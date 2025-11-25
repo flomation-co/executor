@@ -1,0 +1,41 @@
+stages:
+  - build
+  - publish
+  - deploy
+
+variables:
+  VERSION: 0.0.${CI_PIPELINE_IID}
+  NAME: execute
+  AWS_ACCESS_KEY_ID: ${GITLAB_AWS_USER_KEY}
+  AWS_SECRET_ACCESS_KEY: ${GITLAB_AWS_USER_SECRET}
+  AWS_DEFAULT_REGION: eu-west-2
+  DEPLOY_BUCKET: ${AWS_DEPLOYMENT_BUCKET}
+
+compile:
+  stage: build
+  script:
+    - make build
+  cache:
+    policy: push
+    paths:
+      - "*.zip"
+
+publish:
+  stage: publish
+  only:
+    - main
+  script:
+    - aws s3 cp build.zip s3://${DEPLOY_BUCKET}/${NAME}/flomation-executor-${VERSION}.zip
+  cache:
+    policy: pull
+    paths:
+      - "*.zip"
+
+deploy-runners:
+  stage: deploy
+  only:
+    - main
+  variables:
+    NAME: runner
+  trigger:
+    project: flomation/automate/runner

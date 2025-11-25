@@ -1,0 +1,165 @@
+{
+  "edges": [
+    {
+      "id": "xy-edge__6dccd6ee-2ff2-4ea0-a630-385bbab47ebc-86e06b5b-d6b9-46b7-b87c-6c49191f35dc",
+      "type": "simplebezier",
+      "source": "6dccd6ee-2ff2-4ea0-a630-385bbab47ebc",
+      "target": "86e06b5b-d6b9-46b7-b87c-6c49191f35dc"
+    }
+  ],
+  "nodes": [
+    {
+      "id": "6dccd6ee-2ff2-4ea0-a630-385bbab47ebc",
+      "data": {
+        "id": "6dccd6ee-2ff2-4ea0-a630-385bbab47ebc",
+        "label": "manual",
+        "config": {
+          "id": "manual",
+          "icon": "[\"fa\", \"play\"]",
+          "name": "Manual",
+          "type": 1,
+          "label": "",
+          "inputs": null,
+          "plugin": "trigger/manual",
+          "outputs": [
+            {
+              "name": "time",
+              "type": "timestamp",
+              "value": "Start Time"
+            }
+          ],
+          "ordering": 0,
+          "description": "Manually invoke a flow"
+        }
+      },
+      "type": "manual",
+      "dragging": false,
+      "measured": {
+        "width": 150,
+        "height": 118
+      },
+      "position": {
+        "x": 240,
+        "y": -30
+      },
+      "selected": false,
+      "sourcePosition": "right",
+      "targetPosition": "left"
+    },
+    {
+      "id": "86e06b5b-d6b9-46b7-b87c-6c49191f35dc",
+      "data": {
+        "id": "86e06b5b-d6b9-46b7-b87c-6c49191f35dc",
+        "label": "sendSMTPEmail",
+        "config": {
+          "id": "sendSMTPEmail",
+          "icon": "[\"fa\", \"envelope\"]",
+          "name": "Send SMTP Email",
+          "type": 3,
+          "label": "Send Result Email",
+          "inputs": [
+            {
+              "name": "to",
+              "type": "string",
+              "label": "To (Email Address)",
+              "value": "andy@flomation.co",
+              "placeholder": "Email Address"
+            },
+            {
+              "name": "subject",
+              "type": "string",
+              "label": "Subject",
+              "value": "This is a test email",
+              "placeholder": "Subject"
+            },
+            {
+              "name": "message",
+              "type": "string",
+              "label": "Message",
+              "value": "Sent From: ${env.my_name}\nGod I hope this works\n\nQuote: ${quote}\nHost: ${env.smtp_host}\nPassword: ${secret.smtp_password}",
+              "placeholder": "Message"
+            },
+            {
+              "name": "smtp_host",
+              "type": "string",
+              "label": "SMTP Host",
+              "value": "smtp-relay.gmail.com",
+              "placeholder": "SMTP Host"
+            },
+            {
+              "name": "smtp_username",
+              "type": "string",
+              "label": "SMTP Username",
+              "value": "andy@flomation.co",
+              "placeholder": "SMTP Username"
+            },
+            {
+              "name": "smtp_password",
+              "type": "string",
+              "label": "SMTP Password",
+              "value": "zebg wpjd fnmd yfex",
+              "placeholder": "SMTP Password"
+            },
+            {
+              "name": "smtp_port",
+              "type": "integer",
+              "label": "SMTP Port",
+              "value": "587",
+              "placeholder": "SMTP Port"
+            },
+            {
+              "name": "smtp_secure",
+              "type": "boolean",
+              "label": "SMTP Secure",
+              "value": false,
+              "placeholder": "SMTP Secure"
+            }
+          ],
+          "plugin": "output/email",
+          "outputs": [
+            {
+              "name": "success",
+              "type": "boolean",
+              "value": ""
+            },
+            {
+              "name": "messageId",
+              "type": "string",
+              "value": ""
+            },
+            {
+              "name": "accepted",
+              "type": "string",
+              "value": ""
+            },
+            {
+              "name": "rejected",
+              "type": "string",
+              "value": ""
+            },
+            {
+              "name": "output",
+              "type": "string",
+              "value": ""
+            }
+          ],
+          "ordering": 2,
+          "description": "Send an email via SMTP"
+        }
+      },
+      "type": "sendSMTPEmail",
+      "dragging": false,
+      "measured": {
+        "width": 150,
+        "height": 118
+      },
+      "position": {
+        "x": 701.5303971805215,
+        "y": -134.7496721815557
+      },
+      "selected": true,
+      "sourcePosition": "right",
+      "targetPosition": "left"
+    }
+  ]
+}
