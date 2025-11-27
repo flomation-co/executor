@@ -5,6 +5,12 @@
       "type": "simplebezier",
       "source": "6dccd6ee-2ff2-4ea0-a630-385bbab47ebc",
       "target": "86e06b5b-d6b9-46b7-b87c-6c49191f35dc"
+    },
+    {
+      "id": "xy-edge__6dccd6ee-2ff2-4ea0-a630-385bbab47ebc-86e06b5b-d6b9-46b7-b87c-6c49191f35dc",
+      "type": "simplebezier",
+      "source": "86e06b5b-d6b9-46b7-b87c-6c49191f35dc",
+      "target": "125f7e61-df8b-44e0-8209-c80b8455264f"
     }
   ],
   "nodes": [
@@ -66,6 +72,13 @@
               "placeholder": "Email Address"
             },
             {
+              "name": "from",
+              "type": "string",
+              "label": "From (Email Address)",
+              "value": "andy@flomation.co",
+              "placeholder": "Email Address"
+            },
+            {
               "name": "subject",
               "type": "string",
               "label": "Subject",
@@ -76,7 +89,7 @@
               "name": "message",
               "type": "string",
               "label": "Message",
-              "value": "Sent From: ${env.my_name}\nGod I hope this works\n\nQuote: ${quote}\nHost: ${env.smtp_host}\nPassword: ${secret.smtp_password}",
+              "value": "Sent From: ${env.my_name}<br />God I hope this works\n\nQuote: ${quote}\nHost: ${env.smtp_host}\nPassword: ${secret.smtp_password}",
               "placeholder": "Message"
             },
             {
@@ -104,7 +117,7 @@
               "name": "smtp_port",
               "type": "integer",
               "label": "SMTP Port",
-              "value": "587",
+              "value": 587,
               "placeholder": "SMTP Port"
             },
             {
@@ -158,6 +171,48 @@
         "y": -134.7496721815557
       },
       "selected": true,
+      "sourcePosition": "right",
+      "targetPosition": "left"
+    },
+    {
+      "id": "125f7e61-df8b-44e0-8209-c80b8455264f",
+      "data": {
+        "id": "125f7e61-df8b-44e0-8209-c80b8455264f",
+        "label": "output",
+        "config": {
+          "id": "output",
+          "icon": "[\"fa\", \"play\"]",
+          "name": "Output",
+          "type": 2,
+          "label": "",
+          "plugin": "output",
+          "inputs": [
+            {
+              "name": "output",
+              "type": "string",
+              "value": "Bytes written"
+            },
+            {
+              "name": "count",
+              "type": "integer",
+              "value": "${count}"
+            }
+          ],
+          "ordering": 0,
+          "description": "Output a value"
+        }
+      },
+      "type": "output",
+      "dragging": false,
+      "measured": {
+        "width": 150,
+        "height": 118
+      },
+      "position": {
+        "x": 240,
+        "y": -30
+      },
+      "selected": false,
       "sourcePosition": "right",
       "targetPosition": "left"
     }
