@@ -9,6 +9,16 @@ import (
 	log "github.com/sirupsen/logrus"
 )
 
+const (
+	Author       = "Andy Esser"
+	Organisation = "Flomation"
+	Name         = "Send SMTP Email"
+	Description  = "Send an HTML email via SMTP"
+	Website      = "https://www.flomation.co"
+	Icon         = "fa-solid fa-envelope"
+	Date         = "27/11/2025"
+)
+
 func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[string]interface{}, error) {
 	log.Debug("Executing SMTP Send Email action")
 
