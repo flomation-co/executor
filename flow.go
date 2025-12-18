@@ -3,9 +3,13 @@ package core
 import (
 	"encoding/json"
 	"errors"
+	"fmt"
 	"os"
+	"regexp"
 	"strconv"
+	"strings"
 
+	"flomation.app/automate/executor/internal/environment"
 	log "github.com/sirupsen/logrus"
 )
 
@@ -16,6 +20,13 @@ const (
 var (
 	ErrNoStartNode = errors.New("no start node specified")
 	ErrInvalidNode = errors.New("invalid node")
+)
+
+const (
+	ConnectionTypeString  = "string"
+	ConnectionTypeObject  = "object"
+	ConnectionTypeInteger = "integer"
+	ConnectionTypeBoolean = "boolean"
 )
 
 type Action func(flow *Flow, node *Node, inputs []*Connection) (map[string]interface{}, error)
@@ -34,22 +45,31 @@ type Connection struct {
 	Value interface{} `json:"value"`
 }
 
-func (c *Connection) String() string {
-	if c.Type != "string" {
-		return ""
+func (c *Connection) String() *string {
+	if c == nil {
+		return nil
 	}
 
-	v, ok := c.Value.(string)
-	if !ok {
-		return ""
+	if c.Type == ConnectionTypeString {
+		v, ok := c.Value.(string)
+		if !ok {
+			return nil
+		}
+
+		return &v
 	}
 
-	return v
+	v := fmt.Sprintf("%v", c.Value)
+	return &v
 }
 
-func (c *Connection) Number() int64 {
-	if c.Type != "integer" {
-		return 0
+func (c *Connection) Number() *int64 {
+	if c == nil {
+		return nil
+	}
+
+	if c.Type != ConnectionTypeInteger {
+		return nil
 	}
 
 	v, ok := c.Value.(int64)
@@ -60,32 +80,38 @@ func (c *Connection) Number() int64 {
 			if !ok {
 				v, err := strconv.ParseInt(c.Value.(string), 10, 64)
 				if err != nil {
-					return 0
+					return nil
 				}
 
-				return v
+				return &v
 			}
 
-			return int64(v)
+			val := int64(v)
+			return &val
 		}
 
-		return int64(v)
+		val := int64(v)
+		return &val
 	}
 
-	return v
+	return &v
 }
 
-func (c *Connection) Boolean() bool {
-	if c.Type != "boolean" {
-		return false
+func (c *Connection) Boolean() *bool {
+	if c == nil {
+		return nil
+	}
+
+	if c.Type != ConnectionTypeBoolean {
+		return nil
 	}
 
 	v, ok := c.Value.(bool)
 	if !ok {
-		return false
+		return nil
 	}
 
-	return v
+	return &v
 }
 
 func FindConnection(name string, connections []*Connection) *Connection {
@@ -151,15 +177,10 @@ func Load(path *string) (*Flow, error) {
 	f.nodeResults = make(map[string]map[string]interface{})
 	f.outputs = make(map[string]interface{})
 
-	log.WithFields(log.Fields{
-		"nodes": len(f.Nodes),
-		"edges": len(f.Edges),
-	}).Debug("Loaded Flow")
-
 	return &f, nil
 }
 
-func (f *Flow) Execute(actions map[string]Action, entry *string, environment *string) (map[string]interface{}, error) {
+func (f *Flow) Execute(actions map[string]Action, entry *string, environment *environment.Environment) (map[string]interface{}, error) {
 	var start *Node
 
 	if entry != nil {
@@ -189,7 +210,7 @@ func (f *Flow) Execute(actions map[string]Action, entry *string, environment *st
 	return f.outputs, nil
 }
 
-func (f *Flow) ExecuteNode(actions map[string]Action, node *Node, environment *string) (map[string]interface{}, error) {
+func (f *Flow) ExecuteNode(actions map[string]Action, node *Node, environment *environment.Environment) (map[string]interface{}, error) {
 	var err error
 
 	if node == nil || node.Data == nil {
@@ -204,10 +225,12 @@ func (f *Flow) ExecuteNode(actions map[string]Action, node *Node, environment *s
 	}
 
 	log.WithFields(log.Fields{
-		"node": node,
-	}).Debug("Processing Node")
+		"id":   node.ID,
+		"type": node.Type,
+	}).Info("Processing Node")
 
 	var results map[string]interface{}
+	parentResults := make(map[string]interface{})
 	parents := f.FindSource(node.ID)
 	for _, p := range parents {
 		if p == nil {
@@ -223,14 +246,15 @@ func (f *Flow) ExecuteNode(actions map[string]Action, node *Node, environment *s
 
 		for k, v := range results {
 			results[k] = v
+			parentResults[k] = v
 		}
 	}
 
-	a, exists := actions[node.Type]
+	action, exists := actions[node.Type]
 	if !exists {
 		log.WithFields(log.Fields{
 			"type": node.Type,
-		}).Debug("unknown node action")
+		}).Debug("Unknown node action")
 		return nil, ErrInvalidNode
 	}
 
@@ -241,7 +265,65 @@ func (f *Flow) ExecuteNode(actions map[string]Action, node *Node, environment *s
 			value = results[v.Name]
 		}
 
-		// TODO: Variable substitution
+		val := v.String()
+		if val != nil {
+			r := regexp.MustCompile(`\${[^{}]*}`)
+			matches := r.FindAllString(*val, -1)
+
+			for _, m := range matches {
+				m = strings.TrimPrefix(m, "${")
+				m = strings.TrimSuffix(m, "}")
+
+				if strings.HasPrefix(m, "env.") {
+					name := strings.TrimPrefix(m, "env.")
+					p, err := environment.GetProperty(name)
+					if err != nil {
+						log.WithFields(log.Fields{
+							"error": err,
+						}).Error("Unable to get Property")
+						continue
+					}
+
+					if p == nil {
+						log.WithFields(log.Fields{
+							"name": name,
+						}).Warn("Missing property")
+						continue
+					}
+
+					*val = strings.ReplaceAll(*val, "${"+m+"}", *p.Value)
+				} else if strings.HasPrefix(m, "secret.") {
+					name := strings.TrimPrefix(m, "secret.")
+					p, err := environment.GetSecret(name)
+					if err != nil {
+						log.WithFields(log.Fields{
+							"error": err,
+						}).Error("Unable to get Secret")
+						continue
+					}
+
+					if p == nil {
+						log.WithFields(log.Fields{
+							"name": name,
+						}).Warn("Missing secret")
+						continue
+					}
+
+					*val = strings.ReplaceAll(*val, "${"+m+"}", *p.Value)
+				} else {
+					if res, exists := parentResults[m]; exists {
+						*val = strings.ReplaceAll(*val, "${"+m+"}", fmt.Sprintf("%v", res))
+					} else {
+						log.WithFields(log.Fields{
+							"output": m,
+						}).Warn("Substitution upstream output does not exist")
+					}
+				}
+			}
+
+			value = *val
+		}
+
 		configuration = append(configuration, &Connection{
 			ID:    v.ID,
 			Name:  v.Name,
@@ -250,7 +332,7 @@ func (f *Flow) ExecuteNode(actions map[string]Action, node *Node, environment *s
 		})
 	}
 
-	outputs, err := a(f, node, configuration)
+	outputs, err := action(f, node, configuration)
 	if err != nil {
 		log.WithFields(log.Fields{
 			"error": err,
@@ -336,6 +418,10 @@ func (f *Flow) SetOutput(name string, value interface{}) {
 		log.WithFields(log.Fields{
 			"value": name,
 		}).Warn("overwriting already set output value")
+	}
+
+	if f.outputs == nil {
+		f.outputs = make(map[string]interface{})
 	}
 
 	f.outputs[name] = value

@@ -2,7 +2,6 @@ package output
 
 import (
 	core "flomation.app/automate/executor"
-	log "github.com/sirupsen/logrus"
 )
 
 const (
@@ -16,12 +15,17 @@ const (
 )
 
 func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[string]interface{}, error) {
-	log.Debug("Executing output")
+	name := core.FindConnection("name", inputs)
+	value := core.FindConnection("value", inputs)
 
-	name := core.FindConnection("output", inputs)
-	value := core.FindConnection("count", inputs)
+	result := false
+	n := name.String()
+	if n != nil && value != nil {
+		flow.SetOutput(*n, value.Value)
+		result = true
+	}
 
-	flow.SetOutput(name.String(), value.Value)
-
-	return nil, nil
+	return map[string]interface{}{
+		"set": result,
+	}, nil
 }

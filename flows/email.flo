@@ -96,35 +96,35 @@
               "name": "smtp_host",
               "type": "string",
               "label": "SMTP Host",
-              "value": "smtp-relay.gmail.com",
+              "value": "${env.smtp_host}",
               "placeholder": "SMTP Host"
             },
             {
               "name": "smtp_username",
               "type": "string",
               "label": "SMTP Username",
-              "value": "andy@flomation.co",
+              "value": "${env.smtp_username}",
               "placeholder": "SMTP Username"
             },
             {
               "name": "smtp_password",
               "type": "string",
               "label": "SMTP Password",
-              "value": "zebg wpjd fnmd yfex",
+              "value": "${secret.smtp_password}",
               "placeholder": "SMTP Password"
             },
             {
               "name": "smtp_port",
               "type": "integer",
               "label": "SMTP Port",
-              "value": 587,
+              "value": "${env.smtp_port}",
               "placeholder": "SMTP Port"
             },
             {
               "name": "smtp_secure",
               "type": "boolean",
               "label": "SMTP Secure",
-              "value": false,
+              "value": "${env.smtp_secure}",
               "placeholder": "SMTP Secure"
             }
           ],

@@ -31,10 +31,11 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	user := core.FindConnection("smtp_username", inputs)
 	password := core.FindConnection("smtp_password", inputs)
 	port := core.FindConnection("smtp_port", inputs)
-	smtpHost := fmt.Sprintf("%v:%v", host.String(), port.Number())
 
-	auth := smtp.PlainAuth("", user.String(), password.String(), host.String())
-	msg := fmt.Sprintf("From: %v\nTo: %v\nSubject: %v\nMIME-version: 1.0;\nContent-Type: text/html; charset=\"UTF-8\";\n\n%v\n\n", from.String(), to.String(), subject.String(), message.String())
+	smtpHost := fmt.Sprintf("%v:%v", *host.String(), *port.Number())
+
+	auth := smtp.PlainAuth("", *user.String(), *password.String(), *host.String())
+	msg := fmt.Sprintf("From: %v\nTo: %v\nSubject: %v\nMIME-version: 1.0;\nContent-Type: text/html; charset=\"UTF-8\";\n\n%v\n\n", *from.String(), *to.String(), *subject.String(), *message.String())
 
 	c, err := smtp.Dial(smtpHost)
 	if err != nil {
@@ -47,7 +48,7 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 
 	if ok, _ := c.Extension("STARTTLS"); ok {
 		cfg := &tls.Config{
-			ServerName: host.String(),
+			ServerName: *host.String(),
 			MinVersion: tls.VersionTLS12,
 		}
 		if err = c.StartTLS(cfg); err != nil {
@@ -59,11 +60,11 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 		return nil, err
 	}
 
-	if err = c.Mail(from.String()); err != nil {
+	if err = c.Mail(*from.String()); err != nil {
 		return nil, err
 	}
 
-	if err = c.Rcpt(to.String()); err != nil {
+	if err = c.Rcpt(*to.String()); err != nil {
 		return nil, err
 	}
 
