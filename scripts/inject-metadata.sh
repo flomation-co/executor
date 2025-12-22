@@ -10,6 +10,7 @@ SPEC_TEMPLATE="${PROJECT_ROOT}/templates/yum/template.spec"
 DEBIAN_TEMPLATE="${PROJECT_ROOT}/templates/apt/debian"
 DEBIAN_OUTPUT="${PROJECT_ROOT}/debian"
 SERVICE_TEMPLATE="${PROJECT_ROOT}/templates/systemd/service.template"
+WIX_TEMPLATE="${PROJECT_ROOT}/templates/msi/template.wxs"
 
 # Check if jq is installed
 if ! command -v jq &> /dev/null; then
@@ -141,6 +142,37 @@ if [ -d "$DEBIAN_TEMPLATE" ]; then
     echo "  Generated debian directory: $DEBIAN_OUTPUT"
 else
     echo "  Warning: Debian template not found: $DEBIAN_TEMPLATE"
+fi
+
+# Process WiX template for MSI
+echo ""
+echo "Injecting metadata into WiX source file..."
+
+# Set WiX output file
+WIX_OUTPUT="${PROJECT_ROOT}/${PACKAGE_NAME}.wxs"
+
+# Check if WiX template exists
+if [ -f "$WIX_TEMPLATE" ]; then
+    echo "  Copying WiX template to project root..."
+    cp "$WIX_TEMPLATE" "$WIX_OUTPUT"
+
+    # Generate a stable UpgradeCode GUID based on package name
+    # This ensures the same package always gets the same UpgradeCode
+    UPGRADE_CODE=$(echo -n "${PACKAGE_NAME}" | md5sum | awk '{print toupper(substr($1,1,8) "-" substr($1,9,4) "-" substr($1,13,4) "-" substr($1,17,4) "-" substr($1,21,12))}')
+
+    echo "  Replacing placeholders in WiX source..."
+    sed -i "s|{{PACKAGE_NAME}}|$PACKAGE_NAME|g" "$WIX_OUTPUT"
+    sed -i "s|{{PACKAGE_SUMMARY}}|$PACKAGE_SUMMARY|g" "$WIX_OUTPUT"
+    sed -i "s|{{PACKAGE_URL}}|$PACKAGE_URL|g" "$WIX_OUTPUT"
+    sed -i "s|{{COMPONENT_NAME}}|$COMPONENT_NAME|g" "$WIX_OUTPUT"
+    sed -i "s|{{MAINTAINER_NAME}}|$MAINTAINER_NAME|g" "$WIX_OUTPUT"
+    sed -i "s|{{VERSION}}|${VERSION:-1.0.0}|g" "$WIX_OUTPUT"
+    sed -i "s|{{UPGRADE_CODE}}|$UPGRADE_CODE|g" "$WIX_OUTPUT"
+
+    echo "  Generated WiX source file: $WIX_OUTPUT"
+    echo "  UpgradeCode: $UPGRADE_CODE"
+else
+    echo "  Warning: WiX template not found: $WIX_TEMPLATE"
 fi
 
 echo ""

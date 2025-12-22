@@ -33,6 +33,7 @@ inject-metadata:
     paths:
       - "*.spec"
       - "*.service"
+      - "*.wxs"
       - "debian/"
     reports:
       dotenv: build.env
@@ -142,6 +143,20 @@ build-deb-arm64:
   artifacts:
     paths:
       - ${PACKAGE_NAME}_*.deb
+    expire_in: 30 days
+
+build-msi:
+  extends: .build-msi-template
+  variables:
+    CI_TEMPLATES_REF: "main"
+    APPLICATION_BINARY: "flomation-execute-amd64-windows*"
+    ARCH: x64
+  needs:
+    - inject-metadata
+    - compile
+  artifacts:
+    paths:
+      - ${PACKAGE_NAME}-*.msi
     expire_in: 30 days
 
 publish:
