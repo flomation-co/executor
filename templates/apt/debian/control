@@ -7,7 +7,7 @@ Standards-Version: 4.6.0
 Homepage: {{PACKAGE_URL}}
 
 Package: {{PACKAGE_NAME}}
-Architecture: {{ARCH_DEB}}
+Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends}, systemd
 Description: {{PACKAGE_SUMMARY}}
  {{PACKAGE_DESCRIPTION}}

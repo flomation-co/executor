@@ -122,11 +122,6 @@ build-deb:
     CI_TEMPLATES_REF: "main"
     APPLICATION_BINARY: "flomation-execute-amd64-linux*"
     ARCH: amd64
-  script:
-    # Set the architecture in the debian control file
-    - sed -i 's/{{ARCH_DEB}}/amd64/' debian/control
-    # Call the build script from the template
-    - /tmp/build-deb.sh
   needs:
     - inject-metadata
     - compile
@@ -141,11 +136,6 @@ build-deb-arm64:
     CI_TEMPLATES_REF: "main"
     APPLICATION_BINARY: "flomation-execute-arm64-linux*"
     ARCH: arm64
-  script:
-    # Set the architecture in the debian control file
-    - sed -i 's/{{ARCH_DEB}}/arm64/' debian/control
-    # Call the build script from the template
-    - /tmp/build-deb.sh
   needs:
     - inject-metadata
     - compile
