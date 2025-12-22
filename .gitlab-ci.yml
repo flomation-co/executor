@@ -171,15 +171,7 @@ publish:
       - "*.zip"
 
 publish-msi:
-  stage: publish
-  image: amazon/aws-cli:latest
-  variables:
-    AWS_ACCESS_KEY_ID: ${GITLAB_AWS_USER_KEY}
-    AWS_SECRET_ACCESS_KEY: ${GITLAB_AWS_USER_SECRET}
-    AWS_DEFAULT_REGION: eu-west-2
-  script:
-    - aws s3 cp ${PACKAGE_NAME}-${VERSION}-x64.msi s3://${AWS_PACKAGE_BUCKET}/msi/${PACKAGE_NAME}-${VERSION}-x64.msi
-    - echo "Published MSI to s3://${AWS_PACKAGE_BUCKET}/msi/${PACKAGE_NAME}-${VERSION}-x64.msi"
+  extends: .publish-msi-template
   needs:
     - build-msi
 
