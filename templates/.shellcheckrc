@@ -1,0 +1,6 @@
+# ShellCheck configuration for template files
+# Template files contain {{PLACEHOLDERS}} that are replaced during build
+# These are not valid shell syntax and should be ignored by ShellCheck
+
+# Disable checking for template files
+disable=SC1083,SC2154

@@ -1,0 +1,64 @@
+#!/bin/sh
+# postinst script for {{PACKAGE_NAME}}
+# Equivalent to RPM %post section
+# shellcheck disable=SC1083,SC2154
+# Note: This is a template file with {{PLACEHOLDERS}} that will be replaced during build
+
+set -e
+
+case "$1" in
+    configure)
+        # Set ownership on installed files
+        chown -R flomation:flomation /opt/flomation/{{COMPONENT_NAME}}
+        chmod 750 /opt/flomation/{{COMPONENT_NAME}}/{{COMPONENT_NAME}}
+
+        # Create symlink from /var/log/flomation/{{COMPONENT_NAME}} to /opt/flomation/{{COMPONENT_NAME}}/logs
+        mkdir -p /var/log/flomation
+        ln -sf /opt/flomation/{{COMPONENT_NAME}}/logs /var/log/flomation/{{COMPONENT_NAME}}
+
+        # Set SELinux contexts if SELinux is enabled
+        # Note: SELinux is less common on Debian/Ubuntu, but we include this for compatibility
+        if command -v getenforce >/dev/null 2>&1 && [ "$(getenforce)" != "Disabled" ]; then
+            # Set context for application directory and binary
+            semanage fcontext -a -t usr_t "/opt/flomation/{{COMPONENT_NAME}}(/.*)?" 2>/dev/null || true
+            restorecon -Rv /opt/flomation/{{COMPONENT_NAME}} 2>/dev/null || true
+
+            # Set context for log directory
+            semanage fcontext -a -t var_log_t "/opt/flomation/{{COMPONENT_NAME}}/logs(/.*)?" 2>/dev/null || true
+            restorecon -Rv /opt/flomation/{{COMPONENT_NAME}}/logs 2>/dev/null || true
+
+            # Set context for snapshot directory
+            semanage fcontext -a -t usr_t "/opt/flomation/snapshots(/.*)?" 2>/dev/null || true
+            restorecon -Rv /opt/flomation/snapshots 2>/dev/null || true
+
+            # Set context for /var/log/flomation symlink
+            semanage fcontext -a -t var_log_t "/var/log/flomation(/.*)?" 2>/dev/null || true
+            restorecon -Rv /var/log/flomation 2>/dev/null || true
+        fi
+
+        # Handle service based on install type
+        # $2 is empty on fresh install, has old version on upgrade
+        if [ -z "$2" ]; then
+            # Fresh install - enable but don't start
+            systemctl daemon-reload >/dev/null 2>&1 || true
+            systemctl enable {{PACKAGE_NAME}}.service >/dev/null 2>&1 || true
+        else
+            # Upgrade - restart the service
+            systemctl daemon-reload >/dev/null 2>&1 || true
+            systemctl enable {{PACKAGE_NAME}}.service >/dev/null 2>&1 || true
+            systemctl start {{PACKAGE_NAME}}.service >/dev/null 2>&1 || true
+        fi
+        ;;
+
+    abort-upgrade|abort-remove|abort-deconfigure)
+        ;;
+
+    *)
+        echo "postinst called with unknown argument \`$1'" >&2
+        exit 1
+        ;;
+esac
+
+#DEBHELPER#
+
+exit 0

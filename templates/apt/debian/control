@@ -1,0 +1,13 @@
+Source: {{PACKAGE_NAME}}
+Section: misc
+Priority: optional
+Maintainer: {{MAINTAINER_NAME}} <{{MAINTAINER_EMAIL}}>
+Build-Depends: debhelper-compat (= 13)
+Standards-Version: 4.6.0
+Homepage: {{PACKAGE_URL}}
+
+Package: {{PACKAGE_NAME}}
+Architecture: amd64
+Depends: ${shlibs:Depends}, ${misc:Depends}, systemd
+Description: {{PACKAGE_SUMMARY}}
+ {{PACKAGE_DESCRIPTION}}

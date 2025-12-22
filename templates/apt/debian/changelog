@@ -1,0 +1,7 @@
+{{PACKAGE_NAME}} (1.0.0-1) unstable; urgency=medium
+
+  * Automated build
+  * Build commit: {{BUILD_COMMIT_SHA}}
+  * Build time: {{BUILD_TIMESTAMP}}
+
+ -- Build System <build@flomation.co>  {{BUILD_DATE_RFC2822}}

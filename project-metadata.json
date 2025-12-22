@@ -1,0 +1,18 @@
+{
+  "package": {
+    "component_name": "executor",
+    "name": "flomation-executor",
+    "summary": "Flomation Automate Executor Service",
+    "description": "Flomation Automate Executor Service - Executor service for automation workflows",
+    "license": "MIT",
+    "url": "https://flomation.co"
+  },
+  "maintainer": {
+    "name": "Build System",
+    "email": "build@flomation.co"
+  },
+  "architecture": {
+    "rpm": "x86_64",
+    "deb": "amd64"
+  }
+}

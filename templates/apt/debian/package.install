@@ -1,0 +1,2 @@
+# Install systemd service file
+flomation-{{COMPONENT_NAME}}.service /lib/systemd/system/

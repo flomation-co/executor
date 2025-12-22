@@ -1,0 +1,47 @@
+#!/bin/sh
+# postrm script for {{PACKAGE_NAME}}
+# Equivalent to RPM %postun section
+# shellcheck disable=SC1083,SC2154
+# Note: This is a template file with {{PLACEHOLDERS}} that will be replaced during build
+
+set -e
+
+case "$1" in
+    purge|remove|upgrade|failed-upgrade|abort-install|abort-upgrade|disappear)
+        # Restart the service after upgrade if it was running
+        if [ "$1" = "upgrade" ]; then
+            if command -v systemctl >/dev/null 2>&1; then
+                systemctl daemon-reload >/dev/null 2>&1 || true
+                systemctl try-restart {{PACKAGE_NAME}}.service >/dev/null 2>&1 || true
+            fi
+        fi
+
+        # Remove SELinux contexts and symlink on uninstall (not upgrade)
+        if [ "$1" = "remove" ] || [ "$1" = "purge" ]; then
+            # Remove symlink
+            rm -f /var/log/flomation/{{COMPONENT_NAME}}
+
+            if command -v getenforce >/dev/null 2>&1 && [ "$(getenforce)" != "Disabled" ]; then
+                semanage fcontext -d "/opt/flomation/{{COMPONENT_NAME}}(/.*)?" 2>/dev/null || true
+                semanage fcontext -d "/opt/flomation/{{COMPONENT_NAME}}/logs(/.*)?" 2>/dev/null || true
+                semanage fcontext -d "/var/log/flomation(/.*)?" 2>/dev/null || true
+            fi
+        fi
+
+        # On purge, remove all configuration and data
+        if [ "$1" = "purge" ]; then
+            rm -rf /opt/flomation/{{COMPONENT_NAME}}
+            # Only remove /var/log/flomation if empty
+            rmdir /var/log/flomation 2>/dev/null || true
+        fi
+        ;;
+
+    *)
+        echo "postrm called with unknown argument \`$1'" >&2
+        exit 1
+        ;;
+esac
+
+#DEBHELPER#
+
+exit 0

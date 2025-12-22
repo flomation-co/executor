@@ -1,0 +1,33 @@
+#!/usr/bin/make -f
+
+# Debian rules file for {{PACKAGE_NAME}}
+# Equivalent to the RPM spec file build process
+
+%:
+	dh $@
+
+override_dh_auto_build:
+	# Binary is pre-built, nothing to do here
+
+override_dh_auto_test:
+	# Skip tests - binary is pre-built and tested in compile stage
+
+override_dh_auto_install:
+	# Install the binary to /opt/flomation/{{COMPONENT_NAME}}/
+	install -d debian/{{PACKAGE_NAME}}/opt/flomation/{{COMPONENT_NAME}}
+	install -m 0755 application debian/{{PACKAGE_NAME}}/opt/flomation/{{COMPONENT_NAME}}/{{COMPONENT_NAME}}
+
+	# Create placeholder directories
+	install -d debian/{{PACKAGE_NAME}}/opt/flomation/{{COMPONENT_NAME}}/etc
+	install -d debian/{{PACKAGE_NAME}}/opt/flomation/{{COMPONENT_NAME}}/logs
+
+override_dh_fixperms:
+	dh_fixperms
+	# Set correct ownership (will be applied during install)
+	chmod 0755 debian/{{PACKAGE_NAME}}/opt/flomation/{{COMPONENT_NAME}}/{{COMPONENT_NAME}}
+
+override_dh_strip:
+	# Don't strip the binary (equivalent to %define debug_package %{nil})
+
+override_dh_builddeb:
+	dh_builddeb -- -Zxz
