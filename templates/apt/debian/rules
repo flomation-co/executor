@@ -29,5 +29,11 @@ override_dh_fixperms:
 override_dh_strip:
 	# Don't strip the binary (equivalent to %define debug_package %{nil})
 
+override_dh_makeshlibs:
+	# Skip shared library analysis for pre-built binary
+
+override_dh_shlibdeps:
+	# Skip shared library dependency analysis for pre-built binary
+
 override_dh_builddeb:
 	dh_builddeb -- -Zxz
