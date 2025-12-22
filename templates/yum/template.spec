@@ -11,7 +11,6 @@ License:        {{PACKAGE_LICENSE}}
 URL:            {{PACKAGE_URL}}
 Source0:        %{name}-%{version}.tar.gz
 
-BuildArch:      {{ARCH_RPM}}
 BuildRequires:  systemd-rpm-macros
 Requires:       policycoreutils-python-utils
 

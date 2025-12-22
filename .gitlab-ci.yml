@@ -60,11 +60,6 @@ build-rpm-8:
     CI_TEMPLATES_REF: "main"
     APPLICATION_BINARY: "flomation-execute-amd64-linux*"
     ARCH: x86_64
-  script:
-    # Set the architecture in the spec file
-    - sed -i 's/{{ARCH_RPM}}/x86_64/' ${PACKAGE_NAME}.spec
-    # Call the build script from the template
-    - /tmp/build-rpm.sh
   needs:
     - inject-metadata
     - compile
@@ -81,11 +76,6 @@ build-rpm-9:
     CI_TEMPLATES_REF: "main"
     APPLICATION_BINARY: "flomation-execute-amd64-linux*"
     ARCH: x86_64
-  script:
-    # Set the architecture in the spec file
-    - sed -i 's/{{ARCH_RPM}}/x86_64/' ${PACKAGE_NAME}.spec
-    # Call the build script from the template
-    - /tmp/build-rpm.sh
   needs:
     - inject-metadata
     - compile
@@ -102,17 +92,12 @@ build-rpm-8-arm64:
     CI_TEMPLATES_REF: "main"
     APPLICATION_BINARY: "flomation-execute-arm64-linux*"
     ARCH: aarch64
-  script:
-    # Set the architecture in the spec file
-    - sed -i 's/{{ARCH_RPM}}/aarch64/' ${PACKAGE_NAME}.spec
-    # Call the build script from the template
-    - /tmp/build-rpm.sh
   needs:
     - inject-metadata
     - compile
   artifacts:
     paths:
-      - ${PACKAGE_NAME}-*el8.aarch64.rpm
+      - ${PACKAGE_NAME}-*el8.*.rpm
     expire_in: 30 days
 
 build-rpm-9-arm64:
@@ -123,17 +108,12 @@ build-rpm-9-arm64:
     CI_TEMPLATES_REF: "main"
     APPLICATION_BINARY: "flomation-execute-arm64-linux*"
     ARCH: aarch64
-  script:
-    # Set the architecture in the spec file
-    - sed -i 's/{{ARCH_RPM}}/aarch64/' ${PACKAGE_NAME}.spec
-    # Call the build script from the template
-    - /tmp/build-rpm.sh
   needs:
     - inject-metadata
     - compile
   artifacts:
     paths:
-      - ${PACKAGE_NAME}-*el9.aarch64.rpm
+      - ${PACKAGE_NAME}-*el9.*.rpm
     expire_in: 30 days
 
 build-deb:
