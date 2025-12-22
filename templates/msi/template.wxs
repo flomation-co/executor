@@ -41,12 +41,16 @@
             <Directory Id='EtcFolder' Name='etc'>
               <Component Id='EtcFolder' Guid='*'>
                 <CreateFolder />
+                <RemoveFolder Id='RemoveEtcFolder' On='uninstall'/>
+                <RegistryValue Root='HKCU' Key='Software\Flomation\{{COMPONENT_NAME}}' Name='etc' Type='integer' Value='1' KeyPath='yes'/>
               </Component>
             </Directory>
 
             <Directory Id='LogsFolder' Name='logs'>
               <Component Id='LogsFolder' Guid='*'>
                 <CreateFolder />
+                <RemoveFolder Id='RemoveLogsFolder' On='uninstall'/>
+                <RegistryValue Root='HKCU' Key='Software\Flomation\{{COMPONENT_NAME}}' Name='logs' Type='integer' Value='1' KeyPath='yes'/>
               </Component>
             </Directory>
           </Directory>
