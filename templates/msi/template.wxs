@@ -6,21 +6,22 @@
            Language='1033'
            Codepage='1252'
            Version='{{VERSION}}'
-           Manufacturer='{{MAINTAINER_NAME}}'>
+           Manufacturer='Flomation Limited'>
 
     <Package Id='*'
              Keywords='Installer'
              Description='{{PACKAGE_SUMMARY}}'
-             Manufacturer='{{MAINTAINER_NAME}}'
+             Manufacturer='Flomation Limited'
              InstallerVersion='200'
              Languages='1033'
              Compressed='yes'
-             SummaryCodepage='1252' />
+             SummaryCodepage='1252'
+             Platform='x64' />
 
     <Media Id='1' Cabinet='product.cab' EmbedCab='yes' />
 
     <Directory Id='TARGETDIR' Name='SourceDir'>
-      <Directory Id='ProgramFilesFolder' Name='PFiles'>
+      <Directory Id='ProgramFiles64Folder' Name='PFiles'>
         <Directory Id='FlomationFolder' Name='Flomation'>
           <Directory Id='INSTALLDIR' Name='{{COMPONENT_NAME}}'>
             <Component Id='MainExecutable' Guid='*'>
