@@ -173,8 +173,6 @@ publish:
 publish-msi:
   stage: publish
   image: amazon/aws-cli:latest
-  only:
-    - main
   variables:
     AWS_ACCESS_KEY_ID: ${GITLAB_AWS_USER_KEY}
     AWS_SECRET_ACCESS_KEY: ${GITLAB_AWS_USER_SECRET}
