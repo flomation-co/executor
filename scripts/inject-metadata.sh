@@ -36,7 +36,6 @@ PACKAGE_DESCRIPTION=$(jq -r '.package.description' "$METADATA_FILE")
 PACKAGE_LICENSE=$(jq -r '.package.license' "$METADATA_FILE")
 PACKAGE_URL=$(jq -r '.package.url' "$METADATA_FILE")
 COMPONENT_NAME=$(jq -r '.package.component_name' "$METADATA_FILE")
-ARCH_RPM=$(jq -r '.architecture.rpm' "$METADATA_FILE")
 MAINTAINER_NAME=$(jq -r '.maintainer.name' "$METADATA_FILE")
 MAINTAINER_EMAIL=$(jq -r '.maintainer.email' "$METADATA_FILE")
 
@@ -66,18 +65,18 @@ echo "  Package Name: $PACKAGE_NAME"
 echo "  Component: $COMPONENT_NAME"
 echo "  Summary: $PACKAGE_SUMMARY"
 echo "  Output: $SPEC_OUTPUT"
+echo "  Note: Architecture placeholders will be set by build jobs"
 
 # Read the template and replace placeholders
 cp "$SPEC_TEMPLATE" "$SPEC_OUTPUT"
 
-# Replace placeholders
+# Replace placeholders (except architecture - that will be set by build jobs)
 sed -i "s|{{PACKAGE_NAME}}|$PACKAGE_NAME|g" "$SPEC_OUTPUT"
 sed -i "s|{{PACKAGE_SUMMARY}}|$PACKAGE_SUMMARY|g" "$SPEC_OUTPUT"
 sed -i "s|{{PACKAGE_DESCRIPTION}}|$PACKAGE_DESCRIPTION|g" "$SPEC_OUTPUT"
 sed -i "s|{{PACKAGE_LICENSE}}|$PACKAGE_LICENSE|g" "$SPEC_OUTPUT"
 sed -i "s|{{PACKAGE_URL}}|$PACKAGE_URL|g" "$SPEC_OUTPUT"
 sed -i "s|{{COMPONENT_NAME}}|$COMPONENT_NAME|g" "$SPEC_OUTPUT"
-sed -i "s|{{ARCH_RPM}}|$ARCH_RPM|g" "$SPEC_OUTPUT"
 sed -i "s|{{MAINTAINER_NAME}}|$MAINTAINER_NAME|g" "$SPEC_OUTPUT"
 sed -i "s|{{MAINTAINER_EMAIL}}|$MAINTAINER_EMAIL|g" "$SPEC_OUTPUT"
 sed -i "s|{{BUILD_COMMIT_SHA}}|$BUILD_COMMIT_SHA|g" "$SPEC_OUTPUT"
@@ -125,8 +124,8 @@ if [ -d "$DEBIAN_TEMPLATE" ]; then
         mv "$DEBIAN_OUTPUT/package.conffiles" "$DEBIAN_OUTPUT/${PACKAGE_NAME}.conffiles"
     fi
 
-    echo "  Replacing placeholders in debian files..."
-    # Find all files in debian directory and replace placeholders
+    echo "  Replacing placeholders in debian files (except architecture)..."
+    # Find all files in debian directory and replace placeholders (except architecture - that will be set by build jobs)
     find "$DEBIAN_OUTPUT" -type f -exec sed -i "s|{{PACKAGE_NAME}}|$PACKAGE_NAME|g" {} \;
     find "$DEBIAN_OUTPUT" -type f -exec sed -i "s|{{PACKAGE_SUMMARY}}|$PACKAGE_SUMMARY|g" {} \;
     find "$DEBIAN_OUTPUT" -type f -exec sed -i "s|{{PACKAGE_DESCRIPTION}}|$PACKAGE_DESCRIPTION|g" {} \;

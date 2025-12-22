@@ -10,9 +10,5 @@
   "maintainer": {
     "name": "Build System",
     "email": "build@flomation.co"
-  },
-  "architecture": {
-    "rpm": "x86_64",
-    "deb": "amd64"
   }
 }

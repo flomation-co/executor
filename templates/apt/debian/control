@@ -7,7 +7,7 @@ Standards-Version: 4.6.0
 Homepage: {{PACKAGE_URL}}
 
 Package: {{PACKAGE_NAME}}
-Architecture: amd64
+Architecture: {{ARCH_DEB}}
 Depends: ${shlibs:Depends}, ${misc:Depends}, systemd
 Description: {{PACKAGE_SUMMARY}}
  {{PACKAGE_DESCRIPTION}}
