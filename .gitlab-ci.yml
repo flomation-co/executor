@@ -21,23 +21,7 @@ variables:
   CI_TEMPLATES_PROJECT: flomation/infrastructure/ci-templates
 
 inject-metadata:
-  stage: prepare
-  image: alpine:latest
-  before_script:
-    - apk add --no-cache jq bash
-  script:
-    - chmod +x scripts/inject-metadata.sh
-    - bash scripts/inject-metadata.sh
-    - echo "PACKAGE_NAME=$(jq -r '.package.name' project-metadata.json)" >> build.env
-  artifacts:
-    paths:
-      - "*.spec"
-      - "*.service"
-      - "*.wxs"
-      - "debian/"
-    reports:
-      dotenv: build.env
-    expire_in: 1 hour
+  extends: .inject-metadata-template
 
 compile:
   stage: build
