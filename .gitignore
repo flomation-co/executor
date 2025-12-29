@@ -1,3 +1,4 @@
 dist/
 *.zip
 cover.out
+state.json

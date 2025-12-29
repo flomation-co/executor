@@ -36,4 +36,4 @@ test:
 	go tool cover -func cover.out
 
 flow:
-	go run cmd/main.go -path flows/email.flo -api http://localhost:8080 -environment ae-dev-shared -identity http://localhost:8081 -user andy@flomation.co -password C0axialW4rp53927952!
+	go run cmd/main.go -path flows/email.flo -api http://localhost:8080 -environment ae-dev-shared -identity http://localhost:8081 -user ${FLO_USER} -password ${FLO_PASS}
