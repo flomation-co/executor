@@ -27,9 +27,13 @@ build: lint
 	cd dist && zip -r ../build.zip .
 
 lint:
+	go mod tidy
 	goimports -l .
 	golangci-lint run --timeout=5m ./...
+	go vet ./...
 	gosec ./...
+	go install golang.org/x/vuln/cmd/govulncheck@latest
+	govulncheck ./...
 
 test:
 	go test ./... -coverprofile cover.out
