@@ -43,8 +43,4 @@ flow-local:
 	go run cmd/main.go -path flows/email.flo -environment ae-dev-shared -api http://localhost:8080 -identity http://localhost:8081 -user ${FLO_USER} -password ${FLO_PASS}
 
 flow:
-<<<<<<< HEAD
-	go run cmd/main.go -path flows/email.flo -api http://localhost:8080 -environment ae-dev-shared -identity http://localhost:8081 -user ${FLO_USER} -password ${FLO_PASS}
-=======
 	go run cmd/main.go -path flows/email.flo -environment ae-dev-shared -api https://api.dev.flomation.app -identity https://id.dev.flomation.app -user ${FLO_USER} -password ${FLO_PASS}
->>>>>>> 4a3214d (feature: updated state file, linting, debug level)
