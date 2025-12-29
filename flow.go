@@ -159,6 +159,15 @@ type Flow struct {
 	outputs     map[string]interface{}
 }
 
+type ExecutionResult struct {
+	ID              string                 `json:"id"`
+	FlowID          string                 `json:"flow_id"`
+	Status          int64                  `json:"status"`
+	Duration        int64                  `json:"duration"`
+	BillingDuration int64                  `json:"billing_duration"`
+	Outputs         map[string]interface{} `json:"outputs"`
+}
+
 func Load(path *string) (*Flow, error) {
 	if path == nil {
 		return nil, nil
@@ -202,12 +211,12 @@ func (f *Flow) Execute(actions map[string]Action, entry *string, environment *en
 		return nil, ErrNoStartNode
 	}
 
-	_, err := f.ExecuteNode(actions, start, environment)
+	outputs, err := f.ExecuteNode(actions, start, environment)
 	if err != nil {
 		return nil, err
 	}
 
-	return f.outputs, nil
+	return outputs, nil
 }
 
 func (f *Flow) ExecuteNode(actions map[string]Action, node *Node, environment *environment.Environment) (map[string]interface{}, error) {
@@ -347,6 +356,10 @@ func (f *Flow) ExecuteNode(actions map[string]Action, node *Node, environment *e
 	}).Debug("Node results")
 
 	combinedResults := make(map[string]interface{})
+
+	for k, v := range outputs {
+		combinedResults[k] = v
+	}
 
 	children := f.FindTarget(node.ID)
 	for _, c := range children {

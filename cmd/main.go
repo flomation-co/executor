@@ -1,7 +1,9 @@
 package main
 
 import (
+	"encoding/json"
 	"flag"
+	"os"
 	"strings"
 	"time"
 
@@ -26,7 +28,6 @@ const (
 )
 
 func main() {
-	log.SetLevel(log.DebugLevel)
 
 	log.WithFields(log.Fields{
 		"version": version.Version,
@@ -45,10 +46,15 @@ func main() {
 	password := flag.String("password", "", "Execution context username")
 	token := flag.String("token", "", "Execution context credential token")
 	identity := flag.String("identity", "https://id.flomation.app", "URL of Identity Service Provider")
+	debug := flag.Bool("debug", false, "Enable debug logging")
 
 	flag.Parse()
 	if strings.ToLower(*logOutput) == "json" {
 		log.SetFormatter(&log.JSONFormatter{})
+	}
+
+	if *debug {
+		log.SetLevel(log.DebugLevel)
 	}
 
 	if *path == "" {
@@ -107,10 +113,36 @@ func main() {
 		}).Error("Error executing flow")
 	}
 
+	status := int64(0)
+	if err != nil {
+		status = 1
+	}
+
 	duration := time.Since(start)
 
 	log.WithFields(log.Fields{
-		"outputs":     outputs,
 		"duration_ms": duration.Milliseconds(),
 	}).Info("Finished processing Flow")
+
+	result := core.ExecutionResult{
+		ID:              *id,
+		FlowID:          *path,
+		Status:          status,
+		Duration:        duration.Milliseconds(),
+		BillingDuration: duration.Milliseconds(),
+		Outputs:         outputs,
+	}
+
+	b, err := json.Marshal(result)
+	if err != nil {
+		log.WithFields(log.Fields{
+			"error": err,
+		}).Error("unable to marshal json")
+	}
+
+	if err := os.WriteFile("state.json", b, 0600); err != nil {
+		log.WithFields(log.Fields{
+			"error": err,
+		}).Error("unable to write state file")
+	}
 }
