@@ -40,6 +40,7 @@ func inspectPackage(dir string) map[string]ManifestEntry {
 			diff, _ := filepath.Rel(path.Join(pwd, "actions"), dir)
 
 			var me ManifestEntry
+			var meUpdated bool
 
 			for _, object := range f.Decls {
 				g, ok := object.(*ast.GenDecl)
@@ -64,24 +65,31 @@ func inspectPackage(dir string) map[string]ManifestEntry {
 						switch name.String() {
 						case "Author":
 							me.Author = stringVal
+							meUpdated = true
 						case "Organisation":
 							me.Organisation = stringVal
+							meUpdated = true
 						case "Name":
 							me.Name = stringVal
+							meUpdated = true
 						case "Description":
 							me.Description = stringVal
+							meUpdated = true
 						case "Website":
 							me.Website = stringVal
+							meUpdated = true
 						case "Icon":
 							me.Icon = stringVal
+							meUpdated = true
 						case "Date":
 							me.Date = stringVal
+							meUpdated = true
 						}
 					}
 				}
 			}
 
-			if diff != "." {
+			if diff != "." && meUpdated {
 				manifest[diff] = me
 			}
 		}
