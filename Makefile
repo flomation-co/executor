@@ -1,10 +1,10 @@
 NAMESPACE			= flomation.app/automate/executor
 DATE				= $(shell date -u +%Y%m%d_%H%M%S)
-NAME				?= execute
+NAME				?= executor
 BRANCH 				:= $(shell git rev-parse --abbrev-ref HEAD)
 GITHASH 			?= $(shell git rev-parse HEAD)
 CI_PIPELINE_ID 		?= local
-VERSION 			?= 0.0.${CI_PIPELINE_ID}
+VERSION 			?= 1.0.${CI_PIPELINE_ID}
 
 OS_ARCHS := \
 	linux/amd64 \
