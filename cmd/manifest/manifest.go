@@ -115,9 +115,10 @@ func inspectPackage(dir string) map[string]ManifestEntry {
 							continue
 						}
 
-						if name == "Inputs" {
+						switch name {
+						case "Inputs":
 							isInput = true
-						} else if name == "Outputs" {
+						case "Outputs":
 							isInput = false
 						}
 
