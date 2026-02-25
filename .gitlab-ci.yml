@@ -12,7 +12,7 @@ stages:
   - deploy
 
 variables:
-  VERSION: 0.0.${CI_PIPELINE_IID}
+  VERSION: 1.0.${CI_PIPELINE_IID}
   NAME: execute
   AWS_ACCESS_KEY_ID: ${GITLAB_AWS_USER_KEY}
   AWS_SECRET_ACCESS_KEY: ${GITLAB_AWS_USER_SECRET}
@@ -43,7 +43,7 @@ build-rpm-8:
   variables:
     EL_VERSION: "8"
     CI_TEMPLATES_REF: "main"
-    APPLICATION_BINARY: "flomation-execute-amd64-linux*"
+    APPLICATION_BINARY: "${PACKAGE_NAME}-amd64-linux*"
     ARCH: x86_64
   needs:
     - inject-metadata
@@ -59,7 +59,7 @@ build-rpm-9:
   variables:
     EL_VERSION: "9"
     CI_TEMPLATES_REF: "main"
-    APPLICATION_BINARY: "flomation-execute-amd64-linux*"
+    APPLICATION_BINARY: "${PACKAGE_NAME}-amd64-linux*"
     ARCH: x86_64
   needs:
     - inject-metadata
@@ -75,7 +75,7 @@ build-rpm-8-arm64:
   variables:
     EL_VERSION: "8"
     CI_TEMPLATES_REF: "main"
-    APPLICATION_BINARY: "flomation-execute-arm64-linux*"
+    APPLICATION_BINARY: "${PACKAGE_NAME}-arm64-linux*"
     ARCH: aarch64
   needs:
     - inject-metadata
@@ -91,7 +91,7 @@ build-rpm-9-arm64:
   variables:
     EL_VERSION: "9"
     CI_TEMPLATES_REF: "main"
-    APPLICATION_BINARY: "flomation-execute-arm64-linux*"
+    APPLICATION_BINARY: "${PACKAGE_NAME}-arm64-linux*"
     ARCH: aarch64
   needs:
     - inject-metadata
@@ -105,7 +105,7 @@ build-deb:
   extends: .build-deb-template
   variables:
     CI_TEMPLATES_REF: "main"
-    APPLICATION_BINARY: "flomation-execute-amd64-linux*"
+    APPLICATION_BINARY: "${PACKAGE_NAME}-amd64-linux*"
     ARCH: amd64
   needs:
     - inject-metadata
@@ -119,7 +119,7 @@ build-deb-arm64:
   extends: .build-deb-template
   variables:
     CI_TEMPLATES_REF: "main"
-    APPLICATION_BINARY: "flomation-execute-arm64-linux*"
+    APPLICATION_BINARY: "${PACKAGE_NAME}-arm64-linux*"
     ARCH: arm64
   needs:
     - inject-metadata
@@ -133,7 +133,7 @@ build-msi:
   extends: .build-msi-template
   variables:
     CI_TEMPLATES_REF: "main"
-    APPLICATION_BINARY: "flomation-execute-amd64-windows*"
+    APPLICATION_BINARY: "${PACKAGE_NAME}-amd64-windows*"
     ARCH: x64
   needs:
     - inject-metadata
@@ -157,6 +157,7 @@ publish:
 publish-msi:
   extends: .publish-msi-template
   needs:
+    - inject-metadata
     - build-msi
 
 publish-rpm-8:
@@ -169,6 +170,7 @@ publish-rpm-8:
     S3_ACCESS_KEY_PARAM: ${S3_ACCESS_KEY_PARAM_DEV}
     S3_SECRET_KEY_PARAM: ${S3_SECRET_KEY_PARAM_DEV}
   needs:
+    - inject-metadata
     - build-rpm-8
 
 publish-rpm-9:
@@ -181,6 +183,7 @@ publish-rpm-9:
     S3_ACCESS_KEY_PARAM: ${S3_ACCESS_KEY_PARAM_DEV}
     S3_SECRET_KEY_PARAM: ${S3_SECRET_KEY_PARAM_DEV}
   needs:
+    - inject-metadata
     - build-rpm-9
 
 publish-rpm-8-arm64:
@@ -193,6 +196,7 @@ publish-rpm-8-arm64:
     S3_ACCESS_KEY_PARAM: ${S3_ACCESS_KEY_PARAM_DEV}
     S3_SECRET_KEY_PARAM: ${S3_SECRET_KEY_PARAM_DEV}
   needs:
+    - inject-metadata
     - build-rpm-8-arm64
 
 publish-rpm-9-arm64:
@@ -205,6 +209,7 @@ publish-rpm-9-arm64:
     S3_ACCESS_KEY_PARAM: ${S3_ACCESS_KEY_PARAM_DEV}
     S3_SECRET_KEY_PARAM: ${S3_SECRET_KEY_PARAM_DEV}
   needs:
+    - inject-metadata
     - build-rpm-9-arm64
 
 publish-deb:
@@ -216,6 +221,7 @@ publish-deb:
     S3_ACCESS_KEY_PARAM: ${S3_ACCESS_KEY_PARAM_DEV}
     S3_SECRET_KEY_PARAM: ${S3_SECRET_KEY_PARAM_DEV}
   needs:
+    - inject-metadata
     - build-deb
 
 publish-deb-arm64:
@@ -227,6 +233,7 @@ publish-deb-arm64:
     S3_ACCESS_KEY_PARAM: ${S3_ACCESS_KEY_PARAM_DEV}
     S3_SECRET_KEY_PARAM: ${S3_SECRET_KEY_PARAM_DEV}
   needs:
+    - inject-metadata
     - build-deb-arm64
 
 deploy-runners:
