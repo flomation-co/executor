@@ -19,6 +19,64 @@ const (
 	Date         = "27/11/2025"
 )
 
+var Inputs = [...]core.Connection{
+	core.Connection{
+		Name:        "to",
+		Type:        core.ConnectionTypeString,
+		Label:       "To (Email Address)",
+		Placeholder: "Email Address",
+	},
+	core.Connection{
+		Name:        "from",
+		Type:        core.ConnectionTypeString,
+		Label:       "From (Email Address)",
+		Placeholder: "Email Address",
+	},
+	core.Connection{
+		Name:        "subject",
+		Type:        core.ConnectionTypeString,
+		Label:       "Subject",
+		Placeholder: "Subject",
+	},
+	core.Connection{
+		Name:        "message",
+		Type:        core.ConnectionTypeString,
+		Label:       "Message",
+		Placeholder: "Message",
+	},
+	core.Connection{
+		Name:        "smtp_host",
+		Type:        core.ConnectionTypeString,
+		Label:       "SMTP Host",
+		Placeholder: "SMTP Host",
+	},
+	core.Connection{
+		Name:        "smtp_username",
+		Type:        core.ConnectionTypeString,
+		Label:       "SMTP Username",
+		Placeholder: "SMTP Username",
+	},
+	core.Connection{
+		Name:        "smtp_password",
+		Type:        core.ConnectionTypeString,
+		Label:       "SMTP Password",
+		Placeholder: "SMTP Password",
+	},
+	core.Connection{
+		Name:        "smtp_port",
+		Type:        core.ConnectionTypeInteger,
+		Label:       "SMTP Port",
+		Placeholder: "SMTP Port",
+	},
+	core.Connection{
+		Name:        "smtp_secure",
+		Type:        core.ConnectionTypeBoolean,
+		Label:       "SMTP Secure",
+		Placeholder: "SMTP Secure",
+	},
+}
+var Outputs = [...]core.Connection{}
+
 func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[string]interface{}, error) {
 	log.Debug("Executing SMTP Send Email action")
 

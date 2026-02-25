@@ -2,3 +2,4 @@ dist/
 *.zip
 cover.out
 state.json
+actions-manifest.json
