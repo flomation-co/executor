@@ -38,6 +38,7 @@ func main() {
 	path := flag.String("path", "", "Path of the Flow file to execute")
 	entry := flag.String("entry", "", "Entry node to begin execution")
 	id := flag.String("id", uuid.NewString(), "Execution ID")
+	flow := flag.String("flow", "", "Flow ID")
 	api := flag.String("api", DefaultAPI, "URL for API Service")
 	env := flag.String("environment", DefaultEnvironment, "ID of environment to execute within")
 	runner := flag.String("runner", DefaultRunnerIdentifier, "Runner ID")
@@ -126,7 +127,7 @@ func main() {
 
 	result := core.ExecutionResult{
 		ID:              *id,
-		FlowID:          *path,
+		FlowID:          *flow,
 		Status:          status,
 		Duration:        duration.Milliseconds(),
 		BillingDuration: duration.Milliseconds(),

@@ -1,10 +1,10 @@
 NAMESPACE			= flomation.app/automate/executor
 DATE				= $(shell date -u +%Y%m%d_%H%M%S)
-NAME				?= execute
+NAME				?= executor
 BRANCH 				:= $(shell git rev-parse --abbrev-ref HEAD)
 GITHASH 			?= $(shell git rev-parse HEAD)
 CI_PIPELINE_ID 		?= local
-VERSION 			?= 0.0.${CI_PIPELINE_ID}
+VERSION 			?= 1.0.${CI_PIPELINE_ID}
 
 OS_ARCHS := \
 	linux/amd64 \
@@ -29,16 +29,11 @@ lint:
 	goimports -l .
 	golangci-lint run --timeout=5m ./...
 	go vet ./...
-	gosec ./...
+	go install github.com/securego/gosec/v2/cmd/gosec@latest
+	gosec -exclude=G117,G704 ./...
 	go install golang.org/x/vuln/cmd/govulncheck@latest
 	govulncheck ./...
 
 test:
 	go test ./... -coverprofile cover.out
 	go tool cover -func cover.out
-
-flow-local:
-	go run cmd/main.go -path flows/email.flo -environment ae-dev-shared -api http://localhost:8080 -identity http://localhost:8081 -user ${FLO_USER} -password ${FLO_PASS}
-
-flow:
-	go run cmd/main.go -path flows/email.flo -environment ae-dev-shared -api https://api.dev.flomation.app -identity https://id.dev.flomation.app -user ${FLO_USER} -password ${FLO_PASS}

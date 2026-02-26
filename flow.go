@@ -39,10 +39,11 @@ type Edge struct {
 }
 
 type Connection struct {
-	ID    *string     `json:"id"`
-	Name  string      `json:"name"`
-	Type  string      `json:"type"`
-	Value interface{} `json:"value"`
+	Name        string      `json:"name"`
+	Type        string      `json:"type"`
+	Value       interface{} `json:"value"`
+	Label       string      `json:"label"`
+	Placeholder string      `json:"placeholder"`
 }
 
 func (c *Connection) String() *string {
@@ -334,7 +335,6 @@ func (f *Flow) ExecuteNode(actions map[string]Action, node *Node, environment *e
 		}
 
 		configuration = append(configuration, &Connection{
-			ID:    v.ID,
 			Name:  v.Name,
 			Type:  v.Type,
 			Value: value,
