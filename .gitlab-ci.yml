@@ -238,6 +238,16 @@ publish-deb-arm64:
     - inject-metadata
     - build-deb-arm64
 
+build-docker-harbor:
+  extends: .build-docker-dhi-harbor-buildx-template
+  variables:
+    BINARY_FILE_PATTERN: "dist/flomation-executor-amd64-linux-*"
+    HARBOR_REGISTRY_URL: ${HARBOR_REGISTRY_URL}
+    HARBOR_PROJECT: ${HARBOR_PROJECT}
+  needs:
+    - inject-metadata
+    - compile
+
 build-docker:
   extends: .build-docker-dhi-buildx-template
   only:
