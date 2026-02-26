@@ -149,6 +149,7 @@ publish:
     - main
   script:
     - aws s3 cp build.zip s3://${DEPLOY_BUCKET}/${NAME}/flomation-executor-${VERSION}.zip
+    - aws s3 cp build.zip s3://${DEPLOY_BUCKET}/${NAME}/flomation-executor-latest.zip
   cache:
     policy: pull
     paths:
