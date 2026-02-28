@@ -11,6 +11,7 @@ stages:
   - publish
   - docker
   - deploy
+  - test-suite
 
 variables:
   VERSION: 1.0.${CI_PIPELINE_IID}
@@ -264,3 +265,12 @@ deploy-runners:
     NAME: runner
   trigger:
     project: flomation/automate/runner
+
+test-suite:
+  extends: .test-suite-template
+  only:
+    - main
+  needs:
+    - inject-metadata
+    - compile
+    - deploy-runners
