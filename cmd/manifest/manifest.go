@@ -4,6 +4,7 @@ import (
 	"crypto/sha256"
 	"encoding/hex"
 	"encoding/json"
+	"flag"
 	core "flomation.app/automate/executor"
 	"go/ast"
 	"go/parser"
@@ -252,6 +253,9 @@ func parseDir(dir string) (map[string]ManifestEntry, error) {
 }
 
 func main() {
+	output := flag.String("path", "actions-manifest.json", "Output path for manifest file")
+
+	flag.Parse()
 	pwd, err := os.Getwd()
 	if err != nil {
 		log.WithFields(log.Fields{
@@ -275,7 +279,7 @@ func main() {
 		}).Error("unable to marshal json manifest")
 	}
 
-	if err := os.WriteFile("actions-manifest.json", b, 0600); err != nil {
+	if err := os.WriteFile(*output, b, 0600); err != nil {
 		log.WithFields(log.Fields{
 			"error": err,
 		}).Error("unable to write manifest file")
