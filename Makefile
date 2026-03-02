@@ -14,7 +14,10 @@ OS_ARCHS := \
 	darwin/arm64 \
 	windows/amd64
 
-build: lint
+manifest:
+	go run cmd/manifest/manifest.go --path internal/assets/manifest/manifest.json
+
+build:
 	rm -rf dist/
 	@for platform in $(OS_ARCHS); do \
 		os=$$(echo $$platform | cut -d'/' -f1); \
