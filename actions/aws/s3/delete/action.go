@@ -1,4 +1,4 @@
-package describe
+package aws_s3_delete
 
 import (
 	"context"

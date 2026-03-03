@@ -17,7 +17,7 @@ OS_ARCHS := \
 manifest:
 	go run cmd/manifest/manifest.go --path internal/assets/manifest/manifest.json
 
-build:
+build: manifest
 	rm -rf dist/
 	@for platform in $(OS_ARCHS); do \
 		os=$$(echo $$platform | cut -d'/' -f1); \
@@ -26,6 +26,10 @@ build:
 		GOOS=$$os GOARCH=$$arch CGO_ENABLED=0 go build -ldflags "-s -X $(NAMESPACE)/internal/version.Version=$(VERSION) -X $(NAMESPACE)/internal/version.Hash=$(GITHASH) -X $(NAMESPACE)/internal/version.BuiltDate=$(DATE)" -o ./dist/flomation-${NAME}-$$arch-$$os-${VERSION} $(NAMESPACE)/cmd; \
 	done
 	cd dist && zip -r ../build.zip .
+
+install:
+	go install -ldflags "-s -X $(NAMESPACE)/internal/version.Version=$(VERSION) -X $(NAMESPACE)/internal/version.Hash=$(GITHASH) -X $(NAMESPACE)/internal/version.BuiltDate=$(DATE)" $(NAMESPACE)/cmd
+	mv $$GOPATH/bin/cmd $$GOPATH/bin/flomation-executor
 
 lint:
 	go mod tidy

@@ -1,4 +1,4 @@
-package describe
+package aws_ec2_describe
 
 import (
 	core "flomation.app/automate/executor"
