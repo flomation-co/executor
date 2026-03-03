@@ -15,7 +15,7 @@ const (
 	Name         = "AWS S3 Delete"
 	Description  = "AWS S3 Actions"
 	Website      = "https://www.flomation.co"
-	Icon         = "fa-solid fa-envelope"
+	Icon         = "envelope"
 	Date         = "27/11/2025"
 )
 

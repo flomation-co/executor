@@ -13,7 +13,7 @@ const (
 	Name         = "Manual Trigger"
 	Description  = "A simple trigger invoked by pressing the play button, or as the default means"
 	Website      = "https://www.flomation.co"
-	Icon         = "fa-solid fa-play"
+	Icon         = "play"
 	Date         = "27/11/2025"
 )
 

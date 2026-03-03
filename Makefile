@@ -27,7 +27,7 @@ build: manifest
 	done
 	cd dist && zip -r ../build.zip .
 
-install:
+install: manifest
 	go install -ldflags "-s -X $(NAMESPACE)/internal/version.Version=$(VERSION) -X $(NAMESPACE)/internal/version.Hash=$(GITHASH) -X $(NAMESPACE)/internal/version.BuiltDate=$(DATE)" $(NAMESPACE)/cmd
 	mv $$GOPATH/bin/cmd $$GOPATH/bin/flomation-executor
 
