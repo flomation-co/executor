@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"flag"
 	"flomation.app/automate/executor/internal/assets"
+	"fmt"
 	"os"
 	"strings"
 	"time"
@@ -29,12 +30,7 @@ const (
 )
 
 func main() {
-	log.WithFields(log.Fields{
-		"version": version.Version,
-		"hash":    version.GetHash(),
-		"date":    version.BuiltDate,
-	}).Info("Starting Flomation Executor")
-
+	printVersion := flag.Bool("version", false, "Print version information")
 	manifest := flag.String("manifest", "", "Path to save the manifest file to")
 	path := flag.String("path", "", "Path of the Flow file to execute")
 	entry := flag.String("entry", "", "Entry node to begin execution")
@@ -54,6 +50,17 @@ func main() {
 	if strings.ToLower(*logOutput) == "json" {
 		log.SetFormatter(&log.JSONFormatter{})
 	}
+
+	if *printVersion {
+		fmt.Printf("%v", version.Version)
+		return
+	}
+
+	log.WithFields(log.Fields{
+		"version": version.Version,
+		"hash":    version.GetHash(),
+		"date":    version.BuiltDate,
+	}).Info("Starting Flomation Executor")
 
 	if *manifest != "" {
 		b, err := assets.Manifest.ReadFile("manifest/manifest.json")

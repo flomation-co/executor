@@ -1,6 +1,6 @@
 {
   "aws/ec2/describe": {
-    "hash": "30e247ad8c10a723033d0ad6f869367eacc3e95a550efd1634a6cfdc45f8bb19",
+    "hash": "a3ffbc1eb04380b7121d59af5fc60b8873bf2b441ae9b794db207acd5e551f06",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "AWS EC2 Describe",
@@ -12,7 +12,7 @@
     "outputs": null
   },
   "aws/s3/delete": {
-    "hash": "780877b5775d595e8f44af1e7f33805fdf829e238890a2d7bf0409e74c071563",
+    "hash": "369efa07746ea30461f8e3dfc1eb26e28baab8d59c000c432afdef10359514b5",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "AWS S3 Delete",
@@ -24,7 +24,7 @@
     "outputs": null
   },
   "aws/s3/get": {
-    "hash": "6930a867d0b0d13088cc8446be3db4e724529ddceefb99088aef001e44328b29",
+    "hash": "ef28a5f899f32bf2d1fc5e002699a60c07a9e9e02edd61cfe592979625dd1773",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "AWS S3 Get Object",
@@ -36,7 +36,7 @@
     "outputs": null
   },
   "aws/s3/put": {
-    "hash": "6d1ac7dd2623b669828abca1227422d063954f91de1ceb979f02665867745ebe",
+    "hash": "e749cfb88132591b3f6cbfb9825105b8f0f9918e37ba7f09139ac51eb9650aa0",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "AWS S3 Put",
