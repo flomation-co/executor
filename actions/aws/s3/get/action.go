@@ -16,7 +16,7 @@ const (
 	Name         = "AWS S3 Get Object"
 	Description  = "AWS S3 Actions"
 	Website      = "https://www.flomation.co"
-	Icon         = "fa-solid fa-envelope"
+	Icon         = "envelope"
 	Date         = "03/01/2026"
 )
 

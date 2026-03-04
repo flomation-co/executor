@@ -10,7 +10,7 @@ const (
 	Name         = "AWS EC2 Describe"
 	Description  = "AWS EC2 Actions"
 	Website      = "https://www.flomation.co"
-	Icon         = "fa-solid fa-envelope"
+	Icon         = "envelope"
 	Date         = "27/11/2025"
 )
 
