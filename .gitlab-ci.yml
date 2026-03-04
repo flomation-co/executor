@@ -6,6 +6,7 @@ include:
 stages:
   - prepare
   - build
+  - executor-manifest
   - rpm-publish
   - deb-publish
   - publish
@@ -38,6 +39,14 @@ compile:
     policy: push
     paths:
       - ./build.zip
+
+executor_manifest_dev:
+  extends: .executor-manifest-create
+  variables:
+    S3_MANIFEST_BUCKET: "${AWS_CONFIG_BUCKET_DEV}"
+  needs:
+    - inject-metadata
+    - compile
 
 build-rpm-8:
   extends: .build-rpm-template
