@@ -1,6 +1,6 @@
 {
   "aws/ec2/describe": {
-    "hash": "f26fa27360a61cbb4ccc115e8d6c9060030ff00a289f023b550d232dd9150c77",
+    "hash": "ae113204fce3e971a44bcf35458d574413c8d52e808afd650a8372bed9dd8888",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "AWS EC2 Describe",
@@ -8,11 +8,12 @@
     "website": "https://www.flomation.co",
     "icon": "envelope",
     "date": "27/11/2025",
+    "type": 2,
     "inputs": null,
     "outputs": null
   },
   "aws/s3/delete": {
-    "hash": "4914071d9c01c8272afd10c3166a68fddb5147bd881b1ac94be9ca76e71194de",
+    "hash": "19169f0e08c9031d05d3091c0905cb376ca934759d0d1e8d7dc5fba49cadbae0",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "AWS S3 Delete",
@@ -20,11 +21,12 @@
     "website": "https://www.flomation.co",
     "icon": "envelope",
     "date": "27/11/2025",
+    "type": 2,
     "inputs": null,
     "outputs": null
   },
   "aws/s3/get": {
-    "hash": "82d674d181bc1b7c4fa6da7c7bfe2df9132bd0ed586e1429814cd5cf0fcc4556",
+    "hash": "d8d4faf5999c7d7cc4ce3ed8fcf03c16f94a60ba4cff3374850521dbc1454ac4",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "AWS S3 Get Object",
@@ -32,11 +34,12 @@
     "website": "https://www.flomation.co",
     "icon": "envelope",
     "date": "03/01/2026",
+    "type": 2,
     "inputs": null,
     "outputs": null
   },
   "aws/s3/put": {
-    "hash": "98678402d243078927d0ae722f160226c26cca55c4c7c3ff55f1d667dd72d19d",
+    "hash": "66f1fedcd9687fe9c78c9ed990f8968fef0866840c46cfdd9518545f4aab4e7e",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "AWS S3 Put",
@@ -44,11 +47,12 @@
     "website": "https://www.flomation.co",
     "icon": "envelope",
     "date": "27/11/2025",
+    "type": 2,
     "inputs": null,
     "outputs": null
   },
   "common/smtp": {
-    "hash": "65d6879f45d448bbdf7745fb86c1c20c6404565c015492e6c5fe29474915b3a0",
+    "hash": "5dd9c876ec2a8b852c18f51ecdedaeca6faa8da9752b700153363d976edbb819",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Send SMTP Email",
@@ -56,6 +60,7 @@
     "website": "https://www.flomation.co",
     "icon": "envelope",
     "date": "27/11/2025",
+    "type": 2,
     "inputs": [
       {
         "name": "to",
@@ -124,7 +129,7 @@
     "outputs": null
   },
   "output/set": {
-    "hash": "8ecca08bb6abbd3e933eaef666ce090db8ea4aeceea036c41bbcdb7a0766aa1b",
+    "hash": "95714fcfe057e314fa181541cedfdd593e86a69f43580d9dc0f5b505e72b3e4c",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Set Output",
@@ -132,11 +137,12 @@
     "website": "https://www.flomation.co",
     "icon": "dollar-sign",
     "date": "27/11/2025",
+    "type": 3,
     "inputs": null,
     "outputs": null
   },
   "trigger/manual": {
-    "hash": "c22d00f83474e77110e8f8256b48d4a5d2374789434a12910737788cc9540dbc",
+    "hash": "c728668c4c23d11a2b0f674ac24409de01a68103b38f2debee76c588934d4d66",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Manual Trigger",
@@ -144,6 +150,7 @@
     "website": "https://www.flomation.co",
     "icon": "play",
     "date": "27/11/2025",
+    "type": 1,
     "inputs": null,
     "outputs": null
   }

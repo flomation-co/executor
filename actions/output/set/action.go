@@ -12,6 +12,7 @@ const (
 	Website      = "https://www.flomation.co"
 	Icon         = "dollar-sign"
 	Date         = "27/11/2025"
+	Type         = core.ActionTypeOutput
 )
 
 func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[string]interface{}, error) {
