@@ -5,6 +5,7 @@ include:
 
 stages:
   - prepare
+  - sync
   - build
   - executor-manifest
   - rpm-publish
@@ -13,7 +14,6 @@ stages:
   - docker
   - deploy
   - test-suite
-  - sync
 
 variables:
   VERSION: 1.0.${CI_PIPELINE_IID}
