@@ -267,14 +267,15 @@ build-docker:
     - inject-metadata
     - compile
 
-deploy-runners:
-  stage: deploy
-  only:
-    - main
-  variables:
-    NAME: runner
-  trigger:
-    project: flomation/automate/runner
+# Commented out for FLO-169
+#deploy-runners:
+#  stage: deploy
+#  only:
+#    - main
+#  variables:
+#    NAME: runner
+#  trigger:
+#    project: flomation/automate/runner
 
 test-suite:
   extends: .test-suite-template
@@ -283,7 +284,6 @@ test-suite:
   needs:
     - inject-metadata
     - compile
-    - deploy-runners
 
 sync-to-github:
   extends: .sync-to-github-template
