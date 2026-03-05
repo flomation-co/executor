@@ -13,6 +13,7 @@ stages:
   - docker
   - deploy
   - test-suite
+  - sync
 
 variables:
   VERSION: 1.0.${CI_PIPELINE_IID}
@@ -283,3 +284,8 @@ test-suite:
     - inject-metadata
     - compile
     - deploy-runners
+
+sync-to-github:
+  extends: .sync-to-github-template
+  only:
+    - main
