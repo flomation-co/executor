@@ -287,5 +287,7 @@ test-suite:
 
 sync-to-github:
   extends: .sync-to-github-template
+  variables:
+    GIT_DEPTH: 0
   only:
     - main
