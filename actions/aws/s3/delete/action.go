@@ -15,8 +15,9 @@ const (
 	Name         = "AWS S3 Delete"
 	Description  = "AWS S3 Actions"
 	Website      = "https://www.flomation.co"
-	Icon         = "envelope"
+	Icon         = "bucket"
 	Date         = "27/11/2025"
+	Type         = core.ActionTypeAction
 )
 
 func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[string]interface{}, error) {

@@ -17,6 +17,7 @@ const (
 	Website      = "https://www.flomation.co"
 	Icon         = "envelope"
 	Date         = "27/11/2025"
+	Type         = core.ActionTypeAction
 )
 
 var Inputs = [...]core.Connection{

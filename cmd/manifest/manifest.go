@@ -28,6 +28,7 @@ type ManifestEntry struct {
 	Website      string `json:"website"`
 	Icon         string `json:"icon"`
 	Date         string `json:"date"`
+	Type         int64  `json:"type"`
 
 	Inputs  []core.Connection `json:"inputs"`
 	Outputs []core.Connection `json:"outputs"`
@@ -105,6 +106,34 @@ func inspectPackage(dir string) map[string]ManifestEntry {
 
 					val, ok := v.Values[0].(*ast.BasicLit)
 					if !ok {
+
+						if val, ok := v.Values[0].(*ast.SelectorExpr); ok {
+							for _, name := range v.Names {
+								switch name.String() {
+								case "Type":
+									switch val.Sel.Name {
+									case "ActionTypeTrigger":
+										me.Type = core.ActionTypeTrigger
+										meUpdated = true
+									case "ActionTypeAction":
+										me.Type = core.ActionTypeAction
+										meUpdated = true
+									case "ActionTypeOutput":
+										me.Type = core.ActionTypeOutput
+										meUpdated = true
+									case "ActionTypeConditional":
+										me.Type = core.ActionTypeConditional
+										meUpdated = true
+									case "ActionTypeLoop":
+										me.Type = core.ActionTypeLoop
+										meUpdated = true
+									}
+								}
+							}
+
+							continue
+						}
+
 						val, ok := v.Values[0].(*ast.CompositeLit)
 						if !ok {
 							continue
@@ -132,7 +161,6 @@ func inspectPackage(dir string) map[string]ManifestEntry {
 							}
 
 							var c core.Connection
-
 							for _, e := range lit.Elts {
 								el, ok := e.(*ast.KeyValueExpr)
 								if !ok {
@@ -190,29 +218,37 @@ func inspectPackage(dir string) map[string]ManifestEntry {
 					}
 
 					for _, name := range v.Names {
-						stringVal, _ := strconv.Unquote(val.Value)
-
 						switch name.String() {
 						case "Author":
+							stringVal, _ := strconv.Unquote(val.Value)
 							me.Author = stringVal
 							meUpdated = true
 						case "Organisation":
+							stringVal, _ := strconv.Unquote(val.Value)
 							me.Organisation = stringVal
 							meUpdated = true
 						case "Name":
+							stringVal, _ := strconv.Unquote(val.Value)
 							me.Name = stringVal
 							meUpdated = true
 						case "Description":
+							stringVal, _ := strconv.Unquote(val.Value)
 							me.Description = stringVal
 							meUpdated = true
 						case "Website":
+							stringVal, _ := strconv.Unquote(val.Value)
 							me.Website = stringVal
 							meUpdated = true
 						case "Icon":
+							stringVal, _ := strconv.Unquote(val.Value)
 							me.Icon = stringVal
 							meUpdated = true
 						case "Date":
+							stringVal, _ := strconv.Unquote(val.Value)
 							me.Date = stringVal
+							meUpdated = true
+						case "Type":
+							me.Type, _ = strconv.ParseInt(val.Value, 10, 64)
 							meUpdated = true
 						}
 					}

@@ -17,6 +17,14 @@ const (
 	TriggerTypeManual = "manual"
 )
 
+const (
+	ActionTypeTrigger     = 1
+	ActionTypeAction      = 2
+	ActionTypeOutput      = 3
+	ActionTypeConditional = 4
+	ActionTypeLoop        = 5
+)
+
 var (
 	ErrNoStartNode = errors.New("no start node specified")
 	ErrInvalidNode = errors.New("invalid node")

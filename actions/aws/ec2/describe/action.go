@@ -10,8 +10,9 @@ const (
 	Name         = "AWS EC2 Describe"
 	Description  = "AWS EC2 Actions"
 	Website      = "https://www.flomation.co"
-	Icon         = "envelope"
+	Icon         = "server"
 	Date         = "27/11/2025"
+	Type         = core.ActionTypeAction
 )
 
 func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[string]interface{}, error) {

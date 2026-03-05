@@ -15,6 +15,7 @@ const (
 	Website      = "https://www.flomation.co"
 	Icon         = "play"
 	Date         = "27/11/2025"
+	Type         = core.ActionTypeTrigger
 )
 
 func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[string]interface{}, error) {
