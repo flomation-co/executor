@@ -27,7 +27,7 @@ build: manifest
 	done
 	cd dist && zip -r ../build.zip .
 
-install:
+install: manifest
 	go install -ldflags "-s -X $(NAMESPACE)/internal/version.Version=$(VERSION) -X $(NAMESPACE)/internal/version.Hash=$(GITHASH) -X $(NAMESPACE)/internal/version.BuiltDate=$(DATE)" $(NAMESPACE)/cmd
 	mv $$GOPATH/bin/cmd $$GOPATH/bin/flomation-executor
 
@@ -39,7 +39,7 @@ lint:
 	go install github.com/securego/gosec/v2/cmd/gosec@latest
 	gosec -exclude=G117,G704 ./...
 	go install golang.org/x/vuln/cmd/govulncheck@latest
-	govulncheck ./...
+	govulncheck -show verbose ./...
 
 test:
 	go test ./... -coverprofile cover.out

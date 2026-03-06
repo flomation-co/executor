@@ -6,7 +6,6 @@ import (
 	"net/smtp"
 
 	core "flomation.app/automate/executor"
-	log "github.com/sirupsen/logrus"
 )
 
 const (
@@ -75,11 +74,23 @@ var Inputs = [...]core.Connection{
 		Placeholder: "SMTP Secure",
 	},
 }
-var Outputs = [...]core.Connection{}
+
+var Outputs = [...]core.Connection{
+	core.Connection{
+		Name:        "length",
+		Type:        core.ConnectionTypeInteger,
+		Label:       "Output Length",
+		Placeholder: "",
+	},
+	core.Connection{
+		Name:        "result",
+		Type:        core.ConnectionTypeInteger,
+		Label:       "Result",
+		Placeholder: "",
+	},
+}
 
 func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[string]interface{}, error) {
-	log.Debug("Executing SMTP Send Email action")
-
 	to := core.FindConnection("to", inputs)
 	from := core.FindConnection("from", inputs)
 	subject := core.FindConnection("subject", inputs)
@@ -144,7 +155,7 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	}
 
 	return map[string]interface{}{
-		"count":  len(msg),
+		"length": len(msg),
 		"result": 0,
 	}, nil
 }

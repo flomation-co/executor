@@ -14,7 +14,15 @@ import (
 )
 
 const (
-	TriggerTypeManual = "manual"
+	TriggerTypeManual = "trigger/manual"
+)
+
+const (
+	ActionTypeTrigger     = 1
+	ActionTypeAction      = 2
+	ActionTypeOutput      = 3
+	ActionTypeConditional = 4
+	ActionTypeLoop        = 5
 )
 
 var (
@@ -252,10 +260,7 @@ func (f *Flow) ExecuteNode(actions map[string]Action, node *Node, environment *e
 			return nil, err
 		}
 
-		f.nodeResults[node.ID] = results
-
 		for k, v := range results {
-			results[k] = v
 			parentResults[k] = v
 		}
 	}
@@ -350,10 +355,6 @@ func (f *Flow) ExecuteNode(actions map[string]Action, node *Node, environment *e
 	}
 
 	f.nodeResults[node.ID] = outputs
-
-	log.WithFields(log.Fields{
-		"results": outputs,
-	}).Debug("Node results")
 
 	combinedResults := make(map[string]interface{})
 

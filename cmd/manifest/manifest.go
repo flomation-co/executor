@@ -5,7 +5,6 @@ import (
 	"encoding/hex"
 	"encoding/json"
 	"flag"
-	core "flomation.app/automate/executor"
 	"go/ast"
 	"go/parser"
 	"go/token"
@@ -14,6 +13,8 @@ import (
 	"path"
 	"path/filepath"
 	"strconv"
+
+	core "flomation.app/automate/executor"
 
 	log "github.com/sirupsen/logrus"
 )
