@@ -1,8 +1,8 @@
-package aws_s3_put
+package aws_s3_list_bucket
 
 import (
-	"bytes"
 	"context"
+
 	core "flomation.app/automate/executor"
 	"flomation.app/automate/executor/actions/aws/s3"
 	"github.com/aws/aws-sdk-go-v2/aws"
@@ -12,7 +12,7 @@ import (
 const (
 	Author       = "Andy Esser"
 	Organisation = "Flomation"
-	Name         = "AWS S3 Put"
+	Name         = "AWS S3 List Buckets"
 	Description  = "AWS S3 Actions"
 	Website      = "https://www.flomation.co"
 	Icon         = "bucket"
@@ -34,36 +34,18 @@ var Inputs = [...]core.Connection{
 		Placeholder: "",
 	},
 	core.Connection{
-		Name:        "key",
+		Name:        "aws_region",
 		Type:        core.ConnectionTypeString,
-		Label:       "Filename",
-		Placeholder: "",
-	},
-	core.Connection{
-		Name:        "bucket",
-		Type:        core.ConnectionTypeString,
-		Label:       "Bucket",
-		Placeholder: "",
-	},
-	core.Connection{
-		Name:        "contents",
-		Type:        core.ConnectionTypeString,
-		Label:       "Contents",
+		Label:       "AWS Region",
 		Placeholder: "",
 	},
 }
 
 var Outputs = [...]core.Connection{
 	core.Connection{
-		Name:        "bucket",
-		Type:        core.ConnectionTypeString,
-		Label:       "Bucket",
-		Placeholder: "",
-	},
-	core.Connection{
-		Name:        "filename",
-		Type:        core.ConnectionTypeString,
-		Label:       "Filename",
+		Name:        "buckets",
+		Type:        core.ConnectionTypeObject,
+		Label:       "Buckets",
 		Placeholder: "",
 	},
 	core.Connection{
@@ -77,27 +59,27 @@ var Outputs = [...]core.Connection{
 func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[string]interface{}, error) {
 	accessKey := core.FindConnection("aws_access_key", inputs)
 	secretKey := core.FindConnection("aws_secret_key", inputs)
-	filename := core.FindConnection("key", inputs)
-	bucket := core.FindConnection("bucket", inputs)
-	contents := core.FindConnection("contents", inputs)
+	region := core.FindConnection("aws_region", inputs)
 
-	s, err := s3.GetService(*accessKey.String(), *secretKey.String(), "eu-west-2")
+	s, err := s3.GetService(*accessKey.String(), *secretKey.String(), *region.String())
 	if err != nil {
 		return nil, err
 	}
 
-	_, err = s.Client.PutObject(context.Background(), &awsS3.PutObjectInput{
-		Key:    aws.String(*filename.String()),
-		Bucket: aws.String(*bucket.String()),
-		Body:   bytes.NewReader([]byte(*contents.String())),
+	result, err := s.Client.ListBuckets(context.Background(), &awsS3.ListBucketsInput{
+		BucketRegion: aws.String(*region.String()),
 	})
 	if err != nil {
 		return nil, err
 	}
 
+	var buckets []string
+	for _, b := range result.Buckets {
+		buckets = append(buckets, *b.Name)
+	}
+
 	return map[string]interface{}{
-		"bucket":   *bucket.String(),
-		"filename": *filename.String(),
-		"result":   0,
+		"buckets": buckets,
+		"result":  0,
 	}, nil
 }

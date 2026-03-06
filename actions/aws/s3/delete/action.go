@@ -16,9 +16,57 @@ const (
 	Description  = "AWS S3 Actions"
 	Website      = "https://www.flomation.co"
 	Icon         = "bucket"
-	Date         = "27/11/2025"
+	Date         = "05/03/2026"
 	Type         = core.ActionTypeAction
 )
+
+var Inputs = [...]core.Connection{
+	core.Connection{
+		Name:        "aws_access_key",
+		Type:        core.ConnectionTypeString,
+		Label:       "AWS Access Key",
+		Placeholder: "",
+	},
+	core.Connection{
+		Name:        "aws_secret_key",
+		Type:        core.ConnectionTypeString,
+		Label:       "AWS Secret Key",
+		Placeholder: "",
+	},
+	core.Connection{
+		Name:        "key",
+		Type:        core.ConnectionTypeString,
+		Label:       "Filename",
+		Placeholder: "",
+	},
+	core.Connection{
+		Name:        "bucket",
+		Type:        core.ConnectionTypeString,
+		Label:       "Bucket",
+		Placeholder: "",
+	},
+}
+
+var Outputs = [...]core.Connection{
+	core.Connection{
+		Name:        "bucket",
+		Type:        core.ConnectionTypeString,
+		Label:       "Bucket",
+		Placeholder: "",
+	},
+	core.Connection{
+		Name:        "filename",
+		Type:        core.ConnectionTypeString,
+		Label:       "Filename",
+		Placeholder: "",
+	},
+	core.Connection{
+		Name:        "result",
+		Type:        core.ConnectionTypeInteger,
+		Label:       "Filename",
+		Placeholder: "",
+	},
+}
 
 func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[string]interface{}, error) {
 	accessKey := core.FindConnection("aws_access_key", inputs)

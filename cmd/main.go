@@ -3,11 +3,12 @@ package main
 import (
 	"encoding/json"
 	"flag"
-	"flomation.app/automate/executor/internal/assets"
 	"fmt"
 	"os"
 	"strings"
 	"time"
+
+	"flomation.app/automate/executor/internal/assets"
 
 	"flomation.app/automate/executor/internal/environment"
 

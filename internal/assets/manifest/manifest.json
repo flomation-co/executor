@@ -1,58 +1,419 @@
 {
+  "arithmetic/addition": {
+    "hash": "b6fe525ab8d26c1f79d2d9ba9cd996eefdea0055ec48b79de78f23063f0838c0",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Maths | Addition",
+    "description": "Arithmetic Functions",
+    "website": "https://www.flomation.co",
+    "icon": "plus",
+    "date": "05/03/2026",
+    "type": 2,
+    "inputs": [
+      {
+        "name": "a",
+        "type": "integer",
+        "value": null,
+        "label": "A",
+        "placeholder": ""
+      },
+      {
+        "name": "b",
+        "type": "integer",
+        "value": null,
+        "label": "B",
+        "placeholder": ""
+      }
+    ],
+    "outputs": [
+      {
+        "name": "answer",
+        "type": "integer",
+        "value": null,
+        "label": "X",
+        "placeholder": ""
+      }
+    ]
+  },
+  "arithmetic/division": {
+    "hash": "6211a773b3f3e9d3ace9b333e919ebce8a1a734466798aaf5dea93e8b92d3acb",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Maths | Division",
+    "description": "Arithmetic Functions",
+    "website": "https://www.flomation.co",
+    "icon": "divide",
+    "date": "05/03/2026",
+    "type": 2,
+    "inputs": [
+      {
+        "name": "numerator",
+        "type": "integer",
+        "value": null,
+        "label": "Numerator",
+        "placeholder": ""
+      },
+      {
+        "name": "denominator",
+        "type": "integer",
+        "value": null,
+        "label": "Denominator",
+        "placeholder": ""
+      }
+    ],
+    "outputs": [
+      {
+        "name": "answer",
+        "type": "integer",
+        "value": null,
+        "label": "X",
+        "placeholder": ""
+      }
+    ]
+  },
+  "arithmetic/multiplication": {
+    "hash": "fcf03a759297a09551980dc080708338cc658fa84349cf738518f99873ccc6a7",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Maths | Multiplication",
+    "description": "Arithmetic Functions",
+    "website": "https://www.flomation.co",
+    "icon": "xmark",
+    "date": "05/03/2026",
+    "type": 2,
+    "inputs": [
+      {
+        "name": "a",
+        "type": "integer",
+        "value": null,
+        "label": "A",
+        "placeholder": ""
+      },
+      {
+        "name": "b",
+        "type": "integer",
+        "value": null,
+        "label": "B",
+        "placeholder": ""
+      }
+    ],
+    "outputs": [
+      {
+        "name": "answer",
+        "type": "integer",
+        "value": null,
+        "label": "X",
+        "placeholder": ""
+      }
+    ]
+  },
+  "arithmetic/subtraction": {
+    "hash": "b29b2697a80ec8b282cd2811ec81ecf0cdc11b29cbc0c6aadce00cc75740eacc",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Maths | Subtraction",
+    "description": "Arithmetic Functions",
+    "website": "https://www.flomation.co",
+    "icon": "minus",
+    "date": "05/03/2026",
+    "type": 2,
+    "inputs": [
+      {
+        "name": "a",
+        "type": "integer",
+        "value": null,
+        "label": "A",
+        "placeholder": ""
+      },
+      {
+        "name": "b",
+        "type": "integer",
+        "value": null,
+        "label": "B",
+        "placeholder": ""
+      }
+    ],
+    "outputs": [
+      {
+        "name": "answer",
+        "type": "integer",
+        "value": null,
+        "label": "X",
+        "placeholder": ""
+      }
+    ]
+  },
   "aws/ec2/describe": {
-    "hash": "ae113204fce3e971a44bcf35458d574413c8d52e808afd650a8372bed9dd8888",
+    "hash": "83b8abb88363392fc36a1d647461f7dd155dd0435dfdea0b58a063fbdc53d8be",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "AWS EC2 Describe",
     "description": "AWS EC2 Actions",
     "website": "https://www.flomation.co",
-    "icon": "envelope",
-    "date": "27/11/2025",
+    "icon": "server",
+    "date": "05/03/2026",
     "type": 2,
     "inputs": null,
     "outputs": null
   },
   "aws/s3/delete": {
-    "hash": "19169f0e08c9031d05d3091c0905cb376ca934759d0d1e8d7dc5fba49cadbae0",
+    "hash": "d4d3e238c48a4ea249e076eaa48905e3b107a1f24e2686622119106508d46304",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "AWS S3 Delete",
     "description": "AWS S3 Actions",
     "website": "https://www.flomation.co",
-    "icon": "envelope",
-    "date": "27/11/2025",
+    "icon": "bucket",
+    "date": "05/03/2026",
     "type": 2,
-    "inputs": null,
-    "outputs": null
+    "inputs": [
+      {
+        "name": "aws_access_key",
+        "type": "string",
+        "value": null,
+        "label": "AWS Access Key",
+        "placeholder": ""
+      },
+      {
+        "name": "aws_secret_key",
+        "type": "string",
+        "value": null,
+        "label": "AWS Secret Key",
+        "placeholder": ""
+      },
+      {
+        "name": "key",
+        "type": "string",
+        "value": null,
+        "label": "Filename",
+        "placeholder": ""
+      },
+      {
+        "name": "bucket",
+        "type": "string",
+        "value": null,
+        "label": "Bucket",
+        "placeholder": ""
+      }
+    ],
+    "outputs": [
+      {
+        "name": "bucket",
+        "type": "string",
+        "value": null,
+        "label": "Bucket",
+        "placeholder": ""
+      },
+      {
+        "name": "filename",
+        "type": "string",
+        "value": null,
+        "label": "Filename",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "integer",
+        "value": null,
+        "label": "Filename",
+        "placeholder": ""
+      }
+    ]
   },
   "aws/s3/get": {
-    "hash": "d8d4faf5999c7d7cc4ce3ed8fcf03c16f94a60ba4cff3374850521dbc1454ac4",
+    "hash": "b5b4da8dfafb6834aae97f7c38c1acccc4e56a6694360e7903818b5e1c3b0300",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "AWS S3 Get Object",
     "description": "AWS S3 Actions",
     "website": "https://www.flomation.co",
-    "icon": "envelope",
-    "date": "03/01/2026",
+    "icon": "bucket",
+    "date": "05/03/2026",
     "type": 2,
-    "inputs": null,
-    "outputs": null
+    "inputs": [
+      {
+        "name": "aws_access_key",
+        "type": "string",
+        "value": null,
+        "label": "AWS Access Key",
+        "placeholder": ""
+      },
+      {
+        "name": "aws_secret_key",
+        "type": "string",
+        "value": null,
+        "label": "AWS Secret Key",
+        "placeholder": ""
+      },
+      {
+        "name": "key",
+        "type": "string",
+        "value": null,
+        "label": "Filename",
+        "placeholder": ""
+      },
+      {
+        "name": "bucket",
+        "type": "string",
+        "value": null,
+        "label": "Bucket",
+        "placeholder": ""
+      }
+    ],
+    "outputs": [
+      {
+        "name": "body",
+        "type": "string",
+        "value": null,
+        "label": "Body",
+        "placeholder": ""
+      },
+      {
+        "name": "bucket",
+        "type": "string",
+        "value": null,
+        "label": "Bucket",
+        "placeholder": ""
+      },
+      {
+        "name": "filename",
+        "type": "string",
+        "value": null,
+        "label": "Filename",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "integer",
+        "value": null,
+        "label": "Filename",
+        "placeholder": ""
+      }
+    ]
+  },
+  "aws/s3/list": {
+    "hash": "f42e61f41f676bc8a34bd861c21500ffe121d11a2c9199d16d3557eaeb4bf179",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "AWS S3 List Buckets",
+    "description": "AWS S3 Actions",
+    "website": "https://www.flomation.co",
+    "icon": "bucket",
+    "date": "05/03/2026",
+    "type": 2,
+    "inputs": [
+      {
+        "name": "aws_access_key",
+        "type": "string",
+        "value": null,
+        "label": "AWS Access Key",
+        "placeholder": ""
+      },
+      {
+        "name": "aws_secret_key",
+        "type": "string",
+        "value": null,
+        "label": "AWS Secret Key",
+        "placeholder": ""
+      },
+      {
+        "name": "aws_region",
+        "type": "string",
+        "value": null,
+        "label": "AWS Region",
+        "placeholder": ""
+      }
+    ],
+    "outputs": [
+      {
+        "name": "buckets",
+        "type": "object",
+        "value": null,
+        "label": "Buckets",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "integer",
+        "value": null,
+        "label": "Filename",
+        "placeholder": ""
+      }
+    ]
   },
   "aws/s3/put": {
-    "hash": "66f1fedcd9687fe9c78c9ed990f8968fef0866840c46cfdd9518545f4aab4e7e",
+    "hash": "00fe9d15a1ac29506319150daae4c17499b73a783a4d462611b3489cf96717ae",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "AWS S3 Put",
     "description": "AWS S3 Actions",
     "website": "https://www.flomation.co",
-    "icon": "envelope",
-    "date": "27/11/2025",
+    "icon": "bucket",
+    "date": "05/03/2026",
     "type": 2,
-    "inputs": null,
-    "outputs": null
+    "inputs": [
+      {
+        "name": "aws_access_key",
+        "type": "string",
+        "value": null,
+        "label": "AWS Access Key",
+        "placeholder": ""
+      },
+      {
+        "name": "aws_secret_key",
+        "type": "string",
+        "value": null,
+        "label": "AWS Secret Key",
+        "placeholder": ""
+      },
+      {
+        "name": "key",
+        "type": "string",
+        "value": null,
+        "label": "Filename",
+        "placeholder": ""
+      },
+      {
+        "name": "bucket",
+        "type": "string",
+        "value": null,
+        "label": "Bucket",
+        "placeholder": ""
+      },
+      {
+        "name": "contents",
+        "type": "string",
+        "value": null,
+        "label": "Contents",
+        "placeholder": ""
+      }
+    ],
+    "outputs": [
+      {
+        "name": "bucket",
+        "type": "string",
+        "value": null,
+        "label": "Bucket",
+        "placeholder": ""
+      },
+      {
+        "name": "filename",
+        "type": "string",
+        "value": null,
+        "label": "Filename",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "integer",
+        "value": null,
+        "label": "Filename",
+        "placeholder": ""
+      }
+    ]
   },
   "common/smtp": {
-    "hash": "5dd9c876ec2a8b852c18f51ecdedaeca6faa8da9752b700153363d976edbb819",
+    "hash": "4566715acda55acbac18b45920b9702285734f9d01387f34413755da0a9fb6f2",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Send SMTP Email",
@@ -126,10 +487,25 @@
         "placeholder": "SMTP Secure"
       }
     ],
-    "outputs": null
+    "outputs": [
+      {
+        "name": "length",
+        "type": "integer",
+        "value": null,
+        "label": "Output Length",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "integer",
+        "value": null,
+        "label": "Result",
+        "placeholder": ""
+      }
+    ]
   },
   "output/set": {
-    "hash": "95714fcfe057e314fa181541cedfdd593e86a69f43580d9dc0f5b505e72b3e4c",
+    "hash": "2cad2357211e95ee40c70ae5f04ed7990d472ef1593df27116ecb94c01711e36",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Set Output",
@@ -138,11 +514,104 @@
     "icon": "dollar-sign",
     "date": "27/11/2025",
     "type": 3,
-    "inputs": null,
+    "inputs": [
+      {
+        "name": "name",
+        "type": "string",
+        "value": null,
+        "label": "Name",
+        "placeholder": ""
+      },
+      {
+        "name": "value",
+        "type": "string",
+        "value": null,
+        "label": "Value",
+        "placeholder": ""
+      }
+    ],
     "outputs": null
   },
+  "sql/query": {
+    "hash": "ead5ae53f12eb5c80b99760c2c134575fc47f10721bd3bb6cd074073676bed7a",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "PostgreSQL Query",
+    "description": "Perform a PostgreSQL Query",
+    "website": "https://www.flomation.co",
+    "icon": "database",
+    "date": "05/03/2026",
+    "type": 2,
+    "inputs": [
+      {
+        "name": "driver",
+        "type": "string",
+        "value": null,
+        "label": "Database Driver",
+        "placeholder": ""
+      },
+      {
+        "name": "host",
+        "type": "string",
+        "value": null,
+        "label": "Database Host",
+        "placeholder": ""
+      },
+      {
+        "name": "port",
+        "type": "integer",
+        "value": null,
+        "label": "Database Port",
+        "placeholder": ""
+      },
+      {
+        "name": "username",
+        "type": "string",
+        "value": null,
+        "label": "Database Username",
+        "placeholder": ""
+      },
+      {
+        "name": "password",
+        "type": "string",
+        "value": null,
+        "label": "Database Password",
+        "placeholder": ""
+      },
+      {
+        "name": "database",
+        "type": "string",
+        "value": null,
+        "label": "Database Name",
+        "placeholder": ""
+      },
+      {
+        "name": "query",
+        "type": "string",
+        "value": null,
+        "label": "SQL Query",
+        "placeholder": ""
+      },
+      {
+        "name": "ssl_mode",
+        "type": "boolean",
+        "value": null,
+        "label": "SSL Mode",
+        "placeholder": ""
+      }
+    ],
+    "outputs": [
+      {
+        "name": "results",
+        "type": "object",
+        "value": null,
+        "label": "Results",
+        "placeholder": ""
+      }
+    ]
+  },
   "trigger/manual": {
-    "hash": "c728668c4c23d11a2b0f674ac24409de01a68103b38f2debee76c588934d4d66",
+    "hash": "91109374db62ff75a99c52420786bdc8821643d16e8c8bc895707644876f4ba1",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Manual Trigger",
@@ -152,6 +621,21 @@
     "date": "27/11/2025",
     "type": 1,
     "inputs": null,
-    "outputs": null
+    "outputs": [
+      {
+        "name": "start",
+        "type": "string",
+        "value": null,
+        "label": "Start Time",
+        "placeholder": ""
+      },
+      {
+        "name": "quote",
+        "type": "string",
+        "value": null,
+        "label": "Quote",
+        "placeholder": ""
+      }
+    ]
   }
 }
