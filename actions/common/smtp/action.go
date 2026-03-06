@@ -14,8 +14,9 @@ const (
 	Name         = "Send SMTP Email"
 	Description  = "Send an HTML email via SMTP"
 	Website      = "https://www.flomation.co"
-	Icon         = "fa-solid fa-envelope"
+	Icon         = "envelope"
 	Date         = "27/11/2025"
+	Type         = core.ActionTypeAction
 )
 
 var Inputs = [...]core.Connection{

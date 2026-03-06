@@ -5,7 +5,9 @@ include:
 
 stages:
   - prepare
+  - sync
   - build
+  - executor-manifest
   - rpm-publish
   - deb-publish
   - publish
@@ -38,6 +40,14 @@ compile:
     policy: push
     paths:
       - ./build.zip
+
+executor_manifest_dev:
+  extends: .executor-manifest-create
+  variables:
+    S3_MANIFEST_BUCKET: "${AWS_CONFIG_BUCKET_DEV}"
+  needs:
+    - inject-metadata
+    - compile
 
 build-rpm-8:
   extends: .build-rpm-template
@@ -257,14 +267,15 @@ build-docker:
     - inject-metadata
     - compile
 
-deploy-runners:
-  stage: deploy
-  only:
-    - main
-  variables:
-    NAME: runner
-  trigger:
-    project: flomation/automate/runner
+# Commented out for FLO-169
+#deploy-runners:
+#  stage: deploy
+#  only:
+#    - main
+#  variables:
+#    NAME: runner
+#  trigger:
+#    project: flomation/automate/runner
 
 test-suite:
   extends: .test-suite-template
@@ -273,4 +284,10 @@ test-suite:
   needs:
     - inject-metadata
     - compile
-    - deploy-runners
+
+sync-to-github:
+  extends: .sync-to-github-template
+  variables:
+    GIT_DEPTH: 0
+  only:
+    - main

@@ -8,6 +8,7 @@
     "website": "https://www.flomation.co",
     "icon": "plus",
     "date": "05/03/2026",
+    "type": 2,
     "inputs": [
       {
         "name": "a",
@@ -43,6 +44,7 @@
     "website": "https://www.flomation.co",
     "icon": "divide",
     "date": "05/03/2026",
+    "type": 2,
     "inputs": [
       {
         "name": "numerator",
@@ -78,6 +80,7 @@
     "website": "https://www.flomation.co",
     "icon": "xmark",
     "date": "05/03/2026",
+    "type": 2,
     "inputs": [
       {
         "name": "a",
@@ -113,6 +116,7 @@
     "website": "https://www.flomation.co",
     "icon": "minus",
     "date": "05/03/2026",
+    "type": 2,
     "inputs": [
       {
         "name": "a",
@@ -148,6 +152,7 @@
     "website": "https://www.flomation.co",
     "icon": "server",
     "date": "05/03/2026",
+    "type": 2,
     "inputs": null,
     "outputs": null
   },
@@ -160,6 +165,7 @@
     "website": "https://www.flomation.co",
     "icon": "bucket",
     "date": "05/03/2026",
+    "type": 2,
     "inputs": [
       {
         "name": "aws_access_key",
@@ -223,6 +229,7 @@
     "website": "https://www.flomation.co",
     "icon": "bucket",
     "date": "05/03/2026",
+    "type": 2,
     "inputs": [
       {
         "name": "aws_access_key",
@@ -293,6 +300,7 @@
     "website": "https://www.flomation.co",
     "icon": "bucket",
     "date": "05/03/2026",
+    "type": 2,
     "inputs": [
       {
         "name": "aws_access_key",
@@ -334,7 +342,7 @@
     ]
   },
   "aws/s3/put": {
-    "hash": "b476c38a48f07d1520c620ea0dd5c1cf9170b4f4dce88e25e64bbec511b3e36e",
+    "hash": "00fe9d15a1ac29506319150daae4c17499b73a783a4d462611b3489cf96717ae",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "AWS S3 Put",
@@ -342,6 +350,7 @@
     "website": "https://www.flomation.co",
     "icon": "bucket",
     "date": "05/03/2026",
+    "type": 2,
     "inputs": [
       {
         "name": "aws_access_key",
@@ -404,14 +413,15 @@
     ]
   },
   "common/smtp": {
-    "hash": "f15bd204794160d3ed8150ea9583b8e34d21e6ad5fe1fe7dc9c3096b12a74e80",
+    "hash": "4566715acda55acbac18b45920b9702285734f9d01387f34413755da0a9fb6f2",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Send SMTP Email",
     "description": "Send an HTML email via SMTP",
     "website": "https://www.flomation.co",
-    "icon": "fa-solid fa-envelope",
+    "icon": "envelope",
     "date": "27/11/2025",
+    "type": 2,
     "inputs": [
       {
         "name": "to",
@@ -495,14 +505,15 @@
     ]
   },
   "output/set": {
-    "hash": "a43485ef291a1f2e0f8f6c875f4ce36db0afa15da1372022f3fbdb789ca3b3ef",
+    "hash": "2cad2357211e95ee40c70ae5f04ed7990d472ef1593df27116ecb94c01711e36",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Set Output",
     "description": "Pass data out from a Flow",
     "website": "https://www.flomation.co",
-    "icon": "fa-solid fa-dollar-sign",
+    "icon": "dollar-sign",
     "date": "27/11/2025",
+    "type": 3,
     "inputs": [
       {
         "name": "name",
@@ -530,6 +541,7 @@
     "website": "https://www.flomation.co",
     "icon": "database",
     "date": "05/03/2026",
+    "type": 2,
     "inputs": [
       {
         "name": "driver",
@@ -599,14 +611,15 @@
     ]
   },
   "trigger/manual": {
-    "hash": "d4c2d8227fd3fc06a97ff3ce0d7b90213602161228013607d9deb62a0254fbab",
+    "hash": "91109374db62ff75a99c52420786bdc8821643d16e8c8bc895707644876f4ba1",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Manual Trigger",
     "description": "A simple trigger invoked by pressing the play button, or as the default means",
     "website": "https://www.flomation.co",
-    "icon": "fa-solid fa-play",
+    "icon": "play",
     "date": "27/11/2025",
+    "type": 1,
     "inputs": null,
     "outputs": [
       {

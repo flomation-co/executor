@@ -10,8 +10,9 @@ const (
 	Name         = "Set Output"
 	Description  = "Pass data out from a Flow"
 	Website      = "https://www.flomation.co"
-	Icon         = "fa-solid fa-dollar-sign"
+	Icon         = "dollar-sign"
 	Date         = "27/11/2025"
+	Type         = core.ActionTypeOutput
 )
 
 var Inputs = [...]core.Connection{
