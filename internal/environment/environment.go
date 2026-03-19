@@ -2,12 +2,20 @@ package environment
 
 import (
 	"bytes"
+	"crypto"
+	"crypto/rand"
+	"crypto/rsa"
+	"crypto/sha256"
+	"crypto/x509"
+	"encoding/hex"
 	"encoding/json"
+	"encoding/pem"
 	"errors"
 	"fmt"
 	"io"
 	"net/http"
 	"net/url"
+	"os"
 	"time"
 
 	log "github.com/sirupsen/logrus"
@@ -15,6 +23,13 @@ import (
 
 const (
 	DefaultIdentityService = "https://id.flomation.app"
+)
+
+const (
+	CredentialTypeNone = iota
+	CredentialTypeUsernamePassword
+	CredentialTypeToken
+	CredentialTypeCertificate
 )
 
 type Summary struct {
@@ -50,7 +65,8 @@ type CachedSecret struct {
 }
 
 type Credentials struct {
-	token *string
+	token          *string
+	credentialType int64
 }
 
 type LoginRequest struct {
@@ -133,19 +149,83 @@ func Authenticate(username string, password string, identity *string) *Credentia
 	}
 
 	return &Credentials{
-		token: &token.Value,
+		token:          &token.Value,
+		credentialType: CredentialTypeUsernamePassword,
 	}
 }
 
 func Token(token string) *Credentials {
 	return &Credentials{
-		token: &token,
+		token:          &token,
+		credentialType: CredentialTypeToken,
 	}
+}
+
+func Key(executionID string, key string) (*Credentials, error) {
+	var privateKey *rsa.PrivateKey
+
+	r, err := os.OpenRoot(".")
+	if err != nil {
+		return nil, err
+	}
+
+	defer func() {
+		_ = r.Close()
+	}()
+
+	b, err := r.ReadFile(key)
+	if err != nil {
+		return nil, err
+	}
+
+	block, _ := pem.Decode(b)
+	if block == nil {
+		return nil, errors.New("invalid pem file")
+	}
+
+	switch block.Type {
+	case "RSA PRIVATE KEY":
+		key, err := x509.ParsePKCS1PrivateKey(block.Bytes)
+		if err != nil {
+			return nil, err
+		}
+		privateKey = key
+
+	case "PRIVATE KEY":
+		key, err := x509.ParsePKCS8PrivateKey(block.Bytes)
+		if err != nil {
+			return nil, err
+		}
+		rsaKey, ok := key.(*rsa.PrivateKey)
+		if !ok {
+			return nil, errors.New("invalid pem format")
+		}
+
+		privateKey = rsaKey
+	default:
+		return nil, errors.New("invalid private key type")
+	}
+
+	hash := sha256.Sum256([]byte(executionID))
+
+	signature, err := rsa.SignPSS(rand.Reader, privateKey, crypto.SHA256, hash[:], nil)
+	if err != nil {
+		return nil, err
+	}
+
+	token := hex.EncodeToString(signature)
+	creds := Credentials{
+		token:          &token,
+		credentialType: CredentialTypeCertificate,
+	}
+
+	return &creds, nil
 }
 
 type Environment struct {
 	name        string
 	identifier  string
+	execution   string
 	url         string
 	credentials *Credentials
 
@@ -153,10 +233,11 @@ type Environment struct {
 	secrets    map[string]CachedSecret
 }
 
-func NewEnvironment(name string, url *string, credentials *Credentials) (*Environment, error) {
+func NewEnvironment(name string, url *string, execution string, credentials *Credentials) (*Environment, error) {
 	e := Environment{
 		name:        name,
 		url:         *url,
+		execution:   execution,
 		credentials: credentials,
 
 		properties: make(map[string]CachedProperty),
@@ -164,7 +245,7 @@ func NewEnvironment(name string, url *string, credentials *Credentials) (*Enviro
 	}
 
 	var summary Summary
-	b, err := e.fetch(fmt.Sprintf("%v/api/v1/environment/%v", e.url, e.name))
+	b, err := e.fetch(fmt.Sprintf("%v/api/v1/execution/%v/environment/%v", e.url, execution, e.name))
 	if err != nil {
 		return nil, err
 	}
@@ -227,7 +308,7 @@ func (e *Environment) GetSecret(name string) (*Secret, error) {
 }
 
 func (e *Environment) fetchProperty(name string) (*Property, error) {
-	b, err := e.fetch(fmt.Sprintf("%v/api/v1/environment/%v/property/%v", e.url, e.identifier, url.PathEscape(name)))
+	b, err := e.fetch(fmt.Sprintf("%v/api/v1/execution/%v/environment/%v/property/%v", e.url, e.execution, e.identifier, url.PathEscape(name)))
 	if err != nil {
 		return nil, err
 	}
@@ -241,7 +322,7 @@ func (e *Environment) fetchProperty(name string) (*Property, error) {
 }
 
 func (e *Environment) fetchSecret(name string) (*Secret, error) {
-	b, err := e.fetch(fmt.Sprintf("%v/api/v1/environment/%v/secret/%v?decrypt=true", e.url, e.identifier, url.PathEscape(name)))
+	b, err := e.fetch(fmt.Sprintf("%v/api/v1/execution/%v/environment/%v/secret/%v", e.url, e.execution, e.identifier, url.PathEscape(name)))
 	if err != nil {
 		return nil, err
 	}
@@ -254,18 +335,36 @@ func (e *Environment) fetchSecret(name string) (*Secret, error) {
 	return &result, nil
 }
 
-func (e *Environment) fetch(url string) ([]byte, error) {
+func (e *Environment) fetch(address string) ([]byte, error) {
 	client := http.Client{
 		Timeout: time.Second * 30,
 	}
 
-	req, err := http.NewRequest(http.MethodGet, url, nil)
+	u, err := url.Parse(address)
+	if err != nil {
+		return nil, err
+	}
+	q := u.Query()
+
+	if e.credentials != nil && e.credentials.credentialType == CredentialTypeCertificate {
+		q.Set("token", *e.credentials.token)
+	}
+
+	environmentUrl := fmt.Sprintf("%v?%v", u.String(), q.Encode())
+
+	log.WithFields(log.Fields{
+		"environment_url": environmentUrl,
+	}).Info("new environment")
+
+	req, err := http.NewRequest(http.MethodGet, environmentUrl, nil)
 	if err != nil {
 		return nil, err
 	}
 
 	if e.credentials != nil {
-		req.Header.Set("Authorization", "Bearer "+*e.credentials.token)
+		if e.credentials.credentialType == CredentialTypeUsernamePassword || e.credentials.credentialType == CredentialTypeToken {
+			req.Header.Set("Authorization", "Bearer "+*e.credentials.token)
+		}
 	}
 
 	res, err := client.Do(req)

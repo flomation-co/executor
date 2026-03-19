@@ -15,6 +15,21 @@ const (
 	Type         = core.ActionTypeOutput
 )
 
+var Inputs = [...]core.Connection{
+	core.Connection{
+		Name:        "name",
+		Type:        core.ConnectionTypeString,
+		Label:       "Name",
+		Placeholder: "",
+	},
+	core.Connection{
+		Name:        "value",
+		Type:        core.ConnectionTypeString,
+		Label:       "Value",
+		Placeholder: "",
+	},
+}
+
 func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[string]interface{}, error) {
 	name := core.FindConnection("name", inputs)
 	value := core.FindConnection("value", inputs)

@@ -5,7 +5,6 @@ import (
 	"encoding/hex"
 	"encoding/json"
 	"flag"
-	core "flomation.app/automate/executor"
 	"go/ast"
 	"go/parser"
 	"go/token"
@@ -14,6 +13,8 @@ import (
 	"path"
 	"path/filepath"
 	"strconv"
+
+	core "flomation.app/automate/executor"
 
 	log "github.com/sirupsen/logrus"
 )
@@ -188,6 +189,8 @@ func inspectPackage(dir string) map[string]ManifestEntry {
 										value = "integer"
 									case "ConnectionTypeBoolean":
 										value = "boolean"
+									case "ConnectionTypeText":
+										value = "text"
 									}
 								} else {
 									value, _ = strconv.Unquote(connectionValue.Value)

@@ -11,7 +11,7 @@ const (
 	Description  = "AWS EC2 Actions"
 	Website      = "https://www.flomation.co"
 	Icon         = "server"
-	Date         = "27/11/2025"
+	Date         = "05/03/2026"
 	Type         = core.ActionTypeAction
 )
 
