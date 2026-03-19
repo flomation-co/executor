@@ -35,6 +35,7 @@ const (
 	ConnectionTypeObject  = "object"
 	ConnectionTypeInteger = "integer"
 	ConnectionTypeBoolean = "boolean"
+	ConnectionTypeText    = "text"
 )
 
 type Action func(flow *Flow, node *Node, inputs []*Connection) (map[string]interface{}, error)
@@ -59,13 +60,23 @@ func (c *Connection) String() *string {
 		return nil
 	}
 
-	if c.Type == ConnectionTypeString {
+	if c.Type == ConnectionTypeString || c.Type == ConnectionTypeText {
 		v, ok := c.Value.(string)
 		if !ok {
 			return nil
 		}
 
 		return &v
+	} else if c.Type == ConnectionTypeBoolean {
+		_, err := strconv.ParseBool(fmt.Sprintf("%v", c.Value))
+		if err != nil {
+			return nil
+		}
+	} else if c.Type == ConnectionTypeInteger {
+		_, err := strconv.ParseInt(fmt.Sprintf("%v", c.Value), 10, 64)
+		if err != nil {
+			return nil
+		}
 	}
 
 	v := fmt.Sprintf("%v", c.Value)
@@ -351,7 +362,7 @@ func (f *Flow) ExecuteNode(actions map[string]Action, node *Node, environment *e
 		log.WithFields(log.Fields{
 			"error": err,
 		}).Error("Error processing Action")
-		//	TODO: Determine what to do in Error scenario
+		return nil, err
 	}
 
 	f.nodeResults[node.ID] = outputs

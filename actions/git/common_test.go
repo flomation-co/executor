@@ -2,7 +2,6 @@ package git_common
 
 import (
 	"os"
-	"path/filepath"
 	"testing"
 
 	"github.com/go-git/go-git/v6"
@@ -16,38 +15,6 @@ func initTestRepo(t *testing.T) string {
 	if err != nil {
 		t.Fatalf("failed to init repo: %v", err)
 	}
-	return dir
-}
-
-func initTestRepoWithCommit(t *testing.T) string {
-	t.Helper()
-	dir := initTestRepo(t)
-
-	err := os.WriteFile(filepath.Join(dir, "README.md"), []byte("# Test\n"), 0644)
-	if err != nil {
-		t.Fatalf("failed to write file: %v", err)
-	}
-
-	r, err := git.PlainOpen(dir)
-	if err != nil {
-		t.Fatalf("failed to open repo: %v", err)
-	}
-
-	w, err := r.Worktree()
-	if err != nil {
-		t.Fatalf("failed to get worktree: %v", err)
-	}
-
-	_, err = w.Add("README.md")
-	if err != nil {
-		t.Fatalf("failed to add file: %v", err)
-	}
-
-	_, err = w.Commit("Initial commit", &git.CommitOptions{})
-	if err != nil {
-		t.Fatalf("failed to commit: %v", err)
-	}
-
 	return dir
 }
 

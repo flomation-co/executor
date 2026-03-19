@@ -46,7 +46,7 @@ func TestConnectionTypeNumber(t *testing.T) {
 
 	Expect(c.Number()).To(Not(BeNil()))
 
-	Expect(c.String()).To(BeNil())
+	Expect(*c.String()).To(Equal("1234"))
 	Expect(c.Boolean()).To(BeNil())
 }
 
@@ -61,7 +61,7 @@ func TestConnectionTypeBadNumber(t *testing.T) {
 
 	Expect(c.Number()).To(Not(BeNil()))
 
-	Expect(c.String()).To(BeNil())
+	Expect(*c.String()).To(Equal("1234"))
 	Expect(c.Boolean()).To(BeNil())
 
 	c2 := Connection{
@@ -97,7 +97,7 @@ func TestConnectionTypeBoolean(t *testing.T) {
 
 	Expect(c.Boolean()).To(Not(BeNil()))
 
-	Expect(c.String()).To(BeNil())
+	Expect(*c.String()).To(Equal("false"))
 	Expect(c.Number()).To(BeNil())
 }
 

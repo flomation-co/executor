@@ -1,20 +1,61 @@
-package aws_ec2_describe
+package git_checkout
 
 import (
 	core "flomation.app/automate/executor"
+	git_common "flomation.app/automate/executor/actions/git"
+	"github.com/go-git/go-git/v6"
+	"github.com/go-git/go-git/v6/plumbing"
 )
 
 const (
 	Author       = "Andy Esser"
 	Organisation = "Flomation"
-	Name         = "AWS EC2 Describe"
-	Description  = "AWS EC2 Actions"
+	Name         = "Git Checkout"
+	Description  = "Git Actions"
 	Website      = "https://www.flomation.co"
-	Icon         = "server"
-	Date         = "05/03/2026"
+	Icon         = "code-branch"
+	Date         = "06/03/2026"
 	Type         = core.ActionTypeAction
 )
 
+var Inputs = [...]core.Connection{
+	core.Connection{
+		Name:        "repository_path",
+		Type:        core.ConnectionTypeString,
+		Label:       "Repository Path",
+		Placeholder: "",
+	},
+	core.Connection{
+		Name:        "branch",
+		Type:        core.ConnectionTypeString,
+		Label:       "Branch",
+		Placeholder: "main",
+	},
+}
+
+var Outputs = [...]core.Connection{
+	core.Connection{
+		Name: "repository_path",
+		Type: core.ConnectionTypeString,
+	},
+}
+
 func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[string]interface{}, error) {
-	return nil, nil
+	repository := core.FindConnection("repository_path", inputs)
+	branch := core.FindConnection("branch", inputs)
+
+	w, err := git_common.GetWorktree(*repository.String())
+	if err != nil {
+		return nil, err
+	}
+
+	if err := w.Checkout(&git.CheckoutOptions{
+		Branch: plumbing.NewBranchReferenceName(*branch.String()),
+	}); err != nil {
+		return nil, err
+	}
+
+	return map[string]interface{}{
+		"repository_path": *repository.String(),
+	}, nil
 }

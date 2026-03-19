@@ -189,6 +189,8 @@ func inspectPackage(dir string) map[string]ManifestEntry {
 										value = "integer"
 									case "ConnectionTypeBoolean":
 										value = "boolean"
+									case "ConnectionTypeText":
+										value = "text"
 									}
 								} else {
 									value, _ = strconv.Unquote(connectionValue.Value)
