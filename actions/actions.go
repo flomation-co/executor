@@ -12,6 +12,15 @@ import (
 	aws_s3_list_bucket "flomation.app/automate/executor/actions/aws/s3/list"
 	aws_s3_put "flomation.app/automate/executor/actions/aws/s3/put"
 	"flomation.app/automate/executor/actions/common/smtp"
+	git_add "flomation.app/automate/executor/actions/git/add"
+	git_branch "flomation.app/automate/executor/actions/git/branch"
+	git_checkout "flomation.app/automate/executor/actions/git/checkout"
+	git_clone "flomation.app/automate/executor/actions/git/clone"
+	git_commit "flomation.app/automate/executor/actions/git/commit"
+	git_pull "flomation.app/automate/executor/actions/git/pull"
+	git_push "flomation.app/automate/executor/actions/git/push"
+	git_status "flomation.app/automate/executor/actions/git/status"
+	git_tag "flomation.app/automate/executor/actions/git/tag"
 	output "flomation.app/automate/executor/actions/output/set"
 	sql_query "flomation.app/automate/executor/actions/sql/query"
 	"flomation.app/automate/executor/actions/trigger/manual"
@@ -32,5 +41,14 @@ var (
 		"arithmetic/subtraction":    arithmetic_subtraction.Execute,
 		"arithmetic/multiplication": arithmetic_multiplication.Execute,
 		"arithmetic/division":       arithmetic_division.Execute,
+		"git/clone":                 git_clone.Execute,
+		"git/checkout":              git_checkout.Execute,
+		"git/add":                   git_add.Execute,
+		"git/commit":                git_commit.Execute,
+		"git/push":                  git_push.Execute,
+		"git/pull":                  git_pull.Execute,
+		"git/branch":                git_branch.Execute,
+		"git/tag":                   git_tag.Execute,
+		"git/status":                git_status.Execute,
 	}
 )
