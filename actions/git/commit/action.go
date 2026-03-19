@@ -1,0 +1,86 @@
+package git_commit
+
+import (
+	core "flomation.app/automate/executor"
+	git_common "flomation.app/automate/executor/actions/git"
+	"github.com/go-git/go-git/v6"
+	"github.com/go-git/go-git/v6/plumbing/object"
+	"time"
+)
+
+const (
+	Author       = "Andy Esser"
+	Organisation = "Flomation"
+	Name         = "Git Commit"
+	Description  = "Git Actions"
+	Website      = "https://www.flomation.co"
+	Icon         = "code-branch"
+	Date         = "06/03/2026"
+	Type         = core.ActionTypeAction
+)
+
+var Inputs = [...]core.Connection{
+	{
+		Name:        "repository_path",
+		Type:        core.ConnectionTypeString,
+		Label:       "Repository Path",
+		Placeholder: "",
+	},
+	{
+		Name:        "message",
+		Type:        core.ConnectionTypeText,
+		Label:       "Commit Message",
+		Placeholder: "",
+	},
+	{
+		Name:        "author_name",
+		Type:        core.ConnectionTypeString,
+		Label:       "Author Name",
+		Placeholder: "",
+	},
+	{
+		Name:        "author_email",
+		Type:        core.ConnectionTypeString,
+		Label:       "Author Email",
+		Placeholder: "",
+	},
+}
+
+var Outputs = [...]core.Connection{
+	{
+		Name: "repository_path",
+		Type: core.ConnectionTypeString,
+	},
+	{
+		Name: "commit_hash",
+		Type: core.ConnectionTypeString,
+	},
+}
+
+func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[string]interface{}, error) {
+	repository := core.FindConnection("repository_path", inputs)
+	message := core.FindConnection("message", inputs)
+	authorName := core.FindConnection("author_name", inputs)
+	authorEmail := core.FindConnection("author_email", inputs)
+
+	_, w, err := git_common.GetRepositoryAndWorktree(*repository.String())
+	if err != nil {
+		return nil, err
+	}
+
+	hash, err := w.Commit(*message.String(), &git.CommitOptions{
+		Author: &object.Signature{
+			Name:  *authorName.String(),
+			Email: *authorEmail.String(),
+			When:  time.Now(),
+		},
+	})
+	if err != nil {
+		return nil, err
+	}
+
+	return map[string]interface{}{
+		"repository_path": *repository.String(),
+		"commit_hash":     hash.String(),
+	}, nil
+}

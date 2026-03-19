@@ -44,6 +44,7 @@ func main() {
 	user := flag.String("user", "", "Execution context username")
 	password := flag.String("password", "", "Execution context username")
 	token := flag.String("token", "", "Execution context credential token")
+	key := flag.String("key", "", "Certificate file for signing requests")
 	identity := flag.String("identity", "https://id.flomation.app", "URL of Identity Service Provider")
 	debug := flag.Bool("debug", false, "Enable debug logging")
 
@@ -106,6 +107,13 @@ func main() {
 
 	var e *environment.Environment
 	if *env != DefaultEnvironment {
+		log.WithFields(log.Fields{
+			"user":     *user,
+			"password": *password,
+			"token":    *token,
+			"key":      *key,
+		}).Info("environment auth")
+
 		var auth *environment.Credentials
 		if *user != "" && *password != "" {
 			auth = environment.Authenticate(*user, *password, identity)
@@ -115,11 +123,25 @@ func main() {
 			auth = environment.Token(*token)
 		}
 
-		e, err = environment.NewEnvironment(*env, api, auth)
+		if *key != "" {
+			auth, err = environment.Key(*id, *key)
+			if err != nil {
+				log.WithFields(log.Fields{
+					"error": err,
+				}).Error("unable to load key")
+			}
+
+			log.WithFields(log.Fields{
+				"error": err,
+				"auth":  auth,
+			}).Info("certificate auth")
+		}
+
+		e, err = environment.NewEnvironment(*env, api, *id, auth)
 		if err != nil {
 			log.WithFields(log.Fields{
 				"error": err,
-			}).Error("Unable to configure environment")
+			}).Error("unable to configure environment")
 			return
 		}
 	}
@@ -130,15 +152,13 @@ func main() {
 	}
 
 	start := time.Now()
+	status := int64(0)
+
 	outputs, err := flo.Execute(actions.Actions, entryNode, e)
 	if err != nil {
 		log.WithFields(log.Fields{
 			"error": err,
 		}).Error("Error executing flow")
-	}
-
-	status := int64(0)
-	if err != nil {
 		status = 1
 	}
 
@@ -146,6 +166,7 @@ func main() {
 
 	log.WithFields(log.Fields{
 		"duration_ms": duration.Milliseconds(),
+		"status":      status,
 	}).Info("Finished processing Flow")
 
 	result := core.ExecutionResult{

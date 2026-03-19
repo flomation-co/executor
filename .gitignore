@@ -3,3 +3,4 @@ dist/
 cover.out
 state.json
 actions-manifest.json
+scratch/

@@ -504,6 +504,130 @@
       }
     ]
   },
+  "git/add": {
+    "hash": "48ab854650f91172c59499dc8ff9913d2263ce595ec2cd253b7b199faeaeefcb",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Git Add",
+    "description": "Git Actions",
+    "website": "https://www.flomation.co",
+    "icon": "code-branch",
+    "date": "06/03/2026",
+    "type": 2,
+    "inputs": null,
+    "outputs": null
+  },
+  "git/checkout": {
+    "hash": "cccbfe7151d94aa74668ab22f94d51db3f5604e3de456222a769dcc95a463146",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Git Checkout",
+    "description": "Git Actions",
+    "website": "https://www.flomation.co",
+    "icon": "code-branch",
+    "date": "06/03/2026",
+    "type": 2,
+    "inputs": [
+      {
+        "name": "repository_path",
+        "type": "string",
+        "value": null,
+        "label": "Repository Path",
+        "placeholder": ""
+      },
+      {
+        "name": "branch",
+        "type": "string",
+        "value": null,
+        "label": "Branch",
+        "placeholder": "main"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "repository_path",
+        "type": "string",
+        "value": null,
+        "label": "",
+        "placeholder": ""
+      }
+    ]
+  },
+  "git/clone": {
+    "hash": "c6fd1fe321f93deb955fb940e56eb5950e151e922deabc9d33a4b8e2396ce9cd",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Git Clone",
+    "description": "Git Actions",
+    "website": "https://www.flomation.co",
+    "icon": "code-branch",
+    "date": "06/03/2026",
+    "type": 2,
+    "inputs": [
+      {
+        "name": "repository_url",
+        "type": "string",
+        "value": null,
+        "label": "Repository URL",
+        "placeholder": ""
+      },
+      {
+        "name": "ssh_key",
+        "type": "text",
+        "value": null,
+        "label": "SSH Private Key",
+        "placeholder": ""
+      }
+    ],
+    "outputs": [
+      {
+        "name": "repository_path",
+        "type": "string",
+        "value": null,
+        "label": "",
+        "placeholder": ""
+      }
+    ]
+  },
+  "git/commit": {
+    "hash": "dadefb197883cb17895ed90973f398e8ab46b33b1e8f3bbb2ff982a8249714e8",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Git Commit",
+    "description": "Git Actions",
+    "website": "https://www.flomation.co",
+    "icon": "code-branch",
+    "date": "06/03/2026",
+    "type": 2,
+    "inputs": null,
+    "outputs": null
+  },
+  "git/pull": {
+    "hash": "389eadde88ee0e8abdae3f412c7f1a229cb1e86b29828c386c7707a9bba0bf43",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Git Pull",
+    "description": "Git Actions",
+    "website": "https://www.flomation.co",
+    "icon": "code-branch",
+    "date": "06/03/2026",
+    "type": 2,
+    "inputs": null,
+    "outputs": null
+  },
+  "git/push": {
+    "hash": "39a6122337a1c89c62a6f355331af05e63f65344c5a93abca868f50f26fdd711",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Git Push",
+    "description": "Git Actions",
+    "website": "https://www.flomation.co",
+    "icon": "code-branch",
+    "date": "06/03/2026",
+    "type": 2,
+    "inputs": null,
+    "outputs": null
+  },
   "output/set": {
     "hash": "2cad2357211e95ee40c70ae5f04ed7990d472ef1593df27116ecb94c01711e36",
     "author": "Andy Esser",
