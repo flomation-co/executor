@@ -504,6 +504,49 @@
       }
     ]
   },
+  "conditional/if": {
+    "hash": "2cd970654cefe48ca3352ddc35cfef20eff2b9b283066a731670b235d223af72",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "If",
+    "description": "Conditional Actions",
+    "website": "https://www.flomation.co",
+    "icon": "code-branch",
+    "date": "20/03/2026",
+    "type": 4,
+    "inputs": [
+      {
+        "name": "value_a",
+        "type": "string",
+        "value": null,
+        "label": "Value A",
+        "placeholder": "Left operand"
+      },
+      {
+        "name": "operator",
+        "type": "string",
+        "value": null,
+        "label": "Operator",
+        "placeholder": "equals, not_equals, contains, greater_than, less_than, is_empty, is_not_empty"
+      },
+      {
+        "name": "value_b",
+        "type": "string",
+        "value": null,
+        "label": "Value B",
+        "placeholder": "Right operand"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "result",
+        "type": "boolean",
+        "value": null,
+        "label": "Result",
+        "placeholder": ""
+      }
+    ]
+  },
   "git/add": {
     "hash": "04901d72c6653e48168253f2f3885a8a868e205ffea7b15a1339b40f4693264e",
     "author": "Andy Esser",
@@ -918,6 +961,63 @@
       }
     ],
     "outputs": null
+  },
+  "security/antivirus": {
+    "hash": "478e227ac564da0f095a876cfc043a5120297dd36cbeba4681db7488e1170842",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Scan with Antivirus",
+    "description": "Security Actions",
+    "website": "https://www.flomation.co",
+    "icon": "shield-virus",
+    "date": "20/03/2026",
+    "type": 2,
+    "inputs": [
+      {
+        "name": "scan_path",
+        "type": "string",
+        "value": null,
+        "label": "Scan Path",
+        "placeholder": ""
+      },
+      {
+        "name": "recursive",
+        "type": "boolean",
+        "value": null,
+        "label": "Recursive Scan",
+        "placeholder": ""
+      }
+    ],
+    "outputs": [
+      {
+        "name": "is_clean",
+        "type": "boolean",
+        "value": null,
+        "label": "",
+        "placeholder": ""
+      },
+      {
+        "name": "infected_count",
+        "type": "integer",
+        "value": null,
+        "label": "",
+        "placeholder": ""
+      },
+      {
+        "name": "scanned_count",
+        "type": "integer",
+        "value": null,
+        "label": "",
+        "placeholder": ""
+      },
+      {
+        "name": "scan_output",
+        "type": "string",
+        "value": null,
+        "label": "",
+        "placeholder": ""
+      }
+    ]
   },
   "sql/query": {
     "hash": "ead5ae53f12eb5c80b99760c2c134575fc47f10721bd3bb6cd074073676bed7a",

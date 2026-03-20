@@ -41,10 +41,12 @@ const (
 type Action func(flow *Flow, node *Node, inputs []*Connection) (map[string]interface{}, error)
 
 type Edge struct {
-	ID     string `json:"id"`
-	Type   string `json:"type"`
-	Source string `json:"source"`
-	Target string `json:"target"`
+	ID           string `json:"id"`
+	Type         string `json:"type"`
+	Source       string `json:"source"`
+	Target       string `json:"target"`
+	SourceHandle string `json:"sourceHandle,omitempty"`
+	TargetHandle string `json:"targetHandle,omitempty"`
 }
 
 type Connection struct {
@@ -373,7 +375,28 @@ func (f *Flow) ExecuteNode(actions map[string]Action, node *Node, environment *e
 		combinedResults[k] = v
 	}
 
-	children := f.FindTarget(node.ID)
+	var children []*Node
+	if node.Data.Config.Type == ActionTypeConditional {
+		result, ok := outputs["result"].(bool)
+		if !ok {
+			return nil, fmt.Errorf("conditional node %s did not return a boolean result", node.ID)
+		}
+
+		if result {
+			children = f.FindTargetByHandle(node.ID, "true-branch")
+		} else {
+			children = f.FindTargetByHandle(node.ID, "false-branch")
+		}
+
+		log.WithFields(log.Fields{
+			"id":     node.ID,
+			"result": result,
+			"branch": fmt.Sprintf("%v", result),
+		}).Info("Conditional branching")
+	} else {
+		children = f.FindTarget(node.ID)
+	}
+
 	for _, c := range children {
 		childResults, err := f.ExecuteNode(actions, c, environment)
 		if err != nil {
@@ -400,6 +423,25 @@ func (f *Flow) FindSource(target string) []*Node {
 
 		if e.Target == target {
 			n := f.FindNode(e.Source)
+			if n != nil {
+				results = append(results, n)
+			}
+		}
+	}
+
+	return results
+}
+
+func (f *Flow) FindTargetByHandle(source string, handle string) []*Node {
+	results := make([]*Node, 0)
+
+	for _, e := range f.Edges {
+		if e == nil {
+			continue
+		}
+
+		if e.Source == source && e.SourceHandle == handle {
+			n := f.FindNode(e.Target)
 			if n != nil {
 				results = append(results, n)
 			}
