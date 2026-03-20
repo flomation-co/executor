@@ -35,6 +35,40 @@ type ManifestEntry struct {
 	Outputs []core.Connection `json:"outputs"`
 }
 
+func parseConnectionOptions(compositeLit *ast.CompositeLit) []core.ConnectionOption {
+	var options []core.ConnectionOption
+	for _, elt := range compositeLit.Elts {
+		optLit, ok := elt.(*ast.CompositeLit)
+		if !ok {
+			continue
+		}
+		var opt core.ConnectionOption
+		for _, field := range optLit.Elts {
+			kv, ok := field.(*ast.KeyValueExpr)
+			if !ok {
+				continue
+			}
+			key, ok := kv.Key.(*ast.Ident)
+			if !ok {
+				continue
+			}
+			val, ok := kv.Value.(*ast.BasicLit)
+			if !ok {
+				continue
+			}
+			s, _ := strconv.Unquote(val.Value)
+			switch key.Name {
+			case "Name":
+				opt.Name = s
+			case "Value":
+				opt.Value = s
+			}
+		}
+		options = append(options, opt)
+	}
+	return options
+}
+
 func inspectPackage(dir string) map[string]ManifestEntry {
 
 	pkgs, err := parser.ParseDir(token.NewFileSet(), dir, nil, 0)
@@ -169,17 +203,14 @@ func inspectPackage(dir string) map[string]ManifestEntry {
 								}
 
 								var value string
+								var boolValue *bool
 								key := el.Key.(*ast.Ident)
 
-								connectionValue, ok := el.Value.(*ast.BasicLit)
-								if !ok {
-									selector, ok := el.Value.(*ast.SelectorExpr)
-									if !ok {
-										continue
-									}
-
-									t := selector.Sel.Name
-
+								switch v := el.Value.(type) {
+								case *ast.BasicLit:
+									value, _ = strconv.Unquote(v.Value)
+								case *ast.SelectorExpr:
+									t := v.Sel.Name
 									switch t {
 									case "ConnectionTypeString":
 										value = "string"
@@ -192,8 +223,19 @@ func inspectPackage(dir string) map[string]ManifestEntry {
 									case "ConnectionTypeText":
 										value = "text"
 									}
-								} else {
-									value, _ = strconv.Unquote(connectionValue.Value)
+								case *ast.Ident:
+									if v.Name == "true" {
+										b := true
+										boolValue = &b
+									}
+									if v.Name == "false" {
+										b := false
+										boolValue = &b
+									}
+								case *ast.CompositeLit:
+									if key.Name == "Options" {
+										c.Options = parseConnectionOptions(v)
+									}
 								}
 
 								switch key.Name {
@@ -205,6 +247,10 @@ func inspectPackage(dir string) map[string]ManifestEntry {
 									c.Placeholder = value
 								case "Type":
 									c.Type = value
+								case "Required":
+									if boolValue != nil {
+										c.Required = *boolValue
+									}
 								}
 							}
 

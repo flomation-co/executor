@@ -24,6 +24,7 @@ var Inputs = [...]core.Connection{
 		Type:        core.ConnectionTypeString,
 		Label:       "Repository URL",
 		Placeholder: "",
+		Required:    true,
 	},
 	core.Connection{
 		Name:        "ssh_key",

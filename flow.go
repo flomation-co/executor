@@ -49,12 +49,19 @@ type Edge struct {
 	TargetHandle string `json:"targetHandle,omitempty"`
 }
 
+type ConnectionOption struct {
+	Name  string `json:"name"`
+	Value string `json:"value"`
+}
+
 type Connection struct {
-	Name        string      `json:"name"`
-	Type        string      `json:"type"`
-	Value       interface{} `json:"value"`
-	Label       string      `json:"label"`
-	Placeholder string      `json:"placeholder"`
+	Name        string             `json:"name"`
+	Type        string             `json:"type"`
+	Value       interface{}        `json:"value"`
+	Label       string             `json:"label"`
+	Placeholder string             `json:"placeholder"`
+	Required    bool               `json:"required,omitempty"`
+	Options     []ConnectionOption `json:"options,omitempty"`
 }
 
 func (c *Connection) String() *string {

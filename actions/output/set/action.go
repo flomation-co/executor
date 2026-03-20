@@ -21,12 +21,14 @@ var Inputs = [...]core.Connection{
 		Type:        core.ConnectionTypeString,
 		Label:       "Name",
 		Placeholder: "",
+		Required:    true,
 	},
 	core.Connection{
 		Name:        "value",
 		Type:        core.ConnectionTypeString,
 		Label:       "Value",
 		Placeholder: "",
+		Required:    true,
 	},
 }
 

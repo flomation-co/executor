@@ -28,6 +28,7 @@ var Inputs = [...]core.Connection{
 		Type:        core.ConnectionTypeString,
 		Label:       "Scan Path",
 		Placeholder: "",
+		Required:    true,
 	},
 	{
 		Name:        "recursive",

@@ -26,30 +26,35 @@ var Inputs = [...]core.Connection{
 		Type:        core.ConnectionTypeString,
 		Label:       "AWS Access Key",
 		Placeholder: "",
+		Required:    true,
 	},
 	core.Connection{
 		Name:        "aws_secret_key",
 		Type:        core.ConnectionTypeString,
 		Label:       "AWS Secret Key",
 		Placeholder: "",
+		Required:    true,
 	},
 	core.Connection{
 		Name:        "key",
 		Type:        core.ConnectionTypeString,
 		Label:       "Filename",
 		Placeholder: "",
+		Required:    true,
 	},
 	core.Connection{
 		Name:        "bucket",
 		Type:        core.ConnectionTypeString,
 		Label:       "Bucket",
 		Placeholder: "",
+		Required:    true,
 	},
 	core.Connection{
 		Name:        "contents",
 		Type:        core.ConnectionTypeString,
 		Label:       "Contents",
 		Placeholder: "",
+		Required:    true,
 	},
 }
 

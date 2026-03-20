@@ -24,12 +24,14 @@ var Inputs = [...]core.Connection{
 		Type:        core.ConnectionTypeString,
 		Label:       "Repository Path",
 		Placeholder: "",
+		Required:    true,
 	},
 	core.Connection{
 		Name:        "branch",
 		Type:        core.ConnectionTypeString,
 		Label:       "Branch",
 		Placeholder: "main",
+		Required:    true,
 	},
 }
 

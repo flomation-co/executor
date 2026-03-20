@@ -25,24 +25,28 @@ var Inputs = [...]core.Connection{
 		Type:        core.ConnectionTypeString,
 		Label:       "Repository Path",
 		Placeholder: "",
+		Required:    true,
 	},
 	{
 		Name:        "message",
 		Type:        core.ConnectionTypeText,
 		Label:       "Commit Message",
 		Placeholder: "",
+		Required:    true,
 	},
 	{
 		Name:        "author_name",
 		Type:        core.ConnectionTypeString,
 		Label:       "Author Name",
 		Placeholder: "",
+		Required:    true,
 	},
 	{
 		Name:        "author_email",
 		Type:        core.ConnectionTypeString,
 		Label:       "Author Email",
 		Placeholder: "",
+		Required:    true,
 	},
 }
 
