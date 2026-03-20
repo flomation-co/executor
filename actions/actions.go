@@ -12,6 +12,7 @@ import (
 	aws_s3_list_bucket "flomation.app/automate/executor/actions/aws/s3/list"
 	aws_s3_put "flomation.app/automate/executor/actions/aws/s3/put"
 	"flomation.app/automate/executor/actions/common/smtp"
+	antivirus "flomation.app/automate/executor/actions/security/antivirus"
 	git_add "flomation.app/automate/executor/actions/git/add"
 	git_branch "flomation.app/automate/executor/actions/git/branch"
 	git_checkout "flomation.app/automate/executor/actions/git/checkout"
@@ -50,5 +51,6 @@ var (
 		"git/branch":                git_branch.Execute,
 		"git/tag":                   git_tag.Execute,
 		"git/status":                git_status.Execute,
+		"security/antivirus":        antivirus.Execute,
 	}
 )

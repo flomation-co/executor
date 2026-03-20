@@ -505,7 +505,7 @@
     ]
   },
   "git/add": {
-    "hash": "48ab854650f91172c59499dc8ff9913d2263ce595ec2cd253b7b199faeaeefcb",
+    "hash": "04901d72c6653e48168253f2f3885a8a868e205ffea7b15a1339b40f4693264e",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Git Add",
@@ -514,8 +514,67 @@
     "icon": "code-branch",
     "date": "06/03/2026",
     "type": 2,
-    "inputs": null,
-    "outputs": null
+    "inputs": [
+      {
+        "name": "repository_path",
+        "type": "string",
+        "value": null,
+        "label": "Repository Path",
+        "placeholder": ""
+      },
+      {
+        "name": "path",
+        "type": "string",
+        "value": null,
+        "label": "File Path",
+        "placeholder": "."
+      }
+    ],
+    "outputs": [
+      {
+        "name": "repository_path",
+        "type": "string",
+        "value": null,
+        "label": "",
+        "placeholder": ""
+      }
+    ]
+  },
+  "git/branch": {
+    "hash": "6b2206915870620154ad5cf067881490c9b9e1ea534f09797ca24a16d96e1cc8",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Git Branch",
+    "description": "Git Actions",
+    "website": "https://www.flomation.co",
+    "icon": "code-branch",
+    "date": "19/03/2026",
+    "type": 2,
+    "inputs": [
+      {
+        "name": "repository_path",
+        "type": "string",
+        "value": null,
+        "label": "Repository Path",
+        "placeholder": ""
+      },
+      {
+        "name": "branch_name",
+        "type": "string",
+        "value": null,
+        "label": "Branch Name",
+        "placeholder": ""
+      }
+    ],
+    "outputs": [
+      {
+        "name": "repository_path",
+        "type": "string",
+        "value": null,
+        "label": "",
+        "placeholder": ""
+      }
+    ]
   },
   "git/checkout": {
     "hash": "cccbfe7151d94aa74668ab22f94d51db3f5604e3de456222a769dcc95a463146",
@@ -590,7 +649,7 @@
     ]
   },
   "git/commit": {
-    "hash": "dadefb197883cb17895ed90973f398e8ab46b33b1e8f3bbb2ff982a8249714e8",
+    "hash": "2faa59c0a594970e4132864c57ebf42a5f9bdbeb173604c9d6379504f934da83",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Git Commit",
@@ -599,11 +658,55 @@
     "icon": "code-branch",
     "date": "06/03/2026",
     "type": 2,
-    "inputs": null,
-    "outputs": null
+    "inputs": [
+      {
+        "name": "repository_path",
+        "type": "string",
+        "value": null,
+        "label": "Repository Path",
+        "placeholder": ""
+      },
+      {
+        "name": "message",
+        "type": "text",
+        "value": null,
+        "label": "Commit Message",
+        "placeholder": ""
+      },
+      {
+        "name": "author_name",
+        "type": "string",
+        "value": null,
+        "label": "Author Name",
+        "placeholder": ""
+      },
+      {
+        "name": "author_email",
+        "type": "string",
+        "value": null,
+        "label": "Author Email",
+        "placeholder": ""
+      }
+    ],
+    "outputs": [
+      {
+        "name": "repository_path",
+        "type": "string",
+        "value": null,
+        "label": "",
+        "placeholder": ""
+      },
+      {
+        "name": "commit_hash",
+        "type": "string",
+        "value": null,
+        "label": "",
+        "placeholder": ""
+      }
+    ]
   },
   "git/pull": {
-    "hash": "389eadde88ee0e8abdae3f412c7f1a229cb1e86b29828c386c7707a9bba0bf43",
+    "hash": "c63c8b48b45de7ad08dc238f905983e1254e7cf852db6de5eadc58b403a7aa32",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Git Pull",
@@ -612,11 +715,48 @@
     "icon": "code-branch",
     "date": "06/03/2026",
     "type": 2,
-    "inputs": null,
-    "outputs": null
+    "inputs": [
+      {
+        "name": "repository_path",
+        "type": "string",
+        "value": null,
+        "label": "Repository Path",
+        "placeholder": ""
+      },
+      {
+        "name": "ssh_key",
+        "type": "text",
+        "value": null,
+        "label": "SSH Private Key",
+        "placeholder": ""
+      },
+      {
+        "name": "remote_name",
+        "type": "string",
+        "value": null,
+        "label": "Remote Name",
+        "placeholder": "origin"
+      },
+      {
+        "name": "branch",
+        "type": "string",
+        "value": null,
+        "label": "Branch",
+        "placeholder": ""
+      }
+    ],
+    "outputs": [
+      {
+        "name": "repository_path",
+        "type": "string",
+        "value": null,
+        "label": "",
+        "placeholder": ""
+      }
+    ]
   },
   "git/push": {
-    "hash": "39a6122337a1c89c62a6f355331af05e63f65344c5a93abca868f50f26fdd711",
+    "hash": "41d637e80551ccd4d980a62dfc97196390c449f4ecb9f76af435827c295a44f5",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Git Push",
@@ -625,8 +765,131 @@
     "icon": "code-branch",
     "date": "06/03/2026",
     "type": 2,
-    "inputs": null,
-    "outputs": null
+    "inputs": [
+      {
+        "name": "repository_path",
+        "type": "string",
+        "value": null,
+        "label": "Repository Path",
+        "placeholder": ""
+      },
+      {
+        "name": "ssh_key",
+        "type": "text",
+        "value": null,
+        "label": "SSH Private Key",
+        "placeholder": ""
+      },
+      {
+        "name": "remote_name",
+        "type": "string",
+        "value": null,
+        "label": "Remote Name",
+        "placeholder": "origin"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "repository_path",
+        "type": "string",
+        "value": null,
+        "label": "",
+        "placeholder": ""
+      }
+    ]
+  },
+  "git/status": {
+    "hash": "84829fea15feb7d7970fd4acfe7f79c2a139458283d20fc7b54d110ac5f98a37",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Git Status",
+    "description": "Git Actions",
+    "website": "https://www.flomation.co",
+    "icon": "code-branch",
+    "date": "19/03/2026",
+    "type": 2,
+    "inputs": [
+      {
+        "name": "repository_path",
+        "type": "string",
+        "value": null,
+        "label": "Repository Path",
+        "placeholder": ""
+      }
+    ],
+    "outputs": [
+      {
+        "name": "repository_path",
+        "type": "string",
+        "value": null,
+        "label": "",
+        "placeholder": ""
+      },
+      {
+        "name": "is_clean",
+        "type": "string",
+        "value": null,
+        "label": "",
+        "placeholder": ""
+      },
+      {
+        "name": "status",
+        "type": "string",
+        "value": null,
+        "label": "",
+        "placeholder": ""
+      }
+    ]
+  },
+  "git/tag": {
+    "hash": "d39656dceb49fd20c12d78e4630ef817b61dc4e74369e44d1128f5a8ebea6b54",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Git Tag",
+    "description": "Git Actions",
+    "website": "https://www.flomation.co",
+    "icon": "code-branch",
+    "date": "19/03/2026",
+    "type": 2,
+    "inputs": [
+      {
+        "name": "repository_path",
+        "type": "string",
+        "value": null,
+        "label": "Repository Path",
+        "placeholder": ""
+      },
+      {
+        "name": "tag_name",
+        "type": "string",
+        "value": null,
+        "label": "Tag Name",
+        "placeholder": ""
+      },
+      {
+        "name": "message",
+        "type": "text",
+        "value": null,
+        "label": "Tag Message",
+        "placeholder": ""
+      }
+    ],
+    "outputs": [
+      {
+        "name": "repository_path",
+        "type": "string",
+        "value": null,
+        "label": "",
+        "placeholder": ""
+      },
+      {
+        "name": "tag_name",
+        "type": "string",
+        "value": null,
+        "label": "",
+        "placeholder": ""
+      }
+    ]
   },
   "output/set": {
     "hash": "2cad2357211e95ee40c70ae5f04ed7990d472ef1593df27116ecb94c01711e36",
