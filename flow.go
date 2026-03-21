@@ -487,6 +487,21 @@ func (f *Flow) FindNode(id string) *Node {
 	return nil
 }
 
+func (f *Flow) GetNodeResult(nodeID string) map[string]interface{} {
+	if f.nodeResults == nil {
+		return nil
+	}
+	return f.nodeResults[nodeID]
+}
+
+// SetNodeResultForTest allows tests to pre-populate cached node results.
+func (f *Flow) SetNodeResultForTest(nodeID string, result map[string]interface{}) {
+	if f.nodeResults == nil {
+		f.nodeResults = make(map[string]map[string]interface{})
+	}
+	f.nodeResults[nodeID] = result
+}
+
 func (f *Flow) SetOutput(name string, value interface{}) {
 	if _, exists := f.outputs[name]; exists {
 		log.WithFields(log.Fields{

@@ -11,6 +11,8 @@ import (
 	aws_s3_get "flomation.app/automate/executor/actions/aws/s3/get"
 	aws_s3_list_bucket "flomation.app/automate/executor/actions/aws/s3/list"
 	aws_s3_put "flomation.app/automate/executor/actions/aws/s3/put"
+	data_combine "flomation.app/automate/executor/actions/common/data_combine"
+	data_extract "flomation.app/automate/executor/actions/common/data_extract"
 	"flomation.app/automate/executor/actions/common/smtp"
 	conditional_if "flomation.app/automate/executor/actions/conditional/if"
 	antivirus "flomation.app/automate/executor/actions/security/antivirus"
@@ -37,6 +39,8 @@ var (
 		"aws/s3/list":               aws_s3_list_bucket.Execute,
 		"trigger/manual":            manual.Execute,
 		"output/set":                output.Execute,
+		"common/data_combine":       data_combine.Execute,
+		"common/data_extract":       data_extract.Execute,
 		"common/smtp":               smtp.Execute,
 		"sql/query":                 sql_query.Execute,
 		"arithmetic/addition":       arithmetic_addition.Execute,
