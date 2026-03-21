@@ -9,6 +9,7 @@ import (
 	arithmetic_division "flomation.app/automate/executor/actions/arithmetic/division"
 	arithmetic_multiplication "flomation.app/automate/executor/actions/arithmetic/multiplication"
 	arithmetic_subtraction "flomation.app/automate/executor/actions/arithmetic/subtraction"
+	aws_dynamodb "flomation.app/automate/executor/actions/aws/dynamodb"
 	aws_ec2_describe "flomation.app/automate/executor/actions/aws/ec2/describe"
 	aws_s3_delete "flomation.app/automate/executor/actions/aws/s3/delete"
 	aws_s3_get "flomation.app/automate/executor/actions/aws/s3/get"
@@ -28,6 +29,8 @@ import (
 	git_push "flomation.app/automate/executor/actions/git/push"
 	git_status "flomation.app/automate/executor/actions/git/status"
 	git_tag "flomation.app/automate/executor/actions/git/tag"
+	nosql_mongodb "flomation.app/automate/executor/actions/nosql/mongodb"
+	nosql_redis "flomation.app/automate/executor/actions/nosql/redis"
 	output_set "flomation.app/automate/executor/actions/output/set"
 	security_antivirus "flomation.app/automate/executor/actions/security/antivirus"
 	sql_mysql "flomation.app/automate/executor/actions/sql/mysql"
@@ -41,6 +44,7 @@ var Actions = map[string]core.Action{
 	"arithmetic/division":       arithmetic_division.Execute,
 	"arithmetic/multiplication": arithmetic_multiplication.Execute,
 	"arithmetic/subtraction":    arithmetic_subtraction.Execute,
+	"aws/dynamodb":              aws_dynamodb.Execute,
 	"aws/ec2/describe":          aws_ec2_describe.Execute,
 	"aws/s3/delete":             aws_s3_delete.Execute,
 	"aws/s3/get":                aws_s3_get.Execute,
@@ -60,6 +64,8 @@ var Actions = map[string]core.Action{
 	"git/push":                  git_push.Execute,
 	"git/status":                git_status.Execute,
 	"git/tag":                   git_tag.Execute,
+	"nosql/mongodb":             nosql_mongodb.Execute,
+	"nosql/redis":               nosql_redis.Execute,
 	"output/set":                output_set.Execute,
 	"security/antivirus":        security_antivirus.Execute,
 	"sql/mysql":                 sql_mysql.Execute,
