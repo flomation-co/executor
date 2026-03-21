@@ -16,6 +16,7 @@ import (
 	aws_s3_put "flomation.app/automate/executor/actions/aws/s3/put"
 	common_data_combine "flomation.app/automate/executor/actions/common/data_combine"
 	common_data_extract "flomation.app/automate/executor/actions/common/data_extract"
+	common_data_rename "flomation.app/automate/executor/actions/common/data_rename"
 	common_smtp "flomation.app/automate/executor/actions/common/smtp"
 	conditional_if "flomation.app/automate/executor/actions/conditional/if"
 	git_add "flomation.app/automate/executor/actions/git/add"
@@ -45,6 +46,7 @@ var Actions = map[string]core.Action{
 	"aws/s3/put":                aws_s3_put.Execute,
 	"common/data_combine":       common_data_combine.Execute,
 	"common/data_extract":       common_data_extract.Execute,
+	"common/data_rename":        common_data_rename.Execute,
 	"common/smtp":               common_smtp.Execute,
 	"conditional/if":            conditional_if.Execute,
 	"git/add":                   git_add.Execute,

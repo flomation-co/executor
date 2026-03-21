@@ -1,3 +1,3 @@
 package actions
 
-//go:generate go run ../cmd/manifest/manifest.go
+//go:generate sh -c "cd .. && go run cmd/manifest/manifest.go"
