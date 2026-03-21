@@ -43,7 +43,7 @@ var Inputs = [...]core.Connection{
 	},
 	core.Connection{
 		Name:        "message",
-		Type:        core.ConnectionTypeString,
+		Type:        core.ConnectionTypeText,
 		Label:       "Message",
 		Placeholder: "Message",
 		Required:    true,
