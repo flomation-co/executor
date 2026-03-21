@@ -24,6 +24,12 @@ import (
 	log "github.com/sirupsen/logrus"
 )
 
+type CategoryMeta struct {
+	Name        string `json:"name"`
+	Icon        string `json:"icon"`
+	Description string `json:"description"`
+}
+
 type ManifestEntry struct {
 	Hash string `json:"hash"`
 
@@ -36,10 +42,13 @@ type ManifestEntry struct {
 	Date         string `json:"date"`
 	Type         int64  `json:"type"`
 
+	Category *CategoryMeta `json:"category,omitempty"`
+
 	Inputs  []core.Connection `json:"inputs"`
 	Outputs []core.Connection `json:"outputs"`
 
-	HasExecute bool `json:"-"`
+	HasExecute  bool `json:"-"`
+	HasCategory bool `json:"-"`
 }
 
 func parseConnectionOptions(compositeLit *ast.CompositeLit) []core.ConnectionOption {
@@ -314,13 +323,34 @@ func inspectPackage(dir string) map[string]ManifestEntry {
 						case "Type":
 							me.Type, _ = strconv.ParseInt(val.Value, 10, 64)
 							meUpdated = true
+						case "CategoryName":
+							stringVal, _ := strconv.Unquote(val.Value)
+							if me.Category == nil {
+								me.Category = &CategoryMeta{}
+							}
+							me.Category.Name = stringVal
+							me.HasCategory = true
+						case "CategoryIcon":
+							stringVal, _ := strconv.Unquote(val.Value)
+							if me.Category == nil {
+								me.Category = &CategoryMeta{}
+							}
+							me.Category.Icon = stringVal
+							me.HasCategory = true
+						case "CategoryDescription":
+							stringVal, _ := strconv.Unquote(val.Value)
+							if me.Category == nil {
+								me.Category = &CategoryMeta{}
+							}
+							me.Category.Description = stringVal
+							me.HasCategory = true
 						}
 					}
 				}
 			}
 		}
 
-		if diff != "." && meUpdated {
+		if diff != "." && (meUpdated || me.HasCategory) {
 			manifest[diff] = me
 		}
 	}
@@ -449,6 +479,35 @@ func main() {
 		log.WithFields(log.Fields{
 			"error": err,
 		}).Error("unable to parse directory")
+	}
+
+	// Collect category metadata and apply to child actions
+	categories := make(map[string]*CategoryMeta)
+	for key, me := range manifest {
+		if me.HasCategory && me.Category != nil {
+			categories[key] = me.Category
+		}
+	}
+
+	// Apply category metadata to actions and remove category-only entries
+	for key, me := range manifest {
+		if me.HasCategory && !me.HasExecute {
+			delete(manifest, key)
+			continue
+		}
+		// Find the matching category by checking path prefixes
+		bestPrefix := ""
+		for catKey := range categories {
+			if strings.HasPrefix(key, catKey+"/") || key == catKey {
+				if len(catKey) > len(bestPrefix) {
+					bestPrefix = catKey
+				}
+			}
+		}
+		if bestPrefix != "" && me.Category == nil {
+			me.Category = categories[bestPrefix]
+			manifest[key] = me
+		}
 	}
 
 	b, err := json.MarshalIndent(manifest, "", "  ")

@@ -9,6 +9,11 @@
     "icon": "plus",
     "date": "05/03/2026",
     "type": 2,
+    "category": {
+      "name": "Arithmetic",
+      "icon": "calculator",
+      "description": "Mathematical operations"
+    },
     "inputs": [
       {
         "name": "a",
@@ -45,6 +50,11 @@
     "icon": "divide",
     "date": "05/03/2026",
     "type": 2,
+    "category": {
+      "name": "Arithmetic",
+      "icon": "calculator",
+      "description": "Mathematical operations"
+    },
     "inputs": [
       {
         "name": "numerator",
@@ -81,6 +91,11 @@
     "icon": "xmark",
     "date": "05/03/2026",
     "type": 2,
+    "category": {
+      "name": "Arithmetic",
+      "icon": "calculator",
+      "description": "Mathematical operations"
+    },
     "inputs": [
       {
         "name": "a",
@@ -117,6 +132,11 @@
     "icon": "minus",
     "date": "05/03/2026",
     "type": 2,
+    "category": {
+      "name": "Arithmetic",
+      "icon": "calculator",
+      "description": "Mathematical operations"
+    },
     "inputs": [
       {
         "name": "a",
@@ -153,6 +173,11 @@
     "icon": "server",
     "date": "05/03/2026",
     "type": 2,
+    "category": {
+      "name": "AWS",
+      "icon": "cloud",
+      "description": "Amazon Web Services integrations"
+    },
     "inputs": null,
     "outputs": null
   },
@@ -166,6 +191,11 @@
     "icon": "bucket",
     "date": "05/03/2026",
     "type": 2,
+    "category": {
+      "name": "AWS",
+      "icon": "cloud",
+      "description": "Amazon Web Services integrations"
+    },
     "inputs": [
       {
         "name": "aws_access_key",
@@ -230,6 +260,11 @@
     "icon": "bucket",
     "date": "05/03/2026",
     "type": 2,
+    "category": {
+      "name": "AWS",
+      "icon": "cloud",
+      "description": "Amazon Web Services integrations"
+    },
     "inputs": [
       {
         "name": "aws_access_key",
@@ -301,6 +336,11 @@
     "icon": "bucket",
     "date": "05/03/2026",
     "type": 2,
+    "category": {
+      "name": "AWS",
+      "icon": "cloud",
+      "description": "Amazon Web Services integrations"
+    },
     "inputs": [
       {
         "name": "aws_access_key",
@@ -351,6 +391,11 @@
     "icon": "bucket",
     "date": "05/03/2026",
     "type": 2,
+    "category": {
+      "name": "AWS",
+      "icon": "cloud",
+      "description": "Amazon Web Services integrations"
+    },
     "inputs": [
       {
         "name": "aws_access_key",
@@ -427,6 +472,11 @@
     "icon": "object-group",
     "date": "20/03/2026",
     "type": 2,
+    "category": {
+      "name": "Common",
+      "icon": "toolbox",
+      "description": "General-purpose data utilities"
+    },
     "inputs": null,
     "outputs": [
       {
@@ -448,6 +498,11 @@
     "icon": "filter",
     "date": "20/03/2026",
     "type": 2,
+    "category": {
+      "name": "Common",
+      "icon": "toolbox",
+      "description": "General-purpose data utilities"
+    },
     "inputs": [
       {
         "name": "keys",
@@ -478,6 +533,11 @@
     "icon": "i-cursor",
     "date": "21/03/2026",
     "type": 2,
+    "category": {
+      "name": "Common",
+      "icon": "toolbox",
+      "description": "General-purpose data utilities"
+    },
     "inputs": [
       {
         "name": "input_key",
@@ -516,6 +576,11 @@
     "icon": "envelope",
     "date": "27/11/2025",
     "type": 2,
+    "category": {
+      "name": "Common",
+      "icon": "toolbox",
+      "description": "General-purpose data utilities"
+    },
     "inputs": [
       {
         "name": "to",
@@ -616,6 +681,11 @@
     "icon": "code-branch",
     "date": "20/03/2026",
     "type": 4,
+    "category": {
+      "name": "Conditional",
+      "icon": "code-branch",
+      "description": "Control flow based on conditions"
+    },
     "inputs": [
       {
         "name": "value_a",
@@ -691,6 +761,11 @@
     "icon": "code-branch",
     "date": "06/03/2026",
     "type": 2,
+    "category": {
+      "name": "Git",
+      "icon": "code-branch",
+      "description": "Version control operations"
+    },
     "inputs": [
       {
         "name": "repository_path",
@@ -728,6 +803,11 @@
     "icon": "code-branch",
     "date": "19/03/2026",
     "type": 2,
+    "category": {
+      "name": "Git",
+      "icon": "code-branch",
+      "description": "Version control operations"
+    },
     "inputs": [
       {
         "name": "repository_path",
@@ -764,6 +844,11 @@
     "icon": "code-branch",
     "date": "06/03/2026",
     "type": 2,
+    "category": {
+      "name": "Git",
+      "icon": "code-branch",
+      "description": "Version control operations"
+    },
     "inputs": [
       {
         "name": "repository_path",
@@ -802,6 +887,11 @@
     "icon": "code-branch",
     "date": "06/03/2026",
     "type": 2,
+    "category": {
+      "name": "Git",
+      "icon": "code-branch",
+      "description": "Version control operations"
+    },
     "inputs": [
       {
         "name": "repository_url",
@@ -839,6 +929,11 @@
     "icon": "code-branch",
     "date": "06/03/2026",
     "type": 2,
+    "category": {
+      "name": "Git",
+      "icon": "code-branch",
+      "description": "Version control operations"
+    },
     "inputs": [
       {
         "name": "repository_path",
@@ -900,6 +995,11 @@
     "icon": "code-branch",
     "date": "06/03/2026",
     "type": 2,
+    "category": {
+      "name": "Git",
+      "icon": "code-branch",
+      "description": "Version control operations"
+    },
     "inputs": [
       {
         "name": "repository_path",
@@ -951,6 +1051,11 @@
     "icon": "code-branch",
     "date": "06/03/2026",
     "type": 2,
+    "category": {
+      "name": "Git",
+      "icon": "code-branch",
+      "description": "Version control operations"
+    },
     "inputs": [
       {
         "name": "repository_path",
@@ -995,6 +1100,11 @@
     "icon": "code-branch",
     "date": "19/03/2026",
     "type": 2,
+    "category": {
+      "name": "Git",
+      "icon": "code-branch",
+      "description": "Version control operations"
+    },
     "inputs": [
       {
         "name": "repository_path",
@@ -1038,6 +1148,11 @@
     "icon": "code-branch",
     "date": "19/03/2026",
     "type": 2,
+    "category": {
+      "name": "Git",
+      "icon": "code-branch",
+      "description": "Version control operations"
+    },
     "inputs": [
       {
         "name": "repository_path",
@@ -1088,6 +1203,11 @@
     "icon": "dollar-sign",
     "date": "27/11/2025",
     "type": 3,
+    "category": {
+      "name": "Output",
+      "icon": "location-arrow",
+      "description": "Send data to external destinations"
+    },
     "inputs": [
       {
         "name": "name",
@@ -1118,6 +1238,11 @@
     "icon": "shield-virus",
     "date": "20/03/2026",
     "type": 2,
+    "category": {
+      "name": "Security",
+      "icon": "shield-halved",
+      "description": "Security scanning and compliance"
+    },
     "inputs": [
       {
         "name": "scan_path",
@@ -1166,31 +1291,28 @@
       }
     ]
   },
-  "sql/query": {
-    "hash": "ce4a3a87d2565743092e64904a26b4fac46739a671e4aeb85110f0118b1f91a7",
+  "sql/mysql": {
+    "hash": "788f659db227b68ffbcdc5ad2543a9808a3f95f24dd5aef1da77b6368febfd5a",
     "author": "Andy Esser",
     "organisation": "Flomation",
-    "name": "PostgreSQL Query",
-    "description": "Perform a PostgreSQL Query",
+    "name": "MySQL Query",
+    "description": "Execute a query against a MySQL database",
     "website": "https://www.flomation.co",
     "icon": "database",
-    "date": "05/03/2026",
+    "date": "21/03/2026",
     "type": 2,
+    "category": {
+      "name": "SQL",
+      "icon": "database",
+      "description": "Relational database queries"
+    },
     "inputs": [
-      {
-        "name": "driver",
-        "type": "string",
-        "value": null,
-        "label": "Database Driver",
-        "placeholder": "",
-        "required": true
-      },
       {
         "name": "host",
         "type": "string",
         "value": null,
         "label": "Database Host",
-        "placeholder": "",
+        "placeholder": "localhost",
         "required": true
       },
       {
@@ -1198,14 +1320,14 @@
         "type": "integer",
         "value": null,
         "label": "Database Port",
-        "placeholder": "",
+        "placeholder": "3306",
         "required": true
       },
       {
         "name": "username",
         "type": "string",
         "value": null,
-        "label": "Database Username",
+        "label": "Username",
         "placeholder": "",
         "required": true
       },
@@ -1213,7 +1335,7 @@
         "name": "password",
         "type": "string",
         "value": null,
-        "label": "Database Password",
+        "label": "Password",
         "placeholder": "",
         "required": true
       },
@@ -1227,18 +1349,36 @@
       },
       {
         "name": "query",
-        "type": "string",
+        "type": "text",
         "value": null,
         "label": "SQL Query",
-        "placeholder": "",
+        "placeholder": "SELECT * FROM ...",
         "required": true
       },
       {
-        "name": "ssl_mode",
-        "type": "boolean",
+        "name": "tls_mode",
+        "type": "string",
         "value": null,
-        "label": "SSL Mode",
-        "placeholder": ""
+        "label": "TLS Mode",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "Disabled",
+            "value": "false"
+          },
+          {
+            "name": "Preferred",
+            "value": "preferred"
+          },
+          {
+            "name": "Required",
+            "value": "true"
+          },
+          {
+            "name": "Skip Verify",
+            "value": "skip-verify"
+          }
+        ]
       }
     ],
     "outputs": [
@@ -1247,6 +1387,210 @@
         "type": "object",
         "value": null,
         "label": "Results",
+        "placeholder": ""
+      },
+      {
+        "name": "row_count",
+        "type": "integer",
+        "value": null,
+        "label": "Row Count",
+        "placeholder": ""
+      }
+    ]
+  },
+  "sql/oracle": {
+    "hash": "773caf8a0453087840c89a2049d9f23eb15660c6662ef7d6c4351c82d12b9148",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Oracle Query",
+    "description": "Execute a query against an Oracle database",
+    "website": "https://www.flomation.co",
+    "icon": "database",
+    "date": "21/03/2026",
+    "type": 2,
+    "category": {
+      "name": "SQL",
+      "icon": "database",
+      "description": "Relational database queries"
+    },
+    "inputs": [
+      {
+        "name": "host",
+        "type": "string",
+        "value": null,
+        "label": "Database Host",
+        "placeholder": "localhost",
+        "required": true
+      },
+      {
+        "name": "port",
+        "type": "integer",
+        "value": null,
+        "label": "Database Port",
+        "placeholder": "1521",
+        "required": true
+      },
+      {
+        "name": "username",
+        "type": "string",
+        "value": null,
+        "label": "Username",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "password",
+        "type": "string",
+        "value": null,
+        "label": "Password",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "service_name",
+        "type": "string",
+        "value": null,
+        "label": "Service Name",
+        "placeholder": "ORCL",
+        "required": true
+      },
+      {
+        "name": "query",
+        "type": "text",
+        "value": null,
+        "label": "SQL Query",
+        "placeholder": "SELECT * FROM ...",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "results",
+        "type": "object",
+        "value": null,
+        "label": "Results",
+        "placeholder": ""
+      },
+      {
+        "name": "row_count",
+        "type": "integer",
+        "value": null,
+        "label": "Row Count",
+        "placeholder": ""
+      }
+    ]
+  },
+  "sql/postgresql": {
+    "hash": "0f759f1fb854b1b15562eda288f8f18afc768b0c55bd7075cc0143b1a4501995",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "PostgreSQL Query",
+    "description": "Execute a query against a PostgreSQL database",
+    "website": "https://www.flomation.co",
+    "icon": "database",
+    "date": "21/03/2026",
+    "type": 2,
+    "category": {
+      "name": "SQL",
+      "icon": "database",
+      "description": "Relational database queries"
+    },
+    "inputs": [
+      {
+        "name": "host",
+        "type": "string",
+        "value": null,
+        "label": "Database Host",
+        "placeholder": "localhost",
+        "required": true
+      },
+      {
+        "name": "port",
+        "type": "integer",
+        "value": null,
+        "label": "Database Port",
+        "placeholder": "5432",
+        "required": true
+      },
+      {
+        "name": "username",
+        "type": "string",
+        "value": null,
+        "label": "Username",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "password",
+        "type": "string",
+        "value": null,
+        "label": "Password",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "database",
+        "type": "string",
+        "value": null,
+        "label": "Database Name",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "query",
+        "type": "text",
+        "value": null,
+        "label": "SQL Query",
+        "placeholder": "SELECT * FROM ...",
+        "required": true
+      },
+      {
+        "name": "ssl_mode",
+        "type": "string",
+        "value": null,
+        "label": "SSL Mode",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "Disable",
+            "value": "disable"
+          },
+          {
+            "name": "Allow",
+            "value": "allow"
+          },
+          {
+            "name": "Prefer",
+            "value": "prefer"
+          },
+          {
+            "name": "Require",
+            "value": "require"
+          },
+          {
+            "name": "Verify CA",
+            "value": "verify-ca"
+          },
+          {
+            "name": "Verify Full",
+            "value": "verify-full"
+          }
+        ]
+      }
+    ],
+    "outputs": [
+      {
+        "name": "results",
+        "type": "object",
+        "value": null,
+        "label": "Results",
+        "placeholder": ""
+      },
+      {
+        "name": "row_count",
+        "type": "integer",
+        "value": null,
+        "label": "Row Count",
         "placeholder": ""
       }
     ]
@@ -1261,6 +1605,11 @@
     "icon": "play",
     "date": "27/11/2025",
     "type": 1,
+    "category": {
+      "name": "Triggers",
+      "icon": "bolt-lightning",
+      "description": "Start a Flow"
+    },
     "inputs": null,
     "outputs": [
       {
