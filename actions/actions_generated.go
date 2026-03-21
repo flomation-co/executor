@@ -30,7 +30,9 @@ import (
 	git_tag "flomation.app/automate/executor/actions/git/tag"
 	output_set "flomation.app/automate/executor/actions/output/set"
 	security_antivirus "flomation.app/automate/executor/actions/security/antivirus"
-	sql_query "flomation.app/automate/executor/actions/sql/query"
+	sql_mysql "flomation.app/automate/executor/actions/sql/mysql"
+	sql_oracle "flomation.app/automate/executor/actions/sql/oracle"
+	sql_postgresql "flomation.app/automate/executor/actions/sql/postgresql"
 	trigger_manual "flomation.app/automate/executor/actions/trigger/manual"
 )
 
@@ -60,6 +62,8 @@ var Actions = map[string]core.Action{
 	"git/tag":                   git_tag.Execute,
 	"output/set":                output_set.Execute,
 	"security/antivirus":        security_antivirus.Execute,
-	"sql/query":                 sql_query.Execute,
+	"sql/mysql":                 sql_mysql.Execute,
+	"sql/oracle":                sql_oracle.Execute,
+	"sql/postgresql":            sql_postgresql.Execute,
 	"trigger/manual":            trigger_manual.Execute,
 }

@@ -417,6 +417,95 @@
       }
     ]
   },
+  "common/data_combine": {
+    "hash": "206e77c2103f3008271e3acd4e0cfbd699f8662ada21cb4f65e3df1654bc55d4",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Data Combine",
+    "description": "Combine all parent outputs into a single object",
+    "website": "https://www.flomation.co",
+    "icon": "object-group",
+    "date": "20/03/2026",
+    "type": 2,
+    "inputs": null,
+    "outputs": [
+      {
+        "name": "combined",
+        "type": "object",
+        "value": null,
+        "label": "Combined Data",
+        "placeholder": ""
+      }
+    ]
+  },
+  "common/data_extract": {
+    "hash": "1efe67371686f30f3cfd3649208b0bf1637936ff8aec3ab8b972a60db08b650e",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Data Extract",
+    "description": "Selectively extract outputs from parent nodes",
+    "website": "https://www.flomation.co",
+    "icon": "filter",
+    "date": "20/03/2026",
+    "type": 2,
+    "inputs": [
+      {
+        "name": "keys",
+        "type": "text",
+        "value": null,
+        "label": "Keys to Extract",
+        "placeholder": "Comma-separated output names, e.g. repository_path,status",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "extracted",
+        "type": "object",
+        "value": null,
+        "label": "Extracted Data",
+        "placeholder": ""
+      }
+    ]
+  },
+  "common/data_rename": {
+    "hash": "7a31ed4f444ba180dee672580cebbf592d0bf0edc728ce9cbc1e04d3dca1f8f2",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Data Rename",
+    "description": "Rename an input key to a different output key",
+    "website": "https://www.flomation.co",
+    "icon": "i-cursor",
+    "date": "21/03/2026",
+    "type": 2,
+    "inputs": [
+      {
+        "name": "input_key",
+        "type": "string",
+        "value": null,
+        "label": "Input Key",
+        "placeholder": "The key to read from parent outputs",
+        "required": true
+      },
+      {
+        "name": "output_key",
+        "type": "string",
+        "value": null,
+        "label": "Output Key",
+        "placeholder": "The new key name for the value",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "renamed",
+        "type": "object",
+        "value": null,
+        "label": "Renamed Data",
+        "placeholder": ""
+      }
+    ]
+  },
   "common/smtp": {
     "hash": "95cfc0caa6a9d003ec660d7d26bc4eecf087803e8b02e4ca071343d9823d760d",
     "author": "Andy Esser",
