@@ -404,12 +404,15 @@ func (f *Flow) ExecuteNode(actions map[string]Action, node *Node, environment *e
 		children = f.FindTarget(node.ID)
 	}
 
+	var childErr error
 	for _, c := range children {
 		childResults, err := f.ExecuteNode(actions, c, environment)
 		if err != nil {
 			log.WithFields(log.Fields{
 				"error": err,
+				"node":  c.ID,
 			}).Error("Error processing Child")
+			childErr = err
 		}
 
 		for k, v := range childResults {
@@ -417,7 +420,7 @@ func (f *Flow) ExecuteNode(actions map[string]Action, node *Node, environment *e
 		}
 	}
 
-	return combinedResults, nil
+	return combinedResults, childErr
 }
 
 func (f *Flow) FindSource(target string) []*Node {
