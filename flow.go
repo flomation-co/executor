@@ -229,7 +229,7 @@ func (f *Flow) Execute(actions map[string]Action, entry *string, environment *en
 				continue
 			}
 
-			if n.Type == TriggerTypeManual {
+			if strings.HasPrefix(n.Type, "trigger/") {
 				start = n
 				break
 			}
