@@ -367,7 +367,7 @@ func (f *Flow) ExecuteNode(actions map[string]Action, node *Node, environment *e
 					} else {
 						log.WithFields(log.Fields{
 							"output": m,
-						}).Warn("Substitution upstream output does not exist")
+						}).Warn("substitution upstream output does not exist")
 					}
 				}
 			}
@@ -395,7 +395,7 @@ func (f *Flow) ExecuteNode(actions map[string]Action, node *Node, environment *e
 	combinedResults := make(map[string]interface{})
 
 	// Only Output-type nodes contribute to the flow's final outputs
-	if node.Data.Config.Type == ActionTypeOutput {
+	if node.Data.Config.Type == ActionTypeOutput || strings.HasPrefix(node.Type, "output/") {
 		for k, v := range outputs {
 			combinedResults[k] = v
 		}
