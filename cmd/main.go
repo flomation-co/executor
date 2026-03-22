@@ -85,7 +85,7 @@ func main() {
 	if *path == "" {
 		log.Error("no path specified")
 		flag.PrintDefaults()
-		return
+		os.Exit(1)
 	}
 
 	log.WithFields(log.Fields{
@@ -102,7 +102,7 @@ func main() {
 		log.WithFields(log.Fields{
 			"error": err,
 		}).Error("Unable to load flow")
-		return
+		os.Exit(1)
 	}
 
 	var e *environment.Environment
@@ -142,7 +142,7 @@ func main() {
 			log.WithFields(log.Fields{
 				"error": err,
 			}).Error("unable to configure environment")
-			return
+			os.Exit(1)
 		}
 	}
 
