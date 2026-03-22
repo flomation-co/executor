@@ -394,8 +394,11 @@ func (f *Flow) ExecuteNode(actions map[string]Action, node *Node, environment *e
 
 	combinedResults := make(map[string]interface{})
 
-	for k, v := range outputs {
-		combinedResults[k] = v
+	// Only Output-type nodes contribute to the flow's final outputs
+	if node.Data.Config.Type == ActionTypeOutput {
+		for k, v := range outputs {
+			combinedResults[k] = v
+		}
 	}
 
 	var children []*Node
