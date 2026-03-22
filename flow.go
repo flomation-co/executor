@@ -327,8 +327,9 @@ func (f *Flow) ExecuteNode(actions map[string]Action, node *Node, environment *e
 					}
 
 					*val = strings.ReplaceAll(*val, "${"+m+"}", *p.Value)
-				} else if strings.HasPrefix(m, "secret.") {
-					name := strings.TrimPrefix(m, "secret.")
+				} else if strings.HasPrefix(m, "secrets.") || strings.HasPrefix(m, "secret.") {
+					name := strings.TrimPrefix(m, "secrets.")
+					name = strings.TrimPrefix(name, "secret.")
 					p, err := environment.GetSecret(name)
 					if err != nil {
 						log.WithFields(log.Fields{
