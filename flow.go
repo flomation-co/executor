@@ -245,30 +245,8 @@ func (f *Flow) Execute(actions map[string]Action, entry *string, environment *en
 		return nil, err
 	}
 
-	// Collect outputs only from Output-type nodes
-	finalOutputs := make(map[string]interface{})
-	for nodeID, nodeOutputs := range f.nodeResults {
-		node := f.FindNode(nodeID)
-		if node == nil {
-			continue
-		}
-
-		isOutput := node.Data != nil && node.Data.Config.Type == ActionTypeOutput
-		if !isOutput && node.Data != nil && strings.HasPrefix(node.Data.Label, "output/") {
-			isOutput = true
-		}
-		if !isOutput && strings.HasPrefix(node.Type, "output/") {
-			isOutput = true
-		}
-
-		if isOutput {
-			for k, v := range nodeOutputs {
-				finalOutputs[k] = v
-			}
-		}
-	}
-
-	return finalOutputs, nil
+	// Return outputs set explicitly via SetOutput (by Output-type nodes)
+	return f.outputs, nil
 }
 
 func (f *Flow) ExecuteNode(actions map[string]Action, node *Node, environment *environment.Environment) (map[string]interface{}, error) {
