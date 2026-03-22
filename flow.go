@@ -282,8 +282,13 @@ func (f *Flow) ExecuteNode(actions map[string]Action, node *Node, environment *e
 
 	action, exists := actions[node.Type]
 	if !exists {
+		// Fall back to Data.Label for action lookup (ReactFlow stores component type in node.Type)
+		action, exists = actions[node.Data.Label]
+	}
+	if !exists {
 		log.WithFields(log.Fields{
-			"type": node.Type,
+			"type":  node.Type,
+			"label": node.Data.Label,
 		}).Debug("Unknown node action")
 		return nil, ErrInvalidNode
 	}
@@ -395,7 +400,10 @@ func (f *Flow) ExecuteNode(actions map[string]Action, node *Node, environment *e
 	combinedResults := make(map[string]interface{})
 
 	// Only Output-type nodes contribute to the flow's final outputs
-	if node.Data.Config.Type == ActionTypeOutput || strings.HasPrefix(node.Type, "output/") {
+	isOutputNode := node.Data.Config.Type == ActionTypeOutput ||
+		strings.HasPrefix(node.Type, "output/") ||
+		strings.HasPrefix(node.Data.Label, "output/")
+	if isOutputNode {
 		for k, v := range outputs {
 			combinedResults[k] = v
 		}
