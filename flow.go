@@ -346,14 +346,14 @@ func (f *Flow) ExecuteNode(actions map[string]Action, node *Node, environment *e
 					if err != nil {
 						log.WithFields(log.Fields{
 							"error": err,
-						}).Error("Unable to get Secret")
+						}).Error("unable to get Secret")
 						continue
 					}
 
 					if p == nil || p.Value == nil {
 						log.WithFields(log.Fields{
 							"name": name,
-						}).Warn("Missing secret")
+						}).Warn("missing secret")
 						continue
 					}
 
@@ -425,10 +425,6 @@ func (f *Flow) ExecuteNode(actions map[string]Action, node *Node, environment *e
 		}
 		childResults, err := f.ExecuteNode(actions, c, environment)
 		if err != nil {
-			log.WithFields(log.Fields{
-				"error": err,
-				"node":  c.ID,
-			}).Error("Error processing Child")
 			childErr = err
 		}
 

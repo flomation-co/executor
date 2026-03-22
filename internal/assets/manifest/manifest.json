@@ -163,6 +163,124 @@
       }
     ]
   },
+  "aws/dynamodb": {
+    "hash": "51a2077fabc6cf77306fa3c23e6925c790975d7944ab681a86739ba76d0441b3",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "DynamoDB Query",
+    "description": "Execute an operation against an AWS DynamoDB table",
+    "website": "https://www.flomation.co",
+    "icon": "table",
+    "date": "21/03/2026",
+    "type": 2,
+    "category": {
+      "name": "AWS",
+      "icon": "cloud",
+      "description": "Amazon Web Services integrations"
+    },
+    "inputs": [
+      {
+        "name": "access_key",
+        "type": "string",
+        "value": null,
+        "label": "AWS Access Key",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "secret_key",
+        "type": "string",
+        "value": null,
+        "label": "AWS Secret Key",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "eu-west-1",
+        "required": true
+      },
+      {
+        "name": "table_name",
+        "type": "string",
+        "value": null,
+        "label": "Table Name",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "operation",
+        "type": "string",
+        "value": null,
+        "label": "Operation",
+        "placeholder": "",
+        "required": true,
+        "options": [
+          {
+            "name": "Get Item",
+            "value": "get_item"
+          },
+          {
+            "name": "Put Item",
+            "value": "put_item"
+          },
+          {
+            "name": "Query",
+            "value": "query"
+          },
+          {
+            "name": "Scan",
+            "value": "scan"
+          },
+          {
+            "name": "Delete Item",
+            "value": "delete_item"
+          }
+        ]
+      },
+      {
+        "name": "key",
+        "type": "text",
+        "value": null,
+        "label": "Key",
+        "placeholder": "{\"pk\": {\"S\": \"value\"}}",
+        "required": true
+      },
+      {
+        "name": "data",
+        "type": "text",
+        "value": null,
+        "label": "Data",
+        "placeholder": "{\"attribute\": {\"S\": \"value\"}}"
+      },
+      {
+        "name": "filter_expression",
+        "type": "string",
+        "value": null,
+        "label": "Filter Expression",
+        "placeholder": ""
+      }
+    ],
+    "outputs": [
+      {
+        "name": "results",
+        "type": "object",
+        "value": null,
+        "label": "Results",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Count",
+        "placeholder": ""
+      }
+    ]
+  },
   "aws/ec2/describe": {
     "hash": "83b8abb88363392fc36a1d647461f7dd155dd0435dfdea0b58a063fbdc53d8be",
     "author": "Andy Esser",
@@ -567,7 +685,7 @@
     ]
   },
   "common/smtp": {
-    "hash": "95cfc0caa6a9d003ec660d7d26bc4eecf087803e8b02e4ca071343d9823d760d",
+    "hash": "57c5848c5223a478b71d2bae33812426ae20e234d4c19252bb84451b4850c77c",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Send SMTP Email",
@@ -608,7 +726,7 @@
       },
       {
         "name": "message",
-        "type": "string",
+        "type": "text",
         "value": null,
         "label": "Message",
         "placeholder": "Message",
@@ -1193,6 +1311,260 @@
       }
     ]
   },
+  "nosql/mongodb": {
+    "hash": "cd1428b9a909b381660aa4e27f43c927bdbac9b03e10ae1bce7f7d986e638d91",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "MongoDB Query",
+    "description": "Execute an operation against a MongoDB collection",
+    "website": "https://www.flomation.co",
+    "icon": "leaf",
+    "date": "21/03/2026",
+    "type": 2,
+    "category": {
+      "name": "NoSQL",
+      "icon": "layer-group",
+      "description": "NoSQL database operations"
+    },
+    "inputs": [
+      {
+        "name": "connection_uri",
+        "type": "string",
+        "value": null,
+        "label": "Connection URI",
+        "placeholder": "mongodb://localhost:27017",
+        "required": true
+      },
+      {
+        "name": "database",
+        "type": "string",
+        "value": null,
+        "label": "Database",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "collection",
+        "type": "string",
+        "value": null,
+        "label": "Collection",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "operation",
+        "type": "string",
+        "value": null,
+        "label": "Operation",
+        "placeholder": "",
+        "required": true,
+        "options": [
+          {
+            "name": "Find",
+            "value": "find"
+          },
+          {
+            "name": "Insert One",
+            "value": "insert_one"
+          },
+          {
+            "name": "Insert Many",
+            "value": "insert_many"
+          },
+          {
+            "name": "Update",
+            "value": "update"
+          },
+          {
+            "name": "Delete",
+            "value": "delete"
+          },
+          {
+            "name": "Count",
+            "value": "count"
+          }
+        ]
+      },
+      {
+        "name": "filter",
+        "type": "text",
+        "value": null,
+        "label": "Filter",
+        "placeholder": "{\"key\": \"value\"}"
+      },
+      {
+        "name": "document",
+        "type": "text",
+        "value": null,
+        "label": "Document",
+        "placeholder": "{\"key\": \"value\"}"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "results",
+        "type": "object",
+        "value": null,
+        "label": "Results",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Count",
+        "placeholder": ""
+      }
+    ]
+  },
+  "nosql/redis": {
+    "hash": "4a1dec065b473ae73bff5db8dca1eb461c19fea9130c6787192f652466f4ee90",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Redis Command",
+    "description": "Execute a command against a Redis instance",
+    "website": "https://www.flomation.co",
+    "icon": "bolt",
+    "date": "21/03/2026",
+    "type": 2,
+    "category": {
+      "name": "NoSQL",
+      "icon": "layer-group",
+      "description": "NoSQL database operations"
+    },
+    "inputs": [
+      {
+        "name": "host",
+        "type": "string",
+        "value": null,
+        "label": "Host",
+        "placeholder": "localhost",
+        "required": true
+      },
+      {
+        "name": "port",
+        "type": "integer",
+        "value": null,
+        "label": "Port",
+        "placeholder": "6379",
+        "required": true
+      },
+      {
+        "name": "password",
+        "type": "string",
+        "value": null,
+        "label": "Password",
+        "placeholder": ""
+      },
+      {
+        "name": "database",
+        "type": "integer",
+        "value": null,
+        "label": "Database",
+        "placeholder": "0"
+      },
+      {
+        "name": "command",
+        "type": "string",
+        "value": null,
+        "label": "Command",
+        "placeholder": "",
+        "required": true,
+        "options": [
+          {
+            "name": "GET",
+            "value": "GET"
+          },
+          {
+            "name": "SET",
+            "value": "SET"
+          },
+          {
+            "name": "DEL",
+            "value": "DEL"
+          },
+          {
+            "name": "HGET",
+            "value": "HGET"
+          },
+          {
+            "name": "HSET",
+            "value": "HSET"
+          },
+          {
+            "name": "LPUSH",
+            "value": "LPUSH"
+          },
+          {
+            "name": "LPOP",
+            "value": "LPOP"
+          },
+          {
+            "name": "RPUSH",
+            "value": "RPUSH"
+          },
+          {
+            "name": "RPOP",
+            "value": "RPOP"
+          },
+          {
+            "name": "KEYS",
+            "value": "KEYS"
+          },
+          {
+            "name": "EXISTS",
+            "value": "EXISTS"
+          },
+          {
+            "name": "EXPIRE",
+            "value": "EXPIRE"
+          },
+          {
+            "name": "TTL",
+            "value": "TTL"
+          }
+        ]
+      },
+      {
+        "name": "key",
+        "type": "string",
+        "value": null,
+        "label": "Key",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "value",
+        "type": "text",
+        "value": null,
+        "label": "Value",
+        "placeholder": ""
+      },
+      {
+        "name": "field",
+        "type": "string",
+        "value": null,
+        "label": "Field",
+        "placeholder": ""
+      }
+    ],
+    "outputs": [
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Result",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      }
+    ]
+  },
   "output/set": {
     "hash": "05f0e3818a441c5837d9b6543e663da5f0a4e6febe515914d851620eb82ec9b3",
     "author": "Andy Esser",
@@ -1591,6 +1963,83 @@
         "type": "integer",
         "value": null,
         "label": "Row Count",
+        "placeholder": ""
+      }
+    ]
+  },
+  "trigger/git_poll": {
+    "hash": "57d9d447631a50e38c36d0848c7bfd584ca3d401f8a920253c921ce362a6c8ea",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Git Poll Trigger",
+    "description": "Triggers a flow when changes are detected in a Git repository",
+    "website": "https://www.flomation.co",
+    "icon": "code-branch",
+    "date": "22/03/2026",
+    "type": 1,
+    "category": {
+      "name": "Triggers",
+      "icon": "bolt-lightning",
+      "description": "Start a Flow"
+    },
+    "inputs": [
+      {
+        "name": "repository_url",
+        "type": "string",
+        "value": null,
+        "label": "Repository URL",
+        "placeholder": "git@github.com:org/repo.git",
+        "required": true
+      },
+      {
+        "name": "ssh_key",
+        "type": "text",
+        "value": null,
+        "label": "SSH Private Key",
+        "placeholder": "Optional SSH key for authentication"
+      },
+      {
+        "name": "branch_regex",
+        "type": "string",
+        "value": null,
+        "label": "Branch Regex",
+        "placeholder": "e.g. ^main$ or ^feature/.*"
+      },
+      {
+        "name": "poll_interval",
+        "type": "string",
+        "value": null,
+        "label": "Poll Interval",
+        "placeholder": "e.g. 60s, 5m"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "branch",
+        "type": "string",
+        "value": null,
+        "label": "Branch",
+        "placeholder": ""
+      },
+      {
+        "name": "commit_hash",
+        "type": "string",
+        "value": null,
+        "label": "Commit Hash",
+        "placeholder": ""
+      },
+      {
+        "name": "commit_message",
+        "type": "string",
+        "value": null,
+        "label": "Commit Message",
+        "placeholder": ""
+      },
+      {
+        "name": "repository_url",
+        "type": "string",
+        "value": null,
+        "label": "Repository URL",
         "placeholder": ""
       }
     ]

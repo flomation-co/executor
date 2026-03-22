@@ -62,6 +62,7 @@ func main() {
 		"version": version.Version,
 		"hash":    version.GetHash(),
 		"date":    version.BuiltDate,
+		"runner":  runner,
 	}).Info("Starting Flomation Executor")
 
 	if *manifest != "" {
@@ -88,15 +89,6 @@ func main() {
 		os.Exit(1)
 	}
 
-	log.WithFields(log.Fields{
-		"path":        *path,
-		"entry":       *entry,
-		"id":          *id,
-		"api":         *api,
-		"environment": *env,
-		"runner":      *runner,
-	}).Info("Executing Flow")
-
 	flo, err := core.Load(path)
 	if err != nil {
 		log.WithFields(log.Fields{
@@ -107,13 +99,6 @@ func main() {
 
 	var e *environment.Environment
 	if *env != DefaultEnvironment {
-		log.WithFields(log.Fields{
-			"user":     *user,
-			"password": *password,
-			"token":    *token,
-			"key":      *key,
-		}).Info("environment auth")
-
 		var auth *environment.Credentials
 		if *user != "" && *password != "" {
 			auth = environment.Authenticate(*user, *password, identity)
@@ -130,11 +115,6 @@ func main() {
 					"error": err,
 				}).Error("unable to load key")
 			}
-
-			log.WithFields(log.Fields{
-				"error": err,
-				"auth":  auth,
-			}).Info("certificate auth")
 		}
 
 		e, err = environment.NewEnvironment(*env, api, *id, auth)
