@@ -3,6 +3,7 @@ package smtp
 import (
 	"crypto/tls"
 	"fmt"
+	"net/mail"
 	"net/smtp"
 
 	core "flomation.app/automate/executor"
@@ -113,7 +114,7 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	smtpHost := fmt.Sprintf("%v:%v", *host.String(), *port.Number())
 
 	auth := smtp.PlainAuth("", *user.String(), *password.String(), *host.String())
-	msg := fmt.Sprintf("From: %v\nTo: %v\nSubject: %v\nMIME-version: 1.0;\nContent-Type: text/html; charset=\"UTF-8\";\n\n%v\n\n", *from.String(), *to.String(), *subject.String(), *message.String())
+	msg := fmt.Sprintf("MIME-version: 1.0\r\nFrom: %v\r\nTo: %v\r\nSubject: %v\r\nContent-Type: text/html; charset=\"UTF-8\"\r\n\r\n%v", *from.String(), *to.String(), *subject.String(), *message.String())
 
 	c, err := smtp.Dial(smtpHost)
 	if err != nil {
@@ -138,7 +139,12 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 		return nil, err
 	}
 
-	if err = c.Mail(*from.String()); err != nil {
+	a, err := mail.ParseAddress(*from.String())
+	if err != nil {
+		return nil, err
+	}
+
+	if err = c.Mail(a.Address); err != nil {
 		return nil, err
 	}
 

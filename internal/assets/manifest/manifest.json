@@ -685,7 +685,7 @@
     ]
   },
   "common/smtp": {
-    "hash": "57c5848c5223a478b71d2bae33812426ae20e234d4c19252bb84451b4850c77c",
+    "hash": "86e1e5f5016e23ae902e82070ce07dfb1321f9e678cb0975e6203e8eb7ac2c23",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Send SMTP Email",
@@ -2073,6 +2073,111 @@
         "type": "string",
         "value": null,
         "label": "Quote",
+        "placeholder": ""
+      }
+    ]
+  },
+  "trigger/schedule": {
+    "hash": "33ecf38fcf81f979428966d5726fde090c54f9b4d8ef43b27583287ab0734624",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Schedule Trigger",
+    "description": "Triggers a flow on a recurring schedule",
+    "website": "https://www.flomation.co",
+    "icon": "clock",
+    "date": "22/03/2026",
+    "type": 1,
+    "category": {
+      "name": "Triggers",
+      "icon": "bolt-lightning",
+      "description": "Start a Flow"
+    },
+    "inputs": [
+      {
+        "name": "mode",
+        "type": "string",
+        "value": null,
+        "label": "Schedule Mode",
+        "placeholder": "",
+        "required": true,
+        "options": [
+          {
+            "name": "Every interval",
+            "value": "interval"
+          },
+          {
+            "name": "Daily at a specific time",
+            "value": "daily"
+          },
+          {
+            "name": "Weekly on specific days",
+            "value": "weekly"
+          }
+        ]
+      },
+      {
+        "name": "interval",
+        "type": "string",
+        "value": null,
+        "label": "Interval",
+        "placeholder": "e.g. 15"
+      },
+      {
+        "name": "unit",
+        "type": "string",
+        "value": null,
+        "label": "Unit",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "Minutes",
+            "value": "minutes"
+          },
+          {
+            "name": "Hours",
+            "value": "hours"
+          },
+          {
+            "name": "Days",
+            "value": "days"
+          }
+        ]
+      },
+      {
+        "name": "time_of_day",
+        "type": "string",
+        "value": null,
+        "label": "Time of Day",
+        "placeholder": "HH:MM (24-hour)"
+      },
+      {
+        "name": "days_of_week",
+        "type": "string",
+        "value": null,
+        "label": "Days of Week",
+        "placeholder": "monday,wednesday,friday"
+      },
+      {
+        "name": "timezone",
+        "type": "string",
+        "value": null,
+        "label": "Timezone",
+        "placeholder": "Europe/London"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "triggered_at",
+        "type": "string",
+        "value": null,
+        "label": "Triggered At",
+        "placeholder": ""
+      },
+      {
+        "name": "schedule_mode",
+        "type": "string",
+        "value": null,
+        "label": "Schedule Mode",
         "placeholder": ""
       }
     ]
