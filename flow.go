@@ -240,12 +240,35 @@ func (f *Flow) Execute(actions map[string]Action, entry *string, environment *en
 		return nil, ErrNoStartNode
 	}
 
-	outputs, err := f.ExecuteNode(actions, start, environment)
+	_, err := f.ExecuteNode(actions, start, environment)
 	if err != nil {
 		return nil, err
 	}
 
-	return outputs, nil
+	// Collect outputs only from Output-type nodes
+	finalOutputs := make(map[string]interface{})
+	for nodeID, nodeOutputs := range f.nodeResults {
+		node := f.FindNode(nodeID)
+		if node == nil {
+			continue
+		}
+
+		isOutput := node.Data != nil && node.Data.Config.Type == ActionTypeOutput
+		if !isOutput && node.Data != nil && strings.HasPrefix(node.Data.Label, "output/") {
+			isOutput = true
+		}
+		if !isOutput && strings.HasPrefix(node.Type, "output/") {
+			isOutput = true
+		}
+
+		if isOutput {
+			for k, v := range nodeOutputs {
+				finalOutputs[k] = v
+			}
+		}
+	}
+
+	return finalOutputs, nil
 }
 
 func (f *Flow) ExecuteNode(actions map[string]Action, node *Node, environment *environment.Environment) (map[string]interface{}, error) {
@@ -398,16 +421,6 @@ func (f *Flow) ExecuteNode(actions map[string]Action, node *Node, environment *e
 	f.nodeResults[node.ID] = outputs
 
 	combinedResults := make(map[string]interface{})
-
-	// Only Output-type nodes contribute to the flow's final outputs
-	isOutputNode := node.Data.Config.Type == ActionTypeOutput ||
-		strings.HasPrefix(node.Type, "output/") ||
-		strings.HasPrefix(node.Data.Label, "output/")
-	if isOutputNode {
-		for k, v := range outputs {
-			combinedResults[k] = v
-		}
-	}
 
 	var children []*Node
 	if node.Data.Config.Type == ActionTypeConditional {
