@@ -310,6 +310,12 @@ func (f *Flow) ExecuteNode(actions map[string]Action, node *Node, environment *e
 				m = strings.TrimSuffix(m, "}")
 
 				if strings.HasPrefix(m, "env.") {
+					if environment == nil {
+						log.WithFields(log.Fields{
+							"name": m,
+						}).Warn("No environment configured for property substitution")
+						continue
+					}
 					name := strings.TrimPrefix(m, "env.")
 					p, err := environment.GetProperty(name)
 					if err != nil {
@@ -319,7 +325,7 @@ func (f *Flow) ExecuteNode(actions map[string]Action, node *Node, environment *e
 						continue
 					}
 
-					if p == nil {
+					if p == nil || p.Value == nil {
 						log.WithFields(log.Fields{
 							"name": name,
 						}).Warn("Missing property")
@@ -328,6 +334,12 @@ func (f *Flow) ExecuteNode(actions map[string]Action, node *Node, environment *e
 
 					*val = strings.ReplaceAll(*val, "${"+m+"}", *p.Value)
 				} else if strings.HasPrefix(m, "secrets.") || strings.HasPrefix(m, "secret.") {
+					if environment == nil {
+						log.WithFields(log.Fields{
+							"name": m,
+						}).Warn("No environment configured for secret substitution")
+						continue
+					}
 					name := strings.TrimPrefix(m, "secrets.")
 					name = strings.TrimPrefix(name, "secret.")
 					p, err := environment.GetSecret(name)
@@ -338,7 +350,7 @@ func (f *Flow) ExecuteNode(actions map[string]Action, node *Node, environment *e
 						continue
 					}
 
-					if p == nil {
+					if p == nil || p.Value == nil {
 						log.WithFields(log.Fields{
 							"name": name,
 						}).Warn("Missing secret")
