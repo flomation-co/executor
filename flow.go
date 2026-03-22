@@ -419,6 +419,10 @@ func (f *Flow) ExecuteNode(actions map[string]Action, node *Node, environment *e
 
 	var childErr error
 	for _, c := range children {
+		// Skip other trigger nodes — only the entry trigger should execute
+		if c.Type != "" && strings.HasPrefix(c.Type, "trigger/") {
+			continue
+		}
 		childResults, err := f.ExecuteNode(actions, c, environment)
 		if err != nil {
 			log.WithFields(log.Fields{
