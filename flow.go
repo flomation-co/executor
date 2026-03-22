@@ -262,11 +262,6 @@ func (f *Flow) ExecuteNode(actions map[string]Action, node *Node, environment *e
 		return v, nil
 	}
 
-	log.WithFields(log.Fields{
-		"id":   node.ID,
-		"type": node.Type,
-	}).Info("Processing Node")
-
 	var results map[string]interface{}
 	parentResults := make(map[string]interface{})
 	parents := f.FindSource(node.ID)
@@ -300,7 +295,15 @@ func (f *Flow) ExecuteNode(actions map[string]Action, node *Node, environment *e
 			value = results[v.Name]
 		}
 
+		// Try string representation first; for non-string types, check if the
+		// raw value contains a variable reference (e.g. "${env.X}" in an integer field)
 		val := v.String()
+		if val == nil && v.Value != nil {
+			raw := fmt.Sprintf("%v", v.Value)
+			if strings.Contains(raw, "${") {
+				val = &raw
+			}
+		}
 		if val != nil {
 			r := regexp.MustCompile(`\${[^{}]*}`)
 			matches := r.FindAllString(*val, -1)
@@ -407,12 +410,6 @@ func (f *Flow) ExecuteNode(actions map[string]Action, node *Node, environment *e
 		} else {
 			children = f.FindTargetByHandle(node.ID, "false-branch")
 		}
-
-		log.WithFields(log.Fields{
-			"id":     node.ID,
-			"result": result,
-			"branch": fmt.Sprintf("%v", result),
-		}).Info("Conditional branching")
 	} else {
 		children = f.FindTarget(node.ID)
 	}
