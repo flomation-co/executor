@@ -36,6 +36,7 @@ import (
 	sql_mysql "flomation.app/automate/executor/actions/sql/mysql"
 	sql_oracle "flomation.app/automate/executor/actions/sql/oracle"
 	sql_postgresql "flomation.app/automate/executor/actions/sql/postgresql"
+	trigger_git_poll "flomation.app/automate/executor/actions/trigger/git_poll"
 	trigger_manual "flomation.app/automate/executor/actions/trigger/manual"
 )
 
@@ -71,5 +72,6 @@ var Actions = map[string]core.Action{
 	"sql/mysql":                 sql_mysql.Execute,
 	"sql/oracle":                sql_oracle.Execute,
 	"sql/postgresql":            sql_postgresql.Execute,
+	"trigger/git_poll":          trigger_git_poll.Execute,
 	"trigger/manual":            trigger_manual.Execute,
 }
