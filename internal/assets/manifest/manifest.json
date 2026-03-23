@@ -296,6 +296,11 @@
       "icon": "cloud",
       "description": "Amazon Web Services integrations"
     },
+    "sub_category": {
+      "name": "EC2",
+      "icon": "server",
+      "description": "Elastic Compute Cloud operations"
+    },
     "inputs": null,
     "outputs": null
   },
@@ -313,6 +318,11 @@
       "name": "AWS",
       "icon": "cloud",
       "description": "Amazon Web Services integrations"
+    },
+    "sub_category": {
+      "name": "S3",
+      "icon": "box-archive",
+      "description": "Simple Storage Service operations"
     },
     "inputs": [
       {
@@ -382,6 +392,11 @@
       "name": "AWS",
       "icon": "cloud",
       "description": "Amazon Web Services integrations"
+    },
+    "sub_category": {
+      "name": "S3",
+      "icon": "box-archive",
+      "description": "Simple Storage Service operations"
     },
     "inputs": [
       {
@@ -459,6 +474,11 @@
       "icon": "cloud",
       "description": "Amazon Web Services integrations"
     },
+    "sub_category": {
+      "name": "S3",
+      "icon": "box-archive",
+      "description": "Simple Storage Service operations"
+    },
     "inputs": [
       {
         "name": "aws_access_key",
@@ -513,6 +533,11 @@
       "name": "AWS",
       "icon": "cloud",
       "description": "Amazon Web Services integrations"
+    },
+    "sub_category": {
+      "name": "S3",
+      "icon": "box-archive",
+      "description": "Simple Storage Service operations"
     },
     "inputs": [
       {
@@ -996,7 +1021,7 @@
     ]
   },
   "git/clone": {
-    "hash": "eed0fd384c5726f49c9b9159e03cfb320efd4586ae1618097a3016679117e0d4",
+    "hash": "7fffd8bd6987f48440b1944f115b6179d5a84de80d6427ea72aee23fe266b629",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Git Clone",
