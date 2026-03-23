@@ -16,6 +16,14 @@ const (
 	Type         = core.ActionTypeTrigger
 )
 
+var Inputs = [...]core.Connection{
+	{
+		Name:  "form_definition",
+		Type:  core.ConnectionTypeText,
+		Label: "Form Definition",
+	},
+}
+
 var Outputs = [...]core.Connection{
 	{Name: "form_data", Type: core.ConnectionTypeString, Label: "Form Data"},
 	{Name: "triggered_at", Type: core.ConnectionTypeString, Label: "Triggered At"},
