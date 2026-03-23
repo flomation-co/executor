@@ -184,8 +184,9 @@ type Flow struct {
 	Nodes []*Node `json:"nodes"`
 	Edges []*Edge `json:"edges"`
 
-	nodeResults map[string]map[string]interface{}
-	outputs     map[string]interface{}
+	nodeResults  map[string]map[string]interface{}
+	outputs      map[string]interface{}
+	entryNodeID  string
 }
 
 type ExecutionResult struct {
@@ -218,6 +219,48 @@ func Load(path *string) (*Flow, error) {
 	return &f, nil
 }
 
+// InjectTriggerData merges trigger invocation data into the first trigger
+// node's inputs, making dynamic event data available to the flow.
+func (f *Flow) InjectTriggerData(data map[string]interface{}) {
+	for _, n := range f.Nodes {
+		if n == nil || n.Data == nil {
+			continue
+		}
+
+		isTrigger := strings.HasPrefix(n.Type, "trigger/") ||
+			(n.Data != nil && strings.HasPrefix(n.Data.Label, "trigger/"))
+
+		if !isTrigger {
+			continue
+		}
+
+		// Add each data field as an input connection on the trigger node
+		for k, v := range data {
+			found := false
+			for _, input := range n.Data.Config.Inputs {
+				if input.Name == k {
+					input.Value = v
+					found = true
+					break
+				}
+			}
+			if !found {
+				n.Data.Config.Inputs = append(n.Data.Config.Inputs, &Connection{
+					Name:  k,
+					Type:  ConnectionTypeString,
+					Value: v,
+				})
+			}
+		}
+
+		log.WithFields(log.Fields{
+			"node_id": n.ID,
+			"keys":    len(data),
+		}).Info("injected trigger data into trigger node")
+		break
+	}
+}
+
 func (f *Flow) Execute(actions map[string]Action, entry *string, environment *environment.Environment) (map[string]interface{}, error) {
 	var start *Node
 
@@ -240,6 +283,8 @@ func (f *Flow) Execute(actions map[string]Action, entry *string, environment *en
 		return nil, ErrNoStartNode
 	}
 
+	f.entryNodeID = start.ID
+
 	_, err := f.ExecuteNode(actions, start, environment)
 	if err != nil {
 		return nil, err
@@ -259,15 +304,28 @@ func (f *Flow) ExecuteNode(actions map[string]Action, node *Node, environment *e
 	if v, exists := f.nodeResults[node.ID]; exists {
 		log.WithFields(log.Fields{
 			"id": node.ID,
-		}).Debug("Node cached, returning")
+		}).Debug("Node already executed, returning cached result")
 		return v, nil
 	}
+
+	log.WithFields(log.Fields{
+		"id":     node.ID,
+		"action": node.Type,
+		"label":  node.Data.Label,
+	}).Info("executing node")
 
 	var results map[string]interface{}
 	parentResults := make(map[string]interface{})
 	parents := f.FindSource(node.ID)
 	for _, p := range parents {
 		if p == nil {
+			continue
+		}
+
+		// Skip non-entry trigger parents — only the entry trigger should be executed
+		isTriggerParent := strings.HasPrefix(p.Type, "trigger/") ||
+			(p.Data != nil && strings.HasPrefix(p.Data.Label, "trigger/"))
+		if isTriggerParent && p.ID != f.entryNodeID {
 			continue
 		}
 

@@ -46,6 +46,7 @@ func main() {
 	token := flag.String("token", "", "Execution context credential token")
 	key := flag.String("key", "", "Certificate file for signing requests")
 	identity := flag.String("identity", "https://id.flomation.app", "URL of Identity Service Provider")
+	triggerData := flag.String("trigger-data", "", "Path to trigger invocation data JSON file")
 	debug := flag.Bool("debug", false, "Enable debug logging")
 
 	flag.Parse()
@@ -129,6 +130,33 @@ func main() {
 	var entryNode *string
 	if *entry != "" {
 		entryNode = entry
+	}
+
+	// Load and inject trigger invocation data into the trigger node
+	if *triggerData != "" {
+		tdBytes, err := os.ReadFile(*triggerData)
+		if err != nil {
+			log.WithFields(log.Fields{
+				"error": err,
+			}).Warn("unable to read trigger data file")
+		} else {
+			var td map[string]interface{}
+			if err := json.Unmarshal(tdBytes, &td); err != nil {
+				// The data might be a double-encoded JSON string — try unwrapping
+				var s string
+				if err2 := json.Unmarshal(tdBytes, &s); err2 == nil {
+					if err3 := json.Unmarshal([]byte(s), &td); err3 == nil {
+						flo.InjectTriggerData(td)
+					} else {
+						log.WithFields(log.Fields{"error": err3}).Warn("unable to parse unwrapped trigger data")
+					}
+				} else {
+					log.WithFields(log.Fields{"error": err}).Warn("unable to parse trigger data")
+				}
+			} else {
+				flo.InjectTriggerData(td)
+			}
+		}
 	}
 
 	start := time.Now()
