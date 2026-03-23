@@ -68,9 +68,9 @@ var Outputs = [...]core.Connection{
 		Placeholder: "",
 	},
 	core.Connection{
-		Name:        "result",
-		Type:        core.ConnectionTypeInteger,
-		Label:       "Filename",
+		Name:        "content_type",
+		Type:        core.ConnectionTypeString,
+		Label:       "Content Type",
 		Placeholder: "",
 	},
 }
@@ -99,10 +99,15 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 		return nil, err
 	}
 
+	var ct string
+	if result.ContentType != nil {
+		ct = *result.ContentType
+	}
+
 	return map[string]interface{}{
-		"body":     b,
-		"bucket":   *bucket.String(),
-		"filename": *filename.String(),
-		"result":   0,
+		"body":         string(b),
+		"bucket":       *bucket.String(),
+		"content_type": ct,
+		"filename":     *filename.String(),
 	}, nil
 }
