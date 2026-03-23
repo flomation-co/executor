@@ -180,6 +180,49 @@ type Node struct {
 	Data *NodeData `json:"data"`
 }
 
+// ExecutionContext holds read-only metadata about the current execution,
+// exposed to actions via ${flow.xxx} variable substitution.
+type ExecutionContext struct {
+	FlowID         string `json:"flow_id"`
+	ExecutionID    string `json:"execution_id"`
+	Sequence       int64  `json:"sequence"`
+	AuthorID       string `json:"author_id"`
+	OrganisationID string `json:"organisation_id"`
+	RunnerID       string `json:"runner_id"`
+	StartTime      string `json:"start_time"`
+	TriggerType    string `json:"trigger_type"`
+	AuthorEmail    string `json:"author_email"`
+	TriggererEmail string `json:"triggerer_email"`
+}
+
+// Get returns the value of a named execution context field.
+func (ctx *ExecutionContext) Get(name string) string {
+	switch name {
+	case "flow_id":
+		return ctx.FlowID
+	case "execution_id":
+		return ctx.ExecutionID
+	case "sequence":
+		return fmt.Sprintf("%d", ctx.Sequence)
+	case "author_id":
+		return ctx.AuthorID
+	case "organisation_id":
+		return ctx.OrganisationID
+	case "runner_id":
+		return ctx.RunnerID
+	case "start_time":
+		return ctx.StartTime
+	case "trigger_type":
+		return ctx.TriggerType
+	case "author_email":
+		return ctx.AuthorEmail
+	case "triggerer_email":
+		return ctx.TriggererEmail
+	default:
+		return ""
+	}
+}
+
 type Flow struct {
 	Nodes []*Node `json:"nodes"`
 	Edges []*Edge `json:"edges"`
@@ -187,6 +230,12 @@ type Flow struct {
 	nodeResults  map[string]map[string]interface{}
 	outputs      map[string]interface{}
 	entryNodeID  string
+	context      *ExecutionContext
+}
+
+// SetContext attaches execution metadata for ${flow.xxx} variable resolution.
+func (f *Flow) SetContext(ctx *ExecutionContext) {
+	f.context = ctx
 }
 
 type ExecutionResult struct {
@@ -400,6 +449,22 @@ func (f *Flow) ExecuteNode(actions map[string]Action, node *Node, environment *e
 					}
 
 					*val = strings.ReplaceAll(*val, "${"+m+"}", *p.Value)
+				} else if strings.HasPrefix(m, "flow.") {
+					name := strings.TrimPrefix(m, "flow.")
+					if f.context != nil {
+						contextVal := f.context.Get(name)
+						if contextVal != "" {
+							*val = strings.ReplaceAll(*val, "${"+m+"}", contextVal)
+						} else {
+							log.WithFields(log.Fields{
+								"name": name,
+							}).Warn("unknown flow variable")
+						}
+					} else {
+						log.WithFields(log.Fields{
+							"name": name,
+						}).Warn("no execution context for flow variable substitution")
+					}
 				} else if strings.HasPrefix(m, "secrets.") || strings.HasPrefix(m, "secret.") {
 					if environment == nil {
 						log.WithFields(log.Fields{

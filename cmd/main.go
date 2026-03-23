@@ -47,6 +47,7 @@ func main() {
 	key := flag.String("key", "", "Certificate file for signing requests")
 	identity := flag.String("identity", "https://id.flomation.app", "URL of Identity Service Provider")
 	triggerData := flag.String("trigger-data", "", "Path to trigger invocation data JSON file")
+	contextFile := flag.String("context", "", "Path to execution context JSON file")
 	debug := flag.Bool("debug", false, "Enable debug logging")
 
 	flag.Parse()
@@ -155,6 +156,26 @@ func main() {
 				}
 			} else {
 				flo.InjectTriggerData(td)
+			}
+		}
+	}
+
+	// Load execution context for ${flow.xxx} variable substitution
+	if *contextFile != "" {
+		ctxBytes, err := os.ReadFile(*contextFile)
+		if err != nil {
+			log.WithFields(log.Fields{
+				"error": err,
+			}).Warn("unable to read execution context file")
+		} else {
+			var ctx core.ExecutionContext
+			if err := json.Unmarshal(ctxBytes, &ctx); err != nil {
+				log.WithFields(log.Fields{"error": err}).Warn("unable to parse execution context")
+			} else {
+				if ctx.StartTime == "" {
+					ctx.StartTime = time.Now().UTC().Format(time.RFC3339)
+				}
+				flo.SetContext(&ctx)
 			}
 		}
 	}
