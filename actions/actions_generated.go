@@ -20,6 +20,8 @@ import (
 	common_data_rename "flomation.app/automate/executor/actions/common/data_rename"
 	common_smtp "flomation.app/automate/executor/actions/common/smtp"
 	conditional_if "flomation.app/automate/executor/actions/conditional/if"
+	file_read "flomation.app/automate/executor/actions/file/read"
+	file_write "flomation.app/automate/executor/actions/file/write"
 	git_add "flomation.app/automate/executor/actions/git/add"
 	git_branch "flomation.app/automate/executor/actions/git/branch"
 	git_checkout "flomation.app/automate/executor/actions/git/checkout"
@@ -29,9 +31,12 @@ import (
 	git_push "flomation.app/automate/executor/actions/git/push"
 	git_status "flomation.app/automate/executor/actions/git/status"
 	git_tag "flomation.app/automate/executor/actions/git/tag"
+	http_request "flomation.app/automate/executor/actions/http/request"
 	nosql_mongodb "flomation.app/automate/executor/actions/nosql/mongodb"
 	nosql_redis "flomation.app/automate/executor/actions/nosql/redis"
+	output_discord_webhook "flomation.app/automate/executor/actions/output/discord_webhook"
 	output_set "flomation.app/automate/executor/actions/output/set"
+	output_slack_webhook "flomation.app/automate/executor/actions/output/slack_webhook"
 	script_bash "flomation.app/automate/executor/actions/script/bash"
 	security_antivirus "flomation.app/automate/executor/actions/security/antivirus"
 	sql_mysql "flomation.app/automate/executor/actions/sql/mysql"
@@ -62,6 +67,8 @@ var Actions = map[string]core.Action{
 	"common/data_rename":        common_data_rename.Execute,
 	"common/smtp":               common_smtp.Execute,
 	"conditional/if":            conditional_if.Execute,
+	"file/read":                 file_read.Execute,
+	"file/write":                file_write.Execute,
 	"git/add":                   git_add.Execute,
 	"git/branch":                git_branch.Execute,
 	"git/checkout":              git_checkout.Execute,
@@ -71,9 +78,12 @@ var Actions = map[string]core.Action{
 	"git/push":                  git_push.Execute,
 	"git/status":                git_status.Execute,
 	"git/tag":                   git_tag.Execute,
+	"http/request":              http_request.Execute,
 	"nosql/mongodb":             nosql_mongodb.Execute,
 	"nosql/redis":               nosql_redis.Execute,
+	"output/discord_webhook":    output_discord_webhook.Execute,
 	"output/set":                output_set.Execute,
+	"output/slack_webhook":      output_slack_webhook.Execute,
 	"script/bash":               script_bash.Execute,
 	"security/antivirus":        security_antivirus.Execute,
 	"sql/mysql":                 sql_mysql.Execute,

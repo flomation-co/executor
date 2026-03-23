@@ -1,17 +1,18 @@
 package git_clone
 
 import (
+	"os"
+
 	core "flomation.app/automate/executor"
 	"github.com/go-git/go-git/v6"
 	"github.com/go-git/go-git/v6/plumbing/transport/ssh"
-	"os"
 )
 
 const (
 	Author       = "Andy Esser"
 	Organisation = "Flomation"
 	Name         = "Git Clone"
-	Description  = "Git Actions"
+	Description  = "Clone a Git repository"
 	Website      = "https://www.flomation.co"
 	Icon         = "code-branch"
 	Date         = "06/03/2026"
@@ -19,14 +20,14 @@ const (
 )
 
 var Inputs = [...]core.Connection{
-	core.Connection{
+	{
 		Name:        "repository_url",
 		Type:        core.ConnectionTypeString,
 		Label:       "Repository URL",
 		Placeholder: "",
 		Required:    true,
 	},
-	core.Connection{
+	{
 		Name:        "ssh_key",
 		Type:        core.ConnectionTypeText,
 		Label:       "SSH Private Key",
@@ -35,8 +36,12 @@ var Inputs = [...]core.Connection{
 }
 
 var Outputs = [...]core.Connection{
-	core.Connection{
+	{
 		Name: "repository_path",
+		Type: core.ConnectionTypeString,
+	},
+	{
+		Name: "branch",
 		Type: core.ConnectionTypeString,
 	},
 }
@@ -50,22 +55,31 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 		return nil, err
 	}
 
-	pk, err := ssh.NewPublicKeys("git", []byte(*sshKey.String()), "")
+	cloneOpts := &git.CloneOptions{
+		URL: *repository.String(),
+	}
+
+	if sshKey != nil && sshKey.String() != nil && *sshKey.String() != "" {
+		pk, err := ssh.NewPublicKeys("git", []byte(*sshKey.String()), "")
+		if err != nil {
+			return nil, err
+		}
+		cloneOpts.Auth = pk
+	}
+
+	repo, err := git.PlainClone(f, cloneOpts)
 	if err != nil {
 		return nil, err
 	}
 
-	_, err = git.PlainClone(f, &git.CloneOptions{
-		URL:      *repository.String(),
-		Auth:     pk,
-		Progress: os.Stdout,
-	})
-	if err != nil {
-		return nil, err
+	branch := ""
+	head, err := repo.Head()
+	if err == nil && head != nil {
+		branch = head.Name().Short()
 	}
 
 	return map[string]interface{}{
-		"success":         true,
 		"repository_path": f,
+		"branch":          branch,
 	}, nil
 }
