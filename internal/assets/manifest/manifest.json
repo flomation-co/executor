@@ -379,7 +379,7 @@
     ]
   },
   "aws/s3/get": {
-    "hash": "b5b4da8dfafb6834aae97f7c38c1acccc4e56a6694360e7903818b5e1c3b0300",
+    "hash": "502c9be718b7d8f3650594fb3e374f5a4404db87dcb0a7ef52c1b16bec7c7b91",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "AWS S3 Get Object",
@@ -451,10 +451,10 @@
         "placeholder": ""
       },
       {
-        "name": "result",
-        "type": "integer",
+        "name": "content_type",
+        "type": "string",
         "value": null,
-        "label": "Filename",
+        "label": "Content Type",
         "placeholder": ""
       }
     ]
