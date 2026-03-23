@@ -142,9 +142,17 @@ func main() {
 		} else {
 			var td map[string]interface{}
 			if err := json.Unmarshal(tdBytes, &td); err != nil {
-				log.WithFields(log.Fields{
-					"error": err,
-				}).Warn("unable to parse trigger data")
+				// The data might be a double-encoded JSON string — try unwrapping
+				var s string
+				if err2 := json.Unmarshal(tdBytes, &s); err2 == nil {
+					if err3 := json.Unmarshal([]byte(s), &td); err3 == nil {
+						flo.InjectTriggerData(td)
+					} else {
+						log.WithFields(log.Fields{"error": err3}).Warn("unable to parse unwrapped trigger data")
+					}
+				} else {
+					log.WithFields(log.Fields{"error": err}).Warn("unable to parse trigger data")
+				}
 			} else {
 				flo.InjectTriggerData(td)
 			}
