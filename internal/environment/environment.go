@@ -163,17 +163,7 @@ func Token(token string) *Credentials {
 
 func Key(executionID string, key string) (*Credentials, error) {
 	var privateKey *rsa.PrivateKey
-
-	r, err := os.OpenRoot(".")
-	if err != nil {
-		return nil, err
-	}
-
-	defer func() {
-		_ = r.Close()
-	}()
-
-	b, err := r.ReadFile(key)
+	b, err := os.ReadFile(key)
 	if err != nil {
 		return nil, err
 	}
@@ -351,10 +341,6 @@ func (e *Environment) fetch(address string) ([]byte, error) {
 	}
 
 	environmentUrl := fmt.Sprintf("%v?%v", u.String(), q.Encode())
-
-	log.WithFields(log.Fields{
-		"environment_url": environmentUrl,
-	}).Info("new environment")
 
 	req, err := http.NewRequest(http.MethodGet, environmentUrl, nil)
 	if err != nil {

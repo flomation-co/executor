@@ -38,6 +38,7 @@ import (
 	sql_postgresql "flomation.app/automate/executor/actions/sql/postgresql"
 	trigger_git_poll "flomation.app/automate/executor/actions/trigger/git_poll"
 	trigger_manual "flomation.app/automate/executor/actions/trigger/manual"
+	trigger_schedule "flomation.app/automate/executor/actions/trigger/schedule"
 )
 
 var Actions = map[string]core.Action{
@@ -74,4 +75,5 @@ var Actions = map[string]core.Action{
 	"sql/postgresql":            sql_postgresql.Execute,
 	"trigger/git_poll":          trigger_git_poll.Execute,
 	"trigger/manual":            trigger_manual.Execute,
+	"trigger/schedule":          trigger_schedule.Execute,
 }

@@ -240,12 +240,13 @@ func (f *Flow) Execute(actions map[string]Action, entry *string, environment *en
 		return nil, ErrNoStartNode
 	}
 
-	outputs, err := f.ExecuteNode(actions, start, environment)
+	_, err := f.ExecuteNode(actions, start, environment)
 	if err != nil {
 		return nil, err
 	}
 
-	return outputs, nil
+	// Return outputs set explicitly via SetOutput (by Output-type nodes)
+	return f.outputs, nil
 }
 
 func (f *Flow) ExecuteNode(actions map[string]Action, node *Node, environment *environment.Environment) (map[string]interface{}, error) {
@@ -261,11 +262,6 @@ func (f *Flow) ExecuteNode(actions map[string]Action, node *Node, environment *e
 		}).Debug("Node cached, returning")
 		return v, nil
 	}
-
-	log.WithFields(log.Fields{
-		"id":   node.ID,
-		"type": node.Type,
-	}).Info("Processing Node")
 
 	var results map[string]interface{}
 	parentResults := make(map[string]interface{})
@@ -287,8 +283,13 @@ func (f *Flow) ExecuteNode(actions map[string]Action, node *Node, environment *e
 
 	action, exists := actions[node.Type]
 	if !exists {
+		// Fall back to Data.Label for action lookup (ReactFlow stores component type in node.Type)
+		action, exists = actions[node.Data.Label]
+	}
+	if !exists {
 		log.WithFields(log.Fields{
-			"type": node.Type,
+			"type":  node.Type,
+			"label": node.Data.Label,
 		}).Debug("Unknown node action")
 		return nil, ErrInvalidNode
 	}
@@ -300,7 +301,15 @@ func (f *Flow) ExecuteNode(actions map[string]Action, node *Node, environment *e
 			value = results[v.Name]
 		}
 
+		// Try string representation first; for non-string types, check if the
+		// raw value contains a variable reference (e.g. "${env.X}" in an integer field)
 		val := v.String()
+		if val == nil && v.Value != nil {
+			raw := fmt.Sprintf("%v", v.Value)
+			if strings.Contains(raw, "${") {
+				val = &raw
+			}
+		}
 		if val != nil {
 			r := regexp.MustCompile(`\${[^{}]*}`)
 			matches := r.FindAllString(*val, -1)
@@ -310,6 +319,12 @@ func (f *Flow) ExecuteNode(actions map[string]Action, node *Node, environment *e
 				m = strings.TrimSuffix(m, "}")
 
 				if strings.HasPrefix(m, "env.") {
+					if environment == nil {
+						log.WithFields(log.Fields{
+							"name": m,
+						}).Warn("No environment configured for property substitution")
+						continue
+					}
 					name := strings.TrimPrefix(m, "env.")
 					p, err := environment.GetProperty(name)
 					if err != nil {
@@ -319,7 +334,7 @@ func (f *Flow) ExecuteNode(actions map[string]Action, node *Node, environment *e
 						continue
 					}
 
-					if p == nil {
+					if p == nil || p.Value == nil {
 						log.WithFields(log.Fields{
 							"name": name,
 						}).Warn("Missing property")
@@ -327,20 +342,27 @@ func (f *Flow) ExecuteNode(actions map[string]Action, node *Node, environment *e
 					}
 
 					*val = strings.ReplaceAll(*val, "${"+m+"}", *p.Value)
-				} else if strings.HasPrefix(m, "secret.") {
-					name := strings.TrimPrefix(m, "secret.")
+				} else if strings.HasPrefix(m, "secrets.") || strings.HasPrefix(m, "secret.") {
+					if environment == nil {
+						log.WithFields(log.Fields{
+							"name": m,
+						}).Warn("No environment configured for secret substitution")
+						continue
+					}
+					name := strings.TrimPrefix(m, "secrets.")
+					name = strings.TrimPrefix(name, "secret.")
 					p, err := environment.GetSecret(name)
 					if err != nil {
 						log.WithFields(log.Fields{
 							"error": err,
-						}).Error("Unable to get Secret")
+						}).Error("unable to get Secret")
 						continue
 					}
 
-					if p == nil {
+					if p == nil || p.Value == nil {
 						log.WithFields(log.Fields{
 							"name": name,
-						}).Warn("Missing secret")
+						}).Warn("missing secret")
 						continue
 					}
 
@@ -351,7 +373,7 @@ func (f *Flow) ExecuteNode(actions map[string]Action, node *Node, environment *e
 					} else {
 						log.WithFields(log.Fields{
 							"output": m,
-						}).Warn("Substitution upstream output does not exist")
+						}).Warn("substitution upstream output does not exist")
 					}
 				}
 			}
@@ -378,10 +400,6 @@ func (f *Flow) ExecuteNode(actions map[string]Action, node *Node, environment *e
 
 	combinedResults := make(map[string]interface{})
 
-	for k, v := range outputs {
-		combinedResults[k] = v
-	}
-
 	var children []*Node
 	if node.Data.Config.Type == ActionTypeConditional {
 		result, ok := outputs["result"].(bool)
@@ -394,24 +412,18 @@ func (f *Flow) ExecuteNode(actions map[string]Action, node *Node, environment *e
 		} else {
 			children = f.FindTargetByHandle(node.ID, "false-branch")
 		}
-
-		log.WithFields(log.Fields{
-			"id":     node.ID,
-			"result": result,
-			"branch": fmt.Sprintf("%v", result),
-		}).Info("Conditional branching")
 	} else {
 		children = f.FindTarget(node.ID)
 	}
 
 	var childErr error
 	for _, c := range children {
+		// Skip other trigger nodes — only the entry trigger should execute
+		if c.Type != "" && strings.HasPrefix(c.Type, "trigger/") {
+			continue
+		}
 		childResults, err := f.ExecuteNode(actions, c, environment)
 		if err != nil {
-			log.WithFields(log.Fields{
-				"error": err,
-				"node":  c.ID,
-			}).Error("Error processing Child")
 			childErr = err
 		}
 
