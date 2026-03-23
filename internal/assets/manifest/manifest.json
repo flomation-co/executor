@@ -1625,6 +1625,83 @@
     ],
     "outputs": null
   },
+  "script/bash": {
+    "hash": "6e97950254ba0414478985b4ffb7af142081cd06fa325b3c122a926c3e602a00",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Run Bash Script",
+    "description": "Execute a Bash script in a sandboxed temporary directory",
+    "website": "https://www.flomation.co",
+    "icon": "terminal",
+    "date": "23/03/2026",
+    "type": 2,
+    "category": {
+      "name": "Script",
+      "icon": "terminal",
+      "description": "Execute scripts and commands"
+    },
+    "inputs": [
+      {
+        "name": "script",
+        "type": "text",
+        "value": null,
+        "label": "Script",
+        "placeholder": "#!/bin/bash\necho \"Hello, World!\"",
+        "required": true
+      },
+      {
+        "name": "timeout_seconds",
+        "type": "integer",
+        "value": null,
+        "label": "Timeout (seconds)",
+        "placeholder": "60"
+      },
+      {
+        "name": "working_directory",
+        "type": "string",
+        "value": null,
+        "label": "Working Directory",
+        "placeholder": "Leave empty for a fresh temporary directory"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "stdout",
+        "type": "string",
+        "value": null,
+        "label": "",
+        "placeholder": ""
+      },
+      {
+        "name": "stderr",
+        "type": "string",
+        "value": null,
+        "label": "",
+        "placeholder": ""
+      },
+      {
+        "name": "exit_code",
+        "type": "integer",
+        "value": null,
+        "label": "",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "",
+        "placeholder": ""
+      },
+      {
+        "name": "working_directory",
+        "type": "string",
+        "value": null,
+        "label": "",
+        "placeholder": ""
+      }
+    ]
+  },
   "security/antivirus": {
     "hash": "5df6c1166a7477edfdbb22a50a3391b26e87c54841573d8943f61eb8e5b8015a",
     "author": "Andy Esser",
@@ -1992,6 +2069,47 @@
       }
     ]
   },
+  "trigger/form": {
+    "hash": "6e6a0d901b182f5495e604425df2ee982954989a155a53fe1f4f754eb873b971",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Form Trigger",
+    "description": "Triggers a flow when a form is submitted",
+    "website": "https://www.flomation.co",
+    "icon": "file-lines",
+    "date": "23/03/2026",
+    "type": 1,
+    "category": {
+      "name": "Triggers",
+      "icon": "bolt-lightning",
+      "description": "Start a Flow"
+    },
+    "inputs": [
+      {
+        "name": "form_definition",
+        "type": "text",
+        "value": null,
+        "label": "Form Definition",
+        "placeholder": ""
+      }
+    ],
+    "outputs": [
+      {
+        "name": "form_data",
+        "type": "string",
+        "value": null,
+        "label": "Form Data",
+        "placeholder": ""
+      },
+      {
+        "name": "triggered_at",
+        "type": "string",
+        "value": null,
+        "label": "Triggered At",
+        "placeholder": ""
+      }
+    ]
+  },
   "trigger/git_poll": {
     "hash": "57d9d447631a50e38c36d0848c7bfd584ca3d401f8a920253c921ce362a6c8ea",
     "author": "Andy Esser",
@@ -2069,6 +2187,53 @@
       }
     ]
   },
+  "trigger/image": {
+    "hash": "746e45399d9a876c699ad875be3810935ac995f13c2a0fbb7298f2cc4ec4fc68",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Tracking Pixel Trigger",
+    "description": "Triggers a flow when a tracking pixel image is loaded",
+    "website": "https://www.flomation.co",
+    "icon": "image",
+    "date": "23/03/2026",
+    "type": 1,
+    "category": {
+      "name": "Triggers",
+      "icon": "bolt-lightning",
+      "description": "Start a Flow"
+    },
+    "inputs": null,
+    "outputs": [
+      {
+        "name": "ip",
+        "type": "string",
+        "value": null,
+        "label": "Client IP",
+        "placeholder": ""
+      },
+      {
+        "name": "user_agent",
+        "type": "string",
+        "value": null,
+        "label": "User Agent",
+        "placeholder": ""
+      },
+      {
+        "name": "referrer",
+        "type": "string",
+        "value": null,
+        "label": "Referrer",
+        "placeholder": ""
+      },
+      {
+        "name": "triggered_at",
+        "type": "string",
+        "value": null,
+        "label": "Triggered At",
+        "placeholder": ""
+      }
+    ]
+  },
   "trigger/manual": {
     "hash": "91109374db62ff75a99c52420786bdc8821643d16e8c8bc895707644876f4ba1",
     "author": "Andy Esser",
@@ -2098,6 +2263,46 @@
         "type": "string",
         "value": null,
         "label": "Quote",
+        "placeholder": ""
+      }
+    ]
+  },
+  "trigger/qr": {
+    "hash": "a34973effbc20e2644053abb6892aff28ad00ada381f1ec80406b3fb4b21578e",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "QR Code Trigger",
+    "description": "Triggers a flow when a QR code is scanned",
+    "website": "https://www.flomation.co",
+    "icon": "qrcode",
+    "date": "23/03/2026",
+    "type": 1,
+    "category": {
+      "name": "Triggers",
+      "icon": "bolt-lightning",
+      "description": "Start a Flow"
+    },
+    "inputs": null,
+    "outputs": [
+      {
+        "name": "triggered_at",
+        "type": "string",
+        "value": null,
+        "label": "Triggered At",
+        "placeholder": ""
+      },
+      {
+        "name": "ip",
+        "type": "string",
+        "value": null,
+        "label": "Client IP",
+        "placeholder": ""
+      },
+      {
+        "name": "user_agent",
+        "type": "string",
+        "value": null,
+        "label": "User Agent",
         "placeholder": ""
       }
     ]
@@ -2203,6 +2408,53 @@
         "type": "string",
         "value": null,
         "label": "Schedule Mode",
+        "placeholder": ""
+      }
+    ]
+  },
+  "trigger/webhook": {
+    "hash": "195d2f0d929ea1d02d4c0d24cd7f13179836dfd08356ec37b555a8304a698572",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Webhook Trigger",
+    "description": "Triggers a flow when an HTTP webhook is received",
+    "website": "https://www.flomation.co",
+    "icon": "globe",
+    "date": "23/03/2026",
+    "type": 1,
+    "category": {
+      "name": "Triggers",
+      "icon": "bolt-lightning",
+      "description": "Start a Flow"
+    },
+    "inputs": null,
+    "outputs": [
+      {
+        "name": "body",
+        "type": "string",
+        "value": null,
+        "label": "Request Body",
+        "placeholder": ""
+      },
+      {
+        "name": "method",
+        "type": "string",
+        "value": null,
+        "label": "HTTP Method",
+        "placeholder": ""
+      },
+      {
+        "name": "content_type",
+        "type": "string",
+        "value": null,
+        "label": "Content Type",
+        "placeholder": ""
+      },
+      {
+        "name": "triggered_at",
+        "type": "string",
+        "value": null,
+        "label": "Triggered At",
         "placeholder": ""
       }
     ]

@@ -32,6 +32,7 @@ import (
 	nosql_mongodb "flomation.app/automate/executor/actions/nosql/mongodb"
 	nosql_redis "flomation.app/automate/executor/actions/nosql/redis"
 	output_set "flomation.app/automate/executor/actions/output/set"
+	script_bash "flomation.app/automate/executor/actions/script/bash"
 	security_antivirus "flomation.app/automate/executor/actions/security/antivirus"
 	sql_mysql "flomation.app/automate/executor/actions/sql/mysql"
 	sql_oracle "flomation.app/automate/executor/actions/sql/oracle"
@@ -73,6 +74,7 @@ var Actions = map[string]core.Action{
 	"nosql/mongodb":             nosql_mongodb.Execute,
 	"nosql/redis":               nosql_redis.Execute,
 	"output/set":                output_set.Execute,
+	"script/bash":               script_bash.Execute,
 	"security/antivirus":        security_antivirus.Execute,
 	"sql/mysql":                 sql_mysql.Execute,
 	"sql/oracle":                sql_oracle.Execute,
