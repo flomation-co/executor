@@ -184,8 +184,9 @@ type Flow struct {
 	Nodes []*Node `json:"nodes"`
 	Edges []*Edge `json:"edges"`
 
-	nodeResults map[string]map[string]interface{}
-	outputs     map[string]interface{}
+	nodeResults  map[string]map[string]interface{}
+	outputs      map[string]interface{}
+	entryNodeID  string
 }
 
 type ExecutionResult struct {
@@ -282,6 +283,8 @@ func (f *Flow) Execute(actions map[string]Action, entry *string, environment *en
 		return nil, ErrNoStartNode
 	}
 
+	f.entryNodeID = start.ID
+
 	_, err := f.ExecuteNode(actions, start, environment)
 	if err != nil {
 		return nil, err
@@ -316,6 +319,13 @@ func (f *Flow) ExecuteNode(actions map[string]Action, node *Node, environment *e
 	parents := f.FindSource(node.ID)
 	for _, p := range parents {
 		if p == nil {
+			continue
+		}
+
+		// Skip non-entry trigger parents — only the entry trigger should be executed
+		isTriggerParent := strings.HasPrefix(p.Type, "trigger/") ||
+			(p.Data != nil && strings.HasPrefix(p.Data.Label, "trigger/"))
+		if isTriggerParent && p.ID != f.entryNodeID {
 			continue
 		}
 
