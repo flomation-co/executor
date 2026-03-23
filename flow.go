@@ -301,9 +301,15 @@ func (f *Flow) ExecuteNode(actions map[string]Action, node *Node, environment *e
 	if v, exists := f.nodeResults[node.ID]; exists {
 		log.WithFields(log.Fields{
 			"id": node.ID,
-		}).Debug("Node cached, returning")
+		}).Debug("Node already executed, returning cached result")
 		return v, nil
 	}
+
+	log.WithFields(log.Fields{
+		"id":     node.ID,
+		"action": node.Type,
+		"label":  node.Data.Label,
+	}).Info("executing node")
 
 	var results map[string]interface{}
 	parentResults := make(map[string]interface{})
