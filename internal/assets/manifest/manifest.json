@@ -894,6 +894,126 @@
       }
     ]
   },
+  "file/read": {
+    "hash": "228ea63998a0a44bed1c1cd697dae4d8e8b55d558545f746794a71b9fd235dbd",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Read File",
+    "description": "Read the contents of a file",
+    "website": "https://www.flomation.co",
+    "icon": "file-lines",
+    "date": "23/03/2026",
+    "type": 2,
+    "category": {
+      "name": "File",
+      "icon": "file",
+      "description": "Read and write files"
+    },
+    "inputs": [
+      {
+        "name": "file_path",
+        "type": "string",
+        "value": null,
+        "label": "File Path",
+        "placeholder": "/path/to/file.txt",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "content",
+        "type": "string",
+        "value": null,
+        "label": "",
+        "placeholder": ""
+      },
+      {
+        "name": "file_name",
+        "type": "string",
+        "value": null,
+        "label": "",
+        "placeholder": ""
+      },
+      {
+        "name": "file_size",
+        "type": "integer",
+        "value": null,
+        "label": "",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "",
+        "placeholder": ""
+      }
+    ]
+  },
+  "file/write": {
+    "hash": "cd52cf63fa1330ab85e620a490e8390f1b4180f516a39a5725c2458f1373672f",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Write File",
+    "description": "Write content to a file",
+    "website": "https://www.flomation.co",
+    "icon": "file-pen",
+    "date": "23/03/2026",
+    "type": 2,
+    "category": {
+      "name": "File",
+      "icon": "file",
+      "description": "Read and write files"
+    },
+    "inputs": [
+      {
+        "name": "file_path",
+        "type": "string",
+        "value": null,
+        "label": "File Path",
+        "placeholder": "/path/to/output.txt",
+        "required": true
+      },
+      {
+        "name": "content",
+        "type": "text",
+        "value": null,
+        "label": "Content",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "append",
+        "type": "boolean",
+        "value": null,
+        "label": "Append to File",
+        "placeholder": ""
+      }
+    ],
+    "outputs": [
+      {
+        "name": "file_path",
+        "type": "string",
+        "value": null,
+        "label": "",
+        "placeholder": ""
+      },
+      {
+        "name": "bytes_written",
+        "type": "integer",
+        "value": null,
+        "label": "",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "",
+        "placeholder": ""
+      }
+    ]
+  },
   "git/add": {
     "hash": "eeb1bfa21a3c3d91124279d9423f2d3c639440f87495c35ae19761c5d033d355",
     "author": "Andy Esser",
@@ -1021,11 +1141,11 @@
     ]
   },
   "git/clone": {
-    "hash": "7fffd8bd6987f48440b1944f115b6179d5a84de80d6427ea72aee23fe266b629",
+    "hash": "fc6108112e6a5cfe50b1ffab148ea8034b65df533daf26a28027b011f802d94d",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Git Clone",
-    "description": "Git Actions",
+    "description": "Clone a Git repository",
     "website": "https://www.flomation.co",
     "icon": "code-branch",
     "date": "06/03/2026",
@@ -1055,6 +1175,13 @@
     "outputs": [
       {
         "name": "repository_path",
+        "type": "string",
+        "value": null,
+        "label": "",
+        "placeholder": ""
+      },
+      {
+        "name": "branch",
         "type": "string",
         "value": null,
         "label": "",
@@ -1336,6 +1463,121 @@
       }
     ]
   },
+  "http/request": {
+    "hash": "f50443920b139813b93b4000dbef57ebcdf2564b9d9df1ce5156cbf05ad388c8",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "HTTP Request",
+    "description": "Send an HTTP request and capture the response",
+    "website": "https://www.flomation.co",
+    "icon": "globe",
+    "date": "23/03/2026",
+    "type": 2,
+    "category": {
+      "name": "HTTP",
+      "icon": "globe",
+      "description": "HTTP request operations"
+    },
+    "inputs": [
+      {
+        "name": "method",
+        "type": "string",
+        "value": null,
+        "label": "HTTP Method",
+        "placeholder": "GET",
+        "required": true,
+        "options": [
+          {
+            "name": "GET",
+            "value": "GET"
+          },
+          {
+            "name": "POST",
+            "value": "POST"
+          },
+          {
+            "name": "PUT",
+            "value": "PUT"
+          },
+          {
+            "name": "PATCH",
+            "value": "PATCH"
+          },
+          {
+            "name": "DELETE",
+            "value": "DELETE"
+          },
+          {
+            "name": "HEAD",
+            "value": "HEAD"
+          },
+          {
+            "name": "OPTIONS",
+            "value": "OPTIONS"
+          }
+        ]
+      },
+      {
+        "name": "url",
+        "type": "string",
+        "value": null,
+        "label": "URL",
+        "placeholder": "https://example.com/api/v1/resource",
+        "required": true
+      },
+      {
+        "name": "headers",
+        "type": "text",
+        "value": null,
+        "label": "Headers",
+        "placeholder": "Content-Type: application/json\nAuthorization: Bearer ..."
+      },
+      {
+        "name": "body",
+        "type": "text",
+        "value": null,
+        "label": "Request Body",
+        "placeholder": ""
+      },
+      {
+        "name": "timeout_seconds",
+        "type": "integer",
+        "value": null,
+        "label": "Timeout (seconds)",
+        "placeholder": "30"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "status_code",
+        "type": "integer",
+        "value": null,
+        "label": "",
+        "placeholder": ""
+      },
+      {
+        "name": "response_body",
+        "type": "string",
+        "value": null,
+        "label": "",
+        "placeholder": ""
+      },
+      {
+        "name": "response_headers",
+        "type": "string",
+        "value": null,
+        "label": "",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "",
+        "placeholder": ""
+      }
+    ]
+  },
   "nosql/mongodb": {
     "hash": "cd1428b9a909b381660aa4e27f43c927bdbac9b03e10ae1bce7f7d986e638d91",
     "author": "Andy Esser",
@@ -1590,6 +1832,70 @@
       }
     ]
   },
+  "output/discord_webhook": {
+    "hash": "1b870edc7672c6972ce1b6816b64358ab3ee27e6eee7236ecaf1b09289a1c402",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Discord Webhook",
+    "description": "Send a message to a Discord channel via webhook",
+    "website": "https://www.flomation.co",
+    "icon": "comment-dots",
+    "date": "23/03/2026",
+    "type": 2,
+    "category": {
+      "name": "Output",
+      "icon": "location-arrow",
+      "description": "Send data to external destinations"
+    },
+    "inputs": [
+      {
+        "name": "webhook_url",
+        "type": "string",
+        "value": null,
+        "label": "Webhook URL",
+        "placeholder": "https://discord.com/api/webhooks/...",
+        "required": true
+      },
+      {
+        "name": "content",
+        "type": "text",
+        "value": null,
+        "label": "Message Content",
+        "placeholder": "Hello from Flomation!",
+        "required": true
+      },
+      {
+        "name": "username",
+        "type": "string",
+        "value": null,
+        "label": "Username Override",
+        "placeholder": "Flomation Bot"
+      },
+      {
+        "name": "avatar_url",
+        "type": "string",
+        "value": null,
+        "label": "Avatar URL",
+        "placeholder": "https://example.com/avatar.png"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "status_code",
+        "type": "integer",
+        "value": null,
+        "label": "",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "",
+        "placeholder": ""
+      }
+    ]
+  },
   "output/set": {
     "hash": "05f0e3818a441c5837d9b6543e663da5f0a4e6febe515914d851620eb82ec9b3",
     "author": "Andy Esser",
@@ -1625,8 +1931,72 @@
     ],
     "outputs": null
   },
+  "output/slack_webhook": {
+    "hash": "36c21e1e44225d11396b67c36902c5386a093ef419874f658561a3b9016307f6",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Slack Webhook",
+    "description": "Send a message to a Slack channel via webhook",
+    "website": "https://www.flomation.co",
+    "icon": "hashtag",
+    "date": "23/03/2026",
+    "type": 2,
+    "category": {
+      "name": "Output",
+      "icon": "location-arrow",
+      "description": "Send data to external destinations"
+    },
+    "inputs": [
+      {
+        "name": "webhook_url",
+        "type": "string",
+        "value": null,
+        "label": "Webhook URL",
+        "placeholder": "https://hooks.slack.com/services/...",
+        "required": true
+      },
+      {
+        "name": "message",
+        "type": "text",
+        "value": null,
+        "label": "Message",
+        "placeholder": "Hello from Flomation!",
+        "required": true
+      },
+      {
+        "name": "username",
+        "type": "string",
+        "value": null,
+        "label": "Username Override",
+        "placeholder": "Flomation Bot"
+      },
+      {
+        "name": "icon_emoji",
+        "type": "string",
+        "value": null,
+        "label": "Icon Emoji",
+        "placeholder": ":robot_face:"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "status_code",
+        "type": "integer",
+        "value": null,
+        "label": "",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "",
+        "placeholder": ""
+      }
+    ]
+  },
   "script/bash": {
-    "hash": "6e97950254ba0414478985b4ffb7af142081cd06fa325b3c122a926c3e602a00",
+    "hash": "3f6788759781675344a6ca0a2453982468871918b21ae68da9c3c936a712f84e",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Run Bash Script",
