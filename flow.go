@@ -8,6 +8,7 @@ import (
 	"regexp"
 	"strconv"
 	"strings"
+	"time"
 
 	"flomation.app/automate/executor/internal/environment"
 	log "github.com/sirupsen/logrus"
@@ -227,10 +228,16 @@ type Flow struct {
 	Nodes []*Node `json:"nodes"`
 	Edges []*Edge `json:"edges"`
 
-	nodeResults  map[string]map[string]interface{}
-	outputs      map[string]interface{}
-	entryNodeID  string
-	context      *ExecutionContext
+	nodeResults          map[string]map[string]interface{}
+	nodeExecutionResults map[string]*ExecutionNodeResult
+	outputs              map[string]interface{}
+	entryNodeID          string
+	context              *ExecutionContext
+}
+
+// GetNodeExecutionResults returns the per-node execution results map.
+func (f *Flow) GetNodeExecutionResults() map[string]*ExecutionNodeResult {
+	return f.nodeExecutionResults
 }
 
 // SetContext attaches execution metadata for ${flow.xxx} variable resolution.
@@ -238,13 +245,27 @@ func (f *Flow) SetContext(ctx *ExecutionContext) {
 	f.context = ctx
 }
 
+// ExecutionNodeResult captures per-node execution metadata including
+// resolved inputs, outputs, status, duration, and any error message.
+type ExecutionNodeResult struct {
+	ID       string                 `json:"id"`
+	Action   string                 `json:"action"`
+	Label    string                 `json:"label"`
+	Status   string                 `json:"status"`
+	Inputs   map[string]interface{} `json:"inputs,omitempty"`
+	Outputs  map[string]interface{} `json:"outputs,omitempty"`
+	Error    string                 `json:"error,omitempty"`
+	Duration int64                  `json:"duration_ms"`
+}
+
 type ExecutionResult struct {
-	ID              string                 `json:"id"`
-	FlowID          string                 `json:"flow_id"`
-	Status          int64                  `json:"status"`
-	Duration        int64                  `json:"duration"`
-	BillingDuration int64                  `json:"billing_duration"`
-	Outputs         map[string]interface{} `json:"outputs"`
+	ID              string                          `json:"id"`
+	FlowID          string                          `json:"flow_id"`
+	Status          int64                           `json:"status"`
+	Duration        int64                           `json:"duration"`
+	BillingDuration int64                           `json:"billing_duration"`
+	Outputs         map[string]interface{}          `json:"outputs"`
+	NodeResults     map[string]*ExecutionNodeResult `json:"node_results,omitempty"`
 }
 
 func Load(path *string) (*Flow, error) {
@@ -263,6 +284,7 @@ func Load(path *string) (*Flow, error) {
 	}
 
 	f.nodeResults = make(map[string]map[string]interface{})
+	f.nodeExecutionResults = make(map[string]*ExecutionNodeResult)
 	f.outputs = make(map[string]interface{})
 
 	return &f, nil
@@ -511,13 +533,25 @@ func (f *Flow) ExecuteNode(actions map[string]Action, node *Node, environment *e
 		})
 	}
 
+	// Emit running event
+	f.emitNodeEvent(node.ID, node.Type, node.Data.Label, "running", 0, "")
+
+	startTime := time.Now()
 	outputs, err := action(f, node, configuration)
+	durationMs := time.Since(startTime).Milliseconds()
+
 	if err != nil {
+		f.emitNodeEvent(node.ID, node.Type, node.Data.Label, "failed", durationMs, err.Error())
+		f.recordNodeResult(node, "failed", configuration, nil, durationMs, err.Error())
+
 		log.WithFields(log.Fields{
 			"error": err,
 		}).Error("Error processing Action")
 		return nil, err
 	}
+
+	f.emitNodeEvent(node.ID, node.Type, node.Data.Label, "success", durationMs, "")
+	f.recordNodeResult(node, "success", configuration, outputs, durationMs, "")
 
 	f.nodeResults[node.ID] = outputs
 
@@ -656,4 +690,67 @@ func (f *Flow) SetOutput(name string, value interface{}) {
 
 func (f *Flow) GetOutput(name string) interface{} {
 	return f.outputs[name]
+}
+
+// secretPattern matches ${secrets.X} and ${secret.X} variable references.
+var secretPattern = regexp.MustCompile(`\$\{secrets?\.`)
+
+// emitNodeEvent writes a __NODE__: prefixed JSON line to stdout for the
+// runner and API SSE infrastructure to consume.
+func (f *Flow) emitNodeEvent(id, action, label, status string, durationMs int64, errMsg string) {
+	evt := map[string]interface{}{
+		"id":     id,
+		"action": action,
+		"label":  label,
+		"status": status,
+	}
+	if durationMs > 0 {
+		evt["duration_ms"] = durationMs
+	}
+	if errMsg != "" {
+		evt["error"] = errMsg
+	}
+	b, _ := json.Marshal(evt)
+	fmt.Fprintf(os.Stdout, "__NODE__:%s\n", b)
+}
+
+// recordNodeResult stores an ExecutionNodeResult for the given node,
+// obfuscating any inputs whose original config values contain secret references.
+func (f *Flow) recordNodeResult(node *Node, status string, resolvedInputs []*Connection, outputs map[string]interface{}, durationMs int64, errMsg string) {
+	if f.nodeExecutionResults == nil {
+		f.nodeExecutionResults = make(map[string]*ExecutionNodeResult)
+	}
+
+	inputMap := make(map[string]interface{})
+	for _, c := range resolvedInputs {
+		val := c.Value
+
+		// Check original config input for secret references to obfuscate
+		if node.Data != nil {
+			for _, orig := range node.Data.Config.Inputs {
+				if orig.Name == c.Name {
+					origStr := fmt.Sprintf("%v", orig.Value)
+					if secretPattern.MatchString(origStr) {
+						val = "********"
+					}
+					break
+				}
+			}
+		}
+
+		inputMap[c.Name] = val
+	}
+
+	nr := &ExecutionNodeResult{
+		ID:       node.ID,
+		Action:   node.Type,
+		Label:    node.Data.Label,
+		Status:   status,
+		Inputs:   inputMap,
+		Outputs:  outputs,
+		Error:    errMsg,
+		Duration: durationMs,
+	}
+
+	f.nodeExecutionResults[node.ID] = nr
 }
