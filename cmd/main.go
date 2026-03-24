@@ -205,6 +205,7 @@ func main() {
 		Duration:        duration.Milliseconds(),
 		BillingDuration: duration.Milliseconds(),
 		Outputs:         outputs,
+		NodeResults:     flo.GetNodeExecutionResults(),
 	}
 
 	b, err := json.Marshal(result)
