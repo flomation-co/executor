@@ -32,7 +32,13 @@ var Inputs = [...]core.Connection{
 	},
 }
 
-var Outputs = [...]core.Connection{}
+var Outputs = [...]core.Connection{
+	{
+		Name: "success",
+		Type: core.ConnectionTypeBoolean,
+		Label: "Success",
+	},
+}
 
 func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[string]interface{}, error) {
 	repoPath := ""
@@ -65,5 +71,5 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 		return nil, err
 	}
 
-	return map[string]interface{}{}, nil
+	return map[string]interface{}{"success": true}, nil
 }
