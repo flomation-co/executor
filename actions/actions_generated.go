@@ -50,6 +50,7 @@ import (
 	trigger_git_poll "flomation.app/automate/executor/actions/trigger/git_poll"
 	trigger_image "flomation.app/automate/executor/actions/trigger/image"
 	trigger_manual "flomation.app/automate/executor/actions/trigger/manual"
+	trigger_on_error "flomation.app/automate/executor/actions/trigger/on_error"
 	trigger_qr "flomation.app/automate/executor/actions/trigger/qr"
 	trigger_s3 "flomation.app/automate/executor/actions/trigger/s3"
 	trigger_schedule "flomation.app/automate/executor/actions/trigger/schedule"
@@ -102,6 +103,7 @@ var Actions = map[string]core.Action{
 	"trigger/git_poll":          trigger_git_poll.Execute,
 	"trigger/image":             trigger_image.Execute,
 	"trigger/manual":            trigger_manual.Execute,
+	"trigger/on_error":          trigger_on_error.Execute,
 	"trigger/qr":                trigger_qr.Execute,
 	"trigger/s3":                trigger_s3.Execute,
 	"trigger/schedule":          trigger_schedule.Execute,

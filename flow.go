@@ -233,6 +233,7 @@ type Flow struct {
 	outputs              map[string]interface{}
 	variables            map[string]interface{}
 	entryNodeID          string
+	inErrorChain         bool
 	context              *ExecutionContext
 }
 
@@ -358,12 +359,80 @@ func (f *Flow) Execute(actions map[string]Action, entry *string, environment *en
 	f.entryNodeID = start.ID
 
 	_, err := f.ExecuteNode(actions, start, environment)
-	if err != nil {
+	if err != nil && !f.inErrorChain {
+		// Look for an On Error trigger node and execute its chain
+		onErrorHandled := f.executeOnErrorChain(actions, err, environment)
+		if !onErrorHandled {
+			return nil, err
+		}
+	} else if err != nil {
 		return nil, err
 	}
 
 	// Return outputs set explicitly via SetOutput (by Output-type nodes)
 	return f.outputs, nil
+}
+
+// executeOnErrorChain finds a "trigger/on_error" node and executes its
+// downstream chain with error context. Returns true if an error handler
+// was found and executed successfully.
+func (f *Flow) executeOnErrorChain(actions map[string]Action, flowErr error, environment *environment.Environment) bool {
+	var onErrorNode *Node
+	for _, n := range f.Nodes {
+		if n == nil {
+			continue
+		}
+		if n.Type == "trigger/on_error" || (n.Data != nil && n.Data.Label == "trigger/on_error") {
+			onErrorNode = n
+			break
+		}
+	}
+
+	if onErrorNode == nil {
+		return false
+	}
+
+	// Find the node that caused the error from execution results
+	var failedNodeID, failedNodeLabel, failedNodeType string
+	for _, result := range f.nodeExecutionResults {
+		if result != nil && result.Status == "failed" {
+			failedNodeID = result.ID
+			failedNodeLabel = result.Label
+			failedNodeType = result.Action
+			break
+		}
+	}
+
+	// Prevent re-entrancy: errors in the error chain must not trigger it again
+	f.inErrorChain = true
+
+	// Inject error context as the On Error node's cached result
+	errorOutputs := map[string]interface{}{
+		"error_message":    flowErr.Error(),
+		"error_node_id":    failedNodeID,
+		"error_node_label": failedNodeLabel,
+		"error_node_type":  failedNodeType,
+	}
+	f.nodeResults[onErrorNode.ID] = errorOutputs
+	f.emitNodeEvent(onErrorNode.ID, onErrorNode.Type, onErrorNode.Data.Label, "success", 0, "")
+	f.recordNodeResult(onErrorNode, "success", nil, errorOutputs, 0, "")
+
+	// Execute children of the On Error node
+	children := f.FindTarget(onErrorNode.ID)
+	for _, c := range children {
+		if c.Type != "" && strings.HasPrefix(c.Type, "trigger/") {
+			continue
+		}
+		_, childErr := f.ExecuteNode(actions, c, environment)
+		if childErr != nil {
+			log.WithFields(log.Fields{
+				"error": childErr,
+			}).Error("Error in On Error handler chain")
+			return false
+		}
+	}
+
+	return true
 }
 
 func (f *Flow) ExecuteNode(actions map[string]Action, node *Node, environment *environment.Environment) (map[string]interface{}, error) {
