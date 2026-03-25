@@ -18,13 +18,7 @@ const (
 
 var Inputs = [...]core.Connection{}
 
-var Outputs = [...]core.Connection{
-	{
-		Name:  "count",
-		Type:  core.ConnectionTypeInteger,
-		Label: "Outputs Set",
-	},
-}
+var Outputs = [...]core.Connection{}
 
 func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[string]interface{}, error) {
 	count := 0
