@@ -1,4 +1,4 @@
-package trigger_on_error
+package error_on_error
 
 import (
 	"testing"

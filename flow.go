@@ -380,7 +380,7 @@ func (f *Flow) Execute(actions map[string]Action, entry *string, environment *en
 	return f.outputs, nil
 }
 
-// executeOnErrorChain finds a "trigger/on_error" node and executes its
+// executeOnErrorChain finds a "error/on_error" node and executes its
 // downstream chain with error context. Returns true if an error handler
 // was found and executed successfully.
 func (f *Flow) executeOnErrorChain(actions map[string]Action, flowErr error, environment *environment.Environment) bool {
@@ -389,7 +389,7 @@ func (f *Flow) executeOnErrorChain(actions map[string]Action, flowErr error, env
 		if n == nil {
 			continue
 		}
-		if n.Type == "trigger/on_error" || (n.Data != nil && n.Data.Label == "trigger/on_error") {
+		if n.Type == "error/on_error" || (n.Data != nil && n.Data.Label == "error/on_error") {
 			onErrorNode = n
 			break
 		}

@@ -9,6 +9,11 @@
     "icon": "plus",
     "date": "05/03/2026",
     "type": 2,
+    "category": {
+      "name": "Arithmetic",
+      "icon": "calculator",
+      "description": "Mathematical operations"
+    },
     "inputs": [
       {
         "name": "a",
@@ -45,6 +50,11 @@
     "icon": "divide",
     "date": "05/03/2026",
     "type": 2,
+    "category": {
+      "name": "Arithmetic",
+      "icon": "calculator",
+      "description": "Mathematical operations"
+    },
     "inputs": [
       {
         "name": "numerator",
@@ -81,6 +91,11 @@
     "icon": "xmark",
     "date": "05/03/2026",
     "type": 2,
+    "category": {
+      "name": "Arithmetic",
+      "icon": "calculator",
+      "description": "Mathematical operations"
+    },
     "inputs": [
       {
         "name": "a",
@@ -117,6 +132,11 @@
     "icon": "minus",
     "date": "05/03/2026",
     "type": 2,
+    "category": {
+      "name": "Arithmetic",
+      "icon": "calculator",
+      "description": "Mathematical operations"
+    },
     "inputs": [
       {
         "name": "a",
@@ -143,6 +163,124 @@
       }
     ]
   },
+  "aws/dynamodb": {
+    "hash": "51a2077fabc6cf77306fa3c23e6925c790975d7944ab681a86739ba76d0441b3",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "DynamoDB Query",
+    "description": "Execute an operation against an AWS DynamoDB table",
+    "website": "https://www.flomation.co",
+    "icon": "table",
+    "date": "21/03/2026",
+    "type": 2,
+    "category": {
+      "name": "AWS",
+      "icon": "cloud",
+      "description": "Amazon Web Services integrations"
+    },
+    "inputs": [
+      {
+        "name": "access_key",
+        "type": "string",
+        "value": null,
+        "label": "AWS Access Key",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "secret_key",
+        "type": "string",
+        "value": null,
+        "label": "AWS Secret Key",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "eu-west-1",
+        "required": true
+      },
+      {
+        "name": "table_name",
+        "type": "string",
+        "value": null,
+        "label": "Table Name",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "operation",
+        "type": "string",
+        "value": null,
+        "label": "Operation",
+        "placeholder": "",
+        "required": true,
+        "options": [
+          {
+            "name": "Get Item",
+            "value": "get_item"
+          },
+          {
+            "name": "Put Item",
+            "value": "put_item"
+          },
+          {
+            "name": "Query",
+            "value": "query"
+          },
+          {
+            "name": "Scan",
+            "value": "scan"
+          },
+          {
+            "name": "Delete Item",
+            "value": "delete_item"
+          }
+        ]
+      },
+      {
+        "name": "key",
+        "type": "text",
+        "value": null,
+        "label": "Key",
+        "placeholder": "{\"pk\": {\"S\": \"value\"}}",
+        "required": true
+      },
+      {
+        "name": "data",
+        "type": "text",
+        "value": null,
+        "label": "Data",
+        "placeholder": "{\"attribute\": {\"S\": \"value\"}}"
+      },
+      {
+        "name": "filter_expression",
+        "type": "string",
+        "value": null,
+        "label": "Filter Expression",
+        "placeholder": ""
+      }
+    ],
+    "outputs": [
+      {
+        "name": "results",
+        "type": "object",
+        "value": null,
+        "label": "Results",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Count",
+        "placeholder": ""
+      }
+    ]
+  },
   "aws/ec2/describe": {
     "hash": "83b8abb88363392fc36a1d647461f7dd155dd0435dfdea0b58a063fbdc53d8be",
     "author": "Andy Esser",
@@ -153,6 +291,16 @@
     "icon": "server",
     "date": "05/03/2026",
     "type": 2,
+    "category": {
+      "name": "AWS",
+      "icon": "cloud",
+      "description": "Amazon Web Services integrations"
+    },
+    "sub_category": {
+      "name": "EC2",
+      "icon": "server",
+      "description": "Elastic Compute Cloud operations"
+    },
     "inputs": null,
     "outputs": null
   },
@@ -166,6 +314,16 @@
     "icon": "bucket",
     "date": "05/03/2026",
     "type": 2,
+    "category": {
+      "name": "AWS",
+      "icon": "cloud",
+      "description": "Amazon Web Services integrations"
+    },
+    "sub_category": {
+      "name": "S3",
+      "icon": "box-archive",
+      "description": "Simple Storage Service operations"
+    },
     "inputs": [
       {
         "name": "aws_access_key",
@@ -221,7 +379,7 @@
     ]
   },
   "aws/s3/get": {
-    "hash": "b5b4da8dfafb6834aae97f7c38c1acccc4e56a6694360e7903818b5e1c3b0300",
+    "hash": "502c9be718b7d8f3650594fb3e374f5a4404db87dcb0a7ef52c1b16bec7c7b91",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "AWS S3 Get Object",
@@ -230,6 +388,16 @@
     "icon": "bucket",
     "date": "05/03/2026",
     "type": 2,
+    "category": {
+      "name": "AWS",
+      "icon": "cloud",
+      "description": "Amazon Web Services integrations"
+    },
+    "sub_category": {
+      "name": "S3",
+      "icon": "box-archive",
+      "description": "Simple Storage Service operations"
+    },
     "inputs": [
       {
         "name": "aws_access_key",
@@ -283,10 +451,10 @@
         "placeholder": ""
       },
       {
-        "name": "result",
-        "type": "integer",
+        "name": "content_type",
+        "type": "string",
         "value": null,
-        "label": "Filename",
+        "label": "Content Type",
         "placeholder": ""
       }
     ]
@@ -301,6 +469,16 @@
     "icon": "bucket",
     "date": "05/03/2026",
     "type": 2,
+    "category": {
+      "name": "AWS",
+      "icon": "cloud",
+      "description": "Amazon Web Services integrations"
+    },
+    "sub_category": {
+      "name": "S3",
+      "icon": "box-archive",
+      "description": "Simple Storage Service operations"
+    },
     "inputs": [
       {
         "name": "aws_access_key",
@@ -351,6 +529,16 @@
     "icon": "bucket",
     "date": "05/03/2026",
     "type": 2,
+    "category": {
+      "name": "AWS",
+      "icon": "cloud",
+      "description": "Amazon Web Services integrations"
+    },
+    "sub_category": {
+      "name": "S3",
+      "icon": "box-archive",
+      "description": "Simple Storage Service operations"
+    },
     "inputs": [
       {
         "name": "aws_access_key",
@@ -427,6 +615,11 @@
     "icon": "object-group",
     "date": "20/03/2026",
     "type": 2,
+    "category": {
+      "name": "Common",
+      "icon": "toolbox",
+      "description": "General-purpose data utilities"
+    },
     "inputs": null,
     "outputs": [
       {
@@ -448,6 +641,11 @@
     "icon": "filter",
     "date": "20/03/2026",
     "type": 2,
+    "category": {
+      "name": "Common",
+      "icon": "toolbox",
+      "description": "General-purpose data utilities"
+    },
     "inputs": [
       {
         "name": "keys",
@@ -478,6 +676,11 @@
     "icon": "i-cursor",
     "date": "21/03/2026",
     "type": 2,
+    "category": {
+      "name": "Common",
+      "icon": "toolbox",
+      "description": "General-purpose data utilities"
+    },
     "inputs": [
       {
         "name": "input_key",
@@ -506,8 +709,58 @@
       }
     ]
   },
+  "common/set_variable": {
+    "hash": "90a65516c7e93d09c3cbf88ad12ce2dd8ed2e00f88d7c17ba9f19330fe4b9d0e",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Set Variable",
+    "description": "Set a flow-wide variable accessible via ${var.name}",
+    "website": "https://www.flomation.co",
+    "icon": "code",
+    "date": "25/03/2026",
+    "type": 2,
+    "category": {
+      "name": "Common",
+      "icon": "toolbox",
+      "description": "General-purpose data utilities"
+    },
+    "inputs": [
+      {
+        "name": "name",
+        "type": "string",
+        "value": null,
+        "label": "Variable Name",
+        "placeholder": "my_variable",
+        "required": true
+      },
+      {
+        "name": "value",
+        "type": "string",
+        "value": null,
+        "label": "Value",
+        "placeholder": "",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "name",
+        "type": "string",
+        "value": null,
+        "label": "Variable Name",
+        "placeholder": ""
+      },
+      {
+        "name": "value",
+        "type": "string",
+        "value": null,
+        "label": "Value",
+        "placeholder": ""
+      }
+    ]
+  },
   "common/smtp": {
-    "hash": "95cfc0caa6a9d003ec660d7d26bc4eecf087803e8b02e4ca071343d9823d760d",
+    "hash": "86e1e5f5016e23ae902e82070ce07dfb1321f9e678cb0975e6203e8eb7ac2c23",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Send SMTP Email",
@@ -516,6 +769,11 @@
     "icon": "envelope",
     "date": "27/11/2025",
     "type": 2,
+    "category": {
+      "name": "Common",
+      "icon": "toolbox",
+      "description": "General-purpose data utilities"
+    },
     "inputs": [
       {
         "name": "to",
@@ -543,7 +801,7 @@
       },
       {
         "name": "message",
-        "type": "string",
+        "type": "text",
         "value": null,
         "label": "Message",
         "placeholder": "Message",
@@ -606,6 +864,132 @@
       }
     ]
   },
+  "common/start_flow": {
+    "hash": "07eebde66e10cb8685a5165dbdbbfe9ea20b4e60ede6372b74ab7178f1ddce66",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Start Flow",
+    "description": "Trigger another flow, optionally waiting for completion",
+    "website": "https://www.flomation.co",
+    "icon": "share-from-square",
+    "date": "25/03/2026",
+    "type": 2,
+    "category": {
+      "name": "Common",
+      "icon": "toolbox",
+      "description": "General-purpose data utilities"
+    },
+    "inputs": [
+      {
+        "name": "flow_id",
+        "type": "string",
+        "value": null,
+        "label": "Flow ID",
+        "placeholder": "ID of the flow to trigger",
+        "required": true
+      },
+      {
+        "name": "wait_for_completion",
+        "type": "boolean",
+        "value": null,
+        "label": "Wait for Completion",
+        "placeholder": ""
+      },
+      {
+        "name": "timeout_seconds",
+        "type": "integer",
+        "value": null,
+        "label": "Timeout (seconds)",
+        "placeholder": "300"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "execution_id",
+        "type": "string",
+        "value": null,
+        "label": "Execution ID",
+        "placeholder": ""
+      },
+      {
+        "name": "status",
+        "type": "string",
+        "value": null,
+        "label": "Status",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Flow Result",
+        "placeholder": ""
+      }
+    ]
+  },
+  "conditional/for": {
+    "hash": "1e5751e27df3577b6705fc2d8549d5af9d556b277b9a020df2b09b2c4b9592b9",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "For",
+    "description": "Loop a fixed number of times",
+    "website": "https://www.flomation.co",
+    "icon": "arrow-rotate-right",
+    "date": "25/03/2026",
+    "type": 5,
+    "category": {
+      "name": "Conditional",
+      "icon": "code-branch",
+      "description": "Control flow based on conditions"
+    },
+    "inputs": [
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Iterations",
+        "placeholder": "10",
+        "required": true
+      },
+      {
+        "name": "start",
+        "type": "integer",
+        "value": null,
+        "label": "Start Index",
+        "placeholder": "0"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "result",
+        "type": "boolean",
+        "value": null,
+        "label": "Continue",
+        "placeholder": ""
+      },
+      {
+        "name": "iterations",
+        "type": "integer",
+        "value": null,
+        "label": "Iteration Count",
+        "placeholder": ""
+      },
+      {
+        "name": "max_iterations",
+        "type": "integer",
+        "value": null,
+        "label": "Total Iterations",
+        "placeholder": ""
+      },
+      {
+        "name": "current_index",
+        "type": "integer",
+        "value": null,
+        "label": "Current Index",
+        "placeholder": ""
+      }
+    ]
+  },
   "conditional/if": {
     "hash": "27f959cb422cca5d0ecaebdd475097aaf6f16e27befda513d6472ab57c0c54c2",
     "author": "Andy Esser",
@@ -616,6 +1000,11 @@
     "icon": "code-branch",
     "date": "20/03/2026",
     "type": 4,
+    "category": {
+      "name": "Conditional",
+      "icon": "code-branch",
+      "description": "Control flow based on conditions"
+    },
     "inputs": [
       {
         "name": "value_a",
@@ -681,6 +1070,227 @@
       }
     ]
   },
+  "conditional/while": {
+    "hash": "4030558203eb571abe0172329bb136d2c90948ffd47ceaad16b6ffcc653509ff",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "While",
+    "description": "Loop while a condition is true",
+    "website": "https://www.flomation.co",
+    "icon": "repeat",
+    "date": "25/03/2026",
+    "type": 5,
+    "category": {
+      "name": "Conditional",
+      "icon": "code-branch",
+      "description": "Control flow based on conditions"
+    },
+    "inputs": [
+      {
+        "name": "value_a",
+        "type": "string",
+        "value": null,
+        "label": "Value A",
+        "placeholder": "Left operand",
+        "required": true
+      },
+      {
+        "name": "operator",
+        "type": "string",
+        "value": null,
+        "label": "Operator",
+        "placeholder": "",
+        "required": true,
+        "options": [
+          {
+            "name": "Equals",
+            "value": "equals"
+          },
+          {
+            "name": "Not Equals",
+            "value": "not_equals"
+          },
+          {
+            "name": "Contains",
+            "value": "contains"
+          },
+          {
+            "name": "Greater Than",
+            "value": "greater_than"
+          },
+          {
+            "name": "Less Than",
+            "value": "less_than"
+          },
+          {
+            "name": "Is Empty",
+            "value": "is_empty"
+          },
+          {
+            "name": "Is Not Empty",
+            "value": "is_not_empty"
+          }
+        ]
+      },
+      {
+        "name": "value_b",
+        "type": "string",
+        "value": null,
+        "label": "Value B",
+        "placeholder": "Right operand"
+      },
+      {
+        "name": "max_iterations",
+        "type": "integer",
+        "value": null,
+        "label": "Max Iterations",
+        "placeholder": "1000"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "result",
+        "type": "boolean",
+        "value": null,
+        "label": "Condition Result",
+        "placeholder": ""
+      },
+      {
+        "name": "iterations",
+        "type": "integer",
+        "value": null,
+        "label": "Iteration Count",
+        "placeholder": ""
+      },
+      {
+        "name": "max_iterations",
+        "type": "integer",
+        "value": null,
+        "label": "Max Iterations",
+        "placeholder": ""
+      }
+    ]
+  },
+  "file/read": {
+    "hash": "228ea63998a0a44bed1c1cd697dae4d8e8b55d558545f746794a71b9fd235dbd",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Read File",
+    "description": "Read the contents of a file",
+    "website": "https://www.flomation.co",
+    "icon": "file-lines",
+    "date": "23/03/2026",
+    "type": 2,
+    "category": {
+      "name": "File",
+      "icon": "file",
+      "description": "Read and write files"
+    },
+    "inputs": [
+      {
+        "name": "file_path",
+        "type": "string",
+        "value": null,
+        "label": "File Path",
+        "placeholder": "/path/to/file.txt",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "content",
+        "type": "string",
+        "value": null,
+        "label": "",
+        "placeholder": ""
+      },
+      {
+        "name": "file_name",
+        "type": "string",
+        "value": null,
+        "label": "",
+        "placeholder": ""
+      },
+      {
+        "name": "file_size",
+        "type": "integer",
+        "value": null,
+        "label": "",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "",
+        "placeholder": ""
+      }
+    ]
+  },
+  "file/write": {
+    "hash": "cd52cf63fa1330ab85e620a490e8390f1b4180f516a39a5725c2458f1373672f",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Write File",
+    "description": "Write content to a file",
+    "website": "https://www.flomation.co",
+    "icon": "file-pen",
+    "date": "23/03/2026",
+    "type": 2,
+    "category": {
+      "name": "File",
+      "icon": "file",
+      "description": "Read and write files"
+    },
+    "inputs": [
+      {
+        "name": "file_path",
+        "type": "string",
+        "value": null,
+        "label": "File Path",
+        "placeholder": "/path/to/output.txt",
+        "required": true
+      },
+      {
+        "name": "content",
+        "type": "text",
+        "value": null,
+        "label": "Content",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "append",
+        "type": "boolean",
+        "value": null,
+        "label": "Append to File",
+        "placeholder": ""
+      }
+    ],
+    "outputs": [
+      {
+        "name": "file_path",
+        "type": "string",
+        "value": null,
+        "label": "",
+        "placeholder": ""
+      },
+      {
+        "name": "bytes_written",
+        "type": "integer",
+        "value": null,
+        "label": "",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "",
+        "placeholder": ""
+      }
+    ]
+  },
   "git/add": {
     "hash": "eeb1bfa21a3c3d91124279d9423f2d3c639440f87495c35ae19761c5d033d355",
     "author": "Andy Esser",
@@ -691,6 +1301,11 @@
     "icon": "code-branch",
     "date": "06/03/2026",
     "type": 2,
+    "category": {
+      "name": "Git",
+      "icon": "code-branch",
+      "description": "Version control operations"
+    },
     "inputs": [
       {
         "name": "repository_path",
@@ -728,6 +1343,11 @@
     "icon": "code-branch",
     "date": "19/03/2026",
     "type": 2,
+    "category": {
+      "name": "Git",
+      "icon": "code-branch",
+      "description": "Version control operations"
+    },
     "inputs": [
       {
         "name": "repository_path",
@@ -764,6 +1384,11 @@
     "icon": "code-branch",
     "date": "06/03/2026",
     "type": 2,
+    "category": {
+      "name": "Git",
+      "icon": "code-branch",
+      "description": "Version control operations"
+    },
     "inputs": [
       {
         "name": "repository_path",
@@ -793,15 +1418,20 @@
     ]
   },
   "git/clone": {
-    "hash": "eed0fd384c5726f49c9b9159e03cfb320efd4586ae1618097a3016679117e0d4",
+    "hash": "fc6108112e6a5cfe50b1ffab148ea8034b65df533daf26a28027b011f802d94d",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Git Clone",
-    "description": "Git Actions",
+    "description": "Clone a Git repository",
     "website": "https://www.flomation.co",
     "icon": "code-branch",
     "date": "06/03/2026",
     "type": 2,
+    "category": {
+      "name": "Git",
+      "icon": "code-branch",
+      "description": "Version control operations"
+    },
     "inputs": [
       {
         "name": "repository_url",
@@ -826,6 +1456,13 @@
         "value": null,
         "label": "",
         "placeholder": ""
+      },
+      {
+        "name": "branch",
+        "type": "string",
+        "value": null,
+        "label": "",
+        "placeholder": ""
       }
     ]
   },
@@ -839,6 +1476,11 @@
     "icon": "code-branch",
     "date": "06/03/2026",
     "type": 2,
+    "category": {
+      "name": "Git",
+      "icon": "code-branch",
+      "description": "Version control operations"
+    },
     "inputs": [
       {
         "name": "repository_path",
@@ -900,6 +1542,11 @@
     "icon": "code-branch",
     "date": "06/03/2026",
     "type": 2,
+    "category": {
+      "name": "Git",
+      "icon": "code-branch",
+      "description": "Version control operations"
+    },
     "inputs": [
       {
         "name": "repository_path",
@@ -951,6 +1598,11 @@
     "icon": "code-branch",
     "date": "06/03/2026",
     "type": 2,
+    "category": {
+      "name": "Git",
+      "icon": "code-branch",
+      "description": "Version control operations"
+    },
     "inputs": [
       {
         "name": "repository_path",
@@ -995,6 +1647,11 @@
     "icon": "code-branch",
     "date": "19/03/2026",
     "type": 2,
+    "category": {
+      "name": "Git",
+      "icon": "code-branch",
+      "description": "Version control operations"
+    },
     "inputs": [
       {
         "name": "repository_path",
@@ -1038,6 +1695,11 @@
     "icon": "code-branch",
     "date": "19/03/2026",
     "type": 2,
+    "category": {
+      "name": "Git",
+      "icon": "code-branch",
+      "description": "Version control operations"
+    },
     "inputs": [
       {
         "name": "repository_path",
@@ -1078,6 +1740,439 @@
       }
     ]
   },
+  "http/request": {
+    "hash": "f50443920b139813b93b4000dbef57ebcdf2564b9d9df1ce5156cbf05ad388c8",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "HTTP Request",
+    "description": "Send an HTTP request and capture the response",
+    "website": "https://www.flomation.co",
+    "icon": "globe",
+    "date": "23/03/2026",
+    "type": 2,
+    "category": {
+      "name": "HTTP",
+      "icon": "globe",
+      "description": "HTTP request operations"
+    },
+    "inputs": [
+      {
+        "name": "method",
+        "type": "string",
+        "value": null,
+        "label": "HTTP Method",
+        "placeholder": "GET",
+        "required": true,
+        "options": [
+          {
+            "name": "GET",
+            "value": "GET"
+          },
+          {
+            "name": "POST",
+            "value": "POST"
+          },
+          {
+            "name": "PUT",
+            "value": "PUT"
+          },
+          {
+            "name": "PATCH",
+            "value": "PATCH"
+          },
+          {
+            "name": "DELETE",
+            "value": "DELETE"
+          },
+          {
+            "name": "HEAD",
+            "value": "HEAD"
+          },
+          {
+            "name": "OPTIONS",
+            "value": "OPTIONS"
+          }
+        ]
+      },
+      {
+        "name": "url",
+        "type": "string",
+        "value": null,
+        "label": "URL",
+        "placeholder": "https://example.com/api/v1/resource",
+        "required": true
+      },
+      {
+        "name": "headers",
+        "type": "text",
+        "value": null,
+        "label": "Headers",
+        "placeholder": "Content-Type: application/json\nAuthorization: Bearer ..."
+      },
+      {
+        "name": "body",
+        "type": "text",
+        "value": null,
+        "label": "Request Body",
+        "placeholder": ""
+      },
+      {
+        "name": "timeout_seconds",
+        "type": "integer",
+        "value": null,
+        "label": "Timeout (seconds)",
+        "placeholder": "30"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "status_code",
+        "type": "integer",
+        "value": null,
+        "label": "",
+        "placeholder": ""
+      },
+      {
+        "name": "response_body",
+        "type": "string",
+        "value": null,
+        "label": "",
+        "placeholder": ""
+      },
+      {
+        "name": "response_headers",
+        "type": "string",
+        "value": null,
+        "label": "",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "",
+        "placeholder": ""
+      }
+    ]
+  },
+  "nosql/mongodb": {
+    "hash": "cd1428b9a909b381660aa4e27f43c927bdbac9b03e10ae1bce7f7d986e638d91",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "MongoDB Query",
+    "description": "Execute an operation against a MongoDB collection",
+    "website": "https://www.flomation.co",
+    "icon": "leaf",
+    "date": "21/03/2026",
+    "type": 2,
+    "category": {
+      "name": "NoSQL",
+      "icon": "layer-group",
+      "description": "NoSQL database operations"
+    },
+    "inputs": [
+      {
+        "name": "connection_uri",
+        "type": "string",
+        "value": null,
+        "label": "Connection URI",
+        "placeholder": "mongodb://localhost:27017",
+        "required": true
+      },
+      {
+        "name": "database",
+        "type": "string",
+        "value": null,
+        "label": "Database",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "collection",
+        "type": "string",
+        "value": null,
+        "label": "Collection",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "operation",
+        "type": "string",
+        "value": null,
+        "label": "Operation",
+        "placeholder": "",
+        "required": true,
+        "options": [
+          {
+            "name": "Find",
+            "value": "find"
+          },
+          {
+            "name": "Insert One",
+            "value": "insert_one"
+          },
+          {
+            "name": "Insert Many",
+            "value": "insert_many"
+          },
+          {
+            "name": "Update",
+            "value": "update"
+          },
+          {
+            "name": "Delete",
+            "value": "delete"
+          },
+          {
+            "name": "Count",
+            "value": "count"
+          }
+        ]
+      },
+      {
+        "name": "filter",
+        "type": "text",
+        "value": null,
+        "label": "Filter",
+        "placeholder": "{\"key\": \"value\"}"
+      },
+      {
+        "name": "document",
+        "type": "text",
+        "value": null,
+        "label": "Document",
+        "placeholder": "{\"key\": \"value\"}"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "results",
+        "type": "object",
+        "value": null,
+        "label": "Results",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Count",
+        "placeholder": ""
+      }
+    ]
+  },
+  "nosql/redis": {
+    "hash": "4a1dec065b473ae73bff5db8dca1eb461c19fea9130c6787192f652466f4ee90",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Redis Command",
+    "description": "Execute a command against a Redis instance",
+    "website": "https://www.flomation.co",
+    "icon": "bolt",
+    "date": "21/03/2026",
+    "type": 2,
+    "category": {
+      "name": "NoSQL",
+      "icon": "layer-group",
+      "description": "NoSQL database operations"
+    },
+    "inputs": [
+      {
+        "name": "host",
+        "type": "string",
+        "value": null,
+        "label": "Host",
+        "placeholder": "localhost",
+        "required": true
+      },
+      {
+        "name": "port",
+        "type": "integer",
+        "value": null,
+        "label": "Port",
+        "placeholder": "6379",
+        "required": true
+      },
+      {
+        "name": "password",
+        "type": "string",
+        "value": null,
+        "label": "Password",
+        "placeholder": ""
+      },
+      {
+        "name": "database",
+        "type": "integer",
+        "value": null,
+        "label": "Database",
+        "placeholder": "0"
+      },
+      {
+        "name": "command",
+        "type": "string",
+        "value": null,
+        "label": "Command",
+        "placeholder": "",
+        "required": true,
+        "options": [
+          {
+            "name": "GET",
+            "value": "GET"
+          },
+          {
+            "name": "SET",
+            "value": "SET"
+          },
+          {
+            "name": "DEL",
+            "value": "DEL"
+          },
+          {
+            "name": "HGET",
+            "value": "HGET"
+          },
+          {
+            "name": "HSET",
+            "value": "HSET"
+          },
+          {
+            "name": "LPUSH",
+            "value": "LPUSH"
+          },
+          {
+            "name": "LPOP",
+            "value": "LPOP"
+          },
+          {
+            "name": "RPUSH",
+            "value": "RPUSH"
+          },
+          {
+            "name": "RPOP",
+            "value": "RPOP"
+          },
+          {
+            "name": "KEYS",
+            "value": "KEYS"
+          },
+          {
+            "name": "EXISTS",
+            "value": "EXISTS"
+          },
+          {
+            "name": "EXPIRE",
+            "value": "EXPIRE"
+          },
+          {
+            "name": "TTL",
+            "value": "TTL"
+          }
+        ]
+      },
+      {
+        "name": "key",
+        "type": "string",
+        "value": null,
+        "label": "Key",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "value",
+        "type": "text",
+        "value": null,
+        "label": "Value",
+        "placeholder": ""
+      },
+      {
+        "name": "field",
+        "type": "string",
+        "value": null,
+        "label": "Field",
+        "placeholder": ""
+      }
+    ],
+    "outputs": [
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Result",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      }
+    ]
+  },
+  "output/discord_webhook": {
+    "hash": "1b870edc7672c6972ce1b6816b64358ab3ee27e6eee7236ecaf1b09289a1c402",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Discord Webhook",
+    "description": "Send a message to a Discord channel via webhook",
+    "website": "https://www.flomation.co",
+    "icon": "comment-dots",
+    "date": "23/03/2026",
+    "type": 2,
+    "category": {
+      "name": "Output",
+      "icon": "location-arrow",
+      "description": "Send data to external destinations"
+    },
+    "inputs": [
+      {
+        "name": "webhook_url",
+        "type": "string",
+        "value": null,
+        "label": "Webhook URL",
+        "placeholder": "https://discord.com/api/webhooks/...",
+        "required": true
+      },
+      {
+        "name": "content",
+        "type": "text",
+        "value": null,
+        "label": "Message Content",
+        "placeholder": "Hello from Flomation!",
+        "required": true
+      },
+      {
+        "name": "username",
+        "type": "string",
+        "value": null,
+        "label": "Username Override",
+        "placeholder": "Flomation Bot"
+      },
+      {
+        "name": "avatar_url",
+        "type": "string",
+        "value": null,
+        "label": "Avatar URL",
+        "placeholder": "https://example.com/avatar.png"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "status_code",
+        "type": "integer",
+        "value": null,
+        "label": "",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "",
+        "placeholder": ""
+      }
+    ]
+  },
   "output/set": {
     "hash": "05f0e3818a441c5837d9b6543e663da5f0a4e6febe515914d851620eb82ec9b3",
     "author": "Andy Esser",
@@ -1088,6 +2183,11 @@
     "icon": "dollar-sign",
     "date": "27/11/2025",
     "type": 3,
+    "category": {
+      "name": "Output",
+      "icon": "location-arrow",
+      "description": "Send data to external destinations"
+    },
     "inputs": [
       {
         "name": "name",
@@ -1108,6 +2208,165 @@
     ],
     "outputs": null
   },
+  "output/set_outputs": {
+    "hash": "ac0d6709eeb11562c429dbfd3f2532e2afd0db3a447f03efb42a4a4fef1fc0c7",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Set Outputs",
+    "description": "Set all parent outputs as flow outputs",
+    "website": "https://www.flomation.co",
+    "icon": "list-check",
+    "date": "25/03/2026",
+    "type": 3,
+    "category": {
+      "name": "Output",
+      "icon": "location-arrow",
+      "description": "Send data to external destinations"
+    },
+    "inputs": null,
+    "outputs": null
+  },
+  "output/slack_webhook": {
+    "hash": "36c21e1e44225d11396b67c36902c5386a093ef419874f658561a3b9016307f6",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Slack Webhook",
+    "description": "Send a message to a Slack channel via webhook",
+    "website": "https://www.flomation.co",
+    "icon": "hashtag",
+    "date": "23/03/2026",
+    "type": 2,
+    "category": {
+      "name": "Output",
+      "icon": "location-arrow",
+      "description": "Send data to external destinations"
+    },
+    "inputs": [
+      {
+        "name": "webhook_url",
+        "type": "string",
+        "value": null,
+        "label": "Webhook URL",
+        "placeholder": "https://hooks.slack.com/services/...",
+        "required": true
+      },
+      {
+        "name": "message",
+        "type": "text",
+        "value": null,
+        "label": "Message",
+        "placeholder": "Hello from Flomation!",
+        "required": true
+      },
+      {
+        "name": "username",
+        "type": "string",
+        "value": null,
+        "label": "Username Override",
+        "placeholder": "Flomation Bot"
+      },
+      {
+        "name": "icon_emoji",
+        "type": "string",
+        "value": null,
+        "label": "Icon Emoji",
+        "placeholder": ":robot_face:"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "status_code",
+        "type": "integer",
+        "value": null,
+        "label": "",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "",
+        "placeholder": ""
+      }
+    ]
+  },
+  "script/bash": {
+    "hash": "3f6788759781675344a6ca0a2453982468871918b21ae68da9c3c936a712f84e",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Run Bash Script",
+    "description": "Execute a Bash script in a sandboxed temporary directory",
+    "website": "https://www.flomation.co",
+    "icon": "terminal",
+    "date": "23/03/2026",
+    "type": 2,
+    "category": {
+      "name": "Script",
+      "icon": "terminal",
+      "description": "Execute scripts and commands"
+    },
+    "inputs": [
+      {
+        "name": "script",
+        "type": "text",
+        "value": null,
+        "label": "Script",
+        "placeholder": "#!/bin/bash\necho \"Hello, World!\"",
+        "required": true
+      },
+      {
+        "name": "timeout_seconds",
+        "type": "integer",
+        "value": null,
+        "label": "Timeout (seconds)",
+        "placeholder": "60"
+      },
+      {
+        "name": "working_directory",
+        "type": "string",
+        "value": null,
+        "label": "Working Directory",
+        "placeholder": "Leave empty for a fresh temporary directory"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "stdout",
+        "type": "string",
+        "value": null,
+        "label": "",
+        "placeholder": ""
+      },
+      {
+        "name": "stderr",
+        "type": "string",
+        "value": null,
+        "label": "",
+        "placeholder": ""
+      },
+      {
+        "name": "exit_code",
+        "type": "integer",
+        "value": null,
+        "label": "",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "",
+        "placeholder": ""
+      },
+      {
+        "name": "working_directory",
+        "type": "string",
+        "value": null,
+        "label": "",
+        "placeholder": ""
+      }
+    ]
+  },
   "security/antivirus": {
     "hash": "5df6c1166a7477edfdbb22a50a3391b26e87c54841573d8943f61eb8e5b8015a",
     "author": "Andy Esser",
@@ -1118,6 +2377,11 @@
     "icon": "shield-virus",
     "date": "20/03/2026",
     "type": 2,
+    "category": {
+      "name": "Security",
+      "icon": "shield-halved",
+      "description": "Security scanning and compliance"
+    },
     "inputs": [
       {
         "name": "scan_path",
@@ -1166,31 +2430,28 @@
       }
     ]
   },
-  "sql/query": {
-    "hash": "ce4a3a87d2565743092e64904a26b4fac46739a671e4aeb85110f0118b1f91a7",
+  "sql/mysql": {
+    "hash": "788f659db227b68ffbcdc5ad2543a9808a3f95f24dd5aef1da77b6368febfd5a",
     "author": "Andy Esser",
     "organisation": "Flomation",
-    "name": "PostgreSQL Query",
-    "description": "Perform a PostgreSQL Query",
+    "name": "MySQL Query",
+    "description": "Execute a query against a MySQL database",
     "website": "https://www.flomation.co",
     "icon": "database",
-    "date": "05/03/2026",
+    "date": "21/03/2026",
     "type": 2,
+    "category": {
+      "name": "SQL",
+      "icon": "database",
+      "description": "Relational database queries"
+    },
     "inputs": [
-      {
-        "name": "driver",
-        "type": "string",
-        "value": null,
-        "label": "Database Driver",
-        "placeholder": "",
-        "required": true
-      },
       {
         "name": "host",
         "type": "string",
         "value": null,
         "label": "Database Host",
-        "placeholder": "",
+        "placeholder": "localhost",
         "required": true
       },
       {
@@ -1198,14 +2459,14 @@
         "type": "integer",
         "value": null,
         "label": "Database Port",
-        "placeholder": "",
+        "placeholder": "3306",
         "required": true
       },
       {
         "name": "username",
         "type": "string",
         "value": null,
-        "label": "Database Username",
+        "label": "Username",
         "placeholder": "",
         "required": true
       },
@@ -1213,7 +2474,7 @@
         "name": "password",
         "type": "string",
         "value": null,
-        "label": "Database Password",
+        "label": "Password",
         "placeholder": "",
         "required": true
       },
@@ -1227,18 +2488,36 @@
       },
       {
         "name": "query",
-        "type": "string",
+        "type": "text",
         "value": null,
         "label": "SQL Query",
-        "placeholder": "",
+        "placeholder": "SELECT * FROM ...",
         "required": true
       },
       {
-        "name": "ssl_mode",
-        "type": "boolean",
+        "name": "tls_mode",
+        "type": "string",
         "value": null,
-        "label": "SSL Mode",
-        "placeholder": ""
+        "label": "TLS Mode",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "Disabled",
+            "value": "false"
+          },
+          {
+            "name": "Preferred",
+            "value": "preferred"
+          },
+          {
+            "name": "Required",
+            "value": "true"
+          },
+          {
+            "name": "Skip Verify",
+            "value": "skip-verify"
+          }
+        ]
       }
     ],
     "outputs": [
@@ -1247,6 +2526,375 @@
         "type": "object",
         "value": null,
         "label": "Results",
+        "placeholder": ""
+      },
+      {
+        "name": "row_count",
+        "type": "integer",
+        "value": null,
+        "label": "Row Count",
+        "placeholder": ""
+      }
+    ]
+  },
+  "sql/oracle": {
+    "hash": "773caf8a0453087840c89a2049d9f23eb15660c6662ef7d6c4351c82d12b9148",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Oracle Query",
+    "description": "Execute a query against an Oracle database",
+    "website": "https://www.flomation.co",
+    "icon": "database",
+    "date": "21/03/2026",
+    "type": 2,
+    "category": {
+      "name": "SQL",
+      "icon": "database",
+      "description": "Relational database queries"
+    },
+    "inputs": [
+      {
+        "name": "host",
+        "type": "string",
+        "value": null,
+        "label": "Database Host",
+        "placeholder": "localhost",
+        "required": true
+      },
+      {
+        "name": "port",
+        "type": "integer",
+        "value": null,
+        "label": "Database Port",
+        "placeholder": "1521",
+        "required": true
+      },
+      {
+        "name": "username",
+        "type": "string",
+        "value": null,
+        "label": "Username",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "password",
+        "type": "string",
+        "value": null,
+        "label": "Password",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "service_name",
+        "type": "string",
+        "value": null,
+        "label": "Service Name",
+        "placeholder": "ORCL",
+        "required": true
+      },
+      {
+        "name": "query",
+        "type": "text",
+        "value": null,
+        "label": "SQL Query",
+        "placeholder": "SELECT * FROM ...",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "results",
+        "type": "object",
+        "value": null,
+        "label": "Results",
+        "placeholder": ""
+      },
+      {
+        "name": "row_count",
+        "type": "integer",
+        "value": null,
+        "label": "Row Count",
+        "placeholder": ""
+      }
+    ]
+  },
+  "sql/postgresql": {
+    "hash": "0f759f1fb854b1b15562eda288f8f18afc768b0c55bd7075cc0143b1a4501995",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "PostgreSQL Query",
+    "description": "Execute a query against a PostgreSQL database",
+    "website": "https://www.flomation.co",
+    "icon": "database",
+    "date": "21/03/2026",
+    "type": 2,
+    "category": {
+      "name": "SQL",
+      "icon": "database",
+      "description": "Relational database queries"
+    },
+    "inputs": [
+      {
+        "name": "host",
+        "type": "string",
+        "value": null,
+        "label": "Database Host",
+        "placeholder": "localhost",
+        "required": true
+      },
+      {
+        "name": "port",
+        "type": "integer",
+        "value": null,
+        "label": "Database Port",
+        "placeholder": "5432",
+        "required": true
+      },
+      {
+        "name": "username",
+        "type": "string",
+        "value": null,
+        "label": "Username",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "password",
+        "type": "string",
+        "value": null,
+        "label": "Password",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "database",
+        "type": "string",
+        "value": null,
+        "label": "Database Name",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "query",
+        "type": "text",
+        "value": null,
+        "label": "SQL Query",
+        "placeholder": "SELECT * FROM ...",
+        "required": true
+      },
+      {
+        "name": "ssl_mode",
+        "type": "string",
+        "value": null,
+        "label": "SSL Mode",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "Disable",
+            "value": "disable"
+          },
+          {
+            "name": "Allow",
+            "value": "allow"
+          },
+          {
+            "name": "Prefer",
+            "value": "prefer"
+          },
+          {
+            "name": "Require",
+            "value": "require"
+          },
+          {
+            "name": "Verify CA",
+            "value": "verify-ca"
+          },
+          {
+            "name": "Verify Full",
+            "value": "verify-full"
+          }
+        ]
+      }
+    ],
+    "outputs": [
+      {
+        "name": "results",
+        "type": "object",
+        "value": null,
+        "label": "Results",
+        "placeholder": ""
+      },
+      {
+        "name": "row_count",
+        "type": "integer",
+        "value": null,
+        "label": "Row Count",
+        "placeholder": ""
+      }
+    ]
+  },
+  "trigger/form": {
+    "hash": "6e6a0d901b182f5495e604425df2ee982954989a155a53fe1f4f754eb873b971",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Form Trigger",
+    "description": "Triggers a flow when a form is submitted",
+    "website": "https://www.flomation.co",
+    "icon": "file-lines",
+    "date": "23/03/2026",
+    "type": 1,
+    "category": {
+      "name": "Triggers",
+      "icon": "bolt-lightning",
+      "description": "Start a Flow"
+    },
+    "inputs": [
+      {
+        "name": "form_definition",
+        "type": "text",
+        "value": null,
+        "label": "Form Definition",
+        "placeholder": ""
+      }
+    ],
+    "outputs": [
+      {
+        "name": "form_data",
+        "type": "string",
+        "value": null,
+        "label": "Form Data",
+        "placeholder": ""
+      },
+      {
+        "name": "triggered_at",
+        "type": "string",
+        "value": null,
+        "label": "Triggered At",
+        "placeholder": ""
+      }
+    ]
+  },
+  "trigger/git_poll": {
+    "hash": "57d9d447631a50e38c36d0848c7bfd584ca3d401f8a920253c921ce362a6c8ea",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Git Poll Trigger",
+    "description": "Triggers a flow when changes are detected in a Git repository",
+    "website": "https://www.flomation.co",
+    "icon": "code-branch",
+    "date": "22/03/2026",
+    "type": 1,
+    "category": {
+      "name": "Triggers",
+      "icon": "bolt-lightning",
+      "description": "Start a Flow"
+    },
+    "inputs": [
+      {
+        "name": "repository_url",
+        "type": "string",
+        "value": null,
+        "label": "Repository URL",
+        "placeholder": "git@github.com:org/repo.git",
+        "required": true
+      },
+      {
+        "name": "ssh_key",
+        "type": "text",
+        "value": null,
+        "label": "SSH Private Key",
+        "placeholder": "Optional SSH key for authentication"
+      },
+      {
+        "name": "branch_regex",
+        "type": "string",
+        "value": null,
+        "label": "Branch Regex",
+        "placeholder": "e.g. ^main$ or ^feature/.*"
+      },
+      {
+        "name": "poll_interval",
+        "type": "string",
+        "value": null,
+        "label": "Poll Interval",
+        "placeholder": "e.g. 60s, 5m"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "branch",
+        "type": "string",
+        "value": null,
+        "label": "Branch",
+        "placeholder": ""
+      },
+      {
+        "name": "commit_hash",
+        "type": "string",
+        "value": null,
+        "label": "Commit Hash",
+        "placeholder": ""
+      },
+      {
+        "name": "commit_message",
+        "type": "string",
+        "value": null,
+        "label": "Commit Message",
+        "placeholder": ""
+      },
+      {
+        "name": "repository_url",
+        "type": "string",
+        "value": null,
+        "label": "Repository URL",
+        "placeholder": ""
+      }
+    ]
+  },
+  "trigger/image": {
+    "hash": "746e45399d9a876c699ad875be3810935ac995f13c2a0fbb7298f2cc4ec4fc68",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Tracking Pixel Trigger",
+    "description": "Triggers a flow when a tracking pixel image is loaded",
+    "website": "https://www.flomation.co",
+    "icon": "image",
+    "date": "23/03/2026",
+    "type": 1,
+    "category": {
+      "name": "Triggers",
+      "icon": "bolt-lightning",
+      "description": "Start a Flow"
+    },
+    "inputs": null,
+    "outputs": [
+      {
+        "name": "ip",
+        "type": "string",
+        "value": null,
+        "label": "Client IP",
+        "placeholder": ""
+      },
+      {
+        "name": "user_agent",
+        "type": "string",
+        "value": null,
+        "label": "User Agent",
+        "placeholder": ""
+      },
+      {
+        "name": "referrer",
+        "type": "string",
+        "value": null,
+        "label": "Referrer",
+        "placeholder": ""
+      },
+      {
+        "name": "triggered_at",
+        "type": "string",
+        "value": null,
+        "label": "Triggered At",
         "placeholder": ""
       }
     ]
@@ -1261,6 +2909,11 @@
     "icon": "play",
     "date": "27/11/2025",
     "type": 1,
+    "category": {
+      "name": "Triggers",
+      "icon": "bolt-lightning",
+      "description": "Start a Flow"
+    },
     "inputs": null,
     "outputs": [
       {
@@ -1275,6 +2928,432 @@
         "type": "string",
         "value": null,
         "label": "Quote",
+        "placeholder": ""
+      }
+    ]
+  },
+  "trigger/on_error": {
+    "hash": "d451d4514eabc2593338bedebdad8dd4ce0e19a7bfa3c9effc01ac98a7612ca9",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "On Error",
+    "description": "Executes when a flow error occurs",
+    "website": "https://www.flomation.co",
+    "icon": "triangle-exclamation",
+    "date": "25/03/2026",
+    "type": 1,
+    "category": {
+      "name": "Triggers",
+      "icon": "bolt-lightning",
+      "description": "Start a Flow"
+    },
+    "inputs": null,
+    "outputs": [
+      {
+        "name": "error_message",
+        "type": "string",
+        "value": null,
+        "label": "Error Message",
+        "placeholder": ""
+      },
+      {
+        "name": "error_node_id",
+        "type": "string",
+        "value": null,
+        "label": "Failed Node ID",
+        "placeholder": ""
+      },
+      {
+        "name": "error_node_label",
+        "type": "string",
+        "value": null,
+        "label": "Failed Node Label",
+        "placeholder": ""
+      },
+      {
+        "name": "error_node_type",
+        "type": "string",
+        "value": null,
+        "label": "Failed Node Type",
+        "placeholder": ""
+      }
+    ]
+  },
+  "trigger/qr": {
+    "hash": "a34973effbc20e2644053abb6892aff28ad00ada381f1ec80406b3fb4b21578e",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "QR Code Trigger",
+    "description": "Triggers a flow when a QR code is scanned",
+    "website": "https://www.flomation.co",
+    "icon": "qrcode",
+    "date": "23/03/2026",
+    "type": 1,
+    "category": {
+      "name": "Triggers",
+      "icon": "bolt-lightning",
+      "description": "Start a Flow"
+    },
+    "inputs": null,
+    "outputs": [
+      {
+        "name": "triggered_at",
+        "type": "string",
+        "value": null,
+        "label": "Triggered At",
+        "placeholder": ""
+      },
+      {
+        "name": "ip",
+        "type": "string",
+        "value": null,
+        "label": "Client IP",
+        "placeholder": ""
+      },
+      {
+        "name": "user_agent",
+        "type": "string",
+        "value": null,
+        "label": "User Agent",
+        "placeholder": ""
+      }
+    ]
+  },
+  "trigger/s3": {
+    "hash": "b715a6e49c90b5127a081f157bb4c7f8d9a45fee300314b89bc3c6b0101116c0",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "S3 Trigger",
+    "description": "Triggers a flow when objects are created or deleted in an S3 bucket",
+    "website": "https://www.flomation.co",
+    "icon": "bucket",
+    "date": "23/03/2026",
+    "type": 1,
+    "category": {
+      "name": "Triggers",
+      "icon": "bolt-lightning",
+      "description": "Start a Flow"
+    },
+    "inputs": [
+      {
+        "name": "bucket_name",
+        "type": "string",
+        "value": null,
+        "label": "Bucket Name",
+        "placeholder": "my-bucket",
+        "required": true
+      },
+      {
+        "name": "prefix",
+        "type": "string",
+        "value": null,
+        "label": "Key Prefix",
+        "placeholder": "Optional key prefix filter"
+      },
+      {
+        "name": "aws_access_key",
+        "type": "string",
+        "value": null,
+        "label": "AWS Access Key",
+        "placeholder": "AKIA...",
+        "required": true
+      },
+      {
+        "name": "aws_secret_key",
+        "type": "string",
+        "value": null,
+        "label": "AWS Secret Key",
+        "placeholder": "Secret key for authentication",
+        "required": true
+      },
+      {
+        "name": "region",
+        "type": "string",
+        "value": null,
+        "label": "AWS Region",
+        "placeholder": "",
+        "required": true,
+        "options": [
+          {
+            "name": "US East (N. Virginia)",
+            "value": "us-east-1"
+          },
+          {
+            "name": "US East (Ohio)",
+            "value": "us-east-2"
+          },
+          {
+            "name": "US West (N. California)",
+            "value": "us-west-1"
+          },
+          {
+            "name": "US West (Oregon)",
+            "value": "us-west-2"
+          },
+          {
+            "name": "EU (Ireland)",
+            "value": "eu-west-1"
+          },
+          {
+            "name": "EU (London)",
+            "value": "eu-west-2"
+          },
+          {
+            "name": "EU (Frankfurt)",
+            "value": "eu-central-1"
+          },
+          {
+            "name": "Asia Pacific (Singapore)",
+            "value": "ap-southeast-1"
+          },
+          {
+            "name": "Asia Pacific (Sydney)",
+            "value": "ap-southeast-2"
+          },
+          {
+            "name": "Asia Pacific (Tokyo)",
+            "value": "ap-northeast-1"
+          },
+          {
+            "name": "Asia Pacific (Seoul)",
+            "value": "ap-northeast-2"
+          },
+          {
+            "name": "Asia Pacific (Mumbai)",
+            "value": "ap-south-1"
+          },
+          {
+            "name": "Canada (Central)",
+            "value": "ca-central-1"
+          },
+          {
+            "name": "South America (São Paulo)",
+            "value": "sa-east-1"
+          }
+        ]
+      },
+      {
+        "name": "poll_interval",
+        "type": "string",
+        "value": null,
+        "label": "Poll Interval",
+        "placeholder": "e.g. 60s, 5m"
+      },
+      {
+        "name": "event_types",
+        "type": "string",
+        "value": null,
+        "label": "Event Types",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "Put",
+            "value": "put"
+          },
+          {
+            "name": "Delete",
+            "value": "delete"
+          },
+          {
+            "name": "Put \u0026 Delete",
+            "value": "put,delete"
+          }
+        ]
+      }
+    ],
+    "outputs": [
+      {
+        "name": "bucket",
+        "type": "string",
+        "value": null,
+        "label": "Bucket",
+        "placeholder": ""
+      },
+      {
+        "name": "key",
+        "type": "string",
+        "value": null,
+        "label": "Object Key",
+        "placeholder": ""
+      },
+      {
+        "name": "size",
+        "type": "integer",
+        "value": null,
+        "label": "Size",
+        "placeholder": ""
+      },
+      {
+        "name": "last_modified",
+        "type": "string",
+        "value": null,
+        "label": "Last Modified",
+        "placeholder": ""
+      },
+      {
+        "name": "etag",
+        "type": "string",
+        "value": null,
+        "label": "ETag",
+        "placeholder": ""
+      },
+      {
+        "name": "event_type",
+        "type": "string",
+        "value": null,
+        "label": "Event Type",
+        "placeholder": ""
+      }
+    ]
+  },
+  "trigger/schedule": {
+    "hash": "33ecf38fcf81f979428966d5726fde090c54f9b4d8ef43b27583287ab0734624",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Schedule Trigger",
+    "description": "Triggers a flow on a recurring schedule",
+    "website": "https://www.flomation.co",
+    "icon": "clock",
+    "date": "22/03/2026",
+    "type": 1,
+    "category": {
+      "name": "Triggers",
+      "icon": "bolt-lightning",
+      "description": "Start a Flow"
+    },
+    "inputs": [
+      {
+        "name": "mode",
+        "type": "string",
+        "value": null,
+        "label": "Schedule Mode",
+        "placeholder": "",
+        "required": true,
+        "options": [
+          {
+            "name": "Every interval",
+            "value": "interval"
+          },
+          {
+            "name": "Daily at a specific time",
+            "value": "daily"
+          },
+          {
+            "name": "Weekly on specific days",
+            "value": "weekly"
+          }
+        ]
+      },
+      {
+        "name": "interval",
+        "type": "string",
+        "value": null,
+        "label": "Interval",
+        "placeholder": "e.g. 15"
+      },
+      {
+        "name": "unit",
+        "type": "string",
+        "value": null,
+        "label": "Unit",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "Minutes",
+            "value": "minutes"
+          },
+          {
+            "name": "Hours",
+            "value": "hours"
+          },
+          {
+            "name": "Days",
+            "value": "days"
+          }
+        ]
+      },
+      {
+        "name": "time_of_day",
+        "type": "string",
+        "value": null,
+        "label": "Time of Day",
+        "placeholder": "HH:MM (24-hour)"
+      },
+      {
+        "name": "days_of_week",
+        "type": "string",
+        "value": null,
+        "label": "Days of Week",
+        "placeholder": "monday,wednesday,friday"
+      },
+      {
+        "name": "timezone",
+        "type": "string",
+        "value": null,
+        "label": "Timezone",
+        "placeholder": "Europe/London"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "triggered_at",
+        "type": "string",
+        "value": null,
+        "label": "Triggered At",
+        "placeholder": ""
+      },
+      {
+        "name": "schedule_mode",
+        "type": "string",
+        "value": null,
+        "label": "Schedule Mode",
+        "placeholder": ""
+      }
+    ]
+  },
+  "trigger/webhook": {
+    "hash": "195d2f0d929ea1d02d4c0d24cd7f13179836dfd08356ec37b555a8304a698572",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Webhook Trigger",
+    "description": "Triggers a flow when an HTTP webhook is received",
+    "website": "https://www.flomation.co",
+    "icon": "globe",
+    "date": "23/03/2026",
+    "type": 1,
+    "category": {
+      "name": "Triggers",
+      "icon": "bolt-lightning",
+      "description": "Start a Flow"
+    },
+    "inputs": null,
+    "outputs": [
+      {
+        "name": "body",
+        "type": "string",
+        "value": null,
+        "label": "Request Body",
+        "placeholder": ""
+      },
+      {
+        "name": "method",
+        "type": "string",
+        "value": null,
+        "label": "HTTP Method",
+        "placeholder": ""
+      },
+      {
+        "name": "content_type",
+        "type": "string",
+        "value": null,
+        "label": "Content Type",
+        "placeholder": ""
+      },
+      {
+        "name": "triggered_at",
+        "type": "string",
+        "value": null,
+        "label": "Triggered At",
         "placeholder": ""
       }
     ]

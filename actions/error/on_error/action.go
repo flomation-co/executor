@@ -1,4 +1,4 @@
-package trigger_on_error
+package error_on_error
 
 import (
 	core "flomation.app/automate/executor"
@@ -12,7 +12,7 @@ const (
 	Website      = "https://www.flomation.co"
 	Icon         = "triangle-exclamation"
 	Date         = "25/03/2026"
-	Type         = core.ActionTypeTrigger
+	Type         = core.ActionTypeAction
 )
 
 var Inputs = [...]core.Connection{}
