@@ -231,6 +231,7 @@ type Flow struct {
 	nodeResults          map[string]map[string]interface{}
 	nodeExecutionResults map[string]*ExecutionNodeResult
 	outputs              map[string]interface{}
+	variables            map[string]interface{}
 	entryNodeID          string
 	context              *ExecutionContext
 }
@@ -487,6 +488,17 @@ func (f *Flow) ExecuteNode(actions map[string]Action, node *Node, environment *e
 							"name": name,
 						}).Warn("no execution context for flow variable substitution")
 					}
+				} else if strings.HasPrefix(m, "var.") {
+					name := strings.TrimPrefix(m, "var.")
+					if f.variables != nil {
+						if varVal, ok := f.variables[name]; ok {
+							*val = strings.ReplaceAll(*val, "${"+m+"}", fmt.Sprintf("%v", varVal))
+						} else {
+							log.WithFields(log.Fields{
+								"name": name,
+							}).Warn("unknown flow variable")
+						}
+					}
 				} else if strings.HasPrefix(m, "secrets.") || strings.HasPrefix(m, "secret.") {
 					if environment == nil {
 						log.WithFields(log.Fields{
@@ -694,6 +706,25 @@ func (f *Flow) GetOutput(name string) interface{} {
 
 func (f *Flow) GetOutputs() map[string]interface{} {
 	return f.outputs
+}
+
+func (f *Flow) SetVariable(name string, value interface{}) {
+	if f.variables == nil {
+		f.variables = make(map[string]interface{})
+	}
+	f.variables[name] = value
+}
+
+func (f *Flow) GetVariable(name string) (interface{}, bool) {
+	if f.variables == nil {
+		return nil, false
+	}
+	v, ok := f.variables[name]
+	return v, ok
+}
+
+func (f *Flow) GetVariables() map[string]interface{} {
+	return f.variables
 }
 
 // secretPattern matches ${secrets.X} and ${secret.X} variable references.

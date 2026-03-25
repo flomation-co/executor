@@ -18,6 +18,7 @@ import (
 	common_data_combine "flomation.app/automate/executor/actions/common/data_combine"
 	common_data_extract "flomation.app/automate/executor/actions/common/data_extract"
 	common_data_rename "flomation.app/automate/executor/actions/common/data_rename"
+	common_set_variable "flomation.app/automate/executor/actions/common/set_variable"
 	common_smtp "flomation.app/automate/executor/actions/common/smtp"
 	conditional_if "flomation.app/automate/executor/actions/conditional/if"
 	file_read "flomation.app/automate/executor/actions/file/read"
@@ -67,6 +68,7 @@ var Actions = map[string]core.Action{
 	"common/data_combine":       common_data_combine.Execute,
 	"common/data_extract":       common_data_extract.Execute,
 	"common/data_rename":        common_data_rename.Execute,
+	"common/set_variable":       common_set_variable.Execute,
 	"common/smtp":               common_smtp.Execute,
 	"conditional/if":            conditional_if.Execute,
 	"file/read":                 file_read.Execute,
