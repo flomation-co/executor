@@ -17,7 +17,7 @@ const (
 	Author       = "Andy Esser"
 	Organisation = "Flomation"
 	Name         = "Run Bash Script"
-	Description  = "Execute a Bash script in a sandboxed temporary directory"
+	Description  = "Execute a Bash script in the current working directory"
 	Website      = "https://www.flomation.co"
 	Icon         = "terminal"
 	Date         = "23/03/2026"
@@ -43,10 +43,9 @@ var Inputs = [...]core.Connection{
 		Placeholder: "60",
 	},
 	{
-		Name:        "working_directory",
-		Type:        core.ConnectionTypeString,
-		Label:       "Working Directory",
-		Placeholder: "Leave empty for a fresh temporary directory",
+		Name:  "sandboxed",
+		Type:  core.ConnectionTypeBoolean,
+		Label: "Run in Sandboxed Directory",
 	},
 }
 
@@ -94,34 +93,25 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	}
 
 	// 3. Determine working directory
+	sandboxed := false
+	if sc := core.FindConnection("sandboxed", inputs); sc != nil && sc.String() != nil {
+		sandboxed = *sc.String() == "true"
+	}
+
 	var workDir string
-	var cleanupDir bool
-
-	if wdc := core.FindConnection("working_directory", inputs); wdc != nil && wdc.String() != nil && *wdc.String() != "" {
-		rawDir := *wdc.String()
-
-		// Reject path traversal before cleaning
-		if strings.Contains(rawDir, "..") {
-			return nil, fmt.Errorf("working directory must not contain path traversal")
-		}
-
-		workDir = filepath.Clean(rawDir)
-
-		info, err := os.Stat(workDir)
-		if err != nil || !info.IsDir() {
-			return nil, fmt.Errorf("working directory does not exist: %s", workDir)
-		}
-	} else {
+	if sandboxed {
 		tmpDir, err := os.MkdirTemp("", "flomation-bash-*")
 		if err != nil {
 			return nil, fmt.Errorf("failed to create temporary directory: %w", err)
 		}
 		workDir = tmpDir
-		cleanupDir = true
-	}
-
-	if cleanupDir {
 		defer os.RemoveAll(workDir)
+	} else {
+		cwd, err := os.Getwd()
+		if err != nil {
+			return nil, fmt.Errorf("failed to get working directory: %w", err)
+		}
+		workDir = cwd
 	}
 
 	// 4. Write script to temp file
