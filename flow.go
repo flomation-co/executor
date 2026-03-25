@@ -55,6 +55,14 @@ type ConnectionOption struct {
 	Value string `json:"value"`
 }
 
+// VisibleWhen controls conditional visibility of an input based on
+// the value of another input. The input is only shown (and validated)
+// when the referenced field has one of the specified values.
+type VisibleWhen struct {
+	Field  string   `json:"field"`
+	Values []string `json:"values"`
+}
+
 type Connection struct {
 	Name        string             `json:"name"`
 	Type        string             `json:"type"`
@@ -63,6 +71,7 @@ type Connection struct {
 	Placeholder string             `json:"placeholder"`
 	Required    bool               `json:"required,omitempty"`
 	Options     []ConnectionOption `json:"options,omitempty"`
+	Visible     *VisibleWhen       `json:"visible_when,omitempty"`
 }
 
 func (c *Connection) String() *string {

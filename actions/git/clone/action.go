@@ -1,11 +1,13 @@
 package git_clone
 
 import (
+	"io/fs"
 	"os"
+	"path/filepath"
 
 	core "flomation.app/automate/executor"
+	git_common "flomation.app/automate/executor/actions/git"
 	"github.com/go-git/go-git/v6"
-	"github.com/go-git/go-git/v6/plumbing/transport/ssh"
 )
 
 const (
@@ -27,47 +29,46 @@ var Inputs = [...]core.Connection{
 		Placeholder: "",
 		Required:    true,
 	},
-	{
-		Name:        "ssh_key",
-		Type:        core.ConnectionTypeText,
-		Label:       "SSH Private Key",
-		Placeholder: "",
-	},
+	git_common.AuthInputs[0], // auth_method
+	git_common.AuthInputs[1], // ssh_key
+	git_common.AuthInputs[2], // username
+	git_common.AuthInputs[3], // password
 }
 
 var Outputs = [...]core.Connection{
 	{
-		Name: "repository_path",
-		Type: core.ConnectionTypeString,
+		Name:  "repository_path",
+		Type:  core.ConnectionTypeString,
+		Label: "Repository Path",
 	},
 	{
-		Name: "branch",
-		Type: core.ConnectionTypeString,
+		Name:  "branch",
+		Type:  core.ConnectionTypeString,
+		Label: "Branch",
 	},
 }
 
 func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[string]interface{}, error) {
 	repository := core.FindConnection("repository_url", inputs)
-	sshKey := core.FindConnection("ssh_key", inputs)
 
-	f, err := os.MkdirTemp(".", "")
+	auth, err := git_common.GetAuthFromInputs(inputs)
 	if err != nil {
 		return nil, err
 	}
 
+	// Clone into a temp directory then move contents into the execution directory
+	tmpDir, err := os.MkdirTemp("", "flomation-clone-*")
+	if err != nil {
+		return nil, err
+	}
+	defer os.RemoveAll(tmpDir)
+
 	cloneOpts := &git.CloneOptions{
-		URL: *repository.String(),
+		URL:  *repository.String(),
+		Auth: auth,
 	}
 
-	if sshKey != nil && sshKey.String() != nil && *sshKey.String() != "" {
-		pk, err := ssh.NewPublicKeys("git", []byte(*sshKey.String()), "")
-		if err != nil {
-			return nil, err
-		}
-		cloneOpts.Auth = pk
-	}
-
-	repo, err := git.PlainClone(f, cloneOpts)
+	repo, err := git.PlainClone(tmpDir, cloneOpts)
 	if err != nil {
 		return nil, err
 	}
@@ -78,8 +79,35 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 		branch = head.Name().Short()
 	}
 
+	// Move all cloned files into the current working directory
+	cwd, err := os.Getwd()
+	if err != nil {
+		return nil, err
+	}
+
+	err = filepath.WalkDir(tmpDir, func(path string, d fs.DirEntry, walkErr error) error {
+		if walkErr != nil {
+			return walkErr
+		}
+		rel, err := filepath.Rel(tmpDir, path)
+		if err != nil {
+			return err
+		}
+		if rel == "." {
+			return nil
+		}
+		dest := filepath.Join(cwd, rel)
+		if d.IsDir() {
+			return os.MkdirAll(dest, 0755)
+		}
+		return os.Rename(path, dest)
+	})
+	if err != nil {
+		return nil, err
+	}
+
 	return map[string]interface{}{
-		"repository_path": f,
+		"repository_path": cwd,
 		"branch":          branch,
 	}, nil
 }
