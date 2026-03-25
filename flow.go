@@ -581,6 +581,68 @@ func (f *Flow) ExecuteNode(actions map[string]Action, node *Node, environment *e
 		} else {
 			children = f.FindTargetByHandle(node.ID, "false-branch")
 		}
+	} else if node.Data.Config.Type == ActionTypeLoop {
+		// Loop execution: iterate body children, then execute output children
+		loopChildren := f.FindTargetByHandle(node.ID, "loop")
+		outputChildren := f.FindTargetByHandle(node.ID, "output")
+
+		maxIter := int64(1000)
+		if mi, ok := outputs["max_iterations"].(int64); ok && mi > 0 {
+			maxIter = mi
+		}
+
+		var iteration int64
+		for iteration = 0; iteration < maxIter; iteration++ {
+			// Re-evaluate the loop condition by re-executing the loop node's action
+			// On first iteration, use the already-computed outputs
+			if iteration > 0 {
+				// Clear the loop node's own cached result so it re-evaluates
+				delete(f.nodeResults, node.ID)
+				// Also clear parent results that might feed dynamic values
+				f.clearSubgraphResults(node.ID, "loop")
+
+				// Re-resolve inputs and re-execute the loop action
+				reOutputs, err := actions[node.Type](f, node, configuration)
+				if err != nil {
+					return nil, err
+				}
+				outputs = reOutputs
+				f.nodeResults[node.ID] = outputs
+			}
+
+			// Set loop context variables
+			f.SetVariable("loop.index", iteration)
+			f.SetVariable("loop.iteration", iteration+1)
+
+			result, ok := outputs["result"].(bool)
+			if !ok || !result {
+				break
+			}
+
+			// Execute loop body
+			for _, c := range loopChildren {
+				if c.Type != "" && strings.HasPrefix(c.Type, "trigger/") {
+					continue
+				}
+				_, err := f.ExecuteNode(actions, c, environment)
+				if err != nil {
+					// Store final iteration count before returning error
+					outputs["iterations"] = iteration + 1
+					f.nodeResults[node.ID] = outputs
+					return nil, err
+				}
+			}
+
+			// Clear loop body results for next iteration
+			f.clearSubgraphResults(node.ID, "loop")
+		}
+
+		// Store final iteration count
+		outputs["iterations"] = iteration
+		f.nodeResults[node.ID] = outputs
+
+		// Execute output-handle children (post-loop)
+		children = outputChildren
 	} else {
 		children = f.FindTarget(node.ID)
 	}
@@ -602,6 +664,26 @@ func (f *Flow) ExecuteNode(actions map[string]Action, node *Node, environment *e
 	}
 
 	return combinedResults, childErr
+}
+
+// clearSubgraphResults removes cached results for all nodes reachable from
+// the given source via the specified handle. This allows loop body nodes to
+// be re-executed on each iteration.
+func (f *Flow) clearSubgraphResults(source string, handle string) {
+	var targets []*Node
+	if handle != "" {
+		targets = f.FindTargetByHandle(source, handle)
+	} else {
+		targets = f.FindTarget(source)
+	}
+
+	for _, t := range targets {
+		if _, exists := f.nodeResults[t.ID]; exists {
+			delete(f.nodeResults, t.ID)
+			// Recurse into children of this node
+			f.clearSubgraphResults(t.ID, "")
+		}
+	}
 }
 
 func (f *Flow) FindSource(target string) []*Node {

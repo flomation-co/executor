@@ -20,7 +20,9 @@ import (
 	common_data_rename "flomation.app/automate/executor/actions/common/data_rename"
 	common_set_variable "flomation.app/automate/executor/actions/common/set_variable"
 	common_smtp "flomation.app/automate/executor/actions/common/smtp"
+	conditional_for "flomation.app/automate/executor/actions/conditional/for"
 	conditional_if "flomation.app/automate/executor/actions/conditional/if"
+	conditional_while "flomation.app/automate/executor/actions/conditional/while"
 	file_read "flomation.app/automate/executor/actions/file/read"
 	file_write "flomation.app/automate/executor/actions/file/write"
 	git_add "flomation.app/automate/executor/actions/git/add"
@@ -70,7 +72,9 @@ var Actions = map[string]core.Action{
 	"common/data_rename":        common_data_rename.Execute,
 	"common/set_variable":       common_set_variable.Execute,
 	"common/smtp":               common_smtp.Execute,
+	"conditional/for":           conditional_for.Execute,
 	"conditional/if":            conditional_if.Execute,
+	"conditional/while":         conditional_while.Execute,
 	"file/read":                 file_read.Execute,
 	"file/write":                file_write.Execute,
 	"git/add":                   git_add.Execute,
