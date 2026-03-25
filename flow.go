@@ -686,9 +686,12 @@ func (f *Flow) ExecuteNode(actions map[string]Action, node *Node, environment *e
 				f.nodeResults[node.ID] = outputs
 			}
 
-			// Set loop context variables
+			// Set loop context variables and update outputs
 			f.SetVariable("loop.index", iteration)
 			f.SetVariable("loop.iteration", iteration+1)
+			outputs["current_index"] = iteration
+			outputs["iterations"] = iteration
+			f.nodeResults[node.ID] = outputs
 
 			result, ok := outputs["result"].(bool)
 			if !ok || !result {

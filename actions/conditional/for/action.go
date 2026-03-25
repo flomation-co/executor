@@ -76,10 +76,20 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 		}
 	}
 
+	// Check current iteration from loop context variable
+	currentIndex := start
+	shouldContinue := count > 0
+	if loopIdx, ok := flow.GetVariable("loop.index"); ok {
+		if idx, ok := loopIdx.(int64); ok {
+			currentIndex = start + idx
+			shouldContinue = idx < count
+		}
+	}
+
 	return map[string]interface{}{
-		"result":         count > 0,
+		"result":         shouldContinue,
 		"iterations":     count,
 		"max_iterations": count,
-		"current_index":  start,
+		"current_index":  currentIndex,
 	}, nil
 }
