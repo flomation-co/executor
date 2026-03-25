@@ -7,10 +7,16 @@ import (
 )
 
 func GetRepository(repositoryPath string) (*git.Repository, error) {
+	if repositoryPath == "" {
+		repositoryPath = "."
+	}
 	return git.PlainOpen(repositoryPath)
 }
 
 func GetRepositoryAndWorktree(repositoryPath string) (*git.Repository, *git.Worktree, error) {
+	if repositoryPath == "" {
+		repositoryPath = "."
+	}
 	r, err := git.PlainOpen(repositoryPath)
 	if err != nil {
 		return nil, nil, err
@@ -25,6 +31,9 @@ func GetRepositoryAndWorktree(repositoryPath string) (*git.Repository, *git.Work
 }
 
 func GetWorktree(repositoryPath string) (*git.Worktree, error) {
+	if repositoryPath == "" {
+		repositoryPath = "."
+	}
 	r, err := git.PlainOpen(repositoryPath)
 	if err != nil {
 		return nil, err

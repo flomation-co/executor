@@ -10,6 +10,15 @@ import (
 	. "github.com/onsi/gomega"
 )
 
+func chdir(t *testing.T, dir string) {
+	t.Helper()
+	orig, _ := os.Getwd()
+	if err := os.Chdir(dir); err != nil {
+		t.Fatalf("failed to chdir: %v", err)
+	}
+	t.Cleanup(func() { os.Chdir(orig) })
+}
+
 func conn(name, value string) *core.Connection {
 	return &core.Connection{Name: name, Type: core.ConnectionTypeString, Value: value}
 }
@@ -43,20 +52,17 @@ func initTestRepoWithCommit(t *testing.T) string {
 
 func Test_LightweightTag(t *testing.T) {
 	RegisterTestingT(t)
-
 	dir := initTestRepoWithCommit(t)
+	chdir(t, dir)
 
 	result, err := Execute(nil, nil, []*core.Connection{
-		conn("repository_path", dir),
 		conn("tag_name", "v1.0.0"),
 		textConn("message", ""),
 	})
 	Expect(err).To(BeNil())
-	Expect(result["repository_path"]).To(Equal(dir))
 	Expect(result["tag_name"]).To(Equal("v1.0.0"))
 
-	// Verify tag exists
-	r, _ := git.PlainOpen(dir)
+	r, _ := git.PlainOpen(".")
 	ref, err := r.Tag("v1.0.0")
 	Expect(err).To(BeNil())
 	Expect(ref).ToNot(BeNil())
@@ -64,20 +70,17 @@ func Test_LightweightTag(t *testing.T) {
 
 func Test_AnnotatedTag(t *testing.T) {
 	RegisterTestingT(t)
-
 	dir := initTestRepoWithCommit(t)
+	chdir(t, dir)
 
 	result, err := Execute(nil, nil, []*core.Connection{
-		conn("repository_path", dir),
 		conn("tag_name", "v2.0.0"),
 		textConn("message", "Release version 2.0.0"),
 	})
 	Expect(err).To(BeNil())
-	Expect(result["repository_path"]).To(Equal(dir))
 	Expect(result["tag_name"]).To(Equal("v2.0.0"))
 
-	// Verify tag exists
-	r, _ := git.PlainOpen(dir)
+	r, _ := git.PlainOpen(".")
 	ref, err := r.Tag("v2.0.0")
 	Expect(err).To(BeNil())
 	Expect(ref).ToNot(BeNil())
@@ -85,9 +88,10 @@ func Test_AnnotatedTag(t *testing.T) {
 
 func Test_Tag_InvalidRepo(t *testing.T) {
 	RegisterTestingT(t)
+	dir := t.TempDir()
+	chdir(t, dir)
 
 	_, err := Execute(nil, nil, []*core.Connection{
-		conn("repository_path", "/nonexistent/path"),
 		conn("tag_name", "v1.0.0"),
 		textConn("message", ""),
 	})

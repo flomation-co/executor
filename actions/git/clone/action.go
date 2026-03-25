@@ -1,8 +1,6 @@
 package git_clone
 
 import (
-	"os"
-
 	core "flomation.app/automate/executor"
 	"github.com/go-git/go-git/v6"
 	"github.com/go-git/go-git/v6/plumbing/transport/ssh"
@@ -37,10 +35,6 @@ var Inputs = [...]core.Connection{
 
 var Outputs = [...]core.Connection{
 	{
-		Name: "repository_path",
-		Type: core.ConnectionTypeString,
-	},
-	{
 		Name: "branch",
 		Type: core.ConnectionTypeString,
 	},
@@ -49,11 +43,6 @@ var Outputs = [...]core.Connection{
 func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[string]interface{}, error) {
 	repository := core.FindConnection("repository_url", inputs)
 	sshKey := core.FindConnection("ssh_key", inputs)
-
-	f, err := os.MkdirTemp(".", "")
-	if err != nil {
-		return nil, err
-	}
 
 	cloneOpts := &git.CloneOptions{
 		URL: *repository.String(),
@@ -67,7 +56,7 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 		cloneOpts.Auth = pk
 	}
 
-	repo, err := git.PlainClone(f, cloneOpts)
+	repo, err := git.PlainClone(".", cloneOpts)
 	if err != nil {
 		return nil, err
 	}
@@ -79,7 +68,6 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	}
 
 	return map[string]interface{}{
-		"repository_path": f,
-		"branch":          branch,
+		"branch": branch,
 	}, nil
 }
