@@ -18,10 +18,38 @@ const (
 )
 
 var Inputs = [...]core.Connection{
-	git_common.AuthInputs[0], // auth_method
-	git_common.AuthInputs[1], // ssh_key
-	git_common.AuthInputs[2], // username
-	git_common.AuthInputs[3], // password
+	{
+		Name:  "auth_method",
+		Type:  core.ConnectionTypeString,
+		Label: "Authentication",
+		Options: []core.ConnectionOption{
+			{Name: "Anonymous", Value: "anonymous"},
+			{Name: "SSH Key", Value: "ssh"},
+			{Name: "HTTP (Username/Password)", Value: "http"},
+			{Name: "Token", Value: "token"},
+		},
+	},
+	{
+		Name:     "ssh_key",
+		Type:     core.ConnectionTypeText,
+		Label:    "SSH Private Key",
+		Required: true,
+		Visible:  &core.VisibleWhen{Field: "auth_method", Values: []string{"ssh"}},
+	},
+	{
+		Name:     "username",
+		Type:     core.ConnectionTypeString,
+		Label:    "Username",
+		Required: true,
+		Visible:  &core.VisibleWhen{Field: "auth_method", Values: []string{"http"}},
+	},
+	{
+		Name:     "password",
+		Type:     core.ConnectionTypeString,
+		Label:    "Password / Token",
+		Required: true,
+		Visible:  &core.VisibleWhen{Field: "auth_method", Values: []string{"http", "token"}},
+	},
 	{
 		Name:        "remote_name",
 		Type:        core.ConnectionTypeString,

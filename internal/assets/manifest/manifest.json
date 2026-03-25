@@ -1171,6 +1171,53 @@
       }
     ]
   },
+  "error/on_error": {
+    "hash": "2993955f40a587683fef31cd5032d2fbad2c5cba1daa035f4dc1d412216d0d97",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "On Error",
+    "description": "Executes when a flow error occurs",
+    "website": "https://www.flomation.co",
+    "icon": "triangle-exclamation",
+    "date": "25/03/2026",
+    "type": 2,
+    "category": {
+      "name": "Error Handling",
+      "icon": "triangle-exclamation",
+      "description": "Handle and recover from flow errors"
+    },
+    "inputs": null,
+    "outputs": [
+      {
+        "name": "error_message",
+        "type": "string",
+        "value": null,
+        "label": "Error Message",
+        "placeholder": ""
+      },
+      {
+        "name": "error_node_id",
+        "type": "string",
+        "value": null,
+        "label": "Failed Node ID",
+        "placeholder": ""
+      },
+      {
+        "name": "error_node_label",
+        "type": "string",
+        "value": null,
+        "label": "Failed Node Label",
+        "placeholder": ""
+      },
+      {
+        "name": "error_node_type",
+        "type": "string",
+        "value": null,
+        "label": "Failed Node Type",
+        "placeholder": ""
+      }
+    ]
+  },
   "file/read": {
     "hash": "228ea63998a0a44bed1c1cd697dae4d8e8b55d558545f746794a71b9fd235dbd",
     "author": "Andy Esser",
@@ -1418,7 +1465,7 @@
     ]
   },
   "git/clone": {
-    "hash": "fc6108112e6a5cfe50b1ffab148ea8034b65df533daf26a28027b011f802d94d",
+    "hash": "ed1f6ebd8058ec801d2ea52dcd755faf4886e10ec478b0c4af3ea9ed1e6bf202",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Git Clone",
@@ -1440,13 +1487,6 @@
         "label": "Repository URL",
         "placeholder": "",
         "required": true
-      },
-      {
-        "name": "ssh_key",
-        "type": "text",
-        "value": null,
-        "label": "SSH Private Key",
-        "placeholder": ""
       }
     ],
     "outputs": [
@@ -1454,14 +1494,14 @@
         "name": "repository_path",
         "type": "string",
         "value": null,
-        "label": "",
+        "label": "Repository Path",
         "placeholder": ""
       },
       {
         "name": "branch",
         "type": "string",
         "value": null,
-        "label": "",
+        "label": "Branch",
         "placeholder": ""
       }
     ]
@@ -1533,11 +1573,11 @@
     ]
   },
   "git/pull": {
-    "hash": "ad16e0474a509d9d10076298a9281b20395d35ad8db2cdb7a6ff05141cae4b47",
+    "hash": "45a69b3cbf8965845c0072f101ab391abc26e7b999951c447590513168834212",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Git Pull",
-    "description": "Git Actions",
+    "description": "Pull latest changes from a remote",
     "website": "https://www.flomation.co",
     "icon": "code-branch",
     "date": "06/03/2026",
@@ -1548,21 +1588,6 @@
       "description": "Version control operations"
     },
     "inputs": [
-      {
-        "name": "repository_path",
-        "type": "string",
-        "value": null,
-        "label": "Repository Path",
-        "placeholder": "",
-        "required": true
-      },
-      {
-        "name": "ssh_key",
-        "type": "text",
-        "value": null,
-        "label": "SSH Private Key",
-        "placeholder": ""
-      },
       {
         "name": "remote_name",
         "type": "string",
@@ -1580,16 +1605,16 @@
     ],
     "outputs": [
       {
-        "name": "repository_path",
-        "type": "string",
+        "name": "success",
+        "type": "boolean",
         "value": null,
-        "label": "",
+        "label": "Success",
         "placeholder": ""
       }
     ]
   },
   "git/push": {
-    "hash": "ead408f183c2eced27c03e3a914b43eceb5be106b3d5eb95efaafc847345e2f1",
+    "hash": "cdb439ebe0cb2fd67040b9b0d67107050814cd6f8ab8bf40c7bef961ae9a7b6e",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Git Push",
@@ -1605,21 +1630,6 @@
     },
     "inputs": [
       {
-        "name": "repository_path",
-        "type": "string",
-        "value": null,
-        "label": "Repository Path",
-        "placeholder": "",
-        "required": true
-      },
-      {
-        "name": "ssh_key",
-        "type": "text",
-        "value": null,
-        "label": "SSH Private Key",
-        "placeholder": ""
-      },
-      {
         "name": "remote_name",
         "type": "string",
         "value": null,
@@ -1629,10 +1639,10 @@
     ],
     "outputs": [
       {
-        "name": "repository_path",
-        "type": "string",
+        "name": "success",
+        "type": "boolean",
         "value": null,
-        "label": "",
+        "label": "Success",
         "placeholder": ""
       }
     ]
@@ -2928,53 +2938,6 @@
         "type": "string",
         "value": null,
         "label": "Quote",
-        "placeholder": ""
-      }
-    ]
-  },
-  "trigger/on_error": {
-    "hash": "d451d4514eabc2593338bedebdad8dd4ce0e19a7bfa3c9effc01ac98a7612ca9",
-    "author": "Andy Esser",
-    "organisation": "Flomation",
-    "name": "On Error",
-    "description": "Executes when a flow error occurs",
-    "website": "https://www.flomation.co",
-    "icon": "triangle-exclamation",
-    "date": "25/03/2026",
-    "type": 1,
-    "category": {
-      "name": "Triggers",
-      "icon": "bolt-lightning",
-      "description": "Start a Flow"
-    },
-    "inputs": null,
-    "outputs": [
-      {
-        "name": "error_message",
-        "type": "string",
-        "value": null,
-        "label": "Error Message",
-        "placeholder": ""
-      },
-      {
-        "name": "error_node_id",
-        "type": "string",
-        "value": null,
-        "label": "Failed Node ID",
-        "placeholder": ""
-      },
-      {
-        "name": "error_node_label",
-        "type": "string",
-        "value": null,
-        "label": "Failed Node Label",
-        "placeholder": ""
-      },
-      {
-        "name": "error_node_type",
-        "type": "string",
-        "value": null,
-        "label": "Failed Node Type",
         "placeholder": ""
       }
     ]
