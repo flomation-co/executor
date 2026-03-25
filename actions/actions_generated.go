@@ -18,8 +18,13 @@ import (
 	common_data_combine "flomation.app/automate/executor/actions/common/data_combine"
 	common_data_extract "flomation.app/automate/executor/actions/common/data_extract"
 	common_data_rename "flomation.app/automate/executor/actions/common/data_rename"
+	common_set_variable "flomation.app/automate/executor/actions/common/set_variable"
 	common_smtp "flomation.app/automate/executor/actions/common/smtp"
+	common_start_flow "flomation.app/automate/executor/actions/common/start_flow"
+	conditional_for "flomation.app/automate/executor/actions/conditional/for"
 	conditional_if "flomation.app/automate/executor/actions/conditional/if"
+	conditional_while "flomation.app/automate/executor/actions/conditional/while"
+	error_on_error "flomation.app/automate/executor/actions/error/on_error"
 	file_read "flomation.app/automate/executor/actions/file/read"
 	file_write "flomation.app/automate/executor/actions/file/write"
 	git_add "flomation.app/automate/executor/actions/git/add"
@@ -36,6 +41,7 @@ import (
 	nosql_redis "flomation.app/automate/executor/actions/nosql/redis"
 	output_discord_webhook "flomation.app/automate/executor/actions/output/discord_webhook"
 	output_set "flomation.app/automate/executor/actions/output/set"
+	output_set_outputs "flomation.app/automate/executor/actions/output/set_outputs"
 	output_slack_webhook "flomation.app/automate/executor/actions/output/slack_webhook"
 	script_bash "flomation.app/automate/executor/actions/script/bash"
 	security_antivirus "flomation.app/automate/executor/actions/security/antivirus"
@@ -66,8 +72,13 @@ var Actions = map[string]core.Action{
 	"common/data_combine":       common_data_combine.Execute,
 	"common/data_extract":       common_data_extract.Execute,
 	"common/data_rename":        common_data_rename.Execute,
+	"common/set_variable":       common_set_variable.Execute,
 	"common/smtp":               common_smtp.Execute,
+	"common/start_flow":         common_start_flow.Execute,
+	"conditional/for":           conditional_for.Execute,
 	"conditional/if":            conditional_if.Execute,
+	"conditional/while":         conditional_while.Execute,
+	"error/on_error":            error_on_error.Execute,
 	"file/read":                 file_read.Execute,
 	"file/write":                file_write.Execute,
 	"git/add":                   git_add.Execute,
@@ -84,6 +95,7 @@ var Actions = map[string]core.Action{
 	"nosql/redis":               nosql_redis.Execute,
 	"output/discord_webhook":    output_discord_webhook.Execute,
 	"output/set":                output_set.Execute,
+	"output/set_outputs":        output_set_outputs.Execute,
 	"output/slack_webhook":      output_slack_webhook.Execute,
 	"script/bash":               script_bash.Execute,
 	"security/antivirus":        security_antivirus.Execute,
