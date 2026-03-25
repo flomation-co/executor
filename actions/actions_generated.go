@@ -36,6 +36,7 @@ import (
 	nosql_redis "flomation.app/automate/executor/actions/nosql/redis"
 	output_discord_webhook "flomation.app/automate/executor/actions/output/discord_webhook"
 	output_set "flomation.app/automate/executor/actions/output/set"
+	output_set_outputs "flomation.app/automate/executor/actions/output/set_outputs"
 	output_slack_webhook "flomation.app/automate/executor/actions/output/slack_webhook"
 	script_bash "flomation.app/automate/executor/actions/script/bash"
 	security_antivirus "flomation.app/automate/executor/actions/security/antivirus"
@@ -84,6 +85,7 @@ var Actions = map[string]core.Action{
 	"nosql/redis":               nosql_redis.Execute,
 	"output/discord_webhook":    output_discord_webhook.Execute,
 	"output/set":                output_set.Execute,
+	"output/set_outputs":        output_set_outputs.Execute,
 	"output/slack_webhook":      output_slack_webhook.Execute,
 	"script/bash":               script_bash.Execute,
 	"security/antivirus":        security_antivirus.Execute,

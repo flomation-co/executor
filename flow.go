@@ -692,6 +692,10 @@ func (f *Flow) GetOutput(name string) interface{} {
 	return f.outputs[name]
 }
 
+func (f *Flow) GetOutputs() map[string]interface{} {
+	return f.outputs
+}
+
 // secretPattern matches ${secrets.X} and ${secret.X} variable references.
 var secretPattern = regexp.MustCompile(`\$\{secrets?\.`)
 
