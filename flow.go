@@ -194,6 +194,13 @@ type ExecutionContext struct {
 	TriggerType    string `json:"trigger_type"`
 	AuthorEmail    string `json:"author_email"`
 	TriggererEmail string `json:"triggerer_email"`
+	APIURL         string `json:"api_url,omitempty"`
+	Token          string `json:"token,omitempty"`
+}
+
+// GetContext returns the full execution context.
+func (f *Flow) GetContext() *ExecutionContext {
+	return f.context
 }
 
 // Get returns the value of a named execution context field.
