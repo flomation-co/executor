@@ -19,13 +19,6 @@ const (
 
 var Inputs = [...]core.Connection{
 	{
-		Name:        "repository_path",
-		Type:        core.ConnectionTypeString,
-		Label:       "Repository Path",
-		Placeholder: "",
-		Required:    true,
-	},
-	{
 		Name:        "ssh_key",
 		Type:        core.ConnectionTypeText,
 		Label:       "SSH Private Key",
@@ -41,17 +34,21 @@ var Inputs = [...]core.Connection{
 
 var Outputs = [...]core.Connection{
 	{
-		Name: "repository_path",
-		Type: core.ConnectionTypeString,
+		Name: "success",
+		Type: core.ConnectionTypeBoolean,
+		Label: "Success",
 	},
 }
 
 func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[string]interface{}, error) {
-	repository := core.FindConnection("repository_path", inputs)
+	repoPath := ""
+	if repository := core.FindConnection("repository_path", inputs); repository != nil && repository.String() != nil {
+		repoPath = *repository.String()
+	}
 	sshKey := core.FindConnection("ssh_key", inputs)
 	remoteName := core.FindConnection("remote_name", inputs)
 
-	r, err := git_common.GetRepository(*repository.String())
+	r, err := git_common.GetRepository(repoPath)
 	if err != nil {
 		return nil, err
 	}
@@ -74,7 +71,5 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 		return nil, err
 	}
 
-	return map[string]interface{}{
-		"repository_path": *repository.String(),
-	}, nil
+	return map[string]interface{}{"success": true}, nil
 }

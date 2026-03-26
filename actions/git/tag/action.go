@@ -19,12 +19,6 @@ const (
 
 var Inputs = [...]core.Connection{
 	{
-		Name:        "repository_path",
-		Type:        core.ConnectionTypeString,
-		Label:       "Repository Path",
-		Placeholder: "",
-	},
-	{
 		Name:        "tag_name",
 		Type:        core.ConnectionTypeString,
 		Label:       "Tag Name",
@@ -40,21 +34,20 @@ var Inputs = [...]core.Connection{
 
 var Outputs = [...]core.Connection{
 	{
-		Name: "repository_path",
-		Type: core.ConnectionTypeString,
-	},
-	{
 		Name: "tag_name",
 		Type: core.ConnectionTypeString,
 	},
 }
 
 func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[string]interface{}, error) {
-	repository := core.FindConnection("repository_path", inputs)
+	repoPath := ""
+	if repository := core.FindConnection("repository_path", inputs); repository != nil && repository.String() != nil {
+		repoPath = *repository.String()
+	}
 	tagName := core.FindConnection("tag_name", inputs)
 	message := core.FindConnection("message", inputs)
 
-	r, err := git_common.GetRepository(*repository.String())
+	r, err := git_common.GetRepository(repoPath)
 	if err != nil {
 		return nil, err
 	}
@@ -77,7 +70,6 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	}
 
 	return map[string]interface{}{
-		"repository_path": *repository.String(),
-		"tag_name":        *tagName.String(),
+		"tag_name": *tagName.String(),
 	}, nil
 }
