@@ -140,7 +140,7 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	cmd.Dir = workDir
 	cmd.WaitDelay = 5 * time.Second
 	cmd.Env = []string{
-		"PATH=/usr/local/bin:/usr/bin:/bin",
+		"PATH=" + os.Getenv("PATH"),
 		"HOME=" + workDir,
 		"TMPDIR=" + workDir,
 		"LANG=en_GB.UTF-8",
