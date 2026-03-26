@@ -639,7 +639,7 @@ func (f *Flow) ExecuteNode(actions map[string]Action, node *Node, environment *e
 
 	if err != nil {
 		f.emitNodeEvent(node.ID, node.Type, node.Data.Label, "failed", durationMs, err.Error())
-		f.recordNodeResult(node, "failed", configuration, nil, durationMs, err.Error())
+		f.recordNodeResult(node, "failed", configuration, outputs, durationMs, err.Error())
 
 		log.WithFields(log.Fields{
 			"error": err,
