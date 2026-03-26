@@ -17,20 +17,9 @@ const (
 	Type         = core.ActionTypeAction
 )
 
-var Inputs = [...]core.Connection{
-	{
-		Name:        "repository_path",
-		Type:        core.ConnectionTypeString,
-		Label:       "Repository Path",
-		Placeholder: "",
-	},
-}
+var Inputs = [...]core.Connection{}
 
 var Outputs = [...]core.Connection{
-	{
-		Name: "repository_path",
-		Type: core.ConnectionTypeString,
-	},
 	{
 		Name: "is_clean",
 		Type: core.ConnectionTypeString,
@@ -42,9 +31,12 @@ var Outputs = [...]core.Connection{
 }
 
 func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[string]interface{}, error) {
-	repository := core.FindConnection("repository_path", inputs)
+	repoPath := ""
+	if repository := core.FindConnection("repository_path", inputs); repository != nil && repository.String() != nil {
+		repoPath = *repository.String()
+	}
 
-	w, err := git_common.GetWorktree(*repository.String())
+	w, err := git_common.GetWorktree(repoPath)
 	if err != nil {
 		return nil, err
 	}
@@ -55,8 +47,7 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	}
 
 	return map[string]interface{}{
-		"repository_path": *repository.String(),
-		"is_clean":        fmt.Sprintf("%t", s.IsClean()),
-		"status":          s.String(),
+		"is_clean": fmt.Sprintf("%t", s.IsClean()),
+		"status":   s.String(),
 	}, nil
 }

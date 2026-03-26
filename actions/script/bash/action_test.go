@@ -76,12 +76,13 @@ func Test_WorkingDirectory(t *testing.T) {
 	RegisterTestingT(t)
 
 	dir := t.TempDir()
-	// Resolve symlinks (macOS /var -> /private/var)
 	resolvedDir, _ := filepath.EvalSymlinks(dir)
+	orig, _ := os.Getwd()
+	os.Chdir(dir)
+	defer os.Chdir(orig)
 
 	result, err := Execute(nil, nil, []*core.Connection{
 		textConn("script", "pwd"),
-		strConn("working_directory", dir),
 	})
 	Expect(err).To(BeNil())
 	Expect(result["stdout"]).To(Equal(resolvedDir))
@@ -105,36 +106,14 @@ func Test_MissingScript(t *testing.T) {
 	Expect(err.Error()).To(ContainSubstring("script is required"))
 }
 
-func Test_InvalidWorkingDirectory(t *testing.T) {
-	RegisterTestingT(t)
-
-	_, err := Execute(nil, nil, []*core.Connection{
-		textConn("script", "echo test"),
-		strConn("working_directory", "/nonexistent/path/that/does/not/exist"),
-	})
-	Expect(err).ToNot(BeNil())
-	Expect(err.Error()).To(ContainSubstring("does not exist"))
-}
-
-func Test_PathTraversal(t *testing.T) {
-	RegisterTestingT(t)
-
-	_, err := Execute(nil, nil, []*core.Connection{
-		textConn("script", "echo test"),
-		strConn("working_directory", "/tmp/../etc"),
-	})
-	Expect(err).ToNot(BeNil())
-	Expect(err.Error()).To(ContainSubstring("path traversal"))
-}
-
-func Test_EnvironmentIsolation(t *testing.T) {
+func Test_SandboxedMode(t *testing.T) {
 	RegisterTestingT(t)
 
 	result, err := Execute(nil, nil, []*core.Connection{
 		textConn("script", "echo $HOME"),
+		strConn("sandboxed", "true"),
 	})
 	Expect(err).To(BeNil())
-	// HOME should be the temp dir, not the real home
 	home := result["stdout"].(string)
 	Expect(home).ToNot(Equal(os.Getenv("HOME")))
 	Expect(home).To(ContainSubstring("flomation-bash"))
@@ -144,16 +123,17 @@ func Test_ScriptCanWriteFiles(t *testing.T) {
 	RegisterTestingT(t)
 
 	dir := t.TempDir()
+	orig, _ := os.Getwd()
+	os.Chdir(dir)
+	defer os.Chdir(orig)
 
 	result, err := Execute(nil, nil, []*core.Connection{
 		textConn("script", "echo 'test content' > output.txt && cat output.txt"),
-		strConn("working_directory", dir),
 	})
 	Expect(err).To(BeNil())
 	Expect(result["stdout"]).To(Equal("test content"))
 	Expect(result["success"]).To(Equal(true))
 
-	// Verify the file was actually created
 	content, err := os.ReadFile(filepath.Join(dir, "output.txt"))
 	Expect(err).To(BeNil())
 	Expect(string(content)).To(ContainSubstring("test content"))

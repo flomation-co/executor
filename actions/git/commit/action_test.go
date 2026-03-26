@@ -10,6 +10,15 @@ import (
 	. "github.com/onsi/gomega"
 )
 
+func chdir(t *testing.T, dir string) {
+	t.Helper()
+	orig, _ := os.Getwd()
+	if err := os.Chdir(dir); err != nil {
+		t.Fatalf("failed to chdir: %v", err)
+	}
+	t.Cleanup(func() { os.Chdir(orig) })
+}
+
 func conn(name, value string) *core.Connection {
 	return &core.Connection{Name: name, Type: core.ConnectionTypeString, Value: value}
 }
@@ -43,34 +52,31 @@ func initTestRepoWithCommit(t *testing.T) string {
 
 func Test_Commit(t *testing.T) {
 	RegisterTestingT(t)
-
 	dir := initTestRepoWithCommit(t)
+	chdir(t, dir)
 
-	// Create and stage a file
-	err := os.WriteFile(filepath.Join(dir, "new.txt"), []byte("content"), 0644)
-	Expect(err).To(BeNil())
+	Expect(os.WriteFile("new.txt", []byte("content"), 0644)).To(Succeed())
 
-	r, _ := git.PlainOpen(dir)
+	r, _ := git.PlainOpen(".")
 	w, _ := r.Worktree()
-	_, err = w.Add("new.txt")
+	_, err := w.Add("new.txt")
 	Expect(err).To(BeNil())
 
 	result, err := Execute(nil, nil, []*core.Connection{
-		conn("repository_path", dir),
 		textConn("message", "Test commit message"),
 		conn("author_name", "Test Author"),
 		conn("author_email", "test@example.com"),
 	})
 	Expect(err).To(BeNil())
-	Expect(result["repository_path"]).To(Equal(dir))
 	Expect(result["commit_hash"]).ToNot(BeEmpty())
 }
 
 func Test_Commit_InvalidRepo(t *testing.T) {
 	RegisterTestingT(t)
+	dir := t.TempDir()
+	chdir(t, dir)
 
 	_, err := Execute(nil, nil, []*core.Connection{
-		conn("repository_path", "/nonexistent/path"),
 		textConn("message", "msg"),
 		conn("author_name", "name"),
 		conn("author_email", "email"),
