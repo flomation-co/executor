@@ -1,11 +1,15 @@
 package main
 
 import (
+	"context"
 	"encoding/json"
+	"errors"
 	"flag"
 	"fmt"
 	"os"
+	"os/signal"
 	"strings"
+	"syscall"
 	"time"
 
 	"flomation.app/automate/executor/internal/assets"
@@ -180,6 +184,21 @@ func main() {
 		}
 	}
 
+	// Set up cancellable context with SIGTERM/SIGINT handling
+	ctx, cancel := context.WithCancel(context.Background())
+	defer cancel()
+	flo.SetCancelContext(ctx, cancel)
+
+	sigCh := make(chan os.Signal, 1)
+	signal.Notify(sigCh, syscall.SIGTERM, syscall.SIGINT)
+	go func() {
+		sig := <-sigCh
+		log.WithFields(log.Fields{
+			"signal": sig,
+		}).Info("Received signal, cancelling execution")
+		cancel()
+	}()
+
 	start := time.Now()
 	status := int64(0)
 
@@ -189,6 +208,9 @@ func main() {
 			"error": err,
 		}).Error("Error executing flow")
 		status = 1
+		if errors.Is(err, core.ErrCancelled) {
+			status = 2
+		}
 	}
 
 	duration := time.Since(start)

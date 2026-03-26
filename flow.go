@@ -1,6 +1,7 @@
 package core
 
 import (
+	gocontext "context"
 	"encoding/json"
 	"errors"
 	"fmt"
@@ -288,7 +289,12 @@ type Flow struct {
 	entryNodeID          string
 	inErrorChain         bool
 	context              *ExecutionContext
+	ctx                  gocontext.Context
+	cancel               gocontext.CancelFunc
 }
+
+// ErrCancelled is returned when a flow execution is cancelled.
+var ErrCancelled = errors.New("execution cancelled")
 
 // GetNodeExecutionResults returns the per-node execution results map.
 func (f *Flow) GetNodeExecutionResults() map[string]*ExecutionNodeResult {
@@ -298,6 +304,28 @@ func (f *Flow) GetNodeExecutionResults() map[string]*ExecutionNodeResult {
 // SetContext attaches execution metadata for ${flow.xxx} variable resolution.
 func (f *Flow) SetContext(ctx *ExecutionContext) {
 	f.context = ctx
+}
+
+// SetCancelContext attaches a cancellable Go context to the flow.
+// The flow checks this context between node executions and aborts if cancelled.
+func (f *Flow) SetCancelContext(ctx gocontext.Context, cancel gocontext.CancelFunc) {
+	f.ctx = ctx
+	f.cancel = cancel
+}
+
+// Cancel cancels the flow execution. Safe to call multiple times.
+func (f *Flow) Cancel() {
+	if f.cancel != nil {
+		f.cancel()
+	}
+}
+
+// Context returns the flow's Go context, or context.Background() if none set.
+func (f *Flow) GoContext() gocontext.Context {
+	if f.ctx != nil {
+		return f.ctx
+	}
+	return gocontext.Background()
 }
 
 // ExecutionNodeResult captures per-node execution metadata including
@@ -518,6 +546,17 @@ func (f *Flow) executeNodeActionOnly(actions map[string]Action, node *Node, envi
 
 	if node == nil || node.Data == nil {
 		return nil, ErrInvalidNode
+	}
+
+	// Check for cancellation before executing
+	if f.ctx != nil {
+		select {
+		case <-f.ctx.Done():
+			f.emitNodeEvent(node.ID, node.Type, node.Data.Label, "cancelled", 0, ErrCancelled.Error())
+			f.recordNodeResult(node, "cancelled", nil, nil, 0, ErrCancelled.Error())
+			return nil, ErrCancelled
+		default:
+		}
 	}
 
 	if v, exists := f.nodeResults[node.ID]; exists {

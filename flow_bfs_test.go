@@ -1,6 +1,7 @@
 package core
 
 import (
+	gocontext "context"
 	"fmt"
 	"sync"
 	"testing"
@@ -250,6 +251,65 @@ func TestSiblingErrorStopsExecution(t *testing.T) {
 	Expect(executionOrder).To(ContainElement("FAIL"))
 	Expect(executionOrder).ToNot(ContainElement("C"), "C should not execute after B failed")
 	Expect(executionOrder).ToNot(ContainElement("A1"), "A1 should not execute after B failed")
+}
+
+// TestCancellationStopsExecution verifies that cancelling the flow's context
+// prevents subsequent nodes from executing.
+func TestCancellationStopsExecution(t *testing.T) {
+	RegisterTestingT(t)
+
+	var mu sync.Mutex
+	var executionOrder []string
+
+	recordAction := func(name string) Action {
+		return func(flow *Flow, node *Node, inputs []*Connection) (map[string]interface{}, error) {
+			mu.Lock()
+			executionOrder = append(executionOrder, name)
+			mu.Unlock()
+			return map[string]interface{}{"node": name}, nil
+		}
+	}
+
+	// Action that cancels the flow after executing
+	cancellingAction := func(flow *Flow, node *Node, inputs []*Connection) (map[string]interface{}, error) {
+		mu.Lock()
+		executionOrder = append(executionOrder, "CANCEL")
+		mu.Unlock()
+		flow.Cancel()
+		return map[string]interface{}{"node": "cancel"}, nil
+	}
+
+	ctx, cancel := gocontext.WithCancel(gocontext.Background())
+	defer cancel()
+
+	f := &Flow{
+		Nodes: []*Node{
+			{ID: "trigger", Type: "trigger/manual", Data: &NodeData{Label: "trigger/manual", Config: NodeConfig{Type: ActionTypeTrigger}}},
+			{ID: "A", Type: "action/a", Data: &NodeData{Config: NodeConfig{Type: ActionTypeAction}}},
+			{ID: "B", Type: "action/b", Data: &NodeData{Config: NodeConfig{Type: ActionTypeAction}}},
+		},
+		Edges: []*Edge{
+			{ID: "e1", Source: "trigger", Target: "A"},
+			{ID: "e2", Source: "A", Target: "B"},
+		},
+		nodeResults: make(map[string]map[string]interface{}),
+		outputs:     make(map[string]interface{}),
+	}
+	f.SetCancelContext(ctx, cancel)
+
+	actions := map[string]Action{
+		"trigger/manual": recordAction("trigger"),
+		"action/a":       cancellingAction,
+		"action/b":       recordAction("B"),
+	}
+
+	_, err := f.ExecuteNode(actions, f.Nodes[0], nil)
+	Expect(err).To(Equal(ErrCancelled))
+
+	// Trigger and A (cancel) should have executed, but B should not
+	Expect(executionOrder).To(ContainElement("trigger"))
+	Expect(executionOrder).To(ContainElement("CANCEL"))
+	Expect(executionOrder).ToNot(ContainElement("B"))
 }
 
 func indexOf(slice []string, item string) int {
