@@ -47,6 +47,11 @@ var Inputs = [...]core.Connection{
 		Type:  core.ConnectionTypeBoolean,
 		Label: "Run in Sandboxed Directory",
 	},
+	{
+		Name:  "environment_variables",
+		Type:  core.ConnectionTypeKeyValueArray,
+		Label: "Environment Variables",
+	},
 }
 
 var Outputs = [...]core.Connection{
@@ -129,12 +134,22 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	cmd := exec.CommandContext(ctx, "/bin/bash", scriptPath)
 	cmd.Dir = workDir
 	cmd.WaitDelay = 5 * time.Second
-	cmd.Env = []string{
+	env := []string{
 		"PATH=" + os.Getenv("PATH"),
 		"HOME=" + workDir,
-		"TMPDIR=" + workDir,
 		"LANG=en_GB.UTF-8",
 	}
+
+	// 6b. Add user-defined environment variables
+	if envVars := core.FindConnection("environment_variables", inputs); envVars != nil {
+		for _, kv := range envVars.KeyValuePairs() {
+			if kv.Key != "" {
+				env = append(env, kv.Key+"="+kv.Value)
+			}
+		}
+	}
+
+	cmd.Env = env
 
 	var stdoutBuf, stderrBuf bytes.Buffer
 	cmd.Stdout = &stdoutBuf

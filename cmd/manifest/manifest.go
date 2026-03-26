@@ -277,6 +277,8 @@ func inspectPackage(dir string) map[string]ManifestEntry {
 										value = "boolean"
 									case "ConnectionTypeText":
 										value = "text"
+									case "ConnectionTypeKeyValueArray":
+										value = "key_value_array"
 									}
 								case *ast.Ident:
 									if v.Name == "true" {

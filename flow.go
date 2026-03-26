@@ -1,6 +1,7 @@
 package core
 
 import (
+	gocontext "context"
 	"encoding/json"
 	"errors"
 	"fmt"
@@ -32,11 +33,12 @@ var (
 )
 
 const (
-	ConnectionTypeString  = "string"
-	ConnectionTypeObject  = "object"
-	ConnectionTypeInteger = "integer"
-	ConnectionTypeBoolean = "boolean"
-	ConnectionTypeText    = "text"
+	ConnectionTypeString        = "string"
+	ConnectionTypeObject        = "object"
+	ConnectionTypeInteger       = "integer"
+	ConnectionTypeBoolean       = "boolean"
+	ConnectionTypeText          = "text"
+	ConnectionTypeKeyValueArray = "key_value_array"
 )
 
 type Action func(flow *Flow, node *Node, inputs []*Connection) (map[string]interface{}, error)
@@ -153,6 +155,42 @@ func (c *Connection) Boolean() *bool {
 	return &v
 }
 
+// KeyValuePair represents a single key-value pair from a key_value_array input.
+type KeyValuePair struct {
+	Key   string `json:"key"`
+	Value string `json:"value"`
+}
+
+// KeyValuePairs parses a key_value_array connection value into a slice of KeyValuePair.
+func (c *Connection) KeyValuePairs() []KeyValuePair {
+	if c == nil || c.Value == nil {
+		return nil
+	}
+
+	// Value is stored as a JSON string or already-parsed array
+	switch v := c.Value.(type) {
+	case string:
+		var pairs []KeyValuePair
+		if err := json.Unmarshal([]byte(v), &pairs); err != nil {
+			return nil
+		}
+		return pairs
+	case []interface{}:
+		var pairs []KeyValuePair
+		for _, item := range v {
+			if m, ok := item.(map[string]interface{}); ok {
+				pairs = append(pairs, KeyValuePair{
+					Key:   fmt.Sprintf("%v", m["key"]),
+					Value: fmt.Sprintf("%v", m["value"]),
+				})
+			}
+		}
+		return pairs
+	default:
+		return nil
+	}
+}
+
 func FindConnection(name string, connections []*Connection) *Connection {
 	for _, c := range connections {
 		if c.Name == name {
@@ -251,7 +289,12 @@ type Flow struct {
 	entryNodeID          string
 	inErrorChain         bool
 	context              *ExecutionContext
+	ctx                  gocontext.Context
+	cancel               gocontext.CancelFunc
 }
+
+// ErrCancelled is returned when a flow execution is cancelled.
+var ErrCancelled = errors.New("execution cancelled")
 
 // GetNodeExecutionResults returns the per-node execution results map.
 func (f *Flow) GetNodeExecutionResults() map[string]*ExecutionNodeResult {
@@ -261,6 +304,28 @@ func (f *Flow) GetNodeExecutionResults() map[string]*ExecutionNodeResult {
 // SetContext attaches execution metadata for ${flow.xxx} variable resolution.
 func (f *Flow) SetContext(ctx *ExecutionContext) {
 	f.context = ctx
+}
+
+// SetCancelContext attaches a cancellable Go context to the flow.
+// The flow checks this context between node executions and aborts if cancelled.
+func (f *Flow) SetCancelContext(ctx gocontext.Context, cancel gocontext.CancelFunc) {
+	f.ctx = ctx
+	f.cancel = cancel
+}
+
+// Cancel cancels the flow execution. Safe to call multiple times.
+func (f *Flow) Cancel() {
+	if f.cancel != nil {
+		f.cancel()
+	}
+}
+
+// Context returns the flow's Go context, or context.Background() if none set.
+func (f *Flow) GoContext() gocontext.Context {
+	if f.ctx != nil {
+		return f.ctx
+	}
+	return gocontext.Background()
 }
 
 // ExecutionNodeResult captures per-node execution metadata including
@@ -452,10 +517,46 @@ func (f *Flow) executeOnErrorChain(actions map[string]Action, flowErr error, env
 }
 
 func (f *Flow) ExecuteNode(actions map[string]Action, node *Node, environment *environment.Environment) (map[string]interface{}, error) {
+	if node == nil || node.Data == nil {
+		return nil, ErrInvalidNode
+	}
+
+	// If already fully processed (action + children), return cached result.
+	// This prevents re-entrant child traversal when a child's parent resolution
+	// calls ExecuteNode on this node again.
+	if v, exists := f.nodeResults[node.ID]; exists {
+		return v, nil
+	}
+
+	// Phase 1: execute this node's own action (resolve parents, substitute vars, run action, cache)
+	outputs, err := f.executeNodeActionOnly(actions, node, environment)
+	if err != nil {
+		return nil, err
+	}
+
+	// Phase 2: determine and execute children using breadth-first ordering
+	return f.executeNodeChildren(actions, node, outputs, environment)
+}
+
+// executeNodeActionOnly resolves parent inputs, performs variable substitution,
+// executes the node's action, and caches the result. It does NOT traverse
+// children — that is handled separately to enable breadth-first ordering.
+func (f *Flow) executeNodeActionOnly(actions map[string]Action, node *Node, environment *environment.Environment) (map[string]interface{}, error) {
 	var err error
 
 	if node == nil || node.Data == nil {
 		return nil, ErrInvalidNode
+	}
+
+	// Check for cancellation before executing
+	if f.ctx != nil {
+		select {
+		case <-f.ctx.Done():
+			f.emitNodeEvent(node.ID, node.Type, node.Data.Label, "cancelled", 0, ErrCancelled.Error())
+			f.recordNodeResult(node, "cancelled", nil, nil, 0, ErrCancelled.Error())
+			return nil, ErrCancelled
+		default:
+		}
 	}
 
 	if v, exists := f.nodeResults[node.ID]; exists {
@@ -637,9 +738,12 @@ func (f *Flow) ExecuteNode(actions map[string]Action, node *Node, environment *e
 	outputs, err := action(f, node, configuration)
 	durationMs := time.Since(startTime).Milliseconds()
 
+	// Build obfuscated input map for streaming and recording
+	inputMap := f.buildObfuscatedInputMap(node, configuration)
+
 	if err != nil {
-		f.emitNodeEvent(node.ID, node.Type, node.Data.Label, "failed", durationMs, err.Error())
-		f.recordNodeResult(node, "failed", configuration, nil, durationMs, err.Error())
+		f.emitNodeEvent(node.ID, node.Type, node.Data.Label, "failed", durationMs, err.Error(), inputMap, outputs)
+		f.recordNodeResult(node, "failed", configuration, outputs, durationMs, err.Error())
 
 		log.WithFields(log.Fields{
 			"error": err,
@@ -647,11 +751,16 @@ func (f *Flow) ExecuteNode(actions map[string]Action, node *Node, environment *e
 		return nil, err
 	}
 
-	f.emitNodeEvent(node.ID, node.Type, node.Data.Label, "success", durationMs, "")
+	f.emitNodeEvent(node.ID, node.Type, node.Data.Label, "success", durationMs, "", inputMap, outputs)
 	f.recordNodeResult(node, "success", configuration, outputs, durationMs, "")
 
 	f.nodeResults[node.ID] = outputs
+	return outputs, nil
+}
 
+// executeNodeChildren determines and executes the children of a node using
+// breadth-first ordering: all sibling actions execute before any subtrees.
+func (f *Flow) executeNodeChildren(actions map[string]Action, node *Node, outputs map[string]interface{}, environment *environment.Environment) (map[string]interface{}, error) {
 	combinedResults := make(map[string]interface{})
 
 	var children []*Node
@@ -671,6 +780,20 @@ func (f *Flow) ExecuteNode(actions map[string]Action, node *Node, environment *e
 		loopChildren := f.FindTargetByHandle(node.ID, "loop")
 		outputChildren := f.FindTargetByHandle(node.ID, "output")
 
+		action, exists := actions[node.Type]
+		if !exists {
+			action, exists = actions[node.Data.Label]
+		}
+
+		var configuration []*Connection
+		for _, v := range node.Data.Config.Inputs {
+			configuration = append(configuration, &Connection{
+				Name:  v.Name,
+				Type:  v.Type,
+				Value: v.Value,
+			})
+		}
+
 		maxIter := int64(1000)
 		if mi, ok := outputs["max_iterations"].(int64); ok && mi > 0 {
 			maxIter = mi
@@ -687,7 +810,7 @@ func (f *Flow) ExecuteNode(actions map[string]Action, node *Node, environment *e
 				f.clearSubgraphResults(node.ID, "loop")
 
 				// Re-resolve inputs and re-execute the loop action
-				reOutputs, err := actions[node.Type](f, node, configuration)
+				reOutputs, err := action(f, node, configuration)
 				if err != nil {
 					return nil, err
 				}
@@ -735,23 +858,41 @@ func (f *Flow) ExecuteNode(actions map[string]Action, node *Node, environment *e
 		children = f.FindTarget(node.ID)
 	}
 
-	var childErr error
+	// Filter out trigger nodes from children
+	var validChildren []*Node
 	for _, c := range children {
-		// Skip other trigger nodes — only the entry trigger should execute
 		if c.Type != "" && strings.HasPrefix(c.Type, "trigger/") {
 			continue
 		}
-		childResults, err := f.ExecuteNode(actions, c, environment)
-		if err != nil {
-			childErr = err
-		}
+		validChildren = append(validChildren, c)
+	}
 
+	// Breadth-first: execute all siblings' actions before traversing any subtrees.
+	// Pass 1: run each sibling's action only (no child traversal)
+	for _, c := range validChildren {
+		outputs, err := f.executeNodeActionOnly(actions, c, environment)
+		if err != nil {
+			return nil, err
+		}
+		// Include this child's own outputs in the combined results
+		for k, v := range outputs {
+			combinedResults[k] = v
+		}
+	}
+
+	// Pass 2: now traverse each sibling's children (parent results are cached from pass 1)
+	for _, c := range validChildren {
+		childOutputs := f.nodeResults[c.ID]
+		childResults, err := f.executeNodeChildren(actions, c, childOutputs, environment)
+		if err != nil {
+			return combinedResults, err
+		}
 		for k, v := range childResults {
 			combinedResults[k] = v
 		}
 	}
 
-	return combinedResults, childErr
+	return combinedResults, nil
 }
 
 // clearSubgraphResults removes cached results for all nodes reachable from
@@ -901,8 +1042,10 @@ func (f *Flow) GetVariables() map[string]interface{} {
 var secretPattern = regexp.MustCompile(`\$\{secrets?\.`)
 
 // emitNodeEvent writes a __NODE__: prefixed JSON line to stdout for the
-// runner and API SSE infrastructure to consume.
-func (f *Flow) emitNodeEvent(id, action, label, status string, durationMs int64, errMsg string) {
+// runner and API SSE infrastructure to consume. When inputs/outputs are
+// provided (on completion), they are included so the editor can show them
+// in real time without waiting for the full execution to finish.
+func (f *Flow) emitNodeEvent(id, action, label, status string, durationMs int64, errMsg string, inputs ...map[string]interface{}) {
 	evt := map[string]interface{}{
 		"id":     id,
 		"action": action,
@@ -915,22 +1058,22 @@ func (f *Flow) emitNodeEvent(id, action, label, status string, durationMs int64,
 	if errMsg != "" {
 		evt["error"] = errMsg
 	}
+	// inputs[0] = resolved inputs, inputs[1] = outputs (variadic to keep "running" calls simple)
+	if len(inputs) > 0 && inputs[0] != nil {
+		evt["inputs"] = inputs[0]
+	}
+	if len(inputs) > 1 && inputs[1] != nil {
+		evt["outputs"] = inputs[1]
+	}
 	b, _ := json.Marshal(evt)
 	fmt.Fprintf(os.Stdout, "__NODE__:%s\n", b)
 }
 
-// recordNodeResult stores an ExecutionNodeResult for the given node,
-// obfuscating any inputs whose original config values contain secret references.
-func (f *Flow) recordNodeResult(node *Node, status string, resolvedInputs []*Connection, outputs map[string]interface{}, durationMs int64, errMsg string) {
-	if f.nodeExecutionResults == nil {
-		f.nodeExecutionResults = make(map[string]*ExecutionNodeResult)
-	}
-
+// buildObfuscatedInputMap creates an input map with secret values masked.
+func (f *Flow) buildObfuscatedInputMap(node *Node, resolvedInputs []*Connection) map[string]interface{} {
 	inputMap := make(map[string]interface{})
 	for _, c := range resolvedInputs {
 		val := c.Value
-
-		// Check original config input for secret references to obfuscate
 		if node.Data != nil {
 			for _, orig := range node.Data.Config.Inputs {
 				if orig.Name == c.Name {
@@ -942,9 +1085,18 @@ func (f *Flow) recordNodeResult(node *Node, status string, resolvedInputs []*Con
 				}
 			}
 		}
-
 		inputMap[c.Name] = val
 	}
+	return inputMap
+}
+
+// recordNodeResult stores an ExecutionNodeResult for the given node.
+func (f *Flow) recordNodeResult(node *Node, status string, resolvedInputs []*Connection, outputs map[string]interface{}, durationMs int64, errMsg string) {
+	if f.nodeExecutionResults == nil {
+		f.nodeExecutionResults = make(map[string]*ExecutionNodeResult)
+	}
+
+	inputMap := f.buildObfuscatedInputMap(node, resolvedInputs)
 
 	nr := &ExecutionNodeResult{
 		ID:       node.ID,

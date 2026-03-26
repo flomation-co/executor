@@ -1339,7 +1339,7 @@
     ]
   },
   "git/add": {
-    "hash": "1fe6c30dc7105083c0186d2085af818165e2b9a08ddfc626e24e3c479c4f2bc5",
+    "hash": "ded6d4f88575756a715507a99b45369853c31dcb7762df01a7142606b2394f80",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Git Add",
@@ -1362,10 +1362,18 @@
         "placeholder": "."
       }
     ],
-    "outputs": null
+    "outputs": [
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      }
+    ]
   },
   "git/branch": {
-    "hash": "cb653e4f4f7d83a962c9c4ada1b042976e2850e7035b300f6650ed6bfcb27a6f",
+    "hash": "29e06b80871cd6b93591db937431c030349ed4ddd3c17ed07ee3dc261949e2d7",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Git Branch",
@@ -1388,10 +1396,18 @@
         "placeholder": ""
       }
     ],
-    "outputs": null
+    "outputs": [
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      }
+    ]
   },
   "git/checkout": {
-    "hash": "15e7724e0e29a82c11dbf91ab399c029f2c0c9e452a9ee6d903be92fc6e9a4c9",
+    "hash": "e0186dbf6876adb8940982cc803ea9fca3e95e5b9a1fbac01fda6a5cbc91681d",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Git Checkout",
@@ -1407,6 +1423,14 @@
     },
     "inputs": [
       {
+        "name": "repository_path",
+        "type": "string",
+        "value": null,
+        "label": "Repository Path",
+        "placeholder": "",
+        "required": true
+      },
+      {
         "name": "branch",
         "type": "string",
         "value": null,
@@ -1415,10 +1439,18 @@
         "required": true
       }
     ],
-    "outputs": null
+    "outputs": [
+      {
+        "name": "repository_path",
+        "type": "string",
+        "value": null,
+        "label": "",
+        "placeholder": ""
+      }
+    ]
   },
   "git/clone": {
-    "hash": "689565f3205eaada857a7ae90bd298ee2161295baf7047f50a3c10ead9bf697e",
+    "hash": "1b849dfc2f043e86f5865028753249ab5942d9881650145f8a167af2fada883a",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Git Clone",
@@ -1442,19 +1474,87 @@
         "required": true
       },
       {
+        "name": "auth_method",
+        "type": "string",
+        "value": null,
+        "label": "Authentication",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "Anonymous",
+            "value": "anonymous"
+          },
+          {
+            "name": "SSH Key",
+            "value": "ssh"
+          },
+          {
+            "name": "HTTP (Username/Password)",
+            "value": "http"
+          },
+          {
+            "name": "Token",
+            "value": "token"
+          }
+        ]
+      },
+      {
         "name": "ssh_key",
         "type": "text",
         "value": null,
         "label": "SSH Private Key",
-        "placeholder": ""
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "ssh"
+          ]
+        }
+      },
+      {
+        "name": "username",
+        "type": "string",
+        "value": null,
+        "label": "Username",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "http"
+          ]
+        }
+      },
+      {
+        "name": "password",
+        "type": "string",
+        "value": null,
+        "label": "Password / Token",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "http",
+            "token"
+          ]
+        }
       }
     ],
     "outputs": [
       {
+        "name": "repository_path",
+        "type": "string",
+        "value": null,
+        "label": "Repository Path",
+        "placeholder": ""
+      },
+      {
         "name": "branch",
         "type": "string",
         "value": null,
-        "label": "",
+        "label": "Branch",
         "placeholder": ""
       }
     ]
@@ -1511,11 +1611,11 @@
     ]
   },
   "git/pull": {
-    "hash": "9deadd589eb3d024cc94ad44bc5890da3e7323baa8f1ac74979b9607f431796e",
+    "hash": "c0b3ee578189fdc38a9ea37bfc92825f4a7c4fc40fa66c95d84ec0253ce66604",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Git Pull",
-    "description": "Git Actions",
+    "description": "Pull latest changes from a remote",
     "website": "https://www.flomation.co",
     "icon": "code-branch",
     "date": "06/03/2026",
@@ -1527,11 +1627,72 @@
     },
     "inputs": [
       {
+        "name": "auth_method",
+        "type": "string",
+        "value": null,
+        "label": "Authentication",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "Anonymous",
+            "value": "anonymous"
+          },
+          {
+            "name": "SSH Key",
+            "value": "ssh"
+          },
+          {
+            "name": "HTTP (Username/Password)",
+            "value": "http"
+          },
+          {
+            "name": "Token",
+            "value": "token"
+          }
+        ]
+      },
+      {
         "name": "ssh_key",
         "type": "text",
         "value": null,
         "label": "SSH Private Key",
-        "placeholder": ""
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "ssh"
+          ]
+        }
+      },
+      {
+        "name": "username",
+        "type": "string",
+        "value": null,
+        "label": "Username",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "http"
+          ]
+        }
+      },
+      {
+        "name": "password",
+        "type": "string",
+        "value": null,
+        "label": "Password / Token",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "http",
+            "token"
+          ]
+        }
       },
       {
         "name": "remote_name",
@@ -1548,10 +1709,18 @@
         "placeholder": ""
       }
     ],
-    "outputs": null
+    "outputs": [
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      }
+    ]
   },
   "git/push": {
-    "hash": "d9a3566a855caf6e225d46aa482fc52a8bc7209a54cb0721ebcc60f12df62711",
+    "hash": "0203d0801239fb258ed49742a92aa61ba13f4658423067f7fb62d621ae9b625b",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Git Push",
@@ -1567,11 +1736,72 @@
     },
     "inputs": [
       {
+        "name": "auth_method",
+        "type": "string",
+        "value": null,
+        "label": "Authentication",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "Anonymous",
+            "value": "anonymous"
+          },
+          {
+            "name": "SSH Key",
+            "value": "ssh"
+          },
+          {
+            "name": "HTTP (Username/Password)",
+            "value": "http"
+          },
+          {
+            "name": "Token",
+            "value": "token"
+          }
+        ]
+      },
+      {
         "name": "ssh_key",
         "type": "text",
         "value": null,
         "label": "SSH Private Key",
-        "placeholder": ""
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "ssh"
+          ]
+        }
+      },
+      {
+        "name": "username",
+        "type": "string",
+        "value": null,
+        "label": "Username",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "http"
+          ]
+        }
+      },
+      {
+        "name": "password",
+        "type": "string",
+        "value": null,
+        "label": "Password / Token",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "http",
+            "token"
+          ]
+        }
       },
       {
         "name": "remote_name",
@@ -1581,7 +1811,15 @@
         "placeholder": "origin"
       }
     ],
-    "outputs": null
+    "outputs": [
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      }
+    ]
   },
   "git/status": {
     "hash": "e1c65d6c47e74d7619c1e6adf7f4a9e8aa1f2b30793d9067b72d1e3f4181f7cd",
@@ -2208,11 +2446,11 @@
     ]
   },
   "script/bash": {
-    "hash": "3f6788759781675344a6ca0a2453982468871918b21ae68da9c3c936a712f84e",
+    "hash": "1ea54a634882c154022a6c645fda7efc4c90293e1092841694776a25c0474826",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Run Bash Script",
-    "description": "Execute a Bash script in a sandboxed temporary directory",
+    "description": "Execute a Bash script in the current working directory",
     "website": "https://www.flomation.co",
     "icon": "terminal",
     "date": "23/03/2026",
@@ -2239,11 +2477,18 @@
         "placeholder": "60"
       },
       {
-        "name": "working_directory",
-        "type": "string",
+        "name": "sandboxed",
+        "type": "boolean",
         "value": null,
-        "label": "Working Directory",
-        "placeholder": "Leave empty for a fresh temporary directory"
+        "label": "Run in Sandboxed Directory",
+        "placeholder": ""
+      },
+      {
+        "name": "environment_variables",
+        "type": "key_value_array",
+        "value": null,
+        "label": "Environment Variables",
+        "placeholder": ""
       }
     ],
     "outputs": [

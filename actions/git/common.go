@@ -86,9 +86,9 @@ func GetAuthFromInputs(inputs []*core.Connection) (transport.AuthMethod, error) 
 		if token == nil || token.String() == nil || *token.String() == "" {
 			return nil, fmt.Errorf("token is required for token authentication")
 		}
-		// Token auth uses BasicAuth with the token as password and a dummy username
+		// Use oauth2 as username — works with GitLab, GitHub, and Bitbucket tokens
 		return &githttp.BasicAuth{
-			Username: "x-token-auth",
+			Username: "oauth2",
 			Password: *token.String(),
 		}, nil
 
