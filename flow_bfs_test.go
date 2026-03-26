@@ -1,6 +1,7 @@
 package core
 
 import (
+	"fmt"
 	"sync"
 	"testing"
 
@@ -152,6 +153,103 @@ func TestBreadthFirstThreeChildren(t *testing.T) {
 	Expect(indexC).To(BeNumerically("<", indexA1), "C before A1")
 	Expect(indexC).To(BeNumerically("<", indexB1), "C before B1")
 	Expect(indexC).To(BeNumerically("<", indexC1), "C before C1")
+}
+
+// TestChildErrorPropagatesUpward verifies that when a child node fails,
+// the error propagates back to the caller rather than being swallowed.
+// Regression test: a bash script timeout was not terminating the execution.
+func TestChildErrorPropagatesUpward(t *testing.T) {
+	RegisterTestingT(t)
+
+	failAction := func(flow *Flow, node *Node, inputs []*Connection) (map[string]interface{}, error) {
+		return nil, fmt.Errorf("script exceeded timeout of 60 seconds")
+	}
+	okAction := func(flow *Flow, node *Node, inputs []*Connection) (map[string]interface{}, error) {
+		return map[string]interface{}{"ok": true}, nil
+	}
+
+	f := &Flow{
+		Nodes: []*Node{
+			{ID: "trigger", Type: "trigger/manual", Data: &NodeData{Label: "trigger/manual", Config: NodeConfig{Type: ActionTypeTrigger}}},
+			{ID: "fail-node", Type: "action/fail", Data: &NodeData{Config: NodeConfig{Type: ActionTypeAction}}},
+			{ID: "after-fail", Type: "action/ok", Data: &NodeData{Config: NodeConfig{Type: ActionTypeAction}}},
+		},
+		Edges: []*Edge{
+			{ID: "e1", Source: "trigger", Target: "fail-node"},
+			{ID: "e2", Source: "fail-node", Target: "after-fail"},
+		},
+		nodeResults: make(map[string]map[string]interface{}),
+		outputs:     make(map[string]interface{}),
+	}
+
+	actions := map[string]Action{
+		"trigger/manual": okAction,
+		"action/fail":    failAction,
+		"action/ok":      okAction,
+	}
+
+	_, err := f.ExecuteNode(actions, f.Nodes[0], nil)
+	Expect(err).ToNot(BeNil())
+	Expect(err.Error()).To(ContainSubstring("timeout"))
+}
+
+// TestSiblingErrorStopsExecution verifies that when one sibling fails in
+// Pass 1 of BFS, remaining siblings and Pass 2 are not executed.
+func TestSiblingErrorStopsExecution(t *testing.T) {
+	RegisterTestingT(t)
+
+	var mu sync.Mutex
+	var executionOrder []string
+
+	recordAction := func(name string) Action {
+		return func(flow *Flow, node *Node, inputs []*Connection) (map[string]interface{}, error) {
+			mu.Lock()
+			executionOrder = append(executionOrder, name)
+			mu.Unlock()
+			return map[string]interface{}{"node": name}, nil
+		}
+	}
+	failAction := func(flow *Flow, node *Node, inputs []*Connection) (map[string]interface{}, error) {
+		mu.Lock()
+		executionOrder = append(executionOrder, "FAIL")
+		mu.Unlock()
+		return nil, fmt.Errorf("node failed")
+	}
+
+	f := &Flow{
+		Nodes: []*Node{
+			{ID: "trigger", Type: "trigger/manual", Data: &NodeData{Label: "trigger/manual", Config: NodeConfig{Type: ActionTypeTrigger}}},
+			{ID: "A", Type: "action/a", Data: &NodeData{Config: NodeConfig{Type: ActionTypeAction}}},
+			{ID: "B", Type: "action/fail", Data: &NodeData{Config: NodeConfig{Type: ActionTypeAction}}},
+			{ID: "C", Type: "action/c", Data: &NodeData{Config: NodeConfig{Type: ActionTypeAction}}},
+			{ID: "A1", Type: "action/a1", Data: &NodeData{Config: NodeConfig{Type: ActionTypeAction}}},
+		},
+		Edges: []*Edge{
+			{ID: "e1", Source: "trigger", Target: "A"},
+			{ID: "e2", Source: "trigger", Target: "B"},
+			{ID: "e3", Source: "trigger", Target: "C"},
+			{ID: "e4", Source: "A", Target: "A1"},
+		},
+		nodeResults: make(map[string]map[string]interface{}),
+		outputs:     make(map[string]interface{}),
+	}
+
+	actions := map[string]Action{
+		"trigger/manual": recordAction("trigger"),
+		"action/a":       recordAction("A"),
+		"action/fail":    failAction,
+		"action/c":       recordAction("C"),
+		"action/a1":      recordAction("A1"),
+	}
+
+	_, err := f.ExecuteNode(actions, f.Nodes[0], nil)
+	Expect(err).ToNot(BeNil())
+
+	// A executed before B (the failing node), but C and A1 should NOT have executed
+	Expect(executionOrder).To(ContainElement("A"))
+	Expect(executionOrder).To(ContainElement("FAIL"))
+	Expect(executionOrder).ToNot(ContainElement("C"), "C should not execute after B failed")
+	Expect(executionOrder).ToNot(ContainElement("A1"), "A1 should not execute after B failed")
 }
 
 func indexOf(slice []string, item string) int {

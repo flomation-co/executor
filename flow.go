@@ -830,11 +830,10 @@ func (f *Flow) executeNodeChildren(actions map[string]Action, node *Node, output
 
 	// Breadth-first: execute all siblings' actions before traversing any subtrees.
 	// Pass 1: run each sibling's action only (no child traversal)
-	var childErr error
 	for _, c := range validChildren {
 		outputs, err := f.executeNodeActionOnly(actions, c, environment)
 		if err != nil {
-			childErr = err
+			return nil, err
 		}
 		// Include this child's own outputs in the combined results
 		for k, v := range outputs {
@@ -847,14 +846,14 @@ func (f *Flow) executeNodeChildren(actions map[string]Action, node *Node, output
 		childOutputs := f.nodeResults[c.ID]
 		childResults, err := f.executeNodeChildren(actions, c, childOutputs, environment)
 		if err != nil {
-			childErr = err
+			return combinedResults, err
 		}
 		for k, v := range childResults {
 			combinedResults[k] = v
 		}
 	}
 
-	return combinedResults, childErr
+	return combinedResults, nil
 }
 
 // clearSubgraphResults removes cached results for all nodes reachable from
