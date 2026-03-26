@@ -489,6 +489,31 @@ func (f *Flow) executeOnErrorChain(actions map[string]Action, flowErr error, env
 }
 
 func (f *Flow) ExecuteNode(actions map[string]Action, node *Node, environment *environment.Environment) (map[string]interface{}, error) {
+	if node == nil || node.Data == nil {
+		return nil, ErrInvalidNode
+	}
+
+	// If already fully processed (action + children), return cached result.
+	// This prevents re-entrant child traversal when a child's parent resolution
+	// calls ExecuteNode on this node again.
+	if v, exists := f.nodeResults[node.ID]; exists {
+		return v, nil
+	}
+
+	// Phase 1: execute this node's own action (resolve parents, substitute vars, run action, cache)
+	outputs, err := f.executeNodeActionOnly(actions, node, environment)
+	if err != nil {
+		return nil, err
+	}
+
+	// Phase 2: determine and execute children using breadth-first ordering
+	return f.executeNodeChildren(actions, node, outputs, environment)
+}
+
+// executeNodeActionOnly resolves parent inputs, performs variable substitution,
+// executes the node's action, and caches the result. It does NOT traverse
+// children — that is handled separately to enable breadth-first ordering.
+func (f *Flow) executeNodeActionOnly(actions map[string]Action, node *Node, environment *environment.Environment) (map[string]interface{}, error) {
 	var err error
 
 	if node == nil || node.Data == nil {
@@ -691,7 +716,12 @@ func (f *Flow) ExecuteNode(actions map[string]Action, node *Node, environment *e
 	f.recordNodeResult(node, "success", configuration, outputs, durationMs, "")
 
 	f.nodeResults[node.ID] = outputs
+	return outputs, nil
+}
 
+// executeNodeChildren determines and executes the children of a node using
+// breadth-first ordering: all sibling actions execute before any subtrees.
+func (f *Flow) executeNodeChildren(actions map[string]Action, node *Node, outputs map[string]interface{}, environment *environment.Environment) (map[string]interface{}, error) {
 	combinedResults := make(map[string]interface{})
 
 	var children []*Node
@@ -711,6 +741,20 @@ func (f *Flow) ExecuteNode(actions map[string]Action, node *Node, environment *e
 		loopChildren := f.FindTargetByHandle(node.ID, "loop")
 		outputChildren := f.FindTargetByHandle(node.ID, "output")
 
+		action, exists := actions[node.Type]
+		if !exists {
+			action, exists = actions[node.Data.Label]
+		}
+
+		var configuration []*Connection
+		for _, v := range node.Data.Config.Inputs {
+			configuration = append(configuration, &Connection{
+				Name:  v.Name,
+				Type:  v.Type,
+				Value: v.Value,
+			})
+		}
+
 		maxIter := int64(1000)
 		if mi, ok := outputs["max_iterations"].(int64); ok && mi > 0 {
 			maxIter = mi
@@ -727,7 +771,7 @@ func (f *Flow) ExecuteNode(actions map[string]Action, node *Node, environment *e
 				f.clearSubgraphResults(node.ID, "loop")
 
 				// Re-resolve inputs and re-execute the loop action
-				reOutputs, err := actions[node.Type](f, node, configuration)
+				reOutputs, err := action(f, node, configuration)
 				if err != nil {
 					return nil, err
 				}
@@ -775,17 +819,36 @@ func (f *Flow) ExecuteNode(actions map[string]Action, node *Node, environment *e
 		children = f.FindTarget(node.ID)
 	}
 
-	var childErr error
+	// Filter out trigger nodes from children
+	var validChildren []*Node
 	for _, c := range children {
-		// Skip other trigger nodes — only the entry trigger should execute
 		if c.Type != "" && strings.HasPrefix(c.Type, "trigger/") {
 			continue
 		}
-		childResults, err := f.ExecuteNode(actions, c, environment)
+		validChildren = append(validChildren, c)
+	}
+
+	// Breadth-first: execute all siblings' actions before traversing any subtrees.
+	// Pass 1: run each sibling's action only (no child traversal)
+	var childErr error
+	for _, c := range validChildren {
+		outputs, err := f.executeNodeActionOnly(actions, c, environment)
 		if err != nil {
 			childErr = err
 		}
+		// Include this child's own outputs in the combined results
+		for k, v := range outputs {
+			combinedResults[k] = v
+		}
+	}
 
+	// Pass 2: now traverse each sibling's children (parent results are cached from pass 1)
+	for _, c := range validChildren {
+		childOutputs := f.nodeResults[c.ID]
+		childResults, err := f.executeNodeChildren(actions, c, childOutputs, environment)
+		if err != nil {
+			childErr = err
+		}
 		for k, v := range childResults {
 			combinedResults[k] = v
 		}

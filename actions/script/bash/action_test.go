@@ -53,7 +53,8 @@ func Test_NonZeroExitCode(t *testing.T) {
 	result, err := Execute(nil, nil, []*core.Connection{
 		textConn("script", "exit 42"),
 	})
-	Expect(err).To(BeNil())
+	Expect(err).ToNot(BeNil())
+	Expect(err.Error()).To(ContainSubstring("42"))
 	Expect(result["exit_code"]).To(Equal(42))
 	Expect(result["success"]).To(Equal(false))
 }
