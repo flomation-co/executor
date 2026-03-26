@@ -6,8 +6,8 @@ import (
 	"path/filepath"
 
 	core "flomation.app/automate/executor"
+	git_common "flomation.app/automate/executor/actions/git"
 	"github.com/go-git/go-git/v6"
-	"github.com/go-git/go-git/v6/plumbing/transport/ssh"
 )
 
 const (
@@ -30,34 +30,58 @@ var Inputs = [...]core.Connection{
 		Required:    true,
 	},
 	{
-		Name:        "ssh_key",
-		Type:        core.ConnectionTypeText,
-		Label:       "SSH Private Key",
-		Placeholder: "",
+		Name:  "auth_method",
+		Type:  core.ConnectionTypeString,
+		Label: "Authentication",
+		Options: []core.ConnectionOption{
+			{Name: "Anonymous", Value: "anonymous"},
+			{Name: "SSH Key", Value: "ssh"},
+			{Name: "HTTP (Username/Password)", Value: "http"},
+			{Name: "Token", Value: "token"},
+		},
+	},
+	{
+		Name:     "ssh_key",
+		Type:     core.ConnectionTypeText,
+		Label:    "SSH Private Key",
+		Required: true,
+		Visible:  &core.VisibleWhen{Field: "auth_method", Values: []string{"ssh"}},
+	},
+	{
+		Name:     "username",
+		Type:     core.ConnectionTypeString,
+		Label:    "Username",
+		Required: true,
+		Visible:  &core.VisibleWhen{Field: "auth_method", Values: []string{"http"}},
+	},
+	{
+		Name:     "password",
+		Type:     core.ConnectionTypeString,
+		Label:    "Password / Token",
+		Required: true,
+		Visible:  &core.VisibleWhen{Field: "auth_method", Values: []string{"http", "token"}},
 	},
 }
 
 var Outputs = [...]core.Connection{
 	{
-		Name: "branch",
-		Type: core.ConnectionTypeString,
+		Name:  "repository_path",
+		Type:  core.ConnectionTypeString,
+		Label: "Repository Path",
+	},
+	{
+		Name:  "branch",
+		Type:  core.ConnectionTypeString,
+		Label: "Branch",
 	},
 }
 
 func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[string]interface{}, error) {
 	repository := core.FindConnection("repository_url", inputs)
-	sshKey := core.FindConnection("ssh_key", inputs)
 
-	cloneOpts := &git.CloneOptions{
-		URL: *repository.String(),
-	}
-
-	if sshKey != nil && sshKey.String() != nil && *sshKey.String() != "" {
-		pk, err := ssh.NewPublicKeys("git", []byte(*sshKey.String()), "")
-		if err != nil {
-			return nil, err
-		}
-		cloneOpts.Auth = pk
+	auth, err := git_common.GetAuthFromInputs(inputs)
+	if err != nil {
+		return nil, err
 	}
 
 	// Clone into a temp directory then move contents into the execution directory
@@ -66,6 +90,11 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 		return nil, err
 	}
 	defer os.RemoveAll(tmpDir)
+
+	cloneOpts := &git.CloneOptions{
+		URL:  *repository.String(),
+		Auth: auth,
+	}
 
 	repo, err := git.PlainClone(tmpDir, cloneOpts)
 	if err != nil {
@@ -88,7 +117,6 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 		if walkErr != nil {
 			return walkErr
 		}
-
 		rel, err := filepath.Rel(tmpDir, path)
 		if err != nil {
 			return err
@@ -96,7 +124,6 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 		if rel == "." {
 			return nil
 		}
-
 		dest := filepath.Join(cwd, rel)
 		if d.IsDir() {
 			return os.MkdirAll(dest, 0755)
@@ -108,6 +135,7 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	}
 
 	return map[string]interface{}{
-		"branch": branch,
+		"repository_path": cwd,
+		"branch":          branch,
 	}, nil
 }
