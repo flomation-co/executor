@@ -19,7 +19,14 @@ const (
 )
 
 var Inputs = [...]core.Connection{
-	{
+	core.Connection{
+		Name:        "repository_path",
+		Type:        core.ConnectionTypeString,
+		Label:       "Repository Path",
+		Placeholder: "",
+		Required:    true,
+	},
+	core.Connection{
 		Name:        "branch",
 		Type:        core.ConnectionTypeString,
 		Label:       "Branch",
@@ -29,17 +36,16 @@ var Inputs = [...]core.Connection{
 }
 
 var Outputs = [...]core.Connection{
-	{
-		Name: "success",
-		Type: core.ConnectionTypeBoolean,
-		Label: "Success",
+	core.Connection{
+		Name: "repository_path",
+		Type: core.ConnectionTypeString,
 	},
 }
 
 func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[string]interface{}, error) {
 	repoPath := ""
-	if repository := core.FindConnection("repository_path", inputs); repository != nil && repository.String() != nil {
-		repoPath = *repository.String()
+	if rp := core.FindConnection("repository_path", inputs); rp != nil && rp.String() != nil {
+		repoPath = *rp.String()
 	}
 	branch := core.FindConnection("branch", inputs)
 
@@ -54,5 +60,7 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 		return nil, err
 	}
 
-	return map[string]interface{}{"success": true}, nil
+	return map[string]interface{}{
+		"repository_path": repoPath,
+	}, nil
 }

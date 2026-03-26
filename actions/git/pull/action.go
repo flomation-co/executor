@@ -11,7 +11,7 @@ const (
 	Author       = "Andy Esser"
 	Organisation = "Flomation"
 	Name         = "Git Pull"
-	Description  = "Git Actions"
+	Description  = "Pull latest changes from a remote"
 	Website      = "https://www.flomation.co"
 	Icon         = "code-branch"
 	Date         = "06/03/2026"
@@ -20,10 +20,36 @@ const (
 
 var Inputs = [...]core.Connection{
 	{
-		Name:        "ssh_key",
-		Type:        core.ConnectionTypeText,
-		Label:       "SSH Private Key",
-		Placeholder: "",
+		Name:  "auth_method",
+		Type:  core.ConnectionTypeString,
+		Label: "Authentication",
+		Options: []core.ConnectionOption{
+			{Name: "Anonymous", Value: "anonymous"},
+			{Name: "SSH Key", Value: "ssh"},
+			{Name: "HTTP (Username/Password)", Value: "http"},
+			{Name: "Token", Value: "token"},
+		},
+	},
+	{
+		Name:     "ssh_key",
+		Type:     core.ConnectionTypeText,
+		Label:    "SSH Private Key",
+		Required: true,
+		Visible:  &core.VisibleWhen{Field: "auth_method", Values: []string{"ssh"}},
+	},
+	{
+		Name:     "username",
+		Type:     core.ConnectionTypeString,
+		Label:    "Username",
+		Required: true,
+		Visible:  &core.VisibleWhen{Field: "auth_method", Values: []string{"http"}},
+	},
+	{
+		Name:     "password",
+		Type:     core.ConnectionTypeString,
+		Label:    "Password / Token",
+		Required: true,
+		Visible:  &core.VisibleWhen{Field: "auth_method", Values: []string{"http", "token"}},
 	},
 	{
 		Name:        "remote_name",
@@ -41,27 +67,26 @@ var Inputs = [...]core.Connection{
 
 var Outputs = [...]core.Connection{
 	{
-		Name: "success",
-		Type: core.ConnectionTypeBoolean,
+		Name:  "success",
+		Type:  core.ConnectionTypeBoolean,
 		Label: "Success",
 	},
 }
 
 func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[string]interface{}, error) {
 	repoPath := ""
-	if repository := core.FindConnection("repository_path", inputs); repository != nil && repository.String() != nil {
-		repoPath = *repository.String()
+	if rp := core.FindConnection("repository_path", inputs); rp != nil && rp.String() != nil {
+		repoPath = *rp.String()
 	}
-	sshKey := core.FindConnection("ssh_key", inputs)
 	remoteName := core.FindConnection("remote_name", inputs)
 	branch := core.FindConnection("branch", inputs)
 
-	_, w, err := git_common.GetRepositoryAndWorktree(repoPath)
+	auth, err := git_common.GetAuthFromInputs(inputs)
 	if err != nil {
 		return nil, err
 	}
 
-	auth, err := git_common.GetSSHAuth(*sshKey.String())
+	_, w, err := git_common.GetRepositoryAndWorktree(repoPath)
 	if err != nil {
 		return nil, err
 	}
