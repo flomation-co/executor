@@ -55,6 +55,11 @@ type ConnectionOption struct {
 	Value string `json:"value"`
 }
 
+type VisibleWhen struct {
+	Field  string   `json:"field"`
+	Values []string `json:"values"`
+}
+
 type Connection struct {
 	Name        string             `json:"name"`
 	Type        string             `json:"type"`
@@ -63,6 +68,7 @@ type Connection struct {
 	Placeholder string             `json:"placeholder"`
 	Required    bool               `json:"required,omitempty"`
 	Options     []ConnectionOption `json:"options,omitempty"`
+	Visible     *VisibleWhen       `json:"visible_when,omitempty"`
 }
 
 func (c *Connection) String() *string {

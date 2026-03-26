@@ -34,11 +34,14 @@ var Inputs = [...]core.Connection{
 		Type:        core.ConnectionTypeString,
 		Label:       "Interval",
 		Placeholder: "e.g. 15",
+		Required:    true,
+		Visible:     &core.VisibleWhen{Field: "mode", Values: []string{"interval"}},
 	},
 	{
-		Name:  "unit",
-		Type:  core.ConnectionTypeString,
-		Label: "Unit",
+		Name:    "unit",
+		Type:    core.ConnectionTypeString,
+		Label:   "Unit",
+		Visible: &core.VisibleWhen{Field: "mode", Values: []string{"interval"}},
 		Options: []core.ConnectionOption{
 			{Name: "Minutes", Value: "minutes"},
 			{Name: "Hours", Value: "hours"},
@@ -50,18 +53,29 @@ var Inputs = [...]core.Connection{
 		Type:        core.ConnectionTypeString,
 		Label:       "Time of Day",
 		Placeholder: "HH:MM (24-hour)",
+		Required:    true,
+		Visible:     &core.VisibleWhen{Field: "mode", Values: []string{"daily", "weekly"}},
 	},
 	{
 		Name:        "days_of_week",
 		Type:        core.ConnectionTypeString,
 		Label:       "Days of Week",
 		Placeholder: "monday,wednesday,friday",
+		Required:    true,
+		Visible:     &core.VisibleWhen{Field: "mode", Values: []string{"weekly"}},
 	},
 	{
 		Name:        "timezone",
 		Type:        core.ConnectionTypeString,
 		Label:       "Timezone",
 		Placeholder: "Europe/London",
+		Visible:     &core.VisibleWhen{Field: "mode", Values: []string{"daily", "weekly"}},
+	},
+	{
+		Name:    "exclude_bank_holidays",
+		Type:    core.ConnectionTypeBoolean,
+		Label:   "Exclude UK Bank Holidays",
+		Visible: &core.VisibleWhen{Field: "mode", Values: []string{"daily", "weekly"}},
 	},
 }
 

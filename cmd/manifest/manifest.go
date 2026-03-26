@@ -86,6 +86,36 @@ func parseConnectionOptions(compositeLit *ast.CompositeLit) []core.ConnectionOpt
 	return options
 }
 
+func parseVisibleWhen(compositeLit *ast.CompositeLit) *core.VisibleWhen {
+	vw := &core.VisibleWhen{}
+	for _, field := range compositeLit.Elts {
+		kv, ok := field.(*ast.KeyValueExpr)
+		if !ok {
+			continue
+		}
+		key, ok := kv.Key.(*ast.Ident)
+		if !ok {
+			continue
+		}
+		switch key.Name {
+		case "Field":
+			if v, ok := kv.Value.(*ast.BasicLit); ok {
+				vw.Field, _ = strconv.Unquote(v.Value)
+			}
+		case "Values":
+			if cl, ok := kv.Value.(*ast.CompositeLit); ok {
+				for _, elt := range cl.Elts {
+					if v, ok := elt.(*ast.BasicLit); ok {
+						s, _ := strconv.Unquote(v.Value)
+						vw.Values = append(vw.Values, s)
+					}
+				}
+			}
+		}
+	}
+	return vw
+}
+
 func inspectPackage(dir string) map[string]ManifestEntry {
 
 	pkgs, err := parser.ParseDir(token.NewFileSet(), dir, nil, 0)
@@ -260,6 +290,12 @@ func inspectPackage(dir string) map[string]ManifestEntry {
 								case *ast.CompositeLit:
 									if key.Name == "Options" {
 										c.Options = parseConnectionOptions(v)
+									}
+								case *ast.UnaryExpr:
+									if key.Name == "Visible" {
+										if cl, ok := v.X.(*ast.CompositeLit); ok {
+											c.Visible = parseVisibleWhen(cl)
+										}
 									}
 								}
 
