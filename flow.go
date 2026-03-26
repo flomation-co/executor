@@ -674,8 +674,11 @@ func (f *Flow) ExecuteNode(actions map[string]Action, node *Node, environment *e
 	outputs, err := action(f, node, configuration)
 	durationMs := time.Since(startTime).Milliseconds()
 
+	// Build obfuscated input map for streaming and recording
+	inputMap := f.buildObfuscatedInputMap(node, configuration)
+
 	if err != nil {
-		f.emitNodeEvent(node.ID, node.Type, node.Data.Label, "failed", durationMs, err.Error())
+		f.emitNodeEvent(node.ID, node.Type, node.Data.Label, "failed", durationMs, err.Error(), inputMap, outputs)
 		f.recordNodeResult(node, "failed", configuration, outputs, durationMs, err.Error())
 
 		log.WithFields(log.Fields{
@@ -684,7 +687,7 @@ func (f *Flow) ExecuteNode(actions map[string]Action, node *Node, environment *e
 		return nil, err
 	}
 
-	f.emitNodeEvent(node.ID, node.Type, node.Data.Label, "success", durationMs, "")
+	f.emitNodeEvent(node.ID, node.Type, node.Data.Label, "success", durationMs, "", inputMap, outputs)
 	f.recordNodeResult(node, "success", configuration, outputs, durationMs, "")
 
 	f.nodeResults[node.ID] = outputs
@@ -938,8 +941,10 @@ func (f *Flow) GetVariables() map[string]interface{} {
 var secretPattern = regexp.MustCompile(`\$\{secrets?\.`)
 
 // emitNodeEvent writes a __NODE__: prefixed JSON line to stdout for the
-// runner and API SSE infrastructure to consume.
-func (f *Flow) emitNodeEvent(id, action, label, status string, durationMs int64, errMsg string) {
+// runner and API SSE infrastructure to consume. When inputs/outputs are
+// provided (on completion), they are included so the editor can show them
+// in real time without waiting for the full execution to finish.
+func (f *Flow) emitNodeEvent(id, action, label, status string, durationMs int64, errMsg string, inputs ...map[string]interface{}) {
 	evt := map[string]interface{}{
 		"id":     id,
 		"action": action,
@@ -952,22 +957,22 @@ func (f *Flow) emitNodeEvent(id, action, label, status string, durationMs int64,
 	if errMsg != "" {
 		evt["error"] = errMsg
 	}
+	// inputs[0] = resolved inputs, inputs[1] = outputs (variadic to keep "running" calls simple)
+	if len(inputs) > 0 && inputs[0] != nil {
+		evt["inputs"] = inputs[0]
+	}
+	if len(inputs) > 1 && inputs[1] != nil {
+		evt["outputs"] = inputs[1]
+	}
 	b, _ := json.Marshal(evt)
 	fmt.Fprintf(os.Stdout, "__NODE__:%s\n", b)
 }
 
-// recordNodeResult stores an ExecutionNodeResult for the given node,
-// obfuscating any inputs whose original config values contain secret references.
-func (f *Flow) recordNodeResult(node *Node, status string, resolvedInputs []*Connection, outputs map[string]interface{}, durationMs int64, errMsg string) {
-	if f.nodeExecutionResults == nil {
-		f.nodeExecutionResults = make(map[string]*ExecutionNodeResult)
-	}
-
+// buildObfuscatedInputMap creates an input map with secret values masked.
+func (f *Flow) buildObfuscatedInputMap(node *Node, resolvedInputs []*Connection) map[string]interface{} {
 	inputMap := make(map[string]interface{})
 	for _, c := range resolvedInputs {
 		val := c.Value
-
-		// Check original config input for secret references to obfuscate
 		if node.Data != nil {
 			for _, orig := range node.Data.Config.Inputs {
 				if orig.Name == c.Name {
@@ -979,9 +984,18 @@ func (f *Flow) recordNodeResult(node *Node, status string, resolvedInputs []*Con
 				}
 			}
 		}
-
 		inputMap[c.Name] = val
 	}
+	return inputMap
+}
+
+// recordNodeResult stores an ExecutionNodeResult for the given node.
+func (f *Flow) recordNodeResult(node *Node, status string, resolvedInputs []*Connection, outputs map[string]interface{}, durationMs int64, errMsg string) {
+	if f.nodeExecutionResults == nil {
+		f.nodeExecutionResults = make(map[string]*ExecutionNodeResult)
+	}
+
+	inputMap := f.buildObfuscatedInputMap(node, resolvedInputs)
 
 	nr := &ExecutionNodeResult{
 		ID:       node.ID,
