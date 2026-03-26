@@ -32,11 +32,12 @@ var (
 )
 
 const (
-	ConnectionTypeString  = "string"
-	ConnectionTypeObject  = "object"
-	ConnectionTypeInteger = "integer"
-	ConnectionTypeBoolean = "boolean"
-	ConnectionTypeText    = "text"
+	ConnectionTypeString        = "string"
+	ConnectionTypeObject        = "object"
+	ConnectionTypeInteger       = "integer"
+	ConnectionTypeBoolean       = "boolean"
+	ConnectionTypeText          = "text"
+	ConnectionTypeKeyValueArray = "key_value_array"
 )
 
 type Action func(flow *Flow, node *Node, inputs []*Connection) (map[string]interface{}, error)
@@ -151,6 +152,42 @@ func (c *Connection) Boolean() *bool {
 	}
 
 	return &v
+}
+
+// KeyValuePair represents a single key-value pair from a key_value_array input.
+type KeyValuePair struct {
+	Key   string `json:"key"`
+	Value string `json:"value"`
+}
+
+// KeyValuePairs parses a key_value_array connection value into a slice of KeyValuePair.
+func (c *Connection) KeyValuePairs() []KeyValuePair {
+	if c == nil || c.Value == nil {
+		return nil
+	}
+
+	// Value is stored as a JSON string or already-parsed array
+	switch v := c.Value.(type) {
+	case string:
+		var pairs []KeyValuePair
+		if err := json.Unmarshal([]byte(v), &pairs); err != nil {
+			return nil
+		}
+		return pairs
+	case []interface{}:
+		var pairs []KeyValuePair
+		for _, item := range v {
+			if m, ok := item.(map[string]interface{}); ok {
+				pairs = append(pairs, KeyValuePair{
+					Key:   fmt.Sprintf("%v", m["key"]),
+					Value: fmt.Sprintf("%v", m["value"]),
+				})
+			}
+		}
+		return pairs
+	default:
+		return nil
+	}
 }
 
 func FindConnection(name string, connections []*Connection) *Connection {
