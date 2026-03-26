@@ -43,10 +43,13 @@ var Outputs = [...]core.Connection{
 }
 
 func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[string]interface{}, error) {
-	repository := core.FindConnection("repository_path", inputs)
+	repoPath := ""
+	if rp := core.FindConnection("repository_path", inputs); rp != nil && rp.String() != nil {
+		repoPath = *rp.String()
+	}
 	branch := core.FindConnection("branch", inputs)
 
-	w, err := git_common.GetWorktree(*repository.String())
+	w, err := git_common.GetWorktree(repoPath)
 	if err != nil {
 		return nil, err
 	}
@@ -58,6 +61,6 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	}
 
 	return map[string]interface{}{
-		"repository_path": *repository.String(),
+		"repository_path": repoPath,
 	}, nil
 }

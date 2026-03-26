@@ -2,6 +2,7 @@ package git_common
 
 import (
 	"fmt"
+	"strings"
 
 	core "flomation.app/automate/executor"
 	"github.com/go-git/go-git/v6"
@@ -55,7 +56,7 @@ var AuthInputs = [...]core.Connection{
 func GetAuthFromInputs(inputs []*core.Connection) (transport.AuthMethod, error) {
 	method := "anonymous"
 	if mc := core.FindConnection("auth_method", inputs); mc != nil && mc.String() != nil && *mc.String() != "" {
-		method = *mc.String()
+		method = strings.TrimSpace(*mc.String())
 	}
 
 	switch method {
