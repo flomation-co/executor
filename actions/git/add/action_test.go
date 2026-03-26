@@ -10,6 +10,15 @@ import (
 	. "github.com/onsi/gomega"
 )
 
+func chdir(t *testing.T, dir string) {
+	t.Helper()
+	orig, _ := os.Getwd()
+	if err := os.Chdir(dir); err != nil {
+		t.Fatalf("failed to chdir: %v", err)
+	}
+	t.Cleanup(func() { os.Chdir(orig) })
+}
+
 func conn(name, value string) *core.Connection {
 	return &core.Connection{Name: name, Type: core.ConnectionTypeString, Value: value}
 }
@@ -39,60 +48,40 @@ func initTestRepoWithCommit(t *testing.T) string {
 
 func Test_AddSpecificFile(t *testing.T) {
 	RegisterTestingT(t)
-
 	dir := initTestRepoWithCommit(t)
+	chdir(t, dir)
 
-	err := os.WriteFile(filepath.Join(dir, "test.txt"), []byte("hello"), 0644)
+	Expect(os.WriteFile("test.txt", []byte("hello"), 0644)).To(Succeed())
+	_, err := Execute(nil, nil, []*core.Connection{conn("path", "test.txt")})
 	Expect(err).To(BeNil())
-
-	result, err := Execute(nil, nil, []*core.Connection{
-		conn("repository_path", dir),
-		conn("path", "test.txt"),
-	})
-	Expect(err).To(BeNil())
-	Expect(result["repository_path"]).To(Equal(dir))
 }
 
 func Test_AddAll(t *testing.T) {
 	RegisterTestingT(t)
-
 	dir := initTestRepoWithCommit(t)
+	chdir(t, dir)
 
-	err := os.WriteFile(filepath.Join(dir, "a.txt"), []byte("a"), 0644)
+	Expect(os.WriteFile("a.txt", []byte("a"), 0644)).To(Succeed())
+	Expect(os.WriteFile("b.txt", []byte("b"), 0644)).To(Succeed())
+	_, err := Execute(nil, nil, []*core.Connection{conn("path", ".")})
 	Expect(err).To(BeNil())
-	err = os.WriteFile(filepath.Join(dir, "b.txt"), []byte("b"), 0644)
-	Expect(err).To(BeNil())
-
-	result, err := Execute(nil, nil, []*core.Connection{
-		conn("repository_path", dir),
-		conn("path", "."),
-	})
-	Expect(err).To(BeNil())
-	Expect(result["repository_path"]).To(Equal(dir))
 }
 
 func Test_AddAll_EmptyPath(t *testing.T) {
 	RegisterTestingT(t)
-
 	dir := initTestRepoWithCommit(t)
+	chdir(t, dir)
 
-	err := os.WriteFile(filepath.Join(dir, "c.txt"), []byte("c"), 0644)
+	Expect(os.WriteFile("c.txt", []byte("c"), 0644)).To(Succeed())
+	_, err := Execute(nil, nil, []*core.Connection{conn("path", "")})
 	Expect(err).To(BeNil())
-
-	result, err := Execute(nil, nil, []*core.Connection{
-		conn("repository_path", dir),
-		conn("path", ""),
-	})
-	Expect(err).To(BeNil())
-	Expect(result["repository_path"]).To(Equal(dir))
 }
 
 func Test_Add_InvalidRepo(t *testing.T) {
 	RegisterTestingT(t)
+	dir := t.TempDir()
+	chdir(t, dir)
 
-	_, err := Execute(nil, nil, []*core.Connection{
-		conn("repository_path", "/nonexistent/path"),
-		conn("path", "test.txt"),
-	})
+	_, err := Execute(nil, nil, []*core.Connection{conn("path", "test.txt")})
 	Expect(err).ToNot(BeNil())
 }

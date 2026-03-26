@@ -21,13 +21,6 @@ const (
 
 var Inputs = [...]core.Connection{
 	{
-		Name:        "repository_path",
-		Type:        core.ConnectionTypeString,
-		Label:       "Repository Path",
-		Placeholder: "",
-		Required:    true,
-	},
-	{
 		Name:        "message",
 		Type:        core.ConnectionTypeText,
 		Label:       "Commit Message",
@@ -52,22 +45,21 @@ var Inputs = [...]core.Connection{
 
 var Outputs = [...]core.Connection{
 	{
-		Name: "repository_path",
-		Type: core.ConnectionTypeString,
-	},
-	{
 		Name: "commit_hash",
 		Type: core.ConnectionTypeString,
 	},
 }
 
 func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[string]interface{}, error) {
-	repository := core.FindConnection("repository_path", inputs)
+	repoPath := ""
+	if repository := core.FindConnection("repository_path", inputs); repository != nil && repository.String() != nil {
+		repoPath = *repository.String()
+	}
 	message := core.FindConnection("message", inputs)
 	authorName := core.FindConnection("author_name", inputs)
 	authorEmail := core.FindConnection("author_email", inputs)
 
-	_, w, err := git_common.GetRepositoryAndWorktree(*repository.String())
+	_, w, err := git_common.GetRepositoryAndWorktree(repoPath)
 	if err != nil {
 		return nil, err
 	}
@@ -84,7 +76,6 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	}
 
 	return map[string]interface{}{
-		"repository_path": *repository.String(),
-		"commit_hash":     hash.String(),
+		"commit_hash": hash.String(),
 	}, nil
 }

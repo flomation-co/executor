@@ -1,7 +1,9 @@
 package git_clone
 
 import (
+	"io/fs"
 	"os"
+	"path/filepath"
 
 	core "flomation.app/automate/executor"
 	"github.com/go-git/go-git/v6"
@@ -37,10 +39,6 @@ var Inputs = [...]core.Connection{
 
 var Outputs = [...]core.Connection{
 	{
-		Name: "repository_path",
-		Type: core.ConnectionTypeString,
-	},
-	{
 		Name: "branch",
 		Type: core.ConnectionTypeString,
 	},
@@ -49,11 +47,6 @@ var Outputs = [...]core.Connection{
 func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[string]interface{}, error) {
 	repository := core.FindConnection("repository_url", inputs)
 	sshKey := core.FindConnection("ssh_key", inputs)
-
-	f, err := os.MkdirTemp(".", "")
-	if err != nil {
-		return nil, err
-	}
 
 	cloneOpts := &git.CloneOptions{
 		URL: *repository.String(),
@@ -67,7 +60,14 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 		cloneOpts.Auth = pk
 	}
 
-	repo, err := git.PlainClone(f, cloneOpts)
+	// Clone into a temp directory then move contents into the execution directory
+	tmpDir, err := os.MkdirTemp("", "flomation-clone-*")
+	if err != nil {
+		return nil, err
+	}
+	defer os.RemoveAll(tmpDir)
+
+	repo, err := git.PlainClone(tmpDir, cloneOpts)
 	if err != nil {
 		return nil, err
 	}
@@ -78,8 +78,36 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 		branch = head.Name().Short()
 	}
 
+	// Move all cloned files into the current working directory
+	cwd, err := os.Getwd()
+	if err != nil {
+		return nil, err
+	}
+
+	err = filepath.WalkDir(tmpDir, func(path string, d fs.DirEntry, walkErr error) error {
+		if walkErr != nil {
+			return walkErr
+		}
+
+		rel, err := filepath.Rel(tmpDir, path)
+		if err != nil {
+			return err
+		}
+		if rel == "." {
+			return nil
+		}
+
+		dest := filepath.Join(cwd, rel)
+		if d.IsDir() {
+			return os.MkdirAll(dest, 0755)
+		}
+		return os.Rename(path, dest)
+	})
+	if err != nil {
+		return nil, err
+	}
+
 	return map[string]interface{}{
-		"repository_path": f,
-		"branch":          branch,
+		"branch": branch,
 	}, nil
 }
