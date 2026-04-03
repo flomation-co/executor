@@ -5,6 +5,9 @@ package actions
 import (
 	core "flomation.app/automate/executor"
 
+	agent_read_state "flomation.app/automate/executor/actions/agent/read_state"
+	agent_send_message "flomation.app/automate/executor/actions/agent/send_message"
+	agent_write_state "flomation.app/automate/executor/actions/agent/write_state"
 	arithmetic_addition "flomation.app/automate/executor/actions/arithmetic/addition"
 	arithmetic_division "flomation.app/automate/executor/actions/arithmetic/division"
 	arithmetic_multiplication "flomation.app/automate/executor/actions/arithmetic/multiplication"
@@ -19,6 +22,7 @@ import (
 	common_data_extract "flomation.app/automate/executor/actions/common/data_extract"
 	common_data_rename "flomation.app/automate/executor/actions/common/data_rename"
 	common_set_variable "flomation.app/automate/executor/actions/common/set_variable"
+	common_sleep "flomation.app/automate/executor/actions/common/sleep"
 	common_smtp "flomation.app/automate/executor/actions/common/smtp"
 	common_start_flow "flomation.app/automate/executor/actions/common/start_flow"
 	conditional_for "flomation.app/automate/executor/actions/conditional/for"
@@ -37,6 +41,8 @@ import (
 	git_status "flomation.app/automate/executor/actions/git/status"
 	git_tag "flomation.app/automate/executor/actions/git/tag"
 	http_request "flomation.app/automate/executor/actions/http/request"
+	messaging_email "flomation.app/automate/executor/actions/messaging/email"
+	messaging_telegram "flomation.app/automate/executor/actions/messaging/telegram"
 	nosql_mongodb "flomation.app/automate/executor/actions/nosql/mongodb"
 	nosql_redis "flomation.app/automate/executor/actions/nosql/redis"
 	output_discord_webhook "flomation.app/automate/executor/actions/output/discord_webhook"
@@ -59,6 +65,9 @@ import (
 )
 
 var Actions = map[string]core.Action{
+	"agent/read_state":          agent_read_state.Execute,
+	"agent/send_message":        agent_send_message.Execute,
+	"agent/write_state":         agent_write_state.Execute,
 	"arithmetic/addition":       arithmetic_addition.Execute,
 	"arithmetic/division":       arithmetic_division.Execute,
 	"arithmetic/multiplication": arithmetic_multiplication.Execute,
@@ -73,6 +82,7 @@ var Actions = map[string]core.Action{
 	"common/data_extract":       common_data_extract.Execute,
 	"common/data_rename":        common_data_rename.Execute,
 	"common/set_variable":       common_set_variable.Execute,
+	"common/sleep":              common_sleep.Execute,
 	"common/smtp":               common_smtp.Execute,
 	"common/start_flow":         common_start_flow.Execute,
 	"conditional/for":           conditional_for.Execute,
@@ -91,6 +101,8 @@ var Actions = map[string]core.Action{
 	"git/status":                git_status.Execute,
 	"git/tag":                   git_tag.Execute,
 	"http/request":              http_request.Execute,
+	"messaging/email":           messaging_email.Execute,
+	"messaging/telegram":        messaging_telegram.Execute,
 	"nosql/mongodb":             nosql_mongodb.Execute,
 	"nosql/redis":               nosql_redis.Execute,
 	"output/discord_webhook":    output_discord_webhook.Execute,

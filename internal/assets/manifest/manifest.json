@@ -2446,7 +2446,7 @@
     ]
   },
   "script/bash": {
-    "hash": "1ea54a634882c154022a6c645fda7efc4c90293e1092841694776a25c0474826",
+    "hash": "6f4fe249c7335c542b3ce8ec892cb50edf138ebc272110b72492c55289cfd44f",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Run Bash Script",
@@ -3322,7 +3322,7 @@
     ]
   },
   "trigger/schedule": {
-    "hash": "33ecf38fcf81f979428966d5726fde090c54f9b4d8ef43b27583287ab0734624",
+    "hash": "76fda88acd183847e4e698cdc48cd4e17cfdeb83e2077aa22e5deb0e16eeb80b",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Schedule Trigger",
@@ -3364,7 +3364,14 @@
         "type": "string",
         "value": null,
         "label": "Interval",
-        "placeholder": "e.g. 15"
+        "placeholder": "e.g. 15",
+        "required": true,
+        "visible_when": {
+          "field": "mode",
+          "values": [
+            "interval"
+          ]
+        }
       },
       {
         "name": "unit",
@@ -3385,28 +3392,70 @@
             "name": "Days",
             "value": "days"
           }
-        ]
+        ],
+        "visible_when": {
+          "field": "mode",
+          "values": [
+            "interval"
+          ]
+        }
       },
       {
         "name": "time_of_day",
         "type": "string",
         "value": null,
         "label": "Time of Day",
-        "placeholder": "HH:MM (24-hour)"
+        "placeholder": "HH:MM (24-hour)",
+        "required": true,
+        "visible_when": {
+          "field": "mode",
+          "values": [
+            "daily",
+            "weekly"
+          ]
+        }
       },
       {
         "name": "days_of_week",
         "type": "string",
         "value": null,
         "label": "Days of Week",
-        "placeholder": "monday,wednesday,friday"
+        "placeholder": "monday,wednesday,friday",
+        "required": true,
+        "visible_when": {
+          "field": "mode",
+          "values": [
+            "weekly"
+          ]
+        }
       },
       {
         "name": "timezone",
         "type": "string",
         "value": null,
         "label": "Timezone",
-        "placeholder": "Europe/London"
+        "placeholder": "Europe/London",
+        "visible_when": {
+          "field": "mode",
+          "values": [
+            "daily",
+            "weekly"
+          ]
+        }
+      },
+      {
+        "name": "exclude_bank_holidays",
+        "type": "boolean",
+        "value": null,
+        "label": "Exclude UK Bank Holidays",
+        "placeholder": "",
+        "visible_when": {
+          "field": "mode",
+          "values": [
+            "daily",
+            "weekly"
+          ]
+        }
       }
     ],
     "outputs": [
