@@ -1,4 +1,185 @@
 {
+  "agent/read_state": {
+    "hash": "9f2922b0e62faf6ebab9a32b76c9970c5a56f22beb0bb107cb1f88388825e673",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Read Agent State",
+    "description": "Read a persistent state value from an agent's key-value store",
+    "website": "https://www.flomation.co",
+    "icon": "database",
+    "date": "03/04/2026",
+    "type": 2,
+    "category": {
+      "name": "Agent",
+      "icon": "robot",
+      "description": "Interact with Flomation Agents"
+    },
+    "inputs": [
+      {
+        "name": "agent_id",
+        "type": "string",
+        "value": null,
+        "label": "Agent ID",
+        "placeholder": "ID of the agent",
+        "required": true
+      },
+      {
+        "name": "key",
+        "type": "string",
+        "value": null,
+        "label": "State Key",
+        "placeholder": "conversation_history",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "value",
+        "type": "object",
+        "value": null,
+        "label": "State Value",
+        "placeholder": ""
+      },
+      {
+        "name": "exists",
+        "type": "boolean",
+        "value": null,
+        "label": "Key Exists",
+        "placeholder": ""
+      }
+    ]
+  },
+  "agent/send_message": {
+    "hash": "c8907e636602732026ca5f617590c05892dd820042eb0fe7e97fd4436016c395",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Send Agent Message",
+    "description": "Send a message through an agent's communication channel and record it",
+    "website": "https://www.flomation.co",
+    "icon": "paper-plane",
+    "date": "03/04/2026",
+    "type": 2,
+    "category": {
+      "name": "Agent",
+      "icon": "robot",
+      "description": "Interact with Flomation Agents"
+    },
+    "inputs": [
+      {
+        "name": "agent_id",
+        "type": "string",
+        "value": null,
+        "label": "Agent ID",
+        "placeholder": "ID of the agent",
+        "required": true
+      },
+      {
+        "name": "channel",
+        "type": "string",
+        "value": null,
+        "label": "Channel",
+        "placeholder": "",
+        "required": true,
+        "options": [
+          {
+            "name": "Telegram",
+            "value": "telegram"
+          },
+          {
+            "name": "Email",
+            "value": "email"
+          },
+          {
+            "name": "Webhook",
+            "value": "webhook"
+          }
+        ]
+      },
+      {
+        "name": "recipient",
+        "type": "string",
+        "value": null,
+        "label": "Recipient",
+        "placeholder": "Chat ID, email address, or webhook URL",
+        "required": true
+      },
+      {
+        "name": "message",
+        "type": "text",
+        "value": null,
+        "label": "Message",
+        "placeholder": "Message content",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "message_id",
+        "type": "string",
+        "value": null,
+        "label": "Message ID",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      }
+    ]
+  },
+  "agent/write_state": {
+    "hash": "2ccffa26a1a9cf5982e876a1970a99c60f974494be7c4eca147829c5a4c5738d",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Write Agent State",
+    "description": "Write a persistent state value to an agent's key-value store",
+    "website": "https://www.flomation.co",
+    "icon": "floppy-disk",
+    "date": "03/04/2026",
+    "type": 2,
+    "category": {
+      "name": "Agent",
+      "icon": "robot",
+      "description": "Interact with Flomation Agents"
+    },
+    "inputs": [
+      {
+        "name": "agent_id",
+        "type": "string",
+        "value": null,
+        "label": "Agent ID",
+        "placeholder": "ID of the agent",
+        "required": true
+      },
+      {
+        "name": "key",
+        "type": "string",
+        "value": null,
+        "label": "State Key",
+        "placeholder": "conversation_history",
+        "required": true
+      },
+      {
+        "name": "value",
+        "type": "object",
+        "value": null,
+        "label": "Value",
+        "placeholder": "",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      }
+    ]
+  },
   "arithmetic/addition": {
     "hash": "b6fe525ab8d26c1f79d2d9ba9cd996eefdea0055ec48b79de78f23063f0838c0",
     "author": "Andy Esser",
@@ -755,6 +936,69 @@
         "type": "string",
         "value": null,
         "label": "Value",
+        "placeholder": ""
+      }
+    ]
+  },
+  "common/sleep": {
+    "hash": "cc750f7ee25516cd60c886cede3d5ed43b7ddaa688c1ad8ba7cc7e35346a60cf",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Sleep",
+    "description": "Pause execution for a specified duration",
+    "website": "https://www.flomation.co",
+    "icon": "clock",
+    "date": "03/04/2026",
+    "type": 2,
+    "category": {
+      "name": "Common",
+      "icon": "toolbox",
+      "description": "General-purpose data utilities"
+    },
+    "inputs": [
+      {
+        "name": "duration",
+        "type": "integer",
+        "value": null,
+        "label": "Duration",
+        "placeholder": "10",
+        "required": true
+      },
+      {
+        "name": "unit",
+        "type": "string",
+        "value": null,
+        "label": "Unit",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "Seconds",
+            "value": "seconds"
+          },
+          {
+            "name": "Minutes",
+            "value": "minutes"
+          },
+          {
+            "name": "Hours",
+            "value": "hours"
+          }
+        ]
+      }
+    ],
+    "outputs": [
+      {
+        "name": "slept_for_seconds",
+        "type": "integer",
+        "value": null,
+        "label": "Slept For (seconds)",
+        "placeholder": ""
+      },
+      {
+        "name": "cancelled",
+        "type": "boolean",
+        "value": null,
+        "label": "Was Cancelled",
         "placeholder": ""
       }
     ]
@@ -2006,6 +2250,212 @@
         "type": "boolean",
         "value": null,
         "label": "",
+        "placeholder": ""
+      }
+    ]
+  },
+  "messaging/email": {
+    "hash": "853a89426030c214dd4a9b69c622e7ab9f1e56059a405b57aff261688aa6a484",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Send Email",
+    "description": "Send an email via SMTP with optional HTML body",
+    "website": "https://www.flomation.co",
+    "icon": "envelope",
+    "date": "03/04/2026",
+    "type": 2,
+    "category": {
+      "name": "Messaging",
+      "icon": "comments",
+      "description": "Send messages via various channels"
+    },
+    "inputs": [
+      {
+        "name": "smtp_host",
+        "type": "string",
+        "value": null,
+        "label": "SMTP Host",
+        "placeholder": "smtp.example.com",
+        "required": true
+      },
+      {
+        "name": "smtp_port",
+        "type": "integer",
+        "value": null,
+        "label": "SMTP Port",
+        "placeholder": "587",
+        "required": true
+      },
+      {
+        "name": "username",
+        "type": "string",
+        "value": null,
+        "label": "Username",
+        "placeholder": "user@example.com"
+      },
+      {
+        "name": "password",
+        "type": "string",
+        "value": null,
+        "label": "Password",
+        "placeholder": ""
+      },
+      {
+        "name": "use_tls",
+        "type": "boolean",
+        "value": null,
+        "label": "Use TLS",
+        "placeholder": ""
+      },
+      {
+        "name": "from",
+        "type": "string",
+        "value": null,
+        "label": "From Address",
+        "placeholder": "noreply@example.com",
+        "required": true
+      },
+      {
+        "name": "to",
+        "type": "string",
+        "value": null,
+        "label": "To Addresses",
+        "placeholder": "user@example.com, admin@example.com",
+        "required": true
+      },
+      {
+        "name": "subject",
+        "type": "string",
+        "value": null,
+        "label": "Subject",
+        "placeholder": "Hello from Flomation",
+        "required": true
+      },
+      {
+        "name": "body",
+        "type": "text",
+        "value": null,
+        "label": "Body",
+        "placeholder": "Email body content",
+        "required": true
+      },
+      {
+        "name": "content_type",
+        "type": "string",
+        "value": null,
+        "label": "Content Type",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "Plain Text",
+            "value": "text/plain"
+          },
+          {
+            "name": "HTML",
+            "value": "text/html"
+          }
+        ]
+      }
+    ],
+    "outputs": [
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "messaging/telegram": {
+    "hash": "028221cd539abcce801d0d3abf80d33ba203f108281868ba15c6fdf37f8ba1d6",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Send Telegram Message",
+    "description": "Send a message via the Telegram Bot API",
+    "website": "https://www.flomation.co",
+    "icon": "paper-plane",
+    "date": "03/04/2026",
+    "type": 2,
+    "category": {
+      "name": "Messaging",
+      "icon": "comments",
+      "description": "Send messages via various channels"
+    },
+    "inputs": [
+      {
+        "name": "bot_token",
+        "type": "string",
+        "value": null,
+        "label": "Bot Token",
+        "placeholder": "123456:ABC-DEF1234ghIkl-zyx57W2v1u123ew11",
+        "required": true
+      },
+      {
+        "name": "chat_id",
+        "type": "string",
+        "value": null,
+        "label": "Chat ID",
+        "placeholder": "12345678 or @channelname",
+        "required": true
+      },
+      {
+        "name": "message",
+        "type": "text",
+        "value": null,
+        "label": "Message",
+        "placeholder": "Hello from Flomation!",
+        "required": true
+      },
+      {
+        "name": "parse_mode",
+        "type": "string",
+        "value": null,
+        "label": "Parse Mode",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "None",
+            "value": ""
+          },
+          {
+            "name": "HTML",
+            "value": "HTML"
+          },
+          {
+            "name": "MarkdownV2",
+            "value": "MarkdownV2"
+          }
+        ]
+      }
+    ],
+    "outputs": [
+      {
+        "name": "message_id",
+        "type": "integer",
+        "value": null,
+        "label": "Message ID",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
         "placeholder": ""
       }
     ]
@@ -3471,6 +3921,88 @@
         "type": "string",
         "value": null,
         "label": "Schedule Mode",
+        "placeholder": ""
+      }
+    ]
+  },
+  "trigger/telegram": {
+    "hash": "d53098d38b67d64e56f47e927db7a94cd0792ef87476ab574f3dfe2631eda5c6",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Telegram Trigger",
+    "description": "Triggers a flow when a Telegram message is received",
+    "website": "https://www.flomation.co",
+    "icon": "paper-plane",
+    "date": "03/04/2026",
+    "type": 1,
+    "category": {
+      "name": "Triggers",
+      "icon": "bolt-lightning",
+      "description": "Start a Flow"
+    },
+    "inputs": null,
+    "outputs": [
+      {
+        "name": "chat_id",
+        "type": "string",
+        "value": null,
+        "label": "Chat ID",
+        "placeholder": ""
+      },
+      {
+        "name": "chat_type",
+        "type": "string",
+        "value": null,
+        "label": "Chat Type",
+        "placeholder": ""
+      },
+      {
+        "name": "sender",
+        "type": "string",
+        "value": null,
+        "label": "Sender",
+        "placeholder": ""
+      },
+      {
+        "name": "sender_id",
+        "type": "string",
+        "value": null,
+        "label": "Sender ID",
+        "placeholder": ""
+      },
+      {
+        "name": "sender_username",
+        "type": "string",
+        "value": null,
+        "label": "Sender Username",
+        "placeholder": ""
+      },
+      {
+        "name": "message_text",
+        "type": "string",
+        "value": null,
+        "label": "Message Text",
+        "placeholder": ""
+      },
+      {
+        "name": "message_id",
+        "type": "string",
+        "value": null,
+        "label": "Message ID",
+        "placeholder": ""
+      },
+      {
+        "name": "content",
+        "type": "string",
+        "value": null,
+        "label": "Content",
+        "placeholder": ""
+      },
+      {
+        "name": "agent_id",
+        "type": "string",
+        "value": null,
+        "label": "Agent ID",
         "placeholder": ""
       }
     ]

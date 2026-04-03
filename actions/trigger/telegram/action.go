@@ -19,13 +19,17 @@ const (
 var Outputs = [...]core.Connection{
 	{Name: "chat_id", Type: core.ConnectionTypeString, Label: "Chat ID"},
 	{Name: "chat_type", Type: core.ConnectionTypeString, Label: "Chat Type"},
+	{Name: "chat_title", Type: core.ConnectionTypeString, Label: "Chat Title"},
 	{Name: "sender", Type: core.ConnectionTypeString, Label: "Sender"},
 	{Name: "sender_id", Type: core.ConnectionTypeString, Label: "Sender ID"},
 	{Name: "sender_username", Type: core.ConnectionTypeString, Label: "Sender Username"},
+	{Name: "sender_name", Type: core.ConnectionTypeString, Label: "Sender Name"},
 	{Name: "message_text", Type: core.ConnectionTypeString, Label: "Message Text"},
 	{Name: "message_id", Type: core.ConnectionTypeString, Label: "Message ID"},
 	{Name: "content", Type: core.ConnectionTypeString, Label: "Content"},
 	{Name: "agent_id", Type: core.ConnectionTypeString, Label: "Agent ID"},
+	{Name: "channel_type", Type: core.ConnectionTypeString, Label: "Channel Type"},
+	{Name: "date", Type: core.ConnectionTypeString, Label: "Date"},
 }
 
 func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[string]interface{}, error) {
