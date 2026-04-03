@@ -42,6 +42,7 @@ import (
 	git_tag "flomation.app/automate/executor/actions/git/tag"
 	http_request "flomation.app/automate/executor/actions/http/request"
 	messaging_email "flomation.app/automate/executor/actions/messaging/email"
+	messaging_slack "flomation.app/automate/executor/actions/messaging/slack"
 	messaging_telegram "flomation.app/automate/executor/actions/messaging/telegram"
 	nosql_mongodb "flomation.app/automate/executor/actions/nosql/mongodb"
 	nosql_redis "flomation.app/automate/executor/actions/nosql/redis"
@@ -103,6 +104,7 @@ var Actions = map[string]core.Action{
 	"git/tag":                   git_tag.Execute,
 	"http/request":              http_request.Execute,
 	"messaging/email":           messaging_email.Execute,
+	"messaging/slack":           messaging_slack.Execute,
 	"messaging/telegram":        messaging_telegram.Execute,
 	"nosql/mongodb":             nosql_mongodb.Execute,
 	"nosql/redis":               nosql_redis.Execute,
