@@ -60,7 +60,7 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 		return nil, fmt.Errorf("execution context with API URL is required")
 	}
 
-	url := fmt.Sprintf("%s/api/v1/agent/%s/state/%s", ctx.APIURL, agentID, key)
+	url := fmt.Sprintf("%s/api/v1/internal/agent/%s/state/%s", ctx.APIURL, agentID, key)
 	req, err := http.NewRequestWithContext(flow.GoContext(), http.MethodGet, url, nil)
 	if err != nil {
 		return nil, fmt.Errorf("failed to create request: %w", err)

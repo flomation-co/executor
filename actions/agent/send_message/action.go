@@ -100,7 +100,7 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 		return nil, fmt.Errorf("failed to marshal message: %w", err)
 	}
 
-	url := fmt.Sprintf("%s/api/v1/agent/%s/message", ctx.APIURL, agentID)
+	url := fmt.Sprintf("%s/api/v1/internal/agent/%s/message", ctx.APIURL, agentID)
 	req, err := http.NewRequestWithContext(flow.GoContext(), http.MethodPost, url, bytes.NewReader(payload))
 	if err != nil {
 		return nil, fmt.Errorf("failed to create request: %w", err)
