@@ -62,6 +62,7 @@ import (
 	trigger_qr "flomation.app/automate/executor/actions/trigger/qr"
 	trigger_s3 "flomation.app/automate/executor/actions/trigger/s3"
 	trigger_schedule "flomation.app/automate/executor/actions/trigger/schedule"
+	trigger_slack "flomation.app/automate/executor/actions/trigger/slack"
 	trigger_telegram "flomation.app/automate/executor/actions/trigger/telegram"
 	trigger_webhook "flomation.app/automate/executor/actions/trigger/webhook"
 )
@@ -124,6 +125,7 @@ var Actions = map[string]core.Action{
 	"trigger/qr":                trigger_qr.Execute,
 	"trigger/s3":                trigger_s3.Execute,
 	"trigger/schedule":          trigger_schedule.Execute,
+	"trigger/slack":             trigger_slack.Execute,
 	"trigger/telegram":          trigger_telegram.Execute,
 	"trigger/webhook":           trigger_webhook.Execute,
 }
