@@ -1314,6 +1314,92 @@
       }
     ]
   },
+  "conditional/switch": {
+    "hash": "d51acc704a6116b130fa3e5203f18c9979b9549d356dc904f4bc19680ffa5308",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Switch",
+    "description": "Route execution to one of multiple branches based on matching conditions",
+    "website": "https://www.flomation.co",
+    "icon": "route",
+    "date": "04/04/2026",
+    "type": 6,
+    "category": {
+      "name": "Conditional",
+      "icon": "code-branch",
+      "description": "Control flow based on conditions"
+    },
+    "inputs": [
+      {
+        "name": "value",
+        "type": "string",
+        "value": null,
+        "label": "Value",
+        "placeholder": "The value to evaluate",
+        "required": true
+      },
+      {
+        "name": "operator",
+        "type": "string",
+        "value": null,
+        "label": "Operator",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "Equals",
+            "value": "equals"
+          },
+          {
+            "name": "Contains",
+            "value": "contains"
+          },
+          {
+            "name": "Starts With",
+            "value": "starts_with"
+          },
+          {
+            "name": "Ends With",
+            "value": "ends_with"
+          },
+          {
+            "name": "Regex",
+            "value": "regex"
+          }
+        ]
+      },
+      {
+        "name": "cases",
+        "type": "key_value_array",
+        "value": null,
+        "label": "Cases",
+        "placeholder": "Case label → condition value",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "matched_case",
+        "type": "string",
+        "value": null,
+        "label": "Matched Case",
+        "placeholder": ""
+      },
+      {
+        "name": "value",
+        "type": "string",
+        "value": null,
+        "label": "Value",
+        "placeholder": ""
+      },
+      {
+        "name": "matched",
+        "type": "boolean",
+        "value": null,
+        "label": "Has Match",
+        "placeholder": ""
+      }
+    ]
+  },
   "conditional/while": {
     "hash": "4030558203eb571abe0172329bb136d2c90948ffd47ceaad16b6ffcc653509ff",
     "author": "Andy Esser",
