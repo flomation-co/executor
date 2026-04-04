@@ -8,6 +8,8 @@ import (
 	agent_read_state "flomation.app/automate/executor/actions/agent/read_state"
 	agent_send_message "flomation.app/automate/executor/actions/agent/send_message"
 	agent_write_state "flomation.app/automate/executor/actions/agent/write_state"
+	ai_anthropic "flomation.app/automate/executor/actions/ai/anthropic"
+	ai_openai "flomation.app/automate/executor/actions/ai/openai"
 	arithmetic_addition "flomation.app/automate/executor/actions/arithmetic/addition"
 	arithmetic_division "flomation.app/automate/executor/actions/arithmetic/division"
 	arithmetic_multiplication "flomation.app/automate/executor/actions/arithmetic/multiplication"
@@ -72,6 +74,8 @@ var Actions = map[string]core.Action{
 	"agent/read_state":          agent_read_state.Execute,
 	"agent/send_message":        agent_send_message.Execute,
 	"agent/write_state":         agent_write_state.Execute,
+	"ai/anthropic":              ai_anthropic.Execute,
+	"ai/openai":                 ai_openai.Execute,
 	"arithmetic/addition":       arithmetic_addition.Execute,
 	"arithmetic/division":       arithmetic_division.Execute,
 	"arithmetic/multiplication": arithmetic_multiplication.Execute,

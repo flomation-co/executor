@@ -180,6 +180,280 @@
       }
     ]
   },
+  "ai/anthropic": {
+    "hash": "980e3aaadb8f901d954a4a7b01d17f666b56f8bc37f6b09d081a4bbd5783b1f9",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Anthropic Prompt",
+    "description": "Send a prompt to the Anthropic Messages API and return the response",
+    "website": "https://www.flomation.co",
+    "icon": "brain",
+    "date": "04/04/2026",
+    "type": 2,
+    "category": {
+      "name": "AI",
+      "icon": "brain",
+      "description": "Artificial intelligence and large language model integrations"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "string",
+        "value": null,
+        "label": "API Key",
+        "placeholder": "sk-ant-...",
+        "required": true
+      },
+      {
+        "name": "model",
+        "type": "string",
+        "value": null,
+        "label": "Model",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "Claude Sonnet 4.6",
+            "value": "claude-sonnet-4-6"
+          },
+          {
+            "name": "Claude Haiku 4.5",
+            "value": "claude-haiku-4-5-20251001"
+          },
+          {
+            "name": "Claude Opus 4.6",
+            "value": "claude-opus-4-6"
+          }
+        ]
+      },
+      {
+        "name": "system_prompt",
+        "type": "text",
+        "value": null,
+        "label": "System Prompt",
+        "placeholder": "You are a helpful assistant."
+      },
+      {
+        "name": "prompt",
+        "type": "text",
+        "value": null,
+        "label": "Prompt",
+        "placeholder": "What would you like to ask?",
+        "required": true
+      },
+      {
+        "name": "max_tokens",
+        "type": "integer",
+        "value": null,
+        "label": "Max Tokens",
+        "placeholder": "2048"
+      },
+      {
+        "name": "temperature",
+        "type": "string",
+        "value": null,
+        "label": "Temperature",
+        "placeholder": "0.7"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "response",
+        "type": "string",
+        "value": null,
+        "label": "Response",
+        "placeholder": ""
+      },
+      {
+        "name": "model",
+        "type": "string",
+        "value": null,
+        "label": "Model Used",
+        "placeholder": ""
+      },
+      {
+        "name": "input_tokens",
+        "type": "integer",
+        "value": null,
+        "label": "Input Tokens",
+        "placeholder": ""
+      },
+      {
+        "name": "output_tokens",
+        "type": "integer",
+        "value": null,
+        "label": "Output Tokens",
+        "placeholder": ""
+      },
+      {
+        "name": "stop_reason",
+        "type": "string",
+        "value": null,
+        "label": "Stop Reason",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "ai/openai": {
+    "hash": "3804072ec5ad087bac257e8d2ceac11990a4347cd91d1f26ef90516e62e3aab0",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "OpenAI Prompt",
+    "description": "Send a prompt to the OpenAI Chat Completions API and return the response",
+    "website": "https://www.flomation.co",
+    "icon": "brain",
+    "date": "04/04/2026",
+    "type": 2,
+    "category": {
+      "name": "AI",
+      "icon": "brain",
+      "description": "Artificial intelligence and large language model integrations"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "string",
+        "value": null,
+        "label": "API Key",
+        "placeholder": "sk-...",
+        "required": true
+      },
+      {
+        "name": "model",
+        "type": "string",
+        "value": null,
+        "label": "Model",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "GPT-4o",
+            "value": "gpt-4o"
+          },
+          {
+            "name": "GPT-4o Mini",
+            "value": "gpt-4o-mini"
+          },
+          {
+            "name": "GPT-4.1",
+            "value": "gpt-4.1"
+          },
+          {
+            "name": "GPT-4.1 Mini",
+            "value": "gpt-4.1-mini"
+          },
+          {
+            "name": "GPT-4.1 Nano",
+            "value": "gpt-4.1-nano"
+          },
+          {
+            "name": "o3",
+            "value": "o3"
+          },
+          {
+            "name": "o3 Mini",
+            "value": "o3-mini"
+          },
+          {
+            "name": "o4 Mini",
+            "value": "o4-mini"
+          }
+        ]
+      },
+      {
+        "name": "system_prompt",
+        "type": "text",
+        "value": null,
+        "label": "System Prompt",
+        "placeholder": "You are a helpful assistant."
+      },
+      {
+        "name": "prompt",
+        "type": "text",
+        "value": null,
+        "label": "Prompt",
+        "placeholder": "What would you like to ask?",
+        "required": true
+      },
+      {
+        "name": "max_tokens",
+        "type": "integer",
+        "value": null,
+        "label": "Max Tokens",
+        "placeholder": "2048"
+      },
+      {
+        "name": "temperature",
+        "type": "string",
+        "value": null,
+        "label": "Temperature",
+        "placeholder": "0.7"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "response",
+        "type": "string",
+        "value": null,
+        "label": "Response",
+        "placeholder": ""
+      },
+      {
+        "name": "model",
+        "type": "string",
+        "value": null,
+        "label": "Model Used",
+        "placeholder": ""
+      },
+      {
+        "name": "prompt_tokens",
+        "type": "integer",
+        "value": null,
+        "label": "Prompt Tokens",
+        "placeholder": ""
+      },
+      {
+        "name": "completion_tokens",
+        "type": "integer",
+        "value": null,
+        "label": "Completion Tokens",
+        "placeholder": ""
+      },
+      {
+        "name": "total_tokens",
+        "type": "integer",
+        "value": null,
+        "label": "Total Tokens",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
   "arithmetic/addition": {
     "hash": "b6fe525ab8d26c1f79d2d9ba9cd996eefdea0055ec48b79de78f23063f0838c0",
     "author": "Andy Esser",
