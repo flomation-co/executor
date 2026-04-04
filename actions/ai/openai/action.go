@@ -156,23 +156,24 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	client := &http.Client{Timeout: 120 * time.Second}
 	resp, err := client.Do(req)
 	if err != nil {
-		return map[string]interface{}{
-			"response": "", "model": model, "success": false, "error": err.Error(),
-			"prompt_tokens": int64(0), "completion_tokens": int64(0), "total_tokens": int64(0),
-		}, nil
+		return nil, fmt.Errorf("OpenAI request failed: %w", err)
 	}
 	defer resp.Body.Close()
 
 	respBody, _ := io.ReadAll(io.LimitReader(resp.Body, maxResponseBody))
 
 	if resp.StatusCode != http.StatusOK {
-		return map[string]interface{}{
-			"response": "", "model": model, "success": false,
-			"error":             fmt.Sprintf("API returned %d: %s", resp.StatusCode, string(respBody)),
-			"prompt_tokens":     int64(0),
-			"completion_tokens": int64(0),
-			"total_tokens":      int64(0),
-		}, nil
+		var apiErr struct {
+			Error struct {
+				Message string `json:"message"`
+			} `json:"error"`
+		}
+		json.Unmarshal(respBody, &apiErr)
+		errMsg := apiErr.Error.Message
+		if errMsg == "" {
+			errMsg = string(respBody)
+		}
+		return nil, fmt.Errorf("OpenAI API error (%d): %s", resp.StatusCode, errMsg)
 	}
 
 	var result struct {
@@ -190,10 +191,7 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	}
 
 	if err := json.Unmarshal(respBody, &result); err != nil {
-		return map[string]interface{}{
-			"response": "", "model": model, "success": false, "error": "failed to parse response",
-			"prompt_tokens": int64(0), "completion_tokens": int64(0), "total_tokens": int64(0),
-		}, nil
+		return nil, fmt.Errorf("failed to parse OpenAI response: %w", err)
 	}
 
 	content := ""

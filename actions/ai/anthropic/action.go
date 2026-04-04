@@ -146,10 +146,7 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	client := &http.Client{Timeout: 120 * time.Second}
 	resp, err := client.Do(req)
 	if err != nil {
-		return map[string]interface{}{
-			"response": "", "model": model, "success": false, "error": err.Error(),
-			"input_tokens": int64(0), "output_tokens": int64(0), "stop_reason": "",
-		}, nil
+		return nil, fmt.Errorf("Anthropic request failed: %w", err)
 	}
 	defer resp.Body.Close()
 
@@ -164,12 +161,9 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 		json.Unmarshal(respBody, &apiErr)
 		errMsg := apiErr.Error.Message
 		if errMsg == "" {
-			errMsg = fmt.Sprintf("API returned %d", resp.StatusCode)
+			errMsg = string(respBody)
 		}
-		return map[string]interface{}{
-			"response": "", "model": model, "success": false, "error": errMsg,
-			"input_tokens": int64(0), "output_tokens": int64(0), "stop_reason": "",
-		}, nil
+		return nil, fmt.Errorf("Anthropic API error (%d): %s", resp.StatusCode, errMsg)
 	}
 
 	var result struct {
@@ -186,10 +180,7 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	}
 
 	if err := json.Unmarshal(respBody, &result); err != nil {
-		return map[string]interface{}{
-			"response": "", "model": model, "success": false, "error": "failed to parse response",
-			"input_tokens": int64(0), "output_tokens": int64(0), "stop_reason": "",
-		}, nil
+		return nil, fmt.Errorf("failed to parse Anthropic response: %w", err)
 	}
 
 	// Extract text content
