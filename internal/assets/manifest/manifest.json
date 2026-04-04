@@ -1,6 +1,6 @@
 {
   "agent/read_state": {
-    "hash": "9f2922b0e62faf6ebab9a32b76c9970c5a56f22beb0bb107cb1f88388825e673",
+    "hash": "07d0557a62bd7a4f12ee06dc9a8ff810ecd29a6dd46122b5cd3af06fe0f9649a",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Read Agent State",
@@ -50,7 +50,7 @@
     ]
   },
   "agent/send_message": {
-    "hash": "c8907e636602732026ca5f617590c05892dd820042eb0fe7e97fd4436016c395",
+    "hash": "8df6a5d7bf5c5a62f4df29a8288ff0b5b0b75e3c90aa4bde63816cff8c37b203",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Send Agent Message",
@@ -130,7 +130,7 @@
     ]
   },
   "agent/write_state": {
-    "hash": "2ccffa26a1a9cf5982e876a1970a99c60f974494be7c4eca147829c5a4c5738d",
+    "hash": "5df38bff5e4190153d7bb4e4273566dc01c15bfbc4918dc22a63c37cd03878b3",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Write Agent State",
@@ -1109,7 +1109,7 @@
     ]
   },
   "common/start_flow": {
-    "hash": "07eebde66e10cb8685a5165dbdbbfe9ea20b4e60ede6372b74ab7178f1ddce66",
+    "hash": "17df3ed5e80e3b5870346bce09f61b13eaa51fd2c59801da178a1076d695825c",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Start Flow",
@@ -2358,6 +2358,78 @@
       }
     ],
     "outputs": [
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "messaging/slack": {
+    "hash": "b080bbe262cbf72d38c0c18a31689523a673e067b93e2e8690062defd53eb67c",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Send Slack Message",
+    "description": "Send a message to a Slack channel via the Bot API",
+    "website": "https://www.flomation.co",
+    "icon": "hashtag",
+    "date": "03/04/2026",
+    "type": 2,
+    "category": {
+      "name": "Messaging",
+      "icon": "comments",
+      "description": "Send messages via various channels"
+    },
+    "inputs": [
+      {
+        "name": "bot_token",
+        "type": "string",
+        "value": null,
+        "label": "Bot Token",
+        "placeholder": "xoxb-...",
+        "required": true
+      },
+      {
+        "name": "channel_id",
+        "type": "string",
+        "value": null,
+        "label": "Channel ID",
+        "placeholder": "C01234ABCDE",
+        "required": true
+      },
+      {
+        "name": "message",
+        "type": "text",
+        "value": null,
+        "label": "Message",
+        "placeholder": "Hello from Flomation!",
+        "required": true
+      },
+      {
+        "name": "thread_ts",
+        "type": "string",
+        "value": null,
+        "label": "Thread Timestamp",
+        "placeholder": "Reply in thread (optional)"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "timestamp",
+        "type": "string",
+        "value": null,
+        "label": "Message Timestamp",
+        "placeholder": ""
+      },
       {
         "name": "success",
         "type": "boolean",
@@ -3925,8 +3997,118 @@
       }
     ]
   },
+  "trigger/slack": {
+    "hash": "71f4748d41beea0976e746946a83aa69f1fa84899ee85d0f45e33124266dfa46",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Slack Trigger",
+    "description": "Triggers a flow when a Slack message or app mention is received",
+    "website": "https://www.flomation.co",
+    "icon": "hashtag",
+    "date": "03/04/2026",
+    "type": 1,
+    "category": {
+      "name": "Triggers",
+      "icon": "bolt-lightning",
+      "description": "Start a Flow"
+    },
+    "inputs": null,
+    "outputs": [
+      {
+        "name": "user_id",
+        "type": "string",
+        "value": null,
+        "label": "User ID",
+        "placeholder": ""
+      },
+      {
+        "name": "user_name",
+        "type": "string",
+        "value": null,
+        "label": "User Name",
+        "placeholder": ""
+      },
+      {
+        "name": "display_name",
+        "type": "string",
+        "value": null,
+        "label": "Display Name",
+        "placeholder": ""
+      },
+      {
+        "name": "sender",
+        "type": "string",
+        "value": null,
+        "label": "Sender",
+        "placeholder": ""
+      },
+      {
+        "name": "channel_id",
+        "type": "string",
+        "value": null,
+        "label": "Channel ID",
+        "placeholder": ""
+      },
+      {
+        "name": "content",
+        "type": "string",
+        "value": null,
+        "label": "Message Text",
+        "placeholder": ""
+      },
+      {
+        "name": "timestamp",
+        "type": "string",
+        "value": null,
+        "label": "Message Timestamp",
+        "placeholder": ""
+      },
+      {
+        "name": "thread_ts",
+        "type": "string",
+        "value": null,
+        "label": "Thread Timestamp",
+        "placeholder": ""
+      },
+      {
+        "name": "team_id",
+        "type": "string",
+        "value": null,
+        "label": "Team ID",
+        "placeholder": ""
+      },
+      {
+        "name": "event_id",
+        "type": "string",
+        "value": null,
+        "label": "Event ID",
+        "placeholder": ""
+      },
+      {
+        "name": "event_type",
+        "type": "string",
+        "value": null,
+        "label": "Event Type",
+        "placeholder": ""
+      },
+      {
+        "name": "agent_id",
+        "type": "string",
+        "value": null,
+        "label": "Agent ID",
+        "placeholder": ""
+      },
+      {
+        "name": "channel_type",
+        "type": "string",
+        "value": null,
+        "label": "Channel Type",
+        "placeholder": ""
+      }
+    ]
+  },
   "trigger/telegram": {
-    "hash": "d53098d38b67d64e56f47e927db7a94cd0792ef87476ab574f3dfe2631eda5c6",
+    "hash": "2e7bf359cc2f075fd8011b466ab5b7d56d0241b137e68c69e430dfd25794372a",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Telegram Trigger",
@@ -3957,6 +4139,13 @@
         "placeholder": ""
       },
       {
+        "name": "chat_title",
+        "type": "string",
+        "value": null,
+        "label": "Chat Title",
+        "placeholder": ""
+      },
+      {
         "name": "sender",
         "type": "string",
         "value": null,
@@ -3975,6 +4164,13 @@
         "type": "string",
         "value": null,
         "label": "Sender Username",
+        "placeholder": ""
+      },
+      {
+        "name": "sender_name",
+        "type": "string",
+        "value": null,
+        "label": "Sender Name",
         "placeholder": ""
       },
       {
@@ -4003,6 +4199,20 @@
         "type": "string",
         "value": null,
         "label": "Agent ID",
+        "placeholder": ""
+      },
+      {
+        "name": "channel_type",
+        "type": "string",
+        "value": null,
+        "label": "Channel Type",
+        "placeholder": ""
+      },
+      {
+        "name": "date",
+        "type": "string",
+        "value": null,
+        "label": "Date",
         "placeholder": ""
       }
     ]

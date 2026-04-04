@@ -25,6 +25,7 @@ const (
 	ActionTypeOutput      = 3
 	ActionTypeConditional = 4
 	ActionTypeLoop        = 5
+	ActionTypeSwitch      = 6
 )
 
 var (
@@ -799,6 +800,16 @@ func (f *Flow) executeNodeChildren(actions map[string]Action, node *Node, output
 			children = f.FindTargetByHandle(node.ID, "true-branch")
 		} else {
 			children = f.FindTargetByHandle(node.ID, "false-branch")
+		}
+	} else if node.Data.Config.Type == ActionTypeSwitch {
+		// Switch: route to the matched case handle, or default
+		branch, _ := outputs["matched_case"].(string)
+		if branch != "" {
+			children = f.FindTargetByHandle(node.ID, branch)
+		}
+		// Fall back to default handle if no match or no children on matched handle
+		if len(children) == 0 {
+			children = f.FindTargetByHandle(node.ID, "default")
 		}
 	} else if node.Data.Config.Type == ActionTypeLoop {
 		// Loop execution: iterate body children, then execute output children

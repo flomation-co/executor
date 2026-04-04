@@ -27,6 +27,7 @@ import (
 	common_start_flow "flomation.app/automate/executor/actions/common/start_flow"
 	conditional_for "flomation.app/automate/executor/actions/conditional/for"
 	conditional_if "flomation.app/automate/executor/actions/conditional/if"
+	conditional_switch "flomation.app/automate/executor/actions/conditional/switch"
 	conditional_while "flomation.app/automate/executor/actions/conditional/while"
 	error_on_error "flomation.app/automate/executor/actions/error/on_error"
 	file_read "flomation.app/automate/executor/actions/file/read"
@@ -90,6 +91,7 @@ var Actions = map[string]core.Action{
 	"common/start_flow":         common_start_flow.Execute,
 	"conditional/for":           conditional_for.Execute,
 	"conditional/if":            conditional_if.Execute,
+	"conditional/switch":        conditional_switch.Execute,
 	"conditional/while":         conditional_while.Execute,
 	"error/on_error":            error_on_error.Execute,
 	"file/read":                 file_read.Execute,
