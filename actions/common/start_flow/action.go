@@ -90,9 +90,19 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 		return nil, fmt.Errorf("API URL not available in execution context")
 	}
 
-	// Trigger the flow
-	triggerURL := fmt.Sprintf("%s/api/v1/flo/%s/execute", ctx.APIURL, flowID)
-	resp, err := http.Post(triggerURL, "application/json", bytes.NewBuffer([]byte("{}")))
+	// Trigger the flow via internal endpoint (no auth required)
+	triggerURL := fmt.Sprintf("%s/api/v1/internal/flo/%s/execute", ctx.APIURL, flowID)
+	req, err := http.NewRequest(http.MethodPost, triggerURL, bytes.NewBuffer([]byte("{}")))
+	if err != nil {
+		return nil, fmt.Errorf("failed to create request: %w", err)
+	}
+	req.Header.Set("Content-Type", "application/json")
+	if ctx.Token != "" {
+		req.Header.Set("Authorization", "Bearer "+ctx.Token)
+	}
+
+	client := http.Client{Timeout: 30 * time.Second}
+	resp, err := client.Do(req)
 	if err != nil {
 		return nil, fmt.Errorf("failed to trigger flow: %w", err)
 	}
@@ -116,12 +126,16 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 
 	if waitForCompletion {
 		deadline := time.Now().Add(time.Duration(timeoutSeconds) * time.Second)
-		pollURL := fmt.Sprintf("%s/api/v1/execution/%s", ctx.APIURL, executionID)
+		pollURL := fmt.Sprintf("%s/api/v1/internal/execution/%s", ctx.APIURL, executionID)
 
 		for time.Now().Before(deadline) {
 			time.Sleep(2 * time.Second)
 
-			pollResp, err := http.Get(pollURL)
+			pollReq, _ := http.NewRequest(http.MethodGet, pollURL, nil)
+			if ctx.Token != "" {
+				pollReq.Header.Set("Authorization", "Bearer "+ctx.Token)
+			}
+			pollResp, err := client.Do(pollReq)
 			if err != nil {
 				log.WithFields(log.Fields{"error": err}).Warn("failed to poll execution status")
 				continue

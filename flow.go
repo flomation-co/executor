@@ -25,6 +25,7 @@ const (
 	ActionTypeOutput      = 3
 	ActionTypeConditional = 4
 	ActionTypeLoop        = 5
+	ActionTypeSwitch      = 6
 )
 
 var (
@@ -243,6 +244,7 @@ type ExecutionContext struct {
 	TriggererEmail string `json:"triggerer_email"`
 	APIURL         string `json:"api_url,omitempty"`
 	Token          string `json:"token,omitempty"`
+	SystemPrompt   string `json:"system_prompt,omitempty"`
 }
 
 // GetContext returns the full execution context.
@@ -273,6 +275,8 @@ func (ctx *ExecutionContext) Get(name string) string {
 		return ctx.AuthorEmail
 	case "triggerer_email":
 		return ctx.TriggererEmail
+	case "system_prompt":
+		return ctx.SystemPrompt
 	default:
 		return ""
 	}
@@ -376,6 +380,11 @@ func Load(path *string) (*Flow, error) {
 // InjectTriggerData merges trigger invocation data into the first trigger
 // node's inputs, making dynamic event data available to the flow.
 func (f *Flow) InjectTriggerData(data map[string]interface{}) {
+	// If channel_type is present, try to match the specific trigger node first
+	channelType, _ := data["channel_type"].(string)
+
+	var targetNode *Node
+
 	for _, n := range f.Nodes {
 		if n == nil || n.Data == nil {
 			continue
@@ -388,31 +397,51 @@ func (f *Flow) InjectTriggerData(data map[string]interface{}) {
 			continue
 		}
 
-		// Add each data field as an input connection on the trigger node
-		for k, v := range data {
-			found := false
-			for _, input := range n.Data.Config.Inputs {
-				if input.Name == k {
-					input.Value = v
-					found = true
-					break
-				}
-			}
-			if !found {
-				n.Data.Config.Inputs = append(n.Data.Config.Inputs, &Connection{
-					Name:  k,
-					Type:  ConnectionTypeString,
-					Value: v,
-				})
+		// Match channel type to trigger label (e.g. "slack" matches "trigger/slack")
+		if channelType != "" {
+			label := n.Data.Label
+			if label == "trigger/"+channelType {
+				targetNode = n
+				break
 			}
 		}
 
-		log.WithFields(log.Fields{
-			"node_id": n.ID,
-			"keys":    len(data),
-		}).Info("injected trigger data into trigger node")
-		break
+		// Record first trigger as fallback
+		if targetNode == nil {
+			targetNode = n
+		}
 	}
+
+	if targetNode == nil {
+		return
+	}
+
+	n := targetNode
+
+	// Add each data field as an input connection on the trigger node
+	for k, v := range data {
+		found := false
+		for _, input := range n.Data.Config.Inputs {
+			if input.Name == k {
+				input.Value = v
+				found = true
+				break
+			}
+		}
+		if !found {
+			n.Data.Config.Inputs = append(n.Data.Config.Inputs, &Connection{
+				Name:  k,
+				Type:  ConnectionTypeString,
+				Value: v,
+			})
+		}
+	}
+
+	log.WithFields(log.Fields{
+		"node_id": n.ID,
+		"label":   n.Data.Label,
+		"keys":    len(data),
+	}).Info("injected trigger data into trigger node")
 }
 
 func (f *Flow) Execute(actions map[string]Action, entry *string, environment *environment.Environment) (map[string]interface{}, error) {
@@ -774,6 +803,16 @@ func (f *Flow) executeNodeChildren(actions map[string]Action, node *Node, output
 			children = f.FindTargetByHandle(node.ID, "true-branch")
 		} else {
 			children = f.FindTargetByHandle(node.ID, "false-branch")
+		}
+	} else if node.Data.Config.Type == ActionTypeSwitch {
+		// Switch: route to the matched case handle, or default
+		branch, _ := outputs["matched_case"].(string)
+		if branch != "" {
+			children = f.FindTargetByHandle(node.ID, branch)
+		}
+		// Fall back to default handle if no match or no children on matched handle
+		if len(children) == 0 {
+			children = f.FindTargetByHandle(node.ID, "default")
 		}
 	} else if node.Data.Config.Type == ActionTypeLoop {
 		// Loop execution: iterate body children, then execute output children
