@@ -244,6 +244,7 @@ type ExecutionContext struct {
 	TriggererEmail string `json:"triggerer_email"`
 	APIURL         string `json:"api_url,omitempty"`
 	Token          string `json:"token,omitempty"`
+	SystemPrompt   string `json:"system_prompt,omitempty"`
 }
 
 // GetContext returns the full execution context.
@@ -274,6 +275,8 @@ func (ctx *ExecutionContext) Get(name string) string {
 		return ctx.AuthorEmail
 	case "triggerer_email":
 		return ctx.TriggererEmail
+	case "system_prompt":
+		return ctx.SystemPrompt
 	default:
 		return ""
 	}
