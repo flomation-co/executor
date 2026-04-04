@@ -19,6 +19,7 @@ const (
 var Outputs = [...]core.Connection{
 	{Name: "user_id", Type: core.ConnectionTypeString, Label: "User ID"},
 	{Name: "user_name", Type: core.ConnectionTypeString, Label: "User Name"},
+	{Name: "display_name", Type: core.ConnectionTypeString, Label: "Display Name"},
 	{Name: "sender", Type: core.ConnectionTypeString, Label: "Sender"},
 	{Name: "channel_id", Type: core.ConnectionTypeString, Label: "Channel ID"},
 	{Name: "content", Type: core.ConnectionTypeString, Label: "Message Text"},
