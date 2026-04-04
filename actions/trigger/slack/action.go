@@ -18,6 +18,8 @@ const (
 
 var Outputs = [...]core.Connection{
 	{Name: "user_id", Type: core.ConnectionTypeString, Label: "User ID"},
+	{Name: "user_name", Type: core.ConnectionTypeString, Label: "User Name"},
+	{Name: "sender", Type: core.ConnectionTypeString, Label: "Sender"},
 	{Name: "channel_id", Type: core.ConnectionTypeString, Label: "Channel ID"},
 	{Name: "content", Type: core.ConnectionTypeString, Label: "Message Text"},
 	{Name: "timestamp", Type: core.ConnectionTypeString, Label: "Message Timestamp"},
@@ -25,7 +27,6 @@ var Outputs = [...]core.Connection{
 	{Name: "team_id", Type: core.ConnectionTypeString, Label: "Team ID"},
 	{Name: "event_id", Type: core.ConnectionTypeString, Label: "Event ID"},
 	{Name: "event_type", Type: core.ConnectionTypeString, Label: "Event Type"},
-	{Name: "sender", Type: core.ConnectionTypeString, Label: "Sender"},
 	{Name: "agent_id", Type: core.ConnectionTypeString, Label: "Agent ID"},
 	{Name: "channel_type", Type: core.ConnectionTypeString, Label: "Channel Type"},
 }
