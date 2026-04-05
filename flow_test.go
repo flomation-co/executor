@@ -1,6 +1,7 @@
 package core
 
 import (
+	"encoding/json"
 	"testing"
 
 	. "github.com/onsi/gomega"
@@ -148,6 +149,10 @@ func TestExecutionContextGet(t *testing.T) {
 		TriggerType:    "schedule",
 		AuthorEmail:    "author@example.com",
 		TriggererEmail: "trigger@example.com",
+		SystemPrompt:   "You are helpful.",
+		AgentID:        "agent-aaa",
+		AgentUserID:    "user-bbb",
+		ConversationID: "conv-ccc",
 	}
 
 	Expect(ctx.Get("flow_id")).To(Equal("flo-123"))
@@ -160,7 +165,60 @@ func TestExecutionContextGet(t *testing.T) {
 	Expect(ctx.Get("trigger_type")).To(Equal("schedule"))
 	Expect(ctx.Get("author_email")).To(Equal("author@example.com"))
 	Expect(ctx.Get("triggerer_email")).To(Equal("trigger@example.com"))
+	Expect(ctx.Get("system_prompt")).To(Equal("You are helpful."))
+	Expect(ctx.Get("agent_id")).To(Equal("agent-aaa"))
+	Expect(ctx.Get("agent_user_id")).To(Equal("user-bbb"))
+	Expect(ctx.Get("conversation_id")).To(Equal("conv-ccc"))
 	Expect(ctx.Get("nonexistent")).To(Equal(""))
+}
+
+// TestExecutionContextJSONRoundtrip ensures the agent memory fields
+// added in Phase 1.5 survive a JSON marshal/unmarshal cycle. This is
+// the path the runner actually uses: it marshals a map with these
+// keys, writes it to context.json, and the executor reads it back
+// into ExecutionContext at flow entry. A regression here would mean
+// the executor silently loses agent scoping on every execution.
+func TestExecutionContextJSONRoundtrip(t *testing.T) {
+	RegisterTestingT(t)
+
+	original := ExecutionContext{
+		FlowID:         "flo-1",
+		AgentID:        "agent-aaa",
+		AgentUserID:    "user-bbb",
+		ConversationID: "conv-ccc",
+	}
+
+	raw, err := json.Marshal(original)
+	Expect(err).To(BeNil())
+	// Marshalled output must use the canonical snake_case keys — the
+	// runner writes these keys literally into context.json.
+	Expect(string(raw)).To(ContainSubstring(`"agent_id":"agent-aaa"`))
+	Expect(string(raw)).To(ContainSubstring(`"agent_user_id":"user-bbb"`))
+	Expect(string(raw)).To(ContainSubstring(`"conversation_id":"conv-ccc"`))
+
+	var decoded ExecutionContext
+	Expect(json.Unmarshal(raw, &decoded)).To(Succeed())
+	Expect(decoded.AgentID).To(Equal("agent-aaa"))
+	Expect(decoded.AgentUserID).To(Equal("user-bbb"))
+	Expect(decoded.ConversationID).To(Equal("conv-ccc"))
+}
+
+// TestExecutionContextJSONRoundtrip_EmptyFieldsOmitted ensures a
+// non-agent execution produces a clean context.json without noisy
+// empty agent_* keys. The `omitempty` tags guard this, and the test
+// pins the invariant so a future field-add doesn't accidentally drop
+// the tag.
+func TestExecutionContextJSONRoundtrip_EmptyFieldsOmitted(t *testing.T) {
+	RegisterTestingT(t)
+
+	ctx := ExecutionContext{FlowID: "flo-1"}
+	raw, err := json.Marshal(ctx)
+	Expect(err).To(BeNil())
+
+	Expect(string(raw)).NotTo(ContainSubstring("agent_id"))
+	Expect(string(raw)).NotTo(ContainSubstring("agent_user_id"))
+	Expect(string(raw)).NotTo(ContainSubstring("conversation_id"))
+	Expect(string(raw)).NotTo(ContainSubstring("system_prompt"))
 }
 
 func TestFlowVariableSubstitution(t *testing.T) {
@@ -234,6 +292,95 @@ func TestFlowVariableSubstitution(t *testing.T) {
 	Expect(result["exec_id"]).To(Equal("Execution: exec-xyz"))
 	Expect(result["flow_id"]).To(Equal("flo-abc"))
 	Expect(result["runner"]).To(Equal("runner-42"))
+}
+
+// TestFlowWholeValueReferencePreservesType verifies that when an input's
+// entire value is a single ${name} reference and the referenced parent
+// output is a non-string value (e.g. an array of conversation messages),
+// the raw typed value is preserved on the downstream input rather than
+// being stringified via fmt.Sprintf. This is required for AI actions that
+// accept a conversation_history array.
+func TestFlowWholeValueReferencePreservesType(t *testing.T) {
+	RegisterTestingT(t)
+
+	triggerAction := func(flow *Flow, node *Node, inputs []*Connection) (map[string]interface{}, error) {
+		result := make(map[string]interface{})
+		for _, input := range inputs {
+			if input.Value != nil {
+				result[input.Name] = input.Value
+			}
+		}
+		return result, nil
+	}
+
+	var captured interface{}
+	capturingAction := func(flow *Flow, node *Node, inputs []*Connection) (map[string]interface{}, error) {
+		for _, c := range inputs {
+			if c.Name == "history" {
+				captured = c.Value
+			}
+		}
+		return map[string]interface{}{}, nil
+	}
+
+	actions := map[string]Action{
+		"trigger/manual": triggerAction,
+		"action/ai":      capturingAction,
+	}
+
+	history := []map[string]string{
+		{"role": "user", "content": "hello"},
+		{"role": "assistant", "content": "hi there"},
+	}
+
+	f := &Flow{
+		Nodes: []*Node{
+			{
+				ID:   "trigger-1",
+				Type: "trigger/manual",
+				Data: &NodeData{
+					Label: "trigger/manual",
+					Config: NodeConfig{
+						ID:   "trigger-1",
+						Type: ActionTypeTrigger,
+						Inputs: []*Connection{
+							{Name: "conversation_history", Type: ConnectionTypeObject, Value: history},
+						},
+					},
+				},
+			},
+			{
+				ID:   "action-1",
+				Type: "action/ai",
+				Data: &NodeData{
+					Label: "action/ai",
+					Config: NodeConfig{
+						ID:   "action-1",
+						Type: ActionTypeAction,
+						Inputs: []*Connection{
+							{Name: "history", Type: ConnectionTypeObject, Value: "${conversation_history}"},
+						},
+					},
+				},
+			},
+		},
+		Edges: []*Edge{
+			{ID: "e1", Source: "trigger-1", Target: "action-1"},
+		},
+		nodeResults: make(map[string]map[string]interface{}),
+		outputs:     make(map[string]interface{}),
+	}
+
+	entry := "trigger-1"
+	_, err := f.Execute(actions, &entry, nil)
+	Expect(err).To(BeNil())
+
+	// captured must be the typed slice, not a stringified form.
+	slice, ok := captured.([]map[string]string)
+	Expect(ok).To(BeTrue(), "expected raw []map[string]string, got %T", captured)
+	Expect(slice).To(HaveLen(2))
+	Expect(slice[0]["role"]).To(Equal("user"))
+	Expect(slice[1]["content"]).To(Equal("hi there"))
 }
 
 func TestFlowVariableSubstitutionWithoutContext(t *testing.T) {

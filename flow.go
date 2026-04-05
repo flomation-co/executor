@@ -245,6 +245,26 @@ type ExecutionContext struct {
 	APIURL         string `json:"api_url,omitempty"`
 	Token          string `json:"token,omitempty"`
 	SystemPrompt   string `json:"system_prompt,omitempty"`
+	// AgentID is set when this execution is running as part of an agent
+	// orchestrator flow. When present, AI actions use it to automatically
+	// record their response as a direction=outbound agent_message so the
+	// next turn's conversation_history includes assistant replies. This is
+	// what prevents the conversation-loop bug where the model sees only
+	// consecutive user turns and tries to answer them all at once.
+	AgentID string `json:"agent_id,omitempty"`
+	// AgentUserID is the canonical AgentUser this turn belongs to, as
+	// resolved by Launch from the inbound message's stable external id
+	// (e.g. Slack U-id, Telegram numeric sender id). Phase 2 semantic
+	// memory retrieval uses this to scope memory lookups per-user, so
+	// preferences persist across channels and conversations. Empty when
+	// the execution is not running in an agent context.
+	AgentUserID string `json:"agent_user_id,omitempty"`
+	// ConversationID is the current open conversation scoped to
+	// (agent, user, channel, thread). AI actions auto-record their
+	// outbound turn into this conversation so the sequence column
+	// stays contiguous and future conversation_history fetches see
+	// assistant replies interleaved with user turns.
+	ConversationID string `json:"conversation_id,omitempty"`
 }
 
 // GetContext returns the full execution context.
@@ -277,6 +297,12 @@ func (ctx *ExecutionContext) Get(name string) string {
 		return ctx.TriggererEmail
 	case "system_prompt":
 		return ctx.SystemPrompt
+	case "agent_id":
+		return ctx.AgentID
+	case "agent_user_id":
+		return ctx.AgentUserID
+	case "conversation_id":
+		return ctx.ConversationID
 	default:
 		return ""
 	}
@@ -700,7 +726,8 @@ func (f *Flow) executeNodeActionOnly(actions map[string]Action, node *Node, envi
 		// substitute directly. For non-string types, we only stringify-and-
 		// substitute when the raw value actually contains a ${...} reference
 		// (e.g. "${env.X}" in an integer field) — otherwise the typed value
-		// flows through untouched.
+		// flows through untouched. Non-string pass-through is critical for
+		// array/object inputs like conversation_history on AI actions.
 		var val *string
 		if s, ok := value.(string); ok {
 			val = &s
@@ -710,6 +737,35 @@ func (f *Flow) executeNodeActionOnly(actions map[string]Action, node *Node, envi
 				val = &raw
 			}
 		}
+
+		// Whole-value reference: when an input's entire value is a single
+		// ${name} reference and the referenced value is a non-string (e.g.
+		// an array of conversation history messages), preserve the raw
+		// typed value instead of stringifying it. This is required for AI
+		// action inputs that accept arrays/objects.
+		if val != nil {
+			trimmed := strings.TrimSpace(*val)
+			wholeRef := regexp.MustCompile(`^\$\{([^{}]+)\}$`)
+			if sub := wholeRef.FindStringSubmatch(trimmed); sub != nil {
+				name := sub[1]
+				// Only intercept plain parent-result references.
+				if !strings.HasPrefix(name, "env.") && !strings.HasPrefix(name, "flow.") &&
+					!strings.HasPrefix(name, "var.") && !strings.HasPrefix(name, "secrets.") &&
+					!strings.HasPrefix(name, "secret.") {
+					if res, exists := parentResults[name]; exists {
+						if _, isStr := res.(string); !isStr {
+							configuration = append(configuration, &Connection{
+								Name:  v.Name,
+								Type:  v.Type,
+								Value: res,
+							})
+							continue
+						}
+					}
+				}
+			}
+		}
+
 		if val != nil {
 			r := regexp.MustCompile(`\${[^{}]*}`)
 			matches := r.FindAllString(*val, -1)

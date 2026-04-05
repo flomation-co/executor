@@ -1,4 +1,4 @@
-package ai_actions
+package ai_common
 
 const (
 	CategoryName        = "AI"
