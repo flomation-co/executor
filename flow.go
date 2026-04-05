@@ -252,6 +252,19 @@ type ExecutionContext struct {
 	// what prevents the conversation-loop bug where the model sees only
 	// consecutive user turns and tries to answer them all at once.
 	AgentID string `json:"agent_id,omitempty"`
+	// AgentUserID is the canonical AgentUser this turn belongs to, as
+	// resolved by Launch from the inbound message's stable external id
+	// (e.g. Slack U-id, Telegram numeric sender id). Phase 2 semantic
+	// memory retrieval uses this to scope memory lookups per-user, so
+	// preferences persist across channels and conversations. Empty when
+	// the execution is not running in an agent context.
+	AgentUserID string `json:"agent_user_id,omitempty"`
+	// ConversationID is the current open conversation scoped to
+	// (agent, user, channel, thread). AI actions auto-record their
+	// outbound turn into this conversation so the sequence column
+	// stays contiguous and future conversation_history fetches see
+	// assistant replies interleaved with user turns.
+	ConversationID string `json:"conversation_id,omitempty"`
 }
 
 // GetContext returns the full execution context.
@@ -286,6 +299,10 @@ func (ctx *ExecutionContext) Get(name string) string {
 		return ctx.SystemPrompt
 	case "agent_id":
 		return ctx.AgentID
+	case "agent_user_id":
+		return ctx.AgentUserID
+	case "conversation_id":
+		return ctx.ConversationID
 	default:
 		return ""
 	}
