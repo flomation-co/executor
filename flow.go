@@ -377,6 +377,28 @@ func Load(path *string) (*Flow, error) {
 	return &f, nil
 }
 
+// reservedTriggerDataKeys enumerates trigger-data keys that must NOT be
+// injected as inputs on a trigger node. These are values that users compose
+// into text on downstream actions — e.g. an AI action's System Prompt field
+// typically contains "${flow.system_prompt}\n\n<extra directives>". They
+// are surfaced to the flow via the ExecutionContext (accessed as
+// ${flow.xxx}) instead of via the trigger-node-echo relay path.
+//
+// If we injected such a key onto the trigger node, the trigger's action
+// would re-emit it as an output and the auto-wire-by-name mechanism in
+// executeNodeActionOnly would clobber the user-composed text with the bare
+// value. The explicit-wins precedence rule in executeNodeActionOnly already
+// guards against that clobber, but filtering here is defence in depth and
+// keeps the trigger node's input/output surface clean.
+//
+// Note: keys that users reference whole (e.g. ${conversation_history} for
+// an array input on an AI action) are deliberately NOT reserved. They rely
+// on the trigger echoing them through as outputs so that auto-wire or the
+// whole-value-reference substitution path can pick them up downstream.
+var reservedTriggerDataKeys = map[string]bool{
+	"system_prompt": true,
+}
+
 // InjectTriggerData merges trigger invocation data into the first trigger
 // node's inputs, making dynamic event data available to the flow.
 func (f *Flow) InjectTriggerData(data map[string]interface{}) {
@@ -418,8 +440,20 @@ func (f *Flow) InjectTriggerData(data map[string]interface{}) {
 
 	n := targetNode
 
-	// Add each data field as an input connection on the trigger node
+	// Add each data field as an input connection on the trigger node.
+	//
+	// Reserved keys are agent-orchestration values that are already surfaced
+	// to the flow via the ExecutionContext (e.g. ${flow.system_prompt}) or
+	// are intended to be bound by downstream actions via explicit variable
+	// references. We deliberately skip injecting them as trigger-node inputs
+	// because trigger actions tend to re-emit all of their inputs as outputs,
+	// which would auto-wire them into same-named inputs on downstream nodes
+	// and silently override user-authored values (e.g. an AI action's
+	// system_prompt field).
 	for k, v := range data {
+		if reservedTriggerDataKeys[k] {
+			continue
+		}
 		found := false
 		for _, input := range n.Data.Config.Inputs {
 			if input.Name == k {
@@ -642,15 +676,36 @@ func (f *Flow) executeNodeActionOnly(actions map[string]Action, node *Node, envi
 	var configuration []*Connection
 	for _, v := range node.Data.Config.Inputs {
 		value := v.Value
-		if _, exists := results[v.Name]; exists {
-			value = results[v.Name]
+
+		// Auto-wire parent outputs by matching input name, but only when this
+		// input has NOT been explicitly set on the node. Explicit values
+		// (non-nil and, for strings, non-empty) always take precedence over
+		// auto-wired parent outputs — otherwise a parent that happens to emit
+		// an output with the same name as a downstream input would silently
+		// clobber the user-authored value. A blank/unset input still falls
+		// back to the matching parent output to preserve the convenience of
+		// implicit wiring where the user has not supplied a value.
+		hasExplicitValue := value != nil
+		if s, ok := value.(string); ok && s == "" {
+			hasExplicitValue = false
+		}
+		if !hasExplicitValue {
+			if parentVal, exists := results[v.Name]; exists {
+				value = parentVal
+			}
 		}
 
-		// Try string representation first; for non-string types, check if the
-		// raw value contains a variable reference (e.g. "${env.X}" in an integer field)
-		val := v.String()
-		if val == nil && v.Value != nil {
-			raw := fmt.Sprintf("%v", v.Value)
+		// Determine whether we need to run string-based variable substitution
+		// on this input. If the (possibly auto-wired) value is a string, we
+		// substitute directly. For non-string types, we only stringify-and-
+		// substitute when the raw value actually contains a ${...} reference
+		// (e.g. "${env.X}" in an integer field) — otherwise the typed value
+		// flows through untouched.
+		var val *string
+		if s, ok := value.(string); ok {
+			val = &s
+		} else if value != nil {
+			raw := fmt.Sprintf("%v", value)
 			if strings.Contains(raw, "${") {
 				val = &raw
 			}
