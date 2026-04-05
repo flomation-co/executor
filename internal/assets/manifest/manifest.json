@@ -181,7 +181,7 @@
     ]
   },
   "ai/anthropic": {
-    "hash": "980e3aaadb8f901d954a4a7b01d17f666b56f8bc37f6b09d081a4bbd5783b1f9",
+    "hash": "38747cd31635391a67143c2ce5ade8985d71e3f9dc835320049fccd5c5cd3482",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Anthropic Prompt",
@@ -308,7 +308,7 @@
     ]
   },
   "ai/openai": {
-    "hash": "3804072ec5ad087bac257e8d2ceac11990a4347cd91d1f26ef90516e62e3aab0",
+    "hash": "39bc2371b91b1de21e11183f09ccb90a30f12bc1eb352aa829a9d3df334ab2af",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "OpenAI Prompt",

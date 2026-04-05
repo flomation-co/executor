@@ -700,7 +700,8 @@ func (f *Flow) executeNodeActionOnly(actions map[string]Action, node *Node, envi
 		// substitute directly. For non-string types, we only stringify-and-
 		// substitute when the raw value actually contains a ${...} reference
 		// (e.g. "${env.X}" in an integer field) — otherwise the typed value
-		// flows through untouched.
+		// flows through untouched. Non-string pass-through is critical for
+		// array/object inputs like conversation_history on AI actions.
 		var val *string
 		if s, ok := value.(string); ok {
 			val = &s
@@ -710,6 +711,35 @@ func (f *Flow) executeNodeActionOnly(actions map[string]Action, node *Node, envi
 				val = &raw
 			}
 		}
+
+		// Whole-value reference: when an input's entire value is a single
+		// ${name} reference and the referenced value is a non-string (e.g.
+		// an array of conversation history messages), preserve the raw
+		// typed value instead of stringifying it. This is required for AI
+		// action inputs that accept arrays/objects.
+		if val != nil {
+			trimmed := strings.TrimSpace(*val)
+			wholeRef := regexp.MustCompile(`^\$\{([^{}]+)\}$`)
+			if sub := wholeRef.FindStringSubmatch(trimmed); sub != nil {
+				name := sub[1]
+				// Only intercept plain parent-result references.
+				if !strings.HasPrefix(name, "env.") && !strings.HasPrefix(name, "flow.") &&
+					!strings.HasPrefix(name, "var.") && !strings.HasPrefix(name, "secrets.") &&
+					!strings.HasPrefix(name, "secret.") {
+					if res, exists := parentResults[name]; exists {
+						if _, isStr := res.(string); !isStr {
+							configuration = append(configuration, &Connection{
+								Name:  v.Name,
+								Type:  v.Type,
+								Value: res,
+							})
+							continue
+						}
+					}
+				}
+			}
+		}
+
 		if val != nil {
 			r := regexp.MustCompile(`\${[^{}]*}`)
 			matches := r.FindAllString(*val, -1)

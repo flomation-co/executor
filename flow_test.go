@@ -236,6 +236,95 @@ func TestFlowVariableSubstitution(t *testing.T) {
 	Expect(result["runner"]).To(Equal("runner-42"))
 }
 
+// TestFlowWholeValueReferencePreservesType verifies that when an input's
+// entire value is a single ${name} reference and the referenced parent
+// output is a non-string value (e.g. an array of conversation messages),
+// the raw typed value is preserved on the downstream input rather than
+// being stringified via fmt.Sprintf. This is required for AI actions that
+// accept a conversation_history array.
+func TestFlowWholeValueReferencePreservesType(t *testing.T) {
+	RegisterTestingT(t)
+
+	triggerAction := func(flow *Flow, node *Node, inputs []*Connection) (map[string]interface{}, error) {
+		result := make(map[string]interface{})
+		for _, input := range inputs {
+			if input.Value != nil {
+				result[input.Name] = input.Value
+			}
+		}
+		return result, nil
+	}
+
+	var captured interface{}
+	capturingAction := func(flow *Flow, node *Node, inputs []*Connection) (map[string]interface{}, error) {
+		for _, c := range inputs {
+			if c.Name == "history" {
+				captured = c.Value
+			}
+		}
+		return map[string]interface{}{}, nil
+	}
+
+	actions := map[string]Action{
+		"trigger/manual": triggerAction,
+		"action/ai":      capturingAction,
+	}
+
+	history := []map[string]string{
+		{"role": "user", "content": "hello"},
+		{"role": "assistant", "content": "hi there"},
+	}
+
+	f := &Flow{
+		Nodes: []*Node{
+			{
+				ID:   "trigger-1",
+				Type: "trigger/manual",
+				Data: &NodeData{
+					Label: "trigger/manual",
+					Config: NodeConfig{
+						ID:   "trigger-1",
+						Type: ActionTypeTrigger,
+						Inputs: []*Connection{
+							{Name: "conversation_history", Type: ConnectionTypeObject, Value: history},
+						},
+					},
+				},
+			},
+			{
+				ID:   "action-1",
+				Type: "action/ai",
+				Data: &NodeData{
+					Label: "action/ai",
+					Config: NodeConfig{
+						ID:   "action-1",
+						Type: ActionTypeAction,
+						Inputs: []*Connection{
+							{Name: "history", Type: ConnectionTypeObject, Value: "${conversation_history}"},
+						},
+					},
+				},
+			},
+		},
+		Edges: []*Edge{
+			{ID: "e1", Source: "trigger-1", Target: "action-1"},
+		},
+		nodeResults: make(map[string]map[string]interface{}),
+		outputs:     make(map[string]interface{}),
+	}
+
+	entry := "trigger-1"
+	_, err := f.Execute(actions, &entry, nil)
+	Expect(err).To(BeNil())
+
+	// captured must be the typed slice, not a stringified form.
+	slice, ok := captured.([]map[string]string)
+	Expect(ok).To(BeTrue(), "expected raw []map[string]string, got %T", captured)
+	Expect(slice).To(HaveLen(2))
+	Expect(slice[0]["role"]).To(Equal("user"))
+	Expect(slice[1]["content"]).To(Equal("hi there"))
+}
+
 func TestFlowVariableSubstitutionWithoutContext(t *testing.T) {
 	RegisterTestingT(t)
 

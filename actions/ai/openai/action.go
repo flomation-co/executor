@@ -9,6 +9,7 @@ import (
 	"time"
 
 	core "flomation.app/automate/executor"
+	ai_common "flomation.app/automate/executor/actions/ai"
 )
 
 const (
@@ -75,6 +76,12 @@ var Inputs = [...]core.Connection{
 		Label:       "Temperature",
 		Placeholder: "0.7",
 	},
+	{
+		Name:        "conversation_history",
+		Type:        core.ConnectionTypeObject,
+		Label:       "Conversation History",
+		Placeholder: "${conversation_history}",
+	},
 }
 
 var Outputs = [...]core.Connection{
@@ -121,12 +128,37 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	// Build messages
 	var messages []map[string]string
 
+	systemPromptStr := ""
 	systemConn := core.FindConnection("system_prompt", inputs)
 	if systemConn != nil && systemConn.String() != nil && *systemConn.String() != "" {
+		systemPromptStr = *systemConn.String()
 		messages = append(messages, map[string]string{
 			"role":    "system",
-			"content": *systemConn.String(),
+			"content": systemPromptStr,
 		})
+	}
+
+	// Append prior conversation turns if history was supplied. History is
+	// auto-truncated (oldest-first) when the combined prompt + reply budget
+	// would exceed the model's context window.
+	historyConn := core.FindConnection("conversation_history", inputs)
+	if historyConn != nil {
+		history := ai_common.ParseConversationHistory(historyConn.Value)
+		if len(history) > 0 {
+			history = ai_common.TruncateHistoryForBudget(
+				history, systemPromptStr, prompt,
+				int(maxTokens), ai_common.ModelContextWindow(model),
+			)
+			for _, m := range history {
+				if m.Role == "" || m.Content == "" {
+					continue
+				}
+				messages = append(messages, map[string]string{
+					"role":    m.Role,
+					"content": m.Content,
+				})
+			}
+		}
 	}
 
 	messages = append(messages, map[string]string{

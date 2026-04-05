@@ -9,6 +9,7 @@ import (
 	"time"
 
 	core "flomation.app/automate/executor"
+	ai_common "flomation.app/automate/executor/actions/ai"
 )
 
 const (
@@ -71,6 +72,12 @@ var Inputs = [...]core.Connection{
 		Label:       "Temperature",
 		Placeholder: "0.7",
 	},
+	{
+		Name:        "conversation_history",
+		Type:        core.ConnectionTypeObject,
+		Label:       "Conversation History",
+		Placeholder: "${conversation_history}",
+	},
 }
 
 var Outputs = [...]core.Connection{
@@ -114,20 +121,50 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 		fmt.Sscanf(*tempConn.String(), "%f", &temperature)
 	}
 
-	// Build request
+	// System prompt is a top-level field in the Anthropic API
+	systemPromptStr := ""
+	systemConn := core.FindConnection("system_prompt", inputs)
+	if systemConn != nil && systemConn.String() != nil && *systemConn.String() != "" {
+		systemPromptStr = *systemConn.String()
+	}
+
+	// Build messages array: prior history (auto-truncated to fit context),
+	// then the new user turn.
+	var messages []map[string]string
+	historyConn := core.FindConnection("conversation_history", inputs)
+	if historyConn != nil {
+		history := ai_common.ParseConversationHistory(historyConn.Value)
+		if len(history) > 0 {
+			history = ai_common.TruncateHistoryForBudget(
+				history, systemPromptStr, prompt,
+				int(maxTokens), ai_common.ModelContextWindow(model),
+			)
+			for _, m := range history {
+				if m.Role == "" || m.Content == "" {
+					continue
+				}
+				// Anthropic requires alternating user/assistant — skip 'system'
+				// entries and any other unexpected roles.
+				if m.Role != "user" && m.Role != "assistant" {
+					continue
+				}
+				messages = append(messages, map[string]string{
+					"role":    m.Role,
+					"content": m.Content,
+				})
+			}
+		}
+	}
+	messages = append(messages, map[string]string{"role": "user", "content": prompt})
+
 	payload := map[string]interface{}{
 		"model":       model,
 		"max_tokens":  maxTokens,
 		"temperature": temperature,
-		"messages": []map[string]string{
-			{"role": "user", "content": prompt},
-		},
+		"messages":    messages,
 	}
-
-	// System prompt is a top-level field in the Anthropic API
-	systemConn := core.FindConnection("system_prompt", inputs)
-	if systemConn != nil && systemConn.String() != nil && *systemConn.String() != "" {
-		payload["system"] = *systemConn.String()
+	if systemPromptStr != "" {
+		payload["system"] = systemPromptStr
 	}
 
 	body, err := json.Marshal(payload)
