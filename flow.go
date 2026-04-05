@@ -245,6 +245,13 @@ type ExecutionContext struct {
 	APIURL         string `json:"api_url,omitempty"`
 	Token          string `json:"token,omitempty"`
 	SystemPrompt   string `json:"system_prompt,omitempty"`
+	// AgentID is set when this execution is running as part of an agent
+	// orchestrator flow. When present, AI actions use it to automatically
+	// record their response as a direction=outbound agent_message so the
+	// next turn's conversation_history includes assistant replies. This is
+	// what prevents the conversation-loop bug where the model sees only
+	// consecutive user turns and tries to answer them all at once.
+	AgentID string `json:"agent_id,omitempty"`
 }
 
 // GetContext returns the full execution context.
@@ -277,6 +284,8 @@ func (ctx *ExecutionContext) Get(name string) string {
 		return ctx.TriggererEmail
 	case "system_prompt":
 		return ctx.SystemPrompt
+	case "agent_id":
+		return ctx.AgentID
 	default:
 		return ""
 	}

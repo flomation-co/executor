@@ -228,6 +228,12 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 		}
 	}
 
+	// When running inside an agent orchestrator flow, record this response
+	// as an outbound agent_message so the next turn's conversation_history
+	// includes assistant replies. No-op outside of agent contexts. See
+	// ai_common.RecordAssistantReply for full rationale.
+	ai_common.RecordAssistantReply(flow.GoContext(), flow.GetContext(), content)
+
 	return map[string]interface{}{
 		"response":      content,
 		"model":         result.Model,
