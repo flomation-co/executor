@@ -28,22 +28,29 @@ func TestRecordAssistantReply_PostsOutboundWhenInAgentContext(t *testing.T) {
 
 	var (
 		mu       sync.Mutex
+		hitPaths []string
 		received []map[string]interface{}
-		hitPath  string
 	)
 
 	srv := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		mu.Lock()
 		defer mu.Unlock()
 
-		hitPath = r.URL.Path
+		hitPaths = append(hitPaths, r.URL.Path)
 		body, _ := io.ReadAll(r.Body)
 		var payload map[string]interface{}
 		_ = json.Unmarshal(body, &payload)
 		received = append(received, payload)
 
-		w.WriteHeader(http.StatusCreated)
-		_, _ = w.Write([]byte(`{"id":"msg-123"}`))
+		// Route-specific status: the record endpoint expects 201,
+		// the extract endpoint expects 202.
+		if strings.HasSuffix(r.URL.Path, "/extract") {
+			w.WriteHeader(http.StatusAccepted)
+			_, _ = w.Write([]byte(`{"execution_id":"exec-1"}`))
+		} else {
+			w.WriteHeader(http.StatusCreated)
+			_, _ = w.Write([]byte(`{"id":"msg-123"}`))
+		}
 	}))
 	defer srv.Close()
 
@@ -57,14 +64,25 @@ func TestRecordAssistantReply_PostsOutboundWhenInAgentContext(t *testing.T) {
 	mu.Lock()
 	defer mu.Unlock()
 
-	Expect(received).To(HaveLen(1), "exactly one outbound record request should be made")
-	Expect(hitPath).To(Equal("/api/v1/internal/agent/agent-abc/message"),
-		"recording must POST to the agent's message endpoint")
+	// Phase 2d-γ: RecordAssistantReply now makes TWO calls — one to
+	// record the outbound message, then one to dispatch extraction on
+	// the assistant's text.
+	Expect(hitPaths).To(HaveLen(2), "expected record + extraction calls")
+	Expect(hitPaths[0]).To(Equal("/api/v1/internal/agent/agent-abc/message"),
+		"first call must be the message record")
+	Expect(hitPaths[1]).To(Equal("/api/v1/internal/agent/agent-abc/extract"),
+		"second call must be the extraction dispatch")
 
-	payload := received[0]
-	Expect(payload["direction"]).To(Equal("outbound"))
-	Expect(payload["content"]).To(Equal("Hello, this is the assistant's reply."))
-	Expect(payload["sender"]).To(Equal("agent"))
+	// Assert the record payload (first call).
+	recordPayload := received[0]
+	Expect(recordPayload["direction"]).To(Equal("outbound"))
+	Expect(recordPayload["content"]).To(Equal("Hello, this is the assistant's reply."))
+	Expect(recordPayload["sender"]).To(Equal("agent"))
+
+	// Assert the extraction payload (second call).
+	extractPayload := received[1]
+	Expect(extractPayload["role"]).To(Equal("assistant"))
+	Expect(extractPayload["content"]).To(Equal("Hello, this is the assistant's reply."))
 }
 
 // TestRecordAssistantReply_NoOpWhenNotInAgentContext verifies that a regular
@@ -149,10 +167,17 @@ func TestExecutionContextGet_AgentID(t *testing.T) {
 func TestRecordAssistantReply_URLContainsAgentID(t *testing.T) {
 	RegisterTestingT(t)
 
-	var urlPath string
+	var mu sync.Mutex
+	var urlPaths []string
 	srv := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		urlPath = r.URL.Path
-		w.WriteHeader(http.StatusCreated)
+		mu.Lock()
+		urlPaths = append(urlPaths, r.URL.Path)
+		mu.Unlock()
+		if strings.HasSuffix(r.URL.Path, "/extract") {
+			w.WriteHeader(http.StatusAccepted)
+		} else {
+			w.WriteHeader(http.StatusCreated)
+		}
 	}))
 	defer srv.Close()
 
@@ -161,5 +186,106 @@ func TestRecordAssistantReply_URLContainsAgentID(t *testing.T) {
 		APIURL:  srv.URL,
 	}, "content")
 
-	Expect(strings.Contains(urlPath, "special-agent-id")).To(BeTrue())
+	mu.Lock()
+	defer mu.Unlock()
+	for _, p := range urlPaths {
+		Expect(strings.Contains(p, "special-agent-id")).To(BeTrue())
+	}
+}
+
+// --- Phase 2d-γ extraction dispatch tests ---
+
+func TestDispatchAssistantExtraction_IncludesUserAndConversationIDs(t *testing.T) {
+	RegisterTestingT(t)
+
+	var (
+		mu      sync.Mutex
+		hitPath string
+		body    map[string]interface{}
+	)
+	srv := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		mu.Lock()
+		defer mu.Unlock()
+		hitPath = r.URL.Path
+		raw, _ := io.ReadAll(r.Body)
+		_ = json.Unmarshal(raw, &body)
+		w.WriteHeader(http.StatusAccepted)
+	}))
+	defer srv.Close()
+
+	ctx := &core.ExecutionContext{
+		AgentID:        "agent-1",
+		APIURL:         srv.URL,
+		AgentUserID:    "user-abc",
+		ConversationID: "conv-xyz",
+	}
+	dispatchAssistantExtraction(context.Background(), ctx, "I'll come back to you.")
+
+	mu.Lock()
+	defer mu.Unlock()
+
+	Expect(hitPath).To(Equal("/api/v1/internal/agent/agent-1/extract"))
+	Expect(body["role"]).To(Equal("assistant"))
+	Expect(body["content"]).To(Equal("I'll come back to you."))
+	Expect(body["agent_user_id"]).To(Equal("user-abc"))
+	Expect(body["conversation_id"]).To(Equal("conv-xyz"))
+}
+
+func TestDispatchAssistantExtraction_OmitsEmptyOptionals(t *testing.T) {
+	RegisterTestingT(t)
+
+	var (
+		mu   sync.Mutex
+		body map[string]interface{}
+	)
+	srv := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		mu.Lock()
+		defer mu.Unlock()
+		raw, _ := io.ReadAll(r.Body)
+		_ = json.Unmarshal(raw, &body)
+		w.WriteHeader(http.StatusAccepted)
+	}))
+	defer srv.Close()
+
+	ctx := &core.ExecutionContext{
+		AgentID: "agent-1",
+		APIURL:  srv.URL,
+		// AgentUserID and ConversationID deliberately empty
+	}
+	dispatchAssistantExtraction(context.Background(), ctx, "some reply")
+
+	mu.Lock()
+	defer mu.Unlock()
+
+	_, hasUser := body["agent_user_id"]
+	_, hasConv := body["conversation_id"]
+	Expect(hasUser).To(BeFalse(), "empty agent_user_id should not appear in payload")
+	Expect(hasConv).To(BeFalse(), "empty conversation_id should not appear in payload")
+}
+
+func TestDispatchAssistantExtraction_NoOpWhenNotInAgentContext(t *testing.T) {
+	RegisterTestingT(t)
+
+	called := false
+	srv := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		called = true
+		w.WriteHeader(http.StatusAccepted)
+	}))
+	defer srv.Close()
+
+	// No AgentID → should not even make the call.
+	dispatchAssistantExtraction(context.Background(), &core.ExecutionContext{
+		APIURL: srv.URL,
+	}, "content")
+	Expect(called).To(BeFalse(), "no extraction call when AgentID is empty")
+
+	// Nil context
+	dispatchAssistantExtraction(context.Background(), nil, "content")
+	Expect(called).To(BeFalse(), "no extraction call when context is nil")
+
+	// Empty content
+	dispatchAssistantExtraction(context.Background(), &core.ExecutionContext{
+		AgentID: "agent-1", APIURL: srv.URL,
+	}, "")
+	Expect(called).To(BeFalse(), "no extraction call when content is empty")
 }
