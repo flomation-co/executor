@@ -106,4 +106,85 @@ func RecordAssistantReply(flowCtx context.Context, ctx *core.ExecutionContext, c
 		}).Warn("assistant reply record returned non-2xx")
 		return
 	}
+
+	// Phase 2d-γ: after recording the assistant reply, fire the
+	// extraction pipeline on the assistant's response text. This
+	// is what lets the extraction flow detect commitments the
+	// agent makes ("I'll come back to you in an hour") and
+	// assistant-derived memory updates. The extraction call is
+	// fire-and-forget — any failure only costs one turn of
+	// extraction, not the user's reply.
+	dispatchAssistantExtraction(flowCtx, ctx, content)
+}
+
+// dispatchAssistantExtraction calls POST /internal/agent/:id/extract
+// with role=assistant and the assistant's reply content. This is the
+// sibling of Launch's dispatchExtraction for inbound turns; together
+// they ensure extraction runs on both halves of the conversation, as
+// required by plans/agent_memory.md §"The extraction pipeline":
+// "Running extraction on assistant replies as well as user turns is
+// what makes commitment detection work."
+//
+// Same fire-and-forget contract as RecordAssistantReply: failures are
+// logged and swallowed, the reply path is never blocked.
+func dispatchAssistantExtraction(flowCtx context.Context, ctx *core.ExecutionContext, content string) {
+	if ctx == nil || ctx.AgentID == "" || ctx.APIURL == "" || content == "" {
+		return
+	}
+
+	body := map[string]interface{}{
+		"role":    "assistant",
+		"content": content,
+	}
+	if ctx.AgentUserID != "" {
+		body["agent_user_id"] = ctx.AgentUserID
+	}
+	if ctx.ConversationID != "" {
+		body["conversation_id"] = ctx.ConversationID
+	}
+
+	payload, err := json.Marshal(body)
+	if err != nil {
+		log.WithFields(log.Fields{
+			"agent_id": ctx.AgentID,
+			"error":    err,
+		}).Warn("failed to marshal extraction payload for assistant turn")
+		return
+	}
+
+	reqCtx, cancel := context.WithTimeout(flowCtx, recordTimeout)
+	defer cancel()
+
+	url := fmt.Sprintf("%s/api/v1/internal/agent/%s/extract", ctx.APIURL, ctx.AgentID)
+	req, err := http.NewRequestWithContext(reqCtx, http.MethodPost, url, bytes.NewReader(payload))
+	if err != nil {
+		log.WithFields(log.Fields{
+			"agent_id": ctx.AgentID,
+			"error":    err,
+		}).Warn("failed to build assistant extraction request")
+		return
+	}
+	req.Header.Set("Content-Type", "application/json")
+	if ctx.Token != "" {
+		req.Header.Set("Authorization", "Bearer "+ctx.Token)
+	}
+
+	client := &http.Client{Timeout: recordTimeout}
+	resp, err := client.Do(req)
+	if err != nil {
+		log.WithFields(log.Fields{
+			"agent_id": ctx.AgentID,
+			"error":    err,
+		}).Warn("failed to dispatch assistant extraction")
+		return
+	}
+	defer func() { _ = resp.Body.Close() }()
+	_, _ = io.Copy(io.Discard, io.LimitReader(resp.Body, 256))
+
+	if resp.StatusCode != http.StatusAccepted && resp.StatusCode != http.StatusNoContent {
+		log.WithFields(log.Fields{
+			"agent_id": ctx.AgentID,
+			"status":   resp.StatusCode,
+		}).Warn("unexpected response from assistant extraction dispatch")
+	}
 }
