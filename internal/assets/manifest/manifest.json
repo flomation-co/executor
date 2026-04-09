@@ -70,7 +70,7 @@
     ]
   },
   "agent/process_extraction": {
-    "hash": "2390db3accc6163d0589148c5b0354d641e66581e291146e5a2e0534634d5442",
+    "hash": "653ae30cef413faa3509109b1142416c447c29a6553b78192ccc84f9471c4517",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Process Extraction Output",
@@ -157,6 +157,20 @@
         "type": "integer",
         "value": null,
         "label": "Commitments written",
+        "placeholder": ""
+      },
+      {
+        "name": "confirmations_processed",
+        "type": "integer",
+        "value": null,
+        "label": "Confirmations processed",
+        "placeholder": ""
+      },
+      {
+        "name": "identities_merged",
+        "type": "integer",
+        "value": null,
+        "label": "Identities merged",
         "placeholder": ""
       },
       {
