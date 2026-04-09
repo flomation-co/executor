@@ -441,14 +441,28 @@ func processConfirmations(
 			if paType == "identity_link" {
 				if currentStatus == "awaiting_confirmation" {
 					// First side confirmed. Move to awaiting-other-side.
-					// The other identity's next message will trigger the
-					// extraction pipeline on that side, which will see this
-					// pending action in their system prompt and confirm.
 					if err := patchJSON(flow, ctx, fmt.Sprintf("/api/v1/internal/pending-action/%s", paID),
 						map[string]interface{}{"status": "confirmed_here_awaiting_other_side"}); err != nil {
 						result.Errors = append(result.Errors, fmt.Sprintf("confirmation[%d]: failed to update status: %v", i, err))
 						continue
 					}
+
+					// Proactively dispatch verification to the other channel.
+					// The API looks up the target identity, checks channel
+					// privacy, creates a target-side PA, and forwards to
+					// Launch to fire the orchestrator on the target channel.
+					sourceChannel := ""
+					if sc, ok := pa["source_channel"].(string); ok {
+						sourceChannel = sc
+					}
+					_ = postJSON(flow, ctx,
+						fmt.Sprintf("/api/v1/internal/agent/%s/identity/request-verification", agentID),
+						map[string]interface{}{
+							"pending_action_id":  paID,
+							"source_user_id":     agentUserID,
+							"source_channel_type": sourceChannel,
+						}, http.StatusOK)
+
 					result.ConfirmationsProcessed++
 				} else if currentStatus == "confirmed_here_awaiting_other_side" {
 					// Both sides confirmed! Execute the merge.

@@ -233,7 +233,7 @@
     ]
   },
   "agent/recall": {
-    "hash": "e6de96fd17669143cc0bb16582e02b782926768e666b6304fc1a2d0c8e10acf5",
+    "hash": "e61035eb3c82a5c44c51d5427181af87ff745ce2c5cc3e316d946923856b9866",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Recall Memories",
@@ -277,6 +277,20 @@
         "value": null,
         "label": "Limit",
         "placeholder": "20"
+      },
+      {
+        "name": "query",
+        "type": "string",
+        "value": null,
+        "label": "Semantic search query",
+        "placeholder": ""
+      },
+      {
+        "name": "aws_region",
+        "type": "string",
+        "value": null,
+        "label": "AWS region for embeddings",
+        "placeholder": "us-east-1"
       }
     ],
     "outputs": [
@@ -297,7 +311,7 @@
     ]
   },
   "agent/remember": {
-    "hash": "67ba79808e02d473bfca14982dd964bb4de7eba8b38f7671c95461ae4628c238",
+    "hash": "4503b0c5e81b71d64889946d0ffce478111dfca815e2bc29ae95f44f239dac32",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Remember Fact",
@@ -408,6 +422,13 @@
         "value": null,
         "label": "Confidence (0.0–1.0, defaults 1.0)",
         "placeholder": "1.0"
+      },
+      {
+        "name": "aws_region",
+        "type": "string",
+        "value": null,
+        "label": "AWS region for embeddings",
+        "placeholder": "us-east-1"
       }
     ],
     "outputs": [
