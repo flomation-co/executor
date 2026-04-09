@@ -11,9 +11,38 @@ import (
 	"strings"
 	"time"
 
+	"flomation.app/automate/executor/internal/assets"
 	"flomation.app/automate/executor/internal/environment"
 	log "github.com/sirupsen/logrus"
 )
+
+// manifestDescriptions is a lazy-loaded lookup from action label
+// (e.g. "tools/calendar_read") to the manifest description string.
+// Used by injectToolDefinitions to produce richer tool descriptions.
+var manifestDescriptions map[string]string
+
+func getManifestDescriptions() map[string]string {
+	if manifestDescriptions != nil {
+		return manifestDescriptions
+	}
+	manifestDescriptions = make(map[string]string)
+	data, err := assets.Manifest.ReadFile("manifest/manifest.json")
+	if err != nil {
+		return manifestDescriptions
+	}
+	var manifest map[string]struct {
+		Description string `json:"description"`
+	}
+	if err := json.Unmarshal(data, &manifest); err != nil {
+		return manifestDescriptions
+	}
+	for key, entry := range manifest {
+		if entry.Description != "" {
+			manifestDescriptions[key] = entry.Description
+		}
+	}
+	return manifestDescriptions
+}
 
 const (
 	TriggerTypeManual = "trigger/manual"
@@ -27,6 +56,52 @@ const (
 	ActionTypeLoop        = 5
 	ActionTypeSwitch      = 6
 )
+
+const (
+	// ToolRequestsKey is the special output key that AI actions set when
+	// the model returns tool_use (Anthropic) or tool_calls (OpenAI).
+	// The engine detects this in executeNodeChildren and enters the
+	// tool loop — executing the tools subgraph and feeding results back.
+	ToolRequestsKey = "__tool_requests"
+
+	// ToolConversationStateKey carries the full messages array across
+	// tool rounds so the AI API sees the complete conversation including
+	// all tool_use and tool_result blocks.
+	ToolConversationStateKey = "__conversation_state"
+
+	// ToolResultsKey is set by the engine after executing the tools
+	// subgraph. The AI action reads it on re-invocation to build
+	// tool_result content blocks for the API.
+	ToolResultsKey = "__tool_results"
+
+	// IntermediateTextKey carries any text the AI emitted alongside
+	// tool_use blocks. The engine fires Response handle children with
+	// this text mid-loop so the user sees progress messages like
+	// "Checking your calendar..." while tools execute.
+	IntermediateTextKey = "__intermediate_text"
+
+	// ToolsHandle is the source handle ID for the tools subgraph edge.
+	ToolsHandle = "tools"
+
+	// MaxToolRoundsDefault is the safety cap on tool calling rounds.
+	MaxToolRoundsDefault = 25
+)
+
+// ToolRequest represents a single tool call from an AI model.
+// Anthropic: content block with type="tool_use".
+// OpenAI: tool_calls array entry with type="function".
+type ToolRequest struct {
+	ID    string                 `json:"id"`
+	Name  string                 `json:"name"`
+	Input map[string]interface{} `json:"input"`
+}
+
+// ToolResult carries the output of a tool execution back to the AI.
+type ToolResult struct {
+	ToolUseID string `json:"tool_use_id"`
+	Content   string `json:"content"`
+	IsError   bool   `json:"is_error,omitempty"`
+}
 
 var (
 	ErrNoStartNode = errors.New("no start node specified")
@@ -730,6 +805,16 @@ func (f *Flow) executeNodeActionOnly(actions map[string]Action, node *Node, envi
 		return nil, ErrInvalidNode
 	}
 
+	// Auto-generate tool definitions for AI nodes from their Tools handle
+	// children. Must happen before building the configuration slice so
+	// the generated tool_definitions input is included.
+	if node.Data != nil && strings.HasPrefix(node.Data.Label, "ai/") {
+		toolsChildren := f.FindTargetByHandle(node.ID, ToolsHandle)
+		if len(toolsChildren) > 0 {
+			f.injectToolDefinitions(node, toolsChildren, actions)
+		}
+	}
+
 	var configuration []*Connection
 	for _, v := range node.Data.Config.Inputs {
 		value := v.Value
@@ -920,6 +1005,24 @@ func (f *Flow) executeNodeActionOnly(actions map[string]Action, node *Node, envi
 		return nil, err
 	}
 
+	// Check for soft failures: the action returned nil error but set
+	// success=false in its outputs (common in tool actions that handle
+	// errors gracefully). Mark the node as failed so the UI shows it
+	// correctly, but still return the outputs (not a Go error) so the
+	// tool loop can feed the error back to the AI for recovery.
+	if successVal, ok := outputs["success"]; ok {
+		if isFalse, ok := successVal.(bool); ok && !isFalse {
+			errMsg := ""
+			if e, ok := outputs["error"].(string); ok {
+				errMsg = e
+			}
+			f.emitNodeEvent(node.ID, node.Type, node.Data.Label, "failed", durationMs, errMsg, inputMap, outputs)
+			f.recordNodeResult(node, "failed", configuration, outputs, durationMs, errMsg)
+			f.nodeResults[node.ID] = outputs
+			return outputs, nil
+		}
+	}
+
 	// For conditional/switch/loop nodes, merge parent outputs into this
 	// node's outputs so they pass through to child branches. Without this,
 	// a Send action after a Switch can't see the AI response or trigger
@@ -1069,6 +1172,263 @@ func (f *Flow) executeNodeChildren(actions map[string]Action, node *Node, output
 
 		// Execute output-handle children (post-loop)
 		children = outputChildren
+	} else if _, hasToolReqs := outputs[ToolRequestsKey]; hasToolReqs {
+		// AI Tool Use loop: the AI action returned tool requests instead
+		// of a final response. Execute the tools subgraph for each request,
+		// collect results, re-invoke the AI action with results, and repeat
+		// until the model produces a text response (stop_reason != tool_use).
+		toolsChildren := f.FindTargetByHandle(node.ID, ToolsHandle)
+		outputChildren := f.FindTarget(node.ID)
+		// Filter: output children are those NOT connected via the tools handle
+		toolsChildIDs := make(map[string]bool)
+		for _, tc := range toolsChildren {
+			toolsChildIDs[tc.ID] = true
+		}
+		var nonToolChildren []*Node
+		for _, oc := range outputChildren {
+			if !toolsChildIDs[oc.ID] {
+				nonToolChildren = append(nonToolChildren, oc)
+			}
+		}
+
+		if len(toolsChildren) == 0 {
+			// No tools wired — just pass through to normal children
+			children = nonToolChildren
+		} else {
+			maxRounds := MaxToolRoundsDefault
+
+			// Resolve Response handle children once for intermediate messages.
+			// These are the nodes wired to the "output" (Response) handle —
+			// they get fired mid-loop for intermediate text AND at the end
+			// for the final response.
+			responseChildren := f.FindTargetByHandle(node.ID, "output")
+
+			for round := 0; round < maxRounds; round++ {
+				requests, ok := outputs[ToolRequestsKey].([]ToolRequest)
+				if !ok || len(requests) == 0 {
+					break
+				}
+
+				// If the AI emitted text alongside tool calls (e.g.
+				// "Checking your calendar..."), fire the Response handle
+				// children now so the user sees the message immediately.
+				if iText, ok := outputs[IntermediateTextKey].(string); ok && iText != "" {
+					// The AI emitted text alongside tool calls. Fire the
+					// Response handle subgraph so the user sees the message
+					// while tools execute. Treated like a loop iteration:
+					// clear all cached results in the subgraph, set the
+					// response output, execute fully, then clear again so
+					// the final response can re-execute the same subgraph.
+					f.clearSubgraphResults(node.ID, "output")
+					if f.nodeResults[node.ID] == nil {
+						f.nodeResults[node.ID] = make(map[string]interface{})
+					}
+					f.nodeResults[node.ID]["response"] = iText
+					for _, rc := range responseChildren {
+						if _, err := f.ExecuteNode(actions, rc, environment); err != nil {
+							log.WithFields(log.Fields{
+								"error": err,
+								"node":  rc.ID,
+							}).Warn("intermediate message dispatch failed")
+						}
+					}
+					// Clear the subgraph again so the final response (or
+					// next intermediate) can re-execute it cleanly.
+					f.clearSubgraphResults(node.ID, "output")
+				}
+
+				var results []ToolResult
+				for _, req := range requests {
+					// Set tool context variables so the tools subgraph
+					// can read ${var.tool.name}, ${var.tool.id}, etc.
+					f.SetVariable("tool.name", req.Name)
+					f.SetVariable("tool.id", req.ID)
+					if inputJSON, err := json.Marshal(req.Input); err == nil {
+						f.SetVariable("tool.input", string(inputJSON))
+					}
+					for k, v := range req.Input {
+						f.SetVariable("tool.input."+k, fmt.Sprintf("%v", v))
+					}
+
+					// Clear tools subgraph results for this execution
+					f.clearSubgraphResults(node.ID, ToolsHandle)
+
+					// Route to the matching tool child by name. Each tool
+					// action wired to the Tools handle is matched by its
+					// data.label (action type name) against the requested
+					// tool name. No Switch node needed — the engine routes
+					// internally.
+					var toolOutput string
+					var toolErr bool
+					var matchedTool *Node
+					for _, c := range toolsChildren {
+						if c.Data != nil && c.Data.Label == "tools/"+req.Name {
+							matchedTool = c
+							break
+						}
+						// Also match by config.name or bare label
+						if c.Data != nil {
+							if c.Data.Label == req.Name {
+								matchedTool = c
+								break
+							}
+							if c.Data.Config.Name != nil && *c.Data.Config.Name == req.Name {
+								matchedTool = c
+								break
+							}
+						}
+					}
+
+					if matchedTool == nil {
+						toolOutput = fmt.Sprintf("Unknown tool: %s. Available tools: ", req.Name)
+						for i, c := range toolsChildren {
+							if i > 0 {
+								toolOutput += ", "
+							}
+							toolOutput += c.Data.Label
+						}
+						toolErr = true
+					} else {
+						// Inject tool input as the matched node's input values.
+						// We must also clear the cached result for this node
+						// so executeNodeActionOnly re-reads the updated inputs.
+						delete(f.nodeResults, matchedTool.ID)
+
+						for _, inp := range matchedTool.Data.Config.Inputs {
+							if v, exists := req.Input[inp.Name]; exists {
+								inp.Value = v
+								log.WithFields(log.Fields{
+									"tool":  req.Name,
+									"input": inp.Name,
+									"value": fmt.Sprintf("%v", v),
+								}).Debug("injected tool input")
+							}
+						}
+						// Also add any inputs that don't have a matching
+						// connection definition
+						for k, v := range req.Input {
+							found := false
+							for _, inp := range matchedTool.Data.Config.Inputs {
+								if inp.Name == k {
+									found = true
+									break
+								}
+							}
+							if !found {
+								matchedTool.Data.Config.Inputs = append(
+									matchedTool.Data.Config.Inputs,
+									&Connection{Name: k, Type: ConnectionTypeString, Value: v},
+								)
+							}
+						}
+
+						_, err := f.ExecuteNode(actions, matchedTool, environment)
+						if err != nil {
+							toolOutput = fmt.Sprintf("Tool execution error: %v", err)
+							toolErr = true
+						}
+					}
+
+					// Collect the tool result from the executed node
+					if toolOutput == "" && matchedTool != nil {
+						if r, exists := f.nodeResults[matchedTool.ID]; exists && r != nil {
+							for _, key := range []string{"tool_result", "result", "response", "output"} {
+								if v, ok := r[key]; ok {
+									if s, ok := v.(string); ok && s != "" {
+										toolOutput = s
+										break
+									}
+									if v != nil {
+										if b, err := json.Marshal(v); err == nil {
+											toolOutput = string(b)
+											break
+										}
+									}
+								}
+							}
+							// Fall back to JSON of all outputs
+							if toolOutput == "" {
+								if b, err := json.Marshal(r); err == nil {
+									toolOutput = string(b)
+								}
+							}
+						}
+					}
+					if toolOutput == "" {
+						toolOutput = "Tool produced no output"
+						toolErr = true
+					}
+
+					results = append(results, ToolResult{
+						ToolUseID: req.ID,
+						Content:   toolOutput,
+						IsError:   toolErr,
+					})
+				}
+
+				// Store results and conversation state for the AI action's
+				// next invocation, then re-execute the AI node.
+				f.SetVariable(ToolResultsKey, results)
+				if convState, exists := outputs[ToolConversationStateKey]; exists {
+					f.SetVariable(ToolConversationStateKey, convState)
+				}
+
+				// Clear AI node's cached result so it re-executes
+				delete(f.nodeResults, node.ID)
+
+				reOutputs, err := f.executeNodeActionOnly(actions, node, environment)
+				if err != nil {
+					return nil, err
+				}
+				outputs = reOutputs
+
+				// Clean up tool variables for next round
+				f.SetVariable(ToolResultsKey, nil)
+				f.SetVariable(ToolConversationStateKey, nil)
+
+				// Check if the model is done (no more tool requests)
+				if _, hasMore := outputs[ToolRequestsKey]; !hasMore {
+					break
+				}
+			}
+
+			// Update the node's cached result with the final outputs
+			f.nodeResults[node.ID] = outputs
+
+			// Execute non-tool children (the main response path)
+			children = nonToolChildren
+		}
+
+		// After tool loop (or if no tools): check should_respond for
+		// the no_response handle routing
+		if sr, ok := outputs["should_respond"]; ok {
+			if shouldRespond, ok := sr.(bool); ok && !shouldRespond {
+				noRespChildren := f.FindTargetByHandle(node.ID, "no_response")
+				if len(noRespChildren) > 0 {
+					children = noRespChildren
+				} else {
+					// No handle wired — just skip all children (silent drop)
+					children = nil
+				}
+			}
+		}
+	} else if sr, ok := outputs["should_respond"]; ok {
+		// AI node with should_respond output — route appropriately
+		if shouldRespond, ok := sr.(bool); ok && !shouldRespond {
+			noRespChildren := f.FindTargetByHandle(node.ID, "no_response")
+			if len(noRespChildren) > 0 {
+				children = noRespChildren
+			} else {
+				children = nil
+			}
+		} else {
+			// should_respond=true: route to "output" handle children
+			// (the Response handle), falling back to default handle
+			children = f.FindTargetByHandle(node.ID, "output")
+			if len(children) == 0 {
+				children = f.FindTargetByDefaultHandle(node.ID)
+			}
+		}
 	} else {
 		children = f.FindTarget(node.ID)
 	}
@@ -1168,6 +1528,25 @@ func (f *Flow) FindTargetByHandle(source string, handle string) []*Node {
 	return results
 }
 
+// FindTargetByDefaultHandle returns child nodes connected via the default
+// (empty/unnamed) source handle only. Used by AI nodes to route to the
+// Response path without accidentally including Tools or Finished children.
+func (f *Flow) FindTargetByDefaultHandle(source string) []*Node {
+	results := make([]*Node, 0)
+	for _, e := range f.Edges {
+		if e == nil {
+			continue
+		}
+		if e.Source == source && e.SourceHandle == "" {
+			n := f.FindNode(e.Target)
+			if n != nil {
+				results = append(results, n)
+			}
+		}
+	}
+	return results
+}
+
 func (f *Flow) FindTarget(source string) []*Node {
 	results := make([]*Node, 0)
 
@@ -1251,6 +1630,182 @@ func (f *Flow) GetVariable(name string) (interface{}, bool) {
 
 func (f *Flow) GetVariables() map[string]interface{} {
 	return f.variables
+}
+
+// injectToolDefinitions auto-generates Anthropic/OpenAI tool definitions
+// from the nodes wired to the AI node's Tools handle. Each tool child
+// becomes a tool definition with its name, description, and input schema
+// derived from the node's configured inputs. This replaces the manual
+// JSON tool_definitions input.
+func (f *Flow) injectToolDefinitions(aiNode *Node, toolNodes []*Node, actions map[string]Action) {
+	// Credential input names to exclude from the tool's input schema —
+	// these are configured on the node, not provided by the AI.
+	credentialInputs := map[string]bool{
+		"api_key": true, "bot_token": true, "signing_secret": true,
+		"token": true, "password": true, "secret": true,
+		"max_length": true, "count": true, "parse_mode": true,
+	}
+
+	// Map Flomation connection types to JSON Schema types
+	typeMap := map[string]string{
+		ConnectionTypeString:  "string",
+		ConnectionTypeText:    "string",
+		ConnectionTypeInteger: "integer",
+		ConnectionTypeBoolean: "boolean",
+		ConnectionTypeObject:  "object",
+	}
+
+	var tools []map[string]interface{}
+
+	for _, toolNode := range toolNodes {
+		if toolNode.Data == nil {
+			continue
+		}
+
+		// Derive tool name: strip "tools/" prefix from label
+		toolName := toolNode.Data.Label
+		if strings.HasPrefix(toolName, "tools/") {
+			toolName = strings.TrimPrefix(toolName, "tools/")
+		}
+
+		// Description: prefer the manifest's full description, fall back
+		// to config.Name (display name), then the tool name itself.
+		description := toolName
+		if desc, ok := getManifestDescriptions()[toolNode.Data.Label]; ok && desc != "" {
+			description = desc
+		} else if toolNode.Data.Config.Name != nil && *toolNode.Data.Config.Name != "" {
+			description = *toolNode.Data.Config.Name
+		}
+
+		// Build input_schema from the tool's inputs
+		properties := make(map[string]interface{})
+		var required []string
+		for _, inp := range toolNode.Data.Config.Inputs {
+			if credentialInputs[inp.Name] {
+				continue
+			}
+			// Skip inputs that have a value already set (configured
+			// by the flow author, not provided by the AI)
+			if inp.Value != nil {
+				if s, ok := inp.Value.(string); ok && s != "" && !strings.HasPrefix(s, "${") {
+					continue
+				}
+			}
+
+			propType := typeMap[inp.Type]
+			if propType == "" {
+				propType = "string"
+			}
+
+			prop := map[string]interface{}{
+				"type": propType,
+			}
+			if inp.Label != "" {
+				prop["description"] = inp.Label
+			} else if inp.Placeholder != "" {
+				prop["description"] = inp.Placeholder
+			}
+
+			// Map Options to JSON Schema enum values so the AI knows
+			// what valid inputs are (e.g. "events", "availability").
+			if len(inp.Options) > 0 {
+				var enumVals []string
+				var enumDescs []string
+				for _, opt := range inp.Options {
+					enumVals = append(enumVals, opt.Value)
+					if opt.Name != "" && opt.Name != opt.Value {
+						enumDescs = append(enumDescs, fmt.Sprintf("%s (%s)", opt.Value, opt.Name))
+					}
+				}
+				prop["enum"] = enumVals
+				if len(enumDescs) > 0 {
+					prop["description"] = fmt.Sprintf("%v. Options: %s",
+						prop["description"], strings.Join(enumDescs, ", "))
+				}
+			}
+
+			properties[inp.Name] = prop
+			if inp.Required {
+				required = append(required, inp.Name)
+			}
+		}
+
+		tool := map[string]interface{}{
+			"name":        toolName,
+			"description": description,
+			"input_schema": map[string]interface{}{
+				"type":       "object",
+				"properties": properties,
+			},
+		}
+		if len(required) > 0 {
+			tool["input_schema"].(map[string]interface{})["required"] = required
+		}
+
+		tools = append(tools, tool)
+	}
+
+	if len(tools) == 0 {
+		return
+	}
+
+	// Inject as the tool_definitions input, overwriting any manual JSON
+	toolJSON, err := json.Marshal(tools)
+	if err != nil {
+		return
+	}
+
+	// Find or create the tool_definitions input on the AI node
+	found := false
+	for _, inp := range aiNode.Data.Config.Inputs {
+		if inp.Name == "tool_definitions" {
+			inp.Value = string(toolJSON)
+			found = true
+			break
+		}
+	}
+	if !found {
+		aiNode.Data.Config.Inputs = append(aiNode.Data.Config.Inputs, &Connection{
+			Name:  "tool_definitions",
+			Type:  ConnectionTypeText,
+			Value: string(toolJSON),
+		})
+	}
+
+	log.WithFields(log.Fields{
+		"ai_node":    aiNode.ID,
+		"tool_count": len(tools),
+		"tools_json": string(toolJSON),
+	}).Info("auto-generated tool definitions from graph")
+}
+
+// collectToolResult walks the cached results of nodes reachable from the
+// tools handle of the given parent node, looking for a "tool_result",
+// "result", or "response" output key. Returns the first non-empty value
+// found, or empty string if none. This is how the engine extracts the
+// tool action's output after executing the tools subgraph.
+func (f *Flow) collectToolResult(parentID string) string {
+	// Walk all cached results looking for tool output keys
+	toolResultKeys := []string{"tool_result", "result", "response", "output"}
+	for _, results := range f.nodeResults {
+		if results == nil {
+			continue
+		}
+		for _, key := range toolResultKeys {
+			if v, ok := results[key]; ok {
+				if s, ok := v.(string); ok && s != "" {
+					return s
+				}
+				// Non-string: marshal to JSON
+				if v != nil {
+					if b, err := json.Marshal(v); err == nil && string(b) != "null" {
+						return string(b)
+					}
+				}
+			}
+		}
+	}
+	return ""
 }
 
 // secretPattern matches ${secrets.X} and ${secret.X} variable references.

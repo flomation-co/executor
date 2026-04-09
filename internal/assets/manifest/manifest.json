@@ -1,4 +1,173 @@
 {
+  "agent/forget": {
+    "hash": "dc356e5402f88b4460ee3f340ede7dd3a269f58550e10c1ac91e69c7ac9f0544",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Forget Memory",
+    "description": "Delete a specific memory from an agent's store",
+    "website": "https://www.flomation.co",
+    "icon": "brain",
+    "date": "05/04/2026",
+    "type": 2,
+    "category": {
+      "name": "Agent",
+      "icon": "robot",
+      "description": "Interact with Flomation Agents"
+    },
+    "inputs": [
+      {
+        "name": "memory_id",
+        "type": "string",
+        "value": null,
+        "label": "Memory ID",
+        "placeholder": "UUID of the memory to delete",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      }
+    ]
+  },
+  "agent/fulfill_commitment": {
+    "hash": "2ec805de51cafa988e187d52d44f989c196de5d924543c10c375151e3bf4facd",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Fulfil Commitment",
+    "description": "Mark an agent commitment as fulfilled after the follow-up has been delivered",
+    "website": "https://www.flomation.co",
+    "icon": "check-circle",
+    "date": "06/04/2026",
+    "type": 2,
+    "category": {
+      "name": "Agent",
+      "icon": "robot",
+      "description": "Interact with Flomation Agents"
+    },
+    "inputs": [
+      {
+        "name": "commitment_id",
+        "type": "string",
+        "value": null,
+        "label": "Commitment ID",
+        "placeholder": "${trigger.commitment_id}",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      }
+    ]
+  },
+  "agent/process_extraction": {
+    "hash": "2390db3accc6163d0589148c5b0354d641e66581e291146e5a2e0534634d5442",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Process Extraction Output",
+    "description": "Parse a structured extraction JSON payload and write memories, pending actions, and commitments",
+    "website": "https://www.flomation.co",
+    "icon": "brain",
+    "date": "05/04/2026",
+    "type": 2,
+    "category": {
+      "name": "Agent",
+      "icon": "robot",
+      "description": "Interact with Flomation Agents"
+    },
+    "inputs": [
+      {
+        "name": "agent_id",
+        "type": "string",
+        "value": null,
+        "label": "Agent ID",
+        "placeholder": "${flow.agent_id}",
+        "required": true
+      },
+      {
+        "name": "extraction_json",
+        "type": "string",
+        "value": null,
+        "label": "Extraction JSON",
+        "placeholder": "${node.ai.response}",
+        "required": true
+      },
+      {
+        "name": "agent_user_id",
+        "type": "string",
+        "value": null,
+        "label": "Agent User ID",
+        "placeholder": "${trigger.agent_user_id}"
+      },
+      {
+        "name": "conversation_id",
+        "type": "string",
+        "value": null,
+        "label": "Conversation ID",
+        "placeholder": "${trigger.conversation_id}"
+      },
+      {
+        "name": "source_message_id",
+        "type": "string",
+        "value": null,
+        "label": "Source Message ID",
+        "placeholder": "${trigger.message_id}"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "memories_written",
+        "type": "integer",
+        "value": null,
+        "label": "Memories written",
+        "placeholder": ""
+      },
+      {
+        "name": "memories_flagged",
+        "type": "integer",
+        "value": null,
+        "label": "Memories flagged (0.5–0.8 confidence)",
+        "placeholder": ""
+      },
+      {
+        "name": "memories_discarded",
+        "type": "integer",
+        "value": null,
+        "label": "Memories discarded (\u003c0.5 confidence)",
+        "placeholder": ""
+      },
+      {
+        "name": "pending_actions_written",
+        "type": "integer",
+        "value": null,
+        "label": "Pending actions written",
+        "placeholder": ""
+      },
+      {
+        "name": "commitments_written",
+        "type": "integer",
+        "value": null,
+        "label": "Commitments written",
+        "placeholder": ""
+      },
+      {
+        "name": "errors",
+        "type": "object",
+        "value": null,
+        "label": "Per-record errors",
+        "placeholder": ""
+      }
+    ]
+  },
   "agent/read_state": {
     "hash": "07d0557a62bd7a4f12ee06dc9a8ff810ecd29a6dd46122b5cd3af06fe0f9649a",
     "author": "Andy Esser",
@@ -45,6 +214,194 @@
         "type": "boolean",
         "value": null,
         "label": "Key Exists",
+        "placeholder": ""
+      }
+    ]
+  },
+  "agent/recall": {
+    "hash": "e6de96fd17669143cc0bb16582e02b782926768e666b6304fc1a2d0c8e10acf5",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Recall Memories",
+    "description": "Fetch an agent's memories about a specific user",
+    "website": "https://www.flomation.co",
+    "icon": "brain",
+    "date": "05/04/2026",
+    "type": 2,
+    "category": {
+      "name": "Agent",
+      "icon": "robot",
+      "description": "Interact with Flomation Agents"
+    },
+    "inputs": [
+      {
+        "name": "agent_id",
+        "type": "string",
+        "value": null,
+        "label": "Agent ID",
+        "placeholder": "${flow.agent_id}",
+        "required": true
+      },
+      {
+        "name": "agent_user_id",
+        "type": "string",
+        "value": null,
+        "label": "Agent User ID",
+        "placeholder": "${flow.agent_user_id}",
+        "required": true
+      },
+      {
+        "name": "pinned_only",
+        "type": "boolean",
+        "value": null,
+        "label": "Pinned only",
+        "placeholder": "false"
+      },
+      {
+        "name": "limit",
+        "type": "integer",
+        "value": null,
+        "label": "Limit",
+        "placeholder": "20"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "memories",
+        "type": "object",
+        "value": null,
+        "label": "Memories",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Count",
+        "placeholder": ""
+      }
+    ]
+  },
+  "agent/remember": {
+    "hash": "67ba79808e02d473bfca14982dd964bb4de7eba8b38f7671c95461ae4628c238",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Remember Fact",
+    "description": "Store a durable fact, preference, or piece of feedback in an agent's memory",
+    "website": "https://www.flomation.co",
+    "icon": "brain",
+    "date": "05/04/2026",
+    "type": 2,
+    "category": {
+      "name": "Agent",
+      "icon": "robot",
+      "description": "Interact with Flomation Agents"
+    },
+    "inputs": [
+      {
+        "name": "agent_id",
+        "type": "string",
+        "value": null,
+        "label": "Agent ID",
+        "placeholder": "${flow.agent_id}",
+        "required": true
+      },
+      {
+        "name": "agent_user_id",
+        "type": "string",
+        "value": null,
+        "label": "Agent User ID",
+        "placeholder": "${flow.agent_user_id}"
+      },
+      {
+        "name": "scope",
+        "type": "string",
+        "value": null,
+        "label": "Scope",
+        "placeholder": "",
+        "required": true,
+        "options": [
+          {
+            "name": "User-specific",
+            "value": "user"
+          },
+          {
+            "name": "Agent-global",
+            "value": "global"
+          }
+        ]
+      },
+      {
+        "name": "memory_type",
+        "type": "string",
+        "value": null,
+        "label": "Memory Type",
+        "placeholder": "",
+        "required": true,
+        "options": [
+          {
+            "name": "Preference (auto-pinned)",
+            "value": "preference"
+          },
+          {
+            "name": "Feedback (auto-pinned)",
+            "value": "feedback"
+          },
+          {
+            "name": "Fact",
+            "value": "fact"
+          },
+          {
+            "name": "Relationship",
+            "value": "relationship"
+          },
+          {
+            "name": "Task",
+            "value": "task"
+          },
+          {
+            "name": "Session summary",
+            "value": "session_summary"
+          }
+        ]
+      },
+      {
+        "name": "title",
+        "type": "string",
+        "value": null,
+        "label": "Title",
+        "placeholder": "Short handle for the memory",
+        "required": true
+      },
+      {
+        "name": "body",
+        "type": "string",
+        "value": null,
+        "label": "Body",
+        "placeholder": "The fact itself",
+        "required": true
+      },
+      {
+        "name": "pinned",
+        "type": "boolean",
+        "value": null,
+        "label": "Pinned (always included in system prompt)",
+        "placeholder": "false"
+      },
+      {
+        "name": "confidence",
+        "type": "string",
+        "value": null,
+        "label": "Confidence (0.0–1.0, defaults 1.0)",
+        "placeholder": "1.0"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "memory_id",
+        "type": "string",
+        "value": null,
+        "label": "Memory ID",
         "placeholder": ""
       }
     ]
@@ -181,7 +538,7 @@
     ]
   },
   "ai/anthropic": {
-    "hash": "38747cd31635391a67143c2ce5ade8985d71e3f9dc835320049fccd5c5cd3482",
+    "hash": "26207b57cf383c3dbd1b104f044c4e2bc8db36a060075bb2fcb876cdcebbd813",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Anthropic Prompt",
@@ -253,6 +610,20 @@
         "value": null,
         "label": "Temperature",
         "placeholder": "0.7"
+      },
+      {
+        "name": "conversation_history",
+        "type": "object",
+        "value": null,
+        "label": "Conversation History",
+        "placeholder": "${conversation_history}"
+      },
+      {
+        "name": "tool_definitions",
+        "type": "text",
+        "value": null,
+        "label": "Tool Definitions (JSON)",
+        "placeholder": "[{\"name\":\"web_search\",\"description\":\"Search the web\",\"input_schema\":{\"type\":\"object\",\"properties\":{\"query\":{\"type\":\"string\"}},\"required\":[\"query\"]}}]"
       }
     ],
     "outputs": [
@@ -261,6 +632,13 @@
         "type": "string",
         "value": null,
         "label": "Response",
+        "placeholder": ""
+      },
+      {
+        "name": "should_respond",
+        "type": "boolean",
+        "value": null,
+        "label": "Should Respond",
         "placeholder": ""
       },
       {
@@ -292,6 +670,13 @@
         "placeholder": ""
       },
       {
+        "name": "tool_calls_count",
+        "type": "integer",
+        "value": null,
+        "label": "Tool Calls",
+        "placeholder": ""
+      },
+      {
         "name": "success",
         "type": "boolean",
         "value": null,
@@ -308,7 +693,7 @@
     ]
   },
   "ai/openai": {
-    "hash": "39bc2371b91b1de21e11183f09ccb90a30f12bc1eb352aa829a9d3df334ab2af",
+    "hash": "c108e9ea37bbdf6348ad15e9b1ab37f01f2b6025da6074085f8054041a9c32ed",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "OpenAI Prompt",
@@ -400,6 +785,20 @@
         "value": null,
         "label": "Temperature",
         "placeholder": "0.7"
+      },
+      {
+        "name": "conversation_history",
+        "type": "object",
+        "value": null,
+        "label": "Conversation History",
+        "placeholder": "${conversation_history}"
+      },
+      {
+        "name": "tool_definitions",
+        "type": "text",
+        "value": null,
+        "label": "Tool Definitions (JSON)",
+        "placeholder": "[{\"type\":\"function\",\"function\":{\"name\":\"web_search\",\"description\":\"Search the web\",\"parameters\":{\"type\":\"object\",\"properties\":{\"query\":{\"type\":\"string\"}},\"required\":[\"query\"]}}}]"
       }
     ],
     "outputs": [
@@ -436,6 +835,20 @@
         "type": "integer",
         "value": null,
         "label": "Total Tokens",
+        "placeholder": ""
+      },
+      {
+        "name": "should_respond",
+        "type": "boolean",
+        "value": null,
+        "label": "Should Respond",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_calls_count",
+        "type": "integer",
+        "value": null,
+        "label": "Tool Calls",
         "placeholder": ""
       },
       {
@@ -975,7 +1388,7 @@
     ]
   },
   "aws/s3/put": {
-    "hash": "48997fb6eb17888ab2423413fac3c1dc5098c52e8b0a5079ce09e52a55c136f8",
+    "hash": "c3b1052838a189e96a9ba0f2f3b6dd732a5b6346a8bcfcd3d1e7e07f4d415999",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "AWS S3 Put",
@@ -1943,7 +2356,7 @@
     ]
   },
   "git/add": {
-    "hash": "ded6d4f88575756a715507a99b45369853c31dcb7762df01a7142606b2394f80",
+    "hash": "ac708fe77ddb564ce137445130993f9dab813c7a4fbe9915f820a0bdd6c5d11c",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Git Add",
@@ -1977,7 +2390,7 @@
     ]
   },
   "git/branch": {
-    "hash": "29e06b80871cd6b93591db937431c030349ed4ddd3c17ed07ee3dc261949e2d7",
+    "hash": "313adcea10ebed0d1b39b8af2481d00d08f83e762059027d093b59b4eb512afc",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Git Branch",
@@ -2054,7 +2467,7 @@
     ]
   },
   "git/clone": {
-    "hash": "1b849dfc2f043e86f5865028753249ab5942d9881650145f8a167af2fada883a",
+    "hash": "07660134e1f82be28f2b3cffc8b867e9d2c4cb3dfea1b3b6d27ff7b8a49a77cf",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Git Clone",
@@ -2164,7 +2577,7 @@
     ]
   },
   "git/commit": {
-    "hash": "d77fa33c2ce5d54b84a087ada5eba9d67f8015835ab00729628aa7b9179ce304",
+    "hash": "a08584760609a5f14f6e3841ce067072f35faef7e50316a8400915f1800aa8d6",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Git Commit",
@@ -2426,7 +2839,7 @@
     ]
   },
   "git/status": {
-    "hash": "e1c65d6c47e74d7619c1e6adf7f4a9e8aa1f2b30793d9067b72d1e3f4181f7cd",
+    "hash": "80914da573aa8be40f48ad113c51d14437e857104e32026e19c7458289480098",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Git Status",
@@ -2735,7 +3148,7 @@
     ]
   },
   "messaging/slack": {
-    "hash": "b080bbe262cbf72d38c0c18a31689523a673e067b93e2e8690062defd53eb67c",
+    "hash": "2c5672a9e4fafb6b85302ca2fb475ad8fb2d7b3aeeb909f4cac8000b05e1d1c0",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Send Slack Message",
@@ -2763,7 +3176,7 @@
         "type": "string",
         "value": null,
         "label": "Channel ID",
-        "placeholder": "C01234ABCDE",
+        "placeholder": "${channel_id}",
         "required": true
       },
       {
@@ -2775,11 +3188,11 @@
         "required": true
       },
       {
-        "name": "thread_ts",
+        "name": "thread_id",
         "type": "string",
         "value": null,
-        "label": "Thread Timestamp",
-        "placeholder": "Reply in thread (optional)"
+        "label": "Thread ID",
+        "placeholder": "${thread_id}"
       }
     ],
     "outputs": [
@@ -2807,7 +3220,7 @@
     ]
   },
   "messaging/telegram": {
-    "hash": "028221cd539abcce801d0d3abf80d33ba203f108281868ba15c6fdf37f8ba1d6",
+    "hash": "6a5006897044dbe31ee97e186287a6554232cfbfed89c934344d20c3f822b3c5",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Send Telegram Message",
@@ -2831,11 +3244,11 @@
         "required": true
       },
       {
-        "name": "chat_id",
+        "name": "channel_id",
         "type": "string",
         "value": null,
-        "label": "Chat ID",
-        "placeholder": "12345678 or @channelname",
+        "label": "Channel ID",
+        "placeholder": "${channel_id}",
         "required": true
       },
       {
@@ -3412,7 +3825,7 @@
     ]
   },
   "security/antivirus": {
-    "hash": "5df6c1166a7477edfdbb22a50a3391b26e87c54841573d8943f61eb8e5b8015a",
+    "hash": "3e40798bc9b5382a70a10df2a183219e00bc783cb4d17cfe450a2bf3cdb8809c",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Scan with Antivirus",
@@ -3774,6 +4187,1146 @@
         "type": "integer",
         "value": null,
         "label": "Row Count",
+        "placeholder": ""
+      }
+    ]
+  },
+  "tools/calendar_create": {
+    "hash": "3b28de72ba239797bb5b8ebf40e057d26e9a93197db1146e5d5d029d112c3082",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Calendar Create Event",
+    "description": "Create a new event on a connected Google Calendar. Specify the account (email or label like 'Work'/'Personal'), date, time, title, and optional attendees/location.",
+    "website": "https://www.flomation.co",
+    "icon": "calendar",
+    "date": "08/04/2026",
+    "type": 2,
+    "category": {
+      "name": "Tools",
+      "icon": "wrench",
+      "description": "AI tool implementations for function calling"
+    },
+    "inputs": [
+      {
+        "name": "title",
+        "type": "string",
+        "value": null,
+        "label": "Event title",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "date",
+        "type": "string",
+        "value": null,
+        "label": "Date (YYYY-MM-DD, 'today', 'tomorrow', or day name)",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "start_time",
+        "type": "string",
+        "value": null,
+        "label": "Start time (HH:MM, 24h format)",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "end_time",
+        "type": "string",
+        "value": null,
+        "label": "End time (HH:MM, 24h format)",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "description",
+        "type": "string",
+        "value": null,
+        "label": "Event description or notes",
+        "placeholder": ""
+      },
+      {
+        "name": "attendees",
+        "type": "string",
+        "value": null,
+        "label": "Attendees (comma-separated email addresses)",
+        "placeholder": ""
+      },
+      {
+        "name": "location",
+        "type": "string",
+        "value": null,
+        "label": "Event location",
+        "placeholder": ""
+      },
+      {
+        "name": "account",
+        "type": "string",
+        "value": null,
+        "label": "Account (email, label like 'Work'/'Personal', or empty for primary)",
+        "placeholder": ""
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result (text)",
+        "placeholder": ""
+      },
+      {
+        "name": "event_id",
+        "type": "string",
+        "value": null,
+        "label": "Created Event ID",
+        "placeholder": ""
+      },
+      {
+        "name": "event_link",
+        "type": "string",
+        "value": null,
+        "label": "Event Link",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "tools/calendar_delete": {
+    "hash": "e9e9f316caf923c2661fe1036934252da92491d8fe449db180b231572d6b7055",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Calendar Delete Event",
+    "description": "Delete an event from Google Calendar. Requires the event_id from a previous calendar_read. This permanently removes the event.",
+    "website": "https://www.flomation.co",
+    "icon": "calendar",
+    "date": "08/04/2026",
+    "type": 2,
+    "category": {
+      "name": "Tools",
+      "icon": "wrench",
+      "description": "AI tool implementations for function calling"
+    },
+    "inputs": [
+      {
+        "name": "event_id",
+        "type": "string",
+        "value": null,
+        "label": "Event ID (from calendar_read results)",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "account",
+        "type": "string",
+        "value": null,
+        "label": "Account the event is on (email or label)",
+        "placeholder": ""
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result (text)",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "tools/calendar_read": {
+    "hash": "970b4320fe1bcda999ddd3fc95c7a8ed48b9e51a5381e34192d38e1382dd8583",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Calendar Read",
+    "description": "Read events, check availability, or find free slots across all connected Google calendars",
+    "website": "https://www.flomation.co",
+    "icon": "calendar",
+    "date": "08/04/2026",
+    "type": 2,
+    "category": {
+      "name": "Tools",
+      "icon": "wrench",
+      "description": "AI tool implementations for function calling"
+    },
+    "inputs": [
+      {
+        "name": "query_type",
+        "type": "string",
+        "value": null,
+        "label": "Query Type",
+        "placeholder": "",
+        "required": true,
+        "options": [
+          {
+            "name": "List events",
+            "value": "events"
+          },
+          {
+            "name": "Check availability",
+            "value": "availability"
+          },
+          {
+            "name": "Find free slots",
+            "value": "free_slots"
+          }
+        ]
+      },
+      {
+        "name": "date_from",
+        "type": "string",
+        "value": null,
+        "label": "Start Date (YYYY-MM-DD or 'today', 'tomorrow')",
+        "placeholder": "today",
+        "required": true
+      },
+      {
+        "name": "date_to",
+        "type": "string",
+        "value": null,
+        "label": "End Date (YYYY-MM-DD, defaults to date_from)",
+        "placeholder": ""
+      },
+      {
+        "name": "start_time",
+        "type": "string",
+        "value": null,
+        "label": "Start Time (HH:MM, for availability check)",
+        "placeholder": "14:00"
+      },
+      {
+        "name": "end_time",
+        "type": "string",
+        "value": null,
+        "label": "End Time (HH:MM, for availability check)",
+        "placeholder": "15:00"
+      },
+      {
+        "name": "duration_minutes",
+        "type": "integer",
+        "value": null,
+        "label": "Slot Duration (minutes, for free slot search)",
+        "placeholder": "60"
+      },
+      {
+        "name": "account",
+        "type": "string",
+        "value": null,
+        "label": "Account filter (email, label like 'Work', or empty for all)",
+        "placeholder": ""
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Results (text)",
+        "placeholder": ""
+      },
+      {
+        "name": "events",
+        "type": "object",
+        "value": null,
+        "label": "Events (JSON)",
+        "placeholder": ""
+      },
+      {
+        "name": "is_free",
+        "type": "boolean",
+        "value": null,
+        "label": "Is Free (availability)",
+        "placeholder": ""
+      },
+      {
+        "name": "free_slots",
+        "type": "object",
+        "value": null,
+        "label": "Free Slots (JSON)",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "tools/calendar_update": {
+    "hash": "b9ea571f4e2470bd0f2fff9210f4ae77aceab5125dc2ca8be9f0aacc365f8004",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Calendar Update Event",
+    "description": "Update an existing Google Calendar event. Requires the event_id from a previous calendar_read. Only the fields you provide will be changed; others remain untouched.",
+    "website": "https://www.flomation.co",
+    "icon": "calendar",
+    "date": "08/04/2026",
+    "type": 2,
+    "category": {
+      "name": "Tools",
+      "icon": "wrench",
+      "description": "AI tool implementations for function calling"
+    },
+    "inputs": [
+      {
+        "name": "event_id",
+        "type": "string",
+        "value": null,
+        "label": "Event ID (from calendar_read results)",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "title",
+        "type": "string",
+        "value": null,
+        "label": "New title (leave empty to keep current)",
+        "placeholder": ""
+      },
+      {
+        "name": "date",
+        "type": "string",
+        "value": null,
+        "label": "New date (YYYY-MM-DD, leave empty to keep current)",
+        "placeholder": ""
+      },
+      {
+        "name": "start_time",
+        "type": "string",
+        "value": null,
+        "label": "New start time (HH:MM, leave empty to keep current)",
+        "placeholder": ""
+      },
+      {
+        "name": "end_time",
+        "type": "string",
+        "value": null,
+        "label": "New end time (HH:MM, leave empty to keep current)",
+        "placeholder": ""
+      },
+      {
+        "name": "description",
+        "type": "string",
+        "value": null,
+        "label": "New description",
+        "placeholder": ""
+      },
+      {
+        "name": "location",
+        "type": "string",
+        "value": null,
+        "label": "New location",
+        "placeholder": ""
+      },
+      {
+        "name": "account",
+        "type": "string",
+        "value": null,
+        "label": "Account the event is on (email or label)",
+        "placeholder": ""
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result (text)",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "tools/email_draft": {
+    "hash": "a08ac1e928935988a73414bf9fe8a6737fec28001459bf31796d50f7561400d9",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Email Draft",
+    "description": "Manage Gmail drafts: create a new draft, list existing drafts, update a draft, or delete one. Use action='create' to compose without sending, 'list' to see drafts, 'update' to modify, 'delete' to remove.",
+    "website": "https://www.flomation.co",
+    "icon": "envelope",
+    "date": "08/04/2026",
+    "type": 2,
+    "category": {
+      "name": "Tools",
+      "icon": "wrench",
+      "description": "AI tool implementations for function calling"
+    },
+    "inputs": [
+      {
+        "name": "action",
+        "type": "string",
+        "value": null,
+        "label": "Action to perform",
+        "placeholder": "",
+        "required": true,
+        "options": [
+          {
+            "name": "Create a new draft",
+            "value": "create"
+          },
+          {
+            "name": "List existing drafts",
+            "value": "list"
+          },
+          {
+            "name": "Update a draft",
+            "value": "update"
+          },
+          {
+            "name": "Delete a draft",
+            "value": "delete"
+          }
+        ]
+      },
+      {
+        "name": "to",
+        "type": "string",
+        "value": null,
+        "label": "Recipient (for create/update)",
+        "placeholder": ""
+      },
+      {
+        "name": "subject",
+        "type": "string",
+        "value": null,
+        "label": "Subject (for create/update)",
+        "placeholder": ""
+      },
+      {
+        "name": "body",
+        "type": "text",
+        "value": null,
+        "label": "Body (for create/update)",
+        "placeholder": ""
+      },
+      {
+        "name": "draft_id",
+        "type": "string",
+        "value": null,
+        "label": "Draft ID (for update/delete)",
+        "placeholder": ""
+      },
+      {
+        "name": "account",
+        "type": "string",
+        "value": null,
+        "label": "Account (email or label)",
+        "placeholder": ""
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result (text)",
+        "placeholder": ""
+      },
+      {
+        "name": "draft_id",
+        "type": "string",
+        "value": null,
+        "label": "Draft ID",
+        "placeholder": ""
+      },
+      {
+        "name": "drafts",
+        "type": "object",
+        "value": null,
+        "label": "Drafts (JSON)",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "tools/email_read": {
+    "hash": "6776a061f1a4a67e529021fce7db27ae2b9ae4993bfc7911c9f75bb01a76e5b1",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Email Read",
+    "description": "Search and read emails from connected Gmail accounts. Use a Gmail search query (e.g. 'from:dave@flomation.co', 'subject:invoice', 'is:unread') or provide an email_id to read a specific email in full.",
+    "website": "https://www.flomation.co",
+    "icon": "envelope",
+    "date": "08/04/2026",
+    "type": 2,
+    "category": {
+      "name": "Tools",
+      "icon": "wrench",
+      "description": "AI tool implementations for function calling"
+    },
+    "inputs": [
+      {
+        "name": "query",
+        "type": "string",
+        "value": null,
+        "label": "Gmail search query (e.g. 'from:boss@company.com', 'subject:urgent', 'is:unread')",
+        "placeholder": "is:unread"
+      },
+      {
+        "name": "max_results",
+        "type": "integer",
+        "value": null,
+        "label": "Max emails to return (default 10, max 50)",
+        "placeholder": "10"
+      },
+      {
+        "name": "email_id",
+        "type": "string",
+        "value": null,
+        "label": "Email ID to read in full (from a prior search)",
+        "placeholder": ""
+      },
+      {
+        "name": "account",
+        "type": "string",
+        "value": null,
+        "label": "Account filter (email or label, empty for all)",
+        "placeholder": ""
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Results (text)",
+        "placeholder": ""
+      },
+      {
+        "name": "emails",
+        "type": "object",
+        "value": null,
+        "label": "Emails (JSON)",
+        "placeholder": ""
+      },
+      {
+        "name": "total_count",
+        "type": "integer",
+        "value": null,
+        "label": "Total Results",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "tools/email_reply": {
+    "hash": "445d15cec37c5179d672b732cecb884ff8cddbd79d85df4a289bf616618d0d75",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Email Reply",
+    "description": "Reply to an existing email. Requires the email_id from a previous email_read. Preserves the thread so the reply appears in the correct conversation.",
+    "website": "https://www.flomation.co",
+    "icon": "envelope",
+    "date": "08/04/2026",
+    "type": 2,
+    "category": {
+      "name": "Tools",
+      "icon": "wrench",
+      "description": "AI tool implementations for function calling"
+    },
+    "inputs": [
+      {
+        "name": "email_id",
+        "type": "string",
+        "value": null,
+        "label": "Email ID to reply to (from email_read)",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "body",
+        "type": "text",
+        "value": null,
+        "label": "Reply body (plain text)",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "reply_all",
+        "type": "boolean",
+        "value": null,
+        "label": "Reply all (default false)",
+        "placeholder": ""
+      },
+      {
+        "name": "sender_name",
+        "type": "string",
+        "value": null,
+        "label": "Sender display name (e.g. 'Ada Whitmore')",
+        "placeholder": ""
+      },
+      {
+        "name": "account",
+        "type": "string",
+        "value": null,
+        "label": "Account to send from (email or label)",
+        "placeholder": ""
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result (text)",
+        "placeholder": ""
+      },
+      {
+        "name": "message_id",
+        "type": "string",
+        "value": null,
+        "label": "Message ID",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "tools/email_send": {
+    "hash": "1476d7ad6eb8f55b57b430708b126eeba51c0ed5b109f63834014b533e52db78",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Email Send",
+    "description": "Send an email from a connected Gmail account. Specify recipients, subject, body, and optionally CC/BCC. The AI must call this tool to actually send — never claim an email was sent without calling it.",
+    "website": "https://www.flomation.co",
+    "icon": "envelope",
+    "date": "08/04/2026",
+    "type": 2,
+    "category": {
+      "name": "Tools",
+      "icon": "wrench",
+      "description": "AI tool implementations for function calling"
+    },
+    "inputs": [
+      {
+        "name": "to",
+        "type": "string",
+        "value": null,
+        "label": "Recipient email address(es), comma-separated",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "subject",
+        "type": "string",
+        "value": null,
+        "label": "Email subject",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "body",
+        "type": "text",
+        "value": null,
+        "label": "Email body (plain text)",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "cc",
+        "type": "string",
+        "value": null,
+        "label": "CC recipients (comma-separated)",
+        "placeholder": ""
+      },
+      {
+        "name": "bcc",
+        "type": "string",
+        "value": null,
+        "label": "BCC recipients (comma-separated)",
+        "placeholder": ""
+      },
+      {
+        "name": "sender_name",
+        "type": "string",
+        "value": null,
+        "label": "Sender display name (e.g. 'Ada Whitmore', defaults to account label)",
+        "placeholder": ""
+      },
+      {
+        "name": "account",
+        "type": "string",
+        "value": null,
+        "label": "Sending account (email or label, empty for primary)",
+        "placeholder": ""
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result (text)",
+        "placeholder": ""
+      },
+      {
+        "name": "message_id",
+        "type": "string",
+        "value": null,
+        "label": "Message ID",
+        "placeholder": ""
+      },
+      {
+        "name": "thread_id",
+        "type": "string",
+        "value": null,
+        "label": "Thread ID",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "tools/google_accounts": {
+    "hash": "4ab8ff14e3197d35ed7d19006c6fcbff6b533b734556bb39afc742969e6f55c1",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Manage Google Connections",
+    "description": "Manage the user's Google account connections for calendar, email read, and email send. Lists which accounts are connected and for which purposes (calendar, email read, email send), provides OAuth links to connect new permissions, and can disconnect specific accounts/purposes. Use this when the user wants to connect or manage their Google accounts.",
+    "website": "https://www.flomation.co",
+    "icon": "link",
+    "date": "08/04/2026",
+    "type": 2,
+    "category": {
+      "name": "Tools",
+      "icon": "wrench",
+      "description": "AI tool implementations for function calling"
+    },
+    "inputs": [
+      {
+        "name": "action",
+        "type": "string",
+        "value": null,
+        "label": "What to do with Google account connections",
+        "placeholder": "",
+        "required": true,
+        "options": [
+          {
+            "name": "List accounts with purposes and get connect links",
+            "value": "list"
+          },
+          {
+            "name": "Disconnect an account or specific purpose",
+            "value": "disconnect"
+          }
+        ]
+      },
+      {
+        "name": "email",
+        "type": "string",
+        "value": null,
+        "label": "Email (for disconnect)",
+        "placeholder": "user@example.com"
+      },
+      {
+        "name": "purpose",
+        "type": "string",
+        "value": null,
+        "label": "Purpose to disconnect (calendar, email_read, email_send) — empty removes all",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "Calendar access",
+            "value": "calendar"
+          },
+          {
+            "name": "Email read access",
+            "value": "email_read"
+          },
+          {
+            "name": "Email send access",
+            "value": "email_send"
+          }
+        ]
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Results (text)",
+        "placeholder": ""
+      },
+      {
+        "name": "accounts",
+        "type": "object",
+        "value": null,
+        "label": "Connected Accounts (JSON)",
+        "placeholder": ""
+      },
+      {
+        "name": "auth_urls",
+        "type": "object",
+        "value": null,
+        "label": "OAuth Connect URLs by purpose",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "tools/web_fetch": {
+    "hash": "bcbf0b35a883913d80bb10192e7f5860978964ff7c54e318895801d0a1efb6c0",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Web Fetch",
+    "description": "Fetch a URL and extract the text content",
+    "website": "https://www.flomation.co",
+    "icon": "globe",
+    "date": "07/04/2026",
+    "type": 2,
+    "category": {
+      "name": "Tools",
+      "icon": "wrench",
+      "description": "AI tool implementations for function calling"
+    },
+    "inputs": [
+      {
+        "name": "url",
+        "type": "string",
+        "value": null,
+        "label": "URL",
+        "placeholder": "https://example.com",
+        "required": true
+      },
+      {
+        "name": "max_length",
+        "type": "integer",
+        "value": null,
+        "label": "Max Content Length",
+        "placeholder": "10000"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Page Content (text)",
+        "placeholder": ""
+      },
+      {
+        "name": "title",
+        "type": "string",
+        "value": null,
+        "label": "Page Title",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "tools/web_search": {
+    "hash": "a9cbe3694698d84c35f442ab66ebff47b61ea8ad8f3ed834e11c9490e2b0fd0b",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Web Search",
+    "description": "Search the web using the Brave Search API",
+    "website": "https://www.flomation.co",
+    "icon": "magnifying-glass",
+    "date": "07/04/2026",
+    "type": 2,
+    "category": {
+      "name": "Tools",
+      "icon": "wrench",
+      "description": "AI tool implementations for function calling"
+    },
+    "inputs": [
+      {
+        "name": "query",
+        "type": "string",
+        "value": null,
+        "label": "Search Query",
+        "placeholder": "What to search for",
+        "required": true
+      },
+      {
+        "name": "api_key",
+        "type": "string",
+        "value": null,
+        "label": "Brave API Key",
+        "placeholder": "BSA...",
+        "required": true
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Number of Results",
+        "placeholder": "5"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Search Results (text)",
+        "placeholder": ""
+      },
+      {
+        "name": "results",
+        "type": "object",
+        "value": null,
+        "label": "Raw Results (JSON)",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "trigger/email": {
+    "hash": "b79ff3e9875535ad1dce1d323778d80ac006db68186859376cef528e469c9eb0",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Email Trigger",
+    "description": "Triggers a flow when a new email arrives in a connected Gmail account",
+    "website": "https://www.flomation.co",
+    "icon": "envelope",
+    "date": "08/04/2026",
+    "type": 1,
+    "category": {
+      "name": "Triggers",
+      "icon": "bolt-lightning",
+      "description": "Start a Flow"
+    },
+    "inputs": [
+      {
+        "name": "gmail_query",
+        "type": "string",
+        "value": null,
+        "label": "Gmail Search Filter",
+        "placeholder": "is:unread"
+      },
+      {
+        "name": "account",
+        "type": "string",
+        "value": null,
+        "label": "Account Filter (email or label)",
+        "placeholder": ""
+      }
+    ],
+    "outputs": [
+      {
+        "name": "email_id",
+        "type": "string",
+        "value": null,
+        "label": "Email ID",
+        "placeholder": ""
+      },
+      {
+        "name": "thread_id",
+        "type": "string",
+        "value": null,
+        "label": "Thread ID",
+        "placeholder": ""
+      },
+      {
+        "name": "from",
+        "type": "string",
+        "value": null,
+        "label": "From",
+        "placeholder": ""
+      },
+      {
+        "name": "to",
+        "type": "string",
+        "value": null,
+        "label": "To",
+        "placeholder": ""
+      },
+      {
+        "name": "subject",
+        "type": "string",
+        "value": null,
+        "label": "Subject",
+        "placeholder": ""
+      },
+      {
+        "name": "snippet",
+        "type": "string",
+        "value": null,
+        "label": "Snippet",
+        "placeholder": ""
+      },
+      {
+        "name": "body_text",
+        "type": "string",
+        "value": null,
+        "label": "Body (text)",
+        "placeholder": ""
+      },
+      {
+        "name": "date",
+        "type": "string",
+        "value": null,
+        "label": "Date",
+        "placeholder": ""
+      },
+      {
+        "name": "labels",
+        "type": "string",
+        "value": null,
+        "label": "Labels",
+        "placeholder": ""
+      },
+      {
+        "name": "has_attachments",
+        "type": "boolean",
+        "value": null,
+        "label": "Has Attachments",
+        "placeholder": ""
+      },
+      {
+        "name": "account",
+        "type": "string",
+        "value": null,
+        "label": "Account",
+        "placeholder": ""
+      },
+      {
+        "name": "triggered_at",
+        "type": "string",
+        "value": null,
+        "label": "Triggered At",
         "placeholder": ""
       }
     ]
