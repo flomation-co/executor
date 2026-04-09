@@ -9,14 +9,22 @@
 package recall
 
 import (
+	"bytes"
+	"context"
 	"encoding/json"
 	"fmt"
 	"io"
 	"net/http"
 	"net/url"
 	"strconv"
+	"strings"
+	"time"
+
+	awsconfig "github.com/aws/aws-sdk-go-v2/config"
+	"github.com/aws/aws-sdk-go-v2/service/bedrockruntime"
 
 	core "flomation.app/automate/executor"
+	log "github.com/sirupsen/logrus"
 )
 
 const (
@@ -59,6 +67,8 @@ var Inputs = [...]core.Connection{
 		Placeholder: "20",
 		Required:    false,
 	},
+	{Name: "query", Type: core.ConnectionTypeString, Label: "Semantic search query"},
+	{Name: "aws_region", Type: core.ConnectionTypeString, Label: "AWS region for embeddings", Placeholder: "us-east-1"},
 }
 
 var Outputs = [...]core.Connection{
@@ -76,11 +86,19 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 		return nil, err
 	}
 
-	ctx := flow.GetContext()
-	if ctx == nil || ctx.APIURL == "" {
+	execCtx := flow.GetContext()
+	if execCtx == nil || execCtx.APIURL == "" {
 		return nil, fmt.Errorf("execution context with API URL is required")
 	}
 
+	query := optionalString("query", inputs)
+
+	// Semantic search path: embed the query and POST to the search endpoint.
+	if strings.TrimSpace(query) != "" {
+		return semanticRecall(flow, execCtx, agentID, agentUserID, query, optionalInt("limit", inputs), inputs)
+	}
+
+	// List path: standard list-memories endpoint.
 	q := url.Values{}
 	q.Set("agent_user_id", agentUserID)
 	if optionalBool("pinned_only", inputs) {
@@ -91,14 +109,11 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	}
 
 	endpoint := fmt.Sprintf("%s/api/v1/internal/agent/%s/memory?%s",
-		ctx.APIURL, agentID, q.Encode())
+		execCtx.APIURL, agentID, q.Encode())
 
 	req, err := http.NewRequestWithContext(flow.GoContext(), http.MethodGet, endpoint, nil)
 	if err != nil {
 		return nil, fmt.Errorf("failed to create request: %w", err)
-	}
-	if ctx.Token != "" {
-		req.Header.Set("Authorization", "Bearer "+ctx.Token)
 	}
 
 	resp, err := http.DefaultClient.Do(req)
@@ -112,11 +127,6 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 		return nil, fmt.Errorf("API returned %d: %s", resp.StatusCode, string(respBody))
 	}
 
-	// Decode into []map[string]interface{} rather than a typed struct so
-	// flows can reference memory fields via ${node.memories[0].title}
-	// without the executor needing to know about the api.AgentMemory
-	// type. This matches the pattern used by read_state, which also
-	// returns opaque maps.
 	var memories []map[string]interface{}
 	if err := json.NewDecoder(resp.Body).Decode(&memories); err != nil {
 		return nil, fmt.Errorf("failed to decode response: %w", err)
@@ -127,6 +137,112 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 		"count":    len(memories),
 	}, nil
 }
+
+func semanticRecall(flow *core.Flow, execCtx *core.ExecutionContext, agentID, agentUserID, query string, topK int, inputs []*core.Connection) (map[string]interface{}, error) {
+	region := optionalString("aws_region", inputs)
+	if region == "" {
+		region = "us-east-1"
+	}
+	if topK <= 0 {
+		topK = 10
+	}
+
+	vec, err := generateEmbedding(flow.GoContext(), region, query)
+	if err != nil {
+		log.WithError(err).Warn("recall: failed to generate embedding, falling back to list")
+		return map[string]interface{}{
+			"memories": []map[string]interface{}{},
+			"count":    0,
+		}, nil
+	}
+
+	payload, _ := json.Marshal(map[string]interface{}{
+		"agent_user_id":  agentUserID,
+		"embedding":      vec,
+		"top_k":          topK,
+		"exclude_pinned": false,
+	})
+
+	endpoint := fmt.Sprintf("%s/api/v1/internal/agent/%s/memory/search", execCtx.APIURL, agentID)
+	req, err := http.NewRequestWithContext(flow.GoContext(), http.MethodPost, endpoint, bytes.NewReader(payload))
+	if err != nil {
+		return nil, fmt.Errorf("failed to create search request: %w", err)
+	}
+	req.Header.Set("Content-Type", "application/json")
+
+	resp, err := http.DefaultClient.Do(req)
+	if err != nil {
+		return nil, fmt.Errorf("failed to call search endpoint: %w", err)
+	}
+	defer func() { _ = resp.Body.Close() }()
+
+	if resp.StatusCode != http.StatusOK {
+		respBody, _ := io.ReadAll(io.LimitReader(resp.Body, 1024))
+		return nil, fmt.Errorf("API returned %d: %s", resp.StatusCode, string(respBody))
+	}
+
+	var memories []map[string]interface{}
+	if err := json.NewDecoder(resp.Body).Decode(&memories); err != nil {
+		return nil, fmt.Errorf("failed to decode search response: %w", err)
+	}
+
+	return map[string]interface{}{
+		"memories": memories,
+		"count":    len(memories),
+	}, nil
+}
+
+func optionalString(name string, inputs []*core.Connection) string {
+	c := core.FindConnection(name, inputs)
+	if c == nil || c.String() == nil {
+		return ""
+	}
+	return *c.String()
+}
+
+// generateEmbedding calls AWS Bedrock Titan Embeddings v2 to produce a
+// 1024-dimensional vector for semantic search.
+func generateEmbedding(ctx context.Context, region, text string) ([]float32, error) {
+	ctx, cancel := context.WithTimeout(ctx, 5*time.Second)
+	defer cancel()
+
+	cfg, err := awsconfig.LoadDefaultConfig(ctx, awsconfig.WithRegion(region))
+	if err != nil {
+		return nil, fmt.Errorf("load AWS config: %w", err)
+	}
+
+	client := bedrockruntime.NewFromConfig(cfg)
+	modelID := "amazon.titan-embed-text-v2:0"
+
+	reqBody, _ := json.Marshal(map[string]interface{}{
+		"inputText":  text,
+		"dimensions": 1024,
+		"normalize":  true,
+	})
+
+	resp, err := client.InvokeModel(ctx, &bedrockruntime.InvokeModelInput{
+		ModelId:     &modelID,
+		Body:        reqBody,
+		ContentType: strPtr("application/json"),
+		Accept:      strPtr("application/json"),
+	})
+	if err != nil {
+		return nil, fmt.Errorf("invoke Bedrock: %w", err)
+	}
+
+	var result struct {
+		Embedding []float32 `json:"embedding"`
+	}
+	if err := json.Unmarshal(resp.Body, &result); err != nil {
+		return nil, fmt.Errorf("unmarshal response: %w", err)
+	}
+	if len(result.Embedding) == 0 {
+		return nil, fmt.Errorf("empty embedding returned")
+	}
+	return result.Embedding, nil
+}
+
+func strPtr(s string) *string { return &s }
 
 func requiredString(name string, inputs []*core.Connection) (string, error) {
 	c := core.FindConnection(name, inputs)
