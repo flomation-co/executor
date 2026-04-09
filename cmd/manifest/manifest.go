@@ -448,8 +448,8 @@ type actionsGoEntry struct {
 }
 
 type actionsGoData struct {
-	Imports  []actionsGoEntry
-	Entries  []actionsGoEntry
+	Imports []actionsGoEntry
+	Entries []actionsGoEntry
 }
 
 func generateActionsGo(manifest map[string]ManifestEntry, outputPath string) {

@@ -33,10 +33,10 @@ var Inputs = [...]core.Connection{
 		Required:    true,
 	},
 	{
-		Name:        "chat_id",
+		Name:        "channel_id",
 		Type:        core.ConnectionTypeString,
-		Label:       "Chat ID",
-		Placeholder: "12345678 or @channelname",
+		Label:       "Channel ID",
+		Placeholder: "${channel_id}",
 		Required:    true,
 	},
 	{
@@ -71,9 +71,14 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	}
 	botToken := *botTokenConn.String()
 
-	chatIDConn := core.FindConnection("chat_id", inputs)
+	// Accept both canonical "channel_id" and legacy "chat_id" for
+	// backwards compatibility with existing flows.
+	chatIDConn := core.FindConnection("channel_id", inputs)
 	if chatIDConn == nil || chatIDConn.String() == nil || *chatIDConn.String() == "" {
-		return nil, fmt.Errorf("chat_id is required")
+		chatIDConn = core.FindConnection("chat_id", inputs)
+	}
+	if chatIDConn == nil || chatIDConn.String() == nil || *chatIDConn.String() == "" {
+		return nil, fmt.Errorf("channel_id is required")
 	}
 	chatID := *chatIDConn.String()
 

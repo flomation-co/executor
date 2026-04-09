@@ -6,8 +6,8 @@ import (
 
 	core "flomation.app/automate/executor"
 	"github.com/go-git/go-git/v6"
-	githttp "github.com/go-git/go-git/v6/plumbing/transport/http"
 	"github.com/go-git/go-git/v6/plumbing/transport"
+	githttp "github.com/go-git/go-git/v6/plumbing/transport/http"
 	"github.com/go-git/go-git/v6/plumbing/transport/ssh"
 )
 

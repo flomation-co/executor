@@ -6,6 +6,7 @@ import (
 	core "flomation.app/automate/executor"
 
 	agent_forget "flomation.app/automate/executor/actions/agent/forget"
+	agent_fulfill_commitment "flomation.app/automate/executor/actions/agent/fulfill_commitment"
 	agent_process_extraction "flomation.app/automate/executor/actions/agent/process_extraction"
 	agent_read_state "flomation.app/automate/executor/actions/agent/read_state"
 	agent_recall "flomation.app/automate/executor/actions/agent/recall"
@@ -76,6 +77,7 @@ import (
 
 var Actions = map[string]core.Action{
 	"agent/forget":              agent_forget.Execute,
+	"agent/fulfill_commitment":  agent_fulfill_commitment.Execute,
 	"agent/process_extraction":  agent_process_extraction.Execute,
 	"agent/read_state":          agent_read_state.Execute,
 	"agent/recall":              agent_recall.Execute,

@@ -35,7 +35,7 @@ var Inputs = [...]core.Connection{
 		Name:        "channel_id",
 		Type:        core.ConnectionTypeString,
 		Label:       "Channel ID",
-		Placeholder: "C01234ABCDE",
+		Placeholder: "${channel_id}",
 		Required:    true,
 	},
 	{
@@ -46,10 +46,10 @@ var Inputs = [...]core.Connection{
 		Required:    true,
 	},
 	{
-		Name:        "thread_ts",
+		Name:        "thread_id",
 		Type:        core.ConnectionTypeString,
-		Label:       "Thread Timestamp",
-		Placeholder: "Reply in thread (optional)",
+		Label:       "Thread ID",
+		Placeholder: "${thread_id}",
 	},
 }
 
@@ -66,7 +66,12 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	}
 	botToken := *botTokenConn.String()
 
+	// Accept both canonical "channel_id" and legacy "chat_id" for
+	// cross-provider compatibility (Telegram flows use chat_id).
 	channelConn := core.FindConnection("channel_id", inputs)
+	if channelConn == nil || channelConn.String() == nil || *channelConn.String() == "" {
+		channelConn = core.FindConnection("chat_id", inputs)
+	}
 	if channelConn == nil || channelConn.String() == nil || *channelConn.String() == "" {
 		return nil, fmt.Errorf("channel_id is required")
 	}
@@ -78,8 +83,12 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	}
 	message := *messageConn.String()
 
+	// Accept both canonical "thread_id" and Slack-specific "thread_ts".
 	threadTS := ""
-	threadConn := core.FindConnection("thread_ts", inputs)
+	threadConn := core.FindConnection("thread_id", inputs)
+	if threadConn == nil || threadConn.String() == nil || *threadConn.String() == "" {
+		threadConn = core.FindConnection("thread_ts", inputs)
+	}
 	if threadConn != nil && threadConn.String() != nil {
 		threadTS = *threadConn.String()
 	}

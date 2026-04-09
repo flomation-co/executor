@@ -265,6 +265,27 @@ type ExecutionContext struct {
 	// stays contiguous and future conversation_history fetches see
 	// assistant replies interleaved with user turns.
 	ConversationID string `json:"conversation_id,omitempty"`
+	// TriggerSource distinguishes reactive ("channel") from proactive
+	// ("commitment") executions. Used to skip extraction on commitment-
+	// triggered turns to prevent duplicate commitment creation.
+	TriggerSource string `json:"trigger_source,omitempty"`
+	// ChannelType identifies the source channel: "slack", "telegram",
+	// "webhook", "commitment". Available as ${flow.channel_type} for
+	// Switch/conditional branching regardless of node parentage.
+	ChannelType string `json:"channel_type,omitempty"`
+	// ChannelID is the target channel/chat for message delivery.
+	// Slack channel ID, Telegram chat ID, etc. Available as
+	// ${flow.channel_id} so send actions work regardless of node position.
+	ChannelID string `json:"channel_id,omitempty"`
+	// ThreadID is the thread/reply identifier (Slack thread_ts).
+	ThreadID string `json:"thread_id,omitempty"`
+	// Role is "user" or "assistant" for extraction flows. Used by
+	// process_extraction to gate commitment writes to assistant turns only.
+	Role string `json:"role,omitempty"`
+	// SystemFlow is true when this execution is running a system flow
+	// (e.g. extraction). System flow executions must not cascade into
+	// further extraction to prevent infinite loops.
+	SystemFlow bool `json:"system_flow,omitempty"`
 }
 
 // GetContext returns the full execution context.
@@ -303,6 +324,16 @@ func (ctx *ExecutionContext) Get(name string) string {
 		return ctx.AgentUserID
 	case "conversation_id":
 		return ctx.ConversationID
+	case "trigger_source":
+		return ctx.TriggerSource
+	case "channel_type":
+		return ctx.ChannelType
+	case "channel_id":
+		return ctx.ChannelID
+	case "thread_id":
+		return ctx.ThreadID
+	case "role":
+		return ctx.Role
 	default:
 		return ""
 	}
@@ -802,13 +833,11 @@ func (f *Flow) executeNodeActionOnly(actions map[string]Action, node *Node, envi
 					name := strings.TrimPrefix(m, "flow.")
 					if f.context != nil {
 						contextVal := f.context.Get(name)
-						if contextVal != "" {
-							*val = strings.ReplaceAll(*val, "${"+m+"}", contextVal)
-						} else {
-							log.WithFields(log.Fields{
-								"name": name,
-							}).Warn("unknown flow variable")
-						}
+						// Always substitute — empty string is a valid
+						// resolved value (e.g. thread_id when there's no
+						// thread). Leaving the literal ${flow.xxx} in place
+						// causes downstream actions to receive it as text.
+						*val = strings.ReplaceAll(*val, "${"+m+"}", contextVal)
 					} else {
 						log.WithFields(log.Fields{
 							"name": name,
@@ -889,6 +918,42 @@ func (f *Flow) executeNodeActionOnly(actions map[string]Action, node *Node, envi
 			"error": err,
 		}).Error("Error processing Action")
 		return nil, err
+	}
+
+	// For conditional/switch/loop nodes, merge parent outputs into this
+	// node's outputs so they pass through to child branches. Without this,
+	// a Send action after a Switch can't see the AI response or trigger
+	// data from upstream — it only sees the Switch's own outputs ({result,
+	// matched_case}). The merge uses child-wins semantics: the conditional's
+	// own outputs take precedence over inherited parent outputs.
+	if node.Data != nil && (node.Data.Config.Type == ActionTypeConditional ||
+		node.Data.Config.Type == ActionTypeSwitch ||
+		node.Data.Config.Type == ActionTypeLoop) {
+		for k, v := range parentResults {
+			if _, exists := outputs[k]; !exists {
+				outputs[k] = v
+			}
+		}
+	}
+
+	// For trigger nodes, merge injected trigger data (stored as Config.Inputs
+	// by InjectTriggerData) into the action's outputs. Without this, downstream
+	// nodes cannot reference trigger data via ${nodeID.key} because the trigger
+	// action's Execute only returns its own built-in outputs (e.g. {quote, start}).
+	// The merge uses input-wins-not semantics: if the action already produced an
+	// output with the same name as an injected input, the action's output takes
+	// precedence. This ensures built-in trigger outputs are stable while injected
+	// data fills the gaps.
+	if node.Data != nil && node.Data.Config.Type == ActionTypeTrigger {
+		for _, input := range node.Data.Config.Inputs {
+			if _, exists := outputs[input.Name]; !exists && input.Value != nil {
+				if s, ok := input.Value.(string); ok && s != "" {
+					outputs[input.Name] = s
+				} else if input.Value != nil {
+					outputs[input.Name] = input.Value
+				}
+			}
+		}
 	}
 
 	f.emitNodeEvent(node.ID, node.Type, node.Data.Label, "success", durationMs, "", inputMap, outputs)

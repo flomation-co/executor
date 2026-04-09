@@ -8,6 +8,7 @@ import (
 	"strings"
 	"sync"
 	"testing"
+	"time"
 
 	core "flomation.app/automate/executor"
 
@@ -418,4 +419,197 @@ func TestExecute_FeedbackTypeAutoPinned(t *testing.T) {
 	})
 	Expect(err).NotTo(HaveOccurred())
 	Expect(api.memoryCalls[0]["pinned"]).To(BeTrue(), "feedback type must be auto-pinned like preference")
+}
+
+// --- resolveDueIn (Phase 3 due-at resolution) ---
+
+func TestResolveDueIn_SimpleMinutes(t *testing.T) {
+	RegisterTestingT(t)
+	result := resolveDueIn("30 minutes")
+	Expect(result).NotTo(BeEmpty())
+	// Parse the result and check it's roughly 30 minutes from now.
+	parsed, err := time.Parse(time.RFC3339, result)
+	Expect(err).NotTo(HaveOccurred())
+	diff := time.Until(parsed)
+	Expect(diff.Minutes()).To(BeNumerically("~", 30, 1))
+}
+
+func TestResolveDueIn_Hours(t *testing.T) {
+	RegisterTestingT(t)
+	result := resolveDueIn("2 hours")
+	Expect(result).NotTo(BeEmpty())
+	parsed, err := time.Parse(time.RFC3339, result)
+	Expect(err).NotTo(HaveOccurred())
+	diff := time.Until(parsed)
+	Expect(diff.Hours()).To(BeNumerically("~", 2, 0.1))
+}
+
+func TestResolveDueIn_SingularUnit(t *testing.T) {
+	RegisterTestingT(t)
+	result := resolveDueIn("1 hour")
+	Expect(result).NotTo(BeEmpty())
+	parsed, err := time.Parse(time.RFC3339, result)
+	Expect(err).NotTo(HaveOccurred())
+	diff := time.Until(parsed)
+	Expect(diff.Hours()).To(BeNumerically("~", 1, 0.1))
+}
+
+func TestResolveDueIn_GoDurationFormat(t *testing.T) {
+	RegisterTestingT(t)
+	// Go-style "30m" should also work.
+	result := resolveDueIn("30m")
+	Expect(result).NotTo(BeEmpty())
+}
+
+func TestResolveDueIn_UnparseableReturnsEmpty(t *testing.T) {
+	RegisterTestingT(t)
+	Expect(resolveDueIn("soon")).To(BeEmpty())
+	Expect(resolveDueIn("")).To(BeEmpty())
+	Expect(resolveDueIn("whenever you get a chance")).To(BeEmpty())
+	Expect(resolveDueIn("asap")).To(BeEmpty())
+}
+
+func TestResolveDueIn_Days(t *testing.T) {
+	RegisterTestingT(t)
+	result := resolveDueIn("1 day")
+	Expect(result).NotTo(BeEmpty())
+	parsed, err := time.Parse(time.RFC3339, result)
+	Expect(err).NotTo(HaveOccurred())
+	diff := time.Until(parsed)
+	Expect(diff.Hours()).To(BeNumerically("~", 24, 1))
+}
+
+// --- Phase 3 enhanced patterns ---
+
+func TestResolveDueIn_Tomorrow(t *testing.T) {
+	RegisterTestingT(t)
+	result := resolveDueIn("tomorrow")
+	Expect(result).NotTo(BeEmpty())
+	parsed, err := time.Parse(time.RFC3339, result)
+	Expect(err).NotTo(HaveOccurred())
+	// Should be roughly 24 hours from now (same time tomorrow).
+	diff := time.Until(parsed)
+	Expect(diff.Hours()).To(BeNumerically("~", 24, 1))
+}
+
+func TestResolveDueIn_TomorrowAt9am(t *testing.T) {
+	RegisterTestingT(t)
+	result := resolveDueIn("tomorrow at 9am")
+	Expect(result).NotTo(BeEmpty())
+	parsed, err := time.Parse(time.RFC3339, result)
+	Expect(err).NotTo(HaveOccurred())
+	// Should be tomorrow, and the hour should be 9 in local time.
+	tomorrow := time.Now().AddDate(0, 0, 1)
+	Expect(parsed.Year()).To(Equal(tomorrow.Year()))
+	Expect(parsed.YearDay()).To(Equal(tomorrow.YearDay()))
+	// Convert back to local for the hour check since we format as UTC.
+	local := parsed.In(time.Now().Location())
+	Expect(local.Hour()).To(Equal(9))
+}
+
+func TestResolveDueIn_TomorrowAt1430(t *testing.T) {
+	RegisterTestingT(t)
+	result := resolveDueIn("tomorrow at 14:30")
+	Expect(result).NotTo(BeEmpty())
+	parsed, err := time.Parse(time.RFC3339, result)
+	Expect(err).NotTo(HaveOccurred())
+	local := parsed.In(time.Now().Location())
+	Expect(local.Hour()).To(Equal(14))
+	Expect(local.Minute()).To(Equal(30))
+}
+
+func TestResolveDueIn_NextMonday(t *testing.T) {
+	RegisterTestingT(t)
+	result := resolveDueIn("next monday")
+	Expect(result).NotTo(BeEmpty())
+	parsed, err := time.Parse(time.RFC3339, result)
+	Expect(err).NotTo(HaveOccurred())
+	local := parsed.In(time.Now().Location())
+	Expect(local.Weekday()).To(Equal(time.Monday))
+	// Default time for bare weekday is 9am.
+	Expect(local.Hour()).To(Equal(9))
+	// Must be in the future (1-7 days out).
+	Expect(parsed.After(time.Now())).To(BeTrue())
+}
+
+func TestResolveDueIn_NextTuesdayAt10am(t *testing.T) {
+	RegisterTestingT(t)
+	result := resolveDueIn("next tuesday at 10am")
+	Expect(result).NotTo(BeEmpty())
+	parsed, err := time.Parse(time.RFC3339, result)
+	Expect(err).NotTo(HaveOccurred())
+	local := parsed.In(time.Now().Location())
+	Expect(local.Weekday()).To(Equal(time.Tuesday))
+	Expect(local.Hour()).To(Equal(10))
+}
+
+func TestResolveDueIn_InAnHour(t *testing.T) {
+	RegisterTestingT(t)
+	result := resolveDueIn("in an hour")
+	Expect(result).NotTo(BeEmpty())
+	parsed, err := time.Parse(time.RFC3339, result)
+	Expect(err).NotTo(HaveOccurred())
+	diff := time.Until(parsed)
+	Expect(diff.Minutes()).To(BeNumerically("~", 60, 2))
+}
+
+func TestResolveDueIn_InADay(t *testing.T) {
+	RegisterTestingT(t)
+	result := resolveDueIn("in a day")
+	Expect(result).NotTo(BeEmpty())
+	parsed, err := time.Parse(time.RFC3339, result)
+	Expect(err).NotTo(HaveOccurred())
+	diff := time.Until(parsed)
+	Expect(diff.Hours()).To(BeNumerically("~", 24, 1))
+}
+
+func TestResolveDueIn_In30Minutes(t *testing.T) {
+	RegisterTestingT(t)
+	// "in 30 minutes" — the "in" prefix + numeric pattern.
+	result := resolveDueIn("in 30 minutes")
+	Expect(result).NotTo(BeEmpty())
+	parsed, err := time.Parse(time.RFC3339, result)
+	Expect(err).NotTo(HaveOccurred())
+	diff := time.Until(parsed)
+	Expect(diff.Minutes()).To(BeNumerically("~", 30, 1))
+}
+
+func TestResolveDueIn_Weeks(t *testing.T) {
+	RegisterTestingT(t)
+	result := resolveDueIn("2 weeks")
+	Expect(result).NotTo(BeEmpty())
+	parsed, err := time.Parse(time.RFC3339, result)
+	Expect(err).NotTo(HaveOccurred())
+	diff := time.Until(parsed)
+	Expect(diff.Hours()).To(BeNumerically("~", 14*24, 1))
+}
+
+func TestExecute_CommitmentWithDueIn_ResolvedToDueAt(t *testing.T) {
+	RegisterTestingT(t)
+
+	api := newFakeAPI()
+	defer api.close()
+
+	extraction := `{
+		"memories": [],
+		"proposed_actions": [],
+		"commitments": [
+			{"kind":"followup","description":"Follow up","trigger_type":"time_elapsed","due_in":"30 minutes","evidence":"I'll get back to you in 30 minutes","confidence":0.9,"made_by":"assistant"}
+		]
+	}`
+
+	flow := flowWithContext(api.server.URL)
+	out, err := Execute(flow, nil, []*core.Connection{
+		strInput("agent_id", "agent-1"),
+		strInput("extraction_json", extraction),
+		strInput("agent_user_id", "user-abc"),
+	})
+	Expect(err).NotTo(HaveOccurred())
+	Expect(out["commitments_written"]).To(Equal(1))
+
+	// The commitment API call should have a due_at field (resolved from due_in).
+	Expect(api.commitmentCalls).To(HaveLen(1))
+	dueAt, hasDueAt := api.commitmentCalls[0]["due_at"]
+	Expect(hasDueAt).To(BeTrue(), "due_in should have been resolved to due_at")
+	Expect(dueAt).NotTo(BeEmpty())
 }

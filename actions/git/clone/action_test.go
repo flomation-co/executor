@@ -2,10 +2,11 @@ package git_clone
 
 import (
 	"fmt"
-	"github.com/go-git/go-git/v6/plumbing/transport/ssh"
-	. "github.com/onsi/gomega"
 	"os"
 	"testing"
+
+	"github.com/go-git/go-git/v6/plumbing/transport/ssh"
+	. "github.com/onsi/gomega"
 )
 
 func Test_SSHKey(t *testing.T) {
