@@ -9,10 +9,16 @@ package remember
 
 import (
 	"bytes"
+	"context"
 	"encoding/json"
 	"fmt"
 	"io"
 	"net/http"
+	"time"
+
+	awsconfig "github.com/aws/aws-sdk-go-v2/config"
+	"github.com/aws/aws-sdk-go-v2/service/bedrockruntime"
+	log "github.com/sirupsen/logrus"
 
 	core "flomation.app/automate/executor"
 )
@@ -95,6 +101,7 @@ var Inputs = [...]core.Connection{
 		Placeholder: "1.0",
 		Required:    false,
 	},
+	{Name: "aws_region", Type: core.ConnectionTypeString, Label: "AWS region for embeddings", Placeholder: "us-east-1"},
 }
 
 var Outputs = [...]core.Connection{
@@ -160,7 +167,59 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 		}
 	}
 
+	// Generate embedding if AWS region is available.
+	if region := optionalString("aws_region", inputs); region != "" {
+		embedText := title + ": " + body
+		vec, err := generateEmbedding(flow.GoContext(), region, embedText)
+		if err != nil {
+			log.WithError(err).Warn("remember: failed to generate embedding, storing without it")
+		} else {
+			payload["embedding"] = vec
+		}
+	}
+
 	return postMemory(flow, ctx, agentID, payload)
+}
+
+func generateEmbedding(ctx context.Context, region, text string) ([]float32, error) {
+	ctx, cancel := context.WithTimeout(ctx, 5*time.Second)
+	defer cancel()
+
+	cfg, err := awsconfig.LoadDefaultConfig(ctx, awsconfig.WithRegion(region))
+	if err != nil {
+		return nil, fmt.Errorf("load AWS config: %w", err)
+	}
+
+	client := bedrockruntime.NewFromConfig(cfg)
+	modelID := "amazon.titan-embed-text-v2:0"
+
+	reqBody, _ := json.Marshal(map[string]interface{}{
+		"inputText":  text,
+		"dimensions": 1024,
+		"normalize":  true,
+	})
+
+	contentType := "application/json"
+	resp, err := client.InvokeModel(ctx, &bedrockruntime.InvokeModelInput{
+		ModelId:     &modelID,
+		Body:        reqBody,
+		ContentType: &contentType,
+		Accept:      &contentType,
+	})
+	if err != nil {
+		return nil, fmt.Errorf("invoke Bedrock: %w", err)
+	}
+
+	var result struct {
+		Embedding []float32 `json:"embedding"`
+	}
+	if err := json.Unmarshal(resp.Body, &result); err != nil {
+		return nil, fmt.Errorf("unmarshal response: %w", err)
+	}
+	if len(result.Embedding) == 0 {
+		return nil, fmt.Errorf("empty embedding returned")
+	}
+	return result.Embedding, nil
 }
 
 // --- shared request helper ---
