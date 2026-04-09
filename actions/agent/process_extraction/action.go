@@ -35,6 +35,7 @@ import (
 	"io"
 	"net/http"
 	"strings"
+	"time"
 
 	core "flomation.app/automate/executor"
 )
@@ -355,12 +356,16 @@ func processCommitments(
 		}
 		if c.DueAt != "" {
 			body["due_at"] = c.DueAt
+		} else if c.DueIn != "" {
+			// Phase 3: resolve relative durations ("30 minutes", "1 hour",
+			// "2 hours") into absolute timestamps so the commitment poller
+			// can select them via due_at <= NOW(). Only simple durations
+			// are handled; complex expressions ("tomorrow at 9am") should
+			// be emitted as due_at by the AI action directly.
+			if resolved := resolveDueIn(c.DueIn); resolved != "" {
+				body["due_at"] = resolved
+			}
 		}
-		// Phase 2d does NOT resolve "in 30 minutes" style due_in strings
-		// into absolute timestamps here. The Phase 3 commitment poller
-		// or a future date-math action will handle that. If due_at is
-		// unset, the commitment is stored with NULL due_at and will
-		// only fire when a future phase backfills it.
 
 		if err := postJSON(flow, ctx, fmt.Sprintf("/api/v1/internal/agent/%s/commitment", agentID), body, http.StatusCreated); err != nil {
 			result.Errors = append(result.Errors, fmt.Sprintf("commitment[%d]: %v", i, err))
@@ -440,4 +445,167 @@ func optionalString(name string, inputs []*core.Connection) string {
 		return ""
 	}
 	return *c.String()
+}
+
+// resolveDueIn parses a human-readable time expression into an ISO-8601
+// absolute timestamp. Handles three families of input:
+//
+//  1. Go durations: "30m", "1h", "2h30m"
+//  2. Natural relative: "30 minutes", "2 hours", "1 day", "3 weeks"
+//  3. Named relative: "tomorrow", "tomorrow at 9am", "tomorrow at 14:30",
+//     "next monday", "next tuesday at 10am", "in an hour"
+//
+// Returns empty string for genuinely unparseable inputs — the commitment
+// will be stored without a due_at and surfaced in the admin UI for
+// manual resolution.
+func resolveDueIn(s string) string {
+	s = strings.TrimSpace(strings.ToLower(s))
+	if s == "" {
+		return ""
+	}
+
+	now := time.Now()
+
+	// --- family 1: Go duration ("30m", "1h", "2h30m") ---
+	if d, err := time.ParseDuration(s); err == nil {
+		return now.Add(d).UTC().Format(time.RFC3339)
+	}
+
+	// --- family 3: named relative patterns (check before numeric) ---
+
+	// "in an hour", "in a minute", "in a day"
+	if strings.HasPrefix(s, "in a ") || strings.HasPrefix(s, "in an ") {
+		rest := strings.TrimPrefix(strings.TrimPrefix(s, "in an "), "in a ")
+		rest = strings.TrimSpace(rest)
+		switch {
+		case strings.HasPrefix(rest, "hour"):
+			return now.Add(time.Hour).UTC().Format(time.RFC3339)
+		case strings.HasPrefix(rest, "minute"):
+			return now.Add(time.Minute).UTC().Format(time.RFC3339)
+		case strings.HasPrefix(rest, "day"):
+			return now.Add(24 * time.Hour).UTC().Format(time.RFC3339)
+		case strings.HasPrefix(rest, "week"):
+			return now.Add(7 * 24 * time.Hour).UTC().Format(time.RFC3339)
+		}
+	}
+
+	// "tomorrow" or "tomorrow at HH:MM" / "tomorrow at Ham" / "tomorrow at H:MMam"
+	if strings.HasPrefix(s, "tomorrow") {
+		tomorrow := now.AddDate(0, 0, 1)
+		if t := extractTimeOfDay(s, tomorrow); !t.IsZero() {
+			return t.UTC().Format(time.RFC3339)
+		}
+		// Bare "tomorrow" → same time tomorrow
+		return time.Date(tomorrow.Year(), tomorrow.Month(), tomorrow.Day(),
+			now.Hour(), now.Minute(), 0, 0, now.Location()).UTC().Format(time.RFC3339)
+	}
+
+	// "next monday", "next tuesday at 10am", etc.
+	if strings.HasPrefix(s, "next ") {
+		rest := strings.TrimPrefix(s, "next ")
+		if target := resolveNextWeekday(rest, now); !target.IsZero() {
+			return target.UTC().Format(time.RFC3339)
+		}
+	}
+
+	// --- family 2: "<number> <unit>" ("30 minutes", "2 hours") ---
+	// Also handles "in 30 minutes" by stripping the leading "in ".
+	numeric := strings.TrimPrefix(s, "in ")
+	numeric = strings.TrimSpace(numeric)
+	parts := strings.Fields(numeric)
+	if len(parts) >= 2 {
+		var n float64
+		if _, err := fmt.Sscanf(parts[0], "%f", &n); err == nil && n > 0 {
+			unit := strings.TrimSuffix(parts[1], "s")
+			var d time.Duration
+			switch unit {
+			case "second":
+				d = time.Duration(n) * time.Second
+			case "minute":
+				d = time.Duration(n) * time.Minute
+			case "hour":
+				d = time.Duration(n) * time.Hour
+			case "day":
+				d = time.Duration(n) * 24 * time.Hour
+			case "week":
+				d = time.Duration(n) * 7 * 24 * time.Hour
+			case "month":
+				return now.AddDate(0, int(n), 0).UTC().Format(time.RFC3339)
+			}
+			if d > 0 {
+				return now.Add(d).UTC().Format(time.RFC3339)
+			}
+		}
+	}
+
+	return ""
+}
+
+// extractTimeOfDay looks for "at HH:MM", "at Ham", "at H:MMam", "at HH:MMpm"
+// patterns inside s and returns the given day with that time set. Returns
+// zero time if no pattern is found.
+func extractTimeOfDay(s string, day time.Time) time.Time {
+	atIdx := strings.Index(s, "at ")
+	if atIdx == -1 {
+		return time.Time{}
+	}
+	timeStr := strings.TrimSpace(s[atIdx+3:])
+
+	// Try 24-hour formats first
+	for _, layout := range []string{"15:04", "15"} {
+		if t, err := time.Parse(layout, timeStr); err == nil {
+			return time.Date(day.Year(), day.Month(), day.Day(),
+				t.Hour(), t.Minute(), 0, 0, day.Location())
+		}
+	}
+
+	// Try 12-hour formats: "9am", "9:30am", "9 am", "9:30 am"
+	timeStr = strings.ReplaceAll(timeStr, " ", "") // normalise "9 am" → "9am"
+	for _, layout := range []string{"3:04pm", "3pm", "3:04am", "3am"} {
+		// time.Parse uses Go's reference time; "pm"/"am" are handled natively
+		if t, err := time.Parse(layout, timeStr); err == nil {
+			return time.Date(day.Year(), day.Month(), day.Day(),
+				t.Hour(), t.Minute(), 0, 0, day.Location())
+		}
+	}
+
+	return time.Time{}
+}
+
+// resolveNextWeekday parses "monday", "tuesday at 10am", etc. and returns
+// the next occurrence of that weekday (always in the future, 1-7 days out).
+func resolveNextWeekday(s string, now time.Time) time.Time {
+	weekdays := map[string]time.Weekday{
+		"monday": time.Monday, "tuesday": time.Tuesday,
+		"wednesday": time.Wednesday, "thursday": time.Thursday,
+		"friday": time.Friday, "saturday": time.Saturday,
+		"sunday": time.Sunday,
+	}
+
+	// Extract the weekday name (first word).
+	parts := strings.Fields(s)
+	if len(parts) == 0 {
+		return time.Time{}
+	}
+	target, ok := weekdays[parts[0]]
+	if !ok {
+		return time.Time{}
+	}
+
+	// Find the next occurrence.
+	daysAhead := int(target-now.Weekday()+7) % 7
+	if daysAhead == 0 {
+		daysAhead = 7 // "next monday" on a monday = 7 days out
+	}
+	nextDay := now.AddDate(0, 0, daysAhead)
+
+	// Check for "at HH:MM" suffix.
+	if t := extractTimeOfDay(s, nextDay); !t.IsZero() {
+		return t
+	}
+
+	// Default to 9am on that day — a reasonable default for "next monday"
+	// that's better than midnight.
+	return time.Date(nextDay.Year(), nextDay.Month(), nextDay.Day(),
+		9, 0, 0, 0, now.Location())
 }

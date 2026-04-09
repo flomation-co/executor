@@ -1,9 +1,10 @@
 package git_status
 
 import (
+	"fmt"
+
 	core "flomation.app/automate/executor"
 	git_common "flomation.app/automate/executor/actions/git"
-	"fmt"
 )
 
 const (

@@ -13,8 +13,9 @@ import (
 // depth execute their actions before any of their children are traversed.
 //
 // Graph:
-//   trigger -> A -> A1
-//           -> B -> B1
+//
+//	trigger -> A -> A1
+//	        -> B -> B1
 //
 // Expected order: trigger, then A+B (siblings), then A1+B1 (next level).
 // A and B must both execute before A1 or B1.
@@ -80,9 +81,10 @@ func TestBreadthFirstSiblingExecution(t *testing.T) {
 // TestBreadthFirstThreeChildren verifies BFS with three siblings and their children.
 //
 // Graph:
-//   trigger -> A -> A1
-//           -> B -> B1
-//           -> C -> C1
+//
+//	trigger -> A -> A1
+//	        -> B -> B1
+//	        -> C -> C1
 //
 // Expected: trigger, then A+B+C (all siblings), then A1/B1/C1 (each after its parent)
 func TestBreadthFirstThreeChildren(t *testing.T) {

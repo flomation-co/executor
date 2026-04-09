@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"io"
 	"net/http"
+	"strings"
 	"time"
 
 	core "flomation.app/automate/executor"
@@ -82,6 +83,15 @@ var Inputs = [...]core.Connection{
 		Label:       "Conversation History",
 		Placeholder: "${conversation_history}",
 	},
+	{
+		// TEMPORARY: tool definitions as JSON. Will be replaced by
+		// automatic discovery from the tools subgraph wired to the
+		// Tools handle.
+		Name:        "tool_definitions",
+		Type:        core.ConnectionTypeText,
+		Label:       "Tool Definitions (JSON)",
+		Placeholder: `[{"type":"function","function":{"name":"web_search","description":"Search the web","parameters":{"type":"object","properties":{"query":{"type":"string"}},"required":["query"]}}}]`,
+	},
 }
 
 var Outputs = [...]core.Connection{
@@ -90,6 +100,8 @@ var Outputs = [...]core.Connection{
 	{Name: "prompt_tokens", Type: core.ConnectionTypeInteger, Label: "Prompt Tokens"},
 	{Name: "completion_tokens", Type: core.ConnectionTypeInteger, Label: "Completion Tokens"},
 	{Name: "total_tokens", Type: core.ConnectionTypeInteger, Label: "Total Tokens"},
+	{Name: "should_respond", Type: core.ConnectionTypeBoolean, Label: "Should Respond"},
+	{Name: "tool_calls_count", Type: core.ConnectionTypeInteger, Label: "Tool Calls"},
 	{Name: "success", Type: core.ConnectionTypeBoolean, Label: "Success"},
 	{Name: "error", Type: core.ConnectionTypeString, Label: "Error"},
 }
@@ -125,52 +137,89 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 		fmt.Sscanf(*tempConn.String(), "%f", &temperature)
 	}
 
-	// Build messages
-	var messages []map[string]string
-
 	systemPromptStr := ""
 	systemConn := core.FindConnection("system_prompt", inputs)
 	if systemConn != nil && systemConn.String() != nil && *systemConn.String() != "" {
 		systemPromptStr = *systemConn.String()
-		messages = append(messages, map[string]string{
-			"role":    "system",
-			"content": systemPromptStr,
-		})
 	}
 
-	// Append prior conversation turns if history was supplied. History is
-	// auto-truncated (oldest-first) when the combined prompt + reply budget
-	// would exceed the model's context window.
-	historyConn := core.FindConnection("conversation_history", inputs)
-	if historyConn != nil {
-		history := ai_common.ParseConversationHistory(historyConn.Value)
-		if len(history) > 0 {
-			history = ai_common.TruncateHistoryForBudget(
-				history, systemPromptStr, prompt,
-				int(maxTokens), ai_common.ModelContextWindow(model),
-			)
-			for _, m := range history {
-				if m.Role == "" || m.Content == "" {
-					continue
-				}
-				messages = append(messages, map[string]string{
-					"role":    m.Role,
-					"content": m.Content,
-				})
-			}
+	// Parse tool definitions if provided (OpenAI format)
+	var tools []interface{}
+	toolDefsConn := core.FindConnection("tool_definitions", inputs)
+	if toolDefsConn != nil {
+		var raw string
+		if s := toolDefsConn.String(); s != nil && *s != "" {
+			raw = *s
+		}
+		if raw != "" {
+			_ = json.Unmarshal([]byte(raw), &tools)
 		}
 	}
 
-	messages = append(messages, map[string]string{
-		"role":    "user",
-		"content": prompt,
-	})
+	// Check if we're in a tool loop (re-invocation with tool results)
+	var messages []interface{}
+	toolCallsCount := 0
+
+	if convState, ok := flow.GetVariable(core.ToolConversationStateKey); ok && convState != nil {
+		if ms, ok := convState.([]interface{}); ok {
+			messages = ms
+		}
+
+		// Append tool results
+		if toolResults, ok := flow.GetVariable(core.ToolResultsKey); ok && toolResults != nil {
+			if results, ok := toolResults.([]core.ToolResult); ok {
+				for _, r := range results {
+					messages = append(messages, map[string]interface{}{
+						"role":         "tool",
+						"tool_call_id": r.ToolUseID,
+						"content":      r.Content,
+					})
+				}
+			}
+		}
+	} else {
+		// First invocation — build messages from system prompt + history + prompt
+		if systemPromptStr != "" {
+			messages = append(messages, map[string]interface{}{
+				"role":    "system",
+				"content": systemPromptStr,
+			})
+		}
+
+		historyConn := core.FindConnection("conversation_history", inputs)
+		if historyConn != nil {
+			history := ai_common.ParseConversationHistory(historyConn.Value)
+			if len(history) > 0 {
+				history = ai_common.TruncateHistoryForBudget(
+					history, systemPromptStr, prompt,
+					int(maxTokens), ai_common.ModelContextWindow(model),
+				)
+				for _, m := range history {
+					if m.Role == "" || m.Content == "" {
+						continue
+					}
+					messages = append(messages, map[string]interface{}{
+						"role":    m.Role,
+						"content": m.Content,
+					})
+				}
+			}
+		}
+
+		messages = append(messages, map[string]interface{}{
+			"role":    "user",
+			"content": prompt,
+		})
+	}
 
 	payload := map[string]interface{}{
 		"model":       model,
 		"messages":    messages,
 		"max_tokens":  maxTokens,
 		"temperature": temperature,
+	}
+	if len(tools) > 0 {
+		payload["tools"] = tools
 	}
 
 	body, err := json.Marshal(payload)
@@ -190,7 +239,7 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	if err != nil {
 		return nil, fmt.Errorf("OpenAI request failed: %w", err)
 	}
-	defer resp.Body.Close()
+	defer func() { _ = resp.Body.Close() }()
 
 	respBody, _ := io.ReadAll(io.LimitReader(resp.Body, maxResponseBody))
 
@@ -211,8 +260,17 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	var result struct {
 		Choices []struct {
 			Message struct {
-				Content string `json:"content"`
+				Content   *string `json:"content"`
+				ToolCalls []struct {
+					ID       string `json:"id"`
+					Type     string `json:"type"`
+					Function struct {
+						Name      string `json:"name"`
+						Arguments string `json:"arguments"` // JSON string
+					} `json:"function"`
+				} `json:"tool_calls,omitempty"`
 			} `json:"message"`
+			FinishReason string `json:"finish_reason"`
 		} `json:"choices"`
 		Model string `json:"model"`
 		Usage struct {
@@ -226,24 +284,82 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 		return nil, fmt.Errorf("failed to parse OpenAI response: %w", err)
 	}
 
-	content := ""
-	if len(result.Choices) > 0 {
-		content = result.Choices[0].Message.Content
+	if len(result.Choices) == 0 {
+		return nil, fmt.Errorf("OpenAI returned no choices")
 	}
 
-	// When running inside an agent orchestrator flow, record this response as
-	// an outbound agent_message so the next turn's conversation_history
-	// includes assistant replies. This is a no-op outside of agent contexts.
-	// Failures are logged but never surfaced — the user-visible response has
-	// already been generated and must be returned regardless of recording.
-	ai_common.RecordAssistantReply(flow.GoContext(), flow.GetContext(), content)
+	choice := result.Choices[0]
+
+	// Check for tool calls
+	if choice.FinishReason == "tool_calls" && len(choice.Message.ToolCalls) > 0 {
+		var toolRequests []core.ToolRequest
+
+		// Build the assistant message with tool_calls for conversation state
+		assistantMsg := map[string]interface{}{
+			"role":       "assistant",
+			"tool_calls": choice.Message.ToolCalls,
+		}
+		if choice.Message.Content != nil {
+			assistantMsg["content"] = *choice.Message.Content
+		}
+
+		for _, tc := range choice.Message.ToolCalls {
+			var input map[string]interface{}
+			_ = json.Unmarshal([]byte(tc.Function.Arguments), &input)
+			toolRequests = append(toolRequests, core.ToolRequest{
+				ID:    tc.ID,
+				Name:  tc.Function.Name,
+				Input: input,
+			})
+		}
+
+		messages = append(messages, assistantMsg)
+
+		out := map[string]interface{}{
+			core.ToolRequestsKey:          toolRequests,
+			core.ToolConversationStateKey: messages,
+			"stop_reason":                 "tool_calls",
+			"model":                       result.Model,
+			"prompt_tokens":               result.Usage.PromptTokens,
+			"completion_tokens":           result.Usage.CompletionTokens,
+			"total_tokens":                result.Usage.TotalTokens,
+			"tool_calls_count":            len(toolRequests),
+			"success":                     true,
+			"error":                       "",
+		}
+		// Capture any text the model emitted alongside tool calls so the
+		// engine can send it to the user via the Response handle mid-loop.
+		if choice.Message.Content != nil && *choice.Message.Content != "" {
+			out[core.IntermediateTextKey] = *choice.Message.Content
+		}
+		return out, nil
+	}
+
+	// Final text response
+	content := ""
+	if choice.Message.Content != nil {
+		content = *choice.Message.Content
+	}
+
+	shouldRespond := true
+	trimmed := strings.TrimSpace(content)
+	if trimmed == "[NO_RESPONSE]" || strings.Contains(trimmed, "[NO_RESPONSE]") {
+		shouldRespond = false
+		content = ""
+	}
+
+	if shouldRespond && content != "" {
+		ai_common.RecordAssistantReply(flow.GoContext(), flow.GetContext(), content)
+	}
 
 	return map[string]interface{}{
 		"response":          content,
+		"should_respond":    shouldRespond,
 		"model":             result.Model,
 		"prompt_tokens":     result.Usage.PromptTokens,
 		"completion_tokens": result.Usage.CompletionTokens,
 		"total_tokens":      result.Usage.TotalTokens,
+		"tool_calls_count":  toolCallsCount,
 		"success":           true,
 		"error":             "",
 	}, nil

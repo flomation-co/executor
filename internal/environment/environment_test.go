@@ -2,9 +2,10 @@ package environment
 
 import (
 	"fmt"
-	. "github.com/onsi/gomega"
 	"net/url"
 	"testing"
+
+	. "github.com/onsi/gomega"
 )
 
 func Test_ParsingUrl(t *testing.T) {

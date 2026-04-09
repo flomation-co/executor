@@ -55,7 +55,7 @@ func RecordAssistantReply(flowCtx context.Context, ctx *core.ExecutionContext, c
 
 	payload, err := json.Marshal(map[string]interface{}{
 		"direction":    "outbound",
-		"channel_type": "assistant",
+		"channel_type": ctx.ChannelType,
 		"sender":       "agent",
 		"content":      content,
 	})
@@ -73,7 +73,18 @@ func RecordAssistantReply(flowCtx context.Context, ctx *core.ExecutionContext, c
 	reqCtx, cancel := context.WithTimeout(flowCtx, recordTimeout)
 	defer cancel()
 
-	url := fmt.Sprintf("%s/api/v1/internal/agent/%s/message", ctx.APIURL, ctx.AgentID)
+	// Use the conversation-scoped endpoint when a conversation_id is
+	// available. This stores the outbound message with the correct
+	// conversation_id, session_id, and sequence so the conversation
+	// history includes both user and assistant turns. Falls back to
+	// the legacy agent-wide endpoint for non-conversation contexts.
+	var url string
+	if ctx.ConversationID != "" {
+		url = fmt.Sprintf("%s/api/v1/internal/conversation/%s/message?agent_id=%s",
+			ctx.APIURL, ctx.ConversationID, ctx.AgentID)
+	} else {
+		url = fmt.Sprintf("%s/api/v1/internal/agent/%s/message", ctx.APIURL, ctx.AgentID)
+	}
 	req, err := http.NewRequestWithContext(reqCtx, http.MethodPost, url, bytes.NewReader(payload))
 	if err != nil {
 		log.WithFields(log.Fields{
@@ -114,7 +125,15 @@ func RecordAssistantReply(flowCtx context.Context, ctx *core.ExecutionContext, c
 	// assistant-derived memory updates. The extraction call is
 	// fire-and-forget — any failure only costs one turn of
 	// extraction, not the user's reply.
-	dispatchAssistantExtraction(flowCtx, ctx, content)
+	//
+	// Skip extraction when:
+	// - This is a system flow execution (e.g. the extraction flow
+	//   itself) — prevents infinite cascading loops
+	// - This is a commitment-triggered execution — prevents the
+	//   follow-up reply from creating duplicate commitments
+	if !ctx.SystemFlow && ctx.TriggerSource != "commitment" {
+		dispatchAssistantExtraction(flowCtx, ctx, content)
+	}
 }
 
 // dispatchAssistantExtraction calls POST /internal/agent/:id/extract

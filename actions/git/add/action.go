@@ -28,8 +28,8 @@ var Inputs = [...]core.Connection{
 
 var Outputs = [...]core.Connection{
 	{
-		Name: "success",
-		Type: core.ConnectionTypeBoolean,
+		Name:  "success",
+		Type:  core.ConnectionTypeBoolean,
 		Label: "Success",
 	},
 }
