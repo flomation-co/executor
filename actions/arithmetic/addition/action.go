@@ -7,8 +7,8 @@ import (
 const (
 	Author       = "Andy Esser"
 	Organisation = "Flomation"
-	Name         = "Maths | Addition"
-	Description  = "Arithmetic Functions"
+	Name         = "Addition"
+	Description  = "Add two numbers together and return the sum"
 	Website      = "https://www.flomation.co"
 	Icon         = "plus"
 	Date         = "05/03/2026"

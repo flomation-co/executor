@@ -8,7 +8,7 @@ const (
 	Author       = "Andy Esser"
 	Organisation = "Flomation"
 	Name         = "AWS EC2 Describe"
-	Description  = "AWS EC2 Actions"
+	Description  = "Describe EC2 instances, returning details like state, type, IPs, and tags"
 	Website      = "https://www.flomation.co"
 	Icon         = "server"
 	Date         = "05/03/2026"

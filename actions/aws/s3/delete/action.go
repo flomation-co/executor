@@ -13,7 +13,7 @@ const (
 	Author       = "Andy Esser"
 	Organisation = "Flomation"
 	Name         = "AWS S3 Delete"
-	Description  = "AWS S3 Actions"
+	Description  = "Delete an object from an AWS S3 bucket"
 	Website      = "https://www.flomation.co"
 	Icon         = "bucket"
 	Date         = "05/03/2026"

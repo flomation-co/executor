@@ -7,8 +7,8 @@ import (
 const (
 	Author       = "Andy Esser"
 	Organisation = "Flomation"
-	Name         = "Maths | Multiplication"
-	Description  = "Arithmetic Functions"
+	Name         = "Multiplication"
+	Description  = "Multiply two numbers together and return the product"
 	Website      = "https://www.flomation.co"
 	Icon         = "xmark"
 	Date         = "05/03/2026"

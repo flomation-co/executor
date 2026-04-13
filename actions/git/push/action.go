@@ -10,7 +10,7 @@ const (
 	Author       = "Andy Esser"
 	Organisation = "Flomation"
 	Name         = "Git Push"
-	Description  = "Git Actions"
+	Description  = "Push local commits to a remote Git repository"
 	Website      = "https://www.flomation.co"
 	Icon         = "code-branch"
 	Date         = "06/03/2026"

@@ -12,7 +12,7 @@ const (
 	Author       = "Andy Esser"
 	Organisation = "Flomation"
 	Name         = "If"
-	Description  = "Conditional Actions"
+	Description  = "Evaluate a condition and branch execution accordingly"
 	Website      = "https://www.flomation.co"
 	Icon         = "code-branch"
 	Date         = "20/03/2026"

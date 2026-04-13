@@ -11,7 +11,7 @@ const (
 	Author       = "Andy Esser"
 	Organisation = "Flomation"
 	Name         = "Git Status"
-	Description  = "Git Actions"
+	Description  = "Show the working tree status of a Git repository"
 	Website      = "https://www.flomation.co"
 	Icon         = "code-branch"
 	Date         = "19/03/2026"

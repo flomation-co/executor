@@ -7,8 +7,8 @@ import (
 const (
 	Author       = "Andy Esser"
 	Organisation = "Flomation"
-	Name         = "Maths | Subtraction"
-	Description  = "Arithmetic Functions"
+	Name         = "Subtraction"
+	Description  = "Subtract one number from another and return the difference"
 	Website      = "https://www.flomation.co"
 	Icon         = "minus"
 	Date         = "05/03/2026"

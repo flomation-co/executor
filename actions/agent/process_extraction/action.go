@@ -320,6 +320,21 @@ func processPendingActions(
 			body["source_message"] = sourceMessageID
 		}
 
+		// Deduplicate: skip if an open pending action of the same type
+		// already exists for this user. Prevents duplicate identity_link
+		// records when extraction fires on both inbound and assistant turns.
+		if pa.Type == "identity_link" {
+			existing, _ := getJSON(flow, ctx, fmt.Sprintf(
+				"/api/v1/internal/agent/%s/pending-action/match?agent_user_id=%s&type=identity_link",
+				agentID, agentUserID))
+			if existing != nil {
+				if eid, ok := existing["id"].(string); ok && eid != "" {
+					// Already have an open identity_link for this user — skip.
+					continue
+				}
+			}
+		}
+
 		if err := postJSON(flow, ctx, fmt.Sprintf("/api/v1/internal/agent/%s/pending-action", agentID), body, http.StatusCreated); err != nil {
 			result.Errors = append(result.Errors, fmt.Sprintf("pending_action[%d]: %v", i, err))
 			continue

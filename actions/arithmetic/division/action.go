@@ -7,8 +7,8 @@ import (
 const (
 	Author       = "Andy Esser"
 	Organisation = "Flomation"
-	Name         = "Maths | Division"
-	Description  = "Arithmetic Functions"
+	Name         = "Division"
+	Description  = "Divide one number by another and return the quotient"
 	Website      = "https://www.flomation.co"
 	Icon         = "divide"
 	Date         = "05/03/2026"
