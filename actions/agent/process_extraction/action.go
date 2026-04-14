@@ -106,6 +106,8 @@ var Outputs = [...]core.Connection{
 	{Name: "memories_discarded", Type: core.ConnectionTypeInteger, Label: "Memories discarded (<0.5 confidence)"},
 	{Name: "pending_actions_written", Type: core.ConnectionTypeInteger, Label: "Pending actions written"},
 	{Name: "commitments_written", Type: core.ConnectionTypeInteger, Label: "Commitments written"},
+	{Name: "confirmations_processed", Type: core.ConnectionTypeInteger, Label: "Confirmations processed"},
+	{Name: "identities_merged", Type: core.ConnectionTypeInteger, Label: "Identities merged"},
 	{Name: "errors", Type: core.ConnectionTypeObject, Label: "Per-record errors"},
 }
 
@@ -155,12 +157,14 @@ type extractionConfirm struct {
 // extractionResult summarises what the action did, returned as the
 // node's output and surfaced in the execution detail view.
 type extractionResult struct {
-	MemoriesWritten       int      `json:"memories_written"`
-	MemoriesFlagged       int      `json:"memories_flagged"`
-	MemoriesDiscarded     int      `json:"memories_discarded"`
-	PendingActionsWritten int      `json:"pending_actions_written"`
-	CommitmentsWritten    int      `json:"commitments_written"`
-	Errors                []string `json:"errors,omitempty"`
+	MemoriesWritten         int      `json:"memories_written"`
+	MemoriesFlagged         int      `json:"memories_flagged"`
+	MemoriesDiscarded       int      `json:"memories_discarded"`
+	PendingActionsWritten   int      `json:"pending_actions_written"`
+	CommitmentsWritten      int      `json:"commitments_written"`
+	ConfirmationsProcessed  int      `json:"confirmations_processed"`
+	IdentitiesMerged        int      `json:"identities_merged"`
+	Errors                  []string `json:"errors,omitempty"`
 }
 
 func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[string]interface{}, error) {
@@ -201,14 +205,17 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	processMemories(flow, ctx, agentID, agentUserID, conversationID, sourceMessageID, payload.Memories, &result)
 	processPendingActions(flow, ctx, agentID, agentUserID, conversationID, sourceMessageID, payload.ProposedActions, &result)
 	processCommitments(flow, ctx, agentID, agentUserID, conversationID, sourceMessageID, payload.Commitments, &result)
+	processConfirmations(flow, ctx, agentID, agentUserID, payload.Confirmations, &result)
 
 	return map[string]interface{}{
-		"memories_written":        result.MemoriesWritten,
-		"memories_flagged":        result.MemoriesFlagged,
-		"memories_discarded":      result.MemoriesDiscarded,
-		"pending_actions_written": result.PendingActionsWritten,
-		"commitments_written":     result.CommitmentsWritten,
-		"errors":                  result.Errors,
+		"memories_written":         result.MemoriesWritten,
+		"memories_flagged":         result.MemoriesFlagged,
+		"memories_discarded":       result.MemoriesDiscarded,
+		"pending_actions_written":  result.PendingActionsWritten,
+		"commitments_written":      result.CommitmentsWritten,
+		"confirmations_processed":  result.ConfirmationsProcessed,
+		"identities_merged":        result.IdentitiesMerged,
+		"errors":                   result.Errors,
 	}, nil
 }
 
@@ -373,6 +380,196 @@ func processCommitments(
 		}
 		result.CommitmentsWritten++
 	}
+}
+
+// --- confirmations (Phase 5) ---
+
+func processConfirmations(
+	flow *core.Flow, ctx *core.ExecutionContext,
+	agentID, agentUserID string,
+	confirmations []extractionConfirm, result *extractionResult,
+) {
+	if agentUserID == "" || len(confirmations) == 0 {
+		return
+	}
+
+	for i, conf := range confirmations {
+		// Resolve the pending action — either by explicit ID or by
+		// matching on user + type (identity_link is the primary use case).
+		paID := conf.PendingActionID
+
+		if paID == "" {
+			// Try to find a matching pending action by type. The extraction
+			// pipeline may not know the ID, so we search for the most recent
+			// open pending action of type "identity_link" for this user.
+			pa, err := getJSON(flow, ctx, fmt.Sprintf(
+				"/api/v1/internal/agent/%s/pending-action/match?agent_user_id=%s&type=identity_link",
+				agentID, agentUserID))
+			if err != nil {
+				result.Errors = append(result.Errors, fmt.Sprintf("confirmation[%d]: no matching pending action: %v", i, err))
+				continue
+			}
+			if id, ok := pa["id"].(string); ok {
+				paID = id
+			} else {
+				result.Errors = append(result.Errors, fmt.Sprintf("confirmation[%d]: no matching pending action found", i))
+				continue
+			}
+		}
+
+		if conf.Resolution == "declined" {
+			// User declined — mark the pending action as declined.
+			if err := patchJSON(flow, ctx, fmt.Sprintf("/api/v1/internal/pending-action/%s", paID),
+				map[string]interface{}{"status": "declined"}); err != nil {
+				result.Errors = append(result.Errors, fmt.Sprintf("confirmation[%d]: failed to decline: %v", i, err))
+			}
+			result.ConfirmationsProcessed++
+			continue
+		}
+
+		if conf.Resolution == "confirmed" {
+			// Fetch the pending action to check its current status and payload.
+			pa, err := getJSON(flow, ctx, fmt.Sprintf("/api/v1/internal/pending-action/%s", paID))
+			if err != nil {
+				result.Errors = append(result.Errors, fmt.Sprintf("confirmation[%d]: failed to fetch pending action: %v", i, err))
+				continue
+			}
+
+			currentStatus, _ := pa["status"].(string)
+			paType, _ := pa["type"].(string)
+
+			if paType == "identity_link" {
+				if currentStatus == "awaiting_confirmation" {
+					// First side confirmed. Move to awaiting-other-side.
+					if err := patchJSON(flow, ctx, fmt.Sprintf("/api/v1/internal/pending-action/%s", paID),
+						map[string]interface{}{"status": "confirmed_here_awaiting_other_side"}); err != nil {
+						result.Errors = append(result.Errors, fmt.Sprintf("confirmation[%d]: failed to update status: %v", i, err))
+						continue
+					}
+
+					// Proactively dispatch verification to the other channel.
+					// The API looks up the target identity, checks channel
+					// privacy, creates a target-side PA, and forwards to
+					// Launch to fire the orchestrator on the target channel.
+					sourceChannel := ""
+					if sc, ok := pa["source_channel"].(string); ok {
+						sourceChannel = sc
+					}
+					_ = postJSON(flow, ctx,
+						fmt.Sprintf("/api/v1/internal/agent/%s/identity/request-verification", agentID),
+						map[string]interface{}{
+							"pending_action_id":  paID,
+							"source_user_id":     agentUserID,
+							"source_channel_type": sourceChannel,
+						}, http.StatusOK)
+
+					result.ConfirmationsProcessed++
+				} else if currentStatus == "confirmed_here_awaiting_other_side" {
+					// Both sides confirmed! Execute the merge.
+					payload, _ := pa["payload"].(map[string]interface{})
+					sourceUserID, _ := payload["source_user_id"].(string)
+					targetUserID, _ := payload["target_user_id"].(string)
+
+					if sourceUserID == "" || targetUserID == "" {
+						// Fall back to merging current user into the
+						// identity linked user. The claiming side's
+						// agent_user_id is the source; the target is
+						// the identity they claimed to also be.
+						sourceUserID = agentUserID
+						if tgt, ok := payload["target_user_id"].(string); ok && tgt != "" {
+							targetUserID = tgt
+						}
+					}
+
+					if sourceUserID != "" && targetUserID != "" && sourceUserID != targetUserID {
+						if err := postJSON(flow, ctx,
+							fmt.Sprintf("/api/v1/internal/agent/%s/identity/merge", agentID),
+							map[string]interface{}{
+								"source_user_id": sourceUserID,
+								"target_user_id": targetUserID,
+							}, http.StatusNoContent); err != nil {
+							result.Errors = append(result.Errors, fmt.Sprintf("confirmation[%d]: merge failed: %v", i, err))
+							continue
+						}
+						result.IdentitiesMerged++
+					}
+
+					// Mark the pending action as executed.
+					_ = patchJSON(flow, ctx, fmt.Sprintf("/api/v1/internal/pending-action/%s", paID),
+						map[string]interface{}{"status": "executed"})
+
+					result.ConfirmationsProcessed++
+				}
+			} else {
+				// Non-identity-link confirmations (forget_memory, correct_memory, etc.)
+				// Mark as executed — the specific side effects are handled
+				// by dedicated actions in future phases.
+				if err := patchJSON(flow, ctx, fmt.Sprintf("/api/v1/internal/pending-action/%s", paID),
+					map[string]interface{}{"status": "executed"}); err != nil {
+					result.Errors = append(result.Errors, fmt.Sprintf("confirmation[%d]: failed to execute: %v", i, err))
+					continue
+				}
+				result.ConfirmationsProcessed++
+			}
+		}
+	}
+}
+
+// getJSON performs a GET request and returns the parsed JSON body as a map.
+func getJSON(flow *core.Flow, ctx *core.ExecutionContext, path string) (map[string]interface{}, error) {
+	req, err := http.NewRequestWithContext(flow.GoContext(), http.MethodGet, ctx.APIURL+path, nil)
+	if err != nil {
+		return nil, fmt.Errorf("new request: %w", err)
+	}
+	if ctx.Token != "" {
+		req.Header.Set("Authorization", "Bearer "+ctx.Token)
+	}
+
+	resp, err := http.DefaultClient.Do(req)
+	if err != nil {
+		return nil, fmt.Errorf("do: %w", err)
+	}
+	defer func() { _ = resp.Body.Close() }()
+
+	if resp.StatusCode != http.StatusOK {
+		respBody, _ := io.ReadAll(io.LimitReader(resp.Body, 512))
+		return nil, fmt.Errorf("API returned %d: %s", resp.StatusCode, string(respBody))
+	}
+
+	var result map[string]interface{}
+	if err := json.NewDecoder(resp.Body).Decode(&result); err != nil {
+		return nil, fmt.Errorf("decode: %w", err)
+	}
+	return result, nil
+}
+
+// patchJSON performs a PATCH request with a JSON body.
+func patchJSON(flow *core.Flow, ctx *core.ExecutionContext, path string, body map[string]interface{}) error {
+	raw, err := json.Marshal(body)
+	if err != nil {
+		return fmt.Errorf("marshal: %w", err)
+	}
+
+	req, err := http.NewRequestWithContext(flow.GoContext(), http.MethodPatch, ctx.APIURL+path, bytes.NewReader(raw))
+	if err != nil {
+		return fmt.Errorf("new request: %w", err)
+	}
+	req.Header.Set("Content-Type", "application/json")
+	if ctx.Token != "" {
+		req.Header.Set("Authorization", "Bearer "+ctx.Token)
+	}
+
+	resp, err := http.DefaultClient.Do(req)
+	if err != nil {
+		return fmt.Errorf("do: %w", err)
+	}
+	defer func() { _ = resp.Body.Close() }()
+
+	if resp.StatusCode >= 300 {
+		respBody, _ := io.ReadAll(io.LimitReader(resp.Body, 512))
+		return fmt.Errorf("API returned %d: %s", resp.StatusCode, string(respBody))
+	}
+	return nil
 }
 
 // --- shared HTTP helper ---
