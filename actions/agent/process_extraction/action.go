@@ -150,8 +150,9 @@ type extractionCommit struct {
 
 type extractionConfirm struct {
 	PendingActionID string `json:"pending_action_id"`
-	Resolution      string `json:"resolution"` // 'confirmed' | 'declined'
+	Resolution      string `json:"resolution"` // 'confirmed' | 'declined' | 'task_completed'
 	Evidence        string `json:"evidence"`
+	TaskTitle       string `json:"task_title,omitempty"` // For task_completed: which task
 }
 
 // extractionResult summarises what the action did, returned as the
@@ -160,6 +161,8 @@ type extractionResult struct {
 	MemoriesWritten         int      `json:"memories_written"`
 	MemoriesFlagged         int      `json:"memories_flagged"`
 	MemoriesDiscarded       int      `json:"memories_discarded"`
+	MemoriesSuperseded      int      `json:"memories_superseded"`
+	MemoriesDeduplicated    int      `json:"memories_deduplicated"`
 	PendingActionsWritten   int      `json:"pending_actions_written"`
 	CommitmentsWritten      int      `json:"commitments_written"`
 	ConfirmationsProcessed  int      `json:"confirmations_processed"`
@@ -211,6 +214,8 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 		"memories_written":         result.MemoriesWritten,
 		"memories_flagged":         result.MemoriesFlagged,
 		"memories_discarded":       result.MemoriesDiscarded,
+		"memories_superseded":      result.MemoriesSuperseded,
+		"memories_deduplicated":    result.MemoriesDeduplicated,
 		"pending_actions_written":  result.PendingActionsWritten,
 		"commitments_written":      result.CommitmentsWritten,
 		"confirmations_processed":  result.ConfirmationsProcessed,
@@ -267,9 +272,28 @@ func processMemories(
 			body["source_message"] = sourceMessageID
 		}
 
-		if err := postJSON(flow, ctx, fmt.Sprintf("/api/v1/internal/agent/%s/memory", agentID), body, http.StatusCreated); err != nil {
+		// Phase 7: temporal decay — auto-set valid_until based on type.
+		switch mem.Type {
+		case "task":
+			validUntil := time.Now().Add(7 * 24 * time.Hour)
+			body["valid_until"] = validUntil.Format(time.RFC3339)
+		case "session_summary":
+			validUntil := time.Now().Add(30 * 24 * time.Hour)
+			body["valid_until"] = validUntil.Format(time.RFC3339)
+		}
+
+		resp, err := postJSONWithResponse(flow, ctx, fmt.Sprintf("/api/v1/internal/agent/%s/memory", agentID), body, http.StatusCreated)
+		if err != nil {
 			result.Errors = append(result.Errors, fmt.Sprintf("memory[%d]: %v", i, err))
 			continue
+		}
+
+		// Extract the new memory ID for hygiene checks.
+		newMemoryID := ""
+		if resp != nil {
+			if id, ok := resp["id"].(string); ok {
+				newMemoryID = id
+			}
 		}
 
 		// 0.5–0.8 → flagged (stored but counted separately for the
@@ -278,6 +302,96 @@ func processMemories(
 			result.MemoriesFlagged++
 		} else {
 			result.MemoriesWritten++
+		}
+
+		// Phase 7: hygiene checks — find contradictions and duplicates.
+		// Only run if we have a memory ID and the memory has an embedding
+		// (the backfill goroutine may not have embedded it yet, but the
+		// API endpoint handles missing embeddings gracefully).
+		if newMemoryID != "" && agentUserID != "" {
+			runHygieneCheck(flow, ctx, agentID, agentUserID, newMemoryID, mem, result)
+		}
+	}
+
+	// Phase 7: enforce pin limit after all memories are written.
+	if agentUserID != "" {
+		_ = postJSON(flow, ctx,
+			fmt.Sprintf("/api/v1/internal/agent/%s/memory/enforce-pin-limit", agentID),
+			map[string]interface{}{"agent_user_id": agentUserID},
+			http.StatusOK)
+	}
+}
+
+// runHygieneCheck calls the API's check-hygiene endpoint to find
+// contradictions and duplicates, then resolves them.
+func runHygieneCheck(
+	flow *core.Flow, ctx *core.ExecutionContext,
+	agentID, agentUserID, newMemoryID string,
+	mem extractionMemory, result *extractionResult,
+) {
+	// Try to fetch the new memory's embedding for similarity-based checks.
+	// If no embedding yet (backfill hasn't run), use a zero-length slice —
+	// the API-side title-based contradiction check doesn't need one.
+	var embeddingSlice []float32
+	memData, err := getJSON(flow, ctx, fmt.Sprintf("/api/v1/internal/memory/%s", newMemoryID))
+	if err == nil && memData != nil {
+		if embeddingRaw, ok := memData["embedding"]; ok && embeddingRaw != nil {
+			if arr, ok := embeddingRaw.([]interface{}); ok {
+				for _, f := range arr {
+					if n, ok := f.(float64); ok {
+						embeddingSlice = append(embeddingSlice, float32(n))
+					}
+				}
+			}
+		}
+	}
+
+	// Call check-hygiene endpoint.
+	hygieneResp, err := postJSONWithResponse(flow, ctx,
+		fmt.Sprintf("/api/v1/internal/agent/%s/memory/check-hygiene", agentID),
+		map[string]interface{}{
+			"agent_user_id": agentUserID,
+			"memory_type":   mem.Type,
+			"memory_id":     newMemoryID,
+			"title":         mem.Title,
+			"body":          mem.Body,
+			"embedding":     embeddingSlice,
+		}, http.StatusOK)
+	if err != nil || hygieneResp == nil {
+		return
+	}
+
+	// Process duplicates (merge).
+	if dupes, ok := hygieneResp["duplicates"].([]interface{}); ok {
+		for _, d := range dupes {
+			if dm, ok := d.(map[string]interface{}); ok {
+				if dupeID, ok := dm["id"].(string); ok && dupeID != newMemoryID {
+					_ = postJSON(flow, ctx,
+						fmt.Sprintf("/api/v1/internal/agent/%s/memory/merge", agentID),
+						map[string]interface{}{
+							"duplicate_id": dupeID,
+							"canonical_id": newMemoryID,
+						}, http.StatusNoContent)
+					result.MemoriesDeduplicated++
+				}
+			}
+		}
+	}
+
+	// Process contradictions (supersede).
+	if contras, ok := hygieneResp["contradictions"].([]interface{}); ok {
+		for _, c := range contras {
+			if cm, ok := c.(map[string]interface{}); ok {
+				if oldID, ok := cm["id"].(string); ok && oldID != newMemoryID {
+					_ = postJSON(flow, ctx,
+						fmt.Sprintf("/api/v1/internal/agent/%s/memory/supersede", agentID),
+						map[string]interface{}{
+							"old_id": oldID,
+							"new_id": newMemoryID,
+						}, http.StatusNoContent)
+					result.MemoriesSuperseded++
+				}
+			}
 		}
 	}
 }
@@ -318,6 +432,21 @@ func processPendingActions(
 		}
 		if sourceMessageID != "" {
 			body["source_message"] = sourceMessageID
+		}
+
+		// Deduplicate: skip if an open pending action of the same type
+		// already exists for this user. Prevents duplicate identity_link
+		// records when extraction fires on both inbound and assistant turns.
+		if pa.Type == "identity_link" {
+			existing, _ := getJSON(flow, ctx, fmt.Sprintf(
+				"/api/v1/internal/agent/%s/pending-action/match?agent_user_id=%s&type=identity_link",
+				agentID, agentUserID))
+			if existing != nil {
+				if eid, ok := existing["id"].(string); ok && eid != "" {
+					// Already have an open identity_link for this user — skip.
+					continue
+				}
+			}
 		}
 
 		if err := postJSON(flow, ctx, fmt.Sprintf("/api/v1/internal/agent/%s/pending-action", agentID), body, http.StatusCreated); err != nil {
@@ -394,6 +523,14 @@ func processConfirmations(
 	}
 
 	for i, conf := range confirmations {
+		_ = i // used in error messages below
+		// Phase 7: handle task_completed confirmations by superseding
+		// the matching task memory.
+		if conf.Resolution == "task_completed" {
+			handleTaskCompleted(flow, ctx, agentID, agentUserID, conf, result)
+			continue
+		}
+
 		// Resolve the pending action — either by explicit ID or by
 		// matching on user + type (identity_link is the primary use case).
 		paID := conf.PendingActionID
@@ -515,6 +652,80 @@ func processConfirmations(
 	}
 }
 
+// handleTaskCompleted searches for an active task memory matching the
+// confirmation's task_title and supersedes it. This handles cases where
+// the user says "nevermind, I've done it" or "thanks, that's sorted".
+func handleTaskCompleted(
+	flow *core.Flow, ctx *core.ExecutionContext,
+	agentID, agentUserID string,
+	conf extractionConfirm, result *extractionResult,
+) {
+	if conf.TaskTitle == "" {
+		return
+	}
+
+	// Search for active task memories for this user.
+	// Use the internal memory listing endpoint filtered to tasks.
+	endpoint := fmt.Sprintf(
+		"/api/v1/internal/agent/%s/memory?agent_user_id=%s&limit=50",
+		agentID, agentUserID)
+
+	// Fetch memories as raw JSON array (getJSON returns a map, not suitable here).
+	rawResp, err := getRaw(flow, ctx, endpoint)
+	if err != nil || rawResp == nil {
+		return
+	}
+
+	var memories []struct {
+		ID         string `json:"id"`
+		MemoryType string `json:"memory_type"`
+		Title      string `json:"title"`
+		Status     string `json:"status"`
+	}
+	if err := json.Unmarshal(rawResp, &memories); err != nil {
+		return
+	}
+
+	// Find a matching task memory by title similarity.
+	taskTitle := strings.ToLower(conf.TaskTitle)
+	for _, mem := range memories {
+		if mem.MemoryType != "task" || mem.Status != "active" {
+			continue
+		}
+		memTitle := strings.ToLower(mem.Title)
+		// Simple substring match — covers "Book dentist appointment" matching "book dentist"
+		if strings.Contains(memTitle, taskTitle) || strings.Contains(taskTitle, memTitle) {
+			// Supersede this task memory.
+			_ = postJSON(flow, ctx,
+				fmt.Sprintf("/api/v1/internal/agent/%s/memory/supersede", agentID),
+				map[string]interface{}{
+					"old_id": mem.ID,
+					"new_id": mem.ID, // Self-supersede (task completed, no replacement)
+				}, http.StatusNoContent)
+			result.ConfirmationsProcessed++
+			return
+		}
+	}
+}
+
+// getRaw performs a GET request and returns the raw response body.
+func getRaw(flow *core.Flow, ctx *core.ExecutionContext, path string) ([]byte, error) {
+	req, err := http.NewRequestWithContext(flow.GoContext(), http.MethodGet, ctx.APIURL+path, nil)
+	if err != nil {
+		return nil, err
+	}
+	client := &http.Client{}
+	resp, err := client.Do(req)
+	if err != nil {
+		return nil, err
+	}
+	defer func() { _ = resp.Body.Close() }()
+	if resp.StatusCode != http.StatusOK {
+		return nil, fmt.Errorf("API returned %d", resp.StatusCode)
+	}
+	return io.ReadAll(resp.Body)
+}
+
 // getJSON performs a GET request and returns the parsed JSON body as a map.
 func getJSON(flow *core.Flow, ctx *core.ExecutionContext, path string) (map[string]interface{}, error) {
 	req, err := http.NewRequestWithContext(flow.GoContext(), http.MethodGet, ctx.APIURL+path, nil)
@@ -604,6 +815,40 @@ func postJSON(flow *core.Flow, ctx *core.ExecutionContext, path string, body map
 		return fmt.Errorf("API returned %d: %s", resp.StatusCode, string(respBody))
 	}
 	return nil
+}
+
+// postJSONWithResponse is like postJSON but returns the decoded response body.
+func postJSONWithResponse(flow *core.Flow, ctx *core.ExecutionContext, path string, body map[string]interface{}, expectStatus int) (map[string]interface{}, error) {
+	raw, err := json.Marshal(body)
+	if err != nil {
+		return nil, fmt.Errorf("marshal: %w", err)
+	}
+
+	req, err := http.NewRequestWithContext(flow.GoContext(), http.MethodPost, ctx.APIURL+path, bytes.NewReader(raw))
+	if err != nil {
+		return nil, fmt.Errorf("new request: %w", err)
+	}
+	req.Header.Set("Content-Type", "application/json")
+	if ctx.Token != "" {
+		req.Header.Set("Authorization", "Bearer "+ctx.Token)
+	}
+
+	resp, err := http.DefaultClient.Do(req)
+	if err != nil {
+		return nil, fmt.Errorf("do: %w", err)
+	}
+	defer func() { _ = resp.Body.Close() }()
+
+	if resp.StatusCode != expectStatus {
+		respBody, _ := io.ReadAll(io.LimitReader(resp.Body, 512))
+		return nil, fmt.Errorf("API returned %d: %s", resp.StatusCode, string(respBody))
+	}
+
+	var result map[string]interface{}
+	if err := json.NewDecoder(resp.Body).Decode(&result); err != nil {
+		return nil, nil // Non-JSON response is ok for some endpoints
+	}
+	return result, nil
 }
 
 // stripCodeFence unwraps a ```json … ``` or ``` … ``` block if present.

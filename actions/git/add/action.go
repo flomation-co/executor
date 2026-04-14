@@ -10,7 +10,7 @@ const (
 	Author       = "Andy Esser"
 	Organisation = "Flomation"
 	Name         = "Git Add"
-	Description  = "Git Actions"
+	Description  = "Stage files for commit in a Git repository"
 	Website      = "https://www.flomation.co"
 	Icon         = "code-branch"
 	Date         = "06/03/2026"

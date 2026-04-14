@@ -67,6 +67,7 @@ import (
 	tools_calendar_delete "flomation.app/automate/executor/actions/tools/calendar_delete"
 	tools_calendar_read "flomation.app/automate/executor/actions/tools/calendar_read"
 	tools_calendar_update "flomation.app/automate/executor/actions/tools/calendar_update"
+	tools_channel_action "flomation.app/automate/executor/actions/tools/channel_action"
 	tools_email_draft "flomation.app/automate/executor/actions/tools/email_draft"
 	tools_email_read "flomation.app/automate/executor/actions/tools/email_read"
 	tools_email_reply "flomation.app/automate/executor/actions/tools/email_reply"
@@ -150,6 +151,7 @@ var Actions = map[string]core.Action{
 	"tools/calendar_delete":     tools_calendar_delete.Execute,
 	"tools/calendar_read":       tools_calendar_read.Execute,
 	"tools/calendar_update":     tools_calendar_update.Execute,
+	"tools/channel_action":      tools_channel_action.Execute,
 	"tools/email_draft":         tools_email_draft.Execute,
 	"tools/email_read":          tools_email_read.Execute,
 	"tools/email_reply":         tools_email_reply.Execute,

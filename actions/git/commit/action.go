@@ -13,7 +13,7 @@ const (
 	Author       = "Andy Esser"
 	Organisation = "Flomation"
 	Name         = "Git Commit"
-	Description  = "Git Actions"
+	Description  = "Create a Git commit with staged changes"
 	Website      = "https://www.flomation.co"
 	Icon         = "code-branch"
 	Date         = "06/03/2026"

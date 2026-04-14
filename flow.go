@@ -1295,6 +1295,17 @@ func (f *Flow) executeNodeChildren(actions map[string]Action, node *Node, output
 						delete(f.nodeResults, matchedTool.ID)
 
 						for _, inp := range matchedTool.Data.Config.Inputs {
+							// Never allow the AI to override pre-configured
+							// input values set by the flow author. These are
+							// filtered out of the tool schema entirely, so
+							// the AI shouldn't pass them — but some models
+							// hallucinate parameters and pass empty strings,
+							// wiping out legitimate pre-set values.
+							if inp.Value != nil {
+								if s, ok := inp.Value.(string); ok && s != "" && !strings.HasPrefix(s, "${") {
+									continue
+								}
+							}
 							if v, exists := req.Input[inp.Name]; exists {
 								inp.Value = v
 								log.WithFields(log.Fields{
@@ -1662,11 +1673,13 @@ func (f *Flow) injectToolDefinitions(aiNode *Node, toolNodes []*Node, actions ma
 			continue
 		}
 
-		// Derive tool name: strip "tools/" prefix from label
+		// Derive tool name: strip "tools/" prefix from label and sanitise
+		// to match Anthropic's tool name pattern ^[a-zA-Z0-9_-]{1,128}$
 		toolName := toolNode.Data.Label
 		if strings.HasPrefix(toolName, "tools/") {
 			toolName = strings.TrimPrefix(toolName, "tools/")
 		}
+		toolName = sanitiseToolName(toolName)
 
 		// Description: prefer the manifest's full description, fall back
 		// to config.Name (display name), then the tool name itself.
@@ -1777,6 +1790,34 @@ func (f *Flow) injectToolDefinitions(aiNode *Node, toolNodes []*Node, actions ma
 		"tool_count": len(tools),
 		"tools_json": string(toolJSON),
 	}).Info("auto-generated tool definitions from graph")
+}
+
+// sanitiseToolName replaces characters that don't match the Anthropic/OpenAI
+// tool name pattern ^[a-zA-Z0-9_-]{1,128}$ with underscores, and truncates
+// to 128 characters. Spaces become underscores, consecutive underscores
+// are collapsed, and leading/trailing underscores are trimmed.
+func sanitiseToolName(name string) string {
+	var b strings.Builder
+	for _, r := range name {
+		if (r >= 'a' && r <= 'z') || (r >= 'A' && r <= 'Z') || (r >= '0' && r <= '9') || r == '-' {
+			b.WriteRune(r)
+		} else {
+			b.WriteRune('_')
+		}
+	}
+	// Collapse consecutive underscores
+	result := b.String()
+	for strings.Contains(result, "__") {
+		result = strings.ReplaceAll(result, "__", "_")
+	}
+	result = strings.Trim(result, "_")
+	if len(result) > 128 {
+		result = result[:128]
+	}
+	if result == "" {
+		result = "tool"
+	}
+	return result
 }
 
 // collectToolResult walks the cached results of nodes reachable from the

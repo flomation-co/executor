@@ -7,6 +7,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"io"
+	"mime"
 	"net/http"
 	"strings"
 	"time"
@@ -132,7 +133,9 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	if bcc != "" {
 		msg.WriteString(fmt.Sprintf("Bcc: %s\r\n", bcc))
 	}
-	msg.WriteString(fmt.Sprintf("Subject: %s\r\n", subject))
+	// RFC 2047 encode subject for non-ASCII safety.
+	encodedSubject := mime.QEncoding.Encode("UTF-8", subject)
+	msg.WriteString(fmt.Sprintf("Subject: %s\r\n", encodedSubject))
 	msg.WriteString("Content-Type: text/plain; charset=\"UTF-8\"\r\n")
 	msg.WriteString("\r\n")
 	msg.WriteString(body)

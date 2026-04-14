@@ -70,7 +70,7 @@
     ]
   },
   "agent/process_extraction": {
-    "hash": "653ae30cef413faa3509109b1142416c447c29a6553b78192ccc84f9471c4517",
+    "hash": "bf920ed45e8855aa2c7c693c3ccb0f934c043fee73cbd356e613f09413f1498e",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Process Extraction Output",
@@ -903,11 +903,11 @@
     ]
   },
   "arithmetic/addition": {
-    "hash": "b6fe525ab8d26c1f79d2d9ba9cd996eefdea0055ec48b79de78f23063f0838c0",
+    "hash": "bf0eb244799e42af72492ec6971e38cc251faeb847d4d3a52e58fc0469445031",
     "author": "Andy Esser",
     "organisation": "Flomation",
-    "name": "Maths | Addition",
-    "description": "Arithmetic Functions",
+    "name": "Addition",
+    "description": "Add two numbers together and return the sum",
     "website": "https://www.flomation.co",
     "icon": "plus",
     "date": "05/03/2026",
@@ -944,11 +944,11 @@
     ]
   },
   "arithmetic/division": {
-    "hash": "6211a773b3f3e9d3ace9b333e919ebce8a1a734466798aaf5dea93e8b92d3acb",
+    "hash": "e5c364f05e0494fb7527529848f856b1970bdcb46df89480d66b6e9e8fa98df5",
     "author": "Andy Esser",
     "organisation": "Flomation",
-    "name": "Maths | Division",
-    "description": "Arithmetic Functions",
+    "name": "Division",
+    "description": "Divide one number by another and return the quotient",
     "website": "https://www.flomation.co",
     "icon": "divide",
     "date": "05/03/2026",
@@ -985,11 +985,11 @@
     ]
   },
   "arithmetic/multiplication": {
-    "hash": "fcf03a759297a09551980dc080708338cc658fa84349cf738518f99873ccc6a7",
+    "hash": "daf8d42306edfc6644a55d68e4c483fa6c3a1d75ab3f0811110e464f0546b157",
     "author": "Andy Esser",
     "organisation": "Flomation",
-    "name": "Maths | Multiplication",
-    "description": "Arithmetic Functions",
+    "name": "Multiplication",
+    "description": "Multiply two numbers together and return the product",
     "website": "https://www.flomation.co",
     "icon": "xmark",
     "date": "05/03/2026",
@@ -1026,11 +1026,11 @@
     ]
   },
   "arithmetic/subtraction": {
-    "hash": "b29b2697a80ec8b282cd2811ec81ecf0cdc11b29cbc0c6aadce00cc75740eacc",
+    "hash": "7c74ff33661bb71b4813a3f7686b5b02bd22ef0f252f30ad494a5005003db472",
     "author": "Andy Esser",
     "organisation": "Flomation",
-    "name": "Maths | Subtraction",
-    "description": "Arithmetic Functions",
+    "name": "Subtraction",
+    "description": "Subtract one number from another and return the difference",
     "website": "https://www.flomation.co",
     "icon": "minus",
     "date": "05/03/2026",
@@ -1185,11 +1185,11 @@
     ]
   },
   "aws/ec2/describe": {
-    "hash": "83b8abb88363392fc36a1d647461f7dd155dd0435dfdea0b58a063fbdc53d8be",
+    "hash": "3b9490bd2136c66008690f61d262d1b6b192b2655ba245fcf42177e1297c5c78",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "AWS EC2 Describe",
-    "description": "AWS EC2 Actions",
+    "description": "Describe EC2 instances, returning details like state, type, IPs, and tags",
     "website": "https://www.flomation.co",
     "icon": "server",
     "date": "05/03/2026",
@@ -1208,11 +1208,11 @@
     "outputs": null
   },
   "aws/s3/delete": {
-    "hash": "d4d3e238c48a4ea249e076eaa48905e3b107a1f24e2686622119106508d46304",
+    "hash": "5d4cebad406a06fe9726676d0878e2a35ffa715583fc5622b327f8ee7c4406f9",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "AWS S3 Delete",
-    "description": "AWS S3 Actions",
+    "description": "Delete an object from an AWS S3 bucket",
     "website": "https://www.flomation.co",
     "icon": "bucket",
     "date": "05/03/2026",
@@ -1282,11 +1282,11 @@
     ]
   },
   "aws/s3/get": {
-    "hash": "502c9be718b7d8f3650594fb3e374f5a4404db87dcb0a7ef52c1b16bec7c7b91",
+    "hash": "c4f02c556a9c3ef1d263aa9ecbb41c974ac3c661ff3e88704311ccd9e76543b3",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "AWS S3 Get Object",
-    "description": "AWS S3 Actions",
+    "description": "Download an object from an AWS S3 bucket",
     "website": "https://www.flomation.co",
     "icon": "bucket",
     "date": "05/03/2026",
@@ -1363,11 +1363,11 @@
     ]
   },
   "aws/s3/list": {
-    "hash": "f42e61f41f676bc8a34bd861c21500ffe121d11a2c9199d16d3557eaeb4bf179",
+    "hash": "61be976bd5a691a183a0a05ba8fb2d8d6dab0a4eb916c1d6ad22ba388ae71402",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "AWS S3 List Buckets",
-    "description": "AWS S3 Actions",
+    "description": "List objects in an AWS S3 bucket with optional prefix filter",
     "website": "https://www.flomation.co",
     "icon": "bucket",
     "date": "05/03/2026",
@@ -1423,11 +1423,11 @@
     ]
   },
   "aws/s3/put": {
-    "hash": "c3b1052838a189e96a9ba0f2f3b6dd732a5b6346a8bcfcd3d1e7e07f4d415999",
+    "hash": "dc905f99c0e029834f66ee2298b4250e2abc0c3a4636d53d1a22d2a80d19e35d",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "AWS S3 Put",
-    "description": "AWS S3 Actions",
+    "description": "Upload an object to an AWS S3 bucket",
     "website": "https://www.flomation.co",
     "icon": "bucket",
     "date": "05/03/2026",
@@ -1957,11 +1957,11 @@
     ]
   },
   "conditional/if": {
-    "hash": "27f959cb422cca5d0ecaebdd475097aaf6f16e27befda513d6472ab57c0c54c2",
+    "hash": "ca6bf0da1f25252ef28bb836034cb37a138dc9b029a69baa20c8fb9dcdb2c7c0",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "If",
-    "description": "Conditional Actions",
+    "description": "Evaluate a condition and branch execution accordingly",
     "website": "https://www.flomation.co",
     "icon": "code-branch",
     "date": "20/03/2026",
@@ -2391,11 +2391,11 @@
     ]
   },
   "git/add": {
-    "hash": "ac708fe77ddb564ce137445130993f9dab813c7a4fbe9915f820a0bdd6c5d11c",
+    "hash": "2918d7ae8a198b2ad852839d154a8e8b5682326d3bc26288ffc27d7983eda39d",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Git Add",
-    "description": "Git Actions",
+    "description": "Stage files for commit in a Git repository",
     "website": "https://www.flomation.co",
     "icon": "code-branch",
     "date": "06/03/2026",
@@ -2425,11 +2425,11 @@
     ]
   },
   "git/branch": {
-    "hash": "313adcea10ebed0d1b39b8af2481d00d08f83e762059027d093b59b4eb512afc",
+    "hash": "19474522a27595cc5b806c2fa445b87a1b57ef91fa1fd5f8d6ebc81553ed6918",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Git Branch",
-    "description": "Git Actions",
+    "description": "Create, list, or switch Git branches",
     "website": "https://www.flomation.co",
     "icon": "code-branch",
     "date": "19/03/2026",
@@ -2459,11 +2459,11 @@
     ]
   },
   "git/checkout": {
-    "hash": "e0186dbf6876adb8940982cc803ea9fca3e95e5b9a1fbac01fda6a5cbc91681d",
+    "hash": "c725b37f18c24d683258a4a6eeeb0b925b3f81d443f57e7845f3a172e536fc99",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Git Checkout",
-    "description": "Git Actions",
+    "description": "Check out a branch or commit in a Git repository",
     "website": "https://www.flomation.co",
     "icon": "code-branch",
     "date": "06/03/2026",
@@ -2612,11 +2612,11 @@
     ]
   },
   "git/commit": {
-    "hash": "a08584760609a5f14f6e3841ce067072f35faef7e50316a8400915f1800aa8d6",
+    "hash": "eb5848a0693565ff776a72c784e3d6ec2b55855ea3ab15880d44996d26cf1771",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Git Commit",
-    "description": "Git Actions",
+    "description": "Create a Git commit with staged changes",
     "website": "https://www.flomation.co",
     "icon": "code-branch",
     "date": "06/03/2026",
@@ -2772,11 +2772,11 @@
     ]
   },
   "git/push": {
-    "hash": "0203d0801239fb258ed49742a92aa61ba13f4658423067f7fb62d621ae9b625b",
+    "hash": "41f69038224bd1a2bed1491dd89b8d803338db6b12c7bdc0656d40cb3296d7ef",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Git Push",
-    "description": "Git Actions",
+    "description": "Push local commits to a remote Git repository",
     "website": "https://www.flomation.co",
     "icon": "code-branch",
     "date": "06/03/2026",
@@ -2874,11 +2874,11 @@
     ]
   },
   "git/status": {
-    "hash": "80914da573aa8be40f48ad113c51d14437e857104e32026e19c7458289480098",
+    "hash": "cf52fcd000f7a411740e47e7719144d1357e1c9b2b85c55f699cbe2ee309edf8",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Git Status",
-    "description": "Git Actions",
+    "description": "Show the working tree status of a Git repository",
     "website": "https://www.flomation.co",
     "icon": "code-branch",
     "date": "19/03/2026",
@@ -2907,11 +2907,11 @@
     ]
   },
   "git/tag": {
-    "hash": "6eba02e94225e66d44897ce3c595ba6b4cd564f65aa83583d873715d6c7f0f6a",
+    "hash": "fa0a8a70ba16707ce85241159d0032ae1c9cdad5d921d2be1cf3c8ebb5c303fe",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Git Tag",
-    "description": "Git Actions",
+    "description": "Create or list tags in a Git repository",
     "website": "https://www.flomation.co",
     "icon": "code-branch",
     "date": "19/03/2026",
@@ -3860,11 +3860,11 @@
     ]
   },
   "security/antivirus": {
-    "hash": "3e40798bc9b5382a70a10df2a183219e00bc783cb4d17cfe450a2bf3cdb8809c",
+    "hash": "2df1bb230899fed23908de0573cbe87f4d0e072994f331a8f771c9b71dca9b8e",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Scan with Antivirus",
-    "description": "Security Actions",
+    "description": "Scan a file or URL for malware using ClamAV",
     "website": "https://www.flomation.co",
     "icon": "shield-virus",
     "date": "20/03/2026",
@@ -4622,6 +4622,107 @@
       }
     ]
   },
+  "tools/channel_action": {
+    "hash": "cc672c1255ae188c88f5e22ae975a3bbecfb995f1d1746953023ac1b8cba8688",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Channel Action",
+    "description": "Send a channel-specific action like a typing indicator. Use this before long-running operations to show the user the agent is working.",
+    "website": "https://www.flomation.co",
+    "icon": "message-typing",
+    "date": "14/04/2026",
+    "type": 2,
+    "category": {
+      "name": "Tools",
+      "icon": "wrench",
+      "description": "AI tool implementations for function calling"
+    },
+    "inputs": [
+      {
+        "name": "channel_type",
+        "type": "string",
+        "value": null,
+        "label": "Channel Type",
+        "placeholder": "telegram, slack, etc.",
+        "required": true,
+        "options": [
+          {
+            "name": "Telegram",
+            "value": "telegram"
+          },
+          {
+            "name": "Slack",
+            "value": "slack"
+          }
+        ]
+      },
+      {
+        "name": "action",
+        "type": "string",
+        "value": null,
+        "label": "Action",
+        "placeholder": "typing",
+        "required": true,
+        "options": [
+          {
+            "name": "Typing",
+            "value": "typing"
+          },
+          {
+            "name": "Upload Photo",
+            "value": "upload_photo"
+          },
+          {
+            "name": "Upload Document",
+            "value": "upload_document"
+          },
+          {
+            "name": "Record Video",
+            "value": "record_video"
+          },
+          {
+            "name": "Record Voice",
+            "value": "record_voice"
+          },
+          {
+            "name": "Find Location",
+            "value": "find_location"
+          }
+        ]
+      },
+      {
+        "name": "chat_id",
+        "type": "string",
+        "value": null,
+        "label": "Chat ID",
+        "placeholder": "Target chat/channel ID",
+        "required": true
+      },
+      {
+        "name": "agent_id",
+        "type": "string",
+        "value": null,
+        "label": "Agent ID",
+        "placeholder": ""
+      }
+    ],
+    "outputs": [
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "message",
+        "type": "string",
+        "value": null,
+        "label": "Result message",
+        "placeholder": ""
+      }
+    ]
+  },
   "tools/email_draft": {
     "hash": "a08ac1e928935988a73414bf9fe8a6737fec28001459bf31796d50f7561400d9",
     "author": "Andy Esser",
@@ -4907,7 +5008,7 @@
     ]
   },
   "tools/email_send": {
-    "hash": "1476d7ad6eb8f55b57b430708b126eeba51c0ed5b109f63834014b533e52db78",
+    "hash": "1ff6aa3c671647604aa86bb28ed615752b8ddbd16e54ed7bd7df907374922d9d",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Email Send",

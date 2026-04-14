@@ -13,7 +13,7 @@ const (
 	Author       = "Andy Esser"
 	Organisation = "Flomation"
 	Name         = "AWS S3 List Buckets"
-	Description  = "AWS S3 Actions"
+	Description  = "List objects in an AWS S3 bucket with optional prefix filter"
 	Website      = "https://www.flomation.co"
 	Icon         = "bucket"
 	Date         = "05/03/2026"

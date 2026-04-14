@@ -15,7 +15,7 @@ const (
 	Author       = "Andy Esser"
 	Organisation = "Flomation"
 	Name         = "Scan with Antivirus"
-	Description  = "Security Actions"
+	Description  = "Scan a file or URL for malware using ClamAV"
 	Website      = "https://www.flomation.co"
 	Icon         = "shield-virus"
 	Date         = "20/03/2026"

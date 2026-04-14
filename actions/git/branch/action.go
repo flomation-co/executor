@@ -11,7 +11,7 @@ const (
 	Author       = "Andy Esser"
 	Organisation = "Flomation"
 	Name         = "Git Branch"
-	Description  = "Git Actions"
+	Description  = "Create, list, or switch Git branches"
 	Website      = "https://www.flomation.co"
 	Icon         = "code-branch"
 	Date         = "19/03/2026"
