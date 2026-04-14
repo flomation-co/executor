@@ -80,6 +80,13 @@ const (
 	// "Checking your calendar..." while tools execute.
 	IntermediateTextKey = "__intermediate_text"
 
+	// ToolExchangesKey accumulates completed tool exchanges across all
+	// rounds of the tool loop. Each entry is a map with tool_use_id,
+	// name, input, result, and is_error. The AI actions read this on
+	// their final (non-tool_use) invocation to record the exchanges
+	// in the conversation history via RecordToolExchange.
+	ToolExchangesKey = "__tool_exchanges"
+
 	// ToolsHandle is the source handle ID for the tools subgraph edge.
 	ToolsHandle = "tools"
 
@@ -1376,6 +1383,27 @@ func (f *Flow) executeNodeChildren(actions map[string]Action, node *Node, output
 						IsError:   toolErr,
 					})
 				}
+
+				// Accumulate completed tool exchanges so the AI action
+				// can record them in the conversation history after the
+				// final response. This persists across rounds.
+				var accumulated []map[string]interface{}
+				if prev, ok := f.GetVariable(ToolExchangesKey); ok && prev != nil {
+					if arr, ok := prev.([]map[string]interface{}); ok {
+						accumulated = arr
+					}
+				}
+				for i, req := range requests {
+					exchange := map[string]interface{}{
+						"tool_use_id": req.ID,
+						"name":        req.Name,
+						"input":       req.Input,
+						"result":      results[i].Content,
+						"is_error":    results[i].IsError,
+					}
+					accumulated = append(accumulated, exchange)
+				}
+				f.SetVariable(ToolExchangesKey, accumulated)
 
 				// Store results and conversation state for the AI action's
 				// next invocation, then re-execute the AI node.
