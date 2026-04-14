@@ -131,7 +131,7 @@ func RecordAssistantReply(flowCtx context.Context, ctx *core.ExecutionContext, c
 	//   itself) — prevents infinite cascading loops
 	// - This is a commitment-triggered execution — prevents the
 	//   follow-up reply from creating duplicate commitments
-	if !ctx.SystemFlow && ctx.TriggerSource != "commitment" {
+	if !ctx.SystemFlow && ctx.TriggerSource != "commitment" && ctx.TriggerSource != "pending_action" {
 		dispatchAssistantExtraction(flowCtx, ctx, content)
 	}
 }

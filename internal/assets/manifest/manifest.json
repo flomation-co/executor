@@ -70,7 +70,7 @@
     ]
   },
   "agent/process_extraction": {
-    "hash": "cd6b814cf5f182eda3581c1bf5906f47a1b684771ede3fc1d3ceb0948c5b3110",
+    "hash": "bf920ed45e8855aa2c7c693c3ccb0f934c043fee73cbd356e613f09413f1498e",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Process Extraction Output",
@@ -4622,6 +4622,107 @@
       }
     ]
   },
+  "tools/channel_action": {
+    "hash": "cc672c1255ae188c88f5e22ae975a3bbecfb995f1d1746953023ac1b8cba8688",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Channel Action",
+    "description": "Send a channel-specific action like a typing indicator. Use this before long-running operations to show the user the agent is working.",
+    "website": "https://www.flomation.co",
+    "icon": "message-typing",
+    "date": "14/04/2026",
+    "type": 2,
+    "category": {
+      "name": "Tools",
+      "icon": "wrench",
+      "description": "AI tool implementations for function calling"
+    },
+    "inputs": [
+      {
+        "name": "channel_type",
+        "type": "string",
+        "value": null,
+        "label": "Channel Type",
+        "placeholder": "telegram, slack, etc.",
+        "required": true,
+        "options": [
+          {
+            "name": "Telegram",
+            "value": "telegram"
+          },
+          {
+            "name": "Slack",
+            "value": "slack"
+          }
+        ]
+      },
+      {
+        "name": "action",
+        "type": "string",
+        "value": null,
+        "label": "Action",
+        "placeholder": "typing",
+        "required": true,
+        "options": [
+          {
+            "name": "Typing",
+            "value": "typing"
+          },
+          {
+            "name": "Upload Photo",
+            "value": "upload_photo"
+          },
+          {
+            "name": "Upload Document",
+            "value": "upload_document"
+          },
+          {
+            "name": "Record Video",
+            "value": "record_video"
+          },
+          {
+            "name": "Record Voice",
+            "value": "record_voice"
+          },
+          {
+            "name": "Find Location",
+            "value": "find_location"
+          }
+        ]
+      },
+      {
+        "name": "chat_id",
+        "type": "string",
+        "value": null,
+        "label": "Chat ID",
+        "placeholder": "Target chat/channel ID",
+        "required": true
+      },
+      {
+        "name": "agent_id",
+        "type": "string",
+        "value": null,
+        "label": "Agent ID",
+        "placeholder": ""
+      }
+    ],
+    "outputs": [
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "message",
+        "type": "string",
+        "value": null,
+        "label": "Result message",
+        "placeholder": ""
+      }
+    ]
+  },
   "tools/email_draft": {
     "hash": "a08ac1e928935988a73414bf9fe8a6737fec28001459bf31796d50f7561400d9",
     "author": "Andy Esser",
@@ -4907,7 +5008,7 @@
     ]
   },
   "tools/email_send": {
-    "hash": "1476d7ad6eb8f55b57b430708b126eeba51c0ed5b109f63834014b533e52db78",
+    "hash": "1ff6aa3c671647604aa86bb28ed615752b8ddbd16e54ed7bd7df907374922d9d",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Email Send",
