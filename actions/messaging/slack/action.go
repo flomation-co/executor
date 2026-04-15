@@ -6,15 +6,17 @@ import (
 	"fmt"
 	"io"
 	"net/http"
+	"strings"
 
 	core "flomation.app/automate/executor"
+	log "github.com/sirupsen/logrus"
 )
 
 const (
 	Author       = "Andy Esser"
 	Organisation = "Flomation"
 	Name         = "Send Slack Message"
-	Description  = "Send a message to a Slack channel via the Bot API"
+	Description  = "Send a message to a Slack channel via the Bot API with mrkdwn formatting and optional Block Kit layouts"
 	Website      = "https://www.flomation.co"
 	Icon         = "hashtag"
 	Date         = "03/04/2026"
@@ -42,7 +44,7 @@ var Inputs = [...]core.Connection{
 		Name:        "message",
 		Type:        core.ConnectionTypeText,
 		Label:       "Message",
-		Placeholder: "Hello from Flomation!",
+		Placeholder: "Hello from Flomation! Use *bold*, _italic_, `code`",
 		Required:    true,
 	},
 	{
@@ -50,6 +52,23 @@ var Inputs = [...]core.Connection{
 		Type:        core.ConnectionTypeString,
 		Label:       "Thread ID",
 		Placeholder: "${thread_id}",
+	},
+	{
+		Name:        "blocks",
+		Type:        core.ConnectionTypeText,
+		Label:       "Block Kit JSON",
+		Placeholder: `[{"type":"section","text":{"type":"mrkdwn","text":"*Rich* message"}}]`,
+	},
+	{
+		Name:        "attachments",
+		Type:        core.ConnectionTypeText,
+		Label:       "Attachments JSON",
+		Placeholder: `[{"color":"#36a64f","text":"Attachment text"}]`,
+	},
+	{
+		Name:        "unfurl_links",
+		Type:        core.ConnectionTypeBoolean,
+		Label:       "Unfurl Links",
 	},
 }
 
@@ -93,12 +112,50 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 		threadTS = *threadConn.String()
 	}
 
+	// Build the payload with mrkdwn enabled by default.
 	payload := map[string]interface{}{
 		"channel": channelID,
 		"text":    message,
+		"mrkdwn":  true,
 	}
 	if threadTS != "" {
 		payload["thread_ts"] = threadTS
+	}
+
+	// Block Kit: parse and include blocks array if provided.
+	if blocksConn := core.FindConnection("blocks", inputs); blocksConn != nil && blocksConn.String() != nil {
+		blocksJSON := strings.TrimSpace(*blocksConn.String())
+		if blocksJSON != "" {
+			var blocks []interface{}
+			if err := json.Unmarshal([]byte(blocksJSON), &blocks); err != nil {
+				log.WithFields(log.Fields{
+					"error": err,
+					"raw":   blocksJSON[:min(len(blocksJSON), 100)],
+				}).Warn("failed to parse blocks JSON — sending as plain text")
+			} else {
+				payload["blocks"] = blocks
+			}
+		}
+	}
+
+	// Attachments: secondary content below the main message.
+	if attachConn := core.FindConnection("attachments", inputs); attachConn != nil && attachConn.String() != nil {
+		attachJSON := strings.TrimSpace(*attachConn.String())
+		if attachJSON != "" {
+			var attachments []interface{}
+			if err := json.Unmarshal([]byte(attachJSON), &attachments); err != nil {
+				log.WithFields(log.Fields{
+					"error": err,
+				}).Warn("failed to parse attachments JSON — skipping")
+			} else {
+				payload["attachments"] = attachments
+			}
+		}
+	}
+
+	// Unfurl links control.
+	if unfurlConn := core.FindConnection("unfurl_links", inputs); unfurlConn != nil && unfurlConn.Boolean() != nil {
+		payload["unfurl_links"] = *unfurlConn.Boolean()
 	}
 
 	body, err := json.Marshal(payload)

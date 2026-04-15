@@ -87,6 +87,7 @@ import (
 	tools_linear_list_teams "flomation.app/automate/executor/actions/tools/linear_list_teams"
 	tools_linear_search_issues "flomation.app/automate/executor/actions/tools/linear_search_issues"
 	tools_linear_update_issue "flomation.app/automate/executor/actions/tools/linear_update_issue"
+	tools_slack_rich_message "flomation.app/automate/executor/actions/tools/slack_rich_message"
 	tools_web_fetch "flomation.app/automate/executor/actions/tools/web_fetch"
 	tools_web_search "flomation.app/automate/executor/actions/tools/web_search"
 	trigger_email "flomation.app/automate/executor/actions/trigger/email"
@@ -185,6 +186,7 @@ var Actions = map[string]core.Action{
 	"tools/linear_list_teams":    tools_linear_list_teams.Execute,
 	"tools/linear_search_issues": tools_linear_search_issues.Execute,
 	"tools/linear_update_issue":  tools_linear_update_issue.Execute,
+	"tools/slack_rich_message":   tools_slack_rich_message.Execute,
 	"tools/web_fetch":            tools_web_fetch.Execute,
 	"tools/web_search":           tools_web_search.Execute,
 	"trigger/email":              trigger_email.Execute,
