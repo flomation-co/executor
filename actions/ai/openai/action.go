@@ -349,6 +349,12 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	}
 
 	if shouldRespond && content != "" {
+		// Record any accumulated tool exchanges before the final reply
+		// so the conversation history includes what tools were called.
+		if exchanges := extractToolExchanges(flow); len(exchanges) > 0 {
+			ai_common.RecordToolExchange(flow.GoContext(), flow.GetContext(), exchanges)
+			toolCallsCount = len(exchanges)
+		}
 		ai_common.RecordAssistantReply(flow.GoContext(), flow.GetContext(), content)
 	}
 
@@ -363,4 +369,39 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 		"success":           true,
 		"error":             "",
 	}, nil
+}
+
+// extractToolExchanges reads the accumulated tool exchanges from the
+// flow variable set by the engine's tool loop. Returns nil if no tools
+// were called in this turn.
+func extractToolExchanges(flow *core.Flow) []ai_common.ToolExchange {
+	raw, ok := flow.GetVariable(core.ToolExchangesKey)
+	if !ok || raw == nil {
+		return nil
+	}
+	arr, ok := raw.([]map[string]interface{})
+	if !ok || len(arr) == 0 {
+		return nil
+	}
+	exchanges := make([]ai_common.ToolExchange, 0, len(arr))
+	for _, m := range arr {
+		ex := ai_common.ToolExchange{}
+		if v, ok := m["tool_use_id"].(string); ok {
+			ex.ToolUseID = v
+		}
+		if v, ok := m["name"].(string); ok {
+			ex.Name = v
+		}
+		if v, ok := m["input"].(map[string]interface{}); ok {
+			ex.Input = v
+		}
+		if v, ok := m["result"].(string); ok {
+			ex.Result = v
+		}
+		if v, ok := m["is_error"].(bool); ok {
+			ex.IsError = v
+		}
+		exchanges = append(exchanges, ex)
+	}
+	return exchanges
 }

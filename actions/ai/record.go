@@ -136,6 +136,122 @@ func RecordAssistantReply(flowCtx context.Context, ctx *core.ExecutionContext, c
 	}
 }
 
+// ToolExchange represents a single tool invocation within an AI turn:
+// the request the model made and the result it received.
+type ToolExchange struct {
+	ToolUseID string                 `json:"tool_use_id"`
+	Name      string                 `json:"name"`
+	Input     map[string]interface{} `json:"input,omitempty"`
+	Result    string                 `json:"result"`
+	IsError   bool                   `json:"is_error,omitempty"`
+}
+
+// RecordToolExchange stores the intermediate tool_use and tool_result
+// messages from a completed AI turn. This fills the gap that caused the
+// "context loss" bug: without these records, the next turn's conversation
+// history only contained the user's text and the assistant's text — the
+// model had no memory of which tools it called or what they returned.
+//
+// Each exchange produces two agent_message rows:
+//   - direction=tool_use  — what the model asked to call (name + input)
+//   - direction=tool_result — what came back (result text)
+//
+// The content field stores a human-readable summary; the metadata JSONB
+// field stores the structured data so the history normaliser in Launch
+// can reconstruct proper Anthropic/OpenAI tool message formats.
+//
+// Same fire-and-forget contract as RecordAssistantReply.
+func RecordToolExchange(flowCtx context.Context, ctx *core.ExecutionContext, exchanges []ToolExchange) {
+	if ctx == nil || ctx.AgentID == "" || ctx.APIURL == "" || ctx.ConversationID == "" || len(exchanges) == 0 {
+		return
+	}
+
+	client := &http.Client{Timeout: recordTimeout}
+	apiEndpoint := fmt.Sprintf("%s/api/v1/internal/conversation/%s/message?agent_id=%s",
+		ctx.APIURL, ctx.ConversationID, ctx.AgentID)
+
+	for _, ex := range exchanges {
+		// 1. Record the tool_use message (what the model called)
+		inputJSON, _ := json.Marshal(ex.Input)
+		useContent := fmt.Sprintf("[Tool Call] %s(%s)", ex.Name, string(inputJSON))
+		usePayload, err := json.Marshal(map[string]interface{}{
+			"direction":    "tool_use",
+			"channel_type": ctx.ChannelType,
+			"sender":       "agent",
+			"content":      useContent,
+			"metadata": map[string]interface{}{
+				"tool_use_id": ex.ToolUseID,
+				"tool_name":   ex.Name,
+				"tool_input":  ex.Input,
+			},
+		})
+		if err != nil {
+			continue
+		}
+
+		reqCtx, cancel := context.WithTimeout(flowCtx, recordTimeout)
+		req, err := http.NewRequestWithContext(reqCtx, http.MethodPost, apiEndpoint, bytes.NewReader(usePayload)) // #nosec G107 — internal service URL
+		if err != nil {
+			cancel()
+			continue
+		}
+		req.Header.Set("Content-Type", "application/json")
+		if ctx.Token != "" {
+			req.Header.Set("Authorization", "Bearer "+ctx.Token)
+		}
+		resp, err := client.Do(req)
+		if err == nil {
+			_, _ = io.Copy(io.Discard, io.LimitReader(resp.Body, 256))
+			resp.Body.Close()
+		}
+		cancel()
+
+		// 2. Record the tool_result message (what came back)
+		resultContent := ex.Result
+		if len(resultContent) > 2000 {
+			resultContent = resultContent[:2000] + "… [truncated]"
+		}
+		resultPayload, err := json.Marshal(map[string]interface{}{
+			"direction":    "tool_result",
+			"channel_type": ctx.ChannelType,
+			"sender":       "system",
+			"content":      fmt.Sprintf("[Tool Result] %s → %s", ex.Name, resultContent),
+			"metadata": map[string]interface{}{
+				"tool_use_id": ex.ToolUseID,
+				"tool_name":   ex.Name,
+				"is_error":    ex.IsError,
+				"raw_result":  ex.Result,
+			},
+		})
+		if err != nil {
+			continue
+		}
+
+		reqCtx2, cancel2 := context.WithTimeout(flowCtx, recordTimeout)
+		req2, err := http.NewRequestWithContext(reqCtx2, http.MethodPost, apiEndpoint, bytes.NewReader(resultPayload)) // #nosec G107 — internal service URL
+		if err != nil {
+			cancel2()
+			continue
+		}
+		req2.Header.Set("Content-Type", "application/json")
+		if ctx.Token != "" {
+			req2.Header.Set("Authorization", "Bearer "+ctx.Token)
+		}
+		resp2, err := client.Do(req2)
+		if err == nil {
+			_, _ = io.Copy(io.Discard, io.LimitReader(resp2.Body, 256))
+			resp2.Body.Close()
+		}
+		cancel2()
+	}
+
+	log.WithFields(log.Fields{
+		"agent_id":        ctx.AgentID,
+		"conversation_id": ctx.ConversationID,
+		"exchanges":       len(exchanges),
+	}).Debug("recorded tool exchanges in conversation history")
+}
+
 // dispatchAssistantExtraction calls POST /internal/agent/:id/extract
 // with role=assistant and the assistant's reply content. This is the
 // sibling of Launch's dispatchExtraction for inbound turns; together
