@@ -1714,11 +1714,21 @@ func (f *Flow) injectToolDefinitions(aiNode *Node, toolNodes []*Node, actions ma
 		}
 		toolName = sanitiseToolName(toolName)
 
-		// Description: prefer the manifest's full description, fall back
-		// to config.Name (display name), then the tool name itself.
+		// Description: prefer manifest description (truncated to save tokens),
+		// fall back to config.Name, then the tool name itself.
 		description := toolName
 		if desc, ok := getManifestDescriptions()[toolNode.Data.Label]; ok && desc != "" {
 			description = desc
+			// Truncate long descriptions to reduce prompt token usage.
+			// The AI can infer parameter usage from the schema.
+			if len(description) > 120 {
+				// Cut at last space before limit to avoid mid-word truncation.
+				cut := 120
+				if idx := strings.LastIndex(description[:cut], " "); idx > 60 {
+					cut = idx
+				}
+				description = description[:cut]
+			}
 		} else if toolNode.Data.Config.Name != nil && *toolNode.Data.Config.Name != "" {
 			description = *toolNode.Data.Config.Name
 		}
@@ -1731,9 +1741,10 @@ func (f *Flow) injectToolDefinitions(aiNode *Node, toolNodes []*Node, actions ma
 				continue
 			}
 			// Skip inputs that have a value already set (configured
-			// by the flow author, not provided by the AI)
+			// by the flow author, not provided by the AI). This includes
+			// ${...} variable references which resolve at execution time.
 			if inp.Value != nil {
-				if s, ok := inp.Value.(string); ok && s != "" && !strings.HasPrefix(s, "${") {
+				if s, ok := inp.Value.(string); ok && s != "" {
 					continue
 				}
 			}
