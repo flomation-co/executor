@@ -23,7 +23,7 @@ const (
 	Name         = "Channel Action"
 	Description  = "Send a channel-specific action like a typing indicator. Use this before long-running operations to show the user the agent is working."
 	Website      = "https://www.flomation.co"
-	Icon         = "channel-action"
+	Icon         = "hand"
 	Date         = "14/04/2026"
 	Type         = core.ActionTypeAction
 )
