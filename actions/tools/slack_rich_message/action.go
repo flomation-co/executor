@@ -25,7 +25,8 @@ const (
 	Name         = "Slack Rich Message"
 	Description  = "Send a rich Slack message with Block Kit layouts. Use this when you need structured formatting: " +
 		"sections with fields, images, buttons, dividers, or context blocks. For simple text replies, " +
-		"use the normal response instead. Blocks use Slack mrkdwn (*bold*, _italic_, ~strike~, `code`)."
+		"use the normal response instead. Blocks use Slack mrkdwn (*bold*, _italic_, ~strike~, `code`). " +
+		"You do NOT need to provide bot_token or channel_id — they are inherited from the conversation context automatically."
 	Website = "https://www.flomation.co"
 	Icon    = "slack"
 	Date    = "15/04/2026"
@@ -36,16 +37,14 @@ const (
 
 var Inputs = [...]core.Connection{
 	{
-		Name:     "bot_token",
-		Type:     core.ConnectionTypeString,
-		Label:    "Slack bot token (xoxb-...)",
-		Required: true,
+		Name:  "bot_token",
+		Type:  core.ConnectionTypeString,
+		Label: "Slack bot token — auto-inherited from flow context, do not provide",
 	},
 	{
-		Name:     "channel_id",
-		Type:     core.ConnectionTypeString,
-		Label:    "Channel or DM ID to send to",
-		Required: true,
+		Name:  "channel_id",
+		Type:  core.ConnectionTypeString,
+		Label: "Channel ID — auto-inherited from flow context, do not provide",
 	},
 	{
 		Name:     "text",
@@ -81,13 +80,44 @@ var Outputs = [...]core.Connection{
 }
 
 func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[string]interface{}, error) {
+	// Auto-inherit bot_token and channel_id from the flow context if not
+	// provided by the AI. This means agents never need to ask the user for
+	// these values — they come from the orchestrator flow's trigger data.
 	botToken := requireString("bot_token", inputs)
 	if botToken == "" {
-		return nil, fmt.Errorf("bot_token is required")
+		// Fall back to the Slack bot token from agent channel config.
+		// The orchestrator flow pre-sets this on the tool node.
+		ctx := flow.GetContext()
+		if ctx != nil {
+			// Check flow variables set by the orchestrator.
+			if v, ok := flow.GetVariable("bot_token"); ok {
+				if s, ok := v.(string); ok && s != "" {
+					botToken = s
+				}
+			}
+		}
 	}
+	if botToken == "" {
+		return map[string]interface{}{
+			"tool_result": "Bot token not available — ensure the Slack bot token is configured on this tool node in the flow editor.",
+			"success":     false,
+			"error":       "bot_token not configured",
+		}, nil
+	}
+
 	channelID := requireString("channel_id", inputs)
 	if channelID == "" {
-		return nil, fmt.Errorf("channel_id is required")
+		// Fall back to flow context channel_id (set by trigger data).
+		if ctx := flow.GetContext(); ctx != nil && ctx.ChannelID != "" {
+			channelID = ctx.ChannelID
+		}
+	}
+	if channelID == "" {
+		return map[string]interface{}{
+			"tool_result": "Channel ID not available — this tool auto-inherits the channel from the conversation context.",
+			"success":     false,
+			"error":       "channel_id not available",
+		}, nil
 	}
 	text := requireString("text", inputs)
 	if text == "" {
@@ -126,7 +156,14 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 		"blocks":  blocks,
 	}
 
-	if threadTS := optionalString("thread_ts", inputs); threadTS != "" {
+	threadTS := optionalString("thread_ts", inputs)
+	if threadTS == "" {
+		// Fall back to flow context thread_id.
+		if ctx := flow.GetContext(); ctx != nil && ctx.ThreadID != "" {
+			threadTS = ctx.ThreadID
+		}
+	}
+	if threadTS != "" {
 		payload["thread_ts"] = threadTS
 	}
 
