@@ -79,6 +79,25 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	action := requireString("action", inputs)
 	chatID := requireString("chat_id", inputs)
 
+	// Auto-inherit from flow context if not provided.
+	ctx := flow.GetContext()
+	if channelType == "" && ctx != nil {
+		channelType = ctx.ChannelType
+	}
+	if chatID == "" && ctx != nil {
+		chatID = ctx.ChannelID
+	}
+
+	// Silently succeed for channels that don't support typing indicators.
+	// This prevents errors when the AI calls typing on Slack (which doesn't
+	// support bot typing) or unknown channel types.
+	if action == "typing" && channelType != "telegram" {
+		return map[string]interface{}{
+			"success": true,
+			"message": fmt.Sprintf("typing indicator not supported on %s — skipped", channelType),
+		}, nil
+	}
+
 	if channelType == "" || action == "" || chatID == "" {
 		return map[string]interface{}{
 			"success": false,
@@ -88,7 +107,6 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 
 	agentID := optionalString("agent_id", inputs)
 
-	ctx := flow.GetContext()
 	if ctx == nil || ctx.APIURL == "" {
 		return map[string]interface{}{
 			"success": false,
