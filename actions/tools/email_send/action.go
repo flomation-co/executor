@@ -133,8 +133,19 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	if bcc != "" {
 		msg.WriteString(fmt.Sprintf("Bcc: %s\r\n", bcc))
 	}
-	// RFC 2047 encode subject for non-ASCII safety.
-	encodedSubject := mime.QEncoding.Encode("UTF-8", subject)
+	// Replace common non-ASCII characters that cause encoding issues
+	// in email subjects. The AI often uses em/en dashes and smart quotes.
+	subjectClean := strings.NewReplacer(
+		"\u2014", "-", // em dash → hyphen
+		"\u2013", "-", // en dash → hyphen
+		"\u2018", "'", // left single quote
+		"\u2019", "'", // right single quote
+		"\u201c", "\"", // left double quote
+		"\u201d", "\"", // right double quote
+		"\u2026", "...", // ellipsis
+	).Replace(subject)
+	// RFC 2047 encode subject for any remaining non-ASCII.
+	encodedSubject := mime.QEncoding.Encode("UTF-8", subjectClean)
 	msg.WriteString(fmt.Sprintf("Subject: %s\r\n", encodedSubject))
 	msg.WriteString("Content-Type: text/plain; charset=\"UTF-8\"\r\n")
 	msg.WriteString("\r\n")
