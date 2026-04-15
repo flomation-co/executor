@@ -49,6 +49,13 @@ import (
 	git_status "flomation.app/automate/executor/actions/git/status"
 	git_tag "flomation.app/automate/executor/actions/git/tag"
 	http_request "flomation.app/automate/executor/actions/http/request"
+	linear_add_comment "flomation.app/automate/executor/actions/linear/add_comment"
+	linear_create_issue "flomation.app/automate/executor/actions/linear/create_issue"
+	linear_get_issue "flomation.app/automate/executor/actions/linear/get_issue"
+	linear_list_issues "flomation.app/automate/executor/actions/linear/list_issues"
+	linear_list_teams "flomation.app/automate/executor/actions/linear/list_teams"
+	linear_search_issues "flomation.app/automate/executor/actions/linear/search_issues"
+	linear_update_issue "flomation.app/automate/executor/actions/linear/update_issue"
 	messaging_email "flomation.app/automate/executor/actions/messaging/email"
 	messaging_slack "flomation.app/automate/executor/actions/messaging/slack"
 	messaging_telegram "flomation.app/automate/executor/actions/messaging/telegram"
@@ -133,6 +140,13 @@ var Actions = map[string]core.Action{
 	"git/status":                git_status.Execute,
 	"git/tag":                   git_tag.Execute,
 	"http/request":              http_request.Execute,
+	"linear/add_comment":        linear_add_comment.Execute,
+	"linear/create_issue":       linear_create_issue.Execute,
+	"linear/get_issue":          linear_get_issue.Execute,
+	"linear/list_issues":        linear_list_issues.Execute,
+	"linear/list_teams":         linear_list_teams.Execute,
+	"linear/search_issues":      linear_search_issues.Execute,
+	"linear/update_issue":       linear_update_issue.Execute,
 	"messaging/email":           messaging_email.Execute,
 	"messaging/slack":           messaging_slack.Execute,
 	"messaging/telegram":        messaging_telegram.Execute,
