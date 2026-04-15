@@ -26,7 +26,8 @@ const (
 	Description  = "Send a rich Slack message with Block Kit layouts. Use this when you need structured formatting: " +
 		"sections with fields, images, buttons, dividers, or context blocks. For simple text replies, " +
 		"use the normal response instead. Blocks use Slack mrkdwn (*bold*, _italic_, ~strike~, `code`). " +
-		"You do NOT need to provide bot_token or channel_id — they are inherited from the conversation context automatically."
+		"IMPORTANT: bot_token, channel_id, and thread_ts are pre-configured — do NOT provide them and do NOT ask the user for them. " +
+		"You only need to provide: text (fallback) and blocks (the Block Kit JSON array)."
 	Website = "https://www.flomation.co"
 	Icon    = "slack"
 	Date    = "15/04/2026"
@@ -85,15 +86,22 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	// these values — they come from the orchestrator flow's trigger data.
 	botToken := requireString("bot_token", inputs)
 	if botToken == "" {
-		// Fall back to the Slack bot token from agent channel config.
-		// The orchestrator flow pre-sets this on the tool node.
-		ctx := flow.GetContext()
-		if ctx != nil {
-			// Check flow variables set by the orchestrator.
-			if v, ok := flow.GetVariable("bot_token"); ok {
+		// Check flow variables (set by trigger data or orchestrator).
+		for _, key := range []string{"bot_token", "slack_bot_token"} {
+			if v, ok := flow.GetVariable(key); ok {
 				if s, ok := v.(string); ok && s != "" {
 					botToken = s
+					break
 				}
+			}
+		}
+	}
+	if botToken == "" {
+		// Check trigger data — the entire trigger payload is available
+		// as flow variables via ${trigger.key} syntax.
+		if v, ok := flow.GetVariable("trigger.bot_token"); ok {
+			if s, ok := v.(string); ok && s != "" {
+				botToken = s
 			}
 		}
 	}
