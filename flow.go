@@ -1308,8 +1308,13 @@ func (f *Flow) executeNodeChildren(actions map[string]Action, node *Node, output
 							// the AI shouldn't pass them — but some models
 							// hallucinate parameters and pass empty strings,
 							// wiping out legitimate pre-set values.
+							//
+							// This now also protects ${...} variable references.
+							// The variable will be resolved during normal input
+							// processing; the AI's value would overwrite the
+							// reference before resolution could occur.
 							if inp.Value != nil {
-								if s, ok := inp.Value.(string); ok && s != "" && !strings.HasPrefix(s, "${") {
+								if s, ok := inp.Value.(string); ok && s != "" {
 									continue
 								}
 							}
