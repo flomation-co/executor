@@ -19,7 +19,7 @@ const (
 	Author       = "Andy Esser"
 	Organisation = "Flomation"
 	Name         = "Email Send"
-	Description  = "Send an email from a connected Gmail account. Specify recipients, subject, body, and optionally CC/BCC. The AI must call this tool to actually send — never claim an email was sent without calling it."
+	Description  = "Send an email. Default sends from agent's account. Set account to user's email to send on their behalf."
 	Website      = "https://www.flomation.co"
 	Icon         = "envelope"
 	Date         = "08/04/2026"
