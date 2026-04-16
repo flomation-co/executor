@@ -62,11 +62,12 @@ func TestInputsConfiguration(t *testing.T) {
 func TestOutputsConfiguration(t *testing.T) {
 	RegisterTestingT(t)
 
-	Expect(len(Outputs)).To(Equal(2))
-	Expect(Outputs[0].Name).To(Equal("results"))
-	Expect(Outputs[0].Type).To(Equal(core.ConnectionTypeObject))
-	Expect(Outputs[1].Name).To(Equal("count"))
-	Expect(Outputs[1].Type).To(Equal(core.ConnectionTypeInteger))
+	Expect(len(Outputs)).To(Equal(3))
+	Expect(Outputs[0].Name).To(Equal("tool_result"))
+	Expect(Outputs[1].Name).To(Equal("results"))
+	Expect(Outputs[1].Type).To(Equal(core.ConnectionTypeObject))
+	Expect(Outputs[2].Name).To(Equal("count"))
+	Expect(Outputs[2].Type).To(Equal(core.ConnectionTypeInteger))
 }
 
 func TestParseDynamoDBKey(t *testing.T) {

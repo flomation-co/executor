@@ -33,6 +33,7 @@ var Inputs = [...]core.Connection{
 }
 
 var Outputs = [...]core.Connection{
+	{Name: "tool_result", Type: core.ConnectionTypeString, Label: "Result summary"},
 	{Name: "content", Type: core.ConnectionTypeString},
 	{Name: "file_name", Type: core.ConnectionTypeString},
 	{Name: "file_size", Type: core.ConnectionTypeInteger},

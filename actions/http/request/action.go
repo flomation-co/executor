@@ -68,6 +68,7 @@ var Inputs = [...]core.Connection{
 }
 
 var Outputs = [...]core.Connection{
+	{Name: "tool_result", Type: core.ConnectionTypeString, Label: "Result summary"},
 	{Name: "status_code", Type: core.ConnectionTypeInteger},
 	{Name: "response_body", Type: core.ConnectionTypeString},
 	{Name: "response_headers", Type: core.ConnectionTypeString},

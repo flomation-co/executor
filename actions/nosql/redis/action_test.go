@@ -57,11 +57,11 @@ func TestInputsConfiguration(t *testing.T) {
 func TestOutputsConfiguration(t *testing.T) {
 	RegisterTestingT(t)
 
-	Expect(len(Outputs)).To(Equal(2))
-	Expect(Outputs[0].Name).To(Equal("result"))
-	Expect(Outputs[0].Type).To(Equal(core.ConnectionTypeObject))
-	Expect(Outputs[1].Name).To(Equal("success"))
-	Expect(Outputs[1].Type).To(Equal(core.ConnectionTypeBoolean))
+	Expect(len(Outputs)).To(Equal(3))
+	Expect(Outputs[1].Name).To(Equal("result"))
+	Expect(Outputs[1].Type).To(Equal(core.ConnectionTypeObject))
+	Expect(Outputs[2].Name).To(Equal("success"))
+	Expect(Outputs[2].Type).To(Equal(core.ConnectionTypeBoolean))
 }
 
 func TestUnsupportedCommand(t *testing.T) {

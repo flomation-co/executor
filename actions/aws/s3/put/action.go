@@ -60,6 +60,7 @@ var Inputs = [...]core.Connection{
 }
 
 var Outputs = [...]core.Connection{
+	{Name: "tool_result", Type: core.ConnectionTypeString, Label: "Result summary"},
 	core.Connection{
 		Name:        "bucket",
 		Type:        core.ConnectionTypeString,
