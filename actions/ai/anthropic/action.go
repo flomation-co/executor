@@ -220,17 +220,31 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 					history, systemPromptStr, prompt,
 					int(maxTokens), ai_common.ModelContextWindow(model),
 				)
-				for _, m := range history {
+				for i, m := range history {
 					if m.Role == "" || m.Content == "" {
 						continue
 					}
 					if m.Role != "user" && m.Role != "assistant" {
 						continue
 					}
-					messages = append(messages, map[string]interface{}{
-						"role":    m.Role,
-						"content": m.Content,
-					})
+					msg := map[string]interface{}{
+						"role": m.Role,
+					}
+					// Mark the last history message with cache_control
+					// so the entire history prefix is cached. The new
+					// user prompt (appended below) is the only uncached part.
+					if i == len(history)-1 {
+						msg["content"] = []map[string]interface{}{
+							{
+								"type":          "text",
+								"text":          m.Content,
+								"cache_control": map[string]string{"type": "ephemeral"},
+							},
+						}
+					} else {
+						msg["content"] = m.Content
+					}
+					messages = append(messages, msg)
 				}
 			}
 		}
@@ -246,16 +260,27 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 		"temperature": temperature,
 		"messages":    messages,
 	}
+
+	// System prompt: use structured content blocks with cache_control
+	// so repeated turns with the same system prompt hit the cache.
 	if systemPromptStr != "" {
-		payload["system"] = systemPromptStr
+		payload["system"] = []map[string]interface{}{
+			{
+				"type":          "text",
+				"text":          systemPromptStr,
+				"cache_control": map[string]string{"type": "ephemeral"},
+			},
+		}
 	}
+
+	// Tools: mark the last tool with cache_control so the entire tool
+	// definition block is cached across turns.
 	if len(tools) > 0 {
+		// Add cache_control to the last tool definition.
+		if toolMap, ok := tools[len(tools)-1].(map[string]interface{}); ok {
+			toolMap["cache_control"] = map[string]string{"type": "ephemeral"}
+		}
 		payload["tools"] = tools
-		log.WithFields(log.Fields{
-			"tool_count": len(tools),
-		}).Info("sending tools to Anthropic API")
-	} else {
-		log.Info("no tools to send to Anthropic API")
 	}
 
 	body, err := json.Marshal(payload)
