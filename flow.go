@@ -1735,6 +1735,9 @@ func (f *Flow) injectToolDefinitions(aiNode *Node, toolNodes []*Node, actions ma
 	credentialInputs := map[string]bool{
 		"api_key": true, "bot_token": true, "signing_secret": true,
 		"token": true, "password": true, "secret": true,
+		"secret_key": true, "access_key": true,
+		"agent_id": true, "channel_type": true, "channel_id": true,
+		"chat_id": true, "thread_id": true, "thread_ts": true,
 		"max_length": true, "count": true, "parse_mode": true,
 	}
 
