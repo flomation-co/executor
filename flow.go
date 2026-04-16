@@ -1709,7 +1709,7 @@ func (f *Flow) sendTypingIndicator() {
 		ctx.APIURL, ctx.AgentID)
 
 	go func() {
-		client := &http.Client{Timeout: 3 * time.Second}
+		client := &http.Client{Timeout: 2 * time.Second}
 		req, err := http.NewRequest(http.MethodPost, endpoint, bytes.NewReader(payload)) // #nosec G107
 		if err != nil {
 			return
