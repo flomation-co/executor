@@ -52,7 +52,7 @@ var Inputs = [...]core.Connection{
 	{
 		Name:        "account",
 		Type:        core.ConnectionTypeString,
-		Label:       "Account filter (email or label, empty for all)",
+		Label:       "Filter to a specific account email. Leave empty to search ALL user accounts. Never default to the agent's own email.",
 	},
 }
 
