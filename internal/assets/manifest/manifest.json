@@ -70,7 +70,7 @@
     ]
   },
   "agent/process_extraction": {
-    "hash": "4bf62616376485ab05e329bc8232264ecf73afd082bd4634c3607aba743ac421",
+    "hash": "3457b39c9cbd2baf6e0ee67e952cc74157c2ee1ab6f00e880361c89711184160",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Process Extraction Output",

@@ -20,7 +20,13 @@ const (
 )
 
 var Inputs = [...]core.Connection{
-	linear.AuthInputs[0],
+	{
+		Name:        "api_key",
+		Type:        core.ConnectionTypeString,
+		Label:       "Linear API Key",
+		Placeholder: "lin_api_...",
+		Required:    true,
+	},
 	{
 		Name:        "team_id",
 		Type:        core.ConnectionTypeString,
