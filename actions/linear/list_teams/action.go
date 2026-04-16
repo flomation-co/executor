@@ -14,7 +14,7 @@ const (
 	Name         = "List Teams"
 	Description  = "List all teams in the Linear workspace with their workflow states"
 	Website      = "https://www.flomation.co"
-	Icon         = "users"
+	Icon         = "linear"
 	Date         = "15/04/2026"
 	Type         = core.ActionTypeAction
 )

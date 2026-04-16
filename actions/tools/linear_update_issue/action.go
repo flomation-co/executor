@@ -16,7 +16,7 @@ const (
 	Name         = "Linear Update Issue"
 	Description  = "Update an existing Linear issue. Pass the issue UUID and any fields to change. Only provided fields are updated; omitted fields are left unchanged."
 	Website      = "https://www.flomation.co"
-	Icon         = "pencil"
+	Icon    = "linear"
 	Date         = "15/04/2026"
 	Type         = core.ActionTypeAction
 )

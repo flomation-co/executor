@@ -16,7 +16,7 @@ const (
 	Name         = "Linear Add Comment"
 	Description  = "Add a comment to an existing Linear issue. Provide the issue UUID and a Markdown comment body."
 	Website      = "https://www.flomation.co"
-	Icon         = "comment"
+	Icon    = "linear"
 	Date         = "15/04/2026"
 	Type         = core.ActionTypeAction
 )

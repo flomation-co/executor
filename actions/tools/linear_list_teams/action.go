@@ -17,7 +17,7 @@ const (
 	Name         = "Linear List Teams"
 	Description  = "List all teams in the Linear workspace. Returns team IDs, names, workflow states, labels, and members. Call this first to get team_id for creating issues."
 	Website      = "https://www.flomation.co"
-	Icon         = "users"
+	Icon    = "linear"
 	Date         = "15/04/2026"
 	Type         = core.ActionTypeAction
 )

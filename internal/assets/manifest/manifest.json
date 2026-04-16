@@ -70,7 +70,7 @@
     ]
   },
   "agent/process_extraction": {
-    "hash": "bf920ed45e8855aa2c7c693c3ccb0f934c043fee73cbd356e613f09413f1498e",
+    "hash": "4bf62616376485ab05e329bc8232264ecf73afd082bd4634c3607aba743ac421",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Process Extraction Output",
@@ -573,7 +573,7 @@
     ]
   },
   "ai/anthropic": {
-    "hash": "26207b57cf383c3dbd1b104f044c4e2bc8db36a060075bb2fcb876cdcebbd813",
+    "hash": "4c66d7401da135c2e0c1cb8e2df3366a2451b41dfeee9faec96930e792cddc15",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Anthropic Prompt",
@@ -728,7 +728,7 @@
     ]
   },
   "ai/openai": {
-    "hash": "c108e9ea37bbdf6348ad15e9b1ab37f01f2b6025da6074085f8054041a9c32ed",
+    "hash": "6f2de4f319aff2ab9593a9e04e61949d103e1700ced05fb23408c8c2e3329a49",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "OpenAI Prompt",
@@ -3062,6 +3062,719 @@
       }
     ]
   },
+  "linear/add_comment": {
+    "hash": "8b015ea4dc4500050753aea625414ad2e42007d35e37890493b18911f93c9779",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Add Comment",
+    "description": "Add a comment to an existing Linear issue",
+    "website": "https://www.flomation.co",
+    "icon": "comment",
+    "date": "15/04/2026",
+    "type": 2,
+    "category": {
+      "name": "Linear",
+      "icon": "clipboard-list",
+      "description": "Manage issues, projects, and teams in Linear"
+    },
+    "inputs": [
+      {
+        "name": "issue_id",
+        "type": "string",
+        "value": null,
+        "label": "Issue ID",
+        "placeholder": "Issue UUID",
+        "required": true
+      },
+      {
+        "name": "body",
+        "type": "text",
+        "value": null,
+        "label": "Comment Body",
+        "placeholder": "Markdown comment text",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "comment_id",
+        "type": "string",
+        "value": null,
+        "label": "Comment ID",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "linear/create_issue": {
+    "hash": "2b6e7958388dd7b1def4fcf3626622d797675c8a29155cb9c414efa4329e99e7",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Create Issue",
+    "description": "Create a new issue in Linear with title, description, priority, assignee, and labels",
+    "website": "https://www.flomation.co",
+    "icon": "plus-circle",
+    "date": "15/04/2026",
+    "type": 2,
+    "category": {
+      "name": "Linear",
+      "icon": "clipboard-list",
+      "description": "Manage issues, projects, and teams in Linear"
+    },
+    "inputs": [
+      {
+        "name": "team_id",
+        "type": "string",
+        "value": null,
+        "label": "Team ID",
+        "placeholder": "The team UUID or key (e.g. ENG)",
+        "required": true
+      },
+      {
+        "name": "title",
+        "type": "string",
+        "value": null,
+        "label": "Title",
+        "placeholder": "Issue title",
+        "required": true
+      },
+      {
+        "name": "description",
+        "type": "text",
+        "value": null,
+        "label": "Description",
+        "placeholder": "Markdown description (optional)"
+      },
+      {
+        "name": "priority",
+        "type": "string",
+        "value": null,
+        "label": "Priority",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "No Priority",
+            "value": "0"
+          },
+          {
+            "name": "Urgent",
+            "value": "1"
+          },
+          {
+            "name": "High",
+            "value": "2"
+          },
+          {
+            "name": "Medium",
+            "value": "3"
+          },
+          {
+            "name": "Low",
+            "value": "4"
+          }
+        ]
+      },
+      {
+        "name": "assignee_id",
+        "type": "string",
+        "value": null,
+        "label": "Assignee ID",
+        "placeholder": "User UUID (optional)"
+      },
+      {
+        "name": "state_id",
+        "type": "string",
+        "value": null,
+        "label": "State ID",
+        "placeholder": "Workflow state UUID (optional, defaults to team backlog)"
+      },
+      {
+        "name": "label_ids",
+        "type": "string",
+        "value": null,
+        "label": "Label IDs",
+        "placeholder": "Comma-separated label UUIDs (optional)"
+      },
+      {
+        "name": "project_id",
+        "type": "string",
+        "value": null,
+        "label": "Project ID",
+        "placeholder": "Project UUID (optional)"
+      },
+      {
+        "name": "estimate",
+        "type": "integer",
+        "value": null,
+        "label": "Estimate",
+        "placeholder": "Story points (optional)"
+      },
+      {
+        "name": "due_date",
+        "type": "string",
+        "value": null,
+        "label": "Due Date",
+        "placeholder": "YYYY-MM-DD (optional)"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "issue_id",
+        "type": "string",
+        "value": null,
+        "label": "Issue ID",
+        "placeholder": ""
+      },
+      {
+        "name": "identifier",
+        "type": "string",
+        "value": null,
+        "label": "Identifier",
+        "placeholder": ""
+      },
+      {
+        "name": "url",
+        "type": "string",
+        "value": null,
+        "label": "URL",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "linear/get_issue": {
+    "hash": "3b6f6a48a2c3094e5b9951b9772ee1024ee57ed891e48d159bb2ffcfd9f7a7a6",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Get Issue",
+    "description": "Fetch a single Linear issue by its ID or identifier (e.g. ENG-123)",
+    "website": "https://www.flomation.co",
+    "icon": "file-lines",
+    "date": "15/04/2026",
+    "type": 2,
+    "category": {
+      "name": "Linear",
+      "icon": "clipboard-list",
+      "description": "Manage issues, projects, and teams in Linear"
+    },
+    "inputs": [
+      {
+        "name": "issue_id",
+        "type": "string",
+        "value": null,
+        "label": "Issue ID or Identifier",
+        "placeholder": "UUID or ENG-123",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "issue_id",
+        "type": "string",
+        "value": null,
+        "label": "Issue ID",
+        "placeholder": ""
+      },
+      {
+        "name": "identifier",
+        "type": "string",
+        "value": null,
+        "label": "Identifier",
+        "placeholder": ""
+      },
+      {
+        "name": "title",
+        "type": "string",
+        "value": null,
+        "label": "Title",
+        "placeholder": ""
+      },
+      {
+        "name": "description",
+        "type": "string",
+        "value": null,
+        "label": "Description",
+        "placeholder": ""
+      },
+      {
+        "name": "state",
+        "type": "string",
+        "value": null,
+        "label": "State",
+        "placeholder": ""
+      },
+      {
+        "name": "priority",
+        "type": "string",
+        "value": null,
+        "label": "Priority",
+        "placeholder": ""
+      },
+      {
+        "name": "assignee",
+        "type": "string",
+        "value": null,
+        "label": "Assignee",
+        "placeholder": ""
+      },
+      {
+        "name": "team",
+        "type": "string",
+        "value": null,
+        "label": "Team",
+        "placeholder": ""
+      },
+      {
+        "name": "url",
+        "type": "string",
+        "value": null,
+        "label": "URL",
+        "placeholder": ""
+      },
+      {
+        "name": "due_date",
+        "type": "string",
+        "value": null,
+        "label": "Due Date",
+        "placeholder": ""
+      },
+      {
+        "name": "created_at",
+        "type": "string",
+        "value": null,
+        "label": "Created At",
+        "placeholder": ""
+      },
+      {
+        "name": "updated_at",
+        "type": "string",
+        "value": null,
+        "label": "Updated At",
+        "placeholder": ""
+      },
+      {
+        "name": "labels",
+        "type": "string",
+        "value": null,
+        "label": "Labels",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Full Result",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "linear/list_issues": {
+    "hash": "b70a6c745b4c02e0e24290ee57f0c6732d84a66b0e3b66a358fffc23ddc2a6a5",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "List Issues",
+    "description": "List and filter issues in Linear by team, state, assignee, priority, or label",
+    "website": "https://www.flomation.co",
+    "icon": "list",
+    "date": "15/04/2026",
+    "type": 2,
+    "category": {
+      "name": "Linear",
+      "icon": "clipboard-list",
+      "description": "Manage issues, projects, and teams in Linear"
+    },
+    "inputs": [
+      {
+        "name": "team_id",
+        "type": "string",
+        "value": null,
+        "label": "Team ID",
+        "placeholder": "Filter by team UUID (optional)"
+      },
+      {
+        "name": "assignee_id",
+        "type": "string",
+        "value": null,
+        "label": "Assignee ID",
+        "placeholder": "Filter by assignee UUID (optional)"
+      },
+      {
+        "name": "state_name",
+        "type": "string",
+        "value": null,
+        "label": "State Name",
+        "placeholder": "Filter by state name, e.g. In Progress (optional)"
+      },
+      {
+        "name": "priority",
+        "type": "string",
+        "value": null,
+        "label": "Priority",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "Any",
+            "value": ""
+          },
+          {
+            "name": "Urgent",
+            "value": "1"
+          },
+          {
+            "name": "High",
+            "value": "2"
+          },
+          {
+            "name": "Medium",
+            "value": "3"
+          },
+          {
+            "name": "Low",
+            "value": "4"
+          }
+        ]
+      },
+      {
+        "name": "label_name",
+        "type": "string",
+        "value": null,
+        "label": "Label Name",
+        "placeholder": "Filter by label name (optional)"
+      },
+      {
+        "name": "project_id",
+        "type": "string",
+        "value": null,
+        "label": "Project ID",
+        "placeholder": "Filter by project UUID (optional)"
+      },
+      {
+        "name": "limit",
+        "type": "integer",
+        "value": null,
+        "label": "Limit",
+        "placeholder": "50"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "issues",
+        "type": "object",
+        "value": null,
+        "label": "Issues",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Count",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "linear/list_teams": {
+    "hash": "2f07713f4dabe942e80d9e9ef7ce4c0b5ece6ce6e6ce5d80b5cf6e84f9357271",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "List Teams",
+    "description": "List all teams in the Linear workspace with their workflow states",
+    "website": "https://www.flomation.co",
+    "icon": "users",
+    "date": "15/04/2026",
+    "type": 2,
+    "category": {
+      "name": "Linear",
+      "icon": "clipboard-list",
+      "description": "Manage issues, projects, and teams in Linear"
+    },
+    "inputs": null,
+    "outputs": [
+      {
+        "name": "teams",
+        "type": "object",
+        "value": null,
+        "label": "Teams",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Count",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "linear/search_issues": {
+    "hash": "ad92439378c0d69fc35fe4f1a803286a061a6abcc72918271baebcac135b7a13",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Search Issues",
+    "description": "Full-text search across Linear issues by keyword",
+    "website": "https://www.flomation.co",
+    "icon": "magnifying-glass",
+    "date": "15/04/2026",
+    "type": 2,
+    "category": {
+      "name": "Linear",
+      "icon": "clipboard-list",
+      "description": "Manage issues, projects, and teams in Linear"
+    },
+    "inputs": [
+      {
+        "name": "query",
+        "type": "string",
+        "value": null,
+        "label": "Search Query",
+        "placeholder": "Search keywords",
+        "required": true
+      },
+      {
+        "name": "limit",
+        "type": "integer",
+        "value": null,
+        "label": "Limit",
+        "placeholder": "25"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "issues",
+        "type": "object",
+        "value": null,
+        "label": "Issues",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Count",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "linear/update_issue": {
+    "hash": "79c25ea0d5d8ebe2838f6884b8519b822de287408d501786ca201978c5bbc67e",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Update Issue",
+    "description": "Update an existing Linear issue's title, description, status, priority, or assignee",
+    "website": "https://www.flomation.co",
+    "icon": "pencil",
+    "date": "15/04/2026",
+    "type": 2,
+    "category": {
+      "name": "Linear",
+      "icon": "clipboard-list",
+      "description": "Manage issues, projects, and teams in Linear"
+    },
+    "inputs": [
+      {
+        "name": "issue_id",
+        "type": "string",
+        "value": null,
+        "label": "Issue ID",
+        "placeholder": "Issue UUID",
+        "required": true
+      },
+      {
+        "name": "title",
+        "type": "string",
+        "value": null,
+        "label": "Title",
+        "placeholder": "New title (optional)"
+      },
+      {
+        "name": "description",
+        "type": "text",
+        "value": null,
+        "label": "Description",
+        "placeholder": "New description (optional)"
+      },
+      {
+        "name": "priority",
+        "type": "string",
+        "value": null,
+        "label": "Priority",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "(unchanged)",
+            "value": ""
+          },
+          {
+            "name": "No Priority",
+            "value": "0"
+          },
+          {
+            "name": "Urgent",
+            "value": "1"
+          },
+          {
+            "name": "High",
+            "value": "2"
+          },
+          {
+            "name": "Medium",
+            "value": "3"
+          },
+          {
+            "name": "Low",
+            "value": "4"
+          }
+        ]
+      },
+      {
+        "name": "state_id",
+        "type": "string",
+        "value": null,
+        "label": "State ID",
+        "placeholder": "Workflow state UUID (optional)"
+      },
+      {
+        "name": "assignee_id",
+        "type": "string",
+        "value": null,
+        "label": "Assignee ID",
+        "placeholder": "User UUID (optional)"
+      },
+      {
+        "name": "project_id",
+        "type": "string",
+        "value": null,
+        "label": "Project ID",
+        "placeholder": "Project UUID (optional)"
+      },
+      {
+        "name": "due_date",
+        "type": "string",
+        "value": null,
+        "label": "Due Date",
+        "placeholder": "YYYY-MM-DD (optional)"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "issue_id",
+        "type": "string",
+        "value": null,
+        "label": "Issue ID",
+        "placeholder": ""
+      },
+      {
+        "name": "identifier",
+        "type": "string",
+        "value": null,
+        "label": "Identifier",
+        "placeholder": ""
+      },
+      {
+        "name": "url",
+        "type": "string",
+        "value": null,
+        "label": "URL",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
   "messaging/email": {
     "hash": "853a89426030c214dd4a9b69c622e7ab9f1e56059a405b57aff261688aa6a484",
     "author": "Andy Esser",
@@ -3183,11 +3896,11 @@
     ]
   },
   "messaging/slack": {
-    "hash": "2c5672a9e4fafb6b85302ca2fb475ad8fb2d7b3aeeb909f4cac8000b05e1d1c0",
+    "hash": "8fa5107f0eabc4840899d65737afd6cfbe23468e36b42567eb011e56bc52cc64",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Send Slack Message",
-    "description": "Send a message to a Slack channel via the Bot API",
+    "description": "Send a message to a Slack channel via the Bot API with mrkdwn formatting and optional Block Kit layouts",
     "website": "https://www.flomation.co",
     "icon": "hashtag",
     "date": "03/04/2026",
@@ -3219,7 +3932,7 @@
         "type": "text",
         "value": null,
         "label": "Message",
-        "placeholder": "Hello from Flomation!",
+        "placeholder": "Hello from Flomation! Use *bold*, _italic_, `code`",
         "required": true
       },
       {
@@ -3228,6 +3941,27 @@
         "value": null,
         "label": "Thread ID",
         "placeholder": "${thread_id}"
+      },
+      {
+        "name": "blocks",
+        "type": "text",
+        "value": null,
+        "label": "Block Kit JSON",
+        "placeholder": "[{\"type\":\"section\",\"text\":{\"type\":\"mrkdwn\",\"text\":\"*Rich* message\"}}]"
+      },
+      {
+        "name": "attachments",
+        "type": "text",
+        "value": null,
+        "label": "Attachments JSON",
+        "placeholder": "[{\"color\":\"#36a64f\",\"text\":\"Attachment text\"}]"
+      },
+      {
+        "name": "unfurl_links",
+        "type": "boolean",
+        "value": null,
+        "label": "Unfurl Links",
+        "placeholder": ""
       }
     ],
     "outputs": [
@@ -3712,11 +4446,11 @@
     "outputs": null
   },
   "output/slack_webhook": {
-    "hash": "36c21e1e44225d11396b67c36902c5386a093ef419874f658561a3b9016307f6",
+    "hash": "2b9b283c8879180451465644e61d73a798bf169f99b1cadd79b1fbcd0bd838d0",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Slack Webhook",
-    "description": "Send a message to a Slack channel via webhook",
+    "description": "Send a message to a Slack channel via webhook with mrkdwn formatting and optional Block Kit layouts",
     "website": "https://www.flomation.co",
     "icon": "hashtag",
     "date": "23/03/2026",
@@ -3740,7 +4474,7 @@
         "type": "text",
         "value": null,
         "label": "Message",
-        "placeholder": "Hello from Flomation!",
+        "placeholder": "Hello from Flomation! Use *bold*, _italic_, `code`",
         "required": true
       },
       {
@@ -3756,6 +4490,20 @@
         "value": null,
         "label": "Icon Emoji",
         "placeholder": ":robot_face:"
+      },
+      {
+        "name": "blocks",
+        "type": "text",
+        "value": null,
+        "label": "Block Kit JSON",
+        "placeholder": "[{\"type\":\"section\",\"text\":{\"type\":\"mrkdwn\",\"text\":\"*Rich* message\"}}]"
+      },
+      {
+        "name": "attachments",
+        "type": "text",
+        "value": null,
+        "label": "Attachments JSON",
+        "placeholder": "[{\"color\":\"#36a64f\",\"text\":\"Attachment text\"}]"
       }
     ],
     "outputs": [
@@ -3771,6 +4519,13 @@
         "type": "boolean",
         "value": null,
         "label": "",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
         "placeholder": ""
       }
     ]
@@ -4623,13 +5378,13 @@
     ]
   },
   "tools/channel_action": {
-    "hash": "cc672c1255ae188c88f5e22ae975a3bbecfb995f1d1746953023ac1b8cba8688",
+    "hash": "a74575b7049d88b8376ad85656d9b804207a16fef831cbcf465e16653f845866",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Channel Action",
     "description": "Send a channel-specific action like a typing indicator. Use this before long-running operations to show the user the agent is working.",
     "website": "https://www.flomation.co",
-    "icon": "message-typing",
+    "icon": "hand",
     "date": "14/04/2026",
     "type": 2,
     "category": {
@@ -5008,7 +5763,7 @@
     ]
   },
   "tools/email_send": {
-    "hash": "1ff6aa3c671647604aa86bb28ed615752b8ddbd16e54ed7bd7df907374922d9d",
+    "hash": "dc42aa3e05c04a79ad9b76f471ac6bb2fa905f21e66f5346f5abac300295231c",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Email Send",
@@ -5197,6 +5952,728 @@
         "type": "object",
         "value": null,
         "label": "OAuth Connect URLs by purpose",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "tools/linear_add_comment": {
+    "hash": "f8366b87447754ce4252fe1d348f4abe7d21fa6ec8cf9d45275f6a1d3816bb15",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Linear Add Comment",
+    "description": "Add a comment to an existing Linear issue. Provide the issue UUID and a Markdown comment body.",
+    "website": "https://www.flomation.co",
+    "icon": "comment",
+    "date": "15/04/2026",
+    "type": 2,
+    "category": {
+      "name": "Tools",
+      "icon": "wrench",
+      "description": "AI tool implementations for function calling"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "string",
+        "value": null,
+        "label": "Linear API key",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "issue_id",
+        "type": "string",
+        "value": null,
+        "label": "Issue UUID to comment on",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "body",
+        "type": "text",
+        "value": null,
+        "label": "Comment text (Markdown supported)",
+        "placeholder": "",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary for the AI",
+        "placeholder": ""
+      },
+      {
+        "name": "comment_id",
+        "type": "string",
+        "value": null,
+        "label": "Comment UUID",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "tools/linear_create_issue": {
+    "hash": "4b46013f6079ed44f2c7dc545924ee6670767a68140fa72c41bbaff0af639164",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Linear Create Issue",
+    "description": "Create a new issue in Linear. Requires team_id (use linear_list_teams to find it). Returns the issue identifier and URL. Always confirm the team before creating.",
+    "website": "https://www.flomation.co",
+    "icon": "plus-circle",
+    "date": "15/04/2026",
+    "type": 2,
+    "category": {
+      "name": "Tools",
+      "icon": "wrench",
+      "description": "AI tool implementations for function calling"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "string",
+        "value": null,
+        "label": "Linear API key",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "team_id",
+        "type": "string",
+        "value": null,
+        "label": "Team UUID (from linear_list_teams)",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "title",
+        "type": "string",
+        "value": null,
+        "label": "Issue title",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "description",
+        "type": "text",
+        "value": null,
+        "label": "Markdown description of the issue",
+        "placeholder": ""
+      },
+      {
+        "name": "priority",
+        "type": "string",
+        "value": null,
+        "label": "Priority: 0=none, 1=urgent, 2=high, 3=medium, 4=low",
+        "placeholder": ""
+      },
+      {
+        "name": "assignee_id",
+        "type": "string",
+        "value": null,
+        "label": "Assignee user UUID",
+        "placeholder": ""
+      },
+      {
+        "name": "state_id",
+        "type": "string",
+        "value": null,
+        "label": "Workflow state UUID",
+        "placeholder": ""
+      },
+      {
+        "name": "label_ids",
+        "type": "string",
+        "value": null,
+        "label": "Comma-separated label UUIDs",
+        "placeholder": ""
+      },
+      {
+        "name": "project_id",
+        "type": "string",
+        "value": null,
+        "label": "Project UUID",
+        "placeholder": ""
+      },
+      {
+        "name": "due_date",
+        "type": "string",
+        "value": null,
+        "label": "Due date in YYYY-MM-DD format",
+        "placeholder": ""
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary for the AI",
+        "placeholder": ""
+      },
+      {
+        "name": "issue_id",
+        "type": "string",
+        "value": null,
+        "label": "Issue UUID",
+        "placeholder": ""
+      },
+      {
+        "name": "identifier",
+        "type": "string",
+        "value": null,
+        "label": "Human-readable identifier (e.g. ENG-123)",
+        "placeholder": ""
+      },
+      {
+        "name": "url",
+        "type": "string",
+        "value": null,
+        "label": "Web URL",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "tools/linear_get_issue": {
+    "hash": "9ccce732d7305b1099a8373cc895693dd5712a19800691e48c4f1a5065b31aa3",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Linear Get Issue",
+    "description": "Fetch details of a single Linear issue by its UUID or human-readable identifier (e.g. ENG-123). Returns title, description, state, priority, assignee, and more.",
+    "website": "https://www.flomation.co",
+    "icon": "file-lines",
+    "date": "15/04/2026",
+    "type": 2,
+    "category": {
+      "name": "Tools",
+      "icon": "wrench",
+      "description": "AI tool implementations for function calling"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "string",
+        "value": null,
+        "label": "Linear API key",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "issue_id",
+        "type": "string",
+        "value": null,
+        "label": "Issue UUID or identifier (e.g. ENG-123)",
+        "placeholder": "",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Issue details for the AI",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Full issue data",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "tools/linear_list_issues": {
+    "hash": "733bccca807b25adb22ec121581750d5be1f9833e0a394a4eecedcdc3f2b83b9",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Linear List Issues",
+    "description": "List and filter issues in Linear. Supports filtering by team, assignee, state, priority, and label. Returns a summary of matching issues.",
+    "website": "https://www.flomation.co",
+    "icon": "list",
+    "date": "15/04/2026",
+    "type": 2,
+    "category": {
+      "name": "Tools",
+      "icon": "wrench",
+      "description": "AI tool implementations for function calling"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "string",
+        "value": null,
+        "label": "Linear API key",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "team_id",
+        "type": "string",
+        "value": null,
+        "label": "Filter by team UUID",
+        "placeholder": ""
+      },
+      {
+        "name": "assignee_id",
+        "type": "string",
+        "value": null,
+        "label": "Filter by assignee UUID",
+        "placeholder": ""
+      },
+      {
+        "name": "state_name",
+        "type": "string",
+        "value": null,
+        "label": "Filter by state name (e.g. In Progress, Done)",
+        "placeholder": ""
+      },
+      {
+        "name": "priority",
+        "type": "string",
+        "value": null,
+        "label": "Filter by priority: 1=urgent, 2=high, 3=medium, 4=low",
+        "placeholder": ""
+      },
+      {
+        "name": "label_name",
+        "type": "string",
+        "value": null,
+        "label": "Filter by label name",
+        "placeholder": ""
+      },
+      {
+        "name": "limit",
+        "type": "integer",
+        "value": null,
+        "label": "Maximum number of issues to return (default 20)",
+        "placeholder": ""
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Issue list summary for the AI",
+        "placeholder": ""
+      },
+      {
+        "name": "issues",
+        "type": "object",
+        "value": null,
+        "label": "Full issue data array",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Number of issues returned",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "tools/linear_list_teams": {
+    "hash": "cd1425783610f253d1e0b72f1be64d402374e75f130eed768e894223133ed028",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Linear List Teams",
+    "description": "List all teams in the Linear workspace. Returns team IDs, names, workflow states, labels, and members. Call this first to get team_id for creating issues.",
+    "website": "https://www.flomation.co",
+    "icon": "users",
+    "date": "15/04/2026",
+    "type": 2,
+    "category": {
+      "name": "Tools",
+      "icon": "wrench",
+      "description": "AI tool implementations for function calling"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "string",
+        "value": null,
+        "label": "Linear API key",
+        "placeholder": "",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Team list summary for the AI",
+        "placeholder": ""
+      },
+      {
+        "name": "teams",
+        "type": "object",
+        "value": null,
+        "label": "Full team data array",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Number of teams",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "tools/linear_search_issues": {
+    "hash": "4acfb6d06d5eeab1df6ed735bcc85b4fc056d9c049a5c1549af6cc29c197be1c",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Linear Search Issues",
+    "description": "Full-text search across all Linear issues by keyword. Use this to find issues when you know part of the title, description, or identifier.",
+    "website": "https://www.flomation.co",
+    "icon": "magnifying-glass",
+    "date": "15/04/2026",
+    "type": 2,
+    "category": {
+      "name": "Tools",
+      "icon": "wrench",
+      "description": "AI tool implementations for function calling"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "string",
+        "value": null,
+        "label": "Linear API key",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "query",
+        "type": "string",
+        "value": null,
+        "label": "Search keywords",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "limit",
+        "type": "integer",
+        "value": null,
+        "label": "Maximum results (default 10)",
+        "placeholder": ""
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Search results for the AI",
+        "placeholder": ""
+      },
+      {
+        "name": "issues",
+        "type": "object",
+        "value": null,
+        "label": "Full issue data array",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Number of results",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "tools/linear_update_issue": {
+    "hash": "2e95ea686f6b7ccf73df1432caab57a9fa9634cc8356676d024a96c5d5140605",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Linear Update Issue",
+    "description": "Update an existing Linear issue. Pass the issue UUID and any fields to change. Only provided fields are updated; omitted fields are left unchanged.",
+    "website": "https://www.flomation.co",
+    "icon": "pencil",
+    "date": "15/04/2026",
+    "type": 2,
+    "category": {
+      "name": "Tools",
+      "icon": "wrench",
+      "description": "AI tool implementations for function calling"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "string",
+        "value": null,
+        "label": "Linear API key",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "issue_id",
+        "type": "string",
+        "value": null,
+        "label": "Issue UUID to update",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "title",
+        "type": "string",
+        "value": null,
+        "label": "New title",
+        "placeholder": ""
+      },
+      {
+        "name": "description",
+        "type": "text",
+        "value": null,
+        "label": "New markdown description",
+        "placeholder": ""
+      },
+      {
+        "name": "priority",
+        "type": "string",
+        "value": null,
+        "label": "New priority: 0=none, 1=urgent, 2=high, 3=medium, 4=low",
+        "placeholder": ""
+      },
+      {
+        "name": "state_id",
+        "type": "string",
+        "value": null,
+        "label": "New workflow state UUID",
+        "placeholder": ""
+      },
+      {
+        "name": "assignee_id",
+        "type": "string",
+        "value": null,
+        "label": "New assignee user UUID",
+        "placeholder": ""
+      },
+      {
+        "name": "due_date",
+        "type": "string",
+        "value": null,
+        "label": "New due date in YYYY-MM-DD format",
+        "placeholder": ""
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary for the AI",
+        "placeholder": ""
+      },
+      {
+        "name": "identifier",
+        "type": "string",
+        "value": null,
+        "label": "Issue identifier",
+        "placeholder": ""
+      },
+      {
+        "name": "url",
+        "type": "string",
+        "value": null,
+        "label": "Web URL",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "tools/slack_rich_message": {
+    "hash": "270c48d824ff351678a651bdd7ca9f201826d95778170305017aff86c444621c",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Slack Rich Message",
+    "description": "",
+    "website": "https://www.flomation.co",
+    "icon": "slack",
+    "date": "15/04/2026",
+    "type": 2,
+    "category": {
+      "name": "Tools",
+      "icon": "wrench",
+      "description": "AI tool implementations for function calling"
+    },
+    "inputs": [
+      {
+        "name": "bot_token",
+        "type": "string",
+        "value": null,
+        "label": "Slack bot token — auto-inherited from flow context, do not provide",
+        "placeholder": ""
+      },
+      {
+        "name": "channel_id",
+        "type": "string",
+        "value": null,
+        "label": "Channel ID — auto-inherited from flow context, do not provide",
+        "placeholder": ""
+      },
+      {
+        "name": "text",
+        "type": "text",
+        "value": null,
+        "label": "Fallback text shown in notifications and accessibility (plain summary of the message)",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "blocks",
+        "type": "text",
+        "value": null,
+        "label": "",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "thread_ts",
+        "type": "string",
+        "value": null,
+        "label": "Thread timestamp to reply in (optional)",
+        "placeholder": ""
+      },
+      {
+        "name": "attachments",
+        "type": "text",
+        "value": null,
+        "label": "Legacy attachments JSON array — colour bars, fields, footers (optional)",
+        "placeholder": ""
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary for the AI",
+        "placeholder": ""
+      },
+      {
+        "name": "timestamp",
+        "type": "string",
+        "value": null,
+        "label": "Message timestamp",
         "placeholder": ""
       },
       {

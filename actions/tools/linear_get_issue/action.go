@@ -17,7 +17,7 @@ const (
 	Name         = "Linear Get Issue"
 	Description  = "Fetch details of a single Linear issue by its UUID or human-readable identifier (e.g. ENG-123). Returns title, description, state, priority, assignee, and more."
 	Website      = "https://www.flomation.co"
-	Icon         = "file-lines"
+	Icon    = "linear"
 	Date         = "15/04/2026"
 	Type         = core.ActionTypeAction
 )

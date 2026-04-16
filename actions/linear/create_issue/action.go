@@ -14,7 +14,7 @@ const (
 	Name         = "Create Issue"
 	Description  = "Create a new issue in Linear with title, description, priority, assignee, and labels"
 	Website      = "https://www.flomation.co"
-	Icon         = "plus-circle"
+	Icon         = "linear"
 	Date         = "15/04/2026"
 	Type         = core.ActionTypeAction
 )

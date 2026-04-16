@@ -17,7 +17,7 @@ const (
 	Name         = "Linear List Issues"
 	Description  = "List and filter issues in Linear. Supports filtering by team, assignee, state, priority, and label. Returns a summary of matching issues."
 	Website      = "https://www.flomation.co"
-	Icon         = "list"
+	Icon    = "linear"
 	Date         = "15/04/2026"
 	Type         = core.ActionTypeAction
 )

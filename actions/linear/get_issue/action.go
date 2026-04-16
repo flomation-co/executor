@@ -14,7 +14,7 @@ const (
 	Name         = "Get Issue"
 	Description  = "Fetch a single Linear issue by its ID or identifier (e.g. ENG-123)"
 	Website      = "https://www.flomation.co"
-	Icon         = "file-lines"
+	Icon         = "linear"
 	Date         = "15/04/2026"
 	Type         = core.ActionTypeAction
 )

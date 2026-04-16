@@ -17,7 +17,7 @@ const (
 	Name         = "Linear Search Issues"
 	Description  = "Full-text search across all Linear issues by keyword. Use this to find issues when you know part of the title, description, or identifier."
 	Website      = "https://www.flomation.co"
-	Icon         = "magnifying-glass"
+	Icon    = "linear"
 	Date         = "15/04/2026"
 	Type         = core.ActionTypeAction
 )
