@@ -1,10 +1,13 @@
 package core
 
 import (
+	"bytes"
 	gocontext "context"
 	"encoding/json"
 	"errors"
 	"fmt"
+	"io"
+	"net/http"
 	"os"
 	"regexp"
 	"strconv"
@@ -1246,6 +1249,11 @@ func (f *Flow) executeNodeChildren(actions map[string]Action, node *Node, output
 
 				var results []ToolResult
 				for _, req := range requests {
+					// Refresh the typing indicator between tool calls so the
+					// user sees continuous feedback during multi-tool turns.
+					// Only fires for Telegram (other channels don't support it).
+					f.sendTypingIndicator()
+
 					// Set tool context variables so the tools subgraph
 					// can read ${var.tool.name}, ${var.tool.id}, etc.
 					f.SetVariable("tool.name", req.Name)
@@ -1674,6 +1682,46 @@ func (f *Flow) GetVariable(name string) (interface{}, bool) {
 
 func (f *Flow) GetVariables() map[string]interface{} {
 	return f.variables
+}
+
+// sendTypingIndicator fires a typing indicator to the current channel.
+// Only works for Telegram (other channels silently skip). Uses the API's
+// channel-action endpoint. Fire-and-forget — never blocks the tool loop.
+func (f *Flow) sendTypingIndicator() {
+	ctx := f.GetContext()
+	if ctx == nil || ctx.APIURL == "" || ctx.AgentID == "" {
+		return
+	}
+	if ctx.ChannelType != "telegram" {
+		return
+	}
+	if ctx.ChannelID == "" {
+		return
+	}
+
+	payload, _ := json.Marshal(map[string]string{
+		"channel_type": ctx.ChannelType,
+		"action":       "typing",
+		"chat_id":      ctx.ChannelID,
+	})
+
+	endpoint := fmt.Sprintf("%s/api/v1/internal/agent/%s/channel-action",
+		ctx.APIURL, ctx.AgentID)
+
+	go func() {
+		client := &http.Client{Timeout: 3 * time.Second}
+		req, err := http.NewRequest(http.MethodPost, endpoint, bytes.NewReader(payload)) // #nosec G107
+		if err != nil {
+			return
+		}
+		req.Header.Set("Content-Type", "application/json")
+		resp, err := client.Do(req)
+		if err != nil {
+			return
+		}
+		defer func() { _ = resp.Body.Close() }()
+		_, _ = io.Copy(io.Discard, resp.Body)
+	}()
 }
 
 // injectToolDefinitions auto-generates Anthropic/OpenAI tool definitions
