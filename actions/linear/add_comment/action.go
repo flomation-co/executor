@@ -12,7 +12,7 @@ const (
 	Author       = "Andy Esser"
 	Organisation = "Flomation"
 	Name         = "Add Comment"
-	Description  = "Add a comment to an existing Linear issue"
+	Description  = "Add a Markdown comment to an existing Linear issue."
 	Website      = "https://www.flomation.co"
 	Icon         = "linear"
 	Date         = "15/04/2026"
@@ -38,6 +38,7 @@ var Inputs = [...]core.Connection{
 }
 
 var Outputs = [...]core.Connection{
+	{Name: "tool_result", Type: core.ConnectionTypeString, Label: "Result summary"},
 	{Name: "comment_id", Type: core.ConnectionTypeString, Label: "Comment ID"},
 	{Name: "success", Type: core.ConnectionTypeBoolean, Label: "Success"},
 	{Name: "error", Type: core.ConnectionTypeString, Label: "Error"},
@@ -77,8 +78,9 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	})
 	if err != nil {
 		return map[string]interface{}{
-			"success": false,
-			"error":   err.Error(),
+			"tool_result": fmt.Sprintf("Failed: %s", err),
+			"success":     false,
+			"error":       err.Error(),
 		}, nil
 	}
 
@@ -95,8 +97,9 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	}
 
 	return map[string]interface{}{
-		"comment_id": result.CommentCreate.Comment.ID,
-		"success":    result.CommentCreate.Success,
-		"error":      "",
+		"tool_result": "Comment added successfully",
+		"comment_id":  result.CommentCreate.Comment.ID,
+		"success":     result.CommentCreate.Success,
+		"error":       "",
 	}, nil
 }

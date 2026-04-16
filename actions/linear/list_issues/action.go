@@ -12,7 +12,7 @@ const (
 	Author       = "Andy Esser"
 	Organisation = "Flomation"
 	Name         = "List Issues"
-	Description  = "List and filter issues in Linear by team, state, assignee, priority, or label"
+	Description  = "List and filter Linear issues by team, state, assignee, priority, or label."
 	Website      = "https://www.flomation.co"
 	Icon         = "linear"
 	Date         = "15/04/2026"
@@ -72,6 +72,7 @@ var Inputs = [...]core.Connection{
 }
 
 var Outputs = [...]core.Connection{
+	{Name: "tool_result", Type: core.ConnectionTypeString, Label: "Result summary"},
 	{Name: "issues", Type: core.ConnectionTypeObject, Label: "Issues"},
 	{Name: "count", Type: core.ConnectionTypeInteger, Label: "Count"},
 	{Name: "success", Type: core.ConnectionTypeBoolean, Label: "Success"},
@@ -146,8 +147,9 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	})
 	if err != nil {
 		return map[string]interface{}{
-			"success": false,
-			"error":   err.Error(),
+			"tool_result": fmt.Sprintf("Failed: %s", err),
+			"success":     false,
+			"error":       err.Error(),
 		}, nil
 	}
 
@@ -161,9 +163,10 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	}
 
 	return map[string]interface{}{
-		"issues":  result.Issues.Nodes,
-		"count":   len(result.Issues.Nodes),
-		"success": true,
-		"error":   "",
+		"tool_result": fmt.Sprintf("Found %d issues", len(result.Issues.Nodes)),
+		"issues":      result.Issues.Nodes,
+		"count":       len(result.Issues.Nodes),
+		"success":     true,
+		"error":       "",
 	}, nil
 }

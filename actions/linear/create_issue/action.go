@@ -12,7 +12,7 @@ const (
 	Author       = "Andy Esser"
 	Organisation = "Flomation"
 	Name         = "Create Issue"
-	Description  = "Create a new issue in Linear with title, description, priority, assignee, and labels"
+	Description  = "Create a new Linear issue. Requires team_id (use List Teams to find it). Returns identifier and URL."
 	Website      = "https://www.flomation.co"
 	Icon         = "linear"
 	Date         = "15/04/2026"
@@ -92,6 +92,7 @@ var Inputs = [...]core.Connection{
 }
 
 var Outputs = [...]core.Connection{
+	{Name: "tool_result", Type: core.ConnectionTypeString, Label: "Result summary"},
 	{Name: "issue_id", Type: core.ConnectionTypeString, Label: "Issue ID"},
 	{Name: "identifier", Type: core.ConnectionTypeString, Label: "Identifier"},
 	{Name: "url", Type: core.ConnectionTypeString, Label: "URL"},
@@ -170,8 +171,9 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	})
 	if err != nil {
 		return map[string]interface{}{
-			"success": false,
-			"error":   err.Error(),
+			"tool_result": fmt.Sprintf("Failed to create issue: %s", err),
+			"success":     false,
+			"error":       err.Error(),
 		}, nil
 	}
 
@@ -189,12 +191,14 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 		return nil, fmt.Errorf("failed to parse response: %w", err)
 	}
 
+	issue := result.IssueCreate.Issue
 	return map[string]interface{}{
-		"issue_id":   result.IssueCreate.Issue.ID,
-		"identifier": result.IssueCreate.Issue.Identifier,
-		"url":        result.IssueCreate.Issue.URL,
-		"success":    result.IssueCreate.Success,
-		"error":      "",
+		"tool_result": fmt.Sprintf("Created %s: %s — %s", issue.Identifier, title, issue.URL),
+		"issue_id":    issue.ID,
+		"identifier":  issue.Identifier,
+		"url":         issue.URL,
+		"success":     result.IssueCreate.Success,
+		"error":       "",
 	}, nil
 }
 

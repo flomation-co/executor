@@ -12,7 +12,7 @@ const (
 	Author       = "Andy Esser"
 	Organisation = "Flomation"
 	Name         = "Get Issue"
-	Description  = "Fetch a single Linear issue by its ID or identifier (e.g. ENG-123)"
+	Description  = "Fetch a Linear issue by UUID or identifier (e.g. ENG-123). Returns full details."
 	Website      = "https://www.flomation.co"
 	Icon         = "linear"
 	Date         = "15/04/2026"
@@ -31,6 +31,7 @@ var Inputs = [...]core.Connection{
 }
 
 var Outputs = [...]core.Connection{
+	{Name: "tool_result", Type: core.ConnectionTypeString, Label: "Result summary"},
 	{Name: "issue_id", Type: core.ConnectionTypeString, Label: "Issue ID"},
 	{Name: "identifier", Type: core.ConnectionTypeString, Label: "Identifier"},
 	{Name: "title", Type: core.ConnectionTypeString, Label: "Title"},
@@ -88,8 +89,9 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	})
 	if err != nil {
 		return map[string]interface{}{
-			"success": false,
-			"error":   err.Error(),
+			"tool_result": fmt.Sprintf("Failed: %s", err),
+			"success":     false,
+			"error":       err.Error(),
 		}, nil
 	}
 
@@ -177,6 +179,7 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	_ = json.Unmarshal(fullResult, &fullObj)
 
 	return map[string]interface{}{
+		"tool_result": fmt.Sprintf("%s: %s [%s]", issue.Identifier, issue.Title, stateName),
 		"issue_id":    issue.ID,
 		"identifier":  issue.Identifier,
 		"title":       issue.Title,

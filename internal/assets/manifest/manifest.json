@@ -3063,18 +3063,18 @@
     ]
   },
   "linear/add_comment": {
-    "hash": "8b015ea4dc4500050753aea625414ad2e42007d35e37890493b18911f93c9779",
+    "hash": "b0e59b58da151238d2e2e6dafc806f1e0e3e964b3a054c0802fd7a875dacdf24",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Add Comment",
     "description": "Add a comment to an existing Linear issue",
     "website": "https://www.flomation.co",
-    "icon": "comment",
+    "icon": "linear",
     "date": "15/04/2026",
     "type": 2,
     "category": {
       "name": "Linear",
-      "icon": "clipboard-list",
+      "icon": "linear",
       "description": "Manage issues, projects, and teams in Linear"
     },
     "inputs": [
@@ -3120,18 +3120,18 @@
     ]
   },
   "linear/create_issue": {
-    "hash": "2b6e7958388dd7b1def4fcf3626622d797675c8a29155cb9c414efa4329e99e7",
+    "hash": "a4bea9ac202c4702672710e2cf718863851279881a073f62586c471e090347d1",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Create Issue",
     "description": "Create a new issue in Linear with title, description, priority, assignee, and labels",
     "website": "https://www.flomation.co",
-    "icon": "plus-circle",
+    "icon": "linear",
     "date": "15/04/2026",
     "type": 2,
     "category": {
       "name": "Linear",
-      "icon": "clipboard-list",
+      "icon": "linear",
       "description": "Manage issues, projects, and teams in Linear"
     },
     "inputs": [
@@ -3269,18 +3269,18 @@
     ]
   },
   "linear/get_issue": {
-    "hash": "3b6f6a48a2c3094e5b9951b9772ee1024ee57ed891e48d159bb2ffcfd9f7a7a6",
+    "hash": "24ee0998ec21326bc81fe7b511bfa0ccdf021f0b645dfa1b4b26c2e03179e0b1",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Get Issue",
     "description": "Fetch a single Linear issue by its ID or identifier (e.g. ENG-123)",
     "website": "https://www.flomation.co",
-    "icon": "file-lines",
+    "icon": "linear",
     "date": "15/04/2026",
     "type": 2,
     "category": {
       "name": "Linear",
-      "icon": "clipboard-list",
+      "icon": "linear",
       "description": "Manage issues, projects, and teams in Linear"
     },
     "inputs": [
@@ -3409,18 +3409,18 @@
     ]
   },
   "linear/list_issues": {
-    "hash": "b70a6c745b4c02e0e24290ee57f0c6732d84a66b0e3b66a358fffc23ddc2a6a5",
+    "hash": "dc19c66b17d9ffb1c38cdc1c651e560099d27df16df38d786bcf99e6bd516199",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "List Issues",
     "description": "List and filter issues in Linear by team, state, assignee, priority, or label",
     "website": "https://www.flomation.co",
-    "icon": "list",
+    "icon": "linear",
     "date": "15/04/2026",
     "type": 2,
     "category": {
       "name": "Linear",
-      "icon": "clipboard-list",
+      "icon": "linear",
       "description": "Manage issues, projects, and teams in Linear"
     },
     "inputs": [
@@ -3528,18 +3528,18 @@
     ]
   },
   "linear/list_teams": {
-    "hash": "2f07713f4dabe942e80d9e9ef7ce4c0b5ece6ce6e6ce5d80b5cf6e84f9357271",
+    "hash": "67a0af61553e9d671776c90bbd8af754107448a7e2515ad05d8107a4d75f3f11",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "List Teams",
     "description": "List all teams in the Linear workspace with their workflow states",
     "website": "https://www.flomation.co",
-    "icon": "users",
+    "icon": "linear",
     "date": "15/04/2026",
     "type": 2,
     "category": {
       "name": "Linear",
-      "icon": "clipboard-list",
+      "icon": "linear",
       "description": "Manage issues, projects, and teams in Linear"
     },
     "inputs": null,
@@ -3575,18 +3575,18 @@
     ]
   },
   "linear/search_issues": {
-    "hash": "ad92439378c0d69fc35fe4f1a803286a061a6abcc72918271baebcac135b7a13",
+    "hash": "afde6b7fef7e0152a23934382302b74595bcad7312d76a7834438b9017a2ff51",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Search Issues",
     "description": "Full-text search across Linear issues by keyword",
     "website": "https://www.flomation.co",
-    "icon": "magnifying-glass",
+    "icon": "linear",
     "date": "15/04/2026",
     "type": 2,
     "category": {
       "name": "Linear",
-      "icon": "clipboard-list",
+      "icon": "linear",
       "description": "Manage issues, projects, and teams in Linear"
     },
     "inputs": [
@@ -3638,18 +3638,18 @@
     ]
   },
   "linear/update_issue": {
-    "hash": "79c25ea0d5d8ebe2838f6884b8519b822de287408d501786ca201978c5bbc67e",
+    "hash": "5c2b1029384bed7f5f8e5efcbd7c3ff5c6b506b1f50b7d0c68ae615b82d5db1a",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Update Issue",
     "description": "Update an existing Linear issue's title, description, status, priority, or assignee",
     "website": "https://www.flomation.co",
-    "icon": "pencil",
+    "icon": "linear",
     "date": "15/04/2026",
     "type": 2,
     "category": {
       "name": "Linear",
-      "icon": "clipboard-list",
+      "icon": "linear",
       "description": "Manage issues, projects, and teams in Linear"
     },
     "inputs": [
@@ -5595,11 +5595,11 @@
     ]
   },
   "tools/email_read": {
-    "hash": "6776a061f1a4a67e529021fce7db27ae2b9ae4993bfc7911c9f75bb01a76e5b1",
+    "hash": "2e0a22e4ae7274e028bcb0b3893f933b09ae0622a8616cbc6fb94125da605ea3",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Email Read",
-    "description": "Search and read emails from connected Gmail accounts. Use a Gmail search query (e.g. 'from:dave@flomation.co', 'subject:invoice', 'is:unread') or provide an email_id to read a specific email in full.",
+    "description": "Search and read the USER's emails from their connected Gmail. When the user says 'my emails' or 'check my inbox', use this tool — it reads THEIR mailbox. Use Gmail search (e.g. 'is:unread newer_than:1d', 'from:someone') or email_id for a specific message.",
     "website": "https://www.flomation.co",
     "icon": "envelope",
     "date": "08/04/2026",
@@ -5971,13 +5971,13 @@
     ]
   },
   "tools/linear_add_comment": {
-    "hash": "f8366b87447754ce4252fe1d348f4abe7d21fa6ec8cf9d45275f6a1d3816bb15",
+    "hash": "b26741cc2e80a166d4152efbc544e04a1a68694c87f78fdebab9554c6566af32",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Linear Add Comment",
     "description": "Add a comment to an existing Linear issue. Provide the issue UUID and a Markdown comment body.",
     "website": "https://www.flomation.co",
-    "icon": "comment",
+    "icon": "linear",
     "date": "15/04/2026",
     "type": 2,
     "category": {
@@ -6043,13 +6043,13 @@
     ]
   },
   "tools/linear_create_issue": {
-    "hash": "4b46013f6079ed44f2c7dc545924ee6670767a68140fa72c41bbaff0af639164",
+    "hash": "5249b4734aa308d2ebdb15130257d5cabe3e2ed69c71249075b2bf0c0b971111",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Linear Create Issue",
     "description": "Create a new issue in Linear. Requires team_id (use linear_list_teams to find it). Returns the issue identifier and URL. Always confirm the team before creating.",
     "website": "https://www.flomation.co",
-    "icon": "plus-circle",
+    "icon": "linear",
     "date": "15/04/2026",
     "type": 2,
     "category": {
@@ -6178,13 +6178,13 @@
     ]
   },
   "tools/linear_get_issue": {
-    "hash": "9ccce732d7305b1099a8373cc895693dd5712a19800691e48c4f1a5065b31aa3",
+    "hash": "a98eff6112a3aee3ba39c8699cf2f3b2bac91621d18e138fdb1d47d51c3fe89b",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Linear Get Issue",
     "description": "Fetch details of a single Linear issue by its UUID or human-readable identifier (e.g. ENG-123). Returns title, description, state, priority, assignee, and more.",
     "website": "https://www.flomation.co",
-    "icon": "file-lines",
+    "icon": "linear",
     "date": "15/04/2026",
     "type": 2,
     "category": {
@@ -6242,13 +6242,13 @@
     ]
   },
   "tools/linear_list_issues": {
-    "hash": "733bccca807b25adb22ec121581750d5be1f9833e0a394a4eecedcdc3f2b83b9",
+    "hash": "15e8db40f03d41ebc0d83855abd2f271377548e6ba76d4977345b54486288bc9",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Linear List Issues",
     "description": "List and filter issues in Linear. Supports filtering by team, assignee, state, priority, and label. Returns a summary of matching issues.",
     "website": "https://www.flomation.co",
-    "icon": "list",
+    "icon": "linear",
     "date": "15/04/2026",
     "type": 2,
     "category": {
@@ -6347,13 +6347,13 @@
     ]
   },
   "tools/linear_list_teams": {
-    "hash": "cd1425783610f253d1e0b72f1be64d402374e75f130eed768e894223133ed028",
+    "hash": "92b1f56b1b82edb20cf7c497dda1d71392037606bb9503462555fc9fac88f874",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Linear List Teams",
     "description": "List all teams in the Linear workspace. Returns team IDs, names, workflow states, labels, and members. Call this first to get team_id for creating issues.",
     "website": "https://www.flomation.co",
-    "icon": "users",
+    "icon": "linear",
     "date": "15/04/2026",
     "type": 2,
     "category": {
@@ -6410,13 +6410,13 @@
     ]
   },
   "tools/linear_search_issues": {
-    "hash": "4acfb6d06d5eeab1df6ed735bcc85b4fc056d9c049a5c1549af6cc29c197be1c",
+    "hash": "b3ac2d0d00dfdbd979f878a8d9f5e63e9334cf67f1c02ce4363e8db5d1af3694",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Linear Search Issues",
     "description": "Full-text search across all Linear issues by keyword. Use this to find issues when you know part of the title, description, or identifier.",
     "website": "https://www.flomation.co",
-    "icon": "magnifying-glass",
+    "icon": "linear",
     "date": "15/04/2026",
     "type": 2,
     "category": {
@@ -6488,13 +6488,13 @@
     ]
   },
   "tools/linear_update_issue": {
-    "hash": "2e95ea686f6b7ccf73df1432caab57a9fa9634cc8356676d024a96c5d5140605",
+    "hash": "30f43678e2fb562d263bb534988cccfcad0f1391f2d43c1613d96cb3530d5621",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Linear Update Issue",
     "description": "Update an existing Linear issue. Pass the issue UUID and any fields to change. Only provided fields are updated; omitted fields are left unchanged.",
     "website": "https://www.flomation.co",
-    "icon": "pencil",
+    "icon": "linear",
     "date": "15/04/2026",
     "type": 2,
     "category": {

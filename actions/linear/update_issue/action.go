@@ -12,7 +12,7 @@ const (
 	Author       = "Andy Esser"
 	Organisation = "Flomation"
 	Name         = "Update Issue"
-	Description  = "Update an existing Linear issue's title, description, status, priority, or assignee"
+	Description  = "Update an existing Linear issue. Pass issue UUID and fields to change. Omitted fields are unchanged."
 	Website      = "https://www.flomation.co"
 	Icon         = "linear"
 	Date         = "15/04/2026"
@@ -80,6 +80,7 @@ var Inputs = [...]core.Connection{
 }
 
 var Outputs = [...]core.Connection{
+	{Name: "tool_result", Type: core.ConnectionTypeString, Label: "Result summary"},
 	{Name: "issue_id", Type: core.ConnectionTypeString, Label: "Issue ID"},
 	{Name: "identifier", Type: core.ConnectionTypeString, Label: "Identifier"},
 	{Name: "url", Type: core.ConnectionTypeString, Label: "URL"},
@@ -126,8 +127,9 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 
 	if len(update) == 0 {
 		return map[string]interface{}{
-			"success": false,
-			"error":   "at least one field to update is required",
+			"tool_result": "No fields provided to update",
+			"success":     false,
+			"error":       "at least one field to update is required",
 		}, nil
 	}
 
@@ -149,8 +151,9 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	})
 	if err != nil {
 		return map[string]interface{}{
-			"success": false,
-			"error":   err.Error(),
+			"tool_result": fmt.Sprintf("Failed to update: %s", err),
+			"success":     false,
+			"error":       err.Error(),
 		}, nil
 	}
 
@@ -169,10 +172,11 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	}
 
 	return map[string]interface{}{
-		"issue_id":   result.IssueUpdate.Issue.ID,
-		"identifier": result.IssueUpdate.Issue.Identifier,
-		"url":        result.IssueUpdate.Issue.URL,
-		"success":    result.IssueUpdate.Success,
-		"error":      "",
+		"tool_result": fmt.Sprintf("Updated %s — %s", result.IssueUpdate.Issue.Identifier, result.IssueUpdate.Issue.URL),
+		"issue_id":    result.IssueUpdate.Issue.ID,
+		"identifier":  result.IssueUpdate.Issue.Identifier,
+		"url":         result.IssueUpdate.Issue.URL,
+		"success":     result.IssueUpdate.Success,
+		"error":       "",
 	}, nil
 }
