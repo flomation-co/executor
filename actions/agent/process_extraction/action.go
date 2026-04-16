@@ -652,9 +652,14 @@ func processConfirmations(
 	}
 }
 
-// handleTaskCompleted searches for an active task memory matching the
-// confirmation's task_title and supersedes it. This handles cases where
-// the user says "nevermind, I've done it" or "thanks, that's sorted".
+// handleTaskCompleted searches for active memories matching the
+// confirmation's task_title and supersedes them. This covers both
+// task-type memories AND related fact memories (e.g. "clinic contact
+// methods" when the user cancels "forget about the clinic research").
+//
+// Matching strategy:
+//  1. Title substring match (fast, covers exact and partial matches)
+//  2. Keyword overlap (catches semantically related facts)
 func handleTaskCompleted(
 	flow *core.Flow, ctx *core.ExecutionContext,
 	agentID, agentUserID string,
@@ -664,13 +669,10 @@ func handleTaskCompleted(
 		return
 	}
 
-	// Search for active task memories for this user.
-	// Use the internal memory listing endpoint filtered to tasks.
 	endpoint := fmt.Sprintf(
 		"/api/v1/internal/agent/%s/memory?agent_user_id=%s&limit=50",
 		agentID, agentUserID)
 
-	// Fetch memories as raw JSON array (getJSON returns a map, not suitable here).
 	rawResp, err := getRaw(flow, ctx, endpoint)
 	if err != nil || rawResp == nil {
 		return
@@ -680,32 +682,83 @@ func handleTaskCompleted(
 		ID         string `json:"id"`
 		MemoryType string `json:"memory_type"`
 		Title      string `json:"title"`
+		Body       string `json:"body"`
 		Status     string `json:"status"`
 	}
 	if err := json.Unmarshal(rawResp, &memories); err != nil {
 		return
 	}
 
-	// Find a matching task memory by title similarity.
 	taskTitle := strings.ToLower(conf.TaskTitle)
+	// Extract keywords (3+ chars) from the task title for fuzzy matching.
+	keywords := extractKeywords(taskTitle)
+
+	superseded := 0
 	for _, mem := range memories {
-		if mem.MemoryType != "task" || mem.Status != "active" {
+		if mem.Status != "active" {
 			continue
 		}
+
 		memTitle := strings.ToLower(mem.Title)
-		// Simple substring match — covers "Book dentist appointment" matching "book dentist"
+		memBody := strings.ToLower(mem.Body)
+		matched := false
+
+		// 1. Direct title match (tasks and facts).
 		if strings.Contains(memTitle, taskTitle) || strings.Contains(taskTitle, memTitle) {
-			// Supersede this task memory.
+			matched = true
+		}
+
+		// 2. Keyword overlap — if 2+ keywords from the task title appear
+		//    in the memory's title or body, it's related.
+		if !matched && len(keywords) >= 2 {
+			hits := 0
+			for _, kw := range keywords {
+				if strings.Contains(memTitle, kw) || strings.Contains(memBody, kw) {
+					hits++
+				}
+			}
+			if hits >= 2 || (len(keywords) <= 2 && hits >= 1) {
+				matched = true
+			}
+		}
+
+		if matched {
 			_ = postJSON(flow, ctx,
 				fmt.Sprintf("/api/v1/internal/agent/%s/memory/supersede", agentID),
 				map[string]interface{}{
 					"old_id": mem.ID,
-					"new_id": mem.ID, // Self-supersede (task completed, no replacement)
+					"new_id": mem.ID,
 				}, http.StatusNoContent)
-			result.ConfirmationsProcessed++
-			return
+			superseded++
 		}
 	}
+
+	if superseded > 0 {
+		result.ConfirmationsProcessed++
+	}
+}
+
+// extractKeywords splits text into words of 3+ characters, filtering
+// out common stop words.
+func extractKeywords(text string) []string {
+	stopWords := map[string]bool{
+		"the": true, "and": true, "for": true, "with": true,
+		"that": true, "this": true, "from": true, "about": true,
+		"will": true, "have": true, "been": true, "they": true,
+		"their": true, "your": true, "what": true, "when": true,
+		"where": true, "which": true, "who": true, "how": true,
+		"are": true, "was": true, "were": true, "has": true,
+		"had": true, "can": true, "not": true, "all": true,
+	}
+	words := strings.Fields(text)
+	var keywords []string
+	for _, w := range words {
+		w = strings.Trim(w, ".,!?;:\"'()-")
+		if len(w) >= 3 && !stopWords[w] {
+			keywords = append(keywords, w)
+		}
+	}
+	return keywords
 }
 
 // getRaw performs a GET request and returns the raw response body.
