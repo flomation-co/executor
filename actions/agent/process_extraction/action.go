@@ -146,6 +146,7 @@ type extractionCommit struct {
 	Evidence    string  `json:"evidence"`
 	Confidence  float64 `json:"confidence"`
 	MadeBy      string  `json:"made_by,omitempty"` // 'assistant' | 'user'
+	Recurrence  string  `json:"recurrence,omitempty"` // 'daily' | 'weekly' | 'monthly' | 'every Monday' | etc.
 }
 
 type extractionConfirm struct {
@@ -501,6 +502,10 @@ func processCommitments(
 			if resolved := resolveDueIn(c.DueIn); resolved != "" {
 				body["due_at"] = resolved
 			}
+		}
+
+		if c.Recurrence != "" {
+			body["recurrence"] = c.Recurrence
 		}
 
 		if err := postJSON(flow, ctx, fmt.Sprintf("/api/v1/internal/agent/%s/commitment", agentID), body, http.StatusCreated); err != nil {

@@ -903,7 +903,7 @@
     ]
   },
   "arithmetic/addition": {
-    "hash": "bf0eb244799e42af72492ec6971e38cc251faeb847d4d3a52e58fc0469445031",
+    "hash": "e0b3a5294a4ed0d48707045e7323418c48ac7ee812b6168313467045ea938a13",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Addition",
@@ -935,6 +935,13 @@
     ],
     "outputs": [
       {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
         "name": "answer",
         "type": "integer",
         "value": null,
@@ -944,7 +951,7 @@
     ]
   },
   "arithmetic/division": {
-    "hash": "e5c364f05e0494fb7527529848f856b1970bdcb46df89480d66b6e9e8fa98df5",
+    "hash": "2bbcc32c2df795cb6f0b59df3d7758de1a0d0c654f66fedc0e29b7f1b65da375",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Division",
@@ -976,6 +983,13 @@
     ],
     "outputs": [
       {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
         "name": "answer",
         "type": "integer",
         "value": null,
@@ -985,7 +999,7 @@
     ]
   },
   "arithmetic/multiplication": {
-    "hash": "daf8d42306edfc6644a55d68e4c483fa6c3a1d75ab3f0811110e464f0546b157",
+    "hash": "a7f7a73040d5b27d223196d73a59487746ed7ad083d9e348b940c4807a073302",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Multiplication",
@@ -1017,6 +1031,13 @@
     ],
     "outputs": [
       {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
         "name": "answer",
         "type": "integer",
         "value": null,
@@ -1026,7 +1047,7 @@
     ]
   },
   "arithmetic/subtraction": {
-    "hash": "7c74ff33661bb71b4813a3f7686b5b02bd22ef0f252f30ad494a5005003db472",
+    "hash": "fa3ecc9cefc7a7bcda703e11c4e569723d50e4bae084df05d088109b8d3649e5",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Subtraction",
@@ -1058,6 +1079,13 @@
     ],
     "outputs": [
       {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
         "name": "answer",
         "type": "integer",
         "value": null,
@@ -1067,7 +1095,7 @@
     ]
   },
   "aws/dynamodb": {
-    "hash": "51a2077fabc6cf77306fa3c23e6925c790975d7944ab681a86739ba76d0441b3",
+    "hash": "614a3779fc3641ffd2b8090b3e3ee65665fd9a2dec4118100c6cb91e46841095",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "DynamoDB Query",
@@ -1169,6 +1197,13 @@
     ],
     "outputs": [
       {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
         "name": "results",
         "type": "object",
         "value": null,
@@ -1208,7 +1243,7 @@
     "outputs": null
   },
   "aws/s3/delete": {
-    "hash": "5d4cebad406a06fe9726676d0878e2a35ffa715583fc5622b327f8ee7c4406f9",
+    "hash": "37da3cc3e42f58ddbfd7ae4d28cc4f392d77f9ba34d2e5404a4f374e702d0036",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "AWS S3 Delete",
@@ -1259,6 +1294,13 @@
     ],
     "outputs": [
       {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
         "name": "bucket",
         "type": "string",
         "value": null,
@@ -1282,7 +1324,7 @@
     ]
   },
   "aws/s3/get": {
-    "hash": "c4f02c556a9c3ef1d263aa9ecbb41c974ac3c661ff3e88704311ccd9e76543b3",
+    "hash": "004ae35f17c14bfb764755b51ba44d47ef3d73158587bd626d27d6a1be9f095b",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "AWS S3 Get Object",
@@ -1333,6 +1375,13 @@
     ],
     "outputs": [
       {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
         "name": "body",
         "type": "string",
         "value": null,
@@ -1363,7 +1412,7 @@
     ]
   },
   "aws/s3/list": {
-    "hash": "61be976bd5a691a183a0a05ba8fb2d8d6dab0a4eb916c1d6ad22ba388ae71402",
+    "hash": "7068308eca325d2a631c4c2ba46495edc7e078ce102bcffed6e68b4a938f75a9",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "AWS S3 List Buckets",
@@ -1407,6 +1456,13 @@
     ],
     "outputs": [
       {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
         "name": "buckets",
         "type": "object",
         "value": null,
@@ -1423,7 +1479,7 @@
     ]
   },
   "aws/s3/put": {
-    "hash": "dc905f99c0e029834f66ee2298b4250e2abc0c3a4636d53d1a22d2a80d19e35d",
+    "hash": "65997c8d60b083b1e912c233a4fee8e414eca82a48cf52e1f5bb0c4f622916ce",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "AWS S3 Put",
@@ -1486,6 +1542,13 @@
     ],
     "outputs": [
       {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
         "name": "bucket",
         "type": "string",
         "value": null,
@@ -1509,7 +1572,7 @@
     ]
   },
   "common/data_combine": {
-    "hash": "206e77c2103f3008271e3acd4e0cfbd699f8662ada21cb4f65e3df1654bc55d4",
+    "hash": "b6f4c73aa6bdbff1c9845c040366feb5f036c55f7646eec6e5d9a7a840c3e2d6",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Data Combine",
@@ -1526,6 +1589,13 @@
     "inputs": null,
     "outputs": [
       {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
         "name": "combined",
         "type": "object",
         "value": null,
@@ -1535,7 +1605,7 @@
     ]
   },
   "common/data_extract": {
-    "hash": "1efe67371686f30f3cfd3649208b0bf1637936ff8aec3ab8b972a60db08b650e",
+    "hash": "898b0d713505e765deced6336f9ad250b8853639c84e697e832251a9a704e9d2",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Data Extract",
@@ -1561,6 +1631,13 @@
     ],
     "outputs": [
       {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
         "name": "extracted",
         "type": "object",
         "value": null,
@@ -1570,7 +1647,7 @@
     ]
   },
   "common/data_rename": {
-    "hash": "7a31ed4f444ba180dee672580cebbf592d0bf0edc728ce9cbc1e04d3dca1f8f2",
+    "hash": "3a7c1a15a82eef8f28e8cb53028223235b37a8c7963e68b013b28226e0dcb598",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Data Rename",
@@ -1603,6 +1680,13 @@
       }
     ],
     "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
       {
         "name": "renamed",
         "type": "object",
@@ -1726,7 +1810,7 @@
     ]
   },
   "common/smtp": {
-    "hash": "86e1e5f5016e23ae902e82070ce07dfb1321f9e678cb0975e6203e8eb7ac2c23",
+    "hash": "00542101fa76b7cb2f01739deb59c07c90fa8dd87c258182e659c8731b57f039",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Send SMTP Email",
@@ -1814,6 +1898,13 @@
       }
     ],
     "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
       {
         "name": "length",
         "type": "integer",
@@ -2271,7 +2362,7 @@
     ]
   },
   "file/read": {
-    "hash": "228ea63998a0a44bed1c1cd697dae4d8e8b55d558545f746794a71b9fd235dbd",
+    "hash": "be45263e8632bb33f7d81e98edac26fd60e350037cf2244626f736f9fba5920c",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Read File",
@@ -2296,6 +2387,13 @@
       }
     ],
     "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
       {
         "name": "content",
         "type": "string",
@@ -2327,7 +2425,7 @@
     ]
   },
   "file/write": {
-    "hash": "cd52cf63fa1330ab85e620a490e8390f1b4180f516a39a5725c2458f1373672f",
+    "hash": "c0bb33f2ab7be923194f86e1f9e750b16acd3ac8d9456772deaa2b5026c23f6b",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Write File",
@@ -2368,6 +2466,13 @@
     ],
     "outputs": [
       {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
         "name": "file_path",
         "type": "string",
         "value": null,
@@ -2391,7 +2496,7 @@
     ]
   },
   "git/add": {
-    "hash": "2918d7ae8a198b2ad852839d154a8e8b5682326d3bc26288ffc27d7983eda39d",
+    "hash": "00fe416dfeb0e8fd624d3c41084c9d4543d26e9aa82e06feb185accb5dfc02fa",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Git Add",
@@ -2416,6 +2521,13 @@
     ],
     "outputs": [
       {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
         "name": "success",
         "type": "boolean",
         "value": null,
@@ -2425,7 +2537,7 @@
     ]
   },
   "git/branch": {
-    "hash": "19474522a27595cc5b806c2fa445b87a1b57ef91fa1fd5f8d6ebc81553ed6918",
+    "hash": "bea48f5064730d36544fd805e54ffb5e1526cc7bf3913f76d4cf57415a52d23d",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Git Branch",
@@ -2450,6 +2562,13 @@
     ],
     "outputs": [
       {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
         "name": "success",
         "type": "boolean",
         "value": null,
@@ -2459,7 +2578,7 @@
     ]
   },
   "git/checkout": {
-    "hash": "c725b37f18c24d683258a4a6eeeb0b925b3f81d443f57e7845f3a172e536fc99",
+    "hash": "4639fb424d52dd893812766461636d3df1a7fef938198317163808f5703bb9f8",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Git Checkout",
@@ -2493,6 +2612,13 @@
     ],
     "outputs": [
       {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
         "name": "repository_path",
         "type": "string",
         "value": null,
@@ -2502,7 +2628,7 @@
     ]
   },
   "git/clone": {
-    "hash": "07660134e1f82be28f2b3cffc8b867e9d2c4cb3dfea1b3b6d27ff7b8a49a77cf",
+    "hash": "26f6f35b6a3060096c7433211d9a0bb7d2bfe6877949cd1407882b02b491acfb",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Git Clone",
@@ -2596,6 +2722,13 @@
     ],
     "outputs": [
       {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
         "name": "repository_path",
         "type": "string",
         "value": null,
@@ -2612,7 +2745,7 @@
     ]
   },
   "git/commit": {
-    "hash": "eb5848a0693565ff776a72c784e3d6ec2b55855ea3ab15880d44996d26cf1771",
+    "hash": "a672a70592aad3c89887823c7369c2a08ccb6e6c1ad9ba1c1b0c500ef2148c76",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Git Commit",
@@ -2654,6 +2787,13 @@
     ],
     "outputs": [
       {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
         "name": "commit_hash",
         "type": "string",
         "value": null,
@@ -2663,7 +2803,7 @@
     ]
   },
   "git/pull": {
-    "hash": "c0b3ee578189fdc38a9ea37bfc92825f4a7c4fc40fa66c95d84ec0253ce66604",
+    "hash": "c3758623d7784d86f492331d2b45a3f0b19ad93f2ffa6d6e0375cc9a1461318a",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Git Pull",
@@ -2763,6 +2903,13 @@
     ],
     "outputs": [
       {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
         "name": "success",
         "type": "boolean",
         "value": null,
@@ -2772,7 +2919,7 @@
     ]
   },
   "git/push": {
-    "hash": "41f69038224bd1a2bed1491dd89b8d803338db6b12c7bdc0656d40cb3296d7ef",
+    "hash": "33fcf34894059820699ce354435b6a9a2806c4df8df7ee4bfcda5304583ff03e",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Git Push",
@@ -2865,6 +3012,13 @@
     ],
     "outputs": [
       {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
         "name": "success",
         "type": "boolean",
         "value": null,
@@ -2874,7 +3028,7 @@
     ]
   },
   "git/status": {
-    "hash": "cf52fcd000f7a411740e47e7719144d1357e1c9b2b85c55f699cbe2ee309edf8",
+    "hash": "edb1d2a8071e2a8f8f1ca707ba1c81f8cd8b4cb78e9e81236ff5132222387a0c",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Git Status",
@@ -2890,6 +3044,13 @@
     },
     "inputs": null,
     "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
       {
         "name": "is_clean",
         "type": "string",
@@ -2907,7 +3068,7 @@
     ]
   },
   "git/tag": {
-    "hash": "fa0a8a70ba16707ce85241159d0032ae1c9cdad5d921d2be1cf3c8ebb5c303fe",
+    "hash": "08844b0937ce7e5d0c0178c0ec69a9e5998945a4283e50c1391552764da7e480",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Git Tag",
@@ -2939,6 +3100,13 @@
     ],
     "outputs": [
       {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
         "name": "tag_name",
         "type": "string",
         "value": null,
@@ -2948,7 +3116,7 @@
     ]
   },
   "http/request": {
-    "hash": "f50443920b139813b93b4000dbef57ebcdf2564b9d9df1ce5156cbf05ad388c8",
+    "hash": "a4dfc20efa6503dc772abacf8d374e8d0028205b6fc7279072c444c7877855c0",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "HTTP Request",
@@ -3033,6 +3201,13 @@
     ],
     "outputs": [
       {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
         "name": "status_code",
         "type": "integer",
         "value": null,
@@ -3063,11 +3238,11 @@
     ]
   },
   "linear/add_comment": {
-    "hash": "b0e59b58da151238d2e2e6dafc806f1e0e3e964b3a054c0802fd7a875dacdf24",
+    "hash": "b659bdca51ea3d5d6b8370b5e7c05c5f40cc1cab87dc71c80bbba779d4c6e2c1",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Add Comment",
-    "description": "Add a comment to an existing Linear issue",
+    "description": "Add a Markdown comment to an existing Linear issue.",
     "website": "https://www.flomation.co",
     "icon": "linear",
     "date": "15/04/2026",
@@ -3097,6 +3272,13 @@
     ],
     "outputs": [
       {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
         "name": "comment_id",
         "type": "string",
         "value": null,
@@ -3120,11 +3302,11 @@
     ]
   },
   "linear/create_issue": {
-    "hash": "a4bea9ac202c4702672710e2cf718863851279881a073f62586c471e090347d1",
+    "hash": "b908967cf1727372656924e6eb122caef35005527246a9c8f972c63da0f2d215",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Create Issue",
-    "description": "Create a new issue in Linear with title, description, priority, assignee, and labels",
+    "description": "Create a new Linear issue. Requires team_id (use List Teams to find it). Returns identifier and URL.",
     "website": "https://www.flomation.co",
     "icon": "linear",
     "date": "15/04/2026",
@@ -3232,6 +3414,13 @@
     ],
     "outputs": [
       {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
         "name": "issue_id",
         "type": "string",
         "value": null,
@@ -3269,11 +3458,11 @@
     ]
   },
   "linear/get_issue": {
-    "hash": "24ee0998ec21326bc81fe7b511bfa0ccdf021f0b645dfa1b4b26c2e03179e0b1",
+    "hash": "b4a3c6c86986160af117150ca50896a8312726ebc13d85bd64cc3b8563461e4d",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Get Issue",
-    "description": "Fetch a single Linear issue by its ID or identifier (e.g. ENG-123)",
+    "description": "Fetch a Linear issue by UUID or identifier (e.g. ENG-123). Returns full details.",
     "website": "https://www.flomation.co",
     "icon": "linear",
     "date": "15/04/2026",
@@ -3294,6 +3483,13 @@
       }
     ],
     "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
       {
         "name": "issue_id",
         "type": "string",
@@ -3409,11 +3605,11 @@
     ]
   },
   "linear/list_issues": {
-    "hash": "dc19c66b17d9ffb1c38cdc1c651e560099d27df16df38d786bcf99e6bd516199",
+    "hash": "4ac07d2501e9af8091b56b47ad4fb5a8fd0f47b7768d399eaeddd4bcc3f79000",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "List Issues",
-    "description": "List and filter issues in Linear by team, state, assignee, priority, or label",
+    "description": "List and filter Linear issues by team, state, assignee, priority, or label.",
     "website": "https://www.flomation.co",
     "icon": "linear",
     "date": "15/04/2026",
@@ -3498,6 +3694,13 @@
     ],
     "outputs": [
       {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
         "name": "issues",
         "type": "object",
         "value": null,
@@ -3528,11 +3731,11 @@
     ]
   },
   "linear/list_teams": {
-    "hash": "67a0af61553e9d671776c90bbd8af754107448a7e2515ad05d8107a4d75f3f11",
+    "hash": "d8a137fa14c659302ed9db38886e6069b7ae04e075125628e400dc474564c409",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "List Teams",
-    "description": "List all teams in the Linear workspace with their workflow states",
+    "description": "List all Linear teams with workflow states, labels, and members. Call first to get team_id.",
     "website": "https://www.flomation.co",
     "icon": "linear",
     "date": "15/04/2026",
@@ -3544,6 +3747,13 @@
     },
     "inputs": null,
     "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
       {
         "name": "teams",
         "type": "object",
@@ -3575,11 +3785,11 @@
     ]
   },
   "linear/search_issues": {
-    "hash": "afde6b7fef7e0152a23934382302b74595bcad7312d76a7834438b9017a2ff51",
+    "hash": "fe31466e0e5130a1aa94d124bf1dfdaceed8a0ec8ae5547888ebc937a59ed58e",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Search Issues",
-    "description": "Full-text search across Linear issues by keyword",
+    "description": "Full-text search across Linear issues by keyword.",
     "website": "https://www.flomation.co",
     "icon": "linear",
     "date": "15/04/2026",
@@ -3607,6 +3817,13 @@
       }
     ],
     "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
       {
         "name": "issues",
         "type": "object",
@@ -3638,11 +3855,11 @@
     ]
   },
   "linear/update_issue": {
-    "hash": "5c2b1029384bed7f5f8e5efcbd7c3ff5c6b506b1f50b7d0c68ae615b82d5db1a",
+    "hash": "fef8db7ac0415cb9ac3109b505ea98726b89ef318e2cc625cd7545d506cbd8a4",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Update Issue",
-    "description": "Update an existing Linear issue's title, description, status, priority, or assignee",
+    "description": "Update an existing Linear issue. Pass issue UUID and fields to change. Omitted fields are unchanged.",
     "website": "https://www.flomation.co",
     "icon": "linear",
     "date": "15/04/2026",
@@ -3739,6 +3956,13 @@
     ],
     "outputs": [
       {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
         "name": "issue_id",
         "type": "string",
         "value": null,
@@ -3776,7 +4000,7 @@
     ]
   },
   "messaging/email": {
-    "hash": "853a89426030c214dd4a9b69c622e7ab9f1e56059a405b57aff261688aa6a484",
+    "hash": "f5838101995bc24b7ca1caec4ad9b235b799b6f78930e80bc5a1888e292d763c",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Send Email",
@@ -3880,6 +4104,13 @@
     ],
     "outputs": [
       {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
         "name": "success",
         "type": "boolean",
         "value": null,
@@ -3896,7 +4127,7 @@
     ]
   },
   "messaging/slack": {
-    "hash": "8fa5107f0eabc4840899d65737afd6cfbe23468e36b42567eb011e56bc52cc64",
+    "hash": "fe830827d9e99742477567408d727bf156864d299a0e38b336c0cdb84374358d",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Send Slack Message",
@@ -3966,6 +4197,13 @@
     ],
     "outputs": [
       {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
         "name": "timestamp",
         "type": "string",
         "value": null,
@@ -3989,7 +4227,7 @@
     ]
   },
   "messaging/telegram": {
-    "hash": "6a5006897044dbe31ee97e186287a6554232cfbfed89c934344d20c3f822b3c5",
+    "hash": "a49ca52512dde92a045c3314bcb899c5fd0e4bedbde980885b897ccbe9719c7d",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Send Telegram Message",
@@ -4052,6 +4290,13 @@
     ],
     "outputs": [
       {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
         "name": "message_id",
         "type": "integer",
         "value": null,
@@ -4075,7 +4320,7 @@
     ]
   },
   "nosql/mongodb": {
-    "hash": "cd1428b9a909b381660aa4e27f43c927bdbac9b03e10ae1bce7f7d986e638d91",
+    "hash": "b39aa00de55e30d04c1bd1fb7df7ada3807e1a63a5917febc616c46748c1d618",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "MongoDB Query",
@@ -4165,6 +4410,13 @@
     ],
     "outputs": [
       {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
         "name": "results",
         "type": "object",
         "value": null,
@@ -4181,7 +4433,7 @@
     ]
   },
   "nosql/redis": {
-    "hash": "4a1dec065b473ae73bff5db8dca1eb461c19fea9130c6787192f652466f4ee90",
+    "hash": "afff80230bbc8ffb347211ce22aa6fbeb540d564624b694cf704374e15f1f2f8",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Redis Command",
@@ -4313,6 +4565,13 @@
     ],
     "outputs": [
       {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
         "name": "result",
         "type": "object",
         "value": null,
@@ -4329,7 +4588,7 @@
     ]
   },
   "output/discord_webhook": {
-    "hash": "1b870edc7672c6972ce1b6816b64358ab3ee27e6eee7236ecaf1b09289a1c402",
+    "hash": "3ec3a2edc15da5d2d15c4385695720cf9351b0d3cc85ffb71bea0608ba3339ee",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Discord Webhook",
@@ -4376,6 +4635,13 @@
       }
     ],
     "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
       {
         "name": "status_code",
         "type": "integer",
@@ -4446,7 +4712,7 @@
     "outputs": null
   },
   "output/slack_webhook": {
-    "hash": "2b9b283c8879180451465644e61d73a798bf169f99b1cadd79b1fbcd0bd838d0",
+    "hash": "30189d299c25053bbbac1406fa2a3756e4b952bf540040c157e3be0cdf6e9b4e",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Slack Webhook",
@@ -4508,6 +4774,13 @@
     ],
     "outputs": [
       {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
         "name": "status_code",
         "type": "integer",
         "value": null,
@@ -4531,7 +4804,7 @@
     ]
   },
   "script/bash": {
-    "hash": "6f4fe249c7335c542b3ce8ec892cb50edf138ebc272110b72492c55289cfd44f",
+    "hash": "7e00e44738bc4f2c9519665968f26d7a073971ba8fca63008c1d4e8257a877fd",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Run Bash Script",
@@ -4578,6 +4851,13 @@
     ],
     "outputs": [
       {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
         "name": "stdout",
         "type": "string",
         "value": null,
@@ -4615,7 +4895,7 @@
     ]
   },
   "security/antivirus": {
-    "hash": "2df1bb230899fed23908de0573cbe87f4d0e072994f331a8f771c9b71dca9b8e",
+    "hash": "9b6cda9c213601a97f601005396d8a8a33c74a8e1c9bc2915b8a056f33efa2e2",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Scan with Antivirus",
@@ -4648,6 +4928,13 @@
     ],
     "outputs": [
       {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
         "name": "is_clean",
         "type": "boolean",
         "value": null,
@@ -4678,7 +4965,7 @@
     ]
   },
   "sql/mysql": {
-    "hash": "788f659db227b68ffbcdc5ad2543a9808a3f95f24dd5aef1da77b6368febfd5a",
+    "hash": "29cc6e01c901817e8e94602a83657861507f03a14bbe0eae99d449cf50b963a3",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "MySQL Query",
@@ -4769,6 +5056,13 @@
     ],
     "outputs": [
       {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
         "name": "results",
         "type": "object",
         "value": null,
@@ -4785,7 +5079,7 @@
     ]
   },
   "sql/oracle": {
-    "hash": "773caf8a0453087840c89a2049d9f23eb15660c6662ef7d6c4351c82d12b9148",
+    "hash": "1ae26d7bb99017a7e02a2b9bf0cb3c76d9cc8ded7354327bc53569383f017134",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Oracle Query",
@@ -4851,6 +5145,13 @@
     ],
     "outputs": [
       {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
         "name": "results",
         "type": "object",
         "value": null,
@@ -4867,7 +5168,7 @@
     ]
   },
   "sql/postgresql": {
-    "hash": "0f759f1fb854b1b15562eda288f8f18afc768b0c55bd7075cc0143b1a4501995",
+    "hash": "ce526ba535338e49b8f73beb8869845ee857c487f411244d96f66c3203c8bc17",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "PostgreSQL Query",
@@ -4965,6 +5266,13 @@
       }
     ],
     "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
       {
         "name": "results",
         "type": "object",
@@ -5952,636 +6260,6 @@
         "type": "object",
         "value": null,
         "label": "OAuth Connect URLs by purpose",
-        "placeholder": ""
-      },
-      {
-        "name": "success",
-        "type": "boolean",
-        "value": null,
-        "label": "Success",
-        "placeholder": ""
-      },
-      {
-        "name": "error",
-        "type": "string",
-        "value": null,
-        "label": "Error",
-        "placeholder": ""
-      }
-    ]
-  },
-  "tools/linear_add_comment": {
-    "hash": "b26741cc2e80a166d4152efbc544e04a1a68694c87f78fdebab9554c6566af32",
-    "author": "Andy Esser",
-    "organisation": "Flomation",
-    "name": "Linear Add Comment",
-    "description": "Add a comment to an existing Linear issue. Provide the issue UUID and a Markdown comment body.",
-    "website": "https://www.flomation.co",
-    "icon": "linear",
-    "date": "15/04/2026",
-    "type": 2,
-    "category": {
-      "name": "Tools",
-      "icon": "wrench",
-      "description": "AI tool implementations for function calling"
-    },
-    "inputs": [
-      {
-        "name": "api_key",
-        "type": "string",
-        "value": null,
-        "label": "Linear API key",
-        "placeholder": "",
-        "required": true
-      },
-      {
-        "name": "issue_id",
-        "type": "string",
-        "value": null,
-        "label": "Issue UUID to comment on",
-        "placeholder": "",
-        "required": true
-      },
-      {
-        "name": "body",
-        "type": "text",
-        "value": null,
-        "label": "Comment text (Markdown supported)",
-        "placeholder": "",
-        "required": true
-      }
-    ],
-    "outputs": [
-      {
-        "name": "tool_result",
-        "type": "string",
-        "value": null,
-        "label": "Result summary for the AI",
-        "placeholder": ""
-      },
-      {
-        "name": "comment_id",
-        "type": "string",
-        "value": null,
-        "label": "Comment UUID",
-        "placeholder": ""
-      },
-      {
-        "name": "success",
-        "type": "boolean",
-        "value": null,
-        "label": "Success",
-        "placeholder": ""
-      },
-      {
-        "name": "error",
-        "type": "string",
-        "value": null,
-        "label": "Error",
-        "placeholder": ""
-      }
-    ]
-  },
-  "tools/linear_create_issue": {
-    "hash": "5249b4734aa308d2ebdb15130257d5cabe3e2ed69c71249075b2bf0c0b971111",
-    "author": "Andy Esser",
-    "organisation": "Flomation",
-    "name": "Linear Create Issue",
-    "description": "Create a new issue in Linear. Requires team_id (use linear_list_teams to find it). Returns the issue identifier and URL. Always confirm the team before creating.",
-    "website": "https://www.flomation.co",
-    "icon": "linear",
-    "date": "15/04/2026",
-    "type": 2,
-    "category": {
-      "name": "Tools",
-      "icon": "wrench",
-      "description": "AI tool implementations for function calling"
-    },
-    "inputs": [
-      {
-        "name": "api_key",
-        "type": "string",
-        "value": null,
-        "label": "Linear API key",
-        "placeholder": "",
-        "required": true
-      },
-      {
-        "name": "team_id",
-        "type": "string",
-        "value": null,
-        "label": "Team UUID (from linear_list_teams)",
-        "placeholder": "",
-        "required": true
-      },
-      {
-        "name": "title",
-        "type": "string",
-        "value": null,
-        "label": "Issue title",
-        "placeholder": "",
-        "required": true
-      },
-      {
-        "name": "description",
-        "type": "text",
-        "value": null,
-        "label": "Markdown description of the issue",
-        "placeholder": ""
-      },
-      {
-        "name": "priority",
-        "type": "string",
-        "value": null,
-        "label": "Priority: 0=none, 1=urgent, 2=high, 3=medium, 4=low",
-        "placeholder": ""
-      },
-      {
-        "name": "assignee_id",
-        "type": "string",
-        "value": null,
-        "label": "Assignee user UUID",
-        "placeholder": ""
-      },
-      {
-        "name": "state_id",
-        "type": "string",
-        "value": null,
-        "label": "Workflow state UUID",
-        "placeholder": ""
-      },
-      {
-        "name": "label_ids",
-        "type": "string",
-        "value": null,
-        "label": "Comma-separated label UUIDs",
-        "placeholder": ""
-      },
-      {
-        "name": "project_id",
-        "type": "string",
-        "value": null,
-        "label": "Project UUID",
-        "placeholder": ""
-      },
-      {
-        "name": "due_date",
-        "type": "string",
-        "value": null,
-        "label": "Due date in YYYY-MM-DD format",
-        "placeholder": ""
-      }
-    ],
-    "outputs": [
-      {
-        "name": "tool_result",
-        "type": "string",
-        "value": null,
-        "label": "Result summary for the AI",
-        "placeholder": ""
-      },
-      {
-        "name": "issue_id",
-        "type": "string",
-        "value": null,
-        "label": "Issue UUID",
-        "placeholder": ""
-      },
-      {
-        "name": "identifier",
-        "type": "string",
-        "value": null,
-        "label": "Human-readable identifier (e.g. ENG-123)",
-        "placeholder": ""
-      },
-      {
-        "name": "url",
-        "type": "string",
-        "value": null,
-        "label": "Web URL",
-        "placeholder": ""
-      },
-      {
-        "name": "success",
-        "type": "boolean",
-        "value": null,
-        "label": "Success",
-        "placeholder": ""
-      },
-      {
-        "name": "error",
-        "type": "string",
-        "value": null,
-        "label": "Error",
-        "placeholder": ""
-      }
-    ]
-  },
-  "tools/linear_get_issue": {
-    "hash": "a98eff6112a3aee3ba39c8699cf2f3b2bac91621d18e138fdb1d47d51c3fe89b",
-    "author": "Andy Esser",
-    "organisation": "Flomation",
-    "name": "Linear Get Issue",
-    "description": "Fetch details of a single Linear issue by its UUID or human-readable identifier (e.g. ENG-123). Returns title, description, state, priority, assignee, and more.",
-    "website": "https://www.flomation.co",
-    "icon": "linear",
-    "date": "15/04/2026",
-    "type": 2,
-    "category": {
-      "name": "Tools",
-      "icon": "wrench",
-      "description": "AI tool implementations for function calling"
-    },
-    "inputs": [
-      {
-        "name": "api_key",
-        "type": "string",
-        "value": null,
-        "label": "Linear API key",
-        "placeholder": "",
-        "required": true
-      },
-      {
-        "name": "issue_id",
-        "type": "string",
-        "value": null,
-        "label": "Issue UUID or identifier (e.g. ENG-123)",
-        "placeholder": "",
-        "required": true
-      }
-    ],
-    "outputs": [
-      {
-        "name": "tool_result",
-        "type": "string",
-        "value": null,
-        "label": "Issue details for the AI",
-        "placeholder": ""
-      },
-      {
-        "name": "result",
-        "type": "object",
-        "value": null,
-        "label": "Full issue data",
-        "placeholder": ""
-      },
-      {
-        "name": "success",
-        "type": "boolean",
-        "value": null,
-        "label": "Success",
-        "placeholder": ""
-      },
-      {
-        "name": "error",
-        "type": "string",
-        "value": null,
-        "label": "Error",
-        "placeholder": ""
-      }
-    ]
-  },
-  "tools/linear_list_issues": {
-    "hash": "15e8db40f03d41ebc0d83855abd2f271377548e6ba76d4977345b54486288bc9",
-    "author": "Andy Esser",
-    "organisation": "Flomation",
-    "name": "Linear List Issues",
-    "description": "List and filter issues in Linear. Supports filtering by team, assignee, state, priority, and label. Returns a summary of matching issues.",
-    "website": "https://www.flomation.co",
-    "icon": "linear",
-    "date": "15/04/2026",
-    "type": 2,
-    "category": {
-      "name": "Tools",
-      "icon": "wrench",
-      "description": "AI tool implementations for function calling"
-    },
-    "inputs": [
-      {
-        "name": "api_key",
-        "type": "string",
-        "value": null,
-        "label": "Linear API key",
-        "placeholder": "",
-        "required": true
-      },
-      {
-        "name": "team_id",
-        "type": "string",
-        "value": null,
-        "label": "Filter by team UUID",
-        "placeholder": ""
-      },
-      {
-        "name": "assignee_id",
-        "type": "string",
-        "value": null,
-        "label": "Filter by assignee UUID",
-        "placeholder": ""
-      },
-      {
-        "name": "state_name",
-        "type": "string",
-        "value": null,
-        "label": "Filter by state name (e.g. In Progress, Done)",
-        "placeholder": ""
-      },
-      {
-        "name": "priority",
-        "type": "string",
-        "value": null,
-        "label": "Filter by priority: 1=urgent, 2=high, 3=medium, 4=low",
-        "placeholder": ""
-      },
-      {
-        "name": "label_name",
-        "type": "string",
-        "value": null,
-        "label": "Filter by label name",
-        "placeholder": ""
-      },
-      {
-        "name": "limit",
-        "type": "integer",
-        "value": null,
-        "label": "Maximum number of issues to return (default 20)",
-        "placeholder": ""
-      }
-    ],
-    "outputs": [
-      {
-        "name": "tool_result",
-        "type": "string",
-        "value": null,
-        "label": "Issue list summary for the AI",
-        "placeholder": ""
-      },
-      {
-        "name": "issues",
-        "type": "object",
-        "value": null,
-        "label": "Full issue data array",
-        "placeholder": ""
-      },
-      {
-        "name": "count",
-        "type": "integer",
-        "value": null,
-        "label": "Number of issues returned",
-        "placeholder": ""
-      },
-      {
-        "name": "success",
-        "type": "boolean",
-        "value": null,
-        "label": "Success",
-        "placeholder": ""
-      },
-      {
-        "name": "error",
-        "type": "string",
-        "value": null,
-        "label": "Error",
-        "placeholder": ""
-      }
-    ]
-  },
-  "tools/linear_list_teams": {
-    "hash": "92b1f56b1b82edb20cf7c497dda1d71392037606bb9503462555fc9fac88f874",
-    "author": "Andy Esser",
-    "organisation": "Flomation",
-    "name": "Linear List Teams",
-    "description": "List all teams in the Linear workspace. Returns team IDs, names, workflow states, labels, and members. Call this first to get team_id for creating issues.",
-    "website": "https://www.flomation.co",
-    "icon": "linear",
-    "date": "15/04/2026",
-    "type": 2,
-    "category": {
-      "name": "Tools",
-      "icon": "wrench",
-      "description": "AI tool implementations for function calling"
-    },
-    "inputs": [
-      {
-        "name": "api_key",
-        "type": "string",
-        "value": null,
-        "label": "Linear API key",
-        "placeholder": "",
-        "required": true
-      }
-    ],
-    "outputs": [
-      {
-        "name": "tool_result",
-        "type": "string",
-        "value": null,
-        "label": "Team list summary for the AI",
-        "placeholder": ""
-      },
-      {
-        "name": "teams",
-        "type": "object",
-        "value": null,
-        "label": "Full team data array",
-        "placeholder": ""
-      },
-      {
-        "name": "count",
-        "type": "integer",
-        "value": null,
-        "label": "Number of teams",
-        "placeholder": ""
-      },
-      {
-        "name": "success",
-        "type": "boolean",
-        "value": null,
-        "label": "Success",
-        "placeholder": ""
-      },
-      {
-        "name": "error",
-        "type": "string",
-        "value": null,
-        "label": "Error",
-        "placeholder": ""
-      }
-    ]
-  },
-  "tools/linear_search_issues": {
-    "hash": "b3ac2d0d00dfdbd979f878a8d9f5e63e9334cf67f1c02ce4363e8db5d1af3694",
-    "author": "Andy Esser",
-    "organisation": "Flomation",
-    "name": "Linear Search Issues",
-    "description": "Full-text search across all Linear issues by keyword. Use this to find issues when you know part of the title, description, or identifier.",
-    "website": "https://www.flomation.co",
-    "icon": "linear",
-    "date": "15/04/2026",
-    "type": 2,
-    "category": {
-      "name": "Tools",
-      "icon": "wrench",
-      "description": "AI tool implementations for function calling"
-    },
-    "inputs": [
-      {
-        "name": "api_key",
-        "type": "string",
-        "value": null,
-        "label": "Linear API key",
-        "placeholder": "",
-        "required": true
-      },
-      {
-        "name": "query",
-        "type": "string",
-        "value": null,
-        "label": "Search keywords",
-        "placeholder": "",
-        "required": true
-      },
-      {
-        "name": "limit",
-        "type": "integer",
-        "value": null,
-        "label": "Maximum results (default 10)",
-        "placeholder": ""
-      }
-    ],
-    "outputs": [
-      {
-        "name": "tool_result",
-        "type": "string",
-        "value": null,
-        "label": "Search results for the AI",
-        "placeholder": ""
-      },
-      {
-        "name": "issues",
-        "type": "object",
-        "value": null,
-        "label": "Full issue data array",
-        "placeholder": ""
-      },
-      {
-        "name": "count",
-        "type": "integer",
-        "value": null,
-        "label": "Number of results",
-        "placeholder": ""
-      },
-      {
-        "name": "success",
-        "type": "boolean",
-        "value": null,
-        "label": "Success",
-        "placeholder": ""
-      },
-      {
-        "name": "error",
-        "type": "string",
-        "value": null,
-        "label": "Error",
-        "placeholder": ""
-      }
-    ]
-  },
-  "tools/linear_update_issue": {
-    "hash": "30f43678e2fb562d263bb534988cccfcad0f1391f2d43c1613d96cb3530d5621",
-    "author": "Andy Esser",
-    "organisation": "Flomation",
-    "name": "Linear Update Issue",
-    "description": "Update an existing Linear issue. Pass the issue UUID and any fields to change. Only provided fields are updated; omitted fields are left unchanged.",
-    "website": "https://www.flomation.co",
-    "icon": "linear",
-    "date": "15/04/2026",
-    "type": 2,
-    "category": {
-      "name": "Tools",
-      "icon": "wrench",
-      "description": "AI tool implementations for function calling"
-    },
-    "inputs": [
-      {
-        "name": "api_key",
-        "type": "string",
-        "value": null,
-        "label": "Linear API key",
-        "placeholder": "",
-        "required": true
-      },
-      {
-        "name": "issue_id",
-        "type": "string",
-        "value": null,
-        "label": "Issue UUID to update",
-        "placeholder": "",
-        "required": true
-      },
-      {
-        "name": "title",
-        "type": "string",
-        "value": null,
-        "label": "New title",
-        "placeholder": ""
-      },
-      {
-        "name": "description",
-        "type": "text",
-        "value": null,
-        "label": "New markdown description",
-        "placeholder": ""
-      },
-      {
-        "name": "priority",
-        "type": "string",
-        "value": null,
-        "label": "New priority: 0=none, 1=urgent, 2=high, 3=medium, 4=low",
-        "placeholder": ""
-      },
-      {
-        "name": "state_id",
-        "type": "string",
-        "value": null,
-        "label": "New workflow state UUID",
-        "placeholder": ""
-      },
-      {
-        "name": "assignee_id",
-        "type": "string",
-        "value": null,
-        "label": "New assignee user UUID",
-        "placeholder": ""
-      },
-      {
-        "name": "due_date",
-        "type": "string",
-        "value": null,
-        "label": "New due date in YYYY-MM-DD format",
-        "placeholder": ""
-      }
-    ],
-    "outputs": [
-      {
-        "name": "tool_result",
-        "type": "string",
-        "value": null,
-        "label": "Result summary for the AI",
-        "placeholder": ""
-      },
-      {
-        "name": "identifier",
-        "type": "string",
-        "value": null,
-        "label": "Issue identifier",
-        "placeholder": ""
-      },
-      {
-        "name": "url",
-        "type": "string",
-        "value": null,
-        "label": "Web URL",
         "placeholder": ""
       },
       {
