@@ -20,7 +20,7 @@ const (
 	Author       = "Andy Esser"
 	Organisation = "Flomation"
 	Name         = "Email Read"
-	Description  = "Search and read emails from connected Gmail accounts. Use a Gmail search query (e.g. 'from:dave@flomation.co', 'subject:invoice', 'is:unread') or provide an email_id to read a specific email in full."
+	Description  = "Search and read the USER's emails from their connected Gmail. When the user says 'my emails' or 'check my inbox', use this tool — it reads THEIR mailbox. Use Gmail search (e.g. 'is:unread newer_than:1d', 'from:someone') or email_id for a specific message."
 	Website      = "https://www.flomation.co"
 	Icon         = "envelope"
 	Date         = "08/04/2026"
