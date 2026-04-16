@@ -6,7 +6,6 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
-	"io"
 	"net/http"
 	"os"
 	"regexp"
@@ -1709,7 +1708,13 @@ func (f *Flow) sendTypingIndicator() {
 		ctx.APIURL, ctx.AgentID)
 
 	go func() {
-		client := &http.Client{Timeout: 2 * time.Second}
+		// Fire-and-forget: don't wait for response. Use a transport
+		// that doesn't follow redirects and a tiny timeout just to
+		// establish the connection. We don't care about the result.
+		transport := &http.Transport{
+			DisableKeepAlives: true,
+		}
+		client := &http.Client{Timeout: 1 * time.Second, Transport: transport}
 		req, err := http.NewRequest(http.MethodPost, endpoint, bytes.NewReader(payload)) // #nosec G107
 		if err != nil {
 			return
@@ -1717,10 +1722,9 @@ func (f *Flow) sendTypingIndicator() {
 		req.Header.Set("Content-Type", "application/json")
 		resp, err := client.Do(req)
 		if err != nil {
-			return
+			return // Connection failed — silently ignore
 		}
-		defer func() { _ = resp.Body.Close() }()
-		_, _ = io.Copy(io.Discard, resp.Body)
+		resp.Body.Close()
 	}()
 }
 
