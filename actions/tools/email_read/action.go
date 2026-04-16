@@ -468,20 +468,10 @@ func fetchTokens(flow *core.Flow, ctx *core.ExecutionContext, purpose string) ([
 			all = append(all, tokens...)
 		}
 	}
-	if ctx.AgentID != "" {
-		if tokens := fetchTokensFrom(flow, client, fmt.Sprintf("%s/api/v1/internal/trigger/%s/google-tokens?purpose=%s",
-			ctx.APIURL, ctx.AgentID, purpose)); len(tokens) > 0 {
-			seen := make(map[string]bool)
-			for _, t := range all {
-				seen[t.Email] = true
-			}
-			for _, t := range tokens {
-				if !seen[t.Email] {
-					all = append(all, t)
-				}
-			}
-		}
-	}
+	// Note: trigger-level tokens (agent's own email accounts) are NOT
+	// included here. Those are for the email trigger (inbound polling),
+	// not for reading the user's inbox. When the user says "check my
+	// emails", they mean THEIR connected accounts, not the agent's.
 	if len(all) == 0 {
 		return nil, fmt.Errorf("no %s tokens available", purpose)
 	}
