@@ -465,8 +465,40 @@ func processCommitments(
 	agentID, agentUserID, conversationID, sourceMessageID string,
 	commits []extractionCommit, result *extractionResult,
 ) {
+	// Fetch existing pending commitments for dedup.
+	var existingDescs []string
+	if agentUserID != "" {
+		endpoint := fmt.Sprintf("/api/v1/internal/agent/%s/commitment?agent_user_id=%s&limit=20", agentID, agentUserID)
+		if raw, err := getRaw(flow, ctx, endpoint); err == nil {
+			var existing []struct {
+				Description string `json:"description"`
+				Status      string `json:"status"`
+			}
+			if json.Unmarshal(raw, &existing) == nil {
+				for _, e := range existing {
+					if e.Status == "pending" || e.Status == "firing" {
+						existingDescs = append(existingDescs, strings.ToLower(e.Description))
+					}
+				}
+			}
+		}
+	}
+
 	for i, c := range commits {
 		if c.Confidence < confidenceDiscardThreshold {
+			continue
+		}
+
+		// Dedup: skip if a pending commitment with similar description exists.
+		descLower := strings.ToLower(c.Description)
+		isDup := false
+		for _, existing := range existingDescs {
+			if strings.Contains(existing, descLower) || strings.Contains(descLower, existing) {
+				isDup = true
+				break
+			}
+		}
+		if isDup {
 			continue
 		}
 
