@@ -36,6 +36,9 @@ import (
 	conditional_if "flomation.app/automate/executor/actions/conditional/if"
 	conditional_switch "flomation.app/automate/executor/actions/conditional/switch"
 	conditional_while "flomation.app/automate/executor/actions/conditional/while"
+	elevenlabs_list_voices "flomation.app/automate/executor/actions/elevenlabs/list_voices"
+	elevenlabs_speech_to_text "flomation.app/automate/executor/actions/elevenlabs/speech_to_text"
+	elevenlabs_text_to_speech "flomation.app/automate/executor/actions/elevenlabs/text_to_speech"
 	error_on_error "flomation.app/automate/executor/actions/error/on_error"
 	file_read "flomation.app/automate/executor/actions/file/read"
 	file_write "flomation.app/automate/executor/actions/file/write"
@@ -129,6 +132,9 @@ var Actions = map[string]core.Action{
 	"conditional/if":              conditional_if.Execute,
 	"conditional/switch":          conditional_switch.Execute,
 	"conditional/while":           conditional_while.Execute,
+	"elevenlabs/list_voices":      elevenlabs_list_voices.Execute,
+	"elevenlabs/speech_to_text":   elevenlabs_speech_to_text.Execute,
+	"elevenlabs/text_to_speech":   elevenlabs_text_to_speech.Execute,
 	"error/on_error":              error_on_error.Execute,
 	"file/read":                   file_read.Execute,
 	"file/write":                  file_write.Execute,

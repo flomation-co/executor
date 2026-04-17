@@ -2314,6 +2314,353 @@
       }
     ]
   },
+  "elevenlabs/list_voices": {
+    "hash": "bcab05b87ea12bb1651e3e10dc9dd8bad455c1dd0f0e87330b9f61b4f3eca815",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "List Voices",
+    "description": "List all available ElevenLabs voices with their IDs, names, and characteristics",
+    "website": "https://www.flomation.co",
+    "icon": "microphone",
+    "date": "18/04/2026",
+    "type": 2,
+    "category": {
+      "name": "ElevenLabs",
+      "icon": "microphone",
+      "description": "AI voice synthesis and speech recognition powered by ElevenLabs"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "string",
+        "value": null,
+        "label": "ElevenLabs API Key",
+        "placeholder": "sk_...",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "voices",
+        "type": "object",
+        "value": null,
+        "label": "Voices (JSON)",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Voice Count",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "elevenlabs/speech_to_text": {
+    "hash": "01bde6d8863b301ddbded7008a4c1c2fbcde7e4fb65b6f0de735297ca8fcbe4c",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Speech to Text",
+    "description": "Transcribe audio to text using ElevenLabs speech recognition",
+    "website": "https://www.flomation.co",
+    "icon": "microphone",
+    "date": "18/04/2026",
+    "type": 2,
+    "category": {
+      "name": "ElevenLabs",
+      "icon": "microphone",
+      "description": "AI voice synthesis and speech recognition powered by ElevenLabs"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "string",
+        "value": null,
+        "label": "ElevenLabs API Key",
+        "placeholder": "sk_...",
+        "required": true
+      },
+      {
+        "name": "audio_base64",
+        "type": "string",
+        "value": null,
+        "label": "Audio data (base64-encoded). Provide this OR audio_url.",
+        "placeholder": "base64 audio data"
+      },
+      {
+        "name": "audio_url",
+        "type": "string",
+        "value": null,
+        "label": "URL to audio file. Provide this OR audio_base64.",
+        "placeholder": "https://example.com/audio.mp3"
+      },
+      {
+        "name": "language_code",
+        "type": "string",
+        "value": null,
+        "label": "Language code (ISO 639-1, e.g. 'en', 'fr', 'de'). Leave empty for auto-detect.",
+        "placeholder": "en"
+      },
+      {
+        "name": "model_id",
+        "type": "string",
+        "value": null,
+        "label": "Model",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "Scribe v1 (default)",
+            "value": "scribe_v1"
+          }
+        ]
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Transcribed text",
+        "placeholder": ""
+      },
+      {
+        "name": "text",
+        "type": "string",
+        "value": null,
+        "label": "Full transcription",
+        "placeholder": ""
+      },
+      {
+        "name": "language_code",
+        "type": "string",
+        "value": null,
+        "label": "Detected language",
+        "placeholder": ""
+      },
+      {
+        "name": "words",
+        "type": "object",
+        "value": null,
+        "label": "Word-level timestamps (JSON)",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "elevenlabs/text_to_speech": {
+    "hash": "803192aa03dd2fc5c5bc85288cf711ee96ddb411778645c6d64d57b593b4e40c",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Text to Speech",
+    "description": "Convert text to spoken audio using ElevenLabs AI voices",
+    "website": "https://www.flomation.co",
+    "icon": "microphone",
+    "date": "18/04/2026",
+    "type": 2,
+    "category": {
+      "name": "ElevenLabs",
+      "icon": "microphone",
+      "description": "AI voice synthesis and speech recognition powered by ElevenLabs"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "string",
+        "value": null,
+        "label": "ElevenLabs API Key",
+        "placeholder": "sk_...",
+        "required": true
+      },
+      {
+        "name": "text",
+        "type": "text",
+        "value": null,
+        "label": "Text to convert to speech",
+        "placeholder": "Hello, welcome to Flomation!",
+        "required": true
+      },
+      {
+        "name": "voice_id",
+        "type": "string",
+        "value": null,
+        "label": "Voice ID (from list_voices, or use a name like 'Rachel', 'Adam')",
+        "placeholder": "21m00Tcm4TlvDq8ikWAM",
+        "required": true
+      },
+      {
+        "name": "model_id",
+        "type": "string",
+        "value": null,
+        "label": "Model",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "Multilingual v2 (best quality)",
+            "value": "eleven_multilingual_v2"
+          },
+          {
+            "name": "Turbo v2.5 (low latency)",
+            "value": "eleven_turbo_v2_5"
+          },
+          {
+            "name": "Turbo v2 (low latency)",
+            "value": "eleven_turbo_v2"
+          },
+          {
+            "name": "English v1",
+            "value": "eleven_monolingual_v1"
+          }
+        ]
+      },
+      {
+        "name": "stability",
+        "type": "string",
+        "value": null,
+        "label": "Stability (0.0-1.0, higher = more consistent, lower = more expressive)",
+        "placeholder": "0.5"
+      },
+      {
+        "name": "similarity_boost",
+        "type": "string",
+        "value": null,
+        "label": "Similarity Boost (0.0-1.0, higher = closer to original voice)",
+        "placeholder": "0.75"
+      },
+      {
+        "name": "style",
+        "type": "string",
+        "value": null,
+        "label": "Style exaggeration (0.0-1.0, v2 models only)",
+        "placeholder": "0.0"
+      },
+      {
+        "name": "output_format",
+        "type": "string",
+        "value": null,
+        "label": "Output Format",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "MP3 (44.1kHz, 128kbps)",
+            "value": "mp3_44100_128"
+          },
+          {
+            "name": "MP3 (44.1kHz, 64kbps)",
+            "value": "mp3_44100_64"
+          },
+          {
+            "name": "MP3 (22.05kHz, 32kbps)",
+            "value": "mp3_22050_32"
+          },
+          {
+            "name": "PCM (16kHz)",
+            "value": "pcm_16000"
+          },
+          {
+            "name": "PCM (22.05kHz)",
+            "value": "pcm_22050"
+          },
+          {
+            "name": "PCM (24kHz)",
+            "value": "pcm_24000"
+          },
+          {
+            "name": "PCM (44.1kHz)",
+            "value": "pcm_44100"
+          },
+          {
+            "name": "u-law (8kHz, telephony)",
+            "value": "ulaw_8000"
+          }
+        ]
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "audio_base64",
+        "type": "string",
+        "value": null,
+        "label": "Audio (base64)",
+        "placeholder": ""
+      },
+      {
+        "name": "audio_format",
+        "type": "string",
+        "value": null,
+        "label": "Audio Format",
+        "placeholder": ""
+      },
+      {
+        "name": "audio_size_bytes",
+        "type": "integer",
+        "value": null,
+        "label": "Audio Size (bytes)",
+        "placeholder": ""
+      },
+      {
+        "name": "character_count",
+        "type": "integer",
+        "value": null,
+        "label": "Characters Used",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
   "error/on_error": {
     "hash": "2993955f40a587683fef31cd5032d2fbad2c5cba1daa035f4dc1d412216d0d97",
     "author": "Andy Esser",
@@ -3826,7 +4173,7 @@
     ]
   },
   "linear/list_workflow_states": {
-    "hash": "25d3398ff92757a67ae2fc991e24b025b110bfa6d80829a05b31bb4c9d5852fb",
+    "hash": "caa20bd51c1e6e53bfb313e97768e443d52d92dfd59f9b5763d1e93456dafe35",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "List Workflow States",
@@ -3975,7 +4322,7 @@
     ]
   },
   "linear/update_issue": {
-    "hash": "a3cd94e58eeb5585fffdb4ad3b21b18b7b4b8b10b73a2b3a9d7b4e4240b1ab03",
+    "hash": "ebfb0898333c0ba6b6c832ea3bf5c3400b1a04ee691577e382895894998d1573",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Update Issue",
