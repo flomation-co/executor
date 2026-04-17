@@ -60,15 +60,20 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 		}, nil
 	}
 
+	// Use the team node's states connection directly rather than the
+	// top-level workflowStates query with a filter, as the filter
+	// type may not accept String for team ID comparison.
 	resp, err := linear.ExecuteGraphQL(apiKey, linear.GraphQLRequest{
 		Query: `query ListWorkflowStates($teamId: String!) {
-			workflowStates(filter: { team: { id: { eq: $teamId } } }, first: 50) {
-				nodes {
-					id
-					name
-					type
-					position
-					color
+			team(id: $teamId) {
+				states {
+					nodes {
+						id
+						name
+						type
+						position
+						color
+					}
 				}
 			}
 		}`,
@@ -85,9 +90,11 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	}
 
 	var result struct {
-		WorkflowStates struct {
-			Nodes []json.RawMessage `json:"nodes"`
-		} `json:"workflowStates"`
+		Team struct {
+			States struct {
+				Nodes []json.RawMessage `json:"nodes"`
+			} `json:"states"`
+		} `json:"team"`
 	}
 	if err := json.Unmarshal(resp.Data, &result); err != nil {
 		return nil, fmt.Errorf("failed to parse response: %w", err)
@@ -102,9 +109,9 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	}
 
 	var sb strings.Builder
-	fmt.Fprintf(&sb, "Found %d workflow state(s):\n\n", len(result.WorkflowStates.Nodes))
+	fmt.Fprintf(&sb, "Found %d workflow state(s):\n\n", len(result.Team.States.Nodes))
 	var parsed []interface{}
-	for _, raw := range result.WorkflowStates.Nodes {
+	for _, raw := range result.Team.States.Nodes {
 		var row stateRow
 		if err := json.Unmarshal(raw, &row); err == nil {
 			fmt.Fprintf(&sb, "• %s (type: %s) {id:%s}\n", row.Name, row.Type, row.ID)
@@ -117,7 +124,7 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	return map[string]interface{}{
 		"tool_result": sb.String(),
 		"states":      parsed,
-		"count":       len(result.WorkflowStates.Nodes),
+		"count":       len(result.Team.States.Nodes),
 		"success":     true,
 		"error":       "",
 	}, nil

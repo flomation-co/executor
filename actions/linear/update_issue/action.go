@@ -237,13 +237,15 @@ func resolveStateName(apiKey, issueID, stateName string) (string, error) {
 		return "", fmt.Errorf("could not determine team for issue %s", issueID)
 	}
 
-	// Step 2: list workflow states for the team
+	// Step 2: list workflow states via the team's states connection
 	statesResp, err := linear.ExecuteGraphQL(apiKey, linear.GraphQLRequest{
 		Query: `query ListStates($teamId: String!) {
-			workflowStates(filter: { team: { id: { eq: $teamId } } }, first: 50) {
-				nodes {
-					id
-					name
+			team(id: $teamId) {
+				states {
+					nodes {
+						id
+						name
+					}
 				}
 			}
 		}`,
@@ -254,19 +256,21 @@ func resolveStateName(apiKey, issueID, stateName string) (string, error) {
 	}
 
 	var statesResult struct {
-		WorkflowStates struct {
-			Nodes []struct {
-				ID   string `json:"id"`
-				Name string `json:"name"`
-			} `json:"nodes"`
-		} `json:"workflowStates"`
+		Team struct {
+			States struct {
+				Nodes []struct {
+					ID   string `json:"id"`
+					Name string `json:"name"`
+				} `json:"nodes"`
+			} `json:"states"`
+		} `json:"team"`
 	}
 	if err := json.Unmarshal(statesResp.Data, &statesResult); err != nil {
 		return "", fmt.Errorf("failed to parse states: %w", err)
 	}
 
 	// Case-insensitive match
-	for _, s := range statesResult.WorkflowStates.Nodes {
+	for _, s := range statesResult.Team.States.Nodes {
 		if strings.EqualFold(s.Name, stateName) {
 			return s.ID, nil
 		}
@@ -274,7 +278,7 @@ func resolveStateName(apiKey, issueID, stateName string) (string, error) {
 
 	// Build helpful error with available state names
 	var names []string
-	for _, s := range statesResult.WorkflowStates.Nodes {
+	for _, s := range statesResult.Team.States.Nodes {
 		names = append(names, s.Name)
 	}
 	return "", fmt.Errorf("state '%s' not found. Available states: %s", stateName, strings.Join(names, ", "))
