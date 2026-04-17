@@ -63,6 +63,7 @@ import (
 	messaging_email "flomation.app/automate/executor/actions/messaging/email"
 	messaging_slack "flomation.app/automate/executor/actions/messaging/slack"
 	messaging_telegram "flomation.app/automate/executor/actions/messaging/telegram"
+	messaging_telegram_voice "flomation.app/automate/executor/actions/messaging/telegram_voice"
 	nosql_mongodb "flomation.app/automate/executor/actions/nosql/mongodb"
 	nosql_redis "flomation.app/automate/executor/actions/nosql/redis"
 	output_discord_webhook "flomation.app/automate/executor/actions/output/discord_webhook"
@@ -159,6 +160,7 @@ var Actions = map[string]core.Action{
 	"messaging/email":             messaging_email.Execute,
 	"messaging/slack":             messaging_slack.Execute,
 	"messaging/telegram":          messaging_telegram.Execute,
+	"messaging/telegram_voice":    messaging_telegram_voice.Execute,
 	"nosql/mongodb":               nosql_mongodb.Execute,
 	"nosql/redis":                 nosql_redis.Execute,
 	"output/discord_webhook":      output_discord_webhook.Execute,

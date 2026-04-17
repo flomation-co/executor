@@ -4801,6 +4801,129 @@
       }
     ]
   },
+  "messaging/telegram_voice": {
+    "hash": "3d8a019cc08dbf028e95eda45d366376c816b605f187715a6c969897dc3d5567",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Send Telegram Voice",
+    "description": "Send a voice message via Telegram. Provide audio as base64 OGG, or text to auto-convert via ElevenLabs TTS.",
+    "website": "https://www.flomation.co",
+    "icon": "paper-plane",
+    "date": "18/04/2026",
+    "type": 2,
+    "category": {
+      "name": "Messaging",
+      "icon": "comments",
+      "description": "Send messages via various channels"
+    },
+    "inputs": [
+      {
+        "name": "bot_token",
+        "type": "string",
+        "value": null,
+        "label": "Telegram Bot Token",
+        "placeholder": "123456:ABC-DEF...",
+        "required": true
+      },
+      {
+        "name": "channel_id",
+        "type": "string",
+        "value": null,
+        "label": "Chat/Channel ID",
+        "placeholder": "${channel_id}",
+        "required": true
+      },
+      {
+        "name": "message",
+        "type": "text",
+        "value": null,
+        "label": "Text to speak (uses ElevenLabs TTS). Ignored if audio_base64 is provided.",
+        "placeholder": ""
+      },
+      {
+        "name": "audio_base64",
+        "type": "string",
+        "value": null,
+        "label": "Pre-encoded audio (base64, OGG format). If provided, sent directly.",
+        "placeholder": ""
+      },
+      {
+        "name": "elevenlabs_api_key",
+        "type": "string",
+        "value": null,
+        "label": "ElevenLabs API Key (required for text-to-speech)",
+        "placeholder": ""
+      },
+      {
+        "name": "voice_id",
+        "type": "string",
+        "value": null,
+        "label": "ElevenLabs Voice ID (default: Rachel)",
+        "placeholder": "21m00Tcm4TlvDq8ikWAM"
+      },
+      {
+        "name": "model_id",
+        "type": "string",
+        "value": null,
+        "label": "ElevenLabs Model",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "Multilingual v2",
+            "value": "eleven_multilingual_v2"
+          },
+          {
+            "name": "Turbo v2.5",
+            "value": "eleven_turbo_v2_5"
+          }
+        ]
+      },
+      {
+        "name": "caption",
+        "type": "string",
+        "value": null,
+        "label": "Caption text shown alongside the voice message",
+        "placeholder": ""
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "message_id",
+        "type": "integer",
+        "value": null,
+        "label": "Message ID",
+        "placeholder": ""
+      },
+      {
+        "name": "audio_size_bytes",
+        "type": "integer",
+        "value": null,
+        "label": "Audio size (bytes)",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
   "nosql/mongodb": {
     "hash": "b39aa00de55e30d04c1bd1fb7df7ada3807e1a63a5917febc616c46748c1d618",
     "author": "Andy Esser",
