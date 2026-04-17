@@ -1231,6 +1231,23 @@ func (f *Flow) executeNodeChildren(actions map[string]Action, node *Node, output
 			// for the final response.
 			responseChildren := f.FindTargetByHandle(node.ID, "output")
 
+			// Snapshot original input values for each tool node so we can
+			// distinguish flow-author pre-configured values from values
+			// injected by a previous tool call in this loop. Without this,
+			// the second call to the same tool sees the first call's injected
+			// value as "pre-configured" and refuses to override it.
+			toolOriginalInputs := make(map[string]map[string]interface{})
+			for _, tc := range toolsChildren {
+				if tc.Data == nil {
+					continue
+				}
+				snapshot := make(map[string]interface{})
+				for _, inp := range tc.Data.Config.Inputs {
+					snapshot[inp.Name] = inp.Value
+				}
+				toolOriginalInputs[tc.ID] = snapshot
+			}
+
 			for round := 0; round < maxRounds; round++ {
 				requests, ok := outputs[ToolRequestsKey].([]ToolRequest)
 				if !ok || len(requests) == 0 {
@@ -1295,20 +1312,31 @@ func (f *Flow) executeNodeChildren(actions map[string]Action, node *Node, output
 					var toolErr bool
 					var matchedTool *Node
 					for _, c := range toolsChildren {
-						if c.Data != nil && c.Data.Label == "tools/"+req.Name {
+						if c.Data == nil {
+							continue
+						}
+						// Match by label with "tools/" prefix (standard tool actions)
+						if c.Data.Label == "tools/"+req.Name {
 							matchedTool = c
 							break
 						}
-						// Also match by config.name or bare label
-						if c.Data != nil {
-							if c.Data.Label == req.Name {
-								matchedTool = c
-								break
-							}
-							if c.Data.Config.Name != nil && *c.Data.Config.Name == req.Name {
-								matchedTool = c
-								break
-							}
+						// Match by bare label (e.g. "linear/add_comment" == "linear_add_comment"
+						// after the same sanitisation applied when building the tool schema)
+						if c.Data.Label == req.Name {
+							matchedTool = c
+							break
+						}
+						// Match by sanitised label — handles non-tools/ actions like
+						// linear/add_comment where the AI sees "linear_add_comment"
+						// but the node label contains slashes
+						sanitised := sanitiseToolName(c.Data.Label)
+						if sanitised == req.Name {
+							matchedTool = c
+							break
+						}
+						if c.Data.Config.Name != nil && *c.Data.Config.Name == req.Name {
+							matchedTool = c
+							break
 						}
 					}
 
@@ -1326,6 +1354,18 @@ func (f *Flow) executeNodeChildren(actions map[string]Action, node *Node, output
 						// We must also clear the cached result for this node
 						// so executeNodeActionOnly re-reads the updated inputs.
 						delete(f.nodeResults, matchedTool.ID)
+
+						// Reset inputs to their original (flow-author) values
+						// before injecting the AI's parameters. This ensures
+						// that a previous tool call's injected values don't
+						// persist and block the current call's parameters.
+						if originals, ok := toolOriginalInputs[matchedTool.ID]; ok {
+							for _, inp := range matchedTool.Data.Config.Inputs {
+								if origVal, exists := originals[inp.Name]; exists {
+									inp.Value = origVal
+								}
+							}
+						}
 
 						for _, inp := range matchedTool.Data.Config.Inputs {
 							// Never allow the AI to override pre-configured

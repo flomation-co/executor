@@ -25,7 +25,7 @@ const (
 	Type         = core.ActionTypeAction
 
 	defaultModel     = "claude-sonnet-4-6"
-	defaultMaxTokens = 2048
+	defaultMaxTokens = 8192
 	apiURL           = "https://api.anthropic.com/v1/messages"
 	apiVersion       = "2023-06-01"
 	maxResponseBody  = 1 << 20 // 1 MB
@@ -189,15 +189,47 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 			messages = ms
 		}
 
-		// Append tool results as tool_result content blocks
+		// Append tool results as tool_result content blocks.
+		// Estimate token budget: if conversation is getting large, truncate
+		// individual tool results to prevent exhausting the context window.
 		if toolResults, ok := flow.GetVariable(core.ToolResultsKey); ok && toolResults != nil {
 			if results, ok := toolResults.([]core.ToolResult); ok {
+				// Estimate current message tokens to decide truncation
+				contextWindow := ai_common.ModelContextWindow(model)
+				currentTokens := estimateMessagesTokens(messages) +
+					ai_common.ApproxTokens(systemPromptStr) + int(maxTokens) + 64
+				remainingBudget := contextWindow - currentTokens
+				// Reserve at least 30% of context for tool results + response
+				maxResultTokens := remainingBudget
+				if maxResultTokens < 0 {
+					maxResultTokens = 4096 // fallback minimum
+				}
+				// Per-result limit: divide remaining budget among results
+				perResultLimit := maxResultTokens / max(len(results), 1)
+				// Minimum 512 tokens per result, max 8192
+				if perResultLimit < 512 {
+					perResultLimit = 512
+				}
+				if perResultLimit > 8192 {
+					perResultLimit = 8192
+				}
+				perResultChars := perResultLimit * 4 // ~4 chars per token
+
 				for _, r := range results {
+					resultContent := r.Content
+					if len(resultContent) > perResultChars {
+						resultContent = resultContent[:perResultChars] + "\n... [truncated — full result too large for context window]"
+						log.WithFields(log.Fields{
+							"tool_use_id":    r.ToolUseID,
+							"original_chars": len(r.Content),
+							"truncated_to":   perResultChars,
+						}).Info("truncated tool result to fit context budget")
+					}
 					content := []map[string]interface{}{
 						{
 							"type":        "tool_result",
 							"tool_use_id": r.ToolUseID,
-							"content":     r.Content,
+							"content":     resultContent,
 						},
 					}
 					if r.IsError {
@@ -406,6 +438,31 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 		}
 	}
 
+	// Detect max_tokens truncation with an empty response — this means
+	// the conversation history consumed the entire context window and the
+	// model had no room to generate a response. Fail the node so the
+	// error is visible rather than silently sending an empty message.
+	if result.StopReason == "max_tokens" && strings.TrimSpace(content) == "" {
+		log.WithFields(log.Fields{
+			"model":         result.Model,
+			"input_tokens":  result.Usage.InputTokens,
+			"output_tokens": result.Usage.OutputTokens,
+			"max_tokens":    maxTokens,
+		}).Error("AI response truncated to empty — conversation history too large for context window")
+
+		return map[string]interface{}{
+			"response":         "",
+			"should_respond":   false,
+			"model":            result.Model,
+			"input_tokens":     result.Usage.InputTokens,
+			"output_tokens":    result.Usage.OutputTokens,
+			"stop_reason":      result.StopReason,
+			"tool_calls_count": toolCallsCount,
+			"success":          false,
+			"error":            fmt.Sprintf("Response truncated — conversation history (%d input tokens) exhausted the context window, leaving no room for a response. Try reducing conversation history or tool call count.", result.Usage.InputTokens),
+		}, nil
+	}
+
 	// Check if the AI decided no response is needed (e.g. message not
 	// directed at this agent in a multi-user channel). The AI signals
 	// this by including [NO_RESPONSE] in its output.
@@ -472,4 +529,15 @@ func extractToolExchanges(flow *core.Flow) []ai_common.ToolExchange {
 		exchanges = append(exchanges, ex)
 	}
 	return exchanges
+}
+
+// estimateMessagesTokens provides a rough token count for the messages
+// array used in the Anthropic API call. This is an approximation used
+// for budget-aware tool result truncation — not a precise tokeniser.
+func estimateMessagesTokens(messages []interface{}) int {
+	b, err := json.Marshal(messages)
+	if err != nil {
+		return 0
+	}
+	return ai_common.ApproxTokens(string(b))
 }

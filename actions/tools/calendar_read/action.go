@@ -100,6 +100,7 @@ type calendarEvent struct {
 	Account   string `json:"account"`
 	AllDay    bool   `json:"all_day,omitempty"`
 	EventID   string `json:"event_id"`
+	Recurring bool   `json:"recurring,omitempty"`
 }
 
 type tokenInfo struct {
@@ -289,10 +290,11 @@ func fetchEvents(flow *core.Flow, accessToken string, timeMin, timeMax time.Time
 
 	var result struct {
 		Items []struct {
-			ID       string `json:"id"`
-			Summary  string `json:"summary"`
-			Location string `json:"location"`
-			Start    struct {
+			ID               string `json:"id"`
+			Summary          string `json:"summary"`
+			Location         string `json:"location"`
+			RecurringEventID string `json:"recurringEventId"`
+			Start            struct {
 				DateTime string `json:"dateTime"`
 				Date     string `json:"date"`
 			} `json:"start"`
@@ -309,9 +311,10 @@ func fetchEvents(flow *core.Flow, accessToken string, timeMin, timeMax time.Time
 	var events []calendarEvent
 	for _, item := range result.Items {
 		ev := calendarEvent{
-			Title:    item.Summary,
-			Location: item.Location,
-			EventID:  item.ID,
+			Title:     item.Summary,
+			Location:  item.Location,
+			EventID:   item.ID,
+			Recurring: item.RecurringEventID != "",
 		}
 		if item.Start.DateTime != "" {
 			ev.Start = item.Start.DateTime
@@ -373,6 +376,9 @@ func eventsResult(events []calendarEvent, from, to time.Time) (map[string]interf
 		}
 		if ev.Location != "" {
 			fmt.Fprintf(&sb, " (%s)", ev.Location)
+		}
+		if ev.Recurring {
+			sb.WriteString(" [recurring]")
 		}
 		if ev.Account != "" {
 			fmt.Fprintf(&sb, " [%s]", ev.Account)

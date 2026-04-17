@@ -3,6 +3,7 @@ package linear_list_issues
 import (
 	"encoding/json"
 	"fmt"
+	"strings"
 
 	core "flomation.app/automate/executor"
 	linear "flomation.app/automate/executor/actions/linear"
@@ -161,16 +162,57 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 
 	var result struct {
 		Issues struct {
-			Nodes []interface{} `json:"nodes"`
+			Nodes []json.RawMessage `json:"nodes"`
 		} `json:"issues"`
 	}
 	if err := json.Unmarshal(resp.Data, &result); err != nil {
 		return nil, fmt.Errorf("failed to parse response: %w", err)
 	}
 
+	// Build a human-readable summary for tool_result so the AI can see
+	// issue details, not just a count.
+	type issueRow struct {
+		ID            string `json:"id"`
+		Identifier    string `json:"identifier"`
+		Title         string `json:"title"`
+		PriorityLabel string `json:"priorityLabel"`
+		DueDate       string `json:"dueDate"`
+		State         struct {
+			Name string `json:"name"`
+		} `json:"state"`
+		Assignee *struct {
+			Name string `json:"name"`
+		} `json:"assignee"`
+		Team struct {
+			Key string `json:"key"`
+		} `json:"team"`
+	}
+
+	var sb strings.Builder
+	fmt.Fprintf(&sb, "Found %d issue(s):\n\n", len(result.Issues.Nodes))
+	var parsed []interface{}
+	for _, raw := range result.Issues.Nodes {
+		var row issueRow
+		if err := json.Unmarshal(raw, &row); err == nil {
+			assignee := "Unassigned"
+			if row.Assignee != nil && row.Assignee.Name != "" {
+				assignee = row.Assignee.Name
+			}
+			due := ""
+			if row.DueDate != "" {
+				due = fmt.Sprintf(" due:%s", row.DueDate)
+			}
+			fmt.Fprintf(&sb, "• [%s] %s (%s, %s, %s%s)\n",
+				row.Identifier, row.Title, row.State.Name, row.PriorityLabel, assignee, due)
+		}
+		var generic interface{}
+		_ = json.Unmarshal(raw, &generic)
+		parsed = append(parsed, generic)
+	}
+
 	return map[string]interface{}{
-		"tool_result": fmt.Sprintf("Found %d issues", len(result.Issues.Nodes)),
-		"issues":      result.Issues.Nodes,
+		"tool_result": sb.String(),
+		"issues":      parsed,
 		"count":       len(result.Issues.Nodes),
 		"success":     true,
 		"error":       "",

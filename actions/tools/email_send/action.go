@@ -44,7 +44,7 @@ var Inputs = [...]core.Connection{
 	{
 		Name:     "body",
 		Type:     core.ConnectionTypeText,
-		Label:    "Email body (plain text)",
+		Label:    "Email body / message content (plain text)",
 		Required: true,
 	},
 	{
@@ -88,6 +88,11 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	to := requireString("to", inputs)
 	subject := requireString("subject", inputs)
 	body := requireString("body", inputs)
+	// Accept "message" as an alias for "body" — AI models
+	// frequently use "message" as the natural parameter name.
+	if body == "" {
+		body = requireString("message", inputs)
+	}
 	if to == "" || subject == "" || body == "" {
 		return errResult("to, subject, and body are all required")
 	}
