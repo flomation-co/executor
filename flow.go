@@ -514,6 +514,7 @@ func Load(path *string) (*Flow, error) {
 	f.nodeResults = make(map[string]map[string]interface{})
 	f.nodeExecutionResults = make(map[string]*ExecutionNodeResult)
 	f.outputs = make(map[string]interface{})
+	f.variables = make(map[string]interface{})
 
 	return &f, nil
 }
@@ -663,18 +664,28 @@ func (f *Flow) Execute(actions map[string]Action, entry *string, environment *en
 // was found and executed successfully.
 func (f *Flow) executeOnErrorChain(actions map[string]Action, flowErr error, environment *environment.Environment) bool {
 	var onErrorNode *Node
+	var onErrorCount int
 	for _, n := range f.Nodes {
 		if n == nil {
 			continue
 		}
 		if n.Type == "error/on_error" || (n.Data != nil && n.Data.Label == "error/on_error") {
-			onErrorNode = n
-			break
+			onErrorCount++
+			if onErrorNode == nil {
+				onErrorNode = n
+			}
 		}
 	}
 
 	if onErrorNode == nil {
 		return false
+	}
+
+	if onErrorCount > 1 {
+		log.WithFields(log.Fields{
+			"count": onErrorCount,
+			"using": onErrorNode.ID,
+		}).Warn("Multiple On Error nodes found in flow; only the first will be used")
 	}
 
 	// Find the node that caused the error from execution results
@@ -691,13 +702,21 @@ func (f *Flow) executeOnErrorChain(actions map[string]Action, flowErr error, env
 	// Prevent re-entrancy: errors in the error chain must not trigger it again
 	f.inErrorChain = true
 
-	// Inject error context as the On Error node's cached result
-	errorOutputs := map[string]interface{}{
-		"error_message":    flowErr.Error(),
-		"error_node_id":    failedNodeID,
-		"error_node_label": failedNodeLabel,
-		"error_node_type":  failedNodeType,
+	// Build the On Error node's outputs by merging all previously-executed
+	// node results with the error context. This allows downstream children
+	// in the error chain to reference upstream variables via ${...}
+	// substitution — without this merge, only the 4 error fields are visible.
+	// Error context fields take precedence over any clashing upstream keys.
+	errorOutputs := make(map[string]interface{})
+	for _, cachedOutputs := range f.nodeResults {
+		for k, v := range cachedOutputs {
+			errorOutputs[k] = v
+		}
 	}
+	errorOutputs["error_message"] = flowErr.Error()
+	errorOutputs["error_node_id"] = failedNodeID
+	errorOutputs["error_node_label"] = failedNodeLabel
+	errorOutputs["error_node_type"] = failedNodeType
 	f.nodeResults[onErrorNode.ID] = errorOutputs
 	f.emitNodeEvent(onErrorNode.ID, onErrorNode.Type, onErrorNode.Data.Label, "success", 0, "")
 	f.recordNodeResult(onErrorNode, "success", nil, errorOutputs, 0, "")
