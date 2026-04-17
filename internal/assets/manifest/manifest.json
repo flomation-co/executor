@@ -3825,6 +3825,77 @@
       }
     ]
   },
+  "linear/list_workflow_states": {
+    "hash": "25d3398ff92757a67ae2fc991e24b025b110bfa6d80829a05b31bb4c9d5852fb",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "List Workflow States",
+    "description": "List workflow states (e.g. Todo, In Progress, Done, Cancelled) for a team. Use this to get state UUIDs needed by update_issue.",
+    "website": "https://www.flomation.co",
+    "icon": "linear",
+    "date": "17/04/2026",
+    "type": 2,
+    "category": {
+      "name": "Linear",
+      "icon": "linear",
+      "description": "Manage issues, projects, and teams in Linear"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "string",
+        "value": null,
+        "label": "Linear API Key",
+        "placeholder": "lin_api_...",
+        "required": true
+      },
+      {
+        "name": "team_id",
+        "type": "string",
+        "value": null,
+        "label": "Team ID (UUID, from list_teams)",
+        "placeholder": "Team UUID",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "states",
+        "type": "object",
+        "value": null,
+        "label": "Workflow States",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Count",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
   "linear/search_issues": {
     "hash": "81a0e8bc9c219e83e30fb215f91de1efdcfa92351fb5b27334fafa751e75971a",
     "author": "Andy Esser",
@@ -3904,7 +3975,7 @@
     ]
   },
   "linear/update_issue": {
-    "hash": "19e0e2085635797ff9e1cf2d71899a74c8ba15045f5e23d43590c301535e8788",
+    "hash": "a3cd94e58eeb5585fffdb4ad3b21b18b7b4b8b10b73a2b3a9d7b4e4240b1ab03",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Update Issue",
@@ -3986,8 +4057,15 @@
         "name": "state_id",
         "type": "string",
         "value": null,
-        "label": "State ID",
-        "placeholder": "Workflow state UUID (optional)"
+        "label": "State ID (UUID, optional — use state_name instead for convenience)",
+        "placeholder": "Workflow state UUID"
+      },
+      {
+        "name": "state_name",
+        "type": "string",
+        "value": null,
+        "label": "State Name (e.g. 'Cancelled', 'In Progress', 'Done' — resolves to UUID automatically)",
+        "placeholder": "State name"
       },
       {
         "name": "assignee_id",
@@ -6149,7 +6227,7 @@
     ]
   },
   "tools/email_send": {
-    "hash": "175318b18ab9056ce41787f89a9bcf11619b34259c8923c06612df98a44ce2ef",
+    "hash": "9abcc8ba02b1ed0d3ce5d8cb2d23ff532a509ce6b55d2906c4462eb62dcbe0b9",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Email Send",

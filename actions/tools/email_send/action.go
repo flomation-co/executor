@@ -152,7 +152,21 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	// RFC 2047 encode subject for any remaining non-ASCII.
 	encodedSubject := mime.QEncoding.Encode("UTF-8", subjectClean)
 	msg.WriteString(fmt.Sprintf("Subject: %s\r\n", encodedSubject))
-	msg.WriteString("Content-Type: text/plain; charset=\"UTF-8\"\r\n")
+	msg.WriteString("MIME-Version: 1.0\r\n")
+
+	// Detect HTML content and set the appropriate Content-Type.
+	// If the body looks like HTML, send as text/html so email clients
+	// render it properly instead of showing raw tags.
+	isHTML := strings.Contains(body, "<html") || strings.Contains(body, "<HTML") ||
+		strings.Contains(body, "<body") || strings.Contains(body, "<div") ||
+		strings.Contains(body, "<p>") || strings.Contains(body, "<br") ||
+		strings.Contains(body, "<table") || strings.Contains(body, "<h1") ||
+		strings.Contains(body, "<h2") || strings.Contains(body, "<h3")
+	if isHTML {
+		msg.WriteString("Content-Type: text/html; charset=\"UTF-8\"\r\n")
+	} else {
+		msg.WriteString("Content-Type: text/plain; charset=\"UTF-8\"\r\n")
+	}
 	msg.WriteString("\r\n")
 	msg.WriteString(body)
 
