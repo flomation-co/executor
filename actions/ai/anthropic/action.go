@@ -479,11 +479,17 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	// this when the channel supports multiple response formats (e.g.
 	// telegram_voice conversations where the agent can reply with
 	// either a voice note or a text message). Default is "text".
+	// Voice mode is only permitted when the inbound channel is
+	// telegram_voice — text channels must always respond with text.
 	responseMode := "text"
 	contentTrimmed := strings.TrimSpace(content)
 	if strings.HasPrefix(contentTrimmed, "[VOICE]") {
-		responseMode = "voice"
 		content = strings.TrimSpace(strings.TrimPrefix(contentTrimmed, "[VOICE]"))
+		// Only allow voice responses on voice-capable channels
+		ctx := flow.GetContext()
+		if ctx != nil && ctx.ChannelType == "telegram_voice" {
+			responseMode = "voice"
+		}
 	} else if strings.HasPrefix(contentTrimmed, "[TEXT]") {
 		responseMode = "text"
 		content = strings.TrimSpace(strings.TrimPrefix(contentTrimmed, "[TEXT]"))
