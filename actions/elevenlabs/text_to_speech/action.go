@@ -4,6 +4,7 @@ package text_to_speech
 
 import (
 	"bytes"
+	"context"
 	"encoding/base64"
 	"encoding/json"
 	"fmt"
@@ -12,6 +13,7 @@ import (
 
 	core "flomation.app/automate/executor"
 	el "flomation.app/automate/executor/actions/elevenlabs"
+	log "github.com/sirupsen/logrus"
 )
 
 const (
@@ -171,7 +173,13 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	endpoint := fmt.Sprintf("%s/text-to-speech/%s?output_format=%s",
 		el.APIURL, voiceID, outputFormat)
 
-	req, err := http.NewRequestWithContext(flow.GoContext(), http.MethodPost,
+	// Use a bounded context for the entire TTS request (including body read).
+	// ElevenLabs can stream audio slowly, so the flow's Go context alone
+	// may not have a deadline. This ensures we never hang indefinitely.
+	reqCtx, reqCancel := context.WithTimeout(flow.GoContext(), el.RequestTimeout)
+	defer reqCancel()
+
+	req, err := http.NewRequestWithContext(reqCtx, http.MethodPost,
 		endpoint, bytes.NewReader(payload))
 	if err != nil {
 		return errResult(fmt.Sprintf("Failed to build request: %v", err))
@@ -183,11 +191,29 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	client := &http.Client{Timeout: el.RequestTimeout}
 	resp, err := client.Do(req)
 	if err != nil {
+		if reqCtx.Err() != nil {
+			return errResult(fmt.Sprintf("ElevenLabs TTS timed out after %v", el.RequestTimeout))
+		}
 		return errResult(fmt.Sprintf("ElevenLabs API error: %v", err))
 	}
 	defer func() { _ = resp.Body.Close() }()
 
-	audioBytes, _ := io.ReadAll(io.LimitReader(resp.Body, el.MaxResponseBody))
+	log.WithFields(log.Fields{
+		"status":         resp.StatusCode,
+		"content_length": resp.ContentLength,
+	}).Info("[elevenlabs_tts] response received, reading body")
+
+	audioBytes, err := io.ReadAll(io.LimitReader(resp.Body, el.MaxResponseBody))
+	if err != nil {
+		if reqCtx.Err() != nil {
+			return errResult(fmt.Sprintf("ElevenLabs TTS body read timed out after %v", el.RequestTimeout))
+		}
+		return errResult(fmt.Sprintf("Failed to read audio response: %v", err))
+	}
+
+	log.WithFields(log.Fields{
+		"size_bytes": len(audioBytes),
+	}).Info("[elevenlabs_tts] body read complete")
 
 	if resp.StatusCode != http.StatusOK {
 		return errResult(fmt.Sprintf("ElevenLabs API returned %d: %s", resp.StatusCode, string(audioBytes)))
