@@ -25,6 +25,8 @@ import (
 	aws_s3_get "flomation.app/automate/executor/actions/aws/s3/get"
 	aws_s3_list "flomation.app/automate/executor/actions/aws/s3/list"
 	aws_s3_put "flomation.app/automate/executor/actions/aws/s3/put"
+	common_array_index "flomation.app/automate/executor/actions/common/array_index"
+	common_array_length "flomation.app/automate/executor/actions/common/array_length"
 	common_data_combine "flomation.app/automate/executor/actions/common/data_combine"
 	common_data_extract "flomation.app/automate/executor/actions/common/data_extract"
 	common_data_rename "flomation.app/automate/executor/actions/common/data_rename"
@@ -122,6 +124,8 @@ var Actions = map[string]core.Action{
 	"aws/s3/get":                  aws_s3_get.Execute,
 	"aws/s3/list":                 aws_s3_list.Execute,
 	"aws/s3/put":                  aws_s3_put.Execute,
+	"common/array_index":          common_array_index.Execute,
+	"common/array_length":         common_array_length.Execute,
 	"common/data_combine":         common_data_combine.Execute,
 	"common/data_extract":         common_data_extract.Execute,
 	"common/data_rename":          common_data_rename.Execute,

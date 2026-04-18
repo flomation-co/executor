@@ -1578,6 +1578,126 @@
       }
     ]
   },
+  "common/array_index": {
+    "hash": "107946c095b2175c3db49cd559e99b65c272dbfde4d6571f05964f359802b9b8",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Array Index",
+    "description": "Extract a single item from an array by its index (0-based)",
+    "website": "https://www.flomation.co",
+    "icon": "list",
+    "date": "19/04/2026",
+    "type": 2,
+    "category": {
+      "name": "Common",
+      "icon": "toolbox",
+      "description": "General-purpose data utilities"
+    },
+    "inputs": [
+      {
+        "name": "array",
+        "type": "object",
+        "value": null,
+        "label": "Array",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "index",
+        "type": "integer",
+        "value": null,
+        "label": "Index (0-based)",
+        "placeholder": "0",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result",
+        "placeholder": ""
+      },
+      {
+        "name": "item",
+        "type": "object",
+        "value": null,
+        "label": "Item",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "common/array_length": {
+    "hash": "546b2fd3450929b3118157f8f12c3889905f5480880979421b7dd846f12690ee",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Array Length",
+    "description": "Returns the number of items in an array",
+    "website": "https://www.flomation.co",
+    "icon": "list",
+    "date": "19/04/2026",
+    "type": 2,
+    "category": {
+      "name": "Common",
+      "icon": "toolbox",
+      "description": "General-purpose data utilities"
+    },
+    "inputs": [
+      {
+        "name": "array",
+        "type": "object",
+        "value": null,
+        "label": "Array",
+        "placeholder": "",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result",
+        "placeholder": ""
+      },
+      {
+        "name": "length",
+        "type": "integer",
+        "value": null,
+        "label": "Length",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
   "common/data_combine": {
     "hash": "b6f4c73aa6bdbff1c9845c040366feb5f036c55f7646eec6e5d9a7a840c3e2d6",
     "author": "Andy Esser",
