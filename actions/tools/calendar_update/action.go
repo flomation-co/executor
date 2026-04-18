@@ -245,7 +245,7 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	// For single instance updates, PUT with the full event body works fine.
 	var method string
 	var payload []byte
-	updateURL := fmt.Sprintf("%s/calendars/primary/events/%s", calendarAPIBase, targetID)
+	updateURL := fmt.Sprintf("%s/calendars/primary/events/%s?sendUpdates=all", calendarAPIBase, targetID)
 
 	if scope == "all_events" {
 		// PATCH the master event with only changed fields — preserves RRULE
@@ -281,7 +281,7 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 				}
 			}
 		}
-		updateURL = fmt.Sprintf("%s/calendars/primary/events/%s", calendarAPIBase, eventID)
+		updateURL = fmt.Sprintf("%s/calendars/primary/events/%s?sendUpdates=all", calendarAPIBase, eventID)
 		payload, _ = json.Marshal(existing)
 		method = http.MethodPut
 	} else {
