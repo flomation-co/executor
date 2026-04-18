@@ -94,6 +94,7 @@ var Inputs = [...]core.Connection{
 
 var Outputs = [...]core.Connection{
 	{Name: "response", Type: core.ConnectionTypeString, Label: "Response"},
+	{Name: "response_mode", Type: core.ConnectionTypeString, Label: "Response Mode (text or voice)"},
 	{Name: "should_respond", Type: core.ConnectionTypeBoolean, Label: "Should Respond"},
 	{Name: "model", Type: core.ConnectionTypeString, Label: "Model Used"},
 	{Name: "input_tokens", Type: core.ConnectionTypeInteger, Label: "Input Tokens"},
@@ -473,6 +474,20 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 		content = "" // Don't record or send empty responses
 	}
 
+	// Parse response mode prefix: [VOICE] or [TEXT]. The AI includes
+	// this when the channel supports multiple response formats (e.g.
+	// telegram_voice conversations where the agent can reply with
+	// either a voice note or a text message). Default is "text".
+	responseMode := "text"
+	contentTrimmed := strings.TrimSpace(content)
+	if strings.HasPrefix(contentTrimmed, "[VOICE]") {
+		responseMode = "voice"
+		content = strings.TrimSpace(strings.TrimPrefix(contentTrimmed, "[VOICE]"))
+	} else if strings.HasPrefix(contentTrimmed, "[TEXT]") {
+		responseMode = "text"
+		content = strings.TrimSpace(strings.TrimPrefix(contentTrimmed, "[TEXT]"))
+	}
+
 	if shouldRespond && content != "" {
 		// Record any accumulated tool exchanges before the final reply
 		// so the conversation history includes what tools were called.
@@ -485,6 +500,7 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 
 	return map[string]interface{}{
 		"response":         content,
+		"response_mode":    responseMode,
 		"should_respond":   shouldRespond,
 		"model":            result.Model,
 		"input_tokens":     result.Usage.InputTokens,
