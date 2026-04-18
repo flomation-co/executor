@@ -2187,6 +2187,11 @@ var secretPattern = regexp.MustCompile(`\$\{secrets?\.`)
 // runner and API SSE infrastructure to consume. When inputs/outputs are
 // provided (on completion), they are included so the editor can show them
 // in real time without waiting for the full execution to finish.
+// maxEventValueLen is the maximum length of a string value in node events.
+// Values exceeding this are truncated to prevent stdout pipe deadlocks
+// when large binary data (e.g. base64 audio) is included in outputs.
+const maxEventValueLen = 4096
+
 func (f *Flow) emitNodeEvent(id, action, label, status string, durationMs int64, errMsg string, inputs ...map[string]interface{}) {
 	evt := map[string]interface{}{
 		"id":     id,
@@ -2202,13 +2207,28 @@ func (f *Flow) emitNodeEvent(id, action, label, status string, durationMs int64,
 	}
 	// inputs[0] = resolved inputs, inputs[1] = outputs (variadic to keep "running" calls simple)
 	if len(inputs) > 0 && inputs[0] != nil {
-		evt["inputs"] = inputs[0]
+		evt["inputs"] = truncateEventValues(inputs[0])
 	}
 	if len(inputs) > 1 && inputs[1] != nil {
-		evt["outputs"] = inputs[1]
+		evt["outputs"] = truncateEventValues(inputs[1])
 	}
 	b, _ := json.Marshal(evt)
 	fmt.Fprintf(os.Stdout, "__NODE__:%s\n", b)
+}
+
+// truncateEventValues creates a shallow copy of a map with oversized string
+// values truncated. This prevents node events from containing megabytes of
+// base64-encoded binary data that would block the stdout pipe.
+func truncateEventValues(m map[string]interface{}) map[string]interface{} {
+	out := make(map[string]interface{}, len(m))
+	for k, v := range m {
+		if s, ok := v.(string); ok && len(s) > maxEventValueLen {
+			out[k] = s[:maxEventValueLen] + fmt.Sprintf("... [truncated, %d bytes total]", len(s))
+		} else {
+			out[k] = v
+		}
+	}
+	return out
 }
 
 // buildObfuscatedInputMap creates an input map with secret values masked.
