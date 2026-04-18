@@ -636,15 +636,42 @@ func (f *Flow) Execute(actions map[string]Action, entry *string, environment *en
 	if entry != nil {
 		start = f.FindNode(*entry)
 	} else {
+		// When no explicit entry node is set, find the trigger that
+		// matches the channel_type from the execution context. This
+		// ensures voice messages start from trigger/telegram, not
+		// whichever trigger appears first in the nodes array.
+		var channelType string
+		if f.context != nil {
+			channelType = f.context.Get("channel_type")
+		}
+		var fallback *Node
 		for _, n := range f.Nodes {
 			if n == nil {
 				continue
 			}
-
-			if strings.HasPrefix(n.Type, "trigger/") {
-				start = n
-				break
+			if !strings.HasPrefix(n.Type, "trigger/") {
+				continue
 			}
+			if fallback == nil {
+				fallback = n
+			}
+			if channelType != "" && n.Data != nil {
+				label := n.Data.Label
+				if label == "trigger/"+channelType {
+					start = n
+					break
+				}
+				// Match sub-types (e.g. telegram_voice → trigger/telegram)
+				if idx := strings.LastIndex(channelType, "_"); idx > 0 {
+					if label == "trigger/"+channelType[:idx] {
+						start = n
+						break
+					}
+				}
+			}
+		}
+		if start == nil {
+			start = fallback
 		}
 	}
 
@@ -820,6 +847,22 @@ func (f *Flow) executeNodeActionOnly(actions map[string]Action, node *Node, envi
 			continue
 		}
 
+		// Skip parents on unmatched conditional/switch branches. If a parent
+		// hasn't been executed yet AND it's not reachable from a matched
+		// branch, executing it would trigger the wrong code path. Parents
+		// that already ran (cached result) are always included — they
+		// were on the active execution path.
+		if _, cached := f.nodeResults[p.ID]; !cached {
+			if f.isOnUnmatchedBranch(p.ID) {
+				log.WithFields(log.Fields{
+					"node":   node.ID,
+					"parent": p.ID,
+					"action": p.Data.Label,
+				}).Debug("skipping parent on unmatched conditional branch")
+				continue
+			}
+		}
+
 		results, err = f.ExecuteNode(actions, p, environment)
 		if err != nil {
 			return nil, err
@@ -892,7 +935,7 @@ func (f *Flow) executeNodeActionOnly(actions map[string]Action, node *Node, envi
 			hasExplicitValue = false
 		}
 		if !hasExplicitValue {
-			if parentVal, exists := results[v.Name]; exists {
+			if parentVal, exists := parentResults[v.Name]; exists {
 				value = parentVal
 			}
 		}
@@ -1610,6 +1653,92 @@ func (f *Flow) executeNodeChildren(actions map[string]Action, node *Node, output
 	}
 
 	return combinedResults, nil
+}
+
+// isOnUnmatchedBranch checks whether a node is exclusively reachable via
+// an unmatched conditional/switch/loop branch. It walks up from the node
+// through its ancestors looking for branching nodes (conditional, switch,
+// loop) that have already executed. If such a node exists and this node
+// is connected via a handle that wasn't the matched branch, it returns true.
+//
+// This prevents parent resolution from triggering nodes on inactive
+// branches (e.g. STT on the voice path when a text message is being
+// processed).
+func (f *Flow) isOnUnmatchedBranch(nodeID string) bool {
+	// Walk up through ancestors to find any branching node
+	visited := make(map[string]bool)
+	return f.checkUnmatchedBranch(nodeID, visited)
+}
+
+func (f *Flow) checkUnmatchedBranch(nodeID string, visited map[string]bool) bool {
+	if visited[nodeID] {
+		return false
+	}
+	visited[nodeID] = true
+
+	// Check all edges where this node is the target
+	for _, e := range f.Edges {
+		if e == nil || e.Target != nodeID {
+			continue
+		}
+
+		sourceNode := f.FindNode(e.Source)
+		if sourceNode == nil || sourceNode.Data == nil {
+			continue
+		}
+
+		nodeType := sourceNode.Data.Config.Type
+
+		// Check if the source is a branching node (conditional, switch, loop)
+		isBranching := nodeType == ActionTypeConditional ||
+			nodeType == ActionTypeSwitch ||
+			nodeType == ActionTypeLoop
+
+		if isBranching {
+			// If this branching node has already executed, check if our
+			// edge's sourceHandle was the matched branch
+			if branchResult, ok := f.nodeResults[sourceNode.ID]; ok {
+				edgeHandle := e.SourceHandle
+
+				// Determine which handle was matched
+				var matchedHandle string
+				switch nodeType {
+				case ActionTypeSwitch:
+					if mc, ok := branchResult["matched_case"].(string); ok {
+						matchedHandle = mc
+					}
+				case ActionTypeConditional:
+					if result, ok := branchResult["result"].(bool); ok {
+						if result {
+							matchedHandle = "true-branch"
+						} else {
+							matchedHandle = "false-branch"
+						}
+					}
+				case ActionTypeLoop:
+					// Loop body children use "loop" handle, output uses "output"
+					// Both are valid paths, so don't block either
+					continue
+				}
+
+				// If the edge's handle doesn't match the matched branch,
+				// this node is on an unmatched branch
+				if edgeHandle != "" && matchedHandle != "" && edgeHandle != matchedHandle {
+					return true
+				}
+			}
+			// If the branching node hasn't executed yet, we can't determine
+			// if this branch is matched — don't block it
+			continue
+		}
+
+		// Not a branching node — check further up the chain
+		if f.checkUnmatchedBranch(e.Source, visited) {
+			return true
+		}
+	}
+
+	return false
 }
 
 // isEmpty returns true if a value is nil, an empty string, or a zero-length

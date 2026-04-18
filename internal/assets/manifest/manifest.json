@@ -1647,7 +1647,7 @@
     ]
   },
   "common/data_rename": {
-    "hash": "3a7c1a15a82eef8f28e8cb53028223235b37a8c7963e68b013b28226e0dcb598",
+    "hash": "8afc6b1453fe2b67fb62e5eec539b15c007c83f67a43302d221dbc5f9a596f6b",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Data Rename",
@@ -1677,6 +1677,13 @@
         "label": "Output Key",
         "placeholder": "The new key name for the value",
         "required": true
+      },
+      {
+        "name": "value",
+        "type": "string",
+        "value": null,
+        "label": "Value (optional — if set, uses this instead of looking up input_key from parents)",
+        "placeholder": "${text}"
       }
     ],
     "outputs": [
