@@ -573,7 +573,7 @@
     ]
   },
   "ai/anthropic": {
-    "hash": "fd6aae84a61f6b84aa4606d2fe2a1b43e228d53f77fa1f0a5c38d495e7c7af10",
+    "hash": "df8297dd531614d4db959164b052ae259655ba883fad56f9f4fa0ab90df74c11",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Anthropic Prompt",
@@ -667,6 +667,13 @@
         "type": "string",
         "value": null,
         "label": "Response",
+        "placeholder": ""
+      },
+      {
+        "name": "response_mode",
+        "type": "string",
+        "value": null,
+        "label": "Response Mode (text or voice)",
         "placeholder": ""
       },
       {
@@ -2489,7 +2496,7 @@
     ]
   },
   "elevenlabs/text_to_speech": {
-    "hash": "b1fb9e5a82a215959e019edf4a47c94ee628695cd6efde10ca3f636c0dfacff8",
+    "hash": "b210c9b11462cb48ab439878af282f33739549a1a967fd52505baeec70ddccb1",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Text to Speech",
