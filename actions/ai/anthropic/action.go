@@ -417,6 +417,7 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 		out := map[string]interface{}{
 			core.ToolRequestsKey:         toolRequests,
 			core.ToolConversationStateKey: messages,
+			"response_mode":              "text", // default during tool calls; final response may override
 			"stop_reason":                result.StopReason,
 			"model":                      result.Model,
 			"input_tokens":               result.Usage.InputTokens,
