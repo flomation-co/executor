@@ -573,7 +573,7 @@
     ]
   },
   "ai/anthropic": {
-    "hash": "df8297dd531614d4db959164b052ae259655ba883fad56f9f4fa0ab90df74c11",
+    "hash": "eeab66810d6c518c4023e1d28021965afc2fe00b0c33491a9643a2728df59814",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Anthropic Prompt",
@@ -5879,7 +5879,7 @@
     ]
   },
   "tools/calendar_create": {
-    "hash": "3b28de72ba239797bb5b8ebf40e057d26e9a93197db1146e5d5d029d112c3082",
+    "hash": "33a689156b625d5aea80d221b1a6fa8549926c061e2afc3adc6af021f2ad52c8",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Calendar Create Event",
@@ -6177,7 +6177,7 @@
     ]
   },
   "tools/calendar_update": {
-    "hash": "9d7eba34e8ac813c1355960f3a8861112fec2d2425afa6e6191668f9b4e39b0e",
+    "hash": "e26aa43781d3d105df758d08afe9b84e7437e590bff57d640a8b6c2ae4304511",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Calendar Update Event",
