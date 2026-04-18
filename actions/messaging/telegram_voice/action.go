@@ -1,6 +1,6 @@
 // Package telegram_voice sends a voice message via the Telegram Bot API.
-// It can take pre-encoded OGG audio (base64) directly, or convert text to
-// speech using ElevenLabs first and then send the resulting audio.
+// Takes pre-encoded audio as base64 input — use a separate TTS action
+// (e.g. elevenlabs/text_to_speech) upstream to convert text to audio first.
 package telegram_voice
 
 import (
@@ -20,14 +20,13 @@ const (
 	Author       = "Andy Esser"
 	Organisation = "Flomation"
 	Name         = "Send Telegram Voice"
-	Description  = "Send a voice message via Telegram. Provide audio as base64 OGG, or text to auto-convert via ElevenLabs TTS."
+	Description  = "Send a voice message via Telegram. Wire an ElevenLabs TTS node upstream to convert text to audio."
 	Website      = "https://www.flomation.co"
 	Icon         = "paper-plane"
 	Date         = "18/04/2026"
 	Type         = core.ActionTypeAction
 
 	telegramAPIBase = "https://api.telegram.org"
-	elevenlabsAPI   = "https://api.elevenlabs.io/v1"
 )
 
 var Inputs = [...]core.Connection{
@@ -46,34 +45,10 @@ var Inputs = [...]core.Connection{
 		Required:    true,
 	},
 	{
-		Name:  "message",
-		Type:  core.ConnectionTypeText,
-		Label: "Text to speak (uses ElevenLabs TTS). Ignored if audio_base64 is provided.",
-	},
-	{
-		Name:  "audio_base64",
-		Type:  core.ConnectionTypeString,
-		Label: "Pre-encoded audio (base64, OGG format). If provided, sent directly.",
-	},
-	{
-		Name:  "elevenlabs_api_key",
-		Type:  core.ConnectionTypeString,
-		Label: "ElevenLabs API Key (required for text-to-speech)",
-	},
-	{
-		Name:  "voice_id",
-		Type:  core.ConnectionTypeString,
-		Label: "ElevenLabs Voice ID (default: Rachel)",
-		Placeholder: "21m00Tcm4TlvDq8ikWAM",
-	},
-	{
-		Name:  "model_id",
-		Type:  core.ConnectionTypeString,
-		Label: "ElevenLabs Model",
-		Options: []core.ConnectionOption{
-			{Name: "Multilingual v2", Value: "eleven_multilingual_v2"},
-			{Name: "Turbo v2.5", Value: "eleven_turbo_v2_5"},
-		},
+		Name:        "audio_base64",
+		Type:        core.ConnectionTypeString,
+		Label:       "Audio data (base64). Wire from an upstream TTS or audio action.",
+		Required:    true,
 	},
 	{
 		Name:  "caption",
@@ -102,45 +77,21 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	}
 
 	audioB64 := optionalString("audio_base64", inputs)
-	message := optionalString("message", inputs)
+	if audioB64 == "" {
+		return errResult("audio_base64 is required — wire an ElevenLabs TTS or other audio action upstream")
+	}
+
 	caption := optionalString("caption", inputs)
 
-	var audioData []byte
-
-	if audioB64 != "" {
-		// Use pre-encoded audio directly
-		var err error
-		audioData, err = base64.StdEncoding.DecodeString(audioB64)
+	audioData, err := base64.StdEncoding.DecodeString(audioB64)
+	if err != nil {
+		// Try URL-safe base64
+		audioData, err = base64.URLEncoding.DecodeString(audioB64)
 		if err != nil {
 			return errResult(fmt.Sprintf("Failed to decode audio_base64: %v", err))
 		}
-	} else if message != "" {
-		// Convert text to speech via ElevenLabs
-		elAPIKey := optionalString("elevenlabs_api_key", inputs)
-		if elAPIKey == "" {
-			return errResult("elevenlabs_api_key is required when using text-to-speech (no audio_base64 provided)")
-		}
-
-		voiceID := optionalString("voice_id", inputs)
-		if voiceID == "" {
-			voiceID = "21m00Tcm4TlvDq8ikWAM" // Rachel (default)
-		}
-
-		modelID := optionalString("model_id", inputs)
-		if modelID == "" {
-			modelID = "eleven_multilingual_v2"
-		}
-
-		var err error
-		audioData, err = textToSpeech(flow, elAPIKey, message, voiceID, modelID)
-		if err != nil {
-			return errResult(fmt.Sprintf("ElevenLabs TTS failed: %v", err))
-		}
-	} else {
-		return errResult("Either message (for TTS) or audio_base64 (pre-encoded) is required")
 	}
 
-	// Send via Telegram sendVoice
 	msgID, err := sendVoice(flow, botToken, channelID, audioData, caption)
 	if err != nil {
 		return errResult(fmt.Sprintf("Failed to send voice message: %v", err))
@@ -153,39 +104,6 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 		"success":          true,
 		"error":            "",
 	}, nil
-}
-
-func textToSpeech(flow *core.Flow, apiKey, text, voiceID, modelID string) ([]byte, error) {
-	payload, _ := json.Marshal(map[string]interface{}{
-		"text":     text,
-		"model_id": modelID,
-	})
-
-	// Request OGG/OPUS format — Telegram's native voice format
-	endpoint := fmt.Sprintf("%s/text-to-speech/%s?output_format=mp3_44100_128",
-		elevenlabsAPI, voiceID)
-
-	req, err := http.NewRequestWithContext(flow.GoContext(), http.MethodPost, endpoint, bytes.NewReader(payload))
-	if err != nil {
-		return nil, err
-	}
-	req.Header.Set("xi-api-key", apiKey)
-	req.Header.Set("Content-Type", "application/json")
-
-	client := &http.Client{Timeout: 120 * time.Second}
-	resp, err := client.Do(req)
-	if err != nil {
-		return nil, err
-	}
-	defer func() { _ = resp.Body.Close() }()
-
-	data, _ := io.ReadAll(io.LimitReader(resp.Body, 50<<20))
-
-	if resp.StatusCode != http.StatusOK {
-		return nil, fmt.Errorf("ElevenLabs API returned %d: %s", resp.StatusCode, string(data[:min(len(data), 500)]))
-	}
-
-	return data, nil
 }
 
 func sendVoice(flow *core.Flow, botToken, chatID string, audioData []byte, caption string) (int64, error) {

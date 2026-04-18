@@ -4816,11 +4816,11 @@
     ]
   },
   "messaging/telegram_voice": {
-    "hash": "3d8a019cc08dbf028e95eda45d366376c816b605f187715a6c969897dc3d5567",
+    "hash": "cc6972244392ccf5f1444062b259703c674a9b41fa8bd6b4dcfd508e945ac3a9",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Send Telegram Voice",
-    "description": "Send a voice message via Telegram. Provide audio as base64 OGG, or text to auto-convert via ElevenLabs TTS.",
+    "description": "Send a voice message via Telegram. Wire an ElevenLabs TTS node upstream to convert text to audio.",
     "website": "https://www.flomation.co",
     "icon": "paper-plane",
     "date": "18/04/2026",
@@ -4848,49 +4848,12 @@
         "required": true
       },
       {
-        "name": "message",
-        "type": "text",
-        "value": null,
-        "label": "Text to speak (uses ElevenLabs TTS). Ignored if audio_base64 is provided.",
-        "placeholder": ""
-      },
-      {
         "name": "audio_base64",
         "type": "string",
         "value": null,
-        "label": "Pre-encoded audio (base64, OGG format). If provided, sent directly.",
-        "placeholder": ""
-      },
-      {
-        "name": "elevenlabs_api_key",
-        "type": "string",
-        "value": null,
-        "label": "ElevenLabs API Key (required for text-to-speech)",
-        "placeholder": ""
-      },
-      {
-        "name": "voice_id",
-        "type": "string",
-        "value": null,
-        "label": "ElevenLabs Voice ID (default: Rachel)",
-        "placeholder": "21m00Tcm4TlvDq8ikWAM"
-      },
-      {
-        "name": "model_id",
-        "type": "string",
-        "value": null,
-        "label": "ElevenLabs Model",
+        "label": "Audio data (base64). Wire from an upstream TTS or audio action.",
         "placeholder": "",
-        "options": [
-          {
-            "name": "Multilingual v2",
-            "value": "eleven_multilingual_v2"
-          },
-          {
-            "name": "Turbo v2.5",
-            "value": "eleven_turbo_v2_5"
-          }
-        ]
+        "required": true
       },
       {
         "name": "caption",
