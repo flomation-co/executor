@@ -561,12 +561,22 @@ func (f *Flow) InjectTriggerData(data map[string]interface{}) {
 			continue
 		}
 
-		// Match channel type to trigger label (e.g. "slack" matches "trigger/slack")
+		// Match channel type to trigger label (e.g. "slack" matches "trigger/slack").
+		// Also match sub-types like "telegram_voice" to "trigger/telegram" so
+		// voice messages route to the base Telegram trigger node.
 		if channelType != "" {
 			label := n.Data.Label
 			if label == "trigger/"+channelType {
 				targetNode = n
 				break
+			}
+			// Try base channel type (strip _suffix)
+			if idx := strings.LastIndex(channelType, "_"); idx > 0 {
+				baseType := channelType[:idx]
+				if label == "trigger/"+baseType {
+					targetNode = n
+					break
+				}
 			}
 		}
 
@@ -815,7 +825,29 @@ func (f *Flow) executeNodeActionOnly(actions map[string]Action, node *Node, envi
 			return nil, err
 		}
 
+		// Skip execution if a direct parent failed — don't run children
+		// of nodes that produced errors, regardless of other edges.
+		if parentResult, ok := f.nodeExecutionResults[p.ID]; ok && parentResult.Status == "failed" {
+			log.WithFields(log.Fields{
+				"node":   node.ID,
+				"parent": p.ID,
+				"action": p.Data.Label,
+			}).Info("skipping node: direct parent failed")
+			f.emitNodeEvent(node.ID, node.Type, node.Data.Label, "skipped", 0, "parent node failed")
+			f.recordNodeResult(node, "skipped", nil, nil, 0, "parent node failed")
+			return nil, fmt.Errorf("parent node %s failed", p.Data.Label)
+		}
+
 		for k, v := range results {
+			// When multiple parents provide the same output key, prefer
+			// non-empty values over empty ones. This ensures trigger data
+			// that passes through conditional nodes isn't overwritten by
+			// empty outputs from other parent branches.
+			if existing, ok := parentResults[k]; ok {
+				if isEmpty(v) && !isEmpty(existing) {
+					continue // keep the non-empty value
+				}
+			}
 			parentResults[k] = v
 		}
 	}
@@ -1578,6 +1610,18 @@ func (f *Flow) executeNodeChildren(actions map[string]Action, node *Node, output
 	}
 
 	return combinedResults, nil
+}
+
+// isEmpty returns true if a value is nil, an empty string, or a zero-length
+// collection. Used when merging parent outputs to prefer non-empty values.
+func isEmpty(v interface{}) bool {
+	if v == nil {
+		return true
+	}
+	if s, ok := v.(string); ok {
+		return s == ""
+	}
+	return false
 }
 
 // clearSubgraphResults removes cached results for all nodes reachable from

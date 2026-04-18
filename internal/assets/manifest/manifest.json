@@ -2482,7 +2482,7 @@
     ]
   },
   "elevenlabs/text_to_speech": {
-    "hash": "803192aa03dd2fc5c5bc85288cf711ee96ddb411778645c6d64d57b593b4e40c",
+    "hash": "b1fb9e5a82a215959e019edf4a47c94ee628695cd6efde10ca3f636c0dfacff8",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Text to Speech",
@@ -2566,6 +2566,13 @@
         "value": null,
         "label": "Style exaggeration (0.0-1.0, v2 models only)",
         "placeholder": "0.0"
+      },
+      {
+        "name": "use_speaker_boost",
+        "type": "boolean",
+        "value": null,
+        "label": "Use Speaker Boost (enhances voice clarity and presence)",
+        "placeholder": ""
       },
       {
         "name": "output_format",

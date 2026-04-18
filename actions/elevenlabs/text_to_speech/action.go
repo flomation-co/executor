@@ -77,6 +77,11 @@ var Inputs = [...]core.Connection{
 		Placeholder: "0.0",
 	},
 	{
+		Name:  "use_speaker_boost",
+		Type:  core.ConnectionTypeBoolean,
+		Label: "Use Speaker Boost (enhances voice clarity and presence)",
+	},
+	{
 		Name:  "output_format",
 		Type:  core.ConnectionTypeString,
 		Label: "Output Format",
@@ -151,6 +156,11 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 		var f float64
 		fmt.Sscanf(v, "%f", &f)
 		voiceSettings["style"] = f
+	}
+	if boostConn := core.FindConnection("use_speaker_boost", inputs); boostConn != nil {
+		if b := boostConn.Boolean(); b != nil {
+			voiceSettings["use_speaker_boost"] = *b
+		}
 	}
 	if len(voiceSettings) > 0 {
 		reqBody["voice_settings"] = voiceSettings
