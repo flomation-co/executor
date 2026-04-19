@@ -1740,14 +1740,33 @@ func (f *Flow) executeSubFlow(actions map[string]Action, name string, invokeOutp
 	defer f.SetVariable(depthKey, depth)
 
 	// Inject invoke parameters into the Begin node's inputs.
-	// Parameters from the Invoke node are passed through as inputs
-	// on the Begin node so its Execute function can echo them as outputs.
+	// For existing inputs, update their values. For new parameters
+	// from the Invoke node, add them as new connections so the Begin
+	// action can echo them as outputs.
 	for _, inp := range beginNode.Data.Config.Inputs {
 		if inp.Name == "name" {
 			continue
 		}
 		if v, exists := invokeOutputs[inp.Name]; exists {
 			inp.Value = v
+		}
+	}
+	// Add any invoke parameters that don't have matching input connections
+	for k, v := range invokeOutputs {
+		if k == "sub_flow_name" || k == SubFlowNameKey || k == "tool_result" ||
+			k == "success" || k == "error" {
+			continue
+		}
+		found := false
+		for _, inp := range beginNode.Data.Config.Inputs {
+			if inp.Name == k {
+				found = true
+				break
+			}
+		}
+		if !found {
+			beginNode.Data.Config.Inputs = append(beginNode.Data.Config.Inputs,
+				&Connection{Name: k, Type: ConnectionTypeString, Value: v})
 		}
 	}
 
@@ -1767,6 +1786,20 @@ func (f *Flow) executeSubFlow(actions map[string]Action, name string, invokeOutp
 	_, err := f.ExecuteNode(actions, beginNode, environment)
 	if err != nil {
 		return nil, fmt.Errorf("sub-flow '%s' failed: %w", name, err)
+	}
+
+	// Ensure all invoke parameters are visible in the Begin node's cached
+	// results so downstream sub-flow nodes can reference them via ${param}.
+	if beginResults, ok := f.nodeResults[beginNode.ID]; ok {
+		for k, v := range invokeOutputs {
+			if k == "sub_flow_name" || k == SubFlowNameKey || k == "tool_result" ||
+				k == "success" || k == "error" {
+				continue
+			}
+			if _, exists := beginResults[k]; !exists {
+				beginResults[k] = v
+			}
+		}
 	}
 
 	// Collect results: prefer End Sub-Flow node outputs if one was reached
