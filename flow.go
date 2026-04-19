@@ -2050,36 +2050,67 @@ func (f *Flow) checkUnmatchedBranch(nodeID string, visited map[string]bool) bool
 	}
 	visited[nodeID] = true
 
+	// Group edges by source node to handle cases where a node has
+	// multiple edges from the same Switch (e.g. both case_1 and default).
+	// The node is only on an unmatched branch if ALL edges from a given
+	// Switch/Conditional source are unmatched.
+	type edgeInfo struct {
+		handle     string
+		sourceNode *Node
+		sourceType int64
+	}
+	edgesBySource := make(map[string][]edgeInfo)
+
 	for _, e := range f.Edges {
 		if e == nil || e.Target != nodeID {
 			continue
 		}
-
 		sourceNode := f.FindNode(e.Source)
 		if sourceNode == nil || sourceNode.Data == nil {
 			continue
 		}
+		edgesBySource[e.Source] = append(edgesBySource[e.Source], edgeInfo{
+			handle:     e.SourceHandle,
+			sourceNode: sourceNode,
+			sourceType: sourceNode.Data.Config.Type,
+		})
+	}
 
-		sourceType := sourceNode.Data.Config.Type
+	for _, edges := range edgesBySource {
+		if len(edges) == 0 {
+			continue
+		}
+		sourceNode := edges[0].sourceNode
+		sourceType := edges[0].sourceType
 
-		// Check if the edge comes from a Conditional's unmatched branch
 		if sourceType == ActionTypeConditional {
 			if cached, ok := f.nodeResults[sourceNode.ID]; ok {
 				result, _ := cached["result"].(bool)
-				if (result && e.SourceHandle == "false-branch") ||
-					(!result && e.SourceHandle == "true-branch") {
+				allUnmatched := true
+				for _, ei := range edges {
+					if (result && ei.handle == "true-branch") || (!result && ei.handle == "false-branch") || ei.handle == "" {
+						allUnmatched = false
+						break
+					}
+				}
+				if allUnmatched {
 					return true
 				}
 			}
 		}
 
-		// Check if the edge comes from a Switch's unmatched case
 		if sourceType == ActionTypeSwitch {
 			if cached, ok := f.nodeResults[sourceNode.ID]; ok {
 				matchedCase, _ := cached["matched_case"].(string)
-				if e.SourceHandle != "" && matchedCase != "" && e.SourceHandle != matchedCase {
-					// Also allow default handle if nothing matched
-					if e.SourceHandle != "default" {
+				if matchedCase != "" {
+					allUnmatched := true
+					for _, ei := range edges {
+						if ei.handle == "" || ei.handle == matchedCase || ei.handle == "default" {
+							allUnmatched = false
+							break
+						}
+					}
+					if allUnmatched {
 						return true
 					}
 				}
