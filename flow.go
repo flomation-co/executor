@@ -824,6 +824,18 @@ func (f *Flow) executeNodeActionOnly(actions map[string]Action, node *Node, envi
 			continue
 		}
 
+		// Skip parents on unmatched Switch/Conditional branches.
+		// If a parent was reached via a Switch edge whose case wasn't
+		// matched at runtime, it should not be executed.
+		if f.isOnUnmatchedBranch(p.ID) {
+			log.WithFields(log.Fields{
+				"node":   node.ID,
+				"parent": p.ID,
+				"action": p.Data.Label,
+			}).Debug("skipping parent on unmatched conditional branch")
+			continue
+		}
+
 		results, err = f.ExecuteNode(actions, p, environment)
 		if err != nil {
 			return nil, err
@@ -2023,6 +2035,67 @@ func (f *Flow) collectToolResult(parentID string) string {
 
 // secretPattern matches ${secrets.X} and ${secret.X} variable references.
 var secretPattern = regexp.MustCompile(`\$\{secrets?\.`)
+
+// isOnUnmatchedBranch checks whether a node sits on an unmatched
+// Switch or Conditional branch. It walks up through the node's ancestors
+// looking for edges from Switch/Conditional nodes whose source handle
+// doesn't match the runtime-selected case.
+func (f *Flow) isOnUnmatchedBranch(nodeID string) bool {
+	return f.checkUnmatchedBranch(nodeID, make(map[string]bool))
+}
+
+func (f *Flow) checkUnmatchedBranch(nodeID string, visited map[string]bool) bool {
+	if visited[nodeID] {
+		return false
+	}
+	visited[nodeID] = true
+
+	for _, e := range f.Edges {
+		if e == nil || e.Target != nodeID {
+			continue
+		}
+
+		sourceNode := f.FindNode(e.Source)
+		if sourceNode == nil || sourceNode.Data == nil {
+			continue
+		}
+
+		sourceType := sourceNode.Data.Config.Type
+
+		// Check if the edge comes from a Conditional's unmatched branch
+		if sourceType == ActionTypeConditional {
+			if cached, ok := f.nodeResults[sourceNode.ID]; ok {
+				result, _ := cached["result"].(bool)
+				if (result && e.SourceHandle == "false-branch") ||
+					(!result && e.SourceHandle == "true-branch") {
+					return true
+				}
+			}
+		}
+
+		// Check if the edge comes from a Switch's unmatched case
+		if sourceType == ActionTypeSwitch {
+			if cached, ok := f.nodeResults[sourceNode.ID]; ok {
+				matchedCase, _ := cached["matched_case"].(string)
+				if e.SourceHandle != "" && matchedCase != "" && e.SourceHandle != matchedCase {
+					// Also allow default handle if nothing matched
+					if e.SourceHandle != "default" {
+						return true
+					}
+				}
+			}
+		}
+
+		// Recurse up through pass-through parent types
+		if sourceType == ActionTypeConditional || sourceType == ActionTypeSwitch || sourceType == ActionTypeLoop {
+			if f.checkUnmatchedBranch(sourceNode.ID, visited) {
+				return true
+			}
+		}
+	}
+
+	return false
+}
 
 // stripPlatformTags removes platform-internal tags like [LINK_OFFER:channel:id]
 // from AI responses. These tags are instructions from the system prompt that
