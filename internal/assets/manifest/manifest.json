@@ -5998,6 +5998,710 @@
       }
     ]
   },
+  "string/concatenate": {
+    "hash": "fac8ad8a5b8b807ac7939b1e54667d103cf03c4530906587451593fd49c7ef7c",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Concatenate",
+    "description": "Join two or more strings together",
+    "website": "https://www.flomation.co",
+    "icon": "font",
+    "date": "19/04/2026",
+    "type": 2,
+    "category": {
+      "name": "String",
+      "icon": "font",
+      "description": "String manipulation and text operations"
+    },
+    "inputs": [
+      {
+        "name": "a",
+        "type": "string",
+        "value": null,
+        "label": "First String",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "b",
+        "type": "string",
+        "value": null,
+        "label": "Second String",
+        "placeholder": ""
+      },
+      {
+        "name": "c",
+        "type": "string",
+        "value": null,
+        "label": "Third String (optional)",
+        "placeholder": ""
+      },
+      {
+        "name": "d",
+        "type": "string",
+        "value": null,
+        "label": "Fourth String (optional)",
+        "placeholder": ""
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "string",
+        "value": null,
+        "label": "Concatenated String",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "string/contains": {
+    "hash": "9e1b28faac65f233b993243e6514f59db6fe3fc83737e17a0f46326568c6d80a",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Contains",
+    "description": "Check if a string contains a substring",
+    "website": "https://www.flomation.co",
+    "icon": "font",
+    "date": "19/04/2026",
+    "type": 2,
+    "category": {
+      "name": "String",
+      "icon": "font",
+      "description": "String manipulation and text operations"
+    },
+    "inputs": [
+      {
+        "name": "value",
+        "type": "string",
+        "value": null,
+        "label": "Input String",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "search",
+        "type": "string",
+        "value": null,
+        "label": "Search For",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "case_sensitive",
+        "type": "boolean",
+        "value": null,
+        "label": "Case Sensitive",
+        "placeholder": ""
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "boolean",
+        "value": null,
+        "label": "Contains",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "string/join": {
+    "hash": "f84fdeefdcce6f2f7a23abaa5120409a5473a76a8d48e0cffc44f800d143a648",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Join",
+    "description": "Join an array of strings with a separator",
+    "website": "https://www.flomation.co",
+    "icon": "font",
+    "date": "19/04/2026",
+    "type": 2,
+    "category": {
+      "name": "String",
+      "icon": "font",
+      "description": "String manipulation and text operations"
+    },
+    "inputs": [
+      {
+        "name": "array",
+        "type": "object",
+        "value": null,
+        "label": "Array of Strings",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "separator",
+        "type": "string",
+        "value": null,
+        "label": "Separator",
+        "placeholder": ", "
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "string",
+        "value": null,
+        "label": "Joined String",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "string/lower_case": {
+    "hash": "9cd7cef683521e311dff0a2a5b2840be52f062c52fd2dfbe029737dfa25cc1c6",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Lower Case",
+    "description": "Convert a string to lower case",
+    "website": "https://www.flomation.co",
+    "icon": "font",
+    "date": "19/04/2026",
+    "type": 2,
+    "category": {
+      "name": "String",
+      "icon": "font",
+      "description": "String manipulation and text operations"
+    },
+    "inputs": [
+      {
+        "name": "value",
+        "type": "string",
+        "value": null,
+        "label": "Input String",
+        "placeholder": "",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "string",
+        "value": null,
+        "label": "Lower Case String",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "string/repeat": {
+    "hash": "830ffecf210920b29695b948eab6d2330caf089df3fd124d4c73a35c25e937ad",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Repeat",
+    "description": "Repeat a string a given number of times",
+    "website": "https://www.flomation.co",
+    "icon": "font",
+    "date": "19/04/2026",
+    "type": 2,
+    "category": {
+      "name": "String",
+      "icon": "font",
+      "description": "String manipulation and text operations"
+    },
+    "inputs": [
+      {
+        "name": "value",
+        "type": "string",
+        "value": null,
+        "label": "Input String",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Repeat Count",
+        "placeholder": "2",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "string",
+        "value": null,
+        "label": "Repeated String",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "string/replace": {
+    "hash": "3494a3436c2fb5fc9368b8c5c74cda677fc61a2cc4ed10feaa3053b7b968031e",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Replace",
+    "description": "Replace all occurrences of a substring with another string",
+    "website": "https://www.flomation.co",
+    "icon": "font",
+    "date": "19/04/2026",
+    "type": 2,
+    "category": {
+      "name": "String",
+      "icon": "font",
+      "description": "String manipulation and text operations"
+    },
+    "inputs": [
+      {
+        "name": "value",
+        "type": "string",
+        "value": null,
+        "label": "Input String",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "search",
+        "type": "string",
+        "value": null,
+        "label": "Search For",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "replace",
+        "type": "string",
+        "value": null,
+        "label": "Replace With",
+        "placeholder": ""
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "string",
+        "value": null,
+        "label": "Replaced String",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Replacements Made",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "string/substring": {
+    "hash": "fb0bf673f7fc7813e1ab17c63ba6ca8841e43d6a2fa138d04989e27989a351ab",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Substring",
+    "description": "Extract a portion of a string by start and end positions",
+    "website": "https://www.flomation.co",
+    "icon": "font",
+    "date": "19/04/2026",
+    "type": 2,
+    "category": {
+      "name": "String",
+      "icon": "font",
+      "description": "String manipulation and text operations"
+    },
+    "inputs": [
+      {
+        "name": "value",
+        "type": "string",
+        "value": null,
+        "label": "Input String",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "start",
+        "type": "integer",
+        "value": null,
+        "label": "Start Index (0-based)",
+        "placeholder": "0",
+        "required": true
+      },
+      {
+        "name": "end",
+        "type": "integer",
+        "value": null,
+        "label": "End Index (exclusive, empty = end of string)",
+        "placeholder": ""
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "string",
+        "value": null,
+        "label": "Substring",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "string/trim": {
+    "hash": "8da539e38150ea0c0520a23b285d54188ad77a5569ad536d3f2d04c3b8cfc19e",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Trim",
+    "description": "Remove whitespace from both ends of a string",
+    "website": "https://www.flomation.co",
+    "icon": "font",
+    "date": "19/04/2026",
+    "type": 2,
+    "category": {
+      "name": "String",
+      "icon": "font",
+      "description": "String manipulation and text operations"
+    },
+    "inputs": [
+      {
+        "name": "value",
+        "type": "string",
+        "value": null,
+        "label": "Input String",
+        "placeholder": "",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "string",
+        "value": null,
+        "label": "Trimmed String",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "string/trim_end": {
+    "hash": "cb8959c83e714dc51ce40380317006aed955cd214674d17663ea87fde2317de3",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Trim End",
+    "description": "Remove whitespace from the end of a string",
+    "website": "https://www.flomation.co",
+    "icon": "font",
+    "date": "19/04/2026",
+    "type": 2,
+    "category": {
+      "name": "String",
+      "icon": "font",
+      "description": "String manipulation and text operations"
+    },
+    "inputs": [
+      {
+        "name": "value",
+        "type": "string",
+        "value": null,
+        "label": "Input String",
+        "placeholder": "",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "string",
+        "value": null,
+        "label": "Trimmed String",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "string/trim_start": {
+    "hash": "04b1acbdbf1ab80149069ba685ac1c41485394ace8899f96513e74a64990feb9",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Trim Start",
+    "description": "Remove whitespace from the start of a string",
+    "website": "https://www.flomation.co",
+    "icon": "font",
+    "date": "19/04/2026",
+    "type": 2,
+    "category": {
+      "name": "String",
+      "icon": "font",
+      "description": "String manipulation and text operations"
+    },
+    "inputs": [
+      {
+        "name": "value",
+        "type": "string",
+        "value": null,
+        "label": "Input String",
+        "placeholder": "",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "string",
+        "value": null,
+        "label": "Trimmed String",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "string/upper_case": {
+    "hash": "cc5266493b46711de3962f5d984fbdad97db96f1343a660545ad763defa90418",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Upper Case",
+    "description": "Convert a string to upper case",
+    "website": "https://www.flomation.co",
+    "icon": "font",
+    "date": "19/04/2026",
+    "type": 2,
+    "category": {
+      "name": "String",
+      "icon": "font",
+      "description": "String manipulation and text operations"
+    },
+    "inputs": [
+      {
+        "name": "value",
+        "type": "string",
+        "value": null,
+        "label": "Input String",
+        "placeholder": "",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "string",
+        "value": null,
+        "label": "Upper Case String",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
   "subflow/begin": {
     "hash": "7797862805ba9c85ac630538f9d42b8466828cb9bcf5448ea44de1bc195d9448",
     "author": "Andy Esser",

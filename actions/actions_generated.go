@@ -77,6 +77,17 @@ import (
 	sql_mysql "flomation.app/automate/executor/actions/sql/mysql"
 	sql_oracle "flomation.app/automate/executor/actions/sql/oracle"
 	sql_postgresql "flomation.app/automate/executor/actions/sql/postgresql"
+	string_concatenate "flomation.app/automate/executor/actions/string/concatenate"
+	string_contains "flomation.app/automate/executor/actions/string/contains"
+	string_join "flomation.app/automate/executor/actions/string/join"
+	string_lower_case "flomation.app/automate/executor/actions/string/lower_case"
+	string_repeat "flomation.app/automate/executor/actions/string/repeat"
+	string_replace "flomation.app/automate/executor/actions/string/replace"
+	string_substring "flomation.app/automate/executor/actions/string/substring"
+	string_trim "flomation.app/automate/executor/actions/string/trim"
+	string_trim_end "flomation.app/automate/executor/actions/string/trim_end"
+	string_trim_start "flomation.app/automate/executor/actions/string/trim_start"
+	string_upper_case "flomation.app/automate/executor/actions/string/upper_case"
 	subflow_begin "flomation.app/automate/executor/actions/subflow/begin"
 	subflow_end "flomation.app/automate/executor/actions/subflow/end"
 	subflow_invoke "flomation.app/automate/executor/actions/subflow/invoke"
@@ -179,6 +190,17 @@ var Actions = map[string]core.Action{
 	"sql/mysql":                   sql_mysql.Execute,
 	"sql/oracle":                  sql_oracle.Execute,
 	"sql/postgresql":              sql_postgresql.Execute,
+	"string/concatenate":          string_concatenate.Execute,
+	"string/contains":             string_contains.Execute,
+	"string/join":                 string_join.Execute,
+	"string/lower_case":           string_lower_case.Execute,
+	"string/repeat":               string_repeat.Execute,
+	"string/replace":              string_replace.Execute,
+	"string/substring":            string_substring.Execute,
+	"string/trim":                 string_trim.Execute,
+	"string/trim_end":             string_trim_end.Execute,
+	"string/trim_start":           string_trim_start.Execute,
+	"string/upper_case":           string_upper_case.Execute,
 	"subflow/begin":               subflow_begin.Execute,
 	"subflow/end":                 subflow_end.Execute,
 	"subflow/invoke":              subflow_invoke.Execute,
