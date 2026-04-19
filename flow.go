@@ -1631,8 +1631,26 @@ func (f *Flow) executeNodeChildren(actions map[string]Action, node *Node, output
 	} else if node.Data != nil && (node.Data.Label == "subflow/invoke" || node.Type == "subflow/invoke") {
 		// Sub-flow invocation: dispatch to the matching Begin Sub-Flow,
 		// execute its chain, and merge the results into this node's outputs.
+		// Include all parent outputs (e.g. loop variables like current_index)
+		// so the sub-flow chain can reference them.
 		if sfName, ok := outputs[SubFlowNameKey].(string); ok && sfName != "" {
-			sfOutputs, err := f.executeSubFlow(actions, sfName, outputs, environment)
+			// Collect invoke node's parent outputs to pass through
+			invokeContext := make(map[string]interface{})
+			for _, p := range f.FindSource(node.ID) {
+				if p == nil {
+					continue
+				}
+				if cached, exists := f.nodeResults[p.ID]; exists {
+					for k, v := range cached {
+						invokeContext[k] = v
+					}
+				}
+			}
+			// Overlay the invoke action's own outputs
+			for k, v := range outputs {
+				invokeContext[k] = v
+			}
+			sfOutputs, err := f.executeSubFlow(actions, sfName, invokeContext, environment)
 			if err != nil {
 				return nil, err
 			}
