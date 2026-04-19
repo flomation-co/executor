@@ -433,6 +433,7 @@ type Flow struct {
 	variables            map[string]interface{}
 	entryNodeID          string
 	inErrorChain         bool
+	hadError             bool
 	context              *ExecutionContext
 	ctx                  gocontext.Context
 	cancel               gocontext.CancelFunc
@@ -444,6 +445,12 @@ var ErrCancelled = errors.New("execution cancelled")
 // GetNodeExecutionResults returns the per-node execution results map.
 func (f *Flow) GetNodeExecutionResults() map[string]*ExecutionNodeResult {
 	return f.nodeExecutionResults
+}
+
+// HadError returns true if the flow encountered an error during execution,
+// even if it was handled by an On Error chain.
+func (f *Flow) HadError() bool {
+	return f.hadError
 }
 
 // SetContext attaches execution metadata for ${flow.xxx} variable resolution.
@@ -676,6 +683,10 @@ func (f *Flow) executeOnErrorChain(actions map[string]Action, flowErr error, env
 	if onErrorNode == nil {
 		return false
 	}
+
+	// Mark that this execution encountered an error, even though it is
+	// being handled. The overall execution status should remain "failed".
+	f.hadError = true
 
 	// Find the node that caused the error from execution results
 	var failedNodeID, failedNodeLabel, failedNodeType string

@@ -1696,6 +1696,212 @@
       }
     ]
   },
+  "common/format_date": {
+    "hash": "ae5570636d73ae77daf5bdee68880b97153aecceceb63753186e0210fbf34b88",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Format Date",
+    "description": "Format a date/time value or the current time into a string",
+    "website": "https://www.flomation.co",
+    "icon": "calendar",
+    "date": "19/04/2026",
+    "type": 2,
+    "category": {
+      "name": "Common",
+      "icon": "toolbox",
+      "description": "General-purpose data utilities"
+    },
+    "inputs": [
+      {
+        "name": "datetime",
+        "type": "string",
+        "value": null,
+        "label": "Date/Time",
+        "placeholder": "Leave empty for current time"
+      },
+      {
+        "name": "input_format",
+        "type": "string",
+        "value": null,
+        "label": "Input Format",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "ISO 8601 (2006-01-02T15:04:05Z07:00)",
+            "value": "iso8601"
+          },
+          {
+            "name": "RFC 2822 (Mon, 02 Jan 2006 15:04:05 -0700)",
+            "value": "rfc2822"
+          },
+          {
+            "name": "Unix Timestamp (seconds)",
+            "value": "unix"
+          },
+          {
+            "name": "Date Only (2006-01-02)",
+            "value": "date"
+          },
+          {
+            "name": "Custom",
+            "value": "custom"
+          }
+        ]
+      },
+      {
+        "name": "custom_input_format",
+        "type": "string",
+        "value": null,
+        "label": "Custom Input Format (Go layout)",
+        "placeholder": "2006-01-02 15:04:05"
+      },
+      {
+        "name": "output_format",
+        "type": "string",
+        "value": null,
+        "label": "Output Format",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "ISO 8601 (2006-01-02T15:04:05Z07:00)",
+            "value": "iso8601"
+          },
+          {
+            "name": "RFC 2822 (Mon, 02 Jan 2006 15:04:05 -0700)",
+            "value": "rfc2822"
+          },
+          {
+            "name": "Date Only (2006-01-02)",
+            "value": "date"
+          },
+          {
+            "name": "Time Only (15:04:05)",
+            "value": "time"
+          },
+          {
+            "name": "Friendly (02 Jan 2006, 15:04)",
+            "value": "friendly"
+          },
+          {
+            "name": "Day/Month/Year (02/01/2006)",
+            "value": "dmy"
+          },
+          {
+            "name": "Month/Day/Year (01/02/2006)",
+            "value": "mdy"
+          },
+          {
+            "name": "Unix Timestamp",
+            "value": "unix"
+          },
+          {
+            "name": "Custom",
+            "value": "custom"
+          }
+        ]
+      },
+      {
+        "name": "custom_output_format",
+        "type": "string",
+        "value": null,
+        "label": "Custom Output Format (Go layout)",
+        "placeholder": "Monday, 02 January 2006"
+      },
+      {
+        "name": "timezone",
+        "type": "string",
+        "value": null,
+        "label": "Timezone",
+        "placeholder": "UTC (e.g. Europe/London, America/New_York)"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "string",
+        "value": null,
+        "label": "Formatted Date",
+        "placeholder": ""
+      },
+      {
+        "name": "year",
+        "type": "integer",
+        "value": null,
+        "label": "Year",
+        "placeholder": ""
+      },
+      {
+        "name": "month",
+        "type": "integer",
+        "value": null,
+        "label": "Month",
+        "placeholder": ""
+      },
+      {
+        "name": "day",
+        "type": "integer",
+        "value": null,
+        "label": "Day",
+        "placeholder": ""
+      },
+      {
+        "name": "hour",
+        "type": "integer",
+        "value": null,
+        "label": "Hour",
+        "placeholder": ""
+      },
+      {
+        "name": "minute",
+        "type": "integer",
+        "value": null,
+        "label": "Minute",
+        "placeholder": ""
+      },
+      {
+        "name": "second",
+        "type": "integer",
+        "value": null,
+        "label": "Second",
+        "placeholder": ""
+      },
+      {
+        "name": "day_of_week",
+        "type": "string",
+        "value": null,
+        "label": "Day of Week",
+        "placeholder": ""
+      },
+      {
+        "name": "unix_timestamp",
+        "type": "integer",
+        "value": null,
+        "label": "Unix Timestamp",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
   "common/set_variable": {
     "hash": "90a65516c7e93d09c3cbf88ad12ce2dd8ed2e00f88d7c17ba9f19330fe4b9d0e",
     "author": "Andy Esser",

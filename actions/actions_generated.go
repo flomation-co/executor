@@ -28,6 +28,7 @@ import (
 	common_data_combine "flomation.app/automate/executor/actions/common/data_combine"
 	common_data_extract "flomation.app/automate/executor/actions/common/data_extract"
 	common_data_rename "flomation.app/automate/executor/actions/common/data_rename"
+	common_format_date "flomation.app/automate/executor/actions/common/format_date"
 	common_set_variable "flomation.app/automate/executor/actions/common/set_variable"
 	common_sleep "flomation.app/automate/executor/actions/common/sleep"
 	common_smtp "flomation.app/automate/executor/actions/common/smtp"
@@ -120,6 +121,7 @@ var Actions = map[string]core.Action{
 	"common/data_combine":       common_data_combine.Execute,
 	"common/data_extract":       common_data_extract.Execute,
 	"common/data_rename":        common_data_rename.Execute,
+	"common/format_date":        common_format_date.Execute,
 	"common/set_variable":       common_set_variable.Execute,
 	"common/sleep":              common_sleep.Execute,
 	"common/smtp":               common_smtp.Execute,
