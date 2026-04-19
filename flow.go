@@ -1101,6 +1101,20 @@ func (f *Flow) executeNodeActionOnly(actions map[string]Action, node *Node, envi
 		}
 	}
 
+	// Strip platform-internal tags (e.g. [LINK_OFFER:...]) from the response
+	// output before caching. These tags are instructions from the system prompt
+	// that must not be delivered to the user.
+	if resp, ok := outputs["response"].(string); ok {
+		if start := strings.Index(resp, "[LINK_OFFER:"); start >= 0 {
+			if end := strings.Index(resp[start:], "]"); end >= 0 {
+				tag := resp[start+len("[LINK_OFFER:") : start+end]
+				// Emit a platform event so the API can create the pending action
+				fmt.Fprintf(os.Stdout, "__LINK_OFFER__:%s\n", tag)
+			}
+		}
+		outputs["response"] = stripPlatformTags(resp)
+	}
+
 	f.emitNodeEvent(node.ID, node.Type, node.Data.Label, "success", durationMs, "", inputMap, outputs)
 	f.recordNodeResult(node, "success", configuration, outputs, durationMs, "")
 
@@ -2009,6 +2023,24 @@ func (f *Flow) collectToolResult(parentID string) string {
 
 // secretPattern matches ${secrets.X} and ${secret.X} variable references.
 var secretPattern = regexp.MustCompile(`\$\{secrets?\.`)
+
+// stripPlatformTags removes platform-internal tags like [LINK_OFFER:channel:id]
+// from AI responses. These tags are instructions from the system prompt that
+// must not be delivered to the end user.
+func stripPlatformTags(s string) string {
+	for {
+		start := strings.Index(s, "[LINK_OFFER:")
+		if start == -1 {
+			break
+		}
+		end := strings.Index(s[start:], "]")
+		if end == -1 {
+			break
+		}
+		s = strings.TrimSpace(s[:start] + s[start+end+1:])
+	}
+	return s
+}
 
 // emitNodeEvent writes a __NODE__: prefixed JSON line to stdout for the
 // runner and API SSE infrastructure to consume. When inputs/outputs are
