@@ -2128,22 +2128,15 @@ func (f *Flow) checkUnmatchedBranch(nodeID string, visited map[string]bool) bool
 	return false
 }
 
+// platformTagPattern matches [UPPERCASE_TAG:...] patterns that the AI may
+// emit as platform instructions. These must be stripped before delivery.
+var platformTagPattern = regexp.MustCompile(`\[(?:LINK_OFFER|LINK_CONFIRM|LINK_[A-Z_]+)[^\]]*\]`)
+
 // stripPlatformTags removes platform-internal tags like [LINK_OFFER:channel:id]
 // from AI responses. These tags are instructions from the system prompt that
 // must not be delivered to the end user.
 func stripPlatformTags(s string) string {
-	for {
-		start := strings.Index(s, "[LINK_OFFER:")
-		if start == -1 {
-			break
-		}
-		end := strings.Index(s[start:], "]")
-		if end == -1 {
-			break
-		}
-		s = strings.TrimSpace(s[:start] + s[start+end+1:])
-	}
-	return s
+	return strings.TrimSpace(platformTagPattern.ReplaceAllString(s, ""))
 }
 
 // emitNodeEvent writes a __NODE__: prefixed JSON line to stdout for the
