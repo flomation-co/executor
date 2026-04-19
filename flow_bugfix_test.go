@@ -279,3 +279,120 @@ func TestOnErrorChain_WarnsOnMultipleOnErrorNodes(t *testing.T) {
 	Expect(child1Executed).To(BeTrue())
 	Expect(child2Executed).To(BeFalse())
 }
+
+// --- Bug: Parents from unrelated trigger paths should not be executed ---
+
+func TestMultipleTriggerPaths_SkipsUnreachableParent(t *testing.T) {
+	RegisterTestingT(t)
+
+	// Scenario: Two triggers feed into the same AI Prompt node.
+	// Slack Trigger → AI Prompt (direct)
+	// Email Trigger → Switch → AI Prompt
+	// When Slack triggers, the Switch (only reachable via Email) must NOT execute.
+
+	var switchExecuted bool
+	switchAction := func(flow *Flow, node *Node, inputs []*Connection) (map[string]interface{}, error) {
+		switchExecuted = true
+		return map[string]interface{}{"matched_case": "case_0", "result": "switched"}, nil
+	}
+
+	triggerAction := func(flow *Flow, node *Node, inputs []*Connection) (map[string]interface{}, error) {
+		return map[string]interface{}{"channel": "slack"}, nil
+	}
+
+	promptAction := func(flow *Flow, node *Node, inputs []*Connection) (map[string]interface{}, error) {
+		return map[string]interface{}{"response": "hello"}, nil
+	}
+
+	f := &Flow{
+		Nodes: []*Node{
+			{ID: "slack-trigger", Type: "trigger/slack", Data: &NodeData{Label: "trigger/slack", Config: NodeConfig{Type: ActionTypeTrigger}}},
+			{ID: "email-trigger", Type: "trigger/email", Data: &NodeData{Label: "trigger/email", Config: NodeConfig{Type: ActionTypeTrigger}}},
+			{ID: "switch-1", Type: "conditional/switch", Data: &NodeData{Label: "conditional/switch", Config: NodeConfig{Type: ActionTypeSwitch}}},
+			{ID: "prompt-1", Type: "ai/anthropic", Data: &NodeData{Label: "ai/anthropic", Config: NodeConfig{Type: ActionTypeAction}}},
+		},
+		Edges: []*Edge{
+			{ID: "e1", Source: "slack-trigger", Target: "prompt-1"},
+			{ID: "e2", Source: "email-trigger", Target: "switch-1"},
+			{ID: "e3", Source: "switch-1", Target: "prompt-1", SourceHandle: "case_0"},
+		},
+		nodeResults:          make(map[string]map[string]interface{}),
+		nodeExecutionResults: make(map[string]*ExecutionNodeResult),
+		outputs:              make(map[string]interface{}),
+		variables:            make(map[string]interface{}),
+	}
+
+	// Execute from the Slack trigger entry point
+	slackEntry := "slack-trigger"
+	actions := map[string]Action{
+		"trigger/slack":      triggerAction,
+		"trigger/email":      triggerAction,
+		"conditional/switch": switchAction,
+		"ai/anthropic":       promptAction,
+	}
+
+	_, err := f.Execute(actions, &slackEntry, nil)
+	Expect(err).To(BeNil())
+
+	// The Switch node should NOT have been executed — it's only
+	// reachable from the Email trigger, not the Slack trigger.
+	Expect(switchExecuted).To(BeFalse())
+
+	// The AI Prompt should have executed successfully
+	_, promptExecuted := f.nodeResults["prompt-1"]
+	Expect(promptExecuted).To(BeTrue())
+}
+
+func TestMultipleTriggerPaths_ExecutesReachableParent(t *testing.T) {
+	RegisterTestingT(t)
+
+	// Verify that parents reachable from the active trigger ARE still executed.
+	// Email Trigger → Switch → AI Prompt
+
+	var switchExecuted bool
+	switchAction := func(flow *Flow, node *Node, inputs []*Connection) (map[string]interface{}, error) {
+		switchExecuted = true
+		return map[string]interface{}{"matched_case": "case_0"}, nil
+	}
+
+	triggerAction := func(flow *Flow, node *Node, inputs []*Connection) (map[string]interface{}, error) {
+		return map[string]interface{}{"channel": "email"}, nil
+	}
+
+	promptAction := func(flow *Flow, node *Node, inputs []*Connection) (map[string]interface{}, error) {
+		return map[string]interface{}{"response": "hello"}, nil
+	}
+
+	f := &Flow{
+		Nodes: []*Node{
+			{ID: "slack-trigger", Type: "trigger/slack", Data: &NodeData{Label: "trigger/slack", Config: NodeConfig{Type: ActionTypeTrigger}}},
+			{ID: "email-trigger", Type: "trigger/email", Data: &NodeData{Label: "trigger/email", Config: NodeConfig{Type: ActionTypeTrigger}}},
+			{ID: "switch-1", Type: "conditional/switch", Data: &NodeData{Label: "conditional/switch", Config: NodeConfig{Type: ActionTypeSwitch}}},
+			{ID: "prompt-1", Type: "ai/anthropic", Data: &NodeData{Label: "ai/anthropic", Config: NodeConfig{Type: ActionTypeAction}}},
+		},
+		Edges: []*Edge{
+			{ID: "e1", Source: "slack-trigger", Target: "prompt-1"},
+			{ID: "e2", Source: "email-trigger", Target: "switch-1"},
+			{ID: "e3", Source: "switch-1", Target: "prompt-1", SourceHandle: "case_0"},
+		},
+		nodeResults:          make(map[string]map[string]interface{}),
+		nodeExecutionResults: make(map[string]*ExecutionNodeResult),
+		outputs:              make(map[string]interface{}),
+		variables:            make(map[string]interface{}),
+	}
+
+	// Execute from the Email trigger entry point
+	emailEntry := "email-trigger"
+	actions := map[string]Action{
+		"trigger/slack":      triggerAction,
+		"trigger/email":      triggerAction,
+		"conditional/switch": switchAction,
+		"ai/anthropic":       promptAction,
+	}
+
+	_, err := f.Execute(actions, &emailEntry, nil)
+	Expect(err).To(BeNil())
+
+	// The Switch node SHOULD have been executed — it IS reachable from Email trigger
+	Expect(switchExecuted).To(BeTrue())
+}

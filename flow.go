@@ -432,6 +432,7 @@ type Flow struct {
 	outputs              map[string]interface{}
 	variables            map[string]interface{}
 	entryNodeID          string
+	reachableNodes       map[string]bool
 	inErrorChain         bool
 	hadError             bool
 	context              *ExecutionContext
@@ -649,6 +650,7 @@ func (f *Flow) Execute(actions map[string]Action, entry *string, environment *en
 	}
 
 	f.entryNodeID = start.ID
+	f.reachableNodes = f.computeReachable(start.ID)
 
 	_, err := f.ExecuteNode(actions, start, environment)
 	if err != nil && !f.inErrorChain {
@@ -799,6 +801,18 @@ func (f *Flow) executeNodeActionOnly(actions map[string]Action, node *Node, envi
 		isTriggerParent := strings.HasPrefix(p.Type, "trigger/") ||
 			(p.Data != nil && strings.HasPrefix(p.Data.Label, "trigger/"))
 		if isTriggerParent && p.ID != f.entryNodeID {
+			continue
+		}
+
+		// Skip parents that are not reachable from the entry trigger.
+		// This prevents executing nodes on unrelated trigger paths
+		// (e.g. a Switch node only reachable from a different trigger).
+		if f.reachableNodes != nil && !f.reachableNodes[p.ID] {
+			log.WithFields(log.Fields{
+				"node":   node.ID,
+				"parent": p.ID,
+				"action": p.Data.Label,
+			}).Debug("skipping parent not reachable from entry trigger")
 			continue
 		}
 
@@ -1550,6 +1564,32 @@ func (f *Flow) clearSubgraphResults(source string, handle string) {
 			f.clearSubgraphResults(t.ID, "")
 		}
 	}
+}
+
+// computeReachable performs a forward BFS from the given start node,
+// returning the set of all node IDs reachable by following edges. This is
+// used to restrict parent resolution so that nodes on unrelated trigger
+// paths are not executed.
+func (f *Flow) computeReachable(startID string) map[string]bool {
+	reachable := map[string]bool{startID: true}
+	queue := []string{startID}
+
+	for len(queue) > 0 {
+		current := queue[0]
+		queue = queue[1:]
+
+		for _, e := range f.Edges {
+			if e == nil {
+				continue
+			}
+			if e.Source == current && !reachable[e.Target] {
+				reachable[e.Target] = true
+				queue = append(queue, e.Target)
+			}
+		}
+	}
+
+	return reachable
 }
 
 func (f *Flow) FindSource(target string) []*Node {
