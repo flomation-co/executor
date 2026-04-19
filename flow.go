@@ -704,6 +704,14 @@ func (f *Flow) executeOnErrorChain(actions map[string]Action, flowErr error, env
 	// Prevent re-entrancy: errors in the error chain must not trigger it again
 	f.inErrorChain = true
 
+	// Add the On Error node and its descendants to the reachable set so
+	// that parent resolution within the error chain doesn't skip them.
+	if f.reachableNodes != nil {
+		for id := range f.computeReachable(onErrorNode.ID) {
+			f.reachableNodes[id] = true
+		}
+	}
+
 	// Inject error context as the On Error node's cached result
 	errorOutputs := map[string]interface{}{
 		"error_message":    flowErr.Error(),

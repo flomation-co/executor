@@ -88,6 +88,74 @@ func TestNoError_HadErrorIsFalse(t *testing.T) {
 	Expect(f.HadError()).To(BeFalse())
 }
 
+// --- On Error chain variable substitution with reachability ---
+
+func TestOnErrorChain_ErrorMessageResolvesWithReachability(t *testing.T) {
+	RegisterTestingT(t)
+
+	// When a node fails and the On Error chain fires, children of the
+	// On Error node should be able to resolve ${error_message} even
+	// though On Error nodes are not forward-reachable from the trigger.
+
+	var capturedErrorMsg string
+	triggerAction := func(flow *Flow, node *Node, inputs []*Connection) (map[string]interface{}, error) {
+		return map[string]interface{}{}, nil
+	}
+	failAction := func(flow *Flow, node *Node, inputs []*Connection) (map[string]interface{}, error) {
+		return nil, errors.New("database connection failed")
+	}
+	onErrorAction := func(flow *Flow, node *Node, inputs []*Connection) (map[string]interface{}, error) {
+		return map[string]interface{}{}, nil
+	}
+	logErrorAction := func(flow *Flow, node *Node, inputs []*Connection) (map[string]interface{}, error) {
+		for _, c := range inputs {
+			if c.Name == "message" && c.String() != nil {
+				capturedErrorMsg = *c.String()
+			}
+		}
+		return map[string]interface{}{"logged": true}, nil
+	}
+
+	f := &Flow{
+		Nodes: []*Node{
+			{ID: "trigger-1", Type: "trigger/manual", Data: &NodeData{Label: "trigger/manual", Config: NodeConfig{Type: ActionTypeTrigger}}},
+			{ID: "fail-1", Type: "test/fail", Data: &NodeData{Label: "test/fail", Config: NodeConfig{Type: ActionTypeAction}}},
+			{ID: "on-error-1", Type: "error/on_error", Data: &NodeData{Label: "error/on_error", Config: NodeConfig{Type: ActionTypeAction}}},
+			{ID: "log-error-1", Type: "test/log_error", Data: &NodeData{
+				Label: "test/log_error",
+				Config: NodeConfig{
+					Type: ActionTypeAction,
+					Inputs: []*Connection{
+						{Name: "message", Type: ConnectionTypeString, Value: "Error: ${error_message}"},
+					},
+				},
+			}},
+		},
+		Edges: []*Edge{
+			{ID: "e1", Source: "trigger-1", Target: "fail-1"},
+			{ID: "e2", Source: "on-error-1", Target: "log-error-1"},
+		},
+		nodeResults:          make(map[string]map[string]interface{}),
+		nodeExecutionResults: make(map[string]*ExecutionNodeResult),
+		outputs:              make(map[string]interface{}),
+		variables:            make(map[string]interface{}),
+	}
+
+	actions := map[string]Action{
+		"trigger/manual":  triggerAction,
+		"test/fail":       failAction,
+		"error/on_error":  onErrorAction,
+		"test/log_error":  logErrorAction,
+	}
+
+	_, err := f.Execute(actions, nil, nil)
+	Expect(err).To(BeNil())
+	Expect(f.HadError()).To(BeTrue())
+
+	// The ${error_message} variable should have been resolved
+	Expect(capturedErrorMsg).To(Equal("Error: database connection failed"))
+}
+
 // --- Bug 3: "Set Variable" should be globally accessible ---
 
 func TestSetVariable_GlobalScope(t *testing.T) {
