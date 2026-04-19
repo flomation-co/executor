@@ -77,6 +77,9 @@ import (
 	sql_mysql "flomation.app/automate/executor/actions/sql/mysql"
 	sql_oracle "flomation.app/automate/executor/actions/sql/oracle"
 	sql_postgresql "flomation.app/automate/executor/actions/sql/postgresql"
+	subflow_begin "flomation.app/automate/executor/actions/subflow/begin"
+	subflow_end "flomation.app/automate/executor/actions/subflow/end"
+	subflow_invoke "flomation.app/automate/executor/actions/subflow/invoke"
 	tools_calendar_create "flomation.app/automate/executor/actions/tools/calendar_create"
 	tools_calendar_delete "flomation.app/automate/executor/actions/tools/calendar_delete"
 	tools_calendar_read "flomation.app/automate/executor/actions/tools/calendar_read"
@@ -176,6 +179,9 @@ var Actions = map[string]core.Action{
 	"sql/mysql":                   sql_mysql.Execute,
 	"sql/oracle":                  sql_oracle.Execute,
 	"sql/postgresql":              sql_postgresql.Execute,
+	"subflow/begin":               subflow_begin.Execute,
+	"subflow/end":                 subflow_end.Execute,
+	"subflow/invoke":              subflow_invoke.Execute,
 	"tools/calendar_create":       tools_calendar_create.Execute,
 	"tools/calendar_delete":       tools_calendar_delete.Execute,
 	"tools/calendar_read":         tools_calendar_read.Execute,

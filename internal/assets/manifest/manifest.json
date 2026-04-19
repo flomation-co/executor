@@ -5998,6 +5998,131 @@
       }
     ]
   },
+  "subflow/begin": {
+    "hash": "7797862805ba9c85ac630538f9d42b8466828cb9bcf5448ea44de1bc195d9448",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Begin Sub-Flow",
+    "description": "Entry point of a reusable sub-flow. Give it a name and connect actions below it.",
+    "website": "https://www.flomation.co",
+    "icon": "play",
+    "date": "19/04/2026",
+    "type": 2,
+    "category": {
+      "name": "Sub-Flow",
+      "icon": "layer-group",
+      "description": "Reusable sub-flow subroutines within a flow"
+    },
+    "inputs": [
+      {
+        "name": "name",
+        "type": "string",
+        "value": null,
+        "label": "Sub-Flow Name",
+        "placeholder": "my_subroutine",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result",
+        "placeholder": ""
+      },
+      {
+        "name": "name",
+        "type": "string",
+        "value": null,
+        "label": "Sub-Flow Name",
+        "placeholder": ""
+      }
+    ]
+  },
+  "subflow/end": {
+    "hash": "20792bda3473648ba1ef5ad5c085617817fc95b497046ef6d7e7235a14fb6317",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "End Sub-Flow",
+    "description": "Return point of a sub-flow. Outputs are returned to the Invoke node.",
+    "website": "https://www.flomation.co",
+    "icon": "stop",
+    "date": "19/04/2026",
+    "type": 2,
+    "category": {
+      "name": "Sub-Flow",
+      "icon": "layer-group",
+      "description": "Reusable sub-flow subroutines within a flow"
+    },
+    "inputs": [
+      {
+        "name": "return_value",
+        "type": "string",
+        "value": null,
+        "label": "Return Value (optional explicit return; otherwise all parent outputs are returned)",
+        "placeholder": ""
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result",
+        "placeholder": ""
+      }
+    ]
+  },
+  "subflow/invoke": {
+    "hash": "dc8445fb64389426a54b609537d4568ab3fd9add343199c13dca04085e799bf5",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Invoke Sub-Flow",
+    "description": "Call a named sub-flow subroutine and return its results",
+    "website": "https://www.flomation.co",
+    "icon": "share",
+    "date": "19/04/2026",
+    "type": 2,
+    "category": {
+      "name": "Sub-Flow",
+      "icon": "layer-group",
+      "description": "Reusable sub-flow subroutines within a flow"
+    },
+    "inputs": [
+      {
+        "name": "sub_flow_name",
+        "type": "string",
+        "value": null,
+        "label": "Sub-Flow Name",
+        "placeholder": "my_subroutine",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
   "tools/calendar_create": {
     "hash": "33a689156b625d5aea80d221b1a6fa8549926c061e2afc3adc6af021f2ad52c8",
     "author": "Andy Esser",
