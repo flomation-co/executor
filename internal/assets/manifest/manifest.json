@@ -4344,7 +4344,7 @@
     ]
   },
   "linear/list_issues": {
-    "hash": "64f5d3393d31ad3f597662588347577bb2fb137ed687609ed213ae21dd8b07da",
+    "hash": "1196c946d237b5bf8da9f34f8968741050428bf557e6b02724b1c24664ca1a73",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "List Issues",
@@ -4612,7 +4612,7 @@
     ]
   },
   "linear/search_issues": {
-    "hash": "0e15a4a2eda43243e82b09f9fcfd627b84b3b6df02096da9d422c4af3c4462f4",
+    "hash": "ca613f836272f4c72949c5b3feba00f95ec2e4e5c44fe8a9b618c1a9bd6ecae6",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Search Issues",
@@ -8349,11 +8349,11 @@
     ]
   },
   "tools/slack_search": {
-    "hash": "b20cfce544f25cc5d5d4a21483a6041d077fcbe434616429b5c76fe0793a2adf",
+    "hash": "817ce2f72e9c88a0477e39647466e84620e06d75a14fdd92c0b336d639618a84",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Slack Search Messages",
-    "description": "Search Slack messages by query. Supports Slack search modifiers: from:user, in:channel, before:date, after:date, has:link, has:emoji",
+    "description": "Search Slack messages. Requires a user token (xoxp-), not a bot token. Supports modifiers: from:user, in:channel, before:date, after:date",
     "website": "https://www.flomation.co",
     "icon": "slack",
     "date": "20/04/2026",
@@ -8365,11 +8365,11 @@
     },
     "inputs": [
       {
-        "name": "bot_token",
+        "name": "user_token",
         "type": "string",
         "value": null,
-        "label": "Bot Token",
-        "placeholder": "xoxb-...",
+        "label": "User Token (required — search needs a user token, not bot token)",
+        "placeholder": "xoxp-...",
         "required": true
       },
       {

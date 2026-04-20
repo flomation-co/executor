@@ -16,7 +16,7 @@ const (
 	Author       = "Andy Esser"
 	Organisation = "Flomation"
 	Name         = "Slack Search Messages"
-	Description  = "Search Slack messages by query. Supports Slack search modifiers: from:user, in:channel, before:date, after:date, has:link, has:emoji"
+	Description  = "Search Slack messages. Requires a user token (xoxp-), not a bot token. Supports modifiers: from:user, in:channel, before:date, after:date"
 	Website      = "https://www.flomation.co"
 	Icon         = "slack"
 	Date         = "20/04/2026"
@@ -26,7 +26,7 @@ const (
 )
 
 var Inputs = [...]core.Connection{
-	{Name: "bot_token", Type: core.ConnectionTypeString, Label: "Bot Token", Placeholder: "xoxb-...", Required: true},
+	{Name: "user_token", Type: core.ConnectionTypeString, Label: "User Token (required — search needs a user token, not bot token)", Placeholder: "xoxp-...", Required: true},
 	{Name: "query", Type: core.ConnectionTypeString, Label: "Search query. Supports Slack search modifiers: from:@user, in:#channel, before:2026-04-20, after:2026-04-01, has:link", Required: true},
 	{Name: "count", Type: core.ConnectionTypeString, Label: "Max results to return (default 10, max 100)"},
 	{Name: "sort", Type: core.ConnectionTypeString, Label: "Sort order: score (relevance) or timestamp (recent first). Default: score"},
@@ -41,9 +41,10 @@ var Outputs = [...]core.Connection{
 }
 
 func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[string]interface{}, error) {
-	botToken := str("bot_token", inputs)
-	if botToken == "" {
-		return nil, fmt.Errorf("bot_token is required")
+	// search.messages requires a user token (xoxp-), not a bot token (xoxb-).
+	userToken := str("user_token", inputs)
+	if userToken == "" {
+		return nil, fmt.Errorf("user_token is required (search.messages needs a user token, not a bot token)")
 	}
 	query := str("query", inputs)
 	if query == "" {
@@ -68,7 +69,7 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	if err != nil {
 		return nil, fmt.Errorf("create request: %w", err)
 	}
-	req.Header.Set("Authorization", "Bearer "+botToken)
+	req.Header.Set("Authorization", "Bearer "+userToken)
 
 	resp, err := http.DefaultClient.Do(req)
 	if err != nil {
