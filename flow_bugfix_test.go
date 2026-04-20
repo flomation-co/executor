@@ -464,3 +464,74 @@ func TestMultipleTriggerPaths_ExecutesReachableParent(t *testing.T) {
 	// The Switch node SHOULD have been executed — it IS reachable from Email trigger
 	Expect(switchExecuted).To(BeTrue())
 }
+
+// Test: a node behind a regular action on an unmatched Switch branch should
+// NOT execute during parent resolution of the AI node.
+//
+// Flow: Trigger → Switch(voice/text)
+//         case_0 → STT → DataRename → AI
+//         case_1 ─────────────────────→ AI
+//
+// When Switch matches case_1 (text), data_rename (on case_0 path via STT)
+// should NOT execute. Previously, the ancestor walk only recursed through
+// Switch/Conditional/Loop nodes, missing the STT action in between.
+func TestUnmatchedBranch_SkipsThroughIntermediateActions(t *testing.T) {
+	RegisterTestingT(t)
+
+	dataRenameExecuted := false
+	sttExecuted := false
+
+	triggerAction := func(flow *Flow, node *Node, inputs []*Connection) (map[string]interface{}, error) {
+		return map[string]interface{}{"channel_type": "telegram"}, nil
+	}
+	switchAction := func(flow *Flow, node *Node, inputs []*Connection) (map[string]interface{}, error) {
+		return map[string]interface{}{"matched": true, "matched_case": "case_1", "value": "telegram"}, nil
+	}
+	sttAction := func(flow *Flow, node *Node, inputs []*Connection) (map[string]interface{}, error) {
+		sttExecuted = true
+		return map[string]interface{}{"text": "transcribed"}, nil
+	}
+	dataRenameAction := func(flow *Flow, node *Node, inputs []*Connection) (map[string]interface{}, error) {
+		dataRenameExecuted = true
+		return map[string]interface{}{"content": "renamed"}, nil
+	}
+	aiAction := func(flow *Flow, node *Node, inputs []*Connection) (map[string]interface{}, error) {
+		return map[string]interface{}{"response": "hello"}, nil
+	}
+
+	f := &Flow{
+		Nodes: []*Node{
+			{ID: "trigger", Type: "trigger/telegram", Data: &NodeData{Label: "trigger/telegram", Config: NodeConfig{Type: ActionTypeTrigger}}},
+			{ID: "switch", Type: "conditional/switch", Data: &NodeData{Label: "conditional/switch", Config: NodeConfig{Type: ActionTypeSwitch}}},
+			{ID: "stt", Type: "action", Data: &NodeData{Label: "elevenlabs/speech_to_text", Config: NodeConfig{Type: ActionTypeAction}}},
+			{ID: "data-rename", Type: "action", Data: &NodeData{Label: "common/data_rename", Config: NodeConfig{Type: ActionTypeAction}}},
+			{ID: "ai", Type: "action", Data: &NodeData{Label: "ai/anthropic", Config: NodeConfig{Type: ActionTypeAction}}},
+		},
+		Edges: []*Edge{
+			{ID: "e1", Source: "trigger", Target: "switch"},
+			{ID: "e2", Source: "switch", Target: "stt", SourceHandle: "case_0"},     // voice branch
+			{ID: "e3", Source: "switch", Target: "ai", SourceHandle: "case_1"},       // text branch
+			{ID: "e4", Source: "stt", Target: "data-rename"},
+			{ID: "e5", Source: "data-rename", Target: "ai"},
+		},
+		nodeResults:          make(map[string]map[string]interface{}),
+		nodeExecutionResults: make(map[string]*ExecutionNodeResult),
+		outputs:              make(map[string]interface{}),
+	}
+
+	actions := map[string]Action{
+		"trigger/telegram":           triggerAction,
+		"conditional/switch":         switchAction,
+		"elevenlabs/speech_to_text":  sttAction,
+		"common/data_rename":         dataRenameAction,
+		"ai/anthropic":               aiAction,
+	}
+
+	triggerEntry := "trigger"
+	_, err := f.Execute(actions, &triggerEntry, nil)
+	Expect(err).To(BeNil())
+
+	// data_rename and STT should NOT have executed — they're on the unmatched voice branch
+	Expect(dataRenameExecuted).To(BeFalse(), "data_rename on unmatched case_0 branch should not execute")
+	Expect(sttExecuted).To(BeFalse(), "STT on unmatched case_0 branch should not execute")
+}

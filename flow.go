@@ -2076,6 +2076,18 @@ func (f *Flow) checkUnmatchedBranch(nodeID string, visited map[string]bool) bool
 		})
 	}
 
+	// A node is only on an unmatched branch if ALL of its source paths
+	// are unmatched. If any single source provides a valid (matched) path,
+	// the node is reachable and should not be skipped.
+	//
+	// Example: AI node has edges from Switch/case_1 (matched) AND from
+	// data_rename (on unmatched case_0 path). The AI is reachable via
+	// case_1, so it must NOT be marked as unmatched.
+	if len(edgesBySource) == 0 {
+		return false
+	}
+
+	allSourcesUnmatched := true
 	for _, edges := range edgesBySource {
 		if len(edges) == 0 {
 			continue
@@ -2083,18 +2095,20 @@ func (f *Flow) checkUnmatchedBranch(nodeID string, visited map[string]bool) bool
 		sourceNode := edges[0].sourceNode
 		sourceType := edges[0].sourceType
 
+		thisSourceUnmatched := false
+
 		if sourceType == ActionTypeConditional {
 			if cached, ok := f.nodeResults[sourceNode.ID]; ok {
 				result, _ := cached["result"].(bool)
-				allUnmatched := true
+				allEdgesUnmatched := true
 				for _, ei := range edges {
 					if (result && ei.handle == "true-branch") || (!result && ei.handle == "false-branch") || ei.handle == "" {
-						allUnmatched = false
+						allEdgesUnmatched = false
 						break
 					}
 				}
-				if allUnmatched {
-					return true
+				if allEdgesUnmatched {
+					thisSourceUnmatched = true
 				}
 			}
 		}
@@ -2103,29 +2117,37 @@ func (f *Flow) checkUnmatchedBranch(nodeID string, visited map[string]bool) bool
 			if cached, ok := f.nodeResults[sourceNode.ID]; ok {
 				matchedCase, _ := cached["matched_case"].(string)
 				if matchedCase != "" {
-					allUnmatched := true
+					allEdgesUnmatched := true
 					for _, ei := range edges {
 						if ei.handle == "" || ei.handle == matchedCase || ei.handle == "default" {
-							allUnmatched = false
+							allEdgesUnmatched = false
 							break
 						}
 					}
-					if allUnmatched {
-						return true
+					if allEdgesUnmatched {
+						thisSourceUnmatched = true
 					}
 				}
 			}
 		}
 
-		// Recurse up through pass-through parent types
-		if sourceType == ActionTypeConditional || sourceType == ActionTypeSwitch || sourceType == ActionTypeLoop {
-			if f.checkUnmatchedBranch(sourceNode.ID, visited) {
-				return true
-			}
+		// Recurse up through all parent types — a node is on an unmatched
+		// branch if its ancestor chain leads through an unmatched branch,
+		// even through intermediate regular actions (e.g. STT between a
+		// Switch and data_rename).
+		if !thisSourceUnmatched && f.checkUnmatchedBranch(sourceNode.ID, visited) {
+			thisSourceUnmatched = true
+		}
+
+		if !thisSourceUnmatched {
+			// At least one source is on a valid (matched) path — the node
+			// is reachable. No need to check remaining sources.
+			allSourcesUnmatched = false
+			break
 		}
 	}
 
-	return false
+	return allSourcesUnmatched
 }
 
 // platformTagPattern matches [UPPERCASE_TAG:...] patterns that the AI may
