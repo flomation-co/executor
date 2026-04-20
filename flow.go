@@ -1335,20 +1335,37 @@ func (f *Flow) executeNodeChildren(actions map[string]Action, node *Node, output
 					var toolErr bool
 					var matchedTool *Node
 					for _, c := range toolsChildren {
-						if c.Data != nil && c.Data.Label == "tools/"+req.Name {
+						if c.Data == nil {
+							continue
+						}
+						label := c.Data.Label
+
+						// Exact label match (tools/email_send == tools/email_send)
+						if label == "tools/"+req.Name || label == req.Name {
 							matchedTool = c
 							break
 						}
-						// Also match by config.name or bare label
-						if c.Data != nil {
-							if c.Data.Label == req.Name {
+
+						// Sanitised match: the AI receives tool names with /
+						// replaced by _ (via sanitiseToolName), so reverse that
+						// by sanitising the label and comparing.
+						sanitised := sanitiseToolName(label)
+						if sanitised == req.Name {
+							matchedTool = c
+							break
+						}
+						// Also try stripping tools/ prefix before sanitising.
+						if strings.HasPrefix(label, "tools/") {
+							if sanitiseToolName(strings.TrimPrefix(label, "tools/")) == req.Name {
 								matchedTool = c
 								break
 							}
-							if c.Data.Config.Name != nil && *c.Data.Config.Name == req.Name {
-								matchedTool = c
-								break
-							}
+						}
+
+						// Config.Name fallback.
+						if c.Data.Config.Name != nil && *c.Data.Config.Name == req.Name {
+							matchedTool = c
+							break
 						}
 					}
 
