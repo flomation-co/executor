@@ -2676,18 +2676,18 @@
     ]
   },
   "elevenlabs/list_voices": {
-    "hash": "bcab05b87ea12bb1651e3e10dc9dd8bad455c1dd0f0e87330b9f61b4f3eca815",
+    "hash": "489b254e7d739c2c1e10d2349079649c150d8c75609b4689ce263ce48e6fbc3a",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "List Voices",
     "description": "List all available ElevenLabs voices with their IDs, names, and characteristics",
     "website": "https://www.flomation.co",
-    "icon": "microphone",
+    "icon": "elevenlabs",
     "date": "18/04/2026",
     "type": 2,
     "category": {
       "name": "ElevenLabs",
-      "icon": "microphone",
+      "icon": "elevenlabs",
       "description": "AI voice synthesis and speech recognition powered by ElevenLabs"
     },
     "inputs": [
@@ -2739,18 +2739,18 @@
     ]
   },
   "elevenlabs/speech_to_text": {
-    "hash": "01bde6d8863b301ddbded7008a4c1c2fbcde7e4fb65b6f0de735297ca8fcbe4c",
+    "hash": "5b131a0b3620ab4761db974da5a559bc8c3b789008943ed1a637cbd8ad67aab4",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Speech to Text",
     "description": "Transcribe audio to text using ElevenLabs speech recognition",
     "website": "https://www.flomation.co",
-    "icon": "microphone",
+    "icon": "elevenlabs",
     "date": "18/04/2026",
     "type": 2,
     "category": {
       "name": "ElevenLabs",
-      "icon": "microphone",
+      "icon": "elevenlabs",
       "description": "AI voice synthesis and speech recognition powered by ElevenLabs"
     },
     "inputs": [
@@ -2843,18 +2843,18 @@
     ]
   },
   "elevenlabs/text_to_speech": {
-    "hash": "b210c9b11462cb48ab439878af282f33739549a1a967fd52505baeec70ddccb1",
+    "hash": "40fda6daddb8bbd212226a28d6813bcd098d5bcffa7c4a0e27a6c3d0386d003c",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Text to Speech",
     "description": "Convert text to spoken audio using ElevenLabs AI voices",
     "website": "https://www.flomation.co",
-    "icon": "microphone",
+    "icon": "elevenlabs",
     "date": "18/04/2026",
     "type": 2,
     "category": {
       "name": "ElevenLabs",
-      "icon": "microphone",
+      "icon": "elevenlabs",
       "description": "AI voice synthesis and speech recognition powered by ElevenLabs"
     },
     "inputs": [
