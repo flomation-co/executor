@@ -8064,6 +8064,181 @@
       }
     ]
   },
+  "tools/slack_channels": {
+    "hash": "58b3b48cbcd7c2160cd27a24aeb3a7e9789bb341c34b915190bbe8ea9c0fa126",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Slack Channels",
+    "description": "List or search Slack channels. Returns channel names, IDs, topics, and member counts",
+    "website": "https://www.flomation.co",
+    "icon": "slack",
+    "date": "20/04/2026",
+    "type": 2,
+    "category": {
+      "name": "Tools",
+      "icon": "wrench",
+      "description": "AI tool implementations for function calling"
+    },
+    "inputs": [
+      {
+        "name": "bot_token",
+        "type": "string",
+        "value": null,
+        "label": "Slack bot token — pre-configured, do not provide",
+        "placeholder": ""
+      },
+      {
+        "name": "search",
+        "type": "string",
+        "value": null,
+        "label": "Optional filter: only return channels whose name contains this text",
+        "placeholder": ""
+      },
+      {
+        "name": "limit",
+        "type": "string",
+        "value": null,
+        "label": "Max channels to return (default 50, max 200)",
+        "placeholder": ""
+      },
+      {
+        "name": "include_private",
+        "type": "boolean",
+        "value": null,
+        "label": "Include private channels the bot is a member of (default false)",
+        "placeholder": ""
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "channels",
+        "type": "object",
+        "value": null,
+        "label": "Channel list",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Number of channels returned",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "tools/slack_file_upload": {
+    "hash": "263ccb570d61a6eea1870c3ce3e683249fd11d09383cb0b20e13cb2a9464776a",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Slack File Upload",
+    "description": "Upload a file to a Slack channel. Supports text content or base64-encoded binary data",
+    "website": "https://www.flomation.co",
+    "icon": "slack",
+    "date": "20/04/2026",
+    "type": 2,
+    "category": {
+      "name": "Tools",
+      "icon": "wrench",
+      "description": "AI tool implementations for function calling"
+    },
+    "inputs": [
+      {
+        "name": "bot_token",
+        "type": "string",
+        "value": null,
+        "label": "Slack bot token — pre-configured, do not provide",
+        "placeholder": ""
+      },
+      {
+        "name": "channel_id",
+        "type": "string",
+        "value": null,
+        "label": "Channel ID — pre-configured, do not provide",
+        "placeholder": ""
+      },
+      {
+        "name": "content",
+        "type": "text",
+        "value": null,
+        "label": "File content as text (for code snippets, CSV, logs, etc.)",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "filename",
+        "type": "string",
+        "value": null,
+        "label": "Filename including extension (e.g. report.csv, log.txt, data.json)",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "title",
+        "type": "string",
+        "value": null,
+        "label": "Display title for the file in Slack (optional, defaults to filename)",
+        "placeholder": ""
+      },
+      {
+        "name": "initial_comment",
+        "type": "string",
+        "value": null,
+        "label": "Message to post alongside the file (optional)",
+        "placeholder": ""
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "file_id",
+        "type": "string",
+        "value": null,
+        "label": "Slack file ID",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
   "tools/slack_rich_message": {
     "hash": "270c48d824ff351678a651bdd7ca9f201826d95778170305017aff86c444621c",
     "author": "Andy Esser",
@@ -8138,6 +8313,271 @@
         "type": "string",
         "value": null,
         "label": "Message timestamp",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "tools/slack_search": {
+    "hash": "01bf6dbb687889de4d80d805b910149905b24d29a4eb53b3531ea7dde7088850",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Slack Search Messages",
+    "description": "Search Slack messages by query. Supports Slack search modifiers: from:user, in:channel, before:date, after:date, has:link, has:emoji",
+    "website": "https://www.flomation.co",
+    "icon": "slack",
+    "date": "20/04/2026",
+    "type": 2,
+    "category": {
+      "name": "Tools",
+      "icon": "wrench",
+      "description": "AI tool implementations for function calling"
+    },
+    "inputs": [
+      {
+        "name": "bot_token",
+        "type": "string",
+        "value": null,
+        "label": "Slack bot token — pre-configured, do not provide",
+        "placeholder": ""
+      },
+      {
+        "name": "query",
+        "type": "string",
+        "value": null,
+        "label": "Search query. Supports Slack search modifiers: from:@user, in:#channel, before:2026-04-20, after:2026-04-01, has:link",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "count",
+        "type": "string",
+        "value": null,
+        "label": "Max results to return (default 10, max 100)",
+        "placeholder": ""
+      },
+      {
+        "name": "sort",
+        "type": "string",
+        "value": null,
+        "label": "Sort order: score (relevance) or timestamp (recent first). Default: score",
+        "placeholder": ""
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "messages",
+        "type": "object",
+        "value": null,
+        "label": "Matching messages",
+        "placeholder": ""
+      },
+      {
+        "name": "total",
+        "type": "integer",
+        "value": null,
+        "label": "Total matches",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "tools/slack_user_profile": {
+    "hash": "efd91f80b8ba0744e5ef6f991b77f337b3d716490b1000b7008b55a332094111",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Slack User Profile",
+    "description": "Get a Slack user's full profile by user ID. Returns name, email, title, phone, timezone, status, and avatar",
+    "website": "https://www.flomation.co",
+    "icon": "slack",
+    "date": "20/04/2026",
+    "type": 2,
+    "category": {
+      "name": "Tools",
+      "icon": "wrench",
+      "description": "AI tool implementations for function calling"
+    },
+    "inputs": [
+      {
+        "name": "bot_token",
+        "type": "string",
+        "value": null,
+        "label": "Slack bot token — pre-configured, do not provide",
+        "placeholder": ""
+      },
+      {
+        "name": "user_id",
+        "type": "string",
+        "value": null,
+        "label": "Slack user ID (e.g. U01ABCDEF). Use slack_users to find IDs by name",
+        "placeholder": "",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "profile",
+        "type": "object",
+        "value": null,
+        "label": "Full user profile",
+        "placeholder": ""
+      },
+      {
+        "name": "real_name",
+        "type": "string",
+        "value": null,
+        "label": "Real name",
+        "placeholder": ""
+      },
+      {
+        "name": "display_name",
+        "type": "string",
+        "value": null,
+        "label": "Display name",
+        "placeholder": ""
+      },
+      {
+        "name": "email",
+        "type": "string",
+        "value": null,
+        "label": "Email address",
+        "placeholder": ""
+      },
+      {
+        "name": "title",
+        "type": "string",
+        "value": null,
+        "label": "Job title",
+        "placeholder": ""
+      },
+      {
+        "name": "timezone",
+        "type": "string",
+        "value": null,
+        "label": "Timezone",
+        "placeholder": ""
+      },
+      {
+        "name": "status_text",
+        "type": "string",
+        "value": null,
+        "label": "Status text",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "tools/slack_users": {
+    "hash": "175147e109c8f143f5ff3d1ddbf2fc40c903d871be056d0cf31d4e060c0fd186",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Slack Users",
+    "description": "List or search Slack workspace members. Returns display names, real names, email addresses, and status",
+    "website": "https://www.flomation.co",
+    "icon": "slack",
+    "date": "20/04/2026",
+    "type": 2,
+    "category": {
+      "name": "Tools",
+      "icon": "wrench",
+      "description": "AI tool implementations for function calling"
+    },
+    "inputs": [
+      {
+        "name": "bot_token",
+        "type": "string",
+        "value": null,
+        "label": "Slack bot token — pre-configured, do not provide",
+        "placeholder": ""
+      },
+      {
+        "name": "search",
+        "type": "string",
+        "value": null,
+        "label": "Optional filter: only return users whose name or display name contains this text",
+        "placeholder": ""
+      },
+      {
+        "name": "limit",
+        "type": "string",
+        "value": null,
+        "label": "Max users to return (default 50, max 200)",
+        "placeholder": ""
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "users",
+        "type": "object",
+        "value": null,
+        "label": "User list",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Number of users returned",
         "placeholder": ""
       },
       {
