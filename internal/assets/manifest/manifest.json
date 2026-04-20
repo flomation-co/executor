@@ -4540,6 +4540,76 @@
       }
     ]
   },
+  "linear/list_users": {
+    "hash": "f8e94f22953df7b2945255c901da10526745eeea8d13981e5dfcdcbaf6e0d4a8",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "List Users",
+    "description": "List Linear workspace members. Returns user IDs, names, emails, and active status.",
+    "website": "https://www.flomation.co",
+    "icon": "linear",
+    "date": "20/04/2026",
+    "type": 2,
+    "category": {
+      "name": "Linear",
+      "icon": "linear",
+      "description": "Manage issues, projects, and teams in Linear"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "string",
+        "value": null,
+        "label": "Linear API Key",
+        "placeholder": "lin_api_...",
+        "required": true
+      },
+      {
+        "name": "search",
+        "type": "string",
+        "value": null,
+        "label": "Optional: filter by name or email",
+        "placeholder": ""
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "users",
+        "type": "object",
+        "value": null,
+        "label": "User list",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Number of users",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
   "linear/list_workflow_states": {
     "hash": "c297c1dc1939acb94bd83046389eb6b1af67fcdd8faaf7f3e7f465e27411fe1c",
     "author": "Andy Esser",

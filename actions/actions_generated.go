@@ -60,6 +60,7 @@ import (
 	linear_get_issue "flomation.app/automate/executor/actions/linear/get_issue"
 	linear_list_issues "flomation.app/automate/executor/actions/linear/list_issues"
 	linear_list_teams "flomation.app/automate/executor/actions/linear/list_teams"
+	linear_list_users "flomation.app/automate/executor/actions/linear/list_users"
 	linear_list_workflow_states "flomation.app/automate/executor/actions/linear/list_workflow_states"
 	linear_search_issues "flomation.app/automate/executor/actions/linear/search_issues"
 	linear_update_issue "flomation.app/automate/executor/actions/linear/update_issue"
@@ -179,6 +180,7 @@ var Actions = map[string]core.Action{
 	"linear/get_issue":            linear_get_issue.Execute,
 	"linear/list_issues":          linear_list_issues.Execute,
 	"linear/list_teams":           linear_list_teams.Execute,
+	"linear/list_users":           linear_list_users.Execute,
 	"linear/list_workflow_states": linear_list_workflow_states.Execute,
 	"linear/search_issues":        linear_search_issues.Execute,
 	"linear/update_issue":         linear_update_issue.Execute,
