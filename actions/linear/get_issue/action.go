@@ -3,6 +3,7 @@ package linear_get_issue
 import (
 	"encoding/json"
 	"fmt"
+	"strings"
 
 	core "flomation.app/automate/executor"
 	linear "flomation.app/automate/executor/actions/linear"
@@ -56,25 +57,37 @@ var Outputs = [...]core.Connection{
 	{Name: "error", Type: core.ConnectionTypeString, Label: "Error"},
 }
 
-const issueQuery = `query GetIssue($id: String!) {
+const issueByIDQuery = `query GetIssue($id: String!) {
 	issue(id: $id) {
-		id
-		identifier
-		title
-		description
-		url
-		priority
-		priorityLabel
-		dueDate
-		estimate
-		createdAt
-		updatedAt
+		id identifier title description url priority priorityLabel
+		dueDate estimate createdAt updatedAt
 		state { id name }
 		assignee { id name email }
 		team { id name key }
 		project { id name }
 		cycle { id name number }
-		labels { nodes { id name } }
+		parent { id identifier title }
+		children { nodes { id identifier title state { name } } }
+		labels { nodes { id name color } }
+		relations { nodes { type relatedIssue { id identifier title } } }
+	}
+}`
+
+const issueByIdentifierQuery = `query GetIssueByIdentifier($filter: IssueFilter!) {
+	issues(filter: $filter, first: 1) {
+		nodes {
+			id identifier title description url priority priorityLabel
+			dueDate estimate createdAt updatedAt
+			state { id name }
+			assignee { id name email }
+			team { id name key }
+			project { id name }
+			cycle { id name number }
+			parent { id identifier title }
+			children { nodes { id identifier title state { name } } }
+			labels { nodes { id name color } }
+			relations { nodes { type relatedIssue { id identifier title } } }
+		}
 	}
 }`
 
@@ -89,10 +102,26 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 		return nil, err
 	}
 
-	resp, err := linear.ExecuteGraphQL(apiKey, linear.GraphQLRequest{
-		Query:     issueQuery,
-		Variables: map[string]interface{}{"id": issueID},
-	})
+	// Detect identifier format (e.g. ENG-123) vs UUID.
+	isIdentifier := len(issueID) < 36 && strings.Contains(issueID, "-") &&
+		!strings.ContainsAny(issueID[:1], "0123456789")
+
+	var resp *linear.GraphQLResponse
+	if isIdentifier {
+		resp, err = linear.ExecuteGraphQL(apiKey, linear.GraphQLRequest{
+			Query: issueByIdentifierQuery,
+			Variables: map[string]interface{}{
+				"filter": map[string]interface{}{
+					"identifier": map[string]string{"eq": issueID},
+				},
+			},
+		})
+	} else {
+		resp, err = linear.ExecuteGraphQL(apiKey, linear.GraphQLRequest{
+			Query:     issueByIDQuery,
+			Variables: map[string]interface{}{"id": issueID},
+		})
+	}
 	if err != nil {
 		return map[string]interface{}{
 			"tool_result": fmt.Sprintf("Failed: %s", err),
@@ -101,55 +130,101 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 		}, nil
 	}
 
-	var result struct {
-		Issue struct {
-			ID            string  `json:"id"`
-			Identifier    string  `json:"identifier"`
-			Title         string  `json:"title"`
-			Description   string  `json:"description"`
-			URL           string  `json:"url"`
-			Priority      int     `json:"priority"`
-			PriorityLabel string  `json:"priorityLabel"`
-			DueDate       *string `json:"dueDate"`
-			Estimate      *int    `json:"estimate"`
-			CreatedAt     string  `json:"createdAt"`
-			UpdatedAt     string  `json:"updatedAt"`
-			State         *struct {
-				ID   string `json:"id"`
-				Name string `json:"name"`
-			} `json:"state"`
-			Assignee *struct {
-				ID    string `json:"id"`
-				Name  string `json:"name"`
-				Email string `json:"email"`
-			} `json:"assignee"`
-			Team *struct {
-				ID   string `json:"id"`
-				Name string `json:"name"`
-				Key  string `json:"key"`
-			} `json:"team"`
-			Project *struct {
-				ID   string `json:"id"`
-				Name string `json:"name"`
-			} `json:"project"`
-			Cycle *struct {
-				ID     string `json:"id"`
-				Name   string `json:"name"`
-				Number int    `json:"number"`
-			} `json:"cycle"`
-			Labels struct {
-				Nodes []struct {
-					ID   string `json:"id"`
+	type issueData struct {
+		ID            string  `json:"id"`
+		Identifier    string  `json:"identifier"`
+		Title         string  `json:"title"`
+		Description   string  `json:"description"`
+		URL           string  `json:"url"`
+		Priority      int     `json:"priority"`
+		PriorityLabel string  `json:"priorityLabel"`
+		DueDate       *string `json:"dueDate"`
+		Estimate      *int    `json:"estimate"`
+		CreatedAt     string  `json:"createdAt"`
+		UpdatedAt     string  `json:"updatedAt"`
+		State         *struct {
+			ID   string `json:"id"`
+			Name string `json:"name"`
+		} `json:"state"`
+		Assignee *struct {
+			ID    string `json:"id"`
+			Name  string `json:"name"`
+			Email string `json:"email"`
+		} `json:"assignee"`
+		Team *struct {
+			ID   string `json:"id"`
+			Name string `json:"name"`
+			Key  string `json:"key"`
+		} `json:"team"`
+		Project *struct {
+			ID   string `json:"id"`
+			Name string `json:"name"`
+		} `json:"project"`
+		Cycle *struct {
+			ID     string `json:"id"`
+			Name   string `json:"name"`
+			Number int    `json:"number"`
+		} `json:"cycle"`
+		Parent *struct {
+			ID         string `json:"id"`
+			Identifier string `json:"identifier"`
+			Title      string `json:"title"`
+		} `json:"parent"`
+		Children struct {
+			Nodes []struct {
+				ID         string `json:"id"`
+				Identifier string `json:"identifier"`
+				Title      string `json:"title"`
+				State      *struct {
 					Name string `json:"name"`
-				} `json:"nodes"`
-			} `json:"labels"`
-		} `json:"issue"`
-	}
-	if err := json.Unmarshal(resp.Data, &result); err != nil {
-		return nil, fmt.Errorf("failed to parse response: %w", err)
+				} `json:"state"`
+			} `json:"nodes"`
+		} `json:"children"`
+		Labels struct {
+			Nodes []struct {
+				ID   string `json:"id"`
+				Name string `json:"name"`
+			} `json:"nodes"`
+		} `json:"labels"`
+		Relations struct {
+			Nodes []struct {
+				Type         string `json:"type"`
+				RelatedIssue struct {
+					ID         string `json:"id"`
+					Identifier string `json:"identifier"`
+					Title      string `json:"title"`
+				} `json:"relatedIssue"`
+			} `json:"nodes"`
+		} `json:"relations"`
 	}
 
-	issue := result.Issue
+	var issue issueData
+	if isIdentifier {
+		var result struct {
+			Issues struct {
+				Nodes []issueData `json:"nodes"`
+			} `json:"issues"`
+		}
+		if err := json.Unmarshal(resp.Data, &result); err != nil {
+			return nil, fmt.Errorf("failed to parse response: %w", err)
+		}
+		if len(result.Issues.Nodes) == 0 {
+			return map[string]interface{}{
+				"tool_result": fmt.Sprintf("Issue %s not found", issueID),
+				"success":     false,
+				"error":       "not found",
+			}, nil
+		}
+		issue = result.Issues.Nodes[0]
+	} else {
+		var result struct {
+			Issue issueData `json:"issue"`
+		}
+		if err := json.Unmarshal(resp.Data, &result); err != nil {
+			return nil, fmt.Errorf("failed to parse response: %w", err)
+		}
+		issue = result.Issue
+	}
 	stateName := ""
 	if issue.State != nil {
 		stateName = issue.State.Name
@@ -179,13 +254,47 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 		labelsStr += n
 	}
 
-	// Build full result as JSON object
+	// Build detailed summary.
+	var sb strings.Builder
+	fmt.Fprintf(&sb, "%s: %s\n", issue.Identifier, issue.Title)
+	fmt.Fprintf(&sb, "  State: %s | Priority: %s | Assignee: %s\n", stateName, issue.PriorityLabel, assigneeName)
+	if teamName != "" {
+		fmt.Fprintf(&sb, "  Team: %s\n", teamName)
+	}
+	if dueDate != "" {
+		fmt.Fprintf(&sb, "  Due: %s\n", dueDate)
+	}
+	if labelsStr != "" {
+		fmt.Fprintf(&sb, "  Labels: %s\n", labelsStr)
+	}
+	if issue.Parent != nil {
+		fmt.Fprintf(&sb, "  Parent: %s — %s\n", issue.Parent.Identifier, issue.Parent.Title)
+	}
+	if len(issue.Children.Nodes) > 0 {
+		fmt.Fprintf(&sb, "  Sub-issues (%d):\n", len(issue.Children.Nodes))
+		for _, ch := range issue.Children.Nodes {
+			chState := ""
+			if ch.State != nil {
+				chState = ch.State.Name
+			}
+			fmt.Fprintf(&sb, "    • %s: %s [%s]\n", ch.Identifier, ch.Title, chState)
+		}
+	}
+	if issue.Description != "" {
+		desc := issue.Description
+		if len(desc) > 300 {
+			desc = desc[:300] + "..."
+		}
+		fmt.Fprintf(&sb, "  Description: %s\n", desc)
+	}
+
+	// Build full result as JSON object.
 	fullResult, _ := json.Marshal(issue)
 	var fullObj interface{}
 	_ = json.Unmarshal(fullResult, &fullObj)
 
 	return map[string]interface{}{
-		"tool_result": fmt.Sprintf("%s: %s [%s]", issue.Identifier, issue.Title, stateName),
+		"tool_result": sb.String(),
 		"issue_id":    issue.ID,
 		"identifier":  issue.Identifier,
 		"title":       issue.Title,

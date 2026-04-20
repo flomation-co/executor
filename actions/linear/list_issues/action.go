@@ -186,6 +186,11 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 		Team struct {
 			Key string `json:"key"`
 		} `json:"team"`
+		Labels struct {
+			Nodes []struct {
+				Name string `json:"name"`
+			} `json:"nodes"`
+		} `json:"labels"`
 	}
 
 	var sb strings.Builder
@@ -202,8 +207,16 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 			if row.DueDate != "" {
 				due = fmt.Sprintf(" due:%s", row.DueDate)
 			}
-			fmt.Fprintf(&sb, "• [%s] %s (%s, %s, %s%s)\n",
-				row.Identifier, row.Title, row.State.Name, row.PriorityLabel, assignee, due)
+			var labels []string
+			for _, l := range row.Labels.Nodes {
+				labels = append(labels, l.Name)
+			}
+			labelStr := ""
+			if len(labels) > 0 {
+				labelStr = fmt.Sprintf(" [%s]", strings.Join(labels, ", "))
+			}
+			fmt.Fprintf(&sb, "• [%s] %s (%s, %s, %s%s)%s\n",
+				row.Identifier, row.Title, row.State.Name, row.PriorityLabel, assignee, due, labelStr)
 		}
 		var generic interface{}
 		_ = json.Unmarshal(raw, &generic)
