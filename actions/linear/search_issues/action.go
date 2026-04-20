@@ -71,8 +71,8 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	}
 
 	resp, err := linear.ExecuteGraphQL(apiKey, linear.GraphQLRequest{
-		Query: `query SearchIssues($query: String!, $first: Int) {
-			searchIssues(query: $query, first: $first) {
+		Query: `query SearchIssues($term: String!, $first: Int) {
+			searchIssues(term: $term, first: $first) {
 				nodes {
 					id
 					identifier
@@ -91,7 +91,7 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 			}
 		}`,
 		Variables: map[string]interface{}{
-			"query": query,
+			"term":  query,
 			"first": limit,
 		},
 	})

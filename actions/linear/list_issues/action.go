@@ -119,7 +119,7 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	if v := linear.OptionalString("label_name", inputs); v != "" {
 		filter["labels"] = map[string]interface{}{
 			"some": map[string]interface{}{
-				"name": map[string]interface{}{"eqCaseInsensitive": v},
+				"name": map[string]interface{}{"eq": v},
 			},
 		}
 	}
