@@ -38,14 +38,16 @@ const (
 
 var Inputs = [...]core.Connection{
 	{
-		Name:  "bot_token",
-		Type:  core.ConnectionTypeString,
-		Label: "Slack bot token — auto-inherited from flow context, do not provide",
+		Name:        "bot_token",
+		Type:        core.ConnectionTypeString,
+		Label:       "Bot Token",
+		Placeholder: "xoxb-...",
 	},
 	{
-		Name:  "channel_id",
-		Type:  core.ConnectionTypeString,
-		Label: "Channel ID — auto-inherited from flow context, do not provide",
+		Name:        "channel_id",
+		Type:        core.ConnectionTypeString,
+		Label:       "Channel ID",
+		Placeholder: "${channel_id}",
 	},
 	{
 		Name:     "text",

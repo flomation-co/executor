@@ -8065,7 +8065,7 @@
     ]
   },
   "tools/slack_channels": {
-    "hash": "58b3b48cbcd7c2160cd27a24aeb3a7e9789bb341c34b915190bbe8ea9c0fa126",
+    "hash": "c57c98efe338ddf3927b61c62ee42d85da62f19c3a2bcfa06adc8181b8a15106",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Slack Channels",
@@ -8084,8 +8084,9 @@
         "name": "bot_token",
         "type": "string",
         "value": null,
-        "label": "Slack bot token — pre-configured, do not provide",
-        "placeholder": ""
+        "label": "Bot Token",
+        "placeholder": "xoxb-...",
+        "required": true
       },
       {
         "name": "search",
@@ -8148,7 +8149,7 @@
     ]
   },
   "tools/slack_file_upload": {
-    "hash": "263ccb570d61a6eea1870c3ce3e683249fd11d09383cb0b20e13cb2a9464776a",
+    "hash": "bd07aef49e2b8c6295a4213e23813e87a193d6e44b953607ce4d8a942d75cb54",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Slack File Upload",
@@ -8167,15 +8168,17 @@
         "name": "bot_token",
         "type": "string",
         "value": null,
-        "label": "Slack bot token — pre-configured, do not provide",
-        "placeholder": ""
+        "label": "Bot Token",
+        "placeholder": "xoxb-...",
+        "required": true
       },
       {
         "name": "channel_id",
         "type": "string",
         "value": null,
-        "label": "Channel ID — pre-configured, do not provide",
-        "placeholder": ""
+        "label": "Channel ID",
+        "placeholder": "${channel_id}",
+        "required": true
       },
       {
         "name": "content",
@@ -8240,7 +8243,7 @@
     ]
   },
   "tools/slack_rich_message": {
-    "hash": "270c48d824ff351678a651bdd7ca9f201826d95778170305017aff86c444621c",
+    "hash": "2571bfcd91a313eec2be84418f4b925690e70aead1ad463e8aaac20686940847",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Slack Rich Message",
@@ -8259,15 +8262,15 @@
         "name": "bot_token",
         "type": "string",
         "value": null,
-        "label": "Slack bot token — auto-inherited from flow context, do not provide",
-        "placeholder": ""
+        "label": "Bot Token",
+        "placeholder": "xoxb-..."
       },
       {
         "name": "channel_id",
         "type": "string",
         "value": null,
-        "label": "Channel ID — auto-inherited from flow context, do not provide",
-        "placeholder": ""
+        "label": "Channel ID",
+        "placeholder": "${channel_id}"
       },
       {
         "name": "text",
@@ -8332,7 +8335,7 @@
     ]
   },
   "tools/slack_search": {
-    "hash": "01bf6dbb687889de4d80d805b910149905b24d29a4eb53b3531ea7dde7088850",
+    "hash": "b20cfce544f25cc5d5d4a21483a6041d077fcbe434616429b5c76fe0793a2adf",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Slack Search Messages",
@@ -8351,8 +8354,9 @@
         "name": "bot_token",
         "type": "string",
         "value": null,
-        "label": "Slack bot token — pre-configured, do not provide",
-        "placeholder": ""
+        "label": "Bot Token",
+        "placeholder": "xoxb-...",
+        "required": true
       },
       {
         "name": "query",
@@ -8416,7 +8420,7 @@
     ]
   },
   "tools/slack_user_profile": {
-    "hash": "efd91f80b8ba0744e5ef6f991b77f337b3d716490b1000b7008b55a332094111",
+    "hash": "07d71f1b79a5849e47dd07a55e5578df07418328b4eaa7407618993586638def",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Slack User Profile",
@@ -8435,8 +8439,9 @@
         "name": "bot_token",
         "type": "string",
         "value": null,
-        "label": "Slack bot token — pre-configured, do not provide",
-        "placeholder": ""
+        "label": "Bot Token",
+        "placeholder": "xoxb-...",
+        "required": true
       },
       {
         "name": "user_id",
@@ -8521,7 +8526,7 @@
     ]
   },
   "tools/slack_users": {
-    "hash": "175147e109c8f143f5ff3d1ddbf2fc40c903d871be056d0cf31d4e060c0fd186",
+    "hash": "be6aca2f6e470f618322344a178173297a87a519cb517c9cbd1c77f7bc34faed",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Slack Users",
@@ -8540,8 +8545,9 @@
         "name": "bot_token",
         "type": "string",
         "value": null,
-        "label": "Slack bot token — pre-configured, do not provide",
-        "placeholder": ""
+        "label": "Bot Token",
+        "placeholder": "xoxb-...",
+        "required": true
       },
       {
         "name": "search",

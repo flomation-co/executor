@@ -26,7 +26,7 @@ const (
 )
 
 var Inputs = [...]core.Connection{
-	{Name: "bot_token", Type: core.ConnectionTypeString, Label: "Slack bot token — pre-configured, do not provide"},
+	{Name: "bot_token", Type: core.ConnectionTypeString, Label: "Bot Token", Placeholder: "xoxb-...", Required: true},
 	{Name: "query", Type: core.ConnectionTypeString, Label: "Search query. Supports Slack search modifiers: from:@user, in:#channel, before:2026-04-20, after:2026-04-01, has:link", Required: true},
 	{Name: "count", Type: core.ConnectionTypeString, Label: "Max results to return (default 10, max 100)"},
 	{Name: "sort", Type: core.ConnectionTypeString, Label: "Sort order: score (relevance) or timestamp (recent first). Default: score"},
