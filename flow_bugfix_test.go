@@ -7,56 +7,34 @@ import (
 	. "github.com/onsi/gomega"
 )
 
-// --- Bug 2: Variable substitution should work in On Error chain ---
+// --- On Error handled executions should still report as failed ---
 
-func TestOnErrorChain_InheritsUpstreamOutputs(t *testing.T) {
+func TestOnErrorHandled_StillMarkedAsErrored(t *testing.T) {
 	RegisterTestingT(t)
 
-	// Node that succeeds and produces output
 	successAction := func(flow *Flow, node *Node, inputs []*Connection) (map[string]interface{}, error) {
-		return map[string]interface{}{"greeting": "hello"}, nil
+		return map[string]interface{}{"ok": true}, nil
 	}
-
-	// Node that fails
 	failAction := func(flow *Flow, node *Node, inputs []*Connection) (map[string]interface{}, error) {
-		return nil, errors.New("something went wrong")
+		return nil, errors.New("node exploded")
 	}
-
-	// On Error handler (passthrough)
 	onErrorAction := func(flow *Flow, node *Node, inputs []*Connection) (map[string]interface{}, error) {
 		return map[string]interface{}{}, nil
 	}
-
-	// Error handler child that captures parentResults
-	var childReceivedParentResults map[string]interface{}
-	errorChildAction := func(flow *Flow, node *Node, inputs []*Connection) (map[string]interface{}, error) {
-		// The parent of this node is the On Error node. Its cached results
-		// should include the upstream "greeting" output merged in.
-		parentOutputs := flow.GetNodeResult(node.ID)
-		// We can't access parentResults directly from here, but we can check
-		// the On Error node's cached results which get passed as parentResults
-		parents := flow.FindSource(node.ID)
-		for _, p := range parents {
-			if cached, exists := flow.nodeResults[p.ID]; exists {
-				childReceivedParentResults = cached
-			}
-		}
-		_ = parentOutputs
-		return map[string]interface{}{"handled": true}, nil
+	recoveryAction := func(flow *Flow, node *Node, inputs []*Connection) (map[string]interface{}, error) {
+		return map[string]interface{}{"recovered": true}, nil
 	}
 
 	f := &Flow{
 		Nodes: []*Node{
 			{ID: "trigger-1", Type: "trigger/manual", Data: &NodeData{Label: "trigger/manual", Config: NodeConfig{Type: ActionTypeTrigger}}},
-			{ID: "success-1", Type: "test/success", Data: &NodeData{Label: "test/success", Config: NodeConfig{Type: ActionTypeAction}}},
 			{ID: "fail-1", Type: "test/fail", Data: &NodeData{Label: "test/fail", Config: NodeConfig{Type: ActionTypeAction}}},
 			{ID: "on-error-1", Type: "error/on_error", Data: &NodeData{Label: "error/on_error", Config: NodeConfig{Type: ActionTypeAction}}},
-			{ID: "error-child-1", Type: "test/error_child", Data: &NodeData{Label: "test/error_child", Config: NodeConfig{Type: ActionTypeAction}}},
+			{ID: "recovery-1", Type: "test/recovery", Data: &NodeData{Label: "test/recovery", Config: NodeConfig{Type: ActionTypeAction}}},
 		},
 		Edges: []*Edge{
-			{ID: "e1", Source: "trigger-1", Target: "success-1"},
-			{ID: "e2", Source: "success-1", Target: "fail-1"},
-			{ID: "e3", Source: "on-error-1", Target: "error-child-1"},
+			{ID: "e1", Source: "trigger-1", Target: "fail-1"},
+			{ID: "e2", Source: "on-error-1", Target: "recovery-1"},
 		},
 		nodeResults:          make(map[string]map[string]interface{}),
 		nodeExecutionResults: make(map[string]*ExecutionNodeResult),
@@ -65,21 +43,117 @@ func TestOnErrorChain_InheritsUpstreamOutputs(t *testing.T) {
 	}
 
 	actions := map[string]Action{
-		"trigger/manual":   successAction,
-		"test/success":     successAction,
-		"test/fail":        failAction,
-		"error/on_error":   onErrorAction,
-		"test/error_child": errorChildAction,
+		"trigger/manual": successAction,
+		"test/fail":      failAction,
+		"error/on_error": onErrorAction,
+		"test/recovery":  recoveryAction,
 	}
 
 	_, err := f.Execute(actions, nil, nil)
-	Expect(err).To(BeNil()) // Error was handled
+	Expect(err).To(BeNil()) // Error was handled by On Error chain
 
-	// The On Error node's cached results should contain both error context
-	// AND the upstream "greeting" output from the success node
-	Expect(childReceivedParentResults).ToNot(BeNil())
-	Expect(childReceivedParentResults["error_message"]).To(Equal("something went wrong"))
-	Expect(childReceivedParentResults["greeting"]).To(Equal("hello"))
+	// Even though the On Error chain completed successfully, the flow
+	// should still report that an error occurred.
+	Expect(f.HadError()).To(BeTrue())
+}
+
+func TestNoError_HadErrorIsFalse(t *testing.T) {
+	RegisterTestingT(t)
+
+	successAction := func(flow *Flow, node *Node, inputs []*Connection) (map[string]interface{}, error) {
+		return map[string]interface{}{"ok": true}, nil
+	}
+
+	f := &Flow{
+		Nodes: []*Node{
+			{ID: "trigger-1", Type: "trigger/manual", Data: &NodeData{Label: "trigger/manual", Config: NodeConfig{Type: ActionTypeTrigger}}},
+			{ID: "action-1", Type: "test/success", Data: &NodeData{Label: "test/success", Config: NodeConfig{Type: ActionTypeAction}}},
+		},
+		Edges: []*Edge{
+			{ID: "e1", Source: "trigger-1", Target: "action-1"},
+		},
+		nodeResults:          make(map[string]map[string]interface{}),
+		nodeExecutionResults: make(map[string]*ExecutionNodeResult),
+		outputs:              make(map[string]interface{}),
+		variables:            make(map[string]interface{}),
+	}
+
+	actions := map[string]Action{
+		"trigger/manual": successAction,
+		"test/success":   successAction,
+	}
+
+	_, err := f.Execute(actions, nil, nil)
+	Expect(err).To(BeNil())
+	Expect(f.HadError()).To(BeFalse())
+}
+
+// --- On Error chain variable substitution with reachability ---
+
+func TestOnErrorChain_ErrorMessageResolvesWithReachability(t *testing.T) {
+	RegisterTestingT(t)
+
+	// When a node fails and the On Error chain fires, children of the
+	// On Error node should be able to resolve ${error_message} even
+	// though On Error nodes are not forward-reachable from the trigger.
+
+	var capturedErrorMsg string
+	triggerAction := func(flow *Flow, node *Node, inputs []*Connection) (map[string]interface{}, error) {
+		return map[string]interface{}{}, nil
+	}
+	failAction := func(flow *Flow, node *Node, inputs []*Connection) (map[string]interface{}, error) {
+		return nil, errors.New("database connection failed")
+	}
+	onErrorAction := func(flow *Flow, node *Node, inputs []*Connection) (map[string]interface{}, error) {
+		return map[string]interface{}{}, nil
+	}
+	logErrorAction := func(flow *Flow, node *Node, inputs []*Connection) (map[string]interface{}, error) {
+		for _, c := range inputs {
+			if c.Name == "message" && c.String() != nil {
+				capturedErrorMsg = *c.String()
+			}
+		}
+		return map[string]interface{}{"logged": true}, nil
+	}
+
+	f := &Flow{
+		Nodes: []*Node{
+			{ID: "trigger-1", Type: "trigger/manual", Data: &NodeData{Label: "trigger/manual", Config: NodeConfig{Type: ActionTypeTrigger}}},
+			{ID: "fail-1", Type: "test/fail", Data: &NodeData{Label: "test/fail", Config: NodeConfig{Type: ActionTypeAction}}},
+			{ID: "on-error-1", Type: "error/on_error", Data: &NodeData{Label: "error/on_error", Config: NodeConfig{Type: ActionTypeAction}}},
+			{ID: "log-error-1", Type: "test/log_error", Data: &NodeData{
+				Label: "test/log_error",
+				Config: NodeConfig{
+					Type: ActionTypeAction,
+					Inputs: []*Connection{
+						{Name: "message", Type: ConnectionTypeString, Value: "Error: ${error_message}"},
+					},
+				},
+			}},
+		},
+		Edges: []*Edge{
+			{ID: "e1", Source: "trigger-1", Target: "fail-1"},
+			{ID: "e2", Source: "on-error-1", Target: "log-error-1"},
+		},
+		nodeResults:          make(map[string]map[string]interface{}),
+		nodeExecutionResults: make(map[string]*ExecutionNodeResult),
+		outputs:              make(map[string]interface{}),
+		variables:            make(map[string]interface{}),
+	}
+
+	actions := map[string]Action{
+		"trigger/manual":  triggerAction,
+		"test/fail":       failAction,
+		"error/on_error":  onErrorAction,
+		"test/log_error":  logErrorAction,
+	}
+
+	_, err := f.Execute(actions, nil, nil)
+	Expect(err).To(BeNil())
+	Expect(f.HadError()).To(BeTrue())
+
+	// The ${error_message} variable should have been resolved
+	Expect(capturedErrorMsg).To(Equal("Error: database connection failed"))
 }
 
 // --- Bug 3: "Set Variable" should be globally accessible ---
@@ -272,4 +346,192 @@ func TestOnErrorChain_WarnsOnMultipleOnErrorNodes(t *testing.T) {
 	_, child2Executed := f.nodeResults["child-2"]
 	Expect(child1Executed).To(BeTrue())
 	Expect(child2Executed).To(BeFalse())
+}
+
+// --- Bug: Parents from unrelated trigger paths should not be executed ---
+
+func TestMultipleTriggerPaths_SkipsUnreachableParent(t *testing.T) {
+	RegisterTestingT(t)
+
+	// Scenario: Two triggers feed into the same AI Prompt node.
+	// Slack Trigger → AI Prompt (direct)
+	// Email Trigger → Switch → AI Prompt
+	// When Slack triggers, the Switch (only reachable via Email) must NOT execute.
+
+	var switchExecuted bool
+	switchAction := func(flow *Flow, node *Node, inputs []*Connection) (map[string]interface{}, error) {
+		switchExecuted = true
+		return map[string]interface{}{"matched_case": "case_0", "result": "switched"}, nil
+	}
+
+	triggerAction := func(flow *Flow, node *Node, inputs []*Connection) (map[string]interface{}, error) {
+		return map[string]interface{}{"channel": "slack"}, nil
+	}
+
+	promptAction := func(flow *Flow, node *Node, inputs []*Connection) (map[string]interface{}, error) {
+		return map[string]interface{}{"response": "hello"}, nil
+	}
+
+	f := &Flow{
+		Nodes: []*Node{
+			{ID: "slack-trigger", Type: "trigger/slack", Data: &NodeData{Label: "trigger/slack", Config: NodeConfig{Type: ActionTypeTrigger}}},
+			{ID: "email-trigger", Type: "trigger/email", Data: &NodeData{Label: "trigger/email", Config: NodeConfig{Type: ActionTypeTrigger}}},
+			{ID: "switch-1", Type: "conditional/switch", Data: &NodeData{Label: "conditional/switch", Config: NodeConfig{Type: ActionTypeSwitch}}},
+			{ID: "prompt-1", Type: "ai/anthropic", Data: &NodeData{Label: "ai/anthropic", Config: NodeConfig{Type: ActionTypeAction}}},
+		},
+		Edges: []*Edge{
+			{ID: "e1", Source: "slack-trigger", Target: "prompt-1"},
+			{ID: "e2", Source: "email-trigger", Target: "switch-1"},
+			{ID: "e3", Source: "switch-1", Target: "prompt-1", SourceHandle: "case_0"},
+		},
+		nodeResults:          make(map[string]map[string]interface{}),
+		nodeExecutionResults: make(map[string]*ExecutionNodeResult),
+		outputs:              make(map[string]interface{}),
+		variables:            make(map[string]interface{}),
+	}
+
+	// Execute from the Slack trigger entry point
+	slackEntry := "slack-trigger"
+	actions := map[string]Action{
+		"trigger/slack":      triggerAction,
+		"trigger/email":      triggerAction,
+		"conditional/switch": switchAction,
+		"ai/anthropic":       promptAction,
+	}
+
+	_, err := f.Execute(actions, &slackEntry, nil)
+	Expect(err).To(BeNil())
+
+	// The Switch node should NOT have been executed — it's only
+	// reachable from the Email trigger, not the Slack trigger.
+	Expect(switchExecuted).To(BeFalse())
+
+	// The AI Prompt should have executed successfully
+	_, promptExecuted := f.nodeResults["prompt-1"]
+	Expect(promptExecuted).To(BeTrue())
+}
+
+func TestMultipleTriggerPaths_ExecutesReachableParent(t *testing.T) {
+	RegisterTestingT(t)
+
+	// Verify that parents reachable from the active trigger ARE still executed.
+	// Email Trigger → Switch → AI Prompt
+
+	var switchExecuted bool
+	switchAction := func(flow *Flow, node *Node, inputs []*Connection) (map[string]interface{}, error) {
+		switchExecuted = true
+		return map[string]interface{}{"matched_case": "case_0"}, nil
+	}
+
+	triggerAction := func(flow *Flow, node *Node, inputs []*Connection) (map[string]interface{}, error) {
+		return map[string]interface{}{"channel": "email"}, nil
+	}
+
+	promptAction := func(flow *Flow, node *Node, inputs []*Connection) (map[string]interface{}, error) {
+		return map[string]interface{}{"response": "hello"}, nil
+	}
+
+	f := &Flow{
+		Nodes: []*Node{
+			{ID: "slack-trigger", Type: "trigger/slack", Data: &NodeData{Label: "trigger/slack", Config: NodeConfig{Type: ActionTypeTrigger}}},
+			{ID: "email-trigger", Type: "trigger/email", Data: &NodeData{Label: "trigger/email", Config: NodeConfig{Type: ActionTypeTrigger}}},
+			{ID: "switch-1", Type: "conditional/switch", Data: &NodeData{Label: "conditional/switch", Config: NodeConfig{Type: ActionTypeSwitch}}},
+			{ID: "prompt-1", Type: "ai/anthropic", Data: &NodeData{Label: "ai/anthropic", Config: NodeConfig{Type: ActionTypeAction}}},
+		},
+		Edges: []*Edge{
+			{ID: "e1", Source: "slack-trigger", Target: "prompt-1"},
+			{ID: "e2", Source: "email-trigger", Target: "switch-1"},
+			{ID: "e3", Source: "switch-1", Target: "prompt-1", SourceHandle: "case_0"},
+		},
+		nodeResults:          make(map[string]map[string]interface{}),
+		nodeExecutionResults: make(map[string]*ExecutionNodeResult),
+		outputs:              make(map[string]interface{}),
+		variables:            make(map[string]interface{}),
+	}
+
+	// Execute from the Email trigger entry point
+	emailEntry := "email-trigger"
+	actions := map[string]Action{
+		"trigger/slack":      triggerAction,
+		"trigger/email":      triggerAction,
+		"conditional/switch": switchAction,
+		"ai/anthropic":       promptAction,
+	}
+
+	_, err := f.Execute(actions, &emailEntry, nil)
+	Expect(err).To(BeNil())
+
+	// The Switch node SHOULD have been executed — it IS reachable from Email trigger
+	Expect(switchExecuted).To(BeTrue())
+}
+
+// Test: a node behind a regular action on an unmatched Switch branch should
+// NOT execute during parent resolution of the AI node.
+//
+// Flow: Trigger → Switch(voice/text)
+//         case_0 → STT → DataRename → AI
+//         case_1 ─────────────────────→ AI
+//
+// When Switch matches case_1 (text), data_rename (on case_0 path via STT)
+// should NOT execute. Previously, the ancestor walk only recursed through
+// Switch/Conditional/Loop nodes, missing the STT action in between.
+func TestUnmatchedBranch_SkipsThroughIntermediateActions(t *testing.T) {
+	RegisterTestingT(t)
+
+	dataRenameExecuted := false
+	sttExecuted := false
+
+	triggerAction := func(flow *Flow, node *Node, inputs []*Connection) (map[string]interface{}, error) {
+		return map[string]interface{}{"channel_type": "telegram"}, nil
+	}
+	switchAction := func(flow *Flow, node *Node, inputs []*Connection) (map[string]interface{}, error) {
+		return map[string]interface{}{"matched": true, "matched_case": "case_1", "value": "telegram"}, nil
+	}
+	sttAction := func(flow *Flow, node *Node, inputs []*Connection) (map[string]interface{}, error) {
+		sttExecuted = true
+		return map[string]interface{}{"text": "transcribed"}, nil
+	}
+	dataRenameAction := func(flow *Flow, node *Node, inputs []*Connection) (map[string]interface{}, error) {
+		dataRenameExecuted = true
+		return map[string]interface{}{"content": "renamed"}, nil
+	}
+	aiAction := func(flow *Flow, node *Node, inputs []*Connection) (map[string]interface{}, error) {
+		return map[string]interface{}{"response": "hello"}, nil
+	}
+
+	f := &Flow{
+		Nodes: []*Node{
+			{ID: "trigger", Type: "trigger/telegram", Data: &NodeData{Label: "trigger/telegram", Config: NodeConfig{Type: ActionTypeTrigger}}},
+			{ID: "switch", Type: "conditional/switch", Data: &NodeData{Label: "conditional/switch", Config: NodeConfig{Type: ActionTypeSwitch}}},
+			{ID: "stt", Type: "action", Data: &NodeData{Label: "elevenlabs/speech_to_text", Config: NodeConfig{Type: ActionTypeAction}}},
+			{ID: "data-rename", Type: "action", Data: &NodeData{Label: "common/data_rename", Config: NodeConfig{Type: ActionTypeAction}}},
+			{ID: "ai", Type: "action", Data: &NodeData{Label: "ai/anthropic", Config: NodeConfig{Type: ActionTypeAction}}},
+		},
+		Edges: []*Edge{
+			{ID: "e1", Source: "trigger", Target: "switch"},
+			{ID: "e2", Source: "switch", Target: "stt", SourceHandle: "case_0"},     // voice branch
+			{ID: "e3", Source: "switch", Target: "ai", SourceHandle: "case_1"},       // text branch
+			{ID: "e4", Source: "stt", Target: "data-rename"},
+			{ID: "e5", Source: "data-rename", Target: "ai"},
+		},
+		nodeResults:          make(map[string]map[string]interface{}),
+		nodeExecutionResults: make(map[string]*ExecutionNodeResult),
+		outputs:              make(map[string]interface{}),
+	}
+
+	actions := map[string]Action{
+		"trigger/telegram":           triggerAction,
+		"conditional/switch":         switchAction,
+		"elevenlabs/speech_to_text":  sttAction,
+		"common/data_rename":         dataRenameAction,
+		"ai/anthropic":               aiAction,
+	}
+
+	triggerEntry := "trigger"
+	_, err := f.Execute(actions, &triggerEntry, nil)
+	Expect(err).To(BeNil())
+
+	// data_rename and STT should NOT have executed — they're on the unmatched voice branch
+	Expect(dataRenameExecuted).To(BeFalse(), "data_rename on unmatched case_0 branch should not execute")
+	Expect(sttExecuted).To(BeFalse(), "STT on unmatched case_0 branch should not execute")
 }

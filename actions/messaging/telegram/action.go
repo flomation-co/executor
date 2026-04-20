@@ -85,7 +85,14 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 
 	messageConn := core.FindConnection("message", inputs)
 	if messageConn == nil || messageConn.String() == nil || *messageConn.String() == "" {
-		return nil, fmt.Errorf("message is required")
+		// Empty message — the AI likely communicated via tools and has no
+		// final text to send. Skip gracefully instead of failing.
+		return map[string]interface{}{
+			"tool_result": "no message to send (empty response)",
+			"message_id":  0,
+			"success":     true,
+			"error":       "",
+		}, nil
 	}
 	message := *messageConn.String()
 

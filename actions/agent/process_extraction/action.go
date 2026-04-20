@@ -108,6 +108,9 @@ var Outputs = [...]core.Connection{
 	{Name: "commitments_written", Type: core.ConnectionTypeInteger, Label: "Commitments written"},
 	{Name: "confirmations_processed", Type: core.ConnectionTypeInteger, Label: "Confirmations processed"},
 	{Name: "identities_merged", Type: core.ConnectionTypeInteger, Label: "Identities merged"},
+	{Name: "schedules_created", Type: core.ConnectionTypeInteger, Label: "Schedules created"},
+	{Name: "schedules_updated", Type: core.ConnectionTypeInteger, Label: "Schedules updated"},
+	{Name: "schedules_deleted", Type: core.ConnectionTypeInteger, Label: "Schedules deleted"},
 	{Name: "errors", Type: core.ConnectionTypeObject, Label: "Per-record errors"},
 }
 
@@ -116,10 +119,11 @@ var Outputs = [...]core.Connection{
 // AI action produces this shape; if the model drifts or returns malformed
 // JSON we return a structured error rather than exploding.
 type extractionPayload struct {
-	Memories        []extractionMemory  `json:"memories"`
-	ProposedActions []extractionAction  `json:"proposed_actions"`
-	Commitments     []extractionCommit  `json:"commitments"`
-	Confirmations   []extractionConfirm `json:"confirmations"` // Phase 5 consumer
+	Memories        []extractionMemory   `json:"memories"`
+	ProposedActions []extractionAction   `json:"proposed_actions"`
+	Commitments     []extractionCommit   `json:"commitments"`
+	Confirmations   []extractionConfirm  `json:"confirmations"`
+	Schedules       []extractionSchedule `json:"schedules"`
 }
 
 type extractionMemory struct {
@@ -156,19 +160,36 @@ type extractionConfirm struct {
 	TaskTitle       string `json:"task_title,omitempty"` // For task_completed: which task
 }
 
+type extractionSchedule struct {
+	Action      string  `json:"action"` // 'create' | 'update' | 'delete'
+	Name        string  `json:"name"`
+	Description string  `json:"description,omitempty"`
+	Mode        string  `json:"mode,omitempty"`        // 'interval' | 'daily' | 'weekly'
+	Interval    string  `json:"interval,omitempty"`     // e.g. "30"
+	Unit        string  `json:"unit,omitempty"`         // 'minutes' | 'hours' | 'days'
+	TimeOfDay   string  `json:"time_of_day,omitempty"`  // "HH:MM"
+	DaysOfWeek  string  `json:"days_of_week,omitempty"` // "monday,wednesday"
+	Timezone    string  `json:"timezone,omitempty"`     // IANA timezone
+	Evidence    string  `json:"evidence"`
+	Confidence  float64 `json:"confidence"`
+}
+
 // extractionResult summarises what the action did, returned as the
 // node's output and surfaced in the execution detail view.
 type extractionResult struct {
-	MemoriesWritten         int      `json:"memories_written"`
-	MemoriesFlagged         int      `json:"memories_flagged"`
-	MemoriesDiscarded       int      `json:"memories_discarded"`
-	MemoriesSuperseded      int      `json:"memories_superseded"`
-	MemoriesDeduplicated    int      `json:"memories_deduplicated"`
-	PendingActionsWritten   int      `json:"pending_actions_written"`
-	CommitmentsWritten      int      `json:"commitments_written"`
-	ConfirmationsProcessed  int      `json:"confirmations_processed"`
-	IdentitiesMerged        int      `json:"identities_merged"`
-	Errors                  []string `json:"errors,omitempty"`
+	MemoriesWritten        int      `json:"memories_written"`
+	MemoriesFlagged        int      `json:"memories_flagged"`
+	MemoriesDiscarded      int      `json:"memories_discarded"`
+	MemoriesSuperseded     int      `json:"memories_superseded"`
+	MemoriesDeduplicated   int      `json:"memories_deduplicated"`
+	PendingActionsWritten  int      `json:"pending_actions_written"`
+	CommitmentsWritten     int      `json:"commitments_written"`
+	ConfirmationsProcessed int      `json:"confirmations_processed"`
+	IdentitiesMerged       int      `json:"identities_merged"`
+	SchedulesCreated       int      `json:"schedules_created"`
+	SchedulesUpdated       int      `json:"schedules_updated"`
+	SchedulesDeleted       int      `json:"schedules_deleted"`
+	Errors                 []string `json:"errors,omitempty"`
 }
 
 func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[string]interface{}, error) {
@@ -210,18 +231,22 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	processPendingActions(flow, ctx, agentID, agentUserID, conversationID, sourceMessageID, payload.ProposedActions, &result)
 	processCommitments(flow, ctx, agentID, agentUserID, conversationID, sourceMessageID, payload.Commitments, &result)
 	processConfirmations(flow, ctx, agentID, agentUserID, payload.Confirmations, &result)
+	processSchedules(flow, ctx, agentID, agentUserID, conversationID, payload.Schedules, &result)
 
 	return map[string]interface{}{
-		"memories_written":         result.MemoriesWritten,
-		"memories_flagged":         result.MemoriesFlagged,
-		"memories_discarded":       result.MemoriesDiscarded,
-		"memories_superseded":      result.MemoriesSuperseded,
-		"memories_deduplicated":    result.MemoriesDeduplicated,
-		"pending_actions_written":  result.PendingActionsWritten,
-		"commitments_written":      result.CommitmentsWritten,
-		"confirmations_processed":  result.ConfirmationsProcessed,
-		"identities_merged":        result.IdentitiesMerged,
-		"errors":                   result.Errors,
+		"memories_written":        result.MemoriesWritten,
+		"memories_flagged":        result.MemoriesFlagged,
+		"memories_discarded":      result.MemoriesDiscarded,
+		"memories_superseded":     result.MemoriesSuperseded,
+		"memories_deduplicated":   result.MemoriesDeduplicated,
+		"pending_actions_written": result.PendingActionsWritten,
+		"commitments_written":     result.CommitmentsWritten,
+		"confirmations_processed": result.ConfirmationsProcessed,
+		"identities_merged":       result.IdentitiesMerged,
+		"schedules_created":       result.SchedulesCreated,
+		"schedules_updated":       result.SchedulesUpdated,
+		"schedules_deleted":       result.SchedulesDeleted,
+		"errors":                  result.Errors,
 	}, nil
 }
 
@@ -856,6 +881,229 @@ func patchJSON(flow *core.Flow, ctx *core.ExecutionContext, path string, body ma
 		return fmt.Errorf("new request: %w", err)
 	}
 	req.Header.Set("Content-Type", "application/json")
+	if ctx.Token != "" {
+		req.Header.Set("Authorization", "Bearer "+ctx.Token)
+	}
+
+	resp, err := http.DefaultClient.Do(req)
+	if err != nil {
+		return fmt.Errorf("do: %w", err)
+	}
+	defer func() { _ = resp.Body.Close() }()
+
+	if resp.StatusCode >= 300 {
+		respBody, _ := io.ReadAll(io.LimitReader(resp.Body, 512))
+		return fmt.Errorf("API returned %d: %s", resp.StatusCode, string(respBody))
+	}
+	return nil
+}
+
+// --- schedules ---
+
+func processSchedules(
+	flow *core.Flow, ctx *core.ExecutionContext,
+	agentID, agentUserID, conversationID string,
+	schedules []extractionSchedule, result *extractionResult,
+) {
+	if len(schedules) == 0 {
+		return
+	}
+
+	for i := range schedules {
+		s := &schedules[i]
+		if s.Confidence < 0.8 {
+			continue
+		}
+		if s.Name == "" {
+			continue
+		}
+
+		switch s.Action {
+		case "create":
+			createSchedule(flow, ctx, agentID, agentUserID, conversationID, s, result)
+		case "update":
+			updateSchedule(flow, ctx, agentID, s, result)
+		case "delete":
+			deleteSchedule(flow, ctx, agentID, s, result)
+		}
+	}
+}
+
+func createSchedule(
+	flow *core.Flow, ctx *core.ExecutionContext,
+	agentID, agentUserID, conversationID string,
+	s *extractionSchedule, result *extractionResult,
+) {
+	// Validate mode.
+	if s.Mode == "" {
+		result.Errors = append(result.Errors, fmt.Sprintf("schedule %q: missing mode", s.Name))
+		return
+	}
+
+	// Deduplication: check if a similar schedule already exists.
+	// Match by exact name OR by same mode+time (catches AI generating
+	// different names for the same schedule across turns).
+	existingList, err := getJSONArray(flow, ctx, fmt.Sprintf("/api/v1/internal/agent/%s/schedule", agentID))
+	if err == nil {
+		for _, item := range existingList {
+			m, ok := item.(map[string]interface{})
+			if !ok {
+				continue
+			}
+			existName, _ := m["name"].(string)
+			existMode, _ := m["schedule_mode"].(string)
+			existTime, _ := m["time_of_day"].(string)
+
+			// Exact name match.
+			if strings.EqualFold(existName, s.Name) {
+				return
+			}
+			// Same mode and time — likely the same schedule with a different name.
+			if existMode == s.Mode && existTime == s.TimeOfDay && s.TimeOfDay != "" {
+				return
+			}
+		}
+	}
+
+	body := map[string]interface{}{
+		"name":          s.Name,
+		"description":   s.Description,
+		"schedule_mode": s.Mode,
+	}
+	if agentUserID != "" {
+		body["agent_user_id"] = agentUserID
+	}
+	if conversationID != "" {
+		body["conversation_id"] = conversationID
+	}
+	if s.Interval != "" {
+		body["interval_val"] = s.Interval
+	}
+	if s.Unit != "" {
+		body["unit"] = s.Unit
+	}
+	if s.TimeOfDay != "" {
+		body["time_of_day"] = s.TimeOfDay
+	}
+	if s.DaysOfWeek != "" {
+		body["days_of_week"] = s.DaysOfWeek
+	}
+	if s.Timezone != "" {
+		body["timezone"] = s.Timezone
+	}
+
+	path := fmt.Sprintf("/api/v1/internal/agent/%s/schedule", agentID)
+	if err := postJSON(flow, ctx, path, body, http.StatusCreated); err != nil {
+		result.Errors = append(result.Errors, fmt.Sprintf("create schedule %q: %v", s.Name, err))
+		return
+	}
+	result.SchedulesCreated++
+}
+
+func updateSchedule(
+	flow *core.Flow, ctx *core.ExecutionContext,
+	agentID string,
+	s *extractionSchedule, result *extractionResult,
+) {
+	// Find existing schedule by name.
+	schedList, err := getJSONArray(flow, ctx, fmt.Sprintf("/api/v1/internal/agent/%s/schedule", agentID))
+	if err != nil {
+		result.Errors = append(result.Errors, fmt.Sprintf("update schedule %q: list failed: %v", s.Name, err))
+		return
+	}
+
+	var schedID string
+	for _, item := range schedList {
+		if m, ok := item.(map[string]interface{}); ok {
+			if n, _ := m["name"].(string); strings.EqualFold(n, s.Name) {
+				schedID, _ = m["id"].(string)
+				break
+			}
+		}
+	}
+	if schedID == "" {
+		result.Errors = append(result.Errors, fmt.Sprintf("update schedule %q: not found", s.Name))
+		return
+	}
+
+	body := map[string]interface{}{}
+	if s.Mode != "" {
+		body["schedule_mode"] = s.Mode
+	}
+	if s.Interval != "" {
+		body["interval_val"] = s.Interval
+	}
+	if s.Unit != "" {
+		body["unit"] = s.Unit
+	}
+	if s.TimeOfDay != "" {
+		body["time_of_day"] = s.TimeOfDay
+	}
+	if s.DaysOfWeek != "" {
+		body["days_of_week"] = s.DaysOfWeek
+	}
+	if s.Timezone != "" {
+		body["timezone"] = s.Timezone
+	}
+	if s.Description != "" {
+		body["description"] = s.Description
+	}
+
+	path := fmt.Sprintf("/api/v1/internal/schedule/%s", schedID)
+	if err := patchJSON(flow, ctx, path, body); err != nil {
+		result.Errors = append(result.Errors, fmt.Sprintf("update schedule %q: %v", s.Name, err))
+		return
+	}
+	result.SchedulesUpdated++
+}
+
+func deleteSchedule(
+	flow *core.Flow, ctx *core.ExecutionContext,
+	agentID string,
+	s *extractionSchedule, result *extractionResult,
+) {
+	path := fmt.Sprintf("/api/v1/internal/agent/%s/schedule/by-name/%s", agentID, s.Name)
+	if err := deleteRequest(flow, ctx, path); err != nil {
+		result.Errors = append(result.Errors, fmt.Sprintf("delete schedule %q: %v", s.Name, err))
+		return
+	}
+	result.SchedulesDeleted++
+}
+
+// getJSONArray performs a GET request and returns the response as a JSON array.
+func getJSONArray(flow *core.Flow, ctx *core.ExecutionContext, path string) ([]interface{}, error) {
+	req, err := http.NewRequestWithContext(flow.GoContext(), http.MethodGet, ctx.APIURL+path, nil)
+	if err != nil {
+		return nil, fmt.Errorf("new request: %w", err)
+	}
+	if ctx.Token != "" {
+		req.Header.Set("Authorization", "Bearer "+ctx.Token)
+	}
+
+	resp, err := http.DefaultClient.Do(req)
+	if err != nil {
+		return nil, fmt.Errorf("do: %w", err)
+	}
+	defer func() { _ = resp.Body.Close() }()
+
+	if resp.StatusCode != http.StatusOK {
+		respBody, _ := io.ReadAll(io.LimitReader(resp.Body, 512))
+		return nil, fmt.Errorf("API returned %d: %s", resp.StatusCode, string(respBody))
+	}
+
+	var result []interface{}
+	if err := json.NewDecoder(resp.Body).Decode(&result); err != nil {
+		return nil, fmt.Errorf("decode: %w", err)
+	}
+	return result, nil
+}
+
+// deleteRequest performs a DELETE request.
+func deleteRequest(flow *core.Flow, ctx *core.ExecutionContext, path string) error {
+	req, err := http.NewRequestWithContext(flow.GoContext(), http.MethodDelete, ctx.APIURL+path, nil)
+	if err != nil {
+		return fmt.Errorf("new request: %w", err)
+	}
 	if ctx.Token != "" {
 		req.Header.Set("Authorization", "Bearer "+ctx.Token)
 	}

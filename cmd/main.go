@@ -211,6 +211,10 @@ func main() {
 		if errors.Is(err, core.ErrCancelled) {
 			status = 2
 		}
+	} else if flo.HadError() {
+		// The error was handled by an On Error chain, but the execution
+		// should still be marked as failed.
+		status = 1
 	}
 
 	duration := time.Since(start)
