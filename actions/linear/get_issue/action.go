@@ -108,11 +108,18 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 
 	var resp *linear.GraphQLResponse
 	if isIdentifier {
+		// Parse identifier (e.g. FLO-189) into team key and issue number.
+		parts := strings.SplitN(issueID, "-", 2)
+		var number int
+		if len(parts) == 2 {
+			fmt.Sscanf(parts[1], "%d", &number)
+		}
 		resp, err = linear.ExecuteGraphQL(apiKey, linear.GraphQLRequest{
 			Query: issueByIdentifierQuery,
 			Variables: map[string]interface{}{
 				"filter": map[string]interface{}{
-					"identifier": map[string]string{"eq": issueID},
+					"number": map[string]interface{}{"eq": number},
+					"team":   map[string]interface{}{"key": map[string]interface{}{"eq": parts[0]}},
 				},
 			},
 		})

@@ -31,8 +31,8 @@ var Inputs = [...]core.Connection{
 	{
 		Name:        "team_id",
 		Type:        core.ConnectionTypeString,
-		Label:       "Team ID (UUID, from list_teams)",
-		Placeholder: "Team UUID",
+		Label:       "Team ID or Key",
+		Placeholder: "UUID or team key (e.g. FLO)",
 		Required:    true,
 	},
 }
@@ -60,9 +60,19 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 		}, nil
 	}
 
-	// Use the team node's states connection directly rather than the
-	// top-level workflowStates query with a filter, as the filter
-	// type may not accept String for team ID comparison.
+	// If the user passed a team key (e.g. "FLO") instead of UUID, resolve it.
+	if len(teamID) < 36 && !strings.Contains(teamID, "-") {
+		resolved, resolveErr := resolveTeamKey(apiKey, teamID)
+		if resolveErr != nil {
+			return map[string]interface{}{
+				"tool_result": fmt.Sprintf("Could not resolve team key %q: %s", teamID, resolveErr),
+				"success":     false,
+				"error":       resolveErr.Error(),
+			}, nil
+		}
+		teamID = resolved
+	}
+
 	resp, err := linear.ExecuteGraphQL(apiKey, linear.GraphQLRequest{
 		Query: `query ListWorkflowStates($teamId: String!) {
 			team(id: $teamId) {
@@ -128,4 +138,30 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 		"success":     true,
 		"error":       "",
 	}, nil
+}
+
+func resolveTeamKey(apiKey, key string) (string, error) {
+	resp, err := linear.ExecuteGraphQL(apiKey, linear.GraphQLRequest{
+		Query: `query { teams { nodes { id key } } }`,
+	})
+	if err != nil {
+		return "", err
+	}
+	var result struct {
+		Teams struct {
+			Nodes []struct {
+				ID  string `json:"id"`
+				Key string `json:"key"`
+			} `json:"nodes"`
+		} `json:"teams"`
+	}
+	if err := json.Unmarshal(resp.Data, &result); err != nil {
+		return "", err
+	}
+	for _, t := range result.Teams.Nodes {
+		if strings.EqualFold(t.Key, key) {
+			return t.ID, nil
+		}
+	}
+	return "", fmt.Errorf("team with key %q not found", key)
 }

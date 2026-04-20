@@ -72,7 +72,7 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 
 	resp, err := linear.ExecuteGraphQL(apiKey, linear.GraphQLRequest{
 		Query: `query SearchIssues($query: String!, $first: Int) {
-			issueSearch(query: $query, first: $first) {
+			searchIssues(query: $query, first: $first) {
 				nodes {
 					id
 					identifier
@@ -104,9 +104,9 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	}
 
 	var result struct {
-		IssueSearch struct {
+		SearchIssues struct {
 			Nodes []json.RawMessage `json:"nodes"`
-		} `json:"issueSearch"`
+		} `json:"searchIssues"`
 	}
 	if err := json.Unmarshal(resp.Data, &result); err != nil {
 		return nil, fmt.Errorf("failed to parse response: %w", err)
@@ -132,9 +132,9 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	}
 
 	var sb strings.Builder
-	fmt.Fprintf(&sb, "Found %d issue(s):\n\n", len(result.IssueSearch.Nodes))
+	fmt.Fprintf(&sb, "Found %d issue(s):\n\n", len(result.SearchIssues.Nodes))
 	var parsed []interface{}
-	for _, raw := range result.IssueSearch.Nodes {
+	for _, raw := range result.SearchIssues.Nodes {
 		var row issueRow
 		if err := json.Unmarshal(raw, &row); err == nil {
 			assignee := "Unassigned"
@@ -164,7 +164,7 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	return map[string]interface{}{
 		"tool_result": sb.String(),
 		"issues":      parsed,
-		"count":       len(result.IssueSearch.Nodes),
+		"count":       len(result.SearchIssues.Nodes),
 		"success":     true,
 		"error":       "",
 	}, nil

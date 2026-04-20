@@ -117,7 +117,11 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 		filter["priority"] = map[string]interface{}{"eq": p}
 	}
 	if v := linear.OptionalString("label_name", inputs); v != "" {
-		filter["labels"] = map[string]interface{}{"name": map[string]string{"eq": v}}
+		filter["labels"] = map[string]interface{}{
+			"some": map[string]interface{}{
+				"name": map[string]interface{}{"eqCaseInsensitive": v},
+			},
+		}
 	}
 	if v := linear.OptionalString("project_id", inputs); v != "" {
 		filter["project"] = map[string]interface{}{"id": map[string]string{"eq": v}}

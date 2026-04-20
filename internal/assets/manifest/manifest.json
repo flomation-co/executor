@@ -4189,7 +4189,7 @@
     ]
   },
   "linear/get_issue": {
-    "hash": "b63703a5d73be4adb129b4b3f7356aebd38b76fa582f092c856f26a63a17947e",
+    "hash": "bf9df2d8dc36729c4eae4dc65d897091bbfc95353f0f895190af3ee085803a69",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Get Issue",
@@ -4344,7 +4344,7 @@
     ]
   },
   "linear/list_issues": {
-    "hash": "8d16c71509db5bc7dab1ad31a5aa8c9ccec3b8d0176c3fba3f300af85ab24b7a",
+    "hash": "64f5d3393d31ad3f597662588347577bb2fb137ed687609ed213ae21dd8b07da",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "List Issues",
@@ -4541,7 +4541,7 @@
     ]
   },
   "linear/list_workflow_states": {
-    "hash": "caa20bd51c1e6e53bfb313e97768e443d52d92dfd59f9b5763d1e93456dafe35",
+    "hash": "c297c1dc1939acb94bd83046389eb6b1af67fcdd8faaf7f3e7f465e27411fe1c",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "List Workflow States",
@@ -4568,8 +4568,8 @@
         "name": "team_id",
         "type": "string",
         "value": null,
-        "label": "Team ID (UUID, from list_teams)",
-        "placeholder": "Team UUID",
+        "label": "Team ID or Key",
+        "placeholder": "UUID or team key (e.g. FLO)",
         "required": true
       }
     ],
@@ -4612,7 +4612,7 @@
     ]
   },
   "linear/search_issues": {
-    "hash": "e419e435d17b0844b66ae3abfd59f2475e5a532319384e7111b046bd62fff550",
+    "hash": "0e15a4a2eda43243e82b09f9fcfd627b84b3b6df02096da9d422c4af3c4462f4",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Search Issues",
@@ -4690,7 +4690,7 @@
     ]
   },
   "linear/update_issue": {
-    "hash": "63fd6d581faabf7236529012983d8095fe0a28a5afd3d3ecc4eb50fa2e29d0b0",
+    "hash": "5eeeaaf8e9ea49bc23b3cc006405e9f57fd8c6f27455c8c9d737681335dfd9cf",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Update Issue",

@@ -353,7 +353,19 @@ func isIdentifier(s string) bool {
 }
 
 // resolveIdentifierToUUID converts a Linear identifier (e.g. FLO-123) to a UUID.
+// Linear's IssueFilter doesn't have an "identifier" field — we parse the
+// identifier into team key and issue number, then filter by both.
 func resolveIdentifierToUUID(apiKey, identifier string) (string, error) {
+	parts := strings.SplitN(identifier, "-", 2)
+	if len(parts) != 2 {
+		return "", fmt.Errorf("invalid identifier format: %s (expected TEAM-123)", identifier)
+	}
+	teamKey := parts[0]
+	var number int
+	if _, err := fmt.Sscanf(parts[1], "%d", &number); err != nil {
+		return "", fmt.Errorf("invalid issue number in %s", identifier)
+	}
+
 	resp, err := linear.ExecuteGraphQL(apiKey, linear.GraphQLRequest{
 		Query: `query ResolveIdentifier($filter: IssueFilter!) {
 			issues(filter: $filter, first: 1) {
@@ -362,7 +374,8 @@ func resolveIdentifierToUUID(apiKey, identifier string) (string, error) {
 		}`,
 		Variables: map[string]interface{}{
 			"filter": map[string]interface{}{
-				"identifier": map[string]string{"eq": identifier},
+				"number": map[string]interface{}{"eq": number},
+				"team":   map[string]interface{}{"key": map[string]interface{}{"eq": teamKey}},
 			},
 		},
 	})
