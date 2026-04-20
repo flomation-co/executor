@@ -4189,7 +4189,7 @@
     ]
   },
   "linear/get_issue": {
-    "hash": "bf9df2d8dc36729c4eae4dc65d897091bbfc95353f0f895190af3ee085803a69",
+    "hash": "c3e179d76867db1c6f57ec740448d7c05e235cd0b6aa8200101d6e00acf51d0c",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Get Issue",
@@ -4311,6 +4311,13 @@
         "type": "string",
         "value": null,
         "label": "Updated At",
+        "placeholder": ""
+      },
+      {
+        "name": "estimate",
+        "type": "integer",
+        "value": null,
+        "label": "Estimate",
         "placeholder": ""
       },
       {
@@ -4760,7 +4767,7 @@
     ]
   },
   "linear/update_issue": {
-    "hash": "5eeeaaf8e9ea49bc23b3cc006405e9f57fd8c6f27455c8c9d737681335dfd9cf",
+    "hash": "1469a660949abca6d3c8e743313561ffdfea23e36c83282986bdc6ed7e7abb21",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Update Issue",
@@ -4872,6 +4879,13 @@
         "value": null,
         "label": "Due Date",
         "placeholder": "YYYY-MM-DD (optional)"
+      },
+      {
+        "name": "estimate",
+        "type": "string",
+        "value": null,
+        "label": "Estimate",
+        "placeholder": "Point estimate (optional)"
       },
       {
         "name": "parent_id",

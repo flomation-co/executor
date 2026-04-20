@@ -91,6 +91,12 @@ var Inputs = [...]core.Connection{
 		Placeholder: "YYYY-MM-DD (optional)",
 	},
 	{
+		Name:        "estimate",
+		Type:        core.ConnectionTypeString,
+		Label:       "Estimate",
+		Placeholder: "Point estimate (optional)",
+	},
+	{
 		Name:        "parent_id",
 		Type:        core.ConnectionTypeString,
 		Label:       "Parent Issue ID",
@@ -174,6 +180,12 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	}
 	if v := linear.OptionalString("due_date", inputs); v != "" {
 		update["dueDate"] = v
+	}
+	if v := linear.OptionalString("estimate", inputs); v != "" {
+		var e int
+		if _, err := fmt.Sscanf(v, "%d", &e); err == nil {
+			update["estimate"] = e
+		}
 	}
 	if v := linear.OptionalString("parent_id", inputs); v != "" {
 		parentID := v

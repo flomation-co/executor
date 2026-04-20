@@ -51,6 +51,7 @@ var Outputs = [...]core.Connection{
 	{Name: "due_date", Type: core.ConnectionTypeString, Label: "Due Date"},
 	{Name: "created_at", Type: core.ConnectionTypeString, Label: "Created At"},
 	{Name: "updated_at", Type: core.ConnectionTypeString, Label: "Updated At"},
+	{Name: "estimate", Type: core.ConnectionTypeInteger, Label: "Estimate"},
 	{Name: "labels", Type: core.ConnectionTypeString, Label: "Labels"},
 	{Name: "result", Type: core.ConnectionTypeObject, Label: "Full Result"},
 	{Name: "success", Type: core.ConnectionTypeBoolean, Label: "Success"},
@@ -271,6 +272,11 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	if dueDate != "" {
 		fmt.Fprintf(&sb, "  Due: %s\n", dueDate)
 	}
+	estimate := 0
+	if issue.Estimate != nil {
+		estimate = *issue.Estimate
+		fmt.Fprintf(&sb, "  Estimate: %d\n", estimate)
+	}
 	if labelsStr != "" {
 		fmt.Fprintf(&sb, "  Labels: %s\n", labelsStr)
 	}
@@ -314,6 +320,7 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 		"due_date":    dueDate,
 		"created_at":  issue.CreatedAt,
 		"updated_at":  issue.UpdatedAt,
+		"estimate":    estimate,
 		"labels":      labelsStr,
 		"result":      fullObj,
 		"success":     true,
