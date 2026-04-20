@@ -50,7 +50,7 @@ executor_manifest_dev:
     - compile
 
 build-rpm-8:
-  extends: .build-rpm-template
+  extends: .publish-rpm-s3sync-template
   only:
     - main
   image: rockylinux/rockylinux:8
@@ -68,7 +68,7 @@ build-rpm-8:
     expire_in: 30 days
 
 build-rpm-9:
-  extends: .build-rpm-template
+  extends: .publish-rpm-s3sync-template
   only:
     - main
   image: rockylinux/rockylinux:9
@@ -86,7 +86,7 @@ build-rpm-9:
     expire_in: 30 days
 
 build-rpm-8-arm64:
-  extends: .build-rpm-template
+  extends: .publish-rpm-s3sync-template
   only:
     - main
   image: rockylinux/rockylinux:8
@@ -104,7 +104,7 @@ build-rpm-8-arm64:
     expire_in: 30 days
 
 build-rpm-9-arm64:
-  extends: .build-rpm-template
+  extends: .publish-rpm-s3sync-template
   only:
     - main
   image: rockylinux/rockylinux:9
