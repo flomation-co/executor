@@ -3,6 +3,7 @@ package linear_update_issue
 import (
 	"encoding/json"
 	"fmt"
+	"strings"
 
 	core "flomation.app/automate/executor"
 	linear "flomation.app/automate/executor/actions/linear"
@@ -62,8 +63,14 @@ var Inputs = [...]core.Connection{
 	{
 		Name:        "state_id",
 		Type:        core.ConnectionTypeString,
-		Label:       "State ID",
-		Placeholder: "Workflow state UUID (optional)",
+		Label:       "State ID (UUID, optional — use state_name instead for convenience)",
+		Placeholder: "Workflow state UUID",
+	},
+	{
+		Name:        "state_name",
+		Type:        core.ConnectionTypeString,
+		Label:       "State Name (e.g. 'Cancelled', 'In Progress', 'Done' — resolves to UUID automatically)",
+		Placeholder: "State name",
 	},
 	{
 		Name:        "assignee_id",
@@ -120,6 +127,18 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	}
 	if v := linear.OptionalString("state_id", inputs); v != "" {
 		update["stateId"] = v
+	} else if v := linear.OptionalString("state_name", inputs); v != "" {
+		// Resolve state name to UUID by fetching the issue's team and
+		// looking up the matching workflow state.
+		stateID, err := resolveStateName(apiKey, issueID, v)
+		if err != nil {
+			return map[string]interface{}{
+				"tool_result": fmt.Sprintf("Failed to resolve state '%s': %s", v, err),
+				"success":     false,
+				"error":       err.Error(),
+			}, nil
+		}
+		update["stateId"] = stateID
 	}
 	if v := linear.OptionalString("assignee_id", inputs); v != "" {
 		update["assigneeId"] = v
@@ -185,4 +204,82 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 		"success":     result.IssueUpdate.Success,
 		"error":       "",
 	}, nil
+}
+
+// resolveStateName fetches the issue's team, then looks up the workflow
+// state by name (case-insensitive) and returns its UUID.
+func resolveStateName(apiKey, issueID, stateName string) (string, error) {
+	// Step 1: get the issue's team ID
+	issueResp, err := linear.ExecuteGraphQL(apiKey, linear.GraphQLRequest{
+		Query: `query GetIssueTeam($id: String!) {
+			issue(id: $id) {
+				team { id }
+			}
+		}`,
+		Variables: map[string]interface{}{"id": issueID},
+	})
+	if err != nil {
+		return "", fmt.Errorf("failed to fetch issue team: %w", err)
+	}
+
+	var issueResult struct {
+		Issue struct {
+			Team struct {
+				ID string `json:"id"`
+			} `json:"team"`
+		} `json:"issue"`
+	}
+	if err := json.Unmarshal(issueResp.Data, &issueResult); err != nil {
+		return "", fmt.Errorf("failed to parse issue: %w", err)
+	}
+	teamID := issueResult.Issue.Team.ID
+	if teamID == "" {
+		return "", fmt.Errorf("could not determine team for issue %s", issueID)
+	}
+
+	// Step 2: list workflow states via the team's states connection
+	statesResp, err := linear.ExecuteGraphQL(apiKey, linear.GraphQLRequest{
+		Query: `query ListStates($teamId: String!) {
+			team(id: $teamId) {
+				states {
+					nodes {
+						id
+						name
+					}
+				}
+			}
+		}`,
+		Variables: map[string]interface{}{"teamId": teamID},
+	})
+	if err != nil {
+		return "", fmt.Errorf("failed to fetch workflow states: %w", err)
+	}
+
+	var statesResult struct {
+		Team struct {
+			States struct {
+				Nodes []struct {
+					ID   string `json:"id"`
+					Name string `json:"name"`
+				} `json:"nodes"`
+			} `json:"states"`
+		} `json:"team"`
+	}
+	if err := json.Unmarshal(statesResp.Data, &statesResult); err != nil {
+		return "", fmt.Errorf("failed to parse states: %w", err)
+	}
+
+	// Case-insensitive match
+	for _, s := range statesResult.Team.States.Nodes {
+		if strings.EqualFold(s.Name, stateName) {
+			return s.ID, nil
+		}
+	}
+
+	// Build helpful error with available state names
+	var names []string
+	for _, s := range statesResult.Team.States.Nodes {
+		names = append(names, s.Name)
+	}
+	return "", fmt.Errorf("state '%s' not found. Available states: %s", stateName, strings.Join(names, ", "))
 }

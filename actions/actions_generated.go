@@ -25,6 +25,8 @@ import (
 	aws_s3_get "flomation.app/automate/executor/actions/aws/s3/get"
 	aws_s3_list "flomation.app/automate/executor/actions/aws/s3/list"
 	aws_s3_put "flomation.app/automate/executor/actions/aws/s3/put"
+	common_array_index "flomation.app/automate/executor/actions/common/array_index"
+	common_array_length "flomation.app/automate/executor/actions/common/array_length"
 	common_data_combine "flomation.app/automate/executor/actions/common/data_combine"
 	common_data_extract "flomation.app/automate/executor/actions/common/data_extract"
 	common_data_rename "flomation.app/automate/executor/actions/common/data_rename"
@@ -37,6 +39,9 @@ import (
 	conditional_if "flomation.app/automate/executor/actions/conditional/if"
 	conditional_switch "flomation.app/automate/executor/actions/conditional/switch"
 	conditional_while "flomation.app/automate/executor/actions/conditional/while"
+	elevenlabs_list_voices "flomation.app/automate/executor/actions/elevenlabs/list_voices"
+	elevenlabs_speech_to_text "flomation.app/automate/executor/actions/elevenlabs/speech_to_text"
+	elevenlabs_text_to_speech "flomation.app/automate/executor/actions/elevenlabs/text_to_speech"
 	error_on_error "flomation.app/automate/executor/actions/error/on_error"
 	file_read "flomation.app/automate/executor/actions/file/read"
 	file_write "flomation.app/automate/executor/actions/file/write"
@@ -55,11 +60,13 @@ import (
 	linear_get_issue "flomation.app/automate/executor/actions/linear/get_issue"
 	linear_list_issues "flomation.app/automate/executor/actions/linear/list_issues"
 	linear_list_teams "flomation.app/automate/executor/actions/linear/list_teams"
+	linear_list_workflow_states "flomation.app/automate/executor/actions/linear/list_workflow_states"
 	linear_search_issues "flomation.app/automate/executor/actions/linear/search_issues"
 	linear_update_issue "flomation.app/automate/executor/actions/linear/update_issue"
 	messaging_email "flomation.app/automate/executor/actions/messaging/email"
 	messaging_slack "flomation.app/automate/executor/actions/messaging/slack"
 	messaging_telegram "flomation.app/automate/executor/actions/messaging/telegram"
+	messaging_telegram_voice "flomation.app/automate/executor/actions/messaging/telegram_voice"
 	nosql_mongodb "flomation.app/automate/executor/actions/nosql/mongodb"
 	nosql_redis "flomation.app/automate/executor/actions/nosql/redis"
 	output_discord_webhook "flomation.app/automate/executor/actions/output/discord_webhook"
@@ -71,6 +78,20 @@ import (
 	sql_mysql "flomation.app/automate/executor/actions/sql/mysql"
 	sql_oracle "flomation.app/automate/executor/actions/sql/oracle"
 	sql_postgresql "flomation.app/automate/executor/actions/sql/postgresql"
+	string_concatenate "flomation.app/automate/executor/actions/string/concatenate"
+	string_contains "flomation.app/automate/executor/actions/string/contains"
+	string_join "flomation.app/automate/executor/actions/string/join"
+	string_lower_case "flomation.app/automate/executor/actions/string/lower_case"
+	string_repeat "flomation.app/automate/executor/actions/string/repeat"
+	string_replace "flomation.app/automate/executor/actions/string/replace"
+	string_substring "flomation.app/automate/executor/actions/string/substring"
+	string_trim "flomation.app/automate/executor/actions/string/trim"
+	string_trim_end "flomation.app/automate/executor/actions/string/trim_end"
+	string_trim_start "flomation.app/automate/executor/actions/string/trim_start"
+	string_upper_case "flomation.app/automate/executor/actions/string/upper_case"
+	subflow_begin "flomation.app/automate/executor/actions/subflow/begin"
+	subflow_end "flomation.app/automate/executor/actions/subflow/end"
+	subflow_invoke "flomation.app/automate/executor/actions/subflow/invoke"
 	tools_calendar_create "flomation.app/automate/executor/actions/tools/calendar_create"
 	tools_calendar_delete "flomation.app/automate/executor/actions/tools/calendar_delete"
 	tools_calendar_read "flomation.app/automate/executor/actions/tools/calendar_read"
@@ -98,94 +119,115 @@ import (
 )
 
 var Actions = map[string]core.Action{
-	"agent/forget":              agent_forget.Execute,
-	"agent/fulfill_commitment":  agent_fulfill_commitment.Execute,
-	"agent/process_extraction":  agent_process_extraction.Execute,
-	"agent/read_state":          agent_read_state.Execute,
-	"agent/recall":              agent_recall.Execute,
-	"agent/remember":            agent_remember.Execute,
-	"agent/send_message":        agent_send_message.Execute,
-	"agent/write_state":         agent_write_state.Execute,
-	"ai/anthropic":              ai_anthropic.Execute,
-	"ai/openai":                 ai_openai.Execute,
-	"arithmetic/addition":       arithmetic_addition.Execute,
-	"arithmetic/division":       arithmetic_division.Execute,
-	"arithmetic/multiplication": arithmetic_multiplication.Execute,
-	"arithmetic/subtraction":    arithmetic_subtraction.Execute,
-	"aws/dynamodb":              aws_dynamodb.Execute,
-	"aws/ec2/describe":          aws_ec2_describe.Execute,
-	"aws/s3/delete":             aws_s3_delete.Execute,
-	"aws/s3/get":                aws_s3_get.Execute,
-	"aws/s3/list":               aws_s3_list.Execute,
-	"aws/s3/put":                aws_s3_put.Execute,
-	"common/data_combine":       common_data_combine.Execute,
-	"common/data_extract":       common_data_extract.Execute,
-	"common/data_rename":        common_data_rename.Execute,
-	"common/format_date":        common_format_date.Execute,
-	"common/set_variable":       common_set_variable.Execute,
-	"common/sleep":              common_sleep.Execute,
-	"common/smtp":               common_smtp.Execute,
-	"common/start_flow":         common_start_flow.Execute,
-	"conditional/for":           conditional_for.Execute,
-	"conditional/if":            conditional_if.Execute,
-	"conditional/switch":        conditional_switch.Execute,
-	"conditional/while":         conditional_while.Execute,
-	"error/on_error":            error_on_error.Execute,
-	"file/read":                 file_read.Execute,
-	"file/write":                file_write.Execute,
-	"git/add":                   git_add.Execute,
-	"git/branch":                git_branch.Execute,
-	"git/checkout":              git_checkout.Execute,
-	"git/clone":                 git_clone.Execute,
-	"git/commit":                git_commit.Execute,
-	"git/pull":                  git_pull.Execute,
-	"git/push":                  git_push.Execute,
-	"git/status":                git_status.Execute,
-	"git/tag":                   git_tag.Execute,
-	"http/request":              http_request.Execute,
-	"linear/add_comment":        linear_add_comment.Execute,
-	"linear/create_issue":       linear_create_issue.Execute,
-	"linear/get_issue":          linear_get_issue.Execute,
-	"linear/list_issues":        linear_list_issues.Execute,
-	"linear/list_teams":         linear_list_teams.Execute,
-	"linear/search_issues":      linear_search_issues.Execute,
-	"linear/update_issue":       linear_update_issue.Execute,
-	"messaging/email":           messaging_email.Execute,
-	"messaging/slack":           messaging_slack.Execute,
-	"messaging/telegram":        messaging_telegram.Execute,
-	"nosql/mongodb":             nosql_mongodb.Execute,
-	"nosql/redis":               nosql_redis.Execute,
-	"output/discord_webhook":    output_discord_webhook.Execute,
-	"output/set":                output_set.Execute,
-	"output/set_outputs":        output_set_outputs.Execute,
-	"output/slack_webhook":      output_slack_webhook.Execute,
-	"script/bash":               script_bash.Execute,
-	"security/antivirus":        security_antivirus.Execute,
-	"sql/mysql":                 sql_mysql.Execute,
-	"sql/oracle":                sql_oracle.Execute,
-	"sql/postgresql":            sql_postgresql.Execute,
-	"tools/calendar_create":     tools_calendar_create.Execute,
-	"tools/calendar_delete":     tools_calendar_delete.Execute,
-	"tools/calendar_read":       tools_calendar_read.Execute,
-	"tools/calendar_update":     tools_calendar_update.Execute,
-	"tools/channel_action":      tools_channel_action.Execute,
-	"tools/email_draft":         tools_email_draft.Execute,
-	"tools/email_read":          tools_email_read.Execute,
-	"tools/email_reply":         tools_email_reply.Execute,
-	"tools/email_send":          tools_email_send.Execute,
-	"tools/google_accounts":     tools_google_accounts.Execute,
-	"tools/slack_rich_message":  tools_slack_rich_message.Execute,
-	"tools/web_fetch":           tools_web_fetch.Execute,
-	"tools/web_search":          tools_web_search.Execute,
-	"trigger/email":             trigger_email.Execute,
-	"trigger/form":              trigger_form.Execute,
-	"trigger/git_poll":          trigger_git_poll.Execute,
-	"trigger/image":             trigger_image.Execute,
-	"trigger/manual":            trigger_manual.Execute,
-	"trigger/qr":                trigger_qr.Execute,
-	"trigger/s3":                trigger_s3.Execute,
-	"trigger/schedule":          trigger_schedule.Execute,
-	"trigger/slack":             trigger_slack.Execute,
-	"trigger/telegram":          trigger_telegram.Execute,
-	"trigger/webhook":           trigger_webhook.Execute,
+	"agent/forget":                agent_forget.Execute,
+	"agent/fulfill_commitment":    agent_fulfill_commitment.Execute,
+	"agent/process_extraction":    agent_process_extraction.Execute,
+	"agent/read_state":            agent_read_state.Execute,
+	"agent/recall":                agent_recall.Execute,
+	"agent/remember":              agent_remember.Execute,
+	"agent/send_message":          agent_send_message.Execute,
+	"agent/write_state":           agent_write_state.Execute,
+	"ai/anthropic":                ai_anthropic.Execute,
+	"ai/openai":                   ai_openai.Execute,
+	"arithmetic/addition":         arithmetic_addition.Execute,
+	"arithmetic/division":         arithmetic_division.Execute,
+	"arithmetic/multiplication":   arithmetic_multiplication.Execute,
+	"arithmetic/subtraction":      arithmetic_subtraction.Execute,
+	"aws/dynamodb":                aws_dynamodb.Execute,
+	"aws/ec2/describe":            aws_ec2_describe.Execute,
+	"aws/s3/delete":               aws_s3_delete.Execute,
+	"aws/s3/get":                  aws_s3_get.Execute,
+	"aws/s3/list":                 aws_s3_list.Execute,
+	"aws/s3/put":                  aws_s3_put.Execute,
+	"common/array_index":          common_array_index.Execute,
+	"common/array_length":         common_array_length.Execute,
+	"common/data_combine":         common_data_combine.Execute,
+	"common/data_extract":         common_data_extract.Execute,
+	"common/data_rename":          common_data_rename.Execute,
+	"common/format_date":          common_format_date.Execute,
+	"common/set_variable":         common_set_variable.Execute,
+	"common/sleep":                common_sleep.Execute,
+	"common/smtp":                 common_smtp.Execute,
+	"common/start_flow":           common_start_flow.Execute,
+	"conditional/for":             conditional_for.Execute,
+	"conditional/if":              conditional_if.Execute,
+	"conditional/switch":          conditional_switch.Execute,
+	"conditional/while":           conditional_while.Execute,
+	"elevenlabs/list_voices":      elevenlabs_list_voices.Execute,
+	"elevenlabs/speech_to_text":   elevenlabs_speech_to_text.Execute,
+	"elevenlabs/text_to_speech":   elevenlabs_text_to_speech.Execute,
+	"error/on_error":              error_on_error.Execute,
+	"file/read":                   file_read.Execute,
+	"file/write":                  file_write.Execute,
+	"git/add":                     git_add.Execute,
+	"git/branch":                  git_branch.Execute,
+	"git/checkout":                git_checkout.Execute,
+	"git/clone":                   git_clone.Execute,
+	"git/commit":                  git_commit.Execute,
+	"git/pull":                    git_pull.Execute,
+	"git/push":                    git_push.Execute,
+	"git/status":                  git_status.Execute,
+	"git/tag":                     git_tag.Execute,
+	"http/request":                http_request.Execute,
+	"linear/add_comment":          linear_add_comment.Execute,
+	"linear/create_issue":         linear_create_issue.Execute,
+	"linear/get_issue":            linear_get_issue.Execute,
+	"linear/list_issues":          linear_list_issues.Execute,
+	"linear/list_teams":           linear_list_teams.Execute,
+	"linear/list_workflow_states": linear_list_workflow_states.Execute,
+	"linear/search_issues":        linear_search_issues.Execute,
+	"linear/update_issue":         linear_update_issue.Execute,
+	"messaging/email":             messaging_email.Execute,
+	"messaging/slack":             messaging_slack.Execute,
+	"messaging/telegram":          messaging_telegram.Execute,
+	"messaging/telegram_voice":    messaging_telegram_voice.Execute,
+	"nosql/mongodb":               nosql_mongodb.Execute,
+	"nosql/redis":                 nosql_redis.Execute,
+	"output/discord_webhook":      output_discord_webhook.Execute,
+	"output/set":                  output_set.Execute,
+	"output/set_outputs":          output_set_outputs.Execute,
+	"output/slack_webhook":        output_slack_webhook.Execute,
+	"script/bash":                 script_bash.Execute,
+	"security/antivirus":          security_antivirus.Execute,
+	"sql/mysql":                   sql_mysql.Execute,
+	"sql/oracle":                  sql_oracle.Execute,
+	"sql/postgresql":              sql_postgresql.Execute,
+	"string/concatenate":          string_concatenate.Execute,
+	"string/contains":             string_contains.Execute,
+	"string/join":                 string_join.Execute,
+	"string/lower_case":           string_lower_case.Execute,
+	"string/repeat":               string_repeat.Execute,
+	"string/replace":              string_replace.Execute,
+	"string/substring":            string_substring.Execute,
+	"string/trim":                 string_trim.Execute,
+	"string/trim_end":             string_trim_end.Execute,
+	"string/trim_start":           string_trim_start.Execute,
+	"string/upper_case":           string_upper_case.Execute,
+	"subflow/begin":               subflow_begin.Execute,
+	"subflow/end":                 subflow_end.Execute,
+	"subflow/invoke":              subflow_invoke.Execute,
+	"tools/calendar_create":       tools_calendar_create.Execute,
+	"tools/calendar_delete":       tools_calendar_delete.Execute,
+	"tools/calendar_read":         tools_calendar_read.Execute,
+	"tools/calendar_update":       tools_calendar_update.Execute,
+	"tools/channel_action":        tools_channel_action.Execute,
+	"tools/email_draft":           tools_email_draft.Execute,
+	"tools/email_read":            tools_email_read.Execute,
+	"tools/email_reply":           tools_email_reply.Execute,
+	"tools/email_send":            tools_email_send.Execute,
+	"tools/google_accounts":       tools_google_accounts.Execute,
+	"tools/slack_rich_message":    tools_slack_rich_message.Execute,
+	"tools/web_fetch":             tools_web_fetch.Execute,
+	"tools/web_search":            tools_web_search.Execute,
+	"trigger/email":               trigger_email.Execute,
+	"trigger/form":                trigger_form.Execute,
+	"trigger/git_poll":            trigger_git_poll.Execute,
+	"trigger/image":               trigger_image.Execute,
+	"trigger/manual":              trigger_manual.Execute,
+	"trigger/qr":                  trigger_qr.Execute,
+	"trigger/s3":                  trigger_s3.Execute,
+	"trigger/schedule":            trigger_schedule.Execute,
+	"trigger/slack":               trigger_slack.Execute,
+	"trigger/telegram":            trigger_telegram.Execute,
+	"trigger/webhook":             trigger_webhook.Execute,
 }

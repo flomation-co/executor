@@ -178,8 +178,9 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	}
 
 	// POST to Google Calendar API
+	// sendUpdates=all ensures attendees receive email invitations.
 	body, _ := json.Marshal(event)
-	endpoint := fmt.Sprintf("%s/calendars/primary/events", calendarAPIBase)
+	endpoint := fmt.Sprintf("%s/calendars/primary/events?sendUpdates=all", calendarAPIBase)
 	req, err := http.NewRequestWithContext(flow.GoContext(), http.MethodPost, endpoint, bytes.NewReader(body))
 	if err != nil {
 		return errResult(fmt.Sprintf("Failed to build request: %v", err))

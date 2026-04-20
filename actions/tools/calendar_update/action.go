@@ -71,6 +71,16 @@ var Inputs = [...]core.Connection{
 		Type:  core.ConnectionTypeString,
 		Label: "Account the event is on (email or label)",
 	},
+	{
+		Name:  "scope",
+		Type:  core.ConnectionTypeString,
+		Label: "For recurring events: 'this_instance' (default), 'all_events' (change the entire series), or 'this_and_following' (this and all future instances)",
+		Options: []core.ConnectionOption{
+			{Name: "This instance only", Value: "this_instance"},
+			{Name: "All events in series", Value: "all_events"},
+			{Name: "This and following", Value: "this_and_following"},
+		},
+	},
 }
 
 var Outputs = [...]core.Connection{
@@ -93,6 +103,10 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	}
 
 	accountFilter := optionalString("account", inputs)
+	scope := optionalString("scope", inputs)
+	if scope == "" {
+		scope = "this_instance"
+	}
 
 	ctx := flow.GetContext()
 	if ctx == nil || ctx.APIURL == "" {
@@ -108,9 +122,16 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 		return errResult(fmt.Sprintf("Failed to get calendar tokens: %v", err))
 	}
 
+	// For all_events or this_and_following on a recurring instance,
+	// we need to target the master event, not the instance.
+	targetID := eventID
+	if scope == "all_events" {
+		targetID = baseEventID(eventID)
+	}
+
 	// Find the event across accounts. If account filter is given, try that
 	// first; if it 404s (or no filter given), try all accounts.
-	token, existing, err := findEvent(flow, tokens, accountFilter, eventID)
+	token, existing, err := findEvent(flow, tokens, accountFilter, targetID)
 	if err != nil {
 		return errResult(err.Error())
 	}
@@ -219,25 +240,72 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 		return errResult("No changes specified — provide at least one field to update")
 	}
 
-	// PUT the updated event
-	body, _ := json.Marshal(existing)
-	putURL := fmt.Sprintf("%s/calendars/primary/events/%s", calendarAPIBase, eventID)
-	putReq, err := http.NewRequestWithContext(flow.GoContext(), http.MethodPut, putURL, bytes.NewReader(body))
+	// Build the update payload. For recurring series updates we use PATCH
+	// with only the changed fields, which preserves recurrence rules.
+	// For single instance updates, PUT with the full event body works fine.
+	var method string
+	var payload []byte
+	updateURL := fmt.Sprintf("%s/calendars/primary/events/%s?sendUpdates=all", calendarAPIBase, targetID)
+
+	if scope == "all_events" {
+		// PATCH the master event with only changed fields — preserves RRULE
+		patch := make(map[string]interface{})
+		if title != "" {
+			patch["summary"] = title
+		}
+		if description != "" {
+			patch["description"] = description
+		}
+		if location != "" {
+			patch["location"] = location
+		}
+		if _, ok := existing["start"]; ok && (startTimeStr != "" || dateStr != "") {
+			patch["start"] = existing["start"]
+		}
+		if _, ok := existing["end"]; ok && (endTimeStr != "" || dateStr != "") {
+			patch["end"] = existing["end"]
+		}
+		payload, _ = json.Marshal(patch)
+		method = http.MethodPatch
+	} else if scope == "this_and_following" {
+		// For this_and_following, the instance becomes the new "start" of a
+		// modified series. We PUT the instance with the updated fields and
+		// the recurrence rule from the master, which splits the series.
+		masterID := baseEventID(eventID)
+		if masterID != eventID {
+			// Fetch the master to get its recurrence rule
+			_, master, masterErr := findEvent(flow, tokens, accountFilter, masterID)
+			if masterErr == nil {
+				if rrule, ok := master["recurrence"]; ok {
+					existing["recurrence"] = rrule
+				}
+			}
+		}
+		updateURL = fmt.Sprintf("%s/calendars/primary/events/%s?sendUpdates=all", calendarAPIBase, eventID)
+		payload, _ = json.Marshal(existing)
+		method = http.MethodPut
+	} else {
+		// this_instance — PUT the full instance body
+		payload, _ = json.Marshal(existing)
+		method = http.MethodPut
+	}
+
+	updateReq, err := http.NewRequestWithContext(flow.GoContext(), method, updateURL, bytes.NewReader(payload))
 	if err != nil {
 		return errResult(fmt.Sprintf("Failed to build request: %v", err))
 	}
-	putReq.Header.Set("Authorization", "Bearer "+token.AccessToken)
-	putReq.Header.Set("Content-Type", "application/json")
+	updateReq.Header.Set("Authorization", "Bearer "+token.AccessToken)
+	updateReq.Header.Set("Content-Type", "application/json")
 
-	putResp, err := client.Do(putReq)
+	updateResp, err := client.Do(updateReq)
 	if err != nil {
 		return errResult(fmt.Sprintf("Google Calendar API error: %v", err))
 	}
-	defer func() { _ = putResp.Body.Close() }()
+	defer func() { _ = updateResp.Body.Close() }()
 
-	if putResp.StatusCode != http.StatusOK {
-		respBody, _ := io.ReadAll(io.LimitReader(putResp.Body, 512))
-		return errResult(fmt.Sprintf("Failed to update (%d): %s", putResp.StatusCode, string(respBody)))
+	if updateResp.StatusCode != http.StatusOK {
+		respBody, _ := io.ReadAll(io.LimitReader(updateResp.Body, 512))
+		return errResult(fmt.Sprintf("Failed to update (%d): %s", updateResp.StatusCode, string(respBody)))
 	}
 
 	summary := "event"
@@ -245,8 +313,16 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 		summary = s
 	}
 
+	scopeDesc := ""
+	switch scope {
+	case "all_events":
+		scopeDesc = " (all events in series)"
+	case "this_and_following":
+		scopeDesc = " (this and following events)"
+	}
+
 	return map[string]interface{}{
-		"tool_result": fmt.Sprintf("Updated '%s' (%d field(s) changed)", summary, changes),
+		"tool_result": fmt.Sprintf("Updated '%s' (%d field(s) changed)%s", summary, changes, scopeDesc),
 		"success":     true,
 		"error":       "",
 	}, nil
@@ -422,6 +498,20 @@ func findEvent(flow *core.Flow, tokens []tokenInfo, accountFilter, eventID strin
 	}
 
 	return nil, nil, fmt.Errorf("event %s not found on any connected account", eventID)
+}
+
+// baseEventID extracts the master recurring event ID from an instance ID.
+// Google Calendar instance IDs have the format "baseId_YYYYMMDDTHHMMSSZ".
+// If the ID doesn't contain an underscore, it's already the base ID.
+func baseEventID(instanceID string) string {
+	if idx := strings.LastIndex(instanceID, "_"); idx > 0 {
+		// Verify the suffix looks like a date (YYYYMMDD...)
+		suffix := instanceID[idx+1:]
+		if len(suffix) >= 8 {
+			return instanceID[:idx]
+		}
+	}
+	return instanceID
 }
 
 func errResult(msg string) (map[string]interface{}, error) {

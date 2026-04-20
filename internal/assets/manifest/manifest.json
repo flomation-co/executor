@@ -70,7 +70,7 @@
     ]
   },
   "agent/process_extraction": {
-    "hash": "9c2c44393d44ace965a79f631b40006f2aa55ff14b23a286db641064bae706cc",
+    "hash": "3457b39c9cbd2baf6e0ee67e952cc74157c2ee1ab6f00e880361c89711184160",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Process Extraction Output",
@@ -171,27 +171,6 @@
         "type": "integer",
         "value": null,
         "label": "Identities merged",
-        "placeholder": ""
-      },
-      {
-        "name": "schedules_created",
-        "type": "integer",
-        "value": null,
-        "label": "Schedules created",
-        "placeholder": ""
-      },
-      {
-        "name": "schedules_updated",
-        "type": "integer",
-        "value": null,
-        "label": "Schedules updated",
-        "placeholder": ""
-      },
-      {
-        "name": "schedules_deleted",
-        "type": "integer",
-        "value": null,
-        "label": "Schedules deleted",
         "placeholder": ""
       },
       {
@@ -594,7 +573,7 @@
     ]
   },
   "ai/anthropic": {
-    "hash": "4c66d7401da135c2e0c1cb8e2df3366a2451b41dfeee9faec96930e792cddc15",
+    "hash": "eeab66810d6c518c4023e1d28021965afc2fe00b0c33491a9643a2728df59814",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Anthropic Prompt",
@@ -688,6 +667,13 @@
         "type": "string",
         "value": null,
         "label": "Response",
+        "placeholder": ""
+      },
+      {
+        "name": "response_mode",
+        "type": "string",
+        "value": null,
+        "label": "Response Mode (text or voice)",
         "placeholder": ""
       },
       {
@@ -1592,6 +1578,126 @@
       }
     ]
   },
+  "common/array_index": {
+    "hash": "107946c095b2175c3db49cd559e99b65c272dbfde4d6571f05964f359802b9b8",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Array Index",
+    "description": "Extract a single item from an array by its index (0-based)",
+    "website": "https://www.flomation.co",
+    "icon": "list",
+    "date": "19/04/2026",
+    "type": 2,
+    "category": {
+      "name": "Common",
+      "icon": "toolbox",
+      "description": "General-purpose data utilities"
+    },
+    "inputs": [
+      {
+        "name": "array",
+        "type": "object",
+        "value": null,
+        "label": "Array",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "index",
+        "type": "integer",
+        "value": null,
+        "label": "Index (0-based)",
+        "placeholder": "0",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result",
+        "placeholder": ""
+      },
+      {
+        "name": "item",
+        "type": "object",
+        "value": null,
+        "label": "Item",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "common/array_length": {
+    "hash": "546b2fd3450929b3118157f8f12c3889905f5480880979421b7dd846f12690ee",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Array Length",
+    "description": "Returns the number of items in an array",
+    "website": "https://www.flomation.co",
+    "icon": "list",
+    "date": "19/04/2026",
+    "type": 2,
+    "category": {
+      "name": "Common",
+      "icon": "toolbox",
+      "description": "General-purpose data utilities"
+    },
+    "inputs": [
+      {
+        "name": "array",
+        "type": "object",
+        "value": null,
+        "label": "Array",
+        "placeholder": "",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result",
+        "placeholder": ""
+      },
+      {
+        "name": "length",
+        "type": "integer",
+        "value": null,
+        "label": "Length",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
   "common/data_combine": {
     "hash": "b6f4c73aa6bdbff1c9845c040366feb5f036c55f7646eec6e5d9a7a840c3e2d6",
     "author": "Andy Esser",
@@ -1668,7 +1774,7 @@
     ]
   },
   "common/data_rename": {
-    "hash": "3a7c1a15a82eef8f28e8cb53028223235b37a8c7963e68b013b28226e0dcb598",
+    "hash": "8afc6b1453fe2b67fb62e5eec539b15c007c83f67a43302d221dbc5f9a596f6b",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Data Rename",
@@ -1698,6 +1804,13 @@
         "label": "Output Key",
         "placeholder": "The new key name for the value",
         "required": true
+      },
+      {
+        "name": "value",
+        "type": "string",
+        "value": null,
+        "label": "Value (optional — if set, uses this instead of looking up input_key from parents)",
+        "placeholder": "${text}"
       }
     ],
     "outputs": [
@@ -1713,212 +1826,6 @@
         "type": "object",
         "value": null,
         "label": "Renamed Data",
-        "placeholder": ""
-      }
-    ]
-  },
-  "common/format_date": {
-    "hash": "ae5570636d73ae77daf5bdee68880b97153aecceceb63753186e0210fbf34b88",
-    "author": "Andy Esser",
-    "organisation": "Flomation",
-    "name": "Format Date",
-    "description": "Format a date/time value or the current time into a string",
-    "website": "https://www.flomation.co",
-    "icon": "calendar",
-    "date": "19/04/2026",
-    "type": 2,
-    "category": {
-      "name": "Common",
-      "icon": "toolbox",
-      "description": "General-purpose data utilities"
-    },
-    "inputs": [
-      {
-        "name": "datetime",
-        "type": "string",
-        "value": null,
-        "label": "Date/Time",
-        "placeholder": "Leave empty for current time"
-      },
-      {
-        "name": "input_format",
-        "type": "string",
-        "value": null,
-        "label": "Input Format",
-        "placeholder": "",
-        "options": [
-          {
-            "name": "ISO 8601 (2006-01-02T15:04:05Z07:00)",
-            "value": "iso8601"
-          },
-          {
-            "name": "RFC 2822 (Mon, 02 Jan 2006 15:04:05 -0700)",
-            "value": "rfc2822"
-          },
-          {
-            "name": "Unix Timestamp (seconds)",
-            "value": "unix"
-          },
-          {
-            "name": "Date Only (2006-01-02)",
-            "value": "date"
-          },
-          {
-            "name": "Custom",
-            "value": "custom"
-          }
-        ]
-      },
-      {
-        "name": "custom_input_format",
-        "type": "string",
-        "value": null,
-        "label": "Custom Input Format (Go layout)",
-        "placeholder": "2006-01-02 15:04:05"
-      },
-      {
-        "name": "output_format",
-        "type": "string",
-        "value": null,
-        "label": "Output Format",
-        "placeholder": "",
-        "options": [
-          {
-            "name": "ISO 8601 (2006-01-02T15:04:05Z07:00)",
-            "value": "iso8601"
-          },
-          {
-            "name": "RFC 2822 (Mon, 02 Jan 2006 15:04:05 -0700)",
-            "value": "rfc2822"
-          },
-          {
-            "name": "Date Only (2006-01-02)",
-            "value": "date"
-          },
-          {
-            "name": "Time Only (15:04:05)",
-            "value": "time"
-          },
-          {
-            "name": "Friendly (02 Jan 2006, 15:04)",
-            "value": "friendly"
-          },
-          {
-            "name": "Day/Month/Year (02/01/2006)",
-            "value": "dmy"
-          },
-          {
-            "name": "Month/Day/Year (01/02/2006)",
-            "value": "mdy"
-          },
-          {
-            "name": "Unix Timestamp",
-            "value": "unix"
-          },
-          {
-            "name": "Custom",
-            "value": "custom"
-          }
-        ]
-      },
-      {
-        "name": "custom_output_format",
-        "type": "string",
-        "value": null,
-        "label": "Custom Output Format (Go layout)",
-        "placeholder": "Monday, 02 January 2006"
-      },
-      {
-        "name": "timezone",
-        "type": "string",
-        "value": null,
-        "label": "Timezone",
-        "placeholder": "UTC (e.g. Europe/London, America/New_York)"
-      }
-    ],
-    "outputs": [
-      {
-        "name": "tool_result",
-        "type": "string",
-        "value": null,
-        "label": "Result",
-        "placeholder": ""
-      },
-      {
-        "name": "result",
-        "type": "string",
-        "value": null,
-        "label": "Formatted Date",
-        "placeholder": ""
-      },
-      {
-        "name": "year",
-        "type": "integer",
-        "value": null,
-        "label": "Year",
-        "placeholder": ""
-      },
-      {
-        "name": "month",
-        "type": "integer",
-        "value": null,
-        "label": "Month",
-        "placeholder": ""
-      },
-      {
-        "name": "day",
-        "type": "integer",
-        "value": null,
-        "label": "Day",
-        "placeholder": ""
-      },
-      {
-        "name": "hour",
-        "type": "integer",
-        "value": null,
-        "label": "Hour",
-        "placeholder": ""
-      },
-      {
-        "name": "minute",
-        "type": "integer",
-        "value": null,
-        "label": "Minute",
-        "placeholder": ""
-      },
-      {
-        "name": "second",
-        "type": "integer",
-        "value": null,
-        "label": "Second",
-        "placeholder": ""
-      },
-      {
-        "name": "day_of_week",
-        "type": "string",
-        "value": null,
-        "label": "Day of Week",
-        "placeholder": ""
-      },
-      {
-        "name": "unix_timestamp",
-        "type": "integer",
-        "value": null,
-        "label": "Unix Timestamp",
-        "placeholder": ""
-      },
-      {
-        "name": "success",
-        "type": "boolean",
-        "value": null,
-        "label": "Success",
-        "placeholder": ""
-      },
-      {
-        "name": "error",
-        "type": "string",
-        "value": null,
-        "label": "Error",
         "placeholder": ""
       }
     ]
@@ -2537,6 +2444,360 @@
         "type": "integer",
         "value": null,
         "label": "Max Iterations",
+        "placeholder": ""
+      }
+    ]
+  },
+  "elevenlabs/list_voices": {
+    "hash": "bcab05b87ea12bb1651e3e10dc9dd8bad455c1dd0f0e87330b9f61b4f3eca815",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "List Voices",
+    "description": "List all available ElevenLabs voices with their IDs, names, and characteristics",
+    "website": "https://www.flomation.co",
+    "icon": "microphone",
+    "date": "18/04/2026",
+    "type": 2,
+    "category": {
+      "name": "ElevenLabs",
+      "icon": "microphone",
+      "description": "AI voice synthesis and speech recognition powered by ElevenLabs"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "string",
+        "value": null,
+        "label": "ElevenLabs API Key",
+        "placeholder": "sk_...",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "voices",
+        "type": "object",
+        "value": null,
+        "label": "Voices (JSON)",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Voice Count",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "elevenlabs/speech_to_text": {
+    "hash": "01bde6d8863b301ddbded7008a4c1c2fbcde7e4fb65b6f0de735297ca8fcbe4c",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Speech to Text",
+    "description": "Transcribe audio to text using ElevenLabs speech recognition",
+    "website": "https://www.flomation.co",
+    "icon": "microphone",
+    "date": "18/04/2026",
+    "type": 2,
+    "category": {
+      "name": "ElevenLabs",
+      "icon": "microphone",
+      "description": "AI voice synthesis and speech recognition powered by ElevenLabs"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "string",
+        "value": null,
+        "label": "ElevenLabs API Key",
+        "placeholder": "sk_...",
+        "required": true
+      },
+      {
+        "name": "audio_base64",
+        "type": "string",
+        "value": null,
+        "label": "Audio data (base64-encoded). Provide this OR audio_url.",
+        "placeholder": "base64 audio data"
+      },
+      {
+        "name": "audio_url",
+        "type": "string",
+        "value": null,
+        "label": "URL to audio file. Provide this OR audio_base64.",
+        "placeholder": "https://example.com/audio.mp3"
+      },
+      {
+        "name": "language_code",
+        "type": "string",
+        "value": null,
+        "label": "Language code (ISO 639-1, e.g. 'en', 'fr', 'de'). Leave empty for auto-detect.",
+        "placeholder": "en"
+      },
+      {
+        "name": "model_id",
+        "type": "string",
+        "value": null,
+        "label": "Model",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "Scribe v1 (default)",
+            "value": "scribe_v1"
+          }
+        ]
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Transcribed text",
+        "placeholder": ""
+      },
+      {
+        "name": "text",
+        "type": "string",
+        "value": null,
+        "label": "Full transcription",
+        "placeholder": ""
+      },
+      {
+        "name": "language_code",
+        "type": "string",
+        "value": null,
+        "label": "Detected language",
+        "placeholder": ""
+      },
+      {
+        "name": "words",
+        "type": "object",
+        "value": null,
+        "label": "Word-level timestamps (JSON)",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "elevenlabs/text_to_speech": {
+    "hash": "b210c9b11462cb48ab439878af282f33739549a1a967fd52505baeec70ddccb1",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Text to Speech",
+    "description": "Convert text to spoken audio using ElevenLabs AI voices",
+    "website": "https://www.flomation.co",
+    "icon": "microphone",
+    "date": "18/04/2026",
+    "type": 2,
+    "category": {
+      "name": "ElevenLabs",
+      "icon": "microphone",
+      "description": "AI voice synthesis and speech recognition powered by ElevenLabs"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "string",
+        "value": null,
+        "label": "ElevenLabs API Key",
+        "placeholder": "sk_...",
+        "required": true
+      },
+      {
+        "name": "text",
+        "type": "text",
+        "value": null,
+        "label": "Text to convert to speech",
+        "placeholder": "Hello, welcome to Flomation!",
+        "required": true
+      },
+      {
+        "name": "voice_id",
+        "type": "string",
+        "value": null,
+        "label": "Voice ID (from list_voices, or use a name like 'Rachel', 'Adam')",
+        "placeholder": "21m00Tcm4TlvDq8ikWAM",
+        "required": true
+      },
+      {
+        "name": "model_id",
+        "type": "string",
+        "value": null,
+        "label": "Model",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "Multilingual v2 (best quality)",
+            "value": "eleven_multilingual_v2"
+          },
+          {
+            "name": "Turbo v2.5 (low latency)",
+            "value": "eleven_turbo_v2_5"
+          },
+          {
+            "name": "Turbo v2 (low latency)",
+            "value": "eleven_turbo_v2"
+          },
+          {
+            "name": "English v1",
+            "value": "eleven_monolingual_v1"
+          }
+        ]
+      },
+      {
+        "name": "stability",
+        "type": "string",
+        "value": null,
+        "label": "Stability (0.0-1.0, higher = more consistent, lower = more expressive)",
+        "placeholder": "0.5"
+      },
+      {
+        "name": "similarity_boost",
+        "type": "string",
+        "value": null,
+        "label": "Similarity Boost (0.0-1.0, higher = closer to original voice)",
+        "placeholder": "0.75"
+      },
+      {
+        "name": "style",
+        "type": "string",
+        "value": null,
+        "label": "Style exaggeration (0.0-1.0, v2 models only)",
+        "placeholder": "0.0"
+      },
+      {
+        "name": "use_speaker_boost",
+        "type": "boolean",
+        "value": null,
+        "label": "Use Speaker Boost (enhances voice clarity and presence)",
+        "placeholder": ""
+      },
+      {
+        "name": "output_format",
+        "type": "string",
+        "value": null,
+        "label": "Output Format",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "MP3 (44.1kHz, 128kbps)",
+            "value": "mp3_44100_128"
+          },
+          {
+            "name": "MP3 (44.1kHz, 64kbps)",
+            "value": "mp3_44100_64"
+          },
+          {
+            "name": "MP3 (22.05kHz, 32kbps)",
+            "value": "mp3_22050_32"
+          },
+          {
+            "name": "PCM (16kHz)",
+            "value": "pcm_16000"
+          },
+          {
+            "name": "PCM (22.05kHz)",
+            "value": "pcm_22050"
+          },
+          {
+            "name": "PCM (24kHz)",
+            "value": "pcm_24000"
+          },
+          {
+            "name": "PCM (44.1kHz)",
+            "value": "pcm_44100"
+          },
+          {
+            "name": "u-law (8kHz, telephony)",
+            "value": "ulaw_8000"
+          }
+        ]
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "audio_base64",
+        "type": "string",
+        "value": null,
+        "label": "Audio (base64)",
+        "placeholder": ""
+      },
+      {
+        "name": "audio_format",
+        "type": "string",
+        "value": null,
+        "label": "Audio Format",
+        "placeholder": ""
+      },
+      {
+        "name": "audio_size_bytes",
+        "type": "integer",
+        "value": null,
+        "label": "Audio Size (bytes)",
+        "placeholder": ""
+      },
+      {
+        "name": "character_count",
+        "type": "integer",
+        "value": null,
+        "label": "Characters Used",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
         "placeholder": ""
       }
     ]
@@ -3856,7 +4117,7 @@
     ]
   },
   "linear/list_issues": {
-    "hash": "6c14052dadd6be5e777df59a9431771b881264d60d4f0b7c67287acfbd41156a",
+    "hash": "7121d2b2f782ca77891df03c8b001066cf4e2c157d3ef5190fa0d72cb6af2e75",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "List Issues",
@@ -3990,7 +4251,7 @@
     ]
   },
   "linear/list_teams": {
-    "hash": "9ed1d353dcaefb5f6d18b7c1c52ee97a9bed389e72ee0e1e1a8aee4d5f9e3ebb",
+    "hash": "ebd8abe514702983974177467b341bc1817bfd66086c3fd5931e51e51a2145d0",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "List Teams",
@@ -4052,8 +4313,79 @@
       }
     ]
   },
+  "linear/list_workflow_states": {
+    "hash": "caa20bd51c1e6e53bfb313e97768e443d52d92dfd59f9b5763d1e93456dafe35",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "List Workflow States",
+    "description": "List workflow states (e.g. Todo, In Progress, Done, Cancelled) for a team. Use this to get state UUIDs needed by update_issue.",
+    "website": "https://www.flomation.co",
+    "icon": "linear",
+    "date": "17/04/2026",
+    "type": 2,
+    "category": {
+      "name": "Linear",
+      "icon": "linear",
+      "description": "Manage issues, projects, and teams in Linear"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "string",
+        "value": null,
+        "label": "Linear API Key",
+        "placeholder": "lin_api_...",
+        "required": true
+      },
+      {
+        "name": "team_id",
+        "type": "string",
+        "value": null,
+        "label": "Team ID (UUID, from list_teams)",
+        "placeholder": "Team UUID",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "states",
+        "type": "object",
+        "value": null,
+        "label": "Workflow States",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Count",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
   "linear/search_issues": {
-    "hash": "872b7e2167aaedea374b62dc404ee1250a04cc9c6307f758e6de9362d74088d3",
+    "hash": "81a0e8bc9c219e83e30fb215f91de1efdcfa92351fb5b27334fafa751e75971a",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Search Issues",
@@ -4131,7 +4463,7 @@
     ]
   },
   "linear/update_issue": {
-    "hash": "19e0e2085635797ff9e1cf2d71899a74c8ba15045f5e23d43590c301535e8788",
+    "hash": "ebfb0898333c0ba6b6c832ea3bf5c3400b1a04ee691577e382895894998d1573",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Update Issue",
@@ -4213,8 +4545,15 @@
         "name": "state_id",
         "type": "string",
         "value": null,
-        "label": "State ID",
-        "placeholder": "Workflow state UUID (optional)"
+        "label": "State ID (UUID, optional — use state_name instead for convenience)",
+        "placeholder": "Workflow state UUID"
+      },
+      {
+        "name": "state_name",
+        "type": "string",
+        "value": null,
+        "label": "State Name (e.g. 'Cancelled', 'In Progress', 'Done' — resolves to UUID automatically)",
+        "placeholder": "State name"
       },
       {
         "name": "assignee_id",
@@ -4411,7 +4750,7 @@
     ]
   },
   "messaging/slack": {
-    "hash": "4c89c26c03f0cc12f676a7d81ebc5f4bdc6513e6fd78142088c78a9092207086",
+    "hash": "fe830827d9e99742477567408d727bf156864d299a0e38b336c0cdb84374358d",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Send Slack Message",
@@ -4511,7 +4850,7 @@
     ]
   },
   "messaging/telegram": {
-    "hash": "dcccc54a50c9691e2d21196c4f12935c23c889279e95f2e0125f2b7d27dac76a",
+    "hash": "a49ca52512dde92a045c3314bcb899c5fd0e4bedbde980885b897ccbe9719c7d",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Send Telegram Message",
@@ -4585,6 +4924,92 @@
         "type": "integer",
         "value": null,
         "label": "Message ID",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "messaging/telegram_voice": {
+    "hash": "cc6972244392ccf5f1444062b259703c674a9b41fa8bd6b4dcfd508e945ac3a9",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Send Telegram Voice",
+    "description": "Send a voice message via Telegram. Wire an ElevenLabs TTS node upstream to convert text to audio.",
+    "website": "https://www.flomation.co",
+    "icon": "paper-plane",
+    "date": "18/04/2026",
+    "type": 2,
+    "category": {
+      "name": "Messaging",
+      "icon": "comments",
+      "description": "Send messages via various channels"
+    },
+    "inputs": [
+      {
+        "name": "bot_token",
+        "type": "string",
+        "value": null,
+        "label": "Telegram Bot Token",
+        "placeholder": "123456:ABC-DEF...",
+        "required": true
+      },
+      {
+        "name": "channel_id",
+        "type": "string",
+        "value": null,
+        "label": "Chat/Channel ID",
+        "placeholder": "${channel_id}",
+        "required": true
+      },
+      {
+        "name": "audio_base64",
+        "type": "string",
+        "value": null,
+        "label": "Audio data (base64). Wire from an upstream TTS or audio action.",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "caption",
+        "type": "string",
+        "value": null,
+        "label": "Caption text shown alongside the voice message",
+        "placeholder": ""
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "message_id",
+        "type": "integer",
+        "value": null,
+        "label": "Message ID",
+        "placeholder": ""
+      },
+      {
+        "name": "audio_size_bytes",
+        "type": "integer",
+        "value": null,
+        "label": "Audio size (bytes)",
         "placeholder": ""
       },
       {
@@ -5573,8 +5998,837 @@
       }
     ]
   },
+  "string/concatenate": {
+    "hash": "fac8ad8a5b8b807ac7939b1e54667d103cf03c4530906587451593fd49c7ef7c",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Concatenate",
+    "description": "Join two or more strings together",
+    "website": "https://www.flomation.co",
+    "icon": "font",
+    "date": "19/04/2026",
+    "type": 2,
+    "category": {
+      "name": "String",
+      "icon": "font",
+      "description": "String manipulation and text operations"
+    },
+    "inputs": [
+      {
+        "name": "a",
+        "type": "string",
+        "value": null,
+        "label": "First String",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "b",
+        "type": "string",
+        "value": null,
+        "label": "Second String",
+        "placeholder": ""
+      },
+      {
+        "name": "c",
+        "type": "string",
+        "value": null,
+        "label": "Third String (optional)",
+        "placeholder": ""
+      },
+      {
+        "name": "d",
+        "type": "string",
+        "value": null,
+        "label": "Fourth String (optional)",
+        "placeholder": ""
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "string",
+        "value": null,
+        "label": "Concatenated String",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "string/contains": {
+    "hash": "9e1b28faac65f233b993243e6514f59db6fe3fc83737e17a0f46326568c6d80a",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Contains",
+    "description": "Check if a string contains a substring",
+    "website": "https://www.flomation.co",
+    "icon": "font",
+    "date": "19/04/2026",
+    "type": 2,
+    "category": {
+      "name": "String",
+      "icon": "font",
+      "description": "String manipulation and text operations"
+    },
+    "inputs": [
+      {
+        "name": "value",
+        "type": "string",
+        "value": null,
+        "label": "Input String",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "search",
+        "type": "string",
+        "value": null,
+        "label": "Search For",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "case_sensitive",
+        "type": "boolean",
+        "value": null,
+        "label": "Case Sensitive",
+        "placeholder": ""
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "boolean",
+        "value": null,
+        "label": "Contains",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "string/join": {
+    "hash": "f84fdeefdcce6f2f7a23abaa5120409a5473a76a8d48e0cffc44f800d143a648",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Join",
+    "description": "Join an array of strings with a separator",
+    "website": "https://www.flomation.co",
+    "icon": "font",
+    "date": "19/04/2026",
+    "type": 2,
+    "category": {
+      "name": "String",
+      "icon": "font",
+      "description": "String manipulation and text operations"
+    },
+    "inputs": [
+      {
+        "name": "array",
+        "type": "object",
+        "value": null,
+        "label": "Array of Strings",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "separator",
+        "type": "string",
+        "value": null,
+        "label": "Separator",
+        "placeholder": ", "
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "string",
+        "value": null,
+        "label": "Joined String",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "string/lower_case": {
+    "hash": "9cd7cef683521e311dff0a2a5b2840be52f062c52fd2dfbe029737dfa25cc1c6",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Lower Case",
+    "description": "Convert a string to lower case",
+    "website": "https://www.flomation.co",
+    "icon": "font",
+    "date": "19/04/2026",
+    "type": 2,
+    "category": {
+      "name": "String",
+      "icon": "font",
+      "description": "String manipulation and text operations"
+    },
+    "inputs": [
+      {
+        "name": "value",
+        "type": "string",
+        "value": null,
+        "label": "Input String",
+        "placeholder": "",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "string",
+        "value": null,
+        "label": "Lower Case String",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "string/repeat": {
+    "hash": "830ffecf210920b29695b948eab6d2330caf089df3fd124d4c73a35c25e937ad",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Repeat",
+    "description": "Repeat a string a given number of times",
+    "website": "https://www.flomation.co",
+    "icon": "font",
+    "date": "19/04/2026",
+    "type": 2,
+    "category": {
+      "name": "String",
+      "icon": "font",
+      "description": "String manipulation and text operations"
+    },
+    "inputs": [
+      {
+        "name": "value",
+        "type": "string",
+        "value": null,
+        "label": "Input String",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Repeat Count",
+        "placeholder": "2",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "string",
+        "value": null,
+        "label": "Repeated String",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "string/replace": {
+    "hash": "3494a3436c2fb5fc9368b8c5c74cda677fc61a2cc4ed10feaa3053b7b968031e",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Replace",
+    "description": "Replace all occurrences of a substring with another string",
+    "website": "https://www.flomation.co",
+    "icon": "font",
+    "date": "19/04/2026",
+    "type": 2,
+    "category": {
+      "name": "String",
+      "icon": "font",
+      "description": "String manipulation and text operations"
+    },
+    "inputs": [
+      {
+        "name": "value",
+        "type": "string",
+        "value": null,
+        "label": "Input String",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "search",
+        "type": "string",
+        "value": null,
+        "label": "Search For",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "replace",
+        "type": "string",
+        "value": null,
+        "label": "Replace With",
+        "placeholder": ""
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "string",
+        "value": null,
+        "label": "Replaced String",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Replacements Made",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "string/substring": {
+    "hash": "fb0bf673f7fc7813e1ab17c63ba6ca8841e43d6a2fa138d04989e27989a351ab",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Substring",
+    "description": "Extract a portion of a string by start and end positions",
+    "website": "https://www.flomation.co",
+    "icon": "font",
+    "date": "19/04/2026",
+    "type": 2,
+    "category": {
+      "name": "String",
+      "icon": "font",
+      "description": "String manipulation and text operations"
+    },
+    "inputs": [
+      {
+        "name": "value",
+        "type": "string",
+        "value": null,
+        "label": "Input String",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "start",
+        "type": "integer",
+        "value": null,
+        "label": "Start Index (0-based)",
+        "placeholder": "0",
+        "required": true
+      },
+      {
+        "name": "end",
+        "type": "integer",
+        "value": null,
+        "label": "End Index (exclusive, empty = end of string)",
+        "placeholder": ""
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "string",
+        "value": null,
+        "label": "Substring",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "string/trim": {
+    "hash": "8da539e38150ea0c0520a23b285d54188ad77a5569ad536d3f2d04c3b8cfc19e",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Trim",
+    "description": "Remove whitespace from both ends of a string",
+    "website": "https://www.flomation.co",
+    "icon": "font",
+    "date": "19/04/2026",
+    "type": 2,
+    "category": {
+      "name": "String",
+      "icon": "font",
+      "description": "String manipulation and text operations"
+    },
+    "inputs": [
+      {
+        "name": "value",
+        "type": "string",
+        "value": null,
+        "label": "Input String",
+        "placeholder": "",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "string",
+        "value": null,
+        "label": "Trimmed String",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "string/trim_end": {
+    "hash": "cb8959c83e714dc51ce40380317006aed955cd214674d17663ea87fde2317de3",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Trim End",
+    "description": "Remove whitespace from the end of a string",
+    "website": "https://www.flomation.co",
+    "icon": "font",
+    "date": "19/04/2026",
+    "type": 2,
+    "category": {
+      "name": "String",
+      "icon": "font",
+      "description": "String manipulation and text operations"
+    },
+    "inputs": [
+      {
+        "name": "value",
+        "type": "string",
+        "value": null,
+        "label": "Input String",
+        "placeholder": "",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "string",
+        "value": null,
+        "label": "Trimmed String",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "string/trim_start": {
+    "hash": "04b1acbdbf1ab80149069ba685ac1c41485394ace8899f96513e74a64990feb9",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Trim Start",
+    "description": "Remove whitespace from the start of a string",
+    "website": "https://www.flomation.co",
+    "icon": "font",
+    "date": "19/04/2026",
+    "type": 2,
+    "category": {
+      "name": "String",
+      "icon": "font",
+      "description": "String manipulation and text operations"
+    },
+    "inputs": [
+      {
+        "name": "value",
+        "type": "string",
+        "value": null,
+        "label": "Input String",
+        "placeholder": "",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "string",
+        "value": null,
+        "label": "Trimmed String",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "string/upper_case": {
+    "hash": "cc5266493b46711de3962f5d984fbdad97db96f1343a660545ad763defa90418",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Upper Case",
+    "description": "Convert a string to upper case",
+    "website": "https://www.flomation.co",
+    "icon": "font",
+    "date": "19/04/2026",
+    "type": 2,
+    "category": {
+      "name": "String",
+      "icon": "font",
+      "description": "String manipulation and text operations"
+    },
+    "inputs": [
+      {
+        "name": "value",
+        "type": "string",
+        "value": null,
+        "label": "Input String",
+        "placeholder": "",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "string",
+        "value": null,
+        "label": "Upper Case String",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "subflow/begin": {
+    "hash": "7797862805ba9c85ac630538f9d42b8466828cb9bcf5448ea44de1bc195d9448",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Begin Sub-Flow",
+    "description": "Entry point of a reusable sub-flow. Give it a name and connect actions below it.",
+    "website": "https://www.flomation.co",
+    "icon": "play",
+    "date": "19/04/2026",
+    "type": 2,
+    "category": {
+      "name": "Sub-Flow",
+      "icon": "layer-group",
+      "description": "Reusable sub-flow subroutines within a flow"
+    },
+    "inputs": [
+      {
+        "name": "name",
+        "type": "string",
+        "value": null,
+        "label": "Sub-Flow Name",
+        "placeholder": "my_subroutine",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result",
+        "placeholder": ""
+      },
+      {
+        "name": "name",
+        "type": "string",
+        "value": null,
+        "label": "Sub-Flow Name",
+        "placeholder": ""
+      }
+    ]
+  },
+  "subflow/end": {
+    "hash": "20792bda3473648ba1ef5ad5c085617817fc95b497046ef6d7e7235a14fb6317",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "End Sub-Flow",
+    "description": "Return point of a sub-flow. Outputs are returned to the Invoke node.",
+    "website": "https://www.flomation.co",
+    "icon": "stop",
+    "date": "19/04/2026",
+    "type": 2,
+    "category": {
+      "name": "Sub-Flow",
+      "icon": "layer-group",
+      "description": "Reusable sub-flow subroutines within a flow"
+    },
+    "inputs": [
+      {
+        "name": "return_value",
+        "type": "string",
+        "value": null,
+        "label": "Return Value (optional explicit return; otherwise all parent outputs are returned)",
+        "placeholder": ""
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result",
+        "placeholder": ""
+      }
+    ]
+  },
+  "subflow/invoke": {
+    "hash": "dc8445fb64389426a54b609537d4568ab3fd9add343199c13dca04085e799bf5",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Invoke Sub-Flow",
+    "description": "Call a named sub-flow subroutine and return its results",
+    "website": "https://www.flomation.co",
+    "icon": "share",
+    "date": "19/04/2026",
+    "type": 2,
+    "category": {
+      "name": "Sub-Flow",
+      "icon": "layer-group",
+      "description": "Reusable sub-flow subroutines within a flow"
+    },
+    "inputs": [
+      {
+        "name": "sub_flow_name",
+        "type": "string",
+        "value": null,
+        "label": "Sub-Flow Name",
+        "placeholder": "my_subroutine",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
   "tools/calendar_create": {
-    "hash": "3b28de72ba239797bb5b8ebf40e057d26e9a93197db1146e5d5d029d112c3082",
+    "hash": "33a689156b625d5aea80d221b1a6fa8549926c061e2afc3adc6af021f2ad52c8",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Calendar Create Event",
@@ -5745,7 +6999,7 @@
     ]
   },
   "tools/calendar_read": {
-    "hash": "970b4320fe1bcda999ddd3fc95c7a8ed48b9e51a5381e34192d38e1382dd8583",
+    "hash": "14764745fccb82529bcf63d3d26b94ea3dd3d5db583b1d09f4d4693040843aef",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Calendar Read",
@@ -5872,7 +7126,7 @@
     ]
   },
   "tools/calendar_update": {
-    "hash": "b9ea571f4e2470bd0f2fff9210f4ae77aceab5125dc2ca8be9f0aacc365f8004",
+    "hash": "e26aa43781d3d105df758d08afe9b84e7437e590bff57d640a8b6c2ae4304511",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Calendar Update Event",
@@ -5943,6 +7197,27 @@
         "value": null,
         "label": "Account the event is on (email or label)",
         "placeholder": ""
+      },
+      {
+        "name": "scope",
+        "type": "string",
+        "value": null,
+        "label": "For recurring events: 'this_instance' (default), 'all_events' (change the entire series), or 'this_and_following' (this and all future instances)",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "This instance only",
+            "value": "this_instance"
+          },
+          {
+            "name": "All events in series",
+            "value": "all_events"
+          },
+          {
+            "name": "This and following",
+            "value": "this_and_following"
+          }
+        ]
       }
     ],
     "outputs": [
@@ -6187,7 +7462,7 @@
     ]
   },
   "tools/email_read": {
-    "hash": "a9a3af231bc88b11c7b3cf05a7bf877db73fea3fd82934fbbad83a78db95ff71",
+    "hash": "c0bf8021d6b6f70c8642a55a787ce7cc7156f2478ecad0d303d3244b66f54dbd",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Email Read",
@@ -6355,7 +7630,7 @@
     ]
   },
   "tools/email_send": {
-    "hash": "978dacbfd3bbfea8445de6badb0e1ca039552ea6aa0d887e5f64442b1c86cecf",
+    "hash": "9abcc8ba02b1ed0d3ce5d8cb2d23ff532a509ce6b55d2906c4462eb62dcbe0b9",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Email Send",
@@ -6390,7 +7665,7 @@
         "name": "body",
         "type": "text",
         "value": null,
-        "label": "Email body (plain text)",
+        "label": "Email body / message content (plain text)",
         "placeholder": "",
         "required": true
       },
