@@ -3,6 +3,7 @@ package linear_search_issues
 import (
 	"encoding/json"
 	"fmt"
+	"strings"
 
 	core "flomation.app/automate/executor"
 	linear "flomation.app/automate/executor/actions/linear"
@@ -104,16 +105,51 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 
 	var result struct {
 		IssueSearch struct {
-			Nodes []interface{} `json:"nodes"`
+			Nodes []json.RawMessage `json:"nodes"`
 		} `json:"issueSearch"`
 	}
 	if err := json.Unmarshal(resp.Data, &result); err != nil {
 		return nil, fmt.Errorf("failed to parse response: %w", err)
 	}
 
+	type issueRow struct {
+		Identifier    string `json:"identifier"`
+		Title         string `json:"title"`
+		PriorityLabel string `json:"priorityLabel"`
+		DueDate       string `json:"dueDate"`
+		State         struct {
+			Name string `json:"name"`
+		} `json:"state"`
+		Assignee *struct {
+			Name string `json:"name"`
+		} `json:"assignee"`
+	}
+
+	var sb strings.Builder
+	fmt.Fprintf(&sb, "Found %d issue(s):\n\n", len(result.IssueSearch.Nodes))
+	var parsed []interface{}
+	for _, raw := range result.IssueSearch.Nodes {
+		var row issueRow
+		if err := json.Unmarshal(raw, &row); err == nil {
+			assignee := "Unassigned"
+			if row.Assignee != nil && row.Assignee.Name != "" {
+				assignee = row.Assignee.Name
+			}
+			due := ""
+			if row.DueDate != "" {
+				due = fmt.Sprintf(" due:%s", row.DueDate)
+			}
+			fmt.Fprintf(&sb, "• [%s] %s (%s, %s, %s%s)\n",
+				row.Identifier, row.Title, row.State.Name, row.PriorityLabel, assignee, due)
+		}
+		var generic interface{}
+		_ = json.Unmarshal(raw, &generic)
+		parsed = append(parsed, generic)
+	}
+
 	return map[string]interface{}{
-		"tool_result": fmt.Sprintf("Found %d issues", len(result.IssueSearch.Nodes)),
-		"issues":      result.IssueSearch.Nodes,
+		"tool_result": sb.String(),
+		"issues":      parsed,
 		"count":       len(result.IssueSearch.Nodes),
 		"success":     true,
 		"error":       "",

@@ -14,6 +14,7 @@ import (
 	"time"
 
 	core "flomation.app/automate/executor"
+	log "github.com/sirupsen/logrus"
 )
 
 const (
@@ -117,11 +118,29 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 		return errResult("No Gmail read access connected. Ask the user to connect their email (read access) first.")
 	}
 
+	log.WithFields(log.Fields{
+		"token_count":    len(tokens),
+		"account_filter": accountFilter,
+	}).Info("[email_read] tokens fetched")
+	for i, t := range tokens {
+		log.WithFields(log.Fields{
+			"index":     i,
+			"email":     t.Email,
+			"label":     t.Label,
+			"has_token": t.AccessToken != "",
+			"error":     t.Error,
+		}).Info("[email_read] token detail")
+	}
+
 	// Filter accounts
 	activeTokens := filterTokens(tokens, accountFilter)
 	if len(activeTokens) == 0 {
 		return errResult(fmt.Sprintf("No matching email account for filter '%s'", accountFilter))
 	}
+
+	log.WithFields(log.Fields{
+		"active_count": len(activeTokens),
+	}).Info("[email_read] after filter")
 
 	// If a specific email ID is requested, read it in full
 	if emailID != "" {
@@ -135,22 +154,90 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 func searchEmails(flow *core.Flow, tokens []tokenInfo, query string, maxResults int) (map[string]interface{}, error) {
 	var allEmails []emailSummary
 
+	// Track emails per account for grouped output
+	type accountResult struct {
+		Label  string
+		Email  string
+		Emails []emailSummary
+		Error  string
+	}
+	var accountResults []accountResult
+
 	for _, t := range tokens {
-		emails, err := listMessages(flow, t.AccessToken, query, maxResults)
-		if err != nil {
-			continue
-		}
 		label := t.Label
 		if label == "" {
 			label = t.Email
 		}
-		for i := range emails {
-			emails[i].Account = label
+		log.WithFields(log.Fields{
+			"account":       t.Email,
+			"label":         label,
+			"token_prefix":  t.AccessToken[:min(20, len(t.AccessToken))],
+		}).Info("[email_read] querying Gmail for account")
+
+		emails, err := listMessages(flow, t.AccessToken, query, maxResults)
+		if err != nil {
+			log.WithFields(log.Fields{
+				"account": t.Email,
+				"error":   err,
+			}).Warn("[email_read] listMessages failed for account")
+
+			errMsg := err.Error()
+			// If permissions expired, auto-disconnect and give a clear message
+			if strings.Contains(errMsg, "can't access") {
+				disconnectAccount(flow, t.Email, "email_read")
+				errMsg = fmt.Sprintf("I can no longer access %s, so I've removed it from your connected accounts. You can re-connect it at any time.", t.Email)
+			}
+
+			accountResults = append(accountResults, accountResult{
+				Label: label, Email: t.Email, Error: errMsg,
+			})
+			continue
 		}
+
+		log.WithFields(log.Fields{
+			"account":     t.Email,
+			"email_count": len(emails),
+		}).Info("[email_read] results for account")
+		if len(emails) > 0 {
+			log.WithFields(log.Fields{
+				"account": t.Email,
+				"subject": emails[0].Subject,
+				"from":    emails[0].From,
+				"id":      emails[0].ID,
+			}).Info("[email_read] latest email for account")
+		}
+
+		for i := range emails {
+			emails[i].Account = t.Email
+		}
+		accountResults = append(accountResults, accountResult{
+			Label: label, Email: t.Email, Emails: emails,
+		})
 		allEmails = append(allEmails, emails...)
 	}
 
 	if len(allEmails) == 0 {
+		// Check whether the empty result is due to errors (403, etc.)
+		// vs genuinely empty inboxes — report errors to the AI so it
+		// knows the account is inaccessible, not just empty.
+		var errMsgs []string
+		for _, ar := range accountResults {
+			if ar.Error != "" {
+				errMsgs = append(errMsgs, fmt.Sprintf("%s (%s): %s", ar.Label, ar.Email, ar.Error))
+			}
+		}
+		if len(errMsgs) > 0 {
+			msg := fmt.Sprintf("Couldn't read emails from %d account(s):\n%s",
+				len(errMsgs), strings.Join(errMsgs, "\n"))
+			return map[string]interface{}{
+				"tool_result":  msg,
+				"emails":       []emailSummary{},
+				"total_count":  0,
+				"success":      false,
+				"error":        msg,
+			}, nil
+		}
+
 		searchDesc := "inbox"
 		if query != "" {
 			searchDesc = fmt.Sprintf("'%s'", query)
@@ -164,12 +251,24 @@ func searchEmails(flow *core.Flow, tokens []tokenInfo, query string, maxResults 
 		}, nil
 	}
 
-	// Build text summary
+	// Build text summary grouped by account so the AI can clearly
+	// distinguish which emails belong to which inbox.
 	var sb strings.Builder
-	fmt.Fprintf(&sb, "%d email(s) found:\n\n", len(allEmails))
-	for _, e := range allEmails {
-		fmt.Fprintf(&sb, "• From: %s\n  Subject: %s\n  Date: %s\n  Snippet: %s\n  [%s] {id:%s}\n\n",
-			e.From, e.Subject, e.Date, e.Snippet, e.Account, e.ID)
+	fmt.Fprintf(&sb, "%d email(s) found across %d account(s):\n", len(allEmails), len(accountResults))
+	for _, ar := range accountResults {
+		fmt.Fprintf(&sb, "\n── %s (%s) ──\n", ar.Label, ar.Email)
+		if ar.Error != "" {
+			fmt.Fprintf(&sb, "  %s\n", ar.Error)
+			continue
+		}
+		if len(ar.Emails) == 0 {
+			sb.WriteString("  No matching emails\n")
+			continue
+		}
+		for _, e := range ar.Emails {
+			fmt.Fprintf(&sb, "• From: %s\n  Subject: %s\n  Date: %s\n  Snippet: %s\n  {id:%s}\n\n",
+				e.From, e.Subject, e.Date, e.Snippet, e.ID)
+		}
 	}
 
 	return map[string]interface{}{
@@ -241,7 +340,15 @@ func listMessages(flow *core.Flow, accessToken, query string, maxResults int) ([
 	defer func() { _ = resp.Body.Close() }()
 
 	if resp.StatusCode != http.StatusOK {
-		return nil, fmt.Errorf("Gmail API returned %d", resp.StatusCode)
+		body, _ := io.ReadAll(io.LimitReader(resp.Body, 2048))
+		log.WithFields(log.Fields{
+			"status": resp.StatusCode,
+			"body":   string(body),
+		}).Warn("[email_read] Gmail API error response")
+		if resp.StatusCode == http.StatusForbidden || resp.StatusCode == http.StatusUnauthorized {
+			return nil, fmt.Errorf("I can't access this inbox — it looks like the email permissions have expired or been revoked. The user will need to re-connect this account")
+		}
+		return nil, fmt.Errorf("Gmail API returned %d: %s", resp.StatusCode, string(body))
 	}
 
 	var result struct {
@@ -514,6 +621,34 @@ func filterTokens(tokens []tokenInfo, accountFilter string) []tokenInfo {
 		active = append(active, t)
 	}
 	return active
+}
+
+// disconnectAccount removes a Google account connection that is no longer
+// accessible (e.g. 403/401 from Gmail). Fire-and-forget — errors are logged
+// but don't block the email read response.
+func disconnectAccount(flow *core.Flow, email, purpose string) {
+	ctx := flow.GetContext()
+	if ctx == nil || ctx.APIURL == "" || ctx.AgentUserID == "" {
+		return
+	}
+	endpoint := fmt.Sprintf("%s/api/v1/internal/agent-user/%s/google-account/%s?purpose=%s",
+		ctx.APIURL, ctx.AgentUserID, email, purpose)
+	req, err := http.NewRequestWithContext(flow.GoContext(), http.MethodDelete, endpoint, nil)
+	if err != nil {
+		log.WithError(err).Warn("[email_read] failed to build disconnect request")
+		return
+	}
+	client := &http.Client{Timeout: 10 * time.Second}
+	resp, err := client.Do(req)
+	if err != nil {
+		log.WithError(err).Warn("[email_read] failed to disconnect account")
+		return
+	}
+	defer func() { _ = resp.Body.Close() }()
+	log.WithFields(log.Fields{
+		"email":  email,
+		"status": resp.StatusCode,
+	}).Info("[email_read] disconnected expired account")
 }
 
 func errResult(msg string) (map[string]interface{}, error) {

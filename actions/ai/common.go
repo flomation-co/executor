@@ -73,6 +73,12 @@ func approxTokens(s string) int {
 	return (len(s) + 3) / 4
 }
 
+// ApproxTokens is the exported version of approxTokens for use by
+// AI action packages that need token estimation.
+func ApproxTokens(s string) int {
+	return approxTokens(s)
+}
+
 // ApproxMessageTokens estimates the token cost of a single message. A small
 // overhead is added to account for role tags and message boundaries in the
 // underlying API wire format.

@@ -94,6 +94,14 @@ const (
 
 	// MaxToolRoundsDefault is the safety cap on tool calling rounds.
 	MaxToolRoundsDefault = 25
+
+	// SubFlowNameKey is the output key set by subflow/invoke actions.
+	// The engine detects this in executeNodeChildren and dispatches
+	// to the matching subflow/begin node.
+	SubFlowNameKey = "__subflow_name"
+
+	// MaxSubFlowDepth caps recursion for sub-flow invocations.
+	MaxSubFlowDepth = 10
 )
 
 // ToolRequest represents a single tool call from an AI model.
@@ -514,6 +522,7 @@ func Load(path *string) (*Flow, error) {
 	f.nodeResults = make(map[string]map[string]interface{})
 	f.nodeExecutionResults = make(map[string]*ExecutionNodeResult)
 	f.outputs = make(map[string]interface{})
+	f.variables = make(map[string]interface{})
 
 	return &f, nil
 }
@@ -560,12 +569,22 @@ func (f *Flow) InjectTriggerData(data map[string]interface{}) {
 			continue
 		}
 
-		// Match channel type to trigger label (e.g. "slack" matches "trigger/slack")
+		// Match channel type to trigger label (e.g. "slack" matches "trigger/slack").
+		// Also match sub-types like "telegram_voice" to "trigger/telegram" so
+		// voice messages route to the base Telegram trigger node.
 		if channelType != "" {
 			label := n.Data.Label
 			if label == "trigger/"+channelType {
 				targetNode = n
 				break
+			}
+			// Try base channel type (strip _suffix)
+			if idx := strings.LastIndex(channelType, "_"); idx > 0 {
+				baseType := channelType[:idx]
+				if label == "trigger/"+baseType {
+					targetNode = n
+					break
+				}
 			}
 		}
 
@@ -625,15 +644,42 @@ func (f *Flow) Execute(actions map[string]Action, entry *string, environment *en
 	if entry != nil {
 		start = f.FindNode(*entry)
 	} else {
+		// When no explicit entry node is set, find the trigger that
+		// matches the channel_type from the execution context. This
+		// ensures voice messages start from trigger/telegram, not
+		// whichever trigger appears first in the nodes array.
+		var channelType string
+		if f.context != nil {
+			channelType = f.context.Get("channel_type")
+		}
+		var fallback *Node
 		for _, n := range f.Nodes {
 			if n == nil {
 				continue
 			}
-
-			if strings.HasPrefix(n.Type, "trigger/") {
-				start = n
-				break
+			if !strings.HasPrefix(n.Type, "trigger/") {
+				continue
 			}
+			if fallback == nil {
+				fallback = n
+			}
+			if channelType != "" && n.Data != nil {
+				label := n.Data.Label
+				if label == "trigger/"+channelType {
+					start = n
+					break
+				}
+				// Match sub-types (e.g. telegram_voice → trigger/telegram)
+				if idx := strings.LastIndex(channelType, "_"); idx > 0 {
+					if label == "trigger/"+channelType[:idx] {
+						start = n
+						break
+					}
+				}
+			}
+		}
+		if start == nil {
+			start = fallback
 		}
 	}
 
@@ -663,18 +709,28 @@ func (f *Flow) Execute(actions map[string]Action, entry *string, environment *en
 // was found and executed successfully.
 func (f *Flow) executeOnErrorChain(actions map[string]Action, flowErr error, environment *environment.Environment) bool {
 	var onErrorNode *Node
+	var onErrorCount int
 	for _, n := range f.Nodes {
 		if n == nil {
 			continue
 		}
 		if n.Type == "error/on_error" || (n.Data != nil && n.Data.Label == "error/on_error") {
-			onErrorNode = n
-			break
+			onErrorCount++
+			if onErrorNode == nil {
+				onErrorNode = n
+			}
 		}
 	}
 
 	if onErrorNode == nil {
 		return false
+	}
+
+	if onErrorCount > 1 {
+		log.WithFields(log.Fields{
+			"count": onErrorCount,
+			"using": onErrorNode.ID,
+		}).Warn("Multiple On Error nodes found in flow; only the first will be used")
 	}
 
 	// Find the node that caused the error from execution results
@@ -691,13 +747,21 @@ func (f *Flow) executeOnErrorChain(actions map[string]Action, flowErr error, env
 	// Prevent re-entrancy: errors in the error chain must not trigger it again
 	f.inErrorChain = true
 
-	// Inject error context as the On Error node's cached result
-	errorOutputs := map[string]interface{}{
-		"error_message":    flowErr.Error(),
-		"error_node_id":    failedNodeID,
-		"error_node_label": failedNodeLabel,
-		"error_node_type":  failedNodeType,
+	// Build the On Error node's outputs by merging all previously-executed
+	// node results with the error context. This allows downstream children
+	// in the error chain to reference upstream variables via ${...}
+	// substitution — without this merge, only the 4 error fields are visible.
+	// Error context fields take precedence over any clashing upstream keys.
+	errorOutputs := make(map[string]interface{})
+	for _, cachedOutputs := range f.nodeResults {
+		for k, v := range cachedOutputs {
+			errorOutputs[k] = v
+		}
 	}
+	errorOutputs["error_message"] = flowErr.Error()
+	errorOutputs["error_node_id"] = failedNodeID
+	errorOutputs["error_node_label"] = failedNodeLabel
+	errorOutputs["error_node_type"] = failedNodeType
 	f.nodeResults[onErrorNode.ID] = errorOutputs
 	f.emitNodeEvent(onErrorNode.ID, onErrorNode.Type, onErrorNode.Data.Label, "success", 0, "")
 	f.recordNodeResult(onErrorNode, "success", nil, errorOutputs, 0, "")
@@ -791,12 +855,50 @@ func (f *Flow) executeNodeActionOnly(actions map[string]Action, node *Node, envi
 			continue
 		}
 
+		// Skip parents on unmatched conditional/switch branches. If a parent
+		// hasn't been executed yet AND it's not reachable from a matched
+		// branch, executing it would trigger the wrong code path. Parents
+		// that already ran (cached result) are always included — they
+		// were on the active execution path.
+		if _, cached := f.nodeResults[p.ID]; !cached {
+			if f.isOnUnmatchedBranch(p.ID) {
+				log.WithFields(log.Fields{
+					"node":   node.ID,
+					"parent": p.ID,
+					"action": p.Data.Label,
+				}).Debug("skipping parent on unmatched conditional branch")
+				continue
+			}
+		}
+
 		results, err = f.ExecuteNode(actions, p, environment)
 		if err != nil {
 			return nil, err
 		}
 
+		// Skip execution if a direct parent failed — don't run children
+		// of nodes that produced errors, regardless of other edges.
+		if parentResult, ok := f.nodeExecutionResults[p.ID]; ok && parentResult.Status == "failed" {
+			log.WithFields(log.Fields{
+				"node":   node.ID,
+				"parent": p.ID,
+				"action": p.Data.Label,
+			}).Info("skipping node: direct parent failed")
+			f.emitNodeEvent(node.ID, node.Type, node.Data.Label, "skipped", 0, "parent node failed")
+			f.recordNodeResult(node, "skipped", nil, nil, 0, "parent node failed")
+			return nil, fmt.Errorf("parent node %s failed", p.Data.Label)
+		}
+
 		for k, v := range results {
+			// When multiple parents provide the same output key, prefer
+			// non-empty values over empty ones. This ensures trigger data
+			// that passes through conditional nodes isn't overwritten by
+			// empty outputs from other parent branches.
+			if existing, ok := parentResults[k]; ok {
+				if isEmpty(v) && !isEmpty(existing) {
+					continue // keep the non-empty value
+				}
+			}
 			parentResults[k] = v
 		}
 	}
@@ -841,7 +943,7 @@ func (f *Flow) executeNodeActionOnly(actions map[string]Action, node *Node, envi
 			hasExplicitValue = false
 		}
 		if !hasExplicitValue {
-			if parentVal, exists := results[v.Name]; exists {
+			if parentVal, exists := parentResults[v.Name]; exists {
 				value = parentVal
 			}
 		}
@@ -1080,6 +1182,12 @@ func (f *Flow) executeNodeActionOnly(actions map[string]Action, node *Node, envi
 func (f *Flow) executeNodeChildren(actions map[string]Action, node *Node, outputs map[string]interface{}, environment *environment.Environment) (map[string]interface{}, error) {
 	combinedResults := make(map[string]interface{})
 
+	// End Sub-Flow: stop traversal — outputs are already cached and
+	// will be collected by the Invoke node's executeSubFlow method.
+	if node.Data != nil && (node.Data.Label == "subflow/end" || node.Type == "subflow/end") {
+		return outputs, nil
+	}
+
 	var children []*Node
 	if node.Data.Config.Type == ActionTypeConditional {
 		result, ok := outputs["result"].(bool)
@@ -1212,6 +1320,23 @@ func (f *Flow) executeNodeChildren(actions map[string]Action, node *Node, output
 			// for the final response.
 			responseChildren := f.FindTargetByHandle(node.ID, "output")
 
+			// Snapshot original input values for each tool node so we can
+			// distinguish flow-author pre-configured values from values
+			// injected by a previous tool call in this loop. Without this,
+			// the second call to the same tool sees the first call's injected
+			// value as "pre-configured" and refuses to override it.
+			toolOriginalInputs := make(map[string]map[string]interface{})
+			for _, tc := range toolsChildren {
+				if tc.Data == nil {
+					continue
+				}
+				snapshot := make(map[string]interface{})
+				for _, inp := range tc.Data.Config.Inputs {
+					snapshot[inp.Name] = inp.Value
+				}
+				toolOriginalInputs[tc.ID] = snapshot
+			}
+
 			for round := 0; round < maxRounds; round++ {
 				requests, ok := outputs[ToolRequestsKey].([]ToolRequest)
 				if !ok || len(requests) == 0 {
@@ -1276,20 +1401,31 @@ func (f *Flow) executeNodeChildren(actions map[string]Action, node *Node, output
 					var toolErr bool
 					var matchedTool *Node
 					for _, c := range toolsChildren {
-						if c.Data != nil && c.Data.Label == "tools/"+req.Name {
+						if c.Data == nil {
+							continue
+						}
+						// Match by label with "tools/" prefix (standard tool actions)
+						if c.Data.Label == "tools/"+req.Name {
 							matchedTool = c
 							break
 						}
-						// Also match by config.name or bare label
-						if c.Data != nil {
-							if c.Data.Label == req.Name {
-								matchedTool = c
-								break
-							}
-							if c.Data.Config.Name != nil && *c.Data.Config.Name == req.Name {
-								matchedTool = c
-								break
-							}
+						// Match by bare label (e.g. "linear/add_comment" == "linear_add_comment"
+						// after the same sanitisation applied when building the tool schema)
+						if c.Data.Label == req.Name {
+							matchedTool = c
+							break
+						}
+						// Match by sanitised label — handles non-tools/ actions like
+						// linear/add_comment where the AI sees "linear_add_comment"
+						// but the node label contains slashes
+						sanitised := sanitiseToolName(c.Data.Label)
+						if sanitised == req.Name {
+							matchedTool = c
+							break
+						}
+						if c.Data.Config.Name != nil && *c.Data.Config.Name == req.Name {
+							matchedTool = c
+							break
 						}
 					}
 
@@ -1307,6 +1443,18 @@ func (f *Flow) executeNodeChildren(actions map[string]Action, node *Node, output
 						// We must also clear the cached result for this node
 						// so executeNodeActionOnly re-reads the updated inputs.
 						delete(f.nodeResults, matchedTool.ID)
+
+						// Reset inputs to their original (flow-author) values
+						// before injecting the AI's parameters. This ensures
+						// that a previous tool call's injected values don't
+						// persist and block the current call's parameters.
+						if originals, ok := toolOriginalInputs[matchedTool.ID]; ok {
+							for _, inp := range matchedTool.Data.Config.Inputs {
+								if origVal, exists := originals[inp.Name]; exists {
+									inp.Value = origVal
+								}
+							}
+						}
 
 						for _, inp := range matchedTool.Data.Config.Inputs {
 							// Never allow the AI to override pre-configured
@@ -1480,6 +1628,45 @@ func (f *Flow) executeNodeChildren(actions map[string]Action, node *Node, output
 				children = f.FindTargetByDefaultHandle(node.ID)
 			}
 		}
+	} else if node.Data != nil && (node.Data.Label == "subflow/invoke" || node.Type == "subflow/invoke") {
+		// Sub-flow invocation: dispatch to the matching Begin Sub-Flow,
+		// execute its chain, and merge the results into this node's outputs.
+		// Include all parent outputs (e.g. loop variables like current_index)
+		// so the sub-flow chain can reference them.
+		if sfName, ok := outputs[SubFlowNameKey].(string); ok && sfName != "" {
+			// Collect invoke node's parent outputs to pass through
+			invokeContext := make(map[string]interface{})
+			for _, p := range f.FindSource(node.ID) {
+				if p == nil {
+					continue
+				}
+				if cached, exists := f.nodeResults[p.ID]; exists {
+					for k, v := range cached {
+						invokeContext[k] = v
+					}
+				}
+			}
+			// Overlay the invoke action's own outputs
+			for k, v := range outputs {
+				invokeContext[k] = v
+			}
+			sfOutputs, err := f.executeSubFlow(actions, sfName, invokeContext, environment)
+			if err != nil {
+				return nil, err
+			}
+			// Merge sub-flow results into the invoke node's outputs
+			for k, v := range sfOutputs {
+				if k == "tool_result" || k == SubFlowNameKey {
+					continue
+				}
+				outputs[k] = v
+			}
+			outputs["tool_result"] = fmt.Sprintf("Sub-flow '%s' completed", sfName)
+			outputs["success"] = true
+			outputs["error"] = ""
+			f.nodeResults[node.ID] = outputs
+		}
+		children = f.FindTarget(node.ID)
 	} else {
 		children = f.FindTarget(node.ID)
 	}
@@ -1488,6 +1675,11 @@ func (f *Flow) executeNodeChildren(actions map[string]Action, node *Node, output
 	var validChildren []*Node
 	for _, c := range children {
 		if c.Type != "" && strings.HasPrefix(c.Type, "trigger/") {
+			continue
+		}
+		// Skip Begin Sub-Flow nodes — they only execute when invoked
+		if c.Data != nil && (c.Data.Label == "subflow/begin" ||
+			c.Type == "subflow/begin") {
 			continue
 		}
 		validChildren = append(validChildren, c)
@@ -1519,6 +1711,232 @@ func (f *Flow) executeNodeChildren(actions map[string]Action, node *Node, output
 	}
 
 	return combinedResults, nil
+}
+
+// executeSubFlow finds a Begin Sub-Flow node by name, executes its chain,
+// and returns the outputs from the End Sub-Flow node (or the last node).
+func (f *Flow) executeSubFlow(actions map[string]Action, name string, invokeOutputs map[string]interface{}, environment *environment.Environment) (map[string]interface{}, error) {
+	// Find the Begin Sub-Flow node by name
+	var beginNode *Node
+	for _, n := range f.Nodes {
+		if n == nil || n.Data == nil {
+			continue
+		}
+		if n.Data.Label != "subflow/begin" && n.Type != "subflow/begin" {
+			continue
+		}
+		// Check the "name" input matches
+		for _, inp := range n.Data.Config.Inputs {
+			if inp.Name == "name" {
+				if s, ok := inp.Value.(string); ok && s == name {
+					beginNode = n
+				}
+				break
+			}
+		}
+		if beginNode != nil {
+			break
+		}
+	}
+
+	if beginNode == nil {
+		return nil, fmt.Errorf("sub-flow '%s' not found — add a Begin Sub-Flow node with this name", name)
+	}
+
+	// Recursion guard
+	depthKey := "subflow.depth." + name
+	depth := int64(0)
+	if v, ok := f.GetVariable(depthKey); ok {
+		if d, ok := v.(int64); ok {
+			depth = d
+		}
+	}
+	if depth >= MaxSubFlowDepth {
+		return nil, fmt.Errorf("sub-flow '%s' exceeded maximum recursion depth (%d)", name, MaxSubFlowDepth)
+	}
+	f.SetVariable(depthKey, depth+1)
+	defer f.SetVariable(depthKey, depth)
+
+	// Inject invoke parameters into the Begin node's inputs.
+	// For existing inputs, update their values. For new parameters
+	// from the Invoke node, add them as new connections so the Begin
+	// action can echo them as outputs.
+	for _, inp := range beginNode.Data.Config.Inputs {
+		if inp.Name == "name" {
+			continue
+		}
+		if v, exists := invokeOutputs[inp.Name]; exists {
+			inp.Value = v
+		}
+	}
+	// Add any invoke parameters that don't have matching input connections
+	for k, v := range invokeOutputs {
+		if k == "sub_flow_name" || k == SubFlowNameKey || k == "tool_result" ||
+			k == "success" || k == "error" {
+			continue
+		}
+		found := false
+		for _, inp := range beginNode.Data.Config.Inputs {
+			if inp.Name == k {
+				found = true
+				break
+			}
+		}
+		if !found {
+			beginNode.Data.Config.Inputs = append(beginNode.Data.Config.Inputs,
+				&Connection{Name: k, Type: ConnectionTypeString, Value: v})
+		}
+	}
+
+	// Clear cached results for the sub-flow subgraph so re-invocations
+	// start fresh (important when the same sub-flow is called multiple times).
+	delete(f.nodeResults, beginNode.ID)
+	delete(f.nodeExecutionResults, beginNode.ID)
+	f.clearSubgraphResults(beginNode.ID, "")
+
+	log.WithFields(log.Fields{
+		"name":  name,
+		"begin": beginNode.ID,
+		"depth": depth + 1,
+	}).Info("executing sub-flow")
+
+	// Execute the Begin node and its entire chain
+	_, err := f.ExecuteNode(actions, beginNode, environment)
+	if err != nil {
+		return nil, fmt.Errorf("sub-flow '%s' failed: %w", name, err)
+	}
+
+	// Ensure all invoke parameters are visible in the Begin node's cached
+	// results so downstream sub-flow nodes can reference them via ${param}.
+	if beginResults, ok := f.nodeResults[beginNode.ID]; ok {
+		for k, v := range invokeOutputs {
+			if k == "sub_flow_name" || k == SubFlowNameKey || k == "tool_result" ||
+				k == "success" || k == "error" {
+				continue
+			}
+			if _, exists := beginResults[k]; !exists {
+				beginResults[k] = v
+			}
+		}
+	}
+
+	// Collect results: prefer End Sub-Flow node outputs if one was reached
+	for _, n := range f.Nodes {
+		if n == nil || n.Data == nil {
+			continue
+		}
+		if n.Data.Label != "subflow/end" && n.Type != "subflow/end" {
+			continue
+		}
+		if result, exists := f.nodeResults[n.ID]; exists {
+			return result, nil
+		}
+	}
+
+	// No End node — return the Begin node's outputs as fallback
+	if result, exists := f.nodeResults[beginNode.ID]; exists {
+		return result, nil
+	}
+
+	return map[string]interface{}{}, nil
+}
+
+// isOnUnmatchedBranch checks whether a node is exclusively reachable via
+// an unmatched conditional/switch/loop branch. It walks up from the node
+// through its ancestors looking for branching nodes (conditional, switch,
+// loop) that have already executed. If such a node exists and this node
+// is connected via a handle that wasn't the matched branch, it returns true.
+//
+// This prevents parent resolution from triggering nodes on inactive
+// branches (e.g. STT on the voice path when a text message is being
+// processed).
+func (f *Flow) isOnUnmatchedBranch(nodeID string) bool {
+	// Walk up through ancestors to find any branching node
+	visited := make(map[string]bool)
+	return f.checkUnmatchedBranch(nodeID, visited)
+}
+
+func (f *Flow) checkUnmatchedBranch(nodeID string, visited map[string]bool) bool {
+	if visited[nodeID] {
+		return false
+	}
+	visited[nodeID] = true
+
+	// Check all edges where this node is the target
+	for _, e := range f.Edges {
+		if e == nil || e.Target != nodeID {
+			continue
+		}
+
+		sourceNode := f.FindNode(e.Source)
+		if sourceNode == nil || sourceNode.Data == nil {
+			continue
+		}
+
+		nodeType := sourceNode.Data.Config.Type
+
+		// Check if the source is a branching node (conditional, switch, loop)
+		isBranching := nodeType == ActionTypeConditional ||
+			nodeType == ActionTypeSwitch ||
+			nodeType == ActionTypeLoop
+
+		if isBranching {
+			// If this branching node has already executed, check if our
+			// edge's sourceHandle was the matched branch
+			if branchResult, ok := f.nodeResults[sourceNode.ID]; ok {
+				edgeHandle := e.SourceHandle
+
+				// Determine which handle was matched
+				var matchedHandle string
+				switch nodeType {
+				case ActionTypeSwitch:
+					if mc, ok := branchResult["matched_case"].(string); ok {
+						matchedHandle = mc
+					}
+				case ActionTypeConditional:
+					if result, ok := branchResult["result"].(bool); ok {
+						if result {
+							matchedHandle = "true-branch"
+						} else {
+							matchedHandle = "false-branch"
+						}
+					}
+				case ActionTypeLoop:
+					// Loop body children use "loop" handle, output uses "output"
+					// Both are valid paths, so don't block either
+					continue
+				}
+
+				// If the edge's handle doesn't match the matched branch,
+				// this node is on an unmatched branch
+				if edgeHandle != "" && matchedHandle != "" && edgeHandle != matchedHandle {
+					return true
+				}
+			}
+			// If the branching node hasn't executed yet, we can't determine
+			// if this branch is matched — don't block it
+			continue
+		}
+
+		// Not a branching node — check further up the chain
+		if f.checkUnmatchedBranch(e.Source, visited) {
+			return true
+		}
+	}
+
+	return false
+}
+
+// isEmpty returns true if a value is nil, an empty string, or a zero-length
+// collection. Used when merging parent outputs to prefer non-empty values.
+func isEmpty(v interface{}) bool {
+	if v == nil {
+		return true
+	}
+	if s, ok := v.(string); ok {
+		return s == ""
+	}
+	return false
 }
 
 // clearSubgraphResults removes cached results for all nodes reachable from
@@ -1955,6 +2373,11 @@ var secretPattern = regexp.MustCompile(`\$\{secrets?\.`)
 // runner and API SSE infrastructure to consume. When inputs/outputs are
 // provided (on completion), they are included so the editor can show them
 // in real time without waiting for the full execution to finish.
+// maxEventValueLen is the maximum length of a string value in node events.
+// Values exceeding this are truncated to prevent stdout pipe deadlocks
+// when large binary data (e.g. base64 audio) is included in outputs.
+const maxEventValueLen = 4096
+
 func (f *Flow) emitNodeEvent(id, action, label, status string, durationMs int64, errMsg string, inputs ...map[string]interface{}) {
 	evt := map[string]interface{}{
 		"id":     id,
@@ -1970,13 +2393,28 @@ func (f *Flow) emitNodeEvent(id, action, label, status string, durationMs int64,
 	}
 	// inputs[0] = resolved inputs, inputs[1] = outputs (variadic to keep "running" calls simple)
 	if len(inputs) > 0 && inputs[0] != nil {
-		evt["inputs"] = inputs[0]
+		evt["inputs"] = truncateEventValues(inputs[0])
 	}
 	if len(inputs) > 1 && inputs[1] != nil {
-		evt["outputs"] = inputs[1]
+		evt["outputs"] = truncateEventValues(inputs[1])
 	}
 	b, _ := json.Marshal(evt)
 	fmt.Fprintf(os.Stdout, "__NODE__:%s\n", b)
+}
+
+// truncateEventValues creates a shallow copy of a map with oversized string
+// values truncated. This prevents node events from containing megabytes of
+// base64-encoded binary data that would block the stdout pipe.
+func truncateEventValues(m map[string]interface{}) map[string]interface{} {
+	out := make(map[string]interface{}, len(m))
+	for k, v := range m {
+		if s, ok := v.(string); ok && len(s) > maxEventValueLen {
+			out[k] = s[:maxEventValueLen] + fmt.Sprintf("... [truncated, %d bytes total]", len(s))
+		} else {
+			out[k] = v
+		}
+	}
+	return out
 }
 
 // buildObfuscatedInputMap creates an input map with secret values masked.
