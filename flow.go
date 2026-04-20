@@ -94,6 +94,14 @@ const (
 
 	// MaxToolRoundsDefault is the safety cap on tool calling rounds.
 	MaxToolRoundsDefault = 25
+
+	// SubFlowNameKey is the output key set by subflow/invoke actions.
+	// The engine detects this in executeNodeChildren and dispatches
+	// to the matching subflow/begin node.
+	SubFlowNameKey = "__subflow_name"
+
+	// MaxSubFlowDepth caps recursion for sub-flow invocations.
+	MaxSubFlowDepth = 10
 )
 
 // ToolRequest represents a single tool call from an AI model.
@@ -1584,14 +1592,37 @@ func (f *Flow) executeNodeChildren(actions map[string]Action, node *Node, output
 				children = f.FindTargetByDefaultHandle(node.ID)
 			}
 		}
+	} else if node.Data != nil && (node.Data.Label == "subflow/invoke" || node.Type == "subflow/invoke") {
+		// Sub-flow invocation: dispatch to the matching Begin Sub-Flow,
+		// execute its chain, and merge the results into this node's outputs.
+		if sfName, ok := outputs[SubFlowNameKey].(string); ok && sfName != "" {
+			sfOutputs, err := f.executeSubFlow(actions, sfName, outputs, environment)
+			if err != nil {
+				return nil, err
+			}
+			for k, v := range sfOutputs {
+				if k == "tool_result" || k == SubFlowNameKey {
+					continue
+				}
+				outputs[k] = v
+			}
+			outputs["tool_result"] = fmt.Sprintf("Sub-flow '%s' completed", sfName)
+			outputs["success"] = true
+			outputs["error"] = ""
+			f.nodeResults[node.ID] = outputs
+		}
+		children = f.FindTarget(node.ID)
 	} else {
 		children = f.FindTarget(node.ID)
 	}
 
-	// Filter out trigger nodes from children
+	// Filter out trigger nodes and Begin Sub-Flow nodes from children
 	var validChildren []*Node
 	for _, c := range children {
 		if c.Type != "" && strings.HasPrefix(c.Type, "trigger/") {
+			continue
+		}
+		if c.Data != nil && (c.Data.Label == "subflow/begin" || c.Type == "subflow/begin") {
 			continue
 		}
 		validChildren = append(validChildren, c)
@@ -2080,6 +2111,94 @@ func (f *Flow) collectToolResult(parentID string) string {
 
 // secretPattern matches ${secrets.X} and ${secret.X} variable references.
 var secretPattern = regexp.MustCompile(`\$\{secrets?\.`)
+
+// executeSubFlow finds a Begin Sub-Flow node by name, executes its chain,
+// and returns the outputs from the End Sub-Flow node (or the last node).
+func (f *Flow) executeSubFlow(actions map[string]Action, name string, invokeOutputs map[string]interface{}, environment *environment.Environment) (map[string]interface{}, error) {
+	var beginNode *Node
+	for _, n := range f.Nodes {
+		if n == nil || n.Data == nil {
+			continue
+		}
+		if n.Data.Label != "subflow/begin" && n.Type != "subflow/begin" {
+			continue
+		}
+		for _, inp := range n.Data.Config.Inputs {
+			if inp.Name == "name" {
+				if s, ok := inp.Value.(string); ok && s == name {
+					beginNode = n
+				}
+				break
+			}
+		}
+		if beginNode != nil {
+			break
+		}
+	}
+
+	if beginNode == nil {
+		return nil, fmt.Errorf("sub-flow '%s' not found — add a Begin Sub-Flow node with this name", name)
+	}
+
+	// Recursion guard.
+	depthKey := "subflow.depth." + name
+	depth := int64(0)
+	if v, ok := f.GetVariable(depthKey); ok {
+		if d, ok := v.(int64); ok {
+			depth = d
+		}
+	}
+	if depth >= MaxSubFlowDepth {
+		return nil, fmt.Errorf("sub-flow '%s' exceeded maximum recursion depth (%d)", name, MaxSubFlowDepth)
+	}
+	f.SetVariable(depthKey, depth+1)
+	defer f.SetVariable(depthKey, depth)
+
+	// Inject invoke parameters into the Begin node's inputs.
+	for _, inp := range beginNode.Data.Config.Inputs {
+		if inp.Name == "name" {
+			continue
+		}
+		if v, exists := invokeOutputs[inp.Name]; exists {
+			inp.Value = v
+		}
+	}
+
+	// Clear cached results for the sub-flow subgraph.
+	delete(f.nodeResults, beginNode.ID)
+	delete(f.nodeExecutionResults, beginNode.ID)
+	f.clearSubgraphResults(beginNode.ID, "")
+
+	log.WithFields(log.Fields{
+		"name":  name,
+		"begin": beginNode.ID,
+		"depth": depth + 1,
+	}).Info("executing sub-flow")
+
+	if _, err := f.ExecuteNode(actions, beginNode, environment); err != nil {
+		return nil, fmt.Errorf("sub-flow '%s' failed: %w", name, err)
+	}
+
+	// Collect results: prefer End Sub-Flow node outputs if one was reached.
+	for _, n := range f.Nodes {
+		if n == nil || n.Data == nil {
+			continue
+		}
+		if n.Data.Label != "subflow/end" && n.Type != "subflow/end" {
+			continue
+		}
+		if result, exists := f.nodeResults[n.ID]; exists {
+			return result, nil
+		}
+	}
+
+	// No End node — return the Begin node's outputs as fallback.
+	if result, exists := f.nodeResults[beginNode.ID]; exists {
+		return result, nil
+	}
+
+	return map[string]interface{}{}, nil
+}
 
 // isOnUnmatchedBranch checks whether a node sits on an unmatched
 // Switch or Conditional branch. It walks up through the node's ancestors
