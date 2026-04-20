@@ -13,7 +13,7 @@ const (
 	Author       = "Andy Esser"
 	Organisation = "Flomation"
 	Name         = "Update Issue"
-	Description  = "Update an existing Linear issue. Pass issue UUID and fields to change. Omitted fields are unchanged."
+	Description  = "Update a Linear issue. Accepts UUID or identifier (e.g. ENG-123). Omitted fields are unchanged."
 	Website      = "https://www.flomation.co"
 	Icon         = "linear"
 	Date         = "15/04/2026"
@@ -31,8 +31,8 @@ var Inputs = [...]core.Connection{
 	{
 		Name:        "issue_id",
 		Type:        core.ConnectionTypeString,
-		Label:       "Issue ID",
-		Placeholder: "Issue UUID",
+		Label:       "Issue ID or Identifier",
+		Placeholder: "UUID or ENG-123",
 		Required:    true,
 	},
 	{
@@ -90,6 +90,18 @@ var Inputs = [...]core.Connection{
 		Label:       "Due Date",
 		Placeholder: "YYYY-MM-DD (optional)",
 	},
+	{
+		Name:        "parent_id",
+		Type:        core.ConnectionTypeString,
+		Label:       "Parent Issue ID",
+		Placeholder: "UUID or identifier of parent issue (optional)",
+	},
+	{
+		Name:        "label_ids",
+		Type:        core.ConnectionTypeString,
+		Label:       "Label IDs",
+		Placeholder: "Comma-separated label UUIDs to set (optional)",
+	},
 }
 
 var Outputs = [...]core.Connection{
@@ -107,9 +119,23 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 		return nil, err
 	}
 
-	issueID, err := linear.RequiredString("issue_id", inputs)
+	issueIDRaw, err := linear.RequiredString("issue_id", inputs)
 	if err != nil {
 		return nil, err
+	}
+
+	// Resolve identifier to UUID if needed.
+	issueID := issueIDRaw
+	if isIdentifier(issueIDRaw) {
+		resolved, err := resolveIdentifierToUUID(apiKey, issueIDRaw)
+		if err != nil {
+			return map[string]interface{}{
+				"tool_result": fmt.Sprintf("Could not resolve %s: %s", issueIDRaw, err),
+				"success":     false,
+				"error":       err.Error(),
+			}, nil
+		}
+		issueID = resolved
 	}
 
 	update := map[string]interface{}{}
@@ -148,6 +174,33 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	}
 	if v := linear.OptionalString("due_date", inputs); v != "" {
 		update["dueDate"] = v
+	}
+	if v := linear.OptionalString("parent_id", inputs); v != "" {
+		parentID := v
+		if isIdentifier(v) {
+			resolved, err := resolveIdentifierToUUID(apiKey, v)
+			if err != nil {
+				return map[string]interface{}{
+					"tool_result": fmt.Sprintf("Could not resolve parent %s: %s", v, err),
+					"success":     false,
+					"error":       err.Error(),
+				}, nil
+			}
+			parentID = resolved
+		}
+		update["parentId"] = parentID
+	}
+	if v := linear.OptionalString("label_ids", inputs); v != "" {
+		var ids []string
+		for _, id := range strings.Split(v, ",") {
+			id = strings.TrimSpace(id)
+			if id != "" {
+				ids = append(ids, id)
+			}
+		}
+		if len(ids) > 0 {
+			update["labelIds"] = ids
+		}
 	}
 
 	if len(update) == 0 {
@@ -208,15 +261,24 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 
 // resolveStateName fetches the issue's team, then looks up the workflow
 // state by name (case-insensitive) and returns its UUID.
+// issueID must already be a UUID (caller resolves identifiers first).
 func resolveStateName(apiKey, issueID, stateName string) (string, error) {
-	// Step 1: get the issue's team ID
+	// Step 1: get the issue's team ID.
+	actualID := issueID
+	if isIdentifier(issueID) {
+		resolved, err := resolveIdentifierToUUID(apiKey, issueID)
+		if err != nil {
+			return "", fmt.Errorf("could not resolve %s: %w", issueID, err)
+		}
+		actualID = resolved
+	}
 	issueResp, err := linear.ExecuteGraphQL(apiKey, linear.GraphQLRequest{
 		Query: `query GetIssueTeam($id: String!) {
 			issue(id: $id) {
 				team { id }
 			}
 		}`,
-		Variables: map[string]interface{}{"id": issueID},
+		Variables: map[string]interface{}{"id": actualID},
 	})
 	if err != nil {
 		return "", fmt.Errorf("failed to fetch issue team: %w", err)
@@ -282,4 +344,43 @@ func resolveStateName(apiKey, issueID, stateName string) (string, error) {
 		names = append(names, s.Name)
 	}
 	return "", fmt.Errorf("state '%s' not found. Available states: %s", stateName, strings.Join(names, ", "))
+}
+
+// isIdentifier detects Linear identifiers like ENG-123 vs UUIDs.
+func isIdentifier(s string) bool {
+	return len(s) < 36 && strings.Contains(s, "-") &&
+		len(s) > 0 && !strings.ContainsAny(s[:1], "0123456789")
+}
+
+// resolveIdentifierToUUID converts a Linear identifier (e.g. FLO-123) to a UUID.
+func resolveIdentifierToUUID(apiKey, identifier string) (string, error) {
+	resp, err := linear.ExecuteGraphQL(apiKey, linear.GraphQLRequest{
+		Query: `query ResolveIdentifier($filter: IssueFilter!) {
+			issues(filter: $filter, first: 1) {
+				nodes { id }
+			}
+		}`,
+		Variables: map[string]interface{}{
+			"filter": map[string]interface{}{
+				"identifier": map[string]string{"eq": identifier},
+			},
+		},
+	})
+	if err != nil {
+		return "", err
+	}
+	var result struct {
+		Issues struct {
+			Nodes []struct {
+				ID string `json:"id"`
+			} `json:"nodes"`
+		} `json:"issues"`
+	}
+	if err := json.Unmarshal(resp.Data, &result); err != nil {
+		return "", err
+	}
+	if len(result.Issues.Nodes) == 0 {
+		return "", fmt.Errorf("issue %s not found", identifier)
+	}
+	return result.Issues.Nodes[0].ID, nil
 }

@@ -113,6 +113,7 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	}
 
 	type issueRow struct {
+		ID            string `json:"id"`
 		Identifier    string `json:"identifier"`
 		Title         string `json:"title"`
 		PriorityLabel string `json:"priorityLabel"`
@@ -152,8 +153,8 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 			if len(labels) > 0 {
 				labelStr = fmt.Sprintf(" [%s]", strings.Join(labels, ", "))
 			}
-			fmt.Fprintf(&sb, "• [%s] %s (%s, %s, %s%s)%s\n",
-				row.Identifier, row.Title, row.State.Name, row.PriorityLabel, assignee, due, labelStr)
+			fmt.Fprintf(&sb, "• [%s] %s (id:%s, %s, %s, %s%s)%s\n",
+				row.Identifier, row.Title, row.ID, row.State.Name, row.PriorityLabel, assignee, due, labelStr)
 		}
 		var generic interface{}
 		_ = json.Unmarshal(raw, &generic)

@@ -4344,7 +4344,7 @@
     ]
   },
   "linear/list_issues": {
-    "hash": "43de6f34ad9dea6786c90cb38bbeda56f0e6c3d5a0b5dd901e6899bfdf793f93",
+    "hash": "8d16c71509db5bc7dab1ad31a5aa8c9ccec3b8d0176c3fba3f300af85ab24b7a",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "List Issues",
@@ -4612,7 +4612,7 @@
     ]
   },
   "linear/search_issues": {
-    "hash": "f60bd4c39e18cd624f810b485aa56c4cffca250acc92ea25aa4e4ebb6b0e6a76",
+    "hash": "e419e435d17b0844b66ae3abfd59f2475e5a532319384e7111b046bd62fff550",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Search Issues",
@@ -4690,11 +4690,11 @@
     ]
   },
   "linear/update_issue": {
-    "hash": "ebfb0898333c0ba6b6c832ea3bf5c3400b1a04ee691577e382895894998d1573",
+    "hash": "63fd6d581faabf7236529012983d8095fe0a28a5afd3d3ecc4eb50fa2e29d0b0",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Update Issue",
-    "description": "Update an existing Linear issue. Pass issue UUID and fields to change. Omitted fields are unchanged.",
+    "description": "Update a Linear issue. Accepts UUID or identifier (e.g. ENG-123). Omitted fields are unchanged.",
     "website": "https://www.flomation.co",
     "icon": "linear",
     "date": "15/04/2026",
@@ -4717,8 +4717,8 @@
         "name": "issue_id",
         "type": "string",
         "value": null,
-        "label": "Issue ID",
-        "placeholder": "Issue UUID",
+        "label": "Issue ID or Identifier",
+        "placeholder": "UUID or ENG-123",
         "required": true
       },
       {
@@ -4802,6 +4802,20 @@
         "value": null,
         "label": "Due Date",
         "placeholder": "YYYY-MM-DD (optional)"
+      },
+      {
+        "name": "parent_id",
+        "type": "string",
+        "value": null,
+        "label": "Parent Issue ID",
+        "placeholder": "UUID or identifier of parent issue (optional)"
+      },
+      {
+        "name": "label_ids",
+        "type": "string",
+        "value": null,
+        "label": "Label IDs",
+        "placeholder": "Comma-separated label UUIDs to set (optional)"
       }
     ],
     "outputs": [
