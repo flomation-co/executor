@@ -1271,6 +1271,22 @@ func (f *Flow) executeNodeChildren(actions map[string]Action, node *Node, output
 			// for the final response.
 			responseChildren := f.FindTargetByHandle(node.ID, "output")
 
+			// Snapshot tool node inputs before the loop so we can reset
+			// them between calls. Without this, the first call's injected
+			// values persist and block subsequent calls from receiving
+			// different parameter values from the AI.
+			toolInputSnapshots := make(map[string][]interface{})
+			for _, c := range toolsChildren {
+				if c.Data == nil {
+					continue
+				}
+				var snap []interface{}
+				for _, inp := range c.Data.Config.Inputs {
+					snap = append(snap, inp.Value)
+				}
+				toolInputSnapshots[c.ID] = snap
+			}
+
 			for round := 0; round < maxRounds; round++ {
 				requests, ok := outputs[ToolRequestsKey].([]ToolRequest)
 				if !ok || len(requests) == 0 {
@@ -1379,6 +1395,18 @@ func (f *Flow) executeNodeChildren(actions map[string]Action, node *Node, output
 						}
 						toolErr = true
 					} else {
+						// Reset the matched tool's inputs to their original
+						// snapshotted values before injecting new parameters.
+						// This prevents the previous call's values from
+						// persisting and blocking the current call's values.
+						if snap, ok := toolInputSnapshots[matchedTool.ID]; ok {
+							for i, inp := range matchedTool.Data.Config.Inputs {
+								if i < len(snap) {
+									inp.Value = snap[i]
+								}
+							}
+						}
+
 						// Inject tool input as the matched node's input values.
 						// We must also clear the cached result for this node
 						// so executeNodeActionOnly re-reads the updated inputs.
