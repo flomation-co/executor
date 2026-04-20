@@ -70,7 +70,7 @@
     ]
   },
   "agent/process_extraction": {
-    "hash": "3457b39c9cbd2baf6e0ee67e952cc74157c2ee1ab6f00e880361c89711184160",
+    "hash": "9c2c44393d44ace965a79f631b40006f2aa55ff14b23a286db641064bae706cc",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Process Extraction Output",
@@ -171,6 +171,27 @@
         "type": "integer",
         "value": null,
         "label": "Identities merged",
+        "placeholder": ""
+      },
+      {
+        "name": "schedules_created",
+        "type": "integer",
+        "value": null,
+        "label": "Schedules created",
+        "placeholder": ""
+      },
+      {
+        "name": "schedules_updated",
+        "type": "integer",
+        "value": null,
+        "label": "Schedules updated",
+        "placeholder": ""
+      },
+      {
+        "name": "schedules_deleted",
+        "type": "integer",
+        "value": null,
+        "label": "Schedules deleted",
         "placeholder": ""
       },
       {
@@ -1826,6 +1847,212 @@
         "type": "object",
         "value": null,
         "label": "Renamed Data",
+        "placeholder": ""
+      }
+    ]
+  },
+  "common/format_date": {
+    "hash": "ae5570636d73ae77daf5bdee68880b97153aecceceb63753186e0210fbf34b88",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Format Date",
+    "description": "Format a date/time value or the current time into a string",
+    "website": "https://www.flomation.co",
+    "icon": "calendar",
+    "date": "19/04/2026",
+    "type": 2,
+    "category": {
+      "name": "Common",
+      "icon": "toolbox",
+      "description": "General-purpose data utilities"
+    },
+    "inputs": [
+      {
+        "name": "datetime",
+        "type": "string",
+        "value": null,
+        "label": "Date/Time",
+        "placeholder": "Leave empty for current time"
+      },
+      {
+        "name": "input_format",
+        "type": "string",
+        "value": null,
+        "label": "Input Format",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "ISO 8601 (2006-01-02T15:04:05Z07:00)",
+            "value": "iso8601"
+          },
+          {
+            "name": "RFC 2822 (Mon, 02 Jan 2006 15:04:05 -0700)",
+            "value": "rfc2822"
+          },
+          {
+            "name": "Unix Timestamp (seconds)",
+            "value": "unix"
+          },
+          {
+            "name": "Date Only (2006-01-02)",
+            "value": "date"
+          },
+          {
+            "name": "Custom",
+            "value": "custom"
+          }
+        ]
+      },
+      {
+        "name": "custom_input_format",
+        "type": "string",
+        "value": null,
+        "label": "Custom Input Format (Go layout)",
+        "placeholder": "2006-01-02 15:04:05"
+      },
+      {
+        "name": "output_format",
+        "type": "string",
+        "value": null,
+        "label": "Output Format",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "ISO 8601 (2006-01-02T15:04:05Z07:00)",
+            "value": "iso8601"
+          },
+          {
+            "name": "RFC 2822 (Mon, 02 Jan 2006 15:04:05 -0700)",
+            "value": "rfc2822"
+          },
+          {
+            "name": "Date Only (2006-01-02)",
+            "value": "date"
+          },
+          {
+            "name": "Time Only (15:04:05)",
+            "value": "time"
+          },
+          {
+            "name": "Friendly (02 Jan 2006, 15:04)",
+            "value": "friendly"
+          },
+          {
+            "name": "Day/Month/Year (02/01/2006)",
+            "value": "dmy"
+          },
+          {
+            "name": "Month/Day/Year (01/02/2006)",
+            "value": "mdy"
+          },
+          {
+            "name": "Unix Timestamp",
+            "value": "unix"
+          },
+          {
+            "name": "Custom",
+            "value": "custom"
+          }
+        ]
+      },
+      {
+        "name": "custom_output_format",
+        "type": "string",
+        "value": null,
+        "label": "Custom Output Format (Go layout)",
+        "placeholder": "Monday, 02 January 2006"
+      },
+      {
+        "name": "timezone",
+        "type": "string",
+        "value": null,
+        "label": "Timezone",
+        "placeholder": "UTC (e.g. Europe/London, America/New_York)"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "string",
+        "value": null,
+        "label": "Formatted Date",
+        "placeholder": ""
+      },
+      {
+        "name": "year",
+        "type": "integer",
+        "value": null,
+        "label": "Year",
+        "placeholder": ""
+      },
+      {
+        "name": "month",
+        "type": "integer",
+        "value": null,
+        "label": "Month",
+        "placeholder": ""
+      },
+      {
+        "name": "day",
+        "type": "integer",
+        "value": null,
+        "label": "Day",
+        "placeholder": ""
+      },
+      {
+        "name": "hour",
+        "type": "integer",
+        "value": null,
+        "label": "Hour",
+        "placeholder": ""
+      },
+      {
+        "name": "minute",
+        "type": "integer",
+        "value": null,
+        "label": "Minute",
+        "placeholder": ""
+      },
+      {
+        "name": "second",
+        "type": "integer",
+        "value": null,
+        "label": "Second",
+        "placeholder": ""
+      },
+      {
+        "name": "day_of_week",
+        "type": "string",
+        "value": null,
+        "label": "Day of Week",
+        "placeholder": ""
+      },
+      {
+        "name": "unix_timestamp",
+        "type": "integer",
+        "value": null,
+        "label": "Unix Timestamp",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
         "placeholder": ""
       }
     ]
@@ -4750,7 +4977,7 @@
     ]
   },
   "messaging/slack": {
-    "hash": "fe830827d9e99742477567408d727bf156864d299a0e38b336c0cdb84374358d",
+    "hash": "4c89c26c03f0cc12f676a7d81ebc5f4bdc6513e6fd78142088c78a9092207086",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Send Slack Message",
@@ -4850,7 +5077,7 @@
     ]
   },
   "messaging/telegram": {
-    "hash": "a49ca52512dde92a045c3314bcb899c5fd0e4bedbde980885b897ccbe9719c7d",
+    "hash": "dcccc54a50c9691e2d21196c4f12935c23c889279e95f2e0125f2b7d27dac76a",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Send Telegram Message",

@@ -102,7 +102,12 @@ import (
 	tools_email_reply "flomation.app/automate/executor/actions/tools/email_reply"
 	tools_email_send "flomation.app/automate/executor/actions/tools/email_send"
 	tools_google_accounts "flomation.app/automate/executor/actions/tools/google_accounts"
+	tools_slack_channels "flomation.app/automate/executor/actions/tools/slack_channels"
+	tools_slack_file_upload "flomation.app/automate/executor/actions/tools/slack_file_upload"
 	tools_slack_rich_message "flomation.app/automate/executor/actions/tools/slack_rich_message"
+	tools_slack_search "flomation.app/automate/executor/actions/tools/slack_search"
+	tools_slack_user_profile "flomation.app/automate/executor/actions/tools/slack_user_profile"
+	tools_slack_users "flomation.app/automate/executor/actions/tools/slack_users"
 	tools_web_fetch "flomation.app/automate/executor/actions/tools/web_fetch"
 	tools_web_search "flomation.app/automate/executor/actions/tools/web_search"
 	trigger_email "flomation.app/automate/executor/actions/trigger/email"
@@ -216,7 +221,12 @@ var Actions = map[string]core.Action{
 	"tools/email_reply":           tools_email_reply.Execute,
 	"tools/email_send":            tools_email_send.Execute,
 	"tools/google_accounts":       tools_google_accounts.Execute,
+	"tools/slack_channels":        tools_slack_channels.Execute,
+	"tools/slack_file_upload":     tools_slack_file_upload.Execute,
 	"tools/slack_rich_message":    tools_slack_rich_message.Execute,
+	"tools/slack_search":          tools_slack_search.Execute,
+	"tools/slack_user_profile":    tools_slack_user_profile.Execute,
+	"tools/slack_users":           tools_slack_users.Execute,
 	"tools/web_fetch":             tools_web_fetch.Execute,
 	"tools/web_search":            tools_web_search.Execute,
 	"trigger/email":               trigger_email.Execute,
