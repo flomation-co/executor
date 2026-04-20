@@ -11,7 +11,7 @@ const (
 	Name         = "Slack Trigger"
 	Description  = "Triggers a flow when a Slack message or app mention is received"
 	Website      = "https://www.flomation.co"
-	Icon         = "hashtag"
+	Icon         = "slack"
 	Date         = "03/04/2026"
 	Type         = core.ActionTypeTrigger
 )

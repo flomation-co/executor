@@ -4977,13 +4977,13 @@
     ]
   },
   "messaging/slack": {
-    "hash": "4c89c26c03f0cc12f676a7d81ebc5f4bdc6513e6fd78142088c78a9092207086",
+    "hash": "b8bc3561c3be2f9a65cbba8b03c721bcb6c69b6f3cde0da9e9f6a2763b252291",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Send Slack Message",
     "description": "Send a message to a Slack channel via the Bot API with mrkdwn formatting and optional Block Kit layouts",
     "website": "https://www.flomation.co",
-    "icon": "hashtag",
+    "icon": "slack",
     "date": "03/04/2026",
     "type": 2,
     "category": {
@@ -5648,13 +5648,13 @@
     "outputs": null
   },
   "output/slack_webhook": {
-    "hash": "30189d299c25053bbbac1406fa2a3756e4b952bf540040c157e3be0cdf6e9b4e",
+    "hash": "271ff3c2b66b46591980953e87bf1800c6f9360cabe084cf232639dd55bfddf1",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Slack Webhook",
     "description": "Send a message to a Slack channel via webhook with mrkdwn formatting and optional Block Kit layouts",
     "website": "https://www.flomation.co",
-    "icon": "hashtag",
+    "icon": "slack",
     "date": "23/03/2026",
     "type": 2,
     "category": {
@@ -9428,13 +9428,13 @@
     ]
   },
   "trigger/slack": {
-    "hash": "71f4748d41beea0976e746946a83aa69f1fa84899ee85d0f45e33124266dfa46",
+    "hash": "f00b9d4be8b99edae2b25e5a62e74f65ab0101ff89cf723b6101eb39327bda03",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Slack Trigger",
     "description": "Triggers a flow when a Slack message or app mention is received",
     "website": "https://www.flomation.co",
-    "icon": "hashtag",
+    "icon": "slack",
     "date": "03/04/2026",
     "type": 1,
     "category": {

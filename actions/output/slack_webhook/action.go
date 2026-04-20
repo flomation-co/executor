@@ -18,7 +18,7 @@ const (
 	Name         = "Slack Webhook"
 	Description  = "Send a message to a Slack channel via webhook with mrkdwn formatting and optional Block Kit layouts"
 	Website      = "https://www.flomation.co"
-	Icon         = "hashtag"
+	Icon         = "slack"
 	Date         = "23/03/2026"
 	Type         = core.ActionTypeAction
 )
