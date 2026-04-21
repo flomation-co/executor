@@ -720,11 +720,22 @@ func (f *Flow) executeOnErrorChain(actions map[string]Action, flowErr error, env
 	// Prevent re-entrancy: errors in the error chain must not trigger it again
 	f.inErrorChain = true
 
-	// Add the On Error node and its descendants to the reachable set so
-	// that parent resolution within the error chain doesn't skip them.
+	// Add the On Error node, its descendants, AND their parents to the
+	// reachable set. Parents matter because error chain nodes may have
+	// upstream dependencies (e.g. Format Date → Slack) that aren't
+	// reachable from the entry trigger via forward BFS.
 	if f.reachableNodes != nil {
-		for id := range f.computeReachable(onErrorNode.ID) {
+		errorReachable := f.computeReachable(onErrorNode.ID)
+		for id := range errorReachable {
 			f.reachableNodes[id] = true
+		}
+		// Also add parents of error-chain nodes so parent resolution works.
+		for id := range errorReachable {
+			for _, e := range f.Edges {
+				if e != nil && e.Target == id && !f.reachableNodes[e.Source] {
+					f.reachableNodes[e.Source] = true
+				}
+			}
 		}
 	}
 
