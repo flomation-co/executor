@@ -11,6 +11,7 @@ import (
 	"io"
 	"mime/multipart"
 	"net/http"
+	"strings"
 	"time"
 
 	core "flomation.app/automate/executor"
@@ -77,8 +78,15 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	}
 
 	audioB64 := optionalString("audio_base64", inputs)
-	if audioB64 == "" {
-		return errResult("audio_base64 is required — wire an ElevenLabs TTS or other audio action upstream")
+	if audioB64 == "" || strings.HasPrefix(audioB64, "${") {
+		// Empty or unresolved variable — the TTS upstream likely hasn't run
+		// (or the subgraph was re-executed after cache clearance). Skip gracefully.
+		return map[string]interface{}{
+			"tool_result": "no audio to send (empty or unresolved audio_base64)",
+			"message_id":  0,
+			"success":     true,
+			"error":       "",
+		}, nil
 	}
 
 	caption := optionalString("caption", inputs)
