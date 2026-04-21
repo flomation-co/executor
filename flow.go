@@ -858,6 +858,15 @@ func (f *Flow) executeNodeActionOnly(actions map[string]Action, node *Node, envi
 		}
 
 		for k, v := range results {
+			// Non-empty values take precedence: if we already have a non-empty
+			// value for this key, don't overwrite it with an empty one.
+			// This prevents a switch pass-through of content="" from clobbering
+			// a data_rename's content="actual text" when both are parents.
+			if existing, has := parentResults[k]; has {
+				if isEmpty(v) && !isEmpty(existing) {
+					continue
+				}
+			}
 			parentResults[k] = v
 		}
 	}
@@ -2118,6 +2127,17 @@ func (f *Flow) collectToolResult(parentID string) string {
 }
 
 // secretPattern matches ${secrets.X} and ${secret.X} variable references.
+// isEmpty checks if a value is considered empty for parent merge purposes.
+func isEmpty(v interface{}) bool {
+	if v == nil {
+		return true
+	}
+	if s, ok := v.(string); ok {
+		return s == ""
+	}
+	return false
+}
+
 var secretPattern = regexp.MustCompile(`\$\{secrets?\.`)
 
 // executeSubFlow finds a Begin Sub-Flow node by name, executes its chain,
