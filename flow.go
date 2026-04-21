@@ -583,6 +583,14 @@ func (f *Flow) InjectTriggerData(data map[string]interface{}) {
 				targetNode = n
 				break
 			}
+			// Sub-type fallback: telegram_voice → trigger/telegram
+			if strings.Contains(channelType, "_") {
+				baseType := channelType[:strings.LastIndex(channelType, "_")]
+				if label == "trigger/"+baseType {
+					targetNode = n
+					break
+				}
+			}
 		}
 
 		// Record first trigger as fallback
