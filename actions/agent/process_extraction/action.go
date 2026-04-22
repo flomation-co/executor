@@ -98,6 +98,13 @@ var Inputs = [...]core.Connection{
 		Placeholder: "${trigger.message_id}",
 		Required:    false,
 	},
+	{
+		Name:        "channel_type",
+		Type:        core.ConnectionTypeString,
+		Label:       "Channel Type",
+		Placeholder: "${trigger.channel_type}",
+		Required:    false,
+	},
 }
 
 var Outputs = [...]core.Connection{
@@ -224,6 +231,7 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	agentUserID := optionalString("agent_user_id", inputs)
 	conversationID := optionalString("conversation_id", inputs)
 	sourceMessageID := optionalString("source_message_id", inputs)
+	channelType := optionalString("channel_type", inputs)
 
 	result := extractionResult{}
 
@@ -231,7 +239,7 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	processPendingActions(flow, ctx, agentID, agentUserID, conversationID, sourceMessageID, payload.ProposedActions, &result)
 	processCommitments(flow, ctx, agentID, agentUserID, conversationID, sourceMessageID, payload.Commitments, &result)
 	processConfirmations(flow, ctx, agentID, agentUserID, payload.Confirmations, &result)
-	processSchedules(flow, ctx, agentID, agentUserID, conversationID, payload.Schedules, &result)
+	processSchedules(flow, ctx, agentID, agentUserID, conversationID, channelType, payload.Schedules, &result)
 
 	return map[string]interface{}{
 		"memories_written":        result.MemoriesWritten,
@@ -902,7 +910,7 @@ func patchJSON(flow *core.Flow, ctx *core.ExecutionContext, path string, body ma
 
 func processSchedules(
 	flow *core.Flow, ctx *core.ExecutionContext,
-	agentID, agentUserID, conversationID string,
+	agentID, agentUserID, conversationID, channelType string,
 	schedules []extractionSchedule, result *extractionResult,
 ) {
 	if len(schedules) == 0 {
@@ -920,7 +928,7 @@ func processSchedules(
 
 		switch s.Action {
 		case "create":
-			createSchedule(flow, ctx, agentID, agentUserID, conversationID, s, result)
+			createSchedule(flow, ctx, agentID, agentUserID, conversationID, channelType, s, result)
 		case "update":
 			updateSchedule(flow, ctx, agentID, s, result)
 		case "delete":
@@ -931,7 +939,7 @@ func processSchedules(
 
 func createSchedule(
 	flow *core.Flow, ctx *core.ExecutionContext,
-	agentID, agentUserID, conversationID string,
+	agentID, agentUserID, conversationID, channelType string,
 	s *extractionSchedule, result *extractionResult,
 ) {
 	// Validate mode.
@@ -990,6 +998,9 @@ func createSchedule(
 	}
 	if s.Timezone != "" {
 		body["timezone"] = s.Timezone
+	}
+	if channelType != "" {
+		body["source_channel"] = channelType
 	}
 
 	path := fmt.Sprintf("/api/v1/internal/agent/%s/schedule", agentID)
