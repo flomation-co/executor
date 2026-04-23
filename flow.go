@@ -1943,6 +1943,7 @@ func (f *Flow) injectToolDefinitions(aiNode *Node, toolNodes []*Node, actions ma
 	}
 
 	var tools []map[string]interface{}
+	seenToolNames := make(map[string]bool)
 
 	for _, toolNode := range toolNodes {
 		if toolNode.Data == nil {
@@ -1956,6 +1957,12 @@ func (f *Flow) injectToolDefinitions(aiNode *Node, toolNodes []*Node, actions ma
 			toolName = strings.TrimPrefix(toolName, "tools/")
 		}
 		toolName = sanitiseToolName(toolName)
+
+		// Skip duplicate tool names — Anthropic requires unique names
+		if seenToolNames[toolName] {
+			continue
+		}
+		seenToolNames[toolName] = true
 
 		// Description: prefer manifest description (truncated to save tokens),
 		// fall back to config.Name, then the tool name itself.

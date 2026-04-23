@@ -18,10 +18,10 @@ import (
 const (
 	Author       = "Andy Esser"
 	Organisation = "Flomation"
-	Name         = "Email Reply"
+	Name         = "Gmail Reply"
 	Description  = "Reply to an existing email. Requires the email_id from a previous email_read. Preserves the thread so the reply appears in the correct conversation."
 	Website      = "https://www.flomation.co"
-	Icon         = "envelope"
+	Icon         = "gmail"
 	Date         = "08/04/2026"
 	Type         = core.ActionTypeAction
 

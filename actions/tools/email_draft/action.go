@@ -17,10 +17,10 @@ import (
 const (
 	Author       = "Andy Esser"
 	Organisation = "Flomation"
-	Name         = "Email Draft"
+	Name         = "Gmail Draft"
 	Description  = "Manage Gmail drafts: create a new draft, list existing drafts, update a draft, or delete one. Use action='create' to compose without sending, 'list' to see drafts, 'update' to modify, 'delete' to remove."
 	Website      = "https://www.flomation.co"
-	Icon         = "envelope"
+	Icon         = "gmail"
 	Date         = "08/04/2026"
 	Type         = core.ActionTypeAction
 
