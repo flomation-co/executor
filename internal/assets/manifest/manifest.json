@@ -70,7 +70,7 @@
     ]
   },
   "agent/process_extraction": {
-    "hash": "9c2c44393d44ace965a79f631b40006f2aa55ff14b23a286db641064bae706cc",
+    "hash": "e40e0998c996ffe6c0866179d175d203bc096f829ece36ed33d950f9be9b9702",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Process Extraction Output",
@@ -121,6 +121,13 @@
         "value": null,
         "label": "Source Message ID",
         "placeholder": "${trigger.message_id}"
+      },
+      {
+        "name": "channel_type",
+        "type": "string",
+        "value": null,
+        "label": "Channel Type",
+        "placeholder": "${trigger.channel_type}"
       }
     ],
     "outputs": [
@@ -7671,13 +7678,13 @@
     ]
   },
   "tools/email_draft": {
-    "hash": "a08ac1e928935988a73414bf9fe8a6737fec28001459bf31796d50f7561400d9",
+    "hash": "612a023a3ce66447779e3cb34ce9855a9a49dc06a9655a1fa6acc4434a49d4d0",
     "author": "Andy Esser",
     "organisation": "Flomation",
-    "name": "Email Draft",
+    "name": "Gmail Draft",
     "description": "Manage Gmail drafts: create a new draft, list existing drafts, update a draft, or delete one. Use action='create' to compose without sending, 'list' to see drafts, 'update' to modify, 'delete' to remove.",
     "website": "https://www.flomation.co",
-    "icon": "envelope",
+    "icon": "gmail",
     "date": "08/04/2026",
     "type": 2,
     "category": {
@@ -7787,13 +7794,13 @@
     ]
   },
   "tools/email_read": {
-    "hash": "c0bf8021d6b6f70c8642a55a787ce7cc7156f2478ecad0d303d3244b66f54dbd",
+    "hash": "1b6b45e0c0fe672ec37ad3f87290bf0592467600bf2b633a4eb4c6e61eda15bb",
     "author": "Andy Esser",
     "organisation": "Flomation",
-    "name": "Email Read",
+    "name": "Gmail Read",
     "description": "Search and read the USER's emails from their connected Gmail. When the user says 'my emails' or 'check my inbox', use this tool — it reads THEIR mailbox. Use Gmail search (e.g. 'is:unread newer_than:1d', 'from:someone') or email_id for a specific message.",
     "website": "https://www.flomation.co",
-    "icon": "envelope",
+    "icon": "gmail",
     "date": "08/04/2026",
     "type": 2,
     "category": {
@@ -7870,13 +7877,13 @@
     ]
   },
   "tools/email_reply": {
-    "hash": "445d15cec37c5179d672b732cecb884ff8cddbd79d85df4a289bf616618d0d75",
+    "hash": "4e45b2453dba9f94d461b32988ceb774e614656e5e9910bf1b5500667683a76d",
     "author": "Andy Esser",
     "organisation": "Flomation",
-    "name": "Email Reply",
+    "name": "Gmail Reply",
     "description": "Reply to an existing email. Requires the email_id from a previous email_read. Preserves the thread so the reply appears in the correct conversation.",
     "website": "https://www.flomation.co",
-    "icon": "envelope",
+    "icon": "gmail",
     "date": "08/04/2026",
     "type": 2,
     "category": {
@@ -7955,13 +7962,13 @@
     ]
   },
   "tools/email_send": {
-    "hash": "9abcc8ba02b1ed0d3ce5d8cb2d23ff532a509ce6b55d2906c4462eb62dcbe0b9",
+    "hash": "a49b75265517518ab1a5c117e9c935eb74036326939f1cc61e61fafb11b1034b",
     "author": "Andy Esser",
     "organisation": "Flomation",
-    "name": "Email Send",
+    "name": "Gmail Send",
     "description": "Send an email. Default sends from agent's account. Set account to user's email to send on their behalf.",
     "website": "https://www.flomation.co",
-    "icon": "envelope",
+    "icon": "gmail",
     "date": "08/04/2026",
     "type": 2,
     "category": {
