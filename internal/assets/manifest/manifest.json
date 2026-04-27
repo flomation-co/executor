@@ -3837,6 +3837,5028 @@
       }
     ]
   },
+  "github/add_issue_comment": {
+    "hash": "521a39f637f2d9a7d05973cbe54c262c72190e135bbf79e0c9714ece419e10df",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "GitHub Add Issue Comment",
+    "description": "Add a comment to a GitHub issue",
+    "website": "https://www.flomation.co",
+    "icon": "github",
+    "date": "26/04/2026",
+    "type": 2,
+    "category": {
+      "name": "GitHub",
+      "icon": "github",
+      "description": "Manage pull requests, workflows, and issues in GitHub"
+    },
+    "inputs": [
+      {
+        "name": "access_token",
+        "type": "string",
+        "value": null,
+        "label": "GitHub Access Token",
+        "placeholder": "ghp_...",
+        "required": true
+      },
+      {
+        "name": "base_url",
+        "type": "string",
+        "value": null,
+        "label": "GitHub API Base URL",
+        "placeholder": "https://api.github.com"
+      },
+      {
+        "name": "owner",
+        "type": "string",
+        "value": null,
+        "label": "Repository Owner",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "repo",
+        "type": "string",
+        "value": null,
+        "label": "Repository Name",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "issue_number",
+        "type": "string",
+        "value": null,
+        "label": "Issue Number",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "body",
+        "type": "text",
+        "value": null,
+        "label": "Comment Body",
+        "placeholder": "Markdown comment text",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "comment_id",
+        "type": "string",
+        "value": null,
+        "label": "Comment ID",
+        "placeholder": ""
+      },
+      {
+        "name": "html_url",
+        "type": "string",
+        "value": null,
+        "label": "Comment URL",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "github/add_pull_request_comment": {
+    "hash": "27094f393ee7a33b1988dde8c01ac5a39d25fc183469775c40e6400cb3d905f5",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "GitHub Add PR Comment",
+    "description": "Add a comment to a GitHub pull request",
+    "website": "https://www.flomation.co",
+    "icon": "github",
+    "date": "26/04/2026",
+    "type": 2,
+    "category": {
+      "name": "GitHub",
+      "icon": "github",
+      "description": "Manage pull requests, workflows, and issues in GitHub"
+    },
+    "inputs": [
+      {
+        "name": "access_token",
+        "type": "string",
+        "value": null,
+        "label": "GitHub Access Token",
+        "placeholder": "ghp_...",
+        "required": true
+      },
+      {
+        "name": "base_url",
+        "type": "string",
+        "value": null,
+        "label": "GitHub API Base URL",
+        "placeholder": "https://api.github.com"
+      },
+      {
+        "name": "owner",
+        "type": "string",
+        "value": null,
+        "label": "Repository Owner",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "repo",
+        "type": "string",
+        "value": null,
+        "label": "Repository Name",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "pull_number",
+        "type": "string",
+        "value": null,
+        "label": "Pull Request Number",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "body",
+        "type": "text",
+        "value": null,
+        "label": "Comment Body",
+        "placeholder": "Markdown comment text",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "comment_id",
+        "type": "string",
+        "value": null,
+        "label": "Comment ID",
+        "placeholder": ""
+      },
+      {
+        "name": "html_url",
+        "type": "string",
+        "value": null,
+        "label": "Comment URL",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "github/cancel_workflow_run": {
+    "hash": "dc384790d9eb0fc31f7ab2fbc0692be3fad608223b07ab6478c0ef4bc4b835db",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "GitHub Cancel Workflow Run",
+    "description": "Cancel a running GitHub Actions workflow run",
+    "website": "https://www.flomation.co",
+    "icon": "github",
+    "date": "26/04/2026",
+    "type": 2,
+    "category": {
+      "name": "GitHub",
+      "icon": "github",
+      "description": "Manage pull requests, workflows, and issues in GitHub"
+    },
+    "inputs": [
+      {
+        "name": "access_token",
+        "type": "string",
+        "value": null,
+        "label": "GitHub Access Token",
+        "placeholder": "ghp_...",
+        "required": true
+      },
+      {
+        "name": "base_url",
+        "type": "string",
+        "value": null,
+        "label": "GitHub API Base URL",
+        "placeholder": "https://api.github.com"
+      },
+      {
+        "name": "owner",
+        "type": "string",
+        "value": null,
+        "label": "Repository Owner",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "repo",
+        "type": "string",
+        "value": null,
+        "label": "Repository Name",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "run_id",
+        "type": "string",
+        "value": null,
+        "label": "Run ID",
+        "placeholder": "",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "github/create_issue": {
+    "hash": "7c1a6d61912fc50eaa17defd5a71e124b32892ff66ada397c1ea3e1c1383aeea",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "GitHub Create Issue",
+    "description": "Create a new issue in a GitHub repository",
+    "website": "https://www.flomation.co",
+    "icon": "github",
+    "date": "26/04/2026",
+    "type": 2,
+    "category": {
+      "name": "GitHub",
+      "icon": "github",
+      "description": "Manage pull requests, workflows, and issues in GitHub"
+    },
+    "inputs": [
+      {
+        "name": "access_token",
+        "type": "string",
+        "value": null,
+        "label": "GitHub Access Token",
+        "placeholder": "ghp_...",
+        "required": true
+      },
+      {
+        "name": "base_url",
+        "type": "string",
+        "value": null,
+        "label": "GitHub API Base URL",
+        "placeholder": "https://api.github.com"
+      },
+      {
+        "name": "owner",
+        "type": "string",
+        "value": null,
+        "label": "Repository Owner",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "repo",
+        "type": "string",
+        "value": null,
+        "label": "Repository Name",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "title",
+        "type": "string",
+        "value": null,
+        "label": "Title",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "body",
+        "type": "text",
+        "value": null,
+        "label": "Body",
+        "placeholder": ""
+      },
+      {
+        "name": "labels",
+        "type": "string",
+        "value": null,
+        "label": "Labels",
+        "placeholder": "Comma-separated label names"
+      },
+      {
+        "name": "assignees",
+        "type": "string",
+        "value": null,
+        "label": "Assignees",
+        "placeholder": "Comma-separated usernames"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "issue_number",
+        "type": "string",
+        "value": null,
+        "label": "Issue Number",
+        "placeholder": ""
+      },
+      {
+        "name": "html_url",
+        "type": "string",
+        "value": null,
+        "label": "HTML URL",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "github/create_pull_request": {
+    "hash": "e51df21dd3a6e9af8c5ebb7054055fe397134bb2a01bd682746100404048105c",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "GitHub Create Pull Request",
+    "description": "Create a new pull request in a GitHub repository",
+    "website": "https://www.flomation.co",
+    "icon": "github",
+    "date": "26/04/2026",
+    "type": 2,
+    "category": {
+      "name": "GitHub",
+      "icon": "github",
+      "description": "Manage pull requests, workflows, and issues in GitHub"
+    },
+    "inputs": [
+      {
+        "name": "access_token",
+        "type": "string",
+        "value": null,
+        "label": "GitHub Access Token",
+        "placeholder": "ghp_...",
+        "required": true
+      },
+      {
+        "name": "base_url",
+        "type": "string",
+        "value": null,
+        "label": "GitHub API Base URL",
+        "placeholder": "https://api.github.com"
+      },
+      {
+        "name": "owner",
+        "type": "string",
+        "value": null,
+        "label": "Repository Owner",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "repo",
+        "type": "string",
+        "value": null,
+        "label": "Repository Name",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "title",
+        "type": "string",
+        "value": null,
+        "label": "Title",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "head",
+        "type": "string",
+        "value": null,
+        "label": "Head Branch",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "base",
+        "type": "string",
+        "value": null,
+        "label": "Base Branch",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "body",
+        "type": "text",
+        "value": null,
+        "label": "Description",
+        "placeholder": ""
+      },
+      {
+        "name": "draft",
+        "type": "boolean",
+        "value": null,
+        "label": "Draft PR",
+        "placeholder": ""
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "pull_number",
+        "type": "string",
+        "value": null,
+        "label": "Pull Request Number",
+        "placeholder": ""
+      },
+      {
+        "name": "html_url",
+        "type": "string",
+        "value": null,
+        "label": "HTML URL",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "github/create_pull_request_review": {
+    "hash": "caf7fe4079548ab3b0c3076f707e897c47b29f0dbdf3b70bc1e6826c2bed8fbc",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "GitHub Create PR Review",
+    "description": "Submit a review on a GitHub pull request (approve, request changes, or comment)",
+    "website": "https://www.flomation.co",
+    "icon": "github",
+    "date": "26/04/2026",
+    "type": 2,
+    "category": {
+      "name": "GitHub",
+      "icon": "github",
+      "description": "Manage pull requests, workflows, and issues in GitHub"
+    },
+    "inputs": [
+      {
+        "name": "access_token",
+        "type": "string",
+        "value": null,
+        "label": "GitHub Access Token",
+        "placeholder": "ghp_...",
+        "required": true
+      },
+      {
+        "name": "base_url",
+        "type": "string",
+        "value": null,
+        "label": "GitHub API Base URL",
+        "placeholder": "https://api.github.com"
+      },
+      {
+        "name": "owner",
+        "type": "string",
+        "value": null,
+        "label": "Repository Owner",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "repo",
+        "type": "string",
+        "value": null,
+        "label": "Repository Name",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "pull_number",
+        "type": "string",
+        "value": null,
+        "label": "Pull Request Number",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "event",
+        "type": "string",
+        "value": null,
+        "label": "Review Event",
+        "placeholder": "",
+        "required": true,
+        "options": [
+          {
+            "name": "Approve",
+            "value": "APPROVE"
+          },
+          {
+            "name": "Request Changes",
+            "value": "REQUEST_CHANGES"
+          },
+          {
+            "name": "Comment",
+            "value": "COMMENT"
+          }
+        ]
+      },
+      {
+        "name": "body",
+        "type": "text",
+        "value": null,
+        "label": "Review Body",
+        "placeholder": "Review comment (required for REQUEST_CHANGES)"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "review_id",
+        "type": "string",
+        "value": null,
+        "label": "Review ID",
+        "placeholder": ""
+      },
+      {
+        "name": "state",
+        "type": "string",
+        "value": null,
+        "label": "Review State",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "github/delete_pull_request_comment": {
+    "hash": "19b598f3089ead40e18cab869e7de53407d6951f0936df5dfd74a4726a5f5fe2",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "GitHub Delete PR Comment",
+    "description": "Remove a comment from a GitHub pull request",
+    "website": "https://www.flomation.co",
+    "icon": "github",
+    "date": "26/04/2026",
+    "type": 2,
+    "category": {
+      "name": "GitHub",
+      "icon": "github",
+      "description": "Manage pull requests, workflows, and issues in GitHub"
+    },
+    "inputs": [
+      {
+        "name": "access_token",
+        "type": "string",
+        "value": null,
+        "label": "GitHub Access Token",
+        "placeholder": "ghp_...",
+        "required": true
+      },
+      {
+        "name": "base_url",
+        "type": "string",
+        "value": null,
+        "label": "GitHub API Base URL",
+        "placeholder": "https://api.github.com"
+      },
+      {
+        "name": "owner",
+        "type": "string",
+        "value": null,
+        "label": "Repository Owner",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "repo",
+        "type": "string",
+        "value": null,
+        "label": "Repository Name",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "comment_id",
+        "type": "string",
+        "value": null,
+        "label": "Comment ID",
+        "placeholder": "",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "github/dismiss_pull_request_review": {
+    "hash": "92b0c5e595cc53b56dfbe2c981d8285b418b0b9bbe6842c24da2617e9b7e0d4d",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "GitHub Dismiss PR Review",
+    "description": "Dismiss a review on a GitHub pull request",
+    "website": "https://www.flomation.co",
+    "icon": "github",
+    "date": "26/04/2026",
+    "type": 2,
+    "category": {
+      "name": "GitHub",
+      "icon": "github",
+      "description": "Manage pull requests, workflows, and issues in GitHub"
+    },
+    "inputs": [
+      {
+        "name": "access_token",
+        "type": "string",
+        "value": null,
+        "label": "GitHub Access Token",
+        "placeholder": "ghp_...",
+        "required": true
+      },
+      {
+        "name": "base_url",
+        "type": "string",
+        "value": null,
+        "label": "GitHub API Base URL",
+        "placeholder": "https://api.github.com"
+      },
+      {
+        "name": "owner",
+        "type": "string",
+        "value": null,
+        "label": "Repository Owner",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "repo",
+        "type": "string",
+        "value": null,
+        "label": "Repository Name",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "pull_number",
+        "type": "string",
+        "value": null,
+        "label": "Pull Request Number",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "review_id",
+        "type": "string",
+        "value": null,
+        "label": "Review ID",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "message",
+        "type": "text",
+        "value": null,
+        "label": "Dismissal Message",
+        "placeholder": "",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "github/get_issue": {
+    "hash": "a3b47d71363d6fef976850c6ef707ec7280d22018c348efe5ed7a543ab4ec865",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "GitHub Get Issue",
+    "description": "Retrieve details of a GitHub issue by number",
+    "website": "https://www.flomation.co",
+    "icon": "github",
+    "date": "26/04/2026",
+    "type": 2,
+    "category": {
+      "name": "GitHub",
+      "icon": "github",
+      "description": "Manage pull requests, workflows, and issues in GitHub"
+    },
+    "inputs": [
+      {
+        "name": "access_token",
+        "type": "string",
+        "value": null,
+        "label": "GitHub Access Token",
+        "placeholder": "ghp_...",
+        "required": true
+      },
+      {
+        "name": "base_url",
+        "type": "string",
+        "value": null,
+        "label": "GitHub API Base URL",
+        "placeholder": "https://api.github.com"
+      },
+      {
+        "name": "owner",
+        "type": "string",
+        "value": null,
+        "label": "Repository Owner",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "repo",
+        "type": "string",
+        "value": null,
+        "label": "Repository Name",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "issue_number",
+        "type": "string",
+        "value": null,
+        "label": "Issue Number",
+        "placeholder": "",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "title",
+        "type": "string",
+        "value": null,
+        "label": "Title",
+        "placeholder": ""
+      },
+      {
+        "name": "body",
+        "type": "string",
+        "value": null,
+        "label": "Body",
+        "placeholder": ""
+      },
+      {
+        "name": "state",
+        "type": "string",
+        "value": null,
+        "label": "State",
+        "placeholder": ""
+      },
+      {
+        "name": "user",
+        "type": "string",
+        "value": null,
+        "label": "Author",
+        "placeholder": ""
+      },
+      {
+        "name": "html_url",
+        "type": "string",
+        "value": null,
+        "label": "HTML URL",
+        "placeholder": ""
+      },
+      {
+        "name": "labels",
+        "type": "string",
+        "value": null,
+        "label": "Labels (JSON)",
+        "placeholder": ""
+      },
+      {
+        "name": "data",
+        "type": "object",
+        "value": null,
+        "label": "Full Response (JSON)",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "github/get_pull_request": {
+    "hash": "4d2c8f2c367c1aad96789a4ca77afeda3b12e5689dc6b8767b1ab8bcdf22468a",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "GitHub Get Pull Request",
+    "description": "Retrieve details of a GitHub pull request by number",
+    "website": "https://www.flomation.co",
+    "icon": "github",
+    "date": "26/04/2026",
+    "type": 2,
+    "category": {
+      "name": "GitHub",
+      "icon": "github",
+      "description": "Manage pull requests, workflows, and issues in GitHub"
+    },
+    "inputs": [
+      {
+        "name": "access_token",
+        "type": "string",
+        "value": null,
+        "label": "GitHub Access Token",
+        "placeholder": "ghp_...",
+        "required": true
+      },
+      {
+        "name": "base_url",
+        "type": "string",
+        "value": null,
+        "label": "GitHub API Base URL",
+        "placeholder": "https://api.github.com"
+      },
+      {
+        "name": "owner",
+        "type": "string",
+        "value": null,
+        "label": "Repository Owner",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "repo",
+        "type": "string",
+        "value": null,
+        "label": "Repository Name",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "pull_number",
+        "type": "string",
+        "value": null,
+        "label": "Pull Request Number",
+        "placeholder": "",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "title",
+        "type": "string",
+        "value": null,
+        "label": "Title",
+        "placeholder": ""
+      },
+      {
+        "name": "body",
+        "type": "string",
+        "value": null,
+        "label": "Body",
+        "placeholder": ""
+      },
+      {
+        "name": "state",
+        "type": "string",
+        "value": null,
+        "label": "State",
+        "placeholder": ""
+      },
+      {
+        "name": "user",
+        "type": "string",
+        "value": null,
+        "label": "Author",
+        "placeholder": ""
+      },
+      {
+        "name": "head_ref",
+        "type": "string",
+        "value": null,
+        "label": "Head Branch",
+        "placeholder": ""
+      },
+      {
+        "name": "base_ref",
+        "type": "string",
+        "value": null,
+        "label": "Base Branch",
+        "placeholder": ""
+      },
+      {
+        "name": "html_url",
+        "type": "string",
+        "value": null,
+        "label": "HTML URL",
+        "placeholder": ""
+      },
+      {
+        "name": "mergeable",
+        "type": "boolean",
+        "value": null,
+        "label": "Mergeable",
+        "placeholder": ""
+      },
+      {
+        "name": "labels",
+        "type": "string",
+        "value": null,
+        "label": "Labels (JSON)",
+        "placeholder": ""
+      },
+      {
+        "name": "data",
+        "type": "object",
+        "value": null,
+        "label": "Full Response (JSON)",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "github/get_pull_request_diff": {
+    "hash": "e9809ccab43d217b891a3098a70e423b0d4fa8566044af818b2b8211de9384f9",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "GitHub Get Pull Request Diff",
+    "description": "Retrieve changed files for a GitHub pull request",
+    "website": "https://www.flomation.co",
+    "icon": "github",
+    "date": "26/04/2026",
+    "type": 2,
+    "category": {
+      "name": "GitHub",
+      "icon": "github",
+      "description": "Manage pull requests, workflows, and issues in GitHub"
+    },
+    "inputs": [
+      {
+        "name": "access_token",
+        "type": "string",
+        "value": null,
+        "label": "GitHub Access Token",
+        "placeholder": "ghp_...",
+        "required": true
+      },
+      {
+        "name": "base_url",
+        "type": "string",
+        "value": null,
+        "label": "GitHub API Base URL",
+        "placeholder": "https://api.github.com"
+      },
+      {
+        "name": "owner",
+        "type": "string",
+        "value": null,
+        "label": "Repository Owner",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "repo",
+        "type": "string",
+        "value": null,
+        "label": "Repository Name",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "pull_number",
+        "type": "string",
+        "value": null,
+        "label": "Pull Request Number",
+        "placeholder": "",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "files",
+        "type": "object",
+        "value": null,
+        "label": "Changed Files (JSON)",
+        "placeholder": ""
+      },
+      {
+        "name": "files_count",
+        "type": "integer",
+        "value": null,
+        "label": "Number of Changed Files",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "github/get_workflow_run": {
+    "hash": "17a38464d1f644ba4f5bc4463100f837f063cb131612785757d841f599622265",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "GitHub Get Workflow Run",
+    "description": "Retrieve details of a specific GitHub Actions workflow run",
+    "website": "https://www.flomation.co",
+    "icon": "github",
+    "date": "26/04/2026",
+    "type": 2,
+    "category": {
+      "name": "GitHub",
+      "icon": "github",
+      "description": "Manage pull requests, workflows, and issues in GitHub"
+    },
+    "inputs": [
+      {
+        "name": "access_token",
+        "type": "string",
+        "value": null,
+        "label": "GitHub Access Token",
+        "placeholder": "ghp_...",
+        "required": true
+      },
+      {
+        "name": "base_url",
+        "type": "string",
+        "value": null,
+        "label": "GitHub API Base URL",
+        "placeholder": "https://api.github.com"
+      },
+      {
+        "name": "owner",
+        "type": "string",
+        "value": null,
+        "label": "Repository Owner",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "repo",
+        "type": "string",
+        "value": null,
+        "label": "Repository Name",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "run_id",
+        "type": "string",
+        "value": null,
+        "label": "Run ID",
+        "placeholder": "",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "status",
+        "type": "string",
+        "value": null,
+        "label": "Status",
+        "placeholder": ""
+      },
+      {
+        "name": "conclusion",
+        "type": "string",
+        "value": null,
+        "label": "Conclusion",
+        "placeholder": ""
+      },
+      {
+        "name": "head_branch",
+        "type": "string",
+        "value": null,
+        "label": "Branch",
+        "placeholder": ""
+      },
+      {
+        "name": "html_url",
+        "type": "string",
+        "value": null,
+        "label": "HTML URL",
+        "placeholder": ""
+      },
+      {
+        "name": "created_at",
+        "type": "string",
+        "value": null,
+        "label": "Created At",
+        "placeholder": ""
+      },
+      {
+        "name": "data",
+        "type": "object",
+        "value": null,
+        "label": "Full Response (JSON)",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "github/list_issues": {
+    "hash": "74bf8eef67cf716afb385dfe73e3cb8c25e8a50433339a37dcb2c188cbf20633",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "GitHub List Issues",
+    "description": "List issues in a GitHub repository with optional filters",
+    "website": "https://www.flomation.co",
+    "icon": "github",
+    "date": "26/04/2026",
+    "type": 2,
+    "category": {
+      "name": "GitHub",
+      "icon": "github",
+      "description": "Manage pull requests, workflows, and issues in GitHub"
+    },
+    "inputs": [
+      {
+        "name": "access_token",
+        "type": "string",
+        "value": null,
+        "label": "GitHub Access Token",
+        "placeholder": "ghp_...",
+        "required": true
+      },
+      {
+        "name": "base_url",
+        "type": "string",
+        "value": null,
+        "label": "GitHub API Base URL",
+        "placeholder": "https://api.github.com"
+      },
+      {
+        "name": "owner",
+        "type": "string",
+        "value": null,
+        "label": "Repository Owner",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "repo",
+        "type": "string",
+        "value": null,
+        "label": "Repository Name",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "state",
+        "type": "string",
+        "value": null,
+        "label": "State",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "Open",
+            "value": "open"
+          },
+          {
+            "name": "Closed",
+            "value": "closed"
+          },
+          {
+            "name": "All",
+            "value": "all"
+          }
+        ]
+      },
+      {
+        "name": "labels",
+        "type": "string",
+        "value": null,
+        "label": "Labels",
+        "placeholder": "Comma-separated label names"
+      },
+      {
+        "name": "assignee",
+        "type": "string",
+        "value": null,
+        "label": "Assignee",
+        "placeholder": "Username or * for any"
+      },
+      {
+        "name": "sort",
+        "type": "string",
+        "value": null,
+        "label": "Sort By",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "Created",
+            "value": "created"
+          },
+          {
+            "name": "Updated",
+            "value": "updated"
+          },
+          {
+            "name": "Comments",
+            "value": "comments"
+          }
+        ]
+      },
+      {
+        "name": "per_page",
+        "type": "string",
+        "value": null,
+        "label": "Per Page",
+        "placeholder": "30 (max 100)"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "issues",
+        "type": "object",
+        "value": null,
+        "label": "Issues (JSON)",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Count",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "github/list_pull_request_comments": {
+    "hash": "a34cf81e83b8ce300aed08bed634f26de41d5875becdd32f8441503b06bf99ca",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "GitHub List PR Comments",
+    "description": "List comments on a GitHub pull request",
+    "website": "https://www.flomation.co",
+    "icon": "github",
+    "date": "26/04/2026",
+    "type": 2,
+    "category": {
+      "name": "GitHub",
+      "icon": "github",
+      "description": "Manage pull requests, workflows, and issues in GitHub"
+    },
+    "inputs": [
+      {
+        "name": "access_token",
+        "type": "string",
+        "value": null,
+        "label": "GitHub Access Token",
+        "placeholder": "ghp_...",
+        "required": true
+      },
+      {
+        "name": "base_url",
+        "type": "string",
+        "value": null,
+        "label": "GitHub API Base URL",
+        "placeholder": "https://api.github.com"
+      },
+      {
+        "name": "owner",
+        "type": "string",
+        "value": null,
+        "label": "Repository Owner",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "repo",
+        "type": "string",
+        "value": null,
+        "label": "Repository Name",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "pull_number",
+        "type": "string",
+        "value": null,
+        "label": "Pull Request Number",
+        "placeholder": "",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "comments",
+        "type": "object",
+        "value": null,
+        "label": "Comments (JSON)",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Count",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "github/list_pull_request_reviews": {
+    "hash": "21cd4258c74936b5a80495a51f0500ad281b208d97a8d14b441464b7a4021a70",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "GitHub List PR Reviews",
+    "description": "List reviews on a GitHub pull request",
+    "website": "https://www.flomation.co",
+    "icon": "github",
+    "date": "26/04/2026",
+    "type": 2,
+    "category": {
+      "name": "GitHub",
+      "icon": "github",
+      "description": "Manage pull requests, workflows, and issues in GitHub"
+    },
+    "inputs": [
+      {
+        "name": "access_token",
+        "type": "string",
+        "value": null,
+        "label": "GitHub Access Token",
+        "placeholder": "ghp_...",
+        "required": true
+      },
+      {
+        "name": "base_url",
+        "type": "string",
+        "value": null,
+        "label": "GitHub API Base URL",
+        "placeholder": "https://api.github.com"
+      },
+      {
+        "name": "owner",
+        "type": "string",
+        "value": null,
+        "label": "Repository Owner",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "repo",
+        "type": "string",
+        "value": null,
+        "label": "Repository Name",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "pull_number",
+        "type": "string",
+        "value": null,
+        "label": "Pull Request Number",
+        "placeholder": "",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "reviews",
+        "type": "object",
+        "value": null,
+        "label": "Reviews (JSON)",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Count",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "github/list_pull_requests": {
+    "hash": "b9e3d006a9bc9c94591da82674a97975fac20880a04ae6c4ef7fbe057d9a4bb6",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "GitHub List Pull Requests",
+    "description": "List pull requests in a GitHub repository with optional filters",
+    "website": "https://www.flomation.co",
+    "icon": "github",
+    "date": "26/04/2026",
+    "type": 2,
+    "category": {
+      "name": "GitHub",
+      "icon": "github",
+      "description": "Manage pull requests, workflows, and issues in GitHub"
+    },
+    "inputs": [
+      {
+        "name": "access_token",
+        "type": "string",
+        "value": null,
+        "label": "GitHub Access Token",
+        "placeholder": "ghp_...",
+        "required": true
+      },
+      {
+        "name": "base_url",
+        "type": "string",
+        "value": null,
+        "label": "GitHub API Base URL",
+        "placeholder": "https://api.github.com"
+      },
+      {
+        "name": "owner",
+        "type": "string",
+        "value": null,
+        "label": "Repository Owner",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "repo",
+        "type": "string",
+        "value": null,
+        "label": "Repository Name",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "state",
+        "type": "string",
+        "value": null,
+        "label": "State",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "Open",
+            "value": "open"
+          },
+          {
+            "name": "Closed",
+            "value": "closed"
+          },
+          {
+            "name": "All",
+            "value": "all"
+          }
+        ]
+      },
+      {
+        "name": "head",
+        "type": "string",
+        "value": null,
+        "label": "Head Branch",
+        "placeholder": "user:branch"
+      },
+      {
+        "name": "base",
+        "type": "string",
+        "value": null,
+        "label": "Base Branch",
+        "placeholder": ""
+      },
+      {
+        "name": "sort",
+        "type": "string",
+        "value": null,
+        "label": "Sort By",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "Created",
+            "value": "created"
+          },
+          {
+            "name": "Updated",
+            "value": "updated"
+          },
+          {
+            "name": "Popularity",
+            "value": "popularity"
+          }
+        ]
+      },
+      {
+        "name": "per_page",
+        "type": "string",
+        "value": null,
+        "label": "Per Page",
+        "placeholder": "30 (max 100)"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "pull_requests",
+        "type": "object",
+        "value": null,
+        "label": "Pull Requests (JSON)",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Count",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "github/list_workflow_jobs": {
+    "hash": "d882eff54875d4ca3d1895174319b8a5e11ddb66bd74b9927ff8b4a1e30be5ca",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "GitHub List Workflow Jobs",
+    "description": "List jobs for a GitHub Actions workflow run",
+    "website": "https://www.flomation.co",
+    "icon": "github",
+    "date": "26/04/2026",
+    "type": 2,
+    "category": {
+      "name": "GitHub",
+      "icon": "github",
+      "description": "Manage pull requests, workflows, and issues in GitHub"
+    },
+    "inputs": [
+      {
+        "name": "access_token",
+        "type": "string",
+        "value": null,
+        "label": "GitHub Access Token",
+        "placeholder": "ghp_...",
+        "required": true
+      },
+      {
+        "name": "base_url",
+        "type": "string",
+        "value": null,
+        "label": "GitHub API Base URL",
+        "placeholder": "https://api.github.com"
+      },
+      {
+        "name": "owner",
+        "type": "string",
+        "value": null,
+        "label": "Repository Owner",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "repo",
+        "type": "string",
+        "value": null,
+        "label": "Repository Name",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "run_id",
+        "type": "string",
+        "value": null,
+        "label": "Run ID",
+        "placeholder": "",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "jobs",
+        "type": "object",
+        "value": null,
+        "label": "Jobs (JSON)",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Count",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "github/list_workflow_runs": {
+    "hash": "3719e498fbfe00aba6d20b3a888e2377bf4440646986e3611ebba8a8111c2876",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "GitHub List Workflow Runs",
+    "description": "List GitHub Actions workflow runs for a repository",
+    "website": "https://www.flomation.co",
+    "icon": "github",
+    "date": "26/04/2026",
+    "type": 2,
+    "category": {
+      "name": "GitHub",
+      "icon": "github",
+      "description": "Manage pull requests, workflows, and issues in GitHub"
+    },
+    "inputs": [
+      {
+        "name": "access_token",
+        "type": "string",
+        "value": null,
+        "label": "GitHub Access Token",
+        "placeholder": "ghp_...",
+        "required": true
+      },
+      {
+        "name": "base_url",
+        "type": "string",
+        "value": null,
+        "label": "GitHub API Base URL",
+        "placeholder": "https://api.github.com"
+      },
+      {
+        "name": "owner",
+        "type": "string",
+        "value": null,
+        "label": "Repository Owner",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "repo",
+        "type": "string",
+        "value": null,
+        "label": "Repository Name",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "branch",
+        "type": "string",
+        "value": null,
+        "label": "Branch",
+        "placeholder": ""
+      },
+      {
+        "name": "status",
+        "type": "string",
+        "value": null,
+        "label": "Status",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "All",
+            "value": ""
+          },
+          {
+            "name": "Completed",
+            "value": "completed"
+          },
+          {
+            "name": "In Progress",
+            "value": "in_progress"
+          },
+          {
+            "name": "Queued",
+            "value": "queued"
+          }
+        ]
+      },
+      {
+        "name": "per_page",
+        "type": "string",
+        "value": null,
+        "label": "Per Page",
+        "placeholder": "30 (max 100)"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "workflow_runs",
+        "type": "object",
+        "value": null,
+        "label": "Workflow Runs (JSON)",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Total Count",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "github/merge_pull_request": {
+    "hash": "e19e96e262a0df88d0fc18c765b9866077c7b0a316cb80424ede40203014f35e",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "GitHub Merge Pull Request",
+    "description": "Merge a GitHub pull request",
+    "website": "https://www.flomation.co",
+    "icon": "github",
+    "date": "26/04/2026",
+    "type": 2,
+    "category": {
+      "name": "GitHub",
+      "icon": "github",
+      "description": "Manage pull requests, workflows, and issues in GitHub"
+    },
+    "inputs": [
+      {
+        "name": "access_token",
+        "type": "string",
+        "value": null,
+        "label": "GitHub Access Token",
+        "placeholder": "ghp_...",
+        "required": true
+      },
+      {
+        "name": "base_url",
+        "type": "string",
+        "value": null,
+        "label": "GitHub API Base URL",
+        "placeholder": "https://api.github.com"
+      },
+      {
+        "name": "owner",
+        "type": "string",
+        "value": null,
+        "label": "Repository Owner",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "repo",
+        "type": "string",
+        "value": null,
+        "label": "Repository Name",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "pull_number",
+        "type": "string",
+        "value": null,
+        "label": "Pull Request Number",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "merge_method",
+        "type": "string",
+        "value": null,
+        "label": "Merge Method",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "Merge Commit",
+            "value": "merge"
+          },
+          {
+            "name": "Squash",
+            "value": "squash"
+          },
+          {
+            "name": "Rebase",
+            "value": "rebase"
+          }
+        ]
+      },
+      {
+        "name": "commit_title",
+        "type": "string",
+        "value": null,
+        "label": "Commit Title",
+        "placeholder": ""
+      },
+      {
+        "name": "commit_message",
+        "type": "text",
+        "value": null,
+        "label": "Commit Message",
+        "placeholder": ""
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "sha",
+        "type": "string",
+        "value": null,
+        "label": "Merge Commit SHA",
+        "placeholder": ""
+      },
+      {
+        "name": "merged",
+        "type": "boolean",
+        "value": null,
+        "label": "Merged",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "github/rerun_workflow": {
+    "hash": "da40fb1fe6783e6e6cd3b41b3e6973ddad1ec3d77133bd7e73eba78968cd403e",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "GitHub Re-run Workflow",
+    "description": "Re-run a GitHub Actions workflow run",
+    "website": "https://www.flomation.co",
+    "icon": "github",
+    "date": "26/04/2026",
+    "type": 2,
+    "category": {
+      "name": "GitHub",
+      "icon": "github",
+      "description": "Manage pull requests, workflows, and issues in GitHub"
+    },
+    "inputs": [
+      {
+        "name": "access_token",
+        "type": "string",
+        "value": null,
+        "label": "GitHub Access Token",
+        "placeholder": "ghp_...",
+        "required": true
+      },
+      {
+        "name": "base_url",
+        "type": "string",
+        "value": null,
+        "label": "GitHub API Base URL",
+        "placeholder": "https://api.github.com"
+      },
+      {
+        "name": "owner",
+        "type": "string",
+        "value": null,
+        "label": "Repository Owner",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "repo",
+        "type": "string",
+        "value": null,
+        "label": "Repository Name",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "run_id",
+        "type": "string",
+        "value": null,
+        "label": "Run ID",
+        "placeholder": "",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "github/trigger_workflow": {
+    "hash": "bfb433d9cab44cb23e58da96a8d33af2bc43bd291c9dd4adfbc10c661a7ab3bf",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "GitHub Trigger Workflow",
+    "description": "Trigger a GitHub Actions workflow dispatch event",
+    "website": "https://www.flomation.co",
+    "icon": "github",
+    "date": "26/04/2026",
+    "type": 2,
+    "category": {
+      "name": "GitHub",
+      "icon": "github",
+      "description": "Manage pull requests, workflows, and issues in GitHub"
+    },
+    "inputs": [
+      {
+        "name": "access_token",
+        "type": "string",
+        "value": null,
+        "label": "GitHub Access Token",
+        "placeholder": "ghp_...",
+        "required": true
+      },
+      {
+        "name": "base_url",
+        "type": "string",
+        "value": null,
+        "label": "GitHub API Base URL",
+        "placeholder": "https://api.github.com"
+      },
+      {
+        "name": "owner",
+        "type": "string",
+        "value": null,
+        "label": "Repository Owner",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "repo",
+        "type": "string",
+        "value": null,
+        "label": "Repository Name",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "workflow_id",
+        "type": "string",
+        "value": null,
+        "label": "Workflow ID or Filename",
+        "placeholder": "ID or filename (e.g. deploy.yml)",
+        "required": true
+      },
+      {
+        "name": "ref",
+        "type": "string",
+        "value": null,
+        "label": "Ref",
+        "placeholder": "Branch or tag",
+        "required": true
+      },
+      {
+        "name": "inputs",
+        "type": "key_value_array",
+        "value": null,
+        "label": "Workflow Inputs",
+        "placeholder": ""
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "github/update_pull_request": {
+    "hash": "e479bf2c5dd41ff6a86a848af93b1b0be4da24f88a48cd21a4804996bb107480",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "GitHub Update Pull Request",
+    "description": "Update an existing GitHub pull request",
+    "website": "https://www.flomation.co",
+    "icon": "github",
+    "date": "26/04/2026",
+    "type": 2,
+    "category": {
+      "name": "GitHub",
+      "icon": "github",
+      "description": "Manage pull requests, workflows, and issues in GitHub"
+    },
+    "inputs": [
+      {
+        "name": "access_token",
+        "type": "string",
+        "value": null,
+        "label": "GitHub Access Token",
+        "placeholder": "ghp_...",
+        "required": true
+      },
+      {
+        "name": "base_url",
+        "type": "string",
+        "value": null,
+        "label": "GitHub API Base URL",
+        "placeholder": "https://api.github.com"
+      },
+      {
+        "name": "owner",
+        "type": "string",
+        "value": null,
+        "label": "Repository Owner",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "repo",
+        "type": "string",
+        "value": null,
+        "label": "Repository Name",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "pull_number",
+        "type": "string",
+        "value": null,
+        "label": "Pull Request Number",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "title",
+        "type": "string",
+        "value": null,
+        "label": "Title",
+        "placeholder": ""
+      },
+      {
+        "name": "body",
+        "type": "text",
+        "value": null,
+        "label": "Description",
+        "placeholder": ""
+      },
+      {
+        "name": "state",
+        "type": "string",
+        "value": null,
+        "label": "State",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "No Change",
+            "value": ""
+          },
+          {
+            "name": "Open",
+            "value": "open"
+          },
+          {
+            "name": "Closed",
+            "value": "closed"
+          }
+        ]
+      },
+      {
+        "name": "base",
+        "type": "string",
+        "value": null,
+        "label": "Base Branch",
+        "placeholder": ""
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "html_url",
+        "type": "string",
+        "value": null,
+        "label": "HTML URL",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "gitlab/add_issue_comment": {
+    "hash": "bfa495d28e87139b96d9c3f9046c7fbba1db968243aad4dc450806ccf65a862f",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "GitLab Add Issue Comment",
+    "description": "Add a comment to a GitLab issue",
+    "website": "https://www.flomation.co",
+    "icon": "gitlab",
+    "date": "26/04/2026",
+    "type": 2,
+    "category": {
+      "name": "GitLab",
+      "icon": "gitlab",
+      "description": "Manage merge requests, pipelines, and issues in GitLab"
+    },
+    "inputs": [
+      {
+        "name": "access_token",
+        "type": "string",
+        "value": null,
+        "label": "GitLab Access Token",
+        "placeholder": "glpat-...",
+        "required": true
+      },
+      {
+        "name": "base_url",
+        "type": "string",
+        "value": null,
+        "label": "GitLab Base URL",
+        "placeholder": "https://gitlab.com"
+      },
+      {
+        "name": "project_id",
+        "type": "string",
+        "value": null,
+        "label": "Project ID",
+        "placeholder": "Numeric ID or namespace/project",
+        "required": true
+      },
+      {
+        "name": "issue_iid",
+        "type": "string",
+        "value": null,
+        "label": "Issue IID",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "body",
+        "type": "text",
+        "value": null,
+        "label": "Comment Body",
+        "placeholder": "Markdown comment text",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "comment_id",
+        "type": "string",
+        "value": null,
+        "label": "Comment ID",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "gitlab/add_merge_request_comment": {
+    "hash": "8ee52b447e72410a4d40787357ba03e188905504dcc55b8a0c3084ee60ff5761",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "GitLab Add MR Comment",
+    "description": "Add a comment to a GitLab merge request",
+    "website": "https://www.flomation.co",
+    "icon": "gitlab",
+    "date": "26/04/2026",
+    "type": 2,
+    "category": {
+      "name": "GitLab",
+      "icon": "gitlab",
+      "description": "Manage merge requests, pipelines, and issues in GitLab"
+    },
+    "inputs": [
+      {
+        "name": "access_token",
+        "type": "string",
+        "value": null,
+        "label": "GitLab Access Token",
+        "placeholder": "glpat-...",
+        "required": true
+      },
+      {
+        "name": "base_url",
+        "type": "string",
+        "value": null,
+        "label": "GitLab Base URL",
+        "placeholder": "https://gitlab.com"
+      },
+      {
+        "name": "project_id",
+        "type": "string",
+        "value": null,
+        "label": "Project ID",
+        "placeholder": "Numeric ID or namespace/project",
+        "required": true
+      },
+      {
+        "name": "merge_request_iid",
+        "type": "string",
+        "value": null,
+        "label": "Merge Request IID",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "body",
+        "type": "text",
+        "value": null,
+        "label": "Comment Body",
+        "placeholder": "Markdown comment text",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "comment_id",
+        "type": "string",
+        "value": null,
+        "label": "Comment ID",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "gitlab/approve_merge_request": {
+    "hash": "3597e4958b44a66e22ef9ff3563b6706a5fe1d5c3ab38e197576f337d9036839",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "GitLab Approve Merge Request",
+    "description": "Add your approval to a GitLab merge request",
+    "website": "https://www.flomation.co",
+    "icon": "gitlab",
+    "date": "26/04/2026",
+    "type": 2,
+    "category": {
+      "name": "GitLab",
+      "icon": "gitlab",
+      "description": "Manage merge requests, pipelines, and issues in GitLab"
+    },
+    "inputs": [
+      {
+        "name": "access_token",
+        "type": "string",
+        "value": null,
+        "label": "GitLab Access Token",
+        "placeholder": "glpat-...",
+        "required": true
+      },
+      {
+        "name": "base_url",
+        "type": "string",
+        "value": null,
+        "label": "GitLab Base URL",
+        "placeholder": "https://gitlab.com"
+      },
+      {
+        "name": "project_id",
+        "type": "string",
+        "value": null,
+        "label": "Project ID",
+        "placeholder": "Numeric ID or namespace/project",
+        "required": true
+      },
+      {
+        "name": "merge_request_iid",
+        "type": "string",
+        "value": null,
+        "label": "Merge Request IID",
+        "placeholder": "",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "gitlab/cancel_pipeline": {
+    "hash": "dea80b0ee81ea51e0121ca0861666842ebe30a6fad35c754f8d800f4edc0aad7",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "GitLab Cancel Pipeline",
+    "description": "Cancel a running GitLab pipeline",
+    "website": "https://www.flomation.co",
+    "icon": "gitlab",
+    "date": "26/04/2026",
+    "type": 2,
+    "category": {
+      "name": "GitLab",
+      "icon": "gitlab",
+      "description": "Manage merge requests, pipelines, and issues in GitLab"
+    },
+    "inputs": [
+      {
+        "name": "access_token",
+        "type": "string",
+        "value": null,
+        "label": "GitLab Access Token",
+        "placeholder": "glpat-...",
+        "required": true
+      },
+      {
+        "name": "base_url",
+        "type": "string",
+        "value": null,
+        "label": "GitLab Base URL",
+        "placeholder": "https://gitlab.com"
+      },
+      {
+        "name": "project_id",
+        "type": "string",
+        "value": null,
+        "label": "Project ID",
+        "placeholder": "Numeric ID or namespace/project",
+        "required": true
+      },
+      {
+        "name": "pipeline_id",
+        "type": "string",
+        "value": null,
+        "label": "Pipeline ID",
+        "placeholder": "",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "pipeline_id",
+        "type": "string",
+        "value": null,
+        "label": "Pipeline ID",
+        "placeholder": ""
+      },
+      {
+        "name": "status",
+        "type": "string",
+        "value": null,
+        "label": "Status",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "gitlab/create_issue": {
+    "hash": "c3b0914a3b067283232245ca9c16279b95c17b515ea909466513bfb28a680621",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "GitLab Create Issue",
+    "description": "Create a new issue in a GitLab project",
+    "website": "https://www.flomation.co",
+    "icon": "gitlab",
+    "date": "26/04/2026",
+    "type": 2,
+    "category": {
+      "name": "GitLab",
+      "icon": "gitlab",
+      "description": "Manage merge requests, pipelines, and issues in GitLab"
+    },
+    "inputs": [
+      {
+        "name": "access_token",
+        "type": "string",
+        "value": null,
+        "label": "GitLab Access Token",
+        "placeholder": "glpat-...",
+        "required": true
+      },
+      {
+        "name": "base_url",
+        "type": "string",
+        "value": null,
+        "label": "GitLab Base URL",
+        "placeholder": "https://gitlab.com"
+      },
+      {
+        "name": "project_id",
+        "type": "string",
+        "value": null,
+        "label": "Project ID",
+        "placeholder": "Numeric ID or namespace/project",
+        "required": true
+      },
+      {
+        "name": "title",
+        "type": "string",
+        "value": null,
+        "label": "Title",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "description",
+        "type": "text",
+        "value": null,
+        "label": "Description",
+        "placeholder": "Markdown description (optional)"
+      },
+      {
+        "name": "labels",
+        "type": "string",
+        "value": null,
+        "label": "Labels",
+        "placeholder": "Comma-separated label names"
+      },
+      {
+        "name": "assignee_ids",
+        "type": "string",
+        "value": null,
+        "label": "Assignee IDs",
+        "placeholder": "Comma-separated user IDs"
+      },
+      {
+        "name": "milestone_id",
+        "type": "string",
+        "value": null,
+        "label": "Milestone ID",
+        "placeholder": ""
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "issue_iid",
+        "type": "string",
+        "value": null,
+        "label": "Issue IID",
+        "placeholder": ""
+      },
+      {
+        "name": "web_url",
+        "type": "string",
+        "value": null,
+        "label": "Web URL",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "gitlab/create_merge_request": {
+    "hash": "3d48414353f7b38f81dc1b31b798778cfd0c86700cafaef0dff3a9dcec21494f",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "GitLab Create Merge Request",
+    "description": "Create a new merge request in a GitLab project",
+    "website": "https://www.flomation.co",
+    "icon": "gitlab",
+    "date": "26/04/2026",
+    "type": 2,
+    "category": {
+      "name": "GitLab",
+      "icon": "gitlab",
+      "description": "Manage merge requests, pipelines, and issues in GitLab"
+    },
+    "inputs": [
+      {
+        "name": "access_token",
+        "type": "string",
+        "value": null,
+        "label": "GitLab Access Token",
+        "placeholder": "glpat-...",
+        "required": true
+      },
+      {
+        "name": "base_url",
+        "type": "string",
+        "value": null,
+        "label": "GitLab Base URL",
+        "placeholder": "https://gitlab.com"
+      },
+      {
+        "name": "project_id",
+        "type": "string",
+        "value": null,
+        "label": "Project ID",
+        "placeholder": "Numeric ID or namespace/project",
+        "required": true
+      },
+      {
+        "name": "source_branch",
+        "type": "string",
+        "value": null,
+        "label": "Source Branch",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "target_branch",
+        "type": "string",
+        "value": null,
+        "label": "Target Branch",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "title",
+        "type": "string",
+        "value": null,
+        "label": "Title",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "description",
+        "type": "text",
+        "value": null,
+        "label": "Description",
+        "placeholder": "Markdown description (optional)"
+      },
+      {
+        "name": "labels",
+        "type": "string",
+        "value": null,
+        "label": "Labels",
+        "placeholder": "Comma-separated label names"
+      },
+      {
+        "name": "assignee_ids",
+        "type": "string",
+        "value": null,
+        "label": "Assignee IDs",
+        "placeholder": "Comma-separated user IDs"
+      },
+      {
+        "name": "reviewer_ids",
+        "type": "string",
+        "value": null,
+        "label": "Reviewer IDs",
+        "placeholder": "Comma-separated user IDs"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "merge_request_iid",
+        "type": "string",
+        "value": null,
+        "label": "Merge Request IID",
+        "placeholder": ""
+      },
+      {
+        "name": "web_url",
+        "type": "string",
+        "value": null,
+        "label": "Web URL",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "gitlab/delete_merge_request_comment": {
+    "hash": "5dec290981cccc4628870f1c9917e8ec132872f6d433102177f60da219cab443",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "GitLab Delete MR Comment",
+    "description": "Remove a comment from a GitLab merge request",
+    "website": "https://www.flomation.co",
+    "icon": "gitlab",
+    "date": "26/04/2026",
+    "type": 2,
+    "category": {
+      "name": "GitLab",
+      "icon": "gitlab",
+      "description": "Manage merge requests, pipelines, and issues in GitLab"
+    },
+    "inputs": [
+      {
+        "name": "access_token",
+        "type": "string",
+        "value": null,
+        "label": "GitLab Access Token",
+        "placeholder": "glpat-...",
+        "required": true
+      },
+      {
+        "name": "base_url",
+        "type": "string",
+        "value": null,
+        "label": "GitLab Base URL",
+        "placeholder": "https://gitlab.com"
+      },
+      {
+        "name": "project_id",
+        "type": "string",
+        "value": null,
+        "label": "Project ID",
+        "placeholder": "Numeric ID or namespace/project",
+        "required": true
+      },
+      {
+        "name": "merge_request_iid",
+        "type": "string",
+        "value": null,
+        "label": "Merge Request IID",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "note_id",
+        "type": "string",
+        "value": null,
+        "label": "Note ID",
+        "placeholder": "The ID of the comment to delete",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "gitlab/get_issue": {
+    "hash": "70f27bba4fd92a2df1b618bdd0dcb247d1fc0543cc457fd1d385fa962a73a468",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "GitLab Get Issue",
+    "description": "Retrieve details of a GitLab issue by IID",
+    "website": "https://www.flomation.co",
+    "icon": "gitlab",
+    "date": "26/04/2026",
+    "type": 2,
+    "category": {
+      "name": "GitLab",
+      "icon": "gitlab",
+      "description": "Manage merge requests, pipelines, and issues in GitLab"
+    },
+    "inputs": [
+      {
+        "name": "access_token",
+        "type": "string",
+        "value": null,
+        "label": "GitLab Access Token",
+        "placeholder": "glpat-...",
+        "required": true
+      },
+      {
+        "name": "base_url",
+        "type": "string",
+        "value": null,
+        "label": "GitLab Base URL",
+        "placeholder": "https://gitlab.com"
+      },
+      {
+        "name": "project_id",
+        "type": "string",
+        "value": null,
+        "label": "Project ID",
+        "placeholder": "Numeric ID or namespace/project",
+        "required": true
+      },
+      {
+        "name": "issue_iid",
+        "type": "string",
+        "value": null,
+        "label": "Issue IID",
+        "placeholder": "",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "title",
+        "type": "string",
+        "value": null,
+        "label": "Title",
+        "placeholder": ""
+      },
+      {
+        "name": "description",
+        "type": "string",
+        "value": null,
+        "label": "Description",
+        "placeholder": ""
+      },
+      {
+        "name": "state",
+        "type": "string",
+        "value": null,
+        "label": "State",
+        "placeholder": ""
+      },
+      {
+        "name": "author",
+        "type": "string",
+        "value": null,
+        "label": "Author",
+        "placeholder": ""
+      },
+      {
+        "name": "web_url",
+        "type": "string",
+        "value": null,
+        "label": "Web URL",
+        "placeholder": ""
+      },
+      {
+        "name": "labels",
+        "type": "string",
+        "value": null,
+        "label": "Labels (JSON)",
+        "placeholder": ""
+      },
+      {
+        "name": "data",
+        "type": "object",
+        "value": null,
+        "label": "Full Response (JSON)",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "gitlab/get_job_log": {
+    "hash": "2f07a32ee4d9448c0a3ac94599cca722c8b7a285fbe91056fa9fc9f8551cdf72",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "GitLab Get Job Log",
+    "description": "Retrieve the log/trace output of a GitLab CI/CD job",
+    "website": "https://www.flomation.co",
+    "icon": "gitlab",
+    "date": "27/04/2026",
+    "type": 2,
+    "category": {
+      "name": "GitLab",
+      "icon": "gitlab",
+      "description": "Manage merge requests, pipelines, and issues in GitLab"
+    },
+    "inputs": [
+      {
+        "name": "access_token",
+        "type": "string",
+        "value": null,
+        "label": "GitLab Access Token",
+        "placeholder": "glpat-...",
+        "required": true
+      },
+      {
+        "name": "base_url",
+        "type": "string",
+        "value": null,
+        "label": "GitLab Base URL",
+        "placeholder": "https://gitlab.com"
+      },
+      {
+        "name": "project_id",
+        "type": "string",
+        "value": null,
+        "label": "Project ID",
+        "placeholder": "Numeric ID or namespace/project",
+        "required": true
+      },
+      {
+        "name": "job_id",
+        "type": "string",
+        "value": null,
+        "label": "Job ID",
+        "placeholder": "",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "log",
+        "type": "string",
+        "value": null,
+        "label": "Full Log Output",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "gitlab/get_merge_request": {
+    "hash": "6bf07b4dbc1b27fa2807d594367b7a7c5ca218e5011c73c370e3f6c22b186462",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "GitLab Get Merge Request",
+    "description": "Retrieve details of a GitLab merge request by IID",
+    "website": "https://www.flomation.co",
+    "icon": "gitlab",
+    "date": "26/04/2026",
+    "type": 2,
+    "category": {
+      "name": "GitLab",
+      "icon": "gitlab",
+      "description": "Manage merge requests, pipelines, and issues in GitLab"
+    },
+    "inputs": [
+      {
+        "name": "access_token",
+        "type": "string",
+        "value": null,
+        "label": "GitLab Access Token",
+        "placeholder": "glpat-...",
+        "required": true
+      },
+      {
+        "name": "base_url",
+        "type": "string",
+        "value": null,
+        "label": "GitLab Base URL",
+        "placeholder": "https://gitlab.com"
+      },
+      {
+        "name": "project_id",
+        "type": "string",
+        "value": null,
+        "label": "Project ID",
+        "placeholder": "Numeric ID or namespace/project",
+        "required": true
+      },
+      {
+        "name": "merge_request_iid",
+        "type": "string",
+        "value": null,
+        "label": "Merge Request IID",
+        "placeholder": "The internal ID of the merge request",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "title",
+        "type": "string",
+        "value": null,
+        "label": "Title",
+        "placeholder": ""
+      },
+      {
+        "name": "description",
+        "type": "string",
+        "value": null,
+        "label": "Description",
+        "placeholder": ""
+      },
+      {
+        "name": "state",
+        "type": "string",
+        "value": null,
+        "label": "State",
+        "placeholder": ""
+      },
+      {
+        "name": "author",
+        "type": "string",
+        "value": null,
+        "label": "Author",
+        "placeholder": ""
+      },
+      {
+        "name": "source_branch",
+        "type": "string",
+        "value": null,
+        "label": "Source Branch",
+        "placeholder": ""
+      },
+      {
+        "name": "target_branch",
+        "type": "string",
+        "value": null,
+        "label": "Target Branch",
+        "placeholder": ""
+      },
+      {
+        "name": "web_url",
+        "type": "string",
+        "value": null,
+        "label": "Web URL",
+        "placeholder": ""
+      },
+      {
+        "name": "merge_status",
+        "type": "string",
+        "value": null,
+        "label": "Merge Status",
+        "placeholder": ""
+      },
+      {
+        "name": "labels",
+        "type": "string",
+        "value": null,
+        "label": "Labels (JSON)",
+        "placeholder": ""
+      },
+      {
+        "name": "data",
+        "type": "object",
+        "value": null,
+        "label": "Full Response (JSON)",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "gitlab/get_merge_request_diff": {
+    "hash": "4fd3d1137deb31db7c5f31fe6f0e535095323e23c6fe40c4284dff2e9f19a60d",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "GitLab Get Merge Request Diff",
+    "description": "Retrieve the diff and changed files for a GitLab merge request",
+    "website": "https://www.flomation.co",
+    "icon": "gitlab",
+    "date": "26/04/2026",
+    "type": 2,
+    "category": {
+      "name": "GitLab",
+      "icon": "gitlab",
+      "description": "Manage merge requests, pipelines, and issues in GitLab"
+    },
+    "inputs": [
+      {
+        "name": "access_token",
+        "type": "string",
+        "value": null,
+        "label": "GitLab Access Token",
+        "placeholder": "glpat-...",
+        "required": true
+      },
+      {
+        "name": "base_url",
+        "type": "string",
+        "value": null,
+        "label": "GitLab Base URL",
+        "placeholder": "https://gitlab.com"
+      },
+      {
+        "name": "project_id",
+        "type": "string",
+        "value": null,
+        "label": "Project ID",
+        "placeholder": "Numeric ID or namespace/project",
+        "required": true
+      },
+      {
+        "name": "merge_request_iid",
+        "type": "string",
+        "value": null,
+        "label": "Merge Request IID",
+        "placeholder": "",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "changes",
+        "type": "object",
+        "value": null,
+        "label": "Changes (JSON)",
+        "placeholder": ""
+      },
+      {
+        "name": "changes_count",
+        "type": "integer",
+        "value": null,
+        "label": "Number of Changed Files",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "gitlab/get_pipeline": {
+    "hash": "2584b173de1a4ffa3f32eaab10032ec575df94336b3180bb3b2f59accd90e844",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "GitLab Get Pipeline",
+    "description": "Retrieve details of a specific GitLab pipeline",
+    "website": "https://www.flomation.co",
+    "icon": "gitlab",
+    "date": "26/04/2026",
+    "type": 2,
+    "category": {
+      "name": "GitLab",
+      "icon": "gitlab",
+      "description": "Manage merge requests, pipelines, and issues in GitLab"
+    },
+    "inputs": [
+      {
+        "name": "access_token",
+        "type": "string",
+        "value": null,
+        "label": "GitLab Access Token",
+        "placeholder": "glpat-...",
+        "required": true
+      },
+      {
+        "name": "base_url",
+        "type": "string",
+        "value": null,
+        "label": "GitLab Base URL",
+        "placeholder": "https://gitlab.com"
+      },
+      {
+        "name": "project_id",
+        "type": "string",
+        "value": null,
+        "label": "Project ID",
+        "placeholder": "Numeric ID or namespace/project",
+        "required": true
+      },
+      {
+        "name": "pipeline_id",
+        "type": "string",
+        "value": null,
+        "label": "Pipeline ID",
+        "placeholder": "",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "status",
+        "type": "string",
+        "value": null,
+        "label": "Status",
+        "placeholder": ""
+      },
+      {
+        "name": "ref",
+        "type": "string",
+        "value": null,
+        "label": "Ref",
+        "placeholder": ""
+      },
+      {
+        "name": "web_url",
+        "type": "string",
+        "value": null,
+        "label": "Web URL",
+        "placeholder": ""
+      },
+      {
+        "name": "created_at",
+        "type": "string",
+        "value": null,
+        "label": "Created At",
+        "placeholder": ""
+      },
+      {
+        "name": "duration",
+        "type": "integer",
+        "value": null,
+        "label": "Duration (seconds)",
+        "placeholder": ""
+      },
+      {
+        "name": "data",
+        "type": "object",
+        "value": null,
+        "label": "Full Response (JSON)",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "gitlab/list_issues": {
+    "hash": "dc002b2a1b0a2aecf030847d5ecf3c9a05500ba7cc0827c0dd1478959c7f75bd",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "GitLab List Issues",
+    "description": "List issues in a GitLab project with optional filters",
+    "website": "https://www.flomation.co",
+    "icon": "gitlab",
+    "date": "26/04/2026",
+    "type": 2,
+    "category": {
+      "name": "GitLab",
+      "icon": "gitlab",
+      "description": "Manage merge requests, pipelines, and issues in GitLab"
+    },
+    "inputs": [
+      {
+        "name": "access_token",
+        "type": "string",
+        "value": null,
+        "label": "GitLab Access Token",
+        "placeholder": "glpat-...",
+        "required": true
+      },
+      {
+        "name": "base_url",
+        "type": "string",
+        "value": null,
+        "label": "GitLab Base URL",
+        "placeholder": "https://gitlab.com"
+      },
+      {
+        "name": "project_id",
+        "type": "string",
+        "value": null,
+        "label": "Project ID",
+        "placeholder": "Numeric ID or namespace/project",
+        "required": true
+      },
+      {
+        "name": "state",
+        "type": "string",
+        "value": null,
+        "label": "State",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "All",
+            "value": "all"
+          },
+          {
+            "name": "Opened",
+            "value": "opened"
+          },
+          {
+            "name": "Closed",
+            "value": "closed"
+          }
+        ]
+      },
+      {
+        "name": "search",
+        "type": "string",
+        "value": null,
+        "label": "Search",
+        "placeholder": "Search in title and description"
+      },
+      {
+        "name": "labels",
+        "type": "string",
+        "value": null,
+        "label": "Labels",
+        "placeholder": "Comma-separated label names"
+      },
+      {
+        "name": "assignee_username",
+        "type": "string",
+        "value": null,
+        "label": "Assignee Username",
+        "placeholder": ""
+      },
+      {
+        "name": "per_page",
+        "type": "string",
+        "value": null,
+        "label": "Per Page",
+        "placeholder": "20 (max 100)"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "issues",
+        "type": "object",
+        "value": null,
+        "label": "Issues (JSON)",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Count",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "gitlab/list_merge_request_approvals": {
+    "hash": "33c0e6511dd690b7ebac6bf00536f9c2207a836aa2f10b094733e19eb23543d9",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "GitLab List MR Approvals",
+    "description": "View current approvals on a GitLab merge request",
+    "website": "https://www.flomation.co",
+    "icon": "gitlab",
+    "date": "26/04/2026",
+    "type": 2,
+    "category": {
+      "name": "GitLab",
+      "icon": "gitlab",
+      "description": "Manage merge requests, pipelines, and issues in GitLab"
+    },
+    "inputs": [
+      {
+        "name": "access_token",
+        "type": "string",
+        "value": null,
+        "label": "GitLab Access Token",
+        "placeholder": "glpat-...",
+        "required": true
+      },
+      {
+        "name": "base_url",
+        "type": "string",
+        "value": null,
+        "label": "GitLab Base URL",
+        "placeholder": "https://gitlab.com"
+      },
+      {
+        "name": "project_id",
+        "type": "string",
+        "value": null,
+        "label": "Project ID",
+        "placeholder": "Numeric ID or namespace/project",
+        "required": true
+      },
+      {
+        "name": "merge_request_iid",
+        "type": "string",
+        "value": null,
+        "label": "Merge Request IID",
+        "placeholder": "",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "approvals",
+        "type": "object",
+        "value": null,
+        "label": "Approvals (JSON)",
+        "placeholder": ""
+      },
+      {
+        "name": "approved",
+        "type": "boolean",
+        "value": null,
+        "label": "Approved",
+        "placeholder": ""
+      },
+      {
+        "name": "approvals_required",
+        "type": "integer",
+        "value": null,
+        "label": "Approvals Required",
+        "placeholder": ""
+      },
+      {
+        "name": "approvals_left",
+        "type": "integer",
+        "value": null,
+        "label": "Approvals Left",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "gitlab/list_merge_request_comments": {
+    "hash": "d70da8be21921ff4ff68c112841ef8976942aad561218606e9539537c19116da",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "GitLab List MR Comments",
+    "description": "List notes and comments on a GitLab merge request",
+    "website": "https://www.flomation.co",
+    "icon": "gitlab",
+    "date": "26/04/2026",
+    "type": 2,
+    "category": {
+      "name": "GitLab",
+      "icon": "gitlab",
+      "description": "Manage merge requests, pipelines, and issues in GitLab"
+    },
+    "inputs": [
+      {
+        "name": "access_token",
+        "type": "string",
+        "value": null,
+        "label": "GitLab Access Token",
+        "placeholder": "glpat-...",
+        "required": true
+      },
+      {
+        "name": "base_url",
+        "type": "string",
+        "value": null,
+        "label": "GitLab Base URL",
+        "placeholder": "https://gitlab.com"
+      },
+      {
+        "name": "project_id",
+        "type": "string",
+        "value": null,
+        "label": "Project ID",
+        "placeholder": "Numeric ID or namespace/project",
+        "required": true
+      },
+      {
+        "name": "merge_request_iid",
+        "type": "string",
+        "value": null,
+        "label": "Merge Request IID",
+        "placeholder": "",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "comments",
+        "type": "object",
+        "value": null,
+        "label": "Comments (JSON)",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Count",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "gitlab/list_merge_requests": {
+    "hash": "c384c2c03dd8c275a2dd4561d2554e9ed310c74d7e7299bbefed91666478b6bb",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "GitLab List Merge Requests",
+    "description": "List merge requests in a GitLab project with optional filters",
+    "website": "https://www.flomation.co",
+    "icon": "gitlab",
+    "date": "26/04/2026",
+    "type": 2,
+    "category": {
+      "name": "GitLab",
+      "icon": "gitlab",
+      "description": "Manage merge requests, pipelines, and issues in GitLab"
+    },
+    "inputs": [
+      {
+        "name": "access_token",
+        "type": "string",
+        "value": null,
+        "label": "GitLab Access Token",
+        "placeholder": "glpat-...",
+        "required": true
+      },
+      {
+        "name": "base_url",
+        "type": "string",
+        "value": null,
+        "label": "GitLab Base URL",
+        "placeholder": "https://gitlab.com"
+      },
+      {
+        "name": "project_id",
+        "type": "string",
+        "value": null,
+        "label": "Project ID",
+        "placeholder": "Numeric ID or namespace/project",
+        "required": true
+      },
+      {
+        "name": "state",
+        "type": "string",
+        "value": null,
+        "label": "State",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "All",
+            "value": "all"
+          },
+          {
+            "name": "Opened",
+            "value": "opened"
+          },
+          {
+            "name": "Closed",
+            "value": "closed"
+          },
+          {
+            "name": "Merged",
+            "value": "merged"
+          }
+        ]
+      },
+      {
+        "name": "search",
+        "type": "string",
+        "value": null,
+        "label": "Search",
+        "placeholder": "Search in title and description"
+      },
+      {
+        "name": "labels",
+        "type": "string",
+        "value": null,
+        "label": "Labels",
+        "placeholder": "Comma-separated label names"
+      },
+      {
+        "name": "author_username",
+        "type": "string",
+        "value": null,
+        "label": "Author Username",
+        "placeholder": ""
+      },
+      {
+        "name": "per_page",
+        "type": "string",
+        "value": null,
+        "label": "Per Page",
+        "placeholder": "20 (max 100)"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "merge_requests",
+        "type": "object",
+        "value": null,
+        "label": "Merge Requests (JSON)",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Count",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "gitlab/list_pipeline_jobs": {
+    "hash": "b221964a1e48f9d833f7e909af8e3140f162774e9dd479ff7a80ad275c9c3ac9",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "GitLab List Pipeline Jobs",
+    "description": "List jobs within a GitLab pipeline",
+    "website": "https://www.flomation.co",
+    "icon": "gitlab",
+    "date": "26/04/2026",
+    "type": 2,
+    "category": {
+      "name": "GitLab",
+      "icon": "gitlab",
+      "description": "Manage merge requests, pipelines, and issues in GitLab"
+    },
+    "inputs": [
+      {
+        "name": "access_token",
+        "type": "string",
+        "value": null,
+        "label": "GitLab Access Token",
+        "placeholder": "glpat-...",
+        "required": true
+      },
+      {
+        "name": "base_url",
+        "type": "string",
+        "value": null,
+        "label": "GitLab Base URL",
+        "placeholder": "https://gitlab.com"
+      },
+      {
+        "name": "project_id",
+        "type": "string",
+        "value": null,
+        "label": "Project ID",
+        "placeholder": "Numeric ID or namespace/project",
+        "required": true
+      },
+      {
+        "name": "pipeline_id",
+        "type": "string",
+        "value": null,
+        "label": "Pipeline ID",
+        "placeholder": "",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "jobs",
+        "type": "object",
+        "value": null,
+        "label": "Jobs (JSON)",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Count",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "gitlab/list_pipelines": {
+    "hash": "22ccd4bf5f9bc724cfa501f7c9016dc651fc3f03ac829c459bf7e070dcaf1623",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "GitLab List Pipelines",
+    "description": "List pipelines for a GitLab project with optional filters",
+    "website": "https://www.flomation.co",
+    "icon": "gitlab",
+    "date": "26/04/2026",
+    "type": 2,
+    "category": {
+      "name": "GitLab",
+      "icon": "gitlab",
+      "description": "Manage merge requests, pipelines, and issues in GitLab"
+    },
+    "inputs": [
+      {
+        "name": "access_token",
+        "type": "string",
+        "value": null,
+        "label": "GitLab Access Token",
+        "placeholder": "glpat-...",
+        "required": true
+      },
+      {
+        "name": "base_url",
+        "type": "string",
+        "value": null,
+        "label": "GitLab Base URL",
+        "placeholder": "https://gitlab.com"
+      },
+      {
+        "name": "project_id",
+        "type": "string",
+        "value": null,
+        "label": "Project ID",
+        "placeholder": "Numeric ID or namespace/project",
+        "required": true
+      },
+      {
+        "name": "ref",
+        "type": "string",
+        "value": null,
+        "label": "Ref",
+        "placeholder": "Branch or tag name"
+      },
+      {
+        "name": "status",
+        "type": "string",
+        "value": null,
+        "label": "Status",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "All",
+            "value": ""
+          },
+          {
+            "name": "Running",
+            "value": "running"
+          },
+          {
+            "name": "Pending",
+            "value": "pending"
+          },
+          {
+            "name": "Success",
+            "value": "success"
+          },
+          {
+            "name": "Failed",
+            "value": "failed"
+          },
+          {
+            "name": "Cancelled",
+            "value": "canceled"
+          }
+        ]
+      },
+      {
+        "name": "per_page",
+        "type": "string",
+        "value": null,
+        "label": "Per Page",
+        "placeholder": "20 (max 100)"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "pipelines",
+        "type": "object",
+        "value": null,
+        "label": "Pipelines (JSON)",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Count",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "gitlab/list_projects": {
+    "hash": "6e08e778bfa76e17e8da15075bd0a1b10c31bac7120659f81eb0472b86a54c0d",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "GitLab List Projects",
+    "description": "List projects accessible to the authenticated user",
+    "website": "https://www.flomation.co",
+    "icon": "gitlab",
+    "date": "26/04/2026",
+    "type": 2,
+    "category": {
+      "name": "GitLab",
+      "icon": "gitlab",
+      "description": "Manage merge requests, pipelines, and issues in GitLab"
+    },
+    "inputs": [
+      {
+        "name": "access_token",
+        "type": "string",
+        "value": null,
+        "label": "GitLab Access Token",
+        "placeholder": "glpat-...",
+        "required": true
+      },
+      {
+        "name": "base_url",
+        "type": "string",
+        "value": null,
+        "label": "GitLab Base URL",
+        "placeholder": "https://gitlab.com"
+      },
+      {
+        "name": "search",
+        "type": "string",
+        "value": null,
+        "label": "Search",
+        "placeholder": "Search by name"
+      },
+      {
+        "name": "owned",
+        "type": "boolean",
+        "value": null,
+        "label": "Owned Only",
+        "placeholder": ""
+      },
+      {
+        "name": "membership",
+        "type": "boolean",
+        "value": null,
+        "label": "Member Of Only",
+        "placeholder": ""
+      },
+      {
+        "name": "order_by",
+        "type": "string",
+        "value": null,
+        "label": "Order By",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "Created At",
+            "value": "created_at"
+          },
+          {
+            "name": "Updated At",
+            "value": "updated_at"
+          },
+          {
+            "name": "Name",
+            "value": "name"
+          },
+          {
+            "name": "Last Activity",
+            "value": "last_activity_at"
+          }
+        ]
+      },
+      {
+        "name": "per_page",
+        "type": "string",
+        "value": null,
+        "label": "Per Page",
+        "placeholder": "20 (max 100)"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "projects",
+        "type": "object",
+        "value": null,
+        "label": "Projects (JSON)",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Count",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "gitlab/list_users": {
+    "hash": "5a84674e2c6132f5f32658a3c36ab60fbab8a4a26057ab5376e418ece326ffe2",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "GitLab List Users",
+    "description": "List users on a GitLab instance with optional search",
+    "website": "https://www.flomation.co",
+    "icon": "gitlab",
+    "date": "26/04/2026",
+    "type": 2,
+    "category": {
+      "name": "GitLab",
+      "icon": "gitlab",
+      "description": "Manage merge requests, pipelines, and issues in GitLab"
+    },
+    "inputs": [
+      {
+        "name": "access_token",
+        "type": "string",
+        "value": null,
+        "label": "GitLab Access Token",
+        "placeholder": "glpat-...",
+        "required": true
+      },
+      {
+        "name": "base_url",
+        "type": "string",
+        "value": null,
+        "label": "GitLab Base URL",
+        "placeholder": "https://gitlab.com"
+      },
+      {
+        "name": "search",
+        "type": "string",
+        "value": null,
+        "label": "Search",
+        "placeholder": "Search by name, username, or email"
+      },
+      {
+        "name": "active",
+        "type": "boolean",
+        "value": null,
+        "label": "Active Users Only",
+        "placeholder": ""
+      },
+      {
+        "name": "per_page",
+        "type": "string",
+        "value": null,
+        "label": "Per Page",
+        "placeholder": "20 (max 100)"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "users",
+        "type": "object",
+        "value": null,
+        "label": "Users (JSON)",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Count",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "gitlab/merge_merge_request": {
+    "hash": "37f2d42c8b2af1abb35c27d94e7c8949c2d53c05d28a0f4ba2eeb3143af2cbad",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "GitLab Merge Merge Request",
+    "description": "Merge an approved merge request in a GitLab project",
+    "website": "https://www.flomation.co",
+    "icon": "gitlab",
+    "date": "26/04/2026",
+    "type": 2,
+    "category": {
+      "name": "GitLab",
+      "icon": "gitlab",
+      "description": "Manage merge requests, pipelines, and issues in GitLab"
+    },
+    "inputs": [
+      {
+        "name": "access_token",
+        "type": "string",
+        "value": null,
+        "label": "GitLab Access Token",
+        "placeholder": "glpat-...",
+        "required": true
+      },
+      {
+        "name": "base_url",
+        "type": "string",
+        "value": null,
+        "label": "GitLab Base URL",
+        "placeholder": "https://gitlab.com"
+      },
+      {
+        "name": "project_id",
+        "type": "string",
+        "value": null,
+        "label": "Project ID",
+        "placeholder": "Numeric ID or namespace/project",
+        "required": true
+      },
+      {
+        "name": "merge_request_iid",
+        "type": "string",
+        "value": null,
+        "label": "Merge Request IID",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "squash",
+        "type": "boolean",
+        "value": null,
+        "label": "Squash Commits",
+        "placeholder": ""
+      },
+      {
+        "name": "should_remove_source_branch",
+        "type": "boolean",
+        "value": null,
+        "label": "Delete Source Branch",
+        "placeholder": ""
+      },
+      {
+        "name": "merge_when_pipeline_succeeds",
+        "type": "boolean",
+        "value": null,
+        "label": "Merge When Pipeline Succeeds",
+        "placeholder": ""
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "state",
+        "type": "string",
+        "value": null,
+        "label": "State",
+        "placeholder": ""
+      },
+      {
+        "name": "web_url",
+        "type": "string",
+        "value": null,
+        "label": "Web URL",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "gitlab/retry_pipeline": {
+    "hash": "7e117ed2740b52f6b04dffd986042c10e38e0e9b73c0933617b81ef984722061",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "GitLab Retry Pipeline",
+    "description": "Retry all failed jobs in a GitLab pipeline",
+    "website": "https://www.flomation.co",
+    "icon": "gitlab",
+    "date": "26/04/2026",
+    "type": 2,
+    "category": {
+      "name": "GitLab",
+      "icon": "gitlab",
+      "description": "Manage merge requests, pipelines, and issues in GitLab"
+    },
+    "inputs": [
+      {
+        "name": "access_token",
+        "type": "string",
+        "value": null,
+        "label": "GitLab Access Token",
+        "placeholder": "glpat-...",
+        "required": true
+      },
+      {
+        "name": "base_url",
+        "type": "string",
+        "value": null,
+        "label": "GitLab Base URL",
+        "placeholder": "https://gitlab.com"
+      },
+      {
+        "name": "project_id",
+        "type": "string",
+        "value": null,
+        "label": "Project ID",
+        "placeholder": "Numeric ID or namespace/project",
+        "required": true
+      },
+      {
+        "name": "pipeline_id",
+        "type": "string",
+        "value": null,
+        "label": "Pipeline ID",
+        "placeholder": "",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "pipeline_id",
+        "type": "string",
+        "value": null,
+        "label": "Pipeline ID",
+        "placeholder": ""
+      },
+      {
+        "name": "status",
+        "type": "string",
+        "value": null,
+        "label": "Status",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "gitlab/trigger_pipeline": {
+    "hash": "fced518d5872931f36505456710ccbdbcf67d42759dcc491a5ea1873243203c7",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "GitLab Trigger Pipeline",
+    "description": "Create and trigger a new pipeline for a branch or tag",
+    "website": "https://www.flomation.co",
+    "icon": "gitlab",
+    "date": "26/04/2026",
+    "type": 2,
+    "category": {
+      "name": "GitLab",
+      "icon": "gitlab",
+      "description": "Manage merge requests, pipelines, and issues in GitLab"
+    },
+    "inputs": [
+      {
+        "name": "access_token",
+        "type": "string",
+        "value": null,
+        "label": "GitLab Access Token",
+        "placeholder": "glpat-...",
+        "required": true
+      },
+      {
+        "name": "base_url",
+        "type": "string",
+        "value": null,
+        "label": "GitLab Base URL",
+        "placeholder": "https://gitlab.com"
+      },
+      {
+        "name": "project_id",
+        "type": "string",
+        "value": null,
+        "label": "Project ID",
+        "placeholder": "Numeric ID or namespace/project",
+        "required": true
+      },
+      {
+        "name": "ref",
+        "type": "string",
+        "value": null,
+        "label": "Ref",
+        "placeholder": "Branch or tag to run the pipeline on",
+        "required": true
+      },
+      {
+        "name": "variables",
+        "type": "key_value_array",
+        "value": null,
+        "label": "Pipeline Variables",
+        "placeholder": ""
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "pipeline_id",
+        "type": "string",
+        "value": null,
+        "label": "Pipeline ID",
+        "placeholder": ""
+      },
+      {
+        "name": "web_url",
+        "type": "string",
+        "value": null,
+        "label": "Web URL",
+        "placeholder": ""
+      },
+      {
+        "name": "status",
+        "type": "string",
+        "value": null,
+        "label": "Status",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "gitlab/unapprove_merge_request": {
+    "hash": "cafb60d60fe4ae9313b0519de48e63f2cdbbe5a9e6b35d43f13001425f882781",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "GitLab Unapprove Merge Request",
+    "description": "Remove your approval from a GitLab merge request",
+    "website": "https://www.flomation.co",
+    "icon": "gitlab",
+    "date": "26/04/2026",
+    "type": 2,
+    "category": {
+      "name": "GitLab",
+      "icon": "gitlab",
+      "description": "Manage merge requests, pipelines, and issues in GitLab"
+    },
+    "inputs": [
+      {
+        "name": "access_token",
+        "type": "string",
+        "value": null,
+        "label": "GitLab Access Token",
+        "placeholder": "glpat-...",
+        "required": true
+      },
+      {
+        "name": "base_url",
+        "type": "string",
+        "value": null,
+        "label": "GitLab Base URL",
+        "placeholder": "https://gitlab.com"
+      },
+      {
+        "name": "project_id",
+        "type": "string",
+        "value": null,
+        "label": "Project ID",
+        "placeholder": "Numeric ID or namespace/project",
+        "required": true
+      },
+      {
+        "name": "merge_request_iid",
+        "type": "string",
+        "value": null,
+        "label": "Merge Request IID",
+        "placeholder": "",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "gitlab/update_merge_request": {
+    "hash": "0b05dcd4ca819c60c8f3f4639f7208499073000cd995c8923b7ee7fe0cd2af78",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "GitLab Update Merge Request",
+    "description": "Update an existing merge request in a GitLab project",
+    "website": "https://www.flomation.co",
+    "icon": "gitlab",
+    "date": "26/04/2026",
+    "type": 2,
+    "category": {
+      "name": "GitLab",
+      "icon": "gitlab",
+      "description": "Manage merge requests, pipelines, and issues in GitLab"
+    },
+    "inputs": [
+      {
+        "name": "access_token",
+        "type": "string",
+        "value": null,
+        "label": "GitLab Access Token",
+        "placeholder": "glpat-...",
+        "required": true
+      },
+      {
+        "name": "base_url",
+        "type": "string",
+        "value": null,
+        "label": "GitLab Base URL",
+        "placeholder": "https://gitlab.com"
+      },
+      {
+        "name": "project_id",
+        "type": "string",
+        "value": null,
+        "label": "Project ID",
+        "placeholder": "Numeric ID or namespace/project",
+        "required": true
+      },
+      {
+        "name": "merge_request_iid",
+        "type": "string",
+        "value": null,
+        "label": "Merge Request IID",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "title",
+        "type": "string",
+        "value": null,
+        "label": "Title",
+        "placeholder": ""
+      },
+      {
+        "name": "description",
+        "type": "text",
+        "value": null,
+        "label": "Description",
+        "placeholder": ""
+      },
+      {
+        "name": "labels",
+        "type": "string",
+        "value": null,
+        "label": "Labels",
+        "placeholder": "Comma-separated label names"
+      },
+      {
+        "name": "assignee_ids",
+        "type": "string",
+        "value": null,
+        "label": "Assignee IDs",
+        "placeholder": "Comma-separated user IDs"
+      },
+      {
+        "name": "reviewer_ids",
+        "type": "string",
+        "value": null,
+        "label": "Reviewer IDs",
+        "placeholder": "Comma-separated user IDs"
+      },
+      {
+        "name": "state_event",
+        "type": "string",
+        "value": null,
+        "label": "State Event",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "No Change",
+            "value": ""
+          },
+          {
+            "name": "Close",
+            "value": "close"
+          },
+          {
+            "name": "Reopen",
+            "value": "reopen"
+          }
+        ]
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "web_url",
+        "type": "string",
+        "value": null,
+        "label": "Web URL",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
   "http/request": {
     "hash": "a4dfc20efa6503dc772abacf8d374e8d0028205b6fc7279072c444c7877855c0",
     "author": "Andy Esser",
@@ -5624,6 +10646,975 @@
         "type": "boolean",
         "value": null,
         "label": "Success",
+        "placeholder": ""
+      }
+    ]
+  },
+  "notion/add_comment": {
+    "hash": "a1f6b2c6097d1e1beabc07eb2a9b374fc8ad77217eb710f77d4bb98e885d2118",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Notion Add Comment",
+    "description": "Add a comment to a Notion page or discussion thread",
+    "website": "https://www.flomation.co",
+    "icon": "notion",
+    "date": "28/04/2026",
+    "type": 2,
+    "category": {
+      "name": "Notion",
+      "icon": "notion",
+      "description": "Search, create, and manage pages, databases, and content in Notion"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "string",
+        "value": null,
+        "label": "Notion Integration Token",
+        "placeholder": "ntn_...",
+        "required": true
+      },
+      {
+        "name": "page_id",
+        "type": "string",
+        "value": null,
+        "label": "Page ID",
+        "placeholder": "Page to comment on"
+      },
+      {
+        "name": "discussion_id",
+        "type": "string",
+        "value": null,
+        "label": "Discussion Thread ID",
+        "placeholder": "Reply to existing discussion (optional)"
+      },
+      {
+        "name": "body",
+        "type": "text",
+        "value": null,
+        "label": "Comment Text",
+        "placeholder": "",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "comment_id",
+        "type": "string",
+        "value": null,
+        "label": "Comment ID",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "notion/append_block_children": {
+    "hash": "5b21479501ea609c3080a029535b417974ca82aaed3cda29f71fda5b8b2398f5",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Notion Append Content",
+    "description": "Append content blocks to a Notion page or block",
+    "website": "https://www.flomation.co",
+    "icon": "notion",
+    "date": "28/04/2026",
+    "type": 2,
+    "category": {
+      "name": "Notion",
+      "icon": "notion",
+      "description": "Search, create, and manage pages, databases, and content in Notion"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "string",
+        "value": null,
+        "label": "Notion Integration Token",
+        "placeholder": "ntn_...",
+        "required": true
+      },
+      {
+        "name": "block_id",
+        "type": "string",
+        "value": null,
+        "label": "Block or Page ID",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "content",
+        "type": "text",
+        "value": null,
+        "label": "Text Content",
+        "placeholder": "Text to append as a paragraph"
+      },
+      {
+        "name": "blocks_json",
+        "type": "text",
+        "value": null,
+        "label": "Blocks (JSON array)",
+        "placeholder": "Advanced: raw Notion block objects"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "notion/create_page": {
+    "hash": "384268120fcef587af2c54710cdf95f0017a1c41520890f2181a9bf6a155b2bc",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Notion Create Page",
+    "description": "Create a new page in a Notion database or as a child of another page",
+    "website": "https://www.flomation.co",
+    "icon": "notion",
+    "date": "28/04/2026",
+    "type": 2,
+    "category": {
+      "name": "Notion",
+      "icon": "notion",
+      "description": "Search, create, and manage pages, databases, and content in Notion"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "string",
+        "value": null,
+        "label": "Notion Integration Token",
+        "placeholder": "ntn_...",
+        "required": true
+      },
+      {
+        "name": "parent_id",
+        "type": "string",
+        "value": null,
+        "label": "Parent ID (database or page)",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "parent_type",
+        "type": "string",
+        "value": null,
+        "label": "Parent Type",
+        "placeholder": "",
+        "required": true,
+        "options": [
+          {
+            "name": "Database",
+            "value": "database_id"
+          },
+          {
+            "name": "Page",
+            "value": "page_id"
+          }
+        ]
+      },
+      {
+        "name": "title",
+        "type": "string",
+        "value": null,
+        "label": "Page Title",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "content",
+        "type": "text",
+        "value": null,
+        "label": "Page Content (Markdown-style text)",
+        "placeholder": ""
+      },
+      {
+        "name": "properties_json",
+        "type": "text",
+        "value": null,
+        "label": "Additional Properties (JSON)",
+        "placeholder": "{\"Status\": {\"select\": {\"name\": \"In Progress\"}}}"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "page_id",
+        "type": "string",
+        "value": null,
+        "label": "Page ID",
+        "placeholder": ""
+      },
+      {
+        "name": "url",
+        "type": "string",
+        "value": null,
+        "label": "URL",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "notion/delete_block": {
+    "hash": "520350e81169e19e0112900279c6d99369fda65970ad851493595250bd385ab6",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Notion Delete Block",
+    "description": "Delete (archive) a block from a Notion page",
+    "website": "https://www.flomation.co",
+    "icon": "notion",
+    "date": "28/04/2026",
+    "type": 2,
+    "category": {
+      "name": "Notion",
+      "icon": "notion",
+      "description": "Search, create, and manage pages, databases, and content in Notion"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "string",
+        "value": null,
+        "label": "Notion Integration Token",
+        "placeholder": "ntn_...",
+        "required": true
+      },
+      {
+        "name": "block_id",
+        "type": "string",
+        "value": null,
+        "label": "Block ID",
+        "placeholder": "",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "notion/get_block_children": {
+    "hash": "a76116ab98a4c7472dfe076fbb893c8eeef000b7a2828a72b2a7fff62dc5ca3d",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Notion Get Block Children",
+    "description": "Read the content blocks of a Notion page or block",
+    "website": "https://www.flomation.co",
+    "icon": "notion",
+    "date": "28/04/2026",
+    "type": 2,
+    "category": {
+      "name": "Notion",
+      "icon": "notion",
+      "description": "Search, create, and manage pages, databases, and content in Notion"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "string",
+        "value": null,
+        "label": "Notion Integration Token",
+        "placeholder": "ntn_...",
+        "required": true
+      },
+      {
+        "name": "block_id",
+        "type": "string",
+        "value": null,
+        "label": "Block or Page ID",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "page_size",
+        "type": "string",
+        "value": null,
+        "label": "Results (default 50, max 100)",
+        "placeholder": ""
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "blocks",
+        "type": "object",
+        "value": null,
+        "label": "Blocks (JSON)",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Count",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "notion/get_database": {
+    "hash": "00a460deaf0d12e9ffc13d2c08699d1a32a09416e4ce96ae0086b4cb12e64943",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Notion Get Database",
+    "description": "Retrieve a Notion database schema and metadata",
+    "website": "https://www.flomation.co",
+    "icon": "notion",
+    "date": "28/04/2026",
+    "type": 2,
+    "category": {
+      "name": "Notion",
+      "icon": "notion",
+      "description": "Search, create, and manage pages, databases, and content in Notion"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "string",
+        "value": null,
+        "label": "Notion Integration Token",
+        "placeholder": "ntn_...",
+        "required": true
+      },
+      {
+        "name": "database_id",
+        "type": "string",
+        "value": null,
+        "label": "Database ID",
+        "placeholder": "",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "title",
+        "type": "string",
+        "value": null,
+        "label": "Title",
+        "placeholder": ""
+      },
+      {
+        "name": "url",
+        "type": "string",
+        "value": null,
+        "label": "URL",
+        "placeholder": ""
+      },
+      {
+        "name": "properties",
+        "type": "object",
+        "value": null,
+        "label": "Schema (JSON)",
+        "placeholder": ""
+      },
+      {
+        "name": "data",
+        "type": "object",
+        "value": null,
+        "label": "Full Response (JSON)",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "notion/get_page": {
+    "hash": "c98ffe4c25bdc0a7916294fa13f8cd82afa110ebebb22647db50acd9e67865b4",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Notion Get Page",
+    "description": "Retrieve a Notion page's properties by ID",
+    "website": "https://www.flomation.co",
+    "icon": "notion",
+    "date": "28/04/2026",
+    "type": 2,
+    "category": {
+      "name": "Notion",
+      "icon": "notion",
+      "description": "Search, create, and manage pages, databases, and content in Notion"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "string",
+        "value": null,
+        "label": "Notion Integration Token",
+        "placeholder": "ntn_...",
+        "required": true
+      },
+      {
+        "name": "page_id",
+        "type": "string",
+        "value": null,
+        "label": "Page ID",
+        "placeholder": "",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "title",
+        "type": "string",
+        "value": null,
+        "label": "Title",
+        "placeholder": ""
+      },
+      {
+        "name": "url",
+        "type": "string",
+        "value": null,
+        "label": "URL",
+        "placeholder": ""
+      },
+      {
+        "name": "properties",
+        "type": "object",
+        "value": null,
+        "label": "Properties (JSON)",
+        "placeholder": ""
+      },
+      {
+        "name": "data",
+        "type": "object",
+        "value": null,
+        "label": "Full Response (JSON)",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "notion/list_comments": {
+    "hash": "9d14b37ffc424b5496285aedfcd3eec5e113eaef9805793cca639df8edee2b34",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Notion List Comments",
+    "description": "List comments on a Notion page or block",
+    "website": "https://www.flomation.co",
+    "icon": "notion",
+    "date": "28/04/2026",
+    "type": 2,
+    "category": {
+      "name": "Notion",
+      "icon": "notion",
+      "description": "Search, create, and manage pages, databases, and content in Notion"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "string",
+        "value": null,
+        "label": "Notion Integration Token",
+        "placeholder": "ntn_...",
+        "required": true
+      },
+      {
+        "name": "block_id",
+        "type": "string",
+        "value": null,
+        "label": "Block or Page ID",
+        "placeholder": "",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "comments",
+        "type": "object",
+        "value": null,
+        "label": "Comments (JSON)",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Count",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "notion/list_databases": {
+    "hash": "81ba42951c0ea33c041271a3e3da674b106f23163adaf0523e73f55cff01ae86",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Notion List Databases",
+    "description": "List all databases shared with the integration",
+    "website": "https://www.flomation.co",
+    "icon": "notion",
+    "date": "28/04/2026",
+    "type": 2,
+    "category": {
+      "name": "Notion",
+      "icon": "notion",
+      "description": "Search, create, and manage pages, databases, and content in Notion"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "string",
+        "value": null,
+        "label": "Notion Integration Token",
+        "placeholder": "ntn_...",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "databases",
+        "type": "object",
+        "value": null,
+        "label": "Databases (JSON)",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Count",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "notion/query_database": {
+    "hash": "4f3255c883ce9ee6d7756b747f46c91bc64e85396df6a65eb1ee12dbb8689c71",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Notion Query Database",
+    "description": "Query a Notion database with optional filters and sorts",
+    "website": "https://www.flomation.co",
+    "icon": "notion",
+    "date": "28/04/2026",
+    "type": 2,
+    "category": {
+      "name": "Notion",
+      "icon": "notion",
+      "description": "Search, create, and manage pages, databases, and content in Notion"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "string",
+        "value": null,
+        "label": "Notion Integration Token",
+        "placeholder": "ntn_...",
+        "required": true
+      },
+      {
+        "name": "database_id",
+        "type": "string",
+        "value": null,
+        "label": "Database ID",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "filter_json",
+        "type": "text",
+        "value": null,
+        "label": "Filter (JSON)",
+        "placeholder": "{\"property\": \"Status\", \"select\": {\"equals\": \"Done\"}}"
+      },
+      {
+        "name": "sorts_json",
+        "type": "text",
+        "value": null,
+        "label": "Sorts (JSON array)",
+        "placeholder": "[{\"property\": \"Created\", \"direction\": \"descending\"}]"
+      },
+      {
+        "name": "page_size",
+        "type": "string",
+        "value": null,
+        "label": "Results (default 20, max 100)",
+        "placeholder": ""
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "results",
+        "type": "object",
+        "value": null,
+        "label": "Results (JSON)",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Count",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "notion/search": {
+    "hash": "54b5b77358a978efcde0ad223a90fc426587002d4217e2702afc24a6caa8f3fa",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Notion Search",
+    "description": "Search across all pages and databases in a Notion workspace",
+    "website": "https://www.flomation.co",
+    "icon": "notion",
+    "date": "28/04/2026",
+    "type": 2,
+    "category": {
+      "name": "Notion",
+      "icon": "notion",
+      "description": "Search, create, and manage pages, databases, and content in Notion"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "string",
+        "value": null,
+        "label": "Notion Integration Token",
+        "placeholder": "ntn_...",
+        "required": true
+      },
+      {
+        "name": "query",
+        "type": "string",
+        "value": null,
+        "label": "Search Query",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "filter_type",
+        "type": "string",
+        "value": null,
+        "label": "Filter Type",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "All",
+            "value": ""
+          },
+          {
+            "name": "Pages Only",
+            "value": "page"
+          },
+          {
+            "name": "Databases Only",
+            "value": "database"
+          }
+        ]
+      },
+      {
+        "name": "page_size",
+        "type": "string",
+        "value": null,
+        "label": "Results (default 10, max 100)",
+        "placeholder": ""
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "results",
+        "type": "object",
+        "value": null,
+        "label": "Results (JSON)",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Count",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "notion/update_page": {
+    "hash": "081588d86f060d860b75b748ed4f64eccea52ca153be2f9b916820c99cc58cfc",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Notion Update Page",
+    "description": "Update properties of an existing Notion page",
+    "website": "https://www.flomation.co",
+    "icon": "notion",
+    "date": "28/04/2026",
+    "type": 2,
+    "category": {
+      "name": "Notion",
+      "icon": "notion",
+      "description": "Search, create, and manage pages, databases, and content in Notion"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "string",
+        "value": null,
+        "label": "Notion Integration Token",
+        "placeholder": "ntn_...",
+        "required": true
+      },
+      {
+        "name": "page_id",
+        "type": "string",
+        "value": null,
+        "label": "Page ID",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "properties_json",
+        "type": "text",
+        "value": null,
+        "label": "Properties (JSON)",
+        "placeholder": "{\"Status\": {\"select\": {\"name\": \"Done\"}}}",
+        "required": true
+      },
+      {
+        "name": "archived",
+        "type": "boolean",
+        "value": null,
+        "label": "Archive Page",
+        "placeholder": ""
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "url",
+        "type": "string",
+        "value": null,
+        "label": "URL",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
         "placeholder": ""
       }
     ]
@@ -8347,6 +14338,164 @@
       }
     ]
   },
+  "tools/slack_history": {
+    "hash": "5ec8638e1e977a914cf4697ef519f08e59dcb08e294aa6110c8b33ae96065b5e",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Slack Channel History",
+    "description": "Read recent messages from a Slack channel. Uses conversations.history API.",
+    "website": "https://www.flomation.co",
+    "icon": "slack",
+    "date": "28/04/2026",
+    "type": 2,
+    "category": {
+      "name": "Tools",
+      "icon": "wrench",
+      "description": "AI tool implementations for function calling"
+    },
+    "inputs": [
+      {
+        "name": "bot_token",
+        "type": "string",
+        "value": null,
+        "label": "Bot Token",
+        "placeholder": "xoxb-...",
+        "required": true
+      },
+      {
+        "name": "channel_id",
+        "type": "string",
+        "value": null,
+        "label": "Channel ID",
+        "placeholder": "C01ABC2DEF3",
+        "required": true
+      },
+      {
+        "name": "limit",
+        "type": "string",
+        "value": null,
+        "label": "Number of messages (default 20, max 100)",
+        "placeholder": ""
+      },
+      {
+        "name": "oldest",
+        "type": "string",
+        "value": null,
+        "label": "Oldest timestamp (Unix ts or ISO date, e.g. 2026-04-28)",
+        "placeholder": ""
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "messages",
+        "type": "object",
+        "value": null,
+        "label": "Messages (JSON array)",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Message count",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "tools/slack_react": {
+    "hash": "d630fc0f338b9cc1eb05bbeb730c78be84214d2f7e0bd449a5c125e035476bfd",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Slack Add Reaction",
+    "description": "Add an emoji reaction to a Slack message. Use emoji name without colons.",
+    "website": "https://www.flomation.co",
+    "icon": "slack",
+    "date": "28/04/2026",
+    "type": 2,
+    "category": {
+      "name": "Tools",
+      "icon": "wrench",
+      "description": "AI tool implementations for function calling"
+    },
+    "inputs": [
+      {
+        "name": "bot_token",
+        "type": "string",
+        "value": null,
+        "label": "Bot Token",
+        "placeholder": "xoxb-...",
+        "required": true
+      },
+      {
+        "name": "channel_id",
+        "type": "string",
+        "value": null,
+        "label": "Channel ID",
+        "placeholder": "C01ABC2DEF3",
+        "required": true
+      },
+      {
+        "name": "timestamp",
+        "type": "string",
+        "value": null,
+        "label": "Message Timestamp",
+        "placeholder": "1234567890.123456",
+        "required": true
+      },
+      {
+        "name": "emoji",
+        "type": "string",
+        "value": null,
+        "label": "Emoji Name (without colons)",
+        "placeholder": "thumbsup",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
   "tools/slack_rich_message": {
     "hash": "2571bfcd91a313eec2be84418f4b925690e70aead1ad463e8aaac20686940847",
     "author": "Andy Esser",
@@ -8506,6 +14655,92 @@
         "type": "integer",
         "value": null,
         "label": "Total matches",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "tools/slack_thread": {
+    "hash": "f4d65ca677d2486d5c1785739968273a8bf025fafb6dbb0aa65ad92ee3cf476a",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Slack Thread Replies",
+    "description": "Read replies in a Slack thread. Requires the channel ID and thread timestamp.",
+    "website": "https://www.flomation.co",
+    "icon": "slack",
+    "date": "28/04/2026",
+    "type": 2,
+    "category": {
+      "name": "Tools",
+      "icon": "wrench",
+      "description": "AI tool implementations for function calling"
+    },
+    "inputs": [
+      {
+        "name": "bot_token",
+        "type": "string",
+        "value": null,
+        "label": "Bot Token",
+        "placeholder": "xoxb-...",
+        "required": true
+      },
+      {
+        "name": "channel_id",
+        "type": "string",
+        "value": null,
+        "label": "Channel ID",
+        "placeholder": "C01ABC2DEF3",
+        "required": true
+      },
+      {
+        "name": "thread_ts",
+        "type": "string",
+        "value": null,
+        "label": "Thread Timestamp",
+        "placeholder": "1234567890.123456",
+        "required": true
+      },
+      {
+        "name": "limit",
+        "type": "string",
+        "value": null,
+        "label": "Number of replies (default 50, max 200)",
+        "placeholder": ""
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "messages",
+        "type": "object",
+        "value": null,
+        "label": "Thread messages (JSON array)",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Reply count",
         "placeholder": ""
       },
       {
@@ -9073,6 +15308,314 @@
         "type": "string",
         "value": null,
         "label": "Repository URL",
+        "placeholder": ""
+      }
+    ]
+  },
+  "trigger/github_webhook": {
+    "hash": "847b195cc53d29aecc2a424870e302c0b2434c538cb54e7261c8586322ce3c43",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "GitHub Webhook Trigger",
+    "description": "Triggers a flow when a GitHub webhook event is received",
+    "website": "https://www.flomation.co",
+    "icon": "github",
+    "date": "26/04/2026",
+    "type": 1,
+    "category": {
+      "name": "Triggers",
+      "icon": "bolt-lightning",
+      "description": "Start a Flow"
+    },
+    "inputs": [
+      {
+        "name": "webhook_secret",
+        "type": "string",
+        "value": null,
+        "label": "Webhook Secret",
+        "placeholder": "HMAC secret for X-Hub-Signature-256 validation",
+        "required": true
+      },
+      {
+        "name": "event_filter",
+        "type": "string",
+        "value": null,
+        "label": "Event Filter",
+        "placeholder": "Comma-separated: push,pull_request,issue_comment,workflow_run"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "content",
+        "type": "string",
+        "value": null,
+        "label": "Event Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "event_type",
+        "type": "string",
+        "value": null,
+        "label": "Event Type",
+        "placeholder": ""
+      },
+      {
+        "name": "action",
+        "type": "string",
+        "value": null,
+        "label": "Action",
+        "placeholder": ""
+      },
+      {
+        "name": "repository_name",
+        "type": "string",
+        "value": null,
+        "label": "Repository Name",
+        "placeholder": ""
+      },
+      {
+        "name": "repository_full_name",
+        "type": "string",
+        "value": null,
+        "label": "Repository Full Name",
+        "placeholder": ""
+      },
+      {
+        "name": "repository_url",
+        "type": "string",
+        "value": null,
+        "label": "Repository URL",
+        "placeholder": ""
+      },
+      {
+        "name": "sender_login",
+        "type": "string",
+        "value": null,
+        "label": "Sender Login",
+        "placeholder": ""
+      },
+      {
+        "name": "ref",
+        "type": "string",
+        "value": null,
+        "label": "Ref",
+        "placeholder": ""
+      },
+      {
+        "name": "pull_request_number",
+        "type": "string",
+        "value": null,
+        "label": "Pull Request Number",
+        "placeholder": ""
+      },
+      {
+        "name": "pull_request_title",
+        "type": "string",
+        "value": null,
+        "label": "Pull Request Title",
+        "placeholder": ""
+      },
+      {
+        "name": "pull_request_state",
+        "type": "string",
+        "value": null,
+        "label": "Pull Request State",
+        "placeholder": ""
+      },
+      {
+        "name": "workflow_run_id",
+        "type": "string",
+        "value": null,
+        "label": "Workflow Run ID",
+        "placeholder": ""
+      },
+      {
+        "name": "workflow_run_status",
+        "type": "string",
+        "value": null,
+        "label": "Workflow Run Status",
+        "placeholder": ""
+      },
+      {
+        "name": "comment_body",
+        "type": "string",
+        "value": null,
+        "label": "Comment Body",
+        "placeholder": ""
+      },
+      {
+        "name": "body",
+        "type": "string",
+        "value": null,
+        "label": "Raw JSON Body",
+        "placeholder": ""
+      },
+      {
+        "name": "triggered_at",
+        "type": "string",
+        "value": null,
+        "label": "Triggered At",
+        "placeholder": ""
+      }
+    ]
+  },
+  "trigger/gitlab_webhook": {
+    "hash": "4f99c25f7e688da34cf1161c190e87682c97c7a4f702ff16972b1a1bd17ddfe5",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "GitLab Webhook Trigger",
+    "description": "Triggers a flow when a GitLab webhook event is received",
+    "website": "https://www.flomation.co",
+    "icon": "gitlab",
+    "date": "26/04/2026",
+    "type": 1,
+    "category": {
+      "name": "Triggers",
+      "icon": "bolt-lightning",
+      "description": "Start a Flow"
+    },
+    "inputs": [
+      {
+        "name": "webhook_secret",
+        "type": "string",
+        "value": null,
+        "label": "Webhook Secret Token",
+        "placeholder": "Shared secret for X-Gitlab-Token validation",
+        "required": true
+      },
+      {
+        "name": "event_filter",
+        "type": "string",
+        "value": null,
+        "label": "Event Filter",
+        "placeholder": "Comma-separated: push,merge_request,note,pipeline,tag_push"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "content",
+        "type": "string",
+        "value": null,
+        "label": "Event Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "event_type",
+        "type": "string",
+        "value": null,
+        "label": "Event Type",
+        "placeholder": ""
+      },
+      {
+        "name": "object_kind",
+        "type": "string",
+        "value": null,
+        "label": "Object Kind",
+        "placeholder": ""
+      },
+      {
+        "name": "project_id",
+        "type": "string",
+        "value": null,
+        "label": "Project ID",
+        "placeholder": ""
+      },
+      {
+        "name": "project_name",
+        "type": "string",
+        "value": null,
+        "label": "Project Name",
+        "placeholder": ""
+      },
+      {
+        "name": "project_url",
+        "type": "string",
+        "value": null,
+        "label": "Project URL",
+        "placeholder": ""
+      },
+      {
+        "name": "user_name",
+        "type": "string",
+        "value": null,
+        "label": "User Name",
+        "placeholder": ""
+      },
+      {
+        "name": "user_username",
+        "type": "string",
+        "value": null,
+        "label": "User Username",
+        "placeholder": ""
+      },
+      {
+        "name": "ref",
+        "type": "string",
+        "value": null,
+        "label": "Ref",
+        "placeholder": ""
+      },
+      {
+        "name": "merge_request_iid",
+        "type": "string",
+        "value": null,
+        "label": "Merge Request IID",
+        "placeholder": ""
+      },
+      {
+        "name": "merge_request_title",
+        "type": "string",
+        "value": null,
+        "label": "Merge Request Title",
+        "placeholder": ""
+      },
+      {
+        "name": "merge_request_state",
+        "type": "string",
+        "value": null,
+        "label": "Merge Request State",
+        "placeholder": ""
+      },
+      {
+        "name": "merge_request_action",
+        "type": "string",
+        "value": null,
+        "label": "Merge Request Action",
+        "placeholder": ""
+      },
+      {
+        "name": "pipeline_id",
+        "type": "string",
+        "value": null,
+        "label": "Pipeline ID",
+        "placeholder": ""
+      },
+      {
+        "name": "pipeline_status",
+        "type": "string",
+        "value": null,
+        "label": "Pipeline Status",
+        "placeholder": ""
+      },
+      {
+        "name": "comment_body",
+        "type": "string",
+        "value": null,
+        "label": "Comment Body",
+        "placeholder": ""
+      },
+      {
+        "name": "body",
+        "type": "string",
+        "value": null,
+        "label": "Raw JSON Body",
+        "placeholder": ""
+      },
+      {
+        "name": "triggered_at",
+        "type": "string",
+        "value": null,
+        "label": "Triggered At",
         "placeholder": ""
       }
     ]
