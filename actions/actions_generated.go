@@ -5,8 +5,13 @@ package actions
 import (
 	core "flomation.app/automate/executor"
 
+	agent_create_schedule "flomation.app/automate/executor/actions/agent/create_schedule"
+	agent_delete_schedule "flomation.app/automate/executor/actions/agent/delete_schedule"
 	agent_forget "flomation.app/automate/executor/actions/agent/forget"
 	agent_fulfill_commitment "flomation.app/automate/executor/actions/agent/fulfill_commitment"
+	agent_list_identities "flomation.app/automate/executor/actions/agent/list_identities"
+	agent_list_schedules "flomation.app/automate/executor/actions/agent/list_schedules"
+	agent_offer_identity_link "flomation.app/automate/executor/actions/agent/offer_identity_link"
 	agent_process_extraction "flomation.app/automate/executor/actions/agent/process_extraction"
 	agent_read_state "flomation.app/automate/executor/actions/agent/read_state"
 	agent_recall "flomation.app/automate/executor/actions/agent/recall"
@@ -104,7 +109,10 @@ import (
 	http_request "flomation.app/automate/executor/actions/http/request"
 	linear_add_comment "flomation.app/automate/executor/actions/linear/add_comment"
 	linear_create_issue "flomation.app/automate/executor/actions/linear/create_issue"
+	linear_delete_comment "flomation.app/automate/executor/actions/linear/delete_comment"
+	linear_get_comment "flomation.app/automate/executor/actions/linear/get_comment"
 	linear_get_issue "flomation.app/automate/executor/actions/linear/get_issue"
+	linear_list_comments "flomation.app/automate/executor/actions/linear/list_comments"
 	linear_list_issues "flomation.app/automate/executor/actions/linear/list_issues"
 	linear_list_teams "flomation.app/automate/executor/actions/linear/list_teams"
 	linear_list_users "flomation.app/automate/executor/actions/linear/list_users"
@@ -189,8 +197,13 @@ import (
 )
 
 var Actions = map[string]core.Action{
+	"agent/create_schedule":               agent_create_schedule.Execute,
+	"agent/delete_schedule":               agent_delete_schedule.Execute,
 	"agent/forget":                        agent_forget.Execute,
 	"agent/fulfill_commitment":            agent_fulfill_commitment.Execute,
+	"agent/list_identities":               agent_list_identities.Execute,
+	"agent/list_schedules":                agent_list_schedules.Execute,
+	"agent/offer_identity_link":           agent_offer_identity_link.Execute,
 	"agent/process_extraction":            agent_process_extraction.Execute,
 	"agent/read_state":                    agent_read_state.Execute,
 	"agent/recall":                        agent_recall.Execute,
@@ -288,7 +301,10 @@ var Actions = map[string]core.Action{
 	"http/request":                        http_request.Execute,
 	"linear/add_comment":                  linear_add_comment.Execute,
 	"linear/create_issue":                 linear_create_issue.Execute,
+	"linear/delete_comment":               linear_delete_comment.Execute,
+	"linear/get_comment":                  linear_get_comment.Execute,
 	"linear/get_issue":                    linear_get_issue.Execute,
+	"linear/list_comments":                linear_list_comments.Execute,
 	"linear/list_issues":                  linear_list_issues.Execute,
 	"linear/list_teams":                   linear_list_teams.Execute,
 	"linear/list_users":                   linear_list_users.Execute,

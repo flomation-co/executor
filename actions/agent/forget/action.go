@@ -60,7 +60,7 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 		req.Header.Set("Authorization", "Bearer "+ctx.Token)
 	}
 
-	resp, err := http.DefaultClient.Do(req)
+	resp, err := ctx.InternalClient().Do(req)
 	if err != nil {
 		return nil, fmt.Errorf("failed to call forget endpoint: %w", err)
 	}

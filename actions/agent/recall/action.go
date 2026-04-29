@@ -116,7 +116,7 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 		return nil, fmt.Errorf("failed to create request: %w", err)
 	}
 
-	resp, err := http.DefaultClient.Do(req)
+	resp, err := execCtx.InternalClient().Do(req)
 	if err != nil {
 		return nil, fmt.Errorf("failed to call recall endpoint: %w", err)
 	}
@@ -170,7 +170,7 @@ func semanticRecall(flow *core.Flow, execCtx *core.ExecutionContext, agentID, ag
 	}
 	req.Header.Set("Content-Type", "application/json")
 
-	resp, err := http.DefaultClient.Do(req)
+	resp, err := execCtx.InternalClient().Do(req)
 	if err != nil {
 		return nil, fmt.Errorf("failed to call search endpoint: %w", err)
 	}

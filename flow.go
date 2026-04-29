@@ -378,6 +378,23 @@ type ExecutionContext struct {
 	// (e.g. extraction). System flow executions must not cascade into
 	// further extraction to prevent infinite loops.
 	SystemFlow bool `json:"system_flow,omitempty"`
+	// TLS fields for mTLS client configuration. When set, the executor
+	// builds a dedicated HTTP client for internal API calls.
+	TLSCACert string `json:"tls_ca_cert,omitempty"`
+	TLSCert   string `json:"tls_cert,omitempty"`
+	TLSKey    string `json:"tls_key,omitempty"`
+	// APIClient is the mTLS-configured HTTP client for internal API calls.
+	// Nil when mTLS is not configured — actions should use InternalClient().
+	APIClient *http.Client `json:"-"`
+}
+
+// InternalClient returns the mTLS client for internal API calls if
+// configured, otherwise falls back to http.DefaultClient.
+func (ctx *ExecutionContext) InternalClient() *http.Client {
+	if ctx != nil && ctx.APIClient != nil {
+		return ctx.APIClient
+	}
+	return http.DefaultClient
 }
 
 // GetContext returns the full execution context.
