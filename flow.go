@@ -554,12 +554,14 @@ func Load(path *string) (*Flow, error) {
 // whole-value-reference substitution path can pick them up downstream.
 var reservedTriggerDataKeys = map[string]bool{
 	"system_prompt": true,
+	"__node_id":     true,
 }
 
 // InjectTriggerData merges trigger invocation data into the first trigger
 // node's inputs, making dynamic event data available to the flow.
 func (f *Flow) InjectTriggerData(data map[string]interface{}) {
-	// If channel_type is present, try to match the specific trigger node first
+	// Highest priority: match by explicit __node_id (set by trigger sync)
+	nodeID, _ := data["__node_id"].(string)
 	channelType, _ := data["channel_type"].(string)
 
 	var targetNode *Node
@@ -574,6 +576,12 @@ func (f *Flow) InjectTriggerData(data map[string]interface{}) {
 
 		if !isTrigger {
 			continue
+		}
+
+		// Exact node ID match — highest priority
+		if nodeID != "" && n.ID == nodeID {
+			targetNode = n
+			break
 		}
 
 		// Match channel type to trigger label (e.g. "slack" matches "trigger/slack")
