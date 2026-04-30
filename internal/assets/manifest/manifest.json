@@ -1,4 +1,197 @@
 {
+  "agent/create_schedule": {
+    "hash": "e566c8dbbf690d79f5990c6944e2d11f95493bfa7fb21c7232d94d0c05aeeeec",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Create Schedule",
+    "description": "Create a recurring scheduled task for the agent",
+    "website": "https://www.flomation.co",
+    "icon": "clock",
+    "date": "29/04/2026",
+    "type": 2,
+    "category": {
+      "name": "Agent",
+      "icon": "robot",
+      "description": "Interact with Flomation Agents"
+    },
+    "inputs": [
+      {
+        "name": "agent_id",
+        "type": "string",
+        "value": null,
+        "label": "Agent ID",
+        "placeholder": "${flow.agent_id}",
+        "required": true
+      },
+      {
+        "name": "agent_user_id",
+        "type": "string",
+        "value": null,
+        "label": "Agent User ID",
+        "placeholder": "${flow.agent_user_id}"
+      },
+      {
+        "name": "conversation_id",
+        "type": "string",
+        "value": null,
+        "label": "Conversation ID",
+        "placeholder": "${flow.conversation_id}"
+      },
+      {
+        "name": "name",
+        "type": "string",
+        "value": null,
+        "label": "Schedule name",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "description",
+        "type": "string",
+        "value": null,
+        "label": "What to do when the schedule fires",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "schedule_mode",
+        "type": "string",
+        "value": null,
+        "label": "Mode",
+        "placeholder": "",
+        "required": true,
+        "options": [
+          {
+            "name": "Daily",
+            "value": "daily"
+          },
+          {
+            "name": "Weekly",
+            "value": "weekly"
+          },
+          {
+            "name": "Interval",
+            "value": "interval"
+          }
+        ]
+      },
+      {
+        "name": "time_of_day",
+        "type": "string",
+        "value": null,
+        "label": "Time of day (HH:MM, for daily/weekly)",
+        "placeholder": ""
+      },
+      {
+        "name": "days_of_week",
+        "type": "string",
+        "value": null,
+        "label": "Days of week (comma-separated, for weekly)",
+        "placeholder": ""
+      },
+      {
+        "name": "interval_val",
+        "type": "string",
+        "value": null,
+        "label": "Interval value (for interval mode)",
+        "placeholder": ""
+      },
+      {
+        "name": "unit",
+        "type": "string",
+        "value": null,
+        "label": "Interval unit",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "Minutes",
+            "value": "minutes"
+          },
+          {
+            "name": "Hours",
+            "value": "hours"
+          },
+          {
+            "name": "Days",
+            "value": "days"
+          }
+        ]
+      },
+      {
+        "name": "timezone",
+        "type": "string",
+        "value": null,
+        "label": "Timezone (IANA)",
+        "placeholder": "Europe/London"
+      },
+      {
+        "name": "source_channel",
+        "type": "string",
+        "value": null,
+        "label": "Source channel type",
+        "placeholder": "${flow.channel_type}"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result",
+        "placeholder": ""
+      },
+      {
+        "name": "schedule_id",
+        "type": "string",
+        "value": null,
+        "label": "Schedule ID",
+        "placeholder": ""
+      }
+    ]
+  },
+  "agent/delete_schedule": {
+    "hash": "bd4fe70881c0e6155e12bb7de2fe6b782b22c203a0f864b27a6ab1ec0763cf54",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Delete Schedule",
+    "description": "Delete a scheduled task by name",
+    "website": "https://www.flomation.co",
+    "icon": "clock",
+    "date": "29/04/2026",
+    "type": 2,
+    "category": {
+      "name": "Agent",
+      "icon": "robot",
+      "description": "Interact with Flomation Agents"
+    },
+    "inputs": [
+      {
+        "name": "agent_id",
+        "type": "string",
+        "value": null,
+        "label": "Agent ID",
+        "placeholder": "${flow.agent_id}",
+        "required": true
+      },
+      {
+        "name": "name",
+        "type": "string",
+        "value": null,
+        "label": "Schedule name to delete",
+        "placeholder": "",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result",
+        "placeholder": ""
+      }
+    ]
+  },
   "agent/forget": {
     "hash": "dc356e5402f88b4460ee3f340ede7dd3a269f58550e10c1ac91e69c7ac9f0544",
     "author": "Andy Esser",
@@ -69,8 +262,209 @@
       }
     ]
   },
+  "agent/list_identities": {
+    "hash": "0b30bd69876b99c78a058e18388a0c60c88e9a70718159e2a653839c30ef6e96",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "List Identities",
+    "description": "List all known channel identities for the current user",
+    "website": "https://www.flomation.co",
+    "icon": "id-card",
+    "date": "29/04/2026",
+    "type": 2,
+    "category": {
+      "name": "Agent",
+      "icon": "robot",
+      "description": "Interact with Flomation Agents"
+    },
+    "inputs": [
+      {
+        "name": "agent_id",
+        "type": "string",
+        "value": null,
+        "label": "Agent ID",
+        "placeholder": "${flow.agent_id}",
+        "required": true
+      },
+      {
+        "name": "agent_user_id",
+        "type": "string",
+        "value": null,
+        "label": "Agent User ID",
+        "placeholder": "${flow.agent_user_id}",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result",
+        "placeholder": ""
+      },
+      {
+        "name": "identities",
+        "type": "object",
+        "value": null,
+        "label": "Identities (JSON array)",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Count",
+        "placeholder": ""
+      }
+    ]
+  },
+  "agent/list_schedules": {
+    "hash": "329a10c3d6474aeb09a3bd4787e589cc337f738486b4eb9f74e6553959224ced",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "List Schedules",
+    "description": "List all scheduled tasks for the agent",
+    "website": "https://www.flomation.co",
+    "icon": "clock",
+    "date": "29/04/2026",
+    "type": 2,
+    "category": {
+      "name": "Agent",
+      "icon": "robot",
+      "description": "Interact with Flomation Agents"
+    },
+    "inputs": [
+      {
+        "name": "agent_id",
+        "type": "string",
+        "value": null,
+        "label": "Agent ID",
+        "placeholder": "${flow.agent_id}",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result",
+        "placeholder": ""
+      },
+      {
+        "name": "schedules",
+        "type": "object",
+        "value": null,
+        "label": "Schedules (JSON array)",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Count",
+        "placeholder": ""
+      }
+    ]
+  },
+  "agent/offer_identity_link": {
+    "hash": "6256f36176e9fcff3b53317cc6de7996617872d1e686872364edbd1823fff4c2",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Offer Identity Link",
+    "description": "Offer to link this user to their identity on another channel",
+    "website": "https://www.flomation.co",
+    "icon": "link",
+    "date": "29/04/2026",
+    "type": 2,
+    "category": {
+      "name": "Agent",
+      "icon": "robot",
+      "description": "Interact with Flomation Agents"
+    },
+    "inputs": [
+      {
+        "name": "agent_id",
+        "type": "string",
+        "value": null,
+        "label": "Agent ID",
+        "placeholder": "${flow.agent_id}",
+        "required": true
+      },
+      {
+        "name": "agent_user_id",
+        "type": "string",
+        "value": null,
+        "label": "Agent User ID",
+        "placeholder": "${flow.agent_user_id}",
+        "required": true
+      },
+      {
+        "name": "target_channel",
+        "type": "string",
+        "value": null,
+        "label": "Target channel type",
+        "placeholder": "",
+        "required": true,
+        "options": [
+          {
+            "name": "Slack",
+            "value": "slack"
+          },
+          {
+            "name": "Telegram",
+            "value": "telegram"
+          },
+          {
+            "name": "Email",
+            "value": "email"
+          }
+        ]
+      },
+      {
+        "name": "target_identifier",
+        "type": "string",
+        "value": null,
+        "label": "Target identifier (username, email, etc.)",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "evidence",
+        "type": "string",
+        "value": null,
+        "label": "Why this link is being offered",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "source_channel",
+        "type": "string",
+        "value": null,
+        "label": "Source channel type",
+        "placeholder": "${flow.channel_type}"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result",
+        "placeholder": ""
+      },
+      {
+        "name": "pending_action_id",
+        "type": "string",
+        "value": null,
+        "label": "Pending Action ID",
+        "placeholder": ""
+      }
+    ]
+  },
   "agent/process_extraction": {
-    "hash": "e40e0998c996ffe6c0866179d175d203bc096f829ece36ed33d950f9be9b9702",
+    "hash": "5397bf28fe2712a266c7bb233eebfd88228ee98603d24de25ccde442a12b19c3",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Process Extraction Output",
@@ -171,34 +565,6 @@
         "type": "integer",
         "value": null,
         "label": "Confirmations processed",
-        "placeholder": ""
-      },
-      {
-        "name": "identities_merged",
-        "type": "integer",
-        "value": null,
-        "label": "Identities merged",
-        "placeholder": ""
-      },
-      {
-        "name": "schedules_created",
-        "type": "integer",
-        "value": null,
-        "label": "Schedules created",
-        "placeholder": ""
-      },
-      {
-        "name": "schedules_updated",
-        "type": "integer",
-        "value": null,
-        "label": "Schedules updated",
-        "placeholder": ""
-      },
-      {
-        "name": "schedules_deleted",
-        "type": "integer",
-        "value": null,
-        "label": "Schedules deleted",
         "placeholder": ""
       },
       {
@@ -9217,6 +9583,148 @@
       }
     ]
   },
+  "linear/delete_comment": {
+    "hash": "18605ce35eef67fad15fedbeba46e979077082f681e6c2e1bb5323b37bc84db6",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Delete Comment",
+    "description": "Delete a comment from a Linear issue by comment ID.",
+    "website": "https://www.flomation.co",
+    "icon": "linear",
+    "date": "28/04/2026",
+    "type": 2,
+    "category": {
+      "name": "Linear",
+      "icon": "linear",
+      "description": "Manage issues, projects, and teams in Linear"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "string",
+        "value": null,
+        "label": "Linear API Key",
+        "placeholder": "lin_api_...",
+        "required": true
+      },
+      {
+        "name": "comment_id",
+        "type": "string",
+        "value": null,
+        "label": "Comment ID",
+        "placeholder": "Comment UUID",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "linear/get_comment": {
+    "hash": "d5147334cff042d980dd5285607589324e07ae6e90d1d8d9af79bf82ca95a8bb",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Get Comment",
+    "description": "Retrieve a single Linear comment by ID with full body text.",
+    "website": "https://www.flomation.co",
+    "icon": "linear",
+    "date": "28/04/2026",
+    "type": 2,
+    "category": {
+      "name": "Linear",
+      "icon": "linear",
+      "description": "Manage issues, projects, and teams in Linear"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "string",
+        "value": null,
+        "label": "Linear API Key",
+        "placeholder": "lin_api_...",
+        "required": true
+      },
+      {
+        "name": "comment_id",
+        "type": "string",
+        "value": null,
+        "label": "Comment ID",
+        "placeholder": "Comment UUID",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "body",
+        "type": "string",
+        "value": null,
+        "label": "Comment Body",
+        "placeholder": ""
+      },
+      {
+        "name": "author",
+        "type": "string",
+        "value": null,
+        "label": "Author",
+        "placeholder": ""
+      },
+      {
+        "name": "created_at",
+        "type": "string",
+        "value": null,
+        "label": "Created At",
+        "placeholder": ""
+      },
+      {
+        "name": "issue_id",
+        "type": "string",
+        "value": null,
+        "label": "Issue ID",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
   "linear/get_issue": {
     "hash": "c3e179d76867db1c6f57ec740448d7c05e235cd0b6aa8200101d6e00acf51d0c",
     "author": "Andy Esser",
@@ -9361,6 +9869,77 @@
         "type": "object",
         "value": null,
         "label": "Full Result",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "linear/list_comments": {
+    "hash": "ed649a79ce608c9f3ac7685f50bd46093fa04ac09b9ceb11033efa024bdd7be3",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "List Comments",
+    "description": "List comments on a Linear issue. Returns comment IDs, authors, and body text.",
+    "website": "https://www.flomation.co",
+    "icon": "linear",
+    "date": "28/04/2026",
+    "type": 2,
+    "category": {
+      "name": "Linear",
+      "icon": "linear",
+      "description": "Manage issues, projects, and teams in Linear"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "string",
+        "value": null,
+        "label": "Linear API Key",
+        "placeholder": "lin_api_...",
+        "required": true
+      },
+      {
+        "name": "issue_id",
+        "type": "string",
+        "value": null,
+        "label": "Issue ID",
+        "placeholder": "Issue UUID",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "comments",
+        "type": "object",
+        "value": null,
+        "label": "Comments (JSON)",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Count",
         "placeholder": ""
       },
       {

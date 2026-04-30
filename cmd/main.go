@@ -2,10 +2,13 @@ package main
 
 import (
 	"context"
+	"crypto/tls"
+	"crypto/x509"
 	"encoding/json"
 	"errors"
 	"flag"
 	"fmt"
+	"net/http"
 	"os"
 	"os/signal"
 	"strings"
@@ -180,6 +183,18 @@ func main() {
 					ctx.StartTime = time.Now().UTC().Format(time.RFC3339)
 				}
 				flo.SetContext(&ctx)
+
+				// Configure mTLS client for internal API calls.
+				if ctx.TLSCACert != "" && ctx.TLSCert != "" && ctx.TLSKey != "" {
+					client, err := buildMTLSClient(ctx.TLSCACert, ctx.TLSCert, ctx.TLSKey)
+					if err != nil {
+						log.WithError(err).Warn("unable to configure mTLS — API calls will use plain HTTP")
+					} else {
+						ctx.APIClient = client
+						flo.SetContext(&ctx) // re-set with client attached
+						log.Info("mTLS configured for internal API calls")
+					}
+				}
 			}
 		}
 	}
@@ -246,4 +261,36 @@ func main() {
 			"error": err,
 		}).Error("unable to write state file")
 	}
+}
+
+// buildMTLSClient creates an HTTP client that presents a client certificate
+// and verifies the server against the platform CA. Used only for internal
+// API calls — external calls (Anthropic, Google, etc.) use http.DefaultClient
+// with the system CA pool.
+func buildMTLSClient(caCertFile, certFile, keyFile string) (*http.Client, error) {
+	cert, err := tls.LoadX509KeyPair(certFile, keyFile)
+	if err != nil {
+		return nil, fmt.Errorf("load key pair: %w", err)
+	}
+
+	caCert, err := os.ReadFile(caCertFile) // #nosec G304
+	if err != nil {
+		return nil, fmt.Errorf("read CA cert: %w", err)
+	}
+
+	caPool := x509.NewCertPool()
+	if !caPool.AppendCertsFromPEM(caCert) {
+		return nil, fmt.Errorf("failed to parse CA certificate")
+	}
+
+	return &http.Client{
+		Timeout: 30 * time.Second,
+		Transport: &http.Transport{
+			TLSClientConfig: &tls.Config{
+				Certificates: []tls.Certificate{cert},
+				RootCAs:      caPool,
+				MinVersion:   tls.VersionTLS13,
+			},
+		},
+	}, nil
 }

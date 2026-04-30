@@ -240,7 +240,7 @@ func postMemory(flow *core.Flow, ctx *core.ExecutionContext, agentID string, pay
 		req.Header.Set("Authorization", "Bearer "+ctx.Token)
 	}
 
-	resp, err := http.DefaultClient.Do(req)
+	resp, err := ctx.InternalClient().Do(req)
 	if err != nil {
 		return nil, fmt.Errorf("failed to call remember endpoint: %w", err)
 	}
