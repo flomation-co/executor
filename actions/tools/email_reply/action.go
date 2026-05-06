@@ -290,7 +290,7 @@ func fetchOriginal(flow *core.Flow, tokens []tokenInfo, emailID string) (*origin
 
 func fetchTokens(flow *core.Flow, ctx *core.ExecutionContext, purpose string) ([]tokenInfo, error) {
 	var all []tokenInfo
-	client := &http.Client{Timeout: 15 * time.Second}
+	client := ctx.InternalClient()
 
 	// Source 1: agent-user scoped tokens (per-user Google accounts)
 	if ctx.AgentUserID != "" {

@@ -236,8 +236,7 @@ func fetchTokens(flow *core.Flow, ctx *core.ExecutionContext) ([]tokenInfo, erro
 		return nil, err
 	}
 
-	client := &http.Client{Timeout: 15 * time.Second}
-	resp, err := client.Do(req)
+	resp, err := ctx.InternalClient().Do(req)
 	if err != nil {
 		return nil, err
 	}
