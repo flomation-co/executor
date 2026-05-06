@@ -9,7 +9,6 @@ import (
 	"io"
 	"net/http"
 	"strings"
-	"time"
 
 	core "flomation.app/automate/executor"
 )
@@ -99,8 +98,7 @@ func handleList(flow *core.Flow, ctx *core.ExecutionContext) (map[string]interfa
 		return errResult(fmt.Sprintf("Failed to build request: %v", err))
 	}
 
-	client := &http.Client{Timeout: 10 * time.Second}
-	resp, err := client.Do(req)
+	resp, err := ctx.InternalClient().Do(req)
 	if err != nil {
 		return errResult(fmt.Sprintf("Failed to fetch accounts: %v", err))
 	}
@@ -204,8 +202,7 @@ func handleDisconnect(flow *core.Flow, ctx *core.ExecutionContext, inputs []*cor
 		return errResult(fmt.Sprintf("Failed to build request: %v", err))
 	}
 
-	client := &http.Client{Timeout: 10 * time.Second}
-	resp, err := client.Do(req)
+	resp, err := ctx.InternalClient().Do(req)
 	if err != nil {
 		return errResult(fmt.Sprintf("Failed to disconnect: %v", err))
 	}

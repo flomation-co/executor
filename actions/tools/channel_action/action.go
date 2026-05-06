@@ -136,8 +136,7 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	}
 	req.Header.Set("Content-Type", "application/json")
 
-	client := &http.Client{}
-	resp, err := client.Do(req)
+	resp, err := ctx.InternalClient().Do(req)
 	if err != nil {
 		return map[string]interface{}{
 			"success": false,

@@ -568,7 +568,7 @@ func stripHTML(html string) string {
 
 func fetchTokens(flow *core.Flow, ctx *core.ExecutionContext, purpose string) ([]tokenInfo, error) {
 	var all []tokenInfo
-	client := &http.Client{Timeout: 15 * time.Second}
+	client := ctx.InternalClient()
 	if ctx.AgentUserID != "" {
 		if tokens := fetchTokensFrom(flow, client, fmt.Sprintf("%s/api/v1/internal/agent-user/%s/google-tokens?purpose=%s",
 			ctx.APIURL, ctx.AgentUserID, purpose)); len(tokens) > 0 {
@@ -638,8 +638,7 @@ func disconnectAccount(flow *core.Flow, email, purpose string) {
 		log.WithError(err).Warn("[email_read] failed to build disconnect request")
 		return
 	}
-	client := &http.Client{Timeout: 10 * time.Second}
-	resp, err := client.Do(req)
+	resp, err := ctx.InternalClient().Do(req)
 	if err != nil {
 		log.WithError(err).Warn("[email_read] failed to disconnect account")
 		return

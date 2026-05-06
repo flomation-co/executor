@@ -222,7 +222,7 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 
 func fetchTokens(flow *core.Flow, ctx *core.ExecutionContext, purpose string) ([]tokenInfo, error) {
 	var all []tokenInfo
-	client := &http.Client{Timeout: 15 * time.Second}
+	client := ctx.InternalClient()
 	if ctx.AgentUserID != "" {
 		if tokens := fetchTokensFrom(flow, client, fmt.Sprintf("%s/api/v1/internal/agent-user/%s/google-tokens?purpose=%s",
 			ctx.APIURL, ctx.AgentUserID, purpose)); len(tokens) > 0 {
