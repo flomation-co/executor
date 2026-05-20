@@ -2225,13 +2225,27 @@ func (f *Flow) executeSubFlow(actions map[string]Action, name string, invokeOutp
 	defer f.SetVariable(depthKey, depth)
 
 	// Inject invoke parameters into the Begin node's inputs.
+	// First update any existing inputs that match, then add new dynamic
+	// inputs for invoke outputs not already defined on the Begin node.
+	seen := make(map[string]bool)
 	for _, inp := range beginNode.Data.Config.Inputs {
+		seen[inp.Name] = true
 		if inp.Name == "name" {
 			continue
 		}
 		if v, exists := invokeOutputs[inp.Name]; exists {
 			inp.Value = v
 		}
+	}
+	for k, v := range invokeOutputs {
+		if seen[k] {
+			continue
+		}
+		beginNode.Data.Config.Inputs = append(beginNode.Data.Config.Inputs, &Connection{
+			Name:  k,
+			Type:  ConnectionTypeString,
+			Value: v,
+		})
 	}
 
 	// Clear cached results for the sub-flow subgraph.
