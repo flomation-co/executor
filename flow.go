@@ -1649,7 +1649,21 @@ func (f *Flow) executeNodeChildren(actions map[string]Action, node *Node, output
 		// Sub-flow invocation: dispatch to the matching Begin Sub-Flow,
 		// execute its chain, and merge the results into this node's outputs.
 		if sfName, ok := outputs[SubFlowNameKey].(string); ok && sfName != "" {
-			sfOutputs, err := f.executeSubFlow(actions, sfName, outputs, environment)
+			// Merge parent outputs into the invoke outputs so that
+			// upstream variables (e.g. current_index from a Loop) are
+			// available inside the sub-flow via ${variable} substitution.
+			invokePayload := make(map[string]interface{})
+			for _, p := range f.FindSource(node.ID) {
+				if pResult, exists := f.nodeResults[p.ID]; exists {
+					for k, v := range pResult {
+						invokePayload[k] = v
+					}
+				}
+			}
+			for k, v := range outputs {
+				invokePayload[k] = v
+			}
+			sfOutputs, err := f.executeSubFlow(actions, sfName, invokePayload, environment)
 			if err != nil {
 				return nil, err
 			}
@@ -2225,12 +2239,44 @@ func (f *Flow) executeSubFlow(actions map[string]Action, name string, invokeOutp
 	defer f.SetVariable(depthKey, depth)
 
 	// Inject invoke parameters into the Begin node's inputs.
+	// First update any existing inputs that match, then add new dynamic
+	// inputs for invoke outputs not already defined on the Begin node.
+	seen := make(map[string]bool)
 	for _, inp := range beginNode.Data.Config.Inputs {
+		seen[inp.Name] = true
 		if inp.Name == "name" {
 			continue
 		}
 		if v, exists := invokeOutputs[inp.Name]; exists {
 			inp.Value = v
+		}
+	}
+	for k, v := range invokeOutputs {
+		if seen[k] {
+			continue
+		}
+		beginNode.Data.Config.Inputs = append(beginNode.Data.Config.Inputs, &Connection{
+			Name:  k,
+			Type:  ConnectionTypeString,
+			Value: v,
+		})
+	}
+
+	// Mark all sub-flow nodes as reachable so parent resolution
+	// doesn't skip them (the reachability BFS from the entry trigger
+	// never reaches sub-flow nodes since they're dispatched programmatically).
+	if f.reachableNodes != nil {
+		f.reachableNodes[beginNode.ID] = true
+		queue := []*Node{beginNode}
+		for len(queue) > 0 {
+			curr := queue[0]
+			queue = queue[1:]
+			for _, child := range f.FindTarget(curr.ID) {
+				if !f.reachableNodes[child.ID] {
+					f.reachableNodes[child.ID] = true
+					queue = append(queue, child)
+				}
+			}
 		}
 	}
 
