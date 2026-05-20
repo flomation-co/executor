@@ -2262,6 +2262,24 @@ func (f *Flow) executeSubFlow(actions map[string]Action, name string, invokeOutp
 		})
 	}
 
+	// Mark all sub-flow nodes as reachable so parent resolution
+	// doesn't skip them (the reachability BFS from the entry trigger
+	// never reaches sub-flow nodes since they're dispatched programmatically).
+	if f.reachableNodes != nil {
+		f.reachableNodes[beginNode.ID] = true
+		queue := []*Node{beginNode}
+		for len(queue) > 0 {
+			curr := queue[0]
+			queue = queue[1:]
+			for _, child := range f.FindTarget(curr.ID) {
+				if !f.reachableNodes[child.ID] {
+					f.reachableNodes[child.ID] = true
+					queue = append(queue, child)
+				}
+			}
+		}
+	}
+
 	// Clear cached results for the sub-flow subgraph.
 	delete(f.nodeResults, beginNode.ID)
 	delete(f.nodeExecutionResults, beginNode.ID)
