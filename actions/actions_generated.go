@@ -143,6 +143,12 @@ import (
 	output_slack_webhook "flomation.app/automate/executor/actions/output/slack_webhook"
 	script_bash "flomation.app/automate/executor/actions/script/bash"
 	security_antivirus "flomation.app/automate/executor/actions/security/antivirus"
+	social_linkedin_delete_post "flomation.app/automate/executor/actions/social/linkedin/delete_post"
+	social_linkedin_get_analytics "flomation.app/automate/executor/actions/social/linkedin/get_analytics"
+	social_linkedin_get_post "flomation.app/automate/executor/actions/social/linkedin/get_post"
+	social_linkedin_get_profile "flomation.app/automate/executor/actions/social/linkedin/get_profile"
+	social_linkedin_list_posts "flomation.app/automate/executor/actions/social/linkedin/list_posts"
+	social_linkedin_share_post "flomation.app/automate/executor/actions/social/linkedin/share_post"
 	sql_mysql "flomation.app/automate/executor/actions/sql/mysql"
 	sql_oracle "flomation.app/automate/executor/actions/sql/oracle"
 	sql_postgresql "flomation.app/automate/executor/actions/sql/postgresql"
@@ -335,6 +341,12 @@ var Actions = map[string]core.Action{
 	"output/slack_webhook":                output_slack_webhook.Execute,
 	"script/bash":                         script_bash.Execute,
 	"security/antivirus":                  security_antivirus.Execute,
+	"social/linkedin/delete_post":         social_linkedin_delete_post.Execute,
+	"social/linkedin/get_analytics":       social_linkedin_get_analytics.Execute,
+	"social/linkedin/get_post":            social_linkedin_get_post.Execute,
+	"social/linkedin/get_profile":         social_linkedin_get_profile.Execute,
+	"social/linkedin/list_posts":          social_linkedin_list_posts.Execute,
+	"social/linkedin/share_post":          social_linkedin_share_post.Execute,
 	"sql/mysql":                           sql_mysql.Execute,
 	"sql/oracle":                          sql_oracle.Execute,
 	"sql/postgresql":                      sql_postgresql.Execute,
