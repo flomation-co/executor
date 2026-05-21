@@ -21,7 +21,7 @@ const (
 )
 
 var Inputs = [...]core.Connection{
-	{Name: "access_token", Type: core.ConnectionTypeString, Label: "LinkedIn Access Token", Placeholder: "${credentials.linkedin}", Required: true},
+	{Name: "access_token", Type: core.ConnectionTypeString, Label: "LinkedIn Access Token", Placeholder: "${credentials.linkedin_community}", Required: true},
 	{Name: "author_urn", Type: core.ConnectionTypeString, Label: "Author URN", Placeholder: "urn:li:person:XXXXXXXX", Required: true},
 	{Name: "count", Type: core.ConnectionTypeInteger, Label: "Count", Placeholder: "10"},
 }
@@ -51,14 +51,13 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	}
 
 	params := url.Values{
-		"q":      {"authors"},
-		"authors": {"List(" + authorURN + ")"},
+		"q":      {"author"},
+		"author": {authorURN},
 		"count":  {count},
-		"sortBy": {"LAST_MODIFIED"},
 	}
 
-	apiURL := linkedin.BaseURL + "/ugcPosts?" + params.Encode()
-	resp, err := linkedin.ExecuteAPI(token, "GET", apiURL, nil)
+	apiURL := linkedin.RestBaseURL + "/posts?" + params.Encode()
+	resp, err := linkedin.ExecuteVersionedAPI(token, "GET", apiURL, nil)
 	if err != nil {
 		return linkedin.ErrorResult(fmt.Sprintf("failed to list posts: %v", err)), nil
 	}
@@ -71,6 +70,7 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 		Elements []map[string]interface{} `json:"elements"`
 		Paging   struct {
 			Total int64 `json:"total"`
+			Count int64 `json:"count"`
 		} `json:"paging"`
 	}
 	if err := json.Unmarshal(resp.Body, &result); err != nil {

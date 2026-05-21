@@ -62,19 +62,39 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 		visibility = "PUBLIC"
 	}
 
-	// Build the UGC post payload
+	// Build the REST Posts API payload
 	post := map[string]interface{}{
 		"author":         authorURN,
 		"lifecycleState": "PUBLISHED",
-		"visibility": map[string]interface{}{
-			"com.linkedin.ugc.MemberNetworkVisibility": visibility,
-		},
-		"specificContent": map[string]interface{}{
-			"com.linkedin.ugc.ShareContent": buildShareContent(text, inputs),
+		"visibility":     visibility,
+		"commentary":     text,
+		"distribution": map[string]interface{}{
+			"feedDistribution":               "MAIN_FEED",
+			"targetEntities":                 []interface{}{},
+			"thirdPartyDistributionChannels": []interface{}{},
 		},
 	}
 
-	resp, err := linkedin.ExecuteAPI(token, "POST", linkedin.BaseURL+"/ugcPosts", post)
+	// Add article content if link provided
+	linkURL := linkedin.OptionalString("link_url", inputs)
+	if linkURL != "" {
+		article := map[string]interface{}{
+			"source": linkURL,
+		}
+		title := linkedin.OptionalString("link_title", inputs)
+		if title != "" {
+			article["title"] = title
+		}
+		desc := linkedin.OptionalString("link_description", inputs)
+		if desc != "" {
+			article["description"] = desc
+		}
+		post["content"] = map[string]interface{}{
+			"article": article,
+		}
+	}
+
+	resp, err := linkedin.ExecuteVersionedAPI(token, "POST", linkedin.RestBaseURL+"/posts", post)
 	if err != nil {
 		return linkedin.ErrorResult(fmt.Sprintf("failed to share post: %v", err)), nil
 	}
@@ -83,50 +103,20 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 		return linkedin.ErrorResult(err.Error()), nil
 	}
 
-	// Extract post URN from response
-	var result struct {
-		ID string `json:"id"`
-	}
-	_ = json.Unmarshal(resp.Body, &result)
-
-	// Also check X-RestLi-Id header
-	if result.ID == "" {
-		result.ID = resp.Headers.Get("X-RestLi-Id")
+	// Extract post URN from X-RestLi-Id header or response body
+	postURN := resp.Headers.Get("X-RestLi-Id")
+	if postURN == "" {
+		var result struct {
+			ID string `json:"id"`
+		}
+		_ = json.Unmarshal(resp.Body, &result)
+		postURN = result.ID
 	}
 
 	return linkedin.SuccessResult(
-		fmt.Sprintf("Post shared successfully: %s", result.ID),
+		fmt.Sprintf("Post shared successfully: %s", postURN),
 		map[string]interface{}{
-			"post_urn": result.ID,
+			"post_urn": postURN,
 		},
 	), nil
-}
-
-func buildShareContent(text string, inputs []*core.Connection) map[string]interface{} {
-	content := map[string]interface{}{
-		"shareCommentary": map[string]interface{}{
-			"text": text,
-		},
-		"shareMediaCategory": "NONE",
-	}
-
-	linkURL := linkedin.OptionalString("link_url", inputs)
-	if linkURL != "" {
-		media := map[string]interface{}{
-			"status":      "READY",
-			"originalUrl": linkURL,
-		}
-		title := linkedin.OptionalString("link_title", inputs)
-		if title != "" {
-			media["title"] = map[string]interface{}{"text": title}
-		}
-		desc := linkedin.OptionalString("link_description", inputs)
-		if desc != "" {
-			media["description"] = map[string]interface{}{"text": desc}
-		}
-		content["shareMediaCategory"] = "ARTICLE"
-		content["media"] = []interface{}{media}
-	}
-
-	return content
 }

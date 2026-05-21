@@ -37,7 +37,17 @@ type APIResponse struct {
 }
 
 // ExecuteAPI performs a REST call to the LinkedIn API.
+// If versioned is true, the LinkedIn-Version header is set for the REST API.
 func ExecuteAPI(accessToken, method, url string, body interface{}) (*APIResponse, error) {
+	return executeAPIInternal(accessToken, method, url, body, false)
+}
+
+// ExecuteVersionedAPI performs a REST call with the LinkedIn-Version header.
+func ExecuteVersionedAPI(accessToken, method, url string, body interface{}) (*APIResponse, error) {
+	return executeAPIInternal(accessToken, method, url, body, true)
+}
+
+func executeAPIInternal(accessToken, method, url string, body interface{}, versioned bool) (*APIResponse, error) {
 	var bodyReader io.Reader
 	if body != nil && (method == http.MethodPost || method == http.MethodPut || method == http.MethodPatch) {
 		b, err := json.Marshal(body)
@@ -54,7 +64,9 @@ func ExecuteAPI(accessToken, method, url string, body interface{}) (*APIResponse
 
 	req.Header.Set("Authorization", "Bearer "+accessToken)
 	req.Header.Set("X-Restli-Protocol-Version", "2.0.0")
-	req.Header.Set("LinkedIn-Version", "202405")
+	if versioned {
+		req.Header.Set("LinkedIn-Version", "202604")
+	}
 	if bodyReader != nil {
 		req.Header.Set("Content-Type", "application/json")
 	}

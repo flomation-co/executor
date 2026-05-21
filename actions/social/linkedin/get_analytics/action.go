@@ -21,8 +21,8 @@ const (
 )
 
 var Inputs = [...]core.Connection{
-	{Name: "access_token", Type: core.ConnectionTypeString, Label: "LinkedIn Access Token", Placeholder: "${credentials.linkedin}", Required: true},
-	{Name: "post_urn", Type: core.ConnectionTypeString, Label: "Post URN", Placeholder: "urn:li:ugcPost:...", Required: true},
+	{Name: "access_token", Type: core.ConnectionTypeString, Label: "LinkedIn Access Token", Placeholder: "${credentials.linkedin_community}", Required: true},
+	{Name: "post_urn", Type: core.ConnectionTypeString, Label: "Post URN", Placeholder: "urn:li:share:...", Required: true},
 }
 
 var Outputs = [...]core.Connection{
@@ -32,7 +32,6 @@ var Outputs = [...]core.Connection{
 	{Name: "likes", Type: core.ConnectionTypeInteger, Label: "Likes"},
 	{Name: "comments", Type: core.ConnectionTypeInteger, Label: "Comments"},
 	{Name: "shares", Type: core.ConnectionTypeInteger, Label: "Shares"},
-	{Name: "impressions", Type: core.ConnectionTypeInteger, Label: "Impressions"},
 	{Name: "analytics_json", Type: core.ConnectionTypeString, Label: "Full Analytics JSON"},
 }
 
@@ -47,11 +46,10 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 		return linkedin.ErrorResult("post_urn is required"), nil
 	}
 
-	// Fetch social metadata (likes, comments, etc.)
 	encodedURN := url.QueryEscape(postURN)
-	apiURL := fmt.Sprintf("%s/socialMetadata/%s", linkedin.BaseURL, encodedURN)
+	apiURL := fmt.Sprintf("%s/socialMetadata/%s", linkedin.RestBaseURL, encodedURN)
 
-	resp, err := linkedin.ExecuteAPI(token, "GET", apiURL, nil)
+	resp, err := linkedin.ExecuteVersionedAPI(token, "GET", apiURL, nil)
 	if err != nil {
 		return linkedin.ErrorResult(fmt.Sprintf("failed to get analytics: %v", err)), nil
 	}
@@ -77,7 +75,6 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 			"likes":          likes,
 			"comments":       comments,
 			"shares":         shares,
-			"impressions":    0, // Not available via this endpoint
 			"analytics_json": string(analyticsJSON),
 		},
 	), nil
