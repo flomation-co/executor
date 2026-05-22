@@ -1,6 +1,6 @@
 {
   "agent/create_schedule": {
-    "hash": "e566c8dbbf690d79f5990c6944e2d11f95493bfa7fb21c7232d94d0c05aeeeec",
+    "hash": "650edc48b1628f0290cdc55d2a9f9066b7ab3b7b881bfba4946d1438500b718c",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Create Schedule",
@@ -150,7 +150,7 @@
     ]
   },
   "agent/delete_schedule": {
-    "hash": "bd4fe70881c0e6155e12bb7de2fe6b782b22c203a0f864b27a6ab1ec0763cf54",
+    "hash": "fd4191e0a0ed57d522f68ebbf25406e264320a51b0cd641c45a77c86d9b98700",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Delete Schedule",
@@ -193,7 +193,7 @@
     ]
   },
   "agent/forget": {
-    "hash": "dc356e5402f88b4460ee3f340ede7dd3a269f58550e10c1ac91e69c7ac9f0544",
+    "hash": "ebd9466a0ec23f9d239e4080cd3bf6d2abd8a1847a01e6bdb81aca930cc85ec1",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Forget Memory",
@@ -228,7 +228,7 @@
     ]
   },
   "agent/fulfill_commitment": {
-    "hash": "2ec805de51cafa988e187d52d44f989c196de5d924543c10c375151e3bf4facd",
+    "hash": "d88228743ac40e267a4d5df52b7f3c7bcd195429f05fca28f13c796cd6e1b12c",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Fulfil Commitment",
@@ -263,7 +263,7 @@
     ]
   },
   "agent/list_identities": {
-    "hash": "0b30bd69876b99c78a058e18388a0c60c88e9a70718159e2a653839c30ef6e96",
+    "hash": "fa0f7fb53a9807a33c8ed3cbcb4f06c94fd8daba6283338733f1408589b4662c",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "List Identities",
@@ -320,7 +320,7 @@
     ]
   },
   "agent/list_schedules": {
-    "hash": "329a10c3d6474aeb09a3bd4787e589cc337f738486b4eb9f74e6553959224ced",
+    "hash": "b4e8651b999c84ec905f89e609d8e029f59c3177c685320f8b89041b83d54a98",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "List Schedules",
@@ -369,7 +369,7 @@
     ]
   },
   "agent/offer_identity_link": {
-    "hash": "6256f36176e9fcff3b53317cc6de7996617872d1e686872364edbd1823fff4c2",
+    "hash": "02199ed2427803660a2287a458e14a5df11e746ccf75eac3b5000585d6a3493a",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Offer Identity Link",
@@ -464,7 +464,7 @@
     ]
   },
   "agent/process_extraction": {
-    "hash": "5397bf28fe2712a266c7bb233eebfd88228ee98603d24de25ccde442a12b19c3",
+    "hash": "5aadc7c92c3ee90772df38793ecb3f0cbb9c0635a71724057883b9c340fc7d3a",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Process Extraction Output",
@@ -577,7 +577,7 @@
     ]
   },
   "agent/read_state": {
-    "hash": "07d0557a62bd7a4f12ee06dc9a8ff810ecd29a6dd46122b5cd3af06fe0f9649a",
+    "hash": "499135e8f0ed4bf92337bb803e0f919e358900f7d879e464054cc95e9ec8c279",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Read Agent State",
@@ -627,7 +627,7 @@
     ]
   },
   "agent/recall": {
-    "hash": "e61035eb3c82a5c44c51d5427181af87ff745ce2c5cc3e316d946923856b9866",
+    "hash": "32e009469cb2b1b1cb5ebe97c8f730fa7647f7e93e3bca5b281246f536bd90e3",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Recall Memories",
@@ -705,7 +705,7 @@
     ]
   },
   "agent/remember": {
-    "hash": "4503b0c5e81b71d64889946d0ffce478111dfca815e2bc29ae95f44f239dac32",
+    "hash": "010096592624c71ce34ab069cc2ae32d66c86d602888cc6f28c9f1f3968a9f89",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Remember Fact",
@@ -836,7 +836,7 @@
     ]
   },
   "agent/send_message": {
-    "hash": "8df6a5d7bf5c5a62f4df29a8288ff0b5b0b75e3c90aa4bde63816cff8c37b203",
+    "hash": "60479644fcf11801f7b1effe10997816cd695940e7bb5a7195d074cba8c11f3d",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Send Agent Message",
@@ -916,7 +916,7 @@
     ]
   },
   "agent/write_state": {
-    "hash": "5df38bff5e4190153d7bb4e4273566dc01c15bfbc4918dc22a63c37cd03878b3",
+    "hash": "6ab5fb79bae2a20963f4c6fd418c764de9976e9728f98585020f418c170afbe7",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Write Agent State",
@@ -1972,6 +1972,182 @@
       }
     ]
   },
+  "common/array_find": {
+    "hash": "c24af09afe932bc3f49cf3fd7725da519c1f708ecc7b5459c7fcc6063a0b0579",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Array Find",
+    "description": "Find an item in an array by index or by matching a field value",
+    "website": "https://www.flomation.co",
+    "icon": "magnifying-glass",
+    "date": "22/05/2026",
+    "type": 2,
+    "category": {
+      "name": "Common",
+      "icon": "toolbox",
+      "description": "General-purpose data utilities"
+    },
+    "inputs": [
+      {
+        "name": "array",
+        "type": "object",
+        "value": null,
+        "label": "Array",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "mode",
+        "type": "string",
+        "value": null,
+        "label": "Find Mode",
+        "placeholder": "",
+        "required": true,
+        "options": [
+          {
+            "name": "By Index",
+            "value": "index"
+          },
+          {
+            "name": "First Match",
+            "value": "first"
+          },
+          {
+            "name": "All Matches",
+            "value": "all"
+          }
+        ]
+      },
+      {
+        "name": "index",
+        "type": "integer",
+        "value": null,
+        "label": "Index (0-based)",
+        "placeholder": "0",
+        "visible_when": {
+          "field": "mode",
+          "values": [
+            "index"
+          ]
+        }
+      },
+      {
+        "name": "field",
+        "type": "string",
+        "value": null,
+        "label": "Field Name",
+        "placeholder": "id",
+        "visible_when": {
+          "field": "mode",
+          "values": [
+            "first",
+            "all"
+          ]
+        }
+      },
+      {
+        "name": "operator",
+        "type": "string",
+        "value": null,
+        "label": "Operator",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "Equals",
+            "value": "equals"
+          },
+          {
+            "name": "Contains",
+            "value": "contains"
+          },
+          {
+            "name": "Starts With",
+            "value": "starts_with"
+          },
+          {
+            "name": "Ends With",
+            "value": "ends_with"
+          },
+          {
+            "name": "Not Equals",
+            "value": "not_equals"
+          }
+        ],
+        "visible_when": {
+          "field": "mode",
+          "values": [
+            "first",
+            "all"
+          ]
+        }
+      },
+      {
+        "name": "value",
+        "type": "string",
+        "value": null,
+        "label": "Match Value",
+        "placeholder": "Value to match against",
+        "visible_when": {
+          "field": "mode",
+          "values": [
+            "first",
+            "all"
+          ]
+        }
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result",
+        "placeholder": ""
+      },
+      {
+        "name": "item",
+        "type": "object",
+        "value": null,
+        "label": "Matched Item (first or index)",
+        "placeholder": ""
+      },
+      {
+        "name": "items",
+        "type": "object",
+        "value": null,
+        "label": "All Matched Items (array)",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Match Count",
+        "placeholder": ""
+      },
+      {
+        "name": "found",
+        "type": "boolean",
+        "value": null,
+        "label": "Found",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
   "common/array_index": {
     "hash": "107946c095b2175c3db49cd559e99b65c272dbfde4d6571f05964f359802b9b8",
     "author": "Andy Esser",
@@ -2412,6 +2588,84 @@
         "type": "integer",
         "value": null,
         "label": "Unix Timestamp",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "common/object_get": {
+    "hash": "a6628e19d69bd80a27bc6f40a9075615369fdace3f2db60d0358c09277bfcecc",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Object Get Field",
+    "description": "Extract a field from an object by name, with dot-notation for nested access",
+    "website": "https://www.flomation.co",
+    "icon": "crosshairs",
+    "date": "22/05/2026",
+    "type": 2,
+    "category": {
+      "name": "Common",
+      "icon": "toolbox",
+      "description": "General-purpose data utilities"
+    },
+    "inputs": [
+      {
+        "name": "object",
+        "type": "object",
+        "value": null,
+        "label": "Object",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "field",
+        "type": "string",
+        "value": null,
+        "label": "Field Name",
+        "placeholder": "name or address.city",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result",
+        "placeholder": ""
+      },
+      {
+        "name": "value",
+        "type": "object",
+        "value": null,
+        "label": "Field Value",
+        "placeholder": ""
+      },
+      {
+        "name": "value_string",
+        "type": "string",
+        "value": null,
+        "label": "Field Value (string)",
+        "placeholder": ""
+      },
+      {
+        "name": "found",
+        "type": "boolean",
+        "value": null,
+        "label": "Found",
         "placeholder": ""
       },
       {
@@ -12575,6 +12829,1041 @@
       }
     ]
   },
+  "social/facebook/delete_post": {
+    "hash": "0322a8ef23f4fd2d3b846c014e9836f83c886a2178179a71e886682e3cf14779",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Facebook Delete Post",
+    "description": "Delete a Facebook Page post by ID",
+    "website": "https://www.flomation.co",
+    "icon": "facebook",
+    "date": "21/05/2026",
+    "type": 2,
+    "category": {
+      "name": "Social Media",
+      "icon": "comments",
+      "description": "Publish and manage content on social media platforms"
+    },
+    "sub_category": {
+      "name": "Facebook",
+      "icon": "facebook",
+      "description": "Publish posts, manage pages, and read insights on Facebook"
+    },
+    "inputs": [
+      {
+        "name": "access_token",
+        "type": "string",
+        "value": null,
+        "label": "Page Access Token",
+        "placeholder": "${first_page_token}",
+        "required": true
+      },
+      {
+        "name": "app_secret",
+        "type": "string",
+        "value": null,
+        "label": "App Secret",
+        "placeholder": "${secrets.facebook_app_secret}"
+      },
+      {
+        "name": "post_id",
+        "type": "string",
+        "value": null,
+        "label": "Post ID",
+        "placeholder": "",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "social/facebook/get_page_insights": {
+    "hash": "c2d06bdb4d32d5d06f4837102e60dac4a126537f01755406ca5e7bae461b132d",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Facebook Page Insights",
+    "description": "Get engagement and reach metrics for a Facebook Page",
+    "website": "https://www.flomation.co",
+    "icon": "facebook",
+    "date": "21/05/2026",
+    "type": 2,
+    "category": {
+      "name": "Social Media",
+      "icon": "comments",
+      "description": "Publish and manage content on social media platforms"
+    },
+    "sub_category": {
+      "name": "Facebook",
+      "icon": "facebook",
+      "description": "Publish posts, manage pages, and read insights on Facebook"
+    },
+    "inputs": [
+      {
+        "name": "access_token",
+        "type": "string",
+        "value": null,
+        "label": "Page Access Token",
+        "placeholder": "${first_page_token}",
+        "required": true
+      },
+      {
+        "name": "app_secret",
+        "type": "string",
+        "value": null,
+        "label": "App Secret",
+        "placeholder": "${secrets.facebook_app_secret}"
+      },
+      {
+        "name": "page_id",
+        "type": "string",
+        "value": null,
+        "label": "Page ID",
+        "placeholder": "${first_page_id}",
+        "required": true
+      },
+      {
+        "name": "period",
+        "type": "string",
+        "value": null,
+        "label": "Period",
+        "placeholder": "day",
+        "options": [
+          {
+            "name": "Day",
+            "value": "day"
+          },
+          {
+            "name": "Week",
+            "value": "week"
+          },
+          {
+            "name": "28 Days",
+            "value": "days_28"
+          }
+        ]
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      },
+      {
+        "name": "page_impressions",
+        "type": "integer",
+        "value": null,
+        "label": "Page Impressions",
+        "placeholder": ""
+      },
+      {
+        "name": "page_engaged_users",
+        "type": "integer",
+        "value": null,
+        "label": "Engaged Users",
+        "placeholder": ""
+      },
+      {
+        "name": "page_fans",
+        "type": "integer",
+        "value": null,
+        "label": "Total Followers",
+        "placeholder": ""
+      },
+      {
+        "name": "insights_json",
+        "type": "string",
+        "value": null,
+        "label": "Full Insights JSON",
+        "placeholder": ""
+      }
+    ]
+  },
+  "social/facebook/get_pages": {
+    "hash": "00c61cb96480dca361fa377912cbf0d0b2bc6f75c4da46373a24f0431d809be2",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Facebook Get Pages",
+    "description": "List Facebook Pages managed by the authenticated user with their access tokens",
+    "website": "https://www.flomation.co",
+    "icon": "facebook",
+    "date": "21/05/2026",
+    "type": 2,
+    "category": {
+      "name": "Social Media",
+      "icon": "comments",
+      "description": "Publish and manage content on social media platforms"
+    },
+    "sub_category": {
+      "name": "Facebook",
+      "icon": "facebook",
+      "description": "Publish posts, manage pages, and read insights on Facebook"
+    },
+    "inputs": [
+      {
+        "name": "access_token",
+        "type": "string",
+        "value": null,
+        "label": "Facebook User Token",
+        "placeholder": "${credentials.facebook}",
+        "required": true
+      },
+      {
+        "name": "app_secret",
+        "type": "string",
+        "value": null,
+        "label": "App Secret",
+        "placeholder": "${secrets.facebook_app_secret}"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      },
+      {
+        "name": "pages",
+        "type": "string",
+        "value": null,
+        "label": "Pages (JSON array)",
+        "placeholder": ""
+      },
+      {
+        "name": "page_count",
+        "type": "integer",
+        "value": null,
+        "label": "Page Count",
+        "placeholder": ""
+      },
+      {
+        "name": "first_page_id",
+        "type": "string",
+        "value": null,
+        "label": "First Page ID",
+        "placeholder": ""
+      },
+      {
+        "name": "first_page_name",
+        "type": "string",
+        "value": null,
+        "label": "First Page Name",
+        "placeholder": ""
+      },
+      {
+        "name": "first_page_token",
+        "type": "string",
+        "value": null,
+        "label": "First Page Access Token",
+        "placeholder": ""
+      }
+    ]
+  },
+  "social/facebook/get_post": {
+    "hash": "6a4f9f5a3073bc39598e5c350ffac6a96b87e6ce6a8b651d8278d88f656d3273",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Facebook Get Post",
+    "description": "Retrieve a Facebook post by ID with engagement metrics",
+    "website": "https://www.flomation.co",
+    "icon": "facebook",
+    "date": "21/05/2026",
+    "type": 2,
+    "category": {
+      "name": "Social Media",
+      "icon": "comments",
+      "description": "Publish and manage content on social media platforms"
+    },
+    "sub_category": {
+      "name": "Facebook",
+      "icon": "facebook",
+      "description": "Publish posts, manage pages, and read insights on Facebook"
+    },
+    "inputs": [
+      {
+        "name": "access_token",
+        "type": "string",
+        "value": null,
+        "label": "Page Access Token",
+        "placeholder": "${first_page_token}",
+        "required": true
+      },
+      {
+        "name": "app_secret",
+        "type": "string",
+        "value": null,
+        "label": "App Secret",
+        "placeholder": "${secrets.facebook_app_secret}"
+      },
+      {
+        "name": "post_id",
+        "type": "string",
+        "value": null,
+        "label": "Post ID",
+        "placeholder": "",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      },
+      {
+        "name": "message",
+        "type": "string",
+        "value": null,
+        "label": "Message",
+        "placeholder": ""
+      },
+      {
+        "name": "created_time",
+        "type": "string",
+        "value": null,
+        "label": "Created Time",
+        "placeholder": ""
+      },
+      {
+        "name": "likes",
+        "type": "integer",
+        "value": null,
+        "label": "Likes",
+        "placeholder": ""
+      },
+      {
+        "name": "comments",
+        "type": "integer",
+        "value": null,
+        "label": "Comments",
+        "placeholder": ""
+      },
+      {
+        "name": "shares",
+        "type": "integer",
+        "value": null,
+        "label": "Shares",
+        "placeholder": ""
+      },
+      {
+        "name": "post_json",
+        "type": "string",
+        "value": null,
+        "label": "Full Post JSON",
+        "placeholder": ""
+      }
+    ]
+  },
+  "social/facebook/publish_post": {
+    "hash": "6dacdb4e394bb6a8ec5896d0e018019dc48d50c23d94322bb70366db7a57009a",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Facebook Publish Post",
+    "description": "Publish a post to a Facebook Page",
+    "website": "https://www.flomation.co",
+    "icon": "facebook",
+    "date": "21/05/2026",
+    "type": 2,
+    "category": {
+      "name": "Social Media",
+      "icon": "comments",
+      "description": "Publish and manage content on social media platforms"
+    },
+    "sub_category": {
+      "name": "Facebook",
+      "icon": "facebook",
+      "description": "Publish posts, manage pages, and read insights on Facebook"
+    },
+    "inputs": [
+      {
+        "name": "access_token",
+        "type": "string",
+        "value": null,
+        "label": "Page Access Token",
+        "placeholder": "${first_page_token}",
+        "required": true
+      },
+      {
+        "name": "app_secret",
+        "type": "string",
+        "value": null,
+        "label": "App Secret",
+        "placeholder": "${secrets.facebook_app_secret}"
+      },
+      {
+        "name": "page_id",
+        "type": "string",
+        "value": null,
+        "label": "Page ID",
+        "placeholder": "${first_page_id}",
+        "required": true
+      },
+      {
+        "name": "message",
+        "type": "text",
+        "value": null,
+        "label": "Message",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "link",
+        "type": "string",
+        "value": null,
+        "label": "Link URL",
+        "placeholder": "https://example.com (optional)"
+      },
+      {
+        "name": "published",
+        "type": "boolean",
+        "value": null,
+        "label": "Published",
+        "placeholder": "true"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      },
+      {
+        "name": "post_id",
+        "type": "string",
+        "value": null,
+        "label": "Post ID",
+        "placeholder": ""
+      }
+    ]
+  },
+  "social/linkedin/delete_post": {
+    "hash": "314338f5f3796692048e030874cea2e5809234dc6100abf4ed9966c446cc71e3",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "LinkedIn Delete Post",
+    "description": "Delete a LinkedIn post by its URN",
+    "website": "https://www.flomation.co",
+    "icon": "linkedin",
+    "date": "21/05/2026",
+    "type": 2,
+    "category": {
+      "name": "Social Media",
+      "icon": "comments",
+      "description": "Publish and manage content on social media platforms"
+    },
+    "sub_category": {
+      "name": "LinkedIn",
+      "icon": "linkedin",
+      "description": "Publish posts, manage content, and read analytics on LinkedIn"
+    },
+    "inputs": [
+      {
+        "name": "access_token",
+        "type": "string",
+        "value": null,
+        "label": "LinkedIn Access Token",
+        "placeholder": "${credentials.linkedin}",
+        "required": true
+      },
+      {
+        "name": "post_urn",
+        "type": "string",
+        "value": null,
+        "label": "Post URN",
+        "placeholder": "urn:li:ugcPost:...",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "social/linkedin/get_analytics": {
+    "hash": "6531af3d52c5c7250b922126aa3c6916c53bb92d71dd82b3245e3e26a5f3c8a6",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "LinkedIn Post Analytics",
+    "description": "Get engagement metrics (likes, comments, shares) for a LinkedIn post",
+    "website": "https://www.flomation.co",
+    "icon": "linkedin",
+    "date": "21/05/2026",
+    "type": 2,
+    "category": {
+      "name": "Social Media",
+      "icon": "comments",
+      "description": "Publish and manage content on social media platforms"
+    },
+    "sub_category": {
+      "name": "LinkedIn",
+      "icon": "linkedin",
+      "description": "Publish posts, manage content, and read analytics on LinkedIn"
+    },
+    "inputs": [
+      {
+        "name": "access_token",
+        "type": "string",
+        "value": null,
+        "label": "LinkedIn Access Token",
+        "placeholder": "${credentials.linkedin_community}",
+        "required": true
+      },
+      {
+        "name": "post_urn",
+        "type": "string",
+        "value": null,
+        "label": "Post URN",
+        "placeholder": "urn:li:share:...",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      },
+      {
+        "name": "likes",
+        "type": "integer",
+        "value": null,
+        "label": "Likes",
+        "placeholder": ""
+      },
+      {
+        "name": "comments",
+        "type": "integer",
+        "value": null,
+        "label": "Comments",
+        "placeholder": ""
+      },
+      {
+        "name": "shares",
+        "type": "integer",
+        "value": null,
+        "label": "Shares",
+        "placeholder": ""
+      },
+      {
+        "name": "analytics_json",
+        "type": "string",
+        "value": null,
+        "label": "Full Analytics JSON",
+        "placeholder": ""
+      }
+    ]
+  },
+  "social/linkedin/get_post": {
+    "hash": "08c99b7e66da191814af7a4479c61206dd94dda5b50510ad3a518d31664f0bc8",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "LinkedIn Get Post",
+    "description": "Retrieve a LinkedIn post by its URN with content and metadata",
+    "website": "https://www.flomation.co",
+    "icon": "linkedin",
+    "date": "21/05/2026",
+    "type": 2,
+    "category": {
+      "name": "Social Media",
+      "icon": "comments",
+      "description": "Publish and manage content on social media platforms"
+    },
+    "sub_category": {
+      "name": "LinkedIn",
+      "icon": "linkedin",
+      "description": "Publish posts, manage content, and read analytics on LinkedIn"
+    },
+    "inputs": [
+      {
+        "name": "access_token",
+        "type": "string",
+        "value": null,
+        "label": "LinkedIn Access Token",
+        "placeholder": "${credentials.linkedin_community}",
+        "required": true
+      },
+      {
+        "name": "post_urn",
+        "type": "string",
+        "value": null,
+        "label": "Post URN",
+        "placeholder": "urn:li:share:...",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      },
+      {
+        "name": "text",
+        "type": "string",
+        "value": null,
+        "label": "Post Text",
+        "placeholder": ""
+      },
+      {
+        "name": "author",
+        "type": "string",
+        "value": null,
+        "label": "Author URN",
+        "placeholder": ""
+      },
+      {
+        "name": "created_at",
+        "type": "string",
+        "value": null,
+        "label": "Created At",
+        "placeholder": ""
+      },
+      {
+        "name": "lifecycle_state",
+        "type": "string",
+        "value": null,
+        "label": "Lifecycle State",
+        "placeholder": ""
+      },
+      {
+        "name": "post_json",
+        "type": "string",
+        "value": null,
+        "label": "Full Post JSON",
+        "placeholder": ""
+      }
+    ]
+  },
+  "social/linkedin/get_profile": {
+    "hash": "9a3717bc383bd436bb83c3d8db6565a7312c2a33d5664f9f3363c7d5ca6c1362",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "LinkedIn Get Profile",
+    "description": "Get the authenticated user's LinkedIn profile and member URN",
+    "website": "https://www.flomation.co",
+    "icon": "linkedin",
+    "date": "21/05/2026",
+    "type": 2,
+    "category": {
+      "name": "Social Media",
+      "icon": "comments",
+      "description": "Publish and manage content on social media platforms"
+    },
+    "sub_category": {
+      "name": "LinkedIn",
+      "icon": "linkedin",
+      "description": "Publish posts, manage content, and read analytics on LinkedIn"
+    },
+    "inputs": [
+      {
+        "name": "access_token",
+        "type": "string",
+        "value": null,
+        "label": "LinkedIn Access Token",
+        "placeholder": "${credentials.linkedin}",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      },
+      {
+        "name": "member_urn",
+        "type": "string",
+        "value": null,
+        "label": "Member URN",
+        "placeholder": ""
+      },
+      {
+        "name": "name",
+        "type": "string",
+        "value": null,
+        "label": "Full Name",
+        "placeholder": ""
+      },
+      {
+        "name": "given_name",
+        "type": "string",
+        "value": null,
+        "label": "First Name",
+        "placeholder": ""
+      },
+      {
+        "name": "family_name",
+        "type": "string",
+        "value": null,
+        "label": "Last Name",
+        "placeholder": ""
+      },
+      {
+        "name": "email",
+        "type": "string",
+        "value": null,
+        "label": "Email",
+        "placeholder": ""
+      },
+      {
+        "name": "picture_url",
+        "type": "string",
+        "value": null,
+        "label": "Profile Picture URL",
+        "placeholder": ""
+      }
+    ]
+  },
+  "social/linkedin/list_posts": {
+    "hash": "621f9166cc778ba62e3a94ad9df36c2c9eb61612007b1bda1fe25ab0c191c3cc",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "LinkedIn List Posts",
+    "description": "List recent posts by the authenticated user or a specified author",
+    "website": "https://www.flomation.co",
+    "icon": "linkedin",
+    "date": "21/05/2026",
+    "type": 2,
+    "category": {
+      "name": "Social Media",
+      "icon": "comments",
+      "description": "Publish and manage content on social media platforms"
+    },
+    "sub_category": {
+      "name": "LinkedIn",
+      "icon": "linkedin",
+      "description": "Publish posts, manage content, and read analytics on LinkedIn"
+    },
+    "inputs": [
+      {
+        "name": "access_token",
+        "type": "string",
+        "value": null,
+        "label": "LinkedIn Access Token",
+        "placeholder": "${credentials.linkedin_community}",
+        "required": true
+      },
+      {
+        "name": "author_urn",
+        "type": "string",
+        "value": null,
+        "label": "Author URN",
+        "placeholder": "urn:li:person:XXXXXXXX",
+        "required": true
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Count",
+        "placeholder": "10"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      },
+      {
+        "name": "posts",
+        "type": "string",
+        "value": null,
+        "label": "Posts (JSON array)",
+        "placeholder": ""
+      },
+      {
+        "name": "total",
+        "type": "integer",
+        "value": null,
+        "label": "Total Posts",
+        "placeholder": ""
+      }
+    ]
+  },
+  "social/linkedin/share_post": {
+    "hash": "3b0fb80b63fc0e265965ce05a711ac7a0b6e9e084a97ef714969c2052d9583ed",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "LinkedIn Share Post",
+    "description": "Publish a text or link post to LinkedIn as the authenticated user",
+    "website": "https://www.flomation.co",
+    "icon": "linkedin",
+    "date": "21/05/2026",
+    "type": 2,
+    "category": {
+      "name": "Social Media",
+      "icon": "comments",
+      "description": "Publish and manage content on social media platforms"
+    },
+    "sub_category": {
+      "name": "LinkedIn",
+      "icon": "linkedin",
+      "description": "Publish posts, manage content, and read analytics on LinkedIn"
+    },
+    "inputs": [
+      {
+        "name": "access_token",
+        "type": "string",
+        "value": null,
+        "label": "LinkedIn Access Token",
+        "placeholder": "${credentials.linkedin}",
+        "required": true
+      },
+      {
+        "name": "author_urn",
+        "type": "string",
+        "value": null,
+        "label": "Author URN",
+        "placeholder": "urn:li:person:XXXXXXXX",
+        "required": true
+      },
+      {
+        "name": "text",
+        "type": "text",
+        "value": null,
+        "label": "Post Text",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "link_url",
+        "type": "string",
+        "value": null,
+        "label": "Link URL",
+        "placeholder": "https://example.com (optional)"
+      },
+      {
+        "name": "link_title",
+        "type": "string",
+        "value": null,
+        "label": "Link Title",
+        "placeholder": ""
+      },
+      {
+        "name": "link_description",
+        "type": "string",
+        "value": null,
+        "label": "Link Description",
+        "placeholder": ""
+      },
+      {
+        "name": "visibility",
+        "type": "string",
+        "value": null,
+        "label": "Visibility",
+        "placeholder": "PUBLIC",
+        "options": [
+          {
+            "name": "Public",
+            "value": "PUBLIC"
+          },
+          {
+            "name": "Connections Only",
+            "value": "CONNECTIONS"
+          }
+        ]
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      },
+      {
+        "name": "post_urn",
+        "type": "string",
+        "value": null,
+        "label": "Post URN",
+        "placeholder": ""
+      }
+    ]
+  },
   "sql/mysql": {
     "hash": "29cc6e01c901817e8e94602a83657861507f03a14bbe0eae99d449cf50b963a3",
     "author": "Andy Esser",
@@ -13730,7 +15019,7 @@
     ]
   },
   "tools/calendar_create": {
-    "hash": "33a689156b625d5aea80d221b1a6fa8549926c061e2afc3adc6af021f2ad52c8",
+    "hash": "a0c7dc6a277c6a0c3598dd5a345630f861df17e8e0b2f6694750890183f1a680",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Calendar Create Event",
@@ -13845,7 +15134,7 @@
     ]
   },
   "tools/calendar_delete": {
-    "hash": "e9e9f316caf923c2661fe1036934252da92491d8fe449db180b231572d6b7055",
+    "hash": "ed293e2e2abbb65f8625836176a16b771804aab8fa4fb67c589f186f2a3339eb",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Calendar Delete Event",
@@ -13901,7 +15190,7 @@
     ]
   },
   "tools/calendar_read": {
-    "hash": "14764745fccb82529bcf63d3d26b94ea3dd3d5db583b1d09f4d4693040843aef",
+    "hash": "12876b616af369051252ec0d2b92517e0ff60ee6f7115b219348ecfa2ccefab2",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Calendar Read",
@@ -14028,7 +15317,7 @@
     ]
   },
   "tools/calendar_update": {
-    "hash": "e26aa43781d3d105df758d08afe9b84e7437e590bff57d640a8b6c2ae4304511",
+    "hash": "88dad4625e2b18f7da6fbea86d0cf60d4dd98ba54c67eab6e5d788f8876f8409",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Calendar Update Event",
@@ -14147,7 +15436,7 @@
     ]
   },
   "tools/channel_action": {
-    "hash": "a74575b7049d88b8376ad85656d9b804207a16fef831cbcf465e16653f845866",
+    "hash": "eddf1f7bbaff9d18a1d29cef6637a9f915f5fd5c005fd7f9edd02ace325efb73",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Channel Action",
@@ -14248,7 +15537,7 @@
     ]
   },
   "tools/email_draft": {
-    "hash": "612a023a3ce66447779e3cb34ce9855a9a49dc06a9655a1fa6acc4434a49d4d0",
+    "hash": "a72eaf974a6bf08d544b1e5813ede474ac976813320964334616be2a86b2695a",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Gmail Draft",
@@ -14364,7 +15653,7 @@
     ]
   },
   "tools/email_read": {
-    "hash": "1b6b45e0c0fe672ec37ad3f87290bf0592467600bf2b633a4eb4c6e61eda15bb",
+    "hash": "3b71aa0d1dd09cd5fa61a3710b4807f272b82311f30bb91d7f0f13536875261a",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Gmail Read",
@@ -14447,7 +15736,7 @@
     ]
   },
   "tools/email_reply": {
-    "hash": "4e45b2453dba9f94d461b32988ceb774e614656e5e9910bf1b5500667683a76d",
+    "hash": "598165ba8c1e897faa5899322dbd45555464f3e9729524311513e3ff0314410e",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Gmail Reply",
@@ -14532,7 +15821,7 @@
     ]
   },
   "tools/email_send": {
-    "hash": "a49b75265517518ab1a5c117e9c935eb74036326939f1cc61e61fafb11b1034b",
+    "hash": "bb322d90c768d9fee49e59be3ba2188c97a3c446127604bf860de6e708cb6067",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Gmail Send",
@@ -14639,7 +15928,7 @@
     ]
   },
   "tools/google_accounts": {
-    "hash": "4ab8ff14e3197d35ed7d19006c6fcbff6b533b734556bb39afc742969e6f55c1",
+    "hash": "0b029cfcc3720095f085d1ac8a30fa6602fb11e4fe4fd377c13dc99bd7326646",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Manage Google Connections",

@@ -904,6 +904,12 @@ func (f *Flow) executeNodeActionOnly(actions map[string]Action, node *Node, envi
 				}
 			}
 			parentResults[k] = v
+
+			// Also store scoped version keyed by node ID: ${nodeId.key}
+			// This allows disambiguating when multiple parents share
+			// the same output key. The editor shows the node name in
+			// the autocomplete but inserts the ID-based reference.
+			parentResults[p.ID+"."+k] = v
 		}
 	}
 

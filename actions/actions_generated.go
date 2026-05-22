@@ -30,12 +30,14 @@ import (
 	aws_s3_get "flomation.app/automate/executor/actions/aws/s3/get"
 	aws_s3_list "flomation.app/automate/executor/actions/aws/s3/list"
 	aws_s3_put "flomation.app/automate/executor/actions/aws/s3/put"
+	common_array_find "flomation.app/automate/executor/actions/common/array_find"
 	common_array_index "flomation.app/automate/executor/actions/common/array_index"
 	common_array_length "flomation.app/automate/executor/actions/common/array_length"
 	common_data_combine "flomation.app/automate/executor/actions/common/data_combine"
 	common_data_extract "flomation.app/automate/executor/actions/common/data_extract"
 	common_data_rename "flomation.app/automate/executor/actions/common/data_rename"
 	common_format_date "flomation.app/automate/executor/actions/common/format_date"
+	common_object_get "flomation.app/automate/executor/actions/common/object_get"
 	common_set_variable "flomation.app/automate/executor/actions/common/set_variable"
 	common_sleep "flomation.app/automate/executor/actions/common/sleep"
 	common_smtp "flomation.app/automate/executor/actions/common/smtp"
@@ -143,6 +145,11 @@ import (
 	output_slack_webhook "flomation.app/automate/executor/actions/output/slack_webhook"
 	script_bash "flomation.app/automate/executor/actions/script/bash"
 	security_antivirus "flomation.app/automate/executor/actions/security/antivirus"
+	social_facebook_delete_post "flomation.app/automate/executor/actions/social/facebook/delete_post"
+	social_facebook_get_page_insights "flomation.app/automate/executor/actions/social/facebook/get_page_insights"
+	social_facebook_get_pages "flomation.app/automate/executor/actions/social/facebook/get_pages"
+	social_facebook_get_post "flomation.app/automate/executor/actions/social/facebook/get_post"
+	social_facebook_publish_post "flomation.app/automate/executor/actions/social/facebook/publish_post"
 	social_linkedin_delete_post "flomation.app/automate/executor/actions/social/linkedin/delete_post"
 	social_linkedin_get_analytics "flomation.app/automate/executor/actions/social/linkedin/get_analytics"
 	social_linkedin_get_post "flomation.app/automate/executor/actions/social/linkedin/get_post"
@@ -228,12 +235,14 @@ var Actions = map[string]core.Action{
 	"aws/s3/get":                          aws_s3_get.Execute,
 	"aws/s3/list":                         aws_s3_list.Execute,
 	"aws/s3/put":                          aws_s3_put.Execute,
+	"common/array_find":                   common_array_find.Execute,
 	"common/array_index":                  common_array_index.Execute,
 	"common/array_length":                 common_array_length.Execute,
 	"common/data_combine":                 common_data_combine.Execute,
 	"common/data_extract":                 common_data_extract.Execute,
 	"common/data_rename":                  common_data_rename.Execute,
 	"common/format_date":                  common_format_date.Execute,
+	"common/object_get":                   common_object_get.Execute,
 	"common/set_variable":                 common_set_variable.Execute,
 	"common/sleep":                        common_sleep.Execute,
 	"common/smtp":                         common_smtp.Execute,
@@ -341,6 +350,11 @@ var Actions = map[string]core.Action{
 	"output/slack_webhook":                output_slack_webhook.Execute,
 	"script/bash":                         script_bash.Execute,
 	"security/antivirus":                  security_antivirus.Execute,
+	"social/facebook/delete_post":         social_facebook_delete_post.Execute,
+	"social/facebook/get_page_insights":   social_facebook_get_page_insights.Execute,
+	"social/facebook/get_pages":           social_facebook_get_pages.Execute,
+	"social/facebook/get_post":            social_facebook_get_post.Execute,
+	"social/facebook/publish_post":        social_facebook_publish_post.Execute,
 	"social/linkedin/delete_post":         social_linkedin_delete_post.Execute,
 	"social/linkedin/get_analytics":       social_linkedin_get_analytics.Execute,
 	"social/linkedin/get_post":            social_linkedin_get_post.Execute,
