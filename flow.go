@@ -904,6 +904,12 @@ func (f *Flow) executeNodeActionOnly(actions map[string]Action, node *Node, envi
 				}
 			}
 			parentResults[k] = v
+
+			// Also store scoped version keyed by node ID: ${nodeId.key}
+			// This allows disambiguating when multiple parents share
+			// the same output key. The editor shows the node name in
+			// the autocomplete but inserts the ID-based reference.
+			parentResults[p.ID+"."+k] = v
 		}
 	}
 
@@ -982,7 +988,7 @@ func (f *Flow) executeNodeActionOnly(actions map[string]Action, node *Node, envi
 				// Only intercept plain parent-result references.
 				if !strings.HasPrefix(name, "env.") && !strings.HasPrefix(name, "flow.") &&
 					!strings.HasPrefix(name, "var.") && !strings.HasPrefix(name, "secrets.") &&
-					!strings.HasPrefix(name, "secret.") {
+					!strings.HasPrefix(name, "secret.") && !strings.HasPrefix(name, "credentials.") {
 					if res, exists := parentResults[name]; exists {
 						if _, isStr := res.(string); !isStr {
 							configuration = append(configuration, &Connection{
@@ -1054,6 +1060,29 @@ func (f *Flow) executeNodeActionOnly(actions map[string]Action, node *Node, envi
 							}).Warn("unknown flow variable")
 						}
 					}
+				} else if strings.HasPrefix(m, "credentials.") {
+					if environment == nil {
+						log.WithFields(log.Fields{
+							"name": m,
+						}).Warn("No environment configured for credential substitution")
+						continue
+					}
+					name := strings.TrimPrefix(m, "credentials.")
+					token, err := environment.GetCredential(name)
+					if err != nil {
+						log.WithFields(log.Fields{
+							"error": err,
+							"name":  name,
+						}).Error("unable to get credential")
+						continue
+					}
+					if token == nil {
+						log.WithFields(log.Fields{
+							"name": name,
+						}).Warn("missing credential")
+						continue
+					}
+					*val = strings.ReplaceAll(*val, "${"+m+"}", *token)
 				} else if strings.HasPrefix(m, "secrets.") || strings.HasPrefix(m, "secret.") {
 					if environment == nil {
 						log.WithFields(log.Fields{

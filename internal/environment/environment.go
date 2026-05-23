@@ -273,6 +273,26 @@ func (e *Environment) GetProperty(name string) (*Property, error) {
 	return prop, nil
 }
 
+// GetCredential fetches an OAuth credential's current access token by name.
+func (e *Environment) GetCredential(name string) (*string, error) {
+	b, err := e.fetch(fmt.Sprintf("%v/api/v1/execution/%v/environment/%v/credential/%v", e.url, e.execution, e.identifier, url.PathEscape(name)))
+	if err != nil {
+		return nil, err
+	}
+
+	var result struct {
+		Value string `json:"value"`
+	}
+	if err := json.Unmarshal(b, &result); err != nil {
+		return nil, err
+	}
+
+	if result.Value == "" {
+		return nil, nil
+	}
+	return &result.Value, nil
+}
+
 func (e *Environment) GetSecret(name string) (*Secret, error) {
 	if v, ok := e.secrets[name]; ok {
 		if v.Expires == nil || time.Now().Before(*v.Expires) {
