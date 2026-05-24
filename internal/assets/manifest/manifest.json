@@ -12898,6 +12898,118 @@
       }
     ]
   },
+  "social/facebook/get_conversation": {
+    "hash": "0eadebde47b8c3ed19441be11daf3f644bded38cfd737d602cabc8677d157b22",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Facebook Get Conversation",
+    "description": "Fetch Messenger conversation history between a Page and a user",
+    "website": "https://www.flomation.co",
+    "icon": "facebook",
+    "date": "24/05/2026",
+    "type": 2,
+    "category": {
+      "name": "Social Media",
+      "icon": "comments",
+      "description": "Publish and manage content on social media platforms"
+    },
+    "sub_category": {
+      "name": "Facebook",
+      "icon": "facebook",
+      "description": "Publish posts, manage pages, and read insights on Facebook"
+    },
+    "inputs": [
+      {
+        "name": "access_token",
+        "type": "string",
+        "value": null,
+        "label": "Page Access Token",
+        "placeholder": "${page_access_token}",
+        "required": true
+      },
+      {
+        "name": "app_secret",
+        "type": "string",
+        "value": null,
+        "label": "App Secret",
+        "placeholder": "${secrets.FACEBOOK_APP_SECRET}"
+      },
+      {
+        "name": "user_id",
+        "type": "string",
+        "value": null,
+        "label": "User PSID",
+        "placeholder": "${sender_id}",
+        "required": true
+      },
+      {
+        "name": "page_id",
+        "type": "string",
+        "value": null,
+        "label": "Page ID",
+        "placeholder": "${page_id}",
+        "required": true
+      },
+      {
+        "name": "limit",
+        "type": "string",
+        "value": null,
+        "label": "Message Limit",
+        "placeholder": "20"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result",
+        "placeholder": ""
+      },
+      {
+        "name": "messages",
+        "type": "object",
+        "value": null,
+        "label": "Messages (array)",
+        "placeholder": ""
+      },
+      {
+        "name": "messages_json",
+        "type": "string",
+        "value": null,
+        "label": "Messages (JSON)",
+        "placeholder": ""
+      },
+      {
+        "name": "message_count",
+        "type": "integer",
+        "value": null,
+        "label": "Message Count",
+        "placeholder": ""
+      },
+      {
+        "name": "conversation_id",
+        "type": "string",
+        "value": null,
+        "label": "Conversation ID",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
   "social/facebook/get_page_insights": {
     "hash": "c2d06bdb4d32d5d06f4837102e60dac4a126537f01755406ca5e7bae461b132d",
     "author": "Andy Esser",
@@ -13317,6 +13429,97 @@
         "type": "string",
         "value": null,
         "label": "Post ID",
+        "placeholder": ""
+      }
+    ]
+  },
+  "social/facebook/send_message": {
+    "hash": "8509e1e6073764e0bc27e70954c566939c61ddb2cd794d8947742f37645ea686",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Facebook Send Message",
+    "description": "Send a message to a user via Facebook Messenger",
+    "website": "https://www.flomation.co",
+    "icon": "facebook",
+    "date": "24/05/2026",
+    "type": 2,
+    "category": {
+      "name": "Social Media",
+      "icon": "comments",
+      "description": "Publish and manage content on social media platforms"
+    },
+    "sub_category": {
+      "name": "Facebook",
+      "icon": "facebook",
+      "description": "Publish posts, manage pages, and read insights on Facebook"
+    },
+    "inputs": [
+      {
+        "name": "access_token",
+        "type": "string",
+        "value": null,
+        "label": "Page Access Token",
+        "placeholder": "${credentials.facebook}",
+        "required": true
+      },
+      {
+        "name": "app_secret",
+        "type": "string",
+        "value": null,
+        "label": "App Secret",
+        "placeholder": "${secrets.facebook_app_secret}"
+      },
+      {
+        "name": "recipient_id",
+        "type": "string",
+        "value": null,
+        "label": "Recipient PSID",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "message_text",
+        "type": "text",
+        "value": null,
+        "label": "Message Text",
+        "placeholder": "",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result",
+        "placeholder": ""
+      },
+      {
+        "name": "recipient_id",
+        "type": "string",
+        "value": null,
+        "label": "Recipient ID",
+        "placeholder": ""
+      },
+      {
+        "name": "message_id",
+        "type": "string",
+        "value": null,
+        "label": "Message ID",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
         "placeholder": ""
       }
     ]
@@ -17062,6 +17265,260 @@
       }
     ]
   },
+  "trigger/facebook_feed": {
+    "hash": "7ca78bb8dcd39b4c6f6843125137d5244c2cb45727c3c245e630951ee59f7afb",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Facebook Page Feed Trigger",
+    "description": "Triggers a flow on comments, reactions or posts on a Facebook Page",
+    "website": "https://www.flomation.co",
+    "icon": "facebook",
+    "date": "24/05/2026",
+    "type": 1,
+    "category": {
+      "name": "Triggers",
+      "icon": "bolt-lightning",
+      "description": "Start a Flow"
+    },
+    "inputs": [
+      {
+        "name": "page_id",
+        "type": "string",
+        "value": null,
+        "label": "Facebook Page ID",
+        "placeholder": "Your Facebook Page ID",
+        "required": true
+      },
+      {
+        "name": "access_token",
+        "type": "string",
+        "value": null,
+        "label": "Facebook User Token",
+        "placeholder": "${credentials.facebook}",
+        "required": true
+      },
+      {
+        "name": "app_secret",
+        "type": "string",
+        "value": null,
+        "label": "App Secret",
+        "placeholder": "${secrets.facebook_app_secret}"
+      },
+      {
+        "name": "event_filter",
+        "type": "string",
+        "value": null,
+        "label": "Event Filter",
+        "placeholder": "comment,reaction,post,share"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "event_type",
+        "type": "string",
+        "value": null,
+        "label": "Event Type",
+        "placeholder": ""
+      },
+      {
+        "name": "verb",
+        "type": "string",
+        "value": null,
+        "label": "Verb",
+        "placeholder": ""
+      },
+      {
+        "name": "item_id",
+        "type": "string",
+        "value": null,
+        "label": "Item ID",
+        "placeholder": ""
+      },
+      {
+        "name": "parent_id",
+        "type": "string",
+        "value": null,
+        "label": "Parent Post ID",
+        "placeholder": ""
+      },
+      {
+        "name": "post_id",
+        "type": "string",
+        "value": null,
+        "label": "Post ID",
+        "placeholder": ""
+      },
+      {
+        "name": "sender_id",
+        "type": "string",
+        "value": null,
+        "label": "Sender ID",
+        "placeholder": ""
+      },
+      {
+        "name": "sender_name",
+        "type": "string",
+        "value": null,
+        "label": "Sender Name",
+        "placeholder": ""
+      },
+      {
+        "name": "message",
+        "type": "string",
+        "value": null,
+        "label": "Content",
+        "placeholder": ""
+      },
+      {
+        "name": "reaction_type",
+        "type": "string",
+        "value": null,
+        "label": "Reaction Type",
+        "placeholder": ""
+      },
+      {
+        "name": "page_id",
+        "type": "string",
+        "value": null,
+        "label": "Page ID",
+        "placeholder": ""
+      },
+      {
+        "name": "page_access_token",
+        "type": "string",
+        "value": null,
+        "label": "Page Access Token",
+        "placeholder": ""
+      },
+      {
+        "name": "triggered_at",
+        "type": "string",
+        "value": null,
+        "label": "Triggered At",
+        "placeholder": ""
+      }
+    ]
+  },
+  "trigger/facebook_messenger": {
+    "hash": "8b2fb396180397efafca810296caae7986a81058a845709b2294c15c17bf9d33",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Facebook Messenger Trigger",
+    "description": "Triggers a flow when a message is received via Facebook Messenger",
+    "website": "https://www.flomation.co",
+    "icon": "facebook",
+    "date": "24/05/2026",
+    "type": 1,
+    "category": {
+      "name": "Triggers",
+      "icon": "bolt-lightning",
+      "description": "Start a Flow"
+    },
+    "inputs": [
+      {
+        "name": "page_id",
+        "type": "string",
+        "value": null,
+        "label": "Facebook Page ID",
+        "placeholder": "Your Facebook Page ID",
+        "required": true
+      },
+      {
+        "name": "access_token",
+        "type": "string",
+        "value": null,
+        "label": "Facebook User Token",
+        "placeholder": "${credentials.facebook}",
+        "required": true
+      },
+      {
+        "name": "app_secret",
+        "type": "string",
+        "value": null,
+        "label": "App Secret",
+        "placeholder": "${secrets.facebook_app_secret}"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "sender_id",
+        "type": "string",
+        "value": null,
+        "label": "Sender PSID",
+        "placeholder": ""
+      },
+      {
+        "name": "message_text",
+        "type": "string",
+        "value": null,
+        "label": "Message Text",
+        "placeholder": ""
+      },
+      {
+        "name": "message_id",
+        "type": "string",
+        "value": null,
+        "label": "Message ID",
+        "placeholder": ""
+      },
+      {
+        "name": "page_id",
+        "type": "string",
+        "value": null,
+        "label": "Page ID",
+        "placeholder": ""
+      },
+      {
+        "name": "page_access_token",
+        "type": "string",
+        "value": null,
+        "label": "Page Access Token",
+        "placeholder": ""
+      },
+      {
+        "name": "timestamp",
+        "type": "string",
+        "value": null,
+        "label": "Timestamp",
+        "placeholder": ""
+      },
+      {
+        "name": "has_attachments",
+        "type": "boolean",
+        "value": null,
+        "label": "Has Attachments",
+        "placeholder": ""
+      },
+      {
+        "name": "is_postback",
+        "type": "boolean",
+        "value": null,
+        "label": "Is Postback",
+        "placeholder": ""
+      },
+      {
+        "name": "postback_title",
+        "type": "string",
+        "value": null,
+        "label": "Postback Title",
+        "placeholder": ""
+      },
+      {
+        "name": "content",
+        "type": "string",
+        "value": null,
+        "label": "Content",
+        "placeholder": ""
+      },
+      {
+        "name": "triggered_at",
+        "type": "string",
+        "value": null,
+        "label": "Triggered At",
+        "placeholder": ""
+      }
+    ]
+  },
   "trigger/form": {
     "hash": "6e6a0d901b182f5495e604425df2ee982954989a155a53fe1f4f754eb873b971",
     "author": "Andy Esser",
@@ -17524,6 +17981,119 @@
         "type": "string",
         "value": null,
         "label": "Referrer",
+        "placeholder": ""
+      },
+      {
+        "name": "triggered_at",
+        "type": "string",
+        "value": null,
+        "label": "Triggered At",
+        "placeholder": ""
+      }
+    ]
+  },
+  "trigger/linkedin_poll": {
+    "hash": "decff3ba9b478ae500959ddb929b1d0ef305b8734ab9aec669211ea7342eeec1",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "LinkedIn Activity Trigger",
+    "description": "Triggers a flow on new comments or reactions on LinkedIn posts",
+    "website": "https://www.flomation.co",
+    "icon": "linkedin",
+    "date": "24/05/2026",
+    "type": 1,
+    "category": {
+      "name": "Triggers",
+      "icon": "bolt-lightning",
+      "description": "Start a Flow"
+    },
+    "inputs": [
+      {
+        "name": "access_token",
+        "type": "string",
+        "value": null,
+        "label": "LinkedIn Access Token",
+        "placeholder": "${credentials.linkedin}",
+        "required": true
+      },
+      {
+        "name": "post_urn",
+        "type": "string",
+        "value": null,
+        "label": "Post URN",
+        "placeholder": "urn:li:share:12345",
+        "required": true
+      },
+      {
+        "name": "event_filter",
+        "type": "string",
+        "value": null,
+        "label": "Event Filter",
+        "placeholder": "comment,reaction"
+      },
+      {
+        "name": "poll_interval",
+        "type": "string",
+        "value": null,
+        "label": "Poll Interval (seconds)",
+        "placeholder": "300"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "event_type",
+        "type": "string",
+        "value": null,
+        "label": "Event Type",
+        "placeholder": ""
+      },
+      {
+        "name": "post_urn",
+        "type": "string",
+        "value": null,
+        "label": "Post URN",
+        "placeholder": ""
+      },
+      {
+        "name": "author_urn",
+        "type": "string",
+        "value": null,
+        "label": "Author URN",
+        "placeholder": ""
+      },
+      {
+        "name": "author_name",
+        "type": "string",
+        "value": null,
+        "label": "Author Name",
+        "placeholder": ""
+      },
+      {
+        "name": "content",
+        "type": "string",
+        "value": null,
+        "label": "Content",
+        "placeholder": ""
+      },
+      {
+        "name": "comment_urn",
+        "type": "string",
+        "value": null,
+        "label": "Comment URN",
+        "placeholder": ""
+      },
+      {
+        "name": "reaction_type",
+        "type": "string",
+        "value": null,
+        "label": "Reaction Type",
+        "placeholder": ""
+      },
+      {
+        "name": "created_at",
+        "type": "string",
+        "value": null,
+        "label": "Created At",
         "placeholder": ""
       },
       {

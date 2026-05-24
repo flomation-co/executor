@@ -371,6 +371,10 @@ type ExecutionContext struct {
 	ChannelID string `json:"channel_id,omitempty"`
 	// ThreadID is the thread/reply identifier (Slack thread_ts).
 	ThreadID string `json:"thread_id,omitempty"`
+	// PageAccessToken is the Facebook Page access token for Messenger
+	// replies. Available as ${flow.page_access_token} so send actions
+	// work regardless of node position in the flow.
+	PageAccessToken string `json:"page_access_token,omitempty"`
 	// Role is "user" or "assistant" for extraction flows. Used by
 	// process_extraction to gate commitment writes to assistant turns only.
 	Role string `json:"role,omitempty"`
@@ -441,6 +445,8 @@ func (ctx *ExecutionContext) Get(name string) string {
 		return ctx.ChannelID
 	case "thread_id":
 		return ctx.ThreadID
+	case "page_access_token":
+		return ctx.PageAccessToken
 	case "role":
 		return ctx.Role
 	default:
@@ -838,8 +844,9 @@ func (f *Flow) executeNodeActionOnly(actions map[string]Action, node *Node, envi
 
 	if v, exists := f.nodeResults[node.ID]; exists {
 		log.WithFields(log.Fields{
-			"id": node.ID,
-		}).Debug("Node already executed, returning cached result")
+			"id":    node.ID,
+			"label": node.Data.Label,
+		}).Info("Node already executed, returning cached result")
 		return v, nil
 	}
 
@@ -911,6 +918,22 @@ func (f *Flow) executeNodeActionOnly(actions map[string]Action, node *Node, envi
 			// the autocomplete but inserts the ID-based reference.
 			parentResults[p.ID+"."+k] = v
 		}
+	}
+
+	// Log parent result keys for debugging multi-parent resolution
+	if len(parents) > 1 {
+		var flatKeys []string
+		for k := range parentResults {
+			if !strings.Contains(k, ".") {
+				flatKeys = append(flatKeys, k)
+			}
+		}
+		log.WithFields(log.Fields{
+			"node_id":   node.ID,
+			"node_type": node.Data.Label,
+			"parents":   len(parents),
+			"flat_keys": flatKeys,
+		}).Info("multi-parent result merge")
 	}
 
 	action, exists := actions[node.Type]
@@ -1177,6 +1200,12 @@ func (f *Flow) executeNodeActionOnly(actions map[string]Action, node *Node, envi
 		node.Data.Config.Type == ActionTypeSwitch ||
 		node.Data.Config.Type == ActionTypeLoop) {
 		for k, v := range parentResults {
+			// Skip scoped parent keys (nodeId.outputName) — only pass through
+			// flat keys. Scoped keys are rebuilt per-node in the parent loop
+			// and should not cascade through pass-through nodes.
+			if strings.Contains(k, ".") {
+				continue
+			}
 			if _, exists := outputs[k]; !exists {
 				outputs[k] = v
 			}
