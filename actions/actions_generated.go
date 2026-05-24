@@ -146,10 +146,12 @@ import (
 	script_bash "flomation.app/automate/executor/actions/script/bash"
 	security_antivirus "flomation.app/automate/executor/actions/security/antivirus"
 	social_facebook_delete_post "flomation.app/automate/executor/actions/social/facebook/delete_post"
+	social_facebook_get_conversation "flomation.app/automate/executor/actions/social/facebook/get_conversation"
 	social_facebook_get_page_insights "flomation.app/automate/executor/actions/social/facebook/get_page_insights"
 	social_facebook_get_pages "flomation.app/automate/executor/actions/social/facebook/get_pages"
 	social_facebook_get_post "flomation.app/automate/executor/actions/social/facebook/get_post"
 	social_facebook_publish_post "flomation.app/automate/executor/actions/social/facebook/publish_post"
+	social_facebook_send_message "flomation.app/automate/executor/actions/social/facebook/send_message"
 	social_linkedin_delete_post "flomation.app/automate/executor/actions/social/linkedin/delete_post"
 	social_linkedin_get_analytics "flomation.app/automate/executor/actions/social/linkedin/get_analytics"
 	social_linkedin_get_post "flomation.app/automate/executor/actions/social/linkedin/get_post"
@@ -195,11 +197,14 @@ import (
 	tools_web_fetch "flomation.app/automate/executor/actions/tools/web_fetch"
 	tools_web_search "flomation.app/automate/executor/actions/tools/web_search"
 	trigger_email "flomation.app/automate/executor/actions/trigger/email"
+	trigger_facebook_feed "flomation.app/automate/executor/actions/trigger/facebook_feed"
+	trigger_facebook_messenger "flomation.app/automate/executor/actions/trigger/facebook_messenger"
 	trigger_form "flomation.app/automate/executor/actions/trigger/form"
 	trigger_git_poll "flomation.app/automate/executor/actions/trigger/git_poll"
 	trigger_github_webhook "flomation.app/automate/executor/actions/trigger/github_webhook"
 	trigger_gitlab_webhook "flomation.app/automate/executor/actions/trigger/gitlab_webhook"
 	trigger_image "flomation.app/automate/executor/actions/trigger/image"
+	trigger_linkedin_poll "flomation.app/automate/executor/actions/trigger/linkedin_poll"
 	trigger_manual "flomation.app/automate/executor/actions/trigger/manual"
 	trigger_qr "flomation.app/automate/executor/actions/trigger/qr"
 	trigger_s3 "flomation.app/automate/executor/actions/trigger/s3"
@@ -351,10 +356,12 @@ var Actions = map[string]core.Action{
 	"script/bash":                         script_bash.Execute,
 	"security/antivirus":                  security_antivirus.Execute,
 	"social/facebook/delete_post":         social_facebook_delete_post.Execute,
+	"social/facebook/get_conversation":    social_facebook_get_conversation.Execute,
 	"social/facebook/get_page_insights":   social_facebook_get_page_insights.Execute,
 	"social/facebook/get_pages":           social_facebook_get_pages.Execute,
 	"social/facebook/get_post":            social_facebook_get_post.Execute,
 	"social/facebook/publish_post":        social_facebook_publish_post.Execute,
+	"social/facebook/send_message":        social_facebook_send_message.Execute,
 	"social/linkedin/delete_post":         social_linkedin_delete_post.Execute,
 	"social/linkedin/get_analytics":       social_linkedin_get_analytics.Execute,
 	"social/linkedin/get_post":            social_linkedin_get_post.Execute,
@@ -400,11 +407,14 @@ var Actions = map[string]core.Action{
 	"tools/web_fetch":                     tools_web_fetch.Execute,
 	"tools/web_search":                    tools_web_search.Execute,
 	"trigger/email":                       trigger_email.Execute,
+	"trigger/facebook_feed":               trigger_facebook_feed.Execute,
+	"trigger/facebook_messenger":          trigger_facebook_messenger.Execute,
 	"trigger/form":                        trigger_form.Execute,
 	"trigger/git_poll":                    trigger_git_poll.Execute,
 	"trigger/github_webhook":              trigger_github_webhook.Execute,
 	"trigger/gitlab_webhook":              trigger_gitlab_webhook.Execute,
 	"trigger/image":                       trigger_image.Execute,
+	"trigger/linkedin_poll":               trigger_linkedin_poll.Execute,
 	"trigger/manual":                      trigger_manual.Execute,
 	"trigger/qr":                          trigger_qr.Execute,
 	"trigger/s3":                          trigger_s3.Execute,
