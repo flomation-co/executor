@@ -98,7 +98,10 @@ func RecordAssistantReply(flowCtx context.Context, ctx *core.ExecutionContext, c
 		req.Header.Set("Authorization", "Bearer "+ctx.Token)
 	}
 
-	client := &http.Client{Timeout: recordTimeout}
+	client := &http.Client{
+		Timeout:   recordTimeout,
+		Transport: ctx.InternalClient().Transport,
+	}
 	resp, err := client.Do(req)
 	if err != nil {
 		log.WithFields(log.Fields{
@@ -166,7 +169,10 @@ func RecordToolExchange(flowCtx context.Context, ctx *core.ExecutionContext, exc
 		return
 	}
 
-	client := &http.Client{Timeout: recordTimeout}
+	client := &http.Client{
+		Timeout:   recordTimeout,
+		Transport: ctx.InternalClient().Transport,
+	}
 	apiEndpoint := fmt.Sprintf("%s/api/v1/internal/conversation/%s/message?agent_id=%s",
 		ctx.APIURL, ctx.ConversationID, ctx.AgentID)
 
