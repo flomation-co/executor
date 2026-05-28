@@ -1012,6 +1012,7 @@ func (f *Flow) executeNodeActionOnly(actions map[string]Action, node *Node, envi
 				if !strings.HasPrefix(name, "env.") && !strings.HasPrefix(name, "flow.") &&
 					!strings.HasPrefix(name, "var.") && !strings.HasPrefix(name, "secrets.") &&
 					!strings.HasPrefix(name, "secret.") && !strings.HasPrefix(name, "credentials.") {
+					// Check direct parent results first
 					if res, exists := parentResults[name]; exists {
 						if _, isStr := res.(string); !isStr {
 							configuration = append(configuration, &Connection{
@@ -1020,6 +1021,25 @@ func (f *Flow) executeNodeActionOnly(actions map[string]Action, node *Node, envi
 								Value: res,
 							})
 							continue
+						}
+					}
+					// Fall back to global node results for scoped references
+					// (e.g. ${nodeId.key} where nodeId is an ancestor, not a
+					// direct parent — separated by Switch/For loop).
+					if dotIdx := strings.IndexByte(name, '.'); dotIdx > 0 {
+						scopeNodeID := name[:dotIdx]
+						scopeKey := name[dotIdx+1:]
+						if nr, ok := f.nodeResults[scopeNodeID]; ok {
+							if res, ok := nr[scopeKey]; ok {
+								if _, isStr := res.(string); !isStr {
+									configuration = append(configuration, &Connection{
+										Name:  v.Name,
+										Type:  v.Type,
+										Value: res,
+									})
+									continue
+								}
+							}
 						}
 					}
 				}
@@ -1134,6 +1154,29 @@ func (f *Flow) executeNodeActionOnly(actions map[string]Action, node *Node, envi
 				} else {
 					if res, exists := parentResults[m]; exists {
 						*val = strings.ReplaceAll(*val, "${"+m+"}", fmt.Sprintf("%v", res))
+					} else if dotIdx := strings.IndexByte(m, '.'); dotIdx > 0 {
+						// Scoped node reference: ${nodeId.key} — look up in
+						// the global node results cache. This handles cases
+						// where the referenced node is an ancestor but not a
+						// direct parent (e.g. separated by a Switch or For loop).
+						scopeNodeID := m[:dotIdx]
+						scopeKey := m[dotIdx+1:]
+						if nr, ok := f.nodeResults[scopeNodeID]; ok {
+							if res, ok := nr[scopeKey]; ok {
+								*val = strings.ReplaceAll(*val, "${"+m+"}", fmt.Sprintf("%v", res))
+							} else {
+								log.WithFields(log.Fields{
+									"output":  m,
+									"node_id": scopeNodeID,
+									"key":     scopeKey,
+								}).Warn("scoped output key not found in node results")
+							}
+						} else {
+							log.WithFields(log.Fields{
+								"output":  m,
+								"node_id": scopeNodeID,
+							}).Warn("scoped node not found in results cache")
+						}
 					} else {
 						log.WithFields(log.Fields{
 							"output": m,
