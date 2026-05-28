@@ -167,6 +167,12 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	}
 
 	threadTS := optionalString("thread_ts", inputs)
+	// Validate thread_ts format: Slack timestamps look like "1234567890.123456".
+	// The AI sometimes passes channel IDs, "null", or other invalid values.
+	if threadTS != "" && !isValidSlackTS(threadTS) {
+		log.WithField("thread_ts", threadTS).Warn("ignoring invalid thread_ts from AI")
+		threadTS = ""
+	}
 	if threadTS == "" {
 		// Fall back to flow context thread_id.
 		if ctx := flow.GetContext(); ctx != nil && ctx.ThreadID != "" {
@@ -234,6 +240,26 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 		"success":     true,
 		"error":       "",
 	}, nil
+}
+
+// isValidSlackTS checks whether a string looks like a Slack message timestamp
+// (e.g. "1234567890.123456"). The AI sometimes passes channel IDs, "null", or
+// empty strings which cause invalid_thread_ts errors from the Slack API.
+func isValidSlackTS(ts string) bool {
+	if len(ts) < 5 {
+		return false
+	}
+	dotIdx := strings.IndexByte(ts, '.')
+	if dotIdx < 1 {
+		return false
+	}
+	// Both parts should be numeric
+	for _, c := range ts {
+		if c != '.' && (c < '0' || c > '9') {
+			return false
+		}
+	}
+	return true
 }
 
 func requireString(name string, inputs []*core.Connection) string {
