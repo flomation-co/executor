@@ -1346,20 +1346,6 @@ func (f *Flow) executeNodeChildren(actions map[string]Action, node *Node, output
 		loopChildren := f.FindTargetByHandle(node.ID, "loop")
 		outputChildren := f.FindTargetByHandle(node.ID, "output")
 
-		action, exists := actions[node.Type]
-		if !exists {
-			action, exists = actions[node.Data.Label]
-		}
-
-		var configuration []*Connection
-		for _, v := range node.Data.Config.Inputs {
-			configuration = append(configuration, &Connection{
-				Name:  v.Name,
-				Type:  v.Type,
-				Value: v.Value,
-			})
-		}
-
 		maxIter := int64(1000)
 		if mi, ok := outputs["max_iterations"].(int64); ok && mi > 0 {
 			maxIter = mi
@@ -1372,16 +1358,20 @@ func (f *Flow) executeNodeChildren(actions map[string]Action, node *Node, output
 			if iteration > 0 {
 				// Clear the loop node's own cached result so it re-evaluates
 				delete(f.nodeResults, node.ID)
-				// Also clear parent results that might feed dynamic values
+				// Clear loop body results so children re-execute, but do NOT
+				// clear the loop node's parents — they provide inputs like
+				// count/array that must persist across iterations.
 				f.clearSubgraphResults(node.ID, "loop")
 
-				// Re-resolve inputs and re-execute the loop action
-				reOutputs, err := action(f, node, configuration)
+				// Re-resolve inputs from parents and re-execute via the full
+				// resolution path. Using executeNodeActionOnly ensures auto-wired
+				// parent outputs (e.g. count from a list action) are properly
+				// resolved on each iteration.
+				reOutputs, err := f.executeNodeActionOnly(actions, node, environment)
 				if err != nil {
 					return nil, err
 				}
 				outputs = reOutputs
-				f.nodeResults[node.ID] = outputs
 			}
 
 			// Set loop context variables and update outputs
