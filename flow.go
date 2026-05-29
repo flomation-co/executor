@@ -1161,6 +1161,24 @@ func (f *Flow) executeNodeActionOnly(actions map[string]Action, node *Node, envi
 						// direct parent (e.g. separated by a Switch or For loop).
 						scopeNodeID := m[:dotIdx]
 						scopeKey := m[dotIdx+1:]
+
+						// If the node hasn't been executed yet (e.g. sibling
+						// in a loop body), execute it now to populate results.
+						if _, ok := f.nodeResults[scopeNodeID]; !ok {
+							if scopeNode := f.FindNode(scopeNodeID); scopeNode != nil {
+								log.WithFields(log.Fields{
+									"node_id": scopeNodeID,
+									"key":     scopeKey,
+								}).Info("executing scoped dependency node")
+								if _, err := f.ExecuteNode(actions, scopeNode, environment); err != nil {
+									log.WithFields(log.Fields{
+										"node_id": scopeNodeID,
+										"error":   err,
+									}).Warn("failed to execute scoped dependency node")
+								}
+							}
+						}
+
 						if nr, ok := f.nodeResults[scopeNodeID]; ok {
 							if res, ok := nr[scopeKey]; ok {
 								*val = strings.ReplaceAll(*val, "${"+m+"}", fmt.Sprintf("%v", res))
