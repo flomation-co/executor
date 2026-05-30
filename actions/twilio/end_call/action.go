@@ -16,7 +16,7 @@ const (
 	Name         = "End Call"
 	Description  = "Terminate an active Twilio voice call"
 	Website      = "https://www.flomation.co"
-	Icon         = "phone-slash"
+	Icon         = "phone"
 	Date         = "30/05/2026"
 	Type         = core.ActionTypeAction
 )

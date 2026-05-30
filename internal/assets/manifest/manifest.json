@@ -1092,7 +1092,7 @@
     ]
   },
   "ai/anthropic": {
-    "hash": "9d373d82562808a67225ad23b908376cb4edab2fef5dbbcfe490f8fd28b2e912",
+    "hash": "0b1605f65e84da406ab9bc1fc6bfb6638658b31d81ed2e7b566c122d674569d8",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Anthropic Prompt",
@@ -19227,13 +19227,13 @@
     ]
   },
   "twilio/end_call": {
-    "hash": "8106965fd263559f699350f2863ccfb19bf51c9bb8bf74a6850c0d7d7d1d673c",
+    "hash": "a1a1fbdf293028a829c577e50477c1a16c8460ce406423a5dabcaa0bfd843d75",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "End Call",
     "description": "Terminate an active Twilio voice call",
     "website": "https://www.flomation.co",
-    "icon": "phone-slash",
+    "icon": "phone",
     "date": "30/05/2026",
     "type": 2,
     "category": {
