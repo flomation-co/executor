@@ -1869,8 +1869,19 @@ func (f *Flow) executeNodeChildren(actions map[string]Action, node *Node, output
 			f.nodeResults[node.ID] = outputs
 		}
 		children = f.FindTarget(node.ID)
-	} else {
-		children = f.FindTarget(node.ID)
+	}
+
+	// Default: if no special handler above set children, use all children.
+	// This covers regular action nodes without should_respond, tool
+	// requests, loops, or subflows. Nodes that DID have a handler
+	// (should_respond, streaming, etc.) already set children — even to
+	// nil — and we must not overwrite that.
+	// We detect "was handled" by checking if should_respond exists in
+	// outputs, since only AI nodes have it.
+	if children == nil {
+		if _, hasShouldRespond := outputs["should_respond"]; !hasShouldRespond {
+			children = f.FindTarget(node.ID)
+		}
 	}
 
 	// Filter out trigger nodes and Begin Sub-Flow nodes from children
