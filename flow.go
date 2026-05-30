@@ -1884,6 +1884,22 @@ func (f *Flow) executeNodeChildren(actions map[string]Action, node *Node, output
 		}
 	}
 
+	// AI "Finished" handle: fire once after the entire AI turn completes
+	// (after streaming, tool loops, etc.). Used for post-response actions
+	// like Add to Conversation that should run once per turn, not per
+	// sentence or per tool round.
+	if _, hasShouldRespond := outputs["should_respond"]; hasShouldRespond {
+		finishedChildren := f.FindTargetByHandle(node.ID, "no_response")
+		for _, fc := range finishedChildren {
+			if _, err := f.ExecuteNode(actions, fc, environment); err != nil {
+				log.WithFields(log.Fields{
+					"error": err,
+					"node":  fc.ID,
+				}).Warn("AI finished handle execution failed")
+			}
+		}
+	}
+
 	// Filter out trigger nodes and Begin Sub-Flow nodes from children
 	var validChildren []*Node
 	for _, c := range children {
