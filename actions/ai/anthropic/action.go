@@ -336,7 +336,7 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	if _, hasResults := flow.GetVariable(core.ToolResultsKey); hasResults {
 		isToolReinvocation = true
 	}
-	useStreaming := streaming && !isToolReinvocation && len(tools) == 0
+	useStreaming := streaming && !isToolReinvocation
 
 	if useStreaming {
 		payload["stream"] = true
