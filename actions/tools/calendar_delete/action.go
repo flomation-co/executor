@@ -38,6 +38,12 @@ var Inputs = [...]core.Connection{
 		Type:  core.ConnectionTypeString,
 		Label: "Account the event is on (email or label)",
 	},
+	{
+		Name:        "credential",
+		Type:        core.ConnectionTypeString,
+		Label:       "Google OAuth Credential (optional, overrides user tokens)",
+		Placeholder: "${credentials.GOOGLE_CALENDAR}",
+	},
 }
 
 var Outputs = [...]core.Connection{
@@ -60,18 +66,25 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	}
 
 	accountFilter := optionalString("account", inputs)
+	credential := optionalString("credential", inputs)
 
 	ctx := flow.GetContext()
 	if ctx == nil || ctx.APIURL == "" {
 		return nil, fmt.Errorf("execution context with API URL is required")
 	}
-	if ctx.AgentUserID == "" {
-		return errResult("No user identity available")
+	if credential == "" && ctx.AgentUserID == "" {
+		return errResult("No user identity or credential available")
 	}
 
-	tokens, err := fetchTokens(flow, ctx)
-	if err != nil {
-		return errResult(fmt.Sprintf("Failed to get calendar tokens: %v", err))
+	var tokens []tokenInfo
+	if credential != "" {
+		tokens = []tokenInfo{{Email: "credential", AccessToken: credential}}
+	} else {
+		var err error
+		tokens, err = fetchTokens(flow, ctx)
+		if err != nil {
+			return errResult(fmt.Sprintf("Failed to get calendar tokens: %v", err))
+		}
 	}
 
 	// Try deleting from the filtered account first, then all others.

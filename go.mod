@@ -52,6 +52,7 @@ require (
 	github.com/go-git/go-billy/v6 v6.0.0-alpha.1 // indirect
 	github.com/golang/groupcache v0.0.0-20241129210726-2c02b8208cf8 // indirect
 	github.com/google/go-cmp v0.7.0 // indirect
+	github.com/gorilla/websocket v1.5.3 // indirect
 	github.com/kevinburke/ssh_config v1.5.0 // indirect
 	github.com/klauspost/compress v1.17.6 // indirect
 	github.com/klauspost/cpuid/v2 v2.3.0 // indirect

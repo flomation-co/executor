@@ -45,6 +45,7 @@ var Inputs = [...]core.Connection{
 	{Name: "body", Type: core.ConnectionTypeText, Label: "Body (for create/update)"},
 	{Name: "draft_id", Type: core.ConnectionTypeString, Label: "Draft ID (for update/delete)"},
 	{Name: "account", Type: core.ConnectionTypeString, Label: "Account (email or label)"},
+	{Name: "credential", Type: core.ConnectionTypeString, Label: "Google OAuth Credential (optional)", Placeholder: "${credentials.GOOGLE_EMAIL}"},
 }
 
 var Outputs = [...]core.Connection{
@@ -76,17 +77,25 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 		action = "list"
 	}
 
+	credential := optionalString("credential", inputs)
+
 	ctx := flow.GetContext()
 	if ctx == nil || ctx.APIURL == "" {
 		return nil, fmt.Errorf("execution context with API URL is required")
 	}
-	if ctx.AgentUserID == "" {
-		return errResult("No user identity available")
+	if credential == "" && ctx.AgentUserID == "" {
+		return errResult("No user identity or credential available")
 	}
 
-	tokens, err := fetchTokens(flow, ctx, "email_send")
-	if err != nil {
-		return errResult(fmt.Sprintf("Failed to get tokens: %v", err))
+	var tokens []tokenInfo
+	if credential != "" {
+		tokens = []tokenInfo{{Email: "credential", AccessToken: credential}}
+	} else {
+		var err error
+		tokens, err = fetchTokens(flow, ctx, "email_send")
+		if err != nil {
+			return errResult(fmt.Sprintf("Failed to get tokens: %v", err))
+		}
 	}
 	if len(tokens) == 0 {
 		return errResult("No Gmail send access connected.")

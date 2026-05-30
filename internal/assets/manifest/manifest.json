@@ -1,4 +1,129 @@
 {
+  "agent/add_to_conversation": {
+    "hash": "1db87ccf026b83f164aead3a9efd6b574a9db9ff10b9aa517cddb02847c3effc",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Add to Conversation",
+    "description": "Store a message and return conversation history",
+    "website": "https://www.flomation.co",
+    "icon": "comments",
+    "date": "29/05/2026",
+    "type": 2,
+    "category": {
+      "name": "Agent",
+      "icon": "robot",
+      "description": "Interact with Flomation Agents"
+    },
+    "inputs": [
+      {
+        "name": "conversation_id",
+        "type": "string",
+        "value": null,
+        "label": "Conversation ID",
+        "placeholder": "${conversation_id}",
+        "required": true
+      },
+      {
+        "name": "agent_id",
+        "type": "string",
+        "value": null,
+        "label": "Agent ID",
+        "placeholder": "${flow.agent_id}",
+        "required": true
+      },
+      {
+        "name": "content",
+        "type": "text",
+        "value": null,
+        "label": "Message Content",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "role",
+        "type": "string",
+        "value": null,
+        "label": "Role",
+        "placeholder": "",
+        "required": true,
+        "options": [
+          {
+            "name": "User (inbound)",
+            "value": "inbound"
+          },
+          {
+            "name": "Assistant (outbound)",
+            "value": "outbound"
+          }
+        ]
+      },
+      {
+        "name": "channel_type",
+        "type": "string",
+        "value": null,
+        "label": "Channel Type",
+        "placeholder": "${channel_type}"
+      },
+      {
+        "name": "sender",
+        "type": "string",
+        "value": null,
+        "label": "Sender",
+        "placeholder": "${from}"
+      },
+      {
+        "name": "history_limit",
+        "type": "integer",
+        "value": null,
+        "label": "History Limit",
+        "placeholder": "30"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result",
+        "placeholder": ""
+      },
+      {
+        "name": "conversation_history",
+        "type": "object",
+        "value": null,
+        "label": "Conversation History (AI format)",
+        "placeholder": ""
+      },
+      {
+        "name": "raw_history",
+        "type": "object",
+        "value": null,
+        "label": "Raw Conversation History",
+        "placeholder": ""
+      },
+      {
+        "name": "message_id",
+        "type": "string",
+        "value": null,
+        "label": "Message ID",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
   "agent/create_schedule": {
     "hash": "650edc48b1628f0290cdc55d2a9f9066b7ab3b7b881bfba4946d1438500b718c",
     "author": "Andy Esser",
@@ -967,7 +1092,7 @@
     ]
   },
   "ai/anthropic": {
-    "hash": "eeab66810d6c518c4023e1d28021965afc2fe00b0c33491a9643a2728df59814",
+    "hash": "9d373d82562808a67225ad23b908376cb4edab2fef5dbbcfe490f8fd28b2e912",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Anthropic Prompt",
@@ -1046,6 +1171,13 @@
         "value": null,
         "label": "Conversation History",
         "placeholder": "${conversation_history}"
+      },
+      {
+        "name": "streaming",
+        "type": "boolean",
+        "value": null,
+        "label": "Streaming (fires response per sentence for low-latency voice)",
+        "placeholder": ""
       },
       {
         "name": "tool_definitions",
@@ -3366,7 +3498,7 @@
     ]
   },
   "elevenlabs/speech_to_text": {
-    "hash": "5b131a0b3620ab4761db974da5a559bc8c3b789008943ed1a637cbd8ad67aab4",
+    "hash": "834d335cf78ea7f4e3916ecd38a6a01980cc3b89773cd2aa424625e69c97d11b",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Speech to Text",
@@ -11215,6 +11347,101 @@
       }
     ]
   },
+  "messaging/twilio_sms": {
+    "hash": "57796ab8be5b620b8e462004eec477fd445771495f2c204cb32afd9f0cca5ca2",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Send Twilio SMS",
+    "description": "Send an SMS message via Twilio",
+    "website": "https://www.flomation.co",
+    "icon": "comment-sms",
+    "date": "29/05/2026",
+    "type": 2,
+    "category": {
+      "name": "Messaging",
+      "icon": "comments",
+      "description": "Send messages via various channels"
+    },
+    "inputs": [
+      {
+        "name": "account_sid",
+        "type": "string",
+        "value": null,
+        "label": "Account SID",
+        "placeholder": "ACxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+        "required": true
+      },
+      {
+        "name": "auth_token",
+        "type": "string",
+        "value": null,
+        "label": "Auth Token",
+        "placeholder": "${secrets.TWILIO_AUTH_TOKEN}",
+        "required": true
+      },
+      {
+        "name": "from",
+        "type": "string",
+        "value": null,
+        "label": "From Number (E.164)",
+        "placeholder": "+19876543210",
+        "required": true
+      },
+      {
+        "name": "to",
+        "type": "string",
+        "value": null,
+        "label": "To Number (E.164)",
+        "placeholder": "${from}",
+        "required": true
+      },
+      {
+        "name": "message",
+        "type": "text",
+        "value": null,
+        "label": "Message Body",
+        "placeholder": "Hello from Flomation!",
+        "required": true
+      },
+      {
+        "name": "media_url",
+        "type": "string",
+        "value": null,
+        "label": "Media URL (MMS)",
+        "placeholder": "https://example.com/image.jpg"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "message_sid",
+        "type": "string",
+        "value": null,
+        "label": "Message SID",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
   "nosql/mongodb": {
     "hash": "b39aa00de55e30d04c1bd1fb7df7ada3807e1a63a5917febc616c46748c1d618",
     "author": "Andy Esser",
@@ -15222,7 +15449,7 @@
     ]
   },
   "tools/calendar_create": {
-    "hash": "a0c7dc6a277c6a0c3598dd5a345630f861df17e8e0b2f6694750890183f1a680",
+    "hash": "d2b7aabc882f8f79dc8e6c77904b77f1fdf4998b3f4cb2566f8ed78e63e8e521",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Calendar Create Event",
@@ -15296,6 +15523,13 @@
         "value": null,
         "label": "Account (email, label like 'Work'/'Personal', or empty for primary)",
         "placeholder": ""
+      },
+      {
+        "name": "credential",
+        "type": "string",
+        "value": null,
+        "label": "Google OAuth Credential (optional, overrides user tokens)",
+        "placeholder": "${credentials.GOOGLE_CALENDAR}"
       }
     ],
     "outputs": [
@@ -15337,7 +15571,7 @@
     ]
   },
   "tools/calendar_delete": {
-    "hash": "ed293e2e2abbb65f8625836176a16b771804aab8fa4fb67c589f186f2a3339eb",
+    "hash": "c82a717692d02759278bc3f43d0339a784edecaecac20513c3e62cd416b8e516",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Calendar Delete Event",
@@ -15366,6 +15600,13 @@
         "value": null,
         "label": "Account the event is on (email or label)",
         "placeholder": ""
+      },
+      {
+        "name": "credential",
+        "type": "string",
+        "value": null,
+        "label": "Google OAuth Credential (optional, overrides user tokens)",
+        "placeholder": "${credentials.GOOGLE_CALENDAR}"
       }
     ],
     "outputs": [
@@ -15393,7 +15634,7 @@
     ]
   },
   "tools/calendar_read": {
-    "hash": "12876b616af369051252ec0d2b92517e0ff60ee6f7115b219348ecfa2ccefab2",
+    "hash": "15ded1dc3cea2b764ff480433186d37a7638e5a12860ff0833cdf4f233bda460",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Calendar Read",
@@ -15472,6 +15713,13 @@
         "value": null,
         "label": "Account filter (email, label like 'Work', or empty for all)",
         "placeholder": ""
+      },
+      {
+        "name": "credential",
+        "type": "string",
+        "value": null,
+        "label": "Google OAuth Credential (optional, overrides user tokens)",
+        "placeholder": "${credentials.GOOGLE_CALENDAR}"
       }
     ],
     "outputs": [
@@ -15520,7 +15768,7 @@
     ]
   },
   "tools/calendar_update": {
-    "hash": "88dad4625e2b18f7da6fbea86d0cf60d4dd98ba54c67eab6e5d788f8876f8409",
+    "hash": "5f146aa2d6e4d048e344b0849f4d1ca0b1875177d9550c00129bbc148d38df25",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Calendar Update Event",
@@ -15612,6 +15860,13 @@
             "value": "this_and_following"
           }
         ]
+      },
+      {
+        "name": "credential",
+        "type": "string",
+        "value": null,
+        "label": "Google OAuth Credential (optional, overrides user tokens)",
+        "placeholder": "${credentials.GOOGLE_CALENDAR}"
       }
     ],
     "outputs": [
@@ -15740,7 +15995,7 @@
     ]
   },
   "tools/email_draft": {
-    "hash": "a72eaf974a6bf08d544b1e5813ede474ac976813320964334616be2a86b2695a",
+    "hash": "db112a7b82b4cbce2f9bf0c5270e89c9dd4c8ffefec059c80398a3c509df8d7f",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Gmail Draft",
@@ -15815,6 +16070,13 @@
         "value": null,
         "label": "Account (email or label)",
         "placeholder": ""
+      },
+      {
+        "name": "credential",
+        "type": "string",
+        "value": null,
+        "label": "Google OAuth Credential (optional)",
+        "placeholder": "${credentials.GOOGLE_EMAIL}"
       }
     ],
     "outputs": [
@@ -15856,7 +16118,7 @@
     ]
   },
   "tools/email_read": {
-    "hash": "3b71aa0d1dd09cd5fa61a3710b4807f272b82311f30bb91d7f0f13536875261a",
+    "hash": "1c362a0d8bf1ccfe8e1092b6ccc9f19fd511f7c65d69728e2167a53b012dfcf3",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Gmail Read",
@@ -15898,6 +16160,13 @@
         "value": null,
         "label": "Filter to a specific account email. Leave empty to search ALL user accounts. Never default to the agent's own email.",
         "placeholder": ""
+      },
+      {
+        "name": "credential",
+        "type": "string",
+        "value": null,
+        "label": "Google OAuth Credential (optional, overrides user tokens)",
+        "placeholder": "${credentials.GOOGLE_EMAIL}"
       }
     ],
     "outputs": [
@@ -15939,7 +16208,7 @@
     ]
   },
   "tools/email_reply": {
-    "hash": "598165ba8c1e897faa5899322dbd45555464f3e9729524311513e3ff0314410e",
+    "hash": "d825005b635634e0aa16404bae9cf2c63087691a176caa3032822cd6dc871f34",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Gmail Reply",
@@ -15990,6 +16259,13 @@
         "value": null,
         "label": "Account to send from (email or label)",
         "placeholder": ""
+      },
+      {
+        "name": "credential",
+        "type": "string",
+        "value": null,
+        "label": "Google OAuth Credential (optional, overrides user tokens)",
+        "placeholder": "${credentials.GOOGLE_EMAIL}"
       }
     ],
     "outputs": [
@@ -16024,7 +16300,7 @@
     ]
   },
   "tools/email_send": {
-    "hash": "bb322d90c768d9fee49e59be3ba2188c97a3c446127604bf860de6e708cb6067",
+    "hash": "eadd2f7dfefdaa372f332cac5c6464b0e4553f64ce75b294235fbc717b786cfd",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Gmail Send",
@@ -16090,6 +16366,13 @@
         "value": null,
         "label": "Sending account (email or label, empty for primary)",
         "placeholder": ""
+      },
+      {
+        "name": "credential",
+        "type": "string",
+        "value": null,
+        "label": "Google OAuth Credential (optional, overrides user tokens)",
+        "placeholder": "${credentials.GOOGLE_EMAIL}"
       }
     ],
     "outputs": [
@@ -16568,7 +16851,7 @@
     ]
   },
   "tools/slack_rich_message": {
-    "hash": "2571bfcd91a313eec2be84418f4b925690e70aead1ad463e8aaac20686940847",
+    "hash": "7b78ed4c601a14ba08870e04625b03aff42fe2d069d7822a9ba25baa255f8429",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Slack Rich Message",
@@ -18739,6 +19022,163 @@
       }
     ]
   },
+  "trigger/twilio_sms": {
+    "hash": "7dd8f1f631c772d217d8e9ecf5f8dbd3f2de39ddfa6951b8ae196ba0074b3ef6",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Twilio SMS Trigger",
+    "description": "Triggers a flow when an SMS message is received via Twilio",
+    "website": "https://www.flomation.co",
+    "icon": "comment-sms",
+    "date": "29/05/2026",
+    "type": 1,
+    "category": {
+      "name": "Triggers",
+      "icon": "bolt-lightning",
+      "description": "Start a Flow"
+    },
+    "inputs": null,
+    "outputs": [
+      {
+        "name": "from",
+        "type": "string",
+        "value": null,
+        "label": "From Number",
+        "placeholder": ""
+      },
+      {
+        "name": "to",
+        "type": "string",
+        "value": null,
+        "label": "To Number",
+        "placeholder": ""
+      },
+      {
+        "name": "content",
+        "type": "string",
+        "value": null,
+        "label": "Message Content",
+        "placeholder": ""
+      },
+      {
+        "name": "message_text",
+        "type": "string",
+        "value": null,
+        "label": "Message Text",
+        "placeholder": ""
+      },
+      {
+        "name": "message_sid",
+        "type": "string",
+        "value": null,
+        "label": "Message SID",
+        "placeholder": ""
+      },
+      {
+        "name": "agent_id",
+        "type": "string",
+        "value": null,
+        "label": "Agent ID",
+        "placeholder": ""
+      },
+      {
+        "name": "channel_type",
+        "type": "string",
+        "value": null,
+        "label": "Channel Type",
+        "placeholder": ""
+      },
+      {
+        "name": "channel_id",
+        "type": "string",
+        "value": null,
+        "label": "Channel ID",
+        "placeholder": ""
+      }
+    ]
+  },
+  "trigger/twilio_voice": {
+    "hash": "f84bf5b3234264851c7ced72a2a124cb789ad4de7d19750287fdc13daacd0b63",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Twilio Voice Trigger",
+    "description": "Triggers a flow when a voice call is received via Twilio",
+    "website": "https://www.flomation.co",
+    "icon": "phone",
+    "date": "29/05/2026",
+    "type": 1,
+    "category": {
+      "name": "Triggers",
+      "icon": "bolt-lightning",
+      "description": "Start a Flow"
+    },
+    "inputs": null,
+    "outputs": [
+      {
+        "name": "from",
+        "type": "string",
+        "value": null,
+        "label": "Caller Number",
+        "placeholder": ""
+      },
+      {
+        "name": "to",
+        "type": "string",
+        "value": null,
+        "label": "Called Number",
+        "placeholder": ""
+      },
+      {
+        "name": "call_sid",
+        "type": "string",
+        "value": null,
+        "label": "Call SID",
+        "placeholder": ""
+      },
+      {
+        "name": "stream_sid",
+        "type": "string",
+        "value": null,
+        "label": "Stream SID",
+        "placeholder": ""
+      },
+      {
+        "name": "session_id",
+        "type": "string",
+        "value": null,
+        "label": "Voice Session ID",
+        "placeholder": ""
+      },
+      {
+        "name": "agent_id",
+        "type": "string",
+        "value": null,
+        "label": "Agent ID",
+        "placeholder": ""
+      },
+      {
+        "name": "channel_type",
+        "type": "string",
+        "value": null,
+        "label": "Channel Type",
+        "placeholder": ""
+      },
+      {
+        "name": "channel_id",
+        "type": "string",
+        "value": null,
+        "label": "Channel ID",
+        "placeholder": ""
+      },
+      {
+        "name": "is_voice",
+        "type": "boolean",
+        "value": null,
+        "label": "Is Voice Call",
+        "placeholder": ""
+      }
+    ]
+  },
   "trigger/webhook": {
     "hash": "195d2f0d929ea1d02d4c0d24cd7f13179836dfd08356ec37b555a8304a698572",
     "author": "Andy Esser",
@@ -18782,6 +19222,1627 @@
         "type": "string",
         "value": null,
         "label": "Triggered At",
+        "placeholder": ""
+      }
+    ]
+  },
+  "twilio/end_call": {
+    "hash": "8106965fd263559f699350f2863ccfb19bf51c9bb8bf74a6850c0d7d7d1d673c",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "End Call",
+    "description": "Terminate an active Twilio voice call",
+    "website": "https://www.flomation.co",
+    "icon": "phone-slash",
+    "date": "30/05/2026",
+    "type": 2,
+    "category": {
+      "name": "Twilio",
+      "icon": "phone",
+      "description": "Twilio voice call and SMS actions"
+    },
+    "inputs": [
+      {
+        "name": "session_id",
+        "type": "string",
+        "value": null,
+        "label": "Voice Session ID",
+        "placeholder": "${session_id}",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      }
+    ]
+  },
+  "twilio/send_audio": {
+    "hash": "517aca6539afadc13f1e3536c3998b4d5c9fa8137b7ccc8a88fcbe6d9b5fa166",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Send Audio",
+    "description": "Send audio back to a Twilio voice call",
+    "website": "https://www.flomation.co",
+    "icon": "phone-volume",
+    "date": "29/05/2026",
+    "type": 2,
+    "category": {
+      "name": "Twilio",
+      "icon": "phone",
+      "description": "Twilio voice call and SMS actions"
+    },
+    "inputs": [
+      {
+        "name": "session_id",
+        "type": "string",
+        "value": null,
+        "label": "Voice Session ID",
+        "placeholder": "${session_id}",
+        "required": true
+      },
+      {
+        "name": "audio_base64",
+        "type": "string",
+        "value": null,
+        "label": "Audio (base64, mulaw 8kHz)",
+        "placeholder": "",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "audio_size_bytes",
+        "type": "integer",
+        "value": null,
+        "label": "Audio Size (bytes)",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "twilio/voice_session": {
+    "hash": "e315bdb11549376a7679fb73b08c302f4390dc8ca1a539f1efd53261f9f1e44f",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Voice Session",
+    "description": "Hold a Twilio voice call open for multi-turn conversation",
+    "website": "https://www.flomation.co",
+    "icon": "phone-volume",
+    "date": "29/05/2026",
+    "type": 5,
+    "category": {
+      "name": "Twilio",
+      "icon": "phone",
+      "description": "Twilio voice call and SMS actions"
+    },
+    "inputs": [
+      {
+        "name": "session_id",
+        "type": "string",
+        "value": null,
+        "label": "Voice Session ID",
+        "placeholder": "${session_id}",
+        "required": true
+      },
+      {
+        "name": "max_turns",
+        "type": "integer",
+        "value": null,
+        "label": "Max Turns",
+        "placeholder": "50"
+      },
+      {
+        "name": "max_duration_seconds",
+        "type": "integer",
+        "value": null,
+        "label": "Max Duration (seconds)",
+        "placeholder": "3600"
+      },
+      {
+        "name": "silence_threshold",
+        "type": "string",
+        "value": null,
+        "label": "Silence Threshold",
+        "placeholder": "0.01"
+      },
+      {
+        "name": "silence_duration_ms",
+        "type": "integer",
+        "value": null,
+        "label": "Silence Duration (ms)",
+        "placeholder": "1500"
+      },
+      {
+        "name": "min_speech_duration_ms",
+        "type": "integer",
+        "value": null,
+        "label": "Min Speech Duration (ms)",
+        "placeholder": "300"
+      },
+      {
+        "name": "enable_barge_in",
+        "type": "boolean",
+        "value": null,
+        "label": "Enable Barge-In",
+        "placeholder": ""
+      },
+      {
+        "name": "greeting_audio_base64",
+        "type": "string",
+        "value": null,
+        "label": "Greeting Audio (base64, mulaw 8kHz)",
+        "placeholder": "Wire from a TTS node to play a greeting on call start"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "result",
+        "type": "boolean",
+        "value": null,
+        "label": "Continue Loop",
+        "placeholder": ""
+      },
+      {
+        "name": "voice_audio_base64",
+        "type": "string",
+        "value": null,
+        "label": "Caller Speech (mulaw base64)",
+        "placeholder": ""
+      },
+      {
+        "name": "voice_audio_format",
+        "type": "string",
+        "value": null,
+        "label": "Audio Format",
+        "placeholder": ""
+      },
+      {
+        "name": "turn_number",
+        "type": "integer",
+        "value": null,
+        "label": "Current Turn",
+        "placeholder": ""
+      },
+      {
+        "name": "current_index",
+        "type": "integer",
+        "value": null,
+        "label": "Loop Index",
+        "placeholder": ""
+      },
+      {
+        "name": "iterations",
+        "type": "integer",
+        "value": null,
+        "label": "Iteration Count",
+        "placeholder": ""
+      },
+      {
+        "name": "max_iterations",
+        "type": "integer",
+        "value": null,
+        "label": "Max Iterations",
+        "placeholder": ""
+      },
+      {
+        "name": "call_duration",
+        "type": "integer",
+        "value": null,
+        "label": "Call Duration (seconds)",
+        "placeholder": ""
+      },
+      {
+        "name": "total_turns",
+        "type": "integer",
+        "value": null,
+        "label": "Total Turns Completed",
+        "placeholder": ""
+      },
+      {
+        "name": "call_sid",
+        "type": "string",
+        "value": null,
+        "label": "Call SID",
+        "placeholder": ""
+      },
+      {
+        "name": "stream_sid",
+        "type": "string",
+        "value": null,
+        "label": "Stream SID",
+        "placeholder": ""
+      }
+    ]
+  },
+  "webflow/create_collection_item": {
+    "hash": "4a049c85cbc65d1435d9275a7e31c6416cab2bf0c73cffd9ca38ba1064a675fd",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Create Collection Item",
+    "description": "Create a new item in a Webflow CMS collection",
+    "website": "https://www.flomation.co",
+    "icon": "globe",
+    "date": "29/05/2026",
+    "type": 2,
+    "category": {
+      "name": "Webflow",
+      "icon": "globe",
+      "description": "Manage Webflow sites, CMS collections, pages, and forms"
+    },
+    "inputs": [
+      {
+        "name": "api_token",
+        "type": "string",
+        "value": null,
+        "label": "Webflow API Token",
+        "placeholder": "wfl_...",
+        "required": true
+      },
+      {
+        "name": "collection_id",
+        "type": "string",
+        "value": null,
+        "label": "Collection ID",
+        "placeholder": "The collection ID",
+        "required": true
+      },
+      {
+        "name": "field_data",
+        "type": "text",
+        "value": null,
+        "label": "Field Data",
+        "placeholder": "{\"name\": \"My Item\", \"slug\": \"my-item\", ...}",
+        "required": true
+      },
+      {
+        "name": "is_draft",
+        "type": "boolean",
+        "value": null,
+        "label": "Is Draft",
+        "placeholder": ""
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "item_id",
+        "type": "string",
+        "value": null,
+        "label": "Item ID",
+        "placeholder": ""
+      },
+      {
+        "name": "item",
+        "type": "object",
+        "value": null,
+        "label": "Item",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "webflow/create_webhook": {
+    "hash": "ab032c9cf0a3bda0bd60c2abc533e1804ab0930f724a8ed73d6be34508bd3254",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Create Webhook",
+    "description": "Create a webhook for a Webflow site to receive event notifications",
+    "website": "https://www.flomation.co",
+    "icon": "globe",
+    "date": "29/05/2026",
+    "type": 2,
+    "category": {
+      "name": "Webflow",
+      "icon": "globe",
+      "description": "Manage Webflow sites, CMS collections, pages, and forms"
+    },
+    "inputs": [
+      {
+        "name": "api_token",
+        "type": "string",
+        "value": null,
+        "label": "Webflow API Token",
+        "placeholder": "wfl_...",
+        "required": true
+      },
+      {
+        "name": "site_id",
+        "type": "string",
+        "value": null,
+        "label": "Site ID",
+        "placeholder": "The Webflow site ID",
+        "required": true
+      },
+      {
+        "name": "url",
+        "type": "string",
+        "value": null,
+        "label": "Webhook URL",
+        "placeholder": "https://example.com/webhook",
+        "required": true
+      },
+      {
+        "name": "trigger_type",
+        "type": "string",
+        "value": null,
+        "label": "Trigger Type",
+        "placeholder": "",
+        "required": true,
+        "options": [
+          {
+            "name": "Form Submission",
+            "value": "form_submission"
+          },
+          {
+            "name": "Site Publish",
+            "value": "site_publish"
+          },
+          {
+            "name": "Page Created",
+            "value": "page_created"
+          },
+          {
+            "name": "Page Metadata Updated",
+            "value": "page_metadata_updated"
+          },
+          {
+            "name": "Page Deleted",
+            "value": "page_deleted"
+          },
+          {
+            "name": "E-commerce New Order",
+            "value": "ecomm_new_order"
+          },
+          {
+            "name": "E-commerce Order Changed",
+            "value": "ecomm_order_changed"
+          },
+          {
+            "name": "E-commerce Inventory Changed",
+            "value": "ecomm_inventory_changed"
+          },
+          {
+            "name": "Collection Item Created",
+            "value": "collection_item_created"
+          },
+          {
+            "name": "Collection Item Changed",
+            "value": "collection_item_changed"
+          },
+          {
+            "name": "Collection Item Deleted",
+            "value": "collection_item_deleted"
+          },
+          {
+            "name": "Collection Item Unpublished",
+            "value": "collection_item_unpublished"
+          },
+          {
+            "name": "User Account Added",
+            "value": "user_account_added"
+          },
+          {
+            "name": "User Account Updated",
+            "value": "user_account_updated"
+          },
+          {
+            "name": "User Account Deleted",
+            "value": "user_account_deleted"
+          }
+        ]
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "webhook_id",
+        "type": "string",
+        "value": null,
+        "label": "Webhook ID",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "webflow/delete_collection_item": {
+    "hash": "3332014fd3393614722716a00a38235061cd8155e20e5936fa493edfd5939c52",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Delete Collection Item",
+    "description": "Delete an item from a Webflow CMS collection",
+    "website": "https://www.flomation.co",
+    "icon": "globe",
+    "date": "29/05/2026",
+    "type": 2,
+    "category": {
+      "name": "Webflow",
+      "icon": "globe",
+      "description": "Manage Webflow sites, CMS collections, pages, and forms"
+    },
+    "inputs": [
+      {
+        "name": "api_token",
+        "type": "string",
+        "value": null,
+        "label": "Webflow API Token",
+        "placeholder": "wfl_...",
+        "required": true
+      },
+      {
+        "name": "collection_id",
+        "type": "string",
+        "value": null,
+        "label": "Collection ID",
+        "placeholder": "The collection ID",
+        "required": true
+      },
+      {
+        "name": "item_id",
+        "type": "string",
+        "value": null,
+        "label": "Item ID",
+        "placeholder": "The item ID",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "webflow/get_collection": {
+    "hash": "49bd0f483017e3afda9fea89fce8fb6e4b9cb2fe1632c1a8fa32ebd811e1cca3",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Get Collection",
+    "description": "Get a Webflow CMS collection with its field schema",
+    "website": "https://www.flomation.co",
+    "icon": "globe",
+    "date": "29/05/2026",
+    "type": 2,
+    "category": {
+      "name": "Webflow",
+      "icon": "globe",
+      "description": "Manage Webflow sites, CMS collections, pages, and forms"
+    },
+    "inputs": [
+      {
+        "name": "api_token",
+        "type": "string",
+        "value": null,
+        "label": "Webflow API Token",
+        "placeholder": "wfl_...",
+        "required": true
+      },
+      {
+        "name": "collection_id",
+        "type": "string",
+        "value": null,
+        "label": "Collection ID",
+        "placeholder": "The collection ID",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "collection",
+        "type": "object",
+        "value": null,
+        "label": "Collection",
+        "placeholder": ""
+      },
+      {
+        "name": "fields",
+        "type": "object",
+        "value": null,
+        "label": "Fields",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "webflow/get_collection_item": {
+    "hash": "816faa1ea1797add514e65bd9935d32cb17d688cb92771425e6cfc5a12a4f6ac",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Get Collection Item",
+    "description": "Get a specific item from a Webflow CMS collection",
+    "website": "https://www.flomation.co",
+    "icon": "globe",
+    "date": "29/05/2026",
+    "type": 2,
+    "category": {
+      "name": "Webflow",
+      "icon": "globe",
+      "description": "Manage Webflow sites, CMS collections, pages, and forms"
+    },
+    "inputs": [
+      {
+        "name": "api_token",
+        "type": "string",
+        "value": null,
+        "label": "Webflow API Token",
+        "placeholder": "wfl_...",
+        "required": true
+      },
+      {
+        "name": "collection_id",
+        "type": "string",
+        "value": null,
+        "label": "Collection ID",
+        "placeholder": "The collection ID",
+        "required": true
+      },
+      {
+        "name": "item_id",
+        "type": "string",
+        "value": null,
+        "label": "Item ID",
+        "placeholder": "The item ID",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "item",
+        "type": "object",
+        "value": null,
+        "label": "Item",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "webflow/get_form_submissions": {
+    "hash": "c31259c6a4b00b57649e953d69b045ede8d38c5fdc2e6718d147104e78b519af",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Get Form Submissions",
+    "description": "Get submissions for a Webflow form with pagination",
+    "website": "https://www.flomation.co",
+    "icon": "globe",
+    "date": "29/05/2026",
+    "type": 2,
+    "category": {
+      "name": "Webflow",
+      "icon": "globe",
+      "description": "Manage Webflow sites, CMS collections, pages, and forms"
+    },
+    "inputs": [
+      {
+        "name": "api_token",
+        "type": "string",
+        "value": null,
+        "label": "Webflow API Token",
+        "placeholder": "wfl_...",
+        "required": true
+      },
+      {
+        "name": "form_id",
+        "type": "string",
+        "value": null,
+        "label": "Form ID",
+        "placeholder": "The form ID",
+        "required": true
+      },
+      {
+        "name": "limit",
+        "type": "integer",
+        "value": null,
+        "label": "Limit",
+        "placeholder": "Number of submissions to return"
+      },
+      {
+        "name": "offset",
+        "type": "integer",
+        "value": null,
+        "label": "Offset",
+        "placeholder": "Number of submissions to skip"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "submissions",
+        "type": "object",
+        "value": null,
+        "label": "Submissions",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Count",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "webflow/get_page_content": {
+    "hash": "9279d0d8938c548bf62d56f3c303a9bd76110a4ff541a83210ab83749eda3459",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Get Page Content",
+    "description": "Get the DOM content nodes of a Webflow page",
+    "website": "https://www.flomation.co",
+    "icon": "globe",
+    "date": "29/05/2026",
+    "type": 2,
+    "category": {
+      "name": "Webflow",
+      "icon": "globe",
+      "description": "Manage Webflow sites, CMS collections, pages, and forms"
+    },
+    "inputs": [
+      {
+        "name": "api_token",
+        "type": "string",
+        "value": null,
+        "label": "Webflow API Token",
+        "placeholder": "wfl_...",
+        "required": true
+      },
+      {
+        "name": "page_id",
+        "type": "string",
+        "value": null,
+        "label": "Page ID",
+        "placeholder": "The page ID",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "nodes",
+        "type": "object",
+        "value": null,
+        "label": "Nodes",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "webflow/get_site": {
+    "hash": "dc11e798d1470fcece5bafee76e2adbcf4df063a092bddf0b3f95c6ae452e908",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Get Site",
+    "description": "Get details of a specific Webflow site by ID",
+    "website": "https://www.flomation.co",
+    "icon": "globe",
+    "date": "29/05/2026",
+    "type": 2,
+    "category": {
+      "name": "Webflow",
+      "icon": "globe",
+      "description": "Manage Webflow sites, CMS collections, pages, and forms"
+    },
+    "inputs": [
+      {
+        "name": "api_token",
+        "type": "string",
+        "value": null,
+        "label": "Webflow API Token",
+        "placeholder": "wfl_...",
+        "required": true
+      },
+      {
+        "name": "site_id",
+        "type": "string",
+        "value": null,
+        "label": "Site ID",
+        "placeholder": "The Webflow site ID",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "site",
+        "type": "object",
+        "value": null,
+        "label": "Site",
+        "placeholder": ""
+      },
+      {
+        "name": "name",
+        "type": "string",
+        "value": null,
+        "label": "Name",
+        "placeholder": ""
+      },
+      {
+        "name": "url",
+        "type": "string",
+        "value": null,
+        "label": "URL",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "webflow/list_collection_items": {
+    "hash": "cb3c15e5f563e10cab50f82a56f9fb9ed68360ca6793b38ddad23035a6bcd314",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "List Collection Items",
+    "description": "List items in a Webflow CMS collection with pagination",
+    "website": "https://www.flomation.co",
+    "icon": "globe",
+    "date": "29/05/2026",
+    "type": 2,
+    "category": {
+      "name": "Webflow",
+      "icon": "globe",
+      "description": "Manage Webflow sites, CMS collections, pages, and forms"
+    },
+    "inputs": [
+      {
+        "name": "api_token",
+        "type": "string",
+        "value": null,
+        "label": "Webflow API Token",
+        "placeholder": "wfl_...",
+        "required": true
+      },
+      {
+        "name": "collection_id",
+        "type": "string",
+        "value": null,
+        "label": "Collection ID",
+        "placeholder": "The collection ID",
+        "required": true
+      },
+      {
+        "name": "limit",
+        "type": "integer",
+        "value": null,
+        "label": "Limit",
+        "placeholder": "Number of items to return"
+      },
+      {
+        "name": "offset",
+        "type": "integer",
+        "value": null,
+        "label": "Offset",
+        "placeholder": "Number of items to skip"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "items",
+        "type": "object",
+        "value": null,
+        "label": "Items",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Count",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "webflow/list_collections": {
+    "hash": "b0cb687518768710e7a43c5127ea6c66414a9bed72f68a53e28d82083d23ab72",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "List Collections",
+    "description": "List all CMS collections for a Webflow site",
+    "website": "https://www.flomation.co",
+    "icon": "globe",
+    "date": "29/05/2026",
+    "type": 2,
+    "category": {
+      "name": "Webflow",
+      "icon": "globe",
+      "description": "Manage Webflow sites, CMS collections, pages, and forms"
+    },
+    "inputs": [
+      {
+        "name": "api_token",
+        "type": "string",
+        "value": null,
+        "label": "Webflow API Token",
+        "placeholder": "wfl_...",
+        "required": true
+      },
+      {
+        "name": "site_id",
+        "type": "string",
+        "value": null,
+        "label": "Site ID",
+        "placeholder": "The Webflow site ID",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "collections",
+        "type": "object",
+        "value": null,
+        "label": "Collections",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Count",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "webflow/list_forms": {
+    "hash": "62016c7641bbdd24f72aa7e89cee723f7b1c626cb3c532fa038860b99213d035",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "List Forms",
+    "description": "List all forms for a Webflow site",
+    "website": "https://www.flomation.co",
+    "icon": "globe",
+    "date": "29/05/2026",
+    "type": 2,
+    "category": {
+      "name": "Webflow",
+      "icon": "globe",
+      "description": "Manage Webflow sites, CMS collections, pages, and forms"
+    },
+    "inputs": [
+      {
+        "name": "api_token",
+        "type": "string",
+        "value": null,
+        "label": "Webflow API Token",
+        "placeholder": "wfl_...",
+        "required": true
+      },
+      {
+        "name": "site_id",
+        "type": "string",
+        "value": null,
+        "label": "Site ID",
+        "placeholder": "The Webflow site ID",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "forms",
+        "type": "object",
+        "value": null,
+        "label": "Forms",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Count",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "webflow/list_pages": {
+    "hash": "b97f255b35da047e8843efa9b2870bcb127fe92d94ea11f2cfbfe74c164e3fd5",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "List Pages",
+    "description": "List all pages for a Webflow site",
+    "website": "https://www.flomation.co",
+    "icon": "globe",
+    "date": "29/05/2026",
+    "type": 2,
+    "category": {
+      "name": "Webflow",
+      "icon": "globe",
+      "description": "Manage Webflow sites, CMS collections, pages, and forms"
+    },
+    "inputs": [
+      {
+        "name": "api_token",
+        "type": "string",
+        "value": null,
+        "label": "Webflow API Token",
+        "placeholder": "wfl_...",
+        "required": true
+      },
+      {
+        "name": "site_id",
+        "type": "string",
+        "value": null,
+        "label": "Site ID",
+        "placeholder": "The Webflow site ID",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "pages",
+        "type": "object",
+        "value": null,
+        "label": "Pages",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Count",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "webflow/list_sites": {
+    "hash": "18fdfdfbb9c235ca4f54c4fd83d743806d30ddd9409c89dbab4a1a6234d46dc6",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "List Sites",
+    "description": "List all Webflow sites accessible with the provided API token",
+    "website": "https://www.flomation.co",
+    "icon": "globe",
+    "date": "29/05/2026",
+    "type": 2,
+    "category": {
+      "name": "Webflow",
+      "icon": "globe",
+      "description": "Manage Webflow sites, CMS collections, pages, and forms"
+    },
+    "inputs": [
+      {
+        "name": "api_token",
+        "type": "string",
+        "value": null,
+        "label": "Webflow API Token",
+        "placeholder": "wfl_...",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "sites",
+        "type": "object",
+        "value": null,
+        "label": "Sites",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Count",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "webflow/publish_site": {
+    "hash": "8425b9e54da9b62505cf5d283f64d20d54e035969b70cb406e3e16f4bbf87805",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Publish Site",
+    "description": "Publish a Webflow site to its subdomain or specified custom domains",
+    "website": "https://www.flomation.co",
+    "icon": "globe",
+    "date": "29/05/2026",
+    "type": 2,
+    "category": {
+      "name": "Webflow",
+      "icon": "globe",
+      "description": "Manage Webflow sites, CMS collections, pages, and forms"
+    },
+    "inputs": [
+      {
+        "name": "api_token",
+        "type": "string",
+        "value": null,
+        "label": "Webflow API Token",
+        "placeholder": "wfl_...",
+        "required": true
+      },
+      {
+        "name": "site_id",
+        "type": "string",
+        "value": null,
+        "label": "Site ID",
+        "placeholder": "The Webflow site ID",
+        "required": true
+      },
+      {
+        "name": "domain_ids",
+        "type": "string",
+        "value": null,
+        "label": "Domain IDs",
+        "placeholder": "Comma-separated domain IDs (optional)"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "webflow/update_collection_item": {
+    "hash": "16a10d0943737804f5cac6e3bfd9fe4d3ad5ab3e267c7107ccd25b8935154ff1",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Update Collection Item",
+    "description": "Update an existing item in a Webflow CMS collection",
+    "website": "https://www.flomation.co",
+    "icon": "globe",
+    "date": "29/05/2026",
+    "type": 2,
+    "category": {
+      "name": "Webflow",
+      "icon": "globe",
+      "description": "Manage Webflow sites, CMS collections, pages, and forms"
+    },
+    "inputs": [
+      {
+        "name": "api_token",
+        "type": "string",
+        "value": null,
+        "label": "Webflow API Token",
+        "placeholder": "wfl_...",
+        "required": true
+      },
+      {
+        "name": "collection_id",
+        "type": "string",
+        "value": null,
+        "label": "Collection ID",
+        "placeholder": "The collection ID",
+        "required": true
+      },
+      {
+        "name": "item_id",
+        "type": "string",
+        "value": null,
+        "label": "Item ID",
+        "placeholder": "The item ID",
+        "required": true
+      },
+      {
+        "name": "field_data",
+        "type": "text",
+        "value": null,
+        "label": "Field Data",
+        "placeholder": "{\"name\": \"Updated Item\", ...}",
+        "required": true
+      },
+      {
+        "name": "is_draft",
+        "type": "boolean",
+        "value": null,
+        "label": "Is Draft",
+        "placeholder": ""
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "item",
+        "type": "object",
+        "value": null,
+        "label": "Item",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "webflow/update_page_content": {
+    "hash": "4b27495155398fd2324b406126871d1fffb720bf68eba1e4dcbc262808e59128",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Update Page Content",
+    "description": "Update the DOM content nodes of a Webflow page",
+    "website": "https://www.flomation.co",
+    "icon": "globe",
+    "date": "29/05/2026",
+    "type": 2,
+    "category": {
+      "name": "Webflow",
+      "icon": "globe",
+      "description": "Manage Webflow sites, CMS collections, pages, and forms"
+    },
+    "inputs": [
+      {
+        "name": "api_token",
+        "type": "string",
+        "value": null,
+        "label": "Webflow API Token",
+        "placeholder": "wfl_...",
+        "required": true
+      },
+      {
+        "name": "page_id",
+        "type": "string",
+        "value": null,
+        "label": "Page ID",
+        "placeholder": "The page ID",
+        "required": true
+      },
+      {
+        "name": "nodes",
+        "type": "text",
+        "value": null,
+        "label": "Nodes",
+        "placeholder": "[{\"nodeId\": \"...\", \"text\": \"...\"}]",
+        "required": true
+      },
+      {
+        "name": "locale_id",
+        "type": "string",
+        "value": null,
+        "label": "Locale ID",
+        "placeholder": "The locale identifier",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "webflow/update_page_metadata": {
+    "hash": "ab60d8fa0bcb20bcce1a6006ae86b391a6ec13c985fe61f1367d23e71776d1f2",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Update Page Metadata",
+    "description": "Update the title, slug, SEO, and Open Graph metadata of a Webflow page",
+    "website": "https://www.flomation.co",
+    "icon": "globe",
+    "date": "29/05/2026",
+    "type": 2,
+    "category": {
+      "name": "Webflow",
+      "icon": "globe",
+      "description": "Manage Webflow sites, CMS collections, pages, and forms"
+    },
+    "inputs": [
+      {
+        "name": "api_token",
+        "type": "string",
+        "value": null,
+        "label": "Webflow API Token",
+        "placeholder": "wfl_...",
+        "required": true
+      },
+      {
+        "name": "page_id",
+        "type": "string",
+        "value": null,
+        "label": "Page ID",
+        "placeholder": "The page ID",
+        "required": true
+      },
+      {
+        "name": "title",
+        "type": "string",
+        "value": null,
+        "label": "Title",
+        "placeholder": "Page title"
+      },
+      {
+        "name": "slug",
+        "type": "string",
+        "value": null,
+        "label": "Slug",
+        "placeholder": "Page URL slug"
+      },
+      {
+        "name": "seo_title",
+        "type": "string",
+        "value": null,
+        "label": "SEO Title",
+        "placeholder": "SEO title tag"
+      },
+      {
+        "name": "seo_description",
+        "type": "string",
+        "value": null,
+        "label": "SEO Description",
+        "placeholder": "SEO meta description"
+      },
+      {
+        "name": "og_title",
+        "type": "string",
+        "value": null,
+        "label": "Open Graph Title",
+        "placeholder": "og:title value"
+      },
+      {
+        "name": "og_description",
+        "type": "string",
+        "value": null,
+        "label": "Open Graph Description",
+        "placeholder": "og:description value"
+      },
+      {
+        "name": "og_image",
+        "type": "string",
+        "value": null,
+        "label": "Open Graph Image",
+        "placeholder": "og:image URL"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "page",
+        "type": "object",
+        "value": null,
+        "label": "Page",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
         "placeholder": ""
       }
     ]

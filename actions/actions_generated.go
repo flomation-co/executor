@@ -5,6 +5,7 @@ package actions
 import (
 	core "flomation.app/automate/executor"
 
+	agent_add_to_conversation "flomation.app/automate/executor/actions/agent/add_to_conversation"
 	agent_create_schedule "flomation.app/automate/executor/actions/agent/create_schedule"
 	agent_delete_schedule "flomation.app/automate/executor/actions/agent/delete_schedule"
 	agent_forget "flomation.app/automate/executor/actions/agent/forget"
@@ -125,6 +126,7 @@ import (
 	messaging_slack "flomation.app/automate/executor/actions/messaging/slack"
 	messaging_telegram "flomation.app/automate/executor/actions/messaging/telegram"
 	messaging_telegram_voice "flomation.app/automate/executor/actions/messaging/telegram_voice"
+	messaging_twilio_sms "flomation.app/automate/executor/actions/messaging/twilio_sms"
 	nosql_mongodb "flomation.app/automate/executor/actions/nosql/mongodb"
 	nosql_redis "flomation.app/automate/executor/actions/nosql/redis"
 	notion_add_comment "flomation.app/automate/executor/actions/notion/add_comment"
@@ -211,10 +213,33 @@ import (
 	trigger_schedule "flomation.app/automate/executor/actions/trigger/schedule"
 	trigger_slack "flomation.app/automate/executor/actions/trigger/slack"
 	trigger_telegram "flomation.app/automate/executor/actions/trigger/telegram"
+	trigger_twilio_sms "flomation.app/automate/executor/actions/trigger/twilio_sms"
+	trigger_twilio_voice "flomation.app/automate/executor/actions/trigger/twilio_voice"
 	trigger_webhook "flomation.app/automate/executor/actions/trigger/webhook"
+	twilio_end_call "flomation.app/automate/executor/actions/twilio/end_call"
+	twilio_send_audio "flomation.app/automate/executor/actions/twilio/send_audio"
+	twilio_voice_session "flomation.app/automate/executor/actions/twilio/voice_session"
+	webflow_create_collection_item "flomation.app/automate/executor/actions/webflow/create_collection_item"
+	webflow_create_webhook "flomation.app/automate/executor/actions/webflow/create_webhook"
+	webflow_delete_collection_item "flomation.app/automate/executor/actions/webflow/delete_collection_item"
+	webflow_get_collection "flomation.app/automate/executor/actions/webflow/get_collection"
+	webflow_get_collection_item "flomation.app/automate/executor/actions/webflow/get_collection_item"
+	webflow_get_form_submissions "flomation.app/automate/executor/actions/webflow/get_form_submissions"
+	webflow_get_page_content "flomation.app/automate/executor/actions/webflow/get_page_content"
+	webflow_get_site "flomation.app/automate/executor/actions/webflow/get_site"
+	webflow_list_collection_items "flomation.app/automate/executor/actions/webflow/list_collection_items"
+	webflow_list_collections "flomation.app/automate/executor/actions/webflow/list_collections"
+	webflow_list_forms "flomation.app/automate/executor/actions/webflow/list_forms"
+	webflow_list_pages "flomation.app/automate/executor/actions/webflow/list_pages"
+	webflow_list_sites "flomation.app/automate/executor/actions/webflow/list_sites"
+	webflow_publish_site "flomation.app/automate/executor/actions/webflow/publish_site"
+	webflow_update_collection_item "flomation.app/automate/executor/actions/webflow/update_collection_item"
+	webflow_update_page_content "flomation.app/automate/executor/actions/webflow/update_page_content"
+	webflow_update_page_metadata "flomation.app/automate/executor/actions/webflow/update_page_metadata"
 )
 
 var Actions = map[string]core.Action{
+	"agent/add_to_conversation":           agent_add_to_conversation.Execute,
 	"agent/create_schedule":               agent_create_schedule.Execute,
 	"agent/delete_schedule":               agent_delete_schedule.Execute,
 	"agent/forget":                        agent_forget.Execute,
@@ -335,6 +360,7 @@ var Actions = map[string]core.Action{
 	"messaging/slack":                     messaging_slack.Execute,
 	"messaging/telegram":                  messaging_telegram.Execute,
 	"messaging/telegram_voice":            messaging_telegram_voice.Execute,
+	"messaging/twilio_sms":                messaging_twilio_sms.Execute,
 	"nosql/mongodb":                       nosql_mongodb.Execute,
 	"nosql/redis":                         nosql_redis.Execute,
 	"notion/add_comment":                  notion_add_comment.Execute,
@@ -421,5 +447,27 @@ var Actions = map[string]core.Action{
 	"trigger/schedule":                    trigger_schedule.Execute,
 	"trigger/slack":                       trigger_slack.Execute,
 	"trigger/telegram":                    trigger_telegram.Execute,
+	"trigger/twilio_sms":                  trigger_twilio_sms.Execute,
+	"trigger/twilio_voice":                trigger_twilio_voice.Execute,
 	"trigger/webhook":                     trigger_webhook.Execute,
+	"twilio/end_call":                     twilio_end_call.Execute,
+	"twilio/send_audio":                   twilio_send_audio.Execute,
+	"twilio/voice_session":                twilio_voice_session.Execute,
+	"webflow/create_collection_item":      webflow_create_collection_item.Execute,
+	"webflow/create_webhook":              webflow_create_webhook.Execute,
+	"webflow/delete_collection_item":      webflow_delete_collection_item.Execute,
+	"webflow/get_collection":              webflow_get_collection.Execute,
+	"webflow/get_collection_item":         webflow_get_collection_item.Execute,
+	"webflow/get_form_submissions":        webflow_get_form_submissions.Execute,
+	"webflow/get_page_content":            webflow_get_page_content.Execute,
+	"webflow/get_site":                    webflow_get_site.Execute,
+	"webflow/list_collection_items":       webflow_list_collection_items.Execute,
+	"webflow/list_collections":            webflow_list_collections.Execute,
+	"webflow/list_forms":                  webflow_list_forms.Execute,
+	"webflow/list_pages":                  webflow_list_pages.Execute,
+	"webflow/list_sites":                  webflow_list_sites.Execute,
+	"webflow/publish_site":                webflow_publish_site.Execute,
+	"webflow/update_collection_item":      webflow_update_collection_item.Execute,
+	"webflow/update_page_content":         webflow_update_page_content.Execute,
+	"webflow/update_page_metadata":        webflow_update_page_metadata.Execute,
 }

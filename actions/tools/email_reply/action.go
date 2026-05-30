@@ -56,6 +56,12 @@ var Inputs = [...]core.Connection{
 		Type:  core.ConnectionTypeString,
 		Label: "Account to send from (email or label)",
 	},
+	{
+		Name:        "credential",
+		Type:        core.ConnectionTypeString,
+		Label:       "Google OAuth Credential (optional, overrides user tokens)",
+		Placeholder: "${credentials.GOOGLE_EMAIL}",
+	},
 }
 
 var Outputs = [...]core.Connection{
@@ -92,18 +98,26 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 		}
 	}
 
+	credential := optionalString("credential", inputs)
+
 	ctx := flow.GetContext()
 	if ctx == nil || ctx.APIURL == "" {
 		return nil, fmt.Errorf("execution context with API URL is required")
 	}
-	if ctx.AgentUserID == "" {
-		return errResult("No user identity available")
+	if credential == "" && ctx.AgentUserID == "" {
+		return errResult("No user identity or credential available")
 	}
 
 	// Need both send tokens (to send) and read tokens (to fetch original)
-	sendTokens, err := fetchTokens(flow, ctx, "email_send")
-	if err != nil {
-		return errResult(fmt.Sprintf("Failed to get send tokens: %v", err))
+	var sendTokens []tokenInfo
+	if credential != "" {
+		sendTokens = []tokenInfo{{Email: "credential", AccessToken: credential}}
+	} else {
+		var err error
+		sendTokens, err = fetchTokens(flow, ctx, "email_send")
+		if err != nil {
+			return errResult(fmt.Sprintf("Failed to get send tokens: %v", err))
+		}
 	}
 	if len(sendTokens) == 0 {
 		return errResult("No Gmail send access connected.")
