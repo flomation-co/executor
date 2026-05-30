@@ -1092,7 +1092,7 @@
     ]
   },
   "ai/anthropic": {
-    "hash": "0b1605f65e84da406ab9bc1fc6bfb6638658b31d81ed2e7b566c122d674569d8",
+    "hash": "7e57f6323194765bf439364dad280cb83323c0806b9a0f80252992bc1e63ea58",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Anthropic Prompt",

@@ -300,6 +300,15 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 		"messages":    messages,
 	}
 
+	log.WithFields(log.Fields{
+		"model":           model,
+		"max_tokens":      maxTokens,
+		"messages_count":  len(messages),
+		"tools_count":     len(tools),
+		"system_prompt_len": len(systemPromptStr),
+		"prompt_len":        len(prompt),
+	}).Info("[anthropic] building API request")
+
 	// System prompt: use structured content blocks with cache_control
 	// so repeated turns with the same system prompt hit the cache.
 	if systemPromptStr != "" {

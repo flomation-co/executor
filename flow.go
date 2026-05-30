@@ -2158,6 +2158,12 @@ func (f *Flow) GetNodeResult(nodeID string) map[string]interface{} {
 	return f.nodeResults[nodeID]
 }
 
+// GetAllNodeResults returns all cached node results. Used by actions
+// that need to find a value (like session_id) from any upstream node.
+func (f *Flow) GetAllNodeResults() map[string]map[string]interface{} {
+	return f.nodeResults
+}
+
 // SetNodeResultForTest allows tests to pre-populate cached node results.
 func (f *Flow) SetNodeResultForTest(nodeID string, result map[string]interface{}) {
 	if f.nodeResults == nil {

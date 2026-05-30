@@ -5,6 +5,7 @@ package end_call
 
 import (
 	"fmt"
+	"strings"
 
 	core "flomation.app/automate/executor"
 	voicesession "flomation.app/automate/executor/actions/twilio/voice_session"
@@ -37,14 +38,34 @@ var Outputs = [...]core.Connection{
 }
 
 func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[string]interface{}, error) {
+	sessionID := ""
 	sessionIDConn := core.FindConnection("session_id", inputs)
-	if sessionIDConn == nil || sessionIDConn.String() == nil || *sessionIDConn.String() == "" {
+	if sessionIDConn != nil && sessionIDConn.String() != nil {
+		s := *sessionIDConn.String()
+		// Skip unresolved variable references
+		if s != "" && !strings.HasPrefix(s, "${") {
+			sessionID = s
+		}
+	}
+
+	// If session_id wasn't resolved from inputs, try the trigger data
+	// which is available as a parent node output on the trigger node.
+	if sessionID == "" {
+		// Check all node results for a session_id (from trigger or voice_session)
+		for _, result := range flow.GetAllNodeResults() {
+			if sid, ok := result["session_id"].(string); ok && sid != "" {
+				sessionID = sid
+				break
+			}
+		}
+	}
+
+	if sessionID == "" {
 		return map[string]interface{}{
-			"tool_result": "Error: session_id is required",
+			"tool_result": "No session_id available — cannot end call",
 			"success":     false,
 		}, nil
 	}
-	sessionID := *sessionIDConn.String()
 
 	sess := voicesession.GetSession(sessionID)
 	if sess == nil {
