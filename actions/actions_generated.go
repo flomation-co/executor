@@ -217,6 +217,7 @@ import (
 	trigger_twilio_voice "flomation.app/automate/executor/actions/trigger/twilio_voice"
 	trigger_webhook "flomation.app/automate/executor/actions/trigger/webhook"
 	twilio_end_call "flomation.app/automate/executor/actions/twilio/end_call"
+	twilio_make_call "flomation.app/automate/executor/actions/twilio/make_call"
 	twilio_send_audio "flomation.app/automate/executor/actions/twilio/send_audio"
 	twilio_voice_session "flomation.app/automate/executor/actions/twilio/voice_session"
 	webflow_create_collection_item "flomation.app/automate/executor/actions/webflow/create_collection_item"
@@ -451,6 +452,7 @@ var Actions = map[string]core.Action{
 	"trigger/twilio_voice":                trigger_twilio_voice.Execute,
 	"trigger/webhook":                     trigger_webhook.Execute,
 	"twilio/end_call":                     twilio_end_call.Execute,
+	"twilio/make_call":                    twilio_make_call.Execute,
 	"twilio/send_audio":                   twilio_send_audio.Execute,
 	"twilio/voice_session":                twilio_voice_session.Execute,
 	"webflow/create_collection_item":      webflow_create_collection_item.Execute,

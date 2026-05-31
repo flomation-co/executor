@@ -19268,8 +19268,102 @@
       }
     ]
   },
+  "twilio/make_call": {
+    "hash": "1f97d4cb8fe21079e1d7a6c913d0248967aee16d09be867180a58c30bc2808e0",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Make Call",
+    "description": "Initiate an outbound Twilio voice call",
+    "website": "https://www.flomation.co",
+    "icon": "phone-arrow-up-right",
+    "date": "31/05/2026",
+    "type": 2,
+    "category": {
+      "name": "Twilio",
+      "icon": "phone",
+      "description": "Twilio voice call and SMS actions"
+    },
+    "inputs": [
+      {
+        "name": "account_sid",
+        "type": "string",
+        "value": null,
+        "label": "Account SID",
+        "placeholder": "ACxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+        "required": true
+      },
+      {
+        "name": "auth_token",
+        "type": "string",
+        "value": null,
+        "label": "Auth Token",
+        "placeholder": "${secrets.TWILIO_AUTH_TOKEN}",
+        "required": true
+      },
+      {
+        "name": "from",
+        "type": "string",
+        "value": null,
+        "label": "From Number (E.164)",
+        "placeholder": "+19876543210",
+        "required": true
+      },
+      {
+        "name": "to",
+        "type": "string",
+        "value": null,
+        "label": "To Number (E.164)",
+        "placeholder": "+441234567890",
+        "required": true
+      },
+      {
+        "name": "timeout",
+        "type": "integer",
+        "value": null,
+        "label": "Ring Timeout (seconds)",
+        "placeholder": "30"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "call_sid",
+        "type": "string",
+        "value": null,
+        "label": "Call SID",
+        "placeholder": ""
+      },
+      {
+        "name": "session_id",
+        "type": "string",
+        "value": null,
+        "label": "Session ID",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
   "twilio/send_audio": {
-    "hash": "517aca6539afadc13f1e3536c3998b4d5c9fa8137b7ccc8a88fcbe6d9b5fa166",
+    "hash": "de788196a4d077efdc26c807cc2125d273a6af15a6fa5053c546d65c2b11e5bb",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Send Audio",
@@ -19333,7 +19427,7 @@
     ]
   },
   "twilio/voice_session": {
-    "hash": "e315bdb11549376a7679fb73b08c302f4390dc8ca1a539f1efd53261f9f1e44f",
+    "hash": "71271242cb160e9f9cbfcae34cb51df5b61d485ebddd638c7cf571c9e6a0ec5a",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Voice Session",

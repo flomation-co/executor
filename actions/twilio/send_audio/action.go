@@ -87,6 +87,16 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 		return errResult("voice session not found or already closed")
 	}
 
+	// If the caller interrupted (barge-in), skip sending audio
+	if sess.BargedIn() {
+		return map[string]interface{}{
+			"tool_result":      "Audio skipped — caller interrupted (barge-in)",
+			"success":          true,
+			"audio_size_bytes": int64(0),
+			"error":            "",
+		}, nil
+	}
+
 	// Send audio to the caller via WebSocket.
 	// If the call has ended (broken pipe), treat as success — the audio
 	// was produced but the caller hung up before it could be played.

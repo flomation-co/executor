@@ -1,11 +1,14 @@
 // Package voice_session implements a long-running voice call loop node.
 // It connects to the API's voice session WebSocket, receives mulaw audio
 // from the caller, runs VAD to detect speech boundaries, and outputs
-// the speech audio for subgraph processing (STT → AI → TTS).
+// the speech audio for subgraph processing (STT -> AI -> TTS).
 //
-// This action uses ActionTypeLoop — the executor calls Execute() on each
+// This action uses ActionTypeLoop -- the executor calls Execute() on each
 // iteration. On the first call it establishes the WebSocket connection.
 // On each subsequent call it waits for the next speech segment.
+//
+// A background reader goroutine continuously reads WebSocket messages,
+// enabling barge-in detection even while the subgraph is executing.
 package voice_session
 
 import (
@@ -111,8 +114,20 @@ type activeSession struct {
 	maxTurns  int
 	maxDur    time.Duration
 	bargeIn   bool
-	closed    bool
-	mu        sync.Mutex
+
+	// Barge-in state: managed by background reader
+	playing    bool   // true while TTS audio is being played back
+	bargedIn   bool   // true when barge-in speech detected during subgraph
+	bargeAudio []byte // buffered caller speech from barge-in
+
+	closed bool
+
+	// Channels fed by the background reader goroutine
+	frames     chan []byte    // decoded media frames
+	events     chan wsMessage // non-media events (mark, stop, dtmf)
+	stopReader chan struct{}  // closed to terminate reader goroutine
+
+	mu sync.Mutex
 }
 
 // sessions is a package-level registry of active voice sessions.
@@ -170,8 +185,17 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 
 	sessionsMu.Lock()
 	sess, exists := sessions[sessionID]
+
+	// If the session existed but was closed (call ended), return clean exit
+	if exists && sess.closed {
+		sessionsMu.Unlock()
+		dur := int(time.Since(sess.startedAt).Seconds())
+		removeSession(sessionID)
+		return exitResult(sess.turnCount, dur, sess.callSID, sess.streamSID), nil
+	}
+
 	if !exists {
-		// First iteration — establish WebSocket connection
+		// First iteration -- establish WebSocket connection
 		ctx := flow.GetContext()
 		if ctx == nil || ctx.APIURL == "" {
 			sessionsMu.Unlock()
@@ -180,7 +204,7 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 
 		wsURL := buildWSURL(ctx.APIURL, sessionID)
 		dialer := websocket.Dialer{
-			TLSClientConfig: nil, // Will be set from transport
+			TLSClientConfig:  nil,
 			HandshakeTimeout: 15 * time.Second,
 		}
 
@@ -202,19 +226,36 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 		}
 
 		sess = &activeSession{
-			conn:      conn,
-			vad:       twilio.NewVADWithConfig(silenceThresh, silenceDurMs, minSpeechMs),
-			startedAt: time.Now(),
-			maxTurns:  maxTurns,
-			maxDur:    time.Duration(maxDurSec) * time.Second,
-			bargeIn:   bargeIn,
+			conn:       conn,
+			vad:        twilio.NewVADWithConfig(silenceThresh, silenceDurMs, minSpeechMs),
+			startedAt:  time.Now(),
+			maxTurns:   maxTurns,
+			maxDur:     time.Duration(maxDurSec) * time.Second,
+			bargeIn:    bargeIn,
+			frames:     make(chan []byte, 500),  // ~10 seconds of 20ms frames
+			events:     make(chan wsMessage, 10), // mark, stop, etc.
+			stopReader: make(chan struct{}),
 		}
 		sessions[sessionID] = sess
 
-		// Wait for the "start" event to get streamSid and callSid
+		// Wait for the "start" event to get streamSid and callSid.
+		// For outbound calls this blocks until the callee answers.
 		if err := waitForStart(sess); err != nil {
 			sessionsMu.Unlock()
-			cleanupSession(sessionID)
+			removeSession(sessionID)
+
+			// Detect timeout or connection closure — these indicate the
+			// call was not answered or was rejected, not an internal error.
+			errStr := err.Error()
+			if strings.Contains(errStr, "timeout") || strings.Contains(errStr, "i/o timeout") {
+				log.WithField("session_id", sessionID).Info("call was not answered (timeout)")
+				return exitResult(0, 0, "", ""), nil
+			}
+			if strings.Contains(errStr, "close 1006") || strings.Contains(errStr, "EOF") || strings.Contains(errStr, "closed") {
+				log.WithField("session_id", sessionID).Info("call ended before media stream started")
+				return exitResult(0, 0, "", ""), nil
+			}
+
 			return exitResult(0, 0, "", ""), fmt.Errorf("failed to receive start event: %w", err)
 		}
 
@@ -222,7 +263,11 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 			"session_id": sessionID,
 			"stream_sid": sess.streamSID,
 			"call_sid":   sess.callSID,
+			"barge_in":   bargeIn,
 		}).Info("voice session established")
+
+		// Start background reader goroutine
+		go sess.readLoop()
 
 		// Play greeting audio if provided (before first listen)
 		greetingB64 := optStr("greeting_audio_base64", inputs)
@@ -243,37 +288,149 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	sessionsMu.Unlock()
 
 	sess.mu.Lock()
-	defer sess.mu.Unlock()
 
 	// Check termination conditions
 	if sess.closed {
+		sess.mu.Unlock()
 		return exitResult(sess.turnCount, int(time.Since(sess.startedAt).Seconds()), sess.callSID, sess.streamSID), nil
 	}
 	if sess.turnCount >= sess.maxTurns {
+		sess.mu.Unlock()
 		cleanupSession(sessionID)
 		return exitResult(sess.turnCount, int(time.Since(sess.startedAt).Seconds()), sess.callSID, sess.streamSID), nil
 	}
 	if time.Since(sess.startedAt) >= sess.maxDur {
+		sess.mu.Unlock()
 		cleanupSession(sessionID)
 		return exitResult(sess.turnCount, int(time.Since(sess.startedAt).Seconds()), sess.callSID, sess.streamSID), nil
 	}
 
-	// Collect speech audio via VAD
+	// Check for barge-in that occurred during subgraph execution.
+	// The background reader detected speech and buffered it -- return immediately.
+	if sess.bargedIn && len(sess.bargeAudio) > 0 {
+		sess.turnCount++
+		audio := sess.bargeAudio
+		sess.bargedIn = false
+		sess.bargeAudio = nil
+		sess.mu.Unlock()
+
+		log.WithFields(log.Fields{
+			"session_id":  sessionID,
+			"turn":        sess.turnCount,
+			"audio_bytes": len(audio),
+		}).Info("returning barge-in speech from subgraph phase")
+
+		wavAudio := twilio.WrapMulawInWAV(audio)
+		encoded := base64.StdEncoding.EncodeToString(wavAudio)
+		return continueResult(sess, encoded), nil
+	}
+	// Clear any stale barge-in state
+	sess.bargedIn = false
+	sess.bargeAudio = nil
+	sess.mu.Unlock()
+
+	// Normal VAD listening -- read from background reader channels
 	sess.vad.Reset()
 	var audioBuffer []byte
 	maxBufferSize := 8000 * 60 // 60 seconds of mulaw at 8kHz
 
 	for {
-		sess.conn.SetReadDeadline(time.Now().Add(30 * time.Second))
-		_, rawMsg, err := sess.conn.ReadMessage()
+		select {
+		case frame, ok := <-sess.frames:
+			if !ok {
+				// Reader closed (connection lost)
+				sess.mu.Lock()
+				sess.closed = true
+				sess.mu.Unlock()
+				cleanupSession(sessionID)
+				return exitResult(sess.turnCount, int(time.Since(sess.startedAt).Seconds()), sess.callSID, sess.streamSID), nil
+			}
+
+			vadResult := sess.vad.ProcessFrame(frame)
+			if vadResult == twilio.VADSpeech || vadResult == twilio.VADEndOfSpeech {
+				audioBuffer = append(audioBuffer, frame...)
+			}
+
+			if vadResult == twilio.VADEndOfSpeech && len(audioBuffer) > 0 {
+				sess.mu.Lock()
+				sess.turnCount++
+				tc := sess.turnCount
+				sess.mu.Unlock()
+
+				log.WithFields(log.Fields{
+					"session_id":  sessionID,
+					"turn":        tc,
+					"audio_bytes": len(audioBuffer),
+				}).Debug("speech segment captured")
+
+				wavAudio := twilio.WrapMulawInWAV(audioBuffer)
+				encoded := base64.StdEncoding.EncodeToString(wavAudio)
+				return continueResult(sess, encoded), nil
+			}
+
+			// Prevent buffer overflow
+			if len(audioBuffer) >= maxBufferSize {
+				sess.mu.Lock()
+				sess.turnCount++
+				sess.mu.Unlock()
+
+				wavAudio := twilio.WrapMulawInWAV(audioBuffer)
+				encoded := base64.StdEncoding.EncodeToString(wavAudio)
+				return continueResult(sess, encoded), nil
+			}
+
+		case evt, ok := <-sess.events:
+			if !ok {
+				// Reader closed
+				sess.mu.Lock()
+				sess.closed = true
+				sess.mu.Unlock()
+				cleanupSession(sessionID)
+				return exitResult(sess.turnCount, int(time.Since(sess.startedAt).Seconds()), sess.callSID, sess.streamSID), nil
+			}
+			if evt.Event == "stop" {
+				sess.mu.Lock()
+				sess.closed = true
+				sess.mu.Unlock()
+				cleanupSession(sessionID)
+				return exitResult(sess.turnCount, int(time.Since(sess.startedAt).Seconds()), sess.callSID, sess.streamSID), nil
+			}
+			// mark during listening -- ignore (playback already complete)
+		}
+	}
+}
+
+// readLoop is the background reader goroutine. It continuously reads
+// WebSocket messages and dispatches them to the frames/events channels.
+// When barge-in is enabled and audio is playing, it detects speech and
+// buffers it, sending a "clear" event to interrupt Twilio playback.
+func (s *activeSession) readLoop() {
+	defer func() {
+		// Close channels to unblock any waiting Execute() calls
+		close(s.frames)
+		close(s.events)
+	}()
+
+	for {
+		select {
+		case <-s.stopReader:
+			return
+		default:
+		}
+
+		s.conn.SetReadDeadline(time.Now().Add(30 * time.Second))
+		_, rawMsg, err := s.conn.ReadMessage()
 		if err != nil {
-			log.WithFields(log.Fields{
-				"session_id": sessionID,
-				"error":      err,
-			}).Warn("voice session WebSocket read error")
-			sess.closed = true
-			cleanupSession(sessionID)
-			return exitResult(sess.turnCount, int(time.Since(sess.startedAt).Seconds()), sess.callSID, sess.streamSID), nil
+			s.mu.Lock()
+			s.closed = true
+			s.mu.Unlock()
+
+			// Send synthetic stop event so Execute() unblocks
+			select {
+			case s.events <- wsMessage{Event: "stop"}:
+			default:
+			}
+			return
 		}
 
 		var msg wsMessage
@@ -287,72 +444,89 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 				continue
 			}
 			audioData, err := base64.StdEncoding.DecodeString(msg.Media.Payload)
-			if err != nil {
+			if err != nil || len(audioData) == 0 {
 				continue
 			}
 
-			vadResult := sess.vad.ProcessFrame(audioData)
-			if vadResult == twilio.VADSpeech || vadResult == twilio.VADEndOfSpeech {
-				audioBuffer = append(audioBuffer, audioData...)
+			s.mu.Lock()
+			// During playback with barge-in enabled: check for speech
+			if s.bargeIn && s.playing {
+				energy := twilio.MulawEnergy(audioData)
+				if energy >= s.vad.SilenceThreshold {
+					// Barge-in detected -- clear playback immediately
+					if err := s.clearPlaybackLocked(); err != nil {
+						log.WithField("error", err).Warn("failed to send clear for barge-in")
+					}
+					s.playing = false
+					s.bargedIn = true
+					s.bargeAudio = append(s.bargeAudio, audioData...)
+					s.mu.Unlock()
+
+					log.Debug("barge-in: speech detected during playback, clearing")
+					continue
+				}
+				// Below threshold during playback -- discard
+				s.mu.Unlock()
+				continue
 			}
 
-			if vadResult == twilio.VADEndOfSpeech && len(audioBuffer) > 0 {
-				// Speech segment complete
-				sess.turnCount++
-				wavAudio := twilio.WrapMulawInWAV(audioBuffer)
-				encoded := base64.StdEncoding.EncodeToString(wavAudio)
-				return map[string]interface{}{
-					"result":             true,
-					"voice_audio_base64": encoded,
-					"voice_audio_format": "wav_ulaw_8000",
-					"turn_number":        int64(sess.turnCount),
-					"current_index":      int64(sess.turnCount - 1),
-					"iterations":         int64(sess.turnCount),
-					"max_iterations":     int64(sess.maxTurns),
-					"call_duration":      int64(time.Since(sess.startedAt).Seconds()),
-					"total_turns":        int64(sess.turnCount),
-					"call_sid":           sess.callSID,
-					"stream_sid":         sess.streamSID,
-				}, nil
+			// During playback without barge-in: discard caller audio
+			if s.playing {
+				s.mu.Unlock()
+				continue
 			}
 
-			// Prevent buffer overflow
-			if len(audioBuffer) >= maxBufferSize {
-				sess.turnCount++
-				wavAudio := twilio.WrapMulawInWAV(audioBuffer)
-				encoded := base64.StdEncoding.EncodeToString(wavAudio)
-				return map[string]interface{}{
-					"result":             true,
-					"voice_audio_base64": encoded,
-					"voice_audio_format": "wav_ulaw_8000",
-					"turn_number":        int64(sess.turnCount),
-					"current_index":      int64(sess.turnCount - 1),
-					"iterations":         int64(sess.turnCount),
-					"max_iterations":     int64(sess.maxTurns),
-					"call_duration":      int64(time.Since(sess.startedAt).Seconds()),
-					"total_turns":        int64(sess.turnCount),
-					"call_sid":           sess.callSID,
-					"stream_sid":         sess.streamSID,
-				}, nil
+			// Barge-in already triggered: continue buffering speech
+			if s.bargedIn {
+				s.bargeAudio = append(s.bargeAudio, audioData...)
+				// Cap barge-in buffer at 10 seconds
+				if len(s.bargeAudio) > 8000*10 {
+					s.mu.Unlock()
+					continue
+				}
+				s.mu.Unlock()
+				continue
+			}
+			s.mu.Unlock()
+
+			// Normal frame -- send to Execute() via channel
+			select {
+			case s.frames <- audioData:
+			case <-s.stopReader:
+				return
+			}
+
+		case "mark":
+			s.mu.Lock()
+			s.playing = false
+			s.mu.Unlock()
+
+			select {
+			case s.events <- msg:
+			case <-s.stopReader:
+				return
 			}
 
 		case "stop":
-			sess.closed = true
-			cleanupSession(sessionID)
-			return exitResult(sess.turnCount, int(time.Since(sess.startedAt).Seconds()), sess.callSID, sess.streamSID), nil
+			s.mu.Lock()
+			s.closed = true
+			s.mu.Unlock()
+
+			select {
+			case s.events <- msg:
+			case <-s.stopReader:
+				return
+			}
 
 		case "dtmf":
 			// TODO: handle DTMF input in future phase
-			continue
-
-		case "mark":
-			// Playback completed — continue listening
 			continue
 		}
 	}
 }
 
 // waitForStart reads WebSocket messages until the "start" event arrives.
+// Called before the background reader starts.
 func waitForStart(sess *activeSession) error {
 	sess.conn.SetReadDeadline(time.Now().Add(15 * time.Second))
 	for {
@@ -381,6 +555,31 @@ func waitForStart(sess *activeSession) error {
 	}
 }
 
+// continueResult builds the output map for a successful speech capture.
+func continueResult(sess *activeSession, encodedAudio string) map[string]interface{} {
+	sess.mu.Lock()
+	tc := sess.turnCount
+	mt := sess.maxTurns
+	dur := int64(time.Since(sess.startedAt).Seconds())
+	callSID := sess.callSID
+	streamSID := sess.streamSID
+	sess.mu.Unlock()
+
+	return map[string]interface{}{
+		"result":             true,
+		"voice_audio_base64": encodedAudio,
+		"voice_audio_format": "wav_ulaw_8000",
+		"turn_number":        int64(tc),
+		"current_index":      int64(tc - 1),
+		"iterations":         int64(tc),
+		"max_iterations":     int64(mt),
+		"call_duration":      dur,
+		"total_turns":        int64(tc),
+		"call_sid":           callSID,
+		"stream_sid":         streamSID,
+	}
+}
+
 // exitResult returns outputs that signal the loop should stop.
 func exitResult(turns, duration int, callSID, streamSID string) map[string]interface{} {
 	return map[string]interface{}{
@@ -401,17 +600,40 @@ func exitResult(turns, duration int, callSID, streamSID string) map[string]inter
 // CleanupSessionByID closes the WebSocket and removes the session from the registry.
 // Exported for use by the end_call action.
 func CleanupSessionByID(sessionID string) {
-	cleanupSession(sessionID)
+	removeSession(sessionID)
 }
 
-// cleanupSession closes the WebSocket and removes the session from the registry.
+// cleanupSession closes the WebSocket but keeps the session in the registry
+// (marked as closed) so the next Execute() call can detect the closed state
+// and return a clean exit result instead of trying to reconnect.
 func cleanupSession(sessionID string) {
 	sessionsMu.Lock()
 	defer sessionsMu.Unlock()
 	if sess, ok := sessions[sessionID]; ok {
-		_ = sess.conn.Close()
-		delete(sessions, sessionID)
+		sess.mu.Lock()
+		alreadyClosed := sess.closed
+		sess.closed = true
+		sess.mu.Unlock()
+
+		if !alreadyClosed {
+			// Stop the background reader
+			select {
+			case <-sess.stopReader:
+			default:
+				close(sess.stopReader)
+			}
+			_ = sess.conn.Close()
+		}
 	}
+}
+
+// removeSession removes the session from the registry entirely.
+// Called by CleanupSessionByID (end_call) for explicit termination.
+func removeSession(sessionID string) {
+	cleanupSession(sessionID)
+	sessionsMu.Lock()
+	defer sessionsMu.Unlock()
+	delete(sessions, sessionID)
 }
 
 // GetSession returns an active session by ID (used by send_audio action).
@@ -421,6 +643,25 @@ func GetSession(sessionID string) *activeSession {
 	return sessions[sessionID]
 }
 
+// GetAnyActiveSessionID returns the session ID of any active session.
+// Used as a fallback when session_id cannot be resolved from inputs.
+func GetAnyActiveSessionID() string {
+	sessionsMu.Lock()
+	defer sessionsMu.Unlock()
+	for id := range sessions {
+		return id
+	}
+	return ""
+}
+
+// BargedIn returns true if a barge-in was detected during subgraph execution.
+// Used by the send_audio action to skip sending audio when the caller has interrupted.
+func (s *activeSession) BargedIn() bool {
+	s.mu.Lock()
+	defer s.mu.Unlock()
+	return s.bargedIn
+}
+
 // SendAudioToStream sends mulaw audio data back to the caller via the WebSocket.
 func (s *activeSession) SendAudioToStream(audioData []byte) error {
 	s.mu.Lock()
@@ -428,6 +669,11 @@ func (s *activeSession) SendAudioToStream(audioData []byte) error {
 
 	if s.closed || s.conn == nil {
 		return fmt.Errorf("session is closed")
+	}
+
+	// If a barge-in already occurred, skip sending
+	if s.bargedIn {
+		return nil
 	}
 
 	// Strip WAV headers if present
@@ -460,14 +706,26 @@ func (s *activeSession) SendAudioToStream(audioData []byte) error {
 		},
 	}
 	markData, _ := json.Marshal(markMsg)
-	return s.conn.WriteMessage(websocket.TextMessage, markData)
+	if err := s.conn.WriteMessage(websocket.TextMessage, markData); err != nil {
+		return fmt.Errorf("failed to send mark: %w", err)
+	}
+
+	// Signal that audio is now playing -- the background reader will
+	// monitor for barge-in speech if enabled.
+	s.playing = true
+	return nil
 }
 
 // ClearPlayback sends a clear message to interrupt audio playback (barge-in).
 func (s *activeSession) ClearPlayback() error {
 	s.mu.Lock()
 	defer s.mu.Unlock()
+	return s.clearPlaybackLocked()
+}
 
+// clearPlaybackLocked sends a clear event without acquiring s.mu.
+// The caller must already hold the lock.
+func (s *activeSession) clearPlaybackLocked() error {
 	if s.closed || s.conn == nil {
 		return nil
 	}
