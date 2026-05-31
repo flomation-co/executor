@@ -122,6 +122,10 @@ import (
 	linear_list_workflow_states "flomation.app/automate/executor/actions/linear/list_workflow_states"
 	linear_search_issues "flomation.app/automate/executor/actions/linear/search_issues"
 	linear_update_issue "flomation.app/automate/executor/actions/linear/update_issue"
+	makefile_get_variable "flomation.app/automate/executor/actions/makefile/get_variable"
+	makefile_list_targets "flomation.app/automate/executor/actions/makefile/list_targets"
+	makefile_run_target "flomation.app/automate/executor/actions/makefile/run_target"
+	makefile_validate "flomation.app/automate/executor/actions/makefile/validate"
 	messaging_email "flomation.app/automate/executor/actions/messaging/email"
 	messaging_slack "flomation.app/automate/executor/actions/messaging/slack"
 	messaging_telegram "flomation.app/automate/executor/actions/messaging/telegram"
@@ -357,6 +361,10 @@ var Actions = map[string]core.Action{
 	"linear/list_workflow_states":         linear_list_workflow_states.Execute,
 	"linear/search_issues":                linear_search_issues.Execute,
 	"linear/update_issue":                 linear_update_issue.Execute,
+	"makefile/get_variable":               makefile_get_variable.Execute,
+	"makefile/list_targets":               makefile_list_targets.Execute,
+	"makefile/run_target":                 makefile_run_target.Execute,
+	"makefile/validate":                   makefile_validate.Execute,
 	"messaging/email":                     messaging_email.Execute,
 	"messaging/slack":                     messaging_slack.Execute,
 	"messaging/telegram":                  messaging_telegram.Execute,
