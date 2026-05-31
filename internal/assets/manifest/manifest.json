@@ -10941,6 +10941,319 @@
       }
     ]
   },
+  "makefile/get_variable": {
+    "hash": "a0f08e0838bb6382358cfdcc3f80890cc998321f71815d5bd259ff4cb442f2b0",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Get Make Variable",
+    "description": "Extract a variable value from a Makefile",
+    "website": "https://www.flomation.co",
+    "icon": "gears",
+    "date": "31/05/2026",
+    "type": 2,
+    "category": {
+      "name": "Makefile",
+      "icon": "gears",
+      "description": "Parse and execute Makefile targets"
+    },
+    "inputs": [
+      {
+        "name": "variable",
+        "type": "string",
+        "value": null,
+        "label": "Variable Name",
+        "placeholder": "CC",
+        "required": true
+      },
+      {
+        "name": "working_directory",
+        "type": "string",
+        "value": null,
+        "label": "Working Directory",
+        "placeholder": "/path/to/project"
+      },
+      {
+        "name": "makefile_path",
+        "type": "string",
+        "value": null,
+        "label": "Makefile Path",
+        "placeholder": "Makefile"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "value",
+        "type": "string",
+        "value": null,
+        "label": "Variable Value",
+        "placeholder": ""
+      },
+      {
+        "name": "found",
+        "type": "boolean",
+        "value": null,
+        "label": "Found",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      }
+    ]
+  },
+  "makefile/list_targets": {
+    "hash": "4619b784e6c217870b12ca518a8d9a022e0eafa2960f5d5f3ecf2396e5722d0d",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "List Make Targets",
+    "description": "List all targets defined in a Makefile",
+    "website": "https://www.flomation.co",
+    "icon": "gears",
+    "date": "31/05/2026",
+    "type": 2,
+    "category": {
+      "name": "Makefile",
+      "icon": "gears",
+      "description": "Parse and execute Makefile targets"
+    },
+    "inputs": [
+      {
+        "name": "working_directory",
+        "type": "string",
+        "value": null,
+        "label": "Working Directory",
+        "placeholder": "/path/to/project"
+      },
+      {
+        "name": "makefile_path",
+        "type": "string",
+        "value": null,
+        "label": "Makefile Path",
+        "placeholder": "Makefile"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "targets",
+        "type": "string",
+        "value": null,
+        "label": "Targets (JSON)",
+        "placeholder": ""
+      },
+      {
+        "name": "target_names",
+        "type": "string",
+        "value": null,
+        "label": "Target Names (comma-separated)",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Target Count",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      }
+    ]
+  },
+  "makefile/run_target": {
+    "hash": "06b5a85be76ba48f9636fe8f785c8308fee3d3c9ea86002af6864e623a15e12b",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Run Make Target",
+    "description": "Execute a Makefile target",
+    "website": "https://www.flomation.co",
+    "icon": "gears",
+    "date": "31/05/2026",
+    "type": 2,
+    "category": {
+      "name": "Makefile",
+      "icon": "gears",
+      "description": "Parse and execute Makefile targets"
+    },
+    "inputs": [
+      {
+        "name": "target",
+        "type": "string",
+        "value": null,
+        "label": "Target",
+        "placeholder": "build",
+        "required": true
+      },
+      {
+        "name": "working_directory",
+        "type": "string",
+        "value": null,
+        "label": "Working Directory",
+        "placeholder": "/path/to/project"
+      },
+      {
+        "name": "makefile_path",
+        "type": "string",
+        "value": null,
+        "label": "Makefile Path",
+        "placeholder": "Makefile"
+      },
+      {
+        "name": "variables",
+        "type": "string",
+        "value": null,
+        "label": "Variables",
+        "placeholder": "CC=gcc CFLAGS=-O2"
+      },
+      {
+        "name": "timeout_seconds",
+        "type": "integer",
+        "value": null,
+        "label": "Timeout (seconds)",
+        "placeholder": "120"
+      },
+      {
+        "name": "dry_run",
+        "type": "boolean",
+        "value": null,
+        "label": "Dry Run",
+        "placeholder": ""
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "stdout",
+        "type": "string",
+        "value": null,
+        "label": "Standard Output",
+        "placeholder": ""
+      },
+      {
+        "name": "stderr",
+        "type": "string",
+        "value": null,
+        "label": "Standard Error",
+        "placeholder": ""
+      },
+      {
+        "name": "exit_code",
+        "type": "integer",
+        "value": null,
+        "label": "Exit Code",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      }
+    ]
+  },
+  "makefile/validate": {
+    "hash": "3a371a68ccc4951bebde38e27417a1066019b73c0d3592acdcfda9b800eaa468",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Validate Makefile",
+    "description": "Check a Makefile for syntax errors",
+    "website": "https://www.flomation.co",
+    "icon": "gears",
+    "date": "31/05/2026",
+    "type": 2,
+    "category": {
+      "name": "Makefile",
+      "icon": "gears",
+      "description": "Parse and execute Makefile targets"
+    },
+    "inputs": [
+      {
+        "name": "working_directory",
+        "type": "string",
+        "value": null,
+        "label": "Working Directory",
+        "placeholder": "/path/to/project"
+      },
+      {
+        "name": "makefile_path",
+        "type": "string",
+        "value": null,
+        "label": "Makefile Path",
+        "placeholder": "Makefile"
+      },
+      {
+        "name": "target",
+        "type": "string",
+        "value": null,
+        "label": "Target to Validate",
+        "placeholder": "all"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "valid",
+        "type": "boolean",
+        "value": null,
+        "label": "Valid",
+        "placeholder": ""
+      },
+      {
+        "name": "errors",
+        "type": "string",
+        "value": null,
+        "label": "Errors",
+        "placeholder": ""
+      },
+      {
+        "name": "commands",
+        "type": "string",
+        "value": null,
+        "label": "Commands (dry run output)",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      }
+    ]
+  },
   "messaging/email": {
     "hash": "f5838101995bc24b7ca1caec4ad9b235b799b6f78930e80bc5a1888e292d763c",
     "author": "Andy Esser",
