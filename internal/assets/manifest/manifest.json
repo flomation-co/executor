@@ -9611,6 +9611,1111 @@
       }
     ]
   },
+  "google/drive/create_folder": {
+    "hash": "b8b9cedfe6fba00e436cd5799bf9bdb770003763b1651e57de1c3ef0902dc7e9",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Create Drive Folder",
+    "description": "Create a new folder in Google Drive",
+    "website": "https://www.flomation.co",
+    "icon": "folder",
+    "date": "01/06/2026",
+    "type": 2,
+    "category": {
+      "name": "Google",
+      "icon": "google",
+      "description": "Google Workspace integrations"
+    },
+    "sub_category": {
+      "name": "Drive",
+      "icon": "folder",
+      "description": "Google Drive file storage and management"
+    },
+    "inputs": [
+      {
+        "name": "name",
+        "type": "string",
+        "value": null,
+        "label": "Folder Name",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "parent_folder_id",
+        "type": "string",
+        "value": null,
+        "label": "Parent Folder ID",
+        "placeholder": "root"
+      },
+      {
+        "name": "account",
+        "type": "string",
+        "value": null,
+        "label": "Google Account (email)",
+        "placeholder": ""
+      },
+      {
+        "name": "credential",
+        "type": "string",
+        "value": null,
+        "label": "Google OAuth Credential",
+        "placeholder": "${credentials.GOOGLE_DRIVE}"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "folder_id",
+        "type": "string",
+        "value": null,
+        "label": "Folder ID",
+        "placeholder": ""
+      },
+      {
+        "name": "web_link",
+        "type": "string",
+        "value": null,
+        "label": "Web Link",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "google/drive/download": {
+    "hash": "f52bff9e27a1d76f71843a9ecfc35ced38dc17fdae99e5a6268b2da1457053bf",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Download Drive File",
+    "description": "Download or export a file from Google Drive",
+    "website": "https://www.flomation.co",
+    "icon": "folder",
+    "date": "01/06/2026",
+    "type": 2,
+    "category": {
+      "name": "Google",
+      "icon": "google",
+      "description": "Google Workspace integrations"
+    },
+    "sub_category": {
+      "name": "Drive",
+      "icon": "folder",
+      "description": "Google Drive file storage and management"
+    },
+    "inputs": [
+      {
+        "name": "file_id",
+        "type": "string",
+        "value": null,
+        "label": "File ID",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "export_format",
+        "type": "string",
+        "value": null,
+        "label": "Export Format (for Google files)",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "Plain Text",
+            "value": "text"
+          },
+          {
+            "name": "PDF",
+            "value": "pdf"
+          },
+          {
+            "name": "CSV (Sheets)",
+            "value": "csv"
+          },
+          {
+            "name": "DOCX (Docs)",
+            "value": "docx"
+          },
+          {
+            "name": "XLSX (Sheets)",
+            "value": "xlsx"
+          },
+          {
+            "name": "HTML",
+            "value": "html"
+          }
+        ]
+      },
+      {
+        "name": "account",
+        "type": "string",
+        "value": null,
+        "label": "Google Account (email)",
+        "placeholder": ""
+      },
+      {
+        "name": "credential",
+        "type": "string",
+        "value": null,
+        "label": "Google OAuth Credential",
+        "placeholder": "${credentials.GOOGLE_DRIVE}"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "content",
+        "type": "string",
+        "value": null,
+        "label": "File Content",
+        "placeholder": ""
+      },
+      {
+        "name": "content_base64",
+        "type": "string",
+        "value": null,
+        "label": "Content (base64, for binary)",
+        "placeholder": ""
+      },
+      {
+        "name": "mime_type",
+        "type": "string",
+        "value": null,
+        "label": "Content MIME Type",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "google/drive/get_file": {
+    "hash": "f8e92a13055f9e40b83a186aa167a93ad04a94c63d02f2c5f79e503bbd5e1709",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Get Drive File",
+    "description": "Get metadata for a Google Drive file",
+    "website": "https://www.flomation.co",
+    "icon": "folder",
+    "date": "01/06/2026",
+    "type": 2,
+    "category": {
+      "name": "Google",
+      "icon": "google",
+      "description": "Google Workspace integrations"
+    },
+    "sub_category": {
+      "name": "Drive",
+      "icon": "folder",
+      "description": "Google Drive file storage and management"
+    },
+    "inputs": [
+      {
+        "name": "file_id",
+        "type": "string",
+        "value": null,
+        "label": "File ID",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "account",
+        "type": "string",
+        "value": null,
+        "label": "Google Account (email)",
+        "placeholder": ""
+      },
+      {
+        "name": "credential",
+        "type": "string",
+        "value": null,
+        "label": "Google OAuth Credential",
+        "placeholder": "${credentials.GOOGLE_DRIVE}"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "file",
+        "type": "string",
+        "value": null,
+        "label": "File Metadata (JSON)",
+        "placeholder": ""
+      },
+      {
+        "name": "name",
+        "type": "string",
+        "value": null,
+        "label": "File Name",
+        "placeholder": ""
+      },
+      {
+        "name": "mime_type",
+        "type": "string",
+        "value": null,
+        "label": "MIME Type",
+        "placeholder": ""
+      },
+      {
+        "name": "size",
+        "type": "string",
+        "value": null,
+        "label": "File Size",
+        "placeholder": ""
+      },
+      {
+        "name": "web_link",
+        "type": "string",
+        "value": null,
+        "label": "Web Link",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "google/drive/list_files": {
+    "hash": "41bbbd2cdabc567b7b2f88f02564fc45cf9f0ef8b2a93a274c3d033ade62b52b",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "List Drive Files",
+    "description": "List files and folders in Google Drive",
+    "website": "https://www.flomation.co",
+    "icon": "folder",
+    "date": "01/06/2026",
+    "type": 2,
+    "category": {
+      "name": "Google",
+      "icon": "google",
+      "description": "Google Workspace integrations"
+    },
+    "sub_category": {
+      "name": "Drive",
+      "icon": "folder",
+      "description": "Google Drive file storage and management"
+    },
+    "inputs": [
+      {
+        "name": "folder_id",
+        "type": "string",
+        "value": null,
+        "label": "Folder ID",
+        "placeholder": "root"
+      },
+      {
+        "name": "query",
+        "type": "string",
+        "value": null,
+        "label": "Drive Query Filter",
+        "placeholder": "name contains 'report'"
+      },
+      {
+        "name": "max_results",
+        "type": "integer",
+        "value": null,
+        "label": "Max Results",
+        "placeholder": "20"
+      },
+      {
+        "name": "include_trashed",
+        "type": "boolean",
+        "value": null,
+        "label": "Include Trashed",
+        "placeholder": ""
+      },
+      {
+        "name": "account",
+        "type": "string",
+        "value": null,
+        "label": "Google Account (email)",
+        "placeholder": ""
+      },
+      {
+        "name": "credential",
+        "type": "string",
+        "value": null,
+        "label": "Google OAuth Credential",
+        "placeholder": "${credentials.GOOGLE_DRIVE}"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "files",
+        "type": "string",
+        "value": null,
+        "label": "Files (JSON)",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "File Count",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "google/drive/search": {
+    "hash": "a9de361237e06b674396f44378f006ebf999debe2f0ae5f002fc01d649144359",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Search Drive",
+    "description": "Search for files in Google Drive",
+    "website": "https://www.flomation.co",
+    "icon": "folder",
+    "date": "01/06/2026",
+    "type": 2,
+    "category": {
+      "name": "Google",
+      "icon": "google",
+      "description": "Google Workspace integrations"
+    },
+    "sub_category": {
+      "name": "Drive",
+      "icon": "folder",
+      "description": "Google Drive file storage and management"
+    },
+    "inputs": [
+      {
+        "name": "name",
+        "type": "string",
+        "value": null,
+        "label": "File Name (contains)",
+        "placeholder": "report"
+      },
+      {
+        "name": "mime_type",
+        "type": "string",
+        "value": null,
+        "label": "File Type",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "Any",
+            "value": ""
+          },
+          {
+            "name": "Document",
+            "value": "document"
+          },
+          {
+            "name": "Spreadsheet",
+            "value": "spreadsheet"
+          },
+          {
+            "name": "Presentation",
+            "value": "presentation"
+          },
+          {
+            "name": "Folder",
+            "value": "folder"
+          },
+          {
+            "name": "PDF",
+            "value": "pdf"
+          }
+        ]
+      },
+      {
+        "name": "content",
+        "type": "string",
+        "value": null,
+        "label": "Content Contains",
+        "placeholder": "keyword"
+      },
+      {
+        "name": "max_results",
+        "type": "integer",
+        "value": null,
+        "label": "Max Results",
+        "placeholder": "20"
+      },
+      {
+        "name": "account",
+        "type": "string",
+        "value": null,
+        "label": "Google Account (email)",
+        "placeholder": ""
+      },
+      {
+        "name": "credential",
+        "type": "string",
+        "value": null,
+        "label": "Google OAuth Credential",
+        "placeholder": "${credentials.GOOGLE_DRIVE}"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "files",
+        "type": "string",
+        "value": null,
+        "label": "Files (JSON)",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "File Count",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "google/drive/upload": {
+    "hash": "4e20b23d4efaae846b6a1ff11203d0ad2f7791c1ef58dc3999dbe01d301672ca",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Upload to Drive",
+    "description": "Upload a file to Google Drive",
+    "website": "https://www.flomation.co",
+    "icon": "folder",
+    "date": "01/06/2026",
+    "type": 2,
+    "category": {
+      "name": "Google",
+      "icon": "google",
+      "description": "Google Workspace integrations"
+    },
+    "sub_category": {
+      "name": "Drive",
+      "icon": "folder",
+      "description": "Google Drive file storage and management"
+    },
+    "inputs": [
+      {
+        "name": "name",
+        "type": "string",
+        "value": null,
+        "label": "File Name",
+        "placeholder": "report.txt",
+        "required": true
+      },
+      {
+        "name": "content",
+        "type": "text",
+        "value": null,
+        "label": "Text Content",
+        "placeholder": ""
+      },
+      {
+        "name": "base64_content",
+        "type": "string",
+        "value": null,
+        "label": "Binary Content (base64)",
+        "placeholder": ""
+      },
+      {
+        "name": "mime_type",
+        "type": "string",
+        "value": null,
+        "label": "MIME Type",
+        "placeholder": "text/plain"
+      },
+      {
+        "name": "folder_id",
+        "type": "string",
+        "value": null,
+        "label": "Destination Folder ID",
+        "placeholder": ""
+      },
+      {
+        "name": "account",
+        "type": "string",
+        "value": null,
+        "label": "Google Account (email)",
+        "placeholder": ""
+      },
+      {
+        "name": "credential",
+        "type": "string",
+        "value": null,
+        "label": "Google OAuth Credential",
+        "placeholder": "${credentials.GOOGLE_DRIVE}"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "file_id",
+        "type": "string",
+        "value": null,
+        "label": "File ID",
+        "placeholder": ""
+      },
+      {
+        "name": "file",
+        "type": "string",
+        "value": null,
+        "label": "File Metadata (JSON)",
+        "placeholder": ""
+      },
+      {
+        "name": "web_link",
+        "type": "string",
+        "value": null,
+        "label": "Web Link",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "google/sheets/append": {
+    "hash": "f190af51fa3739ed5d00fabd2790367bbea9188f9b1617a625e8c9243d385173",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Append to Sheet",
+    "description": "Append rows to a Google Sheet",
+    "website": "https://www.flomation.co",
+    "icon": "table",
+    "date": "01/06/2026",
+    "type": 2,
+    "category": {
+      "name": "Google",
+      "icon": "google",
+      "description": "Google Workspace integrations"
+    },
+    "sub_category": {
+      "name": "Sheets",
+      "icon": "table",
+      "description": "Google Sheets spreadsheet operations"
+    },
+    "inputs": [
+      {
+        "name": "spreadsheet_id",
+        "type": "string",
+        "value": null,
+        "label": "Spreadsheet ID",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "range",
+        "type": "string",
+        "value": null,
+        "label": "Sheet/Range",
+        "placeholder": "Sheet1",
+        "required": true
+      },
+      {
+        "name": "data",
+        "type": "text",
+        "value": null,
+        "label": "Data (JSON 2D array)",
+        "placeholder": "[[\"Alice\",30],[\"Bob\",25]]",
+        "required": true
+      },
+      {
+        "name": "value_input",
+        "type": "string",
+        "value": null,
+        "label": "Value Input Option",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "User Entered (auto-format)",
+            "value": "USER_ENTERED"
+          },
+          {
+            "name": "Raw (as-is)",
+            "value": "RAW"
+          }
+        ]
+      },
+      {
+        "name": "account",
+        "type": "string",
+        "value": null,
+        "label": "Google Account (email)",
+        "placeholder": ""
+      },
+      {
+        "name": "credential",
+        "type": "string",
+        "value": null,
+        "label": "Google OAuth Credential",
+        "placeholder": "${credentials.GOOGLE_DRIVE}"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "updated_range",
+        "type": "string",
+        "value": null,
+        "label": "Updated Range",
+        "placeholder": ""
+      },
+      {
+        "name": "updated_rows",
+        "type": "integer",
+        "value": null,
+        "label": "Rows Appended",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "google/sheets/create": {
+    "hash": "f3d9af3ddfdd2692f606996369301bef51cefb5e2e431c72c848664b0a6a41ef",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Create Spreadsheet",
+    "description": "Create a new Google Sheets spreadsheet",
+    "website": "https://www.flomation.co",
+    "icon": "table",
+    "date": "01/06/2026",
+    "type": 2,
+    "category": {
+      "name": "Google",
+      "icon": "google",
+      "description": "Google Workspace integrations"
+    },
+    "sub_category": {
+      "name": "Sheets",
+      "icon": "table",
+      "description": "Google Sheets spreadsheet operations"
+    },
+    "inputs": [
+      {
+        "name": "title",
+        "type": "string",
+        "value": null,
+        "label": "Title",
+        "placeholder": "My Spreadsheet",
+        "required": true
+      },
+      {
+        "name": "sheet_names",
+        "type": "string",
+        "value": null,
+        "label": "Sheet Names (comma-separated)",
+        "placeholder": "Data, Summary"
+      },
+      {
+        "name": "account",
+        "type": "string",
+        "value": null,
+        "label": "Google Account (email)",
+        "placeholder": ""
+      },
+      {
+        "name": "credential",
+        "type": "string",
+        "value": null,
+        "label": "Google OAuth Credential",
+        "placeholder": "${credentials.GOOGLE_DRIVE}"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "spreadsheet_id",
+        "type": "string",
+        "value": null,
+        "label": "Spreadsheet ID",
+        "placeholder": ""
+      },
+      {
+        "name": "spreadsheet_url",
+        "type": "string",
+        "value": null,
+        "label": "Spreadsheet URL",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "google/sheets/read": {
+    "hash": "6a9ff5fe92926697d457e56980a7c89c2f3ab77349bc6ef3e6b70f04e02b7ab1",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Read Sheet",
+    "description": "Read a range of cells from a Google Sheet",
+    "website": "https://www.flomation.co",
+    "icon": "table",
+    "date": "01/06/2026",
+    "type": 2,
+    "category": {
+      "name": "Google",
+      "icon": "google",
+      "description": "Google Workspace integrations"
+    },
+    "sub_category": {
+      "name": "Sheets",
+      "icon": "table",
+      "description": "Google Sheets spreadsheet operations"
+    },
+    "inputs": [
+      {
+        "name": "spreadsheet_id",
+        "type": "string",
+        "value": null,
+        "label": "Spreadsheet ID",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "range",
+        "type": "string",
+        "value": null,
+        "label": "Range",
+        "placeholder": "Sheet1!A1:D10",
+        "required": true
+      },
+      {
+        "name": "value_render",
+        "type": "string",
+        "value": null,
+        "label": "Value Render Option",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "Formatted",
+            "value": "FORMATTED_VALUE"
+          },
+          {
+            "name": "Unformatted",
+            "value": "UNFORMATTED_VALUE"
+          },
+          {
+            "name": "Formula",
+            "value": "FORMULA"
+          }
+        ]
+      },
+      {
+        "name": "account",
+        "type": "string",
+        "value": null,
+        "label": "Google Account (email)",
+        "placeholder": ""
+      },
+      {
+        "name": "credential",
+        "type": "string",
+        "value": null,
+        "label": "Google OAuth Credential",
+        "placeholder": "${credentials.GOOGLE_DRIVE}"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "data",
+        "type": "string",
+        "value": null,
+        "label": "Data (JSON 2D array)",
+        "placeholder": ""
+      },
+      {
+        "name": "rows",
+        "type": "integer",
+        "value": null,
+        "label": "Row Count",
+        "placeholder": ""
+      },
+      {
+        "name": "columns",
+        "type": "integer",
+        "value": null,
+        "label": "Column Count",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "google/sheets/write": {
+    "hash": "ab555b2b7c49b97a39d0e5829d81a31251762108f7d050219cd1699499213f9c",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Write to Sheet",
+    "description": "Write data to a range in a Google Sheet",
+    "website": "https://www.flomation.co",
+    "icon": "table",
+    "date": "01/06/2026",
+    "type": 2,
+    "category": {
+      "name": "Google",
+      "icon": "google",
+      "description": "Google Workspace integrations"
+    },
+    "sub_category": {
+      "name": "Sheets",
+      "icon": "table",
+      "description": "Google Sheets spreadsheet operations"
+    },
+    "inputs": [
+      {
+        "name": "spreadsheet_id",
+        "type": "string",
+        "value": null,
+        "label": "Spreadsheet ID",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "range",
+        "type": "string",
+        "value": null,
+        "label": "Range",
+        "placeholder": "Sheet1!A1",
+        "required": true
+      },
+      {
+        "name": "data",
+        "type": "text",
+        "value": null,
+        "label": "Data (JSON 2D array)",
+        "placeholder": "[[\"Name\",\"Age\"],[\"Alice\",30]]",
+        "required": true
+      },
+      {
+        "name": "value_input",
+        "type": "string",
+        "value": null,
+        "label": "Value Input Option",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "User Entered (auto-format)",
+            "value": "USER_ENTERED"
+          },
+          {
+            "name": "Raw (as-is)",
+            "value": "RAW"
+          }
+        ]
+      },
+      {
+        "name": "account",
+        "type": "string",
+        "value": null,
+        "label": "Google Account (email)",
+        "placeholder": ""
+      },
+      {
+        "name": "credential",
+        "type": "string",
+        "value": null,
+        "label": "Google OAuth Credential",
+        "placeholder": "${credentials.GOOGLE_DRIVE}"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "updated_cells",
+        "type": "integer",
+        "value": null,
+        "label": "Updated Cells",
+        "placeholder": ""
+      },
+      {
+        "name": "updated_rows",
+        "type": "integer",
+        "value": null,
+        "label": "Updated Rows",
+        "placeholder": ""
+      },
+      {
+        "name": "updated_range",
+        "type": "string",
+        "value": null,
+        "label": "Updated Range",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
   "http/request": {
     "hash": "a4dfc20efa6503dc772abacf8d374e8d0028205b6fc7279072c444c7877855c0",
     "author": "Andy Esser",
