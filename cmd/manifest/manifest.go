@@ -194,6 +194,9 @@ func inspectPackage(dir string) map[string]ManifestEntry {
 						continue
 					}
 
+					if len(v.Values) == 0 {
+						continue
+					}
 					val, ok := v.Values[0].(*ast.BasicLit)
 					if !ok {
 

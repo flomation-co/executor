@@ -1,6 +1,7 @@
 package anthropic
 
 import (
+	"bufio"
 	"bytes"
 	"encoding/json"
 	"fmt"
@@ -79,6 +80,11 @@ var Inputs = [...]core.Connection{
 		Type:        core.ConnectionTypeObject,
 		Label:       "Conversation History",
 		Placeholder: "${conversation_history}",
+	},
+	{
+		Name:  "streaming",
+		Type:  core.ConnectionTypeBoolean,
+		Label: "Streaming (fires response per sentence for low-latency voice)",
 	},
 	{
 		// TEMPORARY: tool definitions as JSON. Will be replaced by
@@ -294,6 +300,15 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 		"messages":    messages,
 	}
 
+	log.WithFields(log.Fields{
+		"model":           model,
+		"max_tokens":      maxTokens,
+		"messages_count":  len(messages),
+		"tools_count":     len(tools),
+		"system_prompt_len": len(systemPromptStr),
+		"prompt_len":        len(prompt),
+	}).Info("[anthropic] building API request")
+
 	// System prompt: use structured content blocks with cache_control
 	// so repeated turns with the same system prompt hit the cache.
 	if systemPromptStr != "" {
@@ -316,6 +331,26 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 		payload["tools"] = tools
 	}
 
+	// Check streaming mode
+	streaming := false
+	streamConn := core.FindConnection("streaming", inputs)
+	if streamConn != nil && streamConn.String() != nil && *streamConn.String() == "true" {
+		streaming = true
+	}
+
+	// Streaming: only for final text responses (not tool re-invocations)
+	// and only when there are no tool definitions (tool calls need the
+	// full response to detect tool_use blocks).
+	isToolReinvocation := false
+	if _, hasResults := flow.GetVariable(core.ToolResultsKey); hasResults {
+		isToolReinvocation = true
+	}
+	useStreaming := streaming && !isToolReinvocation
+
+	if useStreaming {
+		payload["stream"] = true
+	}
+
 	body, err := json.Marshal(payload)
 	if err != nil {
 		return nil, fmt.Errorf("failed to marshal request: %w", err)
@@ -334,11 +369,10 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	if err != nil {
 		return nil, fmt.Errorf("Anthropic request failed: %w", err)
 	}
-	defer func() { _ = resp.Body.Close() }()
-
-	respBody, _ := io.ReadAll(io.LimitReader(resp.Body, maxResponseBody))
 
 	if resp.StatusCode != http.StatusOK {
+		defer func() { _ = resp.Body.Close() }()
+		respBody, _ := io.ReadAll(io.LimitReader(resp.Body, maxResponseBody))
 		var apiErr struct {
 			Error struct {
 				Message string `json:"message"`
@@ -351,6 +385,16 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 		}
 		return nil, fmt.Errorf("Anthropic API error (%d): %s", resp.StatusCode, errMsg)
 	}
+
+	// Streaming response: parse SSE events and emit sentences via channel.
+	// The goroutine owns resp.Body — it closes it when done.
+	if useStreaming {
+		return handleStreamingResponse(flow, resp, model, maxTokens)
+	}
+
+	// Non-streaming: read the full response body
+	defer func() { _ = resp.Body.Close() }()
+	respBody, _ := io.ReadAll(io.LimitReader(resp.Body, maxResponseBody))
 
 	var result struct {
 		Content []struct {
@@ -502,7 +546,13 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 			ai_common.RecordToolExchange(flow.GoContext(), flow.GetContext(), exchanges)
 			toolCallsCount = len(exchanges)
 		}
-		ai_common.RecordAssistantReply(flow.GoContext(), flow.GetContext(), content)
+		// Skip auto-recording for Twilio voice calls — the flow's
+		// Add to Conversation node handles message storage explicitly.
+		// Auto-recording here creates duplicate assistant messages.
+		ctx := flow.GetContext()
+		if ctx == nil || ctx.ChannelType != "twilio_voice" {
+			ai_common.RecordAssistantReply(flow.GoContext(), ctx, content)
+		}
 	}
 
 	return map[string]interface{}{
@@ -563,4 +613,244 @@ func estimateMessagesTokens(messages []interface{}) int {
 		return 0
 	}
 	return ai_common.ApproxTokens(string(b))
+}
+
+// handleStreamingResponse parses an Anthropic SSE stream, splits text
+// into sentences (emitted via channel for low-latency TTS), and accumulates
+// any tool_use blocks. After the stream completes, tool requests and the
+// full text are stored in flow variables for the executor to pick up.
+func handleStreamingResponse(flow *core.Flow, resp *http.Response, model string, maxTokens int64) (map[string]interface{}, error) {
+	ch := make(chan string, 10)
+
+	// Start streaming in a goroutine. The goroutine owns resp.Body.
+	go func() {
+		defer close(ch)
+		defer func() { _ = resp.Body.Close() }()
+
+		scanner := bufio.NewScanner(resp.Body)
+		scanner.Buffer(make([]byte, 64*1024), 256*1024)
+
+		var sentenceBuffer strings.Builder
+		var fullText strings.Builder
+		var toolRequests []core.ToolRequest
+
+		// Current tool_use accumulation state
+		var currentToolID, currentToolName string
+		var currentToolInput strings.Builder
+		inToolUse := false
+
+		var inputTokens, outputTokens int64
+		var stopReason, responseModel string
+
+		for scanner.Scan() {
+			line := scanner.Text()
+
+			if !strings.HasPrefix(line, "data: ") {
+				continue
+			}
+			data := strings.TrimPrefix(line, "data: ")
+			if data == "" {
+				continue
+			}
+
+			var event struct {
+				Type         string `json:"type"`
+				Index        int    `json:"index"`
+				ContentBlock *struct {
+					Type string `json:"type"`
+					ID   string `json:"id"`
+					Name string `json:"name"`
+				} `json:"content_block,omitempty"`
+				Delta *struct {
+					Type        string `json:"type"`
+					Text        string `json:"text"`
+					PartialJSON string `json:"partial_json"`
+					StopReason  string `json:"stop_reason"`
+				} `json:"delta,omitempty"`
+				Message *struct {
+					Model string `json:"model"`
+					Usage struct {
+						InputTokens  int64 `json:"input_tokens"`
+						OutputTokens int64 `json:"output_tokens"`
+					} `json:"usage"`
+				} `json:"message,omitempty"`
+				Usage *struct {
+					OutputTokens int64 `json:"output_tokens"`
+				} `json:"usage,omitempty"`
+			}
+
+			if err := json.Unmarshal([]byte(data), &event); err != nil {
+				continue
+			}
+
+			switch event.Type {
+			case "message_start":
+				if event.Message != nil {
+					responseModel = event.Message.Model
+					inputTokens = event.Message.Usage.InputTokens
+				}
+
+			case "content_block_start":
+				if event.ContentBlock != nil {
+					if event.ContentBlock.Type == "tool_use" {
+						// Flush any pending text before switching to tool mode
+						remaining := strings.TrimSpace(sentenceBuffer.String())
+						if remaining != "" {
+							ch <- remaining
+							sentenceBuffer.Reset()
+						}
+						inToolUse = true
+						currentToolID = event.ContentBlock.ID
+						currentToolName = event.ContentBlock.Name
+						currentToolInput.Reset()
+					} else {
+						inToolUse = false
+					}
+				}
+
+			case "content_block_delta":
+				if event.Delta == nil {
+					continue
+				}
+				if event.Delta.Type == "text_delta" && !inToolUse {
+					sentenceBuffer.WriteString(event.Delta.Text)
+					fullText.WriteString(event.Delta.Text)
+					emitSentences(&sentenceBuffer, ch)
+				} else if event.Delta.Type == "input_json_delta" && inToolUse {
+					currentToolInput.WriteString(event.Delta.PartialJSON)
+				}
+
+			case "content_block_stop":
+				if inToolUse && currentToolName != "" {
+					var input map[string]interface{}
+					if currentToolInput.Len() > 0 {
+						_ = json.Unmarshal([]byte(currentToolInput.String()), &input)
+					}
+					if input == nil {
+						input = make(map[string]interface{})
+					}
+					toolRequests = append(toolRequests, core.ToolRequest{
+						ID:    currentToolID,
+						Name:  currentToolName,
+						Input: input,
+					})
+					inToolUse = false
+					currentToolID = ""
+					currentToolName = ""
+					currentToolInput.Reset()
+				}
+
+			case "message_delta":
+				if event.Delta != nil && event.Delta.StopReason != "" {
+					stopReason = event.Delta.StopReason
+				}
+				if event.Usage != nil {
+					outputTokens = event.Usage.OutputTokens
+				}
+
+			case "message_stop":
+				remaining := strings.TrimSpace(sentenceBuffer.String())
+				if remaining != "" {
+					ch <- remaining
+				}
+			}
+		}
+
+		// Store results in flow variables for the executor to read
+		// after the channel is drained.
+		flow.SetVariable(core.StreamFullTextKey, fullText.String())
+		flow.SetVariable(core.StreamStopReasonKey, stopReason)
+		flow.SetVariable(core.StreamUsageKey, map[string]int64{
+			"input_tokens":  inputTokens,
+			"output_tokens": outputTokens,
+		})
+		if len(toolRequests) > 0 {
+			flow.SetVariable(core.StreamToolRequestsKey, toolRequests)
+		}
+		if responseModel != "" {
+			flow.SetVariable("__stream_model", responseModel)
+		}
+	}()
+
+	// Store the channel as a flow variable
+	flow.SetVariable(core.StreamSentencesKey, ch)
+
+	return map[string]interface{}{
+		core.StreamSentencesKey: true, // flag for executor
+		"response":             "",   // filled after channel drain
+		"response_mode":        "text",
+		"should_respond":       true,
+		"model":                model,
+		"input_tokens":         int64(0), // updated after stream
+		"output_tokens":        int64(0),
+		"stop_reason":          "",
+		"tool_calls_count":     int64(0),
+		"success":              true,
+		"error":                "",
+	}, nil
+}
+
+// emitSentences checks the buffer for complete sentences and sends them
+// to the channel. Returns the number of sentences emitted.
+func emitSentences(buf *strings.Builder, ch chan<- string) int {
+	text := buf.String()
+	emitted := 0
+
+	for {
+		idx := findSentenceBoundary(text)
+		if idx < 0 {
+			break
+		}
+
+		sentence := strings.TrimSpace(text[:idx+1])
+		if sentence != "" {
+			ch <- sentence
+			emitted++
+		}
+		text = text[idx+1:]
+	}
+
+	buf.Reset()
+	buf.WriteString(text)
+	return emitted
+}
+
+// findSentenceBoundary returns the index of the first sentence-ending
+// character (. ! ?) that's followed by a space, newline, or end of text.
+// Returns -1 if no boundary found. Handles common abbreviations.
+func findSentenceBoundary(text string) int {
+	for i := 0; i < len(text); i++ {
+		ch := text[i]
+		if ch != '.' && ch != '!' && ch != '?' {
+			continue
+		}
+
+		// Must be followed by whitespace or end of string
+		if i+1 < len(text) && text[i+1] != ' ' && text[i+1] != '\n' {
+			continue
+		}
+
+		// Skip common abbreviations (Mr. Mrs. Dr. etc.)
+		if ch == '.' && i >= 2 {
+			before := strings.ToLower(text[max(0, i-3) : i+1])
+			if strings.HasSuffix(before, "mr.") ||
+				strings.HasSuffix(before, "mrs.") ||
+				strings.HasSuffix(before, "ms.") ||
+				strings.HasSuffix(before, "dr.") ||
+				strings.HasSuffix(before, "st.") ||
+				strings.HasSuffix(before, "no.") {
+				continue
+			}
+		}
+
+		// Skip decimal numbers (3.14)
+		if ch == '.' && i > 0 && i+1 < len(text) {
+			if text[i-1] >= '0' && text[i-1] <= '9' && text[i+1] >= '0' && text[i+1] <= '9' {
+				continue
+			}
+		}
+
+		return i
+	}
+	return -1
 }

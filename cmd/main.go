@@ -232,6 +232,14 @@ func main() {
 		status = 1
 	}
 
+	// Voice calls: treat WebSocket-close errors as normal termination.
+	// The call ending is not a failure — it's the expected lifecycle.
+	if status == 1 && flo.GetContext() != nil && flo.GetContext().ChannelType == "twilio_voice" {
+		if err == nil || strings.Contains(err.Error(), "websocket") || strings.Contains(err.Error(), "WebSocket") || strings.Contains(err.Error(), "broken pipe") {
+			status = 0
+		}
+	}
+
 	duration := time.Since(start)
 
 	log.WithFields(log.Fields{

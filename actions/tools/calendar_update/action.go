@@ -81,6 +81,12 @@ var Inputs = [...]core.Connection{
 			{Name: "This and following", Value: "this_and_following"},
 		},
 	},
+	{
+		Name:        "credential",
+		Type:        core.ConnectionTypeString,
+		Label:       "Google OAuth Credential (optional, overrides user tokens)",
+		Placeholder: "${credentials.GOOGLE_CALENDAR}",
+	},
 }
 
 var Outputs = [...]core.Connection{
@@ -103,6 +109,7 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	}
 
 	accountFilter := optionalString("account", inputs)
+	credential := optionalString("credential", inputs)
 	scope := optionalString("scope", inputs)
 	if scope == "" {
 		scope = "this_instance"
@@ -112,14 +119,20 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	if ctx == nil || ctx.APIURL == "" {
 		return nil, fmt.Errorf("execution context with API URL is required")
 	}
-	if ctx.AgentUserID == "" {
-		return errResult("No user identity available")
+	if credential == "" && ctx.AgentUserID == "" {
+		return errResult("No user identity or credential available")
 	}
 
-	// Fetch tokens and pick account
-	tokens, err := fetchTokens(flow, ctx)
-	if err != nil {
-		return errResult(fmt.Sprintf("Failed to get calendar tokens: %v", err))
+	// Fetch tokens — from credential or connected user accounts
+	var tokens []tokenInfo
+	if credential != "" {
+		tokens = []tokenInfo{{Email: "credential", AccessToken: credential}}
+	} else {
+		var err error
+		tokens, err = fetchTokens(flow, ctx)
+		if err != nil {
+			return errResult(fmt.Sprintf("Failed to get calendar tokens: %v", err))
+		}
 	}
 
 	// For all_events or this_and_following on a recurring instance,

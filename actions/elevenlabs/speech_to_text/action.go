@@ -115,8 +115,19 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	var body bytes.Buffer
 	writer := multipart.NewWriter(&body)
 
+	// Detect audio format from content to set correct filename extension.
+	// ElevenLabs uses the extension to infer the codec.
+	filename := "audio.mp3"
+	if len(audioData) >= 4 && string(audioData[0:4]) == "RIFF" {
+		filename = "audio.wav"
+	} else if len(audioData) >= 4 && string(audioData[0:4]) == "OggS" {
+		filename = "audio.ogg"
+	} else if len(audioData) >= 4 && string(audioData[0:4]) == "fLaC" {
+		filename = "audio.flac"
+	}
+
 	// Add audio file
-	part, err := writer.CreateFormFile("file", "audio.mp3")
+	part, err := writer.CreateFormFile("file", filename)
 	if err != nil {
 		return errResult(fmt.Sprintf("Failed to create form: %v", err))
 	}

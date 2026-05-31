@@ -95,6 +95,24 @@ const (
 	// MaxToolRoundsDefault is the safety cap on tool calling rounds.
 	MaxToolRoundsDefault = 25
 
+	// StreamSentencesKey flags that the AI action is streaming. The
+	// actual channel is stored as a flow variable (not in outputs)
+	// to avoid JSON serialisation issues.
+	StreamSentencesKey = "__stream_sentences"
+
+	// StreamToolRequestsKey is the flow variable where the streaming
+	// goroutine stores any tool_use requests found during SSE parsing.
+	StreamToolRequestsKey = "__stream_tool_requests"
+
+	// StreamFullTextKey stores accumulated full text from streaming.
+	StreamFullTextKey = "__stream_full_text"
+
+	// StreamStopReasonKey stores the stop_reason from a streaming response.
+	StreamStopReasonKey = "__stream_stop_reason"
+
+	// StreamUsageKey stores token usage from a streaming response.
+	StreamUsageKey = "__stream_usage"
+
 	// SubFlowNameKey is the output key set by subflow/invoke actions.
 	// The engine detects this in executeNodeChildren and dispatches
 	// to the matching subflow/begin node.
@@ -1352,6 +1370,7 @@ func (f *Flow) executeNodeChildren(actions map[string]Action, node *Node, output
 		}
 
 		var iteration int64
+		var loopAborted bool
 		for iteration = 0; iteration < maxIter; iteration++ {
 			// Re-evaluate the loop condition by re-executing the loop node's action
 			// On first iteration, use the already-computed outputs
@@ -1369,6 +1388,13 @@ func (f *Flow) executeNodeChildren(actions map[string]Action, node *Node, output
 				// resolved on each iteration.
 				reOutputs, err := f.executeNodeActionOnly(actions, node, environment)
 				if err != nil {
+					// For voice calls, re-evaluation errors (closed WebSocket)
+					// mean the call ended — exit the loop cleanly.
+					ctx := f.GetContext()
+					if ctx != nil && ctx.ChannelType == "twilio_voice" {
+						loopAborted = true
+						break
+					}
 					return nil, err
 				}
 				outputs = reOutputs
@@ -1393,11 +1419,26 @@ func (f *Flow) executeNodeChildren(actions map[string]Action, node *Node, output
 				}
 				_, err := f.ExecuteNode(actions, c, environment)
 				if err != nil {
+					// For voice calls, subgraph errors during call hangup
+					// should terminate the loop cleanly.
+					ctx := f.GetContext()
+					if ctx != nil && ctx.ChannelType == "twilio_voice" {
+						log.WithFields(log.Fields{
+							"error": err,
+							"node":  c.ID,
+						}).Info("voice loop subgraph error (likely call hangup) — exiting loop")
+						loopAborted = true
+						break
+					}
 					// Store final iteration count before returning error
 					outputs["iterations"] = iteration + 1
 					f.nodeResults[node.ID] = outputs
 					return nil, err
 				}
+			}
+
+			if loopAborted {
+				break
 			}
 
 			// Clear loop body results for next iteration
@@ -1408,8 +1449,13 @@ func (f *Flow) executeNodeChildren(actions map[string]Action, node *Node, output
 		outputs["iterations"] = iteration
 		f.nodeResults[node.ID] = outputs
 
-		// Execute output-handle children (post-loop)
-		children = outputChildren
+		// Execute output-handle children (post-loop).
+		// Skip if the loop was aborted by a voice hangup.
+		if loopAborted {
+			children = nil
+		} else {
+			children = outputChildren
+		}
 	} else if _, hasToolReqs := outputs[ToolRequestsKey]; hasToolReqs {
 		// AI Tool Use loop: the AI action returned tool requests instead
 		// of a final response. Execute the tools subgraph for each request,
@@ -1467,12 +1513,15 @@ func (f *Flow) executeNodeChildren(actions map[string]Action, node *Node, output
 				// "Checking your calendar..."), fire the Response handle
 				// children now so the user sees the message immediately.
 				if iText, ok := outputs[IntermediateTextKey].(string); ok && iText != "" {
+					// Skip intermediate text dispatch for voice calls —
+					// playing partial audio mid-tool-loop sounds broken.
+					ctx := f.GetContext()
+					isVoice := ctx != nil && (ctx.ChannelType == "twilio_voice")
+
+					if !isVoice {
 					// The AI emitted text alongside tool calls. Fire the
 					// Response handle subgraph so the user sees the message
-					// while tools execute. Treated like a loop iteration:
-					// clear all cached results in the subgraph, set the
-					// response output, execute fully, then clear again so
-					// the final response can re-execute the same subgraph.
+					// while tools execute.
 					f.clearSubgraphResults(node.ID, "output")
 					if f.nodeResults[node.ID] == nil {
 						f.nodeResults[node.ID] = make(map[string]interface{})
@@ -1489,6 +1538,7 @@ func (f *Flow) executeNodeChildren(actions map[string]Action, node *Node, output
 					// Clear the subgraph again so the final response (or
 					// next intermediate) can re-execute it cleanly.
 					f.clearSubgraphResults(node.ID, "output")
+					}
 				}
 
 				var results []ToolResult
@@ -1711,6 +1761,15 @@ func (f *Flow) executeNodeChildren(actions map[string]Action, node *Node, output
 				f.SetVariable(ToolResultsKey, nil)
 				f.SetVariable(ToolConversationStateKey, nil)
 
+				// If the re-invocation used streaming, drain the channel
+				// and extract results (text plays via TTS, tool requests
+				// are picked up by the next loop iteration).
+				if _, isStreaming := outputs[StreamSentencesKey]; isStreaming {
+					f.drainStreamingChannel(actions, node, outputs, environment, nil)
+					delete(outputs, StreamSentencesKey)
+					f.nodeResults[node.ID] = outputs
+				}
+
 				// Check if the model is done (no more tool requests)
 				if _, hasMore := outputs[ToolRequestsKey]; !hasMore {
 					break
@@ -1754,7 +1813,29 @@ func (f *Flow) executeNodeChildren(actions map[string]Action, node *Node, output
 				children = f.FindTargetByDefaultHandle(node.ID)
 			}
 		}
-	} else if node.Data != nil && (node.Data.Label == "subflow/invoke" || node.Type == "subflow/invoke") {
+	}
+
+	// Streaming sentence consumer: drain the sentence channel, fire
+	// Response children per sentence, then check for tool requests.
+	if flag, ok := outputs[StreamSentencesKey]; ok && flag != nil {
+		f.drainStreamingChannel(actions, node, outputs, environment, children)
+		delete(outputs, StreamSentencesKey)
+		f.nodeResults[node.ID] = outputs
+
+		// If the stream produced tool requests, re-enter executeNodeChildren
+		// which will hit the tool loop with the updated outputs.
+		if _, hasToolReqs := outputs[ToolRequestsKey]; hasToolReqs {
+			toolsChildren := f.FindTargetByHandle(node.ID, ToolsHandle)
+			if len(toolsChildren) > 0 {
+				return f.executeNodeChildren(actions, node, outputs, environment)
+			}
+		}
+
+		// No tools — streaming text was the final response.
+		children = nil
+	}
+
+	if node.Data != nil && (node.Data.Label == "subflow/invoke" || node.Type == "subflow/invoke") {
 		// Sub-flow invocation: dispatch to the matching Begin Sub-Flow,
 		// execute its chain, and merge the results into this node's outputs.
 		if sfName, ok := outputs[SubFlowNameKey].(string); ok && sfName != "" {
@@ -1788,8 +1869,35 @@ func (f *Flow) executeNodeChildren(actions map[string]Action, node *Node, output
 			f.nodeResults[node.ID] = outputs
 		}
 		children = f.FindTarget(node.ID)
-	} else {
-		children = f.FindTarget(node.ID)
+	}
+
+	// Default: if no special handler above set children, use all children.
+	// This covers regular action nodes without should_respond, tool
+	// requests, loops, or subflows. Nodes that DID have a handler
+	// (should_respond, streaming, etc.) already set children — even to
+	// nil — and we must not overwrite that.
+	// We detect "was handled" by checking if should_respond exists in
+	// outputs, since only AI nodes have it.
+	if children == nil {
+		if _, hasShouldRespond := outputs["should_respond"]; !hasShouldRespond {
+			children = f.FindTarget(node.ID)
+		}
+	}
+
+	// AI "Finished" handle: fire once after the entire AI turn completes
+	// (after streaming, tool loops, etc.). Used for post-response actions
+	// like Add to Conversation that should run once per turn, not per
+	// sentence or per tool round.
+	if _, hasShouldRespond := outputs["should_respond"]; hasShouldRespond {
+		finishedChildren := f.FindTargetByHandle(node.ID, "no_response")
+		for _, fc := range finishedChildren {
+			if _, err := f.ExecuteNode(actions, fc, environment); err != nil {
+				log.WithFields(log.Fields{
+					"error": err,
+					"node":  fc.ID,
+				}).Warn("AI finished handle execution failed")
+			}
+		}
 	}
 
 	// Filter out trigger nodes and Begin Sub-Flow nodes from children
@@ -1833,6 +1941,85 @@ func (f *Flow) executeNodeChildren(actions map[string]Action, node *Node, output
 }
 
 // clearSubgraphResults removes cached results for all nodes reachable from
+// drainStreamingChannel reads all sentences from the streaming channel,
+// fires Response children per sentence, then extracts tool requests and
+// metadata from flow variables set by the streaming goroutine.
+func (f *Flow) drainStreamingChannel(actions map[string]Action, node *Node, outputs map[string]interface{}, env *environment.Environment, children []*Node) {
+	streamVar, hasVar := f.GetVariable(StreamSentencesKey)
+	if !hasVar {
+		return
+	}
+	ch, ok := streamVar.(chan string)
+	if !ok || ch == nil {
+		return
+	}
+
+	responseChildren := children
+	if responseChildren == nil {
+		responseChildren = f.FindTargetByHandle(node.ID, "output")
+		if len(responseChildren) == 0 {
+			responseChildren = f.FindTargetByDefaultHandle(node.ID)
+		}
+	}
+
+	for sentence := range ch {
+		if sentence == "" {
+			continue
+		}
+		f.clearSubgraphResults(node.ID, "output")
+		if f.nodeResults[node.ID] == nil {
+			f.nodeResults[node.ID] = make(map[string]interface{})
+		}
+		f.nodeResults[node.ID]["response"] = sentence
+		for _, rc := range responseChildren {
+			if rc.Data != nil && rc.Data.Config.Type == ActionTypeLoop {
+				continue
+			}
+			if _, err := f.ExecuteNode(actions, rc, env); err != nil {
+				log.WithFields(log.Fields{
+					"error": err,
+					"node":  rc.ID,
+				}).Warn("streaming sentence dispatch failed")
+			}
+		}
+		f.clearSubgraphResults(node.ID, "output")
+	}
+
+	f.SetVariable(StreamSentencesKey, nil)
+
+	if fullText, ok := f.GetVariable(StreamFullTextKey); ok {
+		if s, ok := fullText.(string); ok && s != "" {
+			outputs["response"] = s
+		}
+		f.SetVariable(StreamFullTextKey, nil)
+	}
+	if sr, ok := f.GetVariable(StreamStopReasonKey); ok {
+		if s, ok := sr.(string); ok {
+			outputs["stop_reason"] = s
+		}
+		f.SetVariable(StreamStopReasonKey, nil)
+	}
+	if usage, ok := f.GetVariable(StreamUsageKey); ok {
+		if u, ok := usage.(map[string]int64); ok {
+			outputs["input_tokens"] = u["input_tokens"]
+			outputs["output_tokens"] = u["output_tokens"]
+		}
+		f.SetVariable(StreamUsageKey, nil)
+	}
+	if m, ok := f.GetVariable("__stream_model"); ok {
+		if s, ok := m.(string); ok && s != "" {
+			outputs["model"] = s
+		}
+		f.SetVariable("__stream_model", nil)
+	}
+	if toolReqs, ok := f.GetVariable(StreamToolRequestsKey); ok {
+		if reqs, ok := toolReqs.([]ToolRequest); ok && len(reqs) > 0 {
+			outputs[ToolRequestsKey] = reqs
+		}
+		f.SetVariable(StreamToolRequestsKey, nil)
+	}
+}
+
 // the given source via the specified handle. This allows loop body nodes to
 // be re-executed on each iteration.
 func (f *Flow) clearSubgraphResults(source string, handle string) {
@@ -1969,6 +2156,12 @@ func (f *Flow) GetNodeResult(nodeID string) map[string]interface{} {
 		return nil
 	}
 	return f.nodeResults[nodeID]
+}
+
+// GetAllNodeResults returns all cached node results. Used by actions
+// that need to find a value (like session_id) from any upstream node.
+func (f *Flow) GetAllNodeResults() map[string]map[string]interface{} {
+	return f.nodeResults
 }
 
 // SetNodeResultForTest allows tests to pre-populate cached node results.

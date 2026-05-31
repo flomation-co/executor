@@ -81,6 +81,12 @@ var Inputs = [...]core.Connection{
 		Label:       "Account filter (email, label like 'Work', or empty for all)",
 		Placeholder: "",
 	},
+	{
+		Name:        "credential",
+		Type:        core.ConnectionTypeString,
+		Label:       "Google OAuth Credential (optional, overrides user tokens)",
+		Placeholder: "${credentials.GOOGLE_CALENDAR}",
+	},
 }
 
 var Outputs = [...]core.Connection{
@@ -123,12 +129,14 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	durationMin := optionalInt("duration_minutes", inputs)
 	accountFilter := optionalString("account", inputs)
 
+	credential := optionalString("credential", inputs)
+
 	ctx := flow.GetContext()
 	if ctx == nil || ctx.APIURL == "" {
 		return nil, fmt.Errorf("execution context with API URL is required")
 	}
-	if ctx.AgentUserID == "" {
-		return errResult("No user identity available — calendar requires a connected user")
+	if credential == "" && ctx.AgentUserID == "" {
+		return errResult("No user identity or credential available — provide a credential or connect a user calendar")
 	}
 
 	// Resolve date strings
@@ -159,13 +167,19 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 		}
 	}
 
-	// Fetch access tokens for all connected Google accounts
-	tokens, err := fetchTokens(flow, ctx)
-	if err != nil {
-		return errResult(fmt.Sprintf("Failed to get calendar tokens: %v", err))
-	}
-	if len(tokens) == 0 {
-		return errResult("No Google Calendar accounts connected. Ask the user to connect their calendar first.")
+	// Fetch access tokens — from credential or connected user accounts
+	var tokens []tokenInfo
+	if credential != "" {
+		tokens = []tokenInfo{{Email: "credential", AccessToken: credential}}
+	} else {
+		var err error
+		tokens, err = fetchTokens(flow, ctx)
+		if err != nil {
+			return errResult(fmt.Sprintf("Failed to get calendar tokens: %v", err))
+		}
+		if len(tokens) == 0 {
+			return errResult("No Google Calendar accounts connected. Ask the user to connect their calendar first.")
+		}
 	}
 
 	// Filter accounts if requested
