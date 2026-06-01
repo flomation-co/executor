@@ -27,10 +27,11 @@ var Inputs = [...]core.Connection{
 		Placeholder: "root",
 	},
 	{
-		Name:        "google_account",
+		Name:        "credential",
 		Type:        core.ConnectionTypeString,
-		Label:       "Google Account (email)",
-		Placeholder: "user@gmail.com",
+		Label:       "Google OAuth Credential",
+		Placeholder: "${credentials.GOOGLE_DRIVE}",
+		Required:    true,
 	},
 	{
 		Name:        "poll_interval",

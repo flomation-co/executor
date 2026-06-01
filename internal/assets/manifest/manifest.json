@@ -21495,7 +21495,7 @@
     ]
   },
   "trigger/google_drive": {
-    "hash": "54a83827eba4b4e42a8145e2870e230da3b9b70394f7acb54bcf3c504e200b48",
+    "hash": "5ecb068f179c71ea267a98ffcbb32988cbe5cd0ef85315bdd6f38b9b1eb8a557",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Google Drive Trigger",
@@ -21518,11 +21518,12 @@
         "placeholder": "root"
       },
       {
-        "name": "google_account",
+        "name": "credential",
         "type": "string",
         "value": null,
-        "label": "Google Account (email)",
-        "placeholder": "user@gmail.com"
+        "label": "Google OAuth Credential",
+        "placeholder": "${credentials.GOOGLE_DRIVE}",
+        "required": true
       },
       {
         "name": "poll_interval",
