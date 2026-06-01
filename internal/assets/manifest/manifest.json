@@ -2816,6 +2816,54 @@
       }
     ]
   },
+  "common/pause": {
+    "hash": "ebd690de23d587fe6b873937ca0af5e530b2eb4e2b8ca8ebe691a7723f6e361d",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Pause",
+    "description": "Suspend execution until manually resumed",
+    "website": "https://www.flomation.co",
+    "icon": "pause",
+    "date": "01/06/2026",
+    "type": 2,
+    "category": {
+      "name": "Common",
+      "icon": "toolbox",
+      "description": "General-purpose data utilities"
+    },
+    "inputs": [
+      {
+        "name": "reason",
+        "type": "string",
+        "value": null,
+        "label": "Reason",
+        "placeholder": "Awaiting manual approval"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result",
+        "placeholder": ""
+      },
+      {
+        "name": "suspended",
+        "type": "boolean",
+        "value": null,
+        "label": "Was Suspended",
+        "placeholder": ""
+      },
+      {
+        "name": "reason",
+        "type": "string",
+        "value": null,
+        "label": "Reason",
+        "placeholder": ""
+      }
+    ]
+  },
   "common/set_variable": {
     "hash": "90a65516c7e93d09c3cbf88ad12ce2dd8ed2e00f88d7c17ba9f19330fe4b9d0e",
     "author": "Andy Esser",
@@ -3100,6 +3148,68 @@
         "type": "object",
         "value": null,
         "label": "Flow Result",
+        "placeholder": ""
+      }
+    ]
+  },
+  "common/wait": {
+    "hash": "b7e446571574bd1209e27730a21c1ad4eed6bb50837fe909c3f370074e9d7554",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Wait",
+    "description": "Suspend execution for a duration, then auto-resume",
+    "website": "https://www.flomation.co",
+    "icon": "clock",
+    "date": "01/06/2026",
+    "type": 2,
+    "category": {
+      "name": "Common",
+      "icon": "toolbox",
+      "description": "General-purpose data utilities"
+    },
+    "inputs": [
+      {
+        "name": "duration",
+        "type": "string",
+        "value": null,
+        "label": "Duration",
+        "placeholder": "5m, 1h, 2d"
+      },
+      {
+        "name": "resume_at",
+        "type": "string",
+        "value": null,
+        "label": "Resume At (ISO 8601)",
+        "placeholder": "2026-06-15T14:00:00Z"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result",
+        "placeholder": ""
+      },
+      {
+        "name": "suspended",
+        "type": "boolean",
+        "value": null,
+        "label": "Was Suspended",
+        "placeholder": ""
+      },
+      {
+        "name": "resume_at",
+        "type": "string",
+        "value": null,
+        "label": "Resume At",
+        "placeholder": ""
+      },
+      {
+        "name": "duration",
+        "type": "string",
+        "value": null,
+        "label": "Duration",
         "placeholder": ""
       }
     ]

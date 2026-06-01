@@ -39,10 +39,12 @@ import (
 	common_data_rename "flomation.app/automate/executor/actions/common/data_rename"
 	common_format_date "flomation.app/automate/executor/actions/common/format_date"
 	common_object_get "flomation.app/automate/executor/actions/common/object_get"
+	common_pause "flomation.app/automate/executor/actions/common/pause"
 	common_set_variable "flomation.app/automate/executor/actions/common/set_variable"
 	common_sleep "flomation.app/automate/executor/actions/common/sleep"
 	common_smtp "flomation.app/automate/executor/actions/common/smtp"
 	common_start_flow "flomation.app/automate/executor/actions/common/start_flow"
+	common_wait "flomation.app/automate/executor/actions/common/wait"
 	conditional_for "flomation.app/automate/executor/actions/conditional/for"
 	conditional_if "flomation.app/automate/executor/actions/conditional/if"
 	conditional_switch "flomation.app/automate/executor/actions/conditional/switch"
@@ -309,10 +311,12 @@ var Actions = map[string]core.Action{
 	"common/data_rename":                  common_data_rename.Execute,
 	"common/format_date":                  common_format_date.Execute,
 	"common/object_get":                   common_object_get.Execute,
+	"common/pause":                        common_pause.Execute,
 	"common/set_variable":                 common_set_variable.Execute,
 	"common/sleep":                        common_sleep.Execute,
 	"common/smtp":                         common_smtp.Execute,
 	"common/start_flow":                   common_start_flow.Execute,
+	"common/wait":                         common_wait.Execute,
 	"conditional/for":                     conditional_for.Execute,
 	"conditional/if":                      conditional_if.Execute,
 	"conditional/switch":                  conditional_switch.Execute,
