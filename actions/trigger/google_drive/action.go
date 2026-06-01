@@ -31,7 +31,12 @@ var Inputs = [...]core.Connection{
 		Type:        core.ConnectionTypeString,
 		Label:       "Google OAuth Credential",
 		Placeholder: "${credentials.GOOGLE_DRIVE}",
-		Required:    true,
+	},
+	{
+		Name:        "google_account",
+		Type:        core.ConnectionTypeString,
+		Label:       "Google Account (email)",
+		Placeholder: "user@gmail.com",
 	},
 	{
 		Name:        "poll_interval",
