@@ -112,7 +112,9 @@ import (
 	google_docs_append_text "flomation.app/automate/executor/actions/google/docs/append_text"
 	google_docs_create "flomation.app/automate/executor/actions/google/docs/create"
 	google_docs_get_metadata "flomation.app/automate/executor/actions/google/docs/get_metadata"
+	google_docs_insert_image "flomation.app/automate/executor/actions/google/docs/insert_image"
 	google_docs_read "flomation.app/automate/executor/actions/google/docs/read"
+	google_docs_replace_text "flomation.app/automate/executor/actions/google/docs/replace_text"
 	google_drive_copy "flomation.app/automate/executor/actions/google/drive/copy"
 	google_drive_create_folder "flomation.app/automate/executor/actions/google/drive/create_folder"
 	google_drive_delete "flomation.app/automate/executor/actions/google/drive/delete"
@@ -131,6 +133,12 @@ import (
 	google_sheets_get_metadata "flomation.app/automate/executor/actions/google/sheets/get_metadata"
 	google_sheets_read "flomation.app/automate/executor/actions/google/sheets/read"
 	google_sheets_write "flomation.app/automate/executor/actions/google/sheets/write"
+	google_slides_add_image "flomation.app/automate/executor/actions/google/slides/add_image"
+	google_slides_add_slide "flomation.app/automate/executor/actions/google/slides/add_slide"
+	google_slides_add_text "flomation.app/automate/executor/actions/google/slides/add_text"
+	google_slides_create "flomation.app/automate/executor/actions/google/slides/create"
+	google_slides_get "flomation.app/automate/executor/actions/google/slides/get"
+	google_slides_get_slide "flomation.app/automate/executor/actions/google/slides/get_slide"
 	http_request "flomation.app/automate/executor/actions/http/request"
 	linear_add_comment "flomation.app/automate/executor/actions/linear/add_comment"
 	linear_create_issue "flomation.app/automate/executor/actions/linear/create_issue"
@@ -369,7 +377,9 @@ var Actions = map[string]core.Action{
 	"google/docs/append_text":             google_docs_append_text.Execute,
 	"google/docs/create":                  google_docs_create.Execute,
 	"google/docs/get_metadata":            google_docs_get_metadata.Execute,
+	"google/docs/insert_image":            google_docs_insert_image.Execute,
 	"google/docs/read":                    google_docs_read.Execute,
+	"google/docs/replace_text":            google_docs_replace_text.Execute,
 	"google/drive/copy":                   google_drive_copy.Execute,
 	"google/drive/create_folder":          google_drive_create_folder.Execute,
 	"google/drive/delete":                 google_drive_delete.Execute,
@@ -388,6 +398,12 @@ var Actions = map[string]core.Action{
 	"google/sheets/get_metadata":          google_sheets_get_metadata.Execute,
 	"google/sheets/read":                  google_sheets_read.Execute,
 	"google/sheets/write":                 google_sheets_write.Execute,
+	"google/slides/add_image":             google_slides_add_image.Execute,
+	"google/slides/add_slide":             google_slides_add_slide.Execute,
+	"google/slides/add_text":              google_slides_add_text.Execute,
+	"google/slides/create":                google_slides_create.Execute,
+	"google/slides/get":                   google_slides_get.Execute,
+	"google/slides/get_slide":             google_slides_get_slide.Execute,
 	"http/request":                        http_request.Execute,
 	"linear/add_comment":                  linear_add_comment.Execute,
 	"linear/create_issue":                 linear_create_issue.Execute,

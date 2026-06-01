@@ -9865,6 +9865,96 @@
       }
     ]
   },
+  "google/docs/insert_image": {
+    "hash": "f7c8e4e638f62cf30302432fd74e153dd3f2a3bb625792c2f9cb083c6f60173c",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Insert Image in Document",
+    "description": "Insert an image into a Google Docs document",
+    "website": "https://www.flomation.co",
+    "icon": "file-lines",
+    "date": "01/06/2026",
+    "type": 2,
+    "category": {
+      "name": "Google",
+      "icon": "google",
+      "description": "Google Workspace integrations"
+    },
+    "sub_category": {
+      "name": "Docs",
+      "icon": "file-lines",
+      "description": "Google Docs document operations"
+    },
+    "inputs": [
+      {
+        "name": "document_id",
+        "type": "string",
+        "value": null,
+        "label": "Document ID",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "image_url",
+        "type": "string",
+        "value": null,
+        "label": "Image URL",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "width",
+        "type": "integer",
+        "value": null,
+        "label": "Width (points)",
+        "placeholder": "400"
+      },
+      {
+        "name": "height",
+        "type": "integer",
+        "value": null,
+        "label": "Height (points)",
+        "placeholder": "300"
+      },
+      {
+        "name": "account",
+        "type": "string",
+        "value": null,
+        "label": "Google Account (email)",
+        "placeholder": ""
+      },
+      {
+        "name": "credential",
+        "type": "string",
+        "value": null,
+        "label": "Google OAuth Credential",
+        "placeholder": "${credentials.GOOGLE_DRIVE}"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
   "google/docs/read": {
     "hash": "7123739a2e0da2feda92b9505d0234ee559225e6cbf133dfd38616ba36162fe5",
     "author": "Andy Esser",
@@ -9936,6 +10026,104 @@
         "type": "string",
         "value": null,
         "label": "Full Document (JSON)",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "google/docs/replace_text": {
+    "hash": "3faad8dec64704803d9205d3c90e8260366e94bf2a36317d067cc9379f44dec0",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Replace Text in Document",
+    "description": "Find and replace text in a Google Docs document",
+    "website": "https://www.flomation.co",
+    "icon": "file-lines",
+    "date": "01/06/2026",
+    "type": 2,
+    "category": {
+      "name": "Google",
+      "icon": "google",
+      "description": "Google Workspace integrations"
+    },
+    "sub_category": {
+      "name": "Docs",
+      "icon": "file-lines",
+      "description": "Google Docs document operations"
+    },
+    "inputs": [
+      {
+        "name": "document_id",
+        "type": "string",
+        "value": null,
+        "label": "Document ID",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "find",
+        "type": "string",
+        "value": null,
+        "label": "Find Text",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "replace",
+        "type": "string",
+        "value": null,
+        "label": "Replace With",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "match_case",
+        "type": "boolean",
+        "value": null,
+        "label": "Match Case",
+        "placeholder": ""
+      },
+      {
+        "name": "account",
+        "type": "string",
+        "value": null,
+        "label": "Google Account (email)",
+        "placeholder": ""
+      },
+      {
+        "name": "credential",
+        "type": "string",
+        "value": null,
+        "label": "Google OAuth Credential",
+        "placeholder": "${credentials.GOOGLE_DRIVE}"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "occurrences_replaced",
+        "type": "integer",
+        "value": null,
+        "label": "Occurrences Replaced",
         "placeholder": ""
       },
       {
@@ -11765,6 +11953,599 @@
         "type": "string",
         "value": null,
         "label": "Updated Range",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "google/slides/add_image": {
+    "hash": "b5657f48b7445606bf6193d42b871601d688cea44da16c479ecc1814e0a8b14b",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Add Image to Slide",
+    "description": "Add an image to a Google Slides slide",
+    "website": "https://www.flomation.co",
+    "icon": "display",
+    "date": "01/06/2026",
+    "type": 2,
+    "category": {
+      "name": "Google",
+      "icon": "google",
+      "description": "Google Workspace integrations"
+    },
+    "sub_category": {
+      "name": "Slides",
+      "icon": "display",
+      "description": "Google Slides presentation operations"
+    },
+    "inputs": [
+      {
+        "name": "presentation_id",
+        "type": "string",
+        "value": null,
+        "label": "Presentation ID",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "slide_id",
+        "type": "string",
+        "value": null,
+        "label": "Slide ID",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "image_url",
+        "type": "string",
+        "value": null,
+        "label": "Image URL",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "x",
+        "type": "integer",
+        "value": null,
+        "label": "X Position (points)",
+        "placeholder": "100"
+      },
+      {
+        "name": "y",
+        "type": "integer",
+        "value": null,
+        "label": "Y Position (points)",
+        "placeholder": "100"
+      },
+      {
+        "name": "width",
+        "type": "integer",
+        "value": null,
+        "label": "Width (points)",
+        "placeholder": "400"
+      },
+      {
+        "name": "height",
+        "type": "integer",
+        "value": null,
+        "label": "Height (points)",
+        "placeholder": "300"
+      },
+      {
+        "name": "account",
+        "type": "string",
+        "value": null,
+        "label": "Google Account (email)",
+        "placeholder": ""
+      },
+      {
+        "name": "credential",
+        "type": "string",
+        "value": null,
+        "label": "Google OAuth Credential",
+        "placeholder": "${credentials.GOOGLE_DRIVE}"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "image_id",
+        "type": "string",
+        "value": null,
+        "label": "Image Object ID",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "google/slides/add_slide": {
+    "hash": "00780d6d5483d19727e89f0c0eb9815143398c7ba2d560e0175f1a1df7fca951",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Add Slide",
+    "description": "Add a new slide to a Google Slides presentation",
+    "website": "https://www.flomation.co",
+    "icon": "display",
+    "date": "01/06/2026",
+    "type": 2,
+    "category": {
+      "name": "Google",
+      "icon": "google",
+      "description": "Google Workspace integrations"
+    },
+    "sub_category": {
+      "name": "Slides",
+      "icon": "display",
+      "description": "Google Slides presentation operations"
+    },
+    "inputs": [
+      {
+        "name": "presentation_id",
+        "type": "string",
+        "value": null,
+        "label": "Presentation ID",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "layout",
+        "type": "string",
+        "value": null,
+        "label": "Layout",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "Blank",
+            "value": "BLANK"
+          },
+          {
+            "name": "Title",
+            "value": "TITLE"
+          },
+          {
+            "name": "Title and Body",
+            "value": "TITLE_AND_BODY"
+          },
+          {
+            "name": "Title and Two Columns",
+            "value": "TITLE_AND_TWO_COLUMNS"
+          },
+          {
+            "name": "Title Only",
+            "value": "TITLE_ONLY"
+          },
+          {
+            "name": "Section Header",
+            "value": "SECTION_HEADER"
+          }
+        ]
+      },
+      {
+        "name": "insert_at",
+        "type": "integer",
+        "value": null,
+        "label": "Insert Position (0-based)",
+        "placeholder": ""
+      },
+      {
+        "name": "account",
+        "type": "string",
+        "value": null,
+        "label": "Google Account (email)",
+        "placeholder": ""
+      },
+      {
+        "name": "credential",
+        "type": "string",
+        "value": null,
+        "label": "Google OAuth Credential",
+        "placeholder": "${credentials.GOOGLE_DRIVE}"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "slide_id",
+        "type": "string",
+        "value": null,
+        "label": "Slide ID",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "google/slides/add_text": {
+    "hash": "edc7420c3809207ecacbe80990be326cad874332fb58938abdef6cca31561e2b",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Add Text to Slide",
+    "description": "Insert text into a slide shape",
+    "website": "https://www.flomation.co",
+    "icon": "display",
+    "date": "01/06/2026",
+    "type": 2,
+    "category": {
+      "name": "Google",
+      "icon": "google",
+      "description": "Google Workspace integrations"
+    },
+    "sub_category": {
+      "name": "Slides",
+      "icon": "display",
+      "description": "Google Slides presentation operations"
+    },
+    "inputs": [
+      {
+        "name": "presentation_id",
+        "type": "string",
+        "value": null,
+        "label": "Presentation ID",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "slide_id",
+        "type": "string",
+        "value": null,
+        "label": "Slide/Shape ID",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "text",
+        "type": "text",
+        "value": null,
+        "label": "Text",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "account",
+        "type": "string",
+        "value": null,
+        "label": "Google Account (email)",
+        "placeholder": ""
+      },
+      {
+        "name": "credential",
+        "type": "string",
+        "value": null,
+        "label": "Google OAuth Credential",
+        "placeholder": "${credentials.GOOGLE_DRIVE}"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "google/slides/create": {
+    "hash": "2660af503cbf895e93ab926e87f0d5e6dfd549bb764cd4a8806ff956c995b236",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Create Presentation",
+    "description": "Create a new Google Slides presentation",
+    "website": "https://www.flomation.co",
+    "icon": "display",
+    "date": "01/06/2026",
+    "type": 2,
+    "category": {
+      "name": "Google",
+      "icon": "google",
+      "description": "Google Workspace integrations"
+    },
+    "sub_category": {
+      "name": "Slides",
+      "icon": "display",
+      "description": "Google Slides presentation operations"
+    },
+    "inputs": [
+      {
+        "name": "title",
+        "type": "string",
+        "value": null,
+        "label": "Title",
+        "placeholder": "My Presentation",
+        "required": true
+      },
+      {
+        "name": "account",
+        "type": "string",
+        "value": null,
+        "label": "Google Account (email)",
+        "placeholder": ""
+      },
+      {
+        "name": "credential",
+        "type": "string",
+        "value": null,
+        "label": "Google OAuth Credential",
+        "placeholder": "${credentials.GOOGLE_DRIVE}"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "presentation_id",
+        "type": "string",
+        "value": null,
+        "label": "Presentation ID",
+        "placeholder": ""
+      },
+      {
+        "name": "presentation_url",
+        "type": "string",
+        "value": null,
+        "label": "Presentation URL",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "google/slides/get": {
+    "hash": "ddde82557f91e9358d9d1e77cbbc33ddac7a303329cbc77f550e0d75e3855e13",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Get Presentation",
+    "description": "Get metadata and slides for a Google Slides presentation",
+    "website": "https://www.flomation.co",
+    "icon": "display",
+    "date": "01/06/2026",
+    "type": 2,
+    "category": {
+      "name": "Google",
+      "icon": "google",
+      "description": "Google Workspace integrations"
+    },
+    "sub_category": {
+      "name": "Slides",
+      "icon": "display",
+      "description": "Google Slides presentation operations"
+    },
+    "inputs": [
+      {
+        "name": "presentation_id",
+        "type": "string",
+        "value": null,
+        "label": "Presentation ID",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "account",
+        "type": "string",
+        "value": null,
+        "label": "Google Account (email)",
+        "placeholder": ""
+      },
+      {
+        "name": "credential",
+        "type": "string",
+        "value": null,
+        "label": "Google OAuth Credential",
+        "placeholder": "${credentials.GOOGLE_DRIVE}"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "title",
+        "type": "string",
+        "value": null,
+        "label": "Title",
+        "placeholder": ""
+      },
+      {
+        "name": "slides",
+        "type": "string",
+        "value": null,
+        "label": "Slides (JSON)",
+        "placeholder": ""
+      },
+      {
+        "name": "slide_count",
+        "type": "integer",
+        "value": null,
+        "label": "Slide Count",
+        "placeholder": ""
+      },
+      {
+        "name": "presentation",
+        "type": "string",
+        "value": null,
+        "label": "Full Presentation (JSON)",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "google/slides/get_slide": {
+    "hash": "6c88da8895c64e54dbe9fcb51086d418b02db649fcb09ec3a8c8c685b6638255",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Get Slide",
+    "description": "Get the content and elements of a specific slide",
+    "website": "https://www.flomation.co",
+    "icon": "display",
+    "date": "01/06/2026",
+    "type": 2,
+    "category": {
+      "name": "Google",
+      "icon": "google",
+      "description": "Google Workspace integrations"
+    },
+    "sub_category": {
+      "name": "Slides",
+      "icon": "display",
+      "description": "Google Slides presentation operations"
+    },
+    "inputs": [
+      {
+        "name": "presentation_id",
+        "type": "string",
+        "value": null,
+        "label": "Presentation ID",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "slide_id",
+        "type": "string",
+        "value": null,
+        "label": "Slide ID",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "account",
+        "type": "string",
+        "value": null,
+        "label": "Google Account (email)",
+        "placeholder": ""
+      },
+      {
+        "name": "credential",
+        "type": "string",
+        "value": null,
+        "label": "Google OAuth Credential",
+        "placeholder": "${credentials.GOOGLE_DRIVE}"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "slide",
+        "type": "string",
+        "value": null,
+        "label": "Slide (JSON)",
+        "placeholder": ""
+      },
+      {
+        "name": "elements",
+        "type": "string",
+        "value": null,
+        "label": "Page Elements (JSON)",
+        "placeholder": ""
+      },
+      {
+        "name": "element_count",
+        "type": "integer",
+        "value": null,
+        "label": "Element Count",
         "placeholder": ""
       },
       {
