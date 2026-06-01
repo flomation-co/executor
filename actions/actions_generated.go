@@ -109,14 +109,26 @@ import (
 	gitlab_trigger_pipeline "flomation.app/automate/executor/actions/gitlab/trigger_pipeline"
 	gitlab_unapprove_merge_request "flomation.app/automate/executor/actions/gitlab/unapprove_merge_request"
 	gitlab_update_merge_request "flomation.app/automate/executor/actions/gitlab/update_merge_request"
+	google_docs_append_text "flomation.app/automate/executor/actions/google/docs/append_text"
+	google_docs_create "flomation.app/automate/executor/actions/google/docs/create"
+	google_docs_get_metadata "flomation.app/automate/executor/actions/google/docs/get_metadata"
+	google_docs_read "flomation.app/automate/executor/actions/google/docs/read"
+	google_drive_copy "flomation.app/automate/executor/actions/google/drive/copy"
 	google_drive_create_folder "flomation.app/automate/executor/actions/google/drive/create_folder"
+	google_drive_delete "flomation.app/automate/executor/actions/google/drive/delete"
 	google_drive_download "flomation.app/automate/executor/actions/google/drive/download"
 	google_drive_get_file "flomation.app/automate/executor/actions/google/drive/get_file"
 	google_drive_list_files "flomation.app/automate/executor/actions/google/drive/list_files"
+	google_drive_move "flomation.app/automate/executor/actions/google/drive/move"
 	google_drive_search "flomation.app/automate/executor/actions/google/drive/search"
+	google_drive_share "flomation.app/automate/executor/actions/google/drive/share"
 	google_drive_upload "flomation.app/automate/executor/actions/google/drive/upload"
 	google_sheets_append "flomation.app/automate/executor/actions/google/sheets/append"
+	google_sheets_clear "flomation.app/automate/executor/actions/google/sheets/clear"
 	google_sheets_create "flomation.app/automate/executor/actions/google/sheets/create"
+	google_sheets_create_sheet "flomation.app/automate/executor/actions/google/sheets/create_sheet"
+	google_sheets_delete_sheet "flomation.app/automate/executor/actions/google/sheets/delete_sheet"
+	google_sheets_get_metadata "flomation.app/automate/executor/actions/google/sheets/get_metadata"
 	google_sheets_read "flomation.app/automate/executor/actions/google/sheets/read"
 	google_sheets_write "flomation.app/automate/executor/actions/google/sheets/write"
 	http_request "flomation.app/automate/executor/actions/http/request"
@@ -354,14 +366,26 @@ var Actions = map[string]core.Action{
 	"gitlab/trigger_pipeline":             gitlab_trigger_pipeline.Execute,
 	"gitlab/unapprove_merge_request":      gitlab_unapprove_merge_request.Execute,
 	"gitlab/update_merge_request":         gitlab_update_merge_request.Execute,
+	"google/docs/append_text":             google_docs_append_text.Execute,
+	"google/docs/create":                  google_docs_create.Execute,
+	"google/docs/get_metadata":            google_docs_get_metadata.Execute,
+	"google/docs/read":                    google_docs_read.Execute,
+	"google/drive/copy":                   google_drive_copy.Execute,
 	"google/drive/create_folder":          google_drive_create_folder.Execute,
+	"google/drive/delete":                 google_drive_delete.Execute,
 	"google/drive/download":               google_drive_download.Execute,
 	"google/drive/get_file":               google_drive_get_file.Execute,
 	"google/drive/list_files":             google_drive_list_files.Execute,
+	"google/drive/move":                   google_drive_move.Execute,
 	"google/drive/search":                 google_drive_search.Execute,
+	"google/drive/share":                  google_drive_share.Execute,
 	"google/drive/upload":                 google_drive_upload.Execute,
 	"google/sheets/append":                google_sheets_append.Execute,
+	"google/sheets/clear":                 google_sheets_clear.Execute,
 	"google/sheets/create":                google_sheets_create.Execute,
+	"google/sheets/create_sheet":          google_sheets_create_sheet.Execute,
+	"google/sheets/delete_sheet":          google_sheets_delete_sheet.Execute,
+	"google/sheets/get_metadata":          google_sheets_get_metadata.Execute,
 	"google/sheets/read":                  google_sheets_read.Execute,
 	"google/sheets/write":                 google_sheets_write.Execute,
 	"http/request":                        http_request.Execute,
