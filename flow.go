@@ -1352,6 +1352,16 @@ func (f *Flow) executeNodeActionOnly(actions map[string]Action, node *Node, envi
 	// Build obfuscated input map for streaming and recording
 	inputMap := f.buildObfuscatedInputMap(node, configuration)
 
+	if errors.Is(err, ErrSuspended) {
+		// Record the suspend node as suspended (not failed) and cache its outputs
+		f.emitNodeEvent(node.ID, node.Type, node.Data.Label, "suspended", durationMs, "", inputMap, outputs)
+		f.recordNodeResult(node, "suspended", configuration, outputs, durationMs, "")
+		if outputs != nil {
+			f.nodeResults[node.ID] = outputs
+		}
+		return outputs, ErrSuspended
+	}
+
 	if err != nil {
 		f.emitNodeEvent(node.ID, node.Type, node.Data.Label, "failed", durationMs, err.Error(), inputMap, outputs)
 		f.recordNodeResult(node, "failed", configuration, outputs, durationMs, err.Error())
