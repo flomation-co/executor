@@ -136,6 +136,7 @@ func handleList(flow *core.Flow, ctx *core.ExecutionContext) (map[string]interfa
 		"calendar":   "calendar",
 		"email_read": "email read",
 		"email_send": "email send",
+		"drive":      "drive (sheets, docs, slides)",
 	}
 
 	var sb strings.Builder

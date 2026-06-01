@@ -19680,7 +19680,7 @@
     ]
   },
   "tools/google_accounts": {
-    "hash": "0b029cfcc3720095f085d1ac8a30fa6602fb11e4fe4fd377c13dc99bd7326646",
+    "hash": "9947a58d47db9691a551b4f418f00e7dfa195c7fe0b28af485280491c64e10ca",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Manage Google Connections",
@@ -21490,6 +21490,146 @@
         "type": "string",
         "value": null,
         "label": "Triggered At",
+        "placeholder": ""
+      }
+    ]
+  },
+  "trigger/google_drive": {
+    "hash": "6540b82a8fb36e07e1fd8099f472a2d064a5e9bb4d57ea6fc3384ee10332a984",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Google Drive Trigger",
+    "description": "Triggers when files change in a Google Drive folder",
+    "website": "https://www.flomation.co",
+    "icon": "google",
+    "date": "01/06/2026",
+    "type": 1,
+    "category": {
+      "name": "Triggers",
+      "icon": "bolt-lightning",
+      "description": "Start a Flow"
+    },
+    "inputs": [
+      {
+        "name": "folder_id",
+        "type": "string",
+        "value": null,
+        "label": "Folder ID",
+        "placeholder": "root"
+      },
+      {
+        "name": "credential",
+        "type": "string",
+        "value": null,
+        "label": "Google OAuth Credential",
+        "placeholder": "${credentials.GOOGLE_DRIVE}"
+      },
+      {
+        "name": "google_account",
+        "type": "string",
+        "value": null,
+        "label": "Google Account (email)",
+        "placeholder": "user@gmail.com"
+      },
+      {
+        "name": "poll_interval",
+        "type": "string",
+        "value": null,
+        "label": "Poll Interval (seconds)",
+        "placeholder": "60"
+      },
+      {
+        "name": "event_types",
+        "type": "string",
+        "value": null,
+        "label": "Event Types",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "New Files",
+            "value": "new"
+          },
+          {
+            "name": "Modified Files",
+            "value": "modified"
+          },
+          {
+            "name": "Deleted Files",
+            "value": "deleted"
+          },
+          {
+            "name": "New \u0026 Modified",
+            "value": "new,modified"
+          },
+          {
+            "name": "All Events",
+            "value": "new,modified,deleted"
+          }
+        ]
+      },
+      {
+        "name": "mime_type_filter",
+        "type": "string",
+        "value": null,
+        "label": "MIME Type Filter",
+        "placeholder": "application/vnd.google-apps.spreadsheet"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "file_id",
+        "type": "string",
+        "value": null,
+        "label": "File ID",
+        "placeholder": ""
+      },
+      {
+        "name": "name",
+        "type": "string",
+        "value": null,
+        "label": "File Name",
+        "placeholder": ""
+      },
+      {
+        "name": "mime_type",
+        "type": "string",
+        "value": null,
+        "label": "MIME Type",
+        "placeholder": ""
+      },
+      {
+        "name": "size",
+        "type": "string",
+        "value": null,
+        "label": "File Size",
+        "placeholder": ""
+      },
+      {
+        "name": "modified_time",
+        "type": "string",
+        "value": null,
+        "label": "Modified Time",
+        "placeholder": ""
+      },
+      {
+        "name": "event_type",
+        "type": "string",
+        "value": null,
+        "label": "Event Type",
+        "placeholder": ""
+      },
+      {
+        "name": "web_link",
+        "type": "string",
+        "value": null,
+        "label": "Web Link",
+        "placeholder": ""
+      },
+      {
+        "name": "folder_id",
+        "type": "string",
+        "value": null,
+        "label": "Folder ID",
         "placeholder": ""
       }
     ]
