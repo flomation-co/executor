@@ -69,11 +69,23 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	valueBConn := core.FindConnection("value_b", inputs)
 
 	var valueA, valueB string
-	if valueAConn != nil && valueAConn.String() != nil {
-		valueA = *valueAConn.String()
+	if valueAConn != nil {
+		if valueAConn.String() != nil {
+			valueA = *valueAConn.String()
+		} else if valueAConn.Number() != nil {
+			valueA = fmt.Sprintf("%d", *valueAConn.Number())
+		} else if valueAConn.Value != nil {
+			valueA = fmt.Sprintf("%v", valueAConn.Value)
+		}
 	}
-	if valueBConn != nil && valueBConn.String() != nil {
-		valueB = *valueBConn.String()
+	if valueBConn != nil {
+		if valueBConn.String() != nil {
+			valueB = *valueBConn.String()
+		} else if valueBConn.Number() != nil {
+			valueB = fmt.Sprintf("%d", *valueBConn.Number())
+		} else if valueBConn.Value != nil {
+			valueB = fmt.Sprintf("%v", valueBConn.Value)
+		}
 	}
 
 	var result bool

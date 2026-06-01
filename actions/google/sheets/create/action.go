@@ -88,11 +88,10 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	if err != nil {
 		return google.ErrorResult(err.Error())
 	}
-	if status == 401 || status == 403 {
-		google.HandleAuthError(flow, token.Email, status)
-		return google.ErrorResult(fmt.Sprintf("Google API returned %d", status))
-	}
-	if status != 200 {
+	if status < 200 || status >= 300 {
+		if status == 401 || status == 403 {
+			google.HandleAuthError(flow, token.Email, status)
+		}
 		return google.ErrorResult(fmt.Sprintf("Google API returned %d: %s", status, google.TruncateBody(respBody)))
 	}
 
