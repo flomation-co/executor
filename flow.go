@@ -486,6 +486,8 @@ type Flow struct {
 	hadError             bool
 	suspended            bool
 	suspendInfo          *SuspendInfo
+	resumed              bool   // true when restored from a checkpoint
+	resumedSuspendNodeID string // the node that caused the original suspend
 	context              *ExecutionContext
 	ctx                  gocontext.Context
 	cancel               gocontext.CancelFunc
@@ -573,6 +575,24 @@ func (f *Flow) RestoreCheckpoint(cp *Checkpoint) {
 	// Clear suspend state — we are resuming
 	f.suspended = false
 	f.suspendInfo = nil
+	f.resumed = true
+
+	// Remove the suspend node from cache so it re-executes on resume.
+	// Its children were never traversed (ErrSuspended interrupted), so
+	// ExecuteNode must run again for that node to reach Phase 2.
+	if cp.SuspendInfo != nil && cp.SuspendInfo.NodeID != "" {
+		f.resumedSuspendNodeID = cp.SuspendInfo.NodeID
+		delete(f.nodeResults, cp.SuspendInfo.NodeID)
+	}
+}
+
+// IsResumed returns true if this execution was restored from a checkpoint.
+func (f *Flow) IsResumed() bool { return f.resumed }
+
+// IsResumedNode returns true if this node was the one that caused the suspend
+// and is now being re-executed after resume.
+func (f *Flow) IsResumedNode(nodeID string) bool {
+	return f.resumed && f.resumedSuspendNodeID == nodeID
 }
 
 // filterSerialisableVariables removes non-JSON-serialisable values

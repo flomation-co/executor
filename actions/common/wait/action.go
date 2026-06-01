@@ -46,6 +46,16 @@ var Outputs = [...]core.Connection{
 }
 
 func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[string]interface{}, error) {
+	// On resume, pass through without suspending again
+	if flow.IsResumedNode(node.ID) {
+		return map[string]interface{}{
+			"tool_result": "Resumed after wait",
+			"suspended":   false,
+			"resume_at":   "",
+			"duration":    "",
+		}, nil
+	}
+
 	durationStr := optStr("duration", inputs)
 	resumeAtStr := optStr("resume_at", inputs)
 

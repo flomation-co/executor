@@ -40,6 +40,16 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 		reason = *r.String()
 	}
 
+	// On resume, this node re-executes but should NOT suspend again —
+	// just pass through so children can execute.
+	if flow.IsResumedNode(node.ID) {
+		return map[string]interface{}{
+			"tool_result": "Resumed: " + reason,
+			"suspended":   false,
+			"reason":      reason,
+		}, nil
+	}
+
 	flow.Suspend(&core.SuspendInfo{
 		NodeID: node.ID,
 		Reason: "manual",
