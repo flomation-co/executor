@@ -488,6 +488,7 @@ type Flow struct {
 	suspendInfo          *SuspendInfo
 	resumed              bool   // true when restored from a checkpoint
 	resumedSuspendNodeID string // the node that caused the original suspend
+	traversedNodes       map[string]bool // tracks which nodes have had children traversed
 	context              *ExecutionContext
 	ctx                  gocontext.Context
 	cancel               gocontext.CancelFunc
@@ -953,8 +954,21 @@ func (f *Flow) ExecuteNode(actions map[string]Action, node *Node, environment *e
 	// If already fully processed (action + children), return cached result.
 	// This prevents re-entrant child traversal when a child's parent resolution
 	// calls ExecuteNode on this node again.
+	//
+	// On resume, nodeResults contains cached action outputs from the checkpoint
+	// but the traversedNodes set is empty — so Phase 1 returns cached results
+	// while Phase 2 (child traversal) still runs, walking the graph until it
+	// reaches the uncached suspend node.
 	if v, exists := f.nodeResults[node.ID]; exists {
-		return v, nil
+		if f.traversedNodes[node.ID] {
+			return v, nil
+		}
+		// Action cached but children not yet traversed — proceed to Phase 2
+		if f.traversedNodes == nil {
+			f.traversedNodes = make(map[string]bool)
+		}
+		f.traversedNodes[node.ID] = true
+		return f.executeNodeChildren(actions, node, v, environment)
 	}
 
 	// Phase 1: execute this node's own action (resolve parents, substitute vars, run action, cache)
@@ -962,6 +976,12 @@ func (f *Flow) ExecuteNode(actions map[string]Action, node *Node, environment *e
 	if err != nil {
 		return nil, err
 	}
+
+	// Mark as traversed and proceed to Phase 2
+	if f.traversedNodes == nil {
+		f.traversedNodes = make(map[string]bool)
+	}
+	f.traversedNodes[node.ID] = true
 
 	// Phase 2: determine and execute children using breadth-first ordering
 	return f.executeNodeChildren(actions, node, outputs, environment)
