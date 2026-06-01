@@ -239,6 +239,7 @@ import (
 	trigger_git_poll "flomation.app/automate/executor/actions/trigger/git_poll"
 	trigger_github_webhook "flomation.app/automate/executor/actions/trigger/github_webhook"
 	trigger_gitlab_webhook "flomation.app/automate/executor/actions/trigger/gitlab_webhook"
+	trigger_google_drive "flomation.app/automate/executor/actions/trigger/google_drive"
 	trigger_image "flomation.app/automate/executor/actions/trigger/image"
 	trigger_linkedin_poll "flomation.app/automate/executor/actions/trigger/linkedin_poll"
 	trigger_manual "flomation.app/automate/executor/actions/trigger/manual"
@@ -508,6 +509,7 @@ var Actions = map[string]core.Action{
 	"trigger/git_poll":                    trigger_git_poll.Execute,
 	"trigger/github_webhook":              trigger_github_webhook.Execute,
 	"trigger/gitlab_webhook":              trigger_gitlab_webhook.Execute,
+	"trigger/google_drive":                trigger_google_drive.Execute,
 	"trigger/image":                       trigger_image.Execute,
 	"trigger/linkedin_poll":               trigger_linkedin_poll.Execute,
 	"trigger/manual":                      trigger_manual.Execute,
