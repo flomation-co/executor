@@ -14818,6 +14818,1086 @@
       }
     ]
   },
+  "microsoft/outlook/create_draft": {
+    "hash": "bd7938ef7fb53cfa02a8afe6f331a562c413591de69edff407e35fd7026253d7",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Create Draft",
+    "description": "Create a draft email in Outlook",
+    "website": "https://www.flomation.co",
+    "icon": "envelope",
+    "date": "03/06/2026",
+    "type": 2,
+    "category": {
+      "name": "Microsoft",
+      "icon": "microsoft",
+      "description": "Microsoft 365 integrations"
+    },
+    "sub_category": {
+      "name": "Outlook",
+      "icon": "envelope",
+      "description": "Microsoft Outlook email operations"
+    },
+    "inputs": [
+      {
+        "name": "to",
+        "type": "string",
+        "value": null,
+        "label": "To (email addresses, comma-separated)",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "subject",
+        "type": "string",
+        "value": null,
+        "label": "Subject",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "body",
+        "type": "string",
+        "value": null,
+        "label": "Body",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "cc",
+        "type": "string",
+        "value": null,
+        "label": "CC (email addresses, comma-separated)",
+        "placeholder": ""
+      },
+      {
+        "name": "content_type",
+        "type": "string",
+        "value": null,
+        "label": "Content Type",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "Text",
+            "value": "Text"
+          },
+          {
+            "name": "HTML",
+            "value": "HTML"
+          }
+        ]
+      },
+      {
+        "name": "account",
+        "type": "string",
+        "value": null,
+        "label": "Microsoft Account (email)",
+        "placeholder": ""
+      },
+      {
+        "name": "credential",
+        "type": "string",
+        "value": null,
+        "label": "Microsoft OAuth Credential",
+        "placeholder": "${credentials.MICROSOFT_OUTLOOK}"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "draft_id",
+        "type": "string",
+        "value": null,
+        "label": "Draft ID",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "microsoft/outlook/delete_email": {
+    "hash": "a7f388d67cd36baacc80829200aa9129d5e416881b61ccc1fa47a2fc8c54fd80",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Delete Email",
+    "description": "Delete an Outlook email message",
+    "website": "https://www.flomation.co",
+    "icon": "trash",
+    "date": "03/06/2026",
+    "type": 2,
+    "category": {
+      "name": "Microsoft",
+      "icon": "microsoft",
+      "description": "Microsoft 365 integrations"
+    },
+    "sub_category": {
+      "name": "Outlook",
+      "icon": "envelope",
+      "description": "Microsoft Outlook email operations"
+    },
+    "inputs": [
+      {
+        "name": "message_id",
+        "type": "string",
+        "value": null,
+        "label": "Message ID",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "account",
+        "type": "string",
+        "value": null,
+        "label": "Microsoft Account (email)",
+        "placeholder": ""
+      },
+      {
+        "name": "credential",
+        "type": "string",
+        "value": null,
+        "label": "Microsoft OAuth Credential",
+        "placeholder": "${credentials.MICROSOFT_OUTLOOK}"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "microsoft/outlook/download_attachment": {
+    "hash": "5d754985e89f5fbf6ed6b878ce4e4a37b27aa71adaed3615b45c45e85cf4483c",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Download Attachment",
+    "description": "Download an attachment from an Outlook email",
+    "website": "https://www.flomation.co",
+    "icon": "paperclip",
+    "date": "03/06/2026",
+    "type": 2,
+    "category": {
+      "name": "Microsoft",
+      "icon": "microsoft",
+      "description": "Microsoft 365 integrations"
+    },
+    "sub_category": {
+      "name": "Outlook",
+      "icon": "envelope",
+      "description": "Microsoft Outlook email operations"
+    },
+    "inputs": [
+      {
+        "name": "message_id",
+        "type": "string",
+        "value": null,
+        "label": "Message ID",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "attachment_id",
+        "type": "string",
+        "value": null,
+        "label": "Attachment ID",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "account",
+        "type": "string",
+        "value": null,
+        "label": "Microsoft Account (email)",
+        "placeholder": ""
+      },
+      {
+        "name": "credential",
+        "type": "string",
+        "value": null,
+        "label": "Microsoft OAuth Credential",
+        "placeholder": "${credentials.MICROSOFT_OUTLOOK}"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "content",
+        "type": "string",
+        "value": null,
+        "label": "Content (Base64)",
+        "placeholder": ""
+      },
+      {
+        "name": "filename",
+        "type": "string",
+        "value": null,
+        "label": "Filename",
+        "placeholder": ""
+      },
+      {
+        "name": "content_type",
+        "type": "string",
+        "value": null,
+        "label": "Content Type",
+        "placeholder": ""
+      },
+      {
+        "name": "size",
+        "type": "string",
+        "value": null,
+        "label": "Size (bytes)",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "microsoft/outlook/forward": {
+    "hash": "10f146a90d58e19b65982908fb73d92532b064bcc6dc0ff24831886012540cb2",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Forward Email",
+    "description": "Forward an Outlook email to other recipients",
+    "website": "https://www.flomation.co",
+    "icon": "share",
+    "date": "03/06/2026",
+    "type": 2,
+    "category": {
+      "name": "Microsoft",
+      "icon": "microsoft",
+      "description": "Microsoft 365 integrations"
+    },
+    "sub_category": {
+      "name": "Outlook",
+      "icon": "envelope",
+      "description": "Microsoft Outlook email operations"
+    },
+    "inputs": [
+      {
+        "name": "message_id",
+        "type": "string",
+        "value": null,
+        "label": "Message ID",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "to",
+        "type": "string",
+        "value": null,
+        "label": "To (email addresses, comma-separated)",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "comment",
+        "type": "string",
+        "value": null,
+        "label": "Comment",
+        "placeholder": ""
+      },
+      {
+        "name": "account",
+        "type": "string",
+        "value": null,
+        "label": "Microsoft Account (email)",
+        "placeholder": ""
+      },
+      {
+        "name": "credential",
+        "type": "string",
+        "value": null,
+        "label": "Microsoft OAuth Credential",
+        "placeholder": "${credentials.MICROSOFT_OUTLOOK}"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "microsoft/outlook/list_attachments": {
+    "hash": "3cd755974cd0cf59d39c6d1e3cbf37d3c1afab34442f8da132fb22457f0f64b5",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "List Attachments",
+    "description": "List attachments on an Outlook email message",
+    "website": "https://www.flomation.co",
+    "icon": "paperclip",
+    "date": "03/06/2026",
+    "type": 2,
+    "category": {
+      "name": "Microsoft",
+      "icon": "microsoft",
+      "description": "Microsoft 365 integrations"
+    },
+    "sub_category": {
+      "name": "Outlook",
+      "icon": "envelope",
+      "description": "Microsoft Outlook email operations"
+    },
+    "inputs": [
+      {
+        "name": "message_id",
+        "type": "string",
+        "value": null,
+        "label": "Message ID",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "account",
+        "type": "string",
+        "value": null,
+        "label": "Microsoft Account (email)",
+        "placeholder": ""
+      },
+      {
+        "name": "credential",
+        "type": "string",
+        "value": null,
+        "label": "Microsoft OAuth Credential",
+        "placeholder": "${credentials.MICROSOFT_OUTLOOK}"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "attachments",
+        "type": "string",
+        "value": null,
+        "label": "Attachments (JSON)",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "string",
+        "value": null,
+        "label": "Attachment Count",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "microsoft/outlook/list_emails": {
+    "hash": "c28f21026ec1e7dcfb993addf747008f716211f4544b3010428aac3be09f2cdc",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "List Emails",
+    "description": "List emails from an Outlook mailbox or folder",
+    "website": "https://www.flomation.co",
+    "icon": "envelope",
+    "date": "03/06/2026",
+    "type": 2,
+    "category": {
+      "name": "Microsoft",
+      "icon": "microsoft",
+      "description": "Microsoft 365 integrations"
+    },
+    "sub_category": {
+      "name": "Outlook",
+      "icon": "envelope",
+      "description": "Microsoft Outlook email operations"
+    },
+    "inputs": [
+      {
+        "name": "folder_id",
+        "type": "string",
+        "value": null,
+        "label": "Folder ID",
+        "placeholder": ""
+      },
+      {
+        "name": "account",
+        "type": "string",
+        "value": null,
+        "label": "Microsoft Account (email)",
+        "placeholder": ""
+      },
+      {
+        "name": "credential",
+        "type": "string",
+        "value": null,
+        "label": "Microsoft OAuth Credential",
+        "placeholder": "${credentials.MICROSOFT_OUTLOOK}"
+      },
+      {
+        "name": "max_results",
+        "type": "integer",
+        "value": null,
+        "label": "Maximum Results",
+        "placeholder": ""
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "emails",
+        "type": "string",
+        "value": null,
+        "label": "Emails (JSON)",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "string",
+        "value": null,
+        "label": "Email Count",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "microsoft/outlook/list_folders": {
+    "hash": "fad4a13fcf95be147f3c37d17fa316c891e510533c22f1267ccd22b7c82ae361",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "List Folders",
+    "description": "List mail folders in an Outlook mailbox",
+    "website": "https://www.flomation.co",
+    "icon": "folder",
+    "date": "03/06/2026",
+    "type": 2,
+    "category": {
+      "name": "Microsoft",
+      "icon": "microsoft",
+      "description": "Microsoft 365 integrations"
+    },
+    "sub_category": {
+      "name": "Outlook",
+      "icon": "envelope",
+      "description": "Microsoft Outlook email operations"
+    },
+    "inputs": [
+      {
+        "name": "account",
+        "type": "string",
+        "value": null,
+        "label": "Microsoft Account (email)",
+        "placeholder": ""
+      },
+      {
+        "name": "credential",
+        "type": "string",
+        "value": null,
+        "label": "Microsoft OAuth Credential",
+        "placeholder": "${credentials.MICROSOFT_OUTLOOK}"
+      },
+      {
+        "name": "max_results",
+        "type": "integer",
+        "value": null,
+        "label": "Maximum Results",
+        "placeholder": ""
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "folders",
+        "type": "string",
+        "value": null,
+        "label": "Folders (JSON)",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "string",
+        "value": null,
+        "label": "Folder Count",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "microsoft/outlook/move_email": {
+    "hash": "a12aa9edff83e71c552a43a8d25a58f5e8b9998e44b91281ce5cd09439f191d2",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Move Email",
+    "description": "Move an Outlook email to a different folder",
+    "website": "https://www.flomation.co",
+    "icon": "folder",
+    "date": "03/06/2026",
+    "type": 2,
+    "category": {
+      "name": "Microsoft",
+      "icon": "microsoft",
+      "description": "Microsoft 365 integrations"
+    },
+    "sub_category": {
+      "name": "Outlook",
+      "icon": "envelope",
+      "description": "Microsoft Outlook email operations"
+    },
+    "inputs": [
+      {
+        "name": "message_id",
+        "type": "string",
+        "value": null,
+        "label": "Message ID",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "folder_id",
+        "type": "string",
+        "value": null,
+        "label": "Destination Folder ID",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "account",
+        "type": "string",
+        "value": null,
+        "label": "Microsoft Account (email)",
+        "placeholder": ""
+      },
+      {
+        "name": "credential",
+        "type": "string",
+        "value": null,
+        "label": "Microsoft OAuth Credential",
+        "placeholder": "${credentials.MICROSOFT_OUTLOOK}"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "microsoft/outlook/read_email": {
+    "hash": "5bf0d595d237b8bf3832ba54d2c5ff9cdfd5e7121c2ab8be6b495ab4ba425b94",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Read Email",
+    "description": "Read the full content of an Outlook email message",
+    "website": "https://www.flomation.co",
+    "icon": "envelope",
+    "date": "03/06/2026",
+    "type": 2,
+    "category": {
+      "name": "Microsoft",
+      "icon": "microsoft",
+      "description": "Microsoft 365 integrations"
+    },
+    "sub_category": {
+      "name": "Outlook",
+      "icon": "envelope",
+      "description": "Microsoft Outlook email operations"
+    },
+    "inputs": [
+      {
+        "name": "message_id",
+        "type": "string",
+        "value": null,
+        "label": "Message ID",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "account",
+        "type": "string",
+        "value": null,
+        "label": "Microsoft Account (email)",
+        "placeholder": ""
+      },
+      {
+        "name": "credential",
+        "type": "string",
+        "value": null,
+        "label": "Microsoft OAuth Credential",
+        "placeholder": "${credentials.MICROSOFT_OUTLOOK}"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "subject",
+        "type": "string",
+        "value": null,
+        "label": "Subject",
+        "placeholder": ""
+      },
+      {
+        "name": "from",
+        "type": "string",
+        "value": null,
+        "label": "From",
+        "placeholder": ""
+      },
+      {
+        "name": "to",
+        "type": "string",
+        "value": null,
+        "label": "To",
+        "placeholder": ""
+      },
+      {
+        "name": "body",
+        "type": "string",
+        "value": null,
+        "label": "Body",
+        "placeholder": ""
+      },
+      {
+        "name": "received_at",
+        "type": "string",
+        "value": null,
+        "label": "Received At",
+        "placeholder": ""
+      },
+      {
+        "name": "email",
+        "type": "string",
+        "value": null,
+        "label": "Full Email (JSON)",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "microsoft/outlook/reply": {
+    "hash": "3655af8e1a9753b845c598a4d56bf5c62a916a486d10ab6f05cba0bd253704f5",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Reply to Email",
+    "description": "Reply to an Outlook email message",
+    "website": "https://www.flomation.co",
+    "icon": "reply",
+    "date": "03/06/2026",
+    "type": 2,
+    "category": {
+      "name": "Microsoft",
+      "icon": "microsoft",
+      "description": "Microsoft 365 integrations"
+    },
+    "sub_category": {
+      "name": "Outlook",
+      "icon": "envelope",
+      "description": "Microsoft Outlook email operations"
+    },
+    "inputs": [
+      {
+        "name": "message_id",
+        "type": "string",
+        "value": null,
+        "label": "Message ID",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "comment",
+        "type": "string",
+        "value": null,
+        "label": "Reply Message",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "account",
+        "type": "string",
+        "value": null,
+        "label": "Microsoft Account (email)",
+        "placeholder": ""
+      },
+      {
+        "name": "credential",
+        "type": "string",
+        "value": null,
+        "label": "Microsoft OAuth Credential",
+        "placeholder": "${credentials.MICROSOFT_OUTLOOK}"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "microsoft/outlook/search_emails": {
+    "hash": "f4912e3f45d4a0b18dd2c4fd4d1b7a8e50cc5f32e7ea6553fcdc99d106ed55b0",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Search Emails",
+    "description": "Search for emails in an Outlook mailbox",
+    "website": "https://www.flomation.co",
+    "icon": "magnifying-glass",
+    "date": "03/06/2026",
+    "type": 2,
+    "category": {
+      "name": "Microsoft",
+      "icon": "microsoft",
+      "description": "Microsoft 365 integrations"
+    },
+    "sub_category": {
+      "name": "Outlook",
+      "icon": "envelope",
+      "description": "Microsoft Outlook email operations"
+    },
+    "inputs": [
+      {
+        "name": "query",
+        "type": "string",
+        "value": null,
+        "label": "Search Query",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "account",
+        "type": "string",
+        "value": null,
+        "label": "Microsoft Account (email)",
+        "placeholder": ""
+      },
+      {
+        "name": "credential",
+        "type": "string",
+        "value": null,
+        "label": "Microsoft OAuth Credential",
+        "placeholder": "${credentials.MICROSOFT_OUTLOOK}"
+      },
+      {
+        "name": "max_results",
+        "type": "integer",
+        "value": null,
+        "label": "Maximum Results",
+        "placeholder": ""
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "emails",
+        "type": "string",
+        "value": null,
+        "label": "Emails (JSON)",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "string",
+        "value": null,
+        "label": "Result Count",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "microsoft/outlook/send_email": {
+    "hash": "75523de4b5dd250c6f417e297a792582b78407c3b567419b4bd455e3e1d0f557",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Send Email",
+    "description": "Send an email via Outlook",
+    "website": "https://www.flomation.co",
+    "icon": "paper-plane",
+    "date": "03/06/2026",
+    "type": 2,
+    "category": {
+      "name": "Microsoft",
+      "icon": "microsoft",
+      "description": "Microsoft 365 integrations"
+    },
+    "sub_category": {
+      "name": "Outlook",
+      "icon": "envelope",
+      "description": "Microsoft Outlook email operations"
+    },
+    "inputs": [
+      {
+        "name": "to",
+        "type": "string",
+        "value": null,
+        "label": "To (email addresses, comma-separated)",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "subject",
+        "type": "string",
+        "value": null,
+        "label": "Subject",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "body",
+        "type": "string",
+        "value": null,
+        "label": "Body",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "cc",
+        "type": "string",
+        "value": null,
+        "label": "CC (email addresses, comma-separated)",
+        "placeholder": ""
+      },
+      {
+        "name": "content_type",
+        "type": "string",
+        "value": null,
+        "label": "Content Type",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "Text",
+            "value": "Text"
+          },
+          {
+            "name": "HTML",
+            "value": "HTML"
+          }
+        ]
+      },
+      {
+        "name": "account",
+        "type": "string",
+        "value": null,
+        "label": "Microsoft Account (email)",
+        "placeholder": ""
+      },
+      {
+        "name": "credential",
+        "type": "string",
+        "value": null,
+        "label": "Microsoft OAuth Credential",
+        "placeholder": "${credentials.MICROSOFT_OUTLOOK}"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
   "nosql/mongodb": {
     "hash": "b39aa00de55e30d04c1bd1fb7df7ada3807e1a63a5917febc616c46748c1d618",
     "author": "Andy Esser",
