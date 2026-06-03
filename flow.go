@@ -484,6 +484,11 @@ type Flow struct {
 	reachableNodes       map[string]bool
 	inErrorChain         bool
 	hadError             bool
+	suspended            bool
+	suspendInfo          *SuspendInfo
+	resumed              bool   // true when restored from a checkpoint
+	resumedSuspendNodeID string // the node that caused the original suspend
+	traversedNodes       map[string]bool // tracks which nodes have had children traversed
 	context              *ExecutionContext
 	ctx                  gocontext.Context
 	cancel               gocontext.CancelFunc
@@ -491,6 +496,124 @@ type Flow struct {
 
 // ErrCancelled is returned when a flow execution is cancelled.
 var ErrCancelled = errors.New("execution cancelled")
+
+// ErrSuspended is returned when a flow execution is suspended (paused).
+// The executor should serialise a checkpoint and exit.
+var ErrSuspended = errors.New("execution suspended")
+
+// SuspendInfo holds metadata about why the execution was suspended
+// and how it should be resumed.
+type SuspendInfo struct {
+	NodeID             string                 `json:"suspend_node_id"`
+	Reason             string                 `json:"suspend_reason"`
+	ResumeAt           *time.Time             `json:"resume_at,omitempty"`
+	ResumeTriggerType  string                 `json:"resume_trigger_type,omitempty"`
+	ResumeTriggerMatch map[string]interface{} `json:"resume_trigger_match,omitempty"`
+}
+
+// Checkpoint holds all serialisable runtime state needed to resume
+// a suspended execution on a different runner.
+type Checkpoint struct {
+	NodeResults          map[string]map[string]interface{} `json:"node_results"`
+	Variables            map[string]interface{}             `json:"variables,omitempty"`
+	Outputs              map[string]interface{}             `json:"outputs,omitempty"`
+	NodeExecutionResults map[string]*ExecutionNodeResult    `json:"node_execution_results,omitempty"`
+	EntryNodeID          string                             `json:"entry_node_id"`
+	ReachableNodes       map[string]bool                    `json:"reachable_nodes,omitempty"`
+	InErrorChain         bool                               `json:"in_error_chain"`
+	HadError             bool                               `json:"had_error"`
+	SuspendInfo          *SuspendInfo                       `json:"suspend_info,omitempty"`
+}
+
+// Suspend marks the execution as suspended with the given metadata.
+// Called by suspend/pause/wait actions.
+func (f *Flow) Suspend(info *SuspendInfo) {
+	f.suspended = true
+	f.suspendInfo = info
+}
+
+// IsSuspended returns true if the execution has been suspended.
+func (f *Flow) IsSuspended() bool { return f.suspended }
+
+// GetSuspendInfo returns the suspend metadata.
+func (f *Flow) GetSuspendInfo() *SuspendInfo { return f.suspendInfo }
+
+// CreateCheckpoint serialises the current runtime state for later resume.
+func (f *Flow) CreateCheckpoint() *Checkpoint {
+	return &Checkpoint{
+		NodeResults:          f.nodeResults,
+		Variables:            filterSerialisableVariables(f.variables),
+		Outputs:              f.outputs,
+		NodeExecutionResults: f.nodeExecutionResults,
+		EntryNodeID:          f.entryNodeID,
+		ReachableNodes:       f.reachableNodes,
+		InErrorChain:         f.inErrorChain,
+		HadError:             f.hadError,
+		SuspendInfo:          f.suspendInfo,
+	}
+}
+
+// RestoreCheckpoint restores runtime state from a serialised checkpoint.
+func (f *Flow) RestoreCheckpoint(cp *Checkpoint) {
+	if cp.NodeResults != nil {
+		f.nodeResults = cp.NodeResults
+	}
+	if cp.Variables != nil {
+		f.variables = cp.Variables
+	}
+	if cp.Outputs != nil {
+		f.outputs = cp.Outputs
+	}
+	if cp.NodeExecutionResults != nil {
+		f.nodeExecutionResults = cp.NodeExecutionResults
+	}
+	f.entryNodeID = cp.EntryNodeID
+	if cp.ReachableNodes != nil {
+		f.reachableNodes = cp.ReachableNodes
+	}
+	f.inErrorChain = cp.InErrorChain
+	f.hadError = cp.HadError
+	// Clear suspend state — we are resuming
+	f.suspended = false
+	f.suspendInfo = nil
+	f.resumed = true
+
+	// Remove the suspend node from cache so it re-executes on resume.
+	// Its children were never traversed (ErrSuspended interrupted), so
+	// ExecuteNode must run again for that node to reach Phase 2.
+	if cp.SuspendInfo != nil && cp.SuspendInfo.NodeID != "" {
+		f.resumedSuspendNodeID = cp.SuspendInfo.NodeID
+		delete(f.nodeResults, cp.SuspendInfo.NodeID)
+	}
+}
+
+// IsResumed returns true if this execution was restored from a checkpoint.
+func (f *Flow) IsResumed() bool { return f.resumed }
+
+// IsResumedNode returns true if this node was the one that caused the suspend
+// and is now being re-executed after resume.
+func (f *Flow) IsResumedNode(nodeID string) bool {
+	return f.resumed && f.resumedSuspendNodeID == nodeID
+}
+
+// filterSerialisableVariables removes non-JSON-serialisable values
+// (channels, functions) from the variables map for checkpointing.
+func filterSerialisableVariables(vars map[string]interface{}) map[string]interface{} {
+	if vars == nil {
+		return nil
+	}
+	filtered := make(map[string]interface{}, len(vars))
+	for k, v := range vars {
+		// Skip channels and functions
+		switch v.(type) {
+		case chan string, chan []byte, chan interface{}:
+			continue
+		default:
+			filtered[k] = v
+		}
+	}
+	return filtered
+}
 
 // GetNodeExecutionResults returns the per-node execution results map.
 func (f *Flow) GetNodeExecutionResults() map[string]*ExecutionNodeResult {
@@ -551,6 +674,7 @@ type ExecutionResult struct {
 	BillingDuration int64                           `json:"billing_duration"`
 	Outputs         map[string]interface{}          `json:"outputs"`
 	NodeResults     map[string]*ExecutionNodeResult `json:"node_results,omitempty"`
+	Checkpoint      *Checkpoint                     `json:"checkpoint,omitempty"`
 }
 
 func Load(path *string) (*Flow, error) {
@@ -718,6 +842,11 @@ func (f *Flow) Execute(actions map[string]Action, entry *string, environment *en
 	f.reachableNodes = f.computeReachable(start.ID)
 
 	_, err := f.ExecuteNode(actions, start, environment)
+	if errors.Is(err, ErrSuspended) {
+		// Execution suspended — return current outputs with suspend error
+		// so the caller can serialise the checkpoint.
+		return f.outputs, ErrSuspended
+	}
 	if err != nil && !f.inErrorChain {
 		// Look for an On Error trigger node and execute its chain
 		onErrorHandled := f.executeOnErrorChain(actions, err, environment)
@@ -825,8 +954,21 @@ func (f *Flow) ExecuteNode(actions map[string]Action, node *Node, environment *e
 	// If already fully processed (action + children), return cached result.
 	// This prevents re-entrant child traversal when a child's parent resolution
 	// calls ExecuteNode on this node again.
+	//
+	// On resume, nodeResults contains cached action outputs from the checkpoint
+	// but the traversedNodes set is empty — so Phase 1 returns cached results
+	// while Phase 2 (child traversal) still runs, walking the graph until it
+	// reaches the uncached suspend node.
 	if v, exists := f.nodeResults[node.ID]; exists {
-		return v, nil
+		if f.traversedNodes[node.ID] {
+			return v, nil
+		}
+		// Action cached but children not yet traversed — proceed to Phase 2
+		if f.traversedNodes == nil {
+			f.traversedNodes = make(map[string]bool)
+		}
+		f.traversedNodes[node.ID] = true
+		return f.executeNodeChildren(actions, node, v, environment)
 	}
 
 	// Phase 1: execute this node's own action (resolve parents, substitute vars, run action, cache)
@@ -834,6 +976,12 @@ func (f *Flow) ExecuteNode(actions map[string]Action, node *Node, environment *e
 	if err != nil {
 		return nil, err
 	}
+
+	// Mark as traversed and proceed to Phase 2
+	if f.traversedNodes == nil {
+		f.traversedNodes = make(map[string]bool)
+	}
+	f.traversedNodes[node.ID] = true
 
 	// Phase 2: determine and execute children using breadth-first ordering
 	return f.executeNodeChildren(actions, node, outputs, environment)
@@ -849,7 +997,7 @@ func (f *Flow) executeNodeActionOnly(actions map[string]Action, node *Node, envi
 		return nil, ErrInvalidNode
 	}
 
-	// Check for cancellation before executing
+	// Check for cancellation or suspension before executing
 	if f.ctx != nil {
 		select {
 		case <-f.ctx.Done():
@@ -858,6 +1006,9 @@ func (f *Flow) executeNodeActionOnly(actions map[string]Action, node *Node, envi
 			return nil, ErrCancelled
 		default:
 		}
+	}
+	if f.suspended {
+		return nil, ErrSuspended
 	}
 
 	if v, exists := f.nodeResults[node.ID]; exists {
@@ -1240,6 +1391,16 @@ func (f *Flow) executeNodeActionOnly(actions map[string]Action, node *Node, envi
 
 	// Build obfuscated input map for streaming and recording
 	inputMap := f.buildObfuscatedInputMap(node, configuration)
+
+	if errors.Is(err, ErrSuspended) {
+		// Record the suspend node as suspended (not failed) and cache its outputs
+		f.emitNodeEvent(node.ID, node.Type, node.Data.Label, "suspended", durationMs, "", inputMap, outputs)
+		f.recordNodeResult(node, "suspended", configuration, outputs, durationMs, "")
+		if outputs != nil {
+			f.nodeResults[node.ID] = outputs
+		}
+		return outputs, ErrSuspended
+	}
 
 	if err != nil {
 		f.emitNodeEvent(node.ID, node.Type, node.Data.Label, "failed", durationMs, err.Error(), inputMap, outputs)

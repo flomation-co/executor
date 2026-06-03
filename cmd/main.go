@@ -55,6 +55,7 @@ func main() {
 	identity := flag.String("identity", "https://id.flomation.app", "URL of Identity Service Provider")
 	triggerData := flag.String("trigger-data", "", "Path to trigger invocation data JSON file")
 	contextFile := flag.String("context", "", "Path to execution context JSON file")
+	checkpointFile := flag.String("checkpoint", "", "Path to checkpoint file for resumed execution")
 	debug := flag.Bool("debug", false, "Enable debug logging")
 
 	flag.Parse()
@@ -199,6 +200,25 @@ func main() {
 		}
 	}
 
+	// Restore checkpoint for resumed execution
+	if *checkpointFile != "" {
+		cpBytes, err := os.ReadFile(*checkpointFile)
+		if err != nil {
+			log.WithError(err).Error("unable to read checkpoint file")
+			os.Exit(1)
+		}
+		var cp core.Checkpoint
+		if err := json.Unmarshal(cpBytes, &cp); err != nil {
+			log.WithError(err).Error("unable to parse checkpoint")
+			os.Exit(1)
+		}
+		flo.RestoreCheckpoint(&cp)
+		log.WithFields(log.Fields{
+			"cached_nodes": len(cp.NodeResults),
+			"variables":    len(cp.Variables),
+		}).Info("restored checkpoint for resumed execution")
+	}
+
 	// Set up cancellable context with SIGTERM/SIGINT handling
 	ctx, cancel := context.WithCancel(context.Background())
 	defer cancel()
@@ -219,12 +239,17 @@ func main() {
 
 	outputs, err := flo.Execute(actions.Actions, entryNode, e)
 	if err != nil {
-		log.WithFields(log.Fields{
-			"error": err,
-		}).Error("Error executing flow")
-		status = 1
-		if errors.Is(err, core.ErrCancelled) {
-			status = 2
+		if errors.Is(err, core.ErrSuspended) {
+			log.Info("Execution suspended")
+			status = 3
+		} else {
+			log.WithFields(log.Fields{
+				"error": err,
+			}).Error("Error executing flow")
+			status = 1
+			if errors.Is(err, core.ErrCancelled) {
+				status = 2
+			}
 		}
 	} else if flo.HadError() {
 		// The error was handled by an On Error chain, but the execution
@@ -255,6 +280,11 @@ func main() {
 		BillingDuration: duration.Milliseconds(),
 		Outputs:         outputs,
 		NodeResults:     flo.GetNodeExecutionResults(),
+	}
+
+	// Include checkpoint for suspended executions
+	if status == 3 {
+		result.Checkpoint = flo.CreateCheckpoint()
 	}
 
 	b, err := json.Marshal(result)
