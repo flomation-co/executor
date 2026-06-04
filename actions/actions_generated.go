@@ -175,6 +175,13 @@ import (
 	microsoft_calendar_get_event "flomation.app/automate/executor/actions/microsoft/calendar/get_event"
 	microsoft_calendar_list_events "flomation.app/automate/executor/actions/microsoft/calendar/list_events"
 	microsoft_calendar_update_event "flomation.app/automate/executor/actions/microsoft/calendar/update_event"
+	microsoft_excel_append_rows "flomation.app/automate/executor/actions/microsoft/excel/append_rows"
+	microsoft_excel_clear_range "flomation.app/automate/executor/actions/microsoft/excel/clear_range"
+	microsoft_excel_create_workbook "flomation.app/automate/executor/actions/microsoft/excel/create_workbook"
+	microsoft_excel_get_metadata "flomation.app/automate/executor/actions/microsoft/excel/get_metadata"
+	microsoft_excel_list_worksheets "flomation.app/automate/executor/actions/microsoft/excel/list_worksheets"
+	microsoft_excel_read_range "flomation.app/automate/executor/actions/microsoft/excel/read_range"
+	microsoft_excel_write_range "flomation.app/automate/executor/actions/microsoft/excel/write_range"
 	microsoft_onedrive_copy_file "flomation.app/automate/executor/actions/microsoft/onedrive/copy_file"
 	microsoft_onedrive_create_folder "flomation.app/automate/executor/actions/microsoft/onedrive/create_folder"
 	microsoft_onedrive_delete_file "flomation.app/automate/executor/actions/microsoft/onedrive/delete_file"
@@ -499,6 +506,13 @@ var Actions = map[string]core.Action{
 	"microsoft/calendar/get_event":          microsoft_calendar_get_event.Execute,
 	"microsoft/calendar/list_events":        microsoft_calendar_list_events.Execute,
 	"microsoft/calendar/update_event":       microsoft_calendar_update_event.Execute,
+	"microsoft/excel/append_rows":           microsoft_excel_append_rows.Execute,
+	"microsoft/excel/clear_range":           microsoft_excel_clear_range.Execute,
+	"microsoft/excel/create_workbook":       microsoft_excel_create_workbook.Execute,
+	"microsoft/excel/get_metadata":          microsoft_excel_get_metadata.Execute,
+	"microsoft/excel/list_worksheets":       microsoft_excel_list_worksheets.Execute,
+	"microsoft/excel/read_range":            microsoft_excel_read_range.Execute,
+	"microsoft/excel/write_range":           microsoft_excel_write_range.Execute,
 	"microsoft/onedrive/copy_file":          microsoft_onedrive_copy_file.Execute,
 	"microsoft/onedrive/create_folder":      microsoft_onedrive_create_folder.Execute,
 	"microsoft/onedrive/delete_file":        microsoft_onedrive_delete_file.Execute,
