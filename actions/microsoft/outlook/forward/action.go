@@ -24,7 +24,7 @@ const (
 var Inputs = [...]core.Connection{
 	{Name: "message_id", Type: core.ConnectionTypeString, Label: "Message ID", Required: true},
 	{Name: "to", Type: core.ConnectionTypeString, Label: "To (email addresses, comma-separated)", Required: true},
-	{Name: "comment", Type: core.ConnectionTypeString, Label: "Comment"},
+	{Name: "comment", Type: core.ConnectionTypeText, Label: "Comment"},
 	{Name: "account", Type: core.ConnectionTypeString, Label: "Microsoft Account (email)"},
 	{Name: "credential", Type: core.ConnectionTypeString, Label: "Microsoft OAuth Credential", Placeholder: "${credentials.MICROSOFT_OUTLOOK}"},
 }

@@ -24,7 +24,7 @@ const (
 var Inputs = [...]core.Connection{
 	{Name: "to", Type: core.ConnectionTypeString, Label: "To (email addresses, comma-separated)", Required: true},
 	{Name: "subject", Type: core.ConnectionTypeString, Label: "Subject", Required: true},
-	{Name: "body", Type: core.ConnectionTypeString, Label: "Body", Required: true},
+	{Name: "body", Type: core.ConnectionTypeText, Label: "Body", Required: true},
 	{Name: "cc", Type: core.ConnectionTypeString, Label: "CC (email addresses, comma-separated)"},
 	{Name: "content_type", Type: core.ConnectionTypeString, Label: "Content Type", Options: []core.ConnectionOption{
 		{Name: "Text", Value: "Text"},

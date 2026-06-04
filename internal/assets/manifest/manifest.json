@@ -15598,7 +15598,7 @@
     ]
   },
   "microsoft/outlook/create_draft": {
-    "hash": "dbc9cc2bf38c8da5629ec7beea4839c05bc94862bb57c664be56fd67f35aa16a",
+    "hash": "03e220883e6a0491e7cd4f6bea1e1a56421633c9eb543d2882496666fe1e555e",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Create Draft",
@@ -15636,7 +15636,7 @@
       },
       {
         "name": "body",
-        "type": "string",
+        "type": "text",
         "value": null,
         "label": "Body",
         "placeholder": "",
@@ -15885,7 +15885,7 @@
     ]
   },
   "microsoft/outlook/forward": {
-    "hash": "5b54e2db907c9a0b7fa858208703ca2d8863293a2cc15a914e129aa0c8a5bdb4",
+    "hash": "3a20ef8a7c4442c08852ac9ade81e13bd58ee9857222757db0c8322d6386b227",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Forward Email",
@@ -15923,7 +15923,7 @@
       },
       {
         "name": "comment",
-        "type": "string",
+        "type": "text",
         "value": null,
         "label": "Comment",
         "placeholder": ""
@@ -16405,7 +16405,7 @@
     ]
   },
   "microsoft/outlook/reply": {
-    "hash": "d753b7a86efc26d5aba28ce9aace61196090b882473f418af2608bbefbaf1ac6",
+    "hash": "01d18baab051d37ab4a997245e053075d4d6ed740937bccae0aef323bd5feb5b",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Reply to Email",
@@ -16435,7 +16435,7 @@
       },
       {
         "name": "comment",
-        "type": "string",
+        "type": "text",
         "value": null,
         "label": "Reply Message",
         "placeholder": "",
@@ -16570,7 +16570,7 @@
     ]
   },
   "microsoft/outlook/send_email": {
-    "hash": "75523de4b5dd250c6f417e297a792582b78407c3b567419b4bd455e3e1d0f557",
+    "hash": "61fad765e10fd054639c68c1d149addca2d11780d499752d717f707cd760a49e",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Send Email",
@@ -16608,7 +16608,7 @@
       },
       {
         "name": "body",
-        "type": "string",
+        "type": "text",
         "value": null,
         "label": "Body",
         "placeholder": "",
