@@ -16120,6 +16120,943 @@
       }
     ]
   },
+  "microsoft/onedrive/copy_file": {
+    "hash": "90afb16bc4ee439ea79b72a2c24a21f9e1f0f1e1f9a5da176ea981fb08aed489",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Copy Item",
+    "description": "Copy a file or folder to a different OneDrive location",
+    "website": "https://www.flomation.co",
+    "icon": "folder+file-export",
+    "date": "04/06/2026",
+    "type": 2,
+    "category": {
+      "name": "Microsoft",
+      "icon": "microsoft",
+      "description": "Microsoft 365 integrations"
+    },
+    "sub_category": {
+      "name": "OneDrive",
+      "icon": "folder",
+      "description": "Microsoft OneDrive file storage and management"
+    },
+    "inputs": [
+      {
+        "name": "item_id",
+        "type": "string",
+        "value": null,
+        "label": "Item ID",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "destination_folder_id",
+        "type": "string",
+        "value": null,
+        "label": "Destination Folder ID",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "new_name",
+        "type": "string",
+        "value": null,
+        "label": "New Name",
+        "placeholder": ""
+      },
+      {
+        "name": "account",
+        "type": "string",
+        "value": null,
+        "label": "Microsoft Account (email)",
+        "placeholder": ""
+      },
+      {
+        "name": "credential",
+        "type": "string",
+        "value": null,
+        "label": "Microsoft OAuth Credential",
+        "placeholder": "${credentials.MICROSOFT_ONEDRIVE}"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "microsoft/onedrive/create_folder": {
+    "hash": "bde261941f5bef0c07dc3ff8a345fb1918a39582cc681dcc79ac637cdb2d9ed2",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Create Folder",
+    "description": "Create a new folder in OneDrive",
+    "website": "https://www.flomation.co",
+    "icon": "folder+plus",
+    "date": "04/06/2026",
+    "type": 2,
+    "category": {
+      "name": "Microsoft",
+      "icon": "microsoft",
+      "description": "Microsoft 365 integrations"
+    },
+    "sub_category": {
+      "name": "OneDrive",
+      "icon": "folder",
+      "description": "Microsoft OneDrive file storage and management"
+    },
+    "inputs": [
+      {
+        "name": "name",
+        "type": "string",
+        "value": null,
+        "label": "Folder Name",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "parent_id",
+        "type": "string",
+        "value": null,
+        "label": "Parent Folder ID",
+        "placeholder": "Leave empty for root"
+      },
+      {
+        "name": "account",
+        "type": "string",
+        "value": null,
+        "label": "Microsoft Account (email)",
+        "placeholder": ""
+      },
+      {
+        "name": "credential",
+        "type": "string",
+        "value": null,
+        "label": "Microsoft OAuth Credential",
+        "placeholder": "${credentials.MICROSOFT_ONEDRIVE}"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "item_id",
+        "type": "string",
+        "value": null,
+        "label": "Folder ID",
+        "placeholder": ""
+      },
+      {
+        "name": "web_url",
+        "type": "string",
+        "value": null,
+        "label": "Web URL",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "microsoft/onedrive/delete_file": {
+    "hash": "de0531bc5a0e59e1ca5cc170b454fbf527343217c7ac4bdb38f21d20fdb27f21",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Delete File",
+    "description": "Delete a file or folder from OneDrive",
+    "website": "https://www.flomation.co",
+    "icon": "folder+trash",
+    "date": "04/06/2026",
+    "type": 2,
+    "category": {
+      "name": "Microsoft",
+      "icon": "microsoft",
+      "description": "Microsoft 365 integrations"
+    },
+    "sub_category": {
+      "name": "OneDrive",
+      "icon": "folder",
+      "description": "Microsoft OneDrive file storage and management"
+    },
+    "inputs": [
+      {
+        "name": "item_id",
+        "type": "string",
+        "value": null,
+        "label": "Item ID",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "account",
+        "type": "string",
+        "value": null,
+        "label": "Microsoft Account (email)",
+        "placeholder": ""
+      },
+      {
+        "name": "credential",
+        "type": "string",
+        "value": null,
+        "label": "Microsoft OAuth Credential",
+        "placeholder": "${credentials.MICROSOFT_ONEDRIVE}"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "microsoft/onedrive/download": {
+    "hash": "d611b885848b1216e8bb984f94472463e3a56b109020529ddbd71c56e5f6e6ad",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Download File",
+    "description": "Download a file from OneDrive by item ID",
+    "website": "https://www.flomation.co",
+    "icon": "folder+arrow-down",
+    "date": "04/06/2026",
+    "type": 2,
+    "category": {
+      "name": "Microsoft",
+      "icon": "microsoft",
+      "description": "Microsoft 365 integrations"
+    },
+    "sub_category": {
+      "name": "OneDrive",
+      "icon": "folder",
+      "description": "Microsoft OneDrive file storage and management"
+    },
+    "inputs": [
+      {
+        "name": "item_id",
+        "type": "string",
+        "value": null,
+        "label": "Item ID",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "account",
+        "type": "string",
+        "value": null,
+        "label": "Microsoft Account (email)",
+        "placeholder": ""
+      },
+      {
+        "name": "credential",
+        "type": "string",
+        "value": null,
+        "label": "Microsoft OAuth Credential",
+        "placeholder": "${credentials.MICROSOFT_ONEDRIVE}"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "content",
+        "type": "string",
+        "value": null,
+        "label": "Content (Base64)",
+        "placeholder": ""
+      },
+      {
+        "name": "filename",
+        "type": "string",
+        "value": null,
+        "label": "Filename",
+        "placeholder": ""
+      },
+      {
+        "name": "content_type",
+        "type": "string",
+        "value": null,
+        "label": "Content Type",
+        "placeholder": ""
+      },
+      {
+        "name": "size",
+        "type": "string",
+        "value": null,
+        "label": "Size (bytes)",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "microsoft/onedrive/get_file": {
+    "hash": "3a0c09cf51a3acc415b403f8b62511b994d0e38b97d902d985749692e1350844",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Get File Info",
+    "description": "Retrieve metadata for a file or folder in OneDrive",
+    "website": "https://www.flomation.co",
+    "icon": "folder+eye",
+    "date": "04/06/2026",
+    "type": 2,
+    "category": {
+      "name": "Microsoft",
+      "icon": "microsoft",
+      "description": "Microsoft 365 integrations"
+    },
+    "sub_category": {
+      "name": "OneDrive",
+      "icon": "folder",
+      "description": "Microsoft OneDrive file storage and management"
+    },
+    "inputs": [
+      {
+        "name": "item_id",
+        "type": "string",
+        "value": null,
+        "label": "Item ID",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "account",
+        "type": "string",
+        "value": null,
+        "label": "Microsoft Account (email)",
+        "placeholder": ""
+      },
+      {
+        "name": "credential",
+        "type": "string",
+        "value": null,
+        "label": "Microsoft OAuth Credential",
+        "placeholder": "${credentials.MICROSOFT_ONEDRIVE}"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "name",
+        "type": "string",
+        "value": null,
+        "label": "Name",
+        "placeholder": ""
+      },
+      {
+        "name": "size",
+        "type": "string",
+        "value": null,
+        "label": "Size (bytes)",
+        "placeholder": ""
+      },
+      {
+        "name": "mime_type",
+        "type": "string",
+        "value": null,
+        "label": "MIME Type",
+        "placeholder": ""
+      },
+      {
+        "name": "web_url",
+        "type": "string",
+        "value": null,
+        "label": "Web URL",
+        "placeholder": ""
+      },
+      {
+        "name": "created_at",
+        "type": "string",
+        "value": null,
+        "label": "Created At",
+        "placeholder": ""
+      },
+      {
+        "name": "modified_at",
+        "type": "string",
+        "value": null,
+        "label": "Modified At",
+        "placeholder": ""
+      },
+      {
+        "name": "file",
+        "type": "string",
+        "value": null,
+        "label": "Full Metadata (JSON)",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "microsoft/onedrive/list_files": {
+    "hash": "96ecabdb86d0f9dbb501647366719dadff6bb0dbe1cb5ad7d16c35ac6ee9b44a",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "List Files",
+    "description": "List files and folders in a OneDrive directory",
+    "website": "https://www.flomation.co",
+    "icon": "folder+list",
+    "date": "04/06/2026",
+    "type": 2,
+    "category": {
+      "name": "Microsoft",
+      "icon": "microsoft",
+      "description": "Microsoft 365 integrations"
+    },
+    "sub_category": {
+      "name": "OneDrive",
+      "icon": "folder",
+      "description": "Microsoft OneDrive file storage and management"
+    },
+    "inputs": [
+      {
+        "name": "item_id",
+        "type": "string",
+        "value": null,
+        "label": "Folder ID",
+        "placeholder": "Leave empty for root"
+      },
+      {
+        "name": "max_results",
+        "type": "integer",
+        "value": null,
+        "label": "Maximum Results",
+        "placeholder": ""
+      },
+      {
+        "name": "account",
+        "type": "string",
+        "value": null,
+        "label": "Microsoft Account (email)",
+        "placeholder": ""
+      },
+      {
+        "name": "credential",
+        "type": "string",
+        "value": null,
+        "label": "Microsoft OAuth Credential",
+        "placeholder": "${credentials.MICROSOFT_ONEDRIVE}"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "files",
+        "type": "string",
+        "value": null,
+        "label": "Files (JSON)",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "string",
+        "value": null,
+        "label": "File Count",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "microsoft/onedrive/move": {
+    "hash": "467b14a49f7bc3babd7a9f740ab77a397a0b11d9a5a2c31229fbab78bf97486c",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Move Item",
+    "description": "Move a file or folder to a different OneDrive location",
+    "website": "https://www.flomation.co",
+    "icon": "folder+arrow-right",
+    "date": "04/06/2026",
+    "type": 2,
+    "category": {
+      "name": "Microsoft",
+      "icon": "microsoft",
+      "description": "Microsoft 365 integrations"
+    },
+    "sub_category": {
+      "name": "OneDrive",
+      "icon": "folder",
+      "description": "Microsoft OneDrive file storage and management"
+    },
+    "inputs": [
+      {
+        "name": "item_id",
+        "type": "string",
+        "value": null,
+        "label": "Item ID",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "destination_folder_id",
+        "type": "string",
+        "value": null,
+        "label": "Destination Folder ID",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "new_name",
+        "type": "string",
+        "value": null,
+        "label": "New Name",
+        "placeholder": ""
+      },
+      {
+        "name": "account",
+        "type": "string",
+        "value": null,
+        "label": "Microsoft Account (email)",
+        "placeholder": ""
+      },
+      {
+        "name": "credential",
+        "type": "string",
+        "value": null,
+        "label": "Microsoft OAuth Credential",
+        "placeholder": "${credentials.MICROSOFT_ONEDRIVE}"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "microsoft/onedrive/search": {
+    "hash": "c428d6b97414ed221cd602af3572bb2aa90fd3a28fd6dde8dbc11fd18e9cbec3",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Search Files",
+    "description": "Search for files and folders in OneDrive",
+    "website": "https://www.flomation.co",
+    "icon": "folder+magnifying-glass",
+    "date": "04/06/2026",
+    "type": 2,
+    "category": {
+      "name": "Microsoft",
+      "icon": "microsoft",
+      "description": "Microsoft 365 integrations"
+    },
+    "sub_category": {
+      "name": "OneDrive",
+      "icon": "folder",
+      "description": "Microsoft OneDrive file storage and management"
+    },
+    "inputs": [
+      {
+        "name": "query",
+        "type": "string",
+        "value": null,
+        "label": "Search Query",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "max_results",
+        "type": "integer",
+        "value": null,
+        "label": "Maximum Results",
+        "placeholder": ""
+      },
+      {
+        "name": "account",
+        "type": "string",
+        "value": null,
+        "label": "Microsoft Account (email)",
+        "placeholder": ""
+      },
+      {
+        "name": "credential",
+        "type": "string",
+        "value": null,
+        "label": "Microsoft OAuth Credential",
+        "placeholder": "${credentials.MICROSOFT_ONEDRIVE}"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "results",
+        "type": "string",
+        "value": null,
+        "label": "Results (JSON)",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "string",
+        "value": null,
+        "label": "Result Count",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "microsoft/onedrive/share": {
+    "hash": "1460f4e3b4b70861c52505b1da54511e0505258bb34c922269b131b343712a5f",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Create Sharing Link",
+    "description": "Create a sharing link for a OneDrive file or folder",
+    "website": "https://www.flomation.co",
+    "icon": "folder+share-from-square",
+    "date": "04/06/2026",
+    "type": 2,
+    "category": {
+      "name": "Microsoft",
+      "icon": "microsoft",
+      "description": "Microsoft 365 integrations"
+    },
+    "sub_category": {
+      "name": "OneDrive",
+      "icon": "folder",
+      "description": "Microsoft OneDrive file storage and management"
+    },
+    "inputs": [
+      {
+        "name": "item_id",
+        "type": "string",
+        "value": null,
+        "label": "Item ID",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "link_type",
+        "type": "string",
+        "value": null,
+        "label": "Link Type",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "View",
+            "value": "view"
+          },
+          {
+            "name": "Edit",
+            "value": "edit"
+          },
+          {
+            "name": "Embed",
+            "value": "embed"
+          }
+        ]
+      },
+      {
+        "name": "scope",
+        "type": "string",
+        "value": null,
+        "label": "Scope",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "Anonymous",
+            "value": "anonymous"
+          },
+          {
+            "name": "Organisation",
+            "value": "organization"
+          }
+        ]
+      },
+      {
+        "name": "account",
+        "type": "string",
+        "value": null,
+        "label": "Microsoft Account (email)",
+        "placeholder": ""
+      },
+      {
+        "name": "credential",
+        "type": "string",
+        "value": null,
+        "label": "Microsoft OAuth Credential",
+        "placeholder": "${credentials.MICROSOFT_ONEDRIVE}"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "share_url",
+        "type": "string",
+        "value": null,
+        "label": "Share URL",
+        "placeholder": ""
+      },
+      {
+        "name": "share_id",
+        "type": "string",
+        "value": null,
+        "label": "Share ID",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "microsoft/onedrive/upload": {
+    "hash": "208f8569b9313da26efb5748fb032e1b83d30714b9d35e3adc04ebd8b6ed7822",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Upload File",
+    "description": "Upload a file to OneDrive (simple upload, under 4 MB)",
+    "website": "https://www.flomation.co",
+    "icon": "folder+arrow-up",
+    "date": "04/06/2026",
+    "type": 2,
+    "category": {
+      "name": "Microsoft",
+      "icon": "microsoft",
+      "description": "Microsoft 365 integrations"
+    },
+    "sub_category": {
+      "name": "OneDrive",
+      "icon": "folder",
+      "description": "Microsoft OneDrive file storage and management"
+    },
+    "inputs": [
+      {
+        "name": "filename",
+        "type": "string",
+        "value": null,
+        "label": "Filename",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "content",
+        "type": "text",
+        "value": null,
+        "label": "File Content (text or base64)",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "folder_id",
+        "type": "string",
+        "value": null,
+        "label": "Parent Folder ID",
+        "placeholder": ""
+      },
+      {
+        "name": "content_type",
+        "type": "string",
+        "value": null,
+        "label": "Content Type",
+        "placeholder": "text/plain"
+      },
+      {
+        "name": "account",
+        "type": "string",
+        "value": null,
+        "label": "Microsoft Account (email)",
+        "placeholder": ""
+      },
+      {
+        "name": "credential",
+        "type": "string",
+        "value": null,
+        "label": "Microsoft OAuth Credential",
+        "placeholder": "${credentials.MICROSOFT_ONEDRIVE}"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "item_id",
+        "type": "string",
+        "value": null,
+        "label": "Item ID",
+        "placeholder": ""
+      },
+      {
+        "name": "web_url",
+        "type": "string",
+        "value": null,
+        "label": "Web URL",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
   "microsoft/outlook/create_draft": {
     "hash": "03e220883e6a0491e7cd4f6bea1e1a56421633c9eb543d2882496666fe1e555e",
     "author": "Andy Esser",
@@ -17174,6 +18111,540 @@
         "value": null,
         "label": "Microsoft OAuth Credential",
         "placeholder": "${credentials.MICROSOFT_OUTLOOK}"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "microsoft/sharepoint/create_list_item": {
+    "hash": "68edded4cb9a285150faaefe655d6360712516ff73ef26360a8100ecd57e00d4",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Create List Item",
+    "description": "Create a new item in a SharePoint list",
+    "website": "https://www.flomation.co",
+    "icon": "globe+plus",
+    "date": "04/06/2026",
+    "type": 2,
+    "category": {
+      "name": "Microsoft",
+      "icon": "microsoft",
+      "description": "Microsoft 365 integrations"
+    },
+    "sub_category": {
+      "name": "SharePoint",
+      "icon": "globe",
+      "description": "Microsoft SharePoint sites, lists, and document libraries"
+    },
+    "inputs": [
+      {
+        "name": "site_id",
+        "type": "string",
+        "value": null,
+        "label": "Site ID",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "list_id",
+        "type": "string",
+        "value": null,
+        "label": "List ID",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "fields",
+        "type": "text",
+        "value": null,
+        "label": "Fields (JSON object)",
+        "placeholder": "{\"Title\":\"My Item\",\"Status\":\"Active\"}",
+        "required": true
+      },
+      {
+        "name": "account",
+        "type": "string",
+        "value": null,
+        "label": "Microsoft Account (email)",
+        "placeholder": ""
+      },
+      {
+        "name": "credential",
+        "type": "string",
+        "value": null,
+        "label": "Microsoft OAuth Credential",
+        "placeholder": "${credentials.MICROSOFT_SHAREPOINT}"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "item_id",
+        "type": "string",
+        "value": null,
+        "label": "Item ID",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "microsoft/sharepoint/delete_list_item": {
+    "hash": "e18e862ba3e077e5dc1c90a7d0ecf913fc2b82dca0c782b76fce4f0b0ba3e317",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Delete List Item",
+    "description": "Delete an item from a SharePoint list",
+    "website": "https://www.flomation.co",
+    "icon": "globe+trash",
+    "date": "04/06/2026",
+    "type": 2,
+    "category": {
+      "name": "Microsoft",
+      "icon": "microsoft",
+      "description": "Microsoft 365 integrations"
+    },
+    "sub_category": {
+      "name": "SharePoint",
+      "icon": "globe",
+      "description": "Microsoft SharePoint sites, lists, and document libraries"
+    },
+    "inputs": [
+      {
+        "name": "site_id",
+        "type": "string",
+        "value": null,
+        "label": "Site ID",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "list_id",
+        "type": "string",
+        "value": null,
+        "label": "List ID",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "item_id",
+        "type": "string",
+        "value": null,
+        "label": "Item ID",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "account",
+        "type": "string",
+        "value": null,
+        "label": "Microsoft Account (email)",
+        "placeholder": ""
+      },
+      {
+        "name": "credential",
+        "type": "string",
+        "value": null,
+        "label": "Microsoft OAuth Credential",
+        "placeholder": "${credentials.MICROSOFT_SHAREPOINT}"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "microsoft/sharepoint/get_list_items": {
+    "hash": "45b525d0e25e7f0406eacb10e67e2d0d3ec8cf9efb7966791b542a62e81c007d",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Get List Items",
+    "description": "Retrieve items from a SharePoint list",
+    "website": "https://www.flomation.co",
+    "icon": "globe+eye",
+    "date": "04/06/2026",
+    "type": 2,
+    "category": {
+      "name": "Microsoft",
+      "icon": "microsoft",
+      "description": "Microsoft 365 integrations"
+    },
+    "sub_category": {
+      "name": "SharePoint",
+      "icon": "globe",
+      "description": "Microsoft SharePoint sites, lists, and document libraries"
+    },
+    "inputs": [
+      {
+        "name": "site_id",
+        "type": "string",
+        "value": null,
+        "label": "Site ID",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "list_id",
+        "type": "string",
+        "value": null,
+        "label": "List ID",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "max_results",
+        "type": "integer",
+        "value": null,
+        "label": "Max Results",
+        "placeholder": ""
+      },
+      {
+        "name": "account",
+        "type": "string",
+        "value": null,
+        "label": "Microsoft Account (email)",
+        "placeholder": ""
+      },
+      {
+        "name": "credential",
+        "type": "string",
+        "value": null,
+        "label": "Microsoft OAuth Credential",
+        "placeholder": "${credentials.MICROSOFT_SHAREPOINT}"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "items",
+        "type": "string",
+        "value": null,
+        "label": "Items (JSON array)",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "string",
+        "value": null,
+        "label": "Item Count",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "microsoft/sharepoint/list_lists": {
+    "hash": "d90ecfb8c2ffbb359d62bf0f0c7bc0aa8ddfbf3198912172a763ecac521259bc",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "List Lists",
+    "description": "Retrieve all lists from a SharePoint site",
+    "website": "https://www.flomation.co",
+    "icon": "globe+list",
+    "date": "04/06/2026",
+    "type": 2,
+    "category": {
+      "name": "Microsoft",
+      "icon": "microsoft",
+      "description": "Microsoft 365 integrations"
+    },
+    "sub_category": {
+      "name": "SharePoint",
+      "icon": "globe",
+      "description": "Microsoft SharePoint sites, lists, and document libraries"
+    },
+    "inputs": [
+      {
+        "name": "site_id",
+        "type": "string",
+        "value": null,
+        "label": "Site ID",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "account",
+        "type": "string",
+        "value": null,
+        "label": "Microsoft Account (email)",
+        "placeholder": ""
+      },
+      {
+        "name": "credential",
+        "type": "string",
+        "value": null,
+        "label": "Microsoft OAuth Credential",
+        "placeholder": "${credentials.MICROSOFT_SHAREPOINT}"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "lists",
+        "type": "string",
+        "value": null,
+        "label": "Lists (JSON array)",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "string",
+        "value": null,
+        "label": "List Count",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "microsoft/sharepoint/list_sites": {
+    "hash": "1ddb708b084b18993e6ca3650398bb2c1f37372942fff4eefb4669e47bab66e1",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "List Sites",
+    "description": "Search and list SharePoint sites",
+    "website": "https://www.flomation.co",
+    "icon": "globe+list",
+    "date": "04/06/2026",
+    "type": 2,
+    "category": {
+      "name": "Microsoft",
+      "icon": "microsoft",
+      "description": "Microsoft 365 integrations"
+    },
+    "sub_category": {
+      "name": "SharePoint",
+      "icon": "globe",
+      "description": "Microsoft SharePoint sites, lists, and document libraries"
+    },
+    "inputs": [
+      {
+        "name": "query",
+        "type": "string",
+        "value": null,
+        "label": "Search Query",
+        "placeholder": "Search term (leave empty for all)"
+      },
+      {
+        "name": "max_results",
+        "type": "integer",
+        "value": null,
+        "label": "Max Results",
+        "placeholder": ""
+      },
+      {
+        "name": "account",
+        "type": "string",
+        "value": null,
+        "label": "Microsoft Account (email)",
+        "placeholder": ""
+      },
+      {
+        "name": "credential",
+        "type": "string",
+        "value": null,
+        "label": "Microsoft OAuth Credential",
+        "placeholder": "${credentials.MICROSOFT_SHAREPOINT}"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "sites",
+        "type": "string",
+        "value": null,
+        "label": "Sites (JSON array)",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "string",
+        "value": null,
+        "label": "Site Count",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "microsoft/sharepoint/update_list_item": {
+    "hash": "26b8f529f6cb4edfd12c16972b3c858ddf9e9ce5da5100d1d9561f2d86c02c52",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Update List Item",
+    "description": "Update fields on a SharePoint list item",
+    "website": "https://www.flomation.co",
+    "icon": "globe+pencil",
+    "date": "04/06/2026",
+    "type": 2,
+    "category": {
+      "name": "Microsoft",
+      "icon": "microsoft",
+      "description": "Microsoft 365 integrations"
+    },
+    "sub_category": {
+      "name": "SharePoint",
+      "icon": "globe",
+      "description": "Microsoft SharePoint sites, lists, and document libraries"
+    },
+    "inputs": [
+      {
+        "name": "site_id",
+        "type": "string",
+        "value": null,
+        "label": "Site ID",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "list_id",
+        "type": "string",
+        "value": null,
+        "label": "List ID",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "item_id",
+        "type": "string",
+        "value": null,
+        "label": "Item ID",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "fields",
+        "type": "text",
+        "value": null,
+        "label": "Fields (JSON object)",
+        "placeholder": "{\"Status\":\"Completed\"}",
+        "required": true
+      },
+      {
+        "name": "account",
+        "type": "string",
+        "value": null,
+        "label": "Microsoft Account (email)",
+        "placeholder": ""
+      },
+      {
+        "name": "credential",
+        "type": "string",
+        "value": null,
+        "label": "Microsoft OAuth Credential",
+        "placeholder": "${credentials.MICROSOFT_SHAREPOINT}"
       }
     ],
     "outputs": [
