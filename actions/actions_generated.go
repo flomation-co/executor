@@ -170,6 +170,11 @@ import (
 	messaging_email_send "flomation.app/automate/executor/actions/messaging/email/send"
 	messaging_telegram_send_message "flomation.app/automate/executor/actions/messaging/telegram/send_message"
 	messaging_telegram_send_voice "flomation.app/automate/executor/actions/messaging/telegram/send_voice"
+	microsoft_calendar_create_event "flomation.app/automate/executor/actions/microsoft/calendar/create_event"
+	microsoft_calendar_delete_event "flomation.app/automate/executor/actions/microsoft/calendar/delete_event"
+	microsoft_calendar_get_event "flomation.app/automate/executor/actions/microsoft/calendar/get_event"
+	microsoft_calendar_list_events "flomation.app/automate/executor/actions/microsoft/calendar/list_events"
+	microsoft_calendar_update_event "flomation.app/automate/executor/actions/microsoft/calendar/update_event"
 	microsoft_outlook_create_draft "flomation.app/automate/executor/actions/microsoft/outlook/create_draft"
 	microsoft_outlook_delete_email "flomation.app/automate/executor/actions/microsoft/outlook/delete_email"
 	microsoft_outlook_download_attachment "flomation.app/automate/executor/actions/microsoft/outlook/download_attachment"
@@ -182,6 +187,12 @@ import (
 	microsoft_outlook_reply "flomation.app/automate/executor/actions/microsoft/outlook/reply"
 	microsoft_outlook_search_emails "flomation.app/automate/executor/actions/microsoft/outlook/search_emails"
 	microsoft_outlook_send_email "flomation.app/automate/executor/actions/microsoft/outlook/send_email"
+	microsoft_teams_create_channel "flomation.app/automate/executor/actions/microsoft/teams/create_channel"
+	microsoft_teams_list_channel_messages "flomation.app/automate/executor/actions/microsoft/teams/list_channel_messages"
+	microsoft_teams_list_channels "flomation.app/automate/executor/actions/microsoft/teams/list_channels"
+	microsoft_teams_list_teams "flomation.app/automate/executor/actions/microsoft/teams/list_teams"
+	microsoft_teams_send_channel_message "flomation.app/automate/executor/actions/microsoft/teams/send_channel_message"
+	microsoft_teams_send_chat_message "flomation.app/automate/executor/actions/microsoft/teams/send_chat_message"
 	nosql_mongodb "flomation.app/automate/executor/actions/nosql/mongodb"
 	nosql_redis "flomation.app/automate/executor/actions/nosql/redis"
 	notion_add_comment "flomation.app/automate/executor/actions/notion/add_comment"
@@ -455,6 +466,11 @@ var Actions = map[string]core.Action{
 	"messaging/email/send":                  messaging_email_send.Execute,
 	"messaging/telegram/send_message":       messaging_telegram_send_message.Execute,
 	"messaging/telegram/send_voice":         messaging_telegram_send_voice.Execute,
+	"microsoft/calendar/create_event":       microsoft_calendar_create_event.Execute,
+	"microsoft/calendar/delete_event":       microsoft_calendar_delete_event.Execute,
+	"microsoft/calendar/get_event":          microsoft_calendar_get_event.Execute,
+	"microsoft/calendar/list_events":        microsoft_calendar_list_events.Execute,
+	"microsoft/calendar/update_event":       microsoft_calendar_update_event.Execute,
 	"microsoft/outlook/create_draft":        microsoft_outlook_create_draft.Execute,
 	"microsoft/outlook/delete_email":        microsoft_outlook_delete_email.Execute,
 	"microsoft/outlook/download_attachment": microsoft_outlook_download_attachment.Execute,
@@ -467,6 +483,12 @@ var Actions = map[string]core.Action{
 	"microsoft/outlook/reply":               microsoft_outlook_reply.Execute,
 	"microsoft/outlook/search_emails":       microsoft_outlook_search_emails.Execute,
 	"microsoft/outlook/send_email":          microsoft_outlook_send_email.Execute,
+	"microsoft/teams/create_channel":        microsoft_teams_create_channel.Execute,
+	"microsoft/teams/list_channel_messages": microsoft_teams_list_channel_messages.Execute,
+	"microsoft/teams/list_channels":         microsoft_teams_list_channels.Execute,
+	"microsoft/teams/list_teams":            microsoft_teams_list_teams.Execute,
+	"microsoft/teams/send_channel_message":  microsoft_teams_send_channel_message.Execute,
+	"microsoft/teams/send_chat_message":     microsoft_teams_send_chat_message.Execute,
 	"nosql/mongodb":                         nosql_mongodb.Execute,
 	"nosql/redis":                           nosql_redis.Execute,
 	"notion/add_comment":                    notion_add_comment.Execute,

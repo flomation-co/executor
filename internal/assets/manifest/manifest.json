@@ -15597,6 +15597,529 @@
       }
     ]
   },
+  "microsoft/calendar/create_event": {
+    "hash": "8a62533e0b099e140f542f213ad6b628d2d75b2b5c1f14f7443c688c434a3a23",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Create Event",
+    "description": "Create a new calendar event in Microsoft Outlook",
+    "website": "https://www.flomation.co",
+    "icon": "calendar+plus",
+    "date": "04/06/2026",
+    "type": 2,
+    "category": {
+      "name": "Microsoft",
+      "icon": "microsoft",
+      "description": "Microsoft 365 integrations"
+    },
+    "sub_category": {
+      "name": "Calendar",
+      "icon": "calendar",
+      "description": "Microsoft Outlook calendar event management"
+    },
+    "inputs": [
+      {
+        "name": "subject",
+        "type": "string",
+        "value": null,
+        "label": "Subject",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "start_time",
+        "type": "string",
+        "value": null,
+        "label": "Start Time",
+        "placeholder": "2026-06-15T09:00:00",
+        "required": true
+      },
+      {
+        "name": "end_time",
+        "type": "string",
+        "value": null,
+        "label": "End Time",
+        "placeholder": "2026-06-15T10:00:00",
+        "required": true
+      },
+      {
+        "name": "timezone",
+        "type": "string",
+        "value": null,
+        "label": "Timezone",
+        "placeholder": "UTC"
+      },
+      {
+        "name": "body",
+        "type": "text",
+        "value": null,
+        "label": "Body",
+        "placeholder": ""
+      },
+      {
+        "name": "location",
+        "type": "string",
+        "value": null,
+        "label": "Location",
+        "placeholder": ""
+      },
+      {
+        "name": "attendees",
+        "type": "string",
+        "value": null,
+        "label": "Attendees",
+        "placeholder": "user@example.com, user2@example.com"
+      },
+      {
+        "name": "account",
+        "type": "string",
+        "value": null,
+        "label": "Microsoft Account (email)",
+        "placeholder": ""
+      },
+      {
+        "name": "credential",
+        "type": "string",
+        "value": null,
+        "label": "Microsoft OAuth Credential",
+        "placeholder": "${credentials.MICROSOFT_CALENDAR}"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "event_id",
+        "type": "string",
+        "value": null,
+        "label": "Event ID",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "microsoft/calendar/delete_event": {
+    "hash": "74da6327d86526f7298b0e03700fd9a066a107f6b037001d297abe4f8754078e",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Delete Event",
+    "description": "Delete a calendar event from Microsoft Outlook",
+    "website": "https://www.flomation.co",
+    "icon": "calendar+trash",
+    "date": "04/06/2026",
+    "type": 2,
+    "category": {
+      "name": "Microsoft",
+      "icon": "microsoft",
+      "description": "Microsoft 365 integrations"
+    },
+    "sub_category": {
+      "name": "Calendar",
+      "icon": "calendar",
+      "description": "Microsoft Outlook calendar event management"
+    },
+    "inputs": [
+      {
+        "name": "event_id",
+        "type": "string",
+        "value": null,
+        "label": "Event ID",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "account",
+        "type": "string",
+        "value": null,
+        "label": "Microsoft Account (email)",
+        "placeholder": ""
+      },
+      {
+        "name": "credential",
+        "type": "string",
+        "value": null,
+        "label": "Microsoft OAuth Credential",
+        "placeholder": "${credentials.MICROSOFT_CALENDAR}"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "microsoft/calendar/get_event": {
+    "hash": "f7fa9acd1d47757ec6c8989b27a9b9c9044427c2e95d37f34ebc4dbeffa80e08",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Get Event",
+    "description": "Retrieve details of a specific calendar event",
+    "website": "https://www.flomation.co",
+    "icon": "calendar+eye",
+    "date": "04/06/2026",
+    "type": 2,
+    "category": {
+      "name": "Microsoft",
+      "icon": "microsoft",
+      "description": "Microsoft 365 integrations"
+    },
+    "sub_category": {
+      "name": "Calendar",
+      "icon": "calendar",
+      "description": "Microsoft Outlook calendar event management"
+    },
+    "inputs": [
+      {
+        "name": "event_id",
+        "type": "string",
+        "value": null,
+        "label": "Event ID",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "account",
+        "type": "string",
+        "value": null,
+        "label": "Microsoft Account (email)",
+        "placeholder": ""
+      },
+      {
+        "name": "credential",
+        "type": "string",
+        "value": null,
+        "label": "Microsoft OAuth Credential",
+        "placeholder": "${credentials.MICROSOFT_CALENDAR}"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "subject",
+        "type": "string",
+        "value": null,
+        "label": "Subject",
+        "placeholder": ""
+      },
+      {
+        "name": "start",
+        "type": "string",
+        "value": null,
+        "label": "Start Time",
+        "placeholder": ""
+      },
+      {
+        "name": "end_time",
+        "type": "string",
+        "value": null,
+        "label": "End Time",
+        "placeholder": ""
+      },
+      {
+        "name": "location",
+        "type": "string",
+        "value": null,
+        "label": "Location",
+        "placeholder": ""
+      },
+      {
+        "name": "organizer",
+        "type": "string",
+        "value": null,
+        "label": "Organiser",
+        "placeholder": ""
+      },
+      {
+        "name": "attendees",
+        "type": "string",
+        "value": null,
+        "label": "Attendees",
+        "placeholder": ""
+      },
+      {
+        "name": "body",
+        "type": "string",
+        "value": null,
+        "label": "Body",
+        "placeholder": ""
+      },
+      {
+        "name": "is_all_day",
+        "type": "boolean",
+        "value": null,
+        "label": "All Day Event",
+        "placeholder": ""
+      },
+      {
+        "name": "event",
+        "type": "string",
+        "value": null,
+        "label": "Event (JSON)",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "microsoft/calendar/list_events": {
+    "hash": "73f5e7d848b321a5422ae89e82009166d7f24413c67baab64d72f12175bfc131",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "List Events",
+    "description": "List calendar events from a Microsoft Outlook calendar",
+    "website": "https://www.flomation.co",
+    "icon": "calendar+list",
+    "date": "04/06/2026",
+    "type": 2,
+    "category": {
+      "name": "Microsoft",
+      "icon": "microsoft",
+      "description": "Microsoft 365 integrations"
+    },
+    "sub_category": {
+      "name": "Calendar",
+      "icon": "calendar",
+      "description": "Microsoft Outlook calendar event management"
+    },
+    "inputs": [
+      {
+        "name": "start_date",
+        "type": "string",
+        "value": null,
+        "label": "Start Date",
+        "placeholder": "2026-06-01T00:00:00"
+      },
+      {
+        "name": "end_date",
+        "type": "string",
+        "value": null,
+        "label": "End Date",
+        "placeholder": "2026-06-30T23:59:59"
+      },
+      {
+        "name": "max_results",
+        "type": "integer",
+        "value": null,
+        "label": "Maximum Results",
+        "placeholder": ""
+      },
+      {
+        "name": "account",
+        "type": "string",
+        "value": null,
+        "label": "Microsoft Account (email)",
+        "placeholder": ""
+      },
+      {
+        "name": "credential",
+        "type": "string",
+        "value": null,
+        "label": "Microsoft OAuth Credential",
+        "placeholder": "${credentials.MICROSOFT_CALENDAR}"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "events",
+        "type": "string",
+        "value": null,
+        "label": "Events (JSON)",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "string",
+        "value": null,
+        "label": "Event Count",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "microsoft/calendar/update_event": {
+    "hash": "9f82b585d281a21957582e24b2812eb564a60b3fbbcda035d2e804a05349d9b8",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Update Event",
+    "description": "Update an existing calendar event in Microsoft Outlook",
+    "website": "https://www.flomation.co",
+    "icon": "calendar+pencil",
+    "date": "04/06/2026",
+    "type": 2,
+    "category": {
+      "name": "Microsoft",
+      "icon": "microsoft",
+      "description": "Microsoft 365 integrations"
+    },
+    "sub_category": {
+      "name": "Calendar",
+      "icon": "calendar",
+      "description": "Microsoft Outlook calendar event management"
+    },
+    "inputs": [
+      {
+        "name": "event_id",
+        "type": "string",
+        "value": null,
+        "label": "Event ID",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "subject",
+        "type": "string",
+        "value": null,
+        "label": "Subject",
+        "placeholder": ""
+      },
+      {
+        "name": "start_time",
+        "type": "string",
+        "value": null,
+        "label": "Start Time",
+        "placeholder": ""
+      },
+      {
+        "name": "end_time",
+        "type": "string",
+        "value": null,
+        "label": "End Time",
+        "placeholder": ""
+      },
+      {
+        "name": "timezone",
+        "type": "string",
+        "value": null,
+        "label": "Timezone",
+        "placeholder": ""
+      },
+      {
+        "name": "body",
+        "type": "text",
+        "value": null,
+        "label": "Body",
+        "placeholder": ""
+      },
+      {
+        "name": "location",
+        "type": "string",
+        "value": null,
+        "label": "Location",
+        "placeholder": ""
+      },
+      {
+        "name": "account",
+        "type": "string",
+        "value": null,
+        "label": "Microsoft Account (email)",
+        "placeholder": ""
+      },
+      {
+        "name": "credential",
+        "type": "string",
+        "value": null,
+        "label": "Microsoft OAuth Credential",
+        "placeholder": "${credentials.MICROSOFT_CALENDAR}"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
   "microsoft/outlook/create_draft": {
     "hash": "03e220883e6a0491e7cd4f6bea1e1a56421633c9eb543d2882496666fe1e555e",
     "author": "Andy Esser",
@@ -16659,6 +17182,578 @@
         "type": "string",
         "value": null,
         "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "microsoft/teams/create_channel": {
+    "hash": "0633ad0a37b7768d6f223b9a1660069c26248490e96f5b9c9797b69b1f5d8b91",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Create Channel",
+    "description": "Create a new channel in a Microsoft Teams team",
+    "website": "https://www.flomation.co",
+    "icon": "microsoft+plus",
+    "date": "04/06/2026",
+    "type": 2,
+    "category": {
+      "name": "Microsoft",
+      "icon": "microsoft",
+      "description": "Microsoft 365 integrations"
+    },
+    "sub_category": {
+      "name": "Teams",
+      "icon": "user-group",
+      "description": "Microsoft Teams messaging and channel operations"
+    },
+    "inputs": [
+      {
+        "name": "team_id",
+        "type": "string",
+        "value": null,
+        "label": "Team ID",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "name",
+        "type": "string",
+        "value": null,
+        "label": "Channel Name",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "description",
+        "type": "string",
+        "value": null,
+        "label": "Channel Description",
+        "placeholder": ""
+      },
+      {
+        "name": "membership_type",
+        "type": "string",
+        "value": null,
+        "label": "Membership Type",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "Standard",
+            "value": "standard"
+          },
+          {
+            "name": "Private",
+            "value": "private"
+          },
+          {
+            "name": "Shared",
+            "value": "shared"
+          }
+        ]
+      },
+      {
+        "name": "account",
+        "type": "string",
+        "value": null,
+        "label": "Microsoft Account (email)",
+        "placeholder": ""
+      },
+      {
+        "name": "credential",
+        "type": "string",
+        "value": null,
+        "label": "Microsoft OAuth Credential",
+        "placeholder": "${credentials.MICROSOFT_TEAMS}"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "channel_id",
+        "type": "string",
+        "value": null,
+        "label": "Channel ID",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "microsoft/teams/list_channel_messages": {
+    "hash": "9de02061ee11967e210902f90bb5a83b66b2e8f121697fe076e7bf8c4f82d727",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "List Channel Messages",
+    "description": "Retrieve recent messages from a Microsoft Teams channel",
+    "website": "https://www.flomation.co",
+    "icon": "microsoft+eye",
+    "date": "04/06/2026",
+    "type": 2,
+    "category": {
+      "name": "Microsoft",
+      "icon": "microsoft",
+      "description": "Microsoft 365 integrations"
+    },
+    "sub_category": {
+      "name": "Teams",
+      "icon": "user-group",
+      "description": "Microsoft Teams messaging and channel operations"
+    },
+    "inputs": [
+      {
+        "name": "team_id",
+        "type": "string",
+        "value": null,
+        "label": "Team ID",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "channel_id",
+        "type": "string",
+        "value": null,
+        "label": "Channel ID",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "max_results",
+        "type": "integer",
+        "value": null,
+        "label": "Maximum Results",
+        "placeholder": ""
+      },
+      {
+        "name": "account",
+        "type": "string",
+        "value": null,
+        "label": "Microsoft Account (email)",
+        "placeholder": ""
+      },
+      {
+        "name": "credential",
+        "type": "string",
+        "value": null,
+        "label": "Microsoft OAuth Credential",
+        "placeholder": "${credentials.MICROSOFT_TEAMS}"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "messages",
+        "type": "string",
+        "value": null,
+        "label": "Messages (JSON array)",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "string",
+        "value": null,
+        "label": "Message Count",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "microsoft/teams/list_channels": {
+    "hash": "8e3f91e549c8ff32a4bbc6b706bf8b49387db8a9a95fa3bfb9ec47bc43e8c0d4",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "List Channels",
+    "description": "List all channels within a Microsoft Teams team",
+    "website": "https://www.flomation.co",
+    "icon": "microsoft+list",
+    "date": "04/06/2026",
+    "type": 2,
+    "category": {
+      "name": "Microsoft",
+      "icon": "microsoft",
+      "description": "Microsoft 365 integrations"
+    },
+    "sub_category": {
+      "name": "Teams",
+      "icon": "user-group",
+      "description": "Microsoft Teams messaging and channel operations"
+    },
+    "inputs": [
+      {
+        "name": "team_id",
+        "type": "string",
+        "value": null,
+        "label": "Team ID",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "account",
+        "type": "string",
+        "value": null,
+        "label": "Microsoft Account (email)",
+        "placeholder": ""
+      },
+      {
+        "name": "credential",
+        "type": "string",
+        "value": null,
+        "label": "Microsoft OAuth Credential",
+        "placeholder": "${credentials.MICROSOFT_TEAMS}"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "channels",
+        "type": "string",
+        "value": null,
+        "label": "Channels (JSON array)",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "string",
+        "value": null,
+        "label": "Channel Count",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "microsoft/teams/list_teams": {
+    "hash": "3e1020efffd82d2e896c1909a5f5c0a3388d0f3cb89c4c1c6e0aeec8c529c113",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "List Teams",
+    "description": "List all Microsoft Teams the authenticated user has joined",
+    "website": "https://www.flomation.co",
+    "icon": "microsoft+list",
+    "date": "04/06/2026",
+    "type": 2,
+    "category": {
+      "name": "Microsoft",
+      "icon": "microsoft",
+      "description": "Microsoft 365 integrations"
+    },
+    "sub_category": {
+      "name": "Teams",
+      "icon": "user-group",
+      "description": "Microsoft Teams messaging and channel operations"
+    },
+    "inputs": [
+      {
+        "name": "account",
+        "type": "string",
+        "value": null,
+        "label": "Microsoft Account (email)",
+        "placeholder": ""
+      },
+      {
+        "name": "credential",
+        "type": "string",
+        "value": null,
+        "label": "Microsoft OAuth Credential",
+        "placeholder": "${credentials.MICROSOFT_TEAMS}"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "teams",
+        "type": "string",
+        "value": null,
+        "label": "Teams (JSON array)",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "string",
+        "value": null,
+        "label": "Team Count",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "microsoft/teams/send_channel_message": {
+    "hash": "795849748334ec4a33fd54bb73ca9fee8979ac519f93712e8595cbe28541c03d",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Send Channel Message",
+    "description": "Post a message to a Microsoft Teams channel",
+    "website": "https://www.flomation.co",
+    "icon": "microsoft+paper-plane",
+    "date": "04/06/2026",
+    "type": 2,
+    "category": {
+      "name": "Microsoft",
+      "icon": "microsoft",
+      "description": "Microsoft 365 integrations"
+    },
+    "sub_category": {
+      "name": "Teams",
+      "icon": "user-group",
+      "description": "Microsoft Teams messaging and channel operations"
+    },
+    "inputs": [
+      {
+        "name": "team_id",
+        "type": "string",
+        "value": null,
+        "label": "Team ID",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "channel_id",
+        "type": "string",
+        "value": null,
+        "label": "Channel ID",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "message",
+        "type": "text",
+        "value": null,
+        "label": "Message Content",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "content_type",
+        "type": "string",
+        "value": null,
+        "label": "Content Type",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "HTML",
+            "value": "html"
+          },
+          {
+            "name": "Text",
+            "value": "text"
+          }
+        ]
+      },
+      {
+        "name": "account",
+        "type": "string",
+        "value": null,
+        "label": "Microsoft Account (email)",
+        "placeholder": ""
+      },
+      {
+        "name": "credential",
+        "type": "string",
+        "value": null,
+        "label": "Microsoft OAuth Credential",
+        "placeholder": "${credentials.MICROSOFT_TEAMS}"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "message_id",
+        "type": "string",
+        "value": null,
+        "label": "Message ID",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "microsoft/teams/send_chat_message": {
+    "hash": "eacfe41f20208f89dd1cd7dd67d9b2d84e47551fb799ddbd08d852b854f95aeb",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Send Chat Message",
+    "description": "Send a message to a Microsoft Teams chat conversation",
+    "website": "https://www.flomation.co",
+    "icon": "microsoft+paper-plane",
+    "date": "04/06/2026",
+    "type": 2,
+    "category": {
+      "name": "Microsoft",
+      "icon": "microsoft",
+      "description": "Microsoft 365 integrations"
+    },
+    "sub_category": {
+      "name": "Teams",
+      "icon": "user-group",
+      "description": "Microsoft Teams messaging and channel operations"
+    },
+    "inputs": [
+      {
+        "name": "chat_id",
+        "type": "string",
+        "value": null,
+        "label": "Chat ID",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "message",
+        "type": "text",
+        "value": null,
+        "label": "Message Content",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "content_type",
+        "type": "string",
+        "value": null,
+        "label": "Content Type",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "HTML",
+            "value": "html"
+          },
+          {
+            "name": "Text",
+            "value": "text"
+          }
+        ]
+      },
+      {
+        "name": "account",
+        "type": "string",
+        "value": null,
+        "label": "Microsoft Account (email)",
+        "placeholder": ""
+      },
+      {
+        "name": "credential",
+        "type": "string",
+        "value": null,
+        "label": "Microsoft OAuth Credential",
+        "placeholder": "${credentials.MICROSOFT_TEAMS}"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "message_id",
+        "type": "string",
+        "value": null,
+        "label": "Message ID",
         "placeholder": ""
       },
       {
