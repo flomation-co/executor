@@ -213,6 +213,7 @@ import (
 	microsoft_teams_list_channel_messages "flomation.app/automate/executor/actions/microsoft/teams/list_channel_messages"
 	microsoft_teams_list_channels "flomation.app/automate/executor/actions/microsoft/teams/list_channels"
 	microsoft_teams_list_teams "flomation.app/automate/executor/actions/microsoft/teams/list_teams"
+	microsoft_teams_reply "flomation.app/automate/executor/actions/microsoft/teams/reply"
 	microsoft_teams_send_channel_message "flomation.app/automate/executor/actions/microsoft/teams/send_channel_message"
 	microsoft_teams_send_chat_message "flomation.app/automate/executor/actions/microsoft/teams/send_chat_message"
 	microsoft_word_create "flomation.app/automate/executor/actions/microsoft/word/create"
@@ -295,6 +296,7 @@ import (
 	trigger_s3 "flomation.app/automate/executor/actions/trigger/s3"
 	trigger_schedule "flomation.app/automate/executor/actions/trigger/schedule"
 	trigger_slack "flomation.app/automate/executor/actions/trigger/slack"
+	trigger_teams "flomation.app/automate/executor/actions/trigger/teams"
 	trigger_telegram "flomation.app/automate/executor/actions/trigger/telegram"
 	trigger_twilio_sms "flomation.app/automate/executor/actions/trigger/twilio_sms"
 	trigger_twilio_voice "flomation.app/automate/executor/actions/trigger/twilio_voice"
@@ -535,6 +537,7 @@ var Actions = map[string]core.Action{
 	"microsoft/teams/list_channel_messages": microsoft_teams_list_channel_messages.Execute,
 	"microsoft/teams/list_channels":         microsoft_teams_list_channels.Execute,
 	"microsoft/teams/list_teams":            microsoft_teams_list_teams.Execute,
+	"microsoft/teams/reply":                 microsoft_teams_reply.Execute,
 	"microsoft/teams/send_channel_message":  microsoft_teams_send_channel_message.Execute,
 	"microsoft/teams/send_chat_message":     microsoft_teams_send_chat_message.Execute,
 	"microsoft/word/create":                 microsoft_word_create.Execute,
@@ -617,6 +620,7 @@ var Actions = map[string]core.Action{
 	"trigger/s3":                            trigger_s3.Execute,
 	"trigger/schedule":                      trigger_schedule.Execute,
 	"trigger/slack":                         trigger_slack.Execute,
+	"trigger/teams":                         trigger_teams.Execute,
 	"trigger/telegram":                      trigger_telegram.Execute,
 	"trigger/twilio_sms":                    trigger_twilio_sms.Execute,
 	"trigger/twilio_voice":                  trigger_twilio_voice.Execute,

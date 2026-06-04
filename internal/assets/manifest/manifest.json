@@ -19629,6 +19629,106 @@
       }
     ]
   },
+  "microsoft/teams/reply": {
+    "hash": "0c31b132dfcafde9a3f8c0cdf98db7e8f5311d7bc77e2f0292fc6f1918bdd752",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Reply to Teams Message",
+    "description": "Send a reply to a Teams conversation using the Bot Framework",
+    "website": "https://www.flomation.co",
+    "icon": "microsoft+reply",
+    "date": "05/06/2026",
+    "type": 2,
+    "category": {
+      "name": "Microsoft",
+      "icon": "microsoft",
+      "description": "Microsoft 365 integrations"
+    },
+    "sub_category": {
+      "name": "Teams",
+      "icon": "user-group",
+      "description": "Microsoft Teams messaging and channel operations"
+    },
+    "inputs": [
+      {
+        "name": "message",
+        "type": "text",
+        "value": null,
+        "label": "Message",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "service_url",
+        "type": "string",
+        "value": null,
+        "label": "Service URL",
+        "placeholder": "${service_url}",
+        "required": true
+      },
+      {
+        "name": "conversation_id",
+        "type": "string",
+        "value": null,
+        "label": "Conversation ID",
+        "placeholder": "${channel_id}",
+        "required": true
+      },
+      {
+        "name": "activity_id",
+        "type": "string",
+        "value": null,
+        "label": "Activity ID",
+        "placeholder": "${activity_id}"
+      },
+      {
+        "name": "app_id",
+        "type": "string",
+        "value": null,
+        "label": "Bot App ID",
+        "placeholder": "${secrets.TEAMS_APP_ID}",
+        "required": true
+      },
+      {
+        "name": "app_password",
+        "type": "string",
+        "value": null,
+        "label": "Bot App Password",
+        "placeholder": "${secrets.TEAMS_APP_PASSWORD}",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "message_id",
+        "type": "string",
+        "value": null,
+        "label": "Message ID",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
   "microsoft/teams/send_channel_message": {
     "hash": "795849748334ec4a33fd54bb73ca9fee8979ac519f93712e8595cbe28541c03d",
     "author": "Andy Esser",
@@ -26922,6 +27022,116 @@
         "type": "string",
         "value": null,
         "label": "Event Type",
+        "placeholder": ""
+      },
+      {
+        "name": "agent_id",
+        "type": "string",
+        "value": null,
+        "label": "Agent ID",
+        "placeholder": ""
+      },
+      {
+        "name": "channel_type",
+        "type": "string",
+        "value": null,
+        "label": "Channel Type",
+        "placeholder": ""
+      }
+    ]
+  },
+  "trigger/teams": {
+    "hash": "731dbb34d36dd10fe481bdbb68af2e805ae330d5bafee099da425535f45b76b6",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Teams Trigger",
+    "description": "Triggers a flow when a message is received in Microsoft Teams",
+    "website": "https://www.flomation.co",
+    "icon": "microsoft+comments",
+    "date": "05/06/2026",
+    "type": 1,
+    "category": {
+      "name": "Triggers",
+      "icon": "bolt-lightning",
+      "description": "Start a Flow"
+    },
+    "inputs": null,
+    "outputs": [
+      {
+        "name": "user_id",
+        "type": "string",
+        "value": null,
+        "label": "User ID (AAD Object ID)",
+        "placeholder": ""
+      },
+      {
+        "name": "user_name",
+        "type": "string",
+        "value": null,
+        "label": "User Name",
+        "placeholder": ""
+      },
+      {
+        "name": "sender",
+        "type": "string",
+        "value": null,
+        "label": "Sender",
+        "placeholder": ""
+      },
+      {
+        "name": "channel_id",
+        "type": "string",
+        "value": null,
+        "label": "Conversation ID",
+        "placeholder": ""
+      },
+      {
+        "name": "content",
+        "type": "string",
+        "value": null,
+        "label": "Message Text",
+        "placeholder": ""
+      },
+      {
+        "name": "conversation_type",
+        "type": "string",
+        "value": null,
+        "label": "Conversation Type",
+        "placeholder": ""
+      },
+      {
+        "name": "teams_channel_id",
+        "type": "string",
+        "value": null,
+        "label": "Teams Channel ID",
+        "placeholder": ""
+      },
+      {
+        "name": "teams_team_id",
+        "type": "string",
+        "value": null,
+        "label": "Teams Team ID",
+        "placeholder": ""
+      },
+      {
+        "name": "activity_id",
+        "type": "string",
+        "value": null,
+        "label": "Activity ID",
+        "placeholder": ""
+      },
+      {
+        "name": "service_url",
+        "type": "string",
+        "value": null,
+        "label": "Service URL",
+        "placeholder": ""
+      },
+      {
+        "name": "tenant_id",
+        "type": "string",
+        "value": null,
+        "label": "Tenant ID",
         "placeholder": ""
       },
       {
