@@ -22727,7 +22727,7 @@
     ]
   },
   "trigger/microsoft_outlook": {
-    "hash": "c866d4730356fc7d8b9ef0d9e08afe60c1e8fabbe232a08c1ffa9fa6fc5c43c8",
+    "hash": "e75b71545f941f053162a7747de43ee730e1906399ec0df1856c1ca81933ab7c",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Microsoft Outlook Trigger",
@@ -22762,6 +22762,13 @@
         "value": null,
         "label": "Account Filter (email or label)",
         "placeholder": ""
+      },
+      {
+        "name": "credential",
+        "type": "string",
+        "value": null,
+        "label": "Microsoft OAuth Credential",
+        "placeholder": "${credentials.AZURE_MS}"
       }
     ],
     "outputs": [
