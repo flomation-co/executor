@@ -2,6 +2,6 @@ package webflow_common
 
 const (
 	CategoryName        = "Webflow"
-	CategoryIcon        = "globe"
+	CategoryIcon        = "webflow"
 	CategoryDescription = "Manage Webflow sites, CMS collections, pages, and forms"
 )
