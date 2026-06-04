@@ -15,7 +15,7 @@ const (
 	Name         = "Notion List Databases"
 	Description  = "List all databases shared with the integration"
 	Website      = "https://www.flomation.co"
-	Icon         = "notion"
+	Icon         = "notion+list"
 	Date         = "28/04/2026"
 	Type         = core.ActionTypeAction
 )

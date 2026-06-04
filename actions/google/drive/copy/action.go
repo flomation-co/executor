@@ -15,7 +15,7 @@ const (
 	Name         = "Copy Drive File"
 	Description  = "Copy a file in Google Drive"
 	Website      = "https://www.flomation.co"
-	Icon         = "folder"
+	Icon         = "folder+file-export"
 	Date         = "01/06/2026"
 	Type         = core.ActionTypeAction
 

@@ -15,7 +15,7 @@ const (
 	Name         = "Facebook Get Post"
 	Description  = "Retrieve a Facebook post by ID with engagement metrics"
 	Website      = "https://www.flomation.co"
-	Icon         = "facebook"
+	Icon         = "facebook+eye"
 	Date         = "21/05/2026"
 	Type         = core.ActionTypeAction
 )

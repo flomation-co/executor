@@ -16,7 +16,7 @@ const (
 	Name         = "Delete Schedule"
 	Description  = "Delete a scheduled task by name"
 	Website      = "https://www.flomation.co"
-	Icon         = "clock"
+	Icon         = "clock+trash"
 	Date         = "29/04/2026"
 	Type         = core.ActionTypeAction
 )

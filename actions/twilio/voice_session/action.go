@@ -33,7 +33,7 @@ const (
 	Name         = "Voice Session"
 	Description  = "Hold a Twilio voice call open for multi-turn conversation"
 	Website      = "https://www.flomation.co"
-	Icon         = "phone-volume"
+	Icon         = "phone+headset"
 	Date         = "29/05/2026"
 	Type         = core.ActionTypeLoop
 )

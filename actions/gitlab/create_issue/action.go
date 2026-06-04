@@ -14,7 +14,7 @@ const (
 	Name         = "GitLab Create Issue"
 	Description  = "Create a new issue in a GitLab project"
 	Website      = "https://www.flomation.co"
-	Icon         = "gitlab"
+	Icon         = "gitlab+plus"
 	Date         = "26/04/2026"
 	Type         = core.ActionTypeAction
 )

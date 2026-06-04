@@ -15,7 +15,7 @@ const (
 	Name         = "List Pages"
 	Description  = "List all pages for a Webflow site"
 	Website      = "https://www.flomation.co"
-	Icon         = "globe"
+	Icon         = "webflow+list"
 	Date         = "29/05/2026"
 	Type         = core.ActionTypeAction
 )

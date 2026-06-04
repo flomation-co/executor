@@ -14,7 +14,7 @@ const (
 	Name         = "GitLab Cancel Pipeline"
 	Description  = "Cancel a running GitLab pipeline"
 	Website      = "https://www.flomation.co"
-	Icon         = "gitlab"
+	Icon         = "gitlab+xmark"
 	Date         = "26/04/2026"
 	Type         = core.ActionTypeAction
 )

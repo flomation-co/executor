@@ -14,7 +14,7 @@ const (
 	Name         = "Get Site"
 	Description  = "Get details of a specific Webflow site by ID"
 	Website      = "https://www.flomation.co"
-	Icon         = "globe"
+	Icon         = "webflow+eye"
 	Date         = "29/05/2026"
 	Type         = core.ActionTypeAction
 )

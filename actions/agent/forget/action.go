@@ -20,7 +20,7 @@ const (
 	Name         = "Forget Memory"
 	Description  = "Delete a specific memory from an agent's store"
 	Website      = "https://www.flomation.co"
-	Icon         = "brain"
+	Icon         = "brain+trash"
 	Date         = "05/04/2026"
 	Type         = core.ActionTypeAction
 )

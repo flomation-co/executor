@@ -12,7 +12,7 @@ const (
 	Name         = "Upper Case"
 	Description  = "Convert a string to upper case"
 	Website      = "https://www.flomation.co"
-	Icon         = "font"
+	Icon         = "font+arrow-up"
 	Date         = "19/04/2026"
 	Type         = core.ActionTypeAction
 )

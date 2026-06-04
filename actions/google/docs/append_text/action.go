@@ -15,7 +15,7 @@ const (
 	Name         = "Append to Document"
 	Description  = "Append text to the end of a Google Docs document"
 	Website      = "https://www.flomation.co"
-	Icon         = "file-lines"
+	Icon         = "file-lines+plus"
 	Date         = "01/06/2026"
 	Type         = core.ActionTypeAction
 

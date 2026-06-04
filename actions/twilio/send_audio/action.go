@@ -18,7 +18,7 @@ const (
 	Name         = "Send Audio"
 	Description  = "Send audio back to a Twilio voice call"
 	Website      = "https://www.flomation.co"
-	Icon         = "phone-volume"
+	Icon         = "phone+paper-plane"
 	Date         = "29/05/2026"
 	Type         = core.ActionTypeAction
 )

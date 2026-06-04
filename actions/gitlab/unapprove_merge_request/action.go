@@ -13,7 +13,7 @@ const (
 	Name         = "GitLab Unapprove Merge Request"
 	Description  = "Remove your approval from a GitLab merge request"
 	Website      = "https://www.flomation.co"
-	Icon         = "gitlab"
+	Icon         = "gitlab+xmark"
 	Date         = "26/04/2026"
 	Type         = core.ActionTypeAction
 )

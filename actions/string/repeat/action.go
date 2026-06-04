@@ -12,7 +12,7 @@ const (
 	Name         = "Repeat"
 	Description  = "Repeat a string a given number of times"
 	Website      = "https://www.flomation.co"
-	Icon         = "font"
+	Icon         = "font+repeat"
 	Date         = "19/04/2026"
 	Type         = core.ActionTypeAction
 )

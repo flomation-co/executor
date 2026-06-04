@@ -14,7 +14,7 @@ const (
 	Name         = "Get Comment"
 	Description  = "Retrieve a single Linear comment by ID with full body text."
 	Website      = "https://www.flomation.co"
-	Icon         = "linear"
+	Icon         = "linear+eye"
 	Date         = "28/04/2026"
 	Type         = core.ActionTypeAction
 )

@@ -19,7 +19,7 @@ const (
 	Name         = "List Make Targets"
 	Description  = "List all targets defined in a Makefile"
 	Website      = "https://www.flomation.co"
-	Icon         = "gears"
+	Icon         = "gears+list"
 	Date         = "31/05/2026"
 	Type         = core.ActionTypeAction
 )

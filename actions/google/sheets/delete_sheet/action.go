@@ -16,7 +16,7 @@ const (
 	Name         = "Delete Sheet Tab"
 	Description  = "Delete a sheet tab from a Google Sheets spreadsheet"
 	Website      = "https://www.flomation.co"
-	Icon         = "table"
+	Icon         = "table+trash"
 	Date         = "01/06/2026"
 	Type         = core.ActionTypeAction
 

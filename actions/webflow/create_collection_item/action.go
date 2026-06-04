@@ -14,7 +14,7 @@ const (
 	Name         = "Create Collection Item"
 	Description  = "Create a new item in a Webflow CMS collection"
 	Website      = "https://www.flomation.co"
-	Icon         = "globe"
+	Icon         = "webflow+plus"
 	Date         = "29/05/2026"
 	Type         = core.ActionTypeAction
 )

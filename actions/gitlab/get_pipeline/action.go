@@ -14,7 +14,7 @@ const (
 	Name         = "GitLab Get Pipeline"
 	Description  = "Retrieve details of a specific GitLab pipeline"
 	Website      = "https://www.flomation.co"
-	Icon         = "gitlab"
+	Icon         = "gitlab+eye"
 	Date         = "26/04/2026"
 	Type         = core.ActionTypeAction
 )

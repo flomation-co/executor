@@ -15,7 +15,7 @@ const (
 	Name         = "GitLab List Users"
 	Description  = "List users on a GitLab instance with optional search"
 	Website      = "https://www.flomation.co"
-	Icon         = "gitlab"
+	Icon         = "gitlab+user"
 	Date         = "26/04/2026"
 	Type         = core.ActionTypeAction
 )

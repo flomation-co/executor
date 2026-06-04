@@ -15,7 +15,7 @@ const (
 	Name         = "List Sites"
 	Description  = "List all Webflow sites accessible with the provided API token"
 	Website      = "https://www.flomation.co"
-	Icon         = "globe"
+	Icon         = "webflow+list"
 	Date         = "29/05/2026"
 	Type         = core.ActionTypeAction
 )

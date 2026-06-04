@@ -16,7 +16,7 @@ const (
 	Name         = "List Users"
 	Description  = "List Linear workspace members. Returns user IDs, names, emails, and active status."
 	Website      = "https://www.flomation.co"
-	Icon         = "linear"
+	Icon         = "linear+user"
 	Date         = "20/04/2026"
 	Type         = core.ActionTypeAction
 )

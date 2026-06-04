@@ -14,7 +14,7 @@ const (
 	Name         = "Array Length"
 	Description  = "Returns the number of items in an array"
 	Website      = "https://www.flomation.co"
-	Icon         = "list"
+	Icon         = "list+hashtag"
 	Date         = "19/04/2026"
 	Type         = core.ActionTypeAction
 )

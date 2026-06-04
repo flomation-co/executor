@@ -19,7 +19,7 @@ const (
 	Name         = "List Voices"
 	Description  = "List all available ElevenLabs voices with their IDs, names, and characteristics"
 	Website      = "https://www.flomation.co"
-	Icon         = "elevenlabs"
+	Icon         = "microphone+list"
 	Date         = "18/04/2026"
 	Type         = core.ActionTypeAction
 )

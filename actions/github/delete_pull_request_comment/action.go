@@ -13,7 +13,7 @@ const (
 	Name         = "GitHub Delete PR Comment"
 	Description  = "Remove a comment from a GitHub pull request"
 	Website      = "https://www.flomation.co"
-	Icon         = "github"
+	Icon         = "github+trash"
 	Date         = "26/04/2026"
 	Type         = core.ActionTypeAction
 )

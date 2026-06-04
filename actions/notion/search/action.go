@@ -15,7 +15,7 @@ const (
 	Name         = "Notion Search"
 	Description  = "Search across all pages and databases in a Notion workspace"
 	Website      = "https://www.flomation.co"
-	Icon         = "notion"
+	Icon         = "notion+magnifying-glass"
 	Date         = "28/04/2026"
 	Type         = core.ActionTypeAction
 )

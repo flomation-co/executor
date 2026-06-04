@@ -16,7 +16,7 @@ const (
 	Name         = "AWS S3 Put"
 	Description  = "Upload an object to an AWS S3 bucket"
 	Website      = "https://www.flomation.co"
-	Icon         = "bucket"
+	Icon         = "bucket+arrow-up"
 	Date         = "05/03/2026"
 	Type         = core.ActionTypeAction
 )

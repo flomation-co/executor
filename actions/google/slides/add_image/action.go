@@ -16,7 +16,7 @@ const (
 	Name         = "Add Image to Slide"
 	Description  = "Add an image to a Google Slides slide"
 	Website      = "https://www.flomation.co"
-	Icon         = "display"
+	Icon         = "display+image"
 	Date         = "01/06/2026"
 	Type         = core.ActionTypeAction
 

@@ -14,7 +14,7 @@ const (
 	Name         = "GitLab Update Merge Request"
 	Description  = "Update an existing merge request in a GitLab project"
 	Website      = "https://www.flomation.co"
-	Icon         = "gitlab"
+	Icon         = "gitlab+pencil"
 	Date         = "26/04/2026"
 	Type         = core.ActionTypeAction
 )

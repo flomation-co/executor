@@ -15,7 +15,7 @@ const (
 	Name         = "Get Document Metadata"
 	Description  = "Get metadata for a Google Docs document"
 	Website      = "https://www.flomation.co"
-	Icon         = "file-lines"
+	Icon         = "file-lines+eye"
 	Date         = "01/06/2026"
 	Type         = core.ActionTypeAction
 

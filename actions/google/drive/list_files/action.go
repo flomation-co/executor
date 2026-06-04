@@ -17,7 +17,7 @@ const (
 	Name         = "List Drive Files"
 	Description  = "List files and folders in Google Drive"
 	Website      = "https://www.flomation.co"
-	Icon         = "folder"
+	Icon         = "folder+list"
 	Date         = "01/06/2026"
 	Type         = core.ActionTypeAction
 

@@ -14,7 +14,7 @@ const (
 	Name         = "GitLab Get Merge Request"
 	Description  = "Retrieve details of a GitLab merge request by IID"
 	Website      = "https://www.flomation.co"
-	Icon         = "gitlab"
+	Icon         = "gitlab+eye"
 	Date         = "26/04/2026"
 	Type         = core.ActionTypeAction
 )

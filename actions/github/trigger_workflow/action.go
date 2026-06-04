@@ -13,7 +13,7 @@ const (
 	Name         = "GitHub Trigger Workflow"
 	Description  = "Trigger a GitHub Actions workflow dispatch event"
 	Website      = "https://www.flomation.co"
-	Icon         = "github"
+	Icon         = "github+play"
 	Date         = "26/04/2026"
 	Type         = core.ActionTypeAction
 )

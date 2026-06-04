@@ -16,7 +16,7 @@ const (
 	Name         = "AWS S3 Get Object"
 	Description  = "Download an object from an AWS S3 bucket"
 	Website      = "https://www.flomation.co"
-	Icon         = "bucket"
+	Icon         = "bucket+arrow-down"
 	Date         = "05/03/2026"
 	Type         = core.ActionTypeAction
 )

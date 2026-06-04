@@ -13,7 +13,7 @@ const (
 	Name         = "Notion Delete Block"
 	Description  = "Delete (archive) a block from a Notion page"
 	Website      = "https://www.flomation.co"
-	Icon         = "notion"
+	Icon         = "notion+trash"
 	Date         = "28/04/2026"
 	Type         = core.ActionTypeAction
 )

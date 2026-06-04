@@ -14,7 +14,7 @@ const (
 	Name         = "Update Collection Item"
 	Description  = "Update an existing item in a Webflow CMS collection"
 	Website      = "https://www.flomation.co"
-	Icon         = "globe"
+	Icon         = "webflow+pencil"
 	Date         = "29/05/2026"
 	Type         = core.ActionTypeAction
 )

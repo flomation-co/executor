@@ -19,7 +19,7 @@ const (
 	Name         = "Create Schedule"
 	Description  = "Create a recurring scheduled task for the agent"
 	Website      = "https://www.flomation.co"
-	Icon         = "clock"
+	Icon         = "clock+plus"
 	Date         = "29/04/2026"
 	Type         = core.ActionTypeAction
 )

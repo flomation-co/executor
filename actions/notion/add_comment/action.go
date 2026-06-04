@@ -14,7 +14,7 @@ const (
 	Name         = "Notion Add Comment"
 	Description  = "Add a comment to a Notion page or discussion thread"
 	Website      = "https://www.flomation.co"
-	Icon         = "notion"
+	Icon         = "notion+comments"
 	Date         = "28/04/2026"
 	Type         = core.ActionTypeAction
 )

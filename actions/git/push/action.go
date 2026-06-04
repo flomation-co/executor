@@ -12,7 +12,7 @@ const (
 	Name         = "Git Push"
 	Description  = "Push local commits to a remote Git repository"
 	Website      = "https://www.flomation.co"
-	Icon         = "code-branch"
+	Icon         = "code-branch+arrow-up"
 	Date         = "06/03/2026"
 	Type         = core.ActionTypeAction
 )

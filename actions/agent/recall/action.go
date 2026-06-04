@@ -33,7 +33,7 @@ const (
 	Name         = "Recall Memories"
 	Description  = "Fetch an agent's memories about a specific user"
 	Website      = "https://www.flomation.co"
-	Icon         = "brain"
+	Icon         = "brain+magnifying-glass"
 	Date         = "05/04/2026"
 	Type         = core.ActionTypeAction
 )

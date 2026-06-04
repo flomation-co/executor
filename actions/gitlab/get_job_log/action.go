@@ -13,7 +13,7 @@ const (
 	Name         = "GitLab Get Job Log"
 	Description  = "Retrieve the log/trace output of a GitLab CI/CD job"
 	Website      = "https://www.flomation.co"
-	Icon         = "gitlab"
+	Icon         = "gitlab+file-lines"
 	Date         = "27/04/2026"
 	Type         = core.ActionTypeAction
 )

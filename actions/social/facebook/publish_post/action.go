@@ -15,7 +15,7 @@ const (
 	Name         = "Facebook Publish Post"
 	Description  = "Publish a post to a Facebook Page"
 	Website      = "https://www.flomation.co"
-	Icon         = "facebook"
+	Icon         = "facebook+paper-plane"
 	Date         = "21/05/2026"
 	Type         = core.ActionTypeAction
 )

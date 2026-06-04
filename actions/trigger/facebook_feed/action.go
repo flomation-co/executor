@@ -11,7 +11,7 @@ const (
 	Name         = "Facebook Page Feed Trigger"
 	Description  = "Triggers a flow on comments, reactions or posts on a Facebook Page"
 	Website      = "https://www.flomation.co"
-	Icon         = "facebook"
+	Icon         = "facebook+bolt"
 	Date         = "24/05/2026"
 	Type         = core.ActionTypeTrigger
 )

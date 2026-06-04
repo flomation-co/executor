@@ -13,7 +13,7 @@ const (
 	Name         = "GitHub Re-run Workflow"
 	Description  = "Re-run a GitHub Actions workflow run"
 	Website      = "https://www.flomation.co"
-	Icon         = "github"
+	Icon         = "github+refresh"
 	Date         = "26/04/2026"
 	Type         = core.ActionTypeAction
 )

@@ -14,7 +14,7 @@ const (
 	Name         = "Create Issue"
 	Description  = "Create a new Linear issue. Requires team_id (use List Teams to find it). Returns identifier and URL."
 	Website      = "https://www.flomation.co"
-	Icon         = "linear"
+	Icon         = "linear+plus"
 	Date         = "15/04/2026"
 	Type         = core.ActionTypeAction
 )

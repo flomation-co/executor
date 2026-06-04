@@ -14,7 +14,7 @@ const (
 	Name         = "Facebook Get Pages"
 	Description  = "List Facebook Pages managed by the authenticated user with their access tokens"
 	Website      = "https://www.flomation.co"
-	Icon         = "facebook"
+	Icon         = "facebook+list"
 	Date         = "21/05/2026"
 	Type         = core.ActionTypeAction
 )

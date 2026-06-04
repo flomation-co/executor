@@ -15,7 +15,7 @@ const (
 	Name         = "Replace Text in Document"
 	Description  = "Find and replace text in a Google Docs document"
 	Website      = "https://www.flomation.co"
-	Icon         = "file-lines"
+	Icon         = "file-lines+pencil"
 	Date         = "01/06/2026"
 	Type         = core.ActionTypeAction
 

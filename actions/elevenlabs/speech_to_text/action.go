@@ -22,7 +22,7 @@ const (
 	Name         = "Speech to Text"
 	Description  = "Transcribe audio to text using ElevenLabs speech recognition"
 	Website      = "https://www.flomation.co"
-	Icon         = "elevenlabs"
+	Icon         = "microphone+file-lines"
 	Date         = "18/04/2026"
 	Type         = core.ActionTypeAction
 )

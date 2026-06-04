@@ -15,7 +15,7 @@ const (
 	Name         = "LinkedIn Post Analytics"
 	Description  = "Get engagement metrics (likes, comments, shares) for a LinkedIn post"
 	Website      = "https://www.flomation.co"
-	Icon         = "linkedin"
+	Icon         = "linkedin+pie-chart"
 	Date         = "21/05/2026"
 	Type         = core.ActionTypeAction
 )

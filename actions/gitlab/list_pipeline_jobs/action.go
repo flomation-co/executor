@@ -14,7 +14,7 @@ const (
 	Name         = "GitLab List Pipeline Jobs"
 	Description  = "List jobs within a GitLab pipeline"
 	Website      = "https://www.flomation.co"
-	Icon         = "gitlab"
+	Icon         = "gitlab+list"
 	Date         = "26/04/2026"
 	Type         = core.ActionTypeAction
 )

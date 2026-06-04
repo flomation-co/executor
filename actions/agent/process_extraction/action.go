@@ -46,7 +46,7 @@ const (
 	Name         = "Process Extraction Output"
 	Description  = "Parse a structured extraction JSON payload and write memories, pending actions, and commitments"
 	Website      = "https://www.flomation.co"
-	Icon         = "brain"
+	Icon         = "brain+filter"
 	Date         = "05/04/2026"
 	Type         = core.ActionTypeAction
 )

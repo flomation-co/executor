@@ -13,7 +13,7 @@ const (
 	Name         = "Git Checkout"
 	Description  = "Check out a branch or commit in a Git repository"
 	Website      = "https://www.flomation.co"
-	Icon         = "code-branch"
+	Icon         = "code-branch+arrow-right"
 	Date         = "06/03/2026"
 	Type         = core.ActionTypeAction
 )

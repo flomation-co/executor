@@ -14,7 +14,7 @@ const (
 	Name         = "GitLab Add Issue Comment"
 	Description  = "Add a comment to a GitLab issue"
 	Website      = "https://www.flomation.co"
-	Icon         = "gitlab"
+	Icon         = "gitlab+comments"
 	Date         = "26/04/2026"
 	Type         = core.ActionTypeAction
 )

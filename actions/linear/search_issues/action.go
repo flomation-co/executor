@@ -15,7 +15,7 @@ const (
 	Name         = "Search Issues"
 	Description  = "Full-text search across Linear issues by keyword."
 	Website      = "https://www.flomation.co"
-	Icon         = "linear"
+	Icon         = "linear+magnifying-glass"
 	Date         = "15/04/2026"
 	Type         = core.ActionTypeAction
 )

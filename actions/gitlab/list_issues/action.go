@@ -15,7 +15,7 @@ const (
 	Name         = "GitLab List Issues"
 	Description  = "List issues in a GitLab project with optional filters"
 	Website      = "https://www.flomation.co"
-	Icon         = "gitlab"
+	Icon         = "gitlab+list"
 	Date         = "26/04/2026"
 	Type         = core.ActionTypeAction
 )

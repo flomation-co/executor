@@ -13,7 +13,7 @@ const (
 	Name         = "Sleep"
 	Description  = "Pause execution for a specified duration"
 	Website      = "https://www.flomation.co"
-	Icon         = "clock"
+	Icon         = "clock+pause"
 	Date         = "03/04/2026"
 	Type         = core.ActionTypeAction
 

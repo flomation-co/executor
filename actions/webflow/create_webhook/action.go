@@ -14,7 +14,7 @@ const (
 	Name         = "Create Webhook"
 	Description  = "Create a webhook for a Webflow site to receive event notifications"
 	Website      = "https://www.flomation.co"
-	Icon         = "globe"
+	Icon         = "webflow+globe"
 	Date         = "29/05/2026"
 	Type         = core.ActionTypeAction
 )

@@ -15,7 +15,7 @@ const (
 	Name         = "List Comments"
 	Description  = "List comments on a Linear issue. Returns comment IDs, authors, and body text."
 	Website      = "https://www.flomation.co"
-	Icon         = "linear"
+	Icon         = "linear+comments"
 	Date         = "28/04/2026"
 	Type         = core.ActionTypeAction
 )

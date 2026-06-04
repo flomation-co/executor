@@ -14,7 +14,7 @@ const (
 	Name         = "Delete Comment"
 	Description  = "Delete a comment from a Linear issue by comment ID."
 	Website      = "https://www.flomation.co"
-	Icon         = "linear"
+	Icon         = "linear+trash"
 	Date         = "28/04/2026"
 	Type         = core.ActionTypeAction
 )

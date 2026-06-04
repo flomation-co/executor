@@ -13,7 +13,7 @@ const (
 	Name         = "Git Status"
 	Description  = "Show the working tree status of a Git repository"
 	Website      = "https://www.flomation.co"
-	Icon         = "code-branch"
+	Icon         = "code-branch+eye"
 	Date         = "19/03/2026"
 	Type         = core.ActionTypeAction
 )

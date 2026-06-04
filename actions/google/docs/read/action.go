@@ -16,7 +16,7 @@ const (
 	Name         = "Read Document"
 	Description  = "Read the content of a Google Docs document"
 	Website      = "https://www.flomation.co"
-	Icon         = "file-lines"
+	Icon         = "file-lines+eye"
 	Date         = "01/06/2026"
 	Type         = core.ActionTypeAction
 

@@ -15,7 +15,7 @@ const (
 	Name         = "Get Collection"
 	Description  = "Get a Webflow CMS collection with its field schema"
 	Website      = "https://www.flomation.co"
-	Icon         = "globe"
+	Icon         = "webflow+eye"
 	Date         = "29/05/2026"
 	Type         = core.ActionTypeAction
 )

@@ -14,7 +14,7 @@ const (
 	Name         = "GitHub Merge Pull Request"
 	Description  = "Merge a GitHub pull request"
 	Website      = "https://www.flomation.co"
-	Icon         = "github"
+	Icon         = "github+check"
 	Date         = "26/04/2026"
 	Type         = core.ActionTypeAction
 )

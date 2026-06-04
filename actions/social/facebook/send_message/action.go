@@ -23,7 +23,7 @@ const (
 	Name         = "Facebook Send Message"
 	Description  = "Send a message to a user via Facebook Messenger"
 	Website      = "https://www.flomation.co"
-	Icon         = "facebook"
+	Icon         = "facebook+paper-plane"
 	Date         = "24/05/2026"
 	Type         = core.ActionTypeAction
 )

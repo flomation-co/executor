@@ -16,7 +16,7 @@ const (
 	Name         = "Oracle Query"
 	Description  = "Execute a query against an Oracle database"
 	Website      = "https://www.flomation.co"
-	Icon         = "database"
+	Icon         = "database+play"
 	Date         = "21/03/2026"
 	Type         = core.ActionTypeAction
 )

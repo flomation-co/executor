@@ -15,7 +15,7 @@ const (
 	Name         = "List Workflow States"
 	Description  = "List workflow states (e.g. Todo, In Progress, Done, Cancelled) for a team. Use this to get state UUIDs needed by update_issue."
 	Website      = "https://www.flomation.co"
-	Icon         = "linear"
+	Icon         = "linear+list"
 	Date         = "17/04/2026"
 	Type         = core.ActionTypeAction
 )
