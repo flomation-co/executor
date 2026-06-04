@@ -13,7 +13,7 @@ const (
 	Name         = "GitHub Dismiss PR Review"
 	Description  = "Dismiss a review on a GitHub pull request"
 	Website      = "https://www.flomation.co"
-	Icon         = "github"
+	Icon         = "github+xmark"
 	Date         = "26/04/2026"
 	Type         = core.ActionTypeAction
 )

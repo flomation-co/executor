@@ -20,7 +20,7 @@ const (
 	Name         = "Web Fetch"
 	Description  = "Fetch a URL and extract the text content"
 	Website      = "https://www.flomation.co"
-	Icon         = "globe"
+	Icon         = "globe+arrow-down"
 	Date         = "07/04/2026"
 	Type         = core.ActionTypeAction
 

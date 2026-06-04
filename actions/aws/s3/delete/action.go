@@ -15,7 +15,7 @@ const (
 	Name         = "AWS S3 Delete"
 	Description  = "Delete an object from an AWS S3 bucket"
 	Website      = "https://www.flomation.co"
-	Icon         = "bucket"
+	Icon         = "bucket+trash"
 	Date         = "05/03/2026"
 	Type         = core.ActionTypeAction
 )

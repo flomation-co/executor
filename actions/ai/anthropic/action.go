@@ -21,7 +21,7 @@ const (
 	Name         = "Anthropic Prompt"
 	Description  = "Send a prompt to the Anthropic Messages API and return the response"
 	Website      = "https://www.flomation.co"
-	Icon         = "brain"
+	Icon         = "brain+paper-plane"
 	Date         = "04/04/2026"
 	Type         = core.ActionTypeAction
 

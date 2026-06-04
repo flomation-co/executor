@@ -13,7 +13,7 @@ const (
 	Name         = "Git Branch"
 	Description  = "Create, list, or switch Git branches"
 	Website      = "https://www.flomation.co"
-	Icon         = "code-branch"
+	Icon         = "code-branch+share"
 	Date         = "19/03/2026"
 	Type         = core.ActionTypeAction
 )

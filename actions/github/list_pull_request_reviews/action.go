@@ -14,7 +14,7 @@ const (
 	Name         = "GitHub List PR Reviews"
 	Description  = "List reviews on a GitHub pull request"
 	Website      = "https://www.flomation.co"
-	Icon         = "github"
+	Icon         = "github+list"
 	Date         = "26/04/2026"
 	Type         = core.ActionTypeAction
 )

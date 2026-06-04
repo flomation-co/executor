@@ -15,7 +15,7 @@ const (
 	Name         = "Notion Query Database"
 	Description  = "Query a Notion database with optional filters and sorts"
 	Website      = "https://www.flomation.co"
-	Icon         = "notion"
+	Icon         = "notion+magnifying-glass"
 	Date         = "28/04/2026"
 	Type         = core.ActionTypeAction
 )

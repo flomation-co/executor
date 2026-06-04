@@ -15,7 +15,7 @@ const (
 	Name         = "Notion Get Block Children"
 	Description  = "Read the content blocks of a Notion page or block"
 	Website      = "https://www.flomation.co"
-	Icon         = "notion"
+	Icon         = "notion+list"
 	Date         = "28/04/2026"
 	Type         = core.ActionTypeAction
 )

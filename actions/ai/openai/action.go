@@ -19,7 +19,7 @@ const (
 	Name         = "OpenAI Prompt"
 	Description  = "Send a prompt to the OpenAI Chat Completions API and return the response"
 	Website      = "https://www.flomation.co"
-	Icon         = "brain"
+	Icon         = "brain+play"
 	Date         = "04/04/2026"
 	Type         = core.ActionTypeAction
 

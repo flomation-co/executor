@@ -15,7 +15,7 @@ const (
 	Name         = "Append to Sheet"
 	Description  = "Append rows to a Google Sheet"
 	Website      = "https://www.flomation.co"
-	Icon         = "table"
+	Icon         = "table+plus"
 	Date         = "01/06/2026"
 	Type         = core.ActionTypeAction
 

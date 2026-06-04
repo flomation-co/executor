@@ -14,7 +14,7 @@ const (
 	Name         = "Array Index"
 	Description  = "Extract a single item from an array by its index (0-based)"
 	Website      = "https://www.flomation.co"
-	Icon         = "list"
+	Icon         = "list+magnifying-glass"
 	Date         = "19/04/2026"
 	Type         = core.ActionTypeAction
 )

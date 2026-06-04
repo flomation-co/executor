@@ -14,7 +14,7 @@ const (
 	Name         = "GitLab Retry Pipeline"
 	Description  = "Retry all failed jobs in a GitLab pipeline"
 	Website      = "https://www.flomation.co"
-	Icon         = "gitlab"
+	Icon         = "gitlab+refresh"
 	Date         = "26/04/2026"
 	Type         = core.ActionTypeAction
 )

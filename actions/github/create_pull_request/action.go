@@ -14,7 +14,7 @@ const (
 	Name         = "GitHub Create Pull Request"
 	Description  = "Create a new pull request in a GitHub repository"
 	Website      = "https://www.flomation.co"
-	Icon         = "github"
+	Icon         = "github+plus"
 	Date         = "26/04/2026"
 	Type         = core.ActionTypeAction
 )

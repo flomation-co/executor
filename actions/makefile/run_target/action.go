@@ -22,7 +22,7 @@ const (
 	Name         = "Run Make Target"
 	Description  = "Execute a Makefile target"
 	Website      = "https://www.flomation.co"
-	Icon         = "gears"
+	Icon         = "gears+play"
 	Date         = "31/05/2026"
 	Type         = core.ActionTypeAction
 

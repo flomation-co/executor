@@ -18,7 +18,7 @@ const (
 	Name         = "Send Slack Message"
 	Description  = "Send a message to a Slack channel via the Bot API with mrkdwn formatting and optional Block Kit layouts"
 	Website      = "https://www.flomation.co"
-	Icon         = "slack"
+	Icon         = "slack+paper-plane"
 	Date         = "03/04/2026"
 	Type         = core.ActionTypeAction
 

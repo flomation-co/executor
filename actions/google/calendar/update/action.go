@@ -22,7 +22,7 @@ const (
 	Name         = "Calendar Update Event"
 	Description  = "Update an existing Google Calendar event. Requires the event_id from a previous calendar_read. Only the fields you provide will be changed; others remain untouched."
 	Website      = "https://www.flomation.co"
-	Icon         = "calendar"
+	Icon         = "calendar+pencil"
 	Date         = "08/04/2026"
 	Type         = core.ActionTypeAction
 

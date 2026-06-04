@@ -14,7 +14,7 @@ const (
 	Name         = "GitHub Update Pull Request"
 	Description  = "Update an existing GitHub pull request"
 	Website      = "https://www.flomation.co"
-	Icon         = "github"
+	Icon         = "github+pencil"
 	Date         = "26/04/2026"
 	Type         = core.ActionTypeAction
 )

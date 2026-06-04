@@ -22,7 +22,7 @@ const (
 	Name         = "Get Make Variable"
 	Description  = "Extract a variable value from a Makefile"
 	Website      = "https://www.flomation.co"
-	Icon         = "gears"
+	Icon         = "gears+eye"
 	Date         = "31/05/2026"
 	Type         = core.ActionTypeAction
 )

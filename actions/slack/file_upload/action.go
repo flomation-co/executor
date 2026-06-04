@@ -20,7 +20,7 @@ const (
 	Name         = "Slack File Upload"
 	Description  = "Upload a file to a Slack channel. Supports text content or base64-encoded binary data"
 	Website      = "https://www.flomation.co"
-	Icon         = "slack"
+	Icon         = "slack+arrow-up"
 	Date         = "20/04/2026"
 	Type         = core.ActionTypeAction
 

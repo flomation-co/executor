@@ -23,7 +23,7 @@ const (
 	Name         = "Send Telegram Voice"
 	Description  = "Send a voice message via Telegram. Wire an ElevenLabs TTS node upstream to convert text to audio."
 	Website      = "https://www.flomation.co"
-	Icon         = "paper-plane"
+	Icon         = "telegram+microphone"
 	Date         = "18/04/2026"
 	Type         = core.ActionTypeAction
 

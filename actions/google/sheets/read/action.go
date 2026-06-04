@@ -15,7 +15,7 @@ const (
 	Name         = "Read Sheet"
 	Description  = "Read a range of cells from a Google Sheet"
 	Website      = "https://www.flomation.co"
-	Icon         = "table"
+	Icon         = "table+eye"
 	Date         = "01/06/2026"
 	Type         = core.ActionTypeAction
 

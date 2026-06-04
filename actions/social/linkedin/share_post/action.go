@@ -14,7 +14,7 @@ const (
 	Name         = "LinkedIn Share Post"
 	Description  = "Publish a text or link post to LinkedIn as the authenticated user"
 	Website      = "https://www.flomation.co"
-	Icon         = "linkedin"
+	Icon         = "linkedin+paper-plane"
 	Date         = "21/05/2026"
 	Type         = core.ActionTypeAction
 )

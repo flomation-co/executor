@@ -20,7 +20,7 @@ const (
 	Name         = "Gmail Draft"
 	Description  = "Manage Gmail drafts: create a new draft, list existing drafts, update a draft, or delete one. Use action='create' to compose without sending, 'list' to see drafts, 'update' to modify, 'delete' to remove."
 	Website      = "https://www.flomation.co"
-	Icon         = "gmail"
+	Icon         = "gmail+file-pen"
 	Date         = "08/04/2026"
 	Type         = core.ActionTypeAction
 

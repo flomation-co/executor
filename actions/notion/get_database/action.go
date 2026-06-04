@@ -15,7 +15,7 @@ const (
 	Name         = "Notion Get Database"
 	Description  = "Retrieve a Notion database schema and metadata"
 	Website      = "https://www.flomation.co"
-	Icon         = "notion"
+	Icon         = "notion+database"
 	Date         = "28/04/2026"
 	Type         = core.ActionTypeAction
 )

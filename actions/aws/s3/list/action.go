@@ -15,7 +15,7 @@ const (
 	Name         = "AWS S3 List Buckets"
 	Description  = "List objects in an AWS S3 bucket with optional prefix filter"
 	Website      = "https://www.flomation.co"
-	Icon         = "bucket"
+	Icon         = "bucket+list"
 	Date         = "05/03/2026"
 	Type         = core.ActionTypeAction
 )

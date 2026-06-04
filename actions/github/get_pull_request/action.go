@@ -14,7 +14,7 @@ const (
 	Name         = "GitHub Get Pull Request"
 	Description  = "Retrieve details of a GitHub pull request by number"
 	Website      = "https://www.flomation.co"
-	Icon         = "github"
+	Icon         = "github+eye"
 	Date         = "26/04/2026"
 	Type         = core.ActionTypeAction
 )

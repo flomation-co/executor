@@ -15,7 +15,7 @@ const (
 	Name         = "Move Drive File"
 	Description  = "Move a file to a different folder in Google Drive"
 	Website      = "https://www.flomation.co"
-	Icon         = "folder"
+	Icon         = "folder+arrow-right"
 	Date         = "01/06/2026"
 	Type         = core.ActionTypeAction
 

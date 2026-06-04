@@ -15,7 +15,7 @@ const (
 	Name         = "Publish Site"
 	Description  = "Publish a Webflow site to its subdomain or specified custom domains"
 	Website      = "https://www.flomation.co"
-	Icon         = "globe"
+	Icon         = "webflow+play"
 	Date         = "29/05/2026"
 	Type         = core.ActionTypeAction
 )

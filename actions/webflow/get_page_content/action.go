@@ -14,7 +14,7 @@ const (
 	Name         = "Get Page Content"
 	Description  = "Get the DOM content nodes of a Webflow page"
 	Website      = "https://www.flomation.co"
-	Icon         = "globe"
+	Icon         = "webflow+file-lines"
 	Date         = "29/05/2026"
 	Type         = core.ActionTypeAction
 )

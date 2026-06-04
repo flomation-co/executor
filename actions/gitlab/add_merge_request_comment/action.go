@@ -14,7 +14,7 @@ const (
 	Name         = "GitLab Add MR Comment"
 	Description  = "Add a comment to a GitLab merge request"
 	Website      = "https://www.flomation.co"
-	Icon         = "gitlab"
+	Icon         = "gitlab+pencil"
 	Date         = "26/04/2026"
 	Type         = core.ActionTypeAction
 )

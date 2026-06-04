@@ -15,7 +15,7 @@ const (
 	Name         = "Create Drive Folder"
 	Description  = "Create a new folder in Google Drive"
 	Website      = "https://www.flomation.co"
-	Icon         = "folder"
+	Icon         = "folder+plus"
 	Date         = "01/06/2026"
 	Type         = core.ActionTypeAction
 

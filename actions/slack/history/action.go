@@ -19,7 +19,7 @@ const (
 	Name         = "Slack Channel History"
 	Description  = "Read recent messages from a Slack channel. Uses conversations.history API."
 	Website      = "https://www.flomation.co"
-	Icon         = "slack"
+	Icon         = "slack+clock"
 	Date         = "28/04/2026"
 	Type         = core.ActionTypeAction
 

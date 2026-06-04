@@ -22,7 +22,7 @@ const (
 	Name         = "Calendar Create Event"
 	Description  = "Create a new event on a connected Google Calendar. Specify the account (email or label like 'Work'/'Personal'), date, time, title, and optional attendees/location."
 	Website      = "https://www.flomation.co"
-	Icon         = "calendar"
+	Icon         = "calendar+plus"
 	Date         = "08/04/2026"
 	Type         = core.ActionTypeAction
 

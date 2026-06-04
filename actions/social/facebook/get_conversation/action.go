@@ -19,7 +19,7 @@ const (
 	Name         = "Facebook Get Conversation"
 	Description  = "Fetch Messenger conversation history between a Page and a user"
 	Website      = "https://www.flomation.co"
-	Icon         = "facebook"
+	Icon         = "facebook+comments"
 	Date         = "24/05/2026"
 	Type         = core.ActionTypeAction
 )

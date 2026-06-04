@@ -14,7 +14,7 @@ const (
 	Name         = "Notion Get Page"
 	Description  = "Retrieve a Notion page's properties by ID"
 	Website      = "https://www.flomation.co"
-	Icon         = "notion"
+	Icon         = "notion+eye"
 	Date         = "28/04/2026"
 	Type         = core.ActionTypeAction
 )

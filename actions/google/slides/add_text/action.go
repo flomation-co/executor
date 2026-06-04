@@ -15,7 +15,7 @@ const (
 	Name         = "Add Text to Slide"
 	Description  = "Insert text into a slide shape"
 	Website      = "https://www.flomation.co"
-	Icon         = "display"
+	Icon         = "display+pencil"
 	Date         = "01/06/2026"
 	Type         = core.ActionTypeAction
 

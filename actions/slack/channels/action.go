@@ -18,7 +18,7 @@ const (
 	Name         = "Slack Channels"
 	Description  = "List or search Slack channels. Returns channel names, IDs, topics, and member counts"
 	Website      = "https://www.flomation.co"
-	Icon         = "slack"
+	Icon         = "slack+list"
 	Date         = "20/04/2026"
 	Type         = core.ActionTypeAction
 

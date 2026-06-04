@@ -12,7 +12,7 @@ const (
 	Name         = "Git Tag"
 	Description  = "Create or list tags in a Git repository"
 	Website      = "https://www.flomation.co"
-	Icon         = "code-branch"
+	Icon         = "code-branch+bookmark"
 	Date         = "19/03/2026"
 	Type         = core.ActionTypeAction
 )

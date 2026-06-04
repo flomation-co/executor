@@ -15,7 +15,7 @@ const (
 	Name         = "GitHub Create Issue"
 	Description  = "Create a new issue in a GitHub repository"
 	Website      = "https://www.flomation.co"
-	Icon         = "github"
+	Icon         = "github+plus"
 	Date         = "26/04/2026"
 	Type         = core.ActionTypeAction
 )

@@ -22,7 +22,7 @@ const (
 	Name         = "Text to Speech"
 	Description  = "Convert text to spoken audio using ElevenLabs AI voices"
 	Website      = "https://www.flomation.co"
-	Icon         = "elevenlabs"
+	Icon         = "microphone+paper-plane"
 	Date         = "18/04/2026"
 	Type         = core.ActionTypeAction
 )

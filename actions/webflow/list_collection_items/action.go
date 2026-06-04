@@ -15,7 +15,7 @@ const (
 	Name         = "List Collection Items"
 	Description  = "List items in a Webflow CMS collection with pagination"
 	Website      = "https://www.flomation.co"
-	Icon         = "globe"
+	Icon         = "webflow+list"
 	Date         = "29/05/2026"
 	Type         = core.ActionTypeAction
 )

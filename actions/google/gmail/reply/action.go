@@ -21,7 +21,7 @@ const (
 	Name         = "Gmail Reply"
 	Description  = "Reply to an existing email. Requires the email_id from a previous email_read. Preserves the thread so the reply appears in the correct conversation."
 	Website      = "https://www.flomation.co"
-	Icon         = "gmail"
+	Icon         = "gmail+reply"
 	Date         = "08/04/2026"
 	Type         = core.ActionTypeAction
 

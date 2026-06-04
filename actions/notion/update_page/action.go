@@ -14,7 +14,7 @@ const (
 	Name         = "Notion Update Page"
 	Description  = "Update properties of an existing Notion page"
 	Website      = "https://www.flomation.co"
-	Icon         = "notion"
+	Icon         = "notion+pencil"
 	Date         = "28/04/2026"
 	Type         = core.ActionTypeAction
 )

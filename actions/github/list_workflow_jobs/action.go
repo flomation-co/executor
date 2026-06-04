@@ -14,7 +14,7 @@ const (
 	Name         = "GitHub List Workflow Jobs"
 	Description  = "List jobs for a GitHub Actions workflow run"
 	Website      = "https://www.flomation.co"
-	Icon         = "github"
+	Icon         = "github+list"
 	Date         = "26/04/2026"
 	Type         = core.ActionTypeAction
 )

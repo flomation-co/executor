@@ -14,7 +14,7 @@ const (
 	Name         = "Get Collection Item"
 	Description  = "Get a specific item from a Webflow CMS collection"
 	Website      = "https://www.flomation.co"
-	Icon         = "globe"
+	Icon         = "webflow+eye"
 	Date         = "29/05/2026"
 	Type         = core.ActionTypeAction
 )

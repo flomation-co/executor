@@ -21,7 +21,7 @@ const (
 	Name         = "Validate Makefile"
 	Description  = "Check a Makefile for syntax errors"
 	Website      = "https://www.flomation.co"
-	Icon         = "gears"
+	Icon         = "gears+check"
 	Date         = "31/05/2026"
 	Type         = core.ActionTypeAction
 )

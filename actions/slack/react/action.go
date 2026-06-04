@@ -18,7 +18,7 @@ const (
 	Name         = "Slack Add Reaction"
 	Description  = "Add an emoji reaction to a Slack message. Use emoji name without colons."
 	Website      = "https://www.flomation.co"
-	Icon         = "slack"
+	Icon         = "slack+star"
 	Date         = "28/04/2026"
 	Type         = core.ActionTypeAction
 

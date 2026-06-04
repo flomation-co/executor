@@ -14,7 +14,7 @@ const (
 	Name         = "GitHub Create PR Review"
 	Description  = "Submit a review on a GitHub pull request (approve, request changes, or comment)"
 	Website      = "https://www.flomation.co"
-	Icon         = "github"
+	Icon         = "github+check"
 	Date         = "26/04/2026"
 	Type         = core.ActionTypeAction
 )

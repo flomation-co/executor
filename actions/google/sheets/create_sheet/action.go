@@ -15,7 +15,7 @@ const (
 	Name         = "Add Sheet Tab"
 	Description  = "Add a new sheet tab to a Google Sheets spreadsheet"
 	Website      = "https://www.flomation.co"
-	Icon         = "table"
+	Icon         = "table+plus"
 	Date         = "01/06/2026"
 	Type         = core.ActionTypeAction
 

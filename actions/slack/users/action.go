@@ -18,7 +18,7 @@ const (
 	Name         = "Slack Users"
 	Description  = "List or search Slack workspace members. Returns display names, real names, email addresses, and status"
 	Website      = "https://www.flomation.co"
-	Icon         = "slack"
+	Icon         = "slack+user-group"
 	Date         = "20/04/2026"
 	Type         = core.ActionTypeAction
 

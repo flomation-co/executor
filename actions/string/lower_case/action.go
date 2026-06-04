@@ -12,7 +12,7 @@ const (
 	Name         = "Lower Case"
 	Description  = "Convert a string to lower case"
 	Website      = "https://www.flomation.co"
-	Icon         = "font"
+	Icon         = "font+arrow-down"
 	Date         = "19/04/2026"
 	Type         = core.ActionTypeAction
 )

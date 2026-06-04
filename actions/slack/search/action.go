@@ -18,7 +18,7 @@ const (
 	Name         = "Slack Search Messages"
 	Description  = "Search Slack messages. Requires a user token (xoxp-), not a bot token. Supports modifiers: from:user, in:channel, before:date, after:date"
 	Website      = "https://www.flomation.co"
-	Icon         = "slack"
+	Icon         = "slack+magnifying-glass"
 	Date         = "20/04/2026"
 	Type         = core.ActionTypeAction
 

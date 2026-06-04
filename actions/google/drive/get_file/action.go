@@ -15,7 +15,7 @@ const (
 	Name         = "Get Drive File"
 	Description  = "Get metadata for a Google Drive file"
 	Website      = "https://www.flomation.co"
-	Icon         = "folder"
+	Icon         = "folder+eye"
 	Date         = "01/06/2026"
 	Type         = core.ActionTypeAction
 

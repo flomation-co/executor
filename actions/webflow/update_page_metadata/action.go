@@ -14,7 +14,7 @@ const (
 	Name         = "Update Page Metadata"
 	Description  = "Update the title, slug, SEO, and Open Graph metadata of a Webflow page"
 	Website      = "https://www.flomation.co"
-	Icon         = "globe"
+	Icon         = "webflow+pencil"
 	Date         = "29/05/2026"
 	Type         = core.ActionTypeAction
 )

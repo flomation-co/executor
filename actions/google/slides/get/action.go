@@ -15,7 +15,7 @@ const (
 	Name         = "Get Presentation"
 	Description  = "Get metadata and slides for a Google Slides presentation"
 	Website      = "https://www.flomation.co"
-	Icon         = "display"
+	Icon         = "display+eye"
 	Date         = "01/06/2026"
 	Type         = core.ActionTypeAction
 

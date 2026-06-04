@@ -14,7 +14,7 @@ const (
 	Name         = "Notion Create Page"
 	Description  = "Create a new page in a Notion database or as a child of another page"
 	Website      = "https://www.flomation.co"
-	Icon         = "notion"
+	Icon         = "notion+plus"
 	Date         = "28/04/2026"
 	Type         = core.ActionTypeAction
 )

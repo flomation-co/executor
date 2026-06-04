@@ -19,7 +19,7 @@ const (
 	Name         = "Calendar Delete Event"
 	Description  = "Delete an event from Google Calendar. Requires the event_id from a previous calendar_read. This permanently removes the event."
 	Website      = "https://www.flomation.co"
-	Icon         = "calendar"
+	Icon         = "calendar+trash"
 	Date         = "08/04/2026"
 	Type         = core.ActionTypeAction
 

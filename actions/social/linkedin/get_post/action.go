@@ -15,7 +15,7 @@ const (
 	Name         = "LinkedIn Get Post"
 	Description  = "Retrieve a LinkedIn post by its URN with content and metadata"
 	Website      = "https://www.flomation.co"
-	Icon         = "linkedin"
+	Icon         = "linkedin+eye"
 	Date         = "21/05/2026"
 	Type         = core.ActionTypeAction
 )

@@ -18,7 +18,7 @@ const (
 	Name         = "Slack User Profile"
 	Description  = "Get a Slack user's full profile by user ID. Returns name, email, title, phone, timezone, status, and avatar"
 	Website      = "https://www.flomation.co"
-	Icon         = "slack"
+	Icon         = "slack+user"
 	Date         = "20/04/2026"
 	Type         = core.ActionTypeAction
 

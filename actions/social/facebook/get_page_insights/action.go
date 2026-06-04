@@ -15,7 +15,7 @@ const (
 	Name         = "Facebook Page Insights"
 	Description  = "Get engagement and reach metrics for a Facebook Page"
 	Website      = "https://www.flomation.co"
-	Icon         = "facebook"
+	Icon         = "facebook+pie-chart"
 	Date         = "21/05/2026"
 	Type         = core.ActionTypeAction
 )

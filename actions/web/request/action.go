@@ -16,7 +16,7 @@ const (
 	Name         = "HTTP Request"
 	Description  = "Send an HTTP request and capture the response"
 	Website      = "https://www.flomation.co"
-	Icon         = "globe"
+	Icon         = "globe+paper-plane"
 	Date         = "23/03/2026"
 	Type         = core.ActionTypeAction
 

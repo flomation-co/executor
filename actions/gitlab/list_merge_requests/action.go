@@ -15,7 +15,7 @@ const (
 	Name         = "GitLab List Merge Requests"
 	Description  = "List merge requests in a GitLab project with optional filters"
 	Website      = "https://www.flomation.co"
-	Icon         = "gitlab"
+	Icon         = "gitlab+list"
 	Date         = "26/04/2026"
 	Type         = core.ActionTypeAction
 )

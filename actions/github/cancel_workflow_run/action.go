@@ -13,7 +13,7 @@ const (
 	Name         = "GitHub Cancel Workflow Run"
 	Description  = "Cancel a running GitHub Actions workflow run"
 	Website      = "https://www.flomation.co"
-	Icon         = "github"
+	Icon         = "github+xmark"
 	Date         = "26/04/2026"
 	Type         = core.ActionTypeAction
 )

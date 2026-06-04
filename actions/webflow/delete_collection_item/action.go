@@ -13,7 +13,7 @@ const (
 	Name         = "Delete Collection Item"
 	Description  = "Delete an item from a Webflow CMS collection"
 	Website      = "https://www.flomation.co"
-	Icon         = "globe"
+	Icon         = "webflow+trash"
 	Date         = "29/05/2026"
 	Type         = core.ActionTypeAction
 )

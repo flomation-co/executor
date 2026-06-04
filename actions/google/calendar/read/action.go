@@ -25,7 +25,7 @@ const (
 	Name         = "Calendar Read"
 	Description  = "Read events, check availability, or find free slots across all connected Google calendars"
 	Website      = "https://www.flomation.co"
-	Icon         = "calendar"
+	Icon         = "calendar+eye"
 	Date         = "08/04/2026"
 	Type         = core.ActionTypeAction
 

@@ -29,7 +29,7 @@ const (
 		"IMPORTANT: bot_token, channel_id, and thread_ts are pre-configured — do NOT provide them and do NOT ask the user for them. " +
 		"You only need to provide: text (fallback) and blocks (the Block Kit JSON array)."
 	Website = "https://www.flomation.co"
-	Icon    = "slack"
+	Icon         = "slack+file-lines"
 	Date    = "15/04/2026"
 	Type    = core.ActionTypeAction
 

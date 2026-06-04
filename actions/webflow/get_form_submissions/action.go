@@ -15,7 +15,7 @@ const (
 	Name         = "Get Form Submissions"
 	Description  = "Get submissions for a Webflow form with pagination"
 	Website      = "https://www.flomation.co"
-	Icon         = "globe"
+	Icon         = "webflow+file-lines"
 	Date         = "29/05/2026"
 	Type         = core.ActionTypeAction
 )

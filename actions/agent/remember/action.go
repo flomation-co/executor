@@ -29,7 +29,7 @@ const (
 	Name         = "Remember Fact"
 	Description  = "Store a durable fact, preference, or piece of feedback in an agent's memory"
 	Website      = "https://www.flomation.co"
-	Icon         = "brain"
+	Icon         = "brain+plus"
 	Date         = "05/04/2026"
 	Type         = core.ActionTypeAction
 )

@@ -15,7 +15,7 @@ const (
 	Name         = "Git Commit"
 	Description  = "Create a Git commit with staged changes"
 	Website      = "https://www.flomation.co"
-	Icon         = "code-branch"
+	Icon         = "code-branch+check"
 	Date         = "06/03/2026"
 	Type         = core.ActionTypeAction
 )

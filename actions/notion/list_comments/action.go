@@ -15,7 +15,7 @@ const (
 	Name         = "Notion List Comments"
 	Description  = "List comments on a Notion page or block"
 	Website      = "https://www.flomation.co"
-	Icon         = "notion"
+	Icon         = "notion+comments"
 	Date         = "28/04/2026"
 	Type         = core.ActionTypeAction
 )

@@ -12,7 +12,7 @@ const (
 	Name         = "Contains"
 	Description  = "Check if a string contains a substring"
 	Website      = "https://www.flomation.co"
-	Icon         = "font"
+	Icon         = "font+magnifying-glass"
 	Date         = "19/04/2026"
 	Type         = core.ActionTypeAction
 )

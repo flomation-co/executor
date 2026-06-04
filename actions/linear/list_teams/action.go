@@ -15,7 +15,7 @@ const (
 	Name         = "List Teams"
 	Description  = "List all Linear teams with workflow states, labels, and members. Call first to get team_id."
 	Website      = "https://www.flomation.co"
-	Icon         = "linear"
+	Icon         = "linear+user-group"
 	Date         = "15/04/2026"
 	Type         = core.ActionTypeAction
 )

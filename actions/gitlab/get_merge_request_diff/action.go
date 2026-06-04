@@ -14,7 +14,7 @@ const (
 	Name         = "GitLab Get Merge Request Diff"
 	Description  = "Retrieve the diff and changed files for a GitLab merge request"
 	Website      = "https://www.flomation.co"
-	Icon         = "gitlab"
+	Icon         = "gitlab+file-lines"
 	Date         = "26/04/2026"
 	Type         = core.ActionTypeAction
 )

@@ -21,7 +21,7 @@ const (
 	Name         = "Gmail Send"
 	Description  = "Send an email. Default sends from agent's account. Set account to user's email to send on their behalf."
 	Website      = "https://www.flomation.co"
-	Icon         = "gmail"
+	Icon         = "gmail+paper-plane"
 	Date         = "08/04/2026"
 	Type         = core.ActionTypeAction
 

@@ -12,7 +12,7 @@ const (
 	Name         = "Git Add"
 	Description  = "Stage files for commit in a Git repository"
 	Website      = "https://www.flomation.co"
-	Icon         = "code-branch"
+	Icon         = "code-branch+plus"
 	Date         = "06/03/2026"
 	Type         = core.ActionTypeAction
 )
