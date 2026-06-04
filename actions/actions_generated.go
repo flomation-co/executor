@@ -175,6 +175,16 @@ import (
 	microsoft_calendar_get_event "flomation.app/automate/executor/actions/microsoft/calendar/get_event"
 	microsoft_calendar_list_events "flomation.app/automate/executor/actions/microsoft/calendar/list_events"
 	microsoft_calendar_update_event "flomation.app/automate/executor/actions/microsoft/calendar/update_event"
+	microsoft_onedrive_copy_file "flomation.app/automate/executor/actions/microsoft/onedrive/copy_file"
+	microsoft_onedrive_create_folder "flomation.app/automate/executor/actions/microsoft/onedrive/create_folder"
+	microsoft_onedrive_delete_file "flomation.app/automate/executor/actions/microsoft/onedrive/delete_file"
+	microsoft_onedrive_download "flomation.app/automate/executor/actions/microsoft/onedrive/download"
+	microsoft_onedrive_get_file "flomation.app/automate/executor/actions/microsoft/onedrive/get_file"
+	microsoft_onedrive_list_files "flomation.app/automate/executor/actions/microsoft/onedrive/list_files"
+	microsoft_onedrive_move "flomation.app/automate/executor/actions/microsoft/onedrive/move"
+	microsoft_onedrive_search "flomation.app/automate/executor/actions/microsoft/onedrive/search"
+	microsoft_onedrive_share "flomation.app/automate/executor/actions/microsoft/onedrive/share"
+	microsoft_onedrive_upload "flomation.app/automate/executor/actions/microsoft/onedrive/upload"
 	microsoft_outlook_create_draft "flomation.app/automate/executor/actions/microsoft/outlook/create_draft"
 	microsoft_outlook_delete_email "flomation.app/automate/executor/actions/microsoft/outlook/delete_email"
 	microsoft_outlook_download_attachment "flomation.app/automate/executor/actions/microsoft/outlook/download_attachment"
@@ -187,6 +197,12 @@ import (
 	microsoft_outlook_reply "flomation.app/automate/executor/actions/microsoft/outlook/reply"
 	microsoft_outlook_search_emails "flomation.app/automate/executor/actions/microsoft/outlook/search_emails"
 	microsoft_outlook_send_email "flomation.app/automate/executor/actions/microsoft/outlook/send_email"
+	microsoft_sharepoint_create_list_item "flomation.app/automate/executor/actions/microsoft/sharepoint/create_list_item"
+	microsoft_sharepoint_delete_list_item "flomation.app/automate/executor/actions/microsoft/sharepoint/delete_list_item"
+	microsoft_sharepoint_get_list_items "flomation.app/automate/executor/actions/microsoft/sharepoint/get_list_items"
+	microsoft_sharepoint_list_lists "flomation.app/automate/executor/actions/microsoft/sharepoint/list_lists"
+	microsoft_sharepoint_list_sites "flomation.app/automate/executor/actions/microsoft/sharepoint/list_sites"
+	microsoft_sharepoint_update_list_item "flomation.app/automate/executor/actions/microsoft/sharepoint/update_list_item"
 	microsoft_teams_create_channel "flomation.app/automate/executor/actions/microsoft/teams/create_channel"
 	microsoft_teams_list_channel_messages "flomation.app/automate/executor/actions/microsoft/teams/list_channel_messages"
 	microsoft_teams_list_channels "flomation.app/automate/executor/actions/microsoft/teams/list_channels"
@@ -471,6 +487,16 @@ var Actions = map[string]core.Action{
 	"microsoft/calendar/get_event":          microsoft_calendar_get_event.Execute,
 	"microsoft/calendar/list_events":        microsoft_calendar_list_events.Execute,
 	"microsoft/calendar/update_event":       microsoft_calendar_update_event.Execute,
+	"microsoft/onedrive/copy_file":          microsoft_onedrive_copy_file.Execute,
+	"microsoft/onedrive/create_folder":      microsoft_onedrive_create_folder.Execute,
+	"microsoft/onedrive/delete_file":        microsoft_onedrive_delete_file.Execute,
+	"microsoft/onedrive/download":           microsoft_onedrive_download.Execute,
+	"microsoft/onedrive/get_file":           microsoft_onedrive_get_file.Execute,
+	"microsoft/onedrive/list_files":         microsoft_onedrive_list_files.Execute,
+	"microsoft/onedrive/move":               microsoft_onedrive_move.Execute,
+	"microsoft/onedrive/search":             microsoft_onedrive_search.Execute,
+	"microsoft/onedrive/share":              microsoft_onedrive_share.Execute,
+	"microsoft/onedrive/upload":             microsoft_onedrive_upload.Execute,
 	"microsoft/outlook/create_draft":        microsoft_outlook_create_draft.Execute,
 	"microsoft/outlook/delete_email":        microsoft_outlook_delete_email.Execute,
 	"microsoft/outlook/download_attachment": microsoft_outlook_download_attachment.Execute,
@@ -483,6 +509,12 @@ var Actions = map[string]core.Action{
 	"microsoft/outlook/reply":               microsoft_outlook_reply.Execute,
 	"microsoft/outlook/search_emails":       microsoft_outlook_search_emails.Execute,
 	"microsoft/outlook/send_email":          microsoft_outlook_send_email.Execute,
+	"microsoft/sharepoint/create_list_item": microsoft_sharepoint_create_list_item.Execute,
+	"microsoft/sharepoint/delete_list_item": microsoft_sharepoint_delete_list_item.Execute,
+	"microsoft/sharepoint/get_list_items":   microsoft_sharepoint_get_list_items.Execute,
+	"microsoft/sharepoint/list_lists":       microsoft_sharepoint_list_lists.Execute,
+	"microsoft/sharepoint/list_sites":       microsoft_sharepoint_list_sites.Execute,
+	"microsoft/sharepoint/update_list_item": microsoft_sharepoint_update_list_item.Execute,
 	"microsoft/teams/create_channel":        microsoft_teams_create_channel.Execute,
 	"microsoft/teams/list_channel_messages": microsoft_teams_list_channel_messages.Execute,
 	"microsoft/teams/list_channels":         microsoft_teams_list_channels.Execute,
