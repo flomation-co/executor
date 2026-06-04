@@ -11,7 +11,7 @@ const (
 	Name         = "Facebook Messenger Trigger"
 	Description  = "Triggers a flow when a message is received via Facebook Messenger"
 	Website      = "https://www.flomation.co"
-	Icon         = "facebook+bolt"
+	Icon         = "facebook-messenger"
 	Date         = "24/05/2026"
 	Type         = core.ActionTypeTrigger
 )

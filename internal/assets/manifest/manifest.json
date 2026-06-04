@@ -21848,13 +21848,13 @@
     ]
   },
   "trigger/facebook_messenger": {
-    "hash": "c55d50d06aa16050f1e42e8bbbaa8509aa955b0939c3b0c94b18f8adba8e3bb2",
+    "hash": "29a1b86d40083b0ca806a7510d7b347aeb5db8f8e2525c4be3b47ff8d9ca044d",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Facebook Messenger Trigger",
     "description": "Triggers a flow when a message is received via Facebook Messenger",
     "website": "https://www.flomation.co",
-    "icon": "facebook+bolt",
+    "icon": "facebook-messenger",
     "date": "24/05/2026",
     "type": 1,
     "category": {
