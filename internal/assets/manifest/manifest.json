@@ -9721,6 +9721,572 @@
       }
     ]
   },
+  "google/accounts": {
+    "hash": "9947a58d47db9691a551b4f418f00e7dfa195c7fe0b28af485280491c64e10ca",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Manage Google Connections",
+    "description": "Manage the user's Google account connections for calendar, email read, and email send. Lists which accounts are connected and for which purposes (calendar, email read, email send), provides OAuth links to connect new permissions, and can disconnect specific accounts/purposes. Use this when the user wants to connect or manage their Google accounts.",
+    "website": "https://www.flomation.co",
+    "icon": "link",
+    "date": "08/04/2026",
+    "type": 2,
+    "category": {
+      "name": "Google",
+      "icon": "google",
+      "description": "Google Workspace integrations"
+    },
+    "inputs": [
+      {
+        "name": "action",
+        "type": "string",
+        "value": null,
+        "label": "What to do with Google account connections",
+        "placeholder": "",
+        "required": true,
+        "options": [
+          {
+            "name": "List accounts with purposes and get connect links",
+            "value": "list"
+          },
+          {
+            "name": "Disconnect an account or specific purpose",
+            "value": "disconnect"
+          }
+        ]
+      },
+      {
+        "name": "email",
+        "type": "string",
+        "value": null,
+        "label": "Email (for disconnect)",
+        "placeholder": "user@example.com"
+      },
+      {
+        "name": "purpose",
+        "type": "string",
+        "value": null,
+        "label": "Purpose to disconnect (calendar, email_read, email_send) — empty removes all",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "Calendar access",
+            "value": "calendar"
+          },
+          {
+            "name": "Email read access",
+            "value": "email_read"
+          },
+          {
+            "name": "Email send access",
+            "value": "email_send"
+          }
+        ]
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Results (text)",
+        "placeholder": ""
+      },
+      {
+        "name": "accounts",
+        "type": "object",
+        "value": null,
+        "label": "Connected Accounts (JSON)",
+        "placeholder": ""
+      },
+      {
+        "name": "auth_urls",
+        "type": "object",
+        "value": null,
+        "label": "OAuth Connect URLs by purpose",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "google/calendar/create": {
+    "hash": "d2b7aabc882f8f79dc8e6c77904b77f1fdf4998b3f4cb2566f8ed78e63e8e521",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Calendar Create Event",
+    "description": "Create a new event on a connected Google Calendar. Specify the account (email or label like 'Work'/'Personal'), date, time, title, and optional attendees/location.",
+    "website": "https://www.flomation.co",
+    "icon": "calendar",
+    "date": "08/04/2026",
+    "type": 2,
+    "category": {
+      "name": "Google",
+      "icon": "google",
+      "description": "Google Workspace integrations"
+    },
+    "sub_category": {
+      "name": "Calendar",
+      "icon": "calendar",
+      "description": "Google Calendar event management"
+    },
+    "inputs": [
+      {
+        "name": "title",
+        "type": "string",
+        "value": null,
+        "label": "Event title",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "date",
+        "type": "string",
+        "value": null,
+        "label": "Date (YYYY-MM-DD, 'today', 'tomorrow', or day name)",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "start_time",
+        "type": "string",
+        "value": null,
+        "label": "Start time (HH:MM, 24h format)",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "end_time",
+        "type": "string",
+        "value": null,
+        "label": "End time (HH:MM, 24h format)",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "description",
+        "type": "string",
+        "value": null,
+        "label": "Event description or notes",
+        "placeholder": ""
+      },
+      {
+        "name": "attendees",
+        "type": "string",
+        "value": null,
+        "label": "Attendees (comma-separated email addresses)",
+        "placeholder": ""
+      },
+      {
+        "name": "location",
+        "type": "string",
+        "value": null,
+        "label": "Event location",
+        "placeholder": ""
+      },
+      {
+        "name": "account",
+        "type": "string",
+        "value": null,
+        "label": "Account (email, label like 'Work'/'Personal', or empty for primary)",
+        "placeholder": ""
+      },
+      {
+        "name": "credential",
+        "type": "string",
+        "value": null,
+        "label": "Google OAuth Credential (optional, overrides user tokens)",
+        "placeholder": "${credentials.GOOGLE_CALENDAR}"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result (text)",
+        "placeholder": ""
+      },
+      {
+        "name": "event_id",
+        "type": "string",
+        "value": null,
+        "label": "Created Event ID",
+        "placeholder": ""
+      },
+      {
+        "name": "event_link",
+        "type": "string",
+        "value": null,
+        "label": "Event Link",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "google/calendar/delete": {
+    "hash": "c82a717692d02759278bc3f43d0339a784edecaecac20513c3e62cd416b8e516",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Calendar Delete Event",
+    "description": "Delete an event from Google Calendar. Requires the event_id from a previous calendar_read. This permanently removes the event.",
+    "website": "https://www.flomation.co",
+    "icon": "calendar",
+    "date": "08/04/2026",
+    "type": 2,
+    "category": {
+      "name": "Google",
+      "icon": "google",
+      "description": "Google Workspace integrations"
+    },
+    "sub_category": {
+      "name": "Calendar",
+      "icon": "calendar",
+      "description": "Google Calendar event management"
+    },
+    "inputs": [
+      {
+        "name": "event_id",
+        "type": "string",
+        "value": null,
+        "label": "Event ID (from calendar_read results)",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "account",
+        "type": "string",
+        "value": null,
+        "label": "Account the event is on (email or label)",
+        "placeholder": ""
+      },
+      {
+        "name": "credential",
+        "type": "string",
+        "value": null,
+        "label": "Google OAuth Credential (optional, overrides user tokens)",
+        "placeholder": "${credentials.GOOGLE_CALENDAR}"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result (text)",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "google/calendar/read": {
+    "hash": "15ded1dc3cea2b764ff480433186d37a7638e5a12860ff0833cdf4f233bda460",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Calendar Read",
+    "description": "Read events, check availability, or find free slots across all connected Google calendars",
+    "website": "https://www.flomation.co",
+    "icon": "calendar",
+    "date": "08/04/2026",
+    "type": 2,
+    "category": {
+      "name": "Google",
+      "icon": "google",
+      "description": "Google Workspace integrations"
+    },
+    "sub_category": {
+      "name": "Calendar",
+      "icon": "calendar",
+      "description": "Google Calendar event management"
+    },
+    "inputs": [
+      {
+        "name": "query_type",
+        "type": "string",
+        "value": null,
+        "label": "Query Type",
+        "placeholder": "",
+        "required": true,
+        "options": [
+          {
+            "name": "List events",
+            "value": "events"
+          },
+          {
+            "name": "Check availability",
+            "value": "availability"
+          },
+          {
+            "name": "Find free slots",
+            "value": "free_slots"
+          }
+        ]
+      },
+      {
+        "name": "date_from",
+        "type": "string",
+        "value": null,
+        "label": "Start Date (YYYY-MM-DD or 'today', 'tomorrow')",
+        "placeholder": "today",
+        "required": true
+      },
+      {
+        "name": "date_to",
+        "type": "string",
+        "value": null,
+        "label": "End Date (YYYY-MM-DD, defaults to date_from)",
+        "placeholder": ""
+      },
+      {
+        "name": "start_time",
+        "type": "string",
+        "value": null,
+        "label": "Start Time (HH:MM, for availability check)",
+        "placeholder": "14:00"
+      },
+      {
+        "name": "end_time",
+        "type": "string",
+        "value": null,
+        "label": "End Time (HH:MM, for availability check)",
+        "placeholder": "15:00"
+      },
+      {
+        "name": "duration_minutes",
+        "type": "integer",
+        "value": null,
+        "label": "Slot Duration (minutes, for free slot search)",
+        "placeholder": "60"
+      },
+      {
+        "name": "account",
+        "type": "string",
+        "value": null,
+        "label": "Account filter (email, label like 'Work', or empty for all)",
+        "placeholder": ""
+      },
+      {
+        "name": "credential",
+        "type": "string",
+        "value": null,
+        "label": "Google OAuth Credential (optional, overrides user tokens)",
+        "placeholder": "${credentials.GOOGLE_CALENDAR}"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Results (text)",
+        "placeholder": ""
+      },
+      {
+        "name": "events",
+        "type": "object",
+        "value": null,
+        "label": "Events (JSON)",
+        "placeholder": ""
+      },
+      {
+        "name": "is_free",
+        "type": "boolean",
+        "value": null,
+        "label": "Is Free (availability)",
+        "placeholder": ""
+      },
+      {
+        "name": "free_slots",
+        "type": "object",
+        "value": null,
+        "label": "Free Slots (JSON)",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "google/calendar/update": {
+    "hash": "5f146aa2d6e4d048e344b0849f4d1ca0b1875177d9550c00129bbc148d38df25",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Calendar Update Event",
+    "description": "Update an existing Google Calendar event. Requires the event_id from a previous calendar_read. Only the fields you provide will be changed; others remain untouched.",
+    "website": "https://www.flomation.co",
+    "icon": "calendar",
+    "date": "08/04/2026",
+    "type": 2,
+    "category": {
+      "name": "Google",
+      "icon": "google",
+      "description": "Google Workspace integrations"
+    },
+    "sub_category": {
+      "name": "Calendar",
+      "icon": "calendar",
+      "description": "Google Calendar event management"
+    },
+    "inputs": [
+      {
+        "name": "event_id",
+        "type": "string",
+        "value": null,
+        "label": "Event ID (from calendar_read results)",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "title",
+        "type": "string",
+        "value": null,
+        "label": "New title (leave empty to keep current)",
+        "placeholder": ""
+      },
+      {
+        "name": "date",
+        "type": "string",
+        "value": null,
+        "label": "New date (YYYY-MM-DD, leave empty to keep current)",
+        "placeholder": ""
+      },
+      {
+        "name": "start_time",
+        "type": "string",
+        "value": null,
+        "label": "New start time (HH:MM, leave empty to keep current)",
+        "placeholder": ""
+      },
+      {
+        "name": "end_time",
+        "type": "string",
+        "value": null,
+        "label": "New end time (HH:MM, leave empty to keep current)",
+        "placeholder": ""
+      },
+      {
+        "name": "description",
+        "type": "string",
+        "value": null,
+        "label": "New description",
+        "placeholder": ""
+      },
+      {
+        "name": "location",
+        "type": "string",
+        "value": null,
+        "label": "New location",
+        "placeholder": ""
+      },
+      {
+        "name": "account",
+        "type": "string",
+        "value": null,
+        "label": "Account the event is on (email or label)",
+        "placeholder": ""
+      },
+      {
+        "name": "scope",
+        "type": "string",
+        "value": null,
+        "label": "For recurring events: 'this_instance' (default), 'all_events' (change the entire series), or 'this_and_following' (this and all future instances)",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "This instance only",
+            "value": "this_instance"
+          },
+          {
+            "name": "All events in series",
+            "value": "all_events"
+          },
+          {
+            "name": "This and following",
+            "value": "this_and_following"
+          }
+        ]
+      },
+      {
+        "name": "credential",
+        "type": "string",
+        "value": null,
+        "label": "Google OAuth Credential (optional, overrides user tokens)",
+        "placeholder": "${credentials.GOOGLE_CALENDAR}"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result (text)",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
   "google/docs/append_text": {
     "hash": "89e2930b81ae5ff18022a039756dddc2f4e6131f61b5c2d3f90ac926350880b5",
     "author": "Andy Esser",
@@ -11299,6 +11865,445 @@
       }
     ]
   },
+  "google/gmail/draft": {
+    "hash": "db112a7b82b4cbce2f9bf0c5270e89c9dd4c8ffefec059c80398a3c509df8d7f",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Gmail Draft",
+    "description": "Manage Gmail drafts: create a new draft, list existing drafts, update a draft, or delete one. Use action='create' to compose without sending, 'list' to see drafts, 'update' to modify, 'delete' to remove.",
+    "website": "https://www.flomation.co",
+    "icon": "gmail",
+    "date": "08/04/2026",
+    "type": 2,
+    "category": {
+      "name": "Google",
+      "icon": "google",
+      "description": "Google Workspace integrations"
+    },
+    "sub_category": {
+      "name": "Gmail",
+      "icon": "gmail",
+      "description": "Google Gmail email operations"
+    },
+    "inputs": [
+      {
+        "name": "action",
+        "type": "string",
+        "value": null,
+        "label": "Action to perform",
+        "placeholder": "",
+        "required": true,
+        "options": [
+          {
+            "name": "Create a new draft",
+            "value": "create"
+          },
+          {
+            "name": "List existing drafts",
+            "value": "list"
+          },
+          {
+            "name": "Update a draft",
+            "value": "update"
+          },
+          {
+            "name": "Delete a draft",
+            "value": "delete"
+          }
+        ]
+      },
+      {
+        "name": "to",
+        "type": "string",
+        "value": null,
+        "label": "Recipient (for create/update)",
+        "placeholder": ""
+      },
+      {
+        "name": "subject",
+        "type": "string",
+        "value": null,
+        "label": "Subject (for create/update)",
+        "placeholder": ""
+      },
+      {
+        "name": "body",
+        "type": "text",
+        "value": null,
+        "label": "Body (for create/update)",
+        "placeholder": ""
+      },
+      {
+        "name": "draft_id",
+        "type": "string",
+        "value": null,
+        "label": "Draft ID (for update/delete)",
+        "placeholder": ""
+      },
+      {
+        "name": "account",
+        "type": "string",
+        "value": null,
+        "label": "Account (email or label)",
+        "placeholder": ""
+      },
+      {
+        "name": "credential",
+        "type": "string",
+        "value": null,
+        "label": "Google OAuth Credential (optional)",
+        "placeholder": "${credentials.GOOGLE_EMAIL}"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result (text)",
+        "placeholder": ""
+      },
+      {
+        "name": "draft_id",
+        "type": "string",
+        "value": null,
+        "label": "Draft ID",
+        "placeholder": ""
+      },
+      {
+        "name": "drafts",
+        "type": "object",
+        "value": null,
+        "label": "Drafts (JSON)",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "google/gmail/read": {
+    "hash": "1c362a0d8bf1ccfe8e1092b6ccc9f19fd511f7c65d69728e2167a53b012dfcf3",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Gmail Read",
+    "description": "Search and read the USER's emails from their connected Gmail. When the user says 'my emails' or 'check my inbox', use this tool — it reads THEIR mailbox. Use Gmail search (e.g. 'is:unread newer_than:1d', 'from:someone') or email_id for a specific message.",
+    "website": "https://www.flomation.co",
+    "icon": "gmail",
+    "date": "08/04/2026",
+    "type": 2,
+    "category": {
+      "name": "Google",
+      "icon": "google",
+      "description": "Google Workspace integrations"
+    },
+    "sub_category": {
+      "name": "Gmail",
+      "icon": "gmail",
+      "description": "Google Gmail email operations"
+    },
+    "inputs": [
+      {
+        "name": "query",
+        "type": "string",
+        "value": null,
+        "label": "Gmail search query (e.g. 'from:boss@company.com', 'subject:urgent', 'is:unread')",
+        "placeholder": "is:unread"
+      },
+      {
+        "name": "max_results",
+        "type": "integer",
+        "value": null,
+        "label": "Max emails to return (default 10, max 50)",
+        "placeholder": "10"
+      },
+      {
+        "name": "email_id",
+        "type": "string",
+        "value": null,
+        "label": "Email ID to read in full (from a prior search)",
+        "placeholder": ""
+      },
+      {
+        "name": "account",
+        "type": "string",
+        "value": null,
+        "label": "Filter to a specific account email. Leave empty to search ALL user accounts. Never default to the agent's own email.",
+        "placeholder": ""
+      },
+      {
+        "name": "credential",
+        "type": "string",
+        "value": null,
+        "label": "Google OAuth Credential (optional, overrides user tokens)",
+        "placeholder": "${credentials.GOOGLE_EMAIL}"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Results (text)",
+        "placeholder": ""
+      },
+      {
+        "name": "emails",
+        "type": "object",
+        "value": null,
+        "label": "Emails (JSON)",
+        "placeholder": ""
+      },
+      {
+        "name": "total_count",
+        "type": "integer",
+        "value": null,
+        "label": "Total Results",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "google/gmail/reply": {
+    "hash": "d825005b635634e0aa16404bae9cf2c63087691a176caa3032822cd6dc871f34",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Gmail Reply",
+    "description": "Reply to an existing email. Requires the email_id from a previous email_read. Preserves the thread so the reply appears in the correct conversation.",
+    "website": "https://www.flomation.co",
+    "icon": "gmail",
+    "date": "08/04/2026",
+    "type": 2,
+    "category": {
+      "name": "Google",
+      "icon": "google",
+      "description": "Google Workspace integrations"
+    },
+    "sub_category": {
+      "name": "Gmail",
+      "icon": "gmail",
+      "description": "Google Gmail email operations"
+    },
+    "inputs": [
+      {
+        "name": "email_id",
+        "type": "string",
+        "value": null,
+        "label": "Email ID to reply to (from email_read)",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "body",
+        "type": "text",
+        "value": null,
+        "label": "Reply body (plain text)",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "reply_all",
+        "type": "boolean",
+        "value": null,
+        "label": "Reply all (default false)",
+        "placeholder": ""
+      },
+      {
+        "name": "sender_name",
+        "type": "string",
+        "value": null,
+        "label": "Sender display name (e.g. 'Ada Whitmore')",
+        "placeholder": ""
+      },
+      {
+        "name": "account",
+        "type": "string",
+        "value": null,
+        "label": "Account to send from (email or label)",
+        "placeholder": ""
+      },
+      {
+        "name": "credential",
+        "type": "string",
+        "value": null,
+        "label": "Google OAuth Credential (optional, overrides user tokens)",
+        "placeholder": "${credentials.GOOGLE_EMAIL}"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result (text)",
+        "placeholder": ""
+      },
+      {
+        "name": "message_id",
+        "type": "string",
+        "value": null,
+        "label": "Message ID",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "google/gmail/send": {
+    "hash": "eadd2f7dfefdaa372f332cac5c6464b0e4553f64ce75b294235fbc717b786cfd",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Gmail Send",
+    "description": "Send an email. Default sends from agent's account. Set account to user's email to send on their behalf.",
+    "website": "https://www.flomation.co",
+    "icon": "gmail",
+    "date": "08/04/2026",
+    "type": 2,
+    "category": {
+      "name": "Google",
+      "icon": "google",
+      "description": "Google Workspace integrations"
+    },
+    "sub_category": {
+      "name": "Gmail",
+      "icon": "gmail",
+      "description": "Google Gmail email operations"
+    },
+    "inputs": [
+      {
+        "name": "to",
+        "type": "string",
+        "value": null,
+        "label": "Recipient email address(es), comma-separated",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "subject",
+        "type": "string",
+        "value": null,
+        "label": "Email subject",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "body",
+        "type": "text",
+        "value": null,
+        "label": "Email body / message content (plain text)",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "cc",
+        "type": "string",
+        "value": null,
+        "label": "CC recipients (comma-separated)",
+        "placeholder": ""
+      },
+      {
+        "name": "bcc",
+        "type": "string",
+        "value": null,
+        "label": "BCC recipients (comma-separated)",
+        "placeholder": ""
+      },
+      {
+        "name": "sender_name",
+        "type": "string",
+        "value": null,
+        "label": "Sender display name (e.g. 'Ada Whitmore', defaults to account label)",
+        "placeholder": ""
+      },
+      {
+        "name": "account",
+        "type": "string",
+        "value": null,
+        "label": "Sending account (email or label, empty for primary)",
+        "placeholder": ""
+      },
+      {
+        "name": "credential",
+        "type": "string",
+        "value": null,
+        "label": "Google OAuth Credential (optional, overrides user tokens)",
+        "placeholder": "${credentials.GOOGLE_EMAIL}"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result (text)",
+        "placeholder": ""
+      },
+      {
+        "name": "message_id",
+        "type": "string",
+        "value": null,
+        "label": "Message ID",
+        "placeholder": ""
+      },
+      {
+        "name": "thread_id",
+        "type": "string",
+        "value": null,
+        "label": "Thread ID",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
   "google/sheets/append": {
     "hash": "f190af51fa3739ed5d00fabd2790367bbea9188f9b1617a625e8c9243d385173",
     "author": "Andy Esser",
@@ -12670,128 +13675,6 @@
         "type": "string",
         "value": null,
         "label": "Error",
-        "placeholder": ""
-      }
-    ]
-  },
-  "http/request": {
-    "hash": "a4dfc20efa6503dc772abacf8d374e8d0028205b6fc7279072c444c7877855c0",
-    "author": "Andy Esser",
-    "organisation": "Flomation",
-    "name": "HTTP Request",
-    "description": "Send an HTTP request and capture the response",
-    "website": "https://www.flomation.co",
-    "icon": "globe",
-    "date": "23/03/2026",
-    "type": 2,
-    "category": {
-      "name": "HTTP",
-      "icon": "globe",
-      "description": "HTTP request operations"
-    },
-    "inputs": [
-      {
-        "name": "method",
-        "type": "string",
-        "value": null,
-        "label": "HTTP Method",
-        "placeholder": "GET",
-        "required": true,
-        "options": [
-          {
-            "name": "GET",
-            "value": "GET"
-          },
-          {
-            "name": "POST",
-            "value": "POST"
-          },
-          {
-            "name": "PUT",
-            "value": "PUT"
-          },
-          {
-            "name": "PATCH",
-            "value": "PATCH"
-          },
-          {
-            "name": "DELETE",
-            "value": "DELETE"
-          },
-          {
-            "name": "HEAD",
-            "value": "HEAD"
-          },
-          {
-            "name": "OPTIONS",
-            "value": "OPTIONS"
-          }
-        ]
-      },
-      {
-        "name": "url",
-        "type": "string",
-        "value": null,
-        "label": "URL",
-        "placeholder": "https://example.com/api/v1/resource",
-        "required": true
-      },
-      {
-        "name": "headers",
-        "type": "text",
-        "value": null,
-        "label": "Headers",
-        "placeholder": "Content-Type: application/json\nAuthorization: Bearer ..."
-      },
-      {
-        "name": "body",
-        "type": "text",
-        "value": null,
-        "label": "Request Body",
-        "placeholder": ""
-      },
-      {
-        "name": "timeout_seconds",
-        "type": "integer",
-        "value": null,
-        "label": "Timeout (seconds)",
-        "placeholder": "30"
-      }
-    ],
-    "outputs": [
-      {
-        "name": "tool_result",
-        "type": "string",
-        "value": null,
-        "label": "Result summary",
-        "placeholder": ""
-      },
-      {
-        "name": "status_code",
-        "type": "integer",
-        "value": null,
-        "label": "",
-        "placeholder": ""
-      },
-      {
-        "name": "response_body",
-        "type": "string",
-        "value": null,
-        "label": "",
-        "placeholder": ""
-      },
-      {
-        "name": "response_headers",
-        "type": "string",
-        "value": null,
-        "label": "",
-        "placeholder": ""
-      },
-      {
-        "name": "success",
-        "type": "boolean",
-        "value": null,
-        "label": "",
         "placeholder": ""
       }
     ]
@@ -14317,7 +15200,83 @@
       }
     ]
   },
-  "messaging/email": {
+  "messaging/discord/webhook": {
+    "hash": "3ec3a2edc15da5d2d15c4385695720cf9351b0d3cc85ffb71bea0608ba3339ee",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Discord Webhook",
+    "description": "Send a message to a Discord channel via webhook",
+    "website": "https://www.flomation.co",
+    "icon": "comment-dots",
+    "date": "23/03/2026",
+    "type": 2,
+    "category": {
+      "name": "Messaging",
+      "icon": "comments",
+      "description": "Send messages via various channels"
+    },
+    "sub_category": {
+      "name": "Discord",
+      "icon": "discord",
+      "description": "Discord messaging and webhook operations"
+    },
+    "inputs": [
+      {
+        "name": "webhook_url",
+        "type": "string",
+        "value": null,
+        "label": "Webhook URL",
+        "placeholder": "https://discord.com/api/webhooks/...",
+        "required": true
+      },
+      {
+        "name": "content",
+        "type": "text",
+        "value": null,
+        "label": "Message Content",
+        "placeholder": "Hello from Flomation!",
+        "required": true
+      },
+      {
+        "name": "username",
+        "type": "string",
+        "value": null,
+        "label": "Username Override",
+        "placeholder": "Flomation Bot"
+      },
+      {
+        "name": "avatar_url",
+        "type": "string",
+        "value": null,
+        "label": "Avatar URL",
+        "placeholder": "https://example.com/avatar.png"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "status_code",
+        "type": "integer",
+        "value": null,
+        "label": "",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "",
+        "placeholder": ""
+      }
+    ]
+  },
+  "messaging/email/send": {
     "hash": "f5838101995bc24b7ca1caec4ad9b235b799b6f78930e80bc5a1888e292d763c",
     "author": "Andy Esser",
     "organisation": "Flomation",
@@ -14331,6 +15290,11 @@
       "name": "Messaging",
       "icon": "comments",
       "description": "Send messages via various channels"
+    },
+    "sub_category": {
+      "name": "Email",
+      "icon": "",
+      "description": ""
     },
     "inputs": [
       {
@@ -14444,107 +15408,7 @@
       }
     ]
   },
-  "messaging/slack": {
-    "hash": "b8bc3561c3be2f9a65cbba8b03c721bcb6c69b6f3cde0da9e9f6a2763b252291",
-    "author": "Andy Esser",
-    "organisation": "Flomation",
-    "name": "Send Slack Message",
-    "description": "Send a message to a Slack channel via the Bot API with mrkdwn formatting and optional Block Kit layouts",
-    "website": "https://www.flomation.co",
-    "icon": "slack",
-    "date": "03/04/2026",
-    "type": 2,
-    "category": {
-      "name": "Messaging",
-      "icon": "comments",
-      "description": "Send messages via various channels"
-    },
-    "inputs": [
-      {
-        "name": "bot_token",
-        "type": "string",
-        "value": null,
-        "label": "Bot Token",
-        "placeholder": "xoxb-...",
-        "required": true
-      },
-      {
-        "name": "channel_id",
-        "type": "string",
-        "value": null,
-        "label": "Channel ID",
-        "placeholder": "${channel_id}",
-        "required": true
-      },
-      {
-        "name": "message",
-        "type": "text",
-        "value": null,
-        "label": "Message",
-        "placeholder": "Hello from Flomation! Use *bold*, _italic_, `code`",
-        "required": true
-      },
-      {
-        "name": "thread_id",
-        "type": "string",
-        "value": null,
-        "label": "Thread ID",
-        "placeholder": "${thread_id}"
-      },
-      {
-        "name": "blocks",
-        "type": "text",
-        "value": null,
-        "label": "Block Kit JSON",
-        "placeholder": "[{\"type\":\"section\",\"text\":{\"type\":\"mrkdwn\",\"text\":\"*Rich* message\"}}]"
-      },
-      {
-        "name": "attachments",
-        "type": "text",
-        "value": null,
-        "label": "Attachments JSON",
-        "placeholder": "[{\"color\":\"#36a64f\",\"text\":\"Attachment text\"}]"
-      },
-      {
-        "name": "unfurl_links",
-        "type": "boolean",
-        "value": null,
-        "label": "Unfurl Links",
-        "placeholder": ""
-      }
-    ],
-    "outputs": [
-      {
-        "name": "tool_result",
-        "type": "string",
-        "value": null,
-        "label": "Result summary",
-        "placeholder": ""
-      },
-      {
-        "name": "timestamp",
-        "type": "string",
-        "value": null,
-        "label": "Message Timestamp",
-        "placeholder": ""
-      },
-      {
-        "name": "success",
-        "type": "boolean",
-        "value": null,
-        "label": "Success",
-        "placeholder": ""
-      },
-      {
-        "name": "error",
-        "type": "string",
-        "value": null,
-        "label": "Error",
-        "placeholder": ""
-      }
-    ]
-  },
-  "messaging/telegram": {
+  "messaging/telegram/send_message": {
     "hash": "dcccc54a50c9691e2d21196c4f12935c23c889279e95f2e0125f2b7d27dac76a",
     "author": "Andy Esser",
     "organisation": "Flomation",
@@ -14558,6 +15422,11 @@
       "name": "Messaging",
       "icon": "comments",
       "description": "Send messages via various channels"
+    },
+    "sub_category": {
+      "name": "Telegram",
+      "icon": "telegram",
+      "description": "Telegram Bot messaging operations"
     },
     "inputs": [
       {
@@ -14637,7 +15506,7 @@
       }
     ]
   },
-  "messaging/telegram_voice": {
+  "messaging/telegram/send_voice": {
     "hash": "923887444194396c80cb2411a5bb72d34c29bad434bb8945fa4bc3b2b168e1cd",
     "author": "Andy Esser",
     "organisation": "Flomation",
@@ -14651,6 +15520,11 @@
       "name": "Messaging",
       "icon": "comments",
       "description": "Send messages via various channels"
+    },
+    "sub_category": {
+      "name": "Telegram",
+      "icon": "telegram",
+      "description": "Telegram Bot messaging operations"
     },
     "inputs": [
       {
@@ -14705,101 +15579,6 @@
         "type": "integer",
         "value": null,
         "label": "Audio size (bytes)",
-        "placeholder": ""
-      },
-      {
-        "name": "success",
-        "type": "boolean",
-        "value": null,
-        "label": "Success",
-        "placeholder": ""
-      },
-      {
-        "name": "error",
-        "type": "string",
-        "value": null,
-        "label": "Error",
-        "placeholder": ""
-      }
-    ]
-  },
-  "messaging/twilio_sms": {
-    "hash": "57796ab8be5b620b8e462004eec477fd445771495f2c204cb32afd9f0cca5ca2",
-    "author": "Andy Esser",
-    "organisation": "Flomation",
-    "name": "Send Twilio SMS",
-    "description": "Send an SMS message via Twilio",
-    "website": "https://www.flomation.co",
-    "icon": "comment-sms",
-    "date": "29/05/2026",
-    "type": 2,
-    "category": {
-      "name": "Messaging",
-      "icon": "comments",
-      "description": "Send messages via various channels"
-    },
-    "inputs": [
-      {
-        "name": "account_sid",
-        "type": "string",
-        "value": null,
-        "label": "Account SID",
-        "placeholder": "ACxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
-        "required": true
-      },
-      {
-        "name": "auth_token",
-        "type": "string",
-        "value": null,
-        "label": "Auth Token",
-        "placeholder": "${secrets.TWILIO_AUTH_TOKEN}",
-        "required": true
-      },
-      {
-        "name": "from",
-        "type": "string",
-        "value": null,
-        "label": "From Number (E.164)",
-        "placeholder": "+19876543210",
-        "required": true
-      },
-      {
-        "name": "to",
-        "type": "string",
-        "value": null,
-        "label": "To Number (E.164)",
-        "placeholder": "${from}",
-        "required": true
-      },
-      {
-        "name": "message",
-        "type": "text",
-        "value": null,
-        "label": "Message Body",
-        "placeholder": "Hello from Flomation!",
-        "required": true
-      },
-      {
-        "name": "media_url",
-        "type": "string",
-        "value": null,
-        "label": "Media URL (MMS)",
-        "placeholder": "https://example.com/image.jpg"
-      }
-    ],
-    "outputs": [
-      {
-        "name": "tool_result",
-        "type": "string",
-        "value": null,
-        "label": "Result Summary",
-        "placeholder": ""
-      },
-      {
-        "name": "message_sid",
-        "type": "string",
-        "value": null,
-        "label": "Message SID",
         "placeholder": ""
       },
       {
@@ -17135,77 +17914,6 @@
       }
     ]
   },
-  "output/discord_webhook": {
-    "hash": "3ec3a2edc15da5d2d15c4385695720cf9351b0d3cc85ffb71bea0608ba3339ee",
-    "author": "Andy Esser",
-    "organisation": "Flomation",
-    "name": "Discord Webhook",
-    "description": "Send a message to a Discord channel via webhook",
-    "website": "https://www.flomation.co",
-    "icon": "comment-dots",
-    "date": "23/03/2026",
-    "type": 2,
-    "category": {
-      "name": "Output",
-      "icon": "location-arrow",
-      "description": "Send data to external destinations"
-    },
-    "inputs": [
-      {
-        "name": "webhook_url",
-        "type": "string",
-        "value": null,
-        "label": "Webhook URL",
-        "placeholder": "https://discord.com/api/webhooks/...",
-        "required": true
-      },
-      {
-        "name": "content",
-        "type": "text",
-        "value": null,
-        "label": "Message Content",
-        "placeholder": "Hello from Flomation!",
-        "required": true
-      },
-      {
-        "name": "username",
-        "type": "string",
-        "value": null,
-        "label": "Username Override",
-        "placeholder": "Flomation Bot"
-      },
-      {
-        "name": "avatar_url",
-        "type": "string",
-        "value": null,
-        "label": "Avatar URL",
-        "placeholder": "https://example.com/avatar.png"
-      }
-    ],
-    "outputs": [
-      {
-        "name": "tool_result",
-        "type": "string",
-        "value": null,
-        "label": "Result summary",
-        "placeholder": ""
-      },
-      {
-        "name": "status_code",
-        "type": "integer",
-        "value": null,
-        "label": "",
-        "placeholder": ""
-      },
-      {
-        "name": "success",
-        "type": "boolean",
-        "value": null,
-        "label": "",
-        "placeholder": ""
-      }
-    ]
-  },
   "output/set": {
     "hash": "05f0e3818a441c5837d9b6543e663da5f0a4e6febe515914d851620eb82ec9b3",
     "author": "Andy Esser",
@@ -17258,98 +17966,6 @@
     },
     "inputs": null,
     "outputs": null
-  },
-  "output/slack_webhook": {
-    "hash": "271ff3c2b66b46591980953e87bf1800c6f9360cabe084cf232639dd55bfddf1",
-    "author": "Andy Esser",
-    "organisation": "Flomation",
-    "name": "Slack Webhook",
-    "description": "Send a message to a Slack channel via webhook with mrkdwn formatting and optional Block Kit layouts",
-    "website": "https://www.flomation.co",
-    "icon": "slack",
-    "date": "23/03/2026",
-    "type": 2,
-    "category": {
-      "name": "Output",
-      "icon": "location-arrow",
-      "description": "Send data to external destinations"
-    },
-    "inputs": [
-      {
-        "name": "webhook_url",
-        "type": "string",
-        "value": null,
-        "label": "Webhook URL",
-        "placeholder": "https://hooks.slack.com/services/...",
-        "required": true
-      },
-      {
-        "name": "message",
-        "type": "text",
-        "value": null,
-        "label": "Message",
-        "placeholder": "Hello from Flomation! Use *bold*, _italic_, `code`",
-        "required": true
-      },
-      {
-        "name": "username",
-        "type": "string",
-        "value": null,
-        "label": "Username Override",
-        "placeholder": "Flomation Bot"
-      },
-      {
-        "name": "icon_emoji",
-        "type": "string",
-        "value": null,
-        "label": "Icon Emoji",
-        "placeholder": ":robot_face:"
-      },
-      {
-        "name": "blocks",
-        "type": "text",
-        "value": null,
-        "label": "Block Kit JSON",
-        "placeholder": "[{\"type\":\"section\",\"text\":{\"type\":\"mrkdwn\",\"text\":\"*Rich* message\"}}]"
-      },
-      {
-        "name": "attachments",
-        "type": "text",
-        "value": null,
-        "label": "Attachments JSON",
-        "placeholder": "[{\"color\":\"#36a64f\",\"text\":\"Attachment text\"}]"
-      }
-    ],
-    "outputs": [
-      {
-        "name": "tool_result",
-        "type": "string",
-        "value": null,
-        "label": "Result summary",
-        "placeholder": ""
-      },
-      {
-        "name": "status_code",
-        "type": "integer",
-        "value": null,
-        "label": "",
-        "placeholder": ""
-      },
-      {
-        "name": "success",
-        "type": "boolean",
-        "value": null,
-        "label": "",
-        "placeholder": ""
-      },
-      {
-        "name": "error",
-        "type": "string",
-        "value": null,
-        "label": "Error",
-        "placeholder": ""
-      }
-    ]
   },
   "script/bash": {
     "hash": "7e00e44738bc4f2c9519665968f26d7a073971ba8fca63008c1d4e8257a877fd",
@@ -17508,6 +18124,1081 @@
         "type": "string",
         "value": null,
         "label": "",
+        "placeholder": ""
+      }
+    ]
+  },
+  "slack/channel_action": {
+    "hash": "eddf1f7bbaff9d18a1d29cef6637a9f915f5fd5c005fd7f9edd02ace325efb73",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Channel Action",
+    "description": "Send a channel-specific action like a typing indicator. Use this before long-running operations to show the user the agent is working.",
+    "website": "https://www.flomation.co",
+    "icon": "hand",
+    "date": "14/04/2026",
+    "type": 2,
+    "category": {
+      "name": "Slack",
+      "icon": "slack",
+      "description": "Slack workspace messaging, channels, and integrations"
+    },
+    "inputs": [
+      {
+        "name": "channel_type",
+        "type": "string",
+        "value": null,
+        "label": "Channel Type",
+        "placeholder": "telegram, slack, etc.",
+        "required": true,
+        "options": [
+          {
+            "name": "Telegram",
+            "value": "telegram"
+          },
+          {
+            "name": "Slack",
+            "value": "slack"
+          }
+        ]
+      },
+      {
+        "name": "action",
+        "type": "string",
+        "value": null,
+        "label": "Action",
+        "placeholder": "typing",
+        "required": true,
+        "options": [
+          {
+            "name": "Typing",
+            "value": "typing"
+          },
+          {
+            "name": "Upload Photo",
+            "value": "upload_photo"
+          },
+          {
+            "name": "Upload Document",
+            "value": "upload_document"
+          },
+          {
+            "name": "Record Video",
+            "value": "record_video"
+          },
+          {
+            "name": "Record Voice",
+            "value": "record_voice"
+          },
+          {
+            "name": "Find Location",
+            "value": "find_location"
+          }
+        ]
+      },
+      {
+        "name": "chat_id",
+        "type": "string",
+        "value": null,
+        "label": "Chat ID",
+        "placeholder": "Target chat/channel ID",
+        "required": true
+      },
+      {
+        "name": "agent_id",
+        "type": "string",
+        "value": null,
+        "label": "Agent ID",
+        "placeholder": ""
+      }
+    ],
+    "outputs": [
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "message",
+        "type": "string",
+        "value": null,
+        "label": "Result message",
+        "placeholder": ""
+      }
+    ]
+  },
+  "slack/channels": {
+    "hash": "c57c98efe338ddf3927b61c62ee42d85da62f19c3a2bcfa06adc8181b8a15106",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Slack Channels",
+    "description": "List or search Slack channels. Returns channel names, IDs, topics, and member counts",
+    "website": "https://www.flomation.co",
+    "icon": "slack",
+    "date": "20/04/2026",
+    "type": 2,
+    "category": {
+      "name": "Slack",
+      "icon": "slack",
+      "description": "Slack workspace messaging, channels, and integrations"
+    },
+    "inputs": [
+      {
+        "name": "bot_token",
+        "type": "string",
+        "value": null,
+        "label": "Bot Token",
+        "placeholder": "xoxb-...",
+        "required": true
+      },
+      {
+        "name": "search",
+        "type": "string",
+        "value": null,
+        "label": "Optional filter: only return channels whose name contains this text",
+        "placeholder": ""
+      },
+      {
+        "name": "limit",
+        "type": "string",
+        "value": null,
+        "label": "Max channels to return (default 50, max 200)",
+        "placeholder": ""
+      },
+      {
+        "name": "include_private",
+        "type": "boolean",
+        "value": null,
+        "label": "Include private channels the bot is a member of (default false)",
+        "placeholder": ""
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "channels",
+        "type": "object",
+        "value": null,
+        "label": "Channel list",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Number of channels returned",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "slack/file_upload": {
+    "hash": "bd07aef49e2b8c6295a4213e23813e87a193d6e44b953607ce4d8a942d75cb54",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Slack File Upload",
+    "description": "Upload a file to a Slack channel. Supports text content or base64-encoded binary data",
+    "website": "https://www.flomation.co",
+    "icon": "slack",
+    "date": "20/04/2026",
+    "type": 2,
+    "category": {
+      "name": "Slack",
+      "icon": "slack",
+      "description": "Slack workspace messaging, channels, and integrations"
+    },
+    "inputs": [
+      {
+        "name": "bot_token",
+        "type": "string",
+        "value": null,
+        "label": "Bot Token",
+        "placeholder": "xoxb-...",
+        "required": true
+      },
+      {
+        "name": "channel_id",
+        "type": "string",
+        "value": null,
+        "label": "Channel ID",
+        "placeholder": "${channel_id}",
+        "required": true
+      },
+      {
+        "name": "content",
+        "type": "text",
+        "value": null,
+        "label": "File content as text (for code snippets, CSV, logs, etc.)",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "filename",
+        "type": "string",
+        "value": null,
+        "label": "Filename including extension (e.g. report.csv, log.txt, data.json)",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "title",
+        "type": "string",
+        "value": null,
+        "label": "Display title for the file in Slack (optional, defaults to filename)",
+        "placeholder": ""
+      },
+      {
+        "name": "initial_comment",
+        "type": "string",
+        "value": null,
+        "label": "Message to post alongside the file (optional)",
+        "placeholder": ""
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "file_id",
+        "type": "string",
+        "value": null,
+        "label": "Slack file ID",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "slack/history": {
+    "hash": "5ec8638e1e977a914cf4697ef519f08e59dcb08e294aa6110c8b33ae96065b5e",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Slack Channel History",
+    "description": "Read recent messages from a Slack channel. Uses conversations.history API.",
+    "website": "https://www.flomation.co",
+    "icon": "slack",
+    "date": "28/04/2026",
+    "type": 2,
+    "category": {
+      "name": "Slack",
+      "icon": "slack",
+      "description": "Slack workspace messaging, channels, and integrations"
+    },
+    "inputs": [
+      {
+        "name": "bot_token",
+        "type": "string",
+        "value": null,
+        "label": "Bot Token",
+        "placeholder": "xoxb-...",
+        "required": true
+      },
+      {
+        "name": "channel_id",
+        "type": "string",
+        "value": null,
+        "label": "Channel ID",
+        "placeholder": "C01ABC2DEF3",
+        "required": true
+      },
+      {
+        "name": "limit",
+        "type": "string",
+        "value": null,
+        "label": "Number of messages (default 20, max 100)",
+        "placeholder": ""
+      },
+      {
+        "name": "oldest",
+        "type": "string",
+        "value": null,
+        "label": "Oldest timestamp (Unix ts or ISO date, e.g. 2026-04-28)",
+        "placeholder": ""
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "messages",
+        "type": "object",
+        "value": null,
+        "label": "Messages (JSON array)",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Message count",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "slack/react": {
+    "hash": "d630fc0f338b9cc1eb05bbeb730c78be84214d2f7e0bd449a5c125e035476bfd",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Slack Add Reaction",
+    "description": "Add an emoji reaction to a Slack message. Use emoji name without colons.",
+    "website": "https://www.flomation.co",
+    "icon": "slack",
+    "date": "28/04/2026",
+    "type": 2,
+    "category": {
+      "name": "Slack",
+      "icon": "slack",
+      "description": "Slack workspace messaging, channels, and integrations"
+    },
+    "inputs": [
+      {
+        "name": "bot_token",
+        "type": "string",
+        "value": null,
+        "label": "Bot Token",
+        "placeholder": "xoxb-...",
+        "required": true
+      },
+      {
+        "name": "channel_id",
+        "type": "string",
+        "value": null,
+        "label": "Channel ID",
+        "placeholder": "C01ABC2DEF3",
+        "required": true
+      },
+      {
+        "name": "timestamp",
+        "type": "string",
+        "value": null,
+        "label": "Message Timestamp",
+        "placeholder": "1234567890.123456",
+        "required": true
+      },
+      {
+        "name": "emoji",
+        "type": "string",
+        "value": null,
+        "label": "Emoji Name (without colons)",
+        "placeholder": "thumbsup",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "slack/rich_message": {
+    "hash": "7b78ed4c601a14ba08870e04625b03aff42fe2d069d7822a9ba25baa255f8429",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Slack Rich Message",
+    "description": "",
+    "website": "https://www.flomation.co",
+    "icon": "slack",
+    "date": "15/04/2026",
+    "type": 2,
+    "category": {
+      "name": "Slack",
+      "icon": "slack",
+      "description": "Slack workspace messaging, channels, and integrations"
+    },
+    "inputs": [
+      {
+        "name": "bot_token",
+        "type": "string",
+        "value": null,
+        "label": "Bot Token",
+        "placeholder": "xoxb-..."
+      },
+      {
+        "name": "channel_id",
+        "type": "string",
+        "value": null,
+        "label": "Channel ID",
+        "placeholder": "${channel_id}"
+      },
+      {
+        "name": "text",
+        "type": "text",
+        "value": null,
+        "label": "Fallback text shown in notifications and accessibility (plain summary of the message)",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "blocks",
+        "type": "text",
+        "value": null,
+        "label": "",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "thread_ts",
+        "type": "string",
+        "value": null,
+        "label": "Thread timestamp to reply in (optional)",
+        "placeholder": ""
+      },
+      {
+        "name": "attachments",
+        "type": "text",
+        "value": null,
+        "label": "Legacy attachments JSON array — colour bars, fields, footers (optional)",
+        "placeholder": ""
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary for the AI",
+        "placeholder": ""
+      },
+      {
+        "name": "timestamp",
+        "type": "string",
+        "value": null,
+        "label": "Message timestamp",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "slack/search": {
+    "hash": "817ce2f72e9c88a0477e39647466e84620e06d75a14fdd92c0b336d639618a84",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Slack Search Messages",
+    "description": "Search Slack messages. Requires a user token (xoxp-), not a bot token. Supports modifiers: from:user, in:channel, before:date, after:date",
+    "website": "https://www.flomation.co",
+    "icon": "slack",
+    "date": "20/04/2026",
+    "type": 2,
+    "category": {
+      "name": "Slack",
+      "icon": "slack",
+      "description": "Slack workspace messaging, channels, and integrations"
+    },
+    "inputs": [
+      {
+        "name": "user_token",
+        "type": "string",
+        "value": null,
+        "label": "User Token (required — search needs a user token, not bot token)",
+        "placeholder": "xoxp-...",
+        "required": true
+      },
+      {
+        "name": "query",
+        "type": "string",
+        "value": null,
+        "label": "Search query. Supports Slack search modifiers: from:@user, in:#channel, before:2026-04-20, after:2026-04-01, has:link",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "count",
+        "type": "string",
+        "value": null,
+        "label": "Max results to return (default 10, max 100)",
+        "placeholder": ""
+      },
+      {
+        "name": "sort",
+        "type": "string",
+        "value": null,
+        "label": "Sort order: score (relevance) or timestamp (recent first). Default: score",
+        "placeholder": ""
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "messages",
+        "type": "object",
+        "value": null,
+        "label": "Matching messages",
+        "placeholder": ""
+      },
+      {
+        "name": "total",
+        "type": "integer",
+        "value": null,
+        "label": "Total matches",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "slack/send_message": {
+    "hash": "b8bc3561c3be2f9a65cbba8b03c721bcb6c69b6f3cde0da9e9f6a2763b252291",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Send Slack Message",
+    "description": "Send a message to a Slack channel via the Bot API with mrkdwn formatting and optional Block Kit layouts",
+    "website": "https://www.flomation.co",
+    "icon": "slack",
+    "date": "03/04/2026",
+    "type": 2,
+    "category": {
+      "name": "Slack",
+      "icon": "slack",
+      "description": "Slack workspace messaging, channels, and integrations"
+    },
+    "inputs": [
+      {
+        "name": "bot_token",
+        "type": "string",
+        "value": null,
+        "label": "Bot Token",
+        "placeholder": "xoxb-...",
+        "required": true
+      },
+      {
+        "name": "channel_id",
+        "type": "string",
+        "value": null,
+        "label": "Channel ID",
+        "placeholder": "${channel_id}",
+        "required": true
+      },
+      {
+        "name": "message",
+        "type": "text",
+        "value": null,
+        "label": "Message",
+        "placeholder": "Hello from Flomation! Use *bold*, _italic_, `code`",
+        "required": true
+      },
+      {
+        "name": "thread_id",
+        "type": "string",
+        "value": null,
+        "label": "Thread ID",
+        "placeholder": "${thread_id}"
+      },
+      {
+        "name": "blocks",
+        "type": "text",
+        "value": null,
+        "label": "Block Kit JSON",
+        "placeholder": "[{\"type\":\"section\",\"text\":{\"type\":\"mrkdwn\",\"text\":\"*Rich* message\"}}]"
+      },
+      {
+        "name": "attachments",
+        "type": "text",
+        "value": null,
+        "label": "Attachments JSON",
+        "placeholder": "[{\"color\":\"#36a64f\",\"text\":\"Attachment text\"}]"
+      },
+      {
+        "name": "unfurl_links",
+        "type": "boolean",
+        "value": null,
+        "label": "Unfurl Links",
+        "placeholder": ""
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "timestamp",
+        "type": "string",
+        "value": null,
+        "label": "Message Timestamp",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "slack/thread": {
+    "hash": "f4d65ca677d2486d5c1785739968273a8bf025fafb6dbb0aa65ad92ee3cf476a",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Slack Thread Replies",
+    "description": "Read replies in a Slack thread. Requires the channel ID and thread timestamp.",
+    "website": "https://www.flomation.co",
+    "icon": "slack",
+    "date": "28/04/2026",
+    "type": 2,
+    "category": {
+      "name": "Slack",
+      "icon": "slack",
+      "description": "Slack workspace messaging, channels, and integrations"
+    },
+    "inputs": [
+      {
+        "name": "bot_token",
+        "type": "string",
+        "value": null,
+        "label": "Bot Token",
+        "placeholder": "xoxb-...",
+        "required": true
+      },
+      {
+        "name": "channel_id",
+        "type": "string",
+        "value": null,
+        "label": "Channel ID",
+        "placeholder": "C01ABC2DEF3",
+        "required": true
+      },
+      {
+        "name": "thread_ts",
+        "type": "string",
+        "value": null,
+        "label": "Thread Timestamp",
+        "placeholder": "1234567890.123456",
+        "required": true
+      },
+      {
+        "name": "limit",
+        "type": "string",
+        "value": null,
+        "label": "Number of replies (default 50, max 200)",
+        "placeholder": ""
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "messages",
+        "type": "object",
+        "value": null,
+        "label": "Thread messages (JSON array)",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Reply count",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "slack/user_profile": {
+    "hash": "07d71f1b79a5849e47dd07a55e5578df07418328b4eaa7407618993586638def",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Slack User Profile",
+    "description": "Get a Slack user's full profile by user ID. Returns name, email, title, phone, timezone, status, and avatar",
+    "website": "https://www.flomation.co",
+    "icon": "slack",
+    "date": "20/04/2026",
+    "type": 2,
+    "category": {
+      "name": "Slack",
+      "icon": "slack",
+      "description": "Slack workspace messaging, channels, and integrations"
+    },
+    "inputs": [
+      {
+        "name": "bot_token",
+        "type": "string",
+        "value": null,
+        "label": "Bot Token",
+        "placeholder": "xoxb-...",
+        "required": true
+      },
+      {
+        "name": "user_id",
+        "type": "string",
+        "value": null,
+        "label": "Slack user ID (e.g. U01ABCDEF). Use slack_users to find IDs by name",
+        "placeholder": "",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "profile",
+        "type": "object",
+        "value": null,
+        "label": "Full user profile",
+        "placeholder": ""
+      },
+      {
+        "name": "real_name",
+        "type": "string",
+        "value": null,
+        "label": "Real name",
+        "placeholder": ""
+      },
+      {
+        "name": "display_name",
+        "type": "string",
+        "value": null,
+        "label": "Display name",
+        "placeholder": ""
+      },
+      {
+        "name": "email",
+        "type": "string",
+        "value": null,
+        "label": "Email address",
+        "placeholder": ""
+      },
+      {
+        "name": "title",
+        "type": "string",
+        "value": null,
+        "label": "Job title",
+        "placeholder": ""
+      },
+      {
+        "name": "timezone",
+        "type": "string",
+        "value": null,
+        "label": "Timezone",
+        "placeholder": ""
+      },
+      {
+        "name": "status_text",
+        "type": "string",
+        "value": null,
+        "label": "Status text",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "slack/users": {
+    "hash": "be6aca2f6e470f618322344a178173297a87a519cb517c9cbd1c77f7bc34faed",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Slack Users",
+    "description": "List or search Slack workspace members. Returns display names, real names, email addresses, and status",
+    "website": "https://www.flomation.co",
+    "icon": "slack",
+    "date": "20/04/2026",
+    "type": 2,
+    "category": {
+      "name": "Slack",
+      "icon": "slack",
+      "description": "Slack workspace messaging, channels, and integrations"
+    },
+    "inputs": [
+      {
+        "name": "bot_token",
+        "type": "string",
+        "value": null,
+        "label": "Bot Token",
+        "placeholder": "xoxb-...",
+        "required": true
+      },
+      {
+        "name": "search",
+        "type": "string",
+        "value": null,
+        "label": "Optional filter: only return users whose name or display name contains this text",
+        "placeholder": ""
+      },
+      {
+        "name": "limit",
+        "type": "string",
+        "value": null,
+        "label": "Max users to return (default 50, max 200)",
+        "placeholder": ""
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "users",
+        "type": "object",
+        "value": null,
+        "label": "User list",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Number of users returned",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "slack/webhook": {
+    "hash": "271ff3c2b66b46591980953e87bf1800c6f9360cabe084cf232639dd55bfddf1",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Slack Webhook",
+    "description": "Send a message to a Slack channel via webhook with mrkdwn formatting and optional Block Kit layouts",
+    "website": "https://www.flomation.co",
+    "icon": "slack",
+    "date": "23/03/2026",
+    "type": 2,
+    "category": {
+      "name": "Slack",
+      "icon": "slack",
+      "description": "Slack workspace messaging, channels, and integrations"
+    },
+    "inputs": [
+      {
+        "name": "webhook_url",
+        "type": "string",
+        "value": null,
+        "label": "Webhook URL",
+        "placeholder": "https://hooks.slack.com/services/...",
+        "required": true
+      },
+      {
+        "name": "message",
+        "type": "text",
+        "value": null,
+        "label": "Message",
+        "placeholder": "Hello from Flomation! Use *bold*, _italic_, `code`",
+        "required": true
+      },
+      {
+        "name": "username",
+        "type": "string",
+        "value": null,
+        "label": "Username Override",
+        "placeholder": "Flomation Bot"
+      },
+      {
+        "name": "icon_emoji",
+        "type": "string",
+        "value": null,
+        "label": "Icon Emoji",
+        "placeholder": ":robot_face:"
+      },
+      {
+        "name": "blocks",
+        "type": "text",
+        "value": null,
+        "label": "Block Kit JSON",
+        "placeholder": "[{\"type\":\"section\",\"text\":{\"type\":\"mrkdwn\",\"text\":\"*Rich* message\"}}]"
+      },
+      {
+        "name": "attachments",
+        "type": "text",
+        "value": null,
+        "label": "Attachments JSON",
+        "placeholder": "[{\"color\":\"#36a64f\",\"text\":\"Attachment text\"}]"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "status_code",
+        "type": "integer",
+        "value": null,
+        "label": "",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
         "placeholder": ""
       }
     ]
@@ -19904,1988 +21595,6 @@
       }
     ]
   },
-  "tools/calendar_create": {
-    "hash": "d2b7aabc882f8f79dc8e6c77904b77f1fdf4998b3f4cb2566f8ed78e63e8e521",
-    "author": "Andy Esser",
-    "organisation": "Flomation",
-    "name": "Calendar Create Event",
-    "description": "Create a new event on a connected Google Calendar. Specify the account (email or label like 'Work'/'Personal'), date, time, title, and optional attendees/location.",
-    "website": "https://www.flomation.co",
-    "icon": "calendar",
-    "date": "08/04/2026",
-    "type": 2,
-    "category": {
-      "name": "Tools",
-      "icon": "wrench",
-      "description": "AI tool implementations for function calling"
-    },
-    "inputs": [
-      {
-        "name": "title",
-        "type": "string",
-        "value": null,
-        "label": "Event title",
-        "placeholder": "",
-        "required": true
-      },
-      {
-        "name": "date",
-        "type": "string",
-        "value": null,
-        "label": "Date (YYYY-MM-DD, 'today', 'tomorrow', or day name)",
-        "placeholder": "",
-        "required": true
-      },
-      {
-        "name": "start_time",
-        "type": "string",
-        "value": null,
-        "label": "Start time (HH:MM, 24h format)",
-        "placeholder": "",
-        "required": true
-      },
-      {
-        "name": "end_time",
-        "type": "string",
-        "value": null,
-        "label": "End time (HH:MM, 24h format)",
-        "placeholder": "",
-        "required": true
-      },
-      {
-        "name": "description",
-        "type": "string",
-        "value": null,
-        "label": "Event description or notes",
-        "placeholder": ""
-      },
-      {
-        "name": "attendees",
-        "type": "string",
-        "value": null,
-        "label": "Attendees (comma-separated email addresses)",
-        "placeholder": ""
-      },
-      {
-        "name": "location",
-        "type": "string",
-        "value": null,
-        "label": "Event location",
-        "placeholder": ""
-      },
-      {
-        "name": "account",
-        "type": "string",
-        "value": null,
-        "label": "Account (email, label like 'Work'/'Personal', or empty for primary)",
-        "placeholder": ""
-      },
-      {
-        "name": "credential",
-        "type": "string",
-        "value": null,
-        "label": "Google OAuth Credential (optional, overrides user tokens)",
-        "placeholder": "${credentials.GOOGLE_CALENDAR}"
-      }
-    ],
-    "outputs": [
-      {
-        "name": "tool_result",
-        "type": "string",
-        "value": null,
-        "label": "Result (text)",
-        "placeholder": ""
-      },
-      {
-        "name": "event_id",
-        "type": "string",
-        "value": null,
-        "label": "Created Event ID",
-        "placeholder": ""
-      },
-      {
-        "name": "event_link",
-        "type": "string",
-        "value": null,
-        "label": "Event Link",
-        "placeholder": ""
-      },
-      {
-        "name": "success",
-        "type": "boolean",
-        "value": null,
-        "label": "Success",
-        "placeholder": ""
-      },
-      {
-        "name": "error",
-        "type": "string",
-        "value": null,
-        "label": "Error",
-        "placeholder": ""
-      }
-    ]
-  },
-  "tools/calendar_delete": {
-    "hash": "c82a717692d02759278bc3f43d0339a784edecaecac20513c3e62cd416b8e516",
-    "author": "Andy Esser",
-    "organisation": "Flomation",
-    "name": "Calendar Delete Event",
-    "description": "Delete an event from Google Calendar. Requires the event_id from a previous calendar_read. This permanently removes the event.",
-    "website": "https://www.flomation.co",
-    "icon": "calendar",
-    "date": "08/04/2026",
-    "type": 2,
-    "category": {
-      "name": "Tools",
-      "icon": "wrench",
-      "description": "AI tool implementations for function calling"
-    },
-    "inputs": [
-      {
-        "name": "event_id",
-        "type": "string",
-        "value": null,
-        "label": "Event ID (from calendar_read results)",
-        "placeholder": "",
-        "required": true
-      },
-      {
-        "name": "account",
-        "type": "string",
-        "value": null,
-        "label": "Account the event is on (email or label)",
-        "placeholder": ""
-      },
-      {
-        "name": "credential",
-        "type": "string",
-        "value": null,
-        "label": "Google OAuth Credential (optional, overrides user tokens)",
-        "placeholder": "${credentials.GOOGLE_CALENDAR}"
-      }
-    ],
-    "outputs": [
-      {
-        "name": "tool_result",
-        "type": "string",
-        "value": null,
-        "label": "Result (text)",
-        "placeholder": ""
-      },
-      {
-        "name": "success",
-        "type": "boolean",
-        "value": null,
-        "label": "Success",
-        "placeholder": ""
-      },
-      {
-        "name": "error",
-        "type": "string",
-        "value": null,
-        "label": "Error",
-        "placeholder": ""
-      }
-    ]
-  },
-  "tools/calendar_read": {
-    "hash": "15ded1dc3cea2b764ff480433186d37a7638e5a12860ff0833cdf4f233bda460",
-    "author": "Andy Esser",
-    "organisation": "Flomation",
-    "name": "Calendar Read",
-    "description": "Read events, check availability, or find free slots across all connected Google calendars",
-    "website": "https://www.flomation.co",
-    "icon": "calendar",
-    "date": "08/04/2026",
-    "type": 2,
-    "category": {
-      "name": "Tools",
-      "icon": "wrench",
-      "description": "AI tool implementations for function calling"
-    },
-    "inputs": [
-      {
-        "name": "query_type",
-        "type": "string",
-        "value": null,
-        "label": "Query Type",
-        "placeholder": "",
-        "required": true,
-        "options": [
-          {
-            "name": "List events",
-            "value": "events"
-          },
-          {
-            "name": "Check availability",
-            "value": "availability"
-          },
-          {
-            "name": "Find free slots",
-            "value": "free_slots"
-          }
-        ]
-      },
-      {
-        "name": "date_from",
-        "type": "string",
-        "value": null,
-        "label": "Start Date (YYYY-MM-DD or 'today', 'tomorrow')",
-        "placeholder": "today",
-        "required": true
-      },
-      {
-        "name": "date_to",
-        "type": "string",
-        "value": null,
-        "label": "End Date (YYYY-MM-DD, defaults to date_from)",
-        "placeholder": ""
-      },
-      {
-        "name": "start_time",
-        "type": "string",
-        "value": null,
-        "label": "Start Time (HH:MM, for availability check)",
-        "placeholder": "14:00"
-      },
-      {
-        "name": "end_time",
-        "type": "string",
-        "value": null,
-        "label": "End Time (HH:MM, for availability check)",
-        "placeholder": "15:00"
-      },
-      {
-        "name": "duration_minutes",
-        "type": "integer",
-        "value": null,
-        "label": "Slot Duration (minutes, for free slot search)",
-        "placeholder": "60"
-      },
-      {
-        "name": "account",
-        "type": "string",
-        "value": null,
-        "label": "Account filter (email, label like 'Work', or empty for all)",
-        "placeholder": ""
-      },
-      {
-        "name": "credential",
-        "type": "string",
-        "value": null,
-        "label": "Google OAuth Credential (optional, overrides user tokens)",
-        "placeholder": "${credentials.GOOGLE_CALENDAR}"
-      }
-    ],
-    "outputs": [
-      {
-        "name": "tool_result",
-        "type": "string",
-        "value": null,
-        "label": "Results (text)",
-        "placeholder": ""
-      },
-      {
-        "name": "events",
-        "type": "object",
-        "value": null,
-        "label": "Events (JSON)",
-        "placeholder": ""
-      },
-      {
-        "name": "is_free",
-        "type": "boolean",
-        "value": null,
-        "label": "Is Free (availability)",
-        "placeholder": ""
-      },
-      {
-        "name": "free_slots",
-        "type": "object",
-        "value": null,
-        "label": "Free Slots (JSON)",
-        "placeholder": ""
-      },
-      {
-        "name": "success",
-        "type": "boolean",
-        "value": null,
-        "label": "Success",
-        "placeholder": ""
-      },
-      {
-        "name": "error",
-        "type": "string",
-        "value": null,
-        "label": "Error",
-        "placeholder": ""
-      }
-    ]
-  },
-  "tools/calendar_update": {
-    "hash": "5f146aa2d6e4d048e344b0849f4d1ca0b1875177d9550c00129bbc148d38df25",
-    "author": "Andy Esser",
-    "organisation": "Flomation",
-    "name": "Calendar Update Event",
-    "description": "Update an existing Google Calendar event. Requires the event_id from a previous calendar_read. Only the fields you provide will be changed; others remain untouched.",
-    "website": "https://www.flomation.co",
-    "icon": "calendar",
-    "date": "08/04/2026",
-    "type": 2,
-    "category": {
-      "name": "Tools",
-      "icon": "wrench",
-      "description": "AI tool implementations for function calling"
-    },
-    "inputs": [
-      {
-        "name": "event_id",
-        "type": "string",
-        "value": null,
-        "label": "Event ID (from calendar_read results)",
-        "placeholder": "",
-        "required": true
-      },
-      {
-        "name": "title",
-        "type": "string",
-        "value": null,
-        "label": "New title (leave empty to keep current)",
-        "placeholder": ""
-      },
-      {
-        "name": "date",
-        "type": "string",
-        "value": null,
-        "label": "New date (YYYY-MM-DD, leave empty to keep current)",
-        "placeholder": ""
-      },
-      {
-        "name": "start_time",
-        "type": "string",
-        "value": null,
-        "label": "New start time (HH:MM, leave empty to keep current)",
-        "placeholder": ""
-      },
-      {
-        "name": "end_time",
-        "type": "string",
-        "value": null,
-        "label": "New end time (HH:MM, leave empty to keep current)",
-        "placeholder": ""
-      },
-      {
-        "name": "description",
-        "type": "string",
-        "value": null,
-        "label": "New description",
-        "placeholder": ""
-      },
-      {
-        "name": "location",
-        "type": "string",
-        "value": null,
-        "label": "New location",
-        "placeholder": ""
-      },
-      {
-        "name": "account",
-        "type": "string",
-        "value": null,
-        "label": "Account the event is on (email or label)",
-        "placeholder": ""
-      },
-      {
-        "name": "scope",
-        "type": "string",
-        "value": null,
-        "label": "For recurring events: 'this_instance' (default), 'all_events' (change the entire series), or 'this_and_following' (this and all future instances)",
-        "placeholder": "",
-        "options": [
-          {
-            "name": "This instance only",
-            "value": "this_instance"
-          },
-          {
-            "name": "All events in series",
-            "value": "all_events"
-          },
-          {
-            "name": "This and following",
-            "value": "this_and_following"
-          }
-        ]
-      },
-      {
-        "name": "credential",
-        "type": "string",
-        "value": null,
-        "label": "Google OAuth Credential (optional, overrides user tokens)",
-        "placeholder": "${credentials.GOOGLE_CALENDAR}"
-      }
-    ],
-    "outputs": [
-      {
-        "name": "tool_result",
-        "type": "string",
-        "value": null,
-        "label": "Result (text)",
-        "placeholder": ""
-      },
-      {
-        "name": "success",
-        "type": "boolean",
-        "value": null,
-        "label": "Success",
-        "placeholder": ""
-      },
-      {
-        "name": "error",
-        "type": "string",
-        "value": null,
-        "label": "Error",
-        "placeholder": ""
-      }
-    ]
-  },
-  "tools/channel_action": {
-    "hash": "eddf1f7bbaff9d18a1d29cef6637a9f915f5fd5c005fd7f9edd02ace325efb73",
-    "author": "Andy Esser",
-    "organisation": "Flomation",
-    "name": "Channel Action",
-    "description": "Send a channel-specific action like a typing indicator. Use this before long-running operations to show the user the agent is working.",
-    "website": "https://www.flomation.co",
-    "icon": "hand",
-    "date": "14/04/2026",
-    "type": 2,
-    "category": {
-      "name": "Tools",
-      "icon": "wrench",
-      "description": "AI tool implementations for function calling"
-    },
-    "inputs": [
-      {
-        "name": "channel_type",
-        "type": "string",
-        "value": null,
-        "label": "Channel Type",
-        "placeholder": "telegram, slack, etc.",
-        "required": true,
-        "options": [
-          {
-            "name": "Telegram",
-            "value": "telegram"
-          },
-          {
-            "name": "Slack",
-            "value": "slack"
-          }
-        ]
-      },
-      {
-        "name": "action",
-        "type": "string",
-        "value": null,
-        "label": "Action",
-        "placeholder": "typing",
-        "required": true,
-        "options": [
-          {
-            "name": "Typing",
-            "value": "typing"
-          },
-          {
-            "name": "Upload Photo",
-            "value": "upload_photo"
-          },
-          {
-            "name": "Upload Document",
-            "value": "upload_document"
-          },
-          {
-            "name": "Record Video",
-            "value": "record_video"
-          },
-          {
-            "name": "Record Voice",
-            "value": "record_voice"
-          },
-          {
-            "name": "Find Location",
-            "value": "find_location"
-          }
-        ]
-      },
-      {
-        "name": "chat_id",
-        "type": "string",
-        "value": null,
-        "label": "Chat ID",
-        "placeholder": "Target chat/channel ID",
-        "required": true
-      },
-      {
-        "name": "agent_id",
-        "type": "string",
-        "value": null,
-        "label": "Agent ID",
-        "placeholder": ""
-      }
-    ],
-    "outputs": [
-      {
-        "name": "success",
-        "type": "boolean",
-        "value": null,
-        "label": "Success",
-        "placeholder": ""
-      },
-      {
-        "name": "message",
-        "type": "string",
-        "value": null,
-        "label": "Result message",
-        "placeholder": ""
-      }
-    ]
-  },
-  "tools/email_draft": {
-    "hash": "db112a7b82b4cbce2f9bf0c5270e89c9dd4c8ffefec059c80398a3c509df8d7f",
-    "author": "Andy Esser",
-    "organisation": "Flomation",
-    "name": "Gmail Draft",
-    "description": "Manage Gmail drafts: create a new draft, list existing drafts, update a draft, or delete one. Use action='create' to compose without sending, 'list' to see drafts, 'update' to modify, 'delete' to remove.",
-    "website": "https://www.flomation.co",
-    "icon": "gmail",
-    "date": "08/04/2026",
-    "type": 2,
-    "category": {
-      "name": "Tools",
-      "icon": "wrench",
-      "description": "AI tool implementations for function calling"
-    },
-    "inputs": [
-      {
-        "name": "action",
-        "type": "string",
-        "value": null,
-        "label": "Action to perform",
-        "placeholder": "",
-        "required": true,
-        "options": [
-          {
-            "name": "Create a new draft",
-            "value": "create"
-          },
-          {
-            "name": "List existing drafts",
-            "value": "list"
-          },
-          {
-            "name": "Update a draft",
-            "value": "update"
-          },
-          {
-            "name": "Delete a draft",
-            "value": "delete"
-          }
-        ]
-      },
-      {
-        "name": "to",
-        "type": "string",
-        "value": null,
-        "label": "Recipient (for create/update)",
-        "placeholder": ""
-      },
-      {
-        "name": "subject",
-        "type": "string",
-        "value": null,
-        "label": "Subject (for create/update)",
-        "placeholder": ""
-      },
-      {
-        "name": "body",
-        "type": "text",
-        "value": null,
-        "label": "Body (for create/update)",
-        "placeholder": ""
-      },
-      {
-        "name": "draft_id",
-        "type": "string",
-        "value": null,
-        "label": "Draft ID (for update/delete)",
-        "placeholder": ""
-      },
-      {
-        "name": "account",
-        "type": "string",
-        "value": null,
-        "label": "Account (email or label)",
-        "placeholder": ""
-      },
-      {
-        "name": "credential",
-        "type": "string",
-        "value": null,
-        "label": "Google OAuth Credential (optional)",
-        "placeholder": "${credentials.GOOGLE_EMAIL}"
-      }
-    ],
-    "outputs": [
-      {
-        "name": "tool_result",
-        "type": "string",
-        "value": null,
-        "label": "Result (text)",
-        "placeholder": ""
-      },
-      {
-        "name": "draft_id",
-        "type": "string",
-        "value": null,
-        "label": "Draft ID",
-        "placeholder": ""
-      },
-      {
-        "name": "drafts",
-        "type": "object",
-        "value": null,
-        "label": "Drafts (JSON)",
-        "placeholder": ""
-      },
-      {
-        "name": "success",
-        "type": "boolean",
-        "value": null,
-        "label": "Success",
-        "placeholder": ""
-      },
-      {
-        "name": "error",
-        "type": "string",
-        "value": null,
-        "label": "Error",
-        "placeholder": ""
-      }
-    ]
-  },
-  "tools/email_read": {
-    "hash": "1c362a0d8bf1ccfe8e1092b6ccc9f19fd511f7c65d69728e2167a53b012dfcf3",
-    "author": "Andy Esser",
-    "organisation": "Flomation",
-    "name": "Gmail Read",
-    "description": "Search and read the USER's emails from their connected Gmail. When the user says 'my emails' or 'check my inbox', use this tool — it reads THEIR mailbox. Use Gmail search (e.g. 'is:unread newer_than:1d', 'from:someone') or email_id for a specific message.",
-    "website": "https://www.flomation.co",
-    "icon": "gmail",
-    "date": "08/04/2026",
-    "type": 2,
-    "category": {
-      "name": "Tools",
-      "icon": "wrench",
-      "description": "AI tool implementations for function calling"
-    },
-    "inputs": [
-      {
-        "name": "query",
-        "type": "string",
-        "value": null,
-        "label": "Gmail search query (e.g. 'from:boss@company.com', 'subject:urgent', 'is:unread')",
-        "placeholder": "is:unread"
-      },
-      {
-        "name": "max_results",
-        "type": "integer",
-        "value": null,
-        "label": "Max emails to return (default 10, max 50)",
-        "placeholder": "10"
-      },
-      {
-        "name": "email_id",
-        "type": "string",
-        "value": null,
-        "label": "Email ID to read in full (from a prior search)",
-        "placeholder": ""
-      },
-      {
-        "name": "account",
-        "type": "string",
-        "value": null,
-        "label": "Filter to a specific account email. Leave empty to search ALL user accounts. Never default to the agent's own email.",
-        "placeholder": ""
-      },
-      {
-        "name": "credential",
-        "type": "string",
-        "value": null,
-        "label": "Google OAuth Credential (optional, overrides user tokens)",
-        "placeholder": "${credentials.GOOGLE_EMAIL}"
-      }
-    ],
-    "outputs": [
-      {
-        "name": "tool_result",
-        "type": "string",
-        "value": null,
-        "label": "Results (text)",
-        "placeholder": ""
-      },
-      {
-        "name": "emails",
-        "type": "object",
-        "value": null,
-        "label": "Emails (JSON)",
-        "placeholder": ""
-      },
-      {
-        "name": "total_count",
-        "type": "integer",
-        "value": null,
-        "label": "Total Results",
-        "placeholder": ""
-      },
-      {
-        "name": "success",
-        "type": "boolean",
-        "value": null,
-        "label": "Success",
-        "placeholder": ""
-      },
-      {
-        "name": "error",
-        "type": "string",
-        "value": null,
-        "label": "Error",
-        "placeholder": ""
-      }
-    ]
-  },
-  "tools/email_reply": {
-    "hash": "d825005b635634e0aa16404bae9cf2c63087691a176caa3032822cd6dc871f34",
-    "author": "Andy Esser",
-    "organisation": "Flomation",
-    "name": "Gmail Reply",
-    "description": "Reply to an existing email. Requires the email_id from a previous email_read. Preserves the thread so the reply appears in the correct conversation.",
-    "website": "https://www.flomation.co",
-    "icon": "gmail",
-    "date": "08/04/2026",
-    "type": 2,
-    "category": {
-      "name": "Tools",
-      "icon": "wrench",
-      "description": "AI tool implementations for function calling"
-    },
-    "inputs": [
-      {
-        "name": "email_id",
-        "type": "string",
-        "value": null,
-        "label": "Email ID to reply to (from email_read)",
-        "placeholder": "",
-        "required": true
-      },
-      {
-        "name": "body",
-        "type": "text",
-        "value": null,
-        "label": "Reply body (plain text)",
-        "placeholder": "",
-        "required": true
-      },
-      {
-        "name": "reply_all",
-        "type": "boolean",
-        "value": null,
-        "label": "Reply all (default false)",
-        "placeholder": ""
-      },
-      {
-        "name": "sender_name",
-        "type": "string",
-        "value": null,
-        "label": "Sender display name (e.g. 'Ada Whitmore')",
-        "placeholder": ""
-      },
-      {
-        "name": "account",
-        "type": "string",
-        "value": null,
-        "label": "Account to send from (email or label)",
-        "placeholder": ""
-      },
-      {
-        "name": "credential",
-        "type": "string",
-        "value": null,
-        "label": "Google OAuth Credential (optional, overrides user tokens)",
-        "placeholder": "${credentials.GOOGLE_EMAIL}"
-      }
-    ],
-    "outputs": [
-      {
-        "name": "tool_result",
-        "type": "string",
-        "value": null,
-        "label": "Result (text)",
-        "placeholder": ""
-      },
-      {
-        "name": "message_id",
-        "type": "string",
-        "value": null,
-        "label": "Message ID",
-        "placeholder": ""
-      },
-      {
-        "name": "success",
-        "type": "boolean",
-        "value": null,
-        "label": "Success",
-        "placeholder": ""
-      },
-      {
-        "name": "error",
-        "type": "string",
-        "value": null,
-        "label": "Error",
-        "placeholder": ""
-      }
-    ]
-  },
-  "tools/email_send": {
-    "hash": "eadd2f7dfefdaa372f332cac5c6464b0e4553f64ce75b294235fbc717b786cfd",
-    "author": "Andy Esser",
-    "organisation": "Flomation",
-    "name": "Gmail Send",
-    "description": "Send an email. Default sends from agent's account. Set account to user's email to send on their behalf.",
-    "website": "https://www.flomation.co",
-    "icon": "gmail",
-    "date": "08/04/2026",
-    "type": 2,
-    "category": {
-      "name": "Tools",
-      "icon": "wrench",
-      "description": "AI tool implementations for function calling"
-    },
-    "inputs": [
-      {
-        "name": "to",
-        "type": "string",
-        "value": null,
-        "label": "Recipient email address(es), comma-separated",
-        "placeholder": "",
-        "required": true
-      },
-      {
-        "name": "subject",
-        "type": "string",
-        "value": null,
-        "label": "Email subject",
-        "placeholder": "",
-        "required": true
-      },
-      {
-        "name": "body",
-        "type": "text",
-        "value": null,
-        "label": "Email body / message content (plain text)",
-        "placeholder": "",
-        "required": true
-      },
-      {
-        "name": "cc",
-        "type": "string",
-        "value": null,
-        "label": "CC recipients (comma-separated)",
-        "placeholder": ""
-      },
-      {
-        "name": "bcc",
-        "type": "string",
-        "value": null,
-        "label": "BCC recipients (comma-separated)",
-        "placeholder": ""
-      },
-      {
-        "name": "sender_name",
-        "type": "string",
-        "value": null,
-        "label": "Sender display name (e.g. 'Ada Whitmore', defaults to account label)",
-        "placeholder": ""
-      },
-      {
-        "name": "account",
-        "type": "string",
-        "value": null,
-        "label": "Sending account (email or label, empty for primary)",
-        "placeholder": ""
-      },
-      {
-        "name": "credential",
-        "type": "string",
-        "value": null,
-        "label": "Google OAuth Credential (optional, overrides user tokens)",
-        "placeholder": "${credentials.GOOGLE_EMAIL}"
-      }
-    ],
-    "outputs": [
-      {
-        "name": "tool_result",
-        "type": "string",
-        "value": null,
-        "label": "Result (text)",
-        "placeholder": ""
-      },
-      {
-        "name": "message_id",
-        "type": "string",
-        "value": null,
-        "label": "Message ID",
-        "placeholder": ""
-      },
-      {
-        "name": "thread_id",
-        "type": "string",
-        "value": null,
-        "label": "Thread ID",
-        "placeholder": ""
-      },
-      {
-        "name": "success",
-        "type": "boolean",
-        "value": null,
-        "label": "Success",
-        "placeholder": ""
-      },
-      {
-        "name": "error",
-        "type": "string",
-        "value": null,
-        "label": "Error",
-        "placeholder": ""
-      }
-    ]
-  },
-  "tools/google_accounts": {
-    "hash": "9947a58d47db9691a551b4f418f00e7dfa195c7fe0b28af485280491c64e10ca",
-    "author": "Andy Esser",
-    "organisation": "Flomation",
-    "name": "Manage Google Connections",
-    "description": "Manage the user's Google account connections for calendar, email read, and email send. Lists which accounts are connected and for which purposes (calendar, email read, email send), provides OAuth links to connect new permissions, and can disconnect specific accounts/purposes. Use this when the user wants to connect or manage their Google accounts.",
-    "website": "https://www.flomation.co",
-    "icon": "link",
-    "date": "08/04/2026",
-    "type": 2,
-    "category": {
-      "name": "Tools",
-      "icon": "wrench",
-      "description": "AI tool implementations for function calling"
-    },
-    "inputs": [
-      {
-        "name": "action",
-        "type": "string",
-        "value": null,
-        "label": "What to do with Google account connections",
-        "placeholder": "",
-        "required": true,
-        "options": [
-          {
-            "name": "List accounts with purposes and get connect links",
-            "value": "list"
-          },
-          {
-            "name": "Disconnect an account or specific purpose",
-            "value": "disconnect"
-          }
-        ]
-      },
-      {
-        "name": "email",
-        "type": "string",
-        "value": null,
-        "label": "Email (for disconnect)",
-        "placeholder": "user@example.com"
-      },
-      {
-        "name": "purpose",
-        "type": "string",
-        "value": null,
-        "label": "Purpose to disconnect (calendar, email_read, email_send) — empty removes all",
-        "placeholder": "",
-        "options": [
-          {
-            "name": "Calendar access",
-            "value": "calendar"
-          },
-          {
-            "name": "Email read access",
-            "value": "email_read"
-          },
-          {
-            "name": "Email send access",
-            "value": "email_send"
-          }
-        ]
-      }
-    ],
-    "outputs": [
-      {
-        "name": "tool_result",
-        "type": "string",
-        "value": null,
-        "label": "Results (text)",
-        "placeholder": ""
-      },
-      {
-        "name": "accounts",
-        "type": "object",
-        "value": null,
-        "label": "Connected Accounts (JSON)",
-        "placeholder": ""
-      },
-      {
-        "name": "auth_urls",
-        "type": "object",
-        "value": null,
-        "label": "OAuth Connect URLs by purpose",
-        "placeholder": ""
-      },
-      {
-        "name": "success",
-        "type": "boolean",
-        "value": null,
-        "label": "Success",
-        "placeholder": ""
-      },
-      {
-        "name": "error",
-        "type": "string",
-        "value": null,
-        "label": "Error",
-        "placeholder": ""
-      }
-    ]
-  },
-  "tools/slack_channels": {
-    "hash": "c57c98efe338ddf3927b61c62ee42d85da62f19c3a2bcfa06adc8181b8a15106",
-    "author": "Andy Esser",
-    "organisation": "Flomation",
-    "name": "Slack Channels",
-    "description": "List or search Slack channels. Returns channel names, IDs, topics, and member counts",
-    "website": "https://www.flomation.co",
-    "icon": "slack",
-    "date": "20/04/2026",
-    "type": 2,
-    "category": {
-      "name": "Tools",
-      "icon": "wrench",
-      "description": "AI tool implementations for function calling"
-    },
-    "inputs": [
-      {
-        "name": "bot_token",
-        "type": "string",
-        "value": null,
-        "label": "Bot Token",
-        "placeholder": "xoxb-...",
-        "required": true
-      },
-      {
-        "name": "search",
-        "type": "string",
-        "value": null,
-        "label": "Optional filter: only return channels whose name contains this text",
-        "placeholder": ""
-      },
-      {
-        "name": "limit",
-        "type": "string",
-        "value": null,
-        "label": "Max channels to return (default 50, max 200)",
-        "placeholder": ""
-      },
-      {
-        "name": "include_private",
-        "type": "boolean",
-        "value": null,
-        "label": "Include private channels the bot is a member of (default false)",
-        "placeholder": ""
-      }
-    ],
-    "outputs": [
-      {
-        "name": "tool_result",
-        "type": "string",
-        "value": null,
-        "label": "Result summary",
-        "placeholder": ""
-      },
-      {
-        "name": "channels",
-        "type": "object",
-        "value": null,
-        "label": "Channel list",
-        "placeholder": ""
-      },
-      {
-        "name": "count",
-        "type": "integer",
-        "value": null,
-        "label": "Number of channels returned",
-        "placeholder": ""
-      },
-      {
-        "name": "success",
-        "type": "boolean",
-        "value": null,
-        "label": "Success",
-        "placeholder": ""
-      },
-      {
-        "name": "error",
-        "type": "string",
-        "value": null,
-        "label": "Error",
-        "placeholder": ""
-      }
-    ]
-  },
-  "tools/slack_file_upload": {
-    "hash": "bd07aef49e2b8c6295a4213e23813e87a193d6e44b953607ce4d8a942d75cb54",
-    "author": "Andy Esser",
-    "organisation": "Flomation",
-    "name": "Slack File Upload",
-    "description": "Upload a file to a Slack channel. Supports text content or base64-encoded binary data",
-    "website": "https://www.flomation.co",
-    "icon": "slack",
-    "date": "20/04/2026",
-    "type": 2,
-    "category": {
-      "name": "Tools",
-      "icon": "wrench",
-      "description": "AI tool implementations for function calling"
-    },
-    "inputs": [
-      {
-        "name": "bot_token",
-        "type": "string",
-        "value": null,
-        "label": "Bot Token",
-        "placeholder": "xoxb-...",
-        "required": true
-      },
-      {
-        "name": "channel_id",
-        "type": "string",
-        "value": null,
-        "label": "Channel ID",
-        "placeholder": "${channel_id}",
-        "required": true
-      },
-      {
-        "name": "content",
-        "type": "text",
-        "value": null,
-        "label": "File content as text (for code snippets, CSV, logs, etc.)",
-        "placeholder": "",
-        "required": true
-      },
-      {
-        "name": "filename",
-        "type": "string",
-        "value": null,
-        "label": "Filename including extension (e.g. report.csv, log.txt, data.json)",
-        "placeholder": "",
-        "required": true
-      },
-      {
-        "name": "title",
-        "type": "string",
-        "value": null,
-        "label": "Display title for the file in Slack (optional, defaults to filename)",
-        "placeholder": ""
-      },
-      {
-        "name": "initial_comment",
-        "type": "string",
-        "value": null,
-        "label": "Message to post alongside the file (optional)",
-        "placeholder": ""
-      }
-    ],
-    "outputs": [
-      {
-        "name": "tool_result",
-        "type": "string",
-        "value": null,
-        "label": "Result summary",
-        "placeholder": ""
-      },
-      {
-        "name": "file_id",
-        "type": "string",
-        "value": null,
-        "label": "Slack file ID",
-        "placeholder": ""
-      },
-      {
-        "name": "success",
-        "type": "boolean",
-        "value": null,
-        "label": "Success",
-        "placeholder": ""
-      },
-      {
-        "name": "error",
-        "type": "string",
-        "value": null,
-        "label": "Error",
-        "placeholder": ""
-      }
-    ]
-  },
-  "tools/slack_history": {
-    "hash": "5ec8638e1e977a914cf4697ef519f08e59dcb08e294aa6110c8b33ae96065b5e",
-    "author": "Andy Esser",
-    "organisation": "Flomation",
-    "name": "Slack Channel History",
-    "description": "Read recent messages from a Slack channel. Uses conversations.history API.",
-    "website": "https://www.flomation.co",
-    "icon": "slack",
-    "date": "28/04/2026",
-    "type": 2,
-    "category": {
-      "name": "Tools",
-      "icon": "wrench",
-      "description": "AI tool implementations for function calling"
-    },
-    "inputs": [
-      {
-        "name": "bot_token",
-        "type": "string",
-        "value": null,
-        "label": "Bot Token",
-        "placeholder": "xoxb-...",
-        "required": true
-      },
-      {
-        "name": "channel_id",
-        "type": "string",
-        "value": null,
-        "label": "Channel ID",
-        "placeholder": "C01ABC2DEF3",
-        "required": true
-      },
-      {
-        "name": "limit",
-        "type": "string",
-        "value": null,
-        "label": "Number of messages (default 20, max 100)",
-        "placeholder": ""
-      },
-      {
-        "name": "oldest",
-        "type": "string",
-        "value": null,
-        "label": "Oldest timestamp (Unix ts or ISO date, e.g. 2026-04-28)",
-        "placeholder": ""
-      }
-    ],
-    "outputs": [
-      {
-        "name": "tool_result",
-        "type": "string",
-        "value": null,
-        "label": "Result summary",
-        "placeholder": ""
-      },
-      {
-        "name": "messages",
-        "type": "object",
-        "value": null,
-        "label": "Messages (JSON array)",
-        "placeholder": ""
-      },
-      {
-        "name": "count",
-        "type": "integer",
-        "value": null,
-        "label": "Message count",
-        "placeholder": ""
-      },
-      {
-        "name": "success",
-        "type": "boolean",
-        "value": null,
-        "label": "Success",
-        "placeholder": ""
-      },
-      {
-        "name": "error",
-        "type": "string",
-        "value": null,
-        "label": "Error",
-        "placeholder": ""
-      }
-    ]
-  },
-  "tools/slack_react": {
-    "hash": "d630fc0f338b9cc1eb05bbeb730c78be84214d2f7e0bd449a5c125e035476bfd",
-    "author": "Andy Esser",
-    "organisation": "Flomation",
-    "name": "Slack Add Reaction",
-    "description": "Add an emoji reaction to a Slack message. Use emoji name without colons.",
-    "website": "https://www.flomation.co",
-    "icon": "slack",
-    "date": "28/04/2026",
-    "type": 2,
-    "category": {
-      "name": "Tools",
-      "icon": "wrench",
-      "description": "AI tool implementations for function calling"
-    },
-    "inputs": [
-      {
-        "name": "bot_token",
-        "type": "string",
-        "value": null,
-        "label": "Bot Token",
-        "placeholder": "xoxb-...",
-        "required": true
-      },
-      {
-        "name": "channel_id",
-        "type": "string",
-        "value": null,
-        "label": "Channel ID",
-        "placeholder": "C01ABC2DEF3",
-        "required": true
-      },
-      {
-        "name": "timestamp",
-        "type": "string",
-        "value": null,
-        "label": "Message Timestamp",
-        "placeholder": "1234567890.123456",
-        "required": true
-      },
-      {
-        "name": "emoji",
-        "type": "string",
-        "value": null,
-        "label": "Emoji Name (without colons)",
-        "placeholder": "thumbsup",
-        "required": true
-      }
-    ],
-    "outputs": [
-      {
-        "name": "tool_result",
-        "type": "string",
-        "value": null,
-        "label": "Result summary",
-        "placeholder": ""
-      },
-      {
-        "name": "success",
-        "type": "boolean",
-        "value": null,
-        "label": "Success",
-        "placeholder": ""
-      },
-      {
-        "name": "error",
-        "type": "string",
-        "value": null,
-        "label": "Error",
-        "placeholder": ""
-      }
-    ]
-  },
-  "tools/slack_rich_message": {
-    "hash": "7b78ed4c601a14ba08870e04625b03aff42fe2d069d7822a9ba25baa255f8429",
-    "author": "Andy Esser",
-    "organisation": "Flomation",
-    "name": "Slack Rich Message",
-    "description": "",
-    "website": "https://www.flomation.co",
-    "icon": "slack",
-    "date": "15/04/2026",
-    "type": 2,
-    "category": {
-      "name": "Tools",
-      "icon": "wrench",
-      "description": "AI tool implementations for function calling"
-    },
-    "inputs": [
-      {
-        "name": "bot_token",
-        "type": "string",
-        "value": null,
-        "label": "Bot Token",
-        "placeholder": "xoxb-..."
-      },
-      {
-        "name": "channel_id",
-        "type": "string",
-        "value": null,
-        "label": "Channel ID",
-        "placeholder": "${channel_id}"
-      },
-      {
-        "name": "text",
-        "type": "text",
-        "value": null,
-        "label": "Fallback text shown in notifications and accessibility (plain summary of the message)",
-        "placeholder": "",
-        "required": true
-      },
-      {
-        "name": "blocks",
-        "type": "text",
-        "value": null,
-        "label": "",
-        "placeholder": "",
-        "required": true
-      },
-      {
-        "name": "thread_ts",
-        "type": "string",
-        "value": null,
-        "label": "Thread timestamp to reply in (optional)",
-        "placeholder": ""
-      },
-      {
-        "name": "attachments",
-        "type": "text",
-        "value": null,
-        "label": "Legacy attachments JSON array — colour bars, fields, footers (optional)",
-        "placeholder": ""
-      }
-    ],
-    "outputs": [
-      {
-        "name": "tool_result",
-        "type": "string",
-        "value": null,
-        "label": "Result summary for the AI",
-        "placeholder": ""
-      },
-      {
-        "name": "timestamp",
-        "type": "string",
-        "value": null,
-        "label": "Message timestamp",
-        "placeholder": ""
-      },
-      {
-        "name": "success",
-        "type": "boolean",
-        "value": null,
-        "label": "Success",
-        "placeholder": ""
-      },
-      {
-        "name": "error",
-        "type": "string",
-        "value": null,
-        "label": "Error",
-        "placeholder": ""
-      }
-    ]
-  },
-  "tools/slack_search": {
-    "hash": "817ce2f72e9c88a0477e39647466e84620e06d75a14fdd92c0b336d639618a84",
-    "author": "Andy Esser",
-    "organisation": "Flomation",
-    "name": "Slack Search Messages",
-    "description": "Search Slack messages. Requires a user token (xoxp-), not a bot token. Supports modifiers: from:user, in:channel, before:date, after:date",
-    "website": "https://www.flomation.co",
-    "icon": "slack",
-    "date": "20/04/2026",
-    "type": 2,
-    "category": {
-      "name": "Tools",
-      "icon": "wrench",
-      "description": "AI tool implementations for function calling"
-    },
-    "inputs": [
-      {
-        "name": "user_token",
-        "type": "string",
-        "value": null,
-        "label": "User Token (required — search needs a user token, not bot token)",
-        "placeholder": "xoxp-...",
-        "required": true
-      },
-      {
-        "name": "query",
-        "type": "string",
-        "value": null,
-        "label": "Search query. Supports Slack search modifiers: from:@user, in:#channel, before:2026-04-20, after:2026-04-01, has:link",
-        "placeholder": "",
-        "required": true
-      },
-      {
-        "name": "count",
-        "type": "string",
-        "value": null,
-        "label": "Max results to return (default 10, max 100)",
-        "placeholder": ""
-      },
-      {
-        "name": "sort",
-        "type": "string",
-        "value": null,
-        "label": "Sort order: score (relevance) or timestamp (recent first). Default: score",
-        "placeholder": ""
-      }
-    ],
-    "outputs": [
-      {
-        "name": "tool_result",
-        "type": "string",
-        "value": null,
-        "label": "Result summary",
-        "placeholder": ""
-      },
-      {
-        "name": "messages",
-        "type": "object",
-        "value": null,
-        "label": "Matching messages",
-        "placeholder": ""
-      },
-      {
-        "name": "total",
-        "type": "integer",
-        "value": null,
-        "label": "Total matches",
-        "placeholder": ""
-      },
-      {
-        "name": "success",
-        "type": "boolean",
-        "value": null,
-        "label": "Success",
-        "placeholder": ""
-      },
-      {
-        "name": "error",
-        "type": "string",
-        "value": null,
-        "label": "Error",
-        "placeholder": ""
-      }
-    ]
-  },
-  "tools/slack_thread": {
-    "hash": "f4d65ca677d2486d5c1785739968273a8bf025fafb6dbb0aa65ad92ee3cf476a",
-    "author": "Andy Esser",
-    "organisation": "Flomation",
-    "name": "Slack Thread Replies",
-    "description": "Read replies in a Slack thread. Requires the channel ID and thread timestamp.",
-    "website": "https://www.flomation.co",
-    "icon": "slack",
-    "date": "28/04/2026",
-    "type": 2,
-    "category": {
-      "name": "Tools",
-      "icon": "wrench",
-      "description": "AI tool implementations for function calling"
-    },
-    "inputs": [
-      {
-        "name": "bot_token",
-        "type": "string",
-        "value": null,
-        "label": "Bot Token",
-        "placeholder": "xoxb-...",
-        "required": true
-      },
-      {
-        "name": "channel_id",
-        "type": "string",
-        "value": null,
-        "label": "Channel ID",
-        "placeholder": "C01ABC2DEF3",
-        "required": true
-      },
-      {
-        "name": "thread_ts",
-        "type": "string",
-        "value": null,
-        "label": "Thread Timestamp",
-        "placeholder": "1234567890.123456",
-        "required": true
-      },
-      {
-        "name": "limit",
-        "type": "string",
-        "value": null,
-        "label": "Number of replies (default 50, max 200)",
-        "placeholder": ""
-      }
-    ],
-    "outputs": [
-      {
-        "name": "tool_result",
-        "type": "string",
-        "value": null,
-        "label": "Result summary",
-        "placeholder": ""
-      },
-      {
-        "name": "messages",
-        "type": "object",
-        "value": null,
-        "label": "Thread messages (JSON array)",
-        "placeholder": ""
-      },
-      {
-        "name": "count",
-        "type": "integer",
-        "value": null,
-        "label": "Reply count",
-        "placeholder": ""
-      },
-      {
-        "name": "success",
-        "type": "boolean",
-        "value": null,
-        "label": "Success",
-        "placeholder": ""
-      },
-      {
-        "name": "error",
-        "type": "string",
-        "value": null,
-        "label": "Error",
-        "placeholder": ""
-      }
-    ]
-  },
-  "tools/slack_user_profile": {
-    "hash": "07d71f1b79a5849e47dd07a55e5578df07418328b4eaa7407618993586638def",
-    "author": "Andy Esser",
-    "organisation": "Flomation",
-    "name": "Slack User Profile",
-    "description": "Get a Slack user's full profile by user ID. Returns name, email, title, phone, timezone, status, and avatar",
-    "website": "https://www.flomation.co",
-    "icon": "slack",
-    "date": "20/04/2026",
-    "type": 2,
-    "category": {
-      "name": "Tools",
-      "icon": "wrench",
-      "description": "AI tool implementations for function calling"
-    },
-    "inputs": [
-      {
-        "name": "bot_token",
-        "type": "string",
-        "value": null,
-        "label": "Bot Token",
-        "placeholder": "xoxb-...",
-        "required": true
-      },
-      {
-        "name": "user_id",
-        "type": "string",
-        "value": null,
-        "label": "Slack user ID (e.g. U01ABCDEF). Use slack_users to find IDs by name",
-        "placeholder": "",
-        "required": true
-      }
-    ],
-    "outputs": [
-      {
-        "name": "tool_result",
-        "type": "string",
-        "value": null,
-        "label": "Result summary",
-        "placeholder": ""
-      },
-      {
-        "name": "profile",
-        "type": "object",
-        "value": null,
-        "label": "Full user profile",
-        "placeholder": ""
-      },
-      {
-        "name": "real_name",
-        "type": "string",
-        "value": null,
-        "label": "Real name",
-        "placeholder": ""
-      },
-      {
-        "name": "display_name",
-        "type": "string",
-        "value": null,
-        "label": "Display name",
-        "placeholder": ""
-      },
-      {
-        "name": "email",
-        "type": "string",
-        "value": null,
-        "label": "Email address",
-        "placeholder": ""
-      },
-      {
-        "name": "title",
-        "type": "string",
-        "value": null,
-        "label": "Job title",
-        "placeholder": ""
-      },
-      {
-        "name": "timezone",
-        "type": "string",
-        "value": null,
-        "label": "Timezone",
-        "placeholder": ""
-      },
-      {
-        "name": "status_text",
-        "type": "string",
-        "value": null,
-        "label": "Status text",
-        "placeholder": ""
-      },
-      {
-        "name": "success",
-        "type": "boolean",
-        "value": null,
-        "label": "Success",
-        "placeholder": ""
-      },
-      {
-        "name": "error",
-        "type": "string",
-        "value": null,
-        "label": "Error",
-        "placeholder": ""
-      }
-    ]
-  },
-  "tools/slack_users": {
-    "hash": "be6aca2f6e470f618322344a178173297a87a519cb517c9cbd1c77f7bc34faed",
-    "author": "Andy Esser",
-    "organisation": "Flomation",
-    "name": "Slack Users",
-    "description": "List or search Slack workspace members. Returns display names, real names, email addresses, and status",
-    "website": "https://www.flomation.co",
-    "icon": "slack",
-    "date": "20/04/2026",
-    "type": 2,
-    "category": {
-      "name": "Tools",
-      "icon": "wrench",
-      "description": "AI tool implementations for function calling"
-    },
-    "inputs": [
-      {
-        "name": "bot_token",
-        "type": "string",
-        "value": null,
-        "label": "Bot Token",
-        "placeholder": "xoxb-...",
-        "required": true
-      },
-      {
-        "name": "search",
-        "type": "string",
-        "value": null,
-        "label": "Optional filter: only return users whose name or display name contains this text",
-        "placeholder": ""
-      },
-      {
-        "name": "limit",
-        "type": "string",
-        "value": null,
-        "label": "Max users to return (default 50, max 200)",
-        "placeholder": ""
-      }
-    ],
-    "outputs": [
-      {
-        "name": "tool_result",
-        "type": "string",
-        "value": null,
-        "label": "Result summary",
-        "placeholder": ""
-      },
-      {
-        "name": "users",
-        "type": "object",
-        "value": null,
-        "label": "User list",
-        "placeholder": ""
-      },
-      {
-        "name": "count",
-        "type": "integer",
-        "value": null,
-        "label": "Number of users returned",
-        "placeholder": ""
-      },
-      {
-        "name": "success",
-        "type": "boolean",
-        "value": null,
-        "label": "Success",
-        "placeholder": ""
-      },
-      {
-        "name": "error",
-        "type": "string",
-        "value": null,
-        "label": "Error",
-        "placeholder": ""
-      }
-    ]
-  },
-  "tools/web_fetch": {
-    "hash": "bcbf0b35a883913d80bb10192e7f5860978964ff7c54e318895801d0a1efb6c0",
-    "author": "Andy Esser",
-    "organisation": "Flomation",
-    "name": "Web Fetch",
-    "description": "Fetch a URL and extract the text content",
-    "website": "https://www.flomation.co",
-    "icon": "globe",
-    "date": "07/04/2026",
-    "type": 2,
-    "category": {
-      "name": "Tools",
-      "icon": "wrench",
-      "description": "AI tool implementations for function calling"
-    },
-    "inputs": [
-      {
-        "name": "url",
-        "type": "string",
-        "value": null,
-        "label": "URL",
-        "placeholder": "https://example.com",
-        "required": true
-      },
-      {
-        "name": "max_length",
-        "type": "integer",
-        "value": null,
-        "label": "Max Content Length",
-        "placeholder": "10000"
-      }
-    ],
-    "outputs": [
-      {
-        "name": "tool_result",
-        "type": "string",
-        "value": null,
-        "label": "Page Content (text)",
-        "placeholder": ""
-      },
-      {
-        "name": "title",
-        "type": "string",
-        "value": null,
-        "label": "Page Title",
-        "placeholder": ""
-      },
-      {
-        "name": "success",
-        "type": "boolean",
-        "value": null,
-        "label": "Success",
-        "placeholder": ""
-      },
-      {
-        "name": "error",
-        "type": "string",
-        "value": null,
-        "label": "Error",
-        "placeholder": ""
-      }
-    ]
-  },
-  "tools/web_search": {
-    "hash": "a9cbe3694698d84c35f442ab66ebff47b61ea8ad8f3ed834e11c9490e2b0fd0b",
-    "author": "Andy Esser",
-    "organisation": "Flomation",
-    "name": "Web Search",
-    "description": "Search the web using the Brave Search API",
-    "website": "https://www.flomation.co",
-    "icon": "magnifying-glass",
-    "date": "07/04/2026",
-    "type": 2,
-    "category": {
-      "name": "Tools",
-      "icon": "wrench",
-      "description": "AI tool implementations for function calling"
-    },
-    "inputs": [
-      {
-        "name": "query",
-        "type": "string",
-        "value": null,
-        "label": "Search Query",
-        "placeholder": "What to search for",
-        "required": true
-      },
-      {
-        "name": "api_key",
-        "type": "string",
-        "value": null,
-        "label": "Brave API Key",
-        "placeholder": "BSA...",
-        "required": true
-      },
-      {
-        "name": "count",
-        "type": "integer",
-        "value": null,
-        "label": "Number of Results",
-        "placeholder": "5"
-      }
-    ],
-    "outputs": [
-      {
-        "name": "tool_result",
-        "type": "string",
-        "value": null,
-        "label": "Search Results (text)",
-        "placeholder": ""
-      },
-      {
-        "name": "results",
-        "type": "object",
-        "value": null,
-        "label": "Raw Results (JSON)",
-        "placeholder": ""
-      },
-      {
-        "name": "success",
-        "type": "boolean",
-        "value": null,
-        "label": "Success",
-        "placeholder": ""
-      },
-      {
-        "name": "error",
-        "type": "string",
-        "value": null,
-        "label": "Error",
-        "placeholder": ""
-      }
-    ]
-  },
   "trigger/email": {
     "hash": "b79ff3e9875535ad1dce1d323778d80ac006db68186859376cef528e469c9eb0",
     "author": "Andy Esser",
@@ -24022,6 +23731,101 @@
       }
     ]
   },
+  "twilio/send_sms": {
+    "hash": "57796ab8be5b620b8e462004eec477fd445771495f2c204cb32afd9f0cca5ca2",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Send Twilio SMS",
+    "description": "Send an SMS message via Twilio",
+    "website": "https://www.flomation.co",
+    "icon": "comment-sms",
+    "date": "29/05/2026",
+    "type": 2,
+    "category": {
+      "name": "Twilio",
+      "icon": "phone",
+      "description": "Twilio voice call and SMS actions"
+    },
+    "inputs": [
+      {
+        "name": "account_sid",
+        "type": "string",
+        "value": null,
+        "label": "Account SID",
+        "placeholder": "ACxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+        "required": true
+      },
+      {
+        "name": "auth_token",
+        "type": "string",
+        "value": null,
+        "label": "Auth Token",
+        "placeholder": "${secrets.TWILIO_AUTH_TOKEN}",
+        "required": true
+      },
+      {
+        "name": "from",
+        "type": "string",
+        "value": null,
+        "label": "From Number (E.164)",
+        "placeholder": "+19876543210",
+        "required": true
+      },
+      {
+        "name": "to",
+        "type": "string",
+        "value": null,
+        "label": "To Number (E.164)",
+        "placeholder": "${from}",
+        "required": true
+      },
+      {
+        "name": "message",
+        "type": "text",
+        "value": null,
+        "label": "Message Body",
+        "placeholder": "Hello from Flomation!",
+        "required": true
+      },
+      {
+        "name": "media_url",
+        "type": "string",
+        "value": null,
+        "label": "Media URL (MMS)",
+        "placeholder": "https://example.com/image.jpg"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "message_sid",
+        "type": "string",
+        "value": null,
+        "label": "Message SID",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
   "twilio/voice_session": {
     "hash": "71271242cb160e9f9cbfcae34cb51df5b61d485ebddd638c7cf571c9e6a0ec5a",
     "author": "Andy Esser",
@@ -24172,6 +23976,262 @@
         "type": "string",
         "value": null,
         "label": "Stream SID",
+        "placeholder": ""
+      }
+    ]
+  },
+  "web/fetch": {
+    "hash": "bcbf0b35a883913d80bb10192e7f5860978964ff7c54e318895801d0a1efb6c0",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Web Fetch",
+    "description": "Fetch a URL and extract the text content",
+    "website": "https://www.flomation.co",
+    "icon": "globe",
+    "date": "07/04/2026",
+    "type": 2,
+    "category": {
+      "name": "Web",
+      "icon": "globe",
+      "description": "Web browsing, search, and HTTP request operations"
+    },
+    "inputs": [
+      {
+        "name": "url",
+        "type": "string",
+        "value": null,
+        "label": "URL",
+        "placeholder": "https://example.com",
+        "required": true
+      },
+      {
+        "name": "max_length",
+        "type": "integer",
+        "value": null,
+        "label": "Max Content Length",
+        "placeholder": "10000"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Page Content (text)",
+        "placeholder": ""
+      },
+      {
+        "name": "title",
+        "type": "string",
+        "value": null,
+        "label": "Page Title",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "web/request": {
+    "hash": "a4dfc20efa6503dc772abacf8d374e8d0028205b6fc7279072c444c7877855c0",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "HTTP Request",
+    "description": "Send an HTTP request and capture the response",
+    "website": "https://www.flomation.co",
+    "icon": "globe",
+    "date": "23/03/2026",
+    "type": 2,
+    "category": {
+      "name": "Web",
+      "icon": "globe",
+      "description": "Web browsing, search, and HTTP request operations"
+    },
+    "inputs": [
+      {
+        "name": "method",
+        "type": "string",
+        "value": null,
+        "label": "HTTP Method",
+        "placeholder": "GET",
+        "required": true,
+        "options": [
+          {
+            "name": "GET",
+            "value": "GET"
+          },
+          {
+            "name": "POST",
+            "value": "POST"
+          },
+          {
+            "name": "PUT",
+            "value": "PUT"
+          },
+          {
+            "name": "PATCH",
+            "value": "PATCH"
+          },
+          {
+            "name": "DELETE",
+            "value": "DELETE"
+          },
+          {
+            "name": "HEAD",
+            "value": "HEAD"
+          },
+          {
+            "name": "OPTIONS",
+            "value": "OPTIONS"
+          }
+        ]
+      },
+      {
+        "name": "url",
+        "type": "string",
+        "value": null,
+        "label": "URL",
+        "placeholder": "https://example.com/api/v1/resource",
+        "required": true
+      },
+      {
+        "name": "headers",
+        "type": "text",
+        "value": null,
+        "label": "Headers",
+        "placeholder": "Content-Type: application/json\nAuthorization: Bearer ..."
+      },
+      {
+        "name": "body",
+        "type": "text",
+        "value": null,
+        "label": "Request Body",
+        "placeholder": ""
+      },
+      {
+        "name": "timeout_seconds",
+        "type": "integer",
+        "value": null,
+        "label": "Timeout (seconds)",
+        "placeholder": "30"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "status_code",
+        "type": "integer",
+        "value": null,
+        "label": "",
+        "placeholder": ""
+      },
+      {
+        "name": "response_body",
+        "type": "string",
+        "value": null,
+        "label": "",
+        "placeholder": ""
+      },
+      {
+        "name": "response_headers",
+        "type": "string",
+        "value": null,
+        "label": "",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "",
+        "placeholder": ""
+      }
+    ]
+  },
+  "web/search": {
+    "hash": "a9cbe3694698d84c35f442ab66ebff47b61ea8ad8f3ed834e11c9490e2b0fd0b",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Web Search",
+    "description": "Search the web using the Brave Search API",
+    "website": "https://www.flomation.co",
+    "icon": "magnifying-glass",
+    "date": "07/04/2026",
+    "type": 2,
+    "category": {
+      "name": "Web",
+      "icon": "globe",
+      "description": "Web browsing, search, and HTTP request operations"
+    },
+    "inputs": [
+      {
+        "name": "query",
+        "type": "string",
+        "value": null,
+        "label": "Search Query",
+        "placeholder": "What to search for",
+        "required": true
+      },
+      {
+        "name": "api_key",
+        "type": "string",
+        "value": null,
+        "label": "Brave API Key",
+        "placeholder": "BSA...",
+        "required": true
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Number of Results",
+        "placeholder": "5"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Search Results (text)",
+        "placeholder": ""
+      },
+      {
+        "name": "results",
+        "type": "object",
+        "value": null,
+        "label": "Raw Results (JSON)",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
         "placeholder": ""
       }
     ]

@@ -111,6 +111,11 @@ import (
 	gitlab_trigger_pipeline "flomation.app/automate/executor/actions/gitlab/trigger_pipeline"
 	gitlab_unapprove_merge_request "flomation.app/automate/executor/actions/gitlab/unapprove_merge_request"
 	gitlab_update_merge_request "flomation.app/automate/executor/actions/gitlab/update_merge_request"
+	google_accounts "flomation.app/automate/executor/actions/google/accounts"
+	google_calendar_create "flomation.app/automate/executor/actions/google/calendar/create"
+	google_calendar_delete "flomation.app/automate/executor/actions/google/calendar/delete"
+	google_calendar_read "flomation.app/automate/executor/actions/google/calendar/read"
+	google_calendar_update "flomation.app/automate/executor/actions/google/calendar/update"
 	google_docs_append_text "flomation.app/automate/executor/actions/google/docs/append_text"
 	google_docs_create "flomation.app/automate/executor/actions/google/docs/create"
 	google_docs_get_metadata "flomation.app/automate/executor/actions/google/docs/get_metadata"
@@ -127,6 +132,10 @@ import (
 	google_drive_search "flomation.app/automate/executor/actions/google/drive/search"
 	google_drive_share "flomation.app/automate/executor/actions/google/drive/share"
 	google_drive_upload "flomation.app/automate/executor/actions/google/drive/upload"
+	google_gmail_draft "flomation.app/automate/executor/actions/google/gmail/draft"
+	google_gmail_read "flomation.app/automate/executor/actions/google/gmail/read"
+	google_gmail_reply "flomation.app/automate/executor/actions/google/gmail/reply"
+	google_gmail_send "flomation.app/automate/executor/actions/google/gmail/send"
 	google_sheets_append "flomation.app/automate/executor/actions/google/sheets/append"
 	google_sheets_clear "flomation.app/automate/executor/actions/google/sheets/clear"
 	google_sheets_create "flomation.app/automate/executor/actions/google/sheets/create"
@@ -141,7 +150,6 @@ import (
 	google_slides_create "flomation.app/automate/executor/actions/google/slides/create"
 	google_slides_get "flomation.app/automate/executor/actions/google/slides/get"
 	google_slides_get_slide "flomation.app/automate/executor/actions/google/slides/get_slide"
-	http_request "flomation.app/automate/executor/actions/http/request"
 	linear_add_comment "flomation.app/automate/executor/actions/linear/add_comment"
 	linear_create_issue "flomation.app/automate/executor/actions/linear/create_issue"
 	linear_delete_comment "flomation.app/automate/executor/actions/linear/delete_comment"
@@ -158,11 +166,10 @@ import (
 	makefile_list_targets "flomation.app/automate/executor/actions/makefile/list_targets"
 	makefile_run_target "flomation.app/automate/executor/actions/makefile/run_target"
 	makefile_validate "flomation.app/automate/executor/actions/makefile/validate"
-	messaging_email "flomation.app/automate/executor/actions/messaging/email"
-	messaging_slack "flomation.app/automate/executor/actions/messaging/slack"
-	messaging_telegram "flomation.app/automate/executor/actions/messaging/telegram"
-	messaging_telegram_voice "flomation.app/automate/executor/actions/messaging/telegram_voice"
-	messaging_twilio_sms "flomation.app/automate/executor/actions/messaging/twilio_sms"
+	messaging_discord_webhook "flomation.app/automate/executor/actions/messaging/discord/webhook"
+	messaging_email_send "flomation.app/automate/executor/actions/messaging/email/send"
+	messaging_telegram_send_message "flomation.app/automate/executor/actions/messaging/telegram/send_message"
+	messaging_telegram_send_voice "flomation.app/automate/executor/actions/messaging/telegram/send_voice"
 	microsoft_outlook_create_draft "flomation.app/automate/executor/actions/microsoft/outlook/create_draft"
 	microsoft_outlook_delete_email "flomation.app/automate/executor/actions/microsoft/outlook/delete_email"
 	microsoft_outlook_download_attachment "flomation.app/automate/executor/actions/microsoft/outlook/download_attachment"
@@ -189,12 +196,22 @@ import (
 	notion_query_database "flomation.app/automate/executor/actions/notion/query_database"
 	notion_search "flomation.app/automate/executor/actions/notion/search"
 	notion_update_page "flomation.app/automate/executor/actions/notion/update_page"
-	output_discord_webhook "flomation.app/automate/executor/actions/output/discord_webhook"
 	output_set "flomation.app/automate/executor/actions/output/set"
 	output_set_outputs "flomation.app/automate/executor/actions/output/set_outputs"
-	output_slack_webhook "flomation.app/automate/executor/actions/output/slack_webhook"
 	script_bash "flomation.app/automate/executor/actions/script/bash"
 	security_antivirus "flomation.app/automate/executor/actions/security/antivirus"
+	slack_channel_action "flomation.app/automate/executor/actions/slack/channel_action"
+	slack_channels "flomation.app/automate/executor/actions/slack/channels"
+	slack_file_upload "flomation.app/automate/executor/actions/slack/file_upload"
+	slack_history "flomation.app/automate/executor/actions/slack/history"
+	slack_react "flomation.app/automate/executor/actions/slack/react"
+	slack_rich_message "flomation.app/automate/executor/actions/slack/rich_message"
+	slack_search "flomation.app/automate/executor/actions/slack/search"
+	slack_send_message "flomation.app/automate/executor/actions/slack/send_message"
+	slack_thread "flomation.app/automate/executor/actions/slack/thread"
+	slack_user_profile "flomation.app/automate/executor/actions/slack/user_profile"
+	slack_users "flomation.app/automate/executor/actions/slack/users"
+	slack_webhook "flomation.app/automate/executor/actions/slack/webhook"
 	social_facebook_delete_post "flomation.app/automate/executor/actions/social/facebook/delete_post"
 	social_facebook_get_conversation "flomation.app/automate/executor/actions/social/facebook/get_conversation"
 	social_facebook_get_page_insights "flomation.app/automate/executor/actions/social/facebook/get_page_insights"
@@ -225,27 +242,6 @@ import (
 	subflow_begin "flomation.app/automate/executor/actions/subflow/begin"
 	subflow_end "flomation.app/automate/executor/actions/subflow/end"
 	subflow_invoke "flomation.app/automate/executor/actions/subflow/invoke"
-	tools_calendar_create "flomation.app/automate/executor/actions/tools/calendar_create"
-	tools_calendar_delete "flomation.app/automate/executor/actions/tools/calendar_delete"
-	tools_calendar_read "flomation.app/automate/executor/actions/tools/calendar_read"
-	tools_calendar_update "flomation.app/automate/executor/actions/tools/calendar_update"
-	tools_channel_action "flomation.app/automate/executor/actions/tools/channel_action"
-	tools_email_draft "flomation.app/automate/executor/actions/tools/email_draft"
-	tools_email_read "flomation.app/automate/executor/actions/tools/email_read"
-	tools_email_reply "flomation.app/automate/executor/actions/tools/email_reply"
-	tools_email_send "flomation.app/automate/executor/actions/tools/email_send"
-	tools_google_accounts "flomation.app/automate/executor/actions/tools/google_accounts"
-	tools_slack_channels "flomation.app/automate/executor/actions/tools/slack_channels"
-	tools_slack_file_upload "flomation.app/automate/executor/actions/tools/slack_file_upload"
-	tools_slack_history "flomation.app/automate/executor/actions/tools/slack_history"
-	tools_slack_react "flomation.app/automate/executor/actions/tools/slack_react"
-	tools_slack_rich_message "flomation.app/automate/executor/actions/tools/slack_rich_message"
-	tools_slack_search "flomation.app/automate/executor/actions/tools/slack_search"
-	tools_slack_thread "flomation.app/automate/executor/actions/tools/slack_thread"
-	tools_slack_user_profile "flomation.app/automate/executor/actions/tools/slack_user_profile"
-	tools_slack_users "flomation.app/automate/executor/actions/tools/slack_users"
-	tools_web_fetch "flomation.app/automate/executor/actions/tools/web_fetch"
-	tools_web_search "flomation.app/automate/executor/actions/tools/web_search"
 	trigger_email "flomation.app/automate/executor/actions/trigger/email"
 	trigger_facebook_feed "flomation.app/automate/executor/actions/trigger/facebook_feed"
 	trigger_facebook_messenger "flomation.app/automate/executor/actions/trigger/facebook_messenger"
@@ -268,7 +264,11 @@ import (
 	twilio_end_call "flomation.app/automate/executor/actions/twilio/end_call"
 	twilio_make_call "flomation.app/automate/executor/actions/twilio/make_call"
 	twilio_send_audio "flomation.app/automate/executor/actions/twilio/send_audio"
+	twilio_send_sms "flomation.app/automate/executor/actions/twilio/send_sms"
 	twilio_voice_session "flomation.app/automate/executor/actions/twilio/voice_session"
+	web_fetch "flomation.app/automate/executor/actions/web/fetch"
+	web_request "flomation.app/automate/executor/actions/web/request"
+	web_search "flomation.app/automate/executor/actions/web/search"
 	webflow_create_collection_item "flomation.app/automate/executor/actions/webflow/create_collection_item"
 	webflow_create_webhook "flomation.app/automate/executor/actions/webflow/create_webhook"
 	webflow_delete_collection_item "flomation.app/automate/executor/actions/webflow/delete_collection_item"
@@ -395,6 +395,11 @@ var Actions = map[string]core.Action{
 	"gitlab/trigger_pipeline":               gitlab_trigger_pipeline.Execute,
 	"gitlab/unapprove_merge_request":        gitlab_unapprove_merge_request.Execute,
 	"gitlab/update_merge_request":           gitlab_update_merge_request.Execute,
+	"google/accounts":                       google_accounts.Execute,
+	"google/calendar/create":                google_calendar_create.Execute,
+	"google/calendar/delete":                google_calendar_delete.Execute,
+	"google/calendar/read":                  google_calendar_read.Execute,
+	"google/calendar/update":                google_calendar_update.Execute,
 	"google/docs/append_text":               google_docs_append_text.Execute,
 	"google/docs/create":                    google_docs_create.Execute,
 	"google/docs/get_metadata":              google_docs_get_metadata.Execute,
@@ -411,6 +416,10 @@ var Actions = map[string]core.Action{
 	"google/drive/search":                   google_drive_search.Execute,
 	"google/drive/share":                    google_drive_share.Execute,
 	"google/drive/upload":                   google_drive_upload.Execute,
+	"google/gmail/draft":                    google_gmail_draft.Execute,
+	"google/gmail/read":                     google_gmail_read.Execute,
+	"google/gmail/reply":                    google_gmail_reply.Execute,
+	"google/gmail/send":                     google_gmail_send.Execute,
 	"google/sheets/append":                  google_sheets_append.Execute,
 	"google/sheets/clear":                   google_sheets_clear.Execute,
 	"google/sheets/create":                  google_sheets_create.Execute,
@@ -425,7 +434,6 @@ var Actions = map[string]core.Action{
 	"google/slides/create":                  google_slides_create.Execute,
 	"google/slides/get":                     google_slides_get.Execute,
 	"google/slides/get_slide":               google_slides_get_slide.Execute,
-	"http/request":                          http_request.Execute,
 	"linear/add_comment":                    linear_add_comment.Execute,
 	"linear/create_issue":                   linear_create_issue.Execute,
 	"linear/delete_comment":                 linear_delete_comment.Execute,
@@ -442,11 +450,10 @@ var Actions = map[string]core.Action{
 	"makefile/list_targets":                 makefile_list_targets.Execute,
 	"makefile/run_target":                   makefile_run_target.Execute,
 	"makefile/validate":                     makefile_validate.Execute,
-	"messaging/email":                       messaging_email.Execute,
-	"messaging/slack":                       messaging_slack.Execute,
-	"messaging/telegram":                    messaging_telegram.Execute,
-	"messaging/telegram_voice":              messaging_telegram_voice.Execute,
-	"messaging/twilio_sms":                  messaging_twilio_sms.Execute,
+	"messaging/discord/webhook":             messaging_discord_webhook.Execute,
+	"messaging/email/send":                  messaging_email_send.Execute,
+	"messaging/telegram/send_message":       messaging_telegram_send_message.Execute,
+	"messaging/telegram/send_voice":         messaging_telegram_send_voice.Execute,
 	"microsoft/outlook/create_draft":        microsoft_outlook_create_draft.Execute,
 	"microsoft/outlook/delete_email":        microsoft_outlook_delete_email.Execute,
 	"microsoft/outlook/download_attachment": microsoft_outlook_download_attachment.Execute,
@@ -473,12 +480,22 @@ var Actions = map[string]core.Action{
 	"notion/query_database":                 notion_query_database.Execute,
 	"notion/search":                         notion_search.Execute,
 	"notion/update_page":                    notion_update_page.Execute,
-	"output/discord_webhook":                output_discord_webhook.Execute,
 	"output/set":                            output_set.Execute,
 	"output/set_outputs":                    output_set_outputs.Execute,
-	"output/slack_webhook":                  output_slack_webhook.Execute,
 	"script/bash":                           script_bash.Execute,
 	"security/antivirus":                    security_antivirus.Execute,
+	"slack/channel_action":                  slack_channel_action.Execute,
+	"slack/channels":                        slack_channels.Execute,
+	"slack/file_upload":                     slack_file_upload.Execute,
+	"slack/history":                         slack_history.Execute,
+	"slack/react":                           slack_react.Execute,
+	"slack/rich_message":                    slack_rich_message.Execute,
+	"slack/search":                          slack_search.Execute,
+	"slack/send_message":                    slack_send_message.Execute,
+	"slack/thread":                          slack_thread.Execute,
+	"slack/user_profile":                    slack_user_profile.Execute,
+	"slack/users":                           slack_users.Execute,
+	"slack/webhook":                         slack_webhook.Execute,
 	"social/facebook/delete_post":           social_facebook_delete_post.Execute,
 	"social/facebook/get_conversation":      social_facebook_get_conversation.Execute,
 	"social/facebook/get_page_insights":     social_facebook_get_page_insights.Execute,
@@ -509,27 +526,6 @@ var Actions = map[string]core.Action{
 	"subflow/begin":                         subflow_begin.Execute,
 	"subflow/end":                           subflow_end.Execute,
 	"subflow/invoke":                        subflow_invoke.Execute,
-	"tools/calendar_create":                 tools_calendar_create.Execute,
-	"tools/calendar_delete":                 tools_calendar_delete.Execute,
-	"tools/calendar_read":                   tools_calendar_read.Execute,
-	"tools/calendar_update":                 tools_calendar_update.Execute,
-	"tools/channel_action":                  tools_channel_action.Execute,
-	"tools/email_draft":                     tools_email_draft.Execute,
-	"tools/email_read":                      tools_email_read.Execute,
-	"tools/email_reply":                     tools_email_reply.Execute,
-	"tools/email_send":                      tools_email_send.Execute,
-	"tools/google_accounts":                 tools_google_accounts.Execute,
-	"tools/slack_channels":                  tools_slack_channels.Execute,
-	"tools/slack_file_upload":               tools_slack_file_upload.Execute,
-	"tools/slack_history":                   tools_slack_history.Execute,
-	"tools/slack_react":                     tools_slack_react.Execute,
-	"tools/slack_rich_message":              tools_slack_rich_message.Execute,
-	"tools/slack_search":                    tools_slack_search.Execute,
-	"tools/slack_thread":                    tools_slack_thread.Execute,
-	"tools/slack_user_profile":              tools_slack_user_profile.Execute,
-	"tools/slack_users":                     tools_slack_users.Execute,
-	"tools/web_fetch":                       tools_web_fetch.Execute,
-	"tools/web_search":                      tools_web_search.Execute,
 	"trigger/email":                         trigger_email.Execute,
 	"trigger/facebook_feed":                 trigger_facebook_feed.Execute,
 	"trigger/facebook_messenger":            trigger_facebook_messenger.Execute,
@@ -552,7 +548,11 @@ var Actions = map[string]core.Action{
 	"twilio/end_call":                       twilio_end_call.Execute,
 	"twilio/make_call":                      twilio_make_call.Execute,
 	"twilio/send_audio":                     twilio_send_audio.Execute,
+	"twilio/send_sms":                       twilio_send_sms.Execute,
 	"twilio/voice_session":                  twilio_voice_session.Execute,
+	"web/fetch":                             web_fetch.Execute,
+	"web/request":                           web_request.Execute,
+	"web/search":                            web_search.Execute,
 	"webflow/create_collection_item":        webflow_create_collection_item.Execute,
 	"webflow/create_webhook":                webflow_create_webhook.Execute,
 	"webflow/delete_collection_item":        webflow_delete_collection_item.Execute,
