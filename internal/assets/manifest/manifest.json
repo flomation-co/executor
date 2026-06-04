@@ -18137,6 +18137,600 @@
       }
     ]
   },
+  "microsoft/powerpoint/create": {
+    "hash": "e8af1900e0a6a55c9261f6bbed04e5c4f02b380140992b44c3b44f74ad94a4a8",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Create Presentation",
+    "description": "Create a new empty PowerPoint presentation in OneDrive",
+    "website": "https://www.flomation.co",
+    "icon": "display+plus",
+    "date": "04/06/2026",
+    "type": 2,
+    "category": {
+      "name": "Microsoft",
+      "icon": "microsoft",
+      "description": "Microsoft 365 integrations"
+    },
+    "sub_category": {
+      "name": "PowerPoint",
+      "icon": "display",
+      "description": "Microsoft PowerPoint Online presentation operations"
+    },
+    "inputs": [
+      {
+        "name": "filename",
+        "type": "string",
+        "value": null,
+        "label": "Filename",
+        "placeholder": "presentation.pptx",
+        "required": true
+      },
+      {
+        "name": "folder_path",
+        "type": "string",
+        "value": null,
+        "label": "Folder Path",
+        "placeholder": ""
+      },
+      {
+        "name": "account",
+        "type": "string",
+        "value": null,
+        "label": "Microsoft Account (email)",
+        "placeholder": ""
+      },
+      {
+        "name": "credential",
+        "type": "string",
+        "value": null,
+        "label": "Microsoft OAuth Credential",
+        "placeholder": "${credentials.MICROSOFT_ONEDRIVE}"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "item_id",
+        "type": "string",
+        "value": null,
+        "label": "Item ID",
+        "placeholder": ""
+      },
+      {
+        "name": "web_url",
+        "type": "string",
+        "value": null,
+        "label": "Web URL",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "microsoft/powerpoint/download": {
+    "hash": "f166eb652c0e02c62d84f7bd7cccd03b8e11e16fc0d8df5b96d7dd826da046e0",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Download Presentation",
+    "description": "Download a PowerPoint presentation as PPTX or PDF from OneDrive",
+    "website": "https://www.flomation.co",
+    "icon": "display+arrow-down",
+    "date": "04/06/2026",
+    "type": 2,
+    "category": {
+      "name": "Microsoft",
+      "icon": "microsoft",
+      "description": "Microsoft 365 integrations"
+    },
+    "sub_category": {
+      "name": "PowerPoint",
+      "icon": "display",
+      "description": "Microsoft PowerPoint Online presentation operations"
+    },
+    "inputs": [
+      {
+        "name": "item_id",
+        "type": "string",
+        "value": null,
+        "label": "Presentation Item ID",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "format",
+        "type": "string",
+        "value": null,
+        "label": "Download Format",
+        "placeholder": "pptx",
+        "options": [
+          {
+            "name": "PPTX",
+            "value": "pptx"
+          },
+          {
+            "name": "PDF",
+            "value": "pdf"
+          }
+        ]
+      },
+      {
+        "name": "account",
+        "type": "string",
+        "value": null,
+        "label": "Microsoft Account (email)",
+        "placeholder": ""
+      },
+      {
+        "name": "credential",
+        "type": "string",
+        "value": null,
+        "label": "Microsoft OAuth Credential",
+        "placeholder": "${credentials.MICROSOFT_ONEDRIVE}"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "content",
+        "type": "string",
+        "value": null,
+        "label": "Content (Base64)",
+        "placeholder": ""
+      },
+      {
+        "name": "filename",
+        "type": "string",
+        "value": null,
+        "label": "Filename",
+        "placeholder": ""
+      },
+      {
+        "name": "content_type",
+        "type": "string",
+        "value": null,
+        "label": "Content Type",
+        "placeholder": ""
+      },
+      {
+        "name": "size",
+        "type": "string",
+        "value": null,
+        "label": "Size (bytes)",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "microsoft/powerpoint/export_slide": {
+    "hash": "78fde7c1644c316c5bc442a912815ff3a7a898d4ee7d7bf70cd4f01d2e58386e",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Export Slide Thumbnail",
+    "description": "Export a presentation thumbnail as a PNG image from OneDrive",
+    "website": "https://www.flomation.co",
+    "icon": "display+image",
+    "date": "04/06/2026",
+    "type": 2,
+    "category": {
+      "name": "Microsoft",
+      "icon": "microsoft",
+      "description": "Microsoft 365 integrations"
+    },
+    "sub_category": {
+      "name": "PowerPoint",
+      "icon": "display",
+      "description": "Microsoft PowerPoint Online presentation operations"
+    },
+    "inputs": [
+      {
+        "name": "item_id",
+        "type": "string",
+        "value": null,
+        "label": "Presentation Item ID",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "size",
+        "type": "string",
+        "value": null,
+        "label": "Thumbnail Size",
+        "placeholder": "large",
+        "options": [
+          {
+            "name": "Small",
+            "value": "small"
+          },
+          {
+            "name": "Medium",
+            "value": "medium"
+          },
+          {
+            "name": "Large",
+            "value": "large"
+          }
+        ]
+      },
+      {
+        "name": "account",
+        "type": "string",
+        "value": null,
+        "label": "Microsoft Account (email)",
+        "placeholder": ""
+      },
+      {
+        "name": "credential",
+        "type": "string",
+        "value": null,
+        "label": "Microsoft OAuth Credential",
+        "placeholder": "${credentials.MICROSOFT_ONEDRIVE}"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "image",
+        "type": "string",
+        "value": null,
+        "label": "Image (Base64)",
+        "placeholder": ""
+      },
+      {
+        "name": "content_type",
+        "type": "string",
+        "value": null,
+        "label": "Content Type",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "microsoft/powerpoint/get": {
+    "hash": "64f42e7b1dd07e0d03fc6244d62e13c850409d75699c3de5f902a04991fff225",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Get Presentation",
+    "description": "Retrieve metadata for a PowerPoint presentation in OneDrive",
+    "website": "https://www.flomation.co",
+    "icon": "display+eye",
+    "date": "04/06/2026",
+    "type": 2,
+    "category": {
+      "name": "Microsoft",
+      "icon": "microsoft",
+      "description": "Microsoft 365 integrations"
+    },
+    "sub_category": {
+      "name": "PowerPoint",
+      "icon": "display",
+      "description": "Microsoft PowerPoint Online presentation operations"
+    },
+    "inputs": [
+      {
+        "name": "item_id",
+        "type": "string",
+        "value": null,
+        "label": "Presentation Item ID",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "account",
+        "type": "string",
+        "value": null,
+        "label": "Microsoft Account (email)",
+        "placeholder": ""
+      },
+      {
+        "name": "credential",
+        "type": "string",
+        "value": null,
+        "label": "Microsoft OAuth Credential",
+        "placeholder": "${credentials.MICROSOFT_ONEDRIVE}"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "name",
+        "type": "string",
+        "value": null,
+        "label": "Name",
+        "placeholder": ""
+      },
+      {
+        "name": "size",
+        "type": "string",
+        "value": null,
+        "label": "Size (bytes)",
+        "placeholder": ""
+      },
+      {
+        "name": "web_url",
+        "type": "string",
+        "value": null,
+        "label": "Web URL",
+        "placeholder": ""
+      },
+      {
+        "name": "modified_at",
+        "type": "string",
+        "value": null,
+        "label": "Modified At",
+        "placeholder": ""
+      },
+      {
+        "name": "presentation",
+        "type": "string",
+        "value": null,
+        "label": "Full Metadata (JSON)",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "microsoft/powerpoint/list_slides": {
+    "hash": "f3e95fed57edefe2b3cbe04eeca730ff00a6baaa4e678989356fedb9c33e8e90",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Preview Presentation",
+    "description": "Get a preview URL and metadata for a PowerPoint presentation",
+    "website": "https://www.flomation.co",
+    "icon": "display+list",
+    "date": "04/06/2026",
+    "type": 2,
+    "category": {
+      "name": "Microsoft",
+      "icon": "microsoft",
+      "description": "Microsoft 365 integrations"
+    },
+    "sub_category": {
+      "name": "PowerPoint",
+      "icon": "display",
+      "description": "Microsoft PowerPoint Online presentation operations"
+    },
+    "inputs": [
+      {
+        "name": "item_id",
+        "type": "string",
+        "value": null,
+        "label": "Presentation Item ID",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "account",
+        "type": "string",
+        "value": null,
+        "label": "Microsoft Account (email)",
+        "placeholder": ""
+      },
+      {
+        "name": "credential",
+        "type": "string",
+        "value": null,
+        "label": "Microsoft OAuth Credential",
+        "placeholder": "${credentials.MICROSOFT_ONEDRIVE}"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "preview_url",
+        "type": "string",
+        "value": null,
+        "label": "Preview URL",
+        "placeholder": ""
+      },
+      {
+        "name": "name",
+        "type": "string",
+        "value": null,
+        "label": "Name",
+        "placeholder": ""
+      },
+      {
+        "name": "web_url",
+        "type": "string",
+        "value": null,
+        "label": "Web URL",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "microsoft/powerpoint/upload": {
+    "hash": "bc212d6f085f64bf57d97173fadb00870afa226af5859dcd17d9e8033e82e04e",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Upload Presentation",
+    "description": "Upload a PowerPoint presentation to OneDrive",
+    "website": "https://www.flomation.co",
+    "icon": "display+arrow-up",
+    "date": "04/06/2026",
+    "type": 2,
+    "category": {
+      "name": "Microsoft",
+      "icon": "microsoft",
+      "description": "Microsoft 365 integrations"
+    },
+    "sub_category": {
+      "name": "PowerPoint",
+      "icon": "display",
+      "description": "Microsoft PowerPoint Online presentation operations"
+    },
+    "inputs": [
+      {
+        "name": "filename",
+        "type": "string",
+        "value": null,
+        "label": "Filename",
+        "placeholder": "presentation.pptx",
+        "required": true
+      },
+      {
+        "name": "content",
+        "type": "text",
+        "value": null,
+        "label": "File Content (base64)",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "folder_path",
+        "type": "string",
+        "value": null,
+        "label": "Folder Path",
+        "placeholder": ""
+      },
+      {
+        "name": "account",
+        "type": "string",
+        "value": null,
+        "label": "Microsoft Account (email)",
+        "placeholder": ""
+      },
+      {
+        "name": "credential",
+        "type": "string",
+        "value": null,
+        "label": "Microsoft OAuth Credential",
+        "placeholder": "${credentials.MICROSOFT_ONEDRIVE}"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "item_id",
+        "type": "string",
+        "value": null,
+        "label": "Item ID",
+        "placeholder": ""
+      },
+      {
+        "name": "web_url",
+        "type": "string",
+        "value": null,
+        "label": "Web URL",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
   "microsoft/sharepoint/create_list_item": {
     "hash": "68edded4cb9a285150faaefe655d6360712516ff73ef26360a8100ecd57e00d4",
     "author": "Andy Esser",
@@ -19225,6 +19819,430 @@
         "type": "string",
         "value": null,
         "label": "Message ID",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "microsoft/word/create": {
+    "hash": "5cde7ae07a05fed6e334ff08b1090a508c399b7ab88ea839f707fae1df048503",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Create Document",
+    "description": "Create a new empty Word document in OneDrive",
+    "website": "https://www.flomation.co",
+    "icon": "file-lines+plus",
+    "date": "04/06/2026",
+    "type": 2,
+    "category": {
+      "name": "Microsoft",
+      "icon": "microsoft",
+      "description": "Microsoft 365 integrations"
+    },
+    "sub_category": {
+      "name": "Word",
+      "icon": "file-lines",
+      "description": "Microsoft Word Online document operations"
+    },
+    "inputs": [
+      {
+        "name": "filename",
+        "type": "string",
+        "value": null,
+        "label": "Filename",
+        "placeholder": "document.docx",
+        "required": true
+      },
+      {
+        "name": "folder_path",
+        "type": "string",
+        "value": null,
+        "label": "Folder Path",
+        "placeholder": ""
+      },
+      {
+        "name": "account",
+        "type": "string",
+        "value": null,
+        "label": "Microsoft Account (email)",
+        "placeholder": ""
+      },
+      {
+        "name": "credential",
+        "type": "string",
+        "value": null,
+        "label": "Microsoft OAuth Credential",
+        "placeholder": "${credentials.MICROSOFT_ONEDRIVE}"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "item_id",
+        "type": "string",
+        "value": null,
+        "label": "Item ID",
+        "placeholder": ""
+      },
+      {
+        "name": "web_url",
+        "type": "string",
+        "value": null,
+        "label": "Web URL",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "microsoft/word/get_metadata": {
+    "hash": "752bab5ae3bd29dd7e47b8bf2257f6c13a715db2edde4769ec6d7d78bed7da1b",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Get Document Metadata",
+    "description": "Retrieve metadata for a Word document in OneDrive",
+    "website": "https://www.flomation.co",
+    "icon": "file-lines+eye",
+    "date": "04/06/2026",
+    "type": 2,
+    "category": {
+      "name": "Microsoft",
+      "icon": "microsoft",
+      "description": "Microsoft 365 integrations"
+    },
+    "sub_category": {
+      "name": "Word",
+      "icon": "file-lines",
+      "description": "Microsoft Word Online document operations"
+    },
+    "inputs": [
+      {
+        "name": "item_id",
+        "type": "string",
+        "value": null,
+        "label": "Document Item ID",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "account",
+        "type": "string",
+        "value": null,
+        "label": "Microsoft Account (email)",
+        "placeholder": ""
+      },
+      {
+        "name": "credential",
+        "type": "string",
+        "value": null,
+        "label": "Microsoft OAuth Credential",
+        "placeholder": "${credentials.MICROSOFT_ONEDRIVE}"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "name",
+        "type": "string",
+        "value": null,
+        "label": "Name",
+        "placeholder": ""
+      },
+      {
+        "name": "size",
+        "type": "string",
+        "value": null,
+        "label": "Size (bytes)",
+        "placeholder": ""
+      },
+      {
+        "name": "created_at",
+        "type": "string",
+        "value": null,
+        "label": "Created At",
+        "placeholder": ""
+      },
+      {
+        "name": "modified_at",
+        "type": "string",
+        "value": null,
+        "label": "Modified At",
+        "placeholder": ""
+      },
+      {
+        "name": "created_by",
+        "type": "string",
+        "value": null,
+        "label": "Created By",
+        "placeholder": ""
+      },
+      {
+        "name": "modified_by",
+        "type": "string",
+        "value": null,
+        "label": "Modified By",
+        "placeholder": ""
+      },
+      {
+        "name": "web_url",
+        "type": "string",
+        "value": null,
+        "label": "Web URL",
+        "placeholder": ""
+      },
+      {
+        "name": "mime_type",
+        "type": "string",
+        "value": null,
+        "label": "MIME Type",
+        "placeholder": ""
+      },
+      {
+        "name": "document",
+        "type": "string",
+        "value": null,
+        "label": "Full Metadata (JSON)",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "microsoft/word/read": {
+    "hash": "5ff4c29ed405b497ed284610688cccb36e109ef7ca432dbaa1541b98ac176d48",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Read Document",
+    "description": "Download a Word document as HTML or PDF from OneDrive",
+    "website": "https://www.flomation.co",
+    "icon": "file-lines+eye",
+    "date": "04/06/2026",
+    "type": 2,
+    "category": {
+      "name": "Microsoft",
+      "icon": "microsoft",
+      "description": "Microsoft 365 integrations"
+    },
+    "sub_category": {
+      "name": "Word",
+      "icon": "file-lines",
+      "description": "Microsoft Word Online document operations"
+    },
+    "inputs": [
+      {
+        "name": "item_id",
+        "type": "string",
+        "value": null,
+        "label": "Document Item ID",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "format",
+        "type": "string",
+        "value": null,
+        "label": "Output Format",
+        "placeholder": "html",
+        "options": [
+          {
+            "name": "HTML",
+            "value": "html"
+          },
+          {
+            "name": "PDF",
+            "value": "pdf"
+          }
+        ]
+      },
+      {
+        "name": "account",
+        "type": "string",
+        "value": null,
+        "label": "Microsoft Account (email)",
+        "placeholder": ""
+      },
+      {
+        "name": "credential",
+        "type": "string",
+        "value": null,
+        "label": "Microsoft OAuth Credential",
+        "placeholder": "${credentials.MICROSOFT_ONEDRIVE}"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "content",
+        "type": "string",
+        "value": null,
+        "label": "Content",
+        "placeholder": ""
+      },
+      {
+        "name": "title",
+        "type": "string",
+        "value": null,
+        "label": "Document Title",
+        "placeholder": ""
+      },
+      {
+        "name": "web_url",
+        "type": "string",
+        "value": null,
+        "label": "Web URL",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "microsoft/word/replace_text": {
+    "hash": "40a91b17cb818424c0947fa6e3bf9cdc8dfaa89d7b6a465659233390063532d3",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Replace Text",
+    "description": "Find and replace text in a Word document (via HTML conversion)",
+    "website": "https://www.flomation.co",
+    "icon": "file-lines+pencil",
+    "date": "04/06/2026",
+    "type": 2,
+    "category": {
+      "name": "Microsoft",
+      "icon": "microsoft",
+      "description": "Microsoft 365 integrations"
+    },
+    "sub_category": {
+      "name": "Word",
+      "icon": "file-lines",
+      "description": "Microsoft Word Online document operations"
+    },
+    "inputs": [
+      {
+        "name": "item_id",
+        "type": "string",
+        "value": null,
+        "label": "Document Item ID",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "search",
+        "type": "string",
+        "value": null,
+        "label": "Search Text",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "replace",
+        "type": "string",
+        "value": null,
+        "label": "Replace With",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "account",
+        "type": "string",
+        "value": null,
+        "label": "Microsoft Account (email)",
+        "placeholder": ""
+      },
+      {
+        "name": "credential",
+        "type": "string",
+        "value": null,
+        "label": "Microsoft OAuth Credential",
+        "placeholder": "${credentials.MICROSOFT_ONEDRIVE}"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "content",
+        "type": "string",
+        "value": null,
+        "label": "Modified HTML Content",
+        "placeholder": ""
+      },
+      {
+        "name": "replacements",
+        "type": "string",
+        "value": null,
+        "label": "Replacement Count",
         "placeholder": ""
       },
       {

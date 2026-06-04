@@ -197,6 +197,12 @@ import (
 	microsoft_outlook_reply "flomation.app/automate/executor/actions/microsoft/outlook/reply"
 	microsoft_outlook_search_emails "flomation.app/automate/executor/actions/microsoft/outlook/search_emails"
 	microsoft_outlook_send_email "flomation.app/automate/executor/actions/microsoft/outlook/send_email"
+	microsoft_powerpoint_create "flomation.app/automate/executor/actions/microsoft/powerpoint/create"
+	microsoft_powerpoint_download "flomation.app/automate/executor/actions/microsoft/powerpoint/download"
+	microsoft_powerpoint_export_slide "flomation.app/automate/executor/actions/microsoft/powerpoint/export_slide"
+	microsoft_powerpoint_get "flomation.app/automate/executor/actions/microsoft/powerpoint/get"
+	microsoft_powerpoint_list_slides "flomation.app/automate/executor/actions/microsoft/powerpoint/list_slides"
+	microsoft_powerpoint_upload "flomation.app/automate/executor/actions/microsoft/powerpoint/upload"
 	microsoft_sharepoint_create_list_item "flomation.app/automate/executor/actions/microsoft/sharepoint/create_list_item"
 	microsoft_sharepoint_delete_list_item "flomation.app/automate/executor/actions/microsoft/sharepoint/delete_list_item"
 	microsoft_sharepoint_get_list_items "flomation.app/automate/executor/actions/microsoft/sharepoint/get_list_items"
@@ -209,6 +215,10 @@ import (
 	microsoft_teams_list_teams "flomation.app/automate/executor/actions/microsoft/teams/list_teams"
 	microsoft_teams_send_channel_message "flomation.app/automate/executor/actions/microsoft/teams/send_channel_message"
 	microsoft_teams_send_chat_message "flomation.app/automate/executor/actions/microsoft/teams/send_chat_message"
+	microsoft_word_create "flomation.app/automate/executor/actions/microsoft/word/create"
+	microsoft_word_get_metadata "flomation.app/automate/executor/actions/microsoft/word/get_metadata"
+	microsoft_word_read "flomation.app/automate/executor/actions/microsoft/word/read"
+	microsoft_word_replace_text "flomation.app/automate/executor/actions/microsoft/word/replace_text"
 	nosql_mongodb "flomation.app/automate/executor/actions/nosql/mongodb"
 	nosql_redis "flomation.app/automate/executor/actions/nosql/redis"
 	notion_add_comment "flomation.app/automate/executor/actions/notion/add_comment"
@@ -509,6 +519,12 @@ var Actions = map[string]core.Action{
 	"microsoft/outlook/reply":               microsoft_outlook_reply.Execute,
 	"microsoft/outlook/search_emails":       microsoft_outlook_search_emails.Execute,
 	"microsoft/outlook/send_email":          microsoft_outlook_send_email.Execute,
+	"microsoft/powerpoint/create":           microsoft_powerpoint_create.Execute,
+	"microsoft/powerpoint/download":         microsoft_powerpoint_download.Execute,
+	"microsoft/powerpoint/export_slide":     microsoft_powerpoint_export_slide.Execute,
+	"microsoft/powerpoint/get":              microsoft_powerpoint_get.Execute,
+	"microsoft/powerpoint/list_slides":      microsoft_powerpoint_list_slides.Execute,
+	"microsoft/powerpoint/upload":           microsoft_powerpoint_upload.Execute,
 	"microsoft/sharepoint/create_list_item": microsoft_sharepoint_create_list_item.Execute,
 	"microsoft/sharepoint/delete_list_item": microsoft_sharepoint_delete_list_item.Execute,
 	"microsoft/sharepoint/get_list_items":   microsoft_sharepoint_get_list_items.Execute,
@@ -521,6 +537,10 @@ var Actions = map[string]core.Action{
 	"microsoft/teams/list_teams":            microsoft_teams_list_teams.Execute,
 	"microsoft/teams/send_channel_message":  microsoft_teams_send_channel_message.Execute,
 	"microsoft/teams/send_chat_message":     microsoft_teams_send_chat_message.Execute,
+	"microsoft/word/create":                 microsoft_word_create.Execute,
+	"microsoft/word/get_metadata":           microsoft_word_get_metadata.Execute,
+	"microsoft/word/read":                   microsoft_word_read.Execute,
+	"microsoft/word/replace_text":           microsoft_word_replace_text.Execute,
 	"nosql/mongodb":                         nosql_mongodb.Execute,
 	"nosql/redis":                           nosql_redis.Execute,
 	"notion/add_comment":                    notion_add_comment.Execute,
