@@ -16,7 +16,7 @@ const (
 	Name         = "List Folders"
 	Description  = "List mail folders in an Outlook mailbox"
 	Website      = "https://www.flomation.co"
-	Icon         = "folder"
+	Icon         = "folder-tree"
 	Date         = "03/06/2026"
 	Type         = core.ActionTypeAction
 )

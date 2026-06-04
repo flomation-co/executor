@@ -15,7 +15,7 @@ const (
 	Name         = "Reply to Email"
 	Description  = "Reply to an Outlook email message"
 	Website      = "https://www.flomation.co"
-	Icon         = "reply"
+	Icon         = "reply-all"
 	Date         = "03/06/2026"
 	Type         = core.ActionTypeAction
 )

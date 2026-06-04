@@ -16,7 +16,7 @@ const (
 	Name         = "Forward Email"
 	Description  = "Forward an Outlook email to other recipients"
 	Website      = "https://www.flomation.co"
-	Icon         = "share"
+	Icon         = "share-from-square"
 	Date         = "03/06/2026"
 	Type         = core.ActionTypeAction
 )

@@ -16,7 +16,7 @@ const (
 	Name         = "List Attachments"
 	Description  = "List attachments on an Outlook email message"
 	Website      = "https://www.flomation.co"
-	Icon         = "paperclip"
+	Icon         = "envelope-circle-check"
 	Date         = "03/06/2026"
 	Type         = core.ActionTypeAction
 )

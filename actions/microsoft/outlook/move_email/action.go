@@ -15,7 +15,7 @@ const (
 	Name         = "Move Email"
 	Description  = "Move an Outlook email to a different folder"
 	Website      = "https://www.flomation.co"
-	Icon         = "folder"
+	Icon         = "folder-open"
 	Date         = "03/06/2026"
 	Type         = core.ActionTypeAction
 )

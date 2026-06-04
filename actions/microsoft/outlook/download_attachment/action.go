@@ -15,7 +15,7 @@ const (
 	Name         = "Download Attachment"
 	Description  = "Download an attachment from an Outlook email"
 	Website      = "https://www.flomation.co"
-	Icon         = "paperclip"
+	Icon         = "file-arrow-down"
 	Date         = "03/06/2026"
 	Type         = core.ActionTypeAction
 )

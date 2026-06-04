@@ -14819,13 +14819,13 @@
     ]
   },
   "microsoft/outlook/create_draft": {
-    "hash": "bd7938ef7fb53cfa02a8afe6f331a562c413591de69edff407e35fd7026253d7",
+    "hash": "dbc9cc2bf38c8da5629ec7beea4839c05bc94862bb57c664be56fd67f35aa16a",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Create Draft",
     "description": "Create a draft email in Outlook",
     "website": "https://www.flomation.co",
-    "icon": "envelope",
+    "icon": "file-pen",
     "date": "03/06/2026",
     "type": 2,
     "category": {
@@ -15002,13 +15002,13 @@
     ]
   },
   "microsoft/outlook/download_attachment": {
-    "hash": "5d754985e89f5fbf6ed6b878ce4e4a37b27aa71adaed3615b45c45e85cf4483c",
+    "hash": "0801c1de94d305fc298c3933b4ed66266ed151fb7837888f11b4cf666cbdef43",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Download Attachment",
     "description": "Download an attachment from an Outlook email",
     "website": "https://www.flomation.co",
-    "icon": "paperclip",
+    "icon": "file-arrow-down",
     "date": "03/06/2026",
     "type": 2,
     "category": {
@@ -15106,13 +15106,13 @@
     ]
   },
   "microsoft/outlook/forward": {
-    "hash": "10f146a90d58e19b65982908fb73d92532b064bcc6dc0ff24831886012540cb2",
+    "hash": "5b54e2db907c9a0b7fa858208703ca2d8863293a2cc15a914e129aa0c8a5bdb4",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Forward Email",
     "description": "Forward an Outlook email to other recipients",
     "website": "https://www.flomation.co",
-    "icon": "share",
+    "icon": "share-from-square",
     "date": "03/06/2026",
     "type": 2,
     "category": {
@@ -15189,13 +15189,13 @@
     ]
   },
   "microsoft/outlook/list_attachments": {
-    "hash": "3cd755974cd0cf59d39c6d1e3cbf37d3c1afab34442f8da132fb22457f0f64b5",
+    "hash": "b83949ba8307dcd0ce166911b4518cd79406bc0328d16c484eae6794fc02a00a",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "List Attachments",
     "description": "List attachments on an Outlook email message",
     "website": "https://www.flomation.co",
-    "icon": "paperclip",
+    "icon": "envelope-circle-check",
     "date": "03/06/2026",
     "type": 2,
     "category": {
@@ -15271,13 +15271,13 @@
     ]
   },
   "microsoft/outlook/list_emails": {
-    "hash": "c28f21026ec1e7dcfb993addf747008f716211f4544b3010428aac3be09f2cdc",
+    "hash": "641c0ff563de467016293f68dd837896edb008de449eadc6d3c8928388af6c72",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "List Emails",
     "description": "List emails from an Outlook mailbox or folder",
     "website": "https://www.flomation.co",
-    "icon": "envelope",
+    "icon": "envelopes-bulk",
     "date": "03/06/2026",
     "type": 2,
     "category": {
@@ -15359,13 +15359,13 @@
     ]
   },
   "microsoft/outlook/list_folders": {
-    "hash": "fad4a13fcf95be147f3c37d17fa316c891e510533c22f1267ccd22b7c82ae361",
+    "hash": "391212ccea51e91953aa6e67e22f87915746140a7cfc50bd8d882c966fa014b3",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "List Folders",
     "description": "List mail folders in an Outlook mailbox",
     "website": "https://www.flomation.co",
-    "icon": "folder",
+    "icon": "folder-tree",
     "date": "03/06/2026",
     "type": 2,
     "category": {
@@ -15440,13 +15440,13 @@
     ]
   },
   "microsoft/outlook/move_email": {
-    "hash": "a12aa9edff83e71c552a43a8d25a58f5e8b9998e44b91281ce5cd09439f191d2",
+    "hash": "9f0c2244a795ddc65adecaadc3a8ea72800cc53185d3945d2eb3e14673b6bc77",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Move Email",
     "description": "Move an Outlook email to a different folder",
     "website": "https://www.flomation.co",
-    "icon": "folder",
+    "icon": "folder-open",
     "date": "03/06/2026",
     "type": 2,
     "category": {
@@ -15516,13 +15516,13 @@
     ]
   },
   "microsoft/outlook/read_email": {
-    "hash": "5bf0d595d237b8bf3832ba54d2c5ff9cdfd5e7121c2ab8be6b495ab4ba425b94",
+    "hash": "6f45c33f5f585824962878d2627b4ca96e32826745e57296970428561a025d1b",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Read Email",
     "description": "Read the full content of an Outlook email message",
     "website": "https://www.flomation.co",
-    "icon": "envelope",
+    "icon": "envelope-open-text",
     "date": "03/06/2026",
     "type": 2,
     "category": {
@@ -15626,13 +15626,13 @@
     ]
   },
   "microsoft/outlook/reply": {
-    "hash": "3655af8e1a9753b845c598a4d56bf5c62a916a486d10ab6f05cba0bd253704f5",
+    "hash": "d753b7a86efc26d5aba28ce9aace61196090b882473f418af2608bbefbaf1ac6",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Reply to Email",
     "description": "Reply to an Outlook email message",
     "website": "https://www.flomation.co",
-    "icon": "reply",
+    "icon": "reply-all",
     "date": "03/06/2026",
     "type": 2,
     "category": {

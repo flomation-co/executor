@@ -16,7 +16,7 @@ const (
 	Name         = "Create Draft"
 	Description  = "Create a draft email in Outlook"
 	Website      = "https://www.flomation.co"
-	Icon         = "envelope"
+	Icon         = "file-pen"
 	Date         = "03/06/2026"
 	Type         = core.ActionTypeAction
 )

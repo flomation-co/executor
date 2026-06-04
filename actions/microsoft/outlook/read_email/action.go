@@ -15,7 +15,7 @@ const (
 	Name         = "Read Email"
 	Description  = "Read the full content of an Outlook email message"
 	Website      = "https://www.flomation.co"
-	Icon         = "envelope"
+	Icon         = "envelope-open-text"
 	Date         = "03/06/2026"
 	Type         = core.ActionTypeAction
 )
