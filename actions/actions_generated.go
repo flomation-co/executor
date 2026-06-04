@@ -253,6 +253,7 @@ import (
 	trigger_image "flomation.app/automate/executor/actions/trigger/image"
 	trigger_linkedin_poll "flomation.app/automate/executor/actions/trigger/linkedin_poll"
 	trigger_manual "flomation.app/automate/executor/actions/trigger/manual"
+	trigger_microsoft_outlook "flomation.app/automate/executor/actions/trigger/microsoft_outlook"
 	trigger_qr "flomation.app/automate/executor/actions/trigger/qr"
 	trigger_s3 "flomation.app/automate/executor/actions/trigger/s3"
 	trigger_schedule "flomation.app/automate/executor/actions/trigger/schedule"
@@ -537,6 +538,7 @@ var Actions = map[string]core.Action{
 	"trigger/image":                         trigger_image.Execute,
 	"trigger/linkedin_poll":                 trigger_linkedin_poll.Execute,
 	"trigger/manual":                        trigger_manual.Execute,
+	"trigger/microsoft_outlook":             trigger_microsoft_outlook.Execute,
 	"trigger/qr":                            trigger_qr.Execute,
 	"trigger/s3":                            trigger_s3.Execute,
 	"trigger/schedule":                      trigger_schedule.Execute,

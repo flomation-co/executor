@@ -22726,6 +22726,138 @@
       }
     ]
   },
+  "trigger/microsoft_outlook": {
+    "hash": "c866d4730356fc7d8b9ef0d9e08afe60c1e8fabbe232a08c1ffa9fa6fc5c43c8",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Microsoft Outlook Trigger",
+    "description": "Triggers a flow when a new email arrives in a connected Microsoft 365 account",
+    "website": "https://www.flomation.co",
+    "icon": "microsoft+envelope",
+    "date": "04/06/2026",
+    "type": 1,
+    "category": {
+      "name": "Triggers",
+      "icon": "bolt-lightning",
+      "description": "Start a Flow"
+    },
+    "inputs": [
+      {
+        "name": "folder_id",
+        "type": "string",
+        "value": null,
+        "label": "Folder ID",
+        "placeholder": "Inbox (leave empty for Inbox)"
+      },
+      {
+        "name": "filter",
+        "type": "string",
+        "value": null,
+        "label": "OData Filter",
+        "placeholder": "isRead eq false"
+      },
+      {
+        "name": "account",
+        "type": "string",
+        "value": null,
+        "label": "Account Filter (email or label)",
+        "placeholder": ""
+      }
+    ],
+    "outputs": [
+      {
+        "name": "email_id",
+        "type": "string",
+        "value": null,
+        "label": "Email ID",
+        "placeholder": ""
+      },
+      {
+        "name": "conversation_id",
+        "type": "string",
+        "value": null,
+        "label": "Conversation ID",
+        "placeholder": ""
+      },
+      {
+        "name": "from",
+        "type": "string",
+        "value": null,
+        "label": "From",
+        "placeholder": ""
+      },
+      {
+        "name": "to",
+        "type": "string",
+        "value": null,
+        "label": "To",
+        "placeholder": ""
+      },
+      {
+        "name": "subject",
+        "type": "string",
+        "value": null,
+        "label": "Subject",
+        "placeholder": ""
+      },
+      {
+        "name": "body_preview",
+        "type": "string",
+        "value": null,
+        "label": "Body Preview",
+        "placeholder": ""
+      },
+      {
+        "name": "body",
+        "type": "string",
+        "value": null,
+        "label": "Body",
+        "placeholder": ""
+      },
+      {
+        "name": "received_at",
+        "type": "string",
+        "value": null,
+        "label": "Received At",
+        "placeholder": ""
+      },
+      {
+        "name": "has_attachments",
+        "type": "boolean",
+        "value": null,
+        "label": "Has Attachments",
+        "placeholder": ""
+      },
+      {
+        "name": "importance",
+        "type": "string",
+        "value": null,
+        "label": "Importance",
+        "placeholder": ""
+      },
+      {
+        "name": "is_read",
+        "type": "boolean",
+        "value": null,
+        "label": "Is Read",
+        "placeholder": ""
+      },
+      {
+        "name": "account",
+        "type": "string",
+        "value": null,
+        "label": "Account",
+        "placeholder": ""
+      },
+      {
+        "name": "triggered_at",
+        "type": "string",
+        "value": null,
+        "label": "Triggered At",
+        "placeholder": ""
+      }
+    ]
+  },
   "trigger/qr": {
     "hash": "a34973effbc20e2644053abb6892aff28ad00ada381f1ec80406b3fb4b21578e",
     "author": "Andy Esser",
