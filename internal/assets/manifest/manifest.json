@@ -16120,6 +16120,652 @@
       }
     ]
   },
+  "microsoft/excel/append_rows": {
+    "hash": "83c0c8c574d11f71072175ce3a4d34aef3580bdce80483925eff32ed36ff99e6",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Append Rows",
+    "description": "Append rows to a table in a Microsoft Excel Online workbook",
+    "website": "https://www.flomation.co",
+    "icon": "table+plus",
+    "date": "04/06/2026",
+    "type": 2,
+    "category": {
+      "name": "Microsoft",
+      "icon": "microsoft",
+      "description": "Microsoft 365 integrations"
+    },
+    "sub_category": {
+      "name": "Excel",
+      "icon": "table",
+      "description": "Microsoft Excel Online spreadsheet operations"
+    },
+    "inputs": [
+      {
+        "name": "item_id",
+        "type": "string",
+        "value": null,
+        "label": "Workbook Item ID",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "table_name",
+        "type": "string",
+        "value": null,
+        "label": "Table Name",
+        "placeholder": "Table1",
+        "required": true
+      },
+      {
+        "name": "values",
+        "type": "text",
+        "value": null,
+        "label": "Row Values (JSON 2D array)",
+        "placeholder": "[[\"Alice\",30],[\"Bob\",25]]",
+        "required": true
+      },
+      {
+        "name": "account",
+        "type": "string",
+        "value": null,
+        "label": "Microsoft Account (email)",
+        "placeholder": ""
+      },
+      {
+        "name": "credential",
+        "type": "string",
+        "value": null,
+        "label": "Microsoft OAuth Credential",
+        "placeholder": "${credentials.MICROSOFT_EXCEL}"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "row_index",
+        "type": "string",
+        "value": null,
+        "label": "Row Index",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "microsoft/excel/clear_range": {
+    "hash": "2776ac9a8b78d5bdeed4af53f80319cd78492d9ca52eee787d6718f0e38dec2d",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Clear Range",
+    "description": "Clear contents or formatting from a cell range in an Excel workbook",
+    "website": "https://www.flomation.co",
+    "icon": "table+trash",
+    "date": "04/06/2026",
+    "type": 2,
+    "category": {
+      "name": "Microsoft",
+      "icon": "microsoft",
+      "description": "Microsoft 365 integrations"
+    },
+    "sub_category": {
+      "name": "Excel",
+      "icon": "table",
+      "description": "Microsoft Excel Online spreadsheet operations"
+    },
+    "inputs": [
+      {
+        "name": "item_id",
+        "type": "string",
+        "value": null,
+        "label": "Workbook Item ID",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "sheet",
+        "type": "string",
+        "value": null,
+        "label": "Worksheet Name",
+        "placeholder": "Sheet1",
+        "required": true
+      },
+      {
+        "name": "range_address",
+        "type": "string",
+        "value": null,
+        "label": "Cell Range",
+        "placeholder": "A1:D10",
+        "required": true
+      },
+      {
+        "name": "apply_to",
+        "type": "string",
+        "value": null,
+        "label": "Clear Mode",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "All",
+            "value": "All"
+          },
+          {
+            "name": "Formats",
+            "value": "Formats"
+          },
+          {
+            "name": "Contents",
+            "value": "Contents"
+          }
+        ]
+      },
+      {
+        "name": "account",
+        "type": "string",
+        "value": null,
+        "label": "Microsoft Account (email)",
+        "placeholder": ""
+      },
+      {
+        "name": "credential",
+        "type": "string",
+        "value": null,
+        "label": "Microsoft OAuth Credential",
+        "placeholder": "${credentials.MICROSOFT_EXCEL}"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "microsoft/excel/create_workbook": {
+    "hash": "9cad41837efb9bedfb0906fba89135d7ad042656ad5c23ec8538b3e102d68490",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Create Workbook",
+    "description": "Create a new Excel workbook in OneDrive",
+    "website": "https://www.flomation.co",
+    "icon": "table+plus",
+    "date": "04/06/2026",
+    "type": 2,
+    "category": {
+      "name": "Microsoft",
+      "icon": "microsoft",
+      "description": "Microsoft 365 integrations"
+    },
+    "sub_category": {
+      "name": "Excel",
+      "icon": "table",
+      "description": "Microsoft Excel Online spreadsheet operations"
+    },
+    "inputs": [
+      {
+        "name": "filename",
+        "type": "string",
+        "value": null,
+        "label": "Filename",
+        "placeholder": "report.xlsx",
+        "required": true
+      },
+      {
+        "name": "folder_path",
+        "type": "string",
+        "value": null,
+        "label": "Folder Path",
+        "placeholder": "Documents/Reports"
+      },
+      {
+        "name": "account",
+        "type": "string",
+        "value": null,
+        "label": "Microsoft Account (email)",
+        "placeholder": ""
+      },
+      {
+        "name": "credential",
+        "type": "string",
+        "value": null,
+        "label": "Microsoft OAuth Credential",
+        "placeholder": "${credentials.MICROSOFT_EXCEL}"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "item_id",
+        "type": "string",
+        "value": null,
+        "label": "Item ID",
+        "placeholder": ""
+      },
+      {
+        "name": "web_url",
+        "type": "string",
+        "value": null,
+        "label": "Web URL",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "microsoft/excel/get_metadata": {
+    "hash": "4c212278eccba1569016431bb3b7bca8906c5c4dd3f0093d2998f15b2bbd302b",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Get Workbook Metadata",
+    "description": "Retrieve metadata for a Microsoft Excel Online workbook",
+    "website": "https://www.flomation.co",
+    "icon": "table+eye",
+    "date": "04/06/2026",
+    "type": 2,
+    "category": {
+      "name": "Microsoft",
+      "icon": "microsoft",
+      "description": "Microsoft 365 integrations"
+    },
+    "sub_category": {
+      "name": "Excel",
+      "icon": "table",
+      "description": "Microsoft Excel Online spreadsheet operations"
+    },
+    "inputs": [
+      {
+        "name": "item_id",
+        "type": "string",
+        "value": null,
+        "label": "Workbook Item ID",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "account",
+        "type": "string",
+        "value": null,
+        "label": "Microsoft Account (email)",
+        "placeholder": ""
+      },
+      {
+        "name": "credential",
+        "type": "string",
+        "value": null,
+        "label": "Microsoft OAuth Credential",
+        "placeholder": "${credentials.MICROSOFT_EXCEL}"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "workbook",
+        "type": "string",
+        "value": null,
+        "label": "Workbook (JSON)",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "microsoft/excel/list_worksheets": {
+    "hash": "36cddee3f485bc65299d071a0e5453632747023398bbbd2f815a8544422251a0",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "List Worksheets",
+    "description": "List all worksheets in a Microsoft Excel Online workbook",
+    "website": "https://www.flomation.co",
+    "icon": "table+list",
+    "date": "04/06/2026",
+    "type": 2,
+    "category": {
+      "name": "Microsoft",
+      "icon": "microsoft",
+      "description": "Microsoft 365 integrations"
+    },
+    "sub_category": {
+      "name": "Excel",
+      "icon": "table",
+      "description": "Microsoft Excel Online spreadsheet operations"
+    },
+    "inputs": [
+      {
+        "name": "item_id",
+        "type": "string",
+        "value": null,
+        "label": "Workbook Item ID",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "account",
+        "type": "string",
+        "value": null,
+        "label": "Microsoft Account (email)",
+        "placeholder": ""
+      },
+      {
+        "name": "credential",
+        "type": "string",
+        "value": null,
+        "label": "Microsoft OAuth Credential",
+        "placeholder": "${credentials.MICROSOFT_EXCEL}"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "worksheets",
+        "type": "string",
+        "value": null,
+        "label": "Worksheets (JSON)",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "string",
+        "value": null,
+        "label": "Worksheet Count",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "microsoft/excel/read_range": {
+    "hash": "c3271876eb8bb65d0910cd3098e4f498e7db3d482170840b6b6272515dfd032f",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Read Range",
+    "description": "Read a cell range from a Microsoft Excel Online workbook",
+    "website": "https://www.flomation.co",
+    "icon": "table+eye",
+    "date": "04/06/2026",
+    "type": 2,
+    "category": {
+      "name": "Microsoft",
+      "icon": "microsoft",
+      "description": "Microsoft 365 integrations"
+    },
+    "sub_category": {
+      "name": "Excel",
+      "icon": "table",
+      "description": "Microsoft Excel Online spreadsheet operations"
+    },
+    "inputs": [
+      {
+        "name": "item_id",
+        "type": "string",
+        "value": null,
+        "label": "Workbook Item ID",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "sheet",
+        "type": "string",
+        "value": null,
+        "label": "Worksheet Name",
+        "placeholder": "Sheet1",
+        "required": true
+      },
+      {
+        "name": "range_address",
+        "type": "string",
+        "value": null,
+        "label": "Cell Range",
+        "placeholder": "A1:D10",
+        "required": true
+      },
+      {
+        "name": "account",
+        "type": "string",
+        "value": null,
+        "label": "Microsoft Account (email)",
+        "placeholder": ""
+      },
+      {
+        "name": "credential",
+        "type": "string",
+        "value": null,
+        "label": "Microsoft OAuth Credential",
+        "placeholder": "${credentials.MICROSOFT_EXCEL}"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "values",
+        "type": "string",
+        "value": null,
+        "label": "Values (JSON 2D array)",
+        "placeholder": ""
+      },
+      {
+        "name": "row_count",
+        "type": "string",
+        "value": null,
+        "label": "Row Count",
+        "placeholder": ""
+      },
+      {
+        "name": "column_count",
+        "type": "string",
+        "value": null,
+        "label": "Column Count",
+        "placeholder": ""
+      },
+      {
+        "name": "data",
+        "type": "string",
+        "value": null,
+        "label": "Full Response (JSON)",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "microsoft/excel/write_range": {
+    "hash": "1e34c041099c031375db934afb28c251dbba6b9669f8a1fcfee87f483d399e69",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Write Range",
+    "description": "Write values to a cell range in a Microsoft Excel Online workbook",
+    "website": "https://www.flomation.co",
+    "icon": "table+pencil",
+    "date": "04/06/2026",
+    "type": 2,
+    "category": {
+      "name": "Microsoft",
+      "icon": "microsoft",
+      "description": "Microsoft 365 integrations"
+    },
+    "sub_category": {
+      "name": "Excel",
+      "icon": "table",
+      "description": "Microsoft Excel Online spreadsheet operations"
+    },
+    "inputs": [
+      {
+        "name": "item_id",
+        "type": "string",
+        "value": null,
+        "label": "Workbook Item ID",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "sheet",
+        "type": "string",
+        "value": null,
+        "label": "Worksheet Name",
+        "placeholder": "Sheet1",
+        "required": true
+      },
+      {
+        "name": "range_address",
+        "type": "string",
+        "value": null,
+        "label": "Cell Range",
+        "placeholder": "A1:D3",
+        "required": true
+      },
+      {
+        "name": "values",
+        "type": "text",
+        "value": null,
+        "label": "Values (JSON 2D array)",
+        "placeholder": "[[\"Name\",\"Age\"],[\"Alice\",30]]",
+        "required": true
+      },
+      {
+        "name": "account",
+        "type": "string",
+        "value": null,
+        "label": "Microsoft Account (email)",
+        "placeholder": ""
+      },
+      {
+        "name": "credential",
+        "type": "string",
+        "value": null,
+        "label": "Microsoft OAuth Credential",
+        "placeholder": "${credentials.MICROSOFT_EXCEL}"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
   "microsoft/onedrive/copy_file": {
     "hash": "90afb16bc4ee439ea79b72a2c24a21f9e1f0f1e1f9a5da176ea981fb08aed489",
     "author": "Andy Esser",
