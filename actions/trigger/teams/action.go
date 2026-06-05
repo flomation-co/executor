@@ -18,7 +18,11 @@ const (
 	Type         = core.ActionTypeTrigger
 )
 
-var Inputs = [...]core.Connection{}
+var Inputs = [...]core.Connection{
+	{Name: "app_id", Type: core.ConnectionTypeString, Label: "App ID", Placeholder: "${secrets.teams_app_id}", Required: true},
+	{Name: "app_password", Type: core.ConnectionTypeString, Label: "App Password", Placeholder: "${secrets.teams_app_password}", Required: true},
+	{Name: "tenant_id", Type: core.ConnectionTypeString, Label: "Tenant ID", Placeholder: "${secrets.teams_tenant_id} (optional, single-tenant only)"},
+}
 
 var Outputs = [...]core.Connection{
 	{Name: "user_id", Type: core.ConnectionTypeString, Label: "User ID (AAD Object ID)"},

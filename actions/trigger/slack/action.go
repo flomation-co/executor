@@ -16,6 +16,17 @@ const (
 	Type         = core.ActionTypeTrigger
 )
 
+var Inputs = [...]core.Connection{
+	{Name: "mode", Type: core.ConnectionTypeString, Label: "Connection Mode", Placeholder: "events_api", Options: []core.ConnectionOption{
+		{Name: "Events API (HTTP webhooks)", Value: "events_api"},
+		{Name: "Socket Mode (WebSocket, no public URL)", Value: "socket"},
+	}},
+	{Name: "bot_token", Type: core.ConnectionTypeString, Label: "Bot Token", Placeholder: "xoxb-... or ${secrets.slack_bot_token}", Required: true},
+	{Name: "app_token", Type: core.ConnectionTypeString, Label: "App-Level Token (Socket Mode only)", Placeholder: "xapp-1-..."},
+	{Name: "signing_secret", Type: core.ConnectionTypeString, Label: "Signing Secret (Events API request verification)", Placeholder: "${secrets.slack_signing_secret}"},
+	{Name: "app_id", Type: core.ConnectionTypeString, Label: "App ID (optional)", Placeholder: "Axxxxxxxxxx"},
+}
+
 var Outputs = [...]core.Connection{
 	{Name: "user_id", Type: core.ConnectionTypeString, Label: "User ID"},
 	{Name: "user_name", Type: core.ConnectionTypeString, Label: "User Name"},

@@ -25926,7 +25926,7 @@
     ]
   },
   "trigger/email": {
-    "hash": "b79ff3e9875535ad1dce1d323778d80ac006db68186859376cef528e469c9eb0",
+    "hash": "7c5089bad7faadd188c851ab6695d11522cd9567165a78e047a78d87b953391c",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Email Trigger",
@@ -25941,6 +25941,14 @@
       "description": "Start a Flow"
     },
     "inputs": [
+      {
+        "name": "credential",
+        "type": "string",
+        "value": null,
+        "label": "Google OAuth Credential",
+        "placeholder": "${credentials.GOOGLE_GMAIL}",
+        "required": true
+      },
       {
         "name": "gmail_query",
         "type": "string",
@@ -27577,7 +27585,7 @@
     ]
   },
   "trigger/slack": {
-    "hash": "f00b9d4be8b99edae2b25e5a62e74f65ab0101ff89cf723b6101eb39327bda03",
+    "hash": "4bfe104cf7389da99c50e588bbb17393e4dc3bd1144352ec19776444d591afd6",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Slack Trigger",
@@ -27591,7 +27599,54 @@
       "icon": "bolt-lightning",
       "description": "Start a Flow"
     },
-    "inputs": null,
+    "inputs": [
+      {
+        "name": "mode",
+        "type": "string",
+        "value": null,
+        "label": "Connection Mode",
+        "placeholder": "events_api",
+        "options": [
+          {
+            "name": "Events API (HTTP webhooks)",
+            "value": "events_api"
+          },
+          {
+            "name": "Socket Mode (WebSocket, no public URL)",
+            "value": "socket"
+          }
+        ]
+      },
+      {
+        "name": "bot_token",
+        "type": "string",
+        "value": null,
+        "label": "Bot Token",
+        "placeholder": "xoxb-... or ${secrets.slack_bot_token}",
+        "required": true
+      },
+      {
+        "name": "app_token",
+        "type": "string",
+        "value": null,
+        "label": "App-Level Token (Socket Mode only)",
+        "placeholder": "xapp-1-..."
+      },
+      {
+        "name": "signing_secret",
+        "type": "string",
+        "value": null,
+        "label": "Signing Secret (Events API request verification)",
+        "placeholder": "${secrets.slack_signing_secret}"
+      },
+      {
+        "name": "app_id",
+        "type": "string",
+        "value": null,
+        "label": "App ID (optional)",
+        "placeholder": "Axxxxxxxxxx"
+      }
+    ],
     "outputs": [
       {
         "name": "user_id",
@@ -27687,7 +27742,7 @@
     ]
   },
   "trigger/teams": {
-    "hash": "731dbb34d36dd10fe481bdbb68af2e805ae330d5bafee099da425535f45b76b6",
+    "hash": "d54ee4217167952e66bcb877d8095c044c8ad9b3e630ced9820b0fffddedda8c",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Teams Trigger",
@@ -27701,7 +27756,31 @@
       "icon": "bolt-lightning",
       "description": "Start a Flow"
     },
-    "inputs": null,
+    "inputs": [
+      {
+        "name": "app_id",
+        "type": "string",
+        "value": null,
+        "label": "App ID",
+        "placeholder": "${secrets.teams_app_id}",
+        "required": true
+      },
+      {
+        "name": "app_password",
+        "type": "string",
+        "value": null,
+        "label": "App Password",
+        "placeholder": "${secrets.teams_app_password}",
+        "required": true
+      },
+      {
+        "name": "tenant_id",
+        "type": "string",
+        "value": null,
+        "label": "Tenant ID",
+        "placeholder": "${secrets.teams_tenant_id} (optional, single-tenant only)"
+      }
+    ],
     "outputs": [
       {
         "name": "user_id",
@@ -27797,7 +27876,7 @@
     ]
   },
   "trigger/telegram": {
-    "hash": "2e7bf359cc2f075fd8011b466ab5b7d56d0241b137e68c69e430dfd25794372a",
+    "hash": "e9231b43905e1f0c4d866132433fe13efff10bae0ef907c34c1066f74a739bf3",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Telegram Trigger",
@@ -27811,7 +27890,23 @@
       "icon": "bolt-lightning",
       "description": "Start a Flow"
     },
-    "inputs": null,
+    "inputs": [
+      {
+        "name": "bot_token",
+        "type": "string",
+        "value": null,
+        "label": "Bot Token",
+        "placeholder": "${secrets.telegram_bot_token}",
+        "required": true
+      },
+      {
+        "name": "allowed_chat_ids",
+        "type": "string",
+        "value": null,
+        "label": "Allowed Chat IDs (optional, comma-separated)",
+        "placeholder": "12345678, -100987654"
+      }
+    ],
     "outputs": [
       {
         "name": "chat_id",
@@ -27907,7 +28002,7 @@
     ]
   },
   "trigger/twilio_sms": {
-    "hash": "7dd8f1f631c772d217d8e9ecf5f8dbd3f2de39ddfa6951b8ae196ba0074b3ef6",
+    "hash": "780deaa5042a9ccb1084018b9050e138dc6c191cd19cbb1a8bf63fd84fb89dd4",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Twilio SMS Trigger",
@@ -27921,7 +28016,32 @@
       "icon": "bolt-lightning",
       "description": "Start a Flow"
     },
-    "inputs": null,
+    "inputs": [
+      {
+        "name": "account_sid",
+        "type": "string",
+        "value": null,
+        "label": "Twilio Account SID",
+        "placeholder": "${secrets.twilio_account_sid}",
+        "required": true
+      },
+      {
+        "name": "auth_token",
+        "type": "string",
+        "value": null,
+        "label": "Twilio Auth Token",
+        "placeholder": "${secrets.twilio_auth_token}",
+        "required": true
+      },
+      {
+        "name": "phone_number",
+        "type": "string",
+        "value": null,
+        "label": "Twilio Phone Number",
+        "placeholder": "+15551234567",
+        "required": true
+      }
+    ],
     "outputs": [
       {
         "name": "from",
@@ -27982,7 +28102,7 @@
     ]
   },
   "trigger/twilio_voice": {
-    "hash": "f84bf5b3234264851c7ced72a2a124cb789ad4de7d19750287fdc13daacd0b63",
+    "hash": "986092961e15d650f95f57b64e629e6248043ff52c9c3cacb340a2b8073a9ed4",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Twilio Voice Trigger",
@@ -27996,7 +28116,32 @@
       "icon": "bolt-lightning",
       "description": "Start a Flow"
     },
-    "inputs": null,
+    "inputs": [
+      {
+        "name": "account_sid",
+        "type": "string",
+        "value": null,
+        "label": "Twilio Account SID",
+        "placeholder": "${secrets.twilio_account_sid}",
+        "required": true
+      },
+      {
+        "name": "auth_token",
+        "type": "string",
+        "value": null,
+        "label": "Twilio Auth Token",
+        "placeholder": "${secrets.twilio_auth_token}",
+        "required": true
+      },
+      {
+        "name": "phone_number",
+        "type": "string",
+        "value": null,
+        "label": "Twilio Phone Number",
+        "placeholder": "+15551234567",
+        "required": true
+      }
+    ],
     "outputs": [
       {
         "name": "from",

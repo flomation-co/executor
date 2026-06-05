@@ -16,6 +16,11 @@ const (
 	Type         = core.ActionTypeTrigger
 )
 
+var Inputs = [...]core.Connection{
+	{Name: "bot_token", Type: core.ConnectionTypeString, Label: "Bot Token", Placeholder: "${secrets.telegram_bot_token}", Required: true},
+	{Name: "allowed_chat_ids", Type: core.ConnectionTypeString, Label: "Allowed Chat IDs (optional, comma-separated)", Placeholder: "12345678, -100987654"},
+}
+
 var Outputs = [...]core.Connection{
 	{Name: "chat_id", Type: core.ConnectionTypeString, Label: "Chat ID"},
 	{Name: "chat_type", Type: core.ConnectionTypeString, Label: "Chat Type"},
