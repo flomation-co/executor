@@ -6,12 +6,12 @@ include:
 stages:
   - prepare
   - security-scan
-  - sync
   - build
   - executor-manifest
   - rpm-publish
   - deb-publish
   - publish
+  - sync
   - docker
   - deploy
   - Sandbox
