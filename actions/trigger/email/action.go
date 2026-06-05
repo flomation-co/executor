@@ -20,6 +20,7 @@ const (
 )
 
 var Inputs = [...]core.Connection{
+	{Name: "credential", Type: core.ConnectionTypeString, Label: "Google OAuth Credential", Placeholder: "${credentials.GOOGLE_GMAIL}", Required: true},
 	{Name: "gmail_query", Type: core.ConnectionTypeString, Label: "Gmail Search Filter", Placeholder: "is:unread"},
 	{Name: "account", Type: core.ConnectionTypeString, Label: "Account Filter (email or label)"},
 }
