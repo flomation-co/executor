@@ -339,6 +339,15 @@ type Node struct {
 	Data *NodeData `json:"data"`
 }
 
+// ExecutionIdentity is a single declared channel identity for the
+// executing user, snapshot at execution start. Returned as part of
+// ${flow.identities} and surfaced to AI nodes via the system prompt.
+type ExecutionIdentity struct {
+	ChannelType string `json:"channel_type"`
+	ExternalID  string `json:"external_id"`
+	DisplayName string `json:"display_name,omitempty"`
+}
+
 // ExecutionContext holds read-only metadata about the current execution,
 // exposed to actions via ${flow.xxx} variable substitution.
 type ExecutionContext struct {
@@ -369,6 +378,18 @@ type ExecutionContext struct {
 	// preferences persist across channels and conversations. Empty when
 	// the execution is not running in an agent context.
 	AgentUserID string `json:"agent_user_id,omitempty"`
+	// UserID is the platform user_id resolved by the API's inbound
+	// pipeline — either a declared owner via user_identity, or an
+	// anonymous stub user keyed per-(org, channel, external_id). It
+	// exposes the executing user to flows via ${flow.user_id} so
+	// orchestrator logic can reason about who triggered the run.
+	UserID string `json:"user_id,omitempty"`
+	// Identities is the executing user's declared channel-identity set
+	// within OrganisationID, snapshot at execution start. Exposed to
+	// flows as ${flow.identities} (JSON-encoded). AI nodes also see
+	// these in the system prompt so they can address users by their
+	// other channel handles without an explicit fetch action.
+	Identities []ExecutionIdentity `json:"identities,omitempty"`
 	// ConversationID is the current open conversation scoped to
 	// (agent, user, channel, thread). AI actions auto-record their
 	// outbound turn into this conversation so the sequence column
@@ -453,6 +474,20 @@ func (ctx *ExecutionContext) Get(name string) string {
 		return ctx.AgentID
 	case "agent_user_id":
 		return ctx.AgentUserID
+	case "user_id":
+		return ctx.UserID
+	case "identities":
+		// JSON-encode the slice so downstream actions can either parse it
+		// or splice it into prompts as-is. Empty slice serialises to "[]"
+		// which is safe in both flows.
+		if len(ctx.Identities) == 0 {
+			return "[]"
+		}
+		b, err := json.Marshal(ctx.Identities)
+		if err != nil {
+			return "[]"
+		}
+		return string(b)
 	case "conversation_id":
 		return ctx.ConversationID
 	case "trigger_source":
