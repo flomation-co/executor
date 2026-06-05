@@ -439,7 +439,9 @@ func processPendingActions(
 			body["source_message"] = sourceMessageID
 		}
 
-		// Skip identity_link — handled by dedicated agent/offer_identity_link tool.
+		// Skip identity_link — the user-declared identities flow (R2)
+		// replaced AI-initiated linking; existing identity_link pending
+		// actions are still drained but no new ones get created.
 		if pa.Type == "identity_link" {
 			continue
 		}
@@ -605,8 +607,10 @@ func processConfirmations(
 
 			paType, _ := pa["type"].(string)
 
-			// Identity linking is handled by dedicated tools
-			// (agent/offer_identity_link). Skip it here.
+			// Identity linking is no longer AI-initiated (R2 moved
+			// channel-identity declaration onto user profile settings),
+			// so skip identity_link pending actions here — existing
+			// in-flight ones drain naturally without confirmation.
 			if paType == "identity_link" {
 				continue
 			}
