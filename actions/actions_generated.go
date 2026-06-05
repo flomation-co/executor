@@ -12,7 +12,6 @@ import (
 	agent_fulfill_commitment "flomation.app/automate/executor/actions/agent/fulfill_commitment"
 	agent_list_identities "flomation.app/automate/executor/actions/agent/list_identities"
 	agent_list_schedules "flomation.app/automate/executor/actions/agent/list_schedules"
-	agent_offer_identity_link "flomation.app/automate/executor/actions/agent/offer_identity_link"
 	agent_process_extraction "flomation.app/automate/executor/actions/agent/process_extraction"
 	agent_read_state "flomation.app/automate/executor/actions/agent/read_state"
 	agent_recall "flomation.app/automate/executor/actions/agent/recall"
@@ -343,7 +342,6 @@ var Actions = map[string]core.Action{
 	"agent/fulfill_commitment":              agent_fulfill_commitment.Execute,
 	"agent/list_identities":                 agent_list_identities.Execute,
 	"agent/list_schedules":                  agent_list_schedules.Execute,
-	"agent/offer_identity_link":             agent_offer_identity_link.Execute,
 	"agent/process_extraction":              agent_process_extraction.Execute,
 	"agent/read_state":                      agent_read_state.Execute,
 	"agent/recall":                          agent_recall.Execute,
