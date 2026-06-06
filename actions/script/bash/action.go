@@ -120,7 +120,15 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 		workDir = cwd
 	}
 
-	// 4. Write script to temp file
+	// 4. Write script to temp file. Defensively MkdirAll the workDir
+	// first: in the unsandboxed path workDir comes from os.Getwd(),
+	// which returns a stale path if an earlier action in the same
+	// flow removed the runner's execution directory or chdir'd
+	// somewhere that no longer exists. MkdirAll is a no-op when the
+	// directory is healthy.
+	if err := os.MkdirAll(workDir, 0700); err != nil {
+		return nil, fmt.Errorf("failed to ensure working directory %q: %w", workDir, err)
+	}
 	scriptPath := filepath.Join(workDir, ".flomation-script.sh")
 	if err := os.WriteFile(scriptPath, []byte(scriptContent), 0700); err != nil {
 		return nil, fmt.Errorf("failed to write script: %w", err)
