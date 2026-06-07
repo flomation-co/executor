@@ -2127,6 +2127,22 @@ func (f *Flow) executeNodeChildren(actions map[string]Action, node *Node, output
 		if err != nil {
 			return nil, err
 		}
+		// Mark traversed AFTER running the action. Without this, any
+		// grandchild's parent-resolution walk back to c would hit
+		// ExecuteNode's "cached but not traversed" branch and call
+		// executeNodeChildren(c) AGAIN — re-running the whole subtree
+		// (catastrophic for Loop nodes: re-runs every iteration; bad
+		// even for regular nodes: double-fires downstream sends, slacks,
+		// etc.). Pass 2 below traverses c's children directly via
+		// executeNodeChildren — bypassing ExecuteNode entirely — so
+		// the traversedNodes mark doesn't block legitimate traversal.
+		// Resume semantics are preserved: the start-node on resume is
+		// invoked via ExecuteNode (not via Pass 1), so it still hits
+		// the cached-but-not-traversed branch and walks correctly.
+		if f.traversedNodes == nil {
+			f.traversedNodes = make(map[string]bool)
+		}
+		f.traversedNodes[c.ID] = true
 		// Include this child's own outputs in the combined results
 		for k, v := range outputs {
 			combinedResults[k] = v
