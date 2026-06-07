@@ -45,7 +45,13 @@ var Inputs = [...]core.Connection{
 
 var Outputs = [...]core.Connection{
 	{Name: "tool_result", Type: core.ConnectionTypeString, Label: "Page Content (text)"},
+	// Mirror of tool_result under the conventional name flow authors expect
+	// when wiring this action into a regular (non-AI) flow. tool_result is
+	// the canonical AI-callable first output (per CLAUDE.md), but it reads
+	// awkwardly as a node input — ${node.content} is the natural form.
+	{Name: "content", Type: core.ConnectionTypeString, Label: "Page Content (text)"},
 	{Name: "title", Type: core.ConnectionTypeString, Label: "Page Title"},
+	{Name: "status_code", Type: core.ConnectionTypeInteger, Label: "HTTP Status"},
 	{Name: "success", Type: core.ConnectionTypeBoolean, Label: "Success"},
 	{Name: "error", Type: core.ConnectionTypeString, Label: "Error"},
 }
@@ -76,7 +82,9 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	if err != nil {
 		return map[string]interface{}{
 			"tool_result": fmt.Sprintf("Failed to create request: %v", err),
+			"content":     "",
 			"title":       "",
+			"status_code": 0,
 			"success":     false,
 			"error":       err.Error(),
 		}, nil
@@ -88,7 +96,9 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	if err != nil {
 		return map[string]interface{}{
 			"tool_result": fmt.Sprintf("Failed to fetch URL: %v", err),
+			"content":     "",
 			"title":       "",
+			"status_code": 0,
 			"success":     false,
 			"error":       err.Error(),
 		}, nil
@@ -98,7 +108,9 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	if resp.StatusCode != http.StatusOK {
 		return map[string]interface{}{
 			"tool_result": fmt.Sprintf("HTTP %d from %s", resp.StatusCode, targetURL),
+			"content":     "",
 			"title":       "",
+			"status_code": resp.StatusCode,
 			"success":     false,
 			"error":       fmt.Sprintf("HTTP %d", resp.StatusCode),
 		}, nil
@@ -128,7 +140,9 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 
 	return map[string]interface{}{
 		"tool_result": text,
+		"content":     text,
 		"title":       title,
+		"status_code": resp.StatusCode,
 		"success":     true,
 		"error":       "",
 	}, nil
