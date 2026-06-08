@@ -494,7 +494,7 @@
     ]
   },
   "agent/process_extraction": {
-    "hash": "2d0f903a211fdd3e9777287d53aa168a907af1bcca1e9f9d2f31ebffd16b7a09",
+    "hash": "e7674333559d8a514797eeaa62ae42b970e634c000ba36786db0cf77ec9cbf93",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Process Extraction Output",
@@ -28610,7 +28610,7 @@
     ]
   },
   "web/fetch": {
-    "hash": "a8a3048383073cfbcb520b93cbb6cf9d436526694036b14a8f30e4118a4e9a3b",
+    "hash": "f3e0facf647d3f7f6496a0821f47eba9902f337a76d228a56f6dc5f500d9e62f",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Web Fetch",
@@ -28650,10 +28650,24 @@
         "placeholder": ""
       },
       {
+        "name": "content",
+        "type": "string",
+        "value": null,
+        "label": "Page Content (text)",
+        "placeholder": ""
+      },
+      {
         "name": "title",
         "type": "string",
         "value": null,
         "label": "Page Title",
+        "placeholder": ""
+      },
+      {
+        "name": "status_code",
+        "type": "integer",
+        "value": null,
+        "label": "HTTP Status",
         "placeholder": ""
       },
       {
