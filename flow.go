@@ -998,11 +998,23 @@ func (f *Flow) ExecuteNode(actions map[string]Action, node *Node, environment *e
 		if f.traversedNodes[node.ID] {
 			return v, nil
 		}
-		// Action cached but children not yet traversed — proceed to Phase 2
+		// Action cached but children not yet traversed — proceed to Phase 2.
+		// EXCEPT for Loop nodes: re-entering executeNodeChildren for a loop
+		// would re-run every iteration. That happens when a loop body's
+		// parent-resolution call (loop body child → parent inputs → its
+		// parent IS the loop node) walks back to the loop node before
+		// traversedNodes has been set by the legitimate outer caller's
+		// Pass-2 traversal — Pass 1 only runs the action, never marks
+		// traversed. The fix: mark traversed and return cached without
+		// recursing. The outer caller's Pass 2 still runs the loop once,
+		// correctly, via direct executeNodeChildren.
 		if f.traversedNodes == nil {
 			f.traversedNodes = make(map[string]bool)
 		}
 		f.traversedNodes[node.ID] = true
+		if node.Data != nil && node.Data.Config.Type == ActionTypeLoop {
+			return v, nil
+		}
 		return f.executeNodeChildren(actions, node, v, environment)
 	}
 
@@ -2115,6 +2127,22 @@ func (f *Flow) executeNodeChildren(actions map[string]Action, node *Node, output
 		if err != nil {
 			return nil, err
 		}
+		// Mark traversed AFTER running the action. Without this, any
+		// grandchild's parent-resolution walk back to c would hit
+		// ExecuteNode's "cached but not traversed" branch and call
+		// executeNodeChildren(c) AGAIN — re-running the whole subtree
+		// (catastrophic for Loop nodes: re-runs every iteration; bad
+		// even for regular nodes: double-fires downstream sends, slacks,
+		// etc.). Pass 2 below traverses c's children directly via
+		// executeNodeChildren — bypassing ExecuteNode entirely — so
+		// the traversedNodes mark doesn't block legitimate traversal.
+		// Resume semantics are preserved: the start-node on resume is
+		// invoked via ExecuteNode (not via Pass 1), so it still hits
+		// the cached-but-not-traversed branch and walks correctly.
+		if f.traversedNodes == nil {
+			f.traversedNodes = make(map[string]bool)
+		}
+		f.traversedNodes[c.ID] = true
 		// Include this child's own outputs in the combined results
 		for k, v := range outputs {
 			combinedResults[k] = v
