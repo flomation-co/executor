@@ -753,8 +753,9 @@ func Load(path *string) (*Flow, error) {
 // on the trigger echoing them through as outputs so that auto-wire or the
 // whole-value-reference substitution path can pick them up downstream.
 var reservedTriggerDataKeys = map[string]bool{
-	"system_prompt": true,
-	"__node_id":     true,
+	"system_prompt":         true,
+	"__node_id":             true,
+	"__triggering_user_id":  true,
 }
 
 // InjectTriggerData merges trigger invocation data into the first trigger
