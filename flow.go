@@ -1889,6 +1889,16 @@ func (f *Flow) executeNodeChildren(actions map[string]Action, node *Node, output
 						if err != nil {
 							toolOutput = fmt.Sprintf("Tool execution error: %v", err)
 							toolErr = true
+						} else {
+							// Cross-conversation relay recording: if the
+							// tool just dispatched a messaging action
+							// (send-slack, send-telegram, ...) record
+							// the outbound against the recipient's
+							// conversation so future inbound from them
+							// surfaces the prior message in history.
+							// Lives in flow_record_outbound.go; pure
+							// post-send bookkeeping, never blocks.
+							f.recordOutboundRelay(matchedTool)
 						}
 					}
 
