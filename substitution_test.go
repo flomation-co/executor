@@ -66,3 +66,40 @@ func TestSubstitutionString_StructEncodesAsJSON(t *testing.T) {
 	got := substitutionString(point{Lat: 51.5, Lng: -0.12})
 	Expect(got).To(Equal(`{"latitude":51.5,"longitude":-0.12}`))
 }
+
+// Locks in the fix for the whole-value-reference path: when ${parent.X}
+// resolves to a non-string typed value (slice/map/struct), the Connection's
+// .String() method must JSON-encode rather than return nil. Without this,
+// actions that take string/text inputs receive an empty value and silently
+// drop the wired data — which is exactly how the PDF action lost its
+// turn-by-turn directions when steps_json was wired to ${parent.steps}.
+func TestConnectionString_NonStringValueIsJSONEncoded(t *testing.T) {
+	RegisterTestingT(t)
+
+	steps := []map[string]interface{}{
+		{"instruction": "Head north", "distance_metres": 500.0},
+	}
+	c := &Connection{Name: "steps_json", Type: ConnectionTypeText, Value: steps}
+
+	got := c.String()
+	Expect(got).ToNot(BeNil(), "String() must not return nil when Value is a non-string slice; if it does, OptionalString sees empty and the action silently skips the wired value")
+	Expect(*got).To(ContainSubstring("\"instruction\":\"Head north\""))
+	Expect(*got).To(HavePrefix("["))
+	Expect(*got).To(HaveSuffix("]"))
+}
+
+func TestConnectionString_StringValuePassesThrough(t *testing.T) {
+	RegisterTestingT(t)
+	c := &Connection{Name: "x", Type: ConnectionTypeString, Value: "London"}
+	got := c.String()
+	Expect(got).ToNot(BeNil())
+	Expect(*got).To(Equal("London"))
+}
+
+func TestConnectionString_NilValueReturnsEmpty(t *testing.T) {
+	RegisterTestingT(t)
+	c := &Connection{Name: "x", Type: ConnectionTypeText, Value: nil}
+	got := c.String()
+	Expect(got).ToNot(BeNil())
+	Expect(*got).To(Equal(""))
+}
