@@ -1491,11 +1491,11 @@
     ]
   },
   "arithmetic/addition": {
-    "hash": "e0b3a5294a4ed0d48707045e7323418c48ac7ee812b6168313467045ea938a13",
+    "hash": "a8be7a5887114f374ae4957eb5464f4d5350781dcbc33f09c65fe91137168563",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Addition",
-    "description": "Add two numbers together and return the sum",
+    "description": "Add two numbers together and return the sum. Accepts integers or decimals.",
     "website": "https://www.flomation.co",
     "icon": "plus",
     "date": "05/03/2026",
@@ -1508,17 +1508,17 @@
     "inputs": [
       {
         "name": "a",
-        "type": "integer",
+        "type": "string",
         "value": null,
         "label": "A",
-        "placeholder": ""
+        "placeholder": "e.g. 5 or 3.14"
       },
       {
         "name": "b",
-        "type": "integer",
+        "type": "string",
         "value": null,
         "label": "B",
-        "placeholder": ""
+        "placeholder": "e.g. 7 or 0.40"
       }
     ],
     "outputs": [
@@ -1531,19 +1531,26 @@
       },
       {
         "name": "answer",
+        "type": "string",
+        "value": null,
+        "label": "Sum (decimal)",
+        "placeholder": ""
+      },
+      {
+        "name": "answer_int",
         "type": "integer",
         "value": null,
-        "label": "X",
+        "label": "Sum (rounded to integer)",
         "placeholder": ""
       }
     ]
   },
   "arithmetic/division": {
-    "hash": "2bbcc32c2df795cb6f0b59df3d7758de1a0d0c654f66fedc0e29b7f1b65da375",
+    "hash": "ae44047601d2010da4779cd08a3e63bd95b301f720e7706994a12f30915abbac",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Division",
-    "description": "Divide one number by another and return the quotient",
+    "description": "Divide one number by another and return the quotient. Accepts integers or decimals.",
     "website": "https://www.flomation.co",
     "icon": "divide",
     "date": "05/03/2026",
@@ -1556,17 +1563,17 @@
     "inputs": [
       {
         "name": "numerator",
-        "type": "integer",
+        "type": "string",
         "value": null,
         "label": "Numerator",
-        "placeholder": ""
+        "placeholder": "e.g. 100 or 3.14"
       },
       {
         "name": "denominator",
-        "type": "integer",
+        "type": "string",
         "value": null,
         "label": "Denominator",
-        "placeholder": ""
+        "placeholder": "e.g. 4 or 0.40 (must be non-zero)"
       }
     ],
     "outputs": [
@@ -1579,19 +1586,26 @@
       },
       {
         "name": "answer",
+        "type": "string",
+        "value": null,
+        "label": "Quotient (decimal)",
+        "placeholder": ""
+      },
+      {
+        "name": "answer_int",
         "type": "integer",
         "value": null,
-        "label": "X",
+        "label": "Quotient (rounded to integer)",
         "placeholder": ""
       }
     ]
   },
   "arithmetic/multiplication": {
-    "hash": "a7f7a73040d5b27d223196d73a59487746ed7ad083d9e348b940c4807a073302",
+    "hash": "7772f43ae57d2fb69f67215b0b6dd577ba56f511bc084c909e747ec57d3e2542",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Multiplication",
-    "description": "Multiply two numbers together and return the product",
+    "description": "Multiply two numbers together and return the product. Accepts integers or decimals.",
     "website": "https://www.flomation.co",
     "icon": "xmark",
     "date": "05/03/2026",
@@ -1604,17 +1618,17 @@
     "inputs": [
       {
         "name": "a",
-        "type": "integer",
+        "type": "string",
         "value": null,
         "label": "A",
-        "placeholder": ""
+        "placeholder": "e.g. 5 or 3.14 or ${parent.distance_miles}"
       },
       {
         "name": "b",
-        "type": "integer",
+        "type": "string",
         "value": null,
         "label": "B",
-        "placeholder": ""
+        "placeholder": "e.g. 0.40"
       }
     ],
     "outputs": [
@@ -1627,19 +1641,26 @@
       },
       {
         "name": "answer",
+        "type": "string",
+        "value": null,
+        "label": "Product (decimal)",
+        "placeholder": ""
+      },
+      {
+        "name": "answer_int",
         "type": "integer",
         "value": null,
-        "label": "X",
+        "label": "Product (rounded to integer)",
         "placeholder": ""
       }
     ]
   },
   "arithmetic/subtraction": {
-    "hash": "fa3ecc9cefc7a7bcda703e11c4e569723d50e4bae084df05d088109b8d3649e5",
+    "hash": "ad1826a2a00d21eb6a4d045d32ffba8d5685017832266f7e7725d645fef3d775",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Subtraction",
-    "description": "Subtract one number from another and return the difference",
+    "description": "Subtract one number from another and return the difference. Accepts integers or decimals.",
     "website": "https://www.flomation.co",
     "icon": "minus",
     "date": "05/03/2026",
@@ -1652,17 +1673,17 @@
     "inputs": [
       {
         "name": "a",
-        "type": "integer",
+        "type": "string",
         "value": null,
         "label": "A",
-        "placeholder": ""
+        "placeholder": "e.g. 10 or 3.14"
       },
       {
         "name": "b",
-        "type": "integer",
+        "type": "string",
         "value": null,
         "label": "B",
-        "placeholder": ""
+        "placeholder": "e.g. 4 or 0.40"
       }
     ],
     "outputs": [
@@ -1675,9 +1696,16 @@
       },
       {
         "name": "answer",
+        "type": "string",
+        "value": null,
+        "label": "Difference (decimal)",
+        "placeholder": ""
+      },
+      {
+        "name": "answer_int",
         "type": "integer",
         "value": null,
-        "label": "X",
+        "label": "Difference (rounded to integer)",
         "placeholder": ""
       }
     ]
