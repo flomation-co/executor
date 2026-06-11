@@ -258,6 +258,12 @@ func renderStepsTable(pdf *fpdf.Fpdf, steps []stepItem) {
 		if rowHeight < headerHeight {
 			rowHeight = headerHeight
 		}
+		// MultiCell renders len(lines) * lineHeight in total. When we bump
+		// rowHeight to the headerHeight floor for short instructions, the
+		// Direction cell would end up shorter than its Step/Distance/Duration
+		// siblings. Setting an effective per-line height divides rowHeight
+		// across the lines so MultiCell's total exactly equals rowHeight.
+		effectiveLineHeight := rowHeight / float64(len(lines))
 
 		// New page if this row would overflow — redraw header so the table
 		// continues with its column legend intact.
@@ -276,7 +282,7 @@ func renderStepsTable(pdf *fpdf.Fpdf, steps []stepItem) {
 		// Direction — MultiCell wraps onto N lines and advances the cursor
 		// past the cell. We don't use that advance; we'll SetXY back.
 		pdf.SetXY(xStart+colStepW, yStart)
-		pdf.MultiCell(colDirW, lineHeight, strings.Join(lines, "\n"), "1", "L", false)
+		pdf.MultiCell(colDirW, effectiveLineHeight, strings.Join(lines, "\n"), "1", "L", false)
 
 		// Distance / Duration — return to row Y, draw past the direction cell.
 		distMi := s.DistanceMetres / journey.MetresPerMile
