@@ -193,29 +193,135 @@ func buildPDF(title, distance, duration string, mapImage []byte, steps []stepIte
 	if len(mapImage) > 0 {
 		opt := fpdf.ImageOptions{ImageType: "PNG", ReadDpi: false}
 		pdf.RegisterImageOptionsReader("route_map", opt, bytes.NewReader(mapImage))
-		pdf.ImageOptions("route_map", 10, pdf.GetY(), 190, 0, false, opt, 0, "")
-		pdf.Ln(110)
+		// Image is 600x400 → aspect 1.5 → 190mm wide ⇒ ~127mm tall. Use
+		// explicit height so the cursor lands at a predictable position
+		// (auto-height + Ln() of a wrong constant is what put steps over
+		// the map in the original build).
+		const mapWidthMM = 190.0
+		const mapHeightMM = 127.0
+		mapY := pdf.GetY()
+		pdf.ImageOptions("route_map", 10, mapY, mapWidthMM, mapHeightMM, false, opt, 0, "")
+		pdf.SetY(mapY + mapHeightMM + 12) // 12mm breathing room below the map
 	}
 
 	if len(steps) > 0 {
-		pdf.SetFont("Helvetica", "B", 13)
-		pdf.SetTextColor(0, 170, 156) // brand teal
-		pdf.CellFormat(0, 8, "Turn-by-turn directions", "", 1, "L", false, 0, "")
-		pdf.SetTextColor(0, 0, 0)
-		pdf.SetFont("Helvetica", "", 10)
-		for i, s := range steps {
-			line := fmt.Sprintf("%d. %s", i+1, s.Instruction)
-			if s.DistanceMetres > 0 {
-				line += fmt.Sprintf(" (%.1f mi, %s)",
-					s.DistanceMetres/journey.MetresPerMile,
-					journey.FriendlyDuration(s.DurationSeconds))
-			}
-			pdf.MultiCell(0, 6, line, "", "L", false)
-			pdf.Ln(1)
-		}
+		renderStepsTable(pdf, steps)
 	}
 
 	return pdf
+}
+
+// renderStepsTable lays out the turn-by-turn directions as a four-column
+// table: Step | Direction | Distance | Duration. Direction wraps onto
+// multiple lines when long; the other columns share the wrapped row height
+// so cell borders align.
+func renderStepsTable(pdf *fpdf.Fpdf, steps []stepItem) {
+	const (
+		leftMargin    = 10.0
+		colStepW      = 14.0
+		colDirW       = 108.0
+		colDistW      = 28.0
+		colDurW       = 40.0
+		lineHeight    = 5.0
+		headerHeight  = 7.0
+		cellPad       = 1.5
+		pageBottomY   = 280.0
+	)
+
+	pdf.SetFont("Helvetica", "B", 13)
+	pdf.SetTextColor(0, 170, 156) // brand teal
+	pdf.CellFormat(0, 8, "Turn-by-turn directions", "", 1, "L", false, 0, "")
+	pdf.SetTextColor(0, 0, 0)
+	pdf.Ln(2)
+
+	drawHeader := func() {
+		pdf.SetFillColor(70, 0, 112) // brand purple
+		pdf.SetTextColor(255, 255, 255)
+		pdf.SetFont("Helvetica", "B", 10)
+		pdf.SetX(leftMargin)
+		pdf.CellFormat(colStepW, headerHeight, "Step", "1", 0, "C", true, 0, "")
+		pdf.CellFormat(colDirW, headerHeight, "Direction", "1", 0, "L", true, 0, "")
+		pdf.CellFormat(colDistW, headerHeight, "Distance", "1", 0, "R", true, 0, "")
+		pdf.CellFormat(colDurW, headerHeight, "Duration", "1", 1, "R", true, 0, "")
+		pdf.SetTextColor(0, 0, 0)
+		pdf.SetFont("Helvetica", "", 9)
+	}
+
+	drawHeader()
+
+	for i, s := range steps {
+		lines := wrapToWidth(pdf, s.Instruction, colDirW-2*cellPad)
+		if len(lines) == 0 {
+			lines = []string{""}
+		}
+		rowHeight := float64(len(lines)) * lineHeight
+		if rowHeight < headerHeight {
+			rowHeight = headerHeight
+		}
+
+		// New page if this row would overflow — redraw header so the table
+		// continues with its column legend intact.
+		if pdf.GetY()+rowHeight > pageBottomY {
+			pdf.AddPage()
+			drawHeader()
+		}
+
+		xStart := leftMargin
+		yStart := pdf.GetY()
+
+		// Step number — fixed-height single-line cell.
+		pdf.SetXY(xStart, yStart)
+		pdf.CellFormat(colStepW, rowHeight, fmt.Sprintf("%d", i+1), "1", 0, "C", false, 0, "")
+
+		// Direction — MultiCell wraps onto N lines and advances the cursor
+		// past the cell. We don't use that advance; we'll SetXY back.
+		pdf.SetXY(xStart+colStepW, yStart)
+		pdf.MultiCell(colDirW, lineHeight, strings.Join(lines, "\n"), "1", "L", false)
+
+		// Distance / Duration — return to row Y, draw past the direction cell.
+		distMi := s.DistanceMetres / journey.MetresPerMile
+		distText := ""
+		if s.DistanceMetres > 0 {
+			distText = fmt.Sprintf("%.1f mi", distMi)
+		}
+		durText := ""
+		if s.DurationSeconds > 0 {
+			durText = journey.FriendlyDuration(s.DurationSeconds)
+		}
+		pdf.SetXY(xStart+colStepW+colDirW, yStart)
+		pdf.CellFormat(colDistW, rowHeight, distText, "1", 0, "R", false, 0, "")
+		pdf.CellFormat(colDurW, rowHeight, durText, "1", 0, "R", false, 0, "")
+
+		// Advance to the next row.
+		pdf.SetXY(xStart, yStart+rowHeight)
+	}
+}
+
+// wrapToWidth splits text onto multiple lines so each line fits within the
+// given width when rendered in the current font. fpdf's MultiCell handles
+// wrapping internally, but we need to KNOW the line count up-front to size
+// the sibling fixed-height cells.
+func wrapToWidth(pdf *fpdf.Fpdf, text string, width float64) []string {
+	if text == "" {
+		return []string{""}
+	}
+	words := strings.Fields(text)
+	if len(words) == 0 {
+		return []string{""}
+	}
+	var lines []string
+	current := words[0]
+	for _, w := range words[1:] {
+		candidate := current + " " + w
+		if pdf.GetStringWidth(candidate) <= width {
+			current = candidate
+		} else {
+			lines = append(lines, current)
+			current = w
+		}
+	}
+	lines = append(lines, current)
+	return lines
 }
 
 func optionalBool(name string, inputs []*core.Connection, def bool) bool {
