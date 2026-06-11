@@ -114,6 +114,25 @@ type OptimiseResult struct {
 	Legs []OptimiseLeg `json:"legs"`
 }
 
+// StaticMapMarker pins a labelled point on the rendered map.
+type StaticMapMarker struct {
+	Lat   float64
+	Lng   float64
+	Label string // single character; providers vary on multi-char support
+	Color string // optional, provider-specific (e.g. "red", "0xFF0000")
+}
+
+type StaticMapParams struct {
+	// Polyline is the encoded route (Google polyline algorithm) to overlay.
+	// Required — drives both the path shape and the map's auto-bounds.
+	Polyline string
+	Width    int
+	Height   int
+	// Zoom 0 means "auto-fit to polyline bounds".
+	Zoom    int
+	Markers []StaticMapMarker
+}
+
 type Provider interface {
 	Name() string
 	Geocode(query, region string) (*GeocodeResult, error)
@@ -121,6 +140,7 @@ type Provider interface {
 	CalculateRoute(params RouteParams) (*RouteResult, error)
 	GetTravelTime(origin, destination, mode string, departAt *time.Time) (*TravelTimeResult, error)
 	OptimiseRoute(params OptimiseParams) (*OptimiseResult, error)
+	RenderStaticMap(params StaticMapParams) ([]byte, string, error)
 }
 
 var DefaultClient = &http.Client{Timeout: 60 * time.Second}
@@ -187,6 +207,67 @@ func plural(n int64, noun string) string {
 		return fmt.Sprintf("%d %s", n, noun)
 	}
 	return fmt.Sprintf("%d %ss", n, noun)
+}
+
+// DecodePolyline implements Google's encoded polyline algorithm format. The
+// same encoding is used by Google Directions, Mapbox Directions (when
+// geometries=polyline), Mapbox Optimization, and most major mapping APIs.
+//
+// Reference: https://developers.google.com/maps/documentation/utilities/polylinealgorithm
+//
+// Returns the decoded sequence of (lat, lng) pairs as []LatLng. Each chunk
+// of the input string encodes a delta from the previous coordinate; the
+// loop accumulates absolute lat/lng as it walks.
+func DecodePolyline(encoded string) []LatLng {
+	if encoded == "" {
+		return nil
+	}
+	var coords []LatLng
+	index := 0
+	lat, lng := 0, 0
+	for index < len(encoded) {
+		dlat, n := decodePolylineValue(encoded, index)
+		if n == 0 {
+			return coords
+		}
+		index += n
+		dlng, n := decodePolylineValue(encoded, index)
+		if n == 0 {
+			return coords
+		}
+		index += n
+		lat += dlat
+		lng += dlng
+		coords = append(coords, LatLng{
+			Lat: float64(lat) * 1e-5,
+			Lng: float64(lng) * 1e-5,
+		})
+	}
+	return coords
+}
+
+func decodePolylineValue(s string, index int) (int, int) {
+	result := 0
+	shift := uint(0)
+	consumed := 0
+	for {
+		if index+consumed >= len(s) {
+			return 0, 0
+		}
+		b := int(s[index+consumed]) - 63
+		consumed++
+		result |= (b & 0x1f) << shift
+		shift += 5
+		if b < 0x20 {
+			break
+		}
+	}
+	if result&1 != 0 {
+		result = ^(result >> 1)
+	} else {
+		result >>= 1
+	}
+	return result, consumed
 }
 
 // IsLatLng returns parsed coordinates if the input looks like "lat,lng".

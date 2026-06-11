@@ -411,6 +411,70 @@ func (g *googleProvider) OptimiseRoute(p OptimiseParams) (*OptimiseResult, error
 	}, nil
 }
 
+// RenderStaticMap builds a Google Static Maps URL and downloads the image.
+// The Static Maps API auto-fits the viewport to the path bounds when no
+// center/zoom is given, which matches our "Zoom 0 = auto-fit" contract.
+//
+// We request blue 4px path drawn with the route polyline (Google's `enc:`
+// prefix tells the API the path is encoded rather than a list of lat/lngs).
+// Each marker becomes a `markers=` query parameter — Google accepts repeated
+// keys and renders them in order.
+func (g *googleProvider) RenderStaticMap(p StaticMapParams) ([]byte, string, error) {
+	if strings.TrimSpace(p.Polyline) == "" {
+		return nil, "", fmt.Errorf("journey/google: render_static_map requires a polyline")
+	}
+	width, height := p.Width, p.Height
+	if width <= 0 {
+		width = 600
+	}
+	if height <= 0 {
+		height = 400
+	}
+
+	params := url.Values{
+		"size": {fmt.Sprintf("%dx%d", width, height)},
+		"path": {fmt.Sprintf("color:0x0000ffff|weight:4|enc:%s", p.Polyline)},
+		"key":  {g.apiKey},
+	}
+	if p.Zoom > 0 {
+		params.Set("zoom", strconv.Itoa(p.Zoom))
+	}
+	for _, m := range p.Markers {
+		spec := ""
+		if m.Color != "" {
+			spec += "color:" + m.Color + "|"
+		}
+		if m.Label != "" {
+			spec += "label:" + m.Label + "|"
+		}
+		spec += fmt.Sprintf("%f,%f", m.Lat, m.Lng)
+		params.Add("markers", spec)
+	}
+
+	u := googleBaseURL + "/staticmap?" + params.Encode()
+	req, err := http.NewRequest(http.MethodGet, u, nil)
+	if err != nil {
+		return nil, "", err
+	}
+	resp, err := g.client.Do(req)
+	if err != nil {
+		return nil, "", fmt.Errorf("journey/google: static map request failed: %w", err)
+	}
+	defer resp.Body.Close()
+	body, err := io.ReadAll(resp.Body)
+	if err != nil {
+		return nil, "", fmt.Errorf("journey/google: read static map body: %w", err)
+	}
+	if resp.StatusCode >= 400 {
+		return nil, "", fmt.Errorf("journey/google: static map http %d: %s", resp.StatusCode, strings.TrimSpace(string(body)))
+	}
+	mime := resp.Header.Get("Content-Type")
+	if mime == "" {
+		mime = "image/png"
+	}
+	return body, mime, nil
+}
+
 func stripHTML(s string) string {
 	var out strings.Builder
 	out.Grow(len(s))
