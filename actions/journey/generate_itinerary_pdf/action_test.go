@@ -82,11 +82,13 @@ func TestExecuteMissingPolyline(t *testing.T) {
 	Expect(err.Error()).To(ContainSubstring("polyline"))
 }
 
-func TestExecuteSkipsInvalidStepsJSON(t *testing.T) {
+func TestExecuteInvalidStepsJSONFailsLoudly(t *testing.T) {
 	RegisterTestingT(t)
 	defer swapClient(nil)()
 
-	// Malformed steps_json shouldn't crash — directions are simply omitted.
+	// Malformed steps_json must surface as a node failure so flow authors
+	// notice the wiring problem — silently dropping directions used to hide
+	// the upstream substitution bug (Go syntax leaking through instead of JSON).
 	out, err := Execute(nil, nil, []*core.Connection{
 		conn("provider", "google"),
 		conn("api_key", "test-key"),
@@ -95,6 +97,7 @@ func TestExecuteSkipsInvalidStepsJSON(t *testing.T) {
 		boolConn("include_map", false),
 		boolConn("include_directions", true),
 	})
-	Expect(err).ToNot(HaveOccurred())
-	Expect(out["success"]).To(Equal(true))
+	Expect(err).To(HaveOccurred())
+	Expect(out["success"]).To(Equal(false))
+	Expect(out["error"]).To(ContainSubstring("steps_json"))
 }

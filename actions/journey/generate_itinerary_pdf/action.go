@@ -136,9 +136,13 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 
 	var steps []stepItem
 	if includeDirections && stepsRaw != "" {
+		// Surface parse errors rather than silently dropping directions —
+		// the previous "be lenient" approach hid the bug where upstream
+		// substitution produced Go syntax instead of JSON. If a flow author
+		// has wired steps_json incorrectly, they should know.
 		if err := json.Unmarshal([]byte(stepsRaw), &steps); err != nil {
-			// Non-fatal: drop directions, log nothing-tier3-cant-finish
-			steps = nil
+			return errResult(title, fmt.Errorf("steps_json is not valid JSON: %w (got %d bytes starting with %q)",
+				err, len(stepsRaw), stepsRaw[:min(40, len(stepsRaw))]))
 		}
 	}
 
