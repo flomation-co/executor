@@ -13584,6 +13584,576 @@
       }
     ]
   },
+  "journey/calculate_route": {
+    "hash": "9201a23308e39f8595820b8eed91b118ed7594da79a87271a370877d7bb21f66",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Calculate Route",
+    "description": "Calculate a route between two locations with optional waypoints, returning distance, duration, polyline and turn-by-turn steps.",
+    "website": "https://www.flomation.co",
+    "icon": "route+arrow-right",
+    "date": "11/06/2026",
+    "type": 2,
+    "category": {
+      "name": "Journey",
+      "icon": "route",
+      "description": "Route planning, journey optimisation, and printable itineraries."
+    },
+    "inputs": [
+      {
+        "name": "provider",
+        "type": "string",
+        "value": null,
+        "label": "Map Provider",
+        "placeholder": "google",
+        "required": true,
+        "options": [
+          {
+            "name": "Google Maps",
+            "value": "google"
+          },
+          {
+            "name": "Mapbox",
+            "value": "mapbox"
+          }
+        ]
+      },
+      {
+        "name": "api_key",
+        "type": "string",
+        "value": null,
+        "label": "Provider API Key",
+        "placeholder": "${secrets.GOOGLE_MAPS_API_KEY}",
+        "required": true
+      },
+      {
+        "name": "origin",
+        "type": "string",
+        "value": null,
+        "label": "Origin (address or lat,lng)",
+        "placeholder": "London, UK",
+        "required": true
+      },
+      {
+        "name": "destination",
+        "type": "string",
+        "value": null,
+        "label": "Destination (address or lat,lng)",
+        "placeholder": "Manchester, UK",
+        "required": true
+      },
+      {
+        "name": "waypoints",
+        "type": "string",
+        "value": null,
+        "label": "Waypoints (comma- or pipe-separated)",
+        "placeholder": "Birmingham|Stoke"
+      },
+      {
+        "name": "mode",
+        "type": "string",
+        "value": null,
+        "label": "Travel Mode",
+        "placeholder": "driving",
+        "options": [
+          {
+            "name": "Driving",
+            "value": "driving"
+          },
+          {
+            "name": "Walking",
+            "value": "walking"
+          },
+          {
+            "name": "Cycling",
+            "value": "cycling"
+          },
+          {
+            "name": "Transit",
+            "value": "transit"
+          }
+        ]
+      },
+      {
+        "name": "depart_at",
+        "type": "datetime",
+        "value": null,
+        "label": "Departure time",
+        "placeholder": "leave blank for 'now'"
+      },
+      {
+        "name": "avoid",
+        "type": "multi_select",
+        "value": null,
+        "label": "Avoid",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "Tolls",
+            "value": "tolls"
+          },
+          {
+            "name": "Motorways",
+            "value": "motorways"
+          },
+          {
+            "name": "Ferries",
+            "value": "ferries"
+          }
+        ]
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "distance_metres",
+        "type": "string",
+        "value": null,
+        "label": "Distance (metres)",
+        "placeholder": ""
+      },
+      {
+        "name": "distance_miles",
+        "type": "string",
+        "value": null,
+        "label": "Distance (miles)",
+        "placeholder": ""
+      },
+      {
+        "name": "duration_seconds",
+        "type": "string",
+        "value": null,
+        "label": "Duration (seconds)",
+        "placeholder": ""
+      },
+      {
+        "name": "duration_friendly",
+        "type": "string",
+        "value": null,
+        "label": "Duration (friendly)",
+        "placeholder": ""
+      },
+      {
+        "name": "polyline",
+        "type": "string",
+        "value": null,
+        "label": "Encoded polyline",
+        "placeholder": ""
+      },
+      {
+        "name": "steps",
+        "type": "object",
+        "value": null,
+        "label": "Turn-by-turn steps",
+        "placeholder": ""
+      },
+      {
+        "name": "bounds",
+        "type": "object",
+        "value": null,
+        "label": "Route bounds",
+        "placeholder": ""
+      },
+      {
+        "name": "route",
+        "type": "object",
+        "value": null,
+        "label": "Full route JSON (for downstream actions)",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "journey/geocode_address": {
+    "hash": "d8a028b44dd559ff279f71958a4c3494c6f5c29400c35f9851598b9ec2ab12cb",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Geocode Address",
+    "description": "Convert a textual address into latitude and longitude coordinates.",
+    "website": "https://www.flomation.co",
+    "icon": "route+magnifying-glass",
+    "date": "11/06/2026",
+    "type": 2,
+    "category": {
+      "name": "Journey",
+      "icon": "route",
+      "description": "Route planning, journey optimisation, and printable itineraries."
+    },
+    "inputs": [
+      {
+        "name": "provider",
+        "type": "string",
+        "value": null,
+        "label": "Map Provider",
+        "placeholder": "google",
+        "required": true,
+        "options": [
+          {
+            "name": "Google Maps",
+            "value": "google"
+          },
+          {
+            "name": "Mapbox",
+            "value": "mapbox"
+          }
+        ]
+      },
+      {
+        "name": "api_key",
+        "type": "string",
+        "value": null,
+        "label": "Provider API Key",
+        "placeholder": "${secrets.GOOGLE_MAPS_API_KEY}",
+        "required": true
+      },
+      {
+        "name": "address",
+        "type": "string",
+        "value": null,
+        "label": "Address",
+        "placeholder": "10 Downing Street, London",
+        "required": true
+      },
+      {
+        "name": "region",
+        "type": "string",
+        "value": null,
+        "label": "Region (country code)",
+        "placeholder": "gb"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "latitude",
+        "type": "string",
+        "value": null,
+        "label": "Latitude",
+        "placeholder": ""
+      },
+      {
+        "name": "longitude",
+        "type": "string",
+        "value": null,
+        "label": "Longitude",
+        "placeholder": ""
+      },
+      {
+        "name": "formatted_address",
+        "type": "string",
+        "value": null,
+        "label": "Formatted Address",
+        "placeholder": ""
+      },
+      {
+        "name": "confidence",
+        "type": "string",
+        "value": null,
+        "label": "Confidence",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "journey/get_travel_time": {
+    "hash": "1d0d42ac57eb2edf949dcc9cdfa48b30807d04c8bd1138b0f30ba7d1e61872a5",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Get Travel Time",
+    "description": "Quickly get the distance and duration between two locations without computing a full route.",
+    "website": "https://www.flomation.co",
+    "icon": "route+clock",
+    "date": "11/06/2026",
+    "type": 2,
+    "category": {
+      "name": "Journey",
+      "icon": "route",
+      "description": "Route planning, journey optimisation, and printable itineraries."
+    },
+    "inputs": [
+      {
+        "name": "provider",
+        "type": "string",
+        "value": null,
+        "label": "Map Provider",
+        "placeholder": "google",
+        "required": true,
+        "options": [
+          {
+            "name": "Google Maps",
+            "value": "google"
+          },
+          {
+            "name": "Mapbox",
+            "value": "mapbox"
+          }
+        ]
+      },
+      {
+        "name": "api_key",
+        "type": "string",
+        "value": null,
+        "label": "Provider API Key",
+        "placeholder": "${secrets.GOOGLE_MAPS_API_KEY}",
+        "required": true
+      },
+      {
+        "name": "origin",
+        "type": "string",
+        "value": null,
+        "label": "Origin (address or lat,lng)",
+        "placeholder": "London, UK",
+        "required": true
+      },
+      {
+        "name": "destination",
+        "type": "string",
+        "value": null,
+        "label": "Destination (address or lat,lng)",
+        "placeholder": "Manchester, UK",
+        "required": true
+      },
+      {
+        "name": "mode",
+        "type": "string",
+        "value": null,
+        "label": "Travel Mode",
+        "placeholder": "driving",
+        "options": [
+          {
+            "name": "Driving",
+            "value": "driving"
+          },
+          {
+            "name": "Walking",
+            "value": "walking"
+          },
+          {
+            "name": "Cycling",
+            "value": "cycling"
+          },
+          {
+            "name": "Transit",
+            "value": "transit"
+          }
+        ]
+      },
+      {
+        "name": "depart_at",
+        "type": "datetime",
+        "value": null,
+        "label": "Departure time",
+        "placeholder": "leave blank for 'now'"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "distance_metres",
+        "type": "string",
+        "value": null,
+        "label": "Distance (metres)",
+        "placeholder": ""
+      },
+      {
+        "name": "distance_miles",
+        "type": "string",
+        "value": null,
+        "label": "Distance (miles)",
+        "placeholder": ""
+      },
+      {
+        "name": "duration_seconds",
+        "type": "string",
+        "value": null,
+        "label": "Duration (seconds)",
+        "placeholder": ""
+      },
+      {
+        "name": "duration_friendly",
+        "type": "string",
+        "value": null,
+        "label": "Duration (friendly)",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "journey/reverse_geocode": {
+    "hash": "ace064fe95ad7d5bb31d4b680ffaccc2931a2b6bc475ca6780659ac3461f8a9d",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Reverse Geocode",
+    "description": "Convert latitude and longitude into a human-readable address.",
+    "website": "https://www.flomation.co",
+    "icon": "route+location-dot",
+    "date": "11/06/2026",
+    "type": 2,
+    "category": {
+      "name": "Journey",
+      "icon": "route",
+      "description": "Route planning, journey optimisation, and printable itineraries."
+    },
+    "inputs": [
+      {
+        "name": "provider",
+        "type": "string",
+        "value": null,
+        "label": "Map Provider",
+        "placeholder": "google",
+        "required": true,
+        "options": [
+          {
+            "name": "Google Maps",
+            "value": "google"
+          },
+          {
+            "name": "Mapbox",
+            "value": "mapbox"
+          }
+        ]
+      },
+      {
+        "name": "api_key",
+        "type": "string",
+        "value": null,
+        "label": "Provider API Key",
+        "placeholder": "${secrets.GOOGLE_MAPS_API_KEY}",
+        "required": true
+      },
+      {
+        "name": "latitude",
+        "type": "string",
+        "value": null,
+        "label": "Latitude",
+        "placeholder": "51.5034",
+        "required": true
+      },
+      {
+        "name": "longitude",
+        "type": "string",
+        "value": null,
+        "label": "Longitude",
+        "placeholder": "-0.1276",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "address",
+        "type": "string",
+        "value": null,
+        "label": "Full address",
+        "placeholder": ""
+      },
+      {
+        "name": "street",
+        "type": "string",
+        "value": null,
+        "label": "Street",
+        "placeholder": ""
+      },
+      {
+        "name": "city",
+        "type": "string",
+        "value": null,
+        "label": "City",
+        "placeholder": ""
+      },
+      {
+        "name": "country",
+        "type": "string",
+        "value": null,
+        "label": "Country",
+        "placeholder": ""
+      },
+      {
+        "name": "postcode",
+        "type": "string",
+        "value": null,
+        "label": "Postcode",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
   "linear/add_comment": {
     "hash": "38717cabb35e7f36df65d57f236a7a899693b164c51d940b98cafaef6be09633",
     "author": "Andy Esser",
@@ -22203,7 +22773,7 @@
     "outputs": null
   },
   "script/bash": {
-    "hash": "7e00e44738bc4f2c9519665968f26d7a073971ba8fca63008c1d4e8257a877fd",
+    "hash": "349f40034d13d71d279deed8aa246713f2c91024468ffc346fd74464ce3df938",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Run Bash Script",

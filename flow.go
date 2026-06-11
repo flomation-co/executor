@@ -150,6 +150,8 @@ const (
 	ConnectionTypeBoolean       = "boolean"
 	ConnectionTypeText          = "text"
 	ConnectionTypeKeyValueArray = "key_value_array"
+	ConnectionTypeDateTime      = "datetime"
+	ConnectionTypeMultiSelect   = "multi_select"
 )
 
 type Action func(flow *Flow, node *Node, inputs []*Connection) (map[string]interface{}, error)
@@ -192,7 +194,8 @@ func (c *Connection) String() *string {
 		return nil
 	}
 
-	if c.Type == ConnectionTypeString || c.Type == ConnectionTypeText {
+	if c.Type == ConnectionTypeString || c.Type == ConnectionTypeText ||
+		c.Type == ConnectionTypeDateTime || c.Type == ConnectionTypeMultiSelect {
 		v, ok := c.Value.(string)
 		if !ok {
 			return nil
@@ -2511,11 +2514,13 @@ func (f *Flow) injectToolDefinitions(aiNode *Node, toolNodes []*Node, actions ma
 
 	// Map Flomation connection types to JSON Schema types
 	typeMap := map[string]string{
-		ConnectionTypeString:  "string",
-		ConnectionTypeText:    "string",
-		ConnectionTypeInteger: "integer",
-		ConnectionTypeBoolean: "boolean",
-		ConnectionTypeObject:  "object",
+		ConnectionTypeString:      "string",
+		ConnectionTypeText:        "string",
+		ConnectionTypeInteger:     "integer",
+		ConnectionTypeBoolean:     "boolean",
+		ConnectionTypeObject:      "object",
+		ConnectionTypeDateTime:    "string",
+		ConnectionTypeMultiSelect: "string",
 	}
 
 	var tools []map[string]interface{}
