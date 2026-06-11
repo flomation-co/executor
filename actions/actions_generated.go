@@ -20,6 +20,7 @@ import (
 	agent_write_state "flomation.app/automate/executor/actions/agent/write_state"
 	ai_anthropic "flomation.app/automate/executor/actions/ai/anthropic"
 	ai_openai "flomation.app/automate/executor/actions/ai/openai"
+	ai_openwebui "flomation.app/automate/executor/actions/ai/openwebui"
 	arithmetic_addition "flomation.app/automate/executor/actions/arithmetic/addition"
 	arithmetic_division "flomation.app/automate/executor/actions/arithmetic/division"
 	arithmetic_multiplication "flomation.app/automate/executor/actions/arithmetic/multiplication"
@@ -360,6 +361,7 @@ var Actions = map[string]core.Action{
 	"agent/write_state":                     agent_write_state.Execute,
 	"ai/anthropic":                          ai_anthropic.Execute,
 	"ai/openai":                             ai_openai.Execute,
+	"ai/openwebui":                          ai_openwebui.Execute,
 	"arithmetic/addition":                   arithmetic_addition.Execute,
 	"arithmetic/division":                   arithmetic_division.Execute,
 	"arithmetic/multiplication":             arithmetic_multiplication.Execute,

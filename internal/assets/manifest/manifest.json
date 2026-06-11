@@ -1340,6 +1340,156 @@
       }
     ]
   },
+  "ai/openwebui": {
+    "hash": "e155467a31c394d91b9daf99b082e386a12899f02840ae02a327dede327b0f69",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Open WebUI Prompt",
+    "description": "Send a prompt to an Open WebUI (or any OpenAI-compatible) Chat Completions endpoint and return the response",
+    "website": "https://www.flomation.co",
+    "icon": "brain+globe",
+    "date": "11/06/2026",
+    "type": 2,
+    "category": {
+      "name": "AI",
+      "icon": "brain",
+      "description": "Artificial intelligence and large language model integrations"
+    },
+    "inputs": [
+      {
+        "name": "endpoint",
+        "type": "string",
+        "value": null,
+        "label": "Endpoint",
+        "placeholder": "https://openwebui.example.com",
+        "required": true
+      },
+      {
+        "name": "api_key",
+        "type": "string",
+        "value": null,
+        "label": "API Key",
+        "placeholder": "sk-...",
+        "required": true
+      },
+      {
+        "name": "model",
+        "type": "string",
+        "value": null,
+        "label": "Model",
+        "placeholder": "llama3.1:8b",
+        "required": true
+      },
+      {
+        "name": "system_prompt",
+        "type": "text",
+        "value": null,
+        "label": "System Prompt",
+        "placeholder": "You are a helpful assistant."
+      },
+      {
+        "name": "prompt",
+        "type": "text",
+        "value": null,
+        "label": "Prompt",
+        "placeholder": "What would you like to ask?",
+        "required": true
+      },
+      {
+        "name": "max_tokens",
+        "type": "integer",
+        "value": null,
+        "label": "Max Tokens",
+        "placeholder": "2048"
+      },
+      {
+        "name": "temperature",
+        "type": "string",
+        "value": null,
+        "label": "Temperature",
+        "placeholder": "0.7"
+      },
+      {
+        "name": "conversation_history",
+        "type": "object",
+        "value": null,
+        "label": "Conversation History",
+        "placeholder": "${conversation_history}"
+      },
+      {
+        "name": "tool_definitions",
+        "type": "text",
+        "value": null,
+        "label": "Tool Definitions (JSON)",
+        "placeholder": "[{\"type\":\"function\",\"function\":{\"name\":\"web_search\",\"description\":\"Search the web\",\"parameters\":{\"type\":\"object\",\"properties\":{\"query\":{\"type\":\"string\"}},\"required\":[\"query\"]}}}]"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "response",
+        "type": "string",
+        "value": null,
+        "label": "Response",
+        "placeholder": ""
+      },
+      {
+        "name": "model",
+        "type": "string",
+        "value": null,
+        "label": "Model Used",
+        "placeholder": ""
+      },
+      {
+        "name": "prompt_tokens",
+        "type": "integer",
+        "value": null,
+        "label": "Prompt Tokens",
+        "placeholder": ""
+      },
+      {
+        "name": "completion_tokens",
+        "type": "integer",
+        "value": null,
+        "label": "Completion Tokens",
+        "placeholder": ""
+      },
+      {
+        "name": "total_tokens",
+        "type": "integer",
+        "value": null,
+        "label": "Total Tokens",
+        "placeholder": ""
+      },
+      {
+        "name": "should_respond",
+        "type": "boolean",
+        "value": null,
+        "label": "Should Respond",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_calls_count",
+        "type": "integer",
+        "value": null,
+        "label": "Tool Calls",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
   "arithmetic/addition": {
     "hash": "e0b3a5294a4ed0d48707045e7323418c48ac7ee812b6168313467045ea938a13",
     "author": "Andy Esser",
