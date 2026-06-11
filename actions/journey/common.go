@@ -77,12 +77,50 @@ type TravelTimeResult struct {
 	DurationFriendly string  `json:"duration_friendly"`
 }
 
+// OptimiseParams asks the provider to reorder Stops for shortest total path.
+// Start and End are optional anchors — when both omitted the trip is treated
+// as a closed cycle returning to the first stop. OptimiseFor accepts
+// "duration" (default) or "distance"; not all providers honour "distance".
+type OptimiseParams struct {
+	Start       string
+	End         string
+	Stops       []string
+	Mode        string
+	OptimiseFor string
+	DepartAt    *time.Time
+}
+
+type OptimiseLeg struct {
+	From            string  `json:"from"`
+	To              string  `json:"to"`
+	DistanceMetres  float64 `json:"distance_metres"`
+	DistanceMiles   float64 `json:"distance_miles"`
+	DurationSeconds float64 `json:"duration_seconds"`
+}
+
+type OptimiseResult struct {
+	// OrderedStops is the original Stops slice rearranged into optimal order.
+	// Start and End are NOT included here — they remain the trip's anchors.
+	OrderedStops []string `json:"ordered_stops"`
+	// WaypointOrder maps positions in OrderedStops back to the input Stops
+	// slice. Useful when stops carry external IDs the caller wants to keep.
+	WaypointOrder []int `json:"waypoint_order"`
+
+	TotalDistanceMetres   float64 `json:"total_distance_metres"`
+	TotalDistanceMiles    float64 `json:"total_distance_miles"`
+	TotalDurationSeconds  float64 `json:"total_duration_seconds"`
+	TotalDurationFriendly string  `json:"total_duration_friendly"`
+
+	Legs []OptimiseLeg `json:"legs"`
+}
+
 type Provider interface {
 	Name() string
 	Geocode(query, region string) (*GeocodeResult, error)
 	ReverseGeocode(lat, lng float64) (*ReverseGeocodeResult, error)
 	CalculateRoute(params RouteParams) (*RouteResult, error)
 	GetTravelTime(origin, destination, mode string, departAt *time.Time) (*TravelTimeResult, error)
+	OptimiseRoute(params OptimiseParams) (*OptimiseResult, error)
 }
 
 var DefaultClient = &http.Client{Timeout: 60 * time.Second}

@@ -129,7 +129,8 @@ type googleDirectionsResponse struct {
 			Northeast LatLng `json:"northeast"`
 			Southwest LatLng `json:"southwest"`
 		} `json:"bounds"`
-		Legs []struct {
+		WaypointOrder []int `json:"waypoint_order"`
+		Legs          []struct {
 			Distance googleValueText `json:"distance"`
 			Duration googleValueText `json:"duration"`
 			Steps    []struct {
@@ -311,6 +312,103 @@ func googleConfidence(locationType string, partial bool) string {
 	default:
 		return "low"
 	}
+}
+
+// OptimiseRoute calls Google's Directions API with `waypoints=optimize:true|...`,
+// which returns waypoint_order indicating the optimal visit order. When Start
+// or End are blank we use the first stop as both anchors (cycle) — Google
+// requires explicit origin/destination, so a "tour" of stops is encoded as
+// stops[0] → optimised middle → stops[0].
+func (g *googleProvider) OptimiseRoute(p OptimiseParams) (*OptimiseResult, error) {
+	if len(p.Stops) == 0 {
+		return nil, fmt.Errorf("journey/google: optimise_route requires at least one stop")
+	}
+
+	origin := p.Start
+	destination := p.End
+	middle := p.Stops
+	cycle := origin == "" && destination == ""
+	if cycle {
+		origin = p.Stops[0]
+		destination = p.Stops[0]
+		middle = p.Stops[1:]
+	} else if origin == "" {
+		origin = p.Stops[0]
+		middle = p.Stops[1:]
+	} else if destination == "" {
+		destination = p.Stops[len(p.Stops)-1]
+		middle = p.Stops[:len(p.Stops)-1]
+	}
+
+	q := url.Values{
+		"origin":      {origin},
+		"destination": {destination},
+		"key":         {g.apiKey},
+		"mode":        {googleMode(p.Mode)},
+	}
+	if len(middle) > 0 {
+		q.Set("waypoints", "optimize:true|"+strings.Join(middle, "|"))
+	}
+	if p.DepartAt != nil {
+		q.Set("departure_time", strconv.FormatInt(p.DepartAt.Unix(), 10))
+	}
+	body, err := g.get("/directions/json", q)
+	if err != nil {
+		return nil, err
+	}
+	var resp googleDirectionsResponse
+	if err := json.Unmarshal(body, &resp); err != nil {
+		return nil, fmt.Errorf("journey/google: invalid optimisation response: %w", err)
+	}
+	if err := googleStatusErr("optimise_route", resp.Status, resp.ErrorMessage); err != nil {
+		return nil, err
+	}
+	if len(resp.Routes) == 0 {
+		return nil, fmt.Errorf("journey/google: no routes returned for optimisation")
+	}
+	r := resp.Routes[0]
+
+	ordered := make([]string, 0, len(middle))
+	for _, idx := range r.WaypointOrder {
+		if idx >= 0 && idx < len(middle) {
+			ordered = append(ordered, middle[idx])
+		}
+	}
+
+	// Build per-leg breakdown — each leg connects two consecutive points in
+	// the full path: origin → ordered[0] → ordered[1] → … → destination.
+	path := append([]string{origin}, ordered...)
+	path = append(path, destination)
+	legs := make([]OptimiseLeg, 0, len(r.Legs))
+	var totalDist, totalDur float64
+	for i, leg := range r.Legs {
+		from, to := "", ""
+		if i < len(path) {
+			from = path[i]
+		}
+		if i+1 < len(path) {
+			to = path[i+1]
+		}
+		legs = append(legs, OptimiseLeg{
+			From:            from,
+			To:              to,
+			DistanceMetres:  leg.Distance.Value,
+			DistanceMiles:   MetresToMiles(leg.Distance.Value),
+			DurationSeconds: leg.Duration.Value,
+		})
+		totalDist += leg.Distance.Value
+		totalDur += leg.Duration.Value
+	}
+
+	return &OptimiseResult{
+		OrderedStops:          ordered,
+		WaypointOrder:         r.WaypointOrder,
+		TotalDistanceMetres:   totalDist,
+		TotalDistanceMiles:    MetresToMiles(totalDist),
+		TotalDurationSeconds:  totalDur,
+		TotalDurationFriendly: FriendlyDuration(totalDur),
+		Legs:                  legs,
+	}, nil
 }
 
 func stripHTML(s string) string {
