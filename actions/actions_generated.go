@@ -152,9 +152,12 @@ import (
 	journey_calculate_route "flomation.app/automate/executor/actions/journey/calculate_route"
 	journey_compare_departure_times "flomation.app/automate/executor/actions/journey/compare_departure_times"
 	journey_find_arrive_by "flomation.app/automate/executor/actions/journey/find_arrive_by"
+	journey_generate_itinerary_pdf "flomation.app/automate/executor/actions/journey/generate_itinerary_pdf"
 	journey_geocode_address "flomation.app/automate/executor/actions/journey/geocode_address"
 	journey_get_travel_time "flomation.app/automate/executor/actions/journey/get_travel_time"
 	journey_optimise_route "flomation.app/automate/executor/actions/journey/optimise_route"
+	journey_render_route_gpx "flomation.app/automate/executor/actions/journey/render_route_gpx"
+	journey_render_static_map "flomation.app/automate/executor/actions/journey/render_static_map"
 	journey_reverse_geocode "flomation.app/automate/executor/actions/journey/reverse_geocode"
 	linear_add_comment "flomation.app/automate/executor/actions/linear/add_comment"
 	linear_create_issue "flomation.app/automate/executor/actions/linear/create_issue"
@@ -489,9 +492,12 @@ var Actions = map[string]core.Action{
 	"journey/calculate_route":               journey_calculate_route.Execute,
 	"journey/compare_departure_times":       journey_compare_departure_times.Execute,
 	"journey/find_arrive_by":                journey_find_arrive_by.Execute,
+	"journey/generate_itinerary_pdf":        journey_generate_itinerary_pdf.Execute,
 	"journey/geocode_address":               journey_geocode_address.Execute,
 	"journey/get_travel_time":               journey_get_travel_time.Execute,
 	"journey/optimise_route":                journey_optimise_route.Execute,
+	"journey/render_route_gpx":              journey_render_route_gpx.Execute,
+	"journey/render_static_map":             journey_render_static_map.Execute,
 	"journey/reverse_geocode":               journey_reverse_geocode.Execute,
 	"linear/add_comment":                    linear_add_comment.Execute,
 	"linear/create_issue":                   linear_create_issue.Execute,

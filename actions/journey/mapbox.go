@@ -322,6 +322,76 @@ func mapboxBoundsFromWaypoints(wps []struct {
 	}
 }
 
+// RenderStaticMap builds a Mapbox Static Images URL. Unlike Google's
+// query-param style, Mapbox encodes overlays into the URL PATH itself —
+// `path-{width}+{colour}-{opacity}({encoded_polyline})` for routes and
+// `pin-{size}-{label}+{colour}({lng},{lat})` for markers. The route's
+// encoded polyline must be URL-path-escaped because it contains characters
+// the path parser would otherwise interpret (e.g. `?` `#`).
+//
+// The `auto` viewport token is the equivalent of Google's "no zoom/center"
+// — Mapbox computes bounds to fit all overlays.
+func (m *mapboxProvider) RenderStaticMap(p StaticMapParams) ([]byte, string, error) {
+	if strings.TrimSpace(p.Polyline) == "" {
+		return nil, "", fmt.Errorf("journey/mapbox: render_static_map requires a polyline")
+	}
+	width, height := p.Width, p.Height
+	if width <= 0 {
+		width = 600
+	}
+	if height <= 0 {
+		height = 400
+	}
+
+	overlays := []string{
+		"path-4+0000ff-0.9(" + url.PathEscape(p.Polyline) + ")",
+	}
+	for _, marker := range p.Markers {
+		label := marker.Label
+		if label == "" {
+			label = "m"
+		}
+		colour := strings.TrimPrefix(marker.Color, "0x")
+		if colour == "" {
+			colour = "000000"
+		}
+		overlays = append(overlays, fmt.Sprintf("pin-s-%s+%s(%f,%f)",
+			url.PathEscape(label), colour, marker.Lng, marker.Lat))
+	}
+
+	viewport := "auto"
+	if p.Zoom > 0 {
+		viewport = fmt.Sprintf("%d", p.Zoom)
+	}
+
+	path := fmt.Sprintf("/styles/v1/mapbox/streets-v12/static/%s/%s/%dx%d",
+		strings.Join(overlays, ","), viewport, width, height)
+	q := url.Values{"access_token": {m.apiKey}}
+
+	u := mapboxBaseURL + path + "?" + q.Encode()
+	req, err := http.NewRequest(http.MethodGet, u, nil)
+	if err != nil {
+		return nil, "", err
+	}
+	resp, err := m.client.Do(req)
+	if err != nil {
+		return nil, "", fmt.Errorf("journey/mapbox: static map request failed: %w", err)
+	}
+	defer resp.Body.Close()
+	body, err := io.ReadAll(resp.Body)
+	if err != nil {
+		return nil, "", fmt.Errorf("journey/mapbox: read static map body: %w", err)
+	}
+	if resp.StatusCode >= 400 {
+		return nil, "", fmt.Errorf("journey/mapbox: static map http %d: %s", resp.StatusCode, strings.TrimSpace(string(body)))
+	}
+	mime := resp.Header.Get("Content-Type")
+	if mime == "" {
+		mime = "image/png"
+	}
+	return body, mime, nil
+}
+
 type mapboxOptimisationResponse struct {
 	Code      string `json:"code"`
 	Message   string `json:"message"`

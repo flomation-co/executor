@@ -14092,6 +14092,144 @@
       }
     ]
   },
+  "journey/generate_itinerary_pdf": {
+    "hash": "8c742834bd04c4e4f22458c487501843fd2dff4877aae7efbf933f9053ec5dcf",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Generate Itinerary PDF",
+    "description": "Build a printable PDF with a map, distance/duration summary, and turn-by-turn directions for a route.",
+    "website": "https://www.flomation.co",
+    "icon": "route+file-pdf",
+    "date": "11/06/2026",
+    "type": 2,
+    "category": {
+      "name": "Journey",
+      "icon": "route",
+      "description": "Route planning, journey optimisation, and printable itineraries."
+    },
+    "inputs": [
+      {
+        "name": "provider",
+        "type": "string",
+        "value": null,
+        "label": "Map Provider",
+        "placeholder": "google",
+        "required": true,
+        "options": [
+          {
+            "name": "Google Maps",
+            "value": "google"
+          },
+          {
+            "name": "Mapbox",
+            "value": "mapbox"
+          }
+        ]
+      },
+      {
+        "name": "api_key",
+        "type": "string",
+        "value": null,
+        "label": "Provider API Key",
+        "placeholder": "${secrets.GOOGLE_MAPS_API_KEY}",
+        "required": true
+      },
+      {
+        "name": "title",
+        "type": "string",
+        "value": null,
+        "label": "Itinerary title",
+        "placeholder": "London to Manchester"
+      },
+      {
+        "name": "polyline",
+        "type": "string",
+        "value": null,
+        "label": "Encoded polyline",
+        "placeholder": "${parent.polyline}",
+        "required": true
+      },
+      {
+        "name": "distance_miles",
+        "type": "string",
+        "value": null,
+        "label": "Distance (miles, from calculate_route)",
+        "placeholder": "${parent.distance_miles}"
+      },
+      {
+        "name": "duration_friendly",
+        "type": "string",
+        "value": null,
+        "label": "Duration (friendly, from calculate_route)",
+        "placeholder": "${parent.duration_friendly}"
+      },
+      {
+        "name": "steps_json",
+        "type": "text",
+        "value": null,
+        "label": "Steps JSON (from calculate_route.steps)",
+        "placeholder": "${parent.steps}"
+      },
+      {
+        "name": "include_map",
+        "type": "boolean",
+        "value": null,
+        "label": "Include map image",
+        "placeholder": ""
+      },
+      {
+        "name": "include_directions",
+        "type": "boolean",
+        "value": null,
+        "label": "Include turn-by-turn directions",
+        "placeholder": ""
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "pdf_base64",
+        "type": "string",
+        "value": null,
+        "label": "PDF (base64)",
+        "placeholder": ""
+      },
+      {
+        "name": "page_count",
+        "type": "string",
+        "value": null,
+        "label": "Page count",
+        "placeholder": ""
+      },
+      {
+        "name": "size_kb",
+        "type": "string",
+        "value": null,
+        "label": "Size (KB)",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
   "journey/geocode_address": {
     "hash": "d8a028b44dd559ff279f71958a4c3494c6f5c29400c35f9851598b9ec2ab12cb",
     "author": "Andy Esser",
@@ -14507,6 +14645,200 @@
         "type": "object",
         "value": null,
         "label": "Full optimisation JSON",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "journey/render_route_gpx": {
+    "hash": "8bcb4c0067c6815b109f1bd31d31fe07e40162e02f874ea7a0e722d6bc8d5dd2",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Export Route as GPX",
+    "description": "Convert a route polyline into GPX XML for import into Garmin, Strava, Komoot and other GPS apps.",
+    "website": "https://www.flomation.co",
+    "icon": "route+file-export",
+    "date": "11/06/2026",
+    "type": 2,
+    "category": {
+      "name": "Journey",
+      "icon": "route",
+      "description": "Route planning, journey optimisation, and printable itineraries."
+    },
+    "inputs": [
+      {
+        "name": "polyline",
+        "type": "string",
+        "value": null,
+        "label": "Encoded polyline (from calculate_route)",
+        "placeholder": "${parent.polyline}",
+        "required": true
+      },
+      {
+        "name": "name",
+        "type": "string",
+        "value": null,
+        "label": "Route name",
+        "placeholder": "London to Manchester"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "gpx_xml",
+        "type": "text",
+        "value": null,
+        "label": "GPX XML",
+        "placeholder": ""
+      },
+      {
+        "name": "gpx_base64",
+        "type": "string",
+        "value": null,
+        "label": "GPX (base64)",
+        "placeholder": ""
+      },
+      {
+        "name": "point_count",
+        "type": "string",
+        "value": null,
+        "label": "Decoded point count",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "journey/render_static_map": {
+    "hash": "852c0f3a35e01e13683c222f1be76a2305af4cc53043935f0f2cff89b9365c87",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Render Static Map",
+    "description": "Generate a PNG of a route from an encoded polyline, sized for inline display or PDF embedding.",
+    "website": "https://www.flomation.co",
+    "icon": "route+image",
+    "date": "11/06/2026",
+    "type": 2,
+    "category": {
+      "name": "Journey",
+      "icon": "route",
+      "description": "Route planning, journey optimisation, and printable itineraries."
+    },
+    "inputs": [
+      {
+        "name": "provider",
+        "type": "string",
+        "value": null,
+        "label": "Map Provider",
+        "placeholder": "google",
+        "required": true,
+        "options": [
+          {
+            "name": "Google Maps",
+            "value": "google"
+          },
+          {
+            "name": "Mapbox",
+            "value": "mapbox"
+          }
+        ]
+      },
+      {
+        "name": "api_key",
+        "type": "string",
+        "value": null,
+        "label": "Provider API Key",
+        "placeholder": "${secrets.GOOGLE_MAPS_API_KEY}",
+        "required": true
+      },
+      {
+        "name": "polyline",
+        "type": "string",
+        "value": null,
+        "label": "Encoded polyline (from calculate_route)",
+        "placeholder": "${parent.polyline}",
+        "required": true
+      },
+      {
+        "name": "width",
+        "type": "string",
+        "value": null,
+        "label": "Width (pixels)",
+        "placeholder": "600"
+      },
+      {
+        "name": "height",
+        "type": "string",
+        "value": null,
+        "label": "Height (pixels)",
+        "placeholder": "400"
+      },
+      {
+        "name": "zoom",
+        "type": "string",
+        "value": null,
+        "label": "Zoom (0 = auto-fit)",
+        "placeholder": "0"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "image_base64",
+        "type": "string",
+        "value": null,
+        "label": "Image (base64-encoded PNG)",
+        "placeholder": ""
+      },
+      {
+        "name": "mime_type",
+        "type": "string",
+        "value": null,
+        "label": "MIME type",
+        "placeholder": ""
+      },
+      {
+        "name": "size_kb",
+        "type": "string",
+        "value": null,
+        "label": "Image size (KB)",
         "placeholder": ""
       },
       {
