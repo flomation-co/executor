@@ -418,6 +418,14 @@ type ExecutionContext struct {
 	// exposes the executing user to flows via ${flow.user_id} so
 	// orchestrator logic can reason about who triggered the run.
 	UserID string `json:"user_id,omitempty"`
+	// UserVariables is the executing user's extended profile snapshot,
+	// loaded at execution bootstrap from the API's
+	// /internal/user/:id/variables endpoint. Exposed to flows as
+	// ${user.X} (e.g. ${user.first_name}, ${user.full_address}).
+	// Keys: id, name, email, salutation, first_name, last_name,
+	// job_title, address_line_1, address_line_2, city, region,
+	// postcode, country, full_name, full_address.
+	UserVariables map[string]string `json:"user_variables,omitempty"`
 	// Identities is the executing user's declared channel-identity set
 	// within OrganisationID, snapshot at execution start. Exposed to
 	// flows as ${flow.identities} (JSON-encoded). AI nodes also see
@@ -1343,6 +1351,18 @@ func (f *Flow) executeNodeActionOnly(actions map[string]Action, node *Node, envi
 							"name": name,
 						}).Warn("no execution context for flow variable substitution")
 					}
+				} else if strings.HasPrefix(m, "user.") {
+					// ${user.X} — extended-profile namespace. Populated at
+					// execution-context bootstrap from the API's internal
+					// user-variables endpoint. Empty/missing fields resolve
+					// to "" rather than leaving the literal placeholder,
+					// matching the ${flow.X} semantic.
+					name := strings.TrimPrefix(m, "user.")
+					var userVal string
+					if f.context != nil && f.context.UserVariables != nil {
+						userVal = f.context.UserVariables[name]
+					}
+					*val = strings.ReplaceAll(*val, "${"+m+"}", userVal)
 				} else if strings.HasPrefix(m, "var.") {
 					name := strings.TrimPrefix(m, "var.")
 					if f.variables != nil {
