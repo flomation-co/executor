@@ -1342,7 +1342,7 @@
   },
   "ai/openwebui": {
     "hash": "e155467a31c394d91b9daf99b082e386a12899f02840ae02a327dede327b0f69",
-    "author": "Andy Esser",
+    "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Open WebUI Prompt",
     "description": "Send a prompt to an Open WebUI (or any OpenAI-compatible) Chat Completions endpoint and return the response",
