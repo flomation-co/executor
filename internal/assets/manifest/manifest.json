@@ -1341,8 +1341,8 @@
     ]
   },
   "ai/openwebui": {
-    "hash": "e155467a31c394d91b9daf99b082e386a12899f02840ae02a327dede327b0f69",
-    "author": "Dave McElin",
+    "hash": "ad6797e139c3e11c07722a37b89396fb681f84bb7be1a6a9ffd1800eaa183f32",
+    "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Open WebUI Prompt",
     "description": "Send a prompt to an Open WebUI (or any OpenAI-compatible) Chat Completions endpoint and return the response",
@@ -14242,8 +14242,175 @@
       }
     ]
   },
+  "journey/find_nearby_places": {
+    "hash": "f60122cd916899882360af9ef1c63020c31288fbbb3f29ea2ce5b976f73710ef",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Find Nearby Places",
+    "description": "Find points of interest (restaurants, hotels, petrol stations etc.) around a location.",
+    "website": "https://www.flomation.co",
+    "icon": "route+location-dot",
+    "date": "11/06/2026",
+    "type": 2,
+    "category": {
+      "name": "Journey",
+      "icon": "route",
+      "description": "Route planning, journey optimisation, and printable itineraries."
+    },
+    "inputs": [
+      {
+        "name": "provider",
+        "type": "string",
+        "value": null,
+        "label": "Map Provider",
+        "placeholder": "google",
+        "required": true,
+        "options": [
+          {
+            "name": "Google Maps",
+            "value": "google"
+          },
+          {
+            "name": "Mapbox",
+            "value": "mapbox"
+          }
+        ]
+      },
+      {
+        "name": "api_key",
+        "type": "string",
+        "value": null,
+        "label": "Provider API Key",
+        "placeholder": "${secrets.GOOGLE_MAPS_API_KEY}",
+        "required": true
+      },
+      {
+        "name": "latitude",
+        "type": "string",
+        "value": null,
+        "label": "Latitude",
+        "placeholder": "51.5034",
+        "required": true
+      },
+      {
+        "name": "longitude",
+        "type": "string",
+        "value": null,
+        "label": "Longitude",
+        "placeholder": "-0.1276",
+        "required": true
+      },
+      {
+        "name": "radius_metres",
+        "type": "string",
+        "value": null,
+        "label": "Search radius (metres)",
+        "placeholder": "1500"
+      },
+      {
+        "name": "category",
+        "type": "string",
+        "value": null,
+        "label": "Category",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "Any",
+            "value": ""
+          },
+          {
+            "name": "Restaurant",
+            "value": "restaurant"
+          },
+          {
+            "name": "Cafe",
+            "value": "cafe"
+          },
+          {
+            "name": "Petrol Station",
+            "value": "gas_station"
+          },
+          {
+            "name": "Hotel / Lodging",
+            "value": "lodging"
+          },
+          {
+            "name": "Tourist Attraction",
+            "value": "tourist_attraction"
+          },
+          {
+            "name": "Parking",
+            "value": "parking"
+          },
+          {
+            "name": "Pharmacy",
+            "value": "pharmacy"
+          },
+          {
+            "name": "ATM",
+            "value": "atm"
+          },
+          {
+            "name": "Supermarket",
+            "value": "supermarket"
+          }
+        ]
+      },
+      {
+        "name": "keyword",
+        "type": "string",
+        "value": null,
+        "label": "Keyword filter",
+        "placeholder": "vegetarian"
+      },
+      {
+        "name": "limit",
+        "type": "string",
+        "value": null,
+        "label": "Max results",
+        "placeholder": "10"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "places",
+        "type": "object",
+        "value": null,
+        "label": "Places list",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "string",
+        "value": null,
+        "label": "Result count",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
   "journey/generate_itinerary_pdf": {
-    "hash": "8c742834bd04c4e4f22458c487501843fd2dff4877aae7efbf933f9053ec5dcf",
+    "hash": "b182550844423730f4196aefb3358d2c6b981056b5e748dbb696af9d2d3c367f",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Generate Itinerary PDF",
@@ -14472,6 +14639,261 @@
         "type": "string",
         "value": null,
         "label": "Confidence",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "journey/get_elevation_profile": {
+    "hash": "2d800f936fc6b862afc482017fb503cc8ea52b9760bae7402ba14d2380aad664",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Get Elevation Profile",
+    "description": "Sample elevations along a route polyline and return total ascent, descent, min and max.",
+    "website": "https://www.flomation.co",
+    "icon": "route+mountain",
+    "date": "11/06/2026",
+    "type": 2,
+    "category": {
+      "name": "Journey",
+      "icon": "route",
+      "description": "Route planning, journey optimisation, and printable itineraries."
+    },
+    "inputs": [
+      {
+        "name": "provider",
+        "type": "string",
+        "value": null,
+        "label": "Map Provider",
+        "placeholder": "google",
+        "required": true,
+        "options": [
+          {
+            "name": "Google Maps",
+            "value": "google"
+          },
+          {
+            "name": "Mapbox",
+            "value": "mapbox"
+          }
+        ]
+      },
+      {
+        "name": "api_key",
+        "type": "string",
+        "value": null,
+        "label": "Provider API Key",
+        "placeholder": "${secrets.GOOGLE_MAPS_API_KEY}",
+        "required": true
+      },
+      {
+        "name": "polyline",
+        "type": "string",
+        "value": null,
+        "label": "Encoded polyline (from calculate_route)",
+        "placeholder": "${parent.polyline}",
+        "required": true
+      },
+      {
+        "name": "sample_count",
+        "type": "string",
+        "value": null,
+        "label": "Number of samples (max 512)",
+        "placeholder": "100"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "total_ascent_metres",
+        "type": "string",
+        "value": null,
+        "label": "Total ascent (metres)",
+        "placeholder": ""
+      },
+      {
+        "name": "total_descent_metres",
+        "type": "string",
+        "value": null,
+        "label": "Total descent (metres)",
+        "placeholder": ""
+      },
+      {
+        "name": "min_elevation_metres",
+        "type": "string",
+        "value": null,
+        "label": "Minimum elevation (metres)",
+        "placeholder": ""
+      },
+      {
+        "name": "max_elevation_metres",
+        "type": "string",
+        "value": null,
+        "label": "Maximum elevation (metres)",
+        "placeholder": ""
+      },
+      {
+        "name": "samples",
+        "type": "object",
+        "value": null,
+        "label": "Elevation samples",
+        "placeholder": ""
+      },
+      {
+        "name": "profile",
+        "type": "object",
+        "value": null,
+        "label": "Full elevation profile JSON",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "journey/get_place_details": {
+    "hash": "6a82b7891ba45ed502e5262a59b1af233a26b348fb9ce470d86f75bf7efedb46",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Get Place Details",
+    "description": "Fetch opening hours, phone, website and rating details for a place ID.",
+    "website": "https://www.flomation.co",
+    "icon": "route+circle-info",
+    "date": "11/06/2026",
+    "type": 2,
+    "category": {
+      "name": "Journey",
+      "icon": "route",
+      "description": "Route planning, journey optimisation, and printable itineraries."
+    },
+    "inputs": [
+      {
+        "name": "provider",
+        "type": "string",
+        "value": null,
+        "label": "Map Provider",
+        "placeholder": "google",
+        "required": true,
+        "options": [
+          {
+            "name": "Google Maps",
+            "value": "google"
+          },
+          {
+            "name": "Mapbox",
+            "value": "mapbox"
+          }
+        ]
+      },
+      {
+        "name": "api_key",
+        "type": "string",
+        "value": null,
+        "label": "Provider API Key",
+        "placeholder": "${secrets.GOOGLE_MAPS_API_KEY}",
+        "required": true
+      },
+      {
+        "name": "place_id",
+        "type": "string",
+        "value": null,
+        "label": "Place ID (provider-scoped)",
+        "placeholder": "${parent.places.0.place_id}",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "name",
+        "type": "string",
+        "value": null,
+        "label": "Place name",
+        "placeholder": ""
+      },
+      {
+        "name": "address",
+        "type": "string",
+        "value": null,
+        "label": "Full address",
+        "placeholder": ""
+      },
+      {
+        "name": "phone",
+        "type": "string",
+        "value": null,
+        "label": "Phone number",
+        "placeholder": ""
+      },
+      {
+        "name": "website",
+        "type": "string",
+        "value": null,
+        "label": "Website",
+        "placeholder": ""
+      },
+      {
+        "name": "rating",
+        "type": "string",
+        "value": null,
+        "label": "Rating (0-5)",
+        "placeholder": ""
+      },
+      {
+        "name": "opening_hours",
+        "type": "object",
+        "value": null,
+        "label": "Opening hours per day",
+        "placeholder": ""
+      },
+      {
+        "name": "google_url",
+        "type": "string",
+        "value": null,
+        "label": "Google Maps URL",
+        "placeholder": ""
+      },
+      {
+        "name": "details",
+        "type": "object",
+        "value": null,
+        "label": "Full place details JSON",
         "placeholder": ""
       },
       {

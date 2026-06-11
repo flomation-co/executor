@@ -153,8 +153,11 @@ import (
 	journey_calculate_route "flomation.app/automate/executor/actions/journey/calculate_route"
 	journey_compare_departure_times "flomation.app/automate/executor/actions/journey/compare_departure_times"
 	journey_find_arrive_by "flomation.app/automate/executor/actions/journey/find_arrive_by"
+	journey_find_nearby_places "flomation.app/automate/executor/actions/journey/find_nearby_places"
 	journey_generate_itinerary_pdf "flomation.app/automate/executor/actions/journey/generate_itinerary_pdf"
 	journey_geocode_address "flomation.app/automate/executor/actions/journey/geocode_address"
+	journey_get_elevation_profile "flomation.app/automate/executor/actions/journey/get_elevation_profile"
+	journey_get_place_details "flomation.app/automate/executor/actions/journey/get_place_details"
 	journey_get_travel_time "flomation.app/automate/executor/actions/journey/get_travel_time"
 	journey_optimise_route "flomation.app/automate/executor/actions/journey/optimise_route"
 	journey_render_route_gpx "flomation.app/automate/executor/actions/journey/render_route_gpx"
@@ -494,8 +497,11 @@ var Actions = map[string]core.Action{
 	"journey/calculate_route":               journey_calculate_route.Execute,
 	"journey/compare_departure_times":       journey_compare_departure_times.Execute,
 	"journey/find_arrive_by":                journey_find_arrive_by.Execute,
+	"journey/find_nearby_places":            journey_find_nearby_places.Execute,
 	"journey/generate_itinerary_pdf":        journey_generate_itinerary_pdf.Execute,
 	"journey/geocode_address":               journey_geocode_address.Execute,
+	"journey/get_elevation_profile":         journey_get_elevation_profile.Execute,
+	"journey/get_place_details":             journey_get_place_details.Execute,
 	"journey/get_travel_time":               journey_get_travel_time.Execute,
 	"journey/optimise_route":                journey_optimise_route.Execute,
 	"journey/render_route_gpx":              journey_render_route_gpx.Execute,

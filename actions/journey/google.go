@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"io"
+	"math"
 	"net/http"
 	"net/url"
 	"strconv"
@@ -473,6 +474,230 @@ func (g *googleProvider) RenderStaticMap(p StaticMapParams) ([]byte, string, err
 		mime = "image/png"
 	}
 	return body, mime, nil
+}
+
+type googleNearbyResponse struct {
+	Status       string `json:"status"`
+	ErrorMessage string `json:"error_message"`
+	Results      []struct {
+		PlaceID          string   `json:"place_id"`
+		Name             string   `json:"name"`
+		Vicinity         string   `json:"vicinity"`
+		Geometry         googleGeocodeGeometry
+		Types            []string `json:"types"`
+		Rating           float64  `json:"rating"`
+		UserRatingsTotal int      `json:"user_ratings_total"`
+		PriceLevel       int      `json:"price_level"`
+		OpeningHours     *struct {
+			OpenNow bool `json:"open_now"`
+		} `json:"opening_hours,omitempty"`
+	} `json:"results"`
+}
+
+func (g *googleProvider) FindNearbyPlaces(p NearbyPlacesParams) ([]Place, error) {
+	if p.Radius <= 0 {
+		p.Radius = 1500
+	}
+	q := url.Values{
+		"location": {fmt.Sprintf("%f,%f", p.Latitude, p.Longitude)},
+		"radius":   {strconv.Itoa(p.Radius)},
+		"key":      {g.apiKey},
+	}
+	if p.Keyword != "" {
+		q.Set("keyword", p.Keyword)
+	}
+	if p.Category != "" {
+		q.Set("type", p.Category)
+	}
+	body, err := g.get("/place/nearbysearch/json", q)
+	if err != nil {
+		return nil, err
+	}
+	var resp googleNearbyResponse
+	if err := json.Unmarshal(body, &resp); err != nil {
+		return nil, fmt.Errorf("journey/google: invalid nearby response: %w", err)
+	}
+	if err := googleStatusErr("nearby_places", resp.Status, resp.ErrorMessage); err != nil {
+		return nil, err
+	}
+
+	origin := LatLng{Lat: p.Latitude, Lng: p.Longitude}
+	out := make([]Place, 0, len(resp.Results))
+	for i, r := range resp.Results {
+		if p.Limit > 0 && i >= p.Limit {
+			break
+		}
+		place := Place{
+			PlaceID:     r.PlaceID,
+			Name:        r.Name,
+			Address:     r.Vicinity,
+			Latitude:    r.Geometry.Location.Lat,
+			Longitude:   r.Geometry.Location.Lng,
+			Rating:      r.Rating,
+			UserRatings: r.UserRatingsTotal,
+			PriceLevel:  r.PriceLevel,
+			Types:       r.Types,
+			DistanceM:   haversineMetres(origin, r.Geometry.Location),
+		}
+		if r.OpeningHours != nil {
+			openNow := r.OpeningHours.OpenNow
+			place.OpenNow = &openNow
+		}
+		out = append(out, place)
+	}
+	return out, nil
+}
+
+type googlePlaceDetailsResponse struct {
+	Status       string `json:"status"`
+	ErrorMessage string `json:"error_message"`
+	Result       struct {
+		PlaceID              string   `json:"place_id"`
+		Name                 string   `json:"name"`
+		FormattedAddress     string   `json:"formatted_address"`
+		Geometry             googleGeocodeGeometry
+		FormattedPhoneNumber string   `json:"formatted_phone_number"`
+		Website              string   `json:"website"`
+		URL                  string   `json:"url"`
+		Rating               float64  `json:"rating"`
+		UserRatingsTotal     int      `json:"user_ratings_total"`
+		PriceLevel           int      `json:"price_level"`
+		Types                []string `json:"types"`
+		OpeningHours         *struct {
+			WeekdayText []string `json:"weekday_text"`
+		} `json:"opening_hours,omitempty"`
+	} `json:"result"`
+}
+
+func (g *googleProvider) GetPlaceDetails(placeID string) (*PlaceDetails, error) {
+	if strings.TrimSpace(placeID) == "" {
+		return nil, fmt.Errorf("journey/google: place_id is required")
+	}
+	q := url.Values{
+		"place_id": {placeID},
+		"key":      {g.apiKey},
+		"fields":   {"place_id,name,formatted_address,geometry,formatted_phone_number,website,url,rating,user_ratings_total,price_level,types,opening_hours"},
+	}
+	body, err := g.get("/place/details/json", q)
+	if err != nil {
+		return nil, err
+	}
+	var resp googlePlaceDetailsResponse
+	if err := json.Unmarshal(body, &resp); err != nil {
+		return nil, fmt.Errorf("journey/google: invalid details response: %w", err)
+	}
+	if err := googleStatusErr("place_details", resp.Status, resp.ErrorMessage); err != nil {
+		return nil, err
+	}
+	r := resp.Result
+	out := &PlaceDetails{
+		PlaceID:     r.PlaceID,
+		Name:        r.Name,
+		Address:     r.FormattedAddress,
+		Latitude:    r.Geometry.Location.Lat,
+		Longitude:   r.Geometry.Location.Lng,
+		Phone:       r.FormattedPhoneNumber,
+		Website:     r.Website,
+		Rating:      r.Rating,
+		UserRatings: r.UserRatingsTotal,
+		PriceLevel:  r.PriceLevel,
+		Types:       r.Types,
+		GoogleURL:   r.URL,
+	}
+	if r.OpeningHours != nil {
+		out.OpeningHours = r.OpeningHours.WeekdayText
+	}
+	return out, nil
+}
+
+type googleElevationResponse struct {
+	Status       string `json:"status"`
+	ErrorMessage string `json:"error_message"`
+	Results      []struct {
+		Elevation  float64 `json:"elevation"`
+		Resolution float64 `json:"resolution"`
+		Location   LatLng  `json:"location"`
+	} `json:"results"`
+}
+
+// GetElevationProfile uses Google's Elevation API. Up to 512 samples per
+// request — anything higher is clamped. Returns ascent (sum of positive
+// deltas), descent (sum of negative deltas), min/max elevation, and the
+// raw samples for downstream graphing.
+func (g *googleProvider) GetElevationProfile(p ElevationParams) (*ElevationResult, error) {
+	if strings.TrimSpace(p.Polyline) == "" {
+		return nil, fmt.Errorf("journey/google: elevation_profile requires a polyline")
+	}
+	samples := p.SampleCount
+	if samples <= 0 {
+		samples = 100
+	}
+	if samples > 512 {
+		samples = 512
+	}
+	q := url.Values{
+		"path":    {"enc:" + p.Polyline},
+		"samples": {strconv.Itoa(samples)},
+		"key":     {g.apiKey},
+	}
+	body, err := g.get("/elevation/json", q)
+	if err != nil {
+		return nil, err
+	}
+	var resp googleElevationResponse
+	if err := json.Unmarshal(body, &resp); err != nil {
+		return nil, fmt.Errorf("journey/google: invalid elevation response: %w", err)
+	}
+	if err := googleStatusErr("elevation", resp.Status, resp.ErrorMessage); err != nil {
+		return nil, err
+	}
+	if len(resp.Results) == 0 {
+		return nil, fmt.Errorf("journey/google: no elevation samples returned")
+	}
+
+	out := &ElevationResult{
+		Samples:            make([]ElevationSample, 0, len(resp.Results)),
+		MinElevationMetres: resp.Results[0].Elevation,
+		MaxElevationMetres: resp.Results[0].Elevation,
+	}
+	for i, r := range resp.Results {
+		out.Samples = append(out.Samples, ElevationSample{
+			Latitude:   r.Location.Lat,
+			Longitude:  r.Location.Lng,
+			Elevation:  r.Elevation,
+			Resolution: r.Resolution,
+		})
+		if r.Elevation < out.MinElevationMetres {
+			out.MinElevationMetres = r.Elevation
+		}
+		if r.Elevation > out.MaxElevationMetres {
+			out.MaxElevationMetres = r.Elevation
+		}
+		if i > 0 {
+			d := r.Elevation - resp.Results[i-1].Elevation
+			if d > 0 {
+				out.TotalAscentMetres += d
+			} else {
+				out.TotalDescentMetres += -d
+			}
+		}
+	}
+	return out, nil
+}
+
+// haversineMetres approximates the great-circle distance between two
+// points. Accurate to within ~0.5% for distances under 1000km, which more
+// than covers the "how far is this restaurant from me" use case.
+func haversineMetres(a, b LatLng) float64 {
+	const earthRadiusMetres = 6371000.0
+	toRad := func(deg float64) float64 { return deg * math.Pi / 180 }
+	lat1 := toRad(a.Lat)
+	lat2 := toRad(b.Lat)
+	dLat := lat2 - lat1
+	dLng := toRad(b.Lng - a.Lng)
+	h := math.Sin(dLat/2)*math.Sin(dLat/2) +
+		math.Cos(lat1)*math.Cos(lat2)*math.Sin(dLng/2)*math.Sin(dLng/2)
+	return earthRadiusMetres * 2 * math.Asin(math.Sqrt(h))
 }
 
 func stripHTML(s string) string {
