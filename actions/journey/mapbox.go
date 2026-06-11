@@ -550,3 +550,22 @@ func (m *mapboxProvider) OptimiseRoute(p OptimiseParams) (*OptimiseResult, error
 		Legs:                  legs,
 	}, nil
 }
+
+// FindNearbyPlaces / GetPlaceDetails / GetElevationProfile return clear
+// "not supported by this provider" errors. Mapbox has POI category
+// filtering inside its geocoding API but the rating/hours/phone data
+// is far more limited than Google Places, and Mapbox has no equivalent
+// elevation API at all. Rather than half-implementing with degraded
+// data, we surface the gap so flow authors switch provider deliberately.
+
+func (m *mapboxProvider) FindNearbyPlaces(NearbyPlacesParams) ([]Place, error) {
+	return nil, fmt.Errorf("journey/mapbox: find_nearby_places not supported; use provider=google")
+}
+
+func (m *mapboxProvider) GetPlaceDetails(string) (*PlaceDetails, error) {
+	return nil, fmt.Errorf("journey/mapbox: get_place_details not supported; use provider=google")
+}
+
+func (m *mapboxProvider) GetElevationProfile(ElevationParams) (*ElevationResult, error) {
+	return nil, fmt.Errorf("journey/mapbox: get_elevation_profile not supported; use provider=google")
+}

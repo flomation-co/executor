@@ -133,6 +133,73 @@ type StaticMapParams struct {
 	Markers []StaticMapMarker
 }
 
+// NearbyPlacesParams asks the provider to surface POIs around a point.
+// Categories names follow each provider's vocabulary — Google uses
+// "restaurant", "gas_station", "lodging" etc. (Places API "type" values);
+// Mapbox uses POI category strings. Limit caps the returned set.
+type NearbyPlacesParams struct {
+	Latitude  float64
+	Longitude float64
+	Radius    int      // metres
+	Keyword   string   // free-text filter, optional
+	Category  string   // provider-specific category, optional
+	Limit     int      // max results, 0 = provider default
+}
+
+type Place struct {
+	PlaceID      string   `json:"place_id"`
+	Name         string   `json:"name"`
+	Address      string   `json:"address"`
+	Latitude     float64  `json:"latitude"`
+	Longitude    float64  `json:"longitude"`
+	Rating       float64  `json:"rating,omitempty"`
+	UserRatings  int      `json:"user_ratings,omitempty"`
+	PriceLevel   int      `json:"price_level,omitempty"`
+	Types        []string `json:"types,omitempty"`
+	DistanceM    float64  `json:"distance_metres,omitempty"`
+	OpenNow      *bool    `json:"open_now,omitempty"`
+}
+
+type PlaceDetails struct {
+	PlaceID      string   `json:"place_id"`
+	Name         string   `json:"name"`
+	Address      string   `json:"address"`
+	Latitude     float64  `json:"latitude"`
+	Longitude    float64  `json:"longitude"`
+	Phone        string   `json:"phone,omitempty"`
+	Website      string   `json:"website,omitempty"`
+	Rating       float64  `json:"rating,omitempty"`
+	UserRatings  int      `json:"user_ratings,omitempty"`
+	PriceLevel   int      `json:"price_level,omitempty"`
+	Types        []string `json:"types,omitempty"`
+	OpeningHours []string `json:"opening_hours,omitempty"`
+	GoogleURL    string   `json:"google_url,omitempty"`
+}
+
+// ElevationParams asks for an elevation profile sampled along a polyline.
+// SampleCount is the total number of evenly-spaced samples. Providers cap
+// this — Google's Elevation API supports up to 512 sampled points in one
+// call.
+type ElevationParams struct {
+	Polyline    string
+	SampleCount int
+}
+
+type ElevationSample struct {
+	Latitude    float64 `json:"latitude"`
+	Longitude   float64 `json:"longitude"`
+	Elevation   float64 `json:"elevation_metres"`
+	Resolution  float64 `json:"resolution_metres,omitempty"`
+}
+
+type ElevationResult struct {
+	TotalAscentMetres   float64           `json:"total_ascent_metres"`
+	TotalDescentMetres  float64           `json:"total_descent_metres"`
+	MinElevationMetres  float64           `json:"min_elevation_metres"`
+	MaxElevationMetres  float64           `json:"max_elevation_metres"`
+	Samples             []ElevationSample `json:"samples"`
+}
+
 type Provider interface {
 	Name() string
 	Geocode(query, region string) (*GeocodeResult, error)
@@ -141,6 +208,9 @@ type Provider interface {
 	GetTravelTime(origin, destination, mode string, departAt *time.Time) (*TravelTimeResult, error)
 	OptimiseRoute(params OptimiseParams) (*OptimiseResult, error)
 	RenderStaticMap(params StaticMapParams) ([]byte, string, error)
+	FindNearbyPlaces(params NearbyPlacesParams) ([]Place, error)
+	GetPlaceDetails(placeID string) (*PlaceDetails, error)
+	GetElevationProfile(params ElevationParams) (*ElevationResult, error)
 }
 
 var DefaultClient = &http.Client{Timeout: 60 * time.Second}
