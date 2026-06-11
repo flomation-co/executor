@@ -156,6 +156,25 @@ const (
 
 type Action func(flow *Flow, node *Node, inputs []*Connection) (map[string]interface{}, error)
 
+// substitutionString renders an arbitrary value for inline ${...} substitution.
+// Strings interpolate bare (no surrounding quotes); slices/structs/maps are
+// JSON-encoded so downstream actions can re-parse them. Numbers and booleans
+// render identically under either form. This replaces an earlier fmt.Sprintf
+// "%v" path that produced Go syntax for complex types (e.g. "[{Head north
+// 500 60}]") — unparseable JSON and not useful as a string either.
+func substitutionString(v interface{}) string {
+	if v == nil {
+		return ""
+	}
+	if s, ok := v.(string); ok {
+		return s
+	}
+	if b, err := json.Marshal(v); err == nil {
+		return string(b)
+	}
+	return fmt.Sprintf("%v", v)
+}
+
 type Edge struct {
 	ID           string `json:"id"`
 	Type         string `json:"type"`
@@ -1316,7 +1335,7 @@ func (f *Flow) executeNodeActionOnly(actions map[string]Action, node *Node, envi
 					name := strings.TrimPrefix(m, "var.")
 					if f.variables != nil {
 						if varVal, ok := f.variables[name]; ok {
-							*val = strings.ReplaceAll(*val, "${"+m+"}", fmt.Sprintf("%v", varVal))
+							*val = strings.ReplaceAll(*val, "${"+m+"}", substitutionString(varVal))
 						} else {
 							log.WithFields(log.Fields{
 								"name": name,
@@ -1373,7 +1392,7 @@ func (f *Flow) executeNodeActionOnly(actions map[string]Action, node *Node, envi
 					*val = strings.ReplaceAll(*val, "${"+m+"}", *p.Value)
 				} else {
 					if res, exists := parentResults[m]; exists {
-						*val = strings.ReplaceAll(*val, "${"+m+"}", fmt.Sprintf("%v", res))
+						*val = strings.ReplaceAll(*val, "${"+m+"}", substitutionString(res))
 					} else if dotIdx := strings.IndexByte(m, '.'); dotIdx > 0 {
 						// Scoped node reference: ${nodeId.key} — look up in
 						// the global node results cache. This handles cases
@@ -1401,7 +1420,7 @@ func (f *Flow) executeNodeActionOnly(actions map[string]Action, node *Node, envi
 
 						if nr, ok := f.nodeResults[scopeNodeID]; ok {
 							if res, ok := nr[scopeKey]; ok {
-								*val = strings.ReplaceAll(*val, "${"+m+"}", fmt.Sprintf("%v", res))
+								*val = strings.ReplaceAll(*val, "${"+m+"}", substitutionString(res))
 							} else {
 								log.WithFields(log.Fields{
 									"output":  m,
@@ -1768,7 +1787,7 @@ func (f *Flow) executeNodeChildren(actions map[string]Action, node *Node, output
 						f.SetVariable("tool.input", string(inputJSON))
 					}
 					for k, v := range req.Input {
-						f.SetVariable("tool.input."+k, fmt.Sprintf("%v", v))
+						f.SetVariable("tool.input."+k, substitutionString(v))
 					}
 
 					// Clear tools subgraph results for this execution
