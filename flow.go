@@ -215,12 +215,24 @@ func (c *Connection) String() *string {
 
 	if c.Type == ConnectionTypeString || c.Type == ConnectionTypeText ||
 		c.Type == ConnectionTypeDateTime || c.Type == ConnectionTypeMultiSelect {
-		v, ok := c.Value.(string)
-		if !ok {
-			return nil
+		if v, ok := c.Value.(string); ok {
+			return &v
 		}
-
-		return &v
+		// Non-string value landed in a string/text-typed input — this happens
+		// when a whole-value ${parent.X} reference targets an upstream output
+		// that is a slice/map/struct (e.g. ${parent.steps} → []RouteStep).
+		// JSON-encode so downstream actions can json.Unmarshal the result.
+		// Returning nil here would mask the wire-up — the action sees an
+		// empty input and silently skips its job.
+		if c.Value == nil {
+			empty := ""
+			return &empty
+		}
+		if b, err := json.Marshal(c.Value); err == nil {
+			s := string(b)
+			return &s
+		}
+		return nil
 	} else if c.Type == ConnectionTypeBoolean {
 		_, err := strconv.ParseBool(fmt.Sprintf("%v", c.Value))
 		if err != nil {
