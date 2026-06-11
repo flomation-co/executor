@@ -150,8 +150,11 @@ import (
 	google_slides_get "flomation.app/automate/executor/actions/google/slides/get"
 	google_slides_get_slide "flomation.app/automate/executor/actions/google/slides/get_slide"
 	journey_calculate_route "flomation.app/automate/executor/actions/journey/calculate_route"
+	journey_compare_departure_times "flomation.app/automate/executor/actions/journey/compare_departure_times"
+	journey_find_arrive_by "flomation.app/automate/executor/actions/journey/find_arrive_by"
 	journey_geocode_address "flomation.app/automate/executor/actions/journey/geocode_address"
 	journey_get_travel_time "flomation.app/automate/executor/actions/journey/get_travel_time"
+	journey_optimise_route "flomation.app/automate/executor/actions/journey/optimise_route"
 	journey_reverse_geocode "flomation.app/automate/executor/actions/journey/reverse_geocode"
 	linear_add_comment "flomation.app/automate/executor/actions/linear/add_comment"
 	linear_create_issue "flomation.app/automate/executor/actions/linear/create_issue"
@@ -484,8 +487,11 @@ var Actions = map[string]core.Action{
 	"google/slides/get":                     google_slides_get.Execute,
 	"google/slides/get_slide":               google_slides_get_slide.Execute,
 	"journey/calculate_route":               journey_calculate_route.Execute,
+	"journey/compare_departure_times":       journey_compare_departure_times.Execute,
+	"journey/find_arrive_by":                journey_find_arrive_by.Execute,
 	"journey/geocode_address":               journey_geocode_address.Execute,
 	"journey/get_travel_time":               journey_get_travel_time.Execute,
+	"journey/optimise_route":                journey_optimise_route.Execute,
 	"journey/reverse_geocode":               journey_reverse_geocode.Execute,
 	"linear/add_comment":                    linear_add_comment.Execute,
 	"linear/create_issue":                   linear_create_issue.Execute,

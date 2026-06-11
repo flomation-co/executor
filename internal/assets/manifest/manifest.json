@@ -13783,6 +13783,315 @@
       }
     ]
   },
+  "journey/compare_departure_times": {
+    "hash": "2b05ac1980450fe72d5d0b7ebcb2085b6408929512aa586b3bbc6427bf9e3cb9",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Compare Departure Times",
+    "description": "Run the same route at multiple departure times and surface rush-hour deltas.",
+    "website": "https://www.flomation.co",
+    "icon": "route+clock-rotate-left",
+    "date": "11/06/2026",
+    "type": 2,
+    "category": {
+      "name": "Journey",
+      "icon": "route",
+      "description": "Route planning, journey optimisation, and printable itineraries."
+    },
+    "inputs": [
+      {
+        "name": "provider",
+        "type": "string",
+        "value": null,
+        "label": "Map Provider",
+        "placeholder": "google",
+        "required": true,
+        "options": [
+          {
+            "name": "Google Maps",
+            "value": "google"
+          },
+          {
+            "name": "Mapbox",
+            "value": "mapbox"
+          }
+        ]
+      },
+      {
+        "name": "api_key",
+        "type": "string",
+        "value": null,
+        "label": "Provider API Key",
+        "placeholder": "${secrets.GOOGLE_MAPS_API_KEY}",
+        "required": true
+      },
+      {
+        "name": "origin",
+        "type": "string",
+        "value": null,
+        "label": "Origin",
+        "placeholder": "London, UK",
+        "required": true
+      },
+      {
+        "name": "destination",
+        "type": "string",
+        "value": null,
+        "label": "Destination",
+        "placeholder": "Manchester, UK",
+        "required": true
+      },
+      {
+        "name": "waypoints",
+        "type": "string",
+        "value": null,
+        "label": "Waypoints (comma- or pipe-separated)",
+        "placeholder": "Birmingham|Stoke"
+      },
+      {
+        "name": "mode",
+        "type": "string",
+        "value": null,
+        "label": "Travel Mode",
+        "placeholder": "driving",
+        "options": [
+          {
+            "name": "Driving",
+            "value": "driving"
+          },
+          {
+            "name": "Walking",
+            "value": "walking"
+          },
+          {
+            "name": "Cycling",
+            "value": "cycling"
+          },
+          {
+            "name": "Transit",
+            "value": "transit"
+          }
+        ]
+      },
+      {
+        "name": "departure_times",
+        "type": "string",
+        "value": null,
+        "label": "Departure times (comma-separated RFC3339)",
+        "placeholder": "2026-06-12T07:00:00Z,2026-06-12T08:00:00Z,2026-06-12T17:00:00Z",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "comparisons",
+        "type": "object",
+        "value": null,
+        "label": "Per-departure breakdown",
+        "placeholder": ""
+      },
+      {
+        "name": "best_departure",
+        "type": "string",
+        "value": null,
+        "label": "Fastest departure time (RFC3339)",
+        "placeholder": ""
+      },
+      {
+        "name": "best_duration_friendly",
+        "type": "string",
+        "value": null,
+        "label": "Fastest duration",
+        "placeholder": ""
+      },
+      {
+        "name": "worst_departure",
+        "type": "string",
+        "value": null,
+        "label": "Slowest departure time (RFC3339)",
+        "placeholder": ""
+      },
+      {
+        "name": "worst_duration_friendly",
+        "type": "string",
+        "value": null,
+        "label": "Slowest duration",
+        "placeholder": ""
+      },
+      {
+        "name": "delta_seconds",
+        "type": "string",
+        "value": null,
+        "label": "Time difference (seconds)",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "journey/find_arrive_by": {
+    "hash": "bdce566ed33e05209bc6aa873502ad8668e5efac02a325a99cd58c34749c6852",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Find Departure Time",
+    "description": "Calculate when to leave to arrive by a given time, accounting for traffic at that hour.",
+    "website": "https://www.flomation.co",
+    "icon": "route+hourglass-end",
+    "date": "11/06/2026",
+    "type": 2,
+    "category": {
+      "name": "Journey",
+      "icon": "route",
+      "description": "Route planning, journey optimisation, and printable itineraries."
+    },
+    "inputs": [
+      {
+        "name": "provider",
+        "type": "string",
+        "value": null,
+        "label": "Map Provider",
+        "placeholder": "google",
+        "required": true,
+        "options": [
+          {
+            "name": "Google Maps",
+            "value": "google"
+          },
+          {
+            "name": "Mapbox",
+            "value": "mapbox"
+          }
+        ]
+      },
+      {
+        "name": "api_key",
+        "type": "string",
+        "value": null,
+        "label": "Provider API Key",
+        "placeholder": "${secrets.GOOGLE_MAPS_API_KEY}",
+        "required": true
+      },
+      {
+        "name": "origin",
+        "type": "string",
+        "value": null,
+        "label": "Origin",
+        "placeholder": "Home",
+        "required": true
+      },
+      {
+        "name": "destination",
+        "type": "string",
+        "value": null,
+        "label": "Destination",
+        "placeholder": "Office",
+        "required": true
+      },
+      {
+        "name": "arrive_by",
+        "type": "datetime",
+        "value": null,
+        "label": "Arrive by",
+        "placeholder": "2026-06-12T09:00",
+        "required": true
+      },
+      {
+        "name": "mode",
+        "type": "string",
+        "value": null,
+        "label": "Travel Mode",
+        "placeholder": "driving",
+        "options": [
+          {
+            "name": "Driving",
+            "value": "driving"
+          },
+          {
+            "name": "Walking",
+            "value": "walking"
+          },
+          {
+            "name": "Cycling",
+            "value": "cycling"
+          },
+          {
+            "name": "Transit",
+            "value": "transit"
+          }
+        ]
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "recommended_departure",
+        "type": "string",
+        "value": null,
+        "label": "Recommended departure (RFC3339)",
+        "placeholder": ""
+      },
+      {
+        "name": "estimated_duration_seconds",
+        "type": "string",
+        "value": null,
+        "label": "Estimated duration (seconds)",
+        "placeholder": ""
+      },
+      {
+        "name": "estimated_duration_friendly",
+        "type": "string",
+        "value": null,
+        "label": "Estimated duration (friendly)",
+        "placeholder": ""
+      },
+      {
+        "name": "distance_miles",
+        "type": "string",
+        "value": null,
+        "label": "Distance (miles)",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
   "journey/geocode_address": {
     "hash": "d8a028b44dd559ff279f71958a4c3494c6f5c29400c35f9851598b9ec2ab12cb",
     "author": "Andy Esser",
@@ -14018,6 +14327,186 @@
         "type": "string",
         "value": null,
         "label": "Duration (friendly)",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "journey/optimise_route": {
+    "hash": "494e707c076526d7fdcb3e2e530f77e5d676b0dca95b8b77e42500324e0d4b0b",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Optimise Route",
+    "description": "Find the shortest visit order for a set of stops, with optional fixed start and end anchors.",
+    "website": "https://www.flomation.co",
+    "icon": "route+arrows-spin",
+    "date": "11/06/2026",
+    "type": 2,
+    "category": {
+      "name": "Journey",
+      "icon": "route",
+      "description": "Route planning, journey optimisation, and printable itineraries."
+    },
+    "inputs": [
+      {
+        "name": "provider",
+        "type": "string",
+        "value": null,
+        "label": "Map Provider",
+        "placeholder": "google",
+        "required": true,
+        "options": [
+          {
+            "name": "Google Maps",
+            "value": "google"
+          },
+          {
+            "name": "Mapbox",
+            "value": "mapbox"
+          }
+        ]
+      },
+      {
+        "name": "api_key",
+        "type": "string",
+        "value": null,
+        "label": "Provider API Key",
+        "placeholder": "${secrets.GOOGLE_MAPS_API_KEY}",
+        "required": true
+      },
+      {
+        "name": "start",
+        "type": "string",
+        "value": null,
+        "label": "Start (optional anchor)",
+        "placeholder": "London depot, UK"
+      },
+      {
+        "name": "end",
+        "type": "string",
+        "value": null,
+        "label": "End (optional anchor)",
+        "placeholder": "Leave blank to end at last stop"
+      },
+      {
+        "name": "stops",
+        "type": "string",
+        "value": null,
+        "label": "Stops (comma- or pipe-separated)",
+        "placeholder": "Birmingham|Coventry|Stoke|Manchester",
+        "required": true
+      },
+      {
+        "name": "mode",
+        "type": "string",
+        "value": null,
+        "label": "Travel Mode",
+        "placeholder": "driving",
+        "options": [
+          {
+            "name": "Driving",
+            "value": "driving"
+          },
+          {
+            "name": "Walking",
+            "value": "walking"
+          },
+          {
+            "name": "Cycling",
+            "value": "cycling"
+          },
+          {
+            "name": "Transit",
+            "value": "transit"
+          }
+        ]
+      },
+      {
+        "name": "optimise_for",
+        "type": "string",
+        "value": null,
+        "label": "Optimise For",
+        "placeholder": "duration",
+        "options": [
+          {
+            "name": "Shortest time",
+            "value": "duration"
+          },
+          {
+            "name": "Shortest distance",
+            "value": "distance"
+          }
+        ]
+      },
+      {
+        "name": "depart_at",
+        "type": "datetime",
+        "value": null,
+        "label": "Departure time",
+        "placeholder": "leave blank for 'now'"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "ordered_stops",
+        "type": "object",
+        "value": null,
+        "label": "Stops in optimal order",
+        "placeholder": ""
+      },
+      {
+        "name": "waypoint_order",
+        "type": "object",
+        "value": null,
+        "label": "Original indices in visit order",
+        "placeholder": ""
+      },
+      {
+        "name": "total_distance_miles",
+        "type": "string",
+        "value": null,
+        "label": "Total distance (miles)",
+        "placeholder": ""
+      },
+      {
+        "name": "total_duration_friendly",
+        "type": "string",
+        "value": null,
+        "label": "Total duration (friendly)",
+        "placeholder": ""
+      },
+      {
+        "name": "legs",
+        "type": "object",
+        "value": null,
+        "label": "Per-leg breakdown",
+        "placeholder": ""
+      },
+      {
+        "name": "optimisation",
+        "type": "object",
+        "value": null,
+        "label": "Full optimisation JSON",
         "placeholder": ""
       },
       {
