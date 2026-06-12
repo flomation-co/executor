@@ -92,11 +92,15 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	client := &http.Client{Timeout: 15 * time.Second}
 	deleteURL := fmt.Sprintf("%s/calendars/primary/events/%s", calendarAPIBase, eventID)
 
-	// Build ordered list: filtered account first, then rest
+	// Build ordered list: filtered account first, then rest.
+	// Capture errored tokens so we can tell the user which account
+	// failed to refresh rather than the generic "no tokens" line.
 	var ordered []tokenInfo
 	var rest []tokenInfo
+	var errored []tokenInfo
 	for _, t := range tokens {
 		if t.Error != "" {
+			errored = append(errored, t)
 			continue
 		}
 		if accountFilter != "" && (strings.EqualFold(t.Email, accountFilter) ||
@@ -110,6 +114,9 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	ordered = append(ordered, rest...)
 
 	if len(ordered) == 0 {
+		if msg := formatTokenErrors(errored); msg != "" {
+			return errResult(msg)
+		}
 		return errResult("No valid Google Calendar tokens available")
 	}
 
@@ -150,7 +157,9 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 // --- Shared helpers ---
 
 func fetchTokens(flow *core.Flow, ctx *core.ExecutionContext) ([]tokenInfo, error) {
-	endpoint := fmt.Sprintf("%s/api/v1/internal/agent-user/%s/google-tokens",
+	// purpose=calendar restricts the response to calendar-consented
+	// accounts. See google/calendar/read for the full rationale.
+	endpoint := fmt.Sprintf("%s/api/v1/internal/agent-user/%s/google-tokens?purpose=calendar",
 		ctx.APIURL, ctx.AgentUserID)
 
 	req, err := http.NewRequestWithContext(flow.GoContext(), http.MethodGet, endpoint, nil)
@@ -177,12 +186,18 @@ func fetchTokens(flow *core.Flow, ctx *core.ExecutionContext) ([]tokenInfo, erro
 
 func pickAccount(tokens []tokenInfo, filter string) (*tokenInfo, error) {
 	var valid []tokenInfo
+	var errored []tokenInfo
 	for _, t := range tokens {
-		if t.Error == "" {
-			valid = append(valid, t)
+		if t.Error != "" {
+			errored = append(errored, t)
+			continue
 		}
+		valid = append(valid, t)
 	}
 	if len(valid) == 0 {
+		if msg := formatTokenErrors(errored); msg != "" {
+			return nil, fmt.Errorf("%s", msg)
+		}
 		return nil, fmt.Errorf("no valid Google Calendar tokens available")
 	}
 	if filter == "" {
@@ -200,6 +215,26 @@ func pickAccount(tokens []tokenInfo, filter string) (*tokenInfo, error) {
 		names = append(names, t.Email)
 	}
 	return nil, fmt.Errorf("no matching account for '%s'. Available: %s", filter, strings.Join(names, ", "))
+}
+
+// formatTokenErrors renders refresh failures into a single user-facing
+// message — see google/calendar/read for the full rationale.
+func formatTokenErrors(errored []tokenInfo) string {
+	if len(errored) == 0 {
+		return ""
+	}
+	parts := make([]string, 0, len(errored))
+	for _, t := range errored {
+		label := t.Email
+		if label == "" {
+			label = t.Label
+		}
+		if label == "" {
+			label = "Google account"
+		}
+		parts = append(parts, fmt.Sprintf("%s (%s)", label, t.Error))
+	}
+	return "Google account refresh failed — please re-link the affected calendar account(s): " + strings.Join(parts, "; ")
 }
 
 func errResult(msg string) (map[string]interface{}, error) {

@@ -146,10 +146,18 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 		}).Info("[email_read] token detail")
 	}
 
-	// Filter accounts
+	// Filter accounts. When nothing is left to use, surface refresh
+	// failures so the user knows exactly which account needs re-linking
+	// rather than getting the generic "no matching account" line.
 	activeTokens := filterTokens(tokens, accountFilter)
 	if len(activeTokens) == 0 {
-		return errResult(fmt.Sprintf("No matching email account for filter '%s'", accountFilter))
+		if msg := formatTokenErrors(filterErroredTokens(tokens, accountFilter)); msg != "" {
+			return errResult(msg)
+		}
+		if accountFilter != "" {
+			return errResult(fmt.Sprintf("No matching email account for filter '%s'", accountFilter))
+		}
+		return errResult("No Google Gmail accounts connected. Ask the user to connect their email first.")
 	}
 
 	log.WithFields(log.Fields{
@@ -640,6 +648,48 @@ func filterTokens(tokens []tokenInfo, accountFilter string) []tokenInfo {
 		active = append(active, t)
 	}
 	return active
+}
+
+// filterErroredTokens is the inverse of filterTokens — returns tokens
+// that match the account filter but have a refresh error. Used when
+// no active tokens remain so we can render the underlying Google
+// failure to the user instead of swallowing it.
+func filterErroredTokens(tokens []tokenInfo, accountFilter string) []tokenInfo {
+	var errored []tokenInfo
+	for _, t := range tokens {
+		if t.Error == "" {
+			continue
+		}
+		if accountFilter != "" {
+			if !strings.EqualFold(t.Email, accountFilter) &&
+				!strings.EqualFold(t.Label, accountFilter) &&
+				!strings.Contains(strings.ToLower(t.Email), strings.ToLower(accountFilter)) {
+				continue
+			}
+		}
+		errored = append(errored, t)
+	}
+	return errored
+}
+
+// formatTokenErrors renders refresh failures into a single user-facing
+// message — see google/calendar/read for the full rationale.
+func formatTokenErrors(errored []tokenInfo) string {
+	if len(errored) == 0 {
+		return ""
+	}
+	parts := make([]string, 0, len(errored))
+	for _, t := range errored {
+		label := t.Email
+		if label == "" {
+			label = t.Label
+		}
+		if label == "" {
+			label = "Google account"
+		}
+		parts = append(parts, fmt.Sprintf("%s (%s)", label, t.Error))
+	}
+	return "Google account refresh failed — please re-link the affected Gmail account(s): " + strings.Join(parts, "; ")
 }
 
 // disconnectAccount removes a Google account connection that is no longer

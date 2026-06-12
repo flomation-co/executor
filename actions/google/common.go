@@ -39,8 +39,15 @@ type TokenInfo struct {
 
 // FetchTokens retrieves Google OAuth tokens for the Drive/Workspace purpose.
 // If credential is non-empty, it is used as a raw access token (bypassing
-// the Launch service). Otherwise, tries agent-user tokens first, then
-// falls back to agent-level tokens.
+// the Launch service).
+//
+// Only the agent-user scoped path applies here — Drive tokens are per-
+// user. The previous "fall back to agent-level" branch hit the
+// /trigger/:id/google-tokens endpoint with AgentID as the trigger ID,
+// which always 404'd/missed and only existed because the agent and
+// trigger token URLs share the same path shape. Removed rather than
+// "fixed" because there's no second source of Drive tokens to fall
+// back to.
 func FetchTokens(flow *core.Flow, credential string) ([]TokenInfo, error) {
 	// Direct credential override
 	if credential != "" && !strings.HasPrefix(credential, "${") {
@@ -51,32 +58,17 @@ func FetchTokens(flow *core.Flow, credential string) ([]TokenInfo, error) {
 	if ctx == nil || ctx.APIURL == "" {
 		return nil, fmt.Errorf("execution context with API URL is required")
 	}
-
-	client := ctx.InternalClient()
-	var all []TokenInfo
-
-	// Agent-user scoped tokens (per-user credentials)
-	if ctx.AgentUserID != "" {
-		endpoint := fmt.Sprintf("%s/api/v1/internal/agent-user/%s/google-tokens?purpose=%s",
-			ctx.APIURL, ctx.AgentUserID, Purpose)
-		if tokens := fetchTokensFrom(flow, client, endpoint); len(tokens) > 0 {
-			all = append(all, tokens...)
-		}
+	if ctx.AgentUserID == "" {
+		return nil, fmt.Errorf("no agent-user context — Google Drive actions require an agent execution")
 	}
 
-	// Fall back to agent-level tokens
-	if len(all) == 0 && ctx.AgentID != "" {
-		endpoint := fmt.Sprintf("%s/api/v1/internal/trigger/%s/google-tokens?purpose=%s",
-			ctx.APIURL, ctx.AgentID, Purpose)
-		if tokens := fetchTokensFrom(flow, client, endpoint); len(tokens) > 0 {
-			all = append(all, tokens...)
-		}
-	}
-
-	if len(all) == 0 {
+	endpoint := fmt.Sprintf("%s/api/v1/internal/agent-user/%s/google-tokens?purpose=%s",
+		ctx.APIURL, ctx.AgentUserID, Purpose)
+	tokens := fetchTokensFrom(flow, ctx.InternalClient(), endpoint)
+	if len(tokens) == 0 {
 		return nil, fmt.Errorf("no Google Drive tokens available — connect a Google account with Drive permissions")
 	}
-	return all, nil
+	return tokens, nil
 }
 
 func fetchTokensFrom(flow *core.Flow, client *http.Client, endpoint string) []TokenInfo {
@@ -101,6 +93,11 @@ func fetchTokensFrom(flow *core.Flow, client *http.Client, endpoint string) []To
 
 // FilterTokens returns only active tokens matching the account filter.
 // An empty filter returns all non-errored tokens.
+//
+// Errored tokens (Launch couldn't refresh them) are intentionally
+// dropped here — the caller is expected to use SelectActiveOrError
+// instead when it needs to surface a useful failure message rather
+// than the generic "no accounts available" line.
 func FilterTokens(tokens []TokenInfo, accountFilter string) []TokenInfo {
 	var active []TokenInfo
 	for _, t := range tokens {
@@ -111,12 +108,61 @@ func FilterTokens(tokens []TokenInfo, accountFilter string) []TokenInfo {
 			if !strings.EqualFold(t.Email, accountFilter) &&
 				!strings.EqualFold(t.Label, accountFilter) &&
 				!strings.Contains(strings.ToLower(t.Email), strings.ToLower(accountFilter)) {
-				continue
+					continue
 			}
 		}
 		active = append(active, t)
 	}
 	return active
+}
+
+// SelectActive splits a token slice into usable and errored buckets,
+// respecting accountFilter. Use this when you want to render a human-
+// readable failure ("re-link foo@bar.com — refresh failed: ...") for
+// the AI tool result rather than silently dropping the dead account
+// and returning "no Google accounts available".
+//
+// Returned errors carry the full Launch-side error string verbatim;
+// they're the only place the user gets to see what Google actually
+// said about their refresh token.
+func SelectActive(tokens []TokenInfo, accountFilter string) (active []TokenInfo, errored []TokenInfo) {
+	for _, t := range tokens {
+		matchesFilter := accountFilter == "" ||
+			strings.EqualFold(t.Email, accountFilter) ||
+			strings.EqualFold(t.Label, accountFilter) ||
+			strings.Contains(strings.ToLower(t.Email), strings.ToLower(accountFilter))
+		if !matchesFilter {
+			continue
+		}
+		if t.Error != "" {
+			errored = append(errored, t)
+			continue
+		}
+		active = append(active, t)
+	}
+	return active, errored
+}
+
+// FormatTokenErrors renders an errored-token list as a single
+// user-facing string. Used by actions to surface refresh failures
+// in tool results so the agent can tell the user exactly which
+// account needs re-linking and why.
+func FormatTokenErrors(errored []TokenInfo) string {
+	if len(errored) == 0 {
+		return ""
+	}
+	parts := make([]string, 0, len(errored))
+	for _, t := range errored {
+		label := t.Email
+		if label == "" {
+			label = t.Label
+		}
+		if label == "" {
+			label = "Google account"
+		}
+		parts = append(parts, fmt.Sprintf("%s: %s", label, t.Error))
+	}
+	return "Google account refresh failed — please re-link affected account(s). Details: " + strings.Join(parts, "; ")
 }
 
 // DoRequest makes an authenticated HTTP request to a Google API.
