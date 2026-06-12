@@ -182,12 +182,12 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 		}
 	}
 
-	// Filter accounts if requested
+	// Filter accounts if requested. Track errored tokens separately so
+	// we can tell the user which account needs re-linking and why,
+	// instead of just saying "no accounts matched".
 	var activeTokens []tokenInfo
+	var erroredTokens []tokenInfo
 	for _, t := range tokens {
-		if t.Error != "" {
-			continue
-		}
 		if accountFilter != "" {
 			matchesEmail := strings.EqualFold(t.Email, accountFilter)
 			matchesLabel := strings.EqualFold(t.Label, accountFilter)
@@ -196,11 +196,21 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 				continue
 			}
 		}
+		if t.Error != "" {
+			erroredTokens = append(erroredTokens, t)
+			continue
+		}
 		activeTokens = append(activeTokens, t)
 	}
 
 	if len(activeTokens) == 0 {
-		return errResult(fmt.Sprintf("No matching calendar account for filter '%s'", accountFilter))
+		if msg := formatTokenErrors(erroredTokens); msg != "" {
+			return errResult(msg)
+		}
+		if accountFilter != "" {
+			return errResult(fmt.Sprintf("No matching calendar account for filter '%s'", accountFilter))
+		}
+		return errResult("No Google Calendar accounts connected. Ask the user to connect their calendar first.")
 	}
 
 	// Fetch events from all accounts
@@ -248,7 +258,12 @@ func fetchTokens(flow *core.Flow, ctx *core.ExecutionContext) ([]tokenInfo, erro
 	// For now, we pass them as query params (they're platform credentials,
 	// not user secrets). A future improvement would have the API store
 	// these centrally.
-	endpoint := fmt.Sprintf("%s/api/v1/internal/agent-user/%s/google-tokens",
+	// purpose=calendar scopes the response to calendar-consented
+	// accounts only. Without it the API returned every connected
+	// Google account regardless of purpose — calling the Calendar
+	// API with a Gmail-only access token then 403'd with no useful
+	// error reaching the user.
+	endpoint := fmt.Sprintf("%s/api/v1/internal/agent-user/%s/google-tokens?purpose=calendar",
 		ctx.APIURL, ctx.AgentUserID)
 
 	req, err := http.NewRequestWithContext(flow.GoContext(), http.MethodGet, endpoint, nil)
@@ -643,6 +658,28 @@ func optionalString(name string, inputs []*core.Connection) string {
 		return ""
 	}
 	return *c.String()
+}
+
+// formatTokenErrors renders refresh failures (Launch couldn't exchange
+// the refresh token at Google) into a single user-facing message. The
+// Launch-side error string is included verbatim because it's the only
+// place the user gets to see exactly why their token was rejected.
+func formatTokenErrors(errored []tokenInfo) string {
+	if len(errored) == 0 {
+		return ""
+	}
+	parts := make([]string, 0, len(errored))
+	for _, t := range errored {
+		label := t.Email
+		if label == "" {
+			label = t.Label
+		}
+		if label == "" {
+			label = "Google account"
+		}
+		parts = append(parts, fmt.Sprintf("%s (%s)", label, t.Error))
+	}
+	return "Google account refresh failed — please re-link the affected calendar account(s): " + strings.Join(parts, "; ")
 }
 
 func optionalInt(name string, inputs []*core.Connection) int {

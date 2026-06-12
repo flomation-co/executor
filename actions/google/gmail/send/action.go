@@ -284,12 +284,18 @@ func fetchTokensFrom(flow *core.Flow, client *http.Client, endpoint string) []to
 
 func pickAccount(tokens []tokenInfo, filter string) (*tokenInfo, error) {
 	var valid []tokenInfo
+	var errored []tokenInfo
 	for _, t := range tokens {
-		if t.Error == "" {
-			valid = append(valid, t)
+		if t.Error != "" {
+			errored = append(errored, t)
+			continue
 		}
+		valid = append(valid, t)
 	}
 	if len(valid) == 0 {
+		if msg := formatTokenErrors(errored); msg != "" {
+			return nil, fmt.Errorf("%s", msg)
+		}
 		return nil, fmt.Errorf("no valid Gmail send tokens available")
 	}
 	if filter == "" {
@@ -329,4 +335,24 @@ func requireString(name string, inputs []*core.Connection) string {
 
 func optionalString(name string, inputs []*core.Connection) string {
 	return requireString(name, inputs)
+}
+
+// formatTokenErrors renders refresh failures into a single user-facing
+// message — see google/calendar/read for the full rationale.
+func formatTokenErrors(errored []tokenInfo) string {
+	if len(errored) == 0 {
+		return ""
+	}
+	parts := make([]string, 0, len(errored))
+	for _, t := range errored {
+		label := t.Email
+		if label == "" {
+			label = t.Label
+		}
+		if label == "" {
+			label = "Google account"
+		}
+		parts = append(parts, fmt.Sprintf("%s (%s)", label, t.Error))
+	}
+	return "Google account refresh failed — please re-link the affected Gmail account(s): " + strings.Join(parts, "; ")
 }
