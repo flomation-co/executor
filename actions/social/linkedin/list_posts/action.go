@@ -21,7 +21,7 @@ const (
 )
 
 var Inputs = [...]core.Connection{
-	{Name: "access_token", Type: core.ConnectionTypeString, Label: "LinkedIn Access Token", Placeholder: "${credentials.linkedin_community}", Required: true},
+	{Name: "access_token", Type: core.ConnectionTypeSecret, Label: "LinkedIn Access Token", Placeholder: "${credentials.linkedin_community}", Required: true},
 	{Name: "author_urn", Type: core.ConnectionTypeString, Label: "Author URN", Placeholder: "urn:li:person:XXXXXXXX", Required: true},
 	{Name: "count", Type: core.ConnectionTypeInteger, Label: "Count", Placeholder: "10"},
 }

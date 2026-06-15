@@ -26,7 +26,7 @@ var Inputs = [...]core.Connection{
 	{Name: "range_address", Type: core.ConnectionTypeString, Label: "Cell Range", Required: true, Placeholder: "A1:D3"},
 	{Name: "values", Type: core.ConnectionTypeText, Label: "Values (JSON 2D array)", Required: true, Placeholder: "[[\"Name\",\"Age\"],[\"Alice\",30]]"},
 	{Name: "account", Type: core.ConnectionTypeString, Label: "Microsoft Account (email)"},
-	{Name: "credential", Type: core.ConnectionTypeString, Label: "Microsoft OAuth Credential", Placeholder: "${credentials.MICROSOFT_EXCEL}"},
+	{Name: "credential", Type: core.ConnectionTypeCredential, Label: "Microsoft OAuth Credential", Placeholder: "${credentials.MICROSOFT_EXCEL}"},
 }
 
 var Outputs = [...]core.Connection{

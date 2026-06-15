@@ -25,14 +25,14 @@ const (
 var AuthInputs = []core.Connection{
 	{
 		Name:        "access_token",
-		Type:        core.ConnectionTypeString,
+		Type:        core.ConnectionTypeSecret,
 		Label:       "Facebook Access Token",
 		Placeholder: "${credentials.facebook}",
 		Required:    true,
 	},
 	{
 		Name:        "app_secret",
-		Type:        core.ConnectionTypeString,
+		Type:        core.ConnectionTypeSecret,
 		Label:       "App Secret",
 		Placeholder: "${secrets.facebook_app_secret}",
 	},

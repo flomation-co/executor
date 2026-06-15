@@ -29,8 +29,8 @@ const (
 )
 
 var Inputs = [...]core.Connection{
-	{Name: "access_token", Type: core.ConnectionTypeString, Label: "Page Access Token", Placeholder: "${credentials.facebook}", Required: true},
-	{Name: "app_secret", Type: core.ConnectionTypeString, Label: "App Secret", Placeholder: "${secrets.facebook_app_secret}"},
+	{Name: "access_token", Type: core.ConnectionTypeSecret, Label: "Page Access Token", Placeholder: "${credentials.facebook}", Required: true},
+	{Name: "app_secret", Type: core.ConnectionTypeSecret, Label: "App Secret", Placeholder: "${secrets.facebook_app_secret}"},
 	{Name: "recipient_id", Type: core.ConnectionTypeString, Label: "Recipient PSID", Required: true},
 	{Name: "message_text", Type: core.ConnectionTypeText, Label: "Message Text", Required: true},
 }

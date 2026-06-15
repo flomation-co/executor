@@ -26,7 +26,7 @@ const (
 )
 
 var Inputs = [...]core.Connection{
-	{Name: "bot_token", Type: core.ConnectionTypeString, Label: "Bot Token", Placeholder: "xoxb-...", Required: true},
+	{Name: "bot_token", Type: core.ConnectionTypeSecret, Label: "Bot Token", Placeholder: "xoxb-...", Required: true},
 	{Name: "channel_id", Type: core.ConnectionTypeString, Label: "Channel ID", Placeholder: "C01ABC2DEF3", Required: true},
 	{Name: "thread_ts", Type: core.ConnectionTypeString, Label: "Thread Timestamp", Placeholder: "1234567890.123456", Required: true},
 	{Name: "limit", Type: core.ConnectionTypeString, Label: "Number of replies (default 50, max 200)"},

@@ -23,7 +23,7 @@ var Inputs = [...]core.Connection{
 	{Name: "folder_id", Type: core.ConnectionTypeString, Label: "Folder ID", Placeholder: "Inbox (leave empty for Inbox)"},
 	{Name: "filter", Type: core.ConnectionTypeString, Label: "OData Filter", Placeholder: "isRead eq false"},
 	{Name: "account", Type: core.ConnectionTypeString, Label: "Account Filter (email or label)"},
-	{Name: "credential", Type: core.ConnectionTypeString, Label: "Microsoft OAuth Credential", Placeholder: "${credentials.AZURE_MS}"},
+	{Name: "credential", Type: core.ConnectionTypeCredential, Label: "Microsoft OAuth Credential", Placeholder: "${credentials.AZURE_MS}"},
 }
 
 var Outputs = [...]core.Connection{

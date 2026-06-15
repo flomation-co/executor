@@ -29,7 +29,7 @@ const (
 var AuthInputs = []core.Connection{
 	{
 		Name:        "api_key",
-		Type:        core.ConnectionTypeString,
+		Type:        core.ConnectionTypeSecret,
 		Label:       "Notion Integration Token",
 		Placeholder: "ntn_...",
 		Required:    true,

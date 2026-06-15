@@ -35,7 +35,7 @@ var AuthInputs = [...]core.Connection{
 	},
 	{
 		Name:        "username",
-		Type:        core.ConnectionTypeString,
+		Type:        core.ConnectionTypeSecret,
 		Label:       "Username",
 		Placeholder: "",
 		Required:    true,

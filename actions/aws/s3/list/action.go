@@ -23,19 +23,19 @@ const (
 var Inputs = [...]core.Connection{
 	core.Connection{
 		Name:        "aws_access_key",
-		Type:        core.ConnectionTypeString,
+		Type:        core.ConnectionTypeSecret,
 		Label:       "AWS Access Key",
 		Placeholder: "",
 	},
 	core.Connection{
 		Name:        "aws_secret_key",
-		Type:        core.ConnectionTypeString,
+		Type:        core.ConnectionTypeSecret,
 		Label:       "AWS Secret Key",
 		Placeholder: "",
 	},
 	core.Connection{
 		Name:        "aws_region",
-		Type:        core.ConnectionTypeString,
+		Type:        core.ConnectionTypeSecret,
 		Label:       "AWS Region",
 		Placeholder: "",
 	},

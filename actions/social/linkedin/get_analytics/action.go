@@ -21,7 +21,7 @@ const (
 )
 
 var Inputs = [...]core.Connection{
-	{Name: "access_token", Type: core.ConnectionTypeString, Label: "LinkedIn Access Token", Placeholder: "${credentials.linkedin_community}", Required: true},
+	{Name: "access_token", Type: core.ConnectionTypeSecret, Label: "LinkedIn Access Token", Placeholder: "${credentials.linkedin_community}", Required: true},
 	{Name: "post_urn", Type: core.ConnectionTypeString, Label: "Post URN", Placeholder: "urn:li:share:...", Required: true},
 }
 

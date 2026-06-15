@@ -39,13 +39,13 @@ const (
 var Inputs = [...]core.Connection{
 	{
 		Name:        "bot_token",
-		Type:        core.ConnectionTypeString,
+		Type:        core.ConnectionTypeSecret,
 		Label:       "Bot Token",
 		Placeholder: "xoxb-...",
 	},
 	{
 		Name:        "channel_id",
-		Type:        core.ConnectionTypeString,
+		Type:        core.ConnectionTypeSecret,
 		Label:       "Channel ID",
 		Placeholder: "${channel_id}",
 	},

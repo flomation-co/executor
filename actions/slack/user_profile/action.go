@@ -26,7 +26,7 @@ const (
 )
 
 var Inputs = [...]core.Connection{
-	{Name: "bot_token", Type: core.ConnectionTypeString, Label: "Bot Token", Placeholder: "xoxb-...", Required: true},
+	{Name: "bot_token", Type: core.ConnectionTypeSecret, Label: "Bot Token", Placeholder: "xoxb-...", Required: true},
 	{Name: "user_id", Type: core.ConnectionTypeString, Label: "Slack user ID (e.g. U01ABCDEF). Use slack_users to find IDs by name", Required: true},
 }
 

@@ -30,7 +30,7 @@ const (
 var AuthInputs = []core.Connection{
 	{
 		Name:        "access_token",
-		Type:        core.ConnectionTypeString,
+		Type:        core.ConnectionTypeSecret,
 		Label:       "GitHub Access Token",
 		Placeholder: "ghp_... or github_pat_...",
 		Required:    true,

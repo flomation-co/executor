@@ -20,7 +20,7 @@ const (
 )
 
 var Inputs = [...]core.Connection{
-	{Name: "access_token", Type: core.ConnectionTypeString, Label: "GitHub Access Token", Placeholder: "ghp_...", Required: true},
+	{Name: "access_token", Type: core.ConnectionTypeSecret, Label: "GitHub Access Token", Placeholder: "ghp_...", Required: true},
 	{Name: "base_url", Type: core.ConnectionTypeString, Label: "GitHub API Base URL", Placeholder: "https://api.github.com"},
 	{Name: "owner", Type: core.ConnectionTypeString, Label: "Repository Owner", Required: true},
 	{Name: "repo", Type: core.ConnectionTypeString, Label: "Repository Name", Required: true},

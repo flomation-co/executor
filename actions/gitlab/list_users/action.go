@@ -21,7 +21,7 @@ const (
 )
 
 var Inputs = [...]core.Connection{
-	{Name: "access_token", Type: core.ConnectionTypeString, Label: "GitLab Access Token", Placeholder: "glpat-...", Required: true},
+	{Name: "access_token", Type: core.ConnectionTypeSecret, Label: "GitLab Access Token", Placeholder: "glpat-...", Required: true},
 	{Name: "base_url", Type: core.ConnectionTypeString, Label: "GitLab Base URL", Placeholder: "https://gitlab.com"},
 	{Name: "search", Type: core.ConnectionTypeString, Label: "Search", Placeholder: "Search by name, username, or email"},
 	{Name: "active", Type: core.ConnectionTypeBoolean, Label: "Active Users Only"},

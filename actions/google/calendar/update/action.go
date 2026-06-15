@@ -83,7 +83,7 @@ var Inputs = [...]core.Connection{
 	},
 	{
 		Name:        "credential",
-		Type:        core.ConnectionTypeString,
+		Type:        core.ConnectionTypeCredential,
 		Label:       "Google OAuth Credential (optional, overrides user tokens)",
 		Placeholder: "${credentials.GOOGLE_CALENDAR}",
 	},

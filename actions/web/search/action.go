@@ -38,7 +38,7 @@ var Inputs = [...]core.Connection{
 	},
 	{
 		Name:        "api_key",
-		Type:        core.ConnectionTypeString,
+		Type:        core.ConnectionTypeSecret,
 		Label:       "Brave API Key",
 		Placeholder: "BSA...",
 		Required:    true,

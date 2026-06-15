@@ -28,7 +28,7 @@ const (
 )
 
 var Inputs = [...]core.Connection{
-	{Name: "bot_token", Type: core.ConnectionTypeString, Label: "Bot Token", Placeholder: "xoxb-...", Required: true},
+	{Name: "bot_token", Type: core.ConnectionTypeSecret, Label: "Bot Token", Placeholder: "xoxb-...", Required: true},
 	{Name: "channel_id", Type: core.ConnectionTypeString, Label: "Channel ID", Placeholder: "${channel_id}", Required: true},
 	{Name: "content", Type: core.ConnectionTypeText, Label: "File content as text (for code snippets, CSV, logs, etc.)", Required: true},
 	{Name: "filename", Type: core.ConnectionTypeString, Label: "Filename including extension (e.g. report.csv, log.txt, data.json)", Required: true},

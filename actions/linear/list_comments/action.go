@@ -21,7 +21,7 @@ const (
 )
 
 var Inputs = [...]core.Connection{
-	{Name: "api_key", Type: core.ConnectionTypeString, Label: "Linear API Key", Placeholder: "lin_api_...", Required: true},
+	{Name: "api_key", Type: core.ConnectionTypeSecret, Label: "Linear API Key", Placeholder: "lin_api_...", Required: true},
 	{Name: "issue_id", Type: core.ConnectionTypeString, Label: "Issue ID", Placeholder: "Issue UUID", Required: true},
 }
 

@@ -25,7 +25,7 @@ const (
 var AuthInputs = []core.Connection{
 	{
 		Name:        "api_token",
-		Type:        core.ConnectionTypeString,
+		Type:        core.ConnectionTypeSecret,
 		Label:       "Webflow API Token",
 		Placeholder: "wfl_...",
 		Required:    true,

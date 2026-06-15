@@ -26,7 +26,7 @@ const (
 )
 
 var Inputs = [...]core.Connection{
-	{Name: "bot_token", Type: core.ConnectionTypeString, Label: "Bot Token", Placeholder: "xoxb-...", Required: true},
+	{Name: "bot_token", Type: core.ConnectionTypeSecret, Label: "Bot Token", Placeholder: "xoxb-...", Required: true},
 	{Name: "search", Type: core.ConnectionTypeString, Label: "Optional filter: only return channels whose name contains this text"},
 	{Name: "limit", Type: core.ConnectionTypeString, Label: "Max channels to return (default 50, max 200)"},
 	{Name: "include_private", Type: core.ConnectionTypeBoolean, Label: "Include private channels the bot is a member of (default false)"},

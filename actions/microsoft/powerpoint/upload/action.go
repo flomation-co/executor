@@ -32,7 +32,7 @@ var Inputs = [...]core.Connection{
 	{Name: "content", Type: core.ConnectionTypeText, Label: "File Content (base64)", Required: true},
 	{Name: "folder_path", Type: core.ConnectionTypeString, Label: "Folder Path"},
 	{Name: "account", Type: core.ConnectionTypeString, Label: "Microsoft Account (email)"},
-	{Name: "credential", Type: core.ConnectionTypeString, Label: "Microsoft OAuth Credential", Placeholder: "${credentials.MICROSOFT_ONEDRIVE}"},
+	{Name: "credential", Type: core.ConnectionTypeCredential, Label: "Microsoft OAuth Credential", Placeholder: "${credentials.MICROSOFT_ONEDRIVE}"},
 }
 
 var Outputs = [...]core.Connection{

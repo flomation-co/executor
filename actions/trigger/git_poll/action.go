@@ -33,7 +33,7 @@ var Inputs = [...]core.Connection{
 	},
 	{
 		Name:        "branch_regex",
-		Type:        core.ConnectionTypeString,
+		Type:        core.ConnectionTypeSecret,
 		Label:       "Branch Regex",
 		Placeholder: "e.g. ^main$ or ^feature/.*",
 	},

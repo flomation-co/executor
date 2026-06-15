@@ -25,8 +25,8 @@ const (
 )
 
 var Inputs = [...]core.Connection{
-	{Name: "access_token", Type: core.ConnectionTypeString, Label: "Page Access Token", Placeholder: "${page_access_token}", Required: true},
-	{Name: "app_secret", Type: core.ConnectionTypeString, Label: "App Secret", Placeholder: "${secrets.FACEBOOK_APP_SECRET}"},
+	{Name: "access_token", Type: core.ConnectionTypeSecret, Label: "Page Access Token", Placeholder: "${page_access_token}", Required: true},
+	{Name: "app_secret", Type: core.ConnectionTypeSecret, Label: "App Secret", Placeholder: "${secrets.FACEBOOK_APP_SECRET}"},
 	{Name: "user_id", Type: core.ConnectionTypeString, Label: "User PSID", Placeholder: "${sender_id}", Required: true},
 	{Name: "page_id", Type: core.ConnectionTypeString, Label: "Page ID", Placeholder: "${page_id}", Required: true},
 	{Name: "limit", Type: core.ConnectionTypeString, Label: "Message Limit", Placeholder: "20"},

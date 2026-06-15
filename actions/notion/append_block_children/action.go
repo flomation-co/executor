@@ -20,7 +20,7 @@ const (
 )
 
 var Inputs = [...]core.Connection{
-	{Name: "api_key", Type: core.ConnectionTypeString, Label: "Notion Integration Token", Placeholder: "ntn_...", Required: true},
+	{Name: "api_key", Type: core.ConnectionTypeSecret, Label: "Notion Integration Token", Placeholder: "ntn_...", Required: true},
 	{Name: "block_id", Type: core.ConnectionTypeString, Label: "Block or Page ID", Required: true},
 	{Name: "content", Type: core.ConnectionTypeText, Label: "Text Content", Placeholder: "Text to append as a paragraph"},
 	{Name: "blocks_json", Type: core.ConnectionTypeText, Label: "Blocks (JSON array)", Placeholder: "Advanced: raw Notion block objects"},

@@ -22,7 +22,7 @@ const (
 var AuthInputs = []core.Connection{
 	{
 		Name:        "access_token",
-		Type:        core.ConnectionTypeString,
+		Type:        core.ConnectionTypeSecret,
 		Label:       "LinkedIn Access Token",
 		Placeholder: "${credentials.linkedin}",
 		Required:    true,

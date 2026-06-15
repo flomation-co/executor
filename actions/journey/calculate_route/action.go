@@ -33,14 +33,14 @@ var Inputs = [...]core.Connection{
 	},
 	{
 		Name:        "api_key",
-		Type:        core.ConnectionTypeString,
+		Type:        core.ConnectionTypeSecret,
 		Label:       "Provider API Key",
 		Placeholder: "${secrets.GOOGLE_MAPS_API_KEY}",
 		Required:    true,
 	},
 	{
 		Name:        "origin",
-		Type:        core.ConnectionTypeString,
+		Type:        core.ConnectionTypeSecret,
 		Label:       "Origin (address or lat,lng)",
 		Placeholder: "London, UK",
 		Required:    true,

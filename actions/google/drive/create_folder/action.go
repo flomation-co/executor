@@ -26,7 +26,7 @@ var Inputs = [...]core.Connection{
 	{Name: "name", Type: core.ConnectionTypeString, Label: "Folder Name", Required: true},
 	{Name: "parent_folder_id", Type: core.ConnectionTypeString, Label: "Parent Folder ID", Placeholder: "root"},
 	{Name: "account", Type: core.ConnectionTypeString, Label: "Google Account (email)"},
-	{Name: "credential", Type: core.ConnectionTypeString, Label: "Google OAuth Credential", Placeholder: "${credentials.GOOGLE_DRIVE}"},
+	{Name: "credential", Type: core.ConnectionTypeCredential, Label: "Google OAuth Credential", Placeholder: "${credentials.GOOGLE_DRIVE}"},
 }
 
 var Outputs = [...]core.Connection{

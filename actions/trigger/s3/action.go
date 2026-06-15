@@ -33,21 +33,21 @@ var Inputs = [...]core.Connection{
 	},
 	{
 		Name:        "aws_access_key",
-		Type:        core.ConnectionTypeString,
+		Type:        core.ConnectionTypeSecret,
 		Label:       "AWS Access Key",
 		Placeholder: "AKIA...",
 		Required:    true,
 	},
 	{
 		Name:        "aws_secret_key",
-		Type:        core.ConnectionTypeString,
+		Type:        core.ConnectionTypeSecret,
 		Label:       "AWS Secret Key",
 		Placeholder: "Secret key for authentication",
 		Required:    true,
 	},
 	{
 		Name:     "region",
-		Type:     core.ConnectionTypeString,
+		Type:        core.ConnectionTypeSecret,
 		Label:    "AWS Region",
 		Required: true,
 		Options: []core.ConnectionOption{

@@ -33,7 +33,7 @@ var Inputs = [...]core.Connection{
 	{Name: "conversation_id", Type: core.ConnectionTypeString, Label: "Conversation ID", Required: true, Placeholder: "${channel_id}"},
 	{Name: "activity_id", Type: core.ConnectionTypeString, Label: "Activity ID", Placeholder: "${activity_id}"},
 	{Name: "app_id", Type: core.ConnectionTypeString, Label: "Bot App ID", Required: true, Placeholder: "${secrets.TEAMS_APP_ID}"},
-	{Name: "app_password", Type: core.ConnectionTypeString, Label: "Bot App Password", Required: true, Placeholder: "${secrets.TEAMS_APP_PASSWORD}"},
+	{Name: "app_password", Type: core.ConnectionTypeSecret, Label: "Bot App Password", Required: true, Placeholder: "${secrets.TEAMS_APP_PASSWORD}"},
 }
 
 var Outputs = [...]core.Connection{

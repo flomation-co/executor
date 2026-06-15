@@ -25,7 +25,7 @@ const (
 var Inputs = [...]core.Connection{
 	{Name: "item_id", Type: core.ConnectionTypeString, Label: "Presentation Item ID", Required: true},
 	{Name: "account", Type: core.ConnectionTypeString, Label: "Microsoft Account (email)"},
-	{Name: "credential", Type: core.ConnectionTypeString, Label: "Microsoft OAuth Credential", Placeholder: "${credentials.MICROSOFT_ONEDRIVE}"},
+	{Name: "credential", Type: core.ConnectionTypeCredential, Label: "Microsoft OAuth Credential", Placeholder: "${credentials.MICROSOFT_ONEDRIVE}"},
 }
 
 var Outputs = [...]core.Connection{

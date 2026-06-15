@@ -34,14 +34,14 @@ var Inputs = [...]core.Connection{
 	},
 	{
 		Name:        "api_key",
-		Type:        core.ConnectionTypeString,
+		Type:        core.ConnectionTypeSecret,
 		Label:       "Provider API Key",
 		Placeholder: "${secrets.GOOGLE_MAPS_API_KEY}",
 		Required:    true,
 	},
 	{
 		Name:        "latitude",
-		Type:        core.ConnectionTypeString,
+		Type:        core.ConnectionTypeSecret,
 		Label:       "Latitude",
 		Placeholder: "51.5034",
 		Required:    true,

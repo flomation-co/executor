@@ -35,14 +35,14 @@ var Inputs = [...]core.Connection{
 	},
 	{
 		Name:        "auth_token",
-		Type:        core.ConnectionTypeString,
+		Type:        core.ConnectionTypeSecret,
 		Label:       "Auth Token",
 		Placeholder: "${secrets.TWILIO_AUTH_TOKEN}",
 		Required:    true,
 	},
 	{
 		Name:        "from",
-		Type:        core.ConnectionTypeString,
+		Type:        core.ConnectionTypeSecret,
 		Label:       "From Number (E.164)",
 		Placeholder: "+19876543210",
 		Required:    true,

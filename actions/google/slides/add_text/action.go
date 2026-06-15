@@ -27,7 +27,7 @@ var Inputs = [...]core.Connection{
 	{Name: "slide_id", Type: core.ConnectionTypeString, Label: "Slide/Shape ID", Required: true},
 	{Name: "text", Type: core.ConnectionTypeText, Label: "Text", Required: true},
 	{Name: "account", Type: core.ConnectionTypeString, Label: "Google Account (email)"},
-	{Name: "credential", Type: core.ConnectionTypeString, Label: "Google OAuth Credential", Placeholder: "${credentials.GOOGLE_DRIVE}"},
+	{Name: "credential", Type: core.ConnectionTypeCredential, Label: "Google OAuth Credential", Placeholder: "${credentials.GOOGLE_DRIVE}"},
 }
 
 var Outputs = [...]core.Connection{

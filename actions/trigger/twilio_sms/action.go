@@ -19,7 +19,7 @@ const (
 
 var Inputs = [...]core.Connection{
 	{Name: "account_sid", Type: core.ConnectionTypeString, Label: "Twilio Account SID", Placeholder: "${secrets.twilio_account_sid}", Required: true},
-	{Name: "auth_token", Type: core.ConnectionTypeString, Label: "Twilio Auth Token", Placeholder: "${secrets.twilio_auth_token}", Required: true},
+	{Name: "auth_token", Type: core.ConnectionTypeSecret, Label: "Twilio Auth Token", Placeholder: "${secrets.twilio_auth_token}", Required: true},
 	{Name: "phone_number", Type: core.ConnectionTypeString, Label: "Twilio Phone Number", Placeholder: "+15551234567", Required: true},
 }
 

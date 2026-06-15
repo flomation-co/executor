@@ -25,7 +25,7 @@ var Inputs = [...]core.Connection{
 	{Name: "table_name", Type: core.ConnectionTypeString, Label: "Table Name", Required: true, Placeholder: "Table1"},
 	{Name: "values", Type: core.ConnectionTypeText, Label: "Row Values (JSON 2D array)", Required: true, Placeholder: "[[\"Alice\",30],[\"Bob\",25]]"},
 	{Name: "account", Type: core.ConnectionTypeString, Label: "Microsoft Account (email)"},
-	{Name: "credential", Type: core.ConnectionTypeString, Label: "Microsoft OAuth Credential", Placeholder: "${credentials.MICROSOFT_EXCEL}"},
+	{Name: "credential", Type: core.ConnectionTypeCredential, Label: "Microsoft OAuth Credential", Placeholder: "${credentials.MICROSOFT_EXCEL}"},
 }
 
 var Outputs = [...]core.Connection{
