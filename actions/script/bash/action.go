@@ -31,7 +31,7 @@ const (
 var Inputs = [...]core.Connection{
 	{
 		Name:        "script",
-		Type:        core.ConnectionTypeText,
+		Type:        core.ConnectionTypeCode,
 		Label:       "Script",
 		Placeholder: "#!/bin/bash\necho \"Hello, World!\"",
 		Required:    true,
