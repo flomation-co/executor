@@ -257,6 +257,8 @@ import (
 	output_set "flomation.app/automate/executor/actions/output/set"
 	output_set_outputs "flomation.app/automate/executor/actions/output/set_outputs"
 	script_bash "flomation.app/automate/executor/actions/script/bash"
+	script_javascript "flomation.app/automate/executor/actions/script/javascript"
+	script_python "flomation.app/automate/executor/actions/script/python"
 	security_antivirus "flomation.app/automate/executor/actions/security/antivirus"
 	slack_channel_action "flomation.app/automate/executor/actions/slack/channel_action"
 	slack_channels "flomation.app/automate/executor/actions/slack/channels"
@@ -601,6 +603,8 @@ var Actions = map[string]core.Action{
 	"output/set":                            output_set.Execute,
 	"output/set_outputs":                    output_set_outputs.Execute,
 	"script/bash":                           script_bash.Execute,
+	"script/javascript":                     script_javascript.Execute,
+	"script/python":                         script_python.Execute,
 	"security/antivirus":                    security_antivirus.Execute,
 	"slack/channel_action":                  slack_channel_action.Execute,
 	"slack/channels":                        slack_channels.Execute,

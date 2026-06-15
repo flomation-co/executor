@@ -24194,7 +24194,7 @@
     "outputs": null
   },
   "script/bash": {
-    "hash": "349f40034d13d71d279deed8aa246713f2c91024468ffc346fd74464ce3df938",
+    "hash": "3e426e7c3efc9205151234868959b77885f831b3b55ee9a5e4ab9a6eab1fdaa1",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Run Bash Script",
@@ -24211,7 +24211,7 @@
     "inputs": [
       {
         "name": "script",
-        "type": "text",
+        "type": "code",
         "value": null,
         "label": "Script",
         "placeholder": "#!/bin/bash\necho \"Hello, World!\"",
@@ -24280,6 +24280,186 @@
         "type": "string",
         "value": null,
         "label": "",
+        "placeholder": ""
+      }
+    ]
+  },
+  "script/javascript": {
+    "hash": "aff569e33091425743ce1fce6540a37d82aa727dd5a711ee5ebb8816363b8ab7",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Run JavaScript",
+    "description": "Execute a sandboxed JavaScript script (ES2020+, no network, no file system)",
+    "website": "https://www.flomation.co",
+    "icon": "code",
+    "date": "15/06/2026",
+    "type": 2,
+    "category": {
+      "name": "Script",
+      "icon": "terminal",
+      "description": "Execute scripts and commands"
+    },
+    "inputs": [
+      {
+        "name": "code",
+        "type": "code",
+        "value": null,
+        "label": "JavaScript Code",
+        "placeholder": "// Inputs are available on the global `inputs` object.\n// Return an object whose keys match your declared outputs, or assign to outputs.X.\nreturn { total: inputs.a + inputs.b };",
+        "required": true
+      },
+      {
+        "name": "version",
+        "type": "string",
+        "value": null,
+        "label": "JavaScript Version",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "ES2020 (goja)",
+            "value": "ES2020 (goja)"
+          }
+        ]
+      },
+      {
+        "name": "outputs",
+        "type": "key_value_array",
+        "value": null,
+        "label": "Outputs (name → type)",
+        "placeholder": "e.g. total → number, status → string. Leave empty to emit the whole return value under \"result\"."
+      },
+      {
+        "name": "inputs_data",
+        "type": "object",
+        "value": null,
+        "label": "Inputs",
+        "placeholder": "Available inside the script as `inputs.X`. Wire variables in from upstream nodes."
+      },
+      {
+        "name": "timeout_seconds",
+        "type": "integer",
+        "value": null,
+        "label": "Timeout (seconds)",
+        "placeholder": "30"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "logs",
+        "type": "string",
+        "value": null,
+        "label": "Console output",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "duration_ms",
+        "type": "integer",
+        "value": null,
+        "label": "Duration (ms)",
+        "placeholder": ""
+      }
+    ]
+  },
+  "script/python": {
+    "hash": "795329c4b976564bb62182af53d23abb5311eb71cf2b1fc2497e613b98f66877",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Run Python",
+    "description": "Execute a sandboxed Python 3.12 script (CPython-WASI, no network, /work only)",
+    "website": "https://www.flomation.co",
+    "icon": "code",
+    "date": "15/06/2026",
+    "type": 2,
+    "category": {
+      "name": "Script",
+      "icon": "terminal",
+      "description": "Execute scripts and commands"
+    },
+    "inputs": [
+      {
+        "name": "code",
+        "type": "code",
+        "value": null,
+        "label": "Python Code",
+        "placeholder": "# Inputs are in the `inputs` dict; assign to `outputs`\n# or return a dict — either form populates the outputs.\noutputs['total'] = inputs['a'] + inputs['b']\nreturn {'status': 'ok'}",
+        "required": true
+      },
+      {
+        "name": "version",
+        "type": "string",
+        "value": null,
+        "label": "Python Version",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "Python 3.12 (WASI)",
+            "value": "Python 3.12 (WASI)"
+          }
+        ]
+      },
+      {
+        "name": "outputs",
+        "type": "key_value_array",
+        "value": null,
+        "label": "Outputs (name → type)",
+        "placeholder": "e.g. total → number, status → string. Leave empty to emit the whole outputs dict under \"result\"."
+      },
+      {
+        "name": "inputs_data",
+        "type": "object",
+        "value": null,
+        "label": "Inputs",
+        "placeholder": "Available inside the script as `inputs['X']`. Wire variables in from upstream nodes."
+      },
+      {
+        "name": "timeout_seconds",
+        "type": "integer",
+        "value": null,
+        "label": "Timeout (seconds)",
+        "placeholder": "30"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "logs",
+        "type": "string",
+        "value": null,
+        "label": "stdout",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "duration_ms",
+        "type": "integer",
+        "value": null,
+        "label": "Duration (ms)",
         "placeholder": ""
       }
     ]

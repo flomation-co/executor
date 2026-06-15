@@ -293,6 +293,8 @@ func inspectPackage(dir string) map[string]ManifestEntry {
 										value = "credential"
 									case "ConnectionTypeSecret":
 										value = "secret"
+									case "ConnectionTypeCode":
+										value = "code"
 									}
 								case *ast.Ident:
 									if v.Name == "true" {

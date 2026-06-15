@@ -172,6 +172,13 @@ const (
 	//     any long-lived literal the user pastes into the environment.
 	ConnectionTypeCredential = "credential"
 	ConnectionTypeSecret     = "secret"
+
+	// ConnectionTypeCode is for free-text inputs that hold script
+	// source — Python, JavaScript, anything we add later. The
+	// editor renders this with a monospace font and (in future)
+	// can layer syntax highlighting / line numbers on top, none
+	// of which would make sense for the generic Text type.
+	ConnectionTypeCode = "code"
 )
 
 type Action func(flow *Flow, node *Node, inputs []*Connection) (map[string]interface{}, error)
