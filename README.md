@@ -11,9 +11,9 @@ each node's action in dependency order. Results are written to a `state.json` fi
 completion.
 
 The executor is a single-shot CLI binary. In production it is invoked as a subprocess by
-the [Runner](https://gitlab.tooling.flomation.app/flomation/automate/runner), which
+the Runner, which
 supplies the flow definition and reports the resulting state back to the
-[API](https://gitlab.tooling.flomation.app/flomation/automate/api). It can also be run
+API. It can also be run
 directly against a local flow file.
 
 ## Prerequisites
