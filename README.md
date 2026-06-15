@@ -2,20 +2,6 @@
 
 > Runtime engine — executes a flo's node graph and reports results.
 
-## The Flomation Automate platform
-
-Flomation Automate lets non-technical, front-of-house users build and run automation
-workflows ("flos") from a visual editor. This repository is one of five services that
-make up the platform:
-
-| Service | Role |
-|---------|------|
-| [API](https://gitlab.tooling.flomation.app/flomation/automate/api) | Backend REST API — manages flos, executions, runners, and environments/secrets |
-| [Editor](https://gitlab.tooling.flomation.app/flomation/automate/editor) | Visual web app for building, running, and monitoring flos |
-| [Launch](https://gitlab.tooling.flomation.app/flomation/automate/launch) | Ingress service — turns external events (webhooks, QR scans, forms, pixels) into trigger fires |
-| [Runner](https://gitlab.tooling.flomation.app/flomation/automate/runner) | Remote agent — polls the API for pending executions and runs them |
-| **Executor** (this repository) | Runtime engine — executes a flo's node graph and reports results |
-
 ## Overview
 
 The Flomation Executor is the runtime engine for the Flomation Automate platform. It
@@ -33,7 +19,6 @@ directly against a local flow file.
 ## Prerequisites
 
 - Go 1.26.1+
-- Access to the Flomation API (default: `https://api.flomation.app`) when using environments
 - Docker (optional, for containerised execution)
 
 ## Installation
