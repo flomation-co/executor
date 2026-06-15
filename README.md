@@ -1,22 +1,34 @@
 # Flomation Executor
 
-Loads and executes JSON-defined automation workflows as directed acyclic graphs of nodes and edges.
+> Runtime engine — executes a flo's node graph and reports results.
+
+## The Flomation Automate platform
+
+Flomation Automate lets non-technical, front-of-house users build and run automation
+workflows ("flos") from a visual editor. This repository is one of five services that
+make up the platform:
+
+| Service | Role |
+|---------|------|
+| [API](https://gitlab.tooling.flomation.app/flomation/automate/api) | Backend REST API — manages flos, executions, runners, and environments/secrets |
+| [Editor](https://gitlab.tooling.flomation.app/flomation/automate/editor) | Visual web app for building, running, and monitoring flos |
+| [Launch](https://gitlab.tooling.flomation.app/flomation/automate/launch) | Ingress service — turns external events (webhooks, QR scans, forms, pixels) into trigger fires |
+| [Runner](https://gitlab.tooling.flomation.app/flomation/automate/runner) | Remote agent — polls the API for pending executions and runs them |
+| **Executor** (this repository) | Runtime engine — executes a flo's node graph and reports results |
 
 ## Overview
 
-The Flomation Executor is the runtime engine for the Flomation Automate platform. It takes a flow definition file (a JSON graph of nodes and edges), resolves variable substitutions from upstream outputs, environment properties, and secrets, then executes each node's action in dependency order. Results are written to a `state.json` file on completion.
+The Flomation Executor is the runtime engine for the Flomation Automate platform. It
+takes a flow definition file (a JSON graph of nodes and edges), resolves variable
+substitutions from upstream outputs, environment properties, and secrets, then executes
+each node's action in dependency order. Results are written to a `state.json` file on
+completion.
 
-## Table of Contents
-
-- [Prerequisites](#prerequisites)
-- [Installation](#installation)
-- [Configuration](#configuration)
-- [Usage](#usage)
-- [Actions](#actions)
-- [Variable Substitution](#variable-substitution)
-- [Development](#development)
-- [Project Structure](#project-structure)
-- [Licence](#licence)
+The executor is a single-shot CLI binary. In production it is invoked as a subprocess by
+the [Runner](https://gitlab.tooling.flomation.app/flomation/automate/runner), which
+supplies the flow definition and reports the resulting state back to the
+[API](https://gitlab.tooling.flomation.app/flomation/automate/api). It can also be run
+directly against a local flow file.
 
 ## Prerequisites
 
@@ -32,7 +44,8 @@ The Flomation Executor is the runtime engine for the Flomation Automate platform
 make build
 ```
 
-This produces binaries under `dist/` for linux/amd64, linux/arm64, linux/arm, darwin/amd64, darwin/arm64, and windows/amd64.
+This produces binaries under `dist/` for linux/amd64, linux/arm64, linux/arm,
+darwin/amd64, darwin/arm64, and windows/amd64.
 
 **Install locally:**
 
@@ -42,16 +55,9 @@ make install
 
 Installs the binary as `flomation-executor` in your `$GOPATH/bin`.
 
-**Docker:**
-
-```sh
-docker build --build-arg BINARY_FILE=dist/flomation-executor-amd64-linux-1.0.local -t flomation-executor .
-docker run flomation-executor -path /path/to/flow.json
-```
-
-Base image: `dhi.io/alpine-base:3.23-alpine3.23-dev`. Runs as non-root `flomation` user.
-
 ## Configuration
+
+The executor is configured entirely through command-line flags:
 
 | Flag | Description | Required | Default |
 |------|-------------|----------|---------|
@@ -201,27 +207,25 @@ Node inputs support variable substitution using `${...}` syntax:
 
 ## Development
 
-**Run tests:**
-
 ```sh
+# Run tests
 make test
-```
 
-**Lint:**
-
-```sh
+# Lint (runs goimports, golangci-lint, go vet, gosec, govulncheck)
 make lint
-```
 
-Runs `goimports`, `golangci-lint`, `go vet`, `gosec`, and `govulncheck`.
-
-**Regenerate the action manifest:**
-
-```sh
+# Regenerate the action manifest (writes internal/assets/manifest/manifest.json)
 make manifest
 ```
 
-This runs `cmd/manifest/manifest.go` and writes to `internal/assets/manifest/manifest.json`.
+## Docker
+
+Base image: `dhi.io/alpine-base:3.23-alpine3.23-dev`. Runs as a non-root `flomation` user.
+
+```sh
+docker build --build-arg BINARY_FILE=dist/flomation-executor-amd64-linux-1.0.local -t flomation-executor .
+docker run flomation-executor -path /path/to/flow.json
+```
 
 ## Project Structure
 
