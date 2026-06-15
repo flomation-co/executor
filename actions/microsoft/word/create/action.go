@@ -30,7 +30,7 @@ var Inputs = [...]core.Connection{
 	{Name: "filename", Type: core.ConnectionTypeString, Label: "Filename", Required: true, Placeholder: "document.docx"},
 	{Name: "folder_path", Type: core.ConnectionTypeString, Label: "Folder Path"},
 	{Name: "account", Type: core.ConnectionTypeString, Label: "Microsoft Account (email)"},
-	{Name: "credential", Type: core.ConnectionTypeString, Label: "Microsoft OAuth Credential", Placeholder: "${credentials.MICROSOFT_ONEDRIVE}"},
+	{Name: "credential", Type: core.ConnectionTypeCredential, Label: "Microsoft OAuth Credential", Placeholder: "${credentials.MICROSOFT_ONEDRIVE}"},
 }
 
 var Outputs = [...]core.Connection{

@@ -19,7 +19,7 @@ const (
 )
 
 var Inputs = [...]core.Connection{
-	{Name: "api_key", Type: core.ConnectionTypeString, Label: "Notion Integration Token", Placeholder: "ntn_...", Required: true},
+	{Name: "api_key", Type: core.ConnectionTypeSecret, Label: "Notion Integration Token", Placeholder: "ntn_...", Required: true},
 	{Name: "block_id", Type: core.ConnectionTypeString, Label: "Block ID", Required: true},
 }
 

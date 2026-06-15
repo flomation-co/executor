@@ -32,7 +32,7 @@ const (
 var AuthInputs = []core.Connection{
 	{
 		Name:        "access_token",
-		Type:        core.ConnectionTypeString,
+		Type:        core.ConnectionTypeSecret,
 		Label:       "GitLab Access Token",
 		Placeholder: "glpat-...",
 		Required:    true,

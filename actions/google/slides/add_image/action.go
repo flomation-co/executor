@@ -32,7 +32,7 @@ var Inputs = [...]core.Connection{
 	{Name: "width", Type: core.ConnectionTypeInteger, Label: "Width (points)", Placeholder: "400"},
 	{Name: "height", Type: core.ConnectionTypeInteger, Label: "Height (points)", Placeholder: "300"},
 	{Name: "account", Type: core.ConnectionTypeString, Label: "Google Account (email)"},
-	{Name: "credential", Type: core.ConnectionTypeString, Label: "Google OAuth Credential", Placeholder: "${credentials.GOOGLE_DRIVE}"},
+	{Name: "credential", Type: core.ConnectionTypeCredential, Label: "Google OAuth Credential", Placeholder: "${credentials.GOOGLE_DRIVE}"},
 }
 
 var Outputs = [...]core.Connection{

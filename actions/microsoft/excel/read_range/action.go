@@ -26,7 +26,7 @@ var Inputs = [...]core.Connection{
 	{Name: "sheet", Type: core.ConnectionTypeString, Label: "Worksheet Name", Required: true, Placeholder: "Sheet1"},
 	{Name: "range_address", Type: core.ConnectionTypeString, Label: "Cell Range", Required: true, Placeholder: "A1:D10"},
 	{Name: "account", Type: core.ConnectionTypeString, Label: "Microsoft Account (email)"},
-	{Name: "credential", Type: core.ConnectionTypeString, Label: "Microsoft OAuth Credential", Placeholder: "${credentials.MICROSOFT_EXCEL}"},
+	{Name: "credential", Type: core.ConnectionTypeCredential, Label: "Microsoft OAuth Credential", Placeholder: "${credentials.MICROSOFT_EXCEL}"},
 }
 
 var Outputs = [...]core.Connection{

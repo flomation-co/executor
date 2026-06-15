@@ -38,7 +38,7 @@ var Inputs = [...]core.Connection{
 	},
 	{
 		Name:        "api_key",
-		Type:        core.ConnectionTypeString,
+		Type:        core.ConnectionTypeSecret,
 		Label:       "API Key",
 		Placeholder: "sk-...",
 		Required:    true,

@@ -35,14 +35,14 @@ var Inputs = [...]core.Connection{
 	},
 	{
 		Name:        "api_key",
-		Type:        core.ConnectionTypeString,
+		Type:        core.ConnectionTypeSecret,
 		Label:       "Provider API Key",
 		Placeholder: "${secrets.GOOGLE_MAPS_API_KEY}",
 		Required:    true,
 	},
 	{
 		Name:        "polyline",
-		Type:        core.ConnectionTypeString,
+		Type:        core.ConnectionTypeSecret,
 		Label:       "Encoded polyline (from calculate_route)",
 		Placeholder: "${parent.polyline}",
 		Required:    true,

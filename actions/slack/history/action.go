@@ -27,7 +27,7 @@ const (
 )
 
 var Inputs = [...]core.Connection{
-	{Name: "bot_token", Type: core.ConnectionTypeString, Label: "Bot Token", Placeholder: "xoxb-...", Required: true},
+	{Name: "bot_token", Type: core.ConnectionTypeSecret, Label: "Bot Token", Placeholder: "xoxb-...", Required: true},
 	{Name: "channel_id", Type: core.ConnectionTypeString, Label: "Channel ID", Placeholder: "C01ABC2DEF3", Required: true},
 	{Name: "limit", Type: core.ConnectionTypeString, Label: "Number of messages (default 20, max 100)"},
 	{Name: "oldest", Type: core.ConnectionTypeString, Label: "Oldest timestamp (Unix ts or ISO date, e.g. 2026-04-28)"},

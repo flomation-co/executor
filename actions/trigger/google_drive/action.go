@@ -28,13 +28,13 @@ var Inputs = [...]core.Connection{
 	},
 	{
 		Name:        "credential",
-		Type:        core.ConnectionTypeString,
+		Type:        core.ConnectionTypeCredential,
 		Label:       "Google OAuth Credential",
 		Placeholder: "${credentials.GOOGLE_DRIVE}",
 	},
 	{
 		Name:        "google_account",
-		Type:        core.ConnectionTypeString,
+		Type:        core.ConnectionTypeCredential,
 		Label:       "Google Account (email)",
 		Placeholder: "user@gmail.com",
 	},

@@ -30,14 +30,14 @@ const (
 var Inputs = [...]core.Connection{
 	{
 		Name:        "api_key",
-		Type:        core.ConnectionTypeString,
+		Type:        core.ConnectionTypeSecret,
 		Label:       "ElevenLabs API Key",
 		Placeholder: "sk_...",
 		Required:    true,
 	},
 	{
 		Name:        "audio_base64",
-		Type:        core.ConnectionTypeString,
+		Type:        core.ConnectionTypeSecret,
 		Label:       "Audio data (base64-encoded). Provide this OR audio_url.",
 		Placeholder: "base64 audio data",
 	},

@@ -20,7 +20,7 @@ const (
 )
 
 var Inputs = [...]core.Connection{
-	{Name: "api_key", Type: core.ConnectionTypeString, Label: "Notion Integration Token", Placeholder: "ntn_...", Required: true},
+	{Name: "api_key", Type: core.ConnectionTypeSecret, Label: "Notion Integration Token", Placeholder: "ntn_...", Required: true},
 	{Name: "page_id", Type: core.ConnectionTypeString, Label: "Page ID", Placeholder: "Page to comment on"},
 	{Name: "discussion_id", Type: core.ConnectionTypeString, Label: "Discussion Thread ID", Placeholder: "Reply to existing discussion (optional)"},
 	{Name: "body", Type: core.ConnectionTypeText, Label: "Comment Text", Required: true},

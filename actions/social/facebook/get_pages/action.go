@@ -20,8 +20,8 @@ const (
 )
 
 var Inputs = [...]core.Connection{
-	{Name: "access_token", Type: core.ConnectionTypeString, Label: "Facebook User Token", Placeholder: "${credentials.facebook}", Required: true},
-	{Name: "app_secret", Type: core.ConnectionTypeString, Label: "App Secret", Placeholder: "${secrets.facebook_app_secret}"},
+	{Name: "access_token", Type: core.ConnectionTypeSecret, Label: "Facebook User Token", Placeholder: "${credentials.facebook}", Required: true},
+	{Name: "app_secret", Type: core.ConnectionTypeSecret, Label: "App Secret", Placeholder: "${secrets.facebook_app_secret}"},
 }
 
 var Outputs = [...]core.Connection{

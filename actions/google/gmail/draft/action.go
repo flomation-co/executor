@@ -45,7 +45,7 @@ var Inputs = [...]core.Connection{
 	{Name: "body", Type: core.ConnectionTypeText, Label: "Body (for create/update)"},
 	{Name: "draft_id", Type: core.ConnectionTypeString, Label: "Draft ID (for update/delete)"},
 	{Name: "account", Type: core.ConnectionTypeString, Label: "Account (email or label)"},
-	{Name: "credential", Type: core.ConnectionTypeString, Label: "Google OAuth Credential (optional)", Placeholder: "${credentials.GOOGLE_EMAIL}"},
+	{Name: "credential", Type: core.ConnectionTypeCredential, Label: "Google OAuth Credential (optional)", Placeholder: "${credentials.GOOGLE_EMAIL}"},
 }
 
 var Outputs = [...]core.Connection{

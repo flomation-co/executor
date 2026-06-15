@@ -30,7 +30,7 @@ var Inputs = [...]core.Connection{
 	{Name: "location", Type: core.ConnectionTypeString, Label: "Location"},
 	{Name: "attendees", Type: core.ConnectionTypeString, Label: "Attendees", Placeholder: "user@example.com, user2@example.com"},
 	{Name: "account", Type: core.ConnectionTypeString, Label: "Microsoft Account (email)"},
-	{Name: "credential", Type: core.ConnectionTypeString, Label: "Microsoft OAuth Credential", Placeholder: "${credentials.MICROSOFT_CALENDAR}"},
+	{Name: "credential", Type: core.ConnectionTypeCredential, Label: "Microsoft OAuth Credential", Placeholder: "${credentials.MICROSOFT_CALENDAR}"},
 }
 
 var Outputs = [...]core.Connection{

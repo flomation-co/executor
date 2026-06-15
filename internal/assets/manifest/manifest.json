@@ -997,7 +997,7 @@
     ]
   },
   "ai/anthropic": {
-    "hash": "fc3b34af86e03bd83fb0e51f94d78acfb75d7c941b1331d7b76bb8454bc793ed",
+    "hash": "2dad6a64f94fb01ebdba0162e5401af92f978a4bff5e1da2ad8bfdc57913941e",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Anthropic Prompt",
@@ -1014,7 +1014,7 @@
     "inputs": [
       {
         "name": "api_key",
-        "type": "string",
+        "type": "secret",
         "value": null,
         "label": "API Key",
         "placeholder": "sk-ant-...",
@@ -1022,7 +1022,7 @@
       },
       {
         "name": "model",
-        "type": "string",
+        "type": "secret",
         "value": null,
         "label": "Model",
         "placeholder": "",
@@ -1166,7 +1166,7 @@
     ]
   },
   "ai/openai": {
-    "hash": "ca6f14aa7821654e8fce4ed1ffd6554f7e0f93f35ce6cf51eb4d162d18094caf",
+    "hash": "7d8e46b5b0c18057fd83d3256c9ff11813828329c401138b79722cf181608698",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "OpenAI Prompt",
@@ -1183,7 +1183,7 @@
     "inputs": [
       {
         "name": "api_key",
-        "type": "string",
+        "type": "secret",
         "value": null,
         "label": "API Key",
         "placeholder": "sk-...",
@@ -1191,7 +1191,7 @@
       },
       {
         "name": "model",
-        "type": "string",
+        "type": "secret",
         "value": null,
         "label": "Model",
         "placeholder": "",
@@ -1341,7 +1341,7 @@
     ]
   },
   "ai/openwebui": {
-    "hash": "ad6797e139c3e11c07722a37b89396fb681f84bb7be1a6a9ffd1800eaa183f32",
+    "hash": "03bc59458aa6be6cfa107bc14bc496f443e893a02245f4788e7a9a4ce01ef89e",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Open WebUI Prompt",
@@ -1366,7 +1366,7 @@
       },
       {
         "name": "api_key",
-        "type": "string",
+        "type": "secret",
         "value": null,
         "label": "API Key",
         "placeholder": "sk-...",
@@ -1859,7 +1859,7 @@
     "outputs": null
   },
   "aws/s3/delete": {
-    "hash": "e2c7fccd874c0af52bc3300e38b97cfc863aa2db08b0ddf96aa2458e9ce793dd",
+    "hash": "981b4b75e00d35ac315650af4cdea668d43c39c59c79c4e217b6a4c6111269c6",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "AWS S3 Delete",
@@ -1881,21 +1881,21 @@
     "inputs": [
       {
         "name": "aws_access_key",
-        "type": "string",
+        "type": "secret",
         "value": null,
         "label": "AWS Access Key",
         "placeholder": ""
       },
       {
         "name": "aws_secret_key",
-        "type": "string",
+        "type": "secret",
         "value": null,
         "label": "AWS Secret Key",
         "placeholder": ""
       },
       {
         "name": "key",
-        "type": "string",
+        "type": "secret",
         "value": null,
         "label": "Filename",
         "placeholder": ""
@@ -1940,7 +1940,7 @@
     ]
   },
   "aws/s3/get": {
-    "hash": "a13f67e56e723e9e695d63e0193fbe3c40fbe31b3c2833ae2a6925bd23ec554c",
+    "hash": "fcbe562ed05f118dde068e9c269310cad2835b7349c265700c85e9ec23526b33",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "AWS S3 Get Object",
@@ -1962,21 +1962,21 @@
     "inputs": [
       {
         "name": "aws_access_key",
-        "type": "string",
+        "type": "secret",
         "value": null,
         "label": "AWS Access Key",
         "placeholder": ""
       },
       {
         "name": "aws_secret_key",
-        "type": "string",
+        "type": "secret",
         "value": null,
         "label": "AWS Secret Key",
         "placeholder": ""
       },
       {
         "name": "key",
-        "type": "string",
+        "type": "secret",
         "value": null,
         "label": "Filename",
         "placeholder": ""
@@ -2028,7 +2028,7 @@
     ]
   },
   "aws/s3/list": {
-    "hash": "5021efdcd2c8e7bbf25f21bb23917f2f01cffd5ab74e49d81b4cb8f1eb6b3d04",
+    "hash": "64213cd7bf35f7db112406c63810e930c954200582a632409d5b9fb66b0e0fa7",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "AWS S3 List Buckets",
@@ -2050,21 +2050,21 @@
     "inputs": [
       {
         "name": "aws_access_key",
-        "type": "string",
+        "type": "secret",
         "value": null,
         "label": "AWS Access Key",
         "placeholder": ""
       },
       {
         "name": "aws_secret_key",
-        "type": "string",
+        "type": "secret",
         "value": null,
         "label": "AWS Secret Key",
         "placeholder": ""
       },
       {
         "name": "aws_region",
-        "type": "string",
+        "type": "secret",
         "value": null,
         "label": "AWS Region",
         "placeholder": ""
@@ -2095,7 +2095,7 @@
     ]
   },
   "aws/s3/put": {
-    "hash": "cfaafd2a52b8fa83ebba38dc7bdd36d8b27ff997e1bc6239c0fb11c32b65994e",
+    "hash": "1971c3e6225a04ba970ed035cad1b85320239d5662860f9f2dddc162ad875abb",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "AWS S3 Put",
@@ -2117,7 +2117,7 @@
     "inputs": [
       {
         "name": "aws_access_key",
-        "type": "string",
+        "type": "secret",
         "value": null,
         "label": "AWS Access Key",
         "placeholder": "",
@@ -2125,7 +2125,7 @@
       },
       {
         "name": "aws_secret_key",
-        "type": "string",
+        "type": "secret",
         "value": null,
         "label": "AWS Secret Key",
         "placeholder": "",
@@ -2133,7 +2133,7 @@
       },
       {
         "name": "key",
-        "type": "string",
+        "type": "secret",
         "value": null,
         "label": "Filename",
         "placeholder": "",
@@ -3628,7 +3628,7 @@
     ]
   },
   "elevenlabs/list_voices": {
-    "hash": "8276dc75d86d263d7173ba3610836434f998c01a980c8305f5df5b5c00b89147",
+    "hash": "f34a0f29ccf061e6696ed332a431fee229dc0ca86b1131ff8088e23fc5979305",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "List Voices",
@@ -3645,7 +3645,7 @@
     "inputs": [
       {
         "name": "api_key",
-        "type": "string",
+        "type": "secret",
         "value": null,
         "label": "ElevenLabs API Key",
         "placeholder": "sk_...",
@@ -3691,7 +3691,7 @@
     ]
   },
   "elevenlabs/speech_to_text": {
-    "hash": "1edfbc4077e3d3fd63ce57881f9cd44d5d6781e758d7471efbb9512069729dd5",
+    "hash": "1d2037138f978f175312f9636e97c5216e741adb3d04be12e93dbdf49d28fb74",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Speech to Text",
@@ -3708,7 +3708,7 @@
     "inputs": [
       {
         "name": "api_key",
-        "type": "string",
+        "type": "secret",
         "value": null,
         "label": "ElevenLabs API Key",
         "placeholder": "sk_...",
@@ -3716,7 +3716,7 @@
       },
       {
         "name": "audio_base64",
-        "type": "string",
+        "type": "secret",
         "value": null,
         "label": "Audio data (base64-encoded). Provide this OR audio_url.",
         "placeholder": "base64 audio data"
@@ -3795,7 +3795,7 @@
     ]
   },
   "elevenlabs/text_to_speech": {
-    "hash": "78c9bc3f255bf5eaa9e77543f0b5d0a6e2400da25b8360ecbfcce62fbcaf01fc",
+    "hash": "1cea7bcfaa9722c862732e4eac2132802cdb7bf06656b4a82ef62180c24e558a",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Text to Speech",
@@ -3812,7 +3812,7 @@
     "inputs": [
       {
         "name": "api_key",
-        "type": "string",
+        "type": "secret",
         "value": null,
         "label": "ElevenLabs API Key",
         "placeholder": "sk_...",
@@ -4295,7 +4295,7 @@
     ]
   },
   "git/clone": {
-    "hash": "fc9f2187a3a25a71bff3b69406cb86b7fca6b3bb501e8b8eebc539916065b4d8",
+    "hash": "cb332fa5880dcbff381c3c149726cccbb3629edac0849e205abec30ee33cc369",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Git Clone",
@@ -4359,7 +4359,7 @@
       },
       {
         "name": "username",
-        "type": "string",
+        "type": "secret",
         "value": null,
         "label": "Username",
         "placeholder": "",
@@ -4470,7 +4470,7 @@
     ]
   },
   "git/pull": {
-    "hash": "7a9463c198b56c57ef0b26202035f91d220c896492a19fd94bb88e7cbc68ef5a",
+    "hash": "4bf9f7a259ea89c0cc4dcd6e800da8636c2d948b66fafc2a1ea0aa88f6913789",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Git Pull",
@@ -4526,7 +4526,7 @@
       },
       {
         "name": "username",
-        "type": "string",
+        "type": "secret",
         "value": null,
         "label": "Username",
         "placeholder": "",
@@ -4586,7 +4586,7 @@
     ]
   },
   "git/push": {
-    "hash": "b043c6a9896a29969bee5ad59db3af846a865ccfc76a3b82926842b790af77ce",
+    "hash": "12b96990ab3a2ba4d7de3f507db9b28522572c0a0d422b49fcdf7c3e407cb746",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Git Push",
@@ -4642,7 +4642,7 @@
       },
       {
         "name": "username",
-        "type": "string",
+        "type": "secret",
         "value": null,
         "label": "Username",
         "placeholder": "",
@@ -4783,7 +4783,7 @@
     ]
   },
   "github/add_issue_comment": {
-    "hash": "6086f74c9d80d1e18647752c8fcd91c5e9016b41bbf19be49aa9a32271b1b99e",
+    "hash": "e0c0cee250b76fce3af91620600dcbb8dceb3dc7d4d6fb75b3c4bc15364748b5",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "GitHub Add Issue Comment",
@@ -4800,7 +4800,7 @@
     "inputs": [
       {
         "name": "access_token",
-        "type": "string",
+        "type": "secret",
         "value": null,
         "label": "GitHub Access Token",
         "placeholder": "ghp_...",
@@ -4885,7 +4885,7 @@
     ]
   },
   "github/add_pull_request_comment": {
-    "hash": "9ffa64760bc8d3b06fcad701d9498b77dad84a4bbff32ff8a070e2bc14a4cc11",
+    "hash": "d6ed4844a6438ca308e161b7467242302d1d62b103e0f4638381acb3f269d8fe",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "GitHub Add PR Comment",
@@ -4902,7 +4902,7 @@
     "inputs": [
       {
         "name": "access_token",
-        "type": "string",
+        "type": "secret",
         "value": null,
         "label": "GitHub Access Token",
         "placeholder": "ghp_...",
@@ -4987,7 +4987,7 @@
     ]
   },
   "github/cancel_workflow_run": {
-    "hash": "af963a60d188fbd40184d3d2d081c997ed71a8fa3d330e5ab7460bba133deba0",
+    "hash": "00441a63e2dc907fe123f1ea14b4b1a5b0c3a1d7ac28f019777d42f3a3b7a24b",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "GitHub Cancel Workflow Run",
@@ -5004,7 +5004,7 @@
     "inputs": [
       {
         "name": "access_token",
-        "type": "string",
+        "type": "secret",
         "value": null,
         "label": "GitHub Access Token",
         "placeholder": "ghp_...",
@@ -5067,7 +5067,7 @@
     ]
   },
   "github/create_issue": {
-    "hash": "27dc6b2eafadaaeb27320482943f9e57230d40bfca2a3fdf466e800ded5aafce",
+    "hash": "24a347e650842d8b4ef3cf6132ae02cfd4d59bdca18ea256730523a14f568ae8",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "GitHub Create Issue",
@@ -5084,7 +5084,7 @@
     "inputs": [
       {
         "name": "access_token",
-        "type": "string",
+        "type": "secret",
         "value": null,
         "label": "GitHub Access Token",
         "placeholder": "ghp_...",
@@ -5182,7 +5182,7 @@
     ]
   },
   "github/create_pull_request": {
-    "hash": "a4fd1f247230bd508e481e20c415ab6e0e6e8c0abc60359a47c47233f9083d89",
+    "hash": "d884254982feae25fcc4f5c00e6d2b3d7ff103d22bb1209b440adcabb344469d",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "GitHub Create Pull Request",
@@ -5199,7 +5199,7 @@
     "inputs": [
       {
         "name": "access_token",
-        "type": "string",
+        "type": "secret",
         "value": null,
         "label": "GitHub Access Token",
         "placeholder": "ghp_...",
@@ -5306,7 +5306,7 @@
     ]
   },
   "github/create_pull_request_review": {
-    "hash": "4785ef16bf48cb97b4c2c9bd49fcfc769bbb145d72f3dbe5e5b60898559772b4",
+    "hash": "f9f34c5a8e46b72186fc691ae0bb7fa7f5e38dbb3f9b20775d3c0a16b2860781",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "GitHub Create PR Review",
@@ -5323,7 +5323,7 @@
     "inputs": [
       {
         "name": "access_token",
-        "type": "string",
+        "type": "secret",
         "value": null,
         "label": "GitHub Access Token",
         "placeholder": "ghp_...",
@@ -5429,7 +5429,7 @@
     ]
   },
   "github/delete_pull_request_comment": {
-    "hash": "72b308ba8c7c9f25a1929c85d853c83d2b897e0298865604ff12b3545939a0a6",
+    "hash": "fdc3833c4eb276dcee876e36dd5d3e279f2ee1c3497804a7f126f7269ed941bc",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "GitHub Delete PR Comment",
@@ -5446,7 +5446,7 @@
     "inputs": [
       {
         "name": "access_token",
-        "type": "string",
+        "type": "secret",
         "value": null,
         "label": "GitHub Access Token",
         "placeholder": "ghp_...",
@@ -5509,7 +5509,7 @@
     ]
   },
   "github/dismiss_pull_request_review": {
-    "hash": "c45aac0da0cf2cb80b1561444b1a5fa1e1a7f08b6c1fcec0364e3d004563db16",
+    "hash": "e6b5eb79c2d740f14e21acd2f8deaf871cc4320514d409481682ec2093b3dfe4",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "GitHub Dismiss PR Review",
@@ -5526,7 +5526,7 @@
     "inputs": [
       {
         "name": "access_token",
-        "type": "string",
+        "type": "secret",
         "value": null,
         "label": "GitHub Access Token",
         "placeholder": "ghp_...",
@@ -5605,7 +5605,7 @@
     ]
   },
   "github/get_issue": {
-    "hash": "e05120dd7c16a051fc4ae5dce1239392456a5b813960443032b213bda5a2c6be",
+    "hash": "0637fae2ae85cc9995f7fb64db054ed2bebec54b4b7d8fa2ebaf8d8bd7636fb9",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "GitHub Get Issue",
@@ -5622,7 +5622,7 @@
     "inputs": [
       {
         "name": "access_token",
-        "type": "string",
+        "type": "secret",
         "value": null,
         "label": "GitHub Access Token",
         "placeholder": "ghp_...",
@@ -5734,7 +5734,7 @@
     ]
   },
   "github/get_pull_request": {
-    "hash": "d473c50f891464d86f80181eb36ddfcc94bac52fbfc79778f4039d43255bddb7",
+    "hash": "e7f36e68e79534c3edaacaeaaef42f06f4cff097654d6e381b07827ccc5bd800",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "GitHub Get Pull Request",
@@ -5751,7 +5751,7 @@
     "inputs": [
       {
         "name": "access_token",
-        "type": "string",
+        "type": "secret",
         "value": null,
         "label": "GitHub Access Token",
         "placeholder": "ghp_...",
@@ -5884,7 +5884,7 @@
     ]
   },
   "github/get_pull_request_diff": {
-    "hash": "7fc689d584b8b5a4c2588c11fd8d2cb77908edf118c52f5167e9c367f22da5da",
+    "hash": "2011d41c4e8277f42228ec8224c3dbe9c6a16ca428a8c65eae93a794b024af10",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "GitHub Get Pull Request Diff",
@@ -5901,7 +5901,7 @@
     "inputs": [
       {
         "name": "access_token",
-        "type": "string",
+        "type": "secret",
         "value": null,
         "label": "GitHub Access Token",
         "placeholder": "ghp_...",
@@ -5978,7 +5978,7 @@
     ]
   },
   "github/get_workflow_run": {
-    "hash": "5cace73de4fe1eb26a7e633fae247d219a8c90dc44718e760f7cf577886b1247",
+    "hash": "af6aefb9b3c31c2e172729187ae50c87c981f813ed146b8f34968bd822931836",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "GitHub Get Workflow Run",
@@ -5995,7 +5995,7 @@
     "inputs": [
       {
         "name": "access_token",
-        "type": "string",
+        "type": "secret",
         "value": null,
         "label": "GitHub Access Token",
         "placeholder": "ghp_...",
@@ -6100,7 +6100,7 @@
     ]
   },
   "github/list_issues": {
-    "hash": "5c66543281211de746c6eb82c776f0ea58bfb0161013baa4785f9ede759652c4",
+    "hash": "cda69fdc46f933068362348eafa9a569efa2f9b6a6e19040e9d5bd16c7099d21",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "GitHub List Issues",
@@ -6117,7 +6117,7 @@
     "inputs": [
       {
         "name": "access_token",
-        "type": "string",
+        "type": "secret",
         "value": null,
         "label": "GitHub Access Token",
         "placeholder": "ghp_...",
@@ -6249,7 +6249,7 @@
     ]
   },
   "github/list_pull_request_comments": {
-    "hash": "611cf4f4cc0e6ed42e7686ffd5cbabe27e5e25e55734aba8e62c84656f2b9720",
+    "hash": "c95a13579cff89f6dffe3026441950caeffad7607b1725b51edb1a3d166a2cea",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "GitHub List PR Comments",
@@ -6266,7 +6266,7 @@
     "inputs": [
       {
         "name": "access_token",
-        "type": "string",
+        "type": "secret",
         "value": null,
         "label": "GitHub Access Token",
         "placeholder": "ghp_...",
@@ -6343,7 +6343,7 @@
     ]
   },
   "github/list_pull_request_reviews": {
-    "hash": "5199e05eff8f089972102bec154529d1be6e506b4de3ad482f397b0abaf04193",
+    "hash": "b500da928c8aa4295eefc6ae2069942f99d16c10caf479824a99968d4d16821e",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "GitHub List PR Reviews",
@@ -6360,7 +6360,7 @@
     "inputs": [
       {
         "name": "access_token",
-        "type": "string",
+        "type": "secret",
         "value": null,
         "label": "GitHub Access Token",
         "placeholder": "ghp_...",
@@ -6437,7 +6437,7 @@
     ]
   },
   "github/list_pull_requests": {
-    "hash": "6e3c60cb5734243a3156d5e9a796d2914d2c1894ac6c67fa61c73365926d36ef",
+    "hash": "3163248ad3e358279465406833a428b22769a43dc3ac26f72ccb0b78b38c9083",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "GitHub List Pull Requests",
@@ -6454,7 +6454,7 @@
     "inputs": [
       {
         "name": "access_token",
-        "type": "string",
+        "type": "secret",
         "value": null,
         "label": "GitHub Access Token",
         "placeholder": "ghp_...",
@@ -6586,7 +6586,7 @@
     ]
   },
   "github/list_workflow_jobs": {
-    "hash": "fb70ddf74d4baa90cce0eb7e2314711d6c853a2e0bcc8ad4fa47bd465aaea3eb",
+    "hash": "5279f7bbea4c59c4fbaa20338f03a68060da648f23941f894ef0bf369ee8a542",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "GitHub List Workflow Jobs",
@@ -6603,7 +6603,7 @@
     "inputs": [
       {
         "name": "access_token",
-        "type": "string",
+        "type": "secret",
         "value": null,
         "label": "GitHub Access Token",
         "placeholder": "ghp_...",
@@ -6680,7 +6680,7 @@
     ]
   },
   "github/list_workflow_runs": {
-    "hash": "b7fe62a057b4cf7de887626a9c8a9596b5ac981d8423d21a397e39a912dcd1f3",
+    "hash": "fbd8775da2874e9d5dc6ef96f46f3b3d46211172ba55977b0ebfab0fab3729e5",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "GitHub List Workflow Runs",
@@ -6697,7 +6697,7 @@
     "inputs": [
       {
         "name": "access_token",
-        "type": "string",
+        "type": "secret",
         "value": null,
         "label": "GitHub Access Token",
         "placeholder": "ghp_...",
@@ -6805,7 +6805,7 @@
     ]
   },
   "github/merge_pull_request": {
-    "hash": "a523c3d066a8e48f238e97bae2600e9a3a13e6300f0d672c24c8badb8861d60b",
+    "hash": "c631b3cb3ec32dbe7e3bb015a77c03f15e951457beb6e77e27205a82ccfa3b33",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "GitHub Merge Pull Request",
@@ -6822,7 +6822,7 @@
     "inputs": [
       {
         "name": "access_token",
-        "type": "string",
+        "type": "secret",
         "value": null,
         "label": "GitHub Access Token",
         "placeholder": "ghp_...",
@@ -6934,7 +6934,7 @@
     ]
   },
   "github/rerun_workflow": {
-    "hash": "bbaf2599411276bd0a4b695e8e25596cce20f97e70cb44eafe449de40573676e",
+    "hash": "526a1eb67a822896715f916f96160a379f60aebc7a499ddee96165929615402e",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "GitHub Re-run Workflow",
@@ -6951,7 +6951,7 @@
     "inputs": [
       {
         "name": "access_token",
-        "type": "string",
+        "type": "secret",
         "value": null,
         "label": "GitHub Access Token",
         "placeholder": "ghp_...",
@@ -7014,7 +7014,7 @@
     ]
   },
   "github/trigger_workflow": {
-    "hash": "168edf72ae9ff08e3e38c37f9491675e3d58a8f5df060c144c3e409fad75792d",
+    "hash": "af25a6b4b230bd0f833952df304a0095fce987a36b063a6a713b6e29f9405c39",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "GitHub Trigger Workflow",
@@ -7031,7 +7031,7 @@
     "inputs": [
       {
         "name": "access_token",
-        "type": "string",
+        "type": "secret",
         "value": null,
         "label": "GitHub Access Token",
         "placeholder": "ghp_...",
@@ -7109,7 +7109,7 @@
     ]
   },
   "github/update_pull_request": {
-    "hash": "c1e953e66c5987893631d6d96b73bd87548ba75d49348bdaf213b2aeb3a23920",
+    "hash": "0160356e596441fb43e13e595a245626735cdb3bf886cb04a6687771ef76dcdc",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "GitHub Update Pull Request",
@@ -7126,7 +7126,7 @@
     "inputs": [
       {
         "name": "access_token",
-        "type": "string",
+        "type": "secret",
         "value": null,
         "label": "GitHub Access Token",
         "placeholder": "ghp_...",
@@ -7238,7 +7238,7 @@
     ]
   },
   "gitlab/add_issue_comment": {
-    "hash": "15dd8e396e3371cc9ed580789210503d8a78a1c54964edf72f4593a8fa2894d7",
+    "hash": "7d89d5c946c59cca39bcf2e4493c64c9fc18e2a4cc91f575e8f704ce80f61722",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "GitLab Add Issue Comment",
@@ -7255,7 +7255,7 @@
     "inputs": [
       {
         "name": "access_token",
-        "type": "string",
+        "type": "secret",
         "value": null,
         "label": "GitLab Access Token",
         "placeholder": "glpat-...",
@@ -7325,7 +7325,7 @@
     ]
   },
   "gitlab/add_merge_request_comment": {
-    "hash": "117d25acf99482a030d07bcd1395633176066cb6e69e165f9a5c2809a13afa46",
+    "hash": "8e916971d2275aa11e018f903d1cc508b780af4908dc9037e2713adc804846c2",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "GitLab Add MR Comment",
@@ -7342,7 +7342,7 @@
     "inputs": [
       {
         "name": "access_token",
-        "type": "string",
+        "type": "secret",
         "value": null,
         "label": "GitLab Access Token",
         "placeholder": "glpat-...",
@@ -7412,7 +7412,7 @@
     ]
   },
   "gitlab/approve_merge_request": {
-    "hash": "9e1eaf0a3c3368738e479220e292fce2c3abd5daa864155627d3016cab70fae5",
+    "hash": "8e7417e71158d77e9f205f0d5a219e8c4333404d35716dfa91e57336e07a5a87",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "GitLab Approve Merge Request",
@@ -7429,7 +7429,7 @@
     "inputs": [
       {
         "name": "access_token",
-        "type": "string",
+        "type": "secret",
         "value": null,
         "label": "GitLab Access Token",
         "placeholder": "glpat-...",
@@ -7484,7 +7484,7 @@
     ]
   },
   "gitlab/cancel_pipeline": {
-    "hash": "712e4e030840e1a4994174125f6ee47720a4c393921ae8934d5882671fda4eed",
+    "hash": "8b5488c6168d2a7d1bf7f3c6070a3aa26ba5e70d439f374a4123944d50e86237",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "GitLab Cancel Pipeline",
@@ -7501,7 +7501,7 @@
     "inputs": [
       {
         "name": "access_token",
-        "type": "string",
+        "type": "secret",
         "value": null,
         "label": "GitLab Access Token",
         "placeholder": "glpat-...",
@@ -7570,7 +7570,7 @@
     ]
   },
   "gitlab/create_issue": {
-    "hash": "cf1242ff3062fdf2c8a885472e43d772575cd5f484ba995d9f36a6ac7825d523",
+    "hash": "44d4a78566b1e23fd89b1e222d89a856a7e1be07245c5bfd30889dafe75b467e",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "GitLab Create Issue",
@@ -7587,7 +7587,7 @@
     "inputs": [
       {
         "name": "access_token",
-        "type": "string",
+        "type": "secret",
         "value": null,
         "label": "GitLab Access Token",
         "placeholder": "glpat-...",
@@ -7684,7 +7684,7 @@
     ]
   },
   "gitlab/create_merge_request": {
-    "hash": "c6258dba03ccedd3fa988e8779efa93887026340eebb5b79675141e1435a8bd7",
+    "hash": "b0b346b32cc08d4ca95c7fc24856ec622488bd274055bd5347b71dbc65867567",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "GitLab Create Merge Request",
@@ -7701,7 +7701,7 @@
     "inputs": [
       {
         "name": "access_token",
-        "type": "string",
+        "type": "secret",
         "value": null,
         "label": "GitLab Access Token",
         "placeholder": "glpat-...",
@@ -7814,7 +7814,7 @@
     ]
   },
   "gitlab/delete_merge_request_comment": {
-    "hash": "c055106793b251595843f4d5a709a0f3522bed20d59fcc1f3dc6cad3fdf5a745",
+    "hash": "bc27b4bd9dedc03982eafdc493bb2aa755ed5927494182ad85c5658c7f004594",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "GitLab Delete MR Comment",
@@ -7831,7 +7831,7 @@
     "inputs": [
       {
         "name": "access_token",
-        "type": "string",
+        "type": "secret",
         "value": null,
         "label": "GitLab Access Token",
         "placeholder": "glpat-...",
@@ -7894,7 +7894,7 @@
     ]
   },
   "gitlab/get_issue": {
-    "hash": "69785f37d8dcbca76e62060faa668a21a6167449d899478f281cb80a11483020",
+    "hash": "a033d4f2f7d6065f2832aaeaf6855cf915860a08684a6713663894586749e78d",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "GitLab Get Issue",
@@ -7911,7 +7911,7 @@
     "inputs": [
       {
         "name": "access_token",
-        "type": "string",
+        "type": "secret",
         "value": null,
         "label": "GitLab Access Token",
         "placeholder": "glpat-...",
@@ -8015,7 +8015,7 @@
     ]
   },
   "gitlab/get_job_log": {
-    "hash": "0dc70de73714e4eb2ad3fa84dff24c698a311646bbb17e2bd8f81182d716ade0",
+    "hash": "c6ac30290f637a33b9ad7a133044ebd36f40200db717763932150b19980a4890",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "GitLab Get Job Log",
@@ -8032,7 +8032,7 @@
     "inputs": [
       {
         "name": "access_token",
-        "type": "string",
+        "type": "secret",
         "value": null,
         "label": "GitLab Access Token",
         "placeholder": "glpat-...",
@@ -8094,7 +8094,7 @@
     ]
   },
   "gitlab/get_merge_request": {
-    "hash": "6a1ad1354f0d4cb8aa5b8f713ecf901f78d9120e05d5375d7db7540db109ddde",
+    "hash": "4aeb2363679ffce6095ee79d132abd099a7cd96d34e51e080bf3dda76975f485",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "GitLab Get Merge Request",
@@ -8111,7 +8111,7 @@
     "inputs": [
       {
         "name": "access_token",
-        "type": "string",
+        "type": "secret",
         "value": null,
         "label": "GitLab Access Token",
         "placeholder": "glpat-...",
@@ -8236,7 +8236,7 @@
     ]
   },
   "gitlab/get_merge_request_diff": {
-    "hash": "424847de028dae18acc9d8d58d1f9fc311f53d83c1e6512b49e3334ff1e444ee",
+    "hash": "fe2e2f90067de9b0f2c55c60ab63133fd0181e5970c193c1a4372afe1213e85c",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "GitLab Get Merge Request Diff",
@@ -8253,7 +8253,7 @@
     "inputs": [
       {
         "name": "access_token",
-        "type": "string",
+        "type": "secret",
         "value": null,
         "label": "GitLab Access Token",
         "placeholder": "glpat-...",
@@ -8322,7 +8322,7 @@
     ]
   },
   "gitlab/get_pipeline": {
-    "hash": "e83c4dd3dbe46a1ae4d9e06bee326bfacf51496e3c51c0db7403914f77de4ea1",
+    "hash": "ecb68d7807a06dbf9cff2bcc53f93436e2a9e2778885357f9186ce10dd58946b",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "GitLab Get Pipeline",
@@ -8339,7 +8339,7 @@
     "inputs": [
       {
         "name": "access_token",
-        "type": "string",
+        "type": "secret",
         "value": null,
         "label": "GitLab Access Token",
         "placeholder": "glpat-...",
@@ -8436,7 +8436,7 @@
     ]
   },
   "gitlab/list_issues": {
-    "hash": "b05923284f0da97b2d7d2993d460c8a3991028b959ce5ed6590563f1e7ade945",
+    "hash": "ce896355fc2ca4d7bcda9ebc66a89fb865eff032c72f96545fd400900326d2a1",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "GitLab List Issues",
@@ -8453,7 +8453,7 @@
     "inputs": [
       {
         "name": "access_token",
-        "type": "string",
+        "type": "secret",
         "value": null,
         "label": "GitLab Access Token",
         "placeholder": "glpat-...",
@@ -8563,7 +8563,7 @@
     ]
   },
   "gitlab/list_merge_request_approvals": {
-    "hash": "c4ae316e47058711a99124355312866259209bf445711c5bdef5465ff57c8dc5",
+    "hash": "79f2347f2e428c949304c9e7a1eed61dabdac6ff15942b5b12c9b37d88ab00df",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "GitLab List MR Approvals",
@@ -8580,7 +8580,7 @@
     "inputs": [
       {
         "name": "access_token",
-        "type": "string",
+        "type": "secret",
         "value": null,
         "label": "GitLab Access Token",
         "placeholder": "glpat-...",
@@ -8663,7 +8663,7 @@
     ]
   },
   "gitlab/list_merge_request_comments": {
-    "hash": "4762271d937d071626d2a0e1398d9a4b54f6b6677ecfa8ac740821bf76c6fd1d",
+    "hash": "67833d0ed9991a8f6394d90778a397df68edb96ba0153e4a52eb66d33e8795d0",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "GitLab List MR Comments",
@@ -8680,7 +8680,7 @@
     "inputs": [
       {
         "name": "access_token",
-        "type": "string",
+        "type": "secret",
         "value": null,
         "label": "GitLab Access Token",
         "placeholder": "glpat-...",
@@ -8749,7 +8749,7 @@
     ]
   },
   "gitlab/list_merge_requests": {
-    "hash": "513179aaf0926514571089aba1789bc132048cc9ba40a13ccb358190f4bf4534",
+    "hash": "fafba5991b476125abac9a218b2aea37bb53b782eb6ff0462e3d98ba2eca5ad5",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "GitLab List Merge Requests",
@@ -8766,7 +8766,7 @@
     "inputs": [
       {
         "name": "access_token",
-        "type": "string",
+        "type": "secret",
         "value": null,
         "label": "GitLab Access Token",
         "placeholder": "glpat-...",
@@ -8880,7 +8880,7 @@
     ]
   },
   "gitlab/list_pipeline_jobs": {
-    "hash": "0c68ee4be7dd57f8e1dc69d73ce1b5f7debee8c0c6eef45b74344a1df22f4703",
+    "hash": "3a687f115b061463587e8c0399961e9b36b0a8ba11c2fa3e75b9f4c23f7e0e43",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "GitLab List Pipeline Jobs",
@@ -8897,7 +8897,7 @@
     "inputs": [
       {
         "name": "access_token",
-        "type": "string",
+        "type": "secret",
         "value": null,
         "label": "GitLab Access Token",
         "placeholder": "glpat-...",
@@ -8966,7 +8966,7 @@
     ]
   },
   "gitlab/list_pipelines": {
-    "hash": "62083c8d818e1838788c671c7dfbef8244ffc9a2e8bea027bdccae96db173806",
+    "hash": "f896176d54d091a88169f1c78e3e8c4c3ee65c6e0b75f8f62f46b3b22c606f79",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "GitLab List Pipelines",
@@ -8983,7 +8983,7 @@
     "inputs": [
       {
         "name": "access_token",
-        "type": "string",
+        "type": "secret",
         "value": null,
         "label": "GitLab Access Token",
         "placeholder": "glpat-...",
@@ -9091,7 +9091,7 @@
     ]
   },
   "gitlab/list_projects": {
-    "hash": "05a5ae17374bd19c9d5f60608f8afe4c75dabc20ea392a7c793a6df8c16f490a",
+    "hash": "666e74d52411520aee2cf15cf26f4da92c8004173aeaf5946d300ee8d6cc6ce0",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "GitLab List Projects",
@@ -9108,7 +9108,7 @@
     "inputs": [
       {
         "name": "access_token",
-        "type": "string",
+        "type": "secret",
         "value": null,
         "label": "GitLab Access Token",
         "placeholder": "glpat-...",
@@ -9214,7 +9214,7 @@
     ]
   },
   "gitlab/list_users": {
-    "hash": "fcb5aab345f1fb67de2177ca56daa19d6b6840168044e44adb78eced8b45bd59",
+    "hash": "f25aa75d45faaa3a47871ed6b05f8521d8df959fbb92abe4ca8e96209c298d35",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "GitLab List Users",
@@ -9231,7 +9231,7 @@
     "inputs": [
       {
         "name": "access_token",
-        "type": "string",
+        "type": "secret",
         "value": null,
         "label": "GitLab Access Token",
         "placeholder": "glpat-...",
@@ -9305,7 +9305,7 @@
     ]
   },
   "gitlab/merge_merge_request": {
-    "hash": "b4c3f0d5504d8c4ebe513bf17695328d69460f5d578ce6b04555ee0999378983",
+    "hash": "798eb4149245e2d2613a2c0fe145a1ef883aa8d3c52088d8dcb3cc849ab8ff4a",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "GitLab Merge Merge Request",
@@ -9322,7 +9322,7 @@
     "inputs": [
       {
         "name": "access_token",
-        "type": "string",
+        "type": "secret",
         "value": null,
         "label": "GitLab Access Token",
         "placeholder": "glpat-...",
@@ -9412,7 +9412,7 @@
     ]
   },
   "gitlab/retry_pipeline": {
-    "hash": "e0bc7df566a5c8333b9a7a8b613703b75bf6dcf1a2d3d9b41e4dbdff07375a9b",
+    "hash": "c3a3236aceef6da3a3f094628ba45d2fc3de125b817f6e997ca062e99b5ddc82",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "GitLab Retry Pipeline",
@@ -9429,7 +9429,7 @@
     "inputs": [
       {
         "name": "access_token",
-        "type": "string",
+        "type": "secret",
         "value": null,
         "label": "GitLab Access Token",
         "placeholder": "glpat-...",
@@ -9498,7 +9498,7 @@
     ]
   },
   "gitlab/trigger_pipeline": {
-    "hash": "1ad0be42514f2036405665c7b7fd13c5ae1f90dc940800dd85bb680075949345",
+    "hash": "e874ca12906b9e6b5826435c79e4f272f7d0604ec817fdd0796e5fd93b05c9de",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "GitLab Trigger Pipeline",
@@ -9515,7 +9515,7 @@
     "inputs": [
       {
         "name": "access_token",
-        "type": "string",
+        "type": "secret",
         "value": null,
         "label": "GitLab Access Token",
         "placeholder": "glpat-...",
@@ -9598,7 +9598,7 @@
     ]
   },
   "gitlab/unapprove_merge_request": {
-    "hash": "730b44497685dfd11c001f9e69250e97c0a6ccd7448ff899da1d95fda4d8a867",
+    "hash": "7e0bbddd5de8ec8b42c828013f5c9b5a840d6689cd96f4132c74269ece71deff",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "GitLab Unapprove Merge Request",
@@ -9615,7 +9615,7 @@
     "inputs": [
       {
         "name": "access_token",
-        "type": "string",
+        "type": "secret",
         "value": null,
         "label": "GitLab Access Token",
         "placeholder": "glpat-...",
@@ -9670,7 +9670,7 @@
     ]
   },
   "gitlab/update_merge_request": {
-    "hash": "7f5840355936b5dab7dc390540813445859d7a3e9b170a9e9cc2d8c7d83c1769",
+    "hash": "7f76aaf7f8ed740d23f6e967707afb056e8ca12f620d5b86aeb0781f8e9c41ea",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "GitLab Update Merge Request",
@@ -9687,7 +9687,7 @@
     "inputs": [
       {
         "name": "access_token",
-        "type": "string",
+        "type": "secret",
         "value": null,
         "label": "GitLab Access Token",
         "placeholder": "glpat-...",
@@ -9906,7 +9906,7 @@
     ]
   },
   "google/calendar/create": {
-    "hash": "564afd93d898e8b4d9315099fb9fd47ed41d41ccd9a3b47cd2a0b7182a706d6c",
+    "hash": "521f3da8fe71bc0c0e99dd0aa346850b2bc4800ed884edf051f770acefe4ba97",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Calendar Create Event",
@@ -9988,7 +9988,7 @@
       },
       {
         "name": "credential",
-        "type": "string",
+        "type": "credential",
         "value": null,
         "label": "Google OAuth Credential (optional, overrides user tokens)",
         "placeholder": "${credentials.GOOGLE_CALENDAR}"
@@ -10033,7 +10033,7 @@
     ]
   },
   "google/calendar/delete": {
-    "hash": "8139d842e73e9b53ff2786b4e7dff31bce9e87a05c250bd9799bbbe0ca46b35e",
+    "hash": "be496522438e3e8c9435e0855c3c33541bfdee7437b3589b287c16678644c51b",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Calendar Delete Event",
@@ -10070,7 +10070,7 @@
       },
       {
         "name": "credential",
-        "type": "string",
+        "type": "credential",
         "value": null,
         "label": "Google OAuth Credential (optional, overrides user tokens)",
         "placeholder": "${credentials.GOOGLE_CALENDAR}"
@@ -10101,7 +10101,7 @@
     ]
   },
   "google/calendar/read": {
-    "hash": "3829e5ffa909239f50dae3878aa94fcb5f8b8495a1a49073c9fdeefb334cde0b",
+    "hash": "6b990ef8a2e318872207f77d591735a564b61160abbdd7b233639a350d5ed5ba",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Calendar Read",
@@ -10188,7 +10188,7 @@
       },
       {
         "name": "credential",
-        "type": "string",
+        "type": "credential",
         "value": null,
         "label": "Google OAuth Credential (optional, overrides user tokens)",
         "placeholder": "${credentials.GOOGLE_CALENDAR}"
@@ -10240,7 +10240,7 @@
     ]
   },
   "google/calendar/update": {
-    "hash": "9d5d89e4f8b3bb9fbc3281575628e198c09cb29d67ffd1df7a14fa87b84816a0",
+    "hash": "72c425e977ceb1ff1c1ae49f1f4ec670c787ad04fcd470765a8c26e3993c9076",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Calendar Update Event",
@@ -10340,7 +10340,7 @@
       },
       {
         "name": "credential",
-        "type": "string",
+        "type": "credential",
         "value": null,
         "label": "Google OAuth Credential (optional, overrides user tokens)",
         "placeholder": "${credentials.GOOGLE_CALENDAR}"
@@ -10371,7 +10371,7 @@
     ]
   },
   "google/docs/append_text": {
-    "hash": "e79659794b81052e6c954dfeccee3c9ae1f62e4548e23f6a685c46c3ba6206b7",
+    "hash": "69a46a6e4bd16c36eaabe22a741ba6834e66a1ff23ae268f80ef7942ac2467f0",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Append to Document",
@@ -10416,7 +10416,7 @@
       },
       {
         "name": "credential",
-        "type": "string",
+        "type": "credential",
         "value": null,
         "label": "Google OAuth Credential",
         "placeholder": "${credentials.GOOGLE_DRIVE}"
@@ -10447,7 +10447,7 @@
     ]
   },
   "google/docs/create": {
-    "hash": "d186ea77b29d67f3e02c8ebd4de64c123d213c48d71cba9fed211db3228a0a4c",
+    "hash": "62b802418c271af08176c7f8012f1e36cfcefeab75c858996d0bc6f0c543844b",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Create Document",
@@ -10491,7 +10491,7 @@
       },
       {
         "name": "credential",
-        "type": "string",
+        "type": "credential",
         "value": null,
         "label": "Google OAuth Credential",
         "placeholder": "${credentials.GOOGLE_DRIVE}"
@@ -10536,7 +10536,7 @@
     ]
   },
   "google/docs/get_metadata": {
-    "hash": "6c48020d7f168e4d39590a7627ffaa53448fed7ee0d521852455b42ab2639994",
+    "hash": "a1291787bce7101d5f84c69df69470f01727c651348a8da1e2625f7a677c657f",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Get Document Metadata",
@@ -10573,7 +10573,7 @@
       },
       {
         "name": "credential",
-        "type": "string",
+        "type": "credential",
         "value": null,
         "label": "Google OAuth Credential",
         "placeholder": "${credentials.GOOGLE_DRIVE}"
@@ -10625,7 +10625,7 @@
     ]
   },
   "google/docs/insert_image": {
-    "hash": "60ee0d7505a829010ce7f9660f57058d2bfcfec448a7f791d0315f628eae132a",
+    "hash": "db3af0ed2b9cbc6a7856141383b01e9ed2b6939765184903e046b88c8511a0ef",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Insert Image in Document",
@@ -10684,7 +10684,7 @@
       },
       {
         "name": "credential",
-        "type": "string",
+        "type": "credential",
         "value": null,
         "label": "Google OAuth Credential",
         "placeholder": "${credentials.GOOGLE_DRIVE}"
@@ -10715,7 +10715,7 @@
     ]
   },
   "google/docs/read": {
-    "hash": "5e0a04b0d666933475af1205586b788acd6c8e1fed1aa845975c962f50cdd639",
+    "hash": "901d7b7b1b71eed81a5fbd6ba5e9631e04b077179af81ee08fd02a4e59c5b759",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Read Document",
@@ -10752,7 +10752,7 @@
       },
       {
         "name": "credential",
-        "type": "string",
+        "type": "credential",
         "value": null,
         "label": "Google OAuth Credential",
         "placeholder": "${credentials.GOOGLE_DRIVE}"
@@ -10804,7 +10804,7 @@
     ]
   },
   "google/docs/replace_text": {
-    "hash": "9720be31185fa9c76193ea7ca48affbab9363640ddfe8569d83fd00caf526630",
+    "hash": "9dfcdf04c93ce2caebbb10f9d966fe50a53e46b776baf7c25c21f059dd108015",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Replace Text in Document",
@@ -10864,7 +10864,7 @@
       },
       {
         "name": "credential",
-        "type": "string",
+        "type": "credential",
         "value": null,
         "label": "Google OAuth Credential",
         "placeholder": "${credentials.GOOGLE_DRIVE}"
@@ -10902,7 +10902,7 @@
     ]
   },
   "google/drive/copy": {
-    "hash": "15acc6e492a1f75fae96ca262a202b488e4f4f5c4fe2fe0342db9ba48273da73",
+    "hash": "52848f77bf0f0fccd8a3075087443c3df35fa512b38bc280666d30b9ed8777ed",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Copy Drive File",
@@ -10953,7 +10953,7 @@
       },
       {
         "name": "credential",
-        "type": "string",
+        "type": "credential",
         "value": null,
         "label": "Google OAuth Credential",
         "placeholder": "${credentials.GOOGLE_DRIVE}"
@@ -10998,7 +10998,7 @@
     ]
   },
   "google/drive/create_folder": {
-    "hash": "23b9a4c9ba414b1d4b0d35a4a0e4e651309ca5726d1321e82c4b468f6d5303b0",
+    "hash": "b48cbb4d355a454e9a31419515a2f37aaeff9b30593bc7a5100c9052fe8fa848",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Create Drive Folder",
@@ -11042,7 +11042,7 @@
       },
       {
         "name": "credential",
-        "type": "string",
+        "type": "credential",
         "value": null,
         "label": "Google OAuth Credential",
         "placeholder": "${credentials.GOOGLE_DRIVE}"
@@ -11087,7 +11087,7 @@
     ]
   },
   "google/drive/delete": {
-    "hash": "958df3817204b01d06692a52961db8246d06b8e1b9e5926297ac0d360c6d98fa",
+    "hash": "3b4ba4196e17c2b4817e459710d624b05ec65f6e21cb0aa5d0bf5764e210cf71",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Delete Drive File",
@@ -11131,7 +11131,7 @@
       },
       {
         "name": "credential",
-        "type": "string",
+        "type": "credential",
         "value": null,
         "label": "Google OAuth Credential",
         "placeholder": "${credentials.GOOGLE_DRIVE}"
@@ -11162,7 +11162,7 @@
     ]
   },
   "google/drive/download": {
-    "hash": "5f75700bf0f33330cec5e1e4186c2b31368441409a02954ebdff07526e7c487f",
+    "hash": "416e9c56463c6f42d53dc31817a7b54d883201ed06c74679703acc2727f42185",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Download Drive File",
@@ -11232,7 +11232,7 @@
       },
       {
         "name": "credential",
-        "type": "string",
+        "type": "credential",
         "value": null,
         "label": "Google OAuth Credential",
         "placeholder": "${credentials.GOOGLE_DRIVE}"
@@ -11284,7 +11284,7 @@
     ]
   },
   "google/drive/get_file": {
-    "hash": "ad60a17b0e25d4d112aedea2ca3d9e4645dba827d12353a4ad4998266c008de1",
+    "hash": "ce618808bc982d2c0d30556bc7db5b299d77619880f9a5a2e592b55879f4369d",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Get Drive File",
@@ -11321,7 +11321,7 @@
       },
       {
         "name": "credential",
-        "type": "string",
+        "type": "credential",
         "value": null,
         "label": "Google OAuth Credential",
         "placeholder": "${credentials.GOOGLE_DRIVE}"
@@ -11387,7 +11387,7 @@
     ]
   },
   "google/drive/list_files": {
-    "hash": "f60303043c186d7caec66878ec06ad297e6b7a279a7d5be79a89b10b18f4c94a",
+    "hash": "36072499fcad551c21e7313aeab66929bdf68b667438c53d26ca244072fdbed2",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "List Drive Files",
@@ -11444,7 +11444,7 @@
       },
       {
         "name": "credential",
-        "type": "string",
+        "type": "credential",
         "value": null,
         "label": "Google OAuth Credential",
         "placeholder": "${credentials.GOOGLE_DRIVE}"
@@ -11489,7 +11489,7 @@
     ]
   },
   "google/drive/move": {
-    "hash": "a131ef9efa10ecd18633a1df16d4ae9197191ef85a3fefcd379a875a00e6934b",
+    "hash": "0d142e1d587b9c7c288d41725ff9cd79a7eca4a1af91e0e06c1f5d7ecb77b1a4",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Move Drive File",
@@ -11534,7 +11534,7 @@
       },
       {
         "name": "credential",
-        "type": "string",
+        "type": "credential",
         "value": null,
         "label": "Google OAuth Credential",
         "placeholder": "${credentials.GOOGLE_DRIVE}"
@@ -11572,7 +11572,7 @@
     ]
   },
   "google/drive/search": {
-    "hash": "af332c6094e861c78e78d418b20738f84d4355de30fdfdfb27d566f53530bcac",
+    "hash": "96ca3e65c1941adc7ee4ff8a4929c902512cd0ddd6ecaf7f960bbbb13818c579",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Search Drive",
@@ -11655,7 +11655,7 @@
       },
       {
         "name": "credential",
-        "type": "string",
+        "type": "credential",
         "value": null,
         "label": "Google OAuth Credential",
         "placeholder": "${credentials.GOOGLE_DRIVE}"
@@ -11700,7 +11700,7 @@
     ]
   },
   "google/drive/share": {
-    "hash": "417f3fbbf18c84a2584b24d87fa2a4be496fc81da769ed562b23ea52f79e0aec",
+    "hash": "1935d6b3e00e2047b47361e13082030d42b1b94494104230a730a9c0392d379c",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Share Drive File",
@@ -11794,7 +11794,7 @@
       },
       {
         "name": "credential",
-        "type": "string",
+        "type": "credential",
         "value": null,
         "label": "Google OAuth Credential",
         "placeholder": "${credentials.GOOGLE_DRIVE}"
@@ -11832,7 +11832,7 @@
     ]
   },
   "google/drive/upload": {
-    "hash": "cc968ab82d6d6b10cbb0e532a8e15a89032e2860f6287fcbae918cf05d428608",
+    "hash": "6584778f321f7e2a6c6fdda8fcefeec5430c1a8914f8cc09788bf4a8ff2d7b97",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Upload to Drive",
@@ -11897,7 +11897,7 @@
       },
       {
         "name": "credential",
-        "type": "string",
+        "type": "credential",
         "value": null,
         "label": "Google OAuth Credential",
         "placeholder": "${credentials.GOOGLE_DRIVE}"
@@ -11949,7 +11949,7 @@
     ]
   },
   "google/gmail/draft": {
-    "hash": "d2440c1fc7915142a5b0e7902a0639caba7500e2a16db2c635464da6299c2aea",
+    "hash": "fcf81e6020317cd623475ff21160d373b7fd306a02c0f506e74e11d4c28312ea",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Gmail Draft",
@@ -12032,7 +12032,7 @@
       },
       {
         "name": "credential",
-        "type": "string",
+        "type": "credential",
         "value": null,
         "label": "Google OAuth Credential (optional)",
         "placeholder": "${credentials.GOOGLE_EMAIL}"
@@ -12077,7 +12077,7 @@
     ]
   },
   "google/gmail/read": {
-    "hash": "02a322a79a00b8fb6403aa6c0c0d6dc5acca4a13275719eed0e3c7271128da30",
+    "hash": "949ba561eaa0c8a2db2d5f96a685c5e39b92feca438692c1991548836a152f6d",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Gmail Read",
@@ -12127,7 +12127,7 @@
       },
       {
         "name": "credential",
-        "type": "string",
+        "type": "credential",
         "value": null,
         "label": "Google OAuth Credential (optional, overrides user tokens)",
         "placeholder": "${credentials.GOOGLE_EMAIL}"
@@ -12172,7 +12172,7 @@
     ]
   },
   "google/gmail/reply": {
-    "hash": "9f1ae4eb0c396c10c33fe56091f5e4f22e25e5f07f0e4de4308d7e707ec15306",
+    "hash": "28f1f3bc247a747060fd7718b81c4d61943449215cca15a8f278130e55cf1303",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Gmail Reply",
@@ -12231,7 +12231,7 @@
       },
       {
         "name": "credential",
-        "type": "string",
+        "type": "credential",
         "value": null,
         "label": "Google OAuth Credential (optional, overrides user tokens)",
         "placeholder": "${credentials.GOOGLE_EMAIL}"
@@ -12269,7 +12269,7 @@
     ]
   },
   "google/gmail/send": {
-    "hash": "506eb4506641e9269c0a5e4c703dbe90127adf55a94b199a0cce529748ed7747",
+    "hash": "8b9d50ee2d66769279d7a05b04d5b130fe1e7a8fa1d12b4c28718879ef78577c",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Gmail Send",
@@ -12343,7 +12343,7 @@
       },
       {
         "name": "credential",
-        "type": "string",
+        "type": "credential",
         "value": null,
         "label": "Google OAuth Credential (optional, overrides user tokens)",
         "placeholder": "${credentials.GOOGLE_EMAIL}"
@@ -12388,7 +12388,7 @@
     ]
   },
   "google/sheets/append": {
-    "hash": "8858046b94525ca8fb9feea60296c4c59755aef7cd329ebae59a081256a8309f",
+    "hash": "e57cde4d7be59a82d0fd138bb1ac09c9bdc8d35701219f00bb6b1e0f1a5185ad",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Append to Sheet",
@@ -12458,7 +12458,7 @@
       },
       {
         "name": "credential",
-        "type": "string",
+        "type": "credential",
         "value": null,
         "label": "Google OAuth Credential",
         "placeholder": "${credentials.GOOGLE_DRIVE}"
@@ -12503,7 +12503,7 @@
     ]
   },
   "google/sheets/clear": {
-    "hash": "c2d298a5f8a4f619ff59df4b1e66b1956f3456bacf4856896c455a298629b985",
+    "hash": "566a0a07360cb08754d82696f5de5c6ae451458941acc1e0f185197c6d4ab898",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Clear Sheet Range",
@@ -12548,7 +12548,7 @@
       },
       {
         "name": "credential",
-        "type": "string",
+        "type": "credential",
         "value": null,
         "label": "Google OAuth Credential",
         "placeholder": "${credentials.GOOGLE_DRIVE}"
@@ -12586,7 +12586,7 @@
     ]
   },
   "google/sheets/create": {
-    "hash": "53bbb4308f8512709ab7f889346dc5b55805f8488c9be993bae16daa687f56ff",
+    "hash": "794615f0b2ff1bc8be46ecf2707689d0375e76d3caf5953708ed259c93533cd3",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Create Spreadsheet",
@@ -12630,7 +12630,7 @@
       },
       {
         "name": "credential",
-        "type": "string",
+        "type": "credential",
         "value": null,
         "label": "Google OAuth Credential",
         "placeholder": "${credentials.GOOGLE_DRIVE}"
@@ -12675,7 +12675,7 @@
     ]
   },
   "google/sheets/create_sheet": {
-    "hash": "3929e0ea109c826a33f9e7c15d08af1e0ee10fb60d6470ba9fe8c2e3c59d852b",
+    "hash": "0187ce03f59ef55eea2ab078193792f5218317b3acade035aeb79bc7aad4f915",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Add Sheet Tab",
@@ -12720,7 +12720,7 @@
       },
       {
         "name": "credential",
-        "type": "string",
+        "type": "credential",
         "value": null,
         "label": "Google OAuth Credential",
         "placeholder": "${credentials.GOOGLE_DRIVE}"
@@ -12758,7 +12758,7 @@
     ]
   },
   "google/sheets/delete_sheet": {
-    "hash": "e20a1bfa5a630bc4a2340ad3b0c0ae93512f7f5c8516be13521cb863d0d0a4a7",
+    "hash": "b95cad376d155f4a8d91e76391bb93f6d116339b6b8218919103c88ccc0ee69a",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Delete Sheet Tab",
@@ -12803,7 +12803,7 @@
       },
       {
         "name": "credential",
-        "type": "string",
+        "type": "credential",
         "value": null,
         "label": "Google OAuth Credential",
         "placeholder": "${credentials.GOOGLE_DRIVE}"
@@ -12834,7 +12834,7 @@
     ]
   },
   "google/sheets/get_metadata": {
-    "hash": "149f1b692b32ccc8e7a5f6a026672166746c2580059017ab3e509805ea5be7b3",
+    "hash": "2e0e1f624a540f9871b083d016bc8e65964f3ff8a77cb060352f98a836e0077a",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Get Sheet Metadata",
@@ -12871,7 +12871,7 @@
       },
       {
         "name": "credential",
-        "type": "string",
+        "type": "credential",
         "value": null,
         "label": "Google OAuth Credential",
         "placeholder": "${credentials.GOOGLE_DRIVE}"
@@ -12930,7 +12930,7 @@
     ]
   },
   "google/sheets/read": {
-    "hash": "13435c784b9f4924fac8f6a1d16a9ab0c18c62379db6a4489e1a5dd59fca8ac1",
+    "hash": "7eda628969b09de1a176fbce7865f71e24461dca478fd47644c0c470e28c78fa",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Read Sheet",
@@ -12996,7 +12996,7 @@
       },
       {
         "name": "credential",
-        "type": "string",
+        "type": "credential",
         "value": null,
         "label": "Google OAuth Credential",
         "placeholder": "${credentials.GOOGLE_DRIVE}"
@@ -13048,7 +13048,7 @@
     ]
   },
   "google/sheets/write": {
-    "hash": "f06a42b371911a3c5056456ab878b03d0c24503e3ffcc6c157a5889b33a18164",
+    "hash": "9b8b41e0af0a9462665ffa6b6951f6f7d4cf04b08470a20158cb2c74e272fd0d",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Write to Sheet",
@@ -13118,7 +13118,7 @@
       },
       {
         "name": "credential",
-        "type": "string",
+        "type": "credential",
         "value": null,
         "label": "Google OAuth Credential",
         "placeholder": "${credentials.GOOGLE_DRIVE}"
@@ -13170,7 +13170,7 @@
     ]
   },
   "google/slides/add_image": {
-    "hash": "a68db36e7273268c34770f53118d3c0f3077fc2edb8af1497534f7adb2766bbb",
+    "hash": "116cb443e2d83e80b5137a3eb6967ee53e185024f8fe4d3f443de478a237f67f",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Add Image to Slide",
@@ -13251,7 +13251,7 @@
       },
       {
         "name": "credential",
-        "type": "string",
+        "type": "credential",
         "value": null,
         "label": "Google OAuth Credential",
         "placeholder": "${credentials.GOOGLE_DRIVE}"
@@ -13289,7 +13289,7 @@
     ]
   },
   "google/slides/add_slide": {
-    "hash": "3d66e0cb3a548b71381b4e29e24441fed685078ced1af208ec87ad4dc32e603f",
+    "hash": "f58ab0c0ff7ca8719b4c950e46dc8f824b8b932f590ed0c97735e9ab909646bc",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Add Slide",
@@ -13366,7 +13366,7 @@
       },
       {
         "name": "credential",
-        "type": "string",
+        "type": "credential",
         "value": null,
         "label": "Google OAuth Credential",
         "placeholder": "${credentials.GOOGLE_DRIVE}"
@@ -13404,7 +13404,7 @@
     ]
   },
   "google/slides/add_text": {
-    "hash": "02136c78b3f4777145665acb6d9e660e77fc03fff757f6a210bb54eba7198e9e",
+    "hash": "83945d49a8ebba22209624eb4c69bb3401a2060bbe3c69d4635f02b5655b4f6d",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Add Text to Slide",
@@ -13457,7 +13457,7 @@
       },
       {
         "name": "credential",
-        "type": "string",
+        "type": "credential",
         "value": null,
         "label": "Google OAuth Credential",
         "placeholder": "${credentials.GOOGLE_DRIVE}"
@@ -13488,7 +13488,7 @@
     ]
   },
   "google/slides/create": {
-    "hash": "a2a2015d686c3b82c3be9091783f6ea8b04b874ffd82fc41ac222fd3945e40f4",
+    "hash": "0382f446b0915e99ea1f89d3b67e1ad8f323d252c31155eaef7fa2c01889f01a",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Create Presentation",
@@ -13525,7 +13525,7 @@
       },
       {
         "name": "credential",
-        "type": "string",
+        "type": "credential",
         "value": null,
         "label": "Google OAuth Credential",
         "placeholder": "${credentials.GOOGLE_DRIVE}"
@@ -13570,7 +13570,7 @@
     ]
   },
   "google/slides/get": {
-    "hash": "b8749cfa56096cacd1a9fba1b2988fb6442b6de34cfa121fa4d7596c82d2e570",
+    "hash": "801a3e4f32a620d758760817c29c0fdb246d2e5fae37ddc9ce6016c59330838f",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Get Presentation",
@@ -13607,7 +13607,7 @@
       },
       {
         "name": "credential",
-        "type": "string",
+        "type": "credential",
         "value": null,
         "label": "Google OAuth Credential",
         "placeholder": "${credentials.GOOGLE_DRIVE}"
@@ -13666,7 +13666,7 @@
     ]
   },
   "google/slides/get_slide": {
-    "hash": "3b7e23a51f26255e4a452722cfe71cabea33086e4ac77f008aff3c02f9ac0671",
+    "hash": "a5ef52d423fa10932effd5832f5a68b0296c8e758530dfeba308b79363573b22",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Get Slide",
@@ -13711,7 +13711,7 @@
       },
       {
         "name": "credential",
-        "type": "string",
+        "type": "credential",
         "value": null,
         "label": "Google OAuth Credential",
         "placeholder": "${credentials.GOOGLE_DRIVE}"
@@ -13763,7 +13763,7 @@
     ]
   },
   "journey/calculate_route": {
-    "hash": "9201a23308e39f8595820b8eed91b118ed7594da79a87271a370877d7bb21f66",
+    "hash": "0c7c157d38caaea6e48ce5992e6d571dbca8c145a4f0b36e1e0fec8758c489fe",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Calculate Route",
@@ -13798,7 +13798,7 @@
       },
       {
         "name": "api_key",
-        "type": "string",
+        "type": "secret",
         "value": null,
         "label": "Provider API Key",
         "placeholder": "${secrets.GOOGLE_MAPS_API_KEY}",
@@ -13806,7 +13806,7 @@
       },
       {
         "name": "origin",
-        "type": "string",
+        "type": "secret",
         "value": null,
         "label": "Origin (address or lat,lng)",
         "placeholder": "London, UK",
@@ -13962,7 +13962,7 @@
     ]
   },
   "journey/compare_departure_times": {
-    "hash": "2b05ac1980450fe72d5d0b7ebcb2085b6408929512aa586b3bbc6427bf9e3cb9",
+    "hash": "b1a52c7af616688cf2a994ed4516b146648901a1a88b8f96d86500bed7bdb7f6",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Compare Departure Times",
@@ -13997,7 +13997,7 @@
       },
       {
         "name": "api_key",
-        "type": "string",
+        "type": "secret",
         "value": null,
         "label": "Provider API Key",
         "placeholder": "${secrets.GOOGLE_MAPS_API_KEY}",
@@ -14005,7 +14005,7 @@
       },
       {
         "name": "origin",
-        "type": "string",
+        "type": "secret",
         "value": null,
         "label": "Origin",
         "placeholder": "London, UK",
@@ -14127,7 +14127,7 @@
     ]
   },
   "journey/find_arrive_by": {
-    "hash": "bdce566ed33e05209bc6aa873502ad8668e5efac02a325a99cd58c34749c6852",
+    "hash": "5bc0032e3f6568e012bfc2b2e7f9a8549a9195aa3a7cff515d7a040a3a828a9d",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Find Departure Time",
@@ -14162,7 +14162,7 @@
       },
       {
         "name": "api_key",
-        "type": "string",
+        "type": "secret",
         "value": null,
         "label": "Provider API Key",
         "placeholder": "${secrets.GOOGLE_MAPS_API_KEY}",
@@ -14170,7 +14170,7 @@
       },
       {
         "name": "origin",
-        "type": "string",
+        "type": "secret",
         "value": null,
         "label": "Origin",
         "placeholder": "Home",
@@ -14271,7 +14271,7 @@
     ]
   },
   "journey/find_nearby_places": {
-    "hash": "f60122cd916899882360af9ef1c63020c31288fbbb3f29ea2ce5b976f73710ef",
+    "hash": "4f8c772c29a9e6f25b5ca8616ec4f011add7a2cdbff016fec10f3d9188224abd",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Find Nearby Places",
@@ -14306,7 +14306,7 @@
       },
       {
         "name": "api_key",
-        "type": "string",
+        "type": "secret",
         "value": null,
         "label": "Provider API Key",
         "placeholder": "${secrets.GOOGLE_MAPS_API_KEY}",
@@ -14314,7 +14314,7 @@
       },
       {
         "name": "latitude",
-        "type": "string",
+        "type": "secret",
         "value": null,
         "label": "Latitude",
         "placeholder": "51.5034",
@@ -14438,7 +14438,7 @@
     ]
   },
   "journey/generate_itinerary_pdf": {
-    "hash": "b182550844423730f4196aefb3358d2c6b981056b5e748dbb696af9d2d3c367f",
+    "hash": "e45fb0373a63e352d1a5b372caa8f6a027e0ec5f0fde0d1941065f9118d0c0a5",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Generate Itinerary PDF",
@@ -14473,7 +14473,7 @@
       },
       {
         "name": "api_key",
-        "type": "string",
+        "type": "secret",
         "value": null,
         "label": "Provider API Key",
         "placeholder": "${secrets.GOOGLE_MAPS_API_KEY}",
@@ -14481,7 +14481,7 @@
       },
       {
         "name": "title",
-        "type": "string",
+        "type": "secret",
         "value": null,
         "label": "Itinerary title",
         "placeholder": "London to Manchester"
@@ -14576,7 +14576,7 @@
     ]
   },
   "journey/geocode_address": {
-    "hash": "d8a028b44dd559ff279f71958a4c3494c6f5c29400c35f9851598b9ec2ab12cb",
+    "hash": "ff17072142128a27cbc839ee600b056a3a8e805bd3c330efbda722cbb71a96f6",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Geocode Address",
@@ -14611,7 +14611,7 @@
       },
       {
         "name": "api_key",
-        "type": "string",
+        "type": "secret",
         "value": null,
         "label": "Provider API Key",
         "placeholder": "${secrets.GOOGLE_MAPS_API_KEY}",
@@ -14619,7 +14619,7 @@
       },
       {
         "name": "address",
-        "type": "string",
+        "type": "secret",
         "value": null,
         "label": "Address",
         "placeholder": "10 Downing Street, London",
@@ -14686,7 +14686,7 @@
     ]
   },
   "journey/get_elevation_profile": {
-    "hash": "2d800f936fc6b862afc482017fb503cc8ea52b9760bae7402ba14d2380aad664",
+    "hash": "575409c1738f7ea399ef2a7ce93fdff9e33bdaf9419f1aeb4a56c7315301705b",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Get Elevation Profile",
@@ -14721,7 +14721,7 @@
       },
       {
         "name": "api_key",
-        "type": "string",
+        "type": "secret",
         "value": null,
         "label": "Provider API Key",
         "placeholder": "${secrets.GOOGLE_MAPS_API_KEY}",
@@ -14729,7 +14729,7 @@
       },
       {
         "name": "polyline",
-        "type": "string",
+        "type": "secret",
         "value": null,
         "label": "Encoded polyline (from calculate_route)",
         "placeholder": "${parent.polyline}",
@@ -14810,7 +14810,7 @@
     ]
   },
   "journey/get_place_details": {
-    "hash": "6a82b7891ba45ed502e5262a59b1af233a26b348fb9ce470d86f75bf7efedb46",
+    "hash": "0084b1ea99d4a6463e4889d25795898b2dda9671f701be1a6eabeb1144cd211a",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Get Place Details",
@@ -14845,7 +14845,7 @@
       },
       {
         "name": "api_key",
-        "type": "string",
+        "type": "secret",
         "value": null,
         "label": "Provider API Key",
         "placeholder": "${secrets.GOOGLE_MAPS_API_KEY}",
@@ -14853,7 +14853,7 @@
       },
       {
         "name": "place_id",
-        "type": "string",
+        "type": "secret",
         "value": null,
         "label": "Place ID (provider-scoped)",
         "placeholder": "${parent.places.0.place_id}",
@@ -14941,7 +14941,7 @@
     ]
   },
   "journey/get_travel_time": {
-    "hash": "1d0d42ac57eb2edf949dcc9cdfa48b30807d04c8bd1138b0f30ba7d1e61872a5",
+    "hash": "6eeb4bd510167f5e8af3a314d28928669b8b707c6b7ee528121dd1b38b75d857",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Get Travel Time",
@@ -14976,7 +14976,7 @@
       },
       {
         "name": "api_key",
-        "type": "string",
+        "type": "secret",
         "value": null,
         "label": "Provider API Key",
         "placeholder": "${secrets.GOOGLE_MAPS_API_KEY}",
@@ -14984,7 +14984,7 @@
       },
       {
         "name": "origin",
-        "type": "string",
+        "type": "secret",
         "value": null,
         "label": "Origin (address or lat,lng)",
         "placeholder": "London, UK",
@@ -15084,7 +15084,7 @@
     ]
   },
   "journey/optimise_route": {
-    "hash": "494e707c076526d7fdcb3e2e530f77e5d676b0dca95b8b77e42500324e0d4b0b",
+    "hash": "14a5bcbbfae42d54196fce644cb13638a09bca9588654849cf92607bae2df7b3",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Optimise Route",
@@ -15119,7 +15119,7 @@
       },
       {
         "name": "api_key",
-        "type": "string",
+        "type": "secret",
         "value": null,
         "label": "Provider API Key",
         "placeholder": "${secrets.GOOGLE_MAPS_API_KEY}",
@@ -15127,7 +15127,7 @@
       },
       {
         "name": "start",
-        "type": "string",
+        "type": "secret",
         "value": null,
         "label": "Start (optional anchor)",
         "placeholder": "London depot, UK"
@@ -15341,7 +15341,7 @@
     ]
   },
   "journey/render_static_map": {
-    "hash": "852c0f3a35e01e13683c222f1be76a2305af4cc53043935f0f2cff89b9365c87",
+    "hash": "77647d3d0f1808c99459f3ceffb33624cbe368eb9c4cf16e6317538f935d63dd",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Render Static Map",
@@ -15376,7 +15376,7 @@
       },
       {
         "name": "api_key",
-        "type": "string",
+        "type": "secret",
         "value": null,
         "label": "Provider API Key",
         "placeholder": "${secrets.GOOGLE_MAPS_API_KEY}",
@@ -15384,7 +15384,7 @@
       },
       {
         "name": "polyline",
-        "type": "string",
+        "type": "secret",
         "value": null,
         "label": "Encoded polyline (from calculate_route)",
         "placeholder": "${parent.polyline}",
@@ -15458,7 +15458,7 @@
     ]
   },
   "journey/reverse_geocode": {
-    "hash": "ace064fe95ad7d5bb31d4b680ffaccc2931a2b6bc475ca6780659ac3461f8a9d",
+    "hash": "7b53d836d96fd366eebb4fd16af509e6e3230c3091b1fcdf5164c7d29856171a",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Reverse Geocode",
@@ -15493,7 +15493,7 @@
       },
       {
         "name": "api_key",
-        "type": "string",
+        "type": "secret",
         "value": null,
         "label": "Provider API Key",
         "placeholder": "${secrets.GOOGLE_MAPS_API_KEY}",
@@ -15501,7 +15501,7 @@
       },
       {
         "name": "latitude",
-        "type": "string",
+        "type": "secret",
         "value": null,
         "label": "Latitude",
         "placeholder": "51.5034",
@@ -15576,7 +15576,7 @@
     ]
   },
   "linear/add_comment": {
-    "hash": "38717cabb35e7f36df65d57f236a7a899693b164c51d940b98cafaef6be09633",
+    "hash": "4d5faa86b6d353f2226b18060467437483b0e2492e941800054a6cd60c19c15b",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Add Comment",
@@ -15593,7 +15593,7 @@
     "inputs": [
       {
         "name": "api_key",
-        "type": "string",
+        "type": "secret",
         "value": null,
         "label": "Linear API Key",
         "placeholder": "lin_api_...",
@@ -15601,7 +15601,7 @@
       },
       {
         "name": "issue_id",
-        "type": "string",
+        "type": "secret",
         "value": null,
         "label": "Issue ID",
         "placeholder": "Issue UUID",
@@ -15648,7 +15648,7 @@
     ]
   },
   "linear/create_issue": {
-    "hash": "eabecd7d0c4ecb1a0613722aaf383b9d4c10f551529661d756aabb00492a5126",
+    "hash": "ca6e7a953fc025d3d8994c3042778e587fde811958855b5a55eaa5fcd5d93909",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Create Issue",
@@ -15665,7 +15665,7 @@
     "inputs": [
       {
         "name": "api_key",
-        "type": "string",
+        "type": "secret",
         "value": null,
         "label": "Linear API Key",
         "placeholder": "lin_api_...",
@@ -15673,7 +15673,7 @@
       },
       {
         "name": "team_id",
-        "type": "string",
+        "type": "secret",
         "value": null,
         "label": "Team ID",
         "placeholder": "The team UUID or key (e.g. ENG)",
@@ -15812,7 +15812,7 @@
     ]
   },
   "linear/delete_comment": {
-    "hash": "d48a96e27aa5dbc8fa1ed2b3e58cfd1074576fbd2f2469c361d9e5a652b245b6",
+    "hash": "2f122e9c03ac20dc7d49dbeabc922127467806a1014ba617f91808d1e0decf34",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Delete Comment",
@@ -15829,7 +15829,7 @@
     "inputs": [
       {
         "name": "api_key",
-        "type": "string",
+        "type": "secret",
         "value": null,
         "label": "Linear API Key",
         "placeholder": "lin_api_...",
@@ -15869,7 +15869,7 @@
     ]
   },
   "linear/get_comment": {
-    "hash": "88c22e3b25fce9bf6c9d7c0757cf579fb507c099c380c09272fc14e9142e0e6b",
+    "hash": "347349b5f404d02d19e122ed841d16b4cb54937b6681e45d9eec953bc751957b",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Get Comment",
@@ -15886,7 +15886,7 @@
     "inputs": [
       {
         "name": "api_key",
-        "type": "string",
+        "type": "secret",
         "value": null,
         "label": "Linear API Key",
         "placeholder": "lin_api_...",
@@ -15954,7 +15954,7 @@
     ]
   },
   "linear/get_issue": {
-    "hash": "0eaace66118964bb998220414918ec0db05e6cf5923f9950a2a4c1abef3564d5",
+    "hash": "bce0971fae78189e7feff352164dad968ebf56fc30c9e390b52fd570c22d39c4",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Get Issue",
@@ -15971,7 +15971,7 @@
     "inputs": [
       {
         "name": "api_key",
-        "type": "string",
+        "type": "secret",
         "value": null,
         "label": "Linear API Key",
         "placeholder": "lin_api_...",
@@ -15979,7 +15979,7 @@
       },
       {
         "name": "issue_id",
-        "type": "string",
+        "type": "secret",
         "value": null,
         "label": "Issue ID or Identifier",
         "placeholder": "UUID or ENG-123",
@@ -16116,7 +16116,7 @@
     ]
   },
   "linear/list_comments": {
-    "hash": "76b30d8257b6d47b7b8367a441daa297566f7191282ec161911f6b52fbc2f68e",
+    "hash": "0bf8e682b5cf3073cbb3d507d7d44789d5fe36d853308f712ad07924e5a50037",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "List Comments",
@@ -16133,7 +16133,7 @@
     "inputs": [
       {
         "name": "api_key",
-        "type": "string",
+        "type": "secret",
         "value": null,
         "label": "Linear API Key",
         "placeholder": "lin_api_...",
@@ -16187,7 +16187,7 @@
     ]
   },
   "linear/list_issues": {
-    "hash": "17750a4fd4c424dd37e26a44cae70373d3a9f449efc09b8699063418386bc4a9",
+    "hash": "be02a4061f9f2f464af944bed7bf9c5e72685d8268de4d6ee033738ace4f6c7b",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "List Issues",
@@ -16204,7 +16204,7 @@
     "inputs": [
       {
         "name": "api_key",
-        "type": "string",
+        "type": "secret",
         "value": null,
         "label": "Linear API Key",
         "placeholder": "lin_api_...",
@@ -16212,7 +16212,7 @@
       },
       {
         "name": "team_id",
-        "type": "string",
+        "type": "secret",
         "value": null,
         "label": "Team ID",
         "placeholder": "Filter by team UUID (optional)"
@@ -16321,7 +16321,7 @@
     ]
   },
   "linear/list_teams": {
-    "hash": "6a6b7372f2bef2b663ab49fa2057b50e8b5f87d65206d9e1c474525d33bc39ca",
+    "hash": "6b12450b75f32f42b465352b2d4db533bb46623c0f0c1d8cbb494793506c0f2f",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "List Teams",
@@ -16338,7 +16338,7 @@
     "inputs": [
       {
         "name": "api_key",
-        "type": "string",
+        "type": "secret",
         "value": null,
         "label": "Linear API Key",
         "placeholder": "lin_api_...",
@@ -16384,7 +16384,7 @@
     ]
   },
   "linear/list_users": {
-    "hash": "4da3bab442ce7b26e1b8273757232fb5e6eedc05555705ea3d5622e15ad04965",
+    "hash": "01b9339e5e2ceb3b392eb87118649d857e0dc7a4a02b435144f5fa4a3c62eadf",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "List Users",
@@ -16401,7 +16401,7 @@
     "inputs": [
       {
         "name": "api_key",
-        "type": "string",
+        "type": "secret",
         "value": null,
         "label": "Linear API Key",
         "placeholder": "lin_api_...",
@@ -16409,7 +16409,7 @@
       },
       {
         "name": "search",
-        "type": "string",
+        "type": "secret",
         "value": null,
         "label": "Optional: filter by name or email",
         "placeholder": ""
@@ -16454,7 +16454,7 @@
     ]
   },
   "linear/list_workflow_states": {
-    "hash": "1881360a927bfbd800f471053242b201a9ce213087a5385acbc0cb48d644e71a",
+    "hash": "a8d98627d4f6a0e104b204f9270c04a844302d04f4a58e0a6a0da5689db03c40",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "List Workflow States",
@@ -16471,7 +16471,7 @@
     "inputs": [
       {
         "name": "api_key",
-        "type": "string",
+        "type": "secret",
         "value": null,
         "label": "Linear API Key",
         "placeholder": "lin_api_...",
@@ -16479,7 +16479,7 @@
       },
       {
         "name": "team_id",
-        "type": "string",
+        "type": "secret",
         "value": null,
         "label": "Team ID or Key",
         "placeholder": "UUID or team key (e.g. FLO)",
@@ -16525,7 +16525,7 @@
     ]
   },
   "linear/search_issues": {
-    "hash": "4bb2ea59d62fe2bfd1d826165c30ec0e08a49702fd5d5087159af2597211dc5f",
+    "hash": "2ac46707a77b5a55d941bb504baae44db9500f0aca48dd262d94561082bc431c",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Search Issues",
@@ -16542,7 +16542,7 @@
     "inputs": [
       {
         "name": "api_key",
-        "type": "string",
+        "type": "secret",
         "value": null,
         "label": "Linear API Key",
         "placeholder": "lin_api_...",
@@ -16550,7 +16550,7 @@
       },
       {
         "name": "query",
-        "type": "string",
+        "type": "secret",
         "value": null,
         "label": "Search Query",
         "placeholder": "Search keywords",
@@ -16603,7 +16603,7 @@
     ]
   },
   "linear/update_issue": {
-    "hash": "01df4b4566b2301820871e02ac1b18785e53d8cc04f1b67545241caad8b27fa8",
+    "hash": "b47ed64cb89d3a866516abc1d57a06fcf5b65406dff76154f8b89e8f17f12fbd",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Update Issue",
@@ -16620,7 +16620,7 @@
     "inputs": [
       {
         "name": "api_key",
-        "type": "string",
+        "type": "secret",
         "value": null,
         "label": "Linear API Key",
         "placeholder": "lin_api_...",
@@ -16628,7 +16628,7 @@
       },
       {
         "name": "issue_id",
-        "type": "string",
+        "type": "secret",
         "value": null,
         "label": "Issue ID or Identifier",
         "placeholder": "UUID or ENG-123",
@@ -17305,7 +17305,7 @@
     ]
   },
   "messaging/telegram/send_message": {
-    "hash": "dcccc54a50c9691e2d21196c4f12935c23c889279e95f2e0125f2b7d27dac76a",
+    "hash": "febf114525ad63640cc0e6bf6d2c342894e6f89490cbec046ef2db6721ee21af",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Send Telegram Message",
@@ -17327,7 +17327,7 @@
     "inputs": [
       {
         "name": "bot_token",
-        "type": "string",
+        "type": "secret",
         "value": null,
         "label": "Bot Token",
         "placeholder": "123456:ABC-DEF1234ghIkl-zyx57W2v1u123ew11",
@@ -17335,7 +17335,7 @@
       },
       {
         "name": "channel_id",
-        "type": "string",
+        "type": "secret",
         "value": null,
         "label": "Channel ID",
         "placeholder": "${channel_id}",
@@ -17403,7 +17403,7 @@
     ]
   },
   "messaging/telegram/send_voice": {
-    "hash": "9f0fc830c2df2a8abb49ac7c2b62ed8cb628b0efc2a2352e5591e66978567f23",
+    "hash": "50c26fff0e26185352a7082ab95d920d5d0a5f2a50241a210436f6824bab9475",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Send Telegram Voice",
@@ -17425,7 +17425,7 @@
     "inputs": [
       {
         "name": "bot_token",
-        "type": "string",
+        "type": "secret",
         "value": null,
         "label": "Telegram Bot Token",
         "placeholder": "123456:ABC-DEF...",
@@ -17433,7 +17433,7 @@
       },
       {
         "name": "channel_id",
-        "type": "string",
+        "type": "secret",
         "value": null,
         "label": "Chat/Channel ID",
         "placeholder": "${channel_id}",
@@ -17494,7 +17494,7 @@
     ]
   },
   "microsoft/calendar/create_event": {
-    "hash": "8a62533e0b099e140f542f213ad6b628d2d75b2b5c1f14f7443c688c434a3a23",
+    "hash": "1e1062d4781f5e5f0dec4f0410e38b90403cdebc78cef52dabc534dd05368190",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Create Event",
@@ -17575,7 +17575,7 @@
       },
       {
         "name": "credential",
-        "type": "string",
+        "type": "credential",
         "value": null,
         "label": "Microsoft OAuth Credential",
         "placeholder": "${credentials.MICROSOFT_CALENDAR}"
@@ -17613,7 +17613,7 @@
     ]
   },
   "microsoft/calendar/delete_event": {
-    "hash": "74da6327d86526f7298b0e03700fd9a066a107f6b037001d297abe4f8754078e",
+    "hash": "e27e916740c7e3295878a3cc96c10555bcb0bd175bad2c3f2c65f07b2f03ca43",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Delete Event",
@@ -17650,7 +17650,7 @@
       },
       {
         "name": "credential",
-        "type": "string",
+        "type": "credential",
         "value": null,
         "label": "Microsoft OAuth Credential",
         "placeholder": "${credentials.MICROSOFT_CALENDAR}"
@@ -17681,7 +17681,7 @@
     ]
   },
   "microsoft/calendar/get_event": {
-    "hash": "f7fa9acd1d47757ec6c8989b27a9b9c9044427c2e95d37f34ebc4dbeffa80e08",
+    "hash": "9af1a2eaa52539455d3fde9d3dec07948212a89d7e576351eaa5969aacad2ec8",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Get Event",
@@ -17718,7 +17718,7 @@
       },
       {
         "name": "credential",
-        "type": "string",
+        "type": "credential",
         "value": null,
         "label": "Microsoft OAuth Credential",
         "placeholder": "${credentials.MICROSOFT_CALENDAR}"
@@ -17812,7 +17812,7 @@
     ]
   },
   "microsoft/calendar/list_events": {
-    "hash": "73f5e7d848b321a5422ae89e82009166d7f24413c67baab64d72f12175bfc131",
+    "hash": "66358befcc3b2bcc95ffa8e14399145f05045ab8eb51aefb3b472078e66ca2df",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "List Events",
@@ -17862,7 +17862,7 @@
       },
       {
         "name": "credential",
-        "type": "string",
+        "type": "credential",
         "value": null,
         "label": "Microsoft OAuth Credential",
         "placeholder": "${credentials.MICROSOFT_CALENDAR}"
@@ -17907,7 +17907,7 @@
     ]
   },
   "microsoft/calendar/update_event": {
-    "hash": "9f82b585d281a21957582e24b2812eb564a60b3fbbcda035d2e804a05349d9b8",
+    "hash": "dce0f10d071e271299100d1450ae16807be22ba1cf877c15e0afb00609a519fd",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Update Event",
@@ -17986,7 +17986,7 @@
       },
       {
         "name": "credential",
-        "type": "string",
+        "type": "credential",
         "value": null,
         "label": "Microsoft OAuth Credential",
         "placeholder": "${credentials.MICROSOFT_CALENDAR}"
@@ -18017,7 +18017,7 @@
     ]
   },
   "microsoft/excel/append_rows": {
-    "hash": "83c0c8c574d11f71072175ce3a4d34aef3580bdce80483925eff32ed36ff99e6",
+    "hash": "8aa4cc0cb70e9ec3a10a8b7de8f42cb194ffa5419a7416965c723b76ce5f23e2",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Append Rows",
@@ -18070,7 +18070,7 @@
       },
       {
         "name": "credential",
-        "type": "string",
+        "type": "credential",
         "value": null,
         "label": "Microsoft OAuth Credential",
         "placeholder": "${credentials.MICROSOFT_EXCEL}"
@@ -18108,7 +18108,7 @@
     ]
   },
   "microsoft/excel/clear_range": {
-    "hash": "2776ac9a8b78d5bdeed4af53f80319cd78492d9ca52eee787d6718f0e38dec2d",
+    "hash": "565831634cefc71fd6e74c6c0a6fecfa888f91b0d6c19200b1ba06ad305f0e72",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Clear Range",
@@ -18182,7 +18182,7 @@
       },
       {
         "name": "credential",
-        "type": "string",
+        "type": "credential",
         "value": null,
         "label": "Microsoft OAuth Credential",
         "placeholder": "${credentials.MICROSOFT_EXCEL}"
@@ -18213,7 +18213,7 @@
     ]
   },
   "microsoft/excel/create_workbook": {
-    "hash": "9cad41837efb9bedfb0906fba89135d7ad042656ad5c23ec8538b3e102d68490",
+    "hash": "c74cc54ac67c79f8a18d39294962935d448ea90e4e800006d207af96b2471178",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Create Workbook",
@@ -18257,7 +18257,7 @@
       },
       {
         "name": "credential",
-        "type": "string",
+        "type": "credential",
         "value": null,
         "label": "Microsoft OAuth Credential",
         "placeholder": "${credentials.MICROSOFT_EXCEL}"
@@ -18302,7 +18302,7 @@
     ]
   },
   "microsoft/excel/get_metadata": {
-    "hash": "4c212278eccba1569016431bb3b7bca8906c5c4dd3f0093d2998f15b2bbd302b",
+    "hash": "1dbf4b77b66e66351ee262d436702e040b98e82fbfb5b0a0dd151f3d995a1f24",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Get Workbook Metadata",
@@ -18339,7 +18339,7 @@
       },
       {
         "name": "credential",
-        "type": "string",
+        "type": "credential",
         "value": null,
         "label": "Microsoft OAuth Credential",
         "placeholder": "${credentials.MICROSOFT_EXCEL}"
@@ -18377,7 +18377,7 @@
     ]
   },
   "microsoft/excel/list_worksheets": {
-    "hash": "36cddee3f485bc65299d071a0e5453632747023398bbbd2f815a8544422251a0",
+    "hash": "41944921686b303ccdd6146328aed9e49bfa105a35f871a4395fe94a93950185",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "List Worksheets",
@@ -18414,7 +18414,7 @@
       },
       {
         "name": "credential",
-        "type": "string",
+        "type": "credential",
         "value": null,
         "label": "Microsoft OAuth Credential",
         "placeholder": "${credentials.MICROSOFT_EXCEL}"
@@ -18459,7 +18459,7 @@
     ]
   },
   "microsoft/excel/read_range": {
-    "hash": "c3271876eb8bb65d0910cd3098e4f498e7db3d482170840b6b6272515dfd032f",
+    "hash": "605a3cf05136d06f2cc63e40d9bcc869c84c09076aa92fd864fea9471fcb38d3",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Read Range",
@@ -18512,7 +18512,7 @@
       },
       {
         "name": "credential",
-        "type": "string",
+        "type": "credential",
         "value": null,
         "label": "Microsoft OAuth Credential",
         "placeholder": "${credentials.MICROSOFT_EXCEL}"
@@ -18571,7 +18571,7 @@
     ]
   },
   "microsoft/excel/write_range": {
-    "hash": "1e34c041099c031375db934afb28c251dbba6b9669f8a1fcfee87f483d399e69",
+    "hash": "7352ea7a8fc2e8752a47805ad24cd55052b548116b0e791181a67832a8209315",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Write Range",
@@ -18632,7 +18632,7 @@
       },
       {
         "name": "credential",
-        "type": "string",
+        "type": "credential",
         "value": null,
         "label": "Microsoft OAuth Credential",
         "placeholder": "${credentials.MICROSOFT_EXCEL}"
@@ -18663,7 +18663,7 @@
     ]
   },
   "microsoft/onedrive/copy_file": {
-    "hash": "90afb16bc4ee439ea79b72a2c24a21f9e1f0f1e1f9a5da176ea981fb08aed489",
+    "hash": "f741a22cfe292fbe9a3798fb77e0ccdc0e999fa2dd402a04b83d54db735f8df6",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Copy Item",
@@ -18715,7 +18715,7 @@
       },
       {
         "name": "credential",
-        "type": "string",
+        "type": "credential",
         "value": null,
         "label": "Microsoft OAuth Credential",
         "placeholder": "${credentials.MICROSOFT_ONEDRIVE}"
@@ -18746,7 +18746,7 @@
     ]
   },
   "microsoft/onedrive/create_folder": {
-    "hash": "bde261941f5bef0c07dc3ff8a345fb1918a39582cc681dcc79ac637cdb2d9ed2",
+    "hash": "740c725a9c907e8bf31d6f293dda927be9a110b8ae13f104d3ae2685397c4ec0",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Create Folder",
@@ -18790,7 +18790,7 @@
       },
       {
         "name": "credential",
-        "type": "string",
+        "type": "credential",
         "value": null,
         "label": "Microsoft OAuth Credential",
         "placeholder": "${credentials.MICROSOFT_ONEDRIVE}"
@@ -18835,7 +18835,7 @@
     ]
   },
   "microsoft/onedrive/delete_file": {
-    "hash": "de0531bc5a0e59e1ca5cc170b454fbf527343217c7ac4bdb38f21d20fdb27f21",
+    "hash": "e0c068d3348c2a72a3951d56da1d09315860299360f0849c2e1f1eaca5c903da",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Delete File",
@@ -18872,7 +18872,7 @@
       },
       {
         "name": "credential",
-        "type": "string",
+        "type": "credential",
         "value": null,
         "label": "Microsoft OAuth Credential",
         "placeholder": "${credentials.MICROSOFT_ONEDRIVE}"
@@ -18903,7 +18903,7 @@
     ]
   },
   "microsoft/onedrive/download": {
-    "hash": "d611b885848b1216e8bb984f94472463e3a56b109020529ddbd71c56e5f6e6ad",
+    "hash": "ec585852698b434e449b131508e8b0cf738f20efa0eb665907d1bd3e7c9412db",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Download File",
@@ -18940,7 +18940,7 @@
       },
       {
         "name": "credential",
-        "type": "string",
+        "type": "credential",
         "value": null,
         "label": "Microsoft OAuth Credential",
         "placeholder": "${credentials.MICROSOFT_ONEDRIVE}"
@@ -18999,7 +18999,7 @@
     ]
   },
   "microsoft/onedrive/get_file": {
-    "hash": "3a0c09cf51a3acc415b403f8b62511b994d0e38b97d902d985749692e1350844",
+    "hash": "241403c771893596bed09305eaaeccfcdad5205559977ea409455b647b6a8fab",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Get File Info",
@@ -19036,7 +19036,7 @@
       },
       {
         "name": "credential",
-        "type": "string",
+        "type": "credential",
         "value": null,
         "label": "Microsoft OAuth Credential",
         "placeholder": "${credentials.MICROSOFT_ONEDRIVE}"
@@ -19116,7 +19116,7 @@
     ]
   },
   "microsoft/onedrive/list_files": {
-    "hash": "96ecabdb86d0f9dbb501647366719dadff6bb0dbe1cb5ad7d16c35ac6ee9b44a",
+    "hash": "abd0961321f4cc3565779340afb45f335e4a89222bd9bd5bfea767fdca86c533",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "List Files",
@@ -19159,7 +19159,7 @@
       },
       {
         "name": "credential",
-        "type": "string",
+        "type": "credential",
         "value": null,
         "label": "Microsoft OAuth Credential",
         "placeholder": "${credentials.MICROSOFT_ONEDRIVE}"
@@ -19204,7 +19204,7 @@
     ]
   },
   "microsoft/onedrive/move": {
-    "hash": "467b14a49f7bc3babd7a9f740ab77a397a0b11d9a5a2c31229fbab78bf97486c",
+    "hash": "fe9db14927ccbe72eba36b52f6e694bca848fec1fdb06bf913be03a787ebfca2",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Move Item",
@@ -19256,7 +19256,7 @@
       },
       {
         "name": "credential",
-        "type": "string",
+        "type": "credential",
         "value": null,
         "label": "Microsoft OAuth Credential",
         "placeholder": "${credentials.MICROSOFT_ONEDRIVE}"
@@ -19287,7 +19287,7 @@
     ]
   },
   "microsoft/onedrive/search": {
-    "hash": "c428d6b97414ed221cd602af3572bb2aa90fd3a28fd6dde8dbc11fd18e9cbec3",
+    "hash": "601888764a5a6ed737314f0a2f2e9f508ae486f4a4c62475bd6a3737c76b1944",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Search Files",
@@ -19331,7 +19331,7 @@
       },
       {
         "name": "credential",
-        "type": "string",
+        "type": "credential",
         "value": null,
         "label": "Microsoft OAuth Credential",
         "placeholder": "${credentials.MICROSOFT_ONEDRIVE}"
@@ -19376,7 +19376,7 @@
     ]
   },
   "microsoft/onedrive/share": {
-    "hash": "1460f4e3b4b70861c52505b1da54511e0505258bb34c922269b131b343712a5f",
+    "hash": "e3e355148260dade3ed15b0f8746595e04b9f27676910d6978d2a0d1488bb90a",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Create Sharing Link",
@@ -19451,7 +19451,7 @@
       },
       {
         "name": "credential",
-        "type": "string",
+        "type": "credential",
         "value": null,
         "label": "Microsoft OAuth Credential",
         "placeholder": "${credentials.MICROSOFT_ONEDRIVE}"
@@ -19496,7 +19496,7 @@
     ]
   },
   "microsoft/onedrive/upload": {
-    "hash": "208f8569b9313da26efb5748fb032e1b83d30714b9d35e3adc04ebd8b6ed7822",
+    "hash": "900f1d3f79b71397d2d8a77ac1c6d2f77b1e88f0031f186678c55b1c81fb1639",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Upload File",
@@ -19555,7 +19555,7 @@
       },
       {
         "name": "credential",
-        "type": "string",
+        "type": "credential",
         "value": null,
         "label": "Microsoft OAuth Credential",
         "placeholder": "${credentials.MICROSOFT_ONEDRIVE}"
@@ -19600,7 +19600,7 @@
     ]
   },
   "microsoft/outlook/create_draft": {
-    "hash": "03e220883e6a0491e7cd4f6bea1e1a56421633c9eb543d2882496666fe1e555e",
+    "hash": "9356f6cfdd8294d1768c804851b0ad311078dda422e35c9b922518de7e5fbc1c",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Create Draft",
@@ -19677,7 +19677,7 @@
       },
       {
         "name": "credential",
-        "type": "string",
+        "type": "credential",
         "value": null,
         "label": "Microsoft OAuth Credential",
         "placeholder": "${credentials.MICROSOFT_OUTLOOK}"
@@ -19715,7 +19715,7 @@
     ]
   },
   "microsoft/outlook/delete_email": {
-    "hash": "a7f388d67cd36baacc80829200aa9129d5e416881b61ccc1fa47a2fc8c54fd80",
+    "hash": "5f7ec881c7ee6f6c29ea0f8c8aeabcce6098ee8fc3314fbaf364728415863c20",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Delete Email",
@@ -19752,7 +19752,7 @@
       },
       {
         "name": "credential",
-        "type": "string",
+        "type": "credential",
         "value": null,
         "label": "Microsoft OAuth Credential",
         "placeholder": "${credentials.MICROSOFT_OUTLOOK}"
@@ -19783,7 +19783,7 @@
     ]
   },
   "microsoft/outlook/download_attachment": {
-    "hash": "0801c1de94d305fc298c3933b4ed66266ed151fb7837888f11b4cf666cbdef43",
+    "hash": "0828b8e336c995b5706529e176bc27afb70f2e4e676bcfda77988784857eec7a",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Download Attachment",
@@ -19828,7 +19828,7 @@
       },
       {
         "name": "credential",
-        "type": "string",
+        "type": "credential",
         "value": null,
         "label": "Microsoft OAuth Credential",
         "placeholder": "${credentials.MICROSOFT_OUTLOOK}"
@@ -19887,7 +19887,7 @@
     ]
   },
   "microsoft/outlook/forward": {
-    "hash": "3a20ef8a7c4442c08852ac9ade81e13bd58ee9857222757db0c8322d6386b227",
+    "hash": "b81b402e7fe5e89cf0694d06db680f50d74ee077886276b20f45fcdc8487d355",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Forward Email",
@@ -19939,7 +19939,7 @@
       },
       {
         "name": "credential",
-        "type": "string",
+        "type": "credential",
         "value": null,
         "label": "Microsoft OAuth Credential",
         "placeholder": "${credentials.MICROSOFT_OUTLOOK}"
@@ -19970,7 +19970,7 @@
     ]
   },
   "microsoft/outlook/list_attachments": {
-    "hash": "b83949ba8307dcd0ce166911b4518cd79406bc0328d16c484eae6794fc02a00a",
+    "hash": "b0ec875eb0ecf8e0a98bdb36b7b3b848ad5318ca579e25c0f1f8dd16b61fbbc9",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "List Attachments",
@@ -20007,7 +20007,7 @@
       },
       {
         "name": "credential",
-        "type": "string",
+        "type": "credential",
         "value": null,
         "label": "Microsoft OAuth Credential",
         "placeholder": "${credentials.MICROSOFT_OUTLOOK}"
@@ -20052,7 +20052,7 @@
     ]
   },
   "microsoft/outlook/list_emails": {
-    "hash": "641c0ff563de467016293f68dd837896edb008de449eadc6d3c8928388af6c72",
+    "hash": "e8469c2973c32e1f3058038bf204a077b6de6b3fd7856bfce9e5bee96e5bac45",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "List Emails",
@@ -20088,7 +20088,7 @@
       },
       {
         "name": "credential",
-        "type": "string",
+        "type": "credential",
         "value": null,
         "label": "Microsoft OAuth Credential",
         "placeholder": "${credentials.MICROSOFT_OUTLOOK}"
@@ -20140,7 +20140,7 @@
     ]
   },
   "microsoft/outlook/list_folders": {
-    "hash": "391212ccea51e91953aa6e67e22f87915746140a7cfc50bd8d882c966fa014b3",
+    "hash": "ebe420dc689a5e838e83b63f3eddf8a1fc7a4913594378c9c8ea15ea8aae5e27",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "List Folders",
@@ -20169,7 +20169,7 @@
       },
       {
         "name": "credential",
-        "type": "string",
+        "type": "credential",
         "value": null,
         "label": "Microsoft OAuth Credential",
         "placeholder": "${credentials.MICROSOFT_OUTLOOK}"
@@ -20221,7 +20221,7 @@
     ]
   },
   "microsoft/outlook/move_email": {
-    "hash": "9f0c2244a795ddc65adecaadc3a8ea72800cc53185d3945d2eb3e14673b6bc77",
+    "hash": "b262b5844edfe133c6d38708a7b59cf90dc47bb6d08928c87fd05af35acfcb0d",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Move Email",
@@ -20266,7 +20266,7 @@
       },
       {
         "name": "credential",
-        "type": "string",
+        "type": "credential",
         "value": null,
         "label": "Microsoft OAuth Credential",
         "placeholder": "${credentials.MICROSOFT_OUTLOOK}"
@@ -20297,7 +20297,7 @@
     ]
   },
   "microsoft/outlook/read_email": {
-    "hash": "6f45c33f5f585824962878d2627b4ca96e32826745e57296970428561a025d1b",
+    "hash": "4b35c8f39854a9e9e7ba6751da4c281ad8043e5edec18a74a86f00593e06766d",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Read Email",
@@ -20334,7 +20334,7 @@
       },
       {
         "name": "credential",
-        "type": "string",
+        "type": "credential",
         "value": null,
         "label": "Microsoft OAuth Credential",
         "placeholder": "${credentials.MICROSOFT_OUTLOOK}"
@@ -20407,7 +20407,7 @@
     ]
   },
   "microsoft/outlook/reply": {
-    "hash": "01d18baab051d37ab4a997245e053075d4d6ed740937bccae0aef323bd5feb5b",
+    "hash": "5e0bc5ee60add6195889f9203608b9be1dc2c444fa648dd8eccb5f1c47495d18",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Reply to Email",
@@ -20452,7 +20452,7 @@
       },
       {
         "name": "credential",
-        "type": "string",
+        "type": "credential",
         "value": null,
         "label": "Microsoft OAuth Credential",
         "placeholder": "${credentials.MICROSOFT_OUTLOOK}"
@@ -20483,7 +20483,7 @@
     ]
   },
   "microsoft/outlook/search_emails": {
-    "hash": "f4912e3f45d4a0b18dd2c4fd4d1b7a8e50cc5f32e7ea6553fcdc99d106ed55b0",
+    "hash": "cd36c864fea0ecc2d9e5652cf75d826e4f194dccfd6d20122bdad6bdb1cddcfe",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Search Emails",
@@ -20520,7 +20520,7 @@
       },
       {
         "name": "credential",
-        "type": "string",
+        "type": "credential",
         "value": null,
         "label": "Microsoft OAuth Credential",
         "placeholder": "${credentials.MICROSOFT_OUTLOOK}"
@@ -20572,7 +20572,7 @@
     ]
   },
   "microsoft/outlook/send_email": {
-    "hash": "61fad765e10fd054639c68c1d149addca2d11780d499752d717f707cd760a49e",
+    "hash": "bc820a0c2eee0bb15630aa5c5df8ce080f785f12d325d9707d43e6a48ed8a17c",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Send Email",
@@ -20649,7 +20649,7 @@
       },
       {
         "name": "credential",
-        "type": "string",
+        "type": "credential",
         "value": null,
         "label": "Microsoft OAuth Credential",
         "placeholder": "${credentials.MICROSOFT_OUTLOOK}"
@@ -20680,7 +20680,7 @@
     ]
   },
   "microsoft/powerpoint/create": {
-    "hash": "e8af1900e0a6a55c9261f6bbed04e5c4f02b380140992b44c3b44f74ad94a4a8",
+    "hash": "ce764afb1c7b8ee789b40ff28dce717a9c918d2f89c86831ce057d71ee34fc0b",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Create Presentation",
@@ -20724,7 +20724,7 @@
       },
       {
         "name": "credential",
-        "type": "string",
+        "type": "credential",
         "value": null,
         "label": "Microsoft OAuth Credential",
         "placeholder": "${credentials.MICROSOFT_ONEDRIVE}"
@@ -20769,7 +20769,7 @@
     ]
   },
   "microsoft/powerpoint/download": {
-    "hash": "f166eb652c0e02c62d84f7bd7cccd03b8e11e16fc0d8df5b96d7dd826da046e0",
+    "hash": "7871a030f36fb4d4f4aa0101595e4a2cedbc1dca565a3aa6aac58ccd4ba94bf0",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Download Presentation",
@@ -20823,7 +20823,7 @@
       },
       {
         "name": "credential",
-        "type": "string",
+        "type": "credential",
         "value": null,
         "label": "Microsoft OAuth Credential",
         "placeholder": "${credentials.MICROSOFT_ONEDRIVE}"
@@ -20882,7 +20882,7 @@
     ]
   },
   "microsoft/powerpoint/export_slide": {
-    "hash": "78fde7c1644c316c5bc442a912815ff3a7a898d4ee7d7bf70cd4f01d2e58386e",
+    "hash": "e2db458280b4ecc0088757ae8f765a2b34efbe98bc1de587ec72f97f9b232c39",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Export Slide Thumbnail",
@@ -20940,7 +20940,7 @@
       },
       {
         "name": "credential",
-        "type": "string",
+        "type": "credential",
         "value": null,
         "label": "Microsoft OAuth Credential",
         "placeholder": "${credentials.MICROSOFT_ONEDRIVE}"
@@ -20985,7 +20985,7 @@
     ]
   },
   "microsoft/powerpoint/get": {
-    "hash": "64f42e7b1dd07e0d03fc6244d62e13c850409d75699c3de5f902a04991fff225",
+    "hash": "274b3f802cd7eb32739bcbcdb19efa9a6255719f0056a4363d891313d8396097",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Get Presentation",
@@ -21022,7 +21022,7 @@
       },
       {
         "name": "credential",
-        "type": "string",
+        "type": "credential",
         "value": null,
         "label": "Microsoft OAuth Credential",
         "placeholder": "${credentials.MICROSOFT_ONEDRIVE}"
@@ -21088,7 +21088,7 @@
     ]
   },
   "microsoft/powerpoint/list_slides": {
-    "hash": "f3e95fed57edefe2b3cbe04eeca730ff00a6baaa4e678989356fedb9c33e8e90",
+    "hash": "1d3403ec14151f789e913ba5bcfef77183a5d7f5aae5870bf68a75da0f8415ce",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Preview Presentation",
@@ -21125,7 +21125,7 @@
       },
       {
         "name": "credential",
-        "type": "string",
+        "type": "credential",
         "value": null,
         "label": "Microsoft OAuth Credential",
         "placeholder": "${credentials.MICROSOFT_ONEDRIVE}"
@@ -21177,7 +21177,7 @@
     ]
   },
   "microsoft/powerpoint/upload": {
-    "hash": "bc212d6f085f64bf57d97173fadb00870afa226af5859dcd17d9e8033e82e04e",
+    "hash": "c03acac0e90e23207306a886bcd69182dc7e85b8b8cf75edb974d8359aeb48e8",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Upload Presentation",
@@ -21229,7 +21229,7 @@
       },
       {
         "name": "credential",
-        "type": "string",
+        "type": "credential",
         "value": null,
         "label": "Microsoft OAuth Credential",
         "placeholder": "${credentials.MICROSOFT_ONEDRIVE}"
@@ -21274,7 +21274,7 @@
     ]
   },
   "microsoft/sharepoint/create_list_item": {
-    "hash": "68edded4cb9a285150faaefe655d6360712516ff73ef26360a8100ecd57e00d4",
+    "hash": "c719a38968200cbfaa0f8854dfed3fce5cf17b8736d4cfa2f127c66fe9699569",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Create List Item",
@@ -21327,7 +21327,7 @@
       },
       {
         "name": "credential",
-        "type": "string",
+        "type": "credential",
         "value": null,
         "label": "Microsoft OAuth Credential",
         "placeholder": "${credentials.MICROSOFT_SHAREPOINT}"
@@ -21365,7 +21365,7 @@
     ]
   },
   "microsoft/sharepoint/delete_list_item": {
-    "hash": "e18e862ba3e077e5dc1c90a7d0ecf913fc2b82dca0c782b76fce4f0b0ba3e317",
+    "hash": "85a2dc975df022ffd09ce35926b5e2866ade9ed4310b85b98db09f3047f21171",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Delete List Item",
@@ -21418,7 +21418,7 @@
       },
       {
         "name": "credential",
-        "type": "string",
+        "type": "credential",
         "value": null,
         "label": "Microsoft OAuth Credential",
         "placeholder": "${credentials.MICROSOFT_SHAREPOINT}"
@@ -21449,7 +21449,7 @@
     ]
   },
   "microsoft/sharepoint/get_list_items": {
-    "hash": "45b525d0e25e7f0406eacb10e67e2d0d3ec8cf9efb7966791b542a62e81c007d",
+    "hash": "e923409430096036052b49b3930437962cd4e7d9d223e46413fdc6064fc0bd5d",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Get List Items",
@@ -21501,7 +21501,7 @@
       },
       {
         "name": "credential",
-        "type": "string",
+        "type": "credential",
         "value": null,
         "label": "Microsoft OAuth Credential",
         "placeholder": "${credentials.MICROSOFT_SHAREPOINT}"
@@ -21546,7 +21546,7 @@
     ]
   },
   "microsoft/sharepoint/list_lists": {
-    "hash": "d90ecfb8c2ffbb359d62bf0f0c7bc0aa8ddfbf3198912172a763ecac521259bc",
+    "hash": "9c5fed2f4fa686f2bd6f565c7ef637a096769f9e161f1c15cd580fe8d4bf3433",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "List Lists",
@@ -21583,7 +21583,7 @@
       },
       {
         "name": "credential",
-        "type": "string",
+        "type": "credential",
         "value": null,
         "label": "Microsoft OAuth Credential",
         "placeholder": "${credentials.MICROSOFT_SHAREPOINT}"
@@ -21628,7 +21628,7 @@
     ]
   },
   "microsoft/sharepoint/list_sites": {
-    "hash": "1ddb708b084b18993e6ca3650398bb2c1f37372942fff4eefb4669e47bab66e1",
+    "hash": "95f1246eb14a545efd0eb9d6bfe8f2eeca5951af6b09f7a8efc138d3827a5fbd",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "List Sites",
@@ -21671,7 +21671,7 @@
       },
       {
         "name": "credential",
-        "type": "string",
+        "type": "credential",
         "value": null,
         "label": "Microsoft OAuth Credential",
         "placeholder": "${credentials.MICROSOFT_SHAREPOINT}"
@@ -21716,7 +21716,7 @@
     ]
   },
   "microsoft/sharepoint/update_list_item": {
-    "hash": "26b8f529f6cb4edfd12c16972b3c858ddf9e9ce5da5100d1d9561f2d86c02c52",
+    "hash": "332892d9ac909ead76dbd567c315f8e87da162e5f08a8d35ddfe33856734113d",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Update List Item",
@@ -21777,7 +21777,7 @@
       },
       {
         "name": "credential",
-        "type": "string",
+        "type": "credential",
         "value": null,
         "label": "Microsoft OAuth Credential",
         "placeholder": "${credentials.MICROSOFT_SHAREPOINT}"
@@ -21808,7 +21808,7 @@
     ]
   },
   "microsoft/teams/create_channel": {
-    "hash": "0633ad0a37b7768d6f223b9a1660069c26248490e96f5b9c9797b69b1f5d8b91",
+    "hash": "c9ba2dcd5e3761f2e64ba604178cba461283278e5ae4ba8ff70485c58ecadb4f",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Create Channel",
@@ -21881,7 +21881,7 @@
       },
       {
         "name": "credential",
-        "type": "string",
+        "type": "credential",
         "value": null,
         "label": "Microsoft OAuth Credential",
         "placeholder": "${credentials.MICROSOFT_TEAMS}"
@@ -21919,7 +21919,7 @@
     ]
   },
   "microsoft/teams/list_channel_messages": {
-    "hash": "9de02061ee11967e210902f90bb5a83b66b2e8f121697fe076e7bf8c4f82d727",
+    "hash": "2c4039ee38c7603aed6833d22a54f47affcf8c32d8c29cac0973d45a624302a2",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "List Channel Messages",
@@ -21971,7 +21971,7 @@
       },
       {
         "name": "credential",
-        "type": "string",
+        "type": "credential",
         "value": null,
         "label": "Microsoft OAuth Credential",
         "placeholder": "${credentials.MICROSOFT_TEAMS}"
@@ -22016,7 +22016,7 @@
     ]
   },
   "microsoft/teams/list_channels": {
-    "hash": "8e3f91e549c8ff32a4bbc6b706bf8b49387db8a9a95fa3bfb9ec47bc43e8c0d4",
+    "hash": "cd0b02ba97b205716bbf2626fa72c7ffd6c31f56ea22322483ba2660e1cfdbe3",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "List Channels",
@@ -22053,7 +22053,7 @@
       },
       {
         "name": "credential",
-        "type": "string",
+        "type": "credential",
         "value": null,
         "label": "Microsoft OAuth Credential",
         "placeholder": "${credentials.MICROSOFT_TEAMS}"
@@ -22098,7 +22098,7 @@
     ]
   },
   "microsoft/teams/list_teams": {
-    "hash": "3e1020efffd82d2e896c1909a5f5c0a3388d0f3cb89c4c1c6e0aeec8c529c113",
+    "hash": "fd983fdec98ef236476b7b1dbb5e445d0a29a4ba0b43957221195464c5395894",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "List Teams",
@@ -22127,7 +22127,7 @@
       },
       {
         "name": "credential",
-        "type": "string",
+        "type": "credential",
         "value": null,
         "label": "Microsoft OAuth Credential",
         "placeholder": "${credentials.MICROSOFT_TEAMS}"
@@ -22172,7 +22172,7 @@
     ]
   },
   "microsoft/teams/reply": {
-    "hash": "0c31b132dfcafde9a3f8c0cdf98db7e8f5311d7bc77e2f0292fc6f1918bdd752",
+    "hash": "3102bf8f934ff77b2ab656ac749cfa92c115799e54bab9884ac46da9e6ee4fd4",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Reply to Teams Message",
@@ -22233,7 +22233,7 @@
       },
       {
         "name": "app_password",
-        "type": "string",
+        "type": "secret",
         "value": null,
         "label": "Bot App Password",
         "placeholder": "${secrets.TEAMS_APP_PASSWORD}",
@@ -22272,7 +22272,7 @@
     ]
   },
   "microsoft/teams/send_channel_message": {
-    "hash": "795849748334ec4a33fd54bb73ca9fee8979ac519f93712e8595cbe28541c03d",
+    "hash": "7dc68940571d08a7055067187aed65da4c61852ea4cab0af19bd19a19c96936c",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Send Channel Message",
@@ -22342,7 +22342,7 @@
       },
       {
         "name": "credential",
-        "type": "string",
+        "type": "credential",
         "value": null,
         "label": "Microsoft OAuth Credential",
         "placeholder": "${credentials.MICROSOFT_TEAMS}"
@@ -22380,7 +22380,7 @@
     ]
   },
   "microsoft/teams/send_chat_message": {
-    "hash": "eacfe41f20208f89dd1cd7dd67d9b2d84e47551fb799ddbd08d852b854f95aeb",
+    "hash": "89d028084207dda6c6e75b4b0bdee826442f49d0e3b13f70e7271a376be98e16",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Send Chat Message",
@@ -22442,7 +22442,7 @@
       },
       {
         "name": "credential",
-        "type": "string",
+        "type": "credential",
         "value": null,
         "label": "Microsoft OAuth Credential",
         "placeholder": "${credentials.MICROSOFT_TEAMS}"
@@ -22480,7 +22480,7 @@
     ]
   },
   "microsoft/word/create": {
-    "hash": "5cde7ae07a05fed6e334ff08b1090a508c399b7ab88ea839f707fae1df048503",
+    "hash": "1fbf3311e8c098e8d06185d202af483553ea85c22c391cef1e8506da4ff85a40",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Create Document",
@@ -22524,7 +22524,7 @@
       },
       {
         "name": "credential",
-        "type": "string",
+        "type": "credential",
         "value": null,
         "label": "Microsoft OAuth Credential",
         "placeholder": "${credentials.MICROSOFT_ONEDRIVE}"
@@ -22569,7 +22569,7 @@
     ]
   },
   "microsoft/word/get_metadata": {
-    "hash": "752bab5ae3bd29dd7e47b8bf2257f6c13a715db2edde4769ec6d7d78bed7da1b",
+    "hash": "547c0fff8c25ad4c1286658f4f27f719d75751946e7444c0423a5000ffb5e82f",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Get Document Metadata",
@@ -22606,7 +22606,7 @@
       },
       {
         "name": "credential",
-        "type": "string",
+        "type": "credential",
         "value": null,
         "label": "Microsoft OAuth Credential",
         "placeholder": "${credentials.MICROSOFT_ONEDRIVE}"
@@ -22700,7 +22700,7 @@
     ]
   },
   "microsoft/word/read": {
-    "hash": "5ff4c29ed405b497ed284610688cccb36e109ef7ca432dbaa1541b98ac176d48",
+    "hash": "5d3396f3ee4c85aa490385b310d49dcdb78a198ef03cf3d21697600bbf87c7f0",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Read Document",
@@ -22754,7 +22754,7 @@
       },
       {
         "name": "credential",
-        "type": "string",
+        "type": "credential",
         "value": null,
         "label": "Microsoft OAuth Credential",
         "placeholder": "${credentials.MICROSOFT_ONEDRIVE}"
@@ -22806,7 +22806,7 @@
     ]
   },
   "microsoft/word/replace_text": {
-    "hash": "40a91b17cb818424c0947fa6e3bf9cdc8dfaa89d7b6a465659233390063532d3",
+    "hash": "ed78f4a0db16dbb6cae7ebc7331da65bad8bfd5bbdccc40a5308a1ec2584cd7b",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Replace Text",
@@ -22859,7 +22859,7 @@
       },
       {
         "name": "credential",
-        "type": "string",
+        "type": "credential",
         "value": null,
         "label": "Microsoft OAuth Credential",
         "placeholder": "${credentials.MICROSOFT_ONEDRIVE}"
@@ -23172,7 +23172,7 @@
     ]
   },
   "notion/add_comment": {
-    "hash": "a1c9b24ed7c9cba814f8b6bb062e817d91ca3260daef579bc69ed7f3e257423c",
+    "hash": "70a72b48c681d6268da81b4e6b0470d70d96a1ab71e4eedf29384eeebb65694d",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Notion Add Comment",
@@ -23189,7 +23189,7 @@
     "inputs": [
       {
         "name": "api_key",
-        "type": "string",
+        "type": "secret",
         "value": null,
         "label": "Notion Integration Token",
         "placeholder": "ntn_...",
@@ -23250,7 +23250,7 @@
     ]
   },
   "notion/append_block_children": {
-    "hash": "64f053075756ebaacc7760891f5ffd5727206da3a4c58c511ec50552d02742d4",
+    "hash": "4520ae770f933bbe7656e106fcc7e3021da72391371ed3daf3a400e24a3b510b",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Notion Append Content",
@@ -23267,7 +23267,7 @@
     "inputs": [
       {
         "name": "api_key",
-        "type": "string",
+        "type": "secret",
         "value": null,
         "label": "Notion Integration Token",
         "placeholder": "ntn_...",
@@ -23321,7 +23321,7 @@
     ]
   },
   "notion/create_page": {
-    "hash": "48e17cab5353b83b4cae792f00b3e357e67a6bb368be37c0c39da49b31854492",
+    "hash": "e5fab638668a4138512b3ec9cc806724f3c198fb5a880ba29aea9cf107790034",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Notion Create Page",
@@ -23338,7 +23338,7 @@
     "inputs": [
       {
         "name": "api_key",
-        "type": "string",
+        "type": "secret",
         "value": null,
         "label": "Notion Integration Token",
         "placeholder": "ntn_...",
@@ -23432,7 +23432,7 @@
     ]
   },
   "notion/delete_block": {
-    "hash": "4cd7c6bfed9fae336f824c444034f4ab58601179e386fcb2f60b5d7fbc158a05",
+    "hash": "b2b843a5e4f85cb8f637ecf8a6bc4e5142adecd08229d713312b10d8896acb59",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Notion Delete Block",
@@ -23449,7 +23449,7 @@
     "inputs": [
       {
         "name": "api_key",
-        "type": "string",
+        "type": "secret",
         "value": null,
         "label": "Notion Integration Token",
         "placeholder": "ntn_...",
@@ -23489,7 +23489,7 @@
     ]
   },
   "notion/get_block_children": {
-    "hash": "ac307b424cfb5fcc8c33fbcef081920ba3b3c852b86596257ef815bf5db04fa2",
+    "hash": "577c39c5479402188c17fdae2efa98f9187ae45105fd12c9aa01362506edd4c9",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Notion Get Block Children",
@@ -23506,7 +23506,7 @@
     "inputs": [
       {
         "name": "api_key",
-        "type": "string",
+        "type": "secret",
         "value": null,
         "label": "Notion Integration Token",
         "placeholder": "ntn_...",
@@ -23567,7 +23567,7 @@
     ]
   },
   "notion/get_database": {
-    "hash": "9810014b021e39ba20569956bde8ba648e56628b108a8753ecd610c084589e20",
+    "hash": "dd2f746b85ff8ff7ff44b00400fd14b09c89640f8c2cd6fe8c1362b190e3e644",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Notion Get Database",
@@ -23584,7 +23584,7 @@
     "inputs": [
       {
         "name": "api_key",
-        "type": "string",
+        "type": "secret",
         "value": null,
         "label": "Notion Integration Token",
         "placeholder": "ntn_...",
@@ -23652,7 +23652,7 @@
     ]
   },
   "notion/get_page": {
-    "hash": "e8b88128e7064154a38ae5e31e1d641a5262ee11b99371d5ac0e09c13980da50",
+    "hash": "04d37e077297342a15388d6f796c1e2eed1d1467f19cb33f6469020963236804",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Notion Get Page",
@@ -23669,7 +23669,7 @@
     "inputs": [
       {
         "name": "api_key",
-        "type": "string",
+        "type": "secret",
         "value": null,
         "label": "Notion Integration Token",
         "placeholder": "ntn_...",
@@ -23737,7 +23737,7 @@
     ]
   },
   "notion/list_comments": {
-    "hash": "331ba21c9edb6f9e99e484a2cef991c9daf3e8d4d032fe4f87c2df40568fcdb3",
+    "hash": "3d7a6b173e457e845dc3b56fe11e0533127fde215397e370d62636823dae9711",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Notion List Comments",
@@ -23754,7 +23754,7 @@
     "inputs": [
       {
         "name": "api_key",
-        "type": "string",
+        "type": "secret",
         "value": null,
         "label": "Notion Integration Token",
         "placeholder": "ntn_...",
@@ -23808,7 +23808,7 @@
     ]
   },
   "notion/list_databases": {
-    "hash": "a6166ef6ae8b282be799dfbce29e243d7bb4e4c22f5158e7c636be409fda6e18",
+    "hash": "ca82e68b4c2b9466e2790598ec1030ba8fa81ba9ebe19fb1bb8e993fe9bfb7cf",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Notion List Databases",
@@ -23825,7 +23825,7 @@
     "inputs": [
       {
         "name": "api_key",
-        "type": "string",
+        "type": "secret",
         "value": null,
         "label": "Notion Integration Token",
         "placeholder": "ntn_...",
@@ -23871,7 +23871,7 @@
     ]
   },
   "notion/query_database": {
-    "hash": "d7c09916680e8506059888b4188332d860786284620851af262a5aaaacc37183",
+    "hash": "45954d1e601a3169bce5c7c10d1f382e3bcaf1a57e93e73a849214e66b4da64d",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Notion Query Database",
@@ -23888,7 +23888,7 @@
     "inputs": [
       {
         "name": "api_key",
-        "type": "string",
+        "type": "secret",
         "value": null,
         "label": "Notion Integration Token",
         "placeholder": "ntn_...",
@@ -23963,7 +23963,7 @@
     ]
   },
   "notion/search": {
-    "hash": "3f01e8655c7902a37dd6f1fdd660e5f982aa0d33255892d71e96fb072834adf5",
+    "hash": "dfcfdec4588f2c86baf9a4e8f0fd54e6521c84b5102462396026340fab4a13a3",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Notion Search",
@@ -23980,7 +23980,7 @@
     "inputs": [
       {
         "name": "api_key",
-        "type": "string",
+        "type": "secret",
         "value": null,
         "label": "Notion Integration Token",
         "placeholder": "ntn_...",
@@ -24062,7 +24062,7 @@
     ]
   },
   "notion/update_page": {
-    "hash": "b9bad2cdb2a6e87be270c851605e123f093eb7e47f3def6c2808225184c1b069",
+    "hash": "04186dd7b921e487e62753722c6d9ac56da82ec750c602f23dc501d8f562ea42",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Notion Update Page",
@@ -24079,7 +24079,7 @@
     "inputs": [
       {
         "name": "api_key",
-        "type": "string",
+        "type": "secret",
         "value": null,
         "label": "Notion Integration Token",
         "placeholder": "ntn_...",
@@ -24456,7 +24456,7 @@
     ]
   },
   "slack/channels": {
-    "hash": "1d718bb507dc73f7dd639dd5c3e2e8cad70a6db13354d27ca4db82d17479b983",
+    "hash": "e3a2d1a67b244ff5e32474b484fa67a3b6ddb554454b38bd112541852d3d0ad6",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Slack Channels",
@@ -24473,7 +24473,7 @@
     "inputs": [
       {
         "name": "bot_token",
-        "type": "string",
+        "type": "secret",
         "value": null,
         "label": "Bot Token",
         "placeholder": "xoxb-...",
@@ -24540,7 +24540,7 @@
     ]
   },
   "slack/file_upload": {
-    "hash": "49617df7001e5623b0f08780ab896446589b8e438ffd13f2768c1d03ceab83f3",
+    "hash": "cbdc6967fd6eed5ea2cd482ad425d83e8a4daacd0cdb83236f126fadbe3169ae",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Slack File Upload",
@@ -24557,7 +24557,7 @@
     "inputs": [
       {
         "name": "bot_token",
-        "type": "string",
+        "type": "secret",
         "value": null,
         "label": "Bot Token",
         "placeholder": "xoxb-...",
@@ -24634,7 +24634,7 @@
     ]
   },
   "slack/history": {
-    "hash": "41a0a7db1acc5cd9ece2918ad157ebdcdecfa3d50971f35878c82e25fc4421c9",
+    "hash": "540173363356c018614a944a84116ab5e45fb6b935e6e488a4bc044cfecbb448",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Slack Channel History",
@@ -24651,7 +24651,7 @@
     "inputs": [
       {
         "name": "bot_token",
-        "type": "string",
+        "type": "secret",
         "value": null,
         "label": "Bot Token",
         "placeholder": "xoxb-...",
@@ -24719,7 +24719,7 @@
     ]
   },
   "slack/react": {
-    "hash": "5ab6eed60e2eabd0c3fd9bdf9dbd8fb8d76cf81fbc8af6f5e46b7b57a4704df9",
+    "hash": "f1411bcc7aecfdecbf706fbac39d06b8030dfb2ede1d930e693dbf7f72705183",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Slack Add Reaction",
@@ -24736,7 +24736,7 @@
     "inputs": [
       {
         "name": "bot_token",
-        "type": "string",
+        "type": "secret",
         "value": null,
         "label": "Bot Token",
         "placeholder": "xoxb-...",
@@ -24792,7 +24792,7 @@
     ]
   },
   "slack/rich_message": {
-    "hash": "7ad6d5ee184dc7fb4e4291ae1ebc9652bab7b5aa5e536481bbc59bb6a70490fe",
+    "hash": "4fbba8a24d1e905f2d7bcc8ca172fd7e6bacb740b76da46f7e8b6382ae4488d5",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Slack Rich Message",
@@ -24809,14 +24809,14 @@
     "inputs": [
       {
         "name": "bot_token",
-        "type": "string",
+        "type": "secret",
         "value": null,
         "label": "Bot Token",
         "placeholder": "xoxb-..."
       },
       {
         "name": "channel_id",
-        "type": "string",
+        "type": "secret",
         "value": null,
         "label": "Channel ID",
         "placeholder": "${channel_id}"
@@ -24884,7 +24884,7 @@
     ]
   },
   "slack/search": {
-    "hash": "288e3644c23fcfba9e99ff15d691cd2114d4f9baf6cf38dad9388075ec0dfcfe",
+    "hash": "2bf407929c22edbd3bd4376e518ee06849682bc0af60e1f63d5d49e2a8c0a54f",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Slack Search Messages",
@@ -24901,7 +24901,7 @@
     "inputs": [
       {
         "name": "user_token",
-        "type": "string",
+        "type": "secret",
         "value": null,
         "label": "User Token (required — search needs a user token, not bot token)",
         "placeholder": "xoxp-...",
@@ -24969,7 +24969,7 @@
     ]
   },
   "slack/send_message": {
-    "hash": "d21fd0bd1f63d5f54a607c59d5a6af171cc72872d6c2db112dba7e038ac13121",
+    "hash": "e9449573ef296e9ea31da6619cf6c8a62c1af694d61519eee458766bd6022dfd",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Send Slack Message",
@@ -24986,7 +24986,7 @@
     "inputs": [
       {
         "name": "bot_token",
-        "type": "string",
+        "type": "secret",
         "value": null,
         "label": "Bot Token",
         "placeholder": "xoxb-...",
@@ -24994,7 +24994,7 @@
       },
       {
         "name": "channel_id",
-        "type": "string",
+        "type": "secret",
         "value": null,
         "label": "Channel ID",
         "placeholder": "${channel_id}",
@@ -25069,7 +25069,7 @@
     ]
   },
   "slack/thread": {
-    "hash": "745c17154a28efd98497f380ea8b24b53daad66282feb99e7b765100c94a14d0",
+    "hash": "77e0c51022c9d7807954905c6784dce54b40007d875f6399bb384bcb4cf3051d",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Slack Thread Replies",
@@ -25086,7 +25086,7 @@
     "inputs": [
       {
         "name": "bot_token",
-        "type": "string",
+        "type": "secret",
         "value": null,
         "label": "Bot Token",
         "placeholder": "xoxb-...",
@@ -25155,7 +25155,7 @@
     ]
   },
   "slack/user_profile": {
-    "hash": "32a3d582e29e59d43a044a2798f959f293b8a74f3bebbe281f18a5bcd1bba392",
+    "hash": "846f48aad9e906bc32f8dd1959cc0a1ef66a8ce50f3af74249cd38c7c458ad6e",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Slack User Profile",
@@ -25172,7 +25172,7 @@
     "inputs": [
       {
         "name": "bot_token",
-        "type": "string",
+        "type": "secret",
         "value": null,
         "label": "Bot Token",
         "placeholder": "xoxb-...",
@@ -25261,7 +25261,7 @@
     ]
   },
   "slack/users": {
-    "hash": "722bf3fa493806c4fee5f871dd10cc06d3a29c4f6e3d9c29b101d2ed6c63c081",
+    "hash": "bb58e3b24b0837c1cfc0065198e633065255faa93ed1ab2858a5ca9c3d3c3921",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Slack Users",
@@ -25278,7 +25278,7 @@
     "inputs": [
       {
         "name": "bot_token",
-        "type": "string",
+        "type": "secret",
         "value": null,
         "label": "Bot Token",
         "placeholder": "xoxb-...",
@@ -25430,7 +25430,7 @@
     ]
   },
   "social/facebook/delete_post": {
-    "hash": "76a4c028b1affae8849a83dee22a45b605d0c898544a73ed39fe52eb486cf1e5",
+    "hash": "9e070e380b409d1b0015d4d1f218784c1c292a0171cb285a2157d9f2600120e3",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Facebook Delete Post",
@@ -25452,7 +25452,7 @@
     "inputs": [
       {
         "name": "access_token",
-        "type": "string",
+        "type": "secret",
         "value": null,
         "label": "Page Access Token",
         "placeholder": "${first_page_token}",
@@ -25460,7 +25460,7 @@
       },
       {
         "name": "app_secret",
-        "type": "string",
+        "type": "secret",
         "value": null,
         "label": "App Secret",
         "placeholder": "${secrets.facebook_app_secret}"
@@ -25499,7 +25499,7 @@
     ]
   },
   "social/facebook/get_conversation": {
-    "hash": "a273ffd118d5cfd7b81837914dacbfa8518f7df0e73acaf0f5921a2f5a97e890",
+    "hash": "378a14d68d3ef2f0f477dae57fa0b01d20712060ddc13e15f989ecd57b101b62",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Facebook Get Conversation",
@@ -25521,7 +25521,7 @@
     "inputs": [
       {
         "name": "access_token",
-        "type": "string",
+        "type": "secret",
         "value": null,
         "label": "Page Access Token",
         "placeholder": "${page_access_token}",
@@ -25529,7 +25529,7 @@
       },
       {
         "name": "app_secret",
-        "type": "string",
+        "type": "secret",
         "value": null,
         "label": "App Secret",
         "placeholder": "${secrets.FACEBOOK_APP_SECRET}"
@@ -25611,7 +25611,7 @@
     ]
   },
   "social/facebook/get_page_insights": {
-    "hash": "d68001989c41238432c504690f8a92fd48af7dae173381e5696abc5c2274294e",
+    "hash": "7aafc6db7673c9d3aa2e95a8a01b7d9e1a70e4f077a7370a13dcf72309ac0fa9",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Facebook Page Insights",
@@ -25633,7 +25633,7 @@
     "inputs": [
       {
         "name": "access_token",
-        "type": "string",
+        "type": "secret",
         "value": null,
         "label": "Page Access Token",
         "placeholder": "${first_page_token}",
@@ -25641,7 +25641,7 @@
       },
       {
         "name": "app_secret",
-        "type": "string",
+        "type": "secret",
         "value": null,
         "label": "App Secret",
         "placeholder": "${secrets.facebook_app_secret}"
@@ -25729,7 +25729,7 @@
     ]
   },
   "social/facebook/get_pages": {
-    "hash": "b2a79686bbe10f0a7b5b70ce6352607c34c49e1916fff9ab149be0f587494bad",
+    "hash": "c272053b00bfae600415720e0900a47ca0f90aa01c33428603163c2a368e8791",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Facebook Get Pages",
@@ -25751,7 +25751,7 @@
     "inputs": [
       {
         "name": "access_token",
-        "type": "string",
+        "type": "secret",
         "value": null,
         "label": "Facebook User Token",
         "placeholder": "${credentials.facebook}",
@@ -25759,7 +25759,7 @@
       },
       {
         "name": "app_secret",
-        "type": "string",
+        "type": "secret",
         "value": null,
         "label": "App Secret",
         "placeholder": "${secrets.facebook_app_secret}"
@@ -25825,7 +25825,7 @@
     ]
   },
   "social/facebook/get_post": {
-    "hash": "224d294bdcbd0434948aa5b50648c52575f7502663044a45a54317a3175fc7f2",
+    "hash": "ae635756f450e01a5954d8fbdc175af0c57690480efea82fefd3fc902be5e356",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Facebook Get Post",
@@ -25847,7 +25847,7 @@
     "inputs": [
       {
         "name": "access_token",
-        "type": "string",
+        "type": "secret",
         "value": null,
         "label": "Page Access Token",
         "placeholder": "${first_page_token}",
@@ -25855,7 +25855,7 @@
       },
       {
         "name": "app_secret",
-        "type": "string",
+        "type": "secret",
         "value": null,
         "label": "App Secret",
         "placeholder": "${secrets.facebook_app_secret}"
@@ -25936,7 +25936,7 @@
     ]
   },
   "social/facebook/publish_post": {
-    "hash": "5c3bd3d2c0d219267e2c15493846fa4c4721b1d3825fdd8695686ec4c0ec9b6d",
+    "hash": "f7f403f3e47a3bba015821a455efde68f7e0bf5ac03d7b31f5f0aa6d86d5f993",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Facebook Publish Post",
@@ -25958,7 +25958,7 @@
     "inputs": [
       {
         "name": "access_token",
-        "type": "string",
+        "type": "secret",
         "value": null,
         "label": "Page Access Token",
         "placeholder": "${first_page_token}",
@@ -25966,7 +25966,7 @@
       },
       {
         "name": "app_secret",
-        "type": "string",
+        "type": "secret",
         "value": null,
         "label": "App Secret",
         "placeholder": "${secrets.facebook_app_secret}"
@@ -26034,7 +26034,7 @@
     ]
   },
   "social/facebook/send_message": {
-    "hash": "e53ad384de684e0d1f66a308bc76cb23992b23df2c621669244765e14b8c2903",
+    "hash": "5d0f9e2940d7edc904be0d4bbf42f4b84c6b76bffc58d9d89e917518f8823bb6",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Facebook Send Message",
@@ -26056,7 +26056,7 @@
     "inputs": [
       {
         "name": "access_token",
-        "type": "string",
+        "type": "secret",
         "value": null,
         "label": "Page Access Token",
         "placeholder": "${credentials.facebook}",
@@ -26064,7 +26064,7 @@
       },
       {
         "name": "app_secret",
-        "type": "string",
+        "type": "secret",
         "value": null,
         "label": "App Secret",
         "placeholder": "${secrets.facebook_app_secret}"
@@ -26125,7 +26125,7 @@
     ]
   },
   "social/linkedin/delete_post": {
-    "hash": "c2225d35b7af1584d5f102f1daebd52279c7a907bf74e1b0751c70d6c053b61d",
+    "hash": "eda2f42ba2d1b40a04fd8182addd09660187db4985b171366d45f7662b74fc83",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "LinkedIn Delete Post",
@@ -26147,7 +26147,7 @@
     "inputs": [
       {
         "name": "access_token",
-        "type": "string",
+        "type": "secret",
         "value": null,
         "label": "LinkedIn Access Token",
         "placeholder": "${credentials.linkedin}",
@@ -26187,7 +26187,7 @@
     ]
   },
   "social/linkedin/get_analytics": {
-    "hash": "2b97d8916729aeb92b6636f7f4931d2727c6baa9dc6b260b5e026d3ef690cbdd",
+    "hash": "038a254817bebb99aff44d7affc22c3b29e2c4cd84b72b805d333e38fb624e8c",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "LinkedIn Post Analytics",
@@ -26209,7 +26209,7 @@
     "inputs": [
       {
         "name": "access_token",
-        "type": "string",
+        "type": "secret",
         "value": null,
         "label": "LinkedIn Access Token",
         "placeholder": "${credentials.linkedin_community}",
@@ -26277,7 +26277,7 @@
     ]
   },
   "social/linkedin/get_post": {
-    "hash": "2ac74edf36a2e8091cbc7546523445ed4551b6a332afb7639c2af82ead3a7336",
+    "hash": "ceb37ce06d32d9681d1565b1217ce8398d0c5524df7e5019ac901031c1985d27",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "LinkedIn Get Post",
@@ -26299,7 +26299,7 @@
     "inputs": [
       {
         "name": "access_token",
-        "type": "string",
+        "type": "secret",
         "value": null,
         "label": "LinkedIn Access Token",
         "placeholder": "${credentials.linkedin_community}",
@@ -26374,7 +26374,7 @@
     ]
   },
   "social/linkedin/get_profile": {
-    "hash": "ceac4e64db81bbb723ef96938f2c5ba72121058941c62d69ef53c5261d7e6894",
+    "hash": "97e35d74d71d5d4b9f54bb0a178ab0dd91844cafce43b47a9df802f476d4355f",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "LinkedIn Get Profile",
@@ -26396,7 +26396,7 @@
     "inputs": [
       {
         "name": "access_token",
-        "type": "string",
+        "type": "secret",
         "value": null,
         "label": "LinkedIn Access Token",
         "placeholder": "${credentials.linkedin}",
@@ -26470,7 +26470,7 @@
     ]
   },
   "social/linkedin/list_posts": {
-    "hash": "b56a93bb3a6f7b6e721dcced51e434cae649c0591b1bd93878e749951b22caed",
+    "hash": "162b0ce4510da8a37eb0bdabd4d3de90d8b87e30716c25356583fffe910d80eb",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "LinkedIn List Posts",
@@ -26492,7 +26492,7 @@
     "inputs": [
       {
         "name": "access_token",
-        "type": "string",
+        "type": "secret",
         "value": null,
         "label": "LinkedIn Access Token",
         "placeholder": "${credentials.linkedin_community}",
@@ -26553,7 +26553,7 @@
     ]
   },
   "social/linkedin/share_post": {
-    "hash": "6d0e01925a5491e8386ce6f056c4ff54f22aede1c22d9f24e481ca46544e4a65",
+    "hash": "deeab5f639b4cc83bfa902b5f3b20edc36b0f7b3aba160ee3864fe26f2d597c4",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "LinkedIn Share Post",
@@ -26575,7 +26575,7 @@
     "inputs": [
       {
         "name": "access_token",
-        "type": "string",
+        "type": "secret",
         "value": null,
         "label": "LinkedIn Access Token",
         "placeholder": "${credentials.linkedin}",
@@ -27822,7 +27822,7 @@
     ]
   },
   "trigger/email": {
-    "hash": "7c5089bad7faadd188c851ab6695d11522cd9567165a78e047a78d87b953391c",
+    "hash": "691f69495951b10c4cb9226f8584576b4a83b0b31d2dd01c1c7040d61b4a907e",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Email Trigger",
@@ -27839,7 +27839,7 @@
     "inputs": [
       {
         "name": "credential",
-        "type": "string",
+        "type": "credential",
         "value": null,
         "label": "Google OAuth Credential",
         "placeholder": "${credentials.GOOGLE_GMAIL}",
@@ -27948,7 +27948,7 @@
     ]
   },
   "trigger/facebook_feed": {
-    "hash": "ad88a4cab99fd3ac381ffad814ab2418d34ad37e76590d36bd9fd47a4e89c4f7",
+    "hash": "c8cab4eb219d6b48c3477b95d63ff2606886a7fb8395669fad4f7f2c065725a3",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Facebook Page Feed Trigger",
@@ -27973,7 +27973,7 @@
       },
       {
         "name": "access_token",
-        "type": "string",
+        "type": "secret",
         "value": null,
         "label": "Facebook User Token",
         "placeholder": "${credentials.facebook}",
@@ -27981,7 +27981,7 @@
       },
       {
         "name": "app_secret",
-        "type": "string",
+        "type": "secret",
         "value": null,
         "label": "App Secret",
         "placeholder": "${secrets.facebook_app_secret}"
@@ -28067,7 +28067,7 @@
       },
       {
         "name": "page_access_token",
-        "type": "string",
+        "type": "secret",
         "value": null,
         "label": "Page Access Token",
         "placeholder": ""
@@ -28082,7 +28082,7 @@
     ]
   },
   "trigger/facebook_messenger": {
-    "hash": "29a1b86d40083b0ca806a7510d7b347aeb5db8f8e2525c4be3b47ff8d9ca044d",
+    "hash": "da5120028d59d5435ff03d38065b344efce14ca6f667c908ac0d58ccfe8b9e0f",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Facebook Messenger Trigger",
@@ -28107,7 +28107,7 @@
       },
       {
         "name": "access_token",
-        "type": "string",
+        "type": "secret",
         "value": null,
         "label": "Facebook User Token",
         "placeholder": "${credentials.facebook}",
@@ -28115,7 +28115,7 @@
       },
       {
         "name": "app_secret",
-        "type": "string",
+        "type": "secret",
         "value": null,
         "label": "App Secret",
         "placeholder": "${secrets.facebook_app_secret}"
@@ -28152,7 +28152,7 @@
       },
       {
         "name": "page_access_token",
-        "type": "string",
+        "type": "secret",
         "value": null,
         "label": "Page Access Token",
         "placeholder": ""
@@ -28243,7 +28243,7 @@
     ]
   },
   "trigger/git_poll": {
-    "hash": "57d9d447631a50e38c36d0848c7bfd584ca3d401f8a920253c921ce362a6c8ea",
+    "hash": "f2c4622b03c7358cd3173ecd37adc3161416663ed8a1984c3e955e98910073e4",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Git Poll Trigger",
@@ -28275,7 +28275,7 @@
       },
       {
         "name": "branch_regex",
-        "type": "string",
+        "type": "secret",
         "value": null,
         "label": "Branch Regex",
         "placeholder": "e.g. ^main$ or ^feature/.*"
@@ -28320,7 +28320,7 @@
     ]
   },
   "trigger/github_webhook": {
-    "hash": "847b195cc53d29aecc2a424870e302c0b2434c538cb54e7261c8586322ce3c43",
+    "hash": "48c25fa82935658e3ace4db92a52f23d747ce6e14535b48e7c953ba719fa8c56",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "GitHub Webhook Trigger",
@@ -28337,7 +28337,7 @@
     "inputs": [
       {
         "name": "webhook_secret",
-        "type": "string",
+        "type": "secret",
         "value": null,
         "label": "Webhook Secret",
         "placeholder": "HMAC secret for X-Hub-Signature-256 validation",
@@ -28467,7 +28467,7 @@
     ]
   },
   "trigger/gitlab_webhook": {
-    "hash": "4f99c25f7e688da34cf1161c190e87682c97c7a4f702ff16972b1a1bd17ddfe5",
+    "hash": "bdfb591c84b81d6c6f7dbf39343702bd47f8ad61b57d542cb60a9639da87e8ec",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "GitLab Webhook Trigger",
@@ -28484,7 +28484,7 @@
     "inputs": [
       {
         "name": "webhook_secret",
-        "type": "string",
+        "type": "secret",
         "value": null,
         "label": "Webhook Secret Token",
         "placeholder": "Shared secret for X-Gitlab-Token validation",
@@ -28628,7 +28628,7 @@
     ]
   },
   "trigger/google_drive": {
-    "hash": "6540b82a8fb36e07e1fd8099f472a2d064a5e9bb4d57ea6fc3384ee10332a984",
+    "hash": "ebefabe821d2d8cc12a8fd2a191fda2e145c1654013a7edc2a06b1e17212496c",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Google Drive Trigger",
@@ -28652,14 +28652,14 @@
       },
       {
         "name": "credential",
-        "type": "string",
+        "type": "credential",
         "value": null,
         "label": "Google OAuth Credential",
         "placeholder": "${credentials.GOOGLE_DRIVE}"
       },
       {
         "name": "google_account",
-        "type": "string",
+        "type": "credential",
         "value": null,
         "label": "Google Account (email)",
         "placeholder": "user@gmail.com"
@@ -28815,7 +28815,7 @@
     ]
   },
   "trigger/linkedin_poll": {
-    "hash": "decff3ba9b478ae500959ddb929b1d0ef305b8734ab9aec669211ea7342eeec1",
+    "hash": "bc80192e7a86d7e14316ce67d0c085868168b5cba8803d12856a74b56e10aeed",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "LinkedIn Activity Trigger",
@@ -28832,7 +28832,7 @@
     "inputs": [
       {
         "name": "access_token",
-        "type": "string",
+        "type": "secret",
         "value": null,
         "label": "LinkedIn Access Token",
         "placeholder": "${credentials.linkedin}",
@@ -28961,7 +28961,7 @@
     ]
   },
   "trigger/microsoft_outlook": {
-    "hash": "e75b71545f941f053162a7747de43ee730e1906399ec0df1856c1ca81933ab7c",
+    "hash": "85787ac447ee429277d170a8ff4edd698d2ce1af1384859af59542406bef9e33",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Microsoft Outlook Trigger",
@@ -28999,7 +28999,7 @@
       },
       {
         "name": "credential",
-        "type": "string",
+        "type": "credential",
         "value": null,
         "label": "Microsoft OAuth Credential",
         "placeholder": "${credentials.AZURE_MS}"
@@ -29140,7 +29140,7 @@
     ]
   },
   "trigger/s3": {
-    "hash": "b715a6e49c90b5127a081f157bb4c7f8d9a45fee300314b89bc3c6b0101116c0",
+    "hash": "eaf1521397c9c0d65752ed835c5daef50d1a4081533c790c4946ae1445c988a7",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "S3 Trigger",
@@ -29172,7 +29172,7 @@
       },
       {
         "name": "aws_access_key",
-        "type": "string",
+        "type": "secret",
         "value": null,
         "label": "AWS Access Key",
         "placeholder": "AKIA...",
@@ -29180,7 +29180,7 @@
       },
       {
         "name": "aws_secret_key",
-        "type": "string",
+        "type": "secret",
         "value": null,
         "label": "AWS Secret Key",
         "placeholder": "Secret key for authentication",
@@ -29188,7 +29188,7 @@
       },
       {
         "name": "region",
-        "type": "string",
+        "type": "secret",
         "value": null,
         "label": "AWS Region",
         "placeholder": "",
@@ -29481,7 +29481,7 @@
     ]
   },
   "trigger/slack": {
-    "hash": "4bfe104cf7389da99c50e588bbb17393e4dc3bd1144352ec19776444d591afd6",
+    "hash": "0f5edef7c672363a5359d184ad03042f094087ef467b3a0574ee52d972bc446e",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Slack Trigger",
@@ -29515,7 +29515,7 @@
       },
       {
         "name": "bot_token",
-        "type": "string",
+        "type": "secret",
         "value": null,
         "label": "Bot Token",
         "placeholder": "xoxb-... or ${secrets.slack_bot_token}",
@@ -29523,14 +29523,14 @@
       },
       {
         "name": "app_token",
-        "type": "string",
+        "type": "secret",
         "value": null,
         "label": "App-Level Token (Socket Mode only)",
         "placeholder": "xapp-1-..."
       },
       {
         "name": "signing_secret",
-        "type": "string",
+        "type": "secret",
         "value": null,
         "label": "Signing Secret (Events API request verification)",
         "placeholder": "${secrets.slack_signing_secret}"
@@ -29638,7 +29638,7 @@
     ]
   },
   "trigger/teams": {
-    "hash": "d54ee4217167952e66bcb877d8095c044c8ad9b3e630ced9820b0fffddedda8c",
+    "hash": "ce02bcd95ebd9ebc45d9fa87058e35b7c1c81e526c989b31091228fc16d0fe14",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Teams Trigger",
@@ -29663,7 +29663,7 @@
       },
       {
         "name": "app_password",
-        "type": "string",
+        "type": "secret",
         "value": null,
         "label": "App Password",
         "placeholder": "${secrets.teams_app_password}",
@@ -29772,7 +29772,7 @@
     ]
   },
   "trigger/telegram": {
-    "hash": "e9231b43905e1f0c4d866132433fe13efff10bae0ef907c34c1066f74a739bf3",
+    "hash": "ef1aea6090d3f4ab7023bb2794a315ef39313a523bc42fc9139e65c2c7caa90d",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Telegram Trigger",
@@ -29789,7 +29789,7 @@
     "inputs": [
       {
         "name": "bot_token",
-        "type": "string",
+        "type": "secret",
         "value": null,
         "label": "Bot Token",
         "placeholder": "${secrets.telegram_bot_token}",
@@ -29898,7 +29898,7 @@
     ]
   },
   "trigger/twilio_sms": {
-    "hash": "780deaa5042a9ccb1084018b9050e138dc6c191cd19cbb1a8bf63fd84fb89dd4",
+    "hash": "cfdc682bfd52b95c5c34d92c14a332c590868ab1dc37a07d6ac30f1cf950e3a6",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Twilio SMS Trigger",
@@ -29923,7 +29923,7 @@
       },
       {
         "name": "auth_token",
-        "type": "string",
+        "type": "secret",
         "value": null,
         "label": "Twilio Auth Token",
         "placeholder": "${secrets.twilio_auth_token}",
@@ -29998,7 +29998,7 @@
     ]
   },
   "trigger/twilio_voice": {
-    "hash": "986092961e15d650f95f57b64e629e6248043ff52c9c3cacb340a2b8073a9ed4",
+    "hash": "62b15e02d7d874ac793a5a8998f63147753293680d2cb0b98eca43d1dd0bd5e7",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Twilio Voice Trigger",
@@ -30023,7 +30023,7 @@
       },
       {
         "name": "auth_token",
-        "type": "string",
+        "type": "secret",
         "value": null,
         "label": "Twilio Auth Token",
         "placeholder": "${secrets.twilio_auth_token}",
@@ -30194,7 +30194,7 @@
     ]
   },
   "twilio/make_call": {
-    "hash": "1f97d4cb8fe21079e1d7a6c913d0248967aee16d09be867180a58c30bc2808e0",
+    "hash": "67db55a146fb24052c7c98cc697519d64702cd681a79080857ce32874c2bbd1b",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Make Call",
@@ -30219,7 +30219,7 @@
       },
       {
         "name": "auth_token",
-        "type": "string",
+        "type": "secret",
         "value": null,
         "label": "Auth Token",
         "placeholder": "${secrets.TWILIO_AUTH_TOKEN}",
@@ -30227,7 +30227,7 @@
       },
       {
         "name": "from",
-        "type": "string",
+        "type": "secret",
         "value": null,
         "label": "From Number (E.164)",
         "placeholder": "+19876543210",
@@ -30352,7 +30352,7 @@
     ]
   },
   "twilio/send_sms": {
-    "hash": "57796ab8be5b620b8e462004eec477fd445771495f2c204cb32afd9f0cca5ca2",
+    "hash": "e2e9e3eae0c512d69f4eff91dfe717eed06198d0a4c16bf2c851b59d8f9e2fc0",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Send Twilio SMS",
@@ -30377,7 +30377,7 @@
       },
       {
         "name": "auth_token",
-        "type": "string",
+        "type": "secret",
         "value": null,
         "label": "Auth Token",
         "placeholder": "${secrets.TWILIO_AUTH_TOKEN}",
@@ -30385,7 +30385,7 @@
       },
       {
         "name": "from",
-        "type": "string",
+        "type": "secret",
         "value": null,
         "label": "From Number (E.164)",
         "placeholder": "+19876543210",
@@ -30800,7 +30800,7 @@
     ]
   },
   "web/search": {
-    "hash": "a9cbe3694698d84c35f442ab66ebff47b61ea8ad8f3ed834e11c9490e2b0fd0b",
+    "hash": "4a61f193db1815002b400b8970fbe0caa894be13b72bfc27c4a627a3d15cb875",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Web Search",
@@ -30825,7 +30825,7 @@
       },
       {
         "name": "api_key",
-        "type": "string",
+        "type": "secret",
         "value": null,
         "label": "Brave API Key",
         "placeholder": "BSA...",
@@ -30871,7 +30871,7 @@
     ]
   },
   "webflow/create_collection_item": {
-    "hash": "9e69afc3f0ae21764c4a189d2f1c8463c1eafb259ecc5279feed1708ee260b0f",
+    "hash": "0f1a2f6f8d03b8d02f6d4b07b4f237655941ee82fe0bce6a1797c6d597cbecc8",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Create Collection Item",
@@ -30888,7 +30888,7 @@
     "inputs": [
       {
         "name": "api_token",
-        "type": "string",
+        "type": "secret",
         "value": null,
         "label": "Webflow API Token",
         "placeholder": "wfl_...",
@@ -30896,7 +30896,7 @@
       },
       {
         "name": "collection_id",
-        "type": "string",
+        "type": "secret",
         "value": null,
         "label": "Collection ID",
         "placeholder": "The collection ID",
@@ -30957,7 +30957,7 @@
     ]
   },
   "webflow/create_webhook": {
-    "hash": "bbdd69c0ae51bb82a9151550343810f72b70bcb867816b0a2d9f5eefa57a53e4",
+    "hash": "7748b33fda7d987877c8e559c170f281ede00041fe9f66e6ddc1780340ecdcf5",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Create Webhook",
@@ -30974,7 +30974,7 @@
     "inputs": [
       {
         "name": "api_token",
-        "type": "string",
+        "type": "secret",
         "value": null,
         "label": "Webflow API Token",
         "placeholder": "wfl_...",
@@ -30982,7 +30982,7 @@
       },
       {
         "name": "site_id",
-        "type": "string",
+        "type": "secret",
         "value": null,
         "label": "Site ID",
         "placeholder": "The Webflow site ID",
@@ -31099,7 +31099,7 @@
     ]
   },
   "webflow/delete_collection_item": {
-    "hash": "0a891e708ce22ac6520daf1d68f86933df25f205b2a9a914ecf3159f2b93dfa4",
+    "hash": "7149b00c410f114304dc9ddd53417b079378893a85d4252cbd2adb6e79080e3e",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Delete Collection Item",
@@ -31116,7 +31116,7 @@
     "inputs": [
       {
         "name": "api_token",
-        "type": "string",
+        "type": "secret",
         "value": null,
         "label": "Webflow API Token",
         "placeholder": "wfl_...",
@@ -31124,7 +31124,7 @@
       },
       {
         "name": "collection_id",
-        "type": "string",
+        "type": "secret",
         "value": null,
         "label": "Collection ID",
         "placeholder": "The collection ID",
@@ -31164,7 +31164,7 @@
     ]
   },
   "webflow/get_collection": {
-    "hash": "05a9a30bb57840cefefdb9b5cadc286a3cc7ee5779743d01967a6fa551b688ac",
+    "hash": "175272a03b5e70f02cd2d95eb65d1e0f374ab86ad8e7f425d6d41510f3fcc7c5",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Get Collection",
@@ -31181,7 +31181,7 @@
     "inputs": [
       {
         "name": "api_token",
-        "type": "string",
+        "type": "secret",
         "value": null,
         "label": "Webflow API Token",
         "placeholder": "wfl_...",
@@ -31189,7 +31189,7 @@
       },
       {
         "name": "collection_id",
-        "type": "string",
+        "type": "secret",
         "value": null,
         "label": "Collection ID",
         "placeholder": "The collection ID",
@@ -31235,7 +31235,7 @@
     ]
   },
   "webflow/get_collection_item": {
-    "hash": "0ccd22b25f4fa1e5fb395bae78ea8087df1a71c47996a050ccc7ef8b9cffe042",
+    "hash": "345713fb9eef0992a07d5610430213dc594af4bdd5d7a916faf0072ff49b425b",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Get Collection Item",
@@ -31252,7 +31252,7 @@
     "inputs": [
       {
         "name": "api_token",
-        "type": "string",
+        "type": "secret",
         "value": null,
         "label": "Webflow API Token",
         "placeholder": "wfl_...",
@@ -31260,7 +31260,7 @@
       },
       {
         "name": "collection_id",
-        "type": "string",
+        "type": "secret",
         "value": null,
         "label": "Collection ID",
         "placeholder": "The collection ID",
@@ -31307,7 +31307,7 @@
     ]
   },
   "webflow/get_form_submissions": {
-    "hash": "ddf579222437241f473e3dba8cb3aeef4458ba0d16d6d0c9a4128df9247f568f",
+    "hash": "2d9241772a024ad01ea5877055557f8554f74e58cbd2f38e512df67482a52863",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Get Form Submissions",
@@ -31324,7 +31324,7 @@
     "inputs": [
       {
         "name": "api_token",
-        "type": "string",
+        "type": "secret",
         "value": null,
         "label": "Webflow API Token",
         "placeholder": "wfl_...",
@@ -31332,7 +31332,7 @@
       },
       {
         "name": "form_id",
-        "type": "string",
+        "type": "secret",
         "value": null,
         "label": "Form ID",
         "placeholder": "The form ID",
@@ -31392,7 +31392,7 @@
     ]
   },
   "webflow/get_page_content": {
-    "hash": "61b6e34e27c843980bd4b2f23d1d850505122d5126a60af06e0a39475f36801c",
+    "hash": "59fb94409186d730f0c8ad4a949b45efbc6c8139b5d56169750df4affc7c7fc3",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Get Page Content",
@@ -31409,7 +31409,7 @@
     "inputs": [
       {
         "name": "api_token",
-        "type": "string",
+        "type": "secret",
         "value": null,
         "label": "Webflow API Token",
         "placeholder": "wfl_...",
@@ -31417,7 +31417,7 @@
       },
       {
         "name": "page_id",
-        "type": "string",
+        "type": "secret",
         "value": null,
         "label": "Page ID",
         "placeholder": "The page ID",
@@ -31456,7 +31456,7 @@
     ]
   },
   "webflow/get_site": {
-    "hash": "bbe58dfe7cd515b4dbe48244bb672790fd0d13b36f7a64cb41b29ad7441fa5d5",
+    "hash": "0501c85712f1a328299e4439cc97def70fcc5680980747e18531eb8c390f679b",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Get Site",
@@ -31473,7 +31473,7 @@
     "inputs": [
       {
         "name": "api_token",
-        "type": "string",
+        "type": "secret",
         "value": null,
         "label": "Webflow API Token",
         "placeholder": "wfl_...",
@@ -31481,7 +31481,7 @@
       },
       {
         "name": "site_id",
-        "type": "string",
+        "type": "secret",
         "value": null,
         "label": "Site ID",
         "placeholder": "The Webflow site ID",
@@ -31534,7 +31534,7 @@
     ]
   },
   "webflow/list_collection_items": {
-    "hash": "739d6860be995b3a7a100cb699b74fe2c9f4591ef7ba9f392ad3e2ba5a2991e9",
+    "hash": "971d65423c88163f6a7be1bc1ee4c5209911c942063371991d5317300254e0bb",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "List Collection Items",
@@ -31551,7 +31551,7 @@
     "inputs": [
       {
         "name": "api_token",
-        "type": "string",
+        "type": "secret",
         "value": null,
         "label": "Webflow API Token",
         "placeholder": "wfl_...",
@@ -31559,7 +31559,7 @@
       },
       {
         "name": "collection_id",
-        "type": "string",
+        "type": "secret",
         "value": null,
         "label": "Collection ID",
         "placeholder": "The collection ID",
@@ -31619,7 +31619,7 @@
     ]
   },
   "webflow/list_collections": {
-    "hash": "50f7247ce6f341ab2e9d13be284df950c20c57351dcd48ff9d3f67a592cee005",
+    "hash": "9430338b5abb2caff482bfc5f099363e23eddc06473489f6bb0a26a9e9c53ec7",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "List Collections",
@@ -31636,7 +31636,7 @@
     "inputs": [
       {
         "name": "api_token",
-        "type": "string",
+        "type": "secret",
         "value": null,
         "label": "Webflow API Token",
         "placeholder": "wfl_...",
@@ -31644,7 +31644,7 @@
       },
       {
         "name": "site_id",
-        "type": "string",
+        "type": "secret",
         "value": null,
         "label": "Site ID",
         "placeholder": "The Webflow site ID",
@@ -31690,7 +31690,7 @@
     ]
   },
   "webflow/list_forms": {
-    "hash": "7d0080ca44c39e3d0fc22fbd13294c9128dbcd052c401343f6d7e5e195cc92c6",
+    "hash": "d2c6cbbfa3c99eab69c5ad48fc5c690a3c0f82105279b3e563ed5a4fb242a08b",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "List Forms",
@@ -31707,7 +31707,7 @@
     "inputs": [
       {
         "name": "api_token",
-        "type": "string",
+        "type": "secret",
         "value": null,
         "label": "Webflow API Token",
         "placeholder": "wfl_...",
@@ -31715,7 +31715,7 @@
       },
       {
         "name": "site_id",
-        "type": "string",
+        "type": "secret",
         "value": null,
         "label": "Site ID",
         "placeholder": "The Webflow site ID",
@@ -31761,7 +31761,7 @@
     ]
   },
   "webflow/list_pages": {
-    "hash": "817960f786927751cd37b8f23c7e9752ff5273c3ecc85611f6ceb28d9c199d0d",
+    "hash": "9f15a2c0b7ba0618e44ea089027eb77dad68c3dc2c6d2bfbc9d0c2d7cd2a63a3",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "List Pages",
@@ -31778,7 +31778,7 @@
     "inputs": [
       {
         "name": "api_token",
-        "type": "string",
+        "type": "secret",
         "value": null,
         "label": "Webflow API Token",
         "placeholder": "wfl_...",
@@ -31786,7 +31786,7 @@
       },
       {
         "name": "site_id",
-        "type": "string",
+        "type": "secret",
         "value": null,
         "label": "Site ID",
         "placeholder": "The Webflow site ID",
@@ -31832,7 +31832,7 @@
     ]
   },
   "webflow/list_sites": {
-    "hash": "56a87f0def20c1fb9601ec2da684daa831f17e114ce39629000f635a47e1f94f",
+    "hash": "37f6710e31274a7c50612e5cd27a91f933cd6ff2ead856da8de153789c832698",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "List Sites",
@@ -31849,7 +31849,7 @@
     "inputs": [
       {
         "name": "api_token",
-        "type": "string",
+        "type": "secret",
         "value": null,
         "label": "Webflow API Token",
         "placeholder": "wfl_...",
@@ -31895,7 +31895,7 @@
     ]
   },
   "webflow/publish_site": {
-    "hash": "ab3b99aebcaec5e3da0e9c8b633c11986e698d9f5cdfc0099c94149ef9a877e8",
+    "hash": "1c058cae056f83cd2e112295a4fc280c2359e02d953680de7d4c334c95bd9916",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Publish Site",
@@ -31912,7 +31912,7 @@
     "inputs": [
       {
         "name": "api_token",
-        "type": "string",
+        "type": "secret",
         "value": null,
         "label": "Webflow API Token",
         "placeholder": "wfl_...",
@@ -31920,7 +31920,7 @@
       },
       {
         "name": "site_id",
-        "type": "string",
+        "type": "secret",
         "value": null,
         "label": "Site ID",
         "placeholder": "The Webflow site ID",
@@ -31959,7 +31959,7 @@
     ]
   },
   "webflow/update_collection_item": {
-    "hash": "5d6259f2c725e3a97b5b6af0febe8c3b13264d8368b00f05349370d0cd78144c",
+    "hash": "82da70f628b2f24a00280912b52953790265d3201f29484d52b83317ecddd127",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Update Collection Item",
@@ -31976,7 +31976,7 @@
     "inputs": [
       {
         "name": "api_token",
-        "type": "string",
+        "type": "secret",
         "value": null,
         "label": "Webflow API Token",
         "placeholder": "wfl_...",
@@ -31984,7 +31984,7 @@
       },
       {
         "name": "collection_id",
-        "type": "string",
+        "type": "secret",
         "value": null,
         "label": "Collection ID",
         "placeholder": "The collection ID",
@@ -32046,7 +32046,7 @@
     ]
   },
   "webflow/update_page_content": {
-    "hash": "d63dd2a2627ec6af82977d13f4ee0e4cd566080ccb2824f71959999d29c580ab",
+    "hash": "f7ce39affeb6b76fb4aa071cd0c9e1d3a23ccd72711f590283bdc38f0f703560",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Update Page Content",
@@ -32063,7 +32063,7 @@
     "inputs": [
       {
         "name": "api_token",
-        "type": "string",
+        "type": "secret",
         "value": null,
         "label": "Webflow API Token",
         "placeholder": "wfl_...",
@@ -32071,7 +32071,7 @@
       },
       {
         "name": "page_id",
-        "type": "string",
+        "type": "secret",
         "value": null,
         "label": "Page ID",
         "placeholder": "The page ID",
@@ -32119,7 +32119,7 @@
     ]
   },
   "webflow/update_page_metadata": {
-    "hash": "f5269c616e6c4a8c6dfe088e0fe1f97694068e4874ee7f7bfb87df79b1790c4e",
+    "hash": "9bc2f161e7bfc9035584beb94eca2c1b1266313c782265afe605c05621a2e523",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Update Page Metadata",
@@ -32136,7 +32136,7 @@
     "inputs": [
       {
         "name": "api_token",
-        "type": "string",
+        "type": "secret",
         "value": null,
         "label": "Webflow API Token",
         "placeholder": "wfl_...",
@@ -32144,7 +32144,7 @@
       },
       {
         "name": "page_id",
-        "type": "string",
+        "type": "secret",
         "value": null,
         "label": "Page ID",
         "placeholder": "The page ID",

@@ -19,7 +19,7 @@ const (
 )
 
 var Inputs = [...]core.Connection{
-	{Name: "webhook_secret", Type: core.ConnectionTypeString, Label: "Webhook Secret Token", Placeholder: "Shared secret for X-Gitlab-Token validation", Required: true},
+	{Name: "webhook_secret", Type: core.ConnectionTypeSecret, Label: "Webhook Secret Token", Placeholder: "Shared secret for X-Gitlab-Token validation", Required: true},
 	{Name: "event_filter", Type: core.ConnectionTypeString, Label: "Event Filter", Placeholder: "Comma-separated: push,merge_request,note,pipeline,tag_push"},
 }
 

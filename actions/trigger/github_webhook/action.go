@@ -19,7 +19,7 @@ const (
 )
 
 var Inputs = [...]core.Connection{
-	{Name: "webhook_secret", Type: core.ConnectionTypeString, Label: "Webhook Secret", Placeholder: "HMAC secret for X-Hub-Signature-256 validation", Required: true},
+	{Name: "webhook_secret", Type: core.ConnectionTypeSecret, Label: "Webhook Secret", Placeholder: "HMAC secret for X-Hub-Signature-256 validation", Required: true},
 	{Name: "event_filter", Type: core.ConnectionTypeString, Label: "Event Filter", Placeholder: "Comma-separated: push,pull_request,issue_comment,workflow_run"},
 }
 

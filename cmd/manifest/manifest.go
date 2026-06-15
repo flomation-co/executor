@@ -289,6 +289,10 @@ func inspectPackage(dir string) map[string]ManifestEntry {
 										value = "datetime"
 									case "ConnectionTypeMultiSelect":
 										value = "multi_select"
+									case "ConnectionTypeCredential":
+										value = "credential"
+									case "ConnectionTypeSecret":
+										value = "secret"
 									}
 								case *ast.Ident:
 									if v.Name == "true" {

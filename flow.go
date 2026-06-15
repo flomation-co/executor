@@ -152,6 +152,26 @@ const (
 	ConnectionTypeKeyValueArray = "key_value_array"
 	ConnectionTypeDateTime      = "datetime"
 	ConnectionTypeMultiSelect   = "multi_select"
+
+	// ConnectionTypeCredential / ConnectionTypeSecret are picker-only
+	// input types in the editor. They render a CredentialProperty
+	// constrained to the environment's managed credentials and
+	// secrets respectively — no raw text entry — so a user can't
+	// accidentally paste a literal token into a saved flow.
+	//
+	// The semantic difference:
+	//
+	//   * Credential — only managed credentials (${credentials.X}).
+	//     OAuth-refreshed providers like Google, Microsoft, Slack.
+	//     Use for fields where the platform owns the token lifecycle.
+	//
+	//   * Secret — managed credentials AND environment secrets
+	//     (${secrets.X}). A managed credential satisfies a secret
+	//     slot because both resolve to a token at run-time; the
+	//     reverse is not true. Use for bot tokens, API keys, and
+	//     any long-lived literal the user pastes into the environment.
+	ConnectionTypeCredential = "credential"
+	ConnectionTypeSecret     = "secret"
 )
 
 type Action func(flow *Flow, node *Node, inputs []*Connection) (map[string]interface{}, error)

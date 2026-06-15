@@ -17,7 +17,7 @@ const (
 )
 
 var Inputs = [...]core.Connection{
-	{Name: "access_token", Type: core.ConnectionTypeString, Label: "LinkedIn Access Token", Placeholder: "${credentials.linkedin}", Required: true},
+	{Name: "access_token", Type: core.ConnectionTypeSecret, Label: "LinkedIn Access Token", Placeholder: "${credentials.linkedin}", Required: true},
 	{Name: "post_urn", Type: core.ConnectionTypeString, Label: "Post URN", Placeholder: "urn:li:share:12345", Required: true},
 	{Name: "event_filter", Type: core.ConnectionTypeString, Label: "Event Filter", Placeholder: "comment,reaction"},
 	{Name: "poll_interval", Type: core.ConnectionTypeString, Label: "Poll Interval (seconds)", Placeholder: "300"},

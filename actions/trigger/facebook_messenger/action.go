@@ -18,8 +18,8 @@ const (
 
 var Inputs = [...]core.Connection{
 	{Name: "page_id", Type: core.ConnectionTypeString, Label: "Facebook Page ID", Placeholder: "Your Facebook Page ID", Required: true},
-	{Name: "access_token", Type: core.ConnectionTypeString, Label: "Facebook User Token", Placeholder: "${credentials.facebook}", Required: true},
-	{Name: "app_secret", Type: core.ConnectionTypeString, Label: "App Secret", Placeholder: "${secrets.facebook_app_secret}"},
+	{Name: "access_token", Type: core.ConnectionTypeSecret, Label: "Facebook User Token", Placeholder: "${credentials.facebook}", Required: true},
+	{Name: "app_secret", Type: core.ConnectionTypeSecret, Label: "App Secret", Placeholder: "${secrets.facebook_app_secret}"},
 }
 
 var Outputs = [...]core.Connection{
@@ -27,7 +27,7 @@ var Outputs = [...]core.Connection{
 	{Name: "message_text", Type: core.ConnectionTypeString, Label: "Message Text"},
 	{Name: "message_id", Type: core.ConnectionTypeString, Label: "Message ID"},
 	{Name: "page_id", Type: core.ConnectionTypeString, Label: "Page ID"},
-	{Name: "page_access_token", Type: core.ConnectionTypeString, Label: "Page Access Token"},
+	{Name: "page_access_token", Type: core.ConnectionTypeSecret, Label: "Page Access Token"},
 	{Name: "timestamp", Type: core.ConnectionTypeString, Label: "Timestamp"},
 	{Name: "has_attachments", Type: core.ConnectionTypeBoolean, Label: "Has Attachments"},
 	{Name: "is_postback", Type: core.ConnectionTypeBoolean, Label: "Is Postback"},

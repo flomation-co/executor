@@ -23,7 +23,7 @@ const (
 var Inputs = [...]core.Connection{
 	{Name: "team_id", Type: core.ConnectionTypeString, Label: "Team ID", Required: true},
 	{Name: "account", Type: core.ConnectionTypeString, Label: "Microsoft Account (email)"},
-	{Name: "credential", Type: core.ConnectionTypeString, Label: "Microsoft OAuth Credential", Placeholder: "${credentials.MICROSOFT_TEAMS}"},
+	{Name: "credential", Type: core.ConnectionTypeCredential, Label: "Microsoft OAuth Credential", Placeholder: "${credentials.MICROSOFT_TEAMS}"},
 }
 
 var Outputs = [...]core.Connection{

@@ -23,14 +23,14 @@ const (
 var Inputs = [...]core.Connection{
 	{
 		Name:        "api_token",
-		Type:        core.ConnectionTypeString,
+		Type:        core.ConnectionTypeSecret,
 		Label:       "Webflow API Token",
 		Placeholder: "wfl_...",
 		Required:    true,
 	},
 	{
 		Name:        "collection_id",
-		Type:        core.ConnectionTypeString,
+		Type:        core.ConnectionTypeSecret,
 		Label:       "Collection ID",
 		Placeholder: "The collection ID",
 		Required:    true,

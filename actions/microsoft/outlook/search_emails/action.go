@@ -27,7 +27,7 @@ const (
 var Inputs = [...]core.Connection{
 	{Name: "query", Type: core.ConnectionTypeString, Label: "Search Query", Required: true},
 	{Name: "account", Type: core.ConnectionTypeString, Label: "Microsoft Account (email)"},
-	{Name: "credential", Type: core.ConnectionTypeString, Label: "Microsoft OAuth Credential", Placeholder: "${credentials.MICROSOFT_OUTLOOK}"},
+	{Name: "credential", Type: core.ConnectionTypeCredential, Label: "Microsoft OAuth Credential", Placeholder: "${credentials.MICROSOFT_OUTLOOK}"},
 	{Name: "max_results", Type: core.ConnectionTypeInteger, Label: "Maximum Results"},
 }
 

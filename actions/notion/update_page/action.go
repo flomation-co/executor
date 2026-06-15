@@ -20,7 +20,7 @@ const (
 )
 
 var Inputs = [...]core.Connection{
-	{Name: "api_key", Type: core.ConnectionTypeString, Label: "Notion Integration Token", Placeholder: "ntn_...", Required: true},
+	{Name: "api_key", Type: core.ConnectionTypeSecret, Label: "Notion Integration Token", Placeholder: "ntn_...", Required: true},
 	{Name: "page_id", Type: core.ConnectionTypeString, Label: "Page ID", Required: true},
 	{Name: "properties_json", Type: core.ConnectionTypeText, Label: "Properties (JSON)", Placeholder: "{\"Status\": {\"select\": {\"name\": \"Done\"}}}", Required: true},
 	{Name: "archived", Type: core.ConnectionTypeBoolean, Label: "Archive Page"},

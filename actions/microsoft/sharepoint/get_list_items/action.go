@@ -25,7 +25,7 @@ var Inputs = [...]core.Connection{
 	{Name: "list_id", Type: core.ConnectionTypeString, Label: "List ID", Required: true},
 	{Name: "max_results", Type: core.ConnectionTypeInteger, Label: "Max Results"},
 	{Name: "account", Type: core.ConnectionTypeString, Label: "Microsoft Account (email)"},
-	{Name: "credential", Type: core.ConnectionTypeString, Label: "Microsoft OAuth Credential", Placeholder: "${credentials.MICROSOFT_SHAREPOINT}"},
+	{Name: "credential", Type: core.ConnectionTypeCredential, Label: "Microsoft OAuth Credential", Placeholder: "${credentials.MICROSOFT_SHAREPOINT}"},
 }
 
 var Outputs = [...]core.Connection{

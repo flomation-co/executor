@@ -35,14 +35,14 @@ const (
 var Inputs = [...]core.Connection{
 	{
 		Name:        "api_key",
-		Type:        core.ConnectionTypeString,
+		Type:        core.ConnectionTypeSecret,
 		Label:       "API Key",
 		Placeholder: "sk-ant-...",
 		Required:    true,
 	},
 	{
 		Name:  "model",
-		Type:  core.ConnectionTypeString,
+		Type:        core.ConnectionTypeSecret,
 		Label: "Model",
 		Options: []core.ConnectionOption{
 			{Name: "Claude Sonnet 4.6", Value: "claude-sonnet-4-6"},

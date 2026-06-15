@@ -30,7 +30,7 @@ var Inputs = [...]core.Connection{
 	{Name: "filename", Type: core.ConnectionTypeString, Label: "Filename", Required: true, Placeholder: "report.xlsx"},
 	{Name: "folder_path", Type: core.ConnectionTypeString, Label: "Folder Path", Placeholder: "Documents/Reports"},
 	{Name: "account", Type: core.ConnectionTypeString, Label: "Microsoft Account (email)"},
-	{Name: "credential", Type: core.ConnectionTypeString, Label: "Microsoft OAuth Credential", Placeholder: "${credentials.MICROSOFT_EXCEL}"},
+	{Name: "credential", Type: core.ConnectionTypeCredential, Label: "Microsoft OAuth Credential", Placeholder: "${credentials.MICROSOFT_EXCEL}"},
 }
 
 var Outputs = [...]core.Connection{

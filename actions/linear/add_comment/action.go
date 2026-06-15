@@ -22,14 +22,14 @@ const (
 var Inputs = [...]core.Connection{
 	{
 		Name:        "api_key",
-		Type:        core.ConnectionTypeString,
+		Type:        core.ConnectionTypeSecret,
 		Label:       "Linear API Key",
 		Placeholder: "lin_api_...",
 		Required:    true,
 	},
 	{
 		Name:        "issue_id",
-		Type:        core.ConnectionTypeString,
+		Type:        core.ConnectionTypeSecret,
 		Label:       "Issue ID",
 		Placeholder: "Issue UUID",
 		Required:    true,

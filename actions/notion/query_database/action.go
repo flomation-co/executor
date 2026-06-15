@@ -21,7 +21,7 @@ const (
 )
 
 var Inputs = [...]core.Connection{
-	{Name: "api_key", Type: core.ConnectionTypeString, Label: "Notion Integration Token", Placeholder: "ntn_...", Required: true},
+	{Name: "api_key", Type: core.ConnectionTypeSecret, Label: "Notion Integration Token", Placeholder: "ntn_...", Required: true},
 	{Name: "database_id", Type: core.ConnectionTypeString, Label: "Database ID", Required: true},
 	{Name: "filter_json", Type: core.ConnectionTypeText, Label: "Filter (JSON)", Placeholder: "{\"property\": \"Status\", \"select\": {\"equals\": \"Done\"}}"},
 	{Name: "sorts_json", Type: core.ConnectionTypeText, Label: "Sorts (JSON array)", Placeholder: "[{\"property\": \"Created\", \"direction\": \"descending\"}]"},

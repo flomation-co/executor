@@ -30,7 +30,7 @@ var Inputs = [...]core.Connection{
 	{Name: "mime_type", Type: core.ConnectionTypeString, Label: "MIME Type", Placeholder: "text/plain"},
 	{Name: "folder_id", Type: core.ConnectionTypeString, Label: "Destination Folder ID"},
 	{Name: "account", Type: core.ConnectionTypeString, Label: "Google Account (email)"},
-	{Name: "credential", Type: core.ConnectionTypeString, Label: "Google OAuth Credential", Placeholder: "${credentials.GOOGLE_DRIVE}"},
+	{Name: "credential", Type: core.ConnectionTypeCredential, Label: "Google OAuth Credential", Placeholder: "${credentials.GOOGLE_DRIVE}"},
 }
 
 var Outputs = [...]core.Connection{

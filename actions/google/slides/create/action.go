@@ -25,7 +25,7 @@ const (
 var Inputs = [...]core.Connection{
 	{Name: "title", Type: core.ConnectionTypeString, Label: "Title", Required: true, Placeholder: "My Presentation"},
 	{Name: "account", Type: core.ConnectionTypeString, Label: "Google Account (email)"},
-	{Name: "credential", Type: core.ConnectionTypeString, Label: "Google OAuth Credential", Placeholder: "${credentials.GOOGLE_DRIVE}"},
+	{Name: "credential", Type: core.ConnectionTypeCredential, Label: "Google OAuth Credential", Placeholder: "${credentials.GOOGLE_DRIVE}"},
 }
 
 var Outputs = [...]core.Connection{

@@ -24,7 +24,7 @@ var Inputs = [...]core.Connection{
 	{Name: "name", Type: core.ConnectionTypeString, Label: "Folder Name", Required: true},
 	{Name: "parent_id", Type: core.ConnectionTypeString, Label: "Parent Folder ID", Placeholder: "Leave empty for root"},
 	{Name: "account", Type: core.ConnectionTypeString, Label: "Microsoft Account (email)"},
-	{Name: "credential", Type: core.ConnectionTypeString, Label: "Microsoft OAuth Credential", Placeholder: "${credentials.MICROSOFT_ONEDRIVE}"},
+	{Name: "credential", Type: core.ConnectionTypeCredential, Label: "Microsoft OAuth Credential", Placeholder: "${credentials.MICROSOFT_ONEDRIVE}"},
 }
 
 var Outputs = [...]core.Connection{

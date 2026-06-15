@@ -18,8 +18,8 @@ const (
 
 var Inputs = [...]core.Connection{
 	{Name: "page_id", Type: core.ConnectionTypeString, Label: "Facebook Page ID", Placeholder: "Your Facebook Page ID", Required: true},
-	{Name: "access_token", Type: core.ConnectionTypeString, Label: "Facebook User Token", Placeholder: "${credentials.facebook}", Required: true},
-	{Name: "app_secret", Type: core.ConnectionTypeString, Label: "App Secret", Placeholder: "${secrets.facebook_app_secret}"},
+	{Name: "access_token", Type: core.ConnectionTypeSecret, Label: "Facebook User Token", Placeholder: "${credentials.facebook}", Required: true},
+	{Name: "app_secret", Type: core.ConnectionTypeSecret, Label: "App Secret", Placeholder: "${secrets.facebook_app_secret}"},
 	{Name: "event_filter", Type: core.ConnectionTypeString, Label: "Event Filter", Placeholder: "comment,reaction,post,share"},
 }
 
@@ -34,7 +34,7 @@ var Outputs = [...]core.Connection{
 	{Name: "message", Type: core.ConnectionTypeString, Label: "Content"},
 	{Name: "reaction_type", Type: core.ConnectionTypeString, Label: "Reaction Type"},
 	{Name: "page_id", Type: core.ConnectionTypeString, Label: "Page ID"},
-	{Name: "page_access_token", Type: core.ConnectionTypeString, Label: "Page Access Token"},
+	{Name: "page_access_token", Type: core.ConnectionTypeSecret, Label: "Page Access Token"},
 	{Name: "triggered_at", Type: core.ConnectionTypeString, Label: "Triggered At"},
 }
 

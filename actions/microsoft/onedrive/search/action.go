@@ -28,7 +28,7 @@ var Inputs = [...]core.Connection{
 	{Name: "query", Type: core.ConnectionTypeString, Label: "Search Query", Required: true},
 	{Name: "max_results", Type: core.ConnectionTypeInteger, Label: "Maximum Results"},
 	{Name: "account", Type: core.ConnectionTypeString, Label: "Microsoft Account (email)"},
-	{Name: "credential", Type: core.ConnectionTypeString, Label: "Microsoft OAuth Credential", Placeholder: "${credentials.MICROSOFT_ONEDRIVE}"},
+	{Name: "credential", Type: core.ConnectionTypeCredential, Label: "Microsoft OAuth Credential", Placeholder: "${credentials.MICROSOFT_ONEDRIVE}"},
 }
 
 var Outputs = [...]core.Connection{

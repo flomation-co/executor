@@ -21,7 +21,7 @@ const (
 )
 
 var Inputs = [...]core.Connection{
-	{Name: "api_key", Type: core.ConnectionTypeString, Label: "Notion Integration Token", Placeholder: "ntn_...", Required: true},
+	{Name: "api_key", Type: core.ConnectionTypeSecret, Label: "Notion Integration Token", Placeholder: "ntn_...", Required: true},
 	{Name: "query", Type: core.ConnectionTypeString, Label: "Search Query", Required: true},
 	{Name: "filter_type", Type: core.ConnectionTypeString, Label: "Filter Type", Options: []core.ConnectionOption{
 		{Name: "All", Value: ""},
