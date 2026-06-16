@@ -60,7 +60,7 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	token := active[0]
 
 	// Get current parents
-	metaURL := fmt.Sprintf("%s/files/%s?fields=parents", driveAPI, fileID)
+	metaURL := google.AppendDriveSingleFileQS(fmt.Sprintf("%s/files/%s?fields=parents", driveAPI, fileID))
 	status, metaBody, err := google.DoRequest(flow, "GET", metaURL, token.AccessToken, nil)
 	if err != nil {
 		return google.ErrorResult(err.Error())
@@ -85,8 +85,9 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 		}
 	}
 
-	endpoint := fmt.Sprintf("%s/files/%s?addParents=%s&removeParents=%s&fields=id,name,parents,webViewLink",
-		driveAPI, fileID, destFolder, removeParents)
+	endpoint := google.AppendDriveSingleFileQS(fmt.Sprintf(
+		"%s/files/%s?addParents=%s&removeParents=%s&fields=id,name,parents,webViewLink",
+		driveAPI, fileID, destFolder, removeParents))
 
 	status, body, err := google.DoRequest(flow, "PATCH", endpoint, token.AccessToken, nil)
 	if err != nil {

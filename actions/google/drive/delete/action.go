@@ -59,11 +59,11 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	var body []byte
 
 	if permanent {
-		endpoint := fmt.Sprintf("%s/files/%s", driveAPI, fileID)
+		endpoint := google.AppendDriveSingleFileQS(fmt.Sprintf("%s/files/%s", driveAPI, fileID))
 		status, body, err = google.DoRequest(flow, "DELETE", endpoint, token.AccessToken, nil)
 	} else {
 		// Trash: update the trashed property
-		endpoint := fmt.Sprintf("%s/files/%s", driveAPI, fileID)
+		endpoint := google.AppendDriveSingleFileQS(fmt.Sprintf("%s/files/%s", driveAPI, fileID))
 		payload, _ := json.Marshal(map[string]interface{}{"trashed": true})
 		status, body, err = google.DoRequest(flow, "PATCH", endpoint, token.AccessToken, payload)
 	}

@@ -20,7 +20,10 @@ const (
 	Date         = "01/06/2026"
 	Type         = core.ActionTypeAction
 
-	uploadAPI = "https://www.googleapis.com/upload/drive/v3/files?uploadType=multipart"
+	// supportsAllDrives=true lets the upload land into a shared
+	// drive when the parents in the metadata point at one — without
+	// it, uploads scoped to a shared drive folder are rejected.
+	uploadAPI = "https://www.googleapis.com/upload/drive/v3/files?uploadType=multipart&supportsAllDrives=true"
 )
 
 var Inputs = [...]core.Connection{

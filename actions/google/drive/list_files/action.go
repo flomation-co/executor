@@ -83,6 +83,10 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	params.Set("pageSize", fmt.Sprintf("%d", maxResults))
 	params.Set("fields", "files(id,name,mimeType,size,modifiedTime,createdTime,parents,webViewLink,iconLink)")
 	params.Set("orderBy", "modifiedTime desc")
+	// Include files outside My Drive — shared drives + items
+	// individually shared with the user. Default corpus is
+	// allDrives (widest possible scope).
+	google.AppendDriveListParams(params, "")
 
 	endpoint := fmt.Sprintf("%s/files?%s", driveAPI, params.Encode())
 

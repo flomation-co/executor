@@ -66,7 +66,7 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	}
 	body, _ := json.Marshal(metadata)
 
-	endpoint := fmt.Sprintf("%s/files", driveAPI)
+	endpoint := google.AppendDriveSingleFileQS(fmt.Sprintf("%s/files", driveAPI))
 	status, respBody, err := google.DoRequest(flow, "POST", endpoint, token.AccessToken, body)
 	if err != nil {
 		return google.ErrorResult(err.Error())

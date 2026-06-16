@@ -86,7 +86,7 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	token := active[0]
 
 	// First, get file metadata to determine if it's a Google-native file
-	metaURL := fmt.Sprintf("%s/files/%s?fields=mimeType,name,size", driveAPI, fileID)
+	metaURL := google.AppendDriveSingleFileQS(fmt.Sprintf("%s/files/%s?fields=mimeType,name,size", driveAPI, fileID))
 	status, metaBody, err := google.DoRequest(flow, "GET", metaURL, token.AccessToken, nil)
 	if err != nil {
 		return google.ErrorResult(err.Error())
@@ -121,11 +121,11 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 		if !ok {
 			return google.ErrorResult(fmt.Sprintf("unsupported export format: %s", exportFormat))
 		}
-		downloadURL = fmt.Sprintf("%s/files/%s/export?mimeType=%s", driveAPI, fileID, url.QueryEscape(exportMime))
+		downloadURL = google.AppendDriveSingleFileQS(fmt.Sprintf("%s/files/%s/export?mimeType=%s", driveAPI, fileID, url.QueryEscape(exportMime)))
 		responseMimeType = exportMime
 	} else {
 		// Direct download for non-Google files
-		downloadURL = fmt.Sprintf("%s/files/%s?alt=media", driveAPI, fileID)
+		downloadURL = google.AppendDriveSingleFileQS(fmt.Sprintf("%s/files/%s?alt=media", driveAPI, fileID))
 		responseMimeType = meta.MimeType
 	}
 

@@ -49,6 +49,23 @@ var Inputs = [...]core.Connection{
 		},
 	},
 	{Name: "content", Type: core.ConnectionTypeString, Label: "Content Contains", Placeholder: "keyword"},
+	{
+		// scope narrows the search corpus. Default is "all" which
+		// covers My Drive + shared-with-me + shared drives — the
+		// behaviour most agents expect ("find anything the user
+		// can see"). Narrow to my_drive when you specifically
+		// only want files the user owns. Narrow to shared_with_me
+		// to discover items individually shared to the user.
+		Name:  "scope",
+		Type:  core.ConnectionTypeString,
+		Label: "Search Scope",
+		Options: []core.ConnectionOption{
+			{Name: "Everything I can access (default)", Value: "all"},
+			{Name: "My Drive only", Value: "my_drive"},
+			{Name: "Shared with me only", Value: "shared_with_me"},
+			{Name: "Shared drives only", Value: "shared_drives"},
+		},
+	},
 	{Name: "max_results", Type: core.ConnectionTypeInteger, Label: "Max Results", Placeholder: "20"},
 	{Name: "account", Type: core.ConnectionTypeString, Label: "Google Account (email)"},
 	{Name: "credential", Type: core.ConnectionTypeCredential, Label: "Google OAuth Credential", Placeholder: "${credentials.GOOGLE_DRIVE}"},
@@ -66,6 +83,7 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	nameFilter := google.OptStr("name", inputs)
 	mimeTypeKey := google.OptStr("mime_type", inputs)
 	contentFilter := google.OptStr("content", inputs)
+	scope := google.OptStr("scope", inputs)
 	maxResults := google.OptInt("max_results", inputs, 20)
 	credential := google.OptStr("credential", inputs)
 	account := google.OptStr("account", inputs)
@@ -106,11 +124,28 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	}
 	qParts = append(qParts, "trashed = false")
 
+	// Scope translates user-facing options into Google Drive API
+	// corpora + q-clause modifiers. See AppendDriveListParams for
+	// the explanation of corpora vs my-drive vs shared. The
+	// "shared_with_me" path is the only one that needs an extra
+	// q-clause — the others are pure corpus selection.
+	corpora := "allDrives"
+	switch scope {
+	case "my_drive":
+		corpora = "user"
+	case "shared_drives":
+		corpora = "drive"
+	case "shared_with_me":
+		corpora = "user"
+		qParts = append(qParts, "sharedWithMe = true")
+	}
+
 	params := url.Values{}
 	params.Set("q", strings.Join(qParts, " and "))
 	params.Set("pageSize", fmt.Sprintf("%d", maxResults))
 	params.Set("fields", "files(id,name,mimeType,size,modifiedTime,webViewLink)")
 	params.Set("orderBy", "modifiedTime desc")
+	google.AppendDriveListParams(params, corpora)
 
 	endpoint := fmt.Sprintf("%s/files?%s", driveAPI, params.Encode())
 

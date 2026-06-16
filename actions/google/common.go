@@ -12,6 +12,7 @@ import (
 	"fmt"
 	"io"
 	"net/http"
+	"net/url"
 	"strings"
 	"time"
 
@@ -306,4 +307,62 @@ func OptInt(name string, inputs []*core.Connection, defaultVal int) int {
 // OptBool extracts an optional boolean input value.
 func OptBool(name string, inputs []*core.Connection) bool {
 	return OptStr(name, inputs) == "true"
+}
+
+// ─── Drive shared-files helpers ────────────────────────────────────
+//
+// Google Drive's files.list / files.get / files.update endpoints
+// default to "user's My Drive only" — silently dropping any file
+// that's been shared with the user but lives outside their own
+// drive. The fix is two-or-three parameters that opt into the
+// broader corpus:
+//
+//   - supportsAllDrives=true            (REQUIRED for any single-
+//                                        file op that could touch
+//                                        a shared drive)
+//   - includeItemsFromAllDrives=true    (only for list/search —
+//                                        actually shows the shared
+//                                        items in the response)
+//   - corpora=allDrives                 (only for list/search —
+//                                        widens the scope from
+//                                        "user" to "everything")
+//
+// AppendDriveSingleFileParams adds the minimum needed for any
+// operation that targets a specific file ID (get, download, copy,
+// delete, move, share, etc.) — just supportsAllDrives.
+//
+// AppendDriveListParams adds the full triple for list / search
+// queries, accepting a "corpora" hint so the caller can narrow
+// (e.g. to just shared-with-me) when needed.
+
+// AppendDriveSingleFileParams adds the supportsAllDrives flag to
+// a query string. Use on any endpoint that references a specific
+// file ID. Safe to call multiple times — the flag is idempotent.
+func AppendDriveSingleFileParams(params url.Values) {
+	params.Set("supportsAllDrives", "true")
+}
+
+// AppendDriveListParams adds the three params needed for a list
+// or search query to return files outside the user's My Drive.
+// Pass "" for corpora to use the default "allDrives" — the widest
+// possible scope.
+func AppendDriveListParams(params url.Values, corpora string) {
+	params.Set("supportsAllDrives", "true")
+	params.Set("includeItemsFromAllDrives", "true")
+	if corpora == "" {
+		corpora = "allDrives"
+	}
+	params.Set("corpora", corpora)
+}
+
+// AppendDriveSingleFileQS appends ?supportsAllDrives=true (or
+// &supportsAllDrives=true if the URL already has a query string)
+// to a URL string built without url.Values. Used by call sites
+// that construct their URL inline rather than via url.Values.
+func AppendDriveSingleFileQS(rawURL string) string {
+	sep := "?"
+	if strings.Contains(rawURL, "?") {
+		sep = "&"
+	}
+	return rawURL + sep + "supportsAllDrives=true"
 }
