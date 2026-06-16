@@ -42,7 +42,7 @@ var Inputs = [...]core.Connection{
 		Name:        "channel_id",
 		Type:        core.ConnectionTypeSecret,
 		Label:       "Chat/Channel ID",
-		Placeholder: "${channel_id}",
+		Placeholder: "${flow.channel_id}",
 		Required:    true,
 	},
 	{
@@ -75,6 +75,11 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	channelID := optionalString("channel_id", inputs)
 	if channelID == "" {
 		return errResult("channel_id is required")
+	}
+	// Reject unresolved template variables — they'd otherwise be persisted
+	// as a literal string into agent_conversation.channel_id.
+	if strings.HasPrefix(channelID, "${") || strings.HasPrefix(channelID, "#{") {
+		return errResult(fmt.Sprintf("channel_id contains an unresolved template variable: %q — try ${flow.channel_id}", channelID))
 	}
 
 	audioB64 := optionalString("audio_base64", inputs)

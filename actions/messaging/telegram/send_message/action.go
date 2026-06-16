@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"io"
 	"net/http"
+	"strings"
 
 	core "flomation.app/automate/executor"
 )
@@ -36,7 +37,7 @@ var Inputs = [...]core.Connection{
 		Name:        "channel_id",
 		Type:        core.ConnectionTypeSecret,
 		Label:       "Channel ID",
-		Placeholder: "${channel_id}",
+		Placeholder: "${flow.channel_id}",
 		Required:    true,
 	},
 	{
@@ -82,6 +83,17 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 		return nil, fmt.Errorf("channel_id is required")
 	}
 	chatID := *chatIDConn.String()
+
+	// Guard against unresolved template variables ("${channel_id}",
+	// "${chat_id}", "#{channel_id}", etc.) leaking through to Telegram's
+	// API and being persisted as a literal string into agent_conversation.
+	// These appear when a flow declares a placeholder using the wrong
+	// namespace (e.g. ${channel_id} instead of ${flow.channel_id}) — the
+	// substitution loop in flow.go silently leaves the literal in place
+	// rather than erroring, so we must catch it here.
+	if strings.HasPrefix(chatID, "${") || strings.HasPrefix(chatID, "#{") {
+		return nil, fmt.Errorf("channel_id contains an unresolved template variable: %q — flow author likely used the wrong namespace (try ${flow.channel_id})", chatID)
+	}
 
 	messageConn := core.FindConnection("message", inputs)
 	if messageConn == nil || messageConn.String() == nil || *messageConn.String() == "" {
@@ -145,7 +157,7 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 		} `json:"result"`
 		Description string `json:"description"`
 	}
-	json.Unmarshal(respBody, &result)
+	_ = json.Unmarshal(respBody, &result)
 
 	if !result.OK {
 		return map[string]interface{}{

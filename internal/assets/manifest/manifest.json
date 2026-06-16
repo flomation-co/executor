@@ -125,7 +125,7 @@
     ]
   },
   "agent/create_schedule": {
-    "hash": "d56e071b80c628b5d332d171a7d4331861fe58fd0230f73e81e0a1a85bdacb7a",
+    "hash": "e1d140190f0bf299d22a6a8a1c3d7cbcaae56aa1ad4dec3b3ed420a3ac124e34",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Create Schedule",
@@ -17330,7 +17330,7 @@
     ]
   },
   "messaging/telegram/send_message": {
-    "hash": "febf114525ad63640cc0e6bf6d2c342894e6f89490cbec046ef2db6721ee21af",
+    "hash": "5d66a9d0e4e811bc7e484f124d56d48dc6db2f08d9631c880dfa6fbf854cf22f",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Send Telegram Message",
@@ -17363,7 +17363,7 @@
         "type": "secret",
         "value": null,
         "label": "Channel ID",
-        "placeholder": "${channel_id}",
+        "placeholder": "${flow.channel_id}",
         "required": true
       },
       {
@@ -17428,7 +17428,7 @@
     ]
   },
   "messaging/telegram/send_voice": {
-    "hash": "50c26fff0e26185352a7082ab95d920d5d0a5f2a50241a210436f6824bab9475",
+    "hash": "a6fe0a6fe41fe363c23f8582ebe443331a33e76586afea2b4054746beb026118",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Send Telegram Voice",
@@ -17461,7 +17461,7 @@
         "type": "secret",
         "value": null,
         "label": "Chat/Channel ID",
-        "placeholder": "${channel_id}",
+        "placeholder": "${flow.channel_id}",
         "required": true
       },
       {

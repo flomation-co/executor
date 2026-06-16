@@ -90,11 +90,31 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 		"schedule_mode": mode,
 	}
 
-	if v := optionalString("agent_user_id", inputs); v != "" {
-		payload["agent_user_id"] = v
+	// Default identity/conversation/channel inputs from the executing flow's
+	// context when the AI omits them. Placeholder text on the Inputs is just
+	// a UI hint — it doesn't auto-substitute — so without these fall-backs
+	// the resulting agent_schedule row has conversation_id, agent_user_id,
+	// and source_channel as NULL, and the schedule poller has no anchor
+	// for context loading when it later fires.
+	agentUserID := optionalString("agent_user_id", inputs)
+	convID := optionalString("conversation_id", inputs)
+	sourceChannel := optionalString("source_channel", inputs)
+	if ctx != nil {
+		if agentUserID == "" && ctx.AgentUserID != "" {
+			agentUserID = ctx.AgentUserID
+		}
+		if convID == "" && ctx.ConversationID != "" {
+			convID = ctx.ConversationID
+		}
+		if sourceChannel == "" && ctx.ChannelType != "" {
+			sourceChannel = ctx.ChannelType
+		}
 	}
-	if v := optionalString("conversation_id", inputs); v != "" {
-		payload["conversation_id"] = v
+	if agentUserID != "" {
+		payload["agent_user_id"] = agentUserID
+	}
+	if convID != "" {
+		payload["conversation_id"] = convID
 	}
 	if v := optionalString("time_of_day", inputs); v != "" {
 		payload["time_of_day"] = v
@@ -111,8 +131,8 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	if v := optionalString("timezone", inputs); v != "" {
 		payload["timezone"] = v
 	}
-	if v := optionalString("source_channel", inputs); v != "" {
-		payload["source_channel"] = v
+	if sourceChannel != "" {
+		payload["source_channel"] = sourceChannel
 	}
 
 	body, _ := json.Marshal(payload)
