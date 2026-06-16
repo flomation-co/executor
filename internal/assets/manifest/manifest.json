@@ -10902,7 +10902,7 @@
     ]
   },
   "google/drive/copy": {
-    "hash": "52848f77bf0f0fccd8a3075087443c3df35fa512b38bc280666d30b9ed8777ed",
+    "hash": "101effa52be6ae5c5c8881f14beb01d35c615932ba95099fca2c08a72921cab2",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Copy Drive File",
@@ -10998,7 +10998,7 @@
     ]
   },
   "google/drive/create_folder": {
-    "hash": "b48cbb4d355a454e9a31419515a2f37aaeff9b30593bc7a5100c9052fe8fa848",
+    "hash": "99e37d72219d03012f3f1431b954f4795c884e56242ac6deb4abe872448b8cd5",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Create Drive Folder",
@@ -11087,7 +11087,7 @@
     ]
   },
   "google/drive/delete": {
-    "hash": "3b4ba4196e17c2b4817e459710d624b05ec65f6e21cb0aa5d0bf5764e210cf71",
+    "hash": "99b6fd4f03d771f2d5bc7ee65b95d1cb60974611396b89e951f22385c83cdf53",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Delete Drive File",
@@ -11162,7 +11162,7 @@
     ]
   },
   "google/drive/download": {
-    "hash": "416e9c56463c6f42d53dc31817a7b54d883201ed06c74679703acc2727f42185",
+    "hash": "523d57be5679e62fdf5bdddb5965505e7aea1766037c69953c4f956c88f90832",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Download Drive File",
@@ -11284,7 +11284,7 @@
     ]
   },
   "google/drive/get_file": {
-    "hash": "ce618808bc982d2c0d30556bc7db5b299d77619880f9a5a2e592b55879f4369d",
+    "hash": "e2c90ef0262c97e9e46c86dfd4c30561a41b7f9c30a922c0fb0b0a3976e62f48",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Get Drive File",
@@ -11387,7 +11387,7 @@
     ]
   },
   "google/drive/list_files": {
-    "hash": "36072499fcad551c21e7313aeab66929bdf68b667438c53d26ca244072fdbed2",
+    "hash": "4c639fa5e2935fb60c55351e3c5c4d378fb6623abca8f19b3d3593be96ea3d70",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "List Drive Files",
@@ -11489,7 +11489,7 @@
     ]
   },
   "google/drive/move": {
-    "hash": "0d142e1d587b9c7c288d41725ff9cd79a7eca4a1af91e0e06c1f5d7ecb77b1a4",
+    "hash": "7285026e830d883555b68bfb3a63a71b8a8cefbb46a79a6cd7f27f2bba3928ed",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Move Drive File",
@@ -11572,7 +11572,7 @@
     ]
   },
   "google/drive/search": {
-    "hash": "96ca3e65c1941adc7ee4ff8a4929c902512cd0ddd6ecaf7f960bbbb13818c579",
+    "hash": "009f40e7afab8fae533223a7b09b1220bac0da1870c53e1374476160f47be516",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Search Drive",
@@ -11640,6 +11640,31 @@
         "placeholder": "keyword"
       },
       {
+        "name": "scope",
+        "type": "string",
+        "value": null,
+        "label": "Search Scope",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "Everything I can access (default)",
+            "value": "all"
+          },
+          {
+            "name": "My Drive only",
+            "value": "my_drive"
+          },
+          {
+            "name": "Shared with me only",
+            "value": "shared_with_me"
+          },
+          {
+            "name": "Shared drives only",
+            "value": "shared_drives"
+          }
+        ]
+      },
+      {
         "name": "max_results",
         "type": "integer",
         "value": null,
@@ -11700,7 +11725,7 @@
     ]
   },
   "google/drive/share": {
-    "hash": "1935d6b3e00e2047b47361e13082030d42b1b94494104230a730a9c0392d379c",
+    "hash": "b838e0ab6a92422fc08d976ca58947bb62d7083a6697b2cf0b650a9f6da45faa",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Share Drive File",
@@ -11832,7 +11857,7 @@
     ]
   },
   "google/drive/upload": {
-    "hash": "6584778f321f7e2a6c6fdda8fcefeec5430c1a8914f8cc09788bf4a8ff2d7b97",
+    "hash": "07d5d1eeefd1f453648ac7398e0597e9b1c936f4aa788bc035f6fea7e8ddd529",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Upload to Drive",
@@ -24285,7 +24310,7 @@
     ]
   },
   "script/javascript": {
-    "hash": "aff569e33091425743ce1fce6540a37d82aa727dd5a711ee5ebb8816363b8ab7",
+    "hash": "4d933171e134056c5e47863af9eb514330e645f24b713b8a226ca0c1c3bd4b0b",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Run JavaScript",
@@ -24375,7 +24400,7 @@
     ]
   },
   "script/python": {
-    "hash": "795329c4b976564bb62182af53d23abb5311eb71cf2b1fc2497e613b98f66877",
+    "hash": "464c90ac66109014725a99c28d66bd452cac9af855126fceabd18d99090d457f",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Run Python",

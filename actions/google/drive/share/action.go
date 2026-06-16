@@ -101,7 +101,7 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	}
 
 	body, _ := json.Marshal(perm)
-	endpoint := fmt.Sprintf("%s/files/%s/permissions?sendNotificationEmail=true", driveAPI, fileID)
+	endpoint := google.AppendDriveSingleFileQS(fmt.Sprintf("%s/files/%s/permissions?sendNotificationEmail=true", driveAPI, fileID))
 
 	status, respBody, err := google.DoRequest(flow, "POST", endpoint, token.AccessToken, body)
 	if err != nil {

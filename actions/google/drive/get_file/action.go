@@ -57,8 +57,9 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 		return google.ErrorResult("no active Google account available")
 	}
 
-	endpoint := fmt.Sprintf("%s/files/%s?fields=id,name,mimeType,size,modifiedTime,createdTime,owners,permissions,webViewLink,parents,description",
-		driveAPI, fileID)
+	endpoint := google.AppendDriveSingleFileQS(fmt.Sprintf(
+		"%s/files/%s?fields=id,name,mimeType,size,modifiedTime,createdTime,owners,permissions,webViewLink,parents,description",
+		driveAPI, fileID))
 
 	token := active[0]
 	status, body, err := google.DoRequest(flow, "GET", endpoint, token.AccessToken, nil)
