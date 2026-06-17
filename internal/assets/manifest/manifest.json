@@ -27198,7 +27198,7 @@
     ]
   },
   "ssh/run": {
-    "hash": "58088488b765fe7bd10daea273ff0fde162bd3393f8ae9bd575033aeccf58bce",
+    "hash": "05506b3e8f4c321bfe394ec290de562fb458675d59114e5879d4555f2578e819",
     "author": "David McElin",
     "organisation": "Flomation",
     "name": "SSH Run Command",

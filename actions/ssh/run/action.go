@@ -2,7 +2,6 @@ package ssh_run
 
 import (
 	"bytes"
-	"context"
 	"fmt"
 	"net"
 	"strings"
@@ -191,25 +190,24 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	// process exits, so without this a hung remote command would block the
 	// executor goroutine forever. On timeout we signal the remote process and
 	// bail; the deferred Close calls tear down the session and connection.
-	// When noTimeout is set the context only cancels on return, so Run is
-	// allowed to block indefinitely.
-	var ctx context.Context
-	var cancel context.CancelFunc
-	if noTimeout {
-		ctx, cancel = context.WithCancel(context.Background())
-	} else {
-		ctx, cancel = context.WithTimeout(context.Background(), timeout)
-	}
-	defer cancel()
-
 	done := make(chan error, 1)
 	go func() { done <- session.Run(command) }()
+
+	// A nil channel blocks forever, so when noTimeout is set the timeout case
+	// is effectively disabled and the select just waits on done. This keeps
+	// the timeout value out of the no-deadline path entirely.
+	var timeoutCh <-chan time.Time
+	if !noTimeout {
+		timer := time.NewTimer(timeout)
+		defer timer.Stop()
+		timeoutCh = timer.C
+	}
 
 	var runErr error
 	select {
 	case runErr = <-done:
 		// completed within the deadline
-	case <-ctx.Done():
+	case <-timeoutCh:
 		_ = session.Signal(ssh.SIGKILL)
 		return nil, fmt.Errorf("command timed out on %s after %s", addr, timeout)
 	}
