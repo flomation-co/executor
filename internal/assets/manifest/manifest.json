@@ -27198,7 +27198,7 @@
     ]
   },
   "ssh/run": {
-    "hash": "8de21a2776dd8f6d5fc5c14edc6815292f026a70c8e49c5d49042e2a7ca0cb5d",
+    "hash": "934b15ea989a2e86307f4b26a8d4db6aab5a5f56a5d9471b6b037712a169c33d",
     "author": "David McElin",
     "organisation": "Flomation",
     "name": "SSH Run Command",
@@ -27229,6 +27229,13 @@
         "placeholder": "22"
       },
       {
+        "name": "host_fingerprint",
+        "type": "string",
+        "value": null,
+        "label": "Host Key Fingerprint",
+        "placeholder": "SHA256:... (optional — verifies the server's host key)"
+      },
+      {
         "name": "username",
         "type": "string",
         "value": null,
@@ -27242,6 +27249,7 @@
         "value": null,
         "label": "Authentication",
         "placeholder": "",
+        "required": true,
         "options": [
           {
             "name": "Private Key",
@@ -27301,6 +27309,13 @@
         "label": "Command",
         "placeholder": "uptime",
         "required": true
+      },
+      {
+        "name": "timeout_seconds",
+        "type": "integer",
+        "value": null,
+        "label": "Command Timeout (seconds)",
+        "placeholder": "300"
       }
     ],
     "outputs": [

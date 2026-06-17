@@ -2,6 +2,7 @@ package ssh_run
 
 import (
 	"bytes"
+	"context"
 	"fmt"
 	"net"
 	"strings"
@@ -22,6 +23,10 @@ const (
 	Type         = core.ActionTypeAction
 )
 
+// defaultTimeoutSeconds bounds how long a single command may run once the
+// session is open. The dial/handshake has its own (shorter) timeout below.
+const defaultTimeoutSeconds = 300
+
 var Inputs = [...]core.Connection{
 	{
 		Name:        "host",
@@ -37,6 +42,12 @@ var Inputs = [...]core.Connection{
 		Placeholder: "22",
 	},
 	{
+		Name:        "host_fingerprint",
+		Type:        core.ConnectionTypeString,
+		Label:       "Host Key Fingerprint",
+		Placeholder: "SHA256:... (optional — verifies the server's host key)",
+	},
+	{
 		Name:        "username",
 		Type:        core.ConnectionTypeString,
 		Label:       "Username",
@@ -44,9 +55,10 @@ var Inputs = [...]core.Connection{
 		Required:    true,
 	},
 	{
-		Name:  "auth_method",
-		Type:  core.ConnectionTypeString,
-		Label: "Authentication",
+		Name:     "auth_method",
+		Type:     core.ConnectionTypeString,
+		Label:    "Authentication",
+		Required: true,
 		Options: []core.ConnectionOption{
 			{Name: "Private Key", Value: "key"},
 			{Name: "Password", Value: "password"},
@@ -82,6 +94,12 @@ var Inputs = [...]core.Connection{
 		Placeholder: "uptime",
 		Required:    true,
 	},
+	{
+		Name:        "timeout_seconds",
+		Type:        core.ConnectionTypeInteger,
+		Label:       "Command Timeout (seconds)",
+		Placeholder: "300",
+	},
 }
 
 var Outputs = [...]core.Connection{
@@ -102,7 +120,9 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 		return nil, fmt.Errorf("username is required")
 	}
 
-	command := strVal(core.FindConnection("command", inputs))
+	// command isn't a secret, so trim it — a leading/trailing newline in a
+	// pasted command is user error rather than intent.
+	command := strings.TrimSpace(strVal(core.FindConnection("command", inputs)))
 	if command == "" {
 		return nil, fmt.Errorf("command is required")
 	}
@@ -114,15 +134,32 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 		}
 	}
 
+	timeout := time.Duration(defaultTimeoutSeconds) * time.Second
+	if t := core.FindConnection("timeout_seconds", inputs); t != nil {
+		if n := t.Number(); n != nil && *n > 0 {
+			timeout = time.Duration(*n) * time.Second
+		}
+	}
+
 	authMethod, err := buildAuth(inputs)
 	if err != nil {
 		return nil, err
 	}
 
+	// Host key verification: if the user supplied a SHA-256 fingerprint we
+	// verify against it and reject on mismatch; otherwise we fall back to
+	// accepting any host key but flag it in the result so the lack of
+	// verification is visible rather than silent.
+	fingerprint := strings.TrimSpace(strVal(core.FindConnection("host_fingerprint", inputs)))
+	hostKeyCallback := ssh.InsecureIgnoreHostKey()
+	if fingerprint != "" {
+		hostKeyCallback = fingerprintCallback(fingerprint)
+	}
+
 	config := &ssh.ClientConfig{
 		User:            username,
 		Auth:            []ssh.AuthMethod{authMethod},
-		HostKeyCallback: ssh.InsecureIgnoreHostKey(),
+		HostKeyCallback: hostKeyCallback,
 		Timeout:         30 * time.Second,
 	}
 
@@ -143,11 +180,29 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	session.Stdout = &stdout
 	session.Stderr = &stderr
 
-	// Run the command. A non-zero exit status is not treated as a fatal
-	// error — it's surfaced through the exit_code output so downstream
-	// nodes can branch on it, mirroring how a shell would behave.
+	// Run the command under a deadline. session.Run blocks until the remote
+	// process exits, so without this a hung remote command would block the
+	// executor goroutine forever. On timeout we signal the remote process and
+	// bail; the deferred Close calls tear down the session and connection.
+	ctx, cancel := context.WithTimeout(context.Background(), timeout)
+	defer cancel()
+
+	done := make(chan error, 1)
+	go func() { done <- session.Run(command) }()
+
+	var runErr error
+	select {
+	case runErr = <-done:
+		// completed within the deadline
+	case <-ctx.Done():
+		_ = session.Signal(ssh.SIGKILL)
+		return nil, fmt.Errorf("command timed out on %s after %s", addr, timeout)
+	}
+
+	// A non-zero exit status is not treated as a fatal error — it's surfaced
+	// through the exit_code output so downstream nodes can branch on it,
+	// mirroring how a shell would behave.
 	exitCode := int64(0)
-	runErr := session.Run(command)
 	if runErr != nil {
 		if exitErr, ok := runErr.(*ssh.ExitError); ok {
 			exitCode = int64(exitErr.ExitStatus())
@@ -160,6 +215,9 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	if exitCode == 0 {
 		summary = "Command executed successfully"
 	}
+	if fingerprint == "" {
+		summary = "Warning: host key not verified (no fingerprint supplied). " + summary
+	}
 
 	return map[string]interface{}{
 		"tool_result": summary,
@@ -167,6 +225,20 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 		"stderr":      stderr.String(),
 		"exit_code":   exitCode,
 	}, nil
+}
+
+// fingerprintCallback verifies the server's host key against a user-supplied
+// SHA-256 fingerprint (the "SHA256:..." form produced by ssh.FingerprintSHA256,
+// e.g. from `ssh-keyscan host | ssh-keygen -lf -`). Mismatch aborts the
+// connection, giving callers who care a hard guarantee against MITM.
+func fingerprintCallback(expected string) ssh.HostKeyCallback {
+	return func(hostname string, remote net.Addr, key ssh.PublicKey) error {
+		got := ssh.FingerprintSHA256(key)
+		if got != expected {
+			return fmt.Errorf("host key mismatch for %s: got %s, expected %s", hostname, got, expected)
+		}
+		return nil
+	}
 }
 
 // buildAuth resolves the SSH authentication method from the inputs.
