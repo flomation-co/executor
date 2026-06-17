@@ -742,8 +742,10 @@ func getRaw(flow *core.Flow, ctx *core.ExecutionContext, path string) ([]byte, e
 	if err != nil {
 		return nil, err
 	}
-	client := &http.Client{}
-	resp, err := client.Do(req)
+	if ctx.Token != "" {
+		req.Header.Set("Authorization", "Bearer "+ctx.Token)
+	}
+	resp, err := ctx.InternalClient().Do(req)
 	if err != nil {
 		return nil, err
 	}
