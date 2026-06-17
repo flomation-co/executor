@@ -3135,14 +3135,47 @@ func (f *Flow) emitNodeEvent(id, action, label, status string, durationMs int64,
 		evt["error"] = errMsg
 	}
 	// inputs[0] = resolved inputs, inputs[1] = outputs (variadic to keep "running" calls simple)
+	// Large string values (e.g. base64 audio from elevenlabs/text_to_speech) are
+	// truncated for the streamed event only — the full, untruncated data is
+	// preserved separately via recordNodeResult/nodeResults for downstream nodes.
+	// Without this a single __NODE__ line can be tens of MB, exceeding the
+	// runner's stdout scanner buffer; the runner then stops draining the pipe
+	// and the executor blocks forever on the write, hanging the execution.
 	if len(inputs) > 0 && inputs[0] != nil {
-		evt["inputs"] = inputs[0]
+		evt["inputs"] = truncateEventValues(inputs[0])
 	}
 	if len(inputs) > 1 && inputs[1] != nil {
-		evt["outputs"] = inputs[1]
+		evt["outputs"] = truncateEventValues(inputs[1])
 	}
 	b, _ := json.Marshal(evt)
 	fmt.Fprintf(os.Stdout, "__NODE__:%s\n", b)
+}
+
+// maxEventStringBytes caps the length of any single string value emitted in a
+// streamed __NODE__ event. 4KB is comfortably below the runner's stdout
+// scanner buffer while still carrying enough of a value to be useful in the
+// live editor view.
+const maxEventStringBytes = 4096
+
+// truncateEventValues returns a shallow copy of m in which any string value
+// longer than maxEventStringBytes is truncated (on a valid UTF-8 boundary)
+// with a marker noting the original size. The input map is never mutated, so
+// callers' downstream copies of the data are unaffected. Non-string values are
+// passed through unchanged.
+func truncateEventValues(m map[string]interface{}) map[string]interface{} {
+	if m == nil {
+		return nil
+	}
+	out := make(map[string]interface{}, len(m))
+	for k, v := range m {
+		if s, ok := v.(string); ok && len(s) > maxEventStringBytes {
+			cut := strings.ToValidUTF8(s[:maxEventStringBytes], "")
+			out[k] = fmt.Sprintf("%s… [truncated, %d bytes total]", cut, len(s))
+			continue
+		}
+		out[k] = v
+	}
+	return out
 }
 
 // buildObfuscatedInputMap creates an input map with secret values masked.
