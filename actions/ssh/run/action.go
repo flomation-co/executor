@@ -98,7 +98,7 @@ var Inputs = [...]core.Connection{
 		Name:        "timeout_seconds",
 		Type:        core.ConnectionTypeInteger,
 		Label:       "Command Timeout (seconds)",
-		Placeholder: "300",
+		Placeholder: "300 (-1 for no timeout)",
 	},
 }
 
@@ -134,10 +134,17 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 		}
 	}
 
+	// timeout_seconds: positive bounds the command; a negative value (e.g. -1)
+	// disables the deadline entirely; 0 or unset keeps the default.
 	timeout := time.Duration(defaultTimeoutSeconds) * time.Second
+	noTimeout := false
 	if t := core.FindConnection("timeout_seconds", inputs); t != nil {
-		if n := t.Number(); n != nil && *n > 0 {
-			timeout = time.Duration(*n) * time.Second
+		if n := t.Number(); n != nil {
+			if *n < 0 {
+				noTimeout = true
+			} else if *n > 0 {
+				timeout = time.Duration(*n) * time.Second
+			}
 		}
 	}
 
@@ -184,7 +191,15 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	// process exits, so without this a hung remote command would block the
 	// executor goroutine forever. On timeout we signal the remote process and
 	// bail; the deferred Close calls tear down the session and connection.
-	ctx, cancel := context.WithTimeout(context.Background(), timeout)
+	// When noTimeout is set the context only cancels on return, so Run is
+	// allowed to block indefinitely.
+	var ctx context.Context
+	var cancel context.CancelFunc
+	if noTimeout {
+		ctx, cancel = context.WithCancel(context.Background())
+	} else {
+		ctx, cancel = context.WithTimeout(context.Background(), timeout)
+	}
 	defer cancel()
 
 	done := make(chan error, 1)

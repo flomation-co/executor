@@ -27198,7 +27198,7 @@
     ]
   },
   "ssh/run": {
-    "hash": "934b15ea989a2e86307f4b26a8d4db6aab5a5f56a5d9471b6b037712a169c33d",
+    "hash": "58088488b765fe7bd10daea273ff0fde162bd3393f8ae9bd575033aeccf58bce",
     "author": "David McElin",
     "organisation": "Flomation",
     "name": "SSH Run Command",
@@ -27315,7 +27315,7 @@
         "type": "integer",
         "value": null,
         "label": "Command Timeout (seconds)",
-        "placeholder": "300"
+        "placeholder": "300 (-1 for no timeout)"
       }
     ],
     "outputs": [
