@@ -27197,6 +27197,158 @@
       }
     ]
   },
+  "ssh/run": {
+    "hash": "05506b3e8f4c321bfe394ec290de562fb458675d59114e5879d4555f2578e819",
+    "author": "David McElin",
+    "organisation": "Flomation",
+    "name": "SSH Run Command",
+    "description": "Connect to a remote host over SSH and execute a command",
+    "website": "https://www.flomation.co",
+    "icon": "terminal+play",
+    "date": "17/06/2026",
+    "type": 2,
+    "category": {
+      "name": "SSH",
+      "icon": "terminal",
+      "description": "Run commands on remote hosts over SSH"
+    },
+    "inputs": [
+      {
+        "name": "host",
+        "type": "string",
+        "value": null,
+        "label": "Host",
+        "placeholder": "example.com or 10.0.0.5",
+        "required": true
+      },
+      {
+        "name": "port",
+        "type": "integer",
+        "value": null,
+        "label": "Port",
+        "placeholder": "22"
+      },
+      {
+        "name": "host_fingerprint",
+        "type": "string",
+        "value": null,
+        "label": "Host Key Fingerprint",
+        "placeholder": "SHA256:... (optional — verifies the server's host key)"
+      },
+      {
+        "name": "username",
+        "type": "string",
+        "value": null,
+        "label": "Username",
+        "placeholder": "root",
+        "required": true
+      },
+      {
+        "name": "auth_method",
+        "type": "string",
+        "value": null,
+        "label": "Authentication",
+        "placeholder": "",
+        "required": true,
+        "options": [
+          {
+            "name": "Private Key",
+            "value": "key"
+          },
+          {
+            "name": "Password",
+            "value": "password"
+          }
+        ]
+      },
+      {
+        "name": "private_key",
+        "type": "secret",
+        "value": null,
+        "label": "SSH Private Key",
+        "placeholder": "Select an environment secret holding the private key",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "key"
+          ]
+        }
+      },
+      {
+        "name": "passphrase",
+        "type": "secret",
+        "value": null,
+        "label": "Key Passphrase",
+        "placeholder": "Only if the private key is encrypted",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "key"
+          ]
+        }
+      },
+      {
+        "name": "password",
+        "type": "secret",
+        "value": null,
+        "label": "Password",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "password"
+          ]
+        }
+      },
+      {
+        "name": "command",
+        "type": "text",
+        "value": null,
+        "label": "Command",
+        "placeholder": "uptime",
+        "required": true
+      },
+      {
+        "name": "timeout_seconds",
+        "type": "integer",
+        "value": null,
+        "label": "Command Timeout (seconds)",
+        "placeholder": "300 (-1 for no timeout)"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "stdout",
+        "type": "text",
+        "value": null,
+        "label": "Standard Output",
+        "placeholder": ""
+      },
+      {
+        "name": "stderr",
+        "type": "text",
+        "value": null,
+        "label": "Standard Error",
+        "placeholder": ""
+      },
+      {
+        "name": "exit_code",
+        "type": "integer",
+        "value": null,
+        "label": "Exit Code",
+        "placeholder": ""
+      }
+    ]
+  },
   "string/concatenate": {
     "hash": "dd8f5c959eff4b4d0e67eeb76a5818a6bb8f10eda07cfa8ddee144c9ec67c9c3",
     "author": "Andy Esser",
