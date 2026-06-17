@@ -43,8 +43,18 @@ func newFakeAPI() *fakeAPI {
 		var body map[string]interface{}
 		_ = json.Unmarshal(raw, &body)
 
+		// GETs against these paths are dedup lookups (the action fetches
+		// existing memories / commitments before deciding to write new
+		// ones). They're not the calls the test wants to count, so we
+		// return an empty list and skip the capture. Only POST = create
+		// is counted into the *Calls slices.
+		isGetDedup := r.Method == http.MethodGet
 		switch {
 		case strings.HasSuffix(r.URL.Path, "/memory"):
+			if isGetDedup {
+				_, _ = w.Write([]byte(`[]`))
+				return
+			}
 			f.memoryCalls = append(f.memoryCalls, body)
 			if f.failMemoryOnCall > 0 && len(f.memoryCalls) == f.failMemoryOnCall {
 				http.Error(w, "simulated failure", http.StatusInternalServerError)
@@ -53,6 +63,10 @@ func newFakeAPI() *fakeAPI {
 			w.WriteHeader(http.StatusCreated)
 			_, _ = w.Write([]byte(`{"id":"mem-new"}`))
 		case strings.HasSuffix(r.URL.Path, "/pending-action"):
+			if isGetDedup {
+				_, _ = w.Write([]byte(`[]`))
+				return
+			}
 			f.pendingCalls = append(f.pendingCalls, body)
 			if f.failPendingOnCall > 0 && len(f.pendingCalls) == f.failPendingOnCall {
 				http.Error(w, "simulated failure", http.StatusInternalServerError)
@@ -61,6 +75,10 @@ func newFakeAPI() *fakeAPI {
 			w.WriteHeader(http.StatusCreated)
 			_, _ = w.Write([]byte(`{"id":"pa-new"}`))
 		case strings.HasSuffix(r.URL.Path, "/commitment"):
+			if isGetDedup {
+				_, _ = w.Write([]byte(`[]`))
+				return
+			}
 			f.commitmentCalls = append(f.commitmentCalls, body)
 			if f.failCommitmentOnCall > 0 && len(f.commitmentCalls) == f.failCommitmentOnCall {
 				http.Error(w, "simulated failure", http.StatusInternalServerError)
@@ -95,13 +113,17 @@ func TestExecute_HappyPath_AllThreeArmsWritten(t *testing.T) {
 	api := newFakeAPI()
 	defer api.close()
 
+	// Note: identity_link PAs are deliberately skipped by the action
+	// (replaced by the user-declared identities flow), so the happy-path
+	// PA arm uses a non-skipped type. The skip behaviour itself is
+	// covered by TestExecute_IdentityLinkPendingAction_Skipped below.
 	extraction := `{
 		"memories": [
 			{"type":"preference","title":"Name","body":"Prefers Andy","confidence":0.95},
 			{"type":"fact","title":"Timezone","body":"Europe/London","confidence":0.9}
 		],
 		"proposed_actions": [
-			{"type":"identity_link","evidence":"I'm @andyesser","confidence":0.9,"payload":{"channel":"slack"}}
+			{"type":"confirm_intent","evidence":"User asked to schedule a meeting","confidence":0.9,"payload":{"intent":"schedule"}}
 		],
 		"commitments": [
 			{"kind":"followup","description":"Follow up tomorrow","trigger_type":"time_elapsed","evidence":"I'll get back to you","confidence":0.85,"made_by":"assistant"}
@@ -139,13 +161,41 @@ func TestExecute_HappyPath_AllThreeArmsWritten(t *testing.T) {
 
 	// Pending action carries the evidence verbatim (the plan is
 	// explicit that this must not be paraphrased).
-	Expect(api.pendingCalls[0]["evidence"]).To(Equal("I'm @andyesser"))
-	Expect(api.pendingCalls[0]["type"]).To(Equal("identity_link"))
+	Expect(api.pendingCalls).To(HaveLen(1))
+	Expect(api.pendingCalls[0]["evidence"]).To(Equal("User asked to schedule a meeting"))
+	Expect(api.pendingCalls[0]["type"]).To(Equal("confirm_intent"))
 
 	// Commitment defaults made_by to 'assistant' when omitted, but in
 	// this test it was provided explicitly.
 	Expect(api.commitmentCalls[0]["made_by"]).To(Equal("assistant"))
 	Expect(api.commitmentCalls[0]["kind"]).To(Equal("followup"))
+}
+
+// Regression guard: identity_link pending actions are intentionally
+// skipped because the user-declared identities flow replaced AI-initiated
+// linking. If this behaviour ever silently changes, this test should
+// fail and force a deliberate decision.
+func TestExecute_IdentityLinkPendingAction_Skipped(t *testing.T) {
+	RegisterTestingT(t)
+
+	api := newFakeAPI()
+	defer api.close()
+
+	extraction := `{
+		"proposed_actions": [
+			{"type":"identity_link","evidence":"I'm @andyesser","confidence":0.9,"payload":{"channel":"slack"}}
+		]
+	}`
+
+	flow := flowWithContext(api.server.URL)
+	out, err := Execute(flow, nil, []*core.Connection{
+		strInput("agent_id", "agent-1"),
+		strInput("extraction_json", extraction),
+		strInput("agent_user_id", "user-abc"),
+	})
+	Expect(err).NotTo(HaveOccurred())
+	Expect(out["pending_actions_written"]).To(Equal(0))
+	Expect(api.pendingCalls).To(BeEmpty())
 }
 
 // --- confidence threshold logic ---
