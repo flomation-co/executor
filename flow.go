@@ -1033,6 +1033,19 @@ func (f *Flow) executeOnErrorChain(actions map[string]Action, flowErr error, env
 	f.emitNodeEvent(onErrorNode.ID, onErrorNode.Type, onErrorNode.Data.Label, "success", 0, "")
 	f.recordNodeResult(onErrorNode, "success", nil, errorOutputs, 0, "")
 
+	// Mark the On Error node as traversed at injection time. We execute
+	// its children directly via the loop below, so the "default" Phase 2
+	// child traversal in ExecuteNode must not also fire. Without this,
+	// when a child's parent-resolution calls ExecuteNode(onErrorNode),
+	// the cached-but-not-traversed branch (flow.go ~1088) re-enters
+	// executeNodeChildren(onErrorNode) and re-fires every child — for
+	// the test that fails as a double-execution of log-error-1, the
+	// second pass losing the error_message context.
+	if f.traversedNodes == nil {
+		f.traversedNodes = make(map[string]bool)
+	}
+	f.traversedNodes[onErrorNode.ID] = true
+
 	// Execute children of the On Error node
 	children := f.FindTarget(onErrorNode.ID)
 	for _, c := range children {
@@ -1626,6 +1639,15 @@ func (f *Flow) executeNodeActionOnly(actions map[string]Action, node *Node, envi
 // breadth-first ordering: all sibling actions execute before any subtrees.
 func (f *Flow) executeNodeChildren(actions map[string]Action, node *Node, outputs map[string]interface{}, environment *environment.Environment) (map[string]interface{}, error) {
 	combinedResults := make(map[string]interface{})
+
+	// subflow/end terminates the sub-flow's traversal. Its outputs become
+	// the sub-flow's return value (see executeSubFlow's collection at
+	// flow.go:2918-2929), so any nodes wired downstream of End must not
+	// execute. Without this guard, edges from End leak into the main
+	// graph traversal and silently run "after-end" nodes.
+	if node.Data != nil && (node.Data.Label == "subflow/end" || node.Type == "subflow/end") {
+		return combinedResults, nil
+	}
 
 	var children []*Node
 	if node.Data.Config.Type == ActionTypeConditional {
