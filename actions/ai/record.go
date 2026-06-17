@@ -310,7 +310,10 @@ func dispatchAssistantExtraction(flowCtx context.Context, ctx *core.ExecutionCon
 		req.Header.Set("Authorization", "Bearer "+ctx.Token)
 	}
 
-	client := &http.Client{Timeout: recordTimeout}
+	client := &http.Client{
+		Timeout:   recordTimeout,
+		Transport: ctx.InternalClient().Transport,
+	}
 	resp, err := client.Do(req)
 	if err != nil {
 		log.WithFields(log.Fields{
