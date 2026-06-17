@@ -288,6 +288,7 @@ import (
 	sql_mysql "flomation.app/automate/executor/actions/sql/mysql"
 	sql_oracle "flomation.app/automate/executor/actions/sql/oracle"
 	sql_postgresql "flomation.app/automate/executor/actions/sql/postgresql"
+	ssh_run "flomation.app/automate/executor/actions/ssh/run"
 	string_concatenate "flomation.app/automate/executor/actions/string/concatenate"
 	string_contains "flomation.app/automate/executor/actions/string/contains"
 	string_join "flomation.app/automate/executor/actions/string/join"
@@ -634,6 +635,7 @@ var Actions = map[string]core.Action{
 	"sql/mysql":                             sql_mysql.Execute,
 	"sql/oracle":                            sql_oracle.Execute,
 	"sql/postgresql":                        sql_postgresql.Execute,
+	"ssh/run":                               ssh_run.Execute,
 	"string/concatenate":                    string_concatenate.Execute,
 	"string/contains":                       string_contains.Execute,
 	"string/join":                           string_join.Execute,
