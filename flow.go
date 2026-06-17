@@ -689,6 +689,26 @@ func (f *Flow) RestoreCheckpoint(cp *Checkpoint) {
 		f.resumedSuspendNodeID = cp.SuspendInfo.NodeID
 		delete(f.nodeResults, cp.SuspendInfo.NodeID)
 	}
+
+	// Diagnostic: one structured log line capturing what was actually
+	// restored. Lets operators ground-truth resume behaviour from runner
+	// logs — the alternative is silent failure where the checkpoint is
+	// empty and the flow re-executes from scratch.
+	resumeNodeID := ""
+	resumeReason := ""
+	if cp.SuspendInfo != nil {
+		resumeNodeID = cp.SuspendInfo.NodeID
+		resumeReason = cp.SuspendInfo.Reason
+	}
+	log.WithFields(log.Fields{
+		"resume_node_id":     resumeNodeID,
+		"resume_reason":      resumeReason,
+		"cached_node_count":  len(f.nodeResults),
+		"reachable_count":    len(f.reachableNodes),
+		"node_results_count": len(f.nodeExecutionResults),
+		"in_error_chain":     f.inErrorChain,
+		"had_error":          f.hadError,
+	}).Info("checkpoint restore complete")
 }
 
 // IsResumed returns true if this execution was restored from a checkpoint.
@@ -1079,7 +1099,21 @@ func (f *Flow) ExecuteNode(actions map[string]Action, node *Node, environment *e
 	// reaches the uncached suspend node.
 	if v, exists := f.nodeResults[node.ID]; exists {
 		if f.traversedNodes[node.ID] {
+			if f.resumed {
+				log.WithFields(log.Fields{
+					"node_id":   node.ID,
+					"node_type": node.Type,
+					"phase":     "cached-and-traversed",
+				}).Info("resume cache hit — skipping node entirely")
+			}
 			return v, nil
+		}
+		if f.resumed {
+			log.WithFields(log.Fields{
+				"node_id":   node.ID,
+				"node_type": node.Type,
+				"phase":     "cached-not-traversed",
+			}).Info("resume cache hit — walking children only, action skipped")
 		}
 		// Action cached but children not yet traversed — proceed to Phase 2.
 		// EXCEPT for Loop nodes: re-entering executeNodeChildren for a loop
