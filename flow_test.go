@@ -22,7 +22,13 @@ func TestConnectionTypeString(t *testing.T) {
 	Expect(c.Boolean()).To(BeNil())
 }
 
-func TestConnectionTypeBadString(t *testing.T) {
+// When a non-string value lands in a String-typed Connection (e.g. an
+// upstream output that is a number, slice, or map flowing into a string
+// input via ${parent.X}), String() now JSON-encodes the value rather
+// than returning nil. Returning nil here would silently break wired-up
+// flows — the action would see an empty input and skip its job — so
+// the fallback explicitly favours visibility. See flow.go:248-253.
+func TestConnectionTypeString_NonStringValueJSONEncoded(t *testing.T) {
 	RegisterTestingT(t)
 
 	c := Connection{
@@ -31,9 +37,29 @@ func TestConnectionTypeBadString(t *testing.T) {
 		Value: 1234,
 	}
 
-	Expect(c.String()).To(BeNil())
+	s := c.String()
+	Expect(s).NotTo(BeNil())
+	Expect(*s).To(Equal("1234"))
+
+	// Number/Boolean still return nil — the JSON-encoded fallback is
+	// only on the String path.
 	Expect(c.Number()).To(BeNil())
 	Expect(c.Boolean()).To(BeNil())
+}
+
+// Companion case: a value that genuinely cannot be JSON-marshalled
+// (channels, funcs) returns nil from String(). This locks in the
+// "last resort" nil branch at flow.go:262.
+func TestConnectionTypeString_UnmarshalableValueReturnsNil(t *testing.T) {
+	RegisterTestingT(t)
+
+	c := Connection{
+		Name:  "test-connection",
+		Type:  ConnectionTypeString,
+		Value: make(chan int),
+	}
+
+	Expect(c.String()).To(BeNil())
 }
 
 func TestConnectionTypeNumber(t *testing.T) {
