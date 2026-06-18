@@ -25,6 +25,10 @@ const (
 	maxTimeout     = 7200 // seconds (2h) — over this, Timeout errors rather than clamping
 )
 
+// NOTE: every entry except timeout_seconds mirrors opentofu.SharedInputs
+// verbatim and is enforced identical by TestSharedInputsDoNotDrift. They are
+// inlined (rather than composed from the shared var) because the manifest
+// generator only extracts an inline composite literal — see SharedInputs' docs.
 var Inputs = [...]core.Connection{
 	{
 		Name:        "working_directory",
@@ -140,7 +144,7 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 		return failResult("tofu init failed", initRes), nil
 	}
 
-	planRes, err := tofu.Run(ctx, bin, workDir, env, "plan", "-input=false", "-no-color", "-json")
+	planRes, err := tofu.Run(ctx, bin, cfg.WorkDir, env, "plan", "-input=false", "-no-color", "-json")
 	if err != nil {
 		return errResult(fmt.Sprintf("tofu plan failed to run: %v", err)), nil
 	}

@@ -34,6 +34,11 @@ const (
 	approvalReason = "opentofu_apply_approval"
 )
 
+// NOTE: every entry except require_approval and timeout_seconds mirrors
+// opentofu.SharedInputs verbatim and is enforced identical by
+// TestSharedInputsDoNotDrift. They are inlined (rather than composed from the
+// shared var) because the manifest generator only extracts an inline composite
+// literal — see SharedInputs' docs.
 var Inputs = [...]core.Connection{
 	{
 		Name:        "working_directory",

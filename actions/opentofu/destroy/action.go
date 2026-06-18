@@ -32,6 +32,11 @@ const (
 	approvalReason = "opentofu_destroy_approval"
 )
 
+// NOTE: every entry except require_approval and timeout_seconds mirrors
+// opentofu.SharedInputs verbatim and is enforced identical by
+// TestSharedInputsDoNotDrift. They are inlined (rather than composed from the
+// shared var) because the manifest generator only extracts an inline composite
+// literal — see SharedInputs' docs.
 var Inputs = [...]core.Connection{
 	{
 		Name:        "working_directory",
@@ -150,6 +155,9 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	return destroy(ctx, cfg)
 }
 
+// planAndSuspend runs init + plan -destroy to summarise what will be torn down,
+// then suspends the flow for approval. Returns core.ErrSuspended so the engine
+// checkpoints.
 func planAndSuspend(ctx context.Context, flow *core.Flow, node *core.Node, cfg tofu.RunConfig) (map[string]interface{}, error) {
 	bin, env, initRes, err := tofu.Prepare(ctx, cfg)
 	if err != nil {
