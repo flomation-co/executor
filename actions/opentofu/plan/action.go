@@ -22,7 +22,7 @@ const (
 	Type         = core.ActionTypeAction
 
 	defaultTimeout = 600  // seconds
-	maxTimeout     = 3600 // seconds
+	maxTimeout     = 7200 // seconds (2h) — over this, Timeout errors rather than clamping
 )
 
 var Inputs = [...]core.Connection{

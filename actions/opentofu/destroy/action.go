@@ -26,8 +26,8 @@ const (
 	Date         = "18/06/2026"
 	Type         = core.ActionTypeAction
 
-	defaultTimeout = 1800 // seconds
-	maxTimeout     = 3600 // seconds
+	defaultTimeout = 1800  // seconds
+	maxTimeout     = 21600 // seconds (6h) — over this, Timeout errors rather than clamping
 
 	approvalReason = "opentofu_destroy_approval"
 )
