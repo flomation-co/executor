@@ -254,6 +254,9 @@ import (
 	notion_query_database "flomation.app/automate/executor/actions/notion/query_database"
 	notion_search "flomation.app/automate/executor/actions/notion/search"
 	notion_update_page "flomation.app/automate/executor/actions/notion/update_page"
+	opentofu_apply "flomation.app/automate/executor/actions/opentofu/apply"
+	opentofu_destroy "flomation.app/automate/executor/actions/opentofu/destroy"
+	opentofu_plan "flomation.app/automate/executor/actions/opentofu/plan"
 	output_set "flomation.app/automate/executor/actions/output/set"
 	output_set_outputs "flomation.app/automate/executor/actions/output/set_outputs"
 	script_bash "flomation.app/automate/executor/actions/script/bash"
@@ -601,6 +604,9 @@ var Actions = map[string]core.Action{
 	"notion/query_database":                 notion_query_database.Execute,
 	"notion/search":                         notion_search.Execute,
 	"notion/update_page":                    notion_update_page.Execute,
+	"opentofu/apply":                        opentofu_apply.Execute,
+	"opentofu/destroy":                      opentofu_destroy.Execute,
+	"opentofu/plan":                         opentofu_plan.Execute,
 	"output/set":                            output_set.Execute,
 	"output/set_outputs":                    output_set_outputs.Execute,
 	"script/bash":                           script_bash.Execute,
