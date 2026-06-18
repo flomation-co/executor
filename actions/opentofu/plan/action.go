@@ -17,7 +17,7 @@ const (
 	Name         = "OpenTofu Plan"
 	Description  = "Initialise a working directory and produce an OpenTofu (Terraform-compatible) plan, reporting the changes that would be applied."
 	Website      = "https://www.flomation.co"
-	Icon         = "box+search"
+	Icon         = "box+magnifying-glass"
 	Date         = "18/06/2026"
 	Type         = core.ActionTypeAction
 
