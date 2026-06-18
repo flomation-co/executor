@@ -89,12 +89,6 @@ var Inputs = [...]core.Connection{
 		Placeholder: "Use a host-installed tofu instead of downloading",
 	},
 	{
-		Name:    "allow_binary_download",
-		Type:    core.ConnectionTypeBoolean,
-		Label:   "Allow Runtime Binary Download (unverified)",
-		Options: []core.ConnectionOption{{Name: "No", Value: "false"}, {Name: "Yes", Value: "true"}},
-	},
-	{
 		Name:    "allow_local_state",
 		Type:    core.ConnectionTypeBoolean,
 		Label:   "Allow Local State (unsafe)",
@@ -171,20 +165,18 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	return r, nil
 }
 
-func errResult(msg string) map[string]interface{} {
-	r := opentofu.BaseResult("Error: "+msg, "", msg, -1, false)
-	r["changes_present"] = false
-	r["add"] = int64(0)
-	r["change"] = int64(0)
-	r["destroy"] = int64(0)
-	return r
+// failExtra is the action-specific output schema in its failure (zero) state.
+func failExtra() map[string]interface{} {
+	return map[string]interface{}{
+		"changes_present": false,
+		"add":             int64(0),
+		"change":          int64(0),
+		"destroy":         int64(0),
+	}
 }
 
+func errResult(msg string) map[string]interface{} { return opentofu.ErrResult(msg, failExtra()) }
+
 func failResult(msg string, res *tofu.RunResult) map[string]interface{} {
-	r := opentofu.BaseResult(fmt.Sprintf("%s (exit %d)", msg, res.ExitCode), res.Stdout, res.Stderr, res.ExitCode, false)
-	r["changes_present"] = false
-	r["add"] = int64(0)
-	r["change"] = int64(0)
-	r["destroy"] = int64(0)
-	return r
+	return opentofu.FailResult(msg, res, failExtra())
 }

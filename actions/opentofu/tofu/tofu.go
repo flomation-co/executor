@@ -37,12 +37,12 @@ import (
 // DefaultVersion is the OpenTofu release the actions download when no version is
 // requested and no host binary is found.
 //
-// Bumping it: change this single constant. The matching tofu_<v>_SHA256SUMS is
-// fetched from the same release tag at download time and the archive is verified
-// against it, so no checksums need updating here. Note that this is an
-// integrity check only — authenticity verification (GPG/cosign of SHA256SUMS) is
-// a tracked follow-up, so production deployments should prefer a host-provisioned
-// binary (see EnsureBinary).
+// Bumping it: change this single constant. At download time the matching
+// tofu_<v>_SHA256SUMS is fetched, its detached GPG signature is verified against
+// the embedded OpenTofu signing key, and the archive is checked against the
+// now-trusted checksum — so no checksums need updating here. (If OpenTofu ever
+// rotates its signing key, replace opentofu_signing_key.asc and update
+// SigningKeyFingerprint.)
 const DefaultVersion = "1.9.1"
 
 const binaryName = "tofu"
@@ -57,18 +57,18 @@ var downloadMu sync.Mutex
 var httpClient = &http.Client{Timeout: 5 * time.Minute}
 
 // EnsureBinary returns a path to a usable `tofu` binary. Resolution order, most
-// to least trustworthy:
+// to least preferred:
 //
 //  1. override — an explicit operator-chosen binary path.
 //  2. A `tofu` already on PATH — provisioned by the host (DEB/RPM package, base
-//     image, or manual install); its provenance is controlled outside this
-//     process. Used as-is regardless of the requested version.
+//     image, or manual install); used as-is regardless of the requested version.
 //  3. A previously-downloaded binary cached for the requested version.
-//  4. A fresh download — ONLY when allowDownload (or FLOMATION_TOFU_ALLOW_DOWNLOAD)
-//     is set. The download is checksum-verified for integrity but NOT yet
-//     authenticity-verified (GPG/cosign is a tracked follow-up), so it is gated
-//     off by default and intended as an explicit escape hatch.
-func EnsureBinary(ctx context.Context, version, override string, allowDownload bool) (string, error) {
+//  4. A fresh download. The release SHA256SUMS is verified against the embedded
+//     OpenTofu signing key (authenticity) and the archive against the trusted
+//     checksum (integrity) — see download / verify.go. Set
+//     FLOMATION_TOFU_DISABLE_DOWNLOAD=1 to forbid runtime fetches by policy
+//     (e.g. air-gapped runners that must use a host-provisioned binary).
+func EnsureBinary(ctx context.Context, version, override string) (string, error) {
 	if override != "" {
 		if _, err := os.Stat(override); err != nil {
 			return "", fmt.Errorf("opentofu binary_path %q is not usable: %w", override, err)
@@ -90,11 +90,9 @@ func EnsureBinary(ctx context.Context, version, override string, allowDownload b
 		return dest, nil
 	}
 
-	if !allowDownload && !envAllowsDownload() {
-		return "", fmt.Errorf("no %s binary available: install OpenTofu on the runner (recommended), "+
-			"set binary_path, or explicitly enable runtime download (the \"Allow Runtime Binary Download\" "+
-			"input or FLOMATION_TOFU_ALLOW_DOWNLOAD=1). Runtime download is currently integrity-checked "+
-			"(SHA-256) but not authenticity-verified — GPG/cosign verification is a tracked follow-up", binaryName)
+	if downloadDisabled() {
+		return "", fmt.Errorf("no %s binary available and runtime download is disabled "+
+			"(FLOMATION_TOFU_DISABLE_DOWNLOAD): install OpenTofu on the runner or set binary_path", binaryName)
 	}
 
 	downloadMu.Lock()
@@ -113,9 +111,9 @@ func EnsureBinary(ctx context.Context, version, override string, allowDownload b
 	return dest, nil
 }
 
-// envAllowsDownload reports whether the fleet-wide download opt-in env var is set.
-func envAllowsDownload() bool {
-	switch strings.ToLower(strings.TrimSpace(os.Getenv("FLOMATION_TOFU_ALLOW_DOWNLOAD"))) {
+// downloadDisabled reports whether runtime downloads are forbidden by policy.
+func downloadDisabled() bool {
+	switch strings.ToLower(strings.TrimSpace(os.Getenv("FLOMATION_TOFU_DISABLE_DOWNLOAD"))) {
 	case "1", "true", "yes":
 		return true
 	}
@@ -127,7 +125,6 @@ type RunConfig struct {
 	WorkDir       string
 	Version       string
 	BinaryPath    string
-	AllowDownload bool              // permit runtime download when no host binary is found
 	TFVars        map[string]string // exported as TF_VAR_<key>
 	ExtraEnv      map[string]string // raw env (e.g. provider credentials)
 	BackendConfig map[string]string // passed as -backend-config to `tofu init`
@@ -146,7 +143,7 @@ type RunResult struct {
 // (wiring in any backend config). It returns the binary path and environment so
 // the caller can run the subsequent plan/apply/destroy command.
 func Prepare(ctx context.Context, c RunConfig) (bin string, env []string, init *RunResult, err error) {
-	bin, err = EnsureBinary(ctx, c.Version, c.BinaryPath, c.AllowDownload)
+	bin, err = EnsureBinary(ctx, c.Version, c.BinaryPath)
 	if err != nil {
 		return "", nil, nil, err
 	}
@@ -270,6 +267,48 @@ func (s ChangeSummary) String() string {
 	return fmt.Sprintf("+%d ~%d -%d", s.Add, s.Change, s.Destroy)
 }
 
+// ApplyOutcome counts the resources actually acted on during an apply/destroy,
+// derived from the per-resource apply_complete hooks in `-json` output. Unlike
+// the plan-phase change_summary, this reflects what really happened, so it is
+// the correct source for a destroy's resource count.
+type ApplyOutcome struct {
+	Added     int
+	Changed   int
+	Destroyed int
+}
+
+// ParseApplyOutcome counts apply_complete hooks by action from `tofu apply -json`
+// or `tofu destroy -json` output.
+func ParseApplyOutcome(jsonStream string) ApplyOutcome {
+	var out ApplyOutcome
+	sc := bufio.NewScanner(strings.NewReader(jsonStream))
+	sc.Buffer(make([]byte, 0, 1024*1024), 16*1024*1024)
+
+	for sc.Scan() {
+		var line struct {
+			Type string `json:"type"`
+			Hook struct {
+				Action string `json:"action"`
+			} `json:"hook"`
+		}
+		if err := json.Unmarshal(sc.Bytes(), &line); err != nil {
+			continue
+		}
+		if line.Type != "apply_complete" {
+			continue
+		}
+		switch line.Hook.Action {
+		case "create":
+			out.Added++
+		case "update":
+			out.Changed++
+		case "delete":
+			out.Destroyed++
+		}
+	}
+	return out
+}
+
 // --- download / cache internals ---------------------------------------------
 
 func cacheRoot() string {
@@ -296,16 +335,33 @@ func isExecutableFile(p string) bool {
 	return err == nil && fi.Mode().IsRegular() && fi.Mode()&0o111 != 0
 }
 
+// download fetches, verifies, and installs the pinned tofu binary. The trust
+// chain: the SHA256SUMS file's detached GPG signature is verified against the
+// embedded OpenTofu signing key (authenticity), then the downloaded archive is
+// checked against the now-trusted checksum (integrity).
 func download(ctx context.Context, version, dest string) error {
 	goos, arch := runtime.GOOS, runtime.GOARCH
 	zipName := fmt.Sprintf("tofu_%s_%s_%s.zip", version, goos, arch)
 	base := fmt.Sprintf("https://github.com/opentofu/opentofu/releases/download/v%s", version)
 	zipURL := base + "/" + zipName
 	sumsURL := fmt.Sprintf("%s/tofu_%s_SHA256SUMS", base, version)
+	sigURL := fmt.Sprintf("%s/tofu_%s_SHA256SUMS.gpgsig", base, version)
 
-	wantSum, err := fetchChecksum(ctx, sumsURL, zipName)
+	sums, err := httpGetBytes(ctx, sumsURL)
 	if err != nil {
-		return fmt.Errorf("resolving checksum: %w", err)
+		return fmt.Errorf("fetching SHA256SUMS: %w", err)
+	}
+	sig, err := httpGetBytes(ctx, sigURL)
+	if err != nil {
+		return fmt.Errorf("fetching SHA256SUMS signature: %w", err)
+	}
+	if err := verifyChecksumsSignature(sums, sig); err != nil {
+		return err
+	}
+
+	wantSum, err := checksumFor(sums, zipName)
+	if err != nil {
+		return err
 	}
 
 	tmpZip, err := os.CreateTemp("", "tofu-download-*.zip")
@@ -320,8 +376,6 @@ func download(ctx context.Context, version, dest string) error {
 		return fmt.Errorf("downloading %s: %w", zipName, err)
 	}
 	if !strings.EqualFold(gotSum, wantSum) {
-		// TODO(opentofu): also verify the cosign/GPG signature of SHA256SUMS for
-		// defence against a compromised release asset, not just integrity.
 		return fmt.Errorf("checksum mismatch for %s: got %s, want %s", zipName, gotSum, wantSum)
 	}
 
@@ -331,16 +385,11 @@ func download(ctx context.Context, version, dest string) error {
 	return extractBinary(tmpZip.Name(), dest)
 }
 
-func fetchChecksum(ctx context.Context, url, wantFile string) (string, error) {
-	body, err := httpGet(ctx, url)
-	if err != nil {
-		return "", err
-	}
-	defer body.Close()
-
-	sc := bufio.NewScanner(body)
+// checksumFor extracts the expected SHA-256 of wantFile from a (verified)
+// SHA256SUMS body. Lines look like: "<sha256>  tofu_1.9.1_linux_amd64.zip".
+func checksumFor(sums []byte, wantFile string) (string, error) {
+	sc := bufio.NewScanner(bytes.NewReader(sums))
 	for sc.Scan() {
-		// Lines look like: "<sha256>  tofu_1.9.1_linux_amd64.zip"
 		fields := strings.Fields(sc.Text())
 		if len(fields) == 2 && fields[1] == wantFile {
 			return fields[0], nil
@@ -350,6 +399,16 @@ func fetchChecksum(ctx context.Context, url, wantFile string) (string, error) {
 		return "", err
 	}
 	return "", fmt.Errorf("no checksum entry for %s", wantFile)
+}
+
+// httpGetBytes fetches a (small) resource fully into memory.
+func httpGetBytes(ctx context.Context, url string) ([]byte, error) {
+	body, err := httpGet(ctx, url)
+	if err != nil {
+		return nil, err
+	}
+	defer body.Close()
+	return io.ReadAll(body)
 }
 
 // fetchToFile streams url into f and returns the hex-encoded SHA-256 of the body.

@@ -1,11 +1,49 @@
 package tofu
 
 import (
+	"bytes"
 	"errors"
+	"fmt"
 	"os"
 	"path/filepath"
 	"testing"
+
+	"github.com/ProtonMail/go-crypto/openpgp"
 )
+
+// TestEmbeddedSigningKey asserts the vendored OpenTofu key parses and matches the
+// pinned fingerprint, so a swapped/corrupted key file is caught at test time
+// rather than silently weakening download verification.
+func TestEmbeddedSigningKey(t *testing.T) {
+	ring, err := openpgp.ReadArmoredKeyRing(bytes.NewReader(opentofuSigningKey))
+	if err != nil {
+		t.Fatalf("embedded key did not parse: %v", err)
+	}
+	var got []string
+	for _, e := range ring {
+		fp := fmt.Sprintf("%X", e.PrimaryKey.Fingerprint)
+		if fp == SigningKeyFingerprint {
+			return
+		}
+		got = append(got, fp)
+	}
+	t.Fatalf("embedded key fingerprint(s) %v do not include expected %s", got, SigningKeyFingerprint)
+}
+
+func TestParseApplyOutcome(t *testing.T) {
+	// Two deletes, one create, plus unrelated lines.
+	stream := `{"type":"version"}
+{"type":"apply_complete","hook":{"action":"delete","resource":{"addr":"a"}}}
+{"type":"apply_start","hook":{"action":"delete"}}
+{"type":"apply_complete","hook":{"action":"delete","resource":{"addr":"b"}}}
+{"type":"apply_complete","hook":{"action":"create","resource":{"addr":"c"}}}
+not json
+`
+	got := ParseApplyOutcome(stream)
+	if got.Destroyed != 2 || got.Added != 1 || got.Changed != 0 {
+		t.Fatalf("unexpected outcome: %+v", got)
+	}
+}
 
 func writeTF(t *testing.T, name, body string) string {
 	t.Helper()

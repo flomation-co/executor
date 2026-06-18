@@ -118,7 +118,6 @@ func Config(workDir string, inputs []*core.Connection) tofu.RunConfig {
 		WorkDir:       workDir,
 		Version:       OptStr("tofu_version", inputs),
 		BinaryPath:    OptStr("binary_path", inputs),
-		AllowDownload: OptBool("allow_binary_download", inputs, false),
 		TFVars:        KVMap("variables", inputs),
 		ExtraEnv:      backendEnv(inputs),
 		BackendConfig: backendConfig(inputs),
@@ -163,4 +162,25 @@ func BaseResult(toolResult, stdout, stderr string, exitCode int, success bool) m
 		"exit_code":   int64(exitCode),
 		"success":     success,
 	}
+}
+
+// ErrResult builds a failure result for an input/setup error where no tofu
+// process ran. extra carries the action-specific output keys (with their
+// failure-state zero values) so every action keeps a stable output schema.
+func ErrResult(msg string, extra map[string]interface{}) map[string]interface{} {
+	r := BaseResult("Error: "+msg, "", msg, -1, false)
+	for k, v := range extra {
+		r[k] = v
+	}
+	return r
+}
+
+// FailResult builds a failure result from a tofu command that ran but exited
+// non-zero (or whose preceding init/plan failed). extra is as for ErrResult.
+func FailResult(msg string, res *tofu.RunResult, extra map[string]interface{}) map[string]interface{} {
+	r := BaseResult(fmt.Sprintf("%s (exit %d)", msg, res.ExitCode), res.Stdout, res.Stderr, res.ExitCode, false)
+	for k, v := range extra {
+		r[k] = v
+	}
+	return r
 }

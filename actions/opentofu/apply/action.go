@@ -104,12 +104,6 @@ var Inputs = [...]core.Connection{
 		Placeholder: "Use a host-installed tofu instead of downloading",
 	},
 	{
-		Name:    "allow_binary_download",
-		Type:    core.ConnectionTypeBoolean,
-		Label:   "Allow Runtime Binary Download (unverified)",
-		Options: []core.ConnectionOption{{Name: "No", Value: "false"}, {Name: "Yes", Value: "true"}},
-	},
-	{
 		Name:    "allow_local_state",
 		Type:    core.ConnectionTypeBoolean,
 		Label:   "Allow Local State (unsafe)",
@@ -229,16 +223,16 @@ func apply(ctx context.Context, cfg tofu.RunConfig) (map[string]interface{}, err
 	return r, nil
 }
 
-func errResult(msg string) map[string]interface{} {
-	r := opentofu.BaseResult("Error: "+msg, "", msg, -1, false)
-	r["status"] = "failed"
-	r["outputs_json"] = ""
-	return r
+// failExtra is the action-specific output schema in its failure (zero) state.
+func failExtra() map[string]interface{} {
+	return map[string]interface{}{
+		"status":       "failed",
+		"outputs_json": "",
+	}
 }
 
+func errResult(msg string) map[string]interface{} { return opentofu.ErrResult(msg, failExtra()) }
+
 func failResult(msg string, res *tofu.RunResult) map[string]interface{} {
-	r := opentofu.BaseResult(fmt.Sprintf("%s (exit %d)", msg, res.ExitCode), res.Stdout, res.Stderr, res.ExitCode, false)
-	r["status"] = "failed"
-	r["outputs_json"] = ""
-	return r
+	return opentofu.FailResult(msg, res, failExtra())
 }
