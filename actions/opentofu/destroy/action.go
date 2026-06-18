@@ -10,12 +10,9 @@ package opentofu_destroy
 import (
 	"context"
 	"fmt"
-	"os"
-	"strconv"
-	"strings"
-	"time"
 
 	core "flomation.app/automate/executor"
+	"flomation.app/automate/executor/actions/opentofu"
 	"flomation.app/automate/executor/actions/opentofu/tofu"
 )
 
@@ -31,7 +28,6 @@ const (
 
 	defaultTimeout = 1800 // seconds
 	maxTimeout     = 3600 // seconds
-	maxOutputBytes = 1 << 20
 
 	approvalReason = "opentofu_destroy_approval"
 )
@@ -100,16 +96,22 @@ var Inputs = [...]core.Connection{
 		Placeholder: "1.9.1 (pinned default)",
 	},
 	{
-		Name:    "allow_local_state",
-		Type:    core.ConnectionTypeBoolean,
-		Label:   "Allow Local State (unsafe)",
-		Options: []core.ConnectionOption{{Name: "No", Value: "false"}, {Name: "Yes", Value: "true"}},
-	},
-	{
 		Name:        "binary_path",
 		Type:        core.ConnectionTypeString,
 		Label:       "Binary Path (optional)",
 		Placeholder: "Use a host-installed tofu instead of downloading",
+	},
+	{
+		Name:    "allow_binary_download",
+		Type:    core.ConnectionTypeBoolean,
+		Label:   "Allow Runtime Binary Download (unverified)",
+		Options: []core.ConnectionOption{{Name: "No", Value: "false"}, {Name: "Yes", Value: "true"}},
+	},
+	{
+		Name:    "allow_local_state",
+		Type:    core.ConnectionTypeBoolean,
+		Label:   "Allow Local State (unsafe)",
+		Options: []core.ConnectionOption{{Name: "No", Value: "false"}, {Name: "Yes", Value: "true"}},
 	},
 	{
 		Name:        "timeout_seconds",
@@ -124,41 +126,30 @@ var Outputs = [...]core.Connection{
 	{Name: "status", Type: core.ConnectionTypeString, Label: "Status"},
 	{Name: "stdout", Type: core.ConnectionTypeText, Label: "Destroy Output"},
 	{Name: "stderr", Type: core.ConnectionTypeText, Label: "Standard Error"},
-	{Name: "destroy", Type: core.ConnectionTypeInteger, Label: "Resources to Destroy"},
+	{Name: "destroy", Type: core.ConnectionTypeInteger, Label: "Resources Destroyed"},
 	{Name: "exit_code", Type: core.ConnectionTypeInteger, Label: "Exit Code"},
 	{Name: "success", Type: core.ConnectionTypeBoolean, Label: "Success"},
 }
 
 func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[string]interface{}, error) {
-	workDir := optStr("working_directory", inputs)
-	if workDir == "" || strings.HasPrefix(workDir, "${") {
-		return errResult("working_directory is required"), nil
+	workDir, err := opentofu.WorkDir(inputs)
+	if err != nil {
+		return errResult(err.Error()), nil
 	}
-	if fi, err := os.Stat(workDir); err != nil || !fi.IsDir() {
-		return errResult(fmt.Sprintf("working_directory %q is not an accessible directory", workDir)), nil
+	if err := opentofu.CheckBackend(workDir, inputs); err != nil {
+		return errResult(err.Error()), nil
 	}
-
-	if optStr("allow_local_state", inputs) != "true" {
-		if err := tofu.RequireRemoteBackend(workDir); err != nil {
-			return errResult(err.Error()), nil
-		}
+	timeout, err := opentofu.Timeout(opentofu.OptStr("timeout_seconds", inputs), defaultTimeout, maxTimeout)
+	if err != nil {
+		return errResult(err.Error()), nil
 	}
 
-	ctx, cancel := context.WithTimeout(flow.GoContext(), timeout(inputs))
+	ctx, cancel := context.WithTimeout(flow.GoContext(), timeout)
 	defer cancel()
 
-	cfg := tofu.RunConfig{
-		WorkDir:       workDir,
-		Version:       optStr("tofu_version", inputs),
-		BinaryPath:    optStr("binary_path", inputs),
-		TFVars:        kvMap("variables", inputs),
-		ExtraEnv:      backendEnv(inputs),
-		BackendConfig: backendConfig(inputs),
-	}
+	cfg := opentofu.Config(workDir, inputs)
 
-	requireApproval := optStr("require_approval", inputs) != "false" // default on
-
-	if requireApproval && !flow.IsResumedNode(node.ID) {
+	if opentofu.OptBool("require_approval", inputs, true) && !flow.IsResumedNode(node.ID) {
 		return planAndSuspend(ctx, flow, node, cfg)
 	}
 
@@ -189,15 +180,10 @@ func planAndSuspend(ctx context.Context, flow *core.Flow, node *core.Node, cfg t
 		Reason: approvalReason,
 	})
 
-	return map[string]interface{}{
-		"tool_result": fmt.Sprintf("Awaiting approval to destroy %d resource(s)", summary.Destroy),
-		"status":      "pending_approval",
-		"stdout":      truncate(planRes.Stdout),
-		"stderr":      truncate(planRes.Stderr),
-		"destroy":     int64(summary.Destroy),
-		"exit_code":   int64(0),
-		"success":     true,
-	}, core.ErrSuspended
+	r := opentofu.BaseResult(fmt.Sprintf("Awaiting approval to destroy %d resource(s)", summary.Destroy), planRes.Stdout, planRes.Stderr, 0, true)
+	r["status"] = "pending_approval"
+	r["destroy"] = int64(summary.Destroy)
+	return r, core.ErrSuspended
 }
 
 func destroy(ctx context.Context, cfg tofu.RunConfig) (map[string]interface{}, error) {
@@ -209,123 +195,38 @@ func destroy(ctx context.Context, cfg tofu.RunConfig) (map[string]interface{}, e
 		return failResult("tofu init failed", initRes), nil
 	}
 
-	res, err := tofu.Run(ctx, bin, cfg.WorkDir, env, "destroy", "-input=false", "-no-color", "-auto-approve")
+	// -json so the change_summary (with the destroyed count) is machine-readable.
+	res, err := tofu.Run(ctx, bin, cfg.WorkDir, env, "destroy", "-input=false", "-no-color", "-auto-approve", "-json")
 	if err != nil {
 		return errResult(fmt.Sprintf("tofu destroy failed to run: %v", err)), nil
 	}
 
 	success := res.ExitCode == 0
+	summary, _ := tofu.ParsePlanSummary(res.Stdout)
+
 	toolResult := fmt.Sprintf("Destroy failed (exit %d)", res.ExitCode)
 	status := "failed"
 	if success {
-		toolResult = "Destroy complete"
+		toolResult = fmt.Sprintf("Destroy complete: %d resource(s) destroyed", summary.Destroy)
 		status = "destroyed"
 	}
 
-	return map[string]interface{}{
-		"tool_result": toolResult,
-		"status":      status,
-		"stdout":      truncate(res.Stdout),
-		"stderr":      truncate(res.Stderr),
-		"destroy":     int64(0),
-		"exit_code":   int64(res.ExitCode),
-		"success":     success,
-	}, nil
-}
-
-// --- local helpers ----------------------------------------------------------
-
-func timeout(inputs []*core.Connection) time.Duration {
-	secs := defaultTimeout
-	if v := optStr("timeout_seconds", inputs); v != "" {
-		if n, err := strconv.Atoi(v); err == nil && n > 0 {
-			secs = n
-		}
-	}
-	if secs > maxTimeout {
-		secs = maxTimeout
-	}
-	return time.Duration(secs) * time.Second
-}
-
-func optStr(name string, inputs []*core.Connection) string {
-	c := core.FindConnection(name, inputs)
-	if c == nil || c.String() == nil {
-		return ""
-	}
-	return strings.TrimSpace(*c.String())
-}
-
-func kvMap(name string, inputs []*core.Connection) map[string]string {
-	c := core.FindConnection(name, inputs)
-	if c == nil {
-		return nil
-	}
-	m := map[string]string{}
-	for _, p := range c.KeyValuePairs() {
-		if p.Key != "" {
-			m[p.Key] = p.Value
-		}
-	}
-	return m
-}
-
-// backendEnv merges the free-form credentials key-value input with the typed,
-// provider-specific backend auth fields (the latter take precedence).
-func backendEnv(inputs []*core.Connection) map[string]string {
-	env := kvMap("credentials", inputs)
-	if env == nil {
-		env = map[string]string{}
-	}
-	auth := tofu.BackendAuthEnv(optStr("backend_auth", inputs), func(n string) string { return optStr(n, inputs) })
-	for k, v := range auth {
-		env[k] = v
-	}
-	return env
-}
-
-// backendConfig merges the provider-derived `-backend-config` entries (e.g. the
-// GitLab http address/lock plumbing) with the user's explicit backend_config
-// input. Explicit entries win so a user can always override the derived values.
-func backendConfig(inputs []*core.Connection) map[string]string {
-	cfg := tofu.BackendConfigFor(optStr("backend_auth", inputs), func(n string) string { return optStr(n, inputs) })
-	if cfg == nil {
-		cfg = map[string]string{}
-	}
-	for k, v := range kvMap("backend_config", inputs) {
-		cfg[k] = v
-	}
-	return cfg
-}
-
-func truncate(s string) string {
-	s = strings.TrimSpace(s)
-	if len(s) > maxOutputBytes {
-		return s[:maxOutputBytes] + "\n... (output truncated)"
-	}
-	return s
+	r := opentofu.BaseResult(toolResult, res.Stdout, res.Stderr, res.ExitCode, success)
+	r["status"] = status
+	r["destroy"] = int64(summary.Destroy)
+	return r, nil
 }
 
 func errResult(msg string) map[string]interface{} {
-	return map[string]interface{}{
-		"tool_result": "Error: " + msg,
-		"status":      "failed",
-		"stdout":      "",
-		"stderr":      msg,
-		"destroy":     int64(0),
-		"exit_code":   int64(-1),
-		"success":     false,
-	}
+	r := opentofu.BaseResult("Error: "+msg, "", msg, -1, false)
+	r["status"] = "failed"
+	r["destroy"] = int64(0)
+	return r
 }
 
 func failResult(msg string, res *tofu.RunResult) map[string]interface{} {
-	return map[string]interface{}{
-		"tool_result": fmt.Sprintf("%s (exit %d)", msg, res.ExitCode),
-		"status":      "failed",
-		"stdout":      truncate(res.Stdout),
-		"stderr":      truncate(res.Stderr),
-		"destroy":     int64(0),
-		"exit_code":   int64(res.ExitCode),
-		"success":     false,
-	}
+	r := opentofu.BaseResult(fmt.Sprintf("%s (exit %d)", msg, res.ExitCode), res.Stdout, res.Stderr, res.ExitCode, false)
+	r["status"] = "failed"
+	r["destroy"] = int64(0)
+	return r
 }

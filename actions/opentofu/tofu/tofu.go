@@ -34,9 +34,15 @@ import (
 	"time"
 )
 
-// DefaultVersion is the OpenTofu release the actions pin to when the workflow
-// does not request a specific version. Bump deliberately; downloads are
-// checksum-verified against this exact tag.
+// DefaultVersion is the OpenTofu release the actions download when no version is
+// requested and no host binary is found.
+//
+// Bumping it: change this single constant. The matching tofu_<v>_SHA256SUMS is
+// fetched from the same release tag at download time and the archive is verified
+// against it, so no checksums need updating here. Note that this is an
+// integrity check only — authenticity verification (GPG/cosign of SHA256SUMS) is
+// a tracked follow-up, so production deployments should prefer a host-provisioned
+// binary (see EnsureBinary).
 const DefaultVersion = "1.9.1"
 
 const binaryName = "tofu"
@@ -50,15 +56,29 @@ var downloadMu sync.Mutex
 // slow link should still comfortably finish inside this.
 var httpClient = &http.Client{Timeout: 5 * time.Minute}
 
-// EnsureBinary returns a path to a usable `tofu` binary, downloading and caching
-// the pinned release if necessary. override, when non-empty, must point at an
-// existing binary and short-circuits all resolution.
-func EnsureBinary(ctx context.Context, version, override string) (string, error) {
+// EnsureBinary returns a path to a usable `tofu` binary. Resolution order, most
+// to least trustworthy:
+//
+//  1. override — an explicit operator-chosen binary path.
+//  2. A `tofu` already on PATH — provisioned by the host (DEB/RPM package, base
+//     image, or manual install); its provenance is controlled outside this
+//     process. Used as-is regardless of the requested version.
+//  3. A previously-downloaded binary cached for the requested version.
+//  4. A fresh download — ONLY when allowDownload (or FLOMATION_TOFU_ALLOW_DOWNLOAD)
+//     is set. The download is checksum-verified for integrity but NOT yet
+//     authenticity-verified (GPG/cosign is a tracked follow-up), so it is gated
+//     off by default and intended as an explicit escape hatch.
+func EnsureBinary(ctx context.Context, version, override string, allowDownload bool) (string, error) {
 	if override != "" {
 		if _, err := os.Stat(override); err != nil {
 			return "", fmt.Errorf("opentofu binary_path %q is not usable: %w", override, err)
 		}
 		return override, nil
+	}
+
+	// Prefer a host-provisioned binary over anything we fetch ourselves.
+	if p, err := exec.LookPath(binaryName); err == nil {
+		return p, nil
 	}
 
 	if version == "" {
@@ -68,6 +88,13 @@ func EnsureBinary(ctx context.Context, version, override string) (string, error)
 	dest := cachePath(version)
 	if isExecutableFile(dest) {
 		return dest, nil
+	}
+
+	if !allowDownload && !envAllowsDownload() {
+		return "", fmt.Errorf("no %s binary available: install OpenTofu on the runner (recommended), "+
+			"set binary_path, or explicitly enable runtime download (the \"Allow Runtime Binary Download\" "+
+			"input or FLOMATION_TOFU_ALLOW_DOWNLOAD=1). Runtime download is currently integrity-checked "+
+			"(SHA-256) but not authenticity-verified — GPG/cosign verification is a tracked follow-up", binaryName)
 	}
 
 	downloadMu.Lock()
@@ -80,15 +107,19 @@ func EnsureBinary(ctx context.Context, version, override string) (string, error)
 	}
 
 	if err := download(ctx, version, dest); err != nil {
-		// Fall back to a host-provided tofu (package install) before giving up,
-		// so air-gapped or download-restricted deployments still work.
-		if p, lookErr := exec.LookPath(binaryName); lookErr == nil {
-			return p, nil
-		}
-		return "", fmt.Errorf("could not obtain tofu %s (and none on PATH): %w", version, err)
+		return "", fmt.Errorf("could not obtain tofu %s: %w", version, err)
 	}
 
 	return dest, nil
+}
+
+// envAllowsDownload reports whether the fleet-wide download opt-in env var is set.
+func envAllowsDownload() bool {
+	switch strings.ToLower(strings.TrimSpace(os.Getenv("FLOMATION_TOFU_ALLOW_DOWNLOAD"))) {
+	case "1", "true", "yes":
+		return true
+	}
+	return false
 }
 
 // RunConfig captures everything needed to prepare an OpenTofu working directory.
@@ -96,6 +127,7 @@ type RunConfig struct {
 	WorkDir       string
 	Version       string
 	BinaryPath    string
+	AllowDownload bool              // permit runtime download when no host binary is found
 	TFVars        map[string]string // exported as TF_VAR_<key>
 	ExtraEnv      map[string]string // raw env (e.g. provider credentials)
 	BackendConfig map[string]string // passed as -backend-config to `tofu init`
@@ -114,7 +146,7 @@ type RunResult struct {
 // (wiring in any backend config). It returns the binary path and environment so
 // the caller can run the subsequent plan/apply/destroy command.
 func Prepare(ctx context.Context, c RunConfig) (bin string, env []string, init *RunResult, err error) {
-	bin, err = EnsureBinary(ctx, c.Version, c.BinaryPath)
+	bin, err = EnsureBinary(ctx, c.Version, c.BinaryPath, c.AllowDownload)
 	if err != nil {
 		return "", nil, nil, err
 	}
