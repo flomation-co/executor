@@ -4354,6 +4354,212 @@
       }
     ]
   },
+  "filetransfer/upload": {
+    "hash": "9c3f19cd6c9ef653f5ba753bb5750f2064ddceba61e907174946051c3eb65c66",
+    "author": "David McElin",
+    "organisation": "Flomation",
+    "name": "Upload File (FTP/SFTP)",
+    "description": "Upload a file to a remote FTP, FTPS, or SFTP server",
+    "website": "https://www.flomation.co",
+    "icon": "server+arrow-up",
+    "date": "20/06/2026",
+    "type": 2,
+    "category": {
+      "name": "File Transfer",
+      "icon": "server+arrow-up",
+      "description": "Move files to and from remote FTP, FTPS, and SFTP servers."
+    },
+    "inputs": [
+      {
+        "name": "protocol",
+        "type": "string",
+        "value": null,
+        "label": "Protocol",
+        "placeholder": "",
+        "required": true,
+        "options": [
+          {
+            "name": "SFTP (over SSH)",
+            "value": "sftp"
+          },
+          {
+            "name": "FTP (plain)",
+            "value": "ftp"
+          },
+          {
+            "name": "FTPS (FTP over TLS)",
+            "value": "ftps"
+          }
+        ]
+      },
+      {
+        "name": "host",
+        "type": "string",
+        "value": null,
+        "label": "Host",
+        "placeholder": "files.example.com or 10.0.0.5",
+        "required": true
+      },
+      {
+        "name": "port",
+        "type": "integer",
+        "value": null,
+        "label": "Port",
+        "placeholder": "Defaults to 22 for SFTP, 21 for FTP/FTPS"
+      },
+      {
+        "name": "username",
+        "type": "string",
+        "value": null,
+        "label": "Username",
+        "placeholder": "ftpuser",
+        "required": true
+      },
+      {
+        "name": "auth_method",
+        "type": "string",
+        "value": null,
+        "label": "Authentication",
+        "placeholder": "",
+        "required": true,
+        "options": [
+          {
+            "name": "Password",
+            "value": "password"
+          },
+          {
+            "name": "Private Key (SFTP only)",
+            "value": "key"
+          }
+        ]
+      },
+      {
+        "name": "password",
+        "type": "secret",
+        "value": null,
+        "label": "Password",
+        "placeholder": "Select an environment secret",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "password"
+          ]
+        }
+      },
+      {
+        "name": "private_key",
+        "type": "secret",
+        "value": null,
+        "label": "SSH Private Key",
+        "placeholder": "Secret holding the private key (SFTP only)",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "key"
+          ]
+        }
+      },
+      {
+        "name": "passphrase",
+        "type": "secret",
+        "value": null,
+        "label": "Key Passphrase",
+        "placeholder": "Only if the private key is encrypted",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "key"
+          ]
+        }
+      },
+      {
+        "name": "host_fingerprint",
+        "type": "string",
+        "value": null,
+        "label": "SFTP Host Key Fingerprint",
+        "placeholder": "SHA256:... (optional — verifies the SSH host key)",
+        "visible_when": {
+          "field": "protocol",
+          "values": [
+            "sftp"
+          ]
+        }
+      },
+      {
+        "name": "tls_skip_verify",
+        "type": "boolean",
+        "value": null,
+        "label": "Skip TLS Certificate Verification",
+        "placeholder": "Allow self-signed certificates (FTPS only — use with care)",
+        "visible_when": {
+          "field": "protocol",
+          "values": [
+            "ftps"
+          ]
+        }
+      },
+      {
+        "name": "remote_path",
+        "type": "string",
+        "value": null,
+        "label": "Remote Path",
+        "placeholder": "/uploads/report.pdf (full path including filename)",
+        "required": true
+      },
+      {
+        "name": "content",
+        "type": "text",
+        "value": null,
+        "label": "File Content",
+        "placeholder": "Text to write, or base64 if 'Content is Base64' is on",
+        "required": true
+      },
+      {
+        "name": "content_is_base64",
+        "type": "boolean",
+        "value": null,
+        "label": "Content is Base64 (binary files)",
+        "placeholder": "Decode the content before uploading — for PDFs, images, etc."
+      },
+      {
+        "name": "create_dirs",
+        "type": "boolean",
+        "value": null,
+        "label": "Create Missing Directories",
+        "placeholder": "Create the parent path on the server if it doesn't exist"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "remote_path",
+        "type": "string",
+        "value": null,
+        "label": "Remote Path",
+        "placeholder": ""
+      },
+      {
+        "name": "bytes_sent",
+        "type": "integer",
+        "value": null,
+        "label": "Bytes Sent",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      }
+    ]
+  },
   "git/add": {
     "hash": "4d307d307e222f349b5286744b8373a9f995d89c13605adaf0f42797d9e344f2",
     "author": "Andy Esser",
