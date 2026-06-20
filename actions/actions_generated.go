@@ -55,6 +55,7 @@ import (
 	error_on_error "flomation.app/automate/executor/actions/error/on_error"
 	file_read "flomation.app/automate/executor/actions/file/read"
 	file_write "flomation.app/automate/executor/actions/file/write"
+	filetransfer_upload "flomation.app/automate/executor/actions/filetransfer/upload"
 	git_add "flomation.app/automate/executor/actions/git/add"
 	git_branch "flomation.app/automate/executor/actions/git/branch"
 	git_checkout "flomation.app/automate/executor/actions/git/checkout"
@@ -405,6 +406,7 @@ var Actions = map[string]core.Action{
 	"error/on_error":                        error_on_error.Execute,
 	"file/read":                             file_read.Execute,
 	"file/write":                            file_write.Execute,
+	"filetransfer/upload":                   filetransfer_upload.Execute,
 	"git/add":                               git_add.Execute,
 	"git/branch":                            git_branch.Execute,
 	"git/checkout":                          git_checkout.Execute,

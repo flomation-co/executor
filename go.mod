@@ -16,8 +16,10 @@ require (
 	github.com/go-sql-driver/mysql v1.9.3
 	github.com/google/uuid v1.6.0
 	github.com/gorilla/websocket v1.5.3
+	github.com/jlaffaye/ftp v0.2.1
 	github.com/lib/pq v1.11.2
 	github.com/onsi/gomega v1.38.2
+	github.com/pkg/sftp v1.13.10
 	github.com/redis/go-redis/v9 v9.18.0
 	github.com/sijms/go-ora/v2 v2.9.0
 	github.com/sirupsen/logrus v1.9.3
@@ -61,6 +63,7 @@ require (
 	github.com/kevinburke/ssh_config v1.5.0 // indirect
 	github.com/klauspost/compress v1.18.6 // indirect
 	github.com/klauspost/cpuid/v2 v2.3.0 // indirect
+	github.com/kr/fs v0.1.0 // indirect
 	github.com/pjbgf/sha1cd v0.5.0 // indirect
 	github.com/sergi/go-diff v1.4.0 // indirect
 	github.com/tetratelabs/wazero v1.12.0 // indirect
