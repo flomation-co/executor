@@ -10,6 +10,7 @@ import (
 	"time"
 
 	core "flomation.app/automate/executor"
+	web_common "flomation.app/automate/executor/actions/web"
 	log "github.com/sirupsen/logrus"
 )
 
@@ -101,7 +102,17 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 		req.Header.Set("Authorization", "Bearer "+ctx.Token)
 	}
 
-	client := http.Client{Timeout: 30 * time.Second}
+	// Link the child execution back to this one so the hierarchy
+	// shows up in the executions UI. The destination URL was built
+	// from ctx.APIURL above, so the helper's host-match check passes
+	// by definition.
+	web_common.InjectParentHeaderIfInternal(req, ctx)
+
+	// The internal API listens on the mTLS-only engine in dev and
+	// production. ctx.InternalClient() returns a client whose TLS
+	// config presents the runner's client cert and trusts the dev CA;
+	// http.Client{} without that config fails the cert verification.
+	client := ctx.InternalClient()
 	resp, err := client.Do(req)
 	if err != nil {
 		return nil, fmt.Errorf("failed to trigger flow: %w", err)
