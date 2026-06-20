@@ -387,6 +387,198 @@
       }
     ]
   },
+  "agent/get_calendar": {
+    "hash": "e74fb1c20c22288f456d3cae9a618d0318a80ef88184920bdc731ab9ebe71170",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Get Calendar",
+    "description": "Return the user's upcoming Google Calendar events. Use when the conversation hints at scheduling — where they are, where they need to be, whether they're running late.",
+    "website": "https://www.flomation.co",
+    "icon": "calendar+magnifying-glass",
+    "date": "20/06/2026",
+    "type": 2,
+    "category": {
+      "name": "Agent",
+      "icon": "robot",
+      "description": "Interact with Flomation Agents"
+    },
+    "inputs": [
+      {
+        "name": "agent_id",
+        "type": "string",
+        "value": null,
+        "label": "Agent ID",
+        "placeholder": "${flow.agent_id}",
+        "required": true
+      },
+      {
+        "name": "agent_user_id",
+        "type": "string",
+        "value": null,
+        "label": "Agent User ID",
+        "placeholder": "${flow.agent_user_id}",
+        "required": true
+      },
+      {
+        "name": "hours",
+        "type": "integer",
+        "value": null,
+        "label": "How many hours ahead to look (default 24, max 168).",
+        "placeholder": "24"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "events",
+        "type": "object",
+        "value": null,
+        "label": "Upcoming events",
+        "placeholder": ""
+      },
+      {
+        "name": "event_count",
+        "type": "integer",
+        "value": null,
+        "label": "Number of events returned",
+        "placeholder": ""
+      },
+      {
+        "name": "no_calendar",
+        "type": "boolean",
+        "value": null,
+        "label": "True if the user hasn't linked a Google Calendar",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "agent/get_conversation": {
+    "hash": "edf09efe1d6fbad8b10dfe2afee30f8d2fb8561b5b5c0f5cb5dbee4676ad2066",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Get Conversation",
+    "description": "Fetch the full message history of a previous conversation the agent has had with this user. Use when a summary in your Recent Conversations section looks relevant.",
+    "website": "https://www.flomation.co",
+    "icon": "comments+magnifying-glass",
+    "date": "20/06/2026",
+    "type": 2,
+    "category": {
+      "name": "Agent",
+      "icon": "robot",
+      "description": "Interact with Flomation Agents"
+    },
+    "inputs": [
+      {
+        "name": "agent_id",
+        "type": "string",
+        "value": null,
+        "label": "Agent ID",
+        "placeholder": "${flow.agent_id}",
+        "required": true
+      },
+      {
+        "name": "agent_user_id",
+        "type": "string",
+        "value": null,
+        "label": "Agent User ID",
+        "placeholder": "${flow.agent_user_id}",
+        "required": true
+      },
+      {
+        "name": "conversation_id",
+        "type": "string",
+        "value": null,
+        "label": "Conversation ID — pass the conversation_id verbatim from the Recent Conversations section.",
+        "placeholder": "00000000-0000-0000-0000-000000000000",
+        "required": true
+      },
+      {
+        "name": "max_messages",
+        "type": "integer",
+        "value": null,
+        "label": "Maximum messages to return (defaults to 200; max 500). Messages are read in sequence order from the start of the conversation.",
+        "placeholder": "200"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "messages",
+        "type": "object",
+        "value": null,
+        "label": "Messages in sequence order",
+        "placeholder": ""
+      },
+      {
+        "name": "message_count",
+        "type": "integer",
+        "value": null,
+        "label": "Total messages in the conversation",
+        "placeholder": ""
+      },
+      {
+        "name": "returned_count",
+        "type": "integer",
+        "value": null,
+        "label": "Messages actually returned in this response",
+        "placeholder": ""
+      },
+      {
+        "name": "ended_at",
+        "type": "string",
+        "value": null,
+        "label": "Conversation end timestamp (if ended)",
+        "placeholder": ""
+      },
+      {
+        "name": "was_truncated",
+        "type": "boolean",
+        "value": null,
+        "label": "True if the conversation has more messages than max_messages",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
   "agent/list_identities": {
     "hash": "fa0f7fb53a9807a33c8ed3cbcb4f06c94fd8daba6283338733f1408589b4662c",
     "author": "Andy Esser",
@@ -494,7 +686,7 @@
     ]
   },
   "agent/process_extraction": {
-    "hash": "e7674333559d8a514797eeaa62ae42b970e634c000ba36786db0cf77ec9cbf93",
+    "hash": "e6a832dbfbfb5499a73c0c9c3d97525b8c1245a2bce0c8f318675e80038d1daf",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Process Extraction Output",
@@ -997,7 +1189,7 @@
     ]
   },
   "ai/anthropic": {
-    "hash": "2dad6a64f94fb01ebdba0162e5401af92f978a4bff5e1da2ad8bfdc57913941e",
+    "hash": "76b36066a7dd22aad8e568438fe9a8fd77b5188462b810c948c565c5f8a82e4e",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Anthropic Prompt",
@@ -1166,7 +1358,7 @@
     ]
   },
   "ai/openai": {
-    "hash": "7d8e46b5b0c18057fd83d3256c9ff11813828329c401138b79722cf181608698",
+    "hash": "5fa346529066c4d8c3859627dd64389889a171708beb8f7f4a5c3e66757366d8",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "OpenAI Prompt",
@@ -3173,7 +3365,7 @@
     ]
   },
   "common/start_flow": {
-    "hash": "17df3ed5e80e3b5870346bce09f61b13eaa51fd2c59801da178a1076d695825c",
+    "hash": "12573554a43875a6006cbbb25960c1bc6e12d1858950e485374b519e332a3208",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Start Flow",
@@ -17330,7 +17522,7 @@
     ]
   },
   "messaging/telegram/send_message": {
-    "hash": "5d66a9d0e4e811bc7e484f124d56d48dc6db2f08d9631c880dfa6fbf854cf22f",
+    "hash": "fd8ae5e618a5843151c85035d533a18c32798cbab38a16c310c03bafce26c44f",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Send Telegram Message",
@@ -17360,7 +17552,7 @@
       },
       {
         "name": "channel_id",
-        "type": "secret",
+        "type": "string",
         "value": null,
         "label": "Channel ID",
         "placeholder": "${flow.channel_id}",
@@ -17428,7 +17620,7 @@
     ]
   },
   "messaging/telegram/send_voice": {
-    "hash": "a6fe0a6fe41fe363c23f8582ebe443331a33e76586afea2b4054746beb026118",
+    "hash": "3693537c27c3c81d3bb0077ff34957b5c43f034e548baab82a03594549a59e08",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Send Telegram Voice",
@@ -17458,7 +17650,7 @@
       },
       {
         "name": "channel_id",
-        "type": "secret",
+        "type": "string",
         "value": null,
         "label": "Chat/Channel ID",
         "placeholder": "${flow.channel_id}",
@@ -31035,7 +31227,7 @@
     ]
   },
   "web/request": {
-    "hash": "492a679e758faacbbe7f5f4c0ac092984e0526bd4f71b04f9bdbd6c06a31f76f",
+    "hash": "9eb4a803eff9df6af481e35351abe89b76925a8f6dbb5110aea3189d2d6be2ce",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "HTTP Request",

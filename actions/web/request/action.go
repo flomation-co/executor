@@ -8,6 +8,7 @@ import (
 	"time"
 
 	core "flomation.app/automate/executor"
+	web_common "flomation.app/automate/executor/actions/web"
 )
 
 const (
@@ -123,6 +124,14 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 				req.Header.Set(strings.TrimSpace(parts[0]), strings.TrimSpace(parts[1]))
 			}
 		}
+	}
+
+	// Link any execution this request triggers back to the current
+	// one so the executions UI can render the hierarchy. No-op for
+	// external URLs and for actions running without an execution
+	// context (e.g. unit tests pass flow=nil).
+	if flow != nil {
+		web_common.InjectParentHeaderIfInternal(req, flow.GetContext())
 	}
 
 	client := &http.Client{

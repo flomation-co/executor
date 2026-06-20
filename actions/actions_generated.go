@@ -10,6 +10,8 @@ import (
 	agent_delete_schedule "flomation.app/automate/executor/actions/agent/delete_schedule"
 	agent_forget "flomation.app/automate/executor/actions/agent/forget"
 	agent_fulfill_commitment "flomation.app/automate/executor/actions/agent/fulfill_commitment"
+	agent_get_calendar "flomation.app/automate/executor/actions/agent/get_calendar"
+	agent_get_conversation "flomation.app/automate/executor/actions/agent/get_conversation"
 	agent_list_identities "flomation.app/automate/executor/actions/agent/list_identities"
 	agent_list_schedules "flomation.app/automate/executor/actions/agent/list_schedules"
 	agent_process_extraction "flomation.app/automate/executor/actions/agent/process_extraction"
@@ -360,6 +362,8 @@ var Actions = map[string]core.Action{
 	"agent/delete_schedule":                 agent_delete_schedule.Execute,
 	"agent/forget":                          agent_forget.Execute,
 	"agent/fulfill_commitment":              agent_fulfill_commitment.Execute,
+	"agent/get_calendar":                    agent_get_calendar.Execute,
+	"agent/get_conversation":                agent_get_conversation.Execute,
 	"agent/list_identities":                 agent_list_identities.Execute,
 	"agent/list_schedules":                  agent_list_schedules.Execute,
 	"agent/process_extraction":              agent_process_extraction.Execute,

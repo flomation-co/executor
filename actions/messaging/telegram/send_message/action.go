@@ -35,7 +35,7 @@ var Inputs = [...]core.Connection{
 	},
 	{
 		Name:        "channel_id",
-		Type:        core.ConnectionTypeSecret,
+		Type:        core.ConnectionTypeString,
 		Label:       "Channel ID",
 		Placeholder: "${flow.channel_id}",
 		Required:    true,

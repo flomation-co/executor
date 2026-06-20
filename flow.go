@@ -11,6 +11,7 @@ import (
 	"regexp"
 	"strconv"
 	"strings"
+	"sync"
 	"time"
 
 	"flomation.app/automate/executor/internal/assets"
@@ -514,6 +515,23 @@ func (f *Flow) GetContext() *ExecutionContext {
 	return f.context
 }
 
+// Blobs returns the per-execution BlobStore, lazily creating it the
+// first time a caller needs to off-load a large tool output. The
+// store roots at the executor's current working directory — the
+// runner places each execution in its own dir and tears it down on
+// completion, so blob files share that lifetime automatically.
+func (f *Flow) Blobs() *BlobStore {
+	f.blobsMu.Lock()
+	defer f.blobsMu.Unlock()
+	if f.blobs == nil {
+		// "." resolves at runtime to whatever cwd the runner spawned
+		// us under. We don't capture an absolute path because the
+		// runner might restart and the working dir would be stale.
+		f.blobs = NewBlobStore(".")
+	}
+	return f.blobs
+}
+
 // Get returns the value of a named execution context field.
 func (ctx *ExecutionContext) Get(name string) string {
 	switch name {
@@ -596,6 +614,12 @@ type Flow struct {
 	context              *ExecutionContext
 	ctx                  gocontext.Context
 	cancel               gocontext.CancelFunc
+
+	// blobs is the per-execution off-loading store for large tool
+	// outputs. Lazily initialised by Blobs() so flows that never
+	// touch the AI tool loop pay no filesystem cost.
+	blobs   *BlobStore
+	blobsMu sync.Mutex
 }
 
 // ErrCancelled is returned when a flow execution is cancelled.
@@ -1973,6 +1997,25 @@ func (f *Flow) executeNodeChildren(actions map[string]Action, node *Node, output
 							}
 						}
 
+						// Detokenise any blob references in the LLM's
+						// arguments. The model passes flo:blob:<handle>
+						// references verbatim when carrying data
+						// between tool calls; we resolve them back to
+						// the real values here so actions stay
+						// completely unaware of off-loading. A failed
+						// resolution leaves the token in place and
+						// returns an error string the model can act on
+						// (see the comment in DetokeniseInputs).
+						if detoked, derr := DetokeniseInputs(req.Input, f.blobs); derr == nil {
+							req.Input = detoked
+						} else {
+							log.WithFields(log.Fields{
+								"tool":  req.Name,
+								"error": derr,
+							}).Warn("blob token resolution failed; passing raw value through")
+							req.Input = detoked
+						}
+
 						// Inject tool input as the matched node's input values.
 						// We must also clear the cached result for this node
 						// so executeNodeActionOnly re-reads the updated inputs.
@@ -2067,6 +2110,27 @@ func (f *Flow) executeNodeChildren(actions map[string]Action, node *Node, output
 					if toolOutput == "" {
 						toolOutput = "Tool produced no output"
 						toolErr = true
+					}
+
+					// Off-load any large outputs to the BlobStore and
+					// append a manifest of references to the
+					// LLM-visible content. The model sees compact
+					// tokens it can pass verbatim into subsequent
+					// tool calls; the action's actual output map in
+					// f.nodeResults is left intact so the editor's
+					// inspector, the Download button, and graph-wired
+					// downstream nodes all keep seeing real values.
+					if !toolErr && matchedTool != nil {
+						if r, exists := f.nodeResults[matchedTool.ID]; exists && r != nil {
+							manifest := TokeniseLargeOutputs(r, f.Blobs())
+							if len(manifest) > 0 {
+								toolOutput += FormatTokenManifest(manifest)
+								log.WithFields(log.Fields{
+									"tool":   req.Name,
+									"fields": len(manifest),
+								}).Info("off-loaded large tool outputs to blob store")
+							}
+						}
 					}
 
 					results = append(results, ToolResult{

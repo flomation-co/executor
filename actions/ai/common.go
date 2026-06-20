@@ -157,3 +157,41 @@ func ModelContextWindow(model string) int {
 	}
 	return 32000 // safe default
 }
+
+// BlobTokenInstructions is appended to the system prompt of any AI
+// action that exposes tools. It teaches the model how to handle the
+// flo:blob:<handle> references the executor emits when a tool
+// produces a large output (audio, image, video, OCR text, etc.).
+//
+// Without this instruction the model frequently invents a placeholder
+// string for the argument (the canonical failure: "generated_audio_base64"
+// in execution 0bab2c40-3905-463c-9103-dc164d381f69). With it, the
+// model passes the verbatim token from the prior tool result, the
+// executor resolves the token into the original bytes, and the
+// downstream tool receives the real value without ever touching the
+// context window.
+const BlobTokenInstructions = `
+
+LARGE TOOL OUTPUTS — when a tool's result mentions a reference like
+flo:blob:a3f9c2d1b4e7805f?size=415077&type=audio/mpeg, treat it as
+an OPAQUE handle to data stored by the executor. When invoking a
+downstream tool that needs that data as an argument, paste the
+ENTIRE token verbatim into the argument value — including the
+flo:blob: prefix and the ?size= and &type= query parameters. Do
+not summarise, paraphrase, or describe the contents in place of
+the token; the actual bytes never enter your context and any
+substitute you invent will fail the downstream tool. If a tool's
+result lists "Outputs available as references:" followed by
+key→token pairs, those tokens are the canonical values for fields
+of the same name on subsequent tool calls.
+`
+
+// AppendBlobTokenInstructions returns the supplied system prompt
+// with the blob-token guidance suffixed. Idempotent — calling it
+// twice doesn't duplicate the block.
+func AppendBlobTokenInstructions(systemPrompt string) string {
+	if strings.Contains(systemPrompt, "LARGE TOOL OUTPUTS —") {
+		return systemPrompt
+	}
+	return systemPrompt + BlobTokenInstructions
+}
