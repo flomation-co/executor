@@ -142,6 +142,11 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	if systemConn != nil && systemConn.String() != nil && *systemConn.String() != "" {
 		systemPromptStr = *systemConn.String()
 	}
+	// Teach the model to pass flo:blob:<handle> tokens verbatim to
+	// downstream tools rather than inventing placeholder strings
+	// for large outputs it can't see. See ai_common for the
+	// rationale.
+	systemPromptStr = ai_common.AppendBlobTokenInstructions(systemPromptStr)
 
 	// Parse tool definitions if provided (OpenAI format)
 	var tools []interface{}
