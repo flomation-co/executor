@@ -266,6 +266,7 @@ import (
 	opentofu_plan "flomation.app/automate/executor/actions/opentofu/plan"
 	output_set "flomation.app/automate/executor/actions/output/set"
 	output_set_outputs "flomation.app/automate/executor/actions/output/set_outputs"
+	plan_create "flomation.app/automate/executor/actions/plan/create"
 	script_bash "flomation.app/automate/executor/actions/script/bash"
 	script_javascript "flomation.app/automate/executor/actions/script/javascript"
 	script_python "flomation.app/automate/executor/actions/script/python"
@@ -623,6 +624,7 @@ var Actions = map[string]core.Action{
 	"opentofu/plan":                         opentofu_plan.Execute,
 	"output/set":                            output_set.Execute,
 	"output/set_outputs":                    output_set_outputs.Execute,
+	"plan/create":                           plan_create.Execute,
 	"script/bash":                           script_bash.Execute,
 	"script/javascript":                     script_javascript.Execute,
 	"script/python":                         script_python.Execute,
