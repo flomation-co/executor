@@ -1,6 +1,6 @@
 {
   "agent/add_to_conversation": {
-    "hash": "1db87ccf026b83f164aead3a9efd6b574a9db9ff10b9aa517cddb02847c3effc",
+    "hash": "c594008e6c43d031faf5996b5f02a2d1aa2bf14d7a1c88543bfe27e83d346311",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Add to Conversation",
@@ -275,7 +275,7 @@
     ]
   },
   "agent/delete_schedule": {
-    "hash": "10b0742731bdb64a5232d2b4c47f63ff09822aabd38fd29c562bcd32160c8390",
+    "hash": "7ee9d806d6580e62186f258dab544b26dfdee8c105410abeac63c563b521393e",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Delete Schedule",
@@ -637,7 +637,7 @@
     ]
   },
   "agent/list_schedules": {
-    "hash": "0592aec752b96eaead5d1bbf9fc84744ca312491429d074042ff25e27ac7e980",
+    "hash": "acd0fa0c56ee66c274ef7f10e6f6b2ad010b344b18d6f098d954d5127ff4d304",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "List Schedules",
@@ -686,7 +686,7 @@
     ]
   },
   "agent/process_extraction": {
-    "hash": "e6a832dbfbfb5499a73c0c9c3d97525b8c1245a2bce0c8f318675e80038d1daf",
+    "hash": "52fc56721d4327ca754bdeea4c0c0e4dce7c5b7cf47f88fb8ed5e8c1d0e545fb",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Process Extraction Output",
@@ -1189,7 +1189,7 @@
     ]
   },
   "ai/anthropic": {
-    "hash": "c8f13b27cfd285f2acdb3ddc9e0a32341ab12957bf96154038b923e65caf0206",
+    "hash": "0122abcfd936a2d2fbfef9c709c5d3ed5f1a7514e866a02f9d28f94764afaf8b",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Anthropic Prompt",
@@ -1358,7 +1358,7 @@
     ]
   },
   "ai/openai": {
-    "hash": "b9e780ea83a9e4bb5fbb3b305d061941965b94c479c44531699d3cf1b938b443",
+    "hash": "7c31da3f8c27ea28f1603283f15e88befe347d40377e38eb86f194b8efc95694",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "OpenAI Prompt",
@@ -2380,7 +2380,7 @@
     ]
   },
   "common/array_find": {
-    "hash": "c24af09afe932bc3f49cf3fd7725da519c1f708ecc7b5459c7fcc6063a0b0579",
+    "hash": "92fdc9218159d4a3a8f0864ee2cff581c29db25aa425170d7d22b5f936529cd4",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Array Find",
@@ -2556,7 +2556,7 @@
     ]
   },
   "common/array_index": {
-    "hash": "312a593bbb0d63a8bdc2b22ca9a1d4254c676569baf2027a0ae0fd54f71716ac",
+    "hash": "616570fdd22df2d5d84dc3b2a8849c02f475dbad038ac05c50fbc64750b5c1fa",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Array Index",
@@ -2620,7 +2620,7 @@
     ]
   },
   "common/array_length": {
-    "hash": "6a391adfe7b67da6285de4047c99528430d6e0c364ad89b93e5197199b6c5437",
+    "hash": "dd0a035b4bf50a2bdab0590fd574e0e6540f18cf2dcbcca11e369693dfbe86a6",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Array Length",
@@ -3820,7 +3820,7 @@
     ]
   },
   "elevenlabs/list_voices": {
-    "hash": "f34a0f29ccf061e6696ed332a431fee229dc0ca86b1131ff8088e23fc5979305",
+    "hash": "1406ba75e40064caea35303c2de1b8ab6f8ac0a86810e7dc7058d5b1ca3c2b55",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "List Voices",
@@ -3883,7 +3883,7 @@
     ]
   },
   "elevenlabs/speech_to_text": {
-    "hash": "1d2037138f978f175312f9636e97c5216e741adb3d04be12e93dbdf49d28fb74",
+    "hash": "ce2ed4d9fe69e7da3452e76808813de429a7932440726f2e0f437aa646f5ed54",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Speech to Text",
@@ -3987,7 +3987,7 @@
     ]
   },
   "elevenlabs/text_to_speech": {
-    "hash": "1cea7bcfaa9722c862732e4eac2132802cdb7bf06656b4a82ef62180c24e558a",
+    "hash": "002cc5c3067ddc03ea463c505823f1cb1a2cc9d8fce8509f44609d8a1da9286e",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Text to Speech",
@@ -4693,7 +4693,7 @@
     ]
   },
   "git/clone": {
-    "hash": "cb332fa5880dcbff381c3c149726cccbb3629edac0849e205abec30ee33cc369",
+    "hash": "e816afcd7f86f25cbd03626eeab30621bf965cd42cd8d0471fbf5bd8b291afd8",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Git Clone",
@@ -4868,7 +4868,7 @@
     ]
   },
   "git/pull": {
-    "hash": "4bf9f7a259ea89c0cc4dcd6e800da8636c2d948b66fafc2a1ea0aa88f6913789",
+    "hash": "afa664c3d84d7167824610bbdaacc62f455270e307ec56b4a39c930f59536996",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Git Pull",
@@ -4984,7 +4984,7 @@
     ]
   },
   "git/push": {
-    "hash": "12b96990ab3a2ba4d7de3f507db9b28522572c0a0d422b49fcdf7c3e407cb746",
+    "hash": "8c066032cb452712fc09a1512d3824ebb4b87433e01b84c515135240a6ae4b80",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Git Push",
@@ -10304,7 +10304,7 @@
     ]
   },
   "google/calendar/create": {
-    "hash": "521f3da8fe71bc0c0e99dd0aa346850b2bc4800ed884edf051f770acefe4ba97",
+    "hash": "19c03e971e091ebc10141b39a03f60f6fca642462544576d28e6b79583b49b49",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Calendar Create Event",
@@ -10499,7 +10499,7 @@
     ]
   },
   "google/calendar/read": {
-    "hash": "6b990ef8a2e318872207f77d591735a564b61160abbdd7b233639a350d5ed5ba",
+    "hash": "c9a14bc953fa1e8c94639fbe67f8b13173400d5325fd96d67abca3ef66221513",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Calendar Read",
@@ -10769,7 +10769,7 @@
     ]
   },
   "google/docs/append_text": {
-    "hash": "69a46a6e4bd16c36eaabe22a741ba6834e66a1ff23ae268f80ef7942ac2467f0",
+    "hash": "7ea7d68ec141d0046a75e56476a874f055aa49691ca7d721bd0a173d12a551d7",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Append to Document",
@@ -10845,7 +10845,7 @@
     ]
   },
   "google/docs/create": {
-    "hash": "62b802418c271af08176c7f8012f1e36cfcefeab75c858996d0bc6f0c543844b",
+    "hash": "b40fcc25aedfa751a777c484ab70c5bc263ef4182a1c1fd5d0321ddf17bf9bfd",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Create Document",
@@ -11202,7 +11202,7 @@
     ]
   },
   "google/docs/replace_text": {
-    "hash": "9dfcdf04c93ce2caebbb10f9d966fe50a53e46b776baf7c25c21f059dd108015",
+    "hash": "b987f8fa62dfe25e5ec0746e13eeb6b1c5bc0bb2d7df78a95cabc6658322c95d",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Replace Text in Document",
@@ -11560,7 +11560,7 @@
     ]
   },
   "google/drive/download": {
-    "hash": "523d57be5679e62fdf5bdddb5965505e7aea1766037c69953c4f956c88f90832",
+    "hash": "01060f0083c94c3179884818b203fed59dd8a6771fac596b86c96ac36e911118",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Download Drive File",
@@ -12500,7 +12500,7 @@
     ]
   },
   "google/gmail/read": {
-    "hash": "949ba561eaa0c8a2db2d5f96a685c5e39b92feca438692c1991548836a152f6d",
+    "hash": "58f7d2643696c09b170fea07f826a504effb7cc178adc1df4a5446bf07ccbfd0",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Gmail Read",
@@ -12692,7 +12692,7 @@
     ]
   },
   "google/gmail/send": {
-    "hash": "8b9d50ee2d66769279d7a05b04d5b130fe1e7a8fa1d12b4c28718879ef78577c",
+    "hash": "2326bc3aea72d3f41df96d33586e5e9a63c6620cd698c9d81320dd5b74dbcf36",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Gmail Send",
@@ -13257,7 +13257,7 @@
     ]
   },
   "google/sheets/get_metadata": {
-    "hash": "2e0e1f624a540f9871b083d016bc8e65964f3ff8a77cb060352f98a836e0077a",
+    "hash": "40e67526d2151a2d52966e3bee56241c33f51327fb7aafc39368b020161cb9f7",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Get Sheet Metadata",
@@ -13827,7 +13827,7 @@
     ]
   },
   "google/slides/add_text": {
-    "hash": "83945d49a8ebba22209624eb4c69bb3401a2060bbe3c69d4635f02b5655b4f6d",
+    "hash": "d2a91b77ffdb75c5beb6c4508efd6f06674d781785cf4423794d3086bb8f0794",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Add Text to Slide",
@@ -13993,7 +13993,7 @@
     ]
   },
   "google/slides/get": {
-    "hash": "801a3e4f32a620d758760817c29c0fdb246d2e5fae37ddc9ce6016c59330838f",
+    "hash": "450cd61037cd78d92e13f5971bc1e4a06848d215e834b71ec8649cc579a329e8",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Get Presentation",
@@ -14385,7 +14385,7 @@
     ]
   },
   "journey/compare_departure_times": {
-    "hash": "b1a52c7af616688cf2a994ed4516b146648901a1a88b8f96d86500bed7bdb7f6",
+    "hash": "66b308aca4ec639b01a50a89ea13f9229c4ceda627bca84bd1b1f0ae618635d6",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Compare Departure Times",
@@ -14550,7 +14550,7 @@
     ]
   },
   "journey/find_arrive_by": {
-    "hash": "5bc0032e3f6568e012bfc2b2e7f9a8549a9195aa3a7cff515d7a040a3a828a9d",
+    "hash": "00d438509a94ecf4b12adb51728c07df525eadac56eabd8dc15491d85ca9007a",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Find Departure Time",
@@ -14861,7 +14861,7 @@
     ]
   },
   "journey/generate_itinerary_pdf": {
-    "hash": "e45fb0373a63e352d1a5b372caa8f6a027e0ec5f0fde0d1941065f9118d0c0a5",
+    "hash": "83c5f26e41f0ad3e61cbab19c4e7bba04f942a1ffff133a691987aada0c4da49",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Generate Itinerary PDF",
@@ -15233,7 +15233,7 @@
     ]
   },
   "journey/get_place_details": {
-    "hash": "0084b1ea99d4a6463e4889d25795898b2dda9671f701be1a6eabeb1144cd211a",
+    "hash": "246e2193628d8b39f324b1918ffae344aa0bcca1a2ceaeda6f45b2c82c75263e",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Get Place Details",
@@ -15507,7 +15507,7 @@
     ]
   },
   "journey/optimise_route": {
-    "hash": "14a5bcbbfae42d54196fce644cb13638a09bca9588654849cf92607bae2df7b3",
+    "hash": "8b8c458fc8bbdbe06629b94930a4600177fe7433437f36f6d049eda1c21f2e7f",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Optimise Route",
@@ -16744,7 +16744,7 @@
     ]
   },
   "linear/list_teams": {
-    "hash": "6b12450b75f32f42b465352b2d4db533bb46623c0f0c1d8cbb494793506c0f2f",
+    "hash": "c6ed5e0eea1d685ac5612b76482a02c6baefe86b300ef6471002f01768a2bdf3",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "List Teams",
@@ -16807,7 +16807,7 @@
     ]
   },
   "linear/list_users": {
-    "hash": "01b9339e5e2ceb3b392eb87118649d857e0dc7a4a02b435144f5fa4a3c62eadf",
+    "hash": "39a0903e4658085465f3203adeb47bfe3f6726e32703400aed77de49ccf7ba30",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "List Users",
@@ -16877,7 +16877,7 @@
     ]
   },
   "linear/list_workflow_states": {
-    "hash": "a8d98627d4f6a0e104b204f9270c04a844302d04f4a58e0a6a0da5689db03c40",
+    "hash": "681024970de11c5c41853bd6875ef1e42b2a5bb439fe69c8275fb0838d3a798d",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "List Workflow States",
@@ -17346,7 +17346,7 @@
     ]
   },
   "makefile/run_target": {
-    "hash": "446419499abda51ab1ddc30ca27d348d27bee3e2ea17212b4a1dc2bf14d1d98b",
+    "hash": "c3607ab5678697b48cccb4a81410b08511a1980f84712b0741fa704f4269b84e",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Run Make Target",
@@ -18263,7 +18263,7 @@
     ]
   },
   "messaging/telegram/send_voice": {
-    "hash": "3693537c27c3c81d3bb0077ff34957b5c43f034e548baab82a03594549a59e08",
+    "hash": "09023e6c9ecaa9debb93124971b6edaad587461ab421d692b51c9e1d72ea4c77",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Send Telegram Voice",
@@ -18672,7 +18672,7 @@
     ]
   },
   "microsoft/calendar/list_events": {
-    "hash": "66358befcc3b2bcc95ffa8e14399145f05045ab8eb51aefb3b472078e66ca2df",
+    "hash": "5545ac9acf0f75bc56b7d1d8aeba5c14e62de8fe59304b632c6c5b2ae8ef171c",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "List Events",
@@ -26103,6 +26103,92 @@
     "inputs": null,
     "outputs": null
   },
+  "plan/create": {
+    "hash": "fd22e40cf66afe4acc5c4b8764a1a99254bf6d2c2c958e9b6725262cfed9e1b4",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Create Plan",
+    "description": "Generate a multi-step plan with dependent tasks the agent will autonomously progress over time.",
+    "website": "https://www.flomation.co",
+    "icon": "list-check",
+    "date": "22/06/2026",
+    "type": 2,
+    "category": {
+      "name": "Plan",
+      "icon": "list-check",
+      "description": "Create and manage autonomous multi-step plans the agent progresses on its own."
+    },
+    "inputs": [
+      {
+        "name": "title",
+        "type": "string",
+        "value": null,
+        "label": "Short plan title — shown to the user and on the plan-detail view",
+        "placeholder": "Q3 review",
+        "required": true
+      },
+      {
+        "name": "goal",
+        "type": "text",
+        "value": null,
+        "label": "Goal statement — what success looks like once every task completes",
+        "placeholder": "Pull this quarter's metrics, summarise for leadership, send for sign-off.",
+        "required": true
+      },
+      {
+        "name": "tasks_json",
+        "type": "text",
+        "value": null,
+        "label": "Tasks (JSON array). Each task: name, flow_id, flow_revision_id, depends_on (optional), inputs (optional).",
+        "placeholder": "[{\"name\":\"pull\",\"flow_id\":\"\u003cuuid\u003e\",\"flow_revision_id\":\"\u003cuuid\u003e\",\"inputs\":{}}]",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "plan_id",
+        "type": "string",
+        "value": null,
+        "label": "Plan ID",
+        "placeholder": ""
+      },
+      {
+        "name": "task_count",
+        "type": "integer",
+        "value": null,
+        "label": "Tasks created",
+        "placeholder": ""
+      },
+      {
+        "name": "status",
+        "type": "string",
+        "value": null,
+        "label": "Plan status",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
   "script/bash": {
     "hash": "3e426e7c3efc9205151234868959b77885f831b3b55ee9a5e4ab9a6eab1fdaa1",
     "author": "Andy Esser",
@@ -26895,7 +26981,7 @@
     ]
   },
   "slack/rich_message": {
-    "hash": "4fbba8a24d1e905f2d7bcc8ca172fd7e6bacb740b76da46f7e8b6382ae4488d5",
+    "hash": "aafe73ecc413a93f1686d5d6b38bcd051ce29f6b1490b7fd47a25eb5ddefcfbf",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Slack Rich Message",
@@ -27072,7 +27158,7 @@
     ]
   },
   "slack/send_message": {
-    "hash": "e9449573ef296e9ea31da6619cf6c8a62c1af694d61519eee458766bd6022dfd",
+    "hash": "23ff79f5255029b9f20ad07e88ee19c63736736737ab3a46deca605f00722dd3",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Send Slack Message",
@@ -27714,7 +27800,7 @@
     ]
   },
   "social/facebook/get_page_insights": {
-    "hash": "7aafc6db7673c9d3aa2e95a8a01b7d9e1a70e4f077a7370a13dcf72309ac0fa9",
+    "hash": "85c0235362a5ec1bbe2ddc6f05c076011b1919f4e623837c7668af597d46287e",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Facebook Page Insights",
@@ -28137,7 +28223,7 @@
     ]
   },
   "social/facebook/send_message": {
-    "hash": "5d0f9e2940d7edc904be0d4bbf42f4b84c6b76bffc58d9d89e917518f8823bb6",
+    "hash": "4c899f9d3f868a041d87b1e552d75340ebf5624cefb988f9cecb1afd0b9c67d9",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Facebook Send Message",
@@ -29248,7 +29334,7 @@
     ]
   },
   "string/concatenate": {
-    "hash": "dd8f5c959eff4b4d0e67eeb76a5818a6bb8f10eda07cfa8ddee144c9ec67c9c3",
+    "hash": "2da42bbd7de00d2fbb21412e03cad40f919119eff8aa496388eade540a7f1862",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Concatenate",
@@ -29325,7 +29411,7 @@
     ]
   },
   "string/contains": {
-    "hash": "ad4caa5f7c211f017700f4b3136d23189606dbb917eacd1aed4a1c3a8bea0bb8",
+    "hash": "67d68a6e2ade1f4d2f8acbeee68fa10841ef8f3dcbf9cf992ab8eaf6c5d1e081",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Contains",
@@ -29396,7 +29482,7 @@
     ]
   },
   "string/join": {
-    "hash": "7690f94abdeff2feef51e1ca8c92744f9e239f6667bbe320374240ffd844bce7",
+    "hash": "60ce6f18956c831e5a330bac3f08f77a6a22cbff48691b35c2e9fd014d94da35",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Join",
@@ -29459,7 +29545,7 @@
     ]
   },
   "string/lower_case": {
-    "hash": "f0a97e350fb1dc7a60b536d840995e607cb01aa5b93d1cccadcf0b2e71675f61",
+    "hash": "ee4e9d1b70ceb9b9923430d92eda11e8a7d69ee863fdcc3b69c6dcc51fd7662c",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Lower Case",
@@ -29515,7 +29601,7 @@
     ]
   },
   "string/repeat": {
-    "hash": "8656408df63dc29086f11edc9f3448114cdccc6cd80bb6eccd01a20e4eaf00e6",
+    "hash": "20899a798cb9b89621b72af0b45e8bec79468bdc21877c4a40fce042d8d7731a",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Repeat",
@@ -29579,7 +29665,7 @@
     ]
   },
   "string/replace": {
-    "hash": "07f5a4a03ff4bc87b249e4acda9ec1f4ab263ae7f9570693c1b699f63fb51b8e",
+    "hash": "1d6eeee344bf2980fc88c0d8395934e4537ecbe00ebc1ee9e7c3cdab727cdff6",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Replace",
@@ -29657,7 +29743,7 @@
     ]
   },
   "string/substring": {
-    "hash": "1537d62e78c4909e82734348174d29efe575c8f7c249043b2f62691be5806fcc",
+    "hash": "b9353e279e6727f2c48f7f2ae232f145d7ee63dc0ed2498d489a3c6f55cece4d",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Substring",
@@ -29728,7 +29814,7 @@
     ]
   },
   "string/trim": {
-    "hash": "03148838109ef002922e71f809b9f98be4142b192bee5aa6a8cc9cc657d5b8c0",
+    "hash": "6d0a9902fbf339fa74224b1385f91d401160529c218e7dfffc0635c1d4202fbd",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Trim",
@@ -29784,7 +29870,7 @@
     ]
   },
   "string/trim_end": {
-    "hash": "dbfcd95707744af1c7e50d54017f9eaff518b18fb5159e2d138b20da4bf5a06f",
+    "hash": "700a338129f6c4c41e760ac848a5e966e4ae85982ef204d2ba361c849ac1641c",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Trim End",
@@ -29840,7 +29926,7 @@
     ]
   },
   "string/trim_start": {
-    "hash": "1180a5e9c2f6e374c615c146a36bca9d3f237767a497db87d57944a6e65d1237",
+    "hash": "1f4a9ac2e63e130984016810ec52d772198c143c5d8bc5ad5d7d5b33fe51ad34",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Trim Start",
@@ -29896,7 +29982,7 @@
     ]
   },
   "string/upper_case": {
-    "hash": "feb3e945805a4826374bef56428490200f5e5cc193cf3d10d9d29b89656f7135",
+    "hash": "0d64a598e8499a078587403e5c983080ef735d793a49aaca0cb25381b9daf645",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Upper Case",
@@ -31395,7 +31481,7 @@
     ]
   },
   "trigger/s3": {
-    "hash": "eaf1521397c9c0d65752ed835c5daef50d1a4081533c790c4946ae1445c988a7",
+    "hash": "ffd0a4424b39c12853776f43be2ab03a599a222d9bde1f4f2c63f1206a1ee84d",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "S3 Trigger",
@@ -32543,7 +32629,7 @@
     ]
   },
   "twilio/send_audio": {
-    "hash": "91b8745f88c2219d0789609541fb9a4ea84c244851608df7d6196579eb2a27d7",
+    "hash": "87596d501a7c161f5391dc22349be0de681d771dcaaac5ab2b1eb3b1d6a67784",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Send Audio",
@@ -32607,7 +32693,7 @@
     ]
   },
   "twilio/send_sms": {
-    "hash": "e2e9e3eae0c512d69f4eff91dfe717eed06198d0a4c16bf2c851b59d8f9e2fc0",
+    "hash": "187b1310f55d4d446117377b06aa1dc657900da98268ca1da2364cb0376b8d12",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Send Twilio SMS",
@@ -32702,7 +32788,7 @@
     ]
   },
   "twilio/voice_session": {
-    "hash": "2e79957ef07bbdc42b0ef7f61992b8a32df344605e9a77b0802f05e03d3a15ff",
+    "hash": "61f4e73f653c10ad785548a99fe2d914df93bfb3b0d05d12f661531395c108da",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Voice Session",
@@ -32856,7 +32942,7 @@
     ]
   },
   "web/fetch": {
-    "hash": "f3e0facf647d3f7f6496a0821f47eba9902f337a76d228a56f6dc5f500d9e62f",
+    "hash": "80163995f9d887fb64c7a50dd958587b9ce48b9df095be25d5e8d0ddfbec504e",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Web Fetch",
