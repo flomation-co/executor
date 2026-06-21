@@ -42,7 +42,7 @@ var Inputs = [...]core.Connection{
 	},
 	{
 		Name:  "model",
-		Type:        core.ConnectionTypeSecret,
+		Type:  core.ConnectionTypeSecret,
 		Label: "Model",
 		Options: []core.ConnectionOption{
 			{Name: "Claude Sonnet 4.6", Value: "claude-sonnet-4-6"},
@@ -292,9 +292,16 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 				}
 			}
 		}
+		// Vision-block promotion: if the prompt carries [attached: ...]
+		// markers for image attachments, resolve their blob bytes and
+		// upgrade the user content from a plain string to a content-
+		// block array with image blocks. Non-image markers (audio,
+		// document, video) stay in the text — the model can't see
+		// those either way and the marker still helps it reason.
+		userContent := ai_common.BuildAnthropicUserContent(prompt, flow.Blobs())
 		messages = append(messages, map[string]interface{}{
 			"role":    "user",
-			"content": prompt,
+			"content": userContent,
 		})
 	}
 
@@ -306,10 +313,10 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	}
 
 	log.WithFields(log.Fields{
-		"model":           model,
-		"max_tokens":      maxTokens,
-		"messages_count":  len(messages),
-		"tools_count":     len(tools),
+		"model":             model,
+		"max_tokens":        maxTokens,
+		"messages_count":    len(messages),
+		"tools_count":       len(tools),
 		"system_prompt_len": len(systemPromptStr),
 		"prompt_len":        len(prompt),
 	}).Info("[anthropic] building API request")
@@ -464,16 +471,16 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 		})
 
 		out := map[string]interface{}{
-			core.ToolRequestsKey:         toolRequests,
+			core.ToolRequestsKey:          toolRequests,
 			core.ToolConversationStateKey: messages,
-			"response_mode":              "text", // default during tool calls; final response may override
-			"stop_reason":                result.StopReason,
-			"model":                      result.Model,
-			"input_tokens":               result.Usage.InputTokens,
-			"output_tokens":              result.Usage.OutputTokens,
-			"tool_calls_count":           len(toolRequests),
-			"success":                    true,
-			"error":                      "",
+			"response_mode":               "text", // default during tool calls; final response may override
+			"stop_reason":                 result.StopReason,
+			"model":                       result.Model,
+			"input_tokens":                result.Usage.InputTokens,
+			"output_tokens":               result.Usage.OutputTokens,
+			"tool_calls_count":            len(toolRequests),
+			"success":                     true,
+			"error":                       "",
 		}
 		if intermediateText != "" {
 			out[core.IntermediateTextKey] = intermediateText
@@ -782,16 +789,16 @@ func handleStreamingResponse(flow *core.Flow, resp *http.Response, model string,
 
 	return map[string]interface{}{
 		core.StreamSentencesKey: true, // flag for executor
-		"response":             "",   // filled after channel drain
-		"response_mode":        "text",
-		"should_respond":       true,
-		"model":                model,
-		"input_tokens":         int64(0), // updated after stream
-		"output_tokens":        int64(0),
-		"stop_reason":          "",
-		"tool_calls_count":     int64(0),
-		"success":              true,
-		"error":                "",
+		"response":              "",   // filled after channel drain
+		"response_mode":         "text",
+		"should_respond":        true,
+		"model":                 model,
+		"input_tokens":          int64(0), // updated after stream
+		"output_tokens":         int64(0),
+		"stop_reason":           "",
+		"tool_calls_count":      int64(0),
+		"success":               true,
+		"error":                 "",
 	}, nil
 }
 

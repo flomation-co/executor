@@ -35,8 +35,12 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	if c := core.FindConnection("count", inputs); c != nil && c.Number() != nil {
 		count = int(*c.Number())
 	}
-	if count < 0 { count = 0 }
-	if count > 10000 { count = 10000 }
+	if count < 0 {
+		count = 0
+	}
+	if count > 10000 {
+		count = 10000
+	}
 
 	result := strings.Repeat(v, count)
 	return map[string]interface{}{
@@ -46,6 +50,8 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 
 func str(name string, inputs []*core.Connection) string {
 	c := core.FindConnection(name, inputs)
-	if c == nil || c.String() == nil { return "" }
+	if c == nil || c.String() == nil {
+		return ""
+	}
 	return *c.String()
 }

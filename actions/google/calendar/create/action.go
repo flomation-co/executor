@@ -31,48 +31,48 @@ const (
 
 var Inputs = [...]core.Connection{
 	{
-		Name:        "title",
-		Type:        core.ConnectionTypeString,
-		Label:       "Event title",
-		Required:    true,
+		Name:     "title",
+		Type:     core.ConnectionTypeString,
+		Label:    "Event title",
+		Required: true,
 	},
 	{
-		Name:        "date",
-		Type:        core.ConnectionTypeString,
-		Label:       "Date (YYYY-MM-DD, 'today', 'tomorrow', or day name)",
-		Required:    true,
+		Name:     "date",
+		Type:     core.ConnectionTypeString,
+		Label:    "Date (YYYY-MM-DD, 'today', 'tomorrow', or day name)",
+		Required: true,
 	},
 	{
-		Name:        "start_time",
-		Type:        core.ConnectionTypeString,
-		Label:       "Start time (HH:MM, 24h format)",
-		Required:    true,
+		Name:     "start_time",
+		Type:     core.ConnectionTypeString,
+		Label:    "Start time (HH:MM, 24h format)",
+		Required: true,
 	},
 	{
-		Name:        "end_time",
-		Type:        core.ConnectionTypeString,
-		Label:       "End time (HH:MM, 24h format)",
-		Required:    true,
+		Name:     "end_time",
+		Type:     core.ConnectionTypeString,
+		Label:    "End time (HH:MM, 24h format)",
+		Required: true,
 	},
 	{
-		Name:        "description",
-		Type:        core.ConnectionTypeString,
-		Label:       "Event description or notes",
+		Name:  "description",
+		Type:  core.ConnectionTypeString,
+		Label: "Event description or notes",
 	},
 	{
-		Name:        "attendees",
-		Type:        core.ConnectionTypeString,
-		Label:       "Attendees (comma-separated email addresses)",
+		Name:  "attendees",
+		Type:  core.ConnectionTypeString,
+		Label: "Attendees (comma-separated email addresses)",
 	},
 	{
-		Name:        "location",
-		Type:        core.ConnectionTypeString,
-		Label:       "Event location",
+		Name:  "location",
+		Type:  core.ConnectionTypeString,
+		Label: "Event location",
 	},
 	{
-		Name:        "account",
-		Type:        core.ConnectionTypeString,
-		Label:       "Account (email, label like 'Work'/'Personal', or empty for primary)",
+		Name:  "account",
+		Type:  core.ConnectionTypeString,
+		Label: "Account (email, label like 'Work'/'Personal', or empty for primary)",
 	},
 	{
 		Name:        "credential",
@@ -215,7 +215,7 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	}
 
 	var result struct {
-		ID      string `json:"id"`
+		ID       string `json:"id"`
 		HTMLLink string `json:"htmlLink"`
 	}
 	if err := json.Unmarshal(respBody, &result); err != nil {

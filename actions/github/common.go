@@ -49,10 +49,10 @@ var AuthInputs = []core.Connection{
 		Required:    true,
 	},
 	{
-		Name:        "repo",
-		Type:        core.ConnectionTypeString,
-		Label:       "Repository Name",
-		Required:    true,
+		Name:     "repo",
+		Type:     core.ConnectionTypeString,
+		Label:    "Repository Name",
+		Required: true,
 	},
 }
 

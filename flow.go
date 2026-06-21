@@ -516,18 +516,39 @@ func (f *Flow) GetContext() *ExecutionContext {
 }
 
 // Blobs returns the per-execution BlobStore, lazily creating it the
-// first time a caller needs to off-load a large tool output. The
-// store roots at the executor's current working directory — the
-// runner places each execution in its own dir and tears it down on
-// completion, so blob files share that lifetime automatically.
+// first time a caller needs to off-load a large tool output. After
+// M1 (file_attachments plan) the store is API-backed: tokens are
+// generated and resolved against the API's blob_object endpoints
+// over the mTLS InternalClient. The store inherits the execution's
+// organisation_id and execution_id so server-side rows are scoped
+// correctly without any per-call wiring.
 func (f *Flow) Blobs() *BlobStore {
 	f.blobsMu.Lock()
 	defer f.blobsMu.Unlock()
 	if f.blobs == nil {
-		// "." resolves at runtime to whatever cwd the runner spawned
-		// us under. We don't capture an absolute path because the
-		// runner might restart and the working dir would be stale.
-		f.blobs = NewBlobStore(".")
+		ctx := f.context
+		var (
+			client      = http.DefaultClient
+			apiURL      string
+			orgID       string
+			ownerID     string
+			executionID string
+		)
+		if ctx != nil {
+			client = ctx.InternalClient()
+			apiURL = ctx.APIURL
+			executionID = ctx.ExecutionID
+			// Scope falls back from organisation to flow author so
+			// personal-mode flows can still off-load large tool
+			// outputs. Empty-string discriminator picks the right
+			// header inside the BlobStore.
+			if ctx.OrganisationID != "" {
+				orgID = ctx.OrganisationID
+			} else {
+				ownerID = ctx.AuthorID
+			}
+		}
+		f.blobs = NewBlobStore(client, apiURL, orgID, ownerID, executionID)
 	}
 	return f.blobs
 }
@@ -608,8 +629,8 @@ type Flow struct {
 	hadError             bool
 	suspended            bool
 	suspendInfo          *SuspendInfo
-	resumed              bool   // true when restored from a checkpoint
-	resumedSuspendNodeID string // the node that caused the original suspend
+	resumed              bool            // true when restored from a checkpoint
+	resumedSuspendNodeID string          // the node that caused the original suspend
 	traversedNodes       map[string]bool // tracks which nodes have had children traversed
 	context              *ExecutionContext
 	ctx                  gocontext.Context
@@ -643,14 +664,14 @@ type SuspendInfo struct {
 // a suspended execution on a different runner.
 type Checkpoint struct {
 	NodeResults          map[string]map[string]interface{} `json:"node_results"`
-	Variables            map[string]interface{}             `json:"variables,omitempty"`
-	Outputs              map[string]interface{}             `json:"outputs,omitempty"`
-	NodeExecutionResults map[string]*ExecutionNodeResult    `json:"node_execution_results,omitempty"`
-	EntryNodeID          string                             `json:"entry_node_id"`
-	ReachableNodes       map[string]bool                    `json:"reachable_nodes,omitempty"`
-	InErrorChain         bool                               `json:"in_error_chain"`
-	HadError             bool                               `json:"had_error"`
-	SuspendInfo          *SuspendInfo                       `json:"suspend_info,omitempty"`
+	Variables            map[string]interface{}            `json:"variables,omitempty"`
+	Outputs              map[string]interface{}            `json:"outputs,omitempty"`
+	NodeExecutionResults map[string]*ExecutionNodeResult   `json:"node_execution_results,omitempty"`
+	EntryNodeID          string                            `json:"entry_node_id"`
+	ReachableNodes       map[string]bool                   `json:"reachable_nodes,omitempty"`
+	InErrorChain         bool                              `json:"in_error_chain"`
+	HadError             bool                              `json:"had_error"`
+	SuspendInfo          *SuspendInfo                      `json:"suspend_info,omitempty"`
 }
 
 // Suspend marks the execution as suspended with the given metadata.
@@ -866,9 +887,9 @@ func Load(path *string) (*Flow, error) {
 // on the trigger echoing them through as outputs so that auto-wire or the
 // whole-value-reference substitution path can pick them up downstream.
 var reservedTriggerDataKeys = map[string]bool{
-	"system_prompt":         true,
-	"__node_id":             true,
-	"__triggering_user_id":  true,
+	"system_prompt":        true,
+	"__node_id":            true,
+	"__triggering_user_id": true,
 }
 
 // InjectTriggerData merges trigger invocation data into the first trigger
@@ -1889,25 +1910,25 @@ func (f *Flow) executeNodeChildren(actions map[string]Action, node *Node, output
 					isVoice := ctx != nil && (ctx.ChannelType == "twilio_voice")
 
 					if !isVoice {
-					// The AI emitted text alongside tool calls. Fire the
-					// Response handle subgraph so the user sees the message
-					// while tools execute.
-					f.clearSubgraphResults(node.ID, "output")
-					if f.nodeResults[node.ID] == nil {
-						f.nodeResults[node.ID] = make(map[string]interface{})
-					}
-					f.nodeResults[node.ID]["response"] = iText
-					for _, rc := range responseChildren {
-						if _, err := f.ExecuteNode(actions, rc, environment); err != nil {
-							log.WithFields(log.Fields{
-								"error": err,
-								"node":  rc.ID,
-							}).Warn("intermediate message dispatch failed")
+						// The AI emitted text alongside tool calls. Fire the
+						// Response handle subgraph so the user sees the message
+						// while tools execute.
+						f.clearSubgraphResults(node.ID, "output")
+						if f.nodeResults[node.ID] == nil {
+							f.nodeResults[node.ID] = make(map[string]interface{})
 						}
-					}
-					// Clear the subgraph again so the final response (or
-					// next intermediate) can re-execute it cleanly.
-					f.clearSubgraphResults(node.ID, "output")
+						f.nodeResults[node.ID]["response"] = iText
+						for _, rc := range responseChildren {
+							if _, err := f.ExecuteNode(actions, rc, environment); err != nil {
+								log.WithFields(log.Fields{
+									"error": err,
+									"node":  rc.ID,
+								}).Warn("intermediate message dispatch failed")
+							}
+						}
+						// Clear the subgraph again so the final response (or
+						// next intermediate) can re-execute it cleanly.
+						f.clearSubgraphResults(node.ID, "output")
 					}
 				}
 

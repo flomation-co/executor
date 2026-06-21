@@ -184,7 +184,11 @@ import (
 	makefile_validate "flomation.app/automate/executor/actions/makefile/validate"
 	messaging_discord_webhook "flomation.app/automate/executor/actions/messaging/discord/webhook"
 	messaging_email_send "flomation.app/automate/executor/actions/messaging/email/send"
+	messaging_telegram_send_audio "flomation.app/automate/executor/actions/messaging/telegram/send_audio"
+	messaging_telegram_send_document "flomation.app/automate/executor/actions/messaging/telegram/send_document"
 	messaging_telegram_send_message "flomation.app/automate/executor/actions/messaging/telegram/send_message"
+	messaging_telegram_send_photo "flomation.app/automate/executor/actions/messaging/telegram/send_photo"
+	messaging_telegram_send_video "flomation.app/automate/executor/actions/messaging/telegram/send_video"
 	messaging_telegram_send_voice "flomation.app/automate/executor/actions/messaging/telegram/send_voice"
 	microsoft_calendar_create_event "flomation.app/automate/executor/actions/microsoft/calendar/create_event"
 	microsoft_calendar_delete_event "flomation.app/automate/executor/actions/microsoft/calendar/delete_event"
@@ -537,7 +541,11 @@ var Actions = map[string]core.Action{
 	"makefile/validate":                     makefile_validate.Execute,
 	"messaging/discord/webhook":             messaging_discord_webhook.Execute,
 	"messaging/email/send":                  messaging_email_send.Execute,
+	"messaging/telegram/send_audio":         messaging_telegram_send_audio.Execute,
+	"messaging/telegram/send_document":      messaging_telegram_send_document.Execute,
 	"messaging/telegram/send_message":       messaging_telegram_send_message.Execute,
+	"messaging/telegram/send_photo":         messaging_telegram_send_photo.Execute,
+	"messaging/telegram/send_video":         messaging_telegram_send_video.Execute,
 	"messaging/telegram/send_voice":         messaging_telegram_send_voice.Execute,
 	"microsoft/calendar/create_event":       microsoft_calendar_create_event.Execute,
 	"microsoft/calendar/delete_event":       microsoft_calendar_delete_event.Execute,

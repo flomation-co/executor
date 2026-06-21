@@ -43,14 +43,14 @@ var Inputs = [...]core.Connection{
 		Type:        core.ConnectionTypeInteger,
 		Label:       "Index (0-based)",
 		Placeholder: "0",
-		Visible: &core.VisibleWhen{Field: "mode", Values: []string{"index"}},
+		Visible:     &core.VisibleWhen{Field: "mode", Values: []string{"index"}},
 	},
 	{
 		Name:        "field",
 		Type:        core.ConnectionTypeString,
 		Label:       "Field Name",
 		Placeholder: "id",
-		Visible: &core.VisibleWhen{Field: "mode", Values: []string{"first", "all"}},
+		Visible:     &core.VisibleWhen{Field: "mode", Values: []string{"first", "all"}},
 	},
 	{
 		Name:  "operator",
@@ -70,7 +70,7 @@ var Inputs = [...]core.Connection{
 		Type:        core.ConnectionTypeString,
 		Label:       "Match Value",
 		Placeholder: "Value to match against",
-		Visible: &core.VisibleWhen{Field: "mode", Values: []string{"first", "all"}},
+		Visible:     &core.VisibleWhen{Field: "mode", Values: []string{"first", "all"}},
 	},
 }
 

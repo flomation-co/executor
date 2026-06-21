@@ -105,9 +105,9 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	}
 
 	return map[string]interface{}{
-		"tool_result":           fmt.Sprintf("Replaced %d occurrence(s) of '%s' with '%s'", count, find, replace),
-		"occurrences_replaced":  count,
-		"success":               true,
-		"error":                 "",
+		"tool_result":          fmt.Sprintf("Replaced %d occurrence(s) of '%s' with '%s'", count, find, replace),
+		"occurrences_replaced": count,
+		"success":              true,
+		"error":                "",
 	}, nil
 }

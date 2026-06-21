@@ -46,6 +46,8 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 
 func str(name string, inputs []*core.Connection) string {
 	c := core.FindConnection(name, inputs)
-	if c == nil || c.String() == nil { return "" }
+	if c == nil || c.String() == nil {
+		return ""
+	}
 	return *c.String()
 }

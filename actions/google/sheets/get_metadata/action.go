@@ -101,12 +101,12 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	}
 
 	return map[string]interface{}{
-		"tool_result":  summary,
-		"title":        resp.Properties.Title,
-		"sheets":       string(sheetsJSON),
-		"sheet_count":  int64(len(resp.Sheets)),
-		"spreadsheet":  string(body),
-		"success":      true,
-		"error":        "",
+		"tool_result": summary,
+		"title":       resp.Properties.Title,
+		"sheets":      string(sheetsJSON),
+		"sheet_count": int64(len(resp.Sheets)),
+		"spreadsheet": string(body),
+		"success":     true,
+		"error":       "",
 	}, nil
 }

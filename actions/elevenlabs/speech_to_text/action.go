@@ -48,9 +48,9 @@ var Inputs = [...]core.Connection{
 		Placeholder: "https://example.com/audio.mp3",
 	},
 	{
-		Name:  "language_code",
-		Type:  core.ConnectionTypeString,
-		Label: "Language code (ISO 639-1, e.g. 'en', 'fr', 'de'). Leave empty for auto-detect.",
+		Name:        "language_code",
+		Type:        core.ConnectionTypeString,
+		Label:       "Language code (ISO 639-1, e.g. 'en', 'fr', 'de'). Leave empty for auto-detect.",
 		Placeholder: "en",
 	},
 	{

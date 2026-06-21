@@ -1,7 +1,9 @@
 package ai_common
 
 import (
+	"encoding/base64"
 	"encoding/json"
+	"regexp"
 	"strings"
 )
 
@@ -194,4 +196,173 @@ func AppendBlobTokenInstructions(systemPrompt string) string {
 		return systemPrompt
 	}
 	return systemPrompt + BlobTokenInstructions
+}
+
+// === Vision-block promotion (M2.5) ===
+//
+// When an inbound message carries image attachments (Telegram photo,
+// Slack file_share with image mime, etc.), the API's auto-promote
+// step writes `[attached: name (mime, size) → flo:blob:…]` markers
+// into the user message text. That's enough for the model to KNOW an
+// image exists, but not enough for it to SEE the image — so without
+// further work, vision-capable models hallucinate descriptions of
+// whatever they think the user might have sent.
+//
+// ExtractVisionBlobs scans a prompt for image attachment markers,
+// resolves each blob token to its bytes via the per-execution
+// BlobStore, and returns the (stripped-text, ordered-image-list)
+// pair ready for vendor-specific assembly into a multi-part content
+// array. Non-image attachments (audio, video, document) are LEFT in
+// the text — we don't have a generic vision-block analogue and the
+// marker still helps the model reason about them.
+
+// VisionBlob is a resolved image attachment ready for vendor-specific
+// block assembly. Mime is the canonical content-type the AI vendor
+// needs (image/jpeg, image/png, etc.); Bytes is the raw decoded blob.
+type VisionBlob struct {
+	Name  string
+	Mime  string
+	Bytes []byte
+}
+
+// BlobFetcher is the narrow interface ExtractVisionBlobs needs.
+// Satisfied by *core.BlobStore. Used as a parameter so this package
+// doesn't have to import core (would be a cycle).
+type BlobFetcher interface {
+	Get(token string) ([]byte, error)
+}
+
+// attachedMarkerPattern matches one full [attached: …] line. The
+// `→` separator (U+2192) is the load-bearing marker — we use it
+// instead of `->` so user text containing the literal string
+// `attached:` doesn't false-match. Captures: 1=name, 2=mime, 3=token.
+var attachedMarkerPattern = regexp.MustCompile(
+	`\[attached: ([^()\[\]]+?) \(([^,]+?), [^)]+?\) → (flo:blob:[0-9a-f]{32}(?:\?[^\]]*)?)\]`)
+
+// ExtractVisionBlobs scans `prompt` for image attachment markers,
+// resolves each to bytes via `fetcher.Get`, and returns:
+//
+//   - stripped: the prompt with every successfully-resolved image
+//     marker removed (the image moves to the dedicated block).
+//   - images: the resolved image blobs in marker-appearance order.
+//
+// Non-image markers (mime not starting with "image/") are LEFT in
+// the text untouched. Markers whose blob fetch FAILS are also left
+// in the text — better the model sees a stale reference than
+// silently loses awareness an attachment exists.
+//
+// Returns (prompt, nil) unchanged when no markers match.
+func ExtractVisionBlobs(prompt string, fetcher BlobFetcher) (stripped string, images []VisionBlob) {
+	if fetcher == nil {
+		return prompt, nil
+	}
+	matches := attachedMarkerPattern.FindAllStringSubmatchIndex(prompt, -1)
+	if len(matches) == 0 {
+		return prompt, nil
+	}
+
+	stripped = prompt
+	// Walk matches in reverse so byte-offset splices stay valid as
+	// we shrink the string. Collected images get reversed back to
+	// forward order at the end.
+	for i := len(matches) - 1; i >= 0; i-- {
+		m := matches[i]
+		name := prompt[m[2]:m[3]]
+		mime := prompt[m[4]:m[5]]
+		token := prompt[m[6]:m[7]]
+
+		if !strings.HasPrefix(mime, "image/") {
+			continue
+		}
+		bytes, err := fetcher.Get(token)
+		if err != nil || len(bytes) == 0 {
+			continue
+		}
+		images = append(images, VisionBlob{
+			Name:  name,
+			Mime:  mime,
+			Bytes: bytes,
+		})
+
+		// Splice the marker out, eating one neighbouring newline so
+		// the surrounding text reads naturally.
+		start, end := m[0], m[1]
+		if start > 0 && stripped[start-1] == '\n' {
+			start--
+		} else if end < len(stripped) && stripped[end] == '\n' {
+			end++
+		}
+		stripped = stripped[:start] + stripped[end:]
+	}
+
+	// Reverse images to forward (visual-attachment) order.
+	for i, j := 0, len(images)-1; i < j; i, j = i+1, j-1 {
+		images[i], images[j] = images[j], images[i]
+	}
+
+	stripped = strings.TrimSpace(stripped)
+	stripped = regexp.MustCompile(`\n{3,}`).ReplaceAllString(stripped, "\n\n")
+	return stripped, images
+}
+
+// BuildAnthropicUserContent returns the content value for an
+// Anthropic user message — either the prompt string verbatim (no
+// images) or a content-block array of text + image blocks.
+//
+// Anthropic's image block shape:
+//
+//	{"type": "image", "source": {"type": "base64", "media_type": "image/jpeg", "data": "<b64>"}}
+func BuildAnthropicUserContent(prompt string, fetcher BlobFetcher) interface{} {
+	stripped, images := ExtractVisionBlobs(prompt, fetcher)
+	if len(images) == 0 {
+		return prompt
+	}
+	blocks := make([]map[string]interface{}, 0, len(images)+1)
+	// Images first — Claude documentation recommends placing images
+	// before the accompanying text for best comprehension.
+	for _, img := range images {
+		blocks = append(blocks, map[string]interface{}{
+			"type": "image",
+			"source": map[string]interface{}{
+				"type":       "base64",
+				"media_type": img.Mime,
+				"data":       base64.StdEncoding.EncodeToString(img.Bytes),
+			},
+		})
+	}
+	if strings.TrimSpace(stripped) != "" {
+		blocks = append(blocks, map[string]interface{}{
+			"type": "text",
+			"text": stripped,
+		})
+	}
+	return blocks
+}
+
+// BuildOpenAIUserContent does the same for OpenAI's vision API.
+//
+// OpenAI's image block shape uses a data: URL:
+//
+//	{"type": "image_url", "image_url": {"url": "data:image/jpeg;base64,<b64>"}}
+func BuildOpenAIUserContent(prompt string, fetcher BlobFetcher) interface{} {
+	stripped, images := ExtractVisionBlobs(prompt, fetcher)
+	if len(images) == 0 {
+		return prompt
+	}
+	blocks := make([]map[string]interface{}, 0, len(images)+1)
+	if strings.TrimSpace(stripped) != "" {
+		blocks = append(blocks, map[string]interface{}{
+			"type": "text",
+			"text": stripped,
+		})
+	}
+	for _, img := range images {
+		blocks = append(blocks, map[string]interface{}{
+			"type": "image_url",
+			"image_url": map[string]interface{}{
+				"url": "data:" + img.Mime + ";base64," + base64.StdEncoding.EncodeToString(img.Bytes),
+			},
+		})
+	}
+	return blocks
 }

@@ -82,13 +82,13 @@ func WrapMulawInWAV(rawMulaw []byte) []byte {
 	binary.LittleEndian.PutUint32(header[4:8], 36+dataSize)
 	copy(header[8:12], "WAVE")
 	copy(header[12:16], "fmt ")
-	binary.LittleEndian.PutUint32(header[16:20], 16)    // fmt chunk size
-	binary.LittleEndian.PutUint16(header[20:22], 7)     // audio format: 7 = mulaw
-	binary.LittleEndian.PutUint16(header[22:24], 1)     // channels: mono
-	binary.LittleEndian.PutUint32(header[24:28], 8000)  // sample rate
-	binary.LittleEndian.PutUint32(header[28:32], 8000)  // byte rate
-	binary.LittleEndian.PutUint16(header[32:34], 1)     // block align
-	binary.LittleEndian.PutUint16(header[34:36], 8)     // bits per sample
+	binary.LittleEndian.PutUint32(header[16:20], 16)   // fmt chunk size
+	binary.LittleEndian.PutUint16(header[20:22], 7)    // audio format: 7 = mulaw
+	binary.LittleEndian.PutUint16(header[22:24], 1)    // channels: mono
+	binary.LittleEndian.PutUint32(header[24:28], 8000) // sample rate
+	binary.LittleEndian.PutUint32(header[28:32], 8000) // byte rate
+	binary.LittleEndian.PutUint16(header[32:34], 1)    // block align
+	binary.LittleEndian.PutUint16(header[34:36], 8)    // bits per sample
 	copy(header[36:40], "data")
 	binary.LittleEndian.PutUint32(header[40:44], dataSize)
 

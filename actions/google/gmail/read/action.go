@@ -46,14 +46,14 @@ var Inputs = [...]core.Connection{
 		Placeholder: "10",
 	},
 	{
-		Name:        "email_id",
-		Type:        core.ConnectionTypeString,
-		Label:       "Email ID to read in full (from a prior search)",
+		Name:  "email_id",
+		Type:  core.ConnectionTypeString,
+		Label: "Email ID to read in full (from a prior search)",
 	},
 	{
-		Name:        "account",
-		Type:        core.ConnectionTypeString,
-		Label:       "Filter to a specific account email. Leave empty to search ALL user accounts. Never default to the agent's own email.",
+		Name:  "account",
+		Type:  core.ConnectionTypeString,
+		Label: "Filter to a specific account email. Leave empty to search ALL user accounts. Never default to the agent's own email.",
 	},
 	{
 		Name:        "credential",
@@ -191,9 +191,9 @@ func searchEmails(flow *core.Flow, tokens []tokenInfo, query string, maxResults 
 			label = t.Email
 		}
 		log.WithFields(log.Fields{
-			"account":       t.Email,
-			"label":         label,
-			"token_prefix":  t.AccessToken[:min(20, len(t.AccessToken))],
+			"account":      t.Email,
+			"label":        label,
+			"token_prefix": t.AccessToken[:min(20, len(t.AccessToken))],
 		}).Info("[email_read] querying Gmail for account")
 
 		emails, err := listMessages(flow, t.AccessToken, query, maxResults)
@@ -252,11 +252,11 @@ func searchEmails(flow *core.Flow, tokens []tokenInfo, query string, maxResults 
 			msg := fmt.Sprintf("Couldn't read emails from %d account(s):\n%s",
 				len(errMsgs), strings.Join(errMsgs, "\n"))
 			return map[string]interface{}{
-				"tool_result":  msg,
-				"emails":       []emailSummary{},
-				"total_count":  0,
-				"success":      false,
-				"error":        msg,
+				"tool_result": msg,
+				"emails":      []emailSummary{},
+				"total_count": 0,
+				"success":     false,
+				"error":       msg,
 			}, nil
 		}
 
@@ -265,11 +265,11 @@ func searchEmails(flow *core.Flow, tokens []tokenInfo, query string, maxResults 
 			searchDesc = fmt.Sprintf("'%s'", query)
 		}
 		return map[string]interface{}{
-			"tool_result":  fmt.Sprintf("No emails found matching %s.", searchDesc),
-			"emails":       []emailSummary{},
-			"total_count":  0,
-			"success":      true,
-			"error":        "",
+			"tool_result": fmt.Sprintf("No emails found matching %s.", searchDesc),
+			"emails":      []emailSummary{},
+			"total_count": 0,
+			"success":     true,
+			"error":       "",
 		}, nil
 	}
 
@@ -294,11 +294,11 @@ func searchEmails(flow *core.Flow, tokens []tokenInfo, query string, maxResults 
 	}
 
 	return map[string]interface{}{
-		"tool_result":  sb.String(),
-		"emails":       allEmails,
-		"total_count":  len(allEmails),
-		"success":      true,
-		"error":        "",
+		"tool_result": sb.String(),
+		"emails":      allEmails,
+		"total_count": len(allEmails),
+		"success":     true,
+		"error":       "",
 	}, nil
 }
 
@@ -329,11 +329,11 @@ func readFullEmail(flow *core.Flow, tokens []tokenInfo, emailID string) (map[str
 		sb.WriteString(body)
 
 		return map[string]interface{}{
-			"tool_result":  sb.String(),
-			"emails":       []emailFull{*email},
-			"total_count":  1,
-			"success":      true,
-			"error":        "",
+			"tool_result": sb.String(),
+			"emails":      []emailFull{*email},
+			"total_count": 1,
+			"success":     true,
+			"error":       "",
 		}, nil
 	}
 
@@ -418,8 +418,8 @@ func getMessageMetadata(flow *core.Flow, accessToken, messageID string) (*emailS
 	}
 
 	var msg struct {
-		ID       string `json:"id"`
-		Snippet  string `json:"snippet"`
+		ID       string   `json:"id"`
+		Snippet  string   `json:"snippet"`
 		LabelIDs []string `json:"labelIds"`
 		Payload  struct {
 			Headers []struct {
@@ -476,9 +476,9 @@ func getMessage(flow *core.Flow, accessToken, messageID string) (*emailFull, err
 	body, _ := io.ReadAll(io.LimitReader(resp.Body, 1<<20))
 
 	var msg struct {
-		ID       string `json:"id"`
-		ThreadID string `json:"threadId"`
-		Snippet  string `json:"snippet"`
+		ID       string   `json:"id"`
+		ThreadID string   `json:"threadId"`
+		Snippet  string   `json:"snippet"`
 		LabelIDs []string `json:"labelIds"`
 		Payload  struct {
 			MimeType string `json:"mimeType"`
@@ -721,11 +721,11 @@ func disconnectAccount(flow *core.Flow, email, purpose string) {
 
 func errResult(msg string) (map[string]interface{}, error) {
 	return map[string]interface{}{
-		"tool_result":  msg,
-		"emails":       nil,
-		"total_count":  0,
-		"success":      false,
-		"error":        msg,
+		"tool_result": msg,
+		"emails":      nil,
+		"total_count": 0,
+		"success":     false,
+		"error":       msg,
 	}, nil
 }
 

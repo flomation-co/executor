@@ -47,7 +47,7 @@ func TestSubFlow_BasicInvokeAndReturn(t *testing.T) {
 			{ID: "capture", Type: "test/capture", Data: &NodeData{Label: "test/capture", Config: NodeConfig{Type: ActionTypeAction}}},
 			// Sub-flow nodes (not connected to main flow via edges)
 			{ID: "begin", Type: "subflow/begin", Data: &NodeData{Label: "subflow/begin", Config: NodeConfig{
-				Type: ActionTypeAction,
+				Type:   ActionTypeAction,
 				Inputs: []*Connection{{Name: "name", Type: ConnectionTypeString, Value: "double"}},
 			}}},
 			{ID: "doubler", Type: "test/doubler", Data: &NodeData{Label: "test/doubler", Config: NodeConfig{Type: ActionTypeAction}}},

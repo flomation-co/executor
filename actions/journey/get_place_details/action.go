@@ -108,4 +108,3 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 		"error":         "",
 	}, nil
 }
-

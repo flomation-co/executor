@@ -32,10 +32,10 @@ var Inputs = [...]core.Connection{
 		Required:    true,
 	},
 	{
-		Name:        "audio_base64",
-		Type:        core.ConnectionTypeString,
-		Label:       "Audio (base64, mulaw 8kHz)",
-		Required:    true,
+		Name:     "audio_base64",
+		Type:     core.ConnectionTypeString,
+		Label:    "Audio (base64, mulaw 8kHz)",
+		Required: true,
 	},
 }
 

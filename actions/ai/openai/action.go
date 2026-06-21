@@ -39,7 +39,7 @@ var Inputs = [...]core.Connection{
 	},
 	{
 		Name:  "model",
-		Type:        core.ConnectionTypeSecret,
+		Type:  core.ConnectionTypeSecret,
 		Label: "Model",
 		Options: []core.ConnectionOption{
 			{Name: "GPT-4o", Value: "gpt-4o"},
@@ -211,9 +211,15 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 			}
 		}
 
+		// Vision-block promotion: if the prompt carries [attached: ...]
+		// markers for image attachments, resolve their blob bytes and
+		// upgrade the user content from a plain string to a content-
+		// block array using OpenAI's image_url / data: URL shape.
+		// Non-image markers stay in the text.
+		userContent := ai_common.BuildOpenAIUserContent(prompt, flow.Blobs())
 		messages = append(messages, map[string]interface{}{
 			"role":    "user",
-			"content": prompt,
+			"content": userContent,
 		})
 	}
 

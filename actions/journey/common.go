@@ -140,24 +140,24 @@ type StaticMapParams struct {
 type NearbyPlacesParams struct {
 	Latitude  float64
 	Longitude float64
-	Radius    int      // metres
-	Keyword   string   // free-text filter, optional
-	Category  string   // provider-specific category, optional
-	Limit     int      // max results, 0 = provider default
+	Radius    int    // metres
+	Keyword   string // free-text filter, optional
+	Category  string // provider-specific category, optional
+	Limit     int    // max results, 0 = provider default
 }
 
 type Place struct {
-	PlaceID      string   `json:"place_id"`
-	Name         string   `json:"name"`
-	Address      string   `json:"address"`
-	Latitude     float64  `json:"latitude"`
-	Longitude    float64  `json:"longitude"`
-	Rating       float64  `json:"rating,omitempty"`
-	UserRatings  int      `json:"user_ratings,omitempty"`
-	PriceLevel   int      `json:"price_level,omitempty"`
-	Types        []string `json:"types,omitempty"`
-	DistanceM    float64  `json:"distance_metres,omitempty"`
-	OpenNow      *bool    `json:"open_now,omitempty"`
+	PlaceID     string   `json:"place_id"`
+	Name        string   `json:"name"`
+	Address     string   `json:"address"`
+	Latitude    float64  `json:"latitude"`
+	Longitude   float64  `json:"longitude"`
+	Rating      float64  `json:"rating,omitempty"`
+	UserRatings int      `json:"user_ratings,omitempty"`
+	PriceLevel  int      `json:"price_level,omitempty"`
+	Types       []string `json:"types,omitempty"`
+	DistanceM   float64  `json:"distance_metres,omitempty"`
+	OpenNow     *bool    `json:"open_now,omitempty"`
 }
 
 type PlaceDetails struct {
@@ -186,18 +186,18 @@ type ElevationParams struct {
 }
 
 type ElevationSample struct {
-	Latitude    float64 `json:"latitude"`
-	Longitude   float64 `json:"longitude"`
-	Elevation   float64 `json:"elevation_metres"`
-	Resolution  float64 `json:"resolution_metres,omitempty"`
+	Latitude   float64 `json:"latitude"`
+	Longitude  float64 `json:"longitude"`
+	Elevation  float64 `json:"elevation_metres"`
+	Resolution float64 `json:"resolution_metres,omitempty"`
 }
 
 type ElevationResult struct {
-	TotalAscentMetres   float64           `json:"total_ascent_metres"`
-	TotalDescentMetres  float64           `json:"total_descent_metres"`
-	MinElevationMetres  float64           `json:"min_elevation_metres"`
-	MaxElevationMetres  float64           `json:"max_elevation_metres"`
-	Samples             []ElevationSample `json:"samples"`
+	TotalAscentMetres  float64           `json:"total_ascent_metres"`
+	TotalDescentMetres float64           `json:"total_descent_metres"`
+	MinElevationMetres float64           `json:"min_elevation_metres"`
+	MaxElevationMetres float64           `json:"max_elevation_metres"`
+	Samples            []ElevationSample `json:"samples"`
 }
 
 type Provider interface {

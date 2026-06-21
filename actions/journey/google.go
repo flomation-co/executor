@@ -480,9 +480,9 @@ type googleNearbyResponse struct {
 	Status       string `json:"status"`
 	ErrorMessage string `json:"error_message"`
 	Results      []struct {
-		PlaceID          string   `json:"place_id"`
-		Name             string   `json:"name"`
-		Vicinity         string   `json:"vicinity"`
+		PlaceID          string `json:"place_id"`
+		Name             string `json:"name"`
+		Vicinity         string `json:"vicinity"`
 		Geometry         googleGeocodeGeometry
 		Types            []string `json:"types"`
 		Rating           float64  `json:"rating"`
@@ -552,9 +552,9 @@ type googlePlaceDetailsResponse struct {
 	Status       string `json:"status"`
 	ErrorMessage string `json:"error_message"`
 	Result       struct {
-		PlaceID              string   `json:"place_id"`
-		Name                 string   `json:"name"`
-		FormattedAddress     string   `json:"formatted_address"`
+		PlaceID              string `json:"place_id"`
+		Name                 string `json:"name"`
+		FormattedAddress     string `json:"formatted_address"`
 		Geometry             googleGeocodeGeometry
 		FormattedPhoneNumber string   `json:"formatted_phone_number"`
 		Website              string   `json:"website"`

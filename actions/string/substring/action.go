@@ -45,9 +45,15 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 		end = int(*endConn.Number())
 	}
 
-	if start < 0 { start = 0 }
-	if end > len(runes) { end = len(runes) }
-	if start > end { start = end }
+	if start < 0 {
+		start = 0
+	}
+	if end > len(runes) {
+		end = len(runes)
+	}
+	if start > end {
+		start = end
+	}
 
 	result := string(runes[start:end])
 	return map[string]interface{}{
@@ -57,7 +63,9 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 
 func str(name string, inputs []*core.Connection) string {
 	c := core.FindConnection(name, inputs)
-	if c == nil || c.String() == nil { return "" }
+	if c == nil || c.String() == nil {
+		return ""
+	}
 	return *c.String()
 }
 

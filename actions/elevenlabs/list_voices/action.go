@@ -70,11 +70,11 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 
 	var result struct {
 		Voices []struct {
-			VoiceID  string `json:"voice_id"`
-			Name     string `json:"name"`
-			Category string `json:"category"`
+			VoiceID  string            `json:"voice_id"`
+			Name     string            `json:"name"`
+			Category string            `json:"category"`
 			Labels   map[string]string `json:"labels"`
-			Preview  string `json:"preview_url"`
+			Preview  string            `json:"preview_url"`
 		} `json:"voices"`
 	}
 	if err := json.Unmarshal(body, &result); err != nil {

@@ -26,9 +26,9 @@ const (
 	Date         = "31/05/2026"
 	Type         = core.ActionTypeAction
 
-	defaultTimeout  = 120
-	maxTimeout      = 600
-	maxOutputBytes  = 1 << 20 // 1 MB
+	defaultTimeout = 120
+	maxTimeout     = 600
+	maxOutputBytes = 1 << 20 // 1 MB
 )
 
 var Inputs = [...]core.Connection{
@@ -64,9 +64,9 @@ var Inputs = [...]core.Connection{
 		Placeholder: "120",
 	},
 	{
-		Name:        "dry_run",
-		Type:        core.ConnectionTypeBoolean,
-		Label:       "Dry Run",
+		Name:  "dry_run",
+		Type:  core.ConnectionTypeBoolean,
+		Label: "Dry Run",
 	},
 }
 

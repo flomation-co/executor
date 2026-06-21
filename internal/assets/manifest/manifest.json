@@ -1189,7 +1189,7 @@
     ]
   },
   "ai/anthropic": {
-    "hash": "76b36066a7dd22aad8e568438fe9a8fd77b5188462b810c948c565c5f8a82e4e",
+    "hash": "c8f13b27cfd285f2acdb3ddc9e0a32341ab12957bf96154038b923e65caf0206",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Anthropic Prompt",
@@ -1358,7 +1358,7 @@
     ]
   },
   "ai/openai": {
-    "hash": "5fa346529066c4d8c3859627dd64389889a171708beb8f7f4a5c3e66757366d8",
+    "hash": "b9e780ea83a9e4bb5fbb3b305d061941965b94c479c44531699d3cf1b938b443",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "OpenAI Prompt",
@@ -17727,6 +17727,228 @@
       }
     ]
   },
+  "messaging/telegram/send_audio": {
+    "hash": "554f0d513245280c68f0e1bba7a253e8b6321c7170c23715048bb3f40c369fa6",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Send Telegram Audio",
+    "description": "Send a music/audio file via Telegram. Use send_voice for voice notes.",
+    "website": "https://www.flomation.co",
+    "icon": "telegram+music",
+    "date": "21/06/2026",
+    "type": 2,
+    "category": {
+      "name": "Messaging",
+      "icon": "comments",
+      "description": "Send messages via various channels"
+    },
+    "sub_category": {
+      "name": "Telegram",
+      "icon": "telegram",
+      "description": "Telegram Bot messaging operations"
+    },
+    "inputs": [
+      {
+        "name": "bot_token",
+        "type": "secret",
+        "value": null,
+        "label": "Telegram Bot Token",
+        "placeholder": "123456:ABC-DEF...",
+        "required": true
+      },
+      {
+        "name": "channel_id",
+        "type": "string",
+        "value": null,
+        "label": "Chat/Channel ID",
+        "placeholder": "${flow.channel_id}",
+        "required": true
+      },
+      {
+        "name": "file_blob",
+        "type": "string",
+        "value": null,
+        "label": "Audio to send (flo:blob: token from an upstream action)",
+        "placeholder": ""
+      },
+      {
+        "name": "file_base64",
+        "type": "string",
+        "value": null,
+        "label": "Audio bytes as base64 (alternative to file_blob)",
+        "placeholder": ""
+      },
+      {
+        "name": "title",
+        "type": "string",
+        "value": null,
+        "label": "Track title (optional)",
+        "placeholder": ""
+      },
+      {
+        "name": "performer",
+        "type": "string",
+        "value": null,
+        "label": "Artist / performer (optional)",
+        "placeholder": ""
+      },
+      {
+        "name": "duration",
+        "type": "integer",
+        "value": null,
+        "label": "Duration in seconds (optional)",
+        "placeholder": ""
+      },
+      {
+        "name": "caption",
+        "type": "string",
+        "value": null,
+        "label": "Caption text shown alongside the audio",
+        "placeholder": ""
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "message_id",
+        "type": "integer",
+        "value": null,
+        "label": "Message ID",
+        "placeholder": ""
+      },
+      {
+        "name": "audio_size_bytes",
+        "type": "integer",
+        "value": null,
+        "label": "Audio size (bytes)",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "messaging/telegram/send_document": {
+    "hash": "b0181f2fad14a6b61d79ca450d04e1c2d67589aa29a980b062f49697e55b95bf",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Send Telegram Document",
+    "description": "Send a file via Telegram. Accepts a flo:blob token or base64.",
+    "website": "https://www.flomation.co",
+    "icon": "telegram+file",
+    "date": "21/06/2026",
+    "type": 2,
+    "category": {
+      "name": "Messaging",
+      "icon": "comments",
+      "description": "Send messages via various channels"
+    },
+    "sub_category": {
+      "name": "Telegram",
+      "icon": "telegram",
+      "description": "Telegram Bot messaging operations"
+    },
+    "inputs": [
+      {
+        "name": "bot_token",
+        "type": "secret",
+        "value": null,
+        "label": "Telegram Bot Token",
+        "placeholder": "123456:ABC-DEF...",
+        "required": true
+      },
+      {
+        "name": "channel_id",
+        "type": "string",
+        "value": null,
+        "label": "Chat/Channel ID",
+        "placeholder": "${flow.channel_id}",
+        "required": true
+      },
+      {
+        "name": "file_blob",
+        "type": "string",
+        "value": null,
+        "label": "File to send (flo:blob: token from an upstream action)",
+        "placeholder": ""
+      },
+      {
+        "name": "file_base64",
+        "type": "string",
+        "value": null,
+        "label": "File bytes as base64 (alternative to file_blob)",
+        "placeholder": ""
+      },
+      {
+        "name": "filename",
+        "type": "string",
+        "value": null,
+        "label": "Filename shown to recipient",
+        "placeholder": "document.pdf"
+      },
+      {
+        "name": "caption",
+        "type": "string",
+        "value": null,
+        "label": "Caption text shown alongside the file",
+        "placeholder": ""
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "message_id",
+        "type": "integer",
+        "value": null,
+        "label": "Message ID",
+        "placeholder": ""
+      },
+      {
+        "name": "file_size_bytes",
+        "type": "integer",
+        "value": null,
+        "label": "File size (bytes)",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
   "messaging/telegram/send_message": {
     "hash": "fd8ae5e618a5843151c85035d533a18c32798cbab38a16c310c03bafce26c44f",
     "author": "Andy Esser",
@@ -17807,6 +18029,221 @@
         "type": "integer",
         "value": null,
         "label": "Message ID",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "messaging/telegram/send_photo": {
+    "hash": "b2c957eb61d2ffcf38e93d5374d5e47f8d132661c13a075d519a14145fd2a551",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Send Telegram Photo",
+    "description": "Send a photo via Telegram. Accepts a flo:blob image token or base64.",
+    "website": "https://www.flomation.co",
+    "icon": "telegram+image",
+    "date": "21/06/2026",
+    "type": 2,
+    "category": {
+      "name": "Messaging",
+      "icon": "comments",
+      "description": "Send messages via various channels"
+    },
+    "sub_category": {
+      "name": "Telegram",
+      "icon": "telegram",
+      "description": "Telegram Bot messaging operations"
+    },
+    "inputs": [
+      {
+        "name": "bot_token",
+        "type": "secret",
+        "value": null,
+        "label": "Telegram Bot Token",
+        "placeholder": "123456:ABC-DEF...",
+        "required": true
+      },
+      {
+        "name": "channel_id",
+        "type": "string",
+        "value": null,
+        "label": "Chat/Channel ID",
+        "placeholder": "${flow.channel_id}",
+        "required": true
+      },
+      {
+        "name": "file_blob",
+        "type": "string",
+        "value": null,
+        "label": "Image to send (flo:blob: token from an upstream action)",
+        "placeholder": ""
+      },
+      {
+        "name": "file_base64",
+        "type": "string",
+        "value": null,
+        "label": "Image bytes as base64 (alternative to file_blob)",
+        "placeholder": ""
+      },
+      {
+        "name": "caption",
+        "type": "string",
+        "value": null,
+        "label": "Caption text shown beneath the photo",
+        "placeholder": ""
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "message_id",
+        "type": "integer",
+        "value": null,
+        "label": "Message ID",
+        "placeholder": ""
+      },
+      {
+        "name": "photo_size_bytes",
+        "type": "integer",
+        "value": null,
+        "label": "Photo size (bytes)",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "messaging/telegram/send_video": {
+    "hash": "5fcbc67a567da3e26c2b173d2e64ca52cf75331d620a427c5f3d282214d40049",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Send Telegram Video",
+    "description": "Send a video via Telegram. Accepts a flo:blob token or base64.",
+    "website": "https://www.flomation.co",
+    "icon": "telegram+video",
+    "date": "21/06/2026",
+    "type": 2,
+    "category": {
+      "name": "Messaging",
+      "icon": "comments",
+      "description": "Send messages via various channels"
+    },
+    "sub_category": {
+      "name": "Telegram",
+      "icon": "telegram",
+      "description": "Telegram Bot messaging operations"
+    },
+    "inputs": [
+      {
+        "name": "bot_token",
+        "type": "secret",
+        "value": null,
+        "label": "Telegram Bot Token",
+        "placeholder": "123456:ABC-DEF...",
+        "required": true
+      },
+      {
+        "name": "channel_id",
+        "type": "string",
+        "value": null,
+        "label": "Chat/Channel ID",
+        "placeholder": "${flow.channel_id}",
+        "required": true
+      },
+      {
+        "name": "file_blob",
+        "type": "string",
+        "value": null,
+        "label": "Video to send (flo:blob: token from an upstream action)",
+        "placeholder": ""
+      },
+      {
+        "name": "file_base64",
+        "type": "string",
+        "value": null,
+        "label": "Video bytes as base64 (alternative to file_blob)",
+        "placeholder": ""
+      },
+      {
+        "name": "caption",
+        "type": "string",
+        "value": null,
+        "label": "Caption text shown beneath the video",
+        "placeholder": ""
+      },
+      {
+        "name": "duration",
+        "type": "integer",
+        "value": null,
+        "label": "Video duration in seconds (optional)",
+        "placeholder": ""
+      },
+      {
+        "name": "width",
+        "type": "integer",
+        "value": null,
+        "label": "Video width (optional)",
+        "placeholder": ""
+      },
+      {
+        "name": "height",
+        "type": "integer",
+        "value": null,
+        "label": "Video height (optional)",
+        "placeholder": ""
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "message_id",
+        "type": "integer",
+        "value": null,
+        "label": "Message ID",
+        "placeholder": ""
+      },
+      {
+        "name": "video_size_bytes",
+        "type": "integer",
+        "value": null,
+        "label": "Video size (bytes)",
         "placeholder": ""
       },
       {
@@ -24563,6 +25000,1056 @@
       }
     ]
   },
+  "opentofu/apply": {
+    "hash": "014ad6c578f0d1dc0fd07a413ee6e2608f2dba0b476c44deb5c9970f4b350fef",
+    "author": "David McElin",
+    "organisation": "Flomation",
+    "name": "OpenTofu Apply",
+    "description": "Apply an OpenTofu (Terraform-compatible) configuration, optionally pausing for human approval after showing the planned changes.",
+    "website": "https://www.flomation.co",
+    "icon": "box+check",
+    "date": "18/06/2026",
+    "type": 2,
+    "category": {
+      "name": "OpenTofu",
+      "icon": "box+gears",
+      "description": "Infrastructure as Code — run OpenTofu (Terraform-compatible) plan, apply, and destroy against a remote backend."
+    },
+    "inputs": [
+      {
+        "name": "working_directory",
+        "type": "string",
+        "value": null,
+        "label": "Working Directory",
+        "placeholder": "/path/to/terraform/config",
+        "required": true
+      },
+      {
+        "name": "require_approval",
+        "type": "boolean",
+        "value": null,
+        "label": "Require Approval",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "Yes",
+            "value": "true"
+          },
+          {
+            "name": "No",
+            "value": "false"
+          }
+        ]
+      },
+      {
+        "name": "variables",
+        "type": "key_value_array",
+        "value": null,
+        "label": "Variables",
+        "placeholder": "Exported as TF_VAR_\u003cname\u003e"
+      },
+      {
+        "name": "backend_config",
+        "type": "key_value_array",
+        "value": null,
+        "label": "Backend Config",
+        "placeholder": "Passed to `tofu init -backend-config` (use a remote backend)"
+      },
+      {
+        "name": "credentials",
+        "type": "key_value_array",
+        "value": null,
+        "label": "Environment Credentials",
+        "placeholder": "Extra provider/backend env vars, e.g. AWS_ACCESS_KEY_ID → ${secrets.aws_key}"
+      },
+      {
+        "name": "backend_auth",
+        "type": "string",
+        "value": null,
+        "label": "Backend Authentication",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "None / use credentials above",
+            "value": ""
+          },
+          {
+            "name": "AWS (S3 / DynamoDB)",
+            "value": "aws"
+          },
+          {
+            "name": "Azure (azurerm)",
+            "value": "azure"
+          },
+          {
+            "name": "Google Cloud (gcs)",
+            "value": "gcp"
+          },
+          {
+            "name": "GitLab (http)",
+            "value": "gitlab"
+          }
+        ]
+      },
+      {
+        "name": "aws_access_key_id",
+        "type": "secret",
+        "value": null,
+        "label": "AWS Access Key ID",
+        "placeholder": "",
+        "visible_when": {
+          "field": "backend_auth",
+          "values": [
+            "aws"
+          ]
+        }
+      },
+      {
+        "name": "aws_secret_access_key",
+        "type": "secret",
+        "value": null,
+        "label": "AWS Secret Access Key",
+        "placeholder": "",
+        "visible_when": {
+          "field": "backend_auth",
+          "values": [
+            "aws"
+          ]
+        }
+      },
+      {
+        "name": "aws_session_token",
+        "type": "secret",
+        "value": null,
+        "label": "AWS Session Token (optional)",
+        "placeholder": "",
+        "visible_when": {
+          "field": "backend_auth",
+          "values": [
+            "aws"
+          ]
+        }
+      },
+      {
+        "name": "aws_region",
+        "type": "string",
+        "value": null,
+        "label": "AWS Region",
+        "placeholder": "eu-west-2",
+        "visible_when": {
+          "field": "backend_auth",
+          "values": [
+            "aws"
+          ]
+        }
+      },
+      {
+        "name": "arm_client_id",
+        "type": "secret",
+        "value": null,
+        "label": "Azure Client ID",
+        "placeholder": "",
+        "visible_when": {
+          "field": "backend_auth",
+          "values": [
+            "azure"
+          ]
+        }
+      },
+      {
+        "name": "arm_client_secret",
+        "type": "secret",
+        "value": null,
+        "label": "Azure Client Secret",
+        "placeholder": "",
+        "visible_when": {
+          "field": "backend_auth",
+          "values": [
+            "azure"
+          ]
+        }
+      },
+      {
+        "name": "arm_tenant_id",
+        "type": "secret",
+        "value": null,
+        "label": "Azure Tenant ID",
+        "placeholder": "",
+        "visible_when": {
+          "field": "backend_auth",
+          "values": [
+            "azure"
+          ]
+        }
+      },
+      {
+        "name": "arm_subscription_id",
+        "type": "secret",
+        "value": null,
+        "label": "Azure Subscription ID",
+        "placeholder": "",
+        "visible_when": {
+          "field": "backend_auth",
+          "values": [
+            "azure"
+          ]
+        }
+      },
+      {
+        "name": "arm_access_key",
+        "type": "secret",
+        "value": null,
+        "label": "Azure Storage Access Key (optional)",
+        "placeholder": "",
+        "visible_when": {
+          "field": "backend_auth",
+          "values": [
+            "azure"
+          ]
+        }
+      },
+      {
+        "name": "gcp_credentials_json",
+        "type": "secret",
+        "value": null,
+        "label": "GCP Service Account JSON",
+        "placeholder": "",
+        "visible_when": {
+          "field": "backend_auth",
+          "values": [
+            "gcp"
+          ]
+        }
+      },
+      {
+        "name": "gitlab_username",
+        "type": "string",
+        "value": null,
+        "label": "GitLab Username",
+        "placeholder": "",
+        "visible_when": {
+          "field": "backend_auth",
+          "values": [
+            "gitlab"
+          ]
+        }
+      },
+      {
+        "name": "gitlab_token",
+        "type": "secret",
+        "value": null,
+        "label": "GitLab Token",
+        "placeholder": "",
+        "visible_when": {
+          "field": "backend_auth",
+          "values": [
+            "gitlab"
+          ]
+        }
+      },
+      {
+        "name": "gitlab_address",
+        "type": "string",
+        "value": null,
+        "label": "GitLab State Address",
+        "placeholder": "https://gitlab.com/api/v4/projects/\u003cid\u003e/terraform/state/\u003cname\u003e",
+        "visible_when": {
+          "field": "backend_auth",
+          "values": [
+            "gitlab"
+          ]
+        }
+      },
+      {
+        "name": "tofu_version",
+        "type": "string",
+        "value": null,
+        "label": "OpenTofu Version",
+        "placeholder": "1.9.1 (pinned default)"
+      },
+      {
+        "name": "binary_path",
+        "type": "string",
+        "value": null,
+        "label": "Binary Path (optional)",
+        "placeholder": "Use a host-installed tofu instead of downloading"
+      },
+      {
+        "name": "allow_local_state",
+        "type": "boolean",
+        "value": null,
+        "label": "Allow Local State (unsafe)",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "No",
+            "value": "false"
+          },
+          {
+            "name": "Yes",
+            "value": "true"
+          }
+        ]
+      },
+      {
+        "name": "timeout_seconds",
+        "type": "integer",
+        "value": null,
+        "label": "Timeout (seconds)",
+        "placeholder": "1800"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "status",
+        "type": "string",
+        "value": null,
+        "label": "Status",
+        "placeholder": ""
+      },
+      {
+        "name": "stdout",
+        "type": "text",
+        "value": null,
+        "label": "Apply Output",
+        "placeholder": ""
+      },
+      {
+        "name": "stderr",
+        "type": "text",
+        "value": null,
+        "label": "Standard Error",
+        "placeholder": ""
+      },
+      {
+        "name": "outputs_json",
+        "type": "text",
+        "value": null,
+        "label": "Outputs (JSON)",
+        "placeholder": ""
+      },
+      {
+        "name": "exit_code",
+        "type": "integer",
+        "value": null,
+        "label": "Exit Code",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      }
+    ]
+  },
+  "opentofu/destroy": {
+    "hash": "e965f00a42d6ae072a4926f82846b8008869ece6fcbdeebf1ec7f4b734bb9e45",
+    "author": "David McElin",
+    "organisation": "Flomation",
+    "name": "OpenTofu Destroy",
+    "description": "Destroy the resources managed by an OpenTofu (Terraform-compatible) configuration, optionally pausing for human approval first.",
+    "website": "https://www.flomation.co",
+    "icon": "box+trash",
+    "date": "18/06/2026",
+    "type": 2,
+    "category": {
+      "name": "OpenTofu",
+      "icon": "box+gears",
+      "description": "Infrastructure as Code — run OpenTofu (Terraform-compatible) plan, apply, and destroy against a remote backend."
+    },
+    "inputs": [
+      {
+        "name": "working_directory",
+        "type": "string",
+        "value": null,
+        "label": "Working Directory",
+        "placeholder": "/path/to/terraform/config",
+        "required": true
+      },
+      {
+        "name": "require_approval",
+        "type": "boolean",
+        "value": null,
+        "label": "Require Approval",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "Yes",
+            "value": "true"
+          },
+          {
+            "name": "No",
+            "value": "false"
+          }
+        ]
+      },
+      {
+        "name": "variables",
+        "type": "key_value_array",
+        "value": null,
+        "label": "Variables",
+        "placeholder": "Exported as TF_VAR_\u003cname\u003e"
+      },
+      {
+        "name": "backend_config",
+        "type": "key_value_array",
+        "value": null,
+        "label": "Backend Config",
+        "placeholder": "Passed to `tofu init -backend-config` (use a remote backend)"
+      },
+      {
+        "name": "credentials",
+        "type": "key_value_array",
+        "value": null,
+        "label": "Environment Credentials",
+        "placeholder": "Extra provider/backend env vars, e.g. AWS_ACCESS_KEY_ID → ${secrets.aws_key}"
+      },
+      {
+        "name": "backend_auth",
+        "type": "string",
+        "value": null,
+        "label": "Backend Authentication",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "None / use credentials above",
+            "value": ""
+          },
+          {
+            "name": "AWS (S3 / DynamoDB)",
+            "value": "aws"
+          },
+          {
+            "name": "Azure (azurerm)",
+            "value": "azure"
+          },
+          {
+            "name": "Google Cloud (gcs)",
+            "value": "gcp"
+          },
+          {
+            "name": "GitLab (http)",
+            "value": "gitlab"
+          }
+        ]
+      },
+      {
+        "name": "aws_access_key_id",
+        "type": "secret",
+        "value": null,
+        "label": "AWS Access Key ID",
+        "placeholder": "",
+        "visible_when": {
+          "field": "backend_auth",
+          "values": [
+            "aws"
+          ]
+        }
+      },
+      {
+        "name": "aws_secret_access_key",
+        "type": "secret",
+        "value": null,
+        "label": "AWS Secret Access Key",
+        "placeholder": "",
+        "visible_when": {
+          "field": "backend_auth",
+          "values": [
+            "aws"
+          ]
+        }
+      },
+      {
+        "name": "aws_session_token",
+        "type": "secret",
+        "value": null,
+        "label": "AWS Session Token (optional)",
+        "placeholder": "",
+        "visible_when": {
+          "field": "backend_auth",
+          "values": [
+            "aws"
+          ]
+        }
+      },
+      {
+        "name": "aws_region",
+        "type": "string",
+        "value": null,
+        "label": "AWS Region",
+        "placeholder": "eu-west-2",
+        "visible_when": {
+          "field": "backend_auth",
+          "values": [
+            "aws"
+          ]
+        }
+      },
+      {
+        "name": "arm_client_id",
+        "type": "secret",
+        "value": null,
+        "label": "Azure Client ID",
+        "placeholder": "",
+        "visible_when": {
+          "field": "backend_auth",
+          "values": [
+            "azure"
+          ]
+        }
+      },
+      {
+        "name": "arm_client_secret",
+        "type": "secret",
+        "value": null,
+        "label": "Azure Client Secret",
+        "placeholder": "",
+        "visible_when": {
+          "field": "backend_auth",
+          "values": [
+            "azure"
+          ]
+        }
+      },
+      {
+        "name": "arm_tenant_id",
+        "type": "secret",
+        "value": null,
+        "label": "Azure Tenant ID",
+        "placeholder": "",
+        "visible_when": {
+          "field": "backend_auth",
+          "values": [
+            "azure"
+          ]
+        }
+      },
+      {
+        "name": "arm_subscription_id",
+        "type": "secret",
+        "value": null,
+        "label": "Azure Subscription ID",
+        "placeholder": "",
+        "visible_when": {
+          "field": "backend_auth",
+          "values": [
+            "azure"
+          ]
+        }
+      },
+      {
+        "name": "arm_access_key",
+        "type": "secret",
+        "value": null,
+        "label": "Azure Storage Access Key (optional)",
+        "placeholder": "",
+        "visible_when": {
+          "field": "backend_auth",
+          "values": [
+            "azure"
+          ]
+        }
+      },
+      {
+        "name": "gcp_credentials_json",
+        "type": "secret",
+        "value": null,
+        "label": "GCP Service Account JSON",
+        "placeholder": "",
+        "visible_when": {
+          "field": "backend_auth",
+          "values": [
+            "gcp"
+          ]
+        }
+      },
+      {
+        "name": "gitlab_username",
+        "type": "string",
+        "value": null,
+        "label": "GitLab Username",
+        "placeholder": "",
+        "visible_when": {
+          "field": "backend_auth",
+          "values": [
+            "gitlab"
+          ]
+        }
+      },
+      {
+        "name": "gitlab_token",
+        "type": "secret",
+        "value": null,
+        "label": "GitLab Token",
+        "placeholder": "",
+        "visible_when": {
+          "field": "backend_auth",
+          "values": [
+            "gitlab"
+          ]
+        }
+      },
+      {
+        "name": "gitlab_address",
+        "type": "string",
+        "value": null,
+        "label": "GitLab State Address",
+        "placeholder": "https://gitlab.com/api/v4/projects/\u003cid\u003e/terraform/state/\u003cname\u003e",
+        "visible_when": {
+          "field": "backend_auth",
+          "values": [
+            "gitlab"
+          ]
+        }
+      },
+      {
+        "name": "tofu_version",
+        "type": "string",
+        "value": null,
+        "label": "OpenTofu Version",
+        "placeholder": "1.9.1 (pinned default)"
+      },
+      {
+        "name": "binary_path",
+        "type": "string",
+        "value": null,
+        "label": "Binary Path (optional)",
+        "placeholder": "Use a host-installed tofu instead of downloading"
+      },
+      {
+        "name": "allow_local_state",
+        "type": "boolean",
+        "value": null,
+        "label": "Allow Local State (unsafe)",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "No",
+            "value": "false"
+          },
+          {
+            "name": "Yes",
+            "value": "true"
+          }
+        ]
+      },
+      {
+        "name": "timeout_seconds",
+        "type": "integer",
+        "value": null,
+        "label": "Timeout (seconds)",
+        "placeholder": "1800"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "status",
+        "type": "string",
+        "value": null,
+        "label": "Status",
+        "placeholder": ""
+      },
+      {
+        "name": "stdout",
+        "type": "text",
+        "value": null,
+        "label": "Destroy Output",
+        "placeholder": ""
+      },
+      {
+        "name": "stderr",
+        "type": "text",
+        "value": null,
+        "label": "Standard Error",
+        "placeholder": ""
+      },
+      {
+        "name": "destroy",
+        "type": "integer",
+        "value": null,
+        "label": "Resources Destroyed",
+        "placeholder": ""
+      },
+      {
+        "name": "exit_code",
+        "type": "integer",
+        "value": null,
+        "label": "Exit Code",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      }
+    ]
+  },
+  "opentofu/plan": {
+    "hash": "9a5b06a94174b3884055f92e85b1eaabf92de01283a8362a3d7b1bcca8f14976",
+    "author": "David McElin",
+    "organisation": "Flomation",
+    "name": "OpenTofu Plan",
+    "description": "Initialise a working directory and produce an OpenTofu (Terraform-compatible) plan, reporting the changes that would be applied.",
+    "website": "https://www.flomation.co",
+    "icon": "box+magnifying-glass",
+    "date": "18/06/2026",
+    "type": 2,
+    "category": {
+      "name": "OpenTofu",
+      "icon": "box+gears",
+      "description": "Infrastructure as Code — run OpenTofu (Terraform-compatible) plan, apply, and destroy against a remote backend."
+    },
+    "inputs": [
+      {
+        "name": "working_directory",
+        "type": "string",
+        "value": null,
+        "label": "Working Directory",
+        "placeholder": "/path/to/terraform/config",
+        "required": true
+      },
+      {
+        "name": "variables",
+        "type": "key_value_array",
+        "value": null,
+        "label": "Variables",
+        "placeholder": "Exported as TF_VAR_\u003cname\u003e"
+      },
+      {
+        "name": "backend_config",
+        "type": "key_value_array",
+        "value": null,
+        "label": "Backend Config",
+        "placeholder": "Passed to `tofu init -backend-config` (use a remote backend)"
+      },
+      {
+        "name": "credentials",
+        "type": "key_value_array",
+        "value": null,
+        "label": "Environment Credentials",
+        "placeholder": "Extra provider/backend env vars, e.g. AWS_ACCESS_KEY_ID → ${secrets.aws_key}"
+      },
+      {
+        "name": "backend_auth",
+        "type": "string",
+        "value": null,
+        "label": "Backend Authentication",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "None / use credentials above",
+            "value": ""
+          },
+          {
+            "name": "AWS (S3 / DynamoDB)",
+            "value": "aws"
+          },
+          {
+            "name": "Azure (azurerm)",
+            "value": "azure"
+          },
+          {
+            "name": "Google Cloud (gcs)",
+            "value": "gcp"
+          },
+          {
+            "name": "GitLab (http)",
+            "value": "gitlab"
+          }
+        ]
+      },
+      {
+        "name": "aws_access_key_id",
+        "type": "secret",
+        "value": null,
+        "label": "AWS Access Key ID",
+        "placeholder": "",
+        "visible_when": {
+          "field": "backend_auth",
+          "values": [
+            "aws"
+          ]
+        }
+      },
+      {
+        "name": "aws_secret_access_key",
+        "type": "secret",
+        "value": null,
+        "label": "AWS Secret Access Key",
+        "placeholder": "",
+        "visible_when": {
+          "field": "backend_auth",
+          "values": [
+            "aws"
+          ]
+        }
+      },
+      {
+        "name": "aws_session_token",
+        "type": "secret",
+        "value": null,
+        "label": "AWS Session Token (optional)",
+        "placeholder": "",
+        "visible_when": {
+          "field": "backend_auth",
+          "values": [
+            "aws"
+          ]
+        }
+      },
+      {
+        "name": "aws_region",
+        "type": "string",
+        "value": null,
+        "label": "AWS Region",
+        "placeholder": "eu-west-2",
+        "visible_when": {
+          "field": "backend_auth",
+          "values": [
+            "aws"
+          ]
+        }
+      },
+      {
+        "name": "arm_client_id",
+        "type": "secret",
+        "value": null,
+        "label": "Azure Client ID",
+        "placeholder": "",
+        "visible_when": {
+          "field": "backend_auth",
+          "values": [
+            "azure"
+          ]
+        }
+      },
+      {
+        "name": "arm_client_secret",
+        "type": "secret",
+        "value": null,
+        "label": "Azure Client Secret",
+        "placeholder": "",
+        "visible_when": {
+          "field": "backend_auth",
+          "values": [
+            "azure"
+          ]
+        }
+      },
+      {
+        "name": "arm_tenant_id",
+        "type": "secret",
+        "value": null,
+        "label": "Azure Tenant ID",
+        "placeholder": "",
+        "visible_when": {
+          "field": "backend_auth",
+          "values": [
+            "azure"
+          ]
+        }
+      },
+      {
+        "name": "arm_subscription_id",
+        "type": "secret",
+        "value": null,
+        "label": "Azure Subscription ID",
+        "placeholder": "",
+        "visible_when": {
+          "field": "backend_auth",
+          "values": [
+            "azure"
+          ]
+        }
+      },
+      {
+        "name": "arm_access_key",
+        "type": "secret",
+        "value": null,
+        "label": "Azure Storage Access Key (optional)",
+        "placeholder": "",
+        "visible_when": {
+          "field": "backend_auth",
+          "values": [
+            "azure"
+          ]
+        }
+      },
+      {
+        "name": "gcp_credentials_json",
+        "type": "secret",
+        "value": null,
+        "label": "GCP Service Account JSON",
+        "placeholder": "",
+        "visible_when": {
+          "field": "backend_auth",
+          "values": [
+            "gcp"
+          ]
+        }
+      },
+      {
+        "name": "gitlab_username",
+        "type": "string",
+        "value": null,
+        "label": "GitLab Username",
+        "placeholder": "",
+        "visible_when": {
+          "field": "backend_auth",
+          "values": [
+            "gitlab"
+          ]
+        }
+      },
+      {
+        "name": "gitlab_token",
+        "type": "secret",
+        "value": null,
+        "label": "GitLab Token",
+        "placeholder": "",
+        "visible_when": {
+          "field": "backend_auth",
+          "values": [
+            "gitlab"
+          ]
+        }
+      },
+      {
+        "name": "gitlab_address",
+        "type": "string",
+        "value": null,
+        "label": "GitLab State Address",
+        "placeholder": "https://gitlab.com/api/v4/projects/\u003cid\u003e/terraform/state/\u003cname\u003e",
+        "visible_when": {
+          "field": "backend_auth",
+          "values": [
+            "gitlab"
+          ]
+        }
+      },
+      {
+        "name": "tofu_version",
+        "type": "string",
+        "value": null,
+        "label": "OpenTofu Version",
+        "placeholder": "1.9.1 (pinned default)"
+      },
+      {
+        "name": "binary_path",
+        "type": "string",
+        "value": null,
+        "label": "Binary Path (optional)",
+        "placeholder": "Use a host-installed tofu instead of downloading"
+      },
+      {
+        "name": "allow_local_state",
+        "type": "boolean",
+        "value": null,
+        "label": "Allow Local State (unsafe)",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "No",
+            "value": "false"
+          },
+          {
+            "name": "Yes",
+            "value": "true"
+          }
+        ]
+      },
+      {
+        "name": "timeout_seconds",
+        "type": "integer",
+        "value": null,
+        "label": "Timeout (seconds)",
+        "placeholder": "600"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "stdout",
+        "type": "text",
+        "value": null,
+        "label": "Plan Output (JSON)",
+        "placeholder": ""
+      },
+      {
+        "name": "stderr",
+        "type": "text",
+        "value": null,
+        "label": "Standard Error",
+        "placeholder": ""
+      },
+      {
+        "name": "changes_present",
+        "type": "boolean",
+        "value": null,
+        "label": "Changes Present",
+        "placeholder": ""
+      },
+      {
+        "name": "add",
+        "type": "integer",
+        "value": null,
+        "label": "Resources to Add",
+        "placeholder": ""
+      },
+      {
+        "name": "change",
+        "type": "integer",
+        "value": null,
+        "label": "Resources to Change",
+        "placeholder": ""
+      },
+      {
+        "name": "destroy",
+        "type": "integer",
+        "value": null,
+        "label": "Resources to Destroy",
+        "placeholder": ""
+      },
+      {
+        "name": "exit_code",
+        "type": "integer",
+        "value": null,
+        "label": "Exit Code",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      }
+    ]
+  },
   "output/set": {
     "hash": "05f0e3818a441c5837d9b6543e663da5f0a4e6febe515914d851620eb82ec9b3",
     "author": "Andy Esser",
@@ -25143,14 +26630,14 @@
     ]
   },
   "slack/file_upload": {
-    "hash": "cbdc6967fd6eed5ea2cd482ad425d83e8a4daacd0cdb83236f126fadbe3169ae",
+    "hash": "d54cee4455c881877d4be03ab8d9247d97153db584da74fe28c3fee4e26e1d8e",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Slack File Upload",
-    "description": "Upload a file to a Slack channel. Supports text content or base64-encoded binary data",
+    "description": "Upload a file to a Slack channel. Accepts a flo:blob token, base64, or text.",
     "website": "https://www.flomation.co",
     "icon": "slack+arrow-up",
-    "date": "20/04/2026",
+    "date": "21/06/2026",
     "type": 2,
     "category": {
       "name": "Slack",
@@ -25175,18 +26662,31 @@
         "required": true
       },
       {
+        "name": "file_blob",
+        "type": "string",
+        "value": null,
+        "label": "File to upload (flo:blob: token from an upstream action)",
+        "placeholder": ""
+      },
+      {
+        "name": "file_base64",
+        "type": "string",
+        "value": null,
+        "label": "File bytes as base64 (alternative to file_blob)",
+        "placeholder": ""
+      },
+      {
         "name": "content",
         "type": "text",
         "value": null,
         "label": "File content as text (for code snippets, CSV, logs, etc.)",
-        "placeholder": "",
-        "required": true
+        "placeholder": ""
       },
       {
         "name": "filename",
         "type": "string",
         "value": null,
-        "label": "Filename including extension (e.g. report.csv, log.txt, data.json)",
+        "label": "Filename including extension (e.g. report.csv, photo.png, data.json)",
         "placeholder": "",
         "required": true
       },
