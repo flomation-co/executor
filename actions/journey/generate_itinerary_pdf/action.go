@@ -74,14 +74,14 @@ var Inputs = [...]core.Connection{
 		Placeholder: "${parent.steps}",
 	},
 	{
-		Name:        "include_map",
-		Type:        core.ConnectionTypeBoolean,
-		Label:       "Include map image",
+		Name:  "include_map",
+		Type:  core.ConnectionTypeBoolean,
+		Label: "Include map image",
 	},
 	{
-		Name:        "include_directions",
-		Type:        core.ConnectionTypeBoolean,
-		Label:       "Include turn-by-turn directions",
+		Name:  "include_directions",
+		Type:  core.ConnectionTypeBoolean,
+		Label: "Include turn-by-turn directions",
 	},
 }
 
@@ -217,15 +217,15 @@ func buildPDF(title, distance, duration string, mapImage []byte, steps []stepIte
 // so cell borders align.
 func renderStepsTable(pdf *fpdf.Fpdf, steps []stepItem) {
 	const (
-		leftMargin    = 10.0
-		colStepW      = 14.0
-		colDirW       = 108.0
-		colDistW      = 28.0
-		colDurW       = 40.0
-		lineHeight    = 5.0
-		headerHeight  = 7.0
-		cellPad       = 1.5
-		pageBottomY   = 280.0
+		leftMargin   = 10.0
+		colStepW     = 14.0
+		colDirW      = 108.0
+		colDistW     = 28.0
+		colDurW      = 40.0
+		lineHeight   = 5.0
+		headerHeight = 7.0
+		cellPad      = 1.5
+		pageBottomY  = 280.0
 	)
 
 	pdf.SetFont("Helvetica", "B", 13)

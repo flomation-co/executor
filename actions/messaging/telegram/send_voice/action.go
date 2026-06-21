@@ -46,10 +46,10 @@ var Inputs = [...]core.Connection{
 		Required:    true,
 	},
 	{
-		Name:        "audio_base64",
-		Type:        core.ConnectionTypeString,
-		Label:       "Audio data (base64). Wire from an upstream TTS or audio action.",
-		Required:    true,
+		Name:     "audio_base64",
+		Type:     core.ConnectionTypeString,
+		Label:    "Audio data (base64). Wire from an upstream TTS or audio action.",
+		Required: true,
 	},
 	{
 		Name:  "caption",

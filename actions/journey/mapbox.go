@@ -21,14 +21,14 @@ func (m *mapboxProvider) Name() string { return ProviderMapbox }
 
 type mapboxGeocodeResponse struct {
 	Features []struct {
-		PlaceName   string             `json:"place_name"`
-		Center      []float64          `json:"center"`
-		Relevance   float64            `json:"relevance"`
-		Text        string             `json:"text"`
-		Context     []mapboxContextItm `json:"context"`
-		Address     string             `json:"address"`
-		Properties  map[string]any     `json:"properties"`
-		PlaceTypes  []string           `json:"place_type"`
+		PlaceName  string             `json:"place_name"`
+		Center     []float64          `json:"center"`
+		Relevance  float64            `json:"relevance"`
+		Text       string             `json:"text"`
+		Context    []mapboxContextItm `json:"context"`
+		Address    string             `json:"address"`
+		Properties map[string]any     `json:"properties"`
+		PlaceTypes []string           `json:"place_type"`
 	} `json:"features"`
 	Message string `json:"message"`
 }
@@ -393,9 +393,9 @@ func (m *mapboxProvider) RenderStaticMap(p StaticMapParams) ([]byte, string, err
 }
 
 type mapboxOptimisationResponse struct {
-	Code      string `json:"code"`
-	Message   string `json:"message"`
-	Trips     []struct {
+	Code    string `json:"code"`
+	Message string `json:"message"`
+	Trips   []struct {
 		Distance float64 `json:"distance"`
 		Duration float64 `json:"duration"`
 		Legs     []struct {
@@ -452,9 +452,9 @@ func (m *mapboxProvider) OptimiseRoute(p OptimiseParams) (*OptimiseResult, error
 	}
 
 	q := url.Values{
-		"access_token":  {m.apiKey},
-		"geometries":    {"polyline"},
-		"roundtrip":     {"false"},
+		"access_token": {m.apiKey},
+		"geometries":   {"polyline"},
+		"roundtrip":    {"false"},
 	}
 	if p.Start == "" && p.End == "" {
 		q.Set("roundtrip", "true")

@@ -31,7 +31,7 @@ var Inputs = [...]core.Connection{
 	},
 	{
 		Name:  "search",
-		Type:        core.ConnectionTypeSecret,
+		Type:  core.ConnectionTypeSecret,
 		Label: "Optional: filter by name or email",
 	},
 }

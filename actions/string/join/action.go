@@ -33,7 +33,9 @@ var Outputs = [...]core.Connection{
 
 func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[string]interface{}, error) {
 	sep := str("separator", inputs)
-	if sep == "" { sep = ", " }
+	if sep == "" {
+		sep = ", "
+	}
 
 	arrayConn := core.FindConnection("array", inputs)
 	if arrayConn == nil || arrayConn.Value == nil {
@@ -69,6 +71,8 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 
 func str(name string, inputs []*core.Connection) string {
 	c := core.FindConnection(name, inputs)
-	if c == nil || c.String() == nil { return "" }
+	if c == nil || c.String() == nil {
+		return ""
+	}
 	return *c.String()
 }

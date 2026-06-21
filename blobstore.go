@@ -1,34 +1,40 @@
 package core
 
-// BlobStore — disk-backed key-value store for transparent off-loading
-// of large tool-call outputs.
+// BlobStore — API-backed off-load tier for large tool-call outputs.
+// Underpins the same contract as the original disk-backed BlobStore
+// (per-execution Put/Get/Cleanup, opaque flo:blob:... tokens that
+// the AI passes through unchanged) but persistence happens in the
+// API's blob_object table, accessed over mTLS by ctx.InternalClient().
 //
-// Motivation. LLM tool loops cannot pass large binary payloads through
-// the model context — a 400 KB base64 audio blob would either exhaust
-// the context window or be hallucinated as a placeholder string by the
-// model (see execution 0bab2c40-3905-463c-9103-dc164d381f69 for the
-// canonical case: the model fabricated the literal string
-// "generated_audio_base64" rather than carry the real bytes).
+// Why the change? Two reasons that the disk-backed predecessor
+// couldn't satisfy:
 //
-// The store sits between the action layer (which produces and consumes
-// full values) and the AI orchestration layer (which only ever sees
-// tokens). Actions remain entirely unaware of it. The AI sees compact
-// `flo:blob:<handle>?size=N&type=mime` references in tool results and
-// passes them verbatim to downstream tools; the executor resolves the
-// reference back into the original bytes before invoking the action.
+//  1. Inbound files from Launch (M2+) need to land in the same tier
+//     before any execution exists. A local disk that lives in the
+//     executor's per-execution cwd cannot be written to by Launch.
+//     With the API tier, Launch uploads a blob, the executor reads it
+//     back during the resulting flow — same handle, same auth scope.
+//  2. Tool-output blobs were dying with their execution. The API
+//     tier's TTL (1 h for tool_output, 30 d for inbound) keeps them
+//     available for the editor's media inspector and any future
+//     downstream consumer without coupling lifetime to the local
+//     working directory.
 //
-// Lifetime. One store per execution, scoped to the executor's working
-// directory (which the runner creates per-execution and tears down on
-// completion). Cleanup is therefore mostly redundant but provided so
-// the contract is explicit.
+// Handles are 16 bytes (32 hex characters), set by the API on
+// upload. The executor's previous 8-byte handle format is GONE — any
+// in-flight code that depends on 16-character handles will see
+// ParseBlobToken fail. There is no migration: the per-execution
+// blob_store has no persisted state, and the format change is part
+// of unifying the contract across Launch / executor / API.
 
 import (
-	"crypto/rand"
+	"bytes"
 	"encoding/hex"
 	"fmt"
+	"io"
+	"mime/multipart"
+	"net/http"
 	"net/url"
-	"os"
-	"path/filepath"
 	"strconv"
 	"strings"
 	"sync"
@@ -41,82 +47,164 @@ import (
 // media payload (an MP3 second of audio is ~16 KB base64-encoded).
 const BlobThresholdBytes = 10 * 1024
 
-// BlobTokenPrefix is the leading marker that identifies a string
-// value as a blob reference. The prefix is verbose by design — it
-// makes the token easy to spot in logs, model traces, and DB dumps;
-// it also makes accidental collision with user content
-// vanishingly unlikely.
+// BlobTokenPrefix marks a string value as a blob reference. Same
+// prefix as before — the wire format is intentionally portable
+// between the disk and API backends so any in-flight serialised
+// data continues to parse.
 const BlobTokenPrefix = "flo:blob:"
 
-// BlobStore keeps a per-execution handle→file mapping plus the
-// directory the blobs live in. It is safe for concurrent use.
+// OrgIDHeader is the per-request org scope the API uses to enforce
+// auth. Mirrors the api package's constant; duplicated here only
+// because we'd otherwise import the API module for a single string.
+const OrgIDHeader = "X-Flomation-Org-Id"
+
+// OwnerIDHeader is the personal-mode counterpart of OrgIDHeader,
+// used for tool-output storage when the executing flow has no
+// organisation context. Exactly one of (OrgID, OwnerID) must be set
+// per request — the executor's NewBlobStore caller picks based on
+// ExecutionContext.OrganisationID falling back to AuthorID.
+const OwnerIDHeader = "X-Flomation-Owner-Id"
+
+// blobUploadPurpose tells the API which TTL bucket to apply. The
+// executor only ever produces tool-output blobs; inbound is set by
+// Launch in M2+, manual is reserved for future admin uploads.
+const blobUploadPurpose = "tool_output"
+
+// BlobStore is the per-execution facade over the API's blob endpoints.
+// Safe for concurrent use — the cache mutex serialises map access.
+//
+// orgID and ownerID are mutually exclusive — exactly one is non-empty
+// at construction time, mirroring the API's BlobScope discriminated
+// union. The lookup helper scopeHeader picks the right request header
+// based on which is set.
 type BlobStore struct {
-	dir string
+	client      *http.Client
+	apiURL      string
+	orgID       string
+	ownerID     string
+	executionID string
 
-	mu      sync.Mutex
-	handles map[string]string // handle -> on-disk path
+	mu    sync.Mutex
+	cache map[string][]byte // handle (hex) -> bytes; bounded by cacheMaxEntries
 }
 
-// NewBlobStore creates a store rooted at <baseDir>/blobs. The
-// directory is created lazily on first Put — an execution with no
-// large outputs leaves no filesystem trace.
-func NewBlobStore(baseDir string) *BlobStore {
+// cacheMaxEntries caps the in-process Get cache. Lets one execution
+// reuse a token across many tool calls without re-fetching, but
+// can't grow unboundedly. Eviction is naive: hit the cap, drop the
+// whole map. The blobs are still on the server.
+const cacheMaxEntries = 32
+
+// NewBlobStore builds a per-execution store bound to the calling
+// execution's identity. orgID and ownerID are mutually exclusive —
+// pass orgID for organisation-scoped flows, ownerID for personal-mode
+// flows. Setting both is a contract violation: Put will refuse the
+// upload with a clear error. Setting neither is also a violation.
+// apiURL is required; the cache lives inside the struct.
+func NewBlobStore(client *http.Client, apiURL, orgID, ownerID, executionID string) *BlobStore {
 	return &BlobStore{
-		dir:     filepath.Join(baseDir, "blobs"),
-		handles: map[string]string{},
+		client:      client,
+		apiURL:      strings.TrimRight(apiURL, "/"),
+		orgID:       orgID,
+		ownerID:     ownerID,
+		executionID: executionID,
+		cache:       map[string][]byte{},
 	}
 }
 
-// Put writes value to disk and returns a verbose token of the form
-//
-//	flo:blob:<16-hex>?size=<bytes>&type=<mime>
-//
-// The mimeHint is optional but recommended — it lets the LLM reason
-// about content type when choosing which tool to call next ("this is
-// audio/mpeg, the next tool expects audio_base64 — same shape, pass
-// it through"). An empty mimeHint produces a token without the type
-// parameter; downstream resolution is unaffected.
-func (s *BlobStore) Put(value []byte, mimeHint string) (string, error) {
+// scopeHeader returns the (header, value) pair the API expects on
+// each request. Returns ("", "") when the store is misconfigured —
+// callers should reject before sending.
+func (s *BlobStore) scopeHeader() (header, value string) {
 	if s == nil {
-		return "", fmt.Errorf("blob store not initialised")
+		return "", ""
+	}
+	if s.orgID != "" && s.ownerID == "" {
+		return OrgIDHeader, s.orgID
+	}
+	if s.ownerID != "" && s.orgID == "" {
+		return OwnerIDHeader, s.ownerID
+	}
+	return "", ""
+}
+
+// Put uploads value to the API tier and returns a verbose token of
+// the form
+//
+//	flo:blob:<32-hex>?size=<bytes>&type=<mime>
+//
+// The mimeHint is forwarded as the `mime` form field — the API will
+// reject the upload if it disagrees with the sniffed content category.
+func (s *BlobStore) Put(value []byte, mimeHint string) (string, error) {
+	if s == nil || s.apiURL == "" {
+		return "", fmt.Errorf("blob store not initialised: missing apiURL")
+	}
+	headerKey, headerVal := s.scopeHeader()
+	if headerKey == "" {
+		return "", fmt.Errorf("blob store not initialised: exactly one of orgID / ownerID required")
+	}
+	if mimeHint == "" {
+		mimeHint = "application/octet-stream"
 	}
 
-	if err := os.MkdirAll(s.dir, 0o750); err != nil {
-		return "", fmt.Errorf("create blob dir: %w", err)
+	var body bytes.Buffer
+	w := multipart.NewWriter(&body)
+	if err := w.WriteField("mime", mimeHint); err != nil {
+		return "", fmt.Errorf("write mime field: %w", err)
+	}
+	if err := w.WriteField("purpose", blobUploadPurpose); err != nil {
+		return "", fmt.Errorf("write purpose field: %w", err)
+	}
+	if s.executionID != "" {
+		if err := w.WriteField("execution_id", s.executionID); err != nil {
+			return "", fmt.Errorf("write execution_id field: %w", err)
+		}
+	}
+	part, err := w.CreateFormFile("file", "blob.bin")
+	if err != nil {
+		return "", fmt.Errorf("create file part: %w", err)
+	}
+	if _, err = part.Write(value); err != nil {
+		return "", fmt.Errorf("write file bytes: %w", err)
+	}
+	if err = w.Close(); err != nil {
+		return "", fmt.Errorf("close multipart: %w", err)
 	}
 
-	handle, err := newHandle()
+	req, err := http.NewRequest(http.MethodPost, s.apiURL+"/api/v1/internal/blob", &body)
+	if err != nil {
+		return "", fmt.Errorf("build request: %w", err)
+	}
+	req.Header.Set("Content-Type", w.FormDataContentType())
+	req.Header.Set(headerKey, headerVal)
+
+	resp, err := s.client.Do(req)
+	if err != nil {
+		return "", fmt.Errorf("blob upload: %w", err)
+	}
+	defer resp.Body.Close()
+	respBody, _ := io.ReadAll(resp.Body)
+	if resp.StatusCode != http.StatusCreated {
+		return "", fmt.Errorf("blob upload: status %d: %s", resp.StatusCode, truncateForErr(string(respBody)))
+	}
+
+	// Parse the canonical token out of the JSON response. We rely on
+	// the API's token rather than reconstructing one client-side —
+	// keeps the format authoritative in one place even if it evolves.
+	token, err := extractTokenFromUploadResponse(respBody)
 	if err != nil {
 		return "", err
 	}
-
-	path := filepath.Join(s.dir, handle)
-	// 0o640 — readable by the executor process and the runner that
-	// spawned it, no broader. Blobs may contain credential-adjacent
-	// data (TTS audio of a verification code, OCR'd images of an ID
-	// document) so we treat the on-disk form as sensitive.
-	if err := os.WriteFile(path, value, 0o640); err != nil {
-		return "", fmt.Errorf("write blob %s: %w", handle, err)
-	}
-
-	s.mu.Lock()
-	s.handles[handle] = path
-	s.mu.Unlock()
-
-	return formatBlobToken(handle, len(value), mimeHint), nil
+	return token, nil
 }
 
-// Get resolves a token back to the original bytes. It tolerates the
+// Get resolves a token back to the original bytes. Tolerates the
 // full verbose token format (with query params) and bare-handle
-// shortcuts in case the LLM strips the parameters when echoing.
-//
-// Returns an error wrapping ErrBlobNotFound when the handle is not
-// known to this store — the caller is responsible for translating
-// that into a user-facing error explaining how to wire tokens
-// correctly.
+// shortcuts. Caches successful reads within the execution so a
+// downstream tool that passes a token through twice only fetches
+// once.
 func (s *BlobStore) Get(token string) ([]byte, error) {
-	if s == nil {
-		return nil, fmt.Errorf("blob store not initialised")
+	if s == nil || s.apiURL == "" {
+		return nil, fmt.Errorf("blob store not initialised: missing apiURL")
 	}
 
 	handle, _, _, ok := ParseBlobToken(token)
@@ -125,61 +213,78 @@ func (s *BlobStore) Get(token string) ([]byte, error) {
 	}
 
 	s.mu.Lock()
-	path, exists := s.handles[handle]
+	if cached, hit := s.cache[handle]; hit {
+		s.mu.Unlock()
+		out := make([]byte, len(cached))
+		copy(out, cached)
+		return out, nil
+	}
 	s.mu.Unlock()
 
-	if !exists {
-		// Fall back to a direct disk lookup. Handles are 16 hex
-		// chars and live directly under s.dir, so this is safe
-		// without traversal guarding — strict hex check prevents
-		// any path component injection.
-		if !isHexHandle(handle) {
-			return nil, fmt.Errorf("%w: %s", ErrBlobNotFound, handle)
-		}
-		candidate := filepath.Join(s.dir, handle)
-		if _, err := os.Stat(candidate); err != nil {
-			return nil, fmt.Errorf("%w: %s", ErrBlobNotFound, handle)
-		}
-		path = candidate
+	req, err := http.NewRequest(http.MethodGet,
+		s.apiURL+"/api/v1/internal/blob/"+handle, nil)
+	if err != nil {
+		return nil, fmt.Errorf("build get request: %w", err)
+	}
+	headerKey, headerVal := s.scopeHeader()
+	if headerKey == "" {
+		return nil, fmt.Errorf("blob store not initialised: exactly one of orgID / ownerID required")
+	}
+	req.Header.Set(headerKey, headerVal)
+
+	resp, err := s.client.Do(req)
+	if err != nil {
+		return nil, fmt.Errorf("blob get: %w", err)
+	}
+	defer resp.Body.Close()
+	if resp.StatusCode == http.StatusNotFound {
+		return nil, fmt.Errorf("%w: %s", ErrBlobNotFound, handle)
+	}
+	if resp.StatusCode != http.StatusOK {
+		body, _ := io.ReadAll(resp.Body)
+		return nil, fmt.Errorf("blob get: status %d: %s", resp.StatusCode, truncateForErr(string(body)))
+	}
+	body, err := io.ReadAll(resp.Body)
+	if err != nil {
+		return nil, fmt.Errorf("blob get: read body: %w", err)
 	}
 
-	return os.ReadFile(path)
+	s.mu.Lock()
+	if len(s.cache) >= cacheMaxEntries {
+		s.cache = map[string][]byte{}
+	}
+	cp := make([]byte, len(body))
+	copy(cp, body)
+	s.cache[handle] = cp
+	s.mu.Unlock()
+
+	return body, nil
 }
 
-// Cleanup removes the on-disk blob directory and resets the in-
-// memory map. The runner already tears down the per-execution
-// working directory after the executor exits, so this is belt-and-
-// braces — but harmless to call from a defer.
+// Cleanup drops the in-process cache. The API-side rows are managed
+// by the server-side TTL sweep (tool_output → 1 h), so there's
+// nothing local to delete. Provided for API symmetry with the old
+// disk-backed implementation.
 func (s *BlobStore) Cleanup() error {
 	if s == nil {
 		return nil
 	}
 	s.mu.Lock()
-	s.handles = map[string]string{}
-	dir := s.dir
+	s.cache = map[string][]byte{}
 	s.mu.Unlock()
-	return os.RemoveAll(dir)
+	return nil
 }
 
-// ErrBlobNotFound is returned by Get when a handle doesn't match
-// any blob in this store. Sentinel so callers can pattern-match
-// without scraping error text.
+// ErrBlobNotFound is returned by Get when the API responds 404 — both
+// missing handles and cross-org reads collapse to this value because
+// the API does not distinguish (existence isn't leakable). Sentinel so
+// callers can pattern-match without scraping error text.
 var ErrBlobNotFound = fmt.Errorf("blob not found")
 
-// newHandle returns a fresh 16-hex-character handle. 8 bytes of
-// randomness gives 64 bits of entropy — collision probability is
-// negligible for the per-execution scope we operate in.
-func newHandle() (string, error) {
-	var b [8]byte
-	if _, err := rand.Read(b[:]); err != nil {
-		return "", fmt.Errorf("generate handle: %w", err)
-	}
-	return hex.EncodeToString(b[:]), nil
-}
-
 // formatBlobToken builds the verbose `flo:blob:<handle>?size=N&type=M`
-// representation. Always includes size; only includes type when a
-// hint is provided.
+// representation. Used by the API server today and retained here for
+// tests + any future fallback path that needs to reconstruct a token
+// client-side.
 func formatBlobToken(handle string, size int, mimeHint string) string {
 	var sb strings.Builder
 	sb.WriteString(BlobTokenPrefix)
@@ -193,7 +298,7 @@ func formatBlobToken(handle string, size int, mimeHint string) string {
 	return sb.String()
 }
 
-// IsBlobToken reports whether s is exact-shape blob token. The
+// IsBlobToken reports whether s is an exact-shape blob token. The
 // check is strict — it rejects strings that merely contain a token
 // substring, so a sentence in a tool_result that mentions a token
 // won't be re-interpreted as one.
@@ -208,8 +313,9 @@ func IsBlobToken(s string) bool {
 //   - Without type:     flo:blob:<handle>?size=N
 //   - Bare handle:      flo:blob:<handle>
 //
-// Returns ok=false if the prefix is missing, the handle isn't 16
-// hex chars, or anything else departs from the expected shape.
+// Returns ok=false if the prefix is missing, the handle isn't a
+// 32-character lowercase hex string, or anything else departs from
+// the expected shape.
 func ParseBlobToken(s string) (handle string, size int, mime string, ok bool) {
 	if !strings.HasPrefix(s, BlobTokenPrefix) {
 		return "", 0, "", false
@@ -242,8 +348,13 @@ func ParseBlobToken(s string) (handle string, size int, mime string, ok bool) {
 	return handle, size, mime, true
 }
 
+// blobHandleHexLen is the canonical hex-encoded length of a handle:
+// 16 random bytes = 32 hex characters. Pinned as a constant so the
+// drift catches at compile/test time, not at parse time.
+const blobHandleHexLen = 32
+
 func isHexHandle(s string) bool {
-	if len(s) != 16 {
+	if len(s) != blobHandleHexLen {
 		return false
 	}
 	for _, r := range s {
@@ -254,12 +365,46 @@ func isHexHandle(s string) bool {
 	return true
 }
 
+// extractTokenFromUploadResponse pulls the canonical token out of
+// the API's create-blob JSON. Kept as a tiny helper so a token
+// shape change in the API is a one-line update here, not a scatter
+// across Put callers.
+func extractTokenFromUploadResponse(body []byte) (string, error) {
+	// The full response shape is { handle, blob_token, size, mime,
+	// purpose }; we only need blob_token. Minimal manual decode
+	// avoids pulling encoding/json into the hot path for a single
+	// string field.
+	// #nosec G101 -- this is a JSON field marker for parsing the API's
+	// upload response (the response has a field named "blob_token"
+	// whose value is the opaque flo:blob:... reference). It is not a
+	// credential and contains no secret material.
+	const blobTokenJSONKey = `"blob_token":"`
+	idx := strings.Index(string(body), blobTokenJSONKey)
+	if idx < 0 {
+		return "", fmt.Errorf("upload response missing blob_token: %s", truncateForErr(string(body)))
+	}
+	rest := string(body)[idx+len(blobTokenJSONKey):]
+	end := strings.Index(rest, `"`)
+	if end < 0 {
+		return "", fmt.Errorf("upload response token not terminated: %s", truncateForErr(string(body)))
+	}
+	token := rest[:end]
+	if !IsBlobToken(token) {
+		return "", fmt.Errorf("upload response token malformed: %q", token)
+	}
+	return token, nil
+}
+
 // truncateForErr keeps error messages from spilling a multi-KB
-// string into the logs when ParseBlobToken is handed something
-// unreasonable.
+// string into the logs.
 func truncateForErr(s string) string {
 	if len(s) > 64 {
 		return s[:64] + "…"
 	}
 	return s
 }
+
+// _ avoids unused-import noise on hex when future changes need it.
+// Kept here intentionally so the import block stays stable and any
+// reviewer touching the file sees the hex helper as "available".
+var _ = hex.EncodeToString

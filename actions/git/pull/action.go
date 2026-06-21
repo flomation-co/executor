@@ -39,7 +39,7 @@ var Inputs = [...]core.Connection{
 	},
 	{
 		Name:     "username",
-		Type:        core.ConnectionTypeSecret,
+		Type:     core.ConnectionTypeSecret,
 		Label:    "Username",
 		Required: true,
 		Visible:  &core.VisibleWhen{Field: "auth_method", Values: []string{"http"}},

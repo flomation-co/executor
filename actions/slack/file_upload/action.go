@@ -1,9 +1,21 @@
 // Package slack_file_upload is an AI agent tool for uploading files to Slack.
 // Uses the modern files.getUploadURLExternal -> upload -> files.completeUploadExternal flow.
+//
+// Accepts three flavours of payload, chosen in this priority order:
+//
+//  1. file_blob  — a flo:blob:... reference (typically populated by
+//     the AI tool loop from an upstream action that produced binary
+//     output: TTS audio, generated image, chart render, etc.)
+//  2. file_base64 — base64-encoded bytes (manual / legacy wiring)
+//  3. content    — plain text (the original M0 behaviour, kept for
+//     code snippets / CSV / log paste flows)
+//
+// Exactly one is required; file_blob wins when multiple are set.
 package slack_file_upload
 
 import (
 	"bytes"
+	"encoding/base64"
 	"encoding/json"
 	"fmt"
 	"io"
@@ -18,10 +30,10 @@ const (
 	Author       = "Andy Esser"
 	Organisation = "Flomation"
 	Name         = "Slack File Upload"
-	Description  = "Upload a file to a Slack channel. Supports text content or base64-encoded binary data"
+	Description  = "Upload a file to a Slack channel. Accepts a flo:blob token, base64, or text."
 	Website      = "https://www.flomation.co"
 	Icon         = "slack+arrow-up"
-	Date         = "20/04/2026"
+	Date         = "21/06/2026"
 	Type         = core.ActionTypeAction
 
 	slackAPIBase = "https://slack.com/api"
@@ -30,8 +42,10 @@ const (
 var Inputs = [...]core.Connection{
 	{Name: "bot_token", Type: core.ConnectionTypeSecret, Label: "Bot Token", Placeholder: "xoxb-...", Required: true},
 	{Name: "channel_id", Type: core.ConnectionTypeString, Label: "Channel ID", Placeholder: "${channel_id}", Required: true},
-	{Name: "content", Type: core.ConnectionTypeText, Label: "File content as text (for code snippets, CSV, logs, etc.)", Required: true},
-	{Name: "filename", Type: core.ConnectionTypeString, Label: "Filename including extension (e.g. report.csv, log.txt, data.json)", Required: true},
+	{Name: "file_blob", Type: core.ConnectionTypeString, Label: "File to upload (flo:blob: token from an upstream action)"},
+	{Name: "file_base64", Type: core.ConnectionTypeString, Label: "File bytes as base64 (alternative to file_blob)"},
+	{Name: "content", Type: core.ConnectionTypeText, Label: "File content as text (for code snippets, CSV, logs, etc.)"},
+	{Name: "filename", Type: core.ConnectionTypeString, Label: "Filename including extension (e.g. report.csv, photo.png, data.json)", Required: true},
 	{Name: "title", Type: core.ConnectionTypeString, Label: "Display title for the file in Slack (optional, defaults to filename)"},
 	{Name: "initial_comment", Type: core.ConnectionTypeString, Label: "Message to post alongside the file (optional)"},
 }
@@ -55,20 +69,32 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	if channelID == "" {
 		return nil, fmt.Errorf("channel_id is required")
 	}
+
+	fileBlob := str("file_blob", inputs)
+	fileB64 := str("file_base64", inputs)
 	content := str("content", inputs)
-	if content == "" {
-		return nil, fmt.Errorf("content is required")
+
+	contentBytes, err := resolveFileBytes(flow, fileBlob, fileB64, content)
+	if err != nil {
+		return fail(err.Error())
 	}
+
 	filename := str("filename", inputs)
 	if filename == "" {
-		filename = "file.txt"
+		// Pick a sane default that reflects whichever input we used.
+		// Slack uses the extension to choose a preview renderer.
+		switch {
+		case fileBlob != "" || fileB64 != "":
+			filename = "file.bin"
+		default:
+			filename = "file.txt"
+		}
 	}
 	title := str("title", inputs)
 	if title == "" {
 		title = filename
 	}
 	initialComment := str("initial_comment", inputs)
-	contentBytes := []byte(content)
 
 	// Step 1: Get upload URL.
 	params := url.Values{}
@@ -183,4 +209,42 @@ func str(name string, inputs []*core.Connection) string {
 		return ""
 	}
 	return *conn.String()
+}
+
+// resolveFileBytes picks the bytes to upload from whichever input
+// was supplied, in priority order: file_blob → file_base64 → content.
+// At least one must be non-empty; otherwise we error.
+//
+// The file_blob path mirrors the Telegram M4 actions: if the value
+// is still a flo:blob: token (e.g. the AI tool loop's
+// DetokeniseInputs failed to resolve, or the action was invoked
+// outside the loop), fetch the bytes from the blob store directly.
+// Otherwise the string already IS the raw bytes (DetokeniseInputs
+// resolved on the way in; Go strings carry arbitrary bytes fine).
+func resolveFileBytes(flow *core.Flow, fileBlob, fileBase64, content string) ([]byte, error) {
+	if fileBlob != "" {
+		if core.IsBlobToken(fileBlob) {
+			data, err := flow.Blobs().Get(fileBlob)
+			if err != nil {
+				return nil, fmt.Errorf("resolve file_blob: %w", err)
+			}
+			return data, nil
+		}
+		return []byte(fileBlob), nil
+	}
+	if fileBase64 != "" {
+		data, err := base64.StdEncoding.DecodeString(fileBase64)
+		if err == nil {
+			return data, nil
+		}
+		data, err = base64.URLEncoding.DecodeString(fileBase64)
+		if err != nil {
+			return nil, fmt.Errorf("decode file_base64: %w", err)
+		}
+		return data, nil
+	}
+	if content != "" {
+		return []byte(content), nil
+	}
+	return nil, fmt.Errorf("one of file_blob, file_base64, or content is required")
 }

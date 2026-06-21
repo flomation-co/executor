@@ -47,7 +47,7 @@ var Inputs = [...]core.Connection{
 	},
 	{
 		Name:     "region",
-		Type:        core.ConnectionTypeSecret,
+		Type:     core.ConnectionTypeSecret,
 		Label:    "AWS Region",
 		Required: true,
 		Options: []core.ConnectionOption{

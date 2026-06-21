@@ -109,7 +109,7 @@ func FilterTokens(tokens []TokenInfo, accountFilter string) []TokenInfo {
 			if !strings.EqualFold(t.Email, accountFilter) &&
 				!strings.EqualFold(t.Label, accountFilter) &&
 				!strings.Contains(strings.ToLower(t.Email), strings.ToLower(accountFilter)) {
-					continue
+				continue
 			}
 		}
 		active = append(active, t)

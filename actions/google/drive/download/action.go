@@ -27,14 +27,14 @@ const (
 )
 
 var exportMimeTypes = map[string]string{
-	"text":  "text/plain",
-	"pdf":   "application/pdf",
-	"csv":   "text/csv",
-	"docx":  "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
-	"xlsx":  "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
-	"pptx":  "application/vnd.openxmlformats-officedocument.presentationml.presentation",
-	"html":  "text/html",
-	"tsv":   "text/tab-separated-values",
+	"text": "text/plain",
+	"pdf":  "application/pdf",
+	"csv":  "text/csv",
+	"docx": "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+	"xlsx": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+	"pptx": "application/vnd.openxmlformats-officedocument.presentationml.presentation",
+	"html": "text/html",
+	"tsv":  "text/tab-separated-values",
 }
 
 var Inputs = [...]core.Connection{
@@ -143,10 +143,10 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 		responseMimeType == "application/xml"
 
 	result := map[string]interface{}{
-		"tool_result":    fmt.Sprintf("Downloaded %s (%d bytes)", meta.Name, len(body)),
-		"mime_type":      responseMimeType,
-		"success":        true,
-		"error":          "",
+		"tool_result": fmt.Sprintf("Downloaded %s (%d bytes)", meta.Name, len(body)),
+		"mime_type":   responseMimeType,
+		"success":     true,
+		"error":       "",
 	}
 
 	if isText {

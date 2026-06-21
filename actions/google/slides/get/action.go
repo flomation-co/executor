@@ -73,7 +73,7 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	var pres struct {
 		Title  string `json:"title"`
 		Slides []struct {
-			ObjectID       string `json:"objectId"`
+			ObjectID        string `json:"objectId"`
 			SlideProperties struct {
 				LayoutObjectID string `json:"layoutObjectId"`
 			} `json:"slideProperties"`

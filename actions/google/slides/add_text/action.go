@@ -67,8 +67,8 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 		"requests": []map[string]interface{}{
 			{
 				"insertText": map[string]interface{}{
-					"objectId":    shapeID,
-					"text":        text,
+					"objectId":       shapeID,
+					"text":           text,
 					"insertionIndex": 0,
 				},
 			},

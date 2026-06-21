@@ -80,9 +80,9 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 
 	var resp struct {
 		Value []struct {
-			ID          string `json:"id"`
-			Subject     string `json:"subject"`
-			Start       struct {
+			ID      string `json:"id"`
+			Subject string `json:"subject"`
+			Start   struct {
 				DateTime string `json:"dateTime"`
 			} `json:"start"`
 			End struct {

@@ -14,8 +14,8 @@ import (
 )
 
 type stubTransport struct {
-	calls    int
-	bodies   []string
+	calls  int
+	bodies []string
 }
 
 func (s *stubTransport) RoundTrip(*http.Request) (*http.Response, error) {

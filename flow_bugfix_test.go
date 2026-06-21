@@ -142,10 +142,10 @@ func TestOnErrorChain_ErrorMessageResolvesWithReachability(t *testing.T) {
 	}
 
 	actions := map[string]Action{
-		"trigger/manual":  triggerAction,
-		"test/fail":       failAction,
-		"error/on_error":  onErrorAction,
-		"test/log_error":  logErrorAction,
+		"trigger/manual": triggerAction,
+		"test/fail":      failAction,
+		"error/on_error": onErrorAction,
+		"test/log_error": logErrorAction,
 	}
 
 	_, err := f.Execute(actions, nil, nil)
@@ -332,9 +332,9 @@ func TestOnErrorChain_WarnsOnMultipleOnErrorNodes(t *testing.T) {
 		"trigger/manual": func(flow *Flow, node *Node, inputs []*Connection) (map[string]interface{}, error) {
 			return map[string]interface{}{}, nil
 		},
-		"test/fail":    failAction,
+		"test/fail":      failAction,
 		"error/on_error": onErrorAction,
-		"test/child":   childAction,
+		"test/child":     childAction,
 	}
 
 	_, err := f.Execute(actions, nil, nil)
@@ -469,8 +469,9 @@ func TestMultipleTriggerPaths_ExecutesReachableParent(t *testing.T) {
 // NOT execute during parent resolution of the AI node.
 //
 // Flow: Trigger → Switch(voice/text)
-//         case_0 → STT → DataRename → AI
-//         case_1 ─────────────────────→ AI
+//
+//	case_0 → STT → DataRename → AI
+//	case_1 ─────────────────────→ AI
 //
 // When Switch matches case_1 (text), data_rename (on case_0 path via STT)
 // should NOT execute. Previously, the ancestor walk only recursed through
@@ -509,8 +510,8 @@ func TestUnmatchedBranch_SkipsThroughIntermediateActions(t *testing.T) {
 		},
 		Edges: []*Edge{
 			{ID: "e1", Source: "trigger", Target: "switch"},
-			{ID: "e2", Source: "switch", Target: "stt", SourceHandle: "case_0"},     // voice branch
-			{ID: "e3", Source: "switch", Target: "ai", SourceHandle: "case_1"},       // text branch
+			{ID: "e2", Source: "switch", Target: "stt", SourceHandle: "case_0"}, // voice branch
+			{ID: "e3", Source: "switch", Target: "ai", SourceHandle: "case_1"},  // text branch
 			{ID: "e4", Source: "stt", Target: "data-rename"},
 			{ID: "e5", Source: "data-rename", Target: "ai"},
 		},
@@ -520,11 +521,11 @@ func TestUnmatchedBranch_SkipsThroughIntermediateActions(t *testing.T) {
 	}
 
 	actions := map[string]Action{
-		"trigger/telegram":           triggerAction,
-		"conditional/switch":         switchAction,
-		"elevenlabs/speech_to_text":  sttAction,
-		"common/data_rename":         dataRenameAction,
-		"ai/anthropic":               aiAction,
+		"trigger/telegram":          triggerAction,
+		"conditional/switch":        switchAction,
+		"elevenlabs/speech_to_text": sttAction,
+		"common/data_rename":        dataRenameAction,
+		"ai/anthropic":              aiAction,
 	}
 
 	triggerEntry := "trigger"

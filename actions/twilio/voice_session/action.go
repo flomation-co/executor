@@ -232,7 +232,7 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 			maxTurns:   maxTurns,
 			maxDur:     time.Duration(maxDurSec) * time.Second,
 			bargeIn:    bargeIn,
-			frames:     make(chan []byte, 500),  // ~10 seconds of 20ms frames
+			frames:     make(chan []byte, 500),   // ~10 seconds of 20ms frames
 			events:     make(chan wsMessage, 10), // mark, stop, etc.
 			stopReader: make(chan struct{}),
 		}

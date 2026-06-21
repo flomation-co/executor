@@ -102,10 +102,10 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 		fmt.Sprintf("Impressions: %d, Engaged: %d, Fans: %d",
 			metrics["page_impressions"], metrics["page_engaged_users"], metrics["page_fans"]),
 		map[string]interface{}{
-			"page_impressions":  metrics["page_impressions"],
+			"page_impressions":   metrics["page_impressions"],
 			"page_engaged_users": metrics["page_engaged_users"],
-			"page_fans":         metrics["page_fans"],
-			"insights_json":     string(insightsJSON),
+			"page_fans":          metrics["page_fans"],
+			"insights_json":      string(insightsJSON),
 		},
 	), nil
 }

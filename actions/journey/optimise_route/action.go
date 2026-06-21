@@ -136,13 +136,13 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	return map[string]interface{}{
 		"tool_result": fmt.Sprintf("Optimised %d stops: %.1f miles, %s. Visit order: %v",
 			len(result.OrderedStops), result.TotalDistanceMiles, result.TotalDurationFriendly, result.OrderedStops),
-		"ordered_stops":          result.OrderedStops,
-		"waypoint_order":         result.WaypointOrder,
-		"total_distance_miles":   fmt.Sprintf("%.2f", result.TotalDistanceMiles),
+		"ordered_stops":           result.OrderedStops,
+		"waypoint_order":          result.WaypointOrder,
+		"total_distance_miles":    fmt.Sprintf("%.2f", result.TotalDistanceMiles),
 		"total_duration_friendly": result.TotalDurationFriendly,
-		"legs":                   result.Legs,
-		"optimisation":           json.RawMessage(resultJSON),
-		"success":                true,
-		"error":                  "",
+		"legs":                    result.Legs,
+		"optimisation":            json.RawMessage(resultJSON),
+		"success":                 true,
+		"error":                   "",
 	}, nil
 }

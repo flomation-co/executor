@@ -66,9 +66,9 @@ var Inputs = [...]core.Connection{
 		Placeholder: `[{"color":"#36a64f","text":"Attachment text"}]`,
 	},
 	{
-		Name:        "unfurl_links",
-		Type:        core.ConnectionTypeBoolean,
-		Label:       "Unfurl Links",
+		Name:  "unfurl_links",
+		Type:  core.ConnectionTypeBoolean,
+		Label: "Unfurl Links",
 	},
 }
 

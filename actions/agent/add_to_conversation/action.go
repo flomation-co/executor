@@ -41,10 +41,10 @@ var Inputs = [...]core.Connection{
 		Required:    true,
 	},
 	{
-		Name:        "content",
-		Type:        core.ConnectionTypeText,
-		Label:       "Message Content",
-		Required:    true,
+		Name:     "content",
+		Type:     core.ConnectionTypeText,
+		Label:    "Message Content",
+		Required: true,
 	},
 	{
 		Name:  "role",

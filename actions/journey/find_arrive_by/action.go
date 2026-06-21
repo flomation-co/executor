@@ -125,12 +125,12 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 		"tool_result": fmt.Sprintf("Leave at %s to arrive by %s (%.1f miles, %s).",
 			recommended.Format(time.RFC3339), arriveBy.Format(time.RFC3339),
 			second.DistanceMiles, second.DurationFriendly),
-		"recommended_departure":        recommended.Format(time.RFC3339),
-		"estimated_duration_seconds":   fmt.Sprintf("%.0f", second.DurationSeconds),
-		"estimated_duration_friendly":  second.DurationFriendly,
-		"distance_miles":               fmt.Sprintf("%.2f", second.DistanceMiles),
-		"success":                      true,
-		"error":                        "",
+		"recommended_departure":       recommended.Format(time.RFC3339),
+		"estimated_duration_seconds":  fmt.Sprintf("%.0f", second.DurationSeconds),
+		"estimated_duration_friendly": second.DurationFriendly,
+		"distance_miles":              fmt.Sprintf("%.2f", second.DistanceMiles),
+		"success":                     true,
+		"error":                       "",
 	}, nil
 }
 

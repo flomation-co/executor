@@ -62,7 +62,7 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 		"requests": []map[string]interface{}{
 			{
 				"insertText": map[string]interface{}{
-					"text":                text,
+					"text":                 text,
 					"endOfSegmentLocation": map[string]interface{}{},
 				},
 			},

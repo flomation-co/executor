@@ -122,10 +122,10 @@ var Outputs = [...]core.Connection{
 // AI action produces this shape; if the model drifts or returns malformed
 // JSON we return a structured error rather than exploding.
 type extractionPayload struct {
-	Memories        []extractionMemory   `json:"memories"`
-	ProposedActions []extractionAction   `json:"proposed_actions"`
-	Commitments     []extractionCommit   `json:"commitments"`
-	Confirmations   []extractionConfirm  `json:"confirmations"`
+	Memories        []extractionMemory  `json:"memories"`
+	ProposedActions []extractionAction  `json:"proposed_actions"`
+	Commitments     []extractionCommit  `json:"commitments"`
+	Confirmations   []extractionConfirm `json:"confirmations"`
 }
 
 type extractionMemory struct {
@@ -151,7 +151,7 @@ type extractionCommit struct {
 	DueAt       string  `json:"due_at,omitempty"` // ISO-8601; Phase 3 consumer
 	Evidence    string  `json:"evidence"`
 	Confidence  float64 `json:"confidence"`
-	MadeBy      string  `json:"made_by,omitempty"` // 'assistant' | 'user'
+	MadeBy      string  `json:"made_by,omitempty"`    // 'assistant' | 'user'
 	Recurrence  string  `json:"recurrence,omitempty"` // 'daily' | 'weekly' | 'monthly' | 'every Monday' | etc.
 }
 
@@ -812,7 +812,6 @@ func patchJSON(flow *core.Flow, ctx *core.ExecutionContext, path string, body ma
 	}
 	return nil
 }
-
 
 // --- shared HTTP helper ---
 
