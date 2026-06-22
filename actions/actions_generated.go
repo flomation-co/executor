@@ -266,6 +266,7 @@ import (
 	opentofu_plan "flomation.app/automate/executor/actions/opentofu/plan"
 	output_set "flomation.app/automate/executor/actions/output/set"
 	output_set_outputs "flomation.app/automate/executor/actions/output/set_outputs"
+	plan_block "flomation.app/automate/executor/actions/plan/block"
 	plan_create "flomation.app/automate/executor/actions/plan/create"
 	script_bash "flomation.app/automate/executor/actions/script/bash"
 	script_javascript "flomation.app/automate/executor/actions/script/javascript"
@@ -326,6 +327,7 @@ import (
 	trigger_linkedin_poll "flomation.app/automate/executor/actions/trigger/linkedin_poll"
 	trigger_manual "flomation.app/automate/executor/actions/trigger/manual"
 	trigger_microsoft_outlook "flomation.app/automate/executor/actions/trigger/microsoft_outlook"
+	trigger_plan_task "flomation.app/automate/executor/actions/trigger/plan_task"
 	trigger_qr "flomation.app/automate/executor/actions/trigger/qr"
 	trigger_s3 "flomation.app/automate/executor/actions/trigger/s3"
 	trigger_schedule "flomation.app/automate/executor/actions/trigger/schedule"
@@ -624,6 +626,7 @@ var Actions = map[string]core.Action{
 	"opentofu/plan":                         opentofu_plan.Execute,
 	"output/set":                            output_set.Execute,
 	"output/set_outputs":                    output_set_outputs.Execute,
+	"plan/block":                            plan_block.Execute,
 	"plan/create":                           plan_create.Execute,
 	"script/bash":                           script_bash.Execute,
 	"script/javascript":                     script_javascript.Execute,
@@ -684,6 +687,7 @@ var Actions = map[string]core.Action{
 	"trigger/linkedin_poll":                 trigger_linkedin_poll.Execute,
 	"trigger/manual":                        trigger_manual.Execute,
 	"trigger/microsoft_outlook":             trigger_microsoft_outlook.Execute,
+	"trigger/plan_task":                     trigger_plan_task.Execute,
 	"trigger/qr":                            trigger_qr.Execute,
 	"trigger/s3":                            trigger_s3.Execute,
 	"trigger/schedule":                      trigger_schedule.Execute,

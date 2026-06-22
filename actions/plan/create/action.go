@@ -60,11 +60,13 @@ var Inputs = [...]core.Connection{
 		Placeholder: "Pull this quarter's metrics, summarise for leadership, send for sign-off.",
 	},
 	{
-		Name:        "tasks_json",
-		Type:        core.ConnectionTypeText,
-		Label:       "Tasks (JSON array). Each task: name, flow_id, flow_revision_id, depends_on (optional), inputs (optional).",
+		Name: "tasks_json",
+		Type: core.ConnectionTypeText,
+		Label: "Tasks (JSON array). Each task requires `name` + `description`; optional `inputs`, `depends_on`. " +
+			"Omit `flow_id` to let the agent's orchestrator handle the task (recommended for most work). " +
+			"Specify `flow_id` + `flow_revision_id` together to pin a curated flow when determinism matters.",
 		Required:    true,
-		Placeholder: `[{"name":"pull","flow_id":"<uuid>","flow_revision_id":"<uuid>","inputs":{}}]`,
+		Placeholder: `[{"name":"pull","description":"pull this quarter's metrics","inputs":{"quarter":"Q3"}}]`,
 	},
 }
 

@@ -220,3 +220,52 @@ func TestExecute_ContextCancellation_PropagatesViaFlow(t *testing.T) {
 	Expect(err).NotTo(HaveOccurred())
 	Expect(out["success"]).To(BeFalse())
 }
+
+// === M1.5 commit 5: orchestrator-kind tasks_json shape ===
+
+func TestExecute_OrchestratorKindTasks_PassesNoFlowFields(t *testing.T) {
+	// Per M1.5: a task without flow_id falls back to orchestrator
+	// dispatch. The wire shape is just (name, description, inputs).
+	// The executor action passes the array through verbatim — the
+	// API derives task_kind from field presence.
+	RegisterTestingT(t)
+
+	var sawTasks []map[string]interface{}
+	srv := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		var body struct {
+			Tasks []map[string]interface{} `json:"tasks"`
+		}
+		_ = json.NewDecoder(r.Body).Decode(&body)
+		sawTasks = body.Tasks
+		w.Header().Set("Content-Type", "application/json")
+		w.WriteHeader(http.StatusCreated)
+		_, _ = w.Write([]byte(`{"plan_id":"plan-orc","task_count":2,"status":"active"}`))
+	}))
+	defer srv.Close()
+
+	flow := newPlanTestFlow(srv.URL, "agent-1")
+	inputs := connsFromMap(map[string]string{
+		"title": "Orchestrator-only",
+		"goal":  "Both tasks dispatched via agent orchestrator",
+		"tasks_json": `[
+			{"name":"analyse","description":"summarise the inputs"},
+			{"name":"reply","description":"send the summary back","depends_on":["analyse"]}
+		]`,
+	})
+
+	out, err := Execute(flow, nil, inputs)
+	Expect(err).NotTo(HaveOccurred())
+	Expect(out["success"]).To(BeTrue())
+	Expect(out["plan_id"]).To(Equal("plan-orc"))
+
+	// API received both tasks with NO flow_id / flow_revision_id —
+	// the API's deriveTaskKind sees absence and stamps the rows
+	// task_kind='orchestrator'.
+	Expect(sawTasks).To(HaveLen(2))
+	for _, task := range sawTasks {
+		Expect(task).NotTo(HaveKey("flow_id"))
+		Expect(task).NotTo(HaveKey("flow_revision_id"))
+	}
+	Expect(sawTasks[0]["description"]).To(Equal("summarise the inputs"))
+	Expect(sawTasks[1]["depends_on"]).To(Equal([]interface{}{"analyse"}))
+}

@@ -26104,7 +26104,7 @@
     "outputs": null
   },
   "plan/create": {
-    "hash": "fd22e40cf66afe4acc5c4b8764a1a99254bf6d2c2c958e9b6725262cfed9e1b4",
+    "hash": "5a72c45e12db02fd0ed8aabdcaa828a5f61fbe1c9040bc87d645233d85e819fa",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Create Plan",
@@ -26139,8 +26139,8 @@
         "name": "tasks_json",
         "type": "text",
         "value": null,
-        "label": "Tasks (JSON array). Each task: name, flow_id, flow_revision_id, depends_on (optional), inputs (optional).",
-        "placeholder": "[{\"name\":\"pull\",\"flow_id\":\"\u003cuuid\u003e\",\"flow_revision_id\":\"\u003cuuid\u003e\",\"inputs\":{}}]",
+        "label": "",
+        "placeholder": "[{\"name\":\"pull\",\"description\":\"pull this quarter's metrics\",\"inputs\":{\"quarter\":\"Q3\"}}]",
         "required": true
       }
     ],
@@ -31436,6 +31436,109 @@
         "type": "string",
         "value": null,
         "label": "Triggered At",
+        "placeholder": ""
+      }
+    ]
+  },
+  "trigger/plan_task": {
+    "hash": "95d0d7d2296b0bb0f4755ee25a2e40e5502a60d0116a5dd9d91db2ecc167a139",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Plan Task Trigger",
+    "description": "Fires when a plan task is dispatched. Carries task framing into the agent's orchestrator without flow amendment.",
+    "website": "https://www.flomation.co",
+    "icon": "list-check+bolt",
+    "date": "22/06/2026",
+    "type": 1,
+    "category": {
+      "name": "Triggers",
+      "icon": "bolt-lightning",
+      "description": "Start a Flow"
+    },
+    "inputs": null,
+    "outputs": [
+      {
+        "name": "prompt",
+        "type": "text",
+        "value": null,
+        "label": "Pre-formatted task framing — wire into AI Prompt's prompt input",
+        "placeholder": ""
+      },
+      {
+        "name": "channel_type",
+        "type": "string",
+        "value": null,
+        "label": "Always 'plan_task' — distinguishes from user-message channels",
+        "placeholder": ""
+      },
+      {
+        "name": "channel_id",
+        "type": "string",
+        "value": null,
+        "label": "Empty (plan tasks have no channel)",
+        "placeholder": ""
+      },
+      {
+        "name": "conversation_history",
+        "type": "object",
+        "value": null,
+        "label": "Empty array — plan tasks don't see prior conversation",
+        "placeholder": ""
+      },
+      {
+        "name": "agent_id",
+        "type": "string",
+        "value": null,
+        "label": "Agent ID",
+        "placeholder": ""
+      },
+      {
+        "name": "agent_user_id",
+        "type": "string",
+        "value": null,
+        "label": "Agent User ID",
+        "placeholder": ""
+      },
+      {
+        "name": "plan_id",
+        "type": "string",
+        "value": null,
+        "label": "Plan ID",
+        "placeholder": ""
+      },
+      {
+        "name": "plan_task_id",
+        "type": "string",
+        "value": null,
+        "label": "Plan Task ID — pass to set_output or plan/block",
+        "placeholder": ""
+      },
+      {
+        "name": "plan_task_name",
+        "type": "string",
+        "value": null,
+        "label": "Task name",
+        "placeholder": ""
+      },
+      {
+        "name": "plan_task_description",
+        "type": "text",
+        "value": null,
+        "label": "Task description",
+        "placeholder": ""
+      },
+      {
+        "name": "plan_task_inputs",
+        "type": "object",
+        "value": null,
+        "label": "Task inputs (post-substitution from upstream outputs)",
+        "placeholder": ""
+      },
+      {
+        "name": "upstream_outputs",
+        "type": "object",
+        "value": null,
+        "label": "Outputs from completed dependency tasks, keyed by task name",
         "placeholder": ""
       }
     ]
