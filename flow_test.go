@@ -179,6 +179,7 @@ func TestExecutionContextGet(t *testing.T) {
 		AgentID:        "agent-aaa",
 		AgentUserID:    "user-bbb",
 		ConversationID: "conv-ccc",
+		PlanTaskID:     "task-ddd",
 	}
 
 	Expect(ctx.Get("flow_id")).To(Equal("flo-123"))
@@ -195,6 +196,7 @@ func TestExecutionContextGet(t *testing.T) {
 	Expect(ctx.Get("agent_id")).To(Equal("agent-aaa"))
 	Expect(ctx.Get("agent_user_id")).To(Equal("user-bbb"))
 	Expect(ctx.Get("conversation_id")).To(Equal("conv-ccc"))
+	Expect(ctx.Get("plan_task_id")).To(Equal("task-ddd"))
 	Expect(ctx.Get("nonexistent")).To(Equal(""))
 }
 
@@ -212,6 +214,7 @@ func TestExecutionContextJSONRoundtrip(t *testing.T) {
 		AgentID:        "agent-aaa",
 		AgentUserID:    "user-bbb",
 		ConversationID: "conv-ccc",
+		PlanTaskID:     "task-ddd",
 	}
 
 	raw, err := json.Marshal(original)
@@ -221,12 +224,14 @@ func TestExecutionContextJSONRoundtrip(t *testing.T) {
 	Expect(string(raw)).To(ContainSubstring(`"agent_id":"agent-aaa"`))
 	Expect(string(raw)).To(ContainSubstring(`"agent_user_id":"user-bbb"`))
 	Expect(string(raw)).To(ContainSubstring(`"conversation_id":"conv-ccc"`))
+	Expect(string(raw)).To(ContainSubstring(`"plan_task_id":"task-ddd"`))
 
 	var decoded ExecutionContext
 	Expect(json.Unmarshal(raw, &decoded)).To(Succeed())
 	Expect(decoded.AgentID).To(Equal("agent-aaa"))
 	Expect(decoded.AgentUserID).To(Equal("user-bbb"))
 	Expect(decoded.ConversationID).To(Equal("conv-ccc"))
+	Expect(decoded.PlanTaskID).To(Equal("task-ddd"))
 }
 
 // TestExecutionContextJSONRoundtrip_EmptyFieldsOmitted ensures a
@@ -245,6 +250,7 @@ func TestExecutionContextJSONRoundtrip_EmptyFieldsOmitted(t *testing.T) {
 	Expect(string(raw)).NotTo(ContainSubstring("agent_user_id"))
 	Expect(string(raw)).NotTo(ContainSubstring("conversation_id"))
 	Expect(string(raw)).NotTo(ContainSubstring("system_prompt"))
+	Expect(string(raw)).NotTo(ContainSubstring("plan_task_id"))
 }
 
 func TestFlowVariableSubstitution(t *testing.T) {

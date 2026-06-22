@@ -440,6 +440,13 @@ type ExecutionContext struct {
 	// preferences persist across channels and conversations. Empty when
 	// the execution is not running in an agent context.
 	AgentUserID string `json:"agent_user_id,omitempty"`
+	// PlanTaskID identifies the plan_task this execution is progressing
+	// when the orchestrator was dispatched via the Plan Task Trigger
+	// (Agent Planning M1.5). Exposed as ${flow.plan_task_id} so the
+	// plan/block AI tool can transition the correct task without the
+	// model having to track the UUID across turns. Empty for any
+	// non-plan-task execution.
+	PlanTaskID string `json:"plan_task_id,omitempty"`
 	// UserID is the platform user_id resolved by the API's inbound
 	// pipeline — either a declared owner via user_identity, or an
 	// anonymous stub user keyed per-(org, channel, external_id). It
@@ -582,6 +589,8 @@ func (ctx *ExecutionContext) Get(name string) string {
 		return ctx.AgentID
 	case "agent_user_id":
 		return ctx.AgentUserID
+	case "plan_task_id":
+		return ctx.PlanTaskID
 	case "user_id":
 		return ctx.UserID
 	case "identities":
