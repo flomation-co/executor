@@ -499,6 +499,9 @@ func TestInjectToolDefinitions_PlanTaskMode_FiltersForbiddenTools(t *testing.T) 
 		{ID: "t3", Data: &NodeData{Label: "plan/get_status", Config: NodeConfig{ID: "t3", Inputs: []*Connection{}}}},
 		{ID: "t4", Data: &NodeData{Label: "plan/block", Config: NodeConfig{ID: "t4", Inputs: []*Connection{}}}},
 		{ID: "t5", Data: &NodeData{Label: "output/set_output", Config: NodeConfig{ID: "t5", Inputs: []*Connection{}}}},
+		// M5: plan/revise is also filtered — a plan task should
+		// not mutate its parent plan's task graph.
+		{ID: "t6", Data: &NodeData{Label: "plan/revise", Config: NodeConfig{ID: "t6", Inputs: []*Connection{}}}},
 	}
 
 	f := &Flow{
@@ -520,6 +523,7 @@ func TestInjectToolDefinitions_PlanTaskMode_FiltersForbiddenTools(t *testing.T) 
 	// Forbidden tools must NOT appear.
 	Expect(defs).NotTo(ContainSubstring(`"plan_create"`))
 	Expect(defs).NotTo(ContainSubstring(`"plan_cancel"`))
+	Expect(defs).NotTo(ContainSubstring(`"plan_revise"`))
 	// Allowed tools MUST appear.
 	Expect(defs).To(ContainSubstring(`"plan_get_status"`))
 	Expect(defs).To(ContainSubstring(`"plan_block"`))
