@@ -128,6 +128,23 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 
 	respBody, _ := io.ReadAll(io.LimitReader(resp.Body, 64*1024))
 
+	if resp.StatusCode == http.StatusTooManyRequests {
+		// M3.5 rate cap: the API rejected because this agent
+		// created a plan very recently. The body carries a clear
+		// detail string the AI should read and act on (e.g. call
+		// plan/get_status to check what already exists instead of
+		// trying again). Surface verbatim — the body's detail field
+		// is already AI-facing.
+		var parsed struct {
+			Detail string `json:"detail"`
+		}
+		detail := truncate(string(respBody), 512)
+		if jerr := json.Unmarshal(respBody, &parsed); jerr == nil && parsed.Detail != "" {
+			detail = parsed.Detail
+		}
+		return failResult(fmt.Sprintf("plan/create rate-limited — %s", detail)), nil
+	}
+
 	if resp.StatusCode != http.StatusCreated {
 		// Surface the structured error body verbatim — the validator
 		// returns task_name + reason so the model can self-correct

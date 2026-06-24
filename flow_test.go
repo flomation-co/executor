@@ -478,3 +478,115 @@ func TestFlowVariableSubstitutionWithoutContext(t *testing.T) {
 	// Variable stays as-is when no context is available
 	Expect(result["exec_id"]).To(Equal("${flow.execution_id}"))
 }
+
+// === M3.5 — plan-task tool filtering ===
+
+// TestInjectToolDefinitions_PlanTaskMode_FiltersForbiddenTools pins
+// the M3.5 fix: when the flow's ChannelType is "plan_task", the AI
+// must not see plan/create or plan/cancel in its tool list. Without
+// this filter, an agent running inside a plan task can recursively
+// spawn new plans (the runaway-loop we hit in testing).
+func TestInjectToolDefinitions_PlanTaskMode_FiltersForbiddenTools(t *testing.T) {
+	RegisterTestingT(t)
+
+	aiNode := &Node{
+		ID: "ai-1",
+		Data: &NodeData{Label: "ai/anthropic", Config: NodeConfig{ID: "ai-1"}},
+	}
+	toolNodes := []*Node{
+		{ID: "t1", Data: &NodeData{Label: "plan/create", Config: NodeConfig{ID: "t1", Inputs: []*Connection{}}}},
+		{ID: "t2", Data: &NodeData{Label: "plan/cancel", Config: NodeConfig{ID: "t2", Inputs: []*Connection{}}}},
+		{ID: "t3", Data: &NodeData{Label: "plan/get_status", Config: NodeConfig{ID: "t3", Inputs: []*Connection{}}}},
+		{ID: "t4", Data: &NodeData{Label: "plan/block", Config: NodeConfig{ID: "t4", Inputs: []*Connection{}}}},
+		{ID: "t5", Data: &NodeData{Label: "output/set_output", Config: NodeConfig{ID: "t5", Inputs: []*Connection{}}}},
+	}
+
+	f := &Flow{
+		context: &ExecutionContext{ChannelType: "plan_task"},
+	}
+	f.injectToolDefinitions(aiNode, toolNodes, map[string]Action{})
+
+	// Inspect tool_definitions on aiNode's inputs.
+	var defs string
+	for _, inp := range aiNode.Data.Config.Inputs {
+		if inp.Name == "tool_definitions" && inp.Value != nil {
+			if s, ok := inp.Value.(string); ok {
+				defs = s
+			}
+		}
+	}
+	Expect(defs).NotTo(BeEmpty(), "tool_definitions must be set")
+
+	// Forbidden tools must NOT appear.
+	Expect(defs).NotTo(ContainSubstring(`"plan_create"`))
+	Expect(defs).NotTo(ContainSubstring(`"plan_cancel"`))
+	// Allowed tools MUST appear.
+	Expect(defs).To(ContainSubstring(`"plan_get_status"`))
+	Expect(defs).To(ContainSubstring(`"plan_block"`))
+	Expect(defs).To(ContainSubstring(`"output_set_output"`))
+}
+
+// TestInjectToolDefinitions_NonPlanTaskMode_KeepsAllTools confirms
+// the filter is scoped to plan-task mode only. Telegram, Slack,
+// manual triggers etc. must see the full tool list — including
+// plan/create so the agent CAN author plans on user-facing turns.
+func TestInjectToolDefinitions_NonPlanTaskMode_KeepsAllTools(t *testing.T) {
+	RegisterTestingT(t)
+
+	aiNode := &Node{
+		ID: "ai-1",
+		Data: &NodeData{Label: "ai/anthropic", Config: NodeConfig{ID: "ai-1"}},
+	}
+	toolNodes := []*Node{
+		{ID: "t1", Data: &NodeData{Label: "plan/create", Config: NodeConfig{ID: "t1", Inputs: []*Connection{}}}},
+		{ID: "t2", Data: &NodeData{Label: "plan/cancel", Config: NodeConfig{ID: "t2", Inputs: []*Connection{}}}},
+	}
+
+	f := &Flow{
+		context: &ExecutionContext{ChannelType: "telegram"},
+	}
+	f.injectToolDefinitions(aiNode, toolNodes, map[string]Action{})
+
+	var defs string
+	for _, inp := range aiNode.Data.Config.Inputs {
+		if inp.Name == "tool_definitions" && inp.Value != nil {
+			if s, ok := inp.Value.(string); ok {
+				defs = s
+			}
+		}
+	}
+	Expect(defs).To(ContainSubstring(`"plan_create"`))
+	Expect(defs).To(ContainSubstring(`"plan_cancel"`))
+}
+
+// TestInjectToolDefinitions_NoContext_KeepsAllTools is the
+// defensive path — if the flow has no execution context (eg unit
+// tests, manual triggers without channel framing) we MUST NOT
+// filter, because we don't know what mode we're in. The safe
+// default is "show everything".
+func TestInjectToolDefinitions_NoContext_KeepsAllTools(t *testing.T) {
+	RegisterTestingT(t)
+
+	aiNode := &Node{
+		ID: "ai-1",
+		Data: &NodeData{Label: "ai/anthropic", Config: NodeConfig{ID: "ai-1"}},
+	}
+	toolNodes := []*Node{
+		{ID: "t1", Data: &NodeData{Label: "plan/create", Config: NodeConfig{ID: "t1", Inputs: []*Connection{}}}},
+	}
+
+	f := &Flow{
+		context: nil, // explicit nil — defensive path
+	}
+	f.injectToolDefinitions(aiNode, toolNodes, map[string]Action{})
+
+	var defs string
+	for _, inp := range aiNode.Data.Config.Inputs {
+		if inp.Name == "tool_definitions" && inp.Value != nil {
+			if s, ok := inp.Value.(string); ok {
+				defs = s
+			}
+		}
+	}
+	Expect(defs).To(ContainSubstring(`"plan_create"`))
+}
