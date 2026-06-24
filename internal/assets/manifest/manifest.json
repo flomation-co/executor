@@ -26421,6 +26421,69 @@
       }
     ]
   },
+  "plan/start": {
+    "hash": "6c365323a4f9eba277bfa2245ee4477136fcd796b44a675a7738677b41684fd9",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Plan / Start",
+    "description": "Start a draft plan you previously authored. Transitions the plan from draft to active and begins dispatching tasks.",
+    "website": "https://www.flomation.co",
+    "icon": "list-check+play",
+    "date": "24/06/2026",
+    "type": 2,
+    "category": {
+      "name": "Plan",
+      "icon": "list-check",
+      "description": "Create and manage autonomous multi-step plans the agent progresses on its own."
+    },
+    "inputs": [
+      {
+        "name": "plan_id",
+        "type": "string",
+        "value": null,
+        "label": "Plan identifier — the UUID returned by plan/create",
+        "placeholder": "",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "plan_id",
+        "type": "string",
+        "value": null,
+        "label": "Plan ID",
+        "placeholder": ""
+      },
+      {
+        "name": "outcome",
+        "type": "string",
+        "value": null,
+        "label": "started | idempotent | not_found | already_terminal",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
   "script/bash": {
     "hash": "3e426e7c3efc9205151234868959b77885f831b3b55ee9a5e4ab9a6eab1fdaa1",
     "author": "Andy Esser",
@@ -32003,7 +32066,7 @@
     ]
   },
   "trigger/schedule": {
-    "hash": "76fda88acd183847e4e698cdc48cd4e17cfdeb83e2077aa22e5deb0e16eeb80b",
+    "hash": "72660031b88b57c56819ed536b365e86186ba9a1d057148df1ca7d94ddac7735",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Schedule Trigger",
@@ -32037,6 +32100,18 @@
           {
             "name": "Weekly on specific days",
             "value": "weekly"
+          },
+          {
+            "name": "Monthly on specific dates",
+            "value": "monthly"
+          },
+          {
+            "name": "Monthly on a weekday",
+            "value": "monthly_weekday"
+          },
+          {
+            "name": "Yearly on a date",
+            "value": "yearly"
           }
         ]
       },
@@ -32092,21 +32167,486 @@
           "field": "mode",
           "values": [
             "daily",
-            "weekly"
+            "weekly",
+            "monthly",
+            "monthly_weekday",
+            "yearly"
           ]
         }
       },
       {
         "name": "days_of_week",
-        "type": "string",
+        "type": "multi_select",
         "value": null,
         "label": "Days of Week",
-        "placeholder": "monday,wednesday,friday",
+        "placeholder": "",
         "required": true,
+        "options": [
+          {
+            "name": "Monday",
+            "value": "monday"
+          },
+          {
+            "name": "Tuesday",
+            "value": "tuesday"
+          },
+          {
+            "name": "Wednesday",
+            "value": "wednesday"
+          },
+          {
+            "name": "Thursday",
+            "value": "thursday"
+          },
+          {
+            "name": "Friday",
+            "value": "friday"
+          },
+          {
+            "name": "Saturday",
+            "value": "saturday"
+          },
+          {
+            "name": "Sunday",
+            "value": "sunday"
+          }
+        ],
         "visible_when": {
           "field": "mode",
           "values": [
             "weekly"
+          ]
+        }
+      },
+      {
+        "name": "days_of_month",
+        "type": "multi_select",
+        "value": null,
+        "label": "Dates of Month",
+        "placeholder": "",
+        "required": true,
+        "options": [
+          {
+            "name": "1",
+            "value": "1"
+          },
+          {
+            "name": "2",
+            "value": "2"
+          },
+          {
+            "name": "3",
+            "value": "3"
+          },
+          {
+            "name": "4",
+            "value": "4"
+          },
+          {
+            "name": "5",
+            "value": "5"
+          },
+          {
+            "name": "6",
+            "value": "6"
+          },
+          {
+            "name": "7",
+            "value": "7"
+          },
+          {
+            "name": "8",
+            "value": "8"
+          },
+          {
+            "name": "9",
+            "value": "9"
+          },
+          {
+            "name": "10",
+            "value": "10"
+          },
+          {
+            "name": "11",
+            "value": "11"
+          },
+          {
+            "name": "12",
+            "value": "12"
+          },
+          {
+            "name": "13",
+            "value": "13"
+          },
+          {
+            "name": "14",
+            "value": "14"
+          },
+          {
+            "name": "15",
+            "value": "15"
+          },
+          {
+            "name": "16",
+            "value": "16"
+          },
+          {
+            "name": "17",
+            "value": "17"
+          },
+          {
+            "name": "18",
+            "value": "18"
+          },
+          {
+            "name": "19",
+            "value": "19"
+          },
+          {
+            "name": "20",
+            "value": "20"
+          },
+          {
+            "name": "21",
+            "value": "21"
+          },
+          {
+            "name": "22",
+            "value": "22"
+          },
+          {
+            "name": "23",
+            "value": "23"
+          },
+          {
+            "name": "24",
+            "value": "24"
+          },
+          {
+            "name": "25",
+            "value": "25"
+          },
+          {
+            "name": "26",
+            "value": "26"
+          },
+          {
+            "name": "27",
+            "value": "27"
+          },
+          {
+            "name": "28",
+            "value": "28"
+          },
+          {
+            "name": "29",
+            "value": "29"
+          },
+          {
+            "name": "30",
+            "value": "30"
+          },
+          {
+            "name": "31",
+            "value": "31"
+          },
+          {
+            "name": "Last day of month",
+            "value": "last"
+          }
+        ],
+        "visible_when": {
+          "field": "mode",
+          "values": [
+            "monthly"
+          ]
+        }
+      },
+      {
+        "name": "week_ordinal",
+        "type": "string",
+        "value": null,
+        "label": "Which Week",
+        "placeholder": "",
+        "required": true,
+        "options": [
+          {
+            "name": "First",
+            "value": "first"
+          },
+          {
+            "name": "Second",
+            "value": "second"
+          },
+          {
+            "name": "Third",
+            "value": "third"
+          },
+          {
+            "name": "Fourth",
+            "value": "fourth"
+          },
+          {
+            "name": "Fifth",
+            "value": "fifth"
+          },
+          {
+            "name": "Last",
+            "value": "last"
+          }
+        ],
+        "visible_when": {
+          "field": "mode",
+          "values": [
+            "monthly_weekday"
+          ]
+        }
+      },
+      {
+        "name": "weekday",
+        "type": "string",
+        "value": null,
+        "label": "Weekday",
+        "placeholder": "",
+        "required": true,
+        "options": [
+          {
+            "name": "Monday",
+            "value": "monday"
+          },
+          {
+            "name": "Tuesday",
+            "value": "tuesday"
+          },
+          {
+            "name": "Wednesday",
+            "value": "wednesday"
+          },
+          {
+            "name": "Thursday",
+            "value": "thursday"
+          },
+          {
+            "name": "Friday",
+            "value": "friday"
+          },
+          {
+            "name": "Saturday",
+            "value": "saturday"
+          },
+          {
+            "name": "Sunday",
+            "value": "sunday"
+          }
+        ],
+        "visible_when": {
+          "field": "mode",
+          "values": [
+            "monthly_weekday"
+          ]
+        }
+      },
+      {
+        "name": "month_of_year",
+        "type": "string",
+        "value": null,
+        "label": "Month",
+        "placeholder": "",
+        "required": true,
+        "options": [
+          {
+            "name": "January",
+            "value": "1"
+          },
+          {
+            "name": "February",
+            "value": "2"
+          },
+          {
+            "name": "March",
+            "value": "3"
+          },
+          {
+            "name": "April",
+            "value": "4"
+          },
+          {
+            "name": "May",
+            "value": "5"
+          },
+          {
+            "name": "June",
+            "value": "6"
+          },
+          {
+            "name": "July",
+            "value": "7"
+          },
+          {
+            "name": "August",
+            "value": "8"
+          },
+          {
+            "name": "September",
+            "value": "9"
+          },
+          {
+            "name": "October",
+            "value": "10"
+          },
+          {
+            "name": "November",
+            "value": "11"
+          },
+          {
+            "name": "December",
+            "value": "12"
+          }
+        ],
+        "visible_when": {
+          "field": "mode",
+          "values": [
+            "yearly"
+          ]
+        }
+      },
+      {
+        "name": "day_of_month",
+        "type": "string",
+        "value": null,
+        "label": "Day of Month",
+        "placeholder": "",
+        "required": true,
+        "options": [
+          {
+            "name": "1",
+            "value": "1"
+          },
+          {
+            "name": "2",
+            "value": "2"
+          },
+          {
+            "name": "3",
+            "value": "3"
+          },
+          {
+            "name": "4",
+            "value": "4"
+          },
+          {
+            "name": "5",
+            "value": "5"
+          },
+          {
+            "name": "6",
+            "value": "6"
+          },
+          {
+            "name": "7",
+            "value": "7"
+          },
+          {
+            "name": "8",
+            "value": "8"
+          },
+          {
+            "name": "9",
+            "value": "9"
+          },
+          {
+            "name": "10",
+            "value": "10"
+          },
+          {
+            "name": "11",
+            "value": "11"
+          },
+          {
+            "name": "12",
+            "value": "12"
+          },
+          {
+            "name": "13",
+            "value": "13"
+          },
+          {
+            "name": "14",
+            "value": "14"
+          },
+          {
+            "name": "15",
+            "value": "15"
+          },
+          {
+            "name": "16",
+            "value": "16"
+          },
+          {
+            "name": "17",
+            "value": "17"
+          },
+          {
+            "name": "18",
+            "value": "18"
+          },
+          {
+            "name": "19",
+            "value": "19"
+          },
+          {
+            "name": "20",
+            "value": "20"
+          },
+          {
+            "name": "21",
+            "value": "21"
+          },
+          {
+            "name": "22",
+            "value": "22"
+          },
+          {
+            "name": "23",
+            "value": "23"
+          },
+          {
+            "name": "24",
+            "value": "24"
+          },
+          {
+            "name": "25",
+            "value": "25"
+          },
+          {
+            "name": "26",
+            "value": "26"
+          },
+          {
+            "name": "27",
+            "value": "27"
+          },
+          {
+            "name": "28",
+            "value": "28"
+          },
+          {
+            "name": "29",
+            "value": "29"
+          },
+          {
+            "name": "30",
+            "value": "30"
+          },
+          {
+            "name": "31",
+            "value": "31"
+          }
+        ],
+        "visible_when": {
+          "field": "mode",
+          "values": [
+            "yearly"
           ]
         }
       },
@@ -32120,7 +32660,10 @@
           "field": "mode",
           "values": [
             "daily",
-            "weekly"
+            "weekly",
+            "monthly",
+            "monthly_weekday",
+            "yearly"
           ]
         }
       },
@@ -32134,7 +32677,10 @@
           "field": "mode",
           "values": [
             "daily",
-            "weekly"
+            "weekly",
+            "monthly",
+            "monthly_weekday",
+            "yearly"
           ]
         }
       }
