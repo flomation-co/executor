@@ -3819,6 +3819,975 @@
       }
     ]
   },
+  "databricks/cancel_run": {
+    "hash": "00fd6fe28607bcfa5da76a10e3771d108bc1d24ca965b20b239eac7ec31fbd4b",
+    "author": "Flomation",
+    "organisation": "Flomation",
+    "name": "Databricks Cancel Run",
+    "description": "Cancel an in-progress Databricks job run",
+    "website": "https://www.flomation.co",
+    "icon": "database+ban",
+    "date": "24/06/2026",
+    "type": 2,
+    "category": {
+      "name": "Databricks",
+      "icon": "database",
+      "description": "Run SQL and orchestrate jobs against a Databricks lakehouse"
+    },
+    "inputs": [
+      {
+        "name": "host",
+        "type": "string",
+        "value": null,
+        "label": "Workspace URL",
+        "placeholder": "https://dbc-xxxxxxxx.cloud.databricks.com",
+        "required": true
+      },
+      {
+        "name": "token",
+        "type": "secret",
+        "value": null,
+        "label": "Access Token (PAT)",
+        "placeholder": "dapi...",
+        "required": true
+      },
+      {
+        "name": "run_id",
+        "type": "integer",
+        "value": null,
+        "label": "Run ID",
+        "placeholder": "",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "databricks/delete_file": {
+    "hash": "29df5b09ce4b01e6738c7a4b9464d6e0124510d018f8a1a18176f8af34f5a8f0",
+    "author": "Flomation",
+    "organisation": "Flomation",
+    "name": "Databricks Delete File",
+    "description": "Delete a file from a Databricks Unity Catalog Volume",
+    "website": "https://www.flomation.co",
+    "icon": "database+trash",
+    "date": "24/06/2026",
+    "type": 2,
+    "category": {
+      "name": "Databricks",
+      "icon": "database",
+      "description": "Run SQL and orchestrate jobs against a Databricks lakehouse"
+    },
+    "inputs": [
+      {
+        "name": "host",
+        "type": "string",
+        "value": null,
+        "label": "Workspace URL",
+        "placeholder": "https://dbc-xxxxxxxx.cloud.databricks.com",
+        "required": true
+      },
+      {
+        "name": "token",
+        "type": "secret",
+        "value": null,
+        "label": "Access Token (PAT)",
+        "placeholder": "dapi...",
+        "required": true
+      },
+      {
+        "name": "path",
+        "type": "string",
+        "value": null,
+        "label": "Volume File Path",
+        "placeholder": "/Volumes/main/default/my_volume/file.csv",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "databricks/download_file": {
+    "hash": "9b648da74334edc7080b1520eacc95cc97426fce6e686c7523ca8a44a0db2062",
+    "author": "Flomation",
+    "organisation": "Flomation",
+    "name": "Databricks Download File",
+    "description": "Download a file from a Databricks Unity Catalog Volume",
+    "website": "https://www.flomation.co",
+    "icon": "database+arrow-down",
+    "date": "24/06/2026",
+    "type": 2,
+    "category": {
+      "name": "Databricks",
+      "icon": "database",
+      "description": "Run SQL and orchestrate jobs against a Databricks lakehouse"
+    },
+    "inputs": [
+      {
+        "name": "host",
+        "type": "string",
+        "value": null,
+        "label": "Workspace URL",
+        "placeholder": "https://dbc-xxxxxxxx.cloud.databricks.com",
+        "required": true
+      },
+      {
+        "name": "token",
+        "type": "secret",
+        "value": null,
+        "label": "Access Token (PAT)",
+        "placeholder": "dapi...",
+        "required": true
+      },
+      {
+        "name": "path",
+        "type": "string",
+        "value": null,
+        "label": "Volume File Path",
+        "placeholder": "/Volumes/main/default/my_volume/file.csv",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "content",
+        "type": "string",
+        "value": null,
+        "label": "Content (Base64)",
+        "placeholder": ""
+      },
+      {
+        "name": "size",
+        "type": "integer",
+        "value": null,
+        "label": "Size (bytes)",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "databricks/get_run": {
+    "hash": "f73135da9e0f75909047fc78b22a68986617b7748518421668fe2676a6107d8c",
+    "author": "Flomation",
+    "organisation": "Flomation",
+    "name": "Databricks Get Run",
+    "description": "Get the status and details of a Databricks job run",
+    "website": "https://www.flomation.co",
+    "icon": "database+magnifying-glass",
+    "date": "24/06/2026",
+    "type": 2,
+    "category": {
+      "name": "Databricks",
+      "icon": "database",
+      "description": "Run SQL and orchestrate jobs against a Databricks lakehouse"
+    },
+    "inputs": [
+      {
+        "name": "host",
+        "type": "string",
+        "value": null,
+        "label": "Workspace URL",
+        "placeholder": "https://dbc-xxxxxxxx.cloud.databricks.com",
+        "required": true
+      },
+      {
+        "name": "token",
+        "type": "secret",
+        "value": null,
+        "label": "Access Token (PAT)",
+        "placeholder": "dapi...",
+        "required": true
+      },
+      {
+        "name": "run_id",
+        "type": "integer",
+        "value": null,
+        "label": "Run ID",
+        "placeholder": "",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "life_cycle_state",
+        "type": "string",
+        "value": null,
+        "label": "Life Cycle State",
+        "placeholder": ""
+      },
+      {
+        "name": "result_state",
+        "type": "string",
+        "value": null,
+        "label": "Result State",
+        "placeholder": ""
+      },
+      {
+        "name": "run_page_url",
+        "type": "string",
+        "value": null,
+        "label": "Run Page URL",
+        "placeholder": ""
+      },
+      {
+        "name": "run",
+        "type": "object",
+        "value": null,
+        "label": "Run (JSON)",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "databricks/get_run_output": {
+    "hash": "33166aadc6cbabbde3bb5d1fcf38bee41b702191bb0263fc3315d9b9c8ae1084",
+    "author": "Flomation",
+    "organisation": "Flomation",
+    "name": "Databricks Get Run Output",
+    "description": "Get the output of a completed Databricks job task run",
+    "website": "https://www.flomation.co",
+    "icon": "database+file-lines",
+    "date": "24/06/2026",
+    "type": 2,
+    "category": {
+      "name": "Databricks",
+      "icon": "database",
+      "description": "Run SQL and orchestrate jobs against a Databricks lakehouse"
+    },
+    "inputs": [
+      {
+        "name": "host",
+        "type": "string",
+        "value": null,
+        "label": "Workspace URL",
+        "placeholder": "https://dbc-xxxxxxxx.cloud.databricks.com",
+        "required": true
+      },
+      {
+        "name": "token",
+        "type": "secret",
+        "value": null,
+        "label": "Access Token (PAT)",
+        "placeholder": "dapi...",
+        "required": true
+      },
+      {
+        "name": "run_id",
+        "type": "integer",
+        "value": null,
+        "label": "Task Run ID",
+        "placeholder": "The run_id of a single task, not the job run",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "string",
+        "value": null,
+        "label": "Notebook Result",
+        "placeholder": ""
+      },
+      {
+        "name": "logs",
+        "type": "string",
+        "value": null,
+        "label": "Logs",
+        "placeholder": ""
+      },
+      {
+        "name": "run_error",
+        "type": "string",
+        "value": null,
+        "label": "Run Error",
+        "placeholder": ""
+      },
+      {
+        "name": "output",
+        "type": "object",
+        "value": null,
+        "label": "Output (JSON)",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "databricks/invoke_model": {
+    "hash": "dacd143b13bdde759c1eebe9e9d220a253fcd06ea848da8646cd4a20dd90e542",
+    "author": "Flomation",
+    "organisation": "Flomation",
+    "name": "Databricks Invoke Model",
+    "description": "Invoke a Databricks Model Serving endpoint (ML model or LLM) with a JSON payload",
+    "website": "https://www.flomation.co",
+    "icon": "brain+paper-plane",
+    "date": "25/06/2026",
+    "type": 2,
+    "category": {
+      "name": "Databricks",
+      "icon": "database",
+      "description": "Run SQL and orchestrate jobs against a Databricks lakehouse"
+    },
+    "inputs": [
+      {
+        "name": "host",
+        "type": "string",
+        "value": null,
+        "label": "Workspace URL",
+        "placeholder": "https://dbc-xxxxxxxx.cloud.databricks.com",
+        "required": true
+      },
+      {
+        "name": "token",
+        "type": "secret",
+        "value": null,
+        "label": "Access Token (PAT)",
+        "placeholder": "dapi...",
+        "required": true
+      },
+      {
+        "name": "endpoint_name",
+        "type": "string",
+        "value": null,
+        "label": "Serving Endpoint Name",
+        "placeholder": "my-model-endpoint",
+        "required": true
+      },
+      {
+        "name": "payload",
+        "type": "text",
+        "value": null,
+        "label": "Request Payload (JSON)",
+        "placeholder": "{\"messages\":[{\"role\":\"user\",\"content\":\"Hello\"}]} or {\"dataframe_records\":[{\"x\":1}]}",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "response",
+        "type": "object",
+        "value": null,
+        "label": "Response (JSON)",
+        "placeholder": ""
+      },
+      {
+        "name": "predictions",
+        "type": "object",
+        "value": null,
+        "label": "Predictions",
+        "placeholder": ""
+      },
+      {
+        "name": "content",
+        "type": "string",
+        "value": null,
+        "label": "Chat Content",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "databricks/list_files": {
+    "hash": "6e73545d325dc6b71af7dadc91aadd14c61002827f128e22aad7c42adf8ab863",
+    "author": "Flomation",
+    "organisation": "Flomation",
+    "name": "Databricks List Files",
+    "description": "List the contents of a directory in a Databricks Unity Catalog Volume",
+    "website": "https://www.flomation.co",
+    "icon": "database+folder",
+    "date": "24/06/2026",
+    "type": 2,
+    "category": {
+      "name": "Databricks",
+      "icon": "database",
+      "description": "Run SQL and orchestrate jobs against a Databricks lakehouse"
+    },
+    "inputs": [
+      {
+        "name": "host",
+        "type": "string",
+        "value": null,
+        "label": "Workspace URL",
+        "placeholder": "https://dbc-xxxxxxxx.cloud.databricks.com",
+        "required": true
+      },
+      {
+        "name": "token",
+        "type": "secret",
+        "value": null,
+        "label": "Access Token (PAT)",
+        "placeholder": "dapi...",
+        "required": true
+      },
+      {
+        "name": "path",
+        "type": "string",
+        "value": null,
+        "label": "Directory Path",
+        "placeholder": "/Volumes/main/default/my_volume",
+        "required": true
+      },
+      {
+        "name": "page_token",
+        "type": "string",
+        "value": null,
+        "label": "Page Token",
+        "placeholder": "Optional — for the next page of results"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "files",
+        "type": "object",
+        "value": null,
+        "label": "Files (JSON)",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Count",
+        "placeholder": ""
+      },
+      {
+        "name": "next_page_token",
+        "type": "string",
+        "value": null,
+        "label": "Next Page Token",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "databricks/list_runs": {
+    "hash": "b999201aac919db6f12322844caeca1573b1a9414360e6a12d50ea20fff67347",
+    "author": "Flomation",
+    "organisation": "Flomation",
+    "name": "Databricks List Runs",
+    "description": "List runs for a Databricks job, optionally filtered to active runs",
+    "website": "https://www.flomation.co",
+    "icon": "database+list",
+    "date": "24/06/2026",
+    "type": 2,
+    "category": {
+      "name": "Databricks",
+      "icon": "database",
+      "description": "Run SQL and orchestrate jobs against a Databricks lakehouse"
+    },
+    "inputs": [
+      {
+        "name": "host",
+        "type": "string",
+        "value": null,
+        "label": "Workspace URL",
+        "placeholder": "https://dbc-xxxxxxxx.cloud.databricks.com",
+        "required": true
+      },
+      {
+        "name": "token",
+        "type": "secret",
+        "value": null,
+        "label": "Access Token (PAT)",
+        "placeholder": "dapi...",
+        "required": true
+      },
+      {
+        "name": "job_id",
+        "type": "integer",
+        "value": null,
+        "label": "Job ID",
+        "placeholder": "Optional — omit to list runs across all jobs"
+      },
+      {
+        "name": "limit",
+        "type": "integer",
+        "value": null,
+        "label": "Limit",
+        "placeholder": "Default 20, max 25"
+      },
+      {
+        "name": "active_only",
+        "type": "boolean",
+        "value": null,
+        "label": "Active Runs Only",
+        "placeholder": ""
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "runs",
+        "type": "object",
+        "value": null,
+        "label": "Runs (JSON)",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Count",
+        "placeholder": ""
+      },
+      {
+        "name": "has_more",
+        "type": "boolean",
+        "value": null,
+        "label": "Has More",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "databricks/run_job": {
+    "hash": "54d63213ec7225c9f70033696355c37f388bf589779252747f1ee86664e13bec",
+    "author": "Flomation",
+    "organisation": "Flomation",
+    "name": "Databricks Run Job",
+    "description": "Trigger a Databricks job to run now and return the run ID",
+    "website": "https://www.flomation.co",
+    "icon": "database+play",
+    "date": "24/06/2026",
+    "type": 2,
+    "category": {
+      "name": "Databricks",
+      "icon": "database",
+      "description": "Run SQL and orchestrate jobs against a Databricks lakehouse"
+    },
+    "inputs": [
+      {
+        "name": "host",
+        "type": "string",
+        "value": null,
+        "label": "Workspace URL",
+        "placeholder": "https://dbc-xxxxxxxx.cloud.databricks.com",
+        "required": true
+      },
+      {
+        "name": "token",
+        "type": "secret",
+        "value": null,
+        "label": "Access Token (PAT)",
+        "placeholder": "dapi...",
+        "required": true
+      },
+      {
+        "name": "job_id",
+        "type": "integer",
+        "value": null,
+        "label": "Job ID",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "parameters",
+        "type": "key_value_array",
+        "value": null,
+        "label": "Job Parameters",
+        "placeholder": ""
+      },
+      {
+        "name": "idempotency_token",
+        "type": "string",
+        "value": null,
+        "label": "Idempotency Token",
+        "placeholder": "Optional — dedupe duplicate triggers"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "run_id",
+        "type": "integer",
+        "value": null,
+        "label": "Run ID",
+        "placeholder": ""
+      },
+      {
+        "name": "number_in_job",
+        "type": "integer",
+        "value": null,
+        "label": "Run Number",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "databricks/run_sql": {
+    "hash": "3e8ff0df39898b497b63d6cfdc8d71a59e8d2b89ff51e37855d1686d4a66b343",
+    "author": "Flomation",
+    "organisation": "Flomation",
+    "name": "Databricks Run SQL",
+    "description": "Execute a SQL statement against a Databricks SQL Warehouse and return the rows",
+    "website": "https://www.flomation.co",
+    "icon": "database+play",
+    "date": "24/06/2026",
+    "type": 2,
+    "category": {
+      "name": "Databricks",
+      "icon": "database",
+      "description": "Run SQL and orchestrate jobs against a Databricks lakehouse"
+    },
+    "inputs": [
+      {
+        "name": "host",
+        "type": "string",
+        "value": null,
+        "label": "Workspace URL",
+        "placeholder": "https://dbc-xxxxxxxx.cloud.databricks.com",
+        "required": true
+      },
+      {
+        "name": "token",
+        "type": "secret",
+        "value": null,
+        "label": "Access Token (PAT)",
+        "placeholder": "dapi...",
+        "required": true
+      },
+      {
+        "name": "warehouse_id",
+        "type": "string",
+        "value": null,
+        "label": "SQL Warehouse ID",
+        "placeholder": "1234567890abcdef",
+        "required": true
+      },
+      {
+        "name": "statement",
+        "type": "text",
+        "value": null,
+        "label": "SQL Statement",
+        "placeholder": "SELECT * FROM samples.nyctaxi.trips LIMIT 100",
+        "required": true
+      },
+      {
+        "name": "catalog",
+        "type": "string",
+        "value": null,
+        "label": "Catalog",
+        "placeholder": "main"
+      },
+      {
+        "name": "schema",
+        "type": "string",
+        "value": null,
+        "label": "Schema",
+        "placeholder": "default"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "results",
+        "type": "object",
+        "value": null,
+        "label": "Results",
+        "placeholder": ""
+      },
+      {
+        "name": "row_count",
+        "type": "integer",
+        "value": null,
+        "label": "Row Count",
+        "placeholder": ""
+      },
+      {
+        "name": "columns",
+        "type": "object",
+        "value": null,
+        "label": "Columns",
+        "placeholder": ""
+      }
+    ]
+  },
+  "databricks/upload_file": {
+    "hash": "926adbd09e90af7f3f39f668f68a29090eda0e92203494319c1eab6523e0fb4c",
+    "author": "Flomation",
+    "organisation": "Flomation",
+    "name": "Databricks Upload File",
+    "description": "Upload a file to a Databricks Unity Catalog Volume",
+    "website": "https://www.flomation.co",
+    "icon": "database+arrow-up",
+    "date": "24/06/2026",
+    "type": 2,
+    "category": {
+      "name": "Databricks",
+      "icon": "database",
+      "description": "Run SQL and orchestrate jobs against a Databricks lakehouse"
+    },
+    "inputs": [
+      {
+        "name": "host",
+        "type": "string",
+        "value": null,
+        "label": "Workspace URL",
+        "placeholder": "https://dbc-xxxxxxxx.cloud.databricks.com",
+        "required": true
+      },
+      {
+        "name": "token",
+        "type": "secret",
+        "value": null,
+        "label": "Access Token (PAT)",
+        "placeholder": "dapi...",
+        "required": true
+      },
+      {
+        "name": "path",
+        "type": "string",
+        "value": null,
+        "label": "Volume File Path",
+        "placeholder": "/Volumes/main/default/my_volume/file.csv",
+        "required": true
+      },
+      {
+        "name": "content",
+        "type": "text",
+        "value": null,
+        "label": "File Content",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "is_base64",
+        "type": "boolean",
+        "value": null,
+        "label": "Content is Base64",
+        "placeholder": "Enable for binary files"
+      },
+      {
+        "name": "overwrite",
+        "type": "boolean",
+        "value": null,
+        "label": "Overwrite if Exists",
+        "placeholder": ""
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "path",
+        "type": "string",
+        "value": null,
+        "label": "Path",
+        "placeholder": ""
+      },
+      {
+        "name": "size",
+        "type": "integer",
+        "value": null,
+        "label": "Size (bytes)",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
   "elevenlabs/list_voices": {
     "hash": "1406ba75e40064caea35303c2de1b8ab6f8ac0a86810e7dc7058d5b1ca3c2b55",
     "author": "Andy Esser",
@@ -26403,6 +27372,118 @@
         "type": "text",
         "value": null,
         "label": "Full {plan, tasks} payload as JSON for AI drill-down",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "plan/revise": {
+    "hash": "2e127854f2e0fd357d42cb5fb68907dbddb745845224194e5f11e29d60b0f66c",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Plan / Revise",
+    "description": "Modify a plan's task graph: add, remove, or update tasks. Allowed on draft, blocked, and active plans.",
+    "website": "https://www.flomation.co",
+    "icon": "list-check+pen",
+    "date": "24/06/2026",
+    "type": 2,
+    "category": {
+      "name": "Plan",
+      "icon": "list-check",
+      "description": "Create and manage autonomous multi-step plans the agent progresses on its own."
+    },
+    "inputs": [
+      {
+        "name": "plan_id",
+        "type": "string",
+        "value": null,
+        "label": "Plan identifier — the UUID returned by plan/create",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "add_tasks",
+        "type": "text",
+        "value": null,
+        "label": "Optional JSON array of new tasks to add. Each must have `name` and `description`; can also include `depends_on`, `inputs`, `flow_id` + `flow_revision_id`",
+        "placeholder": "[{\"name\":\"new_step\",\"description\":\"do the thing\",\"depends_on\":[\"existing_task\"]}]"
+      },
+      {
+        "name": "remove_tasks",
+        "type": "text",
+        "value": null,
+        "label": "Optional JSON array of task names to remove. Only pending, failed, and cancelled tasks can be removed",
+        "placeholder": "[\"task_to_remove\"]"
+      },
+      {
+        "name": "update_tasks",
+        "type": "text",
+        "value": null,
+        "label": "Optional JSON array of partial updates. Each must have `name`; provide only the fields you want to change",
+        "placeholder": "[{\"name\":\"existing_task\",\"description\":\"clarified instructions\"}]"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "plan_id",
+        "type": "string",
+        "value": null,
+        "label": "Plan ID",
+        "placeholder": ""
+      },
+      {
+        "name": "outcome",
+        "type": "string",
+        "value": null,
+        "label": "revised | invalid | terminal | not_found",
+        "placeholder": ""
+      },
+      {
+        "name": "new_status",
+        "type": "string",
+        "value": null,
+        "label": "Plan status after revise",
+        "placeholder": ""
+      },
+      {
+        "name": "added_count",
+        "type": "integer",
+        "value": null,
+        "label": "Number of tasks added",
+        "placeholder": ""
+      },
+      {
+        "name": "removed_count",
+        "type": "integer",
+        "value": null,
+        "label": "Number of tasks removed",
+        "placeholder": ""
+      },
+      {
+        "name": "updated_count",
+        "type": "integer",
+        "value": null,
+        "label": "Number of tasks updated",
         "placeholder": ""
       },
       {
