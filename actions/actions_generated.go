@@ -270,6 +270,7 @@ import (
 	plan_cancel "flomation.app/automate/executor/actions/plan/cancel"
 	plan_create "flomation.app/automate/executor/actions/plan/create"
 	plan_get_status "flomation.app/automate/executor/actions/plan/get_status"
+	plan_revise "flomation.app/automate/executor/actions/plan/revise"
 	plan_start "flomation.app/automate/executor/actions/plan/start"
 	script_bash "flomation.app/automate/executor/actions/script/bash"
 	script_javascript "flomation.app/automate/executor/actions/script/javascript"
@@ -633,6 +634,7 @@ var Actions = map[string]core.Action{
 	"plan/cancel":                           plan_cancel.Execute,
 	"plan/create":                           plan_create.Execute,
 	"plan/get_status":                       plan_get_status.Execute,
+	"plan/revise":                           plan_revise.Execute,
 	"plan/start":                            plan_start.Execute,
 	"script/bash":                           script_bash.Execute,
 	"script/javascript":                     script_javascript.Execute,

@@ -2771,6 +2771,11 @@ func (f *Flow) injectToolDefinitions(aiNode *Node, toolNodes []*Node, actions ma
 		// plan-task mode should never need this; the parent plan
 		// is already active by definition.
 		"plan_start": true,
+		// M5: plan/revise would let a plan task mutate its parent
+		// plan's task graph (add tasks, change dependencies). A
+		// task progressing the parent shouldn't be authoring it.
+		// Filter to keep the boundary clean.
+		"plan_revise": true,
 	}
 
 	for _, toolNode := range toolNodes {
