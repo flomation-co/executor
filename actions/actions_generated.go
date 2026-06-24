@@ -267,7 +267,10 @@ import (
 	output_set "flomation.app/automate/executor/actions/output/set"
 	output_set_outputs "flomation.app/automate/executor/actions/output/set_outputs"
 	plan_block "flomation.app/automate/executor/actions/plan/block"
+	plan_cancel "flomation.app/automate/executor/actions/plan/cancel"
 	plan_create "flomation.app/automate/executor/actions/plan/create"
+	plan_get_status "flomation.app/automate/executor/actions/plan/get_status"
+	plan_start "flomation.app/automate/executor/actions/plan/start"
 	script_bash "flomation.app/automate/executor/actions/script/bash"
 	script_javascript "flomation.app/automate/executor/actions/script/javascript"
 	script_python "flomation.app/automate/executor/actions/script/python"
@@ -627,7 +630,10 @@ var Actions = map[string]core.Action{
 	"output/set":                            output_set.Execute,
 	"output/set_outputs":                    output_set_outputs.Execute,
 	"plan/block":                            plan_block.Execute,
+	"plan/cancel":                           plan_cancel.Execute,
 	"plan/create":                           plan_create.Execute,
+	"plan/get_status":                       plan_get_status.Execute,
+	"plan/start":                            plan_start.Execute,
 	"script/bash":                           script_bash.Execute,
 	"script/javascript":                     script_javascript.Execute,
 	"script/python":                         script_python.Execute,

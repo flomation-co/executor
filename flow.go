@@ -2754,6 +2754,25 @@ func (f *Flow) injectToolDefinitions(aiNode *Node, toolNodes []*Node, actions ma
 	var tools []map[string]interface{}
 	seenToolNames := make(map[string]bool)
 
+	// Agent Planning M3.5 — tools forbidden in plan-task mode. The
+	// AI Prompt action runs inside a plan task when the orchestrator
+	// was dispatched by the Plan Task Trigger (channel_type='plan_task').
+	// In that mode, the AI must NOT be able to recursively spawn or
+	// cancel plans — those calls cause the orchestrator-loop runaway
+	// (plan creates plan creates plan...) we saw in M3 testing. The
+	// AI should complete the task via set_output or escape via
+	// plan/block; it should never need plan/create or plan/cancel.
+	planTaskMode := f.context != nil && f.context.ChannelType == "plan_task"
+	planTaskForbidden := map[string]bool{
+		"plan_create": true,
+		"plan_cancel": true,
+		// M4: plan/start would let a plan task transition another
+		// agent's draft to active — recursion vector. The AI in
+		// plan-task mode should never need this; the parent plan
+		// is already active by definition.
+		"plan_start": true,
+	}
+
 	for _, toolNode := range toolNodes {
 		if toolNode.Data == nil {
 			continue
@@ -2769,6 +2788,16 @@ func (f *Flow) injectToolDefinitions(aiNode *Node, toolNodes []*Node, actions ma
 
 		// Skip duplicate tool names — Anthropic requires unique names
 		if seenToolNames[toolName] {
+			continue
+		}
+
+		// M3.5 plan-task tool filter (runs after dedup so the skip-
+		// log shows the user-friendly sanitised name).
+		if planTaskMode && planTaskForbidden[toolName] {
+			log.WithFields(log.Fields{
+				"tool":         toolName,
+				"channel_type": f.context.ChannelType,
+			}).Info("filtered tool — forbidden in plan-task mode")
 			continue
 		}
 		seenToolNames[toolName] = true

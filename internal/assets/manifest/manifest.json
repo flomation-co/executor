@@ -26103,8 +26103,149 @@
     "inputs": null,
     "outputs": null
   },
+  "plan/block": {
+    "hash": "9d224591eabb9670137612fc2a7fa8ab9d44b6dc8e1bdb685ae589a388708710",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Plan / Block",
+    "description": "Mark the current plan task as blocked when you cannot make progress. Call with a clear reason.",
+    "website": "https://www.flomation.co",
+    "icon": "list-check+circle-stop",
+    "date": "22/06/2026",
+    "type": 2,
+    "category": {
+      "name": "Plan",
+      "icon": "list-check",
+      "description": "Create and manage autonomous multi-step plans the agent progresses on its own."
+    },
+    "inputs": [
+      {
+        "name": "plan_task_id",
+        "type": "string",
+        "value": null,
+        "label": "Plan task identifier — defaults to the currently-running task via the Plan Task Trigger context",
+        "placeholder": "${flow.plan_task_id}",
+        "required": true
+      },
+      {
+        "name": "reason",
+        "type": "text",
+        "value": null,
+        "label": "Clear, user-readable reason this task cannot make progress",
+        "placeholder": "Missing API credentials for the BigQuery pull",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "plan_task_id",
+        "type": "string",
+        "value": null,
+        "label": "Plan task ID",
+        "placeholder": ""
+      },
+      {
+        "name": "outcome",
+        "type": "string",
+        "value": null,
+        "label": "blocked | idempotent | not_found",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "plan/cancel": {
+    "hash": "a0cfeca60db3010086af1ac79769e17f74803506de1c6756ddcf43ab91f4985a",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Plan / Cancel",
+    "description": "Cancel a plan you created. Stops all pending and in-progress tasks. Idempotent on already-terminal plans.",
+    "website": "https://www.flomation.co",
+    "icon": "list-check+circle-xmark",
+    "date": "23/06/2026",
+    "type": 2,
+    "category": {
+      "name": "Plan",
+      "icon": "list-check",
+      "description": "Create and manage autonomous multi-step plans the agent progresses on its own."
+    },
+    "inputs": [
+      {
+        "name": "plan_id",
+        "type": "string",
+        "value": null,
+        "label": "Plan identifier — the UUID returned by plan/create or surfaced via plan/get_status",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "reason",
+        "type": "text",
+        "value": null,
+        "label": "Optional human-readable reason recorded on the plan's cancelled_reason column",
+        "placeholder": "user changed their mind"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "plan_id",
+        "type": "string",
+        "value": null,
+        "label": "Plan ID",
+        "placeholder": ""
+      },
+      {
+        "name": "outcome",
+        "type": "string",
+        "value": null,
+        "label": "cancelled | idempotent | not_found",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
   "plan/create": {
-    "hash": "5a72c45e12db02fd0ed8aabdcaa828a5f61fbe1c9040bc87d645233d85e819fa",
+    "hash": "819fca6d7fdcf618f2201728c0963abe100c8d6aa2f6f43d049dfe6f56ce305a",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Create Plan",
@@ -26171,6 +26312,97 @@
         "type": "string",
         "value": null,
         "label": "Plan status",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "plan/get_status": {
+    "hash": "d2bba88351845707e05c1d4fc173b747eb5aef591c0634d017da3faf53dcdfa1",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Plan / Get Status",
+    "description": "Read a plan's current state: status, task counts, and full task list.",
+    "website": "https://www.flomation.co",
+    "icon": "list-check+magnifying-glass",
+    "date": "23/06/2026",
+    "type": 2,
+    "category": {
+      "name": "Plan",
+      "icon": "list-check",
+      "description": "Create and manage autonomous multi-step plans the agent progresses on its own."
+    },
+    "inputs": [
+      {
+        "name": "plan_id",
+        "type": "string",
+        "value": null,
+        "label": "Plan identifier — the UUID returned by plan/create",
+        "placeholder": "",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "One-line summary the AI reads first",
+        "placeholder": ""
+      },
+      {
+        "name": "plan_id",
+        "type": "string",
+        "value": null,
+        "label": "Plan ID",
+        "placeholder": ""
+      },
+      {
+        "name": "status",
+        "type": "string",
+        "value": null,
+        "label": "active | completed | blocked | cancelled | draft",
+        "placeholder": ""
+      },
+      {
+        "name": "task_count",
+        "type": "integer",
+        "value": null,
+        "label": "Total tasks in the plan",
+        "placeholder": ""
+      },
+      {
+        "name": "completed_count",
+        "type": "integer",
+        "value": null,
+        "label": "Tasks with status=completed",
+        "placeholder": ""
+      },
+      {
+        "name": "failed_count",
+        "type": "integer",
+        "value": null,
+        "label": "Tasks with status=failed or cancelled",
+        "placeholder": ""
+      },
+      {
+        "name": "plan_json",
+        "type": "text",
+        "value": null,
+        "label": "Full {plan, tasks} payload as JSON for AI drill-down",
         "placeholder": ""
       },
       {
