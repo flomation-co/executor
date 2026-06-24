@@ -84,6 +84,37 @@ func TestExecute_ChatContent(t *testing.T) {
 	t.Logf("OK — %v", out["tool_result"])
 }
 
+// A pre-structured payload (map/slice wired from an upstream Object output)
+// must be sent as-is, without requiring the user to stringify it.
+func TestExecute_StructuredPayload(t *testing.T) {
+	var gotPath string
+	var gotBody map[string]interface{}
+	srv := newServer(t, `{"predictions":[1]}`, &gotPath, &gotBody)
+	defer srv.Close()
+
+	in := []*core.Connection{
+		{Name: "host", Type: core.ConnectionTypeString, Value: srv.URL},
+		{Name: "token", Type: core.ConnectionTypeSecret, Value: "dapiTEST"},
+		{Name: "endpoint_name", Type: core.ConnectionTypeString, Value: "ep"},
+		// payload value is a real map, as it would arrive from an upstream node.
+		{Name: "payload", Type: core.ConnectionTypeText, Value: map[string]interface{}{
+			"dataframe_records": []interface{}{map[string]interface{}{"x": 1}},
+		}},
+	}
+
+	out, err := Execute(nil, nil, in)
+	if err != nil {
+		t.Fatalf("Execute error: %v", err)
+	}
+	if out["success"] != true {
+		t.Fatalf("success=%v, error=%v", out["success"], out["error"])
+	}
+	if _, ok := gotBody["dataframe_records"].([]interface{}); !ok {
+		t.Fatalf("structured payload not sent through: %v", gotBody)
+	}
+	t.Logf("OK — structured payload sent as-is")
+}
+
 // Invalid JSON payload must soft-fail before any HTTP call.
 func TestExecute_BadPayload(t *testing.T) {
 	out, err := Execute(nil, nil, inputs("http://unused", "ep", `not json`))

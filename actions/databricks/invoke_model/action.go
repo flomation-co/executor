@@ -46,14 +46,26 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	if err != nil {
 		return nil, err
 	}
-	payloadStr, err := databricks.RequiredString("payload", inputs)
-	if err != nil {
-		return nil, err
-	}
 
+	// payload stays a Text field so a user can paste literal JSON in the editor.
+	// But the Connection value may also arrive already-structured (a map/slice)
+	// when an upstream node's Object output is wired straight in — handle both,
+	// so structured wiring doesn't require a manual stringify step.
+	payloadConn := core.FindConnection("payload", inputs)
+	if payloadConn == nil || payloadConn.Value == nil {
+		return databricks.ErrorResult("payload is required"), nil
+	}
 	var payload interface{}
-	if err := json.Unmarshal([]byte(payloadStr), &payload); err != nil {
-		return databricks.ErrorResult(fmt.Sprintf("payload is not valid JSON: %s", err)), nil
+	switch v := payloadConn.Value.(type) {
+	case string:
+		if v == "" {
+			return databricks.ErrorResult("payload is required"), nil
+		}
+		if err := json.Unmarshal([]byte(v), &payload); err != nil {
+			return databricks.ErrorResult(fmt.Sprintf("payload is not valid JSON: %s", err)), nil
+		}
+	default:
+		payload = v // already-structured value from an upstream node
 	}
 
 	path := "/serving-endpoints/" + url.PathEscape(endpoint) + "/invocations"

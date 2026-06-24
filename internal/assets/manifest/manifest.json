@@ -3950,7 +3950,7 @@
     ]
   },
   "databricks/download_file": {
-    "hash": "9b648da74334edc7080b1520eacc95cc97426fce6e686c7523ca8a44a0db2062",
+    "hash": "f137350322fa1961fe743f126b6e2d977fd1ebeafcc023655d9a47cf836babd3",
     "author": "Flomation",
     "organisation": "Flomation",
     "name": "Databricks Download File",
@@ -4215,7 +4215,7 @@
     ]
   },
   "databricks/invoke_model": {
-    "hash": "dacd143b13bdde759c1eebe9e9d220a253fcd06ea848da8646cd4a20dd90e542",
+    "hash": "ad039e064e07671cf632bc57144a71caf89c88adf9ae1d80d93bd3aa8f3ab385",
     "author": "Flomation",
     "organisation": "Flomation",
     "name": "Databricks Invoke Model",
@@ -4594,7 +4594,7 @@
     ]
   },
   "databricks/run_sql": {
-    "hash": "3e8ff0df39898b497b63d6cfdc8d71a59e8d2b89ff51e37855d1686d4a66b343",
+    "hash": "5ecdf338662d95d08add89467e6b2cd0ec6c54d03302d8a96aed9e7f910f3670",
     "author": "Flomation",
     "organisation": "Flomation",
     "name": "Databricks Run SQL",
@@ -4654,6 +4654,13 @@
         "value": null,
         "label": "Schema",
         "placeholder": "default"
+      },
+      {
+        "name": "timeout_seconds",
+        "type": "integer",
+        "value": null,
+        "label": "Timeout (seconds)",
+        "placeholder": "Default 300"
       }
     ],
     "outputs": [

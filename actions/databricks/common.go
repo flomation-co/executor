@@ -14,15 +14,31 @@ import (
 )
 
 const (
-	// maxResponseBody caps the response body. INLINE result sets can be up to
-	// 25 MiB, so allow some headroom above that.
-	maxResponseBody = 32 << 20 // 32 MB
+	// maxResponseBody caps how much of a response we buffer into memory, to
+	// protect the executor from OOMing on a large Volumes file or result set.
+	// SQL INLINE result sets are capped by Databricks at 25 MiB; 50 MB leaves
+	// headroom for file downloads. Exceeding it is a hard error (see readCapped)
+	// rather than a silent truncation.
+	maxResponseBody = 50 << 20 // 50 MB
 
 	// requestTimeout is the HTTP client timeout for a single Databricks API call.
 	// The statement endpoint can block server-side for up to wait_timeout (30s),
 	// so this is comfortably above that.
 	requestTimeout = 90 * time.Second
 )
+
+// readCapped reads at most maxResponseBody bytes, returning an explicit error if
+// the body would exceed the cap — never a silently truncated result.
+func readCapped(r io.Reader) ([]byte, error) {
+	b, err := io.ReadAll(io.LimitReader(r, maxResponseBody+1))
+	if err != nil {
+		return nil, fmt.Errorf("failed to read response: %w", err)
+	}
+	if int64(len(b)) > maxResponseBody {
+		return nil, fmt.Errorf("response exceeds the %d MB limit; use a smaller file or a more selective query", maxResponseBody>>20)
+	}
+	return b, nil
+}
 
 // AuthInputs are the shared connection inputs used by every Databricks action.
 var AuthInputs = []core.Connection{
@@ -97,9 +113,9 @@ func ExecuteAPI(host, token, method, path string, body interface{}) (*APIRespons
 	}
 	defer func() { _ = resp.Body.Close() }()
 
-	respBody, err := io.ReadAll(io.LimitReader(resp.Body, maxResponseBody))
+	respBody, err := readCapped(resp.Body)
 	if err != nil {
-		return nil, fmt.Errorf("failed to read response: %w", err)
+		return nil, err
 	}
 
 	return &APIResponse{
@@ -136,9 +152,9 @@ func ExecuteRaw(host, token, method, path, contentType string, body []byte) (*AP
 	}
 	defer func() { _ = resp.Body.Close() }()
 
-	respBody, err := io.ReadAll(io.LimitReader(resp.Body, maxResponseBody))
+	respBody, err := readCapped(resp.Body)
 	if err != nil {
-		return nil, fmt.Errorf("failed to read response: %w", err)
+		return nil, err
 	}
 
 	return &APIResponse{

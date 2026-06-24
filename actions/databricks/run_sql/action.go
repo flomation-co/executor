@@ -27,9 +27,9 @@ const (
 	// server-side wait (handled via wait_timeout) has elapsed.
 	pollInterval = 2 * time.Second
 
-	// maxWait bounds how long we are willing to block waiting for a statement
-	// to finish before giving up and cancelling it.
-	maxWait = 5 * time.Minute
+	// defaultMaxWait bounds how long we block waiting for a statement to finish
+	// before giving up and cancelling it, when no timeout_seconds is supplied.
+	defaultMaxWait = 5 * time.Minute
 )
 
 var Inputs = [...]core.Connection{
@@ -39,6 +39,7 @@ var Inputs = [...]core.Connection{
 	{Name: "statement", Type: core.ConnectionTypeText, Label: "SQL Statement", Placeholder: "SELECT * FROM samples.nyctaxi.trips LIMIT 100", Required: true},
 	{Name: "catalog", Type: core.ConnectionTypeString, Label: "Catalog", Placeholder: "main"},
 	{Name: "schema", Type: core.ConnectionTypeString, Label: "Schema", Placeholder: "default"},
+	{Name: "timeout_seconds", Type: core.ConnectionTypeInteger, Label: "Timeout (seconds)", Placeholder: "Default 300"},
 }
 
 var Outputs = [...]core.Connection{
@@ -127,7 +128,12 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 		return nil, fmt.Errorf("failed to parse statement response: %w", err)
 	}
 
-	// Poll until the statement reaches a terminal state.
+	// Poll until the statement reaches a terminal state, bounded by an overall
+	// deadline so a hung statement can never hang the executor goroutine.
+	maxWait := defaultMaxWait
+	if secs, ok := databricks.OptionalInt("timeout_seconds", inputs); ok && secs > 0 {
+		maxWait = time.Duration(secs) * time.Second
+	}
 	deadline := time.Now().Add(maxWait)
 	for stmt.Status.State == "PENDING" || stmt.Status.State == "RUNNING" {
 		if time.Now().After(deadline) {
