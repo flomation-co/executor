@@ -53,7 +53,11 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	if jobID, ok := databricks.OptionalInt("job_id", inputs); ok {
 		query.Set("job_id", fmt.Sprintf("%d", jobID))
 	}
-	if limit, ok := databricks.OptionalInt("limit", inputs); ok {
+	if limit, ok := databricks.OptionalInt("limit", inputs); ok && limit > 0 {
+		// The runs/list API rejects limits above 25; clamp rather than error.
+		if limit > 25 {
+			limit = 25
+		}
 		query.Set("limit", fmt.Sprintf("%d", limit))
 	}
 	if conn := core.FindConnection("active_only", inputs); conn != nil && conn.Boolean() != nil && *conn.Boolean() {

@@ -35,7 +35,7 @@ func readCapped(r io.Reader) ([]byte, error) {
 		return nil, fmt.Errorf("failed to read response: %w", err)
 	}
 	if int64(len(b)) > maxResponseBody {
-		return nil, fmt.Errorf("response exceeds the %d MB limit; use a smaller file or a more selective query", maxResponseBody>>20)
+		return nil, fmt.Errorf("response body exceeds the %d MB limit", maxResponseBody>>20)
 	}
 	return b, nil
 }
