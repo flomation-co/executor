@@ -51,6 +51,17 @@ import (
 	conditional_if "flomation.app/automate/executor/actions/conditional/if"
 	conditional_switch "flomation.app/automate/executor/actions/conditional/switch"
 	conditional_while "flomation.app/automate/executor/actions/conditional/while"
+	databricks_cancel_run "flomation.app/automate/executor/actions/databricks/cancel_run"
+	databricks_delete_file "flomation.app/automate/executor/actions/databricks/delete_file"
+	databricks_download_file "flomation.app/automate/executor/actions/databricks/download_file"
+	databricks_get_run "flomation.app/automate/executor/actions/databricks/get_run"
+	databricks_get_run_output "flomation.app/automate/executor/actions/databricks/get_run_output"
+	databricks_invoke_model "flomation.app/automate/executor/actions/databricks/invoke_model"
+	databricks_list_files "flomation.app/automate/executor/actions/databricks/list_files"
+	databricks_list_runs "flomation.app/automate/executor/actions/databricks/list_runs"
+	databricks_run_job "flomation.app/automate/executor/actions/databricks/run_job"
+	databricks_run_sql "flomation.app/automate/executor/actions/databricks/run_sql"
+	databricks_upload_file "flomation.app/automate/executor/actions/databricks/upload_file"
 	elevenlabs_list_voices "flomation.app/automate/executor/actions/elevenlabs/list_voices"
 	elevenlabs_speech_to_text "flomation.app/automate/executor/actions/elevenlabs/speech_to_text"
 	elevenlabs_text_to_speech "flomation.app/automate/executor/actions/elevenlabs/text_to_speech"
@@ -415,6 +426,17 @@ var Actions = map[string]core.Action{
 	"conditional/if":                        conditional_if.Execute,
 	"conditional/switch":                    conditional_switch.Execute,
 	"conditional/while":                     conditional_while.Execute,
+	"databricks/cancel_run":                 databricks_cancel_run.Execute,
+	"databricks/delete_file":                databricks_delete_file.Execute,
+	"databricks/download_file":              databricks_download_file.Execute,
+	"databricks/get_run":                    databricks_get_run.Execute,
+	"databricks/get_run_output":             databricks_get_run_output.Execute,
+	"databricks/invoke_model":               databricks_invoke_model.Execute,
+	"databricks/list_files":                 databricks_list_files.Execute,
+	"databricks/list_runs":                  databricks_list_runs.Execute,
+	"databricks/run_job":                    databricks_run_job.Execute,
+	"databricks/run_sql":                    databricks_run_sql.Execute,
+	"databricks/upload_file":                databricks_upload_file.Execute,
 	"elevenlabs/list_voices":                elevenlabs_list_voices.Execute,
 	"elevenlabs/speech_to_text":             elevenlabs_speech_to_text.Execute,
 	"elevenlabs/text_to_speech":             elevenlabs_text_to_speech.Execute,
