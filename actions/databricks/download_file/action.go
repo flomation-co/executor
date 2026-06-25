@@ -45,6 +45,10 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	}
 
 	apiPath := "/api/2.0/fs/files" + databricks.EncodePath(path)
+	// ExecuteRaw buffers the body via readCapped (common.go), which enforces the
+	// maxResponseBody cap (50 MB) and returns an error rather than silently
+	// truncating — so an oversized file soft-fails here instead of OOMing the
+	// executor or producing a corrupt (truncated) base64 result below.
 	resp, err := databricks.ExecuteRaw(host, token, http.MethodGet, apiPath, "", nil)
 	if err != nil {
 		return databricks.ErrorResult(fmt.Sprintf("Failed to download file: %s", err)), nil

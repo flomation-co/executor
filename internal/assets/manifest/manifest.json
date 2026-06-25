@@ -3950,7 +3950,7 @@
     ]
   },
   "databricks/download_file": {
-    "hash": "f137350322fa1961fe743f126b6e2d977fd1ebeafcc023655d9a47cf836babd3",
+    "hash": "3734728834a0b65d46a6702d98eb81799031b94d7042feb111f5aae05862c6c3",
     "author": "Flomation",
     "organisation": "Flomation",
     "name": "Databricks Download File",
@@ -4122,7 +4122,7 @@
     ]
   },
   "databricks/get_run_output": {
-    "hash": "33166aadc6cbabbde3bb5d1fcf38bee41b702191bb0263fc3315d9b9c8ae1084",
+    "hash": "e0c30c68d29ed5f3eabbfc8c589e323f1771e0c932786169390b342eca1d824d",
     "author": "Flomation",
     "organisation": "Flomation",
     "name": "Databricks Get Run Output",
@@ -4402,7 +4402,7 @@
     ]
   },
   "databricks/list_runs": {
-    "hash": "ce7f9796abd5dda888488cfef723a2e62055ce586cb2d3df9a4c38d7775cc326",
+    "hash": "edf4049986a2b5a6d77241a395805c36f286fe1a1d0f0bd208fd5152aba1b75b",
     "author": "Flomation",
     "organisation": "Flomation",
     "name": "Databricks List Runs",
@@ -4445,7 +4445,7 @@
         "type": "integer",
         "value": null,
         "label": "Limit",
-        "placeholder": "Default 20, max 25"
+        "placeholder": "Default 20, max 25 (runs/list API cap)"
       },
       {
         "name": "active_only",

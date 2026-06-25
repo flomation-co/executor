@@ -25,7 +25,7 @@ var Inputs = [...]core.Connection{
 	{Name: "host", Type: core.ConnectionTypeString, Label: "Workspace URL", Placeholder: "https://dbc-xxxxxxxx.cloud.databricks.com", Required: true},
 	{Name: "token", Type: core.ConnectionTypeSecret, Label: "Access Token (PAT)", Placeholder: "dapi...", Required: true},
 	{Name: "job_id", Type: core.ConnectionTypeInteger, Label: "Job ID", Placeholder: "Optional — omit to list runs across all jobs"},
-	{Name: "limit", Type: core.ConnectionTypeInteger, Label: "Limit", Placeholder: "Default 20, max 25"},
+	{Name: "limit", Type: core.ConnectionTypeInteger, Label: "Limit", Placeholder: "Default 20, max 25 (runs/list API cap)"},
 	{Name: "active_only", Type: core.ConnectionTypeBoolean, Label: "Active Runs Only"},
 }
 

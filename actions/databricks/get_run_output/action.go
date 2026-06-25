@@ -76,6 +76,11 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 		notebookResult = out.NotebookOutput.Result
 	}
 
+	// run_error is distinct from the node-level "error" (which signals the API
+	// call itself failed). get-output returns HTTP 200 with a populated `error`
+	// when the API call succeeded but the underlying task failed (e.g. the
+	// notebook threw), so run_error is meaningfully non-empty for failed runs and
+	// empty for successful ones — it's the task's failure message, not ours.
 	return map[string]interface{}{
 		"tool_result": fmt.Sprintf("Fetched output for run %d", runID),
 		"result":      notebookResult,
