@@ -14,12 +14,14 @@ import (
 )
 
 const (
-	// maxResponseBody caps how much of a response we buffer into memory, to
-	// protect the executor from OOMing on a large Volumes file or result set.
-	// SQL INLINE result sets are capped by Databricks at 25 MiB; 50 MB leaves
-	// headroom for file downloads. Exceeding it is a hard error (see readCapped)
-	// rather than a silent truncation.
-	maxResponseBody = 50 << 20 // 50 MB
+	// maxResponseBody is the 50 MB cap on how much of any Databricks response we
+	// buffer into memory, so a large Volumes file download (download_file) or a
+	// big SQL result set can't OOM the executor. This is the effective DOWNLOAD
+	// CAP: Databricks caps SQL INLINE results at 25 MiB, and 50 MB leaves
+	// headroom for file downloads on top of that. Exceeding it is a hard error
+	// (see readCapped) — never a silent truncation, which would corrupt a
+	// downloaded file's base64.
+	maxResponseBody = 50 << 20 // 50 MB download/response cap
 
 	// requestTimeout is the HTTP client timeout for a single Databricks API call.
 	// The statement endpoint can block server-side for up to wait_timeout (30s),

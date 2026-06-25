@@ -54,9 +54,14 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 		query.Set("job_id", fmt.Sprintf("%d", jobID))
 	}
 	if limit, ok := databricks.OptionalInt("limit", inputs); ok && limit > 0 {
-		// The runs/list API rejects limits above 25; clamp rather than error.
-		if limit > 25 {
-			limit = 25
+		// Limit cap is endpoint-specific and easy to confuse:
+		//   - jobs/runs/list (this endpoint): max 25, default 20
+		//   - jobs/list (listing jobs, NOT runs):  max 100
+		// We call runs/list, so 25 is the ceiling. Clamp rather than let the API
+		// reject the request, so an over-large limit degrades gracefully.
+		const maxRunsListLimit = 25
+		if limit > maxRunsListLimit {
+			limit = maxRunsListLimit
 		}
 		query.Set("limit", fmt.Sprintf("%d", limit))
 	}
