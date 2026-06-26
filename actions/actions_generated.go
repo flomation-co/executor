@@ -21,6 +21,9 @@ import (
 	agent_send_message "flomation.app/automate/executor/actions/agent/send_message"
 	agent_write_state "flomation.app/automate/executor/actions/agent/write_state"
 	ai_anthropic "flomation.app/automate/executor/actions/ai/anthropic"
+	ai_gemini "flomation.app/automate/executor/actions/ai/gemini"
+	ai_gemini_image "flomation.app/automate/executor/actions/ai/gemini_image"
+	ai_gemini_tts "flomation.app/automate/executor/actions/ai/gemini_tts"
 	ai_openai "flomation.app/automate/executor/actions/ai/openai"
 	ai_openwebui "flomation.app/automate/executor/actions/ai/openwebui"
 	arithmetic_addition "flomation.app/automate/executor/actions/arithmetic/addition"
@@ -385,6 +388,9 @@ var Actions = map[string]core.Action{
 	"agent/send_message":                    agent_send_message.Execute,
 	"agent/write_state":                     agent_write_state.Execute,
 	"ai/anthropic":                          ai_anthropic.Execute,
+	"ai/gemini":                             ai_gemini.Execute,
+	"ai/gemini_image":                       ai_gemini_image.Execute,
+	"ai/gemini_tts":                         ai_gemini_tts.Execute,
 	"ai/openai":                             ai_openai.Execute,
 	"ai/openwebui":                          ai_openwebui.Execute,
 	"arithmetic/addition":                   arithmetic_addition.Execute,

@@ -1357,6 +1357,421 @@
       }
     ]
   },
+  "ai/gemini": {
+    "hash": "d945cdb16834dc00e6e552ea175b73888722e8e9d9233b9f3bcd6ab48a206cef",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Gemini Prompt",
+    "description": "Send a prompt to Google's Gemini API and return the response",
+    "website": "https://www.flomation.co",
+    "icon": "brain+play",
+    "date": "25/06/2026",
+    "type": 2,
+    "category": {
+      "name": "AI",
+      "icon": "brain",
+      "description": "Artificial intelligence and large language model integrations"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "API Key",
+        "placeholder": "AIza...",
+        "required": true
+      },
+      {
+        "name": "model",
+        "type": "secret",
+        "value": null,
+        "label": "Model",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "Gemini 2.5 Pro",
+            "value": "gemini-2.5-pro"
+          },
+          {
+            "name": "Gemini 2.5 Flash",
+            "value": "gemini-2.5-flash"
+          },
+          {
+            "name": "Gemini 2.5 Flash Lite",
+            "value": "gemini-2.5-flash-lite"
+          },
+          {
+            "name": "Gemini 2.0 Flash",
+            "value": "gemini-2.0-flash"
+          },
+          {
+            "name": "Gemini 2.0 Flash Lite",
+            "value": "gemini-2.0-flash-lite"
+          }
+        ]
+      },
+      {
+        "name": "system_prompt",
+        "type": "text",
+        "value": null,
+        "label": "System Prompt",
+        "placeholder": "You are a helpful assistant."
+      },
+      {
+        "name": "prompt",
+        "type": "text",
+        "value": null,
+        "label": "Prompt",
+        "placeholder": "What would you like to ask?",
+        "required": true
+      },
+      {
+        "name": "max_tokens",
+        "type": "integer",
+        "value": null,
+        "label": "Max Tokens",
+        "placeholder": "8192"
+      },
+      {
+        "name": "temperature",
+        "type": "string",
+        "value": null,
+        "label": "Temperature",
+        "placeholder": "0.7"
+      },
+      {
+        "name": "conversation_history",
+        "type": "object",
+        "value": null,
+        "label": "Conversation History",
+        "placeholder": "${conversation_history}"
+      },
+      {
+        "name": "tool_definitions",
+        "type": "text",
+        "value": null,
+        "label": "Tool Definitions (JSON)",
+        "placeholder": "[{\"name\":\"web_search\",\"description\":\"Search the web\",\"parameters\":{\"type\":\"object\",\"properties\":{\"query\":{\"type\":\"string\"}},\"required\":[\"query\"]}}]"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "response",
+        "type": "string",
+        "value": null,
+        "label": "Response",
+        "placeholder": ""
+      },
+      {
+        "name": "model",
+        "type": "string",
+        "value": null,
+        "label": "Model Used",
+        "placeholder": ""
+      },
+      {
+        "name": "prompt_tokens",
+        "type": "integer",
+        "value": null,
+        "label": "Prompt Tokens",
+        "placeholder": ""
+      },
+      {
+        "name": "completion_tokens",
+        "type": "integer",
+        "value": null,
+        "label": "Completion Tokens",
+        "placeholder": ""
+      },
+      {
+        "name": "total_tokens",
+        "type": "integer",
+        "value": null,
+        "label": "Total Tokens",
+        "placeholder": ""
+      },
+      {
+        "name": "should_respond",
+        "type": "boolean",
+        "value": null,
+        "label": "Should Respond",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_calls_count",
+        "type": "integer",
+        "value": null,
+        "label": "Tool Calls",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "ai/gemini_image": {
+    "hash": "dda641d229f7d32798d0745b7b1b6a564b9a2ef8f0e69d8b5bb27b8e9dc90f55",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Gemini Image",
+    "description": "Generate an image from a text prompt using Gemini 2.5 Flash Image",
+    "website": "https://www.flomation.co",
+    "icon": "brain+image",
+    "date": "25/06/2026",
+    "type": 2,
+    "category": {
+      "name": "AI",
+      "icon": "brain",
+      "description": "Artificial intelligence and large language model integrations"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "API Key",
+        "placeholder": "AIza...",
+        "required": true
+      },
+      {
+        "name": "model",
+        "type": "secret",
+        "value": null,
+        "label": "Model",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "Gemini 2.5 Flash Image (Nano Banana)",
+            "value": "gemini-2.5-flash-image"
+          },
+          {
+            "name": "Gemini 2.0 Flash Preview Image Generation",
+            "value": "gemini-2.0-flash-preview-image-generation"
+          }
+        ]
+      },
+      {
+        "name": "prompt",
+        "type": "text",
+        "value": null,
+        "label": "Prompt",
+        "placeholder": "A photorealistic image of a cat wearing a top hat, studio lighting.",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Tool Result",
+        "placeholder": ""
+      },
+      {
+        "name": "image_blob",
+        "type": "string",
+        "value": null,
+        "label": "Image (flo:blob token)",
+        "placeholder": ""
+      },
+      {
+        "name": "image_base64",
+        "type": "string",
+        "value": null,
+        "label": "Image (base64)",
+        "placeholder": ""
+      },
+      {
+        "name": "mime_type",
+        "type": "string",
+        "value": null,
+        "label": "MIME Type",
+        "placeholder": ""
+      },
+      {
+        "name": "model",
+        "type": "string",
+        "value": null,
+        "label": "Model Used",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "ai/gemini_tts": {
+    "hash": "84d5f63ec584152f30ec9c2f4a2953a351c73300dc7c9880bc0b4e0e66732e27",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Gemini Text-to-Speech",
+    "description": "Generate audio from a text prompt using Gemini's TTS preview",
+    "website": "https://www.flomation.co",
+    "icon": "brain+microphone",
+    "date": "25/06/2026",
+    "type": 2,
+    "category": {
+      "name": "AI",
+      "icon": "brain",
+      "description": "Artificial intelligence and large language model integrations"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "API Key",
+        "placeholder": "AIza...",
+        "required": true
+      },
+      {
+        "name": "model",
+        "type": "secret",
+        "value": null,
+        "label": "Model",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "Gemini 2.5 Flash Preview TTS",
+            "value": "gemini-2.5-flash-preview-tts"
+          },
+          {
+            "name": "Gemini 2.5 Pro Preview TTS",
+            "value": "gemini-2.5-pro-preview-tts"
+          }
+        ]
+      },
+      {
+        "name": "prompt",
+        "type": "text",
+        "value": null,
+        "label": "Text",
+        "placeholder": "Say cheerfully: hello, world!",
+        "required": true
+      },
+      {
+        "name": "voice",
+        "type": "secret",
+        "value": null,
+        "label": "Voice",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "Kore (firm, default)",
+            "value": "Kore"
+          },
+          {
+            "name": "Puck (upbeat)",
+            "value": "Puck"
+          },
+          {
+            "name": "Charon (informative)",
+            "value": "Charon"
+          },
+          {
+            "name": "Fenrir (excitable)",
+            "value": "Fenrir"
+          },
+          {
+            "name": "Aoede (breezy)",
+            "value": "Aoede"
+          },
+          {
+            "name": "Leda (youthful)",
+            "value": "Leda"
+          },
+          {
+            "name": "Orus (firm, deeper)",
+            "value": "Orus"
+          },
+          {
+            "name": "Zephyr (bright)",
+            "value": "Zephyr"
+          }
+        ]
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Tool Result",
+        "placeholder": ""
+      },
+      {
+        "name": "audio_blob",
+        "type": "string",
+        "value": null,
+        "label": "Audio (flo:blob token)",
+        "placeholder": ""
+      },
+      {
+        "name": "audio_base64",
+        "type": "string",
+        "value": null,
+        "label": "Audio (base64)",
+        "placeholder": ""
+      },
+      {
+        "name": "mime_type",
+        "type": "string",
+        "value": null,
+        "label": "MIME Type",
+        "placeholder": ""
+      },
+      {
+        "name": "voice",
+        "type": "string",
+        "value": null,
+        "label": "Voice Used",
+        "placeholder": ""
+      },
+      {
+        "name": "model",
+        "type": "string",
+        "value": null,
+        "label": "Model Used",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
   "ai/openai": {
     "hash": "7c31da3f8c27ea28f1603283f15e88befe347d40377e38eb86f194b8efc95694",
     "author": "Andy Esser",
@@ -26403,6 +26818,118 @@
         "type": "text",
         "value": null,
         "label": "Full {plan, tasks} payload as JSON for AI drill-down",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "plan/revise": {
+    "hash": "2e127854f2e0fd357d42cb5fb68907dbddb745845224194e5f11e29d60b0f66c",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Plan / Revise",
+    "description": "Modify a plan's task graph: add, remove, or update tasks. Allowed on draft, blocked, and active plans.",
+    "website": "https://www.flomation.co",
+    "icon": "list-check+pen",
+    "date": "24/06/2026",
+    "type": 2,
+    "category": {
+      "name": "Plan",
+      "icon": "list-check",
+      "description": "Create and manage autonomous multi-step plans the agent progresses on its own."
+    },
+    "inputs": [
+      {
+        "name": "plan_id",
+        "type": "string",
+        "value": null,
+        "label": "Plan identifier — the UUID returned by plan/create",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "add_tasks",
+        "type": "text",
+        "value": null,
+        "label": "Optional JSON array of new tasks to add. Each must have `name` and `description`; can also include `depends_on`, `inputs`, `flow_id` + `flow_revision_id`",
+        "placeholder": "[{\"name\":\"new_step\",\"description\":\"do the thing\",\"depends_on\":[\"existing_task\"]}]"
+      },
+      {
+        "name": "remove_tasks",
+        "type": "text",
+        "value": null,
+        "label": "Optional JSON array of task names to remove. Only pending, failed, and cancelled tasks can be removed",
+        "placeholder": "[\"task_to_remove\"]"
+      },
+      {
+        "name": "update_tasks",
+        "type": "text",
+        "value": null,
+        "label": "Optional JSON array of partial updates. Each must have `name`; provide only the fields you want to change",
+        "placeholder": "[{\"name\":\"existing_task\",\"description\":\"clarified instructions\"}]"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "plan_id",
+        "type": "string",
+        "value": null,
+        "label": "Plan ID",
+        "placeholder": ""
+      },
+      {
+        "name": "outcome",
+        "type": "string",
+        "value": null,
+        "label": "revised | invalid | terminal | not_found",
+        "placeholder": ""
+      },
+      {
+        "name": "new_status",
+        "type": "string",
+        "value": null,
+        "label": "Plan status after revise",
+        "placeholder": ""
+      },
+      {
+        "name": "added_count",
+        "type": "integer",
+        "value": null,
+        "label": "Number of tasks added",
+        "placeholder": ""
+      },
+      {
+        "name": "removed_count",
+        "type": "integer",
+        "value": null,
+        "label": "Number of tasks removed",
+        "placeholder": ""
+      },
+      {
+        "name": "updated_count",
+        "type": "integer",
+        "value": null,
+        "label": "Number of tasks updated",
         "placeholder": ""
       },
       {
