@@ -15,7 +15,7 @@ const (
 	Author       = "Andy Esser"
 	Organisation = "Flomation"
 	Name         = "Send Telegram Video"
-	Description  = "Send a video via Telegram. Accepts a flo:blob token or base64."
+	Description  = "Send a video (MP4, with or without audio track) via Telegram. THE CORRECT CHOICE for output from Gemini Video / Veo and any other video file. Accepts a flo:blob token or base64. Do NOT use send_voice or send_audio for video files — those strip the visual track."
 	Website      = "https://www.flomation.co"
 	Icon         = "telegram+video"
 	Date         = "21/06/2026"

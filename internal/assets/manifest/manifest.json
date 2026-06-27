@@ -1772,6 +1772,189 @@
       }
     ]
   },
+  "ai/gemini_video": {
+    "hash": "590ffb98e26a807bc5f80b482b8c8e9a7163ac7127fb4cf3441bcfe2fdae5c9f",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Gemini Video",
+    "description": "Generate a short video clip from a text prompt using Google's Veo 2 or Veo 3",
+    "website": "https://www.flomation.co",
+    "icon": "brain+video",
+    "date": "27/06/2026",
+    "type": 2,
+    "category": {
+      "name": "AI",
+      "icon": "brain",
+      "description": "Artificial intelligence and large language model integrations"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "API Key",
+        "placeholder": "AIza...",
+        "required": true
+      },
+      {
+        "name": "model",
+        "type": "secret",
+        "value": null,
+        "label": "Model",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "Veo 3.1 Fast (preview, with audio, cheapest)",
+            "value": "veo-3.1-fast-generate-preview"
+          },
+          {
+            "name": "Veo 3.1 (preview, with audio, best quality)",
+            "value": "veo-3.1-generate-preview"
+          },
+          {
+            "name": "Veo 3.1 Lite (preview, with audio, lowest cost)",
+            "value": "veo-3.1-lite-generate-preview"
+          },
+          {
+            "name": "Veo 2 (legacy, video only)",
+            "value": "veo-2.0-generate-001"
+          }
+        ]
+      },
+      {
+        "name": "prompt",
+        "type": "text",
+        "value": null,
+        "label": "Prompt",
+        "placeholder": "Photorealistic flythrough over snowy Welsh mountains at golden hour, drone footage.",
+        "required": true
+      },
+      {
+        "name": "input_image_blob",
+        "type": "text",
+        "value": null,
+        "label": "Input Image (flo:blob token, optional — enables image-to-video)",
+        "placeholder": "flo:blob:abc..."
+      },
+      {
+        "name": "aspect_ratio",
+        "type": "text",
+        "value": null,
+        "label": "Aspect Ratio",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "16:9 (landscape)",
+            "value": "16:9"
+          },
+          {
+            "name": "9:16 (portrait)",
+            "value": "9:16"
+          },
+          {
+            "name": "1:1 (square)",
+            "value": "1:1"
+          }
+        ]
+      },
+      {
+        "name": "duration_seconds",
+        "type": "integer",
+        "value": null,
+        "label": "Duration (seconds, 5–8 — model-dependent)",
+        "placeholder": "8"
+      },
+      {
+        "name": "negative_prompt",
+        "type": "text",
+        "value": null,
+        "label": "Negative Prompt (things to avoid, optional)",
+        "placeholder": "blurry, low quality"
+      },
+      {
+        "name": "person_generation",
+        "type": "text",
+        "value": null,
+        "label": "Person Generation",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "Allow adults (default)",
+            "value": "allow_adult"
+          },
+          {
+            "name": "Don't allow people",
+            "value": "dont_allow"
+          }
+        ]
+      },
+      {
+        "name": "seed",
+        "type": "integer",
+        "value": null,
+        "label": "Seed (optional, for reproducibility)",
+        "placeholder": "12345"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Tool Result",
+        "placeholder": ""
+      },
+      {
+        "name": "video_blob",
+        "type": "string",
+        "value": null,
+        "label": "Video (flo:blob token)",
+        "placeholder": ""
+      },
+      {
+        "name": "video_base64",
+        "type": "string",
+        "value": null,
+        "label": "Video (base64)",
+        "placeholder": ""
+      },
+      {
+        "name": "mime_type",
+        "type": "string",
+        "value": null,
+        "label": "MIME Type",
+        "placeholder": ""
+      },
+      {
+        "name": "model",
+        "type": "string",
+        "value": null,
+        "label": "Model Used",
+        "placeholder": ""
+      },
+      {
+        "name": "operation_name",
+        "type": "string",
+        "value": null,
+        "label": "Operation Name (LRO handle)",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
   "ai/openai": {
     "hash": "7c31da3f8c27ea28f1603283f15e88befe347d40377e38eb86f194b8efc95694",
     "author": "Andy Esser",
@@ -19119,11 +19302,11 @@
     ]
   },
   "messaging/telegram/send_audio": {
-    "hash": "554f0d513245280c68f0e1bba7a253e8b6321c7170c23715048bb3f40c369fa6",
+    "hash": "9e1ebbd8f170cca34d67815e14f5e0616722d258d5c5100170d9911b6c11c243",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Send Telegram Audio",
-    "description": "Send a music/audio file via Telegram. Use send_voice for voice notes.",
+    "description": "Send a music/audio file (MP3, M4A, WAV) via Telegram. Use send_voice for spoken-word voice notes. NEVER use for video files (incl. Gemini/Veo output) — use send_video instead so the visual track is preserved.",
     "website": "https://www.flomation.co",
     "icon": "telegram+music",
     "date": "21/06/2026",
@@ -19536,11 +19719,11 @@
     ]
   },
   "messaging/telegram/send_video": {
-    "hash": "5fcbc67a567da3e26c2b173d2e64ca52cf75331d620a427c5f3d282214d40049",
+    "hash": "6464b82bd575e5348ccadd9a070ede91aa79b05b901bf78c83b6d0906f6227e7",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Send Telegram Video",
-    "description": "Send a video via Telegram. Accepts a flo:blob token or base64.",
+    "description": "Send a video (MP4, with or without audio track) via Telegram. THE CORRECT CHOICE for output from Gemini Video / Veo and any other video file. Accepts a flo:blob token or base64. Do NOT use send_voice or send_audio for video files — those strip the visual track.",
     "website": "https://www.flomation.co",
     "icon": "telegram+video",
     "date": "21/06/2026",
@@ -19654,11 +19837,11 @@
     ]
   },
   "messaging/telegram/send_voice": {
-    "hash": "09023e6c9ecaa9debb93124971b6edaad587461ab421d692b51c9e1d72ea4c77",
+    "hash": "bf1628ae02931f137f7e0beeccdcda5d08869ffae7dfbe65b9252fa4763d2c1e",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Send Telegram Voice",
-    "description": "Send a voice message via Telegram. Wire an ElevenLabs TTS node upstream to convert text to audio.",
+    "description": "Send a SHORT AUDIO-ONLY voice note via Telegram (OGG/OPUS, like a WhatsApp voice message). NEVER use for video files — Telegram strips the video track and only the audio will play. For video files (incl. Gemini/Veo video output) use send_video. For music files use send_audio.",
     "website": "https://www.flomation.co",
     "icon": "telegram+microphone",
     "date": "18/04/2026",

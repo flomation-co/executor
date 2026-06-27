@@ -98,3 +98,49 @@ func TestResolveFileBytes_InvalidBase64_Errors(t *testing.T) {
 	_, err := ResolveFileBytes(nil, "", "###not-base64-at-all###")
 	Expect(err).To(MatchError(ContainSubstring("decode file_base64")))
 }
+
+// TestResolveFileBytes_FileBlobReceivesBase64Text_DecodesAutomatically
+// is the regression test for the gemini_video → send_video bug: the
+// AI agent passed `video_base64` into `file_blob`, so the resolved
+// content reaching ResolveFileBytes was the base64 text of an MP4
+// rather than the raw bytes. Previously this got uploaded verbatim
+// — Telegram saved a "video.mp4" containing base64 letters and the
+// playback was unwatchable. The sniffer now spots the all-printable
+// base64-alphabet content and decodes it back to bytes.
+func TestResolveFileBytes_FileBlobReceivesBase64Text_DecodesAutomatically(t *testing.T) {
+	RegisterTestingT(t)
+	// Use a payload that looks like a real binary file once decoded
+	// — leading non-printable bytes so the assertion is sharp.
+	originalBytes := []byte{0x00, 0x00, 0x00, 0x20, 0x66, 0x74, 0x79, 0x70, 0x69, 0x73, 0x6F, 0x6D, 0xDE, 0xAD, 0xBE, 0xEF}
+	b64 := base64.StdEncoding.EncodeToString(originalBytes)
+
+	got, err := ResolveFileBytes(nil, b64, "")
+	Expect(err).NotTo(HaveOccurred())
+	Expect(got).To(Equal(originalBytes), "base64 text in file_blob field should be auto-decoded to its raw bytes")
+}
+
+// TestResolveFileBytes_FileBlobReceivesRawBinary_PassesThrough is the
+// inverse pin: when file_blob legitimately carries raw binary (e.g.
+// the byte sequence starts with a non-printable header), the sniffer
+// must NOT mis-classify it as base64. Otherwise we'd corrupt every
+// real upload.
+func TestResolveFileBytes_FileBlobReceivesRawBinary_PassesThrough(t *testing.T) {
+	RegisterTestingT(t)
+	// Real MP4 file header bytes. The 0x00 bytes immediately fail
+	// the base64-alphabet check on byte 0, so the sniffer bails.
+	rawMP4 := []byte{0x00, 0x00, 0x00, 0x20, 'f', 't', 'y', 'p', 'i', 's', 'o', 'm', 0x00, 0x00, 0x02, 0x00}
+	got, err := ResolveFileBytes(nil, string(rawMP4), "")
+	Expect(err).NotTo(HaveOccurred())
+	Expect(got).To(Equal(rawMP4), "raw binary in file_blob field must pass through unchanged")
+}
+
+// TestResolveFileBytes_FileBlobReceivesPlainText_PassesThrough pins
+// that text strings that AREN'T base64 (have whitespace, punctuation,
+// etc.) also pass through unchanged. The sniffer is conservative —
+// it only decodes when EVERY peeked byte is in the base64 alphabet.
+func TestResolveFileBytes_FileBlobReceivesPlainText_PassesThrough(t *testing.T) {
+	RegisterTestingT(t)
+	got, err := ResolveFileBytes(nil, "this is a caption with spaces and a dot.", "")
+	Expect(err).NotTo(HaveOccurred())
+	Expect(got).To(Equal([]byte("this is a caption with spaces and a dot.")))
+}

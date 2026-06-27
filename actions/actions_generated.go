@@ -24,6 +24,7 @@ import (
 	ai_gemini "flomation.app/automate/executor/actions/ai/gemini"
 	ai_gemini_image "flomation.app/automate/executor/actions/ai/gemini_image"
 	ai_gemini_tts "flomation.app/automate/executor/actions/ai/gemini_tts"
+	ai_gemini_video "flomation.app/automate/executor/actions/ai/gemini_video"
 	ai_openai "flomation.app/automate/executor/actions/ai/openai"
 	ai_openwebui "flomation.app/automate/executor/actions/ai/openwebui"
 	arithmetic_addition "flomation.app/automate/executor/actions/arithmetic/addition"
@@ -402,6 +403,7 @@ var Actions = map[string]core.Action{
 	"ai/gemini":                             ai_gemini.Execute,
 	"ai/gemini_image":                       ai_gemini_image.Execute,
 	"ai/gemini_tts":                         ai_gemini_tts.Execute,
+	"ai/gemini_video":                       ai_gemini_video.Execute,
 	"ai/openai":                             ai_openai.Execute,
 	"ai/openwebui":                          ai_openwebui.Execute,
 	"arithmetic/addition":                   arithmetic_addition.Execute,

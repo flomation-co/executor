@@ -21,7 +21,7 @@ const (
 	Author       = "Andy Esser"
 	Organisation = "Flomation"
 	Name         = "Send Telegram Voice"
-	Description  = "Send a voice message via Telegram. Wire an ElevenLabs TTS node upstream to convert text to audio."
+	Description  = "Send a SHORT AUDIO-ONLY voice note via Telegram (OGG/OPUS, like a WhatsApp voice message). NEVER use for video files — Telegram strips the video track and only the audio will play. For video files (incl. Gemini/Veo video output) use send_video. For music files use send_audio."
 	Website      = "https://www.flomation.co"
 	Icon         = "telegram+microphone"
 	Date         = "18/04/2026"
