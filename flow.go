@@ -1563,24 +1563,57 @@ func (f *Flow) executeNodeActionOnly(actions map[string]Action, node *Node, envi
 
 						// If the node hasn't been executed yet (e.g. sibling
 						// in a loop body), execute it now to populate results.
+						//
+						// Triggers are an exception: they're entry points,
+						// not dependencies. Only the FIRING trigger should
+						// run in any given execution; executing a different
+						// trigger as a side-effect of variable resolution
+						// produces empty outputs (its real data never
+						// arrives) AND falsely marks it as triggered in the
+						// execution viewer. Worse, the missing output then
+						// leaks the trigger's node ID into downstream AI
+						// prompts as a literal `${<uuid>.key}` reference,
+						// which Anthropic models have been observed to
+						// strip-hyphens-from and use as a fake blob handle
+						// (see execution d402887d). Skip them here so
+						// neither symptom appears.
 						if _, ok := f.nodeResults[scopeNodeID]; !ok {
 							if scopeNode := f.FindNode(scopeNodeID); scopeNode != nil {
-								log.WithFields(log.Fields{
-									"node_id": scopeNodeID,
-									"key":     scopeKey,
-								}).Info("executing scoped dependency node")
-								if _, err := f.ExecuteNode(actions, scopeNode, environment); err != nil {
+								if scopeNode.Data != nil && scopeNode.Data.Config.Type == ActionTypeTrigger {
 									log.WithFields(log.Fields{
 										"node_id": scopeNodeID,
-										"error":   err,
-									}).Warn("failed to execute scoped dependency node")
+										"key":     scopeKey,
+									}).Debug("skipping scoped dependency execution for trigger node — only the firing trigger should run")
+								} else {
+									log.WithFields(log.Fields{
+										"node_id": scopeNodeID,
+										"key":     scopeKey,
+									}).Info("executing scoped dependency node")
+									if _, err := f.ExecuteNode(actions, scopeNode, environment); err != nil {
+										log.WithFields(log.Fields{
+											"node_id": scopeNodeID,
+											"error":   err,
+										}).Warn("failed to execute scoped dependency node")
+									}
 								}
 							}
 						}
 
+						// Always remove the ${...} placeholder. If the
+						// lookup succeeds we replace with the resolved
+						// value; if it fails we replace with empty string
+						// so the literal `${nodeId.key}` text never reaches
+						// downstream actions or AI prompts. The literal
+						// leftover is what previously let the AI extract a
+						// UUID from an unresolved reference and construct a
+						// fake blob handle from it; an empty replacement
+						// removes that surface area entirely. The miss is
+						// still logged so flow authors can spot the
+						// misconfiguration.
+						replacement := ""
 						if nr, ok := f.nodeResults[scopeNodeID]; ok {
 							if res, ok := nr[scopeKey]; ok {
-								*val = strings.ReplaceAll(*val, "${"+m+"}", substitutionString(res))
+								replacement = substitutionString(res)
 							} else {
 								log.WithFields(log.Fields{
 									"output":  m,
@@ -1594,6 +1627,7 @@ func (f *Flow) executeNodeActionOnly(actions map[string]Action, node *Node, envi
 								"node_id": scopeNodeID,
 							}).Warn("scoped node not found in results cache")
 						}
+						*val = strings.ReplaceAll(*val, "${"+m+"}", replacement)
 					} else {
 						log.WithFields(log.Fields{
 							"output": m,
@@ -2191,13 +2225,14 @@ func (f *Flow) executeNodeChildren(actions map[string]Action, node *Node, output
 					// downstream nodes all keep seeing real values.
 					if !toolErr && matchedTool != nil {
 						if r, exists := f.nodeResults[matchedTool.ID]; exists && r != nil {
-							manifest := TokeniseLargeOutputs(r, f.Blobs())
-							if len(manifest) > 0 {
-								toolOutput += FormatTokenManifest(manifest)
+							manifest, failures := TokeniseLargeOutputs(r, f.Blobs())
+							if len(manifest) > 0 || len(failures) > 0 {
+								toolOutput += FormatTokenManifest(manifest, failures)
 								log.WithFields(log.Fields{
-									"tool":   req.Name,
-									"fields": len(manifest),
-								}).Info("off-loaded large tool outputs to blob store")
+									"tool":          req.Name,
+									"tokenised":     len(manifest),
+									"tokenise_fail": len(failures),
+								}).Info("blob off-load result for tool outputs")
 							}
 						}
 					}

@@ -6,7 +6,10 @@ package core
 
 import (
 	"errors"
+	"strconv"
 	"strings"
+
+	log "github.com/sirupsen/logrus"
 )
 
 // mediaKeySuffixes identifies fields whose values are almost
@@ -50,6 +53,18 @@ type TokenManifestEntry struct {
 	Mime  string
 }
 
+// TokeniseFailure records a field whose value WOULD have been
+// off-loaded but the BlobStore Put failed. Surfaced to the AI's tool
+// result so the model knows there's no token to pass — without this,
+// the AI sees the action succeeded, sees no token in the manifest,
+// and reaches for the example handle in the system prompt (the exact
+// hallucination loop seen in executions 9dcf8bc3 / ee749f82 etc.).
+type TokeniseFailure struct {
+	Field  string
+	Size   int
+	Reason string
+}
+
 // TokeniseLargeOutputs scans outputs and off-loads any string values
 // that exceed BlobThresholdBytes AND whose key suggests bulk media.
 // Returns the manifest of (field → token) pairs that the caller
@@ -62,11 +77,13 @@ type TokenManifestEntry struct {
 // tool_result string) carries tokens. This is the load-bearing
 // simplification of the whole design — DB stays full-fidelity,
 // auto-wiring keeps working, editor display unchanged.
-func TokeniseLargeOutputs(outputs map[string]interface{}, store *BlobStore) []TokenManifestEntry {
-	if store == nil || len(outputs) == 0 {
-		return nil
+func TokeniseLargeOutputs(outputs map[string]interface{}, store *BlobStore) ([]TokenManifestEntry, []TokeniseFailure) {
+	if len(outputs) == 0 {
+		return nil, nil
 	}
 	var manifest []TokenManifestEntry
+	var failures []TokeniseFailure
+
 	// Prefer the format hint from a paired audio_format/output_format
 	// field if present, so the LLM sees audio/ogg rather than the
 	// generic audio/mpeg when the action actually produced OGG.
@@ -87,13 +104,41 @@ func TokeniseLargeOutputs(outputs map[string]interface{}, store *BlobStore) []To
 		if mime == "" {
 			mime = mimeForKey(key)
 		}
+
+		// A nil store is itself a Put failure — we still want it
+		// surfaced to the AI so the model knows there's no token
+		// to pass and falls back gracefully.
+		if store == nil {
+			reason := "blob store not initialised — flow ran without an API URL or scope"
+			log.WithFields(log.Fields{
+				"field": key,
+				"size":  len(s),
+			}).Warn("blob tokenisation skipped: " + reason)
+			failures = append(failures, TokeniseFailure{
+				Field: key, Size: len(s), Reason: reason,
+			})
+			continue
+		}
+
 		token, err := store.Put([]byte(s), mime)
 		if err != nil {
-			// A store failure is non-fatal: the LLM falls back to
-			// seeing nothing for this field rather than the full
-			// blob. The action still has the real value in its
-			// outputs map, so downstream graph-wired nodes are
-			// unaffected.
+			// Previously this was a silent skip. Logging + propagating
+			// the failure lets us a) diagnose WHY Put failed and b)
+			// tell the AI explicitly that no token is available so it
+			// doesn't reach for the example handle in the system
+			// prompt as a substitute (the hallucination loop in
+			// production executions 9dcf8bc3 / ee749f82).
+			log.WithFields(log.Fields{
+				"field": key,
+				"size":  len(s),
+				"mime":  mime,
+				"error": err,
+			}).Warn("blob tokenisation failed: store.Put returned error")
+			failures = append(failures, TokeniseFailure{
+				Field:  key,
+				Size:   len(s),
+				Reason: err.Error(),
+			})
 			continue
 		}
 		manifest = append(manifest, TokenManifestEntry{
@@ -103,7 +148,7 @@ func TokeniseLargeOutputs(outputs map[string]interface{}, store *BlobStore) []To
 			Mime:  mime,
 		})
 	}
-	return manifest
+	return manifest, failures
 }
 
 // DetokeniseInputs walks the LLM-supplied tool argument map and
@@ -184,22 +229,50 @@ func DetokeniseInputs(args map[string]interface{}, store *BlobStore) (map[string
 // LLM-visible tool_result string. Shape:
 //
 //	Outputs available as references (pass verbatim to downstream tools):
-//	  audio_base64: flo:blob:a3f9c2d1b4e7805f?size=553436&type=audio%2Fmpeg
+//	  audio_base64: flo:blob:a3f9c2d1b4e7805f7e9d0c2b1a8e6f4d?size=553436&type=audio%2Fmpeg
 //
-// Empty manifest returns empty string so callers can unconditionally
-// append.
-func FormatTokenManifest(manifest []TokenManifestEntry) string {
-	if len(manifest) == 0 {
+// When failures is non-empty, an additional warning section is
+// appended naming the fields that COULD NOT be off-loaded and the
+// reason. This is the load-bearing piece that prevents AI
+// hallucination: when the model sees a clear "no token is available
+// for X" warning, it knows the example handle in the system prompt
+// is NOT a substitute and falls back to text or to retry. Without
+// this section the model sees no token, assumes the manifest
+// "should" contain one, and reaches for whatever token-shaped
+// string it remembers (typically the example handle from the
+// system prompt).
+//
+// Empty manifest + empty failures returns empty string so callers
+// can unconditionally append.
+func FormatTokenManifest(manifest []TokenManifestEntry, failures []TokeniseFailure) string {
+	if len(manifest) == 0 && len(failures) == 0 {
 		return ""
 	}
 	var sb strings.Builder
-	sb.WriteString("\n\nOutputs available as references (pass verbatim to downstream tools):\n")
-	for _, e := range manifest {
-		sb.WriteString("  ")
-		sb.WriteString(e.Field)
-		sb.WriteString(": ")
-		sb.WriteString(e.Token)
-		sb.WriteString("\n")
+	if len(manifest) > 0 {
+		sb.WriteString("\n\nOutputs available as references (pass verbatim to downstream tools):\n")
+		for _, e := range manifest {
+			sb.WriteString("  ")
+			sb.WriteString(e.Field)
+			sb.WriteString(": ")
+			sb.WriteString(e.Token)
+			sb.WriteString("\n")
+		}
+	}
+	if len(failures) > 0 {
+		sb.WriteString("\n\nNo blob token is available for the following outputs ")
+		sb.WriteString("(blob store unreachable or rejected the upload). ")
+		sb.WriteString("Do NOT invent a substitute handle — the data is unreachable from downstream tools this turn. ")
+		sb.WriteString("Either retry, or fall back to text:\n")
+		for _, f := range failures {
+			sb.WriteString("  ")
+			sb.WriteString(f.Field)
+			sb.WriteString(" (")
+			sb.WriteString(strconv.Itoa(f.Size))
+			sb.WriteString(" bytes): ")
+			sb.WriteString(f.Reason)
+			sb.WriteString("\n")
+		}
 	}
 	return sb.String()
 }
