@@ -2032,18 +2032,50 @@ func (f *Flow) executeNodeChildren(actions map[string]Action, node *Node, output
 						// references verbatim when carrying data
 						// between tool calls; we resolve them back to
 						// the real values here so actions stay
-						// completely unaware of off-loading. A failed
-						// resolution leaves the token in place and
-						// returns an error string the model can act on
-						// (see the comment in DetokeniseInputs).
-						if detoked, derr := DetokeniseInputs(req.Input, f.blobs); derr == nil {
+						// completely unaware of off-loading.
+						//
+						// Use f.Blobs() (lazy-init getter) rather than
+						// the raw f.blobs field — otherwise the AI's
+						// first tool call with a blob token sees a nil
+						// store (the store is only instantiated on the
+						// first TokeniseLargeOutputs call further
+						// down), the resolution silently no-ops, and
+						// the raw token reaches the action's base64
+						// decoder. f.Blobs() always returns a usable
+						// store; the failure modes from here on are
+						// genuine "handle not found" / "API down".
+						//
+						// On any resolution failure we short-circuit
+						// the whole tool call with a clear error: the
+						// raw token never reaches the action (which
+						// would only emit a base64-decode error the AI
+						// can't act on). The error string names the
+						// offending field so the AI can correct the
+						// next tool call — either with a real token
+						// from this turn's manifest, or by calling the
+						// producing tool again.
+						if detoked, derr := DetokeniseInputs(req.Input, f.Blobs()); derr == nil {
 							req.Input = detoked
 						} else {
 							log.WithFields(log.Fields{
 								"tool":  req.Name,
 								"error": derr,
-							}).Warn("blob token resolution failed; passing raw value through")
-							req.Input = detoked
+							}).Warn("blob token resolution failed; surfacing as tool error")
+							toolOutput = fmt.Sprintf(
+								"Unable to resolve blob reference passed to %s: %v\n\n"+
+									"The flo:blob:<handle> token you passed is unknown to the executor — "+
+									"either the handle was hallucinated, or the handle came from a prior "+
+									"execution and is no longer available. Pass the verbatim token from "+
+									"THIS turn's tool result manifest, or invoke the producing tool again "+
+									"to generate a fresh one.",
+								req.Name, derr)
+							toolErr = true
+							// Don't run the action — it would only emit
+							// a confusing base64-decode error on the raw
+							// token. The toolErr+toolOutput pair we just
+							// set propagates back to the AI's next turn
+							// via the normal result-collection path
+							// below.
 						}
 
 						// Inject tool input as the matched node's input values.
@@ -2095,20 +2127,27 @@ func (f *Flow) executeNodeChildren(actions map[string]Action, node *Node, output
 							}
 						}
 
-						_, err := f.ExecuteNode(actions, matchedTool, environment)
-						if err != nil {
-							toolOutput = fmt.Sprintf("Tool execution error: %v", err)
-							toolErr = true
-						} else {
-							// Cross-conversation relay recording: if the
-							// tool just dispatched a messaging action
-							// (send-slack, send-telegram, ...) record
-							// the outbound against the recipient's
-							// conversation so future inbound from them
-							// surfaces the prior message in history.
-							// Lives in flow_record_outbound.go; pure
-							// post-send bookkeeping, never blocks.
-							f.recordOutboundRelay(matchedTool)
+						// toolErr can be set by the detokenisation
+						// short-circuit above. In that case we've
+						// already populated toolOutput with an
+						// actionable error for the AI and must NOT
+						// run the action with the bad inputs.
+						if !toolErr {
+							_, err := f.ExecuteNode(actions, matchedTool, environment)
+							if err != nil {
+								toolOutput = fmt.Sprintf("Tool execution error: %v", err)
+								toolErr = true
+							} else {
+								// Cross-conversation relay recording: if the
+								// tool just dispatched a messaging action
+								// (send-slack, send-telegram, ...) record
+								// the outbound against the recipient's
+								// conversation so future inbound from them
+								// surfaces the prior message in history.
+								// Lives in flow_record_outbound.go; pure
+								// post-send bookkeeping, never blocks.
+								f.recordOutboundRelay(matchedTool)
+							}
 						}
 					}
 
