@@ -127,7 +127,30 @@ func DetokeniseInputs(args map[string]interface{}, store *BlobStore) (map[string
 	var firstErr error
 	for k, v := range args {
 		s, ok := v.(string)
-		if !ok || !IsBlobToken(s) {
+		if !ok {
+			out[k] = v
+			continue
+		}
+
+		// A string that starts with the blob prefix but isn't a
+		// valid token is almost certainly a hallucination — common
+		// shape from Anthropic models is a UUID with hyphens
+		// (e.g. flo:blob:3b3b8e0e-7f3a-4c3a-…) which fails the
+		// 32-lowercase-hex handle check. Surface this as a clear
+		// error rather than letting the malformed string reach the
+		// action's base64 decoder, which would emit a useless
+		// "illegal base64 data at input byte 3" message the AI
+		// can't act on.
+		if strings.HasPrefix(s, BlobTokenPrefix) && !IsBlobToken(s) {
+			if firstErr == nil {
+				firstErr = errors.New(k + ": value starts with " + BlobTokenPrefix +
+					" but is not a valid blob token (handle must be exactly 32 lowercase hex characters with no separators)")
+			}
+			out[k] = v
+			continue
+		}
+
+		if !IsBlobToken(s) {
 			out[k] = v
 			continue
 		}

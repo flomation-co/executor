@@ -116,3 +116,34 @@ func TestModelContextWindow_UnknownModel(t *testing.T) {
 	RegisterTestingT(t)
 	Expect(ModelContextWindow("some-future-model")).To(Equal(32000))
 }
+
+// TestBlobTokenInstructions_ExampleHandleIsCanonical32Hex is the
+// regression guard for a literal-AI-instruction bug: the example
+// handle previously was 16 chars (a3f9c2d1b4e7805f) — half the
+// canonical 32-char length. Anthropic models faithfully copied the
+// example shape when hallucinating a token (e.g. user asks for a
+// voice note without an upstream TTS run), producing 16-char
+// handles that the engine then rejected as malformed. Confirmed in
+// execution 2611489e where THE EXACT example string appeared in the
+// failing send_voice input.
+//
+// The example must be exactly 32 lowercase hex chars to match the
+// real handle format the executor's BlobStore produces (16 random
+// bytes → 32 hex chars; see API persistence/blob_object.go).
+func TestBlobTokenInstructions_ExampleHandleIsCanonical32Hex(t *testing.T) {
+	RegisterTestingT(t)
+
+	// Look for the canonical-format example: flo:blob:<handle> where
+	// handle should be 32 hex chars. We pin the literal substring so
+	// a careless edit that shortens it fails this test loudly.
+	Expect(BlobTokenInstructions).To(ContainSubstring("flo:blob:a3f9c2d1b4e7805f7e9d0c2b1a8e6f4d3"),
+		"example handle must be 32 lowercase hex chars — AI models copy the shape verbatim when they hallucinate")
+
+	// Also pin that the explicit format guidance is present. Without
+	// these phrases the AI loses the cue that handles are 32-char
+	// hex with no separators.
+	Expect(BlobTokenInstructions).To(ContainSubstring("32 lowercase hexadecimal"),
+		"instruction must explicitly state the format requirement")
+	Expect(BlobTokenInstructions).To(ContainSubstring("DO NOT INVENT TOKENS"),
+		"instruction must explicitly forbid invention when no real reference exists")
+}

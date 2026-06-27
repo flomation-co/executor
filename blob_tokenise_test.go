@@ -47,20 +47,22 @@ func TestDetokeniseInputs_NilStore_ReturnsErrorForTokenValues(t *testing.T) {
 }
 
 // TestDetokeniseInputs_NonTokenValues_PassThrough confirms the function
-// is a no-op for any value that isn't a blob token. Strings that happen
-// to start with "flo:" but don't match the full token shape, integers,
-// nil values, and short strings all flow through untouched.
+// is a no-op for any value that genuinely isn't a blob reference.
+// Strings that start with "flo:" but DON'T include the "blob:" prefix,
+// integers, nil values, and the literal "flo:blob:" appearing inside a
+// surrounding sentence are all left alone. Strings that START with
+// "flo:blob:" but are malformed get caught by the malformed-token
+// branch (covered by the UUID + NearMissPrefix tests above).
 func TestDetokeniseInputs_NonTokenValues_PassThrough(t *testing.T) {
 	RegisterTestingT(t)
 
 	args := map[string]interface{}{
-		"plain":        "hello",
-		"empty":        "",
-		"looks-likey":  "flo:not-a-blob",
-		"short":        "flo:blob:tooshort",
-		"int":          42,
-		"nil":          nil,
-		"actual-text":  "the user said 'flo:blob:something'",
+		"plain":       "hello",
+		"empty":       "",
+		"looks-likey": "flo:not-a-blob",
+		"int":         42,
+		"nil":         nil,
+		"actual-text": "the user said 'flo:blob:something'",
 	}
 	out, err := DetokeniseInputs(args, nil)
 
@@ -107,4 +109,57 @@ func TestDetokeniseInputs_MultipleFailedTokens_SingleError(t *testing.T) {
 	// don't pin WHICH field, only that the count is exactly one.
 	parts := strings.Count(err.Error(), ": blob token received but no blob store available")
 	Expect(parts).To(Equal(1), "agent loop expects a single concise error, not one per field")
+}
+
+// TestDetokeniseInputs_UUIDFormatToken_RejectedAsMalformed locks the
+// exact hallucination pattern seen in execution 9fe18d8a:
+// `flo:blob:3b3b8e0e-7f3a-4c3a-a7d5-0e1e6b3b8e0e?size=513715&type=audio/mpeg`.
+// Anthropic models reflexively format invented handles as UUIDs with
+// hyphens, which fails the strict 32-lowercase-hex handle check. Before
+// this fix DetokeniseInputs silently passed the malformed token to the
+// action — which emitted "illegal base64 data at input byte 3", a
+// useless message the AI couldn't act on. Now we name the format
+// requirement explicitly so the AI can correct itself on the next
+// turn (or, better, recognise that it shouldn't have invented the
+// token in the first place).
+func TestDetokeniseInputs_UUIDFormatToken_RejectedAsMalformed(t *testing.T) {
+	RegisterTestingT(t)
+
+	args := map[string]interface{}{
+		"audio_base64": "flo:blob:3b3b8e0e-7f3a-4c3a-a7d5-0e1e6b3b8e0e?size=513715&type=audio/mpeg",
+	}
+	out, err := DetokeniseInputs(args, nil)
+
+	Expect(err).To(HaveOccurred(), "UUID-format token must be rejected — it's a hallucination")
+	Expect(err.Error()).To(ContainSubstring("audio_base64"))
+	Expect(err.Error()).To(ContainSubstring("32 lowercase hex"),
+		"error must name the format requirement so the AI can correct itself")
+	// Token is left in place but the engine's short-circuit (see
+	// flow.go) will catch the error and skip the action.
+	Expect(out["audio_base64"]).To(Equal(args["audio_base64"]))
+}
+
+// TestDetokeniseInputs_NearMissPrefix_RejectedAsMalformed catches the
+// broader class of "looks like a token but isn't" — anything starting
+// with the flo:blob: prefix that doesn't parse as a valid handle.
+// Covers shorter-than-32-chars handles, longer-than-32-chars, mixed
+// case, non-hex characters.
+func TestDetokeniseInputs_NearMissPrefix_RejectedAsMalformed(t *testing.T) {
+	RegisterTestingT(t)
+
+	cases := []string{
+		"flo:blob:short",                              // too short
+		"flo:blob:f0f0e5c8b2a14d9e8c7f3b1a6d2e4f5",    // 31 chars, off-by-one
+		"flo:blob:F0F0E5C8B2A14D9E8C7F3B1A6D2E4F5C",   // uppercase
+		"flo:blob:G0G0e5c8b2a14d9e8c7f3b1a6d2e4f5c",   // non-hex char
+		"flo:blob:f0f0e5c8b2a14d9e8c7f3b1a6d2e4f5cXX", // 34 chars, too long
+	}
+	for _, malformed := range cases {
+		args := map[string]interface{}{"audio_base64": malformed}
+		_, err := DetokeniseInputs(args, nil)
+		Expect(err).To(HaveOccurred(),
+			"malformed token %q should be rejected", malformed)
+		Expect(err.Error()).To(ContainSubstring("not a valid blob token"),
+			"error for %q should explain why", malformed)
+	}
 }

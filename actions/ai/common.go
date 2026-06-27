@@ -175,17 +175,27 @@ func ModelContextWindow(model string) int {
 const BlobTokenInstructions = `
 
 LARGE TOOL OUTPUTS — when a tool's result mentions a reference like
-flo:blob:a3f9c2d1b4e7805f?size=415077&type=audio/mpeg, treat it as
-an OPAQUE handle to data stored by the executor. When invoking a
-downstream tool that needs that data as an argument, paste the
-ENTIRE token verbatim into the argument value — including the
-flo:blob: prefix and the ?size= and &type= query parameters. Do
-not summarise, paraphrase, or describe the contents in place of
-the token; the actual bytes never enter your context and any
-substitute you invent will fail the downstream tool. If a tool's
-result lists "Outputs available as references:" followed by
-key→token pairs, those tokens are the canonical values for fields
-of the same name on subsequent tool calls.
+flo:blob:a3f9c2d1b4e7805f7e9d0c2b1a8e6f4d3?size=415077&type=audio/mpeg,
+treat it as an OPAQUE handle to data stored by the executor.
+
+CRITICAL — DO NOT INVENT TOKENS: The handle portion (after flo:blob:)
+is exactly 32 lowercase hexadecimal characters [0-9a-f] with NO
+hyphens, NO underscores, NO uppercase. You cannot generate one
+yourself — they only exist when a real tool has produced one in
+"Outputs available as references:" earlier in this turn. If you
+have not seen such a reference in THIS turn's tool results, you do
+NOT have a token to pass; do not invent one.
+
+WHEN A REAL TOKEN IS AVAILABLE: paste the ENTIRE token verbatim into
+the argument value — including the flo:blob: prefix and the ?size=
+and &type= query parameters. Do not summarise, paraphrase, or
+describe the contents in place of the token; the actual bytes never
+enter your context and any substitute you invent will be rejected
+by the executor with a clear "not a valid blob token" error.
+
+WHEN NO REAL TOKEN IS AVAILABLE: invoke the producing tool (e.g. a
+text-to-speech action) first so a real reference appears in the
+manifest, THEN call the downstream tool with the resulting token.
 `
 
 // AppendBlobTokenInstructions returns the supplied system prompt
