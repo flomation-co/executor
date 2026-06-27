@@ -1,6 +1,7 @@
 package ai_common
 
 import (
+	"regexp"
 	"testing"
 
 	. "github.com/onsi/gomega"
@@ -117,33 +118,39 @@ func TestModelContextWindow_UnknownModel(t *testing.T) {
 	Expect(ModelContextWindow("some-future-model")).To(Equal(32000))
 }
 
-// TestBlobTokenInstructions_ExampleHandleIsCanonical32Hex is the
-// regression guard for a literal-AI-instruction bug: the example
-// handle previously was 16 chars (a3f9c2d1b4e7805f) — half the
-// canonical 32-char length. Anthropic models faithfully copied the
-// example shape when hallucinating a token (e.g. user asks for a
-// voice note without an upstream TTS run), producing 16-char
-// handles that the engine then rejected as malformed. Confirmed in
-// execution 2611489e where THE EXACT example string appeared in the
-// failing send_voice input.
+// TestBlobTokenInstructions_NoInlineRealLookingHandle catches the
+// fundamental bug class: a real-looking example handle in the
+// instruction is something Anthropic models will copy verbatim.
+// Three failures in production traced to this:
 //
-// The example must be exactly 32 lowercase hex chars to match the
-// real handle format the executor's BlobStore produces (16 random
-// bytes → 32 hex chars; see API persistence/blob_object.go).
-func TestBlobTokenInstructions_ExampleHandleIsCanonical32Hex(t *testing.T) {
+//   1. Original example was 16 chars (a3f9c2d1b4e7805f). AI copied
+//      that shape. Caught in execution 2611489e.
+//   2. MR !151 used a 33-char example (typo extra `3`). AI trimmed
+//      to 32 chars to match the prose rule. Caught in 9dcf8bc3.
+//   3. The 32-char correct example a3f9c2d1b4e7805f7e9d0c2b1a8e6f4d
+//      was ALSO copied verbatim by the AI. Caught in ee749f82.
+//
+// The fix is to remove any inline real-looking handle from the
+// prompt entirely — replace with `<HANDLE>` placeholder text the
+// model cannot copy. We pin the absence of any flo:blob:<32-hex>?
+// substring in the instructions so a future "let me add a helpful
+// concrete example" edit fails the test loudly.
+func TestBlobTokenInstructions_NoInlineRealLookingHandle(t *testing.T) {
 	RegisterTestingT(t)
 
-	// Look for the canonical-format example: flo:blob:<handle> where
-	// handle should be 32 hex chars. We pin the literal substring so
-	// a careless edit that shortens it fails this test loudly.
-	Expect(BlobTokenInstructions).To(ContainSubstring("flo:blob:a3f9c2d1b4e7805f7e9d0c2b1a8e6f4d3"),
-		"example handle must be 32 lowercase hex chars — AI models copy the shape verbatim when they hallucinate")
+	// Match `flo:blob:` followed by 32+ lowercase hex chars. ANY
+	// substring that matches is a real-looking handle the AI could
+	// copy.
+	re := regexp.MustCompile(`flo:blob:[a-f0-9]{16,}`)
+	matches := re.FindAllString(BlobTokenInstructions, -1)
+	Expect(matches).To(BeEmpty(),
+		"instruction must NOT contain any flo:blob:<real-looking-hex-handle> substring — Anthropic models copy them verbatim. Use <HANDLE> placeholder text instead. Found: %v", matches)
 
-	// Also pin that the explicit format guidance is present. Without
-	// these phrases the AI loses the cue that handles are 32-char
-	// hex with no separators.
+	// Pin the prose-only format guidance that replaces the example.
 	Expect(BlobTokenInstructions).To(ContainSubstring("32 lowercase hexadecimal"),
-		"instruction must explicitly state the format requirement")
-	Expect(BlobTokenInstructions).To(ContainSubstring("DO NOT INVENT TOKENS"),
-		"instruction must explicitly forbid invention when no real reference exists")
+		"instruction must state the format requirement in prose")
+	Expect(BlobTokenInstructions).To(ContainSubstring("<HANDLE>"),
+		"instruction must use <HANDLE> placeholder instead of a copyable example")
+	Expect(BlobTokenInstructions).To(ContainSubstring("NEVER invent"),
+		"instruction must explicitly forbid invention")
 }
