@@ -113,13 +113,18 @@ var Inputs = [...]core.Connection{
 		Placeholder: "flo:blob:abc...",
 	},
 	{
-		Name:  "aspect_ratio",
-		Type:  core.ConnectionTypeText,
-		Label: "Aspect Ratio",
+		Name: "aspect_ratio",
+		Type: core.ConnectionTypeText,
+		// The Label doubles as the AI's parameter description (see
+		// flow.go injectToolDefinitions) so it must give the AI
+		// enough vocabulary to map user intent to the right value.
+		// Without these explicit cues, models pick "16:9" by
+		// default for any video request and ignore user phrasing
+		// like "portrait", "Reels", "TikTok", "Stories".
+		Label: "Aspect ratio for the generated video. Set to '9:16' for portrait/vertical videos (TikTok, Instagram Reels, Instagram Stories, YouTube Shorts, mobile-first viewing). Set to '16:9' for landscape/horizontal (default, YouTube, cinematic). Veo does NOT support square (1:1). If the user mentions a vertical format, mobile-first, social shorts, or any portrait orientation, set this to '9:16'.",
 		Options: []core.ConnectionOption{
 			{Name: "16:9 (landscape)", Value: "16:9"},
-			{Name: "9:16 (portrait)", Value: "9:16"},
-			{Name: "1:1 (square)", Value: "1:1"},
+			{Name: "9:16 (portrait — TikTok / Reels / Stories)", Value: "9:16"},
 		},
 	},
 	{
@@ -135,12 +140,21 @@ var Inputs = [...]core.Connection{
 		Placeholder: "blurry, low quality",
 	},
 	{
-		Name:  "person_generation",
-		Type:  core.ConnectionTypeText,
-		Label: "Person Generation",
+		Name: "person_generation",
+		Type: core.ConnectionTypeText,
+		// Same AI-vocabulary rationale as aspect_ratio. Note Veo
+		// 3.1 in UK/EU/CH/MENA only honours "allow_adult"; other
+		// values are silently downgraded by the model. Veo 2 has
+		// the full three-way choice in those regions but defaults
+		// to "dont_allow" rather than "allow_all". We surface all
+		// three so flows running outside those regions get the
+		// permissive option, and the AI's region-aware reasoning
+		// can pick correctly.
+		Label: "Whether the generated video may include people. Set to 'allow_all' for any people (children + adults — Veo 2 only, downgraded to 'allow_adult' on Veo 3.1 in EU/UK/CH/MENA). Set to 'allow_adult' to allow adults only (the safest universal choice; works on every model and region). Set to 'dont_allow' to exclude people entirely (use for scenery, products, abstract motion). If the user mentions people, characters, faces, or human subjects in the prompt and doesn't object to people, set this to 'allow_adult'.",
 		Options: []core.ConnectionOption{
-			{Name: "Allow adults (default)", Value: "allow_adult"},
-			{Name: "Don't allow people", Value: "dont_allow"},
+			{Name: "Allow adults (default — works on every model and region)", Value: "allow_adult"},
+			{Name: "Allow all (Veo 2 only outside EU/UK; downgrades on Veo 3.1 in EU/UK)", Value: "allow_all"},
+			{Name: "Don't allow people (scenery / products / abstract)", Value: "dont_allow"},
 		},
 	},
 	{
@@ -273,6 +287,25 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	if err != nil {
 		return errorResult(fmt.Sprintf("failed to marshal request: %v", err), ""), nil
 	}
+
+	// Log the resolved generation parameters BEFORE the request goes
+	// out. This is the diagnostic we needed when reports came in that
+	// "portrait doesn't work" — without this we couldn't tell whether
+	// the AI was omitting the field, our action was dropping it, or
+	// Veo was ignoring it. Logging the parameters map (no bytes, no
+	// secrets) makes the chain end-to-end traceable from a single
+	// log line.
+	log.WithFields(log.Fields{
+		"model":             model,
+		"prompt_len":        len(prompt),
+		"aspect_ratio":      aspectRatio,
+		"duration_seconds":  durationSeconds,
+		"person_generation": personGeneration,
+		"negative_prompt":   negativePrompt != "",
+		"input_image":       inputImageB64 != "",
+		"seed":              seed,
+		"parameters_sent":   parameters,
+	}).Info("[gemini_video] starting LRO with parameters")
 
 	startURL := apiBase + "models/" + model + ":predictLongRunning"
 	req, err := http.NewRequestWithContext(flow.GoContext(), http.MethodPost, startURL, bytes.NewReader(body))
