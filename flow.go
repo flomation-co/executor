@@ -1412,19 +1412,46 @@ func (f *Flow) executeNodeActionOnly(actions map[string]Action, node *Node, envi
 					}
 					// Fall back to global node results for scoped references
 					// (e.g. ${nodeId.key} where nodeId is an ancestor, not a
-					// direct parent — separated by Switch/For loop).
+					// direct parent — separated by Switch/For loop). Also
+					// supports path-bearing references like
+					// ${nodeId.body.items[0]} — ParseReference splits the
+					// ID, child key, and path; ResolvePath walks the
+					// child value to surface the deep target as a typed
+					// Go value to downstream actions that want it.
 					if dotIdx := strings.IndexByte(name, '.'); dotIdx > 0 {
-						scopeNodeID := name[:dotIdx]
-						scopeKey := name[dotIdx+1:]
+						var scopeNodeID, scopeKey string
+						var path []string
+						if ref, ok := ParseReference(name); ok {
+							scopeNodeID = ref.Root
+							scopeKey = ref.Child
+							path = ref.Path
+						} else {
+							scopeNodeID = name[:dotIdx]
+							scopeKey = name[dotIdx+1:]
+						}
 						if nr, ok := f.nodeResults[scopeNodeID]; ok {
 							if res, ok := nr[scopeKey]; ok {
-								if _, isStr := res.(string); !isStr {
-									configuration = append(configuration, &Connection{
-										Name:  v.Name,
-										Type:  v.Type,
-										Value: res,
-									})
-									continue
+								target := res
+								if len(path) > 0 {
+									if walked, perr := ResolvePath(res, path); perr == nil {
+										target = walked
+									} else {
+										// Path-resolve failed — fall through to
+										// the string-substitution regex path so
+										// the failure is logged there with the
+										// canonical empty-string replacement.
+										target = nil
+									}
+								}
+								if target != nil {
+									if _, isStr := target.(string); !isStr {
+										configuration = append(configuration, &Connection{
+											Name:  v.Name,
+											Type:  v.Type,
+											Value: target,
+										})
+										continue
+									}
 								}
 							}
 						}
@@ -1492,8 +1519,38 @@ func (f *Flow) executeNodeActionOnly(actions map[string]Action, node *Node, envi
 					}
 					*val = strings.ReplaceAll(*val, "${"+m+"}", userVal)
 				} else if strings.HasPrefix(m, "var.") {
+					// ${var.X} — Set-Variable-node-backed flow-scoped
+					// variables. The stored value can be any interface{}
+					// (the Set Variable action accepts JSON / typed
+					// outputs), so we route through ParseReference +
+					// ResolvePath to support ${var.X.field[0].subfield}
+					// drilling into structured variable values.
 					name := strings.TrimPrefix(m, "var.")
-					if f.variables != nil {
+					if ref, ok := ParseReference(m); ok && len(ref.Path) > 0 {
+						// Path-bearing reference. Root="var",
+						// Child=first segment of variable name,
+						// Path=rest. The variables map is keyed by
+						// the original short name though, so we
+						// look up the unprefixed child first.
+						if f.variables != nil {
+							if varVal, ok := f.variables[ref.Child]; ok {
+								walked, err := ResolvePath(varVal, ref.Path)
+								if err != nil {
+									log.WithFields(log.Fields{
+										"name":  m,
+										"error": err,
+									}).Warn("path resolution failed on ${var.X}")
+									*val = strings.ReplaceAll(*val, "${"+m+"}", "")
+								} else {
+									*val = strings.ReplaceAll(*val, "${"+m+"}", substitutionString(walked))
+								}
+							} else {
+								log.WithFields(log.Fields{
+									"name": ref.Child,
+								}).Warn("unknown flow variable")
+							}
+						}
+					} else if f.variables != nil {
 						if varVal, ok := f.variables[name]; ok {
 							*val = strings.ReplaceAll(*val, "${"+m+"}", substitutionString(varVal))
 						} else {
@@ -1551,15 +1608,46 @@ func (f *Flow) executeNodeActionOnly(actions map[string]Action, node *Node, envi
 
 					*val = strings.ReplaceAll(*val, "${"+m+"}", *p.Value)
 				} else {
-					if res, exists := parentResults[m]; exists {
-						*val = strings.ReplaceAll(*val, "${"+m+"}", substitutionString(res))
-					} else if dotIdx := strings.IndexByte(m, '.'); dotIdx > 0 {
-						// Scoped node reference: ${nodeId.key} — look up in
-						// the global node results cache. This handles cases
+					// Parent-output reference. Two forms:
+					//   ${nodeId.key}                      — top-level output
+					//   ${nodeId.key.subfield[0].sub2}     — drill into a
+					//                                        structured output
+					// Path support: parse the reference up front. If a
+					// path is present, we MUST go through the
+					// node-results cache + ResolvePath (the
+					// parentResults map is keyed by full ${ref}, which
+					// won't have a path-bearing key). For path-free
+					// references the existing fast path still wins.
+					ref, refOk := ParseReference(m)
+					pathPresent := refOk && len(ref.Path) > 0
+
+					if !pathPresent {
+						if res, exists := parentResults[m]; exists {
+							*val = strings.ReplaceAll(*val, "${"+m+"}", substitutionString(res))
+							continue
+						}
+					}
+
+					if dotIdx := strings.IndexByte(m, '.'); dotIdx > 0 {
+						// Scoped node reference: ${nodeId.key[.path...]} — look up
+						// in the global node results cache. This handles cases
 						// where the referenced node is an ancestor but not a
 						// direct parent (e.g. separated by a Switch or For loop).
-						scopeNodeID := m[:dotIdx]
-						scopeKey := m[dotIdx+1:]
+						//
+						// Use ParseReference's tokenisation (when it
+						// succeeded) to pick out the node ID + first
+						// child key correctly even when the reference
+						// contains paths or bracket indices.
+						var scopeNodeID, scopeKey string
+						var path []string
+						if refOk {
+							scopeNodeID = ref.Root
+							scopeKey = ref.Child
+							path = ref.Path
+						} else {
+							scopeNodeID = m[:dotIdx]
+							scopeKey = m[dotIdx+1:]
+						}
 
 						// If the node hasn't been executed yet (e.g. sibling
 						// in a loop body), execute it now to populate results.
@@ -1613,7 +1701,29 @@ func (f *Flow) executeNodeActionOnly(actions map[string]Action, node *Node, envi
 						replacement := ""
 						if nr, ok := f.nodeResults[scopeNodeID]; ok {
 							if res, ok := nr[scopeKey]; ok {
-								replacement = substitutionString(res)
+								if len(path) > 0 {
+									// Path-bearing reference — walk
+									// into the resolved value. JSON-
+									// string roots are auto-parsed by
+									// ResolvePath, so this transparently
+									// supports Web/HTTP response_body
+									// references like
+									// ${web.response_body.user.id}.
+									walked, perr := ResolvePath(res, path)
+									if perr != nil {
+										log.WithFields(log.Fields{
+											"output":  m,
+											"node_id": scopeNodeID,
+											"key":     scopeKey,
+											"path":    path,
+											"error":   perr,
+										}).Warn("path resolution failed on scoped output")
+									} else {
+										replacement = substitutionString(walked)
+									}
+								} else {
+									replacement = substitutionString(res)
+								}
 							} else {
 								log.WithFields(log.Fields{
 									"output":  m,
