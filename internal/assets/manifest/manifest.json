@@ -1773,7 +1773,7 @@
     ]
   },
   "ai/gemini_video": {
-    "hash": "590ffb98e26a807bc5f80b482b8c8e9a7163ac7127fb4cf3441bcfe2fdae5c9f",
+    "hash": "a21f8c3515ce67d71bc3ebdc9dbec90159d67d399f87270facc01c71fed6623d",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Gemini Video",
@@ -1840,7 +1840,7 @@
         "name": "aspect_ratio",
         "type": "text",
         "value": null,
-        "label": "Aspect Ratio",
+        "label": "Aspect ratio for the generated video. Set to '9:16' for portrait/vertical videos (TikTok, Instagram Reels, Instagram Stories, YouTube Shorts, mobile-first viewing). Set to '16:9' for landscape/horizontal (default, YouTube, cinematic). Veo does NOT support square (1:1). If the user mentions a vertical format, mobile-first, social shorts, or any portrait orientation, set this to '9:16'.",
         "placeholder": "",
         "options": [
           {
@@ -1848,12 +1848,8 @@
             "value": "16:9"
           },
           {
-            "name": "9:16 (portrait)",
+            "name": "9:16 (portrait — TikTok / Reels / Stories)",
             "value": "9:16"
-          },
-          {
-            "name": "1:1 (square)",
-            "value": "1:1"
           }
         ]
       },
@@ -1875,15 +1871,19 @@
         "name": "person_generation",
         "type": "text",
         "value": null,
-        "label": "Person Generation",
+        "label": "Whether the generated video may include people. Set to 'allow_all' for any people (children + adults — Veo 2 only, downgraded to 'allow_adult' on Veo 3.1 in EU/UK/CH/MENA). Set to 'allow_adult' to allow adults only (the safest universal choice; works on every model and region). Set to 'dont_allow' to exclude people entirely (use for scenery, products, abstract motion). If the user mentions people, characters, faces, or human subjects in the prompt and doesn't object to people, set this to 'allow_adult'.",
         "placeholder": "",
         "options": [
           {
-            "name": "Allow adults (default)",
+            "name": "Allow adults (default — works on every model and region)",
             "value": "allow_adult"
           },
           {
-            "name": "Don't allow people",
+            "name": "Allow all (Veo 2 only outside EU/UK; downgrades on Veo 3.1 in EU/UK)",
+            "value": "allow_all"
+          },
+          {
+            "name": "Don't allow people (scenery / products / abstract)",
             "value": "dont_allow"
           }
         ]
