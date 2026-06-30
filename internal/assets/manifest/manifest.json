@@ -1955,6 +1955,181 @@
       }
     ]
   },
+  "ai/groq": {
+    "hash": "60afd916da2668d24e74c423fefa9c2c506fd14a73b808d90f4005c4b34dcba5",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Groq Prompt",
+    "description": "Send a prompt to the Groq Chat Completions API and return the response",
+    "website": "https://www.flomation.co",
+    "icon": "brain+bolt",
+    "date": "30/06/2026",
+    "type": 2,
+    "category": {
+      "name": "AI",
+      "icon": "brain",
+      "description": "Artificial intelligence and large language model integrations"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "API Key",
+        "placeholder": "gsk_...",
+        "required": true
+      },
+      {
+        "name": "model",
+        "type": "string",
+        "value": null,
+        "label": "Model",
+        "placeholder": "llama-3.3-70b-versatile",
+        "options": [
+          {
+            "name": "Llama 3.3 70B Versatile",
+            "value": "llama-3.3-70b-versatile"
+          },
+          {
+            "name": "Llama 3.1 8B Instant",
+            "value": "llama-3.1-8b-instant"
+          },
+          {
+            "name": "Llama 4 Scout 17B",
+            "value": "meta-llama/llama-4-scout-17b-16e-instruct"
+          },
+          {
+            "name": "GPT-OSS 120B",
+            "value": "openai/gpt-oss-120b"
+          },
+          {
+            "name": "GPT-OSS 20B",
+            "value": "openai/gpt-oss-20b"
+          },
+          {
+            "name": "Qwen 3 32B",
+            "value": "qwen/qwen3-32b"
+          },
+          {
+            "name": "Groq Compound",
+            "value": "groq/compound"
+          },
+          {
+            "name": "Groq Compound Mini",
+            "value": "groq/compound-mini"
+          }
+        ]
+      },
+      {
+        "name": "system_prompt",
+        "type": "text",
+        "value": null,
+        "label": "System Prompt",
+        "placeholder": "You are a helpful assistant."
+      },
+      {
+        "name": "prompt",
+        "type": "text",
+        "value": null,
+        "label": "Prompt",
+        "placeholder": "What would you like to ask?",
+        "required": true
+      },
+      {
+        "name": "max_tokens",
+        "type": "integer",
+        "value": null,
+        "label": "Max Tokens",
+        "placeholder": "2048"
+      },
+      {
+        "name": "temperature",
+        "type": "string",
+        "value": null,
+        "label": "Temperature",
+        "placeholder": "0.7"
+      },
+      {
+        "name": "conversation_history",
+        "type": "object",
+        "value": null,
+        "label": "Conversation History",
+        "placeholder": "${conversation_history}"
+      },
+      {
+        "name": "tool_definitions",
+        "type": "text",
+        "value": null,
+        "label": "Tool Definitions (JSON)",
+        "placeholder": "[{\"type\":\"function\",\"function\":{\"name\":\"web_search\",\"description\":\"Search the web\",\"parameters\":{\"type\":\"object\",\"properties\":{\"query\":{\"type\":\"string\"}},\"required\":[\"query\"]}}}]"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "response",
+        "type": "string",
+        "value": null,
+        "label": "Response",
+        "placeholder": ""
+      },
+      {
+        "name": "model",
+        "type": "string",
+        "value": null,
+        "label": "Model Used",
+        "placeholder": ""
+      },
+      {
+        "name": "prompt_tokens",
+        "type": "integer",
+        "value": null,
+        "label": "Prompt Tokens",
+        "placeholder": ""
+      },
+      {
+        "name": "completion_tokens",
+        "type": "integer",
+        "value": null,
+        "label": "Completion Tokens",
+        "placeholder": ""
+      },
+      {
+        "name": "total_tokens",
+        "type": "integer",
+        "value": null,
+        "label": "Total Tokens",
+        "placeholder": ""
+      },
+      {
+        "name": "should_respond",
+        "type": "boolean",
+        "value": null,
+        "label": "Should Respond",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_calls_count",
+        "type": "integer",
+        "value": null,
+        "label": "Tool Calls",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
   "ai/openai": {
     "hash": "7c31da3f8c27ea28f1603283f15e88befe347d40377e38eb86f194b8efc95694",
     "author": "Andy Esser",
