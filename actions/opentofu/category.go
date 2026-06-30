@@ -5,7 +5,7 @@
 package opentofu
 
 const (
-	CategoryName        = "OpenTofu"
+	CategoryName        = "Infrastructure"
 	CategoryIcon        = "box+gears"
 	CategoryDescription = "Infrastructure as Code — run OpenTofu (Terraform-compatible) plan, apply, and destroy against a remote backend."
 )
