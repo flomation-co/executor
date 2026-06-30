@@ -156,6 +156,16 @@ func ModelContextWindow(model string) int {
 		return 128000
 	case strings.Contains(m, "gpt-3.5"):
 		return 16000
+	// Groq-hosted open models. Groq publishes large context windows but
+	// caps the practical maximum per deployment; these are conservative
+	// figures matched to Groq's current production limits.
+	case strings.Contains(m, "gpt-oss"),
+		strings.Contains(m, "llama-4-scout"),
+		strings.Contains(m, "llama-3.3-70b"),
+		strings.Contains(m, "llama-3.1-8b"),
+		strings.Contains(m, "qwen/qwen3"),
+		strings.Contains(m, "groq/compound"):
+		return 128000
 	}
 	return 32000 // safe default
 }

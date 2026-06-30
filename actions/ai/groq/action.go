@@ -1,0 +1,463 @@
+// Package groq implements the ai/groq action: a chat-completion call
+// against Groq's OpenAI-compatible Chat Completions API. Because the
+// wire format mirrors OpenAI exactly, this package deliberately tracks
+// actions/ai/openai — including the tool-calling loop, vision image-block
+// promotion, conversation-history truncation, and the [NO_RESPONSE]
+// sentinel — and differs only in the base URL and model catalogue.
+package groq
+
+import (
+	"bytes"
+	"encoding/json"
+	"fmt"
+	"io"
+	"net/http"
+	"strconv"
+	"strings"
+	"time"
+
+	core "flomation.app/automate/executor"
+	ai_common "flomation.app/automate/executor/actions/ai"
+
+	log "github.com/sirupsen/logrus"
+)
+
+const (
+	Author       = "Dave McElin"
+	Organisation = "Flomation"
+	Name         = "Groq Prompt"
+	Description  = "Send a prompt to the Groq Chat Completions API and return the response"
+	Website      = "https://www.flomation.co"
+	Icon         = "brain+bolt"
+	Date         = "30/06/2026"
+	Type         = core.ActionTypeAction
+
+	// Groq exposes an OpenAI-compatible Chat Completions endpoint, so the
+	// request/response shapes mirror actions/ai/openai exactly. The only
+	// provider-specific bits are the base URL and the model catalogue.
+	defaultModel     = "llama-3.3-70b-versatile"
+	defaultMaxTokens = 2048
+	maxResponseBody  = 1 << 20 // 1 MB
+)
+
+// apiURL is the Groq OpenAI-compatible Chat Completions endpoint. It is a
+// var rather than a const so tests can point it at an httptest server.
+var apiURL = "https://api.groq.com/openai/v1/chat/completions"
+
+// httpClient is shared across calls so connections to the Groq endpoint
+// are pooled and reused rather than re-dialled on every invocation.
+var httpClient = &http.Client{Timeout: 120 * time.Second}
+
+var Inputs = [...]core.Connection{
+	{
+		Name:        "api_key",
+		Type:        core.ConnectionTypeSecret,
+		Label:       "API Key",
+		Placeholder: "gsk_...",
+		Required:    true,
+	},
+	{
+		// Free-text (string) rather than a picker-only Secret so users
+		// can type any current or future Groq model ID, while the
+		// Options below surface the common ones as suggestions. Groq's
+		// catalogue changes faster than we rebuild, so locking the
+		// field to a fixed list would strand new models.
+		Name:        "model",
+		Type:        core.ConnectionTypeString,
+		Label:       "Model",
+		Placeholder: "llama-3.3-70b-versatile",
+		// Curated from Groq's currently-active production catalogue
+		// (GET https://api.groq.com/openai/v1/models). Verified live on
+		// 30/06/2026 — every entry returns a successful completion.
+		Options: []core.ConnectionOption{
+			{Name: "Llama 3.3 70B Versatile", Value: "llama-3.3-70b-versatile"},
+			{Name: "Llama 3.1 8B Instant", Value: "llama-3.1-8b-instant"},
+			{Name: "Llama 4 Scout 17B", Value: "meta-llama/llama-4-scout-17b-16e-instruct"},
+			{Name: "GPT-OSS 120B", Value: "openai/gpt-oss-120b"},
+			{Name: "GPT-OSS 20B", Value: "openai/gpt-oss-20b"},
+			{Name: "Qwen 3 32B", Value: "qwen/qwen3-32b"},
+			// Compound systems are Groq's agentic models with built-in
+			// web search and code execution — handy as drop-in tools.
+			{Name: "Groq Compound", Value: "groq/compound"},
+			{Name: "Groq Compound Mini", Value: "groq/compound-mini"},
+		},
+	},
+	{
+		Name:        "system_prompt",
+		Type:        core.ConnectionTypeText,
+		Label:       "System Prompt",
+		Placeholder: "You are a helpful assistant.",
+	},
+	{
+		Name:        "prompt",
+		Type:        core.ConnectionTypeText,
+		Label:       "Prompt",
+		Placeholder: "What would you like to ask?",
+		Required:    true,
+	},
+	{
+		Name:        "max_tokens",
+		Type:        core.ConnectionTypeInteger,
+		Label:       "Max Tokens",
+		Placeholder: "2048",
+	},
+	{
+		Name:        "temperature",
+		Type:        core.ConnectionTypeString,
+		Label:       "Temperature",
+		Placeholder: "0.7",
+	},
+	{
+		Name:        "conversation_history",
+		Type:        core.ConnectionTypeObject,
+		Label:       "Conversation History",
+		Placeholder: "${conversation_history}",
+	},
+	{
+		// TEMPORARY: tool definitions as JSON. Will be replaced by
+		// automatic discovery from the tools subgraph wired to the
+		// Tools handle.
+		Name:        "tool_definitions",
+		Type:        core.ConnectionTypeText,
+		Label:       "Tool Definitions (JSON)",
+		Placeholder: `[{"type":"function","function":{"name":"web_search","description":"Search the web","parameters":{"type":"object","properties":{"query":{"type":"string"}},"required":["query"]}}}]`,
+	},
+}
+
+var Outputs = [...]core.Connection{
+	{Name: "response", Type: core.ConnectionTypeString, Label: "Response"},
+	{Name: "model", Type: core.ConnectionTypeString, Label: "Model Used"},
+	{Name: "prompt_tokens", Type: core.ConnectionTypeInteger, Label: "Prompt Tokens"},
+	{Name: "completion_tokens", Type: core.ConnectionTypeInteger, Label: "Completion Tokens"},
+	{Name: "total_tokens", Type: core.ConnectionTypeInteger, Label: "Total Tokens"},
+	{Name: "should_respond", Type: core.ConnectionTypeBoolean, Label: "Should Respond"},
+	{Name: "tool_calls_count", Type: core.ConnectionTypeInteger, Label: "Tool Calls"},
+	{Name: "success", Type: core.ConnectionTypeBoolean, Label: "Success"},
+	{Name: "error", Type: core.ConnectionTypeString, Label: "Error"},
+}
+
+func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[string]interface{}, error) {
+	apiKeyConn := core.FindConnection("api_key", inputs)
+	if apiKeyConn == nil || apiKeyConn.String() == nil || *apiKeyConn.String() == "" {
+		return nil, fmt.Errorf("api_key is required")
+	}
+	apiKey := *apiKeyConn.String()
+
+	promptConn := core.FindConnection("prompt", inputs)
+	if promptConn == nil || promptConn.String() == nil || *promptConn.String() == "" {
+		return nil, fmt.Errorf("prompt is required")
+	}
+	prompt := *promptConn.String()
+
+	model := defaultModel
+	modelConn := core.FindConnection("model", inputs)
+	if modelConn != nil && modelConn.String() != nil && *modelConn.String() != "" {
+		model = *modelConn.String()
+	}
+
+	maxTokens := int64(defaultMaxTokens)
+	maxTokensConn := core.FindConnection("max_tokens", inputs)
+	if maxTokensConn != nil && maxTokensConn.Number() != nil && *maxTokensConn.Number() > 0 {
+		maxTokens = *maxTokensConn.Number()
+	}
+
+	// Temperature is a string input because the platform has no float
+	// connection type (only Integer); see the action's Inputs. Parse it
+	// explicitly so malformed values warn loudly and fall back to the
+	// default rather than being silently swallowed by fmt.Sscanf.
+	temperature := 0.7
+	tempConn := core.FindConnection("temperature", inputs)
+	if tempConn != nil && tempConn.String() != nil && *tempConn.String() != "" {
+		raw := strings.TrimSpace(*tempConn.String())
+		if parsed, err := strconv.ParseFloat(raw, 64); err == nil {
+			temperature = parsed
+		} else {
+			log.WithFields(log.Fields{
+				"value":   raw,
+				"default": temperature,
+			}).Warn("[groq] invalid temperature; falling back to default")
+		}
+	}
+
+	systemPromptStr := ""
+	systemConn := core.FindConnection("system_prompt", inputs)
+	if systemConn != nil && systemConn.String() != nil && *systemConn.String() != "" {
+		systemPromptStr = *systemConn.String()
+	}
+	// Teach the model to pass flo:blob:<handle> tokens verbatim to
+	// downstream tools rather than inventing placeholder strings
+	// for large outputs it can't see. See ai_common for the
+	// rationale.
+	systemPromptStr = ai_common.AppendBlobTokenInstructions(systemPromptStr)
+
+	// Parse tool definitions if provided (OpenAI format — Groq is
+	// OpenAI-compatible and accepts the same tools/tool_calls schema).
+	var tools []interface{}
+	toolDefsConn := core.FindConnection("tool_definitions", inputs)
+	if toolDefsConn != nil {
+		var raw string
+		if s := toolDefsConn.String(); s != nil && *s != "" {
+			raw = *s
+		}
+		if raw != "" {
+			_ = json.Unmarshal([]byte(raw), &tools)
+		}
+	}
+
+	// Check if we're in a tool loop (re-invocation with tool results)
+	var messages []interface{}
+	toolCallsCount := 0
+
+	if convState, ok := flow.GetVariable(core.ToolConversationStateKey); ok && convState != nil {
+		if ms, ok := convState.([]interface{}); ok {
+			messages = ms
+		}
+
+		// Append tool results
+		if toolResults, ok := flow.GetVariable(core.ToolResultsKey); ok && toolResults != nil {
+			if results, ok := toolResults.([]core.ToolResult); ok {
+				for _, r := range results {
+					messages = append(messages, map[string]interface{}{
+						"role":         "tool",
+						"tool_call_id": r.ToolUseID,
+						"content":      r.Content,
+					})
+				}
+			}
+		}
+	} else {
+		// First invocation — build messages from system prompt + history + prompt
+		if systemPromptStr != "" {
+			messages = append(messages, map[string]interface{}{
+				"role":    "system",
+				"content": systemPromptStr,
+			})
+		}
+
+		historyConn := core.FindConnection("conversation_history", inputs)
+		if historyConn != nil {
+			history := ai_common.ParseConversationHistory(historyConn.Value)
+			if len(history) > 0 {
+				history = ai_common.TruncateHistoryForBudget(
+					history, systemPromptStr, prompt,
+					int(maxTokens), ai_common.ModelContextWindow(model),
+				)
+				for _, m := range history {
+					if m.Role == "" || m.Content == "" {
+						continue
+					}
+					messages = append(messages, map[string]interface{}{
+						"role":    m.Role,
+						"content": m.Content,
+					})
+				}
+			}
+		}
+
+		// Vision-block promotion: if the prompt carries [attached: ...]
+		// markers for image attachments, resolve their blob bytes and
+		// upgrade the user content from a plain string to a content-
+		// block array using OpenAI's image_url / data: URL shape, which
+		// Groq's vision-capable models accept verbatim.
+		userContent := ai_common.BuildOpenAIUserContent(prompt, flow.Blobs())
+		messages = append(messages, map[string]interface{}{
+			"role":    "user",
+			"content": userContent,
+		})
+	}
+
+	payload := map[string]interface{}{
+		"model":       model,
+		"messages":    messages,
+		"max_tokens":  maxTokens,
+		"temperature": temperature,
+	}
+	if len(tools) > 0 {
+		payload["tools"] = tools
+	}
+
+	body, err := json.Marshal(payload)
+	if err != nil {
+		return nil, fmt.Errorf("failed to marshal request: %w", err)
+	}
+
+	req, err := http.NewRequestWithContext(flow.GoContext(), http.MethodPost, apiURL, bytes.NewReader(body))
+	if err != nil {
+		return nil, fmt.Errorf("failed to create request: %w", err)
+	}
+	req.Header.Set("Content-Type", "application/json")
+	req.Header.Set("Authorization", "Bearer "+apiKey)
+
+	resp, err := httpClient.Do(req)
+	if err != nil {
+		return nil, fmt.Errorf("Groq request failed: %w", err)
+	}
+	defer func() { _ = resp.Body.Close() }()
+
+	respBody, _ := io.ReadAll(io.LimitReader(resp.Body, maxResponseBody))
+
+	if resp.StatusCode != http.StatusOK {
+		var apiErr struct {
+			Error struct {
+				Message string `json:"message"`
+			} `json:"error"`
+		}
+		// Best-effort decode of the structured error; on failure we fall
+		// back to the raw body below, so the unmarshal error is ignored
+		// deliberately rather than swallowed.
+		_ = json.Unmarshal(respBody, &apiErr)
+		errMsg := apiErr.Error.Message
+		if errMsg == "" {
+			errMsg = string(respBody)
+		}
+		return nil, fmt.Errorf("Groq API error (%d): %s", resp.StatusCode, errMsg)
+	}
+
+	var result struct {
+		Choices []struct {
+			Message struct {
+				Content   *string `json:"content"`
+				ToolCalls []struct {
+					ID       string `json:"id"`
+					Type     string `json:"type"`
+					Function struct {
+						Name      string `json:"name"`
+						Arguments string `json:"arguments"` // JSON string
+					} `json:"function"`
+				} `json:"tool_calls,omitempty"`
+			} `json:"message"`
+			FinishReason string `json:"finish_reason"`
+		} `json:"choices"`
+		Model string `json:"model"`
+		Usage struct {
+			PromptTokens     int64 `json:"prompt_tokens"`
+			CompletionTokens int64 `json:"completion_tokens"`
+			TotalTokens      int64 `json:"total_tokens"`
+		} `json:"usage"`
+	}
+
+	if err := json.Unmarshal(respBody, &result); err != nil {
+		return nil, fmt.Errorf("failed to parse Groq response: %w", err)
+	}
+
+	if len(result.Choices) == 0 {
+		return nil, fmt.Errorf("Groq returned no choices")
+	}
+
+	choice := result.Choices[0]
+
+	// Check for tool calls
+	if choice.FinishReason == "tool_calls" && len(choice.Message.ToolCalls) > 0 {
+		var toolRequests []core.ToolRequest
+
+		// Build the assistant message with tool_calls for conversation state
+		assistantMsg := map[string]interface{}{
+			"role":       "assistant",
+			"tool_calls": choice.Message.ToolCalls,
+		}
+		if choice.Message.Content != nil {
+			assistantMsg["content"] = *choice.Message.Content
+		}
+
+		for _, tc := range choice.Message.ToolCalls {
+			var input map[string]interface{}
+			_ = json.Unmarshal([]byte(tc.Function.Arguments), &input)
+			toolRequests = append(toolRequests, core.ToolRequest{
+				ID:    tc.ID,
+				Name:  tc.Function.Name,
+				Input: input,
+			})
+		}
+
+		messages = append(messages, assistantMsg)
+
+		out := map[string]interface{}{
+			core.ToolRequestsKey:          toolRequests,
+			core.ToolConversationStateKey: messages,
+			"stop_reason":                 "tool_calls",
+			"model":                       result.Model,
+			"prompt_tokens":               result.Usage.PromptTokens,
+			"completion_tokens":           result.Usage.CompletionTokens,
+			"total_tokens":                result.Usage.TotalTokens,
+			"tool_calls_count":            len(toolRequests),
+			"success":                     true,
+			"error":                       "",
+		}
+		// Capture any text the model emitted alongside tool calls so the
+		// engine can send it to the user via the Response handle mid-loop.
+		if choice.Message.Content != nil && *choice.Message.Content != "" {
+			out[core.IntermediateTextKey] = *choice.Message.Content
+		}
+		return out, nil
+	}
+
+	// Final text response
+	content := ""
+	if choice.Message.Content != nil {
+		content = *choice.Message.Content
+	}
+
+	shouldRespond := true
+	trimmed := strings.TrimSpace(content)
+	if trimmed == "[NO_RESPONSE]" || strings.Contains(trimmed, "[NO_RESPONSE]") {
+		shouldRespond = false
+		content = ""
+	}
+
+	if shouldRespond && content != "" {
+		// Record any accumulated tool exchanges before the final reply
+		// so the conversation history includes what tools were called.
+		if exchanges := extractToolExchanges(flow); len(exchanges) > 0 {
+			ai_common.RecordToolExchange(flow.GoContext(), flow.GetContext(), exchanges)
+			toolCallsCount = len(exchanges)
+		}
+		ai_common.RecordAssistantReply(flow.GoContext(), flow.GetContext(), content)
+	}
+
+	return map[string]interface{}{
+		"response":          content,
+		"should_respond":    shouldRespond,
+		"model":             result.Model,
+		"prompt_tokens":     result.Usage.PromptTokens,
+		"completion_tokens": result.Usage.CompletionTokens,
+		"total_tokens":      result.Usage.TotalTokens,
+		"tool_calls_count":  toolCallsCount,
+		"success":           true,
+		"error":             "",
+	}, nil
+}
+
+// extractToolExchanges reads the accumulated tool exchanges from the
+// flow variable set by the engine's tool loop. Returns nil if no tools
+// were called in this turn.
+func extractToolExchanges(flow *core.Flow) []ai_common.ToolExchange {
+	raw, ok := flow.GetVariable(core.ToolExchangesKey)
+	if !ok || raw == nil {
+		return nil
+	}
+	arr, ok := raw.([]map[string]interface{})
+	if !ok || len(arr) == 0 {
+		return nil
+	}
+	exchanges := make([]ai_common.ToolExchange, 0, len(arr))
+	for _, m := range arr {
+		ex := ai_common.ToolExchange{}
+		if v, ok := m["tool_use_id"].(string); ok {
+			ex.ToolUseID = v
+		}
+		if v, ok := m["name"].(string); ok {
+			ex.Name = v
+		}
+		if v, ok := m["input"].(map[string]interface{}); ok {
+			ex.Input = v
+		}
+		if v, ok := m["result"].(string); ok {
+			ex.Result = v
+		}
+		if v, ok := m["is_error"].(bool); ok {
+			ex.IsError = v
+		}
+		exchanges = append(exchanges, ex)
+	}
+	return exchanges
+}
