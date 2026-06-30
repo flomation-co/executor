@@ -3218,11 +3218,11 @@
     ]
   },
   "common/array_length": {
-    "hash": "dd0a035b4bf50a2bdab0590fd574e0e6540f18cf2dcbcca11e369693dfbe86a6",
+    "hash": "b4af90c6a3afda7466162542a77450634521af349ec4abe03f480f2a210453e0",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Array Length",
-    "description": "Returns the number of items in an array",
+    "description": "Returns the number of items in an array. Optionally walk a dotted path into a JSON object first (e.g. path=\"data.items\").",
     "website": "https://www.flomation.co",
     "icon": "list+hashtag",
     "date": "19/04/2026",
@@ -3237,9 +3237,16 @@
         "name": "array",
         "type": "object",
         "value": null,
-        "label": "Array",
+        "label": "Array (or JSON object containing an array — see Path)",
         "placeholder": "",
         "required": true
+      },
+      {
+        "name": "path",
+        "type": "string",
+        "value": null,
+        "label": "Path into the array (optional, dotted form like \"data.items\")",
+        "placeholder": "items"
       }
     ],
     "outputs": [
@@ -14385,7 +14392,7 @@
     ]
   },
   "google/sheets/append": {
-    "hash": "e57cde4d7be59a82d0fd138bb1ac09c9bdc8d35701219f00bb6b1e0f1a5185ad",
+    "hash": "4c5a72cd202e65a65950f176ec6ca8fa4e1d75a0f6ee9b8c666af9e15bdfaead",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Append to Sheet",
@@ -14423,9 +14430,9 @@
       },
       {
         "name": "data",
-        "type": "text",
+        "type": "rows",
         "value": null,
-        "label": "Data (JSON 2D array)",
+        "label": "Rows to append",
         "placeholder": "[[\"Alice\",30],[\"Bob\",25]]",
         "required": true
       },
@@ -20451,7 +20458,7 @@
     ]
   },
   "microsoft/excel/append_rows": {
-    "hash": "8aa4cc0cb70e9ec3a10a8b7de8f42cb194ffa5419a7416965c723b76ce5f23e2",
+    "hash": "d3f9692d75c7c7c8801036f6b77f2ae401f20d14153a28ff1574143db27c404e",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Append Rows",
@@ -20489,9 +20496,9 @@
       },
       {
         "name": "values",
-        "type": "text",
+        "type": "rows",
         "value": null,
-        "label": "Row Values (JSON 2D array)",
+        "label": "Rows to append",
         "placeholder": "[[\"Alice\",30],[\"Bob\",25]]",
         "required": true
       },

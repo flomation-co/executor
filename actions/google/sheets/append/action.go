@@ -25,7 +25,7 @@ const (
 var Inputs = [...]core.Connection{
 	{Name: "spreadsheet_id", Type: core.ConnectionTypeString, Label: "Spreadsheet ID", Required: true},
 	{Name: "range", Type: core.ConnectionTypeString, Label: "Sheet/Range", Required: true, Placeholder: "Sheet1"},
-	{Name: "data", Type: core.ConnectionTypeText, Label: "Data (JSON 2D array)", Required: true, Placeholder: `[["Alice",30],["Bob",25]]`},
+	{Name: "data", Type: core.ConnectionTypeRows, Label: "Rows to append", Required: true, Placeholder: `[["Alice",30],["Bob",25]]`},
 	{
 		Name:  "value_input",
 		Type:  core.ConnectionTypeString,
