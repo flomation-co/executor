@@ -289,6 +289,8 @@ func inspectPackage(dir string) map[string]ManifestEntry {
 										value = "datetime"
 									case "ConnectionTypeMultiSelect":
 										value = "multi_select"
+									case "ConnectionTypeRows":
+										value = "rows"
 									case "ConnectionTypeCredential":
 										value = "credential"
 									case "ConnectionTypeSecret":

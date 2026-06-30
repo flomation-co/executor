@@ -153,6 +153,16 @@ const (
 	ConnectionTypeKeyValueArray = "key_value_array"
 	ConnectionTypeDateTime      = "datetime"
 	ConnectionTypeMultiSelect   = "multi_select"
+	// ConnectionTypeRows renders a structured rows-of-cells widget
+	// in the editor: a + button adds rows, and each row carries a
+	// + button to add columns. Each cell is a VariableInput so it
+	// can hold literal text or a ${...} reference (or both).
+	// On the wire the value remains a JSON 2D string —
+	// `[["A","B"],["C","D"]]` — for compatibility with existing
+	// action parsers like google/sheets/append and
+	// microsoft/excel/append_rows that already json.Unmarshal the
+	// input into [][]interface{}.
+	ConnectionTypeRows = "rows"
 
 	// ConnectionTypeCredential / ConnectionTypeSecret are picker-only
 	// input types in the editor. They render a CredentialProperty
@@ -242,7 +252,8 @@ func (c *Connection) String() *string {
 	}
 
 	if c.Type == ConnectionTypeString || c.Type == ConnectionTypeText ||
-		c.Type == ConnectionTypeDateTime || c.Type == ConnectionTypeMultiSelect {
+		c.Type == ConnectionTypeDateTime || c.Type == ConnectionTypeMultiSelect ||
+		c.Type == ConnectionTypeRows {
 		if v, ok := c.Value.(string); ok {
 			return &v
 		}

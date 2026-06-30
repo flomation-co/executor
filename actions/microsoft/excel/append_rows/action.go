@@ -23,7 +23,7 @@ const (
 var Inputs = [...]core.Connection{
 	{Name: "item_id", Type: core.ConnectionTypeString, Label: "Workbook Item ID", Required: true},
 	{Name: "table_name", Type: core.ConnectionTypeString, Label: "Table Name", Required: true, Placeholder: "Table1"},
-	{Name: "values", Type: core.ConnectionTypeText, Label: "Row Values (JSON 2D array)", Required: true, Placeholder: "[[\"Alice\",30],[\"Bob\",25]]"},
+	{Name: "values", Type: core.ConnectionTypeRows, Label: "Rows to append", Required: true, Placeholder: "[[\"Alice\",30],[\"Bob\",25]]"},
 	{Name: "account", Type: core.ConnectionTypeString, Label: "Microsoft Account (email)"},
 	{Name: "credential", Type: core.ConnectionTypeCredential, Label: "Microsoft OAuth Credential", Placeholder: "${credentials.MICROSOFT_EXCEL}"},
 }
