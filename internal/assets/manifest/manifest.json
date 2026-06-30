@@ -15941,6 +15941,3219 @@
       }
     ]
   },
+  "hubspot/associations/associate": {
+    "hash": "55f6fe86a695ae45ccdc87d98399f16d0657feb987a160c956d1c6b8cc7119a7",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Associate Records",
+    "description": "Link two HubSpot records with the default association, e.g. attach a contact to a company or a deal. Direction is from -\u003e to.",
+    "website": "https://www.flomation.co",
+    "icon": "hubspot+link",
+    "date": "30/06/2026",
+    "type": 2,
+    "category": {
+      "name": "HubSpot",
+      "icon": "hubspot",
+      "description": "Manage contacts, companies, deals, and tickets in the HubSpot CRM"
+    },
+    "sub_category": {
+      "name": "Associations",
+      "icon": "hubspot+link",
+      "description": "Link and unlink HubSpot records (contacts, companies, deals, tickets)"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "HubSpot Private App Token",
+        "placeholder": "pat-...",
+        "required": true
+      },
+      {
+        "name": "from_object_type",
+        "type": "string",
+        "value": null,
+        "label": "From Object Type",
+        "placeholder": "contacts",
+        "required": true
+      },
+      {
+        "name": "from_id",
+        "type": "string",
+        "value": null,
+        "label": "From Record ID",
+        "placeholder": "12345",
+        "required": true
+      },
+      {
+        "name": "to_object_type",
+        "type": "string",
+        "value": null,
+        "label": "To Object Type",
+        "placeholder": "companies",
+        "required": true
+      },
+      {
+        "name": "to_id",
+        "type": "string",
+        "value": null,
+        "label": "To Record ID",
+        "placeholder": "67890",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Association",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "hubspot/associations/disassociate": {
+    "hash": "4bcee1994a87d1db35fee973bb41384b707c6b5419fa8ab3cca81289d8b450b5",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Disassociate Records",
+    "description": "Remove the association between two HubSpot records. Direction is from -\u003e to.",
+    "website": "https://www.flomation.co",
+    "icon": "hubspot+unlink",
+    "date": "30/06/2026",
+    "type": 2,
+    "category": {
+      "name": "HubSpot",
+      "icon": "hubspot",
+      "description": "Manage contacts, companies, deals, and tickets in the HubSpot CRM"
+    },
+    "sub_category": {
+      "name": "Associations",
+      "icon": "hubspot+link",
+      "description": "Link and unlink HubSpot records (contacts, companies, deals, tickets)"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "HubSpot Private App Token",
+        "placeholder": "pat-...",
+        "required": true
+      },
+      {
+        "name": "from_object_type",
+        "type": "string",
+        "value": null,
+        "label": "From Object Type",
+        "placeholder": "contacts",
+        "required": true
+      },
+      {
+        "name": "from_id",
+        "type": "string",
+        "value": null,
+        "label": "From Record ID",
+        "placeholder": "12345",
+        "required": true
+      },
+      {
+        "name": "to_object_type",
+        "type": "string",
+        "value": null,
+        "label": "To Object Type",
+        "placeholder": "companies",
+        "required": true
+      },
+      {
+        "name": "to_id",
+        "type": "string",
+        "value": null,
+        "label": "To Record ID",
+        "placeholder": "67890",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "hubspot/companies/create": {
+    "hash": "50db6087153255607af58e88c14a835e2fc5cf7908f4b355ba5d822295055a19",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Create Company",
+    "description": "Create a new company in HubSpot. Set common fields directly or add any other property via Additional Properties. Returns the company ID.",
+    "website": "https://www.flomation.co",
+    "icon": "hubspot+plus",
+    "date": "30/06/2026",
+    "type": 2,
+    "category": {
+      "name": "HubSpot",
+      "icon": "hubspot",
+      "description": "Manage contacts, companies, deals, and tickets in the HubSpot CRM"
+    },
+    "sub_category": {
+      "name": "Companies",
+      "icon": "hubspot+building",
+      "description": "Create, retrieve, update, search, and delete HubSpot companies"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "HubSpot Private App Token",
+        "placeholder": "pat-...",
+        "required": true
+      },
+      {
+        "name": "name",
+        "type": "string",
+        "value": null,
+        "label": "Name",
+        "placeholder": "Acme Inc"
+      },
+      {
+        "name": "domain",
+        "type": "string",
+        "value": null,
+        "label": "Domain",
+        "placeholder": "acme.com"
+      },
+      {
+        "name": "industry",
+        "type": "string",
+        "value": null,
+        "label": "Industry",
+        "placeholder": "COMPUTER_SOFTWARE"
+      },
+      {
+        "name": "phone",
+        "type": "string",
+        "value": null,
+        "label": "Phone",
+        "placeholder": "+1 555 0100"
+      },
+      {
+        "name": "city",
+        "type": "string",
+        "value": null,
+        "label": "City",
+        "placeholder": "London"
+      },
+      {
+        "name": "state",
+        "type": "string",
+        "value": null,
+        "label": "State/Region",
+        "placeholder": "England"
+      },
+      {
+        "name": "country",
+        "type": "string",
+        "value": null,
+        "label": "Country",
+        "placeholder": "United Kingdom"
+      },
+      {
+        "name": "website",
+        "type": "string",
+        "value": null,
+        "label": "Website",
+        "placeholder": "https://acme.com"
+      },
+      {
+        "name": "additional_properties",
+        "type": "key_value_array",
+        "value": null,
+        "label": "Additional Properties",
+        "placeholder": "Any other company property (key = HubSpot internal name)"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Company ID",
+        "placeholder": ""
+      },
+      {
+        "name": "properties",
+        "type": "object",
+        "value": null,
+        "label": "Properties",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Company",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "hubspot/companies/delete": {
+    "hash": "f21498ff8c773f09a35fa12166edac5f253390bb40e8aa3d5722bef0e0ae34e7",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Delete Company",
+    "description": "Archive (soft-delete) a HubSpot company by its ID.",
+    "website": "https://www.flomation.co",
+    "icon": "hubspot+trash",
+    "date": "30/06/2026",
+    "type": 2,
+    "category": {
+      "name": "HubSpot",
+      "icon": "hubspot",
+      "description": "Manage contacts, companies, deals, and tickets in the HubSpot CRM"
+    },
+    "sub_category": {
+      "name": "Companies",
+      "icon": "hubspot+building",
+      "description": "Create, retrieve, update, search, and delete HubSpot companies"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "HubSpot Private App Token",
+        "placeholder": "pat-...",
+        "required": true
+      },
+      {
+        "name": "company_id",
+        "type": "string",
+        "value": null,
+        "label": "Company ID",
+        "placeholder": "12345",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Company ID",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "hubspot/companies/get": {
+    "hash": "edaf602a49e7b6c5cb84fdf3a2e60db3bfd1a8af81edfe280ad15f53af8fa1b7",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Get Company",
+    "description": "Retrieve a HubSpot company by its ID. Optionally request specific properties and associated object types.",
+    "website": "https://www.flomation.co",
+    "icon": "hubspot+search",
+    "date": "30/06/2026",
+    "type": 2,
+    "category": {
+      "name": "HubSpot",
+      "icon": "hubspot",
+      "description": "Manage contacts, companies, deals, and tickets in the HubSpot CRM"
+    },
+    "sub_category": {
+      "name": "Companies",
+      "icon": "hubspot+building",
+      "description": "Create, retrieve, update, search, and delete HubSpot companies"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "HubSpot Private App Token",
+        "placeholder": "pat-...",
+        "required": true
+      },
+      {
+        "name": "company_id",
+        "type": "string",
+        "value": null,
+        "label": "Company ID",
+        "placeholder": "12345",
+        "required": true
+      },
+      {
+        "name": "properties",
+        "type": "string",
+        "value": null,
+        "label": "Properties",
+        "placeholder": "Comma-separated property names (optional)"
+      },
+      {
+        "name": "associations",
+        "type": "string",
+        "value": null,
+        "label": "Associations",
+        "placeholder": "Comma-separated object types, e.g. contacts,deals (optional)"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Company ID",
+        "placeholder": ""
+      },
+      {
+        "name": "properties",
+        "type": "object",
+        "value": null,
+        "label": "Properties",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Company",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "hubspot/companies/list": {
+    "hash": "e1976158ade19b02720c8504d81e80ac9b431f6e26fffadad642c68aab967419",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "List Companies",
+    "description": "List HubSpot companies a page at a time. Pass the returned After cursor to fetch the next page.",
+    "website": "https://www.flomation.co",
+    "icon": "hubspot+list",
+    "date": "30/06/2026",
+    "type": 2,
+    "category": {
+      "name": "HubSpot",
+      "icon": "hubspot",
+      "description": "Manage contacts, companies, deals, and tickets in the HubSpot CRM"
+    },
+    "sub_category": {
+      "name": "Companies",
+      "icon": "hubspot+building",
+      "description": "Create, retrieve, update, search, and delete HubSpot companies"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "HubSpot Private App Token",
+        "placeholder": "pat-...",
+        "required": true
+      },
+      {
+        "name": "limit",
+        "type": "integer",
+        "value": null,
+        "label": "Limit",
+        "placeholder": "100 (max)"
+      },
+      {
+        "name": "after",
+        "type": "string",
+        "value": null,
+        "label": "After (cursor)",
+        "placeholder": "Pagination cursor from a previous page"
+      },
+      {
+        "name": "properties",
+        "type": "string",
+        "value": null,
+        "label": "Properties",
+        "placeholder": "Comma-separated property names (optional)"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "results",
+        "type": "object",
+        "value": null,
+        "label": "Companies",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Count",
+        "placeholder": ""
+      },
+      {
+        "name": "after",
+        "type": "string",
+        "value": null,
+        "label": "Next Cursor",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Raw Response",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "hubspot/companies/search": {
+    "hash": "df47f33ba6f1a53becc38431d29ca57896f1f9d1664a7bf0d54d3620040b6667",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Search Companies",
+    "description": "Search HubSpot companies by free text or a property filter (e.g. domain EQ acme.com). Returns matching companies.",
+    "website": "https://www.flomation.co",
+    "icon": "hubspot+search",
+    "date": "30/06/2026",
+    "type": 2,
+    "category": {
+      "name": "HubSpot",
+      "icon": "hubspot",
+      "description": "Manage contacts, companies, deals, and tickets in the HubSpot CRM"
+    },
+    "sub_category": {
+      "name": "Companies",
+      "icon": "hubspot+building",
+      "description": "Create, retrieve, update, search, and delete HubSpot companies"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "HubSpot Private App Token",
+        "placeholder": "pat-...",
+        "required": true
+      },
+      {
+        "name": "query",
+        "type": "string",
+        "value": null,
+        "label": "Query",
+        "placeholder": "Free-text search (optional)"
+      },
+      {
+        "name": "filter_property",
+        "type": "string",
+        "value": null,
+        "label": "Filter Property",
+        "placeholder": "domain"
+      },
+      {
+        "name": "filter_operator",
+        "type": "string",
+        "value": null,
+        "label": "Filter Operator",
+        "placeholder": "EQ",
+        "options": [
+          {
+            "name": "Equals",
+            "value": "EQ"
+          },
+          {
+            "name": "Not equals",
+            "value": "NEQ"
+          },
+          {
+            "name": "Greater than",
+            "value": "GT"
+          },
+          {
+            "name": "Greater than or equal",
+            "value": "GTE"
+          },
+          {
+            "name": "Less than",
+            "value": "LT"
+          },
+          {
+            "name": "Less than or equal",
+            "value": "LTE"
+          },
+          {
+            "name": "Contains token",
+            "value": "CONTAINS_TOKEN"
+          },
+          {
+            "name": "Has property",
+            "value": "HAS_PROPERTY"
+          },
+          {
+            "name": "Has no property",
+            "value": "NOT_HAS_PROPERTY"
+          }
+        ]
+      },
+      {
+        "name": "filter_value",
+        "type": "string",
+        "value": null,
+        "label": "Filter Value",
+        "placeholder": "acme.com"
+      },
+      {
+        "name": "filter_groups",
+        "type": "object",
+        "value": null,
+        "label": "Filter Groups (advanced)",
+        "placeholder": "Raw HubSpot filterGroups array; overrides the simple filter"
+      },
+      {
+        "name": "properties",
+        "type": "string",
+        "value": null,
+        "label": "Properties",
+        "placeholder": "Comma-separated property names to return (optional)"
+      },
+      {
+        "name": "limit",
+        "type": "integer",
+        "value": null,
+        "label": "Limit",
+        "placeholder": "100"
+      },
+      {
+        "name": "after",
+        "type": "string",
+        "value": null,
+        "label": "After (cursor)",
+        "placeholder": "Pagination cursor from a previous page"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "results",
+        "type": "object",
+        "value": null,
+        "label": "Companies",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Count",
+        "placeholder": ""
+      },
+      {
+        "name": "after",
+        "type": "string",
+        "value": null,
+        "label": "Next Cursor",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Raw Response",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "hubspot/companies/update": {
+    "hash": "c6a8f7875e36318d26b4af1325630670f22460eab1d59816a4d2d35c84e1149b",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Update Company",
+    "description": "Update properties on an existing HubSpot company. Only the fields you set are changed.",
+    "website": "https://www.flomation.co",
+    "icon": "hubspot+pencil",
+    "date": "30/06/2026",
+    "type": 2,
+    "category": {
+      "name": "HubSpot",
+      "icon": "hubspot",
+      "description": "Manage contacts, companies, deals, and tickets in the HubSpot CRM"
+    },
+    "sub_category": {
+      "name": "Companies",
+      "icon": "hubspot+building",
+      "description": "Create, retrieve, update, search, and delete HubSpot companies"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "HubSpot Private App Token",
+        "placeholder": "pat-...",
+        "required": true
+      },
+      {
+        "name": "company_id",
+        "type": "string",
+        "value": null,
+        "label": "Company ID",
+        "placeholder": "12345",
+        "required": true
+      },
+      {
+        "name": "name",
+        "type": "string",
+        "value": null,
+        "label": "Name",
+        "placeholder": "Acme Inc"
+      },
+      {
+        "name": "domain",
+        "type": "string",
+        "value": null,
+        "label": "Domain",
+        "placeholder": "acme.com"
+      },
+      {
+        "name": "industry",
+        "type": "string",
+        "value": null,
+        "label": "Industry",
+        "placeholder": "COMPUTER_SOFTWARE"
+      },
+      {
+        "name": "phone",
+        "type": "string",
+        "value": null,
+        "label": "Phone",
+        "placeholder": "+1 555 0100"
+      },
+      {
+        "name": "city",
+        "type": "string",
+        "value": null,
+        "label": "City",
+        "placeholder": "London"
+      },
+      {
+        "name": "state",
+        "type": "string",
+        "value": null,
+        "label": "State/Region",
+        "placeholder": "England"
+      },
+      {
+        "name": "country",
+        "type": "string",
+        "value": null,
+        "label": "Country",
+        "placeholder": "United Kingdom"
+      },
+      {
+        "name": "website",
+        "type": "string",
+        "value": null,
+        "label": "Website",
+        "placeholder": "https://acme.com"
+      },
+      {
+        "name": "additional_properties",
+        "type": "key_value_array",
+        "value": null,
+        "label": "Additional Properties",
+        "placeholder": "Any other company property (key = HubSpot internal name)"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Company ID",
+        "placeholder": ""
+      },
+      {
+        "name": "properties",
+        "type": "object",
+        "value": null,
+        "label": "Properties",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Company",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "hubspot/contacts/create": {
+    "hash": "4483fab3161861e26fa7dd71dc839c7c3b510b1c724366893818dc8ed504f7f9",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Create Contact",
+    "description": "Create a new contact in HubSpot. Set common fields directly or add any other property via Additional Properties. Returns the contact ID.",
+    "website": "https://www.flomation.co",
+    "icon": "hubspot+plus",
+    "date": "30/06/2026",
+    "type": 2,
+    "category": {
+      "name": "HubSpot",
+      "icon": "hubspot",
+      "description": "Manage contacts, companies, deals, and tickets in the HubSpot CRM"
+    },
+    "sub_category": {
+      "name": "Contacts",
+      "icon": "hubspot+user",
+      "description": "Create, retrieve, update, search, and delete HubSpot contacts"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "HubSpot Private App Token",
+        "placeholder": "pat-...",
+        "required": true
+      },
+      {
+        "name": "email",
+        "type": "string",
+        "value": null,
+        "label": "Email",
+        "placeholder": "jane@example.com"
+      },
+      {
+        "name": "firstname",
+        "type": "string",
+        "value": null,
+        "label": "First Name",
+        "placeholder": "Jane"
+      },
+      {
+        "name": "lastname",
+        "type": "string",
+        "value": null,
+        "label": "Last Name",
+        "placeholder": "Doe"
+      },
+      {
+        "name": "phone",
+        "type": "string",
+        "value": null,
+        "label": "Phone",
+        "placeholder": "+1 555 0100"
+      },
+      {
+        "name": "company",
+        "type": "string",
+        "value": null,
+        "label": "Company",
+        "placeholder": "Acme Inc"
+      },
+      {
+        "name": "jobtitle",
+        "type": "string",
+        "value": null,
+        "label": "Job Title",
+        "placeholder": "Head of Sales"
+      },
+      {
+        "name": "website",
+        "type": "string",
+        "value": null,
+        "label": "Website",
+        "placeholder": "https://example.com"
+      },
+      {
+        "name": "additional_properties",
+        "type": "key_value_array",
+        "value": null,
+        "label": "Additional Properties",
+        "placeholder": "Any other contact property (key = HubSpot internal name)"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Contact ID",
+        "placeholder": ""
+      },
+      {
+        "name": "properties",
+        "type": "object",
+        "value": null,
+        "label": "Properties",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Contact",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "hubspot/contacts/delete": {
+    "hash": "5d4959dfccd8557134b49a1f4b757f4a7c403dbcfddc9b9f5b6bbd56211de681",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Delete Contact",
+    "description": "Archive (soft-delete) a HubSpot contact by its ID.",
+    "website": "https://www.flomation.co",
+    "icon": "hubspot+trash",
+    "date": "30/06/2026",
+    "type": 2,
+    "category": {
+      "name": "HubSpot",
+      "icon": "hubspot",
+      "description": "Manage contacts, companies, deals, and tickets in the HubSpot CRM"
+    },
+    "sub_category": {
+      "name": "Contacts",
+      "icon": "hubspot+user",
+      "description": "Create, retrieve, update, search, and delete HubSpot contacts"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "HubSpot Private App Token",
+        "placeholder": "pat-...",
+        "required": true
+      },
+      {
+        "name": "contact_id",
+        "type": "string",
+        "value": null,
+        "label": "Contact ID",
+        "placeholder": "12345",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Contact ID",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "hubspot/contacts/get": {
+    "hash": "2903560147e86b06c99e11c782f8c9a79f4765b6463e1b371dfa3ae363a41aa6",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Get Contact",
+    "description": "Retrieve a HubSpot contact by its ID. Optionally request specific properties and associated object types.",
+    "website": "https://www.flomation.co",
+    "icon": "hubspot+search",
+    "date": "30/06/2026",
+    "type": 2,
+    "category": {
+      "name": "HubSpot",
+      "icon": "hubspot",
+      "description": "Manage contacts, companies, deals, and tickets in the HubSpot CRM"
+    },
+    "sub_category": {
+      "name": "Contacts",
+      "icon": "hubspot+user",
+      "description": "Create, retrieve, update, search, and delete HubSpot contacts"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "HubSpot Private App Token",
+        "placeholder": "pat-...",
+        "required": true
+      },
+      {
+        "name": "contact_id",
+        "type": "string",
+        "value": null,
+        "label": "Contact ID",
+        "placeholder": "12345",
+        "required": true
+      },
+      {
+        "name": "properties",
+        "type": "string",
+        "value": null,
+        "label": "Properties",
+        "placeholder": "Comma-separated property names (optional)"
+      },
+      {
+        "name": "associations",
+        "type": "string",
+        "value": null,
+        "label": "Associations",
+        "placeholder": "Comma-separated object types, e.g. companies,deals (optional)"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Contact ID",
+        "placeholder": ""
+      },
+      {
+        "name": "properties",
+        "type": "object",
+        "value": null,
+        "label": "Properties",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Contact",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "hubspot/contacts/list": {
+    "hash": "1fc00bfbebcf2499c0cc114452bb4462cae7cbef90d37115c06966f7c37cb251",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "List Contacts",
+    "description": "List HubSpot contacts a page at a time. Pass the returned After cursor to fetch the next page.",
+    "website": "https://www.flomation.co",
+    "icon": "hubspot+list",
+    "date": "30/06/2026",
+    "type": 2,
+    "category": {
+      "name": "HubSpot",
+      "icon": "hubspot",
+      "description": "Manage contacts, companies, deals, and tickets in the HubSpot CRM"
+    },
+    "sub_category": {
+      "name": "Contacts",
+      "icon": "hubspot+user",
+      "description": "Create, retrieve, update, search, and delete HubSpot contacts"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "HubSpot Private App Token",
+        "placeholder": "pat-...",
+        "required": true
+      },
+      {
+        "name": "limit",
+        "type": "integer",
+        "value": null,
+        "label": "Limit",
+        "placeholder": "100 (max)"
+      },
+      {
+        "name": "after",
+        "type": "string",
+        "value": null,
+        "label": "After (cursor)",
+        "placeholder": "Pagination cursor from a previous page"
+      },
+      {
+        "name": "properties",
+        "type": "string",
+        "value": null,
+        "label": "Properties",
+        "placeholder": "Comma-separated property names (optional)"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "results",
+        "type": "object",
+        "value": null,
+        "label": "Contacts",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Count",
+        "placeholder": ""
+      },
+      {
+        "name": "after",
+        "type": "string",
+        "value": null,
+        "label": "Next Cursor",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Raw Response",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "hubspot/contacts/search": {
+    "hash": "6c57ca8aafe9c3ba96e274f9519609a688248abd2c54e02a69d84a4f2270027c",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Search Contacts",
+    "description": "Search HubSpot contacts by free text or a property filter (e.g. email EQ jane@example.com). Returns matching contacts.",
+    "website": "https://www.flomation.co",
+    "icon": "hubspot+search",
+    "date": "30/06/2026",
+    "type": 2,
+    "category": {
+      "name": "HubSpot",
+      "icon": "hubspot",
+      "description": "Manage contacts, companies, deals, and tickets in the HubSpot CRM"
+    },
+    "sub_category": {
+      "name": "Contacts",
+      "icon": "hubspot+user",
+      "description": "Create, retrieve, update, search, and delete HubSpot contacts"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "HubSpot Private App Token",
+        "placeholder": "pat-...",
+        "required": true
+      },
+      {
+        "name": "query",
+        "type": "string",
+        "value": null,
+        "label": "Query",
+        "placeholder": "Free-text search (optional)"
+      },
+      {
+        "name": "filter_property",
+        "type": "string",
+        "value": null,
+        "label": "Filter Property",
+        "placeholder": "email"
+      },
+      {
+        "name": "filter_operator",
+        "type": "string",
+        "value": null,
+        "label": "Filter Operator",
+        "placeholder": "EQ",
+        "options": [
+          {
+            "name": "Equals",
+            "value": "EQ"
+          },
+          {
+            "name": "Not equals",
+            "value": "NEQ"
+          },
+          {
+            "name": "Greater than",
+            "value": "GT"
+          },
+          {
+            "name": "Greater than or equal",
+            "value": "GTE"
+          },
+          {
+            "name": "Less than",
+            "value": "LT"
+          },
+          {
+            "name": "Less than or equal",
+            "value": "LTE"
+          },
+          {
+            "name": "Contains token",
+            "value": "CONTAINS_TOKEN"
+          },
+          {
+            "name": "Has property",
+            "value": "HAS_PROPERTY"
+          },
+          {
+            "name": "Has no property",
+            "value": "NOT_HAS_PROPERTY"
+          }
+        ]
+      },
+      {
+        "name": "filter_value",
+        "type": "string",
+        "value": null,
+        "label": "Filter Value",
+        "placeholder": "jane@example.com"
+      },
+      {
+        "name": "filter_groups",
+        "type": "object",
+        "value": null,
+        "label": "Filter Groups (advanced)",
+        "placeholder": "Raw HubSpot filterGroups array; overrides the simple filter"
+      },
+      {
+        "name": "properties",
+        "type": "string",
+        "value": null,
+        "label": "Properties",
+        "placeholder": "Comma-separated property names to return (optional)"
+      },
+      {
+        "name": "limit",
+        "type": "integer",
+        "value": null,
+        "label": "Limit",
+        "placeholder": "100"
+      },
+      {
+        "name": "after",
+        "type": "string",
+        "value": null,
+        "label": "After (cursor)",
+        "placeholder": "Pagination cursor from a previous page"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "results",
+        "type": "object",
+        "value": null,
+        "label": "Contacts",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Count",
+        "placeholder": ""
+      },
+      {
+        "name": "after",
+        "type": "string",
+        "value": null,
+        "label": "Next Cursor",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Raw Response",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "hubspot/contacts/update": {
+    "hash": "69a779f000eff3ff9da0290c3f1c64ba71a68dd3a55539f34ad2d5b0bcb2e4ad",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Update Contact",
+    "description": "Update properties on an existing HubSpot contact. Only the fields you set are changed.",
+    "website": "https://www.flomation.co",
+    "icon": "hubspot+pencil",
+    "date": "30/06/2026",
+    "type": 2,
+    "category": {
+      "name": "HubSpot",
+      "icon": "hubspot",
+      "description": "Manage contacts, companies, deals, and tickets in the HubSpot CRM"
+    },
+    "sub_category": {
+      "name": "Contacts",
+      "icon": "hubspot+user",
+      "description": "Create, retrieve, update, search, and delete HubSpot contacts"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "HubSpot Private App Token",
+        "placeholder": "pat-...",
+        "required": true
+      },
+      {
+        "name": "contact_id",
+        "type": "string",
+        "value": null,
+        "label": "Contact ID",
+        "placeholder": "12345",
+        "required": true
+      },
+      {
+        "name": "email",
+        "type": "string",
+        "value": null,
+        "label": "Email",
+        "placeholder": "jane@example.com"
+      },
+      {
+        "name": "firstname",
+        "type": "string",
+        "value": null,
+        "label": "First Name",
+        "placeholder": "Jane"
+      },
+      {
+        "name": "lastname",
+        "type": "string",
+        "value": null,
+        "label": "Last Name",
+        "placeholder": "Doe"
+      },
+      {
+        "name": "phone",
+        "type": "string",
+        "value": null,
+        "label": "Phone",
+        "placeholder": "+1 555 0100"
+      },
+      {
+        "name": "company",
+        "type": "string",
+        "value": null,
+        "label": "Company",
+        "placeholder": "Acme Inc"
+      },
+      {
+        "name": "jobtitle",
+        "type": "string",
+        "value": null,
+        "label": "Job Title",
+        "placeholder": "Head of Sales"
+      },
+      {
+        "name": "website",
+        "type": "string",
+        "value": null,
+        "label": "Website",
+        "placeholder": "https://example.com"
+      },
+      {
+        "name": "additional_properties",
+        "type": "key_value_array",
+        "value": null,
+        "label": "Additional Properties",
+        "placeholder": "Any other contact property (key = HubSpot internal name)"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Contact ID",
+        "placeholder": ""
+      },
+      {
+        "name": "properties",
+        "type": "object",
+        "value": null,
+        "label": "Properties",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Contact",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "hubspot/deals/create": {
+    "hash": "9cf656a7a2526b3fa239320a62b78f7b4e11b38cc537e523127161ed2dba53fa",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Create Deal",
+    "description": "Create a new deal in HubSpot. Set common fields directly or add any other property via Additional Properties. Returns the deal ID.",
+    "website": "https://www.flomation.co",
+    "icon": "hubspot+plus",
+    "date": "30/06/2026",
+    "type": 2,
+    "category": {
+      "name": "HubSpot",
+      "icon": "hubspot",
+      "description": "Manage contacts, companies, deals, and tickets in the HubSpot CRM"
+    },
+    "sub_category": {
+      "name": "Deals",
+      "icon": "hubspot+handshake",
+      "description": "Create, retrieve, update, search, and delete HubSpot deals"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "HubSpot Private App Token",
+        "placeholder": "pat-...",
+        "required": true
+      },
+      {
+        "name": "dealname",
+        "type": "string",
+        "value": null,
+        "label": "Deal Name",
+        "placeholder": "Acme - Q3 expansion"
+      },
+      {
+        "name": "amount",
+        "type": "string",
+        "value": null,
+        "label": "Amount",
+        "placeholder": "5000"
+      },
+      {
+        "name": "pipeline",
+        "type": "string",
+        "value": null,
+        "label": "Pipeline",
+        "placeholder": "default"
+      },
+      {
+        "name": "dealstage",
+        "type": "string",
+        "value": null,
+        "label": "Deal Stage",
+        "placeholder": "appointmentscheduled"
+      },
+      {
+        "name": "closedate",
+        "type": "string",
+        "value": null,
+        "label": "Close Date",
+        "placeholder": "2026-09-30 or epoch ms"
+      },
+      {
+        "name": "hubspot_owner_id",
+        "type": "string",
+        "value": null,
+        "label": "Owner ID",
+        "placeholder": "HubSpot owner ID (optional)"
+      },
+      {
+        "name": "additional_properties",
+        "type": "key_value_array",
+        "value": null,
+        "label": "Additional Properties",
+        "placeholder": "Any other deal property (key = HubSpot internal name)"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Deal ID",
+        "placeholder": ""
+      },
+      {
+        "name": "properties",
+        "type": "object",
+        "value": null,
+        "label": "Properties",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Deal",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "hubspot/deals/delete": {
+    "hash": "c135aec8ead20fcc57bb4b6a21ff5fe79e67c5912d5e2dcd4e6e7eb6c889ae0c",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Delete Deal",
+    "description": "Archive (soft-delete) a HubSpot deal by its ID.",
+    "website": "https://www.flomation.co",
+    "icon": "hubspot+trash",
+    "date": "30/06/2026",
+    "type": 2,
+    "category": {
+      "name": "HubSpot",
+      "icon": "hubspot",
+      "description": "Manage contacts, companies, deals, and tickets in the HubSpot CRM"
+    },
+    "sub_category": {
+      "name": "Deals",
+      "icon": "hubspot+handshake",
+      "description": "Create, retrieve, update, search, and delete HubSpot deals"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "HubSpot Private App Token",
+        "placeholder": "pat-...",
+        "required": true
+      },
+      {
+        "name": "deal_id",
+        "type": "string",
+        "value": null,
+        "label": "Deal ID",
+        "placeholder": "12345",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Deal ID",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "hubspot/deals/get": {
+    "hash": "a47556aad19a4aabed4a62f72358163c6a7b788cdb62476c32188d34b292dc5b",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Get Deal",
+    "description": "Retrieve a HubSpot deal by its ID. Optionally request specific properties and associated object types.",
+    "website": "https://www.flomation.co",
+    "icon": "hubspot+search",
+    "date": "30/06/2026",
+    "type": 2,
+    "category": {
+      "name": "HubSpot",
+      "icon": "hubspot",
+      "description": "Manage contacts, companies, deals, and tickets in the HubSpot CRM"
+    },
+    "sub_category": {
+      "name": "Deals",
+      "icon": "hubspot+handshake",
+      "description": "Create, retrieve, update, search, and delete HubSpot deals"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "HubSpot Private App Token",
+        "placeholder": "pat-...",
+        "required": true
+      },
+      {
+        "name": "deal_id",
+        "type": "string",
+        "value": null,
+        "label": "Deal ID",
+        "placeholder": "12345",
+        "required": true
+      },
+      {
+        "name": "properties",
+        "type": "string",
+        "value": null,
+        "label": "Properties",
+        "placeholder": "Comma-separated property names (optional)"
+      },
+      {
+        "name": "associations",
+        "type": "string",
+        "value": null,
+        "label": "Associations",
+        "placeholder": "Comma-separated object types, e.g. contacts,companies (optional)"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Deal ID",
+        "placeholder": ""
+      },
+      {
+        "name": "properties",
+        "type": "object",
+        "value": null,
+        "label": "Properties",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Deal",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "hubspot/deals/list": {
+    "hash": "f8b6311d9df1df2f59d4d5969685b49245cdc0c2cc4a3ac1feddd7c3d3e859f8",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "List Deals",
+    "description": "List HubSpot deals a page at a time. Pass the returned After cursor to fetch the next page.",
+    "website": "https://www.flomation.co",
+    "icon": "hubspot+list",
+    "date": "30/06/2026",
+    "type": 2,
+    "category": {
+      "name": "HubSpot",
+      "icon": "hubspot",
+      "description": "Manage contacts, companies, deals, and tickets in the HubSpot CRM"
+    },
+    "sub_category": {
+      "name": "Deals",
+      "icon": "hubspot+handshake",
+      "description": "Create, retrieve, update, search, and delete HubSpot deals"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "HubSpot Private App Token",
+        "placeholder": "pat-...",
+        "required": true
+      },
+      {
+        "name": "limit",
+        "type": "integer",
+        "value": null,
+        "label": "Limit",
+        "placeholder": "100 (max)"
+      },
+      {
+        "name": "after",
+        "type": "string",
+        "value": null,
+        "label": "After (cursor)",
+        "placeholder": "Pagination cursor from a previous page"
+      },
+      {
+        "name": "properties",
+        "type": "string",
+        "value": null,
+        "label": "Properties",
+        "placeholder": "Comma-separated property names (optional)"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "results",
+        "type": "object",
+        "value": null,
+        "label": "Deals",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Count",
+        "placeholder": ""
+      },
+      {
+        "name": "after",
+        "type": "string",
+        "value": null,
+        "label": "Next Cursor",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Raw Response",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "hubspot/deals/search": {
+    "hash": "7d8b91ee4c7c18751ba0624be1d7da9c6299945d406720e264995aecf5c153bb",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Search Deals",
+    "description": "Search HubSpot deals by free text or a property filter (e.g. dealstage EQ closedwon). Returns matching deals.",
+    "website": "https://www.flomation.co",
+    "icon": "hubspot+search",
+    "date": "30/06/2026",
+    "type": 2,
+    "category": {
+      "name": "HubSpot",
+      "icon": "hubspot",
+      "description": "Manage contacts, companies, deals, and tickets in the HubSpot CRM"
+    },
+    "sub_category": {
+      "name": "Deals",
+      "icon": "hubspot+handshake",
+      "description": "Create, retrieve, update, search, and delete HubSpot deals"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "HubSpot Private App Token",
+        "placeholder": "pat-...",
+        "required": true
+      },
+      {
+        "name": "query",
+        "type": "string",
+        "value": null,
+        "label": "Query",
+        "placeholder": "Free-text search (optional)"
+      },
+      {
+        "name": "filter_property",
+        "type": "string",
+        "value": null,
+        "label": "Filter Property",
+        "placeholder": "dealstage"
+      },
+      {
+        "name": "filter_operator",
+        "type": "string",
+        "value": null,
+        "label": "Filter Operator",
+        "placeholder": "EQ",
+        "options": [
+          {
+            "name": "Equals",
+            "value": "EQ"
+          },
+          {
+            "name": "Not equals",
+            "value": "NEQ"
+          },
+          {
+            "name": "Greater than",
+            "value": "GT"
+          },
+          {
+            "name": "Greater than or equal",
+            "value": "GTE"
+          },
+          {
+            "name": "Less than",
+            "value": "LT"
+          },
+          {
+            "name": "Less than or equal",
+            "value": "LTE"
+          },
+          {
+            "name": "Contains token",
+            "value": "CONTAINS_TOKEN"
+          },
+          {
+            "name": "Has property",
+            "value": "HAS_PROPERTY"
+          },
+          {
+            "name": "Has no property",
+            "value": "NOT_HAS_PROPERTY"
+          }
+        ]
+      },
+      {
+        "name": "filter_value",
+        "type": "string",
+        "value": null,
+        "label": "Filter Value",
+        "placeholder": "closedwon"
+      },
+      {
+        "name": "filter_groups",
+        "type": "object",
+        "value": null,
+        "label": "Filter Groups (advanced)",
+        "placeholder": "Raw HubSpot filterGroups array; overrides the simple filter"
+      },
+      {
+        "name": "properties",
+        "type": "string",
+        "value": null,
+        "label": "Properties",
+        "placeholder": "Comma-separated property names to return (optional)"
+      },
+      {
+        "name": "limit",
+        "type": "integer",
+        "value": null,
+        "label": "Limit",
+        "placeholder": "100"
+      },
+      {
+        "name": "after",
+        "type": "string",
+        "value": null,
+        "label": "After (cursor)",
+        "placeholder": "Pagination cursor from a previous page"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "results",
+        "type": "object",
+        "value": null,
+        "label": "Deals",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Count",
+        "placeholder": ""
+      },
+      {
+        "name": "after",
+        "type": "string",
+        "value": null,
+        "label": "Next Cursor",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Raw Response",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "hubspot/deals/update": {
+    "hash": "a8df1f06a33690337dd32d5e596292a82a42c18d27418d251fde267cf03109c2",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Update Deal",
+    "description": "Update properties on an existing HubSpot deal. Only the fields you set are changed.",
+    "website": "https://www.flomation.co",
+    "icon": "hubspot+pencil",
+    "date": "30/06/2026",
+    "type": 2,
+    "category": {
+      "name": "HubSpot",
+      "icon": "hubspot",
+      "description": "Manage contacts, companies, deals, and tickets in the HubSpot CRM"
+    },
+    "sub_category": {
+      "name": "Deals",
+      "icon": "hubspot+handshake",
+      "description": "Create, retrieve, update, search, and delete HubSpot deals"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "HubSpot Private App Token",
+        "placeholder": "pat-...",
+        "required": true
+      },
+      {
+        "name": "deal_id",
+        "type": "string",
+        "value": null,
+        "label": "Deal ID",
+        "placeholder": "12345",
+        "required": true
+      },
+      {
+        "name": "dealname",
+        "type": "string",
+        "value": null,
+        "label": "Deal Name",
+        "placeholder": "Acme - Q3 expansion"
+      },
+      {
+        "name": "amount",
+        "type": "string",
+        "value": null,
+        "label": "Amount",
+        "placeholder": "5000"
+      },
+      {
+        "name": "pipeline",
+        "type": "string",
+        "value": null,
+        "label": "Pipeline",
+        "placeholder": "default"
+      },
+      {
+        "name": "dealstage",
+        "type": "string",
+        "value": null,
+        "label": "Deal Stage",
+        "placeholder": "closedwon"
+      },
+      {
+        "name": "closedate",
+        "type": "string",
+        "value": null,
+        "label": "Close Date",
+        "placeholder": "2026-09-30 or epoch ms"
+      },
+      {
+        "name": "hubspot_owner_id",
+        "type": "string",
+        "value": null,
+        "label": "Owner ID",
+        "placeholder": "HubSpot owner ID (optional)"
+      },
+      {
+        "name": "additional_properties",
+        "type": "key_value_array",
+        "value": null,
+        "label": "Additional Properties",
+        "placeholder": "Any other deal property (key = HubSpot internal name)"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Deal ID",
+        "placeholder": ""
+      },
+      {
+        "name": "properties",
+        "type": "object",
+        "value": null,
+        "label": "Properties",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Deal",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "hubspot/lists/add_contact": {
+    "hash": "f8e4baff29bd210f7379d2eebcd7bf8e7c1889ebb881e5f2aea33284a0dc5311",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Add Contacts to List",
+    "description": "Add contacts to a HubSpot static list by contact ID and/or email address. Only works on static (not dynamic) lists.",
+    "website": "https://www.flomation.co",
+    "icon": "hubspot+list",
+    "date": "30/06/2026",
+    "type": 2,
+    "category": {
+      "name": "HubSpot",
+      "icon": "hubspot",
+      "description": "Manage contacts, companies, deals, and tickets in the HubSpot CRM"
+    },
+    "sub_category": {
+      "name": "Lists",
+      "icon": "hubspot+list",
+      "description": "Add and remove contacts on HubSpot static contact lists"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "HubSpot Private App Token",
+        "placeholder": "pat-...",
+        "required": true
+      },
+      {
+        "name": "list_id",
+        "type": "string",
+        "value": null,
+        "label": "List ID",
+        "placeholder": "Static list ID",
+        "required": true
+      },
+      {
+        "name": "contact_ids",
+        "type": "string",
+        "value": null,
+        "label": "Contact IDs",
+        "placeholder": "Comma-separated contact IDs (vids)"
+      },
+      {
+        "name": "emails",
+        "type": "string",
+        "value": null,
+        "label": "Emails",
+        "placeholder": "Comma-separated email addresses"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Raw Response",
+        "placeholder": ""
+      },
+      {
+        "name": "updated",
+        "type": "object",
+        "value": null,
+        "label": "Updated Contact IDs",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "hubspot/lists/remove_contact": {
+    "hash": "39a58fd64f7284bb6a82e5791add8c5ba03897407e1712ad7152c0b4d4d2155e",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Remove Contacts from List",
+    "description": "Remove contacts from a HubSpot static list by contact ID. Only works on static (not dynamic) lists.",
+    "website": "https://www.flomation.co",
+    "icon": "hubspot+list",
+    "date": "30/06/2026",
+    "type": 2,
+    "category": {
+      "name": "HubSpot",
+      "icon": "hubspot",
+      "description": "Manage contacts, companies, deals, and tickets in the HubSpot CRM"
+    },
+    "sub_category": {
+      "name": "Lists",
+      "icon": "hubspot+list",
+      "description": "Add and remove contacts on HubSpot static contact lists"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "HubSpot Private App Token",
+        "placeholder": "pat-...",
+        "required": true
+      },
+      {
+        "name": "list_id",
+        "type": "string",
+        "value": null,
+        "label": "List ID",
+        "placeholder": "Static list ID",
+        "required": true
+      },
+      {
+        "name": "contact_ids",
+        "type": "string",
+        "value": null,
+        "label": "Contact IDs",
+        "placeholder": "Comma-separated contact IDs (vids)",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Raw Response",
+        "placeholder": ""
+      },
+      {
+        "name": "updated",
+        "type": "object",
+        "value": null,
+        "label": "Updated Contact IDs",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "hubspot/tickets/create": {
+    "hash": "32e5da4757369a2493b8a2f59f8239a6360fd50c5357adfb7c8b9138a9098a11",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Create Ticket",
+    "description": "Create a new support ticket in HubSpot. Set common fields directly or add any other property via Additional Properties. Returns the ticket ID.",
+    "website": "https://www.flomation.co",
+    "icon": "hubspot+plus",
+    "date": "30/06/2026",
+    "type": 2,
+    "category": {
+      "name": "HubSpot",
+      "icon": "hubspot",
+      "description": "Manage contacts, companies, deals, and tickets in the HubSpot CRM"
+    },
+    "sub_category": {
+      "name": "Tickets",
+      "icon": "hubspot+ticket",
+      "description": "Create, retrieve, update, search, and delete HubSpot tickets"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "HubSpot Private App Token",
+        "placeholder": "pat-...",
+        "required": true
+      },
+      {
+        "name": "subject",
+        "type": "string",
+        "value": null,
+        "label": "Subject",
+        "placeholder": "Cannot log in"
+      },
+      {
+        "name": "content",
+        "type": "text",
+        "value": null,
+        "label": "Content",
+        "placeholder": "Description of the issue"
+      },
+      {
+        "name": "hs_pipeline",
+        "type": "string",
+        "value": null,
+        "label": "Pipeline",
+        "placeholder": "0 (Support Pipeline)"
+      },
+      {
+        "name": "hs_pipeline_stage",
+        "type": "string",
+        "value": null,
+        "label": "Pipeline Stage",
+        "placeholder": "1 (New)"
+      },
+      {
+        "name": "hs_ticket_priority",
+        "type": "string",
+        "value": null,
+        "label": "Priority",
+        "placeholder": "HIGH",
+        "options": [
+          {
+            "name": "Low",
+            "value": "LOW"
+          },
+          {
+            "name": "Medium",
+            "value": "MEDIUM"
+          },
+          {
+            "name": "High",
+            "value": "HIGH"
+          }
+        ]
+      },
+      {
+        "name": "additional_properties",
+        "type": "key_value_array",
+        "value": null,
+        "label": "Additional Properties",
+        "placeholder": "Any other ticket property (key = HubSpot internal name)"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Ticket ID",
+        "placeholder": ""
+      },
+      {
+        "name": "properties",
+        "type": "object",
+        "value": null,
+        "label": "Properties",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Ticket",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "hubspot/tickets/delete": {
+    "hash": "d540ea76d249e915d6a56dda84770c809a47e8c250cff4464f8281a5201e0811",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Delete Ticket",
+    "description": "Archive (soft-delete) a HubSpot ticket by its ID.",
+    "website": "https://www.flomation.co",
+    "icon": "hubspot+trash",
+    "date": "30/06/2026",
+    "type": 2,
+    "category": {
+      "name": "HubSpot",
+      "icon": "hubspot",
+      "description": "Manage contacts, companies, deals, and tickets in the HubSpot CRM"
+    },
+    "sub_category": {
+      "name": "Tickets",
+      "icon": "hubspot+ticket",
+      "description": "Create, retrieve, update, search, and delete HubSpot tickets"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "HubSpot Private App Token",
+        "placeholder": "pat-...",
+        "required": true
+      },
+      {
+        "name": "ticket_id",
+        "type": "string",
+        "value": null,
+        "label": "Ticket ID",
+        "placeholder": "12345",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Ticket ID",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "hubspot/tickets/get": {
+    "hash": "dc9419f38e8230ade4c349b6e1484eff0428298639d0b70f0fd99594a1213297",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Get Ticket",
+    "description": "Retrieve a HubSpot ticket by its ID. Optionally request specific properties and associated object types.",
+    "website": "https://www.flomation.co",
+    "icon": "hubspot+search",
+    "date": "30/06/2026",
+    "type": 2,
+    "category": {
+      "name": "HubSpot",
+      "icon": "hubspot",
+      "description": "Manage contacts, companies, deals, and tickets in the HubSpot CRM"
+    },
+    "sub_category": {
+      "name": "Tickets",
+      "icon": "hubspot+ticket",
+      "description": "Create, retrieve, update, search, and delete HubSpot tickets"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "HubSpot Private App Token",
+        "placeholder": "pat-...",
+        "required": true
+      },
+      {
+        "name": "ticket_id",
+        "type": "string",
+        "value": null,
+        "label": "Ticket ID",
+        "placeholder": "12345",
+        "required": true
+      },
+      {
+        "name": "properties",
+        "type": "string",
+        "value": null,
+        "label": "Properties",
+        "placeholder": "Comma-separated property names (optional)"
+      },
+      {
+        "name": "associations",
+        "type": "string",
+        "value": null,
+        "label": "Associations",
+        "placeholder": "Comma-separated object types, e.g. contacts,companies (optional)"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Ticket ID",
+        "placeholder": ""
+      },
+      {
+        "name": "properties",
+        "type": "object",
+        "value": null,
+        "label": "Properties",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Ticket",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "hubspot/tickets/list": {
+    "hash": "c8844aaf6df445d4a8201c00fdaa3336c0862114156316f78c153f382281142c",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "List Tickets",
+    "description": "List HubSpot tickets a page at a time. Pass the returned After cursor to fetch the next page.",
+    "website": "https://www.flomation.co",
+    "icon": "hubspot+list",
+    "date": "30/06/2026",
+    "type": 2,
+    "category": {
+      "name": "HubSpot",
+      "icon": "hubspot",
+      "description": "Manage contacts, companies, deals, and tickets in the HubSpot CRM"
+    },
+    "sub_category": {
+      "name": "Tickets",
+      "icon": "hubspot+ticket",
+      "description": "Create, retrieve, update, search, and delete HubSpot tickets"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "HubSpot Private App Token",
+        "placeholder": "pat-...",
+        "required": true
+      },
+      {
+        "name": "limit",
+        "type": "integer",
+        "value": null,
+        "label": "Limit",
+        "placeholder": "100 (max)"
+      },
+      {
+        "name": "after",
+        "type": "string",
+        "value": null,
+        "label": "After (cursor)",
+        "placeholder": "Pagination cursor from a previous page"
+      },
+      {
+        "name": "properties",
+        "type": "string",
+        "value": null,
+        "label": "Properties",
+        "placeholder": "Comma-separated property names (optional)"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "results",
+        "type": "object",
+        "value": null,
+        "label": "Tickets",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Count",
+        "placeholder": ""
+      },
+      {
+        "name": "after",
+        "type": "string",
+        "value": null,
+        "label": "Next Cursor",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Raw Response",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "hubspot/tickets/search": {
+    "hash": "42ac3fcfd34c5821a2d31b7ebbab2d407e2c0c2ab6c4e889057dc30699973113",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Search Tickets",
+    "description": "Search HubSpot tickets by free text or a property filter (e.g. hs_ticket_priority EQ HIGH). Returns matching tickets.",
+    "website": "https://www.flomation.co",
+    "icon": "hubspot+search",
+    "date": "30/06/2026",
+    "type": 2,
+    "category": {
+      "name": "HubSpot",
+      "icon": "hubspot",
+      "description": "Manage contacts, companies, deals, and tickets in the HubSpot CRM"
+    },
+    "sub_category": {
+      "name": "Tickets",
+      "icon": "hubspot+ticket",
+      "description": "Create, retrieve, update, search, and delete HubSpot tickets"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "HubSpot Private App Token",
+        "placeholder": "pat-...",
+        "required": true
+      },
+      {
+        "name": "query",
+        "type": "string",
+        "value": null,
+        "label": "Query",
+        "placeholder": "Free-text search (optional)"
+      },
+      {
+        "name": "filter_property",
+        "type": "string",
+        "value": null,
+        "label": "Filter Property",
+        "placeholder": "hs_ticket_priority"
+      },
+      {
+        "name": "filter_operator",
+        "type": "string",
+        "value": null,
+        "label": "Filter Operator",
+        "placeholder": "EQ",
+        "options": [
+          {
+            "name": "Equals",
+            "value": "EQ"
+          },
+          {
+            "name": "Not equals",
+            "value": "NEQ"
+          },
+          {
+            "name": "Greater than",
+            "value": "GT"
+          },
+          {
+            "name": "Greater than or equal",
+            "value": "GTE"
+          },
+          {
+            "name": "Less than",
+            "value": "LT"
+          },
+          {
+            "name": "Less than or equal",
+            "value": "LTE"
+          },
+          {
+            "name": "Contains token",
+            "value": "CONTAINS_TOKEN"
+          },
+          {
+            "name": "Has property",
+            "value": "HAS_PROPERTY"
+          },
+          {
+            "name": "Has no property",
+            "value": "NOT_HAS_PROPERTY"
+          }
+        ]
+      },
+      {
+        "name": "filter_value",
+        "type": "string",
+        "value": null,
+        "label": "Filter Value",
+        "placeholder": "HIGH"
+      },
+      {
+        "name": "filter_groups",
+        "type": "object",
+        "value": null,
+        "label": "Filter Groups (advanced)",
+        "placeholder": "Raw HubSpot filterGroups array; overrides the simple filter"
+      },
+      {
+        "name": "properties",
+        "type": "string",
+        "value": null,
+        "label": "Properties",
+        "placeholder": "Comma-separated property names to return (optional)"
+      },
+      {
+        "name": "limit",
+        "type": "integer",
+        "value": null,
+        "label": "Limit",
+        "placeholder": "100"
+      },
+      {
+        "name": "after",
+        "type": "string",
+        "value": null,
+        "label": "After (cursor)",
+        "placeholder": "Pagination cursor from a previous page"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "results",
+        "type": "object",
+        "value": null,
+        "label": "Tickets",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Count",
+        "placeholder": ""
+      },
+      {
+        "name": "after",
+        "type": "string",
+        "value": null,
+        "label": "Next Cursor",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Raw Response",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "hubspot/tickets/update": {
+    "hash": "136f7ab9025dd82a438a0e64313c42b3a405b91d608ac64d434a31baac6f93e3",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Update Ticket",
+    "description": "Update properties on an existing HubSpot ticket. Only the fields you set are changed.",
+    "website": "https://www.flomation.co",
+    "icon": "hubspot+pencil",
+    "date": "30/06/2026",
+    "type": 2,
+    "category": {
+      "name": "HubSpot",
+      "icon": "hubspot",
+      "description": "Manage contacts, companies, deals, and tickets in the HubSpot CRM"
+    },
+    "sub_category": {
+      "name": "Tickets",
+      "icon": "hubspot+ticket",
+      "description": "Create, retrieve, update, search, and delete HubSpot tickets"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "HubSpot Private App Token",
+        "placeholder": "pat-...",
+        "required": true
+      },
+      {
+        "name": "ticket_id",
+        "type": "string",
+        "value": null,
+        "label": "Ticket ID",
+        "placeholder": "12345",
+        "required": true
+      },
+      {
+        "name": "subject",
+        "type": "string",
+        "value": null,
+        "label": "Subject",
+        "placeholder": "Cannot log in"
+      },
+      {
+        "name": "content",
+        "type": "text",
+        "value": null,
+        "label": "Content",
+        "placeholder": "Description of the issue"
+      },
+      {
+        "name": "hs_pipeline",
+        "type": "string",
+        "value": null,
+        "label": "Pipeline",
+        "placeholder": "0 (Support Pipeline)"
+      },
+      {
+        "name": "hs_pipeline_stage",
+        "type": "string",
+        "value": null,
+        "label": "Pipeline Stage",
+        "placeholder": "4 (Closed)"
+      },
+      {
+        "name": "hs_ticket_priority",
+        "type": "string",
+        "value": null,
+        "label": "Priority",
+        "placeholder": "HIGH",
+        "options": [
+          {
+            "name": "Low",
+            "value": "LOW"
+          },
+          {
+            "name": "Medium",
+            "value": "MEDIUM"
+          },
+          {
+            "name": "High",
+            "value": "HIGH"
+          }
+        ]
+      },
+      {
+        "name": "additional_properties",
+        "type": "key_value_array",
+        "value": null,
+        "label": "Additional Properties",
+        "placeholder": "Any other ticket property (key = HubSpot internal name)"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Ticket ID",
+        "placeholder": ""
+      },
+      {
+        "name": "properties",
+        "type": "object",
+        "value": null,
+        "label": "Properties",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Ticket",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
   "journey/calculate_route": {
     "hash": "0c7c157d38caaea6e48ce5992e6d571dbca8c145a4f0b36e1e0fec8758c489fe",
     "author": "Andy Esser",
@@ -33267,6 +36480,110 @@
         "type": "string",
         "value": null,
         "label": "Folder ID",
+        "placeholder": ""
+      }
+    ]
+  },
+  "trigger/hubspot_webhook": {
+    "hash": "a70de399a92214e77e4cce8f69e6842d0b2db58506041301fb1773bab8db3f22",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "HubSpot Webhook Trigger",
+    "description": "Triggers a flow when a HubSpot webhook event is received (contact/company/deal/ticket creation, deletion, or property change).",
+    "website": "https://www.flomation.co",
+    "icon": "hubspot",
+    "date": "30/06/2026",
+    "type": 1,
+    "category": {
+      "name": "Triggers",
+      "icon": "bolt-lightning",
+      "description": "Start a Flow"
+    },
+    "inputs": [
+      {
+        "name": "app_secret",
+        "type": "secret",
+        "value": null,
+        "label": "App Secret",
+        "placeholder": "Client secret for X-HubSpot-Signature validation"
+      },
+      {
+        "name": "event_filter",
+        "type": "string",
+        "value": null,
+        "label": "Event Filter",
+        "placeholder": "Comma-separated: contact.creation,deal.propertyChange,ticket.creation"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "content",
+        "type": "string",
+        "value": null,
+        "label": "Event Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "event_type",
+        "type": "string",
+        "value": null,
+        "label": "Subscription Type",
+        "placeholder": ""
+      },
+      {
+        "name": "object_id",
+        "type": "string",
+        "value": null,
+        "label": "Object ID",
+        "placeholder": ""
+      },
+      {
+        "name": "property_name",
+        "type": "string",
+        "value": null,
+        "label": "Property Name",
+        "placeholder": ""
+      },
+      {
+        "name": "property_value",
+        "type": "string",
+        "value": null,
+        "label": "Property Value",
+        "placeholder": ""
+      },
+      {
+        "name": "change_source",
+        "type": "string",
+        "value": null,
+        "label": "Change Source",
+        "placeholder": ""
+      },
+      {
+        "name": "portal_id",
+        "type": "string",
+        "value": null,
+        "label": "Portal ID",
+        "placeholder": ""
+      },
+      {
+        "name": "occurred_at",
+        "type": "string",
+        "value": null,
+        "label": "Occurred At",
+        "placeholder": ""
+      },
+      {
+        "name": "body",
+        "type": "string",
+        "value": null,
+        "label": "Raw JSON Body",
+        "placeholder": ""
+      },
+      {
+        "name": "triggered_at",
+        "type": "string",
+        "value": null,
+        "label": "Triggered At",
         "placeholder": ""
       }
     ]
