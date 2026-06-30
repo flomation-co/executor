@@ -4428,7 +4428,7 @@
     "date": "24/06/2026",
     "type": 2,
     "category": {
-      "name": "Databricks",
+      "name": "Data Warehouse",
       "icon": "database",
       "description": "Run SQL and orchestrate jobs against a Databricks lakehouse"
     },
@@ -4493,7 +4493,7 @@
     "date": "24/06/2026",
     "type": 2,
     "category": {
-      "name": "Databricks",
+      "name": "Data Warehouse",
       "icon": "database",
       "description": "Run SQL and orchestrate jobs against a Databricks lakehouse"
     },
@@ -4558,7 +4558,7 @@
     "date": "24/06/2026",
     "type": 2,
     "category": {
-      "name": "Databricks",
+      "name": "Data Warehouse",
       "icon": "database",
       "description": "Run SQL and orchestrate jobs against a Databricks lakehouse"
     },
@@ -4637,7 +4637,7 @@
     "date": "24/06/2026",
     "type": 2,
     "category": {
-      "name": "Databricks",
+      "name": "Data Warehouse",
       "icon": "database",
       "description": "Run SQL and orchestrate jobs against a Databricks lakehouse"
     },
@@ -4730,7 +4730,7 @@
     "date": "24/06/2026",
     "type": 2,
     "category": {
-      "name": "Databricks",
+      "name": "Data Warehouse",
       "icon": "database",
       "description": "Run SQL and orchestrate jobs against a Databricks lakehouse"
     },
@@ -4823,7 +4823,7 @@
     "date": "25/06/2026",
     "type": 2,
     "category": {
-      "name": "Databricks",
+      "name": "Data Warehouse",
       "icon": "database",
       "description": "Run SQL and orchestrate jobs against a Databricks lakehouse"
     },
@@ -4917,7 +4917,7 @@
     "date": "24/06/2026",
     "type": 2,
     "category": {
-      "name": "Databricks",
+      "name": "Data Warehouse",
       "icon": "database",
       "description": "Run SQL and orchestrate jobs against a Databricks lakehouse"
     },
@@ -5010,7 +5010,7 @@
     "date": "24/06/2026",
     "type": 2,
     "category": {
-      "name": "Databricks",
+      "name": "Data Warehouse",
       "icon": "database",
       "description": "Run SQL and orchestrate jobs against a Databricks lakehouse"
     },
@@ -5109,7 +5109,7 @@
     "date": "24/06/2026",
     "type": 2,
     "category": {
-      "name": "Databricks",
+      "name": "Data Warehouse",
       "icon": "database",
       "description": "Run SQL and orchestrate jobs against a Databricks lakehouse"
     },
@@ -5202,7 +5202,7 @@
     "date": "24/06/2026",
     "type": 2,
     "category": {
-      "name": "Databricks",
+      "name": "Data Warehouse",
       "icon": "database",
       "description": "Run SQL and orchestrate jobs against a Databricks lakehouse"
     },
@@ -5303,7 +5303,7 @@
     "date": "24/06/2026",
     "type": 2,
     "category": {
-      "name": "Databricks",
+      "name": "Data Warehouse",
       "icon": "database",
       "description": "Run SQL and orchestrate jobs against a Databricks lakehouse"
     },
@@ -26585,7 +26585,7 @@
     "date": "18/06/2026",
     "type": 2,
     "category": {
-      "name": "OpenTofu",
+      "name": "Infrastructure",
       "icon": "box+gears",
       "description": "Infrastructure as Code — run OpenTofu (Terraform-compatible) plan, apply, and destroy against a remote backend."
     },
@@ -26936,7 +26936,7 @@
     "date": "18/06/2026",
     "type": 2,
     "category": {
-      "name": "OpenTofu",
+      "name": "Infrastructure",
       "icon": "box+gears",
       "description": "Infrastructure as Code — run OpenTofu (Terraform-compatible) plan, apply, and destroy against a remote backend."
     },
@@ -27287,7 +27287,7 @@
     "date": "18/06/2026",
     "type": 2,
     "category": {
-      "name": "OpenTofu",
+      "name": "Infrastructure",
       "icon": "box+gears",
       "description": "Infrastructure as Code — run OpenTofu (Terraform-compatible) plan, apply, and destroy against a remote backend."
     },
