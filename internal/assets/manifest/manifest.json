@@ -15941,11 +15941,11 @@
       }
     ]
   },
-  "hubspot/associations/associate": {
-    "hash": "55f6fe86a695ae45ccdc87d98399f16d0657feb987a160c956d1c6b8cc7119a7",
+  "hubspot/associate": {
+    "hash": "58e66113e7821682d95f9e4f2e89173a1576343be904c961404303210441086d",
     "author": "Dave McElin",
     "organisation": "Flomation",
-    "name": "Associate Records",
+    "name": "Association: Link Records",
     "description": "Link two HubSpot records with the default association, e.g. attach a contact to a company or a deal. Direction is from -\u003e to.",
     "website": "https://www.flomation.co",
     "icon": "hubspot+link",
@@ -15955,11 +15955,6 @@
       "name": "HubSpot",
       "icon": "hubspot",
       "description": "Manage contacts, companies, deals, and tickets in the HubSpot CRM"
-    },
-    "sub_category": {
-      "name": "Associations",
-      "icon": "hubspot+link",
-      "description": "Link and unlink HubSpot records (contacts, companies, deals, tickets)"
     },
     "inputs": [
       {
@@ -16034,97 +16029,11 @@
       }
     ]
   },
-  "hubspot/associations/disassociate": {
-    "hash": "4bcee1994a87d1db35fee973bb41384b707c6b5419fa8ab3cca81289d8b450b5",
+  "hubspot/company_create": {
+    "hash": "8042a01e49f42d195f0af521aca0e3d9c58d7dfcbe637d6550a48dcca9afde1d",
     "author": "Dave McElin",
     "organisation": "Flomation",
-    "name": "Disassociate Records",
-    "description": "Remove the association between two HubSpot records. Direction is from -\u003e to.",
-    "website": "https://www.flomation.co",
-    "icon": "hubspot+unlink",
-    "date": "30/06/2026",
-    "type": 2,
-    "category": {
-      "name": "HubSpot",
-      "icon": "hubspot",
-      "description": "Manage contacts, companies, deals, and tickets in the HubSpot CRM"
-    },
-    "sub_category": {
-      "name": "Associations",
-      "icon": "hubspot+link",
-      "description": "Link and unlink HubSpot records (contacts, companies, deals, tickets)"
-    },
-    "inputs": [
-      {
-        "name": "api_key",
-        "type": "secret",
-        "value": null,
-        "label": "HubSpot Private App Token",
-        "placeholder": "pat-...",
-        "required": true
-      },
-      {
-        "name": "from_object_type",
-        "type": "string",
-        "value": null,
-        "label": "From Object Type",
-        "placeholder": "contacts",
-        "required": true
-      },
-      {
-        "name": "from_id",
-        "type": "string",
-        "value": null,
-        "label": "From Record ID",
-        "placeholder": "12345",
-        "required": true
-      },
-      {
-        "name": "to_object_type",
-        "type": "string",
-        "value": null,
-        "label": "To Object Type",
-        "placeholder": "companies",
-        "required": true
-      },
-      {
-        "name": "to_id",
-        "type": "string",
-        "value": null,
-        "label": "To Record ID",
-        "placeholder": "67890",
-        "required": true
-      }
-    ],
-    "outputs": [
-      {
-        "name": "tool_result",
-        "type": "string",
-        "value": null,
-        "label": "Result Summary",
-        "placeholder": ""
-      },
-      {
-        "name": "success",
-        "type": "boolean",
-        "value": null,
-        "label": "Success",
-        "placeholder": ""
-      },
-      {
-        "name": "error",
-        "type": "string",
-        "value": null,
-        "label": "Error",
-        "placeholder": ""
-      }
-    ]
-  },
-  "hubspot/companies/create": {
-    "hash": "50db6087153255607af58e88c14a835e2fc5cf7908f4b355ba5d822295055a19",
-    "author": "Dave McElin",
-    "organisation": "Flomation",
-    "name": "Create Company",
+    "name": "Company: Create",
     "description": "Create a new company in HubSpot. Set common fields directly or add any other property via Additional Properties. Returns the company ID.",
     "website": "https://www.flomation.co",
     "icon": "hubspot+plus",
@@ -16134,11 +16043,6 @@
       "name": "HubSpot",
       "icon": "hubspot",
       "description": "Manage contacts, companies, deals, and tickets in the HubSpot CRM"
-    },
-    "sub_category": {
-      "name": "Companies",
-      "icon": "hubspot+building",
-      "description": "Create, retrieve, update, search, and delete HubSpot companies"
     },
     "inputs": [
       {
@@ -16258,11 +16162,11 @@
       }
     ]
   },
-  "hubspot/companies/delete": {
-    "hash": "f21498ff8c773f09a35fa12166edac5f253390bb40e8aa3d5722bef0e0ae34e7",
+  "hubspot/company_delete": {
+    "hash": "f14147cf6a5cee0fbf78c24dcb18778ba93ed6d13261d729d67d4271fcd33f8f",
     "author": "Dave McElin",
     "organisation": "Flomation",
-    "name": "Delete Company",
+    "name": "Company: Delete",
     "description": "Archive (soft-delete) a HubSpot company by its ID.",
     "website": "https://www.flomation.co",
     "icon": "hubspot+trash",
@@ -16272,11 +16176,6 @@
       "name": "HubSpot",
       "icon": "hubspot",
       "description": "Manage contacts, companies, deals, and tickets in the HubSpot CRM"
-    },
-    "sub_category": {
-      "name": "Companies",
-      "icon": "hubspot+building",
-      "description": "Create, retrieve, update, search, and delete HubSpot companies"
     },
     "inputs": [
       {
@@ -16327,11 +16226,11 @@
       }
     ]
   },
-  "hubspot/companies/get": {
-    "hash": "edaf602a49e7b6c5cb84fdf3a2e60db3bfd1a8af81edfe280ad15f53af8fa1b7",
+  "hubspot/company_get": {
+    "hash": "e8cf426ea5f77873b974e6aba2570d044c3e369cf923eba9672350a195ffe505",
     "author": "Dave McElin",
     "organisation": "Flomation",
-    "name": "Get Company",
+    "name": "Company: Get",
     "description": "Retrieve a HubSpot company by its ID. Optionally request specific properties and associated object types.",
     "website": "https://www.flomation.co",
     "icon": "hubspot+search",
@@ -16341,11 +16240,6 @@
       "name": "HubSpot",
       "icon": "hubspot",
       "description": "Manage contacts, companies, deals, and tickets in the HubSpot CRM"
-    },
-    "sub_category": {
-      "name": "Companies",
-      "icon": "hubspot+building",
-      "description": "Create, retrieve, update, search, and delete HubSpot companies"
     },
     "inputs": [
       {
@@ -16424,11 +16318,11 @@
       }
     ]
   },
-  "hubspot/companies/list": {
-    "hash": "e1976158ade19b02720c8504d81e80ac9b431f6e26fffadad642c68aab967419",
+  "hubspot/company_list": {
+    "hash": "1449f27ee9a5681a3cf12854da8106db363d2c6b58b39a8d6de47649412e6cf4",
     "author": "Dave McElin",
     "organisation": "Flomation",
-    "name": "List Companies",
+    "name": "Company: List",
     "description": "List HubSpot companies a page at a time. Pass the returned After cursor to fetch the next page.",
     "website": "https://www.flomation.co",
     "icon": "hubspot+list",
@@ -16438,11 +16332,6 @@
       "name": "HubSpot",
       "icon": "hubspot",
       "description": "Manage contacts, companies, deals, and tickets in the HubSpot CRM"
-    },
-    "sub_category": {
-      "name": "Companies",
-      "icon": "hubspot+building",
-      "description": "Create, retrieve, update, search, and delete HubSpot companies"
     },
     "inputs": [
       {
@@ -16527,11 +16416,11 @@
       }
     ]
   },
-  "hubspot/companies/search": {
-    "hash": "df47f33ba6f1a53becc38431d29ca57896f1f9d1664a7bf0d54d3620040b6667",
+  "hubspot/company_search": {
+    "hash": "0671eab3ff66f752c1f692048aba938a18a7a5537240914e563482ff6bf18655",
     "author": "Dave McElin",
     "organisation": "Flomation",
-    "name": "Search Companies",
+    "name": "Company: Search",
     "description": "Search HubSpot companies by free text or a property filter (e.g. domain EQ acme.com). Returns matching companies.",
     "website": "https://www.flomation.co",
     "icon": "hubspot+search",
@@ -16541,11 +16430,6 @@
       "name": "HubSpot",
       "icon": "hubspot",
       "description": "Manage contacts, companies, deals, and tickets in the HubSpot CRM"
-    },
-    "sub_category": {
-      "name": "Companies",
-      "icon": "hubspot+building",
-      "description": "Create, retrieve, update, search, and delete HubSpot companies"
     },
     "inputs": [
       {
@@ -16703,11 +16587,11 @@
       }
     ]
   },
-  "hubspot/companies/update": {
-    "hash": "c6a8f7875e36318d26b4af1325630670f22460eab1d59816a4d2d35c84e1149b",
+  "hubspot/company_update": {
+    "hash": "825e1d4a63ed8ad4e230ab8e725ef3dbe8a708eeb6b67c57265814cefbf3c2a1",
     "author": "Dave McElin",
     "organisation": "Flomation",
-    "name": "Update Company",
+    "name": "Company: Update",
     "description": "Update properties on an existing HubSpot company. Only the fields you set are changed.",
     "website": "https://www.flomation.co",
     "icon": "hubspot+pencil",
@@ -16717,11 +16601,6 @@
       "name": "HubSpot",
       "icon": "hubspot",
       "description": "Manage contacts, companies, deals, and tickets in the HubSpot CRM"
-    },
-    "sub_category": {
-      "name": "Companies",
-      "icon": "hubspot+building",
-      "description": "Create, retrieve, update, search, and delete HubSpot companies"
     },
     "inputs": [
       {
@@ -16849,11 +16728,11 @@
       }
     ]
   },
-  "hubspot/contacts/create": {
-    "hash": "4483fab3161861e26fa7dd71dc839c7c3b510b1c724366893818dc8ed504f7f9",
+  "hubspot/contact_create": {
+    "hash": "e79f4ee48a072e10502e16ab1ccf8863d3667f926125956781467f94d56d2bbf",
     "author": "Dave McElin",
     "organisation": "Flomation",
-    "name": "Create Contact",
+    "name": "Contact: Create",
     "description": "Create a new contact in HubSpot. Set common fields directly or add any other property via Additional Properties. Returns the contact ID.",
     "website": "https://www.flomation.co",
     "icon": "hubspot+plus",
@@ -16863,11 +16742,6 @@
       "name": "HubSpot",
       "icon": "hubspot",
       "description": "Manage contacts, companies, deals, and tickets in the HubSpot CRM"
-    },
-    "sub_category": {
-      "name": "Contacts",
-      "icon": "hubspot+user",
-      "description": "Create, retrieve, update, search, and delete HubSpot contacts"
     },
     "inputs": [
       {
@@ -16980,11 +16854,11 @@
       }
     ]
   },
-  "hubspot/contacts/delete": {
-    "hash": "5d4959dfccd8557134b49a1f4b757f4a7c403dbcfddc9b9f5b6bbd56211de681",
+  "hubspot/contact_delete": {
+    "hash": "158852c42067d3562ab6ef89c5efe156861230564e560957cb5e49a1416a23e9",
     "author": "Dave McElin",
     "organisation": "Flomation",
-    "name": "Delete Contact",
+    "name": "Contact: Delete",
     "description": "Archive (soft-delete) a HubSpot contact by its ID.",
     "website": "https://www.flomation.co",
     "icon": "hubspot+trash",
@@ -16994,11 +16868,6 @@
       "name": "HubSpot",
       "icon": "hubspot",
       "description": "Manage contacts, companies, deals, and tickets in the HubSpot CRM"
-    },
-    "sub_category": {
-      "name": "Contacts",
-      "icon": "hubspot+user",
-      "description": "Create, retrieve, update, search, and delete HubSpot contacts"
     },
     "inputs": [
       {
@@ -17049,11 +16918,11 @@
       }
     ]
   },
-  "hubspot/contacts/get": {
-    "hash": "2903560147e86b06c99e11c782f8c9a79f4765b6463e1b371dfa3ae363a41aa6",
+  "hubspot/contact_get": {
+    "hash": "98947a15359deeaa67a2bc2f15b46fcdf8526de813ff9285fae6567001473015",
     "author": "Dave McElin",
     "organisation": "Flomation",
-    "name": "Get Contact",
+    "name": "Contact: Get",
     "description": "Retrieve a HubSpot contact by its ID. Optionally request specific properties and associated object types.",
     "website": "https://www.flomation.co",
     "icon": "hubspot+search",
@@ -17063,11 +16932,6 @@
       "name": "HubSpot",
       "icon": "hubspot",
       "description": "Manage contacts, companies, deals, and tickets in the HubSpot CRM"
-    },
-    "sub_category": {
-      "name": "Contacts",
-      "icon": "hubspot+user",
-      "description": "Create, retrieve, update, search, and delete HubSpot contacts"
     },
     "inputs": [
       {
@@ -17146,11 +17010,11 @@
       }
     ]
   },
-  "hubspot/contacts/list": {
-    "hash": "1fc00bfbebcf2499c0cc114452bb4462cae7cbef90d37115c06966f7c37cb251",
+  "hubspot/contact_list": {
+    "hash": "8aa41c03303f2e76cd6c1925ae1706802a7fe4c530d5a8f59bb99f24ae78236e",
     "author": "Dave McElin",
     "organisation": "Flomation",
-    "name": "List Contacts",
+    "name": "Contact: List",
     "description": "List HubSpot contacts a page at a time. Pass the returned After cursor to fetch the next page.",
     "website": "https://www.flomation.co",
     "icon": "hubspot+list",
@@ -17160,11 +17024,6 @@
       "name": "HubSpot",
       "icon": "hubspot",
       "description": "Manage contacts, companies, deals, and tickets in the HubSpot CRM"
-    },
-    "sub_category": {
-      "name": "Contacts",
-      "icon": "hubspot+user",
-      "description": "Create, retrieve, update, search, and delete HubSpot contacts"
     },
     "inputs": [
       {
@@ -17249,11 +17108,11 @@
       }
     ]
   },
-  "hubspot/contacts/search": {
-    "hash": "6c57ca8aafe9c3ba96e274f9519609a688248abd2c54e02a69d84a4f2270027c",
+  "hubspot/contact_search": {
+    "hash": "b8ebcf93b1da53d8cc7b09521668a80dde805dad1eb0f43caae39ab8c84899ee",
     "author": "Dave McElin",
     "organisation": "Flomation",
-    "name": "Search Contacts",
+    "name": "Contact: Search",
     "description": "Search HubSpot contacts by free text or a property filter (e.g. email EQ jane@example.com). Returns matching contacts.",
     "website": "https://www.flomation.co",
     "icon": "hubspot+search",
@@ -17263,11 +17122,6 @@
       "name": "HubSpot",
       "icon": "hubspot",
       "description": "Manage contacts, companies, deals, and tickets in the HubSpot CRM"
-    },
-    "sub_category": {
-      "name": "Contacts",
-      "icon": "hubspot+user",
-      "description": "Create, retrieve, update, search, and delete HubSpot contacts"
     },
     "inputs": [
       {
@@ -17425,11 +17279,11 @@
       }
     ]
   },
-  "hubspot/contacts/update": {
-    "hash": "69a779f000eff3ff9da0290c3f1c64ba71a68dd3a55539f34ad2d5b0bcb2e4ad",
+  "hubspot/contact_update": {
+    "hash": "83ef93b68188bf3bc3eb2c8e8d6b16305a0dde18e1930ee32127f47047297c81",
     "author": "Dave McElin",
     "organisation": "Flomation",
-    "name": "Update Contact",
+    "name": "Contact: Update",
     "description": "Update properties on an existing HubSpot contact. Only the fields you set are changed.",
     "website": "https://www.flomation.co",
     "icon": "hubspot+pencil",
@@ -17439,11 +17293,6 @@
       "name": "HubSpot",
       "icon": "hubspot",
       "description": "Manage contacts, companies, deals, and tickets in the HubSpot CRM"
-    },
-    "sub_category": {
-      "name": "Contacts",
-      "icon": "hubspot+user",
-      "description": "Create, retrieve, update, search, and delete HubSpot contacts"
     },
     "inputs": [
       {
@@ -17564,11 +17413,11 @@
       }
     ]
   },
-  "hubspot/deals/create": {
-    "hash": "9cf656a7a2526b3fa239320a62b78f7b4e11b38cc537e523127161ed2dba53fa",
+  "hubspot/deal_create": {
+    "hash": "a573e782641b09f9a4097b04c23bd2397739300f52f0ee06e2d7124e0b741df0",
     "author": "Dave McElin",
     "organisation": "Flomation",
-    "name": "Create Deal",
+    "name": "Deal: Create",
     "description": "Create a new deal in HubSpot. Set common fields directly or add any other property via Additional Properties. Returns the deal ID.",
     "website": "https://www.flomation.co",
     "icon": "hubspot+plus",
@@ -17578,11 +17427,6 @@
       "name": "HubSpot",
       "icon": "hubspot",
       "description": "Manage contacts, companies, deals, and tickets in the HubSpot CRM"
-    },
-    "sub_category": {
-      "name": "Deals",
-      "icon": "hubspot+handshake",
-      "description": "Create, retrieve, update, search, and delete HubSpot deals"
     },
     "inputs": [
       {
@@ -17688,11 +17532,11 @@
       }
     ]
   },
-  "hubspot/deals/delete": {
-    "hash": "c135aec8ead20fcc57bb4b6a21ff5fe79e67c5912d5e2dcd4e6e7eb6c889ae0c",
+  "hubspot/deal_delete": {
+    "hash": "056ab4730e212a5272bd335bcbcabada9c2887b858df3cd3cdfc777da1193de9",
     "author": "Dave McElin",
     "organisation": "Flomation",
-    "name": "Delete Deal",
+    "name": "Deal: Delete",
     "description": "Archive (soft-delete) a HubSpot deal by its ID.",
     "website": "https://www.flomation.co",
     "icon": "hubspot+trash",
@@ -17702,11 +17546,6 @@
       "name": "HubSpot",
       "icon": "hubspot",
       "description": "Manage contacts, companies, deals, and tickets in the HubSpot CRM"
-    },
-    "sub_category": {
-      "name": "Deals",
-      "icon": "hubspot+handshake",
-      "description": "Create, retrieve, update, search, and delete HubSpot deals"
     },
     "inputs": [
       {
@@ -17757,11 +17596,11 @@
       }
     ]
   },
-  "hubspot/deals/get": {
-    "hash": "a47556aad19a4aabed4a62f72358163c6a7b788cdb62476c32188d34b292dc5b",
+  "hubspot/deal_get": {
+    "hash": "8a4655d832b237e832d62b7b20131115e8e2d7696f35fb4d6e48399a5d6f798a",
     "author": "Dave McElin",
     "organisation": "Flomation",
-    "name": "Get Deal",
+    "name": "Deal: Get",
     "description": "Retrieve a HubSpot deal by its ID. Optionally request specific properties and associated object types.",
     "website": "https://www.flomation.co",
     "icon": "hubspot+search",
@@ -17771,11 +17610,6 @@
       "name": "HubSpot",
       "icon": "hubspot",
       "description": "Manage contacts, companies, deals, and tickets in the HubSpot CRM"
-    },
-    "sub_category": {
-      "name": "Deals",
-      "icon": "hubspot+handshake",
-      "description": "Create, retrieve, update, search, and delete HubSpot deals"
     },
     "inputs": [
       {
@@ -17854,11 +17688,11 @@
       }
     ]
   },
-  "hubspot/deals/list": {
-    "hash": "f8b6311d9df1df2f59d4d5969685b49245cdc0c2cc4a3ac1feddd7c3d3e859f8",
+  "hubspot/deal_list": {
+    "hash": "d57685d7676bf845322b06d7515e97a40b72735e67d72ea02a80302a4059dfd7",
     "author": "Dave McElin",
     "organisation": "Flomation",
-    "name": "List Deals",
+    "name": "Deal: List",
     "description": "List HubSpot deals a page at a time. Pass the returned After cursor to fetch the next page.",
     "website": "https://www.flomation.co",
     "icon": "hubspot+list",
@@ -17868,11 +17702,6 @@
       "name": "HubSpot",
       "icon": "hubspot",
       "description": "Manage contacts, companies, deals, and tickets in the HubSpot CRM"
-    },
-    "sub_category": {
-      "name": "Deals",
-      "icon": "hubspot+handshake",
-      "description": "Create, retrieve, update, search, and delete HubSpot deals"
     },
     "inputs": [
       {
@@ -17957,11 +17786,11 @@
       }
     ]
   },
-  "hubspot/deals/search": {
-    "hash": "7d8b91ee4c7c18751ba0624be1d7da9c6299945d406720e264995aecf5c153bb",
+  "hubspot/deal_search": {
+    "hash": "650a4da5fa4e29d0933a94a8b956e06ab2b30eeb7f2218a1390614860910f55d",
     "author": "Dave McElin",
     "organisation": "Flomation",
-    "name": "Search Deals",
+    "name": "Deal: Search",
     "description": "Search HubSpot deals by free text or a property filter (e.g. dealstage EQ closedwon). Returns matching deals.",
     "website": "https://www.flomation.co",
     "icon": "hubspot+search",
@@ -17971,11 +17800,6 @@
       "name": "HubSpot",
       "icon": "hubspot",
       "description": "Manage contacts, companies, deals, and tickets in the HubSpot CRM"
-    },
-    "sub_category": {
-      "name": "Deals",
-      "icon": "hubspot+handshake",
-      "description": "Create, retrieve, update, search, and delete HubSpot deals"
     },
     "inputs": [
       {
@@ -18133,11 +17957,11 @@
       }
     ]
   },
-  "hubspot/deals/update": {
-    "hash": "a8df1f06a33690337dd32d5e596292a82a42c18d27418d251fde267cf03109c2",
+  "hubspot/deal_update": {
+    "hash": "9e9531ebb86883685b0542019f2b229542cde13fa4ab88201c75b7432c1ec49b",
     "author": "Dave McElin",
     "organisation": "Flomation",
-    "name": "Update Deal",
+    "name": "Deal: Update",
     "description": "Update properties on an existing HubSpot deal. Only the fields you set are changed.",
     "website": "https://www.flomation.co",
     "icon": "hubspot+pencil",
@@ -18147,11 +17971,6 @@
       "name": "HubSpot",
       "icon": "hubspot",
       "description": "Manage contacts, companies, deals, and tickets in the HubSpot CRM"
-    },
-    "sub_category": {
-      "name": "Deals",
-      "icon": "hubspot+handshake",
-      "description": "Create, retrieve, update, search, and delete HubSpot deals"
     },
     "inputs": [
       {
@@ -18265,11 +18084,92 @@
       }
     ]
   },
-  "hubspot/lists/add_contact": {
-    "hash": "f8e4baff29bd210f7379d2eebcd7bf8e7c1889ebb881e5f2aea33284a0dc5311",
+  "hubspot/disassociate": {
+    "hash": "3fa3abf1085da46daa2d34fbafa043b5d18cf97953a9407ac7faf49360b6b424",
     "author": "Dave McElin",
     "organisation": "Flomation",
-    "name": "Add Contacts to List",
+    "name": "Association: Unlink Records",
+    "description": "Remove the association between two HubSpot records. Direction is from -\u003e to.",
+    "website": "https://www.flomation.co",
+    "icon": "hubspot+unlink",
+    "date": "30/06/2026",
+    "type": 2,
+    "category": {
+      "name": "HubSpot",
+      "icon": "hubspot",
+      "description": "Manage contacts, companies, deals, and tickets in the HubSpot CRM"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "HubSpot Private App Token",
+        "placeholder": "pat-...",
+        "required": true
+      },
+      {
+        "name": "from_object_type",
+        "type": "string",
+        "value": null,
+        "label": "From Object Type",
+        "placeholder": "contacts",
+        "required": true
+      },
+      {
+        "name": "from_id",
+        "type": "string",
+        "value": null,
+        "label": "From Record ID",
+        "placeholder": "12345",
+        "required": true
+      },
+      {
+        "name": "to_object_type",
+        "type": "string",
+        "value": null,
+        "label": "To Object Type",
+        "placeholder": "companies",
+        "required": true
+      },
+      {
+        "name": "to_id",
+        "type": "string",
+        "value": null,
+        "label": "To Record ID",
+        "placeholder": "67890",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "hubspot/list_add_contact": {
+    "hash": "0ce788e277c2b55bf4a6da35002aacb4c87813079e66b568bab1b2ca7fe0bef7",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "List: Add Contacts",
     "description": "Add contacts to a HubSpot static list by contact ID and/or email address. Only works on static (not dynamic) lists.",
     "website": "https://www.flomation.co",
     "icon": "hubspot+list",
@@ -18279,11 +18179,6 @@
       "name": "HubSpot",
       "icon": "hubspot",
       "description": "Manage contacts, companies, deals, and tickets in the HubSpot CRM"
-    },
-    "sub_category": {
-      "name": "Lists",
-      "icon": "hubspot+list",
-      "description": "Add and remove contacts on HubSpot static contact lists"
     },
     "inputs": [
       {
@@ -18355,11 +18250,11 @@
       }
     ]
   },
-  "hubspot/lists/remove_contact": {
-    "hash": "39a58fd64f7284bb6a82e5791add8c5ba03897407e1712ad7152c0b4d4d2155e",
+  "hubspot/list_remove_contact": {
+    "hash": "fe89b8b6983f18795322b88943518c4d6b3befb713730d942a6b6d924d95e8d3",
     "author": "Dave McElin",
     "organisation": "Flomation",
-    "name": "Remove Contacts from List",
+    "name": "List: Remove Contacts",
     "description": "Remove contacts from a HubSpot static list by contact ID. Only works on static (not dynamic) lists.",
     "website": "https://www.flomation.co",
     "icon": "hubspot+list",
@@ -18369,11 +18264,6 @@
       "name": "HubSpot",
       "icon": "hubspot",
       "description": "Manage contacts, companies, deals, and tickets in the HubSpot CRM"
-    },
-    "sub_category": {
-      "name": "Lists",
-      "icon": "hubspot+list",
-      "description": "Add and remove contacts on HubSpot static contact lists"
     },
     "inputs": [
       {
@@ -18439,11 +18329,11 @@
       }
     ]
   },
-  "hubspot/tickets/create": {
-    "hash": "32e5da4757369a2493b8a2f59f8239a6360fd50c5357adfb7c8b9138a9098a11",
+  "hubspot/ticket_create": {
+    "hash": "8b010917017c9a2d10a7688fdd292a1910e4a9dc4a18b995f537b50aed83392a",
     "author": "Dave McElin",
     "organisation": "Flomation",
-    "name": "Create Ticket",
+    "name": "Ticket: Create",
     "description": "Create a new support ticket in HubSpot. Set common fields directly or add any other property via Additional Properties. Returns the ticket ID.",
     "website": "https://www.flomation.co",
     "icon": "hubspot+plus",
@@ -18453,11 +18343,6 @@
       "name": "HubSpot",
       "icon": "hubspot",
       "description": "Manage contacts, companies, deals, and tickets in the HubSpot CRM"
-    },
-    "sub_category": {
-      "name": "Tickets",
-      "icon": "hubspot+ticket",
-      "description": "Create, retrieve, update, search, and delete HubSpot tickets"
     },
     "inputs": [
       {
@@ -18570,11 +18455,11 @@
       }
     ]
   },
-  "hubspot/tickets/delete": {
-    "hash": "d540ea76d249e915d6a56dda84770c809a47e8c250cff4464f8281a5201e0811",
+  "hubspot/ticket_delete": {
+    "hash": "10714eacdc5b051f5f6e89349878c84362658623e79c188957679c04b1d13247",
     "author": "Dave McElin",
     "organisation": "Flomation",
-    "name": "Delete Ticket",
+    "name": "Ticket: Delete",
     "description": "Archive (soft-delete) a HubSpot ticket by its ID.",
     "website": "https://www.flomation.co",
     "icon": "hubspot+trash",
@@ -18584,11 +18469,6 @@
       "name": "HubSpot",
       "icon": "hubspot",
       "description": "Manage contacts, companies, deals, and tickets in the HubSpot CRM"
-    },
-    "sub_category": {
-      "name": "Tickets",
-      "icon": "hubspot+ticket",
-      "description": "Create, retrieve, update, search, and delete HubSpot tickets"
     },
     "inputs": [
       {
@@ -18639,11 +18519,11 @@
       }
     ]
   },
-  "hubspot/tickets/get": {
-    "hash": "dc9419f38e8230ade4c349b6e1484eff0428298639d0b70f0fd99594a1213297",
+  "hubspot/ticket_get": {
+    "hash": "2ca5a619a35da1f9f9e1cda0932b445cc2a9ae49c83582c8888b3493b7655ea1",
     "author": "Dave McElin",
     "organisation": "Flomation",
-    "name": "Get Ticket",
+    "name": "Ticket: Get",
     "description": "Retrieve a HubSpot ticket by its ID. Optionally request specific properties and associated object types.",
     "website": "https://www.flomation.co",
     "icon": "hubspot+search",
@@ -18653,11 +18533,6 @@
       "name": "HubSpot",
       "icon": "hubspot",
       "description": "Manage contacts, companies, deals, and tickets in the HubSpot CRM"
-    },
-    "sub_category": {
-      "name": "Tickets",
-      "icon": "hubspot+ticket",
-      "description": "Create, retrieve, update, search, and delete HubSpot tickets"
     },
     "inputs": [
       {
@@ -18736,11 +18611,11 @@
       }
     ]
   },
-  "hubspot/tickets/list": {
-    "hash": "c8844aaf6df445d4a8201c00fdaa3336c0862114156316f78c153f382281142c",
+  "hubspot/ticket_list": {
+    "hash": "3a1a2eaed753873abb681917fa2419e6f725a42604a58e5acf3397aecaab6f45",
     "author": "Dave McElin",
     "organisation": "Flomation",
-    "name": "List Tickets",
+    "name": "Ticket: List",
     "description": "List HubSpot tickets a page at a time. Pass the returned After cursor to fetch the next page.",
     "website": "https://www.flomation.co",
     "icon": "hubspot+list",
@@ -18750,11 +18625,6 @@
       "name": "HubSpot",
       "icon": "hubspot",
       "description": "Manage contacts, companies, deals, and tickets in the HubSpot CRM"
-    },
-    "sub_category": {
-      "name": "Tickets",
-      "icon": "hubspot+ticket",
-      "description": "Create, retrieve, update, search, and delete HubSpot tickets"
     },
     "inputs": [
       {
@@ -18839,11 +18709,11 @@
       }
     ]
   },
-  "hubspot/tickets/search": {
-    "hash": "42ac3fcfd34c5821a2d31b7ebbab2d407e2c0c2ab6c4e889057dc30699973113",
+  "hubspot/ticket_search": {
+    "hash": "183cf902c0932b4e71483c430bd50547ef7cca0e241295afe2e4b4806e758803",
     "author": "Dave McElin",
     "organisation": "Flomation",
-    "name": "Search Tickets",
+    "name": "Ticket: Search",
     "description": "Search HubSpot tickets by free text or a property filter (e.g. hs_ticket_priority EQ HIGH). Returns matching tickets.",
     "website": "https://www.flomation.co",
     "icon": "hubspot+search",
@@ -18853,11 +18723,6 @@
       "name": "HubSpot",
       "icon": "hubspot",
       "description": "Manage contacts, companies, deals, and tickets in the HubSpot CRM"
-    },
-    "sub_category": {
-      "name": "Tickets",
-      "icon": "hubspot+ticket",
-      "description": "Create, retrieve, update, search, and delete HubSpot tickets"
     },
     "inputs": [
       {
@@ -19015,11 +18880,11 @@
       }
     ]
   },
-  "hubspot/tickets/update": {
-    "hash": "136f7ab9025dd82a438a0e64313c42b3a405b91d608ac64d434a31baac6f93e3",
+  "hubspot/ticket_update": {
+    "hash": "80c62147b58856e77d92600b9fb108dc071366a4776bcb3c8ec412b533725a22",
     "author": "Dave McElin",
     "organisation": "Flomation",
-    "name": "Update Ticket",
+    "name": "Ticket: Update",
     "description": "Update properties on an existing HubSpot ticket. Only the fields you set are changed.",
     "website": "https://www.flomation.co",
     "icon": "hubspot+pencil",
@@ -19029,11 +18894,6 @@
       "name": "HubSpot",
       "icon": "hubspot",
       "description": "Manage contacts, companies, deals, and tickets in the HubSpot CRM"
-    },
-    "sub_category": {
-      "name": "Tickets",
-      "icon": "hubspot+ticket",
-      "description": "Create, retrieve, update, search, and delete HubSpot tickets"
     },
     "inputs": [
       {

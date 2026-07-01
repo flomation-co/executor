@@ -169,34 +169,34 @@ import (
 	google_slides_create "flomation.app/automate/executor/actions/google/slides/create"
 	google_slides_get "flomation.app/automate/executor/actions/google/slides/get"
 	google_slides_get_slide "flomation.app/automate/executor/actions/google/slides/get_slide"
-	hubspot_associations_associate "flomation.app/automate/executor/actions/hubspot/associations/associate"
-	hubspot_associations_disassociate "flomation.app/automate/executor/actions/hubspot/associations/disassociate"
-	hubspot_companies_create "flomation.app/automate/executor/actions/hubspot/companies/create"
-	hubspot_companies_delete "flomation.app/automate/executor/actions/hubspot/companies/delete"
-	hubspot_companies_get "flomation.app/automate/executor/actions/hubspot/companies/get"
-	hubspot_companies_list "flomation.app/automate/executor/actions/hubspot/companies/list"
-	hubspot_companies_search "flomation.app/automate/executor/actions/hubspot/companies/search"
-	hubspot_companies_update "flomation.app/automate/executor/actions/hubspot/companies/update"
-	hubspot_contacts_create "flomation.app/automate/executor/actions/hubspot/contacts/create"
-	hubspot_contacts_delete "flomation.app/automate/executor/actions/hubspot/contacts/delete"
-	hubspot_contacts_get "flomation.app/automate/executor/actions/hubspot/contacts/get"
-	hubspot_contacts_list "flomation.app/automate/executor/actions/hubspot/contacts/list"
-	hubspot_contacts_search "flomation.app/automate/executor/actions/hubspot/contacts/search"
-	hubspot_contacts_update "flomation.app/automate/executor/actions/hubspot/contacts/update"
-	hubspot_deals_create "flomation.app/automate/executor/actions/hubspot/deals/create"
-	hubspot_deals_delete "flomation.app/automate/executor/actions/hubspot/deals/delete"
-	hubspot_deals_get "flomation.app/automate/executor/actions/hubspot/deals/get"
-	hubspot_deals_list "flomation.app/automate/executor/actions/hubspot/deals/list"
-	hubspot_deals_search "flomation.app/automate/executor/actions/hubspot/deals/search"
-	hubspot_deals_update "flomation.app/automate/executor/actions/hubspot/deals/update"
-	hubspot_lists_add_contact "flomation.app/automate/executor/actions/hubspot/lists/add_contact"
-	hubspot_lists_remove_contact "flomation.app/automate/executor/actions/hubspot/lists/remove_contact"
-	hubspot_tickets_create "flomation.app/automate/executor/actions/hubspot/tickets/create"
-	hubspot_tickets_delete "flomation.app/automate/executor/actions/hubspot/tickets/delete"
-	hubspot_tickets_get "flomation.app/automate/executor/actions/hubspot/tickets/get"
-	hubspot_tickets_list "flomation.app/automate/executor/actions/hubspot/tickets/list"
-	hubspot_tickets_search "flomation.app/automate/executor/actions/hubspot/tickets/search"
-	hubspot_tickets_update "flomation.app/automate/executor/actions/hubspot/tickets/update"
+	hubspot_associate "flomation.app/automate/executor/actions/hubspot/associate"
+	hubspot_company_create "flomation.app/automate/executor/actions/hubspot/company_create"
+	hubspot_company_delete "flomation.app/automate/executor/actions/hubspot/company_delete"
+	hubspot_company_get "flomation.app/automate/executor/actions/hubspot/company_get"
+	hubspot_company_list "flomation.app/automate/executor/actions/hubspot/company_list"
+	hubspot_company_search "flomation.app/automate/executor/actions/hubspot/company_search"
+	hubspot_company_update "flomation.app/automate/executor/actions/hubspot/company_update"
+	hubspot_contact_create "flomation.app/automate/executor/actions/hubspot/contact_create"
+	hubspot_contact_delete "flomation.app/automate/executor/actions/hubspot/contact_delete"
+	hubspot_contact_get "flomation.app/automate/executor/actions/hubspot/contact_get"
+	hubspot_contact_list "flomation.app/automate/executor/actions/hubspot/contact_list"
+	hubspot_contact_search "flomation.app/automate/executor/actions/hubspot/contact_search"
+	hubspot_contact_update "flomation.app/automate/executor/actions/hubspot/contact_update"
+	hubspot_deal_create "flomation.app/automate/executor/actions/hubspot/deal_create"
+	hubspot_deal_delete "flomation.app/automate/executor/actions/hubspot/deal_delete"
+	hubspot_deal_get "flomation.app/automate/executor/actions/hubspot/deal_get"
+	hubspot_deal_list "flomation.app/automate/executor/actions/hubspot/deal_list"
+	hubspot_deal_search "flomation.app/automate/executor/actions/hubspot/deal_search"
+	hubspot_deal_update "flomation.app/automate/executor/actions/hubspot/deal_update"
+	hubspot_disassociate "flomation.app/automate/executor/actions/hubspot/disassociate"
+	hubspot_list_add_contact "flomation.app/automate/executor/actions/hubspot/list_add_contact"
+	hubspot_list_remove_contact "flomation.app/automate/executor/actions/hubspot/list_remove_contact"
+	hubspot_ticket_create "flomation.app/automate/executor/actions/hubspot/ticket_create"
+	hubspot_ticket_delete "flomation.app/automate/executor/actions/hubspot/ticket_delete"
+	hubspot_ticket_get "flomation.app/automate/executor/actions/hubspot/ticket_get"
+	hubspot_ticket_list "flomation.app/automate/executor/actions/hubspot/ticket_list"
+	hubspot_ticket_search "flomation.app/automate/executor/actions/hubspot/ticket_search"
+	hubspot_ticket_update "flomation.app/automate/executor/actions/hubspot/ticket_update"
 	journey_calculate_route "flomation.app/automate/executor/actions/journey/calculate_route"
 	journey_compare_departure_times "flomation.app/automate/executor/actions/journey/compare_departure_times"
 	journey_find_arrive_by "flomation.app/automate/executor/actions/journey/find_arrive_by"
@@ -578,34 +578,34 @@ var Actions = map[string]core.Action{
 	"google/slides/create":                  google_slides_create.Execute,
 	"google/slides/get":                     google_slides_get.Execute,
 	"google/slides/get_slide":               google_slides_get_slide.Execute,
-	"hubspot/associations/associate":        hubspot_associations_associate.Execute,
-	"hubspot/associations/disassociate":     hubspot_associations_disassociate.Execute,
-	"hubspot/companies/create":              hubspot_companies_create.Execute,
-	"hubspot/companies/delete":              hubspot_companies_delete.Execute,
-	"hubspot/companies/get":                 hubspot_companies_get.Execute,
-	"hubspot/companies/list":                hubspot_companies_list.Execute,
-	"hubspot/companies/search":              hubspot_companies_search.Execute,
-	"hubspot/companies/update":              hubspot_companies_update.Execute,
-	"hubspot/contacts/create":               hubspot_contacts_create.Execute,
-	"hubspot/contacts/delete":               hubspot_contacts_delete.Execute,
-	"hubspot/contacts/get":                  hubspot_contacts_get.Execute,
-	"hubspot/contacts/list":                 hubspot_contacts_list.Execute,
-	"hubspot/contacts/search":               hubspot_contacts_search.Execute,
-	"hubspot/contacts/update":               hubspot_contacts_update.Execute,
-	"hubspot/deals/create":                  hubspot_deals_create.Execute,
-	"hubspot/deals/delete":                  hubspot_deals_delete.Execute,
-	"hubspot/deals/get":                     hubspot_deals_get.Execute,
-	"hubspot/deals/list":                    hubspot_deals_list.Execute,
-	"hubspot/deals/search":                  hubspot_deals_search.Execute,
-	"hubspot/deals/update":                  hubspot_deals_update.Execute,
-	"hubspot/lists/add_contact":             hubspot_lists_add_contact.Execute,
-	"hubspot/lists/remove_contact":          hubspot_lists_remove_contact.Execute,
-	"hubspot/tickets/create":                hubspot_tickets_create.Execute,
-	"hubspot/tickets/delete":                hubspot_tickets_delete.Execute,
-	"hubspot/tickets/get":                   hubspot_tickets_get.Execute,
-	"hubspot/tickets/list":                  hubspot_tickets_list.Execute,
-	"hubspot/tickets/search":                hubspot_tickets_search.Execute,
-	"hubspot/tickets/update":                hubspot_tickets_update.Execute,
+	"hubspot/associate":                     hubspot_associate.Execute,
+	"hubspot/company_create":                hubspot_company_create.Execute,
+	"hubspot/company_delete":                hubspot_company_delete.Execute,
+	"hubspot/company_get":                   hubspot_company_get.Execute,
+	"hubspot/company_list":                  hubspot_company_list.Execute,
+	"hubspot/company_search":                hubspot_company_search.Execute,
+	"hubspot/company_update":                hubspot_company_update.Execute,
+	"hubspot/contact_create":                hubspot_contact_create.Execute,
+	"hubspot/contact_delete":                hubspot_contact_delete.Execute,
+	"hubspot/contact_get":                   hubspot_contact_get.Execute,
+	"hubspot/contact_list":                  hubspot_contact_list.Execute,
+	"hubspot/contact_search":                hubspot_contact_search.Execute,
+	"hubspot/contact_update":                hubspot_contact_update.Execute,
+	"hubspot/deal_create":                   hubspot_deal_create.Execute,
+	"hubspot/deal_delete":                   hubspot_deal_delete.Execute,
+	"hubspot/deal_get":                      hubspot_deal_get.Execute,
+	"hubspot/deal_list":                     hubspot_deal_list.Execute,
+	"hubspot/deal_search":                   hubspot_deal_search.Execute,
+	"hubspot/deal_update":                   hubspot_deal_update.Execute,
+	"hubspot/disassociate":                  hubspot_disassociate.Execute,
+	"hubspot/list_add_contact":              hubspot_list_add_contact.Execute,
+	"hubspot/list_remove_contact":           hubspot_list_remove_contact.Execute,
+	"hubspot/ticket_create":                 hubspot_ticket_create.Execute,
+	"hubspot/ticket_delete":                 hubspot_ticket_delete.Execute,
+	"hubspot/ticket_get":                    hubspot_ticket_get.Execute,
+	"hubspot/ticket_list":                   hubspot_ticket_list.Execute,
+	"hubspot/ticket_search":                 hubspot_ticket_search.Execute,
+	"hubspot/ticket_update":                 hubspot_ticket_update.Execute,
 	"journey/calculate_route":               journey_calculate_route.Execute,
 	"journey/compare_departure_times":       journey_compare_departure_times.Execute,
 	"journey/find_arrive_by":                journey_find_arrive_by.Execute,
