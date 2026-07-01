@@ -230,6 +230,22 @@ import (
 	linear_list_workflow_states "flomation.app/automate/executor/actions/linear/list_workflow_states"
 	linear_search_issues "flomation.app/automate/executor/actions/linear/search_issues"
 	linear_update_issue "flomation.app/automate/executor/actions/linear/update_issue"
+	mailchimp_audience_list "flomation.app/automate/executor/actions/mailchimp/audience_list"
+	mailchimp_campaign_delete "flomation.app/automate/executor/actions/mailchimp/campaign_delete"
+	mailchimp_campaign_get "flomation.app/automate/executor/actions/mailchimp/campaign_get"
+	mailchimp_campaign_list "flomation.app/automate/executor/actions/mailchimp/campaign_list"
+	mailchimp_campaign_replicate "flomation.app/automate/executor/actions/mailchimp/campaign_replicate"
+	mailchimp_campaign_resend "flomation.app/automate/executor/actions/mailchimp/campaign_resend"
+	mailchimp_campaign_send "flomation.app/automate/executor/actions/mailchimp/campaign_send"
+	mailchimp_interest_category_list "flomation.app/automate/executor/actions/mailchimp/interest_category_list"
+	mailchimp_list_group_list "flomation.app/automate/executor/actions/mailchimp/list_group_list"
+	mailchimp_member_create "flomation.app/automate/executor/actions/mailchimp/member_create"
+	mailchimp_member_delete "flomation.app/automate/executor/actions/mailchimp/member_delete"
+	mailchimp_member_get "flomation.app/automate/executor/actions/mailchimp/member_get"
+	mailchimp_member_list "flomation.app/automate/executor/actions/mailchimp/member_list"
+	mailchimp_member_tag_add "flomation.app/automate/executor/actions/mailchimp/member_tag_add"
+	mailchimp_member_tag_remove "flomation.app/automate/executor/actions/mailchimp/member_tag_remove"
+	mailchimp_member_update "flomation.app/automate/executor/actions/mailchimp/member_update"
 	makefile_get_variable "flomation.app/automate/executor/actions/makefile/get_variable"
 	makefile_list_targets "flomation.app/automate/executor/actions/makefile/list_targets"
 	makefile_run_target "flomation.app/automate/executor/actions/makefile/run_target"
@@ -383,6 +399,7 @@ import (
 	trigger_hubspot_webhook "flomation.app/automate/executor/actions/trigger/hubspot_webhook"
 	trigger_image "flomation.app/automate/executor/actions/trigger/image"
 	trigger_linkedin_poll "flomation.app/automate/executor/actions/trigger/linkedin_poll"
+	trigger_mailchimp_webhook "flomation.app/automate/executor/actions/trigger/mailchimp_webhook"
 	trigger_manual "flomation.app/automate/executor/actions/trigger/manual"
 	trigger_microsoft_outlook "flomation.app/automate/executor/actions/trigger/microsoft_outlook"
 	trigger_plan_task "flomation.app/automate/executor/actions/trigger/plan_task"
@@ -648,6 +665,22 @@ var Actions = map[string]core.Action{
 	"linear/list_workflow_states":           linear_list_workflow_states.Execute,
 	"linear/search_issues":                  linear_search_issues.Execute,
 	"linear/update_issue":                   linear_update_issue.Execute,
+	"mailchimp/audience_list":               mailchimp_audience_list.Execute,
+	"mailchimp/campaign_delete":             mailchimp_campaign_delete.Execute,
+	"mailchimp/campaign_get":                mailchimp_campaign_get.Execute,
+	"mailchimp/campaign_list":               mailchimp_campaign_list.Execute,
+	"mailchimp/campaign_replicate":          mailchimp_campaign_replicate.Execute,
+	"mailchimp/campaign_resend":             mailchimp_campaign_resend.Execute,
+	"mailchimp/campaign_send":               mailchimp_campaign_send.Execute,
+	"mailchimp/interest_category_list":      mailchimp_interest_category_list.Execute,
+	"mailchimp/list_group_list":             mailchimp_list_group_list.Execute,
+	"mailchimp/member_create":               mailchimp_member_create.Execute,
+	"mailchimp/member_delete":               mailchimp_member_delete.Execute,
+	"mailchimp/member_get":                  mailchimp_member_get.Execute,
+	"mailchimp/member_list":                 mailchimp_member_list.Execute,
+	"mailchimp/member_tag_add":              mailchimp_member_tag_add.Execute,
+	"mailchimp/member_tag_remove":           mailchimp_member_tag_remove.Execute,
+	"mailchimp/member_update":               mailchimp_member_update.Execute,
 	"makefile/get_variable":                 makefile_get_variable.Execute,
 	"makefile/list_targets":                 makefile_list_targets.Execute,
 	"makefile/run_target":                   makefile_run_target.Execute,
@@ -801,6 +834,7 @@ var Actions = map[string]core.Action{
 	"trigger/hubspot_webhook":               trigger_hubspot_webhook.Execute,
 	"trigger/image":                         trigger_image.Execute,
 	"trigger/linkedin_poll":                 trigger_linkedin_poll.Execute,
+	"trigger/mailchimp_webhook":             trigger_mailchimp_webhook.Execute,
 	"trigger/manual":                        trigger_manual.Execute,
 	"trigger/microsoft_outlook":             trigger_microsoft_outlook.Execute,
 	"trigger/plan_task":                     trigger_plan_task.Execute,
