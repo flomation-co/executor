@@ -79,6 +79,7 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 		q.Set("sort_field", v)
 	}
 	if v := mailchimp.OptionalString("sort_direction", inputs); v != "" {
+		// Mailchimp's query param is "sort_dir", not "sort_direction".
 		q.Set("sort_dir", v)
 	}
 	if v := mailchimp.OptionalString("before_send_time", inputs); v != "" {

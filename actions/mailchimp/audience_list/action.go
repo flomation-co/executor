@@ -65,7 +65,7 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 		count = n
 	}
 	if count > mailchimp.DefaultPageSize {
-		count = mailchimp.DefaultPageSize
+		count = mailchimp.DefaultPageSize // Mailchimp caps count at 1000
 	}
 	q.Set("count", strconv.Itoa(count))
 	if off, ok := mailchimp.OptionalInt("offset", inputs); ok && off > 0 {
