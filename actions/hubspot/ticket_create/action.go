@@ -20,10 +20,10 @@ const (
 
 var Inputs = [...]core.Connection{
 	{Name: "api_key", Type: core.ConnectionTypeSecret, Label: "HubSpot Private App Token", Placeholder: "pat-...", Required: true},
-	{Name: "subject", Type: core.ConnectionTypeString, Label: "Subject", Placeholder: "Cannot log in"},
+	{Name: "subject", Type: core.ConnectionTypeString, Label: "Subject", Placeholder: "Cannot log in", Required: true},
 	{Name: "content", Type: core.ConnectionTypeText, Label: "Content", Placeholder: "Description of the issue"},
-	{Name: "hs_pipeline", Type: core.ConnectionTypeString, Label: "Pipeline", Placeholder: "0 (Support Pipeline)"},
-	{Name: "hs_pipeline_stage", Type: core.ConnectionTypeString, Label: "Pipeline Stage", Placeholder: "1 (New)"},
+	{Name: "hs_pipeline", Type: core.ConnectionTypeString, Label: "Pipeline", Placeholder: "Defaults to 0 (Support Pipeline)"},
+	{Name: "hs_pipeline_stage", Type: core.ConnectionTypeString, Label: "Pipeline Stage", Placeholder: "Defaults to 1 (New)"},
 	{Name: "hs_ticket_priority", Type: core.ConnectionTypeString, Label: "Priority", Placeholder: "HIGH", Options: []core.ConnectionOption{
 		{Name: "Low", Value: "LOW"},
 		{Name: "Medium", Value: "MEDIUM"},
@@ -47,9 +47,20 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 		return nil, err
 	}
 
+	if _, err := hubspot.RequiredString("subject", inputs); err != nil {
+		return hubspot.ErrorResult(err.Error()), nil
+	}
+
 	props := hubspot.BuildProperties(inputs, "subject", "content", "hs_pipeline", "hs_pipeline_stage", "hs_ticket_priority")
-	if len(props) == 0 {
-		return hubspot.ErrorResult("at least one ticket property is required"), nil
+	// HubSpot requires a pipeline stage on every ticket. Default to the
+	// standard Support Pipeline (0) / New stage (1) when the caller leaves
+	// them unset, so a ticket can be created from just a subject rather
+	// than failing with a VALIDATION_ERROR.
+	if _, ok := props["hs_pipeline_stage"]; !ok {
+		props["hs_pipeline_stage"] = "1"
+		if _, ok := props["hs_pipeline"]; !ok {
+			props["hs_pipeline"] = "0"
+		}
 	}
 
 	obj, err := hubspot.CreateObject(apiKey, "tickets", props, nil)

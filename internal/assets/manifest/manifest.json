@@ -18330,7 +18330,7 @@
     ]
   },
   "hubspot/ticket_create": {
-    "hash": "8b010917017c9a2d10a7688fdd292a1910e4a9dc4a18b995f537b50aed83392a",
+    "hash": "a7c32df593403898791ceaeec6954c90ad894387eaf08b7b257c0ab29986fe56",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Ticket: Create",
@@ -18358,7 +18358,8 @@
         "type": "string",
         "value": null,
         "label": "Subject",
-        "placeholder": "Cannot log in"
+        "placeholder": "Cannot log in",
+        "required": true
       },
       {
         "name": "content",
@@ -18372,14 +18373,14 @@
         "type": "string",
         "value": null,
         "label": "Pipeline",
-        "placeholder": "0 (Support Pipeline)"
+        "placeholder": "Defaults to 0 (Support Pipeline)"
       },
       {
         "name": "hs_pipeline_stage",
         "type": "string",
         "value": null,
         "label": "Pipeline Stage",
-        "placeholder": "1 (New)"
+        "placeholder": "Defaults to 1 (New)"
       },
       {
         "name": "hs_ticket_priority",
