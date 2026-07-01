@@ -79,11 +79,21 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 		q.Set("maxRecords", strconv.Itoa(mr))
 	}
 
+	// Read the pagination cursor once and reuse it: the return-all loop advances
+	// it page by page; the single-page path below uses it as the start cursor.
+	offset := airtable.OptionalString("offset", inputs)
+
 	if airtable.OptionalBool("return_all", inputs) {
 		var all []interface{}
 		var lastRaw map[string]interface{}
-		offset := airtable.OptionalString("offset", inputs)
 		pages := 0
+		// Bounded, self-terminating loop — no cancellation context by design.
+		// Each ListRecordsPage call carries the shared httpClient's 30s timeout,
+		// and the loop is hard-capped at MaxAllPages (100), so it always ends in
+		// bounded time and request count. (The executor's HTTP layer is
+		// context-free throughout, matching the HubSpot/Notion integrations.)
+		// On hitting the cap we return the outstanding offset so the caller can
+		// resume explicitly rather than us looping unbounded.
 		for {
 			if offset != "" {
 				q.Set("offset", offset)
@@ -111,7 +121,7 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 		return out, nil
 	}
 
-	if offset := airtable.OptionalString("offset", inputs); offset != "" {
+	if offset != "" {
 		q.Set("offset", offset)
 	}
 	recs, next, raw, err := airtable.ListRecordsPage(token, baseID, table, q)

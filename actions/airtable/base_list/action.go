@@ -40,6 +40,11 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	var all []interface{}
 	offset := ""
 	pages := 0
+	// Bounded, self-terminating loop — no cancellation context by design. Each
+	// ListBasesPage call carries the shared httpClient's 30s timeout, and the
+	// loop is hard-capped at MaxAllPages (100), so it always ends in bounded
+	// time and request count. (The executor's HTTP layer is context-free
+	// throughout, matching the HubSpot/Notion integrations.)
 	for {
 		bases, next, _, err := airtable.ListBasesPage(token, offset)
 		if err != nil {

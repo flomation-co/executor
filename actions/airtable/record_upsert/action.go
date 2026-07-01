@@ -53,9 +53,13 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 		return airtable.ErrorResult(err.Error()), nil
 	}
 
-	mergeOn := airtable.CSVToList(airtable.OptionalString("match_fields", inputs))
+	matchRaw, err := airtable.RequiredString("match_fields", inputs)
+	if err != nil {
+		return airtable.ErrorResult(err.Error()), nil
+	}
+	mergeOn := airtable.CSVToList(matchRaw)
 	if len(mergeOn) == 0 {
-		return airtable.ErrorResult("match_fields is required (comma-separated field names to match on)"), nil
+		return airtable.ErrorResult("match_fields must list at least one field name"), nil
 	}
 
 	fields, err := airtable.BuildFields(inputs)
