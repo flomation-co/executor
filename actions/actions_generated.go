@@ -28,6 +28,14 @@ import (
 	ai_groq "flomation.app/automate/executor/actions/ai/groq"
 	ai_openai "flomation.app/automate/executor/actions/ai/openai"
 	ai_openwebui "flomation.app/automate/executor/actions/ai/openwebui"
+	airtable_base_get_schema "flomation.app/automate/executor/actions/airtable/base_get_schema"
+	airtable_base_list "flomation.app/automate/executor/actions/airtable/base_list"
+	airtable_record_create "flomation.app/automate/executor/actions/airtable/record_create"
+	airtable_record_delete "flomation.app/automate/executor/actions/airtable/record_delete"
+	airtable_record_get "flomation.app/automate/executor/actions/airtable/record_get"
+	airtable_record_list "flomation.app/automate/executor/actions/airtable/record_list"
+	airtable_record_update "flomation.app/automate/executor/actions/airtable/record_update"
+	airtable_record_upsert "flomation.app/automate/executor/actions/airtable/record_upsert"
 	arithmetic_addition "flomation.app/automate/executor/actions/arithmetic/addition"
 	arithmetic_division "flomation.app/automate/executor/actions/arithmetic/division"
 	arithmetic_multiplication "flomation.app/automate/executor/actions/arithmetic/multiplication"
@@ -363,6 +371,7 @@ import (
 	subflow_begin "flomation.app/automate/executor/actions/subflow/begin"
 	subflow_end "flomation.app/automate/executor/actions/subflow/end"
 	subflow_invoke "flomation.app/automate/executor/actions/subflow/invoke"
+	trigger_airtable_poll "flomation.app/automate/executor/actions/trigger/airtable_poll"
 	trigger_email "flomation.app/automate/executor/actions/trigger/email"
 	trigger_facebook_feed "flomation.app/automate/executor/actions/trigger/facebook_feed"
 	trigger_facebook_messenger "flomation.app/automate/executor/actions/trigger/facebook_messenger"
@@ -437,6 +446,14 @@ var Actions = map[string]core.Action{
 	"ai/groq":                               ai_groq.Execute,
 	"ai/openai":                             ai_openai.Execute,
 	"ai/openwebui":                          ai_openwebui.Execute,
+	"airtable/base_get_schema":              airtable_base_get_schema.Execute,
+	"airtable/base_list":                    airtable_base_list.Execute,
+	"airtable/record_create":                airtable_record_create.Execute,
+	"airtable/record_delete":                airtable_record_delete.Execute,
+	"airtable/record_get":                   airtable_record_get.Execute,
+	"airtable/record_list":                  airtable_record_list.Execute,
+	"airtable/record_update":                airtable_record_update.Execute,
+	"airtable/record_upsert":                airtable_record_upsert.Execute,
 	"arithmetic/addition":                   arithmetic_addition.Execute,
 	"arithmetic/division":                   arithmetic_division.Execute,
 	"arithmetic/multiplication":             arithmetic_multiplication.Execute,
@@ -772,6 +789,7 @@ var Actions = map[string]core.Action{
 	"subflow/begin":                         subflow_begin.Execute,
 	"subflow/end":                           subflow_end.Execute,
 	"subflow/invoke":                        subflow_invoke.Execute,
+	"trigger/airtable_poll":                 trigger_airtable_poll.Execute,
 	"trigger/email":                         trigger_email.Execute,
 	"trigger/facebook_feed":                 trigger_facebook_feed.Execute,
 	"trigger/facebook_messenger":            trigger_facebook_messenger.Execute,

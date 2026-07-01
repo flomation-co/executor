@@ -2455,6 +2455,859 @@
       }
     ]
   },
+  "airtable/base_get_schema": {
+    "hash": "3330572d0d1c96c85c4d0d360f5e8a5185e9a0a48a7ae42f135abe051b472937",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Base: Get Schema",
+    "description": "Get the schema of a base — its tables, and each table's fields (name, type, options) and views. Requires the schema.bases:read scope. Returns the tables array.",
+    "website": "https://www.flomation.co",
+    "icon": "airtable+table",
+    "date": "01/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Airtable",
+      "icon": "airtable",
+      "description": "Manage bases, tables, and records in Airtable"
+    },
+    "inputs": [
+      {
+        "name": "access_token",
+        "type": "secret",
+        "value": null,
+        "label": "Airtable Personal Access Token",
+        "placeholder": "pat...",
+        "required": true
+      },
+      {
+        "name": "base_id",
+        "type": "string",
+        "value": null,
+        "label": "Base ID",
+        "placeholder": "appXXXXXXXXXXXXXX",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tables",
+        "type": "object",
+        "value": null,
+        "label": "Tables",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Count",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Raw Response",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "airtable/base_list": {
+    "hash": "e5a18c6563b94f30b3cee8d8df138f75fc0b271cf30491388a8288fbd373f64e",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Base: List",
+    "description": "List the Airtable bases the token can access, with their IDs and permission levels. Optionally filter by permission level. Requires the schema.bases:read scope.",
+    "website": "https://www.flomation.co",
+    "icon": "airtable+list",
+    "date": "01/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Airtable",
+      "icon": "airtable",
+      "description": "Manage bases, tables, and records in Airtable"
+    },
+    "inputs": [
+      {
+        "name": "access_token",
+        "type": "secret",
+        "value": null,
+        "label": "Airtable Personal Access Token",
+        "placeholder": "pat...",
+        "required": true
+      },
+      {
+        "name": "permission_level",
+        "type": "string",
+        "value": null,
+        "label": "Permission Level",
+        "placeholder": "Comma-separated filter: read, comment, edit, create (optional)"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "bases",
+        "type": "object",
+        "value": null,
+        "label": "Bases",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Count",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "airtable/record_create": {
+    "hash": "11e2be424cb5495b5e74f46fc361fe949eeaf0a1034e4eec657eb3b5422afbf0",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Record: Create",
+    "description": "Create a record in an Airtable table. Set fields as simple key/value rows or as a JSON object for typed values (arrays, linked records, attachments). Returns the new record and its ID.",
+    "website": "https://www.flomation.co",
+    "icon": "airtable+plus",
+    "date": "01/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Airtable",
+      "icon": "airtable",
+      "description": "Manage bases, tables, and records in Airtable"
+    },
+    "inputs": [
+      {
+        "name": "access_token",
+        "type": "secret",
+        "value": null,
+        "label": "Airtable Personal Access Token",
+        "placeholder": "pat...",
+        "required": true
+      },
+      {
+        "name": "base_id",
+        "type": "string",
+        "value": null,
+        "label": "Base ID",
+        "placeholder": "appXXXXXXXXXXXXXX",
+        "required": true
+      },
+      {
+        "name": "table",
+        "type": "string",
+        "value": null,
+        "label": "Table (ID or name)",
+        "placeholder": "tblXXXXXXXXXXXXXX or Table 1",
+        "required": true
+      },
+      {
+        "name": "fields_kv",
+        "type": "key_value_array",
+        "value": null,
+        "label": "Fields",
+        "placeholder": "Field name = value (for simple text/number/single-select fields)"
+      },
+      {
+        "name": "fields",
+        "type": "object",
+        "value": null,
+        "label": "Fields (JSON, advanced)",
+        "placeholder": "{\"Name\":\"Ada\",\"Tags\":[\"A\",\"B\"],\"Done\":true}"
+      },
+      {
+        "name": "typecast",
+        "type": "boolean",
+        "value": null,
+        "label": "Typecast",
+        "placeholder": "Coerce string values to the field's type / create missing select options"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Record ID",
+        "placeholder": ""
+      },
+      {
+        "name": "fields",
+        "type": "object",
+        "value": null,
+        "label": "Fields",
+        "placeholder": ""
+      },
+      {
+        "name": "record",
+        "type": "object",
+        "value": null,
+        "label": "Record",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "airtable/record_delete": {
+    "hash": "cb66d0c8469d54032bace2da15fa2c5df01f498945cfad6a99cef309d412bff1",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Record: Delete",
+    "description": "Delete a record from an Airtable table by its record ID. Returns the deleted record ID.",
+    "website": "https://www.flomation.co",
+    "icon": "airtable+trash",
+    "date": "01/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Airtable",
+      "icon": "airtable",
+      "description": "Manage bases, tables, and records in Airtable"
+    },
+    "inputs": [
+      {
+        "name": "access_token",
+        "type": "secret",
+        "value": null,
+        "label": "Airtable Personal Access Token",
+        "placeholder": "pat...",
+        "required": true
+      },
+      {
+        "name": "base_id",
+        "type": "string",
+        "value": null,
+        "label": "Base ID",
+        "placeholder": "appXXXXXXXXXXXXXX",
+        "required": true
+      },
+      {
+        "name": "table",
+        "type": "string",
+        "value": null,
+        "label": "Table (ID or name)",
+        "placeholder": "tblXXXXXXXXXXXXXX or Table 1",
+        "required": true
+      },
+      {
+        "name": "record_id",
+        "type": "string",
+        "value": null,
+        "label": "Record ID",
+        "placeholder": "recXXXXXXXXXXXXXX",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Deleted Record ID",
+        "placeholder": ""
+      },
+      {
+        "name": "deleted",
+        "type": "boolean",
+        "value": null,
+        "label": "Deleted",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "airtable/record_get": {
+    "hash": "d6348b6ec38455a41ea4ed761c4fc61734920113c9972d373582d38282ef4f2a",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Record: Get",
+    "description": "Retrieve a single record from an Airtable table by its record ID. Returns the record and its fields.",
+    "website": "https://www.flomation.co",
+    "icon": "airtable+eye",
+    "date": "01/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Airtable",
+      "icon": "airtable",
+      "description": "Manage bases, tables, and records in Airtable"
+    },
+    "inputs": [
+      {
+        "name": "access_token",
+        "type": "secret",
+        "value": null,
+        "label": "Airtable Personal Access Token",
+        "placeholder": "pat...",
+        "required": true
+      },
+      {
+        "name": "base_id",
+        "type": "string",
+        "value": null,
+        "label": "Base ID",
+        "placeholder": "appXXXXXXXXXXXXXX",
+        "required": true
+      },
+      {
+        "name": "table",
+        "type": "string",
+        "value": null,
+        "label": "Table (ID or name)",
+        "placeholder": "tblXXXXXXXXXXXXXX or Table 1",
+        "required": true
+      },
+      {
+        "name": "record_id",
+        "type": "string",
+        "value": null,
+        "label": "Record ID",
+        "placeholder": "recXXXXXXXXXXXXXX",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Record ID",
+        "placeholder": ""
+      },
+      {
+        "name": "fields",
+        "type": "object",
+        "value": null,
+        "label": "Fields",
+        "placeholder": ""
+      },
+      {
+        "name": "record",
+        "type": "object",
+        "value": null,
+        "label": "Record",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "airtable/record_list": {
+    "hash": "00e6bc2ce0d7d6ce00a039e8d9040d5b1536ab878db6c82e56d9bf115f2c2ab3",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Record: List",
+    "description": "List or search records in an Airtable table. Filter with a formula, sort, restrict to a view, project fields, and page through results (or return all). Returns matching records.",
+    "website": "https://www.flomation.co",
+    "icon": "airtable+magnifying-glass",
+    "date": "01/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Airtable",
+      "icon": "airtable",
+      "description": "Manage bases, tables, and records in Airtable"
+    },
+    "inputs": [
+      {
+        "name": "access_token",
+        "type": "secret",
+        "value": null,
+        "label": "Airtable Personal Access Token",
+        "placeholder": "pat...",
+        "required": true
+      },
+      {
+        "name": "base_id",
+        "type": "string",
+        "value": null,
+        "label": "Base ID",
+        "placeholder": "appXXXXXXXXXXXXXX",
+        "required": true
+      },
+      {
+        "name": "table",
+        "type": "string",
+        "value": null,
+        "label": "Table (ID or name)",
+        "placeholder": "tblXXXXXXXXXXXXXX or Table 1",
+        "required": true
+      },
+      {
+        "name": "filter_by_formula",
+        "type": "string",
+        "value": null,
+        "label": "Filter by Formula",
+        "placeholder": "NOT({Name} = 'Admin')"
+      },
+      {
+        "name": "view",
+        "type": "string",
+        "value": null,
+        "label": "View",
+        "placeholder": "View name or ID (optional)"
+      },
+      {
+        "name": "return_fields",
+        "type": "string",
+        "value": null,
+        "label": "Return Fields",
+        "placeholder": "Comma-separated field names to return (optional)"
+      },
+      {
+        "name": "sort_field",
+        "type": "string",
+        "value": null,
+        "label": "Sort Field",
+        "placeholder": "Field name to sort by (optional)"
+      },
+      {
+        "name": "sort_direction",
+        "type": "string",
+        "value": null,
+        "label": "Sort Direction",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "Ascending",
+            "value": "asc"
+          },
+          {
+            "name": "Descending",
+            "value": "desc"
+          }
+        ]
+      },
+      {
+        "name": "sort",
+        "type": "object",
+        "value": null,
+        "label": "Sort (JSON, advanced)",
+        "placeholder": "[{\"field\":\"Created\",\"direction\":\"desc\"}] (overrides Sort Field)"
+      },
+      {
+        "name": "return_all",
+        "type": "boolean",
+        "value": null,
+        "label": "Return All",
+        "placeholder": "Page through every matching record (up to a safety cap)"
+      },
+      {
+        "name": "max_records",
+        "type": "integer",
+        "value": null,
+        "label": "Max Records",
+        "placeholder": "Cap on total records returned (optional)"
+      },
+      {
+        "name": "page_size",
+        "type": "integer",
+        "value": null,
+        "label": "Page Size",
+        "placeholder": "Records per page, max 100 (default 100)"
+      },
+      {
+        "name": "offset",
+        "type": "string",
+        "value": null,
+        "label": "Offset",
+        "placeholder": "Pagination offset from a previous page (optional)"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "records",
+        "type": "object",
+        "value": null,
+        "label": "Records",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Count",
+        "placeholder": ""
+      },
+      {
+        "name": "offset",
+        "type": "string",
+        "value": null,
+        "label": "Next Offset",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Raw Response",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "airtable/record_update": {
+    "hash": "f8e0e5038a371520dd12dad1cc108ae1a2be7337e0f739b61d4a1e337d6d2a31",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Record: Update",
+    "description": "Update fields on an existing Airtable record by its record ID. Only the supplied fields change. Returns the updated record.",
+    "website": "https://www.flomation.co",
+    "icon": "airtable+pencil",
+    "date": "01/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Airtable",
+      "icon": "airtable",
+      "description": "Manage bases, tables, and records in Airtable"
+    },
+    "inputs": [
+      {
+        "name": "access_token",
+        "type": "secret",
+        "value": null,
+        "label": "Airtable Personal Access Token",
+        "placeholder": "pat...",
+        "required": true
+      },
+      {
+        "name": "base_id",
+        "type": "string",
+        "value": null,
+        "label": "Base ID",
+        "placeholder": "appXXXXXXXXXXXXXX",
+        "required": true
+      },
+      {
+        "name": "table",
+        "type": "string",
+        "value": null,
+        "label": "Table (ID or name)",
+        "placeholder": "tblXXXXXXXXXXXXXX or Table 1",
+        "required": true
+      },
+      {
+        "name": "record_id",
+        "type": "string",
+        "value": null,
+        "label": "Record ID",
+        "placeholder": "recXXXXXXXXXXXXXX",
+        "required": true
+      },
+      {
+        "name": "fields_kv",
+        "type": "key_value_array",
+        "value": null,
+        "label": "Fields",
+        "placeholder": "Field name = value (for simple text/number/single-select fields)"
+      },
+      {
+        "name": "fields",
+        "type": "object",
+        "value": null,
+        "label": "Fields (JSON, advanced)",
+        "placeholder": "{\"Name\":\"Ada\",\"Tags\":[\"A\",\"B\"],\"Done\":true}"
+      },
+      {
+        "name": "typecast",
+        "type": "boolean",
+        "value": null,
+        "label": "Typecast",
+        "placeholder": "Coerce string values to the field's type / create missing select options"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Record ID",
+        "placeholder": ""
+      },
+      {
+        "name": "fields",
+        "type": "object",
+        "value": null,
+        "label": "Fields",
+        "placeholder": ""
+      },
+      {
+        "name": "record",
+        "type": "object",
+        "value": null,
+        "label": "Record",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "airtable/record_upsert": {
+    "hash": "bfda02cd1e0753fb423eb8e826756c41514398f947361bb2cca7380fe26e16d7",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Record: Create or Update",
+    "description": "Upsert a record: Airtable updates the record whose Match Fields equal the given values, or creates a new one if none match. Returns the record and whether it was created.",
+    "website": "https://www.flomation.co",
+    "icon": "airtable+rotate",
+    "date": "01/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Airtable",
+      "icon": "airtable",
+      "description": "Manage bases, tables, and records in Airtable"
+    },
+    "inputs": [
+      {
+        "name": "access_token",
+        "type": "secret",
+        "value": null,
+        "label": "Airtable Personal Access Token",
+        "placeholder": "pat...",
+        "required": true
+      },
+      {
+        "name": "base_id",
+        "type": "string",
+        "value": null,
+        "label": "Base ID",
+        "placeholder": "appXXXXXXXXXXXXXX",
+        "required": true
+      },
+      {
+        "name": "table",
+        "type": "string",
+        "value": null,
+        "label": "Table (ID or name)",
+        "placeholder": "tblXXXXXXXXXXXXXX or Table 1",
+        "required": true
+      },
+      {
+        "name": "match_fields",
+        "type": "string",
+        "value": null,
+        "label": "Match Fields",
+        "placeholder": "Comma-separated field names to match on, e.g. Email",
+        "required": true
+      },
+      {
+        "name": "fields_kv",
+        "type": "key_value_array",
+        "value": null,
+        "label": "Fields",
+        "placeholder": "Field name = value (must include the Match Fields)"
+      },
+      {
+        "name": "fields",
+        "type": "object",
+        "value": null,
+        "label": "Fields (JSON, advanced)",
+        "placeholder": "{\"Email\":\"a@b.com\",\"Name\":\"Ada\"}"
+      },
+      {
+        "name": "typecast",
+        "type": "boolean",
+        "value": null,
+        "label": "Typecast",
+        "placeholder": "Coerce string values to the field's type / create missing select options"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Record ID",
+        "placeholder": ""
+      },
+      {
+        "name": "created",
+        "type": "boolean",
+        "value": null,
+        "label": "Created",
+        "placeholder": ""
+      },
+      {
+        "name": "fields",
+        "type": "object",
+        "value": null,
+        "label": "Fields",
+        "placeholder": ""
+      },
+      {
+        "name": "record",
+        "type": "object",
+        "value": null,
+        "label": "Record",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Raw Response",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
   "arithmetic/addition": {
     "hash": "a8be7a5887114f374ae4957eb5464f4d5350781dcbc33f09c65fe91137168563",
     "author": "Andy Esser",
@@ -35395,6 +36248,142 @@
         "type": "string",
         "value": null,
         "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "trigger/airtable_poll": {
+    "hash": "6a3e908b974dbb10a9e1ef5c419305a9cafdedc36f311751b8c3a96f8eab17be",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Airtable Trigger",
+    "description": "Triggers a flow when records are created or updated in an Airtable table. Polls the table on an interval using a Created Time or Last Modified Time field.",
+    "website": "https://www.flomation.co",
+    "icon": "airtable",
+    "date": "01/07/2026",
+    "type": 1,
+    "category": {
+      "name": "Triggers",
+      "icon": "bolt-lightning",
+      "description": "Start a Flow"
+    },
+    "inputs": [
+      {
+        "name": "access_token",
+        "type": "secret",
+        "value": null,
+        "label": "Airtable Personal Access Token",
+        "placeholder": "pat...",
+        "required": true
+      },
+      {
+        "name": "base_id",
+        "type": "string",
+        "value": null,
+        "label": "Base ID",
+        "placeholder": "appXXXXXXXXXXXXXX",
+        "required": true
+      },
+      {
+        "name": "table",
+        "type": "string",
+        "value": null,
+        "label": "Table (ID or name)",
+        "placeholder": "tblXXXXXXXXXXXXXX or Table 1",
+        "required": true
+      },
+      {
+        "name": "trigger_field",
+        "type": "string",
+        "value": null,
+        "label": "Trigger Field",
+        "placeholder": "A 'Created Time' or 'Last Modified Time' field name",
+        "required": true
+      },
+      {
+        "name": "trigger_on",
+        "type": "string",
+        "value": null,
+        "label": "Trigger On",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "Record created",
+            "value": "created"
+          },
+          {
+            "name": "Record updated",
+            "value": "updated"
+          },
+          {
+            "name": "Record created or updated",
+            "value": "created_or_updated"
+          }
+        ]
+      },
+      {
+        "name": "view",
+        "type": "string",
+        "value": null,
+        "label": "View",
+        "placeholder": "Restrict to a view name or ID (optional)"
+      },
+      {
+        "name": "formula",
+        "type": "text",
+        "value": null,
+        "label": "Filter by Formula",
+        "placeholder": "Extra Airtable formula, ANDed with the timestamp filter (optional)"
+      },
+      {
+        "name": "poll_interval",
+        "type": "string",
+        "value": null,
+        "label": "Poll Interval",
+        "placeholder": "e.g. 1m, 5m"
+      },
+      {
+        "name": "download_attachments",
+        "type": "boolean",
+        "value": null,
+        "label": "Download Attachments",
+        "placeholder": "Download attachment fields as binary"
+      },
+      {
+        "name": "download_fields",
+        "type": "string",
+        "value": null,
+        "label": "Attachment Fields",
+        "placeholder": "Comma-separated attachment field names (case sensitive)"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "record_id",
+        "type": "string",
+        "value": null,
+        "label": "Record ID",
+        "placeholder": ""
+      },
+      {
+        "name": "created_time",
+        "type": "string",
+        "value": null,
+        "label": "Created Time",
+        "placeholder": ""
+      },
+      {
+        "name": "fields",
+        "type": "object",
+        "value": null,
+        "label": "Fields",
+        "placeholder": ""
+      },
+      {
+        "name": "triggered_at",
+        "type": "string",
+        "value": null,
+        "label": "Triggered At",
         "placeholder": ""
       }
     ]
