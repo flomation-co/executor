@@ -101,6 +101,24 @@ func TestBuildSearchBody_RawGroupsWins(t *testing.T) {
 	Expect(body["filterGroups"]).To(Equal(raw))
 }
 
+func TestBuildSearchBody_HasPropertyOmitsValue(t *testing.T) {
+	RegisterTestingT(t)
+
+	// A populated filter_value must NOT be attached when the operator is an
+	// existence check — HubSpot rejects HAS_PROPERTY/NOT_HAS_PROPERTY with a value.
+	for _, op := range []string{"HAS_PROPERTY", "NOT_HAS_PROPERTY"} {
+		inputs := []*core.Connection{
+			strConn("filter_property", "email"),
+			strConn("filter_operator", op),
+			strConn("filter_value", "leftover"),
+		}
+		body := BuildSearchBody(inputs)
+		filter := body["filterGroups"].([]interface{})[0].(map[string]interface{})["filters"].([]interface{})[0].(map[string]interface{})
+		Expect(filter["operator"]).To(Equal(op))
+		Expect(filter).NotTo(HaveKey("value"), "operator %s must not carry a value", op)
+	}
+}
+
 func TestCheckResponse(t *testing.T) {
 	RegisterTestingT(t)
 

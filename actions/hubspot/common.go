@@ -41,6 +41,19 @@ const (
 	requestTimeout = 30 * time.Second
 )
 
+// httpClient is shared across every HubSpot action so TCP connections to
+// api.hubapi.com are pooled and reused rather than re-dialled on each call
+// (a whole flow run can fire many HubSpot actions). Matches the connection-
+// reuse pattern used by the Databricks and OpenAI integrations.
+var httpClient = &http.Client{
+	Timeout: requestTimeout,
+	Transport: &http.Transport{
+		MaxIdleConns:        100,
+		MaxIdleConnsPerHost: 20,
+		IdleConnTimeout:     90 * time.Second,
+	},
+}
+
 // AuthInputs is the shared credential input. Action packages declare their
 // own literal Inputs arrays (the manifest generator parses those from the
 // AST), but this documents the canonical shape they reuse.
@@ -88,8 +101,7 @@ func ExecuteAPI(apiKey, method, path string, body interface{}) (*APIResponse, er
 		req.Header.Set("Content-Type", "application/json")
 	}
 
-	client := &http.Client{Timeout: requestTimeout}
-	resp, err := client.Do(req)
+	resp, err := httpClient.Do(req)
 	if err != nil {
 		return nil, fmt.Errorf("HubSpot API request failed: %w", err)
 	}
@@ -369,9 +381,13 @@ func BuildSearchBody(inputs []*core.Connection) map[string]interface{} {
 			op = "EQ"
 		}
 		filter := map[string]interface{}{"propertyName": prop, "operator": op}
-		// NEEDS_PROPERTY / HAS_PROPERTY operators take no value.
-		if v := OptionalString("filter_value", inputs); v != "" {
-			filter["value"] = v
+		// HAS_PROPERTY / NOT_HAS_PROPERTY are existence checks that take no
+		// value — HubSpot rejects the request if one is supplied, so never
+		// attach filter_value for them even if the field was left populated.
+		if op != "HAS_PROPERTY" && op != "NOT_HAS_PROPERTY" {
+			if v := OptionalString("filter_value", inputs); v != "" {
+				filter["value"] = v
+			}
 		}
 		body["filterGroups"] = []interface{}{
 			map[string]interface{}{"filters": []interface{}{filter}},
