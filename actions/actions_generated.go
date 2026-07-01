@@ -169,6 +169,34 @@ import (
 	google_slides_create "flomation.app/automate/executor/actions/google/slides/create"
 	google_slides_get "flomation.app/automate/executor/actions/google/slides/get"
 	google_slides_get_slide "flomation.app/automate/executor/actions/google/slides/get_slide"
+	hubspot_associate "flomation.app/automate/executor/actions/hubspot/associate"
+	hubspot_company_create "flomation.app/automate/executor/actions/hubspot/company_create"
+	hubspot_company_delete "flomation.app/automate/executor/actions/hubspot/company_delete"
+	hubspot_company_get "flomation.app/automate/executor/actions/hubspot/company_get"
+	hubspot_company_list "flomation.app/automate/executor/actions/hubspot/company_list"
+	hubspot_company_search "flomation.app/automate/executor/actions/hubspot/company_search"
+	hubspot_company_update "flomation.app/automate/executor/actions/hubspot/company_update"
+	hubspot_contact_create "flomation.app/automate/executor/actions/hubspot/contact_create"
+	hubspot_contact_delete "flomation.app/automate/executor/actions/hubspot/contact_delete"
+	hubspot_contact_get "flomation.app/automate/executor/actions/hubspot/contact_get"
+	hubspot_contact_list "flomation.app/automate/executor/actions/hubspot/contact_list"
+	hubspot_contact_search "flomation.app/automate/executor/actions/hubspot/contact_search"
+	hubspot_contact_update "flomation.app/automate/executor/actions/hubspot/contact_update"
+	hubspot_deal_create "flomation.app/automate/executor/actions/hubspot/deal_create"
+	hubspot_deal_delete "flomation.app/automate/executor/actions/hubspot/deal_delete"
+	hubspot_deal_get "flomation.app/automate/executor/actions/hubspot/deal_get"
+	hubspot_deal_list "flomation.app/automate/executor/actions/hubspot/deal_list"
+	hubspot_deal_search "flomation.app/automate/executor/actions/hubspot/deal_search"
+	hubspot_deal_update "flomation.app/automate/executor/actions/hubspot/deal_update"
+	hubspot_disassociate "flomation.app/automate/executor/actions/hubspot/disassociate"
+	hubspot_list_add_contact "flomation.app/automate/executor/actions/hubspot/list_add_contact"
+	hubspot_list_remove_contact "flomation.app/automate/executor/actions/hubspot/list_remove_contact"
+	hubspot_ticket_create "flomation.app/automate/executor/actions/hubspot/ticket_create"
+	hubspot_ticket_delete "flomation.app/automate/executor/actions/hubspot/ticket_delete"
+	hubspot_ticket_get "flomation.app/automate/executor/actions/hubspot/ticket_get"
+	hubspot_ticket_list "flomation.app/automate/executor/actions/hubspot/ticket_list"
+	hubspot_ticket_search "flomation.app/automate/executor/actions/hubspot/ticket_search"
+	hubspot_ticket_update "flomation.app/automate/executor/actions/hubspot/ticket_update"
 	journey_calculate_route "flomation.app/automate/executor/actions/journey/calculate_route"
 	journey_compare_departure_times "flomation.app/automate/executor/actions/journey/compare_departure_times"
 	journey_find_arrive_by "flomation.app/automate/executor/actions/journey/find_arrive_by"
@@ -343,6 +371,7 @@ import (
 	trigger_github_webhook "flomation.app/automate/executor/actions/trigger/github_webhook"
 	trigger_gitlab_webhook "flomation.app/automate/executor/actions/trigger/gitlab_webhook"
 	trigger_google_drive "flomation.app/automate/executor/actions/trigger/google_drive"
+	trigger_hubspot_webhook "flomation.app/automate/executor/actions/trigger/hubspot_webhook"
 	trigger_image "flomation.app/automate/executor/actions/trigger/image"
 	trigger_linkedin_poll "flomation.app/automate/executor/actions/trigger/linkedin_poll"
 	trigger_manual "flomation.app/automate/executor/actions/trigger/manual"
@@ -549,6 +578,34 @@ var Actions = map[string]core.Action{
 	"google/slides/create":                  google_slides_create.Execute,
 	"google/slides/get":                     google_slides_get.Execute,
 	"google/slides/get_slide":               google_slides_get_slide.Execute,
+	"hubspot/associate":                     hubspot_associate.Execute,
+	"hubspot/company_create":                hubspot_company_create.Execute,
+	"hubspot/company_delete":                hubspot_company_delete.Execute,
+	"hubspot/company_get":                   hubspot_company_get.Execute,
+	"hubspot/company_list":                  hubspot_company_list.Execute,
+	"hubspot/company_search":                hubspot_company_search.Execute,
+	"hubspot/company_update":                hubspot_company_update.Execute,
+	"hubspot/contact_create":                hubspot_contact_create.Execute,
+	"hubspot/contact_delete":                hubspot_contact_delete.Execute,
+	"hubspot/contact_get":                   hubspot_contact_get.Execute,
+	"hubspot/contact_list":                  hubspot_contact_list.Execute,
+	"hubspot/contact_search":                hubspot_contact_search.Execute,
+	"hubspot/contact_update":                hubspot_contact_update.Execute,
+	"hubspot/deal_create":                   hubspot_deal_create.Execute,
+	"hubspot/deal_delete":                   hubspot_deal_delete.Execute,
+	"hubspot/deal_get":                      hubspot_deal_get.Execute,
+	"hubspot/deal_list":                     hubspot_deal_list.Execute,
+	"hubspot/deal_search":                   hubspot_deal_search.Execute,
+	"hubspot/deal_update":                   hubspot_deal_update.Execute,
+	"hubspot/disassociate":                  hubspot_disassociate.Execute,
+	"hubspot/list_add_contact":              hubspot_list_add_contact.Execute,
+	"hubspot/list_remove_contact":           hubspot_list_remove_contact.Execute,
+	"hubspot/ticket_create":                 hubspot_ticket_create.Execute,
+	"hubspot/ticket_delete":                 hubspot_ticket_delete.Execute,
+	"hubspot/ticket_get":                    hubspot_ticket_get.Execute,
+	"hubspot/ticket_list":                   hubspot_ticket_list.Execute,
+	"hubspot/ticket_search":                 hubspot_ticket_search.Execute,
+	"hubspot/ticket_update":                 hubspot_ticket_update.Execute,
 	"journey/calculate_route":               journey_calculate_route.Execute,
 	"journey/compare_departure_times":       journey_compare_departure_times.Execute,
 	"journey/find_arrive_by":                journey_find_arrive_by.Execute,
@@ -723,6 +780,7 @@ var Actions = map[string]core.Action{
 	"trigger/github_webhook":                trigger_github_webhook.Execute,
 	"trigger/gitlab_webhook":                trigger_gitlab_webhook.Execute,
 	"trigger/google_drive":                  trigger_google_drive.Execute,
+	"trigger/hubspot_webhook":               trigger_hubspot_webhook.Execute,
 	"trigger/image":                         trigger_image.Execute,
 	"trigger/linkedin_poll":                 trigger_linkedin_poll.Execute,
 	"trigger/manual":                        trigger_manual.Execute,
