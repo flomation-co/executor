@@ -22889,6 +22889,1788 @@
       }
     ]
   },
+  "mailchimp/audience_list": {
+    "hash": "3e18825da5b8c918293364591352fec10b5ae5d0a10c1897633407e45219869f",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Audience: List",
+    "description": "List the Mailchimp audiences (lists) in the account. Use this to discover audience (list) IDs for the other actions.",
+    "website": "https://www.flomation.co",
+    "icon": "mailchimp+list",
+    "date": "01/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Mailchimp",
+      "icon": "mailchimp",
+      "description": "Manage audiences, members, tags, and campaigns in Mailchimp"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "Mailchimp API Key",
+        "placeholder": "xxxxxxxx-us6",
+        "required": true
+      },
+      {
+        "name": "return_all",
+        "type": "boolean",
+        "value": null,
+        "label": "Return All",
+        "placeholder": ""
+      },
+      {
+        "name": "limit",
+        "type": "integer",
+        "value": null,
+        "label": "Limit",
+        "placeholder": "500 (max 1000)"
+      },
+      {
+        "name": "offset",
+        "type": "integer",
+        "value": null,
+        "label": "Offset",
+        "placeholder": ""
+      }
+    ],
+    "outputs": [
+      {
+        "name": "results",
+        "type": "object",
+        "value": null,
+        "label": "Audiences",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Count",
+        "placeholder": ""
+      },
+      {
+        "name": "total_items",
+        "type": "integer",
+        "value": null,
+        "label": "Total Items",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Raw Response",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "mailchimp/campaign_delete": {
+    "hash": "20c0ff69e7e6c7fa793717b78a3274c39e60bf740d8fed4491e306550f18925d",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Campaign: Delete",
+    "description": "Permanently delete a Mailchimp campaign by its ID. This cannot be undone.",
+    "website": "https://www.flomation.co",
+    "icon": "mailchimp+trash",
+    "date": "01/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Mailchimp",
+      "icon": "mailchimp",
+      "description": "Manage audiences, members, tags, and campaigns in Mailchimp"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "Mailchimp API Key",
+        "placeholder": "xxxxxxxx-us6",
+        "required": true
+      },
+      {
+        "name": "campaign_id",
+        "type": "string",
+        "value": null,
+        "label": "Campaign ID",
+        "placeholder": "",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "mailchimp/campaign_get": {
+    "hash": "eda2fbb2828a3a287066e5c7de904a27e0a3e226624dc654ee87d29dd54297e3",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Campaign: Get",
+    "description": "Retrieve a single Mailchimp campaign by its ID, including its settings, recipients, and delivery status.",
+    "website": "https://www.flomation.co",
+    "icon": "mailchimp+eye",
+    "date": "01/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Mailchimp",
+      "icon": "mailchimp",
+      "description": "Manage audiences, members, tags, and campaigns in Mailchimp"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "Mailchimp API Key",
+        "placeholder": "xxxxxxxx-us6",
+        "required": true
+      },
+      {
+        "name": "campaign_id",
+        "type": "string",
+        "value": null,
+        "label": "Campaign ID",
+        "placeholder": "",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Campaign ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Campaign",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "mailchimp/campaign_list": {
+    "hash": "df9e4fdf49e52af323b64a68538cd5a3925e32342f07e846b430961e89f44ea1",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Campaign: List",
+    "description": "List Mailchimp campaigns, optionally filtered by audience, status, and send/create time. Sort and paginate the results.",
+    "website": "https://www.flomation.co",
+    "icon": "mailchimp+magnifying-glass",
+    "date": "01/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Mailchimp",
+      "icon": "mailchimp",
+      "description": "Manage audiences, members, tags, and campaigns in Mailchimp"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "Mailchimp API Key",
+        "placeholder": "xxxxxxxx-us6",
+        "required": true
+      },
+      {
+        "name": "list_id",
+        "type": "string",
+        "value": null,
+        "label": "Filter by Audience (List) ID",
+        "placeholder": ""
+      },
+      {
+        "name": "status",
+        "type": "string",
+        "value": null,
+        "label": "Status",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "Save",
+            "value": "save"
+          },
+          {
+            "name": "Sending",
+            "value": "sending"
+          },
+          {
+            "name": "Schedule",
+            "value": "schedule"
+          },
+          {
+            "name": "Sent",
+            "value": "sent"
+          }
+        ]
+      },
+      {
+        "name": "sort_field",
+        "type": "string",
+        "value": null,
+        "label": "Sort Field",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "Create Time",
+            "value": "create_time"
+          },
+          {
+            "name": "Send Time",
+            "value": "send_time"
+          }
+        ]
+      },
+      {
+        "name": "sort_direction",
+        "type": "string",
+        "value": null,
+        "label": "Sort Direction",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "Ascending",
+            "value": "ASC"
+          },
+          {
+            "name": "Descending",
+            "value": "DESC"
+          }
+        ]
+      },
+      {
+        "name": "before_send_time",
+        "type": "string",
+        "value": null,
+        "label": "Before Send Time",
+        "placeholder": "ISO 8601, e.g. 2026-07-01T00:00:00+00:00"
+      },
+      {
+        "name": "since_send_time",
+        "type": "string",
+        "value": null,
+        "label": "Since Send Time",
+        "placeholder": "ISO 8601, e.g. 2026-07-01T00:00:00+00:00"
+      },
+      {
+        "name": "before_create_time",
+        "type": "string",
+        "value": null,
+        "label": "Before Create Time",
+        "placeholder": "ISO 8601, e.g. 2026-07-01T00:00:00+00:00"
+      },
+      {
+        "name": "since_create_time",
+        "type": "string",
+        "value": null,
+        "label": "Since Create Time",
+        "placeholder": "ISO 8601, e.g. 2026-07-01T00:00:00+00:00"
+      },
+      {
+        "name": "fields",
+        "type": "string",
+        "value": null,
+        "label": "Fields",
+        "placeholder": "Comma-separated fields to include, e.g. campaigns.id,campaigns.settings.title"
+      },
+      {
+        "name": "exclude_fields",
+        "type": "string",
+        "value": null,
+        "label": "Exclude Fields",
+        "placeholder": "Comma-separated fields to omit"
+      },
+      {
+        "name": "return_all",
+        "type": "boolean",
+        "value": null,
+        "label": "Return All",
+        "placeholder": ""
+      },
+      {
+        "name": "limit",
+        "type": "integer",
+        "value": null,
+        "label": "Limit",
+        "placeholder": "10 (max 1000)"
+      },
+      {
+        "name": "offset",
+        "type": "integer",
+        "value": null,
+        "label": "Offset",
+        "placeholder": ""
+      }
+    ],
+    "outputs": [
+      {
+        "name": "results",
+        "type": "object",
+        "value": null,
+        "label": "Campaigns",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Count",
+        "placeholder": ""
+      },
+      {
+        "name": "total_items",
+        "type": "integer",
+        "value": null,
+        "label": "Total Items",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Raw Response",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "mailchimp/campaign_replicate": {
+    "hash": "a86d92b8cb2b5029c68a9c7dd9e383d0d48756c93a3c31b09c84811629161204",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Campaign: Replicate",
+    "description": "Create a copy of an existing Mailchimp campaign. Returns the newly created campaign.",
+    "website": "https://www.flomation.co",
+    "icon": "mailchimp+copy",
+    "date": "01/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Mailchimp",
+      "icon": "mailchimp",
+      "description": "Manage audiences, members, tags, and campaigns in Mailchimp"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "Mailchimp API Key",
+        "placeholder": "xxxxxxxx-us6",
+        "required": true
+      },
+      {
+        "name": "campaign_id",
+        "type": "string",
+        "value": null,
+        "label": "Campaign ID",
+        "placeholder": "",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Campaign ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Campaign",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "mailchimp/campaign_resend": {
+    "hash": "3f1ac8f5b954c529f7c83f067d8c33487f0f379290a0062d1abed47283c8c74d",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Campaign: Resend",
+    "description": "Create a resend-to-non-openers version of a sent Mailchimp campaign. Returns the newly created campaign.",
+    "website": "https://www.flomation.co",
+    "icon": "mailchimp+repeat",
+    "date": "01/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Mailchimp",
+      "icon": "mailchimp",
+      "description": "Manage audiences, members, tags, and campaigns in Mailchimp"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "Mailchimp API Key",
+        "placeholder": "xxxxxxxx-us6",
+        "required": true
+      },
+      {
+        "name": "campaign_id",
+        "type": "string",
+        "value": null,
+        "label": "Campaign ID",
+        "placeholder": "",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Campaign ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Campaign",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "mailchimp/campaign_send": {
+    "hash": "4045c8d2919cb4a1c583ba9ee93a2435dccec9f26158d564a9f6e93af839f539",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Campaign: Send",
+    "description": "Send a Mailchimp campaign immediately to its configured recipients.",
+    "website": "https://www.flomation.co",
+    "icon": "mailchimp+paper-plane",
+    "date": "01/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Mailchimp",
+      "icon": "mailchimp",
+      "description": "Manage audiences, members, tags, and campaigns in Mailchimp"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "Mailchimp API Key",
+        "placeholder": "xxxxxxxx-us6",
+        "required": true
+      },
+      {
+        "name": "campaign_id",
+        "type": "string",
+        "value": null,
+        "label": "Campaign ID",
+        "placeholder": "",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "mailchimp/interest_category_list": {
+    "hash": "fba083b569ff1708a9b90d3cb13e512b5349ee9924dd21d06d7075376fb8c64c",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Interest Category: List",
+    "description": "List the interest categories (groupings) of a Mailchimp audience. Use this to discover interest category IDs.",
+    "website": "https://www.flomation.co",
+    "icon": "mailchimp+list",
+    "date": "01/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Mailchimp",
+      "icon": "mailchimp",
+      "description": "Manage audiences, members, tags, and campaigns in Mailchimp"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "Mailchimp API Key",
+        "placeholder": "xxxxxxxx-us6",
+        "required": true
+      },
+      {
+        "name": "list_id",
+        "type": "string",
+        "value": null,
+        "label": "Audience (List) ID",
+        "placeholder": "Use Audience: List to find it",
+        "required": true
+      },
+      {
+        "name": "return_all",
+        "type": "boolean",
+        "value": null,
+        "label": "Return All",
+        "placeholder": ""
+      },
+      {
+        "name": "limit",
+        "type": "integer",
+        "value": null,
+        "label": "Limit",
+        "placeholder": "500 (max 1000)"
+      },
+      {
+        "name": "offset",
+        "type": "integer",
+        "value": null,
+        "label": "Offset",
+        "placeholder": ""
+      }
+    ],
+    "outputs": [
+      {
+        "name": "results",
+        "type": "object",
+        "value": null,
+        "label": "Interest Categories",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Count",
+        "placeholder": ""
+      },
+      {
+        "name": "total_items",
+        "type": "integer",
+        "value": null,
+        "label": "Total Items",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Raw Response",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "mailchimp/list_group_list": {
+    "hash": "debe8223ed4b8fd12cc1cf79017ea8edbc0fd590ded6c6316f719e9d4636a153",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Interest Group: List",
+    "description": "List the interests (groups) within an interest category of a Mailchimp audience. Use this to discover interest IDs.",
+    "website": "https://www.flomation.co",
+    "icon": "mailchimp+list",
+    "date": "01/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Mailchimp",
+      "icon": "mailchimp",
+      "description": "Manage audiences, members, tags, and campaigns in Mailchimp"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "Mailchimp API Key",
+        "placeholder": "xxxxxxxx-us6",
+        "required": true
+      },
+      {
+        "name": "list_id",
+        "type": "string",
+        "value": null,
+        "label": "Audience (List) ID",
+        "placeholder": "Use Audience: List to find it",
+        "required": true
+      },
+      {
+        "name": "category_id",
+        "type": "string",
+        "value": null,
+        "label": "Interest Category ID (from Interest Category: List)",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "return_all",
+        "type": "boolean",
+        "value": null,
+        "label": "Return All",
+        "placeholder": ""
+      },
+      {
+        "name": "limit",
+        "type": "integer",
+        "value": null,
+        "label": "Limit",
+        "placeholder": "500 (max 1000)"
+      },
+      {
+        "name": "offset",
+        "type": "integer",
+        "value": null,
+        "label": "Offset",
+        "placeholder": ""
+      }
+    ],
+    "outputs": [
+      {
+        "name": "results",
+        "type": "object",
+        "value": null,
+        "label": "Interest Groups",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Count",
+        "placeholder": ""
+      },
+      {
+        "name": "total_items",
+        "type": "integer",
+        "value": null,
+        "label": "Total Items",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Raw Response",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "mailchimp/member_create": {
+    "hash": "d10ea69299e1be6c3c1a9d8740c13ea635e992d60065d3ffaaf74e2b5949b6cf",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Member: Create",
+    "description": "Add a member (subscriber) to a Mailchimp audience. Set status, merge fields (FNAME/LNAME/…), tags, interests, and location. Returns the created member.",
+    "website": "https://www.flomation.co",
+    "icon": "mailchimp+plus",
+    "date": "01/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Mailchimp",
+      "icon": "mailchimp",
+      "description": "Manage audiences, members, tags, and campaigns in Mailchimp"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "Mailchimp API Key",
+        "placeholder": "xxxxxxxx-us6",
+        "required": true
+      },
+      {
+        "name": "list_id",
+        "type": "string",
+        "value": null,
+        "label": "Audience (List) ID",
+        "placeholder": "Use Audience: List to find it",
+        "required": true
+      },
+      {
+        "name": "email",
+        "type": "string",
+        "value": null,
+        "label": "Email",
+        "placeholder": "name@example.com",
+        "required": true
+      },
+      {
+        "name": "status",
+        "type": "string",
+        "value": null,
+        "label": "Status",
+        "placeholder": "",
+        "required": true,
+        "options": [
+          {
+            "name": "Subscribed",
+            "value": "subscribed"
+          },
+          {
+            "name": "Unsubscribed",
+            "value": "unsubscribed"
+          },
+          {
+            "name": "Pending (double opt-in)",
+            "value": "pending"
+          },
+          {
+            "name": "Cleaned",
+            "value": "cleaned"
+          },
+          {
+            "name": "Transactional",
+            "value": "transactional"
+          }
+        ]
+      },
+      {
+        "name": "email_type",
+        "type": "string",
+        "value": null,
+        "label": "Email Type",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "HTML",
+            "value": "html"
+          },
+          {
+            "name": "Text",
+            "value": "text"
+          }
+        ]
+      },
+      {
+        "name": "language",
+        "type": "string",
+        "value": null,
+        "label": "Language",
+        "placeholder": "en"
+      },
+      {
+        "name": "vip",
+        "type": "boolean",
+        "value": null,
+        "label": "VIP",
+        "placeholder": ""
+      },
+      {
+        "name": "ip_signup",
+        "type": "string",
+        "value": null,
+        "label": "Signup IP",
+        "placeholder": "Opt-in source IP (optional)"
+      },
+      {
+        "name": "ip_opt",
+        "type": "string",
+        "value": null,
+        "label": "Opt-in IP",
+        "placeholder": "Confirmation IP (optional)"
+      },
+      {
+        "name": "timestamp_signup",
+        "type": "string",
+        "value": null,
+        "label": "Signup Timestamp",
+        "placeholder": "ISO 8601, e.g. 2026-07-01T00:00:00+00:00"
+      },
+      {
+        "name": "timestamp_opt",
+        "type": "string",
+        "value": null,
+        "label": "Opt-in Timestamp",
+        "placeholder": "ISO 8601, e.g. 2026-07-01T00:00:00+00:00"
+      },
+      {
+        "name": "tags",
+        "type": "string",
+        "value": null,
+        "label": "Tags",
+        "placeholder": "Comma-separated tag names"
+      },
+      {
+        "name": "merge_fields",
+        "type": "key_value_array",
+        "value": null,
+        "label": "Merge Fields",
+        "placeholder": "Merge tag = value, e.g. FNAME = Ada"
+      },
+      {
+        "name": "merge_fields_json",
+        "type": "object",
+        "value": null,
+        "label": "Merge Fields (JSON, advanced)",
+        "placeholder": "{\"FNAME\":\"Ada\",\"ADDRESS\":{...}}"
+      },
+      {
+        "name": "interests_json",
+        "type": "object",
+        "value": null,
+        "label": "Interests (JSON)",
+        "placeholder": "{\"\u003cinterestId\u003e\":true}"
+      },
+      {
+        "name": "location_json",
+        "type": "object",
+        "value": null,
+        "label": "Location (JSON)",
+        "placeholder": "{\"latitude\":51.5,\"longitude\":-0.1}"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Member ID (subscriber hash)",
+        "placeholder": ""
+      },
+      {
+        "name": "status",
+        "type": "string",
+        "value": null,
+        "label": "Status",
+        "placeholder": ""
+      },
+      {
+        "name": "member",
+        "type": "object",
+        "value": null,
+        "label": "Member",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "mailchimp/member_delete": {
+    "hash": "ce8b6f31e7bbb30bc24d1d2385bfd3869f02db86df54ed1d70aa902b145b68de",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Member: Delete",
+    "description": "Remove a member (subscriber) from a Mailchimp audience. By default archives the member (reversible); optionally permanently delete them (irreversible).",
+    "website": "https://www.flomation.co",
+    "icon": "mailchimp+trash",
+    "date": "01/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Mailchimp",
+      "icon": "mailchimp",
+      "description": "Manage audiences, members, tags, and campaigns in Mailchimp"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "Mailchimp API Key",
+        "placeholder": "xxxxxxxx-us6",
+        "required": true
+      },
+      {
+        "name": "list_id",
+        "type": "string",
+        "value": null,
+        "label": "Audience (List) ID",
+        "placeholder": "Use Audience: List to find it",
+        "required": true
+      },
+      {
+        "name": "email",
+        "type": "string",
+        "value": null,
+        "label": "Email",
+        "placeholder": "name@example.com",
+        "required": true
+      },
+      {
+        "name": "permanent",
+        "type": "boolean",
+        "value": null,
+        "label": "Permanent (irreversible)",
+        "placeholder": "Off = archive (reversible); On = permanently delete"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "mailchimp/member_get": {
+    "hash": "7a30a9310bb5b7f46136471bb757748442c360cf294a523d4716cc3db6d85c89",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Member: Get",
+    "description": "Retrieve a single member (subscriber) from a Mailchimp audience by email. Optionally include or exclude specific fields. Returns the member.",
+    "website": "https://www.flomation.co",
+    "icon": "mailchimp+eye",
+    "date": "01/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Mailchimp",
+      "icon": "mailchimp",
+      "description": "Manage audiences, members, tags, and campaigns in Mailchimp"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "Mailchimp API Key",
+        "placeholder": "xxxxxxxx-us6",
+        "required": true
+      },
+      {
+        "name": "list_id",
+        "type": "string",
+        "value": null,
+        "label": "Audience (List) ID",
+        "placeholder": "Use Audience: List to find it",
+        "required": true
+      },
+      {
+        "name": "email",
+        "type": "string",
+        "value": null,
+        "label": "Email",
+        "placeholder": "name@example.com",
+        "required": true
+      },
+      {
+        "name": "fields",
+        "type": "string",
+        "value": null,
+        "label": "Fields",
+        "placeholder": "Comma-separated fields to include"
+      },
+      {
+        "name": "exclude_fields",
+        "type": "string",
+        "value": null,
+        "label": "Exclude Fields",
+        "placeholder": "Comma-separated fields to exclude"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Member ID (subscriber hash)",
+        "placeholder": ""
+      },
+      {
+        "name": "status",
+        "type": "string",
+        "value": null,
+        "label": "Status",
+        "placeholder": ""
+      },
+      {
+        "name": "member",
+        "type": "object",
+        "value": null,
+        "label": "Member",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "mailchimp/member_list": {
+    "hash": "debae3826b9d80de99f3efe90c35a166942a5fff2a4890e1e24b73f5659db8da",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Member: List",
+    "description": "List members (subscribers) in a Mailchimp audience. Filter by status, email type, and change/creation timestamps. Returns all matching members or a single page.",
+    "website": "https://www.flomation.co",
+    "icon": "mailchimp+magnifying-glass",
+    "date": "01/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Mailchimp",
+      "icon": "mailchimp",
+      "description": "Manage audiences, members, tags, and campaigns in Mailchimp"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "Mailchimp API Key",
+        "placeholder": "xxxxxxxx-us6",
+        "required": true
+      },
+      {
+        "name": "list_id",
+        "type": "string",
+        "value": null,
+        "label": "Audience (List) ID",
+        "placeholder": "Use Audience: List to find it",
+        "required": true
+      },
+      {
+        "name": "status",
+        "type": "string",
+        "value": null,
+        "label": "Status",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "Subscribed",
+            "value": "subscribed"
+          },
+          {
+            "name": "Unsubscribed",
+            "value": "unsubscribed"
+          },
+          {
+            "name": "Cleaned",
+            "value": "cleaned"
+          },
+          {
+            "name": "Pending",
+            "value": "pending"
+          },
+          {
+            "name": "Transactional",
+            "value": "transactional"
+          }
+        ]
+      },
+      {
+        "name": "email_type",
+        "type": "string",
+        "value": null,
+        "label": "Email Type",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "HTML",
+            "value": "html"
+          },
+          {
+            "name": "Text",
+            "value": "text"
+          }
+        ]
+      },
+      {
+        "name": "since_last_changed",
+        "type": "string",
+        "value": null,
+        "label": "Since Last Changed",
+        "placeholder": "ISO timestamp"
+      },
+      {
+        "name": "before_last_changed",
+        "type": "string",
+        "value": null,
+        "label": "Before Last Changed",
+        "placeholder": "ISO timestamp"
+      },
+      {
+        "name": "since_timestamp_opt",
+        "type": "string",
+        "value": null,
+        "label": "Since Opt-in Timestamp",
+        "placeholder": "ISO timestamp"
+      },
+      {
+        "name": "before_timestamp_opt",
+        "type": "string",
+        "value": null,
+        "label": "Before Opt-in Timestamp",
+        "placeholder": "ISO timestamp"
+      },
+      {
+        "name": "return_all",
+        "type": "boolean",
+        "value": null,
+        "label": "Return All",
+        "placeholder": ""
+      },
+      {
+        "name": "limit",
+        "type": "integer",
+        "value": null,
+        "label": "Limit",
+        "placeholder": "Max results (default 500, max 1000)"
+      },
+      {
+        "name": "offset",
+        "type": "integer",
+        "value": null,
+        "label": "Offset",
+        "placeholder": ""
+      }
+    ],
+    "outputs": [
+      {
+        "name": "results",
+        "type": "object",
+        "value": null,
+        "label": "Members",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Count",
+        "placeholder": ""
+      },
+      {
+        "name": "total_items",
+        "type": "integer",
+        "value": null,
+        "label": "Total Items",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Raw Response",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "mailchimp/member_tag_add": {
+    "hash": "0a25810050ec7689c9dff138ea6149a7b6bb7b68e433adb29cd0f11190287a00",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Member Tag: Add",
+    "description": "Add one or more tags to a Mailchimp audience member. Tags are matched or created by name and applied as active.",
+    "website": "https://www.flomation.co",
+    "icon": "mailchimp+plus",
+    "date": "01/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Mailchimp",
+      "icon": "mailchimp",
+      "description": "Manage audiences, members, tags, and campaigns in Mailchimp"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "Mailchimp API Key",
+        "placeholder": "xxxxxxxx-us6",
+        "required": true
+      },
+      {
+        "name": "list_id",
+        "type": "string",
+        "value": null,
+        "label": "Audience (List) ID",
+        "placeholder": "Use Audience: List to find it",
+        "required": true
+      },
+      {
+        "name": "email",
+        "type": "string",
+        "value": null,
+        "label": "Email",
+        "placeholder": "name@example.com",
+        "required": true
+      },
+      {
+        "name": "tags",
+        "type": "string",
+        "value": null,
+        "label": "Tags",
+        "placeholder": "Comma-separated tag names",
+        "required": true
+      },
+      {
+        "name": "is_syncing",
+        "type": "boolean",
+        "value": null,
+        "label": "Suppress tag-triggered automations",
+        "placeholder": ""
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "mailchimp/member_tag_remove": {
+    "hash": "3c0eedea0d548f2ab1f10aa3dc8ee1dfe18f5a6520ddb06805f2880c237ff948",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Member Tag: Remove",
+    "description": "Remove one or more tags from a Mailchimp audience member. Tags are matched by name and marked inactive.",
+    "website": "https://www.flomation.co",
+    "icon": "mailchimp+minus",
+    "date": "01/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Mailchimp",
+      "icon": "mailchimp",
+      "description": "Manage audiences, members, tags, and campaigns in Mailchimp"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "Mailchimp API Key",
+        "placeholder": "xxxxxxxx-us6",
+        "required": true
+      },
+      {
+        "name": "list_id",
+        "type": "string",
+        "value": null,
+        "label": "Audience (List) ID",
+        "placeholder": "Use Audience: List to find it",
+        "required": true
+      },
+      {
+        "name": "email",
+        "type": "string",
+        "value": null,
+        "label": "Email",
+        "placeholder": "name@example.com",
+        "required": true
+      },
+      {
+        "name": "tags",
+        "type": "string",
+        "value": null,
+        "label": "Tags",
+        "placeholder": "Comma-separated tag names",
+        "required": true
+      },
+      {
+        "name": "is_syncing",
+        "type": "boolean",
+        "value": null,
+        "label": "Suppress tag-triggered automations",
+        "placeholder": ""
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "mailchimp/member_update": {
+    "hash": "ad0bff070df769bf0a1327be63f94939565225ccf51f3b5cb6407455bc44e8b0",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Member: Update",
+    "description": "Update a member (subscriber) in a Mailchimp audience, creating it if it does not exist (upsert). Set status, merge fields, interests, location, and more. Returns the member.",
+    "website": "https://www.flomation.co",
+    "icon": "mailchimp+pencil",
+    "date": "01/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Mailchimp",
+      "icon": "mailchimp",
+      "description": "Manage audiences, members, tags, and campaigns in Mailchimp"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "Mailchimp API Key",
+        "placeholder": "xxxxxxxx-us6",
+        "required": true
+      },
+      {
+        "name": "list_id",
+        "type": "string",
+        "value": null,
+        "label": "Audience (List) ID",
+        "placeholder": "Use Audience: List to find it",
+        "required": true
+      },
+      {
+        "name": "email",
+        "type": "string",
+        "value": null,
+        "label": "Email",
+        "placeholder": "name@example.com",
+        "required": true
+      },
+      {
+        "name": "status",
+        "type": "string",
+        "value": null,
+        "label": "Status",
+        "placeholder": "Required only when creating a new member",
+        "options": [
+          {
+            "name": "Subscribed",
+            "value": "subscribed"
+          },
+          {
+            "name": "Unsubscribed",
+            "value": "unsubscribed"
+          },
+          {
+            "name": "Pending (double opt-in)",
+            "value": "pending"
+          },
+          {
+            "name": "Cleaned",
+            "value": "cleaned"
+          },
+          {
+            "name": "Transactional",
+            "value": "transactional"
+          }
+        ]
+      },
+      {
+        "name": "email_type",
+        "type": "string",
+        "value": null,
+        "label": "Email Type",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "HTML",
+            "value": "html"
+          },
+          {
+            "name": "Text",
+            "value": "text"
+          }
+        ]
+      },
+      {
+        "name": "language",
+        "type": "string",
+        "value": null,
+        "label": "Language",
+        "placeholder": "en"
+      },
+      {
+        "name": "vip",
+        "type": "boolean",
+        "value": null,
+        "label": "VIP",
+        "placeholder": ""
+      },
+      {
+        "name": "ip_signup",
+        "type": "string",
+        "value": null,
+        "label": "Signup IP",
+        "placeholder": "Opt-in source IP (optional)"
+      },
+      {
+        "name": "ip_opt",
+        "type": "string",
+        "value": null,
+        "label": "Opt-in IP",
+        "placeholder": "Confirmation IP (optional)"
+      },
+      {
+        "name": "timestamp_signup",
+        "type": "string",
+        "value": null,
+        "label": "Signup Timestamp",
+        "placeholder": "ISO 8601, e.g. 2026-07-01T00:00:00+00:00"
+      },
+      {
+        "name": "timestamp_opt",
+        "type": "string",
+        "value": null,
+        "label": "Opt-in Timestamp",
+        "placeholder": "ISO 8601, e.g. 2026-07-01T00:00:00+00:00"
+      },
+      {
+        "name": "merge_fields",
+        "type": "key_value_array",
+        "value": null,
+        "label": "Merge Fields",
+        "placeholder": "Merge tag = value, e.g. FNAME = Ada"
+      },
+      {
+        "name": "merge_fields_json",
+        "type": "object",
+        "value": null,
+        "label": "Merge Fields (JSON, advanced)",
+        "placeholder": "{\"FNAME\":\"Ada\",\"ADDRESS\":{...}}"
+      },
+      {
+        "name": "interests_json",
+        "type": "object",
+        "value": null,
+        "label": "Interests (JSON)",
+        "placeholder": "{\"\u003cinterestId\u003e\":true}"
+      },
+      {
+        "name": "location_json",
+        "type": "object",
+        "value": null,
+        "label": "Location (JSON)",
+        "placeholder": "{\"latitude\":51.5,\"longitude\":-0.1}"
+      },
+      {
+        "name": "skip_merge_validation",
+        "type": "boolean",
+        "value": null,
+        "label": "Skip Merge Validation",
+        "placeholder": ""
+      }
+    ],
+    "outputs": [
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Member ID (subscriber hash)",
+        "placeholder": ""
+      },
+      {
+        "name": "status",
+        "type": "string",
+        "value": null,
+        "label": "Status",
+        "placeholder": ""
+      },
+      {
+        "name": "member",
+        "type": "object",
+        "value": null,
+        "label": "Member",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
   "makefile/get_variable": {
     "hash": "1f1bd578cd41f1ea6a2b99c4909af65e0ee7a6fde635e620cec17d7315b579cb",
     "author": "Andy Esser",
@@ -37587,6 +39369,105 @@
         "type": "string",
         "value": null,
         "label": "Created At",
+        "placeholder": ""
+      },
+      {
+        "name": "triggered_at",
+        "type": "string",
+        "value": null,
+        "label": "Triggered At",
+        "placeholder": ""
+      }
+    ]
+  },
+  "trigger/mailchimp_webhook": {
+    "hash": "0c141b0008b8178e66fcbf3ca480ca776232b79eda0d4f662ebd6dcf358d12f0",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Mailchimp Trigger",
+    "description": "Triggers a flow on Mailchimp audience events (subscribe, unsubscribe, profile update, cleaned, email changed, campaign sent) via a webhook.",
+    "website": "https://www.flomation.co",
+    "icon": "mailchimp",
+    "date": "01/07/2026",
+    "type": 1,
+    "category": {
+      "name": "Triggers",
+      "icon": "bolt-lightning",
+      "description": "Start a Flow"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "Mailchimp API Key",
+        "placeholder": "xxxxxxxx-us6",
+        "required": true
+      },
+      {
+        "name": "list_id",
+        "type": "string",
+        "value": null,
+        "label": "Audience (List) ID",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "events",
+        "type": "string",
+        "value": null,
+        "label": "Events",
+        "placeholder": "Comma-separated: subscribe,unsubscribe,profile,cleaned,upemail,campaign"
+      },
+      {
+        "name": "sources",
+        "type": "string",
+        "value": null,
+        "label": "Sources",
+        "placeholder": "Comma-separated: user,admin,api"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "content",
+        "type": "string",
+        "value": null,
+        "label": "Event Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "event_type",
+        "type": "string",
+        "value": null,
+        "label": "Event Type",
+        "placeholder": ""
+      },
+      {
+        "name": "list_id",
+        "type": "string",
+        "value": null,
+        "label": "Audience (List) ID",
+        "placeholder": ""
+      },
+      {
+        "name": "email",
+        "type": "string",
+        "value": null,
+        "label": "Email",
+        "placeholder": ""
+      },
+      {
+        "name": "fired_at",
+        "type": "string",
+        "value": null,
+        "label": "Fired At",
+        "placeholder": ""
+      },
+      {
+        "name": "body",
+        "type": "object",
+        "value": null,
+        "label": "Raw Event Body",
         "placeholder": ""
       },
       {
