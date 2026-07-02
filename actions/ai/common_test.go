@@ -118,6 +118,33 @@ func TestModelContextWindow_UnknownModel(t *testing.T) {
 	Expect(ModelContextWindow("some-future-model")).To(Equal(32000))
 }
 
+// OpenRouter reaches models through provider-prefixed ids
+// ("anthropic/claude-sonnet-5"); the substring matching must resolve
+// both the families added for OpenRouter and the pre-existing families
+// when prefixed.
+func TestModelContextWindow_OpenRouterPrefixedModels(t *testing.T) {
+	RegisterTestingT(t)
+	Expect(ModelContextWindow("openai/gpt-5.4-mini")).To(Equal(400000))
+	Expect(ModelContextWindow("anthropic/claude-sonnet-5")).To(Equal(200000))
+	Expect(ModelContextWindow("google/gemini-3.1-pro-preview")).To(Equal(1000000))
+	Expect(ModelContextWindow("google/gemini-3.1-flash-lite-image")).To(Equal(32000))
+	Expect(ModelContextWindow("deepseek/deepseek-v3.2")).To(Equal(128000))
+	Expect(ModelContextWindow("mistralai/mistral-large-2512")).To(Equal(128000))
+	Expect(ModelContextWindow("meta-llama/llama-4-maverick")).To(Equal(128000))
+	Expect(ModelContextWindow("x-ai/grok-4-fast")).To(Equal(128000))
+	// Prefixed ids of families the switch already knew must not regress.
+	Expect(ModelContextWindow("openai/gpt-oss-20b:free")).To(Equal(128000))
+	Expect(ModelContextWindow("openai/gpt-4.1")).To(Equal(1000000))
+	// Unprefixed local (Ollama) and Groq variants of the same families
+	// have far smaller real windows and must keep the conservative
+	// default — the deepseek/mistral cases are scoped to the OpenRouter
+	// provider-prefixed ids on purpose.
+	Expect(ModelContextWindow("mistral:7b-instruct")).To(Equal(32000))
+	Expect(ModelContextWindow("mistral-saba-24b")).To(Equal(32000))
+	Expect(ModelContextWindow("deepseek-r1:8b")).To(Equal(32000))
+	Expect(ModelContextWindow("mistralai/mistral-small-24b-instruct-2501")).To(Equal(32000))
+}
+
 // TestBlobTokenInstructions_NoInlineRealLookingHandle catches the
 // fundamental bug class: a real-looking example handle in the
 // instruction is something Anthropic models will copy verbatim.

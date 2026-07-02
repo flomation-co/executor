@@ -2305,6 +2305,249 @@
       }
     ]
   },
+  "ai/openrouter": {
+    "hash": "542356ee20754bc8b99da798720e7c2b652694bba9a0a9bcfce9b4f51d2801d8",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "OpenRouter Prompt",
+    "description": "Send a prompt to any AI model through the OpenRouter unified API and return the response",
+    "website": "https://www.flomation.co",
+    "icon": "brain+route",
+    "date": "02/07/2026",
+    "type": 2,
+    "category": {
+      "name": "AI",
+      "icon": "brain",
+      "description": "Artificial intelligence and large language model integrations"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "API Key",
+        "placeholder": "sk-or-v1-...",
+        "required": true
+      },
+      {
+        "name": "model",
+        "type": "string",
+        "value": null,
+        "label": "Model",
+        "placeholder": "openai/gpt-5.4-mini",
+        "options": [
+          {
+            "name": "OpenAI GPT-5.4",
+            "value": "openai/gpt-5.4"
+          },
+          {
+            "name": "OpenAI GPT-5.4 Mini",
+            "value": "openai/gpt-5.4-mini"
+          },
+          {
+            "name": "Anthropic Claude Sonnet 5",
+            "value": "anthropic/claude-sonnet-5"
+          },
+          {
+            "name": "Anthropic Claude Opus 4.8",
+            "value": "anthropic/claude-opus-4.8"
+          },
+          {
+            "name": "Anthropic Claude Haiku 4.5",
+            "value": "anthropic/claude-haiku-4.5"
+          },
+          {
+            "name": "Google Gemini 3.1 Pro Preview",
+            "value": "google/gemini-3.1-pro-preview"
+          },
+          {
+            "name": "Google Gemini 2.5 Flash",
+            "value": "google/gemini-2.5-flash"
+          },
+          {
+            "name": "Meta Llama 4 Maverick",
+            "value": "meta-llama/llama-4-maverick"
+          },
+          {
+            "name": "DeepSeek V3.2",
+            "value": "deepseek/deepseek-v3.2"
+          },
+          {
+            "name": "Qwen3 Max",
+            "value": "qwen/qwen3-max"
+          },
+          {
+            "name": "Mistral Large 2512",
+            "value": "mistralai/mistral-large-2512"
+          },
+          {
+            "name": "GPT-OSS 20B (Free)",
+            "value": "openai/gpt-oss-20b:free"
+          }
+        ]
+      },
+      {
+        "name": "system_prompt",
+        "type": "text",
+        "value": null,
+        "label": "System Prompt",
+        "placeholder": "You are a helpful assistant."
+      },
+      {
+        "name": "prompt",
+        "type": "text",
+        "value": null,
+        "label": "Prompt",
+        "placeholder": "What would you like to ask?",
+        "required": true
+      },
+      {
+        "name": "max_tokens",
+        "type": "integer",
+        "value": null,
+        "label": "Max Tokens",
+        "placeholder": "2048"
+      },
+      {
+        "name": "temperature",
+        "type": "string",
+        "value": null,
+        "label": "Temperature",
+        "placeholder": "0.7"
+      },
+      {
+        "name": "top_p",
+        "type": "string",
+        "value": null,
+        "label": "Top P",
+        "placeholder": "1.0"
+      },
+      {
+        "name": "frequency_penalty",
+        "type": "string",
+        "value": null,
+        "label": "Frequency Penalty",
+        "placeholder": "0.0 (-2.0 to 2.0)"
+      },
+      {
+        "name": "presence_penalty",
+        "type": "string",
+        "value": null,
+        "label": "Presence Penalty",
+        "placeholder": "0.0 (-2.0 to 2.0)"
+      },
+      {
+        "name": "response_format",
+        "type": "string",
+        "value": null,
+        "label": "Response Format",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "Text",
+            "value": "text"
+          },
+          {
+            "name": "JSON",
+            "value": "json_object"
+          }
+        ]
+      },
+      {
+        "name": "conversation_history",
+        "type": "object",
+        "value": null,
+        "label": "Conversation History",
+        "placeholder": "${conversation_history}"
+      },
+      {
+        "name": "tool_definitions",
+        "type": "text",
+        "value": null,
+        "label": "Tool Definitions (JSON)",
+        "placeholder": "[{\"type\":\"function\",\"function\":{\"name\":\"web_search\",\"description\":\"Search the web\",\"parameters\":{\"type\":\"object\",\"properties\":{\"query\":{\"type\":\"string\"}},\"required\":[\"query\"]}}}]"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "response",
+        "type": "string",
+        "value": null,
+        "label": "Response",
+        "placeholder": ""
+      },
+      {
+        "name": "model",
+        "type": "string",
+        "value": null,
+        "label": "Model Used",
+        "placeholder": ""
+      },
+      {
+        "name": "provider",
+        "type": "string",
+        "value": null,
+        "label": "Provider",
+        "placeholder": ""
+      },
+      {
+        "name": "prompt_tokens",
+        "type": "integer",
+        "value": null,
+        "label": "Prompt Tokens",
+        "placeholder": ""
+      },
+      {
+        "name": "completion_tokens",
+        "type": "integer",
+        "value": null,
+        "label": "Completion Tokens",
+        "placeholder": ""
+      },
+      {
+        "name": "total_tokens",
+        "type": "integer",
+        "value": null,
+        "label": "Total Tokens",
+        "placeholder": ""
+      },
+      {
+        "name": "cost",
+        "type": "string",
+        "value": null,
+        "label": "Cost (USD)",
+        "placeholder": ""
+      },
+      {
+        "name": "should_respond",
+        "type": "boolean",
+        "value": null,
+        "label": "Should Respond",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_calls_count",
+        "type": "integer",
+        "value": null,
+        "label": "Tool Calls",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
   "ai/openwebui": {
     "hash": "03bc59458aa6be6cfa107bc14bc496f443e893a02245f4788e7a9a4ce01ef89e",
     "author": "Andy Esser",
@@ -22890,7 +23133,7 @@
     ]
   },
   "mailchimp/audience_list": {
-    "hash": "3e18825da5b8c918293364591352fec10b5ae5d0a10c1897633407e45219869f",
+    "hash": "25dc0c69ecec8098c0c1208ad017b6a26b5fa8e3011a43193ab50af74181ea50",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Audience: List",
@@ -23116,7 +23359,7 @@
     ]
   },
   "mailchimp/campaign_list": {
-    "hash": "df9e4fdf49e52af323b64a68538cd5a3925e32342f07e846b430961e89f44ea1",
+    "hash": "10bcd7ed52321d44ae053d2f45b12e6c0f903a2c90190cabcced8950ca0b5d03",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Campaign: List",
