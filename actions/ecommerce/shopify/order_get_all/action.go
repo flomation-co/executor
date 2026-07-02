@@ -7,6 +7,7 @@ import (
 
 	core "flomation.app/automate/executor"
 	shopify "flomation.app/automate/executor/actions/ecommerce/shopify"
+	log "github.com/sirupsen/logrus"
 )
 
 const (
@@ -103,6 +104,13 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 			q.Set("limit", strconv.Itoa(shopify.ClampLimit(limit, set)))
 		}
 		shopify.AddFilter(q, inputs, "fields", "fields")
+		// Warn if the user also set filters: Shopify forbids anything but limit
+		// and fields alongside a page_info cursor, so we drop them silently. A
+		// log line saves a confused user wondering why their status/date filters
+		// had no effect on a resumed page.
+		if ignored := ignoredCursorFilters(inputs); len(ignored) > 0 {
+			log.WithField("ignored_filters", ignored).Warn("Shopify get-many orders: filters are ignored when a page_info cursor is supplied (Shopify permits only limit and fields alongside page_info)")
+		}
 	} else {
 		limit, set := shopify.OptionalInt("limit", inputs)
 		q.Set("limit", strconv.Itoa(shopify.ClampLimit(limit, set)))
@@ -131,4 +139,23 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 		out["tool_result"] = fmt.Sprintf("Found %d order(s)", len(items))
 	}
 	return out, nil
+}
+
+// cursorIgnoredFilters lists the filter inputs Shopify forbids alongside a
+// page_info cursor (limit and fields are the only permitted companions).
+var cursorIgnoredFilters = []string{
+	"status", "financial_status", "fulfillment_status", "ids", "since_id",
+	"created_at_min", "created_at_max", "updated_at_min", "updated_at_max",
+}
+
+// ignoredCursorFilters returns which of the cursor-incompatible filters the
+// user set, so the caller can warn that they are being dropped.
+func ignoredCursorFilters(inputs []*core.Connection) []string {
+	var set []string
+	for _, name := range cursorIgnoredFilters {
+		if shopify.OptionalString(name, inputs) != "" {
+			set = append(set, name)
+		}
+	}
+	return set
 }

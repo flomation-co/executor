@@ -97,6 +97,9 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	shopify.SetBoolIfSet(order, inputs, "send_receipt", "send_receipt")
 	shopify.SetBoolIfSet(order, inputs, "send_fulfillment_receipt", "send_fulfillment_receipt")
 	shopify.SetBoolIfSet(order, inputs, "test", "test")
+	// Iteration order over this map is intentionally unspecified: each field is
+	// written independently by SetJSONIfPresent, so the order the JSON fields are
+	// applied in has no effect on the resulting order body.
 	for field, input := range map[string]string{
 		"billing_address":  "billing_address",
 		"shipping_address": "shipping_address",
