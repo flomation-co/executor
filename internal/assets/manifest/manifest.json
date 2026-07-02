@@ -2130,6 +2130,518 @@
       }
     ]
   },
+  "ai/ollama": {
+    "hash": "f5d0a49c8abfe95dd02ffcdea8be36a9379e994227a91d6061996c9c0a097ea0",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Ollama Prompt",
+    "description": "Send a prompt to a model running on your own Ollama server and return the response",
+    "website": "https://www.flomation.co",
+    "icon": "brain+server",
+    "date": "02/07/2026",
+    "type": 2,
+    "category": {
+      "name": "AI",
+      "icon": "brain",
+      "description": "Artificial intelligence and large language model integrations"
+    },
+    "inputs": [
+      {
+        "name": "endpoint",
+        "type": "string",
+        "value": null,
+        "label": "Ollama Server URL",
+        "placeholder": "http://localhost:11434",
+        "required": true
+      },
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "API Key",
+        "placeholder": "Only needed behind an authenticated proxy"
+      },
+      {
+        "name": "model",
+        "type": "string",
+        "value": null,
+        "label": "Model",
+        "placeholder": "llama3.2",
+        "required": true,
+        "options": [
+          {
+            "name": "Llama 3.2",
+            "value": "llama3.2"
+          },
+          {
+            "name": "Llama 3.1 8B",
+            "value": "llama3.1:8b"
+          },
+          {
+            "name": "Qwen 3",
+            "value": "qwen3"
+          },
+          {
+            "name": "Gemma 3",
+            "value": "gemma3"
+          },
+          {
+            "name": "Mistral",
+            "value": "mistral"
+          },
+          {
+            "name": "Phi-4",
+            "value": "phi4"
+          },
+          {
+            "name": "DeepSeek-R1",
+            "value": "deepseek-r1"
+          },
+          {
+            "name": "Qwen 2.5 Coder",
+            "value": "qwen2.5-coder"
+          },
+          {
+            "name": "Llama 3.2 Vision",
+            "value": "llama3.2-vision"
+          },
+          {
+            "name": "LLaVA (Vision)",
+            "value": "llava"
+          }
+        ]
+      },
+      {
+        "name": "system_prompt",
+        "type": "text",
+        "value": null,
+        "label": "System Prompt",
+        "placeholder": "You are a helpful assistant."
+      },
+      {
+        "name": "prompt",
+        "type": "text",
+        "value": null,
+        "label": "Prompt",
+        "placeholder": "What would you like to ask?",
+        "required": true
+      },
+      {
+        "name": "conversation_history",
+        "type": "object",
+        "value": null,
+        "label": "Conversation History",
+        "placeholder": "${conversation_history}"
+      },
+      {
+        "name": "max_tokens",
+        "type": "integer",
+        "value": null,
+        "label": "Max Tokens",
+        "placeholder": "1024 (-1 = unlimited)"
+      },
+      {
+        "name": "temperature",
+        "type": "string",
+        "value": null,
+        "label": "Temperature",
+        "placeholder": "0.8"
+      },
+      {
+        "name": "response_format",
+        "type": "string",
+        "value": null,
+        "label": "Response Format",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "Text",
+            "value": "text"
+          },
+          {
+            "name": "JSON",
+            "value": "json"
+          }
+        ]
+      },
+      {
+        "name": "think",
+        "type": "string",
+        "value": null,
+        "label": "Thinking",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "Model Default",
+            "value": "default"
+          },
+          {
+            "name": "On",
+            "value": "on"
+          },
+          {
+            "name": "Off",
+            "value": "off"
+          },
+          {
+            "name": "On (Low Effort)",
+            "value": "low"
+          },
+          {
+            "name": "On (Medium Effort)",
+            "value": "medium"
+          },
+          {
+            "name": "On (High Effort)",
+            "value": "high"
+          }
+        ]
+      },
+      {
+        "name": "advanced",
+        "type": "string",
+        "value": null,
+        "label": "Advanced Options",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "Hide",
+            "value": "hide"
+          },
+          {
+            "name": "Show",
+            "value": "show"
+          }
+        ]
+      },
+      {
+        "name": "top_p",
+        "type": "string",
+        "value": null,
+        "label": "Top P",
+        "placeholder": "0.9",
+        "visible_when": {
+          "field": "advanced",
+          "values": [
+            "show"
+          ]
+        }
+      },
+      {
+        "name": "top_k",
+        "type": "integer",
+        "value": null,
+        "label": "Top K",
+        "placeholder": "40",
+        "visible_when": {
+          "field": "advanced",
+          "values": [
+            "show"
+          ]
+        }
+      },
+      {
+        "name": "min_p",
+        "type": "string",
+        "value": null,
+        "label": "Min P",
+        "placeholder": "0.0",
+        "visible_when": {
+          "field": "advanced",
+          "values": [
+            "show"
+          ]
+        }
+      },
+      {
+        "name": "seed",
+        "type": "integer",
+        "value": null,
+        "label": "Seed",
+        "placeholder": "Set for reproducible output",
+        "visible_when": {
+          "field": "advanced",
+          "values": [
+            "show"
+          ]
+        }
+      },
+      {
+        "name": "stop",
+        "type": "string",
+        "value": null,
+        "label": "Stop Sequences",
+        "placeholder": "Comma-separated, e.g. ###,END",
+        "visible_when": {
+          "field": "advanced",
+          "values": [
+            "show"
+          ]
+        }
+      },
+      {
+        "name": "keep_alive",
+        "type": "string",
+        "value": null,
+        "label": "Keep Alive",
+        "placeholder": "5m",
+        "visible_when": {
+          "field": "advanced",
+          "values": [
+            "show"
+          ]
+        }
+      },
+      {
+        "name": "num_ctx",
+        "type": "integer",
+        "value": null,
+        "label": "Context Length",
+        "placeholder": "4096",
+        "visible_when": {
+          "field": "advanced",
+          "values": [
+            "show"
+          ]
+        }
+      },
+      {
+        "name": "repeat_penalty",
+        "type": "string",
+        "value": null,
+        "label": "Repetition Penalty",
+        "placeholder": "1.1 (1.0 = off)",
+        "visible_when": {
+          "field": "advanced",
+          "values": [
+            "show"
+          ]
+        }
+      },
+      {
+        "name": "repeat_last_n",
+        "type": "integer",
+        "value": null,
+        "label": "Repeat Window",
+        "placeholder": "64 (0 = off, -1 = context length)",
+        "visible_when": {
+          "field": "advanced",
+          "values": [
+            "show"
+          ]
+        }
+      },
+      {
+        "name": "frequency_penalty",
+        "type": "string",
+        "value": null,
+        "label": "Frequency Penalty",
+        "placeholder": "0.0",
+        "visible_when": {
+          "field": "advanced",
+          "values": [
+            "show"
+          ]
+        }
+      },
+      {
+        "name": "presence_penalty",
+        "type": "string",
+        "value": null,
+        "label": "Presence Penalty",
+        "placeholder": "0.0",
+        "visible_when": {
+          "field": "advanced",
+          "values": [
+            "show"
+          ]
+        }
+      },
+      {
+        "name": "num_batch",
+        "type": "integer",
+        "value": null,
+        "label": "Prompt Batch Size",
+        "placeholder": "512",
+        "visible_when": {
+          "field": "advanced",
+          "values": [
+            "show"
+          ]
+        }
+      },
+      {
+        "name": "num_gpu",
+        "type": "integer",
+        "value": null,
+        "label": "GPU Layers",
+        "placeholder": "-1 (auto)",
+        "visible_when": {
+          "field": "advanced",
+          "values": [
+            "show"
+          ]
+        }
+      },
+      {
+        "name": "main_gpu",
+        "type": "integer",
+        "value": null,
+        "label": "Main GPU",
+        "placeholder": "0",
+        "visible_when": {
+          "field": "advanced",
+          "values": [
+            "show"
+          ]
+        }
+      },
+      {
+        "name": "num_thread",
+        "type": "integer",
+        "value": null,
+        "label": "CPU Threads",
+        "placeholder": "0 (auto)",
+        "visible_when": {
+          "field": "advanced",
+          "values": [
+            "show"
+          ]
+        }
+      },
+      {
+        "name": "low_vram",
+        "type": "boolean",
+        "value": null,
+        "label": "Low VRAM Mode",
+        "placeholder": "",
+        "visible_when": {
+          "field": "advanced",
+          "values": [
+            "show"
+          ]
+        }
+      },
+      {
+        "name": "use_mlock",
+        "type": "boolean",
+        "value": null,
+        "label": "Lock Model in RAM (mlock)",
+        "placeholder": "",
+        "visible_when": {
+          "field": "advanced",
+          "values": [
+            "show"
+          ]
+        }
+      },
+      {
+        "name": "use_mmap",
+        "type": "boolean",
+        "value": null,
+        "label": "Memory-Map Model (mmap)",
+        "placeholder": "",
+        "visible_when": {
+          "field": "advanced",
+          "values": [
+            "show"
+          ]
+        }
+      },
+      {
+        "name": "penalize_newline",
+        "type": "boolean",
+        "value": null,
+        "label": "Penalize Newlines",
+        "placeholder": "",
+        "visible_when": {
+          "field": "advanced",
+          "values": [
+            "show"
+          ]
+        }
+      },
+      {
+        "name": "tool_definitions",
+        "type": "text",
+        "value": null,
+        "label": "Tool Definitions (JSON)",
+        "placeholder": "[{\"type\":\"function\",\"function\":{\"name\":\"web_search\",\"description\":\"Search the web\",\"parameters\":{\"type\":\"object\",\"properties\":{\"query\":{\"type\":\"string\"}},\"required\":[\"query\"]}}}]"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "response",
+        "type": "string",
+        "value": null,
+        "label": "Response",
+        "placeholder": ""
+      },
+      {
+        "name": "thinking",
+        "type": "string",
+        "value": null,
+        "label": "Thinking",
+        "placeholder": ""
+      },
+      {
+        "name": "model",
+        "type": "string",
+        "value": null,
+        "label": "Model Used",
+        "placeholder": ""
+      },
+      {
+        "name": "prompt_tokens",
+        "type": "integer",
+        "value": null,
+        "label": "Prompt Tokens",
+        "placeholder": ""
+      },
+      {
+        "name": "completion_tokens",
+        "type": "integer",
+        "value": null,
+        "label": "Completion Tokens",
+        "placeholder": ""
+      },
+      {
+        "name": "total_tokens",
+        "type": "integer",
+        "value": null,
+        "label": "Total Tokens",
+        "placeholder": ""
+      },
+      {
+        "name": "should_respond",
+        "type": "boolean",
+        "value": null,
+        "label": "Should Respond",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_calls_count",
+        "type": "integer",
+        "value": null,
+        "label": "Tool Calls",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
   "ai/openai": {
     "hash": "7c31da3f8c27ea28f1603283f15e88befe347d40377e38eb86f194b8efc95694",
     "author": "Andy Esser",
