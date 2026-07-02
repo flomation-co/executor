@@ -26,6 +26,7 @@ import (
 	ai_gemini_tts "flomation.app/automate/executor/actions/ai/gemini_tts"
 	ai_gemini_video "flomation.app/automate/executor/actions/ai/gemini_video"
 	ai_groq "flomation.app/automate/executor/actions/ai/groq"
+	ai_ollama "flomation.app/automate/executor/actions/ai/ollama"
 	ai_openai "flomation.app/automate/executor/actions/ai/openai"
 	ai_openrouter "flomation.app/automate/executor/actions/ai/openrouter"
 	ai_openwebui "flomation.app/automate/executor/actions/ai/openwebui"
@@ -462,6 +463,7 @@ var Actions = map[string]core.Action{
 	"ai/gemini_tts":                         ai_gemini_tts.Execute,
 	"ai/gemini_video":                       ai_gemini_video.Execute,
 	"ai/groq":                               ai_groq.Execute,
+	"ai/ollama":                             ai_ollama.Execute,
 	"ai/openai":                             ai_openai.Execute,
 	"ai/openrouter":                         ai_openrouter.Execute,
 	"ai/openwebui":                          ai_openwebui.Execute,
