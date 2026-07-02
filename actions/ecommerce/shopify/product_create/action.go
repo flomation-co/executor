@@ -72,6 +72,9 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	shopify.SetIfPresent(product, inputs, "tags", "tags")
 	shopify.SetIfPresent(product, inputs, "status", "status")
 	shopify.SetIfPresent(product, inputs, "handle", "handle")
+	// Iteration order over this map is intentionally unspecified: each field is
+	// written independently by SetJSONIfPresent, so the order the three JSON
+	// fields are applied in has no effect on the resulting product body.
 	for field, input := range map[string]string{
 		"variants": "variants",
 		"options":  "options",

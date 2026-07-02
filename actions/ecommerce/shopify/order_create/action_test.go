@@ -11,7 +11,7 @@ import (
 	. "github.com/onsi/gomega"
 )
 
-func base(server string) []*core.Connection {
+func base() []*core.Connection {
 	return []*core.Connection{
 		{Name: "access_token", Type: core.ConnectionTypeSecret, Value: "shpat_x"},
 		{Name: "shop", Type: core.ConnectionTypeString, Value: "acme"},
@@ -32,7 +32,7 @@ func TestExecuteMissingAuth(t *testing.T) {
 
 func TestExecuteMissingLineItems(t *testing.T) {
 	RegisterTestingT(t)
-	res, err := Execute(&core.Flow{}, nil, base(""))
+	res, err := Execute(&core.Flow{}, nil, base())
 	Expect(err).To(BeNil()) // soft error
 	Expect(res["success"]).To(Equal(false))
 	Expect(res["error"]).To(ContainSubstring("line_items is required"))
@@ -40,7 +40,7 @@ func TestExecuteMissingLineItems(t *testing.T) {
 
 func TestExecuteBadLineItemsJSON(t *testing.T) {
 	RegisterTestingT(t)
-	inputs := append(base(""), &core.Connection{Name: "line_items", Type: core.ConnectionTypeObject, Value: "{not json"})
+	inputs := append(base(), &core.Connection{Name: "line_items", Type: core.ConnectionTypeObject, Value: "{not json"})
 	res, err := Execute(&core.Flow{}, nil, inputs)
 	Expect(err).To(BeNil())
 	Expect(res["success"]).To(Equal(false))
@@ -62,7 +62,7 @@ func TestExecuteCreatesOrder(t *testing.T) {
 	defer server.Close()
 	defer shopify.SetHostForTest(server.URL)()
 
-	inputs := append(base(""),
+	inputs := append(base(),
 		&core.Connection{Name: "line_items", Type: core.ConnectionTypeObject, Value: `[{"variant_id":447654529,"quantity":2}]`},
 		&core.Connection{Name: "email", Type: core.ConnectionTypeString, Value: "jane@example.com"},
 		&core.Connection{Name: "tags", Type: core.ConnectionTypeString, Value: "vip"},
@@ -96,7 +96,7 @@ func TestExecuteSurfacesAPIError(t *testing.T) {
 	defer server.Close()
 	defer shopify.SetHostForTest(server.URL)()
 
-	inputs := append(base(""), &core.Connection{Name: "line_items", Type: core.ConnectionTypeObject, Value: `[{"variant_id":1,"quantity":1}]`})
+	inputs := append(base(), &core.Connection{Name: "line_items", Type: core.ConnectionTypeObject, Value: `[{"variant_id":1,"quantity":1}]`})
 	res, err := Execute(&core.Flow{}, nil, inputs)
 	Expect(err).To(BeNil())
 	Expect(res["success"]).To(Equal(false))

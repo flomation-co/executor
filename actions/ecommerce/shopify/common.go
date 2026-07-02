@@ -319,11 +319,30 @@ type cachedToken struct {
 
 // tokenCache holds client-credentials tokens keyed by shop+client_id so a flow
 // firing several Shopify actions mints the 24h token once rather than per call.
-// Same mutex+expiry idiom as the api's option-proxy caches.
+// Same mutex+expiry idiom as the api's option-proxy caches. Three properties
+// matter for this shared auth path:
+//
+//   - Concurrency — every read and write goes through mu, so parallel actions
+//     for the same shop can't race on the map write.
+//   - Proactive expiry — cache entries expire a margin before the real token
+//     deadline (5 minutes for the 24h grant, capped at half the lifetime; see
+//     getOrMintToken), so a cached token is never handed out about to die
+//     mid-request; we refresh ahead rather than waiting for a 401.
+//   - Bounds — the executor is a one-shot process (one flow run, then exit; see
+//     cmd/main.go), so the cache lives only for a single execution and cannot
+//     accrete across time the way a daemon's would. The mint path additionally
+//     prunes expired entries and caps the map at maxCachedTokens
+//     (see pruneExpiredTokens) so even a pathological single run — a Loop over
+//     thousands of distinct shops — can't grow it without limit.
 var tokenCache = struct {
 	mu sync.Mutex
 	m  map[string]cachedToken
 }{m: map[string]cachedToken{}}
+
+// maxCachedTokens bounds the token cache. It only ever bites in a pathological
+// single flow run touching thousands of distinct shop+client pairs; the process
+// exits after the run, so this is a backstop, not a steady-state eviction policy.
+const maxCachedTokens = 512
 
 func getOrMintToken(shop, clientID, clientSecret string) (string, error) {
 	key := shop + "|" + clientID
@@ -342,15 +361,45 @@ func getOrMintToken(shop, clientID, clientSecret string) (string, error) {
 	}
 	ttl := time.Duration(expiresIn) * time.Second
 	if ttl <= 0 {
-		ttl = 23 * time.Hour
+		ttl = 23 * time.Hour // Shopify omitted a lifetime; assume ~24h.
 	}
-	if ttl > 5*time.Minute {
-		ttl -= 5 * time.Minute // refresh a little before actual expiry
+	// Refresh proactively: expire the cache entry a margin before the real
+	// deadline so a cached token is never handed out about to die mid-request.
+	// The margin is 5 minutes for Shopify's 24h grant, but capped at half the
+	// lifetime so even an unexpectedly short-lived token still gets a
+	// proportional head-start rather than none.
+	buffer := 5 * time.Minute
+	if buffer > ttl/2 {
+		buffer = ttl / 2
 	}
+	ttl -= buffer
 	tokenCache.mu.Lock()
+	pruneExpiredTokens()
 	tokenCache.m[key] = cachedToken{token: tok, expiresAt: time.Now().Add(ttl)}
 	tokenCache.mu.Unlock()
 	return tok, nil
+}
+
+// pruneExpiredTokens drops timed-out entries and enforces maxCachedTokens. The
+// caller must hold tokenCache.mu. It runs on the mint (write) path — the only
+// place the map grows — which keeps the cache bounded without a background
+// sweeper (a one-shot process couldn't run one anyway).
+func pruneExpiredTokens() {
+	now := time.Now()
+	for k, v := range tokenCache.m {
+		if !now.Before(v.expiresAt) {
+			delete(tokenCache.m, k)
+		}
+	}
+	// If still at the cap after removing dead entries, evict arbitrary live
+	// ones — they're interchangeable short-lived tokens that simply re-mint on
+	// next use — so the about-to-be-added entry can never breach the bound.
+	for len(tokenCache.m) >= maxCachedTokens {
+		for k := range tokenCache.m {
+			delete(tokenCache.m, k)
+			break
+		}
+	}
 }
 
 // MintAccessToken exchanges a Client ID + Secret for an access token via

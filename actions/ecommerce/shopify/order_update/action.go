@@ -60,6 +60,8 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	if err := shopify.MergeAdditionalFields(order, inputs); err != nil {
 		return shopify.ErrorResult(err.Error()), nil
 	}
+	// order is seeded with the "id" key above, so a length of 1 means no
+	// updatable field was supplied — reject rather than PUT a no-op.
 	if len(order) == 1 {
 		return shopify.ErrorResult("no fields to update — set at least one field"), nil
 	}
