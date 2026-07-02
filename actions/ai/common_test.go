@@ -128,6 +128,7 @@ func TestModelContextWindow_OpenRouterPrefixedModels(t *testing.T) {
 	Expect(ModelContextWindow("anthropic/claude-sonnet-5")).To(Equal(200000))
 	Expect(ModelContextWindow("google/gemini-3.1-pro-preview")).To(Equal(1000000))
 	Expect(ModelContextWindow("google/gemini-3.1-flash-lite-image")).To(Equal(32000))
+	Expect(ModelContextWindow("google/gemini-3-pro-image-preview")).To(Equal(32000))
 	Expect(ModelContextWindow("deepseek/deepseek-v3.2")).To(Equal(128000))
 	Expect(ModelContextWindow("mistralai/mistral-large-2512")).To(Equal(128000))
 	Expect(ModelContextWindow("meta-llama/llama-4-maverick")).To(Equal(128000))

@@ -171,9 +171,13 @@ func ModelContextWindow(model string) int {
 	// OpenRouter's live catalogue on 02/07/2026, rounded down.
 	case strings.Contains(m, "gpt-5"):
 		return 400000
-	case strings.Contains(m, "gemini") && strings.Contains(m, "image"):
-		// Gemini image-output variants ship far smaller windows (~65k)
-		// than the text models, so they must not inherit the 1M case.
+	case strings.Contains(m, "gemini") && strings.Contains(m, "-image"):
+		// Gemini image-GENERATION variants ("-image" / "-image-preview"
+		// suffixed ids, e.g. gemini-3.1-flash-image, gemini-3-pro-image)
+		// ship far smaller windows (32k-131k) than the 1M text models, so
+		// they must not inherit the case below. Matching "-image" rather
+		// than bare "image" keeps ids that merely contain the word (in a
+		// codename, say) on the text-model path.
 		return 32000
 	case strings.Contains(m, "gemini"):
 		return 1000000
