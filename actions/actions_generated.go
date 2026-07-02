@@ -27,6 +27,7 @@ import (
 	ai_gemini_video "flomation.app/automate/executor/actions/ai/gemini_video"
 	ai_groq "flomation.app/automate/executor/actions/ai/groq"
 	ai_openai "flomation.app/automate/executor/actions/ai/openai"
+	ai_openrouter "flomation.app/automate/executor/actions/ai/openrouter"
 	ai_openwebui "flomation.app/automate/executor/actions/ai/openwebui"
 	airtable_base_get_schema "flomation.app/automate/executor/actions/airtable/base_get_schema"
 	airtable_base_list "flomation.app/automate/executor/actions/airtable/base_list"
@@ -462,6 +463,7 @@ var Actions = map[string]core.Action{
 	"ai/gemini_video":                       ai_gemini_video.Execute,
 	"ai/groq":                               ai_groq.Execute,
 	"ai/openai":                             ai_openai.Execute,
+	"ai/openrouter":                         ai_openrouter.Execute,
 	"ai/openwebui":                          ai_openwebui.Execute,
 	"airtable/base_get_schema":              airtable_base_get_schema.Execute,
 	"airtable/base_list":                    airtable_base_list.Execute,
