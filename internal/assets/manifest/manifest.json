@@ -19178,6 +19178,3277 @@
       }
     ]
   },
+  "helpdesk/zendesk/organization_count": {
+    "hash": "578d2c543b899574fadbd12dcc133bada305ebbc791a8f638cb1a6ecabeacdaa",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Zendesk: Count Organizations",
+    "description": "Return the number of organizations in your Zendesk account.",
+    "website": "https://www.flomation.co",
+    "icon": "zendesk+hashtag",
+    "date": "03/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Helpdesk",
+      "icon": "headset",
+      "description": "Customer support and ticketing platforms"
+    },
+    "sub_category": {
+      "name": "Zendesk",
+      "icon": "zendesk",
+      "description": "Manage tickets, users, and organizations in Zendesk Support"
+    },
+    "inputs": [
+      {
+        "name": "subdomain",
+        "type": "string",
+        "value": null,
+        "label": "Subdomain",
+        "placeholder": "mycompany (from mycompany.zendesk.com)",
+        "required": true
+      },
+      {
+        "name": "email",
+        "type": "string",
+        "value": null,
+        "label": "Agent Email",
+        "placeholder": "you@company.com (paired with the API token)"
+      },
+      {
+        "name": "api_token",
+        "type": "secret",
+        "value": null,
+        "label": "API Token",
+        "placeholder": "Zendesk API token"
+      },
+      {
+        "name": "oauth_token",
+        "type": "secret",
+        "value": null,
+        "label": "OAuth Access Token",
+        "placeholder": "Optional — a bearer token used instead of the email + API token"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Count",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Raw Response",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "helpdesk/zendesk/organization_create": {
+    "hash": "a85c1cda0903399a4bc9e1fe998a884077463679a51da8fa5816fe49b0a3deaa",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Zendesk: Create Organization",
+    "description": "Create an organization in Zendesk. Set details, notes, domains and tags directly, add custom organization fields as JSON, or use Additional Fields.",
+    "website": "https://www.flomation.co",
+    "icon": "zendesk+plus",
+    "date": "03/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Helpdesk",
+      "icon": "headset",
+      "description": "Customer support and ticketing platforms"
+    },
+    "sub_category": {
+      "name": "Zendesk",
+      "icon": "zendesk",
+      "description": "Manage tickets, users, and organizations in Zendesk Support"
+    },
+    "inputs": [
+      {
+        "name": "subdomain",
+        "type": "string",
+        "value": null,
+        "label": "Subdomain",
+        "placeholder": "mycompany (from mycompany.zendesk.com)",
+        "required": true
+      },
+      {
+        "name": "email",
+        "type": "string",
+        "value": null,
+        "label": "Agent Email",
+        "placeholder": "you@company.com (paired with the API token)"
+      },
+      {
+        "name": "api_token",
+        "type": "secret",
+        "value": null,
+        "label": "API Token",
+        "placeholder": "Zendesk API token"
+      },
+      {
+        "name": "oauth_token",
+        "type": "secret",
+        "value": null,
+        "label": "OAuth Access Token",
+        "placeholder": "Optional — a bearer token used instead of the email + API token"
+      },
+      {
+        "name": "name",
+        "type": "string",
+        "value": null,
+        "label": "Name",
+        "placeholder": "The organization's name",
+        "required": true
+      },
+      {
+        "name": "details",
+        "type": "string",
+        "value": null,
+        "label": "Details",
+        "placeholder": "Details such as the address"
+      },
+      {
+        "name": "notes",
+        "type": "text",
+        "value": null,
+        "label": "Notes",
+        "placeholder": ""
+      },
+      {
+        "name": "domain_names",
+        "type": "string",
+        "value": null,
+        "label": "Domain Names",
+        "placeholder": "acme.com, acme.io (comma-separated)"
+      },
+      {
+        "name": "tags",
+        "type": "string",
+        "value": null,
+        "label": "Tags",
+        "placeholder": "vip, wholesale (comma-separated)"
+      },
+      {
+        "name": "organization_fields",
+        "type": "object",
+        "value": null,
+        "label": "Organization Fields (JSON)",
+        "placeholder": "{\"tier\":\"gold\"}"
+      },
+      {
+        "name": "additional_fields",
+        "type": "object",
+        "value": null,
+        "label": "Additional Fields (JSON)",
+        "placeholder": ""
+      }
+    ],
+    "outputs": [
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Organization ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Organization",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "helpdesk/zendesk/organization_delete": {
+    "hash": "b2719f88ee3f5278f742e75dac768e1b73ce9cb95a2748db8674e0743f0c0e60",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Zendesk: Delete Organization",
+    "description": "Permanently delete a Zendesk organization by its ID.",
+    "website": "https://www.flomation.co",
+    "icon": "zendesk+trash",
+    "date": "03/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Helpdesk",
+      "icon": "headset",
+      "description": "Customer support and ticketing platforms"
+    },
+    "sub_category": {
+      "name": "Zendesk",
+      "icon": "zendesk",
+      "description": "Manage tickets, users, and organizations in Zendesk Support"
+    },
+    "inputs": [
+      {
+        "name": "subdomain",
+        "type": "string",
+        "value": null,
+        "label": "Subdomain",
+        "placeholder": "mycompany (from mycompany.zendesk.com)",
+        "required": true
+      },
+      {
+        "name": "email",
+        "type": "string",
+        "value": null,
+        "label": "Agent Email",
+        "placeholder": "you@company.com (paired with the API token)"
+      },
+      {
+        "name": "api_token",
+        "type": "secret",
+        "value": null,
+        "label": "API Token",
+        "placeholder": "Zendesk API token"
+      },
+      {
+        "name": "oauth_token",
+        "type": "secret",
+        "value": null,
+        "label": "OAuth Access Token",
+        "placeholder": "Optional — a bearer token used instead of the email + API token"
+      },
+      {
+        "name": "organization_id",
+        "type": "string",
+        "value": null,
+        "label": "Organization ID",
+        "placeholder": "35436",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Organization ID",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "helpdesk/zendesk/organization_get": {
+    "hash": "619e55f5a8487fba4dbd4827c9bb8c2476a7e24c82c60461d5dcb5cc758f107a",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Zendesk: Get Organization",
+    "description": "Retrieve a single Zendesk organization by its ID.",
+    "website": "https://www.flomation.co",
+    "icon": "zendesk+eye",
+    "date": "03/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Helpdesk",
+      "icon": "headset",
+      "description": "Customer support and ticketing platforms"
+    },
+    "sub_category": {
+      "name": "Zendesk",
+      "icon": "zendesk",
+      "description": "Manage tickets, users, and organizations in Zendesk Support"
+    },
+    "inputs": [
+      {
+        "name": "subdomain",
+        "type": "string",
+        "value": null,
+        "label": "Subdomain",
+        "placeholder": "mycompany (from mycompany.zendesk.com)",
+        "required": true
+      },
+      {
+        "name": "email",
+        "type": "string",
+        "value": null,
+        "label": "Agent Email",
+        "placeholder": "you@company.com (paired with the API token)"
+      },
+      {
+        "name": "api_token",
+        "type": "secret",
+        "value": null,
+        "label": "API Token",
+        "placeholder": "Zendesk API token"
+      },
+      {
+        "name": "oauth_token",
+        "type": "secret",
+        "value": null,
+        "label": "OAuth Access Token",
+        "placeholder": "Optional — a bearer token used instead of the email + API token"
+      },
+      {
+        "name": "organization_id",
+        "type": "string",
+        "value": null,
+        "label": "Organization ID",
+        "placeholder": "35436",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Organization ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Organization",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "helpdesk/zendesk/organization_get_all": {
+    "hash": "0493f2e8397e28baad095f1a6303acd7617c69b9d74a28387fbed927221fd918",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Zendesk: Get Many Organizations",
+    "description": "List all organizations in your Zendesk account. Enable Return All to auto-paginate every match.",
+    "website": "https://www.flomation.co",
+    "icon": "zendesk+list",
+    "date": "03/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Helpdesk",
+      "icon": "headset",
+      "description": "Customer support and ticketing platforms"
+    },
+    "sub_category": {
+      "name": "Zendesk",
+      "icon": "zendesk",
+      "description": "Manage tickets, users, and organizations in Zendesk Support"
+    },
+    "inputs": [
+      {
+        "name": "subdomain",
+        "type": "string",
+        "value": null,
+        "label": "Subdomain",
+        "placeholder": "mycompany (from mycompany.zendesk.com)",
+        "required": true
+      },
+      {
+        "name": "email",
+        "type": "string",
+        "value": null,
+        "label": "Agent Email",
+        "placeholder": "you@company.com (paired with the API token)"
+      },
+      {
+        "name": "api_token",
+        "type": "secret",
+        "value": null,
+        "label": "API Token",
+        "placeholder": "Zendesk API token"
+      },
+      {
+        "name": "oauth_token",
+        "type": "secret",
+        "value": null,
+        "label": "OAuth Access Token",
+        "placeholder": "Optional — a bearer token used instead of the email + API token"
+      },
+      {
+        "name": "return_all",
+        "type": "boolean",
+        "value": null,
+        "label": "Return All (auto-paginate every match)",
+        "placeholder": ""
+      },
+      {
+        "name": "limit",
+        "type": "integer",
+        "value": null,
+        "label": "Limit",
+        "placeholder": "100 per page (max 100)"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "results",
+        "type": "object",
+        "value": null,
+        "label": "Organizations",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Count",
+        "placeholder": ""
+      },
+      {
+        "name": "next_page",
+        "type": "string",
+        "value": null,
+        "label": "Next Page URL",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Raw Response",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "helpdesk/zendesk/organization_get_related_data": {
+    "hash": "2d693313beeb5454da8fbf53a798d8cf5be9c17aeb267b18649c71e469925fe0",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Zendesk: Get Organization Related Data",
+    "description": "Get counts of data related to a Zendesk organization (tickets, users, etc.).",
+    "website": "https://www.flomation.co",
+    "icon": "zendesk+list",
+    "date": "03/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Helpdesk",
+      "icon": "headset",
+      "description": "Customer support and ticketing platforms"
+    },
+    "sub_category": {
+      "name": "Zendesk",
+      "icon": "zendesk",
+      "description": "Manage tickets, users, and organizations in Zendesk Support"
+    },
+    "inputs": [
+      {
+        "name": "subdomain",
+        "type": "string",
+        "value": null,
+        "label": "Subdomain",
+        "placeholder": "mycompany (from mycompany.zendesk.com)",
+        "required": true
+      },
+      {
+        "name": "email",
+        "type": "string",
+        "value": null,
+        "label": "Agent Email",
+        "placeholder": "you@company.com (paired with the API token)"
+      },
+      {
+        "name": "api_token",
+        "type": "secret",
+        "value": null,
+        "label": "API Token",
+        "placeholder": "Zendesk API token"
+      },
+      {
+        "name": "oauth_token",
+        "type": "secret",
+        "value": null,
+        "label": "OAuth Access Token",
+        "placeholder": "Optional — a bearer token used instead of the email + API token"
+      },
+      {
+        "name": "organization_id",
+        "type": "string",
+        "value": null,
+        "label": "Organization ID",
+        "placeholder": "35436",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Organization ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Organization Related Data",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "helpdesk/zendesk/organization_update": {
+    "hash": "f3e0e4eb9e04add891054da6495825cb1978105e6a4f975fa75abb69ea628046",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Zendesk: Update Organization",
+    "description": "Update a Zendesk organization. Change details, notes, domains, tags, custom organization fields, or any other field via Additional Fields.",
+    "website": "https://www.flomation.co",
+    "icon": "zendesk+pencil",
+    "date": "03/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Helpdesk",
+      "icon": "headset",
+      "description": "Customer support and ticketing platforms"
+    },
+    "sub_category": {
+      "name": "Zendesk",
+      "icon": "zendesk",
+      "description": "Manage tickets, users, and organizations in Zendesk Support"
+    },
+    "inputs": [
+      {
+        "name": "subdomain",
+        "type": "string",
+        "value": null,
+        "label": "Subdomain",
+        "placeholder": "mycompany (from mycompany.zendesk.com)",
+        "required": true
+      },
+      {
+        "name": "email",
+        "type": "string",
+        "value": null,
+        "label": "Agent Email",
+        "placeholder": "you@company.com (paired with the API token)"
+      },
+      {
+        "name": "api_token",
+        "type": "secret",
+        "value": null,
+        "label": "API Token",
+        "placeholder": "Zendesk API token"
+      },
+      {
+        "name": "oauth_token",
+        "type": "secret",
+        "value": null,
+        "label": "OAuth Access Token",
+        "placeholder": "Optional — a bearer token used instead of the email + API token"
+      },
+      {
+        "name": "organization_id",
+        "type": "string",
+        "value": null,
+        "label": "Organization ID",
+        "placeholder": "35436",
+        "required": true
+      },
+      {
+        "name": "name",
+        "type": "string",
+        "value": null,
+        "label": "Name",
+        "placeholder": "The organization's display name"
+      },
+      {
+        "name": "details",
+        "type": "string",
+        "value": null,
+        "label": "Details",
+        "placeholder": "Additional details, e.g. account number"
+      },
+      {
+        "name": "notes",
+        "type": "text",
+        "value": null,
+        "label": "Notes",
+        "placeholder": "Freeform notes about the organization"
+      },
+      {
+        "name": "domain_names",
+        "type": "string",
+        "value": null,
+        "label": "Domain Names",
+        "placeholder": "example.com, example.org (comma-separated)"
+      },
+      {
+        "name": "tags",
+        "type": "string",
+        "value": null,
+        "label": "Tags",
+        "placeholder": "vip, wholesale (comma-separated)"
+      },
+      {
+        "name": "organization_fields",
+        "type": "object",
+        "value": null,
+        "label": "Organization Fields (JSON)",
+        "placeholder": "{\"support_plan\":\"gold\"}"
+      },
+      {
+        "name": "additional_fields",
+        "type": "object",
+        "value": null,
+        "label": "Additional Fields (JSON)",
+        "placeholder": "{\"group_id\":123}"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Organization ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Organization",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "helpdesk/zendesk/ticket_create": {
+    "hash": "5df4a34e0fbf9149d4ffd890facdec7a0498168c459208d98ae178c9443acb24",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Zendesk: Create Ticket",
+    "description": "Create a support ticket in Zendesk. The Description becomes the ticket's first comment; set common fields directly or add any other ticket field via Additional Fields.",
+    "website": "https://www.flomation.co",
+    "icon": "zendesk+plus",
+    "date": "03/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Helpdesk",
+      "icon": "headset",
+      "description": "Customer support and ticketing platforms"
+    },
+    "sub_category": {
+      "name": "Zendesk",
+      "icon": "zendesk",
+      "description": "Manage tickets, users, and organizations in Zendesk Support"
+    },
+    "inputs": [
+      {
+        "name": "subdomain",
+        "type": "string",
+        "value": null,
+        "label": "Subdomain",
+        "placeholder": "mycompany (from mycompany.zendesk.com)",
+        "required": true
+      },
+      {
+        "name": "email",
+        "type": "string",
+        "value": null,
+        "label": "Agent Email",
+        "placeholder": "you@company.com (paired with the API token)"
+      },
+      {
+        "name": "api_token",
+        "type": "secret",
+        "value": null,
+        "label": "API Token",
+        "placeholder": "Zendesk API token"
+      },
+      {
+        "name": "oauth_token",
+        "type": "secret",
+        "value": null,
+        "label": "OAuth Access Token",
+        "placeholder": "Optional — a bearer token used instead of the email + API token"
+      },
+      {
+        "name": "description",
+        "type": "text",
+        "value": null,
+        "label": "Description",
+        "placeholder": "The ticket's first comment",
+        "required": true
+      },
+      {
+        "name": "subject",
+        "type": "string",
+        "value": null,
+        "label": "Subject",
+        "placeholder": ""
+      },
+      {
+        "name": "type",
+        "type": "string",
+        "value": null,
+        "label": "Type",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "Question",
+            "value": "question"
+          },
+          {
+            "name": "Incident",
+            "value": "incident"
+          },
+          {
+            "name": "Problem",
+            "value": "problem"
+          },
+          {
+            "name": "Task",
+            "value": "task"
+          }
+        ]
+      },
+      {
+        "name": "priority",
+        "type": "string",
+        "value": null,
+        "label": "Priority",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "Urgent",
+            "value": "urgent"
+          },
+          {
+            "name": "High",
+            "value": "high"
+          },
+          {
+            "name": "Normal",
+            "value": "normal"
+          },
+          {
+            "name": "Low",
+            "value": "low"
+          }
+        ]
+      },
+      {
+        "name": "status",
+        "type": "string",
+        "value": null,
+        "label": "Status",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "New",
+            "value": "new"
+          },
+          {
+            "name": "Open",
+            "value": "open"
+          },
+          {
+            "name": "Pending",
+            "value": "pending"
+          },
+          {
+            "name": "On-Hold",
+            "value": "hold"
+          },
+          {
+            "name": "Solved",
+            "value": "solved"
+          },
+          {
+            "name": "Closed",
+            "value": "closed"
+          }
+        ]
+      },
+      {
+        "name": "recipient",
+        "type": "string",
+        "value": null,
+        "label": "Recipient",
+        "placeholder": "The original recipient email address of the ticket"
+      },
+      {
+        "name": "group_id",
+        "type": "string",
+        "value": null,
+        "label": "Group",
+        "placeholder": "The group this ticket is assigned to (ID)"
+      },
+      {
+        "name": "assignee_id",
+        "type": "string",
+        "value": null,
+        "label": "Assignee ID",
+        "placeholder": "Agent user ID to assign the ticket to"
+      },
+      {
+        "name": "requester_id",
+        "type": "string",
+        "value": null,
+        "label": "Requester ID",
+        "placeholder": "User ID of the ticket requester"
+      },
+      {
+        "name": "external_id",
+        "type": "string",
+        "value": null,
+        "label": "External ID",
+        "placeholder": "An ID linking this ticket to a record in another system"
+      },
+      {
+        "name": "tags",
+        "type": "string",
+        "value": null,
+        "label": "Tags",
+        "placeholder": "vip, refund (comma-separated)"
+      },
+      {
+        "name": "custom_fields",
+        "type": "object",
+        "value": null,
+        "label": "Custom Fields (JSON)",
+        "placeholder": "[{\"id\":123,\"value\":\"blue\"}]"
+      },
+      {
+        "name": "additional_fields",
+        "type": "object",
+        "value": null,
+        "label": "Additional Fields (JSON)",
+        "placeholder": "{\"collaborator_ids\":[1,2]}"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Ticket ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Ticket",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "helpdesk/zendesk/ticket_delete": {
+    "hash": "3ca41c2fad41aa22087896416b7baecf161de3d57b64633171ecd3b1665b9b77",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Zendesk: Delete Ticket",
+    "description": "Permanently delete a Zendesk ticket by its ID. Choose Regular for a normal ticket or Suspended for one held in the suspended queue.",
+    "website": "https://www.flomation.co",
+    "icon": "zendesk+trash",
+    "date": "03/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Helpdesk",
+      "icon": "headset",
+      "description": "Customer support and ticketing platforms"
+    },
+    "sub_category": {
+      "name": "Zendesk",
+      "icon": "zendesk",
+      "description": "Manage tickets, users, and organizations in Zendesk Support"
+    },
+    "inputs": [
+      {
+        "name": "subdomain",
+        "type": "string",
+        "value": null,
+        "label": "Subdomain",
+        "placeholder": "mycompany (from mycompany.zendesk.com)",
+        "required": true
+      },
+      {
+        "name": "email",
+        "type": "string",
+        "value": null,
+        "label": "Agent Email",
+        "placeholder": "you@company.com (paired with the API token)"
+      },
+      {
+        "name": "api_token",
+        "type": "secret",
+        "value": null,
+        "label": "API Token",
+        "placeholder": "Zendesk API token"
+      },
+      {
+        "name": "oauth_token",
+        "type": "secret",
+        "value": null,
+        "label": "OAuth Access Token",
+        "placeholder": "Optional — a bearer token used instead of the email + API token"
+      },
+      {
+        "name": "ticket_type",
+        "type": "string",
+        "value": null,
+        "label": "Ticket Type",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "Regular",
+            "value": "regular"
+          },
+          {
+            "name": "Suspended",
+            "value": "suspended"
+          }
+        ]
+      },
+      {
+        "name": "ticket_id",
+        "type": "string",
+        "value": null,
+        "label": "Ticket ID",
+        "placeholder": "35436",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Ticket ID",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "helpdesk/zendesk/ticket_field_get": {
+    "hash": "f8cef333b7326be4ba13352f1ef05c00edf7b7977572019333ed0842f3c940e2",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Zendesk: Get Ticket Field",
+    "description": "Retrieve a single Zendesk ticket field (system or custom) by its ID.",
+    "website": "https://www.flomation.co",
+    "icon": "zendesk+magnifying-glass",
+    "date": "03/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Helpdesk",
+      "icon": "headset",
+      "description": "Customer support and ticketing platforms"
+    },
+    "sub_category": {
+      "name": "Zendesk",
+      "icon": "zendesk",
+      "description": "Manage tickets, users, and organizations in Zendesk Support"
+    },
+    "inputs": [
+      {
+        "name": "subdomain",
+        "type": "string",
+        "value": null,
+        "label": "Subdomain",
+        "placeholder": "mycompany (from mycompany.zendesk.com)",
+        "required": true
+      },
+      {
+        "name": "email",
+        "type": "string",
+        "value": null,
+        "label": "Agent Email",
+        "placeholder": "you@company.com (paired with the API token)"
+      },
+      {
+        "name": "api_token",
+        "type": "secret",
+        "value": null,
+        "label": "API Token",
+        "placeholder": "Zendesk API token"
+      },
+      {
+        "name": "oauth_token",
+        "type": "secret",
+        "value": null,
+        "label": "OAuth Access Token",
+        "placeholder": "Optional — a bearer token used instead of the email + API token"
+      },
+      {
+        "name": "ticket_field_id",
+        "type": "string",
+        "value": null,
+        "label": "Ticket Field ID",
+        "placeholder": "The ticket field ID",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Ticket Field ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Ticket Field",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "helpdesk/zendesk/ticket_field_get_all": {
+    "hash": "9446fae79cdd23e7ef6de5517a171267cb1aeb5762981024cc49b7bac5c030ce",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Zendesk: Get Many Ticket Fields",
+    "description": "List all system and custom ticket fields in your Zendesk account. Enable Return All to auto-paginate.",
+    "website": "https://www.flomation.co",
+    "icon": "zendesk+list",
+    "date": "03/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Helpdesk",
+      "icon": "headset",
+      "description": "Customer support and ticketing platforms"
+    },
+    "sub_category": {
+      "name": "Zendesk",
+      "icon": "zendesk",
+      "description": "Manage tickets, users, and organizations in Zendesk Support"
+    },
+    "inputs": [
+      {
+        "name": "subdomain",
+        "type": "string",
+        "value": null,
+        "label": "Subdomain",
+        "placeholder": "mycompany (from mycompany.zendesk.com)",
+        "required": true
+      },
+      {
+        "name": "email",
+        "type": "string",
+        "value": null,
+        "label": "Agent Email",
+        "placeholder": "you@company.com (paired with the API token)"
+      },
+      {
+        "name": "api_token",
+        "type": "secret",
+        "value": null,
+        "label": "API Token",
+        "placeholder": "Zendesk API token"
+      },
+      {
+        "name": "oauth_token",
+        "type": "secret",
+        "value": null,
+        "label": "OAuth Access Token",
+        "placeholder": "Optional — a bearer token used instead of the email + API token"
+      },
+      {
+        "name": "return_all",
+        "type": "boolean",
+        "value": null,
+        "label": "Return All (auto-paginate every match)",
+        "placeholder": ""
+      },
+      {
+        "name": "limit",
+        "type": "integer",
+        "value": null,
+        "label": "Limit",
+        "placeholder": "100 per page (max 100)"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "results",
+        "type": "object",
+        "value": null,
+        "label": "Ticket Fields",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Count",
+        "placeholder": ""
+      },
+      {
+        "name": "next_page",
+        "type": "string",
+        "value": null,
+        "label": "Next Page URL",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Raw Response",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "helpdesk/zendesk/ticket_get": {
+    "hash": "5a4dcf1c90194b924d320590fa0579f3c6d1127b0854529ea391c5dca3c4b506",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Zendesk: Get Ticket",
+    "description": "Retrieve a single Zendesk ticket by its ID. Choose Regular for a normal ticket or Suspended for one held in the suspended queue.",
+    "website": "https://www.flomation.co",
+    "icon": "zendesk+eye",
+    "date": "03/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Helpdesk",
+      "icon": "headset",
+      "description": "Customer support and ticketing platforms"
+    },
+    "sub_category": {
+      "name": "Zendesk",
+      "icon": "zendesk",
+      "description": "Manage tickets, users, and organizations in Zendesk Support"
+    },
+    "inputs": [
+      {
+        "name": "subdomain",
+        "type": "string",
+        "value": null,
+        "label": "Subdomain",
+        "placeholder": "mycompany (from mycompany.zendesk.com)",
+        "required": true
+      },
+      {
+        "name": "email",
+        "type": "string",
+        "value": null,
+        "label": "Agent Email",
+        "placeholder": "you@company.com (paired with the API token)"
+      },
+      {
+        "name": "api_token",
+        "type": "secret",
+        "value": null,
+        "label": "API Token",
+        "placeholder": "Zendesk API token"
+      },
+      {
+        "name": "oauth_token",
+        "type": "secret",
+        "value": null,
+        "label": "OAuth Access Token",
+        "placeholder": "Optional — a bearer token used instead of the email + API token"
+      },
+      {
+        "name": "ticket_type",
+        "type": "string",
+        "value": null,
+        "label": "Ticket Type",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "Regular",
+            "value": "regular"
+          },
+          {
+            "name": "Suspended",
+            "value": "suspended"
+          }
+        ]
+      },
+      {
+        "name": "ticket_id",
+        "type": "string",
+        "value": null,
+        "label": "Ticket ID",
+        "placeholder": "35436",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Ticket ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Ticket",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "helpdesk/zendesk/ticket_get_all": {
+    "hash": "039e2eaff37dfcdd55a557f6f89ba89c395af9c96d7b0da74df7519a31429700",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Zendesk: Get Many Tickets",
+    "description": "List Zendesk tickets. Regular tickets are fetched via the Search API (filter by status, group, or a raw query); Suspended lists the suspended queue. Enable Return All to auto-paginate.",
+    "website": "https://www.flomation.co",
+    "icon": "zendesk+list",
+    "date": "03/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Helpdesk",
+      "icon": "headset",
+      "description": "Customer support and ticketing platforms"
+    },
+    "sub_category": {
+      "name": "Zendesk",
+      "icon": "zendesk",
+      "description": "Manage tickets, users, and organizations in Zendesk Support"
+    },
+    "inputs": [
+      {
+        "name": "subdomain",
+        "type": "string",
+        "value": null,
+        "label": "Subdomain",
+        "placeholder": "mycompany (from mycompany.zendesk.com)",
+        "required": true
+      },
+      {
+        "name": "email",
+        "type": "string",
+        "value": null,
+        "label": "Agent Email",
+        "placeholder": "you@company.com (paired with the API token)"
+      },
+      {
+        "name": "api_token",
+        "type": "secret",
+        "value": null,
+        "label": "API Token",
+        "placeholder": "Zendesk API token"
+      },
+      {
+        "name": "oauth_token",
+        "type": "secret",
+        "value": null,
+        "label": "OAuth Access Token",
+        "placeholder": "Optional — a bearer token used instead of the email + API token"
+      },
+      {
+        "name": "ticket_type",
+        "type": "string",
+        "value": null,
+        "label": "Ticket Type",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "Regular",
+            "value": "regular"
+          },
+          {
+            "name": "Suspended",
+            "value": "suspended"
+          }
+        ]
+      },
+      {
+        "name": "return_all",
+        "type": "boolean",
+        "value": null,
+        "label": "Return All (auto-paginate every match)",
+        "placeholder": ""
+      },
+      {
+        "name": "limit",
+        "type": "integer",
+        "value": null,
+        "label": "Limit",
+        "placeholder": "100 per page (max 100); Return All still fetches every match"
+      },
+      {
+        "name": "query",
+        "type": "string",
+        "value": null,
+        "label": "Query",
+        "placeholder": "Extra Zendesk search terms, e.g. priority:high created\u003e2024-01-01"
+      },
+      {
+        "name": "status",
+        "type": "string",
+        "value": null,
+        "label": "Status",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "New",
+            "value": "new"
+          },
+          {
+            "name": "Open",
+            "value": "open"
+          },
+          {
+            "name": "Pending",
+            "value": "pending"
+          },
+          {
+            "name": "On-Hold",
+            "value": "hold"
+          },
+          {
+            "name": "Solved",
+            "value": "solved"
+          },
+          {
+            "name": "Closed",
+            "value": "closed"
+          }
+        ]
+      },
+      {
+        "name": "group_id",
+        "type": "string",
+        "value": null,
+        "label": "Group",
+        "placeholder": "Restrict to a group (ID)"
+      },
+      {
+        "name": "sort_by",
+        "type": "string",
+        "value": null,
+        "label": "Sort By",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "Created At",
+            "value": "created_at"
+          },
+          {
+            "name": "Priority",
+            "value": "priority"
+          },
+          {
+            "name": "Status",
+            "value": "status"
+          },
+          {
+            "name": "Ticket Type",
+            "value": "ticket_type"
+          },
+          {
+            "name": "Updated At",
+            "value": "updated_at"
+          }
+        ]
+      },
+      {
+        "name": "sort_order",
+        "type": "string",
+        "value": null,
+        "label": "Sort Order",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "Ascending",
+            "value": "asc"
+          },
+          {
+            "name": "Descending",
+            "value": "desc"
+          }
+        ]
+      }
+    ],
+    "outputs": [
+      {
+        "name": "results",
+        "type": "object",
+        "value": null,
+        "label": "Tickets",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Count",
+        "placeholder": ""
+      },
+      {
+        "name": "next_page",
+        "type": "string",
+        "value": null,
+        "label": "Next Page URL",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Raw Response",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "helpdesk/zendesk/ticket_recover": {
+    "hash": "873819787b53dd594b108173301e7c162fb20b3b3e6727e67883969afe17c759",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Zendesk: Recover Suspended Ticket",
+    "description": "Recover a ticket from the suspended queue, turning it into a regular ticket.",
+    "website": "https://www.flomation.co",
+    "icon": "zendesk+rotate-right",
+    "date": "03/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Helpdesk",
+      "icon": "headset",
+      "description": "Customer support and ticketing platforms"
+    },
+    "sub_category": {
+      "name": "Zendesk",
+      "icon": "zendesk",
+      "description": "Manage tickets, users, and organizations in Zendesk Support"
+    },
+    "inputs": [
+      {
+        "name": "subdomain",
+        "type": "string",
+        "value": null,
+        "label": "Subdomain",
+        "placeholder": "mycompany (from mycompany.zendesk.com)",
+        "required": true
+      },
+      {
+        "name": "email",
+        "type": "string",
+        "value": null,
+        "label": "Agent Email",
+        "placeholder": "you@company.com (paired with the API token)"
+      },
+      {
+        "name": "api_token",
+        "type": "secret",
+        "value": null,
+        "label": "API Token",
+        "placeholder": "Zendesk API token"
+      },
+      {
+        "name": "oauth_token",
+        "type": "secret",
+        "value": null,
+        "label": "OAuth Access Token",
+        "placeholder": "Optional — a bearer token used instead of the email + API token"
+      },
+      {
+        "name": "ticket_id",
+        "type": "string",
+        "value": null,
+        "label": "Suspended Ticket ID",
+        "placeholder": "35436",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Ticket ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Ticket",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "helpdesk/zendesk/ticket_update": {
+    "hash": "e07c7ab799efe98281f8fe004353fc2fb6f1dea9dbdeeaeb8681d8c0ba3f7829",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Zendesk: Update Ticket",
+    "description": "Update a Zendesk ticket. Add a public reply or an internal note, change status/priority/assignee, and set any other ticket field via Additional Fields.",
+    "website": "https://www.flomation.co",
+    "icon": "zendesk+pencil",
+    "date": "03/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Helpdesk",
+      "icon": "headset",
+      "description": "Customer support and ticketing platforms"
+    },
+    "sub_category": {
+      "name": "Zendesk",
+      "icon": "zendesk",
+      "description": "Manage tickets, users, and organizations in Zendesk Support"
+    },
+    "inputs": [
+      {
+        "name": "subdomain",
+        "type": "string",
+        "value": null,
+        "label": "Subdomain",
+        "placeholder": "mycompany (from mycompany.zendesk.com)",
+        "required": true
+      },
+      {
+        "name": "email",
+        "type": "string",
+        "value": null,
+        "label": "Agent Email",
+        "placeholder": "you@company.com (paired with the API token)"
+      },
+      {
+        "name": "api_token",
+        "type": "secret",
+        "value": null,
+        "label": "API Token",
+        "placeholder": "Zendesk API token"
+      },
+      {
+        "name": "oauth_token",
+        "type": "secret",
+        "value": null,
+        "label": "OAuth Access Token",
+        "placeholder": "Optional — a bearer token used instead of the email + API token"
+      },
+      {
+        "name": "ticket_id",
+        "type": "string",
+        "value": null,
+        "label": "Ticket ID",
+        "placeholder": "35436",
+        "required": true
+      },
+      {
+        "name": "subject",
+        "type": "string",
+        "value": null,
+        "label": "Subject",
+        "placeholder": ""
+      },
+      {
+        "name": "public_reply",
+        "type": "text",
+        "value": null,
+        "label": "Public Reply",
+        "placeholder": "A reply added as a public comment on the ticket"
+      },
+      {
+        "name": "internal_note",
+        "type": "text",
+        "value": null,
+        "label": "Internal Note",
+        "placeholder": "A private note (accepts HTML) visible only to agents"
+      },
+      {
+        "name": "type",
+        "type": "string",
+        "value": null,
+        "label": "Type",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "Question",
+            "value": "question"
+          },
+          {
+            "name": "Incident",
+            "value": "incident"
+          },
+          {
+            "name": "Problem",
+            "value": "problem"
+          },
+          {
+            "name": "Task",
+            "value": "task"
+          }
+        ]
+      },
+      {
+        "name": "priority",
+        "type": "string",
+        "value": null,
+        "label": "Priority",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "Urgent",
+            "value": "urgent"
+          },
+          {
+            "name": "High",
+            "value": "high"
+          },
+          {
+            "name": "Normal",
+            "value": "normal"
+          },
+          {
+            "name": "Low",
+            "value": "low"
+          }
+        ]
+      },
+      {
+        "name": "status",
+        "type": "string",
+        "value": null,
+        "label": "Status",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "New",
+            "value": "new"
+          },
+          {
+            "name": "Open",
+            "value": "open"
+          },
+          {
+            "name": "Pending",
+            "value": "pending"
+          },
+          {
+            "name": "On-Hold",
+            "value": "hold"
+          },
+          {
+            "name": "Solved",
+            "value": "solved"
+          },
+          {
+            "name": "Closed",
+            "value": "closed"
+          }
+        ]
+      },
+      {
+        "name": "recipient",
+        "type": "string",
+        "value": null,
+        "label": "Recipient",
+        "placeholder": "The original recipient email address of the ticket"
+      },
+      {
+        "name": "group_id",
+        "type": "string",
+        "value": null,
+        "label": "Group",
+        "placeholder": "The group this ticket is assigned to (ID)"
+      },
+      {
+        "name": "assignee_id",
+        "type": "string",
+        "value": null,
+        "label": "Assignee ID",
+        "placeholder": "Agent user ID to assign the ticket to"
+      },
+      {
+        "name": "assignee_email",
+        "type": "string",
+        "value": null,
+        "label": "Assignee Email",
+        "placeholder": "Email of the agent to assign the ticket to"
+      },
+      {
+        "name": "external_id",
+        "type": "string",
+        "value": null,
+        "label": "External ID",
+        "placeholder": "An ID linking this ticket to a record in another system"
+      },
+      {
+        "name": "tags",
+        "type": "string",
+        "value": null,
+        "label": "Tags",
+        "placeholder": "vip, refund (comma-separated) — replaces the ticket's tags"
+      },
+      {
+        "name": "custom_fields",
+        "type": "object",
+        "value": null,
+        "label": "Custom Fields (JSON)",
+        "placeholder": "[{\"id\":123,\"value\":\"blue\"}]"
+      },
+      {
+        "name": "additional_fields",
+        "type": "object",
+        "value": null,
+        "label": "Additional Fields (JSON)",
+        "placeholder": "{\"collaborator_ids\":[1,2]}"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Ticket ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Ticket",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "helpdesk/zendesk/user_create": {
+    "hash": "53363fb6ef9b3b558bcb1225763d111ab2b3d004a80896ff711d8629b37780d1",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Zendesk: Create User",
+    "description": "Create a user in Zendesk. Set common profile fields directly, add custom user fields as JSON, or add any other field via Additional Fields.",
+    "website": "https://www.flomation.co",
+    "icon": "zendesk+plus",
+    "date": "03/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Helpdesk",
+      "icon": "headset",
+      "description": "Customer support and ticketing platforms"
+    },
+    "sub_category": {
+      "name": "Zendesk",
+      "icon": "zendesk",
+      "description": "Manage tickets, users, and organizations in Zendesk Support"
+    },
+    "inputs": [
+      {
+        "name": "subdomain",
+        "type": "string",
+        "value": null,
+        "label": "Subdomain",
+        "placeholder": "mycompany (from mycompany.zendesk.com)",
+        "required": true
+      },
+      {
+        "name": "email",
+        "type": "string",
+        "value": null,
+        "label": "Agent Email",
+        "placeholder": "you@company.com (paired with the API token)"
+      },
+      {
+        "name": "api_token",
+        "type": "secret",
+        "value": null,
+        "label": "API Token",
+        "placeholder": "Zendesk API token"
+      },
+      {
+        "name": "oauth_token",
+        "type": "secret",
+        "value": null,
+        "label": "OAuth Access Token",
+        "placeholder": "Optional — a bearer token used instead of the email + API token"
+      },
+      {
+        "name": "name",
+        "type": "string",
+        "value": null,
+        "label": "Name",
+        "placeholder": "The user's full name",
+        "required": true
+      },
+      {
+        "name": "user_email",
+        "type": "string",
+        "value": null,
+        "label": "Email",
+        "placeholder": "name@email.com"
+      },
+      {
+        "name": "role",
+        "type": "string",
+        "value": null,
+        "label": "Role",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "End User",
+            "value": "end-user"
+          },
+          {
+            "name": "Agent",
+            "value": "agent"
+          },
+          {
+            "name": "Admin",
+            "value": "admin"
+          }
+        ]
+      },
+      {
+        "name": "phone",
+        "type": "string",
+        "value": null,
+        "label": "Phone",
+        "placeholder": ""
+      },
+      {
+        "name": "alias",
+        "type": "string",
+        "value": null,
+        "label": "Alias",
+        "placeholder": "An alias displayed to end users"
+      },
+      {
+        "name": "organization_id",
+        "type": "string",
+        "value": null,
+        "label": "Organization",
+        "placeholder": "Default organization (ID)"
+      },
+      {
+        "name": "external_id",
+        "type": "string",
+        "value": null,
+        "label": "External ID",
+        "placeholder": "A unique identifier from another system"
+      },
+      {
+        "name": "details",
+        "type": "string",
+        "value": null,
+        "label": "Details",
+        "placeholder": "Details such as an address"
+      },
+      {
+        "name": "notes",
+        "type": "text",
+        "value": null,
+        "label": "Notes",
+        "placeholder": ""
+      },
+      {
+        "name": "time_zone",
+        "type": "string",
+        "value": null,
+        "label": "Timezone",
+        "placeholder": "e.g. Pacific Time (US \u0026 Canada)"
+      },
+      {
+        "name": "locale",
+        "type": "string",
+        "value": null,
+        "label": "Locale",
+        "placeholder": "e.g. en-US"
+      },
+      {
+        "name": "signature",
+        "type": "string",
+        "value": null,
+        "label": "Signature",
+        "placeholder": "Agent/admin signature"
+      },
+      {
+        "name": "custom_role_id",
+        "type": "integer",
+        "value": null,
+        "label": "Custom Role ID",
+        "placeholder": ""
+      },
+      {
+        "name": "ticket_restriction",
+        "type": "string",
+        "value": null,
+        "label": "Ticket Restriction",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "Organization",
+            "value": "organization"
+          },
+          {
+            "name": "Groups",
+            "value": "groups"
+          },
+          {
+            "name": "Assigned",
+            "value": "assigned"
+          },
+          {
+            "name": "Requested",
+            "value": "requested"
+          }
+        ]
+      },
+      {
+        "name": "moderator",
+        "type": "boolean",
+        "value": null,
+        "label": "Moderator",
+        "placeholder": ""
+      },
+      {
+        "name": "only_private_comments",
+        "type": "boolean",
+        "value": null,
+        "label": "Only Private Comments",
+        "placeholder": ""
+      },
+      {
+        "name": "restricted_agent",
+        "type": "boolean",
+        "value": null,
+        "label": "Restricted Agent",
+        "placeholder": ""
+      },
+      {
+        "name": "report_csv",
+        "type": "boolean",
+        "value": null,
+        "label": "Report CSV",
+        "placeholder": ""
+      },
+      {
+        "name": "suspended",
+        "type": "boolean",
+        "value": null,
+        "label": "Suspended",
+        "placeholder": ""
+      },
+      {
+        "name": "verified",
+        "type": "boolean",
+        "value": null,
+        "label": "Verified",
+        "placeholder": ""
+      },
+      {
+        "name": "tags",
+        "type": "string",
+        "value": null,
+        "label": "Tags",
+        "placeholder": "vip, priority (comma-separated)"
+      },
+      {
+        "name": "user_fields",
+        "type": "object",
+        "value": null,
+        "label": "User Fields (JSON)",
+        "placeholder": "{\"support_plan\":\"gold\"}"
+      },
+      {
+        "name": "additional_fields",
+        "type": "object",
+        "value": null,
+        "label": "Additional Fields (JSON)",
+        "placeholder": ""
+      }
+    ],
+    "outputs": [
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "User ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "User",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "helpdesk/zendesk/user_delete": {
+    "hash": "49ee71dd60013e3ab453bd8febb7ca28c38d9e2af8e0dae382ae0145c6c57d69",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Zendesk: Delete User",
+    "description": "Permanently delete (soft-delete) a Zendesk user by their ID.",
+    "website": "https://www.flomation.co",
+    "icon": "zendesk+trash",
+    "date": "03/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Helpdesk",
+      "icon": "headset",
+      "description": "Customer support and ticketing platforms"
+    },
+    "sub_category": {
+      "name": "Zendesk",
+      "icon": "zendesk",
+      "description": "Manage tickets, users, and organizations in Zendesk Support"
+    },
+    "inputs": [
+      {
+        "name": "subdomain",
+        "type": "string",
+        "value": null,
+        "label": "Subdomain",
+        "placeholder": "mycompany (from mycompany.zendesk.com)",
+        "required": true
+      },
+      {
+        "name": "email",
+        "type": "string",
+        "value": null,
+        "label": "Agent Email",
+        "placeholder": "you@company.com (paired with the API token)"
+      },
+      {
+        "name": "api_token",
+        "type": "secret",
+        "value": null,
+        "label": "API Token",
+        "placeholder": "Zendesk API token"
+      },
+      {
+        "name": "oauth_token",
+        "type": "secret",
+        "value": null,
+        "label": "OAuth Access Token",
+        "placeholder": "Optional — a bearer token used instead of the email + API token"
+      },
+      {
+        "name": "user_id",
+        "type": "string",
+        "value": null,
+        "label": "User ID",
+        "placeholder": "35436",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "User ID",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "helpdesk/zendesk/user_get": {
+    "hash": "4385d0ff5e614176a8919b00dbcb323b40a16763b3bf42b7f3d9bde95f7a6e73",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Zendesk: Get User",
+    "description": "Retrieve a single Zendesk user by their ID.",
+    "website": "https://www.flomation.co",
+    "icon": "zendesk+eye",
+    "date": "03/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Helpdesk",
+      "icon": "headset",
+      "description": "Customer support and ticketing platforms"
+    },
+    "sub_category": {
+      "name": "Zendesk",
+      "icon": "zendesk",
+      "description": "Manage tickets, users, and organizations in Zendesk Support"
+    },
+    "inputs": [
+      {
+        "name": "subdomain",
+        "type": "string",
+        "value": null,
+        "label": "Subdomain",
+        "placeholder": "mycompany (from mycompany.zendesk.com)",
+        "required": true
+      },
+      {
+        "name": "email",
+        "type": "string",
+        "value": null,
+        "label": "Agent Email",
+        "placeholder": "you@company.com (paired with the API token)"
+      },
+      {
+        "name": "api_token",
+        "type": "secret",
+        "value": null,
+        "label": "API Token",
+        "placeholder": "Zendesk API token"
+      },
+      {
+        "name": "oauth_token",
+        "type": "secret",
+        "value": null,
+        "label": "OAuth Access Token",
+        "placeholder": "Optional — a bearer token used instead of the email + API token"
+      },
+      {
+        "name": "user_id",
+        "type": "string",
+        "value": null,
+        "label": "User ID",
+        "placeholder": "The user ID",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "User ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "User",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "helpdesk/zendesk/user_get_all": {
+    "hash": "f48c5a01a8938962aa5cd70d2ba26107ad5fc36d73fd74821fa01cd96853f816",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Zendesk: Get Many Users",
+    "description": "List Zendesk users, optionally filtered by role. Enable Return All to auto-paginate every match.",
+    "website": "https://www.flomation.co",
+    "icon": "zendesk+list",
+    "date": "03/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Helpdesk",
+      "icon": "headset",
+      "description": "Customer support and ticketing platforms"
+    },
+    "sub_category": {
+      "name": "Zendesk",
+      "icon": "zendesk",
+      "description": "Manage tickets, users, and organizations in Zendesk Support"
+    },
+    "inputs": [
+      {
+        "name": "subdomain",
+        "type": "string",
+        "value": null,
+        "label": "Subdomain",
+        "placeholder": "mycompany (from mycompany.zendesk.com)",
+        "required": true
+      },
+      {
+        "name": "email",
+        "type": "string",
+        "value": null,
+        "label": "Agent Email",
+        "placeholder": "you@company.com (paired with the API token)"
+      },
+      {
+        "name": "api_token",
+        "type": "secret",
+        "value": null,
+        "label": "API Token",
+        "placeholder": "Zendesk API token"
+      },
+      {
+        "name": "oauth_token",
+        "type": "secret",
+        "value": null,
+        "label": "OAuth Access Token",
+        "placeholder": "Optional — a bearer token used instead of the email + API token"
+      },
+      {
+        "name": "return_all",
+        "type": "boolean",
+        "value": null,
+        "label": "Return All (auto-paginate every match)",
+        "placeholder": ""
+      },
+      {
+        "name": "limit",
+        "type": "integer",
+        "value": null,
+        "label": "Limit",
+        "placeholder": "100 per page (max 100)"
+      },
+      {
+        "name": "role",
+        "type": "string",
+        "value": null,
+        "label": "Role",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "End User",
+            "value": "end-user"
+          },
+          {
+            "name": "Agent",
+            "value": "agent"
+          },
+          {
+            "name": "Admin",
+            "value": "admin"
+          }
+        ]
+      }
+    ],
+    "outputs": [
+      {
+        "name": "results",
+        "type": "object",
+        "value": null,
+        "label": "Users",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Count",
+        "placeholder": ""
+      },
+      {
+        "name": "next_page",
+        "type": "string",
+        "value": null,
+        "label": "Next Page URL",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Raw Response",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "helpdesk/zendesk/user_get_organizations": {
+    "hash": "557af8be97821ca42983478cbcd303ef07af15a48d4f9821cecb442c79e7e6a4",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Zendesk: Get User's Organizations",
+    "description": "List the organizations a Zendesk user belongs to.",
+    "website": "https://www.flomation.co",
+    "icon": "zendesk+user-group",
+    "date": "03/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Helpdesk",
+      "icon": "headset",
+      "description": "Customer support and ticketing platforms"
+    },
+    "sub_category": {
+      "name": "Zendesk",
+      "icon": "zendesk",
+      "description": "Manage tickets, users, and organizations in Zendesk Support"
+    },
+    "inputs": [
+      {
+        "name": "subdomain",
+        "type": "string",
+        "value": null,
+        "label": "Subdomain",
+        "placeholder": "mycompany (from mycompany.zendesk.com)",
+        "required": true
+      },
+      {
+        "name": "email",
+        "type": "string",
+        "value": null,
+        "label": "Agent Email",
+        "placeholder": "you@company.com (paired with the API token)"
+      },
+      {
+        "name": "api_token",
+        "type": "secret",
+        "value": null,
+        "label": "API Token",
+        "placeholder": "Zendesk API token"
+      },
+      {
+        "name": "oauth_token",
+        "type": "secret",
+        "value": null,
+        "label": "OAuth Access Token",
+        "placeholder": "Optional — a bearer token used instead of the email + API token"
+      },
+      {
+        "name": "user_id",
+        "type": "string",
+        "value": null,
+        "label": "User ID",
+        "placeholder": "35436",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "results",
+        "type": "object",
+        "value": null,
+        "label": "Organizations",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Count",
+        "placeholder": ""
+      },
+      {
+        "name": "next_page",
+        "type": "string",
+        "value": null,
+        "label": "Next Page URL",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Raw Response",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "helpdesk/zendesk/user_get_related_data": {
+    "hash": "e638ad32e42a8c6d35b728e136d39f3b15a9c85731b96b789cb0d8ea4d5f8e9b",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Zendesk: Get User Related Data",
+    "description": "Get counts of data related to a Zendesk user (assigned tickets, requested tickets, organization subscriptions, etc.).",
+    "website": "https://www.flomation.co",
+    "icon": "zendesk+list",
+    "date": "03/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Helpdesk",
+      "icon": "headset",
+      "description": "Customer support and ticketing platforms"
+    },
+    "sub_category": {
+      "name": "Zendesk",
+      "icon": "zendesk",
+      "description": "Manage tickets, users, and organizations in Zendesk Support"
+    },
+    "inputs": [
+      {
+        "name": "subdomain",
+        "type": "string",
+        "value": null,
+        "label": "Subdomain",
+        "placeholder": "mycompany (from mycompany.zendesk.com)",
+        "required": true
+      },
+      {
+        "name": "email",
+        "type": "string",
+        "value": null,
+        "label": "Agent Email",
+        "placeholder": "you@company.com (paired with the API token)"
+      },
+      {
+        "name": "api_token",
+        "type": "secret",
+        "value": null,
+        "label": "API Token",
+        "placeholder": "Zendesk API token"
+      },
+      {
+        "name": "oauth_token",
+        "type": "secret",
+        "value": null,
+        "label": "OAuth Access Token",
+        "placeholder": "Optional — a bearer token used instead of the email + API token"
+      },
+      {
+        "name": "user_id",
+        "type": "string",
+        "value": null,
+        "label": "User ID",
+        "placeholder": "35436",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "User ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "User Related Data",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "helpdesk/zendesk/user_search": {
+    "hash": "85b92e31241e8a1f3b5d5e24c169dbec5f2f84fc9070985ff0f4ec9fc86d53d5",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Zendesk: Search Users",
+    "description": "Search Zendesk users by name, email, phone, or external ID. Enable Return All to auto-paginate every match.",
+    "website": "https://www.flomation.co",
+    "icon": "zendesk+magnifying-glass",
+    "date": "03/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Helpdesk",
+      "icon": "headset",
+      "description": "Customer support and ticketing platforms"
+    },
+    "sub_category": {
+      "name": "Zendesk",
+      "icon": "zendesk",
+      "description": "Manage tickets, users, and organizations in Zendesk Support"
+    },
+    "inputs": [
+      {
+        "name": "subdomain",
+        "type": "string",
+        "value": null,
+        "label": "Subdomain",
+        "placeholder": "mycompany (from mycompany.zendesk.com)",
+        "required": true
+      },
+      {
+        "name": "email",
+        "type": "string",
+        "value": null,
+        "label": "Agent Email",
+        "placeholder": "you@company.com (paired with the API token)"
+      },
+      {
+        "name": "api_token",
+        "type": "secret",
+        "value": null,
+        "label": "API Token",
+        "placeholder": "Zendesk API token"
+      },
+      {
+        "name": "oauth_token",
+        "type": "secret",
+        "value": null,
+        "label": "OAuth Access Token",
+        "placeholder": "Optional — a bearer token used instead of the email + API token"
+      },
+      {
+        "name": "return_all",
+        "type": "boolean",
+        "value": null,
+        "label": "Return All (auto-paginate every match)",
+        "placeholder": ""
+      },
+      {
+        "name": "limit",
+        "type": "integer",
+        "value": null,
+        "label": "Limit",
+        "placeholder": "100 per page (max 100)"
+      },
+      {
+        "name": "query",
+        "type": "string",
+        "value": null,
+        "label": "Query",
+        "placeholder": "Name, email, phone, or a search term"
+      },
+      {
+        "name": "external_id",
+        "type": "string",
+        "value": null,
+        "label": "External ID",
+        "placeholder": "Match users by external ID"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "results",
+        "type": "object",
+        "value": null,
+        "label": "Users",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Count",
+        "placeholder": ""
+      },
+      {
+        "name": "next_page",
+        "type": "string",
+        "value": null,
+        "label": "Next Page URL",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Raw Response",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "helpdesk/zendesk/user_update": {
+    "hash": "ad93d8ce31ff3bb1e2fd29005c69513b31978a990620bcc221ec8efffeea239a",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Zendesk: Update User",
+    "description": "Update a Zendesk user. Change profile fields, custom user fields, or any other field via Additional Fields.",
+    "website": "https://www.flomation.co",
+    "icon": "zendesk+pencil",
+    "date": "03/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Helpdesk",
+      "icon": "headset",
+      "description": "Customer support and ticketing platforms"
+    },
+    "sub_category": {
+      "name": "Zendesk",
+      "icon": "zendesk",
+      "description": "Manage tickets, users, and organizations in Zendesk Support"
+    },
+    "inputs": [
+      {
+        "name": "subdomain",
+        "type": "string",
+        "value": null,
+        "label": "Subdomain",
+        "placeholder": "mycompany (from mycompany.zendesk.com)",
+        "required": true
+      },
+      {
+        "name": "email",
+        "type": "string",
+        "value": null,
+        "label": "Agent Email",
+        "placeholder": "you@company.com (paired with the API token)"
+      },
+      {
+        "name": "api_token",
+        "type": "secret",
+        "value": null,
+        "label": "API Token",
+        "placeholder": "Zendesk API token"
+      },
+      {
+        "name": "oauth_token",
+        "type": "secret",
+        "value": null,
+        "label": "OAuth Access Token",
+        "placeholder": "Optional — a bearer token used instead of the email + API token"
+      },
+      {
+        "name": "user_id",
+        "type": "string",
+        "value": null,
+        "label": "User ID",
+        "placeholder": "35436",
+        "required": true
+      },
+      {
+        "name": "name",
+        "type": "string",
+        "value": null,
+        "label": "Name",
+        "placeholder": "The user's full name"
+      },
+      {
+        "name": "user_email",
+        "type": "string",
+        "value": null,
+        "label": "Email",
+        "placeholder": "The user's primary email address"
+      },
+      {
+        "name": "role",
+        "type": "string",
+        "value": null,
+        "label": "Role",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "End User",
+            "value": "end-user"
+          },
+          {
+            "name": "Agent",
+            "value": "agent"
+          },
+          {
+            "name": "Admin",
+            "value": "admin"
+          }
+        ]
+      },
+      {
+        "name": "phone",
+        "type": "string",
+        "value": null,
+        "label": "Phone",
+        "placeholder": "+1 555 123 4567"
+      },
+      {
+        "name": "alias",
+        "type": "string",
+        "value": null,
+        "label": "Alias",
+        "placeholder": "An agent alias displayed to end users"
+      },
+      {
+        "name": "organization_id",
+        "type": "string",
+        "value": null,
+        "label": "Organization",
+        "placeholder": "The organization this user belongs to (ID)"
+      },
+      {
+        "name": "external_id",
+        "type": "string",
+        "value": null,
+        "label": "External ID",
+        "placeholder": "An ID linking this user to a record in another system"
+      },
+      {
+        "name": "details",
+        "type": "text",
+        "value": null,
+        "label": "Details",
+        "placeholder": "Details about the user, such as an address"
+      },
+      {
+        "name": "notes",
+        "type": "text",
+        "value": null,
+        "label": "Notes",
+        "placeholder": "Notes about the user"
+      },
+      {
+        "name": "time_zone",
+        "type": "string",
+        "value": null,
+        "label": "Time Zone",
+        "placeholder": "e.g. Pacific Time (US \u0026 Canada)"
+      },
+      {
+        "name": "locale",
+        "type": "string",
+        "value": null,
+        "label": "Locale",
+        "placeholder": "e.g. en-US"
+      },
+      {
+        "name": "signature",
+        "type": "text",
+        "value": null,
+        "label": "Signature",
+        "placeholder": "The agent's signature (agents and admins only)"
+      },
+      {
+        "name": "custom_role_id",
+        "type": "integer",
+        "value": null,
+        "label": "Custom Role ID",
+        "placeholder": "The ID of a custom agent role"
+      },
+      {
+        "name": "ticket_restriction",
+        "type": "string",
+        "value": null,
+        "label": "Ticket Restriction",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "Organization",
+            "value": "organization"
+          },
+          {
+            "name": "Groups",
+            "value": "groups"
+          },
+          {
+            "name": "Assigned",
+            "value": "assigned"
+          },
+          {
+            "name": "Requested",
+            "value": "requested"
+          }
+        ]
+      },
+      {
+        "name": "moderator",
+        "type": "boolean",
+        "value": null,
+        "label": "Moderator",
+        "placeholder": "Whether the user has forum moderation capabilities"
+      },
+      {
+        "name": "only_private_comments",
+        "type": "boolean",
+        "value": null,
+        "label": "Only Private Comments",
+        "placeholder": "Whether the user can only create private comments"
+      },
+      {
+        "name": "restricted_agent",
+        "type": "boolean",
+        "value": null,
+        "label": "Restricted Agent",
+        "placeholder": "Whether the agent has restrictions"
+      },
+      {
+        "name": "report_csv",
+        "type": "boolean",
+        "value": null,
+        "label": "Report CSV",
+        "placeholder": "Whether the user can access the CSV report"
+      },
+      {
+        "name": "suspended",
+        "type": "boolean",
+        "value": null,
+        "label": "Suspended",
+        "placeholder": "Whether the user is suspended"
+      },
+      {
+        "name": "verified",
+        "type": "boolean",
+        "value": null,
+        "label": "Verified",
+        "placeholder": "Whether the user's identities are verified"
+      },
+      {
+        "name": "tags",
+        "type": "string",
+        "value": null,
+        "label": "Tags",
+        "placeholder": "vip, wholesale (comma-separated) — replaces the user's tags"
+      },
+      {
+        "name": "user_fields",
+        "type": "object",
+        "value": null,
+        "label": "User Fields (JSON)",
+        "placeholder": "{\"support_plan\":\"gold\"}"
+      },
+      {
+        "name": "additional_fields",
+        "type": "object",
+        "value": null,
+        "label": "Additional Fields (JSON)",
+        "placeholder": "{\"shared_phone_number\":true}"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "User ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "User",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
   "hubspot/associate": {
     "hash": "58e66113e7821682d95f9e4f2e89173a1576343be904c961404303210441086d",
     "author": "Dave McElin",
@@ -45566,6 +48837,139 @@
         "type": "string",
         "value": null,
         "label": "Content Type",
+        "placeholder": ""
+      },
+      {
+        "name": "triggered_at",
+        "type": "string",
+        "value": null,
+        "label": "Triggered At",
+        "placeholder": ""
+      }
+    ]
+  },
+  "trigger/zendesk_webhook": {
+    "hash": "5e07c755e9e16afcd3399c6737466199fcfd02ca443d8ad7bf13781c1252043e",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Zendesk Webhook Trigger",
+    "description": "Triggers a flow when a Zendesk ticket is created or updated. Flomation registers the Zendesk webhook and business rule automatically. Leave Conditions empty to fire on every ticket create/update, or supply Zendesk trigger conditions as JSON to narrow it.",
+    "website": "https://www.flomation.co",
+    "icon": "zendesk",
+    "date": "03/07/2026",
+    "type": 1,
+    "category": {
+      "name": "Triggers",
+      "icon": "bolt-lightning",
+      "description": "Start a Flow"
+    },
+    "inputs": [
+      {
+        "name": "subdomain",
+        "type": "string",
+        "value": null,
+        "label": "Subdomain",
+        "placeholder": "mycompany (from mycompany.zendesk.com)",
+        "required": true
+      },
+      {
+        "name": "email",
+        "type": "string",
+        "value": null,
+        "label": "Agent Email",
+        "placeholder": "you@company.com (paired with the API token to register the webhook)"
+      },
+      {
+        "name": "api_token",
+        "type": "secret",
+        "value": null,
+        "label": "API Token",
+        "placeholder": "Zendesk API token (used to register the webhook)"
+      },
+      {
+        "name": "oauth_token",
+        "type": "secret",
+        "value": null,
+        "label": "OAuth Access Token",
+        "placeholder": "Optional — a bearer token used instead of the email + API token"
+      },
+      {
+        "name": "conditions",
+        "type": "object",
+        "value": null,
+        "label": "Conditions (JSON)",
+        "placeholder": "Optional — Zendesk trigger conditions, e.g. {\"all\":[{\"field\":\"priority\",\"operator\":\"is\",\"value\":\"high\"}]}"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "content",
+        "type": "string",
+        "value": null,
+        "label": "Event Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "ticket_id",
+        "type": "string",
+        "value": null,
+        "label": "Ticket ID",
+        "placeholder": ""
+      },
+      {
+        "name": "subject",
+        "type": "string",
+        "value": null,
+        "label": "Subject",
+        "placeholder": ""
+      },
+      {
+        "name": "status",
+        "type": "string",
+        "value": null,
+        "label": "Status",
+        "placeholder": ""
+      },
+      {
+        "name": "priority",
+        "type": "string",
+        "value": null,
+        "label": "Priority",
+        "placeholder": ""
+      },
+      {
+        "name": "requester_email",
+        "type": "string",
+        "value": null,
+        "label": "Requester Email",
+        "placeholder": ""
+      },
+      {
+        "name": "description",
+        "type": "string",
+        "value": null,
+        "label": "Latest Description",
+        "placeholder": ""
+      },
+      {
+        "name": "via",
+        "type": "string",
+        "value": null,
+        "label": "Channel",
+        "placeholder": ""
+      },
+      {
+        "name": "payload",
+        "type": "object",
+        "value": null,
+        "label": "Payload",
+        "placeholder": ""
+      },
+      {
+        "name": "body",
+        "type": "string",
+        "value": null,
+        "label": "Raw JSON Body",
         "placeholder": ""
       },
       {

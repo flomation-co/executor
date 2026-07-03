@@ -189,6 +189,29 @@ import (
 	google_slides_create "flomation.app/automate/executor/actions/google/slides/create"
 	google_slides_get "flomation.app/automate/executor/actions/google/slides/get"
 	google_slides_get_slide "flomation.app/automate/executor/actions/google/slides/get_slide"
+	helpdesk_zendesk_organization_count "flomation.app/automate/executor/actions/helpdesk/zendesk/organization_count"
+	helpdesk_zendesk_organization_create "flomation.app/automate/executor/actions/helpdesk/zendesk/organization_create"
+	helpdesk_zendesk_organization_delete "flomation.app/automate/executor/actions/helpdesk/zendesk/organization_delete"
+	helpdesk_zendesk_organization_get "flomation.app/automate/executor/actions/helpdesk/zendesk/organization_get"
+	helpdesk_zendesk_organization_get_all "flomation.app/automate/executor/actions/helpdesk/zendesk/organization_get_all"
+	helpdesk_zendesk_organization_get_related_data "flomation.app/automate/executor/actions/helpdesk/zendesk/organization_get_related_data"
+	helpdesk_zendesk_organization_update "flomation.app/automate/executor/actions/helpdesk/zendesk/organization_update"
+	helpdesk_zendesk_ticket_create "flomation.app/automate/executor/actions/helpdesk/zendesk/ticket_create"
+	helpdesk_zendesk_ticket_delete "flomation.app/automate/executor/actions/helpdesk/zendesk/ticket_delete"
+	helpdesk_zendesk_ticket_field_get "flomation.app/automate/executor/actions/helpdesk/zendesk/ticket_field_get"
+	helpdesk_zendesk_ticket_field_get_all "flomation.app/automate/executor/actions/helpdesk/zendesk/ticket_field_get_all"
+	helpdesk_zendesk_ticket_get "flomation.app/automate/executor/actions/helpdesk/zendesk/ticket_get"
+	helpdesk_zendesk_ticket_get_all "flomation.app/automate/executor/actions/helpdesk/zendesk/ticket_get_all"
+	helpdesk_zendesk_ticket_recover "flomation.app/automate/executor/actions/helpdesk/zendesk/ticket_recover"
+	helpdesk_zendesk_ticket_update "flomation.app/automate/executor/actions/helpdesk/zendesk/ticket_update"
+	helpdesk_zendesk_user_create "flomation.app/automate/executor/actions/helpdesk/zendesk/user_create"
+	helpdesk_zendesk_user_delete "flomation.app/automate/executor/actions/helpdesk/zendesk/user_delete"
+	helpdesk_zendesk_user_get "flomation.app/automate/executor/actions/helpdesk/zendesk/user_get"
+	helpdesk_zendesk_user_get_all "flomation.app/automate/executor/actions/helpdesk/zendesk/user_get_all"
+	helpdesk_zendesk_user_get_organizations "flomation.app/automate/executor/actions/helpdesk/zendesk/user_get_organizations"
+	helpdesk_zendesk_user_get_related_data "flomation.app/automate/executor/actions/helpdesk/zendesk/user_get_related_data"
+	helpdesk_zendesk_user_search "flomation.app/automate/executor/actions/helpdesk/zendesk/user_search"
+	helpdesk_zendesk_user_update "flomation.app/automate/executor/actions/helpdesk/zendesk/user_update"
 	hubspot_associate "flomation.app/automate/executor/actions/hubspot/associate"
 	hubspot_company_create "flomation.app/automate/executor/actions/hubspot/company_create"
 	hubspot_company_delete "flomation.app/automate/executor/actions/hubspot/company_delete"
@@ -444,6 +467,7 @@ import (
 	trigger_twilio_sms "flomation.app/automate/executor/actions/trigger/twilio_sms"
 	trigger_twilio_voice "flomation.app/automate/executor/actions/trigger/twilio_voice"
 	trigger_webhook "flomation.app/automate/executor/actions/trigger/webhook"
+	trigger_zendesk_webhook "flomation.app/automate/executor/actions/trigger/zendesk_webhook"
 	twilio_end_call "flomation.app/automate/executor/actions/twilio/end_call"
 	twilio_make_call "flomation.app/automate/executor/actions/twilio/make_call"
 	twilio_send_audio "flomation.app/automate/executor/actions/twilio/send_audio"
@@ -656,6 +680,29 @@ var Actions = map[string]core.Action{
 	"google/slides/create":                              google_slides_create.Execute,
 	"google/slides/get":                                 google_slides_get.Execute,
 	"google/slides/get_slide":                           google_slides_get_slide.Execute,
+	"helpdesk/zendesk/organization_count":               helpdesk_zendesk_organization_count.Execute,
+	"helpdesk/zendesk/organization_create":              helpdesk_zendesk_organization_create.Execute,
+	"helpdesk/zendesk/organization_delete":              helpdesk_zendesk_organization_delete.Execute,
+	"helpdesk/zendesk/organization_get":                 helpdesk_zendesk_organization_get.Execute,
+	"helpdesk/zendesk/organization_get_all":             helpdesk_zendesk_organization_get_all.Execute,
+	"helpdesk/zendesk/organization_get_related_data":    helpdesk_zendesk_organization_get_related_data.Execute,
+	"helpdesk/zendesk/organization_update":              helpdesk_zendesk_organization_update.Execute,
+	"helpdesk/zendesk/ticket_create":                    helpdesk_zendesk_ticket_create.Execute,
+	"helpdesk/zendesk/ticket_delete":                    helpdesk_zendesk_ticket_delete.Execute,
+	"helpdesk/zendesk/ticket_field_get":                 helpdesk_zendesk_ticket_field_get.Execute,
+	"helpdesk/zendesk/ticket_field_get_all":             helpdesk_zendesk_ticket_field_get_all.Execute,
+	"helpdesk/zendesk/ticket_get":                       helpdesk_zendesk_ticket_get.Execute,
+	"helpdesk/zendesk/ticket_get_all":                   helpdesk_zendesk_ticket_get_all.Execute,
+	"helpdesk/zendesk/ticket_recover":                   helpdesk_zendesk_ticket_recover.Execute,
+	"helpdesk/zendesk/ticket_update":                    helpdesk_zendesk_ticket_update.Execute,
+	"helpdesk/zendesk/user_create":                      helpdesk_zendesk_user_create.Execute,
+	"helpdesk/zendesk/user_delete":                      helpdesk_zendesk_user_delete.Execute,
+	"helpdesk/zendesk/user_get":                         helpdesk_zendesk_user_get.Execute,
+	"helpdesk/zendesk/user_get_all":                     helpdesk_zendesk_user_get_all.Execute,
+	"helpdesk/zendesk/user_get_organizations":           helpdesk_zendesk_user_get_organizations.Execute,
+	"helpdesk/zendesk/user_get_related_data":            helpdesk_zendesk_user_get_related_data.Execute,
+	"helpdesk/zendesk/user_search":                      helpdesk_zendesk_user_search.Execute,
+	"helpdesk/zendesk/user_update":                      helpdesk_zendesk_user_update.Execute,
 	"hubspot/associate":                                 hubspot_associate.Execute,
 	"hubspot/company_create":                            hubspot_company_create.Execute,
 	"hubspot/company_delete":                            hubspot_company_delete.Execute,
@@ -911,6 +958,7 @@ var Actions = map[string]core.Action{
 	"trigger/twilio_sms":                                trigger_twilio_sms.Execute,
 	"trigger/twilio_voice":                              trigger_twilio_voice.Execute,
 	"trigger/webhook":                                   trigger_webhook.Execute,
+	"trigger/zendesk_webhook":                           trigger_zendesk_webhook.Execute,
 	"twilio/end_call":                                   twilio_end_call.Execute,
 	"twilio/make_call":                                  twilio_make_call.Execute,
 	"twilio/send_audio":                                 twilio_send_audio.Execute,
