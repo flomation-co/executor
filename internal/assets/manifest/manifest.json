@@ -7184,7 +7184,7 @@
     ]
   },
   "ecommerce/shopify/order_create": {
-    "hash": "e26c5e53301d5fd1a01a556b0a401fb3a082a7e1c76939d5a9cbfce79b30c418",
+    "hash": "c4d360790540116ba165d7335769833d846738911e4648039ae61b1724d4dc5e",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Shopify: Create Order",
@@ -7603,7 +7603,7 @@
     ]
   },
   "ecommerce/shopify/order_get_all": {
-    "hash": "0037dfb65df664c0ed42069b90beeaf969ba82f4931ed1784fe000f938eda1b5",
+    "hash": "9118a0bf6adbc0298bd3eda720125457d2fd25e373d059e99e119decc539bfe7",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Shopify: Get Many Orders",
@@ -7875,7 +7875,7 @@
     ]
   },
   "ecommerce/shopify/order_update": {
-    "hash": "a67b55db5074737093b96a4c98bc8124b10d5b998b0dc6e25d92805ac0bbf75a",
+    "hash": "595ddc67247af49187e674ac4bc526f5271a72945bd6893aead52b935302be7c",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Shopify: Update Order",
@@ -8007,7 +8007,7 @@
     ]
   },
   "ecommerce/shopify/product_create": {
-    "hash": "dc664488820c96148c7524ecf72cd4c8c01ef2ede423fcdb9ba8af1e1a30b11c",
+    "hash": "8a41a9da53c7a0bdced70a16cc626a0a4c7cbe4a7def5f0c550163ab7b45c867",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Shopify: Create Product",
@@ -36445,6 +36445,1681 @@
       }
     ]
   },
+  "scheduling/calendly/availability_schedule_get_all": {
+    "hash": "fedb899e61806b0737c8914b986328c3552b700bfa6d24472b98b5702c652528",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Calendly: Get Availability Schedules",
+    "description": "List a Calendly user's availability schedules (working hours). Defaults to the connected user.",
+    "website": "https://www.flomation.co",
+    "icon": "calendly+clock",
+    "date": "03/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Scheduling",
+      "icon": "calendar",
+      "description": "Meeting scheduling and booking platforms"
+    },
+    "sub_category": {
+      "name": "Calendly",
+      "icon": "calendly",
+      "description": "Manage Calendly event types, scheduled events, invitees, and scheduling links"
+    },
+    "inputs": [
+      {
+        "name": "access_token",
+        "type": "secret",
+        "value": null,
+        "label": "Calendly Connection",
+        "placeholder": "Calendly credential or Personal Access Token",
+        "required": true
+      },
+      {
+        "name": "user",
+        "type": "string",
+        "value": null,
+        "label": "User URI",
+        "placeholder": "Defaults to the connected user (optional)"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "results",
+        "type": "object",
+        "value": null,
+        "label": "Availability Schedules",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Count",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Raw Response",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "scheduling/calendly/busy_times_get_all": {
+    "hash": "96a1860de074cdf67fc88237637604c8f7948d9062be26784eaa25a902d0020c",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Calendly: Get Busy Times",
+    "description": "List a Calendly user's busy periods (internal and external calendar events) within a date range of up to 7 days.",
+    "website": "https://www.flomation.co",
+    "icon": "calendly+clock",
+    "date": "03/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Scheduling",
+      "icon": "calendar",
+      "description": "Meeting scheduling and booking platforms"
+    },
+    "sub_category": {
+      "name": "Calendly",
+      "icon": "calendly",
+      "description": "Manage Calendly event types, scheduled events, invitees, and scheduling links"
+    },
+    "inputs": [
+      {
+        "name": "access_token",
+        "type": "secret",
+        "value": null,
+        "label": "Calendly Connection",
+        "placeholder": "Calendly credential or Personal Access Token",
+        "required": true
+      },
+      {
+        "name": "start_time",
+        "type": "string",
+        "value": null,
+        "label": "Start Time",
+        "placeholder": "2026-07-03T00:00:00Z",
+        "required": true
+      },
+      {
+        "name": "end_time",
+        "type": "string",
+        "value": null,
+        "label": "End Time",
+        "placeholder": "2026-07-10T00:00:00Z (max 7 days after start)",
+        "required": true
+      },
+      {
+        "name": "user",
+        "type": "string",
+        "value": null,
+        "label": "User URI",
+        "placeholder": "Defaults to the connected user (optional)"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "results",
+        "type": "object",
+        "value": null,
+        "label": "Busy Times",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Count",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Raw Response",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "scheduling/calendly/event_cancel": {
+    "hash": "8eeca9c5ad3f47eab5741c71800b527a56210024ed31c39326628237ed177cef",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Calendly: Cancel Event",
+    "description": "Cancel a scheduled Calendly event (booking), optionally with a reason shown to the invitee.",
+    "website": "https://www.flomation.co",
+    "icon": "calendly+xmark",
+    "date": "03/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Scheduling",
+      "icon": "calendar",
+      "description": "Meeting scheduling and booking platforms"
+    },
+    "sub_category": {
+      "name": "Calendly",
+      "icon": "calendly",
+      "description": "Manage Calendly event types, scheduled events, invitees, and scheduling links"
+    },
+    "inputs": [
+      {
+        "name": "access_token",
+        "type": "secret",
+        "value": null,
+        "label": "Calendly Connection",
+        "placeholder": "Calendly credential or Personal Access Token",
+        "required": true
+      },
+      {
+        "name": "event",
+        "type": "string",
+        "value": null,
+        "label": "Event",
+        "placeholder": "Scheduled event ID or URI",
+        "required": true
+      },
+      {
+        "name": "reason",
+        "type": "text",
+        "value": null,
+        "label": "Reason",
+        "placeholder": "Cancellation reason shown to the invitee (optional)"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Cancellation URI",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Cancellation",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "scheduling/calendly/event_get": {
+    "hash": "3a23871e5ce8e5030f48ea1ff5e4e4b599f2e6405cef38d86b04464c15abd9c5",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Calendly: Get Event",
+    "description": "Retrieve a single scheduled Calendly event (booking) by its ID or URI.",
+    "website": "https://www.flomation.co",
+    "icon": "calendly+magnifying-glass",
+    "date": "03/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Scheduling",
+      "icon": "calendar",
+      "description": "Meeting scheduling and booking platforms"
+    },
+    "sub_category": {
+      "name": "Calendly",
+      "icon": "calendly",
+      "description": "Manage Calendly event types, scheduled events, invitees, and scheduling links"
+    },
+    "inputs": [
+      {
+        "name": "access_token",
+        "type": "secret",
+        "value": null,
+        "label": "Calendly Connection",
+        "placeholder": "Calendly credential or Personal Access Token",
+        "required": true
+      },
+      {
+        "name": "event",
+        "type": "string",
+        "value": null,
+        "label": "Event",
+        "placeholder": "Scheduled event ID or URI",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Event URI",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Event",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "scheduling/calendly/event_get_all": {
+    "hash": "d3ae49209b531ae4cb359721a2e899efd817fd7bd521d71e4c02b308764a6c7f",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Calendly: Get Many Events",
+    "description": "List scheduled Calendly events (bookings) for you or your organisation, with status, time and invitee filters.",
+    "website": "https://www.flomation.co",
+    "icon": "calendly+list",
+    "date": "03/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Scheduling",
+      "icon": "calendar",
+      "description": "Meeting scheduling and booking platforms"
+    },
+    "sub_category": {
+      "name": "Calendly",
+      "icon": "calendly",
+      "description": "Manage Calendly event types, scheduled events, invitees, and scheduling links"
+    },
+    "inputs": [
+      {
+        "name": "access_token",
+        "type": "secret",
+        "value": null,
+        "label": "Calendly Connection",
+        "placeholder": "Calendly credential or Personal Access Token",
+        "required": true
+      },
+      {
+        "name": "scope",
+        "type": "string",
+        "value": null,
+        "label": "Scope",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "User",
+            "value": "user"
+          },
+          {
+            "name": "Organization",
+            "value": "organization"
+          }
+        ]
+      },
+      {
+        "name": "status",
+        "type": "string",
+        "value": null,
+        "label": "Status",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "Any",
+            "value": ""
+          },
+          {
+            "name": "Active",
+            "value": "active"
+          },
+          {
+            "name": "Canceled",
+            "value": "canceled"
+          }
+        ]
+      },
+      {
+        "name": "invitee_email",
+        "type": "string",
+        "value": null,
+        "label": "Invitee Email",
+        "placeholder": "Only events booked by this invitee (optional)"
+      },
+      {
+        "name": "min_start_time",
+        "type": "string",
+        "value": null,
+        "label": "Start After",
+        "placeholder": "2026-07-01T00:00:00Z (optional)"
+      },
+      {
+        "name": "max_start_time",
+        "type": "string",
+        "value": null,
+        "label": "Start Before",
+        "placeholder": "2026-08-01T00:00:00Z (optional)"
+      },
+      {
+        "name": "limit",
+        "type": "integer",
+        "value": null,
+        "label": "Limit",
+        "placeholder": "Results per page (1-100, default 50)"
+      },
+      {
+        "name": "return_all",
+        "type": "boolean",
+        "value": null,
+        "label": "Return All",
+        "placeholder": "Follow pagination and return every event"
+      },
+      {
+        "name": "page_token",
+        "type": "string",
+        "value": null,
+        "label": "Page Token",
+        "placeholder": "Resume from a previous run's next_page_token"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "results",
+        "type": "object",
+        "value": null,
+        "label": "Events",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Count",
+        "placeholder": ""
+      },
+      {
+        "name": "next_page_token",
+        "type": "string",
+        "value": null,
+        "label": "Next Page Token",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Raw Response",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "scheduling/calendly/event_type_get": {
+    "hash": "f13b578b894e696b7cbfc1d620ecee0d54b14838486c2c9a9cc3c2b2acb6c848",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Calendly: Get Event Type",
+    "description": "Retrieve a single Calendly event type (meeting template) by its ID or URI.",
+    "website": "https://www.flomation.co",
+    "icon": "calendly+magnifying-glass",
+    "date": "03/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Scheduling",
+      "icon": "calendar",
+      "description": "Meeting scheduling and booking platforms"
+    },
+    "sub_category": {
+      "name": "Calendly",
+      "icon": "calendly",
+      "description": "Manage Calendly event types, scheduled events, invitees, and scheduling links"
+    },
+    "inputs": [
+      {
+        "name": "access_token",
+        "type": "secret",
+        "value": null,
+        "label": "Calendly Connection",
+        "placeholder": "Calendly credential or Personal Access Token",
+        "required": true
+      },
+      {
+        "name": "event_type",
+        "type": "string",
+        "value": null,
+        "label": "Event Type",
+        "placeholder": "Event type ID or URI",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Event Type URI",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Event Type",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "scheduling/calendly/event_type_get_all": {
+    "hash": "f940a6d5f6d7701caf5cf22d11a10d59bae9cb19c00bda3a1a93f83d47e85d6c",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Calendly: Get Many Event Types",
+    "description": "List the event types (meeting templates) belonging to you or your organisation.",
+    "website": "https://www.flomation.co",
+    "icon": "calendly+list",
+    "date": "03/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Scheduling",
+      "icon": "calendar",
+      "description": "Meeting scheduling and booking platforms"
+    },
+    "sub_category": {
+      "name": "Calendly",
+      "icon": "calendly",
+      "description": "Manage Calendly event types, scheduled events, invitees, and scheduling links"
+    },
+    "inputs": [
+      {
+        "name": "access_token",
+        "type": "secret",
+        "value": null,
+        "label": "Calendly Connection",
+        "placeholder": "Calendly credential or Personal Access Token",
+        "required": true
+      },
+      {
+        "name": "scope",
+        "type": "string",
+        "value": null,
+        "label": "Scope",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "User",
+            "value": "user"
+          },
+          {
+            "name": "Organization",
+            "value": "organization"
+          }
+        ]
+      },
+      {
+        "name": "active_only",
+        "type": "boolean",
+        "value": null,
+        "label": "Active Only",
+        "placeholder": "Only return event types that are currently bookable"
+      },
+      {
+        "name": "limit",
+        "type": "integer",
+        "value": null,
+        "label": "Limit",
+        "placeholder": "Results per page (1-100, default 50)"
+      },
+      {
+        "name": "return_all",
+        "type": "boolean",
+        "value": null,
+        "label": "Return All",
+        "placeholder": "Follow pagination and return every event type"
+      },
+      {
+        "name": "page_token",
+        "type": "string",
+        "value": null,
+        "label": "Page Token",
+        "placeholder": "Resume from a previous run's next_page_token"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "results",
+        "type": "object",
+        "value": null,
+        "label": "Event Types",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Count",
+        "placeholder": ""
+      },
+      {
+        "name": "next_page_token",
+        "type": "string",
+        "value": null,
+        "label": "Next Page Token",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Raw Response",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "scheduling/calendly/invitation_create": {
+    "hash": "d550e813990e32b68dd841e8daf3ab8894f8aefe9750fe06b644fda20494ac7e",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Calendly: Invite Member",
+    "description": "Invite a person to join your Calendly organisation by email.",
+    "website": "https://www.flomation.co",
+    "icon": "calendly+plus",
+    "date": "03/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Scheduling",
+      "icon": "calendar",
+      "description": "Meeting scheduling and booking platforms"
+    },
+    "sub_category": {
+      "name": "Calendly",
+      "icon": "calendly",
+      "description": "Manage Calendly event types, scheduled events, invitees, and scheduling links"
+    },
+    "inputs": [
+      {
+        "name": "access_token",
+        "type": "secret",
+        "value": null,
+        "label": "Calendly Connection",
+        "placeholder": "Calendly credential or Personal Access Token",
+        "required": true
+      },
+      {
+        "name": "email",
+        "type": "string",
+        "value": null,
+        "label": "Email",
+        "placeholder": "person@example.com",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Invitation URI",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Invitation",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "scheduling/calendly/invitation_delete": {
+    "hash": "8b2f7e969ff5458d431debff6cbc7f25dca16e6b85c5a94751eff81c0181b0b8",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Calendly: Revoke Invitation",
+    "description": "Revoke a pending invitation to join your Calendly organisation.",
+    "website": "https://www.flomation.co",
+    "icon": "calendly+trash",
+    "date": "03/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Scheduling",
+      "icon": "calendar",
+      "description": "Meeting scheduling and booking platforms"
+    },
+    "sub_category": {
+      "name": "Calendly",
+      "icon": "calendly",
+      "description": "Manage Calendly event types, scheduled events, invitees, and scheduling links"
+    },
+    "inputs": [
+      {
+        "name": "access_token",
+        "type": "secret",
+        "value": null,
+        "label": "Calendly Connection",
+        "placeholder": "Calendly credential or Personal Access Token",
+        "required": true
+      },
+      {
+        "name": "invitation",
+        "type": "string",
+        "value": null,
+        "label": "Invitation",
+        "placeholder": "Invitation ID or URI",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "scheduling/calendly/invitation_get_all": {
+    "hash": "dbfaa7e3889cf50379608fcb0f9ab7895e56621f926d7b704a2091e7e2a3ac96",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Calendly: Get Many Invitations",
+    "description": "List invitations to join your Calendly organisation, optionally filtered by email or status.",
+    "website": "https://www.flomation.co",
+    "icon": "calendly+list",
+    "date": "03/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Scheduling",
+      "icon": "calendar",
+      "description": "Meeting scheduling and booking platforms"
+    },
+    "sub_category": {
+      "name": "Calendly",
+      "icon": "calendly",
+      "description": "Manage Calendly event types, scheduled events, invitees, and scheduling links"
+    },
+    "inputs": [
+      {
+        "name": "access_token",
+        "type": "secret",
+        "value": null,
+        "label": "Calendly Connection",
+        "placeholder": "Calendly credential or Personal Access Token",
+        "required": true
+      },
+      {
+        "name": "email",
+        "type": "string",
+        "value": null,
+        "label": "Email",
+        "placeholder": "Only invitations for this email (optional)"
+      },
+      {
+        "name": "status",
+        "type": "string",
+        "value": null,
+        "label": "Status",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "Any",
+            "value": ""
+          },
+          {
+            "name": "Pending",
+            "value": "pending"
+          },
+          {
+            "name": "Accepted",
+            "value": "accepted"
+          },
+          {
+            "name": "Declined",
+            "value": "declined"
+          }
+        ]
+      },
+      {
+        "name": "limit",
+        "type": "integer",
+        "value": null,
+        "label": "Limit",
+        "placeholder": "Results per page (1-100, default 50)"
+      },
+      {
+        "name": "return_all",
+        "type": "boolean",
+        "value": null,
+        "label": "Return All",
+        "placeholder": "Follow pagination and return every invitation"
+      },
+      {
+        "name": "page_token",
+        "type": "string",
+        "value": null,
+        "label": "Page Token",
+        "placeholder": "Resume from a previous run's next_page_token"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "results",
+        "type": "object",
+        "value": null,
+        "label": "Invitations",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Count",
+        "placeholder": ""
+      },
+      {
+        "name": "next_page_token",
+        "type": "string",
+        "value": null,
+        "label": "Next Page Token",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Raw Response",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "scheduling/calendly/invitee_get": {
+    "hash": "f57e8f7322d04f813b0451ea5eebf911afc319b77159f79c7c155788a140a19d",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Calendly: Get Invitee",
+    "description": "Retrieve a single invitee of a scheduled Calendly event, including their answers to booking questions.",
+    "website": "https://www.flomation.co",
+    "icon": "calendly+magnifying-glass",
+    "date": "03/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Scheduling",
+      "icon": "calendar",
+      "description": "Meeting scheduling and booking platforms"
+    },
+    "sub_category": {
+      "name": "Calendly",
+      "icon": "calendly",
+      "description": "Manage Calendly event types, scheduled events, invitees, and scheduling links"
+    },
+    "inputs": [
+      {
+        "name": "access_token",
+        "type": "secret",
+        "value": null,
+        "label": "Calendly Connection",
+        "placeholder": "Calendly credential or Personal Access Token",
+        "required": true
+      },
+      {
+        "name": "event",
+        "type": "string",
+        "value": null,
+        "label": "Event",
+        "placeholder": "Scheduled event ID or URI",
+        "required": true
+      },
+      {
+        "name": "invitee",
+        "type": "string",
+        "value": null,
+        "label": "Invitee",
+        "placeholder": "Invitee ID or URI",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Invitee URI",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Invitee",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "scheduling/calendly/invitee_get_all": {
+    "hash": "9dd7b92b464048fe77e40f2fb2e92ad89fbae947a8719dfe3328348396494863",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Calendly: Get Many Invitees",
+    "description": "List the invitees (attendees) of a scheduled Calendly event, with status and email filters.",
+    "website": "https://www.flomation.co",
+    "icon": "calendly+list",
+    "date": "03/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Scheduling",
+      "icon": "calendar",
+      "description": "Meeting scheduling and booking platforms"
+    },
+    "sub_category": {
+      "name": "Calendly",
+      "icon": "calendly",
+      "description": "Manage Calendly event types, scheduled events, invitees, and scheduling links"
+    },
+    "inputs": [
+      {
+        "name": "access_token",
+        "type": "secret",
+        "value": null,
+        "label": "Calendly Connection",
+        "placeholder": "Calendly credential or Personal Access Token",
+        "required": true
+      },
+      {
+        "name": "event",
+        "type": "string",
+        "value": null,
+        "label": "Event",
+        "placeholder": "Scheduled event ID or URI",
+        "required": true
+      },
+      {
+        "name": "status",
+        "type": "string",
+        "value": null,
+        "label": "Status",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "Any",
+            "value": ""
+          },
+          {
+            "name": "Active",
+            "value": "active"
+          },
+          {
+            "name": "Canceled",
+            "value": "canceled"
+          }
+        ]
+      },
+      {
+        "name": "email",
+        "type": "string",
+        "value": null,
+        "label": "Email",
+        "placeholder": "Only invitees with this email (optional)"
+      },
+      {
+        "name": "limit",
+        "type": "integer",
+        "value": null,
+        "label": "Limit",
+        "placeholder": "Results per page (1-100, default 50)"
+      },
+      {
+        "name": "return_all",
+        "type": "boolean",
+        "value": null,
+        "label": "Return All",
+        "placeholder": "Follow pagination and return every invitee"
+      },
+      {
+        "name": "page_token",
+        "type": "string",
+        "value": null,
+        "label": "Page Token",
+        "placeholder": "Resume from a previous run's next_page_token"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "results",
+        "type": "object",
+        "value": null,
+        "label": "Invitees",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Count",
+        "placeholder": ""
+      },
+      {
+        "name": "next_page_token",
+        "type": "string",
+        "value": null,
+        "label": "Next Page Token",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Raw Response",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "scheduling/calendly/membership_delete": {
+    "hash": "eeab4f082b7126bc5b632e44287095877d7720ed1579a46d18c9296b7cc2c143",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Calendly: Remove Member",
+    "description": "Remove a member from your Calendly organisation.",
+    "website": "https://www.flomation.co",
+    "icon": "calendly+trash",
+    "date": "03/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Scheduling",
+      "icon": "calendar",
+      "description": "Meeting scheduling and booking platforms"
+    },
+    "sub_category": {
+      "name": "Calendly",
+      "icon": "calendly",
+      "description": "Manage Calendly event types, scheduled events, invitees, and scheduling links"
+    },
+    "inputs": [
+      {
+        "name": "access_token",
+        "type": "secret",
+        "value": null,
+        "label": "Calendly Connection",
+        "placeholder": "Calendly credential or Personal Access Token",
+        "required": true
+      },
+      {
+        "name": "membership",
+        "type": "string",
+        "value": null,
+        "label": "Membership",
+        "placeholder": "Organisation membership ID or URI",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "scheduling/calendly/membership_get_all": {
+    "hash": "1f4a1e58d791b962e31debaad11ff926da6db60595e75ec38742e34b6dd26e4c",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Calendly: Get Many Members",
+    "description": "List the members of your Calendly organisation, optionally filtered by email.",
+    "website": "https://www.flomation.co",
+    "icon": "calendly+user-group",
+    "date": "03/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Scheduling",
+      "icon": "calendar",
+      "description": "Meeting scheduling and booking platforms"
+    },
+    "sub_category": {
+      "name": "Calendly",
+      "icon": "calendly",
+      "description": "Manage Calendly event types, scheduled events, invitees, and scheduling links"
+    },
+    "inputs": [
+      {
+        "name": "access_token",
+        "type": "secret",
+        "value": null,
+        "label": "Calendly Connection",
+        "placeholder": "Calendly credential or Personal Access Token",
+        "required": true
+      },
+      {
+        "name": "email",
+        "type": "string",
+        "value": null,
+        "label": "Email",
+        "placeholder": "Only members with this email (optional)"
+      },
+      {
+        "name": "limit",
+        "type": "integer",
+        "value": null,
+        "label": "Limit",
+        "placeholder": "Results per page (1-100, default 50)"
+      },
+      {
+        "name": "return_all",
+        "type": "boolean",
+        "value": null,
+        "label": "Return All",
+        "placeholder": "Follow pagination and return every member"
+      },
+      {
+        "name": "page_token",
+        "type": "string",
+        "value": null,
+        "label": "Page Token",
+        "placeholder": "Resume from a previous run's next_page_token"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "results",
+        "type": "object",
+        "value": null,
+        "label": "Memberships",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Count",
+        "placeholder": ""
+      },
+      {
+        "name": "next_page_token",
+        "type": "string",
+        "value": null,
+        "label": "Next Page Token",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Raw Response",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "scheduling/calendly/no_show_create": {
+    "hash": "0526b1d808fef84550eeb50c75b7335879c82abaec98960edd930eea49048595",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Calendly: Mark Invitee No-Show",
+    "description": "Mark an invitee of a scheduled Calendly event as a no-show.",
+    "website": "https://www.flomation.co",
+    "icon": "calendly+ban",
+    "date": "03/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Scheduling",
+      "icon": "calendar",
+      "description": "Meeting scheduling and booking platforms"
+    },
+    "sub_category": {
+      "name": "Calendly",
+      "icon": "calendly",
+      "description": "Manage Calendly event types, scheduled events, invitees, and scheduling links"
+    },
+    "inputs": [
+      {
+        "name": "access_token",
+        "type": "secret",
+        "value": null,
+        "label": "Calendly Connection",
+        "placeholder": "Calendly credential or Personal Access Token",
+        "required": true
+      },
+      {
+        "name": "invitee",
+        "type": "string",
+        "value": null,
+        "label": "Invitee URI",
+        "placeholder": "https://api.calendly.com/scheduled_events/.../invitees/...",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "No-Show URI",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "No-Show",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "scheduling/calendly/no_show_delete": {
+    "hash": "9ac42fa51ee9daff8f9eb0ba3a1d007ad5d916f4e129ca7b19e2db703a78106e",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Calendly: Unmark Invitee No-Show",
+    "description": "Remove a no-show mark from an invitee of a scheduled Calendly event.",
+    "website": "https://www.flomation.co",
+    "icon": "calendly+trash",
+    "date": "03/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Scheduling",
+      "icon": "calendar",
+      "description": "Meeting scheduling and booking platforms"
+    },
+    "sub_category": {
+      "name": "Calendly",
+      "icon": "calendly",
+      "description": "Manage Calendly event types, scheduled events, invitees, and scheduling links"
+    },
+    "inputs": [
+      {
+        "name": "access_token",
+        "type": "secret",
+        "value": null,
+        "label": "Calendly Connection",
+        "placeholder": "Calendly credential or Personal Access Token",
+        "required": true
+      },
+      {
+        "name": "no_show",
+        "type": "string",
+        "value": null,
+        "label": "No-Show",
+        "placeholder": "No-show ID or URI (from Mark Invitee No-Show)",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "scheduling/calendly/scheduling_link_create": {
+    "hash": "fc28c99eeffa882e1541652df6e39ea2027e537e724b433f43021aba406b5f78",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Calendly: Create Scheduling Link",
+    "description": "Create a single-use scheduling link for an event type — the link expires after one booking.",
+    "website": "https://www.flomation.co",
+    "icon": "calendly+plus",
+    "date": "03/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Scheduling",
+      "icon": "calendar",
+      "description": "Meeting scheduling and booking platforms"
+    },
+    "sub_category": {
+      "name": "Calendly",
+      "icon": "calendly",
+      "description": "Manage Calendly event types, scheduled events, invitees, and scheduling links"
+    },
+    "inputs": [
+      {
+        "name": "access_token",
+        "type": "secret",
+        "value": null,
+        "label": "Calendly Connection",
+        "placeholder": "Calendly credential or Personal Access Token",
+        "required": true
+      },
+      {
+        "name": "event_type",
+        "type": "string",
+        "value": null,
+        "label": "Event Type",
+        "placeholder": "Event type ID or URI to create the link for",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "booking_url",
+        "type": "string",
+        "value": null,
+        "label": "Booking URL",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Scheduling Link",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "scheduling/calendly/user_get": {
+    "hash": "2263778dff93c427183506e067dca53f423b3db1397ca91331438c45782a8b19",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Calendly: Get Current User",
+    "description": "Retrieve the Calendly user the connection belongs to, including their scheduling URL and organisation.",
+    "website": "https://www.flomation.co",
+    "icon": "calendly+user",
+    "date": "03/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Scheduling",
+      "icon": "calendar",
+      "description": "Meeting scheduling and booking platforms"
+    },
+    "sub_category": {
+      "name": "Calendly",
+      "icon": "calendly",
+      "description": "Manage Calendly event types, scheduled events, invitees, and scheduling links"
+    },
+    "inputs": [
+      {
+        "name": "access_token",
+        "type": "secret",
+        "value": null,
+        "label": "Calendly Connection",
+        "placeholder": "Calendly credential or Personal Access Token",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "User URI",
+        "placeholder": ""
+      },
+      {
+        "name": "email",
+        "type": "string",
+        "value": null,
+        "label": "Email",
+        "placeholder": ""
+      },
+      {
+        "name": "scheduling_url",
+        "type": "string",
+        "value": null,
+        "label": "Scheduling URL",
+        "placeholder": ""
+      },
+      {
+        "name": "organization",
+        "type": "string",
+        "value": null,
+        "label": "Organization URI",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "User",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
   "script/bash": {
     "hash": "3e426e7c3efc9205151234868959b77885f831b3b55ee9a5e4ab9a6eab1fdaa1",
     "author": "Andy Esser",
@@ -40543,6 +42218,144 @@
         "type": "object",
         "value": null,
         "label": "Fields",
+        "placeholder": ""
+      },
+      {
+        "name": "triggered_at",
+        "type": "string",
+        "value": null,
+        "label": "Triggered At",
+        "placeholder": ""
+      }
+    ]
+  },
+  "trigger/calendly_webhook": {
+    "hash": "2711dda6dc9f5598be8eec080544def61673ab4af0b9ea947a27141d2f07f9b2",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Calendly Webhook Trigger",
+    "description": "Triggers a flow when a Calendly event occurs (invitee created/canceled, no-shows, routing form submissions). The webhook subscription is registered with Calendly automatically.",
+    "website": "https://www.flomation.co",
+    "icon": "calendly",
+    "date": "03/07/2026",
+    "type": 1,
+    "category": {
+      "name": "Triggers",
+      "icon": "bolt-lightning",
+      "description": "Start a Flow"
+    },
+    "inputs": [
+      {
+        "name": "access_token",
+        "type": "secret",
+        "value": null,
+        "label": "Calendly Connection",
+        "placeholder": "Calendly credential or Personal Access Token (used to register the webhook)",
+        "required": true
+      },
+      {
+        "name": "scope",
+        "type": "string",
+        "value": null,
+        "label": "Scope",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "User",
+            "value": "user"
+          },
+          {
+            "name": "Organization",
+            "value": "organization"
+          }
+        ]
+      },
+      {
+        "name": "events",
+        "type": "multi_select",
+        "value": null,
+        "label": "Events",
+        "placeholder": "",
+        "required": true,
+        "options": [
+          {
+            "name": "Invitee Created (event booked)",
+            "value": "invitee.created"
+          },
+          {
+            "name": "Invitee Canceled (event canceled)",
+            "value": "invitee.canceled"
+          },
+          {
+            "name": "Invitee No-Show Marked",
+            "value": "invitee_no_show.created"
+          },
+          {
+            "name": "Invitee No-Show Unmarked",
+            "value": "invitee_no_show.deleted"
+          },
+          {
+            "name": "Routing Form Submitted",
+            "value": "routing_form_submission.created"
+          }
+        ]
+      }
+    ],
+    "outputs": [
+      {
+        "name": "content",
+        "type": "string",
+        "value": null,
+        "label": "Event Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "event",
+        "type": "string",
+        "value": null,
+        "label": "Event Type",
+        "placeholder": ""
+      },
+      {
+        "name": "payload",
+        "type": "object",
+        "value": null,
+        "label": "Payload",
+        "placeholder": ""
+      },
+      {
+        "name": "invitee_name",
+        "type": "string",
+        "value": null,
+        "label": "Invitee Name",
+        "placeholder": ""
+      },
+      {
+        "name": "invitee_email",
+        "type": "string",
+        "value": null,
+        "label": "Invitee Email",
+        "placeholder": ""
+      },
+      {
+        "name": "event_start_time",
+        "type": "string",
+        "value": null,
+        "label": "Event Start Time",
+        "placeholder": ""
+      },
+      {
+        "name": "created_at",
+        "type": "string",
+        "value": null,
+        "label": "Created At",
+        "placeholder": ""
+      },
+      {
+        "name": "body",
+        "type": "string",
+        "value": null,
+        "label": "Raw JSON Body",
         "placeholder": ""
       },
       {
