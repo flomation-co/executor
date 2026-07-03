@@ -375,6 +375,42 @@ import (
 	plan_get_status "flomation.app/automate/executor/actions/plan/get_status"
 	plan_revise "flomation.app/automate/executor/actions/plan/revise"
 	plan_start "flomation.app/automate/executor/actions/plan/start"
+	scheduling_calcom_booking_cancel "flomation.app/automate/executor/actions/scheduling/calcom/booking_cancel"
+	scheduling_calcom_booking_confirm "flomation.app/automate/executor/actions/scheduling/calcom/booking_confirm"
+	scheduling_calcom_booking_create "flomation.app/automate/executor/actions/scheduling/calcom/booking_create"
+	scheduling_calcom_booking_decline "flomation.app/automate/executor/actions/scheduling/calcom/booking_decline"
+	scheduling_calcom_booking_get "flomation.app/automate/executor/actions/scheduling/calcom/booking_get"
+	scheduling_calcom_booking_get_all "flomation.app/automate/executor/actions/scheduling/calcom/booking_get_all"
+	scheduling_calcom_booking_mark_absent "flomation.app/automate/executor/actions/scheduling/calcom/booking_mark_absent"
+	scheduling_calcom_booking_reschedule "flomation.app/automate/executor/actions/scheduling/calcom/booking_reschedule"
+	scheduling_calcom_event_type_create "flomation.app/automate/executor/actions/scheduling/calcom/event_type_create"
+	scheduling_calcom_event_type_delete "flomation.app/automate/executor/actions/scheduling/calcom/event_type_delete"
+	scheduling_calcom_event_type_get "flomation.app/automate/executor/actions/scheduling/calcom/event_type_get"
+	scheduling_calcom_event_type_get_all "flomation.app/automate/executor/actions/scheduling/calcom/event_type_get_all"
+	scheduling_calcom_event_type_update "flomation.app/automate/executor/actions/scheduling/calcom/event_type_update"
+	scheduling_calcom_me_get "flomation.app/automate/executor/actions/scheduling/calcom/me_get"
+	scheduling_calcom_membership_create "flomation.app/automate/executor/actions/scheduling/calcom/membership_create"
+	scheduling_calcom_membership_delete "flomation.app/automate/executor/actions/scheduling/calcom/membership_delete"
+	scheduling_calcom_membership_get_all "flomation.app/automate/executor/actions/scheduling/calcom/membership_get_all"
+	scheduling_calcom_membership_update "flomation.app/automate/executor/actions/scheduling/calcom/membership_update"
+	scheduling_calcom_schedule_create "flomation.app/automate/executor/actions/scheduling/calcom/schedule_create"
+	scheduling_calcom_schedule_delete "flomation.app/automate/executor/actions/scheduling/calcom/schedule_delete"
+	scheduling_calcom_schedule_get "flomation.app/automate/executor/actions/scheduling/calcom/schedule_get"
+	scheduling_calcom_schedule_get_all "flomation.app/automate/executor/actions/scheduling/calcom/schedule_get_all"
+	scheduling_calcom_schedule_update "flomation.app/automate/executor/actions/scheduling/calcom/schedule_update"
+	scheduling_calcom_slot_get_all "flomation.app/automate/executor/actions/scheduling/calcom/slot_get_all"
+	scheduling_calcom_slot_reservation_delete "flomation.app/automate/executor/actions/scheduling/calcom/slot_reservation_delete"
+	scheduling_calcom_slot_reserve "flomation.app/automate/executor/actions/scheduling/calcom/slot_reserve"
+	scheduling_calcom_team_create "flomation.app/automate/executor/actions/scheduling/calcom/team_create"
+	scheduling_calcom_team_delete "flomation.app/automate/executor/actions/scheduling/calcom/team_delete"
+	scheduling_calcom_team_get "flomation.app/automate/executor/actions/scheduling/calcom/team_get"
+	scheduling_calcom_team_get_all "flomation.app/automate/executor/actions/scheduling/calcom/team_get_all"
+	scheduling_calcom_team_update "flomation.app/automate/executor/actions/scheduling/calcom/team_update"
+	scheduling_calcom_webhook_create "flomation.app/automate/executor/actions/scheduling/calcom/webhook_create"
+	scheduling_calcom_webhook_delete "flomation.app/automate/executor/actions/scheduling/calcom/webhook_delete"
+	scheduling_calcom_webhook_get "flomation.app/automate/executor/actions/scheduling/calcom/webhook_get"
+	scheduling_calcom_webhook_get_all "flomation.app/automate/executor/actions/scheduling/calcom/webhook_get_all"
+	scheduling_calcom_webhook_update "flomation.app/automate/executor/actions/scheduling/calcom/webhook_update"
 	scheduling_calendly_availability_schedule_get_all "flomation.app/automate/executor/actions/scheduling/calendly/availability_schedule_get_all"
 	scheduling_calendly_busy_times_get_all "flomation.app/automate/executor/actions/scheduling/calendly/busy_times_get_all"
 	scheduling_calendly_event_cancel "flomation.app/automate/executor/actions/scheduling/calendly/event_cancel"
@@ -441,6 +477,7 @@ import (
 	subflow_end "flomation.app/automate/executor/actions/subflow/end"
 	subflow_invoke "flomation.app/automate/executor/actions/subflow/invoke"
 	trigger_airtable_poll "flomation.app/automate/executor/actions/trigger/airtable_poll"
+	trigger_calcom_webhook "flomation.app/automate/executor/actions/trigger/calcom_webhook"
 	trigger_calendly_webhook "flomation.app/automate/executor/actions/trigger/calendly_webhook"
 	trigger_email "flomation.app/automate/executor/actions/trigger/email"
 	trigger_facebook_feed "flomation.app/automate/executor/actions/trigger/facebook_feed"
@@ -866,6 +903,42 @@ var Actions = map[string]core.Action{
 	"plan/get_status":                                   plan_get_status.Execute,
 	"plan/revise":                                       plan_revise.Execute,
 	"plan/start":                                        plan_start.Execute,
+	"scheduling/calcom/booking_cancel":                  scheduling_calcom_booking_cancel.Execute,
+	"scheduling/calcom/booking_confirm":                 scheduling_calcom_booking_confirm.Execute,
+	"scheduling/calcom/booking_create":                  scheduling_calcom_booking_create.Execute,
+	"scheduling/calcom/booking_decline":                 scheduling_calcom_booking_decline.Execute,
+	"scheduling/calcom/booking_get":                     scheduling_calcom_booking_get.Execute,
+	"scheduling/calcom/booking_get_all":                 scheduling_calcom_booking_get_all.Execute,
+	"scheduling/calcom/booking_mark_absent":             scheduling_calcom_booking_mark_absent.Execute,
+	"scheduling/calcom/booking_reschedule":              scheduling_calcom_booking_reschedule.Execute,
+	"scheduling/calcom/event_type_create":               scheduling_calcom_event_type_create.Execute,
+	"scheduling/calcom/event_type_delete":               scheduling_calcom_event_type_delete.Execute,
+	"scheduling/calcom/event_type_get":                  scheduling_calcom_event_type_get.Execute,
+	"scheduling/calcom/event_type_get_all":              scheduling_calcom_event_type_get_all.Execute,
+	"scheduling/calcom/event_type_update":               scheduling_calcom_event_type_update.Execute,
+	"scheduling/calcom/me_get":                          scheduling_calcom_me_get.Execute,
+	"scheduling/calcom/membership_create":               scheduling_calcom_membership_create.Execute,
+	"scheduling/calcom/membership_delete":               scheduling_calcom_membership_delete.Execute,
+	"scheduling/calcom/membership_get_all":              scheduling_calcom_membership_get_all.Execute,
+	"scheduling/calcom/membership_update":               scheduling_calcom_membership_update.Execute,
+	"scheduling/calcom/schedule_create":                 scheduling_calcom_schedule_create.Execute,
+	"scheduling/calcom/schedule_delete":                 scheduling_calcom_schedule_delete.Execute,
+	"scheduling/calcom/schedule_get":                    scheduling_calcom_schedule_get.Execute,
+	"scheduling/calcom/schedule_get_all":                scheduling_calcom_schedule_get_all.Execute,
+	"scheduling/calcom/schedule_update":                 scheduling_calcom_schedule_update.Execute,
+	"scheduling/calcom/slot_get_all":                    scheduling_calcom_slot_get_all.Execute,
+	"scheduling/calcom/slot_reservation_delete":         scheduling_calcom_slot_reservation_delete.Execute,
+	"scheduling/calcom/slot_reserve":                    scheduling_calcom_slot_reserve.Execute,
+	"scheduling/calcom/team_create":                     scheduling_calcom_team_create.Execute,
+	"scheduling/calcom/team_delete":                     scheduling_calcom_team_delete.Execute,
+	"scheduling/calcom/team_get":                        scheduling_calcom_team_get.Execute,
+	"scheduling/calcom/team_get_all":                    scheduling_calcom_team_get_all.Execute,
+	"scheduling/calcom/team_update":                     scheduling_calcom_team_update.Execute,
+	"scheduling/calcom/webhook_create":                  scheduling_calcom_webhook_create.Execute,
+	"scheduling/calcom/webhook_delete":                  scheduling_calcom_webhook_delete.Execute,
+	"scheduling/calcom/webhook_get":                     scheduling_calcom_webhook_get.Execute,
+	"scheduling/calcom/webhook_get_all":                 scheduling_calcom_webhook_get_all.Execute,
+	"scheduling/calcom/webhook_update":                  scheduling_calcom_webhook_update.Execute,
 	"scheduling/calendly/availability_schedule_get_all": scheduling_calendly_availability_schedule_get_all.Execute,
 	"scheduling/calendly/busy_times_get_all":            scheduling_calendly_busy_times_get_all.Execute,
 	"scheduling/calendly/event_cancel":                  scheduling_calendly_event_cancel.Execute,
@@ -932,6 +1005,7 @@ var Actions = map[string]core.Action{
 	"subflow/end":                                       subflow_end.Execute,
 	"subflow/invoke":                                    subflow_invoke.Execute,
 	"trigger/airtable_poll":                             trigger_airtable_poll.Execute,
+	"trigger/calcom_webhook":                            trigger_calcom_webhook.Execute,
 	"trigger/calendly_webhook":                          trigger_calendly_webhook.Execute,
 	"trigger/email":                                     trigger_email.Execute,
 	"trigger/facebook_feed":                             trigger_facebook_feed.Execute,

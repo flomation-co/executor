@@ -39716,6 +39716,3475 @@
       }
     ]
   },
+  "scheduling/calcom/booking_cancel": {
+    "hash": "aee90d2813c87c930e476b923570788687e4cbf4cfe485ff354a6488ccc59f6e",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Cal.com: Cancel Booking",
+    "description": "Cancel a Cal.com booking, optionally with a reason.",
+    "website": "https://www.flomation.co",
+    "icon": "calcom+ban",
+    "date": "03/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Scheduling",
+      "icon": "calendar",
+      "description": "Meeting scheduling and booking platforms"
+    },
+    "sub_category": {
+      "name": "Cal.com",
+      "icon": "calcom",
+      "description": "Manage Cal.com bookings, event types, schedules, availability slots, teams, and webhooks"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "Cal.com Connection",
+        "placeholder": "Cal.com API key (cal_live_...) or connected credential",
+        "required": true
+      },
+      {
+        "name": "booking_uid",
+        "type": "string",
+        "value": null,
+        "label": "Booking UID",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "cancellation_reason",
+        "type": "string",
+        "value": null,
+        "label": "Cancellation Reason",
+        "placeholder": "Shared with the attendee (optional)"
+      },
+      {
+        "name": "cancel_subsequent",
+        "type": "boolean",
+        "value": null,
+        "label": "Cancel Subsequent (recurring)",
+        "placeholder": "Cancel all following bookings in a recurring series"
+      },
+      {
+        "name": "seat_uid",
+        "type": "string",
+        "value": null,
+        "label": "Seat UID",
+        "placeholder": "Required to cancel a single seat of a seated event (optional)"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Booking UID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Booking",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "scheduling/calcom/booking_confirm": {
+    "hash": "ab570f2dc2cb21675d81c592f1e061d2f529c37e20bb9e38f61520d720bf0547",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Cal.com: Confirm Booking",
+    "description": "Confirm a Cal.com booking that requires confirmation.",
+    "website": "https://www.flomation.co",
+    "icon": "calcom+circle-check",
+    "date": "03/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Scheduling",
+      "icon": "calendar",
+      "description": "Meeting scheduling and booking platforms"
+    },
+    "sub_category": {
+      "name": "Cal.com",
+      "icon": "calcom",
+      "description": "Manage Cal.com bookings, event types, schedules, availability slots, teams, and webhooks"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "Cal.com Connection",
+        "placeholder": "Cal.com API key (cal_live_...) or connected credential",
+        "required": true
+      },
+      {
+        "name": "booking_uid",
+        "type": "string",
+        "value": null,
+        "label": "Booking UID",
+        "placeholder": "",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Booking UID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Booking",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "scheduling/calcom/booking_create": {
+    "hash": "6144ef5dc8a39d91fcf3c6d3975635336ae213cc3ac76c478ae1967557d498e0",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Cal.com: Create Booking",
+    "description": "Book a Cal.com event type for an attendee at a given start time.",
+    "website": "https://www.flomation.co",
+    "icon": "calcom+plus",
+    "date": "03/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Scheduling",
+      "icon": "calendar",
+      "description": "Meeting scheduling and booking platforms"
+    },
+    "sub_category": {
+      "name": "Cal.com",
+      "icon": "calcom",
+      "description": "Manage Cal.com bookings, event types, schedules, availability slots, teams, and webhooks"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "Cal.com Connection",
+        "placeholder": "Cal.com API key (cal_live_...) or connected credential",
+        "required": true
+      },
+      {
+        "name": "event_type_id",
+        "type": "integer",
+        "value": null,
+        "label": "Event Type ID",
+        "placeholder": "The event type to book",
+        "required": true
+      },
+      {
+        "name": "start",
+        "type": "string",
+        "value": null,
+        "label": "Start Time",
+        "placeholder": "2026-07-10T09:00:00Z (ISO 8601, UTC)",
+        "required": true
+      },
+      {
+        "name": "attendee_name",
+        "type": "string",
+        "value": null,
+        "label": "Attendee Name",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "attendee_email",
+        "type": "string",
+        "value": null,
+        "label": "Attendee Email",
+        "placeholder": "person@example.com",
+        "required": true
+      },
+      {
+        "name": "attendee_timezone",
+        "type": "string",
+        "value": null,
+        "label": "Attendee Time Zone",
+        "placeholder": "Europe/London",
+        "required": true
+      },
+      {
+        "name": "attendee_phone",
+        "type": "string",
+        "value": null,
+        "label": "Attendee Phone",
+        "placeholder": "+447700900000 (optional)"
+      },
+      {
+        "name": "guests",
+        "type": "string",
+        "value": null,
+        "label": "Guest Emails",
+        "placeholder": "Comma-separated additional guest emails (optional)"
+      },
+      {
+        "name": "length_minutes",
+        "type": "integer",
+        "value": null,
+        "label": "Length (minutes)",
+        "placeholder": "Override the event type length (optional)"
+      },
+      {
+        "name": "metadata_json",
+        "type": "object",
+        "value": null,
+        "label": "Metadata (JSON, advanced)",
+        "placeholder": "{\"source\":\"flomation\"}"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Booking UID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Booking",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "scheduling/calcom/booking_decline": {
+    "hash": "5798a12bb447f6d224a109fae5eba9e7beab0355a2f47fee517444825ad41ab0",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Cal.com: Decline Booking",
+    "description": "Reject a Cal.com booking that requires confirmation, optionally with a reason.",
+    "website": "https://www.flomation.co",
+    "icon": "calcom+circle-xmark",
+    "date": "03/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Scheduling",
+      "icon": "calendar",
+      "description": "Meeting scheduling and booking platforms"
+    },
+    "sub_category": {
+      "name": "Cal.com",
+      "icon": "calcom",
+      "description": "Manage Cal.com bookings, event types, schedules, availability slots, teams, and webhooks"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "Cal.com Connection",
+        "placeholder": "Cal.com API key (cal_live_...) or connected credential",
+        "required": true
+      },
+      {
+        "name": "booking_uid",
+        "type": "string",
+        "value": null,
+        "label": "Booking UID",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "reason",
+        "type": "string",
+        "value": null,
+        "label": "Reason",
+        "placeholder": "Shared with the attendee (optional)"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Booking UID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Booking",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "scheduling/calcom/booking_get": {
+    "hash": "412b1b7c228b8d134b138983e72072cbb54f914a9c9b6e94ef3f82d721de5b23",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Cal.com: Get Booking",
+    "description": "Retrieve a single Cal.com booking by its UID.",
+    "website": "https://www.flomation.co",
+    "icon": "calcom+magnifying-glass",
+    "date": "03/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Scheduling",
+      "icon": "calendar",
+      "description": "Meeting scheduling and booking platforms"
+    },
+    "sub_category": {
+      "name": "Cal.com",
+      "icon": "calcom",
+      "description": "Manage Cal.com bookings, event types, schedules, availability slots, teams, and webhooks"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "Cal.com Connection",
+        "placeholder": "Cal.com API key (cal_live_...) or connected credential",
+        "required": true
+      },
+      {
+        "name": "booking_uid",
+        "type": "string",
+        "value": null,
+        "label": "Booking UID",
+        "placeholder": "e.g. 8s7dHT8knaXm...",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Booking UID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Booking",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "scheduling/calcom/booking_get_all": {
+    "hash": "a52bd7fbded6022601d3947d2d0eaf5102231cbc8c9758df33b7c2b8845ef2cf",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Cal.com: Get Many Bookings",
+    "description": "List Cal.com bookings, filtered by status, attendee, event type or date range.",
+    "website": "https://www.flomation.co",
+    "icon": "calcom+list",
+    "date": "03/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Scheduling",
+      "icon": "calendar",
+      "description": "Meeting scheduling and booking platforms"
+    },
+    "sub_category": {
+      "name": "Cal.com",
+      "icon": "calcom",
+      "description": "Manage Cal.com bookings, event types, schedules, availability slots, teams, and webhooks"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "Cal.com Connection",
+        "placeholder": "Cal.com API key (cal_live_...) or connected credential",
+        "required": true
+      },
+      {
+        "name": "status",
+        "type": "string",
+        "value": null,
+        "label": "Status",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "Any",
+            "value": ""
+          },
+          {
+            "name": "Upcoming",
+            "value": "upcoming"
+          },
+          {
+            "name": "Recurring",
+            "value": "recurring"
+          },
+          {
+            "name": "Past",
+            "value": "past"
+          },
+          {
+            "name": "Cancelled",
+            "value": "cancelled"
+          },
+          {
+            "name": "Unconfirmed",
+            "value": "unconfirmed"
+          }
+        ]
+      },
+      {
+        "name": "attendee_email",
+        "type": "string",
+        "value": null,
+        "label": "Attendee Email",
+        "placeholder": "Only bookings for this attendee (optional)"
+      },
+      {
+        "name": "attendee_name",
+        "type": "string",
+        "value": null,
+        "label": "Attendee Name",
+        "placeholder": "Only bookings for this attendee name (optional)"
+      },
+      {
+        "name": "event_type_id",
+        "type": "integer",
+        "value": null,
+        "label": "Event Type ID",
+        "placeholder": "Only bookings for this event type (optional)"
+      },
+      {
+        "name": "after_start",
+        "type": "string",
+        "value": null,
+        "label": "Starts After",
+        "placeholder": "2026-07-01T00:00:00Z (optional)"
+      },
+      {
+        "name": "before_end",
+        "type": "string",
+        "value": null,
+        "label": "Ends Before",
+        "placeholder": "2026-08-01T00:00:00Z (optional)"
+      },
+      {
+        "name": "limit",
+        "type": "integer",
+        "value": null,
+        "label": "Limit",
+        "placeholder": "Results per page (1-250, default 100)"
+      },
+      {
+        "name": "skip",
+        "type": "integer",
+        "value": null,
+        "label": "Skip",
+        "placeholder": "Offset to resume from a previous run's next_skip"
+      },
+      {
+        "name": "return_all",
+        "type": "boolean",
+        "value": null,
+        "label": "Return All",
+        "placeholder": "Follow pagination and return every booking"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "results",
+        "type": "object",
+        "value": null,
+        "label": "Bookings",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Count",
+        "placeholder": ""
+      },
+      {
+        "name": "next_skip",
+        "type": "integer",
+        "value": null,
+        "label": "Next Skip",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "scheduling/calcom/booking_mark_absent": {
+    "hash": "ee20ecc5c1fe2970bc7474c7431656a4b96556814fa512778f52ab5515dfa992",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Cal.com: Mark Booking Absent",
+    "description": "Mark the host and/or specific attendees of a Cal.com booking as no-shows.",
+    "website": "https://www.flomation.co",
+    "icon": "calcom+xmark",
+    "date": "03/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Scheduling",
+      "icon": "calendar",
+      "description": "Meeting scheduling and booking platforms"
+    },
+    "sub_category": {
+      "name": "Cal.com",
+      "icon": "calcom",
+      "description": "Manage Cal.com bookings, event types, schedules, availability slots, teams, and webhooks"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "Cal.com Connection",
+        "placeholder": "Cal.com API key (cal_live_...) or connected credential",
+        "required": true
+      },
+      {
+        "name": "booking_uid",
+        "type": "string",
+        "value": null,
+        "label": "Booking UID",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "host_absent",
+        "type": "boolean",
+        "value": null,
+        "label": "Host Absent",
+        "placeholder": "Mark the host as a no-show"
+      },
+      {
+        "name": "attendees_json",
+        "type": "object",
+        "value": null,
+        "label": "Attendees (JSON array, advanced)",
+        "placeholder": "[{\"email\":\"a@b.com\",\"absent\":true}]"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Booking UID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Booking",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "scheduling/calcom/booking_reschedule": {
+    "hash": "fd231b345af2cdc7a68365d258a72bd2c494c79d765f66207b0b00e8faa4cd12",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Cal.com: Reschedule Booking",
+    "description": "Move a Cal.com booking to a new start time. Creates a new booking and cancels the original.",
+    "website": "https://www.flomation.co",
+    "icon": "calcom+rotate-right",
+    "date": "03/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Scheduling",
+      "icon": "calendar",
+      "description": "Meeting scheduling and booking platforms"
+    },
+    "sub_category": {
+      "name": "Cal.com",
+      "icon": "calcom",
+      "description": "Manage Cal.com bookings, event types, schedules, availability slots, teams, and webhooks"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "Cal.com Connection",
+        "placeholder": "Cal.com API key (cal_live_...) or connected credential",
+        "required": true
+      },
+      {
+        "name": "booking_uid",
+        "type": "string",
+        "value": null,
+        "label": "Booking UID",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "start",
+        "type": "string",
+        "value": null,
+        "label": "New Start Time",
+        "placeholder": "2026-07-11T09:00:00Z (ISO 8601, UTC)",
+        "required": true
+      },
+      {
+        "name": "rescheduling_reason",
+        "type": "string",
+        "value": null,
+        "label": "Reschedule Reason",
+        "placeholder": "Shared with the attendee (optional)"
+      },
+      {
+        "name": "rescheduled_by",
+        "type": "string",
+        "value": null,
+        "label": "Rescheduled By",
+        "placeholder": "Email of who is rescheduling (optional)"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "New Booking UID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Booking",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "scheduling/calcom/event_type_create": {
+    "hash": "305f3b31425667465ca20949f2d2bec1702761df392f0c58102cec7da2cc7aaa",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Cal.com: Create Event Type",
+    "description": "Create a new Cal.com event type (a bookable meeting slot definition).",
+    "website": "https://www.flomation.co",
+    "icon": "calcom+plus",
+    "date": "03/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Scheduling",
+      "icon": "calendar",
+      "description": "Meeting scheduling and booking platforms"
+    },
+    "sub_category": {
+      "name": "Cal.com",
+      "icon": "calcom",
+      "description": "Manage Cal.com bookings, event types, schedules, availability slots, teams, and webhooks"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "Cal.com Connection",
+        "placeholder": "Cal.com API key (cal_live_...) or connected credential",
+        "required": true
+      },
+      {
+        "name": "title",
+        "type": "string",
+        "value": null,
+        "label": "Title",
+        "placeholder": "e.g. Discovery Call",
+        "required": true
+      },
+      {
+        "name": "slug",
+        "type": "string",
+        "value": null,
+        "label": "Slug",
+        "placeholder": "e.g. discovery-call",
+        "required": true
+      },
+      {
+        "name": "length_minutes",
+        "type": "integer",
+        "value": null,
+        "label": "Length (minutes)",
+        "placeholder": "e.g. 30",
+        "required": true
+      },
+      {
+        "name": "description",
+        "type": "text",
+        "value": null,
+        "label": "Description",
+        "placeholder": "Shown on the booking page (optional)"
+      },
+      {
+        "name": "disable_guests",
+        "type": "boolean",
+        "value": null,
+        "label": "Disable Guests",
+        "placeholder": ""
+      },
+      {
+        "name": "minimum_booking_notice",
+        "type": "integer",
+        "value": null,
+        "label": "Minimum Booking Notice (minutes)",
+        "placeholder": ""
+      },
+      {
+        "name": "schedule_id",
+        "type": "integer",
+        "value": null,
+        "label": "Availability Schedule ID",
+        "placeholder": "Attach an availability schedule (optional)"
+      },
+      {
+        "name": "extra_json",
+        "type": "object",
+        "value": null,
+        "label": "Additional Fields (JSON, advanced)",
+        "placeholder": "{\"locations\":[{\"type\":\"integration\",\"integration\":\"cal-video\"}]}"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Event Type ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Event Type",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "scheduling/calcom/event_type_delete": {
+    "hash": "7f0957709de98274d7fb90da1f5d62747622a04456d63103c2ec6e40a00e36f5",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Cal.com: Delete Event Type",
+    "description": "Permanently delete a Cal.com event type.",
+    "website": "https://www.flomation.co",
+    "icon": "calcom+trash",
+    "date": "03/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Scheduling",
+      "icon": "calendar",
+      "description": "Meeting scheduling and booking platforms"
+    },
+    "sub_category": {
+      "name": "Cal.com",
+      "icon": "calcom",
+      "description": "Manage Cal.com bookings, event types, schedules, availability slots, teams, and webhooks"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "Cal.com Connection",
+        "placeholder": "Cal.com API key (cal_live_...) or connected credential",
+        "required": true
+      },
+      {
+        "name": "event_type_id",
+        "type": "integer",
+        "value": null,
+        "label": "Event Type ID",
+        "placeholder": "",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "scheduling/calcom/event_type_get": {
+    "hash": "0580d36f958269ccd701c00dc1966392e0c735631860b12bad2605ae8561c6ed",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Cal.com: Get Event Type",
+    "description": "Retrieve a single Cal.com event type by its ID.",
+    "website": "https://www.flomation.co",
+    "icon": "calcom+magnifying-glass",
+    "date": "03/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Scheduling",
+      "icon": "calendar",
+      "description": "Meeting scheduling and booking platforms"
+    },
+    "sub_category": {
+      "name": "Cal.com",
+      "icon": "calcom",
+      "description": "Manage Cal.com bookings, event types, schedules, availability slots, teams, and webhooks"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "Cal.com Connection",
+        "placeholder": "Cal.com API key (cal_live_...) or connected credential",
+        "required": true
+      },
+      {
+        "name": "event_type_id",
+        "type": "integer",
+        "value": null,
+        "label": "Event Type ID",
+        "placeholder": "",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Event Type ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Event Type",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "scheduling/calcom/event_type_get_all": {
+    "hash": "34f3a602ddc5740d868e706440f5c23a20c98795080dd56830ad9f81e7e839d6",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Cal.com: Get Many Event Types",
+    "description": "List Cal.com event types, optionally filtered by username or slug.",
+    "website": "https://www.flomation.co",
+    "icon": "calcom+list",
+    "date": "03/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Scheduling",
+      "icon": "calendar",
+      "description": "Meeting scheduling and booking platforms"
+    },
+    "sub_category": {
+      "name": "Cal.com",
+      "icon": "calcom",
+      "description": "Manage Cal.com bookings, event types, schedules, availability slots, teams, and webhooks"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "Cal.com Connection",
+        "placeholder": "Cal.com API key (cal_live_...) or connected credential",
+        "required": true
+      },
+      {
+        "name": "username",
+        "type": "string",
+        "value": null,
+        "label": "Username",
+        "placeholder": "Filter to a user's event types (optional)"
+      },
+      {
+        "name": "event_slug",
+        "type": "string",
+        "value": null,
+        "label": "Event Slug",
+        "placeholder": "Filter to a single event type slug (optional)"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "results",
+        "type": "object",
+        "value": null,
+        "label": "Event Types",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Count",
+        "placeholder": ""
+      },
+      {
+        "name": "next_skip",
+        "type": "integer",
+        "value": null,
+        "label": "Next Skip",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "scheduling/calcom/event_type_update": {
+    "hash": "0b96b40e3dc9b8d48eef9864b5ac4c9493ab94bcdc31156afca81d6d59c3c56e",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Cal.com: Update Event Type",
+    "description": "Update fields of an existing Cal.com event type. Only supplied fields change.",
+    "website": "https://www.flomation.co",
+    "icon": "calcom+pencil",
+    "date": "03/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Scheduling",
+      "icon": "calendar",
+      "description": "Meeting scheduling and booking platforms"
+    },
+    "sub_category": {
+      "name": "Cal.com",
+      "icon": "calcom",
+      "description": "Manage Cal.com bookings, event types, schedules, availability slots, teams, and webhooks"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "Cal.com Connection",
+        "placeholder": "Cal.com API key (cal_live_...) or connected credential",
+        "required": true
+      },
+      {
+        "name": "event_type_id",
+        "type": "integer",
+        "value": null,
+        "label": "Event Type ID",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "title",
+        "type": "string",
+        "value": null,
+        "label": "Title",
+        "placeholder": "New title (optional)"
+      },
+      {
+        "name": "slug",
+        "type": "string",
+        "value": null,
+        "label": "Slug",
+        "placeholder": "New slug (optional)"
+      },
+      {
+        "name": "length_minutes",
+        "type": "integer",
+        "value": null,
+        "label": "Length (minutes)",
+        "placeholder": "New length (optional)"
+      },
+      {
+        "name": "description",
+        "type": "text",
+        "value": null,
+        "label": "Description",
+        "placeholder": "New description (optional)"
+      },
+      {
+        "name": "disable_guests",
+        "type": "boolean",
+        "value": null,
+        "label": "Disable Guests",
+        "placeholder": ""
+      },
+      {
+        "name": "minimum_booking_notice",
+        "type": "integer",
+        "value": null,
+        "label": "Minimum Booking Notice (minutes)",
+        "placeholder": ""
+      },
+      {
+        "name": "schedule_id",
+        "type": "integer",
+        "value": null,
+        "label": "Availability Schedule ID",
+        "placeholder": ""
+      },
+      {
+        "name": "extra_json",
+        "type": "object",
+        "value": null,
+        "label": "Additional Fields (JSON, advanced)",
+        "placeholder": "{\"color\":{\"lightThemeHex\":\"#292929\"}}"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Event Type ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Event Type",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "scheduling/calcom/me_get": {
+    "hash": "7654f6b5ae94ee1aa73e4a4541f6a2f5b7cdb5f8c042744d89d9fbb5fbe14e0b",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Cal.com: Get My Profile",
+    "description": "Retrieve the Cal.com profile of the connected account (id, username, timezone, default schedule).",
+    "website": "https://www.flomation.co",
+    "icon": "calcom+magnifying-glass",
+    "date": "03/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Scheduling",
+      "icon": "calendar",
+      "description": "Meeting scheduling and booking platforms"
+    },
+    "sub_category": {
+      "name": "Cal.com",
+      "icon": "calcom",
+      "description": "Manage Cal.com bookings, event types, schedules, availability slots, teams, and webhooks"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "Cal.com Connection",
+        "placeholder": "Cal.com API key (cal_live_...) or connected credential",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "User ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Profile",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "scheduling/calcom/membership_create": {
+    "hash": "05ba05ed2a3c6d07764729770264acb6a789572bc1e115517ee6277170d088c3",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Cal.com: Add Team Member",
+    "description": "Add a user to a Cal.com team as a member, admin or owner.",
+    "website": "https://www.flomation.co",
+    "icon": "calcom+user-plus",
+    "date": "03/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Scheduling",
+      "icon": "calendar",
+      "description": "Meeting scheduling and booking platforms"
+    },
+    "sub_category": {
+      "name": "Cal.com",
+      "icon": "calcom",
+      "description": "Manage Cal.com bookings, event types, schedules, availability slots, teams, and webhooks"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "Cal.com Connection",
+        "placeholder": "Cal.com API key (cal_live_...) or connected credential",
+        "required": true
+      },
+      {
+        "name": "team_id",
+        "type": "integer",
+        "value": null,
+        "label": "Team ID",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "user_id",
+        "type": "integer",
+        "value": null,
+        "label": "User ID",
+        "placeholder": "The Cal.com user to add",
+        "required": true
+      },
+      {
+        "name": "role",
+        "type": "string",
+        "value": null,
+        "label": "Role",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "Member",
+            "value": "MEMBER"
+          },
+          {
+            "name": "Admin",
+            "value": "ADMIN"
+          },
+          {
+            "name": "Owner",
+            "value": "OWNER"
+          }
+        ]
+      },
+      {
+        "name": "accepted",
+        "type": "boolean",
+        "value": null,
+        "label": "Auto-Accept",
+        "placeholder": "Add without requiring the user to accept an invite"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Membership ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Membership",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "scheduling/calcom/membership_delete": {
+    "hash": "e948fd6d20a50dd54c2a00a35cf28db8cd6fa98883db4cbf6c4a4a2331b0f82b",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Cal.com: Remove Team Member",
+    "description": "Remove a member from a Cal.com team.",
+    "website": "https://www.flomation.co",
+    "icon": "calcom+trash",
+    "date": "03/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Scheduling",
+      "icon": "calendar",
+      "description": "Meeting scheduling and booking platforms"
+    },
+    "sub_category": {
+      "name": "Cal.com",
+      "icon": "calcom",
+      "description": "Manage Cal.com bookings, event types, schedules, availability slots, teams, and webhooks"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "Cal.com Connection",
+        "placeholder": "Cal.com API key (cal_live_...) or connected credential",
+        "required": true
+      },
+      {
+        "name": "team_id",
+        "type": "integer",
+        "value": null,
+        "label": "Team ID",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "membership_id",
+        "type": "integer",
+        "value": null,
+        "label": "Membership ID",
+        "placeholder": "",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "scheduling/calcom/membership_get_all": {
+    "hash": "f9376612c66cb7c790a43f47b461fa2bf186894dd7088970c3d1797cae8655df",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Cal.com: Get Many Team Members",
+    "description": "List the members (memberships) of a Cal.com team.",
+    "website": "https://www.flomation.co",
+    "icon": "calcom+list",
+    "date": "03/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Scheduling",
+      "icon": "calendar",
+      "description": "Meeting scheduling and booking platforms"
+    },
+    "sub_category": {
+      "name": "Cal.com",
+      "icon": "calcom",
+      "description": "Manage Cal.com bookings, event types, schedules, availability slots, teams, and webhooks"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "Cal.com Connection",
+        "placeholder": "Cal.com API key (cal_live_...) or connected credential",
+        "required": true
+      },
+      {
+        "name": "team_id",
+        "type": "integer",
+        "value": null,
+        "label": "Team ID",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "limit",
+        "type": "integer",
+        "value": null,
+        "label": "Limit",
+        "placeholder": "Results per page (1-250, default 100)"
+      },
+      {
+        "name": "skip",
+        "type": "integer",
+        "value": null,
+        "label": "Skip",
+        "placeholder": "Offset to resume from a previous run's next_skip"
+      },
+      {
+        "name": "return_all",
+        "type": "boolean",
+        "value": null,
+        "label": "Return All",
+        "placeholder": "Follow pagination and return every member"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "results",
+        "type": "object",
+        "value": null,
+        "label": "Memberships",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Count",
+        "placeholder": ""
+      },
+      {
+        "name": "next_skip",
+        "type": "integer",
+        "value": null,
+        "label": "Next Skip",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "scheduling/calcom/membership_update": {
+    "hash": "c67e16ef0a0051d4e3fc9d00356aab4fdfadeeccfd559f896fbc82cfc5f8c8f3",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Cal.com: Update Team Member",
+    "description": "Change a team member's role or accepted status in a Cal.com team.",
+    "website": "https://www.flomation.co",
+    "icon": "calcom+pencil",
+    "date": "03/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Scheduling",
+      "icon": "calendar",
+      "description": "Meeting scheduling and booking platforms"
+    },
+    "sub_category": {
+      "name": "Cal.com",
+      "icon": "calcom",
+      "description": "Manage Cal.com bookings, event types, schedules, availability slots, teams, and webhooks"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "Cal.com Connection",
+        "placeholder": "Cal.com API key (cal_live_...) or connected credential",
+        "required": true
+      },
+      {
+        "name": "team_id",
+        "type": "integer",
+        "value": null,
+        "label": "Team ID",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "membership_id",
+        "type": "integer",
+        "value": null,
+        "label": "Membership ID",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "role",
+        "type": "string",
+        "value": null,
+        "label": "Role",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "(unchanged)",
+            "value": ""
+          },
+          {
+            "name": "Member",
+            "value": "MEMBER"
+          },
+          {
+            "name": "Admin",
+            "value": "ADMIN"
+          },
+          {
+            "name": "Owner",
+            "value": "OWNER"
+          }
+        ]
+      },
+      {
+        "name": "accepted",
+        "type": "boolean",
+        "value": null,
+        "label": "Accepted",
+        "placeholder": ""
+      }
+    ],
+    "outputs": [
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Membership ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Membership",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "scheduling/calcom/schedule_create": {
+    "hash": "b6591d8b46433640c7539f06ebf516340ee66232f58607d951177c510f3f8195",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Cal.com: Create Schedule",
+    "description": "Create a Cal.com availability schedule defining the hours you can be booked.",
+    "website": "https://www.flomation.co",
+    "icon": "calcom+plus",
+    "date": "03/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Scheduling",
+      "icon": "calendar",
+      "description": "Meeting scheduling and booking platforms"
+    },
+    "sub_category": {
+      "name": "Cal.com",
+      "icon": "calcom",
+      "description": "Manage Cal.com bookings, event types, schedules, availability slots, teams, and webhooks"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "Cal.com Connection",
+        "placeholder": "Cal.com API key (cal_live_...) or connected credential",
+        "required": true
+      },
+      {
+        "name": "name",
+        "type": "string",
+        "value": null,
+        "label": "Name",
+        "placeholder": "e.g. Working hours",
+        "required": true
+      },
+      {
+        "name": "time_zone",
+        "type": "string",
+        "value": null,
+        "label": "Time Zone",
+        "placeholder": "Europe/London",
+        "required": true
+      },
+      {
+        "name": "is_default",
+        "type": "boolean",
+        "value": null,
+        "label": "Set as Default",
+        "placeholder": ""
+      },
+      {
+        "name": "availability_json",
+        "type": "object",
+        "value": null,
+        "label": "Availability (JSON array, advanced)",
+        "placeholder": "[{\"days\":[\"Monday\",\"Tuesday\"],\"startTime\":\"09:00\",\"endTime\":\"17:00\"}]"
+      },
+      {
+        "name": "overrides_json",
+        "type": "object",
+        "value": null,
+        "label": "Date Overrides (JSON array, advanced)",
+        "placeholder": "[{\"date\":\"2026-12-25\",\"startTime\":\"00:00\",\"endTime\":\"00:00\"}]"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Schedule ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Schedule",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "scheduling/calcom/schedule_delete": {
+    "hash": "802c133d156a9afb1dd7d72ef75996a71dc31adae8b77c791f39d05da3c48924",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Cal.com: Delete Schedule",
+    "description": "Permanently delete a Cal.com availability schedule.",
+    "website": "https://www.flomation.co",
+    "icon": "calcom+trash",
+    "date": "03/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Scheduling",
+      "icon": "calendar",
+      "description": "Meeting scheduling and booking platforms"
+    },
+    "sub_category": {
+      "name": "Cal.com",
+      "icon": "calcom",
+      "description": "Manage Cal.com bookings, event types, schedules, availability slots, teams, and webhooks"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "Cal.com Connection",
+        "placeholder": "Cal.com API key (cal_live_...) or connected credential",
+        "required": true
+      },
+      {
+        "name": "schedule_id",
+        "type": "integer",
+        "value": null,
+        "label": "Schedule ID",
+        "placeholder": "",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "scheduling/calcom/schedule_get": {
+    "hash": "191d5313835701f21e27ae7e14525c44f903ce4041b066c227035f80a4a70ba7",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Cal.com: Get Schedule",
+    "description": "Retrieve a single Cal.com availability schedule by its ID.",
+    "website": "https://www.flomation.co",
+    "icon": "calcom+magnifying-glass",
+    "date": "03/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Scheduling",
+      "icon": "calendar",
+      "description": "Meeting scheduling and booking platforms"
+    },
+    "sub_category": {
+      "name": "Cal.com",
+      "icon": "calcom",
+      "description": "Manage Cal.com bookings, event types, schedules, availability slots, teams, and webhooks"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "Cal.com Connection",
+        "placeholder": "Cal.com API key (cal_live_...) or connected credential",
+        "required": true
+      },
+      {
+        "name": "schedule_id",
+        "type": "integer",
+        "value": null,
+        "label": "Schedule ID",
+        "placeholder": "",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Schedule ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Schedule",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "scheduling/calcom/schedule_get_all": {
+    "hash": "9ce881f4232e6160cebe5ef89d953d2e4fcc316ea6291f5d4690627067961329",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Cal.com: Get Many Schedules",
+    "description": "List your Cal.com availability schedules.",
+    "website": "https://www.flomation.co",
+    "icon": "calcom+list",
+    "date": "03/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Scheduling",
+      "icon": "calendar",
+      "description": "Meeting scheduling and booking platforms"
+    },
+    "sub_category": {
+      "name": "Cal.com",
+      "icon": "calcom",
+      "description": "Manage Cal.com bookings, event types, schedules, availability slots, teams, and webhooks"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "Cal.com Connection",
+        "placeholder": "Cal.com API key (cal_live_...) or connected credential",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "results",
+        "type": "object",
+        "value": null,
+        "label": "Schedules",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Count",
+        "placeholder": ""
+      },
+      {
+        "name": "next_skip",
+        "type": "integer",
+        "value": null,
+        "label": "Next Skip",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "scheduling/calcom/schedule_update": {
+    "hash": "6a3123a1152a05f98ababe2f69a32cc23e5ee0fa862258b82d1ddf0832c3b087",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Cal.com: Update Schedule",
+    "description": "Update a Cal.com availability schedule. Only supplied fields change.",
+    "website": "https://www.flomation.co",
+    "icon": "calcom+pencil",
+    "date": "03/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Scheduling",
+      "icon": "calendar",
+      "description": "Meeting scheduling and booking platforms"
+    },
+    "sub_category": {
+      "name": "Cal.com",
+      "icon": "calcom",
+      "description": "Manage Cal.com bookings, event types, schedules, availability slots, teams, and webhooks"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "Cal.com Connection",
+        "placeholder": "Cal.com API key (cal_live_...) or connected credential",
+        "required": true
+      },
+      {
+        "name": "schedule_id",
+        "type": "integer",
+        "value": null,
+        "label": "Schedule ID",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "name",
+        "type": "string",
+        "value": null,
+        "label": "Name",
+        "placeholder": "New name (optional)"
+      },
+      {
+        "name": "time_zone",
+        "type": "string",
+        "value": null,
+        "label": "Time Zone",
+        "placeholder": "New time zone (optional)"
+      },
+      {
+        "name": "is_default",
+        "type": "boolean",
+        "value": null,
+        "label": "Set as Default",
+        "placeholder": ""
+      },
+      {
+        "name": "availability_json",
+        "type": "object",
+        "value": null,
+        "label": "Availability (JSON array, advanced)",
+        "placeholder": "[{\"days\":[\"Monday\"],\"startTime\":\"09:00\",\"endTime\":\"17:00\"}]"
+      },
+      {
+        "name": "overrides_json",
+        "type": "object",
+        "value": null,
+        "label": "Date Overrides (JSON array, advanced)",
+        "placeholder": ""
+      }
+    ],
+    "outputs": [
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Schedule ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Schedule",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "scheduling/calcom/slot_get_all": {
+    "hash": "21e95dca6e1c3a0407f0e061ad130bd712e699da4317d4bcd8859f2d89174e29",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Cal.com: Get Available Slots",
+    "description": "Fetch bookable time slots for a Cal.com event type across a date range. Returns slots grouped by day.",
+    "website": "https://www.flomation.co",
+    "icon": "calcom+clock",
+    "date": "03/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Scheduling",
+      "icon": "calendar",
+      "description": "Meeting scheduling and booking platforms"
+    },
+    "sub_category": {
+      "name": "Cal.com",
+      "icon": "calcom",
+      "description": "Manage Cal.com bookings, event types, schedules, availability slots, teams, and webhooks"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "Cal.com Connection",
+        "placeholder": "Cal.com API key (cal_live_...) or connected credential",
+        "required": true
+      },
+      {
+        "name": "event_type_id",
+        "type": "integer",
+        "value": null,
+        "label": "Event Type ID",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "start",
+        "type": "string",
+        "value": null,
+        "label": "Range Start",
+        "placeholder": "2026-07-10 or 2026-07-10T00:00:00Z",
+        "required": true
+      },
+      {
+        "name": "end",
+        "type": "string",
+        "value": null,
+        "label": "Range End",
+        "placeholder": "2026-07-17 or 2026-07-17T00:00:00Z",
+        "required": true
+      },
+      {
+        "name": "time_zone",
+        "type": "string",
+        "value": null,
+        "label": "Time Zone",
+        "placeholder": "Return slot times in this zone (optional)"
+      },
+      {
+        "name": "duration",
+        "type": "integer",
+        "value": null,
+        "label": "Duration (minutes)",
+        "placeholder": "For dynamic/variable-length events (optional)"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Slots by Day",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "scheduling/calcom/slot_reservation_delete": {
+    "hash": "5e8a481d45486788a059ae6b57f730a901781b695e6bcba9cc55fdf54ced2cc2",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Cal.com: Release Reserved Slot",
+    "description": "Release a previously reserved Cal.com slot so it becomes bookable again.",
+    "website": "https://www.flomation.co",
+    "icon": "calcom+trash",
+    "date": "03/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Scheduling",
+      "icon": "calendar",
+      "description": "Meeting scheduling and booking platforms"
+    },
+    "sub_category": {
+      "name": "Cal.com",
+      "icon": "calcom",
+      "description": "Manage Cal.com bookings, event types, schedules, availability slots, teams, and webhooks"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "Cal.com Connection",
+        "placeholder": "Cal.com API key (cal_live_...) or connected credential",
+        "required": true
+      },
+      {
+        "name": "reservation_uid",
+        "type": "string",
+        "value": null,
+        "label": "Reservation UID",
+        "placeholder": "",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "scheduling/calcom/slot_reserve": {
+    "hash": "8c44420538bef1d9b86a754989a83929de5bf5a81324d13dd22e91e8c61b13d2",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Cal.com: Reserve Slot",
+    "description": "Temporarily hold a Cal.com time slot so it can't be double-booked while an attendee completes booking.",
+    "website": "https://www.flomation.co",
+    "icon": "calcom+lock",
+    "date": "03/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Scheduling",
+      "icon": "calendar",
+      "description": "Meeting scheduling and booking platforms"
+    },
+    "sub_category": {
+      "name": "Cal.com",
+      "icon": "calcom",
+      "description": "Manage Cal.com bookings, event types, schedules, availability slots, teams, and webhooks"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "Cal.com Connection",
+        "placeholder": "Cal.com API key (cal_live_...) or connected credential",
+        "required": true
+      },
+      {
+        "name": "event_type_id",
+        "type": "integer",
+        "value": null,
+        "label": "Event Type ID",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "slot_start",
+        "type": "string",
+        "value": null,
+        "label": "Slot Start",
+        "placeholder": "2026-07-10T09:00:00Z (ISO 8601, UTC)",
+        "required": true
+      },
+      {
+        "name": "slot_duration",
+        "type": "integer",
+        "value": null,
+        "label": "Slot Duration (minutes)",
+        "placeholder": "For variable-length events (optional)"
+      },
+      {
+        "name": "reservation_duration",
+        "type": "integer",
+        "value": null,
+        "label": "Hold For (minutes)",
+        "placeholder": "How long to hold the slot (default 5)"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Reservation UID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Reservation",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "scheduling/calcom/team_create": {
+    "hash": "5f8d7ab84a82322a87cc558f31a7f2bc18c69b5fbefde6199d53471686129047",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Cal.com: Create Team",
+    "description": "Create a new Cal.com team.",
+    "website": "https://www.flomation.co",
+    "icon": "calcom+plus",
+    "date": "03/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Scheduling",
+      "icon": "calendar",
+      "description": "Meeting scheduling and booking platforms"
+    },
+    "sub_category": {
+      "name": "Cal.com",
+      "icon": "calcom",
+      "description": "Manage Cal.com bookings, event types, schedules, availability slots, teams, and webhooks"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "Cal.com Connection",
+        "placeholder": "Cal.com API key (cal_live_...) or connected credential",
+        "required": true
+      },
+      {
+        "name": "name",
+        "type": "string",
+        "value": null,
+        "label": "Name",
+        "placeholder": "e.g. Sales Team",
+        "required": true
+      },
+      {
+        "name": "slug",
+        "type": "string",
+        "value": null,
+        "label": "Slug",
+        "placeholder": "e.g. sales-team (auto-generated if blank)"
+      },
+      {
+        "name": "bio",
+        "type": "text",
+        "value": null,
+        "label": "Bio",
+        "placeholder": "Shown on the team page (optional)"
+      },
+      {
+        "name": "time_zone",
+        "type": "string",
+        "value": null,
+        "label": "Time Zone",
+        "placeholder": "Europe/London (optional)"
+      },
+      {
+        "name": "hide_branding",
+        "type": "boolean",
+        "value": null,
+        "label": "Hide Cal.com Branding",
+        "placeholder": ""
+      },
+      {
+        "name": "extra_json",
+        "type": "object",
+        "value": null,
+        "label": "Additional Fields (JSON, advanced)",
+        "placeholder": "{\"brandColor\":\"#292929\"}"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Team ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Team",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "scheduling/calcom/team_delete": {
+    "hash": "98deccf9b050a31210e8d06e0b418f246de9e0afd3c701f94b97f6b4dade8cad",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Cal.com: Delete Team",
+    "description": "Permanently delete a Cal.com team.",
+    "website": "https://www.flomation.co",
+    "icon": "calcom+trash",
+    "date": "03/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Scheduling",
+      "icon": "calendar",
+      "description": "Meeting scheduling and booking platforms"
+    },
+    "sub_category": {
+      "name": "Cal.com",
+      "icon": "calcom",
+      "description": "Manage Cal.com bookings, event types, schedules, availability slots, teams, and webhooks"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "Cal.com Connection",
+        "placeholder": "Cal.com API key (cal_live_...) or connected credential",
+        "required": true
+      },
+      {
+        "name": "team_id",
+        "type": "integer",
+        "value": null,
+        "label": "Team ID",
+        "placeholder": "",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "scheduling/calcom/team_get": {
+    "hash": "87db5bf8c5434130fe09a43a4007ea3270278e3a858ae0ab62eea82a9229f1ec",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Cal.com: Get Team",
+    "description": "Retrieve a single Cal.com team by its ID.",
+    "website": "https://www.flomation.co",
+    "icon": "calcom+magnifying-glass",
+    "date": "03/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Scheduling",
+      "icon": "calendar",
+      "description": "Meeting scheduling and booking platforms"
+    },
+    "sub_category": {
+      "name": "Cal.com",
+      "icon": "calcom",
+      "description": "Manage Cal.com bookings, event types, schedules, availability slots, teams, and webhooks"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "Cal.com Connection",
+        "placeholder": "Cal.com API key (cal_live_...) or connected credential",
+        "required": true
+      },
+      {
+        "name": "team_id",
+        "type": "integer",
+        "value": null,
+        "label": "Team ID",
+        "placeholder": "",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Team ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Team",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "scheduling/calcom/team_get_all": {
+    "hash": "f03fbfa62036b6f8cccf9ef1938b10d2f4111a54bd2c4f0ff25ff14ccb7f0a92",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Cal.com: Get Many Teams",
+    "description": "List the Cal.com teams you belong to.",
+    "website": "https://www.flomation.co",
+    "icon": "calcom+user-group",
+    "date": "03/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Scheduling",
+      "icon": "calendar",
+      "description": "Meeting scheduling and booking platforms"
+    },
+    "sub_category": {
+      "name": "Cal.com",
+      "icon": "calcom",
+      "description": "Manage Cal.com bookings, event types, schedules, availability slots, teams, and webhooks"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "Cal.com Connection",
+        "placeholder": "Cal.com API key (cal_live_...) or connected credential",
+        "required": true
+      },
+      {
+        "name": "limit",
+        "type": "integer",
+        "value": null,
+        "label": "Limit",
+        "placeholder": "Results per page (1-250, default 100)"
+      },
+      {
+        "name": "skip",
+        "type": "integer",
+        "value": null,
+        "label": "Skip",
+        "placeholder": "Offset to resume from a previous run's next_skip"
+      },
+      {
+        "name": "return_all",
+        "type": "boolean",
+        "value": null,
+        "label": "Return All",
+        "placeholder": "Follow pagination and return every team"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "results",
+        "type": "object",
+        "value": null,
+        "label": "Teams",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Count",
+        "placeholder": ""
+      },
+      {
+        "name": "next_skip",
+        "type": "integer",
+        "value": null,
+        "label": "Next Skip",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "scheduling/calcom/team_update": {
+    "hash": "efbfd405b0e83ab2a9287590b7b5c5f3e5f2130e6ef249a13391017eb4602183",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Cal.com: Update Team",
+    "description": "Update fields of an existing Cal.com team. Only supplied fields change.",
+    "website": "https://www.flomation.co",
+    "icon": "calcom+pencil",
+    "date": "03/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Scheduling",
+      "icon": "calendar",
+      "description": "Meeting scheduling and booking platforms"
+    },
+    "sub_category": {
+      "name": "Cal.com",
+      "icon": "calcom",
+      "description": "Manage Cal.com bookings, event types, schedules, availability slots, teams, and webhooks"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "Cal.com Connection",
+        "placeholder": "Cal.com API key (cal_live_...) or connected credential",
+        "required": true
+      },
+      {
+        "name": "team_id",
+        "type": "integer",
+        "value": null,
+        "label": "Team ID",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "name",
+        "type": "string",
+        "value": null,
+        "label": "Name",
+        "placeholder": "New name (optional)"
+      },
+      {
+        "name": "slug",
+        "type": "string",
+        "value": null,
+        "label": "Slug",
+        "placeholder": "New slug (optional)"
+      },
+      {
+        "name": "bio",
+        "type": "text",
+        "value": null,
+        "label": "Bio",
+        "placeholder": "New bio (optional)"
+      },
+      {
+        "name": "time_zone",
+        "type": "string",
+        "value": null,
+        "label": "Time Zone",
+        "placeholder": "New time zone (optional)"
+      },
+      {
+        "name": "hide_branding",
+        "type": "boolean",
+        "value": null,
+        "label": "Hide Cal.com Branding",
+        "placeholder": ""
+      },
+      {
+        "name": "extra_json",
+        "type": "object",
+        "value": null,
+        "label": "Additional Fields (JSON, advanced)",
+        "placeholder": ""
+      }
+    ],
+    "outputs": [
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Team ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Team",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "scheduling/calcom/webhook_create": {
+    "hash": "8ae6b95f0d124a06edd51d09db5092334a6fe8a0540ef906f7ef72d8ed0429f5",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Cal.com: Create Webhook",
+    "description": "Register a Cal.com webhook that POSTs booking events to a URL you specify.",
+    "website": "https://www.flomation.co",
+    "icon": "calcom+plus",
+    "date": "03/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Scheduling",
+      "icon": "calendar",
+      "description": "Meeting scheduling and booking platforms"
+    },
+    "sub_category": {
+      "name": "Cal.com",
+      "icon": "calcom",
+      "description": "Manage Cal.com bookings, event types, schedules, availability slots, teams, and webhooks"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "Cal.com Connection",
+        "placeholder": "Cal.com API key (cal_live_...) or connected credential",
+        "required": true
+      },
+      {
+        "name": "subscriber_url",
+        "type": "string",
+        "value": null,
+        "label": "Subscriber URL",
+        "placeholder": "https://example.com/hook",
+        "required": true
+      },
+      {
+        "name": "triggers",
+        "type": "multi_select",
+        "value": null,
+        "label": "Events",
+        "placeholder": "",
+        "required": true,
+        "options": [
+          {
+            "name": "Booking Created",
+            "value": "BOOKING_CREATED"
+          },
+          {
+            "name": "Booking Rescheduled",
+            "value": "BOOKING_RESCHEDULED"
+          },
+          {
+            "name": "Booking Cancelled",
+            "value": "BOOKING_CANCELLED"
+          },
+          {
+            "name": "Booking Requested",
+            "value": "BOOKING_REQUESTED"
+          },
+          {
+            "name": "Booking Rejected",
+            "value": "BOOKING_REJECTED"
+          },
+          {
+            "name": "Booking Paid",
+            "value": "BOOKING_PAID"
+          },
+          {
+            "name": "Booking No-Show Updated",
+            "value": "BOOKING_NO_SHOW_UPDATED"
+          },
+          {
+            "name": "Meeting Started",
+            "value": "MEETING_STARTED"
+          },
+          {
+            "name": "Meeting Ended",
+            "value": "MEETING_ENDED"
+          },
+          {
+            "name": "Recording Ready",
+            "value": "RECORDING_READY"
+          },
+          {
+            "name": "Form Submitted",
+            "value": "FORM_SUBMITTED"
+          }
+        ]
+      },
+      {
+        "name": "active",
+        "type": "boolean",
+        "value": null,
+        "label": "Active",
+        "placeholder": "Enable the webhook (default true)"
+      },
+      {
+        "name": "secret",
+        "type": "secret",
+        "value": null,
+        "label": "Signing Secret",
+        "placeholder": "Used to sign deliveries with HMAC-SHA256 (optional)"
+      },
+      {
+        "name": "payload_template",
+        "type": "text",
+        "value": null,
+        "label": "Payload Template",
+        "placeholder": "Custom {{variable}} payload template (optional)"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Webhook ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Webhook",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "scheduling/calcom/webhook_delete": {
+    "hash": "776d642d88d84d77fe9b8253bd063d66573321c6a684a6ce1af086462883fc8d",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Cal.com: Delete Webhook",
+    "description": "Permanently delete a Cal.com webhook.",
+    "website": "https://www.flomation.co",
+    "icon": "calcom+trash",
+    "date": "03/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Scheduling",
+      "icon": "calendar",
+      "description": "Meeting scheduling and booking platforms"
+    },
+    "sub_category": {
+      "name": "Cal.com",
+      "icon": "calcom",
+      "description": "Manage Cal.com bookings, event types, schedules, availability slots, teams, and webhooks"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "Cal.com Connection",
+        "placeholder": "Cal.com API key (cal_live_...) or connected credential",
+        "required": true
+      },
+      {
+        "name": "webhook_id",
+        "type": "string",
+        "value": null,
+        "label": "Webhook ID",
+        "placeholder": "",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "scheduling/calcom/webhook_get": {
+    "hash": "4f34efc34fa71831b3077825bac80db71e92933442aa7ba4d007bf2d0e662791",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Cal.com: Get Webhook",
+    "description": "Retrieve a single Cal.com webhook by its ID.",
+    "website": "https://www.flomation.co",
+    "icon": "calcom+magnifying-glass",
+    "date": "03/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Scheduling",
+      "icon": "calendar",
+      "description": "Meeting scheduling and booking platforms"
+    },
+    "sub_category": {
+      "name": "Cal.com",
+      "icon": "calcom",
+      "description": "Manage Cal.com bookings, event types, schedules, availability slots, teams, and webhooks"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "Cal.com Connection",
+        "placeholder": "Cal.com API key (cal_live_...) or connected credential",
+        "required": true
+      },
+      {
+        "name": "webhook_id",
+        "type": "string",
+        "value": null,
+        "label": "Webhook ID",
+        "placeholder": "",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Webhook ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Webhook",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "scheduling/calcom/webhook_get_all": {
+    "hash": "473c833ffe711b5b7b3d51f589b5b2ffeb3821a1eefde9ae9f021a32efdefeee",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Cal.com: Get Many Webhooks",
+    "description": "List the webhooks configured on your Cal.com account.",
+    "website": "https://www.flomation.co",
+    "icon": "calcom+list",
+    "date": "03/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Scheduling",
+      "icon": "calendar",
+      "description": "Meeting scheduling and booking platforms"
+    },
+    "sub_category": {
+      "name": "Cal.com",
+      "icon": "calcom",
+      "description": "Manage Cal.com bookings, event types, schedules, availability slots, teams, and webhooks"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "Cal.com Connection",
+        "placeholder": "Cal.com API key (cal_live_...) or connected credential",
+        "required": true
+      },
+      {
+        "name": "limit",
+        "type": "integer",
+        "value": null,
+        "label": "Limit",
+        "placeholder": "Results per page (1-250, default 100)"
+      },
+      {
+        "name": "skip",
+        "type": "integer",
+        "value": null,
+        "label": "Skip",
+        "placeholder": "Offset to resume from a previous run's next_skip"
+      },
+      {
+        "name": "return_all",
+        "type": "boolean",
+        "value": null,
+        "label": "Return All",
+        "placeholder": "Follow pagination and return every webhook"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "results",
+        "type": "object",
+        "value": null,
+        "label": "Webhooks",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Count",
+        "placeholder": ""
+      },
+      {
+        "name": "next_skip",
+        "type": "integer",
+        "value": null,
+        "label": "Next Skip",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "scheduling/calcom/webhook_update": {
+    "hash": "803310e19a0fbdeceb9913b42898e3a85de599182c16ed43636acded74582e01",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Cal.com: Update Webhook",
+    "description": "Update a Cal.com webhook's URL, events, active state or secret. Only supplied fields change.",
+    "website": "https://www.flomation.co",
+    "icon": "calcom+pencil",
+    "date": "03/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Scheduling",
+      "icon": "calendar",
+      "description": "Meeting scheduling and booking platforms"
+    },
+    "sub_category": {
+      "name": "Cal.com",
+      "icon": "calcom",
+      "description": "Manage Cal.com bookings, event types, schedules, availability slots, teams, and webhooks"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "Cal.com Connection",
+        "placeholder": "Cal.com API key (cal_live_...) or connected credential",
+        "required": true
+      },
+      {
+        "name": "webhook_id",
+        "type": "string",
+        "value": null,
+        "label": "Webhook ID",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "subscriber_url",
+        "type": "string",
+        "value": null,
+        "label": "Subscriber URL",
+        "placeholder": "New URL (optional)"
+      },
+      {
+        "name": "triggers",
+        "type": "multi_select",
+        "value": null,
+        "label": "Events",
+        "placeholder": "Replace the subscribed events (optional)",
+        "options": [
+          {
+            "name": "Booking Created",
+            "value": "BOOKING_CREATED"
+          },
+          {
+            "name": "Booking Rescheduled",
+            "value": "BOOKING_RESCHEDULED"
+          },
+          {
+            "name": "Booking Cancelled",
+            "value": "BOOKING_CANCELLED"
+          },
+          {
+            "name": "Booking Requested",
+            "value": "BOOKING_REQUESTED"
+          },
+          {
+            "name": "Booking Rejected",
+            "value": "BOOKING_REJECTED"
+          },
+          {
+            "name": "Booking Paid",
+            "value": "BOOKING_PAID"
+          },
+          {
+            "name": "Booking No-Show Updated",
+            "value": "BOOKING_NO_SHOW_UPDATED"
+          },
+          {
+            "name": "Meeting Started",
+            "value": "MEETING_STARTED"
+          },
+          {
+            "name": "Meeting Ended",
+            "value": "MEETING_ENDED"
+          },
+          {
+            "name": "Recording Ready",
+            "value": "RECORDING_READY"
+          },
+          {
+            "name": "Form Submitted",
+            "value": "FORM_SUBMITTED"
+          }
+        ]
+      },
+      {
+        "name": "active",
+        "type": "boolean",
+        "value": null,
+        "label": "Active",
+        "placeholder": ""
+      },
+      {
+        "name": "secret",
+        "type": "secret",
+        "value": null,
+        "label": "Signing Secret",
+        "placeholder": "New signing secret (optional)"
+      },
+      {
+        "name": "payload_template",
+        "type": "text",
+        "value": null,
+        "label": "Payload Template",
+        "placeholder": "New payload template (optional)"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Webhook ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Webhook",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
   "scheduling/calendly/availability_schedule_get_all": {
     "hash": "fedb899e61806b0737c8914b986328c3552b700bfa6d24472b98b5702c652528",
     "author": "Dave McElin",
@@ -45489,6 +48958,165 @@
         "type": "object",
         "value": null,
         "label": "Fields",
+        "placeholder": ""
+      },
+      {
+        "name": "triggered_at",
+        "type": "string",
+        "value": null,
+        "label": "Triggered At",
+        "placeholder": ""
+      }
+    ]
+  },
+  "trigger/calcom_webhook": {
+    "hash": "48f5092d907bca55b183aa75b8abdd3a3f0061e35b502130fbc0f794bdb36417",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Cal.com Webhook Trigger",
+    "description": "Triggers a flow when a Cal.com event occurs (booking created/rescheduled/cancelled, meeting ended, and more). The webhook subscription is registered with Cal.com automatically.",
+    "website": "https://www.flomation.co",
+    "icon": "calcom",
+    "date": "03/07/2026",
+    "type": 1,
+    "category": {
+      "name": "Triggers",
+      "icon": "bolt-lightning",
+      "description": "Start a Flow"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "Cal.com Connection",
+        "placeholder": "Cal.com API key (cal_live_...) — used to register the webhook",
+        "required": true
+      },
+      {
+        "name": "events",
+        "type": "multi_select",
+        "value": null,
+        "label": "Events",
+        "placeholder": "",
+        "required": true,
+        "options": [
+          {
+            "name": "Booking Created",
+            "value": "BOOKING_CREATED"
+          },
+          {
+            "name": "Booking Rescheduled",
+            "value": "BOOKING_RESCHEDULED"
+          },
+          {
+            "name": "Booking Cancelled",
+            "value": "BOOKING_CANCELLED"
+          },
+          {
+            "name": "Booking Requested (needs confirmation)",
+            "value": "BOOKING_REQUESTED"
+          },
+          {
+            "name": "Booking Rejected",
+            "value": "BOOKING_REJECTED"
+          },
+          {
+            "name": "Booking Paid",
+            "value": "BOOKING_PAID"
+          },
+          {
+            "name": "Booking No-Show Updated",
+            "value": "BOOKING_NO_SHOW_UPDATED"
+          },
+          {
+            "name": "Meeting Started",
+            "value": "MEETING_STARTED"
+          },
+          {
+            "name": "Meeting Ended",
+            "value": "MEETING_ENDED"
+          },
+          {
+            "name": "Recording Ready",
+            "value": "RECORDING_READY"
+          },
+          {
+            "name": "Form Submitted",
+            "value": "FORM_SUBMITTED"
+          }
+        ]
+      },
+      {
+        "name": "event_type_id",
+        "type": "integer",
+        "value": null,
+        "label": "Event Type ID",
+        "placeholder": "Only fire for this event type (optional)"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "content",
+        "type": "string",
+        "value": null,
+        "label": "Event Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "event",
+        "type": "string",
+        "value": null,
+        "label": "Event Type",
+        "placeholder": ""
+      },
+      {
+        "name": "payload",
+        "type": "object",
+        "value": null,
+        "label": "Payload",
+        "placeholder": ""
+      },
+      {
+        "name": "attendee_name",
+        "type": "string",
+        "value": null,
+        "label": "Attendee Name",
+        "placeholder": ""
+      },
+      {
+        "name": "attendee_email",
+        "type": "string",
+        "value": null,
+        "label": "Attendee Email",
+        "placeholder": ""
+      },
+      {
+        "name": "booking_uid",
+        "type": "string",
+        "value": null,
+        "label": "Booking UID",
+        "placeholder": ""
+      },
+      {
+        "name": "start_time",
+        "type": "string",
+        "value": null,
+        "label": "Start Time",
+        "placeholder": ""
+      },
+      {
+        "name": "created_at",
+        "type": "string",
+        "value": null,
+        "label": "Created At",
+        "placeholder": ""
+      },
+      {
+        "name": "body",
+        "type": "string",
+        "value": null,
+        "label": "Raw JSON Body",
         "placeholder": ""
       },
       {
