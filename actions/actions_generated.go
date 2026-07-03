@@ -375,6 +375,24 @@ import (
 	plan_get_status "flomation.app/automate/executor/actions/plan/get_status"
 	plan_revise "flomation.app/automate/executor/actions/plan/revise"
 	plan_start "flomation.app/automate/executor/actions/plan/start"
+	scheduling_acuity_appointment_cancel "flomation.app/automate/executor/actions/scheduling/acuity/appointment_cancel"
+	scheduling_acuity_appointment_create "flomation.app/automate/executor/actions/scheduling/acuity/appointment_create"
+	scheduling_acuity_appointment_get "flomation.app/automate/executor/actions/scheduling/acuity/appointment_get"
+	scheduling_acuity_appointment_get_all "flomation.app/automate/executor/actions/scheduling/acuity/appointment_get_all"
+	scheduling_acuity_appointment_payments "flomation.app/automate/executor/actions/scheduling/acuity/appointment_payments"
+	scheduling_acuity_appointment_reschedule "flomation.app/automate/executor/actions/scheduling/acuity/appointment_reschedule"
+	scheduling_acuity_appointment_type_get_all "flomation.app/automate/executor/actions/scheduling/acuity/appointment_type_get_all"
+	scheduling_acuity_appointment_update "flomation.app/automate/executor/actions/scheduling/acuity/appointment_update"
+	scheduling_acuity_availability_check_times "flomation.app/automate/executor/actions/scheduling/acuity/availability_check_times"
+	scheduling_acuity_availability_classes "flomation.app/automate/executor/actions/scheduling/acuity/availability_classes"
+	scheduling_acuity_availability_dates "flomation.app/automate/executor/actions/scheduling/acuity/availability_dates"
+	scheduling_acuity_availability_times "flomation.app/automate/executor/actions/scheduling/acuity/availability_times"
+	scheduling_acuity_calendar_get_all "flomation.app/automate/executor/actions/scheduling/acuity/calendar_get_all"
+	scheduling_acuity_client_create "flomation.app/automate/executor/actions/scheduling/acuity/client_create"
+	scheduling_acuity_client_delete "flomation.app/automate/executor/actions/scheduling/acuity/client_delete"
+	scheduling_acuity_client_get_all "flomation.app/automate/executor/actions/scheduling/acuity/client_get_all"
+	scheduling_acuity_client_update "flomation.app/automate/executor/actions/scheduling/acuity/client_update"
+	scheduling_acuity_me_get "flomation.app/automate/executor/actions/scheduling/acuity/me_get"
 	scheduling_calcom_booking_cancel "flomation.app/automate/executor/actions/scheduling/calcom/booking_cancel"
 	scheduling_calcom_booking_confirm "flomation.app/automate/executor/actions/scheduling/calcom/booking_confirm"
 	scheduling_calcom_booking_create "flomation.app/automate/executor/actions/scheduling/calcom/booking_create"
@@ -476,6 +494,7 @@ import (
 	subflow_begin "flomation.app/automate/executor/actions/subflow/begin"
 	subflow_end "flomation.app/automate/executor/actions/subflow/end"
 	subflow_invoke "flomation.app/automate/executor/actions/subflow/invoke"
+	trigger_acuity_webhook "flomation.app/automate/executor/actions/trigger/acuity_webhook"
 	trigger_airtable_poll "flomation.app/automate/executor/actions/trigger/airtable_poll"
 	trigger_calcom_webhook "flomation.app/automate/executor/actions/trigger/calcom_webhook"
 	trigger_calendly_webhook "flomation.app/automate/executor/actions/trigger/calendly_webhook"
@@ -903,6 +922,24 @@ var Actions = map[string]core.Action{
 	"plan/get_status":                                   plan_get_status.Execute,
 	"plan/revise":                                       plan_revise.Execute,
 	"plan/start":                                        plan_start.Execute,
+	"scheduling/acuity/appointment_cancel":              scheduling_acuity_appointment_cancel.Execute,
+	"scheduling/acuity/appointment_create":              scheduling_acuity_appointment_create.Execute,
+	"scheduling/acuity/appointment_get":                 scheduling_acuity_appointment_get.Execute,
+	"scheduling/acuity/appointment_get_all":             scheduling_acuity_appointment_get_all.Execute,
+	"scheduling/acuity/appointment_payments":            scheduling_acuity_appointment_payments.Execute,
+	"scheduling/acuity/appointment_reschedule":          scheduling_acuity_appointment_reschedule.Execute,
+	"scheduling/acuity/appointment_type_get_all":        scheduling_acuity_appointment_type_get_all.Execute,
+	"scheduling/acuity/appointment_update":              scheduling_acuity_appointment_update.Execute,
+	"scheduling/acuity/availability_check_times":        scheduling_acuity_availability_check_times.Execute,
+	"scheduling/acuity/availability_classes":            scheduling_acuity_availability_classes.Execute,
+	"scheduling/acuity/availability_dates":              scheduling_acuity_availability_dates.Execute,
+	"scheduling/acuity/availability_times":              scheduling_acuity_availability_times.Execute,
+	"scheduling/acuity/calendar_get_all":                scheduling_acuity_calendar_get_all.Execute,
+	"scheduling/acuity/client_create":                   scheduling_acuity_client_create.Execute,
+	"scheduling/acuity/client_delete":                   scheduling_acuity_client_delete.Execute,
+	"scheduling/acuity/client_get_all":                  scheduling_acuity_client_get_all.Execute,
+	"scheduling/acuity/client_update":                   scheduling_acuity_client_update.Execute,
+	"scheduling/acuity/me_get":                          scheduling_acuity_me_get.Execute,
 	"scheduling/calcom/booking_cancel":                  scheduling_calcom_booking_cancel.Execute,
 	"scheduling/calcom/booking_confirm":                 scheduling_calcom_booking_confirm.Execute,
 	"scheduling/calcom/booking_create":                  scheduling_calcom_booking_create.Execute,
@@ -1004,6 +1041,7 @@ var Actions = map[string]core.Action{
 	"subflow/begin":                                     subflow_begin.Execute,
 	"subflow/end":                                       subflow_end.Execute,
 	"subflow/invoke":                                    subflow_invoke.Execute,
+	"trigger/acuity_webhook":                            trigger_acuity_webhook.Execute,
 	"trigger/airtable_poll":                             trigger_airtable_poll.Execute,
 	"trigger/calcom_webhook":                            trigger_calcom_webhook.Execute,
 	"trigger/calendly_webhook":                          trigger_calendly_webhook.Execute,
