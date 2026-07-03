@@ -14,7 +14,7 @@ const (
 	Name         = "Acuity: Get Many Appointment Types"
 	Description  = "List your Acuity appointment types (the bookable services and classes)."
 	Website      = "https://www.flomation.co"
-	Icon         = "acuity+list"
+	Icon         = "acuity+layer-group"
 	Date         = "04/07/2026"
 	Type         = core.ActionTypeAction
 )

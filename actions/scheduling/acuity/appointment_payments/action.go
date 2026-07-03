@@ -13,7 +13,7 @@ const (
 	Name         = "Acuity: Get Appointment Payments"
 	Description  = "List the payment transactions recorded against an Acuity appointment."
 	Website      = "https://www.flomation.co"
-	Icon         = "acuity+list"
+	Icon         = "acuity+dollar-sign"
 	Date         = "04/07/2026"
 	Type         = core.ActionTypeAction
 )

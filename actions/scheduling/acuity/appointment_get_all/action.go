@@ -62,6 +62,11 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	acuity.AddFilter(q, inputs, "lastName", "last_name")
 	acuity.AddFilter(q, inputs, "email", "email")
 	acuity.AddFilter(q, inputs, "phone", "phone")
+	// `direction` (ASC|DESC) comes from the n8n-derived spec but isn't listed on
+	// GET /appointments in the current Acuity reference. It's only sent when the
+	// user explicitly picks a sort, and unknown query params are typically
+	// ignored; verify (and drop this if it 400s) if the account ever reaches the
+	// API. Acuity defaults to newest-first regardless.
 	acuity.AddFilter(q, inputs, "direction", "direction")
 	if acuity.OptionalBool("canceled", inputs) {
 		q.Set("canceled", "true")

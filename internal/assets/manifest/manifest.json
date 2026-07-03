@@ -40078,7 +40078,7 @@
     ]
   },
   "scheduling/acuity/appointment_get_all": {
-    "hash": "54fa6cd63f227656562d87ffc2f877d1f36621dad3b103143acba3cf8ee4f5f5",
+    "hash": "3e342fac62ec0a0d5b1ea1f3c6a0bd25a44e74bb775e778e9f0e60502d6df05e",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Acuity: Get Many Appointments",
@@ -40241,13 +40241,13 @@
     ]
   },
   "scheduling/acuity/appointment_payments": {
-    "hash": "006c233975aa038cf53bf585aada559bd04c776d756a1ddb349949f9be1d21ca",
+    "hash": "06b94358c6c1ff619aba5123fde0abfc03d9bcecc1444907a362d18970b6c2ad",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Acuity: Get Appointment Payments",
     "description": "List the payment transactions recorded against an Acuity appointment.",
     "website": "https://www.flomation.co",
-    "icon": "acuity+list",
+    "icon": "acuity+dollar-sign",
     "date": "04/07/2026",
     "type": 2,
     "category": {
@@ -40438,13 +40438,13 @@
     ]
   },
   "scheduling/acuity/appointment_type_get_all": {
-    "hash": "8b2be4718e2d843e0bffedd646b52aaa374cdea5495ba0605497d85ee71fc6fd",
+    "hash": "68f27954e21fd1c6f88f18712815f3b1894c564d50b8cb290838652fb89c00e5",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Acuity: Get Many Appointment Types",
     "description": "List your Acuity appointment types (the bookable services and classes).",
     "website": "https://www.flomation.co",
-    "icon": "acuity+list",
+    "icon": "acuity+layer-group",
     "date": "04/07/2026",
     "type": 2,
     "category": {
@@ -40661,7 +40661,7 @@
     ]
   },
   "scheduling/acuity/availability_check_times": {
-    "hash": "b614602e670be965b1a571a6eda619d028ebdd526c672582242f12e046651ec2",
+    "hash": "69894984fb82a86ee687b79dead7b3cc4a6013516026c72affd02e4e5fc0430c",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Acuity: Check Time Availability",

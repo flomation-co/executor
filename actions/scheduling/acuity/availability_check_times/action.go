@@ -58,9 +58,19 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 		slot["calendarID"] = calID
 	}
 
+	// Acuity echoes each slot back annotated with a boolean "valid" (and a
+	// "reason" when invalid). The result is an array, so downstream flows read
+	// results[0].valid to decide whether to book — count only reports how many
+	// slots were checked, not whether they're available.
 	items, err := acuity.PostList(userID, apiKey, "/availability/check-times", []interface{}{slot})
 	if err != nil {
 		return acuity.ErrorResult(err.Error()), nil
 	}
-	return acuity.ListResult(items, fmt.Sprintf("Checked availability for %s", datetime)), nil
+	valid := false
+	if len(items) > 0 {
+		if m, ok := items[0].(map[string]interface{}); ok {
+			valid, _ = m["valid"].(bool)
+		}
+	}
+	return acuity.ListResult(items, fmt.Sprintf("Checked %s — available: %t", datetime, valid)), nil
 }
