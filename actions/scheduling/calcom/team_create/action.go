@@ -55,7 +55,10 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 		return calcom.ErrorResult(err.Error()), nil
 	} else {
 		for k, v := range extra {
-			body[k] = v
+			// Advanced JSON augments the body but never clobbers a validated field.
+			if _, exists := body[k]; !exists {
+				body[k] = v
+			}
 		}
 	}
 

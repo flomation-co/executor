@@ -34,9 +34,9 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	if err != nil {
 		return nil, err
 	}
-	id, ok := calcom.OptionalInt("team_id", inputs)
-	if !ok {
-		return calcom.ErrorResult("team_id is required"), nil
+	id, err := calcom.RequiredInt("team_id", inputs)
+	if err != nil {
+		return calcom.ErrorResult(err.Error()), nil
 	}
 
 	if err := calcom.DeleteResource(token, fmt.Sprintf("/teams/%d", id), calcom.VersionNone); err != nil {

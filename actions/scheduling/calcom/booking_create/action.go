@@ -44,9 +44,9 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	if err != nil {
 		return nil, err
 	}
-	eventTypeID, ok := calcom.OptionalInt("event_type_id", inputs)
-	if !ok {
-		return calcom.ErrorResult("event_type_id is required"), nil
+	eventTypeID, err := calcom.RequiredInt("event_type_id", inputs)
+	if err != nil {
+		return calcom.ErrorResult(err.Error()), nil
 	}
 	start, err := calcom.RequiredString("start", inputs)
 	if err != nil {

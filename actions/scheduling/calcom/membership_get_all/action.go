@@ -40,9 +40,9 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	if err != nil {
 		return nil, err
 	}
-	teamID, ok := calcom.OptionalInt("team_id", inputs)
-	if !ok {
-		return calcom.ErrorResult("team_id is required"), nil
+	teamID, err := calcom.RequiredInt("team_id", inputs)
+	if err != nil {
+		return calcom.ErrorResult(err.Error()), nil
 	}
 
 	limit, set := calcom.OptionalInt("limit", inputs)

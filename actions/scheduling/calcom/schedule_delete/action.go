@@ -34,9 +34,9 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	if err != nil {
 		return nil, err
 	}
-	id, ok := calcom.OptionalInt("schedule_id", inputs)
-	if !ok {
-		return calcom.ErrorResult("schedule_id is required"), nil
+	id, err := calcom.RequiredInt("schedule_id", inputs)
+	if err != nil {
+		return calcom.ErrorResult(err.Error()), nil
 	}
 
 	if err := calcom.DeleteResource(token, fmt.Sprintf("/schedules/%d", id), calcom.VersionSchedules); err != nil {

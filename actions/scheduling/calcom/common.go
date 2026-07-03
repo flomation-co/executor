@@ -294,6 +294,17 @@ func OptionalInt(name string, inputs []*core.Connection) (int, bool) {
 	return int(*conn.Number()), true
 }
 
+// RequiredInt extracts a required integer input, erroring if absent. Mirrors
+// RequiredString so required numeric ids (event type, schedule, team, ...) are
+// validated with the same pattern rather than an ad-hoc OptionalInt + !ok.
+func RequiredInt(name string, inputs []*core.Connection) (int, error) {
+	v, ok := OptionalInt(name, inputs)
+	if !ok {
+		return 0, fmt.Errorf("%s is required", name)
+	}
+	return v, nil
+}
+
 // OptionalBool extracts a boolean input, defaulting to false when unset.
 func OptionalBool(name string, inputs []*core.Connection) bool {
 	conn := core.FindConnection(name, inputs)

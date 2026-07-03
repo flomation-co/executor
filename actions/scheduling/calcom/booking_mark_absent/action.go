@@ -14,7 +14,7 @@ const (
 	Name         = "Cal.com: Mark Booking Absent"
 	Description  = "Mark the host and/or specific attendees of a Cal.com booking as no-shows."
 	Website      = "https://www.flomation.co"
-	Icon         = "calcom+ban"
+	Icon         = "calcom+xmark"
 	Date         = "03/07/2026"
 	Type         = core.ActionTypeAction
 )

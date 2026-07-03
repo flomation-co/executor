@@ -51,9 +51,9 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	if err != nil {
 		return calcom.ErrorResult(err.Error()), nil
 	}
-	length, ok := calcom.OptionalInt("length_minutes", inputs)
-	if !ok || length <= 0 {
-		return calcom.ErrorResult("length_minutes is required"), nil
+	length, err := calcom.RequiredInt("length_minutes", inputs)
+	if err != nil || length <= 0 {
+		return calcom.ErrorResult("length_minutes is required (and must be positive)"), nil
 	}
 
 	body := map[string]interface{}{
@@ -69,7 +69,10 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 		return calcom.ErrorResult(err.Error()), nil
 	} else {
 		for k, v := range extra {
-			body[k] = v
+			// Advanced JSON augments the body but never clobbers a validated field.
+			if _, exists := body[k]; !exists {
+				body[k] = v
+			}
 		}
 	}
 

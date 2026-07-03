@@ -39890,7 +39890,7 @@
     ]
   },
   "scheduling/calcom/booking_create": {
-    "hash": "f472bb6d25ebdd2f4a53288e5b82b48349ed8ef2b3862d83ac8f8c1d5e65e338",
+    "hash": "6144ef5dc8a39d91fcf3c6d3975635336ae213cc3ac76c478ae1967557d498e0",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Cal.com: Create Booking",
@@ -40349,13 +40349,13 @@
     ]
   },
   "scheduling/calcom/booking_mark_absent": {
-    "hash": "2f2387b36955d35a5afd9fa21293db7dcc93579e3c08bda896c251b484c18ae4",
+    "hash": "ee20ecc5c1fe2970bc7474c7431656a4b96556814fa512778f52ab5515dfa992",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Cal.com: Mark Booking Absent",
     "description": "Mark the host and/or specific attendees of a Cal.com booking as no-shows.",
     "website": "https://www.flomation.co",
-    "icon": "calcom+ban",
+    "icon": "calcom+xmark",
     "date": "03/07/2026",
     "type": 2,
     "category": {
@@ -40537,7 +40537,7 @@
     ]
   },
   "scheduling/calcom/event_type_create": {
-    "hash": "963f4d264d46d8be94e2c259114a215b547f938789c8d34d5dbef4a8e13c2a1f",
+    "hash": "305f3b31425667465ca20949f2d2bec1702761df392f0c58102cec7da2cc7aaa",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Cal.com: Create Event Type",
@@ -40664,7 +40664,7 @@
     ]
   },
   "scheduling/calcom/event_type_delete": {
-    "hash": "ac1977815cd546f27061e748e8d3e0c6710d37d01ca0cd45e413d7ac39191642",
+    "hash": "7f0957709de98274d7fb90da1f5d62747622a04456d63103c2ec6e40a00e36f5",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Cal.com: Delete Event Type",
@@ -40726,7 +40726,7 @@
     ]
   },
   "scheduling/calcom/event_type_get": {
-    "hash": "7375776949eb731443adde06becb1120d85c7c929b3a5f4f02a4dcec418be537",
+    "hash": "0580d36f958269ccd701c00dc1966392e0c735631860b12bad2605ae8561c6ed",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Cal.com: Get Event Type",
@@ -40891,7 +40891,7 @@
     ]
   },
   "scheduling/calcom/event_type_update": {
-    "hash": "87cfa26d6fe8766b7e674fafa2b8d7a1a3fdda1c4d71b150a11b232c0f2c9731",
+    "hash": "0b96b40e3dc9b8d48eef9864b5ac4c9493ab94bcdc31156afca81d6d59c3c56e",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Cal.com: Update Event Type",
@@ -41091,7 +41091,7 @@
     ]
   },
   "scheduling/calcom/membership_create": {
-    "hash": "5d18bc4599b80927c17bb893252bf9bf257607ebf7471b23f8fdcf62067bfb16",
+    "hash": "05ba05ed2a3c6d07764729770264acb6a789572bc1e115517ee6277170d088c3",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Cal.com: Add Team Member",
@@ -41203,7 +41203,7 @@
     ]
   },
   "scheduling/calcom/membership_delete": {
-    "hash": "b66f1d5f11ec237bdbc2fd99d9453ba1b3de0516cc7d598c0219129ddc3a456e",
+    "hash": "e948fd6d20a50dd54c2a00a35cf28db8cd6fa98883db4cbf6c4a4a2331b0f82b",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Cal.com: Remove Team Member",
@@ -41273,7 +41273,7 @@
     ]
   },
   "scheduling/calcom/membership_get_all": {
-    "hash": "556042cd5fc10ddce3f188924d8f013305fe5525d48af2bed6752a40f4e67ce2",
+    "hash": "f9376612c66cb7c790a43f47b461fa2bf186894dd7088970c3d1797cae8655df",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Cal.com: Get Many Team Members",
@@ -41377,7 +41377,7 @@
     ]
   },
   "scheduling/calcom/membership_update": {
-    "hash": "53fba14800fc69f66c3809759d0ce395bd928db6ed46c02aca38f4d4057ddcec",
+    "hash": "c67e16ef0a0051d4e3fc9d00356aab4fdfadeeccfd559f896fbc82cfc5f8c8f3",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Cal.com: Update Team Member",
@@ -41598,7 +41598,7 @@
     ]
   },
   "scheduling/calcom/schedule_delete": {
-    "hash": "17066a06fdbe5b6a7d6f937850816db761a85998dec79a431336a7b87b162384",
+    "hash": "802c133d156a9afb1dd7d72ef75996a71dc31adae8b77c791f39d05da3c48924",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Cal.com: Delete Schedule",
@@ -41660,7 +41660,7 @@
     ]
   },
   "scheduling/calcom/schedule_get": {
-    "hash": "c6032365349e39f2748039ca4688bac636e7cc76da4405d4c45d0d5fd2b8a715",
+    "hash": "191d5313835701f21e27ae7e14525c44f903ce4041b066c227035f80a4a70ba7",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Cal.com: Get Schedule",
@@ -41811,7 +41811,7 @@
     ]
   },
   "scheduling/calcom/schedule_update": {
-    "hash": "712a08b297877fa8f5049aeda12a15a90894247e294ec55f711dce926d9752b7",
+    "hash": "6a3123a1152a05f98ababe2f69a32cc23e5ee0fa862258b82d1ddf0832c3b087",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Cal.com: Update Schedule",
@@ -41922,7 +41922,7 @@
     ]
   },
   "scheduling/calcom/slot_get_all": {
-    "hash": "0dd8c0e253509084175551f2fc8322ff6bb5e90dbdd6740c5390c34c96699f00",
+    "hash": "21e95dca6e1c3a0407f0e061ad130bd712e699da4317d4bcd8859f2d89174e29",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Cal.com: Get Available Slots",
@@ -42083,7 +42083,7 @@
     ]
   },
   "scheduling/calcom/slot_reserve": {
-    "hash": "0ec03f210c12d413a143f144133861957476f86db9ec207c1dcf4740d8d528ac",
+    "hash": "8c44420538bef1d9b86a754989a83929de5bf5a81324d13dd22e91e8c61b13d2",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Cal.com: Reserve Slot",
@@ -42181,7 +42181,7 @@
     ]
   },
   "scheduling/calcom/team_create": {
-    "hash": "20a51ea2ad8fd89c6fe37028e5f71ccca32180b94d937ccb4ce3044b4eebf1e1",
+    "hash": "5f8d7ab84a82322a87cc558f31a7f2bc18c69b5fbefde6199d53471686129047",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Cal.com: Create Team",
@@ -42292,7 +42292,7 @@
     ]
   },
   "scheduling/calcom/team_delete": {
-    "hash": "9c08abfea9bf69c17dc55a9085351df90e0b9b18b89c822cc22e3be66d4a0167",
+    "hash": "98deccf9b050a31210e8d06e0b418f246de9e0afd3c701f94b97f6b4dade8cad",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Cal.com: Delete Team",
@@ -42354,7 +42354,7 @@
     ]
   },
   "scheduling/calcom/team_get": {
-    "hash": "ad5a5146f02578932bfd77737907c1949156de8afbd79b6d2d2b508594d69256",
+    "hash": "87db5bf8c5434130fe09a43a4007ea3270278e3a858ae0ab62eea82a9229f1ec",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Cal.com: Get Team",
@@ -42526,7 +42526,7 @@
     ]
   },
   "scheduling/calcom/team_update": {
-    "hash": "96c7472f3df46d144f5813f284e7449186aadc57061fb1e9d1fc7d4ad48219bc",
+    "hash": "efbfd405b0e83ab2a9287590b7b5c5f3e5f2130e6ef249a13391017eb4602183",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Cal.com: Update Team",
