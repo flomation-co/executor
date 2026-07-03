@@ -77,6 +77,16 @@ import (
 	databricks_run_job "flomation.app/automate/executor/actions/databricks/run_job"
 	databricks_run_sql "flomation.app/automate/executor/actions/databricks/run_sql"
 	databricks_upload_file "flomation.app/automate/executor/actions/databricks/upload_file"
+	ecommerce_shopify_order_create "flomation.app/automate/executor/actions/ecommerce/shopify/order_create"
+	ecommerce_shopify_order_delete "flomation.app/automate/executor/actions/ecommerce/shopify/order_delete"
+	ecommerce_shopify_order_get "flomation.app/automate/executor/actions/ecommerce/shopify/order_get"
+	ecommerce_shopify_order_get_all "flomation.app/automate/executor/actions/ecommerce/shopify/order_get_all"
+	ecommerce_shopify_order_update "flomation.app/automate/executor/actions/ecommerce/shopify/order_update"
+	ecommerce_shopify_product_create "flomation.app/automate/executor/actions/ecommerce/shopify/product_create"
+	ecommerce_shopify_product_delete "flomation.app/automate/executor/actions/ecommerce/shopify/product_delete"
+	ecommerce_shopify_product_get "flomation.app/automate/executor/actions/ecommerce/shopify/product_get"
+	ecommerce_shopify_product_get_all "flomation.app/automate/executor/actions/ecommerce/shopify/product_get_all"
+	ecommerce_shopify_product_update "flomation.app/automate/executor/actions/ecommerce/shopify/product_update"
 	elevenlabs_list_voices "flomation.app/automate/executor/actions/elevenlabs/list_voices"
 	elevenlabs_speech_to_text "flomation.app/automate/executor/actions/elevenlabs/speech_to_text"
 	elevenlabs_text_to_speech "flomation.app/automate/executor/actions/elevenlabs/text_to_speech"
@@ -408,6 +418,7 @@ import (
 	trigger_qr "flomation.app/automate/executor/actions/trigger/qr"
 	trigger_s3 "flomation.app/automate/executor/actions/trigger/s3"
 	trigger_schedule "flomation.app/automate/executor/actions/trigger/schedule"
+	trigger_shopify_webhook "flomation.app/automate/executor/actions/trigger/shopify_webhook"
 	trigger_slack "flomation.app/automate/executor/actions/trigger/slack"
 	trigger_teams "flomation.app/automate/executor/actions/trigger/teams"
 	trigger_telegram "flomation.app/automate/executor/actions/trigger/telegram"
@@ -514,6 +525,16 @@ var Actions = map[string]core.Action{
 	"databricks/run_job":                    databricks_run_job.Execute,
 	"databricks/run_sql":                    databricks_run_sql.Execute,
 	"databricks/upload_file":                databricks_upload_file.Execute,
+	"ecommerce/shopify/order_create":        ecommerce_shopify_order_create.Execute,
+	"ecommerce/shopify/order_delete":        ecommerce_shopify_order_delete.Execute,
+	"ecommerce/shopify/order_get":           ecommerce_shopify_order_get.Execute,
+	"ecommerce/shopify/order_get_all":       ecommerce_shopify_order_get_all.Execute,
+	"ecommerce/shopify/order_update":        ecommerce_shopify_order_update.Execute,
+	"ecommerce/shopify/product_create":      ecommerce_shopify_product_create.Execute,
+	"ecommerce/shopify/product_delete":      ecommerce_shopify_product_delete.Execute,
+	"ecommerce/shopify/product_get":         ecommerce_shopify_product_get.Execute,
+	"ecommerce/shopify/product_get_all":     ecommerce_shopify_product_get_all.Execute,
+	"ecommerce/shopify/product_update":      ecommerce_shopify_product_update.Execute,
 	"elevenlabs/list_voices":                elevenlabs_list_voices.Execute,
 	"elevenlabs/speech_to_text":             elevenlabs_speech_to_text.Execute,
 	"elevenlabs/text_to_speech":             elevenlabs_text_to_speech.Execute,
@@ -845,6 +866,7 @@ var Actions = map[string]core.Action{
 	"trigger/qr":                            trigger_qr.Execute,
 	"trigger/s3":                            trigger_s3.Execute,
 	"trigger/schedule":                      trigger_schedule.Execute,
+	"trigger/shopify_webhook":               trigger_shopify_webhook.Execute,
 	"trigger/slack":                         trigger_slack.Execute,
 	"trigger/teams":                         trigger_teams.Execute,
 	"trigger/telegram":                      trigger_telegram.Execute,

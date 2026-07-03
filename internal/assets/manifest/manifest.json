@@ -7183,6 +7183,1635 @@
       }
     ]
   },
+  "ecommerce/shopify/order_create": {
+    "hash": "e26c5e53301d5fd1a01a556b0a401fb3a082a7e1c76939d5a9cbfce79b30c418",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Shopify: Create Order",
+    "description": "Create an order in your Shopify store. Provide line items as JSON; set common fields directly or add any other order field via Additional Fields.",
+    "website": "https://www.flomation.co",
+    "icon": "shopify+plus",
+    "date": "02/07/2026",
+    "type": 2,
+    "category": {
+      "name": "E-Commerce",
+      "icon": "cart-shopping",
+      "description": "Online store platforms — orders, products, and customers"
+    },
+    "sub_category": {
+      "name": "Shopify",
+      "icon": "shopify",
+      "description": "Manage orders and products in your Shopify store"
+    },
+    "inputs": [
+      {
+        "name": "shop",
+        "type": "string",
+        "value": null,
+        "label": "Shop Subdomain",
+        "placeholder": "my-store (from my-store.myshopify.com)",
+        "required": true
+      },
+      {
+        "name": "access_token",
+        "type": "secret",
+        "value": null,
+        "label": "Admin API Access Token",
+        "placeholder": "shpat_... — or use Client ID + Secret below"
+      },
+      {
+        "name": "client_id",
+        "type": "string",
+        "value": null,
+        "label": "Client ID",
+        "placeholder": "Dev Dashboard app Client ID (if not using a token)"
+      },
+      {
+        "name": "client_secret",
+        "type": "secret",
+        "value": null,
+        "label": "Client Secret",
+        "placeholder": "shpss_... — minted into a 24h token automatically"
+      },
+      {
+        "name": "line_items",
+        "type": "object",
+        "value": null,
+        "label": "Line Items (JSON)",
+        "placeholder": "[{\"variant_id\":447654529,\"quantity\":1}]",
+        "required": true
+      },
+      {
+        "name": "email",
+        "type": "string",
+        "value": null,
+        "label": "Customer Email",
+        "placeholder": "name@email.com"
+      },
+      {
+        "name": "note",
+        "type": "text",
+        "value": null,
+        "label": "Note",
+        "placeholder": ""
+      },
+      {
+        "name": "tags",
+        "type": "string",
+        "value": null,
+        "label": "Tags",
+        "placeholder": "vip, wholesale (comma-separated)"
+      },
+      {
+        "name": "financial_status",
+        "type": "string",
+        "value": null,
+        "label": "Financial Status",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "Pending",
+            "value": "pending"
+          },
+          {
+            "name": "Authorized",
+            "value": "authorized"
+          },
+          {
+            "name": "Paid",
+            "value": "paid"
+          },
+          {
+            "name": "Partially Paid",
+            "value": "partially_paid"
+          },
+          {
+            "name": "Refunded",
+            "value": "refunded"
+          },
+          {
+            "name": "Partially Refunded",
+            "value": "partially_refunded"
+          },
+          {
+            "name": "Voided",
+            "value": "voided"
+          }
+        ]
+      },
+      {
+        "name": "fulfillment_status",
+        "type": "string",
+        "value": null,
+        "label": "Fulfillment Status",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "Fulfilled",
+            "value": "fulfilled"
+          },
+          {
+            "name": "Partial",
+            "value": "partial"
+          },
+          {
+            "name": "Restocked",
+            "value": "restocked"
+          }
+        ]
+      },
+      {
+        "name": "billing_address",
+        "type": "object",
+        "value": null,
+        "label": "Billing Address (JSON)",
+        "placeholder": "{\"first_name\":\"Jane\",\"last_name\":\"Doe\",\"address1\":\"1 Main St\",\"city\":\"London\",\"country\":\"GB\",\"zip\":\"SW1\"}"
+      },
+      {
+        "name": "shipping_address",
+        "type": "object",
+        "value": null,
+        "label": "Shipping Address (JSON)",
+        "placeholder": "{\"first_name\":\"Jane\",\"last_name\":\"Doe\",\"address1\":\"1 Main St\",\"city\":\"London\",\"country\":\"GB\",\"zip\":\"SW1\"}"
+      },
+      {
+        "name": "discount_codes",
+        "type": "object",
+        "value": null,
+        "label": "Discount Codes (JSON)",
+        "placeholder": "[{\"code\":\"SAVE10\",\"amount\":\"10.0\",\"type\":\"percentage\"}]"
+      },
+      {
+        "name": "send_receipt",
+        "type": "boolean",
+        "value": null,
+        "label": "Send Order Confirmation Email",
+        "placeholder": ""
+      },
+      {
+        "name": "send_fulfillment_receipt",
+        "type": "boolean",
+        "value": null,
+        "label": "Send Shipping Confirmation Email",
+        "placeholder": ""
+      },
+      {
+        "name": "test",
+        "type": "boolean",
+        "value": null,
+        "label": "Test Order",
+        "placeholder": ""
+      },
+      {
+        "name": "additional_fields",
+        "type": "object",
+        "value": null,
+        "label": "Additional Fields (JSON)",
+        "placeholder": "{\"currency\":\"GBP\",\"source_name\":\"web\"}"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Order ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Order",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "ecommerce/shopify/order_delete": {
+    "hash": "655b8bb8ebf0762c60d842f4bd1e019a87fbb6159b8eba35428c9e21413a3bef",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Shopify: Delete Order",
+    "description": "Permanently delete an order from your Shopify store by its ID.",
+    "website": "https://www.flomation.co",
+    "icon": "shopify+trash",
+    "date": "02/07/2026",
+    "type": 2,
+    "category": {
+      "name": "E-Commerce",
+      "icon": "cart-shopping",
+      "description": "Online store platforms — orders, products, and customers"
+    },
+    "sub_category": {
+      "name": "Shopify",
+      "icon": "shopify",
+      "description": "Manage orders and products in your Shopify store"
+    },
+    "inputs": [
+      {
+        "name": "shop",
+        "type": "string",
+        "value": null,
+        "label": "Shop Subdomain",
+        "placeholder": "my-store (from my-store.myshopify.com)",
+        "required": true
+      },
+      {
+        "name": "access_token",
+        "type": "secret",
+        "value": null,
+        "label": "Admin API Access Token",
+        "placeholder": "shpat_... — or use Client ID + Secret below"
+      },
+      {
+        "name": "client_id",
+        "type": "string",
+        "value": null,
+        "label": "Client ID",
+        "placeholder": "Dev Dashboard app Client ID (if not using a token)"
+      },
+      {
+        "name": "client_secret",
+        "type": "secret",
+        "value": null,
+        "label": "Client Secret",
+        "placeholder": "shpss_... — minted into a 24h token automatically"
+      },
+      {
+        "name": "order_id",
+        "type": "string",
+        "value": null,
+        "label": "Order ID",
+        "placeholder": "450789469",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Order ID",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "ecommerce/shopify/order_get": {
+    "hash": "3979f49616c8367910df5de5c393b88a7636dbd5eb93a49992da0ae3f09f1f04",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Shopify: Get Order",
+    "description": "Retrieve a single order from your Shopify store by its ID.",
+    "website": "https://www.flomation.co",
+    "icon": "shopify+search",
+    "date": "02/07/2026",
+    "type": 2,
+    "category": {
+      "name": "E-Commerce",
+      "icon": "cart-shopping",
+      "description": "Online store platforms — orders, products, and customers"
+    },
+    "sub_category": {
+      "name": "Shopify",
+      "icon": "shopify",
+      "description": "Manage orders and products in your Shopify store"
+    },
+    "inputs": [
+      {
+        "name": "shop",
+        "type": "string",
+        "value": null,
+        "label": "Shop Subdomain",
+        "placeholder": "my-store (from my-store.myshopify.com)",
+        "required": true
+      },
+      {
+        "name": "access_token",
+        "type": "secret",
+        "value": null,
+        "label": "Admin API Access Token",
+        "placeholder": "shpat_... — or use Client ID + Secret below"
+      },
+      {
+        "name": "client_id",
+        "type": "string",
+        "value": null,
+        "label": "Client ID",
+        "placeholder": "Dev Dashboard app Client ID (if not using a token)"
+      },
+      {
+        "name": "client_secret",
+        "type": "secret",
+        "value": null,
+        "label": "Client Secret",
+        "placeholder": "shpss_... — minted into a 24h token automatically"
+      },
+      {
+        "name": "order_id",
+        "type": "string",
+        "value": null,
+        "label": "Order ID",
+        "placeholder": "450789469",
+        "required": true
+      },
+      {
+        "name": "fields",
+        "type": "string",
+        "value": null,
+        "label": "Fields",
+        "placeholder": "Comma-separated fields to return (optional)"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Order ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Order",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "ecommerce/shopify/order_get_all": {
+    "hash": "0037dfb65df664c0ed42069b90beeaf969ba82f4931ed1784fe000f938eda1b5",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Shopify: Get Many Orders",
+    "description": "List orders from your Shopify store, with optional filters. Enable Return All to auto-paginate every matching order.",
+    "website": "https://www.flomation.co",
+    "icon": "shopify+list",
+    "date": "02/07/2026",
+    "type": 2,
+    "category": {
+      "name": "E-Commerce",
+      "icon": "cart-shopping",
+      "description": "Online store platforms — orders, products, and customers"
+    },
+    "sub_category": {
+      "name": "Shopify",
+      "icon": "shopify",
+      "description": "Manage orders and products in your Shopify store"
+    },
+    "inputs": [
+      {
+        "name": "shop",
+        "type": "string",
+        "value": null,
+        "label": "Shop Subdomain",
+        "placeholder": "my-store (from my-store.myshopify.com)",
+        "required": true
+      },
+      {
+        "name": "access_token",
+        "type": "secret",
+        "value": null,
+        "label": "Admin API Access Token",
+        "placeholder": "shpat_... — or use Client ID + Secret below"
+      },
+      {
+        "name": "client_id",
+        "type": "string",
+        "value": null,
+        "label": "Client ID",
+        "placeholder": "Dev Dashboard app Client ID (if not using a token)"
+      },
+      {
+        "name": "client_secret",
+        "type": "secret",
+        "value": null,
+        "label": "Client Secret",
+        "placeholder": "shpss_... — minted into a 24h token automatically"
+      },
+      {
+        "name": "return_all",
+        "type": "boolean",
+        "value": null,
+        "label": "Return All (auto-paginate every match)",
+        "placeholder": ""
+      },
+      {
+        "name": "limit",
+        "type": "integer",
+        "value": null,
+        "label": "Limit",
+        "placeholder": "50 per page (max 250); Return All still fetches every match"
+      },
+      {
+        "name": "page_info",
+        "type": "string",
+        "value": null,
+        "label": "Page Info (cursor)",
+        "placeholder": "Next-page cursor from a previous run (ignored when Return All is on)"
+      },
+      {
+        "name": "status",
+        "type": "string",
+        "value": null,
+        "label": "Status",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "Open",
+            "value": "open"
+          },
+          {
+            "name": "Closed",
+            "value": "closed"
+          },
+          {
+            "name": "Cancelled",
+            "value": "cancelled"
+          },
+          {
+            "name": "Any",
+            "value": "any"
+          }
+        ]
+      },
+      {
+        "name": "financial_status",
+        "type": "string",
+        "value": null,
+        "label": "Financial Status",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "Any",
+            "value": "any"
+          },
+          {
+            "name": "Authorized",
+            "value": "authorized"
+          },
+          {
+            "name": "Paid",
+            "value": "paid"
+          },
+          {
+            "name": "Partially Paid",
+            "value": "partially_paid"
+          },
+          {
+            "name": "Partially Refunded",
+            "value": "partially_refunded"
+          },
+          {
+            "name": "Pending",
+            "value": "pending"
+          },
+          {
+            "name": "Refunded",
+            "value": "refunded"
+          },
+          {
+            "name": "Unpaid",
+            "value": "unpaid"
+          },
+          {
+            "name": "Voided",
+            "value": "voided"
+          }
+        ]
+      },
+      {
+        "name": "fulfillment_status",
+        "type": "string",
+        "value": null,
+        "label": "Fulfillment Status",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "Any",
+            "value": "any"
+          },
+          {
+            "name": "Shipped",
+            "value": "shipped"
+          },
+          {
+            "name": "Partial",
+            "value": "partial"
+          },
+          {
+            "name": "Unshipped",
+            "value": "unshipped"
+          },
+          {
+            "name": "Unfulfilled",
+            "value": "unfulfilled"
+          }
+        ]
+      },
+      {
+        "name": "ids",
+        "type": "string",
+        "value": null,
+        "label": "IDs",
+        "placeholder": "Comma-separated order IDs"
+      },
+      {
+        "name": "since_id",
+        "type": "string",
+        "value": null,
+        "label": "Since ID",
+        "placeholder": "Return orders after this ID"
+      },
+      {
+        "name": "created_at_min",
+        "type": "datetime",
+        "value": null,
+        "label": "Created After",
+        "placeholder": ""
+      },
+      {
+        "name": "created_at_max",
+        "type": "datetime",
+        "value": null,
+        "label": "Created Before",
+        "placeholder": ""
+      },
+      {
+        "name": "updated_at_min",
+        "type": "datetime",
+        "value": null,
+        "label": "Updated After",
+        "placeholder": ""
+      },
+      {
+        "name": "updated_at_max",
+        "type": "datetime",
+        "value": null,
+        "label": "Updated Before",
+        "placeholder": ""
+      },
+      {
+        "name": "fields",
+        "type": "string",
+        "value": null,
+        "label": "Fields",
+        "placeholder": "Comma-separated fields to return (optional)"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "results",
+        "type": "object",
+        "value": null,
+        "label": "Orders",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Count",
+        "placeholder": ""
+      },
+      {
+        "name": "next_page_info",
+        "type": "string",
+        "value": null,
+        "label": "Next Page Info",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Raw Response",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "ecommerce/shopify/order_update": {
+    "hash": "a67b55db5074737093b96a4c98bc8124b10d5b998b0dc6e25d92805ac0bbf75a",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Shopify: Update Order",
+    "description": "Update an existing order in your Shopify store. Only the fields you set are changed.",
+    "website": "https://www.flomation.co",
+    "icon": "shopify+pencil",
+    "date": "02/07/2026",
+    "type": 2,
+    "category": {
+      "name": "E-Commerce",
+      "icon": "cart-shopping",
+      "description": "Online store platforms — orders, products, and customers"
+    },
+    "sub_category": {
+      "name": "Shopify",
+      "icon": "shopify",
+      "description": "Manage orders and products in your Shopify store"
+    },
+    "inputs": [
+      {
+        "name": "shop",
+        "type": "string",
+        "value": null,
+        "label": "Shop Subdomain",
+        "placeholder": "my-store (from my-store.myshopify.com)",
+        "required": true
+      },
+      {
+        "name": "access_token",
+        "type": "secret",
+        "value": null,
+        "label": "Admin API Access Token",
+        "placeholder": "shpat_... — or use Client ID + Secret below"
+      },
+      {
+        "name": "client_id",
+        "type": "string",
+        "value": null,
+        "label": "Client ID",
+        "placeholder": "Dev Dashboard app Client ID (if not using a token)"
+      },
+      {
+        "name": "client_secret",
+        "type": "secret",
+        "value": null,
+        "label": "Client Secret",
+        "placeholder": "shpss_... — minted into a 24h token automatically"
+      },
+      {
+        "name": "order_id",
+        "type": "string",
+        "value": null,
+        "label": "Order ID",
+        "placeholder": "450789469",
+        "required": true
+      },
+      {
+        "name": "email",
+        "type": "string",
+        "value": null,
+        "label": "Customer Email",
+        "placeholder": "name@email.com"
+      },
+      {
+        "name": "note",
+        "type": "text",
+        "value": null,
+        "label": "Note",
+        "placeholder": ""
+      },
+      {
+        "name": "tags",
+        "type": "string",
+        "value": null,
+        "label": "Tags",
+        "placeholder": "vip, wholesale (comma-separated)"
+      },
+      {
+        "name": "shipping_address",
+        "type": "object",
+        "value": null,
+        "label": "Shipping Address (JSON)",
+        "placeholder": "{\"address1\":\"1 Main St\",\"city\":\"London\",\"country\":\"GB\",\"zip\":\"SW1\"}"
+      },
+      {
+        "name": "additional_fields",
+        "type": "object",
+        "value": null,
+        "label": "Additional Fields (JSON)",
+        "placeholder": "{\"buyer_accepts_marketing\":true}"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Order ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Order",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "ecommerce/shopify/product_create": {
+    "hash": "dc664488820c96148c7524ecf72cd4c8c01ef2ede423fcdb9ba8af1e1a30b11c",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Shopify: Create Product",
+    "description": "Create a product in your Shopify store. Set common fields directly; supply variants, images, and options as JSON, or any other field via Additional Fields.",
+    "website": "https://www.flomation.co",
+    "icon": "shopify+plus",
+    "date": "02/07/2026",
+    "type": 2,
+    "category": {
+      "name": "E-Commerce",
+      "icon": "cart-shopping",
+      "description": "Online store platforms — orders, products, and customers"
+    },
+    "sub_category": {
+      "name": "Shopify",
+      "icon": "shopify",
+      "description": "Manage orders and products in your Shopify store"
+    },
+    "inputs": [
+      {
+        "name": "shop",
+        "type": "string",
+        "value": null,
+        "label": "Shop Subdomain",
+        "placeholder": "my-store (from my-store.myshopify.com)",
+        "required": true
+      },
+      {
+        "name": "access_token",
+        "type": "secret",
+        "value": null,
+        "label": "Admin API Access Token",
+        "placeholder": "shpat_... — or use Client ID + Secret below"
+      },
+      {
+        "name": "client_id",
+        "type": "string",
+        "value": null,
+        "label": "Client ID",
+        "placeholder": "Dev Dashboard app Client ID (if not using a token)"
+      },
+      {
+        "name": "client_secret",
+        "type": "secret",
+        "value": null,
+        "label": "Client Secret",
+        "placeholder": "shpss_... — minted into a 24h token automatically"
+      },
+      {
+        "name": "title",
+        "type": "string",
+        "value": null,
+        "label": "Title",
+        "placeholder": "Burton Custom Freestyle 151",
+        "required": true
+      },
+      {
+        "name": "price",
+        "type": "string",
+        "value": null,
+        "label": "Price",
+        "placeholder": "19.99 (sets the default variant's price)"
+      },
+      {
+        "name": "sku",
+        "type": "string",
+        "value": null,
+        "label": "SKU",
+        "placeholder": "SB-001"
+      },
+      {
+        "name": "body_html",
+        "type": "text",
+        "value": null,
+        "label": "Description (HTML)",
+        "placeholder": "\u003cstrong\u003eGreat snowboard!\u003c/strong\u003e"
+      },
+      {
+        "name": "vendor",
+        "type": "string",
+        "value": null,
+        "label": "Vendor",
+        "placeholder": "Burton"
+      },
+      {
+        "name": "product_type",
+        "type": "string",
+        "value": null,
+        "label": "Product Type",
+        "placeholder": "Snowboard"
+      },
+      {
+        "name": "tags",
+        "type": "string",
+        "value": null,
+        "label": "Tags",
+        "placeholder": "winter, sale (comma-separated)"
+      },
+      {
+        "name": "status",
+        "type": "string",
+        "value": null,
+        "label": "Status",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "Active",
+            "value": "active"
+          },
+          {
+            "name": "Draft",
+            "value": "draft"
+          },
+          {
+            "name": "Archived",
+            "value": "archived"
+          }
+        ]
+      },
+      {
+        "name": "handle",
+        "type": "string",
+        "value": null,
+        "label": "Handle",
+        "placeholder": "burton-custom (auto-generated from title if blank)"
+      },
+      {
+        "name": "variants",
+        "type": "object",
+        "value": null,
+        "label": "Variants (JSON)",
+        "placeholder": "[{\"option1\":\"Small\",\"price\":\"19.99\",\"sku\":\"SB-S\"}]"
+      },
+      {
+        "name": "options",
+        "type": "object",
+        "value": null,
+        "label": "Options (JSON)",
+        "placeholder": "[{\"name\":\"Size\",\"values\":[\"Small\",\"Medium\"]}]"
+      },
+      {
+        "name": "images",
+        "type": "object",
+        "value": null,
+        "label": "Images (JSON)",
+        "placeholder": "[{\"src\":\"https://example.com/img.jpg\"}]"
+      },
+      {
+        "name": "additional_fields",
+        "type": "object",
+        "value": null,
+        "label": "Additional Fields (JSON)",
+        "placeholder": "{\"template_suffix\":\"special\"}"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Product ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Product",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "ecommerce/shopify/product_delete": {
+    "hash": "2c194b2a8fabc6cc61e665cdfbaeb981e1361f229b6c0d2857fb1abdadb5f35f",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Shopify: Delete Product",
+    "description": "Permanently delete a product from your Shopify store by its ID.",
+    "website": "https://www.flomation.co",
+    "icon": "shopify+trash",
+    "date": "02/07/2026",
+    "type": 2,
+    "category": {
+      "name": "E-Commerce",
+      "icon": "cart-shopping",
+      "description": "Online store platforms — orders, products, and customers"
+    },
+    "sub_category": {
+      "name": "Shopify",
+      "icon": "shopify",
+      "description": "Manage orders and products in your Shopify store"
+    },
+    "inputs": [
+      {
+        "name": "shop",
+        "type": "string",
+        "value": null,
+        "label": "Shop Subdomain",
+        "placeholder": "my-store (from my-store.myshopify.com)",
+        "required": true
+      },
+      {
+        "name": "access_token",
+        "type": "secret",
+        "value": null,
+        "label": "Admin API Access Token",
+        "placeholder": "shpat_... — or use Client ID + Secret below"
+      },
+      {
+        "name": "client_id",
+        "type": "string",
+        "value": null,
+        "label": "Client ID",
+        "placeholder": "Dev Dashboard app Client ID (if not using a token)"
+      },
+      {
+        "name": "client_secret",
+        "type": "secret",
+        "value": null,
+        "label": "Client Secret",
+        "placeholder": "shpss_... — minted into a 24h token automatically"
+      },
+      {
+        "name": "product_id",
+        "type": "string",
+        "value": null,
+        "label": "Product ID",
+        "placeholder": "632910392",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Product ID",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "ecommerce/shopify/product_get": {
+    "hash": "f54c8aff25633f00f8d08c73903db05df54329c0d73f51c81b168e9b1316658e",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Shopify: Get Product",
+    "description": "Retrieve a single product from your Shopify store by its ID.",
+    "website": "https://www.flomation.co",
+    "icon": "shopify+search",
+    "date": "02/07/2026",
+    "type": 2,
+    "category": {
+      "name": "E-Commerce",
+      "icon": "cart-shopping",
+      "description": "Online store platforms — orders, products, and customers"
+    },
+    "sub_category": {
+      "name": "Shopify",
+      "icon": "shopify",
+      "description": "Manage orders and products in your Shopify store"
+    },
+    "inputs": [
+      {
+        "name": "shop",
+        "type": "string",
+        "value": null,
+        "label": "Shop Subdomain",
+        "placeholder": "my-store (from my-store.myshopify.com)",
+        "required": true
+      },
+      {
+        "name": "access_token",
+        "type": "secret",
+        "value": null,
+        "label": "Admin API Access Token",
+        "placeholder": "shpat_... — or use Client ID + Secret below"
+      },
+      {
+        "name": "client_id",
+        "type": "string",
+        "value": null,
+        "label": "Client ID",
+        "placeholder": "Dev Dashboard app Client ID (if not using a token)"
+      },
+      {
+        "name": "client_secret",
+        "type": "secret",
+        "value": null,
+        "label": "Client Secret",
+        "placeholder": "shpss_... — minted into a 24h token automatically"
+      },
+      {
+        "name": "product_id",
+        "type": "string",
+        "value": null,
+        "label": "Product ID",
+        "placeholder": "632910392",
+        "required": true
+      },
+      {
+        "name": "fields",
+        "type": "string",
+        "value": null,
+        "label": "Fields",
+        "placeholder": "Comma-separated fields to return (optional)"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Product ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Product",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "ecommerce/shopify/product_get_all": {
+    "hash": "7427338f4f23d2080a7a874c4ad8877fe9b62c07cb925d46c22effbf5b37951f",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Shopify: Get Many Products",
+    "description": "List products from your Shopify store, with optional filters. Enable Return All to auto-paginate every matching product.",
+    "website": "https://www.flomation.co",
+    "icon": "shopify+list",
+    "date": "02/07/2026",
+    "type": 2,
+    "category": {
+      "name": "E-Commerce",
+      "icon": "cart-shopping",
+      "description": "Online store platforms — orders, products, and customers"
+    },
+    "sub_category": {
+      "name": "Shopify",
+      "icon": "shopify",
+      "description": "Manage orders and products in your Shopify store"
+    },
+    "inputs": [
+      {
+        "name": "shop",
+        "type": "string",
+        "value": null,
+        "label": "Shop Subdomain",
+        "placeholder": "my-store (from my-store.myshopify.com)",
+        "required": true
+      },
+      {
+        "name": "access_token",
+        "type": "secret",
+        "value": null,
+        "label": "Admin API Access Token",
+        "placeholder": "shpat_... — or use Client ID + Secret below"
+      },
+      {
+        "name": "client_id",
+        "type": "string",
+        "value": null,
+        "label": "Client ID",
+        "placeholder": "Dev Dashboard app Client ID (if not using a token)"
+      },
+      {
+        "name": "client_secret",
+        "type": "secret",
+        "value": null,
+        "label": "Client Secret",
+        "placeholder": "shpss_... — minted into a 24h token automatically"
+      },
+      {
+        "name": "return_all",
+        "type": "boolean",
+        "value": null,
+        "label": "Return All (auto-paginate every match)",
+        "placeholder": ""
+      },
+      {
+        "name": "limit",
+        "type": "integer",
+        "value": null,
+        "label": "Limit",
+        "placeholder": "50 per page (max 250); Return All still fetches every match"
+      },
+      {
+        "name": "page_info",
+        "type": "string",
+        "value": null,
+        "label": "Page Info (cursor)",
+        "placeholder": "Next-page cursor from a previous run (ignored when Return All is on)"
+      },
+      {
+        "name": "title",
+        "type": "string",
+        "value": null,
+        "label": "Title",
+        "placeholder": ""
+      },
+      {
+        "name": "vendor",
+        "type": "string",
+        "value": null,
+        "label": "Vendor",
+        "placeholder": ""
+      },
+      {
+        "name": "product_type",
+        "type": "string",
+        "value": null,
+        "label": "Product Type",
+        "placeholder": ""
+      },
+      {
+        "name": "handle",
+        "type": "string",
+        "value": null,
+        "label": "Handle",
+        "placeholder": ""
+      },
+      {
+        "name": "collection_id",
+        "type": "string",
+        "value": null,
+        "label": "Collection ID",
+        "placeholder": ""
+      },
+      {
+        "name": "ids",
+        "type": "string",
+        "value": null,
+        "label": "IDs",
+        "placeholder": "Comma-separated product IDs"
+      },
+      {
+        "name": "since_id",
+        "type": "string",
+        "value": null,
+        "label": "Since ID",
+        "placeholder": "Return products after this ID"
+      },
+      {
+        "name": "published_status",
+        "type": "string",
+        "value": null,
+        "label": "Published Status",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "Any",
+            "value": "any"
+          },
+          {
+            "name": "Published",
+            "value": "published"
+          },
+          {
+            "name": "Unpublished",
+            "value": "unpublished"
+          }
+        ]
+      },
+      {
+        "name": "created_at_min",
+        "type": "datetime",
+        "value": null,
+        "label": "Created After",
+        "placeholder": ""
+      },
+      {
+        "name": "created_at_max",
+        "type": "datetime",
+        "value": null,
+        "label": "Created Before",
+        "placeholder": ""
+      },
+      {
+        "name": "updated_at_min",
+        "type": "datetime",
+        "value": null,
+        "label": "Updated After",
+        "placeholder": ""
+      },
+      {
+        "name": "updated_at_max",
+        "type": "datetime",
+        "value": null,
+        "label": "Updated Before",
+        "placeholder": ""
+      },
+      {
+        "name": "fields",
+        "type": "string",
+        "value": null,
+        "label": "Fields",
+        "placeholder": "Comma-separated fields to return (optional)"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "results",
+        "type": "object",
+        "value": null,
+        "label": "Products",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Count",
+        "placeholder": ""
+      },
+      {
+        "name": "next_page_info",
+        "type": "string",
+        "value": null,
+        "label": "Next Page Info",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Raw Response",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "ecommerce/shopify/product_update": {
+    "hash": "781912b83b1c739441ec5a9238d2defca3d71b368203a78c85f9121ef8774e53",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Shopify: Update Product",
+    "description": "Update an existing product in your Shopify store. Only the fields you set are changed.",
+    "website": "https://www.flomation.co",
+    "icon": "shopify+pencil",
+    "date": "02/07/2026",
+    "type": 2,
+    "category": {
+      "name": "E-Commerce",
+      "icon": "cart-shopping",
+      "description": "Online store platforms — orders, products, and customers"
+    },
+    "sub_category": {
+      "name": "Shopify",
+      "icon": "shopify",
+      "description": "Manage orders and products in your Shopify store"
+    },
+    "inputs": [
+      {
+        "name": "shop",
+        "type": "string",
+        "value": null,
+        "label": "Shop Subdomain",
+        "placeholder": "my-store (from my-store.myshopify.com)",
+        "required": true
+      },
+      {
+        "name": "access_token",
+        "type": "secret",
+        "value": null,
+        "label": "Admin API Access Token",
+        "placeholder": "shpat_... — or use Client ID + Secret below"
+      },
+      {
+        "name": "client_id",
+        "type": "string",
+        "value": null,
+        "label": "Client ID",
+        "placeholder": "Dev Dashboard app Client ID (if not using a token)"
+      },
+      {
+        "name": "client_secret",
+        "type": "secret",
+        "value": null,
+        "label": "Client Secret",
+        "placeholder": "shpss_... — minted into a 24h token automatically"
+      },
+      {
+        "name": "product_id",
+        "type": "string",
+        "value": null,
+        "label": "Product ID",
+        "placeholder": "632910392",
+        "required": true
+      },
+      {
+        "name": "title",
+        "type": "string",
+        "value": null,
+        "label": "Title",
+        "placeholder": ""
+      },
+      {
+        "name": "body_html",
+        "type": "text",
+        "value": null,
+        "label": "Description (HTML)",
+        "placeholder": ""
+      },
+      {
+        "name": "vendor",
+        "type": "string",
+        "value": null,
+        "label": "Vendor",
+        "placeholder": ""
+      },
+      {
+        "name": "product_type",
+        "type": "string",
+        "value": null,
+        "label": "Product Type",
+        "placeholder": ""
+      },
+      {
+        "name": "tags",
+        "type": "string",
+        "value": null,
+        "label": "Tags",
+        "placeholder": "winter, sale (comma-separated)"
+      },
+      {
+        "name": "status",
+        "type": "string",
+        "value": null,
+        "label": "Status",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "Active",
+            "value": "active"
+          },
+          {
+            "name": "Draft",
+            "value": "draft"
+          },
+          {
+            "name": "Archived",
+            "value": "archived"
+          }
+        ]
+      },
+      {
+        "name": "handle",
+        "type": "string",
+        "value": null,
+        "label": "Handle",
+        "placeholder": ""
+      },
+      {
+        "name": "variants",
+        "type": "object",
+        "value": null,
+        "label": "Variants (JSON)",
+        "placeholder": "[{\"id\":808950810,\"price\":\"24.99\"}]"
+      },
+      {
+        "name": "options",
+        "type": "object",
+        "value": null,
+        "label": "Options (JSON)",
+        "placeholder": ""
+      },
+      {
+        "name": "images",
+        "type": "object",
+        "value": null,
+        "label": "Images (JSON)",
+        "placeholder": "[{\"src\":\"https://example.com/img.jpg\"}]"
+      },
+      {
+        "name": "additional_fields",
+        "type": "object",
+        "value": null,
+        "label": "Additional Fields (JSON)",
+        "placeholder": ""
+      }
+    ],
+    "outputs": [
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Product ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Product",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
   "elevenlabs/list_voices": {
     "hash": "1406ba75e40064caea35303c2de1b8ab6f8ac0a86810e7dc7058d5b1ca3c2b55",
     "author": "Andy Esser",
@@ -41369,6 +42998,97 @@
         "type": "string",
         "value": null,
         "label": "Schedule Mode",
+        "placeholder": ""
+      }
+    ]
+  },
+  "trigger/shopify_webhook": {
+    "hash": "69ba416afe591a446f2a6255bdae1160691d1a56e69d1cfe191ad1c9c2358729",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Shopify Webhook Trigger",
+    "description": "Triggers a flow when a Shopify webhook event is received (orders, products, ...). Verify with your app's API secret key.",
+    "website": "https://www.flomation.co",
+    "icon": "shopify",
+    "date": "02/07/2026",
+    "type": 1,
+    "category": {
+      "name": "Triggers",
+      "icon": "bolt-lightning",
+      "description": "Start a Flow"
+    },
+    "inputs": [
+      {
+        "name": "app_secret",
+        "type": "secret",
+        "value": null,
+        "label": "App Secret Key",
+        "placeholder": "Shopify app API secret key (for X-Shopify-Hmac-Sha256 validation)",
+        "required": true
+      },
+      {
+        "name": "event_filter",
+        "type": "string",
+        "value": null,
+        "label": "Topic Filter",
+        "placeholder": "Comma-separated topics: orders/create,orders/updated,products/update"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "content",
+        "type": "string",
+        "value": null,
+        "label": "Event Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "topic",
+        "type": "string",
+        "value": null,
+        "label": "Topic",
+        "placeholder": ""
+      },
+      {
+        "name": "shop_domain",
+        "type": "string",
+        "value": null,
+        "label": "Shop Domain",
+        "placeholder": ""
+      },
+      {
+        "name": "api_version",
+        "type": "string",
+        "value": null,
+        "label": "API Version",
+        "placeholder": ""
+      },
+      {
+        "name": "webhook_id",
+        "type": "string",
+        "value": null,
+        "label": "Webhook ID",
+        "placeholder": ""
+      },
+      {
+        "name": "resource_id",
+        "type": "string",
+        "value": null,
+        "label": "Resource ID",
+        "placeholder": ""
+      },
+      {
+        "name": "body",
+        "type": "string",
+        "value": null,
+        "label": "Raw JSON Body",
+        "placeholder": ""
+      },
+      {
+        "name": "triggered_at",
+        "type": "string",
+        "value": null,
+        "label": "Triggered At",
         "placeholder": ""
       }
     ]
