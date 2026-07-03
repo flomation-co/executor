@@ -39716,6 +39716,1915 @@
       }
     ]
   },
+  "scheduling/acuity/appointment_cancel": {
+    "hash": "6dde627f25272f04109da6dc2f1b7a3ad8006f99b26d247580b82e6d68fe389d",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Acuity: Cancel Appointment",
+    "description": "Cancel an Acuity appointment, optionally with a note.",
+    "website": "https://www.flomation.co",
+    "icon": "acuity+ban",
+    "date": "04/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Scheduling",
+      "icon": "calendar",
+      "description": "Meeting scheduling and booking platforms"
+    },
+    "sub_category": {
+      "name": "Acuity",
+      "icon": "acuity",
+      "description": "Manage Acuity Scheduling appointments, availability, clients, appointment types and calendars"
+    },
+    "inputs": [
+      {
+        "name": "user_id",
+        "type": "string",
+        "value": null,
+        "label": "Acuity User ID",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "Acuity API Key",
+        "placeholder": "Acuity API key (Basic-auth password)",
+        "required": true
+      },
+      {
+        "name": "appointment_id",
+        "type": "integer",
+        "value": null,
+        "label": "Appointment ID",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "cancel_note",
+        "type": "text",
+        "value": null,
+        "label": "Cancellation Note",
+        "placeholder": "Reason shared internally (optional)"
+      },
+      {
+        "name": "admin",
+        "type": "boolean",
+        "value": null,
+        "label": "Admin Cancel",
+        "placeholder": "Bypass cancellation restrictions"
+      },
+      {
+        "name": "no_email",
+        "type": "boolean",
+        "value": null,
+        "label": "Suppress Emails",
+        "placeholder": ""
+      }
+    ],
+    "outputs": [
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Appointment ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Appointment",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "scheduling/acuity/appointment_create": {
+    "hash": "9740ea1251ddecfc7f89c04a58f05d3c90df55a5d512ce236c02eadfd9ff2fab",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Acuity: Book Appointment",
+    "description": "Book a new Acuity appointment for a client at a given date and time.",
+    "website": "https://www.flomation.co",
+    "icon": "acuity+plus",
+    "date": "04/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Scheduling",
+      "icon": "calendar",
+      "description": "Meeting scheduling and booking platforms"
+    },
+    "sub_category": {
+      "name": "Acuity",
+      "icon": "acuity",
+      "description": "Manage Acuity Scheduling appointments, availability, clients, appointment types and calendars"
+    },
+    "inputs": [
+      {
+        "name": "user_id",
+        "type": "string",
+        "value": null,
+        "label": "Acuity User ID",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "Acuity API Key",
+        "placeholder": "Acuity API key (Basic-auth password)",
+        "required": true
+      },
+      {
+        "name": "appointment_type_id",
+        "type": "integer",
+        "value": null,
+        "label": "Appointment Type ID",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "datetime",
+        "type": "string",
+        "value": null,
+        "label": "Date \u0026 Time",
+        "placeholder": "2026-07-10T09:00:00-0700 (ISO 8601)",
+        "required": true
+      },
+      {
+        "name": "first_name",
+        "type": "string",
+        "value": null,
+        "label": "First Name",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "last_name",
+        "type": "string",
+        "value": null,
+        "label": "Last Name",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "email",
+        "type": "string",
+        "value": null,
+        "label": "Email",
+        "placeholder": "client@example.com",
+        "required": true
+      },
+      {
+        "name": "calendar_id",
+        "type": "integer",
+        "value": null,
+        "label": "Calendar ID",
+        "placeholder": "Assign to a calendar (optional)"
+      },
+      {
+        "name": "phone",
+        "type": "string",
+        "value": null,
+        "label": "Phone",
+        "placeholder": "Client phone (optional)"
+      },
+      {
+        "name": "timezone",
+        "type": "string",
+        "value": null,
+        "label": "Time Zone",
+        "placeholder": "America/New_York (optional)"
+      },
+      {
+        "name": "certificate",
+        "type": "string",
+        "value": null,
+        "label": "Certificate",
+        "placeholder": "Package/coupon code (optional)"
+      },
+      {
+        "name": "notes",
+        "type": "text",
+        "value": null,
+        "label": "Notes",
+        "placeholder": "Appointment notes (optional)"
+      },
+      {
+        "name": "fields_json",
+        "type": "object",
+        "value": null,
+        "label": "Intake Form Fields (JSON array, advanced)",
+        "placeholder": "[{\"id\":1,\"value\":\"answer\"}]"
+      },
+      {
+        "name": "admin",
+        "type": "boolean",
+        "value": null,
+        "label": "Admin Booking",
+        "placeholder": "Bypass availability/booking limits"
+      },
+      {
+        "name": "no_email",
+        "type": "boolean",
+        "value": null,
+        "label": "Suppress Emails",
+        "placeholder": "Do not send confirmation emails"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Appointment ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Appointment",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "scheduling/acuity/appointment_get": {
+    "hash": "5429c2482253b0a6b1fd628599efdea058574460a6573aeb2c91a22a7bed5f5b",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Acuity: Get Appointment",
+    "description": "Retrieve a single Acuity appointment by its ID.",
+    "website": "https://www.flomation.co",
+    "icon": "acuity+magnifying-glass",
+    "date": "04/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Scheduling",
+      "icon": "calendar",
+      "description": "Meeting scheduling and booking platforms"
+    },
+    "sub_category": {
+      "name": "Acuity",
+      "icon": "acuity",
+      "description": "Manage Acuity Scheduling appointments, availability, clients, appointment types and calendars"
+    },
+    "inputs": [
+      {
+        "name": "user_id",
+        "type": "string",
+        "value": null,
+        "label": "Acuity User ID",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "Acuity API Key",
+        "placeholder": "Acuity API key (Basic-auth password)",
+        "required": true
+      },
+      {
+        "name": "appointment_id",
+        "type": "integer",
+        "value": null,
+        "label": "Appointment ID",
+        "placeholder": "",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Appointment ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Appointment",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "scheduling/acuity/appointment_get_all": {
+    "hash": "54fa6cd63f227656562d87ffc2f877d1f36621dad3b103143acba3cf8ee4f5f5",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Acuity: Get Many Appointments",
+    "description": "List Acuity appointments, filtered by date range, calendar, type, client details or cancellation state.",
+    "website": "https://www.flomation.co",
+    "icon": "acuity+list",
+    "date": "04/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Scheduling",
+      "icon": "calendar",
+      "description": "Meeting scheduling and booking platforms"
+    },
+    "sub_category": {
+      "name": "Acuity",
+      "icon": "acuity",
+      "description": "Manage Acuity Scheduling appointments, availability, clients, appointment types and calendars"
+    },
+    "inputs": [
+      {
+        "name": "user_id",
+        "type": "string",
+        "value": null,
+        "label": "Acuity User ID",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "Acuity API Key",
+        "placeholder": "Acuity API key (Basic-auth password)",
+        "required": true
+      },
+      {
+        "name": "min_date",
+        "type": "string",
+        "value": null,
+        "label": "Start Date",
+        "placeholder": "2026-07-01 (optional)"
+      },
+      {
+        "name": "max_date",
+        "type": "string",
+        "value": null,
+        "label": "End Date",
+        "placeholder": "2026-07-31 (optional)"
+      },
+      {
+        "name": "calendar_id",
+        "type": "integer",
+        "value": null,
+        "label": "Calendar ID",
+        "placeholder": "Filter to a calendar (optional)"
+      },
+      {
+        "name": "appointment_type_id",
+        "type": "integer",
+        "value": null,
+        "label": "Appointment Type ID",
+        "placeholder": "Filter to a type (optional)"
+      },
+      {
+        "name": "first_name",
+        "type": "string",
+        "value": null,
+        "label": "First Name",
+        "placeholder": "Filter by client first name (optional)"
+      },
+      {
+        "name": "last_name",
+        "type": "string",
+        "value": null,
+        "label": "Last Name",
+        "placeholder": "Filter by client last name (optional)"
+      },
+      {
+        "name": "email",
+        "type": "string",
+        "value": null,
+        "label": "Email",
+        "placeholder": "Filter by client email (optional)"
+      },
+      {
+        "name": "phone",
+        "type": "string",
+        "value": null,
+        "label": "Phone",
+        "placeholder": "Filter by client phone (optional)"
+      },
+      {
+        "name": "canceled",
+        "type": "boolean",
+        "value": null,
+        "label": "Include Canceled",
+        "placeholder": "Return canceled appointments"
+      },
+      {
+        "name": "direction",
+        "type": "string",
+        "value": null,
+        "label": "Sort Direction",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "Newest First",
+            "value": "DESC"
+          },
+          {
+            "name": "Oldest First",
+            "value": "ASC"
+          }
+        ]
+      },
+      {
+        "name": "max",
+        "type": "integer",
+        "value": null,
+        "label": "Max Results",
+        "placeholder": "1-1000, default 100"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "results",
+        "type": "object",
+        "value": null,
+        "label": "Appointments",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Count",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "scheduling/acuity/appointment_payments": {
+    "hash": "006c233975aa038cf53bf585aada559bd04c776d756a1ddb349949f9be1d21ca",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Acuity: Get Appointment Payments",
+    "description": "List the payment transactions recorded against an Acuity appointment.",
+    "website": "https://www.flomation.co",
+    "icon": "acuity+list",
+    "date": "04/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Scheduling",
+      "icon": "calendar",
+      "description": "Meeting scheduling and booking platforms"
+    },
+    "sub_category": {
+      "name": "Acuity",
+      "icon": "acuity",
+      "description": "Manage Acuity Scheduling appointments, availability, clients, appointment types and calendars"
+    },
+    "inputs": [
+      {
+        "name": "user_id",
+        "type": "string",
+        "value": null,
+        "label": "Acuity User ID",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "Acuity API Key",
+        "placeholder": "Acuity API key (Basic-auth password)",
+        "required": true
+      },
+      {
+        "name": "appointment_id",
+        "type": "integer",
+        "value": null,
+        "label": "Appointment ID",
+        "placeholder": "",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "results",
+        "type": "object",
+        "value": null,
+        "label": "Payments",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Count",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "scheduling/acuity/appointment_reschedule": {
+    "hash": "36f23064d8c09fb765c9ea58e2b75c66324b02d28e2cdf0aa96111cf7ad6adbe",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Acuity: Reschedule Appointment",
+    "description": "Move an Acuity appointment to a new date and time (and optionally a different calendar).",
+    "website": "https://www.flomation.co",
+    "icon": "acuity+rotate-right",
+    "date": "04/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Scheduling",
+      "icon": "calendar",
+      "description": "Meeting scheduling and booking platforms"
+    },
+    "sub_category": {
+      "name": "Acuity",
+      "icon": "acuity",
+      "description": "Manage Acuity Scheduling appointments, availability, clients, appointment types and calendars"
+    },
+    "inputs": [
+      {
+        "name": "user_id",
+        "type": "string",
+        "value": null,
+        "label": "Acuity User ID",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "Acuity API Key",
+        "placeholder": "Acuity API key (Basic-auth password)",
+        "required": true
+      },
+      {
+        "name": "appointment_id",
+        "type": "integer",
+        "value": null,
+        "label": "Appointment ID",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "datetime",
+        "type": "string",
+        "value": null,
+        "label": "New Date \u0026 Time",
+        "placeholder": "2026-07-11T09:00:00-0700 (ISO 8601)",
+        "required": true
+      },
+      {
+        "name": "calendar_id",
+        "type": "integer",
+        "value": null,
+        "label": "Calendar ID",
+        "placeholder": "Move to a different calendar (optional)"
+      },
+      {
+        "name": "admin",
+        "type": "boolean",
+        "value": null,
+        "label": "Admin Reschedule",
+        "placeholder": "Bypass availability checks"
+      },
+      {
+        "name": "no_email",
+        "type": "boolean",
+        "value": null,
+        "label": "Suppress Emails",
+        "placeholder": ""
+      }
+    ],
+    "outputs": [
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Appointment ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Appointment",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "scheduling/acuity/appointment_type_get_all": {
+    "hash": "8b2be4718e2d843e0bffedd646b52aaa374cdea5495ba0605497d85ee71fc6fd",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Acuity: Get Many Appointment Types",
+    "description": "List your Acuity appointment types (the bookable services and classes).",
+    "website": "https://www.flomation.co",
+    "icon": "acuity+list",
+    "date": "04/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Scheduling",
+      "icon": "calendar",
+      "description": "Meeting scheduling and booking platforms"
+    },
+    "sub_category": {
+      "name": "Acuity",
+      "icon": "acuity",
+      "description": "Manage Acuity Scheduling appointments, availability, clients, appointment types and calendars"
+    },
+    "inputs": [
+      {
+        "name": "user_id",
+        "type": "string",
+        "value": null,
+        "label": "Acuity User ID",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "Acuity API Key",
+        "placeholder": "Acuity API key (Basic-auth password)",
+        "required": true
+      },
+      {
+        "name": "include_deleted",
+        "type": "boolean",
+        "value": null,
+        "label": "Include Deleted",
+        "placeholder": "Also return deleted appointment types"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "results",
+        "type": "object",
+        "value": null,
+        "label": "Appointment Types",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Count",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "scheduling/acuity/appointment_update": {
+    "hash": "b6b23592cbbb5082638bd6b1ea8c216e19abda7f8009cc09a50a9f4e5a023385",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Acuity: Update Appointment",
+    "description": "Update a client's details or notes on an Acuity appointment. Only supplied fields change.",
+    "website": "https://www.flomation.co",
+    "icon": "acuity+pencil",
+    "date": "04/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Scheduling",
+      "icon": "calendar",
+      "description": "Meeting scheduling and booking platforms"
+    },
+    "sub_category": {
+      "name": "Acuity",
+      "icon": "acuity",
+      "description": "Manage Acuity Scheduling appointments, availability, clients, appointment types and calendars"
+    },
+    "inputs": [
+      {
+        "name": "user_id",
+        "type": "string",
+        "value": null,
+        "label": "Acuity User ID",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "Acuity API Key",
+        "placeholder": "Acuity API key (Basic-auth password)",
+        "required": true
+      },
+      {
+        "name": "appointment_id",
+        "type": "integer",
+        "value": null,
+        "label": "Appointment ID",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "first_name",
+        "type": "string",
+        "value": null,
+        "label": "First Name",
+        "placeholder": "New first name (optional)"
+      },
+      {
+        "name": "last_name",
+        "type": "string",
+        "value": null,
+        "label": "Last Name",
+        "placeholder": "New last name (optional)"
+      },
+      {
+        "name": "email",
+        "type": "string",
+        "value": null,
+        "label": "Email",
+        "placeholder": "New email (optional)"
+      },
+      {
+        "name": "phone",
+        "type": "string",
+        "value": null,
+        "label": "Phone",
+        "placeholder": "New phone (optional)"
+      },
+      {
+        "name": "notes",
+        "type": "text",
+        "value": null,
+        "label": "Notes",
+        "placeholder": "New notes (optional)"
+      },
+      {
+        "name": "fields_json",
+        "type": "object",
+        "value": null,
+        "label": "Intake Form Fields (JSON array, advanced)",
+        "placeholder": "[{\"id\":1,\"value\":\"answer\"}]"
+      },
+      {
+        "name": "admin",
+        "type": "boolean",
+        "value": null,
+        "label": "Admin Update",
+        "placeholder": "Bypass restrictions"
+      },
+      {
+        "name": "no_email",
+        "type": "boolean",
+        "value": null,
+        "label": "Suppress Emails",
+        "placeholder": ""
+      }
+    ],
+    "outputs": [
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Appointment ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Appointment",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "scheduling/acuity/availability_check_times": {
+    "hash": "b614602e670be965b1a571a6eda619d028ebdd526c672582242f12e046651ec2",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Acuity: Check Time Availability",
+    "description": "Validate whether a specific date/time is bookable for an Acuity appointment type before booking it.",
+    "website": "https://www.flomation.co",
+    "icon": "acuity+circle-check",
+    "date": "04/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Scheduling",
+      "icon": "calendar",
+      "description": "Meeting scheduling and booking platforms"
+    },
+    "sub_category": {
+      "name": "Acuity",
+      "icon": "acuity",
+      "description": "Manage Acuity Scheduling appointments, availability, clients, appointment types and calendars"
+    },
+    "inputs": [
+      {
+        "name": "user_id",
+        "type": "string",
+        "value": null,
+        "label": "Acuity User ID",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "Acuity API Key",
+        "placeholder": "Acuity API key (Basic-auth password)",
+        "required": true
+      },
+      {
+        "name": "appointment_type_id",
+        "type": "integer",
+        "value": null,
+        "label": "Appointment Type ID",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "datetime",
+        "type": "string",
+        "value": null,
+        "label": "Date \u0026 Time",
+        "placeholder": "2026-07-10T09:00:00-0700 (ISO 8601)",
+        "required": true
+      },
+      {
+        "name": "calendar_id",
+        "type": "integer",
+        "value": null,
+        "label": "Calendar ID",
+        "placeholder": "Check against a calendar (optional)"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "results",
+        "type": "object",
+        "value": null,
+        "label": "Check Results",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Count",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "scheduling/acuity/availability_classes": {
+    "hash": "647a116218a02586c88cac96957310a4c9b1a906ec52acaad2222db6b140d974",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Acuity: Get Available Classes",
+    "description": "List the class offerings (group appointments) available in a month for an Acuity appointment type.",
+    "website": "https://www.flomation.co",
+    "icon": "acuity+calendar",
+    "date": "04/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Scheduling",
+      "icon": "calendar",
+      "description": "Meeting scheduling and booking platforms"
+    },
+    "sub_category": {
+      "name": "Acuity",
+      "icon": "acuity",
+      "description": "Manage Acuity Scheduling appointments, availability, clients, appointment types and calendars"
+    },
+    "inputs": [
+      {
+        "name": "user_id",
+        "type": "string",
+        "value": null,
+        "label": "Acuity User ID",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "Acuity API Key",
+        "placeholder": "Acuity API key (Basic-auth password)",
+        "required": true
+      },
+      {
+        "name": "appointment_type_id",
+        "type": "integer",
+        "value": null,
+        "label": "Appointment Type ID",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "month",
+        "type": "string",
+        "value": null,
+        "label": "Month",
+        "placeholder": "2026-07 (YYYY-MM)",
+        "required": true
+      },
+      {
+        "name": "include_unavailable",
+        "type": "boolean",
+        "value": null,
+        "label": "Include Full/Unavailable",
+        "placeholder": "Also return classes with no open spots"
+      },
+      {
+        "name": "timezone",
+        "type": "string",
+        "value": null,
+        "label": "Time Zone",
+        "placeholder": "America/New_York (optional)"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "results",
+        "type": "object",
+        "value": null,
+        "label": "Classes",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Count",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "scheduling/acuity/availability_dates": {
+    "hash": "5b895e735580a81fce44e76cec2f0d0c232d1f4a2573af6dccd831be1edf8ac9",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Acuity: Get Available Dates",
+    "description": "List the dates in a month that have availability for an Acuity appointment type.",
+    "website": "https://www.flomation.co",
+    "icon": "acuity+calendar",
+    "date": "04/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Scheduling",
+      "icon": "calendar",
+      "description": "Meeting scheduling and booking platforms"
+    },
+    "sub_category": {
+      "name": "Acuity",
+      "icon": "acuity",
+      "description": "Manage Acuity Scheduling appointments, availability, clients, appointment types and calendars"
+    },
+    "inputs": [
+      {
+        "name": "user_id",
+        "type": "string",
+        "value": null,
+        "label": "Acuity User ID",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "Acuity API Key",
+        "placeholder": "Acuity API key (Basic-auth password)",
+        "required": true
+      },
+      {
+        "name": "appointment_type_id",
+        "type": "integer",
+        "value": null,
+        "label": "Appointment Type ID",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "month",
+        "type": "string",
+        "value": null,
+        "label": "Month",
+        "placeholder": "2026-07 (YYYY-MM)",
+        "required": true
+      },
+      {
+        "name": "calendar_id",
+        "type": "integer",
+        "value": null,
+        "label": "Calendar ID",
+        "placeholder": "Limit to a calendar (optional)"
+      },
+      {
+        "name": "timezone",
+        "type": "string",
+        "value": null,
+        "label": "Time Zone",
+        "placeholder": "America/New_York (optional)"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "results",
+        "type": "object",
+        "value": null,
+        "label": "Available Dates",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Count",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "scheduling/acuity/availability_times": {
+    "hash": "96b529fa3f71a295bbfca61c33927ef15333d120bcc29ad55fc861137beb85c8",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Acuity: Get Available Times",
+    "description": "List the available start times on a given date for an Acuity appointment type.",
+    "website": "https://www.flomation.co",
+    "icon": "acuity+clock",
+    "date": "04/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Scheduling",
+      "icon": "calendar",
+      "description": "Meeting scheduling and booking platforms"
+    },
+    "sub_category": {
+      "name": "Acuity",
+      "icon": "acuity",
+      "description": "Manage Acuity Scheduling appointments, availability, clients, appointment types and calendars"
+    },
+    "inputs": [
+      {
+        "name": "user_id",
+        "type": "string",
+        "value": null,
+        "label": "Acuity User ID",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "Acuity API Key",
+        "placeholder": "Acuity API key (Basic-auth password)",
+        "required": true
+      },
+      {
+        "name": "appointment_type_id",
+        "type": "integer",
+        "value": null,
+        "label": "Appointment Type ID",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "date",
+        "type": "string",
+        "value": null,
+        "label": "Date",
+        "placeholder": "2026-07-10 (YYYY-MM-DD)",
+        "required": true
+      },
+      {
+        "name": "calendar_id",
+        "type": "integer",
+        "value": null,
+        "label": "Calendar ID",
+        "placeholder": "Limit to a calendar (optional)"
+      },
+      {
+        "name": "timezone",
+        "type": "string",
+        "value": null,
+        "label": "Time Zone",
+        "placeholder": "America/New_York (optional)"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "results",
+        "type": "object",
+        "value": null,
+        "label": "Available Times",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Count",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "scheduling/acuity/calendar_get_all": {
+    "hash": "38d7f8ef62fff1fe75269910b29c08136bd7bc3e0147ad86393e5b57e211a81f",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Acuity: Get Many Calendars",
+    "description": "List the calendars (staff/resources) configured in your Acuity account.",
+    "website": "https://www.flomation.co",
+    "icon": "acuity+calendar",
+    "date": "04/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Scheduling",
+      "icon": "calendar",
+      "description": "Meeting scheduling and booking platforms"
+    },
+    "sub_category": {
+      "name": "Acuity",
+      "icon": "acuity",
+      "description": "Manage Acuity Scheduling appointments, availability, clients, appointment types and calendars"
+    },
+    "inputs": [
+      {
+        "name": "user_id",
+        "type": "string",
+        "value": null,
+        "label": "Acuity User ID",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "Acuity API Key",
+        "placeholder": "Acuity API key (Basic-auth password)",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "results",
+        "type": "object",
+        "value": null,
+        "label": "Calendars",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Count",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "scheduling/acuity/client_create": {
+    "hash": "55bf12bce4eb873837305ecba5f88f35d4ab7c8943cfc2e7f309cd669afe5fa5",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Acuity: Create Client",
+    "description": "Add a new client to your Acuity address book.",
+    "website": "https://www.flomation.co",
+    "icon": "acuity+user-plus",
+    "date": "04/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Scheduling",
+      "icon": "calendar",
+      "description": "Meeting scheduling and booking platforms"
+    },
+    "sub_category": {
+      "name": "Acuity",
+      "icon": "acuity",
+      "description": "Manage Acuity Scheduling appointments, availability, clients, appointment types and calendars"
+    },
+    "inputs": [
+      {
+        "name": "user_id",
+        "type": "string",
+        "value": null,
+        "label": "Acuity User ID",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "Acuity API Key",
+        "placeholder": "Acuity API key (Basic-auth password)",
+        "required": true
+      },
+      {
+        "name": "first_name",
+        "type": "string",
+        "value": null,
+        "label": "First Name",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "last_name",
+        "type": "string",
+        "value": null,
+        "label": "Last Name",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "email",
+        "type": "string",
+        "value": null,
+        "label": "Email",
+        "placeholder": "client@example.com (optional)"
+      },
+      {
+        "name": "phone",
+        "type": "string",
+        "value": null,
+        "label": "Phone",
+        "placeholder": "Client phone (optional)"
+      },
+      {
+        "name": "notes",
+        "type": "text",
+        "value": null,
+        "label": "Notes",
+        "placeholder": "Internal notes (optional)"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Client ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Client",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "scheduling/acuity/client_delete": {
+    "hash": "9415b80d2d5f06c5cb2f38362c9da304a211ef601ff90bb9aaeb668a3d24d428",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Acuity: Delete Client",
+    "description": "Remove a client from your Acuity address book. The client is identified by first name, last name and phone.",
+    "website": "https://www.flomation.co",
+    "icon": "acuity+trash",
+    "date": "04/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Scheduling",
+      "icon": "calendar",
+      "description": "Meeting scheduling and booking platforms"
+    },
+    "sub_category": {
+      "name": "Acuity",
+      "icon": "acuity",
+      "description": "Manage Acuity Scheduling appointments, availability, clients, appointment types and calendars"
+    },
+    "inputs": [
+      {
+        "name": "user_id",
+        "type": "string",
+        "value": null,
+        "label": "Acuity User ID",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "Acuity API Key",
+        "placeholder": "Acuity API key (Basic-auth password)",
+        "required": true
+      },
+      {
+        "name": "first_name",
+        "type": "string",
+        "value": null,
+        "label": "First Name",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "last_name",
+        "type": "string",
+        "value": null,
+        "label": "Last Name",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "phone",
+        "type": "string",
+        "value": null,
+        "label": "Phone",
+        "placeholder": "",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "scheduling/acuity/client_get_all": {
+    "hash": "97bab39b5ea20ae53513ddc339a13878d2e6b6111a4474598839e1c6546c7fad",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Acuity: Get Many Clients",
+    "description": "List your Acuity clients, optionally filtered by a search term (name, email or phone).",
+    "website": "https://www.flomation.co",
+    "icon": "acuity+list",
+    "date": "04/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Scheduling",
+      "icon": "calendar",
+      "description": "Meeting scheduling and booking platforms"
+    },
+    "sub_category": {
+      "name": "Acuity",
+      "icon": "acuity",
+      "description": "Manage Acuity Scheduling appointments, availability, clients, appointment types and calendars"
+    },
+    "inputs": [
+      {
+        "name": "user_id",
+        "type": "string",
+        "value": null,
+        "label": "Acuity User ID",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "Acuity API Key",
+        "placeholder": "Acuity API key (Basic-auth password)",
+        "required": true
+      },
+      {
+        "name": "search",
+        "type": "string",
+        "value": null,
+        "label": "Search",
+        "placeholder": "Name, email or phone (optional)"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "results",
+        "type": "object",
+        "value": null,
+        "label": "Clients",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Count",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "scheduling/acuity/client_update": {
+    "hash": "8bcca2beeb1637ab3785800a8c3fbb48a8c84f62752ff1dfa5d406ce0f459f01",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Acuity: Update Client",
+    "description": "Update an Acuity client's email or notes. The client is identified by first name, last name and phone.",
+    "website": "https://www.flomation.co",
+    "icon": "acuity+pencil",
+    "date": "04/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Scheduling",
+      "icon": "calendar",
+      "description": "Meeting scheduling and booking platforms"
+    },
+    "sub_category": {
+      "name": "Acuity",
+      "icon": "acuity",
+      "description": "Manage Acuity Scheduling appointments, availability, clients, appointment types and calendars"
+    },
+    "inputs": [
+      {
+        "name": "user_id",
+        "type": "string",
+        "value": null,
+        "label": "Acuity User ID",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "Acuity API Key",
+        "placeholder": "Acuity API key (Basic-auth password)",
+        "required": true
+      },
+      {
+        "name": "first_name",
+        "type": "string",
+        "value": null,
+        "label": "First Name",
+        "placeholder": "Identifies the client",
+        "required": true
+      },
+      {
+        "name": "last_name",
+        "type": "string",
+        "value": null,
+        "label": "Last Name",
+        "placeholder": "Identifies the client",
+        "required": true
+      },
+      {
+        "name": "phone",
+        "type": "string",
+        "value": null,
+        "label": "Phone",
+        "placeholder": "Identifies the client",
+        "required": true
+      },
+      {
+        "name": "email",
+        "type": "string",
+        "value": null,
+        "label": "Email",
+        "placeholder": "New email (optional)"
+      },
+      {
+        "name": "notes",
+        "type": "text",
+        "value": null,
+        "label": "Notes",
+        "placeholder": "New notes (optional)"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Client ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Client",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "scheduling/acuity/me_get": {
+    "hash": "5be631acc8e86363ded350b0f225a397e857d8e8c6616cf980638f8abb20f520",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Acuity: Get Account",
+    "description": "Retrieve the authenticated Acuity account profile (name, email, timezone, currency).",
+    "website": "https://www.flomation.co",
+    "icon": "acuity+magnifying-glass",
+    "date": "04/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Scheduling",
+      "icon": "calendar",
+      "description": "Meeting scheduling and booking platforms"
+    },
+    "sub_category": {
+      "name": "Acuity",
+      "icon": "acuity",
+      "description": "Manage Acuity Scheduling appointments, availability, clients, appointment types and calendars"
+    },
+    "inputs": [
+      {
+        "name": "user_id",
+        "type": "string",
+        "value": null,
+        "label": "Acuity User ID",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "Acuity API Key",
+        "placeholder": "Acuity API key (Basic-auth password)",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Account ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Account",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
   "scheduling/calcom/booking_cancel": {
     "hash": "aee90d2813c87c930e476b923570788687e4cbf4cfe485ff354a6488ccc59f6e",
     "author": "Dave McElin",
@@ -48829,6 +50738,135 @@
         "type": "string",
         "value": null,
         "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "trigger/acuity_webhook": {
+    "hash": "e6caca8b03346cf54289238f641f22ac8e4e5ee906569b3b7104d7591a1b39fd",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Acuity Scheduling Trigger",
+    "description": "Triggers a flow when an Acuity Scheduling event occurs (appointment scheduled/rescheduled/canceled/changed, or order completed). The webhook subscription is registered with Acuity automatically.",
+    "website": "https://www.flomation.co",
+    "icon": "acuity",
+    "date": "04/07/2026",
+    "type": 1,
+    "category": {
+      "name": "Triggers",
+      "icon": "bolt-lightning",
+      "description": "Start a Flow"
+    },
+    "inputs": [
+      {
+        "name": "user_id",
+        "type": "string",
+        "value": null,
+        "label": "Acuity User ID",
+        "placeholder": "Used to register the webhook",
+        "required": true
+      },
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "Acuity API Key",
+        "placeholder": "Used to register the webhook and verify signatures",
+        "required": true
+      },
+      {
+        "name": "events",
+        "type": "multi_select",
+        "value": null,
+        "label": "Events",
+        "placeholder": "",
+        "required": true,
+        "options": [
+          {
+            "name": "Appointment Scheduled",
+            "value": "appointment.scheduled"
+          },
+          {
+            "name": "Appointment Rescheduled",
+            "value": "appointment.rescheduled"
+          },
+          {
+            "name": "Appointment Canceled",
+            "value": "appointment.canceled"
+          },
+          {
+            "name": "Appointment Changed (any change)",
+            "value": "appointment.changed"
+          },
+          {
+            "name": "Order Completed",
+            "value": "order.completed"
+          }
+        ]
+      },
+      {
+        "name": "resolve_data",
+        "type": "boolean",
+        "value": null,
+        "label": "Resolve Full Object",
+        "placeholder": "Fetch the full appointment/order (Acuity only sends its ID). Default on."
+      }
+    ],
+    "outputs": [
+      {
+        "name": "content",
+        "type": "string",
+        "value": null,
+        "label": "Event Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "event",
+        "type": "string",
+        "value": null,
+        "label": "Event Type",
+        "placeholder": ""
+      },
+      {
+        "name": "object_id",
+        "type": "string",
+        "value": null,
+        "label": "Object ID",
+        "placeholder": ""
+      },
+      {
+        "name": "calendar_id",
+        "type": "string",
+        "value": null,
+        "label": "Calendar ID",
+        "placeholder": ""
+      },
+      {
+        "name": "appointment_type_id",
+        "type": "string",
+        "value": null,
+        "label": "Appointment Type ID",
+        "placeholder": ""
+      },
+      {
+        "name": "appointment",
+        "type": "object",
+        "value": null,
+        "label": "Resolved Object",
+        "placeholder": ""
+      },
+      {
+        "name": "body",
+        "type": "string",
+        "value": null,
+        "label": "Raw Body",
+        "placeholder": ""
+      },
+      {
+        "name": "triggered_at",
+        "type": "string",
+        "value": null,
+        "label": "Triggered At",
         "placeholder": ""
       }
     ]
