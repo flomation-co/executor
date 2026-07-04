@@ -27,6 +27,9 @@ var Inputs = [...]core.Connection{
 	{Name: "job", Type: core.ConnectionTypeString, Label: "Job", Placeholder: "job name (or folder/job)", Required: true},
 	{Name: "build_number", Type: core.ConnectionTypeString, Label: "Build", Placeholder: "42, or lastBuild", Required: true, Options: []core.ConnectionOption{
 		{Name: "Last Build", Value: "lastBuild"},
+		{Name: "Last Successful Build", Value: "lastSuccessfulBuild"},
+		{Name: "Last Failed Build", Value: "lastFailedBuild"},
+		{Name: "Last Completed Build", Value: "lastCompletedBuild"},
 	}},
 }
 

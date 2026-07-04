@@ -21,8 +21,13 @@ const (
 )
 
 // defaultLimit caps the builds returned when "Return All" is off, matching
-// n8n's default page size.
-const defaultLimit = 50
+// n8n's default page size. maxReturnAll is the hard ceiling applied even in
+// "Return All" mode so a job with a huge retained history can't pull an
+// unbounded payload in one request.
+const (
+	defaultLimit = 50
+	maxReturnAll = 1000
+)
 
 var Inputs = [...]core.Connection{
 	{Name: "base_url", Type: core.ConnectionTypeString, Label: "Jenkins URL", Placeholder: "https://jenkins.example.com", Required: true},
@@ -60,8 +65,10 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	field := "builds"
 	tree := field + fields
 	if returnAll {
+		// allBuilds returns the full history, but still capped so a huge job
+		// can't return an unbounded list in one shot.
 		field = "allBuilds"
-		tree = field + fields
+		tree = field + fields + "{0," + strconv.Itoa(maxReturnAll) + "}"
 	} else {
 		limit := defaultLimit
 		if v, ok := jenkins.OptionalInt("limit", inputs); ok && v > 0 {

@@ -13,7 +13,7 @@ const (
 	Name         = "Jenkins: Safely Shutdown"
 	Description  = "Shut Jenkins down once all running builds have finished. Not all environments support this."
 	Website      = "https://www.flomation.co"
-	Icon         = "jenkins+circle-stop"
+	Icon         = "jenkins+stop"
 	Date         = "04/07/2026"
 	Type         = core.ActionTypeAction
 )

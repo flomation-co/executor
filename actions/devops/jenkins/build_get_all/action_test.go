@@ -52,7 +52,7 @@ func TestListBuildsReturnAllUsesAllBuilds(t *testing.T) {
 	Expect(err).To(BeNil())
 	Expect(out["count"]).To(Equal(3)) // read from allBuilds, not the empty builds
 	Expect(tree).To(ContainSubstring("allBuilds"))
-	Expect(tree).NotTo(ContainSubstring("{0,")) // no capped range when returning all
+	Expect(tree).To(ContainSubstring("{0,1000}")) // capped even in return-all mode
 }
 
 // A "Limit" wired to a whole-value reference that resolves to a non-numeric

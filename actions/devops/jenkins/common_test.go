@@ -53,12 +53,13 @@ func TestNormaliseBaseURL(t *testing.T) {
 	RegisterTestingT(t)
 
 	cases := map[string]string{
-		"https://ci.example.com":          "https://ci.example.com",
-		"https://ci.example.com/":         "https://ci.example.com",
-		"http://192.168.0.5:8080/":        "http://192.168.0.5:8080",
-		"https://host/jenkins/":           "https://host/jenkins",   // context path preserved
-		"ci.example.com":                  "https://ci.example.com", // bare host → https
-		"https://ci.example.com/?x=1#foo": "https://ci.example.com", // query/fragment stripped
+		"https://ci.example.com":           "https://ci.example.com",
+		"https://ci.example.com/":          "https://ci.example.com",
+		"http://192.168.0.5:8080/":         "http://192.168.0.5:8080",
+		"https://host/jenkins/":            "https://host/jenkins",   // context path preserved
+		"ci.example.com":                   "https://ci.example.com", // bare host → https
+		"https://ci.example.com/?x=1#foo":  "https://ci.example.com", // query/fragment stripped
+		"https://user:pass@ci.example.com": "https://ci.example.com", // userinfo stripped
 	}
 	for in, want := range cases {
 		got, err := NormaliseBaseURL(in)

@@ -113,6 +113,7 @@ func NormaliseBaseURL(raw string) (string, error) {
 	if u.Scheme != "http" && u.Scheme != "https" {
 		return "", fmt.Errorf("Jenkins URL must start with http:// or https://")
 	}
+	u.User = nil // drop any user:pass@ smuggled into the pasted URL
 	u.Path = strings.TrimRight(u.Path, "/")
 	u.RawQuery = ""
 	u.Fragment = ""

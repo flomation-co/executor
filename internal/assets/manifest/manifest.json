@@ -7417,7 +7417,7 @@
     ]
   },
   "devops/jenkins/build_get_all": {
-    "hash": "2ed3854bf8370b50edb3b22ee70d194793af1b30a2770b1b7bea01a1d7327043",
+    "hash": "3a97d579619653ed1ad875a47e338b26e430cb66febfb93a8c5f11eafd2c5382",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Jenkins: List Builds",
@@ -7523,7 +7523,7 @@
     ]
   },
   "devops/jenkins/build_stop": {
-    "hash": "2dff0e76af4f52013650d93797a50e2a7a1ac152b663658e74b43d52003b4252",
+    "hash": "f454950205dcd39df1b24c85787367e7a2a38d34d0113f03dda0e1c4470d776e",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Jenkins: Stop Build",
@@ -7586,6 +7586,18 @@
           {
             "name": "Last Build",
             "value": "lastBuild"
+          },
+          {
+            "name": "Last Successful Build",
+            "value": "lastSuccessfulBuild"
+          },
+          {
+            "name": "Last Failed Build",
+            "value": "lastFailedBuild"
+          },
+          {
+            "name": "Last Completed Build",
+            "value": "lastCompletedBuild"
           }
         ]
       }
@@ -7832,13 +7844,13 @@
     ]
   },
   "devops/jenkins/instance_safe_restart": {
-    "hash": "9e2c3de88ac34eb6b14392d9c9b5e5ec2e7a735c0d37b4ce10c855f3921b387d",
+    "hash": "d39b964bc7b3fe196860172f4c051123191a755214275febdfa6a05829971c9f",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Jenkins: Safely Restart",
     "description": "Restart Jenkins once all running builds have finished. Not all environments support this.",
     "website": "https://www.flomation.co",
-    "icon": "jenkins+rotate-right",
+    "icon": "jenkins+clock",
     "date": "04/07/2026",
     "type": 2,
     "category": {
@@ -7902,13 +7914,13 @@
     ]
   },
   "devops/jenkins/instance_safe_shutdown": {
-    "hash": "206f3d1eeb1dc49c4a56dc8ee4f3440023869c62da45c33531b151dedb5f94f2",
+    "hash": "b6d75244c8b8ecd68d35edb7ef4a1311aadf01959d6d02476f7e106e26fcde0f",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Jenkins: Safely Shutdown",
     "description": "Shut Jenkins down once all running builds have finished. Not all environments support this.",
     "website": "https://www.flomation.co",
-    "icon": "jenkins+circle-stop",
+    "icon": "jenkins+stop",
     "date": "04/07/2026",
     "type": 2,
     "category": {
@@ -8128,7 +8140,7 @@
     ]
   },
   "devops/jenkins/job_create": {
-    "hash": "4cbfac7a144598124afec6794e950d117715aabe3575c2d0f7b0a2df7d1dd855",
+    "hash": "7533fce886a606c7af71eeb10bd70a00d9c1452a113218c8a2f806489187de39",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Jenkins: Create Job",

@@ -13,7 +13,7 @@ const (
 	Name         = "Jenkins: Safely Restart"
 	Description  = "Restart Jenkins once all running builds have finished. Not all environments support this."
 	Website      = "https://www.flomation.co"
-	Icon         = "jenkins+rotate-right"
+	Icon         = "jenkins+clock"
 	Date         = "04/07/2026"
 	Type         = core.ActionTypeAction
 )
