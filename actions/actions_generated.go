@@ -77,6 +77,25 @@ import (
 	databricks_run_job "flomation.app/automate/executor/actions/databricks/run_job"
 	databricks_run_sql "flomation.app/automate/executor/actions/databricks/run_sql"
 	databricks_upload_file "flomation.app/automate/executor/actions/databricks/upload_file"
+	devops_jenkins_build_console "flomation.app/automate/executor/actions/devops/jenkins/build_console"
+	devops_jenkins_build_get "flomation.app/automate/executor/actions/devops/jenkins/build_get"
+	devops_jenkins_build_get_all "flomation.app/automate/executor/actions/devops/jenkins/build_get_all"
+	devops_jenkins_build_stop "flomation.app/automate/executor/actions/devops/jenkins/build_stop"
+	devops_jenkins_instance_cancel_quiet_down "flomation.app/automate/executor/actions/devops/jenkins/instance_cancel_quiet_down"
+	devops_jenkins_instance_quiet_down "flomation.app/automate/executor/actions/devops/jenkins/instance_quiet_down"
+	devops_jenkins_instance_restart "flomation.app/automate/executor/actions/devops/jenkins/instance_restart"
+	devops_jenkins_instance_safe_restart "flomation.app/automate/executor/actions/devops/jenkins/instance_safe_restart"
+	devops_jenkins_instance_safe_shutdown "flomation.app/automate/executor/actions/devops/jenkins/instance_safe_shutdown"
+	devops_jenkins_instance_shutdown "flomation.app/automate/executor/actions/devops/jenkins/instance_shutdown"
+	devops_jenkins_job_copy "flomation.app/automate/executor/actions/devops/jenkins/job_copy"
+	devops_jenkins_job_create "flomation.app/automate/executor/actions/devops/jenkins/job_create"
+	devops_jenkins_job_delete "flomation.app/automate/executor/actions/devops/jenkins/job_delete"
+	devops_jenkins_job_disable "flomation.app/automate/executor/actions/devops/jenkins/job_disable"
+	devops_jenkins_job_enable "flomation.app/automate/executor/actions/devops/jenkins/job_enable"
+	devops_jenkins_job_get "flomation.app/automate/executor/actions/devops/jenkins/job_get"
+	devops_jenkins_job_list "flomation.app/automate/executor/actions/devops/jenkins/job_list"
+	devops_jenkins_job_trigger "flomation.app/automate/executor/actions/devops/jenkins/job_trigger"
+	devops_jenkins_job_trigger_params "flomation.app/automate/executor/actions/devops/jenkins/job_trigger_params"
 	ecommerce_shopify_order_create "flomation.app/automate/executor/actions/ecommerce/shopify/order_create"
 	ecommerce_shopify_order_delete "flomation.app/automate/executor/actions/ecommerce/shopify/order_delete"
 	ecommerce_shopify_order_get "flomation.app/automate/executor/actions/ecommerce/shopify/order_get"
@@ -625,6 +644,25 @@ var Actions = map[string]core.Action{
 	"databricks/run_job":                                databricks_run_job.Execute,
 	"databricks/run_sql":                                databricks_run_sql.Execute,
 	"databricks/upload_file":                            databricks_upload_file.Execute,
+	"devops/jenkins/build_console":                      devops_jenkins_build_console.Execute,
+	"devops/jenkins/build_get":                          devops_jenkins_build_get.Execute,
+	"devops/jenkins/build_get_all":                      devops_jenkins_build_get_all.Execute,
+	"devops/jenkins/build_stop":                         devops_jenkins_build_stop.Execute,
+	"devops/jenkins/instance_cancel_quiet_down":         devops_jenkins_instance_cancel_quiet_down.Execute,
+	"devops/jenkins/instance_quiet_down":                devops_jenkins_instance_quiet_down.Execute,
+	"devops/jenkins/instance_restart":                   devops_jenkins_instance_restart.Execute,
+	"devops/jenkins/instance_safe_restart":              devops_jenkins_instance_safe_restart.Execute,
+	"devops/jenkins/instance_safe_shutdown":             devops_jenkins_instance_safe_shutdown.Execute,
+	"devops/jenkins/instance_shutdown":                  devops_jenkins_instance_shutdown.Execute,
+	"devops/jenkins/job_copy":                           devops_jenkins_job_copy.Execute,
+	"devops/jenkins/job_create":                         devops_jenkins_job_create.Execute,
+	"devops/jenkins/job_delete":                         devops_jenkins_job_delete.Execute,
+	"devops/jenkins/job_disable":                        devops_jenkins_job_disable.Execute,
+	"devops/jenkins/job_enable":                         devops_jenkins_job_enable.Execute,
+	"devops/jenkins/job_get":                            devops_jenkins_job_get.Execute,
+	"devops/jenkins/job_list":                           devops_jenkins_job_list.Execute,
+	"devops/jenkins/job_trigger":                        devops_jenkins_job_trigger.Execute,
+	"devops/jenkins/job_trigger_params":                 devops_jenkins_job_trigger_params.Execute,
 	"ecommerce/shopify/order_create":                    ecommerce_shopify_order_create.Execute,
 	"ecommerce/shopify/order_delete":                    ecommerce_shopify_order_delete.Execute,
 	"ecommerce/shopify/order_get":                       ecommerce_shopify_order_get.Execute,
