@@ -25523,6 +25523,98 @@
       }
     ]
   },
+  "humanintheloop/await": {
+    "hash": "57700b65919539d859c3385a86738a42021c3d297fb3a8334fcd4177dbf84332",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Human Approval",
+    "description": "Ask a human to choose an option, then branch on their answer. Suspends until a reply or timeout.",
+    "website": "https://www.flomation.co",
+    "icon": "user-check",
+    "date": "04/07/2026",
+    "type": 7,
+    "category": {
+      "name": "Human in the Loop",
+      "icon": "user-check",
+      "description": "Pause a flow for a human decision, then branch on their response"
+    },
+    "inputs": [
+      {
+        "name": "message",
+        "type": "text",
+        "value": null,
+        "label": "Message",
+        "placeholder": "Approve the deployment to production?",
+        "required": true
+      },
+      {
+        "name": "options",
+        "type": "key_value_array",
+        "value": null,
+        "label": "Options",
+        "placeholder": "Button label → value (drives the output handles)",
+        "required": true
+      },
+      {
+        "name": "delivery_nodes",
+        "type": "key_value_array",
+        "value": null,
+        "label": "Deliver Via",
+        "placeholder": "Send Message node ID → channel type (blank to auto-detect)"
+      },
+      {
+        "name": "timeout",
+        "type": "string",
+        "value": null,
+        "label": "Timeout",
+        "placeholder": "24h (blank = 24h)"
+      },
+      {
+        "name": "web_base_url",
+        "type": "string",
+        "value": null,
+        "label": "Response Link Base URL",
+        "placeholder": "Public Launch URL for click-link fallback (optional)"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result",
+        "placeholder": ""
+      },
+      {
+        "name": "matched_case",
+        "type": "string",
+        "value": null,
+        "label": "Chosen Handle",
+        "placeholder": ""
+      },
+      {
+        "name": "answered_option",
+        "type": "string",
+        "value": null,
+        "label": "Chosen Option",
+        "placeholder": ""
+      },
+      {
+        "name": "answered_by",
+        "type": "string",
+        "value": null,
+        "label": "Answered By",
+        "placeholder": ""
+      },
+      {
+        "name": "outcome",
+        "type": "string",
+        "value": null,
+        "label": "Outcome",
+        "placeholder": ""
+      }
+    ]
+  },
   "journey/calculate_route": {
     "hash": "0c7c157d38caaea6e48ce5992e6d571dbca8c145a4f0b36e1e0fec8758c489fe",
     "author": "Andy Esser",
@@ -31070,7 +31162,7 @@
     ]
   },
   "messaging/telegram/send_message": {
-    "hash": "fd8ae5e618a5843151c85035d533a18c32798cbab38a16c310c03bafce26c44f",
+    "hash": "46b7b68cd83280d9292dc9b05e750ae4b26e54a1e3d2db182bff4a8dd1a233d4",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Send Telegram Message",
@@ -31134,6 +31226,13 @@
             "value": "MarkdownV2"
           }
         ]
+      },
+      {
+        "name": "reply_markup",
+        "type": "text",
+        "value": null,
+        "label": "Reply Markup (JSON)",
+        "placeholder": "{\"inline_keyboard\":[[{\"text\":\"Approve\",\"callback_data\":\"yes\"}]]}"
       }
     ],
     "outputs": [

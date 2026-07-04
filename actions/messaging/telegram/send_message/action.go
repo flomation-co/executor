@@ -57,6 +57,12 @@ var Inputs = [...]core.Connection{
 			{Name: "MarkdownV2", Value: "MarkdownV2"},
 		},
 	},
+	{
+		Name:        "reply_markup",
+		Type:        core.ConnectionTypeText,
+		Label:       "Reply Markup (JSON)",
+		Placeholder: `{"inline_keyboard":[[{"text":"Approve","callback_data":"yes"}]]}`,
+	},
 }
 
 var Outputs = [...]core.Connection{
@@ -124,6 +130,17 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	}
 	if parseMode != "" {
 		payload["parse_mode"] = parseMode
+	}
+
+	// Optional inline keyboard / reply markup. Passed as a JSON string (e.g.
+	// by the Human-in-the-Loop node) and forwarded as a nested object so
+	// Telegram renders interactive buttons.
+	if rm := core.FindConnection("reply_markup", inputs); rm != nil && rm.String() != nil && strings.TrimSpace(*rm.String()) != "" {
+		var markup interface{}
+		if err := json.Unmarshal([]byte(*rm.String()), &markup); err != nil {
+			return nil, fmt.Errorf("reply_markup is not valid JSON: %w", err)
+		}
+		payload["reply_markup"] = markup
 	}
 
 	body, err := json.Marshal(payload)

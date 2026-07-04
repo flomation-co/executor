@@ -223,6 +223,9 @@ func inspectPackage(dir string) map[string]ManifestEntry {
 									case "ActionTypeSwitch":
 										me.Type = core.ActionTypeSwitch
 										meUpdated = true
+									case "ActionTypeAwait":
+										me.Type = core.ActionTypeAwait
+										meUpdated = true
 									}
 								}
 							}
