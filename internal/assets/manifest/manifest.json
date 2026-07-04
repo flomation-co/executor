@@ -25524,7 +25524,7 @@
     ]
   },
   "humanintheloop/await": {
-    "hash": "57700b65919539d859c3385a86738a42021c3d297fb3a8334fcd4177dbf84332",
+    "hash": "3dcc04bfb4c1639474fb75b53ed2c0ff8bb4147b8e0c26479162a8c15100c281",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Human Approval",
@@ -25554,13 +25554,6 @@
         "label": "Options",
         "placeholder": "Button label → value (drives the output handles)",
         "required": true
-      },
-      {
-        "name": "delivery_nodes",
-        "type": "key_value_array",
-        "value": null,
-        "label": "Deliver Via",
-        "placeholder": "Send Message node ID → channel type (blank to auto-detect)"
       },
       {
         "name": "timeout",

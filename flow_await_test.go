@@ -139,6 +139,64 @@ func TestAwait_ResumeTimeout_RoutesToTimeoutHandle(t *testing.T) {
 	Expect(c.optionNo).To(Equal(0))
 }
 
+// TestAwait_DeliversViaHandle_NoRecursion validates the AI-tools-style wiring:
+// a Send node connected to the Await node's "delivery" handle is invoked
+// in-process during the first pass. Because the Send node's parent IS the
+// (mid-execution) Await node, this exercises InvokeNode's recursion guard.
+func TestAwait_DeliversViaHandle_NoRecursion(t *testing.T) {
+	RegisterTestingT(t)
+	var sendRuns int
+	var sentMessage interface{}
+
+	f := &Flow{
+		Nodes: []*Node{
+			{ID: "trigger", Type: "trigger/manual", Data: &NodeData{Label: "trigger/manual", Config: NodeConfig{Type: ActionTypeTrigger}}},
+			{ID: "await", Type: "humanintheloop/await", Data: &NodeData{Label: "humanintheloop/await", Config: NodeConfig{Type: ActionTypeAwait}}},
+			{ID: "send", Type: "slack/send_message", Data: &NodeData{Label: "slack/send_message", Config: NodeConfig{Type: ActionTypeAction,
+				Inputs: []*Connection{{Name: "message", Type: ConnectionTypeText, Value: "original"}}}}},
+		},
+		Edges: []*Edge{
+			{ID: "e1", Source: "trigger", Target: "await"},
+			{ID: "e2", Source: "await", Target: "send", SourceHandle: DeliveryHandle},
+		},
+		nodeResults:          make(map[string]map[string]interface{}),
+		nodeExecutionResults: make(map[string]*ExecutionNodeResult),
+		outputs:              make(map[string]interface{}),
+		variables:            make(map[string]interface{}),
+	}
+
+	actions := map[string]Action{
+		"trigger/manual": func(flow *Flow, node *Node, inputs []*Connection) (map[string]interface{}, error) {
+			return map[string]interface{}{}, nil
+		},
+		"humanintheloop/await": func(flow *Flow, node *Node, inputs []*Connection) (map[string]interface{}, error) {
+			if flow.IsResumedNode(node.ID) {
+				return map[string]interface{}{"matched_case": "option_yes"}, nil
+			}
+			// Deliver via the delivery handle, in-process (like the real action).
+			for _, target := range flow.FindTargetByHandle(node.ID, DeliveryHandle) {
+				if _, err := flow.InvokeNode(target, map[string]interface{}{"message": "please approve"}); err != nil {
+					return nil, err
+				}
+			}
+			flow.Suspend(&SuspendInfo{NodeID: node.ID, Reason: "await_human"})
+			return map[string]interface{}{"matched_case": ""}, ErrSuspended
+		},
+		"slack/send_message": func(flow *Flow, node *Node, inputs []*Connection) (map[string]interface{}, error) {
+			sendRuns++
+			if m := FindConnection("message", inputs); m != nil && m.String() != nil {
+				sentMessage = *m.String()
+			}
+			return map[string]interface{}{"success": true}, nil
+		},
+	}
+
+	_, err := f.Execute(actions, nil, nil)
+	Expect(errors.Is(err, ErrSuspended)).To(BeTrue(), "await must suspend after delivering")
+	Expect(sendRuns).To(Equal(1), "delivery node runs exactly once — no recursion")
+	Expect(sentMessage).To(Equal("please approve"), "injected message reaches the delivery node")
+}
+
 // TestInvokeNode_DeliversToReferencedNode validates the in-process fan-out
 // mechanism: an action calls flow.InvokeNode on an edge-less "send" node,
 // injecting a value, and the send node runs with that value and never runs

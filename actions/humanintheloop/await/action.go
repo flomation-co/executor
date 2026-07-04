@@ -47,12 +47,6 @@ var Inputs = [...]core.Connection{
 		Required:    true,
 	},
 	{
-		Name:        "delivery_nodes",
-		Type:        core.ConnectionTypeKeyValueArray,
-		Label:       "Deliver Via",
-		Placeholder: "Send Message node ID → channel type (blank to auto-detect)",
-	},
-	{
 		Name:        "timeout",
 		Type:        core.ConnectionTypeString,
 		Label:       "Timeout",
@@ -249,27 +243,23 @@ func createRequest(flow *core.Flow, ctx *core.ExecutionContext, node *core.Node,
 
 // --- delivery ---
 
-// deliver renders the interactive payload for each referenced Send node's
-// channel and invokes it in-process. Returns the count delivered and any
-// per-channel error strings (non-fatal).
+// deliver renders the interactive payload for each Send Message node wired to
+// the Await node's delivery handle and invokes it in-process. Returns the count
+// delivered and any per-channel error strings (non-fatal). Delivery nodes are
+// reached via the delivery handle — the author simply drops a Send node onto
+// the canvas and wires it to the Await node, exactly like AI tools.
 func deliver(flow *core.Flow, node *core.Node, message string, req *registeredRequest) (int, []string) {
 	var delivered int
 	var errs []string
 
-	for _, dn := range deliveryNodes(node) {
-		target := flow.FindNode(dn.nodeID)
+	for _, target := range flow.FindTargetByHandle(node.ID, core.DeliveryHandle) {
 		if target == nil || target.Data == nil {
-			errs = append(errs, fmt.Sprintf("%s: node not found", dn.nodeID))
 			continue
 		}
-		channel := dn.channel
-		if channel == "" {
-			channel = inferChannel(target.Data.Label, target.Type)
-		}
-
+		channel := inferChannel(target.Data.Label, target.Type)
 		extra := injectionFor(channel, message, req)
 		if _, err := flow.InvokeNode(target, extra); err != nil {
-			errs = append(errs, fmt.Sprintf("%s: %v", dn.nodeID, err))
+			errs = append(errs, fmt.Sprintf("%s: %v", target.ID, err))
 			continue
 		}
 		delivered++
@@ -315,27 +305,6 @@ func inferChannel(label, nodeType string) string {
 	default:
 		return ""
 	}
-}
-
-type deliveryTarget struct {
-	nodeID  string
-	channel string // explicit override; "" = infer
-}
-
-func deliveryNodes(node *core.Node) []deliveryTarget {
-	var out []deliveryTarget
-	c := findInput("delivery_nodes", node)
-	if c == nil {
-		return out
-	}
-	for _, kv := range c.KeyValuePairs() {
-		id := strings.TrimSpace(kv.Key)
-		if id == "" {
-			continue
-		}
-		out = append(out, deliveryTarget{nodeID: id, channel: strings.ToLower(strings.TrimSpace(kv.Value))})
-	}
-	return out
 }
 
 // --- input helpers ---
@@ -394,18 +363,6 @@ func optStr(name string, inputs []*core.Connection) string {
 		return ""
 	}
 	return *c.String()
-}
-
-func findInput(name string, node *core.Node) *core.Connection {
-	if node == nil || node.Data == nil {
-		return nil
-	}
-	for _, c := range node.Data.Config.Inputs {
-		if c != nil && c.Name == name {
-			return c
-		}
-	}
-	return nil
 }
 
 // parseDuration supports Go durations plus days (d) and weeks (w).

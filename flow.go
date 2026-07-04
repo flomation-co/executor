@@ -98,6 +98,12 @@ const (
 	// ToolsHandle is the source handle ID for the tools subgraph edge.
 	ToolsHandle = "tools"
 
+	// DeliveryHandle is the source handle ID the Human-in-the-Loop node uses to
+	// reach the Send Message nodes it fans a request out to. Like the tools
+	// handle, its children are invoked in-process, not walked as normal
+	// downstream nodes.
+	DeliveryHandle = "delivery"
+
 	// MaxToolRoundsDefault is the safety cap on tool calling rounds.
 	MaxToolRoundsDefault = 25
 
@@ -875,6 +881,36 @@ func (f *Flow) InvokeNode(node *Node, extra map[string]interface{}) (map[string]
 
 	// Ensure the delivery node re-runs even if a stale cache entry exists.
 	delete(f.nodeResults, node.ID)
+
+	// Prevent parent-resolution recursion. The target is typically wired as a
+	// child of the node invoking it (e.g. the Human-in-the-Loop node delivering
+	// through its Send Message children via the delivery handle). That node is
+	// mid-execution and not yet cached, so executeNodeActionOnly's parent walk
+	// would re-enter it. Temporarily seed any not-yet-cached parent with an
+	// empty result (delivery nodes read their own config, not parent outputs),
+	// then restore. Mirrors how the AI tool loop invokes tools only after the
+	// AI node is cached.
+	var seeded []string
+	for _, p := range f.FindSource(node.ID) {
+		if p == nil {
+			continue
+		}
+		if _, cached := f.nodeResults[p.ID]; !cached {
+			f.nodeResults[p.ID] = map[string]interface{}{}
+			if f.traversedNodes == nil {
+				f.traversedNodes = make(map[string]bool)
+			}
+			f.traversedNodes[p.ID] = true
+			seeded = append(seeded, p.ID)
+		}
+	}
+	defer func() {
+		for _, id := range seeded {
+			delete(f.nodeResults, id)
+			delete(f.traversedNodes, id)
+		}
+	}()
+
 	return f.executeNodeActionOnly(f.actions, node, f.env)
 }
 
