@@ -2,6 +2,7 @@ package telegram
 
 import (
 	"bytes"
+	"context"
 	"encoding/json"
 	"fmt"
 	"io"
@@ -114,59 +115,79 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	}
 	message := *messageConn.String()
 
-	if len(message) > maxMessageLen {
-		message = message[:maxMessageLen]
-	}
-
 	parseModeConn := core.FindConnection("parse_mode", inputs)
 	parseMode := ""
 	if parseModeConn != nil && parseModeConn.String() != nil {
 		parseMode = *parseModeConn.String()
 	}
 
-	payload := map[string]interface{}{
-		"chat_id": chatID,
-		"text":    message,
-	}
-	if parseMode != "" {
-		payload["parse_mode"] = parseMode
-	}
-
-	// Optional inline keyboard / reply markup. Passed as a JSON string (e.g.
-	// by the Human-in-the-Loop node) and forwarded as a nested object so
-	// Telegram renders interactive buttons.
+	// Optional inline keyboard / reply markup (e.g. from the Human-in-the-Loop
+	// node). Attached only to the final chunk so the buttons sit beneath the
+	// full text when a long message is split.
+	var replyMarkup interface{}
 	if rm := core.FindConnection("reply_markup", inputs); rm != nil && rm.String() != nil && strings.TrimSpace(*rm.String()) != "" {
-		var markup interface{}
-		if err := json.Unmarshal([]byte(*rm.String()), &markup); err != nil {
+		if err := json.Unmarshal([]byte(*rm.String()), &replyMarkup); err != nil {
 			return nil, fmt.Errorf("reply_markup is not valid JSON: %w", err)
 		}
-		payload["reply_markup"] = markup
 	}
 
+	// Telegram caps a single message at 4096 UTF-16 code units. Split long
+	// messages into multiple sends on line/word boundaries rather than
+	// silently truncating the overflow.
+	chunks := splitTelegramMessage(message)
+	var firstID int64
+	for i, chunk := range chunks {
+		payload := map[string]interface{}{"chat_id": chatID, "text": chunk}
+		if parseMode != "" {
+			payload["parse_mode"] = parseMode
+		}
+		if replyMarkup != nil && i == len(chunks)-1 {
+			payload["reply_markup"] = replyMarkup
+		}
+
+		id, ok, desc, err := sendTelegramMessage(flow.GoContext(), botToken, payload)
+		if err != nil {
+			return map[string]interface{}{"message_id": nil, "success": false, "error": err.Error()}, nil
+		}
+		if !ok {
+			return map[string]interface{}{"message_id": nil, "success": false, "error": desc}, nil
+		}
+		if i == 0 {
+			firstID = id
+		}
+	}
+
+	result := "message sent"
+	if len(chunks) > 1 {
+		result = fmt.Sprintf("message sent in %d parts", len(chunks))
+	}
+	return map[string]interface{}{
+		"tool_result": result,
+		"message_id":  firstID,
+		"success":     true,
+		"error":       "",
+	}, nil
+}
+
+// sendTelegramMessage POSTs a single sendMessage call. Returns the message id,
+// Telegram's ok flag, its error description, and any transport error.
+func sendTelegramMessage(ctx context.Context, botToken string, payload map[string]interface{}) (int64, bool, string, error) {
 	body, err := json.Marshal(payload)
 	if err != nil {
-		return nil, fmt.Errorf("failed to marshal payload: %w", err)
+		return 0, false, "", fmt.Errorf("failed to marshal payload: %w", err)
 	}
-
 	url := fmt.Sprintf("%s/bot%s/sendMessage", telegramAPIBase, botToken)
-	req, err := http.NewRequestWithContext(flow.GoContext(), http.MethodPost, url, bytes.NewReader(body))
+	req, err := http.NewRequestWithContext(ctx, http.MethodPost, url, bytes.NewReader(body))
 	if err != nil {
-		return nil, fmt.Errorf("failed to create request: %w", err)
+		return 0, false, "", fmt.Errorf("failed to create request: %w", err)
 	}
 	req.Header.Set("Content-Type", "application/json")
-
 	resp, err := http.DefaultClient.Do(req)
 	if err != nil {
-		return map[string]interface{}{
-			"message_id": nil,
-			"success":    false,
-			"error":      err.Error(),
-		}, nil
+		return 0, false, "", err
 	}
 	defer resp.Body.Close()
-
 	respBody, _ := io.ReadAll(io.LimitReader(resp.Body, 4096))
-
 	var result struct {
 		OK     bool `json:"ok"`
 		Result struct {
@@ -175,18 +196,69 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 		Description string `json:"description"`
 	}
 	_ = json.Unmarshal(respBody, &result)
+	return result.Result.MessageID, result.OK, result.Description, nil
+}
 
-	if !result.OK {
-		return map[string]interface{}{
-			"message_id": nil,
-			"success":    false,
-			"error":      result.Description,
-		}, nil
+// splitTelegramMessage splits text into chunks each within Telegram's 4096
+// UTF-16-code-unit limit, breaking on the last newline (then space) before the
+// limit so lines/words aren't cut mid-way. A single over-long token is
+// hard-split on a rune boundary. Returns []{text} unchanged when it fits.
+//
+// Note: for parse_mode HTML/MarkdownV2 this splits on line boundaries, which is
+// safe for typical content but could break a formatting entity that spans the
+// split point — an accepted trade-off versus silent truncation.
+func splitTelegramMessage(text string) []string {
+	if utf16Len(text) <= maxMessageLen {
+		return []string{text}
 	}
+	runes := []rune(text)
+	var chunks []string
+	for len(runes) > 0 {
+		end, units := 0, 0
+		for end < len(runes) {
+			u := 1
+			if runes[end] > 0xFFFF {
+				u = 2
+			}
+			if units+u > maxMessageLen {
+				break
+			}
+			units += u
+			end++
+		}
+		// Prefer a clean boundary within the fitted prefix (unless everything
+		// left already fits, in which case end == len(runes)).
+		if end < len(runes) {
+			if br := lastRuneIndex(runes[:end], '\n'); br > 0 {
+				end = br + 1
+			} else if br := lastRuneIndex(runes[:end], ' '); br > 0 {
+				end = br + 1
+			}
+		}
+		chunks = append(chunks, string(runes[:end]))
+		runes = runes[end:]
+	}
+	return chunks
+}
 
-	return map[string]interface{}{
-		"message_id": result.Result.MessageID,
-		"success":    true,
-		"error":      "",
-	}, nil
+// utf16Len returns the length of s in UTF-16 code units (Telegram's unit).
+func utf16Len(s string) int {
+	n := 0
+	for _, r := range s {
+		if r > 0xFFFF {
+			n += 2
+		} else {
+			n++
+		}
+	}
+	return n
+}
+
+func lastRuneIndex(runes []rune, target rune) int {
+	for i := len(runes) - 1; i >= 0; i-- {
+		if runes[i] == target {
+			return i
+		}
+	}
+	return -1
 }
