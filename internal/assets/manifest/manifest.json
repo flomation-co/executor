@@ -7183,6 +7183,1628 @@
       }
     ]
   },
+  "devops/jenkins/build_console": {
+    "hash": "c7552c89f5e9c91452b63d11c6e3412a423f0b295e85f580233a9ed73324d989",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Jenkins: Get Build Console Output",
+    "description": "Fetch the console log (build output) of a Jenkins build as plain text. Accepts a build number or a keyword like lastBuild.",
+    "website": "https://www.flomation.co",
+    "icon": "jenkins+terminal",
+    "date": "04/07/2026",
+    "type": 2,
+    "category": {
+      "name": "DevOps",
+      "icon": "gears",
+      "description": "Automate your build, test, and deploy workflows — trigger jobs, watch builds, and manage your CI/CD servers"
+    },
+    "sub_category": {
+      "name": "Jenkins",
+      "icon": "jenkins",
+      "description": "Trigger and manage Jenkins jobs and builds, and control the Jenkins server"
+    },
+    "inputs": [
+      {
+        "name": "base_url",
+        "type": "string",
+        "value": null,
+        "label": "Jenkins URL",
+        "placeholder": "https://jenkins.example.com",
+        "required": true
+      },
+      {
+        "name": "username",
+        "type": "string",
+        "value": null,
+        "label": "Username",
+        "placeholder": "your Jenkins username",
+        "required": true
+      },
+      {
+        "name": "api_token",
+        "type": "secret",
+        "value": null,
+        "label": "API Token",
+        "placeholder": "a Jenkins API token (User ▸ Configure ▸ API Token)",
+        "required": true
+      },
+      {
+        "name": "job",
+        "type": "string",
+        "value": null,
+        "label": "Job",
+        "placeholder": "job name (or folder/job)",
+        "required": true
+      },
+      {
+        "name": "build_number",
+        "type": "string",
+        "value": null,
+        "label": "Build",
+        "placeholder": "42, or lastBuild",
+        "required": true,
+        "options": [
+          {
+            "name": "Last Build",
+            "value": "lastBuild"
+          },
+          {
+            "name": "Last Successful Build",
+            "value": "lastSuccessfulBuild"
+          },
+          {
+            "name": "Last Failed Build",
+            "value": "lastFailedBuild"
+          },
+          {
+            "name": "Last Completed Build",
+            "value": "lastCompletedBuild"
+          }
+        ]
+      }
+    ],
+    "outputs": [
+      {
+        "name": "console",
+        "type": "text",
+        "value": null,
+        "label": "Console Output",
+        "placeholder": ""
+      },
+      {
+        "name": "truncated",
+        "type": "boolean",
+        "value": null,
+        "label": "Truncated",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "devops/jenkins/build_get": {
+    "hash": "1fbcaf7897992895be67d05d7d70cc3b4d187efffb2cff7e9029feaaaf6f051e",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Jenkins: Get Build",
+    "description": "Fetch a single Jenkins build's details — result, duration, cause, and timestamp. Accepts a build number or a keyword like lastBuild or lastSuccessfulBuild.",
+    "website": "https://www.flomation.co",
+    "icon": "jenkins+eye",
+    "date": "04/07/2026",
+    "type": 2,
+    "category": {
+      "name": "DevOps",
+      "icon": "gears",
+      "description": "Automate your build, test, and deploy workflows — trigger jobs, watch builds, and manage your CI/CD servers"
+    },
+    "sub_category": {
+      "name": "Jenkins",
+      "icon": "jenkins",
+      "description": "Trigger and manage Jenkins jobs and builds, and control the Jenkins server"
+    },
+    "inputs": [
+      {
+        "name": "base_url",
+        "type": "string",
+        "value": null,
+        "label": "Jenkins URL",
+        "placeholder": "https://jenkins.example.com",
+        "required": true
+      },
+      {
+        "name": "username",
+        "type": "string",
+        "value": null,
+        "label": "Username",
+        "placeholder": "your Jenkins username",
+        "required": true
+      },
+      {
+        "name": "api_token",
+        "type": "secret",
+        "value": null,
+        "label": "API Token",
+        "placeholder": "a Jenkins API token (User ▸ Configure ▸ API Token)",
+        "required": true
+      },
+      {
+        "name": "job",
+        "type": "string",
+        "value": null,
+        "label": "Job",
+        "placeholder": "job name (or folder/job)",
+        "required": true
+      },
+      {
+        "name": "build_number",
+        "type": "string",
+        "value": null,
+        "label": "Build",
+        "placeholder": "42, or lastBuild / lastSuccessfulBuild",
+        "required": true,
+        "options": [
+          {
+            "name": "Last Build",
+            "value": "lastBuild"
+          },
+          {
+            "name": "Last Successful Build",
+            "value": "lastSuccessfulBuild"
+          },
+          {
+            "name": "Last Stable Build",
+            "value": "lastStableBuild"
+          },
+          {
+            "name": "Last Failed Build",
+            "value": "lastFailedBuild"
+          },
+          {
+            "name": "Last Completed Build",
+            "value": "lastCompletedBuild"
+          }
+        ]
+      }
+    ],
+    "outputs": [
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Build",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "devops/jenkins/build_get_all": {
+    "hash": "3a97d579619653ed1ad875a47e338b26e430cb66febfb93a8c5f11eafd2c5382",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Jenkins: List Builds",
+    "description": "List a Jenkins job's builds with their number, result, timestamp, and duration.",
+    "website": "https://www.flomation.co",
+    "icon": "jenkins+list",
+    "date": "04/07/2026",
+    "type": 2,
+    "category": {
+      "name": "DevOps",
+      "icon": "gears",
+      "description": "Automate your build, test, and deploy workflows — trigger jobs, watch builds, and manage your CI/CD servers"
+    },
+    "sub_category": {
+      "name": "Jenkins",
+      "icon": "jenkins",
+      "description": "Trigger and manage Jenkins jobs and builds, and control the Jenkins server"
+    },
+    "inputs": [
+      {
+        "name": "base_url",
+        "type": "string",
+        "value": null,
+        "label": "Jenkins URL",
+        "placeholder": "https://jenkins.example.com",
+        "required": true
+      },
+      {
+        "name": "username",
+        "type": "string",
+        "value": null,
+        "label": "Username",
+        "placeholder": "your Jenkins username",
+        "required": true
+      },
+      {
+        "name": "api_token",
+        "type": "secret",
+        "value": null,
+        "label": "API Token",
+        "placeholder": "a Jenkins API token (User ▸ Configure ▸ API Token)",
+        "required": true
+      },
+      {
+        "name": "job",
+        "type": "string",
+        "value": null,
+        "label": "Job",
+        "placeholder": "job name (or folder/job)",
+        "required": true
+      },
+      {
+        "name": "return_all",
+        "type": "boolean",
+        "value": null,
+        "label": "Return All",
+        "placeholder": "Return every build rather than a capped page"
+      },
+      {
+        "name": "limit",
+        "type": "integer",
+        "value": null,
+        "label": "Limit",
+        "placeholder": "Max builds to return (default 50)"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "results",
+        "type": "object",
+        "value": null,
+        "label": "Builds",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Count",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "devops/jenkins/build_stop": {
+    "hash": "f454950205dcd39df1b24c85787367e7a2a38d34d0113f03dda0e1c4470d776e",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Jenkins: Stop Build",
+    "description": "Abort a running Jenkins build. Accepts a build number or a keyword like lastBuild.",
+    "website": "https://www.flomation.co",
+    "icon": "jenkins+circle-stop",
+    "date": "04/07/2026",
+    "type": 2,
+    "category": {
+      "name": "DevOps",
+      "icon": "gears",
+      "description": "Automate your build, test, and deploy workflows — trigger jobs, watch builds, and manage your CI/CD servers"
+    },
+    "sub_category": {
+      "name": "Jenkins",
+      "icon": "jenkins",
+      "description": "Trigger and manage Jenkins jobs and builds, and control the Jenkins server"
+    },
+    "inputs": [
+      {
+        "name": "base_url",
+        "type": "string",
+        "value": null,
+        "label": "Jenkins URL",
+        "placeholder": "https://jenkins.example.com",
+        "required": true
+      },
+      {
+        "name": "username",
+        "type": "string",
+        "value": null,
+        "label": "Username",
+        "placeholder": "your Jenkins username",
+        "required": true
+      },
+      {
+        "name": "api_token",
+        "type": "secret",
+        "value": null,
+        "label": "API Token",
+        "placeholder": "a Jenkins API token (User ▸ Configure ▸ API Token)",
+        "required": true
+      },
+      {
+        "name": "job",
+        "type": "string",
+        "value": null,
+        "label": "Job",
+        "placeholder": "job name (or folder/job)",
+        "required": true
+      },
+      {
+        "name": "build_number",
+        "type": "string",
+        "value": null,
+        "label": "Build",
+        "placeholder": "42, or lastBuild",
+        "required": true,
+        "options": [
+          {
+            "name": "Last Build",
+            "value": "lastBuild"
+          },
+          {
+            "name": "Last Successful Build",
+            "value": "lastSuccessfulBuild"
+          },
+          {
+            "name": "Last Failed Build",
+            "value": "lastFailedBuild"
+          },
+          {
+            "name": "Last Completed Build",
+            "value": "lastCompletedBuild"
+          }
+        ]
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "devops/jenkins/instance_cancel_quiet_down": {
+    "hash": "771a2189abb509c168861fd0af8543d59c8ba063d05d5cb522159d3ce4a6b60d",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Jenkins: Cancel Quiet Down",
+    "description": "Cancel quiet-down mode so Jenkins resumes starting new builds.",
+    "website": "https://www.flomation.co",
+    "icon": "jenkins+check",
+    "date": "04/07/2026",
+    "type": 2,
+    "category": {
+      "name": "DevOps",
+      "icon": "gears",
+      "description": "Automate your build, test, and deploy workflows — trigger jobs, watch builds, and manage your CI/CD servers"
+    },
+    "sub_category": {
+      "name": "Jenkins",
+      "icon": "jenkins",
+      "description": "Trigger and manage Jenkins jobs and builds, and control the Jenkins server"
+    },
+    "inputs": [
+      {
+        "name": "base_url",
+        "type": "string",
+        "value": null,
+        "label": "Jenkins URL",
+        "placeholder": "https://jenkins.example.com",
+        "required": true
+      },
+      {
+        "name": "username",
+        "type": "string",
+        "value": null,
+        "label": "Username",
+        "placeholder": "your Jenkins username",
+        "required": true
+      },
+      {
+        "name": "api_token",
+        "type": "secret",
+        "value": null,
+        "label": "API Token",
+        "placeholder": "a Jenkins API token (User ▸ Configure ▸ API Token)",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "devops/jenkins/instance_quiet_down": {
+    "hash": "1ca51bf1f2fbdabaa3db0e5e8489f13538e823899f3f86c635c7b4c8350aaaa7",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Jenkins: Quiet Down",
+    "description": "Put Jenkins into quiet-down mode: no new builds start, and the instance prepares for a safe shutdown.",
+    "website": "https://www.flomation.co",
+    "icon": "jenkins+ban",
+    "date": "04/07/2026",
+    "type": 2,
+    "category": {
+      "name": "DevOps",
+      "icon": "gears",
+      "description": "Automate your build, test, and deploy workflows — trigger jobs, watch builds, and manage your CI/CD servers"
+    },
+    "sub_category": {
+      "name": "Jenkins",
+      "icon": "jenkins",
+      "description": "Trigger and manage Jenkins jobs and builds, and control the Jenkins server"
+    },
+    "inputs": [
+      {
+        "name": "base_url",
+        "type": "string",
+        "value": null,
+        "label": "Jenkins URL",
+        "placeholder": "https://jenkins.example.com",
+        "required": true
+      },
+      {
+        "name": "username",
+        "type": "string",
+        "value": null,
+        "label": "Username",
+        "placeholder": "your Jenkins username",
+        "required": true
+      },
+      {
+        "name": "api_token",
+        "type": "secret",
+        "value": null,
+        "label": "API Token",
+        "placeholder": "a Jenkins API token (User ▸ Configure ▸ API Token)",
+        "required": true
+      },
+      {
+        "name": "reason",
+        "type": "string",
+        "value": null,
+        "label": "Reason",
+        "placeholder": "shown on the Jenkins banner (optional)"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "devops/jenkins/instance_restart": {
+    "hash": "a34652397ec18cbe8475fb7fb76dc43dac3cc2140e728cde71a5c26f7bd9d434",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Jenkins: Restart",
+    "description": "Restart Jenkins immediately, interrupting any running builds. Not all environments support this.",
+    "website": "https://www.flomation.co",
+    "icon": "jenkins+rotate-right",
+    "date": "04/07/2026",
+    "type": 2,
+    "category": {
+      "name": "DevOps",
+      "icon": "gears",
+      "description": "Automate your build, test, and deploy workflows — trigger jobs, watch builds, and manage your CI/CD servers"
+    },
+    "sub_category": {
+      "name": "Jenkins",
+      "icon": "jenkins",
+      "description": "Trigger and manage Jenkins jobs and builds, and control the Jenkins server"
+    },
+    "inputs": [
+      {
+        "name": "base_url",
+        "type": "string",
+        "value": null,
+        "label": "Jenkins URL",
+        "placeholder": "https://jenkins.example.com",
+        "required": true
+      },
+      {
+        "name": "username",
+        "type": "string",
+        "value": null,
+        "label": "Username",
+        "placeholder": "your Jenkins username",
+        "required": true
+      },
+      {
+        "name": "api_token",
+        "type": "secret",
+        "value": null,
+        "label": "API Token",
+        "placeholder": "a Jenkins API token (User ▸ Configure ▸ API Token)",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "devops/jenkins/instance_safe_restart": {
+    "hash": "d39b964bc7b3fe196860172f4c051123191a755214275febdfa6a05829971c9f",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Jenkins: Safely Restart",
+    "description": "Restart Jenkins once all running builds have finished. Not all environments support this.",
+    "website": "https://www.flomation.co",
+    "icon": "jenkins+clock",
+    "date": "04/07/2026",
+    "type": 2,
+    "category": {
+      "name": "DevOps",
+      "icon": "gears",
+      "description": "Automate your build, test, and deploy workflows — trigger jobs, watch builds, and manage your CI/CD servers"
+    },
+    "sub_category": {
+      "name": "Jenkins",
+      "icon": "jenkins",
+      "description": "Trigger and manage Jenkins jobs and builds, and control the Jenkins server"
+    },
+    "inputs": [
+      {
+        "name": "base_url",
+        "type": "string",
+        "value": null,
+        "label": "Jenkins URL",
+        "placeholder": "https://jenkins.example.com",
+        "required": true
+      },
+      {
+        "name": "username",
+        "type": "string",
+        "value": null,
+        "label": "Username",
+        "placeholder": "your Jenkins username",
+        "required": true
+      },
+      {
+        "name": "api_token",
+        "type": "secret",
+        "value": null,
+        "label": "API Token",
+        "placeholder": "a Jenkins API token (User ▸ Configure ▸ API Token)",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "devops/jenkins/instance_safe_shutdown": {
+    "hash": "b6d75244c8b8ecd68d35edb7ef4a1311aadf01959d6d02476f7e106e26fcde0f",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Jenkins: Safely Shutdown",
+    "description": "Shut Jenkins down once all running builds have finished. Not all environments support this.",
+    "website": "https://www.flomation.co",
+    "icon": "jenkins+stop",
+    "date": "04/07/2026",
+    "type": 2,
+    "category": {
+      "name": "DevOps",
+      "icon": "gears",
+      "description": "Automate your build, test, and deploy workflows — trigger jobs, watch builds, and manage your CI/CD servers"
+    },
+    "sub_category": {
+      "name": "Jenkins",
+      "icon": "jenkins",
+      "description": "Trigger and manage Jenkins jobs and builds, and control the Jenkins server"
+    },
+    "inputs": [
+      {
+        "name": "base_url",
+        "type": "string",
+        "value": null,
+        "label": "Jenkins URL",
+        "placeholder": "https://jenkins.example.com",
+        "required": true
+      },
+      {
+        "name": "username",
+        "type": "string",
+        "value": null,
+        "label": "Username",
+        "placeholder": "your Jenkins username",
+        "required": true
+      },
+      {
+        "name": "api_token",
+        "type": "secret",
+        "value": null,
+        "label": "API Token",
+        "placeholder": "a Jenkins API token (User ▸ Configure ▸ API Token)",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "devops/jenkins/instance_shutdown": {
+    "hash": "fd7d3733c3afa5ebd22a4f12e1ef8eb8b5f45e55185010dcd04a3f62e11f2509",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Jenkins: Shutdown",
+    "description": "Shut Jenkins down immediately, interrupting any running builds. Not all environments support this.",
+    "website": "https://www.flomation.co",
+    "icon": "jenkins+circle-stop",
+    "date": "04/07/2026",
+    "type": 2,
+    "category": {
+      "name": "DevOps",
+      "icon": "gears",
+      "description": "Automate your build, test, and deploy workflows — trigger jobs, watch builds, and manage your CI/CD servers"
+    },
+    "sub_category": {
+      "name": "Jenkins",
+      "icon": "jenkins",
+      "description": "Trigger and manage Jenkins jobs and builds, and control the Jenkins server"
+    },
+    "inputs": [
+      {
+        "name": "base_url",
+        "type": "string",
+        "value": null,
+        "label": "Jenkins URL",
+        "placeholder": "https://jenkins.example.com",
+        "required": true
+      },
+      {
+        "name": "username",
+        "type": "string",
+        "value": null,
+        "label": "Username",
+        "placeholder": "your Jenkins username",
+        "required": true
+      },
+      {
+        "name": "api_token",
+        "type": "secret",
+        "value": null,
+        "label": "API Token",
+        "placeholder": "a Jenkins API token (User ▸ Configure ▸ API Token)",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "devops/jenkins/job_copy": {
+    "hash": "80f6d0faeb5f11de61e2c54538a971b5970059c0cbe9cb63318da2a0b93e74e3",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Jenkins: Copy Job",
+    "description": "Create a new Jenkins job by copying the configuration of an existing one.",
+    "website": "https://www.flomation.co",
+    "icon": "jenkins+copy",
+    "date": "04/07/2026",
+    "type": 2,
+    "category": {
+      "name": "DevOps",
+      "icon": "gears",
+      "description": "Automate your build, test, and deploy workflows — trigger jobs, watch builds, and manage your CI/CD servers"
+    },
+    "sub_category": {
+      "name": "Jenkins",
+      "icon": "jenkins",
+      "description": "Trigger and manage Jenkins jobs and builds, and control the Jenkins server"
+    },
+    "inputs": [
+      {
+        "name": "base_url",
+        "type": "string",
+        "value": null,
+        "label": "Jenkins URL",
+        "placeholder": "https://jenkins.example.com",
+        "required": true
+      },
+      {
+        "name": "username",
+        "type": "string",
+        "value": null,
+        "label": "Username",
+        "placeholder": "your Jenkins username",
+        "required": true
+      },
+      {
+        "name": "api_token",
+        "type": "secret",
+        "value": null,
+        "label": "API Token",
+        "placeholder": "a Jenkins API token (User ▸ Configure ▸ API Token)",
+        "required": true
+      },
+      {
+        "name": "job",
+        "type": "string",
+        "value": null,
+        "label": "Source Job",
+        "placeholder": "job to copy from",
+        "required": true
+      },
+      {
+        "name": "new_job",
+        "type": "string",
+        "value": null,
+        "label": "New Job Name",
+        "placeholder": "name for the copy",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "devops/jenkins/job_create": {
+    "hash": "7533fce886a606c7af71eeb10bd70a00d9c1452a113218c8a2f806489187de39",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Jenkins: Create Job",
+    "description": "Create a new Jenkins job from a config.xml definition. Tip: to get the XML of an existing job, add ‘config.xml’ to the end of its URL.",
+    "website": "https://www.flomation.co",
+    "icon": "jenkins+plus",
+    "date": "04/07/2026",
+    "type": 2,
+    "category": {
+      "name": "DevOps",
+      "icon": "gears",
+      "description": "Automate your build, test, and deploy workflows — trigger jobs, watch builds, and manage your CI/CD servers"
+    },
+    "sub_category": {
+      "name": "Jenkins",
+      "icon": "jenkins",
+      "description": "Trigger and manage Jenkins jobs and builds, and control the Jenkins server"
+    },
+    "inputs": [
+      {
+        "name": "base_url",
+        "type": "string",
+        "value": null,
+        "label": "Jenkins URL",
+        "placeholder": "https://jenkins.example.com",
+        "required": true
+      },
+      {
+        "name": "username",
+        "type": "string",
+        "value": null,
+        "label": "Username",
+        "placeholder": "your Jenkins username",
+        "required": true
+      },
+      {
+        "name": "api_token",
+        "type": "secret",
+        "value": null,
+        "label": "API Token",
+        "placeholder": "a Jenkins API token (User ▸ Configure ▸ API Token)",
+        "required": true
+      },
+      {
+        "name": "new_job",
+        "type": "string",
+        "value": null,
+        "label": "New Job Name",
+        "placeholder": "name for the new job",
+        "required": true
+      },
+      {
+        "name": "xml",
+        "type": "code",
+        "value": null,
+        "label": "Config XML",
+        "placeholder": "\u003cproject\u003e…\u003c/project\u003e",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "devops/jenkins/job_delete": {
+    "hash": "2a1460e9fdfb966777f4240e3097684fcf5665cdec7da25475326d681e187789",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Jenkins: Delete Job",
+    "description": "Permanently delete a Jenkins job and all of its build history.",
+    "website": "https://www.flomation.co",
+    "icon": "jenkins+trash",
+    "date": "04/07/2026",
+    "type": 2,
+    "category": {
+      "name": "DevOps",
+      "icon": "gears",
+      "description": "Automate your build, test, and deploy workflows — trigger jobs, watch builds, and manage your CI/CD servers"
+    },
+    "sub_category": {
+      "name": "Jenkins",
+      "icon": "jenkins",
+      "description": "Trigger and manage Jenkins jobs and builds, and control the Jenkins server"
+    },
+    "inputs": [
+      {
+        "name": "base_url",
+        "type": "string",
+        "value": null,
+        "label": "Jenkins URL",
+        "placeholder": "https://jenkins.example.com",
+        "required": true
+      },
+      {
+        "name": "username",
+        "type": "string",
+        "value": null,
+        "label": "Username",
+        "placeholder": "your Jenkins username",
+        "required": true
+      },
+      {
+        "name": "api_token",
+        "type": "secret",
+        "value": null,
+        "label": "API Token",
+        "placeholder": "a Jenkins API token (User ▸ Configure ▸ API Token)",
+        "required": true
+      },
+      {
+        "name": "job",
+        "type": "string",
+        "value": null,
+        "label": "Job",
+        "placeholder": "job name (or folder/job)",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "devops/jenkins/job_disable": {
+    "hash": "2e356fef2b22e888d17e10e6a116774046a0b8cdf52328cb06ecf5af6e439c18",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Jenkins: Disable Job",
+    "description": "Disable a Jenkins job so it can't be triggered until re-enabled.",
+    "website": "https://www.flomation.co",
+    "icon": "jenkins+ban",
+    "date": "04/07/2026",
+    "type": 2,
+    "category": {
+      "name": "DevOps",
+      "icon": "gears",
+      "description": "Automate your build, test, and deploy workflows — trigger jobs, watch builds, and manage your CI/CD servers"
+    },
+    "sub_category": {
+      "name": "Jenkins",
+      "icon": "jenkins",
+      "description": "Trigger and manage Jenkins jobs and builds, and control the Jenkins server"
+    },
+    "inputs": [
+      {
+        "name": "base_url",
+        "type": "string",
+        "value": null,
+        "label": "Jenkins URL",
+        "placeholder": "https://jenkins.example.com",
+        "required": true
+      },
+      {
+        "name": "username",
+        "type": "string",
+        "value": null,
+        "label": "Username",
+        "placeholder": "your Jenkins username",
+        "required": true
+      },
+      {
+        "name": "api_token",
+        "type": "secret",
+        "value": null,
+        "label": "API Token",
+        "placeholder": "a Jenkins API token (User ▸ Configure ▸ API Token)",
+        "required": true
+      },
+      {
+        "name": "job",
+        "type": "string",
+        "value": null,
+        "label": "Job",
+        "placeholder": "job name (or folder/job)",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "devops/jenkins/job_enable": {
+    "hash": "4194eb681a4e5f3d3327019360c592cc977f004c8ab11cbcf2a27c576cd7a494",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Jenkins: Enable Job",
+    "description": "Enable a Jenkins job so it can be built again.",
+    "website": "https://www.flomation.co",
+    "icon": "jenkins+check",
+    "date": "04/07/2026",
+    "type": 2,
+    "category": {
+      "name": "DevOps",
+      "icon": "gears",
+      "description": "Automate your build, test, and deploy workflows — trigger jobs, watch builds, and manage your CI/CD servers"
+    },
+    "sub_category": {
+      "name": "Jenkins",
+      "icon": "jenkins",
+      "description": "Trigger and manage Jenkins jobs and builds, and control the Jenkins server"
+    },
+    "inputs": [
+      {
+        "name": "base_url",
+        "type": "string",
+        "value": null,
+        "label": "Jenkins URL",
+        "placeholder": "https://jenkins.example.com",
+        "required": true
+      },
+      {
+        "name": "username",
+        "type": "string",
+        "value": null,
+        "label": "Username",
+        "placeholder": "your Jenkins username",
+        "required": true
+      },
+      {
+        "name": "api_token",
+        "type": "secret",
+        "value": null,
+        "label": "API Token",
+        "placeholder": "a Jenkins API token (User ▸ Configure ▸ API Token)",
+        "required": true
+      },
+      {
+        "name": "job",
+        "type": "string",
+        "value": null,
+        "label": "Job",
+        "placeholder": "job name (or folder/job)",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "devops/jenkins/job_get": {
+    "hash": "85dc611f3117fe78c01118f8c0f5f3998155fc941fbacfdf34f386f6c6beac47",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Jenkins: Get Job",
+    "description": "Fetch a Jenkins job's details — its description, buildability, health, and last build references.",
+    "website": "https://www.flomation.co",
+    "icon": "jenkins+eye",
+    "date": "04/07/2026",
+    "type": 2,
+    "category": {
+      "name": "DevOps",
+      "icon": "gears",
+      "description": "Automate your build, test, and deploy workflows — trigger jobs, watch builds, and manage your CI/CD servers"
+    },
+    "sub_category": {
+      "name": "Jenkins",
+      "icon": "jenkins",
+      "description": "Trigger and manage Jenkins jobs and builds, and control the Jenkins server"
+    },
+    "inputs": [
+      {
+        "name": "base_url",
+        "type": "string",
+        "value": null,
+        "label": "Jenkins URL",
+        "placeholder": "https://jenkins.example.com",
+        "required": true
+      },
+      {
+        "name": "username",
+        "type": "string",
+        "value": null,
+        "label": "Username",
+        "placeholder": "your Jenkins username",
+        "required": true
+      },
+      {
+        "name": "api_token",
+        "type": "secret",
+        "value": null,
+        "label": "API Token",
+        "placeholder": "a Jenkins API token (User ▸ Configure ▸ API Token)",
+        "required": true
+      },
+      {
+        "name": "job",
+        "type": "string",
+        "value": null,
+        "label": "Job",
+        "placeholder": "job name (or folder/job)",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Job",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "devops/jenkins/job_list": {
+    "hash": "c9b8a3f5548e69e01927a08382ea3c844555cb9bff4d913cdf3bee3201f21ffd",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Jenkins: List Jobs",
+    "description": "List the jobs on the Jenkins instance with their name, URL, and status colour.",
+    "website": "https://www.flomation.co",
+    "icon": "jenkins+list",
+    "date": "04/07/2026",
+    "type": 2,
+    "category": {
+      "name": "DevOps",
+      "icon": "gears",
+      "description": "Automate your build, test, and deploy workflows — trigger jobs, watch builds, and manage your CI/CD servers"
+    },
+    "sub_category": {
+      "name": "Jenkins",
+      "icon": "jenkins",
+      "description": "Trigger and manage Jenkins jobs and builds, and control the Jenkins server"
+    },
+    "inputs": [
+      {
+        "name": "base_url",
+        "type": "string",
+        "value": null,
+        "label": "Jenkins URL",
+        "placeholder": "https://jenkins.example.com",
+        "required": true
+      },
+      {
+        "name": "username",
+        "type": "string",
+        "value": null,
+        "label": "Username",
+        "placeholder": "your Jenkins username",
+        "required": true
+      },
+      {
+        "name": "api_token",
+        "type": "secret",
+        "value": null,
+        "label": "API Token",
+        "placeholder": "a Jenkins API token (User ▸ Configure ▸ API Token)",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "results",
+        "type": "object",
+        "value": null,
+        "label": "Jobs",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Count",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "devops/jenkins/job_trigger": {
+    "hash": "b04e525db5f947e99170b83cec13129f80bba5a6da9461d3972d2d2edd3ecd75",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Jenkins: Trigger Job",
+    "description": "Start a build of a Jenkins job. Returns the queue item URL so a later step can track it.",
+    "website": "https://www.flomation.co",
+    "icon": "jenkins+play",
+    "date": "04/07/2026",
+    "type": 2,
+    "category": {
+      "name": "DevOps",
+      "icon": "gears",
+      "description": "Automate your build, test, and deploy workflows — trigger jobs, watch builds, and manage your CI/CD servers"
+    },
+    "sub_category": {
+      "name": "Jenkins",
+      "icon": "jenkins",
+      "description": "Trigger and manage Jenkins jobs and builds, and control the Jenkins server"
+    },
+    "inputs": [
+      {
+        "name": "base_url",
+        "type": "string",
+        "value": null,
+        "label": "Jenkins URL",
+        "placeholder": "https://jenkins.example.com",
+        "required": true
+      },
+      {
+        "name": "username",
+        "type": "string",
+        "value": null,
+        "label": "Username",
+        "placeholder": "your Jenkins username",
+        "required": true
+      },
+      {
+        "name": "api_token",
+        "type": "secret",
+        "value": null,
+        "label": "API Token",
+        "placeholder": "a Jenkins API token (User ▸ Configure ▸ API Token)",
+        "required": true
+      },
+      {
+        "name": "job",
+        "type": "string",
+        "value": null,
+        "label": "Job",
+        "placeholder": "job name (or folder/job)",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "queue_url",
+        "type": "string",
+        "value": null,
+        "label": "Queue Item URL",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "devops/jenkins/job_trigger_params": {
+    "hash": "bc37f69d435ca02ddf3990f3333e5d3c3d60db3fb1da317f66710eaf11a2e557",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Jenkins: Trigger Job with Parameters",
+    "description": "Start a build of a parameterised Jenkins job, passing name/value build parameters. The job must be set up to accept parameters.",
+    "website": "https://www.flomation.co",
+    "icon": "jenkins+play",
+    "date": "04/07/2026",
+    "type": 2,
+    "category": {
+      "name": "DevOps",
+      "icon": "gears",
+      "description": "Automate your build, test, and deploy workflows — trigger jobs, watch builds, and manage your CI/CD servers"
+    },
+    "sub_category": {
+      "name": "Jenkins",
+      "icon": "jenkins",
+      "description": "Trigger and manage Jenkins jobs and builds, and control the Jenkins server"
+    },
+    "inputs": [
+      {
+        "name": "base_url",
+        "type": "string",
+        "value": null,
+        "label": "Jenkins URL",
+        "placeholder": "https://jenkins.example.com",
+        "required": true
+      },
+      {
+        "name": "username",
+        "type": "string",
+        "value": null,
+        "label": "Username",
+        "placeholder": "your Jenkins username",
+        "required": true
+      },
+      {
+        "name": "api_token",
+        "type": "secret",
+        "value": null,
+        "label": "API Token",
+        "placeholder": "a Jenkins API token (User ▸ Configure ▸ API Token)",
+        "required": true
+      },
+      {
+        "name": "job",
+        "type": "string",
+        "value": null,
+        "label": "Job",
+        "placeholder": "job name (or folder/job)",
+        "required": true
+      },
+      {
+        "name": "parameters",
+        "type": "key_value_array",
+        "value": null,
+        "label": "Parameters",
+        "placeholder": "Build parameter name → value"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "queue_url",
+        "type": "string",
+        "value": null,
+        "label": "Queue Item URL",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
   "ecommerce/shopify/order_create": {
     "hash": "c4d360790540116ba165d7335769833d846738911e4648039ae61b1724d4dc5e",
     "author": "Dave McElin",
