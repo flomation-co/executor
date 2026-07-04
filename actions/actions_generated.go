@@ -240,6 +240,7 @@ import (
 	hubspot_ticket_list "flomation.app/automate/executor/actions/hubspot/ticket_list"
 	hubspot_ticket_search "flomation.app/automate/executor/actions/hubspot/ticket_search"
 	hubspot_ticket_update "flomation.app/automate/executor/actions/hubspot/ticket_update"
+	humanintheloop_await "flomation.app/automate/executor/actions/humanintheloop/await"
 	journey_calculate_route "flomation.app/automate/executor/actions/journey/calculate_route"
 	journey_compare_departure_times "flomation.app/automate/executor/actions/journey/compare_departure_times"
 	journey_find_arrive_by "flomation.app/automate/executor/actions/journey/find_arrive_by"
@@ -787,6 +788,7 @@ var Actions = map[string]core.Action{
 	"hubspot/ticket_list":                               hubspot_ticket_list.Execute,
 	"hubspot/ticket_search":                             hubspot_ticket_search.Execute,
 	"hubspot/ticket_update":                             hubspot_ticket_update.Execute,
+	"humanintheloop/await":                              humanintheloop_await.Execute,
 	"journey/calculate_route":                           journey_calculate_route.Execute,
 	"journey/compare_departure_times":                   journey_compare_departure_times.Execute,
 	"journey/find_arrive_by":                            journey_find_arrive_by.Execute,

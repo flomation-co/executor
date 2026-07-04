@@ -58,6 +58,11 @@ const (
 	ActionTypeConditional = 4
 	ActionTypeLoop        = 5
 	ActionTypeSwitch      = 6
+	// ActionTypeAwait is the Human-in-the-Loop node. Like Switch it exposes
+	// multiple output handles (one per option, plus "timeout") and routes to
+	// the matched handle — but it also suspends the flow while awaiting a
+	// human response, then resumes down the handle for the chosen option.
+	ActionTypeAwait = 7
 )
 
 const (
@@ -92,6 +97,12 @@ const (
 
 	// ToolsHandle is the source handle ID for the tools subgraph edge.
 	ToolsHandle = "tools"
+
+	// DeliveryHandle is the source handle ID the Human-in-the-Loop node uses to
+	// reach the Send Message nodes it fans a request out to. Like the tools
+	// handle, its children are invoked in-process, not walked as normal
+	// downstream nodes.
+	DeliveryHandle = "delivery"
 
 	// MaxToolRoundsDefault is the safety cap on tool calling rounds.
 	MaxToolRoundsDefault = 25
@@ -649,12 +660,20 @@ type Flow struct {
 	hadError             bool
 	suspended            bool
 	suspendInfo          *SuspendInfo
-	resumed              bool            // true when restored from a checkpoint
-	resumedSuspendNodeID string          // the node that caused the original suspend
-	traversedNodes       map[string]bool // tracks which nodes have had children traversed
+	resumed              bool                   // true when restored from a checkpoint
+	resumedSuspendNodeID string                 // the node that caused the original suspend
+	resumeData           map[string]interface{} // data injected on resume (e.g. a human's choice)
+	traversedNodes       map[string]bool        // tracks which nodes have had children traversed
 	context              *ExecutionContext
 	ctx                  gocontext.Context
 	cancel               gocontext.CancelFunc
+
+	// actions and env are stashed at Execute time so an action can invoke
+	// another node in-process (used by the Human-in-the-Loop node to fan a
+	// request out over its referenced Send Message nodes). The Action
+	// signature does not carry these, so they live on the Flow instead.
+	actions map[string]Action
+	env     *environment.Environment
 
 	// blobs is the per-execution off-loading store for large tool
 	// outputs. Lazily initialised by Blobs() so flows that never
@@ -692,6 +711,11 @@ type Checkpoint struct {
 	InErrorChain         bool                              `json:"in_error_chain"`
 	HadError             bool                              `json:"had_error"`
 	SuspendInfo          *SuspendInfo                      `json:"suspend_info,omitempty"`
+	// ResumeData carries values injected at resume time (e.g. the option a
+	// human chose). The API patches this field onto the stored checkpoint
+	// JSONB before re-queuing, so it reaches the executor untouched by the
+	// runner. Restored into Flow.resumeData and read via GetResumeData().
+	ResumeData map[string]interface{} `json:"resume_data,omitempty"`
 }
 
 // Suspend marks the execution as suspended with the given metadata.
@@ -719,6 +743,7 @@ func (f *Flow) CreateCheckpoint() *Checkpoint {
 		InErrorChain:         f.inErrorChain,
 		HadError:             f.hadError,
 		SuspendInfo:          f.suspendInfo,
+		ResumeData:           f.resumeData,
 	}
 }
 
@@ -742,6 +767,9 @@ func (f *Flow) RestoreCheckpoint(cp *Checkpoint) {
 	}
 	f.inErrorChain = cp.InErrorChain
 	f.hadError = cp.HadError
+	if cp.ResumeData != nil {
+		f.resumeData = cp.ResumeData
+	}
 	// Clear suspend state — we are resuming
 	f.suspended = false
 	f.suspendInfo = nil
@@ -783,6 +811,107 @@ func (f *Flow) IsResumed() bool { return f.resumed }
 // and is now being re-executed after resume.
 func (f *Flow) IsResumedNode(nodeID string) bool {
 	return f.resumed && f.resumedSuspendNodeID == nodeID
+}
+
+// GetResumeData returns the data injected when the execution was resumed
+// (nil on a fresh run). The Human-in-the-Loop node reads the chosen option
+// and outcome from here on its resume pass.
+func (f *Flow) GetResumeData() map[string]interface{} { return f.resumeData }
+
+// SetResumeData overrides the injected resume data. Primarily for tests.
+func (f *Flow) SetResumeData(m map[string]interface{}) { f.resumeData = m }
+
+// InvokeNode runs another node's action in-process and returns its outputs.
+// It is used by the Human-in-the-Loop node to deliver a request through its
+// referenced Send Message nodes: the caller passes rendered values (blocks,
+// reply_markup, message text) in extra, which are injected into the target
+// node's matching inputs before delivery and restored afterwards so the
+// node's saved configuration is left untouched.
+//
+// The target node is resolved and executed through executeNodeActionOnly so
+// it goes through the same variable substitution (secrets, ${flow.X}, …),
+// event emission, and result recording as any other node — the delivery
+// therefore appears in the execution inspector like a normal send.
+func (f *Flow) InvokeNode(node *Node, extra map[string]interface{}) (map[string]interface{}, error) {
+	if node == nil || node.Data == nil {
+		return nil, ErrInvalidNode
+	}
+
+	// Snapshot the target inputs we are about to override, then restore them
+	// on return — mirrors the tool-input reset used by the AI tool loop so a
+	// second delivery (or a checkpoint) never sees injected values.
+	type saved struct {
+		conn      *Connection
+		val       interface{}
+		transient bool // true if we appended this input and must strip it
+	}
+	var snapshot []saved
+	setInput := func(name string, value interface{}) {
+		for _, c := range node.Data.Config.Inputs {
+			if c != nil && c.Name == name {
+				snapshot = append(snapshot, saved{conn: c, val: c.Value})
+				c.Value = value
+				return
+			}
+		}
+		// Input not declared on the node — append a transient one and record
+		// it so we can strip it again afterwards.
+		nc := &Connection{Name: name, Type: ConnectionTypeText, Value: value}
+		node.Data.Config.Inputs = append(node.Data.Config.Inputs, nc)
+		snapshot = append(snapshot, saved{conn: nc, transient: true})
+	}
+	for k, v := range extra {
+		setInput(k, v)
+	}
+	defer func() {
+		for i := len(snapshot) - 1; i >= 0; i-- {
+			s := snapshot[i]
+			if s.transient {
+				for idx, c := range node.Data.Config.Inputs {
+					if c == s.conn {
+						node.Data.Config.Inputs = append(node.Data.Config.Inputs[:idx], node.Data.Config.Inputs[idx+1:]...)
+						break
+					}
+				}
+				continue
+			}
+			s.conn.Value = s.val
+		}
+	}()
+
+	// Ensure the delivery node re-runs even if a stale cache entry exists.
+	delete(f.nodeResults, node.ID)
+
+	// Prevent parent-resolution recursion. The target is typically wired as a
+	// child of the node invoking it (e.g. the Human-in-the-Loop node delivering
+	// through its Send Message children via the delivery handle). That node is
+	// mid-execution and not yet cached, so executeNodeActionOnly's parent walk
+	// would re-enter it. Temporarily seed any not-yet-cached parent with an
+	// empty result (delivery nodes read their own config, not parent outputs),
+	// then restore. Mirrors how the AI tool loop invokes tools only after the
+	// AI node is cached.
+	var seeded []string
+	for _, p := range f.FindSource(node.ID) {
+		if p == nil {
+			continue
+		}
+		if _, cached := f.nodeResults[p.ID]; !cached {
+			f.nodeResults[p.ID] = map[string]interface{}{}
+			if f.traversedNodes == nil {
+				f.traversedNodes = make(map[string]bool)
+			}
+			f.traversedNodes[p.ID] = true
+			seeded = append(seeded, p.ID)
+		}
+	}
+	defer func() {
+		for _, id := range seeded {
+			delete(f.nodeResults, id)
+			delete(f.traversedNodes, id)
+		}
+	}()
+
+	return f.executeNodeActionOnly(f.actions, node, f.env)
 }
 
 // filterSerialisableVariables removes non-JSON-serialisable values
@@ -1007,6 +1136,11 @@ func (f *Flow) InjectTriggerData(data map[string]interface{}) {
 }
 
 func (f *Flow) Execute(actions map[string]Action, entry *string, environment *environment.Environment) (map[string]interface{}, error) {
+	// Stash the registry and environment so actions can invoke other nodes
+	// in-process (see InvokeNode — used by the Human-in-the-Loop node).
+	f.actions = actions
+	f.env = environment
+
 	var start *Node
 
 	if entry != nil {
@@ -1823,7 +1957,8 @@ func (f *Flow) executeNodeActionOnly(actions map[string]Action, node *Node, envi
 	// own outputs take precedence over inherited parent outputs.
 	if node.Data != nil && (node.Data.Config.Type == ActionTypeConditional ||
 		node.Data.Config.Type == ActionTypeSwitch ||
-		node.Data.Config.Type == ActionTypeLoop) {
+		node.Data.Config.Type == ActionTypeLoop ||
+		node.Data.Config.Type == ActionTypeAwait) {
 		for k, v := range parentResults {
 			// Skip scoped parent keys (nodeId.outputName) — only pass through
 			// flat keys. Scoped keys are rebuilt per-node in the parent loop
@@ -1913,6 +2048,16 @@ func (f *Flow) executeNodeChildren(actions map[string]Action, node *Node, output
 		// Fall back to default handle if no match or no children on matched handle
 		if len(children) == 0 {
 			children = f.FindTargetByHandle(node.ID, "default")
+		}
+	} else if node.Data.Config.Type == ActionTypeAwait {
+		// Human-in-the-Loop: route to the handle for the chosen option
+		// ("option_<value>") or "timeout". Emitted under matched_case for
+		// symmetry with Switch. No default fallback — an unrouted outcome
+		// simply ends that branch. On the first (suspending) pass matched_case
+		// is empty and there are no children to run.
+		branch, _ := outputs["matched_case"].(string)
+		if branch != "" {
+			children = f.FindTargetByHandle(node.ID, branch)
 		}
 	} else if node.Data.Config.Type == ActionTypeLoop {
 		// Loop execution: iterate body children, then execute output children
@@ -3399,6 +3544,27 @@ func (f *Flow) checkUnmatchedBranch(nodeID string, visited map[string]bool) bool
 					allEdgesUnmatched := true
 					for _, ei := range edges {
 						if ei.handle == "" || ei.handle == matchedCase || ei.handle == "default" {
+							allEdgesUnmatched = false
+							break
+						}
+					}
+					if allEdgesUnmatched {
+						thisSourceUnmatched = true
+					}
+				}
+			}
+		}
+
+		if sourceType == ActionTypeAwait {
+			// Human-in-the-Loop routes to the chosen "option_<value>" handle or
+			// "timeout" (emitted under matched_case, like Switch). Unlike Switch
+			// there is no "default" handle, so it is not exempted here.
+			if cached, ok := f.nodeResults[sourceNode.ID]; ok {
+				matchedCase, _ := cached["matched_case"].(string)
+				if matchedCase != "" {
+					allEdgesUnmatched := true
+					for _, ei := range edges {
+						if ei.handle == "" || ei.handle == matchedCase {
 							allEdgesUnmatched = false
 							break
 						}
