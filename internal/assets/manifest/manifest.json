@@ -10435,7 +10435,7 @@
     ]
   },
   "ecommerce/woocommerce/coupon_create": {
-    "hash": "2cfd60b867f4994b5ca5e027e7971c36dce50ea05af5e8238b12691def9da490",
+    "hash": "2c6e2be58932f26b677fb5a45e1ab51abe5199ed3e79e0fde50b4f2111a1f5dc",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "WooCommerce: Create Coupon",
@@ -10460,7 +10460,7 @@
         "type": "string",
         "value": null,
         "label": "Store URL",
-        "placeholder": "https://your-store.com",
+        "placeholder": "https://your-store.com — your store's root URL, not the /wp-json path",
         "required": true
       },
       {
@@ -10681,7 +10681,7 @@
     ]
   },
   "ecommerce/woocommerce/coupon_delete": {
-    "hash": "94816bd78ebe4ea0ed1e8697445bcc5cf79aa39a25f5743954d4e40ccd19ba0d",
+    "hash": "5216a63e83c3481fd949fba234d1555a2849d3d1a4418295db5d554a179dd40d",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "WooCommerce: Delete Coupon",
@@ -10706,7 +10706,7 @@
         "type": "string",
         "value": null,
         "label": "Store URL",
-        "placeholder": "https://your-store.com",
+        "placeholder": "https://your-store.com — your store's root URL, not the /wp-json path",
         "required": true
       },
       {
@@ -10787,7 +10787,7 @@
     ]
   },
   "ecommerce/woocommerce/coupon_get": {
-    "hash": "a02202b48a292fe1055a3088f85c8c6dca8edd798e8d667f9ed9033a7e857b88",
+    "hash": "3c1a1c3f0f2b434213b78312e896db360962fb418d09cdb7c73be5fe2f4f9640",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "WooCommerce: Get Coupon",
@@ -10812,7 +10812,7 @@
         "type": "string",
         "value": null,
         "label": "Store URL",
-        "placeholder": "https://your-store.com",
+        "placeholder": "https://your-store.com — your store's root URL, not the /wp-json path",
         "required": true
       },
       {
@@ -10886,7 +10886,7 @@
     ]
   },
   "ecommerce/woocommerce/coupon_get_all": {
-    "hash": "635757efff537777465a991bc9f4304e3e72421ca0e3882f768e11721e833aac",
+    "hash": "010723a09b90115fcca07c3eabab6b0852f2530bc21383ea9d0d0be886f00c68",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "WooCommerce: Get Many Coupons",
@@ -10911,7 +10911,7 @@
         "type": "string",
         "value": null,
         "label": "Store URL",
-        "placeholder": "https://your-store.com",
+        "placeholder": "https://your-store.com — your store's root URL, not the /wp-json path",
         "required": true
       },
       {
@@ -11051,7 +11051,7 @@
         "type": "integer",
         "value": null,
         "label": "Offset",
-        "placeholder": "Number of results to skip"
+        "placeholder": "Number of results to skip (ignored when Return All is on)"
       }
     ],
     "outputs": [
@@ -11107,7 +11107,7 @@
     ]
   },
   "ecommerce/woocommerce/coupon_update": {
-    "hash": "8a19047fb4b5d6a17626de34015547fc9b90c8c5599f3e1ae6994dd956a19fef",
+    "hash": "8903e63a9617731fcf7a88cb0e74df34d1c7d5245f0adb157a25a2b64f88fb44",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "WooCommerce: Update Coupon",
@@ -11132,7 +11132,7 @@
         "type": "string",
         "value": null,
         "label": "Store URL",
-        "placeholder": "https://your-store.com",
+        "placeholder": "https://your-store.com — your store's root URL, not the /wp-json path",
         "required": true
       },
       {
@@ -11360,7 +11360,7 @@
     ]
   },
   "ecommerce/woocommerce/customer_create": {
-    "hash": "90a5d3fe1d8127e5f6bfdd104b207fade4a5f09a40c59fefa525b6107c247a0e",
+    "hash": "6e71f51f1d7f7d387ba0b2148586921f0ab6e5a6a9d71d962f839b6d8730b191",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "WooCommerce: Create Customer",
@@ -11385,7 +11385,7 @@
         "type": "string",
         "value": null,
         "label": "Store URL",
-        "placeholder": "https://your-store.com",
+        "placeholder": "https://your-store.com — your store's root URL, not the /wp-json path",
         "required": true
       },
       {
@@ -11552,7 +11552,7 @@
     ]
   },
   "ecommerce/woocommerce/customer_delete": {
-    "hash": "d252f2abf49f62ffab3870e58cd7257ad11984aaca6d536bbe3cbd8c9ea024be",
+    "hash": "fcd60c599054246ea08899bd2fcf07ce19e56acbed92e47a99c0cf5341766dbe",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "WooCommerce: Delete Customer",
@@ -11577,7 +11577,7 @@
         "type": "string",
         "value": null,
         "label": "Store URL",
-        "placeholder": "https://your-store.com",
+        "placeholder": "https://your-store.com — your store's root URL, not the /wp-json path",
         "required": true
       },
       {
@@ -11651,7 +11651,7 @@
     ]
   },
   "ecommerce/woocommerce/customer_get": {
-    "hash": "062bef4119537ed3d33500833b8f4c822803dcea5ea7988c01cf3a5f5ad4852b",
+    "hash": "34211937a27c329b704a26bd7ff4b0e5f7cdcb9e2fd98db27da670c28fc4ccf1",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "WooCommerce: Get Customer",
@@ -11676,7 +11676,7 @@
         "type": "string",
         "value": null,
         "label": "Store URL",
-        "placeholder": "https://your-store.com",
+        "placeholder": "https://your-store.com — your store's root URL, not the /wp-json path",
         "required": true
       },
       {
@@ -11750,7 +11750,7 @@
     ]
   },
   "ecommerce/woocommerce/customer_get_all": {
-    "hash": "a1f0178656ff5f29c39a177bd31b8369f1e4477878d86703317377fe1c556493",
+    "hash": "8dd0835cd501a2438b2756c6a0711c6189479d07a4bf568a3ca6ba6b8fb7fd6f",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "WooCommerce: Get Many Customers",
@@ -11775,7 +11775,7 @@
         "type": "string",
         "value": null,
         "label": "Store URL",
-        "placeholder": "https://your-store.com",
+        "placeholder": "https://your-store.com — your store's root URL, not the /wp-json path",
         "required": true
       },
       {
@@ -11938,7 +11938,7 @@
         "type": "integer",
         "value": null,
         "label": "Offset",
-        "placeholder": "Number of customers to skip"
+        "placeholder": "Number of customers to skip (ignored when Return All is on)"
       }
     ],
     "outputs": [
@@ -11994,7 +11994,7 @@
     ]
   },
   "ecommerce/woocommerce/customer_update": {
-    "hash": "e1c08aae47925d1dccdec7ef0bbc27c9fee14b19b7f8668f65522d6412566534",
+    "hash": "0b889075e5fa0c7e7c55939db3d2bb2f5d0046b1e96a2fffb08528820fbbb83e",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "WooCommerce: Update Customer",
@@ -12019,7 +12019,7 @@
         "type": "string",
         "value": null,
         "label": "Store URL",
-        "placeholder": "https://your-store.com",
+        "placeholder": "https://your-store.com — your store's root URL, not the /wp-json path",
         "required": true
       },
       {
@@ -12186,7 +12186,7 @@
     ]
   },
   "ecommerce/woocommerce/order_create": {
-    "hash": "5e619308283d20e387d24ae89b99fd1eddaff5d85f0532e5531dd850d3afc802",
+    "hash": "6f77aa8e8db4950c0a1c9a37c1fb60b5c305ccbec11ce488e190fa7a4eace031",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "WooCommerce: Create Order",
@@ -12211,7 +12211,7 @@
         "type": "string",
         "value": null,
         "label": "Store URL",
-        "placeholder": "https://your-store.com",
+        "placeholder": "https://your-store.com — your store's root URL, not the /wp-json path",
         "required": true
       },
       {
@@ -12426,7 +12426,7 @@
     ]
   },
   "ecommerce/woocommerce/order_delete": {
-    "hash": "31cf9bcc228027d53564a54979562b236701b39825d95d78e9e97229f74f1e32",
+    "hash": "572e9980adca0ac3a13cfe21584e9ccef9aec462c8e5523f0a4b75f28d402cb5",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "WooCommerce: Delete Order",
@@ -12451,7 +12451,7 @@
         "type": "string",
         "value": null,
         "label": "Store URL",
-        "placeholder": "https://your-store.com",
+        "placeholder": "https://your-store.com — your store's root URL, not the /wp-json path",
         "required": true
       },
       {
@@ -12532,7 +12532,7 @@
     ]
   },
   "ecommerce/woocommerce/order_get": {
-    "hash": "9a7a2d4ff38a7dfb581b2e69d6b3b3db8b2e1e0a917f5467e8b5f5ca606b8802",
+    "hash": "fd3e8e713e2aacc8f17f67e85b51474bbd752e2b3a884ffd52195477ce719a2a",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "WooCommerce: Get Order",
@@ -12557,7 +12557,7 @@
         "type": "string",
         "value": null,
         "label": "Store URL",
-        "placeholder": "https://your-store.com",
+        "placeholder": "https://your-store.com — your store's root URL, not the /wp-json path",
         "required": true
       },
       {
@@ -12631,7 +12631,7 @@
     ]
   },
   "ecommerce/woocommerce/order_get_all": {
-    "hash": "3d03e7e6b9cf5801c531aa719d4eb5b1579d62b8c97cf28cb3d7ba3cdac8624a",
+    "hash": "e342971e4931a01d2b71e1ac6b74d8546219dd891c06bd816440bd19e05b2855",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "WooCommerce: Get Many Orders",
@@ -12656,7 +12656,7 @@
         "type": "string",
         "value": null,
         "label": "Store URL",
-        "placeholder": "https://your-store.com",
+        "placeholder": "https://your-store.com — your store's root URL, not the /wp-json path",
         "required": true
       },
       {
@@ -12904,7 +12904,7 @@
     ]
   },
   "ecommerce/woocommerce/order_update": {
-    "hash": "bb175dbd9dfb8595fcd2f73e28b120467a109defb037b5f7dc0b5edd8fe565a6",
+    "hash": "4e211476edaa190857902b84df0be96b317c75dc605b1bb6288263d98b731254",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "WooCommerce: Update Order",
@@ -12929,7 +12929,7 @@
         "type": "string",
         "value": null,
         "label": "Store URL",
-        "placeholder": "https://your-store.com",
+        "placeholder": "https://your-store.com — your store's root URL, not the /wp-json path",
         "required": true
       },
       {
@@ -13152,7 +13152,7 @@
     ]
   },
   "ecommerce/woocommerce/product_create": {
-    "hash": "5981f29d0b485395ec2aefbd89bf34e0a4479223044ffed4327a2bdd6bc0e8c7",
+    "hash": "77ad552c4bc2ad9432b63fceaa8083425b0a74d9184ab18cbf8c89d320271b2a",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "WooCommerce: Create Product",
@@ -13177,7 +13177,7 @@
         "type": "string",
         "value": null,
         "label": "Store URL",
-        "placeholder": "https://your-store.com",
+        "placeholder": "https://your-store.com — your store's root URL, not the /wp-json path",
         "required": true
       },
       {
@@ -13571,7 +13571,7 @@
     ]
   },
   "ecommerce/woocommerce/product_delete": {
-    "hash": "6e737b4f4d6309cd3161b72a7e500be02e72b29c3a1fe6a9d0dd900f2da0203c",
+    "hash": "ae01bc044cbfd846a0e9f12c538aeea6a887f75af27297b8763cfc19ac1a8f44",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "WooCommerce: Delete Product",
@@ -13596,7 +13596,7 @@
         "type": "string",
         "value": null,
         "label": "Store URL",
-        "placeholder": "https://your-store.com",
+        "placeholder": "https://your-store.com — your store's root URL, not the /wp-json path",
         "required": true
       },
       {
@@ -13677,7 +13677,7 @@
     ]
   },
   "ecommerce/woocommerce/product_get": {
-    "hash": "008613d0c2ee97aeb7187f54f4d325b5c9fdc586433b3ec16e627c0f514d7220",
+    "hash": "0b9727cd589b88019f30a5aec4308f8b724ed810e65cbde63710ad4814226b64",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "WooCommerce: Get Product",
@@ -13702,7 +13702,7 @@
         "type": "string",
         "value": null,
         "label": "Store URL",
-        "placeholder": "https://your-store.com",
+        "placeholder": "https://your-store.com — your store's root URL, not the /wp-json path",
         "required": true
       },
       {
@@ -13776,7 +13776,7 @@
     ]
   },
   "ecommerce/woocommerce/product_get_all": {
-    "hash": "e3459f644b83dbb01ea5f81f09854661cb4497a04dcc2b52fcecc811845b8a1e",
+    "hash": "96ccec60909b844822bbcfbc21380f911f3601afb23dd9acdc7df11b618801b3",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "WooCommerce: Get Many Products",
@@ -13801,7 +13801,7 @@
         "type": "string",
         "value": null,
         "label": "Store URL",
-        "placeholder": "https://your-store.com",
+        "placeholder": "https://your-store.com — your store's root URL, not the /wp-json path",
         "required": true
       },
       {
@@ -14074,7 +14074,7 @@
         "type": "integer",
         "value": null,
         "label": "Offset",
-        "placeholder": "Skip this many results"
+        "placeholder": "Skip this many results (ignored when Return All is on)"
       }
     ],
     "outputs": [
@@ -14130,7 +14130,7 @@
     ]
   },
   "ecommerce/woocommerce/product_update": {
-    "hash": "03844b8e9800c684d187be041d6a60952506d9d6f412815b78323619e567044a",
+    "hash": "9c86fa069a192695c026c0c1ea29f9a86bb4e87832420316160cc3c03ecafae3",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "WooCommerce: Update Product",
@@ -14155,7 +14155,7 @@
         "type": "string",
         "value": null,
         "label": "Store URL",
-        "placeholder": "https://your-store.com",
+        "placeholder": "https://your-store.com — your store's root URL, not the /wp-json path",
         "required": true
       },
       {
@@ -65210,7 +65210,7 @@
     ]
   },
   "trigger/woocommerce_webhook": {
-    "hash": "0b3ebe22536dc97b56991fa199e920edee57897fd04ad927d162bd293668501f",
+    "hash": "95894a95315abf739bce97e9f2741310e7b5678b020d91be5b4044ea0d2a43ca",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "WooCommerce Webhook Trigger",
@@ -65230,7 +65230,7 @@
         "type": "string",
         "value": null,
         "label": "Store URL",
-        "placeholder": "https://your-store.com",
+        "placeholder": "https://your-store.com — your store's root URL, not the /wp-json path",
         "required": true
       },
       {

@@ -86,7 +86,7 @@ var AuthInputs = []core.Connection{
 		Name:        "url",
 		Type:        core.ConnectionTypeString,
 		Label:       "Store URL",
-		Placeholder: "https://your-store.com",
+		Placeholder: "https://your-store.com — your store's root URL, not the /wp-json path",
 		Required:    true,
 	},
 	{
@@ -522,8 +522,14 @@ func SetIntListIfPresent(body map[string]interface{}, inputs []*core.Connection,
 
 // MergeAdditionalFields overlays a raw JSON object input ("additional_fields")
 // onto the resource body — the escape hatch for any WooCommerce field not exposed
-// as a first-class input. Later keys win. Returns an error on malformed JSON or
-// the wrong shape (an array/scalar).
+// as a first-class input. Returns an error on malformed JSON or the wrong shape
+// (an array/scalar).
+//
+// It is called LAST in every action's body assembly, so a key here OVERRIDES the
+// same key set by a first-class input (e.g. putting {"status":"draft"} in
+// Additional Fields overrides the Status dropdown). This "power-user last word"
+// precedence is deliberate and matches the Cal.com / Acuity nodes; it is not a
+// bug, but it is why the escape hatch is applied after everything else.
 func MergeAdditionalFields(body map[string]interface{}, inputs []*core.Connection) error {
 	v, err := OptionalJSON("additional_fields", inputs)
 	if err != nil {
