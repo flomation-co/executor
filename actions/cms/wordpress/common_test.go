@@ -146,6 +146,44 @@ func TestListResourcesReturnAllPaginates(t *testing.T) {
 	Expect(len(items)).To(Equal(2))
 }
 
+func TestResourceResultUnwrapsForceDeletePrevious(t *testing.T) {
+	RegisterTestingT(t)
+	// A permanent (force) delete returns {deleted, previous:{id}} with no
+	// top-level id — the id must be unwrapped from previous.
+	out := ResourceResult(map[string]interface{}{
+		"deleted":  true,
+		"previous": map[string]interface{}{"id": float64(42), "name": "x"},
+	}, "deleted")
+	Expect(out["id"]).To(Equal("42"))
+	// A trash delete (bare object with id) is unaffected.
+	out = ResourceResult(map[string]interface{}{"id": float64(7)}, "trashed")
+	Expect(out["id"]).To(Equal("7"))
+}
+
+func TestListResourcesReturnAllUsesTotalPagesWhenLinkStripped(t *testing.T) {
+	RegisterTestingT(t)
+	call := 0
+	server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		call++
+		if call > 3 {
+			t.Fatalf("fetched more pages than X-WP-TotalPages")
+		}
+		w.Header().Set("Content-Type", "application/json")
+		// NO Link header — pagination must continue off X-WP-TotalPages alone.
+		w.Header().Set("X-WP-Total", "3")
+		w.Header().Set("X-WP-TotalPages", "3")
+		_, _ = w.Write([]byte(`[{"id":1}]`))
+	}))
+	defer server.Close()
+	defer SetBaseForTest(server.URL)()
+
+	items, _, totalPages, pages, err := ListResources(Auth{}, "/posts", url.Values{"per_page": {"1"}}, true)
+	Expect(err).To(BeNil())
+	Expect(totalPages).To(Equal(3))
+	Expect(pages).To(Equal(3)) // continued to page 3 despite the missing Link header
+	Expect(len(items)).To(Equal(3))
+}
+
 func TestDeleteResourceForceAndReassign(t *testing.T) {
 	RegisterTestingT(t)
 	var gotForce, gotReassign, gotMethod string

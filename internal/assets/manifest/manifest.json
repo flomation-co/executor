@@ -5114,7 +5114,7 @@
     ]
   },
   "cms/wordpress/category_get_all": {
-    "hash": "d3e0c4968721e4d0b2e1ffa51e9c83bdced3b7edb214fee3af062cd662fc66df",
+    "hash": "83cfd547f4e97900f33b79c149ffb4ba52278029668e81954bf0d303a37cc675",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "WordPress: Get Many Categories",
@@ -5164,6 +5164,27 @@
         "value": null,
         "label": "Allow Insecure SSL",
         "placeholder": "Skip TLS verification — only for self-signed sites"
+      },
+      {
+        "name": "context",
+        "type": "string",
+        "value": null,
+        "label": "Context",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "View",
+            "value": "view"
+          },
+          {
+            "name": "Edit (more fields; needs edit rights)",
+            "value": "edit"
+          },
+          {
+            "name": "Embed",
+            "value": "embed"
+          }
+        ]
       },
       {
         "name": "return_all",
@@ -5908,7 +5929,7 @@
     ]
   },
   "cms/wordpress/comment_get_all": {
-    "hash": "2264b2ec4fb308e14fa20204cf971855cc6103ed5088183ce9ff26d51415e3c9",
+    "hash": "566e2b36a647fdd25d4901aecf93ddb8cc4fa0f885c973499808ececde681436",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "WordPress: Get Many Comments",
@@ -5958,6 +5979,27 @@
         "value": null,
         "label": "Allow Insecure SSL",
         "placeholder": "Skip TLS verification — only for self-signed sites"
+      },
+      {
+        "name": "context",
+        "type": "string",
+        "value": null,
+        "label": "Context",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "View",
+            "value": "view"
+          },
+          {
+            "name": "Edit (more fields; needs edit rights)",
+            "value": "edit"
+          },
+          {
+            "name": "Embed",
+            "value": "embed"
+          }
+        ]
       },
       {
         "name": "return_all",
@@ -6820,7 +6862,7 @@
     ]
   },
   "cms/wordpress/page_get_all": {
-    "hash": "04b947a6d9e3d014895810c329c11725e61cb7bc614f434421a4b298b423da6f",
+    "hash": "90a0885c5d2a1e4233c8272d8c69cade48c6d4b1b217ec0f6c3cfc68c922f929",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "WordPress: Get Many Pages",
@@ -6870,6 +6912,27 @@
         "value": null,
         "label": "Allow Insecure SSL",
         "placeholder": "Skip TLS verification — only for self-signed sites"
+      },
+      {
+        "name": "context",
+        "type": "string",
+        "value": null,
+        "label": "Context",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "View",
+            "value": "view"
+          },
+          {
+            "name": "Edit (more fields; needs edit rights)",
+            "value": "edit"
+          },
+          {
+            "name": "Embed",
+            "value": "embed"
+          }
+        ]
       },
       {
         "name": "return_all",
@@ -7888,7 +7951,7 @@
     ]
   },
   "cms/wordpress/post_get_all": {
-    "hash": "75c5491663b017374dc52c6aa87d25bbcec9e1ecee719f8dfccc83aa82bb4a72",
+    "hash": "86378490c62ee60c56a40871d7abed648a66077b653f6f73c598131ad64ac3d4",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "WordPress: Get Many Posts",
@@ -7938,6 +8001,27 @@
         "value": null,
         "label": "Allow Insecure SSL",
         "placeholder": "Skip TLS verification — only for self-signed sites"
+      },
+      {
+        "name": "context",
+        "type": "string",
+        "value": null,
+        "label": "Context",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "View",
+            "value": "view"
+          },
+          {
+            "name": "Edit (more fields; needs edit rights)",
+            "value": "edit"
+          },
+          {
+            "name": "Embed",
+            "value": "embed"
+          }
+        ]
       },
       {
         "name": "return_all",
@@ -8024,6 +8108,20 @@
         "value": null,
         "label": "Tag IDs",
         "placeholder": "Comma-separated tag IDs"
+      },
+      {
+        "name": "categories_exclude",
+        "type": "string",
+        "value": null,
+        "label": "Exclude Category IDs",
+        "placeholder": "Comma-separated category IDs to exclude"
+      },
+      {
+        "name": "tags_exclude",
+        "type": "string",
+        "value": null,
+        "label": "Exclude Tag IDs",
+        "placeholder": "Comma-separated tag IDs to exclude"
       },
       {
         "name": "slug",
@@ -8837,7 +8935,7 @@
     ]
   },
   "cms/wordpress/tag_get_all": {
-    "hash": "d04090ce2888a6897b4ea4897752d889f3ee51bc6a07a7a127a1a9c519c78173",
+    "hash": "2f559e6495f2474aba670ee544a342c7f50d0d841765c770d6160cca55ad9678",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "WordPress: Get Many Tags",
@@ -8887,6 +8985,27 @@
         "value": null,
         "label": "Allow Insecure SSL",
         "placeholder": "Skip TLS verification — only for self-signed sites"
+      },
+      {
+        "name": "context",
+        "type": "string",
+        "value": null,
+        "label": "Context",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "View",
+            "value": "view"
+          },
+          {
+            "name": "Edit (more fields; needs edit rights)",
+            "value": "edit"
+          },
+          {
+            "name": "Embed",
+            "value": "embed"
+          }
+        ]
       },
       {
         "name": "return_all",
@@ -9612,7 +9731,7 @@
     ]
   },
   "cms/wordpress/user_get_all": {
-    "hash": "67235f39f0e196bd1a681d4e302e6cca1bcdf97a6dbe293162f1ce5d2290196b",
+    "hash": "9f83beec2cbcccb9bd6f509b05bce47099a287c8b26039a82c96ec15b0f6dac4",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "WordPress: Get Many Users",
@@ -9662,6 +9781,27 @@
         "value": null,
         "label": "Allow Insecure SSL",
         "placeholder": "Skip TLS verification — only for self-signed sites"
+      },
+      {
+        "name": "context",
+        "type": "string",
+        "value": null,
+        "label": "Context",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "View",
+            "value": "view"
+          },
+          {
+            "name": "Edit (more fields; needs edit rights)",
+            "value": "edit"
+          },
+          {
+            "name": "Embed",
+            "value": "embed"
+          }
+        ]
       },
       {
         "name": "return_all",

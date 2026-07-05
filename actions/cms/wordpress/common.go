@@ -663,7 +663,14 @@ func ListResources(a Auth, resourcePath string, q url.Values, returnAll bool) (i
 			totalPages = headerInt(resp.Headers, "X-WP-TotalPages")
 		}
 
-		hasNext := strings.Contains(resp.Headers.Get("Link"), `rel="next"`)
+		// There are more pages if the Link header advertises a next cursor OR
+		// the X-WP-TotalPages count (parsed on page 1) shows pages remaining.
+		// Using both is more robust than the Link header alone: a proxy / CDN /
+		// WP security plugin can strip the standard Link header while passing the
+		// custom X-WP-TotalPages through, which would otherwise truncate Return
+		// All to page 1 and mislabel it "fetched all". Matches n8n's behaviour.
+		hasNext := strings.Contains(resp.Headers.Get("Link"), `rel="next"`) ||
+			(totalPages > 0 && page < totalPages)
 		if !returnAll || !hasNext || pages >= MaxAllPages {
 			break
 		}
@@ -692,8 +699,17 @@ func ResourceResult(obj map[string]interface{}, summary string) map[string]inter
 	if obj == nil {
 		obj = map[string]interface{}{}
 	}
+	id := stringifyID(obj["id"])
+	if id == "" {
+		// A permanent (force) delete returns {"deleted":true,"previous":{...}}
+		// with no top-level id — the deleted object (with its id) lives under
+		// "previous". Unwrap it so the documented id output is still populated.
+		if prev, ok := obj["previous"].(map[string]interface{}); ok {
+			id = stringifyID(prev["id"])
+		}
+	}
 	return map[string]interface{}{
-		"id":          stringifyID(obj["id"]),
+		"id":          id,
 		"result":      obj,
 		"tool_result": summary,
 		"success":     true,

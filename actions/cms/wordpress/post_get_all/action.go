@@ -25,6 +25,16 @@ var Inputs = [...]core.Connection{
 	{Name: "username", Type: core.ConnectionTypeString, Label: "Username", Placeholder: "Your WordPress username", Required: true},
 	{Name: "app_password", Type: core.ConnectionTypeSecret, Label: "Application Password", Placeholder: "Users ▸ Profile ▸ Application Passwords (WP 5.6+)", Required: true},
 	{Name: "allow_insecure", Type: core.ConnectionTypeBoolean, Label: "Allow Insecure SSL", Placeholder: "Skip TLS verification — only for self-signed sites"},
+	{
+		Name:  "context",
+		Type:  core.ConnectionTypeString,
+		Label: "Context",
+		Options: []core.ConnectionOption{
+			{Name: "View", Value: "view"},
+			{Name: "Edit (more fields; needs edit rights)", Value: "edit"},
+			{Name: "Embed", Value: "embed"},
+		},
+	},
 	{Name: "return_all", Type: core.ConnectionTypeBoolean, Label: "Return All (auto-paginate every match)"},
 	{Name: "limit", Type: core.ConnectionTypeInteger, Label: "Limit (per page)", Placeholder: "50 per page (max 100); Return All still fetches every match"},
 	{Name: "page", Type: core.ConnectionTypeInteger, Label: "Page", Placeholder: "Page number to fetch (ignored when Return All is on)"},
@@ -46,6 +56,8 @@ var Inputs = [...]core.Connection{
 	{Name: "author", Type: core.ConnectionTypeString, Label: "Author (User ID)", Placeholder: "Limit to posts by this author user ID"},
 	{Name: "categories", Type: core.ConnectionTypeString, Label: "Category IDs", Placeholder: "Comma-separated category IDs"},
 	{Name: "tags", Type: core.ConnectionTypeString, Label: "Tag IDs", Placeholder: "Comma-separated tag IDs"},
+	{Name: "categories_exclude", Type: core.ConnectionTypeString, Label: "Exclude Category IDs", Placeholder: "Comma-separated category IDs to exclude"},
+	{Name: "tags_exclude", Type: core.ConnectionTypeString, Label: "Exclude Tag IDs", Placeholder: "Comma-separated tag IDs to exclude"},
 	{Name: "slug", Type: core.ConnectionTypeString, Label: "Slug"},
 	{Name: "after", Type: core.ConnectionTypeDateTime, Label: "Published After"},
 	{Name: "before", Type: core.ConnectionTypeDateTime, Label: "Published Before"},
@@ -96,6 +108,7 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 
 	returnAll := wordpress.OptionalBool("return_all", inputs)
 	q := url.Values{}
+	wordpress.AddFilter(q, inputs, "context", "context")
 	limit, set := wordpress.OptionalInt("limit", inputs)
 	q.Set("per_page", strconv.Itoa(wordpress.ClampLimit(limit, set)))
 	if !returnAll {
@@ -111,6 +124,8 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	wordpress.AddFilter(q, inputs, "author", "author")
 	wordpress.AddFilter(q, inputs, "categories", "categories")
 	wordpress.AddFilter(q, inputs, "tags", "tags")
+	wordpress.AddFilter(q, inputs, "categories_exclude", "categories_exclude")
+	wordpress.AddFilter(q, inputs, "tags_exclude", "tags_exclude")
 	wordpress.AddFilter(q, inputs, "slug", "slug")
 	wordpress.AddFilter(q, inputs, "after", "after")
 	wordpress.AddFilter(q, inputs, "before", "before")
