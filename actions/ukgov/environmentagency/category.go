@@ -1,0 +1,7 @@
+package environmentagency
+
+const (
+	CategoryName        = "Environment Agency"
+	CategoryIcon        = "water"
+	CategoryDescription = "UK flood warnings, flood areas and river/rainfall monitoring (Environment Agency)"
+)
