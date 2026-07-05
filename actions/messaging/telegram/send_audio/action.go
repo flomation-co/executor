@@ -18,7 +18,7 @@ const (
 	Name         = "Send Telegram Audio"
 	Description  = "Send a music/audio file (MP3, M4A, WAV) via Telegram. Use send_voice for spoken-word voice notes. NEVER use for video files (incl. Gemini/Veo output) — use send_video instead so the visual track is preserved."
 	Website      = "https://www.flomation.co"
-	Icon         = "telegram+music"
+	Icon         = "telegram+microphone"
 	Date         = "21/06/2026"
 	Type         = core.ActionTypeAction
 )

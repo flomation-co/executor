@@ -15,7 +15,7 @@ const (
 	Name         = "Invoke Sub-Flow"
 	Description  = "Call a named sub-flow subroutine and return its results"
 	Website      = "https://www.flomation.co"
-	Icon         = "share"
+	Icon         = "share-from-square"
 	Date         = "19/04/2026"
 	Type         = core.ActionTypeAction
 )

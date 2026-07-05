@@ -15,7 +15,7 @@ const (
 	Name         = "Find Nearby Places"
 	Description  = "Find points of interest (restaurants, hotels, petrol stations etc.) around a location."
 	Website      = "https://www.flomation.co"
-	Icon         = "route+location-dot"
+	Icon         = "route+map"
 	Date         = "11/06/2026"
 	Type         = core.ActionTypeAction
 )

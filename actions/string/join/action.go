@@ -14,7 +14,7 @@ const (
 	Name         = "Join"
 	Description  = "Join an array of strings with a separator"
 	Website      = "https://www.flomation.co"
-	Icon         = "font+link"
+	Icon         = "i-cursor+link"
 	Date         = "19/04/2026"
 	Type         = core.ActionTypeAction
 )

@@ -12,7 +12,7 @@ const (
 	Name         = "Trim"
 	Description  = "Remove whitespace from both ends of a string"
 	Website      = "https://www.flomation.co"
-	Icon         = "font+xmark"
+	Icon         = "i-cursor+xmark"
 	Date         = "19/04/2026"
 	Type         = core.ActionTypeAction
 )

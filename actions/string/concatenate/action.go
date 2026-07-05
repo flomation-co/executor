@@ -10,7 +10,7 @@ const (
 	Name         = "Concatenate"
 	Description  = "Join two or more strings together"
 	Website      = "https://www.flomation.co"
-	Icon         = "font+link"
+	Icon         = "i-cursor+link"
 	Date         = "19/04/2026"
 	Type         = core.ActionTypeAction
 )

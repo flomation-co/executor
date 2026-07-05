@@ -12,7 +12,7 @@ const (
 	Name         = "Replace"
 	Description  = "Replace all occurrences of a substring with another string"
 	Website      = "https://www.flomation.co"
-	Icon         = "font+pencil"
+	Icon         = "i-cursor+pencil"
 	Date         = "19/04/2026"
 	Type         = core.ActionTypeAction
 )

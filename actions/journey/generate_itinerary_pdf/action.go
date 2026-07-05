@@ -18,7 +18,7 @@ const (
 	Name         = "Generate Itinerary PDF"
 	Description  = "Build a printable PDF with a map, distance/duration summary, and turn-by-turn directions for a route."
 	Website      = "https://www.flomation.co"
-	Icon         = "route+file-pdf"
+	Icon         = "route+file"
 	Date         = "11/06/2026"
 	Type         = core.ActionTypeAction
 )

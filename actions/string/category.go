@@ -2,6 +2,6 @@ package string_common
 
 const (
 	CategoryName        = "String"
-	CategoryIcon        = "font"
+	CategoryIcon        = "i-cursor"
 	CategoryDescription = "String manipulation and text operations"
 )

@@ -11,10 +11,10 @@
 //
 // Common patterns:
 //
-//   * Add a new task: add_tasks = [{ "name": ..., "description":
+//   - Add a new task: add_tasks = [{ "name": ..., "description":
 //     ..., "depends_on": ["other_task_name"] }]
-//   * Remove a failed task: remove_tasks = ["failed_task_name"]
-//   * Tweak a pending task: update_tasks = [{ "name": "...",
+//   - Remove a failed task: remove_tasks = ["failed_task_name"]
+//   - Tweak a pending task: update_tasks = [{ "name": "...",
 //     "description": "clarified" }]
 package revise
 
@@ -34,7 +34,7 @@ const (
 	Name         = "Plan / Revise"
 	Description  = "Modify a plan's task graph: add, remove, or update tasks. Allowed on draft, blocked, and active plans."
 	Website      = "https://www.flomation.co"
-	Icon         = "list-check+pen"
+	Icon         = "list-check+pencil"
 	Date         = "24/06/2026"
 	Type         = core.ActionTypeAction
 )

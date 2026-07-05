@@ -14,7 +14,7 @@ const (
 	Name         = "Optimise Route"
 	Description  = "Find the shortest visit order for a set of stops, with optional fixed start and end anchors."
 	Website      = "https://www.flomation.co"
-	Icon         = "route+arrows-spin"
+	Icon         = "route+rotate"
 	Date         = "11/06/2026"
 	Type         = core.ActionTypeAction
 )

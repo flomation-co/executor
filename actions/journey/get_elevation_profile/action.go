@@ -15,7 +15,7 @@ const (
 	Name         = "Get Elevation Profile"
 	Description  = "Sample elevations along a route polyline and return total ascent, descent, min and max."
 	Website      = "https://www.flomation.co"
-	Icon         = "route+mountain"
+	Icon         = "route+chart-area"
 	Date         = "11/06/2026"
 	Type         = core.ActionTypeAction
 )

@@ -14,7 +14,7 @@ const (
 	Name         = "Find Departure Time"
 	Description  = "Calculate when to leave to arrive by a given time, accounting for traffic at that hour."
 	Website      = "https://www.flomation.co"
-	Icon         = "route+hourglass-end"
+	Icon         = "route+hourglass-start"
 	Date         = "11/06/2026"
 	Type         = core.ActionTypeAction
 )

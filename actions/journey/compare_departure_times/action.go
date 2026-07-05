@@ -16,7 +16,7 @@ const (
 	Name         = "Compare Departure Times"
 	Description  = "Run the same route at multiple departure times and surface rush-hour deltas."
 	Website      = "https://www.flomation.co"
-	Icon         = "route+clock-rotate-left"
+	Icon         = "route+clock"
 	Date         = "11/06/2026"
 	Type         = core.ActionTypeAction
 )
