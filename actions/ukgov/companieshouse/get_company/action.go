@@ -21,7 +21,7 @@ const (
 	Name         = "Get Company"
 	Description  = "Retrieve a UK company's profile by company number (Companies House)"
 	Website      = "https://www.flomation.co"
-	Icon         = "building+circle-info"
+	Icon         = "briefcase"
 	Date         = "05/07/2026"
 	Type         = core.ActionTypeAction
 )

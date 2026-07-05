@@ -22,7 +22,7 @@ const (
 	Name         = "Search Food Establishments"
 	Description  = "Search UK food hygiene ratings by business name or address (Food Standards Agency)"
 	Website      = "https://www.flomation.co"
-	Icon         = "utensils+magnifying-glass"
+	Icon         = "star+magnifying-glass"
 	Date         = "05/07/2026"
 	Type         = core.ActionTypeAction
 )

@@ -20,7 +20,7 @@ const (
 	Name         = "Validate Postcode"
 	Description  = "Check whether a string is a valid UK postcode (postcodes.io)"
 	Website      = "https://www.flomation.co"
-	Icon         = "location-dot+circle-check"
+	Icon         = "map+circle-check"
 	Date         = "05/07/2026"
 	Type         = core.ActionTypeAction
 )

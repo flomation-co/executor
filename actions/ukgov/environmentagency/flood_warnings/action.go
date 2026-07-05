@@ -20,7 +20,7 @@ const (
 	Name         = "Flood Warnings"
 	Description  = "List current UK flood warnings and alerts, optionally by county (Environment Agency)"
 	Website      = "https://www.flomation.co"
-	Icon         = "water+triangle-exclamation"
+	Icon         = "leaf+triangle-exclamation"
 	Date         = "05/07/2026"
 	Type         = core.ActionTypeAction
 )

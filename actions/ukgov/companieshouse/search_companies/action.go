@@ -21,7 +21,7 @@ const (
 	Name         = "Search Companies"
 	Description  = "Search the UK Companies House register by company name or number (Companies House)"
 	Website      = "https://www.flomation.co"
-	Icon         = "building+magnifying-glass"
+	Icon         = "briefcase+magnifying-glass"
 	Date         = "05/07/2026"
 	Type         = core.ActionTypeAction
 )

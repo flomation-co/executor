@@ -21,7 +21,7 @@ const (
 	Name         = "Search Disqualified Officers"
 	Description  = "Search the UK register of disqualified company directors by name (Companies House)"
 	Website      = "https://www.flomation.co"
-	Icon         = "building+user-slash"
+	Icon         = "user+ban"
 	Date         = "05/07/2026"
 	Type         = core.ActionTypeAction
 )

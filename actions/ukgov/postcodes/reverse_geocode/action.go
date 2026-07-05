@@ -20,7 +20,7 @@ const (
 	Name         = "Reverse Geocode"
 	Description  = "Find the nearest UK postcodes to a latitude/longitude (postcodes.io)"
 	Website      = "https://www.flomation.co"
-	Icon         = "location-dot+arrows-rotate"
+	Icon         = "map+location-arrow"
 	Date         = "05/07/2026"
 	Type         = core.ActionTypeAction
 )

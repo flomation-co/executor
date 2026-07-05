@@ -20,7 +20,7 @@ const (
 	Name         = "List Food Business Types"
 	Description  = "List the food business type categories used by the FHRS scheme (Food Standards Agency)"
 	Website      = "https://www.flomation.co"
-	Icon         = "utensils+list"
+	Icon         = "star+list"
 	Date         = "05/07/2026"
 	Type         = core.ActionTypeAction
 )
