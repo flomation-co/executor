@@ -6,6 +6,7 @@ import (
 	"testing"
 
 	core "flomation.app/automate/executor"
+	"flomation.app/automate/executor/actions/ukgov/foodstandards"
 	. "github.com/onsi/gomega"
 )
 
@@ -17,22 +18,32 @@ const sampleResponse = `{
   "meta": {"totalCount": 2}
 }`
 
+func mockFHRS(t *testing.T, status int, body string, capture func(*http.Request)) func() {
+	srv := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		if capture != nil {
+			capture(r)
+		}
+		w.WriteHeader(status)
+		_, _ = w.Write([]byte(body))
+	}))
+	old := foodstandards.BaseURL
+	foodstandards.BaseURL = srv.URL
+	return func() {
+		foodstandards.BaseURL = old
+		srv.Close()
+	}
+}
+
 func TestSearchEstablishments(t *testing.T) {
 	RegisterTestingT(t)
 	var gotPath, gotQuery, gotVersion, gotAccept string
-	srv := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+	restore := mockFHRS(t, http.StatusOK, sampleResponse, func(r *http.Request) {
 		gotPath = r.URL.Path
 		gotQuery = r.URL.RawQuery
 		gotVersion = r.Header.Get("x-api-version")
 		gotAccept = r.Header.Get("Accept")
-		w.WriteHeader(http.StatusOK)
-		_, _ = w.Write([]byte(sampleResponse))
-	}))
-	defer srv.Close()
-
-	old := baseURL
-	baseURL = srv.URL
-	defer func() { baseURL = old }()
+	})
+	defer restore()
 
 	out, err := Execute(nil, nil, []*core.Connection{
 		{Name: "name", Type: core.ConnectionTypeString, Value: "cafe"},
@@ -53,16 +64,10 @@ func TestSearchEstablishments(t *testing.T) {
 func TestSearchEstablishmentsCapsMaxResults(t *testing.T) {
 	RegisterTestingT(t)
 	var gotQuery string
-	srv := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+	restore := mockFHRS(t, http.StatusOK, `{"establishments":[],"meta":{"totalCount":0}}`, func(r *http.Request) {
 		gotQuery = r.URL.RawQuery
-		w.WriteHeader(http.StatusOK)
-		_, _ = w.Write([]byte(`{"establishments":[],"meta":{"totalCount":0}}`))
-	}))
-	defer srv.Close()
-
-	old := baseURL
-	baseURL = srv.URL
-	defer func() { baseURL = old }()
+	})
+	defer restore()
 
 	_, err := Execute(nil, nil, []*core.Connection{
 		{Name: "name", Type: core.ConnectionTypeString, Value: "x"},
@@ -82,14 +87,8 @@ func TestSearchEstablishmentsRequiresQuery(t *testing.T) {
 
 func TestSearchEstablishmentsUpstreamError(t *testing.T) {
 	RegisterTestingT(t)
-	srv := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		w.WriteHeader(http.StatusInternalServerError)
-	}))
-	defer srv.Close()
-
-	old := baseURL
-	baseURL = srv.URL
-	defer func() { baseURL = old }()
+	restore := mockFHRS(t, http.StatusInternalServerError, "", nil)
+	defer restore()
 
 	out, err := Execute(nil, nil, []*core.Connection{
 		{Name: "name", Type: core.ConnectionTypeString, Value: "x"},

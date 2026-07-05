@@ -549,7 +549,20 @@ import (
 	twilio_send_audio "flomation.app/automate/executor/actions/twilio/send_audio"
 	twilio_send_sms "flomation.app/automate/executor/actions/twilio/send_sms"
 	twilio_voice_session "flomation.app/automate/executor/actions/twilio/voice_session"
+	ukgov_environmentagency_flood_areas "flomation.app/automate/executor/actions/ukgov/environmentagency/flood_areas"
+	ukgov_environmentagency_flood_warnings "flomation.app/automate/executor/actions/ukgov/environmentagency/flood_warnings"
+	ukgov_environmentagency_station_readings "flomation.app/automate/executor/actions/ukgov/environmentagency/station_readings"
+	ukgov_foodstandards_get_establishment "flomation.app/automate/executor/actions/ukgov/foodstandards/get_establishment"
+	ukgov_foodstandards_list_business_types "flomation.app/automate/executor/actions/ukgov/foodstandards/list_business_types"
 	ukgov_foodstandards_search_establishments "flomation.app/automate/executor/actions/ukgov/foodstandards/search_establishments"
+	ukgov_police_crime_categories "flomation.app/automate/executor/actions/ukgov/police/crime_categories"
+	ukgov_police_list_forces "flomation.app/automate/executor/actions/ukgov/police/list_forces"
+	ukgov_police_stop_and_search "flomation.app/automate/executor/actions/ukgov/police/stop_and_search"
+	ukgov_police_street_crimes "flomation.app/automate/executor/actions/ukgov/police/street_crimes"
+	ukgov_postcodes_nearest_postcodes "flomation.app/automate/executor/actions/ukgov/postcodes/nearest_postcodes"
+	ukgov_postcodes_postcode_lookup "flomation.app/automate/executor/actions/ukgov/postcodes/postcode_lookup"
+	ukgov_postcodes_reverse_geocode "flomation.app/automate/executor/actions/ukgov/postcodes/reverse_geocode"
+	ukgov_postcodes_validate_postcode "flomation.app/automate/executor/actions/ukgov/postcodes/validate_postcode"
 	web_fetch "flomation.app/automate/executor/actions/web/fetch"
 	web_request "flomation.app/automate/executor/actions/web/request"
 	web_search "flomation.app/automate/executor/actions/web/search"
@@ -1117,7 +1130,20 @@ var Actions = map[string]core.Action{
 	"twilio/send_audio":                                 twilio_send_audio.Execute,
 	"twilio/send_sms":                                   twilio_send_sms.Execute,
 	"twilio/voice_session":                              twilio_voice_session.Execute,
+	"ukgov/environmentagency/flood_areas":               ukgov_environmentagency_flood_areas.Execute,
+	"ukgov/environmentagency/flood_warnings":            ukgov_environmentagency_flood_warnings.Execute,
+	"ukgov/environmentagency/station_readings":          ukgov_environmentagency_station_readings.Execute,
+	"ukgov/foodstandards/get_establishment":             ukgov_foodstandards_get_establishment.Execute,
+	"ukgov/foodstandards/list_business_types":           ukgov_foodstandards_list_business_types.Execute,
 	"ukgov/foodstandards/search_establishments":         ukgov_foodstandards_search_establishments.Execute,
+	"ukgov/police/crime_categories":                     ukgov_police_crime_categories.Execute,
+	"ukgov/police/list_forces":                          ukgov_police_list_forces.Execute,
+	"ukgov/police/stop_and_search":                      ukgov_police_stop_and_search.Execute,
+	"ukgov/police/street_crimes":                        ukgov_police_street_crimes.Execute,
+	"ukgov/postcodes/nearest_postcodes":                 ukgov_postcodes_nearest_postcodes.Execute,
+	"ukgov/postcodes/postcode_lookup":                   ukgov_postcodes_postcode_lookup.Execute,
+	"ukgov/postcodes/reverse_geocode":                   ukgov_postcodes_reverse_geocode.Execute,
+	"ukgov/postcodes/validate_postcode":                 ukgov_postcodes_validate_postcode.Execute,
 	"web/fetch":                                         web_fetch.Execute,
 	"web/request":                                       web_request.Execute,
 	"web/search":                                        web_search.Execute,

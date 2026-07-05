@@ -13,6 +13,7 @@ import (
 
 	core "flomation.app/automate/executor"
 	ukgov_common "flomation.app/automate/executor/actions/ukgov"
+	"flomation.app/automate/executor/actions/ukgov/foodstandards"
 )
 
 const (
@@ -25,13 +26,6 @@ const (
 	Date         = "05/07/2026"
 	Type         = core.ActionTypeAction
 )
-
-// baseURL is the FHRS API root. It is a package variable (not a const) so tests
-// can redirect it to a local mock server.
-var baseURL = "https://api.ratings.food.gov.uk"
-
-// apiVersion is the mandatory FHRS API version header value.
-const apiVersion = "2"
 
 var Inputs = [...]core.Connection{
 	{
@@ -63,28 +57,8 @@ var Outputs = [...]core.Connection{
 	{Name: "error", Type: core.ConnectionTypeString, Label: "Error"},
 }
 
-type geocode struct {
-	Longitude string `json:"longitude"`
-	Latitude  string `json:"latitude"`
-}
-
-type establishment struct {
-	FHRSID             int64   `json:"FHRSID"`
-	BusinessName       string  `json:"BusinessName"`
-	BusinessType       string  `json:"BusinessType"`
-	AddressLine1       string  `json:"AddressLine1"`
-	AddressLine2       string  `json:"AddressLine2"`
-	AddressLine3       string  `json:"AddressLine3"`
-	AddressLine4       string  `json:"AddressLine4"`
-	PostCode           string  `json:"PostCode"`
-	RatingValue        string  `json:"RatingValue"`
-	RatingDate         string  `json:"RatingDate"`
-	LocalAuthorityName string  `json:"LocalAuthorityName"`
-	Geocode            geocode `json:"geocode"`
-}
-
 type searchResponse struct {
-	Establishments []establishment `json:"establishments"`
+	Establishments []foodstandards.Establishment `json:"establishments"`
 	Meta           struct {
 		TotalCount int `json:"totalCount"`
 	} `json:"meta"`
@@ -114,16 +88,13 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	}
 	q.Set("pageNumber", "1")
 	q.Set("pageSize", fmt.Sprintf("%d", maxResults))
-	endpoint := fmt.Sprintf("%s/Establishments?%s", baseURL, q.Encode())
 
 	ctx := context.Background()
 	if flow != nil {
 		ctx = flow.GoContext()
 	}
 
-	status, body, err := ukgov_common.Fetch(ctx, http.MethodGet, endpoint, map[string]string{
-		"x-api-version": apiVersion,
-	})
+	status, body, err := foodstandards.Get(ctx, "/Establishments", q)
 	if err != nil {
 		return ukgov_common.ErrResult("Food Standards Agency request failed: %v", err)
 	}
@@ -162,7 +133,7 @@ func nonEmpty(vals ...string) []string {
 
 // summarise builds a concise, AI-readable one-line summary of the results,
 // listing up to the first five establishments with their hygiene rating.
-func summarise(estabs []establishment, total int, query string) string {
+func summarise(estabs []foodstandards.Establishment, total int, query string) string {
 	if len(estabs) == 0 {
 		if query != "" {
 			return fmt.Sprintf("No food establishments found matching %q.", query)
