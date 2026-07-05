@@ -14,7 +14,7 @@ const (
 	Name         = "WordPress: Update Tag"
 	Description  = "Update an existing tag on your WordPress site. Only the fields you set are changed; add any other tag field via Additional Fields."
 	Website      = "https://www.flomation.co"
-	Icon         = "wordpress+pen"
+	Icon         = "wordpress+pencil"
 	Date         = "05/07/2026"
 	Type         = core.ActionTypeAction
 )

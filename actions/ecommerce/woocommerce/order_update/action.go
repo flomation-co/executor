@@ -14,7 +14,7 @@ const (
 	Name         = "WooCommerce: Update Order"
 	Description  = "Update an existing order in your WooCommerce store. Only the fields you set are changed; add any other order field via Additional Fields."
 	Website      = "https://www.flomation.co"
-	Icon         = "woocommerce+pen"
+	Icon         = "woocommerce+pencil"
 	Date         = "05/07/2026"
 	Type         = core.ActionTypeAction
 )

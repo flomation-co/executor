@@ -1,11 +1,3 @@
-# Valid editor icon names — the authoritative set the editor can render.
-# Source: automate/editor  app/components/icons/paths.ts  (iconPaths + iconAliases keys).
-# An action's Icon metadata, and EACH half of a "base+badge" composite, must be one
-# of these names, or the editor renders a "?" placeholder (Go builds pass regardless).
-# Regenerate from the editor repo's main branch:
-#   git -C <editor-repo> show origin/main:app/components/icons/paths.ts \
-#     | grep -oE '^[[:space:]]*"[a-z0-9-]+":' | tr -d ' ":' | sort -u
-# Keep in sync whenever the editor icon set changes.
 acuity
 airtable
 align-left
@@ -192,6 +184,8 @@ warning
 webflow
 webhook
 wifi
+woocommerce
+wordpress
 wrench
 x-twitter
 xmark
