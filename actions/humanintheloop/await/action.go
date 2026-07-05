@@ -26,7 +26,7 @@ const (
 	Name         = "Human Approval"
 	Description  = "Ask a human to choose an option, then branch on their answer. Suspends until a reply or timeout."
 	Website      = "https://www.flomation.co"
-	Icon         = "user-check"
+	Icon         = "user+check"
 	Date         = "04/07/2026"
 	Type         = core.ActionTypeAwait
 )

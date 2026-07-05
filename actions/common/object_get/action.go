@@ -16,7 +16,7 @@ const (
 	Name         = "Object Get Field"
 	Description  = "Extract a field from an object by name, with dot-notation for nested access"
 	Website      = "https://www.flomation.co"
-	Icon         = "crosshairs"
+	Icon         = "magnifying-glass"
 	Date         = "22/05/2026"
 	Type         = core.ActionTypeAction
 )

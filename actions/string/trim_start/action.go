@@ -12,7 +12,7 @@ const (
 	Name         = "Trim Start"
 	Description  = "Remove whitespace from the start of a string"
 	Website      = "https://www.flomation.co"
-	Icon         = "font+arrow-right"
+	Icon         = "i-cursor+arrow-right"
 	Date         = "19/04/2026"
 	Type         = core.ActionTypeAction
 )

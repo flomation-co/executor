@@ -14,7 +14,7 @@ const (
 	Name         = "Get Place Details"
 	Description  = "Fetch opening hours, phone, website and rating details for a place ID."
 	Website      = "https://www.flomation.co"
-	Icon         = "route+circle-info"
+	Icon         = "route+eye"
 	Date         = "11/06/2026"
 	Type         = core.ActionTypeAction
 )

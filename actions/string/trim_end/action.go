@@ -12,7 +12,7 @@ const (
 	Name         = "Trim End"
 	Description  = "Remove whitespace from the end of a string"
 	Website      = "https://www.flomation.co"
-	Icon         = "font+arrow-left"
+	Icon         = "i-cursor+arrow-left"
 	Date         = "19/04/2026"
 	Type         = core.ActionTypeAction
 )

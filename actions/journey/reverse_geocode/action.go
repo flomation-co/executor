@@ -14,7 +14,7 @@ const (
 	Name         = "Reverse Geocode"
 	Description  = "Convert latitude and longitude into a human-readable address."
 	Website      = "https://www.flomation.co"
-	Icon         = "route+location-dot"
+	Icon         = "route+map"
 	Date         = "11/06/2026"
 	Type         = core.ActionTypeAction
 )

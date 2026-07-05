@@ -580,13 +580,13 @@
     ]
   },
   "agent/list_identities": {
-    "hash": "fa0f7fb53a9807a33c8ed3cbcb4f06c94fd8daba6283338733f1408589b4662c",
+    "hash": "62b294d8a1e142de991bb31fc71b8a1ee6b7c604ae5853ff63e3fd61c906c004",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "List Identities",
     "description": "List all known channel identities for the current user",
     "website": "https://www.flomation.co",
-    "icon": "id-card",
+    "icon": "user-group",
     "date": "29/04/2026",
     "type": 2,
     "category": {
@@ -1773,7 +1773,7 @@
     ]
   },
   "ai/gemini_video": {
-    "hash": "a21f8c3515ce67d71bc3ebdc9dbec90159d67d399f87270facc01c71fed6623d",
+    "hash": "616b7a4b006e1e95c99fb27c22c507a5b8d29dc99fd4290cc8937e4fb44dfb19",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Gemini Video",
@@ -10811,13 +10811,13 @@
     ]
   },
   "common/object_get": {
-    "hash": "a6628e19d69bd80a27bc6f40a9075615369fdace3f2db60d0358c09277bfcecc",
+    "hash": "3c2fcfa69b4183247ebfb212d3473aa73f93cfa0a6e36949bd09910dc3d7f18f",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Object Get Field",
     "description": "Extract a field from an object by name, with dot-notation for nested access",
     "website": "https://www.flomation.co",
-    "icon": "crosshairs",
+    "icon": "magnifying-glass",
     "date": "22/05/2026",
     "type": 2,
     "category": {
@@ -20747,13 +20747,13 @@
     ]
   },
   "git/branch": {
-    "hash": "604f51fa567742583318e2e9ed55f9597c0d1da5564e46e97902f811d11f79b4",
+    "hash": "94a277f6c411134faa0cdfea2e7f6727bc3b59d339fdd714f795aee9b0bd2365",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Git Branch",
     "description": "Create, list, or switch Git branches",
     "website": "https://www.flomation.co",
-    "icon": "code-branch+share",
+    "icon": "code-branch+plus",
     "date": "19/03/2026",
     "type": 2,
     "category": {
@@ -36676,18 +36676,18 @@
     ]
   },
   "humanintheloop/await": {
-    "hash": "3dcc04bfb4c1639474fb75b53ed2c0ff8bb4147b8e0c26479162a8c15100c281",
+    "hash": "2cdff45ac3828c5352a2e2920f71dd2cbe8d36cebe877cfc515d954e66bccc84",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Human Approval",
     "description": "Ask a human to choose an option, then branch on their answer. Suspends until a reply or timeout.",
     "website": "https://www.flomation.co",
-    "icon": "user-check",
+    "icon": "user+check",
     "date": "04/07/2026",
     "type": 7,
     "category": {
       "name": "Human in the Loop",
-      "icon": "user-check",
+      "icon": "user",
       "description": "Pause a flow for a human decision, then branch on their response"
     },
     "inputs": [
@@ -36960,13 +36960,13 @@
     ]
   },
   "journey/compare_departure_times": {
-    "hash": "66b308aca4ec639b01a50a89ea13f9229c4ceda627bca84bd1b1f0ae618635d6",
+    "hash": "174967021b1b7f76608673115e6caf278b7e743258181d7905f5e1df4a63da6e",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Compare Departure Times",
     "description": "Run the same route at multiple departure times and surface rush-hour deltas.",
     "website": "https://www.flomation.co",
-    "icon": "route+clock-rotate-left",
+    "icon": "route+clock",
     "date": "11/06/2026",
     "type": 2,
     "category": {
@@ -37125,13 +37125,13 @@
     ]
   },
   "journey/find_arrive_by": {
-    "hash": "00d438509a94ecf4b12adb51728c07df525eadac56eabd8dc15491d85ca9007a",
+    "hash": "8eb0e09718e29eced38f47ead3ecce50bc92665b76ba7edcb528691db099afc6",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Find Departure Time",
     "description": "Calculate when to leave to arrive by a given time, accounting for traffic at that hour.",
     "website": "https://www.flomation.co",
-    "icon": "route+hourglass-end",
+    "icon": "route+hourglass-start",
     "date": "11/06/2026",
     "type": 2,
     "category": {
@@ -37269,13 +37269,13 @@
     ]
   },
   "journey/find_nearby_places": {
-    "hash": "4f8c772c29a9e6f25b5ca8616ec4f011add7a2cdbff016fec10f3d9188224abd",
+    "hash": "9adc99ac0de7a9f9e07599bd07c18325d0f0589b81894cec15bd37a7c7d07f5c",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Find Nearby Places",
     "description": "Find points of interest (restaurants, hotels, petrol stations etc.) around a location.",
     "website": "https://www.flomation.co",
-    "icon": "route+location-dot",
+    "icon": "route+map",
     "date": "11/06/2026",
     "type": 2,
     "category": {
@@ -37436,13 +37436,13 @@
     ]
   },
   "journey/generate_itinerary_pdf": {
-    "hash": "83c5f26e41f0ad3e61cbab19c4e7bba04f942a1ffff133a691987aada0c4da49",
+    "hash": "0aeb7b4885cbd64c56584e8ae2cfdceaeb99e1435d9703c09373d10747c61b44",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Generate Itinerary PDF",
     "description": "Build a printable PDF with a map, distance/duration summary, and turn-by-turn directions for a route.",
     "website": "https://www.flomation.co",
-    "icon": "route+file-pdf",
+    "icon": "route+file",
     "date": "11/06/2026",
     "type": 2,
     "category": {
@@ -37684,13 +37684,13 @@
     ]
   },
   "journey/get_elevation_profile": {
-    "hash": "575409c1738f7ea399ef2a7ce93fdff9e33bdaf9419f1aeb4a56c7315301705b",
+    "hash": "832c7838e453aae3fe59c6885753e18e84d267c239acc33ccbfeb2a3cb1c86d1",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Get Elevation Profile",
     "description": "Sample elevations along a route polyline and return total ascent, descent, min and max.",
     "website": "https://www.flomation.co",
-    "icon": "route+mountain",
+    "icon": "route+chart-area",
     "date": "11/06/2026",
     "type": 2,
     "category": {
@@ -37808,13 +37808,13 @@
     ]
   },
   "journey/get_place_details": {
-    "hash": "246e2193628d8b39f324b1918ffae344aa0bcca1a2ceaeda6f45b2c82c75263e",
+    "hash": "cc899438cd98fe677357909bed5cc7aabd87fb8d051a4236b7bd49fa7b43ac84",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Get Place Details",
     "description": "Fetch opening hours, phone, website and rating details for a place ID.",
     "website": "https://www.flomation.co",
-    "icon": "route+circle-info",
+    "icon": "route+eye",
     "date": "11/06/2026",
     "type": 2,
     "category": {
@@ -38082,13 +38082,13 @@
     ]
   },
   "journey/optimise_route": {
-    "hash": "8b8c458fc8bbdbe06629b94930a4600177fe7433437f36f6d049eda1c21f2e7f",
+    "hash": "185c7f1c8cb889dddebc15414aa52419c5fb4f589444d70f11c5cb91003a0e45",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Optimise Route",
     "description": "Find the shortest visit order for a set of stops, with optional fixed start and end anchors.",
     "website": "https://www.flomation.co",
-    "icon": "route+arrows-spin",
+    "icon": "route+rotate",
     "date": "11/06/2026",
     "type": 2,
     "category": {
@@ -38456,13 +38456,13 @@
     ]
   },
   "journey/reverse_geocode": {
-    "hash": "7b53d836d96fd366eebb4fd16af509e6e3230c3091b1fcdf5164c7d29856171a",
+    "hash": "b3f4a21046e0323f7581aa69a4ae141ee9cf609afc84aa56e62c72c07d4b980c",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Reverse Geocode",
     "description": "Convert latitude and longitude into a human-readable address.",
     "website": "https://www.flomation.co",
-    "icon": "route+location-dot",
+    "icon": "route+map",
     "date": "11/06/2026",
     "type": 2,
     "category": {
@@ -42085,13 +42085,13 @@
     ]
   },
   "messaging/telegram/send_audio": {
-    "hash": "9e1ebbd8f170cca34d67815e14f5e0616722d258d5c5100170d9911b6c11c243",
+    "hash": "eef8920154970d7aa2dac25620ad622fb5e4150865490f21073d7a4ff8d56f28",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Send Telegram Audio",
     "description": "Send a music/audio file (MP3, M4A, WAV) via Telegram. Use send_voice for spoken-word voice notes. NEVER use for video files (incl. Gemini/Veo output) — use send_video instead so the visual track is preserved.",
     "website": "https://www.flomation.co",
-    "icon": "telegram+music",
+    "icon": "telegram+microphone",
     "date": "21/06/2026",
     "type": 2,
     "category": {
@@ -50786,13 +50786,13 @@
     ]
   },
   "plan/revise": {
-    "hash": "2e127854f2e0fd357d42cb5fb68907dbddb745845224194e5f11e29d60b0f66c",
+    "hash": "df112c988adec003944454f9fd145cc2d56f605ab5e4331ffbd0819e182ec82b",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Plan / Revise",
     "description": "Modify a plan's task graph: add, remove, or update tasks. Allowed on draft, blocked, and active plans.",
     "website": "https://www.flomation.co",
-    "icon": "list-check+pen",
+    "icon": "list-check+pencil",
     "date": "24/06/2026",
     "type": 2,
     "category": {
@@ -61158,18 +61158,18 @@
     ]
   },
   "string/concatenate": {
-    "hash": "2da42bbd7de00d2fbb21412e03cad40f919119eff8aa496388eade540a7f1862",
+    "hash": "d595ca6b03031dbe24dedf1c9619b6c36febcb3a8c74566e3141b1137cb380c9",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Concatenate",
     "description": "Join two or more strings together",
     "website": "https://www.flomation.co",
-    "icon": "font+link",
+    "icon": "i-cursor+link",
     "date": "19/04/2026",
     "type": 2,
     "category": {
       "name": "String",
-      "icon": "font",
+      "icon": "i-cursor",
       "description": "String manipulation and text operations"
     },
     "inputs": [
@@ -61235,18 +61235,18 @@
     ]
   },
   "string/contains": {
-    "hash": "67d68a6e2ade1f4d2f8acbeee68fa10841ef8f3dcbf9cf992ab8eaf6c5d1e081",
+    "hash": "2ddecd9c4ce722aff89a70014b754ba33f773825a427693d63fce56c0e026ae9",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Contains",
     "description": "Check if a string contains a substring",
     "website": "https://www.flomation.co",
-    "icon": "font+magnifying-glass",
+    "icon": "i-cursor+magnifying-glass",
     "date": "19/04/2026",
     "type": 2,
     "category": {
       "name": "String",
-      "icon": "font",
+      "icon": "i-cursor",
       "description": "String manipulation and text operations"
     },
     "inputs": [
@@ -61306,18 +61306,18 @@
     ]
   },
   "string/join": {
-    "hash": "60ce6f18956c831e5a330bac3f08f77a6a22cbff48691b35c2e9fd014d94da35",
+    "hash": "15d40813edb9c0891954d0b3fae623f340955e88e1a2aae5543f4693a4943efc",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Join",
     "description": "Join an array of strings with a separator",
     "website": "https://www.flomation.co",
-    "icon": "font+link",
+    "icon": "i-cursor+link",
     "date": "19/04/2026",
     "type": 2,
     "category": {
       "name": "String",
-      "icon": "font",
+      "icon": "i-cursor",
       "description": "String manipulation and text operations"
     },
     "inputs": [
@@ -61369,18 +61369,18 @@
     ]
   },
   "string/lower_case": {
-    "hash": "ee4e9d1b70ceb9b9923430d92eda11e8a7d69ee863fdcc3b69c6dcc51fd7662c",
+    "hash": "27d3156d32391e07ddc76d307e686882e8bb2b412f0fa9f64ebfe71d13692ee3",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Lower Case",
     "description": "Convert a string to lower case",
     "website": "https://www.flomation.co",
-    "icon": "font+arrow-down",
+    "icon": "i-cursor+arrow-down",
     "date": "19/04/2026",
     "type": 2,
     "category": {
       "name": "String",
-      "icon": "font",
+      "icon": "i-cursor",
       "description": "String manipulation and text operations"
     },
     "inputs": [
@@ -61425,18 +61425,18 @@
     ]
   },
   "string/repeat": {
-    "hash": "20899a798cb9b89621b72af0b45e8bec79468bdc21877c4a40fce042d8d7731a",
+    "hash": "517329975a2289c2115823f7bd97e587cacd8173b5d744dd4cf0f0abfbd6196b",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Repeat",
     "description": "Repeat a string a given number of times",
     "website": "https://www.flomation.co",
-    "icon": "font+repeat",
+    "icon": "i-cursor+repeat",
     "date": "19/04/2026",
     "type": 2,
     "category": {
       "name": "String",
-      "icon": "font",
+      "icon": "i-cursor",
       "description": "String manipulation and text operations"
     },
     "inputs": [
@@ -61489,18 +61489,18 @@
     ]
   },
   "string/replace": {
-    "hash": "1d6eeee344bf2980fc88c0d8395934e4537ecbe00ebc1ee9e7c3cdab727cdff6",
+    "hash": "61d194e0633e1a3f02f0dea1886c6b1bf88947c888a4badd0153befca14fab16",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Replace",
     "description": "Replace all occurrences of a substring with another string",
     "website": "https://www.flomation.co",
-    "icon": "font+pencil",
+    "icon": "i-cursor+pencil",
     "date": "19/04/2026",
     "type": 2,
     "category": {
       "name": "String",
-      "icon": "font",
+      "icon": "i-cursor",
       "description": "String manipulation and text operations"
     },
     "inputs": [
@@ -61567,18 +61567,18 @@
     ]
   },
   "string/substring": {
-    "hash": "b9353e279e6727f2c48f7f2ae232f145d7ee63dc0ed2498d489a3c6f55cece4d",
+    "hash": "6e836f0e19d91249913cbdf667b7373482ef658d9b1ba2e498cf8d30327e1e6e",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Substring",
     "description": "Extract a portion of a string by start and end positions",
     "website": "https://www.flomation.co",
-    "icon": "font+filter",
+    "icon": "i-cursor+filter",
     "date": "19/04/2026",
     "type": 2,
     "category": {
       "name": "String",
-      "icon": "font",
+      "icon": "i-cursor",
       "description": "String manipulation and text operations"
     },
     "inputs": [
@@ -61638,18 +61638,18 @@
     ]
   },
   "string/trim": {
-    "hash": "6d0a9902fbf339fa74224b1385f91d401160529c218e7dfffc0635c1d4202fbd",
+    "hash": "5318d01e95e06ab0d788f045e1d5cf0d0426fcb9d457c0c09772bc120d8a7e92",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Trim",
     "description": "Remove whitespace from both ends of a string",
     "website": "https://www.flomation.co",
-    "icon": "font+xmark",
+    "icon": "i-cursor+xmark",
     "date": "19/04/2026",
     "type": 2,
     "category": {
       "name": "String",
-      "icon": "font",
+      "icon": "i-cursor",
       "description": "String manipulation and text operations"
     },
     "inputs": [
@@ -61694,18 +61694,18 @@
     ]
   },
   "string/trim_end": {
-    "hash": "700a338129f6c4c41e760ac848a5e966e4ae85982ef204d2ba361c849ac1641c",
+    "hash": "3be2b8e93737bc9eed8772f4bfdf74e93300e73094da1704a30a2167a8b22d0c",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Trim End",
     "description": "Remove whitespace from the end of a string",
     "website": "https://www.flomation.co",
-    "icon": "font+arrow-left",
+    "icon": "i-cursor+arrow-left",
     "date": "19/04/2026",
     "type": 2,
     "category": {
       "name": "String",
-      "icon": "font",
+      "icon": "i-cursor",
       "description": "String manipulation and text operations"
     },
     "inputs": [
@@ -61750,18 +61750,18 @@
     ]
   },
   "string/trim_start": {
-    "hash": "1f4a9ac2e63e130984016810ec52d772198c143c5d8bc5ad5d7d5b33fe51ad34",
+    "hash": "c92063abe6ab18fa37631e87772f856297228707fcb381a54bb08de544a9cc1c",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Trim Start",
     "description": "Remove whitespace from the start of a string",
     "website": "https://www.flomation.co",
-    "icon": "font+arrow-right",
+    "icon": "i-cursor+arrow-right",
     "date": "19/04/2026",
     "type": 2,
     "category": {
       "name": "String",
-      "icon": "font",
+      "icon": "i-cursor",
       "description": "String manipulation and text operations"
     },
     "inputs": [
@@ -61806,18 +61806,18 @@
     ]
   },
   "string/upper_case": {
-    "hash": "0d64a598e8499a078587403e5c983080ef735d793a49aaca0cb25381b9daf645",
+    "hash": "8d8f17005e8ab7cee06b7ca9aeabd4e96856cdd35c25debffe92e99c7937f549",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Upper Case",
     "description": "Convert a string to upper case",
     "website": "https://www.flomation.co",
-    "icon": "font+arrow-up",
+    "icon": "i-cursor+arrow-up",
     "date": "19/04/2026",
     "type": 2,
     "category": {
       "name": "String",
-      "icon": "font",
+      "icon": "i-cursor",
       "description": "String manipulation and text operations"
     },
     "inputs": [
@@ -62650,7 +62650,7 @@
     ]
   },
   "stripe/customer_create": {
-    "hash": "4ca741444b2b984e15eceae5647c868bf83aaebfc47745f8173dc5ac701cc089",
+    "hash": "3c3d1421c0a09b936ec6411c2925957afdfaf477404b715348acb87721dab2d9",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Customer: Create",
@@ -62755,7 +62755,7 @@
     ]
   },
   "stripe/customer_delete": {
-    "hash": "d7f8dc241724dce735c30f7622ffac42c5d80f2ec86b0c907c4fba5990892b34",
+    "hash": "56947841e0d4b8992408d965c2cf1895f319d4df10d35ee2d9dcdfff31bfc2cb",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Customer: Delete",
@@ -62826,7 +62826,7 @@
     ]
   },
   "stripe/customer_get": {
-    "hash": "072af5154d2d09925d091b61b56d6d3027869ef07f0d427fad1b219c8b7564d1",
+    "hash": "47430789c80d69f99f8d3759778cab99815e5d444965a4062e7f778d85b5e534",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Customer: Get",
@@ -62904,7 +62904,7 @@
     ]
   },
   "stripe/customer_list": {
-    "hash": "835a52179c19899339b2e6842126593d09dfae94fc488df47c2e196c2278c8e2",
+    "hash": "9cefad0bda670c271b6124e95af0837e84d7c2c0d6bb07eb775e0adeb786d220",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Customer: List",
@@ -62988,7 +62988,7 @@
     ]
   },
   "stripe/customer_update": {
-    "hash": "427d7e3fde82733918cd6e819e1a7d6cd560da1643e21a7724722bb7795ed2b3",
+    "hash": "737abb68f65055d02a5f82158d2a85708b064a4466fddbd14de219f51f58ba88",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Customer: Update",
@@ -66686,13 +66686,13 @@
     ]
   },
   "subflow/invoke": {
-    "hash": "dc8445fb64389426a54b609537d4568ab3fd9add343199c13dca04085e799bf5",
+    "hash": "3ba8e3d2816e254d6d5ea53692e3509556f8c80a7298178e728239bcf35daeeb",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Invoke Sub-Flow",
     "description": "Call a named sub-flow subroutine and return its results",
     "website": "https://www.flomation.co",
-    "icon": "share",
+    "icon": "share-from-square",
     "date": "19/04/2026",
     "type": 2,
     "category": {

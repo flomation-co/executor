@@ -19,7 +19,7 @@ const (
 	Name         = "List Identities"
 	Description  = "List all known channel identities for the current user"
 	Website      = "https://www.flomation.co"
-	Icon         = "id-card"
+	Icon         = "user-group"
 	Date         = "29/04/2026"
 	Type         = core.ActionTypeAction
 )
