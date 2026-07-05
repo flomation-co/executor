@@ -201,6 +201,14 @@ const (
 	// can layer syntax highlighting / line numbers on top, none
 	// of which would make sense for the generic Text type.
 	ConnectionTypeCode = "code"
+
+	// ConnectionTypeMoney is a decimal monetary amount entered in MAJOR
+	// units (e.g. £12.34), rendered by the editor as a currency-prefixed
+	// money field. The stored/substituted value is a plain decimal string;
+	// actions convert it to the currency's smallest unit (pence, cents…)
+	// at execution time via a currency-aware helper. Kept string-typed so
+	// ${...} substitution flows through untouched.
+	ConnectionTypeMoney = "money"
 )
 
 type Action func(flow *Flow, node *Node, inputs []*Connection) (map[string]interface{}, error)
@@ -264,7 +272,7 @@ func (c *Connection) String() *string {
 
 	if c.Type == ConnectionTypeString || c.Type == ConnectionTypeText ||
 		c.Type == ConnectionTypeDateTime || c.Type == ConnectionTypeMultiSelect ||
-		c.Type == ConnectionTypeRows {
+		c.Type == ConnectionTypeRows || c.Type == ConnectionTypeMoney {
 		if v, ok := c.Value.(string); ok {
 			return &v
 		}
