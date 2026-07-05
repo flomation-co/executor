@@ -1,0 +1,67 @@
+package promotion_code_list
+
+import (
+	"fmt"
+
+	core "flomation.app/automate/executor"
+	stripe_common "flomation.app/automate/executor/actions/stripe"
+	stripe "github.com/stripe/stripe-go/v82"
+)
+
+const (
+	Author       = "Andy Esser"
+	Organisation = "Flomation"
+	Name         = "Promotion Code: List"
+	Description  = "List Stripe promotion codes, optionally filtered by coupon or active state."
+	Website      = "https://www.flomation.co"
+	Icon         = "stripe+list"
+	Date         = "05/07/2026"
+	Type         = core.ActionTypeAction
+)
+
+var Inputs = [...]core.Connection{
+	{Name: "api_key", Type: core.ConnectionTypeSecret, Label: "Stripe Secret Key", Placeholder: "sk_live_… or sk_test_…", Required: true},
+	{Name: "coupon", Type: core.ConnectionTypeString, Label: "Coupon ID", Placeholder: "Filter by coupon (optional)"},
+	{Name: "active", Type: core.ConnectionTypeBoolean, Label: "Active", Placeholder: "Filter by active state (optional)"},
+	{Name: "limit", Type: core.ConnectionTypeInteger, Label: "Limit", Placeholder: "Max results (default 20, max 100)"},
+}
+
+var Outputs = [...]core.Connection{
+	{Name: "tool_result", Type: core.ConnectionTypeString, Label: "Result Summary"},
+	{Name: "results", Type: core.ConnectionTypeObject, Label: "Promotion Codes"},
+	{Name: "count", Type: core.ConnectionTypeInteger, Label: "Count"},
+	{Name: "has_more", Type: core.ConnectionTypeBoolean, Label: "Has More"},
+	{Name: "success", Type: core.ConnectionTypeBoolean, Label: "Success"},
+	{Name: "error", Type: core.ConnectionTypeString, Label: "Error"},
+}
+
+func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[string]interface{}, error) {
+	apiKey, err := stripe_common.GetAPIKey(inputs)
+	if err != nil {
+		return nil, err
+	}
+
+	limit := int64(20)
+	if l := stripe_common.OptionalInt64("limit", inputs); l != nil && *l > 0 {
+		limit = *l
+	}
+	params := &stripe.PromotionCodeListParams{}
+	params.Limit = stripe.Int64(limit)
+	if v := stripe_common.OptionalString("coupon", inputs); v != "" {
+		params.Coupon = stripe.String(v)
+	}
+	if v := stripe_common.OptionalBool("active", inputs); v != nil {
+		params.Active = v
+	}
+
+	it := stripe_common.NewClient(apiKey).PromotionCodes.List(params)
+	var items []map[string]interface{}
+	for it.Next() {
+		items = append(items, stripe_common.ToMap(it.PromotionCode()))
+	}
+	if err := it.Err(); err != nil {
+		return stripe_common.MapError(err), nil
+	}
+	hasMore := it.Meta() != nil && it.Meta().HasMore
+	return stripe_common.ListResult(items, hasMore, fmt.Sprintf("Listed %d promotion code(s)", len(items))), nil
+}

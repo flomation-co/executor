@@ -511,6 +511,61 @@ import (
 	string_trim_end "flomation.app/automate/executor/actions/string/trim_end"
 	string_trim_start "flomation.app/automate/executor/actions/string/trim_start"
 	string_upper_case "flomation.app/automate/executor/actions/string/upper_case"
+	stripe_balance_get "flomation.app/automate/executor/actions/stripe/balance_get"
+	stripe_charge_get "flomation.app/automate/executor/actions/stripe/charge_get"
+	stripe_charge_list "flomation.app/automate/executor/actions/stripe/charge_list"
+	stripe_checkout_session_create "flomation.app/automate/executor/actions/stripe/checkout_session_create"
+	stripe_checkout_session_expire "flomation.app/automate/executor/actions/stripe/checkout_session_expire"
+	stripe_checkout_session_get "flomation.app/automate/executor/actions/stripe/checkout_session_get"
+	stripe_checkout_session_list "flomation.app/automate/executor/actions/stripe/checkout_session_list"
+	stripe_coupon_create "flomation.app/automate/executor/actions/stripe/coupon_create"
+	stripe_coupon_list "flomation.app/automate/executor/actions/stripe/coupon_list"
+	stripe_customer_create "flomation.app/automate/executor/actions/stripe/customer_create"
+	stripe_customer_delete "flomation.app/automate/executor/actions/stripe/customer_delete"
+	stripe_customer_get "flomation.app/automate/executor/actions/stripe/customer_get"
+	stripe_customer_list "flomation.app/automate/executor/actions/stripe/customer_list"
+	stripe_customer_update "flomation.app/automate/executor/actions/stripe/customer_update"
+	stripe_dispute_close "flomation.app/automate/executor/actions/stripe/dispute_close"
+	stripe_dispute_get "flomation.app/automate/executor/actions/stripe/dispute_get"
+	stripe_dispute_list "flomation.app/automate/executor/actions/stripe/dispute_list"
+	stripe_invoice_create "flomation.app/automate/executor/actions/stripe/invoice_create"
+	stripe_invoice_finalize "flomation.app/automate/executor/actions/stripe/invoice_finalize"
+	stripe_invoice_get "flomation.app/automate/executor/actions/stripe/invoice_get"
+	stripe_invoice_list "flomation.app/automate/executor/actions/stripe/invoice_list"
+	stripe_invoice_pay "flomation.app/automate/executor/actions/stripe/invoice_pay"
+	stripe_invoice_send "flomation.app/automate/executor/actions/stripe/invoice_send"
+	stripe_invoice_void "flomation.app/automate/executor/actions/stripe/invoice_void"
+	stripe_payment_intent_cancel "flomation.app/automate/executor/actions/stripe/payment_intent_cancel"
+	stripe_payment_intent_capture "flomation.app/automate/executor/actions/stripe/payment_intent_capture"
+	stripe_payment_intent_create "flomation.app/automate/executor/actions/stripe/payment_intent_create"
+	stripe_payment_intent_get "flomation.app/automate/executor/actions/stripe/payment_intent_get"
+	stripe_payment_intent_list "flomation.app/automate/executor/actions/stripe/payment_intent_list"
+	stripe_payment_intent_update "flomation.app/automate/executor/actions/stripe/payment_intent_update"
+	stripe_payment_method_attach "flomation.app/automate/executor/actions/stripe/payment_method_attach"
+	stripe_payment_method_detach "flomation.app/automate/executor/actions/stripe/payment_method_detach"
+	stripe_payment_method_get "flomation.app/automate/executor/actions/stripe/payment_method_get"
+	stripe_payment_method_list "flomation.app/automate/executor/actions/stripe/payment_method_list"
+	stripe_payout_create "flomation.app/automate/executor/actions/stripe/payout_create"
+	stripe_payout_get "flomation.app/automate/executor/actions/stripe/payout_get"
+	stripe_payout_list "flomation.app/automate/executor/actions/stripe/payout_list"
+	stripe_price_create "flomation.app/automate/executor/actions/stripe/price_create"
+	stripe_price_get "flomation.app/automate/executor/actions/stripe/price_get"
+	stripe_price_list "flomation.app/automate/executor/actions/stripe/price_list"
+	stripe_price_update "flomation.app/automate/executor/actions/stripe/price_update"
+	stripe_product_create "flomation.app/automate/executor/actions/stripe/product_create"
+	stripe_product_get "flomation.app/automate/executor/actions/stripe/product_get"
+	stripe_product_list "flomation.app/automate/executor/actions/stripe/product_list"
+	stripe_product_update "flomation.app/automate/executor/actions/stripe/product_update"
+	stripe_promotion_code_create "flomation.app/automate/executor/actions/stripe/promotion_code_create"
+	stripe_promotion_code_list "flomation.app/automate/executor/actions/stripe/promotion_code_list"
+	stripe_refund_create "flomation.app/automate/executor/actions/stripe/refund_create"
+	stripe_refund_get "flomation.app/automate/executor/actions/stripe/refund_get"
+	stripe_refund_list "flomation.app/automate/executor/actions/stripe/refund_list"
+	stripe_subscription_cancel "flomation.app/automate/executor/actions/stripe/subscription_cancel"
+	stripe_subscription_create "flomation.app/automate/executor/actions/stripe/subscription_create"
+	stripe_subscription_get "flomation.app/automate/executor/actions/stripe/subscription_get"
+	stripe_subscription_list "flomation.app/automate/executor/actions/stripe/subscription_list"
+	stripe_subscription_update "flomation.app/automate/executor/actions/stripe/subscription_update"
 	subflow_begin "flomation.app/automate/executor/actions/subflow/begin"
 	subflow_end "flomation.app/automate/executor/actions/subflow/end"
 	subflow_invoke "flomation.app/automate/executor/actions/subflow/invoke"
@@ -538,6 +593,7 @@ import (
 	trigger_schedule "flomation.app/automate/executor/actions/trigger/schedule"
 	trigger_shopify_webhook "flomation.app/automate/executor/actions/trigger/shopify_webhook"
 	trigger_slack "flomation.app/automate/executor/actions/trigger/slack"
+	trigger_stripe_webhook "flomation.app/automate/executor/actions/trigger/stripe_webhook"
 	trigger_teams "flomation.app/automate/executor/actions/trigger/teams"
 	trigger_telegram "flomation.app/automate/executor/actions/trigger/telegram"
 	trigger_twilio_sms "flomation.app/automate/executor/actions/trigger/twilio_sms"
@@ -1078,6 +1134,61 @@ var Actions = map[string]core.Action{
 	"string/trim_end":                                   string_trim_end.Execute,
 	"string/trim_start":                                 string_trim_start.Execute,
 	"string/upper_case":                                 string_upper_case.Execute,
+	"stripe/balance_get":                                stripe_balance_get.Execute,
+	"stripe/charge_get":                                 stripe_charge_get.Execute,
+	"stripe/charge_list":                                stripe_charge_list.Execute,
+	"stripe/checkout_session_create":                    stripe_checkout_session_create.Execute,
+	"stripe/checkout_session_expire":                    stripe_checkout_session_expire.Execute,
+	"stripe/checkout_session_get":                       stripe_checkout_session_get.Execute,
+	"stripe/checkout_session_list":                      stripe_checkout_session_list.Execute,
+	"stripe/coupon_create":                              stripe_coupon_create.Execute,
+	"stripe/coupon_list":                                stripe_coupon_list.Execute,
+	"stripe/customer_create":                            stripe_customer_create.Execute,
+	"stripe/customer_delete":                            stripe_customer_delete.Execute,
+	"stripe/customer_get":                               stripe_customer_get.Execute,
+	"stripe/customer_list":                              stripe_customer_list.Execute,
+	"stripe/customer_update":                            stripe_customer_update.Execute,
+	"stripe/dispute_close":                              stripe_dispute_close.Execute,
+	"stripe/dispute_get":                                stripe_dispute_get.Execute,
+	"stripe/dispute_list":                               stripe_dispute_list.Execute,
+	"stripe/invoice_create":                             stripe_invoice_create.Execute,
+	"stripe/invoice_finalize":                           stripe_invoice_finalize.Execute,
+	"stripe/invoice_get":                                stripe_invoice_get.Execute,
+	"stripe/invoice_list":                               stripe_invoice_list.Execute,
+	"stripe/invoice_pay":                                stripe_invoice_pay.Execute,
+	"stripe/invoice_send":                               stripe_invoice_send.Execute,
+	"stripe/invoice_void":                               stripe_invoice_void.Execute,
+	"stripe/payment_intent_cancel":                      stripe_payment_intent_cancel.Execute,
+	"stripe/payment_intent_capture":                     stripe_payment_intent_capture.Execute,
+	"stripe/payment_intent_create":                      stripe_payment_intent_create.Execute,
+	"stripe/payment_intent_get":                         stripe_payment_intent_get.Execute,
+	"stripe/payment_intent_list":                        stripe_payment_intent_list.Execute,
+	"stripe/payment_intent_update":                      stripe_payment_intent_update.Execute,
+	"stripe/payment_method_attach":                      stripe_payment_method_attach.Execute,
+	"stripe/payment_method_detach":                      stripe_payment_method_detach.Execute,
+	"stripe/payment_method_get":                         stripe_payment_method_get.Execute,
+	"stripe/payment_method_list":                        stripe_payment_method_list.Execute,
+	"stripe/payout_create":                              stripe_payout_create.Execute,
+	"stripe/payout_get":                                 stripe_payout_get.Execute,
+	"stripe/payout_list":                                stripe_payout_list.Execute,
+	"stripe/price_create":                               stripe_price_create.Execute,
+	"stripe/price_get":                                  stripe_price_get.Execute,
+	"stripe/price_list":                                 stripe_price_list.Execute,
+	"stripe/price_update":                               stripe_price_update.Execute,
+	"stripe/product_create":                             stripe_product_create.Execute,
+	"stripe/product_get":                                stripe_product_get.Execute,
+	"stripe/product_list":                               stripe_product_list.Execute,
+	"stripe/product_update":                             stripe_product_update.Execute,
+	"stripe/promotion_code_create":                      stripe_promotion_code_create.Execute,
+	"stripe/promotion_code_list":                        stripe_promotion_code_list.Execute,
+	"stripe/refund_create":                              stripe_refund_create.Execute,
+	"stripe/refund_get":                                 stripe_refund_get.Execute,
+	"stripe/refund_list":                                stripe_refund_list.Execute,
+	"stripe/subscription_cancel":                        stripe_subscription_cancel.Execute,
+	"stripe/subscription_create":                        stripe_subscription_create.Execute,
+	"stripe/subscription_get":                           stripe_subscription_get.Execute,
+	"stripe/subscription_list":                          stripe_subscription_list.Execute,
+	"stripe/subscription_update":                        stripe_subscription_update.Execute,
 	"subflow/begin":                                     subflow_begin.Execute,
 	"subflow/end":                                       subflow_end.Execute,
 	"subflow/invoke":                                    subflow_invoke.Execute,
@@ -1105,6 +1216,7 @@ var Actions = map[string]core.Action{
 	"trigger/schedule":                                  trigger_schedule.Execute,
 	"trigger/shopify_webhook":                           trigger_shopify_webhook.Execute,
 	"trigger/slack":                                     trigger_slack.Execute,
+	"trigger/stripe_webhook":                            trigger_stripe_webhook.Execute,
 	"trigger/teams":                                     trigger_teams.Execute,
 	"trigger/telegram":                                  trigger_telegram.Execute,
 	"trigger/twilio_sms":                                trigger_twilio_sms.Execute,

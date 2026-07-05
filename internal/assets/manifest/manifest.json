@@ -32777,7 +32777,7 @@
     ]
   },
   "messaging/telegram/send_message": {
-    "hash": "46b7b68cd83280d9292dc9b05e750ae4b26e54a1e3d2db182bff4a8dd1a233d4",
+    "hash": "9f2fb5e8219e42b345096c48218dcc743418e09eef4146bed4fd70e99647b4a7",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Send Telegram Message",
@@ -52331,6 +52331,4754 @@
       }
     ]
   },
+  "stripe/balance_get": {
+    "hash": "87c4dba66edfa470f222a773a003e1490e890e799956b3b700aa7d2b59b69531",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Balance: Get",
+    "description": "Retrieve the current Stripe account balance.",
+    "website": "https://www.flomation.co",
+    "icon": "stripe+search",
+    "date": "05/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Stripe",
+      "icon": "stripe",
+      "description": "Accept payments and manage customers, subscriptions and invoices in Stripe"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "Stripe Secret Key",
+        "placeholder": "sk_live_… or sk_test_…",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Balance",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "stripe/charge_get": {
+    "hash": "4ee9c64ffcf93e3937aa1a7f2feb222621a3611b3f5ed7afdd5527d04bb4cb0e",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Charge: Get",
+    "description": "Retrieve a Stripe charge by ID.",
+    "website": "https://www.flomation.co",
+    "icon": "stripe+search",
+    "date": "05/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Stripe",
+      "icon": "stripe",
+      "description": "Accept payments and manage customers, subscriptions and invoices in Stripe"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "Stripe Secret Key",
+        "placeholder": "sk_live_… or sk_test_…",
+        "required": true
+      },
+      {
+        "name": "charge_id",
+        "type": "string",
+        "value": null,
+        "label": "Charge ID",
+        "placeholder": "ch_…",
+        "required": true
+      },
+      {
+        "name": "expand",
+        "type": "string",
+        "value": null,
+        "label": "Expand",
+        "placeholder": "Comma-separated fields to expand (optional)"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Charge ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Charge",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "stripe/charge_list": {
+    "hash": "5a0ce26af13c4b9dcbe2c1c8c024727bc72cb962bdba1b4c38e10704c193bb4a",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Charge: List",
+    "description": "List Stripe charges, optionally filtered by customer.",
+    "website": "https://www.flomation.co",
+    "icon": "stripe+list",
+    "date": "05/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Stripe",
+      "icon": "stripe",
+      "description": "Accept payments and manage customers, subscriptions and invoices in Stripe"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "Stripe Secret Key",
+        "placeholder": "sk_live_… or sk_test_…",
+        "required": true
+      },
+      {
+        "name": "customer",
+        "type": "string",
+        "value": null,
+        "label": "Customer ID",
+        "placeholder": "Filter by customer (optional)"
+      },
+      {
+        "name": "limit",
+        "type": "integer",
+        "value": null,
+        "label": "Limit",
+        "placeholder": "Max results (default 20, max 100)"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "results",
+        "type": "object",
+        "value": null,
+        "label": "Charges",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Count",
+        "placeholder": ""
+      },
+      {
+        "name": "has_more",
+        "type": "boolean",
+        "value": null,
+        "label": "Has More",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "stripe/checkout_session_create": {
+    "hash": "2c9bda1935754088eaca77ba90bfa58c704385d16b02df69b9c42cfd3ec063cb",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Checkout Session: Create",
+    "description": "Create a Stripe Checkout Session and return its hosted payment URL.",
+    "website": "https://www.flomation.co",
+    "icon": "stripe+plus",
+    "date": "05/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Stripe",
+      "icon": "stripe",
+      "description": "Accept payments and manage customers, subscriptions and invoices in Stripe"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "Stripe Secret Key",
+        "placeholder": "sk_live_… or sk_test_…",
+        "required": true
+      },
+      {
+        "name": "mode",
+        "type": "string",
+        "value": null,
+        "label": "Mode",
+        "placeholder": "payment",
+        "options": [
+          {
+            "name": "Payment",
+            "value": "payment"
+          },
+          {
+            "name": "Subscription",
+            "value": "subscription"
+          },
+          {
+            "name": "Setup",
+            "value": "setup"
+          }
+        ]
+      },
+      {
+        "name": "success_url",
+        "type": "string",
+        "value": null,
+        "label": "Success URL",
+        "placeholder": "https://example.com/success",
+        "required": true
+      },
+      {
+        "name": "cancel_url",
+        "type": "string",
+        "value": null,
+        "label": "Cancel URL",
+        "placeholder": "https://example.com/cancel"
+      },
+      {
+        "name": "customer",
+        "type": "string",
+        "value": null,
+        "label": "Customer",
+        "placeholder": "cus_…"
+      },
+      {
+        "name": "line_items",
+        "type": "key_value_array",
+        "value": null,
+        "label": "Line Items",
+        "placeholder": "price_id → quantity"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Session ID",
+        "placeholder": ""
+      },
+      {
+        "name": "url",
+        "type": "string",
+        "value": null,
+        "label": "Checkout URL",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Checkout Session",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "stripe/checkout_session_expire": {
+    "hash": "821b51bdc73b5c888296c6038d326f0865fd67f97e7f26add9b8fd4d44329d28",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Checkout Session: Expire",
+    "description": "Expire an open Stripe Checkout Session so it can no longer be completed.",
+    "website": "https://www.flomation.co",
+    "icon": "stripe",
+    "date": "05/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Stripe",
+      "icon": "stripe",
+      "description": "Accept payments and manage customers, subscriptions and invoices in Stripe"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "Stripe Secret Key",
+        "placeholder": "sk_live_… or sk_test_…",
+        "required": true
+      },
+      {
+        "name": "session_id",
+        "type": "string",
+        "value": null,
+        "label": "Session ID",
+        "placeholder": "cs_…",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Session ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Checkout Session",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "stripe/checkout_session_get": {
+    "hash": "df3249b9430ad557810e74537fd383be6b7ff85b78088240a644e1448e980cf8",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Checkout Session: Get",
+    "description": "Retrieve a Stripe Checkout Session by ID.",
+    "website": "https://www.flomation.co",
+    "icon": "stripe+search",
+    "date": "05/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Stripe",
+      "icon": "stripe",
+      "description": "Accept payments and manage customers, subscriptions and invoices in Stripe"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "Stripe Secret Key",
+        "placeholder": "sk_live_… or sk_test_…",
+        "required": true
+      },
+      {
+        "name": "session_id",
+        "type": "string",
+        "value": null,
+        "label": "Session ID",
+        "placeholder": "cs_…",
+        "required": true
+      },
+      {
+        "name": "expand",
+        "type": "string",
+        "value": null,
+        "label": "Expand",
+        "placeholder": "Comma-separated fields to expand (optional)"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Session ID",
+        "placeholder": ""
+      },
+      {
+        "name": "url",
+        "type": "string",
+        "value": null,
+        "label": "Checkout URL",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Checkout Session",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "stripe/checkout_session_list": {
+    "hash": "222240520bd9e6c556f2a28be0008b2d5536c8bc581f16b44a55ddf01bcdda7b",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Checkout Session: List",
+    "description": "List Stripe Checkout Sessions, optionally filtered by customer.",
+    "website": "https://www.flomation.co",
+    "icon": "stripe+list",
+    "date": "05/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Stripe",
+      "icon": "stripe",
+      "description": "Accept payments and manage customers, subscriptions and invoices in Stripe"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "Stripe Secret Key",
+        "placeholder": "sk_live_… or sk_test_…",
+        "required": true
+      },
+      {
+        "name": "customer",
+        "type": "string",
+        "value": null,
+        "label": "Customer",
+        "placeholder": "Filter by customer ID (optional)"
+      },
+      {
+        "name": "limit",
+        "type": "integer",
+        "value": null,
+        "label": "Limit",
+        "placeholder": "Max results (default 20, max 100)"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "results",
+        "type": "object",
+        "value": null,
+        "label": "Checkout Sessions",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Count",
+        "placeholder": ""
+      },
+      {
+        "name": "has_more",
+        "type": "boolean",
+        "value": null,
+        "label": "Has More",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "stripe/coupon_create": {
+    "hash": "5bae973203f3808d4d8e4562a0ca0afe51501641ccaf832b3764a1e204829ade",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Coupon: Create",
+    "description": "Create a Stripe coupon (percent-off or amount-off discount).",
+    "website": "https://www.flomation.co",
+    "icon": "stripe+plus",
+    "date": "05/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Stripe",
+      "icon": "stripe",
+      "description": "Accept payments and manage customers, subscriptions and invoices in Stripe"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "Stripe Secret Key",
+        "placeholder": "sk_live_… or sk_test_…",
+        "required": true
+      },
+      {
+        "name": "name",
+        "type": "string",
+        "value": null,
+        "label": "Name",
+        "placeholder": "Displayed to customers on invoices/receipts"
+      },
+      {
+        "name": "percent_off",
+        "type": "integer",
+        "value": null,
+        "label": "Percent Off",
+        "placeholder": "Percentage discount 1–100 (leave blank for amount off)"
+      },
+      {
+        "name": "amount_off",
+        "type": "money",
+        "value": null,
+        "label": "Amount Off",
+        "placeholder": "e.g. 12.34 (requires a currency)"
+      },
+      {
+        "name": "currency",
+        "type": "string",
+        "value": null,
+        "label": "Currency",
+        "placeholder": "Required when Amount Off is set, e.g. gbp"
+      },
+      {
+        "name": "duration",
+        "type": "string",
+        "value": null,
+        "label": "Duration",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "Once",
+            "value": "once"
+          },
+          {
+            "name": "Repeating",
+            "value": "repeating"
+          },
+          {
+            "name": "Forever",
+            "value": "forever"
+          }
+        ]
+      },
+      {
+        "name": "metadata",
+        "type": "key_value_array",
+        "value": null,
+        "label": "Metadata",
+        "placeholder": "Arbitrary key → value pairs stored on the coupon"
+      },
+      {
+        "name": "idempotency_key",
+        "type": "string",
+        "value": null,
+        "label": "Idempotency Key",
+        "placeholder": "Optional — safely retry the same create"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Coupon ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Coupon",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "stripe/coupon_list": {
+    "hash": "cfbfee2b05aa7720904fc6b67ecb4242681dd307bcf4842274c933aa106fc4e6",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Coupon: List",
+    "description": "List Stripe coupons.",
+    "website": "https://www.flomation.co",
+    "icon": "stripe+list",
+    "date": "05/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Stripe",
+      "icon": "stripe",
+      "description": "Accept payments and manage customers, subscriptions and invoices in Stripe"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "Stripe Secret Key",
+        "placeholder": "sk_live_… or sk_test_…",
+        "required": true
+      },
+      {
+        "name": "limit",
+        "type": "integer",
+        "value": null,
+        "label": "Limit",
+        "placeholder": "Max results (default 20, max 100)"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "results",
+        "type": "object",
+        "value": null,
+        "label": "Coupons",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Count",
+        "placeholder": ""
+      },
+      {
+        "name": "has_more",
+        "type": "boolean",
+        "value": null,
+        "label": "Has More",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "stripe/customer_create": {
+    "hash": "4ca741444b2b984e15eceae5647c868bf83aaebfc47745f8173dc5ac701cc089",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Customer: Create",
+    "description": "Create a Stripe customer. Returns the customer ID and object.",
+    "website": "https://www.flomation.co",
+    "icon": "stripe+plus",
+    "date": "05/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Stripe",
+      "icon": "stripe",
+      "description": "Accept payments and manage customers, subscriptions and invoices in Stripe"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "Stripe Secret Key",
+        "placeholder": "sk_live_… or sk_test_…",
+        "required": true
+      },
+      {
+        "name": "email",
+        "type": "string",
+        "value": null,
+        "label": "Email",
+        "placeholder": "customer@example.com"
+      },
+      {
+        "name": "name",
+        "type": "string",
+        "value": null,
+        "label": "Name",
+        "placeholder": "Ada Lovelace"
+      },
+      {
+        "name": "phone",
+        "type": "string",
+        "value": null,
+        "label": "Phone",
+        "placeholder": "+44 20 7946 0000"
+      },
+      {
+        "name": "description",
+        "type": "string",
+        "value": null,
+        "label": "Description",
+        "placeholder": ""
+      },
+      {
+        "name": "metadata",
+        "type": "key_value_array",
+        "value": null,
+        "label": "Metadata",
+        "placeholder": "Arbitrary key → value pairs stored on the customer"
+      },
+      {
+        "name": "idempotency_key",
+        "type": "string",
+        "value": null,
+        "label": "Idempotency Key",
+        "placeholder": "Optional — safely retry the same create"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Customer ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Customer",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "stripe/customer_delete": {
+    "hash": "d7f8dc241724dce735c30f7622ffac42c5d80f2ec86b0c907c4fba5990892b34",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Customer: Delete",
+    "description": "Permanently delete a Stripe customer.",
+    "website": "https://www.flomation.co",
+    "icon": "stripe+trash",
+    "date": "05/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Stripe",
+      "icon": "stripe",
+      "description": "Accept payments and manage customers, subscriptions and invoices in Stripe"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "Stripe Secret Key",
+        "placeholder": "sk_live_… or sk_test_…",
+        "required": true
+      },
+      {
+        "name": "customer_id",
+        "type": "string",
+        "value": null,
+        "label": "Customer ID",
+        "placeholder": "cus_…",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Customer ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Customer",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "stripe/customer_get": {
+    "hash": "072af5154d2d09925d091b61b56d6d3027869ef07f0d427fad1b219c8b7564d1",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Customer: Get",
+    "description": "Retrieve a Stripe customer by ID.",
+    "website": "https://www.flomation.co",
+    "icon": "stripe+search",
+    "date": "05/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Stripe",
+      "icon": "stripe",
+      "description": "Accept payments and manage customers, subscriptions and invoices in Stripe"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "Stripe Secret Key",
+        "placeholder": "sk_live_… or sk_test_…",
+        "required": true
+      },
+      {
+        "name": "customer_id",
+        "type": "string",
+        "value": null,
+        "label": "Customer ID",
+        "placeholder": "cus_…",
+        "required": true
+      },
+      {
+        "name": "expand",
+        "type": "string",
+        "value": null,
+        "label": "Expand",
+        "placeholder": "Comma-separated fields to expand (optional)"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Customer ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Customer",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "stripe/customer_list": {
+    "hash": "835a52179c19899339b2e6842126593d09dfae94fc488df47c2e196c2278c8e2",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Customer: List",
+    "description": "List Stripe customers, optionally filtered by email.",
+    "website": "https://www.flomation.co",
+    "icon": "stripe+list",
+    "date": "05/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Stripe",
+      "icon": "stripe",
+      "description": "Accept payments and manage customers, subscriptions and invoices in Stripe"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "Stripe Secret Key",
+        "placeholder": "sk_live_… or sk_test_…",
+        "required": true
+      },
+      {
+        "name": "email",
+        "type": "string",
+        "value": null,
+        "label": "Email",
+        "placeholder": "Filter by exact email (optional)"
+      },
+      {
+        "name": "limit",
+        "type": "integer",
+        "value": null,
+        "label": "Limit",
+        "placeholder": "Max results (default 20, max 100)"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "results",
+        "type": "object",
+        "value": null,
+        "label": "Customers",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Count",
+        "placeholder": ""
+      },
+      {
+        "name": "has_more",
+        "type": "boolean",
+        "value": null,
+        "label": "Has More",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "stripe/customer_update": {
+    "hash": "427d7e3fde82733918cd6e819e1a7d6cd560da1643e21a7724722bb7795ed2b3",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Customer: Update",
+    "description": "Update fields on an existing Stripe customer.",
+    "website": "https://www.flomation.co",
+    "icon": "stripe+pencil",
+    "date": "05/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Stripe",
+      "icon": "stripe",
+      "description": "Accept payments and manage customers, subscriptions and invoices in Stripe"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "Stripe Secret Key",
+        "placeholder": "sk_live_… or sk_test_…",
+        "required": true
+      },
+      {
+        "name": "customer_id",
+        "type": "string",
+        "value": null,
+        "label": "Customer ID",
+        "placeholder": "cus_…",
+        "required": true
+      },
+      {
+        "name": "email",
+        "type": "string",
+        "value": null,
+        "label": "Email",
+        "placeholder": ""
+      },
+      {
+        "name": "name",
+        "type": "string",
+        "value": null,
+        "label": "Name",
+        "placeholder": ""
+      },
+      {
+        "name": "phone",
+        "type": "string",
+        "value": null,
+        "label": "Phone",
+        "placeholder": ""
+      },
+      {
+        "name": "description",
+        "type": "string",
+        "value": null,
+        "label": "Description",
+        "placeholder": ""
+      },
+      {
+        "name": "metadata",
+        "type": "key_value_array",
+        "value": null,
+        "label": "Metadata",
+        "placeholder": ""
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Customer ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Customer",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "stripe/dispute_close": {
+    "hash": "3344d29768b8547c9b8fce89d5fc04d1d114ff645c9a0d6cb0bba547ac417aff",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Dispute: Close",
+    "description": "Close a Stripe dispute, acknowledging it as lost. Irreversible.",
+    "website": "https://www.flomation.co",
+    "icon": "stripe+trash",
+    "date": "05/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Stripe",
+      "icon": "stripe",
+      "description": "Accept payments and manage customers, subscriptions and invoices in Stripe"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "Stripe Secret Key",
+        "placeholder": "sk_live_… or sk_test_…",
+        "required": true
+      },
+      {
+        "name": "dispute_id",
+        "type": "string",
+        "value": null,
+        "label": "Dispute ID",
+        "placeholder": "dp_…",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Dispute ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Dispute",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "stripe/dispute_get": {
+    "hash": "06ed6fac4e5d86cac5a58f5f4250e9d4c091d5b69ad81c1ab323a38224722c19",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Dispute: Get",
+    "description": "Retrieve a Stripe dispute by ID.",
+    "website": "https://www.flomation.co",
+    "icon": "stripe+search",
+    "date": "05/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Stripe",
+      "icon": "stripe",
+      "description": "Accept payments and manage customers, subscriptions and invoices in Stripe"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "Stripe Secret Key",
+        "placeholder": "sk_live_… or sk_test_…",
+        "required": true
+      },
+      {
+        "name": "dispute_id",
+        "type": "string",
+        "value": null,
+        "label": "Dispute ID",
+        "placeholder": "dp_…",
+        "required": true
+      },
+      {
+        "name": "expand",
+        "type": "string",
+        "value": null,
+        "label": "Expand",
+        "placeholder": "Comma-separated fields to expand (optional)"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Dispute ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Dispute",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "stripe/dispute_list": {
+    "hash": "fc6e3bae699d47b14bfc93cf57fa2300e8cebb8b2334e8f6598a0bcad2faea96",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Dispute: List",
+    "description": "List Stripe disputes, optionally filtered by charge or payment intent.",
+    "website": "https://www.flomation.co",
+    "icon": "stripe+list",
+    "date": "05/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Stripe",
+      "icon": "stripe",
+      "description": "Accept payments and manage customers, subscriptions and invoices in Stripe"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "Stripe Secret Key",
+        "placeholder": "sk_live_… or sk_test_…",
+        "required": true
+      },
+      {
+        "name": "charge",
+        "type": "string",
+        "value": null,
+        "label": "Charge ID",
+        "placeholder": "Filter by charge (optional)"
+      },
+      {
+        "name": "payment_intent",
+        "type": "string",
+        "value": null,
+        "label": "Payment Intent ID",
+        "placeholder": "Filter by payment intent (optional)"
+      },
+      {
+        "name": "limit",
+        "type": "integer",
+        "value": null,
+        "label": "Limit",
+        "placeholder": "Max results (default 20, max 100)"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "results",
+        "type": "object",
+        "value": null,
+        "label": "Disputes",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Count",
+        "placeholder": ""
+      },
+      {
+        "name": "has_more",
+        "type": "boolean",
+        "value": null,
+        "label": "Has More",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "stripe/invoice_create": {
+    "hash": "65145c868778ac7471806f265031f5f398b0096b0e5fe49a258aab872c2b5709",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Invoice: Create",
+    "description": "Create a draft Stripe invoice for a customer. Returns the invoice ID and object.",
+    "website": "https://www.flomation.co",
+    "icon": "stripe+plus",
+    "date": "05/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Stripe",
+      "icon": "stripe",
+      "description": "Accept payments and manage customers, subscriptions and invoices in Stripe"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "Stripe Secret Key",
+        "placeholder": "sk_live_… or sk_test_…",
+        "required": true
+      },
+      {
+        "name": "customer",
+        "type": "string",
+        "value": null,
+        "label": "Customer",
+        "placeholder": "cus_…",
+        "required": true
+      },
+      {
+        "name": "description",
+        "type": "string",
+        "value": null,
+        "label": "Description",
+        "placeholder": ""
+      },
+      {
+        "name": "auto_advance",
+        "type": "boolean",
+        "value": null,
+        "label": "Auto Advance",
+        "placeholder": "Automatically finalise and attempt collection"
+      },
+      {
+        "name": "metadata",
+        "type": "key_value_array",
+        "value": null,
+        "label": "Metadata",
+        "placeholder": "Arbitrary key → value pairs stored on the invoice"
+      },
+      {
+        "name": "idempotency_key",
+        "type": "string",
+        "value": null,
+        "label": "Idempotency Key",
+        "placeholder": "Optional — safely retry the same create"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Invoice ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Invoice",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "stripe/invoice_finalize": {
+    "hash": "c66dd80e4f263d89a93d753aac41e02b7151cf850edd5eb618249be495dc1f44",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Invoice: Finalize",
+    "description": "Finalise a draft Stripe invoice, making it ready to pay or send.",
+    "website": "https://www.flomation.co",
+    "icon": "stripe",
+    "date": "05/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Stripe",
+      "icon": "stripe",
+      "description": "Accept payments and manage customers, subscriptions and invoices in Stripe"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "Stripe Secret Key",
+        "placeholder": "sk_live_… or sk_test_…",
+        "required": true
+      },
+      {
+        "name": "invoice_id",
+        "type": "string",
+        "value": null,
+        "label": "Invoice ID",
+        "placeholder": "in_…",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Invoice ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Invoice",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "stripe/invoice_get": {
+    "hash": "37105e971d0a8026a04c3c69bbbf4e9d1d5c49c8331e976f3ca994ec925a6313",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Invoice: Get",
+    "description": "Retrieve a Stripe invoice by ID.",
+    "website": "https://www.flomation.co",
+    "icon": "stripe+search",
+    "date": "05/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Stripe",
+      "icon": "stripe",
+      "description": "Accept payments and manage customers, subscriptions and invoices in Stripe"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "Stripe Secret Key",
+        "placeholder": "sk_live_… or sk_test_…",
+        "required": true
+      },
+      {
+        "name": "invoice_id",
+        "type": "string",
+        "value": null,
+        "label": "Invoice ID",
+        "placeholder": "in_…",
+        "required": true
+      },
+      {
+        "name": "expand",
+        "type": "string",
+        "value": null,
+        "label": "Expand",
+        "placeholder": "Comma-separated fields to expand (optional)"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Invoice ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Invoice",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "stripe/invoice_list": {
+    "hash": "586b26647774b1efa82af80ece8990cbe3429d21e755a4f81bf48c9f95f95a80",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Invoice: List",
+    "description": "List Stripe invoices, optionally filtered by customer or status.",
+    "website": "https://www.flomation.co",
+    "icon": "stripe+list",
+    "date": "05/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Stripe",
+      "icon": "stripe",
+      "description": "Accept payments and manage customers, subscriptions and invoices in Stripe"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "Stripe Secret Key",
+        "placeholder": "sk_live_… or sk_test_…",
+        "required": true
+      },
+      {
+        "name": "customer",
+        "type": "string",
+        "value": null,
+        "label": "Customer",
+        "placeholder": "Filter by customer ID (optional)"
+      },
+      {
+        "name": "status",
+        "type": "string",
+        "value": null,
+        "label": "Status",
+        "placeholder": "draft, open, paid, uncollectible, void (optional)"
+      },
+      {
+        "name": "limit",
+        "type": "integer",
+        "value": null,
+        "label": "Limit",
+        "placeholder": "Max results (default 20, max 100)"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "results",
+        "type": "object",
+        "value": null,
+        "label": "Invoices",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Count",
+        "placeholder": ""
+      },
+      {
+        "name": "has_more",
+        "type": "boolean",
+        "value": null,
+        "label": "Has More",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "stripe/invoice_pay": {
+    "hash": "5d4765009b08fcbfe9b48fdd9616768e9230a888a224fda2133dfde6986890fe",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Invoice: Pay",
+    "description": "Attempt to collect payment on a Stripe invoice out of the normal schedule.",
+    "website": "https://www.flomation.co",
+    "icon": "stripe",
+    "date": "05/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Stripe",
+      "icon": "stripe",
+      "description": "Accept payments and manage customers, subscriptions and invoices in Stripe"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "Stripe Secret Key",
+        "placeholder": "sk_live_… or sk_test_…",
+        "required": true
+      },
+      {
+        "name": "invoice_id",
+        "type": "string",
+        "value": null,
+        "label": "Invoice ID",
+        "placeholder": "in_…",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Invoice ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Invoice",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "stripe/invoice_send": {
+    "hash": "a9e58d24d444ddb530ad78cd5575f08b01b28e6969320b149034f9de5d5b4a6c",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Invoice: Send",
+    "description": "Manually send a Stripe invoice to the customer by email.",
+    "website": "https://www.flomation.co",
+    "icon": "stripe",
+    "date": "05/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Stripe",
+      "icon": "stripe",
+      "description": "Accept payments and manage customers, subscriptions and invoices in Stripe"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "Stripe Secret Key",
+        "placeholder": "sk_live_… or sk_test_…",
+        "required": true
+      },
+      {
+        "name": "invoice_id",
+        "type": "string",
+        "value": null,
+        "label": "Invoice ID",
+        "placeholder": "in_…",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Invoice ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Invoice",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "stripe/invoice_void": {
+    "hash": "aa1649663fcc332772778cdaa9e0b701334f5566c3b200e73dea10933b01d4a9",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Invoice: Void",
+    "description": "Void a finalised Stripe invoice. This cannot be undone.",
+    "website": "https://www.flomation.co",
+    "icon": "stripe+trash",
+    "date": "05/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Stripe",
+      "icon": "stripe",
+      "description": "Accept payments and manage customers, subscriptions and invoices in Stripe"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "Stripe Secret Key",
+        "placeholder": "sk_live_… or sk_test_…",
+        "required": true
+      },
+      {
+        "name": "invoice_id",
+        "type": "string",
+        "value": null,
+        "label": "Invoice ID",
+        "placeholder": "in_…",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Invoice ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Invoice",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "stripe/payment_intent_cancel": {
+    "hash": "f9e2fa7de72db6dd3390f7a04d9fa39f8e262a61921fd695496570b60d908647",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Payment Intent: Cancel",
+    "description": "Cancel a Stripe PaymentIntent that has not yet completed.",
+    "website": "https://www.flomation.co",
+    "icon": "stripe+trash",
+    "date": "05/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Stripe",
+      "icon": "stripe",
+      "description": "Accept payments and manage customers, subscriptions and invoices in Stripe"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "Stripe Secret Key",
+        "placeholder": "sk_live_… or sk_test_…",
+        "required": true
+      },
+      {
+        "name": "payment_intent_id",
+        "type": "string",
+        "value": null,
+        "label": "Payment Intent ID",
+        "placeholder": "pi_…",
+        "required": true
+      },
+      {
+        "name": "cancellation_reason",
+        "type": "string",
+        "value": null,
+        "label": "Cancellation Reason",
+        "placeholder": "duplicate, fraudulent, requested_by_customer or abandoned"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Payment Intent ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Payment Intent",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "stripe/payment_intent_capture": {
+    "hash": "3b29c174d329b39923d41e6d0927c0bff13435fc001d217b8cb553e34e093ca4",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Payment Intent: Capture",
+    "description": "Capture the funds of an authorised Stripe PaymentIntent.",
+    "website": "https://www.flomation.co",
+    "icon": "stripe",
+    "date": "05/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Stripe",
+      "icon": "stripe",
+      "description": "Accept payments and manage customers, subscriptions and invoices in Stripe"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "Stripe Secret Key",
+        "placeholder": "sk_live_… or sk_test_…",
+        "required": true
+      },
+      {
+        "name": "payment_intent_id",
+        "type": "string",
+        "value": null,
+        "label": "Payment Intent ID",
+        "placeholder": "pi_…",
+        "required": true
+      },
+      {
+        "name": "amount_to_capture",
+        "type": "money",
+        "value": null,
+        "label": "Amount to Capture",
+        "placeholder": "e.g. 12.34 — defaults to the full capturable amount"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Payment Intent ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Payment Intent",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "stripe/payment_intent_create": {
+    "hash": "2972d66e7f9596da3a2e13eb8ccf9e05cb4997dfa6ad723f0f12e2ab444084a4",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Payment Intent: Create",
+    "description": "Create a Stripe PaymentIntent to collect a payment. Returns the intent ID and object.",
+    "website": "https://www.flomation.co",
+    "icon": "stripe+plus",
+    "date": "05/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Stripe",
+      "icon": "stripe",
+      "description": "Accept payments and manage customers, subscriptions and invoices in Stripe"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "Stripe Secret Key",
+        "placeholder": "sk_live_… or sk_test_…",
+        "required": true
+      },
+      {
+        "name": "amount",
+        "type": "money",
+        "value": null,
+        "label": "Amount",
+        "placeholder": "e.g. 12.34",
+        "required": true
+      },
+      {
+        "name": "currency",
+        "type": "string",
+        "value": null,
+        "label": "Currency",
+        "placeholder": "gbp",
+        "required": true
+      },
+      {
+        "name": "customer",
+        "type": "string",
+        "value": null,
+        "label": "Customer ID",
+        "placeholder": "cus_…"
+      },
+      {
+        "name": "payment_method",
+        "type": "string",
+        "value": null,
+        "label": "Payment Method",
+        "placeholder": "pm_…"
+      },
+      {
+        "name": "description",
+        "type": "string",
+        "value": null,
+        "label": "Description",
+        "placeholder": ""
+      },
+      {
+        "name": "confirm",
+        "type": "boolean",
+        "value": null,
+        "label": "Confirm Immediately",
+        "placeholder": ""
+      },
+      {
+        "name": "metadata",
+        "type": "key_value_array",
+        "value": null,
+        "label": "Metadata",
+        "placeholder": "Arbitrary key → value pairs stored on the payment intent"
+      },
+      {
+        "name": "idempotency_key",
+        "type": "string",
+        "value": null,
+        "label": "Idempotency Key",
+        "placeholder": "Optional — safely retry the same create"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Payment Intent ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Payment Intent",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "stripe/payment_intent_get": {
+    "hash": "22cf5e6f46cb56bf1ad44e0867c742c3a961dcc11ac0ecfcc501a716e0008c21",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Payment Intent: Get",
+    "description": "Retrieve a Stripe PaymentIntent by ID.",
+    "website": "https://www.flomation.co",
+    "icon": "stripe+search",
+    "date": "05/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Stripe",
+      "icon": "stripe",
+      "description": "Accept payments and manage customers, subscriptions and invoices in Stripe"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "Stripe Secret Key",
+        "placeholder": "sk_live_… or sk_test_…",
+        "required": true
+      },
+      {
+        "name": "payment_intent_id",
+        "type": "string",
+        "value": null,
+        "label": "Payment Intent ID",
+        "placeholder": "pi_…",
+        "required": true
+      },
+      {
+        "name": "expand",
+        "type": "string",
+        "value": null,
+        "label": "Expand",
+        "placeholder": "Comma-separated fields to expand (optional)"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Payment Intent ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Payment Intent",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "stripe/payment_intent_list": {
+    "hash": "2ecd3ddade014bdd3a420ee33f9df138f47b2ecd4ca479a16fe8cd275b749848",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Payment Intent: List",
+    "description": "List Stripe PaymentIntents, optionally filtered by customer.",
+    "website": "https://www.flomation.co",
+    "icon": "stripe+list",
+    "date": "05/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Stripe",
+      "icon": "stripe",
+      "description": "Accept payments and manage customers, subscriptions and invoices in Stripe"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "Stripe Secret Key",
+        "placeholder": "sk_live_… or sk_test_…",
+        "required": true
+      },
+      {
+        "name": "customer",
+        "type": "string",
+        "value": null,
+        "label": "Customer ID",
+        "placeholder": "Filter by customer (optional)"
+      },
+      {
+        "name": "limit",
+        "type": "integer",
+        "value": null,
+        "label": "Limit",
+        "placeholder": "Max results (default 20, max 100)"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "results",
+        "type": "object",
+        "value": null,
+        "label": "Payment Intents",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Count",
+        "placeholder": ""
+      },
+      {
+        "name": "has_more",
+        "type": "boolean",
+        "value": null,
+        "label": "Has More",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "stripe/payment_intent_update": {
+    "hash": "23237e507cb7113d4505c106761f79aba091d8febaabc3baa6f2f7a7aa6338b8",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Payment Intent: Update",
+    "description": "Update fields on an existing Stripe PaymentIntent.",
+    "website": "https://www.flomation.co",
+    "icon": "stripe+pencil",
+    "date": "05/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Stripe",
+      "icon": "stripe",
+      "description": "Accept payments and manage customers, subscriptions and invoices in Stripe"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "Stripe Secret Key",
+        "placeholder": "sk_live_… or sk_test_…",
+        "required": true
+      },
+      {
+        "name": "payment_intent_id",
+        "type": "string",
+        "value": null,
+        "label": "Payment Intent ID",
+        "placeholder": "pi_…",
+        "required": true
+      },
+      {
+        "name": "amount",
+        "type": "money",
+        "value": null,
+        "label": "Amount",
+        "placeholder": "e.g. 12.34"
+      },
+      {
+        "name": "description",
+        "type": "string",
+        "value": null,
+        "label": "Description",
+        "placeholder": ""
+      },
+      {
+        "name": "metadata",
+        "type": "key_value_array",
+        "value": null,
+        "label": "Metadata",
+        "placeholder": ""
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Payment Intent ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Payment Intent",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "stripe/payment_method_attach": {
+    "hash": "4d3a0f7f4c5bcf9001bd78d6cb347b60f42124753fcac5632c6e24a65e95511f",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Payment Method: Attach",
+    "description": "Attach a Stripe payment method to a customer.",
+    "website": "https://www.flomation.co",
+    "icon": "stripe",
+    "date": "05/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Stripe",
+      "icon": "stripe",
+      "description": "Accept payments and manage customers, subscriptions and invoices in Stripe"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "Stripe Secret Key",
+        "placeholder": "sk_live_… or sk_test_…",
+        "required": true
+      },
+      {
+        "name": "payment_method_id",
+        "type": "string",
+        "value": null,
+        "label": "Payment Method ID",
+        "placeholder": "pm_…",
+        "required": true
+      },
+      {
+        "name": "customer",
+        "type": "string",
+        "value": null,
+        "label": "Customer ID",
+        "placeholder": "cus_…",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Payment Method ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Payment Method",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "stripe/payment_method_detach": {
+    "hash": "c5b8250ef8621cff284216081f175ca3d000fb160875bf343b9114cf73d55a1f",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Payment Method: Detach",
+    "description": "Detach a Stripe payment method from its customer.",
+    "website": "https://www.flomation.co",
+    "icon": "stripe+trash",
+    "date": "05/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Stripe",
+      "icon": "stripe",
+      "description": "Accept payments and manage customers, subscriptions and invoices in Stripe"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "Stripe Secret Key",
+        "placeholder": "sk_live_… or sk_test_…",
+        "required": true
+      },
+      {
+        "name": "payment_method_id",
+        "type": "string",
+        "value": null,
+        "label": "Payment Method ID",
+        "placeholder": "pm_…",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Payment Method ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Payment Method",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "stripe/payment_method_get": {
+    "hash": "f7efb48378286d05c7afa9178c55dffe447d82b17125caf8762ee98113182edd",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Payment Method: Get",
+    "description": "Retrieve a Stripe payment method by ID.",
+    "website": "https://www.flomation.co",
+    "icon": "stripe+search",
+    "date": "05/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Stripe",
+      "icon": "stripe",
+      "description": "Accept payments and manage customers, subscriptions and invoices in Stripe"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "Stripe Secret Key",
+        "placeholder": "sk_live_… or sk_test_…",
+        "required": true
+      },
+      {
+        "name": "payment_method_id",
+        "type": "string",
+        "value": null,
+        "label": "Payment Method ID",
+        "placeholder": "pm_…",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Payment Method ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Payment Method",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "stripe/payment_method_list": {
+    "hash": "2e7f028c21a98bb74fc69cc7abd2384728ae040dcb8e2ed4ccf439c6d9faee27",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Payment Method: List",
+    "description": "List a customer's Stripe payment methods by type.",
+    "website": "https://www.flomation.co",
+    "icon": "stripe+list",
+    "date": "05/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Stripe",
+      "icon": "stripe",
+      "description": "Accept payments and manage customers, subscriptions and invoices in Stripe"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "Stripe Secret Key",
+        "placeholder": "sk_live_… or sk_test_…",
+        "required": true
+      },
+      {
+        "name": "customer",
+        "type": "string",
+        "value": null,
+        "label": "Customer ID",
+        "placeholder": "cus_…",
+        "required": true
+      },
+      {
+        "name": "type",
+        "type": "string",
+        "value": null,
+        "label": "Type",
+        "placeholder": "Payment method type (default card)"
+      },
+      {
+        "name": "limit",
+        "type": "integer",
+        "value": null,
+        "label": "Limit",
+        "placeholder": "Max results (default 20, max 100)"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "results",
+        "type": "object",
+        "value": null,
+        "label": "Payment Methods",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Count",
+        "placeholder": ""
+      },
+      {
+        "name": "has_more",
+        "type": "boolean",
+        "value": null,
+        "label": "Has More",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "stripe/payout_create": {
+    "hash": "d9bc58ce0082c2f3f3b85ce7029e9ee5e2f1d4186daa1a502ca7d52f861102f8",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Payout: Create",
+    "description": "Create a Stripe payout to your bank account or debit card.",
+    "website": "https://www.flomation.co",
+    "icon": "stripe+plus",
+    "date": "05/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Stripe",
+      "icon": "stripe",
+      "description": "Accept payments and manage customers, subscriptions and invoices in Stripe"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "Stripe Secret Key",
+        "placeholder": "sk_live_… or sk_test_…",
+        "required": true
+      },
+      {
+        "name": "amount",
+        "type": "money",
+        "value": null,
+        "label": "Amount",
+        "placeholder": "e.g. 12.34",
+        "required": true
+      },
+      {
+        "name": "currency",
+        "type": "string",
+        "value": null,
+        "label": "Currency",
+        "placeholder": "Three-letter ISO currency code, e.g. gbp",
+        "required": true
+      },
+      {
+        "name": "description",
+        "type": "string",
+        "value": null,
+        "label": "Description",
+        "placeholder": "Arbitrary string shown to users"
+      },
+      {
+        "name": "metadata",
+        "type": "key_value_array",
+        "value": null,
+        "label": "Metadata",
+        "placeholder": "Arbitrary key → value pairs stored on the payout"
+      },
+      {
+        "name": "idempotency_key",
+        "type": "string",
+        "value": null,
+        "label": "Idempotency Key",
+        "placeholder": "Optional — safely retry the same create"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Payout ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Payout",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "stripe/payout_get": {
+    "hash": "177b47ed141abf7ac9a20dc713c357456460bcf3becee59149b371e1ca768504",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Payout: Get",
+    "description": "Retrieve a Stripe payout by ID.",
+    "website": "https://www.flomation.co",
+    "icon": "stripe+search",
+    "date": "05/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Stripe",
+      "icon": "stripe",
+      "description": "Accept payments and manage customers, subscriptions and invoices in Stripe"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "Stripe Secret Key",
+        "placeholder": "sk_live_… or sk_test_…",
+        "required": true
+      },
+      {
+        "name": "payout_id",
+        "type": "string",
+        "value": null,
+        "label": "Payout ID",
+        "placeholder": "po_…",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Payout ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Payout",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "stripe/payout_list": {
+    "hash": "db9e04f87f74d1eb318775126d57f68aefd05957b369d10d749f48f6c4eea8b9",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Payout: List",
+    "description": "List Stripe payouts, optionally filtered by status.",
+    "website": "https://www.flomation.co",
+    "icon": "stripe+list",
+    "date": "05/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Stripe",
+      "icon": "stripe",
+      "description": "Accept payments and manage customers, subscriptions and invoices in Stripe"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "Stripe Secret Key",
+        "placeholder": "sk_live_… or sk_test_…",
+        "required": true
+      },
+      {
+        "name": "status",
+        "type": "string",
+        "value": null,
+        "label": "Status",
+        "placeholder": "Filter by status: pending, paid, failed, canceled (optional)"
+      },
+      {
+        "name": "limit",
+        "type": "integer",
+        "value": null,
+        "label": "Limit",
+        "placeholder": "Max results (default 20, max 100)"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "results",
+        "type": "object",
+        "value": null,
+        "label": "Payouts",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Count",
+        "placeholder": ""
+      },
+      {
+        "name": "has_more",
+        "type": "boolean",
+        "value": null,
+        "label": "Has More",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "stripe/price_create": {
+    "hash": "fd587625369b23c1b432e7fca5ea0e6341b27a8d1305885dad9e290780337045",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Price: Create",
+    "description": "Create a Stripe price for a product. Returns the price ID and object.",
+    "website": "https://www.flomation.co",
+    "icon": "stripe+plus",
+    "date": "05/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Stripe",
+      "icon": "stripe",
+      "description": "Accept payments and manage customers, subscriptions and invoices in Stripe"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "Stripe Secret Key",
+        "placeholder": "sk_live_… or sk_test_…",
+        "required": true
+      },
+      {
+        "name": "product",
+        "type": "string",
+        "value": null,
+        "label": "Product ID",
+        "placeholder": "prod_…",
+        "required": true
+      },
+      {
+        "name": "unit_amount",
+        "type": "money",
+        "value": null,
+        "label": "Unit Amount",
+        "placeholder": "e.g. 12.34",
+        "required": true
+      },
+      {
+        "name": "currency",
+        "type": "string",
+        "value": null,
+        "label": "Currency",
+        "placeholder": "gbp",
+        "required": true
+      },
+      {
+        "name": "recurring_interval",
+        "type": "string",
+        "value": null,
+        "label": "Recurring Interval",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "One-off",
+            "value": ""
+          },
+          {
+            "name": "Daily",
+            "value": "day"
+          },
+          {
+            "name": "Weekly",
+            "value": "week"
+          },
+          {
+            "name": "Monthly",
+            "value": "month"
+          },
+          {
+            "name": "Yearly",
+            "value": "year"
+          }
+        ]
+      },
+      {
+        "name": "metadata",
+        "type": "key_value_array",
+        "value": null,
+        "label": "Metadata",
+        "placeholder": "Arbitrary key → value pairs stored on the price"
+      },
+      {
+        "name": "idempotency_key",
+        "type": "string",
+        "value": null,
+        "label": "Idempotency Key",
+        "placeholder": "Optional — safely retry the same create"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Price ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Price",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "stripe/price_get": {
+    "hash": "fbee2e9b3e170ddc275b09d0238d8b19ab54a12048d6443474392ad071b1cd17",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Price: Get",
+    "description": "Retrieve a Stripe price by ID.",
+    "website": "https://www.flomation.co",
+    "icon": "stripe+search",
+    "date": "05/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Stripe",
+      "icon": "stripe",
+      "description": "Accept payments and manage customers, subscriptions and invoices in Stripe"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "Stripe Secret Key",
+        "placeholder": "sk_live_… or sk_test_…",
+        "required": true
+      },
+      {
+        "name": "price_id",
+        "type": "string",
+        "value": null,
+        "label": "Price ID",
+        "placeholder": "price_…",
+        "required": true
+      },
+      {
+        "name": "expand",
+        "type": "string",
+        "value": null,
+        "label": "Expand",
+        "placeholder": "Comma-separated fields to expand (optional)"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Price ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Price",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "stripe/price_list": {
+    "hash": "7b2dd07cc7370f0deb7977979e6bb505c596c6636e6a1b1a1b528d7bdcad9410",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Price: List",
+    "description": "List Stripe prices, optionally filtered by product or active state.",
+    "website": "https://www.flomation.co",
+    "icon": "stripe+list",
+    "date": "05/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Stripe",
+      "icon": "stripe",
+      "description": "Accept payments and manage customers, subscriptions and invoices in Stripe"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "Stripe Secret Key",
+        "placeholder": "sk_live_… or sk_test_…",
+        "required": true
+      },
+      {
+        "name": "product",
+        "type": "string",
+        "value": null,
+        "label": "Product ID",
+        "placeholder": "Filter by product (optional)"
+      },
+      {
+        "name": "active",
+        "type": "boolean",
+        "value": null,
+        "label": "Active",
+        "placeholder": "Filter by active state (optional)"
+      },
+      {
+        "name": "limit",
+        "type": "integer",
+        "value": null,
+        "label": "Limit",
+        "placeholder": "Max results (default 20, max 100)"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "results",
+        "type": "object",
+        "value": null,
+        "label": "Prices",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Count",
+        "placeholder": ""
+      },
+      {
+        "name": "has_more",
+        "type": "boolean",
+        "value": null,
+        "label": "Has More",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "stripe/price_update": {
+    "hash": "db5af00483c44a3033c553eb5e0893ed8700cdcb0e2093ff66e4bac615d8f652",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Price: Update",
+    "description": "Update mutable fields (active, nickname, metadata) on a Stripe price.",
+    "website": "https://www.flomation.co",
+    "icon": "stripe+pencil",
+    "date": "05/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Stripe",
+      "icon": "stripe",
+      "description": "Accept payments and manage customers, subscriptions and invoices in Stripe"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "Stripe Secret Key",
+        "placeholder": "sk_live_… or sk_test_…",
+        "required": true
+      },
+      {
+        "name": "price_id",
+        "type": "string",
+        "value": null,
+        "label": "Price ID",
+        "placeholder": "price_…",
+        "required": true
+      },
+      {
+        "name": "active",
+        "type": "boolean",
+        "value": null,
+        "label": "Active",
+        "placeholder": ""
+      },
+      {
+        "name": "nickname",
+        "type": "string",
+        "value": null,
+        "label": "Nickname",
+        "placeholder": ""
+      },
+      {
+        "name": "metadata",
+        "type": "key_value_array",
+        "value": null,
+        "label": "Metadata",
+        "placeholder": ""
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Price ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Price",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "stripe/product_create": {
+    "hash": "4a2ad0813d481185a282b0cc6131ff29e44cd82b3517a2f2c11f279797efd2ab",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Product: Create",
+    "description": "Create a Stripe product. Returns the product ID and object.",
+    "website": "https://www.flomation.co",
+    "icon": "stripe+plus",
+    "date": "05/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Stripe",
+      "icon": "stripe",
+      "description": "Accept payments and manage customers, subscriptions and invoices in Stripe"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "Stripe Secret Key",
+        "placeholder": "sk_live_… or sk_test_…",
+        "required": true
+      },
+      {
+        "name": "name",
+        "type": "string",
+        "value": null,
+        "label": "Name",
+        "placeholder": "Premium Plan",
+        "required": true
+      },
+      {
+        "name": "description",
+        "type": "string",
+        "value": null,
+        "label": "Description",
+        "placeholder": ""
+      },
+      {
+        "name": "active",
+        "type": "boolean",
+        "value": null,
+        "label": "Active",
+        "placeholder": ""
+      },
+      {
+        "name": "metadata",
+        "type": "key_value_array",
+        "value": null,
+        "label": "Metadata",
+        "placeholder": "Arbitrary key → value pairs stored on the product"
+      },
+      {
+        "name": "idempotency_key",
+        "type": "string",
+        "value": null,
+        "label": "Idempotency Key",
+        "placeholder": "Optional — safely retry the same create"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Product ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Product",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "stripe/product_get": {
+    "hash": "7f545c6da55cc171be71396e5d3d261fb5466ccce8b11e82eb06650d77e367f3",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Product: Get",
+    "description": "Retrieve a Stripe product by ID.",
+    "website": "https://www.flomation.co",
+    "icon": "stripe+search",
+    "date": "05/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Stripe",
+      "icon": "stripe",
+      "description": "Accept payments and manage customers, subscriptions and invoices in Stripe"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "Stripe Secret Key",
+        "placeholder": "sk_live_… or sk_test_…",
+        "required": true
+      },
+      {
+        "name": "product_id",
+        "type": "string",
+        "value": null,
+        "label": "Product ID",
+        "placeholder": "prod_…",
+        "required": true
+      },
+      {
+        "name": "expand",
+        "type": "string",
+        "value": null,
+        "label": "Expand",
+        "placeholder": "Comma-separated fields to expand (optional)"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Product ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Product",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "stripe/product_list": {
+    "hash": "a28559e85b901154203dacd1998596b72461ba7e5b35076818395e1da8fa274f",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Product: List",
+    "description": "List Stripe products, optionally filtered by active state.",
+    "website": "https://www.flomation.co",
+    "icon": "stripe+list",
+    "date": "05/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Stripe",
+      "icon": "stripe",
+      "description": "Accept payments and manage customers, subscriptions and invoices in Stripe"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "Stripe Secret Key",
+        "placeholder": "sk_live_… or sk_test_…",
+        "required": true
+      },
+      {
+        "name": "active",
+        "type": "boolean",
+        "value": null,
+        "label": "Active",
+        "placeholder": "Filter by active state (optional)"
+      },
+      {
+        "name": "limit",
+        "type": "integer",
+        "value": null,
+        "label": "Limit",
+        "placeholder": "Max results (default 20, max 100)"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "results",
+        "type": "object",
+        "value": null,
+        "label": "Products",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Count",
+        "placeholder": ""
+      },
+      {
+        "name": "has_more",
+        "type": "boolean",
+        "value": null,
+        "label": "Has More",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "stripe/product_update": {
+    "hash": "a274cc1478241e228f0ca1d6ba6529f6d8bc944baad3b50fb4c47488f69b26dd",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Product: Update",
+    "description": "Update fields on an existing Stripe product.",
+    "website": "https://www.flomation.co",
+    "icon": "stripe+pencil",
+    "date": "05/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Stripe",
+      "icon": "stripe",
+      "description": "Accept payments and manage customers, subscriptions and invoices in Stripe"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "Stripe Secret Key",
+        "placeholder": "sk_live_… or sk_test_…",
+        "required": true
+      },
+      {
+        "name": "product_id",
+        "type": "string",
+        "value": null,
+        "label": "Product ID",
+        "placeholder": "prod_…",
+        "required": true
+      },
+      {
+        "name": "name",
+        "type": "string",
+        "value": null,
+        "label": "Name",
+        "placeholder": ""
+      },
+      {
+        "name": "description",
+        "type": "string",
+        "value": null,
+        "label": "Description",
+        "placeholder": ""
+      },
+      {
+        "name": "active",
+        "type": "boolean",
+        "value": null,
+        "label": "Active",
+        "placeholder": ""
+      },
+      {
+        "name": "metadata",
+        "type": "key_value_array",
+        "value": null,
+        "label": "Metadata",
+        "placeholder": ""
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Product ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Product",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "stripe/promotion_code_create": {
+    "hash": "1f600e5bf9cb84980cf70920e1cb35d8cda38b3393e76ad5e48fc2fa7a9b93a9",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Promotion Code: Create",
+    "description": "Create a customer-facing promotion code for a Stripe coupon.",
+    "website": "https://www.flomation.co",
+    "icon": "stripe+plus",
+    "date": "05/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Stripe",
+      "icon": "stripe",
+      "description": "Accept payments and manage customers, subscriptions and invoices in Stripe"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "Stripe Secret Key",
+        "placeholder": "sk_live_… or sk_test_…",
+        "required": true
+      },
+      {
+        "name": "coupon",
+        "type": "string",
+        "value": null,
+        "label": "Coupon ID",
+        "placeholder": "The coupon this code applies",
+        "required": true
+      },
+      {
+        "name": "code",
+        "type": "string",
+        "value": null,
+        "label": "Code",
+        "placeholder": "Customer-facing code (leave blank to auto-generate)"
+      },
+      {
+        "name": "active",
+        "type": "boolean",
+        "value": null,
+        "label": "Active",
+        "placeholder": "Whether the promotion code is currently active"
+      },
+      {
+        "name": "metadata",
+        "type": "key_value_array",
+        "value": null,
+        "label": "Metadata",
+        "placeholder": "Arbitrary key → value pairs stored on the promotion code"
+      },
+      {
+        "name": "idempotency_key",
+        "type": "string",
+        "value": null,
+        "label": "Idempotency Key",
+        "placeholder": "Optional — safely retry the same create"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Promotion Code ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Promotion Code",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "stripe/promotion_code_list": {
+    "hash": "a87b187292ab9a313ad967efe5bb0715ca9fa56bc59a04357139282b033b3b99",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Promotion Code: List",
+    "description": "List Stripe promotion codes, optionally filtered by coupon or active state.",
+    "website": "https://www.flomation.co",
+    "icon": "stripe+list",
+    "date": "05/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Stripe",
+      "icon": "stripe",
+      "description": "Accept payments and manage customers, subscriptions and invoices in Stripe"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "Stripe Secret Key",
+        "placeholder": "sk_live_… or sk_test_…",
+        "required": true
+      },
+      {
+        "name": "coupon",
+        "type": "string",
+        "value": null,
+        "label": "Coupon ID",
+        "placeholder": "Filter by coupon (optional)"
+      },
+      {
+        "name": "active",
+        "type": "boolean",
+        "value": null,
+        "label": "Active",
+        "placeholder": "Filter by active state (optional)"
+      },
+      {
+        "name": "limit",
+        "type": "integer",
+        "value": null,
+        "label": "Limit",
+        "placeholder": "Max results (default 20, max 100)"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "results",
+        "type": "object",
+        "value": null,
+        "label": "Promotion Codes",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Count",
+        "placeholder": ""
+      },
+      {
+        "name": "has_more",
+        "type": "boolean",
+        "value": null,
+        "label": "Has More",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "stripe/refund_create": {
+    "hash": "cf09a1bc28503fec345e3a93df3a8e31dc96bd5de16a4b2c1d5ec00510999054",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Refund: Create",
+    "description": "Refund a Stripe charge or payment intent, in full or part.",
+    "website": "https://www.flomation.co",
+    "icon": "stripe+plus",
+    "date": "05/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Stripe",
+      "icon": "stripe",
+      "description": "Accept payments and manage customers, subscriptions and invoices in Stripe"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "Stripe Secret Key",
+        "placeholder": "sk_live_… or sk_test_…",
+        "required": true
+      },
+      {
+        "name": "payment_intent",
+        "type": "string",
+        "value": null,
+        "label": "Payment Intent",
+        "placeholder": "pi_…"
+      },
+      {
+        "name": "charge",
+        "type": "string",
+        "value": null,
+        "label": "Charge",
+        "placeholder": "ch_…"
+      },
+      {
+        "name": "amount",
+        "type": "money",
+        "value": null,
+        "label": "Amount",
+        "placeholder": "e.g. 12.34 — omit for a full refund"
+      },
+      {
+        "name": "reason",
+        "type": "string",
+        "value": null,
+        "label": "Reason",
+        "placeholder": "duplicate, fraudulent or requested_by_customer"
+      },
+      {
+        "name": "metadata",
+        "type": "key_value_array",
+        "value": null,
+        "label": "Metadata",
+        "placeholder": "Arbitrary key → value pairs stored on the refund"
+      },
+      {
+        "name": "idempotency_key",
+        "type": "string",
+        "value": null,
+        "label": "Idempotency Key",
+        "placeholder": "Optional — safely retry the same create"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Refund ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Refund",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "stripe/refund_get": {
+    "hash": "3b875d4f7c3274c52091423e935845a4bd87fd13a4439a37ca2a056eb23b63e9",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Refund: Get",
+    "description": "Retrieve a Stripe refund by ID.",
+    "website": "https://www.flomation.co",
+    "icon": "stripe+search",
+    "date": "05/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Stripe",
+      "icon": "stripe",
+      "description": "Accept payments and manage customers, subscriptions and invoices in Stripe"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "Stripe Secret Key",
+        "placeholder": "sk_live_… or sk_test_…",
+        "required": true
+      },
+      {
+        "name": "refund_id",
+        "type": "string",
+        "value": null,
+        "label": "Refund ID",
+        "placeholder": "re_…",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Refund ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Refund",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "stripe/refund_list": {
+    "hash": "e3d204cc616a3a68552dc090301df31a5c06933feee9ee1211b944685e721445",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Refund: List",
+    "description": "List Stripe refunds, optionally filtered by charge or payment intent.",
+    "website": "https://www.flomation.co",
+    "icon": "stripe+list",
+    "date": "05/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Stripe",
+      "icon": "stripe",
+      "description": "Accept payments and manage customers, subscriptions and invoices in Stripe"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "Stripe Secret Key",
+        "placeholder": "sk_live_… or sk_test_…",
+        "required": true
+      },
+      {
+        "name": "charge",
+        "type": "string",
+        "value": null,
+        "label": "Charge",
+        "placeholder": "Filter by charge ID (optional)"
+      },
+      {
+        "name": "payment_intent",
+        "type": "string",
+        "value": null,
+        "label": "Payment Intent",
+        "placeholder": "Filter by payment intent ID (optional)"
+      },
+      {
+        "name": "limit",
+        "type": "integer",
+        "value": null,
+        "label": "Limit",
+        "placeholder": "Max results (default 20, max 100)"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "results",
+        "type": "object",
+        "value": null,
+        "label": "Refunds",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Count",
+        "placeholder": ""
+      },
+      {
+        "name": "has_more",
+        "type": "boolean",
+        "value": null,
+        "label": "Has More",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "stripe/subscription_cancel": {
+    "hash": "1177477faff8f03961f9daeb636a5f06547a1248f5bf79f8ee1ec6fc81b50e24",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Subscription: Cancel",
+    "description": "Cancel a Stripe subscription immediately.",
+    "website": "https://www.flomation.co",
+    "icon": "stripe+trash",
+    "date": "05/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Stripe",
+      "icon": "stripe",
+      "description": "Accept payments and manage customers, subscriptions and invoices in Stripe"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "Stripe Secret Key",
+        "placeholder": "sk_live_… or sk_test_…",
+        "required": true
+      },
+      {
+        "name": "subscription_id",
+        "type": "string",
+        "value": null,
+        "label": "Subscription ID",
+        "placeholder": "sub_…",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Subscription ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Subscription",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "stripe/subscription_create": {
+    "hash": "c65f21009b871fd22441b8ce4e9206bc5b4415cde1bda293cfea37f8e77ee26a",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Subscription: Create",
+    "description": "Create a Stripe subscription for a customer from price/quantity items.",
+    "website": "https://www.flomation.co",
+    "icon": "stripe+plus",
+    "date": "05/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Stripe",
+      "icon": "stripe",
+      "description": "Accept payments and manage customers, subscriptions and invoices in Stripe"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "Stripe Secret Key",
+        "placeholder": "sk_live_… or sk_test_…",
+        "required": true
+      },
+      {
+        "name": "customer",
+        "type": "string",
+        "value": null,
+        "label": "Customer ID",
+        "placeholder": "cus_…",
+        "required": true
+      },
+      {
+        "name": "line_items",
+        "type": "key_value_array",
+        "value": null,
+        "label": "Line Items",
+        "placeholder": "Price ID → quantity"
+      },
+      {
+        "name": "metadata",
+        "type": "key_value_array",
+        "value": null,
+        "label": "Metadata",
+        "placeholder": "Arbitrary key → value pairs stored on the subscription"
+      },
+      {
+        "name": "idempotency_key",
+        "type": "string",
+        "value": null,
+        "label": "Idempotency Key",
+        "placeholder": "Optional — safely retry the same create"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Subscription ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Subscription",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "stripe/subscription_get": {
+    "hash": "191637c2f9722e536ac1ade3aa2927cf2dc67d6d1ef3c8e91539e04b12f755e8",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Subscription: Get",
+    "description": "Retrieve a Stripe subscription by ID.",
+    "website": "https://www.flomation.co",
+    "icon": "stripe+search",
+    "date": "05/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Stripe",
+      "icon": "stripe",
+      "description": "Accept payments and manage customers, subscriptions and invoices in Stripe"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "Stripe Secret Key",
+        "placeholder": "sk_live_… or sk_test_…",
+        "required": true
+      },
+      {
+        "name": "subscription_id",
+        "type": "string",
+        "value": null,
+        "label": "Subscription ID",
+        "placeholder": "sub_…",
+        "required": true
+      },
+      {
+        "name": "expand",
+        "type": "string",
+        "value": null,
+        "label": "Expand",
+        "placeholder": "Comma-separated fields to expand (optional)"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Subscription ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Subscription",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "stripe/subscription_list": {
+    "hash": "0c5e654bbde7d57ca24c9aa45d509306052a828f2aa6ca4df789fd8aa64b8360",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Subscription: List",
+    "description": "List Stripe subscriptions, optionally filtered by customer and status.",
+    "website": "https://www.flomation.co",
+    "icon": "stripe+list",
+    "date": "05/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Stripe",
+      "icon": "stripe",
+      "description": "Accept payments and manage customers, subscriptions and invoices in Stripe"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "Stripe Secret Key",
+        "placeholder": "sk_live_… or sk_test_…",
+        "required": true
+      },
+      {
+        "name": "customer",
+        "type": "string",
+        "value": null,
+        "label": "Customer ID",
+        "placeholder": "Filter by customer (optional)"
+      },
+      {
+        "name": "status",
+        "type": "string",
+        "value": null,
+        "label": "Status",
+        "placeholder": "active, canceled, all, etc. (optional)"
+      },
+      {
+        "name": "limit",
+        "type": "integer",
+        "value": null,
+        "label": "Limit",
+        "placeholder": "Max results (default 20, max 100)"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "results",
+        "type": "object",
+        "value": null,
+        "label": "Subscriptions",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Count",
+        "placeholder": ""
+      },
+      {
+        "name": "has_more",
+        "type": "boolean",
+        "value": null,
+        "label": "Has More",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "stripe/subscription_update": {
+    "hash": "e3508a950191ae04705fb9909eaae28ea6cb23f8b4267fce727c4501aa41e3de",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Subscription: Update",
+    "description": "Update a Stripe subscription (cancel at period end, metadata).",
+    "website": "https://www.flomation.co",
+    "icon": "stripe+pencil",
+    "date": "05/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Stripe",
+      "icon": "stripe",
+      "description": "Accept payments and manage customers, subscriptions and invoices in Stripe"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "Stripe Secret Key",
+        "placeholder": "sk_live_… or sk_test_…",
+        "required": true
+      },
+      {
+        "name": "subscription_id",
+        "type": "string",
+        "value": null,
+        "label": "Subscription ID",
+        "placeholder": "sub_…",
+        "required": true
+      },
+      {
+        "name": "cancel_at_period_end",
+        "type": "boolean",
+        "value": null,
+        "label": "Cancel At Period End",
+        "placeholder": ""
+      },
+      {
+        "name": "metadata",
+        "type": "key_value_array",
+        "value": null,
+        "label": "Metadata",
+        "placeholder": ""
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Subscription ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Subscription",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
   "subflow/begin": {
     "hash": "7797862805ba9c85ac630538f9d42b8466828cb9bcf5448ea44de1bc195d9448",
     "author": "Andy Esser",
@@ -55710,6 +60458,118 @@
         "type": "string",
         "value": null,
         "label": "Channel Type",
+        "placeholder": ""
+      }
+    ]
+  },
+  "trigger/stripe_webhook": {
+    "hash": "1b2841a182234fd324bb457566e527e6afb9b9fb8aef5b0bcce30813cbf6dc84",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Stripe Webhook Trigger",
+    "description": "Triggers a flow when a Stripe webhook event is received (payment, subscription, invoice…)",
+    "website": "https://www.flomation.co",
+    "icon": "stripe",
+    "date": "05/07/2026",
+    "type": 1,
+    "category": {
+      "name": "Triggers",
+      "icon": "bolt-lightning",
+      "description": "Start a Flow"
+    },
+    "inputs": [
+      {
+        "name": "signing_secret",
+        "type": "secret",
+        "value": null,
+        "label": "Signing Secret",
+        "placeholder": "whsec_… (from the Stripe webhook endpoint)",
+        "required": true
+      },
+      {
+        "name": "event_filter",
+        "type": "string",
+        "value": null,
+        "label": "Event Filter",
+        "placeholder": "Comma-separated, e.g. payment_intent.succeeded,checkout.session.completed,invoice.paid (blank = all)"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "content",
+        "type": "string",
+        "value": null,
+        "label": "Event Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "event_type",
+        "type": "string",
+        "value": null,
+        "label": "Event Type",
+        "placeholder": ""
+      },
+      {
+        "name": "event_id",
+        "type": "string",
+        "value": null,
+        "label": "Event ID",
+        "placeholder": ""
+      },
+      {
+        "name": "object_type",
+        "type": "string",
+        "value": null,
+        "label": "Object Type",
+        "placeholder": ""
+      },
+      {
+        "name": "object_id",
+        "type": "string",
+        "value": null,
+        "label": "Object ID",
+        "placeholder": ""
+      },
+      {
+        "name": "customer_id",
+        "type": "string",
+        "value": null,
+        "label": "Customer ID",
+        "placeholder": ""
+      },
+      {
+        "name": "amount",
+        "type": "string",
+        "value": null,
+        "label": "Amount (smallest currency unit)",
+        "placeholder": ""
+      },
+      {
+        "name": "currency",
+        "type": "string",
+        "value": null,
+        "label": "Currency",
+        "placeholder": ""
+      },
+      {
+        "name": "status",
+        "type": "string",
+        "value": null,
+        "label": "Status",
+        "placeholder": ""
+      },
+      {
+        "name": "body",
+        "type": "string",
+        "value": null,
+        "label": "Raw JSON Body",
+        "placeholder": ""
+      },
+      {
+        "name": "triggered_at",
+        "type": "string",
+        "value": null,
+        "label": "Triggered At",
         "placeholder": ""
       }
     ]
