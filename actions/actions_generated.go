@@ -549,6 +549,15 @@ import (
 	twilio_send_audio "flomation.app/automate/executor/actions/twilio/send_audio"
 	twilio_send_sms "flomation.app/automate/executor/actions/twilio/send_sms"
 	twilio_voice_session "flomation.app/automate/executor/actions/twilio/voice_session"
+	ukgov_companieshouse_get_company "flomation.app/automate/executor/actions/ukgov/companieshouse/get_company"
+	ukgov_companieshouse_get_insolvency "flomation.app/automate/executor/actions/ukgov/companieshouse/get_insolvency"
+	ukgov_companieshouse_list_charges "flomation.app/automate/executor/actions/ukgov/companieshouse/list_charges"
+	ukgov_companieshouse_list_filing_history "flomation.app/automate/executor/actions/ukgov/companieshouse/list_filing_history"
+	ukgov_companieshouse_list_officers "flomation.app/automate/executor/actions/ukgov/companieshouse/list_officers"
+	ukgov_companieshouse_list_psc "flomation.app/automate/executor/actions/ukgov/companieshouse/list_psc"
+	ukgov_companieshouse_search_companies "flomation.app/automate/executor/actions/ukgov/companieshouse/search_companies"
+	ukgov_companieshouse_search_disqualified "flomation.app/automate/executor/actions/ukgov/companieshouse/search_disqualified"
+	ukgov_companieshouse_search_officers "flomation.app/automate/executor/actions/ukgov/companieshouse/search_officers"
 	ukgov_environmentagency_flood_areas "flomation.app/automate/executor/actions/ukgov/environmentagency/flood_areas"
 	ukgov_environmentagency_flood_warnings "flomation.app/automate/executor/actions/ukgov/environmentagency/flood_warnings"
 	ukgov_environmentagency_station_readings "flomation.app/automate/executor/actions/ukgov/environmentagency/station_readings"
@@ -1130,6 +1139,15 @@ var Actions = map[string]core.Action{
 	"twilio/send_audio":                                 twilio_send_audio.Execute,
 	"twilio/send_sms":                                   twilio_send_sms.Execute,
 	"twilio/voice_session":                              twilio_voice_session.Execute,
+	"ukgov/companieshouse/get_company":                  ukgov_companieshouse_get_company.Execute,
+	"ukgov/companieshouse/get_insolvency":               ukgov_companieshouse_get_insolvency.Execute,
+	"ukgov/companieshouse/list_charges":                 ukgov_companieshouse_list_charges.Execute,
+	"ukgov/companieshouse/list_filing_history":          ukgov_companieshouse_list_filing_history.Execute,
+	"ukgov/companieshouse/list_officers":                ukgov_companieshouse_list_officers.Execute,
+	"ukgov/companieshouse/list_psc":                     ukgov_companieshouse_list_psc.Execute,
+	"ukgov/companieshouse/search_companies":             ukgov_companieshouse_search_companies.Execute,
+	"ukgov/companieshouse/search_disqualified":          ukgov_companieshouse_search_disqualified.Execute,
+	"ukgov/companieshouse/search_officers":              ukgov_companieshouse_search_officers.Execute,
 	"ukgov/environmentagency/flood_areas":               ukgov_environmentagency_flood_areas.Execute,
 	"ukgov/environmentagency/flood_warnings":            ukgov_environmentagency_flood_warnings.Execute,
 	"ukgov/environmentagency/station_readings":          ukgov_environmentagency_station_readings.Execute,

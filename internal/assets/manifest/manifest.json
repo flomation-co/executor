@@ -56810,8 +56810,769 @@
       }
     ]
   },
+  "ukgov/companieshouse/get_company": {
+    "hash": "ad0906fd794dfad809e35b718d250d02d0648c6a445930e7b28dfe3868c2e2cb",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Get Company",
+    "description": "Retrieve a UK company's profile by company number (Companies House)",
+    "website": "https://www.flomation.co",
+    "icon": "building+circle-info",
+    "date": "05/07/2026",
+    "type": 2,
+    "category": {
+      "name": "UK Government",
+      "icon": "landmark",
+      "description": "UK government agency data — Companies House, DVLA, Police, Food Standards and more"
+    },
+    "sub_category": {
+      "name": "Companies House",
+      "icon": "building",
+      "description": "UK company registry — search companies, officers, filings, PSCs and charges (Companies House)"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "Companies House API Key",
+        "placeholder": "${secrets.COMPANIES_HOUSE_KEY}",
+        "required": true
+      },
+      {
+        "name": "company_number",
+        "type": "string",
+        "value": null,
+        "label": "Company Number",
+        "placeholder": "e.g. 12345678",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "company",
+        "type": "object",
+        "value": null,
+        "label": "Company Profile",
+        "placeholder": ""
+      },
+      {
+        "name": "company_name",
+        "type": "string",
+        "value": null,
+        "label": "Company Name",
+        "placeholder": ""
+      },
+      {
+        "name": "company_status",
+        "type": "string",
+        "value": null,
+        "label": "Company Status",
+        "placeholder": ""
+      },
+      {
+        "name": "registered_office",
+        "type": "string",
+        "value": null,
+        "label": "Registered Office",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "ukgov/companieshouse/get_insolvency": {
+    "hash": "13f9b20d2d746a6af88070a6a882f4fe7bcd3506160b5577d13d5e6f35356a95",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Get Insolvency",
+    "description": "Retrieve a UK company's insolvency case history (Companies House)",
+    "website": "https://www.flomation.co",
+    "icon": "building+triangle-exclamation",
+    "date": "05/07/2026",
+    "type": 2,
+    "category": {
+      "name": "UK Government",
+      "icon": "landmark",
+      "description": "UK government agency data — Companies House, DVLA, Police, Food Standards and more"
+    },
+    "sub_category": {
+      "name": "Companies House",
+      "icon": "building",
+      "description": "UK company registry — search companies, officers, filings, PSCs and charges (Companies House)"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "Companies House API Key",
+        "placeholder": "${secrets.COMPANIES_HOUSE_KEY}",
+        "required": true
+      },
+      {
+        "name": "company_number",
+        "type": "string",
+        "value": null,
+        "label": "Company Number",
+        "placeholder": "e.g. 12345678",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "cases",
+        "type": "object",
+        "value": null,
+        "label": "Insolvency Cases",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Case Count",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "ukgov/companieshouse/list_charges": {
+    "hash": "03ac053a672c61ec82e04294a92513c501bd9da100c1671c81842d67a9d16994",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "List Charges",
+    "description": "List a UK company's registered charges — mortgages and debentures (Companies House)",
+    "website": "https://www.flomation.co",
+    "icon": "building+file-contract",
+    "date": "05/07/2026",
+    "type": 2,
+    "category": {
+      "name": "UK Government",
+      "icon": "landmark",
+      "description": "UK government agency data — Companies House, DVLA, Police, Food Standards and more"
+    },
+    "sub_category": {
+      "name": "Companies House",
+      "icon": "building",
+      "description": "UK company registry — search companies, officers, filings, PSCs and charges (Companies House)"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "Companies House API Key",
+        "placeholder": "${secrets.COMPANIES_HOUSE_KEY}",
+        "required": true
+      },
+      {
+        "name": "company_number",
+        "type": "string",
+        "value": null,
+        "label": "Company Number",
+        "placeholder": "e.g. 12345678",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "charges",
+        "type": "object",
+        "value": null,
+        "label": "Charges",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Returned Count",
+        "placeholder": ""
+      },
+      {
+        "name": "total",
+        "type": "integer",
+        "value": null,
+        "label": "Total Count",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "ukgov/companieshouse/list_filing_history": {
+    "hash": "c3592428df006f19a59f62105a1732f6fcadb1885dda27eaa2d77738738facf9",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "List Filing History",
+    "description": "List a UK company's filing history — accounts, confirmations, changes (Companies House)",
+    "website": "https://www.flomation.co",
+    "icon": "building+file-lines",
+    "date": "05/07/2026",
+    "type": 2,
+    "category": {
+      "name": "UK Government",
+      "icon": "landmark",
+      "description": "UK government agency data — Companies House, DVLA, Police, Food Standards and more"
+    },
+    "sub_category": {
+      "name": "Companies House",
+      "icon": "building",
+      "description": "UK company registry — search companies, officers, filings, PSCs and charges (Companies House)"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "Companies House API Key",
+        "placeholder": "${secrets.COMPANIES_HOUSE_KEY}",
+        "required": true
+      },
+      {
+        "name": "company_number",
+        "type": "string",
+        "value": null,
+        "label": "Company Number",
+        "placeholder": "e.g. 12345678",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "filings",
+        "type": "object",
+        "value": null,
+        "label": "Filings",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Returned Count",
+        "placeholder": ""
+      },
+      {
+        "name": "total",
+        "type": "integer",
+        "value": null,
+        "label": "Total Count",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "ukgov/companieshouse/list_officers": {
+    "hash": "bd2f986c9c192c163a775c0cea9e954576c589c1964b61d409a0c9a490d2cbf9",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "List Officers",
+    "description": "List a UK company's officers — directors and secretaries (Companies House)",
+    "website": "https://www.flomation.co",
+    "icon": "building+users",
+    "date": "05/07/2026",
+    "type": 2,
+    "category": {
+      "name": "UK Government",
+      "icon": "landmark",
+      "description": "UK government agency data — Companies House, DVLA, Police, Food Standards and more"
+    },
+    "sub_category": {
+      "name": "Companies House",
+      "icon": "building",
+      "description": "UK company registry — search companies, officers, filings, PSCs and charges (Companies House)"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "Companies House API Key",
+        "placeholder": "${secrets.COMPANIES_HOUSE_KEY}",
+        "required": true
+      },
+      {
+        "name": "company_number",
+        "type": "string",
+        "value": null,
+        "label": "Company Number",
+        "placeholder": "e.g. 12345678",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "officers",
+        "type": "object",
+        "value": null,
+        "label": "Officers",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Returned Count",
+        "placeholder": ""
+      },
+      {
+        "name": "active_count",
+        "type": "integer",
+        "value": null,
+        "label": "Active Count",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "ukgov/companieshouse/list_psc": {
+    "hash": "a1771941f0efac2a67c43d331a9f8bde827ad3baeb1f86df9076d03cbb16f1f6",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "List Persons with Significant Control",
+    "description": "List a UK company's beneficial owners / persons with significant control (Companies House)",
+    "website": "https://www.flomation.co",
+    "icon": "building+user-shield",
+    "date": "05/07/2026",
+    "type": 2,
+    "category": {
+      "name": "UK Government",
+      "icon": "landmark",
+      "description": "UK government agency data — Companies House, DVLA, Police, Food Standards and more"
+    },
+    "sub_category": {
+      "name": "Companies House",
+      "icon": "building",
+      "description": "UK company registry — search companies, officers, filings, PSCs and charges (Companies House)"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "Companies House API Key",
+        "placeholder": "${secrets.COMPANIES_HOUSE_KEY}",
+        "required": true
+      },
+      {
+        "name": "company_number",
+        "type": "string",
+        "value": null,
+        "label": "Company Number",
+        "placeholder": "e.g. 12345678",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "persons",
+        "type": "object",
+        "value": null,
+        "label": "Persons with Significant Control",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Returned Count",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "ukgov/companieshouse/search_companies": {
+    "hash": "96b298073452f45a885685b69172f40f09b437ffa8f3dd85fa013a28f805b506",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Search Companies",
+    "description": "Search the UK Companies House register by company name or number (Companies House)",
+    "website": "https://www.flomation.co",
+    "icon": "building+magnifying-glass",
+    "date": "05/07/2026",
+    "type": 2,
+    "category": {
+      "name": "UK Government",
+      "icon": "landmark",
+      "description": "UK government agency data — Companies House, DVLA, Police, Food Standards and more"
+    },
+    "sub_category": {
+      "name": "Companies House",
+      "icon": "building",
+      "description": "UK company registry — search companies, officers, filings, PSCs and charges (Companies House)"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "Companies House API Key",
+        "placeholder": "${secrets.COMPANIES_HOUSE_KEY}",
+        "required": true
+      },
+      {
+        "name": "query",
+        "type": "string",
+        "value": null,
+        "label": "Search Query",
+        "placeholder": "e.g. Flomation Ltd",
+        "required": true
+      },
+      {
+        "name": "max_results",
+        "type": "integer",
+        "value": null,
+        "label": "Maximum Results (1-100)",
+        "placeholder": "20"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "companies",
+        "type": "object",
+        "value": null,
+        "label": "Companies",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Returned Count",
+        "placeholder": ""
+      },
+      {
+        "name": "total",
+        "type": "integer",
+        "value": null,
+        "label": "Total Matches",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "ukgov/companieshouse/search_disqualified": {
+    "hash": "632f494792b4e476e31edb71c79b2de1d965ccd70d52448071166e57f190bebe",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Search Disqualified Officers",
+    "description": "Search the UK register of disqualified company directors by name (Companies House)",
+    "website": "https://www.flomation.co",
+    "icon": "building+user-slash",
+    "date": "05/07/2026",
+    "type": 2,
+    "category": {
+      "name": "UK Government",
+      "icon": "landmark",
+      "description": "UK government agency data — Companies House, DVLA, Police, Food Standards and more"
+    },
+    "sub_category": {
+      "name": "Companies House",
+      "icon": "building",
+      "description": "UK company registry — search companies, officers, filings, PSCs and charges (Companies House)"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "Companies House API Key",
+        "placeholder": "${secrets.COMPANIES_HOUSE_KEY}",
+        "required": true
+      },
+      {
+        "name": "query",
+        "type": "string",
+        "value": null,
+        "label": "Officer Name",
+        "placeholder": "e.g. John Smith",
+        "required": true
+      },
+      {
+        "name": "max_results",
+        "type": "integer",
+        "value": null,
+        "label": "Maximum Results (1-100)",
+        "placeholder": "20"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "officers",
+        "type": "object",
+        "value": null,
+        "label": "Disqualified Officers",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Returned Count",
+        "placeholder": ""
+      },
+      {
+        "name": "total",
+        "type": "integer",
+        "value": null,
+        "label": "Total Matches",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "ukgov/companieshouse/search_officers": {
+    "hash": "46fe51e3386c0f0b6a18dbd03317ccddb991654cbb58641b22ac6185c8c92ceb",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Search Officers",
+    "description": "Search UK company officers (directors, secretaries) by name (Companies House)",
+    "website": "https://www.flomation.co",
+    "icon": "building+user-magnifying-glass",
+    "date": "05/07/2026",
+    "type": 2,
+    "category": {
+      "name": "UK Government",
+      "icon": "landmark",
+      "description": "UK government agency data — Companies House, DVLA, Police, Food Standards and more"
+    },
+    "sub_category": {
+      "name": "Companies House",
+      "icon": "building",
+      "description": "UK company registry — search companies, officers, filings, PSCs and charges (Companies House)"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "Companies House API Key",
+        "placeholder": "${secrets.COMPANIES_HOUSE_KEY}",
+        "required": true
+      },
+      {
+        "name": "query",
+        "type": "string",
+        "value": null,
+        "label": "Officer Name",
+        "placeholder": "e.g. John Smith",
+        "required": true
+      },
+      {
+        "name": "max_results",
+        "type": "integer",
+        "value": null,
+        "label": "Maximum Results (1-100)",
+        "placeholder": "20"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "officers",
+        "type": "object",
+        "value": null,
+        "label": "Officers",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Returned Count",
+        "placeholder": ""
+      },
+      {
+        "name": "total",
+        "type": "integer",
+        "value": null,
+        "label": "Total Matches",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
   "ukgov/environmentagency/flood_areas": {
-    "hash": "dcea878a78963d0a9102ce23431ca05b83482b309c0fc79abba26213142843dc",
+    "hash": "41629b5586f197a6ce657250e857535bd32c26b24dd61f15d0ff125e3aedfbb0",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Flood Areas",
@@ -57557,7 +58318,7 @@
     ]
   },
   "ukgov/postcodes/nearest_postcodes": {
-    "hash": "f65f5c90037bc9634cd3b36c34302b7caa87130058f1a7e6c4f0ea8b0f6eb29f",
+    "hash": "42f315c6b973ee7d02bb1dd6ddbc656805ce002b6b06608ff8499971496b0e25",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Nearest Postcodes",
@@ -57625,7 +58386,7 @@
     ]
   },
   "ukgov/postcodes/postcode_lookup": {
-    "hash": "3a18886a2ea223dee21013c6c0af45e9989159cdfcf6bf6eac3f395e92e67a1c",
+    "hash": "52394a402da4d6e897f80a97acca36f9ce18e5371ec3caae71e18f683e2096b1",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Postcode Lookup",
