@@ -14,6 +14,7 @@
 package ukgov_common
 
 import (
+	"bytes"
 	"context"
 	"encoding/base64"
 	"fmt"
@@ -33,23 +34,39 @@ const (
 	MaxResponseBody = 4 << 20 // 4 MB
 )
 
-// Fetch performs a bounded HTTP request and returns the status code and body.
-// It reads at most MaxResponseBody bytes. Callers own status-code interpretation
-// (e.g. mapping 404 to a friendly "not found" tool result) and JSON decoding,
-// keeping this helper agnostic to each agency's payload shape. A nil context is
-// tolerated so actions can call it with a nil Flow during testing.
+// Fetch performs a bounded HTTP GET-style request (no body) and returns the
+// status code and body. It reads at most MaxResponseBody bytes. Callers own
+// status-code interpretation (e.g. mapping 404 to a friendly "not found" tool
+// result) and JSON decoding, keeping this helper agnostic to each agency's
+// payload shape. A nil context is tolerated so actions can call it with a nil
+// Flow during testing.
 func Fetch(ctx context.Context, method, requestURL string, headers map[string]string) (int, []byte, error) {
+	return FetchWithBody(ctx, method, requestURL, headers, nil)
+}
+
+// FetchWithBody is Fetch with an optional request body (e.g. a JSON POST, as
+// the DVLA Vehicle Enquiry Service requires). When body is non-nil the
+// Content-Type is set to application/json. The body is bounded on read exactly
+// as Fetch.
+func FetchWithBody(ctx context.Context, method, requestURL string, headers map[string]string, body []byte) (int, []byte, error) {
 	if ctx == nil {
 		ctx = context.Background()
 	}
 	reqCtx, cancel := context.WithTimeout(ctx, RequestTimeout)
 	defer cancel()
 
-	req, err := http.NewRequestWithContext(reqCtx, method, requestURL, nil)
+	var reader io.Reader
+	if body != nil {
+		reader = bytes.NewReader(body)
+	}
+	req, err := http.NewRequestWithContext(reqCtx, method, requestURL, reader)
 	if err != nil {
 		return 0, nil, fmt.Errorf("failed to build request: %w", err)
 	}
 	req.Header.Set("Accept", "application/json")
+	if body != nil {
+		req.Header.Set("Content-Type", "application/json")
+	}
 	for k, v := range headers {
 		req.Header.Set(k, v)
 	}
@@ -61,11 +78,11 @@ func Fetch(ctx context.Context, method, requestURL string, headers map[string]st
 	}
 	defer func() { _ = resp.Body.Close() }()
 
-	body, err := io.ReadAll(io.LimitReader(resp.Body, MaxResponseBody))
+	respBody, err := io.ReadAll(io.LimitReader(resp.Body, MaxResponseBody))
 	if err != nil {
 		return resp.StatusCode, nil, fmt.Errorf("failed to read response body: %w", err)
 	}
-	return resp.StatusCode, body, nil
+	return resp.StatusCode, respBody, nil
 }
 
 // BasicAuthHeader builds an HTTP Basic Authorization header value. Companies

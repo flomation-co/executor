@@ -558,6 +558,7 @@ import (
 	ukgov_companieshouse_search_companies "flomation.app/automate/executor/actions/ukgov/companieshouse/search_companies"
 	ukgov_companieshouse_search_disqualified "flomation.app/automate/executor/actions/ukgov/companieshouse/search_disqualified"
 	ukgov_companieshouse_search_officers "flomation.app/automate/executor/actions/ukgov/companieshouse/search_officers"
+	ukgov_dvla_vehicle_enquiry "flomation.app/automate/executor/actions/ukgov/dvla/vehicle_enquiry"
 	ukgov_environmentagency_flood_areas "flomation.app/automate/executor/actions/ukgov/environmentagency/flood_areas"
 	ukgov_environmentagency_flood_warnings "flomation.app/automate/executor/actions/ukgov/environmentagency/flood_warnings"
 	ukgov_environmentagency_station_readings "flomation.app/automate/executor/actions/ukgov/environmentagency/station_readings"
@@ -1148,6 +1149,7 @@ var Actions = map[string]core.Action{
 	"ukgov/companieshouse/search_companies":             ukgov_companieshouse_search_companies.Execute,
 	"ukgov/companieshouse/search_disqualified":          ukgov_companieshouse_search_disqualified.Execute,
 	"ukgov/companieshouse/search_officers":              ukgov_companieshouse_search_officers.Execute,
+	"ukgov/dvla/vehicle_enquiry":                        ukgov_dvla_vehicle_enquiry.Execute,
 	"ukgov/environmentagency/flood_areas":               ukgov_environmentagency_flood_areas.Execute,
 	"ukgov/environmentagency/flood_warnings":            ukgov_environmentagency_flood_warnings.Execute,
 	"ukgov/environmentagency/station_readings":          ukgov_environmentagency_station_readings.Execute,

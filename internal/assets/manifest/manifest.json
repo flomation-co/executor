@@ -57571,6 +57571,110 @@
       }
     ]
   },
+  "ukgov/dvla/vehicle_enquiry": {
+    "hash": "a8509f41b1e99a47c009f587649bc333ac78d3ec3019c1449d64b5e73cbd328c",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Vehicle Enquiry",
+    "description": "Look up a UK vehicle's tax, MOT status, make, colour and CO2 by registration (DVLA)",
+    "website": "https://www.flomation.co",
+    "icon": "car+magnifying-glass",
+    "date": "05/07/2026",
+    "type": 2,
+    "category": {
+      "name": "UK Government",
+      "icon": "landmark",
+      "description": "UK government agency data — Companies House, DVLA, Police, Food Standards and more"
+    },
+    "sub_category": {
+      "name": "DVLA",
+      "icon": "car",
+      "description": "UK vehicle data — tax, MOT status and vehicle details (DVLA Vehicle Enquiry Service)"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "DVLA API Key",
+        "placeholder": "${secrets.DVLA_VES_KEY}",
+        "required": true
+      },
+      {
+        "name": "registration_number",
+        "type": "string",
+        "value": null,
+        "label": "Registration Number",
+        "placeholder": "e.g. AB19 ABC",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "vehicle",
+        "type": "object",
+        "value": null,
+        "label": "Vehicle",
+        "placeholder": ""
+      },
+      {
+        "name": "make",
+        "type": "string",
+        "value": null,
+        "label": "Make",
+        "placeholder": ""
+      },
+      {
+        "name": "colour",
+        "type": "string",
+        "value": null,
+        "label": "Colour",
+        "placeholder": ""
+      },
+      {
+        "name": "tax_status",
+        "type": "string",
+        "value": null,
+        "label": "Tax Status",
+        "placeholder": ""
+      },
+      {
+        "name": "mot_status",
+        "type": "string",
+        "value": null,
+        "label": "MOT Status",
+        "placeholder": ""
+      },
+      {
+        "name": "year_of_manufacture",
+        "type": "integer",
+        "value": null,
+        "label": "Year of Manufacture",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
   "ukgov/environmentagency/flood_areas": {
     "hash": "41629b5586f197a6ce657250e857535bd32c26b24dd61f15d0ff125e3aedfbb0",
     "author": "Andy Esser",
