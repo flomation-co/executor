@@ -143,6 +143,7 @@ play
 plug
 plus
 qrcode
+quickbooks
 recycle
 refresh
 repeat
@@ -188,5 +189,6 @@ woocommerce
 wordpress
 wrench
 x-twitter
+xero
 xmark
 zendesk

@@ -50960,6 +50960,3429 @@
       }
     ]
   },
+  "quickbooks/account_create": {
+    "hash": "2d170653920b7a777d3058d1fdfd97f56e223ce4c15ad7de59a2a8aef9a864b5",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Account: Create",
+    "description": "Create a QuickBooks Online chart-of-accounts account. Returns the account ID and object.",
+    "website": "https://www.flomation.co",
+    "icon": "quickbooks+plus",
+    "date": "05/07/2026",
+    "type": 2,
+    "category": {
+      "name": "QuickBooks Online",
+      "icon": "quickbooks",
+      "description": "Manage customers, invoices, bills, payments and the ledger in QuickBooks Online"
+    },
+    "inputs": [
+      {
+        "name": "credential",
+        "type": "credential",
+        "value": null,
+        "label": "QuickBooks Connection",
+        "placeholder": "${credentials.MyQBO}",
+        "required": true
+      },
+      {
+        "name": "company",
+        "type": "string",
+        "value": null,
+        "label": "Company (Realm ID)",
+        "placeholder": "${credentials.MyQBO.realm_id}",
+        "required": true
+      },
+      {
+        "name": "sandbox",
+        "type": "boolean",
+        "value": null,
+        "label": "Use Sandbox",
+        "placeholder": ""
+      },
+      {
+        "name": "name",
+        "type": "string",
+        "value": null,
+        "label": "Account Name",
+        "placeholder": "Marketing Expenses",
+        "required": true
+      },
+      {
+        "name": "account_type",
+        "type": "string",
+        "value": null,
+        "label": "Account Type",
+        "placeholder": "Expense"
+      },
+      {
+        "name": "account_sub_type",
+        "type": "string",
+        "value": null,
+        "label": "Account Sub-Type",
+        "placeholder": "AdvertisingPromotional"
+      },
+      {
+        "name": "fields",
+        "type": "text",
+        "value": null,
+        "label": "Advanced Fields (JSON)",
+        "placeholder": "{\"AcctNum\":\"6000\",\"Description\":\"...\"}"
+      }
+    ],
+    "outputs": null
+  },
+  "quickbooks/account_get": {
+    "hash": "6ca8b4ffc94c466f6c962beaf7daa0e9d73cb5f6eacacf3837555164d7e68f31",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Account: Get",
+    "description": "Fetch a QuickBooks Online account by ID. Returns the account object.",
+    "website": "https://www.flomation.co",
+    "icon": "quickbooks+eye",
+    "date": "05/07/2026",
+    "type": 2,
+    "category": {
+      "name": "QuickBooks Online",
+      "icon": "quickbooks",
+      "description": "Manage customers, invoices, bills, payments and the ledger in QuickBooks Online"
+    },
+    "inputs": [
+      {
+        "name": "credential",
+        "type": "credential",
+        "value": null,
+        "label": "QuickBooks Connection",
+        "placeholder": "${credentials.MyQBO}",
+        "required": true
+      },
+      {
+        "name": "company",
+        "type": "string",
+        "value": null,
+        "label": "Company (Realm ID)",
+        "placeholder": "${credentials.MyQBO.realm_id}",
+        "required": true
+      },
+      {
+        "name": "sandbox",
+        "type": "boolean",
+        "value": null,
+        "label": "Use Sandbox",
+        "placeholder": ""
+      },
+      {
+        "name": "account_id",
+        "type": "string",
+        "value": null,
+        "label": "Account ID",
+        "placeholder": "33",
+        "required": true
+      }
+    ],
+    "outputs": null
+  },
+  "quickbooks/account_query": {
+    "hash": "179cb7b0ef04ab3ef8594e12aeda84c028058382d6cee81c7f64b3c5c1e215d6",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Account: Query",
+    "description": "Query QuickBooks Online accounts with SQL-like syntax. Returns matching account rows.",
+    "website": "https://www.flomation.co",
+    "icon": "quickbooks+magnifying-glass",
+    "date": "05/07/2026",
+    "type": 2,
+    "category": {
+      "name": "QuickBooks Online",
+      "icon": "quickbooks",
+      "description": "Manage customers, invoices, bills, payments and the ledger in QuickBooks Online"
+    },
+    "inputs": [
+      {
+        "name": "credential",
+        "type": "credential",
+        "value": null,
+        "label": "QuickBooks Connection",
+        "placeholder": "${credentials.MyQBO}",
+        "required": true
+      },
+      {
+        "name": "company",
+        "type": "string",
+        "value": null,
+        "label": "Company (Realm ID)",
+        "placeholder": "${credentials.MyQBO.realm_id}",
+        "required": true
+      },
+      {
+        "name": "sandbox",
+        "type": "boolean",
+        "value": null,
+        "label": "Use Sandbox",
+        "placeholder": ""
+      },
+      {
+        "name": "query",
+        "type": "string",
+        "value": null,
+        "label": "Query (SQL)",
+        "placeholder": "select * from Account where AccountType = 'Expense'"
+      },
+      {
+        "name": "where",
+        "type": "string",
+        "value": null,
+        "label": "Where Clause",
+        "placeholder": "Active = true"
+      },
+      {
+        "name": "max_results",
+        "type": "string",
+        "value": null,
+        "label": "Max Results",
+        "placeholder": "100"
+      }
+    ],
+    "outputs": null
+  },
+  "quickbooks/bill_create": {
+    "hash": "54324f4125885aad6bca0a523175df0804f53400b2cf7186a79b3188c68cf9c0",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Bill: Create",
+    "description": "Create a QuickBooks Online bill for a vendor. Returns the bill ID and object.",
+    "website": "https://www.flomation.co",
+    "icon": "quickbooks+plus",
+    "date": "05/07/2026",
+    "type": 2,
+    "category": {
+      "name": "QuickBooks Online",
+      "icon": "quickbooks",
+      "description": "Manage customers, invoices, bills, payments and the ledger in QuickBooks Online"
+    },
+    "inputs": [
+      {
+        "name": "credential",
+        "type": "credential",
+        "value": null,
+        "label": "QuickBooks Connection",
+        "placeholder": "${credentials.MyQBO}",
+        "required": true
+      },
+      {
+        "name": "company",
+        "type": "string",
+        "value": null,
+        "label": "Company (Realm ID)",
+        "placeholder": "${credentials.MyQBO.realm_id}",
+        "required": true
+      },
+      {
+        "name": "sandbox",
+        "type": "boolean",
+        "value": null,
+        "label": "Use Sandbox",
+        "placeholder": ""
+      },
+      {
+        "name": "vendor_id",
+        "type": "string",
+        "value": null,
+        "label": "Vendor ID",
+        "placeholder": "56",
+        "required": true
+      },
+      {
+        "name": "line_items",
+        "type": "text",
+        "value": null,
+        "label": "Line Items (JSON array)",
+        "placeholder": "[{\"Amount\":100.00,\"DetailType\":\"AccountBasedExpenseLineDetail\",\"AccountBasedExpenseLineDetail\":{\"AccountRef\":{\"value\":\"7\"}}}]",
+        "required": true
+      },
+      {
+        "name": "txn_date",
+        "type": "string",
+        "value": null,
+        "label": "Transaction Date",
+        "placeholder": "2026-07-05"
+      },
+      {
+        "name": "due_date",
+        "type": "string",
+        "value": null,
+        "label": "Due Date",
+        "placeholder": "2026-08-05"
+      },
+      {
+        "name": "doc_number",
+        "type": "string",
+        "value": null,
+        "label": "Reference / Doc Number",
+        "placeholder": ""
+      },
+      {
+        "name": "fields",
+        "type": "text",
+        "value": null,
+        "label": "Advanced Fields (JSON)",
+        "placeholder": "{\"PrivateNote\":\"...\"}"
+      }
+    ],
+    "outputs": null
+  },
+  "quickbooks/bill_get": {
+    "hash": "1c94f2f7a893cb0b306e5e464484eb692450a8ed3b0426b0e18e7d6daabcf076",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Bill: Get",
+    "description": "Fetch a QuickBooks Online bill by ID. Returns the bill object.",
+    "website": "https://www.flomation.co",
+    "icon": "quickbooks+eye",
+    "date": "05/07/2026",
+    "type": 2,
+    "category": {
+      "name": "QuickBooks Online",
+      "icon": "quickbooks",
+      "description": "Manage customers, invoices, bills, payments and the ledger in QuickBooks Online"
+    },
+    "inputs": [
+      {
+        "name": "credential",
+        "type": "credential",
+        "value": null,
+        "label": "QuickBooks Connection",
+        "placeholder": "${credentials.MyQBO}",
+        "required": true
+      },
+      {
+        "name": "company",
+        "type": "string",
+        "value": null,
+        "label": "Company (Realm ID)",
+        "placeholder": "${credentials.MyQBO.realm_id}",
+        "required": true
+      },
+      {
+        "name": "sandbox",
+        "type": "boolean",
+        "value": null,
+        "label": "Use Sandbox",
+        "placeholder": ""
+      },
+      {
+        "name": "bill_id",
+        "type": "string",
+        "value": null,
+        "label": "Bill ID",
+        "placeholder": "145",
+        "required": true
+      }
+    ],
+    "outputs": null
+  },
+  "quickbooks/bill_query": {
+    "hash": "45025c9c39cd77cf96a7f1cd8c3beb10d2ccacd422973840a92d454f68d4b2b0",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Bill: Query",
+    "description": "Query QuickBooks Online bills with an optional SQL-like statement. Returns matching bills.",
+    "website": "https://www.flomation.co",
+    "icon": "quickbooks+magnifying-glass",
+    "date": "05/07/2026",
+    "type": 2,
+    "category": {
+      "name": "QuickBooks Online",
+      "icon": "quickbooks",
+      "description": "Manage customers, invoices, bills, payments and the ledger in QuickBooks Online"
+    },
+    "inputs": [
+      {
+        "name": "credential",
+        "type": "credential",
+        "value": null,
+        "label": "QuickBooks Connection",
+        "placeholder": "${credentials.MyQBO}",
+        "required": true
+      },
+      {
+        "name": "company",
+        "type": "string",
+        "value": null,
+        "label": "Company (Realm ID)",
+        "placeholder": "${credentials.MyQBO.realm_id}",
+        "required": true
+      },
+      {
+        "name": "sandbox",
+        "type": "boolean",
+        "value": null,
+        "label": "Use Sandbox",
+        "placeholder": ""
+      },
+      {
+        "name": "query",
+        "type": "string",
+        "value": null,
+        "label": "Query (SQL)",
+        "placeholder": "select * from Bill where VendorRef = '56'"
+      }
+    ],
+    "outputs": null
+  },
+  "quickbooks/billpayment_create": {
+    "hash": "691c781ae30d461f19ad93ecafc82dcd6d2bd9f375cbe926f3002f6c589c4bbd",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Bill Payment: Create",
+    "description": "Record a QuickBooks Online bill payment to a vendor. Returns the bill payment ID and object.",
+    "website": "https://www.flomation.co",
+    "icon": "quickbooks+plus",
+    "date": "05/07/2026",
+    "type": 2,
+    "category": {
+      "name": "QuickBooks Online",
+      "icon": "quickbooks",
+      "description": "Manage customers, invoices, bills, payments and the ledger in QuickBooks Online"
+    },
+    "inputs": [
+      {
+        "name": "credential",
+        "type": "credential",
+        "value": null,
+        "label": "QuickBooks Connection",
+        "placeholder": "${credentials.MyQBO}",
+        "required": true
+      },
+      {
+        "name": "company",
+        "type": "string",
+        "value": null,
+        "label": "Company (Realm ID)",
+        "placeholder": "${credentials.MyQBO.realm_id}",
+        "required": true
+      },
+      {
+        "name": "sandbox",
+        "type": "boolean",
+        "value": null,
+        "label": "Use Sandbox",
+        "placeholder": ""
+      },
+      {
+        "name": "vendor_id",
+        "type": "string",
+        "value": null,
+        "label": "Vendor ID",
+        "placeholder": "56",
+        "required": true
+      },
+      {
+        "name": "total_amount",
+        "type": "money",
+        "value": null,
+        "label": "Total Amount",
+        "placeholder": "100.00",
+        "required": true
+      },
+      {
+        "name": "pay_type",
+        "type": "string",
+        "value": null,
+        "label": "Pay Type",
+        "placeholder": "Check",
+        "options": [
+          {
+            "name": "Check",
+            "value": "Check"
+          },
+          {
+            "name": "Credit Card",
+            "value": "CreditCard"
+          }
+        ]
+      },
+      {
+        "name": "line_items",
+        "type": "text",
+        "value": null,
+        "label": "Line Items (JSON array)",
+        "placeholder": "[{\"Amount\":100.00,\"LinkedTxn\":[{\"TxnId\":\"145\",\"TxnType\":\"Bill\"}]}]",
+        "required": true
+      },
+      {
+        "name": "txn_date",
+        "type": "string",
+        "value": null,
+        "label": "Transaction Date",
+        "placeholder": "2026-07-05"
+      },
+      {
+        "name": "fields",
+        "type": "text",
+        "value": null,
+        "label": "Advanced Fields (JSON)",
+        "placeholder": "{\"CheckPayment\":{\"BankAccountRef\":{\"value\":\"36\"}}}"
+      }
+    ],
+    "outputs": null
+  },
+  "quickbooks/billpayment_get": {
+    "hash": "e3125d39ee93ad209a4511b46a12fa9709717193e4338cecce9bd19963c019c2",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Bill Payment: Get",
+    "description": "Fetch a QuickBooks Online bill payment by ID. Returns the bill payment object.",
+    "website": "https://www.flomation.co",
+    "icon": "quickbooks+eye",
+    "date": "05/07/2026",
+    "type": 2,
+    "category": {
+      "name": "QuickBooks Online",
+      "icon": "quickbooks",
+      "description": "Manage customers, invoices, bills, payments and the ledger in QuickBooks Online"
+    },
+    "inputs": [
+      {
+        "name": "credential",
+        "type": "credential",
+        "value": null,
+        "label": "QuickBooks Connection",
+        "placeholder": "${credentials.MyQBO}",
+        "required": true
+      },
+      {
+        "name": "company",
+        "type": "string",
+        "value": null,
+        "label": "Company (Realm ID)",
+        "placeholder": "${credentials.MyQBO.realm_id}",
+        "required": true
+      },
+      {
+        "name": "sandbox",
+        "type": "boolean",
+        "value": null,
+        "label": "Use Sandbox",
+        "placeholder": ""
+      },
+      {
+        "name": "billpayment_id",
+        "type": "string",
+        "value": null,
+        "label": "Bill Payment ID",
+        "placeholder": "180",
+        "required": true
+      }
+    ],
+    "outputs": null
+  },
+  "quickbooks/billpayment_query": {
+    "hash": "67953b0eadbf490e287f4af1ee44995f4901e720679245c49219ced07422ac8c",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Bill Payment: Query",
+    "description": "Query QuickBooks Online bill payments with an optional SQL-like statement.",
+    "website": "https://www.flomation.co",
+    "icon": "quickbooks+magnifying-glass",
+    "date": "05/07/2026",
+    "type": 2,
+    "category": {
+      "name": "QuickBooks Online",
+      "icon": "quickbooks",
+      "description": "Manage customers, invoices, bills, payments and the ledger in QuickBooks Online"
+    },
+    "inputs": [
+      {
+        "name": "credential",
+        "type": "credential",
+        "value": null,
+        "label": "QuickBooks Connection",
+        "placeholder": "${credentials.MyQBO}",
+        "required": true
+      },
+      {
+        "name": "company",
+        "type": "string",
+        "value": null,
+        "label": "Company (Realm ID)",
+        "placeholder": "${credentials.MyQBO.realm_id}",
+        "required": true
+      },
+      {
+        "name": "sandbox",
+        "type": "boolean",
+        "value": null,
+        "label": "Use Sandbox",
+        "placeholder": ""
+      },
+      {
+        "name": "query",
+        "type": "string",
+        "value": null,
+        "label": "Query (SQL)",
+        "placeholder": "select * from BillPayment where VendorRef = '56'"
+      }
+    ],
+    "outputs": null
+  },
+  "quickbooks/companyinfo_get": {
+    "hash": "0356332ba8911fd9e114270be46f3a79e43013dfb78f4c712322c0bdbe539636",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Company Info: Get",
+    "description": "Fetch the QuickBooks Online company information. Returns the company profile object.",
+    "website": "https://www.flomation.co",
+    "icon": "quickbooks+book",
+    "date": "05/07/2026",
+    "type": 2,
+    "category": {
+      "name": "QuickBooks Online",
+      "icon": "quickbooks",
+      "description": "Manage customers, invoices, bills, payments and the ledger in QuickBooks Online"
+    },
+    "inputs": [
+      {
+        "name": "credential",
+        "type": "credential",
+        "value": null,
+        "label": "QuickBooks Connection",
+        "placeholder": "${credentials.MyQBO}",
+        "required": true
+      },
+      {
+        "name": "company",
+        "type": "string",
+        "value": null,
+        "label": "Company (Realm ID)",
+        "placeholder": "${credentials.MyQBO.realm_id}",
+        "required": true
+      },
+      {
+        "name": "sandbox",
+        "type": "boolean",
+        "value": null,
+        "label": "Use Sandbox",
+        "placeholder": ""
+      }
+    ],
+    "outputs": null
+  },
+  "quickbooks/creditmemo_create": {
+    "hash": "bbd47cb4edc00ceda44cca8135ece880fc10b700eac3c7899f70160a0adecb89",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Credit Memo: Create",
+    "description": "Create a QuickBooks Online credit memo for a customer with line items. Returns the credit memo ID and object.",
+    "website": "https://www.flomation.co",
+    "icon": "quickbooks+plus",
+    "date": "05/07/2026",
+    "type": 2,
+    "category": {
+      "name": "QuickBooks Online",
+      "icon": "quickbooks",
+      "description": "Manage customers, invoices, bills, payments and the ledger in QuickBooks Online"
+    },
+    "inputs": [
+      {
+        "name": "credential",
+        "type": "credential",
+        "value": null,
+        "label": "QuickBooks Connection",
+        "placeholder": "${credentials.MyQBO}",
+        "required": true
+      },
+      {
+        "name": "company",
+        "type": "string",
+        "value": null,
+        "label": "Company (Realm ID)",
+        "placeholder": "${credentials.MyQBO.realm_id}",
+        "required": true
+      },
+      {
+        "name": "sandbox",
+        "type": "boolean",
+        "value": null,
+        "label": "Use Sandbox",
+        "placeholder": ""
+      },
+      {
+        "name": "customer_id",
+        "type": "string",
+        "value": null,
+        "label": "Customer ID",
+        "placeholder": "42",
+        "required": true
+      },
+      {
+        "name": "line_items",
+        "type": "text",
+        "value": null,
+        "label": "Line Items (JSON array)",
+        "placeholder": "[{\"Amount\":100.0,\"DetailType\":\"SalesItemLineDetail\",\"SalesItemLineDetail\":{\"ItemRef\":{\"value\":\"1\"}}}]",
+        "required": true
+      },
+      {
+        "name": "txn_date",
+        "type": "string",
+        "value": null,
+        "label": "Transaction Date",
+        "placeholder": "2026-07-05"
+      },
+      {
+        "name": "doc_number",
+        "type": "string",
+        "value": null,
+        "label": "Document Number",
+        "placeholder": "CM-1001"
+      },
+      {
+        "name": "fields",
+        "type": "text",
+        "value": null,
+        "label": "Advanced Fields (JSON)",
+        "placeholder": "{\"BillEmail\":{\"Address\":\"...\"}}"
+      }
+    ],
+    "outputs": null
+  },
+  "quickbooks/creditmemo_get": {
+    "hash": "71741e1f16c23113b253287a5e729e6616f1acfbebe20ea0285a38f70ebd59a2",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Credit Memo: Get",
+    "description": "Fetch a QuickBooks Online credit memo by ID. Returns the credit memo object.",
+    "website": "https://www.flomation.co",
+    "icon": "quickbooks+eye",
+    "date": "05/07/2026",
+    "type": 2,
+    "category": {
+      "name": "QuickBooks Online",
+      "icon": "quickbooks",
+      "description": "Manage customers, invoices, bills, payments and the ledger in QuickBooks Online"
+    },
+    "inputs": [
+      {
+        "name": "credential",
+        "type": "credential",
+        "value": null,
+        "label": "QuickBooks Connection",
+        "placeholder": "${credentials.MyQBO}",
+        "required": true
+      },
+      {
+        "name": "company",
+        "type": "string",
+        "value": null,
+        "label": "Company (Realm ID)",
+        "placeholder": "${credentials.MyQBO.realm_id}",
+        "required": true
+      },
+      {
+        "name": "sandbox",
+        "type": "boolean",
+        "value": null,
+        "label": "Use Sandbox",
+        "placeholder": ""
+      },
+      {
+        "name": "credit_memo_id",
+        "type": "string",
+        "value": null,
+        "label": "Credit Memo ID",
+        "placeholder": "201",
+        "required": true
+      }
+    ],
+    "outputs": null
+  },
+  "quickbooks/creditmemo_query": {
+    "hash": "14507cd70681298c991c77ed5dc64db366c7fa37a87270b8b85c3b435f852e9b",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Credit Memo: Query",
+    "description": "Query QuickBooks Online credit memos with SQL-like syntax. Returns matching credit memo rows.",
+    "website": "https://www.flomation.co",
+    "icon": "quickbooks+magnifying-glass",
+    "date": "05/07/2026",
+    "type": 2,
+    "category": {
+      "name": "QuickBooks Online",
+      "icon": "quickbooks",
+      "description": "Manage customers, invoices, bills, payments and the ledger in QuickBooks Online"
+    },
+    "inputs": [
+      {
+        "name": "credential",
+        "type": "credential",
+        "value": null,
+        "label": "QuickBooks Connection",
+        "placeholder": "${credentials.MyQBO}",
+        "required": true
+      },
+      {
+        "name": "company",
+        "type": "string",
+        "value": null,
+        "label": "Company (Realm ID)",
+        "placeholder": "${credentials.MyQBO.realm_id}",
+        "required": true
+      },
+      {
+        "name": "sandbox",
+        "type": "boolean",
+        "value": null,
+        "label": "Use Sandbox",
+        "placeholder": ""
+      },
+      {
+        "name": "query",
+        "type": "string",
+        "value": null,
+        "label": "Query (SQL)",
+        "placeholder": "select * from CreditMemo where CustomerRef = '42'"
+      },
+      {
+        "name": "where",
+        "type": "string",
+        "value": null,
+        "label": "Where Clause",
+        "placeholder": "CustomerRef = '42'"
+      },
+      {
+        "name": "max_results",
+        "type": "string",
+        "value": null,
+        "label": "Max Results",
+        "placeholder": "100"
+      }
+    ],
+    "outputs": null
+  },
+  "quickbooks/customer_create": {
+    "hash": "f8a2cecd549b802c1321be775314b656d7f6a8b3c94fc9d618e8f197ae054664",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Customer: Create",
+    "description": "Create a QuickBooks Online customer. Returns the customer ID and object.",
+    "website": "https://www.flomation.co",
+    "icon": "quickbooks+plus",
+    "date": "05/07/2026",
+    "type": 2,
+    "category": {
+      "name": "QuickBooks Online",
+      "icon": "quickbooks",
+      "description": "Manage customers, invoices, bills, payments and the ledger in QuickBooks Online"
+    },
+    "inputs": [
+      {
+        "name": "credential",
+        "type": "credential",
+        "value": null,
+        "label": "QuickBooks Connection",
+        "placeholder": "${credentials.MyQBO}",
+        "required": true
+      },
+      {
+        "name": "company",
+        "type": "string",
+        "value": null,
+        "label": "Company (Realm ID)",
+        "placeholder": "${credentials.MyQBO.realm_id}",
+        "required": true
+      },
+      {
+        "name": "sandbox",
+        "type": "boolean",
+        "value": null,
+        "label": "Use Sandbox",
+        "placeholder": ""
+      },
+      {
+        "name": "display_name",
+        "type": "string",
+        "value": null,
+        "label": "Display Name",
+        "placeholder": "Ada Lovelace Ltd",
+        "required": true
+      },
+      {
+        "name": "company_name",
+        "type": "string",
+        "value": null,
+        "label": "Company Name",
+        "placeholder": ""
+      },
+      {
+        "name": "given_name",
+        "type": "string",
+        "value": null,
+        "label": "First Name",
+        "placeholder": "Ada"
+      },
+      {
+        "name": "family_name",
+        "type": "string",
+        "value": null,
+        "label": "Last Name",
+        "placeholder": "Lovelace"
+      },
+      {
+        "name": "email",
+        "type": "string",
+        "value": null,
+        "label": "Email",
+        "placeholder": "ada@example.com"
+      },
+      {
+        "name": "phone",
+        "type": "string",
+        "value": null,
+        "label": "Phone",
+        "placeholder": "+44 20 7946 0000"
+      },
+      {
+        "name": "fields",
+        "type": "text",
+        "value": null,
+        "label": "Advanced Fields (JSON)",
+        "placeholder": "{\"BillAddr\":{\"Line1\":\"...\",\"City\":\"...\"}}"
+      }
+    ],
+    "outputs": null
+  },
+  "quickbooks/customer_get": {
+    "hash": "2d940d34b186d217530c931eeb741ac87a1cacb8a6692ddc61810ab1dcccbfa8",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Customer: Get",
+    "description": "Fetch a QuickBooks Online customer by ID. Returns the customer object.",
+    "website": "https://www.flomation.co",
+    "icon": "quickbooks+eye",
+    "date": "05/07/2026",
+    "type": 2,
+    "category": {
+      "name": "QuickBooks Online",
+      "icon": "quickbooks",
+      "description": "Manage customers, invoices, bills, payments and the ledger in QuickBooks Online"
+    },
+    "inputs": [
+      {
+        "name": "credential",
+        "type": "credential",
+        "value": null,
+        "label": "QuickBooks Connection",
+        "placeholder": "${credentials.MyQBO}",
+        "required": true
+      },
+      {
+        "name": "company",
+        "type": "string",
+        "value": null,
+        "label": "Company (Realm ID)",
+        "placeholder": "${credentials.MyQBO.realm_id}",
+        "required": true
+      },
+      {
+        "name": "sandbox",
+        "type": "boolean",
+        "value": null,
+        "label": "Use Sandbox",
+        "placeholder": ""
+      },
+      {
+        "name": "customer_id",
+        "type": "string",
+        "value": null,
+        "label": "Customer ID",
+        "placeholder": "42",
+        "required": true
+      }
+    ],
+    "outputs": null
+  },
+  "quickbooks/customer_query": {
+    "hash": "15c6c14de2ee1b5aa745cd24d0090b0afa9df0efc6da6f8b8429966ddba48a1c",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Customer: Query",
+    "description": "Query QuickBooks Online customers with SQL-like syntax. Returns matching rows.",
+    "website": "https://www.flomation.co",
+    "icon": "quickbooks+magnifying-glass",
+    "date": "05/07/2026",
+    "type": 2,
+    "category": {
+      "name": "QuickBooks Online",
+      "icon": "quickbooks",
+      "description": "Manage customers, invoices, bills, payments and the ledger in QuickBooks Online"
+    },
+    "inputs": [
+      {
+        "name": "credential",
+        "type": "credential",
+        "value": null,
+        "label": "QuickBooks Connection",
+        "placeholder": "${credentials.MyQBO}",
+        "required": true
+      },
+      {
+        "name": "company",
+        "type": "string",
+        "value": null,
+        "label": "Company (Realm ID)",
+        "placeholder": "${credentials.MyQBO.realm_id}",
+        "required": true
+      },
+      {
+        "name": "sandbox",
+        "type": "boolean",
+        "value": null,
+        "label": "Use Sandbox",
+        "placeholder": ""
+      },
+      {
+        "name": "query",
+        "type": "string",
+        "value": null,
+        "label": "Query (SQL)",
+        "placeholder": "select * from Customer where Active = true"
+      }
+    ],
+    "outputs": null
+  },
+  "quickbooks/customer_update": {
+    "hash": "e2577a3ef5276977f188aae92611bfa629b5bca53bbb4350066ee1b8a655dc18",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Customer: Update",
+    "description": "Update a QuickBooks Online customer (sparse). Requires ID and sync token.",
+    "website": "https://www.flomation.co",
+    "icon": "quickbooks+pencil",
+    "date": "05/07/2026",
+    "type": 2,
+    "category": {
+      "name": "QuickBooks Online",
+      "icon": "quickbooks",
+      "description": "Manage customers, invoices, bills, payments and the ledger in QuickBooks Online"
+    },
+    "inputs": [
+      {
+        "name": "credential",
+        "type": "credential",
+        "value": null,
+        "label": "QuickBooks Connection",
+        "placeholder": "${credentials.MyQBO}",
+        "required": true
+      },
+      {
+        "name": "company",
+        "type": "string",
+        "value": null,
+        "label": "Company (Realm ID)",
+        "placeholder": "${credentials.MyQBO.realm_id}",
+        "required": true
+      },
+      {
+        "name": "sandbox",
+        "type": "boolean",
+        "value": null,
+        "label": "Use Sandbox",
+        "placeholder": ""
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Customer ID",
+        "placeholder": "42",
+        "required": true
+      },
+      {
+        "name": "sync_token",
+        "type": "string",
+        "value": null,
+        "label": "Sync Token",
+        "placeholder": "3",
+        "required": true
+      },
+      {
+        "name": "display_name",
+        "type": "string",
+        "value": null,
+        "label": "Display Name",
+        "placeholder": "Ada Lovelace Ltd"
+      },
+      {
+        "name": "company_name",
+        "type": "string",
+        "value": null,
+        "label": "Company Name",
+        "placeholder": ""
+      },
+      {
+        "name": "given_name",
+        "type": "string",
+        "value": null,
+        "label": "First Name",
+        "placeholder": ""
+      },
+      {
+        "name": "family_name",
+        "type": "string",
+        "value": null,
+        "label": "Last Name",
+        "placeholder": ""
+      },
+      {
+        "name": "email",
+        "type": "string",
+        "value": null,
+        "label": "Email",
+        "placeholder": ""
+      },
+      {
+        "name": "phone",
+        "type": "string",
+        "value": null,
+        "label": "Phone",
+        "placeholder": ""
+      },
+      {
+        "name": "fields",
+        "type": "text",
+        "value": null,
+        "label": "Advanced Fields (JSON)",
+        "placeholder": "{\"Notes\":\"...\"}"
+      }
+    ],
+    "outputs": null
+  },
+  "quickbooks/deposit_create": {
+    "hash": "a487de9dd87be99b0d711f6c7797e82d256d326e7ae2b9810c0ccc67a0eb29c9",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Deposit: Create",
+    "description": "Create a QuickBooks Online deposit into an account. Returns the deposit ID and object.",
+    "website": "https://www.flomation.co",
+    "icon": "quickbooks+plus",
+    "date": "05/07/2026",
+    "type": 2,
+    "category": {
+      "name": "QuickBooks Online",
+      "icon": "quickbooks",
+      "description": "Manage customers, invoices, bills, payments and the ledger in QuickBooks Online"
+    },
+    "inputs": [
+      {
+        "name": "credential",
+        "type": "credential",
+        "value": null,
+        "label": "QuickBooks Connection",
+        "placeholder": "${credentials.MyQBO}",
+        "required": true
+      },
+      {
+        "name": "company",
+        "type": "string",
+        "value": null,
+        "label": "Company (Realm ID)",
+        "placeholder": "${credentials.MyQBO.realm_id}",
+        "required": true
+      },
+      {
+        "name": "sandbox",
+        "type": "boolean",
+        "value": null,
+        "label": "Use Sandbox",
+        "placeholder": ""
+      },
+      {
+        "name": "deposit_to_account_id",
+        "type": "string",
+        "value": null,
+        "label": "Deposit To Account ID",
+        "placeholder": "35",
+        "required": true
+      },
+      {
+        "name": "line_items",
+        "type": "text",
+        "value": null,
+        "label": "Lines (JSON array)",
+        "placeholder": "[{\"Amount\":100.0,\"DetailType\":\"DepositLineDetail\",\"DepositLineDetail\":{\"AccountRef\":{\"value\":\"79\"}}}]",
+        "required": true
+      },
+      {
+        "name": "txn_date",
+        "type": "string",
+        "value": null,
+        "label": "Transaction Date",
+        "placeholder": "2026-07-05"
+      },
+      {
+        "name": "private_note",
+        "type": "string",
+        "value": null,
+        "label": "Private Note (Memo)",
+        "placeholder": ""
+      },
+      {
+        "name": "fields",
+        "type": "text",
+        "value": null,
+        "label": "Advanced Fields (JSON)",
+        "placeholder": "{\"CurrencyRef\":{\"value\":\"GBP\"}}"
+      }
+    ],
+    "outputs": null
+  },
+  "quickbooks/deposit_get": {
+    "hash": "0a78e59866ea5a6824e775e71fdf5f6f3b4862c5447c87e40e7e695691bbadfb",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Deposit: Get",
+    "description": "Fetch a QuickBooks Online deposit by ID. Returns the deposit object.",
+    "website": "https://www.flomation.co",
+    "icon": "quickbooks+eye",
+    "date": "05/07/2026",
+    "type": 2,
+    "category": {
+      "name": "QuickBooks Online",
+      "icon": "quickbooks",
+      "description": "Manage customers, invoices, bills, payments and the ledger in QuickBooks Online"
+    },
+    "inputs": [
+      {
+        "name": "credential",
+        "type": "credential",
+        "value": null,
+        "label": "QuickBooks Connection",
+        "placeholder": "${credentials.MyQBO}",
+        "required": true
+      },
+      {
+        "name": "company",
+        "type": "string",
+        "value": null,
+        "label": "Company (Realm ID)",
+        "placeholder": "${credentials.MyQBO.realm_id}",
+        "required": true
+      },
+      {
+        "name": "sandbox",
+        "type": "boolean",
+        "value": null,
+        "label": "Use Sandbox",
+        "placeholder": ""
+      },
+      {
+        "name": "deposit_id",
+        "type": "string",
+        "value": null,
+        "label": "Deposit ID",
+        "placeholder": "180",
+        "required": true
+      }
+    ],
+    "outputs": null
+  },
+  "quickbooks/deposit_query": {
+    "hash": "00fed09a687b609894eef7a64c98b6856cfc453e769803b3a24c35c7a4fa75de",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Deposit: Query",
+    "description": "Query QuickBooks Online deposits. Supply a WHERE clause or a full SQL query.",
+    "website": "https://www.flomation.co",
+    "icon": "quickbooks+magnifying-glass",
+    "date": "05/07/2026",
+    "type": 2,
+    "category": {
+      "name": "QuickBooks Online",
+      "icon": "quickbooks",
+      "description": "Manage customers, invoices, bills, payments and the ledger in QuickBooks Online"
+    },
+    "inputs": [
+      {
+        "name": "credential",
+        "type": "credential",
+        "value": null,
+        "label": "QuickBooks Connection",
+        "placeholder": "${credentials.MyQBO}",
+        "required": true
+      },
+      {
+        "name": "company",
+        "type": "string",
+        "value": null,
+        "label": "Company (Realm ID)",
+        "placeholder": "${credentials.MyQBO.realm_id}",
+        "required": true
+      },
+      {
+        "name": "sandbox",
+        "type": "boolean",
+        "value": null,
+        "label": "Use Sandbox",
+        "placeholder": ""
+      },
+      {
+        "name": "where",
+        "type": "string",
+        "value": null,
+        "label": "WHERE Clause",
+        "placeholder": "TxnDate \u003e '2026-01-01'"
+      },
+      {
+        "name": "max_results",
+        "type": "string",
+        "value": null,
+        "label": "Max Results",
+        "placeholder": "100"
+      },
+      {
+        "name": "query",
+        "type": "text",
+        "value": null,
+        "label": "Full SQL Query (overrides WHERE)",
+        "placeholder": "select * from Deposit"
+      }
+    ],
+    "outputs": null
+  },
+  "quickbooks/employee_create": {
+    "hash": "ce060f47299fd79c3b122729ef46a3fb23960fc1b7abfd994c4869f3bb6dcb36",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Employee: Create",
+    "description": "Create a QuickBooks Online employee. Returns the employee ID and object.",
+    "website": "https://www.flomation.co",
+    "icon": "quickbooks+plus",
+    "date": "05/07/2026",
+    "type": 2,
+    "category": {
+      "name": "QuickBooks Online",
+      "icon": "quickbooks",
+      "description": "Manage customers, invoices, bills, payments and the ledger in QuickBooks Online"
+    },
+    "inputs": [
+      {
+        "name": "credential",
+        "type": "credential",
+        "value": null,
+        "label": "QuickBooks Connection",
+        "placeholder": "${credentials.MyQBO}",
+        "required": true
+      },
+      {
+        "name": "company",
+        "type": "string",
+        "value": null,
+        "label": "Company (Realm ID)",
+        "placeholder": "${credentials.MyQBO.realm_id}",
+        "required": true
+      },
+      {
+        "name": "sandbox",
+        "type": "boolean",
+        "value": null,
+        "label": "Use Sandbox",
+        "placeholder": ""
+      },
+      {
+        "name": "given_name",
+        "type": "string",
+        "value": null,
+        "label": "First Name",
+        "placeholder": "Ada",
+        "required": true
+      },
+      {
+        "name": "family_name",
+        "type": "string",
+        "value": null,
+        "label": "Last Name",
+        "placeholder": "Lovelace"
+      },
+      {
+        "name": "email",
+        "type": "string",
+        "value": null,
+        "label": "Email",
+        "placeholder": "ada@example.com"
+      },
+      {
+        "name": "phone",
+        "type": "string",
+        "value": null,
+        "label": "Phone",
+        "placeholder": "+44 20 7946 0000"
+      },
+      {
+        "name": "fields",
+        "type": "text",
+        "value": null,
+        "label": "Advanced Fields (JSON)",
+        "placeholder": "{\"PrimaryAddr\":{\"Line1\":\"...\",\"City\":\"...\"}}"
+      }
+    ],
+    "outputs": null
+  },
+  "quickbooks/employee_get": {
+    "hash": "5fe683514ac35bb193792cd8fad38538f546305cd0804c8dec3c8b103cce13e6",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Employee: Get",
+    "description": "Fetch a QuickBooks Online employee by ID. Returns the employee object.",
+    "website": "https://www.flomation.co",
+    "icon": "quickbooks+eye",
+    "date": "05/07/2026",
+    "type": 2,
+    "category": {
+      "name": "QuickBooks Online",
+      "icon": "quickbooks",
+      "description": "Manage customers, invoices, bills, payments and the ledger in QuickBooks Online"
+    },
+    "inputs": [
+      {
+        "name": "credential",
+        "type": "credential",
+        "value": null,
+        "label": "QuickBooks Connection",
+        "placeholder": "${credentials.MyQBO}",
+        "required": true
+      },
+      {
+        "name": "company",
+        "type": "string",
+        "value": null,
+        "label": "Company (Realm ID)",
+        "placeholder": "${credentials.MyQBO.realm_id}",
+        "required": true
+      },
+      {
+        "name": "sandbox",
+        "type": "boolean",
+        "value": null,
+        "label": "Use Sandbox",
+        "placeholder": ""
+      },
+      {
+        "name": "employee_id",
+        "type": "string",
+        "value": null,
+        "label": "Employee ID",
+        "placeholder": "55",
+        "required": true
+      }
+    ],
+    "outputs": null
+  },
+  "quickbooks/employee_query": {
+    "hash": "f5a0bf9a1cf40c066d3b5a52dfb7a8666b9b1af744da0a3cb60fdd2a9549bd60",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Employee: Query",
+    "description": "Query QuickBooks Online employees. Supply a WHERE clause or a full SQL query.",
+    "website": "https://www.flomation.co",
+    "icon": "quickbooks+magnifying-glass",
+    "date": "05/07/2026",
+    "type": 2,
+    "category": {
+      "name": "QuickBooks Online",
+      "icon": "quickbooks",
+      "description": "Manage customers, invoices, bills, payments and the ledger in QuickBooks Online"
+    },
+    "inputs": [
+      {
+        "name": "credential",
+        "type": "credential",
+        "value": null,
+        "label": "QuickBooks Connection",
+        "placeholder": "${credentials.MyQBO}",
+        "required": true
+      },
+      {
+        "name": "company",
+        "type": "string",
+        "value": null,
+        "label": "Company (Realm ID)",
+        "placeholder": "${credentials.MyQBO.realm_id}",
+        "required": true
+      },
+      {
+        "name": "sandbox",
+        "type": "boolean",
+        "value": null,
+        "label": "Use Sandbox",
+        "placeholder": ""
+      },
+      {
+        "name": "where",
+        "type": "string",
+        "value": null,
+        "label": "WHERE Clause",
+        "placeholder": "Active = true"
+      },
+      {
+        "name": "max_results",
+        "type": "string",
+        "value": null,
+        "label": "Max Results",
+        "placeholder": "100"
+      },
+      {
+        "name": "query",
+        "type": "text",
+        "value": null,
+        "label": "Full SQL Query (overrides WHERE)",
+        "placeholder": "select * from Employee"
+      }
+    ],
+    "outputs": null
+  },
+  "quickbooks/estimate_create": {
+    "hash": "aaa8de3597521d0e147bca27b16ee5d4e5b70b279fefcf8662915364305c6f14",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Estimate: Create",
+    "description": "Create a QuickBooks Online estimate for a customer with line items. Returns the estimate ID and object.",
+    "website": "https://www.flomation.co",
+    "icon": "quickbooks+plus",
+    "date": "05/07/2026",
+    "type": 2,
+    "category": {
+      "name": "QuickBooks Online",
+      "icon": "quickbooks",
+      "description": "Manage customers, invoices, bills, payments and the ledger in QuickBooks Online"
+    },
+    "inputs": [
+      {
+        "name": "credential",
+        "type": "credential",
+        "value": null,
+        "label": "QuickBooks Connection",
+        "placeholder": "${credentials.MyQBO}",
+        "required": true
+      },
+      {
+        "name": "company",
+        "type": "string",
+        "value": null,
+        "label": "Company (Realm ID)",
+        "placeholder": "${credentials.MyQBO.realm_id}",
+        "required": true
+      },
+      {
+        "name": "sandbox",
+        "type": "boolean",
+        "value": null,
+        "label": "Use Sandbox",
+        "placeholder": ""
+      },
+      {
+        "name": "customer_id",
+        "type": "string",
+        "value": null,
+        "label": "Customer ID",
+        "placeholder": "42",
+        "required": true
+      },
+      {
+        "name": "line_items",
+        "type": "text",
+        "value": null,
+        "label": "Line Items (JSON array)",
+        "placeholder": "[{\"Amount\":100.0,\"DetailType\":\"SalesItemLineDetail\",\"SalesItemLineDetail\":{\"ItemRef\":{\"value\":\"1\"}}}]",
+        "required": true
+      },
+      {
+        "name": "txn_date",
+        "type": "string",
+        "value": null,
+        "label": "Transaction Date",
+        "placeholder": "2026-07-05"
+      },
+      {
+        "name": "doc_number",
+        "type": "string",
+        "value": null,
+        "label": "Document Number",
+        "placeholder": "EST-1001"
+      },
+      {
+        "name": "fields",
+        "type": "text",
+        "value": null,
+        "label": "Advanced Fields (JSON)",
+        "placeholder": "{\"BillEmail\":{\"Address\":\"...\"}}"
+      }
+    ],
+    "outputs": null
+  },
+  "quickbooks/estimate_get": {
+    "hash": "2793698042a3f2629645e5019469fdc9ca2cef2fc3ee6a6e1cc16de7fd0beab9",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Estimate: Get",
+    "description": "Fetch a QuickBooks Online estimate by ID. Returns the estimate object.",
+    "website": "https://www.flomation.co",
+    "icon": "quickbooks+eye",
+    "date": "05/07/2026",
+    "type": 2,
+    "category": {
+      "name": "QuickBooks Online",
+      "icon": "quickbooks",
+      "description": "Manage customers, invoices, bills, payments and the ledger in QuickBooks Online"
+    },
+    "inputs": [
+      {
+        "name": "credential",
+        "type": "credential",
+        "value": null,
+        "label": "QuickBooks Connection",
+        "placeholder": "${credentials.MyQBO}",
+        "required": true
+      },
+      {
+        "name": "company",
+        "type": "string",
+        "value": null,
+        "label": "Company (Realm ID)",
+        "placeholder": "${credentials.MyQBO.realm_id}",
+        "required": true
+      },
+      {
+        "name": "sandbox",
+        "type": "boolean",
+        "value": null,
+        "label": "Use Sandbox",
+        "placeholder": ""
+      },
+      {
+        "name": "estimate_id",
+        "type": "string",
+        "value": null,
+        "label": "Estimate ID",
+        "placeholder": "145",
+        "required": true
+      }
+    ],
+    "outputs": null
+  },
+  "quickbooks/estimate_query": {
+    "hash": "c30531583845050b354fc52b74d873ccc673326d843dd2e256c20a7a1e9db747",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Estimate: Query",
+    "description": "Query QuickBooks Online estimates with SQL-like syntax. Returns matching estimate rows.",
+    "website": "https://www.flomation.co",
+    "icon": "quickbooks+magnifying-glass",
+    "date": "05/07/2026",
+    "type": 2,
+    "category": {
+      "name": "QuickBooks Online",
+      "icon": "quickbooks",
+      "description": "Manage customers, invoices, bills, payments and the ledger in QuickBooks Online"
+    },
+    "inputs": [
+      {
+        "name": "credential",
+        "type": "credential",
+        "value": null,
+        "label": "QuickBooks Connection",
+        "placeholder": "${credentials.MyQBO}",
+        "required": true
+      },
+      {
+        "name": "company",
+        "type": "string",
+        "value": null,
+        "label": "Company (Realm ID)",
+        "placeholder": "${credentials.MyQBO.realm_id}",
+        "required": true
+      },
+      {
+        "name": "sandbox",
+        "type": "boolean",
+        "value": null,
+        "label": "Use Sandbox",
+        "placeholder": ""
+      },
+      {
+        "name": "query",
+        "type": "string",
+        "value": null,
+        "label": "Query (SQL)",
+        "placeholder": "select * from Estimate where TxnStatus = 'Pending'"
+      },
+      {
+        "name": "where",
+        "type": "string",
+        "value": null,
+        "label": "Where Clause",
+        "placeholder": "CustomerRef = '42'"
+      },
+      {
+        "name": "max_results",
+        "type": "string",
+        "value": null,
+        "label": "Max Results",
+        "placeholder": "100"
+      }
+    ],
+    "outputs": null
+  },
+  "quickbooks/invoice_create": {
+    "hash": "2a36eec39fcfd12c2a6e10c2ae4f7357804a0df1f6ca110d6f4aef9aeb903794",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Invoice: Create",
+    "description": "Create a QuickBooks Online invoice for a customer with line items.",
+    "website": "https://www.flomation.co",
+    "icon": "quickbooks+plus",
+    "date": "05/07/2026",
+    "type": 2,
+    "category": {
+      "name": "QuickBooks Online",
+      "icon": "quickbooks",
+      "description": "Manage customers, invoices, bills, payments and the ledger in QuickBooks Online"
+    },
+    "inputs": [
+      {
+        "name": "credential",
+        "type": "credential",
+        "value": null,
+        "label": "QuickBooks Connection",
+        "placeholder": "${credentials.MyQBO}",
+        "required": true
+      },
+      {
+        "name": "company",
+        "type": "string",
+        "value": null,
+        "label": "Company (Realm ID)",
+        "placeholder": "${credentials.MyQBO.realm_id}",
+        "required": true
+      },
+      {
+        "name": "sandbox",
+        "type": "boolean",
+        "value": null,
+        "label": "Use Sandbox",
+        "placeholder": ""
+      },
+      {
+        "name": "customer_id",
+        "type": "string",
+        "value": null,
+        "label": "Customer ID",
+        "placeholder": "42",
+        "required": true
+      },
+      {
+        "name": "line_items",
+        "type": "text",
+        "value": null,
+        "label": "Line Items (JSON array)",
+        "placeholder": "[{\"Amount\":100.0,\"DetailType\":\"SalesItemLineDetail\",\"SalesItemLineDetail\":{\"ItemRef\":{\"value\":\"1\"}}}]",
+        "required": true
+      },
+      {
+        "name": "txn_date",
+        "type": "string",
+        "value": null,
+        "label": "Transaction Date",
+        "placeholder": "2026-07-05"
+      },
+      {
+        "name": "due_date",
+        "type": "string",
+        "value": null,
+        "label": "Due Date",
+        "placeholder": "2026-08-05"
+      },
+      {
+        "name": "doc_number",
+        "type": "string",
+        "value": null,
+        "label": "Document Number",
+        "placeholder": "INV-1001"
+      },
+      {
+        "name": "fields",
+        "type": "text",
+        "value": null,
+        "label": "Advanced Fields (JSON)",
+        "placeholder": "{\"CustomerMemo\":{\"value\":\"Thank you\"}}"
+      }
+    ],
+    "outputs": null
+  },
+  "quickbooks/invoice_get": {
+    "hash": "f72608a332e841d437f9addaa919d1b8c754d027a255ed748a541733655f2e05",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Invoice: Get",
+    "description": "Fetch a QuickBooks Online invoice by ID. Returns the invoice object.",
+    "website": "https://www.flomation.co",
+    "icon": "quickbooks+eye",
+    "date": "05/07/2026",
+    "type": 2,
+    "category": {
+      "name": "QuickBooks Online",
+      "icon": "quickbooks",
+      "description": "Manage customers, invoices, bills, payments and the ledger in QuickBooks Online"
+    },
+    "inputs": [
+      {
+        "name": "credential",
+        "type": "credential",
+        "value": null,
+        "label": "QuickBooks Connection",
+        "placeholder": "${credentials.MyQBO}",
+        "required": true
+      },
+      {
+        "name": "company",
+        "type": "string",
+        "value": null,
+        "label": "Company (Realm ID)",
+        "placeholder": "${credentials.MyQBO.realm_id}",
+        "required": true
+      },
+      {
+        "name": "sandbox",
+        "type": "boolean",
+        "value": null,
+        "label": "Use Sandbox",
+        "placeholder": ""
+      },
+      {
+        "name": "invoice_id",
+        "type": "string",
+        "value": null,
+        "label": "Invoice ID",
+        "placeholder": "130",
+        "required": true
+      }
+    ],
+    "outputs": null
+  },
+  "quickbooks/invoice_query": {
+    "hash": "ce92a4eaec0b071079cb1abcece84ae9e7f52858f7a39bf245b4b51025d3913a",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Invoice: Query",
+    "description": "Query QuickBooks Online invoices with SQL-like syntax. Returns matching rows.",
+    "website": "https://www.flomation.co",
+    "icon": "quickbooks+magnifying-glass",
+    "date": "05/07/2026",
+    "type": 2,
+    "category": {
+      "name": "QuickBooks Online",
+      "icon": "quickbooks",
+      "description": "Manage customers, invoices, bills, payments and the ledger in QuickBooks Online"
+    },
+    "inputs": [
+      {
+        "name": "credential",
+        "type": "credential",
+        "value": null,
+        "label": "QuickBooks Connection",
+        "placeholder": "${credentials.MyQBO}",
+        "required": true
+      },
+      {
+        "name": "company",
+        "type": "string",
+        "value": null,
+        "label": "Company (Realm ID)",
+        "placeholder": "${credentials.MyQBO.realm_id}",
+        "required": true
+      },
+      {
+        "name": "sandbox",
+        "type": "boolean",
+        "value": null,
+        "label": "Use Sandbox",
+        "placeholder": ""
+      },
+      {
+        "name": "query",
+        "type": "string",
+        "value": null,
+        "label": "Query (SQL)",
+        "placeholder": "select * from Invoice where TotalAmt \u003e 100"
+      }
+    ],
+    "outputs": null
+  },
+  "quickbooks/invoice_send": {
+    "hash": "9d87d4d958ff91d4a91393e09bd11df2dba4f2f75ec02997320caa8221ac0846",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Invoice: Send",
+    "description": "Email a QuickBooks Online invoice to the customer or a given address.",
+    "website": "https://www.flomation.co",
+    "icon": "quickbooks+paper-plane",
+    "date": "05/07/2026",
+    "type": 2,
+    "category": {
+      "name": "QuickBooks Online",
+      "icon": "quickbooks",
+      "description": "Manage customers, invoices, bills, payments and the ledger in QuickBooks Online"
+    },
+    "inputs": [
+      {
+        "name": "credential",
+        "type": "credential",
+        "value": null,
+        "label": "QuickBooks Connection",
+        "placeholder": "${credentials.MyQBO}",
+        "required": true
+      },
+      {
+        "name": "company",
+        "type": "string",
+        "value": null,
+        "label": "Company (Realm ID)",
+        "placeholder": "${credentials.MyQBO.realm_id}",
+        "required": true
+      },
+      {
+        "name": "sandbox",
+        "type": "boolean",
+        "value": null,
+        "label": "Use Sandbox",
+        "placeholder": ""
+      },
+      {
+        "name": "invoice_id",
+        "type": "string",
+        "value": null,
+        "label": "Invoice ID",
+        "placeholder": "130",
+        "required": true
+      },
+      {
+        "name": "send_to",
+        "type": "string",
+        "value": null,
+        "label": "Send To (Email)",
+        "placeholder": "ada@example.com"
+      }
+    ],
+    "outputs": null
+  },
+  "quickbooks/invoice_update": {
+    "hash": "6fa140e802de022cff5386e6524bbf2b24f47d27e20c20848632362af3ddbba0",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Invoice: Update",
+    "description": "Update a QuickBooks Online invoice (sparse). Requires ID and sync token.",
+    "website": "https://www.flomation.co",
+    "icon": "quickbooks+pencil",
+    "date": "05/07/2026",
+    "type": 2,
+    "category": {
+      "name": "QuickBooks Online",
+      "icon": "quickbooks",
+      "description": "Manage customers, invoices, bills, payments and the ledger in QuickBooks Online"
+    },
+    "inputs": [
+      {
+        "name": "credential",
+        "type": "credential",
+        "value": null,
+        "label": "QuickBooks Connection",
+        "placeholder": "${credentials.MyQBO}",
+        "required": true
+      },
+      {
+        "name": "company",
+        "type": "string",
+        "value": null,
+        "label": "Company (Realm ID)",
+        "placeholder": "${credentials.MyQBO.realm_id}",
+        "required": true
+      },
+      {
+        "name": "sandbox",
+        "type": "boolean",
+        "value": null,
+        "label": "Use Sandbox",
+        "placeholder": ""
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Invoice ID",
+        "placeholder": "130",
+        "required": true
+      },
+      {
+        "name": "sync_token",
+        "type": "string",
+        "value": null,
+        "label": "Sync Token",
+        "placeholder": "0",
+        "required": true
+      },
+      {
+        "name": "txn_date",
+        "type": "string",
+        "value": null,
+        "label": "Transaction Date",
+        "placeholder": ""
+      },
+      {
+        "name": "due_date",
+        "type": "string",
+        "value": null,
+        "label": "Due Date",
+        "placeholder": ""
+      },
+      {
+        "name": "doc_number",
+        "type": "string",
+        "value": null,
+        "label": "Document Number",
+        "placeholder": ""
+      },
+      {
+        "name": "line_items",
+        "type": "text",
+        "value": null,
+        "label": "Line Items (JSON array)",
+        "placeholder": "[{\"Amount\":100.0,\"DetailType\":\"SalesItemLineDetail\",\"SalesItemLineDetail\":{\"ItemRef\":{\"value\":\"1\"}}}]"
+      },
+      {
+        "name": "fields",
+        "type": "text",
+        "value": null,
+        "label": "Advanced Fields (JSON)",
+        "placeholder": "{\"CustomerMemo\":{\"value\":\"Updated\"}}"
+      }
+    ],
+    "outputs": null
+  },
+  "quickbooks/invoice_void": {
+    "hash": "9ddce2ab2a820f60110fc4f3829263393697df695b079bfb0f44bfd3e8fcef74",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Invoice: Void",
+    "description": "Void a QuickBooks Online invoice. Requires ID and sync token.",
+    "website": "https://www.flomation.co",
+    "icon": "quickbooks+ban",
+    "date": "05/07/2026",
+    "type": 2,
+    "category": {
+      "name": "QuickBooks Online",
+      "icon": "quickbooks",
+      "description": "Manage customers, invoices, bills, payments and the ledger in QuickBooks Online"
+    },
+    "inputs": [
+      {
+        "name": "credential",
+        "type": "credential",
+        "value": null,
+        "label": "QuickBooks Connection",
+        "placeholder": "${credentials.MyQBO}",
+        "required": true
+      },
+      {
+        "name": "company",
+        "type": "string",
+        "value": null,
+        "label": "Company (Realm ID)",
+        "placeholder": "${credentials.MyQBO.realm_id}",
+        "required": true
+      },
+      {
+        "name": "sandbox",
+        "type": "boolean",
+        "value": null,
+        "label": "Use Sandbox",
+        "placeholder": ""
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Invoice ID",
+        "placeholder": "130",
+        "required": true
+      },
+      {
+        "name": "sync_token",
+        "type": "string",
+        "value": null,
+        "label": "Sync Token",
+        "placeholder": "0",
+        "required": true
+      }
+    ],
+    "outputs": null
+  },
+  "quickbooks/item_create": {
+    "hash": "62a1c428d5cb73a31fb73b3c96d1ef5a0e85f56fad37cce7538a2987b7ec356c",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Item: Create",
+    "description": "Create a QuickBooks Online item (product or service). Returns the item ID and object.",
+    "website": "https://www.flomation.co",
+    "icon": "quickbooks+plus",
+    "date": "05/07/2026",
+    "type": 2,
+    "category": {
+      "name": "QuickBooks Online",
+      "icon": "quickbooks",
+      "description": "Manage customers, invoices, bills, payments and the ledger in QuickBooks Online"
+    },
+    "inputs": [
+      {
+        "name": "credential",
+        "type": "credential",
+        "value": null,
+        "label": "QuickBooks Connection",
+        "placeholder": "${credentials.MyQBO}",
+        "required": true
+      },
+      {
+        "name": "company",
+        "type": "string",
+        "value": null,
+        "label": "Company (Realm ID)",
+        "placeholder": "${credentials.MyQBO.realm_id}",
+        "required": true
+      },
+      {
+        "name": "sandbox",
+        "type": "boolean",
+        "value": null,
+        "label": "Use Sandbox",
+        "placeholder": ""
+      },
+      {
+        "name": "name",
+        "type": "string",
+        "value": null,
+        "label": "Name",
+        "placeholder": "Consulting",
+        "required": true
+      },
+      {
+        "name": "item_type",
+        "type": "string",
+        "value": null,
+        "label": "Type",
+        "placeholder": "Service",
+        "required": true,
+        "options": [
+          {
+            "name": "Service",
+            "value": "Service"
+          },
+          {
+            "name": "Inventory",
+            "value": "Inventory"
+          },
+          {
+            "name": "Non-Inventory",
+            "value": "NonInventory"
+          }
+        ]
+      },
+      {
+        "name": "income_account_id",
+        "type": "string",
+        "value": null,
+        "label": "Income Account ID",
+        "placeholder": "79",
+        "required": true
+      },
+      {
+        "name": "unit_price",
+        "type": "money",
+        "value": null,
+        "label": "Unit Price",
+        "placeholder": "150.00"
+      },
+      {
+        "name": "fields",
+        "type": "text",
+        "value": null,
+        "label": "Advanced Fields (JSON)",
+        "placeholder": "{\"Description\":\"...\",\"Taxable\":true}"
+      }
+    ],
+    "outputs": null
+  },
+  "quickbooks/item_get": {
+    "hash": "9ebea997328cd796f65110efa10fadbf4d60e4bc7b0a566909797385ae083cd0",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Item: Get",
+    "description": "Fetch a QuickBooks Online item by ID. Returns the item object.",
+    "website": "https://www.flomation.co",
+    "icon": "quickbooks+eye",
+    "date": "05/07/2026",
+    "type": 2,
+    "category": {
+      "name": "QuickBooks Online",
+      "icon": "quickbooks",
+      "description": "Manage customers, invoices, bills, payments and the ledger in QuickBooks Online"
+    },
+    "inputs": [
+      {
+        "name": "credential",
+        "type": "credential",
+        "value": null,
+        "label": "QuickBooks Connection",
+        "placeholder": "${credentials.MyQBO}",
+        "required": true
+      },
+      {
+        "name": "company",
+        "type": "string",
+        "value": null,
+        "label": "Company (Realm ID)",
+        "placeholder": "${credentials.MyQBO.realm_id}",
+        "required": true
+      },
+      {
+        "name": "sandbox",
+        "type": "boolean",
+        "value": null,
+        "label": "Use Sandbox",
+        "placeholder": ""
+      },
+      {
+        "name": "item_id",
+        "type": "string",
+        "value": null,
+        "label": "Item ID",
+        "placeholder": "19",
+        "required": true
+      }
+    ],
+    "outputs": null
+  },
+  "quickbooks/item_query": {
+    "hash": "5e4aa02c5e5677f9ef2ce61761a5c28940083a5fb66cbd36f7a0750416c019e6",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Item: Query",
+    "description": "Query QuickBooks Online items with an optional SQL-like statement. Returns matching items.",
+    "website": "https://www.flomation.co",
+    "icon": "quickbooks+magnifying-glass",
+    "date": "05/07/2026",
+    "type": 2,
+    "category": {
+      "name": "QuickBooks Online",
+      "icon": "quickbooks",
+      "description": "Manage customers, invoices, bills, payments and the ledger in QuickBooks Online"
+    },
+    "inputs": [
+      {
+        "name": "credential",
+        "type": "credential",
+        "value": null,
+        "label": "QuickBooks Connection",
+        "placeholder": "${credentials.MyQBO}",
+        "required": true
+      },
+      {
+        "name": "company",
+        "type": "string",
+        "value": null,
+        "label": "Company (Realm ID)",
+        "placeholder": "${credentials.MyQBO.realm_id}",
+        "required": true
+      },
+      {
+        "name": "sandbox",
+        "type": "boolean",
+        "value": null,
+        "label": "Use Sandbox",
+        "placeholder": ""
+      },
+      {
+        "name": "query",
+        "type": "string",
+        "value": null,
+        "label": "Query (SQL)",
+        "placeholder": "select * from Item where Type = 'Service'"
+      }
+    ],
+    "outputs": null
+  },
+  "quickbooks/journalentry_create": {
+    "hash": "153f0ccffc787e1354b5f147da34043243eb84de3abdd3b79c5258931c71f807",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Journal Entry: Create",
+    "description": "Create a QuickBooks Online journal entry from debit/credit lines. Returns the entry ID and object.",
+    "website": "https://www.flomation.co",
+    "icon": "quickbooks+plus",
+    "date": "05/07/2026",
+    "type": 2,
+    "category": {
+      "name": "QuickBooks Online",
+      "icon": "quickbooks",
+      "description": "Manage customers, invoices, bills, payments and the ledger in QuickBooks Online"
+    },
+    "inputs": [
+      {
+        "name": "credential",
+        "type": "credential",
+        "value": null,
+        "label": "QuickBooks Connection",
+        "placeholder": "${credentials.MyQBO}",
+        "required": true
+      },
+      {
+        "name": "company",
+        "type": "string",
+        "value": null,
+        "label": "Company (Realm ID)",
+        "placeholder": "${credentials.MyQBO.realm_id}",
+        "required": true
+      },
+      {
+        "name": "sandbox",
+        "type": "boolean",
+        "value": null,
+        "label": "Use Sandbox",
+        "placeholder": ""
+      },
+      {
+        "name": "line_items",
+        "type": "text",
+        "value": null,
+        "label": "Lines (JSON array)",
+        "placeholder": "[{\"Amount\":100.0,\"DetailType\":\"JournalEntryLineDetail\",\"JournalEntryLineDetail\":{\"PostingType\":\"Debit\",\"AccountRef\":{\"value\":\"1\"}}}]",
+        "required": true
+      },
+      {
+        "name": "txn_date",
+        "type": "string",
+        "value": null,
+        "label": "Transaction Date",
+        "placeholder": "2026-07-05"
+      },
+      {
+        "name": "doc_number",
+        "type": "string",
+        "value": null,
+        "label": "Document Number",
+        "placeholder": ""
+      },
+      {
+        "name": "private_note",
+        "type": "string",
+        "value": null,
+        "label": "Private Note (Memo)",
+        "placeholder": ""
+      },
+      {
+        "name": "fields",
+        "type": "text",
+        "value": null,
+        "label": "Advanced Fields (JSON)",
+        "placeholder": "{\"CurrencyRef\":{\"value\":\"GBP\"}}"
+      }
+    ],
+    "outputs": null
+  },
+  "quickbooks/journalentry_get": {
+    "hash": "cc88187213a2ab5229f87f17eb0abcf3036c8d6aa6ec64d4927378b9442f4433",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Journal Entry: Get",
+    "description": "Fetch a QuickBooks Online journal entry by ID. Returns the entry object.",
+    "website": "https://www.flomation.co",
+    "icon": "quickbooks+eye",
+    "date": "05/07/2026",
+    "type": 2,
+    "category": {
+      "name": "QuickBooks Online",
+      "icon": "quickbooks",
+      "description": "Manage customers, invoices, bills, payments and the ledger in QuickBooks Online"
+    },
+    "inputs": [
+      {
+        "name": "credential",
+        "type": "credential",
+        "value": null,
+        "label": "QuickBooks Connection",
+        "placeholder": "${credentials.MyQBO}",
+        "required": true
+      },
+      {
+        "name": "company",
+        "type": "string",
+        "value": null,
+        "label": "Company (Realm ID)",
+        "placeholder": "${credentials.MyQBO.realm_id}",
+        "required": true
+      },
+      {
+        "name": "sandbox",
+        "type": "boolean",
+        "value": null,
+        "label": "Use Sandbox",
+        "placeholder": ""
+      },
+      {
+        "name": "journal_entry_id",
+        "type": "string",
+        "value": null,
+        "label": "Journal Entry ID",
+        "placeholder": "145",
+        "required": true
+      }
+    ],
+    "outputs": null
+  },
+  "quickbooks/journalentry_query": {
+    "hash": "273b5a86b4ebb9f421fcf45e70a1e8bb4ebc1c5cfc4232cc89100d681e8396af",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Journal Entry: Query",
+    "description": "Query QuickBooks Online journal entries. Supply a WHERE clause or a full SQL query.",
+    "website": "https://www.flomation.co",
+    "icon": "quickbooks+magnifying-glass",
+    "date": "05/07/2026",
+    "type": 2,
+    "category": {
+      "name": "QuickBooks Online",
+      "icon": "quickbooks",
+      "description": "Manage customers, invoices, bills, payments and the ledger in QuickBooks Online"
+    },
+    "inputs": [
+      {
+        "name": "credential",
+        "type": "credential",
+        "value": null,
+        "label": "QuickBooks Connection",
+        "placeholder": "${credentials.MyQBO}",
+        "required": true
+      },
+      {
+        "name": "company",
+        "type": "string",
+        "value": null,
+        "label": "Company (Realm ID)",
+        "placeholder": "${credentials.MyQBO.realm_id}",
+        "required": true
+      },
+      {
+        "name": "sandbox",
+        "type": "boolean",
+        "value": null,
+        "label": "Use Sandbox",
+        "placeholder": ""
+      },
+      {
+        "name": "where",
+        "type": "string",
+        "value": null,
+        "label": "WHERE Clause",
+        "placeholder": "TxnDate \u003e '2026-01-01'"
+      },
+      {
+        "name": "max_results",
+        "type": "string",
+        "value": null,
+        "label": "Max Results",
+        "placeholder": "100"
+      },
+      {
+        "name": "query",
+        "type": "text",
+        "value": null,
+        "label": "Full SQL Query (overrides WHERE)",
+        "placeholder": "select * from JournalEntry"
+      }
+    ],
+    "outputs": null
+  },
+  "quickbooks/payment_create": {
+    "hash": "6930f56992bb6665b8d50d53870edfb5b01babdcae60fc052f22756ef05b1a2f",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Payment: Create",
+    "description": "Record a QuickBooks Online customer payment. Returns the payment ID and object.",
+    "website": "https://www.flomation.co",
+    "icon": "quickbooks+plus",
+    "date": "05/07/2026",
+    "type": 2,
+    "category": {
+      "name": "QuickBooks Online",
+      "icon": "quickbooks",
+      "description": "Manage customers, invoices, bills, payments and the ledger in QuickBooks Online"
+    },
+    "inputs": [
+      {
+        "name": "credential",
+        "type": "credential",
+        "value": null,
+        "label": "QuickBooks Connection",
+        "placeholder": "${credentials.MyQBO}",
+        "required": true
+      },
+      {
+        "name": "company",
+        "type": "string",
+        "value": null,
+        "label": "Company (Realm ID)",
+        "placeholder": "${credentials.MyQBO.realm_id}",
+        "required": true
+      },
+      {
+        "name": "sandbox",
+        "type": "boolean",
+        "value": null,
+        "label": "Use Sandbox",
+        "placeholder": ""
+      },
+      {
+        "name": "customer_id",
+        "type": "string",
+        "value": null,
+        "label": "Customer ID",
+        "placeholder": "21",
+        "required": true
+      },
+      {
+        "name": "total_amount",
+        "type": "money",
+        "value": null,
+        "label": "Total Amount",
+        "placeholder": "100.00",
+        "required": true
+      },
+      {
+        "name": "line_items",
+        "type": "text",
+        "value": null,
+        "label": "Line Items (JSON array)",
+        "placeholder": "[{\"Amount\":100.00,\"LinkedTxn\":[{\"TxnId\":\"96\",\"TxnType\":\"Invoice\"}]}]"
+      },
+      {
+        "name": "txn_date",
+        "type": "string",
+        "value": null,
+        "label": "Transaction Date",
+        "placeholder": "2026-07-05"
+      },
+      {
+        "name": "fields",
+        "type": "text",
+        "value": null,
+        "label": "Advanced Fields (JSON)",
+        "placeholder": "{\"PrivateNote\":\"...\"}"
+      }
+    ],
+    "outputs": null
+  },
+  "quickbooks/payment_get": {
+    "hash": "4532099d23dc25c0557e628180ea0573dcce30b461abd16ff1f9b2a167074c73",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Payment: Get",
+    "description": "Fetch a QuickBooks Online customer payment by ID. Returns the payment object.",
+    "website": "https://www.flomation.co",
+    "icon": "quickbooks+eye",
+    "date": "05/07/2026",
+    "type": 2,
+    "category": {
+      "name": "QuickBooks Online",
+      "icon": "quickbooks",
+      "description": "Manage customers, invoices, bills, payments and the ledger in QuickBooks Online"
+    },
+    "inputs": [
+      {
+        "name": "credential",
+        "type": "credential",
+        "value": null,
+        "label": "QuickBooks Connection",
+        "placeholder": "${credentials.MyQBO}",
+        "required": true
+      },
+      {
+        "name": "company",
+        "type": "string",
+        "value": null,
+        "label": "Company (Realm ID)",
+        "placeholder": "${credentials.MyQBO.realm_id}",
+        "required": true
+      },
+      {
+        "name": "sandbox",
+        "type": "boolean",
+        "value": null,
+        "label": "Use Sandbox",
+        "placeholder": ""
+      },
+      {
+        "name": "payment_id",
+        "type": "string",
+        "value": null,
+        "label": "Payment ID",
+        "placeholder": "108",
+        "required": true
+      }
+    ],
+    "outputs": null
+  },
+  "quickbooks/payment_query": {
+    "hash": "65d860e6584d5996c5002f9aaaa8e91c5b15830d0fa0cb232427e88cd1b95671",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Payment: Query",
+    "description": "Query QuickBooks Online customer payments with an optional SQL-like statement.",
+    "website": "https://www.flomation.co",
+    "icon": "quickbooks+magnifying-glass",
+    "date": "05/07/2026",
+    "type": 2,
+    "category": {
+      "name": "QuickBooks Online",
+      "icon": "quickbooks",
+      "description": "Manage customers, invoices, bills, payments and the ledger in QuickBooks Online"
+    },
+    "inputs": [
+      {
+        "name": "credential",
+        "type": "credential",
+        "value": null,
+        "label": "QuickBooks Connection",
+        "placeholder": "${credentials.MyQBO}",
+        "required": true
+      },
+      {
+        "name": "company",
+        "type": "string",
+        "value": null,
+        "label": "Company (Realm ID)",
+        "placeholder": "${credentials.MyQBO.realm_id}",
+        "required": true
+      },
+      {
+        "name": "sandbox",
+        "type": "boolean",
+        "value": null,
+        "label": "Use Sandbox",
+        "placeholder": ""
+      },
+      {
+        "name": "query",
+        "type": "string",
+        "value": null,
+        "label": "Query (SQL)",
+        "placeholder": "select * from Payment where CustomerRef = '21'"
+      }
+    ],
+    "outputs": null
+  },
+  "quickbooks/purchaseorder_create": {
+    "hash": "306a1090544221e3693fbdb6c85fdfdc241e05a9cd30f2bb446aa868e8791724",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Purchase Order: Create",
+    "description": "Create a QuickBooks Online purchase order for a vendor with line items. Returns the purchase order ID and object.",
+    "website": "https://www.flomation.co",
+    "icon": "quickbooks+plus",
+    "date": "05/07/2026",
+    "type": 2,
+    "category": {
+      "name": "QuickBooks Online",
+      "icon": "quickbooks",
+      "description": "Manage customers, invoices, bills, payments and the ledger in QuickBooks Online"
+    },
+    "inputs": [
+      {
+        "name": "credential",
+        "type": "credential",
+        "value": null,
+        "label": "QuickBooks Connection",
+        "placeholder": "${credentials.MyQBO}",
+        "required": true
+      },
+      {
+        "name": "company",
+        "type": "string",
+        "value": null,
+        "label": "Company (Realm ID)",
+        "placeholder": "${credentials.MyQBO.realm_id}",
+        "required": true
+      },
+      {
+        "name": "sandbox",
+        "type": "boolean",
+        "value": null,
+        "label": "Use Sandbox",
+        "placeholder": ""
+      },
+      {
+        "name": "vendor_id",
+        "type": "string",
+        "value": null,
+        "label": "Vendor ID",
+        "placeholder": "56",
+        "required": true
+      },
+      {
+        "name": "ap_account_id",
+        "type": "string",
+        "value": null,
+        "label": "AP Account ID",
+        "placeholder": "33",
+        "required": true
+      },
+      {
+        "name": "line_items",
+        "type": "text",
+        "value": null,
+        "label": "Line Items (JSON array)",
+        "placeholder": "[{\"Amount\":100.0,\"DetailType\":\"ItemBasedExpenseLineDetail\",\"ItemBasedExpenseLineDetail\":{\"ItemRef\":{\"value\":\"1\"}}}]",
+        "required": true
+      },
+      {
+        "name": "txn_date",
+        "type": "string",
+        "value": null,
+        "label": "Transaction Date",
+        "placeholder": "2026-07-05"
+      },
+      {
+        "name": "doc_number",
+        "type": "string",
+        "value": null,
+        "label": "Document Number",
+        "placeholder": "PO-1001"
+      },
+      {
+        "name": "fields",
+        "type": "text",
+        "value": null,
+        "label": "Advanced Fields (JSON)",
+        "placeholder": "{\"ShipAddr\":{\"Line1\":\"...\"}}"
+      }
+    ],
+    "outputs": null
+  },
+  "quickbooks/purchaseorder_get": {
+    "hash": "77ae2b84b1d88abecccd0acc26d484815ac3864cb8d8f2113b685344476c75cb",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Purchase Order: Get",
+    "description": "Fetch a QuickBooks Online purchase order by ID. Returns the purchase order object.",
+    "website": "https://www.flomation.co",
+    "icon": "quickbooks+eye",
+    "date": "05/07/2026",
+    "type": 2,
+    "category": {
+      "name": "QuickBooks Online",
+      "icon": "quickbooks",
+      "description": "Manage customers, invoices, bills, payments and the ledger in QuickBooks Online"
+    },
+    "inputs": [
+      {
+        "name": "credential",
+        "type": "credential",
+        "value": null,
+        "label": "QuickBooks Connection",
+        "placeholder": "${credentials.MyQBO}",
+        "required": true
+      },
+      {
+        "name": "company",
+        "type": "string",
+        "value": null,
+        "label": "Company (Realm ID)",
+        "placeholder": "${credentials.MyQBO.realm_id}",
+        "required": true
+      },
+      {
+        "name": "sandbox",
+        "type": "boolean",
+        "value": null,
+        "label": "Use Sandbox",
+        "placeholder": ""
+      },
+      {
+        "name": "purchase_order_id",
+        "type": "string",
+        "value": null,
+        "label": "Purchase Order ID",
+        "placeholder": "78",
+        "required": true
+      }
+    ],
+    "outputs": null
+  },
+  "quickbooks/purchaseorder_query": {
+    "hash": "d474c30254f7bf06e71cfe4af9d9acb7240d487a4cc7c8c366c6b50b971cb1f9",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Purchase Order: Query",
+    "description": "Query QuickBooks Online purchase orders with SQL-like syntax. Returns matching purchase order rows.",
+    "website": "https://www.flomation.co",
+    "icon": "quickbooks+magnifying-glass",
+    "date": "05/07/2026",
+    "type": 2,
+    "category": {
+      "name": "QuickBooks Online",
+      "icon": "quickbooks",
+      "description": "Manage customers, invoices, bills, payments and the ledger in QuickBooks Online"
+    },
+    "inputs": [
+      {
+        "name": "credential",
+        "type": "credential",
+        "value": null,
+        "label": "QuickBooks Connection",
+        "placeholder": "${credentials.MyQBO}",
+        "required": true
+      },
+      {
+        "name": "company",
+        "type": "string",
+        "value": null,
+        "label": "Company (Realm ID)",
+        "placeholder": "${credentials.MyQBO.realm_id}",
+        "required": true
+      },
+      {
+        "name": "sandbox",
+        "type": "boolean",
+        "value": null,
+        "label": "Use Sandbox",
+        "placeholder": ""
+      },
+      {
+        "name": "query",
+        "type": "string",
+        "value": null,
+        "label": "Query (SQL)",
+        "placeholder": "select * from PurchaseOrder where VendorRef = '56'"
+      },
+      {
+        "name": "where",
+        "type": "string",
+        "value": null,
+        "label": "Where Clause",
+        "placeholder": "VendorRef = '56'"
+      },
+      {
+        "name": "max_results",
+        "type": "string",
+        "value": null,
+        "label": "Max Results",
+        "placeholder": "100"
+      }
+    ],
+    "outputs": null
+  },
+  "quickbooks/query": {
+    "hash": "7aa3b786793a37d0138efd96722415e0e75e8eaa1db522139b5d24ac1a512295",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Query",
+    "description": "Run a raw QuickBooks Online SQL query against any entity. Returns the whole QueryResponse.",
+    "website": "https://www.flomation.co",
+    "icon": "quickbooks+magnifying-glass",
+    "date": "05/07/2026",
+    "type": 2,
+    "category": {
+      "name": "QuickBooks Online",
+      "icon": "quickbooks",
+      "description": "Manage customers, invoices, bills, payments and the ledger in QuickBooks Online"
+    },
+    "inputs": [
+      {
+        "name": "credential",
+        "type": "credential",
+        "value": null,
+        "label": "QuickBooks Connection",
+        "placeholder": "${credentials.MyQBO}",
+        "required": true
+      },
+      {
+        "name": "company",
+        "type": "string",
+        "value": null,
+        "label": "Company (Realm ID)",
+        "placeholder": "${credentials.MyQBO.realm_id}",
+        "required": true
+      },
+      {
+        "name": "sandbox",
+        "type": "boolean",
+        "value": null,
+        "label": "Use Sandbox",
+        "placeholder": ""
+      },
+      {
+        "name": "query",
+        "type": "text",
+        "value": null,
+        "label": "SQL Query",
+        "placeholder": "select * from Invoice where TotalAmt \u003e '100'",
+        "required": true
+      }
+    ],
+    "outputs": null
+  },
+  "quickbooks/report": {
+    "hash": "f166ce3e4e436b0cb845c3185ae27276e1af6149f8086dcd9970dfe7fe8fd2af",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Report",
+    "description": "Fetch a QuickBooks Online report (e.g. ProfitAndLoss, BalanceSheet) with an optional date range.",
+    "website": "https://www.flomation.co",
+    "icon": "quickbooks+chart-line",
+    "date": "05/07/2026",
+    "type": 2,
+    "category": {
+      "name": "QuickBooks Online",
+      "icon": "quickbooks",
+      "description": "Manage customers, invoices, bills, payments and the ledger in QuickBooks Online"
+    },
+    "inputs": [
+      {
+        "name": "credential",
+        "type": "credential",
+        "value": null,
+        "label": "QuickBooks Connection",
+        "placeholder": "${credentials.MyQBO}",
+        "required": true
+      },
+      {
+        "name": "company",
+        "type": "string",
+        "value": null,
+        "label": "Company (Realm ID)",
+        "placeholder": "${credentials.MyQBO.realm_id}",
+        "required": true
+      },
+      {
+        "name": "sandbox",
+        "type": "boolean",
+        "value": null,
+        "label": "Use Sandbox",
+        "placeholder": ""
+      },
+      {
+        "name": "report_name",
+        "type": "string",
+        "value": null,
+        "label": "Report Name",
+        "placeholder": "ProfitAndLoss",
+        "required": true
+      },
+      {
+        "name": "start_date",
+        "type": "string",
+        "value": null,
+        "label": "Start Date",
+        "placeholder": "2026-01-01"
+      },
+      {
+        "name": "end_date",
+        "type": "string",
+        "value": null,
+        "label": "End Date",
+        "placeholder": "2026-12-31"
+      }
+    ],
+    "outputs": null
+  },
+  "quickbooks/salesreceipt_create": {
+    "hash": "f0b67888888fa32bc05048850f5187185712443c6d7b63783b7d36a9f7a9b09f",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Sales Receipt: Create",
+    "description": "Create a QuickBooks Online sales receipt for a customer with line items. Returns the sales receipt ID and object.",
+    "website": "https://www.flomation.co",
+    "icon": "quickbooks+plus",
+    "date": "05/07/2026",
+    "type": 2,
+    "category": {
+      "name": "QuickBooks Online",
+      "icon": "quickbooks",
+      "description": "Manage customers, invoices, bills, payments and the ledger in QuickBooks Online"
+    },
+    "inputs": [
+      {
+        "name": "credential",
+        "type": "credential",
+        "value": null,
+        "label": "QuickBooks Connection",
+        "placeholder": "${credentials.MyQBO}",
+        "required": true
+      },
+      {
+        "name": "company",
+        "type": "string",
+        "value": null,
+        "label": "Company (Realm ID)",
+        "placeholder": "${credentials.MyQBO.realm_id}",
+        "required": true
+      },
+      {
+        "name": "sandbox",
+        "type": "boolean",
+        "value": null,
+        "label": "Use Sandbox",
+        "placeholder": ""
+      },
+      {
+        "name": "customer_id",
+        "type": "string",
+        "value": null,
+        "label": "Customer ID",
+        "placeholder": "42",
+        "required": true
+      },
+      {
+        "name": "line_items",
+        "type": "text",
+        "value": null,
+        "label": "Line Items (JSON array)",
+        "placeholder": "[{\"Amount\":100.0,\"DetailType\":\"SalesItemLineDetail\",\"SalesItemLineDetail\":{\"ItemRef\":{\"value\":\"1\"}}}]",
+        "required": true
+      },
+      {
+        "name": "txn_date",
+        "type": "string",
+        "value": null,
+        "label": "Transaction Date",
+        "placeholder": "2026-07-05"
+      },
+      {
+        "name": "doc_number",
+        "type": "string",
+        "value": null,
+        "label": "Document Number",
+        "placeholder": "SR-1001"
+      },
+      {
+        "name": "fields",
+        "type": "text",
+        "value": null,
+        "label": "Advanced Fields (JSON)",
+        "placeholder": "{\"BillEmail\":{\"Address\":\"...\"}}"
+      }
+    ],
+    "outputs": null
+  },
+  "quickbooks/salesreceipt_get": {
+    "hash": "c826cd3d5b5f1ea65e88328ac837bc7f4f164474e8df26cb5057b082ddb413fe",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Sales Receipt: Get",
+    "description": "Fetch a QuickBooks Online sales receipt by ID. Returns the sales receipt object.",
+    "website": "https://www.flomation.co",
+    "icon": "quickbooks+eye",
+    "date": "05/07/2026",
+    "type": 2,
+    "category": {
+      "name": "QuickBooks Online",
+      "icon": "quickbooks",
+      "description": "Manage customers, invoices, bills, payments and the ledger in QuickBooks Online"
+    },
+    "inputs": [
+      {
+        "name": "credential",
+        "type": "credential",
+        "value": null,
+        "label": "QuickBooks Connection",
+        "placeholder": "${credentials.MyQBO}",
+        "required": true
+      },
+      {
+        "name": "company",
+        "type": "string",
+        "value": null,
+        "label": "Company (Realm ID)",
+        "placeholder": "${credentials.MyQBO.realm_id}",
+        "required": true
+      },
+      {
+        "name": "sandbox",
+        "type": "boolean",
+        "value": null,
+        "label": "Use Sandbox",
+        "placeholder": ""
+      },
+      {
+        "name": "sales_receipt_id",
+        "type": "string",
+        "value": null,
+        "label": "Sales Receipt ID",
+        "placeholder": "312",
+        "required": true
+      }
+    ],
+    "outputs": null
+  },
+  "quickbooks/salesreceipt_query": {
+    "hash": "8f0504796ba41b409ebe7dfc743a178e4044cbef4e73333d55064e92fe1344a6",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Sales Receipt: Query",
+    "description": "Query QuickBooks Online sales receipts with SQL-like syntax. Returns matching sales receipt rows.",
+    "website": "https://www.flomation.co",
+    "icon": "quickbooks+magnifying-glass",
+    "date": "05/07/2026",
+    "type": 2,
+    "category": {
+      "name": "QuickBooks Online",
+      "icon": "quickbooks",
+      "description": "Manage customers, invoices, bills, payments and the ledger in QuickBooks Online"
+    },
+    "inputs": [
+      {
+        "name": "credential",
+        "type": "credential",
+        "value": null,
+        "label": "QuickBooks Connection",
+        "placeholder": "${credentials.MyQBO}",
+        "required": true
+      },
+      {
+        "name": "company",
+        "type": "string",
+        "value": null,
+        "label": "Company (Realm ID)",
+        "placeholder": "${credentials.MyQBO.realm_id}",
+        "required": true
+      },
+      {
+        "name": "sandbox",
+        "type": "boolean",
+        "value": null,
+        "label": "Use Sandbox",
+        "placeholder": ""
+      },
+      {
+        "name": "query",
+        "type": "string",
+        "value": null,
+        "label": "Query (SQL)",
+        "placeholder": "select * from SalesReceipt where CustomerRef = '42'"
+      },
+      {
+        "name": "where",
+        "type": "string",
+        "value": null,
+        "label": "Where Clause",
+        "placeholder": "CustomerRef = '42'"
+      },
+      {
+        "name": "max_results",
+        "type": "string",
+        "value": null,
+        "label": "Max Results",
+        "placeholder": "100"
+      }
+    ],
+    "outputs": null
+  },
+  "quickbooks/taxcode_get": {
+    "hash": "fa2ee5747c8ac8ec22f2c9bb587bf3f8468c37999caebfb3baec9b50fab17ad4",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Tax Code: Get",
+    "description": "Fetch a QuickBooks Online tax code by ID. Returns the tax code object.",
+    "website": "https://www.flomation.co",
+    "icon": "quickbooks+eye",
+    "date": "05/07/2026",
+    "type": 2,
+    "category": {
+      "name": "QuickBooks Online",
+      "icon": "quickbooks",
+      "description": "Manage customers, invoices, bills, payments and the ledger in QuickBooks Online"
+    },
+    "inputs": [
+      {
+        "name": "credential",
+        "type": "credential",
+        "value": null,
+        "label": "QuickBooks Connection",
+        "placeholder": "${credentials.MyQBO}",
+        "required": true
+      },
+      {
+        "name": "company",
+        "type": "string",
+        "value": null,
+        "label": "Company (Realm ID)",
+        "placeholder": "${credentials.MyQBO.realm_id}",
+        "required": true
+      },
+      {
+        "name": "sandbox",
+        "type": "boolean",
+        "value": null,
+        "label": "Use Sandbox",
+        "placeholder": ""
+      },
+      {
+        "name": "tax_code_id",
+        "type": "string",
+        "value": null,
+        "label": "Tax Code ID",
+        "placeholder": "3",
+        "required": true
+      }
+    ],
+    "outputs": null
+  },
+  "quickbooks/taxcode_query": {
+    "hash": "a5d27d067196488fef03053b10fb24e6e8d7d53c07917cbaf4a9a91c369b7a05",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Tax Code: Query",
+    "description": "Query QuickBooks Online tax codes. Supply a WHERE clause or a full SQL query.",
+    "website": "https://www.flomation.co",
+    "icon": "quickbooks+magnifying-glass",
+    "date": "05/07/2026",
+    "type": 2,
+    "category": {
+      "name": "QuickBooks Online",
+      "icon": "quickbooks",
+      "description": "Manage customers, invoices, bills, payments and the ledger in QuickBooks Online"
+    },
+    "inputs": [
+      {
+        "name": "credential",
+        "type": "credential",
+        "value": null,
+        "label": "QuickBooks Connection",
+        "placeholder": "${credentials.MyQBO}",
+        "required": true
+      },
+      {
+        "name": "company",
+        "type": "string",
+        "value": null,
+        "label": "Company (Realm ID)",
+        "placeholder": "${credentials.MyQBO.realm_id}",
+        "required": true
+      },
+      {
+        "name": "sandbox",
+        "type": "boolean",
+        "value": null,
+        "label": "Use Sandbox",
+        "placeholder": ""
+      },
+      {
+        "name": "where",
+        "type": "string",
+        "value": null,
+        "label": "WHERE Clause",
+        "placeholder": "Active = true"
+      },
+      {
+        "name": "max_results",
+        "type": "string",
+        "value": null,
+        "label": "Max Results",
+        "placeholder": "100"
+      },
+      {
+        "name": "query",
+        "type": "text",
+        "value": null,
+        "label": "Full SQL Query (overrides WHERE)",
+        "placeholder": "select * from TaxCode"
+      }
+    ],
+    "outputs": null
+  },
+  "quickbooks/vendor_create": {
+    "hash": "86c2084e81ba844b23ab3fed555daff586fff76e16ea1dc0993a4b4e496b01bf",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Vendor: Create",
+    "description": "Create a QuickBooks Online vendor. Returns the vendor ID and object.",
+    "website": "https://www.flomation.co",
+    "icon": "quickbooks+plus",
+    "date": "05/07/2026",
+    "type": 2,
+    "category": {
+      "name": "QuickBooks Online",
+      "icon": "quickbooks",
+      "description": "Manage customers, invoices, bills, payments and the ledger in QuickBooks Online"
+    },
+    "inputs": [
+      {
+        "name": "credential",
+        "type": "credential",
+        "value": null,
+        "label": "QuickBooks Connection",
+        "placeholder": "${credentials.MyQBO}",
+        "required": true
+      },
+      {
+        "name": "company",
+        "type": "string",
+        "value": null,
+        "label": "Company (Realm ID)",
+        "placeholder": "${credentials.MyQBO.realm_id}",
+        "required": true
+      },
+      {
+        "name": "sandbox",
+        "type": "boolean",
+        "value": null,
+        "label": "Use Sandbox",
+        "placeholder": ""
+      },
+      {
+        "name": "display_name",
+        "type": "string",
+        "value": null,
+        "label": "Display Name",
+        "placeholder": "Acme Supplies Ltd",
+        "required": true
+      },
+      {
+        "name": "company_name",
+        "type": "string",
+        "value": null,
+        "label": "Company Name",
+        "placeholder": ""
+      },
+      {
+        "name": "email",
+        "type": "string",
+        "value": null,
+        "label": "Email",
+        "placeholder": "accounts@acme.com"
+      },
+      {
+        "name": "phone",
+        "type": "string",
+        "value": null,
+        "label": "Phone",
+        "placeholder": ""
+      },
+      {
+        "name": "fields",
+        "type": "text",
+        "value": null,
+        "label": "Advanced Fields (JSON)",
+        "placeholder": "{\"BillAddr\":{\"Line1\":\"...\",\"City\":\"...\"}}"
+      }
+    ],
+    "outputs": null
+  },
+  "quickbooks/vendor_get": {
+    "hash": "8e6f3fc716db23939bd032b7e8bbd0fd55d4fc60136a7b853b87dfc96b907535",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Vendor: Get",
+    "description": "Fetch a QuickBooks Online vendor by ID. Returns the vendor object.",
+    "website": "https://www.flomation.co",
+    "icon": "quickbooks+eye",
+    "date": "05/07/2026",
+    "type": 2,
+    "category": {
+      "name": "QuickBooks Online",
+      "icon": "quickbooks",
+      "description": "Manage customers, invoices, bills, payments and the ledger in QuickBooks Online"
+    },
+    "inputs": [
+      {
+        "name": "credential",
+        "type": "credential",
+        "value": null,
+        "label": "QuickBooks Connection",
+        "placeholder": "${credentials.MyQBO}",
+        "required": true
+      },
+      {
+        "name": "company",
+        "type": "string",
+        "value": null,
+        "label": "Company (Realm ID)",
+        "placeholder": "${credentials.MyQBO.realm_id}",
+        "required": true
+      },
+      {
+        "name": "sandbox",
+        "type": "boolean",
+        "value": null,
+        "label": "Use Sandbox",
+        "placeholder": ""
+      },
+      {
+        "name": "vendor_id",
+        "type": "string",
+        "value": null,
+        "label": "Vendor ID",
+        "placeholder": "56",
+        "required": true
+      }
+    ],
+    "outputs": null
+  },
+  "quickbooks/vendor_query": {
+    "hash": "844116d6010eb33d62e767ce4bec74d9d4e54dbe454c044f1ba2c4276da4f73a",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Vendor: Query",
+    "description": "Query QuickBooks Online vendors with SQL-like syntax. Returns matching rows.",
+    "website": "https://www.flomation.co",
+    "icon": "quickbooks+magnifying-glass",
+    "date": "05/07/2026",
+    "type": 2,
+    "category": {
+      "name": "QuickBooks Online",
+      "icon": "quickbooks",
+      "description": "Manage customers, invoices, bills, payments and the ledger in QuickBooks Online"
+    },
+    "inputs": [
+      {
+        "name": "credential",
+        "type": "credential",
+        "value": null,
+        "label": "QuickBooks Connection",
+        "placeholder": "${credentials.MyQBO}",
+        "required": true
+      },
+      {
+        "name": "company",
+        "type": "string",
+        "value": null,
+        "label": "Company (Realm ID)",
+        "placeholder": "${credentials.MyQBO.realm_id}",
+        "required": true
+      },
+      {
+        "name": "sandbox",
+        "type": "boolean",
+        "value": null,
+        "label": "Use Sandbox",
+        "placeholder": ""
+      },
+      {
+        "name": "query",
+        "type": "string",
+        "value": null,
+        "label": "Query (SQL)",
+        "placeholder": "select * from Vendor where Active = true"
+      }
+    ],
+    "outputs": null
+  },
   "scheduling/acuity/appointment_cancel": {
     "hash": "6dde627f25272f04109da6dc2f1b7a3ad8006f99b26d247580b82e6d68fe389d",
     "author": "Dave McElin",
@@ -75898,5 +79321,3065 @@
         "placeholder": ""
       }
     ]
+  },
+  "xero/account_create": {
+    "hash": "828236782c3c60da5e24c30c75fea691e4338dec3391dbfd906fdaf17ed832f7",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Account: Create",
+    "description": "Create a Xero chart-of-accounts account. Returns the account ID and object.",
+    "website": "https://www.flomation.co",
+    "icon": "xero+plus",
+    "date": "05/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Xero",
+      "icon": "xero",
+      "description": "Manage contacts, invoices, bills, payments and the ledger in Xero"
+    },
+    "inputs": [
+      {
+        "name": "credential",
+        "type": "credential",
+        "value": null,
+        "label": "Xero Connection",
+        "placeholder": "${credentials.MyXero}",
+        "required": true
+      },
+      {
+        "name": "tenant",
+        "type": "string",
+        "value": null,
+        "label": "Organisation",
+        "placeholder": "${credentials.MyXero.tenant_id}",
+        "required": true
+      },
+      {
+        "name": "code",
+        "type": "string",
+        "value": null,
+        "label": "Code",
+        "placeholder": "200"
+      },
+      {
+        "name": "name",
+        "type": "string",
+        "value": null,
+        "label": "Name",
+        "placeholder": "Sales"
+      },
+      {
+        "name": "type",
+        "type": "string",
+        "value": null,
+        "label": "Type",
+        "placeholder": "REVENUE",
+        "required": true
+      },
+      {
+        "name": "description",
+        "type": "string",
+        "value": null,
+        "label": "Description",
+        "placeholder": ""
+      },
+      {
+        "name": "fields",
+        "type": "text",
+        "value": null,
+        "label": "Advanced Fields (JSON)",
+        "placeholder": "{\"TaxType\":\"OUTPUT2\"}"
+      }
+    ],
+    "outputs": null
+  },
+  "xero/account_get": {
+    "hash": "cf84b6db9f00147484dc132cddc4dd6521bfbac71a48e8bf6e03fa293f591b9c",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Account: Get",
+    "description": "Fetch a single Xero account by its ID. Returns the account object.",
+    "website": "https://www.flomation.co",
+    "icon": "xero+eye",
+    "date": "05/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Xero",
+      "icon": "xero",
+      "description": "Manage contacts, invoices, bills, payments and the ledger in Xero"
+    },
+    "inputs": [
+      {
+        "name": "credential",
+        "type": "credential",
+        "value": null,
+        "label": "Xero Connection",
+        "placeholder": "${credentials.MyXero}",
+        "required": true
+      },
+      {
+        "name": "tenant",
+        "type": "string",
+        "value": null,
+        "label": "Organisation",
+        "placeholder": "${credentials.MyXero.tenant_id}",
+        "required": true
+      },
+      {
+        "name": "account_id",
+        "type": "string",
+        "value": null,
+        "label": "Account ID",
+        "placeholder": "00000000-0000-0000-0000-000000000000",
+        "required": true
+      }
+    ],
+    "outputs": null
+  },
+  "xero/account_list": {
+    "hash": "bd63bd137e8f7d2247a1f2870eda985652d0d9f48c62666c14b428c8b0a0cce0",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Account: List",
+    "description": "List Xero chart-of-accounts accounts, optionally filtered. Returns matching accounts.",
+    "website": "https://www.flomation.co",
+    "icon": "xero+list",
+    "date": "05/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Xero",
+      "icon": "xero",
+      "description": "Manage contacts, invoices, bills, payments and the ledger in Xero"
+    },
+    "inputs": [
+      {
+        "name": "credential",
+        "type": "credential",
+        "value": null,
+        "label": "Xero Connection",
+        "placeholder": "${credentials.MyXero}",
+        "required": true
+      },
+      {
+        "name": "tenant",
+        "type": "string",
+        "value": null,
+        "label": "Organisation",
+        "placeholder": "${credentials.MyXero.tenant_id}",
+        "required": true
+      },
+      {
+        "name": "where",
+        "type": "string",
+        "value": null,
+        "label": "Where Filter",
+        "placeholder": "Type==\"BANK\""
+      },
+      {
+        "name": "order",
+        "type": "string",
+        "value": null,
+        "label": "Order By",
+        "placeholder": "Name"
+      }
+    ],
+    "outputs": null
+  },
+  "xero/account_update": {
+    "hash": "aa2155b7758854f4ec989c32d7cc77d3b53bc35b38ada0fbd2dbb87291db54ef",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Account: Update",
+    "description": "Update an existing Xero account by its ID. Returns the updated account object.",
+    "website": "https://www.flomation.co",
+    "icon": "xero+pencil",
+    "date": "05/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Xero",
+      "icon": "xero",
+      "description": "Manage contacts, invoices, bills, payments and the ledger in Xero"
+    },
+    "inputs": [
+      {
+        "name": "credential",
+        "type": "credential",
+        "value": null,
+        "label": "Xero Connection",
+        "placeholder": "${credentials.MyXero}",
+        "required": true
+      },
+      {
+        "name": "tenant",
+        "type": "string",
+        "value": null,
+        "label": "Organisation",
+        "placeholder": "${credentials.MyXero.tenant_id}",
+        "required": true
+      },
+      {
+        "name": "account_id",
+        "type": "string",
+        "value": null,
+        "label": "Account ID",
+        "placeholder": "00000000-0000-0000-0000-000000000000",
+        "required": true
+      },
+      {
+        "name": "code",
+        "type": "string",
+        "value": null,
+        "label": "Code",
+        "placeholder": "200"
+      },
+      {
+        "name": "name",
+        "type": "string",
+        "value": null,
+        "label": "Name",
+        "placeholder": "Sales"
+      },
+      {
+        "name": "type",
+        "type": "string",
+        "value": null,
+        "label": "Type",
+        "placeholder": "REVENUE"
+      },
+      {
+        "name": "description",
+        "type": "string",
+        "value": null,
+        "label": "Description",
+        "placeholder": ""
+      },
+      {
+        "name": "fields",
+        "type": "text",
+        "value": null,
+        "label": "Advanced Fields (JSON)",
+        "placeholder": "{\"TaxType\":\"OUTPUT2\"}"
+      }
+    ],
+    "outputs": null
+  },
+  "xero/bank_transaction_create": {
+    "hash": "63aac7d2ab800915417c29718abaf5e414e5261b8c7c6f3c03fcd45e7953ca9d",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Bank Transaction: Create",
+    "description": "Create a Xero spend or receive bank transaction. Returns the transaction ID and object.",
+    "website": "https://www.flomation.co",
+    "icon": "xero+plus",
+    "date": "05/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Xero",
+      "icon": "xero",
+      "description": "Manage contacts, invoices, bills, payments and the ledger in Xero"
+    },
+    "inputs": [
+      {
+        "name": "credential",
+        "type": "credential",
+        "value": null,
+        "label": "Xero Connection",
+        "placeholder": "${credentials.MyXero}",
+        "required": true
+      },
+      {
+        "name": "tenant",
+        "type": "string",
+        "value": null,
+        "label": "Organisation",
+        "placeholder": "${credentials.MyXero.tenant_id}",
+        "required": true
+      },
+      {
+        "name": "type",
+        "type": "string",
+        "value": null,
+        "label": "Type",
+        "placeholder": "RECEIVE",
+        "required": true,
+        "options": [
+          {
+            "name": "Receive money (RECEIVE)",
+            "value": "RECEIVE"
+          },
+          {
+            "name": "Spend money (SPEND)",
+            "value": "SPEND"
+          }
+        ]
+      },
+      {
+        "name": "contact_id",
+        "type": "string",
+        "value": null,
+        "label": "Contact ID",
+        "placeholder": "The Xero ContactID",
+        "required": true
+      },
+      {
+        "name": "bank_account_id",
+        "type": "string",
+        "value": null,
+        "label": "Bank Account ID",
+        "placeholder": "The bank AccountID",
+        "required": true
+      },
+      {
+        "name": "date",
+        "type": "string",
+        "value": null,
+        "label": "Date",
+        "placeholder": "2026-07-05"
+      },
+      {
+        "name": "reference",
+        "type": "string",
+        "value": null,
+        "label": "Reference",
+        "placeholder": ""
+      },
+      {
+        "name": "line_amount_types",
+        "type": "string",
+        "value": null,
+        "label": "Line Amount Types",
+        "placeholder": "Inclusive"
+      },
+      {
+        "name": "line_items",
+        "type": "text",
+        "value": null,
+        "label": "Line Items (JSON array)",
+        "placeholder": "[{\"Description\":\"Item\",\"Quantity\":1,\"UnitAmount\":20.00,\"AccountCode\":\"400\"}]"
+      },
+      {
+        "name": "fields",
+        "type": "text",
+        "value": null,
+        "label": "Advanced Fields (JSON)",
+        "placeholder": "{\"IsReconciled\":false}"
+      }
+    ],
+    "outputs": null
+  },
+  "xero/bank_transaction_get": {
+    "hash": "20483399bd13035afc308cada3410aba0f44468ca4e2267c7bee10529aadd3c5",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Bank Transaction: Get",
+    "description": "Fetch a single Xero bank transaction by ID. Returns the transaction object.",
+    "website": "https://www.flomation.co",
+    "icon": "xero+eye",
+    "date": "05/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Xero",
+      "icon": "xero",
+      "description": "Manage contacts, invoices, bills, payments and the ledger in Xero"
+    },
+    "inputs": [
+      {
+        "name": "credential",
+        "type": "credential",
+        "value": null,
+        "label": "Xero Connection",
+        "placeholder": "${credentials.MyXero}",
+        "required": true
+      },
+      {
+        "name": "tenant",
+        "type": "string",
+        "value": null,
+        "label": "Organisation",
+        "placeholder": "${credentials.MyXero.tenant_id}",
+        "required": true
+      },
+      {
+        "name": "bank_transaction_id",
+        "type": "string",
+        "value": null,
+        "label": "Bank Transaction ID",
+        "placeholder": "The Xero BankTransactionID",
+        "required": true
+      }
+    ],
+    "outputs": null
+  },
+  "xero/bank_transaction_list": {
+    "hash": "898dd40739e527137430c25937570bbc81cd347472f5da1bf540e4d44ca1e54b",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Bank Transaction: List",
+    "description": "List Xero bank transactions, optionally filtered with a where clause and paged.",
+    "website": "https://www.flomation.co",
+    "icon": "xero+list",
+    "date": "05/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Xero",
+      "icon": "xero",
+      "description": "Manage contacts, invoices, bills, payments and the ledger in Xero"
+    },
+    "inputs": [
+      {
+        "name": "credential",
+        "type": "credential",
+        "value": null,
+        "label": "Xero Connection",
+        "placeholder": "${credentials.MyXero}",
+        "required": true
+      },
+      {
+        "name": "tenant",
+        "type": "string",
+        "value": null,
+        "label": "Organisation",
+        "placeholder": "${credentials.MyXero.tenant_id}",
+        "required": true
+      },
+      {
+        "name": "where",
+        "type": "string",
+        "value": null,
+        "label": "Where Filter",
+        "placeholder": "Type==\"SPEND\""
+      },
+      {
+        "name": "page",
+        "type": "string",
+        "value": null,
+        "label": "Page",
+        "placeholder": "1"
+      }
+    ],
+    "outputs": null
+  },
+  "xero/bank_transfer_create": {
+    "hash": "3bf8f54f63f80fa652d12450162df8ed34fb246b6cec91403e5b023187525e86",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Bank Transfer: Create",
+    "description": "Transfer money between two Xero bank accounts. Returns the transfer ID and object.",
+    "website": "https://www.flomation.co",
+    "icon": "xero+repeat",
+    "date": "05/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Xero",
+      "icon": "xero",
+      "description": "Manage contacts, invoices, bills, payments and the ledger in Xero"
+    },
+    "inputs": [
+      {
+        "name": "credential",
+        "type": "credential",
+        "value": null,
+        "label": "Xero Connection",
+        "placeholder": "${credentials.MyXero}",
+        "required": true
+      },
+      {
+        "name": "tenant",
+        "type": "string",
+        "value": null,
+        "label": "Organisation",
+        "placeholder": "${credentials.MyXero.tenant_id}",
+        "required": true
+      },
+      {
+        "name": "from_account_id",
+        "type": "string",
+        "value": null,
+        "label": "From Account ID",
+        "placeholder": "The source bank AccountID",
+        "required": true
+      },
+      {
+        "name": "to_account_id",
+        "type": "string",
+        "value": null,
+        "label": "To Account ID",
+        "placeholder": "The destination bank AccountID",
+        "required": true
+      },
+      {
+        "name": "amount",
+        "type": "money",
+        "value": null,
+        "label": "Amount",
+        "placeholder": "100.00",
+        "required": true
+      },
+      {
+        "name": "date",
+        "type": "string",
+        "value": null,
+        "label": "Date",
+        "placeholder": "2026-07-05"
+      },
+      {
+        "name": "fields",
+        "type": "text",
+        "value": null,
+        "label": "Advanced Fields (JSON)",
+        "placeholder": "{\"Reference\":\"Internal transfer\"}"
+      }
+    ],
+    "outputs": null
+  },
+  "xero/bank_transfer_list": {
+    "hash": "7770a91524cd9f5dad53f46bccd0130f70dc4671d59b61fc28223f4f36f957c9",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Bank Transfer: List",
+    "description": "List Xero bank transfers, optionally filtered with a where clause.",
+    "website": "https://www.flomation.co",
+    "icon": "xero+list",
+    "date": "05/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Xero",
+      "icon": "xero",
+      "description": "Manage contacts, invoices, bills, payments and the ledger in Xero"
+    },
+    "inputs": [
+      {
+        "name": "credential",
+        "type": "credential",
+        "value": null,
+        "label": "Xero Connection",
+        "placeholder": "${credentials.MyXero}",
+        "required": true
+      },
+      {
+        "name": "tenant",
+        "type": "string",
+        "value": null,
+        "label": "Organisation",
+        "placeholder": "${credentials.MyXero.tenant_id}",
+        "required": true
+      },
+      {
+        "name": "where",
+        "type": "string",
+        "value": null,
+        "label": "Where Filter",
+        "placeholder": "Amount\u003e=100"
+      },
+      {
+        "name": "page",
+        "type": "string",
+        "value": null,
+        "label": "Page",
+        "placeholder": "1"
+      }
+    ],
+    "outputs": null
+  },
+  "xero/contact_create": {
+    "hash": "0000168ebe3b9ed78338387cbedd05e07dea0dce323222af14cad4241002874c",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Contact: Create",
+    "description": "Create a Xero contact (customer or supplier). Returns the contact ID and object.",
+    "website": "https://www.flomation.co",
+    "icon": "xero+plus",
+    "date": "05/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Xero",
+      "icon": "xero",
+      "description": "Manage contacts, invoices, bills, payments and the ledger in Xero"
+    },
+    "inputs": [
+      {
+        "name": "credential",
+        "type": "credential",
+        "value": null,
+        "label": "Xero Connection",
+        "placeholder": "${credentials.MyXero}",
+        "required": true
+      },
+      {
+        "name": "tenant",
+        "type": "string",
+        "value": null,
+        "label": "Organisation",
+        "placeholder": "${credentials.MyXero.tenant_id}",
+        "required": true
+      },
+      {
+        "name": "name",
+        "type": "string",
+        "value": null,
+        "label": "Name",
+        "placeholder": "Ada Lovelace Ltd",
+        "required": true
+      },
+      {
+        "name": "first_name",
+        "type": "string",
+        "value": null,
+        "label": "First Name",
+        "placeholder": "Ada"
+      },
+      {
+        "name": "last_name",
+        "type": "string",
+        "value": null,
+        "label": "Last Name",
+        "placeholder": "Lovelace"
+      },
+      {
+        "name": "email",
+        "type": "string",
+        "value": null,
+        "label": "Email",
+        "placeholder": "ada@example.com"
+      },
+      {
+        "name": "contact_number",
+        "type": "string",
+        "value": null,
+        "label": "Contact Number",
+        "placeholder": "Your reference for this contact"
+      },
+      {
+        "name": "account_number",
+        "type": "string",
+        "value": null,
+        "label": "Account Number",
+        "placeholder": ""
+      },
+      {
+        "name": "fields",
+        "type": "text",
+        "value": null,
+        "label": "Advanced Fields (JSON)",
+        "placeholder": "{\"Phones\":[{\"PhoneType\":\"DEFAULT\",\"PhoneNumber\":\"...\"}]}"
+      }
+    ],
+    "outputs": null
+  },
+  "xero/contact_get": {
+    "hash": "a82dcf7472c996c40583419a515369fd9e934b89f5cf62b56b35ccf93985624c",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Contact: Get",
+    "description": "Fetch a single Xero contact by its ID. Returns the contact object.",
+    "website": "https://www.flomation.co",
+    "icon": "xero+eye",
+    "date": "05/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Xero",
+      "icon": "xero",
+      "description": "Manage contacts, invoices, bills, payments and the ledger in Xero"
+    },
+    "inputs": [
+      {
+        "name": "credential",
+        "type": "credential",
+        "value": null,
+        "label": "Xero Connection",
+        "placeholder": "${credentials.MyXero}",
+        "required": true
+      },
+      {
+        "name": "tenant",
+        "type": "string",
+        "value": null,
+        "label": "Organisation",
+        "placeholder": "${credentials.MyXero.tenant_id}",
+        "required": true
+      },
+      {
+        "name": "contact_id",
+        "type": "string",
+        "value": null,
+        "label": "Contact ID",
+        "placeholder": "00000000-0000-0000-0000-000000000000",
+        "required": true
+      }
+    ],
+    "outputs": null
+  },
+  "xero/contact_list": {
+    "hash": "9937d3264e22171f4e1baf7e5fc34ce3f9697296c2184d324535ee23e6bc9cb1",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Contact: List",
+    "description": "List Xero contacts with optional filter, search and pagination. Returns matching contacts.",
+    "website": "https://www.flomation.co",
+    "icon": "xero+list",
+    "date": "05/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Xero",
+      "icon": "xero",
+      "description": "Manage contacts, invoices, bills, payments and the ledger in Xero"
+    },
+    "inputs": [
+      {
+        "name": "credential",
+        "type": "credential",
+        "value": null,
+        "label": "Xero Connection",
+        "placeholder": "${credentials.MyXero}",
+        "required": true
+      },
+      {
+        "name": "tenant",
+        "type": "string",
+        "value": null,
+        "label": "Organisation",
+        "placeholder": "${credentials.MyXero.tenant_id}",
+        "required": true
+      },
+      {
+        "name": "where",
+        "type": "string",
+        "value": null,
+        "label": "Filter (where)",
+        "placeholder": "Name.Contains(\"Ltd\")"
+      },
+      {
+        "name": "search_term",
+        "type": "string",
+        "value": null,
+        "label": "Search Term",
+        "placeholder": "Ada"
+      },
+      {
+        "name": "page",
+        "type": "string",
+        "value": null,
+        "label": "Page",
+        "placeholder": "1"
+      }
+    ],
+    "outputs": null
+  },
+  "xero/contact_update": {
+    "hash": "9280954b037ab0adcf91635764aef5c8613b5948380a1433f27274db9e6829ab",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Contact: Update",
+    "description": "Update an existing Xero contact by ID. Returns the updated contact object.",
+    "website": "https://www.flomation.co",
+    "icon": "xero+pencil",
+    "date": "05/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Xero",
+      "icon": "xero",
+      "description": "Manage contacts, invoices, bills, payments and the ledger in Xero"
+    },
+    "inputs": [
+      {
+        "name": "credential",
+        "type": "credential",
+        "value": null,
+        "label": "Xero Connection",
+        "placeholder": "${credentials.MyXero}",
+        "required": true
+      },
+      {
+        "name": "tenant",
+        "type": "string",
+        "value": null,
+        "label": "Organisation",
+        "placeholder": "${credentials.MyXero.tenant_id}",
+        "required": true
+      },
+      {
+        "name": "contact_id",
+        "type": "string",
+        "value": null,
+        "label": "Contact ID",
+        "placeholder": "00000000-0000-0000-0000-000000000000",
+        "required": true
+      },
+      {
+        "name": "name",
+        "type": "string",
+        "value": null,
+        "label": "Name",
+        "placeholder": "Ada Lovelace Ltd"
+      },
+      {
+        "name": "first_name",
+        "type": "string",
+        "value": null,
+        "label": "First Name",
+        "placeholder": "Ada"
+      },
+      {
+        "name": "last_name",
+        "type": "string",
+        "value": null,
+        "label": "Last Name",
+        "placeholder": "Lovelace"
+      },
+      {
+        "name": "email",
+        "type": "string",
+        "value": null,
+        "label": "Email",
+        "placeholder": "ada@example.com"
+      },
+      {
+        "name": "contact_number",
+        "type": "string",
+        "value": null,
+        "label": "Contact Number",
+        "placeholder": "Your reference for this contact"
+      },
+      {
+        "name": "account_number",
+        "type": "string",
+        "value": null,
+        "label": "Account Number",
+        "placeholder": ""
+      },
+      {
+        "name": "fields",
+        "type": "text",
+        "value": null,
+        "label": "Advanced Fields (JSON)",
+        "placeholder": "{\"Phones\":[{\"PhoneType\":\"DEFAULT\",\"PhoneNumber\":\"...\"}]}"
+      }
+    ],
+    "outputs": null
+  },
+  "xero/credit_note_create": {
+    "hash": "30719f715f99e7e2a31c91298db178fddf747508ec70281ab16803601247f77c",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Credit Note: Create",
+    "description": "Create a Xero credit note for a contact. Returns the credit note ID and object.",
+    "website": "https://www.flomation.co",
+    "icon": "xero+plus",
+    "date": "05/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Xero",
+      "icon": "xero",
+      "description": "Manage contacts, invoices, bills, payments and the ledger in Xero"
+    },
+    "inputs": [
+      {
+        "name": "credential",
+        "type": "credential",
+        "value": null,
+        "label": "Xero Connection",
+        "placeholder": "${credentials.MyXero}",
+        "required": true
+      },
+      {
+        "name": "tenant",
+        "type": "string",
+        "value": null,
+        "label": "Organisation",
+        "placeholder": "${credentials.MyXero.tenant_id}",
+        "required": true
+      },
+      {
+        "name": "type",
+        "type": "string",
+        "value": null,
+        "label": "Type",
+        "placeholder": "ACCRECCREDIT",
+        "options": [
+          {
+            "name": "Accounts Receivable Credit (ACCRECCREDIT)",
+            "value": "ACCRECCREDIT"
+          },
+          {
+            "name": "Accounts Payable Credit (ACCPAYCREDIT)",
+            "value": "ACCPAYCREDIT"
+          }
+        ]
+      },
+      {
+        "name": "contact_id",
+        "type": "string",
+        "value": null,
+        "label": "Contact ID",
+        "placeholder": "The Xero ContactID",
+        "required": true
+      },
+      {
+        "name": "date",
+        "type": "string",
+        "value": null,
+        "label": "Date",
+        "placeholder": "2026-07-05"
+      },
+      {
+        "name": "reference",
+        "type": "string",
+        "value": null,
+        "label": "Reference",
+        "placeholder": ""
+      },
+      {
+        "name": "status",
+        "type": "string",
+        "value": null,
+        "label": "Status",
+        "placeholder": "DRAFT"
+      },
+      {
+        "name": "line_amount_types",
+        "type": "string",
+        "value": null,
+        "label": "Line Amount Types",
+        "placeholder": "Exclusive"
+      },
+      {
+        "name": "currency_code",
+        "type": "string",
+        "value": null,
+        "label": "Currency Code",
+        "placeholder": "GBP"
+      },
+      {
+        "name": "line_items",
+        "type": "text",
+        "value": null,
+        "label": "Line Items (JSON array)",
+        "placeholder": "[{\"Description\":\"Credit\",\"Quantity\":1,\"UnitAmount\":50.00,\"AccountCode\":\"200\"}]"
+      },
+      {
+        "name": "fields",
+        "type": "text",
+        "value": null,
+        "label": "Advanced Fields (JSON)",
+        "placeholder": "{\"SentToContact\":true}"
+      }
+    ],
+    "outputs": null
+  },
+  "xero/credit_note_get": {
+    "hash": "0e98eaa9be6bebbcae1b9616b97a41af390622076764ed3727b40c201130c58e",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Credit Note: Get",
+    "description": "Fetch a single Xero credit note by ID. Returns the credit note object.",
+    "website": "https://www.flomation.co",
+    "icon": "xero+eye",
+    "date": "05/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Xero",
+      "icon": "xero",
+      "description": "Manage contacts, invoices, bills, payments and the ledger in Xero"
+    },
+    "inputs": [
+      {
+        "name": "credential",
+        "type": "credential",
+        "value": null,
+        "label": "Xero Connection",
+        "placeholder": "${credentials.MyXero}",
+        "required": true
+      },
+      {
+        "name": "tenant",
+        "type": "string",
+        "value": null,
+        "label": "Organisation",
+        "placeholder": "${credentials.MyXero.tenant_id}",
+        "required": true
+      },
+      {
+        "name": "credit_note_id",
+        "type": "string",
+        "value": null,
+        "label": "Credit Note ID",
+        "placeholder": "The Xero CreditNoteID",
+        "required": true
+      }
+    ],
+    "outputs": null
+  },
+  "xero/credit_note_list": {
+    "hash": "b3c51abba2e157152d08120e8735d80fa2e57f9e8749d63ccf605d27ee5b2083",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Credit Note: List",
+    "description": "List Xero credit notes, optionally filtered with a where clause and paged.",
+    "website": "https://www.flomation.co",
+    "icon": "xero+list",
+    "date": "05/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Xero",
+      "icon": "xero",
+      "description": "Manage contacts, invoices, bills, payments and the ledger in Xero"
+    },
+    "inputs": [
+      {
+        "name": "credential",
+        "type": "credential",
+        "value": null,
+        "label": "Xero Connection",
+        "placeholder": "${credentials.MyXero}",
+        "required": true
+      },
+      {
+        "name": "tenant",
+        "type": "string",
+        "value": null,
+        "label": "Organisation",
+        "placeholder": "${credentials.MyXero.tenant_id}",
+        "required": true
+      },
+      {
+        "name": "where",
+        "type": "string",
+        "value": null,
+        "label": "Where Filter",
+        "placeholder": "Status==\"AUTHORISED\""
+      },
+      {
+        "name": "page",
+        "type": "string",
+        "value": null,
+        "label": "Page",
+        "placeholder": "1"
+      }
+    ],
+    "outputs": null
+  },
+  "xero/invoice_create": {
+    "hash": "74b29090e3634977bdb22e48adaafc696ed290386c96cb992f836921dd122991",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Invoice: Create",
+    "description": "Create a Xero invoice (sales ACCREC or bill ACCPAY) with line items. Returns the invoice ID.",
+    "website": "https://www.flomation.co",
+    "icon": "xero+plus",
+    "date": "05/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Xero",
+      "icon": "xero",
+      "description": "Manage contacts, invoices, bills, payments and the ledger in Xero"
+    },
+    "inputs": [
+      {
+        "name": "credential",
+        "type": "credential",
+        "value": null,
+        "label": "Xero Connection",
+        "placeholder": "${credentials.MyXero}",
+        "required": true
+      },
+      {
+        "name": "tenant",
+        "type": "string",
+        "value": null,
+        "label": "Organisation",
+        "placeholder": "${credentials.MyXero.tenant_id}",
+        "required": true
+      },
+      {
+        "name": "contact_id",
+        "type": "string",
+        "value": null,
+        "label": "Contact ID",
+        "placeholder": "00000000-0000-0000-0000-000000000000",
+        "required": true
+      },
+      {
+        "name": "type",
+        "type": "string",
+        "value": null,
+        "label": "Type",
+        "placeholder": "ACCREC",
+        "options": [
+          {
+            "name": "Sales Invoice (ACCREC)",
+            "value": "ACCREC"
+          },
+          {
+            "name": "Bill (ACCPAY)",
+            "value": "ACCPAY"
+          }
+        ]
+      },
+      {
+        "name": "line_items",
+        "type": "text",
+        "value": null,
+        "label": "Line Items (JSON)",
+        "placeholder": "[{\"Description\":\"Consulting\",\"Quantity\":1,\"UnitAmount\":100.00,\"AccountCode\":\"200\"}]",
+        "required": true
+      },
+      {
+        "name": "date",
+        "type": "string",
+        "value": null,
+        "label": "Date",
+        "placeholder": "2026-07-05"
+      },
+      {
+        "name": "due_date",
+        "type": "string",
+        "value": null,
+        "label": "Due Date",
+        "placeholder": "2026-08-05"
+      },
+      {
+        "name": "reference",
+        "type": "string",
+        "value": null,
+        "label": "Reference",
+        "placeholder": "INV-001"
+      },
+      {
+        "name": "status",
+        "type": "string",
+        "value": null,
+        "label": "Status",
+        "placeholder": "DRAFT",
+        "options": [
+          {
+            "name": "Draft",
+            "value": "DRAFT"
+          },
+          {
+            "name": "Submitted",
+            "value": "SUBMITTED"
+          },
+          {
+            "name": "Authorised",
+            "value": "AUTHORISED"
+          }
+        ]
+      },
+      {
+        "name": "line_amount_types",
+        "type": "string",
+        "value": null,
+        "label": "Line Amount Types",
+        "placeholder": "Exclusive",
+        "options": [
+          {
+            "name": "Exclusive",
+            "value": "Exclusive"
+          },
+          {
+            "name": "Inclusive",
+            "value": "Inclusive"
+          },
+          {
+            "name": "No Tax",
+            "value": "NoTax"
+          }
+        ]
+      },
+      {
+        "name": "currency_code",
+        "type": "string",
+        "value": null,
+        "label": "Currency Code",
+        "placeholder": "GBP"
+      },
+      {
+        "name": "fields",
+        "type": "text",
+        "value": null,
+        "label": "Advanced Fields (JSON)",
+        "placeholder": "{\"BrandingThemeID\":\"...\"}"
+      }
+    ],
+    "outputs": null
+  },
+  "xero/invoice_email": {
+    "hash": "8ab7290d6ab5afb3e7cd1cb42ef4a970f3c6f505a6b27b65ba90ff8681885696",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Invoice: Email",
+    "description": "Email a Xero invoice to its contact using the organisation's default template.",
+    "website": "https://www.flomation.co",
+    "icon": "xero+paper-plane",
+    "date": "05/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Xero",
+      "icon": "xero",
+      "description": "Manage contacts, invoices, bills, payments and the ledger in Xero"
+    },
+    "inputs": [
+      {
+        "name": "credential",
+        "type": "credential",
+        "value": null,
+        "label": "Xero Connection",
+        "placeholder": "${credentials.MyXero}",
+        "required": true
+      },
+      {
+        "name": "tenant",
+        "type": "string",
+        "value": null,
+        "label": "Organisation",
+        "placeholder": "${credentials.MyXero.tenant_id}",
+        "required": true
+      },
+      {
+        "name": "invoice_id",
+        "type": "string",
+        "value": null,
+        "label": "Invoice ID",
+        "placeholder": "00000000-0000-0000-0000-000000000000",
+        "required": true
+      }
+    ],
+    "outputs": null
+  },
+  "xero/invoice_get": {
+    "hash": "80c1f8407a13dd3a99e28baa77d4190b977e94afcb87046800f1342c8666bd8e",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Invoice: Get",
+    "description": "Fetch a single Xero invoice by its ID. Returns the invoice object.",
+    "website": "https://www.flomation.co",
+    "icon": "xero+eye",
+    "date": "05/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Xero",
+      "icon": "xero",
+      "description": "Manage contacts, invoices, bills, payments and the ledger in Xero"
+    },
+    "inputs": [
+      {
+        "name": "credential",
+        "type": "credential",
+        "value": null,
+        "label": "Xero Connection",
+        "placeholder": "${credentials.MyXero}",
+        "required": true
+      },
+      {
+        "name": "tenant",
+        "type": "string",
+        "value": null,
+        "label": "Organisation",
+        "placeholder": "${credentials.MyXero.tenant_id}",
+        "required": true
+      },
+      {
+        "name": "invoice_id",
+        "type": "string",
+        "value": null,
+        "label": "Invoice ID",
+        "placeholder": "00000000-0000-0000-0000-000000000000",
+        "required": true
+      }
+    ],
+    "outputs": null
+  },
+  "xero/invoice_list": {
+    "hash": "5e4794c38db1b45f97da5788357fc28e1ac945de685371f3eaa88fe3eb3dfee4",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Invoice: List",
+    "description": "List Xero invoices with optional filter, status and pagination. Returns matching invoices.",
+    "website": "https://www.flomation.co",
+    "icon": "xero+list",
+    "date": "05/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Xero",
+      "icon": "xero",
+      "description": "Manage contacts, invoices, bills, payments and the ledger in Xero"
+    },
+    "inputs": [
+      {
+        "name": "credential",
+        "type": "credential",
+        "value": null,
+        "label": "Xero Connection",
+        "placeholder": "${credentials.MyXero}",
+        "required": true
+      },
+      {
+        "name": "tenant",
+        "type": "string",
+        "value": null,
+        "label": "Organisation",
+        "placeholder": "${credentials.MyXero.tenant_id}",
+        "required": true
+      },
+      {
+        "name": "where",
+        "type": "string",
+        "value": null,
+        "label": "Filter (where)",
+        "placeholder": "Status==\"AUTHORISED\""
+      },
+      {
+        "name": "statuses",
+        "type": "string",
+        "value": null,
+        "label": "Statuses",
+        "placeholder": "DRAFT,AUTHORISED"
+      },
+      {
+        "name": "page",
+        "type": "string",
+        "value": null,
+        "label": "Page",
+        "placeholder": "1"
+      }
+    ],
+    "outputs": null
+  },
+  "xero/invoice_update": {
+    "hash": "1a0ba83254234d6a1a16e3264672525df994fbef0ca6a3e0b4acca3756d005c1",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Invoice: Update",
+    "description": "Update an existing Xero invoice by ID. Returns the updated invoice object.",
+    "website": "https://www.flomation.co",
+    "icon": "xero+pencil",
+    "date": "05/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Xero",
+      "icon": "xero",
+      "description": "Manage contacts, invoices, bills, payments and the ledger in Xero"
+    },
+    "inputs": [
+      {
+        "name": "credential",
+        "type": "credential",
+        "value": null,
+        "label": "Xero Connection",
+        "placeholder": "${credentials.MyXero}",
+        "required": true
+      },
+      {
+        "name": "tenant",
+        "type": "string",
+        "value": null,
+        "label": "Organisation",
+        "placeholder": "${credentials.MyXero.tenant_id}",
+        "required": true
+      },
+      {
+        "name": "invoice_id",
+        "type": "string",
+        "value": null,
+        "label": "Invoice ID",
+        "placeholder": "00000000-0000-0000-0000-000000000000",
+        "required": true
+      },
+      {
+        "name": "contact_id",
+        "type": "string",
+        "value": null,
+        "label": "Contact ID",
+        "placeholder": "00000000-0000-0000-0000-000000000000"
+      },
+      {
+        "name": "line_items",
+        "type": "text",
+        "value": null,
+        "label": "Line Items (JSON)",
+        "placeholder": "[{\"Description\":\"Consulting\",\"Quantity\":1,\"UnitAmount\":100.00,\"AccountCode\":\"200\"}]"
+      },
+      {
+        "name": "date",
+        "type": "string",
+        "value": null,
+        "label": "Date",
+        "placeholder": "2026-07-05"
+      },
+      {
+        "name": "due_date",
+        "type": "string",
+        "value": null,
+        "label": "Due Date",
+        "placeholder": "2026-08-05"
+      },
+      {
+        "name": "reference",
+        "type": "string",
+        "value": null,
+        "label": "Reference",
+        "placeholder": "INV-001"
+      },
+      {
+        "name": "status",
+        "type": "string",
+        "value": null,
+        "label": "Status",
+        "placeholder": "AUTHORISED",
+        "options": [
+          {
+            "name": "Draft",
+            "value": "DRAFT"
+          },
+          {
+            "name": "Submitted",
+            "value": "SUBMITTED"
+          },
+          {
+            "name": "Authorised",
+            "value": "AUTHORISED"
+          }
+        ]
+      },
+      {
+        "name": "line_amount_types",
+        "type": "string",
+        "value": null,
+        "label": "Line Amount Types",
+        "placeholder": "Exclusive",
+        "options": [
+          {
+            "name": "Exclusive",
+            "value": "Exclusive"
+          },
+          {
+            "name": "Inclusive",
+            "value": "Inclusive"
+          },
+          {
+            "name": "No Tax",
+            "value": "NoTax"
+          }
+        ]
+      },
+      {
+        "name": "currency_code",
+        "type": "string",
+        "value": null,
+        "label": "Currency Code",
+        "placeholder": "GBP"
+      },
+      {
+        "name": "fields",
+        "type": "text",
+        "value": null,
+        "label": "Advanced Fields (JSON)",
+        "placeholder": "{\"BrandingThemeID\":\"...\"}"
+      }
+    ],
+    "outputs": null
+  },
+  "xero/invoice_void": {
+    "hash": "389c37ceefd73d28fbc7742c6bd4093680bd2151282eec5b3ff7ea638261cd39",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Invoice: Void",
+    "description": "Void a Xero invoice by ID (sets its status to VOIDED). Returns the voided invoice.",
+    "website": "https://www.flomation.co",
+    "icon": "xero+ban",
+    "date": "05/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Xero",
+      "icon": "xero",
+      "description": "Manage contacts, invoices, bills, payments and the ledger in Xero"
+    },
+    "inputs": [
+      {
+        "name": "credential",
+        "type": "credential",
+        "value": null,
+        "label": "Xero Connection",
+        "placeholder": "${credentials.MyXero}",
+        "required": true
+      },
+      {
+        "name": "tenant",
+        "type": "string",
+        "value": null,
+        "label": "Organisation",
+        "placeholder": "${credentials.MyXero.tenant_id}",
+        "required": true
+      },
+      {
+        "name": "invoice_id",
+        "type": "string",
+        "value": null,
+        "label": "Invoice ID",
+        "placeholder": "00000000-0000-0000-0000-000000000000",
+        "required": true
+      }
+    ],
+    "outputs": null
+  },
+  "xero/item_create": {
+    "hash": "118b70203eabdebe526a168961cac81b12c9c312885867d054624e8e77cd1e63",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Item: Create",
+    "description": "Create a Xero inventory or service item. Returns the item ID and object.",
+    "website": "https://www.flomation.co",
+    "icon": "xero+plus",
+    "date": "05/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Xero",
+      "icon": "xero",
+      "description": "Manage contacts, invoices, bills, payments and the ledger in Xero"
+    },
+    "inputs": [
+      {
+        "name": "credential",
+        "type": "credential",
+        "value": null,
+        "label": "Xero Connection",
+        "placeholder": "${credentials.MyXero}",
+        "required": true
+      },
+      {
+        "name": "tenant",
+        "type": "string",
+        "value": null,
+        "label": "Organisation",
+        "placeholder": "${credentials.MyXero.tenant_id}",
+        "required": true
+      },
+      {
+        "name": "code",
+        "type": "string",
+        "value": null,
+        "label": "Code",
+        "placeholder": "WIDGET-01",
+        "required": true
+      },
+      {
+        "name": "name",
+        "type": "string",
+        "value": null,
+        "label": "Name",
+        "placeholder": "Blue Widget"
+      },
+      {
+        "name": "description",
+        "type": "string",
+        "value": null,
+        "label": "Description",
+        "placeholder": "Standard blue widget"
+      },
+      {
+        "name": "is_sold",
+        "type": "boolean",
+        "value": null,
+        "label": "Is Sold",
+        "placeholder": ""
+      },
+      {
+        "name": "is_purchased",
+        "type": "boolean",
+        "value": null,
+        "label": "Is Purchased",
+        "placeholder": ""
+      },
+      {
+        "name": "fields",
+        "type": "text",
+        "value": null,
+        "label": "Advanced Fields (JSON)",
+        "placeholder": "{\"SalesDetails\":{\"UnitPrice\":10.0,\"AccountCode\":\"200\"}}"
+      }
+    ],
+    "outputs": null
+  },
+  "xero/item_get": {
+    "hash": "56a72fb0d4e1a518c9228f60c4c8759079a0cbb07646ab128f8eefd24a5a3dd2",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Item: Get",
+    "description": "Fetch a single Xero item by its ID. Returns the item object.",
+    "website": "https://www.flomation.co",
+    "icon": "xero+eye",
+    "date": "05/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Xero",
+      "icon": "xero",
+      "description": "Manage contacts, invoices, bills, payments and the ledger in Xero"
+    },
+    "inputs": [
+      {
+        "name": "credential",
+        "type": "credential",
+        "value": null,
+        "label": "Xero Connection",
+        "placeholder": "${credentials.MyXero}",
+        "required": true
+      },
+      {
+        "name": "tenant",
+        "type": "string",
+        "value": null,
+        "label": "Organisation",
+        "placeholder": "${credentials.MyXero.tenant_id}",
+        "required": true
+      },
+      {
+        "name": "item_id",
+        "type": "string",
+        "value": null,
+        "label": "Item ID",
+        "placeholder": "00000000-0000-0000-0000-000000000000",
+        "required": true
+      }
+    ],
+    "outputs": null
+  },
+  "xero/item_list": {
+    "hash": "181ab094226c36812687e187ae6887edbbe9de89588ec6ed8d779c1ca8c7f0fd",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Item: List",
+    "description": "List Xero items, optionally filtered by a where clause. Returns matching items.",
+    "website": "https://www.flomation.co",
+    "icon": "xero+list",
+    "date": "05/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Xero",
+      "icon": "xero",
+      "description": "Manage contacts, invoices, bills, payments and the ledger in Xero"
+    },
+    "inputs": [
+      {
+        "name": "credential",
+        "type": "credential",
+        "value": null,
+        "label": "Xero Connection",
+        "placeholder": "${credentials.MyXero}",
+        "required": true
+      },
+      {
+        "name": "tenant",
+        "type": "string",
+        "value": null,
+        "label": "Organisation",
+        "placeholder": "${credentials.MyXero.tenant_id}",
+        "required": true
+      },
+      {
+        "name": "where",
+        "type": "string",
+        "value": null,
+        "label": "Where Filter",
+        "placeholder": "IsSold==true"
+      },
+      {
+        "name": "order",
+        "type": "string",
+        "value": null,
+        "label": "Order By",
+        "placeholder": "Code"
+      }
+    ],
+    "outputs": null
+  },
+  "xero/item_update": {
+    "hash": "67ecdab49928340b5dccfcd0592e505fe52e6e1f7fea3e327b941bf02869f5fe",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Item: Update",
+    "description": "Update an existing Xero item by its ID. Returns the updated item object.",
+    "website": "https://www.flomation.co",
+    "icon": "xero+pencil",
+    "date": "05/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Xero",
+      "icon": "xero",
+      "description": "Manage contacts, invoices, bills, payments and the ledger in Xero"
+    },
+    "inputs": [
+      {
+        "name": "credential",
+        "type": "credential",
+        "value": null,
+        "label": "Xero Connection",
+        "placeholder": "${credentials.MyXero}",
+        "required": true
+      },
+      {
+        "name": "tenant",
+        "type": "string",
+        "value": null,
+        "label": "Organisation",
+        "placeholder": "${credentials.MyXero.tenant_id}",
+        "required": true
+      },
+      {
+        "name": "item_id",
+        "type": "string",
+        "value": null,
+        "label": "Item ID",
+        "placeholder": "00000000-0000-0000-0000-000000000000",
+        "required": true
+      },
+      {
+        "name": "code",
+        "type": "string",
+        "value": null,
+        "label": "Code",
+        "placeholder": "WIDGET-01"
+      },
+      {
+        "name": "name",
+        "type": "string",
+        "value": null,
+        "label": "Name",
+        "placeholder": "Blue Widget"
+      },
+      {
+        "name": "description",
+        "type": "string",
+        "value": null,
+        "label": "Description",
+        "placeholder": "Standard blue widget"
+      },
+      {
+        "name": "is_sold",
+        "type": "boolean",
+        "value": null,
+        "label": "Is Sold",
+        "placeholder": ""
+      },
+      {
+        "name": "is_purchased",
+        "type": "boolean",
+        "value": null,
+        "label": "Is Purchased",
+        "placeholder": ""
+      },
+      {
+        "name": "fields",
+        "type": "text",
+        "value": null,
+        "label": "Advanced Fields (JSON)",
+        "placeholder": "{\"SalesDetails\":{\"UnitPrice\":10.0,\"AccountCode\":\"200\"}}"
+      }
+    ],
+    "outputs": null
+  },
+  "xero/manual_journal_create": {
+    "hash": "29fd8224d2d6d51305613a12ad2c826d265e0ba73daf9abf3ffc61c6f91c8d52",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Manual Journal: Create",
+    "description": "Create a Xero manual journal from journal lines. Returns the journal ID and object.",
+    "website": "https://www.flomation.co",
+    "icon": "xero+plus",
+    "date": "05/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Xero",
+      "icon": "xero",
+      "description": "Manage contacts, invoices, bills, payments and the ledger in Xero"
+    },
+    "inputs": [
+      {
+        "name": "credential",
+        "type": "credential",
+        "value": null,
+        "label": "Xero Connection",
+        "placeholder": "${credentials.MyXero}",
+        "required": true
+      },
+      {
+        "name": "tenant",
+        "type": "string",
+        "value": null,
+        "label": "Organisation",
+        "placeholder": "${credentials.MyXero.tenant_id}",
+        "required": true
+      },
+      {
+        "name": "narration",
+        "type": "string",
+        "value": null,
+        "label": "Narration",
+        "placeholder": "Accrual for month end",
+        "required": true
+      },
+      {
+        "name": "date",
+        "type": "string",
+        "value": null,
+        "label": "Date",
+        "placeholder": "2026-07-05"
+      },
+      {
+        "name": "line_items",
+        "type": "text",
+        "value": null,
+        "label": "Journal Lines (JSON array)",
+        "placeholder": "[{\"LineAmount\":100.00,\"AccountCode\":\"200\"},{\"LineAmount\":-100.00,\"AccountCode\":\"400\"}]"
+      },
+      {
+        "name": "fields",
+        "type": "text",
+        "value": null,
+        "label": "Advanced Fields (JSON)",
+        "placeholder": "{\"Status\":\"POSTED\"}"
+      }
+    ],
+    "outputs": null
+  },
+  "xero/manual_journal_get": {
+    "hash": "a46e2efb6fd586cb0fe495b096b77a8ba61f6c5722d32d421a0ced0bcde660d4",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Manual Journal: Get",
+    "description": "Fetch a single Xero manual journal by its ID. Returns the journal object.",
+    "website": "https://www.flomation.co",
+    "icon": "xero+eye",
+    "date": "05/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Xero",
+      "icon": "xero",
+      "description": "Manage contacts, invoices, bills, payments and the ledger in Xero"
+    },
+    "inputs": [
+      {
+        "name": "credential",
+        "type": "credential",
+        "value": null,
+        "label": "Xero Connection",
+        "placeholder": "${credentials.MyXero}",
+        "required": true
+      },
+      {
+        "name": "tenant",
+        "type": "string",
+        "value": null,
+        "label": "Organisation",
+        "placeholder": "${credentials.MyXero.tenant_id}",
+        "required": true
+      },
+      {
+        "name": "manual_journal_id",
+        "type": "string",
+        "value": null,
+        "label": "Manual Journal ID",
+        "placeholder": "00000000-0000-0000-0000-000000000000",
+        "required": true
+      }
+    ],
+    "outputs": null
+  },
+  "xero/manual_journal_list": {
+    "hash": "c4626e203d00b7aa5385f4154a536cb809260775939ae396c339f3dd26c4b8bf",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Manual Journal: List",
+    "description": "List Xero manual journals, optionally filtered by a where clause. Returns matching journals.",
+    "website": "https://www.flomation.co",
+    "icon": "xero+list",
+    "date": "05/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Xero",
+      "icon": "xero",
+      "description": "Manage contacts, invoices, bills, payments and the ledger in Xero"
+    },
+    "inputs": [
+      {
+        "name": "credential",
+        "type": "credential",
+        "value": null,
+        "label": "Xero Connection",
+        "placeholder": "${credentials.MyXero}",
+        "required": true
+      },
+      {
+        "name": "tenant",
+        "type": "string",
+        "value": null,
+        "label": "Organisation",
+        "placeholder": "${credentials.MyXero.tenant_id}",
+        "required": true
+      },
+      {
+        "name": "where",
+        "type": "string",
+        "value": null,
+        "label": "Where Filter",
+        "placeholder": "Status==\"POSTED\""
+      },
+      {
+        "name": "page",
+        "type": "string",
+        "value": null,
+        "label": "Page",
+        "placeholder": "1"
+      }
+    ],
+    "outputs": null
+  },
+  "xero/organisation_get": {
+    "hash": "4e719e8fabed0322590200c22f17828d7760594cd7c4e2b0f9f3c819330eab82",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Organisation: Get",
+    "description": "Fetch the connected Xero organisation's details. Returns the organisation object.",
+    "website": "https://www.flomation.co",
+    "icon": "xero+book",
+    "date": "05/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Xero",
+      "icon": "xero",
+      "description": "Manage contacts, invoices, bills, payments and the ledger in Xero"
+    },
+    "inputs": [
+      {
+        "name": "credential",
+        "type": "credential",
+        "value": null,
+        "label": "Xero Connection",
+        "placeholder": "${credentials.MyXero}",
+        "required": true
+      },
+      {
+        "name": "tenant",
+        "type": "string",
+        "value": null,
+        "label": "Organisation",
+        "placeholder": "${credentials.MyXero.tenant_id}",
+        "required": true
+      }
+    ],
+    "outputs": null
+  },
+  "xero/payment_create": {
+    "hash": "bdaa73c94a7e6900fd5040b17928dd3d603347c5240fb3245380dbcfc202b2ee",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Payment: Create",
+    "description": "Apply a payment to a Xero invoice from an account. Returns the payment ID and object.",
+    "website": "https://www.flomation.co",
+    "icon": "xero+plus",
+    "date": "05/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Xero",
+      "icon": "xero",
+      "description": "Manage contacts, invoices, bills, payments and the ledger in Xero"
+    },
+    "inputs": [
+      {
+        "name": "credential",
+        "type": "credential",
+        "value": null,
+        "label": "Xero Connection",
+        "placeholder": "${credentials.MyXero}",
+        "required": true
+      },
+      {
+        "name": "tenant",
+        "type": "string",
+        "value": null,
+        "label": "Organisation",
+        "placeholder": "${credentials.MyXero.tenant_id}",
+        "required": true
+      },
+      {
+        "name": "invoice_id",
+        "type": "string",
+        "value": null,
+        "label": "Invoice ID",
+        "placeholder": "The Xero InvoiceID",
+        "required": true
+      },
+      {
+        "name": "account_id",
+        "type": "string",
+        "value": null,
+        "label": "Account ID",
+        "placeholder": "The bank AccountID",
+        "required": true
+      },
+      {
+        "name": "amount",
+        "type": "money",
+        "value": null,
+        "label": "Amount",
+        "placeholder": "100.00",
+        "required": true
+      },
+      {
+        "name": "date",
+        "type": "string",
+        "value": null,
+        "label": "Date",
+        "placeholder": "2026-07-05"
+      },
+      {
+        "name": "reference",
+        "type": "string",
+        "value": null,
+        "label": "Reference",
+        "placeholder": ""
+      },
+      {
+        "name": "fields",
+        "type": "text",
+        "value": null,
+        "label": "Advanced Fields (JSON)",
+        "placeholder": "{\"CurrencyRate\":1.0}"
+      }
+    ],
+    "outputs": null
+  },
+  "xero/payment_delete": {
+    "hash": "8debc835af96a59ccb1f0515e2e1419f3eca54083617701d3d197176538c5485",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Payment: Delete",
+    "description": "Delete (reverse) a Xero payment by setting its status to DELETED.",
+    "website": "https://www.flomation.co",
+    "icon": "xero+trash",
+    "date": "05/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Xero",
+      "icon": "xero",
+      "description": "Manage contacts, invoices, bills, payments and the ledger in Xero"
+    },
+    "inputs": [
+      {
+        "name": "credential",
+        "type": "credential",
+        "value": null,
+        "label": "Xero Connection",
+        "placeholder": "${credentials.MyXero}",
+        "required": true
+      },
+      {
+        "name": "tenant",
+        "type": "string",
+        "value": null,
+        "label": "Organisation",
+        "placeholder": "${credentials.MyXero.tenant_id}",
+        "required": true
+      },
+      {
+        "name": "payment_id",
+        "type": "string",
+        "value": null,
+        "label": "Payment ID",
+        "placeholder": "The Xero PaymentID",
+        "required": true
+      }
+    ],
+    "outputs": null
+  },
+  "xero/payment_get": {
+    "hash": "a0ceb47c3df5b83ef9bcebe1e1d7dc6084c3cd981821070c542af2acbc827e7f",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Payment: Get",
+    "description": "Fetch a single Xero payment by ID. Returns the payment object.",
+    "website": "https://www.flomation.co",
+    "icon": "xero+eye",
+    "date": "05/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Xero",
+      "icon": "xero",
+      "description": "Manage contacts, invoices, bills, payments and the ledger in Xero"
+    },
+    "inputs": [
+      {
+        "name": "credential",
+        "type": "credential",
+        "value": null,
+        "label": "Xero Connection",
+        "placeholder": "${credentials.MyXero}",
+        "required": true
+      },
+      {
+        "name": "tenant",
+        "type": "string",
+        "value": null,
+        "label": "Organisation",
+        "placeholder": "${credentials.MyXero.tenant_id}",
+        "required": true
+      },
+      {
+        "name": "payment_id",
+        "type": "string",
+        "value": null,
+        "label": "Payment ID",
+        "placeholder": "The Xero PaymentID",
+        "required": true
+      }
+    ],
+    "outputs": null
+  },
+  "xero/payment_list": {
+    "hash": "913084198011a7e64f7df21a94b00498ef767ea768a6688476c5ba701dbe2fcb",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Payment: List",
+    "description": "List Xero payments, optionally filtered with a where clause and paged.",
+    "website": "https://www.flomation.co",
+    "icon": "xero+list",
+    "date": "05/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Xero",
+      "icon": "xero",
+      "description": "Manage contacts, invoices, bills, payments and the ledger in Xero"
+    },
+    "inputs": [
+      {
+        "name": "credential",
+        "type": "credential",
+        "value": null,
+        "label": "Xero Connection",
+        "placeholder": "${credentials.MyXero}",
+        "required": true
+      },
+      {
+        "name": "tenant",
+        "type": "string",
+        "value": null,
+        "label": "Organisation",
+        "placeholder": "${credentials.MyXero.tenant_id}",
+        "required": true
+      },
+      {
+        "name": "where",
+        "type": "string",
+        "value": null,
+        "label": "Where Filter",
+        "placeholder": "Status==\"AUTHORISED\""
+      },
+      {
+        "name": "page",
+        "type": "string",
+        "value": null,
+        "label": "Page",
+        "placeholder": "1"
+      }
+    ],
+    "outputs": null
+  },
+  "xero/purchase_order_create": {
+    "hash": "3cfc6bd520fa0c25c2db94a96725bc07d2897e09d16e9bb9618bd8b069803dbc",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Purchase Order: Create",
+    "description": "Create a Xero purchase order for a supplier. Returns the purchase order ID and object.",
+    "website": "https://www.flomation.co",
+    "icon": "xero+plus",
+    "date": "05/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Xero",
+      "icon": "xero",
+      "description": "Manage contacts, invoices, bills, payments and the ledger in Xero"
+    },
+    "inputs": [
+      {
+        "name": "credential",
+        "type": "credential",
+        "value": null,
+        "label": "Xero Connection",
+        "placeholder": "${credentials.MyXero}",
+        "required": true
+      },
+      {
+        "name": "tenant",
+        "type": "string",
+        "value": null,
+        "label": "Organisation",
+        "placeholder": "${credentials.MyXero.tenant_id}",
+        "required": true
+      },
+      {
+        "name": "contact_id",
+        "type": "string",
+        "value": null,
+        "label": "Supplier Contact ID",
+        "placeholder": "00000000-0000-0000-0000-000000000000",
+        "required": true
+      },
+      {
+        "name": "date",
+        "type": "string",
+        "value": null,
+        "label": "Date",
+        "placeholder": "2026-07-05"
+      },
+      {
+        "name": "delivery_date",
+        "type": "string",
+        "value": null,
+        "label": "Delivery Date",
+        "placeholder": "2026-07-12"
+      },
+      {
+        "name": "reference",
+        "type": "string",
+        "value": null,
+        "label": "Reference",
+        "placeholder": "PO-1001"
+      },
+      {
+        "name": "line_items",
+        "type": "text",
+        "value": null,
+        "label": "Line Items (JSON array)",
+        "placeholder": "[{\"Description\":\"Widgets\",\"Quantity\":10,\"UnitAmount\":5.0,\"AccountCode\":\"300\"}]"
+      },
+      {
+        "name": "fields",
+        "type": "text",
+        "value": null,
+        "label": "Advanced Fields (JSON)",
+        "placeholder": "{\"Status\":\"DRAFT\"}"
+      }
+    ],
+    "outputs": null
+  },
+  "xero/purchase_order_get": {
+    "hash": "15356cb695c7bbc89f02e9d2c07421e9de285ea38c07560a0c55236bfdaf1ce5",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Purchase Order: Get",
+    "description": "Fetch a single Xero purchase order by its ID. Returns the purchase order object.",
+    "website": "https://www.flomation.co",
+    "icon": "xero+eye",
+    "date": "05/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Xero",
+      "icon": "xero",
+      "description": "Manage contacts, invoices, bills, payments and the ledger in Xero"
+    },
+    "inputs": [
+      {
+        "name": "credential",
+        "type": "credential",
+        "value": null,
+        "label": "Xero Connection",
+        "placeholder": "${credentials.MyXero}",
+        "required": true
+      },
+      {
+        "name": "tenant",
+        "type": "string",
+        "value": null,
+        "label": "Organisation",
+        "placeholder": "${credentials.MyXero.tenant_id}",
+        "required": true
+      },
+      {
+        "name": "purchase_order_id",
+        "type": "string",
+        "value": null,
+        "label": "Purchase Order ID",
+        "placeholder": "00000000-0000-0000-0000-000000000000",
+        "required": true
+      }
+    ],
+    "outputs": null
+  },
+  "xero/purchase_order_list": {
+    "hash": "dd9f22bfa28332ce5e2e06f0ac976102cb2685b3306ff863e057c606f95e42e6",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Purchase Order: List",
+    "description": "List Xero purchase orders, optionally filtered by status. Returns matching purchase orders.",
+    "website": "https://www.flomation.co",
+    "icon": "xero+list",
+    "date": "05/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Xero",
+      "icon": "xero",
+      "description": "Manage contacts, invoices, bills, payments and the ledger in Xero"
+    },
+    "inputs": [
+      {
+        "name": "credential",
+        "type": "credential",
+        "value": null,
+        "label": "Xero Connection",
+        "placeholder": "${credentials.MyXero}",
+        "required": true
+      },
+      {
+        "name": "tenant",
+        "type": "string",
+        "value": null,
+        "label": "Organisation",
+        "placeholder": "${credentials.MyXero.tenant_id}",
+        "required": true
+      },
+      {
+        "name": "status",
+        "type": "string",
+        "value": null,
+        "label": "Status",
+        "placeholder": "AUTHORISED"
+      },
+      {
+        "name": "page",
+        "type": "string",
+        "value": null,
+        "label": "Page",
+        "placeholder": "1"
+      }
+    ],
+    "outputs": null
+  },
+  "xero/purchase_order_update": {
+    "hash": "75947c29c0501f94dd58720cfd83d187838597c9a27051abe88d76d94c8c0ec8",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Purchase Order: Update",
+    "description": "Update an existing Xero purchase order by its ID. Returns the updated object.",
+    "website": "https://www.flomation.co",
+    "icon": "xero+pencil",
+    "date": "05/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Xero",
+      "icon": "xero",
+      "description": "Manage contacts, invoices, bills, payments and the ledger in Xero"
+    },
+    "inputs": [
+      {
+        "name": "credential",
+        "type": "credential",
+        "value": null,
+        "label": "Xero Connection",
+        "placeholder": "${credentials.MyXero}",
+        "required": true
+      },
+      {
+        "name": "tenant",
+        "type": "string",
+        "value": null,
+        "label": "Organisation",
+        "placeholder": "${credentials.MyXero.tenant_id}",
+        "required": true
+      },
+      {
+        "name": "purchase_order_id",
+        "type": "string",
+        "value": null,
+        "label": "Purchase Order ID",
+        "placeholder": "00000000-0000-0000-0000-000000000000",
+        "required": true
+      },
+      {
+        "name": "contact_id",
+        "type": "string",
+        "value": null,
+        "label": "Supplier Contact ID",
+        "placeholder": "00000000-0000-0000-0000-000000000000"
+      },
+      {
+        "name": "date",
+        "type": "string",
+        "value": null,
+        "label": "Date",
+        "placeholder": "2026-07-05"
+      },
+      {
+        "name": "delivery_date",
+        "type": "string",
+        "value": null,
+        "label": "Delivery Date",
+        "placeholder": "2026-07-12"
+      },
+      {
+        "name": "reference",
+        "type": "string",
+        "value": null,
+        "label": "Reference",
+        "placeholder": "PO-1001"
+      },
+      {
+        "name": "line_items",
+        "type": "text",
+        "value": null,
+        "label": "Line Items (JSON array)",
+        "placeholder": "[{\"Description\":\"Widgets\",\"Quantity\":10,\"UnitAmount\":5.0,\"AccountCode\":\"300\"}]"
+      },
+      {
+        "name": "fields",
+        "type": "text",
+        "value": null,
+        "label": "Advanced Fields (JSON)",
+        "placeholder": "{\"Status\":\"AUTHORISED\"}"
+      }
+    ],
+    "outputs": null
+  },
+  "xero/quote_create": {
+    "hash": "fb91267faf3f0422eb5321d27c7307489ae5bd99386333280112a4df97aadfcb",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Quote: Create",
+    "description": "Create a Xero quote for a customer. Returns the quote ID and object.",
+    "website": "https://www.flomation.co",
+    "icon": "xero+plus",
+    "date": "05/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Xero",
+      "icon": "xero",
+      "description": "Manage contacts, invoices, bills, payments and the ledger in Xero"
+    },
+    "inputs": [
+      {
+        "name": "credential",
+        "type": "credential",
+        "value": null,
+        "label": "Xero Connection",
+        "placeholder": "${credentials.MyXero}",
+        "required": true
+      },
+      {
+        "name": "tenant",
+        "type": "string",
+        "value": null,
+        "label": "Organisation",
+        "placeholder": "${credentials.MyXero.tenant_id}",
+        "required": true
+      },
+      {
+        "name": "contact_id",
+        "type": "string",
+        "value": null,
+        "label": "Customer Contact ID",
+        "placeholder": "00000000-0000-0000-0000-000000000000",
+        "required": true
+      },
+      {
+        "name": "date",
+        "type": "string",
+        "value": null,
+        "label": "Date",
+        "placeholder": "2026-07-05"
+      },
+      {
+        "name": "reference",
+        "type": "string",
+        "value": null,
+        "label": "Reference",
+        "placeholder": "QU-1001"
+      },
+      {
+        "name": "title",
+        "type": "string",
+        "value": null,
+        "label": "Title",
+        "placeholder": "Website build"
+      },
+      {
+        "name": "summary",
+        "type": "string",
+        "value": null,
+        "label": "Summary",
+        "placeholder": "Quote summary line"
+      },
+      {
+        "name": "line_items",
+        "type": "text",
+        "value": null,
+        "label": "Line Items (JSON array)",
+        "placeholder": "[{\"Description\":\"Design\",\"Quantity\":1,\"UnitAmount\":500.0,\"AccountCode\":\"200\"}]"
+      },
+      {
+        "name": "fields",
+        "type": "text",
+        "value": null,
+        "label": "Advanced Fields (JSON)",
+        "placeholder": "{\"Status\":\"DRAFT\"}"
+      }
+    ],
+    "outputs": null
+  },
+  "xero/quote_get": {
+    "hash": "2cec3a78e478aa2965ae52fc998b4be0172b5d3f59c8a8860685ff05c89e5e67",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Quote: Get",
+    "description": "Fetch a single Xero quote by its ID. Returns the quote object.",
+    "website": "https://www.flomation.co",
+    "icon": "xero+eye",
+    "date": "05/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Xero",
+      "icon": "xero",
+      "description": "Manage contacts, invoices, bills, payments and the ledger in Xero"
+    },
+    "inputs": [
+      {
+        "name": "credential",
+        "type": "credential",
+        "value": null,
+        "label": "Xero Connection",
+        "placeholder": "${credentials.MyXero}",
+        "required": true
+      },
+      {
+        "name": "tenant",
+        "type": "string",
+        "value": null,
+        "label": "Organisation",
+        "placeholder": "${credentials.MyXero.tenant_id}",
+        "required": true
+      },
+      {
+        "name": "quote_id",
+        "type": "string",
+        "value": null,
+        "label": "Quote ID",
+        "placeholder": "00000000-0000-0000-0000-000000000000",
+        "required": true
+      }
+    ],
+    "outputs": null
+  },
+  "xero/quote_list": {
+    "hash": "d85cff480528b42b5745a3f0f893980cc85ba6492cfdd3f25cc951e291c0d0ce",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Quote: List",
+    "description": "List Xero quotes, optionally filtered by status. Returns matching quotes.",
+    "website": "https://www.flomation.co",
+    "icon": "xero+list",
+    "date": "05/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Xero",
+      "icon": "xero",
+      "description": "Manage contacts, invoices, bills, payments and the ledger in Xero"
+    },
+    "inputs": [
+      {
+        "name": "credential",
+        "type": "credential",
+        "value": null,
+        "label": "Xero Connection",
+        "placeholder": "${credentials.MyXero}",
+        "required": true
+      },
+      {
+        "name": "tenant",
+        "type": "string",
+        "value": null,
+        "label": "Organisation",
+        "placeholder": "${credentials.MyXero.tenant_id}",
+        "required": true
+      },
+      {
+        "name": "status",
+        "type": "string",
+        "value": null,
+        "label": "Status",
+        "placeholder": "ACCEPTED"
+      },
+      {
+        "name": "page",
+        "type": "string",
+        "value": null,
+        "label": "Page",
+        "placeholder": "1"
+      }
+    ],
+    "outputs": null
+  },
+  "xero/quote_update": {
+    "hash": "7c6b8149cde35ef468c906e15442b9b2ec7dc0a288d1565032c54507780b7b7a",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Quote: Update",
+    "description": "Update an existing Xero quote by its ID. Returns the updated quote object.",
+    "website": "https://www.flomation.co",
+    "icon": "xero+pencil",
+    "date": "05/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Xero",
+      "icon": "xero",
+      "description": "Manage contacts, invoices, bills, payments and the ledger in Xero"
+    },
+    "inputs": [
+      {
+        "name": "credential",
+        "type": "credential",
+        "value": null,
+        "label": "Xero Connection",
+        "placeholder": "${credentials.MyXero}",
+        "required": true
+      },
+      {
+        "name": "tenant",
+        "type": "string",
+        "value": null,
+        "label": "Organisation",
+        "placeholder": "${credentials.MyXero.tenant_id}",
+        "required": true
+      },
+      {
+        "name": "quote_id",
+        "type": "string",
+        "value": null,
+        "label": "Quote ID",
+        "placeholder": "00000000-0000-0000-0000-000000000000",
+        "required": true
+      },
+      {
+        "name": "contact_id",
+        "type": "string",
+        "value": null,
+        "label": "Customer Contact ID",
+        "placeholder": "00000000-0000-0000-0000-000000000000"
+      },
+      {
+        "name": "date",
+        "type": "string",
+        "value": null,
+        "label": "Date",
+        "placeholder": "2026-07-05"
+      },
+      {
+        "name": "reference",
+        "type": "string",
+        "value": null,
+        "label": "Reference",
+        "placeholder": "QU-1001"
+      },
+      {
+        "name": "title",
+        "type": "string",
+        "value": null,
+        "label": "Title",
+        "placeholder": "Website build"
+      },
+      {
+        "name": "summary",
+        "type": "string",
+        "value": null,
+        "label": "Summary",
+        "placeholder": "Quote summary line"
+      },
+      {
+        "name": "line_items",
+        "type": "text",
+        "value": null,
+        "label": "Line Items (JSON array)",
+        "placeholder": "[{\"Description\":\"Design\",\"Quantity\":1,\"UnitAmount\":500.0,\"AccountCode\":\"200\"}]"
+      },
+      {
+        "name": "fields",
+        "type": "text",
+        "value": null,
+        "label": "Advanced Fields (JSON)",
+        "placeholder": "{\"Status\":\"SENT\"}"
+      }
+    ],
+    "outputs": null
+  },
+  "xero/report_aged_payables": {
+    "hash": "0379202c79fde8664ddf3905e9e76b31de98fbb5ca599bcd5882964ccec37b28",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Report: Aged Payables",
+    "description": "Run the Xero Aged Payables report for a contact. Returns the full report.",
+    "website": "https://www.flomation.co",
+    "icon": "xero+chart-line",
+    "date": "05/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Xero",
+      "icon": "xero",
+      "description": "Manage contacts, invoices, bills, payments and the ledger in Xero"
+    },
+    "inputs": [
+      {
+        "name": "credential",
+        "type": "credential",
+        "value": null,
+        "label": "Xero Connection",
+        "placeholder": "${credentials.MyXero}",
+        "required": true
+      },
+      {
+        "name": "tenant",
+        "type": "string",
+        "value": null,
+        "label": "Organisation",
+        "placeholder": "${credentials.MyXero.tenant_id}",
+        "required": true
+      },
+      {
+        "name": "contact_id",
+        "type": "string",
+        "value": null,
+        "label": "Contact ID",
+        "placeholder": "00000000-0000-0000-0000-000000000000",
+        "required": true
+      }
+    ],
+    "outputs": null
+  },
+  "xero/report_aged_receivables": {
+    "hash": "0168fae5480e276c5ebb26502454d53dcf04c1a7df31d0f378e66c5f14639ca1",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Report: Aged Receivables",
+    "description": "Run the Xero Aged Receivables report for a contact. Returns the full report.",
+    "website": "https://www.flomation.co",
+    "icon": "xero+chart-line",
+    "date": "05/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Xero",
+      "icon": "xero",
+      "description": "Manage contacts, invoices, bills, payments and the ledger in Xero"
+    },
+    "inputs": [
+      {
+        "name": "credential",
+        "type": "credential",
+        "value": null,
+        "label": "Xero Connection",
+        "placeholder": "${credentials.MyXero}",
+        "required": true
+      },
+      {
+        "name": "tenant",
+        "type": "string",
+        "value": null,
+        "label": "Organisation",
+        "placeholder": "${credentials.MyXero.tenant_id}",
+        "required": true
+      },
+      {
+        "name": "contact_id",
+        "type": "string",
+        "value": null,
+        "label": "Contact ID",
+        "placeholder": "00000000-0000-0000-0000-000000000000",
+        "required": true
+      }
+    ],
+    "outputs": null
+  },
+  "xero/report_balance_sheet": {
+    "hash": "0531eef322ec9c38f503057613160c27b8a950d590e1b1d3f8fc1dd05fb58cf3",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Report: Balance Sheet",
+    "description": "Run the Xero Balance Sheet report as at an optional date. Returns the full report.",
+    "website": "https://www.flomation.co",
+    "icon": "xero+chart-line",
+    "date": "05/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Xero",
+      "icon": "xero",
+      "description": "Manage contacts, invoices, bills, payments and the ledger in Xero"
+    },
+    "inputs": [
+      {
+        "name": "credential",
+        "type": "credential",
+        "value": null,
+        "label": "Xero Connection",
+        "placeholder": "${credentials.MyXero}",
+        "required": true
+      },
+      {
+        "name": "tenant",
+        "type": "string",
+        "value": null,
+        "label": "Organisation",
+        "placeholder": "${credentials.MyXero.tenant_id}",
+        "required": true
+      },
+      {
+        "name": "date",
+        "type": "string",
+        "value": null,
+        "label": "Date",
+        "placeholder": "2026-12-31"
+      }
+    ],
+    "outputs": null
+  },
+  "xero/report_profit_and_loss": {
+    "hash": "bc3cf54e76cb436d0bba31e6bc2cdc93754583ab9ade145f2fe248ceaeb7f81d",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Report: Profit and Loss",
+    "description": "Run the Xero Profit and Loss report for an optional date range. Returns the full report.",
+    "website": "https://www.flomation.co",
+    "icon": "xero+chart-line",
+    "date": "05/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Xero",
+      "icon": "xero",
+      "description": "Manage contacts, invoices, bills, payments and the ledger in Xero"
+    },
+    "inputs": [
+      {
+        "name": "credential",
+        "type": "credential",
+        "value": null,
+        "label": "Xero Connection",
+        "placeholder": "${credentials.MyXero}",
+        "required": true
+      },
+      {
+        "name": "tenant",
+        "type": "string",
+        "value": null,
+        "label": "Organisation",
+        "placeholder": "${credentials.MyXero.tenant_id}",
+        "required": true
+      },
+      {
+        "name": "from_date",
+        "type": "string",
+        "value": null,
+        "label": "From Date",
+        "placeholder": "2026-01-01"
+      },
+      {
+        "name": "to_date",
+        "type": "string",
+        "value": null,
+        "label": "To Date",
+        "placeholder": "2026-12-31"
+      }
+    ],
+    "outputs": null
+  },
+  "xero/tax_rate_create": {
+    "hash": "e919c742dea0aae9288ab1abcdc6741e1a8483ca79152e12ac3cf7f35ee9e177",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Tax Rate: Create",
+    "description": "Create a Xero tax rate with its tax components. Returns the tax rate object.",
+    "website": "https://www.flomation.co",
+    "icon": "xero+calculator",
+    "date": "05/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Xero",
+      "icon": "xero",
+      "description": "Manage contacts, invoices, bills, payments and the ledger in Xero"
+    },
+    "inputs": [
+      {
+        "name": "credential",
+        "type": "credential",
+        "value": null,
+        "label": "Xero Connection",
+        "placeholder": "${credentials.MyXero}",
+        "required": true
+      },
+      {
+        "name": "tenant",
+        "type": "string",
+        "value": null,
+        "label": "Organisation",
+        "placeholder": "${credentials.MyXero.tenant_id}",
+        "required": true
+      },
+      {
+        "name": "name",
+        "type": "string",
+        "value": null,
+        "label": "Name",
+        "placeholder": "20% VAT on Income",
+        "required": true
+      },
+      {
+        "name": "report_tax_type",
+        "type": "string",
+        "value": null,
+        "label": "Report Tax Type",
+        "placeholder": "OUTPUT2"
+      },
+      {
+        "name": "tax_components",
+        "type": "text",
+        "value": null,
+        "label": "Tax Components (JSON array)",
+        "placeholder": "[{\"Name\":\"VAT\",\"Rate\":20.0}]"
+      },
+      {
+        "name": "fields",
+        "type": "text",
+        "value": null,
+        "label": "Advanced Fields (JSON)",
+        "placeholder": "{\"Status\":\"ACTIVE\"}"
+      }
+    ],
+    "outputs": null
+  },
+  "xero/tax_rate_list": {
+    "hash": "ecda0385c43e6a2064cccaeb24f3a74854a43869711f380bdd2d91d1364d2084",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Tax Rate: List",
+    "description": "List Xero tax rates, optionally filtered by a where clause. Returns matching tax rates.",
+    "website": "https://www.flomation.co",
+    "icon": "xero+list",
+    "date": "05/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Xero",
+      "icon": "xero",
+      "description": "Manage contacts, invoices, bills, payments and the ledger in Xero"
+    },
+    "inputs": [
+      {
+        "name": "credential",
+        "type": "credential",
+        "value": null,
+        "label": "Xero Connection",
+        "placeholder": "${credentials.MyXero}",
+        "required": true
+      },
+      {
+        "name": "tenant",
+        "type": "string",
+        "value": null,
+        "label": "Organisation",
+        "placeholder": "${credentials.MyXero.tenant_id}",
+        "required": true
+      },
+      {
+        "name": "where",
+        "type": "string",
+        "value": null,
+        "label": "Where Filter",
+        "placeholder": "Status==\"ACTIVE\""
+      }
+    ],
+    "outputs": null
+  },
+  "xero/tracking_category_create": {
+    "hash": "70ed371575d76a60d6e3a1d7cab24cc4d320b1896d80dd00278d3115d1f74a22",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Tracking Category: Create",
+    "description": "Create a Xero tracking category. Returns the tracking category ID and object.",
+    "website": "https://www.flomation.co",
+    "icon": "xero+plus",
+    "date": "05/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Xero",
+      "icon": "xero",
+      "description": "Manage contacts, invoices, bills, payments and the ledger in Xero"
+    },
+    "inputs": [
+      {
+        "name": "credential",
+        "type": "credential",
+        "value": null,
+        "label": "Xero Connection",
+        "placeholder": "${credentials.MyXero}",
+        "required": true
+      },
+      {
+        "name": "tenant",
+        "type": "string",
+        "value": null,
+        "label": "Organisation",
+        "placeholder": "${credentials.MyXero.tenant_id}",
+        "required": true
+      },
+      {
+        "name": "name",
+        "type": "string",
+        "value": null,
+        "label": "Name",
+        "placeholder": "Region",
+        "required": true
+      },
+      {
+        "name": "fields",
+        "type": "text",
+        "value": null,
+        "label": "Advanced Fields (JSON)",
+        "placeholder": "{\"Options\":[{\"Name\":\"North\"},{\"Name\":\"South\"}]}"
+      }
+    ],
+    "outputs": null
+  },
+  "xero/tracking_category_list": {
+    "hash": "6ef8ce54d5733e535b1fc0ba3923d3432d1298b16a7addbb4a14ccfdb060ce35",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Tracking Category: List",
+    "description": "List Xero tracking categories, optionally filtered by a where clause. Returns matching categories.",
+    "website": "https://www.flomation.co",
+    "icon": "xero+list",
+    "date": "05/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Xero",
+      "icon": "xero",
+      "description": "Manage contacts, invoices, bills, payments and the ledger in Xero"
+    },
+    "inputs": [
+      {
+        "name": "credential",
+        "type": "credential",
+        "value": null,
+        "label": "Xero Connection",
+        "placeholder": "${credentials.MyXero}",
+        "required": true
+      },
+      {
+        "name": "tenant",
+        "type": "string",
+        "value": null,
+        "label": "Organisation",
+        "placeholder": "${credentials.MyXero.tenant_id}",
+        "required": true
+      },
+      {
+        "name": "where",
+        "type": "string",
+        "value": null,
+        "label": "Where Filter",
+        "placeholder": "Status==\"ACTIVE\""
+      }
+    ],
+    "outputs": null
   }
 }

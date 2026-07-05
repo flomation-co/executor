@@ -1719,7 +1719,35 @@ func (f *Flow) executeNodeActionOnly(actions map[string]Action, node *Node, envi
 						}).Warn("No environment configured for credential substitution")
 						continue
 					}
-					name := strings.TrimPrefix(m, "credentials.")
+					// ${credentials.NAME} resolves the OAuth access token;
+					// ${credentials.NAME.KEY} resolves a metadata value captured
+					// at connect time (QuickBooks realm_id / Xero tenant_id).
+					// Credential names are sanitised to [A-Za-z0-9_-] (no dots),
+					// so a dot after the name always delimits the metadata key.
+					rest := strings.TrimPrefix(m, "credentials.")
+					if dot := strings.IndexByte(rest, '.'); dot >= 0 {
+						name := rest[:dot]
+						key := rest[dot+1:]
+						metaVal, err := environment.GetCredentialMeta(name, key)
+						if err != nil {
+							log.WithFields(log.Fields{
+								"error": err,
+								"name":  name,
+								"key":   key,
+							}).Error("unable to get credential metadata")
+							continue
+						}
+						if metaVal == nil {
+							log.WithFields(log.Fields{
+								"name": name,
+								"key":  key,
+							}).Warn("missing credential metadata")
+							continue
+						}
+						*val = strings.ReplaceAll(*val, "${"+m+"}", *metaVal)
+						continue
+					}
+					name := rest
 					token, err := environment.GetCredential(name)
 					if err != nil {
 						log.WithFields(log.Fields{
