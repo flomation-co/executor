@@ -21,7 +21,7 @@ const (
 	Name         = "List Persons with Significant Control"
 	Description  = "List a UK company's beneficial owners / persons with significant control (Companies House)"
 	Website      = "https://www.flomation.co"
-	Icon         = "building+user-shield"
+	Icon         = "user-group"
 	Date         = "05/07/2026"
 	Type         = core.ActionTypeAction
 )

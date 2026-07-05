@@ -21,7 +21,7 @@ const (
 	Name         = "Search Officers"
 	Description  = "Search UK company officers (directors, secretaries) by name (Companies House)"
 	Website      = "https://www.flomation.co"
-	Icon         = "building+user-magnifying-glass"
+	Icon         = "user+magnifying-glass"
 	Date         = "05/07/2026"
 	Type         = core.ActionTypeAction
 )

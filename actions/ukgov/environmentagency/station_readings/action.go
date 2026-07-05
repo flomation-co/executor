@@ -22,7 +22,7 @@ const (
 	Name         = "Station Readings"
 	Description  = "Get the latest river level, flow or rainfall readings for a monitoring station (Environment Agency)"
 	Website      = "https://www.flomation.co"
-	Icon         = "water+gauge"
+	Icon         = "leaf+gauge"
 	Date         = "05/07/2026"
 	Type         = core.ActionTypeAction
 )

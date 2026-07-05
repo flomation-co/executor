@@ -605,6 +605,9 @@ import (
 	twilio_send_audio "flomation.app/automate/executor/actions/twilio/send_audio"
 	twilio_send_sms "flomation.app/automate/executor/actions/twilio/send_sms"
 	twilio_voice_session "flomation.app/automate/executor/actions/twilio/voice_session"
+	ukgov_bankholidays_list "flomation.app/automate/executor/actions/ukgov/bankholidays/list"
+	ukgov_charitycommission_get_charity "flomation.app/automate/executor/actions/ukgov/charitycommission/get_charity"
+	ukgov_charitycommission_search_charities "flomation.app/automate/executor/actions/ukgov/charitycommission/search_charities"
 	ukgov_companieshouse_get_company "flomation.app/automate/executor/actions/ukgov/companieshouse/get_company"
 	ukgov_companieshouse_get_insolvency "flomation.app/automate/executor/actions/ukgov/companieshouse/get_insolvency"
 	ukgov_companieshouse_list_charges "flomation.app/automate/executor/actions/ukgov/companieshouse/list_charges"
@@ -615,12 +618,20 @@ import (
 	ukgov_companieshouse_search_disqualified "flomation.app/automate/executor/actions/ukgov/companieshouse/search_disqualified"
 	ukgov_companieshouse_search_officers "flomation.app/automate/executor/actions/ukgov/companieshouse/search_officers"
 	ukgov_dvla_vehicle_enquiry "flomation.app/automate/executor/actions/ukgov/dvla/vehicle_enquiry"
+	ukgov_dvsa_mot_history "flomation.app/automate/executor/actions/ukgov/dvsa/mot_history"
 	ukgov_environmentagency_flood_areas "flomation.app/automate/executor/actions/ukgov/environmentagency/flood_areas"
 	ukgov_environmentagency_flood_warnings "flomation.app/automate/executor/actions/ukgov/environmentagency/flood_warnings"
 	ukgov_environmentagency_station_readings "flomation.app/automate/executor/actions/ukgov/environmentagency/station_readings"
 	ukgov_foodstandards_get_establishment "flomation.app/automate/executor/actions/ukgov/foodstandards/get_establishment"
 	ukgov_foodstandards_list_business_types "flomation.app/automate/executor/actions/ukgov/foodstandards/list_business_types"
 	ukgov_foodstandards_search_establishments "flomation.app/automate/executor/actions/ukgov/foodstandards/search_establishments"
+	ukgov_landregistry_price_paid "flomation.app/automate/executor/actions/ukgov/landregistry/price_paid"
+	ukgov_ons_get_timeseries "flomation.app/automate/executor/actions/ukgov/ons/get_timeseries"
+	ukgov_parliament_commons_divisions "flomation.app/automate/executor/actions/ukgov/parliament/commons_divisions"
+	ukgov_parliament_get_member "flomation.app/automate/executor/actions/ukgov/parliament/get_member"
+	ukgov_parliament_search_bills "flomation.app/automate/executor/actions/ukgov/parliament/search_bills"
+	ukgov_parliament_search_members "flomation.app/automate/executor/actions/ukgov/parliament/search_members"
+	ukgov_parliament_written_questions "flomation.app/automate/executor/actions/ukgov/parliament/written_questions"
 	ukgov_police_crime_categories "flomation.app/automate/executor/actions/ukgov/police/crime_categories"
 	ukgov_police_list_forces "flomation.app/automate/executor/actions/ukgov/police/list_forces"
 	ukgov_police_stop_and_search "flomation.app/automate/executor/actions/ukgov/police/stop_and_search"
@@ -1252,6 +1263,9 @@ var Actions = map[string]core.Action{
 	"twilio/send_audio":                                 twilio_send_audio.Execute,
 	"twilio/send_sms":                                   twilio_send_sms.Execute,
 	"twilio/voice_session":                              twilio_voice_session.Execute,
+	"ukgov/bankholidays/list":                           ukgov_bankholidays_list.Execute,
+	"ukgov/charitycommission/get_charity":               ukgov_charitycommission_get_charity.Execute,
+	"ukgov/charitycommission/search_charities":          ukgov_charitycommission_search_charities.Execute,
 	"ukgov/companieshouse/get_company":                  ukgov_companieshouse_get_company.Execute,
 	"ukgov/companieshouse/get_insolvency":               ukgov_companieshouse_get_insolvency.Execute,
 	"ukgov/companieshouse/list_charges":                 ukgov_companieshouse_list_charges.Execute,
@@ -1262,12 +1276,20 @@ var Actions = map[string]core.Action{
 	"ukgov/companieshouse/search_disqualified":          ukgov_companieshouse_search_disqualified.Execute,
 	"ukgov/companieshouse/search_officers":              ukgov_companieshouse_search_officers.Execute,
 	"ukgov/dvla/vehicle_enquiry":                        ukgov_dvla_vehicle_enquiry.Execute,
+	"ukgov/dvsa/mot_history":                            ukgov_dvsa_mot_history.Execute,
 	"ukgov/environmentagency/flood_areas":               ukgov_environmentagency_flood_areas.Execute,
 	"ukgov/environmentagency/flood_warnings":            ukgov_environmentagency_flood_warnings.Execute,
 	"ukgov/environmentagency/station_readings":          ukgov_environmentagency_station_readings.Execute,
 	"ukgov/foodstandards/get_establishment":             ukgov_foodstandards_get_establishment.Execute,
 	"ukgov/foodstandards/list_business_types":           ukgov_foodstandards_list_business_types.Execute,
 	"ukgov/foodstandards/search_establishments":         ukgov_foodstandards_search_establishments.Execute,
+	"ukgov/landregistry/price_paid":                     ukgov_landregistry_price_paid.Execute,
+	"ukgov/ons/get_timeseries":                          ukgov_ons_get_timeseries.Execute,
+	"ukgov/parliament/commons_divisions":                ukgov_parliament_commons_divisions.Execute,
+	"ukgov/parliament/get_member":                       ukgov_parliament_get_member.Execute,
+	"ukgov/parliament/search_bills":                     ukgov_parliament_search_bills.Execute,
+	"ukgov/parliament/search_members":                   ukgov_parliament_search_members.Execute,
+	"ukgov/parliament/written_questions":                ukgov_parliament_written_questions.Execute,
 	"ukgov/police/crime_categories":                     ukgov_police_crime_categories.Execute,
 	"ukgov/police/list_forces":                          ukgov_police_list_forces.Execute,
 	"ukgov/police/stop_and_search":                      ukgov_police_stop_and_search.Execute,

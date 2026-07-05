@@ -24,7 +24,7 @@ const (
 	Name         = "Vehicle Enquiry"
 	Description  = "Look up a UK vehicle's tax, MOT status, make, colour and CO2 by registration (DVLA)"
 	Website      = "https://www.flomation.co"
-	Icon         = "car+magnifying-glass"
+	Icon         = "truck-ramp-box+magnifying-glass"
 	Date         = "05/07/2026"
 	Type         = core.ActionTypeAction
 )

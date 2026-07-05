@@ -61670,14 +61670,282 @@
       }
     ]
   },
+  "ukgov/bankholidays/list": {
+    "hash": "306b29a31143e5bc7c6310a0b0b54bfb1beb790a48cfeb869c068dc5273a7883",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "List Bank Holidays",
+    "description": "List UK bank holidays for a region, with the next upcoming date (GOV.UK)",
+    "website": "https://www.flomation.co",
+    "icon": "calendar",
+    "date": "05/07/2026",
+    "type": 2,
+    "category": {
+      "name": "UK Government",
+      "icon": "landmark",
+      "description": "UK government agency data — Companies House, DVLA, Police, Food Standards and more"
+    },
+    "sub_category": {
+      "name": "Bank Holidays",
+      "icon": "calendar",
+      "description": "UK bank holiday dates for England \u0026 Wales, Scotland and Northern Ireland (GOV.UK)"
+    },
+    "inputs": [
+      {
+        "name": "division",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "england-and-wales",
+        "options": [
+          {
+            "name": "England \u0026 Wales",
+            "value": "england-and-wales"
+          },
+          {
+            "name": "Scotland",
+            "value": "scotland"
+          },
+          {
+            "name": "Northern Ireland",
+            "value": "northern-ireland"
+          }
+        ]
+      },
+      {
+        "name": "year",
+        "type": "string",
+        "value": null,
+        "label": "Year (optional filter)",
+        "placeholder": "2026"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "holidays",
+        "type": "object",
+        "value": null,
+        "label": "Bank Holidays",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Count",
+        "placeholder": ""
+      },
+      {
+        "name": "next_holiday",
+        "type": "string",
+        "value": null,
+        "label": "Next Holiday",
+        "placeholder": ""
+      },
+      {
+        "name": "next_date",
+        "type": "string",
+        "value": null,
+        "label": "Next Date",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "ukgov/charitycommission/get_charity": {
+    "hash": "ece495371911f9fe006dbdfb5ca6eccfbddc0171d1ddf81b7e247c6c42deddab",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Get Charity",
+    "description": "Retrieve full register details for a charity by registered number (Charity Commission)",
+    "website": "https://www.flomation.co",
+    "icon": "hand",
+    "date": "05/07/2026",
+    "type": 2,
+    "category": {
+      "name": "UK Government",
+      "icon": "landmark",
+      "description": "UK government agency data — Companies House, DVLA, Police, Food Standards and more"
+    },
+    "sub_category": {
+      "name": "Charity Commission",
+      "icon": "hand",
+      "description": "The register of charities for England \u0026 Wales (Charity Commission)"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "Charity Commission Subscription Key",
+        "placeholder": "${secrets.CHARITY_COMMISSION_KEY}",
+        "required": true
+      },
+      {
+        "name": "charity_number",
+        "type": "string",
+        "value": null,
+        "label": "Registered Charity Number",
+        "placeholder": "e.g. 202918",
+        "required": true
+      },
+      {
+        "name": "suffix",
+        "type": "string",
+        "value": null,
+        "label": "Group/Subsidiary Suffix",
+        "placeholder": "0"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "charity",
+        "type": "object",
+        "value": null,
+        "label": "Charity Details",
+        "placeholder": ""
+      },
+      {
+        "name": "charity_name",
+        "type": "string",
+        "value": null,
+        "label": "Charity Name",
+        "placeholder": ""
+      },
+      {
+        "name": "status",
+        "type": "string",
+        "value": null,
+        "label": "Registration Status",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "ukgov/charitycommission/search_charities": {
+    "hash": "8066b4650d3da40803466dfcb14584f9404391556926a997f65d42dbe43d79bd",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Search Charities",
+    "description": "Search the England \u0026 Wales register of charities by name (Charity Commission)",
+    "website": "https://www.flomation.co",
+    "icon": "hand+magnifying-glass",
+    "date": "05/07/2026",
+    "type": 2,
+    "category": {
+      "name": "UK Government",
+      "icon": "landmark",
+      "description": "UK government agency data — Companies House, DVLA, Police, Food Standards and more"
+    },
+    "sub_category": {
+      "name": "Charity Commission",
+      "icon": "hand",
+      "description": "The register of charities for England \u0026 Wales (Charity Commission)"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "Charity Commission Subscription Key",
+        "placeholder": "${secrets.CHARITY_COMMISSION_KEY}",
+        "required": true
+      },
+      {
+        "name": "name",
+        "type": "string",
+        "value": null,
+        "label": "Charity Name",
+        "placeholder": "e.g. Oxfam",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "charities",
+        "type": "object",
+        "value": null,
+        "label": "Charities",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Count",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
   "ukgov/companieshouse/get_company": {
-    "hash": "ad0906fd794dfad809e35b718d250d02d0648c6a445930e7b28dfe3868c2e2cb",
+    "hash": "85775bf40bda19ae166c9414dcdbf04127841253ce1b27a18a74bfe092b0de7c",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Get Company",
     "description": "Retrieve a UK company's profile by company number (Companies House)",
     "website": "https://www.flomation.co",
-    "icon": "building+circle-info",
+    "icon": "briefcase",
     "date": "05/07/2026",
     "type": 2,
     "category": {
@@ -61687,7 +61955,7 @@
     },
     "sub_category": {
       "name": "Companies House",
-      "icon": "building",
+      "icon": "briefcase",
       "description": "UK company registry — search companies, officers, filings, PSCs and charges (Companies House)"
     },
     "inputs": [
@@ -61761,13 +62029,13 @@
     ]
   },
   "ukgov/companieshouse/get_insolvency": {
-    "hash": "13f9b20d2d746a6af88070a6a882f4fe7bcd3506160b5577d13d5e6f35356a95",
+    "hash": "a62d0da1ef71bfa0893afd99d937e05a69471db4cfde4e8cbcf3a884bbeb8115",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Get Insolvency",
     "description": "Retrieve a UK company's insolvency case history (Companies House)",
     "website": "https://www.flomation.co",
-    "icon": "building+triangle-exclamation",
+    "icon": "triangle-exclamation",
     "date": "05/07/2026",
     "type": 2,
     "category": {
@@ -61777,7 +62045,7 @@
     },
     "sub_category": {
       "name": "Companies House",
-      "icon": "building",
+      "icon": "briefcase",
       "description": "UK company registry — search companies, officers, filings, PSCs and charges (Companies House)"
     },
     "inputs": [
@@ -61837,13 +62105,13 @@
     ]
   },
   "ukgov/companieshouse/list_charges": {
-    "hash": "03ac053a672c61ec82e04294a92513c501bd9da100c1671c81842d67a9d16994",
+    "hash": "6b388a8c5d7524ad58df61bee202835189183eb403f2c177b59c6b4715385f93",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "List Charges",
     "description": "List a UK company's registered charges — mortgages and debentures (Companies House)",
     "website": "https://www.flomation.co",
-    "icon": "building+file-contract",
+    "icon": "file-lines+dollar-sign",
     "date": "05/07/2026",
     "type": 2,
     "category": {
@@ -61853,7 +62121,7 @@
     },
     "sub_category": {
       "name": "Companies House",
-      "icon": "building",
+      "icon": "briefcase",
       "description": "UK company registry — search companies, officers, filings, PSCs and charges (Companies House)"
     },
     "inputs": [
@@ -61920,13 +62188,13 @@
     ]
   },
   "ukgov/companieshouse/list_filing_history": {
-    "hash": "c3592428df006f19a59f62105a1732f6fcadb1885dda27eaa2d77738738facf9",
+    "hash": "422679bed279f3018269896e128ea06c6e25ba0207670867dba3926b45ca1bda",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "List Filing History",
     "description": "List a UK company's filing history — accounts, confirmations, changes (Companies House)",
     "website": "https://www.flomation.co",
-    "icon": "building+file-lines",
+    "icon": "file-lines",
     "date": "05/07/2026",
     "type": 2,
     "category": {
@@ -61936,7 +62204,7 @@
     },
     "sub_category": {
       "name": "Companies House",
-      "icon": "building",
+      "icon": "briefcase",
       "description": "UK company registry — search companies, officers, filings, PSCs and charges (Companies House)"
     },
     "inputs": [
@@ -62003,13 +62271,13 @@
     ]
   },
   "ukgov/companieshouse/list_officers": {
-    "hash": "bd2f986c9c192c163a775c0cea9e954576c589c1964b61d409a0c9a490d2cbf9",
+    "hash": "2ec69b8b8c718fd088ed13e97da47f6bd66f5bcbedb2b2ceb0745112c5078e0d",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "List Officers",
     "description": "List a UK company's officers — directors and secretaries (Companies House)",
     "website": "https://www.flomation.co",
-    "icon": "building+users",
+    "icon": "people-group",
     "date": "05/07/2026",
     "type": 2,
     "category": {
@@ -62019,7 +62287,7 @@
     },
     "sub_category": {
       "name": "Companies House",
-      "icon": "building",
+      "icon": "briefcase",
       "description": "UK company registry — search companies, officers, filings, PSCs and charges (Companies House)"
     },
     "inputs": [
@@ -62086,13 +62354,13 @@
     ]
   },
   "ukgov/companieshouse/list_psc": {
-    "hash": "a1771941f0efac2a67c43d331a9f8bde827ad3baeb1f86df9076d03cbb16f1f6",
+    "hash": "fbcce526ab0c8f24802afecb5716a2e936bcef9509acbbcb31e304549d6441a8",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "List Persons with Significant Control",
     "description": "List a UK company's beneficial owners / persons with significant control (Companies House)",
     "website": "https://www.flomation.co",
-    "icon": "building+user-shield",
+    "icon": "user-group",
     "date": "05/07/2026",
     "type": 2,
     "category": {
@@ -62102,7 +62370,7 @@
     },
     "sub_category": {
       "name": "Companies House",
-      "icon": "building",
+      "icon": "briefcase",
       "description": "UK company registry — search companies, officers, filings, PSCs and charges (Companies House)"
     },
     "inputs": [
@@ -62162,13 +62430,13 @@
     ]
   },
   "ukgov/companieshouse/search_companies": {
-    "hash": "96b298073452f45a885685b69172f40f09b437ffa8f3dd85fa013a28f805b506",
+    "hash": "08f9ab660001509eb3253edd6c8c1eb84dde1df199d934b7e0e82ee206e65b69",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Search Companies",
     "description": "Search the UK Companies House register by company name or number (Companies House)",
     "website": "https://www.flomation.co",
-    "icon": "building+magnifying-glass",
+    "icon": "briefcase+magnifying-glass",
     "date": "05/07/2026",
     "type": 2,
     "category": {
@@ -62178,7 +62446,7 @@
     },
     "sub_category": {
       "name": "Companies House",
-      "icon": "building",
+      "icon": "briefcase",
       "description": "UK company registry — search companies, officers, filings, PSCs and charges (Companies House)"
     },
     "inputs": [
@@ -62252,13 +62520,13 @@
     ]
   },
   "ukgov/companieshouse/search_disqualified": {
-    "hash": "632f494792b4e476e31edb71c79b2de1d965ccd70d52448071166e57f190bebe",
+    "hash": "5ceff289cae59aacab653b880b80b1908b9cbde7dced85820b789b136f68552d",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Search Disqualified Officers",
     "description": "Search the UK register of disqualified company directors by name (Companies House)",
     "website": "https://www.flomation.co",
-    "icon": "building+user-slash",
+    "icon": "user+ban",
     "date": "05/07/2026",
     "type": 2,
     "category": {
@@ -62268,7 +62536,7 @@
     },
     "sub_category": {
       "name": "Companies House",
-      "icon": "building",
+      "icon": "briefcase",
       "description": "UK company registry — search companies, officers, filings, PSCs and charges (Companies House)"
     },
     "inputs": [
@@ -62342,13 +62610,13 @@
     ]
   },
   "ukgov/companieshouse/search_officers": {
-    "hash": "46fe51e3386c0f0b6a18dbd03317ccddb991654cbb58641b22ac6185c8c92ceb",
+    "hash": "9e9ae1a386a5205e608439f7ed1304000af258d2f00674be178eb3db9e66c793",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Search Officers",
     "description": "Search UK company officers (directors, secretaries) by name (Companies House)",
     "website": "https://www.flomation.co",
-    "icon": "building+user-magnifying-glass",
+    "icon": "user+magnifying-glass",
     "date": "05/07/2026",
     "type": 2,
     "category": {
@@ -62358,7 +62626,7 @@
     },
     "sub_category": {
       "name": "Companies House",
-      "icon": "building",
+      "icon": "briefcase",
       "description": "UK company registry — search companies, officers, filings, PSCs and charges (Companies House)"
     },
     "inputs": [
@@ -62432,13 +62700,13 @@
     ]
   },
   "ukgov/dvla/vehicle_enquiry": {
-    "hash": "a8509f41b1e99a47c009f587649bc333ac78d3ec3019c1449d64b5e73cbd328c",
+    "hash": "34c769b5f07ef9a8148c7db4427f43a5758e522f368eeeb3f47686e4476ad869",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Vehicle Enquiry",
     "description": "Look up a UK vehicle's tax, MOT status, make, colour and CO2 by registration (DVLA)",
     "website": "https://www.flomation.co",
-    "icon": "car+magnifying-glass",
+    "icon": "truck-ramp-box+magnifying-glass",
     "date": "05/07/2026",
     "type": 2,
     "category": {
@@ -62448,7 +62716,7 @@
     },
     "sub_category": {
       "name": "DVLA",
-      "icon": "car",
+      "icon": "truck-ramp-box",
       "description": "UK vehicle data — tax, MOT status and vehicle details (DVLA Vehicle Enquiry Service)"
     },
     "inputs": [
@@ -62535,14 +62803,142 @@
       }
     ]
   },
+  "ukgov/dvsa/mot_history": {
+    "hash": "27899f1776ef7af150e55afc0c5a6021c796740bd27f3b9baf80390034c66ac4",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "MOT History",
+    "description": "Retrieve a UK vehicle's full MOT test history by registration (DVSA)",
+    "website": "https://www.flomation.co",
+    "icon": "wrench+list",
+    "date": "05/07/2026",
+    "type": 2,
+    "category": {
+      "name": "UK Government",
+      "icon": "landmark",
+      "description": "UK government agency data — Companies House, DVLA, Police, Food Standards and more"
+    },
+    "sub_category": {
+      "name": "DVSA",
+      "icon": "wrench",
+      "description": "UK MOT test history (Driver \u0026 Vehicle Standards Agency)"
+    },
+    "inputs": [
+      {
+        "name": "client_id",
+        "type": "secret",
+        "value": null,
+        "label": "DVSA Client ID",
+        "placeholder": "${secrets.DVSA_CLIENT_ID}",
+        "required": true
+      },
+      {
+        "name": "client_secret",
+        "type": "secret",
+        "value": null,
+        "label": "DVSA Client Secret",
+        "placeholder": "${secrets.DVSA_CLIENT_SECRET}",
+        "required": true
+      },
+      {
+        "name": "tenant_id",
+        "type": "string",
+        "value": null,
+        "label": "DVSA Tenant ID",
+        "placeholder": "${secrets.DVSA_TENANT_ID}",
+        "required": true
+      },
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "DVSA API Key",
+        "placeholder": "${secrets.DVSA_API_KEY}",
+        "required": true
+      },
+      {
+        "name": "registration_number",
+        "type": "string",
+        "value": null,
+        "label": "Registration Number",
+        "placeholder": "e.g. AB19 ABC",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "vehicle",
+        "type": "object",
+        "value": null,
+        "label": "Vehicle",
+        "placeholder": ""
+      },
+      {
+        "name": "make",
+        "type": "string",
+        "value": null,
+        "label": "Make",
+        "placeholder": ""
+      },
+      {
+        "name": "model",
+        "type": "string",
+        "value": null,
+        "label": "Model",
+        "placeholder": ""
+      },
+      {
+        "name": "mot_tests",
+        "type": "object",
+        "value": null,
+        "label": "MOT Tests",
+        "placeholder": ""
+      },
+      {
+        "name": "latest_result",
+        "type": "string",
+        "value": null,
+        "label": "Latest Result",
+        "placeholder": ""
+      },
+      {
+        "name": "latest_expiry",
+        "type": "string",
+        "value": null,
+        "label": "Latest Expiry",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
   "ukgov/environmentagency/flood_areas": {
-    "hash": "41629b5586f197a6ce657250e857535bd32c26b24dd61f15d0ff125e3aedfbb0",
+    "hash": "0f94b9683e986f320151d86747194e02c1d51bf402974a13b7909cacb4e90de1",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Flood Areas",
     "description": "List UK flood warning/alert areas near a latitude/longitude (Environment Agency)",
     "website": "https://www.flomation.co",
-    "icon": "water+map-location-dot",
+    "icon": "leaf+map",
     "date": "05/07/2026",
     "type": 2,
     "category": {
@@ -62552,7 +62948,7 @@
     },
     "sub_category": {
       "name": "Environment Agency",
-      "icon": "water",
+      "icon": "leaf",
       "description": "UK flood warnings, flood areas and river/rainfall monitoring (Environment Agency)"
     },
     "inputs": [
@@ -62619,13 +63015,13 @@
     ]
   },
   "ukgov/environmentagency/flood_warnings": {
-    "hash": "a87c07284610165d176a291117bda11737b233c74c0c2433cf1ac43fceb1a2a3",
+    "hash": "571a4d674511525c4515943fcabbc3103834aa7a1bd215121aca03e2a522da85",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Flood Warnings",
     "description": "List current UK flood warnings and alerts, optionally by county (Environment Agency)",
     "website": "https://www.flomation.co",
-    "icon": "water+triangle-exclamation",
+    "icon": "leaf+triangle-exclamation",
     "date": "05/07/2026",
     "type": 2,
     "category": {
@@ -62635,7 +63031,7 @@
     },
     "sub_category": {
       "name": "Environment Agency",
-      "icon": "water",
+      "icon": "leaf",
       "description": "UK flood warnings, flood areas and river/rainfall monitoring (Environment Agency)"
     },
     "inputs": [
@@ -62693,13 +63089,13 @@
     ]
   },
   "ukgov/environmentagency/station_readings": {
-    "hash": "f5f964deb634b6ad637a6c588923e5f0571d5588c4abbeaf365aef9169695139",
+    "hash": "5364fac35732b917bd97ddfbef989784d123bcc6312f0f81ae2fc034048e774a",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Station Readings",
     "description": "Get the latest river level, flow or rainfall readings for a monitoring station (Environment Agency)",
     "website": "https://www.flomation.co",
-    "icon": "water+gauge",
+    "icon": "leaf+gauge",
     "date": "05/07/2026",
     "type": 2,
     "category": {
@@ -62709,7 +63105,7 @@
     },
     "sub_category": {
       "name": "Environment Agency",
-      "icon": "water",
+      "icon": "leaf",
       "description": "UK flood warnings, flood areas and river/rainfall monitoring (Environment Agency)"
     },
     "inputs": [
@@ -62761,13 +63157,13 @@
     ]
   },
   "ukgov/foodstandards/get_establishment": {
-    "hash": "4fa851666567131efa289b4bb4d9e6bd536c179db618b5dfafb3e6d081a76028",
+    "hash": "7cad95bd8ac2fb1b7c2811ed3da5e39654b06f629afb33136784d9a129ba2261",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Get Food Establishment",
     "description": "Look up a UK food hygiene rating by FHRS establishment ID (Food Standards Agency)",
     "website": "https://www.flomation.co",
-    "icon": "utensils+circle-info",
+    "icon": "star",
     "date": "05/07/2026",
     "type": 2,
     "category": {
@@ -62777,7 +63173,7 @@
     },
     "sub_category": {
       "name": "Food Standards Agency",
-      "icon": "utensils",
+      "icon": "star",
       "description": "UK food hygiene ratings (FHRS) — search establishments and view ratings"
     },
     "inputs": [
@@ -62843,13 +63239,13 @@
     ]
   },
   "ukgov/foodstandards/list_business_types": {
-    "hash": "49f7dd1b265b65b2ebfcf4ad86b4d5fb02c16ad81bf5a49cb5be2b6fe099ef60",
+    "hash": "a9c50539779e8a47a02f51bdc749ff5527d7b20d8b2f81e0b25b45be0da94ee8",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "List Food Business Types",
     "description": "List the food business type categories used by the FHRS scheme (Food Standards Agency)",
     "website": "https://www.flomation.co",
-    "icon": "utensils+list",
+    "icon": "star+list",
     "date": "05/07/2026",
     "type": 2,
     "category": {
@@ -62859,7 +63255,7 @@
     },
     "sub_category": {
       "name": "Food Standards Agency",
-      "icon": "utensils",
+      "icon": "star",
       "description": "UK food hygiene ratings (FHRS) — search establishments and view ratings"
     },
     "inputs": null,
@@ -62902,13 +63298,13 @@
     ]
   },
   "ukgov/foodstandards/search_establishments": {
-    "hash": "4c8915bafc4e7dea1c5b565af518826fc3d0f9de1afaa7f3ecd50061f3b7d8d9",
+    "hash": "69321499276ce58406d53b84015e6085a881a80b1f547ddcba8c6c7d300d55dd",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Search Food Establishments",
     "description": "Search UK food hygiene ratings by business name or address (Food Standards Agency)",
     "website": "https://www.flomation.co",
-    "icon": "utensils+magnifying-glass",
+    "icon": "star+magnifying-glass",
     "date": "05/07/2026",
     "type": 2,
     "category": {
@@ -62918,7 +63314,7 @@
     },
     "sub_category": {
       "name": "Food Standards Agency",
-      "icon": "utensils",
+      "icon": "star",
       "description": "UK food hygiene ratings (FHRS) — search establishments and view ratings"
     },
     "inputs": [
@@ -62989,14 +63385,602 @@
       }
     ]
   },
+  "ukgov/landregistry/price_paid": {
+    "hash": "3b5024a45df2922a97e0b267419f2134ad55233372567094cb79429d1f4a2f24",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Price Paid",
+    "description": "Look up UK sold-property prices by postcode (HM Land Registry Price Paid)",
+    "website": "https://www.flomation.co",
+    "icon": "house+dollar-sign",
+    "date": "05/07/2026",
+    "type": 2,
+    "category": {
+      "name": "UK Government",
+      "icon": "landmark",
+      "description": "UK government agency data — Companies House, DVLA, Police, Food Standards and more"
+    },
+    "sub_category": {
+      "name": "Land Registry",
+      "icon": "house",
+      "description": "UK property sold-price data from HM Land Registry Price Paid"
+    },
+    "inputs": [
+      {
+        "name": "postcode",
+        "type": "string",
+        "value": null,
+        "label": "Postcode",
+        "placeholder": "PL6 8RU",
+        "required": true
+      },
+      {
+        "name": "max_results",
+        "type": "integer",
+        "value": null,
+        "label": "Maximum Results (1-50)",
+        "placeholder": "20"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "transactions",
+        "type": "object",
+        "value": null,
+        "label": "Transactions",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Count",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "ukgov/ons/get_timeseries": {
+    "hash": "cfa734187c4f321b4993194126dba6c568bb3ceedefe1a9c0e85f32f23b16444",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Get Timeseries",
+    "description": "Fetch an ONS economic timeseries (inflation, GDP, etc.) by series ID and dataset (ONS)",
+    "website": "https://www.flomation.co",
+    "icon": "chart-line",
+    "date": "05/07/2026",
+    "type": 2,
+    "category": {
+      "name": "UK Government",
+      "icon": "landmark",
+      "description": "UK government agency data — Companies House, DVLA, Police, Food Standards and more"
+    },
+    "sub_category": {
+      "name": "ONS",
+      "icon": "chart-line",
+      "description": "UK economic statistics from the Office for National Statistics (inflation, GDP, unemployment)"
+    },
+    "inputs": [
+      {
+        "name": "cdid",
+        "type": "string",
+        "value": null,
+        "label": "Series ID (CDID)",
+        "placeholder": "e.g. L55O (CPIH), D7G7 (CPI)",
+        "required": true
+      },
+      {
+        "name": "dataset",
+        "type": "string",
+        "value": null,
+        "label": "Dataset",
+        "placeholder": "e.g. mm23",
+        "required": true
+      },
+      {
+        "name": "section",
+        "type": "string",
+        "value": null,
+        "label": "Topic Path (optional)",
+        "placeholder": ""
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "latest_value",
+        "type": "string",
+        "value": null,
+        "label": "Latest Value",
+        "placeholder": ""
+      },
+      {
+        "name": "latest_period",
+        "type": "string",
+        "value": null,
+        "label": "Latest Period",
+        "placeholder": ""
+      },
+      {
+        "name": "title",
+        "type": "string",
+        "value": null,
+        "label": "Title",
+        "placeholder": ""
+      },
+      {
+        "name": "unit",
+        "type": "string",
+        "value": null,
+        "label": "Unit",
+        "placeholder": ""
+      },
+      {
+        "name": "recent",
+        "type": "object",
+        "value": null,
+        "label": "Recent Points",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "ukgov/parliament/commons_divisions": {
+    "hash": "4dddb1cc049e91ea51c776148df994046e4a7c355a2e8be59b59325fb2ecf7d0",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Commons Divisions",
+    "description": "Search recorded House of Commons division (vote) results (UK Parliament)",
+    "website": "https://www.flomation.co",
+    "icon": "landmark+check",
+    "date": "05/07/2026",
+    "type": 2,
+    "category": {
+      "name": "UK Government",
+      "icon": "landmark",
+      "description": "UK government agency data — Companies House, DVLA, Police, Food Standards and more"
+    },
+    "sub_category": {
+      "name": "UK Parliament",
+      "icon": "landmark",
+      "description": "UK Parliament — MPs \u0026 Lords, bills, Commons votes and written questions"
+    },
+    "inputs": [
+      {
+        "name": "query",
+        "type": "string",
+        "value": null,
+        "label": "Search Term (optional)",
+        "placeholder": "e.g. budget"
+      },
+      {
+        "name": "max_results",
+        "type": "integer",
+        "value": null,
+        "label": "Maximum Results (1-25)",
+        "placeholder": "20"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "divisions",
+        "type": "object",
+        "value": null,
+        "label": "Divisions",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Count",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "ukgov/parliament/get_member": {
+    "hash": "1161e9ee7465b82243622f49595ae537f979c0b6982d7e30f525904fcf1d3160",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Get Member",
+    "description": "Retrieve a UK Parliament member (MP or Lord) by ID (UK Parliament)",
+    "website": "https://www.flomation.co",
+    "icon": "landmark+user",
+    "date": "05/07/2026",
+    "type": 2,
+    "category": {
+      "name": "UK Government",
+      "icon": "landmark",
+      "description": "UK government agency data — Companies House, DVLA, Police, Food Standards and more"
+    },
+    "sub_category": {
+      "name": "UK Parliament",
+      "icon": "landmark",
+      "description": "UK Parliament — MPs \u0026 Lords, bills, Commons votes and written questions"
+    },
+    "inputs": [
+      {
+        "name": "member_id",
+        "type": "string",
+        "value": null,
+        "label": "Member ID",
+        "placeholder": "e.g. 4514",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "member",
+        "type": "object",
+        "value": null,
+        "label": "Member",
+        "placeholder": ""
+      },
+      {
+        "name": "name",
+        "type": "string",
+        "value": null,
+        "label": "Name",
+        "placeholder": ""
+      },
+      {
+        "name": "party",
+        "type": "string",
+        "value": null,
+        "label": "Party",
+        "placeholder": ""
+      },
+      {
+        "name": "constituency",
+        "type": "string",
+        "value": null,
+        "label": "Constituency / Seat",
+        "placeholder": ""
+      },
+      {
+        "name": "house",
+        "type": "string",
+        "value": null,
+        "label": "House",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "ukgov/parliament/search_bills": {
+    "hash": "b836e555501d9b8a529f96cda64df6b40439e548b6cc5a99026466f2d39856c3",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Search Bills",
+    "description": "Search UK Parliament bills by keyword, with their current stage (UK Parliament)",
+    "website": "https://www.flomation.co",
+    "icon": "landmark+book",
+    "date": "05/07/2026",
+    "type": 2,
+    "category": {
+      "name": "UK Government",
+      "icon": "landmark",
+      "description": "UK government agency data — Companies House, DVLA, Police, Food Standards and more"
+    },
+    "sub_category": {
+      "name": "UK Parliament",
+      "icon": "landmark",
+      "description": "UK Parliament — MPs \u0026 Lords, bills, Commons votes and written questions"
+    },
+    "inputs": [
+      {
+        "name": "query",
+        "type": "string",
+        "value": null,
+        "label": "Search Term",
+        "placeholder": "e.g. finance",
+        "required": true
+      },
+      {
+        "name": "max_results",
+        "type": "integer",
+        "value": null,
+        "label": "Maximum Results (1-20)",
+        "placeholder": "20"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "bills",
+        "type": "object",
+        "value": null,
+        "label": "Bills",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Returned Count",
+        "placeholder": ""
+      },
+      {
+        "name": "total",
+        "type": "integer",
+        "value": null,
+        "label": "Total Matches",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "ukgov/parliament/search_members": {
+    "hash": "7d8deaa5d5a9f05c33105bcb2d5e54b8cdc11cf6680d5ef8da090c3a14df7328",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Search Members",
+    "description": "Search UK Parliament members (MPs and Lords) by name (UK Parliament)",
+    "website": "https://www.flomation.co",
+    "icon": "landmark+magnifying-glass",
+    "date": "05/07/2026",
+    "type": 2,
+    "category": {
+      "name": "UK Government",
+      "icon": "landmark",
+      "description": "UK government agency data — Companies House, DVLA, Police, Food Standards and more"
+    },
+    "sub_category": {
+      "name": "UK Parliament",
+      "icon": "landmark",
+      "description": "UK Parliament — MPs \u0026 Lords, bills, Commons votes and written questions"
+    },
+    "inputs": [
+      {
+        "name": "name",
+        "type": "string",
+        "value": null,
+        "label": "Member Name",
+        "placeholder": "e.g. Keir Starmer",
+        "required": true
+      },
+      {
+        "name": "max_results",
+        "type": "integer",
+        "value": null,
+        "label": "Maximum Results (1-20)",
+        "placeholder": "20"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "members",
+        "type": "object",
+        "value": null,
+        "label": "Members",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Returned Count",
+        "placeholder": ""
+      },
+      {
+        "name": "total",
+        "type": "integer",
+        "value": null,
+        "label": "Total Matches",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "ukgov/parliament/written_questions": {
+    "hash": "1284136a83a7903b294af673b01753f3dd892d3c021c43ead8ddcdb6bb6c018e",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Written Questions",
+    "description": "Search UK Parliament written questions and answers by keyword (UK Parliament)",
+    "website": "https://www.flomation.co",
+    "icon": "landmark+comment",
+    "date": "05/07/2026",
+    "type": 2,
+    "category": {
+      "name": "UK Government",
+      "icon": "landmark",
+      "description": "UK government agency data — Companies House, DVLA, Police, Food Standards and more"
+    },
+    "sub_category": {
+      "name": "UK Parliament",
+      "icon": "landmark",
+      "description": "UK Parliament — MPs \u0026 Lords, bills, Commons votes and written questions"
+    },
+    "inputs": [
+      {
+        "name": "query",
+        "type": "string",
+        "value": null,
+        "label": "Search Term",
+        "placeholder": "e.g. NHS waiting times",
+        "required": true
+      },
+      {
+        "name": "max_results",
+        "type": "integer",
+        "value": null,
+        "label": "Maximum Results (1-20)",
+        "placeholder": "20"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "questions",
+        "type": "object",
+        "value": null,
+        "label": "Written Questions",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Returned Count",
+        "placeholder": ""
+      },
+      {
+        "name": "total",
+        "type": "integer",
+        "value": null,
+        "label": "Total Matches",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
   "ukgov/police/crime_categories": {
-    "hash": "b4431097d3300e4b8e67ca745dd86f9e892a6c769d3181005842fc349df37608",
+    "hash": "3d28ba880dcfe191081d1880ddcd0960d8524d2433e118cf22849bd455207de0",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Crime Categories",
     "description": "List UK crime categories valid for a given month (Police UK)",
     "website": "https://www.flomation.co",
-    "icon": "shield-halved+tags",
+    "icon": "shield-halved+hashtag",
     "date": "05/07/2026",
     "type": 2,
     "category": {
@@ -63199,13 +64183,13 @@
     ]
   },
   "ukgov/police/street_crimes": {
-    "hash": "2f4560c6f5c8d8ecd427041b404d82300516e24039896e03be8cd71caeef308d",
+    "hash": "c115dc4a723ff82fa4b6bec2b3f03b16bc582c3ed59df12b423bb97a2baf546d",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Street-Level Crimes",
     "description": "List UK street-level crimes near a latitude/longitude for a given month (Police UK)",
     "website": "https://www.flomation.co",
-    "icon": "shield-halved+location-dot",
+    "icon": "shield-halved+map",
     "date": "05/07/2026",
     "type": 2,
     "category": {
@@ -63282,13 +64266,13 @@
     ]
   },
   "ukgov/postcodes/nearest_postcodes": {
-    "hash": "42f315c6b973ee7d02bb1dd6ddbc656805ce002b6b06608ff8499971496b0e25",
+    "hash": "9a1939da7244a1e9fcf84f514fbd1e3230833baaa41a5deb81738bc23f212100",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Nearest Postcodes",
     "description": "List UK postcodes geographically nearest to a given postcode (postcodes.io)",
     "website": "https://www.flomation.co",
-    "icon": "location-dot+arrows-to-circle",
+    "icon": "map+list",
     "date": "05/07/2026",
     "type": 2,
     "category": {
@@ -63298,7 +64282,7 @@
     },
     "sub_category": {
       "name": "Postcodes",
-      "icon": "location-dot",
+      "icon": "map",
       "description": "UK postcode lookup, validation and geocoding (postcodes.io)"
     },
     "inputs": [
@@ -63350,13 +64334,13 @@
     ]
   },
   "ukgov/postcodes/postcode_lookup": {
-    "hash": "52394a402da4d6e897f80a97acca36f9ce18e5371ec3caae71e18f683e2096b1",
+    "hash": "8b5ef55ad443e22ba5ee9b16792ad93ad9dc8737c55ae60ec785981dca9f36f3",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Postcode Lookup",
     "description": "Resolve a UK postcode to coordinates, region and administrative areas (postcodes.io)",
     "website": "https://www.flomation.co",
-    "icon": "location-dot+magnifying-glass",
+    "icon": "map+magnifying-glass",
     "date": "05/07/2026",
     "type": 2,
     "category": {
@@ -63366,7 +64350,7 @@
     },
     "sub_category": {
       "name": "Postcodes",
-      "icon": "location-dot",
+      "icon": "map",
       "description": "UK postcode lookup, validation and geocoding (postcodes.io)"
     },
     "inputs": [
@@ -63432,13 +64416,13 @@
     ]
   },
   "ukgov/postcodes/reverse_geocode": {
-    "hash": "882f1a907d28d0fa04bdc1d425c89923e74b8257470cc35f3c98a93609f3ddc9",
+    "hash": "cd61842fbacbe9c31e7f4a116c3314b7518a07e14bb142c442a03b9cde484a2d",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Reverse Geocode",
     "description": "Find the nearest UK postcodes to a latitude/longitude (postcodes.io)",
     "website": "https://www.flomation.co",
-    "icon": "location-dot+arrows-rotate",
+    "icon": "map+location-arrow",
     "date": "05/07/2026",
     "type": 2,
     "category": {
@@ -63448,7 +64432,7 @@
     },
     "sub_category": {
       "name": "Postcodes",
-      "icon": "location-dot",
+      "icon": "map",
       "description": "UK postcode lookup, validation and geocoding (postcodes.io)"
     },
     "inputs": [
@@ -63515,13 +64499,13 @@
     ]
   },
   "ukgov/postcodes/validate_postcode": {
-    "hash": "a0811c405a2b4a7fe56e7b2890b1e3011c7cfe847c67b64379fe6fd3cff1a16f",
+    "hash": "10f7be641b7e3973120d1ed60df3a5d40b4cb461ecdd751315dbd4d7e0804677",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Validate Postcode",
     "description": "Check whether a string is a valid UK postcode (postcodes.io)",
     "website": "https://www.flomation.co",
-    "icon": "location-dot+circle-check",
+    "icon": "map+circle-check",
     "date": "05/07/2026",
     "type": 2,
     "category": {
@@ -63531,7 +64515,7 @@
     },
     "sub_category": {
       "name": "Postcodes",
-      "icon": "location-dot",
+      "icon": "map",
       "description": "UK postcode lookup, validation and geocoding (postcodes.io)"
     },
     "inputs": [

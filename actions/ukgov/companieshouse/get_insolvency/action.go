@@ -21,7 +21,7 @@ const (
 	Name         = "Get Insolvency"
 	Description  = "Retrieve a UK company's insolvency case history (Companies House)"
 	Website      = "https://www.flomation.co"
-	Icon         = "building+triangle-exclamation"
+	Icon         = "triangle-exclamation"
 	Date         = "05/07/2026"
 	Type         = core.ActionTypeAction
 )

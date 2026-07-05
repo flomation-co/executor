@@ -20,7 +20,7 @@ const (
 	Name         = "Street-Level Crimes"
 	Description  = "List UK street-level crimes near a latitude/longitude for a given month (Police UK)"
 	Website      = "https://www.flomation.co"
-	Icon         = "shield-halved+location-dot"
+	Icon         = "shield-halved+map"
 	Date         = "05/07/2026"
 	Type         = core.ActionTypeAction
 )

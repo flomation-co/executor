@@ -20,7 +20,7 @@ const (
 	Name         = "List Filing History"
 	Description  = "List a UK company's filing history — accounts, confirmations, changes (Companies House)"
 	Website      = "https://www.flomation.co"
-	Icon         = "building+file-lines"
+	Icon         = "file-lines"
 	Date         = "05/07/2026"
 	Type         = core.ActionTypeAction
 )

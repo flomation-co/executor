@@ -21,7 +21,7 @@ const (
 	Name         = "Nearest Postcodes"
 	Description  = "List UK postcodes geographically nearest to a given postcode (postcodes.io)"
 	Website      = "https://www.flomation.co"
-	Icon         = "location-dot+arrows-to-circle"
+	Icon         = "map+list"
 	Date         = "05/07/2026"
 	Type         = core.ActionTypeAction
 )

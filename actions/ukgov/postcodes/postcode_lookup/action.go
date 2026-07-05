@@ -20,7 +20,7 @@ const (
 	Name         = "Postcode Lookup"
 	Description  = "Resolve a UK postcode to coordinates, region and administrative areas (postcodes.io)"
 	Website      = "https://www.flomation.co"
-	Icon         = "location-dot+magnifying-glass"
+	Icon         = "map+magnifying-glass"
 	Date         = "05/07/2026"
 	Type         = core.ActionTypeAction
 )

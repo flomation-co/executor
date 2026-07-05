@@ -20,7 +20,7 @@ const (
 	Name         = "Flood Areas"
 	Description  = "List UK flood warning/alert areas near a latitude/longitude (Environment Agency)"
 	Website      = "https://www.flomation.co"
-	Icon         = "water+map-location-dot"
+	Icon         = "leaf+map"
 	Date         = "05/07/2026"
 	Type         = core.ActionTypeAction
 )

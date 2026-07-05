@@ -21,7 +21,7 @@ const (
 	Name         = "List Officers"
 	Description  = "List a UK company's officers — directors and secretaries (Companies House)"
 	Website      = "https://www.flomation.co"
-	Icon         = "building+users"
+	Icon         = "people-group"
 	Date         = "05/07/2026"
 	Type         = core.ActionTypeAction
 )

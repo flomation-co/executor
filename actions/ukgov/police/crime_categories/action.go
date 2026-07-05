@@ -21,7 +21,7 @@ const (
 	Name         = "Crime Categories"
 	Description  = "List UK crime categories valid for a given month (Police UK)"
 	Website      = "https://www.flomation.co"
-	Icon         = "shield-halved+tags"
+	Icon         = "shield-halved+hashtag"
 	Date         = "05/07/2026"
 	Type         = core.ActionTypeAction
 )

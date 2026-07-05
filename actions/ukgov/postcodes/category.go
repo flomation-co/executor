@@ -2,6 +2,6 @@ package postcodes
 
 const (
 	CategoryName        = "Postcodes"
-	CategoryIcon        = "location-dot"
+	CategoryIcon        = "map"
 	CategoryDescription = "UK postcode lookup, validation and geocoding (postcodes.io)"
 )

@@ -21,7 +21,7 @@ const (
 	Name         = "Get Food Establishment"
 	Description  = "Look up a UK food hygiene rating by FHRS establishment ID (Food Standards Agency)"
 	Website      = "https://www.flomation.co"
-	Icon         = "utensils+circle-info"
+	Icon         = "star"
 	Date         = "05/07/2026"
 	Type         = core.ActionTypeAction
 )
