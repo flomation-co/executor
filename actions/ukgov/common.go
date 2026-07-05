@@ -17,9 +17,12 @@ import (
 	"bytes"
 	"context"
 	"encoding/base64"
+	"encoding/json"
 	"fmt"
 	"io"
 	"net/http"
+	"net/url"
+	"strings"
 	"time"
 
 	core "flomation.app/automate/executor"
@@ -83,6 +86,63 @@ func FetchWithBody(ctx context.Context, method, requestURL string, headers map[s
 		return resp.StatusCode, nil, fmt.Errorf("failed to read response body: %w", err)
 	}
 	return resp.StatusCode, respBody, nil
+}
+
+// TokenResponse is the OAuth2 token endpoint response envelope.
+type TokenResponse struct {
+	AccessToken string `json:"access_token"`
+	TokenType   string `json:"token_type"`
+	ExpiresIn   int    `json:"expires_in"`
+}
+
+// ClientCredentialsToken performs an OAuth2 client-credentials grant
+// (application/x-www-form-urlencoded) against tokenURL and returns the parsed
+// token. Used by agencies fronted by an OAuth2 provider — e.g. DVSA MOT history
+// via Microsoft Entra ID. The executor runs as a fresh process per execution,
+// so callers fetch a token once per execution rather than caching across runs.
+func ClientCredentialsToken(ctx context.Context, tokenURL, clientID, clientSecret, scope string) (*TokenResponse, error) {
+	if ctx == nil {
+		ctx = context.Background()
+	}
+	form := url.Values{}
+	form.Set("grant_type", "client_credentials")
+	form.Set("client_id", clientID)
+	form.Set("client_secret", clientSecret)
+	form.Set("scope", scope)
+
+	reqCtx, cancel := context.WithTimeout(ctx, RequestTimeout)
+	defer cancel()
+
+	req, err := http.NewRequestWithContext(reqCtx, http.MethodPost, tokenURL, strings.NewReader(form.Encode()))
+	if err != nil {
+		return nil, fmt.Errorf("failed to build token request: %w", err)
+	}
+	req.Header.Set("Content-Type", "application/x-www-form-urlencoded")
+	req.Header.Set("Accept", "application/json")
+
+	client := &http.Client{Timeout: RequestTimeout}
+	resp, err := client.Do(req)
+	if err != nil {
+		return nil, fmt.Errorf("token request failed: %w", err)
+	}
+	defer func() { _ = resp.Body.Close() }()
+
+	body, err := io.ReadAll(io.LimitReader(resp.Body, MaxResponseBody))
+	if err != nil {
+		return nil, fmt.Errorf("failed to read token response: %w", err)
+	}
+	if resp.StatusCode != http.StatusOK {
+		return nil, fmt.Errorf("token endpoint returned %d: %s", resp.StatusCode, string(body))
+	}
+
+	var tok TokenResponse
+	if err := json.Unmarshal(body, &tok); err != nil {
+		return nil, fmt.Errorf("failed to parse token response: %w", err)
+	}
+	if tok.AccessToken == "" {
+		return nil, fmt.Errorf("token endpoint returned an empty access_token")
+	}
+	return &tok, nil
 }
 
 // BasicAuthHeader builds an HTTP Basic Authorization header value. Companies

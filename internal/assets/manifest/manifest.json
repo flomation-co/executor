@@ -61670,6 +61670,274 @@
       }
     ]
   },
+  "ukgov/bankholidays/list": {
+    "hash": "306b29a31143e5bc7c6310a0b0b54bfb1beb790a48cfeb869c068dc5273a7883",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "List Bank Holidays",
+    "description": "List UK bank holidays for a region, with the next upcoming date (GOV.UK)",
+    "website": "https://www.flomation.co",
+    "icon": "calendar",
+    "date": "05/07/2026",
+    "type": 2,
+    "category": {
+      "name": "UK Government",
+      "icon": "landmark",
+      "description": "UK government agency data — Companies House, DVLA, Police, Food Standards and more"
+    },
+    "sub_category": {
+      "name": "Bank Holidays",
+      "icon": "calendar",
+      "description": "UK bank holiday dates for England \u0026 Wales, Scotland and Northern Ireland (GOV.UK)"
+    },
+    "inputs": [
+      {
+        "name": "division",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "england-and-wales",
+        "options": [
+          {
+            "name": "England \u0026 Wales",
+            "value": "england-and-wales"
+          },
+          {
+            "name": "Scotland",
+            "value": "scotland"
+          },
+          {
+            "name": "Northern Ireland",
+            "value": "northern-ireland"
+          }
+        ]
+      },
+      {
+        "name": "year",
+        "type": "string",
+        "value": null,
+        "label": "Year (optional filter)",
+        "placeholder": "2026"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "holidays",
+        "type": "object",
+        "value": null,
+        "label": "Bank Holidays",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Count",
+        "placeholder": ""
+      },
+      {
+        "name": "next_holiday",
+        "type": "string",
+        "value": null,
+        "label": "Next Holiday",
+        "placeholder": ""
+      },
+      {
+        "name": "next_date",
+        "type": "string",
+        "value": null,
+        "label": "Next Date",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "ukgov/charitycommission/get_charity": {
+    "hash": "ece495371911f9fe006dbdfb5ca6eccfbddc0171d1ddf81b7e247c6c42deddab",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Get Charity",
+    "description": "Retrieve full register details for a charity by registered number (Charity Commission)",
+    "website": "https://www.flomation.co",
+    "icon": "hand",
+    "date": "05/07/2026",
+    "type": 2,
+    "category": {
+      "name": "UK Government",
+      "icon": "landmark",
+      "description": "UK government agency data — Companies House, DVLA, Police, Food Standards and more"
+    },
+    "sub_category": {
+      "name": "Charity Commission",
+      "icon": "hand",
+      "description": "The register of charities for England \u0026 Wales (Charity Commission)"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "Charity Commission Subscription Key",
+        "placeholder": "${secrets.CHARITY_COMMISSION_KEY}",
+        "required": true
+      },
+      {
+        "name": "charity_number",
+        "type": "string",
+        "value": null,
+        "label": "Registered Charity Number",
+        "placeholder": "e.g. 202918",
+        "required": true
+      },
+      {
+        "name": "suffix",
+        "type": "string",
+        "value": null,
+        "label": "Group/Subsidiary Suffix",
+        "placeholder": "0"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "charity",
+        "type": "object",
+        "value": null,
+        "label": "Charity Details",
+        "placeholder": ""
+      },
+      {
+        "name": "charity_name",
+        "type": "string",
+        "value": null,
+        "label": "Charity Name",
+        "placeholder": ""
+      },
+      {
+        "name": "status",
+        "type": "string",
+        "value": null,
+        "label": "Registration Status",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "ukgov/charitycommission/search_charities": {
+    "hash": "8066b4650d3da40803466dfcb14584f9404391556926a997f65d42dbe43d79bd",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Search Charities",
+    "description": "Search the England \u0026 Wales register of charities by name (Charity Commission)",
+    "website": "https://www.flomation.co",
+    "icon": "hand+magnifying-glass",
+    "date": "05/07/2026",
+    "type": 2,
+    "category": {
+      "name": "UK Government",
+      "icon": "landmark",
+      "description": "UK government agency data — Companies House, DVLA, Police, Food Standards and more"
+    },
+    "sub_category": {
+      "name": "Charity Commission",
+      "icon": "hand",
+      "description": "The register of charities for England \u0026 Wales (Charity Commission)"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "Charity Commission Subscription Key",
+        "placeholder": "${secrets.CHARITY_COMMISSION_KEY}",
+        "required": true
+      },
+      {
+        "name": "name",
+        "type": "string",
+        "value": null,
+        "label": "Charity Name",
+        "placeholder": "e.g. Oxfam",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "charities",
+        "type": "object",
+        "value": null,
+        "label": "Charities",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Count",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
   "ukgov/companieshouse/get_company": {
     "hash": "85775bf40bda19ae166c9414dcdbf04127841253ce1b27a18a74bfe092b0de7c",
     "author": "Andy Esser",
@@ -62535,6 +62803,134 @@
       }
     ]
   },
+  "ukgov/dvsa/mot_history": {
+    "hash": "27899f1776ef7af150e55afc0c5a6021c796740bd27f3b9baf80390034c66ac4",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "MOT History",
+    "description": "Retrieve a UK vehicle's full MOT test history by registration (DVSA)",
+    "website": "https://www.flomation.co",
+    "icon": "wrench+list",
+    "date": "05/07/2026",
+    "type": 2,
+    "category": {
+      "name": "UK Government",
+      "icon": "landmark",
+      "description": "UK government agency data — Companies House, DVLA, Police, Food Standards and more"
+    },
+    "sub_category": {
+      "name": "DVSA",
+      "icon": "wrench",
+      "description": "UK MOT test history (Driver \u0026 Vehicle Standards Agency)"
+    },
+    "inputs": [
+      {
+        "name": "client_id",
+        "type": "secret",
+        "value": null,
+        "label": "DVSA Client ID",
+        "placeholder": "${secrets.DVSA_CLIENT_ID}",
+        "required": true
+      },
+      {
+        "name": "client_secret",
+        "type": "secret",
+        "value": null,
+        "label": "DVSA Client Secret",
+        "placeholder": "${secrets.DVSA_CLIENT_SECRET}",
+        "required": true
+      },
+      {
+        "name": "tenant_id",
+        "type": "string",
+        "value": null,
+        "label": "DVSA Tenant ID",
+        "placeholder": "${secrets.DVSA_TENANT_ID}",
+        "required": true
+      },
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "DVSA API Key",
+        "placeholder": "${secrets.DVSA_API_KEY}",
+        "required": true
+      },
+      {
+        "name": "registration_number",
+        "type": "string",
+        "value": null,
+        "label": "Registration Number",
+        "placeholder": "e.g. AB19 ABC",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "vehicle",
+        "type": "object",
+        "value": null,
+        "label": "Vehicle",
+        "placeholder": ""
+      },
+      {
+        "name": "make",
+        "type": "string",
+        "value": null,
+        "label": "Make",
+        "placeholder": ""
+      },
+      {
+        "name": "model",
+        "type": "string",
+        "value": null,
+        "label": "Model",
+        "placeholder": ""
+      },
+      {
+        "name": "mot_tests",
+        "type": "object",
+        "value": null,
+        "label": "MOT Tests",
+        "placeholder": ""
+      },
+      {
+        "name": "latest_result",
+        "type": "string",
+        "value": null,
+        "label": "Latest Result",
+        "placeholder": ""
+      },
+      {
+        "name": "latest_expiry",
+        "type": "string",
+        "value": null,
+        "label": "Latest Expiry",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
   "ukgov/environmentagency/flood_areas": {
     "hash": "0f94b9683e986f320151d86747194e02c1d51bf402974a13b7909cacb4e90de1",
     "author": "Andy Esser",
@@ -62957,6 +63353,594 @@
         "type": "object",
         "value": null,
         "label": "Establishments",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Returned Count",
+        "placeholder": ""
+      },
+      {
+        "name": "total",
+        "type": "integer",
+        "value": null,
+        "label": "Total Matches",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "ukgov/landregistry/price_paid": {
+    "hash": "3b5024a45df2922a97e0b267419f2134ad55233372567094cb79429d1f4a2f24",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Price Paid",
+    "description": "Look up UK sold-property prices by postcode (HM Land Registry Price Paid)",
+    "website": "https://www.flomation.co",
+    "icon": "house+dollar-sign",
+    "date": "05/07/2026",
+    "type": 2,
+    "category": {
+      "name": "UK Government",
+      "icon": "landmark",
+      "description": "UK government agency data — Companies House, DVLA, Police, Food Standards and more"
+    },
+    "sub_category": {
+      "name": "Land Registry",
+      "icon": "house",
+      "description": "UK property sold-price data from HM Land Registry Price Paid"
+    },
+    "inputs": [
+      {
+        "name": "postcode",
+        "type": "string",
+        "value": null,
+        "label": "Postcode",
+        "placeholder": "PL6 8RU",
+        "required": true
+      },
+      {
+        "name": "max_results",
+        "type": "integer",
+        "value": null,
+        "label": "Maximum Results (1-50)",
+        "placeholder": "20"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "transactions",
+        "type": "object",
+        "value": null,
+        "label": "Transactions",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Count",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "ukgov/ons/get_timeseries": {
+    "hash": "cfa734187c4f321b4993194126dba6c568bb3ceedefe1a9c0e85f32f23b16444",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Get Timeseries",
+    "description": "Fetch an ONS economic timeseries (inflation, GDP, etc.) by series ID and dataset (ONS)",
+    "website": "https://www.flomation.co",
+    "icon": "chart-line",
+    "date": "05/07/2026",
+    "type": 2,
+    "category": {
+      "name": "UK Government",
+      "icon": "landmark",
+      "description": "UK government agency data — Companies House, DVLA, Police, Food Standards and more"
+    },
+    "sub_category": {
+      "name": "ONS",
+      "icon": "chart-line",
+      "description": "UK economic statistics from the Office for National Statistics (inflation, GDP, unemployment)"
+    },
+    "inputs": [
+      {
+        "name": "cdid",
+        "type": "string",
+        "value": null,
+        "label": "Series ID (CDID)",
+        "placeholder": "e.g. L55O (CPIH), D7G7 (CPI)",
+        "required": true
+      },
+      {
+        "name": "dataset",
+        "type": "string",
+        "value": null,
+        "label": "Dataset",
+        "placeholder": "e.g. mm23",
+        "required": true
+      },
+      {
+        "name": "section",
+        "type": "string",
+        "value": null,
+        "label": "Topic Path (optional)",
+        "placeholder": ""
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "latest_value",
+        "type": "string",
+        "value": null,
+        "label": "Latest Value",
+        "placeholder": ""
+      },
+      {
+        "name": "latest_period",
+        "type": "string",
+        "value": null,
+        "label": "Latest Period",
+        "placeholder": ""
+      },
+      {
+        "name": "title",
+        "type": "string",
+        "value": null,
+        "label": "Title",
+        "placeholder": ""
+      },
+      {
+        "name": "unit",
+        "type": "string",
+        "value": null,
+        "label": "Unit",
+        "placeholder": ""
+      },
+      {
+        "name": "recent",
+        "type": "object",
+        "value": null,
+        "label": "Recent Points",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "ukgov/parliament/commons_divisions": {
+    "hash": "4dddb1cc049e91ea51c776148df994046e4a7c355a2e8be59b59325fb2ecf7d0",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Commons Divisions",
+    "description": "Search recorded House of Commons division (vote) results (UK Parliament)",
+    "website": "https://www.flomation.co",
+    "icon": "landmark+check",
+    "date": "05/07/2026",
+    "type": 2,
+    "category": {
+      "name": "UK Government",
+      "icon": "landmark",
+      "description": "UK government agency data — Companies House, DVLA, Police, Food Standards and more"
+    },
+    "sub_category": {
+      "name": "UK Parliament",
+      "icon": "landmark",
+      "description": "UK Parliament — MPs \u0026 Lords, bills, Commons votes and written questions"
+    },
+    "inputs": [
+      {
+        "name": "query",
+        "type": "string",
+        "value": null,
+        "label": "Search Term (optional)",
+        "placeholder": "e.g. budget"
+      },
+      {
+        "name": "max_results",
+        "type": "integer",
+        "value": null,
+        "label": "Maximum Results (1-25)",
+        "placeholder": "20"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "divisions",
+        "type": "object",
+        "value": null,
+        "label": "Divisions",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Count",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "ukgov/parliament/get_member": {
+    "hash": "1161e9ee7465b82243622f49595ae537f979c0b6982d7e30f525904fcf1d3160",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Get Member",
+    "description": "Retrieve a UK Parliament member (MP or Lord) by ID (UK Parliament)",
+    "website": "https://www.flomation.co",
+    "icon": "landmark+user",
+    "date": "05/07/2026",
+    "type": 2,
+    "category": {
+      "name": "UK Government",
+      "icon": "landmark",
+      "description": "UK government agency data — Companies House, DVLA, Police, Food Standards and more"
+    },
+    "sub_category": {
+      "name": "UK Parliament",
+      "icon": "landmark",
+      "description": "UK Parliament — MPs \u0026 Lords, bills, Commons votes and written questions"
+    },
+    "inputs": [
+      {
+        "name": "member_id",
+        "type": "string",
+        "value": null,
+        "label": "Member ID",
+        "placeholder": "e.g. 4514",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "member",
+        "type": "object",
+        "value": null,
+        "label": "Member",
+        "placeholder": ""
+      },
+      {
+        "name": "name",
+        "type": "string",
+        "value": null,
+        "label": "Name",
+        "placeholder": ""
+      },
+      {
+        "name": "party",
+        "type": "string",
+        "value": null,
+        "label": "Party",
+        "placeholder": ""
+      },
+      {
+        "name": "constituency",
+        "type": "string",
+        "value": null,
+        "label": "Constituency / Seat",
+        "placeholder": ""
+      },
+      {
+        "name": "house",
+        "type": "string",
+        "value": null,
+        "label": "House",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "ukgov/parliament/search_bills": {
+    "hash": "b836e555501d9b8a529f96cda64df6b40439e548b6cc5a99026466f2d39856c3",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Search Bills",
+    "description": "Search UK Parliament bills by keyword, with their current stage (UK Parliament)",
+    "website": "https://www.flomation.co",
+    "icon": "landmark+book",
+    "date": "05/07/2026",
+    "type": 2,
+    "category": {
+      "name": "UK Government",
+      "icon": "landmark",
+      "description": "UK government agency data — Companies House, DVLA, Police, Food Standards and more"
+    },
+    "sub_category": {
+      "name": "UK Parliament",
+      "icon": "landmark",
+      "description": "UK Parliament — MPs \u0026 Lords, bills, Commons votes and written questions"
+    },
+    "inputs": [
+      {
+        "name": "query",
+        "type": "string",
+        "value": null,
+        "label": "Search Term",
+        "placeholder": "e.g. finance",
+        "required": true
+      },
+      {
+        "name": "max_results",
+        "type": "integer",
+        "value": null,
+        "label": "Maximum Results (1-20)",
+        "placeholder": "20"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "bills",
+        "type": "object",
+        "value": null,
+        "label": "Bills",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Returned Count",
+        "placeholder": ""
+      },
+      {
+        "name": "total",
+        "type": "integer",
+        "value": null,
+        "label": "Total Matches",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "ukgov/parliament/search_members": {
+    "hash": "7d8deaa5d5a9f05c33105bcb2d5e54b8cdc11cf6680d5ef8da090c3a14df7328",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Search Members",
+    "description": "Search UK Parliament members (MPs and Lords) by name (UK Parliament)",
+    "website": "https://www.flomation.co",
+    "icon": "landmark+magnifying-glass",
+    "date": "05/07/2026",
+    "type": 2,
+    "category": {
+      "name": "UK Government",
+      "icon": "landmark",
+      "description": "UK government agency data — Companies House, DVLA, Police, Food Standards and more"
+    },
+    "sub_category": {
+      "name": "UK Parliament",
+      "icon": "landmark",
+      "description": "UK Parliament — MPs \u0026 Lords, bills, Commons votes and written questions"
+    },
+    "inputs": [
+      {
+        "name": "name",
+        "type": "string",
+        "value": null,
+        "label": "Member Name",
+        "placeholder": "e.g. Keir Starmer",
+        "required": true
+      },
+      {
+        "name": "max_results",
+        "type": "integer",
+        "value": null,
+        "label": "Maximum Results (1-20)",
+        "placeholder": "20"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "members",
+        "type": "object",
+        "value": null,
+        "label": "Members",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Returned Count",
+        "placeholder": ""
+      },
+      {
+        "name": "total",
+        "type": "integer",
+        "value": null,
+        "label": "Total Matches",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "ukgov/parliament/written_questions": {
+    "hash": "1284136a83a7903b294af673b01753f3dd892d3c021c43ead8ddcdb6bb6c018e",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Written Questions",
+    "description": "Search UK Parliament written questions and answers by keyword (UK Parliament)",
+    "website": "https://www.flomation.co",
+    "icon": "landmark+comment",
+    "date": "05/07/2026",
+    "type": 2,
+    "category": {
+      "name": "UK Government",
+      "icon": "landmark",
+      "description": "UK government agency data — Companies House, DVLA, Police, Food Standards and more"
+    },
+    "sub_category": {
+      "name": "UK Parliament",
+      "icon": "landmark",
+      "description": "UK Parliament — MPs \u0026 Lords, bills, Commons votes and written questions"
+    },
+    "inputs": [
+      {
+        "name": "query",
+        "type": "string",
+        "value": null,
+        "label": "Search Term",
+        "placeholder": "e.g. NHS waiting times",
+        "required": true
+      },
+      {
+        "name": "max_results",
+        "type": "integer",
+        "value": null,
+        "label": "Maximum Results (1-20)",
+        "placeholder": "20"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "questions",
+        "type": "object",
+        "value": null,
+        "label": "Written Questions",
         "placeholder": ""
       },
       {
