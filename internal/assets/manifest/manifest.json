@@ -61955,7 +61955,7 @@
     },
     "sub_category": {
       "name": "Companies House",
-      "icon": "building",
+      "icon": "briefcase",
       "description": "UK company registry — search companies, officers, filings, PSCs and charges (Companies House)"
     },
     "inputs": [
@@ -62045,7 +62045,7 @@
     },
     "sub_category": {
       "name": "Companies House",
-      "icon": "building",
+      "icon": "briefcase",
       "description": "UK company registry — search companies, officers, filings, PSCs and charges (Companies House)"
     },
     "inputs": [
@@ -62121,7 +62121,7 @@
     },
     "sub_category": {
       "name": "Companies House",
-      "icon": "building",
+      "icon": "briefcase",
       "description": "UK company registry — search companies, officers, filings, PSCs and charges (Companies House)"
     },
     "inputs": [
@@ -62204,7 +62204,7 @@
     },
     "sub_category": {
       "name": "Companies House",
-      "icon": "building",
+      "icon": "briefcase",
       "description": "UK company registry — search companies, officers, filings, PSCs and charges (Companies House)"
     },
     "inputs": [
@@ -62287,7 +62287,7 @@
     },
     "sub_category": {
       "name": "Companies House",
-      "icon": "building",
+      "icon": "briefcase",
       "description": "UK company registry — search companies, officers, filings, PSCs and charges (Companies House)"
     },
     "inputs": [
@@ -62370,7 +62370,7 @@
     },
     "sub_category": {
       "name": "Companies House",
-      "icon": "building",
+      "icon": "briefcase",
       "description": "UK company registry — search companies, officers, filings, PSCs and charges (Companies House)"
     },
     "inputs": [
@@ -62446,7 +62446,7 @@
     },
     "sub_category": {
       "name": "Companies House",
-      "icon": "building",
+      "icon": "briefcase",
       "description": "UK company registry — search companies, officers, filings, PSCs and charges (Companies House)"
     },
     "inputs": [
@@ -62536,7 +62536,7 @@
     },
     "sub_category": {
       "name": "Companies House",
-      "icon": "building",
+      "icon": "briefcase",
       "description": "UK company registry — search companies, officers, filings, PSCs and charges (Companies House)"
     },
     "inputs": [
@@ -62626,7 +62626,7 @@
     },
     "sub_category": {
       "name": "Companies House",
-      "icon": "building",
+      "icon": "briefcase",
       "description": "UK company registry — search companies, officers, filings, PSCs and charges (Companies House)"
     },
     "inputs": [
@@ -62716,7 +62716,7 @@
     },
     "sub_category": {
       "name": "DVLA",
-      "icon": "car",
+      "icon": "truck-ramp-box",
       "description": "UK vehicle data — tax, MOT status and vehicle details (DVLA Vehicle Enquiry Service)"
     },
     "inputs": [
@@ -62948,7 +62948,7 @@
     },
     "sub_category": {
       "name": "Environment Agency",
-      "icon": "water",
+      "icon": "leaf",
       "description": "UK flood warnings, flood areas and river/rainfall monitoring (Environment Agency)"
     },
     "inputs": [
@@ -63031,7 +63031,7 @@
     },
     "sub_category": {
       "name": "Environment Agency",
-      "icon": "water",
+      "icon": "leaf",
       "description": "UK flood warnings, flood areas and river/rainfall monitoring (Environment Agency)"
     },
     "inputs": [
@@ -63105,7 +63105,7 @@
     },
     "sub_category": {
       "name": "Environment Agency",
-      "icon": "water",
+      "icon": "leaf",
       "description": "UK flood warnings, flood areas and river/rainfall monitoring (Environment Agency)"
     },
     "inputs": [
@@ -63173,7 +63173,7 @@
     },
     "sub_category": {
       "name": "Food Standards Agency",
-      "icon": "utensils",
+      "icon": "star",
       "description": "UK food hygiene ratings (FHRS) — search establishments and view ratings"
     },
     "inputs": [
@@ -63255,7 +63255,7 @@
     },
     "sub_category": {
       "name": "Food Standards Agency",
-      "icon": "utensils",
+      "icon": "star",
       "description": "UK food hygiene ratings (FHRS) — search establishments and view ratings"
     },
     "inputs": null,
@@ -63314,7 +63314,7 @@
     },
     "sub_category": {
       "name": "Food Standards Agency",
-      "icon": "utensils",
+      "icon": "star",
       "description": "UK food hygiene ratings (FHRS) — search establishments and view ratings"
     },
     "inputs": [
@@ -64282,7 +64282,7 @@
     },
     "sub_category": {
       "name": "Postcodes",
-      "icon": "location-dot",
+      "icon": "map",
       "description": "UK postcode lookup, validation and geocoding (postcodes.io)"
     },
     "inputs": [
@@ -64350,7 +64350,7 @@
     },
     "sub_category": {
       "name": "Postcodes",
-      "icon": "location-dot",
+      "icon": "map",
       "description": "UK postcode lookup, validation and geocoding (postcodes.io)"
     },
     "inputs": [
@@ -64432,7 +64432,7 @@
     },
     "sub_category": {
       "name": "Postcodes",
-      "icon": "location-dot",
+      "icon": "map",
       "description": "UK postcode lookup, validation and geocoding (postcodes.io)"
     },
     "inputs": [
@@ -64515,7 +64515,7 @@
     },
     "sub_category": {
       "name": "Postcodes",
-      "icon": "location-dot",
+      "icon": "map",
       "description": "UK postcode lookup, validation and geocoding (postcodes.io)"
     },
     "inputs": [
