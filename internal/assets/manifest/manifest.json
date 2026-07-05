@@ -32777,7 +32777,7 @@
     ]
   },
   "messaging/telegram/send_message": {
-    "hash": "46b7b68cd83280d9292dc9b05e750ae4b26e54a1e3d2db182bff4a8dd1a233d4",
+    "hash": "9f2fb5e8219e42b345096c48218dcc743418e09eef4146bed4fd70e99647b4a7",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Send Telegram Message",
@@ -56806,6 +56806,94 @@
         "type": "string",
         "value": null,
         "label": "Stream SID",
+        "placeholder": ""
+      }
+    ]
+  },
+  "ukgov/foodstandards/search_establishments": {
+    "hash": "d19178280db92010e20788f131da88419c67e05dbab5fdbe0c000b02da64cfa2",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Search Food Establishments",
+    "description": "Search UK food hygiene ratings by business name or address (Food Standards Agency)",
+    "website": "https://www.flomation.co",
+    "icon": "utensils+magnifying-glass",
+    "date": "05/07/2026",
+    "type": 2,
+    "category": {
+      "name": "UK Government",
+      "icon": "landmark",
+      "description": "UK government agency data — Companies House, DVLA, Police, Food Standards and more"
+    },
+    "sub_category": {
+      "name": "Food Standards Agency",
+      "icon": "utensils",
+      "description": "UK food hygiene ratings (FHRS) — search establishments and view ratings"
+    },
+    "inputs": [
+      {
+        "name": "name",
+        "type": "string",
+        "value": null,
+        "label": "Business Name",
+        "placeholder": "e.g. The Ivy"
+      },
+      {
+        "name": "address",
+        "type": "string",
+        "value": null,
+        "label": "Address or Postcode",
+        "placeholder": "e.g. SW1A 1AA"
+      },
+      {
+        "name": "max_results",
+        "type": "integer",
+        "value": null,
+        "label": "Maximum Results (1-50)",
+        "placeholder": "10"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "establishments",
+        "type": "object",
+        "value": null,
+        "label": "Establishments",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Returned Count",
+        "placeholder": ""
+      },
+      {
+        "name": "total",
+        "type": "integer",
+        "value": null,
+        "label": "Total Matches",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
         "placeholder": ""
       }
     ]

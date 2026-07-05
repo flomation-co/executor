@@ -1,0 +1,119 @@
+// Package ukgov_common provides shared HTTP plumbing and input helpers for the
+// UK Government agency actions (Companies House, DVLA, Police, Food Standards,
+// Environment Agency and postcode lookups).
+//
+// These agencies expose read-only JSON APIs spanning three authentication
+// styles: none (Police, FSA, Environment Agency, postcodes.io), an API key in a
+// request header (DVLA), and HTTP Basic auth with the key as the username and a
+// blank password (Companies House). Centralising the request plumbing keeps
+// each action down to building a URL, supplying any auth headers, and shaping
+// its outputs.
+//
+// This package intentionally has no Execute function, so the manifest generator
+// treats it as a category holder (like git_common) rather than an action.
+package ukgov_common
+
+import (
+	"context"
+	"encoding/base64"
+	"fmt"
+	"io"
+	"net/http"
+	"time"
+
+	core "flomation.app/automate/executor"
+)
+
+const (
+	// RequestTimeout bounds every outbound HTTP call.
+	RequestTimeout = 30 * time.Second
+
+	// MaxResponseBody caps the response body read to prevent memory exhaustion
+	// from an unexpectedly large or hostile response.
+	MaxResponseBody = 4 << 20 // 4 MB
+)
+
+// Fetch performs a bounded HTTP request and returns the status code and body.
+// It reads at most MaxResponseBody bytes. Callers own status-code interpretation
+// (e.g. mapping 404 to a friendly "not found" tool result) and JSON decoding,
+// keeping this helper agnostic to each agency's payload shape. A nil context is
+// tolerated so actions can call it with a nil Flow during testing.
+func Fetch(ctx context.Context, method, requestURL string, headers map[string]string) (int, []byte, error) {
+	if ctx == nil {
+		ctx = context.Background()
+	}
+	reqCtx, cancel := context.WithTimeout(ctx, RequestTimeout)
+	defer cancel()
+
+	req, err := http.NewRequestWithContext(reqCtx, method, requestURL, nil)
+	if err != nil {
+		return 0, nil, fmt.Errorf("failed to build request: %w", err)
+	}
+	req.Header.Set("Accept", "application/json")
+	for k, v := range headers {
+		req.Header.Set(k, v)
+	}
+
+	client := &http.Client{Timeout: RequestTimeout}
+	resp, err := client.Do(req)
+	if err != nil {
+		return 0, nil, fmt.Errorf("request failed: %w", err)
+	}
+	defer func() { _ = resp.Body.Close() }()
+
+	body, err := io.ReadAll(io.LimitReader(resp.Body, MaxResponseBody))
+	if err != nil {
+		return resp.StatusCode, nil, fmt.Errorf("failed to read response body: %w", err)
+	}
+	return resp.StatusCode, body, nil
+}
+
+// BasicAuthHeader builds an HTTP Basic Authorization header value. Companies
+// House authenticates with the API key as the username and a blank password.
+func BasicAuthHeader(username, password string) string {
+	return "Basic " + base64.StdEncoding.EncodeToString([]byte(username+":"+password))
+}
+
+// OptionalString returns a string input, or "" if it is absent or unset.
+func OptionalString(name string, inputs []*core.Connection) string {
+	conn := core.FindConnection(name, inputs)
+	if conn == nil || conn.String() == nil {
+		return ""
+	}
+	return *conn.String()
+}
+
+// RequiredString returns a string input, or an error if it is empty.
+func RequiredString(name string, inputs []*core.Connection) (string, error) {
+	v := OptionalString(name, inputs)
+	if v == "" {
+		return "", fmt.Errorf("%s is required", name)
+	}
+	return v, nil
+}
+
+// OptionalInt returns an integer input, falling back to def if it is absent or
+// cannot be parsed.
+func OptionalInt(name string, inputs []*core.Connection, def int) int {
+	conn := core.FindConnection(name, inputs)
+	if conn == nil {
+		return def
+	}
+	n := conn.Number()
+	if n == nil {
+		return def
+	}
+	return int(*n)
+}
+
+// ErrResult is the standard failure return for a UK Government action. It
+// returns a nil Go error so the message surfaces to the AI via tool_result
+// while the node is still marked unsuccessful — the AI-native action convention.
+func ErrResult(format string, args ...interface{}) (map[string]interface{}, error) {
+	msg := fmt.Sprintf(format, args...)
+	return map[string]interface{}{
+		"tool_result": msg,
+		"success":     false,
+		"error":       msg,
+	}, nil
+}

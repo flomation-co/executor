@@ -549,6 +549,7 @@ import (
 	twilio_send_audio "flomation.app/automate/executor/actions/twilio/send_audio"
 	twilio_send_sms "flomation.app/automate/executor/actions/twilio/send_sms"
 	twilio_voice_session "flomation.app/automate/executor/actions/twilio/voice_session"
+	ukgov_foodstandards_search_establishments "flomation.app/automate/executor/actions/ukgov/foodstandards/search_establishments"
 	web_fetch "flomation.app/automate/executor/actions/web/fetch"
 	web_request "flomation.app/automate/executor/actions/web/request"
 	web_search "flomation.app/automate/executor/actions/web/search"
@@ -1116,6 +1117,7 @@ var Actions = map[string]core.Action{
 	"twilio/send_audio":                                 twilio_send_audio.Execute,
 	"twilio/send_sms":                                   twilio_send_sms.Execute,
 	"twilio/voice_session":                              twilio_voice_session.Execute,
+	"ukgov/foodstandards/search_establishments":         ukgov_foodstandards_search_establishments.Execute,
 	"web/fetch":                                         web_fetch.Execute,
 	"web/request":                                       web_request.Execute,
 	"web/search":                                        web_search.Execute,
