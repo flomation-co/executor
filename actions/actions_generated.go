@@ -106,6 +106,26 @@ import (
 	ecommerce_shopify_product_get "flomation.app/automate/executor/actions/ecommerce/shopify/product_get"
 	ecommerce_shopify_product_get_all "flomation.app/automate/executor/actions/ecommerce/shopify/product_get_all"
 	ecommerce_shopify_product_update "flomation.app/automate/executor/actions/ecommerce/shopify/product_update"
+	ecommerce_woocommerce_coupon_create "flomation.app/automate/executor/actions/ecommerce/woocommerce/coupon_create"
+	ecommerce_woocommerce_coupon_delete "flomation.app/automate/executor/actions/ecommerce/woocommerce/coupon_delete"
+	ecommerce_woocommerce_coupon_get "flomation.app/automate/executor/actions/ecommerce/woocommerce/coupon_get"
+	ecommerce_woocommerce_coupon_get_all "flomation.app/automate/executor/actions/ecommerce/woocommerce/coupon_get_all"
+	ecommerce_woocommerce_coupon_update "flomation.app/automate/executor/actions/ecommerce/woocommerce/coupon_update"
+	ecommerce_woocommerce_customer_create "flomation.app/automate/executor/actions/ecommerce/woocommerce/customer_create"
+	ecommerce_woocommerce_customer_delete "flomation.app/automate/executor/actions/ecommerce/woocommerce/customer_delete"
+	ecommerce_woocommerce_customer_get "flomation.app/automate/executor/actions/ecommerce/woocommerce/customer_get"
+	ecommerce_woocommerce_customer_get_all "flomation.app/automate/executor/actions/ecommerce/woocommerce/customer_get_all"
+	ecommerce_woocommerce_customer_update "flomation.app/automate/executor/actions/ecommerce/woocommerce/customer_update"
+	ecommerce_woocommerce_order_create "flomation.app/automate/executor/actions/ecommerce/woocommerce/order_create"
+	ecommerce_woocommerce_order_delete "flomation.app/automate/executor/actions/ecommerce/woocommerce/order_delete"
+	ecommerce_woocommerce_order_get "flomation.app/automate/executor/actions/ecommerce/woocommerce/order_get"
+	ecommerce_woocommerce_order_get_all "flomation.app/automate/executor/actions/ecommerce/woocommerce/order_get_all"
+	ecommerce_woocommerce_order_update "flomation.app/automate/executor/actions/ecommerce/woocommerce/order_update"
+	ecommerce_woocommerce_product_create "flomation.app/automate/executor/actions/ecommerce/woocommerce/product_create"
+	ecommerce_woocommerce_product_delete "flomation.app/automate/executor/actions/ecommerce/woocommerce/product_delete"
+	ecommerce_woocommerce_product_get "flomation.app/automate/executor/actions/ecommerce/woocommerce/product_get"
+	ecommerce_woocommerce_product_get_all "flomation.app/automate/executor/actions/ecommerce/woocommerce/product_get_all"
+	ecommerce_woocommerce_product_update "flomation.app/automate/executor/actions/ecommerce/woocommerce/product_update"
 	elevenlabs_list_voices "flomation.app/automate/executor/actions/elevenlabs/list_voices"
 	elevenlabs_speech_to_text "flomation.app/automate/executor/actions/elevenlabs/speech_to_text"
 	elevenlabs_text_to_speech "flomation.app/automate/executor/actions/elevenlabs/text_to_speech"
@@ -599,6 +619,7 @@ import (
 	trigger_twilio_sms "flomation.app/automate/executor/actions/trigger/twilio_sms"
 	trigger_twilio_voice "flomation.app/automate/executor/actions/trigger/twilio_voice"
 	trigger_webhook "flomation.app/automate/executor/actions/trigger/webhook"
+	trigger_woocommerce_webhook "flomation.app/automate/executor/actions/trigger/woocommerce_webhook"
 	trigger_zendesk_webhook "flomation.app/automate/executor/actions/trigger/zendesk_webhook"
 	twilio_end_call "flomation.app/automate/executor/actions/twilio/end_call"
 	twilio_make_call "flomation.app/automate/executor/actions/twilio/make_call"
@@ -764,6 +785,26 @@ var Actions = map[string]core.Action{
 	"ecommerce/shopify/product_get":                     ecommerce_shopify_product_get.Execute,
 	"ecommerce/shopify/product_get_all":                 ecommerce_shopify_product_get_all.Execute,
 	"ecommerce/shopify/product_update":                  ecommerce_shopify_product_update.Execute,
+	"ecommerce/woocommerce/coupon_create":               ecommerce_woocommerce_coupon_create.Execute,
+	"ecommerce/woocommerce/coupon_delete":               ecommerce_woocommerce_coupon_delete.Execute,
+	"ecommerce/woocommerce/coupon_get":                  ecommerce_woocommerce_coupon_get.Execute,
+	"ecommerce/woocommerce/coupon_get_all":              ecommerce_woocommerce_coupon_get_all.Execute,
+	"ecommerce/woocommerce/coupon_update":               ecommerce_woocommerce_coupon_update.Execute,
+	"ecommerce/woocommerce/customer_create":             ecommerce_woocommerce_customer_create.Execute,
+	"ecommerce/woocommerce/customer_delete":             ecommerce_woocommerce_customer_delete.Execute,
+	"ecommerce/woocommerce/customer_get":                ecommerce_woocommerce_customer_get.Execute,
+	"ecommerce/woocommerce/customer_get_all":            ecommerce_woocommerce_customer_get_all.Execute,
+	"ecommerce/woocommerce/customer_update":             ecommerce_woocommerce_customer_update.Execute,
+	"ecommerce/woocommerce/order_create":                ecommerce_woocommerce_order_create.Execute,
+	"ecommerce/woocommerce/order_delete":                ecommerce_woocommerce_order_delete.Execute,
+	"ecommerce/woocommerce/order_get":                   ecommerce_woocommerce_order_get.Execute,
+	"ecommerce/woocommerce/order_get_all":               ecommerce_woocommerce_order_get_all.Execute,
+	"ecommerce/woocommerce/order_update":                ecommerce_woocommerce_order_update.Execute,
+	"ecommerce/woocommerce/product_create":              ecommerce_woocommerce_product_create.Execute,
+	"ecommerce/woocommerce/product_delete":              ecommerce_woocommerce_product_delete.Execute,
+	"ecommerce/woocommerce/product_get":                 ecommerce_woocommerce_product_get.Execute,
+	"ecommerce/woocommerce/product_get_all":             ecommerce_woocommerce_product_get_all.Execute,
+	"ecommerce/woocommerce/product_update":              ecommerce_woocommerce_product_update.Execute,
 	"elevenlabs/list_voices":                            elevenlabs_list_voices.Execute,
 	"elevenlabs/speech_to_text":                         elevenlabs_speech_to_text.Execute,
 	"elevenlabs/text_to_speech":                         elevenlabs_text_to_speech.Execute,
@@ -1257,6 +1298,7 @@ var Actions = map[string]core.Action{
 	"trigger/twilio_sms":                                trigger_twilio_sms.Execute,
 	"trigger/twilio_voice":                              trigger_twilio_voice.Execute,
 	"trigger/webhook":                                   trigger_webhook.Execute,
+	"trigger/woocommerce_webhook":                       trigger_woocommerce_webhook.Execute,
 	"trigger/zendesk_webhook":                           trigger_zendesk_webhook.Execute,
 	"twilio/end_call":                                   twilio_end_call.Execute,
 	"twilio/make_call":                                  twilio_make_call.Execute,

@@ -10434,6 +10434,4127 @@
       }
     ]
   },
+  "ecommerce/woocommerce/coupon_create": {
+    "hash": "2c6e2be58932f26b677fb5a45e1ab51abe5199ed3e79e0fde50b4f2111a1f5dc",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "WooCommerce: Create Coupon",
+    "description": "Create a discount coupon in your WooCommerce store, setting its code, discount type and amount plus any usage or product restrictions.",
+    "website": "https://www.flomation.co",
+    "icon": "woocommerce+plus",
+    "date": "05/07/2026",
+    "type": 2,
+    "category": {
+      "name": "E-Commerce",
+      "icon": "cart-shopping",
+      "description": "Online store platforms — orders, products, and customers"
+    },
+    "sub_category": {
+      "name": "WooCommerce",
+      "icon": "woocommerce",
+      "description": "Manage customers, orders, products, and coupons in your WooCommerce store"
+    },
+    "inputs": [
+      {
+        "name": "url",
+        "type": "string",
+        "value": null,
+        "label": "Store URL",
+        "placeholder": "https://your-store.com — your store's root URL, not the /wp-json path",
+        "required": true
+      },
+      {
+        "name": "consumer_key",
+        "type": "secret",
+        "value": null,
+        "label": "Consumer Key",
+        "placeholder": "ck_...",
+        "required": true
+      },
+      {
+        "name": "consumer_secret",
+        "type": "secret",
+        "value": null,
+        "label": "Consumer Secret",
+        "placeholder": "cs_...",
+        "required": true
+      },
+      {
+        "name": "credentials_in_query",
+        "type": "boolean",
+        "value": null,
+        "label": "Send Credentials in Query String",
+        "placeholder": "Enable only if you see a \"Consumer key is missing\" error"
+      },
+      {
+        "name": "code",
+        "type": "string",
+        "value": null,
+        "label": "Coupon Code",
+        "placeholder": "SAVE10",
+        "required": true
+      },
+      {
+        "name": "discount_type",
+        "type": "string",
+        "value": null,
+        "label": "Discount Type",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "Percentage",
+            "value": "percent"
+          },
+          {
+            "name": "Fixed Cart Discount",
+            "value": "fixed_cart"
+          },
+          {
+            "name": "Fixed Product Discount",
+            "value": "fixed_product"
+          }
+        ]
+      },
+      {
+        "name": "amount",
+        "type": "string",
+        "value": null,
+        "label": "Amount",
+        "placeholder": "10 — a percentage or fixed amount depending on Discount Type"
+      },
+      {
+        "name": "description",
+        "type": "text",
+        "value": null,
+        "label": "Description",
+        "placeholder": ""
+      },
+      {
+        "name": "date_expires",
+        "type": "datetime",
+        "value": null,
+        "label": "Expiry Date",
+        "placeholder": ""
+      },
+      {
+        "name": "minimum_amount",
+        "type": "string",
+        "value": null,
+        "label": "Minimum Spend",
+        "placeholder": ""
+      },
+      {
+        "name": "maximum_amount",
+        "type": "string",
+        "value": null,
+        "label": "Maximum Spend",
+        "placeholder": ""
+      },
+      {
+        "name": "individual_use",
+        "type": "boolean",
+        "value": null,
+        "label": "Individual Use Only",
+        "placeholder": "Cannot be used in combination with any other coupon"
+      },
+      {
+        "name": "exclude_sale_items",
+        "type": "boolean",
+        "value": null,
+        "label": "Exclude Sale Items",
+        "placeholder": ""
+      },
+      {
+        "name": "free_shipping",
+        "type": "boolean",
+        "value": null,
+        "label": "Allow Free Shipping",
+        "placeholder": ""
+      },
+      {
+        "name": "usage_limit",
+        "type": "integer",
+        "value": null,
+        "label": "Usage Limit",
+        "placeholder": "How many times this coupon can be used in total"
+      },
+      {
+        "name": "usage_limit_per_user",
+        "type": "integer",
+        "value": null,
+        "label": "Usage Limit Per User",
+        "placeholder": ""
+      },
+      {
+        "name": "limit_usage_to_x_items",
+        "type": "integer",
+        "value": null,
+        "label": "Limit Usage to X Items",
+        "placeholder": "Max number of qualifying items the coupon can apply to"
+      },
+      {
+        "name": "product_ids",
+        "type": "string",
+        "value": null,
+        "label": "Product IDs",
+        "placeholder": "Comma-separated product IDs the coupon applies to"
+      },
+      {
+        "name": "excluded_product_ids",
+        "type": "string",
+        "value": null,
+        "label": "Excluded Product IDs",
+        "placeholder": "Comma-separated product IDs the coupon will not apply to"
+      },
+      {
+        "name": "product_categories",
+        "type": "string",
+        "value": null,
+        "label": "Product Category IDs",
+        "placeholder": "Comma-separated category IDs the coupon applies to"
+      },
+      {
+        "name": "excluded_product_categories",
+        "type": "string",
+        "value": null,
+        "label": "Excluded Product Category IDs",
+        "placeholder": "Comma-separated category IDs the coupon will not apply to"
+      },
+      {
+        "name": "email_restrictions",
+        "type": "object",
+        "value": null,
+        "label": "Email Restrictions (JSON)",
+        "placeholder": "[\"jane@example.com\"]"
+      },
+      {
+        "name": "meta_data",
+        "type": "object",
+        "value": null,
+        "label": "Metadata (JSON)",
+        "placeholder": "[{\"key\":\"source\",\"value\":\"web\"}]"
+      },
+      {
+        "name": "additional_fields",
+        "type": "object",
+        "value": null,
+        "label": "Additional Fields (JSON)",
+        "placeholder": "{\"date_expires_gmt\":\"2026-12-31T23:59:59\"}"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Coupon ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Coupon",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "ecommerce/woocommerce/coupon_delete": {
+    "hash": "5216a63e83c3481fd949fba234d1555a2849d3d1a4418295db5d554a179dd40d",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "WooCommerce: Delete Coupon",
+    "description": "Delete a coupon from your WooCommerce store. Deletes permanently by default; turn off Force Delete to move it to the trash instead.",
+    "website": "https://www.flomation.co",
+    "icon": "woocommerce+trash",
+    "date": "05/07/2026",
+    "type": 2,
+    "category": {
+      "name": "E-Commerce",
+      "icon": "cart-shopping",
+      "description": "Online store platforms — orders, products, and customers"
+    },
+    "sub_category": {
+      "name": "WooCommerce",
+      "icon": "woocommerce",
+      "description": "Manage customers, orders, products, and coupons in your WooCommerce store"
+    },
+    "inputs": [
+      {
+        "name": "url",
+        "type": "string",
+        "value": null,
+        "label": "Store URL",
+        "placeholder": "https://your-store.com — your store's root URL, not the /wp-json path",
+        "required": true
+      },
+      {
+        "name": "consumer_key",
+        "type": "secret",
+        "value": null,
+        "label": "Consumer Key",
+        "placeholder": "ck_...",
+        "required": true
+      },
+      {
+        "name": "consumer_secret",
+        "type": "secret",
+        "value": null,
+        "label": "Consumer Secret",
+        "placeholder": "cs_...",
+        "required": true
+      },
+      {
+        "name": "credentials_in_query",
+        "type": "boolean",
+        "value": null,
+        "label": "Send Credentials in Query String",
+        "placeholder": "Enable only if you see a \"Consumer key is missing\" error"
+      },
+      {
+        "name": "coupon_id",
+        "type": "string",
+        "value": null,
+        "label": "Coupon ID",
+        "placeholder": "123",
+        "required": true
+      },
+      {
+        "name": "force",
+        "type": "boolean",
+        "value": null,
+        "label": "Force Delete",
+        "placeholder": "On (default): delete permanently. Off: move to trash."
+      }
+    ],
+    "outputs": [
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Coupon ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Deleted Coupon",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "ecommerce/woocommerce/coupon_get": {
+    "hash": "3c1a1c3f0f2b434213b78312e896db360962fb418d09cdb7c73be5fe2f4f9640",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "WooCommerce: Get Coupon",
+    "description": "Retrieve a single coupon from your WooCommerce store by ID.",
+    "website": "https://www.flomation.co",
+    "icon": "woocommerce+eye",
+    "date": "05/07/2026",
+    "type": 2,
+    "category": {
+      "name": "E-Commerce",
+      "icon": "cart-shopping",
+      "description": "Online store platforms — orders, products, and customers"
+    },
+    "sub_category": {
+      "name": "WooCommerce",
+      "icon": "woocommerce",
+      "description": "Manage customers, orders, products, and coupons in your WooCommerce store"
+    },
+    "inputs": [
+      {
+        "name": "url",
+        "type": "string",
+        "value": null,
+        "label": "Store URL",
+        "placeholder": "https://your-store.com — your store's root URL, not the /wp-json path",
+        "required": true
+      },
+      {
+        "name": "consumer_key",
+        "type": "secret",
+        "value": null,
+        "label": "Consumer Key",
+        "placeholder": "ck_...",
+        "required": true
+      },
+      {
+        "name": "consumer_secret",
+        "type": "secret",
+        "value": null,
+        "label": "Consumer Secret",
+        "placeholder": "cs_...",
+        "required": true
+      },
+      {
+        "name": "credentials_in_query",
+        "type": "boolean",
+        "value": null,
+        "label": "Send Credentials in Query String",
+        "placeholder": "Enable only if you see a \"Consumer key is missing\" error"
+      },
+      {
+        "name": "coupon_id",
+        "type": "string",
+        "value": null,
+        "label": "Coupon ID",
+        "placeholder": "123",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Coupon ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Coupon",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "ecommerce/woocommerce/coupon_get_all": {
+    "hash": "010723a09b90115fcca07c3eabab6b0852f2530bc21383ea9d0d0be886f00c68",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "WooCommerce: Get Many Coupons",
+    "description": "List coupons from your WooCommerce store, with optional filters. Enable Return All to auto-paginate every matching coupon.",
+    "website": "https://www.flomation.co",
+    "icon": "woocommerce+list",
+    "date": "05/07/2026",
+    "type": 2,
+    "category": {
+      "name": "E-Commerce",
+      "icon": "cart-shopping",
+      "description": "Online store platforms — orders, products, and customers"
+    },
+    "sub_category": {
+      "name": "WooCommerce",
+      "icon": "woocommerce",
+      "description": "Manage customers, orders, products, and coupons in your WooCommerce store"
+    },
+    "inputs": [
+      {
+        "name": "url",
+        "type": "string",
+        "value": null,
+        "label": "Store URL",
+        "placeholder": "https://your-store.com — your store's root URL, not the /wp-json path",
+        "required": true
+      },
+      {
+        "name": "consumer_key",
+        "type": "secret",
+        "value": null,
+        "label": "Consumer Key",
+        "placeholder": "ck_...",
+        "required": true
+      },
+      {
+        "name": "consumer_secret",
+        "type": "secret",
+        "value": null,
+        "label": "Consumer Secret",
+        "placeholder": "cs_...",
+        "required": true
+      },
+      {
+        "name": "credentials_in_query",
+        "type": "boolean",
+        "value": null,
+        "label": "Send Credentials in Query String",
+        "placeholder": "Enable only if you see a \"Consumer key is missing\" error"
+      },
+      {
+        "name": "return_all",
+        "type": "boolean",
+        "value": null,
+        "label": "Return All (auto-paginate every match)",
+        "placeholder": ""
+      },
+      {
+        "name": "limit",
+        "type": "integer",
+        "value": null,
+        "label": "Limit (per page)",
+        "placeholder": "50 per page (max 100); Return All still fetches every match"
+      },
+      {
+        "name": "page",
+        "type": "integer",
+        "value": null,
+        "label": "Page",
+        "placeholder": "Page number to fetch (ignored when Return All is on)"
+      },
+      {
+        "name": "search",
+        "type": "string",
+        "value": null,
+        "label": "Search",
+        "placeholder": ""
+      },
+      {
+        "name": "after",
+        "type": "datetime",
+        "value": null,
+        "label": "Created After",
+        "placeholder": ""
+      },
+      {
+        "name": "before",
+        "type": "datetime",
+        "value": null,
+        "label": "Created Before",
+        "placeholder": ""
+      },
+      {
+        "name": "code",
+        "type": "string",
+        "value": null,
+        "label": "Coupon Code",
+        "placeholder": "Limit to the coupon with this exact code"
+      },
+      {
+        "name": "order",
+        "type": "string",
+        "value": null,
+        "label": "Sort Order",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "Descending",
+            "value": "desc"
+          },
+          {
+            "name": "Ascending",
+            "value": "asc"
+          }
+        ]
+      },
+      {
+        "name": "orderby",
+        "type": "string",
+        "value": null,
+        "label": "Order By",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "Date",
+            "value": "date"
+          },
+          {
+            "name": "ID",
+            "value": "id"
+          },
+          {
+            "name": "Include",
+            "value": "include"
+          },
+          {
+            "name": "Title",
+            "value": "title"
+          },
+          {
+            "name": "Slug",
+            "value": "slug"
+          }
+        ]
+      },
+      {
+        "name": "include",
+        "type": "string",
+        "value": null,
+        "label": "Include IDs",
+        "placeholder": "Comma-separated coupon IDs to include"
+      },
+      {
+        "name": "exclude",
+        "type": "string",
+        "value": null,
+        "label": "Exclude IDs",
+        "placeholder": "Comma-separated coupon IDs to exclude"
+      },
+      {
+        "name": "offset",
+        "type": "integer",
+        "value": null,
+        "label": "Offset",
+        "placeholder": "Number of results to skip (ignored when Return All is on)"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "results",
+        "type": "object",
+        "value": null,
+        "label": "Coupons",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Count (this response)",
+        "placeholder": ""
+      },
+      {
+        "name": "total",
+        "type": "integer",
+        "value": null,
+        "label": "Total (store-wide match)",
+        "placeholder": ""
+      },
+      {
+        "name": "total_pages",
+        "type": "integer",
+        "value": null,
+        "label": "Total Pages",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "ecommerce/woocommerce/coupon_update": {
+    "hash": "8903e63a9617731fcf7a88cb0e74df34d1c7d5245f0adb157a25a2b64f88fb44",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "WooCommerce: Update Coupon",
+    "description": "Update an existing coupon in your WooCommerce store. Only the fields you set are changed; add any other coupon field via Additional Fields.",
+    "website": "https://www.flomation.co",
+    "icon": "woocommerce+pen",
+    "date": "05/07/2026",
+    "type": 2,
+    "category": {
+      "name": "E-Commerce",
+      "icon": "cart-shopping",
+      "description": "Online store platforms — orders, products, and customers"
+    },
+    "sub_category": {
+      "name": "WooCommerce",
+      "icon": "woocommerce",
+      "description": "Manage customers, orders, products, and coupons in your WooCommerce store"
+    },
+    "inputs": [
+      {
+        "name": "url",
+        "type": "string",
+        "value": null,
+        "label": "Store URL",
+        "placeholder": "https://your-store.com — your store's root URL, not the /wp-json path",
+        "required": true
+      },
+      {
+        "name": "consumer_key",
+        "type": "secret",
+        "value": null,
+        "label": "Consumer Key",
+        "placeholder": "ck_...",
+        "required": true
+      },
+      {
+        "name": "consumer_secret",
+        "type": "secret",
+        "value": null,
+        "label": "Consumer Secret",
+        "placeholder": "cs_...",
+        "required": true
+      },
+      {
+        "name": "credentials_in_query",
+        "type": "boolean",
+        "value": null,
+        "label": "Send Credentials in Query String",
+        "placeholder": "Enable only if you see a \"Consumer key is missing\" error"
+      },
+      {
+        "name": "coupon_id",
+        "type": "string",
+        "value": null,
+        "label": "Coupon ID",
+        "placeholder": "123",
+        "required": true
+      },
+      {
+        "name": "code",
+        "type": "string",
+        "value": null,
+        "label": "Coupon Code",
+        "placeholder": "SAVE10"
+      },
+      {
+        "name": "discount_type",
+        "type": "string",
+        "value": null,
+        "label": "Discount Type",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "Percentage",
+            "value": "percent"
+          },
+          {
+            "name": "Fixed Cart Discount",
+            "value": "fixed_cart"
+          },
+          {
+            "name": "Fixed Product Discount",
+            "value": "fixed_product"
+          }
+        ]
+      },
+      {
+        "name": "amount",
+        "type": "string",
+        "value": null,
+        "label": "Amount",
+        "placeholder": "10 — a percentage or fixed amount depending on Discount Type"
+      },
+      {
+        "name": "description",
+        "type": "text",
+        "value": null,
+        "label": "Description",
+        "placeholder": ""
+      },
+      {
+        "name": "date_expires",
+        "type": "datetime",
+        "value": null,
+        "label": "Expiry Date",
+        "placeholder": ""
+      },
+      {
+        "name": "minimum_amount",
+        "type": "string",
+        "value": null,
+        "label": "Minimum Spend",
+        "placeholder": ""
+      },
+      {
+        "name": "maximum_amount",
+        "type": "string",
+        "value": null,
+        "label": "Maximum Spend",
+        "placeholder": ""
+      },
+      {
+        "name": "individual_use",
+        "type": "boolean",
+        "value": null,
+        "label": "Individual Use Only",
+        "placeholder": "Cannot be used in combination with any other coupon"
+      },
+      {
+        "name": "exclude_sale_items",
+        "type": "boolean",
+        "value": null,
+        "label": "Exclude Sale Items",
+        "placeholder": ""
+      },
+      {
+        "name": "free_shipping",
+        "type": "boolean",
+        "value": null,
+        "label": "Allow Free Shipping",
+        "placeholder": ""
+      },
+      {
+        "name": "usage_limit",
+        "type": "integer",
+        "value": null,
+        "label": "Usage Limit",
+        "placeholder": "How many times this coupon can be used in total"
+      },
+      {
+        "name": "usage_limit_per_user",
+        "type": "integer",
+        "value": null,
+        "label": "Usage Limit Per User",
+        "placeholder": ""
+      },
+      {
+        "name": "limit_usage_to_x_items",
+        "type": "integer",
+        "value": null,
+        "label": "Limit Usage to X Items",
+        "placeholder": "Max number of qualifying items the coupon can apply to"
+      },
+      {
+        "name": "product_ids",
+        "type": "string",
+        "value": null,
+        "label": "Product IDs",
+        "placeholder": "Comma-separated product IDs the coupon applies to"
+      },
+      {
+        "name": "excluded_product_ids",
+        "type": "string",
+        "value": null,
+        "label": "Excluded Product IDs",
+        "placeholder": "Comma-separated product IDs the coupon will not apply to"
+      },
+      {
+        "name": "product_categories",
+        "type": "string",
+        "value": null,
+        "label": "Product Category IDs",
+        "placeholder": "Comma-separated category IDs the coupon applies to"
+      },
+      {
+        "name": "excluded_product_categories",
+        "type": "string",
+        "value": null,
+        "label": "Excluded Product Category IDs",
+        "placeholder": "Comma-separated category IDs the coupon will not apply to"
+      },
+      {
+        "name": "email_restrictions",
+        "type": "object",
+        "value": null,
+        "label": "Email Restrictions (JSON)",
+        "placeholder": "[\"jane@example.com\"]"
+      },
+      {
+        "name": "meta_data",
+        "type": "object",
+        "value": null,
+        "label": "Metadata (JSON)",
+        "placeholder": "[{\"key\":\"source\",\"value\":\"web\"}]"
+      },
+      {
+        "name": "additional_fields",
+        "type": "object",
+        "value": null,
+        "label": "Additional Fields (JSON)",
+        "placeholder": ""
+      }
+    ],
+    "outputs": [
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Coupon ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Coupon",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "ecommerce/woocommerce/customer_create": {
+    "hash": "6e71f51f1d7f7d387ba0b2148586921f0ab6e5a6a9d71d962f839b6d8730b191",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "WooCommerce: Create Customer",
+    "description": "Create a customer in your WooCommerce store. Set common fields directly or add any other customer field via Additional Fields.",
+    "website": "https://www.flomation.co",
+    "icon": "woocommerce+plus",
+    "date": "05/07/2026",
+    "type": 2,
+    "category": {
+      "name": "E-Commerce",
+      "icon": "cart-shopping",
+      "description": "Online store platforms — orders, products, and customers"
+    },
+    "sub_category": {
+      "name": "WooCommerce",
+      "icon": "woocommerce",
+      "description": "Manage customers, orders, products, and coupons in your WooCommerce store"
+    },
+    "inputs": [
+      {
+        "name": "url",
+        "type": "string",
+        "value": null,
+        "label": "Store URL",
+        "placeholder": "https://your-store.com — your store's root URL, not the /wp-json path",
+        "required": true
+      },
+      {
+        "name": "consumer_key",
+        "type": "secret",
+        "value": null,
+        "label": "Consumer Key",
+        "placeholder": "ck_...",
+        "required": true
+      },
+      {
+        "name": "consumer_secret",
+        "type": "secret",
+        "value": null,
+        "label": "Consumer Secret",
+        "placeholder": "cs_...",
+        "required": true
+      },
+      {
+        "name": "credentials_in_query",
+        "type": "boolean",
+        "value": null,
+        "label": "Send Credentials in Query String",
+        "placeholder": "Enable only if you see a \"Consumer key is missing\" error"
+      },
+      {
+        "name": "email",
+        "type": "string",
+        "value": null,
+        "label": "Email",
+        "placeholder": "jane@example.com",
+        "required": true
+      },
+      {
+        "name": "first_name",
+        "type": "string",
+        "value": null,
+        "label": "First Name",
+        "placeholder": ""
+      },
+      {
+        "name": "last_name",
+        "type": "string",
+        "value": null,
+        "label": "Last Name",
+        "placeholder": ""
+      },
+      {
+        "name": "username",
+        "type": "string",
+        "value": null,
+        "label": "Username",
+        "placeholder": ""
+      },
+      {
+        "name": "password",
+        "type": "secret",
+        "value": null,
+        "label": "Password",
+        "placeholder": ""
+      },
+      {
+        "name": "role",
+        "type": "string",
+        "value": null,
+        "label": "Role",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "Customer",
+            "value": "customer"
+          },
+          {
+            "name": "Subscriber",
+            "value": "subscriber"
+          },
+          {
+            "name": "Contributor",
+            "value": "contributor"
+          },
+          {
+            "name": "Author",
+            "value": "author"
+          },
+          {
+            "name": "Editor",
+            "value": "editor"
+          },
+          {
+            "name": "Shop Manager",
+            "value": "shop_manager"
+          },
+          {
+            "name": "Administrator",
+            "value": "administrator"
+          }
+        ]
+      },
+      {
+        "name": "billing",
+        "type": "object",
+        "value": null,
+        "label": "Billing Address (JSON)",
+        "placeholder": "{\"first_name\":\"Jane\",\"address_1\":\"1 Main St\",\"city\":\"London\",\"postcode\":\"SW1\",\"country\":\"GB\",\"email\":\"jane@example.com\"}"
+      },
+      {
+        "name": "shipping",
+        "type": "object",
+        "value": null,
+        "label": "Shipping Address (JSON)",
+        "placeholder": "{\"first_name\":\"Jane\",\"last_name\":\"Doe\",\"address_1\":\"1 Main St\",\"city\":\"London\",\"postcode\":\"SW1\",\"country\":\"GB\"}"
+      },
+      {
+        "name": "meta_data",
+        "type": "object",
+        "value": null,
+        "label": "Metadata (JSON)",
+        "placeholder": "[{\"key\":\"vip\",\"value\":\"yes\"}]"
+      },
+      {
+        "name": "additional_fields",
+        "type": "object",
+        "value": null,
+        "label": "Additional Fields (JSON)",
+        "placeholder": "{\"created_via\":\"api\"}"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Customer ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Customer",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "ecommerce/woocommerce/customer_delete": {
+    "hash": "fcd60c599054246ea08899bd2fcf07ce19e56acbed92e47a99c0cf5341766dbe",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "WooCommerce: Delete Customer",
+    "description": "Delete a customer from your WooCommerce store permanently (customers cannot be moved to the trash).",
+    "website": "https://www.flomation.co",
+    "icon": "woocommerce+trash",
+    "date": "05/07/2026",
+    "type": 2,
+    "category": {
+      "name": "E-Commerce",
+      "icon": "cart-shopping",
+      "description": "Online store platforms — orders, products, and customers"
+    },
+    "sub_category": {
+      "name": "WooCommerce",
+      "icon": "woocommerce",
+      "description": "Manage customers, orders, products, and coupons in your WooCommerce store"
+    },
+    "inputs": [
+      {
+        "name": "url",
+        "type": "string",
+        "value": null,
+        "label": "Store URL",
+        "placeholder": "https://your-store.com — your store's root URL, not the /wp-json path",
+        "required": true
+      },
+      {
+        "name": "consumer_key",
+        "type": "secret",
+        "value": null,
+        "label": "Consumer Key",
+        "placeholder": "ck_...",
+        "required": true
+      },
+      {
+        "name": "consumer_secret",
+        "type": "secret",
+        "value": null,
+        "label": "Consumer Secret",
+        "placeholder": "cs_...",
+        "required": true
+      },
+      {
+        "name": "credentials_in_query",
+        "type": "boolean",
+        "value": null,
+        "label": "Send Credentials in Query String",
+        "placeholder": "Enable only if you see a \"Consumer key is missing\" error"
+      },
+      {
+        "name": "customer_id",
+        "type": "string",
+        "value": null,
+        "label": "Customer ID",
+        "placeholder": "123",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Customer ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Deleted Customer",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "ecommerce/woocommerce/customer_get": {
+    "hash": "34211937a27c329b704a26bd7ff4b0e5f7cdcb9e2fd98db27da670c28fc4ccf1",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "WooCommerce: Get Customer",
+    "description": "Retrieve a single customer from your WooCommerce store by ID.",
+    "website": "https://www.flomation.co",
+    "icon": "woocommerce+eye",
+    "date": "05/07/2026",
+    "type": 2,
+    "category": {
+      "name": "E-Commerce",
+      "icon": "cart-shopping",
+      "description": "Online store platforms — orders, products, and customers"
+    },
+    "sub_category": {
+      "name": "WooCommerce",
+      "icon": "woocommerce",
+      "description": "Manage customers, orders, products, and coupons in your WooCommerce store"
+    },
+    "inputs": [
+      {
+        "name": "url",
+        "type": "string",
+        "value": null,
+        "label": "Store URL",
+        "placeholder": "https://your-store.com — your store's root URL, not the /wp-json path",
+        "required": true
+      },
+      {
+        "name": "consumer_key",
+        "type": "secret",
+        "value": null,
+        "label": "Consumer Key",
+        "placeholder": "ck_...",
+        "required": true
+      },
+      {
+        "name": "consumer_secret",
+        "type": "secret",
+        "value": null,
+        "label": "Consumer Secret",
+        "placeholder": "cs_...",
+        "required": true
+      },
+      {
+        "name": "credentials_in_query",
+        "type": "boolean",
+        "value": null,
+        "label": "Send Credentials in Query String",
+        "placeholder": "Enable only if you see a \"Consumer key is missing\" error"
+      },
+      {
+        "name": "customer_id",
+        "type": "string",
+        "value": null,
+        "label": "Customer ID",
+        "placeholder": "123",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Customer ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Customer",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "ecommerce/woocommerce/customer_get_all": {
+    "hash": "8dd0835cd501a2438b2756c6a0711c6189479d07a4bf568a3ca6ba6b8fb7fd6f",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "WooCommerce: Get Many Customers",
+    "description": "List customers from your WooCommerce store, with optional filters. Enable Return All to auto-paginate every matching customer.",
+    "website": "https://www.flomation.co",
+    "icon": "woocommerce+list",
+    "date": "05/07/2026",
+    "type": 2,
+    "category": {
+      "name": "E-Commerce",
+      "icon": "cart-shopping",
+      "description": "Online store platforms — orders, products, and customers"
+    },
+    "sub_category": {
+      "name": "WooCommerce",
+      "icon": "woocommerce",
+      "description": "Manage customers, orders, products, and coupons in your WooCommerce store"
+    },
+    "inputs": [
+      {
+        "name": "url",
+        "type": "string",
+        "value": null,
+        "label": "Store URL",
+        "placeholder": "https://your-store.com — your store's root URL, not the /wp-json path",
+        "required": true
+      },
+      {
+        "name": "consumer_key",
+        "type": "secret",
+        "value": null,
+        "label": "Consumer Key",
+        "placeholder": "ck_...",
+        "required": true
+      },
+      {
+        "name": "consumer_secret",
+        "type": "secret",
+        "value": null,
+        "label": "Consumer Secret",
+        "placeholder": "cs_...",
+        "required": true
+      },
+      {
+        "name": "credentials_in_query",
+        "type": "boolean",
+        "value": null,
+        "label": "Send Credentials in Query String",
+        "placeholder": "Enable only if you see a \"Consumer key is missing\" error"
+      },
+      {
+        "name": "return_all",
+        "type": "boolean",
+        "value": null,
+        "label": "Return All (auto-paginate every match)",
+        "placeholder": ""
+      },
+      {
+        "name": "limit",
+        "type": "integer",
+        "value": null,
+        "label": "Limit (per page)",
+        "placeholder": "50 per page (max 100); Return All still fetches every match"
+      },
+      {
+        "name": "page",
+        "type": "integer",
+        "value": null,
+        "label": "Page",
+        "placeholder": "Page number to fetch (ignored when Return All is on)"
+      },
+      {
+        "name": "search",
+        "type": "string",
+        "value": null,
+        "label": "Search",
+        "placeholder": ""
+      },
+      {
+        "name": "email",
+        "type": "string",
+        "value": null,
+        "label": "Email",
+        "placeholder": "Limit to the customer with this email"
+      },
+      {
+        "name": "role",
+        "type": "string",
+        "value": null,
+        "label": "Role",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "Any",
+            "value": "all"
+          },
+          {
+            "name": "Customer",
+            "value": "customer"
+          },
+          {
+            "name": "Subscriber",
+            "value": "subscriber"
+          },
+          {
+            "name": "Administrator",
+            "value": "administrator"
+          },
+          {
+            "name": "Shop Manager",
+            "value": "shop_manager"
+          },
+          {
+            "name": "Editor",
+            "value": "editor"
+          },
+          {
+            "name": "Author",
+            "value": "author"
+          },
+          {
+            "name": "Contributor",
+            "value": "contributor"
+          }
+        ]
+      },
+      {
+        "name": "order",
+        "type": "string",
+        "value": null,
+        "label": "Sort Order",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "Descending",
+            "value": "desc"
+          },
+          {
+            "name": "Ascending",
+            "value": "asc"
+          }
+        ]
+      },
+      {
+        "name": "orderby",
+        "type": "string",
+        "value": null,
+        "label": "Order By",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "Registered Date",
+            "value": "registered_date"
+          },
+          {
+            "name": "ID",
+            "value": "id"
+          },
+          {
+            "name": "Include",
+            "value": "include"
+          },
+          {
+            "name": "Name",
+            "value": "name"
+          }
+        ]
+      },
+      {
+        "name": "include",
+        "type": "string",
+        "value": null,
+        "label": "Include IDs",
+        "placeholder": "Comma-separated customer IDs to include"
+      },
+      {
+        "name": "exclude",
+        "type": "string",
+        "value": null,
+        "label": "Exclude IDs",
+        "placeholder": "Comma-separated customer IDs to exclude"
+      },
+      {
+        "name": "offset",
+        "type": "integer",
+        "value": null,
+        "label": "Offset",
+        "placeholder": "Number of customers to skip (ignored when Return All is on)"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "results",
+        "type": "object",
+        "value": null,
+        "label": "Customers",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Count (this response)",
+        "placeholder": ""
+      },
+      {
+        "name": "total",
+        "type": "integer",
+        "value": null,
+        "label": "Total (store-wide match)",
+        "placeholder": ""
+      },
+      {
+        "name": "total_pages",
+        "type": "integer",
+        "value": null,
+        "label": "Total Pages",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "ecommerce/woocommerce/customer_update": {
+    "hash": "0b889075e5fa0c7e7c55939db3d2bb2f5d0046b1e96a2fffb08528820fbbb83e",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "WooCommerce: Update Customer",
+    "description": "Update an existing customer in your WooCommerce store. Only the fields you set are changed; add any other customer field via Additional Fields.",
+    "website": "https://www.flomation.co",
+    "icon": "woocommerce+pen",
+    "date": "05/07/2026",
+    "type": 2,
+    "category": {
+      "name": "E-Commerce",
+      "icon": "cart-shopping",
+      "description": "Online store platforms — orders, products, and customers"
+    },
+    "sub_category": {
+      "name": "WooCommerce",
+      "icon": "woocommerce",
+      "description": "Manage customers, orders, products, and coupons in your WooCommerce store"
+    },
+    "inputs": [
+      {
+        "name": "url",
+        "type": "string",
+        "value": null,
+        "label": "Store URL",
+        "placeholder": "https://your-store.com — your store's root URL, not the /wp-json path",
+        "required": true
+      },
+      {
+        "name": "consumer_key",
+        "type": "secret",
+        "value": null,
+        "label": "Consumer Key",
+        "placeholder": "ck_...",
+        "required": true
+      },
+      {
+        "name": "consumer_secret",
+        "type": "secret",
+        "value": null,
+        "label": "Consumer Secret",
+        "placeholder": "cs_...",
+        "required": true
+      },
+      {
+        "name": "credentials_in_query",
+        "type": "boolean",
+        "value": null,
+        "label": "Send Credentials in Query String",
+        "placeholder": "Enable only if you see a \"Consumer key is missing\" error"
+      },
+      {
+        "name": "customer_id",
+        "type": "string",
+        "value": null,
+        "label": "Customer ID",
+        "placeholder": "123",
+        "required": true
+      },
+      {
+        "name": "first_name",
+        "type": "string",
+        "value": null,
+        "label": "First Name",
+        "placeholder": ""
+      },
+      {
+        "name": "last_name",
+        "type": "string",
+        "value": null,
+        "label": "Last Name",
+        "placeholder": ""
+      },
+      {
+        "name": "email",
+        "type": "string",
+        "value": null,
+        "label": "Email",
+        "placeholder": "jane@example.com"
+      },
+      {
+        "name": "password",
+        "type": "secret",
+        "value": null,
+        "label": "Password",
+        "placeholder": ""
+      },
+      {
+        "name": "role",
+        "type": "string",
+        "value": null,
+        "label": "Role",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "Customer",
+            "value": "customer"
+          },
+          {
+            "name": "Subscriber",
+            "value": "subscriber"
+          },
+          {
+            "name": "Contributor",
+            "value": "contributor"
+          },
+          {
+            "name": "Author",
+            "value": "author"
+          },
+          {
+            "name": "Editor",
+            "value": "editor"
+          },
+          {
+            "name": "Shop Manager",
+            "value": "shop_manager"
+          },
+          {
+            "name": "Administrator",
+            "value": "administrator"
+          }
+        ]
+      },
+      {
+        "name": "billing",
+        "type": "object",
+        "value": null,
+        "label": "Billing Address (JSON)",
+        "placeholder": "{\"first_name\":\"Jane\",\"address_1\":\"1 Main St\",\"city\":\"London\",\"postcode\":\"SW1\",\"country\":\"GB\",\"email\":\"jane@example.com\"}"
+      },
+      {
+        "name": "shipping",
+        "type": "object",
+        "value": null,
+        "label": "Shipping Address (JSON)",
+        "placeholder": "{\"first_name\":\"Jane\",\"last_name\":\"Doe\",\"address_1\":\"1 Main St\",\"city\":\"London\",\"postcode\":\"SW1\",\"country\":\"GB\"}"
+      },
+      {
+        "name": "meta_data",
+        "type": "object",
+        "value": null,
+        "label": "Metadata (JSON)",
+        "placeholder": "[{\"key\":\"vip\",\"value\":\"yes\"}]"
+      },
+      {
+        "name": "additional_fields",
+        "type": "object",
+        "value": null,
+        "label": "Additional Fields (JSON)",
+        "placeholder": ""
+      }
+    ],
+    "outputs": [
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Customer ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Customer",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "ecommerce/woocommerce/order_create": {
+    "hash": "6f77aa8e8db4950c0a1c9a37c1fb60b5c305ccbec11ce488e190fa7a4eace031",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "WooCommerce: Create Order",
+    "description": "Create an order in your WooCommerce store. Provide line items as JSON; set common fields directly or add any other order field via Additional Fields.",
+    "website": "https://www.flomation.co",
+    "icon": "woocommerce+plus",
+    "date": "05/07/2026",
+    "type": 2,
+    "category": {
+      "name": "E-Commerce",
+      "icon": "cart-shopping",
+      "description": "Online store platforms — orders, products, and customers"
+    },
+    "sub_category": {
+      "name": "WooCommerce",
+      "icon": "woocommerce",
+      "description": "Manage customers, orders, products, and coupons in your WooCommerce store"
+    },
+    "inputs": [
+      {
+        "name": "url",
+        "type": "string",
+        "value": null,
+        "label": "Store URL",
+        "placeholder": "https://your-store.com — your store's root URL, not the /wp-json path",
+        "required": true
+      },
+      {
+        "name": "consumer_key",
+        "type": "secret",
+        "value": null,
+        "label": "Consumer Key",
+        "placeholder": "ck_...",
+        "required": true
+      },
+      {
+        "name": "consumer_secret",
+        "type": "secret",
+        "value": null,
+        "label": "Consumer Secret",
+        "placeholder": "cs_...",
+        "required": true
+      },
+      {
+        "name": "credentials_in_query",
+        "type": "boolean",
+        "value": null,
+        "label": "Send Credentials in Query String",
+        "placeholder": "Enable only if you see a \"Consumer key is missing\" error"
+      },
+      {
+        "name": "status",
+        "type": "string",
+        "value": null,
+        "label": "Status",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "Pending Payment",
+            "value": "pending"
+          },
+          {
+            "name": "Processing",
+            "value": "processing"
+          },
+          {
+            "name": "On Hold",
+            "value": "on-hold"
+          },
+          {
+            "name": "Completed",
+            "value": "completed"
+          },
+          {
+            "name": "Cancelled",
+            "value": "cancelled"
+          },
+          {
+            "name": "Refunded",
+            "value": "refunded"
+          },
+          {
+            "name": "Failed",
+            "value": "failed"
+          }
+        ]
+      },
+      {
+        "name": "currency",
+        "type": "string",
+        "value": null,
+        "label": "Currency",
+        "placeholder": "GBP, USD, EUR (ISO 4217)"
+      },
+      {
+        "name": "customer_id",
+        "type": "string",
+        "value": null,
+        "label": "Customer ID",
+        "placeholder": "0 for a guest order"
+      },
+      {
+        "name": "customer_note",
+        "type": "text",
+        "value": null,
+        "label": "Customer Note",
+        "placeholder": ""
+      },
+      {
+        "name": "parent_id",
+        "type": "string",
+        "value": null,
+        "label": "Parent Order ID",
+        "placeholder": ""
+      },
+      {
+        "name": "payment_method",
+        "type": "string",
+        "value": null,
+        "label": "Payment Method ID",
+        "placeholder": "bacs, cheque, cod, paypal..."
+      },
+      {
+        "name": "payment_method_title",
+        "type": "string",
+        "value": null,
+        "label": "Payment Method Title",
+        "placeholder": "Direct Bank Transfer"
+      },
+      {
+        "name": "transaction_id",
+        "type": "string",
+        "value": null,
+        "label": "Transaction ID",
+        "placeholder": ""
+      },
+      {
+        "name": "set_paid",
+        "type": "boolean",
+        "value": null,
+        "label": "Set Paid",
+        "placeholder": "Mark the order as paid and reduce stock"
+      },
+      {
+        "name": "line_items",
+        "type": "object",
+        "value": null,
+        "label": "Line Items (JSON)",
+        "placeholder": "[{\"product_id\":93,\"quantity\":2}]"
+      },
+      {
+        "name": "billing",
+        "type": "object",
+        "value": null,
+        "label": "Billing Address (JSON)",
+        "placeholder": "{\"first_name\":\"Jane\",\"last_name\":\"Doe\",\"address_1\":\"1 Main St\",\"city\":\"London\",\"postcode\":\"SW1\",\"country\":\"GB\",\"email\":\"jane@example.com\"}"
+      },
+      {
+        "name": "shipping",
+        "type": "object",
+        "value": null,
+        "label": "Shipping Address (JSON)",
+        "placeholder": "{\"first_name\":\"Jane\",\"last_name\":\"Doe\",\"address_1\":\"1 Main St\",\"city\":\"London\",\"postcode\":\"SW1\",\"country\":\"GB\"}"
+      },
+      {
+        "name": "shipping_lines",
+        "type": "object",
+        "value": null,
+        "label": "Shipping Lines (JSON)",
+        "placeholder": "[{\"method_id\":\"flat_rate\",\"method_title\":\"Flat Rate\",\"total\":\"5.00\"}]"
+      },
+      {
+        "name": "fee_lines",
+        "type": "object",
+        "value": null,
+        "label": "Fee Lines (JSON)",
+        "placeholder": "[{\"name\":\"Gift Wrap\",\"total\":\"2.50\"}]"
+      },
+      {
+        "name": "coupon_lines",
+        "type": "object",
+        "value": null,
+        "label": "Coupon Lines (JSON)",
+        "placeholder": "[{\"code\":\"SAVE10\"}]"
+      },
+      {
+        "name": "meta_data",
+        "type": "object",
+        "value": null,
+        "label": "Metadata (JSON)",
+        "placeholder": "[{\"key\":\"source\",\"value\":\"web\"}]"
+      },
+      {
+        "name": "additional_fields",
+        "type": "object",
+        "value": null,
+        "label": "Additional Fields (JSON)",
+        "placeholder": "{\"created_via\":\"api\"}"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Order ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Order",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "ecommerce/woocommerce/order_delete": {
+    "hash": "572e9980adca0ac3a13cfe21584e9ccef9aec462c8e5523f0a4b75f28d402cb5",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "WooCommerce: Delete Order",
+    "description": "Delete an order from your WooCommerce store. Deletes permanently by default; turn off Force Delete to move it to the trash instead.",
+    "website": "https://www.flomation.co",
+    "icon": "woocommerce+trash",
+    "date": "05/07/2026",
+    "type": 2,
+    "category": {
+      "name": "E-Commerce",
+      "icon": "cart-shopping",
+      "description": "Online store platforms — orders, products, and customers"
+    },
+    "sub_category": {
+      "name": "WooCommerce",
+      "icon": "woocommerce",
+      "description": "Manage customers, orders, products, and coupons in your WooCommerce store"
+    },
+    "inputs": [
+      {
+        "name": "url",
+        "type": "string",
+        "value": null,
+        "label": "Store URL",
+        "placeholder": "https://your-store.com — your store's root URL, not the /wp-json path",
+        "required": true
+      },
+      {
+        "name": "consumer_key",
+        "type": "secret",
+        "value": null,
+        "label": "Consumer Key",
+        "placeholder": "ck_...",
+        "required": true
+      },
+      {
+        "name": "consumer_secret",
+        "type": "secret",
+        "value": null,
+        "label": "Consumer Secret",
+        "placeholder": "cs_...",
+        "required": true
+      },
+      {
+        "name": "credentials_in_query",
+        "type": "boolean",
+        "value": null,
+        "label": "Send Credentials in Query String",
+        "placeholder": "Enable only if you see a \"Consumer key is missing\" error"
+      },
+      {
+        "name": "order_id",
+        "type": "string",
+        "value": null,
+        "label": "Order ID",
+        "placeholder": "123",
+        "required": true
+      },
+      {
+        "name": "force",
+        "type": "boolean",
+        "value": null,
+        "label": "Force Delete",
+        "placeholder": "On (default): delete permanently. Off: move to trash."
+      }
+    ],
+    "outputs": [
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Order ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Deleted Order",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "ecommerce/woocommerce/order_get": {
+    "hash": "fd3e8e713e2aacc8f17f67e85b51474bbd752e2b3a884ffd52195477ce719a2a",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "WooCommerce: Get Order",
+    "description": "Retrieve a single order from your WooCommerce store by ID.",
+    "website": "https://www.flomation.co",
+    "icon": "woocommerce+eye",
+    "date": "05/07/2026",
+    "type": 2,
+    "category": {
+      "name": "E-Commerce",
+      "icon": "cart-shopping",
+      "description": "Online store platforms — orders, products, and customers"
+    },
+    "sub_category": {
+      "name": "WooCommerce",
+      "icon": "woocommerce",
+      "description": "Manage customers, orders, products, and coupons in your WooCommerce store"
+    },
+    "inputs": [
+      {
+        "name": "url",
+        "type": "string",
+        "value": null,
+        "label": "Store URL",
+        "placeholder": "https://your-store.com — your store's root URL, not the /wp-json path",
+        "required": true
+      },
+      {
+        "name": "consumer_key",
+        "type": "secret",
+        "value": null,
+        "label": "Consumer Key",
+        "placeholder": "ck_...",
+        "required": true
+      },
+      {
+        "name": "consumer_secret",
+        "type": "secret",
+        "value": null,
+        "label": "Consumer Secret",
+        "placeholder": "cs_...",
+        "required": true
+      },
+      {
+        "name": "credentials_in_query",
+        "type": "boolean",
+        "value": null,
+        "label": "Send Credentials in Query String",
+        "placeholder": "Enable only if you see a \"Consumer key is missing\" error"
+      },
+      {
+        "name": "order_id",
+        "type": "string",
+        "value": null,
+        "label": "Order ID",
+        "placeholder": "123",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Order ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Order",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "ecommerce/woocommerce/order_get_all": {
+    "hash": "e342971e4931a01d2b71e1ac6b74d8546219dd891c06bd816440bd19e05b2855",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "WooCommerce: Get Many Orders",
+    "description": "List orders from your WooCommerce store, with optional filters. Enable Return All to auto-paginate every matching order.",
+    "website": "https://www.flomation.co",
+    "icon": "woocommerce+list",
+    "date": "05/07/2026",
+    "type": 2,
+    "category": {
+      "name": "E-Commerce",
+      "icon": "cart-shopping",
+      "description": "Online store platforms — orders, products, and customers"
+    },
+    "sub_category": {
+      "name": "WooCommerce",
+      "icon": "woocommerce",
+      "description": "Manage customers, orders, products, and coupons in your WooCommerce store"
+    },
+    "inputs": [
+      {
+        "name": "url",
+        "type": "string",
+        "value": null,
+        "label": "Store URL",
+        "placeholder": "https://your-store.com — your store's root URL, not the /wp-json path",
+        "required": true
+      },
+      {
+        "name": "consumer_key",
+        "type": "secret",
+        "value": null,
+        "label": "Consumer Key",
+        "placeholder": "ck_...",
+        "required": true
+      },
+      {
+        "name": "consumer_secret",
+        "type": "secret",
+        "value": null,
+        "label": "Consumer Secret",
+        "placeholder": "cs_...",
+        "required": true
+      },
+      {
+        "name": "credentials_in_query",
+        "type": "boolean",
+        "value": null,
+        "label": "Send Credentials in Query String",
+        "placeholder": "Enable only if you see a \"Consumer key is missing\" error"
+      },
+      {
+        "name": "return_all",
+        "type": "boolean",
+        "value": null,
+        "label": "Return All (auto-paginate every match)",
+        "placeholder": ""
+      },
+      {
+        "name": "limit",
+        "type": "integer",
+        "value": null,
+        "label": "Limit (per page)",
+        "placeholder": "50 per page (max 100); Return All still fetches every match"
+      },
+      {
+        "name": "page",
+        "type": "integer",
+        "value": null,
+        "label": "Page",
+        "placeholder": "Page number to fetch (ignored when Return All is on)"
+      },
+      {
+        "name": "status",
+        "type": "string",
+        "value": null,
+        "label": "Status",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "Any",
+            "value": "any"
+          },
+          {
+            "name": "Pending Payment",
+            "value": "pending"
+          },
+          {
+            "name": "Processing",
+            "value": "processing"
+          },
+          {
+            "name": "On Hold",
+            "value": "on-hold"
+          },
+          {
+            "name": "Completed",
+            "value": "completed"
+          },
+          {
+            "name": "Cancelled",
+            "value": "cancelled"
+          },
+          {
+            "name": "Refunded",
+            "value": "refunded"
+          },
+          {
+            "name": "Failed",
+            "value": "failed"
+          },
+          {
+            "name": "Trash",
+            "value": "trash"
+          }
+        ]
+      },
+      {
+        "name": "customer",
+        "type": "string",
+        "value": null,
+        "label": "Customer ID",
+        "placeholder": "Limit to orders for this customer ID"
+      },
+      {
+        "name": "product",
+        "type": "string",
+        "value": null,
+        "label": "Product ID",
+        "placeholder": "Limit to orders containing this product ID"
+      },
+      {
+        "name": "search",
+        "type": "string",
+        "value": null,
+        "label": "Search",
+        "placeholder": ""
+      },
+      {
+        "name": "after",
+        "type": "datetime",
+        "value": null,
+        "label": "Created After",
+        "placeholder": ""
+      },
+      {
+        "name": "before",
+        "type": "datetime",
+        "value": null,
+        "label": "Created Before",
+        "placeholder": ""
+      },
+      {
+        "name": "include",
+        "type": "string",
+        "value": null,
+        "label": "Include IDs",
+        "placeholder": "Comma-separated order IDs to include"
+      },
+      {
+        "name": "exclude",
+        "type": "string",
+        "value": null,
+        "label": "Exclude IDs",
+        "placeholder": "Comma-separated order IDs to exclude"
+      },
+      {
+        "name": "order",
+        "type": "string",
+        "value": null,
+        "label": "Sort Order",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "Descending",
+            "value": "desc"
+          },
+          {
+            "name": "Ascending",
+            "value": "asc"
+          }
+        ]
+      },
+      {
+        "name": "orderby",
+        "type": "string",
+        "value": null,
+        "label": "Order By",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "Date",
+            "value": "date"
+          },
+          {
+            "name": "ID",
+            "value": "id"
+          },
+          {
+            "name": "Include",
+            "value": "include"
+          },
+          {
+            "name": "Title",
+            "value": "title"
+          },
+          {
+            "name": "Slug",
+            "value": "slug"
+          }
+        ]
+      },
+      {
+        "name": "dp",
+        "type": "integer",
+        "value": null,
+        "label": "Decimal Points",
+        "placeholder": "Number of decimal points in prices (default 2)"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "results",
+        "type": "object",
+        "value": null,
+        "label": "Orders",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Count (this response)",
+        "placeholder": ""
+      },
+      {
+        "name": "total",
+        "type": "integer",
+        "value": null,
+        "label": "Total (store-wide match)",
+        "placeholder": ""
+      },
+      {
+        "name": "total_pages",
+        "type": "integer",
+        "value": null,
+        "label": "Total Pages",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "ecommerce/woocommerce/order_update": {
+    "hash": "4e211476edaa190857902b84df0be96b317c75dc605b1bb6288263d98b731254",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "WooCommerce: Update Order",
+    "description": "Update an existing order in your WooCommerce store. Only the fields you set are changed; add any other order field via Additional Fields.",
+    "website": "https://www.flomation.co",
+    "icon": "woocommerce+pen",
+    "date": "05/07/2026",
+    "type": 2,
+    "category": {
+      "name": "E-Commerce",
+      "icon": "cart-shopping",
+      "description": "Online store platforms — orders, products, and customers"
+    },
+    "sub_category": {
+      "name": "WooCommerce",
+      "icon": "woocommerce",
+      "description": "Manage customers, orders, products, and coupons in your WooCommerce store"
+    },
+    "inputs": [
+      {
+        "name": "url",
+        "type": "string",
+        "value": null,
+        "label": "Store URL",
+        "placeholder": "https://your-store.com — your store's root URL, not the /wp-json path",
+        "required": true
+      },
+      {
+        "name": "consumer_key",
+        "type": "secret",
+        "value": null,
+        "label": "Consumer Key",
+        "placeholder": "ck_...",
+        "required": true
+      },
+      {
+        "name": "consumer_secret",
+        "type": "secret",
+        "value": null,
+        "label": "Consumer Secret",
+        "placeholder": "cs_...",
+        "required": true
+      },
+      {
+        "name": "credentials_in_query",
+        "type": "boolean",
+        "value": null,
+        "label": "Send Credentials in Query String",
+        "placeholder": "Enable only if you see a \"Consumer key is missing\" error"
+      },
+      {
+        "name": "order_id",
+        "type": "string",
+        "value": null,
+        "label": "Order ID",
+        "placeholder": "123",
+        "required": true
+      },
+      {
+        "name": "status",
+        "type": "string",
+        "value": null,
+        "label": "Status",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "Pending Payment",
+            "value": "pending"
+          },
+          {
+            "name": "Processing",
+            "value": "processing"
+          },
+          {
+            "name": "On Hold",
+            "value": "on-hold"
+          },
+          {
+            "name": "Completed",
+            "value": "completed"
+          },
+          {
+            "name": "Cancelled",
+            "value": "cancelled"
+          },
+          {
+            "name": "Refunded",
+            "value": "refunded"
+          },
+          {
+            "name": "Failed",
+            "value": "failed"
+          }
+        ]
+      },
+      {
+        "name": "currency",
+        "type": "string",
+        "value": null,
+        "label": "Currency",
+        "placeholder": "GBP, USD, EUR (ISO 4217)"
+      },
+      {
+        "name": "customer_id",
+        "type": "string",
+        "value": null,
+        "label": "Customer ID",
+        "placeholder": ""
+      },
+      {
+        "name": "customer_note",
+        "type": "text",
+        "value": null,
+        "label": "Customer Note",
+        "placeholder": ""
+      },
+      {
+        "name": "parent_id",
+        "type": "string",
+        "value": null,
+        "label": "Parent Order ID",
+        "placeholder": ""
+      },
+      {
+        "name": "payment_method",
+        "type": "string",
+        "value": null,
+        "label": "Payment Method ID",
+        "placeholder": "bacs, cheque, cod, paypal..."
+      },
+      {
+        "name": "payment_method_title",
+        "type": "string",
+        "value": null,
+        "label": "Payment Method Title",
+        "placeholder": ""
+      },
+      {
+        "name": "transaction_id",
+        "type": "string",
+        "value": null,
+        "label": "Transaction ID",
+        "placeholder": ""
+      },
+      {
+        "name": "set_paid",
+        "type": "boolean",
+        "value": null,
+        "label": "Set Paid",
+        "placeholder": ""
+      },
+      {
+        "name": "line_items",
+        "type": "object",
+        "value": null,
+        "label": "Line Items (JSON)",
+        "placeholder": "[{\"id\":13,\"quantity\":1}]  (include id to edit, omit to add)"
+      },
+      {
+        "name": "billing",
+        "type": "object",
+        "value": null,
+        "label": "Billing Address (JSON)",
+        "placeholder": ""
+      },
+      {
+        "name": "shipping",
+        "type": "object",
+        "value": null,
+        "label": "Shipping Address (JSON)",
+        "placeholder": ""
+      },
+      {
+        "name": "shipping_lines",
+        "type": "object",
+        "value": null,
+        "label": "Shipping Lines (JSON)",
+        "placeholder": ""
+      },
+      {
+        "name": "fee_lines",
+        "type": "object",
+        "value": null,
+        "label": "Fee Lines (JSON)",
+        "placeholder": ""
+      },
+      {
+        "name": "coupon_lines",
+        "type": "object",
+        "value": null,
+        "label": "Coupon Lines (JSON)",
+        "placeholder": ""
+      },
+      {
+        "name": "meta_data",
+        "type": "object",
+        "value": null,
+        "label": "Metadata (JSON)",
+        "placeholder": "[{\"key\":\"source\",\"value\":\"web\"}]"
+      },
+      {
+        "name": "additional_fields",
+        "type": "object",
+        "value": null,
+        "label": "Additional Fields (JSON)",
+        "placeholder": ""
+      }
+    ],
+    "outputs": [
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Order ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Order",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "ecommerce/woocommerce/product_create": {
+    "hash": "77ad552c4bc2ad9432b63fceaa8083425b0a74d9184ab18cbf8c89d320271b2a",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "WooCommerce: Create Product",
+    "description": "Create a product in your WooCommerce store. Set common fields directly, supply images/attributes/dimensions as JSON, or add any other product field via Additional Fields.",
+    "website": "https://www.flomation.co",
+    "icon": "woocommerce+plus",
+    "date": "05/07/2026",
+    "type": 2,
+    "category": {
+      "name": "E-Commerce",
+      "icon": "cart-shopping",
+      "description": "Online store platforms — orders, products, and customers"
+    },
+    "sub_category": {
+      "name": "WooCommerce",
+      "icon": "woocommerce",
+      "description": "Manage customers, orders, products, and coupons in your WooCommerce store"
+    },
+    "inputs": [
+      {
+        "name": "url",
+        "type": "string",
+        "value": null,
+        "label": "Store URL",
+        "placeholder": "https://your-store.com — your store's root URL, not the /wp-json path",
+        "required": true
+      },
+      {
+        "name": "consumer_key",
+        "type": "secret",
+        "value": null,
+        "label": "Consumer Key",
+        "placeholder": "ck_...",
+        "required": true
+      },
+      {
+        "name": "consumer_secret",
+        "type": "secret",
+        "value": null,
+        "label": "Consumer Secret",
+        "placeholder": "cs_...",
+        "required": true
+      },
+      {
+        "name": "credentials_in_query",
+        "type": "boolean",
+        "value": null,
+        "label": "Send Credentials in Query String",
+        "placeholder": "Enable only if you see a \"Consumer key is missing\" error"
+      },
+      {
+        "name": "name",
+        "type": "string",
+        "value": null,
+        "label": "Name",
+        "placeholder": "Product name",
+        "required": true
+      },
+      {
+        "name": "type",
+        "type": "string",
+        "value": null,
+        "label": "Type",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "Simple",
+            "value": "simple"
+          },
+          {
+            "name": "Grouped",
+            "value": "grouped"
+          },
+          {
+            "name": "External/Affiliate",
+            "value": "external"
+          },
+          {
+            "name": "Variable",
+            "value": "variable"
+          }
+        ]
+      },
+      {
+        "name": "status",
+        "type": "string",
+        "value": null,
+        "label": "Status",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "Published",
+            "value": "publish"
+          },
+          {
+            "name": "Draft",
+            "value": "draft"
+          },
+          {
+            "name": "Pending",
+            "value": "pending"
+          },
+          {
+            "name": "Private",
+            "value": "private"
+          }
+        ]
+      },
+      {
+        "name": "sku",
+        "type": "string",
+        "value": null,
+        "label": "SKU",
+        "placeholder": ""
+      },
+      {
+        "name": "regular_price",
+        "type": "string",
+        "value": null,
+        "label": "Regular Price",
+        "placeholder": "19.99"
+      },
+      {
+        "name": "sale_price",
+        "type": "string",
+        "value": null,
+        "label": "Sale Price",
+        "placeholder": ""
+      },
+      {
+        "name": "description",
+        "type": "text",
+        "value": null,
+        "label": "Description",
+        "placeholder": ""
+      },
+      {
+        "name": "short_description",
+        "type": "text",
+        "value": null,
+        "label": "Short Description",
+        "placeholder": ""
+      },
+      {
+        "name": "catalog_visibility",
+        "type": "string",
+        "value": null,
+        "label": "Catalog Visibility",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "Shop and Search",
+            "value": "visible"
+          },
+          {
+            "name": "Shop Only",
+            "value": "catalog"
+          },
+          {
+            "name": "Search Only",
+            "value": "search"
+          },
+          {
+            "name": "Hidden",
+            "value": "hidden"
+          }
+        ]
+      },
+      {
+        "name": "tax_status",
+        "type": "string",
+        "value": null,
+        "label": "Tax Status",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "Taxable",
+            "value": "taxable"
+          },
+          {
+            "name": "Shipping Only",
+            "value": "shipping"
+          },
+          {
+            "name": "None",
+            "value": "none"
+          }
+        ]
+      },
+      {
+        "name": "tax_class",
+        "type": "string",
+        "value": null,
+        "label": "Tax Class",
+        "placeholder": ""
+      },
+      {
+        "name": "stock_status",
+        "type": "string",
+        "value": null,
+        "label": "Stock Status",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "In Stock",
+            "value": "instock"
+          },
+          {
+            "name": "Out of Stock",
+            "value": "outofstock"
+          },
+          {
+            "name": "On Backorder",
+            "value": "onbackorder"
+          }
+        ]
+      },
+      {
+        "name": "backorders",
+        "type": "string",
+        "value": null,
+        "label": "Backorders",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "Do Not Allow",
+            "value": "no"
+          },
+          {
+            "name": "Allow but Notify",
+            "value": "notify"
+          },
+          {
+            "name": "Allow",
+            "value": "yes"
+          }
+        ]
+      },
+      {
+        "name": "stock_quantity",
+        "type": "integer",
+        "value": null,
+        "label": "Stock Quantity",
+        "placeholder": ""
+      },
+      {
+        "name": "weight",
+        "type": "string",
+        "value": null,
+        "label": "Weight",
+        "placeholder": ""
+      },
+      {
+        "name": "slug",
+        "type": "string",
+        "value": null,
+        "label": "Slug",
+        "placeholder": ""
+      },
+      {
+        "name": "external_url",
+        "type": "string",
+        "value": null,
+        "label": "External URL",
+        "placeholder": "For external/affiliate products"
+      },
+      {
+        "name": "button_text",
+        "type": "string",
+        "value": null,
+        "label": "Button Text",
+        "placeholder": "For external/affiliate products"
+      },
+      {
+        "name": "purchase_note",
+        "type": "string",
+        "value": null,
+        "label": "Purchase Note",
+        "placeholder": ""
+      },
+      {
+        "name": "menu_order",
+        "type": "integer",
+        "value": null,
+        "label": "Menu Order",
+        "placeholder": ""
+      },
+      {
+        "name": "featured",
+        "type": "boolean",
+        "value": null,
+        "label": "Featured",
+        "placeholder": ""
+      },
+      {
+        "name": "virtual",
+        "type": "boolean",
+        "value": null,
+        "label": "Virtual",
+        "placeholder": ""
+      },
+      {
+        "name": "downloadable",
+        "type": "boolean",
+        "value": null,
+        "label": "Downloadable",
+        "placeholder": ""
+      },
+      {
+        "name": "manage_stock",
+        "type": "boolean",
+        "value": null,
+        "label": "Manage Stock",
+        "placeholder": ""
+      },
+      {
+        "name": "sold_individually",
+        "type": "boolean",
+        "value": null,
+        "label": "Sold Individually",
+        "placeholder": ""
+      },
+      {
+        "name": "reviews_allowed",
+        "type": "boolean",
+        "value": null,
+        "label": "Reviews Allowed",
+        "placeholder": ""
+      },
+      {
+        "name": "category_ids",
+        "type": "string",
+        "value": null,
+        "label": "Category IDs",
+        "placeholder": "Comma-separated category IDs, e.g. 9,14"
+      },
+      {
+        "name": "tag_ids",
+        "type": "string",
+        "value": null,
+        "label": "Tag IDs",
+        "placeholder": "Comma-separated tag IDs, e.g. 3,7"
+      },
+      {
+        "name": "dimensions",
+        "type": "object",
+        "value": null,
+        "label": "Dimensions (JSON)",
+        "placeholder": "{\"length\":\"10\",\"width\":\"5\",\"height\":\"2\"}"
+      },
+      {
+        "name": "images",
+        "type": "object",
+        "value": null,
+        "label": "Images (JSON)",
+        "placeholder": "[{\"src\":\"https://.../img.jpg\"}]"
+      },
+      {
+        "name": "attributes",
+        "type": "object",
+        "value": null,
+        "label": "Attributes (JSON)",
+        "placeholder": "[{\"name\":\"Color\",\"options\":[\"Red\",\"Blue\"],\"visible\":true}]"
+      },
+      {
+        "name": "meta_data",
+        "type": "object",
+        "value": null,
+        "label": "Metadata (JSON)",
+        "placeholder": "[{\"key\":\"source\",\"value\":\"web\"}]"
+      },
+      {
+        "name": "additional_fields",
+        "type": "object",
+        "value": null,
+        "label": "Additional Fields (JSON)",
+        "placeholder": "{\"catalog_visibility\":\"hidden\"}"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Product ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Product",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "ecommerce/woocommerce/product_delete": {
+    "hash": "ae01bc044cbfd846a0e9f12c538aeea6a887f75af27297b8763cfc19ac1a8f44",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "WooCommerce: Delete Product",
+    "description": "Delete a product from your WooCommerce store. Deletes permanently by default; turn off Force Delete to move it to the trash instead.",
+    "website": "https://www.flomation.co",
+    "icon": "woocommerce+trash",
+    "date": "05/07/2026",
+    "type": 2,
+    "category": {
+      "name": "E-Commerce",
+      "icon": "cart-shopping",
+      "description": "Online store platforms — orders, products, and customers"
+    },
+    "sub_category": {
+      "name": "WooCommerce",
+      "icon": "woocommerce",
+      "description": "Manage customers, orders, products, and coupons in your WooCommerce store"
+    },
+    "inputs": [
+      {
+        "name": "url",
+        "type": "string",
+        "value": null,
+        "label": "Store URL",
+        "placeholder": "https://your-store.com — your store's root URL, not the /wp-json path",
+        "required": true
+      },
+      {
+        "name": "consumer_key",
+        "type": "secret",
+        "value": null,
+        "label": "Consumer Key",
+        "placeholder": "ck_...",
+        "required": true
+      },
+      {
+        "name": "consumer_secret",
+        "type": "secret",
+        "value": null,
+        "label": "Consumer Secret",
+        "placeholder": "cs_...",
+        "required": true
+      },
+      {
+        "name": "credentials_in_query",
+        "type": "boolean",
+        "value": null,
+        "label": "Send Credentials in Query String",
+        "placeholder": "Enable only if you see a \"Consumer key is missing\" error"
+      },
+      {
+        "name": "product_id",
+        "type": "string",
+        "value": null,
+        "label": "Product ID",
+        "placeholder": "123",
+        "required": true
+      },
+      {
+        "name": "force",
+        "type": "boolean",
+        "value": null,
+        "label": "Force Delete",
+        "placeholder": "On (default): delete permanently. Off: move to trash."
+      }
+    ],
+    "outputs": [
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Product ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Deleted Product",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "ecommerce/woocommerce/product_get": {
+    "hash": "0b9727cd589b88019f30a5aec4308f8b724ed810e65cbde63710ad4814226b64",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "WooCommerce: Get Product",
+    "description": "Retrieve a single product from your WooCommerce store by ID.",
+    "website": "https://www.flomation.co",
+    "icon": "woocommerce+eye",
+    "date": "05/07/2026",
+    "type": 2,
+    "category": {
+      "name": "E-Commerce",
+      "icon": "cart-shopping",
+      "description": "Online store platforms — orders, products, and customers"
+    },
+    "sub_category": {
+      "name": "WooCommerce",
+      "icon": "woocommerce",
+      "description": "Manage customers, orders, products, and coupons in your WooCommerce store"
+    },
+    "inputs": [
+      {
+        "name": "url",
+        "type": "string",
+        "value": null,
+        "label": "Store URL",
+        "placeholder": "https://your-store.com — your store's root URL, not the /wp-json path",
+        "required": true
+      },
+      {
+        "name": "consumer_key",
+        "type": "secret",
+        "value": null,
+        "label": "Consumer Key",
+        "placeholder": "ck_...",
+        "required": true
+      },
+      {
+        "name": "consumer_secret",
+        "type": "secret",
+        "value": null,
+        "label": "Consumer Secret",
+        "placeholder": "cs_...",
+        "required": true
+      },
+      {
+        "name": "credentials_in_query",
+        "type": "boolean",
+        "value": null,
+        "label": "Send Credentials in Query String",
+        "placeholder": "Enable only if you see a \"Consumer key is missing\" error"
+      },
+      {
+        "name": "product_id",
+        "type": "string",
+        "value": null,
+        "label": "Product ID",
+        "placeholder": "123",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Product ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Product",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "ecommerce/woocommerce/product_get_all": {
+    "hash": "96ccec60909b844822bbcfbc21380f911f3601afb23dd9acdc7df11b618801b3",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "WooCommerce: Get Many Products",
+    "description": "List products from your WooCommerce store, with optional filters. Enable Return All to auto-paginate every matching product.",
+    "website": "https://www.flomation.co",
+    "icon": "woocommerce+list",
+    "date": "05/07/2026",
+    "type": 2,
+    "category": {
+      "name": "E-Commerce",
+      "icon": "cart-shopping",
+      "description": "Online store platforms — orders, products, and customers"
+    },
+    "sub_category": {
+      "name": "WooCommerce",
+      "icon": "woocommerce",
+      "description": "Manage customers, orders, products, and coupons in your WooCommerce store"
+    },
+    "inputs": [
+      {
+        "name": "url",
+        "type": "string",
+        "value": null,
+        "label": "Store URL",
+        "placeholder": "https://your-store.com — your store's root URL, not the /wp-json path",
+        "required": true
+      },
+      {
+        "name": "consumer_key",
+        "type": "secret",
+        "value": null,
+        "label": "Consumer Key",
+        "placeholder": "ck_...",
+        "required": true
+      },
+      {
+        "name": "consumer_secret",
+        "type": "secret",
+        "value": null,
+        "label": "Consumer Secret",
+        "placeholder": "cs_...",
+        "required": true
+      },
+      {
+        "name": "credentials_in_query",
+        "type": "boolean",
+        "value": null,
+        "label": "Send Credentials in Query String",
+        "placeholder": "Enable only if you see a \"Consumer key is missing\" error"
+      },
+      {
+        "name": "return_all",
+        "type": "boolean",
+        "value": null,
+        "label": "Return All (auto-paginate every match)",
+        "placeholder": ""
+      },
+      {
+        "name": "limit",
+        "type": "integer",
+        "value": null,
+        "label": "Limit (per page)",
+        "placeholder": "50 per page (max 100); Return All still fetches every match"
+      },
+      {
+        "name": "page",
+        "type": "integer",
+        "value": null,
+        "label": "Page",
+        "placeholder": "Page number to fetch (ignored when Return All is on)"
+      },
+      {
+        "name": "search",
+        "type": "string",
+        "value": null,
+        "label": "Search",
+        "placeholder": ""
+      },
+      {
+        "name": "after",
+        "type": "datetime",
+        "value": null,
+        "label": "Created After",
+        "placeholder": ""
+      },
+      {
+        "name": "before",
+        "type": "datetime",
+        "value": null,
+        "label": "Created Before",
+        "placeholder": ""
+      },
+      {
+        "name": "sku",
+        "type": "string",
+        "value": null,
+        "label": "SKU",
+        "placeholder": ""
+      },
+      {
+        "name": "type",
+        "type": "string",
+        "value": null,
+        "label": "Type",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "Simple",
+            "value": "simple"
+          },
+          {
+            "name": "Grouped",
+            "value": "grouped"
+          },
+          {
+            "name": "External/Affiliate",
+            "value": "external"
+          },
+          {
+            "name": "Variable",
+            "value": "variable"
+          }
+        ]
+      },
+      {
+        "name": "status",
+        "type": "string",
+        "value": null,
+        "label": "Status",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "Any",
+            "value": "any"
+          },
+          {
+            "name": "Published",
+            "value": "publish"
+          },
+          {
+            "name": "Draft",
+            "value": "draft"
+          },
+          {
+            "name": "Pending",
+            "value": "pending"
+          },
+          {
+            "name": "Private",
+            "value": "private"
+          }
+        ]
+      },
+      {
+        "name": "category",
+        "type": "string",
+        "value": null,
+        "label": "Category ID",
+        "placeholder": "Limit to products in this category ID"
+      },
+      {
+        "name": "tag",
+        "type": "string",
+        "value": null,
+        "label": "Tag ID",
+        "placeholder": "Limit to products with this tag ID"
+      },
+      {
+        "name": "featured",
+        "type": "boolean",
+        "value": null,
+        "label": "Featured Only",
+        "placeholder": ""
+      },
+      {
+        "name": "on_sale",
+        "type": "boolean",
+        "value": null,
+        "label": "On Sale Only",
+        "placeholder": ""
+      },
+      {
+        "name": "min_price",
+        "type": "string",
+        "value": null,
+        "label": "Minimum Price",
+        "placeholder": ""
+      },
+      {
+        "name": "max_price",
+        "type": "string",
+        "value": null,
+        "label": "Maximum Price",
+        "placeholder": ""
+      },
+      {
+        "name": "stock_status",
+        "type": "string",
+        "value": null,
+        "label": "Stock Status",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "Any",
+            "value": ""
+          },
+          {
+            "name": "In Stock",
+            "value": "instock"
+          },
+          {
+            "name": "Out of Stock",
+            "value": "outofstock"
+          },
+          {
+            "name": "On Backorder",
+            "value": "onbackorder"
+          }
+        ]
+      },
+      {
+        "name": "order",
+        "type": "string",
+        "value": null,
+        "label": "Sort Order",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "Descending",
+            "value": "desc"
+          },
+          {
+            "name": "Ascending",
+            "value": "asc"
+          }
+        ]
+      },
+      {
+        "name": "orderby",
+        "type": "string",
+        "value": null,
+        "label": "Order By",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "Date",
+            "value": "date"
+          },
+          {
+            "name": "ID",
+            "value": "id"
+          },
+          {
+            "name": "Include",
+            "value": "include"
+          },
+          {
+            "name": "Title",
+            "value": "title"
+          },
+          {
+            "name": "Slug",
+            "value": "slug"
+          },
+          {
+            "name": "Price",
+            "value": "price"
+          },
+          {
+            "name": "Popularity",
+            "value": "popularity"
+          },
+          {
+            "name": "Rating",
+            "value": "rating"
+          }
+        ]
+      },
+      {
+        "name": "include",
+        "type": "string",
+        "value": null,
+        "label": "Include IDs",
+        "placeholder": "Comma-separated product IDs to include"
+      },
+      {
+        "name": "exclude",
+        "type": "string",
+        "value": null,
+        "label": "Exclude IDs",
+        "placeholder": "Comma-separated product IDs to exclude"
+      },
+      {
+        "name": "offset",
+        "type": "integer",
+        "value": null,
+        "label": "Offset",
+        "placeholder": "Skip this many results (ignored when Return All is on)"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "results",
+        "type": "object",
+        "value": null,
+        "label": "Products",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Count (this response)",
+        "placeholder": ""
+      },
+      {
+        "name": "total",
+        "type": "integer",
+        "value": null,
+        "label": "Total (store-wide match)",
+        "placeholder": ""
+      },
+      {
+        "name": "total_pages",
+        "type": "integer",
+        "value": null,
+        "label": "Total Pages",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "ecommerce/woocommerce/product_update": {
+    "hash": "9c86fa069a192695c026c0c1ea29f9a86bb4e87832420316160cc3c03ecafae3",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "WooCommerce: Update Product",
+    "description": "Update an existing product in your WooCommerce store. Only the fields you set are changed; add any other product field via Additional Fields.",
+    "website": "https://www.flomation.co",
+    "icon": "woocommerce+pen",
+    "date": "05/07/2026",
+    "type": 2,
+    "category": {
+      "name": "E-Commerce",
+      "icon": "cart-shopping",
+      "description": "Online store platforms — orders, products, and customers"
+    },
+    "sub_category": {
+      "name": "WooCommerce",
+      "icon": "woocommerce",
+      "description": "Manage customers, orders, products, and coupons in your WooCommerce store"
+    },
+    "inputs": [
+      {
+        "name": "url",
+        "type": "string",
+        "value": null,
+        "label": "Store URL",
+        "placeholder": "https://your-store.com — your store's root URL, not the /wp-json path",
+        "required": true
+      },
+      {
+        "name": "consumer_key",
+        "type": "secret",
+        "value": null,
+        "label": "Consumer Key",
+        "placeholder": "ck_...",
+        "required": true
+      },
+      {
+        "name": "consumer_secret",
+        "type": "secret",
+        "value": null,
+        "label": "Consumer Secret",
+        "placeholder": "cs_...",
+        "required": true
+      },
+      {
+        "name": "credentials_in_query",
+        "type": "boolean",
+        "value": null,
+        "label": "Send Credentials in Query String",
+        "placeholder": "Enable only if you see a \"Consumer key is missing\" error"
+      },
+      {
+        "name": "product_id",
+        "type": "string",
+        "value": null,
+        "label": "Product ID",
+        "placeholder": "123",
+        "required": true
+      },
+      {
+        "name": "name",
+        "type": "string",
+        "value": null,
+        "label": "Name",
+        "placeholder": "Product name"
+      },
+      {
+        "name": "type",
+        "type": "string",
+        "value": null,
+        "label": "Type",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "Simple",
+            "value": "simple"
+          },
+          {
+            "name": "Grouped",
+            "value": "grouped"
+          },
+          {
+            "name": "External/Affiliate",
+            "value": "external"
+          },
+          {
+            "name": "Variable",
+            "value": "variable"
+          }
+        ]
+      },
+      {
+        "name": "status",
+        "type": "string",
+        "value": null,
+        "label": "Status",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "Published",
+            "value": "publish"
+          },
+          {
+            "name": "Draft",
+            "value": "draft"
+          },
+          {
+            "name": "Pending",
+            "value": "pending"
+          },
+          {
+            "name": "Private",
+            "value": "private"
+          }
+        ]
+      },
+      {
+        "name": "sku",
+        "type": "string",
+        "value": null,
+        "label": "SKU",
+        "placeholder": ""
+      },
+      {
+        "name": "regular_price",
+        "type": "string",
+        "value": null,
+        "label": "Regular Price",
+        "placeholder": "19.99"
+      },
+      {
+        "name": "sale_price",
+        "type": "string",
+        "value": null,
+        "label": "Sale Price",
+        "placeholder": ""
+      },
+      {
+        "name": "description",
+        "type": "text",
+        "value": null,
+        "label": "Description",
+        "placeholder": ""
+      },
+      {
+        "name": "short_description",
+        "type": "text",
+        "value": null,
+        "label": "Short Description",
+        "placeholder": ""
+      },
+      {
+        "name": "catalog_visibility",
+        "type": "string",
+        "value": null,
+        "label": "Catalog Visibility",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "Shop and Search",
+            "value": "visible"
+          },
+          {
+            "name": "Shop Only",
+            "value": "catalog"
+          },
+          {
+            "name": "Search Only",
+            "value": "search"
+          },
+          {
+            "name": "Hidden",
+            "value": "hidden"
+          }
+        ]
+      },
+      {
+        "name": "tax_status",
+        "type": "string",
+        "value": null,
+        "label": "Tax Status",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "Taxable",
+            "value": "taxable"
+          },
+          {
+            "name": "Shipping Only",
+            "value": "shipping"
+          },
+          {
+            "name": "None",
+            "value": "none"
+          }
+        ]
+      },
+      {
+        "name": "tax_class",
+        "type": "string",
+        "value": null,
+        "label": "Tax Class",
+        "placeholder": ""
+      },
+      {
+        "name": "stock_status",
+        "type": "string",
+        "value": null,
+        "label": "Stock Status",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "In Stock",
+            "value": "instock"
+          },
+          {
+            "name": "Out of Stock",
+            "value": "outofstock"
+          },
+          {
+            "name": "On Backorder",
+            "value": "onbackorder"
+          }
+        ]
+      },
+      {
+        "name": "backorders",
+        "type": "string",
+        "value": null,
+        "label": "Backorders",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "Do Not Allow",
+            "value": "no"
+          },
+          {
+            "name": "Allow but Notify",
+            "value": "notify"
+          },
+          {
+            "name": "Allow",
+            "value": "yes"
+          }
+        ]
+      },
+      {
+        "name": "stock_quantity",
+        "type": "integer",
+        "value": null,
+        "label": "Stock Quantity",
+        "placeholder": ""
+      },
+      {
+        "name": "weight",
+        "type": "string",
+        "value": null,
+        "label": "Weight",
+        "placeholder": ""
+      },
+      {
+        "name": "slug",
+        "type": "string",
+        "value": null,
+        "label": "Slug",
+        "placeholder": ""
+      },
+      {
+        "name": "external_url",
+        "type": "string",
+        "value": null,
+        "label": "External URL",
+        "placeholder": "For external/affiliate products"
+      },
+      {
+        "name": "button_text",
+        "type": "string",
+        "value": null,
+        "label": "Button Text",
+        "placeholder": "For external/affiliate products"
+      },
+      {
+        "name": "purchase_note",
+        "type": "string",
+        "value": null,
+        "label": "Purchase Note",
+        "placeholder": ""
+      },
+      {
+        "name": "menu_order",
+        "type": "integer",
+        "value": null,
+        "label": "Menu Order",
+        "placeholder": ""
+      },
+      {
+        "name": "featured",
+        "type": "boolean",
+        "value": null,
+        "label": "Featured",
+        "placeholder": ""
+      },
+      {
+        "name": "virtual",
+        "type": "boolean",
+        "value": null,
+        "label": "Virtual",
+        "placeholder": ""
+      },
+      {
+        "name": "downloadable",
+        "type": "boolean",
+        "value": null,
+        "label": "Downloadable",
+        "placeholder": ""
+      },
+      {
+        "name": "manage_stock",
+        "type": "boolean",
+        "value": null,
+        "label": "Manage Stock",
+        "placeholder": ""
+      },
+      {
+        "name": "sold_individually",
+        "type": "boolean",
+        "value": null,
+        "label": "Sold Individually",
+        "placeholder": ""
+      },
+      {
+        "name": "reviews_allowed",
+        "type": "boolean",
+        "value": null,
+        "label": "Reviews Allowed",
+        "placeholder": ""
+      },
+      {
+        "name": "category_ids",
+        "type": "string",
+        "value": null,
+        "label": "Category IDs",
+        "placeholder": "Comma-separated category IDs, e.g. 9,14"
+      },
+      {
+        "name": "tag_ids",
+        "type": "string",
+        "value": null,
+        "label": "Tag IDs",
+        "placeholder": "Comma-separated tag IDs, e.g. 3,7"
+      },
+      {
+        "name": "dimensions",
+        "type": "object",
+        "value": null,
+        "label": "Dimensions (JSON)",
+        "placeholder": "{\"length\":\"10\",\"width\":\"5\",\"height\":\"2\"}"
+      },
+      {
+        "name": "images",
+        "type": "object",
+        "value": null,
+        "label": "Images (JSON)",
+        "placeholder": "[{\"src\":\"https://.../img.jpg\"}]"
+      },
+      {
+        "name": "attributes",
+        "type": "object",
+        "value": null,
+        "label": "Attributes (JSON)",
+        "placeholder": "[{\"name\":\"Color\",\"options\":[\"Red\",\"Blue\"],\"visible\":true}]"
+      },
+      {
+        "name": "meta_data",
+        "type": "object",
+        "value": null,
+        "label": "Metadata (JSON)",
+        "placeholder": "[{\"key\":\"source\",\"value\":\"web\"}]"
+      },
+      {
+        "name": "additional_fields",
+        "type": "object",
+        "value": null,
+        "label": "Additional Fields (JSON)",
+        "placeholder": "{\"catalog_visibility\":\"hidden\"}"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Product ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Product",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
   "elevenlabs/list_voices": {
     "hash": "1406ba75e40064caea35303c2de1b8ab6f8ac0a86810e7dc7058d5b1ca3c2b55",
     "author": "Andy Esser",
@@ -61077,6 +65198,185 @@
         "type": "string",
         "value": null,
         "label": "Content Type",
+        "placeholder": ""
+      },
+      {
+        "name": "triggered_at",
+        "type": "string",
+        "value": null,
+        "label": "Triggered At",
+        "placeholder": ""
+      }
+    ]
+  },
+  "trigger/woocommerce_webhook": {
+    "hash": "95894a95315abf739bce97e9f2741310e7b5678b020d91be5b4044ea0d2a43ca",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "WooCommerce Webhook Trigger",
+    "description": "Triggers a flow when a WooCommerce event occurs (order/product/customer/coupon created, updated or deleted). The webhook is registered and signature-verified automatically.",
+    "website": "https://www.flomation.co",
+    "icon": "woocommerce",
+    "date": "05/07/2026",
+    "type": 1,
+    "category": {
+      "name": "Triggers",
+      "icon": "bolt-lightning",
+      "description": "Start a Flow"
+    },
+    "inputs": [
+      {
+        "name": "url",
+        "type": "string",
+        "value": null,
+        "label": "Store URL",
+        "placeholder": "https://your-store.com — your store's root URL, not the /wp-json path",
+        "required": true
+      },
+      {
+        "name": "consumer_key",
+        "type": "secret",
+        "value": null,
+        "label": "Consumer Key",
+        "placeholder": "ck_... — used to register the webhook",
+        "required": true
+      },
+      {
+        "name": "consumer_secret",
+        "type": "secret",
+        "value": null,
+        "label": "Consumer Secret",
+        "placeholder": "cs_...",
+        "required": true
+      },
+      {
+        "name": "credentials_in_query",
+        "type": "boolean",
+        "value": null,
+        "label": "Send Credentials in Query String",
+        "placeholder": "Enable only if you see a \"Consumer key is missing\" error"
+      },
+      {
+        "name": "events",
+        "type": "multi_select",
+        "value": null,
+        "label": "Events",
+        "placeholder": "",
+        "required": true,
+        "options": [
+          {
+            "name": "Order Created",
+            "value": "order.created"
+          },
+          {
+            "name": "Order Updated",
+            "value": "order.updated"
+          },
+          {
+            "name": "Order Deleted",
+            "value": "order.deleted"
+          },
+          {
+            "name": "Product Created",
+            "value": "product.created"
+          },
+          {
+            "name": "Product Updated",
+            "value": "product.updated"
+          },
+          {
+            "name": "Product Deleted",
+            "value": "product.deleted"
+          },
+          {
+            "name": "Customer Created",
+            "value": "customer.created"
+          },
+          {
+            "name": "Customer Updated",
+            "value": "customer.updated"
+          },
+          {
+            "name": "Customer Deleted",
+            "value": "customer.deleted"
+          },
+          {
+            "name": "Coupon Created",
+            "value": "coupon.created"
+          },
+          {
+            "name": "Coupon Updated",
+            "value": "coupon.updated"
+          },
+          {
+            "name": "Coupon Deleted",
+            "value": "coupon.deleted"
+          }
+        ]
+      }
+    ],
+    "outputs": [
+      {
+        "name": "content",
+        "type": "string",
+        "value": null,
+        "label": "Event Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "topic",
+        "type": "string",
+        "value": null,
+        "label": "Topic",
+        "placeholder": ""
+      },
+      {
+        "name": "resource",
+        "type": "string",
+        "value": null,
+        "label": "Resource",
+        "placeholder": ""
+      },
+      {
+        "name": "event",
+        "type": "string",
+        "value": null,
+        "label": "Event",
+        "placeholder": ""
+      },
+      {
+        "name": "resource_id",
+        "type": "string",
+        "value": null,
+        "label": "Resource ID",
+        "placeholder": ""
+      },
+      {
+        "name": "webhook_id",
+        "type": "string",
+        "value": null,
+        "label": "Webhook ID",
+        "placeholder": ""
+      },
+      {
+        "name": "delivery_id",
+        "type": "string",
+        "value": null,
+        "label": "Delivery ID",
+        "placeholder": ""
+      },
+      {
+        "name": "source",
+        "type": "string",
+        "value": null,
+        "label": "Source Store",
+        "placeholder": ""
+      },
+      {
+        "name": "body",
+        "type": "string",
+        "value": null,
+        "label": "Raw JSON Body",
         "placeholder": ""
       },
       {
