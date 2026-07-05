@@ -96,8 +96,8 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	wordpress.SetIfPresent(page, inputs, "date", "date")
 	wordpress.SetIfPresent(page, inputs, "template", "template")
 	wordpress.SetIfPresent(page, inputs, "password", "password")
-	for field, input := range map[string]string{"author": "author", "parent": "parent", "featured_media": "featured_media", "menu_order": "menu_order"} {
-		if err := wordpress.SetIntIfPresent(page, inputs, field, input); err != nil {
+	for _, field := range []string{"author", "parent", "featured_media", "menu_order"} {
+		if err := wordpress.SetIntIfPresent(page, inputs, field, field); err != nil {
 			return wordpress.ErrorResult(err.Error()), nil
 		}
 	}

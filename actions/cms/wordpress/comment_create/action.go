@@ -66,8 +66,8 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	}
 
 	comment := map[string]interface{}{}
-	for field, input := range map[string]string{"post": "post", "author": "author", "parent": "parent"} {
-		if err := wordpress.SetIntIfPresent(comment, inputs, field, input); err != nil {
+	for _, field := range []string{"post", "author", "parent"} {
+		if err := wordpress.SetIntIfPresent(comment, inputs, field, field); err != nil {
 			return wordpress.ErrorResult(err.Error()), nil
 		}
 	}

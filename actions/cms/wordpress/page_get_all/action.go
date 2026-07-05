@@ -111,7 +111,7 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 		if page, ok := wordpress.OptionalInt("page", inputs); ok && page > 0 {
 			q.Set("page", strconv.Itoa(page))
 		}
-		if offset, ok := wordpress.OptionalInt("offset", inputs); ok {
+		if offset, ok := wordpress.OptionalInt("offset", inputs); ok && offset > 0 {
 			q.Set("offset", strconv.Itoa(offset))
 		}
 	}

@@ -119,8 +119,8 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	wordpress.SetIfPresent(post, inputs, "template", "template")
 	wordpress.SetIfPresent(post, inputs, "password", "password")
 	wordpress.SetBoolIfSet(post, inputs, "sticky", "sticky")
-	for field, input := range map[string]string{"author": "author", "featured_media": "featured_media"} {
-		if err := wordpress.SetIntIfPresent(post, inputs, field, input); err != nil {
+	for _, field := range []string{"author", "featured_media"} {
+		if err := wordpress.SetIntIfPresent(post, inputs, field, field); err != nil {
 			return wordpress.ErrorResult(err.Error()), nil
 		}
 	}

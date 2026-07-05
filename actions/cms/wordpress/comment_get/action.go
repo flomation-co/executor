@@ -58,6 +58,10 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 
 	q := url.Values{}
 	wordpress.AddFilter(q, inputs, "context", "context")
+	// The post password travels as a query param by WordPress REST design: the
+	// GET /comments/{id} endpoint reads the parent post's password from the
+	// `password` query arg to authorise reading comments on a password-protected
+	// post. Not a credential leak — it's the documented parameter for this route.
 	wordpress.AddFilter(q, inputs, "password", "password")
 
 	resp, err := wordpress.GetResource(auth, "/comments/"+url.PathEscape(commentID), q)
