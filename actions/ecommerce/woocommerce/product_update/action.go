@@ -14,7 +14,7 @@ const (
 	Name         = "WooCommerce: Update Product"
 	Description  = "Update an existing product in your WooCommerce store. Only the fields you set are changed; add any other product field via Additional Fields."
 	Website      = "https://www.flomation.co"
-	Icon         = "woocommerce+pen"
+	Icon         = "woocommerce+pencil"
 	Date         = "05/07/2026"
 	Type         = core.ActionTypeAction
 )

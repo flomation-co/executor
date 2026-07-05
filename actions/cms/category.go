@@ -8,6 +8,6 @@ package cms
 // providers.
 const (
 	CategoryName        = "CMS"
-	CategoryIcon        = "newspaper"
+	CategoryIcon        = "feed"
 	CategoryDescription = "Content management systems — publish and manage posts, pages, and media"
 )

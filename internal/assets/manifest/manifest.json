@@ -1773,7 +1773,7 @@
     ]
   },
   "ai/gemini_video": {
-    "hash": "616b7a4b006e1e95c99fb27c22c507a5b8d29dc99fd4290cc8937e4fb44dfb19",
+    "hash": "a21f8c3515ce67d71bc3ebdc9dbec90159d67d399f87270facc01c71fed6623d",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Gemini Video",
@@ -4772,7 +4772,7 @@
     "type": 2,
     "category": {
       "name": "CMS",
-      "icon": "newspaper",
+      "icon": "feed",
       "description": "Content management systems — publish and manage posts, pages, and media"
     },
     "sub_category": {
@@ -4906,7 +4906,7 @@
     "type": 2,
     "category": {
       "name": "CMS",
-      "icon": "newspaper",
+      "icon": "feed",
       "description": "Content management systems — publish and manage posts, pages, and media"
     },
     "sub_category": {
@@ -5005,7 +5005,7 @@
     "type": 2,
     "category": {
       "name": "CMS",
-      "icon": "newspaper",
+      "icon": "feed",
       "description": "Content management systems — publish and manage posts, pages, and media"
     },
     "sub_category": {
@@ -5114,7 +5114,7 @@
     ]
   },
   "cms/wordpress/category_get_all": {
-    "hash": "83cfd547f4e97900f33b79c149ffb4ba52278029668e81954bf0d303a37cc675",
+    "hash": "a043906b37dc9794467d07d808bac77b89af38c93bb14bdf56ce9c4631c284b3",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "WordPress: Get Many Categories",
@@ -5125,7 +5125,7 @@
     "type": 2,
     "category": {
       "name": "CMS",
-      "icon": "newspaper",
+      "icon": "feed",
       "description": "Content management systems — publish and manage posts, pages, and media"
     },
     "sub_category": {
@@ -5371,18 +5371,18 @@
     ]
   },
   "cms/wordpress/category_update": {
-    "hash": "44251dea2973ddccd9f92d62a80b6cb834c4b7e00a729ee5896dbfdc976ad9ed",
+    "hash": "2962344fa825f964eb63a778a7e4cdeb43f7e545ce21ac8250ee0291a890481f",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "WordPress: Update Category",
     "description": "Update an existing category on your WordPress site. Only the fields you set are changed; add any other field via Additional Fields.",
     "website": "https://www.flomation.co",
-    "icon": "wordpress+pen",
+    "icon": "wordpress+pencil",
     "date": "05/07/2026",
     "type": 2,
     "category": {
       "name": "CMS",
-      "icon": "newspaper",
+      "icon": "feed",
       "description": "Content management systems — publish and manage posts, pages, and media"
     },
     "sub_category": {
@@ -5512,7 +5512,7 @@
     ]
   },
   "cms/wordpress/comment_create": {
-    "hash": "05cbecf9e33fd4b2841a412aded3b713b37c8b012e71fda7548153c8734fb7d6",
+    "hash": "f9fa769873f4029c24e0eec74f0a80594340b0afeaf10a1cae4bed2294f8b713",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "WordPress: Create Comment",
@@ -5523,7 +5523,7 @@
     "type": 2,
     "category": {
       "name": "CMS",
-      "icon": "newspaper",
+      "icon": "feed",
       "description": "Content management systems — publish and manage posts, pages, and media"
     },
     "sub_category": {
@@ -5707,7 +5707,7 @@
     "type": 2,
     "category": {
       "name": "CMS",
-      "icon": "newspaper",
+      "icon": "feed",
       "description": "Content management systems — publish and manage posts, pages, and media"
     },
     "sub_category": {
@@ -5802,7 +5802,7 @@
     ]
   },
   "cms/wordpress/comment_get": {
-    "hash": "6b920f6b45f3785a9f01146e285d00bae3101e190b4393cda6eb200e519cec8b",
+    "hash": "575be5ec0a40890a6a3cb24a9b4bde917dfd9a676dca2f395cff0deff3cd96ed",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "WordPress: Get Comment",
@@ -5813,7 +5813,7 @@
     "type": 2,
     "category": {
       "name": "CMS",
-      "icon": "newspaper",
+      "icon": "feed",
       "description": "Content management systems — publish and manage posts, pages, and media"
     },
     "sub_category": {
@@ -5929,7 +5929,7 @@
     ]
   },
   "cms/wordpress/comment_get_all": {
-    "hash": "566e2b36a647fdd25d4901aecf93ddb8cc4fa0f885c973499808ececde681436",
+    "hash": "9da7d1f68a6f34b3a03c3665af3a7754fd49d7b3aa3e3c7e3cf851c674794053",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "WordPress: Get Many Comments",
@@ -5940,7 +5940,7 @@
     "type": 2,
     "category": {
       "name": "CMS",
-      "icon": "newspaper",
+      "icon": "feed",
       "description": "Content management systems — publish and manage posts, pages, and media"
     },
     "sub_category": {
@@ -6214,18 +6214,18 @@
     ]
   },
   "cms/wordpress/comment_update": {
-    "hash": "6cdf729f5b378be3258f2e5dd203412c3e0d8779fc5b975fbcec66a2282d570b",
+    "hash": "e5f6a9ddcdd6140e265db0dcddaa55cb0d85175e742c91bbe1c3dd9c29de17dc",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "WordPress: Update Comment",
     "description": "Update an existing comment on your WordPress site. Only the fields you set are changed; add any other comment field via Additional Fields.",
     "website": "https://www.flomation.co",
-    "icon": "wordpress+pen",
+    "icon": "wordpress+pencil",
     "date": "05/07/2026",
     "type": 2,
     "category": {
       "name": "CMS",
-      "icon": "newspaper",
+      "icon": "feed",
       "description": "Content management systems — publish and manage posts, pages, and media"
     },
     "sub_category": {
@@ -6383,7 +6383,7 @@
     ]
   },
   "cms/wordpress/page_create": {
-    "hash": "8574ddaddd2dd5550cb75ee1574c34ba373da94439ebc58d68fd1c816878b40d",
+    "hash": "5fa714688dac16b00c07641d65dde7e1c4fef7be277df833cd0ee18fca2399b4",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "WordPress: Create Page",
@@ -6394,7 +6394,7 @@
     "type": 2,
     "category": {
       "name": "CMS",
-      "icon": "newspaper",
+      "icon": "feed",
       "description": "Content management systems — publish and manage posts, pages, and media"
     },
     "sub_category": {
@@ -6640,7 +6640,7 @@
     "type": 2,
     "category": {
       "name": "CMS",
-      "icon": "newspaper",
+      "icon": "feed",
       "description": "Content management systems — publish and manage posts, pages, and media"
     },
     "sub_category": {
@@ -6746,7 +6746,7 @@
     "type": 2,
     "category": {
       "name": "CMS",
-      "icon": "newspaper",
+      "icon": "feed",
       "description": "Content management systems — publish and manage posts, pages, and media"
     },
     "sub_category": {
@@ -6862,7 +6862,7 @@
     ]
   },
   "cms/wordpress/page_get_all": {
-    "hash": "90a0885c5d2a1e4233c8272d8c69cade48c6d4b1b217ec0f6c3cfc68c922f929",
+    "hash": "f50f45c4d9ae6a278c158d754815816c60c78e1bfbd9d8c8c17b5c23697fb467",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "WordPress: Get Many Pages",
@@ -6873,7 +6873,7 @@
     "type": 2,
     "category": {
       "name": "CMS",
-      "icon": "newspaper",
+      "icon": "feed",
       "description": "Content management systems — publish and manage posts, pages, and media"
     },
     "sub_category": {
@@ -7163,18 +7163,18 @@
     ]
   },
   "cms/wordpress/page_update": {
-    "hash": "ddebf7f174eb2878f218fc36fc61a25c5545ce913923b039d6426cc97f981ead",
+    "hash": "19a5f6ed5ec0560522e97dab5d58c7f056809a450d72bf822fb4491fb2d0df95",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "WordPress: Update Page",
     "description": "Update an existing page on your WordPress site. Only the fields you set are changed; add any other page field via Additional Fields.",
     "website": "https://www.flomation.co",
-    "icon": "wordpress+pen",
+    "icon": "wordpress+pencil",
     "date": "05/07/2026",
     "type": 2,
     "category": {
       "name": "CMS",
-      "icon": "newspaper",
+      "icon": "feed",
       "description": "Content management systems — publish and manage posts, pages, and media"
     },
     "sub_category": {
@@ -7416,7 +7416,7 @@
     ]
   },
   "cms/wordpress/post_create": {
-    "hash": "37bb62b4d4c37ec6cca23a696d93fda2f36b96ea76604b55a570c3d35ebdc2b8",
+    "hash": "059438eb29c17d666c508adede69f1f603340cdfaecc10ec5c21e153ca3c6197",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "WordPress: Create Post",
@@ -7427,7 +7427,7 @@
     "type": 2,
     "category": {
       "name": "CMS",
-      "icon": "newspaper",
+      "icon": "feed",
       "description": "Content management systems — publish and manage posts, pages, and media"
     },
     "sub_category": {
@@ -7729,7 +7729,7 @@
     "type": 2,
     "category": {
       "name": "CMS",
-      "icon": "newspaper",
+      "icon": "feed",
       "description": "Content management systems — publish and manage posts, pages, and media"
     },
     "sub_category": {
@@ -7835,7 +7835,7 @@
     "type": 2,
     "category": {
       "name": "CMS",
-      "icon": "newspaper",
+      "icon": "feed",
       "description": "Content management systems — publish and manage posts, pages, and media"
     },
     "sub_category": {
@@ -7951,7 +7951,7 @@
     ]
   },
   "cms/wordpress/post_get_all": {
-    "hash": "86378490c62ee60c56a40871d7abed648a66077b653f6f73c598131ad64ac3d4",
+    "hash": "14510e5f0f16e9bf4cccddb9f01296d173756af00b4842bb04c9c702efef43ce",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "WordPress: Get Many Posts",
@@ -7962,7 +7962,7 @@
     "type": 2,
     "category": {
       "name": "CMS",
-      "icon": "newspaper",
+      "icon": "feed",
       "description": "Content management systems — publish and manage posts, pages, and media"
     },
     "sub_category": {
@@ -8280,18 +8280,18 @@
     ]
   },
   "cms/wordpress/post_update": {
-    "hash": "5b98a69ec62e3112777992696da693bc89fca6fddf365c58d85363be162d9cb1",
+    "hash": "ab37e1e9f78f55f5bcf9576b60e58eef4cf539720dee9ac0a51d5ff0a3990134",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "WordPress: Update Post",
     "description": "Update an existing post on your WordPress site. Only the fields you set are changed; add any other post field via Additional Fields.",
     "website": "https://www.flomation.co",
-    "icon": "wordpress+pen",
+    "icon": "wordpress+pencil",
     "date": "05/07/2026",
     "type": 2,
     "category": {
       "name": "CMS",
-      "icon": "newspaper",
+      "icon": "feed",
       "description": "Content management systems — publish and manage posts, pages, and media"
     },
     "sub_category": {
@@ -8600,7 +8600,7 @@
     "type": 2,
     "category": {
       "name": "CMS",
-      "icon": "newspaper",
+      "icon": "feed",
       "description": "Content management systems — publish and manage posts, pages, and media"
     },
     "sub_category": {
@@ -8727,7 +8727,7 @@
     "type": 2,
     "category": {
       "name": "CMS",
-      "icon": "newspaper",
+      "icon": "feed",
       "description": "Content management systems — publish and manage posts, pages, and media"
     },
     "sub_category": {
@@ -8826,7 +8826,7 @@
     "type": 2,
     "category": {
       "name": "CMS",
-      "icon": "newspaper",
+      "icon": "feed",
       "description": "Content management systems — publish and manage posts, pages, and media"
     },
     "sub_category": {
@@ -8935,7 +8935,7 @@
     ]
   },
   "cms/wordpress/tag_get_all": {
-    "hash": "2f559e6495f2474aba670ee544a342c7f50d0d841765c770d6160cca55ad9678",
+    "hash": "5ca0c0eecb64fcbe1b95c3bcddfe1d06c084c7916c95093e7686f0427a70038e",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "WordPress: Get Many Tags",
@@ -8946,7 +8946,7 @@
     "type": 2,
     "category": {
       "name": "CMS",
-      "icon": "newspaper",
+      "icon": "feed",
       "description": "Content management systems — publish and manage posts, pages, and media"
     },
     "sub_category": {
@@ -9185,18 +9185,18 @@
     ]
   },
   "cms/wordpress/tag_update": {
-    "hash": "c52b2f4eed429bd5a1373d4d5bd2ae843aefc933cddac367126c8f09c965bb23",
+    "hash": "5ea321c70c69d9ff1d65d2efd6138b58d4109194d1709da77f7910032b29dba6",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "WordPress: Update Tag",
     "description": "Update an existing tag on your WordPress site. Only the fields you set are changed; add any other tag field via Additional Fields.",
     "website": "https://www.flomation.co",
-    "icon": "wordpress+pen",
+    "icon": "wordpress+pencil",
     "date": "05/07/2026",
     "type": 2,
     "category": {
       "name": "CMS",
-      "icon": "newspaper",
+      "icon": "feed",
       "description": "Content management systems — publish and manage posts, pages, and media"
     },
     "sub_category": {
@@ -9330,7 +9330,7 @@
     "type": 2,
     "category": {
       "name": "CMS",
-      "icon": "newspaper",
+      "icon": "feed",
       "description": "Content management systems — publish and manage posts, pages, and media"
     },
     "sub_category": {
@@ -9515,7 +9515,7 @@
     "type": 2,
     "category": {
       "name": "CMS",
-      "icon": "newspaper",
+      "icon": "feed",
       "description": "Content management systems — publish and manage posts, pages, and media"
     },
     "sub_category": {
@@ -9622,7 +9622,7 @@
     "type": 2,
     "category": {
       "name": "CMS",
-      "icon": "newspaper",
+      "icon": "feed",
       "description": "Content management systems — publish and manage posts, pages, and media"
     },
     "sub_category": {
@@ -9731,7 +9731,7 @@
     ]
   },
   "cms/wordpress/user_get_all": {
-    "hash": "9f83beec2cbcccb9bd6f509b05bce47099a287c8b26039a82c96ec15b0f6dac4",
+    "hash": "e15194a20666fea2ff01a4f3a1b6f3c97b0710aeb59850df4b0c38c40535f4ad",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "WordPress: Get Many Users",
@@ -9742,7 +9742,7 @@
     "type": 2,
     "category": {
       "name": "CMS",
-      "icon": "newspaper",
+      "icon": "feed",
       "description": "Content management systems — publish and manage posts, pages, and media"
     },
     "sub_category": {
@@ -9987,18 +9987,18 @@
     ]
   },
   "cms/wordpress/user_update": {
-    "hash": "444e7b3ddf8b686157cc11fd1db5fc125c6f8f3d50bda1e85b3e7c3efa553a48",
+    "hash": "87aa82e12c4cb5d6edaad7a56fd96964ca207fc91a9e9336c9285692e53c7dc3",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "WordPress: Update User",
     "description": "Update an existing user on your WordPress site. Only the fields you set are changed; add any other user field via Additional Fields.",
     "website": "https://www.flomation.co",
-    "icon": "wordpress+pen",
+    "icon": "wordpress+pencil",
     "date": "05/07/2026",
     "type": 2,
     "category": {
       "name": "CMS",
-      "icon": "newspaper",
+      "icon": "feed",
       "description": "Content management systems — publish and manage posts, pages, and media"
     },
     "sub_category": {
@@ -16516,13 +16516,13 @@
     ]
   },
   "ecommerce/woocommerce/coupon_update": {
-    "hash": "8903e63a9617731fcf7a88cb0e74df34d1c7d5245f0adb157a25a2b64f88fb44",
+    "hash": "2600c1691c418f27c898c4dcec4ca0e67d6f6d3a38e0278be13cd154747082b3",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "WooCommerce: Update Coupon",
     "description": "Update an existing coupon in your WooCommerce store. Only the fields you set are changed; add any other coupon field via Additional Fields.",
     "website": "https://www.flomation.co",
-    "icon": "woocommerce+pen",
+    "icon": "woocommerce+pencil",
     "date": "05/07/2026",
     "type": 2,
     "category": {
@@ -17403,13 +17403,13 @@
     ]
   },
   "ecommerce/woocommerce/customer_update": {
-    "hash": "0b889075e5fa0c7e7c55939db3d2bb2f5d0046b1e96a2fffb08528820fbbb83e",
+    "hash": "6365302657128dd4bbdae4e09d5c7d035ae437dde10acc528dc427c831090b28",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "WooCommerce: Update Customer",
     "description": "Update an existing customer in your WooCommerce store. Only the fields you set are changed; add any other customer field via Additional Fields.",
     "website": "https://www.flomation.co",
-    "icon": "woocommerce+pen",
+    "icon": "woocommerce+pencil",
     "date": "05/07/2026",
     "type": 2,
     "category": {
@@ -18313,13 +18313,13 @@
     ]
   },
   "ecommerce/woocommerce/order_update": {
-    "hash": "4e211476edaa190857902b84df0be96b317c75dc605b1bb6288263d98b731254",
+    "hash": "640acc61d4a3dffc3483d987bec26a83ceba09628f1400f17bcab1075fa2712f",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "WooCommerce: Update Order",
     "description": "Update an existing order in your WooCommerce store. Only the fields you set are changed; add any other order field via Additional Fields.",
     "website": "https://www.flomation.co",
-    "icon": "woocommerce+pen",
+    "icon": "woocommerce+pencil",
     "date": "05/07/2026",
     "type": 2,
     "category": {
@@ -19539,13 +19539,13 @@
     ]
   },
   "ecommerce/woocommerce/product_update": {
-    "hash": "9c86fa069a192695c026c0c1ea29f9a86bb4e87832420316160cc3c03ecafae3",
+    "hash": "edec0cef315858d7cdda1af9a60f81d64e4efff249b4bc401e88d1c18c2a01ea",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "WooCommerce: Update Product",
     "description": "Update an existing product in your WooCommerce store. Only the fields you set are changed; add any other product field via Additional Fields.",
     "website": "https://www.flomation.co",
-    "icon": "woocommerce+pen",
+    "icon": "woocommerce+pencil",
     "date": "05/07/2026",
     "type": 2,
     "category": {
@@ -62650,7 +62650,7 @@
     ]
   },
   "stripe/customer_create": {
-    "hash": "3c3d1421c0a09b936ec6411c2925957afdfaf477404b715348acb87721dab2d9",
+    "hash": "4ca741444b2b984e15eceae5647c868bf83aaebfc47745f8173dc5ac701cc089",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Customer: Create",
@@ -62755,7 +62755,7 @@
     ]
   },
   "stripe/customer_delete": {
-    "hash": "56947841e0d4b8992408d965c2cf1895f319d4df10d35ee2d9dcdfff31bfc2cb",
+    "hash": "d7f8dc241724dce735c30f7622ffac42c5d80f2ec86b0c907c4fba5990892b34",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Customer: Delete",
@@ -62826,7 +62826,7 @@
     ]
   },
   "stripe/customer_get": {
-    "hash": "47430789c80d69f99f8d3759778cab99815e5d444965a4062e7f778d85b5e534",
+    "hash": "072af5154d2d09925d091b61b56d6d3027869ef07f0d427fad1b219c8b7564d1",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Customer: Get",
@@ -62904,7 +62904,7 @@
     ]
   },
   "stripe/customer_list": {
-    "hash": "9cefad0bda670c271b6124e95af0837e84d7c2c0d6bb07eb775e0adeb786d220",
+    "hash": "835a52179c19899339b2e6842126593d09dfae94fc488df47c2e196c2278c8e2",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Customer: List",
@@ -62988,7 +62988,7 @@
     ]
   },
   "stripe/customer_update": {
-    "hash": "737abb68f65055d02a5f82158d2a85708b064a4466fddbd14de219f51f58ba88",
+    "hash": "427d7e3fde82733918cd6e819e1a7d6cd560da1643e21a7724722bb7795ed2b3",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Customer: Update",
