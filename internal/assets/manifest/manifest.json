@@ -4760,6 +4760,5275 @@
       }
     ]
   },
+  "cms/wordpress/category_create": {
+    "hash": "353e20df77f7e8dc0ced0d4d2f2423d6fe557797b8d947a344a7a88be305351d",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "WordPress: Create Category",
+    "description": "Create a category (a hierarchical taxonomy term) on your WordPress site. Set the name, description, slug and parent, or add any other field via Additional Fields.",
+    "website": "https://www.flomation.co",
+    "icon": "wordpress+plus",
+    "date": "05/07/2026",
+    "type": 2,
+    "category": {
+      "name": "CMS",
+      "icon": "newspaper",
+      "description": "Content management systems — publish and manage posts, pages, and media"
+    },
+    "sub_category": {
+      "name": "WordPress",
+      "icon": "wordpress",
+      "description": "Manage posts, pages, users, comments, categories, and tags on your WordPress site"
+    },
+    "inputs": [
+      {
+        "name": "url",
+        "type": "string",
+        "value": null,
+        "label": "Site URL",
+        "placeholder": "https://your-site.com — your WordPress site root, not the /wp-json path",
+        "required": true
+      },
+      {
+        "name": "username",
+        "type": "string",
+        "value": null,
+        "label": "Username",
+        "placeholder": "Your WordPress username",
+        "required": true
+      },
+      {
+        "name": "app_password",
+        "type": "secret",
+        "value": null,
+        "label": "Application Password",
+        "placeholder": "Users ▸ Profile ▸ Application Passwords (WP 5.6+)",
+        "required": true
+      },
+      {
+        "name": "allow_insecure",
+        "type": "boolean",
+        "value": null,
+        "label": "Allow Insecure SSL",
+        "placeholder": "Skip TLS verification — only for self-signed sites"
+      },
+      {
+        "name": "name",
+        "type": "string",
+        "value": null,
+        "label": "Name",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "description",
+        "type": "text",
+        "value": null,
+        "label": "Description",
+        "placeholder": ""
+      },
+      {
+        "name": "slug",
+        "type": "string",
+        "value": null,
+        "label": "Slug",
+        "placeholder": ""
+      },
+      {
+        "name": "parent",
+        "type": "string",
+        "value": null,
+        "label": "Parent Category ID",
+        "placeholder": "Category ID of the parent (leave blank for a top-level category)"
+      },
+      {
+        "name": "meta",
+        "type": "object",
+        "value": null,
+        "label": "Meta (JSON)",
+        "placeholder": "{\"my_key\":\"my_value\"}"
+      },
+      {
+        "name": "additional_fields",
+        "type": "object",
+        "value": null,
+        "label": "Additional Fields (JSON)",
+        "placeholder": ""
+      }
+    ],
+    "outputs": [
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Category ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Category",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "cms/wordpress/category_delete": {
+    "hash": "762d4da833b359e9849c1d7302df33b4dd7d068893c678e448b13d5600c26278",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "WordPress: Delete Category",
+    "description": "Delete a category from your WordPress site. Taxonomy terms cannot be trashed, so this always deletes the category permanently.",
+    "website": "https://www.flomation.co",
+    "icon": "wordpress+trash",
+    "date": "05/07/2026",
+    "type": 2,
+    "category": {
+      "name": "CMS",
+      "icon": "newspaper",
+      "description": "Content management systems — publish and manage posts, pages, and media"
+    },
+    "sub_category": {
+      "name": "WordPress",
+      "icon": "wordpress",
+      "description": "Manage posts, pages, users, comments, categories, and tags on your WordPress site"
+    },
+    "inputs": [
+      {
+        "name": "url",
+        "type": "string",
+        "value": null,
+        "label": "Site URL",
+        "placeholder": "https://your-site.com — your WordPress site root, not the /wp-json path",
+        "required": true
+      },
+      {
+        "name": "username",
+        "type": "string",
+        "value": null,
+        "label": "Username",
+        "placeholder": "Your WordPress username",
+        "required": true
+      },
+      {
+        "name": "app_password",
+        "type": "secret",
+        "value": null,
+        "label": "Application Password",
+        "placeholder": "Users ▸ Profile ▸ Application Passwords (WP 5.6+)",
+        "required": true
+      },
+      {
+        "name": "allow_insecure",
+        "type": "boolean",
+        "value": null,
+        "label": "Allow Insecure SSL",
+        "placeholder": "Skip TLS verification — only for self-signed sites"
+      },
+      {
+        "name": "category_id",
+        "type": "string",
+        "value": null,
+        "label": "Category ID",
+        "placeholder": "123",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Category ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Deleted Category",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "cms/wordpress/category_get": {
+    "hash": "d02a94647ba36e71ad9ca5c0ffb6febadeda6fee128521d93215b86f0c58b064",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "WordPress: Get Category",
+    "description": "Retrieve a single category from your WordPress site by ID.",
+    "website": "https://www.flomation.co",
+    "icon": "wordpress+eye",
+    "date": "05/07/2026",
+    "type": 2,
+    "category": {
+      "name": "CMS",
+      "icon": "newspaper",
+      "description": "Content management systems — publish and manage posts, pages, and media"
+    },
+    "sub_category": {
+      "name": "WordPress",
+      "icon": "wordpress",
+      "description": "Manage posts, pages, users, comments, categories, and tags on your WordPress site"
+    },
+    "inputs": [
+      {
+        "name": "url",
+        "type": "string",
+        "value": null,
+        "label": "Site URL",
+        "placeholder": "https://your-site.com — your WordPress site root, not the /wp-json path",
+        "required": true
+      },
+      {
+        "name": "username",
+        "type": "string",
+        "value": null,
+        "label": "Username",
+        "placeholder": "Your WordPress username",
+        "required": true
+      },
+      {
+        "name": "app_password",
+        "type": "secret",
+        "value": null,
+        "label": "Application Password",
+        "placeholder": "Users ▸ Profile ▸ Application Passwords (WP 5.6+)",
+        "required": true
+      },
+      {
+        "name": "allow_insecure",
+        "type": "boolean",
+        "value": null,
+        "label": "Allow Insecure SSL",
+        "placeholder": "Skip TLS verification — only for self-signed sites"
+      },
+      {
+        "name": "category_id",
+        "type": "string",
+        "value": null,
+        "label": "Category ID",
+        "placeholder": "123",
+        "required": true
+      },
+      {
+        "name": "context",
+        "type": "string",
+        "value": null,
+        "label": "Context",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "View",
+            "value": "view"
+          },
+          {
+            "name": "Edit (more fields; needs edit rights)",
+            "value": "edit"
+          },
+          {
+            "name": "Embed",
+            "value": "embed"
+          }
+        ]
+      }
+    ],
+    "outputs": [
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Category ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Category",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "cms/wordpress/category_get_all": {
+    "hash": "d3e0c4968721e4d0b2e1ffa51e9c83bdced3b7edb214fee3af062cd662fc66df",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "WordPress: Get Many Categories",
+    "description": "List categories from your WordPress site, with optional filters. Enable Return All to auto-paginate every matching category.",
+    "website": "https://www.flomation.co",
+    "icon": "wordpress+list",
+    "date": "05/07/2026",
+    "type": 2,
+    "category": {
+      "name": "CMS",
+      "icon": "newspaper",
+      "description": "Content management systems — publish and manage posts, pages, and media"
+    },
+    "sub_category": {
+      "name": "WordPress",
+      "icon": "wordpress",
+      "description": "Manage posts, pages, users, comments, categories, and tags on your WordPress site"
+    },
+    "inputs": [
+      {
+        "name": "url",
+        "type": "string",
+        "value": null,
+        "label": "Site URL",
+        "placeholder": "https://your-site.com — your WordPress site root, not the /wp-json path",
+        "required": true
+      },
+      {
+        "name": "username",
+        "type": "string",
+        "value": null,
+        "label": "Username",
+        "placeholder": "Your WordPress username",
+        "required": true
+      },
+      {
+        "name": "app_password",
+        "type": "secret",
+        "value": null,
+        "label": "Application Password",
+        "placeholder": "Users ▸ Profile ▸ Application Passwords (WP 5.6+)",
+        "required": true
+      },
+      {
+        "name": "allow_insecure",
+        "type": "boolean",
+        "value": null,
+        "label": "Allow Insecure SSL",
+        "placeholder": "Skip TLS verification — only for self-signed sites"
+      },
+      {
+        "name": "return_all",
+        "type": "boolean",
+        "value": null,
+        "label": "Return All (auto-paginate every match)",
+        "placeholder": ""
+      },
+      {
+        "name": "limit",
+        "type": "integer",
+        "value": null,
+        "label": "Limit (per page)",
+        "placeholder": "50 per page (max 100); Return All still fetches every match"
+      },
+      {
+        "name": "page",
+        "type": "integer",
+        "value": null,
+        "label": "Page",
+        "placeholder": "Page number to fetch (ignored when Return All is on)"
+      },
+      {
+        "name": "search",
+        "type": "string",
+        "value": null,
+        "label": "Search",
+        "placeholder": ""
+      },
+      {
+        "name": "parent",
+        "type": "string",
+        "value": null,
+        "label": "Parent Category ID",
+        "placeholder": "Limit to direct children of this category ID"
+      },
+      {
+        "name": "post",
+        "type": "string",
+        "value": null,
+        "label": "Assigned to Post ID",
+        "placeholder": "Limit to categories assigned to this post ID"
+      },
+      {
+        "name": "slug",
+        "type": "string",
+        "value": null,
+        "label": "Slug",
+        "placeholder": ""
+      },
+      {
+        "name": "hide_empty",
+        "type": "boolean",
+        "value": null,
+        "label": "Hide Empty (only categories with posts)",
+        "placeholder": ""
+      },
+      {
+        "name": "order",
+        "type": "string",
+        "value": null,
+        "label": "Sort Order",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "Descending",
+            "value": "desc"
+          },
+          {
+            "name": "Ascending",
+            "value": "asc"
+          }
+        ]
+      },
+      {
+        "name": "orderby",
+        "type": "string",
+        "value": null,
+        "label": "Order By",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "Name",
+            "value": "name"
+          },
+          {
+            "name": "ID",
+            "value": "id"
+          },
+          {
+            "name": "Slug",
+            "value": "slug"
+          },
+          {
+            "name": "Count",
+            "value": "count"
+          },
+          {
+            "name": "Description",
+            "value": "description"
+          },
+          {
+            "name": "Term Group",
+            "value": "term_group"
+          },
+          {
+            "name": "Include",
+            "value": "include"
+          }
+        ]
+      },
+      {
+        "name": "include",
+        "type": "string",
+        "value": null,
+        "label": "Include IDs",
+        "placeholder": "Comma-separated category IDs to include"
+      },
+      {
+        "name": "exclude",
+        "type": "string",
+        "value": null,
+        "label": "Exclude IDs",
+        "placeholder": "Comma-separated category IDs to exclude"
+      },
+      {
+        "name": "offset",
+        "type": "integer",
+        "value": null,
+        "label": "Offset",
+        "placeholder": "Skip this many results (ignored when Return All is on)"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "results",
+        "type": "object",
+        "value": null,
+        "label": "Categories",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Count (this response)",
+        "placeholder": ""
+      },
+      {
+        "name": "total",
+        "type": "integer",
+        "value": null,
+        "label": "Total (site-wide match)",
+        "placeholder": ""
+      },
+      {
+        "name": "total_pages",
+        "type": "integer",
+        "value": null,
+        "label": "Total Pages",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "cms/wordpress/category_update": {
+    "hash": "44251dea2973ddccd9f92d62a80b6cb834c4b7e00a729ee5896dbfdc976ad9ed",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "WordPress: Update Category",
+    "description": "Update an existing category on your WordPress site. Only the fields you set are changed; add any other field via Additional Fields.",
+    "website": "https://www.flomation.co",
+    "icon": "wordpress+pen",
+    "date": "05/07/2026",
+    "type": 2,
+    "category": {
+      "name": "CMS",
+      "icon": "newspaper",
+      "description": "Content management systems — publish and manage posts, pages, and media"
+    },
+    "sub_category": {
+      "name": "WordPress",
+      "icon": "wordpress",
+      "description": "Manage posts, pages, users, comments, categories, and tags on your WordPress site"
+    },
+    "inputs": [
+      {
+        "name": "url",
+        "type": "string",
+        "value": null,
+        "label": "Site URL",
+        "placeholder": "https://your-site.com — your WordPress site root, not the /wp-json path",
+        "required": true
+      },
+      {
+        "name": "username",
+        "type": "string",
+        "value": null,
+        "label": "Username",
+        "placeholder": "Your WordPress username",
+        "required": true
+      },
+      {
+        "name": "app_password",
+        "type": "secret",
+        "value": null,
+        "label": "Application Password",
+        "placeholder": "Users ▸ Profile ▸ Application Passwords (WP 5.6+)",
+        "required": true
+      },
+      {
+        "name": "allow_insecure",
+        "type": "boolean",
+        "value": null,
+        "label": "Allow Insecure SSL",
+        "placeholder": "Skip TLS verification — only for self-signed sites"
+      },
+      {
+        "name": "category_id",
+        "type": "string",
+        "value": null,
+        "label": "Category ID",
+        "placeholder": "123",
+        "required": true
+      },
+      {
+        "name": "name",
+        "type": "string",
+        "value": null,
+        "label": "Name",
+        "placeholder": ""
+      },
+      {
+        "name": "description",
+        "type": "text",
+        "value": null,
+        "label": "Description",
+        "placeholder": ""
+      },
+      {
+        "name": "slug",
+        "type": "string",
+        "value": null,
+        "label": "Slug",
+        "placeholder": ""
+      },
+      {
+        "name": "parent",
+        "type": "string",
+        "value": null,
+        "label": "Parent Category ID",
+        "placeholder": "Category ID of the parent (0 for a top-level category)"
+      },
+      {
+        "name": "meta",
+        "type": "object",
+        "value": null,
+        "label": "Meta (JSON)",
+        "placeholder": "{\"my_key\":\"my_value\"}"
+      },
+      {
+        "name": "additional_fields",
+        "type": "object",
+        "value": null,
+        "label": "Additional Fields (JSON)",
+        "placeholder": ""
+      }
+    ],
+    "outputs": [
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Category ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Category",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "cms/wordpress/comment_create": {
+    "hash": "05cbecf9e33fd4b2841a412aded3b713b37c8b012e71fda7548153c8734fb7d6",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "WordPress: Create Comment",
+    "description": "Create a comment on a post on your WordPress site. Set the author and body directly, or add any other comment field via Additional Fields.",
+    "website": "https://www.flomation.co",
+    "icon": "wordpress+plus",
+    "date": "05/07/2026",
+    "type": 2,
+    "category": {
+      "name": "CMS",
+      "icon": "newspaper",
+      "description": "Content management systems — publish and manage posts, pages, and media"
+    },
+    "sub_category": {
+      "name": "WordPress",
+      "icon": "wordpress",
+      "description": "Manage posts, pages, users, comments, categories, and tags on your WordPress site"
+    },
+    "inputs": [
+      {
+        "name": "url",
+        "type": "string",
+        "value": null,
+        "label": "Site URL",
+        "placeholder": "https://your-site.com — your WordPress site root, not the /wp-json path",
+        "required": true
+      },
+      {
+        "name": "username",
+        "type": "string",
+        "value": null,
+        "label": "Username",
+        "placeholder": "Your WordPress username",
+        "required": true
+      },
+      {
+        "name": "app_password",
+        "type": "secret",
+        "value": null,
+        "label": "Application Password",
+        "placeholder": "Users ▸ Profile ▸ Application Passwords (WP 5.6+)",
+        "required": true
+      },
+      {
+        "name": "allow_insecure",
+        "type": "boolean",
+        "value": null,
+        "label": "Allow Insecure SSL",
+        "placeholder": "Skip TLS verification — only for self-signed sites"
+      },
+      {
+        "name": "post",
+        "type": "string",
+        "value": null,
+        "label": "Post ID",
+        "placeholder": "ID of the post to comment on",
+        "required": true
+      },
+      {
+        "name": "content",
+        "type": "text",
+        "value": null,
+        "label": "Content",
+        "placeholder": "The comment body",
+        "required": true
+      },
+      {
+        "name": "author",
+        "type": "string",
+        "value": null,
+        "label": "Author (User ID)",
+        "placeholder": "User ID of the comment author (leave blank for the authenticating user)"
+      },
+      {
+        "name": "author_name",
+        "type": "string",
+        "value": null,
+        "label": "Author Name",
+        "placeholder": "Display name for an anonymous author"
+      },
+      {
+        "name": "author_email",
+        "type": "string",
+        "value": null,
+        "label": "Author Email",
+        "placeholder": ""
+      },
+      {
+        "name": "author_url",
+        "type": "string",
+        "value": null,
+        "label": "Author URL",
+        "placeholder": ""
+      },
+      {
+        "name": "parent",
+        "type": "string",
+        "value": null,
+        "label": "Parent Comment ID",
+        "placeholder": "Reply to this comment ID (leave blank for a top-level comment)"
+      },
+      {
+        "name": "date",
+        "type": "datetime",
+        "value": null,
+        "label": "Date",
+        "placeholder": "Comment date (defaults to now)"
+      },
+      {
+        "name": "status",
+        "type": "string",
+        "value": null,
+        "label": "Status",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "Approved",
+            "value": "approved"
+          },
+          {
+            "name": "Hold",
+            "value": "hold"
+          },
+          {
+            "name": "Spam",
+            "value": "spam"
+          }
+        ]
+      },
+      {
+        "name": "meta",
+        "type": "object",
+        "value": null,
+        "label": "Meta (JSON)",
+        "placeholder": "{\"my_key\":\"my_value\"}"
+      },
+      {
+        "name": "additional_fields",
+        "type": "object",
+        "value": null,
+        "label": "Additional Fields (JSON)",
+        "placeholder": "{\"author_ip\":\"127.0.0.1\"}"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Comment ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Comment",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "cms/wordpress/comment_delete": {
+    "hash": "79b5b5f640ce0336392047a83d807d0c592466598ca2b3c2d91343a63659c42d",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "WordPress: Delete Comment",
+    "description": "Delete a comment from your WordPress site. Moves it to the Trash by default; enable Permanently Delete to remove it for good.",
+    "website": "https://www.flomation.co",
+    "icon": "wordpress+trash",
+    "date": "05/07/2026",
+    "type": 2,
+    "category": {
+      "name": "CMS",
+      "icon": "newspaper",
+      "description": "Content management systems — publish and manage posts, pages, and media"
+    },
+    "sub_category": {
+      "name": "WordPress",
+      "icon": "wordpress",
+      "description": "Manage posts, pages, users, comments, categories, and tags on your WordPress site"
+    },
+    "inputs": [
+      {
+        "name": "url",
+        "type": "string",
+        "value": null,
+        "label": "Site URL",
+        "placeholder": "https://your-site.com — your WordPress site root, not the /wp-json path",
+        "required": true
+      },
+      {
+        "name": "username",
+        "type": "string",
+        "value": null,
+        "label": "Username",
+        "placeholder": "Your WordPress username",
+        "required": true
+      },
+      {
+        "name": "app_password",
+        "type": "secret",
+        "value": null,
+        "label": "Application Password",
+        "placeholder": "Users ▸ Profile ▸ Application Passwords (WP 5.6+)",
+        "required": true
+      },
+      {
+        "name": "allow_insecure",
+        "type": "boolean",
+        "value": null,
+        "label": "Allow Insecure SSL",
+        "placeholder": "Skip TLS verification — only for self-signed sites"
+      },
+      {
+        "name": "comment_id",
+        "type": "string",
+        "value": null,
+        "label": "Comment ID",
+        "placeholder": "123",
+        "required": true
+      },
+      {
+        "name": "force",
+        "type": "boolean",
+        "value": null,
+        "label": "Permanently Delete",
+        "placeholder": "On: delete permanently. Off (default): move to Trash."
+      }
+    ],
+    "outputs": [
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Comment ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Deleted Comment",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "cms/wordpress/comment_get": {
+    "hash": "6b920f6b45f3785a9f01146e285d00bae3101e190b4393cda6eb200e519cec8b",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "WordPress: Get Comment",
+    "description": "Retrieve a single comment from your WordPress site by ID.",
+    "website": "https://www.flomation.co",
+    "icon": "wordpress+eye",
+    "date": "05/07/2026",
+    "type": 2,
+    "category": {
+      "name": "CMS",
+      "icon": "newspaper",
+      "description": "Content management systems — publish and manage posts, pages, and media"
+    },
+    "sub_category": {
+      "name": "WordPress",
+      "icon": "wordpress",
+      "description": "Manage posts, pages, users, comments, categories, and tags on your WordPress site"
+    },
+    "inputs": [
+      {
+        "name": "url",
+        "type": "string",
+        "value": null,
+        "label": "Site URL",
+        "placeholder": "https://your-site.com — your WordPress site root, not the /wp-json path",
+        "required": true
+      },
+      {
+        "name": "username",
+        "type": "string",
+        "value": null,
+        "label": "Username",
+        "placeholder": "Your WordPress username",
+        "required": true
+      },
+      {
+        "name": "app_password",
+        "type": "secret",
+        "value": null,
+        "label": "Application Password",
+        "placeholder": "Users ▸ Profile ▸ Application Passwords (WP 5.6+)",
+        "required": true
+      },
+      {
+        "name": "allow_insecure",
+        "type": "boolean",
+        "value": null,
+        "label": "Allow Insecure SSL",
+        "placeholder": "Skip TLS verification — only for self-signed sites"
+      },
+      {
+        "name": "comment_id",
+        "type": "string",
+        "value": null,
+        "label": "Comment ID",
+        "placeholder": "123",
+        "required": true
+      },
+      {
+        "name": "context",
+        "type": "string",
+        "value": null,
+        "label": "Context",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "View",
+            "value": "view"
+          },
+          {
+            "name": "Edit (more fields; needs edit rights)",
+            "value": "edit"
+          },
+          {
+            "name": "Embed",
+            "value": "embed"
+          }
+        ]
+      },
+      {
+        "name": "password",
+        "type": "string",
+        "value": null,
+        "label": "Post Password",
+        "placeholder": "Required for comments on a password-protected post"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Comment ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Comment",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "cms/wordpress/comment_get_all": {
+    "hash": "2264b2ec4fb308e14fa20204cf971855cc6103ed5088183ce9ff26d51415e3c9",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "WordPress: Get Many Comments",
+    "description": "List comments from your WordPress site, with optional filters. Enable Return All to auto-paginate every matching comment.",
+    "website": "https://www.flomation.co",
+    "icon": "wordpress+list",
+    "date": "05/07/2026",
+    "type": 2,
+    "category": {
+      "name": "CMS",
+      "icon": "newspaper",
+      "description": "Content management systems — publish and manage posts, pages, and media"
+    },
+    "sub_category": {
+      "name": "WordPress",
+      "icon": "wordpress",
+      "description": "Manage posts, pages, users, comments, categories, and tags on your WordPress site"
+    },
+    "inputs": [
+      {
+        "name": "url",
+        "type": "string",
+        "value": null,
+        "label": "Site URL",
+        "placeholder": "https://your-site.com — your WordPress site root, not the /wp-json path",
+        "required": true
+      },
+      {
+        "name": "username",
+        "type": "string",
+        "value": null,
+        "label": "Username",
+        "placeholder": "Your WordPress username",
+        "required": true
+      },
+      {
+        "name": "app_password",
+        "type": "secret",
+        "value": null,
+        "label": "Application Password",
+        "placeholder": "Users ▸ Profile ▸ Application Passwords (WP 5.6+)",
+        "required": true
+      },
+      {
+        "name": "allow_insecure",
+        "type": "boolean",
+        "value": null,
+        "label": "Allow Insecure SSL",
+        "placeholder": "Skip TLS verification — only for self-signed sites"
+      },
+      {
+        "name": "return_all",
+        "type": "boolean",
+        "value": null,
+        "label": "Return All (auto-paginate every match)",
+        "placeholder": ""
+      },
+      {
+        "name": "limit",
+        "type": "integer",
+        "value": null,
+        "label": "Limit (per page)",
+        "placeholder": "50 per page (max 100); Return All still fetches every match"
+      },
+      {
+        "name": "page",
+        "type": "integer",
+        "value": null,
+        "label": "Page",
+        "placeholder": "Page number to fetch (ignored when Return All is on)"
+      },
+      {
+        "name": "search",
+        "type": "string",
+        "value": null,
+        "label": "Search",
+        "placeholder": ""
+      },
+      {
+        "name": "post",
+        "type": "string",
+        "value": null,
+        "label": "Post ID",
+        "placeholder": "Limit to comments on this post ID"
+      },
+      {
+        "name": "status",
+        "type": "string",
+        "value": null,
+        "label": "Status",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "Approved",
+            "value": "approved"
+          },
+          {
+            "name": "Hold",
+            "value": "hold"
+          },
+          {
+            "name": "Spam",
+            "value": "spam"
+          },
+          {
+            "name": "Trash",
+            "value": "trash"
+          }
+        ]
+      },
+      {
+        "name": "author_email",
+        "type": "string",
+        "value": null,
+        "label": "Author Email",
+        "placeholder": ""
+      },
+      {
+        "name": "parent",
+        "type": "string",
+        "value": null,
+        "label": "Parent Comment ID",
+        "placeholder": "Limit to replies to this comment ID"
+      },
+      {
+        "name": "after",
+        "type": "datetime",
+        "value": null,
+        "label": "Published After",
+        "placeholder": ""
+      },
+      {
+        "name": "before",
+        "type": "datetime",
+        "value": null,
+        "label": "Published Before",
+        "placeholder": ""
+      },
+      {
+        "name": "order",
+        "type": "string",
+        "value": null,
+        "label": "Sort Order",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "Descending",
+            "value": "desc"
+          },
+          {
+            "name": "Ascending",
+            "value": "asc"
+          }
+        ]
+      },
+      {
+        "name": "orderby",
+        "type": "string",
+        "value": null,
+        "label": "Order By",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "Date",
+            "value": "date"
+          },
+          {
+            "name": "Date GMT",
+            "value": "date_gmt"
+          },
+          {
+            "name": "ID",
+            "value": "id"
+          },
+          {
+            "name": "Post",
+            "value": "post"
+          },
+          {
+            "name": "Parent",
+            "value": "parent"
+          },
+          {
+            "name": "Type",
+            "value": "type"
+          }
+        ]
+      },
+      {
+        "name": "include",
+        "type": "string",
+        "value": null,
+        "label": "Include IDs",
+        "placeholder": "Comma-separated comment IDs to include"
+      },
+      {
+        "name": "exclude",
+        "type": "string",
+        "value": null,
+        "label": "Exclude IDs",
+        "placeholder": "Comma-separated comment IDs to exclude"
+      },
+      {
+        "name": "offset",
+        "type": "integer",
+        "value": null,
+        "label": "Offset",
+        "placeholder": "Skip this many results (ignored when Return All is on)"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "results",
+        "type": "object",
+        "value": null,
+        "label": "Comments",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Count (this response)",
+        "placeholder": ""
+      },
+      {
+        "name": "total",
+        "type": "integer",
+        "value": null,
+        "label": "Total (site-wide match)",
+        "placeholder": ""
+      },
+      {
+        "name": "total_pages",
+        "type": "integer",
+        "value": null,
+        "label": "Total Pages",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "cms/wordpress/comment_update": {
+    "hash": "6cdf729f5b378be3258f2e5dd203412c3e0d8779fc5b975fbcec66a2282d570b",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "WordPress: Update Comment",
+    "description": "Update an existing comment on your WordPress site. Only the fields you set are changed; add any other comment field via Additional Fields.",
+    "website": "https://www.flomation.co",
+    "icon": "wordpress+pen",
+    "date": "05/07/2026",
+    "type": 2,
+    "category": {
+      "name": "CMS",
+      "icon": "newspaper",
+      "description": "Content management systems — publish and manage posts, pages, and media"
+    },
+    "sub_category": {
+      "name": "WordPress",
+      "icon": "wordpress",
+      "description": "Manage posts, pages, users, comments, categories, and tags on your WordPress site"
+    },
+    "inputs": [
+      {
+        "name": "url",
+        "type": "string",
+        "value": null,
+        "label": "Site URL",
+        "placeholder": "https://your-site.com — your WordPress site root, not the /wp-json path",
+        "required": true
+      },
+      {
+        "name": "username",
+        "type": "string",
+        "value": null,
+        "label": "Username",
+        "placeholder": "Your WordPress username",
+        "required": true
+      },
+      {
+        "name": "app_password",
+        "type": "secret",
+        "value": null,
+        "label": "Application Password",
+        "placeholder": "Users ▸ Profile ▸ Application Passwords (WP 5.6+)",
+        "required": true
+      },
+      {
+        "name": "allow_insecure",
+        "type": "boolean",
+        "value": null,
+        "label": "Allow Insecure SSL",
+        "placeholder": "Skip TLS verification — only for self-signed sites"
+      },
+      {
+        "name": "comment_id",
+        "type": "string",
+        "value": null,
+        "label": "Comment ID",
+        "placeholder": "123",
+        "required": true
+      },
+      {
+        "name": "content",
+        "type": "text",
+        "value": null,
+        "label": "Content",
+        "placeholder": "The comment body"
+      },
+      {
+        "name": "author_name",
+        "type": "string",
+        "value": null,
+        "label": "Author Name",
+        "placeholder": ""
+      },
+      {
+        "name": "author_email",
+        "type": "string",
+        "value": null,
+        "label": "Author Email",
+        "placeholder": ""
+      },
+      {
+        "name": "author_url",
+        "type": "string",
+        "value": null,
+        "label": "Author URL",
+        "placeholder": ""
+      },
+      {
+        "name": "status",
+        "type": "string",
+        "value": null,
+        "label": "Status",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "Approved",
+            "value": "approved"
+          },
+          {
+            "name": "Hold",
+            "value": "hold"
+          },
+          {
+            "name": "Spam",
+            "value": "spam"
+          }
+        ]
+      },
+      {
+        "name": "date",
+        "type": "datetime",
+        "value": null,
+        "label": "Date",
+        "placeholder": ""
+      },
+      {
+        "name": "meta",
+        "type": "object",
+        "value": null,
+        "label": "Meta (JSON)",
+        "placeholder": "{\"my_key\":\"my_value\"}"
+      },
+      {
+        "name": "additional_fields",
+        "type": "object",
+        "value": null,
+        "label": "Additional Fields (JSON)",
+        "placeholder": ""
+      }
+    ],
+    "outputs": [
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Comment ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Comment",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "cms/wordpress/page_create": {
+    "hash": "8574ddaddd2dd5550cb75ee1574c34ba373da94439ebc58d68fd1c816878b40d",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "WordPress: Create Page",
+    "description": "Create a page on your WordPress site. Set common fields directly (title, content, status, parent, menu order) or add any other page field via Additional Fields.",
+    "website": "https://www.flomation.co",
+    "icon": "wordpress+plus",
+    "date": "05/07/2026",
+    "type": 2,
+    "category": {
+      "name": "CMS",
+      "icon": "newspaper",
+      "description": "Content management systems — publish and manage posts, pages, and media"
+    },
+    "sub_category": {
+      "name": "WordPress",
+      "icon": "wordpress",
+      "description": "Manage posts, pages, users, comments, categories, and tags on your WordPress site"
+    },
+    "inputs": [
+      {
+        "name": "url",
+        "type": "string",
+        "value": null,
+        "label": "Site URL",
+        "placeholder": "https://your-site.com — your WordPress site root, not the /wp-json path",
+        "required": true
+      },
+      {
+        "name": "username",
+        "type": "string",
+        "value": null,
+        "label": "Username",
+        "placeholder": "Your WordPress username",
+        "required": true
+      },
+      {
+        "name": "app_password",
+        "type": "secret",
+        "value": null,
+        "label": "Application Password",
+        "placeholder": "Users ▸ Profile ▸ Application Passwords (WP 5.6+)",
+        "required": true
+      },
+      {
+        "name": "allow_insecure",
+        "type": "boolean",
+        "value": null,
+        "label": "Allow Insecure SSL",
+        "placeholder": "Skip TLS verification — only for self-signed sites"
+      },
+      {
+        "name": "title",
+        "type": "string",
+        "value": null,
+        "label": "Title",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "content",
+        "type": "text",
+        "value": null,
+        "label": "Content",
+        "placeholder": "HTML or block markup"
+      },
+      {
+        "name": "excerpt",
+        "type": "text",
+        "value": null,
+        "label": "Excerpt",
+        "placeholder": ""
+      },
+      {
+        "name": "status",
+        "type": "string",
+        "value": null,
+        "label": "Status",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "Publish",
+            "value": "publish"
+          },
+          {
+            "name": "Draft",
+            "value": "draft"
+          },
+          {
+            "name": "Pending Review",
+            "value": "pending"
+          },
+          {
+            "name": "Private",
+            "value": "private"
+          },
+          {
+            "name": "Scheduled (future)",
+            "value": "future"
+          }
+        ]
+      },
+      {
+        "name": "author",
+        "type": "string",
+        "value": null,
+        "label": "Author (User ID)",
+        "placeholder": "Author user ID (leave blank for the authenticating user)"
+      },
+      {
+        "name": "slug",
+        "type": "string",
+        "value": null,
+        "label": "Slug",
+        "placeholder": ""
+      },
+      {
+        "name": "parent",
+        "type": "string",
+        "value": null,
+        "label": "Parent Page ID",
+        "placeholder": "ID of the parent page to nest this under"
+      },
+      {
+        "name": "featured_media",
+        "type": "string",
+        "value": null,
+        "label": "Featured Media (ID)",
+        "placeholder": "Media/attachment ID for the featured image"
+      },
+      {
+        "name": "menu_order",
+        "type": "string",
+        "value": null,
+        "label": "Menu Order",
+        "placeholder": "Sort position among sibling pages, e.g. 0"
+      },
+      {
+        "name": "password",
+        "type": "string",
+        "value": null,
+        "label": "Page Password",
+        "placeholder": "Protect the page with a password (distinct from the Application Password above)"
+      },
+      {
+        "name": "comment_status",
+        "type": "string",
+        "value": null,
+        "label": "Comments",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "Open",
+            "value": "open"
+          },
+          {
+            "name": "Closed",
+            "value": "closed"
+          }
+        ]
+      },
+      {
+        "name": "ping_status",
+        "type": "string",
+        "value": null,
+        "label": "Pingbacks",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "Open",
+            "value": "open"
+          },
+          {
+            "name": "Closed",
+            "value": "closed"
+          }
+        ]
+      },
+      {
+        "name": "date",
+        "type": "datetime",
+        "value": null,
+        "label": "Date",
+        "placeholder": "Publish date (defaults to now)"
+      },
+      {
+        "name": "template",
+        "type": "string",
+        "value": null,
+        "label": "Template",
+        "placeholder": ""
+      },
+      {
+        "name": "meta",
+        "type": "object",
+        "value": null,
+        "label": "Meta (JSON)",
+        "placeholder": "{\"my_key\":\"my_value\"}"
+      },
+      {
+        "name": "additional_fields",
+        "type": "object",
+        "value": null,
+        "label": "Additional Fields (JSON)",
+        "placeholder": "{\"date_gmt\":\"2026-01-01T09:00:00\"}"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Page ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Page",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "cms/wordpress/page_delete": {
+    "hash": "5ed50224d882adbd8635476b59abc7bc03b0e3f304250fd525cb5dee2a9d1fa5",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "WordPress: Delete Page",
+    "description": "Delete a page from your WordPress site. Moves it to the Trash by default; enable Permanently Delete to remove it for good.",
+    "website": "https://www.flomation.co",
+    "icon": "wordpress+trash",
+    "date": "05/07/2026",
+    "type": 2,
+    "category": {
+      "name": "CMS",
+      "icon": "newspaper",
+      "description": "Content management systems — publish and manage posts, pages, and media"
+    },
+    "sub_category": {
+      "name": "WordPress",
+      "icon": "wordpress",
+      "description": "Manage posts, pages, users, comments, categories, and tags on your WordPress site"
+    },
+    "inputs": [
+      {
+        "name": "url",
+        "type": "string",
+        "value": null,
+        "label": "Site URL",
+        "placeholder": "https://your-site.com — your WordPress site root, not the /wp-json path",
+        "required": true
+      },
+      {
+        "name": "username",
+        "type": "string",
+        "value": null,
+        "label": "Username",
+        "placeholder": "Your WordPress username",
+        "required": true
+      },
+      {
+        "name": "app_password",
+        "type": "secret",
+        "value": null,
+        "label": "Application Password",
+        "placeholder": "Users ▸ Profile ▸ Application Passwords (WP 5.6+)",
+        "required": true
+      },
+      {
+        "name": "allow_insecure",
+        "type": "boolean",
+        "value": null,
+        "label": "Allow Insecure SSL",
+        "placeholder": "Skip TLS verification — only for self-signed sites"
+      },
+      {
+        "name": "page_id",
+        "type": "string",
+        "value": null,
+        "label": "Page ID",
+        "placeholder": "123",
+        "required": true
+      },
+      {
+        "name": "force",
+        "type": "boolean",
+        "value": null,
+        "label": "Permanently Delete",
+        "placeholder": "On: delete permanently. Off (default): move to Trash."
+      }
+    ],
+    "outputs": [
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Page ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Deleted Page",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "cms/wordpress/page_get": {
+    "hash": "439e0ecf83678541c2817340e14e920839685905d0b67360429825e56a9d6e19",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "WordPress: Get Page",
+    "description": "Retrieve a single page from your WordPress site by ID.",
+    "website": "https://www.flomation.co",
+    "icon": "wordpress+eye",
+    "date": "05/07/2026",
+    "type": 2,
+    "category": {
+      "name": "CMS",
+      "icon": "newspaper",
+      "description": "Content management systems — publish and manage posts, pages, and media"
+    },
+    "sub_category": {
+      "name": "WordPress",
+      "icon": "wordpress",
+      "description": "Manage posts, pages, users, comments, categories, and tags on your WordPress site"
+    },
+    "inputs": [
+      {
+        "name": "url",
+        "type": "string",
+        "value": null,
+        "label": "Site URL",
+        "placeholder": "https://your-site.com — your WordPress site root, not the /wp-json path",
+        "required": true
+      },
+      {
+        "name": "username",
+        "type": "string",
+        "value": null,
+        "label": "Username",
+        "placeholder": "Your WordPress username",
+        "required": true
+      },
+      {
+        "name": "app_password",
+        "type": "secret",
+        "value": null,
+        "label": "Application Password",
+        "placeholder": "Users ▸ Profile ▸ Application Passwords (WP 5.6+)",
+        "required": true
+      },
+      {
+        "name": "allow_insecure",
+        "type": "boolean",
+        "value": null,
+        "label": "Allow Insecure SSL",
+        "placeholder": "Skip TLS verification — only for self-signed sites"
+      },
+      {
+        "name": "page_id",
+        "type": "string",
+        "value": null,
+        "label": "Page ID",
+        "placeholder": "123",
+        "required": true
+      },
+      {
+        "name": "context",
+        "type": "string",
+        "value": null,
+        "label": "Context",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "View",
+            "value": "view"
+          },
+          {
+            "name": "Edit (more fields; needs edit rights)",
+            "value": "edit"
+          },
+          {
+            "name": "Embed",
+            "value": "embed"
+          }
+        ]
+      },
+      {
+        "name": "password",
+        "type": "string",
+        "value": null,
+        "label": "Page Password",
+        "placeholder": "Required to read a password-protected page"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Page ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Page",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "cms/wordpress/page_get_all": {
+    "hash": "04b947a6d9e3d014895810c329c11725e61cb7bc614f434421a4b298b423da6f",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "WordPress: Get Many Pages",
+    "description": "List pages from your WordPress site, with optional filters. Enable Return All to auto-paginate every matching page.",
+    "website": "https://www.flomation.co",
+    "icon": "wordpress+list",
+    "date": "05/07/2026",
+    "type": 2,
+    "category": {
+      "name": "CMS",
+      "icon": "newspaper",
+      "description": "Content management systems — publish and manage posts, pages, and media"
+    },
+    "sub_category": {
+      "name": "WordPress",
+      "icon": "wordpress",
+      "description": "Manage posts, pages, users, comments, categories, and tags on your WordPress site"
+    },
+    "inputs": [
+      {
+        "name": "url",
+        "type": "string",
+        "value": null,
+        "label": "Site URL",
+        "placeholder": "https://your-site.com — your WordPress site root, not the /wp-json path",
+        "required": true
+      },
+      {
+        "name": "username",
+        "type": "string",
+        "value": null,
+        "label": "Username",
+        "placeholder": "Your WordPress username",
+        "required": true
+      },
+      {
+        "name": "app_password",
+        "type": "secret",
+        "value": null,
+        "label": "Application Password",
+        "placeholder": "Users ▸ Profile ▸ Application Passwords (WP 5.6+)",
+        "required": true
+      },
+      {
+        "name": "allow_insecure",
+        "type": "boolean",
+        "value": null,
+        "label": "Allow Insecure SSL",
+        "placeholder": "Skip TLS verification — only for self-signed sites"
+      },
+      {
+        "name": "return_all",
+        "type": "boolean",
+        "value": null,
+        "label": "Return All (auto-paginate every match)",
+        "placeholder": ""
+      },
+      {
+        "name": "limit",
+        "type": "integer",
+        "value": null,
+        "label": "Limit (per page)",
+        "placeholder": "50 per page (max 100); Return All still fetches every match"
+      },
+      {
+        "name": "page",
+        "type": "integer",
+        "value": null,
+        "label": "Page",
+        "placeholder": "Page number to fetch (ignored when Return All is on)"
+      },
+      {
+        "name": "search",
+        "type": "string",
+        "value": null,
+        "label": "Search",
+        "placeholder": ""
+      },
+      {
+        "name": "status",
+        "type": "string",
+        "value": null,
+        "label": "Status",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "Publish",
+            "value": "publish"
+          },
+          {
+            "name": "Draft",
+            "value": "draft"
+          },
+          {
+            "name": "Pending Review",
+            "value": "pending"
+          },
+          {
+            "name": "Private",
+            "value": "private"
+          },
+          {
+            "name": "Future",
+            "value": "future"
+          },
+          {
+            "name": "Trash",
+            "value": "trash"
+          },
+          {
+            "name": "Any",
+            "value": "any"
+          }
+        ]
+      },
+      {
+        "name": "author",
+        "type": "string",
+        "value": null,
+        "label": "Author (User ID)",
+        "placeholder": "Limit to pages by this author user ID"
+      },
+      {
+        "name": "parent",
+        "type": "string",
+        "value": null,
+        "label": "Parent Page ID",
+        "placeholder": "Limit to child pages of this parent ID"
+      },
+      {
+        "name": "slug",
+        "type": "string",
+        "value": null,
+        "label": "Slug",
+        "placeholder": ""
+      },
+      {
+        "name": "after",
+        "type": "datetime",
+        "value": null,
+        "label": "Published After",
+        "placeholder": ""
+      },
+      {
+        "name": "before",
+        "type": "datetime",
+        "value": null,
+        "label": "Published Before",
+        "placeholder": ""
+      },
+      {
+        "name": "include",
+        "type": "string",
+        "value": null,
+        "label": "Include IDs",
+        "placeholder": "Comma-separated page IDs to include"
+      },
+      {
+        "name": "exclude",
+        "type": "string",
+        "value": null,
+        "label": "Exclude IDs",
+        "placeholder": "Comma-separated page IDs to exclude"
+      },
+      {
+        "name": "order",
+        "type": "string",
+        "value": null,
+        "label": "Sort Order",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "Descending",
+            "value": "desc"
+          },
+          {
+            "name": "Ascending",
+            "value": "asc"
+          }
+        ]
+      },
+      {
+        "name": "orderby",
+        "type": "string",
+        "value": null,
+        "label": "Order By",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "Date",
+            "value": "date"
+          },
+          {
+            "name": "Modified",
+            "value": "modified"
+          },
+          {
+            "name": "ID",
+            "value": "id"
+          },
+          {
+            "name": "Title",
+            "value": "title"
+          },
+          {
+            "name": "Slug",
+            "value": "slug"
+          },
+          {
+            "name": "Author",
+            "value": "author"
+          },
+          {
+            "name": "Menu Order",
+            "value": "menu_order"
+          }
+        ]
+      },
+      {
+        "name": "offset",
+        "type": "integer",
+        "value": null,
+        "label": "Offset",
+        "placeholder": "Skip this many results (ignored when Return All is on)"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "results",
+        "type": "object",
+        "value": null,
+        "label": "Pages",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Count (this response)",
+        "placeholder": ""
+      },
+      {
+        "name": "total",
+        "type": "integer",
+        "value": null,
+        "label": "Total (site-wide match)",
+        "placeholder": ""
+      },
+      {
+        "name": "total_pages",
+        "type": "integer",
+        "value": null,
+        "label": "Total Pages",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "cms/wordpress/page_update": {
+    "hash": "ddebf7f174eb2878f218fc36fc61a25c5545ce913923b039d6426cc97f981ead",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "WordPress: Update Page",
+    "description": "Update an existing page on your WordPress site. Only the fields you set are changed; add any other page field via Additional Fields.",
+    "website": "https://www.flomation.co",
+    "icon": "wordpress+pen",
+    "date": "05/07/2026",
+    "type": 2,
+    "category": {
+      "name": "CMS",
+      "icon": "newspaper",
+      "description": "Content management systems — publish and manage posts, pages, and media"
+    },
+    "sub_category": {
+      "name": "WordPress",
+      "icon": "wordpress",
+      "description": "Manage posts, pages, users, comments, categories, and tags on your WordPress site"
+    },
+    "inputs": [
+      {
+        "name": "url",
+        "type": "string",
+        "value": null,
+        "label": "Site URL",
+        "placeholder": "https://your-site.com — your WordPress site root, not the /wp-json path",
+        "required": true
+      },
+      {
+        "name": "username",
+        "type": "string",
+        "value": null,
+        "label": "Username",
+        "placeholder": "Your WordPress username",
+        "required": true
+      },
+      {
+        "name": "app_password",
+        "type": "secret",
+        "value": null,
+        "label": "Application Password",
+        "placeholder": "Users ▸ Profile ▸ Application Passwords (WP 5.6+)",
+        "required": true
+      },
+      {
+        "name": "allow_insecure",
+        "type": "boolean",
+        "value": null,
+        "label": "Allow Insecure SSL",
+        "placeholder": "Skip TLS verification — only for self-signed sites"
+      },
+      {
+        "name": "page_id",
+        "type": "string",
+        "value": null,
+        "label": "Page ID",
+        "placeholder": "123",
+        "required": true
+      },
+      {
+        "name": "title",
+        "type": "string",
+        "value": null,
+        "label": "Title",
+        "placeholder": ""
+      },
+      {
+        "name": "content",
+        "type": "text",
+        "value": null,
+        "label": "Content",
+        "placeholder": "HTML or block markup"
+      },
+      {
+        "name": "excerpt",
+        "type": "text",
+        "value": null,
+        "label": "Excerpt",
+        "placeholder": ""
+      },
+      {
+        "name": "status",
+        "type": "string",
+        "value": null,
+        "label": "Status",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "Publish",
+            "value": "publish"
+          },
+          {
+            "name": "Draft",
+            "value": "draft"
+          },
+          {
+            "name": "Pending Review",
+            "value": "pending"
+          },
+          {
+            "name": "Private",
+            "value": "private"
+          },
+          {
+            "name": "Scheduled (future)",
+            "value": "future"
+          }
+        ]
+      },
+      {
+        "name": "author",
+        "type": "string",
+        "value": null,
+        "label": "Author (User ID)",
+        "placeholder": ""
+      },
+      {
+        "name": "slug",
+        "type": "string",
+        "value": null,
+        "label": "Slug",
+        "placeholder": ""
+      },
+      {
+        "name": "parent",
+        "type": "string",
+        "value": null,
+        "label": "Parent Page ID",
+        "placeholder": "ID of the parent page to nest this under"
+      },
+      {
+        "name": "featured_media",
+        "type": "string",
+        "value": null,
+        "label": "Featured Media (ID)",
+        "placeholder": ""
+      },
+      {
+        "name": "menu_order",
+        "type": "string",
+        "value": null,
+        "label": "Menu Order",
+        "placeholder": "Sort position among sibling pages, e.g. 0"
+      },
+      {
+        "name": "password",
+        "type": "string",
+        "value": null,
+        "label": "Page Password",
+        "placeholder": ""
+      },
+      {
+        "name": "comment_status",
+        "type": "string",
+        "value": null,
+        "label": "Comments",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "Open",
+            "value": "open"
+          },
+          {
+            "name": "Closed",
+            "value": "closed"
+          }
+        ]
+      },
+      {
+        "name": "ping_status",
+        "type": "string",
+        "value": null,
+        "label": "Pingbacks",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "Open",
+            "value": "open"
+          },
+          {
+            "name": "Closed",
+            "value": "closed"
+          }
+        ]
+      },
+      {
+        "name": "date",
+        "type": "datetime",
+        "value": null,
+        "label": "Date",
+        "placeholder": ""
+      },
+      {
+        "name": "template",
+        "type": "string",
+        "value": null,
+        "label": "Template",
+        "placeholder": ""
+      },
+      {
+        "name": "meta",
+        "type": "object",
+        "value": null,
+        "label": "Meta (JSON)",
+        "placeholder": "{\"my_key\":\"my_value\"}"
+      },
+      {
+        "name": "additional_fields",
+        "type": "object",
+        "value": null,
+        "label": "Additional Fields (JSON)",
+        "placeholder": ""
+      }
+    ],
+    "outputs": [
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Page ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Page",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "cms/wordpress/post_create": {
+    "hash": "37bb62b4d4c37ec6cca23a696d93fda2f36b96ea76604b55a570c3d35ebdc2b8",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "WordPress: Create Post",
+    "description": "Create a post on your WordPress site. Set common fields directly (title, content, status, categories, tags) or add any other post field via Additional Fields.",
+    "website": "https://www.flomation.co",
+    "icon": "wordpress+plus",
+    "date": "05/07/2026",
+    "type": 2,
+    "category": {
+      "name": "CMS",
+      "icon": "newspaper",
+      "description": "Content management systems — publish and manage posts, pages, and media"
+    },
+    "sub_category": {
+      "name": "WordPress",
+      "icon": "wordpress",
+      "description": "Manage posts, pages, users, comments, categories, and tags on your WordPress site"
+    },
+    "inputs": [
+      {
+        "name": "url",
+        "type": "string",
+        "value": null,
+        "label": "Site URL",
+        "placeholder": "https://your-site.com — your WordPress site root, not the /wp-json path",
+        "required": true
+      },
+      {
+        "name": "username",
+        "type": "string",
+        "value": null,
+        "label": "Username",
+        "placeholder": "Your WordPress username",
+        "required": true
+      },
+      {
+        "name": "app_password",
+        "type": "secret",
+        "value": null,
+        "label": "Application Password",
+        "placeholder": "Users ▸ Profile ▸ Application Passwords (WP 5.6+)",
+        "required": true
+      },
+      {
+        "name": "allow_insecure",
+        "type": "boolean",
+        "value": null,
+        "label": "Allow Insecure SSL",
+        "placeholder": "Skip TLS verification — only for self-signed sites"
+      },
+      {
+        "name": "title",
+        "type": "string",
+        "value": null,
+        "label": "Title",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "content",
+        "type": "text",
+        "value": null,
+        "label": "Content",
+        "placeholder": "HTML or block markup"
+      },
+      {
+        "name": "excerpt",
+        "type": "text",
+        "value": null,
+        "label": "Excerpt",
+        "placeholder": ""
+      },
+      {
+        "name": "status",
+        "type": "string",
+        "value": null,
+        "label": "Status",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "Publish",
+            "value": "publish"
+          },
+          {
+            "name": "Draft",
+            "value": "draft"
+          },
+          {
+            "name": "Pending Review",
+            "value": "pending"
+          },
+          {
+            "name": "Private",
+            "value": "private"
+          },
+          {
+            "name": "Scheduled (future)",
+            "value": "future"
+          }
+        ]
+      },
+      {
+        "name": "author",
+        "type": "string",
+        "value": null,
+        "label": "Author (User ID)",
+        "placeholder": "Author user ID (leave blank for the authenticating user)"
+      },
+      {
+        "name": "slug",
+        "type": "string",
+        "value": null,
+        "label": "Slug",
+        "placeholder": ""
+      },
+      {
+        "name": "categories",
+        "type": "string",
+        "value": null,
+        "label": "Category IDs",
+        "placeholder": "Comma-separated category IDs, e.g. 3,7"
+      },
+      {
+        "name": "tags",
+        "type": "string",
+        "value": null,
+        "label": "Tag IDs",
+        "placeholder": "Comma-separated tag IDs, e.g. 12,15"
+      },
+      {
+        "name": "format",
+        "type": "string",
+        "value": null,
+        "label": "Format",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "Standard",
+            "value": "standard"
+          },
+          {
+            "name": "Aside",
+            "value": "aside"
+          },
+          {
+            "name": "Gallery",
+            "value": "gallery"
+          },
+          {
+            "name": "Link",
+            "value": "link"
+          },
+          {
+            "name": "Image",
+            "value": "image"
+          },
+          {
+            "name": "Quote",
+            "value": "quote"
+          },
+          {
+            "name": "Status",
+            "value": "status"
+          },
+          {
+            "name": "Video",
+            "value": "video"
+          },
+          {
+            "name": "Audio",
+            "value": "audio"
+          },
+          {
+            "name": "Chat",
+            "value": "chat"
+          }
+        ]
+      },
+      {
+        "name": "featured_media",
+        "type": "string",
+        "value": null,
+        "label": "Featured Media (ID)",
+        "placeholder": "Media/attachment ID for the featured image"
+      },
+      {
+        "name": "sticky",
+        "type": "boolean",
+        "value": null,
+        "label": "Sticky",
+        "placeholder": ""
+      },
+      {
+        "name": "password",
+        "type": "string",
+        "value": null,
+        "label": "Post Password",
+        "placeholder": "Protect the post with a password (distinct from the Application Password above)"
+      },
+      {
+        "name": "comment_status",
+        "type": "string",
+        "value": null,
+        "label": "Comments",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "Open",
+            "value": "open"
+          },
+          {
+            "name": "Closed",
+            "value": "closed"
+          }
+        ]
+      },
+      {
+        "name": "ping_status",
+        "type": "string",
+        "value": null,
+        "label": "Pingbacks",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "Open",
+            "value": "open"
+          },
+          {
+            "name": "Closed",
+            "value": "closed"
+          }
+        ]
+      },
+      {
+        "name": "date",
+        "type": "datetime",
+        "value": null,
+        "label": "Date",
+        "placeholder": "Publish date (defaults to now)"
+      },
+      {
+        "name": "template",
+        "type": "string",
+        "value": null,
+        "label": "Template",
+        "placeholder": ""
+      },
+      {
+        "name": "meta",
+        "type": "object",
+        "value": null,
+        "label": "Meta (JSON)",
+        "placeholder": "{\"my_key\":\"my_value\"}"
+      },
+      {
+        "name": "additional_fields",
+        "type": "object",
+        "value": null,
+        "label": "Additional Fields (JSON)",
+        "placeholder": "{\"menu_order\":1}"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Post ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Post",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "cms/wordpress/post_delete": {
+    "hash": "b60a0e9b771e6f88ff6ae7f15c6caab3f91499c4ebb8c2159d0e48717f42b728",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "WordPress: Delete Post",
+    "description": "Delete a post from your WordPress site. Moves it to the Trash by default; enable Permanently Delete to remove it for good.",
+    "website": "https://www.flomation.co",
+    "icon": "wordpress+trash",
+    "date": "05/07/2026",
+    "type": 2,
+    "category": {
+      "name": "CMS",
+      "icon": "newspaper",
+      "description": "Content management systems — publish and manage posts, pages, and media"
+    },
+    "sub_category": {
+      "name": "WordPress",
+      "icon": "wordpress",
+      "description": "Manage posts, pages, users, comments, categories, and tags on your WordPress site"
+    },
+    "inputs": [
+      {
+        "name": "url",
+        "type": "string",
+        "value": null,
+        "label": "Site URL",
+        "placeholder": "https://your-site.com — your WordPress site root, not the /wp-json path",
+        "required": true
+      },
+      {
+        "name": "username",
+        "type": "string",
+        "value": null,
+        "label": "Username",
+        "placeholder": "Your WordPress username",
+        "required": true
+      },
+      {
+        "name": "app_password",
+        "type": "secret",
+        "value": null,
+        "label": "Application Password",
+        "placeholder": "Users ▸ Profile ▸ Application Passwords (WP 5.6+)",
+        "required": true
+      },
+      {
+        "name": "allow_insecure",
+        "type": "boolean",
+        "value": null,
+        "label": "Allow Insecure SSL",
+        "placeholder": "Skip TLS verification — only for self-signed sites"
+      },
+      {
+        "name": "post_id",
+        "type": "string",
+        "value": null,
+        "label": "Post ID",
+        "placeholder": "123",
+        "required": true
+      },
+      {
+        "name": "force",
+        "type": "boolean",
+        "value": null,
+        "label": "Permanently Delete",
+        "placeholder": "On: delete permanently. Off (default): move to Trash."
+      }
+    ],
+    "outputs": [
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Post ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Deleted Post",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "cms/wordpress/post_get": {
+    "hash": "5354858bc9e1dd3935d096fc2983c7f12b2126f23f66d3417078ca3522a0e996",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "WordPress: Get Post",
+    "description": "Retrieve a single post from your WordPress site by ID.",
+    "website": "https://www.flomation.co",
+    "icon": "wordpress+eye",
+    "date": "05/07/2026",
+    "type": 2,
+    "category": {
+      "name": "CMS",
+      "icon": "newspaper",
+      "description": "Content management systems — publish and manage posts, pages, and media"
+    },
+    "sub_category": {
+      "name": "WordPress",
+      "icon": "wordpress",
+      "description": "Manage posts, pages, users, comments, categories, and tags on your WordPress site"
+    },
+    "inputs": [
+      {
+        "name": "url",
+        "type": "string",
+        "value": null,
+        "label": "Site URL",
+        "placeholder": "https://your-site.com — your WordPress site root, not the /wp-json path",
+        "required": true
+      },
+      {
+        "name": "username",
+        "type": "string",
+        "value": null,
+        "label": "Username",
+        "placeholder": "Your WordPress username",
+        "required": true
+      },
+      {
+        "name": "app_password",
+        "type": "secret",
+        "value": null,
+        "label": "Application Password",
+        "placeholder": "Users ▸ Profile ▸ Application Passwords (WP 5.6+)",
+        "required": true
+      },
+      {
+        "name": "allow_insecure",
+        "type": "boolean",
+        "value": null,
+        "label": "Allow Insecure SSL",
+        "placeholder": "Skip TLS verification — only for self-signed sites"
+      },
+      {
+        "name": "post_id",
+        "type": "string",
+        "value": null,
+        "label": "Post ID",
+        "placeholder": "123",
+        "required": true
+      },
+      {
+        "name": "context",
+        "type": "string",
+        "value": null,
+        "label": "Context",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "View",
+            "value": "view"
+          },
+          {
+            "name": "Edit (more fields; needs edit rights)",
+            "value": "edit"
+          },
+          {
+            "name": "Embed",
+            "value": "embed"
+          }
+        ]
+      },
+      {
+        "name": "password",
+        "type": "string",
+        "value": null,
+        "label": "Post Password",
+        "placeholder": "Required to read a password-protected post"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Post ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Post",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "cms/wordpress/post_get_all": {
+    "hash": "75c5491663b017374dc52c6aa87d25bbcec9e1ecee719f8dfccc83aa82bb4a72",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "WordPress: Get Many Posts",
+    "description": "List posts from your WordPress site, with optional filters. Enable Return All to auto-paginate every matching post.",
+    "website": "https://www.flomation.co",
+    "icon": "wordpress+list",
+    "date": "05/07/2026",
+    "type": 2,
+    "category": {
+      "name": "CMS",
+      "icon": "newspaper",
+      "description": "Content management systems — publish and manage posts, pages, and media"
+    },
+    "sub_category": {
+      "name": "WordPress",
+      "icon": "wordpress",
+      "description": "Manage posts, pages, users, comments, categories, and tags on your WordPress site"
+    },
+    "inputs": [
+      {
+        "name": "url",
+        "type": "string",
+        "value": null,
+        "label": "Site URL",
+        "placeholder": "https://your-site.com — your WordPress site root, not the /wp-json path",
+        "required": true
+      },
+      {
+        "name": "username",
+        "type": "string",
+        "value": null,
+        "label": "Username",
+        "placeholder": "Your WordPress username",
+        "required": true
+      },
+      {
+        "name": "app_password",
+        "type": "secret",
+        "value": null,
+        "label": "Application Password",
+        "placeholder": "Users ▸ Profile ▸ Application Passwords (WP 5.6+)",
+        "required": true
+      },
+      {
+        "name": "allow_insecure",
+        "type": "boolean",
+        "value": null,
+        "label": "Allow Insecure SSL",
+        "placeholder": "Skip TLS verification — only for self-signed sites"
+      },
+      {
+        "name": "return_all",
+        "type": "boolean",
+        "value": null,
+        "label": "Return All (auto-paginate every match)",
+        "placeholder": ""
+      },
+      {
+        "name": "limit",
+        "type": "integer",
+        "value": null,
+        "label": "Limit (per page)",
+        "placeholder": "50 per page (max 100); Return All still fetches every match"
+      },
+      {
+        "name": "page",
+        "type": "integer",
+        "value": null,
+        "label": "Page",
+        "placeholder": "Page number to fetch (ignored when Return All is on)"
+      },
+      {
+        "name": "search",
+        "type": "string",
+        "value": null,
+        "label": "Search",
+        "placeholder": ""
+      },
+      {
+        "name": "status",
+        "type": "string",
+        "value": null,
+        "label": "Status",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "Publish",
+            "value": "publish"
+          },
+          {
+            "name": "Draft",
+            "value": "draft"
+          },
+          {
+            "name": "Pending Review",
+            "value": "pending"
+          },
+          {
+            "name": "Private",
+            "value": "private"
+          },
+          {
+            "name": "Future",
+            "value": "future"
+          },
+          {
+            "name": "Trash",
+            "value": "trash"
+          },
+          {
+            "name": "Any",
+            "value": "any"
+          }
+        ]
+      },
+      {
+        "name": "author",
+        "type": "string",
+        "value": null,
+        "label": "Author (User ID)",
+        "placeholder": "Limit to posts by this author user ID"
+      },
+      {
+        "name": "categories",
+        "type": "string",
+        "value": null,
+        "label": "Category IDs",
+        "placeholder": "Comma-separated category IDs"
+      },
+      {
+        "name": "tags",
+        "type": "string",
+        "value": null,
+        "label": "Tag IDs",
+        "placeholder": "Comma-separated tag IDs"
+      },
+      {
+        "name": "slug",
+        "type": "string",
+        "value": null,
+        "label": "Slug",
+        "placeholder": ""
+      },
+      {
+        "name": "after",
+        "type": "datetime",
+        "value": null,
+        "label": "Published After",
+        "placeholder": ""
+      },
+      {
+        "name": "before",
+        "type": "datetime",
+        "value": null,
+        "label": "Published Before",
+        "placeholder": ""
+      },
+      {
+        "name": "include",
+        "type": "string",
+        "value": null,
+        "label": "Include IDs",
+        "placeholder": "Comma-separated post IDs to include"
+      },
+      {
+        "name": "exclude",
+        "type": "string",
+        "value": null,
+        "label": "Exclude IDs",
+        "placeholder": "Comma-separated post IDs to exclude"
+      },
+      {
+        "name": "sticky",
+        "type": "boolean",
+        "value": null,
+        "label": "Sticky Only",
+        "placeholder": ""
+      },
+      {
+        "name": "order",
+        "type": "string",
+        "value": null,
+        "label": "Sort Order",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "Descending",
+            "value": "desc"
+          },
+          {
+            "name": "Ascending",
+            "value": "asc"
+          }
+        ]
+      },
+      {
+        "name": "orderby",
+        "type": "string",
+        "value": null,
+        "label": "Order By",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "Date",
+            "value": "date"
+          },
+          {
+            "name": "Modified",
+            "value": "modified"
+          },
+          {
+            "name": "ID",
+            "value": "id"
+          },
+          {
+            "name": "Title",
+            "value": "title"
+          },
+          {
+            "name": "Slug",
+            "value": "slug"
+          },
+          {
+            "name": "Author",
+            "value": "author"
+          },
+          {
+            "name": "Relevance",
+            "value": "relevance"
+          }
+        ]
+      },
+      {
+        "name": "offset",
+        "type": "integer",
+        "value": null,
+        "label": "Offset",
+        "placeholder": "Skip this many results (ignored when Return All is on)"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "results",
+        "type": "object",
+        "value": null,
+        "label": "Posts",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Count (this response)",
+        "placeholder": ""
+      },
+      {
+        "name": "total",
+        "type": "integer",
+        "value": null,
+        "label": "Total (site-wide match)",
+        "placeholder": ""
+      },
+      {
+        "name": "total_pages",
+        "type": "integer",
+        "value": null,
+        "label": "Total Pages",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "cms/wordpress/post_update": {
+    "hash": "5b98a69ec62e3112777992696da693bc89fca6fddf365c58d85363be162d9cb1",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "WordPress: Update Post",
+    "description": "Update an existing post on your WordPress site. Only the fields you set are changed; add any other post field via Additional Fields.",
+    "website": "https://www.flomation.co",
+    "icon": "wordpress+pen",
+    "date": "05/07/2026",
+    "type": 2,
+    "category": {
+      "name": "CMS",
+      "icon": "newspaper",
+      "description": "Content management systems — publish and manage posts, pages, and media"
+    },
+    "sub_category": {
+      "name": "WordPress",
+      "icon": "wordpress",
+      "description": "Manage posts, pages, users, comments, categories, and tags on your WordPress site"
+    },
+    "inputs": [
+      {
+        "name": "url",
+        "type": "string",
+        "value": null,
+        "label": "Site URL",
+        "placeholder": "https://your-site.com — your WordPress site root, not the /wp-json path",
+        "required": true
+      },
+      {
+        "name": "username",
+        "type": "string",
+        "value": null,
+        "label": "Username",
+        "placeholder": "Your WordPress username",
+        "required": true
+      },
+      {
+        "name": "app_password",
+        "type": "secret",
+        "value": null,
+        "label": "Application Password",
+        "placeholder": "Users ▸ Profile ▸ Application Passwords (WP 5.6+)",
+        "required": true
+      },
+      {
+        "name": "allow_insecure",
+        "type": "boolean",
+        "value": null,
+        "label": "Allow Insecure SSL",
+        "placeholder": "Skip TLS verification — only for self-signed sites"
+      },
+      {
+        "name": "post_id",
+        "type": "string",
+        "value": null,
+        "label": "Post ID",
+        "placeholder": "123",
+        "required": true
+      },
+      {
+        "name": "title",
+        "type": "string",
+        "value": null,
+        "label": "Title",
+        "placeholder": ""
+      },
+      {
+        "name": "content",
+        "type": "text",
+        "value": null,
+        "label": "Content",
+        "placeholder": "HTML or block markup"
+      },
+      {
+        "name": "excerpt",
+        "type": "text",
+        "value": null,
+        "label": "Excerpt",
+        "placeholder": ""
+      },
+      {
+        "name": "status",
+        "type": "string",
+        "value": null,
+        "label": "Status",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "Publish",
+            "value": "publish"
+          },
+          {
+            "name": "Draft",
+            "value": "draft"
+          },
+          {
+            "name": "Pending Review",
+            "value": "pending"
+          },
+          {
+            "name": "Private",
+            "value": "private"
+          },
+          {
+            "name": "Scheduled (future)",
+            "value": "future"
+          }
+        ]
+      },
+      {
+        "name": "author",
+        "type": "string",
+        "value": null,
+        "label": "Author (User ID)",
+        "placeholder": ""
+      },
+      {
+        "name": "slug",
+        "type": "string",
+        "value": null,
+        "label": "Slug",
+        "placeholder": ""
+      },
+      {
+        "name": "categories",
+        "type": "string",
+        "value": null,
+        "label": "Category IDs",
+        "placeholder": "Comma-separated category IDs (replaces the set)"
+      },
+      {
+        "name": "tags",
+        "type": "string",
+        "value": null,
+        "label": "Tag IDs",
+        "placeholder": "Comma-separated tag IDs (replaces the set)"
+      },
+      {
+        "name": "format",
+        "type": "string",
+        "value": null,
+        "label": "Format",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "Standard",
+            "value": "standard"
+          },
+          {
+            "name": "Aside",
+            "value": "aside"
+          },
+          {
+            "name": "Gallery",
+            "value": "gallery"
+          },
+          {
+            "name": "Link",
+            "value": "link"
+          },
+          {
+            "name": "Image",
+            "value": "image"
+          },
+          {
+            "name": "Quote",
+            "value": "quote"
+          },
+          {
+            "name": "Status",
+            "value": "status"
+          },
+          {
+            "name": "Video",
+            "value": "video"
+          },
+          {
+            "name": "Audio",
+            "value": "audio"
+          },
+          {
+            "name": "Chat",
+            "value": "chat"
+          }
+        ]
+      },
+      {
+        "name": "featured_media",
+        "type": "string",
+        "value": null,
+        "label": "Featured Media (ID)",
+        "placeholder": ""
+      },
+      {
+        "name": "sticky",
+        "type": "boolean",
+        "value": null,
+        "label": "Sticky",
+        "placeholder": ""
+      },
+      {
+        "name": "password",
+        "type": "string",
+        "value": null,
+        "label": "Post Password",
+        "placeholder": ""
+      },
+      {
+        "name": "comment_status",
+        "type": "string",
+        "value": null,
+        "label": "Comments",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "Open",
+            "value": "open"
+          },
+          {
+            "name": "Closed",
+            "value": "closed"
+          }
+        ]
+      },
+      {
+        "name": "ping_status",
+        "type": "string",
+        "value": null,
+        "label": "Pingbacks",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "Open",
+            "value": "open"
+          },
+          {
+            "name": "Closed",
+            "value": "closed"
+          }
+        ]
+      },
+      {
+        "name": "date",
+        "type": "datetime",
+        "value": null,
+        "label": "Date",
+        "placeholder": ""
+      },
+      {
+        "name": "template",
+        "type": "string",
+        "value": null,
+        "label": "Template",
+        "placeholder": ""
+      },
+      {
+        "name": "meta",
+        "type": "object",
+        "value": null,
+        "label": "Meta (JSON)",
+        "placeholder": "{\"my_key\":\"my_value\"}"
+      },
+      {
+        "name": "additional_fields",
+        "type": "object",
+        "value": null,
+        "label": "Additional Fields (JSON)",
+        "placeholder": ""
+      }
+    ],
+    "outputs": [
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Post ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Post",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "cms/wordpress/tag_create": {
+    "hash": "3f1365785df7b8e96921e58ab6d2f45b75392802c1bab4d2a7c2f73828e50633",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "WordPress: Create Tag",
+    "description": "Create a tag on your WordPress site with a name and optional description and slug, or add any other tag field via Additional Fields.",
+    "website": "https://www.flomation.co",
+    "icon": "wordpress+plus",
+    "date": "05/07/2026",
+    "type": 2,
+    "category": {
+      "name": "CMS",
+      "icon": "newspaper",
+      "description": "Content management systems — publish and manage posts, pages, and media"
+    },
+    "sub_category": {
+      "name": "WordPress",
+      "icon": "wordpress",
+      "description": "Manage posts, pages, users, comments, categories, and tags on your WordPress site"
+    },
+    "inputs": [
+      {
+        "name": "url",
+        "type": "string",
+        "value": null,
+        "label": "Site URL",
+        "placeholder": "https://your-site.com — your WordPress site root, not the /wp-json path",
+        "required": true
+      },
+      {
+        "name": "username",
+        "type": "string",
+        "value": null,
+        "label": "Username",
+        "placeholder": "Your WordPress username",
+        "required": true
+      },
+      {
+        "name": "app_password",
+        "type": "secret",
+        "value": null,
+        "label": "Application Password",
+        "placeholder": "Users ▸ Profile ▸ Application Passwords (WP 5.6+)",
+        "required": true
+      },
+      {
+        "name": "allow_insecure",
+        "type": "boolean",
+        "value": null,
+        "label": "Allow Insecure SSL",
+        "placeholder": "Skip TLS verification — only for self-signed sites"
+      },
+      {
+        "name": "name",
+        "type": "string",
+        "value": null,
+        "label": "Name",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "description",
+        "type": "text",
+        "value": null,
+        "label": "Description",
+        "placeholder": ""
+      },
+      {
+        "name": "slug",
+        "type": "string",
+        "value": null,
+        "label": "Slug",
+        "placeholder": ""
+      },
+      {
+        "name": "meta",
+        "type": "object",
+        "value": null,
+        "label": "Meta (JSON)",
+        "placeholder": "{\"my_key\":\"my_value\"}"
+      },
+      {
+        "name": "additional_fields",
+        "type": "object",
+        "value": null,
+        "label": "Additional Fields (JSON)",
+        "placeholder": "{\"key\":\"value\"}"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Tag ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Tag",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "cms/wordpress/tag_delete": {
+    "hash": "0e7855292a2b5b8b414061c96c03b633148c02f3fdf40197e37c5d22f117ba03",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "WordPress: Delete Tag",
+    "description": "Permanently delete a tag from your WordPress site by ID; taxonomy terms cannot be trashed, so this always removes it for good.",
+    "website": "https://www.flomation.co",
+    "icon": "wordpress+trash",
+    "date": "05/07/2026",
+    "type": 2,
+    "category": {
+      "name": "CMS",
+      "icon": "newspaper",
+      "description": "Content management systems — publish and manage posts, pages, and media"
+    },
+    "sub_category": {
+      "name": "WordPress",
+      "icon": "wordpress",
+      "description": "Manage posts, pages, users, comments, categories, and tags on your WordPress site"
+    },
+    "inputs": [
+      {
+        "name": "url",
+        "type": "string",
+        "value": null,
+        "label": "Site URL",
+        "placeholder": "https://your-site.com — your WordPress site root, not the /wp-json path",
+        "required": true
+      },
+      {
+        "name": "username",
+        "type": "string",
+        "value": null,
+        "label": "Username",
+        "placeholder": "Your WordPress username",
+        "required": true
+      },
+      {
+        "name": "app_password",
+        "type": "secret",
+        "value": null,
+        "label": "Application Password",
+        "placeholder": "Users ▸ Profile ▸ Application Passwords (WP 5.6+)",
+        "required": true
+      },
+      {
+        "name": "allow_insecure",
+        "type": "boolean",
+        "value": null,
+        "label": "Allow Insecure SSL",
+        "placeholder": "Skip TLS verification — only for self-signed sites"
+      },
+      {
+        "name": "tag_id",
+        "type": "string",
+        "value": null,
+        "label": "Tag ID",
+        "placeholder": "123",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Tag ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Deleted Tag",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "cms/wordpress/tag_get": {
+    "hash": "66f150d9aabede2bffe276d22aee2ab538de950288cdeb13dda90bdeb2cccd83",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "WordPress: Get Tag",
+    "description": "Retrieve a single tag from your WordPress site by ID.",
+    "website": "https://www.flomation.co",
+    "icon": "wordpress+eye",
+    "date": "05/07/2026",
+    "type": 2,
+    "category": {
+      "name": "CMS",
+      "icon": "newspaper",
+      "description": "Content management systems — publish and manage posts, pages, and media"
+    },
+    "sub_category": {
+      "name": "WordPress",
+      "icon": "wordpress",
+      "description": "Manage posts, pages, users, comments, categories, and tags on your WordPress site"
+    },
+    "inputs": [
+      {
+        "name": "url",
+        "type": "string",
+        "value": null,
+        "label": "Site URL",
+        "placeholder": "https://your-site.com — your WordPress site root, not the /wp-json path",
+        "required": true
+      },
+      {
+        "name": "username",
+        "type": "string",
+        "value": null,
+        "label": "Username",
+        "placeholder": "Your WordPress username",
+        "required": true
+      },
+      {
+        "name": "app_password",
+        "type": "secret",
+        "value": null,
+        "label": "Application Password",
+        "placeholder": "Users ▸ Profile ▸ Application Passwords (WP 5.6+)",
+        "required": true
+      },
+      {
+        "name": "allow_insecure",
+        "type": "boolean",
+        "value": null,
+        "label": "Allow Insecure SSL",
+        "placeholder": "Skip TLS verification — only for self-signed sites"
+      },
+      {
+        "name": "tag_id",
+        "type": "string",
+        "value": null,
+        "label": "Tag ID",
+        "placeholder": "123",
+        "required": true
+      },
+      {
+        "name": "context",
+        "type": "string",
+        "value": null,
+        "label": "Context",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "View",
+            "value": "view"
+          },
+          {
+            "name": "Edit (more fields; needs edit rights)",
+            "value": "edit"
+          },
+          {
+            "name": "Embed",
+            "value": "embed"
+          }
+        ]
+      }
+    ],
+    "outputs": [
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Tag ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Tag",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "cms/wordpress/tag_get_all": {
+    "hash": "d04090ce2888a6897b4ea4897752d889f3ee51bc6a07a7a127a1a9c519c78173",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "WordPress: Get Many Tags",
+    "description": "List tags from your WordPress site, with optional filters. Enable Return All to auto-paginate every matching tag.",
+    "website": "https://www.flomation.co",
+    "icon": "wordpress+list",
+    "date": "05/07/2026",
+    "type": 2,
+    "category": {
+      "name": "CMS",
+      "icon": "newspaper",
+      "description": "Content management systems — publish and manage posts, pages, and media"
+    },
+    "sub_category": {
+      "name": "WordPress",
+      "icon": "wordpress",
+      "description": "Manage posts, pages, users, comments, categories, and tags on your WordPress site"
+    },
+    "inputs": [
+      {
+        "name": "url",
+        "type": "string",
+        "value": null,
+        "label": "Site URL",
+        "placeholder": "https://your-site.com — your WordPress site root, not the /wp-json path",
+        "required": true
+      },
+      {
+        "name": "username",
+        "type": "string",
+        "value": null,
+        "label": "Username",
+        "placeholder": "Your WordPress username",
+        "required": true
+      },
+      {
+        "name": "app_password",
+        "type": "secret",
+        "value": null,
+        "label": "Application Password",
+        "placeholder": "Users ▸ Profile ▸ Application Passwords (WP 5.6+)",
+        "required": true
+      },
+      {
+        "name": "allow_insecure",
+        "type": "boolean",
+        "value": null,
+        "label": "Allow Insecure SSL",
+        "placeholder": "Skip TLS verification — only for self-signed sites"
+      },
+      {
+        "name": "return_all",
+        "type": "boolean",
+        "value": null,
+        "label": "Return All (auto-paginate every match)",
+        "placeholder": ""
+      },
+      {
+        "name": "limit",
+        "type": "integer",
+        "value": null,
+        "label": "Limit (per page)",
+        "placeholder": "50 per page (max 100); Return All still fetches every match"
+      },
+      {
+        "name": "page",
+        "type": "integer",
+        "value": null,
+        "label": "Page",
+        "placeholder": "Page number to fetch (ignored when Return All is on)"
+      },
+      {
+        "name": "search",
+        "type": "string",
+        "value": null,
+        "label": "Search",
+        "placeholder": ""
+      },
+      {
+        "name": "post",
+        "type": "string",
+        "value": null,
+        "label": "Assigned to Post ID",
+        "placeholder": "Limit to tags assigned to this post ID"
+      },
+      {
+        "name": "slug",
+        "type": "string",
+        "value": null,
+        "label": "Slug",
+        "placeholder": ""
+      },
+      {
+        "name": "hide_empty",
+        "type": "boolean",
+        "value": null,
+        "label": "Hide Empty (only tags with posts)",
+        "placeholder": ""
+      },
+      {
+        "name": "order",
+        "type": "string",
+        "value": null,
+        "label": "Sort Order",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "Descending",
+            "value": "desc"
+          },
+          {
+            "name": "Ascending",
+            "value": "asc"
+          }
+        ]
+      },
+      {
+        "name": "orderby",
+        "type": "string",
+        "value": null,
+        "label": "Order By",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "Name",
+            "value": "name"
+          },
+          {
+            "name": "ID",
+            "value": "id"
+          },
+          {
+            "name": "Slug",
+            "value": "slug"
+          },
+          {
+            "name": "Count",
+            "value": "count"
+          },
+          {
+            "name": "Description",
+            "value": "description"
+          },
+          {
+            "name": "Term Group",
+            "value": "term_group"
+          },
+          {
+            "name": "Include",
+            "value": "include"
+          }
+        ]
+      },
+      {
+        "name": "include",
+        "type": "string",
+        "value": null,
+        "label": "Include IDs",
+        "placeholder": "Comma-separated tag IDs to include"
+      },
+      {
+        "name": "exclude",
+        "type": "string",
+        "value": null,
+        "label": "Exclude IDs",
+        "placeholder": "Comma-separated tag IDs to exclude"
+      },
+      {
+        "name": "offset",
+        "type": "integer",
+        "value": null,
+        "label": "Offset",
+        "placeholder": "Skip this many results (ignored when Return All is on)"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "results",
+        "type": "object",
+        "value": null,
+        "label": "Tags",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Count (this response)",
+        "placeholder": ""
+      },
+      {
+        "name": "total",
+        "type": "integer",
+        "value": null,
+        "label": "Total (site-wide match)",
+        "placeholder": ""
+      },
+      {
+        "name": "total_pages",
+        "type": "integer",
+        "value": null,
+        "label": "Total Pages",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "cms/wordpress/tag_update": {
+    "hash": "c52b2f4eed429bd5a1373d4d5bd2ae843aefc933cddac367126c8f09c965bb23",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "WordPress: Update Tag",
+    "description": "Update an existing tag on your WordPress site. Only the fields you set are changed; add any other tag field via Additional Fields.",
+    "website": "https://www.flomation.co",
+    "icon": "wordpress+pen",
+    "date": "05/07/2026",
+    "type": 2,
+    "category": {
+      "name": "CMS",
+      "icon": "newspaper",
+      "description": "Content management systems — publish and manage posts, pages, and media"
+    },
+    "sub_category": {
+      "name": "WordPress",
+      "icon": "wordpress",
+      "description": "Manage posts, pages, users, comments, categories, and tags on your WordPress site"
+    },
+    "inputs": [
+      {
+        "name": "url",
+        "type": "string",
+        "value": null,
+        "label": "Site URL",
+        "placeholder": "https://your-site.com — your WordPress site root, not the /wp-json path",
+        "required": true
+      },
+      {
+        "name": "username",
+        "type": "string",
+        "value": null,
+        "label": "Username",
+        "placeholder": "Your WordPress username",
+        "required": true
+      },
+      {
+        "name": "app_password",
+        "type": "secret",
+        "value": null,
+        "label": "Application Password",
+        "placeholder": "Users ▸ Profile ▸ Application Passwords (WP 5.6+)",
+        "required": true
+      },
+      {
+        "name": "allow_insecure",
+        "type": "boolean",
+        "value": null,
+        "label": "Allow Insecure SSL",
+        "placeholder": "Skip TLS verification — only for self-signed sites"
+      },
+      {
+        "name": "tag_id",
+        "type": "string",
+        "value": null,
+        "label": "Tag ID",
+        "placeholder": "123",
+        "required": true
+      },
+      {
+        "name": "name",
+        "type": "string",
+        "value": null,
+        "label": "Name",
+        "placeholder": ""
+      },
+      {
+        "name": "description",
+        "type": "text",
+        "value": null,
+        "label": "Description",
+        "placeholder": ""
+      },
+      {
+        "name": "slug",
+        "type": "string",
+        "value": null,
+        "label": "Slug",
+        "placeholder": ""
+      },
+      {
+        "name": "meta",
+        "type": "object",
+        "value": null,
+        "label": "Meta (JSON)",
+        "placeholder": "{\"my_key\":\"my_value\"}"
+      },
+      {
+        "name": "additional_fields",
+        "type": "object",
+        "value": null,
+        "label": "Additional Fields (JSON)",
+        "placeholder": ""
+      }
+    ],
+    "outputs": [
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Tag ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Tag",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "cms/wordpress/user_create": {
+    "hash": "2d3eed1ea9df47db1cc41274c5ad6ee47bcf4facb1b2198ac843c8d8f32844c0",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "WordPress: Create User",
+    "description": "Create a new user on your WordPress site. Set common fields directly (username, email, password, roles) or add any other user field via Additional Fields.",
+    "website": "https://www.flomation.co",
+    "icon": "wordpress+plus",
+    "date": "05/07/2026",
+    "type": 2,
+    "category": {
+      "name": "CMS",
+      "icon": "newspaper",
+      "description": "Content management systems — publish and manage posts, pages, and media"
+    },
+    "sub_category": {
+      "name": "WordPress",
+      "icon": "wordpress",
+      "description": "Manage posts, pages, users, comments, categories, and tags on your WordPress site"
+    },
+    "inputs": [
+      {
+        "name": "url",
+        "type": "string",
+        "value": null,
+        "label": "Site URL",
+        "placeholder": "https://your-site.com — your WordPress site root, not the /wp-json path",
+        "required": true
+      },
+      {
+        "name": "username",
+        "type": "string",
+        "value": null,
+        "label": "Username",
+        "placeholder": "Your WordPress username",
+        "required": true
+      },
+      {
+        "name": "app_password",
+        "type": "secret",
+        "value": null,
+        "label": "Application Password",
+        "placeholder": "Users ▸ Profile ▸ Application Passwords (WP 5.6+)",
+        "required": true
+      },
+      {
+        "name": "allow_insecure",
+        "type": "boolean",
+        "value": null,
+        "label": "Allow Insecure SSL",
+        "placeholder": "Skip TLS verification — only for self-signed sites"
+      },
+      {
+        "name": "user_login",
+        "type": "string",
+        "value": null,
+        "label": "Username",
+        "placeholder": "Login name for the new user",
+        "required": true
+      },
+      {
+        "name": "email",
+        "type": "string",
+        "value": null,
+        "label": "Email",
+        "placeholder": "user@example.com",
+        "required": true
+      },
+      {
+        "name": "password",
+        "type": "string",
+        "value": null,
+        "label": "Password",
+        "placeholder": "Account password for the new user",
+        "required": true
+      },
+      {
+        "name": "name",
+        "type": "string",
+        "value": null,
+        "label": "Display Name",
+        "placeholder": ""
+      },
+      {
+        "name": "first_name",
+        "type": "string",
+        "value": null,
+        "label": "First Name",
+        "placeholder": ""
+      },
+      {
+        "name": "last_name",
+        "type": "string",
+        "value": null,
+        "label": "Last Name",
+        "placeholder": ""
+      },
+      {
+        "name": "user_url",
+        "type": "string",
+        "value": null,
+        "label": "Website URL",
+        "placeholder": "https://the-user-website.com"
+      },
+      {
+        "name": "description",
+        "type": "text",
+        "value": null,
+        "label": "Description",
+        "placeholder": "Biographical info shown on the profile"
+      },
+      {
+        "name": "nickname",
+        "type": "string",
+        "value": null,
+        "label": "Nickname",
+        "placeholder": ""
+      },
+      {
+        "name": "slug",
+        "type": "string",
+        "value": null,
+        "label": "Slug",
+        "placeholder": ""
+      },
+      {
+        "name": "roles",
+        "type": "string",
+        "value": null,
+        "label": "Roles",
+        "placeholder": "Comma-separated role slugs, e.g. author,editor"
+      },
+      {
+        "name": "meta",
+        "type": "object",
+        "value": null,
+        "label": "Meta (JSON)",
+        "placeholder": "{\"my_key\":\"my_value\"}"
+      },
+      {
+        "name": "additional_fields",
+        "type": "object",
+        "value": null,
+        "label": "Additional Fields (JSON)",
+        "placeholder": "{\"locale\":\"en_US\"}"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "User ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "User",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "cms/wordpress/user_delete": {
+    "hash": "eb63701c011824563777fb66cf525086435c077b6c981da65b27752a64a11a89",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "WordPress: Delete User",
+    "description": "Delete a user from your WordPress site, reassigning their content to another user (required by WordPress).",
+    "website": "https://www.flomation.co",
+    "icon": "wordpress+trash",
+    "date": "05/07/2026",
+    "type": 2,
+    "category": {
+      "name": "CMS",
+      "icon": "newspaper",
+      "description": "Content management systems — publish and manage posts, pages, and media"
+    },
+    "sub_category": {
+      "name": "WordPress",
+      "icon": "wordpress",
+      "description": "Manage posts, pages, users, comments, categories, and tags on your WordPress site"
+    },
+    "inputs": [
+      {
+        "name": "url",
+        "type": "string",
+        "value": null,
+        "label": "Site URL",
+        "placeholder": "https://your-site.com — your WordPress site root, not the /wp-json path",
+        "required": true
+      },
+      {
+        "name": "username",
+        "type": "string",
+        "value": null,
+        "label": "Username",
+        "placeholder": "Your WordPress username",
+        "required": true
+      },
+      {
+        "name": "app_password",
+        "type": "secret",
+        "value": null,
+        "label": "Application Password",
+        "placeholder": "Users ▸ Profile ▸ Application Passwords (WP 5.6+)",
+        "required": true
+      },
+      {
+        "name": "allow_insecure",
+        "type": "boolean",
+        "value": null,
+        "label": "Allow Insecure SSL",
+        "placeholder": "Skip TLS verification — only for self-signed sites"
+      },
+      {
+        "name": "user_id",
+        "type": "string",
+        "value": null,
+        "label": "User ID",
+        "placeholder": "123",
+        "required": true
+      },
+      {
+        "name": "reassign",
+        "type": "string",
+        "value": null,
+        "label": "Reassign Content To (User ID)",
+        "placeholder": "User ID to inherit this user's posts — WordPress requires this",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "User ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Deleted User",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "cms/wordpress/user_get": {
+    "hash": "3d1a6dced0df354ac9102764c6a97a3b10964167200955e84715a05aa1a08888",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "WordPress: Get User",
+    "description": "Retrieve a single user from your WordPress site by ID.",
+    "website": "https://www.flomation.co",
+    "icon": "wordpress+eye",
+    "date": "05/07/2026",
+    "type": 2,
+    "category": {
+      "name": "CMS",
+      "icon": "newspaper",
+      "description": "Content management systems — publish and manage posts, pages, and media"
+    },
+    "sub_category": {
+      "name": "WordPress",
+      "icon": "wordpress",
+      "description": "Manage posts, pages, users, comments, categories, and tags on your WordPress site"
+    },
+    "inputs": [
+      {
+        "name": "url",
+        "type": "string",
+        "value": null,
+        "label": "Site URL",
+        "placeholder": "https://your-site.com — your WordPress site root, not the /wp-json path",
+        "required": true
+      },
+      {
+        "name": "username",
+        "type": "string",
+        "value": null,
+        "label": "Username",
+        "placeholder": "Your WordPress username",
+        "required": true
+      },
+      {
+        "name": "app_password",
+        "type": "secret",
+        "value": null,
+        "label": "Application Password",
+        "placeholder": "Users ▸ Profile ▸ Application Passwords (WP 5.6+)",
+        "required": true
+      },
+      {
+        "name": "allow_insecure",
+        "type": "boolean",
+        "value": null,
+        "label": "Allow Insecure SSL",
+        "placeholder": "Skip TLS verification — only for self-signed sites"
+      },
+      {
+        "name": "user_id",
+        "type": "string",
+        "value": null,
+        "label": "User ID",
+        "placeholder": "123",
+        "required": true
+      },
+      {
+        "name": "context",
+        "type": "string",
+        "value": null,
+        "label": "Context",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "View",
+            "value": "view"
+          },
+          {
+            "name": "Edit (more fields; needs edit rights)",
+            "value": "edit"
+          },
+          {
+            "name": "Embed",
+            "value": "embed"
+          }
+        ]
+      }
+    ],
+    "outputs": [
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "User ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "User",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "cms/wordpress/user_get_all": {
+    "hash": "67235f39f0e196bd1a681d4e302e6cca1bcdf97a6dbe293162f1ce5d2290196b",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "WordPress: Get Many Users",
+    "description": "List users from your WordPress site, with optional filters. Enable Return All to auto-paginate every matching user.",
+    "website": "https://www.flomation.co",
+    "icon": "wordpress+list",
+    "date": "05/07/2026",
+    "type": 2,
+    "category": {
+      "name": "CMS",
+      "icon": "newspaper",
+      "description": "Content management systems — publish and manage posts, pages, and media"
+    },
+    "sub_category": {
+      "name": "WordPress",
+      "icon": "wordpress",
+      "description": "Manage posts, pages, users, comments, categories, and tags on your WordPress site"
+    },
+    "inputs": [
+      {
+        "name": "url",
+        "type": "string",
+        "value": null,
+        "label": "Site URL",
+        "placeholder": "https://your-site.com — your WordPress site root, not the /wp-json path",
+        "required": true
+      },
+      {
+        "name": "username",
+        "type": "string",
+        "value": null,
+        "label": "Username",
+        "placeholder": "Your WordPress username",
+        "required": true
+      },
+      {
+        "name": "app_password",
+        "type": "secret",
+        "value": null,
+        "label": "Application Password",
+        "placeholder": "Users ▸ Profile ▸ Application Passwords (WP 5.6+)",
+        "required": true
+      },
+      {
+        "name": "allow_insecure",
+        "type": "boolean",
+        "value": null,
+        "label": "Allow Insecure SSL",
+        "placeholder": "Skip TLS verification — only for self-signed sites"
+      },
+      {
+        "name": "return_all",
+        "type": "boolean",
+        "value": null,
+        "label": "Return All (auto-paginate every match)",
+        "placeholder": ""
+      },
+      {
+        "name": "limit",
+        "type": "integer",
+        "value": null,
+        "label": "Limit (per page)",
+        "placeholder": "50 per page (max 100); Return All still fetches every match"
+      },
+      {
+        "name": "page",
+        "type": "integer",
+        "value": null,
+        "label": "Page",
+        "placeholder": "Page number to fetch (ignored when Return All is on)"
+      },
+      {
+        "name": "search",
+        "type": "string",
+        "value": null,
+        "label": "Search",
+        "placeholder": ""
+      },
+      {
+        "name": "roles",
+        "type": "string",
+        "value": null,
+        "label": "Roles",
+        "placeholder": "Comma-separated role slugs to filter"
+      },
+      {
+        "name": "who",
+        "type": "string",
+        "value": null,
+        "label": "Who",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "Any",
+            "value": ""
+          },
+          {
+            "name": "Authors Only",
+            "value": "authors"
+          }
+        ]
+      },
+      {
+        "name": "slug",
+        "type": "string",
+        "value": null,
+        "label": "Slug",
+        "placeholder": ""
+      },
+      {
+        "name": "order",
+        "type": "string",
+        "value": null,
+        "label": "Sort Order",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "Descending",
+            "value": "desc"
+          },
+          {
+            "name": "Ascending",
+            "value": "asc"
+          }
+        ]
+      },
+      {
+        "name": "orderby",
+        "type": "string",
+        "value": null,
+        "label": "Order By",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "Name",
+            "value": "name"
+          },
+          {
+            "name": "ID",
+            "value": "id"
+          },
+          {
+            "name": "Registered Date",
+            "value": "registered_date"
+          },
+          {
+            "name": "Slug",
+            "value": "slug"
+          },
+          {
+            "name": "Email",
+            "value": "email"
+          },
+          {
+            "name": "URL",
+            "value": "url"
+          }
+        ]
+      },
+      {
+        "name": "include",
+        "type": "string",
+        "value": null,
+        "label": "Include IDs",
+        "placeholder": "Comma-separated user IDs to include"
+      },
+      {
+        "name": "exclude",
+        "type": "string",
+        "value": null,
+        "label": "Exclude IDs",
+        "placeholder": "Comma-separated user IDs to exclude"
+      },
+      {
+        "name": "offset",
+        "type": "integer",
+        "value": null,
+        "label": "Offset",
+        "placeholder": "Skip this many results (ignored when Return All is on)"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "results",
+        "type": "object",
+        "value": null,
+        "label": "Users",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Count (this response)",
+        "placeholder": ""
+      },
+      {
+        "name": "total",
+        "type": "integer",
+        "value": null,
+        "label": "Total (site-wide match)",
+        "placeholder": ""
+      },
+      {
+        "name": "total_pages",
+        "type": "integer",
+        "value": null,
+        "label": "Total Pages",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "cms/wordpress/user_update": {
+    "hash": "444e7b3ddf8b686157cc11fd1db5fc125c6f8f3d50bda1e85b3e7c3efa553a48",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "WordPress: Update User",
+    "description": "Update an existing user on your WordPress site. Only the fields you set are changed; add any other user field via Additional Fields.",
+    "website": "https://www.flomation.co",
+    "icon": "wordpress+pen",
+    "date": "05/07/2026",
+    "type": 2,
+    "category": {
+      "name": "CMS",
+      "icon": "newspaper",
+      "description": "Content management systems — publish and manage posts, pages, and media"
+    },
+    "sub_category": {
+      "name": "WordPress",
+      "icon": "wordpress",
+      "description": "Manage posts, pages, users, comments, categories, and tags on your WordPress site"
+    },
+    "inputs": [
+      {
+        "name": "url",
+        "type": "string",
+        "value": null,
+        "label": "Site URL",
+        "placeholder": "https://your-site.com — your WordPress site root, not the /wp-json path",
+        "required": true
+      },
+      {
+        "name": "username",
+        "type": "string",
+        "value": null,
+        "label": "Username",
+        "placeholder": "Your WordPress username",
+        "required": true
+      },
+      {
+        "name": "app_password",
+        "type": "secret",
+        "value": null,
+        "label": "Application Password",
+        "placeholder": "Users ▸ Profile ▸ Application Passwords (WP 5.6+)",
+        "required": true
+      },
+      {
+        "name": "allow_insecure",
+        "type": "boolean",
+        "value": null,
+        "label": "Allow Insecure SSL",
+        "placeholder": "Skip TLS verification — only for self-signed sites"
+      },
+      {
+        "name": "user_id",
+        "type": "string",
+        "value": null,
+        "label": "User ID",
+        "placeholder": "123",
+        "required": true
+      },
+      {
+        "name": "name",
+        "type": "string",
+        "value": null,
+        "label": "Display Name",
+        "placeholder": ""
+      },
+      {
+        "name": "first_name",
+        "type": "string",
+        "value": null,
+        "label": "First Name",
+        "placeholder": ""
+      },
+      {
+        "name": "last_name",
+        "type": "string",
+        "value": null,
+        "label": "Last Name",
+        "placeholder": ""
+      },
+      {
+        "name": "email",
+        "type": "string",
+        "value": null,
+        "label": "Email",
+        "placeholder": "user@example.com"
+      },
+      {
+        "name": "user_url",
+        "type": "string",
+        "value": null,
+        "label": "Website URL",
+        "placeholder": "https://the-user-website.com"
+      },
+      {
+        "name": "description",
+        "type": "text",
+        "value": null,
+        "label": "Description",
+        "placeholder": "Biographical info shown on the profile"
+      },
+      {
+        "name": "nickname",
+        "type": "string",
+        "value": null,
+        "label": "Nickname",
+        "placeholder": ""
+      },
+      {
+        "name": "slug",
+        "type": "string",
+        "value": null,
+        "label": "Slug",
+        "placeholder": ""
+      },
+      {
+        "name": "password",
+        "type": "string",
+        "value": null,
+        "label": "Password",
+        "placeholder": "Set a new account password (leave blank to keep the current one)"
+      },
+      {
+        "name": "roles",
+        "type": "string",
+        "value": null,
+        "label": "Roles",
+        "placeholder": "Comma-separated role slugs, e.g. author,editor (replaces the set)"
+      },
+      {
+        "name": "meta",
+        "type": "object",
+        "value": null,
+        "label": "Meta (JSON)",
+        "placeholder": "{\"my_key\":\"my_value\"}"
+      },
+      {
+        "name": "additional_fields",
+        "type": "object",
+        "value": null,
+        "label": "Additional Fields (JSON)",
+        "placeholder": ""
+      }
+    ],
+    "outputs": [
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "User ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "User",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
   "common/array_find": {
     "hash": "92fdc9218159d4a3a8f0864ee2cff581c29db25aa425170d7d22b5f936529cd4",
     "author": "Andy Esser",

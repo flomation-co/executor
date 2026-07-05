@@ -48,6 +48,36 @@ import (
 	aws_s3_get "flomation.app/automate/executor/actions/aws/s3/get"
 	aws_s3_list "flomation.app/automate/executor/actions/aws/s3/list"
 	aws_s3_put "flomation.app/automate/executor/actions/aws/s3/put"
+	cms_wordpress_category_create "flomation.app/automate/executor/actions/cms/wordpress/category_create"
+	cms_wordpress_category_delete "flomation.app/automate/executor/actions/cms/wordpress/category_delete"
+	cms_wordpress_category_get "flomation.app/automate/executor/actions/cms/wordpress/category_get"
+	cms_wordpress_category_get_all "flomation.app/automate/executor/actions/cms/wordpress/category_get_all"
+	cms_wordpress_category_update "flomation.app/automate/executor/actions/cms/wordpress/category_update"
+	cms_wordpress_comment_create "flomation.app/automate/executor/actions/cms/wordpress/comment_create"
+	cms_wordpress_comment_delete "flomation.app/automate/executor/actions/cms/wordpress/comment_delete"
+	cms_wordpress_comment_get "flomation.app/automate/executor/actions/cms/wordpress/comment_get"
+	cms_wordpress_comment_get_all "flomation.app/automate/executor/actions/cms/wordpress/comment_get_all"
+	cms_wordpress_comment_update "flomation.app/automate/executor/actions/cms/wordpress/comment_update"
+	cms_wordpress_page_create "flomation.app/automate/executor/actions/cms/wordpress/page_create"
+	cms_wordpress_page_delete "flomation.app/automate/executor/actions/cms/wordpress/page_delete"
+	cms_wordpress_page_get "flomation.app/automate/executor/actions/cms/wordpress/page_get"
+	cms_wordpress_page_get_all "flomation.app/automate/executor/actions/cms/wordpress/page_get_all"
+	cms_wordpress_page_update "flomation.app/automate/executor/actions/cms/wordpress/page_update"
+	cms_wordpress_post_create "flomation.app/automate/executor/actions/cms/wordpress/post_create"
+	cms_wordpress_post_delete "flomation.app/automate/executor/actions/cms/wordpress/post_delete"
+	cms_wordpress_post_get "flomation.app/automate/executor/actions/cms/wordpress/post_get"
+	cms_wordpress_post_get_all "flomation.app/automate/executor/actions/cms/wordpress/post_get_all"
+	cms_wordpress_post_update "flomation.app/automate/executor/actions/cms/wordpress/post_update"
+	cms_wordpress_tag_create "flomation.app/automate/executor/actions/cms/wordpress/tag_create"
+	cms_wordpress_tag_delete "flomation.app/automate/executor/actions/cms/wordpress/tag_delete"
+	cms_wordpress_tag_get "flomation.app/automate/executor/actions/cms/wordpress/tag_get"
+	cms_wordpress_tag_get_all "flomation.app/automate/executor/actions/cms/wordpress/tag_get_all"
+	cms_wordpress_tag_update "flomation.app/automate/executor/actions/cms/wordpress/tag_update"
+	cms_wordpress_user_create "flomation.app/automate/executor/actions/cms/wordpress/user_create"
+	cms_wordpress_user_delete "flomation.app/automate/executor/actions/cms/wordpress/user_delete"
+	cms_wordpress_user_get "flomation.app/automate/executor/actions/cms/wordpress/user_get"
+	cms_wordpress_user_get_all "flomation.app/automate/executor/actions/cms/wordpress/user_get_all"
+	cms_wordpress_user_update "flomation.app/automate/executor/actions/cms/wordpress/user_update"
 	common_array_find "flomation.app/automate/executor/actions/common/array_find"
 	common_array_index "flomation.app/automate/executor/actions/common/array_index"
 	common_array_length "flomation.app/automate/executor/actions/common/array_length"
@@ -727,6 +757,36 @@ var Actions = map[string]core.Action{
 	"aws/s3/get":                                        aws_s3_get.Execute,
 	"aws/s3/list":                                       aws_s3_list.Execute,
 	"aws/s3/put":                                        aws_s3_put.Execute,
+	"cms/wordpress/category_create":                     cms_wordpress_category_create.Execute,
+	"cms/wordpress/category_delete":                     cms_wordpress_category_delete.Execute,
+	"cms/wordpress/category_get":                        cms_wordpress_category_get.Execute,
+	"cms/wordpress/category_get_all":                    cms_wordpress_category_get_all.Execute,
+	"cms/wordpress/category_update":                     cms_wordpress_category_update.Execute,
+	"cms/wordpress/comment_create":                      cms_wordpress_comment_create.Execute,
+	"cms/wordpress/comment_delete":                      cms_wordpress_comment_delete.Execute,
+	"cms/wordpress/comment_get":                         cms_wordpress_comment_get.Execute,
+	"cms/wordpress/comment_get_all":                     cms_wordpress_comment_get_all.Execute,
+	"cms/wordpress/comment_update":                      cms_wordpress_comment_update.Execute,
+	"cms/wordpress/page_create":                         cms_wordpress_page_create.Execute,
+	"cms/wordpress/page_delete":                         cms_wordpress_page_delete.Execute,
+	"cms/wordpress/page_get":                            cms_wordpress_page_get.Execute,
+	"cms/wordpress/page_get_all":                        cms_wordpress_page_get_all.Execute,
+	"cms/wordpress/page_update":                         cms_wordpress_page_update.Execute,
+	"cms/wordpress/post_create":                         cms_wordpress_post_create.Execute,
+	"cms/wordpress/post_delete":                         cms_wordpress_post_delete.Execute,
+	"cms/wordpress/post_get":                            cms_wordpress_post_get.Execute,
+	"cms/wordpress/post_get_all":                        cms_wordpress_post_get_all.Execute,
+	"cms/wordpress/post_update":                         cms_wordpress_post_update.Execute,
+	"cms/wordpress/tag_create":                          cms_wordpress_tag_create.Execute,
+	"cms/wordpress/tag_delete":                          cms_wordpress_tag_delete.Execute,
+	"cms/wordpress/tag_get":                             cms_wordpress_tag_get.Execute,
+	"cms/wordpress/tag_get_all":                         cms_wordpress_tag_get_all.Execute,
+	"cms/wordpress/tag_update":                          cms_wordpress_tag_update.Execute,
+	"cms/wordpress/user_create":                         cms_wordpress_user_create.Execute,
+	"cms/wordpress/user_delete":                         cms_wordpress_user_delete.Execute,
+	"cms/wordpress/user_get":                            cms_wordpress_user_get.Execute,
+	"cms/wordpress/user_get_all":                        cms_wordpress_user_get_all.Execute,
+	"cms/wordpress/user_update":                         cms_wordpress_user_update.Execute,
 	"common/array_find":                                 common_array_find.Execute,
 	"common/array_index":                                common_array_index.Execute,
 	"common/array_length":                               common_array_length.Execute,
