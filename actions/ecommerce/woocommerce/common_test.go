@@ -299,6 +299,32 @@ func TestSetIntListIfPresent(t *testing.T) {
 	Expect(ok).To(BeFalse())
 }
 
+func TestRedactAuth(t *testing.T) {
+	RegisterTestingT(t)
+	a := Auth{ConsumerKey: "ck_abc123", ConsumerSecret: "cs_def456", InQuery: true}
+	// Simulates a url.Error string in credentials-in-query mode.
+	msg := `Get "https://store.com/wp-json/wc/v3/orders?consumer_key=ck_abc123&consumer_secret=cs_def456": dial tcp: timeout`
+	out := redactAuth(a, msg)
+	Expect(out).To(Not(ContainSubstring("ck_abc123")))
+	Expect(out).To(Not(ContainSubstring("cs_def456")))
+	Expect(out).To(ContainSubstring("REDACTED"))
+	// Empty creds → no-op, no panic.
+	Expect(redactAuth(Auth{}, "plain error")).To(Equal("plain error"))
+}
+
+func TestExecuteAPIErrorDoesNotLeakQueryCreds(t *testing.T) {
+	RegisterTestingT(t)
+	// Point at an unroutable address so httpClient.Do returns a *url.Error whose
+	// string contains the request URL (with the query credentials).
+	restore := SetBaseForTest("http://127.0.0.1:0")
+	defer restore()
+	a := Auth{ConsumerKey: "ck_secretkey", ConsumerSecret: "cs_secretval", InQuery: true}
+	_, err := ExecuteAPI(a, http.MethodGet, "/orders", nil)
+	Expect(err).To(HaveOccurred())
+	Expect(err.Error()).To(Not(ContainSubstring("ck_secretkey")))
+	Expect(err.Error()).To(Not(ContainSubstring("cs_secretval")))
+}
+
 func TestClampLimit(t *testing.T) {
 	RegisterTestingT(t)
 	Expect(ClampLimit(0, false)).To(Equal(DefaultPageLimit))

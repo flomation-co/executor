@@ -251,7 +251,10 @@ func ExecuteAPI(a Auth, method, path string, body interface{}) (*APIResponse, er
 
 	req, err := http.NewRequest(method, fullURL, bodyReader)
 	if err != nil {
-		return nil, fmt.Errorf("failed to create request: %w", err)
+		// In credentials-in-query mode fullURL carries the key pair, and a
+		// url.Error echoes it — scrub before returning (this error becomes a
+		// node's visible/persisted output via ErrorResult).
+		return nil, fmt.Errorf("failed to create request: %s", redactAuth(a, err.Error()))
 	}
 
 	if !a.InQuery {
@@ -264,7 +267,9 @@ func ExecuteAPI(a Auth, method, path string, body interface{}) (*APIResponse, er
 
 	resp, err := httpClient.Do(req)
 	if err != nil {
-		return nil, fmt.Errorf("WooCommerce API request failed: %w", err)
+		// The transport's *url.Error includes the request URL — which in
+		// credentials-in-query mode holds the consumer key/secret. Scrub them.
+		return nil, fmt.Errorf("WooCommerce API request failed: %s", redactAuth(a, err.Error()))
 	}
 	defer func() { _ = resp.Body.Close() }()
 
@@ -274,6 +279,23 @@ func ExecuteAPI(a Auth, method, path string, body interface{}) (*APIResponse, er
 	}
 
 	return &APIResponse{StatusCode: resp.StatusCode, Body: respBody, Headers: resp.Header}, nil
+}
+
+// redactAuth removes the consumer key/secret from an error message. In
+// credentials-in-query mode they are carried in the request URL, which the
+// net/http transport echoes into its errors — and those errors surface in a
+// node's user-visible/persisted output via ErrorResult. Both the raw and the
+// URL-query-escaped forms are scrubbed. A no-op when the values aren't present
+// (Basic-auth mode keeps them out of the URL entirely).
+func redactAuth(a Auth, msg string) string {
+	for _, s := range []string{a.ConsumerSecret, a.ConsumerKey} {
+		if s == "" {
+			continue
+		}
+		msg = strings.ReplaceAll(msg, url.QueryEscape(s), "REDACTED")
+		msg = strings.ReplaceAll(msg, s, "REDACTED")
+	}
+	return msg
 }
 
 // CheckResponse verifies a 2xx status, decoding WooCommerce's error envelope

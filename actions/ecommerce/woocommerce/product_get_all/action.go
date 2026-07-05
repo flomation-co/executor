@@ -98,7 +98,7 @@ var Inputs = [...]core.Connection{
 	},
 	{Name: "include", Type: core.ConnectionTypeString, Label: "Include IDs", Placeholder: "Comma-separated product IDs to include"},
 	{Name: "exclude", Type: core.ConnectionTypeString, Label: "Exclude IDs", Placeholder: "Comma-separated product IDs to exclude"},
-	{Name: "offset", Type: core.ConnectionTypeInteger, Label: "Offset", Placeholder: "Skip this many results"},
+	{Name: "offset", Type: core.ConnectionTypeInteger, Label: "Offset", Placeholder: "Skip this many results (ignored when Return All is on)"},
 }
 
 var Outputs = [...]core.Connection{
@@ -147,7 +147,10 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	if woocommerce.OptionalBool("on_sale", inputs) {
 		q.Set("on_sale", "true")
 	}
-	if offset, ok := woocommerce.OptionalInt("offset", inputs); ok {
+	// Offset is a single-page positioning param; WooCommerce lets it override the
+	// page cursor, so applying it during a Return All run would refetch the same
+	// window every page (duplicated results). Only honour it for a single page.
+	if offset, ok := woocommerce.OptionalInt("offset", inputs); ok && !returnAll {
 		q.Set("offset", strconv.Itoa(offset))
 	}
 
