@@ -36760,6 +36760,2749 @@
       }
     ]
   },
+  "jira/attachment_add": {
+    "hash": "ac291284c6423b69e3534b516a8de6ca0f75df998db52c63aec25851253a6098",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Add Attachment",
+    "description": "Attach a file to a Jira issue. Provide the issue key, a file name (e.g. report.pdf) and the file's bytes as base64 — Flomation uploads it to the issue. Returns the created attachment's details.",
+    "website": "https://www.flomation.co",
+    "icon": "jira+paperclip",
+    "date": "06/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Jira",
+      "icon": "jira",
+      "description": "Create and manage issues, comments, attachments, worklogs, and users in Jira"
+    },
+    "inputs": [
+      {
+        "name": "url",
+        "type": "string",
+        "value": null,
+        "label": "Site URL",
+        "placeholder": "https://your-domain.atlassian.net",
+        "required": true
+      },
+      {
+        "name": "email",
+        "type": "string",
+        "value": null,
+        "label": "Account Email",
+        "placeholder": "The Atlassian account email that owns the API token",
+        "required": true
+      },
+      {
+        "name": "api_token",
+        "type": "secret",
+        "value": null,
+        "label": "API Token",
+        "placeholder": "id.atlassian.com ▸ Security ▸ Create and manage API tokens",
+        "required": true
+      },
+      {
+        "name": "issue_key",
+        "type": "string",
+        "value": null,
+        "label": "Issue Key",
+        "placeholder": "The issue to attach the file to, e.g. SCRUM-1",
+        "required": true
+      },
+      {
+        "name": "file_name",
+        "type": "string",
+        "value": null,
+        "label": "File Name",
+        "placeholder": "The name to store the file under, e.g. report.pdf",
+        "required": true
+      },
+      {
+        "name": "base64_content",
+        "type": "string",
+        "value": null,
+        "label": "File Content (base64)",
+        "placeholder": "The file's bytes, base64-encoded",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Attachment ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Attachment",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "jira/attachment_get": {
+    "hash": "eac3d513a2a3a20d3c817003f92463cfb1cbd0744094a4555366ad716d362cc7",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Get Attachment",
+    "description": "Fetch a Jira attachment's details by its ID. Optionally download the file itself — when Download File is on, the file's bytes are returned base64-encoded on the File Content output.",
+    "website": "https://www.flomation.co",
+    "icon": "jira+paperclip",
+    "date": "06/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Jira",
+      "icon": "jira",
+      "description": "Create and manage issues, comments, attachments, worklogs, and users in Jira"
+    },
+    "inputs": [
+      {
+        "name": "url",
+        "type": "string",
+        "value": null,
+        "label": "Site URL",
+        "placeholder": "https://your-domain.atlassian.net",
+        "required": true
+      },
+      {
+        "name": "email",
+        "type": "string",
+        "value": null,
+        "label": "Account Email",
+        "placeholder": "The Atlassian account email that owns the API token",
+        "required": true
+      },
+      {
+        "name": "api_token",
+        "type": "secret",
+        "value": null,
+        "label": "API Token",
+        "placeholder": "id.atlassian.com ▸ Security ▸ Create and manage API tokens",
+        "required": true
+      },
+      {
+        "name": "attachment_id",
+        "type": "string",
+        "value": null,
+        "label": "Attachment ID",
+        "placeholder": "The attachment's numeric ID, e.g. 10001",
+        "required": true
+      },
+      {
+        "name": "download",
+        "type": "boolean",
+        "value": null,
+        "label": "Download File",
+        "placeholder": "Also download the file's bytes (returned base64-encoded)"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Attachment ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Attachment",
+        "placeholder": ""
+      },
+      {
+        "name": "base64_content",
+        "type": "string",
+        "value": null,
+        "label": "File Content (base64)",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "jira/attachment_get_all": {
+    "hash": "9c35bdb9e449ec35167f3fae67b4a4188e86e8b7ed47c13438ecbe06265756b7",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Get Many Attachments",
+    "description": "List every attachment on a Jira issue. Provide the issue key; the attachments are read from the issue itself. Turn on Return All to get them all, or set a Limit to cap how many are returned.",
+    "website": "https://www.flomation.co",
+    "icon": "jira+paperclip",
+    "date": "06/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Jira",
+      "icon": "jira",
+      "description": "Create and manage issues, comments, attachments, worklogs, and users in Jira"
+    },
+    "inputs": [
+      {
+        "name": "url",
+        "type": "string",
+        "value": null,
+        "label": "Site URL",
+        "placeholder": "https://your-domain.atlassian.net",
+        "required": true
+      },
+      {
+        "name": "email",
+        "type": "string",
+        "value": null,
+        "label": "Account Email",
+        "placeholder": "The Atlassian account email that owns the API token",
+        "required": true
+      },
+      {
+        "name": "api_token",
+        "type": "secret",
+        "value": null,
+        "label": "API Token",
+        "placeholder": "id.atlassian.com ▸ Security ▸ Create and manage API tokens",
+        "required": true
+      },
+      {
+        "name": "issue_key",
+        "type": "string",
+        "value": null,
+        "label": "Issue Key",
+        "placeholder": "The issue to read attachments from, e.g. SCRUM-1",
+        "required": true
+      },
+      {
+        "name": "return_all",
+        "type": "boolean",
+        "value": null,
+        "label": "Return All",
+        "placeholder": "Return every attachment on the issue"
+      },
+      {
+        "name": "limit",
+        "type": "integer",
+        "value": null,
+        "label": "Limit",
+        "placeholder": "Maximum number to return when Return All is off"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "results",
+        "type": "object",
+        "value": null,
+        "label": "Attachments",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Count",
+        "placeholder": ""
+      },
+      {
+        "name": "total",
+        "type": "integer",
+        "value": null,
+        "label": "Total",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "jira/attachment_remove": {
+    "hash": "8b010b3eff0ab4636776d6625a583922ab3407cf0bfe1d90f0ca00797ec88fae",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Delete Attachment",
+    "description": "Permanently delete a Jira attachment by its ID. This removes the file from its issue and cannot be undone.",
+    "website": "https://www.flomation.co",
+    "icon": "jira+trash",
+    "date": "06/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Jira",
+      "icon": "jira",
+      "description": "Create and manage issues, comments, attachments, worklogs, and users in Jira"
+    },
+    "inputs": [
+      {
+        "name": "url",
+        "type": "string",
+        "value": null,
+        "label": "Site URL",
+        "placeholder": "https://your-domain.atlassian.net",
+        "required": true
+      },
+      {
+        "name": "email",
+        "type": "string",
+        "value": null,
+        "label": "Account Email",
+        "placeholder": "The Atlassian account email that owns the API token",
+        "required": true
+      },
+      {
+        "name": "api_token",
+        "type": "secret",
+        "value": null,
+        "label": "API Token",
+        "placeholder": "id.atlassian.com ▸ Security ▸ Create and manage API tokens",
+        "required": true
+      },
+      {
+        "name": "attachment_id",
+        "type": "string",
+        "value": null,
+        "label": "Attachment ID",
+        "placeholder": "The attachment's numeric ID, e.g. 10001",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Attachment ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Result",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "jira/comment_add": {
+    "hash": "31145be0f43e521b451345896b3e163ffefacfdf07621eb87d773e0ba712bc91",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Add Comment",
+    "description": "Add a comment to a Jira issue. Enter the issue key (e.g. SCRUM-1) and the comment text — it is posted as a plain-text comment on the issue.",
+    "website": "https://www.flomation.co",
+    "icon": "jira+comment",
+    "date": "06/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Jira",
+      "icon": "jira",
+      "description": "Create and manage issues, comments, attachments, worklogs, and users in Jira"
+    },
+    "inputs": [
+      {
+        "name": "url",
+        "type": "string",
+        "value": null,
+        "label": "Site URL",
+        "placeholder": "https://your-domain.atlassian.net",
+        "required": true
+      },
+      {
+        "name": "email",
+        "type": "string",
+        "value": null,
+        "label": "Account Email",
+        "placeholder": "The Atlassian account email that owns the API token",
+        "required": true
+      },
+      {
+        "name": "api_token",
+        "type": "secret",
+        "value": null,
+        "label": "API Token",
+        "placeholder": "id.atlassian.com ▸ Security ▸ Create and manage API tokens",
+        "required": true
+      },
+      {
+        "name": "issue_key",
+        "type": "string",
+        "value": null,
+        "label": "Issue Key",
+        "placeholder": "The issue to comment on, e.g. SCRUM-1",
+        "required": true
+      },
+      {
+        "name": "body",
+        "type": "text",
+        "value": null,
+        "label": "Comment",
+        "placeholder": "The comment text (plain text)",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Comment ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Comment",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "jira/comment_get": {
+    "hash": "8874f5882c5916ef9d058af8f5f4da7b97f5f79a766f764f056d44d1425a24e7",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Get Comment",
+    "description": "Fetch a single comment from a Jira issue by its ID. Enter the issue key (e.g. SCRUM-1) and the comment ID to return the full comment.",
+    "website": "https://www.flomation.co",
+    "icon": "jira+comment",
+    "date": "06/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Jira",
+      "icon": "jira",
+      "description": "Create and manage issues, comments, attachments, worklogs, and users in Jira"
+    },
+    "inputs": [
+      {
+        "name": "url",
+        "type": "string",
+        "value": null,
+        "label": "Site URL",
+        "placeholder": "https://your-domain.atlassian.net",
+        "required": true
+      },
+      {
+        "name": "email",
+        "type": "string",
+        "value": null,
+        "label": "Account Email",
+        "placeholder": "The Atlassian account email that owns the API token",
+        "required": true
+      },
+      {
+        "name": "api_token",
+        "type": "secret",
+        "value": null,
+        "label": "API Token",
+        "placeholder": "id.atlassian.com ▸ Security ▸ Create and manage API tokens",
+        "required": true
+      },
+      {
+        "name": "issue_key",
+        "type": "string",
+        "value": null,
+        "label": "Issue Key",
+        "placeholder": "The issue the comment belongs to, e.g. SCRUM-1",
+        "required": true
+      },
+      {
+        "name": "comment_id",
+        "type": "string",
+        "value": null,
+        "label": "Comment ID",
+        "placeholder": "The ID of the comment to fetch",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Comment ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Comment",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "jira/comment_get_all": {
+    "hash": "114ed8d393857e2b78f2139aff6c813e2b368fb9b004bd736d9ca076ffd5cae1",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Get Many Comments",
+    "description": "List the comments on a Jira issue. Enter the issue key (e.g. SCRUM-1) and either return everything or cap the number returned. Optionally order by newest or oldest first.",
+    "website": "https://www.flomation.co",
+    "icon": "jira+comments",
+    "date": "06/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Jira",
+      "icon": "jira",
+      "description": "Create and manage issues, comments, attachments, worklogs, and users in Jira"
+    },
+    "inputs": [
+      {
+        "name": "url",
+        "type": "string",
+        "value": null,
+        "label": "Site URL",
+        "placeholder": "https://your-domain.atlassian.net",
+        "required": true
+      },
+      {
+        "name": "email",
+        "type": "string",
+        "value": null,
+        "label": "Account Email",
+        "placeholder": "The Atlassian account email that owns the API token",
+        "required": true
+      },
+      {
+        "name": "api_token",
+        "type": "secret",
+        "value": null,
+        "label": "API Token",
+        "placeholder": "id.atlassian.com ▸ Security ▸ Create and manage API tokens",
+        "required": true
+      },
+      {
+        "name": "issue_key",
+        "type": "string",
+        "value": null,
+        "label": "Issue Key",
+        "placeholder": "The issue to list comments for, e.g. SCRUM-1",
+        "required": true
+      },
+      {
+        "name": "return_all",
+        "type": "boolean",
+        "value": null,
+        "label": "Return All",
+        "placeholder": "Return every comment (ignores Limit)"
+      },
+      {
+        "name": "limit",
+        "type": "integer",
+        "value": null,
+        "label": "Limit",
+        "placeholder": "Maximum number of comments to return (1-100)"
+      },
+      {
+        "name": "order_by",
+        "type": "string",
+        "value": null,
+        "label": "Order By",
+        "placeholder": "Sort order for the comments",
+        "options": [
+          {
+            "name": "Newest first",
+            "value": "-created"
+          },
+          {
+            "name": "Oldest first",
+            "value": "created"
+          }
+        ]
+      }
+    ],
+    "outputs": [
+      {
+        "name": "results",
+        "type": "object",
+        "value": null,
+        "label": "Comments",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Count",
+        "placeholder": ""
+      },
+      {
+        "name": "total",
+        "type": "integer",
+        "value": null,
+        "label": "Total",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "jira/comment_remove": {
+    "hash": "37e6e312efaa4137c4b7c9ddebf2fa1c8363b94170d00aedf04e18037cf6ea22",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Delete Comment",
+    "description": "Permanently delete a comment from a Jira issue. Enter the issue key (e.g. SCRUM-1) and the comment ID to remove. This cannot be undone.",
+    "website": "https://www.flomation.co",
+    "icon": "jira+trash",
+    "date": "06/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Jira",
+      "icon": "jira",
+      "description": "Create and manage issues, comments, attachments, worklogs, and users in Jira"
+    },
+    "inputs": [
+      {
+        "name": "url",
+        "type": "string",
+        "value": null,
+        "label": "Site URL",
+        "placeholder": "https://your-domain.atlassian.net",
+        "required": true
+      },
+      {
+        "name": "email",
+        "type": "string",
+        "value": null,
+        "label": "Account Email",
+        "placeholder": "The Atlassian account email that owns the API token",
+        "required": true
+      },
+      {
+        "name": "api_token",
+        "type": "secret",
+        "value": null,
+        "label": "API Token",
+        "placeholder": "id.atlassian.com ▸ Security ▸ Create and manage API tokens",
+        "required": true
+      },
+      {
+        "name": "issue_key",
+        "type": "string",
+        "value": null,
+        "label": "Issue Key",
+        "placeholder": "The issue the comment belongs to, e.g. SCRUM-1",
+        "required": true
+      },
+      {
+        "name": "comment_id",
+        "type": "string",
+        "value": null,
+        "label": "Comment ID",
+        "placeholder": "The ID of the comment to delete",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Comment ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Result",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "jira/comment_update": {
+    "hash": "54a9a7619b8375fcb2af320785ebbe2f69bbe5c71cf244767437ba2d21938f40",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Update Comment",
+    "description": "Change the text of an existing comment on a Jira issue. Enter the issue key (e.g. SCRUM-1), the comment ID, and the new comment text.",
+    "website": "https://www.flomation.co",
+    "icon": "jira+pen",
+    "date": "06/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Jira",
+      "icon": "jira",
+      "description": "Create and manage issues, comments, attachments, worklogs, and users in Jira"
+    },
+    "inputs": [
+      {
+        "name": "url",
+        "type": "string",
+        "value": null,
+        "label": "Site URL",
+        "placeholder": "https://your-domain.atlassian.net",
+        "required": true
+      },
+      {
+        "name": "email",
+        "type": "string",
+        "value": null,
+        "label": "Account Email",
+        "placeholder": "The Atlassian account email that owns the API token",
+        "required": true
+      },
+      {
+        "name": "api_token",
+        "type": "secret",
+        "value": null,
+        "label": "API Token",
+        "placeholder": "id.atlassian.com ▸ Security ▸ Create and manage API tokens",
+        "required": true
+      },
+      {
+        "name": "issue_key",
+        "type": "string",
+        "value": null,
+        "label": "Issue Key",
+        "placeholder": "The issue the comment belongs to, e.g. SCRUM-1",
+        "required": true
+      },
+      {
+        "name": "comment_id",
+        "type": "string",
+        "value": null,
+        "label": "Comment ID",
+        "placeholder": "The ID of the comment to update",
+        "required": true
+      },
+      {
+        "name": "body",
+        "type": "text",
+        "value": null,
+        "label": "Comment",
+        "placeholder": "The new comment text (plain text)",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Comment ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Comment",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "jira/issue_changelog": {
+    "hash": "77edb9ebaf090c7c61b1b19ccebab6c335591e3d7ee23bb122322fb28dcb0799",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Get Issue Changelog",
+    "description": "Retrieve the full change history of a Jira issue — every field edit, status move and assignment, in order. Return all history entries, or cap them to a limit.",
+    "website": "https://www.flomation.co",
+    "icon": "jira+clock-rotate-left",
+    "date": "06/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Jira",
+      "icon": "jira",
+      "description": "Create and manage issues, comments, attachments, worklogs, and users in Jira"
+    },
+    "inputs": [
+      {
+        "name": "url",
+        "type": "string",
+        "value": null,
+        "label": "Site URL",
+        "placeholder": "https://your-domain.atlassian.net",
+        "required": true
+      },
+      {
+        "name": "email",
+        "type": "string",
+        "value": null,
+        "label": "Account Email",
+        "placeholder": "The Atlassian account email that owns the API token",
+        "required": true
+      },
+      {
+        "name": "api_token",
+        "type": "secret",
+        "value": null,
+        "label": "API Token",
+        "placeholder": "id.atlassian.com ▸ Security ▸ Create and manage API tokens",
+        "required": true
+      },
+      {
+        "name": "issue_key",
+        "type": "string",
+        "value": null,
+        "label": "Issue Key",
+        "placeholder": "The issue key, e.g. SCRUM-1",
+        "required": true
+      },
+      {
+        "name": "return_all",
+        "type": "boolean",
+        "value": null,
+        "label": "Return All",
+        "placeholder": "Fetch every history entry"
+      },
+      {
+        "name": "limit",
+        "type": "integer",
+        "value": null,
+        "label": "Limit",
+        "placeholder": "Maximum entries to return when not returning all"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "results",
+        "type": "object",
+        "value": null,
+        "label": "Changelog Entries",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Count",
+        "placeholder": ""
+      },
+      {
+        "name": "total",
+        "type": "integer",
+        "value": null,
+        "label": "Total",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "jira/issue_create": {
+    "hash": "5cd95f7fda135d22a536912b530bdd2d9a76f244c7a464f0ac3e0ed9adbc896b",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Create Issue",
+    "description": "Create a Jira issue. Pick the project and issue type, set a summary and description, and optionally assign it, set a priority, add labels or link a parent (for subtasks). Any other field can be set via Custom Fields or Additional Fields.",
+    "website": "https://www.flomation.co",
+    "icon": "jira+plus",
+    "date": "06/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Jira",
+      "icon": "jira",
+      "description": "Create and manage issues, comments, attachments, worklogs, and users in Jira"
+    },
+    "inputs": [
+      {
+        "name": "url",
+        "type": "string",
+        "value": null,
+        "label": "Site URL",
+        "placeholder": "https://your-domain.atlassian.net",
+        "required": true
+      },
+      {
+        "name": "email",
+        "type": "string",
+        "value": null,
+        "label": "Account Email",
+        "placeholder": "The Atlassian account email that owns the API token",
+        "required": true
+      },
+      {
+        "name": "api_token",
+        "type": "secret",
+        "value": null,
+        "label": "API Token",
+        "placeholder": "id.atlassian.com ▸ Security ▸ Create and manage API tokens",
+        "required": true
+      },
+      {
+        "name": "project",
+        "type": "string",
+        "value": null,
+        "label": "Project",
+        "placeholder": "Choose a project",
+        "required": true
+      },
+      {
+        "name": "issue_type",
+        "type": "string",
+        "value": null,
+        "label": "Issue Type",
+        "placeholder": "Choose an issue type",
+        "required": true
+      },
+      {
+        "name": "summary",
+        "type": "string",
+        "value": null,
+        "label": "Summary",
+        "placeholder": "A short one-line title for the issue",
+        "required": true
+      },
+      {
+        "name": "description",
+        "type": "text",
+        "value": null,
+        "label": "Description",
+        "placeholder": "The issue description (plain text)"
+      },
+      {
+        "name": "priority",
+        "type": "string",
+        "value": null,
+        "label": "Priority",
+        "placeholder": "Choose a priority"
+      },
+      {
+        "name": "assignee",
+        "type": "string",
+        "value": null,
+        "label": "Assignee",
+        "placeholder": "Choose a user to assign"
+      },
+      {
+        "name": "reporter",
+        "type": "string",
+        "value": null,
+        "label": "Reporter",
+        "placeholder": "Choose the reporting user (defaults to you)"
+      },
+      {
+        "name": "labels",
+        "type": "string",
+        "value": null,
+        "label": "Labels",
+        "placeholder": "Comma-separated labels, e.g. backend,urgent"
+      },
+      {
+        "name": "components",
+        "type": "string",
+        "value": null,
+        "label": "Component IDs",
+        "placeholder": "Comma-separated component IDs"
+      },
+      {
+        "name": "parent_key",
+        "type": "string",
+        "value": null,
+        "label": "Parent Issue Key",
+        "placeholder": "Required for a subtask — the parent issue key, e.g. SCRUM-12"
+      },
+      {
+        "name": "due_date",
+        "type": "string",
+        "value": null,
+        "label": "Due Date",
+        "placeholder": "YYYY-MM-DD"
+      },
+      {
+        "name": "custom_fields",
+        "type": "object",
+        "value": null,
+        "label": "Custom Fields (JSON)",
+        "placeholder": "{\"customfield_10011\":\"value\"}"
+      },
+      {
+        "name": "additional_fields",
+        "type": "object",
+        "value": null,
+        "label": "Additional Fields (JSON)",
+        "placeholder": "{\"environment\":\"production\"}"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Issue Key",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Issue",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "jira/issue_delete": {
+    "hash": "d37f05bb55d2341965eecca333f26966e8db3da1257b62a490a6d5d23486ad09",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Delete Issue",
+    "description": "Permanently delete a Jira issue by its key. Optionally delete the issue's subtasks along with it. This cannot be undone.",
+    "website": "https://www.flomation.co",
+    "icon": "jira+trash",
+    "date": "06/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Jira",
+      "icon": "jira",
+      "description": "Create and manage issues, comments, attachments, worklogs, and users in Jira"
+    },
+    "inputs": [
+      {
+        "name": "url",
+        "type": "string",
+        "value": null,
+        "label": "Site URL",
+        "placeholder": "https://your-domain.atlassian.net",
+        "required": true
+      },
+      {
+        "name": "email",
+        "type": "string",
+        "value": null,
+        "label": "Account Email",
+        "placeholder": "The Atlassian account email that owns the API token",
+        "required": true
+      },
+      {
+        "name": "api_token",
+        "type": "secret",
+        "value": null,
+        "label": "API Token",
+        "placeholder": "id.atlassian.com ▸ Security ▸ Create and manage API tokens",
+        "required": true
+      },
+      {
+        "name": "issue_key",
+        "type": "string",
+        "value": null,
+        "label": "Issue Key",
+        "placeholder": "The issue key to delete, e.g. SCRUM-1",
+        "required": true
+      },
+      {
+        "name": "delete_subtasks",
+        "type": "boolean",
+        "value": null,
+        "label": "Delete Subtasks",
+        "placeholder": "Also delete the issue's subtasks"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Issue Key",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Result",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "jira/issue_get": {
+    "hash": "bd57c764f36fcb12d9a4f3c4671c51f41ff073a51193983dce7811cb9901ef63",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Get Issue",
+    "description": "Fetch a single Jira issue by its key. Optionally narrow the returned data to specific fields, or expand extra sections such as the changelog or rendered fields.",
+    "website": "https://www.flomation.co",
+    "icon": "jira",
+    "date": "06/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Jira",
+      "icon": "jira",
+      "description": "Create and manage issues, comments, attachments, worklogs, and users in Jira"
+    },
+    "inputs": [
+      {
+        "name": "url",
+        "type": "string",
+        "value": null,
+        "label": "Site URL",
+        "placeholder": "https://your-domain.atlassian.net",
+        "required": true
+      },
+      {
+        "name": "email",
+        "type": "string",
+        "value": null,
+        "label": "Account Email",
+        "placeholder": "The Atlassian account email that owns the API token",
+        "required": true
+      },
+      {
+        "name": "api_token",
+        "type": "secret",
+        "value": null,
+        "label": "API Token",
+        "placeholder": "id.atlassian.com ▸ Security ▸ Create and manage API tokens",
+        "required": true
+      },
+      {
+        "name": "issue_key",
+        "type": "string",
+        "value": null,
+        "label": "Issue Key",
+        "placeholder": "The issue key, e.g. SCRUM-1",
+        "required": true
+      },
+      {
+        "name": "fields",
+        "type": "string",
+        "value": null,
+        "label": "Fields",
+        "placeholder": "Comma-separated fields to return, e.g. summary,status,assignee"
+      },
+      {
+        "name": "expand",
+        "type": "string",
+        "value": null,
+        "label": "Expand",
+        "placeholder": "Comma-separated sections to expand, e.g. changelog,renderedFields"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Issue Key",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Issue",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "jira/issue_get_all": {
+    "hash": "8188354a57f15ececfdc5734db98e12a26ef795bdbe3ec93fc88cda98b79b4b9",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Search Issues",
+    "description": "Search Jira issues using a JQL query. Leave the query blank to list every issue, or narrow the search and choose which fields to return. Return everything, or cap the results to a limit.",
+    "website": "https://www.flomation.co",
+    "icon": "jira+magnifying-glass",
+    "date": "06/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Jira",
+      "icon": "jira",
+      "description": "Create and manage issues, comments, attachments, worklogs, and users in Jira"
+    },
+    "inputs": [
+      {
+        "name": "url",
+        "type": "string",
+        "value": null,
+        "label": "Site URL",
+        "placeholder": "https://your-domain.atlassian.net",
+        "required": true
+      },
+      {
+        "name": "email",
+        "type": "string",
+        "value": null,
+        "label": "Account Email",
+        "placeholder": "The Atlassian account email that owns the API token",
+        "required": true
+      },
+      {
+        "name": "api_token",
+        "type": "secret",
+        "value": null,
+        "label": "API Token",
+        "placeholder": "id.atlassian.com ▸ Security ▸ Create and manage API tokens",
+        "required": true
+      },
+      {
+        "name": "jql",
+        "type": "text",
+        "value": null,
+        "label": "JQL Query",
+        "placeholder": "e.g. project = SCRUM AND status = \"In Progress\" ORDER BY created DESC"
+      },
+      {
+        "name": "fields",
+        "type": "string",
+        "value": null,
+        "label": "Fields",
+        "placeholder": "Comma-separated fields to return, e.g. summary,status,assignee"
+      },
+      {
+        "name": "expand",
+        "type": "string",
+        "value": null,
+        "label": "Expand",
+        "placeholder": "Comma-separated sections to expand, e.g. changelog,renderedFields"
+      },
+      {
+        "name": "return_all",
+        "type": "boolean",
+        "value": null,
+        "label": "Return All",
+        "placeholder": "Fetch every matching issue"
+      },
+      {
+        "name": "limit",
+        "type": "integer",
+        "value": null,
+        "label": "Limit",
+        "placeholder": "Maximum issues to return when not returning all"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "results",
+        "type": "object",
+        "value": null,
+        "label": "Issues",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Count",
+        "placeholder": ""
+      },
+      {
+        "name": "total",
+        "type": "integer",
+        "value": null,
+        "label": "Total",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "jira/issue_notify": {
+    "hash": "0c7a944a21862c19feb67939c329009ab2a123d02be23d195e20830939eb1cf0",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Notify About Issue",
+    "description": "Send an email notification about a Jira issue. Set a subject and message body, and choose who receives it — the reporter, assignee, watchers, voters, or named users and groups.",
+    "website": "https://www.flomation.co",
+    "icon": "jira+bell",
+    "date": "06/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Jira",
+      "icon": "jira",
+      "description": "Create and manage issues, comments, attachments, worklogs, and users in Jira"
+    },
+    "inputs": [
+      {
+        "name": "url",
+        "type": "string",
+        "value": null,
+        "label": "Site URL",
+        "placeholder": "https://your-domain.atlassian.net",
+        "required": true
+      },
+      {
+        "name": "email",
+        "type": "string",
+        "value": null,
+        "label": "Account Email",
+        "placeholder": "The Atlassian account email that owns the API token",
+        "required": true
+      },
+      {
+        "name": "api_token",
+        "type": "secret",
+        "value": null,
+        "label": "API Token",
+        "placeholder": "id.atlassian.com ▸ Security ▸ Create and manage API tokens",
+        "required": true
+      },
+      {
+        "name": "issue_key",
+        "type": "string",
+        "value": null,
+        "label": "Issue Key",
+        "placeholder": "The issue key, e.g. SCRUM-1",
+        "required": true
+      },
+      {
+        "name": "subject",
+        "type": "string",
+        "value": null,
+        "label": "Subject",
+        "placeholder": "The email subject line"
+      },
+      {
+        "name": "text_body",
+        "type": "text",
+        "value": null,
+        "label": "Text Body",
+        "placeholder": "The plain-text message body"
+      },
+      {
+        "name": "html_body",
+        "type": "text",
+        "value": null,
+        "label": "HTML Body",
+        "placeholder": "The HTML message body"
+      },
+      {
+        "name": "notify_reporter",
+        "type": "boolean",
+        "value": null,
+        "label": "Notify Reporter",
+        "placeholder": "Email the issue reporter"
+      },
+      {
+        "name": "notify_assignee",
+        "type": "boolean",
+        "value": null,
+        "label": "Notify Assignee",
+        "placeholder": "Email the issue assignee"
+      },
+      {
+        "name": "notify_watchers",
+        "type": "boolean",
+        "value": null,
+        "label": "Notify Watchers",
+        "placeholder": "Email everyone watching the issue"
+      },
+      {
+        "name": "notify_voters",
+        "type": "boolean",
+        "value": null,
+        "label": "Notify Voters",
+        "placeholder": "Email everyone who voted on the issue"
+      },
+      {
+        "name": "to_users",
+        "type": "string",
+        "value": null,
+        "label": "To Users",
+        "placeholder": "Comma-separated account IDs to notify"
+      },
+      {
+        "name": "to_groups",
+        "type": "string",
+        "value": null,
+        "label": "To Groups",
+        "placeholder": "Comma-separated group names to notify"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Issue Key",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Result",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "jira/issue_transitions": {
+    "hash": "04d9ba2a439c26724339256971cd4fea60c579900dc04e2bb565f786d135910b",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "List Transitions",
+    "description": "List the status transitions currently available for a Jira issue — the moves it can make from its current status. Use a transition's ID with Update Issue to change the status.",
+    "website": "https://www.flomation.co",
+    "icon": "jira+arrow-right-arrow-left",
+    "date": "06/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Jira",
+      "icon": "jira",
+      "description": "Create and manage issues, comments, attachments, worklogs, and users in Jira"
+    },
+    "inputs": [
+      {
+        "name": "url",
+        "type": "string",
+        "value": null,
+        "label": "Site URL",
+        "placeholder": "https://your-domain.atlassian.net",
+        "required": true
+      },
+      {
+        "name": "email",
+        "type": "string",
+        "value": null,
+        "label": "Account Email",
+        "placeholder": "The Atlassian account email that owns the API token",
+        "required": true
+      },
+      {
+        "name": "api_token",
+        "type": "secret",
+        "value": null,
+        "label": "API Token",
+        "placeholder": "id.atlassian.com ▸ Security ▸ Create and manage API tokens",
+        "required": true
+      },
+      {
+        "name": "issue_key",
+        "type": "string",
+        "value": null,
+        "label": "Issue Key",
+        "placeholder": "The issue key, e.g. SCRUM-1",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "results",
+        "type": "object",
+        "value": null,
+        "label": "Transitions",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Count",
+        "placeholder": ""
+      },
+      {
+        "name": "total",
+        "type": "integer",
+        "value": null,
+        "label": "Total",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "jira/issue_update": {
+    "hash": "67052cc112d2635847f4aaf04b6638d12f948aa923bda972018a40b2f10305e4",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Update Issue",
+    "description": "Update an existing Jira issue. Change any of the standard fields, and optionally move the issue to a new status by choosing a transition. Leave a field blank to leave it unchanged.",
+    "website": "https://www.flomation.co",
+    "icon": "jira+pen",
+    "date": "06/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Jira",
+      "icon": "jira",
+      "description": "Create and manage issues, comments, attachments, worklogs, and users in Jira"
+    },
+    "inputs": [
+      {
+        "name": "url",
+        "type": "string",
+        "value": null,
+        "label": "Site URL",
+        "placeholder": "https://your-domain.atlassian.net",
+        "required": true
+      },
+      {
+        "name": "email",
+        "type": "string",
+        "value": null,
+        "label": "Account Email",
+        "placeholder": "The Atlassian account email that owns the API token",
+        "required": true
+      },
+      {
+        "name": "api_token",
+        "type": "secret",
+        "value": null,
+        "label": "API Token",
+        "placeholder": "id.atlassian.com ▸ Security ▸ Create and manage API tokens",
+        "required": true
+      },
+      {
+        "name": "issue_key",
+        "type": "string",
+        "value": null,
+        "label": "Issue Key",
+        "placeholder": "The issue key to update, e.g. SCRUM-1",
+        "required": true
+      },
+      {
+        "name": "summary",
+        "type": "string",
+        "value": null,
+        "label": "Summary",
+        "placeholder": "A short one-line title for the issue"
+      },
+      {
+        "name": "description",
+        "type": "text",
+        "value": null,
+        "label": "Description",
+        "placeholder": "The issue description (plain text)"
+      },
+      {
+        "name": "priority",
+        "type": "string",
+        "value": null,
+        "label": "Priority",
+        "placeholder": "Choose a priority"
+      },
+      {
+        "name": "assignee",
+        "type": "string",
+        "value": null,
+        "label": "Assignee",
+        "placeholder": "Choose a user to assign"
+      },
+      {
+        "name": "reporter",
+        "type": "string",
+        "value": null,
+        "label": "Reporter",
+        "placeholder": "Choose the reporting user"
+      },
+      {
+        "name": "labels",
+        "type": "string",
+        "value": null,
+        "label": "Labels",
+        "placeholder": "Comma-separated labels, e.g. backend,urgent"
+      },
+      {
+        "name": "components",
+        "type": "string",
+        "value": null,
+        "label": "Component IDs",
+        "placeholder": "Comma-separated component IDs"
+      },
+      {
+        "name": "due_date",
+        "type": "string",
+        "value": null,
+        "label": "Due Date",
+        "placeholder": "YYYY-MM-DD"
+      },
+      {
+        "name": "status",
+        "type": "string",
+        "value": null,
+        "label": "Status Transition",
+        "placeholder": "Choose a transition to move the issue's status"
+      },
+      {
+        "name": "custom_fields",
+        "type": "object",
+        "value": null,
+        "label": "Custom Fields (JSON)",
+        "placeholder": "{\"customfield_10011\":\"value\"}"
+      },
+      {
+        "name": "additional_fields",
+        "type": "object",
+        "value": null,
+        "label": "Additional Fields (JSON)",
+        "placeholder": "{\"environment\":\"production\"}"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Issue Key",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Issue",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "jira/user_create": {
+    "hash": "49647ab56b12d3fb8e9e1a4d6b09a247cd6f5c19cebace5a657ed3547cca4a63",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Create User",
+    "description": "Invite a new user to your Atlassian site by email address. Optionally set a display name and choose which products to grant access to (leave products empty to invite the user to every product). Requires organisation-admin permission on the site.",
+    "website": "https://www.flomation.co",
+    "icon": "jira+user-plus",
+    "date": "06/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Jira",
+      "icon": "jira",
+      "description": "Create and manage issues, comments, attachments, worklogs, and users in Jira"
+    },
+    "inputs": [
+      {
+        "name": "url",
+        "type": "string",
+        "value": null,
+        "label": "Site URL",
+        "placeholder": "https://your-domain.atlassian.net",
+        "required": true
+      },
+      {
+        "name": "email",
+        "type": "string",
+        "value": null,
+        "label": "Account Email",
+        "placeholder": "The Atlassian account email that owns the API token",
+        "required": true
+      },
+      {
+        "name": "api_token",
+        "type": "secret",
+        "value": null,
+        "label": "API Token",
+        "placeholder": "id.atlassian.com ▸ Security ▸ Create and manage API tokens",
+        "required": true
+      },
+      {
+        "name": "email_address",
+        "type": "string",
+        "value": null,
+        "label": "Email Address",
+        "placeholder": "The email address of the user to invite",
+        "required": true
+      },
+      {
+        "name": "display_name",
+        "type": "string",
+        "value": null,
+        "label": "Display Name",
+        "placeholder": "The name shown for the user, e.g. Jane Doe"
+      },
+      {
+        "name": "products",
+        "type": "string",
+        "value": null,
+        "label": "Products",
+        "placeholder": "Comma-separated product keys (e.g. jira-software,jira-servicedesk). Leave empty to invite to all products."
+      },
+      {
+        "name": "additional_fields",
+        "type": "object",
+        "value": null,
+        "label": "Additional Fields (JSON)",
+        "placeholder": "{\"key\":\"value\"}"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Account ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "User",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "jira/user_delete": {
+    "hash": "ad239fa92211cfd229fc3df21de740c7fb5e8bb2a9c2bc7f71c760eb2b8ff9e1",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Delete User",
+    "description": "Remove a user from your Atlassian site by their account ID. This deletes the user from the site — requires organisation-admin permission.",
+    "website": "https://www.flomation.co",
+    "icon": "jira+user-minus",
+    "date": "06/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Jira",
+      "icon": "jira",
+      "description": "Create and manage issues, comments, attachments, worklogs, and users in Jira"
+    },
+    "inputs": [
+      {
+        "name": "url",
+        "type": "string",
+        "value": null,
+        "label": "Site URL",
+        "placeholder": "https://your-domain.atlassian.net",
+        "required": true
+      },
+      {
+        "name": "email",
+        "type": "string",
+        "value": null,
+        "label": "Account Email",
+        "placeholder": "The Atlassian account email that owns the API token",
+        "required": true
+      },
+      {
+        "name": "api_token",
+        "type": "secret",
+        "value": null,
+        "label": "API Token",
+        "placeholder": "id.atlassian.com ▸ Security ▸ Create and manage API tokens",
+        "required": true
+      },
+      {
+        "name": "account_id",
+        "type": "string",
+        "value": null,
+        "label": "Account ID",
+        "placeholder": "The account ID of the user to delete",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Account ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "User",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "jira/user_get": {
+    "hash": "465539cd4cfbb4b344e3e2bdbb2b24a31923cf2debc47de424ef9b835a9c5112",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Get User",
+    "description": "Look up a single Atlassian user by their account ID and return their profile. Optionally expand extra details (e.g. groups, applicationRoles) via the Expand field.",
+    "website": "https://www.flomation.co",
+    "icon": "jira+user",
+    "date": "06/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Jira",
+      "icon": "jira",
+      "description": "Create and manage issues, comments, attachments, worklogs, and users in Jira"
+    },
+    "inputs": [
+      {
+        "name": "url",
+        "type": "string",
+        "value": null,
+        "label": "Site URL",
+        "placeholder": "https://your-domain.atlassian.net",
+        "required": true
+      },
+      {
+        "name": "email",
+        "type": "string",
+        "value": null,
+        "label": "Account Email",
+        "placeholder": "The Atlassian account email that owns the API token",
+        "required": true
+      },
+      {
+        "name": "api_token",
+        "type": "secret",
+        "value": null,
+        "label": "API Token",
+        "placeholder": "id.atlassian.com ▸ Security ▸ Create and manage API tokens",
+        "required": true
+      },
+      {
+        "name": "account_id",
+        "type": "string",
+        "value": null,
+        "label": "Account ID",
+        "placeholder": "The account ID of the user to retrieve",
+        "required": true
+      },
+      {
+        "name": "expand",
+        "type": "string",
+        "value": null,
+        "label": "Expand",
+        "placeholder": "Comma-separated extra details, e.g. groups,applicationRoles"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Account ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "User",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "jira/worklog_add": {
+    "hash": "736df37baf843b542c0f024d95979fd957bd894d0513ebd45505c3ac86762fac",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Add Worklog",
+    "description": "Log time spent on a Jira issue. Give the issue key and how long was spent (e.g. \"1h 30m\"), optionally add a comment and set when the work started. Returns the new worklog entry.",
+    "website": "https://www.flomation.co",
+    "icon": "jira+clock",
+    "date": "06/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Jira",
+      "icon": "jira",
+      "description": "Create and manage issues, comments, attachments, worklogs, and users in Jira"
+    },
+    "inputs": [
+      {
+        "name": "url",
+        "type": "string",
+        "value": null,
+        "label": "Site URL",
+        "placeholder": "https://your-domain.atlassian.net",
+        "required": true
+      },
+      {
+        "name": "email",
+        "type": "string",
+        "value": null,
+        "label": "Account Email",
+        "placeholder": "The Atlassian account email that owns the API token",
+        "required": true
+      },
+      {
+        "name": "api_token",
+        "type": "secret",
+        "value": null,
+        "label": "API Token",
+        "placeholder": "id.atlassian.com ▸ Security ▸ Create and manage API tokens",
+        "required": true
+      },
+      {
+        "name": "issue_key",
+        "type": "string",
+        "value": null,
+        "label": "Issue Key",
+        "placeholder": "The issue to log time against, e.g. SCRUM-1",
+        "required": true
+      },
+      {
+        "name": "time_spent",
+        "type": "string",
+        "value": null,
+        "label": "Time Spent",
+        "placeholder": "How long was spent, e.g. 1h 30m",
+        "required": true
+      },
+      {
+        "name": "comment",
+        "type": "text",
+        "value": null,
+        "label": "Comment",
+        "placeholder": "Optional note describing the work (plain text)"
+      },
+      {
+        "name": "started",
+        "type": "string",
+        "value": null,
+        "label": "Started",
+        "placeholder": "When work started, e.g. 2026-07-06T09:00:00.000+0000"
+      },
+      {
+        "name": "additional_fields",
+        "type": "object",
+        "value": null,
+        "label": "Additional Fields (JSON)",
+        "placeholder": "{\"visibility\":{\"type\":\"group\",\"value\":\"jira-developers\"}}"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Worklog ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Worklog",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "jira/worklog_delete": {
+    "hash": "cc125c41f4d0635332e5020deb3875bca79414956677e24484e7c9f95a7959e5",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Delete Worklog",
+    "description": "Remove a worklog entry from a Jira issue by its issue key and worklog ID. This permanently deletes the logged time and cannot be undone.",
+    "website": "https://www.flomation.co",
+    "icon": "jira+trash",
+    "date": "06/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Jira",
+      "icon": "jira",
+      "description": "Create and manage issues, comments, attachments, worklogs, and users in Jira"
+    },
+    "inputs": [
+      {
+        "name": "url",
+        "type": "string",
+        "value": null,
+        "label": "Site URL",
+        "placeholder": "https://your-domain.atlassian.net",
+        "required": true
+      },
+      {
+        "name": "email",
+        "type": "string",
+        "value": null,
+        "label": "Account Email",
+        "placeholder": "The Atlassian account email that owns the API token",
+        "required": true
+      },
+      {
+        "name": "api_token",
+        "type": "secret",
+        "value": null,
+        "label": "API Token",
+        "placeholder": "id.atlassian.com ▸ Security ▸ Create and manage API tokens",
+        "required": true
+      },
+      {
+        "name": "issue_key",
+        "type": "string",
+        "value": null,
+        "label": "Issue Key",
+        "placeholder": "The issue the worklog belongs to, e.g. SCRUM-1",
+        "required": true
+      },
+      {
+        "name": "worklog_id",
+        "type": "string",
+        "value": null,
+        "label": "Worklog ID",
+        "placeholder": "The ID of the worklog entry to delete",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Worklog ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Result",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "jira/worklog_get": {
+    "hash": "d1c69974e74265f67a3cfcf6fed86c0c8bf5ec89f7df95cca19c90b54a421f27",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Get Worklog",
+    "description": "Fetch a single worklog entry from a Jira issue by its issue key and worklog ID. Returns the full worklog, including who logged it, the time spent and any comment.",
+    "website": "https://www.flomation.co",
+    "icon": "jira+clock",
+    "date": "06/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Jira",
+      "icon": "jira",
+      "description": "Create and manage issues, comments, attachments, worklogs, and users in Jira"
+    },
+    "inputs": [
+      {
+        "name": "url",
+        "type": "string",
+        "value": null,
+        "label": "Site URL",
+        "placeholder": "https://your-domain.atlassian.net",
+        "required": true
+      },
+      {
+        "name": "email",
+        "type": "string",
+        "value": null,
+        "label": "Account Email",
+        "placeholder": "The Atlassian account email that owns the API token",
+        "required": true
+      },
+      {
+        "name": "api_token",
+        "type": "secret",
+        "value": null,
+        "label": "API Token",
+        "placeholder": "id.atlassian.com ▸ Security ▸ Create and manage API tokens",
+        "required": true
+      },
+      {
+        "name": "issue_key",
+        "type": "string",
+        "value": null,
+        "label": "Issue Key",
+        "placeholder": "The issue the worklog belongs to, e.g. SCRUM-1",
+        "required": true
+      },
+      {
+        "name": "worklog_id",
+        "type": "string",
+        "value": null,
+        "label": "Worklog ID",
+        "placeholder": "The ID of the worklog entry to fetch",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Worklog ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Worklog",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "jira/worklog_get_all": {
+    "hash": "46ddae438707a470667dff792e38518e03d12f34aa832a25123a3c4551780c8f",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Get Many Worklogs",
+    "description": "List the worklog entries logged against a Jira issue. Return every entry, or cap the count with a limit. Each entry includes who logged it, the time spent and any comment.",
+    "website": "https://www.flomation.co",
+    "icon": "jira+clock",
+    "date": "06/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Jira",
+      "icon": "jira",
+      "description": "Create and manage issues, comments, attachments, worklogs, and users in Jira"
+    },
+    "inputs": [
+      {
+        "name": "url",
+        "type": "string",
+        "value": null,
+        "label": "Site URL",
+        "placeholder": "https://your-domain.atlassian.net",
+        "required": true
+      },
+      {
+        "name": "email",
+        "type": "string",
+        "value": null,
+        "label": "Account Email",
+        "placeholder": "The Atlassian account email that owns the API token",
+        "required": true
+      },
+      {
+        "name": "api_token",
+        "type": "secret",
+        "value": null,
+        "label": "API Token",
+        "placeholder": "id.atlassian.com ▸ Security ▸ Create and manage API tokens",
+        "required": true
+      },
+      {
+        "name": "issue_key",
+        "type": "string",
+        "value": null,
+        "label": "Issue Key",
+        "placeholder": "The issue to list worklogs for, e.g. SCRUM-1",
+        "required": true
+      },
+      {
+        "name": "return_all",
+        "type": "boolean",
+        "value": null,
+        "label": "Return All",
+        "placeholder": "Return every worklog rather than a single page"
+      },
+      {
+        "name": "limit",
+        "type": "integer",
+        "value": null,
+        "label": "Limit",
+        "placeholder": "Max worklogs to return when not returning all (default 50, max 100)"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "results",
+        "type": "object",
+        "value": null,
+        "label": "Worklogs",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Count",
+        "placeholder": ""
+      },
+      {
+        "name": "total",
+        "type": "integer",
+        "value": null,
+        "label": "Total",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "jira/worklog_update": {
+    "hash": "c2a70f7baaa297dbc2347e7d5aebb9a91cfb6a5dc87229d057464eff68291ebf",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Update Worklog",
+    "description": "Change an existing worklog entry on a Jira issue. Update the time spent, the comment or when the work started — supply only the fields you want to change. Returns the updated worklog.",
+    "website": "https://www.flomation.co",
+    "icon": "jira+pen",
+    "date": "06/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Jira",
+      "icon": "jira",
+      "description": "Create and manage issues, comments, attachments, worklogs, and users in Jira"
+    },
+    "inputs": [
+      {
+        "name": "url",
+        "type": "string",
+        "value": null,
+        "label": "Site URL",
+        "placeholder": "https://your-domain.atlassian.net",
+        "required": true
+      },
+      {
+        "name": "email",
+        "type": "string",
+        "value": null,
+        "label": "Account Email",
+        "placeholder": "The Atlassian account email that owns the API token",
+        "required": true
+      },
+      {
+        "name": "api_token",
+        "type": "secret",
+        "value": null,
+        "label": "API Token",
+        "placeholder": "id.atlassian.com ▸ Security ▸ Create and manage API tokens",
+        "required": true
+      },
+      {
+        "name": "issue_key",
+        "type": "string",
+        "value": null,
+        "label": "Issue Key",
+        "placeholder": "The issue the worklog belongs to, e.g. SCRUM-1",
+        "required": true
+      },
+      {
+        "name": "worklog_id",
+        "type": "string",
+        "value": null,
+        "label": "Worklog ID",
+        "placeholder": "The ID of the worklog entry to update",
+        "required": true
+      },
+      {
+        "name": "time_spent",
+        "type": "string",
+        "value": null,
+        "label": "Time Spent",
+        "placeholder": "New time spent, e.g. 2h"
+      },
+      {
+        "name": "comment",
+        "type": "text",
+        "value": null,
+        "label": "Comment",
+        "placeholder": "New comment (plain text)"
+      },
+      {
+        "name": "started",
+        "type": "string",
+        "value": null,
+        "label": "Started",
+        "placeholder": "When work started, e.g. 2026-07-06T09:00:00.000+0000"
+      },
+      {
+        "name": "additional_fields",
+        "type": "object",
+        "value": null,
+        "label": "Additional Fields (JSON)",
+        "placeholder": "{\"visibility\":{\"type\":\"group\",\"value\":\"jira-developers\"}}"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Worklog ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Worklog",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
   "journey/calculate_route": {
     "hash": "0c7c157d38caaea6e48ce5992e6d571dbca8c145a4f0b36e1e0fec8758c489fe",
     "author": "Andy Esser",
