@@ -71137,7 +71137,7 @@
     ]
   },
   "trigger/jira_webhook": {
-    "hash": "9aa0bbc194d04817c34a91e52fa4c518b580d0857e126333922ba18a3d63ec41",
+    "hash": "db55e1dc2db973d9817f29b2491b9b0f775eb1d7e710a8784d8e7e67a7ac7118",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Jira Webhook Trigger",
@@ -71207,6 +71207,138 @@
           {
             "name": "Comment Deleted",
             "value": "comment_deleted"
+          },
+          {
+            "name": "Worklog Created",
+            "value": "worklog_created"
+          },
+          {
+            "name": "Worklog Updated",
+            "value": "worklog_updated"
+          },
+          {
+            "name": "Worklog Deleted",
+            "value": "worklog_deleted"
+          },
+          {
+            "name": "Issue Link Created",
+            "value": "issuelink_created"
+          },
+          {
+            "name": "Issue Link Deleted",
+            "value": "issuelink_deleted"
+          },
+          {
+            "name": "Version Created",
+            "value": "jira:version_created"
+          },
+          {
+            "name": "Version Updated",
+            "value": "jira:version_updated"
+          },
+          {
+            "name": "Version Deleted",
+            "value": "jira:version_deleted"
+          },
+          {
+            "name": "Version Released",
+            "value": "jira:version_released"
+          },
+          {
+            "name": "Version Unreleased",
+            "value": "jira:version_unreleased"
+          },
+          {
+            "name": "Version Moved",
+            "value": "jira:version_moved"
+          },
+          {
+            "name": "Sprint Created",
+            "value": "sprint_created"
+          },
+          {
+            "name": "Sprint Updated",
+            "value": "sprint_updated"
+          },
+          {
+            "name": "Sprint Deleted",
+            "value": "sprint_deleted"
+          },
+          {
+            "name": "Sprint Started",
+            "value": "sprint_started"
+          },
+          {
+            "name": "Sprint Closed",
+            "value": "sprint_closed"
+          },
+          {
+            "name": "Board Created",
+            "value": "board_created"
+          },
+          {
+            "name": "Board Updated",
+            "value": "board_updated"
+          },
+          {
+            "name": "Board Deleted",
+            "value": "board_deleted"
+          },
+          {
+            "name": "Board Configuration Changed",
+            "value": "board_configuration_changed"
+          },
+          {
+            "name": "Project Created",
+            "value": "project_created"
+          },
+          {
+            "name": "Project Updated",
+            "value": "project_updated"
+          },
+          {
+            "name": "Project Deleted",
+            "value": "project_deleted"
+          },
+          {
+            "name": "User Created",
+            "value": "user_created"
+          },
+          {
+            "name": "User Updated",
+            "value": "user_updated"
+          },
+          {
+            "name": "User Deleted",
+            "value": "user_deleted"
+          },
+          {
+            "name": "Voting Config Changed",
+            "value": "option_voting_changed"
+          },
+          {
+            "name": "Watching Config Changed",
+            "value": "option_watching_changed"
+          },
+          {
+            "name": "Unassigned Issues Config Changed",
+            "value": "option_unassigned_issues_changed"
+          },
+          {
+            "name": "Subtasks Config Changed",
+            "value": "option_subtasks_changed"
+          },
+          {
+            "name": "Attachments Config Changed",
+            "value": "option_attachments_changed"
+          },
+          {
+            "name": "Issue Links Config Changed",
+            "value": "option_issuelinks_changed"
+          },
+          {
+            "name": "Time Tracking Config Changed",
+            "value": "option_timetracking_changed"
           }
         ]
       },
