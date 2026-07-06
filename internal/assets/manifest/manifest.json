@@ -71137,7 +71137,7 @@
     ]
   },
   "trigger/jira_webhook": {
-    "hash": "2392715804d8e265d94526e5e0b1daaa1a57cf58e75a12c7635bc2fcb7c6efd1",
+    "hash": "9aa0bbc194d04817c34a91e52fa4c518b580d0857e126333922ba18a3d63ec41",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Jira Webhook Trigger",
@@ -71222,7 +71222,7 @@
         "type": "secret",
         "value": null,
         "label": "Signing Secret",
-        "placeholder": "Optional — HMAC-SHA256 signing secret to verify payloads. Must be ≤128 characters (Jira's limit); use a dedicated secret, NOT your API token"
+        "placeholder": "Optional — HMAC-SHA256 signing secret (less than 128 chars)"
       }
     ],
     "outputs": [

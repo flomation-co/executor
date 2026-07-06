@@ -31,7 +31,7 @@ var Inputs = [...]core.Connection{
 		{Name: "Comment Deleted", Value: "comment_deleted"},
 	}},
 	{Name: "jql", Type: core.ConnectionTypeString, Label: "JQL Filter", Placeholder: "Optional — only fire for issues matching this JQL, e.g. project = SCRUM AND priority = High"},
-	{Name: "secret", Type: core.ConnectionTypeSecret, Label: "Signing Secret", Placeholder: "Optional — HMAC-SHA256 signing secret to verify payloads. Must be ≤128 characters (Jira's limit); use a dedicated secret, NOT your API token"},
+	{Name: "secret", Type: core.ConnectionTypeSecret, Label: "Signing Secret", Placeholder: "Optional — HMAC-SHA256 signing secret (less than 128 chars)"},
 }
 
 var Outputs = [...]core.Connection{
