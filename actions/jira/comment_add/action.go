@@ -53,6 +53,11 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 		return jira.ErrorResult(err.Error()), nil
 	}
 	out := jira.ResourceResult(obj, "")
-	out["tool_result"] = fmt.Sprintf("Added comment %s", out["id"])
+	id, _ := out["id"].(string)
+	if id == "" {
+		out["tool_result"] = "Added comment"
+	} else {
+		out["tool_result"] = fmt.Sprintf("Added comment %s", id)
+	}
 	return out, nil
 }
