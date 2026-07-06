@@ -22,6 +22,11 @@ var Inputs = [...]core.Connection{
 	{Name: "url", Type: core.ConnectionTypeString, Label: "Site URL", Placeholder: "https://your-domain.atlassian.net", Required: true},
 	{Name: "email", Type: core.ConnectionTypeString, Label: "Account Email", Placeholder: "The Atlassian account email that owns the API token", Required: true},
 	{Name: "api_token", Type: core.ConnectionTypeSecret, Label: "API Token", Placeholder: "id.atlassian.com ▸ Security ▸ Create and manage API tokens", Required: true},
+	// Option Names deliberately repeat across groups ("Created" appears under
+	// Issue, Comment, Worklog, …) — the Group prefixes them in the UI, and Value
+	// (the canonical Jira event id) is unique, so this is unambiguous. The
+	// "Configuration" group holds Jira's GLOBAL toggle events (option_*), which
+	// fire on admin config changes rather than per-resource CRUD.
 	{Name: "events", Type: core.ConnectionTypeMultiSelect, Label: "Events", Required: true, Options: []core.ConnectionOption{
 		{Name: "Created", Value: "jira:issue_created", Group: "Issue"},
 		{Name: "Updated", Value: "jira:issue_updated", Group: "Issue"},
