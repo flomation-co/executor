@@ -54,6 +54,13 @@ const (
 	// search with many fields can be large, so 8 MB.
 	maxResponseBody = 8 << 20 // 8 MB
 
+	// MaxAttachmentBytes bounds attachment upload/download so a runaway file
+	// can't exhaust memory. Jira Cloud's own default attachment ceiling is
+	// smaller, so this is a generous safety cap, not the functional limit. Both
+	// the upload (decoded base64) and the download (streamed bytes) enforce it,
+	// and the download errors rather than silently truncating past it.
+	MaxAttachmentBytes = 50 << 20 // 50 MB
+
 	// requestTimeout is the HTTP client timeout for a single Jira call.
 	requestTimeout = 30 * time.Second
 
@@ -174,7 +181,8 @@ func NormaliseBaseURL(raw string) (string, error) {
 	}
 	path := strings.TrimRight(u.Path, "/")
 	// Strip a pasted /rest or /rest/api/N suffix so we always own the API prefix.
-	for _, suffix := range []string{"/rest/api/3", "/rest/api/2", "/rest"} {
+	// Kept in sync with the api option-proxy and launch trigger normalisers.
+	for _, suffix := range []string{"/rest/api/3", "/rest/api/2", "/rest/api/latest", "/rest"} {
 		if strings.HasSuffix(path, suffix) {
 			path = strings.TrimSuffix(path, suffix)
 			break
@@ -629,7 +637,9 @@ func PutResource(a Auth, path string, fields map[string]interface{}) (map[string
 
 // GetBinary fetches raw bytes from an absolute Jira URL (e.g. an attachment's
 // "content" link, which comes back as a fully-qualified URL, not an API path).
-// Auth and the XSRF header are applied; the response is size-capped.
+// Auth and the XSRF header are applied. The download is bounded by
+// MaxAttachmentBytes; a file that exceeds it is rejected with an error rather
+// than silently truncated (returning a corrupt partial file would be worse).
 func GetBinary(a Auth, absoluteURL string) ([]byte, string, error) {
 	req, err := http.NewRequest(http.MethodGet, absoluteURL, nil)
 	if err != nil {
@@ -645,9 +655,13 @@ func GetBinary(a Auth, absoluteURL string) ([]byte, string, error) {
 	if resp.StatusCode < 200 || resp.StatusCode >= 300 {
 		return nil, "", fmt.Errorf("Jira attachment download error (%d)", resp.StatusCode)
 	}
-	data, err := io.ReadAll(io.LimitReader(resp.Body, maxResponseBody))
+	// Read one byte past the cap so an over-size file is detected, not truncated.
+	data, err := io.ReadAll(io.LimitReader(resp.Body, MaxAttachmentBytes+1))
 	if err != nil {
 		return nil, "", fmt.Errorf("failed to read attachment: %w", err)
+	}
+	if len(data) > MaxAttachmentBytes {
+		return nil, "", fmt.Errorf("attachment exceeds the %d MB download limit", MaxAttachmentBytes>>20)
 	}
 	return data, resp.Header.Get("Content-Type"), nil
 }

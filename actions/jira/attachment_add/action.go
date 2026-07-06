@@ -62,6 +62,9 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	if err != nil {
 		return jira.ErrorResult(fmt.Sprintf("base64_content is not valid base64: %v", err)), nil
 	}
+	if len(raw) > jira.MaxAttachmentBytes {
+		return jira.ErrorResult(fmt.Sprintf("attachment exceeds the %d MB upload limit", jira.MaxAttachmentBytes>>20)), nil
+	}
 
 	var buf bytes.Buffer
 	w := multipart.NewWriter(&buf)
