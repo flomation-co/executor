@@ -310,6 +310,31 @@ import (
 	hubspot_ticket_search "flomation.app/automate/executor/actions/hubspot/ticket_search"
 	hubspot_ticket_update "flomation.app/automate/executor/actions/hubspot/ticket_update"
 	humanintheloop_await "flomation.app/automate/executor/actions/humanintheloop/await"
+	jira_attachment_add "flomation.app/automate/executor/actions/jira/attachment_add"
+	jira_attachment_get "flomation.app/automate/executor/actions/jira/attachment_get"
+	jira_attachment_get_all "flomation.app/automate/executor/actions/jira/attachment_get_all"
+	jira_attachment_remove "flomation.app/automate/executor/actions/jira/attachment_remove"
+	jira_comment_add "flomation.app/automate/executor/actions/jira/comment_add"
+	jira_comment_get "flomation.app/automate/executor/actions/jira/comment_get"
+	jira_comment_get_all "flomation.app/automate/executor/actions/jira/comment_get_all"
+	jira_comment_remove "flomation.app/automate/executor/actions/jira/comment_remove"
+	jira_comment_update "flomation.app/automate/executor/actions/jira/comment_update"
+	jira_issue_changelog "flomation.app/automate/executor/actions/jira/issue_changelog"
+	jira_issue_create "flomation.app/automate/executor/actions/jira/issue_create"
+	jira_issue_delete "flomation.app/automate/executor/actions/jira/issue_delete"
+	jira_issue_get "flomation.app/automate/executor/actions/jira/issue_get"
+	jira_issue_get_all "flomation.app/automate/executor/actions/jira/issue_get_all"
+	jira_issue_notify "flomation.app/automate/executor/actions/jira/issue_notify"
+	jira_issue_transitions "flomation.app/automate/executor/actions/jira/issue_transitions"
+	jira_issue_update "flomation.app/automate/executor/actions/jira/issue_update"
+	jira_user_create "flomation.app/automate/executor/actions/jira/user_create"
+	jira_user_delete "flomation.app/automate/executor/actions/jira/user_delete"
+	jira_user_get "flomation.app/automate/executor/actions/jira/user_get"
+	jira_worklog_add "flomation.app/automate/executor/actions/jira/worklog_add"
+	jira_worklog_delete "flomation.app/automate/executor/actions/jira/worklog_delete"
+	jira_worklog_get "flomation.app/automate/executor/actions/jira/worklog_get"
+	jira_worklog_get_all "flomation.app/automate/executor/actions/jira/worklog_get_all"
+	jira_worklog_update "flomation.app/automate/executor/actions/jira/worklog_update"
 	journey_calculate_route "flomation.app/automate/executor/actions/journey/calculate_route"
 	journey_compare_departure_times "flomation.app/automate/executor/actions/journey/compare_departure_times"
 	journey_find_arrive_by "flomation.app/automate/executor/actions/journey/find_arrive_by"
@@ -633,6 +658,7 @@ import (
 	trigger_google_drive "flomation.app/automate/executor/actions/trigger/google_drive"
 	trigger_hubspot_webhook "flomation.app/automate/executor/actions/trigger/hubspot_webhook"
 	trigger_image "flomation.app/automate/executor/actions/trigger/image"
+	trigger_jira_webhook "flomation.app/automate/executor/actions/trigger/jira_webhook"
 	trigger_linkedin_poll "flomation.app/automate/executor/actions/trigger/linkedin_poll"
 	trigger_mailchimp_webhook "flomation.app/automate/executor/actions/trigger/mailchimp_webhook"
 	trigger_manual "flomation.app/automate/executor/actions/trigger/manual"
@@ -1019,6 +1045,31 @@ var Actions = map[string]core.Action{
 	"hubspot/ticket_search":                             hubspot_ticket_search.Execute,
 	"hubspot/ticket_update":                             hubspot_ticket_update.Execute,
 	"humanintheloop/await":                              humanintheloop_await.Execute,
+	"jira/attachment_add":                               jira_attachment_add.Execute,
+	"jira/attachment_get":                               jira_attachment_get.Execute,
+	"jira/attachment_get_all":                           jira_attachment_get_all.Execute,
+	"jira/attachment_remove":                            jira_attachment_remove.Execute,
+	"jira/comment_add":                                  jira_comment_add.Execute,
+	"jira/comment_get":                                  jira_comment_get.Execute,
+	"jira/comment_get_all":                              jira_comment_get_all.Execute,
+	"jira/comment_remove":                               jira_comment_remove.Execute,
+	"jira/comment_update":                               jira_comment_update.Execute,
+	"jira/issue_changelog":                              jira_issue_changelog.Execute,
+	"jira/issue_create":                                 jira_issue_create.Execute,
+	"jira/issue_delete":                                 jira_issue_delete.Execute,
+	"jira/issue_get":                                    jira_issue_get.Execute,
+	"jira/issue_get_all":                                jira_issue_get_all.Execute,
+	"jira/issue_notify":                                 jira_issue_notify.Execute,
+	"jira/issue_transitions":                            jira_issue_transitions.Execute,
+	"jira/issue_update":                                 jira_issue_update.Execute,
+	"jira/user_create":                                  jira_user_create.Execute,
+	"jira/user_delete":                                  jira_user_delete.Execute,
+	"jira/user_get":                                     jira_user_get.Execute,
+	"jira/worklog_add":                                  jira_worklog_add.Execute,
+	"jira/worklog_delete":                               jira_worklog_delete.Execute,
+	"jira/worklog_get":                                  jira_worklog_get.Execute,
+	"jira/worklog_get_all":                              jira_worklog_get_all.Execute,
+	"jira/worklog_update":                               jira_worklog_update.Execute,
 	"journey/calculate_route":                           journey_calculate_route.Execute,
 	"journey/compare_departure_times":                   journey_compare_departure_times.Execute,
 	"journey/find_arrive_by":                            journey_find_arrive_by.Execute,
@@ -1342,6 +1393,7 @@ var Actions = map[string]core.Action{
 	"trigger/google_drive":                              trigger_google_drive.Execute,
 	"trigger/hubspot_webhook":                           trigger_hubspot_webhook.Execute,
 	"trigger/image":                                     trigger_image.Execute,
+	"trigger/jira_webhook":                              trigger_jira_webhook.Execute,
 	"trigger/linkedin_poll":                             trigger_linkedin_poll.Execute,
 	"trigger/mailchimp_webhook":                         trigger_mailchimp_webhook.Execute,
 	"trigger/manual":                                    trigger_manual.Execute,
