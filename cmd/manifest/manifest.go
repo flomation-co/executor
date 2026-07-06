@@ -79,6 +79,8 @@ func parseConnectionOptions(compositeLit *ast.CompositeLit) []core.ConnectionOpt
 				opt.Name = s
 			case "Value":
 				opt.Value = s
+			case "Group":
+				opt.Group = s
 			}
 		}
 		options = append(options, opt)

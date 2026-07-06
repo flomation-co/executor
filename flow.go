@@ -244,6 +244,11 @@ type Edge struct {
 type ConnectionOption struct {
 	Name  string `json:"name"`
 	Value string `json:"value"`
+	// Group optionally places this option under a labelled, collapsible section
+	// in a multi-select input (e.g. grouping webhook events by resource, like
+	// Jira's own webhook page). Options sharing a Group render together; an empty
+	// Group renders ungrouped, so this is backward-compatible.
+	Group string `json:"group,omitempty"`
 }
 
 // VisibleWhen controls conditional visibility of an input based on
