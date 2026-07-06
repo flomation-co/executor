@@ -658,6 +658,7 @@ import (
 	trigger_google_drive "flomation.app/automate/executor/actions/trigger/google_drive"
 	trigger_hubspot_webhook "flomation.app/automate/executor/actions/trigger/hubspot_webhook"
 	trigger_image "flomation.app/automate/executor/actions/trigger/image"
+	trigger_jira_webhook "flomation.app/automate/executor/actions/trigger/jira_webhook"
 	trigger_linkedin_poll "flomation.app/automate/executor/actions/trigger/linkedin_poll"
 	trigger_mailchimp_webhook "flomation.app/automate/executor/actions/trigger/mailchimp_webhook"
 	trigger_manual "flomation.app/automate/executor/actions/trigger/manual"
@@ -1392,6 +1393,7 @@ var Actions = map[string]core.Action{
 	"trigger/google_drive":                              trigger_google_drive.Execute,
 	"trigger/hubspot_webhook":                           trigger_hubspot_webhook.Execute,
 	"trigger/image":                                     trigger_image.Execute,
+	"trigger/jira_webhook":                              trigger_jira_webhook.Execute,
 	"trigger/linkedin_poll":                             trigger_linkedin_poll.Execute,
 	"trigger/mailchimp_webhook":                         trigger_mailchimp_webhook.Execute,
 	"trigger/manual":                                    trigger_manual.Execute,

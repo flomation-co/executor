@@ -71136,6 +71136,147 @@
       }
     ]
   },
+  "trigger/jira_webhook": {
+    "hash": "5ccd56fe53513f1365d59b4442847f37a7beb91315a224a6ad3bfa23fd51a4dc",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Jira Webhook Trigger",
+    "description": "Triggers a flow when a Jira issue or comment event occurs (created, updated or deleted). The webhook is registered automatically; optionally filter with JQL, and set a signing secret to have Jira's HMAC-SHA256 payload signature verified.",
+    "website": "https://www.flomation.co",
+    "icon": "jira",
+    "date": "06/07/2026",
+    "type": 1,
+    "category": {
+      "name": "Triggers",
+      "icon": "bolt-lightning",
+      "description": "Start a Flow"
+    },
+    "inputs": [
+      {
+        "name": "url",
+        "type": "string",
+        "value": null,
+        "label": "Site URL",
+        "placeholder": "https://your-domain.atlassian.net",
+        "required": true
+      },
+      {
+        "name": "email",
+        "type": "string",
+        "value": null,
+        "label": "Account Email",
+        "placeholder": "The Atlassian account email that owns the API token",
+        "required": true
+      },
+      {
+        "name": "api_token",
+        "type": "secret",
+        "value": null,
+        "label": "API Token",
+        "placeholder": "id.atlassian.com ▸ Security ▸ Create and manage API tokens",
+        "required": true
+      },
+      {
+        "name": "events",
+        "type": "multi_select",
+        "value": null,
+        "label": "Events",
+        "placeholder": "",
+        "required": true,
+        "options": [
+          {
+            "name": "Issue Created",
+            "value": "jira:issue_created"
+          },
+          {
+            "name": "Issue Updated",
+            "value": "jira:issue_updated"
+          },
+          {
+            "name": "Issue Deleted",
+            "value": "jira:issue_deleted"
+          },
+          {
+            "name": "Comment Created",
+            "value": "comment_created"
+          },
+          {
+            "name": "Comment Updated",
+            "value": "comment_updated"
+          },
+          {
+            "name": "Comment Deleted",
+            "value": "comment_deleted"
+          }
+        ]
+      },
+      {
+        "name": "jql",
+        "type": "string",
+        "value": null,
+        "label": "JQL Filter",
+        "placeholder": "Optional — only fire for issues matching this JQL, e.g. project = SCRUM AND priority = High"
+      },
+      {
+        "name": "secret",
+        "type": "secret",
+        "value": null,
+        "label": "Signing Secret",
+        "placeholder": "Optional — set to verify Jira's HMAC-SHA256 payload signature (X-Hub-Signature)"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "content",
+        "type": "string",
+        "value": null,
+        "label": "Event Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "webhook_event",
+        "type": "string",
+        "value": null,
+        "label": "Event",
+        "placeholder": ""
+      },
+      {
+        "name": "issue_key",
+        "type": "string",
+        "value": null,
+        "label": "Issue Key",
+        "placeholder": ""
+      },
+      {
+        "name": "issue_id",
+        "type": "string",
+        "value": null,
+        "label": "Issue ID",
+        "placeholder": ""
+      },
+      {
+        "name": "user",
+        "type": "string",
+        "value": null,
+        "label": "User",
+        "placeholder": ""
+      },
+      {
+        "name": "timestamp",
+        "type": "string",
+        "value": null,
+        "label": "Timestamp",
+        "placeholder": ""
+      },
+      {
+        "name": "body",
+        "type": "string",
+        "value": null,
+        "label": "Raw JSON Body",
+        "placeholder": ""
+      }
+    ]
+  },
   "trigger/linkedin_poll": {
     "hash": "bc80192e7a86d7e14316ce67d0c085868168b5cba8803d12856a74b56e10aeed",
     "author": "Andy Esser",
