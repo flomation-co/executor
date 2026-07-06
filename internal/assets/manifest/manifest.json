@@ -71137,7 +71137,7 @@
     ]
   },
   "trigger/jira_webhook": {
-    "hash": "9aa0bbc194d04817c34a91e52fa4c518b580d0857e126333922ba18a3d63ec41",
+    "hash": "46e0192b6b329513d66ff0cc790c380d08fddbf41cd7ef2b2380cb8c82aee58a",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Jira Webhook Trigger",
@@ -71185,28 +71185,199 @@
         "required": true,
         "options": [
           {
-            "name": "Issue Created",
-            "value": "jira:issue_created"
+            "name": "Created",
+            "value": "jira:issue_created",
+            "group": "Issue"
           },
           {
-            "name": "Issue Updated",
-            "value": "jira:issue_updated"
+            "name": "Updated",
+            "value": "jira:issue_updated",
+            "group": "Issue"
           },
           {
-            "name": "Issue Deleted",
-            "value": "jira:issue_deleted"
+            "name": "Deleted",
+            "value": "jira:issue_deleted",
+            "group": "Issue"
           },
           {
-            "name": "Comment Created",
-            "value": "comment_created"
+            "name": "Created",
+            "value": "comment_created",
+            "group": "Comment"
           },
           {
-            "name": "Comment Updated",
-            "value": "comment_updated"
+            "name": "Updated",
+            "value": "comment_updated",
+            "group": "Comment"
           },
           {
-            "name": "Comment Deleted",
-            "value": "comment_deleted"
+            "name": "Deleted",
+            "value": "comment_deleted",
+            "group": "Comment"
+          },
+          {
+            "name": "Created",
+            "value": "worklog_created",
+            "group": "Worklog"
+          },
+          {
+            "name": "Updated",
+            "value": "worklog_updated",
+            "group": "Worklog"
+          },
+          {
+            "name": "Deleted",
+            "value": "worklog_deleted",
+            "group": "Worklog"
+          },
+          {
+            "name": "Created",
+            "value": "issuelink_created",
+            "group": "Issue Link"
+          },
+          {
+            "name": "Deleted",
+            "value": "issuelink_deleted",
+            "group": "Issue Link"
+          },
+          {
+            "name": "Created",
+            "value": "jira:version_created",
+            "group": "Version"
+          },
+          {
+            "name": "Updated",
+            "value": "jira:version_updated",
+            "group": "Version"
+          },
+          {
+            "name": "Deleted",
+            "value": "jira:version_deleted",
+            "group": "Version"
+          },
+          {
+            "name": "Released",
+            "value": "jira:version_released",
+            "group": "Version"
+          },
+          {
+            "name": "Unreleased",
+            "value": "jira:version_unreleased",
+            "group": "Version"
+          },
+          {
+            "name": "Moved",
+            "value": "jira:version_moved",
+            "group": "Version"
+          },
+          {
+            "name": "Created",
+            "value": "sprint_created",
+            "group": "Sprint"
+          },
+          {
+            "name": "Updated",
+            "value": "sprint_updated",
+            "group": "Sprint"
+          },
+          {
+            "name": "Deleted",
+            "value": "sprint_deleted",
+            "group": "Sprint"
+          },
+          {
+            "name": "Started",
+            "value": "sprint_started",
+            "group": "Sprint"
+          },
+          {
+            "name": "Closed",
+            "value": "sprint_closed",
+            "group": "Sprint"
+          },
+          {
+            "name": "Created",
+            "value": "board_created",
+            "group": "Board"
+          },
+          {
+            "name": "Updated",
+            "value": "board_updated",
+            "group": "Board"
+          },
+          {
+            "name": "Deleted",
+            "value": "board_deleted",
+            "group": "Board"
+          },
+          {
+            "name": "Configuration Changed",
+            "value": "board_configuration_changed",
+            "group": "Board"
+          },
+          {
+            "name": "Created",
+            "value": "project_created",
+            "group": "Project"
+          },
+          {
+            "name": "Updated",
+            "value": "project_updated",
+            "group": "Project"
+          },
+          {
+            "name": "Deleted",
+            "value": "project_deleted",
+            "group": "Project"
+          },
+          {
+            "name": "Created",
+            "value": "user_created",
+            "group": "User"
+          },
+          {
+            "name": "Updated",
+            "value": "user_updated",
+            "group": "User"
+          },
+          {
+            "name": "Deleted",
+            "value": "user_deleted",
+            "group": "User"
+          },
+          {
+            "name": "Voting Changed",
+            "value": "option_voting_changed",
+            "group": "Configuration"
+          },
+          {
+            "name": "Watching Changed",
+            "value": "option_watching_changed",
+            "group": "Configuration"
+          },
+          {
+            "name": "Unassigned Issues Changed",
+            "value": "option_unassigned_issues_changed",
+            "group": "Configuration"
+          },
+          {
+            "name": "Subtasks Changed",
+            "value": "option_subtasks_changed",
+            "group": "Configuration"
+          },
+          {
+            "name": "Attachments Changed",
+            "value": "option_attachments_changed",
+            "group": "Configuration"
+          },
+          {
+            "name": "Issue Links Changed",
+            "value": "option_issuelinks_changed",
+            "group": "Configuration"
+          },
+          {
+            "name": "Time Tracking Changed",
+            "value": "option_timetracking_changed",
+            "group": "Configuration"
           }
         ]
       },
