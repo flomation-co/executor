@@ -53370,6 +53370,1913 @@
       }
     ]
   },
+  "monday/board_archive": {
+    "hash": "becc9063ba3ef80cb1ae381c03f0c2dd4a13e81d2b4fd809b06b482f7d6b2dfa",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Archive Board",
+    "description": "Archive a Monday.com board by its ID.",
+    "website": "https://www.flomation.co",
+    "icon": "monday+box-archive",
+    "date": "07/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Monday.com",
+      "icon": "monday",
+      "description": "Create and manage boards, groups, columns, items, and updates in Monday.com"
+    },
+    "inputs": [
+      {
+        "name": "api_token",
+        "type": "secret",
+        "value": null,
+        "label": "API Token",
+        "placeholder": "Your Monday.com API token",
+        "required": true
+      },
+      {
+        "name": "board_id",
+        "type": "string",
+        "value": null,
+        "label": "Board",
+        "placeholder": "The board to archive",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Board ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Board",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "monday/board_column_create": {
+    "hash": "1cfb70e1709135107ef02475a95392262d7d99064ea29536096d75ec6225513c",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Create Column",
+    "description": "Add a column to a Monday.com board — choose its title and type (text, status, date, numbers, people, etc.).",
+    "website": "https://www.flomation.co",
+    "icon": "monday+plus",
+    "date": "07/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Monday.com",
+      "icon": "monday",
+      "description": "Create and manage boards, groups, columns, items, and updates in Monday.com"
+    },
+    "inputs": [
+      {
+        "name": "api_token",
+        "type": "secret",
+        "value": null,
+        "label": "API Token",
+        "placeholder": "Your Monday.com API token",
+        "required": true
+      },
+      {
+        "name": "board_id",
+        "type": "string",
+        "value": null,
+        "label": "Board",
+        "placeholder": "The board to add the column to",
+        "required": true
+      },
+      {
+        "name": "title",
+        "type": "string",
+        "value": null,
+        "label": "Title",
+        "placeholder": "The column title",
+        "required": true
+      },
+      {
+        "name": "column_type",
+        "type": "string",
+        "value": null,
+        "label": "Type",
+        "placeholder": "The column type",
+        "required": true,
+        "options": [
+          {
+            "name": "Text",
+            "value": "text"
+          },
+          {
+            "name": "Long Text",
+            "value": "long_text"
+          },
+          {
+            "name": "Numbers",
+            "value": "numbers"
+          },
+          {
+            "name": "Status",
+            "value": "status"
+          },
+          {
+            "name": "Dropdown",
+            "value": "dropdown"
+          },
+          {
+            "name": "Date",
+            "value": "date"
+          },
+          {
+            "name": "People",
+            "value": "people"
+          },
+          {
+            "name": "Timeline",
+            "value": "timeline"
+          },
+          {
+            "name": "Tags",
+            "value": "tags"
+          },
+          {
+            "name": "Checkbox",
+            "value": "checkbox"
+          },
+          {
+            "name": "Link",
+            "value": "link"
+          },
+          {
+            "name": "Email",
+            "value": "email"
+          },
+          {
+            "name": "Phone",
+            "value": "phone"
+          },
+          {
+            "name": "Rating",
+            "value": "rating"
+          }
+        ]
+      },
+      {
+        "name": "defaults",
+        "type": "object",
+        "value": null,
+        "label": "Defaults",
+        "placeholder": "Optional column defaults as JSON (e.g. status labels)"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Column ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Column",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "monday/board_column_get_all": {
+    "hash": "c5dafa9c173b2aac64d33399364246de22a5bc4c50966feeda67861fdc0a6040",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Get Columns",
+    "description": "List the columns of a Monday.com board.",
+    "website": "https://www.flomation.co",
+    "icon": "monday+list",
+    "date": "07/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Monday.com",
+      "icon": "monday",
+      "description": "Create and manage boards, groups, columns, items, and updates in Monday.com"
+    },
+    "inputs": [
+      {
+        "name": "api_token",
+        "type": "secret",
+        "value": null,
+        "label": "API Token",
+        "placeholder": "Your Monday.com API token",
+        "required": true
+      },
+      {
+        "name": "board_id",
+        "type": "string",
+        "value": null,
+        "label": "Board",
+        "placeholder": "The board whose columns to fetch",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "results",
+        "type": "object",
+        "value": null,
+        "label": "Columns",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Count",
+        "placeholder": ""
+      },
+      {
+        "name": "total",
+        "type": "integer",
+        "value": null,
+        "label": "Total",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "monday/board_create": {
+    "hash": "f0759f0dc8668e26cbf5bfcc7cdf38df962804e7f2059986912c36ce9febb362",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Create Board",
+    "description": "Create a new Monday.com board. Choose its name and kind (public, private, or shareable), optionally in a workspace or from a template.",
+    "website": "https://www.flomation.co",
+    "icon": "monday+plus",
+    "date": "07/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Monday.com",
+      "icon": "monday",
+      "description": "Create and manage boards, groups, columns, items, and updates in Monday.com"
+    },
+    "inputs": [
+      {
+        "name": "api_token",
+        "type": "secret",
+        "value": null,
+        "label": "API Token",
+        "placeholder": "Your Monday.com API token",
+        "required": true
+      },
+      {
+        "name": "name",
+        "type": "string",
+        "value": null,
+        "label": "Name",
+        "placeholder": "The name of the board",
+        "required": true
+      },
+      {
+        "name": "kind",
+        "type": "string",
+        "value": null,
+        "label": "Kind",
+        "placeholder": "Board visibility",
+        "required": true,
+        "options": [
+          {
+            "name": "Public",
+            "value": "public"
+          },
+          {
+            "name": "Private",
+            "value": "private"
+          },
+          {
+            "name": "Shareable",
+            "value": "share"
+          }
+        ]
+      },
+      {
+        "name": "workspace_id",
+        "type": "string",
+        "value": null,
+        "label": "Workspace",
+        "placeholder": "Optionally create the board in this workspace"
+      },
+      {
+        "name": "template_id",
+        "type": "string",
+        "value": null,
+        "label": "Template ID",
+        "placeholder": "Optionally create from this board template"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Board ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Board",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "monday/board_get": {
+    "hash": "a46839413a686b9d9c6e0f686ab15b4cfc3c72e2530e36e8451ae80b9b8dad7c",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Get Board",
+    "description": "Fetch a single Monday.com board by its ID.",
+    "website": "https://www.flomation.co",
+    "icon": "monday+magnifying-glass",
+    "date": "07/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Monday.com",
+      "icon": "monday",
+      "description": "Create and manage boards, groups, columns, items, and updates in Monday.com"
+    },
+    "inputs": [
+      {
+        "name": "api_token",
+        "type": "secret",
+        "value": null,
+        "label": "API Token",
+        "placeholder": "Your Monday.com API token",
+        "required": true
+      },
+      {
+        "name": "board_id",
+        "type": "string",
+        "value": null,
+        "label": "Board",
+        "placeholder": "The board to fetch",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Board ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Board",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "monday/board_get_all": {
+    "hash": "1a19d25e74d2c140054584902fe871a6eae02339b53ef9478ead610d6787265e",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Get Boards",
+    "description": "List the Monday.com boards you can access.",
+    "website": "https://www.flomation.co",
+    "icon": "monday+list",
+    "date": "07/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Monday.com",
+      "icon": "monday",
+      "description": "Create and manage boards, groups, columns, items, and updates in Monday.com"
+    },
+    "inputs": [
+      {
+        "name": "api_token",
+        "type": "secret",
+        "value": null,
+        "label": "API Token",
+        "placeholder": "Your Monday.com API token",
+        "required": true
+      },
+      {
+        "name": "return_all",
+        "type": "boolean",
+        "value": null,
+        "label": "Return All",
+        "placeholder": "Return every board (ignores Limit)"
+      },
+      {
+        "name": "limit",
+        "type": "integer",
+        "value": null,
+        "label": "Limit",
+        "placeholder": "Maximum number of boards to return (1-100)"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "results",
+        "type": "object",
+        "value": null,
+        "label": "Boards",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Count",
+        "placeholder": ""
+      },
+      {
+        "name": "total",
+        "type": "integer",
+        "value": null,
+        "label": "Total",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "monday/board_group_create": {
+    "hash": "a3ac099d67cfaf1837db88f5993caec513ec2779617892c93b856fdaada53937",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Create Group",
+    "description": "Add a group (a section of rows) to a Monday.com board.",
+    "website": "https://www.flomation.co",
+    "icon": "monday+plus",
+    "date": "07/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Monday.com",
+      "icon": "monday",
+      "description": "Create and manage boards, groups, columns, items, and updates in Monday.com"
+    },
+    "inputs": [
+      {
+        "name": "api_token",
+        "type": "secret",
+        "value": null,
+        "label": "API Token",
+        "placeholder": "Your Monday.com API token",
+        "required": true
+      },
+      {
+        "name": "board_id",
+        "type": "string",
+        "value": null,
+        "label": "Board",
+        "placeholder": "The board to add the group to",
+        "required": true
+      },
+      {
+        "name": "name",
+        "type": "string",
+        "value": null,
+        "label": "Name",
+        "placeholder": "The name of the group",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Group ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Group",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "monday/board_group_delete": {
+    "hash": "e967031faf2079ae7566190b153c82dce3dbf79b40b741fdffc682eceb1b74a3",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Delete Group",
+    "description": "Delete a group from a Monday.com board.",
+    "website": "https://www.flomation.co",
+    "icon": "monday+trash",
+    "date": "07/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Monday.com",
+      "icon": "monday",
+      "description": "Create and manage boards, groups, columns, items, and updates in Monday.com"
+    },
+    "inputs": [
+      {
+        "name": "api_token",
+        "type": "secret",
+        "value": null,
+        "label": "API Token",
+        "placeholder": "Your Monday.com API token",
+        "required": true
+      },
+      {
+        "name": "board_id",
+        "type": "string",
+        "value": null,
+        "label": "Board",
+        "placeholder": "The board the group belongs to",
+        "required": true
+      },
+      {
+        "name": "group_id",
+        "type": "string",
+        "value": null,
+        "label": "Group",
+        "placeholder": "The group to delete",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Group ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Result",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "monday/board_group_get_all": {
+    "hash": "5d3bcd17e64d812f7688146cfedca0acbda08701dd929b7580a4697576df65ab",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Get Groups",
+    "description": "List the groups of a Monday.com board.",
+    "website": "https://www.flomation.co",
+    "icon": "monday+list",
+    "date": "07/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Monday.com",
+      "icon": "monday",
+      "description": "Create and manage boards, groups, columns, items, and updates in Monday.com"
+    },
+    "inputs": [
+      {
+        "name": "api_token",
+        "type": "secret",
+        "value": null,
+        "label": "API Token",
+        "placeholder": "Your Monday.com API token",
+        "required": true
+      },
+      {
+        "name": "board_id",
+        "type": "string",
+        "value": null,
+        "label": "Board",
+        "placeholder": "The board whose groups to fetch",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "results",
+        "type": "object",
+        "value": null,
+        "label": "Groups",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Count",
+        "placeholder": ""
+      },
+      {
+        "name": "total",
+        "type": "integer",
+        "value": null,
+        "label": "Total",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "monday/board_group_update": {
+    "hash": "6dd9608b53ecb1114579e4f82ceb30d91ba6386e31af0b9a2c1bbb9fa140caa6",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Update Group",
+    "description": "Rename a Monday.com group or change its colour.",
+    "website": "https://www.flomation.co",
+    "icon": "monday+pen",
+    "date": "07/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Monday.com",
+      "icon": "monday",
+      "description": "Create and manage boards, groups, columns, items, and updates in Monday.com"
+    },
+    "inputs": [
+      {
+        "name": "api_token",
+        "type": "secret",
+        "value": null,
+        "label": "API Token",
+        "placeholder": "Your Monday.com API token",
+        "required": true
+      },
+      {
+        "name": "board_id",
+        "type": "string",
+        "value": null,
+        "label": "Board",
+        "placeholder": "The board the group belongs to",
+        "required": true
+      },
+      {
+        "name": "group_id",
+        "type": "string",
+        "value": null,
+        "label": "Group",
+        "placeholder": "The group to update",
+        "required": true
+      },
+      {
+        "name": "name",
+        "type": "string",
+        "value": null,
+        "label": "Name",
+        "placeholder": "A new name for the group"
+      },
+      {
+        "name": "color",
+        "type": "string",
+        "value": null,
+        "label": "Color",
+        "placeholder": "A new colour for the group (e.g. #037f4c)"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Group ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Group",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "monday/item_add_update": {
+    "hash": "5b537f211567c8ef40b279be9e389db33abebecf622f5d2f72d8db9fe87e588c",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Add Update to Item",
+    "description": "Post an update (a comment) on a Monday.com item.",
+    "website": "https://www.flomation.co",
+    "icon": "monday+comment",
+    "date": "07/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Monday.com",
+      "icon": "monday",
+      "description": "Create and manage boards, groups, columns, items, and updates in Monday.com"
+    },
+    "inputs": [
+      {
+        "name": "api_token",
+        "type": "secret",
+        "value": null,
+        "label": "API Token",
+        "placeholder": "Your Monday.com API token",
+        "required": true
+      },
+      {
+        "name": "item_id",
+        "type": "string",
+        "value": null,
+        "label": "Item ID",
+        "placeholder": "The item to post an update on",
+        "required": true
+      },
+      {
+        "name": "value",
+        "type": "text",
+        "value": null,
+        "label": "Update",
+        "placeholder": "The update text",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Update ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Update",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "monday/item_archive": {
+    "hash": "fdb491ebe265c3e62312593c55670a8d81cfc86194456da2a5a2fc3abfc5e3d5",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Archive Item",
+    "description": "Archive a Monday.com item by its ID (a softer alternative to deleting it).",
+    "website": "https://www.flomation.co",
+    "icon": "monday+box-archive",
+    "date": "07/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Monday.com",
+      "icon": "monday",
+      "description": "Create and manage boards, groups, columns, items, and updates in Monday.com"
+    },
+    "inputs": [
+      {
+        "name": "api_token",
+        "type": "secret",
+        "value": null,
+        "label": "API Token",
+        "placeholder": "Your Monday.com API token",
+        "required": true
+      },
+      {
+        "name": "item_id",
+        "type": "string",
+        "value": null,
+        "label": "Item ID",
+        "placeholder": "The ID of the item to archive",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Item ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Item",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "monday/item_change_column_value": {
+    "hash": "ecc55ae07685c7841a13a24f70611cee2aa6faa3ab316eb188ddbe4b9c21628b",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Change Column Value",
+    "description": "Set a single column's value on a Monday.com item. The value is column-type-specific JSON.",
+    "website": "https://www.flomation.co",
+    "icon": "monday+pen",
+    "date": "07/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Monday.com",
+      "icon": "monday",
+      "description": "Create and manage boards, groups, columns, items, and updates in Monday.com"
+    },
+    "inputs": [
+      {
+        "name": "api_token",
+        "type": "secret",
+        "value": null,
+        "label": "API Token",
+        "placeholder": "Your Monday.com API token",
+        "required": true
+      },
+      {
+        "name": "board_id",
+        "type": "string",
+        "value": null,
+        "label": "Board",
+        "placeholder": "The board the item is on",
+        "required": true
+      },
+      {
+        "name": "item_id",
+        "type": "string",
+        "value": null,
+        "label": "Item ID",
+        "placeholder": "The item to update",
+        "required": true
+      },
+      {
+        "name": "column_id",
+        "type": "string",
+        "value": null,
+        "label": "Column",
+        "placeholder": "The column to set",
+        "required": true
+      },
+      {
+        "name": "value",
+        "type": "object",
+        "value": null,
+        "label": "Value",
+        "placeholder": "The new value as JSON, e.g. {\"label\":\"Done\"} for a status",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Item ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Item",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "monday/item_change_multiple_column_values": {
+    "hash": "b9335f4d90ccf499a41141772c38546d8a416da0d1a58a5442b5031f21f8f529",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Change Multiple Column Values",
+    "description": "Set several column values on a Monday.com item at once, as a JSON object of column-id → value.",
+    "website": "https://www.flomation.co",
+    "icon": "monday+pen",
+    "date": "07/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Monday.com",
+      "icon": "monday",
+      "description": "Create and manage boards, groups, columns, items, and updates in Monday.com"
+    },
+    "inputs": [
+      {
+        "name": "api_token",
+        "type": "secret",
+        "value": null,
+        "label": "API Token",
+        "placeholder": "Your Monday.com API token",
+        "required": true
+      },
+      {
+        "name": "board_id",
+        "type": "string",
+        "value": null,
+        "label": "Board",
+        "placeholder": "The board the item is on",
+        "required": true
+      },
+      {
+        "name": "item_id",
+        "type": "string",
+        "value": null,
+        "label": "Item ID",
+        "placeholder": "The item to update",
+        "required": true
+      },
+      {
+        "name": "column_values",
+        "type": "object",
+        "value": null,
+        "label": "Column Values",
+        "placeholder": "JSON of column-id to value, e.g. {\"status\":{\"label\":\"Done\"},\"text\":\"hi\"}",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Item ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Item",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "monday/item_create": {
+    "hash": "c71a73451731edce0890527c7bdbc0869a9ba32e3d46f8bc944c641bb21e0340",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Create Item",
+    "description": "Create an item (a row) on a Monday.com board. Optionally place it in a group and set column values.",
+    "website": "https://www.flomation.co",
+    "icon": "monday+plus",
+    "date": "07/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Monday.com",
+      "icon": "monday",
+      "description": "Create and manage boards, groups, columns, items, and updates in Monday.com"
+    },
+    "inputs": [
+      {
+        "name": "api_token",
+        "type": "secret",
+        "value": null,
+        "label": "API Token",
+        "placeholder": "Your Monday.com API token",
+        "required": true
+      },
+      {
+        "name": "board_id",
+        "type": "string",
+        "value": null,
+        "label": "Board",
+        "placeholder": "The board to create the item on",
+        "required": true
+      },
+      {
+        "name": "group_id",
+        "type": "string",
+        "value": null,
+        "label": "Group",
+        "placeholder": "Optionally place the item in this group"
+      },
+      {
+        "name": "name",
+        "type": "string",
+        "value": null,
+        "label": "Item Name",
+        "placeholder": "The name of the item",
+        "required": true
+      },
+      {
+        "name": "column_values",
+        "type": "object",
+        "value": null,
+        "label": "Column Values",
+        "placeholder": "Optional column values as JSON, e.g. {\"status\":{\"label\":\"Done\"}}"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Item ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Item",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "monday/item_delete": {
+    "hash": "794fbacb7ef0006d5f511933c564640de4fb6fa491f41f9e5502bfcc61da9301",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Delete Item",
+    "description": "Permanently delete a Monday.com item by its ID.",
+    "website": "https://www.flomation.co",
+    "icon": "monday+trash",
+    "date": "07/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Monday.com",
+      "icon": "monday",
+      "description": "Create and manage boards, groups, columns, items, and updates in Monday.com"
+    },
+    "inputs": [
+      {
+        "name": "api_token",
+        "type": "secret",
+        "value": null,
+        "label": "API Token",
+        "placeholder": "Your Monday.com API token",
+        "required": true
+      },
+      {
+        "name": "item_id",
+        "type": "string",
+        "value": null,
+        "label": "Item ID",
+        "placeholder": "The ID of the item to delete",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Item ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Item",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "monday/item_get": {
+    "hash": "90db0f1fc35b25d1e3e39af752e08daebbb8179e4b3b19354c0c7dbbda3b5ec3",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Get Item",
+    "description": "Fetch a single Monday.com item by its ID, including its column values.",
+    "website": "https://www.flomation.co",
+    "icon": "monday+magnifying-glass",
+    "date": "07/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Monday.com",
+      "icon": "monday",
+      "description": "Create and manage boards, groups, columns, items, and updates in Monday.com"
+    },
+    "inputs": [
+      {
+        "name": "api_token",
+        "type": "secret",
+        "value": null,
+        "label": "API Token",
+        "placeholder": "Your Monday.com API token",
+        "required": true
+      },
+      {
+        "name": "item_id",
+        "type": "string",
+        "value": null,
+        "label": "Item ID",
+        "placeholder": "The ID of the item to fetch",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Item ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Item",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "monday/item_get_all": {
+    "hash": "4fd9d117188dd2a32f7e5f28425212b31a586f41c7aad0803f4a63b271a49426",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Get Items",
+    "description": "List the items in a Monday.com group on a board.",
+    "website": "https://www.flomation.co",
+    "icon": "monday+list",
+    "date": "07/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Monday.com",
+      "icon": "monday",
+      "description": "Create and manage boards, groups, columns, items, and updates in Monday.com"
+    },
+    "inputs": [
+      {
+        "name": "api_token",
+        "type": "secret",
+        "value": null,
+        "label": "API Token",
+        "placeholder": "Your Monday.com API token",
+        "required": true
+      },
+      {
+        "name": "board_id",
+        "type": "string",
+        "value": null,
+        "label": "Board",
+        "placeholder": "The board to list items from",
+        "required": true
+      },
+      {
+        "name": "group_id",
+        "type": "string",
+        "value": null,
+        "label": "Group",
+        "placeholder": "The group whose items to list",
+        "required": true
+      },
+      {
+        "name": "return_all",
+        "type": "boolean",
+        "value": null,
+        "label": "Return All",
+        "placeholder": "Return every item (follows pagination)"
+      },
+      {
+        "name": "limit",
+        "type": "integer",
+        "value": null,
+        "label": "Limit",
+        "placeholder": "Items per page (1-100)"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "results",
+        "type": "object",
+        "value": null,
+        "label": "Items",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Count",
+        "placeholder": ""
+      },
+      {
+        "name": "total",
+        "type": "integer",
+        "value": null,
+        "label": "Total",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "monday/item_get_by_column_value": {
+    "hash": "47ec4853f96a0941584c9ee3d1be3028c1f8e3a4eb0e62a1ce7fb252cebca9dc",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Get Items by Column Value",
+    "description": "Find Monday.com items on a board whose column matches a value.",
+    "website": "https://www.flomation.co",
+    "icon": "monday+magnifying-glass",
+    "date": "07/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Monday.com",
+      "icon": "monday",
+      "description": "Create and manage boards, groups, columns, items, and updates in Monday.com"
+    },
+    "inputs": [
+      {
+        "name": "api_token",
+        "type": "secret",
+        "value": null,
+        "label": "API Token",
+        "placeholder": "Your Monday.com API token",
+        "required": true
+      },
+      {
+        "name": "board_id",
+        "type": "string",
+        "value": null,
+        "label": "Board",
+        "placeholder": "The board to search",
+        "required": true
+      },
+      {
+        "name": "column_id",
+        "type": "string",
+        "value": null,
+        "label": "Column",
+        "placeholder": "The column to match on",
+        "required": true
+      },
+      {
+        "name": "column_value",
+        "type": "string",
+        "value": null,
+        "label": "Value",
+        "placeholder": "The value to match",
+        "required": true
+      },
+      {
+        "name": "return_all",
+        "type": "boolean",
+        "value": null,
+        "label": "Return All",
+        "placeholder": "Return every match (follows pagination)"
+      },
+      {
+        "name": "limit",
+        "type": "integer",
+        "value": null,
+        "label": "Limit",
+        "placeholder": "Items per page (1-100)"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "results",
+        "type": "object",
+        "value": null,
+        "label": "Items",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Count",
+        "placeholder": ""
+      },
+      {
+        "name": "total",
+        "type": "integer",
+        "value": null,
+        "label": "Total",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "monday/item_move": {
+    "hash": "87dcf6ff7379724c8d805037ae9ceacf05ec1d9686b1badc7375ee66b221ebd6",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Move Item to Group",
+    "description": "Move a Monday.com item into a different group on its board.",
+    "website": "https://www.flomation.co",
+    "icon": "monday+arrow-right-arrow-left",
+    "date": "07/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Monday.com",
+      "icon": "monday",
+      "description": "Create and manage boards, groups, columns, items, and updates in Monday.com"
+    },
+    "inputs": [
+      {
+        "name": "api_token",
+        "type": "secret",
+        "value": null,
+        "label": "API Token",
+        "placeholder": "Your Monday.com API token",
+        "required": true
+      },
+      {
+        "name": "board_id",
+        "type": "string",
+        "value": null,
+        "label": "Board",
+        "placeholder": "The board the item is on (used to load the group picker)"
+      },
+      {
+        "name": "item_id",
+        "type": "string",
+        "value": null,
+        "label": "Item ID",
+        "placeholder": "The item to move",
+        "required": true
+      },
+      {
+        "name": "group_id",
+        "type": "string",
+        "value": null,
+        "label": "Group",
+        "placeholder": "The group to move the item into",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Item ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Item",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "monday/user_get_all": {
+    "hash": "d929db2180b1b4d951eabd17a0a0624bfb36b941cc52868414e47fa24ac43bdf",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Get Users",
+    "description": "List the users in your Monday.com account.",
+    "website": "https://www.flomation.co",
+    "icon": "monday+user",
+    "date": "07/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Monday.com",
+      "icon": "monday",
+      "description": "Create and manage boards, groups, columns, items, and updates in Monday.com"
+    },
+    "inputs": [
+      {
+        "name": "api_token",
+        "type": "secret",
+        "value": null,
+        "label": "API Token",
+        "placeholder": "Your Monday.com API token",
+        "required": true
+      },
+      {
+        "name": "limit",
+        "type": "integer",
+        "value": null,
+        "label": "Limit",
+        "placeholder": "Maximum number of users to return (1-100)"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "results",
+        "type": "object",
+        "value": null,
+        "label": "Users",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Count",
+        "placeholder": ""
+      },
+      {
+        "name": "total",
+        "type": "integer",
+        "value": null,
+        "label": "Total",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "monday/workspace_get_all": {
+    "hash": "1b42f5c7976b5385240518467ed25eb7741fabdcd0ef0420989d9322dd2e087e",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Get Workspaces",
+    "description": "List the Monday.com workspaces you can access.",
+    "website": "https://www.flomation.co",
+    "icon": "monday+list",
+    "date": "07/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Monday.com",
+      "icon": "monday",
+      "description": "Create and manage boards, groups, columns, items, and updates in Monday.com"
+    },
+    "inputs": [
+      {
+        "name": "api_token",
+        "type": "secret",
+        "value": null,
+        "label": "API Token",
+        "placeholder": "Your Monday.com API token",
+        "required": true
+      },
+      {
+        "name": "limit",
+        "type": "integer",
+        "value": null,
+        "label": "Limit",
+        "placeholder": "Maximum number of workspaces to return (1-100)"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "results",
+        "type": "object",
+        "value": null,
+        "label": "Workspaces",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Count",
+        "placeholder": ""
+      },
+      {
+        "name": "total",
+        "type": "integer",
+        "value": null,
+        "label": "Total",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
   "nosql/mongodb": {
     "hash": "b39aa00de55e30d04c1bd1fb7df7ada3807e1a63a5917febc616c46748c1d618",
     "author": "Andy Esser",
@@ -78655,6 +80562,141 @@
         "type": "string",
         "value": null,
         "label": "Triggered At",
+        "placeholder": ""
+      }
+    ]
+  },
+  "trigger/monday_webhook": {
+    "hash": "9f86d38d5d8821411190385e566002dd725bf26126212b32f66c4bd6f923df82",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Monday.com Webhook Trigger",
+    "description": "Triggers a flow when something happens on a Monday.com board you watch — an item is created, a column value changes, an update is posted, and so on. The webhook is registered automatically for the board and event you choose (Monday's challenge handshake is handled for you).",
+    "website": "https://www.flomation.co",
+    "icon": "monday",
+    "date": "07/07/2026",
+    "type": 1,
+    "category": {
+      "name": "Triggers",
+      "icon": "bolt-lightning",
+      "description": "Start a Flow"
+    },
+    "inputs": [
+      {
+        "name": "api_token",
+        "type": "secret",
+        "value": null,
+        "label": "API Token",
+        "placeholder": "Your Monday.com API token",
+        "required": true
+      },
+      {
+        "name": "board_id",
+        "type": "string",
+        "value": null,
+        "label": "Board",
+        "placeholder": "The board to watch for changes",
+        "required": true
+      },
+      {
+        "name": "event",
+        "type": "string",
+        "value": null,
+        "label": "Event",
+        "placeholder": "Which event to fire on",
+        "required": true,
+        "options": [
+          {
+            "name": "Item Created",
+            "value": "create_item"
+          },
+          {
+            "name": "Item Name Changed",
+            "value": "change_name"
+          },
+          {
+            "name": "Column Value Changed",
+            "value": "change_column_value"
+          },
+          {
+            "name": "Status Column Changed",
+            "value": "change_status_column_value"
+          },
+          {
+            "name": "Update Posted",
+            "value": "create_update"
+          },
+          {
+            "name": "Item Archived",
+            "value": "item_archived"
+          },
+          {
+            "name": "Item Deleted",
+            "value": "item_deleted"
+          },
+          {
+            "name": "Item Moved to Group",
+            "value": "item_moved_to_any_group"
+          },
+          {
+            "name": "Subitem Created",
+            "value": "create_subitem"
+          },
+          {
+            "name": "Column Created",
+            "value": "create_column"
+          }
+        ]
+      }
+    ],
+    "outputs": [
+      {
+        "name": "content",
+        "type": "string",
+        "value": null,
+        "label": "Event Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "event_type",
+        "type": "string",
+        "value": null,
+        "label": "Event Type",
+        "placeholder": ""
+      },
+      {
+        "name": "board_id",
+        "type": "string",
+        "value": null,
+        "label": "Board ID",
+        "placeholder": ""
+      },
+      {
+        "name": "item_id",
+        "type": "string",
+        "value": null,
+        "label": "Item ID",
+        "placeholder": ""
+      },
+      {
+        "name": "column_id",
+        "type": "string",
+        "value": null,
+        "label": "Column ID",
+        "placeholder": ""
+      },
+      {
+        "name": "user_id",
+        "type": "string",
+        "value": null,
+        "label": "User ID",
+        "placeholder": ""
+      },
+      {
+        "name": "body",
+        "type": "string",
+        "value": null,
+        "label": "Raw JSON Body",
         "placeholder": ""
       }
     ]
