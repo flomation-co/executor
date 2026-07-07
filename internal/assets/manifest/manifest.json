@@ -4283,6 +4283,2506 @@
       }
     ]
   },
+  "asana/project_create": {
+    "hash": "654226846d8b6781c1b6310f81267e04c08bfc45752ae8699e673a6674aef2bc",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Create Project",
+    "description": "Create a project in an Asana workspace. In an organization, also choose a team.",
+    "website": "https://www.flomation.co",
+    "icon": "asana+plus",
+    "date": "07/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Asana",
+      "icon": "asana",
+      "description": "Create and manage tasks, subtasks, projects, sections, tags, and users in Asana"
+    },
+    "inputs": [
+      {
+        "name": "access_token",
+        "type": "secret",
+        "value": null,
+        "label": "Access Token",
+        "placeholder": "Your Asana Personal Access Token",
+        "required": true
+      },
+      {
+        "name": "workspace",
+        "type": "string",
+        "value": null,
+        "label": "Workspace",
+        "placeholder": "The workspace to create the project in",
+        "required": true
+      },
+      {
+        "name": "name",
+        "type": "string",
+        "value": null,
+        "label": "Name",
+        "placeholder": "The name of the project",
+        "required": true
+      },
+      {
+        "name": "team",
+        "type": "string",
+        "value": null,
+        "label": "Team",
+        "placeholder": "The team to own the project (required in an organization)"
+      },
+      {
+        "name": "notes",
+        "type": "text",
+        "value": null,
+        "label": "Notes",
+        "placeholder": "A description for the project"
+      },
+      {
+        "name": "additional_fields",
+        "type": "object",
+        "value": null,
+        "label": "Additional Fields",
+        "placeholder": "Extra Asana fields as JSON, e.g. {\"color\":\"dark-green\",\"due_on\":\"2026-08-01\"}"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Project ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Project",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "asana/project_delete": {
+    "hash": "803d18aef47c56bfee588c5f3550aa7c0db4b4bd3824608b33e2695356072e01",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Delete Project",
+    "description": "Delete an Asana project by its ID.",
+    "website": "https://www.flomation.co",
+    "icon": "asana+trash",
+    "date": "07/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Asana",
+      "icon": "asana",
+      "description": "Create and manage tasks, subtasks, projects, sections, tags, and users in Asana"
+    },
+    "inputs": [
+      {
+        "name": "access_token",
+        "type": "secret",
+        "value": null,
+        "label": "Access Token",
+        "placeholder": "Your Asana Personal Access Token",
+        "required": true
+      },
+      {
+        "name": "project_id",
+        "type": "string",
+        "value": null,
+        "label": "Project",
+        "placeholder": "The project to delete",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Project ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Result",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "asana/project_get": {
+    "hash": "8d9eac7e3ebb5aecd86321be2a8079bde98ac90cd8198530c5406179dd056a9b",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Get Project",
+    "description": "Fetch a single Asana project by its ID.",
+    "website": "https://www.flomation.co",
+    "icon": "asana+magnifying-glass",
+    "date": "07/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Asana",
+      "icon": "asana",
+      "description": "Create and manage tasks, subtasks, projects, sections, tags, and users in Asana"
+    },
+    "inputs": [
+      {
+        "name": "access_token",
+        "type": "secret",
+        "value": null,
+        "label": "Access Token",
+        "placeholder": "Your Asana Personal Access Token",
+        "required": true
+      },
+      {
+        "name": "project_id",
+        "type": "string",
+        "value": null,
+        "label": "Project",
+        "placeholder": "The project to fetch",
+        "required": true
+      },
+      {
+        "name": "opt_fields",
+        "type": "string",
+        "value": null,
+        "label": "Fields",
+        "placeholder": "Comma-separated fields to return, e.g. name,notes,owner"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Project ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Project",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "asana/project_get_all": {
+    "hash": "4358ffb4cb1bd9b492c9b369d6b52dc606ae4e42e5d00aaae1c6436527e641b6",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Get Projects",
+    "description": "List projects in an Asana workspace, optionally filtered by team or archived state.",
+    "website": "https://www.flomation.co",
+    "icon": "asana+list",
+    "date": "07/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Asana",
+      "icon": "asana",
+      "description": "Create and manage tasks, subtasks, projects, sections, tags, and users in Asana"
+    },
+    "inputs": [
+      {
+        "name": "access_token",
+        "type": "secret",
+        "value": null,
+        "label": "Access Token",
+        "placeholder": "Your Asana Personal Access Token",
+        "required": true
+      },
+      {
+        "name": "workspace",
+        "type": "string",
+        "value": null,
+        "label": "Workspace",
+        "placeholder": "The workspace whose projects to list",
+        "required": true
+      },
+      {
+        "name": "team",
+        "type": "string",
+        "value": null,
+        "label": "Team",
+        "placeholder": "Only projects owned by this team"
+      },
+      {
+        "name": "archived",
+        "type": "boolean",
+        "value": null,
+        "label": "Archived",
+        "placeholder": "Only archived (on) or only unarchived (off) projects"
+      },
+      {
+        "name": "opt_fields",
+        "type": "string",
+        "value": null,
+        "label": "Fields",
+        "placeholder": "Comma-separated fields to return, e.g. name,archived"
+      },
+      {
+        "name": "return_all",
+        "type": "boolean",
+        "value": null,
+        "label": "Return All",
+        "placeholder": "Return every project (ignores Limit)"
+      },
+      {
+        "name": "limit",
+        "type": "integer",
+        "value": null,
+        "label": "Limit",
+        "placeholder": "Maximum number of projects to return (1-100)"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "results",
+        "type": "object",
+        "value": null,
+        "label": "Results",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Count",
+        "placeholder": ""
+      },
+      {
+        "name": "total",
+        "type": "integer",
+        "value": null,
+        "label": "Total",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "asana/project_update": {
+    "hash": "e93e79b874c56b0fa2c847b550a93e0637cc24166a03f1f27a890e7e477c1faf",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Update Project",
+    "description": "Change an existing Asana project — rename it, edit notes, set the owner, colour or due date.",
+    "website": "https://www.flomation.co",
+    "icon": "asana+pen",
+    "date": "07/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Asana",
+      "icon": "asana",
+      "description": "Create and manage tasks, subtasks, projects, sections, tags, and users in Asana"
+    },
+    "inputs": [
+      {
+        "name": "access_token",
+        "type": "secret",
+        "value": null,
+        "label": "Access Token",
+        "placeholder": "Your Asana Personal Access Token",
+        "required": true
+      },
+      {
+        "name": "project_id",
+        "type": "string",
+        "value": null,
+        "label": "Project",
+        "placeholder": "The project to update",
+        "required": true
+      },
+      {
+        "name": "name",
+        "type": "string",
+        "value": null,
+        "label": "Name",
+        "placeholder": "A new name for the project"
+      },
+      {
+        "name": "notes",
+        "type": "text",
+        "value": null,
+        "label": "Notes",
+        "placeholder": "A new description for the project"
+      },
+      {
+        "name": "owner",
+        "type": "string",
+        "value": null,
+        "label": "Owner",
+        "placeholder": "Set the project owner (a user ID)"
+      },
+      {
+        "name": "additional_fields",
+        "type": "object",
+        "value": null,
+        "label": "Additional Fields",
+        "placeholder": "Extra Asana fields as JSON, e.g. {\"color\":\"light-blue\",\"archived\":true}"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Project ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Project",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "asana/section_create": {
+    "hash": "6b65e62ef3190147354296fdd67e16bcd1555f55c581987acff191496235f2f1",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Create Section",
+    "description": "Create a section (a column) in an Asana project.",
+    "website": "https://www.flomation.co",
+    "icon": "asana+plus",
+    "date": "07/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Asana",
+      "icon": "asana",
+      "description": "Create and manage tasks, subtasks, projects, sections, tags, and users in Asana"
+    },
+    "inputs": [
+      {
+        "name": "access_token",
+        "type": "secret",
+        "value": null,
+        "label": "Access Token",
+        "placeholder": "Your Asana Personal Access Token",
+        "required": true
+      },
+      {
+        "name": "workspace",
+        "type": "string",
+        "value": null,
+        "label": "Workspace",
+        "placeholder": "Optional — used only to load the Project picker (not sent to Asana)"
+      },
+      {
+        "name": "project_id",
+        "type": "string",
+        "value": null,
+        "label": "Project",
+        "placeholder": "The project to add the section to",
+        "required": true
+      },
+      {
+        "name": "name",
+        "type": "string",
+        "value": null,
+        "label": "Name",
+        "placeholder": "The name of the section",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Section ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Section",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "asana/section_get_all": {
+    "hash": "4d3aa52756acde34a94b36fe9326c5d83e7fe583ae9f656094a8666b66b668d2",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Get Sections",
+    "description": "List the sections (columns) of an Asana project.",
+    "website": "https://www.flomation.co",
+    "icon": "asana+list",
+    "date": "07/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Asana",
+      "icon": "asana",
+      "description": "Create and manage tasks, subtasks, projects, sections, tags, and users in Asana"
+    },
+    "inputs": [
+      {
+        "name": "access_token",
+        "type": "secret",
+        "value": null,
+        "label": "Access Token",
+        "placeholder": "Your Asana Personal Access Token",
+        "required": true
+      },
+      {
+        "name": "workspace",
+        "type": "string",
+        "value": null,
+        "label": "Workspace",
+        "placeholder": "Optional — used only to load the Project picker (not sent to Asana)"
+      },
+      {
+        "name": "project_id",
+        "type": "string",
+        "value": null,
+        "label": "Project",
+        "placeholder": "The project whose sections to fetch",
+        "required": true
+      },
+      {
+        "name": "opt_fields",
+        "type": "string",
+        "value": null,
+        "label": "Fields",
+        "placeholder": "Comma-separated fields to return, e.g. name"
+      },
+      {
+        "name": "return_all",
+        "type": "boolean",
+        "value": null,
+        "label": "Return All",
+        "placeholder": "Return every section (ignores Limit)"
+      },
+      {
+        "name": "limit",
+        "type": "integer",
+        "value": null,
+        "label": "Limit",
+        "placeholder": "Maximum number of sections to return (1-100)"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "results",
+        "type": "object",
+        "value": null,
+        "label": "Results",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Count",
+        "placeholder": ""
+      },
+      {
+        "name": "total",
+        "type": "integer",
+        "value": null,
+        "label": "Total",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "asana/subtask_create": {
+    "hash": "65827aaf9774e76137bd5e641c1aa8ef42e3357962346732010b84d119e5f8e8",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Create Subtask",
+    "description": "Add a subtask to an Asana task.",
+    "website": "https://www.flomation.co",
+    "icon": "asana+plus",
+    "date": "07/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Asana",
+      "icon": "asana",
+      "description": "Create and manage tasks, subtasks, projects, sections, tags, and users in Asana"
+    },
+    "inputs": [
+      {
+        "name": "access_token",
+        "type": "secret",
+        "value": null,
+        "label": "Access Token",
+        "placeholder": "Your Asana Personal Access Token",
+        "required": true
+      },
+      {
+        "name": "task_id",
+        "type": "string",
+        "value": null,
+        "label": "Parent Task ID",
+        "placeholder": "The task to add the subtask to",
+        "required": true
+      },
+      {
+        "name": "name",
+        "type": "string",
+        "value": null,
+        "label": "Name",
+        "placeholder": "The name of the subtask",
+        "required": true
+      },
+      {
+        "name": "notes",
+        "type": "text",
+        "value": null,
+        "label": "Notes",
+        "placeholder": "A description for the subtask"
+      },
+      {
+        "name": "assignee",
+        "type": "string",
+        "value": null,
+        "label": "Assignee",
+        "placeholder": "The user to assign the subtask to"
+      },
+      {
+        "name": "additional_fields",
+        "type": "object",
+        "value": null,
+        "label": "Additional Fields",
+        "placeholder": "Extra Asana fields as JSON"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Subtask ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Subtask",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "asana/subtask_get_all": {
+    "hash": "d6f8fba519df2e43c4f58d7b9f4645a9a592e0dd42b0aec139b9c89111f249ba",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Get Subtasks",
+    "description": "List the subtasks of an Asana task.",
+    "website": "https://www.flomation.co",
+    "icon": "asana+list",
+    "date": "07/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Asana",
+      "icon": "asana",
+      "description": "Create and manage tasks, subtasks, projects, sections, tags, and users in Asana"
+    },
+    "inputs": [
+      {
+        "name": "access_token",
+        "type": "secret",
+        "value": null,
+        "label": "Access Token",
+        "placeholder": "Your Asana Personal Access Token",
+        "required": true
+      },
+      {
+        "name": "task_id",
+        "type": "string",
+        "value": null,
+        "label": "Parent Task ID",
+        "placeholder": "The task whose subtasks to fetch",
+        "required": true
+      },
+      {
+        "name": "opt_fields",
+        "type": "string",
+        "value": null,
+        "label": "Fields",
+        "placeholder": "Comma-separated fields to return, e.g. name,completed"
+      },
+      {
+        "name": "return_all",
+        "type": "boolean",
+        "value": null,
+        "label": "Return All",
+        "placeholder": "Return every subtask (ignores Limit)"
+      },
+      {
+        "name": "limit",
+        "type": "integer",
+        "value": null,
+        "label": "Limit",
+        "placeholder": "Maximum number of subtasks to return (1-100)"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "results",
+        "type": "object",
+        "value": null,
+        "label": "Subtasks",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Count",
+        "placeholder": ""
+      },
+      {
+        "name": "total",
+        "type": "integer",
+        "value": null,
+        "label": "Total",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "asana/tag_create": {
+    "hash": "53c6a8cc3975057e0b1fc8b19c7173fc831f9af306eb4bf0d35c91f3f9372285",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Create Tag",
+    "description": "Create a tag in an Asana workspace.",
+    "website": "https://www.flomation.co",
+    "icon": "asana+plus",
+    "date": "07/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Asana",
+      "icon": "asana",
+      "description": "Create and manage tasks, subtasks, projects, sections, tags, and users in Asana"
+    },
+    "inputs": [
+      {
+        "name": "access_token",
+        "type": "secret",
+        "value": null,
+        "label": "Access Token",
+        "placeholder": "Your Asana Personal Access Token",
+        "required": true
+      },
+      {
+        "name": "workspace",
+        "type": "string",
+        "value": null,
+        "label": "Workspace",
+        "placeholder": "The workspace to create the tag in",
+        "required": true
+      },
+      {
+        "name": "name",
+        "type": "string",
+        "value": null,
+        "label": "Name",
+        "placeholder": "The name of the tag",
+        "required": true
+      },
+      {
+        "name": "additional_fields",
+        "type": "object",
+        "value": null,
+        "label": "Additional Fields",
+        "placeholder": "Extra Asana fields as JSON, e.g. {\"color\":\"light-green\"}"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Tag ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Tag",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "asana/tag_get_all": {
+    "hash": "8c2ca5621438e7b8b53097a7ec931a55d9dcc5529100e7cf7a6112a836c3ee6e",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Get Tags",
+    "description": "List the tags in an Asana workspace.",
+    "website": "https://www.flomation.co",
+    "icon": "asana+list",
+    "date": "07/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Asana",
+      "icon": "asana",
+      "description": "Create and manage tasks, subtasks, projects, sections, tags, and users in Asana"
+    },
+    "inputs": [
+      {
+        "name": "access_token",
+        "type": "secret",
+        "value": null,
+        "label": "Access Token",
+        "placeholder": "Your Asana Personal Access Token",
+        "required": true
+      },
+      {
+        "name": "workspace",
+        "type": "string",
+        "value": null,
+        "label": "Workspace",
+        "placeholder": "The workspace whose tags to fetch",
+        "required": true
+      },
+      {
+        "name": "opt_fields",
+        "type": "string",
+        "value": null,
+        "label": "Fields",
+        "placeholder": "Comma-separated fields to return, e.g. name,color"
+      },
+      {
+        "name": "return_all",
+        "type": "boolean",
+        "value": null,
+        "label": "Return All",
+        "placeholder": "Return every tag (ignores Limit)"
+      },
+      {
+        "name": "limit",
+        "type": "integer",
+        "value": null,
+        "label": "Limit",
+        "placeholder": "Maximum number of tags to return (1-100)"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "results",
+        "type": "object",
+        "value": null,
+        "label": "Results",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Count",
+        "placeholder": ""
+      },
+      {
+        "name": "total",
+        "type": "integer",
+        "value": null,
+        "label": "Total",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "asana/task_add_project": {
+    "hash": "181f1c1b2fc5125f31d01ac646baf68995ff86f321afa87dda78bfafd947b50b",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Add Task to Project",
+    "description": "Add an Asana task to a project.",
+    "website": "https://www.flomation.co",
+    "icon": "asana+plus",
+    "date": "07/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Asana",
+      "icon": "asana",
+      "description": "Create and manage tasks, subtasks, projects, sections, tags, and users in Asana"
+    },
+    "inputs": [
+      {
+        "name": "access_token",
+        "type": "secret",
+        "value": null,
+        "label": "Access Token",
+        "placeholder": "Your Asana Personal Access Token",
+        "required": true
+      },
+      {
+        "name": "workspace",
+        "type": "string",
+        "value": null,
+        "label": "Workspace",
+        "placeholder": "Optional — used only to load the Project picker (not sent to Asana)"
+      },
+      {
+        "name": "task_id",
+        "type": "string",
+        "value": null,
+        "label": "Task ID",
+        "placeholder": "The task to add to a project",
+        "required": true
+      },
+      {
+        "name": "project",
+        "type": "string",
+        "value": null,
+        "label": "Project",
+        "placeholder": "The project to add the task to",
+        "required": true
+      },
+      {
+        "name": "section",
+        "type": "string",
+        "value": null,
+        "label": "Section",
+        "placeholder": "Optionally place it in this section of the project"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Task ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Result",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "asana/task_add_tag": {
+    "hash": "daec4030d2f0ec9640815a1bb0148a07025b0d1fbfb302437053f6955ef0b18e",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Add Tag to Task",
+    "description": "Add a tag to an Asana task.",
+    "website": "https://www.flomation.co",
+    "icon": "asana+plus",
+    "date": "07/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Asana",
+      "icon": "asana",
+      "description": "Create and manage tasks, subtasks, projects, sections, tags, and users in Asana"
+    },
+    "inputs": [
+      {
+        "name": "access_token",
+        "type": "secret",
+        "value": null,
+        "label": "Access Token",
+        "placeholder": "Your Asana Personal Access Token",
+        "required": true
+      },
+      {
+        "name": "task_id",
+        "type": "string",
+        "value": null,
+        "label": "Task ID",
+        "placeholder": "The task to tag",
+        "required": true
+      },
+      {
+        "name": "workspace",
+        "type": "string",
+        "value": null,
+        "label": "Workspace",
+        "placeholder": "Optional — used only to load the Tag picker (not sent to Asana)"
+      },
+      {
+        "name": "tag",
+        "type": "string",
+        "value": null,
+        "label": "Tag",
+        "placeholder": "The tag to add",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Task ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Result",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "asana/task_comment_add": {
+    "hash": "141b38d00f2288bdf7ac83982c742b401e2709ad97b3e8952430afe013ca4b8b",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Add Comment",
+    "description": "Add a comment to an Asana task.",
+    "website": "https://www.flomation.co",
+    "icon": "asana+comment",
+    "date": "07/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Asana",
+      "icon": "asana",
+      "description": "Create and manage tasks, subtasks, projects, sections, tags, and users in Asana"
+    },
+    "inputs": [
+      {
+        "name": "access_token",
+        "type": "secret",
+        "value": null,
+        "label": "Access Token",
+        "placeholder": "Your Asana Personal Access Token",
+        "required": true
+      },
+      {
+        "name": "task_id",
+        "type": "string",
+        "value": null,
+        "label": "Task ID",
+        "placeholder": "The task to comment on",
+        "required": true
+      },
+      {
+        "name": "text",
+        "type": "text",
+        "value": null,
+        "label": "Comment",
+        "placeholder": "The comment text",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Comment ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Comment",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "asana/task_comment_remove": {
+    "hash": "3c65288960e58fb0426b29e571594ae82f5de291f8c5b2cc67e5fc37591eac26",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Remove Comment",
+    "description": "Delete a comment (story) from an Asana task.",
+    "website": "https://www.flomation.co",
+    "icon": "asana+trash",
+    "date": "07/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Asana",
+      "icon": "asana",
+      "description": "Create and manage tasks, subtasks, projects, sections, tags, and users in Asana"
+    },
+    "inputs": [
+      {
+        "name": "access_token",
+        "type": "secret",
+        "value": null,
+        "label": "Access Token",
+        "placeholder": "Your Asana Personal Access Token",
+        "required": true
+      },
+      {
+        "name": "comment_id",
+        "type": "string",
+        "value": null,
+        "label": "Comment ID",
+        "placeholder": "The ID of the comment (story) to delete",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Comment ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Result",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "asana/task_create": {
+    "hash": "0ed42b882adc5ad0dcfa21435910ce78409db6044eae64a8f71db9b41e900aa1",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Create Task",
+    "description": "Create a task in Asana. Give it a name and workspace, then optionally assign it, set a due date, notes, and the projects it belongs to.",
+    "website": "https://www.flomation.co",
+    "icon": "asana+plus",
+    "date": "07/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Asana",
+      "icon": "asana",
+      "description": "Create and manage tasks, subtasks, projects, sections, tags, and users in Asana"
+    },
+    "inputs": [
+      {
+        "name": "access_token",
+        "type": "secret",
+        "value": null,
+        "label": "Access Token",
+        "placeholder": "Your Asana Personal Access Token",
+        "required": true
+      },
+      {
+        "name": "workspace",
+        "type": "string",
+        "value": null,
+        "label": "Workspace",
+        "placeholder": "The workspace to create the task in",
+        "required": true
+      },
+      {
+        "name": "name",
+        "type": "string",
+        "value": null,
+        "label": "Name",
+        "placeholder": "The name of the task",
+        "required": true
+      },
+      {
+        "name": "notes",
+        "type": "text",
+        "value": null,
+        "label": "Notes",
+        "placeholder": "A description for the task"
+      },
+      {
+        "name": "assignee",
+        "type": "string",
+        "value": null,
+        "label": "Assignee",
+        "placeholder": "The user to assign the task to"
+      },
+      {
+        "name": "due_on",
+        "type": "string",
+        "value": null,
+        "label": "Due On",
+        "placeholder": "Due date, e.g. 2026-07-31 (YYYY-MM-DD)"
+      },
+      {
+        "name": "projects",
+        "type": "string",
+        "value": null,
+        "label": "Projects",
+        "placeholder": "Comma-separated project IDs to add the task to"
+      },
+      {
+        "name": "followers",
+        "type": "string",
+        "value": null,
+        "label": "Followers",
+        "placeholder": "Comma-separated user IDs to follow the task"
+      },
+      {
+        "name": "additional_fields",
+        "type": "object",
+        "value": null,
+        "label": "Additional Fields",
+        "placeholder": "Extra Asana fields as JSON, e.g. {\"start_on\":\"2026-07-01\",\"html_notes\":\"\u003cbody\u003e..\u003c/body\u003e\"}"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Task ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Task",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "asana/task_delete": {
+    "hash": "d0c00013bd26ae55504072a3ede7a9f3cecb7c22019c8d1fe3c5f2eb3f86dea0",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Delete Task",
+    "description": "Delete an Asana task by its ID.",
+    "website": "https://www.flomation.co",
+    "icon": "asana+trash",
+    "date": "07/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Asana",
+      "icon": "asana",
+      "description": "Create and manage tasks, subtasks, projects, sections, tags, and users in Asana"
+    },
+    "inputs": [
+      {
+        "name": "access_token",
+        "type": "secret",
+        "value": null,
+        "label": "Access Token",
+        "placeholder": "Your Asana Personal Access Token",
+        "required": true
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Task ID",
+        "placeholder": "The ID of the task to delete",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Task ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Result",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "asana/task_get": {
+    "hash": "abbc63d15d4f930789b16c99f7d20f65518e08beb83d61bef9efd61ae705fd59",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Get Task",
+    "description": "Fetch a single Asana task by its ID.",
+    "website": "https://www.flomation.co",
+    "icon": "asana+magnifying-glass",
+    "date": "07/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Asana",
+      "icon": "asana",
+      "description": "Create and manage tasks, subtasks, projects, sections, tags, and users in Asana"
+    },
+    "inputs": [
+      {
+        "name": "access_token",
+        "type": "secret",
+        "value": null,
+        "label": "Access Token",
+        "placeholder": "Your Asana Personal Access Token",
+        "required": true
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Task ID",
+        "placeholder": "The ID of the task to fetch",
+        "required": true
+      },
+      {
+        "name": "opt_fields",
+        "type": "string",
+        "value": null,
+        "label": "Fields",
+        "placeholder": "Comma-separated fields to return, e.g. name,notes,assignee,due_on"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Task ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Task",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "asana/task_get_all": {
+    "hash": "b8cf1ea16f88611682f90706c1c94823e93324a4c35389c75f4d22d47f096711",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Get Tasks",
+    "description": "List Asana tasks. Narrow by project, or by assignee within a workspace, or by section.",
+    "website": "https://www.flomation.co",
+    "icon": "asana+list",
+    "date": "07/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Asana",
+      "icon": "asana",
+      "description": "Create and manage tasks, subtasks, projects, sections, tags, and users in Asana"
+    },
+    "inputs": [
+      {
+        "name": "access_token",
+        "type": "secret",
+        "value": null,
+        "label": "Access Token",
+        "placeholder": "Your Asana Personal Access Token",
+        "required": true
+      },
+      {
+        "name": "project",
+        "type": "string",
+        "value": null,
+        "label": "Project",
+        "placeholder": "List tasks in this project"
+      },
+      {
+        "name": "section",
+        "type": "string",
+        "value": null,
+        "label": "Section",
+        "placeholder": "List tasks in this section"
+      },
+      {
+        "name": "workspace",
+        "type": "string",
+        "value": null,
+        "label": "Workspace",
+        "placeholder": "Required when filtering by Assignee"
+      },
+      {
+        "name": "assignee",
+        "type": "string",
+        "value": null,
+        "label": "Assignee",
+        "placeholder": "List tasks assigned to this user (needs Workspace)"
+      },
+      {
+        "name": "opt_fields",
+        "type": "string",
+        "value": null,
+        "label": "Fields",
+        "placeholder": "Comma-separated fields to return, e.g. name,completed,due_on"
+      },
+      {
+        "name": "return_all",
+        "type": "boolean",
+        "value": null,
+        "label": "Return All",
+        "placeholder": "Return every task (ignores Limit)"
+      },
+      {
+        "name": "limit",
+        "type": "integer",
+        "value": null,
+        "label": "Limit",
+        "placeholder": "Maximum number of tasks to return (1-100)"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "results",
+        "type": "object",
+        "value": null,
+        "label": "Tasks",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Count",
+        "placeholder": ""
+      },
+      {
+        "name": "total",
+        "type": "integer",
+        "value": null,
+        "label": "Total",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "asana/task_move": {
+    "hash": "dd738cd8c401ecf6ef6d6027b0b6138a5daea41b2db724814df3760cb41c9cb3",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Move Task to Section",
+    "description": "Move an Asana task into a section (a column) of a project. Pick the project to load its sections.",
+    "website": "https://www.flomation.co",
+    "icon": "asana+arrow-right-arrow-left",
+    "date": "07/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Asana",
+      "icon": "asana",
+      "description": "Create and manage tasks, subtasks, projects, sections, tags, and users in Asana"
+    },
+    "inputs": [
+      {
+        "name": "access_token",
+        "type": "secret",
+        "value": null,
+        "label": "Access Token",
+        "placeholder": "Your Asana Personal Access Token",
+        "required": true
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Task ID",
+        "placeholder": "The task to move",
+        "required": true
+      },
+      {
+        "name": "workspace",
+        "type": "string",
+        "value": null,
+        "label": "Workspace",
+        "placeholder": "Optional — used only to load the Project picker (not sent to Asana)"
+      },
+      {
+        "name": "project_id",
+        "type": "string",
+        "value": null,
+        "label": "Project",
+        "placeholder": "Optional — used only to load the Section picker (not sent to Asana)"
+      },
+      {
+        "name": "section",
+        "type": "string",
+        "value": null,
+        "label": "Section",
+        "placeholder": "The section to move the task into",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Task ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Result",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "asana/task_remove_project": {
+    "hash": "8b57eb18e2fac1178303cddb055acdf2b4843b65a886867c0e49dc4e4ea4a915",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Remove Task from Project",
+    "description": "Remove an Asana task from a project.",
+    "website": "https://www.flomation.co",
+    "icon": "asana+xmark",
+    "date": "07/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Asana",
+      "icon": "asana",
+      "description": "Create and manage tasks, subtasks, projects, sections, tags, and users in Asana"
+    },
+    "inputs": [
+      {
+        "name": "access_token",
+        "type": "secret",
+        "value": null,
+        "label": "Access Token",
+        "placeholder": "Your Asana Personal Access Token",
+        "required": true
+      },
+      {
+        "name": "workspace",
+        "type": "string",
+        "value": null,
+        "label": "Workspace",
+        "placeholder": "Optional — used only to load the Project picker (not sent to Asana)"
+      },
+      {
+        "name": "task_id",
+        "type": "string",
+        "value": null,
+        "label": "Task ID",
+        "placeholder": "The task to remove from a project",
+        "required": true
+      },
+      {
+        "name": "project",
+        "type": "string",
+        "value": null,
+        "label": "Project",
+        "placeholder": "The project to remove the task from",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Task ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Result",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "asana/task_remove_tag": {
+    "hash": "57abbda94d6d579bbecbab5ac09a38d5ca276bd60214c3fb5abe9cc0bdf440f7",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Remove Tag from Task",
+    "description": "Remove a tag from an Asana task.",
+    "website": "https://www.flomation.co",
+    "icon": "asana+xmark",
+    "date": "07/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Asana",
+      "icon": "asana",
+      "description": "Create and manage tasks, subtasks, projects, sections, tags, and users in Asana"
+    },
+    "inputs": [
+      {
+        "name": "access_token",
+        "type": "secret",
+        "value": null,
+        "label": "Access Token",
+        "placeholder": "Your Asana Personal Access Token",
+        "required": true
+      },
+      {
+        "name": "task_id",
+        "type": "string",
+        "value": null,
+        "label": "Task ID",
+        "placeholder": "The task to untag",
+        "required": true
+      },
+      {
+        "name": "workspace",
+        "type": "string",
+        "value": null,
+        "label": "Workspace",
+        "placeholder": "Optional — used only to load the Tag picker (not sent to Asana)"
+      },
+      {
+        "name": "tag",
+        "type": "string",
+        "value": null,
+        "label": "Tag",
+        "placeholder": "The tag to remove",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Task ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Result",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "asana/task_search": {
+    "hash": "bb7c4e732b968b02c2c05fae9bf52385f0f4b6c4ffd25a55eb18b5bc7fac9d90",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Search Tasks",
+    "description": "Search for Asana tasks in a workspace by text in their name or notes.",
+    "website": "https://www.flomation.co",
+    "icon": "asana+magnifying-glass",
+    "date": "07/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Asana",
+      "icon": "asana",
+      "description": "Create and manage tasks, subtasks, projects, sections, tags, and users in Asana"
+    },
+    "inputs": [
+      {
+        "name": "access_token",
+        "type": "secret",
+        "value": null,
+        "label": "Access Token",
+        "placeholder": "Your Asana Personal Access Token",
+        "required": true
+      },
+      {
+        "name": "workspace",
+        "type": "string",
+        "value": null,
+        "label": "Workspace",
+        "placeholder": "The workspace to search in",
+        "required": true
+      },
+      {
+        "name": "text",
+        "type": "string",
+        "value": null,
+        "label": "Text",
+        "placeholder": "Text to search for in task names and notes"
+      },
+      {
+        "name": "opt_fields",
+        "type": "string",
+        "value": null,
+        "label": "Fields",
+        "placeholder": "Comma-separated fields to return, e.g. name,completed,assignee"
+      },
+      {
+        "name": "additional_fields",
+        "type": "object",
+        "value": null,
+        "label": "Additional Fields",
+        "placeholder": "Extra Asana search filters as JSON, e.g. {\"completed\":false}"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "results",
+        "type": "object",
+        "value": null,
+        "label": "Tasks",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Count",
+        "placeholder": ""
+      },
+      {
+        "name": "total",
+        "type": "integer",
+        "value": null,
+        "label": "Total",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "asana/task_update": {
+    "hash": "069d5808e39e45c8fac307cbf5350c5a40524e39b9be45ca323146bda417f9d4",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Update Task",
+    "description": "Change an existing Asana task — rename it, edit notes, reassign it, set a due date, or mark it complete.",
+    "website": "https://www.flomation.co",
+    "icon": "asana+pen",
+    "date": "07/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Asana",
+      "icon": "asana",
+      "description": "Create and manage tasks, subtasks, projects, sections, tags, and users in Asana"
+    },
+    "inputs": [
+      {
+        "name": "access_token",
+        "type": "secret",
+        "value": null,
+        "label": "Access Token",
+        "placeholder": "Your Asana Personal Access Token",
+        "required": true
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Task ID",
+        "placeholder": "The ID of the task to update",
+        "required": true
+      },
+      {
+        "name": "name",
+        "type": "string",
+        "value": null,
+        "label": "Name",
+        "placeholder": "A new name for the task"
+      },
+      {
+        "name": "notes",
+        "type": "text",
+        "value": null,
+        "label": "Notes",
+        "placeholder": "A new description for the task"
+      },
+      {
+        "name": "assignee",
+        "type": "string",
+        "value": null,
+        "label": "Assignee",
+        "placeholder": "Reassign the task to this user"
+      },
+      {
+        "name": "due_on",
+        "type": "string",
+        "value": null,
+        "label": "Due On",
+        "placeholder": "Due date, e.g. 2026-07-31 (YYYY-MM-DD)"
+      },
+      {
+        "name": "completed",
+        "type": "boolean",
+        "value": null,
+        "label": "Completed",
+        "placeholder": "Mark the task complete or incomplete"
+      },
+      {
+        "name": "additional_fields",
+        "type": "object",
+        "value": null,
+        "label": "Additional Fields",
+        "placeholder": "Extra Asana fields as JSON"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Task ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Task",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "asana/user_get": {
+    "hash": "765772eca7c862f2cea1f79d842d97d1c4a51f5aaac7df86089f96c2963cf70c",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Get User",
+    "description": "Fetch a single Asana user by ID (or 'me' for the authenticated user).",
+    "website": "https://www.flomation.co",
+    "icon": "asana+user",
+    "date": "07/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Asana",
+      "icon": "asana",
+      "description": "Create and manage tasks, subtasks, projects, sections, tags, and users in Asana"
+    },
+    "inputs": [
+      {
+        "name": "access_token",
+        "type": "secret",
+        "value": null,
+        "label": "Access Token",
+        "placeholder": "Your Asana Personal Access Token",
+        "required": true
+      },
+      {
+        "name": "user_id",
+        "type": "string",
+        "value": null,
+        "label": "User",
+        "placeholder": "The user ID, or 'me' for yourself",
+        "required": true
+      },
+      {
+        "name": "opt_fields",
+        "type": "string",
+        "value": null,
+        "label": "Fields",
+        "placeholder": "Comma-separated fields to return, e.g. name,email"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "User ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "User",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "asana/user_get_all": {
+    "hash": "cc5340d8e8bf06a1086f0d01837140b5e0cbcf446bcc31bfa173d3536a55c220",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Get Users",
+    "description": "List the users in an Asana workspace.",
+    "website": "https://www.flomation.co",
+    "icon": "asana+list",
+    "date": "07/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Asana",
+      "icon": "asana",
+      "description": "Create and manage tasks, subtasks, projects, sections, tags, and users in Asana"
+    },
+    "inputs": [
+      {
+        "name": "access_token",
+        "type": "secret",
+        "value": null,
+        "label": "Access Token",
+        "placeholder": "Your Asana Personal Access Token",
+        "required": true
+      },
+      {
+        "name": "workspace",
+        "type": "string",
+        "value": null,
+        "label": "Workspace",
+        "placeholder": "The workspace whose users to list",
+        "required": true
+      },
+      {
+        "name": "opt_fields",
+        "type": "string",
+        "value": null,
+        "label": "Fields",
+        "placeholder": "Comma-separated fields to return, e.g. name,email"
+      },
+      {
+        "name": "return_all",
+        "type": "boolean",
+        "value": null,
+        "label": "Return All",
+        "placeholder": "Return every user (ignores Limit)"
+      },
+      {
+        "name": "limit",
+        "type": "integer",
+        "value": null,
+        "label": "Limit",
+        "placeholder": "Maximum number of users to return (1-100)"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "results",
+        "type": "object",
+        "value": null,
+        "label": "Results",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Count",
+        "placeholder": ""
+      },
+      {
+        "name": "total",
+        "type": "integer",
+        "value": null,
+        "label": "Total",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "asana/workspace_get_all": {
+    "hash": "8b4ce59c4ed38baa6d9b766cff2228ba898230a986bcf5e9ffa1152aeced35c6",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Get Workspaces",
+    "description": "List the Asana workspaces you can access. Use this to find the workspace ID other actions need.",
+    "website": "https://www.flomation.co",
+    "icon": "asana+list",
+    "date": "07/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Asana",
+      "icon": "asana",
+      "description": "Create and manage tasks, subtasks, projects, sections, tags, and users in Asana"
+    },
+    "inputs": [
+      {
+        "name": "access_token",
+        "type": "secret",
+        "value": null,
+        "label": "Access Token",
+        "placeholder": "Your Asana Personal Access Token",
+        "required": true
+      },
+      {
+        "name": "opt_fields",
+        "type": "string",
+        "value": null,
+        "label": "Fields",
+        "placeholder": "Comma-separated fields to return, e.g. name,is_organization"
+      },
+      {
+        "name": "return_all",
+        "type": "boolean",
+        "value": null,
+        "label": "Return All",
+        "placeholder": "Return every workspace (ignores Limit)"
+      },
+      {
+        "name": "limit",
+        "type": "integer",
+        "value": null,
+        "label": "Limit",
+        "placeholder": "Maximum number of workspaces to return (1-100)"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "results",
+        "type": "object",
+        "value": null,
+        "label": "Results",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Count",
+        "placeholder": ""
+      },
+      {
+        "name": "total",
+        "type": "integer",
+        "value": null,
+        "label": "Total",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
   "aws/dynamodb": {
     "hash": "614a3779fc3641ffd2b8090b3e3ee65665fd9a2dec4118100c6cb91e46841095",
     "author": "Andy Esser",
@@ -73973,6 +76473,98 @@
         "type": "string",
         "value": null,
         "label": "Triggered At",
+        "placeholder": ""
+      }
+    ]
+  },
+  "trigger/asana_webhook": {
+    "hash": "8b5014c3d35bcca921b858be944962b7f3cf648623ca8762f92c8288bd5e360f",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Asana Webhook Trigger",
+    "description": "Triggers a flow when something changes on an Asana task or project you watch (a task is added, changed, completed, commented on, and so on). The webhook is registered automatically for the resource you choose — Asana's handshake and per-delivery HMAC-SHA256 signature are handled for you.",
+    "website": "https://www.flomation.co",
+    "icon": "asana",
+    "date": "07/07/2026",
+    "type": 1,
+    "category": {
+      "name": "Triggers",
+      "icon": "bolt-lightning",
+      "description": "Start a Flow"
+    },
+    "inputs": [
+      {
+        "name": "access_token",
+        "type": "secret",
+        "value": null,
+        "label": "Access Token",
+        "placeholder": "Your Asana Personal Access Token",
+        "required": true
+      },
+      {
+        "name": "workspace",
+        "type": "string",
+        "value": null,
+        "label": "Workspace",
+        "placeholder": "The workspace that owns the resource (used to load the resource picker)"
+      },
+      {
+        "name": "resource",
+        "type": "string",
+        "value": null,
+        "label": "Watch",
+        "placeholder": "The task or project ID to watch for changes",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "content",
+        "type": "string",
+        "value": null,
+        "label": "Event Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "action",
+        "type": "string",
+        "value": null,
+        "label": "Action",
+        "placeholder": ""
+      },
+      {
+        "name": "resource_id",
+        "type": "string",
+        "value": null,
+        "label": "Resource ID",
+        "placeholder": ""
+      },
+      {
+        "name": "resource_type",
+        "type": "string",
+        "value": null,
+        "label": "Resource Type",
+        "placeholder": ""
+      },
+      {
+        "name": "user",
+        "type": "string",
+        "value": null,
+        "label": "User",
+        "placeholder": ""
+      },
+      {
+        "name": "created_at",
+        "type": "string",
+        "value": null,
+        "label": "Timestamp",
+        "placeholder": ""
+      },
+      {
+        "name": "body",
+        "type": "string",
+        "value": null,
+        "label": "Raw JSON Body",
         "placeholder": ""
       }
     ]
