@@ -644,6 +644,48 @@ import (
 	subflow_begin "flomation.app/automate/executor/actions/subflow/begin"
 	subflow_end "flomation.app/automate/executor/actions/subflow/end"
 	subflow_invoke "flomation.app/automate/executor/actions/subflow/invoke"
+	trello_attachment_create "flomation.app/automate/executor/actions/trello/attachment_create"
+	trello_attachment_delete "flomation.app/automate/executor/actions/trello/attachment_delete"
+	trello_attachment_get "flomation.app/automate/executor/actions/trello/attachment_get"
+	trello_attachment_get_all "flomation.app/automate/executor/actions/trello/attachment_get_all"
+	trello_board_create "flomation.app/automate/executor/actions/trello/board_create"
+	trello_board_delete "flomation.app/automate/executor/actions/trello/board_delete"
+	trello_board_get "flomation.app/automate/executor/actions/trello/board_get"
+	trello_board_get_all "flomation.app/automate/executor/actions/trello/board_get_all"
+	trello_board_member_add "flomation.app/automate/executor/actions/trello/board_member_add"
+	trello_board_member_get_all "flomation.app/automate/executor/actions/trello/board_member_get_all"
+	trello_board_member_invite "flomation.app/automate/executor/actions/trello/board_member_invite"
+	trello_board_member_remove "flomation.app/automate/executor/actions/trello/board_member_remove"
+	trello_board_update "flomation.app/automate/executor/actions/trello/board_update"
+	trello_card_comment_create "flomation.app/automate/executor/actions/trello/card_comment_create"
+	trello_card_comment_delete "flomation.app/automate/executor/actions/trello/card_comment_delete"
+	trello_card_comment_update "flomation.app/automate/executor/actions/trello/card_comment_update"
+	trello_card_create "flomation.app/automate/executor/actions/trello/card_create"
+	trello_card_delete "flomation.app/automate/executor/actions/trello/card_delete"
+	trello_card_get "flomation.app/automate/executor/actions/trello/card_get"
+	trello_card_update "flomation.app/automate/executor/actions/trello/card_update"
+	trello_checklist_create "flomation.app/automate/executor/actions/trello/checklist_create"
+	trello_checklist_create_check_item "flomation.app/automate/executor/actions/trello/checklist_create_check_item"
+	trello_checklist_delete "flomation.app/automate/executor/actions/trello/checklist_delete"
+	trello_checklist_delete_check_item "flomation.app/automate/executor/actions/trello/checklist_delete_check_item"
+	trello_checklist_get "flomation.app/automate/executor/actions/trello/checklist_get"
+	trello_checklist_get_all "flomation.app/automate/executor/actions/trello/checklist_get_all"
+	trello_checklist_get_check_item "flomation.app/automate/executor/actions/trello/checklist_get_check_item"
+	trello_checklist_get_completed_check_items "flomation.app/automate/executor/actions/trello/checklist_get_completed_check_items"
+	trello_checklist_update_check_item "flomation.app/automate/executor/actions/trello/checklist_update_check_item"
+	trello_label_add_to_card "flomation.app/automate/executor/actions/trello/label_add_to_card"
+	trello_label_create "flomation.app/automate/executor/actions/trello/label_create"
+	trello_label_delete "flomation.app/automate/executor/actions/trello/label_delete"
+	trello_label_get "flomation.app/automate/executor/actions/trello/label_get"
+	trello_label_get_all "flomation.app/automate/executor/actions/trello/label_get_all"
+	trello_label_remove_from_card "flomation.app/automate/executor/actions/trello/label_remove_from_card"
+	trello_label_update "flomation.app/automate/executor/actions/trello/label_update"
+	trello_list_archive "flomation.app/automate/executor/actions/trello/list_archive"
+	trello_list_create "flomation.app/automate/executor/actions/trello/list_create"
+	trello_list_get "flomation.app/automate/executor/actions/trello/list_get"
+	trello_list_get_all "flomation.app/automate/executor/actions/trello/list_get_all"
+	trello_list_get_cards "flomation.app/automate/executor/actions/trello/list_get_cards"
+	trello_list_update "flomation.app/automate/executor/actions/trello/list_update"
 	trigger_acuity_webhook "flomation.app/automate/executor/actions/trigger/acuity_webhook"
 	trigger_airtable_poll "flomation.app/automate/executor/actions/trigger/airtable_poll"
 	trigger_calcom_webhook "flomation.app/automate/executor/actions/trigger/calcom_webhook"
@@ -672,6 +714,7 @@ import (
 	trigger_stripe_webhook "flomation.app/automate/executor/actions/trigger/stripe_webhook"
 	trigger_teams "flomation.app/automate/executor/actions/trigger/teams"
 	trigger_telegram "flomation.app/automate/executor/actions/trigger/telegram"
+	trigger_trello_webhook "flomation.app/automate/executor/actions/trigger/trello_webhook"
 	trigger_twilio_sms "flomation.app/automate/executor/actions/trigger/twilio_sms"
 	trigger_twilio_voice "flomation.app/automate/executor/actions/trigger/twilio_voice"
 	trigger_webhook "flomation.app/automate/executor/actions/trigger/webhook"
@@ -1379,6 +1422,48 @@ var Actions = map[string]core.Action{
 	"subflow/begin":                                     subflow_begin.Execute,
 	"subflow/end":                                       subflow_end.Execute,
 	"subflow/invoke":                                    subflow_invoke.Execute,
+	"trello/attachment_create":                          trello_attachment_create.Execute,
+	"trello/attachment_delete":                          trello_attachment_delete.Execute,
+	"trello/attachment_get":                             trello_attachment_get.Execute,
+	"trello/attachment_get_all":                         trello_attachment_get_all.Execute,
+	"trello/board_create":                               trello_board_create.Execute,
+	"trello/board_delete":                               trello_board_delete.Execute,
+	"trello/board_get":                                  trello_board_get.Execute,
+	"trello/board_get_all":                              trello_board_get_all.Execute,
+	"trello/board_member_add":                           trello_board_member_add.Execute,
+	"trello/board_member_get_all":                       trello_board_member_get_all.Execute,
+	"trello/board_member_invite":                        trello_board_member_invite.Execute,
+	"trello/board_member_remove":                        trello_board_member_remove.Execute,
+	"trello/board_update":                               trello_board_update.Execute,
+	"trello/card_comment_create":                        trello_card_comment_create.Execute,
+	"trello/card_comment_delete":                        trello_card_comment_delete.Execute,
+	"trello/card_comment_update":                        trello_card_comment_update.Execute,
+	"trello/card_create":                                trello_card_create.Execute,
+	"trello/card_delete":                                trello_card_delete.Execute,
+	"trello/card_get":                                   trello_card_get.Execute,
+	"trello/card_update":                                trello_card_update.Execute,
+	"trello/checklist_create":                           trello_checklist_create.Execute,
+	"trello/checklist_create_check_item":                trello_checklist_create_check_item.Execute,
+	"trello/checklist_delete":                           trello_checklist_delete.Execute,
+	"trello/checklist_delete_check_item":                trello_checklist_delete_check_item.Execute,
+	"trello/checklist_get":                              trello_checklist_get.Execute,
+	"trello/checklist_get_all":                          trello_checklist_get_all.Execute,
+	"trello/checklist_get_check_item":                   trello_checklist_get_check_item.Execute,
+	"trello/checklist_get_completed_check_items":        trello_checklist_get_completed_check_items.Execute,
+	"trello/checklist_update_check_item":                trello_checklist_update_check_item.Execute,
+	"trello/label_add_to_card":                          trello_label_add_to_card.Execute,
+	"trello/label_create":                               trello_label_create.Execute,
+	"trello/label_delete":                               trello_label_delete.Execute,
+	"trello/label_get":                                  trello_label_get.Execute,
+	"trello/label_get_all":                              trello_label_get_all.Execute,
+	"trello/label_remove_from_card":                     trello_label_remove_from_card.Execute,
+	"trello/label_update":                               trello_label_update.Execute,
+	"trello/list_archive":                               trello_list_archive.Execute,
+	"trello/list_create":                                trello_list_create.Execute,
+	"trello/list_get":                                   trello_list_get.Execute,
+	"trello/list_get_all":                               trello_list_get_all.Execute,
+	"trello/list_get_cards":                             trello_list_get_cards.Execute,
+	"trello/list_update":                                trello_list_update.Execute,
 	"trigger/acuity_webhook":                            trigger_acuity_webhook.Execute,
 	"trigger/airtable_poll":                             trigger_airtable_poll.Execute,
 	"trigger/calcom_webhook":                            trigger_calcom_webhook.Execute,
@@ -1407,6 +1492,7 @@ var Actions = map[string]core.Action{
 	"trigger/stripe_webhook":                            trigger_stripe_webhook.Execute,
 	"trigger/teams":                                     trigger_teams.Execute,
 	"trigger/telegram":                                  trigger_telegram.Execute,
+	"trigger/trello_webhook":                            trigger_trello_webhook.Execute,
 	"trigger/twilio_sms":                                trigger_twilio_sms.Execute,
 	"trigger/twilio_voice":                              trigger_twilio_voice.Execute,
 	"trigger/webhook":                                   trigger_webhook.Execute,

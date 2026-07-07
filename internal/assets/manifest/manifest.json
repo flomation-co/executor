@@ -69477,6 +69477,4241 @@
       }
     ]
   },
+  "trello/attachment_create": {
+    "hash": "310769506b9c697542f340dd487833c253872a1fa2737aa97cfde40ca8ece905",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Create Attachment",
+    "description": "Attach a URL to a Trello card, optionally naming it.",
+    "website": "https://www.flomation.co",
+    "icon": "trello+paperclip",
+    "date": "07/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Trello",
+      "icon": "trello",
+      "description": "Create and manage boards, lists, cards, checklists, labels, and members in Trello"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "API Key",
+        "placeholder": "Your Trello API key",
+        "required": true
+      },
+      {
+        "name": "api_token",
+        "type": "secret",
+        "value": null,
+        "label": "API Token",
+        "placeholder": "Your Trello API token",
+        "required": true
+      },
+      {
+        "name": "card_id",
+        "type": "string",
+        "value": null,
+        "label": "Card ID",
+        "placeholder": "The card to attach to",
+        "required": true
+      },
+      {
+        "name": "url",
+        "type": "string",
+        "value": null,
+        "label": "URL",
+        "placeholder": "The URL to attach, e.g. https://example.com/file.pdf",
+        "required": true
+      },
+      {
+        "name": "name",
+        "type": "string",
+        "value": null,
+        "label": "Name",
+        "placeholder": "A display name for the attachment (optional)"
+      },
+      {
+        "name": "mime_type",
+        "type": "string",
+        "value": null,
+        "label": "MIME Type",
+        "placeholder": "The MIME type of the attachment (optional)"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Attachment ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Attachment",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "trello/attachment_delete": {
+    "hash": "df9084a09dce04255554a20c8f5c512cb325c37e6ac405d87e434b4c0b243fd7",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Delete Attachment",
+    "description": "Delete an attachment from a Trello card.",
+    "website": "https://www.flomation.co",
+    "icon": "trello+trash",
+    "date": "07/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Trello",
+      "icon": "trello",
+      "description": "Create and manage boards, lists, cards, checklists, labels, and members in Trello"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "API Key",
+        "placeholder": "Your Trello API key",
+        "required": true
+      },
+      {
+        "name": "api_token",
+        "type": "secret",
+        "value": null,
+        "label": "API Token",
+        "placeholder": "Your Trello API token",
+        "required": true
+      },
+      {
+        "name": "card_id",
+        "type": "string",
+        "value": null,
+        "label": "Card ID",
+        "placeholder": "The card the attachment is on",
+        "required": true
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Attachment ID",
+        "placeholder": "The ID of the attachment to delete",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Attachment ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Result",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "trello/attachment_get": {
+    "hash": "7485a3eafaf31adf8e0c6a5085f99ef79cf1d987e2afd3305dd6c5ec85a709cc",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Get Attachment",
+    "description": "Fetch a single attachment on a Trello card by its ID.",
+    "website": "https://www.flomation.co",
+    "icon": "trello+magnifying-glass",
+    "date": "07/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Trello",
+      "icon": "trello",
+      "description": "Create and manage boards, lists, cards, checklists, labels, and members in Trello"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "API Key",
+        "placeholder": "Your Trello API key",
+        "required": true
+      },
+      {
+        "name": "api_token",
+        "type": "secret",
+        "value": null,
+        "label": "API Token",
+        "placeholder": "Your Trello API token",
+        "required": true
+      },
+      {
+        "name": "card_id",
+        "type": "string",
+        "value": null,
+        "label": "Card ID",
+        "placeholder": "The card the attachment is on",
+        "required": true
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Attachment ID",
+        "placeholder": "The ID of the attachment to fetch",
+        "required": true
+      },
+      {
+        "name": "fields",
+        "type": "string",
+        "value": null,
+        "label": "Fields",
+        "placeholder": "Comma-separated fields to return (default: all)"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Attachment ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Attachment",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "trello/attachment_get_all": {
+    "hash": "a9883b13011a6cf5ae13829154cfabe81852899b2e4b1a486b5596dc14ca02e2",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Get Attachments",
+    "description": "List the attachments on a Trello card.",
+    "website": "https://www.flomation.co",
+    "icon": "trello+list",
+    "date": "07/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Trello",
+      "icon": "trello",
+      "description": "Create and manage boards, lists, cards, checklists, labels, and members in Trello"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "API Key",
+        "placeholder": "Your Trello API key",
+        "required": true
+      },
+      {
+        "name": "api_token",
+        "type": "secret",
+        "value": null,
+        "label": "API Token",
+        "placeholder": "Your Trello API token",
+        "required": true
+      },
+      {
+        "name": "card_id",
+        "type": "string",
+        "value": null,
+        "label": "Card ID",
+        "placeholder": "The card whose attachments to fetch",
+        "required": true
+      },
+      {
+        "name": "fields",
+        "type": "string",
+        "value": null,
+        "label": "Fields",
+        "placeholder": "Comma-separated fields to return (default: all)"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "results",
+        "type": "object",
+        "value": null,
+        "label": "Attachments",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Count",
+        "placeholder": ""
+      },
+      {
+        "name": "total",
+        "type": "integer",
+        "value": null,
+        "label": "Total",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "trello/board_create": {
+    "hash": "e6e8048afd85356ad34a3822fbe8219a43515e64a9573b96e2a1f40afb90ff1c",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Create Board",
+    "description": "Create a new Trello board. Give it a name and an optional description; use Additional Fields for board preferences (visibility, background, etc.).",
+    "website": "https://www.flomation.co",
+    "icon": "trello+plus",
+    "date": "07/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Trello",
+      "icon": "trello",
+      "description": "Create and manage boards, lists, cards, checklists, labels, and members in Trello"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "API Key",
+        "placeholder": "Your Trello API key",
+        "required": true
+      },
+      {
+        "name": "api_token",
+        "type": "secret",
+        "value": null,
+        "label": "API Token",
+        "placeholder": "Your Trello API token",
+        "required": true
+      },
+      {
+        "name": "name",
+        "type": "string",
+        "value": null,
+        "label": "Name",
+        "placeholder": "The name of the new board",
+        "required": true
+      },
+      {
+        "name": "description",
+        "type": "text",
+        "value": null,
+        "label": "Description",
+        "placeholder": "An optional description for the board"
+      },
+      {
+        "name": "additional_fields",
+        "type": "object",
+        "value": null,
+        "label": "Additional Fields",
+        "placeholder": "Extra Trello fields as JSON, e.g. {\"prefs_permissionLevel\":\"org\",\"idOrganization\":\"...\"}"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Board ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Board",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "trello/board_delete": {
+    "hash": "d657f57cd1b30a22c5026d5bfe5b465101bfb1ec700ac853f0a58bc89abeccad",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Delete Board",
+    "description": "Permanently delete a Trello board by its ID. This cannot be undone.",
+    "website": "https://www.flomation.co",
+    "icon": "trello+trash",
+    "date": "07/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Trello",
+      "icon": "trello",
+      "description": "Create and manage boards, lists, cards, checklists, labels, and members in Trello"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "API Key",
+        "placeholder": "Your Trello API key",
+        "required": true
+      },
+      {
+        "name": "api_token",
+        "type": "secret",
+        "value": null,
+        "label": "API Token",
+        "placeholder": "Your Trello API token",
+        "required": true
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Board",
+        "placeholder": "The board to delete",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Board ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Result",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "trello/board_get": {
+    "hash": "769de191c09c85e531e44f147a7ec674fd8e6054b5b62a57b2fe898436ad3778",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Get Board",
+    "description": "Fetch a single Trello board by its ID. Optionally narrow the returned data with a comma-separated Fields list.",
+    "website": "https://www.flomation.co",
+    "icon": "trello+magnifying-glass",
+    "date": "07/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Trello",
+      "icon": "trello",
+      "description": "Create and manage boards, lists, cards, checklists, labels, and members in Trello"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "API Key",
+        "placeholder": "Your Trello API key",
+        "required": true
+      },
+      {
+        "name": "api_token",
+        "type": "secret",
+        "value": null,
+        "label": "API Token",
+        "placeholder": "Your Trello API token",
+        "required": true
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Board",
+        "placeholder": "The board to fetch",
+        "required": true
+      },
+      {
+        "name": "fields",
+        "type": "string",
+        "value": null,
+        "label": "Fields",
+        "placeholder": "Comma-separated fields to return, e.g. name,desc,url (default: all)"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Board ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Board",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "trello/board_get_all": {
+    "hash": "603b738cfee86f518032da5bdb187a2eca73fd1bc0bdcef001623bdbd78d2b78",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Get Boards",
+    "description": "List the Trello boards you can access. Optionally filter (e.g. open, closed, starred) and narrow the returned Fields.",
+    "website": "https://www.flomation.co",
+    "icon": "trello+list",
+    "date": "07/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Trello",
+      "icon": "trello",
+      "description": "Create and manage boards, lists, cards, checklists, labels, and members in Trello"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "API Key",
+        "placeholder": "Your Trello API key",
+        "required": true
+      },
+      {
+        "name": "api_token",
+        "type": "secret",
+        "value": null,
+        "label": "API Token",
+        "placeholder": "Your Trello API token",
+        "required": true
+      },
+      {
+        "name": "filter",
+        "type": "string",
+        "value": null,
+        "label": "Filter",
+        "placeholder": "Which boards to include",
+        "options": [
+          {
+            "name": "All",
+            "value": "all"
+          },
+          {
+            "name": "Open",
+            "value": "open"
+          },
+          {
+            "name": "Closed",
+            "value": "closed"
+          },
+          {
+            "name": "Starred",
+            "value": "starred"
+          }
+        ]
+      },
+      {
+        "name": "fields",
+        "type": "string",
+        "value": null,
+        "label": "Fields",
+        "placeholder": "Comma-separated fields to return, e.g. name,url (default: all)"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "results",
+        "type": "object",
+        "value": null,
+        "label": "Boards",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Count",
+        "placeholder": ""
+      },
+      {
+        "name": "total",
+        "type": "integer",
+        "value": null,
+        "label": "Total",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "trello/board_member_add": {
+    "hash": "24f7040882b8f6ddb20563336628f0184dea27da63ff1161142388f4224e14b8",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Add Board Member",
+    "description": "Add an existing Trello member to a board and set their membership type (normal, admin, or observer).",
+    "website": "https://www.flomation.co",
+    "icon": "trello+user-plus",
+    "date": "07/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Trello",
+      "icon": "trello",
+      "description": "Create and manage boards, lists, cards, checklists, labels, and members in Trello"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "API Key",
+        "placeholder": "Your Trello API key",
+        "required": true
+      },
+      {
+        "name": "api_token",
+        "type": "secret",
+        "value": null,
+        "label": "API Token",
+        "placeholder": "Your Trello API token",
+        "required": true
+      },
+      {
+        "name": "board_id",
+        "type": "string",
+        "value": null,
+        "label": "Board",
+        "placeholder": "The board to add the member to",
+        "required": true
+      },
+      {
+        "name": "member_id",
+        "type": "string",
+        "value": null,
+        "label": "Member",
+        "placeholder": "The member to add",
+        "required": true
+      },
+      {
+        "name": "type",
+        "type": "string",
+        "value": null,
+        "label": "Member Type",
+        "placeholder": "The member's role on the board",
+        "required": true,
+        "options": [
+          {
+            "name": "Normal",
+            "value": "normal"
+          },
+          {
+            "name": "Admin",
+            "value": "admin"
+          },
+          {
+            "name": "Observer",
+            "value": "observer"
+          }
+        ]
+      },
+      {
+        "name": "allow_billable_guest",
+        "type": "boolean",
+        "value": null,
+        "label": "Allow Billable Guest",
+        "placeholder": "Optionally allow adding a billable guest without a confirmation"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Board ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Board",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "trello/board_member_get_all": {
+    "hash": "e9fb534659d4eca0283237b9ba2dc1f4b80f4aba499de8f0abbed9ac8ad00727",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Get Board Members",
+    "description": "List the members of a Trello board.",
+    "website": "https://www.flomation.co",
+    "icon": "trello+user",
+    "date": "07/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Trello",
+      "icon": "trello",
+      "description": "Create and manage boards, lists, cards, checklists, labels, and members in Trello"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "API Key",
+        "placeholder": "Your Trello API key",
+        "required": true
+      },
+      {
+        "name": "api_token",
+        "type": "secret",
+        "value": null,
+        "label": "API Token",
+        "placeholder": "Your Trello API token",
+        "required": true
+      },
+      {
+        "name": "board_id",
+        "type": "string",
+        "value": null,
+        "label": "Board",
+        "placeholder": "The board whose members to list",
+        "required": true
+      },
+      {
+        "name": "return_all",
+        "type": "boolean",
+        "value": null,
+        "label": "Return All",
+        "placeholder": "Return every member (ignores Limit)"
+      },
+      {
+        "name": "limit",
+        "type": "integer",
+        "value": null,
+        "label": "Limit",
+        "placeholder": "Maximum number of members to return"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "results",
+        "type": "object",
+        "value": null,
+        "label": "Members",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Count",
+        "placeholder": ""
+      },
+      {
+        "name": "total",
+        "type": "integer",
+        "value": null,
+        "label": "Total",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "trello/board_member_invite": {
+    "hash": "e2ca8c169edf43b666ca1ae98619d285f48bbd9f6cf50cfb8ed703710c7eabdf",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Invite Board Member by Email",
+    "description": "Invite someone to a Trello board by email address, optionally setting their membership type and full name.",
+    "website": "https://www.flomation.co",
+    "icon": "trello+user-plus",
+    "date": "07/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Trello",
+      "icon": "trello",
+      "description": "Create and manage boards, lists, cards, checklists, labels, and members in Trello"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "API Key",
+        "placeholder": "Your Trello API key",
+        "required": true
+      },
+      {
+        "name": "api_token",
+        "type": "secret",
+        "value": null,
+        "label": "API Token",
+        "placeholder": "Your Trello API token",
+        "required": true
+      },
+      {
+        "name": "board_id",
+        "type": "string",
+        "value": null,
+        "label": "Board",
+        "placeholder": "The board to invite the member to",
+        "required": true
+      },
+      {
+        "name": "email",
+        "type": "string",
+        "value": null,
+        "label": "Email",
+        "placeholder": "The email address to invite",
+        "required": true
+      },
+      {
+        "name": "type",
+        "type": "string",
+        "value": null,
+        "label": "Member Type",
+        "placeholder": "The member's role on the board",
+        "options": [
+          {
+            "name": "Normal",
+            "value": "normal"
+          },
+          {
+            "name": "Admin",
+            "value": "admin"
+          },
+          {
+            "name": "Observer",
+            "value": "observer"
+          }
+        ]
+      },
+      {
+        "name": "full_name",
+        "type": "string",
+        "value": null,
+        "label": "Full Name",
+        "placeholder": "The invitee's full name (optional)"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Board ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Board",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "trello/board_member_remove": {
+    "hash": "c20adfa7414835fc9c5108abdf1cd20f0f8c12351b69462d8d7cf75e56862574",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Remove Board Member",
+    "description": "Remove a member from a Trello board.",
+    "website": "https://www.flomation.co",
+    "icon": "trello+user-minus",
+    "date": "07/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Trello",
+      "icon": "trello",
+      "description": "Create and manage boards, lists, cards, checklists, labels, and members in Trello"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "API Key",
+        "placeholder": "Your Trello API key",
+        "required": true
+      },
+      {
+        "name": "api_token",
+        "type": "secret",
+        "value": null,
+        "label": "API Token",
+        "placeholder": "Your Trello API token",
+        "required": true
+      },
+      {
+        "name": "board_id",
+        "type": "string",
+        "value": null,
+        "label": "Board",
+        "placeholder": "The board to remove the member from",
+        "required": true
+      },
+      {
+        "name": "member_id",
+        "type": "string",
+        "value": null,
+        "label": "Member",
+        "placeholder": "The member to remove",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Board ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Result",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "trello/board_update": {
+    "hash": "452e6b74dde3aabd59f53ec3519c40e2845667f9ccab52a8a8cc72b1598ce3fa",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Update Board",
+    "description": "Change an existing Trello board — rename it, edit its description, open/close it, or set any other field via Additional Fields.",
+    "website": "https://www.flomation.co",
+    "icon": "trello+pen",
+    "date": "07/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Trello",
+      "icon": "trello",
+      "description": "Create and manage boards, lists, cards, checklists, labels, and members in Trello"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "API Key",
+        "placeholder": "Your Trello API key",
+        "required": true
+      },
+      {
+        "name": "api_token",
+        "type": "secret",
+        "value": null,
+        "label": "API Token",
+        "placeholder": "Your Trello API token",
+        "required": true
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Board",
+        "placeholder": "The board to update",
+        "required": true
+      },
+      {
+        "name": "name",
+        "type": "string",
+        "value": null,
+        "label": "Name",
+        "placeholder": "A new name for the board"
+      },
+      {
+        "name": "description",
+        "type": "text",
+        "value": null,
+        "label": "Description",
+        "placeholder": "A new description for the board"
+      },
+      {
+        "name": "closed",
+        "type": "boolean",
+        "value": null,
+        "label": "Closed",
+        "placeholder": "Close (archive) the board, or reopen it"
+      },
+      {
+        "name": "subscribed",
+        "type": "boolean",
+        "value": null,
+        "label": "Subscribed",
+        "placeholder": "Subscribe to the board"
+      },
+      {
+        "name": "additional_fields",
+        "type": "object",
+        "value": null,
+        "label": "Additional Fields",
+        "placeholder": "Extra Trello fields as JSON, e.g. {\"prefs/background\":\"blue\"}"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Board ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Board",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "trello/card_comment_create": {
+    "hash": "69bec7361ee3d03210779f2dbaaa73d5e81f0adcf0045921ea86d0505ce07990",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Create Comment",
+    "description": "Add a comment to a Trello card.",
+    "website": "https://www.flomation.co",
+    "icon": "trello+comment",
+    "date": "07/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Trello",
+      "icon": "trello",
+      "description": "Create and manage boards, lists, cards, checklists, labels, and members in Trello"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "API Key",
+        "placeholder": "Your Trello API key",
+        "required": true
+      },
+      {
+        "name": "api_token",
+        "type": "secret",
+        "value": null,
+        "label": "API Token",
+        "placeholder": "Your Trello API token",
+        "required": true
+      },
+      {
+        "name": "card_id",
+        "type": "string",
+        "value": null,
+        "label": "Card ID",
+        "placeholder": "The card to comment on",
+        "required": true
+      },
+      {
+        "name": "text",
+        "type": "text",
+        "value": null,
+        "label": "Comment",
+        "placeholder": "The comment text",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Comment ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Comment",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "trello/card_comment_delete": {
+    "hash": "845c1a67881860e899e77807b47f14c9950f83b718d380ee7b616c0459eab531",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Delete Comment",
+    "description": "Delete a comment from a Trello card.",
+    "website": "https://www.flomation.co",
+    "icon": "trello+trash",
+    "date": "07/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Trello",
+      "icon": "trello",
+      "description": "Create and manage boards, lists, cards, checklists, labels, and members in Trello"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "API Key",
+        "placeholder": "Your Trello API key",
+        "required": true
+      },
+      {
+        "name": "api_token",
+        "type": "secret",
+        "value": null,
+        "label": "API Token",
+        "placeholder": "Your Trello API token",
+        "required": true
+      },
+      {
+        "name": "card_id",
+        "type": "string",
+        "value": null,
+        "label": "Card ID",
+        "placeholder": "The card the comment belongs to",
+        "required": true
+      },
+      {
+        "name": "comment_id",
+        "type": "string",
+        "value": null,
+        "label": "Comment ID",
+        "placeholder": "The ID of the comment to delete",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Comment ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Result",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "trello/card_comment_update": {
+    "hash": "f7dc6e863ecce71c658eff14df98a314334f715e3c2e3e0e8539bc6cb08769e4",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Update Comment",
+    "description": "Change the text of an existing comment on a Trello card.",
+    "website": "https://www.flomation.co",
+    "icon": "trello+pen",
+    "date": "07/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Trello",
+      "icon": "trello",
+      "description": "Create and manage boards, lists, cards, checklists, labels, and members in Trello"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "API Key",
+        "placeholder": "Your Trello API key",
+        "required": true
+      },
+      {
+        "name": "api_token",
+        "type": "secret",
+        "value": null,
+        "label": "API Token",
+        "placeholder": "Your Trello API token",
+        "required": true
+      },
+      {
+        "name": "card_id",
+        "type": "string",
+        "value": null,
+        "label": "Card ID",
+        "placeholder": "The card the comment belongs to",
+        "required": true
+      },
+      {
+        "name": "comment_id",
+        "type": "string",
+        "value": null,
+        "label": "Comment ID",
+        "placeholder": "The ID of the comment to update",
+        "required": true
+      },
+      {
+        "name": "text",
+        "type": "text",
+        "value": null,
+        "label": "Comment",
+        "placeholder": "The new comment text",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Comment ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Comment",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "trello/card_create": {
+    "hash": "f1ee44087d1bef8666fdcd0d99a3ce8906d8f1abcbdf7451839f05cab245f775",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Create Card",
+    "description": "Create a new card in a Trello list. Pick a board to load its lists, choose the list, and give the card a name plus optional description, due date, members, and labels.",
+    "website": "https://www.flomation.co",
+    "icon": "trello+plus",
+    "date": "07/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Trello",
+      "icon": "trello",
+      "description": "Create and manage boards, lists, cards, checklists, labels, and members in Trello"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "API Key",
+        "placeholder": "Your Trello API key",
+        "required": true
+      },
+      {
+        "name": "api_token",
+        "type": "secret",
+        "value": null,
+        "label": "API Token",
+        "placeholder": "Your Trello API token",
+        "required": true
+      },
+      {
+        "name": "board_id",
+        "type": "string",
+        "value": null,
+        "label": "Board",
+        "placeholder": "The board that owns the list (used to load the list picker)"
+      },
+      {
+        "name": "list_id",
+        "type": "string",
+        "value": null,
+        "label": "List",
+        "placeholder": "The list to create the card in",
+        "required": true
+      },
+      {
+        "name": "name",
+        "type": "string",
+        "value": null,
+        "label": "Name",
+        "placeholder": "The name of the card",
+        "required": true
+      },
+      {
+        "name": "description",
+        "type": "text",
+        "value": null,
+        "label": "Description",
+        "placeholder": "An optional description for the card"
+      },
+      {
+        "name": "due",
+        "type": "datetime",
+        "value": null,
+        "label": "Due Date",
+        "placeholder": "An optional due date for the card"
+      },
+      {
+        "name": "position",
+        "type": "string",
+        "value": null,
+        "label": "Position",
+        "placeholder": "top, bottom, or a positive number"
+      },
+      {
+        "name": "member_ids",
+        "type": "string",
+        "value": null,
+        "label": "Member IDs",
+        "placeholder": "Comma-separated member IDs to assign"
+      },
+      {
+        "name": "label_ids",
+        "type": "string",
+        "value": null,
+        "label": "Label IDs",
+        "placeholder": "Comma-separated label IDs to attach"
+      },
+      {
+        "name": "additional_fields",
+        "type": "object",
+        "value": null,
+        "label": "Additional Fields",
+        "placeholder": "Extra Trello fields as JSON, e.g. {\"urlSource\":\"https://...\"}"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Card ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Card",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "trello/card_delete": {
+    "hash": "f2705584578da8d5ee3c17aeeff499d2e9f2c4cc6b740c0447b582b9e0217af0",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Delete Card",
+    "description": "Permanently delete a Trello card by its ID. This cannot be undone.",
+    "website": "https://www.flomation.co",
+    "icon": "trello+trash",
+    "date": "07/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Trello",
+      "icon": "trello",
+      "description": "Create and manage boards, lists, cards, checklists, labels, and members in Trello"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "API Key",
+        "placeholder": "Your Trello API key",
+        "required": true
+      },
+      {
+        "name": "api_token",
+        "type": "secret",
+        "value": null,
+        "label": "API Token",
+        "placeholder": "Your Trello API token",
+        "required": true
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Card ID",
+        "placeholder": "The ID of the card to delete",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Card ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Result",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "trello/card_get": {
+    "hash": "cef0493555f53c267ac0e788a57cc29c895d3eb6d575aeeb42b8adf7529b5a27",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Get Card",
+    "description": "Fetch a single Trello card by its ID. Optionally narrow the returned data with a comma-separated Fields list.",
+    "website": "https://www.flomation.co",
+    "icon": "trello+magnifying-glass",
+    "date": "07/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Trello",
+      "icon": "trello",
+      "description": "Create and manage boards, lists, cards, checklists, labels, and members in Trello"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "API Key",
+        "placeholder": "Your Trello API key",
+        "required": true
+      },
+      {
+        "name": "api_token",
+        "type": "secret",
+        "value": null,
+        "label": "API Token",
+        "placeholder": "Your Trello API token",
+        "required": true
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Card ID",
+        "placeholder": "The ID of the card to fetch",
+        "required": true
+      },
+      {
+        "name": "fields",
+        "type": "string",
+        "value": null,
+        "label": "Fields",
+        "placeholder": "Comma-separated fields to return, e.g. name,desc,due (default: all)"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Card ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Card",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "trello/card_update": {
+    "hash": "d06b15383191154d1f70e63b453d515a9be79d69d472cd3dd17d5b4abc1a9f6a",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Update Card",
+    "description": "Change an existing Trello card — rename it, edit the description, set a due date, move it to another list or board, or update members and labels.",
+    "website": "https://www.flomation.co",
+    "icon": "trello+pen",
+    "date": "07/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Trello",
+      "icon": "trello",
+      "description": "Create and manage boards, lists, cards, checklists, labels, and members in Trello"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "API Key",
+        "placeholder": "Your Trello API key",
+        "required": true
+      },
+      {
+        "name": "api_token",
+        "type": "secret",
+        "value": null,
+        "label": "API Token",
+        "placeholder": "Your Trello API token",
+        "required": true
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Card ID",
+        "placeholder": "The ID of the card to update",
+        "required": true
+      },
+      {
+        "name": "name",
+        "type": "string",
+        "value": null,
+        "label": "Name",
+        "placeholder": "A new name for the card"
+      },
+      {
+        "name": "description",
+        "type": "text",
+        "value": null,
+        "label": "Description",
+        "placeholder": "A new description for the card"
+      },
+      {
+        "name": "due",
+        "type": "datetime",
+        "value": null,
+        "label": "Due Date",
+        "placeholder": "A due date for the card"
+      },
+      {
+        "name": "due_complete",
+        "type": "boolean",
+        "value": null,
+        "label": "Due Complete",
+        "placeholder": "Mark the due date complete"
+      },
+      {
+        "name": "list_id",
+        "type": "string",
+        "value": null,
+        "label": "Move to List",
+        "placeholder": "Move the card to this list ID"
+      },
+      {
+        "name": "board_id",
+        "type": "string",
+        "value": null,
+        "label": "Move to Board",
+        "placeholder": "Move the card to this board ID"
+      },
+      {
+        "name": "position",
+        "type": "string",
+        "value": null,
+        "label": "Position",
+        "placeholder": "top, bottom, or a positive number"
+      },
+      {
+        "name": "member_ids",
+        "type": "string",
+        "value": null,
+        "label": "Member IDs",
+        "placeholder": "Comma-separated member IDs (replaces the set)"
+      },
+      {
+        "name": "label_ids",
+        "type": "string",
+        "value": null,
+        "label": "Label IDs",
+        "placeholder": "Comma-separated label IDs (replaces the set)"
+      },
+      {
+        "name": "closed",
+        "type": "boolean",
+        "value": null,
+        "label": "Closed",
+        "placeholder": "Archive the card, or reopen it"
+      },
+      {
+        "name": "subscribed",
+        "type": "boolean",
+        "value": null,
+        "label": "Subscribed",
+        "placeholder": "Subscribe to the card"
+      },
+      {
+        "name": "additional_fields",
+        "type": "object",
+        "value": null,
+        "label": "Additional Fields",
+        "placeholder": "Extra Trello fields as JSON"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Card ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Card",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "trello/checklist_create": {
+    "hash": "6a2661619d61f34e245116939ea50ce5104bb18e878a814509c7bfa0c8da162e",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Create Checklist",
+    "description": "Add a checklist to a Trello card.",
+    "website": "https://www.flomation.co",
+    "icon": "trello+plus",
+    "date": "07/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Trello",
+      "icon": "trello",
+      "description": "Create and manage boards, lists, cards, checklists, labels, and members in Trello"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "API Key",
+        "placeholder": "Your Trello API key",
+        "required": true
+      },
+      {
+        "name": "api_token",
+        "type": "secret",
+        "value": null,
+        "label": "API Token",
+        "placeholder": "Your Trello API token",
+        "required": true
+      },
+      {
+        "name": "card_id",
+        "type": "string",
+        "value": null,
+        "label": "Card ID",
+        "placeholder": "The card to add the checklist to",
+        "required": true
+      },
+      {
+        "name": "name",
+        "type": "string",
+        "value": null,
+        "label": "Name",
+        "placeholder": "The name of the checklist",
+        "required": true
+      },
+      {
+        "name": "position",
+        "type": "string",
+        "value": null,
+        "label": "Position",
+        "placeholder": "top, bottom, or a positive number"
+      },
+      {
+        "name": "additional_fields",
+        "type": "object",
+        "value": null,
+        "label": "Additional Fields",
+        "placeholder": "Extra Trello fields as JSON, e.g. {\"idChecklistSource\":\"...\"}"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Checklist ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Checklist",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "trello/checklist_create_check_item": {
+    "hash": "eadb81587a7efe607f1a40a9edd31b25f8ccf1bbbbc96ef6e9059ee9642cb8a4",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Create Checklist Item",
+    "description": "Add an item to a Trello checklist.",
+    "website": "https://www.flomation.co",
+    "icon": "trello+plus",
+    "date": "07/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Trello",
+      "icon": "trello",
+      "description": "Create and manage boards, lists, cards, checklists, labels, and members in Trello"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "API Key",
+        "placeholder": "Your Trello API key",
+        "required": true
+      },
+      {
+        "name": "api_token",
+        "type": "secret",
+        "value": null,
+        "label": "API Token",
+        "placeholder": "Your Trello API token",
+        "required": true
+      },
+      {
+        "name": "checklist_id",
+        "type": "string",
+        "value": null,
+        "label": "Checklist ID",
+        "placeholder": "The checklist to add the item to",
+        "required": true
+      },
+      {
+        "name": "name",
+        "type": "string",
+        "value": null,
+        "label": "Name",
+        "placeholder": "The text of the checklist item",
+        "required": true
+      },
+      {
+        "name": "checked",
+        "type": "boolean",
+        "value": null,
+        "label": "Checked",
+        "placeholder": "Create the item already checked"
+      },
+      {
+        "name": "position",
+        "type": "string",
+        "value": null,
+        "label": "Position",
+        "placeholder": "top, bottom, or a positive number"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Checklist Item ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Checklist Item",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "trello/checklist_delete": {
+    "hash": "f34cf76737fc97f2be384ddcfea92ee8492330921296112d7cf1ca65cb1c8038",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Delete Checklist",
+    "description": "Delete a checklist from a Trello card.",
+    "website": "https://www.flomation.co",
+    "icon": "trello+trash",
+    "date": "07/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Trello",
+      "icon": "trello",
+      "description": "Create and manage boards, lists, cards, checklists, labels, and members in Trello"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "API Key",
+        "placeholder": "Your Trello API key",
+        "required": true
+      },
+      {
+        "name": "api_token",
+        "type": "secret",
+        "value": null,
+        "label": "API Token",
+        "placeholder": "Your Trello API token",
+        "required": true
+      },
+      {
+        "name": "card_id",
+        "type": "string",
+        "value": null,
+        "label": "Card ID",
+        "placeholder": "The card the checklist belongs to",
+        "required": true
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Checklist ID",
+        "placeholder": "The ID of the checklist to delete",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Checklist ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Result",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "trello/checklist_delete_check_item": {
+    "hash": "467e3b1de2f73e7db9da1c575999d2766fa3d5b65942ca5e7f94a5a80077d6a1",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Delete Checklist Item",
+    "description": "Delete a checklist item from a Trello card.",
+    "website": "https://www.flomation.co",
+    "icon": "trello+trash",
+    "date": "07/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Trello",
+      "icon": "trello",
+      "description": "Create and manage boards, lists, cards, checklists, labels, and members in Trello"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "API Key",
+        "placeholder": "Your Trello API key",
+        "required": true
+      },
+      {
+        "name": "api_token",
+        "type": "secret",
+        "value": null,
+        "label": "API Token",
+        "placeholder": "Your Trello API token",
+        "required": true
+      },
+      {
+        "name": "card_id",
+        "type": "string",
+        "value": null,
+        "label": "Card ID",
+        "placeholder": "The card the checklist item is on",
+        "required": true
+      },
+      {
+        "name": "check_item_id",
+        "type": "string",
+        "value": null,
+        "label": "Checklist Item ID",
+        "placeholder": "The ID of the checklist item to delete",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Checklist Item ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Result",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "trello/checklist_get": {
+    "hash": "7c3a7d20fe3350c042536d31977fd8187482ec31e9f707c2968d1cf9e59f9d68",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Get Checklist",
+    "description": "Fetch a single Trello checklist by its ID.",
+    "website": "https://www.flomation.co",
+    "icon": "trello+magnifying-glass",
+    "date": "07/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Trello",
+      "icon": "trello",
+      "description": "Create and manage boards, lists, cards, checklists, labels, and members in Trello"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "API Key",
+        "placeholder": "Your Trello API key",
+        "required": true
+      },
+      {
+        "name": "api_token",
+        "type": "secret",
+        "value": null,
+        "label": "API Token",
+        "placeholder": "Your Trello API token",
+        "required": true
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Checklist ID",
+        "placeholder": "The ID of the checklist to fetch",
+        "required": true
+      },
+      {
+        "name": "fields",
+        "type": "string",
+        "value": null,
+        "label": "Fields",
+        "placeholder": "Comma-separated fields to return (default: all)"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Checklist ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Checklist",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "trello/checklist_get_all": {
+    "hash": "6349dafd53d8b315f76b238c4b9028c944ec00d14854beab1f5b3c0f82ec33a2",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Get Checklists",
+    "description": "List the checklists on a Trello card.",
+    "website": "https://www.flomation.co",
+    "icon": "trello+list",
+    "date": "07/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Trello",
+      "icon": "trello",
+      "description": "Create and manage boards, lists, cards, checklists, labels, and members in Trello"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "API Key",
+        "placeholder": "Your Trello API key",
+        "required": true
+      },
+      {
+        "name": "api_token",
+        "type": "secret",
+        "value": null,
+        "label": "API Token",
+        "placeholder": "Your Trello API token",
+        "required": true
+      },
+      {
+        "name": "card_id",
+        "type": "string",
+        "value": null,
+        "label": "Card ID",
+        "placeholder": "The card whose checklists to fetch",
+        "required": true
+      },
+      {
+        "name": "fields",
+        "type": "string",
+        "value": null,
+        "label": "Fields",
+        "placeholder": "Comma-separated fields to return (default: all)"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "results",
+        "type": "object",
+        "value": null,
+        "label": "Checklists",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Count",
+        "placeholder": ""
+      },
+      {
+        "name": "total",
+        "type": "integer",
+        "value": null,
+        "label": "Total",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "trello/checklist_get_check_item": {
+    "hash": "297c3b6104212b286a1e3b2aa562bd08638e8769929d874c67abe9e3df6d6f5c",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Get Checklist Item",
+    "description": "Fetch a single item from a Trello card's checklist.",
+    "website": "https://www.flomation.co",
+    "icon": "trello+magnifying-glass",
+    "date": "07/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Trello",
+      "icon": "trello",
+      "description": "Create and manage boards, lists, cards, checklists, labels, and members in Trello"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "API Key",
+        "placeholder": "Your Trello API key",
+        "required": true
+      },
+      {
+        "name": "api_token",
+        "type": "secret",
+        "value": null,
+        "label": "API Token",
+        "placeholder": "Your Trello API token",
+        "required": true
+      },
+      {
+        "name": "card_id",
+        "type": "string",
+        "value": null,
+        "label": "Card ID",
+        "placeholder": "The card the checklist item is on",
+        "required": true
+      },
+      {
+        "name": "check_item_id",
+        "type": "string",
+        "value": null,
+        "label": "Checklist Item ID",
+        "placeholder": "The ID of the checklist item to fetch",
+        "required": true
+      },
+      {
+        "name": "fields",
+        "type": "string",
+        "value": null,
+        "label": "Fields",
+        "placeholder": "Comma-separated fields to return (default: all)"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Checklist Item ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Checklist Item",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "trello/checklist_get_completed_check_items": {
+    "hash": "cf0f3d4e2cce5d3deb08d33f4f86daf009c52b28c8e9a0da70b6999937da33c3",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Get Completed Checklist Items",
+    "description": "List the completed checklist items on a Trello card.",
+    "website": "https://www.flomation.co",
+    "icon": "trello+check",
+    "date": "07/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Trello",
+      "icon": "trello",
+      "description": "Create and manage boards, lists, cards, checklists, labels, and members in Trello"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "API Key",
+        "placeholder": "Your Trello API key",
+        "required": true
+      },
+      {
+        "name": "api_token",
+        "type": "secret",
+        "value": null,
+        "label": "API Token",
+        "placeholder": "Your Trello API token",
+        "required": true
+      },
+      {
+        "name": "card_id",
+        "type": "string",
+        "value": null,
+        "label": "Card ID",
+        "placeholder": "The card whose completed items to fetch",
+        "required": true
+      },
+      {
+        "name": "fields",
+        "type": "string",
+        "value": null,
+        "label": "Fields",
+        "placeholder": "Comma-separated fields to return (default: all)"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "results",
+        "type": "object",
+        "value": null,
+        "label": "Completed Items",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Count",
+        "placeholder": ""
+      },
+      {
+        "name": "total",
+        "type": "integer",
+        "value": null,
+        "label": "Total",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "trello/checklist_update_check_item": {
+    "hash": "a6cf0fa816035c35e4b8e534805aa193a80c5663f18e7e0756bddb15199e1075",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Update Checklist Item",
+    "description": "Update a checklist item on a Trello card — rename it, mark it complete/incomplete, or reposition it.",
+    "website": "https://www.flomation.co",
+    "icon": "trello+pen",
+    "date": "07/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Trello",
+      "icon": "trello",
+      "description": "Create and manage boards, lists, cards, checklists, labels, and members in Trello"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "API Key",
+        "placeholder": "Your Trello API key",
+        "required": true
+      },
+      {
+        "name": "api_token",
+        "type": "secret",
+        "value": null,
+        "label": "API Token",
+        "placeholder": "Your Trello API token",
+        "required": true
+      },
+      {
+        "name": "card_id",
+        "type": "string",
+        "value": null,
+        "label": "Card ID",
+        "placeholder": "The card the checklist item is on",
+        "required": true
+      },
+      {
+        "name": "check_item_id",
+        "type": "string",
+        "value": null,
+        "label": "Checklist Item ID",
+        "placeholder": "The ID of the checklist item to update",
+        "required": true
+      },
+      {
+        "name": "name",
+        "type": "string",
+        "value": null,
+        "label": "Name",
+        "placeholder": "A new text for the item"
+      },
+      {
+        "name": "state",
+        "type": "string",
+        "value": null,
+        "label": "State",
+        "placeholder": "Mark the item complete or incomplete",
+        "options": [
+          {
+            "name": "Complete",
+            "value": "complete"
+          },
+          {
+            "name": "Incomplete",
+            "value": "incomplete"
+          }
+        ]
+      },
+      {
+        "name": "position",
+        "type": "string",
+        "value": null,
+        "label": "Position",
+        "placeholder": "top, bottom, or a positive number"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Checklist Item ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Checklist Item",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "trello/label_add_to_card": {
+    "hash": "26b96c131889b8a26adffff60bf610dd9d06997654344812dab918de35cbc3fd",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Add Label to Card",
+    "description": "Attach an existing label to a Trello card.",
+    "website": "https://www.flomation.co",
+    "icon": "trello+plus",
+    "date": "07/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Trello",
+      "icon": "trello",
+      "description": "Create and manage boards, lists, cards, checklists, labels, and members in Trello"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "API Key",
+        "placeholder": "Your Trello API key",
+        "required": true
+      },
+      {
+        "name": "api_token",
+        "type": "secret",
+        "value": null,
+        "label": "API Token",
+        "placeholder": "Your Trello API token",
+        "required": true
+      },
+      {
+        "name": "board_id",
+        "type": "string",
+        "value": null,
+        "label": "Board",
+        "placeholder": "The board that owns the label (used to load the label picker)"
+      },
+      {
+        "name": "card_id",
+        "type": "string",
+        "value": null,
+        "label": "Card ID",
+        "placeholder": "The card to add the label to",
+        "required": true
+      },
+      {
+        "name": "label_id",
+        "type": "string",
+        "value": null,
+        "label": "Label",
+        "placeholder": "The label to add",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Card ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Result",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "trello/label_create": {
+    "hash": "ddfe1fc0f56ecc97ea67ede17bb7853eccd091b4bb7504ab404915ae528e08e4",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Create Label",
+    "description": "Create a new label on a Trello board with a name and color.",
+    "website": "https://www.flomation.co",
+    "icon": "trello+plus",
+    "date": "07/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Trello",
+      "icon": "trello",
+      "description": "Create and manage boards, lists, cards, checklists, labels, and members in Trello"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "API Key",
+        "placeholder": "Your Trello API key",
+        "required": true
+      },
+      {
+        "name": "api_token",
+        "type": "secret",
+        "value": null,
+        "label": "API Token",
+        "placeholder": "Your Trello API token",
+        "required": true
+      },
+      {
+        "name": "board_id",
+        "type": "string",
+        "value": null,
+        "label": "Board",
+        "placeholder": "The board to create the label on",
+        "required": true
+      },
+      {
+        "name": "name",
+        "type": "string",
+        "value": null,
+        "label": "Name",
+        "placeholder": "The name of the label"
+      },
+      {
+        "name": "color",
+        "type": "string",
+        "value": null,
+        "label": "Color",
+        "placeholder": "The label color",
+        "options": [
+          {
+            "name": "None",
+            "value": "null"
+          },
+          {
+            "name": "Green",
+            "value": "green"
+          },
+          {
+            "name": "Yellow",
+            "value": "yellow"
+          },
+          {
+            "name": "Orange",
+            "value": "orange"
+          },
+          {
+            "name": "Red",
+            "value": "red"
+          },
+          {
+            "name": "Purple",
+            "value": "purple"
+          },
+          {
+            "name": "Blue",
+            "value": "blue"
+          },
+          {
+            "name": "Sky",
+            "value": "sky"
+          },
+          {
+            "name": "Lime",
+            "value": "lime"
+          },
+          {
+            "name": "Pink",
+            "value": "pink"
+          },
+          {
+            "name": "Black",
+            "value": "black"
+          }
+        ]
+      }
+    ],
+    "outputs": [
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Label ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Label",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "trello/label_delete": {
+    "hash": "1a666fac8a886b4b8d55d47cfb7239c5595256c1fe9ee6b9d2dd548f227f25f3",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Delete Label",
+    "description": "Delete a Trello label by its ID.",
+    "website": "https://www.flomation.co",
+    "icon": "trello+trash",
+    "date": "07/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Trello",
+      "icon": "trello",
+      "description": "Create and manage boards, lists, cards, checklists, labels, and members in Trello"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "API Key",
+        "placeholder": "Your Trello API key",
+        "required": true
+      },
+      {
+        "name": "api_token",
+        "type": "secret",
+        "value": null,
+        "label": "API Token",
+        "placeholder": "Your Trello API token",
+        "required": true
+      },
+      {
+        "name": "board_id",
+        "type": "string",
+        "value": null,
+        "label": "Board",
+        "placeholder": "The board that owns the label (used to load the label picker)"
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Label",
+        "placeholder": "The label to delete",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Label ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Result",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "trello/label_get": {
+    "hash": "f4408936fd73fe1a5e0b65efa2789edda87b730613f60f7a264ff2f00dd2c880",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Get Label",
+    "description": "Fetch a single Trello label by its ID.",
+    "website": "https://www.flomation.co",
+    "icon": "trello+magnifying-glass",
+    "date": "07/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Trello",
+      "icon": "trello",
+      "description": "Create and manage boards, lists, cards, checklists, labels, and members in Trello"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "API Key",
+        "placeholder": "Your Trello API key",
+        "required": true
+      },
+      {
+        "name": "api_token",
+        "type": "secret",
+        "value": null,
+        "label": "API Token",
+        "placeholder": "Your Trello API token",
+        "required": true
+      },
+      {
+        "name": "board_id",
+        "type": "string",
+        "value": null,
+        "label": "Board",
+        "placeholder": "The board that owns the label (used to load the label picker)"
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Label",
+        "placeholder": "The label to fetch",
+        "required": true
+      },
+      {
+        "name": "fields",
+        "type": "string",
+        "value": null,
+        "label": "Fields",
+        "placeholder": "Comma-separated fields to return (default: all)"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Label ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Label",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "trello/label_get_all": {
+    "hash": "d51bd203575d4c3a3f27ff6bd7b0a15e6387004da3372a1aed2d8cd93ee96101",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Get Labels",
+    "description": "List the labels on a Trello board.",
+    "website": "https://www.flomation.co",
+    "icon": "trello+list",
+    "date": "07/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Trello",
+      "icon": "trello",
+      "description": "Create and manage boards, lists, cards, checklists, labels, and members in Trello"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "API Key",
+        "placeholder": "Your Trello API key",
+        "required": true
+      },
+      {
+        "name": "api_token",
+        "type": "secret",
+        "value": null,
+        "label": "API Token",
+        "placeholder": "Your Trello API token",
+        "required": true
+      },
+      {
+        "name": "board_id",
+        "type": "string",
+        "value": null,
+        "label": "Board",
+        "placeholder": "The board whose labels to fetch",
+        "required": true
+      },
+      {
+        "name": "fields",
+        "type": "string",
+        "value": null,
+        "label": "Fields",
+        "placeholder": "Comma-separated fields to return (default: all)"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "results",
+        "type": "object",
+        "value": null,
+        "label": "Labels",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Count",
+        "placeholder": ""
+      },
+      {
+        "name": "total",
+        "type": "integer",
+        "value": null,
+        "label": "Total",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "trello/label_remove_from_card": {
+    "hash": "c7593849116167c17914c78c59071c16b158ba10091df4e78bdb72f34c3b6171",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Remove Label from Card",
+    "description": "Remove a label from a Trello card.",
+    "website": "https://www.flomation.co",
+    "icon": "trello+xmark",
+    "date": "07/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Trello",
+      "icon": "trello",
+      "description": "Create and manage boards, lists, cards, checklists, labels, and members in Trello"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "API Key",
+        "placeholder": "Your Trello API key",
+        "required": true
+      },
+      {
+        "name": "api_token",
+        "type": "secret",
+        "value": null,
+        "label": "API Token",
+        "placeholder": "Your Trello API token",
+        "required": true
+      },
+      {
+        "name": "board_id",
+        "type": "string",
+        "value": null,
+        "label": "Board",
+        "placeholder": "The board that owns the label (used to load the label picker)"
+      },
+      {
+        "name": "card_id",
+        "type": "string",
+        "value": null,
+        "label": "Card ID",
+        "placeholder": "The card to remove the label from",
+        "required": true
+      },
+      {
+        "name": "label_id",
+        "type": "string",
+        "value": null,
+        "label": "Label",
+        "placeholder": "The label to remove",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Card ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Result",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "trello/label_update": {
+    "hash": "48c553df205397a6fc3756d34138eb7bdbc069da9ffdcffef178875362431fad",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Update Label",
+    "description": "Change a Trello label's name or color.",
+    "website": "https://www.flomation.co",
+    "icon": "trello+pen",
+    "date": "07/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Trello",
+      "icon": "trello",
+      "description": "Create and manage boards, lists, cards, checklists, labels, and members in Trello"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "API Key",
+        "placeholder": "Your Trello API key",
+        "required": true
+      },
+      {
+        "name": "api_token",
+        "type": "secret",
+        "value": null,
+        "label": "API Token",
+        "placeholder": "Your Trello API token",
+        "required": true
+      },
+      {
+        "name": "board_id",
+        "type": "string",
+        "value": null,
+        "label": "Board",
+        "placeholder": "The board that owns the label (used to load the label picker)"
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Label",
+        "placeholder": "The label to update",
+        "required": true
+      },
+      {
+        "name": "name",
+        "type": "string",
+        "value": null,
+        "label": "Name",
+        "placeholder": "A new name for the label"
+      },
+      {
+        "name": "color",
+        "type": "string",
+        "value": null,
+        "label": "Color",
+        "placeholder": "The label color",
+        "options": [
+          {
+            "name": "None",
+            "value": "null"
+          },
+          {
+            "name": "Green",
+            "value": "green"
+          },
+          {
+            "name": "Yellow",
+            "value": "yellow"
+          },
+          {
+            "name": "Orange",
+            "value": "orange"
+          },
+          {
+            "name": "Red",
+            "value": "red"
+          },
+          {
+            "name": "Purple",
+            "value": "purple"
+          },
+          {
+            "name": "Blue",
+            "value": "blue"
+          },
+          {
+            "name": "Sky",
+            "value": "sky"
+          },
+          {
+            "name": "Lime",
+            "value": "lime"
+          },
+          {
+            "name": "Pink",
+            "value": "pink"
+          },
+          {
+            "name": "Black",
+            "value": "black"
+          }
+        ]
+      }
+    ],
+    "outputs": [
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Label ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Label",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "trello/list_archive": {
+    "hash": "0ca26859ea5c528eba407c1d33c331f739545f025b2739426bc55bfbcc1df7ce",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Archive/Unarchive List",
+    "description": "Archive (close) a Trello list, or reopen it, with the Archive toggle.",
+    "website": "https://www.flomation.co",
+    "icon": "trello+box-archive",
+    "date": "07/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Trello",
+      "icon": "trello",
+      "description": "Create and manage boards, lists, cards, checklists, labels, and members in Trello"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "API Key",
+        "placeholder": "Your Trello API key",
+        "required": true
+      },
+      {
+        "name": "api_token",
+        "type": "secret",
+        "value": null,
+        "label": "API Token",
+        "placeholder": "Your Trello API token",
+        "required": true
+      },
+      {
+        "name": "board_id",
+        "type": "string",
+        "value": null,
+        "label": "Board",
+        "placeholder": "The board that owns the list (used to load the list picker)"
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "List",
+        "placeholder": "The list to archive or unarchive",
+        "required": true
+      },
+      {
+        "name": "archive",
+        "type": "boolean",
+        "value": null,
+        "label": "Archive",
+        "placeholder": "On = archive the list; off = reopen it (defaults to archive)"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "List ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "List",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "trello/list_create": {
+    "hash": "6d9200a05a245d1fdde612ed04b14c2f420a39bad7253df4598e67630b8aee93",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Create List",
+    "description": "Create a new list on a Trello board.",
+    "website": "https://www.flomation.co",
+    "icon": "trello+plus",
+    "date": "07/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Trello",
+      "icon": "trello",
+      "description": "Create and manage boards, lists, cards, checklists, labels, and members in Trello"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "API Key",
+        "placeholder": "Your Trello API key",
+        "required": true
+      },
+      {
+        "name": "api_token",
+        "type": "secret",
+        "value": null,
+        "label": "API Token",
+        "placeholder": "Your Trello API token",
+        "required": true
+      },
+      {
+        "name": "board_id",
+        "type": "string",
+        "value": null,
+        "label": "Board",
+        "placeholder": "The board to add the list to",
+        "required": true
+      },
+      {
+        "name": "name",
+        "type": "string",
+        "value": null,
+        "label": "Name",
+        "placeholder": "The name of the list",
+        "required": true
+      },
+      {
+        "name": "position",
+        "type": "string",
+        "value": null,
+        "label": "Position",
+        "placeholder": "top, bottom, or a positive number"
+      },
+      {
+        "name": "additional_fields",
+        "type": "object",
+        "value": null,
+        "label": "Additional Fields",
+        "placeholder": "Extra Trello fields as JSON, e.g. {\"idListSource\":\"...\"}"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "List ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "List",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "trello/list_get": {
+    "hash": "6360f683443b68023d347344d420df4a75dbfeb10dd18155774d60c4e1829081",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Get List",
+    "description": "Fetch a single Trello list by its ID. Optionally narrow the returned data with a comma-separated Fields list.",
+    "website": "https://www.flomation.co",
+    "icon": "trello+magnifying-glass",
+    "date": "07/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Trello",
+      "icon": "trello",
+      "description": "Create and manage boards, lists, cards, checklists, labels, and members in Trello"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "API Key",
+        "placeholder": "Your Trello API key",
+        "required": true
+      },
+      {
+        "name": "api_token",
+        "type": "secret",
+        "value": null,
+        "label": "API Token",
+        "placeholder": "Your Trello API token",
+        "required": true
+      },
+      {
+        "name": "board_id",
+        "type": "string",
+        "value": null,
+        "label": "Board",
+        "placeholder": "The board that owns the list (used to load the list picker)"
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "List",
+        "placeholder": "The list to fetch",
+        "required": true
+      },
+      {
+        "name": "fields",
+        "type": "string",
+        "value": null,
+        "label": "Fields",
+        "placeholder": "Comma-separated fields to return (default: all)"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "List ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "List",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "trello/list_get_all": {
+    "hash": "b424f63ca077f2bb5ffa816a6c252c4ee17699400126a1cfd87fe2e0e0c146c3",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Get Lists",
+    "description": "List the lists on a Trello board. Optionally filter by open/closed and narrow the returned Fields.",
+    "website": "https://www.flomation.co",
+    "icon": "trello+list",
+    "date": "07/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Trello",
+      "icon": "trello",
+      "description": "Create and manage boards, lists, cards, checklists, labels, and members in Trello"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "API Key",
+        "placeholder": "Your Trello API key",
+        "required": true
+      },
+      {
+        "name": "api_token",
+        "type": "secret",
+        "value": null,
+        "label": "API Token",
+        "placeholder": "Your Trello API token",
+        "required": true
+      },
+      {
+        "name": "board_id",
+        "type": "string",
+        "value": null,
+        "label": "Board",
+        "placeholder": "The board whose lists to fetch",
+        "required": true
+      },
+      {
+        "name": "filter",
+        "type": "string",
+        "value": null,
+        "label": "Filter",
+        "placeholder": "Which lists to include",
+        "options": [
+          {
+            "name": "Open",
+            "value": "open"
+          },
+          {
+            "name": "Closed",
+            "value": "closed"
+          },
+          {
+            "name": "All",
+            "value": "all"
+          }
+        ]
+      },
+      {
+        "name": "fields",
+        "type": "string",
+        "value": null,
+        "label": "Fields",
+        "placeholder": "Comma-separated fields to return (default: all)"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "results",
+        "type": "object",
+        "value": null,
+        "label": "Lists",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Count",
+        "placeholder": ""
+      },
+      {
+        "name": "total",
+        "type": "integer",
+        "value": null,
+        "label": "Total",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "trello/list_get_cards": {
+    "hash": "364343c00a1487b1d78618e550fdef97e3367a704518fbeb5093e9d3f2caba2d",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Get Cards in List",
+    "description": "List all cards in a Trello list. Optionally narrow the returned Fields.",
+    "website": "https://www.flomation.co",
+    "icon": "trello+list",
+    "date": "07/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Trello",
+      "icon": "trello",
+      "description": "Create and manage boards, lists, cards, checklists, labels, and members in Trello"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "API Key",
+        "placeholder": "Your Trello API key",
+        "required": true
+      },
+      {
+        "name": "api_token",
+        "type": "secret",
+        "value": null,
+        "label": "API Token",
+        "placeholder": "Your Trello API token",
+        "required": true
+      },
+      {
+        "name": "board_id",
+        "type": "string",
+        "value": null,
+        "label": "Board",
+        "placeholder": "The board that owns the list (used to load the list picker)"
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "List",
+        "placeholder": "The list whose cards to fetch",
+        "required": true
+      },
+      {
+        "name": "fields",
+        "type": "string",
+        "value": null,
+        "label": "Fields",
+        "placeholder": "Comma-separated fields to return (default: all)"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "results",
+        "type": "object",
+        "value": null,
+        "label": "Cards",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Count",
+        "placeholder": ""
+      },
+      {
+        "name": "total",
+        "type": "integer",
+        "value": null,
+        "label": "Total",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "trello/list_update": {
+    "hash": "18d2d97717e5ebebec602b1b857f646163182fed10ed87ab33c30268e1b5e97b",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Update List",
+    "description": "Change an existing Trello list — rename it, archive/reopen it, move it to another board, or reposition it.",
+    "website": "https://www.flomation.co",
+    "icon": "trello+pen",
+    "date": "07/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Trello",
+      "icon": "trello",
+      "description": "Create and manage boards, lists, cards, checklists, labels, and members in Trello"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "API Key",
+        "placeholder": "Your Trello API key",
+        "required": true
+      },
+      {
+        "name": "api_token",
+        "type": "secret",
+        "value": null,
+        "label": "API Token",
+        "placeholder": "Your Trello API token",
+        "required": true
+      },
+      {
+        "name": "board_id",
+        "type": "string",
+        "value": null,
+        "label": "Board",
+        "placeholder": "The board that owns the list (used to load the list picker)"
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "List",
+        "placeholder": "The list to update",
+        "required": true
+      },
+      {
+        "name": "name",
+        "type": "string",
+        "value": null,
+        "label": "Name",
+        "placeholder": "A new name for the list"
+      },
+      {
+        "name": "closed",
+        "type": "boolean",
+        "value": null,
+        "label": "Closed",
+        "placeholder": "Archive the list, or reopen it"
+      },
+      {
+        "name": "move_to_board_id",
+        "type": "string",
+        "value": null,
+        "label": "Move to Board",
+        "placeholder": "Move the list to this board ID"
+      },
+      {
+        "name": "position",
+        "type": "string",
+        "value": null,
+        "label": "Position",
+        "placeholder": "top, bottom, or a positive number"
+      },
+      {
+        "name": "subscribed",
+        "type": "boolean",
+        "value": null,
+        "label": "Subscribed",
+        "placeholder": "Subscribe to the list"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "List ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "List",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
   "trigger/acuity_webhook": {
     "hash": "e6caca8b03346cf54289238f641f22ac8e4e5ee906569b3b7104d7591a1b39fd",
     "author": "Dave McElin",
@@ -71137,7 +75372,7 @@
     ]
   },
   "trigger/jira_webhook": {
-    "hash": "46e0192b6b329513d66ff0cc790c380d08fddbf41cd7ef2b2380cb8c82aee58a",
+    "hash": "1d8f627f16a30b33e23851642f013017966adfed04f7a9943ae6a3f5aa9a1520",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Jira Webhook Trigger",
@@ -73415,6 +77650,127 @@
         "type": "string",
         "value": null,
         "label": "Date",
+        "placeholder": ""
+      }
+    ]
+  },
+  "trigger/trello_webhook": {
+    "hash": "8e97be3f71f79222483db13389bc3648b84dbf453de251a177ab7400f365ea5c",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Trello Webhook Trigger",
+    "description": "Triggers a flow when something changes on a Trello board, list, or card you watch (a card is created, moved, commented on, and so on). The webhook is registered automatically for the model you choose; set the Trello API Secret to have each delivery's HMAC-SHA1 signature verified.",
+    "website": "https://www.flomation.co",
+    "icon": "trello",
+    "date": "07/07/2026",
+    "type": 1,
+    "category": {
+      "name": "Triggers",
+      "icon": "bolt-lightning",
+      "description": "Start a Flow"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "API Key",
+        "placeholder": "Your Trello API key",
+        "required": true
+      },
+      {
+        "name": "api_token",
+        "type": "secret",
+        "value": null,
+        "label": "API Token",
+        "placeholder": "Your Trello API token",
+        "required": true
+      },
+      {
+        "name": "model_id",
+        "type": "string",
+        "value": null,
+        "label": "Watch",
+        "placeholder": "The board (or list/card ID) to watch for changes",
+        "required": true
+      },
+      {
+        "name": "secret",
+        "type": "secret",
+        "value": null,
+        "label": "API Secret",
+        "placeholder": "Optional — your Trello API Secret, used to verify each delivery's HMAC-SHA1 signature"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "content",
+        "type": "string",
+        "value": null,
+        "label": "Event Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "action_type",
+        "type": "string",
+        "value": null,
+        "label": "Action Type",
+        "placeholder": ""
+      },
+      {
+        "name": "action_id",
+        "type": "string",
+        "value": null,
+        "label": "Action ID",
+        "placeholder": ""
+      },
+      {
+        "name": "model_id",
+        "type": "string",
+        "value": null,
+        "label": "Model ID",
+        "placeholder": ""
+      },
+      {
+        "name": "board_id",
+        "type": "string",
+        "value": null,
+        "label": "Board ID",
+        "placeholder": ""
+      },
+      {
+        "name": "card_id",
+        "type": "string",
+        "value": null,
+        "label": "Card ID",
+        "placeholder": ""
+      },
+      {
+        "name": "list_id",
+        "type": "string",
+        "value": null,
+        "label": "List ID",
+        "placeholder": ""
+      },
+      {
+        "name": "member",
+        "type": "string",
+        "value": null,
+        "label": "Member",
+        "placeholder": ""
+      },
+      {
+        "name": "date",
+        "type": "string",
+        "value": null,
+        "label": "Timestamp",
+        "placeholder": ""
+      },
+      {
+        "name": "body",
+        "type": "string",
+        "value": null,
+        "label": "Raw JSON Body",
         "placeholder": ""
       }
     ]
