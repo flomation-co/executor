@@ -53442,7 +53442,7 @@
     ]
   },
   "monday/board_column_create": {
-    "hash": "1cfb70e1709135107ef02475a95392262d7d99064ea29536096d75ec6225513c",
+    "hash": "e4dac4fc4352ba270d3f50acb487062bb0368e6a67135178610ebf5f93cf344c",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Create Column",
@@ -53552,7 +53552,7 @@
         "type": "object",
         "value": null,
         "label": "Defaults",
-        "placeholder": "Optional column defaults as JSON (e.g. status labels)"
+        "placeholder": "Optional column defaults (JSON object, e.g. {\"labels\":{\"0\":\"Done\"}})"
       }
     ],
     "outputs": [
@@ -54170,7 +54170,7 @@
     ]
   },
   "monday/board_group_update": {
-    "hash": "6dd9608b53ecb1114579e4f82ceb30d91ba6386e31af0b9a2c1bbb9fa140caa6",
+    "hash": "a239a8ef6cafdb4d5a4d9445a33410a8ffcd3253417fb11469beeefdee10d69c",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Update Group",

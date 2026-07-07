@@ -36,7 +36,7 @@ var Inputs = [...]core.Connection{
 		{Name: "Phone", Value: "phone"},
 		{Name: "Rating", Value: "rating"},
 	}},
-	{Name: "defaults", Type: core.ConnectionTypeObject, Label: "Defaults", Placeholder: "Optional column defaults as JSON (e.g. status labels)"},
+	{Name: "defaults", Type: core.ConnectionTypeObject, Label: "Defaults", Placeholder: "Optional column defaults (JSON object, e.g. {\"labels\":{\"0\":\"Done\"}})"},
 }
 
 var Outputs = [...]core.Connection{

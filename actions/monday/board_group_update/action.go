@@ -52,21 +52,35 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	}
 	// update_group changes ONE attribute per call, so send one mutation per
 	// provided attribute (title for a rename, color for a recolour).
+	//
+	// PARTIAL-UPDATE NOTE: when both Name and Color are given these run as two
+	// separate mutations. If the rename succeeds and the recolour then fails, the
+	// group is left PARTIALLY updated (renamed, but not recoloured) and we return
+	// success:false. Monday has no transactional multi-attribute update, so the
+	// remedy is to retry with only Color — the error message says so. The rename
+	// runs first because it is the more common intent and the less surprising to
+	// have applied on a partial failure.
 	query := `mutation ($boardId: ID!, $groupId: String!, $attr: GroupAttributes!, $val: String!) {
 		update_group (board_id: $boardId, group_id: $groupId, group_attribute: $attr, new_value: $val) { id title color }
 	}`
 	var last map[string]interface{}
+	renamed := false
 	if name != "" {
 		data, err := monday.GraphQL(auth, query, map[string]interface{}{"boardId": boardID, "groupId": groupID, "attr": "title", "val": name})
 		if err != nil {
 			return monday.ErrorResult(err.Error()), nil
 		}
 		last = monday.ObjectField(data, "update_group")
+		renamed = true
 	}
 	if color != "" {
 		data, err := monday.GraphQL(auth, query, map[string]interface{}{"boardId": boardID, "groupId": groupID, "attr": "color", "val": color})
 		if err != nil {
-			return monday.ErrorResult(err.Error()), nil
+			msg := err.Error()
+			if renamed {
+				msg = "the group was renamed but the colour update failed (" + msg + ") — retry with only Color"
+			}
+			return monday.ErrorResult(msg), nil
 		}
 		last = monday.ObjectField(data, "update_group")
 	}
