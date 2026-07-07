@@ -70337,11 +70337,11 @@
     ]
   },
   "trello/board_member_get_all": {
-    "hash": "e9fb534659d4eca0283237b9ba2dc1f4b80f4aba499de8f0abbed9ac8ad00727",
+    "hash": "58a4cb1f9677668d05a26bfcf4559e46049f5e412deac0f0da85adfe2cc91d0b",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Get Board Members",
-    "description": "List the members of a Trello board.",
+    "description": "List the members of a Trello board. Leave Return All on (the default behaviour when no Limit is set) to get every member; set a Limit and turn Return All off to cap how many are returned.",
     "website": "https://www.flomation.co",
     "icon": "trello+user",
     "date": "07/07/2026",
