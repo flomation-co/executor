@@ -472,6 +472,28 @@ import (
 	microsoft_word_get_metadata "flomation.app/automate/executor/actions/microsoft/word/get_metadata"
 	microsoft_word_read "flomation.app/automate/executor/actions/microsoft/word/read"
 	microsoft_word_replace_text "flomation.app/automate/executor/actions/microsoft/word/replace_text"
+	monday_board_archive "flomation.app/automate/executor/actions/monday/board_archive"
+	monday_board_column_create "flomation.app/automate/executor/actions/monday/board_column_create"
+	monday_board_column_get_all "flomation.app/automate/executor/actions/monday/board_column_get_all"
+	monday_board_create "flomation.app/automate/executor/actions/monday/board_create"
+	monday_board_get "flomation.app/automate/executor/actions/monday/board_get"
+	monday_board_get_all "flomation.app/automate/executor/actions/monday/board_get_all"
+	monday_board_group_create "flomation.app/automate/executor/actions/monday/board_group_create"
+	monday_board_group_delete "flomation.app/automate/executor/actions/monday/board_group_delete"
+	monday_board_group_get_all "flomation.app/automate/executor/actions/monday/board_group_get_all"
+	monday_board_group_update "flomation.app/automate/executor/actions/monday/board_group_update"
+	monday_item_add_update "flomation.app/automate/executor/actions/monday/item_add_update"
+	monday_item_archive "flomation.app/automate/executor/actions/monday/item_archive"
+	monday_item_change_column_value "flomation.app/automate/executor/actions/monday/item_change_column_value"
+	monday_item_change_multiple_column_values "flomation.app/automate/executor/actions/monday/item_change_multiple_column_values"
+	monday_item_create "flomation.app/automate/executor/actions/monday/item_create"
+	monday_item_delete "flomation.app/automate/executor/actions/monday/item_delete"
+	monday_item_get "flomation.app/automate/executor/actions/monday/item_get"
+	monday_item_get_all "flomation.app/automate/executor/actions/monday/item_get_all"
+	monday_item_get_by_column_value "flomation.app/automate/executor/actions/monday/item_get_by_column_value"
+	monday_item_move "flomation.app/automate/executor/actions/monday/item_move"
+	monday_user_get_all "flomation.app/automate/executor/actions/monday/user_get_all"
+	monday_workspace_get_all "flomation.app/automate/executor/actions/monday/workspace_get_all"
 	nosql_mongodb "flomation.app/automate/executor/actions/nosql/mongodb"
 	nosql_redis "flomation.app/automate/executor/actions/nosql/redis"
 	notion_add_comment "flomation.app/automate/executor/actions/notion/add_comment"
@@ -733,6 +755,7 @@ import (
 	trigger_mailchimp_webhook "flomation.app/automate/executor/actions/trigger/mailchimp_webhook"
 	trigger_manual "flomation.app/automate/executor/actions/trigger/manual"
 	trigger_microsoft_outlook "flomation.app/automate/executor/actions/trigger/microsoft_outlook"
+	trigger_monday_webhook "flomation.app/automate/executor/actions/trigger/monday_webhook"
 	trigger_plan_task "flomation.app/automate/executor/actions/trigger/plan_task"
 	trigger_qr "flomation.app/automate/executor/actions/trigger/qr"
 	trigger_s3 "flomation.app/automate/executor/actions/trigger/s3"
@@ -1278,6 +1301,28 @@ var Actions = map[string]core.Action{
 	"microsoft/word/get_metadata":                       microsoft_word_get_metadata.Execute,
 	"microsoft/word/read":                               microsoft_word_read.Execute,
 	"microsoft/word/replace_text":                       microsoft_word_replace_text.Execute,
+	"monday/board_archive":                              monday_board_archive.Execute,
+	"monday/board_column_create":                        monday_board_column_create.Execute,
+	"monday/board_column_get_all":                       monday_board_column_get_all.Execute,
+	"monday/board_create":                               monday_board_create.Execute,
+	"monday/board_get":                                  monday_board_get.Execute,
+	"monday/board_get_all":                              monday_board_get_all.Execute,
+	"monday/board_group_create":                         monday_board_group_create.Execute,
+	"monday/board_group_delete":                         monday_board_group_delete.Execute,
+	"monday/board_group_get_all":                        monday_board_group_get_all.Execute,
+	"monday/board_group_update":                         monday_board_group_update.Execute,
+	"monday/item_add_update":                            monday_item_add_update.Execute,
+	"monday/item_archive":                               monday_item_archive.Execute,
+	"monday/item_change_column_value":                   monday_item_change_column_value.Execute,
+	"monday/item_change_multiple_column_values":         monday_item_change_multiple_column_values.Execute,
+	"monday/item_create":                                monday_item_create.Execute,
+	"monday/item_delete":                                monday_item_delete.Execute,
+	"monday/item_get":                                   monday_item_get.Execute,
+	"monday/item_get_all":                               monday_item_get_all.Execute,
+	"monday/item_get_by_column_value":                   monday_item_get_by_column_value.Execute,
+	"monday/item_move":                                  monday_item_move.Execute,
+	"monday/user_get_all":                               monday_user_get_all.Execute,
+	"monday/workspace_get_all":                          monday_workspace_get_all.Execute,
 	"nosql/mongodb":                                     nosql_mongodb.Execute,
 	"nosql/redis":                                       nosql_redis.Execute,
 	"notion/add_comment":                                notion_add_comment.Execute,
@@ -1539,6 +1584,7 @@ var Actions = map[string]core.Action{
 	"trigger/mailchimp_webhook":                         trigger_mailchimp_webhook.Execute,
 	"trigger/manual":                                    trigger_manual.Execute,
 	"trigger/microsoft_outlook":                         trigger_microsoft_outlook.Execute,
+	"trigger/monday_webhook":                            trigger_monday_webhook.Execute,
 	"trigger/plan_task":                                 trigger_plan_task.Execute,
 	"trigger/qr":                                        trigger_qr.Execute,
 	"trigger/s3":                                        trigger_s3.Execute,
