@@ -61,6 +61,10 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	if q.Get("project") == "" && q.Get("section") == "" && q.Get("assignee") == "" {
 		return asana.ErrorResult("provide a Project, a Section, or an Assignee (with Workspace) to list tasks"), nil
 	}
+	// Asana's GET /tasks requires a workspace whenever filtering by assignee.
+	if q.Get("assignee") != "" && q.Get("workspace") == "" {
+		return asana.ErrorResult("Workspace is required when filtering by Assignee"), nil
+	}
 	returnAll, _ := asana.OptionalBoolSet("return_all", inputs)
 	limit, _ := asana.OptionalInt("limit", inputs)
 	items, err := asana.ListAll(auth, "/tasks", q, limit, returnAll)

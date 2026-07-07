@@ -5920,7 +5920,7 @@
     ]
   },
   "asana/task_get_all": {
-    "hash": "fc34704700cc3973b2ed7e4f479c84521d1e36720e113240c81359117cfeed52",
+    "hash": "b8cf1ea16f88611682f90706c1c94823e93324a4c35389c75f4d22d47f096711",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Get Tasks",
