@@ -42,6 +42,33 @@ import (
 	arithmetic_division "flomation.app/automate/executor/actions/arithmetic/division"
 	arithmetic_multiplication "flomation.app/automate/executor/actions/arithmetic/multiplication"
 	arithmetic_subtraction "flomation.app/automate/executor/actions/arithmetic/subtraction"
+	asana_project_create "flomation.app/automate/executor/actions/asana/project_create"
+	asana_project_delete "flomation.app/automate/executor/actions/asana/project_delete"
+	asana_project_get "flomation.app/automate/executor/actions/asana/project_get"
+	asana_project_get_all "flomation.app/automate/executor/actions/asana/project_get_all"
+	asana_project_update "flomation.app/automate/executor/actions/asana/project_update"
+	asana_section_create "flomation.app/automate/executor/actions/asana/section_create"
+	asana_section_get_all "flomation.app/automate/executor/actions/asana/section_get_all"
+	asana_subtask_create "flomation.app/automate/executor/actions/asana/subtask_create"
+	asana_subtask_get_all "flomation.app/automate/executor/actions/asana/subtask_get_all"
+	asana_tag_create "flomation.app/automate/executor/actions/asana/tag_create"
+	asana_tag_get_all "flomation.app/automate/executor/actions/asana/tag_get_all"
+	asana_task_add_project "flomation.app/automate/executor/actions/asana/task_add_project"
+	asana_task_add_tag "flomation.app/automate/executor/actions/asana/task_add_tag"
+	asana_task_comment_add "flomation.app/automate/executor/actions/asana/task_comment_add"
+	asana_task_comment_remove "flomation.app/automate/executor/actions/asana/task_comment_remove"
+	asana_task_create "flomation.app/automate/executor/actions/asana/task_create"
+	asana_task_delete "flomation.app/automate/executor/actions/asana/task_delete"
+	asana_task_get "flomation.app/automate/executor/actions/asana/task_get"
+	asana_task_get_all "flomation.app/automate/executor/actions/asana/task_get_all"
+	asana_task_move "flomation.app/automate/executor/actions/asana/task_move"
+	asana_task_remove_project "flomation.app/automate/executor/actions/asana/task_remove_project"
+	asana_task_remove_tag "flomation.app/automate/executor/actions/asana/task_remove_tag"
+	asana_task_search "flomation.app/automate/executor/actions/asana/task_search"
+	asana_task_update "flomation.app/automate/executor/actions/asana/task_update"
+	asana_user_get "flomation.app/automate/executor/actions/asana/user_get"
+	asana_user_get_all "flomation.app/automate/executor/actions/asana/user_get_all"
+	asana_workspace_get_all "flomation.app/automate/executor/actions/asana/workspace_get_all"
 	aws_dynamodb "flomation.app/automate/executor/actions/aws/dynamodb"
 	aws_ec2_describe "flomation.app/automate/executor/actions/aws/ec2/describe"
 	aws_s3_delete "flomation.app/automate/executor/actions/aws/s3/delete"
@@ -688,6 +715,7 @@ import (
 	trello_list_update "flomation.app/automate/executor/actions/trello/list_update"
 	trigger_acuity_webhook "flomation.app/automate/executor/actions/trigger/acuity_webhook"
 	trigger_airtable_poll "flomation.app/automate/executor/actions/trigger/airtable_poll"
+	trigger_asana_webhook "flomation.app/automate/executor/actions/trigger/asana_webhook"
 	trigger_calcom_webhook "flomation.app/automate/executor/actions/trigger/calcom_webhook"
 	trigger_calendly_webhook "flomation.app/automate/executor/actions/trigger/calendly_webhook"
 	trigger_email "flomation.app/automate/executor/actions/trigger/email"
@@ -820,6 +848,33 @@ var Actions = map[string]core.Action{
 	"arithmetic/division":                               arithmetic_division.Execute,
 	"arithmetic/multiplication":                         arithmetic_multiplication.Execute,
 	"arithmetic/subtraction":                            arithmetic_subtraction.Execute,
+	"asana/project_create":                              asana_project_create.Execute,
+	"asana/project_delete":                              asana_project_delete.Execute,
+	"asana/project_get":                                 asana_project_get.Execute,
+	"asana/project_get_all":                             asana_project_get_all.Execute,
+	"asana/project_update":                              asana_project_update.Execute,
+	"asana/section_create":                              asana_section_create.Execute,
+	"asana/section_get_all":                             asana_section_get_all.Execute,
+	"asana/subtask_create":                              asana_subtask_create.Execute,
+	"asana/subtask_get_all":                             asana_subtask_get_all.Execute,
+	"asana/tag_create":                                  asana_tag_create.Execute,
+	"asana/tag_get_all":                                 asana_tag_get_all.Execute,
+	"asana/task_add_project":                            asana_task_add_project.Execute,
+	"asana/task_add_tag":                                asana_task_add_tag.Execute,
+	"asana/task_comment_add":                            asana_task_comment_add.Execute,
+	"asana/task_comment_remove":                         asana_task_comment_remove.Execute,
+	"asana/task_create":                                 asana_task_create.Execute,
+	"asana/task_delete":                                 asana_task_delete.Execute,
+	"asana/task_get":                                    asana_task_get.Execute,
+	"asana/task_get_all":                                asana_task_get_all.Execute,
+	"asana/task_move":                                   asana_task_move.Execute,
+	"asana/task_remove_project":                         asana_task_remove_project.Execute,
+	"asana/task_remove_tag":                             asana_task_remove_tag.Execute,
+	"asana/task_search":                                 asana_task_search.Execute,
+	"asana/task_update":                                 asana_task_update.Execute,
+	"asana/user_get":                                    asana_user_get.Execute,
+	"asana/user_get_all":                                asana_user_get_all.Execute,
+	"asana/workspace_get_all":                           asana_workspace_get_all.Execute,
 	"aws/dynamodb":                                      aws_dynamodb.Execute,
 	"aws/ec2/describe":                                  aws_ec2_describe.Execute,
 	"aws/s3/delete":                                     aws_s3_delete.Execute,
@@ -1466,6 +1521,7 @@ var Actions = map[string]core.Action{
 	"trello/list_update":                                trello_list_update.Execute,
 	"trigger/acuity_webhook":                            trigger_acuity_webhook.Execute,
 	"trigger/airtable_poll":                             trigger_airtable_poll.Execute,
+	"trigger/asana_webhook":                             trigger_asana_webhook.Execute,
 	"trigger/calcom_webhook":                            trigger_calcom_webhook.Execute,
 	"trigger/calendly_webhook":                          trigger_calendly_webhook.Execute,
 	"trigger/email":                                     trigger_email.Execute,
