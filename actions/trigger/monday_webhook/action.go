@@ -46,11 +46,17 @@ var Outputs = [...]core.Connection{
 }
 
 // configInputs are trigger configuration fields that must not be echoed as
-// outputs — they carry the credential or the watched-board/event settings. The
-// launch service injects the event fields (event_type, item_id, …) at fire time.
+// outputs — they carry the credential or the watched-event setting. The launch
+// service injects the event fields (event_type, item_id, board_id, …) at fire
+// time.
+//
+// NOTE: board_id is deliberately NOT listed here even though it is a config
+// input, because it is ALSO a declared output that launch fills from the event.
+// Listing it would make Execute skip the injected value and leave the board_id
+// output empty. The watched board equals the event's board, so echoing it is
+// correct either way.
 var configInputs = map[string]bool{
 	"api_token": true,
-	"board_id":  true,
 	"event":     true,
 	"__node_id": true,
 }

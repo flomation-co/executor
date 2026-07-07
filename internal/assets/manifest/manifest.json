@@ -80567,7 +80567,7 @@
     ]
   },
   "trigger/monday_webhook": {
-    "hash": "9f86d38d5d8821411190385e566002dd725bf26126212b32f66c4bd6f923df82",
+    "hash": "d8f0d990eab2756a64da907dd38d6327cec86ad976220360bf2a81fedc3939d1",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Monday.com Webhook Trigger",

@@ -267,18 +267,36 @@ func OptionalInt(name string, inputs []*core.Connection) (int, bool) {
 	return int(*conn.Number()), true
 }
 
-// ValidateJSON checks that a string input is valid JSON and returns it as-is
-// (Monday's JSON! arguments are passed as JSON-encoded strings). Empty → "".
+// ValidateJSON returns the input as a JSON-encoded STRING for Monday's JSON!
+// arguments. Empty → "". It reads the connection's raw Value directly (NOT via
+// String(), which stringifies a parsed map as a Go literal like "map[label:Done]"
+// rather than JSON): a string value is validated and passed through; a
+// map/slice value (the field wired from an upstream object) is re-marshalled to
+// a JSON string. Mirrors the object-aware JSON handling in the sibling nodes.
 func ValidateJSON(name string, inputs []*core.Connection) (string, error) {
-	raw := OptionalString(name, inputs)
-	if raw == "" {
+	conn := core.FindConnection(name, inputs)
+	if conn == nil || conn.Value == nil {
 		return "", nil
 	}
-	var probe interface{}
-	if err := json.Unmarshal([]byte(raw), &probe); err != nil {
-		return "", fmt.Errorf("%s must be valid JSON", name)
+	switch v := conn.Value.(type) {
+	case string:
+		if strings.TrimSpace(v) == "" {
+			return "", nil
+		}
+		var probe interface{}
+		if err := json.Unmarshal([]byte(v), &probe); err != nil {
+			return "", fmt.Errorf("%s must be valid JSON", name)
+		}
+		return v, nil
+	default:
+		// Already a parsed object/array (e.g. wired from an upstream output) —
+		// re-encode to a JSON string for Monday.
+		b, err := json.Marshal(v)
+		if err != nil {
+			return "", fmt.Errorf("%s must be valid JSON", name)
+		}
+		return string(b), nil
 	}
-	return raw, nil
 }
 
 // ClampLimit bounds a requested page size, falling back to DefaultPageLimit.

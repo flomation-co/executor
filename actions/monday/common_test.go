@@ -72,14 +72,27 @@ func TestGraphQLUnauthorised(t *testing.T) {
 }
 
 func TestValidateJSON(t *testing.T) {
+	// String value that is valid JSON → passed through.
 	good := &core.Connection{Name: "value", Type: core.ConnectionTypeObject, Value: `{"label":"Done"}`}
 	v, err := ValidateJSON("value", []*core.Connection{good})
 	if err != nil || v != `{"label":"Done"}` {
-		t.Fatalf("valid json: v=%q err=%v", v, err)
+		t.Fatalf("valid json string: v=%q err=%v", v, err)
 	}
+	// String value that is NOT JSON → error.
 	bad := &core.Connection{Name: "value", Type: core.ConnectionTypeObject, Value: `{not json`}
 	if _, err := ValidateJSON("value", []*core.Connection{bad}); err == nil {
 		t.Fatal("expected error for invalid json")
+	}
+	// Object value (field wired from an upstream output) → re-marshalled to JSON,
+	// NOT stringified as a Go map literal. This is the review-fixed case.
+	obj := &core.Connection{Name: "value", Type: core.ConnectionTypeObject, Value: map[string]interface{}{"label": "Done"}}
+	ov, err := ValidateJSON("value", []*core.Connection{obj})
+	if err != nil || ov != `{"label":"Done"}` {
+		t.Fatalf("object value: v=%q err=%v (must re-encode to JSON, not a Go map literal)", ov, err)
+	}
+	// Empty → "".
+	if ev, err := ValidateJSON("value", []*core.Connection{}); err != nil || ev != "" {
+		t.Fatalf("absent: v=%q err=%v", ev, err)
 	}
 }
 
