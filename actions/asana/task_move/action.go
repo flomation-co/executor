@@ -24,8 +24,8 @@ const (
 var Inputs = [...]core.Connection{
 	{Name: "access_token", Type: core.ConnectionTypeSecret, Label: "Access Token", Placeholder: "Your Asana Personal Access Token", Required: true},
 	{Name: "id", Type: core.ConnectionTypeString, Label: "Task ID", Placeholder: "The task to move", Required: true},
-	{Name: "workspace", Type: core.ConnectionTypeString, Label: "Workspace", Placeholder: "The workspace that owns the project (used to load the project picker)"},
-	{Name: "project_id", Type: core.ConnectionTypeString, Label: "Project", Placeholder: "The project that owns the section (used to load the section picker)"},
+	{Name: "workspace", Type: core.ConnectionTypeString, Label: "Workspace", Placeholder: "Optional — used only to load the Project picker (not sent to Asana)"},
+	{Name: "project_id", Type: core.ConnectionTypeString, Label: "Project", Placeholder: "Optional — used only to load the Section picker (not sent to Asana)"},
 	{Name: "section", Type: core.ConnectionTypeString, Label: "Section", Placeholder: "The section to move the task into", Required: true},
 }
 

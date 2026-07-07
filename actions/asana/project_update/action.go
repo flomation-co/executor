@@ -52,6 +52,9 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	if err := asana.MergeAdditionalFields(body, inputs); err != nil {
 		return asana.ErrorResult(err.Error()), nil
 	}
+	// Asana's PUT is a PARTIAL update: only the fields present in the data body
+	// are changed; omitted fields are left untouched (verified empirically — it is
+	// not a full replace, so this can't null out unspecified fields).
 	obj, err := asana.WriteObject(auth, http.MethodPut, "/projects/"+url.PathEscape(id), body, url.Values{})
 	if err != nil {
 		return asana.ErrorResult(err.Error()), nil

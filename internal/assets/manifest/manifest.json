@@ -4646,7 +4646,7 @@
     ]
   },
   "asana/project_update": {
-    "hash": "0121a7336cfcb50e4027666b849f2fc65ba2803da178ed33447d5cd4a7cc9178",
+    "hash": "e93e79b874c56b0fa2c847b550a93e0637cc24166a03f1f27a890e7e477c1faf",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Update Project",
@@ -4745,7 +4745,7 @@
     ]
   },
   "asana/section_create": {
-    "hash": "3a33b8da5381fd072efbac1d9cc0a285d55c7d0428f8c20c45b5957081121745",
+    "hash": "6b65e62ef3190147354296fdd67e16bcd1555f55c581987acff191496235f2f1",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Create Section",
@@ -4773,7 +4773,7 @@
         "type": "string",
         "value": null,
         "label": "Workspace",
-        "placeholder": "The workspace that owns the project (used to load the project picker)"
+        "placeholder": "Optional — used only to load the Project picker (not sent to Asana)"
       },
       {
         "name": "project_id",
@@ -4831,7 +4831,7 @@
     ]
   },
   "asana/section_get_all": {
-    "hash": "97036d22f8cb2a1e97a2722a5e2953d7e22ab728106868014f0649b1b8aebc1f",
+    "hash": "4d3aa52756acde34a94b36fe9326c5d83e7fe583ae9f656094a8666b66b668d2",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Get Sections",
@@ -4859,7 +4859,7 @@
         "type": "string",
         "value": null,
         "label": "Workspace",
-        "placeholder": "The workspace that owns the project (used to load the project picker)"
+        "placeholder": "Optional — used only to load the Project picker (not sent to Asana)"
       },
       {
         "name": "project_id",
@@ -5321,7 +5321,7 @@
     ]
   },
   "asana/task_add_project": {
-    "hash": "aa232c2982e5171e3d22ed6c1472e7b53a3519caabcacc54ef694b8026191d1d",
+    "hash": "181f1c1b2fc5125f31d01ac646baf68995ff86f321afa87dda78bfafd947b50b",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Add Task to Project",
@@ -5349,7 +5349,7 @@
         "type": "string",
         "value": null,
         "label": "Workspace",
-        "placeholder": "The workspace that owns the project (used to load the project picker)"
+        "placeholder": "Optional — used only to load the Project picker (not sent to Asana)"
       },
       {
         "name": "task_id",
@@ -5414,7 +5414,7 @@
     ]
   },
   "asana/task_add_tag": {
-    "hash": "0dec968c0b8f96dc063aa0c2dfd9d4324e2b3f4e603daa8d6cc91e2d65146214",
+    "hash": "daec4030d2f0ec9640815a1bb0148a07025b0d1fbfb302437053f6955ef0b18e",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Add Tag to Task",
@@ -5450,7 +5450,7 @@
         "type": "string",
         "value": null,
         "label": "Workspace",
-        "placeholder": "The workspace that owns the tag (used to load the tag picker)"
+        "placeholder": "Optional — used only to load the Tag picker (not sent to Asana)"
       },
       {
         "name": "tag",
@@ -6039,7 +6039,7 @@
     ]
   },
   "asana/task_move": {
-    "hash": "621902b12b12bdd1cdc2245e5d2618351223b458c406ec182b9d23f22283b645",
+    "hash": "dd738cd8c401ecf6ef6d6027b0b6138a5daea41b2db724814df3760cb41c9cb3",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Move Task to Section",
@@ -6075,14 +6075,14 @@
         "type": "string",
         "value": null,
         "label": "Workspace",
-        "placeholder": "The workspace that owns the project (used to load the project picker)"
+        "placeholder": "Optional — used only to load the Project picker (not sent to Asana)"
       },
       {
         "name": "project_id",
         "type": "string",
         "value": null,
         "label": "Project",
-        "placeholder": "The project that owns the section (used to load the section picker)"
+        "placeholder": "Optional — used only to load the Section picker (not sent to Asana)"
       },
       {
         "name": "section",
@@ -6132,7 +6132,7 @@
     ]
   },
   "asana/task_remove_project": {
-    "hash": "a09e062a1d8659a0000ef919f19bd0d955895b367d0622cdfb36ce47cd383bc7",
+    "hash": "8b57eb18e2fac1178303cddb055acdf2b4843b65a886867c0e49dc4e4ea4a915",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Remove Task from Project",
@@ -6160,7 +6160,7 @@
         "type": "string",
         "value": null,
         "label": "Workspace",
-        "placeholder": "The workspace that owns the project (used to load the project picker)"
+        "placeholder": "Optional — used only to load the Project picker (not sent to Asana)"
       },
       {
         "name": "task_id",
@@ -6218,7 +6218,7 @@
     ]
   },
   "asana/task_remove_tag": {
-    "hash": "332080fd8a5bf588f30dc765bb4a4cf38a21f6d43cd501d782ffd3ace84ba05a",
+    "hash": "57abbda94d6d579bbecbab5ac09a38d5ca276bd60214c3fb5abe9cc0bdf440f7",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Remove Tag from Task",
@@ -6254,7 +6254,7 @@
         "type": "string",
         "value": null,
         "label": "Workspace",
-        "placeholder": "The workspace that owns the tag (used to load the tag picker)"
+        "placeholder": "Optional — used only to load the Tag picker (not sent to Asana)"
       },
       {
         "name": "tag",
@@ -6403,7 +6403,7 @@
     ]
   },
   "asana/task_update": {
-    "hash": "d6a1df6c3ad0ff1b23dbd07f0050d665824eebd22439b0f841fbfacf512c8b60",
+    "hash": "069d5808e39e45c8fac307cbf5350c5a40524e39b9be45ca323146bda417f9d4",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Update Task",

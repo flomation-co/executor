@@ -21,7 +21,7 @@ const (
 
 var Inputs = [...]core.Connection{
 	{Name: "access_token", Type: core.ConnectionTypeSecret, Label: "Access Token", Placeholder: "Your Asana Personal Access Token", Required: true},
-	{Name: "workspace", Type: core.ConnectionTypeString, Label: "Workspace", Placeholder: "The workspace that owns the project (used to load the project picker)"},
+	{Name: "workspace", Type: core.ConnectionTypeString, Label: "Workspace", Placeholder: "Optional — used only to load the Project picker (not sent to Asana)"},
 	{Name: "project_id", Type: core.ConnectionTypeString, Label: "Project", Placeholder: "The project whose sections to fetch", Required: true},
 	{Name: "opt_fields", Type: core.ConnectionTypeString, Label: "Fields", Placeholder: "Comma-separated fields to return, e.g. name"},
 	{Name: "return_all", Type: core.ConnectionTypeBoolean, Label: "Return All", Placeholder: "Return every section (ignores Limit)"},

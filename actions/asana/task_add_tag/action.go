@@ -22,7 +22,7 @@ const (
 var Inputs = [...]core.Connection{
 	{Name: "access_token", Type: core.ConnectionTypeSecret, Label: "Access Token", Placeholder: "Your Asana Personal Access Token", Required: true},
 	{Name: "task_id", Type: core.ConnectionTypeString, Label: "Task ID", Placeholder: "The task to tag", Required: true},
-	{Name: "workspace", Type: core.ConnectionTypeString, Label: "Workspace", Placeholder: "The workspace that owns the tag (used to load the tag picker)"},
+	{Name: "workspace", Type: core.ConnectionTypeString, Label: "Workspace", Placeholder: "Optional — used only to load the Tag picker (not sent to Asana)"},
 	{Name: "tag", Type: core.ConnectionTypeString, Label: "Tag", Placeholder: "The tag to add", Required: true},
 }
 

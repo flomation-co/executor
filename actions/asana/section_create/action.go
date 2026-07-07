@@ -21,7 +21,7 @@ const (
 
 var Inputs = [...]core.Connection{
 	{Name: "access_token", Type: core.ConnectionTypeSecret, Label: "Access Token", Placeholder: "Your Asana Personal Access Token", Required: true},
-	{Name: "workspace", Type: core.ConnectionTypeString, Label: "Workspace", Placeholder: "The workspace that owns the project (used to load the project picker)"},
+	{Name: "workspace", Type: core.ConnectionTypeString, Label: "Workspace", Placeholder: "Optional — used only to load the Project picker (not sent to Asana)"},
 	{Name: "project_id", Type: core.ConnectionTypeString, Label: "Project", Placeholder: "The project to add the section to", Required: true},
 	{Name: "name", Type: core.ConnectionTypeString, Label: "Name", Placeholder: "The name of the section", Required: true},
 }
