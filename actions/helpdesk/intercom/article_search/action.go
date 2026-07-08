@@ -105,6 +105,12 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 		}
 		q.Set("starting_after", cursor)
 	}
+	// Defensive: trim to the requested limit in case the endpoint hands back
+	// more than per_page — the same client-side Limit behaviour as the
+	// unpaginated lists (see admin_get_all).
+	if !returnAll && len(all) > pageSize {
+		all = all[:pageSize]
+	}
 	return intercom.ListResult(all, fmt.Sprintf("Found %d article(s) matching %q", len(all), phrase)), nil
 }
 
