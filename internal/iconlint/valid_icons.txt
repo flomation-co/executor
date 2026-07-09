@@ -1,14 +1,24 @@
+# Snapshot of the editor's renderable icon set: the union of iconPaths and
+# iconAliases in automate/editor/app/components/icons/paths.ts.
+#
+# Aliases belong here too — Icon.tsx resolves them before lookup, so an action
+# whose Icon is "stripe+search" renders via search -> magnifying-glass.
+#
+# Regenerate whenever paths.ts changes; a stale snapshot fails iconlint on
+# icons that render perfectly well.
 acuity
 airtable
 align-left
 arrow-down
 arrow-left
 arrow-right
+arrow-right-arrow-left
 arrow-right-from-bracket
 arrow-rotate-right
 arrow-up
 arrow-up-right-from-square
 arrows-split-up-and-left
+asana
 ban
 bell
 bolt
@@ -20,6 +30,7 @@ box-archive
 brain
 briefcase
 bucket
+bullhorn
 calcom
 calculator
 calendar
@@ -45,6 +56,7 @@ circle-stop
 circle-xmark
 clipboard-list
 clock
+clock-rotate-left
 cloud
 code
 code-branch
@@ -104,7 +116,9 @@ house
 hubspot
 i-cursor
 image
+intercom
 jenkins
+jira
 key
 landmark
 layer-group
@@ -126,10 +140,13 @@ microchip
 microphone
 microsoft
 minus
+monday
 notion
 object-group
 paper-plane
+paperclip
 pause
+pen
 pencil
 people-group
 people-pulling
@@ -154,6 +171,7 @@ rotate-right
 route
 save
 search
+sendgrid
 server
 share-from-square
 shield-halved
@@ -173,11 +191,13 @@ terminal
 times
 toolbox
 trash
+trello
 triangle-exclamation
 truck-ramp-box
 unlink
 user
 user-group
+user-minus
 user-plus
 video
 warning
