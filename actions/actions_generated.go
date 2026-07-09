@@ -471,6 +471,56 @@ import (
 	makefile_list_targets "flomation.app/automate/executor/actions/makefile/list_targets"
 	makefile_run_target "flomation.app/automate/executor/actions/makefile/run_target"
 	makefile_validate "flomation.app/automate/executor/actions/makefile/validate"
+	marketing_sendgrid_asm_group_create "flomation.app/automate/executor/actions/marketing/sendgrid/asm_group_create"
+	marketing_sendgrid_asm_group_delete "flomation.app/automate/executor/actions/marketing/sendgrid/asm_group_delete"
+	marketing_sendgrid_asm_group_get "flomation.app/automate/executor/actions/marketing/sendgrid/asm_group_get"
+	marketing_sendgrid_asm_group_list "flomation.app/automate/executor/actions/marketing/sendgrid/asm_group_list"
+	marketing_sendgrid_asm_group_update "flomation.app/automate/executor/actions/marketing/sendgrid/asm_group_update"
+	marketing_sendgrid_asm_suppression_add "flomation.app/automate/executor/actions/marketing/sendgrid/asm_suppression_add"
+	marketing_sendgrid_asm_suppression_delete "flomation.app/automate/executor/actions/marketing/sendgrid/asm_suppression_delete"
+	marketing_sendgrid_asm_suppression_list "flomation.app/automate/executor/actions/marketing/sendgrid/asm_suppression_list"
+	marketing_sendgrid_block_delete "flomation.app/automate/executor/actions/marketing/sendgrid/block_delete"
+	marketing_sendgrid_block_get "flomation.app/automate/executor/actions/marketing/sendgrid/block_get"
+	marketing_sendgrid_block_list "flomation.app/automate/executor/actions/marketing/sendgrid/block_list"
+	marketing_sendgrid_bounce_delete "flomation.app/automate/executor/actions/marketing/sendgrid/bounce_delete"
+	marketing_sendgrid_bounce_get "flomation.app/automate/executor/actions/marketing/sendgrid/bounce_get"
+	marketing_sendgrid_bounce_list "flomation.app/automate/executor/actions/marketing/sendgrid/bounce_list"
+	marketing_sendgrid_contact_count "flomation.app/automate/executor/actions/marketing/sendgrid/contact_count"
+	marketing_sendgrid_contact_delete "flomation.app/automate/executor/actions/marketing/sendgrid/contact_delete"
+	marketing_sendgrid_contact_get "flomation.app/automate/executor/actions/marketing/sendgrid/contact_get"
+	marketing_sendgrid_contact_get_by_email "flomation.app/automate/executor/actions/marketing/sendgrid/contact_get_by_email"
+	marketing_sendgrid_contact_import_status "flomation.app/automate/executor/actions/marketing/sendgrid/contact_import_status"
+	marketing_sendgrid_contact_list "flomation.app/automate/executor/actions/marketing/sendgrid/contact_list"
+	marketing_sendgrid_contact_search "flomation.app/automate/executor/actions/marketing/sendgrid/contact_search"
+	marketing_sendgrid_contact_upsert "flomation.app/automate/executor/actions/marketing/sendgrid/contact_upsert"
+	marketing_sendgrid_custom_field_list "flomation.app/automate/executor/actions/marketing/sendgrid/custom_field_list"
+	marketing_sendgrid_global_unsubscribe_add "flomation.app/automate/executor/actions/marketing/sendgrid/global_unsubscribe_add"
+	marketing_sendgrid_global_unsubscribe_check "flomation.app/automate/executor/actions/marketing/sendgrid/global_unsubscribe_check"
+	marketing_sendgrid_global_unsubscribe_delete "flomation.app/automate/executor/actions/marketing/sendgrid/global_unsubscribe_delete"
+	marketing_sendgrid_invalid_email_delete "flomation.app/automate/executor/actions/marketing/sendgrid/invalid_email_delete"
+	marketing_sendgrid_invalid_email_get "flomation.app/automate/executor/actions/marketing/sendgrid/invalid_email_get"
+	marketing_sendgrid_invalid_email_list "flomation.app/automate/executor/actions/marketing/sendgrid/invalid_email_list"
+	marketing_sendgrid_list_create "flomation.app/automate/executor/actions/marketing/sendgrid/list_create"
+	marketing_sendgrid_list_delete "flomation.app/automate/executor/actions/marketing/sendgrid/list_delete"
+	marketing_sendgrid_list_get "flomation.app/automate/executor/actions/marketing/sendgrid/list_get"
+	marketing_sendgrid_list_get_all "flomation.app/automate/executor/actions/marketing/sendgrid/list_get_all"
+	marketing_sendgrid_list_remove_contacts "flomation.app/automate/executor/actions/marketing/sendgrid/list_remove_contacts"
+	marketing_sendgrid_list_update "flomation.app/automate/executor/actions/marketing/sendgrid/list_update"
+	marketing_sendgrid_mail_send "flomation.app/automate/executor/actions/marketing/sendgrid/mail_send"
+	marketing_sendgrid_segment_get "flomation.app/automate/executor/actions/marketing/sendgrid/segment_get"
+	marketing_sendgrid_segment_list "flomation.app/automate/executor/actions/marketing/sendgrid/segment_list"
+	marketing_sendgrid_sender_list "flomation.app/automate/executor/actions/marketing/sendgrid/sender_list"
+	marketing_sendgrid_spam_report_delete "flomation.app/automate/executor/actions/marketing/sendgrid/spam_report_delete"
+	marketing_sendgrid_spam_report_get "flomation.app/automate/executor/actions/marketing/sendgrid/spam_report_get"
+	marketing_sendgrid_spam_report_list "flomation.app/automate/executor/actions/marketing/sendgrid/spam_report_list"
+	marketing_sendgrid_stats_get "flomation.app/automate/executor/actions/marketing/sendgrid/stats_get"
+	marketing_sendgrid_template_create "flomation.app/automate/executor/actions/marketing/sendgrid/template_create"
+	marketing_sendgrid_template_delete "flomation.app/automate/executor/actions/marketing/sendgrid/template_delete"
+	marketing_sendgrid_template_get "flomation.app/automate/executor/actions/marketing/sendgrid/template_get"
+	marketing_sendgrid_template_list "flomation.app/automate/executor/actions/marketing/sendgrid/template_list"
+	marketing_sendgrid_template_update "flomation.app/automate/executor/actions/marketing/sendgrid/template_update"
+	marketing_sendgrid_template_version_activate "flomation.app/automate/executor/actions/marketing/sendgrid/template_version_activate"
+	marketing_sendgrid_template_version_create "flomation.app/automate/executor/actions/marketing/sendgrid/template_version_create"
 	messaging_discord_webhook "flomation.app/automate/executor/actions/messaging/discord/webhook"
 	messaging_email_send "flomation.app/automate/executor/actions/messaging/email/send"
 	messaging_telegram_send_audio "flomation.app/automate/executor/actions/messaging/telegram/send_audio"
@@ -825,6 +875,7 @@ import (
 	trigger_qr "flomation.app/automate/executor/actions/trigger/qr"
 	trigger_s3 "flomation.app/automate/executor/actions/trigger/s3"
 	trigger_schedule "flomation.app/automate/executor/actions/trigger/schedule"
+	trigger_sendgrid_webhook "flomation.app/automate/executor/actions/trigger/sendgrid_webhook"
 	trigger_shopify_webhook "flomation.app/automate/executor/actions/trigger/shopify_webhook"
 	trigger_slack "flomation.app/automate/executor/actions/trigger/slack"
 	trigger_stripe_webhook "flomation.app/automate/executor/actions/trigger/stripe_webhook"
@@ -1365,6 +1416,56 @@ var Actions = map[string]core.Action{
 	"makefile/list_targets":                             makefile_list_targets.Execute,
 	"makefile/run_target":                               makefile_run_target.Execute,
 	"makefile/validate":                                 makefile_validate.Execute,
+	"marketing/sendgrid/asm_group_create":               marketing_sendgrid_asm_group_create.Execute,
+	"marketing/sendgrid/asm_group_delete":               marketing_sendgrid_asm_group_delete.Execute,
+	"marketing/sendgrid/asm_group_get":                  marketing_sendgrid_asm_group_get.Execute,
+	"marketing/sendgrid/asm_group_list":                 marketing_sendgrid_asm_group_list.Execute,
+	"marketing/sendgrid/asm_group_update":               marketing_sendgrid_asm_group_update.Execute,
+	"marketing/sendgrid/asm_suppression_add":            marketing_sendgrid_asm_suppression_add.Execute,
+	"marketing/sendgrid/asm_suppression_delete":         marketing_sendgrid_asm_suppression_delete.Execute,
+	"marketing/sendgrid/asm_suppression_list":           marketing_sendgrid_asm_suppression_list.Execute,
+	"marketing/sendgrid/block_delete":                   marketing_sendgrid_block_delete.Execute,
+	"marketing/sendgrid/block_get":                      marketing_sendgrid_block_get.Execute,
+	"marketing/sendgrid/block_list":                     marketing_sendgrid_block_list.Execute,
+	"marketing/sendgrid/bounce_delete":                  marketing_sendgrid_bounce_delete.Execute,
+	"marketing/sendgrid/bounce_get":                     marketing_sendgrid_bounce_get.Execute,
+	"marketing/sendgrid/bounce_list":                    marketing_sendgrid_bounce_list.Execute,
+	"marketing/sendgrid/contact_count":                  marketing_sendgrid_contact_count.Execute,
+	"marketing/sendgrid/contact_delete":                 marketing_sendgrid_contact_delete.Execute,
+	"marketing/sendgrid/contact_get":                    marketing_sendgrid_contact_get.Execute,
+	"marketing/sendgrid/contact_get_by_email":           marketing_sendgrid_contact_get_by_email.Execute,
+	"marketing/sendgrid/contact_import_status":          marketing_sendgrid_contact_import_status.Execute,
+	"marketing/sendgrid/contact_list":                   marketing_sendgrid_contact_list.Execute,
+	"marketing/sendgrid/contact_search":                 marketing_sendgrid_contact_search.Execute,
+	"marketing/sendgrid/contact_upsert":                 marketing_sendgrid_contact_upsert.Execute,
+	"marketing/sendgrid/custom_field_list":              marketing_sendgrid_custom_field_list.Execute,
+	"marketing/sendgrid/global_unsubscribe_add":         marketing_sendgrid_global_unsubscribe_add.Execute,
+	"marketing/sendgrid/global_unsubscribe_check":       marketing_sendgrid_global_unsubscribe_check.Execute,
+	"marketing/sendgrid/global_unsubscribe_delete":      marketing_sendgrid_global_unsubscribe_delete.Execute,
+	"marketing/sendgrid/invalid_email_delete":           marketing_sendgrid_invalid_email_delete.Execute,
+	"marketing/sendgrid/invalid_email_get":              marketing_sendgrid_invalid_email_get.Execute,
+	"marketing/sendgrid/invalid_email_list":             marketing_sendgrid_invalid_email_list.Execute,
+	"marketing/sendgrid/list_create":                    marketing_sendgrid_list_create.Execute,
+	"marketing/sendgrid/list_delete":                    marketing_sendgrid_list_delete.Execute,
+	"marketing/sendgrid/list_get":                       marketing_sendgrid_list_get.Execute,
+	"marketing/sendgrid/list_get_all":                   marketing_sendgrid_list_get_all.Execute,
+	"marketing/sendgrid/list_remove_contacts":           marketing_sendgrid_list_remove_contacts.Execute,
+	"marketing/sendgrid/list_update":                    marketing_sendgrid_list_update.Execute,
+	"marketing/sendgrid/mail_send":                      marketing_sendgrid_mail_send.Execute,
+	"marketing/sendgrid/segment_get":                    marketing_sendgrid_segment_get.Execute,
+	"marketing/sendgrid/segment_list":                   marketing_sendgrid_segment_list.Execute,
+	"marketing/sendgrid/sender_list":                    marketing_sendgrid_sender_list.Execute,
+	"marketing/sendgrid/spam_report_delete":             marketing_sendgrid_spam_report_delete.Execute,
+	"marketing/sendgrid/spam_report_get":                marketing_sendgrid_spam_report_get.Execute,
+	"marketing/sendgrid/spam_report_list":               marketing_sendgrid_spam_report_list.Execute,
+	"marketing/sendgrid/stats_get":                      marketing_sendgrid_stats_get.Execute,
+	"marketing/sendgrid/template_create":                marketing_sendgrid_template_create.Execute,
+	"marketing/sendgrid/template_delete":                marketing_sendgrid_template_delete.Execute,
+	"marketing/sendgrid/template_get":                   marketing_sendgrid_template_get.Execute,
+	"marketing/sendgrid/template_list":                  marketing_sendgrid_template_list.Execute,
+	"marketing/sendgrid/template_update":                marketing_sendgrid_template_update.Execute,
+	"marketing/sendgrid/template_version_activate":      marketing_sendgrid_template_version_activate.Execute,
+	"marketing/sendgrid/template_version_create":        marketing_sendgrid_template_version_create.Execute,
 	"messaging/discord/webhook":                         messaging_discord_webhook.Execute,
 	"messaging/email/send":                              messaging_email_send.Execute,
 	"messaging/telegram/send_audio":                     messaging_telegram_send_audio.Execute,
@@ -1719,6 +1820,7 @@ var Actions = map[string]core.Action{
 	"trigger/qr":                                        trigger_qr.Execute,
 	"trigger/s3":                                        trigger_s3.Execute,
 	"trigger/schedule":                                  trigger_schedule.Execute,
+	"trigger/sendgrid_webhook":                          trigger_sendgrid_webhook.Execute,
 	"trigger/shopify_webhook":                           trigger_shopify_webhook.Execute,
 	"trigger/slack":                                     trigger_slack.Execute,
 	"trigger/stripe_webhook":                            trigger_stripe_webhook.Execute,
