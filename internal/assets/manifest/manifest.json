@@ -54943,6 +54943,5292 @@
       }
     ]
   },
+  "marketing/sendgrid/asm_group_create": {
+    "hash": "f5599a45fa675dbb635de1e0e6e746b2e3d09bea6ac71d2ef9493e53ee5d48b9",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "SendGrid: Create Unsubscribe Group",
+    "description": "Create an unsubscribe (ASM) group in SendGrid. Recipients who opt out of a group stop receiving email assigned to that group without unsubscribing from everything. Provide a name and a short description.",
+    "website": "https://www.flomation.co",
+    "icon": "sendgrid+plus",
+    "date": "09/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Marketing",
+      "icon": "bullhorn",
+      "description": "Email and marketing platforms — contacts, campaigns, and transactional email"
+    },
+    "sub_category": {
+      "name": "SendGrid",
+      "icon": "sendgrid",
+      "description": "Send transactional email and manage contacts, lists, templates, and suppressions in SendGrid"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "API Key",
+        "placeholder": "SendGrid API key (SendGrid → Settings → API Keys), e.g. ${secrets.sendgrid_api}",
+        "required": true
+      },
+      {
+        "name": "region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "Global unless your account uses an EU regional subuser — the EU host has no Marketing endpoints (contacts, lists, segments)",
+        "options": [
+          {
+            "name": "Global",
+            "value": ""
+          },
+          {
+            "name": "EU (data residency)",
+            "value": "eu"
+          }
+        ]
+      },
+      {
+        "name": "name",
+        "type": "string",
+        "value": null,
+        "label": "Name",
+        "placeholder": "Weekly Digest — up to 30 characters, unique in your account",
+        "required": true
+      },
+      {
+        "name": "description",
+        "type": "string",
+        "value": null,
+        "label": "Description",
+        "placeholder": "What recipients see when choosing what to unsubscribe from — up to 100 characters; SendGrid requires one when creating a group"
+      },
+      {
+        "name": "is_default",
+        "type": "boolean",
+        "value": null,
+        "label": "Default Group",
+        "placeholder": "Tick to make this the default group for emails sent without an unsubscribe group"
+      },
+      {
+        "name": "additional_fields",
+        "type": "object",
+        "value": null,
+        "label": "Additional Fields (JSON)",
+        "placeholder": "Any other SendGrid field to include in the request body"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Group ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Unsubscribe Group",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "marketing/sendgrid/asm_group_delete": {
+    "hash": "a562e0f2a4613e5a9af764f5b07547a7f77ccfbc90741fa34f79475e1391c5c1",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "SendGrid: Delete Unsubscribe Group",
+    "description": "Delete an unsubscribe (ASM) group from SendGrid. Emails can no longer be assigned to the group once it is gone.",
+    "website": "https://www.flomation.co",
+    "icon": "sendgrid+trash",
+    "date": "09/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Marketing",
+      "icon": "bullhorn",
+      "description": "Email and marketing platforms — contacts, campaigns, and transactional email"
+    },
+    "sub_category": {
+      "name": "SendGrid",
+      "icon": "sendgrid",
+      "description": "Send transactional email and manage contacts, lists, templates, and suppressions in SendGrid"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "API Key",
+        "placeholder": "SendGrid API key (SendGrid → Settings → API Keys), e.g. ${secrets.sendgrid_api}",
+        "required": true
+      },
+      {
+        "name": "region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "Global unless your account uses an EU regional subuser — the EU host has no Marketing endpoints (contacts, lists, segments)",
+        "options": [
+          {
+            "name": "Global",
+            "value": ""
+          },
+          {
+            "name": "EU (data residency)",
+            "value": "eu"
+          }
+        ]
+      },
+      {
+        "name": "group_id",
+        "type": "string",
+        "value": null,
+        "label": "Unsubscribe Group",
+        "placeholder": "The unsubscribe (ASM) group to delete",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Group ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Result",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "marketing/sendgrid/asm_group_get": {
+    "hash": "156f7e74e0313c95b5cd6f0da7b8b2a29c7758ff73171090611d7e430cc75106",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "SendGrid: Get Unsubscribe Group",
+    "description": "Retrieve a single unsubscribe (ASM) group from SendGrid, including its name, description, and how many recipients have unsubscribed from it.",
+    "website": "https://www.flomation.co",
+    "icon": "sendgrid+eye",
+    "date": "09/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Marketing",
+      "icon": "bullhorn",
+      "description": "Email and marketing platforms — contacts, campaigns, and transactional email"
+    },
+    "sub_category": {
+      "name": "SendGrid",
+      "icon": "sendgrid",
+      "description": "Send transactional email and manage contacts, lists, templates, and suppressions in SendGrid"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "API Key",
+        "placeholder": "SendGrid API key (SendGrid → Settings → API Keys), e.g. ${secrets.sendgrid_api}",
+        "required": true
+      },
+      {
+        "name": "region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "Global unless your account uses an EU regional subuser — the EU host has no Marketing endpoints (contacts, lists, segments)",
+        "options": [
+          {
+            "name": "Global",
+            "value": ""
+          },
+          {
+            "name": "EU (data residency)",
+            "value": "eu"
+          }
+        ]
+      },
+      {
+        "name": "group_id",
+        "type": "string",
+        "value": null,
+        "label": "Unsubscribe Group",
+        "placeholder": "The unsubscribe (ASM) group to retrieve",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Group ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Unsubscribe Group",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "marketing/sendgrid/asm_group_list": {
+    "hash": "17d0868abd4a0dedfbb250ffa87f3d573d73b48c95033f59ecc792e48478cfc9",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "SendGrid: List Unsubscribe Groups",
+    "description": "Retrieve all unsubscribe (ASM) groups in your SendGrid account, including each group's name, description, and unsubscribe count.",
+    "website": "https://www.flomation.co",
+    "icon": "sendgrid+list",
+    "date": "09/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Marketing",
+      "icon": "bullhorn",
+      "description": "Email and marketing platforms — contacts, campaigns, and transactional email"
+    },
+    "sub_category": {
+      "name": "SendGrid",
+      "icon": "sendgrid",
+      "description": "Send transactional email and manage contacts, lists, templates, and suppressions in SendGrid"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "API Key",
+        "placeholder": "SendGrid API key (SendGrid → Settings → API Keys), e.g. ${secrets.sendgrid_api}",
+        "required": true
+      },
+      {
+        "name": "region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "Global unless your account uses an EU regional subuser — the EU host has no Marketing endpoints (contacts, lists, segments)",
+        "options": [
+          {
+            "name": "Global",
+            "value": ""
+          },
+          {
+            "name": "EU (data residency)",
+            "value": "eu"
+          }
+        ]
+      }
+    ],
+    "outputs": [
+      {
+        "name": "results",
+        "type": "object",
+        "value": null,
+        "label": "Unsubscribe Groups",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Count",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "marketing/sendgrid/asm_group_update": {
+    "hash": "c9feee97eef24225cb1204a6fad173e1eee621a2d8e949429e7ad9f84d751bc4",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "SendGrid: Update Unsubscribe Group",
+    "description": "Update an unsubscribe (ASM) group's name, description, or default setting in SendGrid. Only the fields you provide are changed.",
+    "website": "https://www.flomation.co",
+    "icon": "sendgrid+pencil",
+    "date": "09/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Marketing",
+      "icon": "bullhorn",
+      "description": "Email and marketing platforms — contacts, campaigns, and transactional email"
+    },
+    "sub_category": {
+      "name": "SendGrid",
+      "icon": "sendgrid",
+      "description": "Send transactional email and manage contacts, lists, templates, and suppressions in SendGrid"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "API Key",
+        "placeholder": "SendGrid API key (SendGrid → Settings → API Keys), e.g. ${secrets.sendgrid_api}",
+        "required": true
+      },
+      {
+        "name": "region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "Global unless your account uses an EU regional subuser — the EU host has no Marketing endpoints (contacts, lists, segments)",
+        "options": [
+          {
+            "name": "Global",
+            "value": ""
+          },
+          {
+            "name": "EU (data residency)",
+            "value": "eu"
+          }
+        ]
+      },
+      {
+        "name": "group_id",
+        "type": "string",
+        "value": null,
+        "label": "Unsubscribe Group",
+        "placeholder": "The unsubscribe (ASM) group to update",
+        "required": true
+      },
+      {
+        "name": "name",
+        "type": "string",
+        "value": null,
+        "label": "Name",
+        "placeholder": "New group name — up to 30 characters, unique in your account"
+      },
+      {
+        "name": "description",
+        "type": "string",
+        "value": null,
+        "label": "Description",
+        "placeholder": "New description — what recipients see when choosing what to unsubscribe from, up to 100 characters"
+      },
+      {
+        "name": "is_default",
+        "type": "boolean",
+        "value": null,
+        "label": "Default Group",
+        "placeholder": "Tick to make this the default group for emails sent without an unsubscribe group"
+      },
+      {
+        "name": "additional_fields",
+        "type": "object",
+        "value": null,
+        "label": "Additional Fields (JSON)",
+        "placeholder": "Any other SendGrid field to include in the request body"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Group ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Unsubscribe Group",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "marketing/sendgrid/asm_suppression_add": {
+    "hash": "bce5c1908edc2b018aca50992ff4ce56c97c6ffa80469152aade718a5d1966f9",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "SendGrid: Add Group Suppressions",
+    "description": "Add one or more email addresses to a SendGrid unsubscribe (ASM) group so they stop receiving email assigned to that group. Separate multiple addresses with commas.",
+    "website": "https://www.flomation.co",
+    "icon": "sendgrid+ban",
+    "date": "09/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Marketing",
+      "icon": "bullhorn",
+      "description": "Email and marketing platforms — contacts, campaigns, and transactional email"
+    },
+    "sub_category": {
+      "name": "SendGrid",
+      "icon": "sendgrid",
+      "description": "Send transactional email and manage contacts, lists, templates, and suppressions in SendGrid"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "API Key",
+        "placeholder": "SendGrid API key (SendGrid → Settings → API Keys), e.g. ${secrets.sendgrid_api}",
+        "required": true
+      },
+      {
+        "name": "region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "Global unless your account uses an EU regional subuser — the EU host has no Marketing endpoints (contacts, lists, segments)",
+        "options": [
+          {
+            "name": "Global",
+            "value": ""
+          },
+          {
+            "name": "EU (data residency)",
+            "value": "eu"
+          }
+        ]
+      },
+      {
+        "name": "group_id",
+        "type": "string",
+        "value": null,
+        "label": "Unsubscribe Group",
+        "placeholder": "The unsubscribe (ASM) group to add the addresses to",
+        "required": true
+      },
+      {
+        "name": "emails",
+        "type": "string",
+        "value": null,
+        "label": "Emails",
+        "placeholder": "recipient@example.com — separate multiple addresses with commas",
+        "required": true
+      },
+      {
+        "name": "additional_fields",
+        "type": "object",
+        "value": null,
+        "label": "Additional Fields (JSON)",
+        "placeholder": "Any other SendGrid field to include in the request body"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Group ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Added Emails",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "marketing/sendgrid/asm_suppression_delete": {
+    "hash": "f27e1bfa6d3829c409e5676b50639cbbaae54b6c290d99598a93d88e1ed8deae",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "SendGrid: Delete Group Suppression",
+    "description": "Remove an email address from a SendGrid unsubscribe (ASM) group so it resumes receiving email assigned to that group.",
+    "website": "https://www.flomation.co",
+    "icon": "sendgrid+trash",
+    "date": "09/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Marketing",
+      "icon": "bullhorn",
+      "description": "Email and marketing platforms — contacts, campaigns, and transactional email"
+    },
+    "sub_category": {
+      "name": "SendGrid",
+      "icon": "sendgrid",
+      "description": "Send transactional email and manage contacts, lists, templates, and suppressions in SendGrid"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "API Key",
+        "placeholder": "SendGrid API key (SendGrid → Settings → API Keys), e.g. ${secrets.sendgrid_api}",
+        "required": true
+      },
+      {
+        "name": "region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "Global unless your account uses an EU regional subuser — the EU host has no Marketing endpoints (contacts, lists, segments)",
+        "options": [
+          {
+            "name": "Global",
+            "value": ""
+          },
+          {
+            "name": "EU (data residency)",
+            "value": "eu"
+          }
+        ]
+      },
+      {
+        "name": "group_id",
+        "type": "string",
+        "value": null,
+        "label": "Unsubscribe Group",
+        "placeholder": "The unsubscribe (ASM) group to remove the address from",
+        "required": true
+      },
+      {
+        "name": "email",
+        "type": "string",
+        "value": null,
+        "label": "Email",
+        "placeholder": "recipient@example.com — the address to remove from the group",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Email",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Result",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "marketing/sendgrid/asm_suppression_list": {
+    "hash": "f0b46cd36b23037567fec73a7bb0bd25f67ff5ffe7bf76ff4487c1e0bdb4c944",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "SendGrid: List Group Suppressions",
+    "description": "Retrieve every email address suppressed in a SendGrid unsubscribe (ASM) group. Each result is an object with an email field, ready to loop over.",
+    "website": "https://www.flomation.co",
+    "icon": "sendgrid+list",
+    "date": "09/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Marketing",
+      "icon": "bullhorn",
+      "description": "Email and marketing platforms — contacts, campaigns, and transactional email"
+    },
+    "sub_category": {
+      "name": "SendGrid",
+      "icon": "sendgrid",
+      "description": "Send transactional email and manage contacts, lists, templates, and suppressions in SendGrid"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "API Key",
+        "placeholder": "SendGrid API key (SendGrid → Settings → API Keys), e.g. ${secrets.sendgrid_api}",
+        "required": true
+      },
+      {
+        "name": "region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "Global unless your account uses an EU regional subuser — the EU host has no Marketing endpoints (contacts, lists, segments)",
+        "options": [
+          {
+            "name": "Global",
+            "value": ""
+          },
+          {
+            "name": "EU (data residency)",
+            "value": "eu"
+          }
+        ]
+      },
+      {
+        "name": "group_id",
+        "type": "string",
+        "value": null,
+        "label": "Unsubscribe Group",
+        "placeholder": "The unsubscribe (ASM) group whose suppressed addresses to list",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "results",
+        "type": "object",
+        "value": null,
+        "label": "Suppressed Emails",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Count",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "marketing/sendgrid/block_delete": {
+    "hash": "e4d01eb2566a2d49e480f3607e9f875049f1b2600bcb6dfcc0990c739a3854ad",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "SendGrid: Delete Block",
+    "description": "Remove addresses from your SendGrid block list so mail can be sent to them again. Provide a single Email, a comma-separated Emails list, or tick Delete All to clear the entire list.",
+    "website": "https://www.flomation.co",
+    "icon": "sendgrid+trash",
+    "date": "09/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Marketing",
+      "icon": "bullhorn",
+      "description": "Email and marketing platforms — contacts, campaigns, and transactional email"
+    },
+    "sub_category": {
+      "name": "SendGrid",
+      "icon": "sendgrid",
+      "description": "Send transactional email and manage contacts, lists, templates, and suppressions in SendGrid"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "API Key",
+        "placeholder": "SendGrid API key (SendGrid → Settings → API Keys), e.g. ${secrets.sendgrid_api}",
+        "required": true
+      },
+      {
+        "name": "region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "Global unless your account uses an EU regional subuser — the EU host has no Marketing endpoints (contacts, lists, segments)",
+        "options": [
+          {
+            "name": "Global",
+            "value": ""
+          },
+          {
+            "name": "EU (data residency)",
+            "value": "eu"
+          }
+        ]
+      },
+      {
+        "name": "email",
+        "type": "string",
+        "value": null,
+        "label": "Email",
+        "placeholder": "A single address to remove — leave blank to use Emails or Delete All"
+      },
+      {
+        "name": "emails",
+        "type": "string",
+        "value": null,
+        "label": "Emails",
+        "placeholder": "Comma-separated addresses to remove in one go — cannot be combined with Delete All"
+      },
+      {
+        "name": "delete_all",
+        "type": "boolean",
+        "value": null,
+        "label": "Delete All",
+        "placeholder": "Tick to clear the entire block list — cannot be combined with Emails"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Email",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Result",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "marketing/sendgrid/block_get": {
+    "hash": "d145aa9b856204bffd4f2a0818df15ccd258fd89b0bff4dcf3c898410bc8578f",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "SendGrid: Get Block",
+    "description": "Look up a single email address on your SendGrid block list. If the address is not blocked, the action reports that no block was found.",
+    "website": "https://www.flomation.co",
+    "icon": "sendgrid+eye",
+    "date": "09/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Marketing",
+      "icon": "bullhorn",
+      "description": "Email and marketing platforms — contacts, campaigns, and transactional email"
+    },
+    "sub_category": {
+      "name": "SendGrid",
+      "icon": "sendgrid",
+      "description": "Send transactional email and manage contacts, lists, templates, and suppressions in SendGrid"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "API Key",
+        "placeholder": "SendGrid API key (SendGrid → Settings → API Keys), e.g. ${secrets.sendgrid_api}",
+        "required": true
+      },
+      {
+        "name": "region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "Global unless your account uses an EU regional subuser — the EU host has no Marketing endpoints (contacts, lists, segments)",
+        "options": [
+          {
+            "name": "Global",
+            "value": ""
+          },
+          {
+            "name": "EU (data residency)",
+            "value": "eu"
+          }
+        ]
+      },
+      {
+        "name": "email",
+        "type": "string",
+        "value": null,
+        "label": "Email",
+        "placeholder": "The address to look up, e.g. jane@example.com",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Email",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Block",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "marketing/sendgrid/block_list": {
+    "hash": "ec6be4acbeac5835ac5a2cd65fb99638fcc08fec1bca01c41cb4c252acce2812",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "SendGrid: List Blocks",
+    "description": "Retrieve the addresses on your SendGrid block list — emails the receiving server refused, for example because of an IP block or content filtering. Optionally narrow the list to a date range.",
+    "website": "https://www.flomation.co",
+    "icon": "sendgrid+list",
+    "date": "09/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Marketing",
+      "icon": "bullhorn",
+      "description": "Email and marketing platforms — contacts, campaigns, and transactional email"
+    },
+    "sub_category": {
+      "name": "SendGrid",
+      "icon": "sendgrid",
+      "description": "Send transactional email and manage contacts, lists, templates, and suppressions in SendGrid"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "API Key",
+        "placeholder": "SendGrid API key (SendGrid → Settings → API Keys), e.g. ${secrets.sendgrid_api}",
+        "required": true
+      },
+      {
+        "name": "region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "Global unless your account uses an EU regional subuser — the EU host has no Marketing endpoints (contacts, lists, segments)",
+        "options": [
+          {
+            "name": "Global",
+            "value": ""
+          },
+          {
+            "name": "EU (data residency)",
+            "value": "eu"
+          }
+        ]
+      },
+      {
+        "name": "start_time",
+        "type": "datetime",
+        "value": null,
+        "label": "Start Time",
+        "placeholder": "Only blocks created on or after this time, e.g. 2026-07-01T00:00:00Z"
+      },
+      {
+        "name": "end_time",
+        "type": "datetime",
+        "value": null,
+        "label": "End Time",
+        "placeholder": "Only blocks created on or before this time, e.g. 2026-07-08T23:59:59Z"
+      },
+      {
+        "name": "limit",
+        "type": "string",
+        "value": null,
+        "label": "Limit",
+        "placeholder": "Max results to return (default 100)"
+      },
+      {
+        "name": "return_all",
+        "type": "boolean",
+        "value": null,
+        "label": "Return All",
+        "placeholder": "Tick to fetch every result page instead of just the first"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "results",
+        "type": "object",
+        "value": null,
+        "label": "Blocks",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Count",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "marketing/sendgrid/bounce_delete": {
+    "hash": "0f7857ee08c53dfc6506f2683624a70ab8c0b5e9e9b47e04640865b0899477d6",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "SendGrid: Delete Bounce",
+    "description": "Remove addresses from your SendGrid bounce list so mail can be sent to them again. Provide a single Email, a comma-separated Emails list, or tick Delete All to clear the entire list.",
+    "website": "https://www.flomation.co",
+    "icon": "sendgrid+trash",
+    "date": "09/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Marketing",
+      "icon": "bullhorn",
+      "description": "Email and marketing platforms — contacts, campaigns, and transactional email"
+    },
+    "sub_category": {
+      "name": "SendGrid",
+      "icon": "sendgrid",
+      "description": "Send transactional email and manage contacts, lists, templates, and suppressions in SendGrid"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "API Key",
+        "placeholder": "SendGrid API key (SendGrid → Settings → API Keys), e.g. ${secrets.sendgrid_api}",
+        "required": true
+      },
+      {
+        "name": "region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "Global unless your account uses an EU regional subuser — the EU host has no Marketing endpoints (contacts, lists, segments)",
+        "options": [
+          {
+            "name": "Global",
+            "value": ""
+          },
+          {
+            "name": "EU (data residency)",
+            "value": "eu"
+          }
+        ]
+      },
+      {
+        "name": "email",
+        "type": "string",
+        "value": null,
+        "label": "Email",
+        "placeholder": "A single address to remove — leave blank to use Emails or Delete All"
+      },
+      {
+        "name": "emails",
+        "type": "string",
+        "value": null,
+        "label": "Emails",
+        "placeholder": "Comma-separated addresses to remove in one go — cannot be combined with Delete All"
+      },
+      {
+        "name": "delete_all",
+        "type": "boolean",
+        "value": null,
+        "label": "Delete All",
+        "placeholder": "Tick to clear the entire bounce list — cannot be combined with Emails"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Email",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Result",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "marketing/sendgrid/bounce_get": {
+    "hash": "1e21b8e8a12a485c86f413a4de8ad596d66490fa76e22e43cf4757b0af7f7c03",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "SendGrid: Get Bounce",
+    "description": "Look up a single email address on your SendGrid bounce list. If the address has not bounced, the action reports that no bounce was found.",
+    "website": "https://www.flomation.co",
+    "icon": "sendgrid+eye",
+    "date": "09/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Marketing",
+      "icon": "bullhorn",
+      "description": "Email and marketing platforms — contacts, campaigns, and transactional email"
+    },
+    "sub_category": {
+      "name": "SendGrid",
+      "icon": "sendgrid",
+      "description": "Send transactional email and manage contacts, lists, templates, and suppressions in SendGrid"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "API Key",
+        "placeholder": "SendGrid API key (SendGrid → Settings → API Keys), e.g. ${secrets.sendgrid_api}",
+        "required": true
+      },
+      {
+        "name": "region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "Global unless your account uses an EU regional subuser — the EU host has no Marketing endpoints (contacts, lists, segments)",
+        "options": [
+          {
+            "name": "Global",
+            "value": ""
+          },
+          {
+            "name": "EU (data residency)",
+            "value": "eu"
+          }
+        ]
+      },
+      {
+        "name": "email",
+        "type": "string",
+        "value": null,
+        "label": "Email",
+        "placeholder": "The address to look up, e.g. jane@example.com",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Email",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Bounce",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "marketing/sendgrid/bounce_list": {
+    "hash": "394d5ad3947eb71fbad891fd23b55d4816e9daebb6883bbcefd5e8cba7b05d31",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "SendGrid: List Bounces",
+    "description": "Retrieve the addresses on your SendGrid bounce list — emails that were rejected by the recipient's mail server. Optionally narrow the list to a date range.",
+    "website": "https://www.flomation.co",
+    "icon": "sendgrid+list",
+    "date": "09/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Marketing",
+      "icon": "bullhorn",
+      "description": "Email and marketing platforms — contacts, campaigns, and transactional email"
+    },
+    "sub_category": {
+      "name": "SendGrid",
+      "icon": "sendgrid",
+      "description": "Send transactional email and manage contacts, lists, templates, and suppressions in SendGrid"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "API Key",
+        "placeholder": "SendGrid API key (SendGrid → Settings → API Keys), e.g. ${secrets.sendgrid_api}",
+        "required": true
+      },
+      {
+        "name": "region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "Global unless your account uses an EU regional subuser — the EU host has no Marketing endpoints (contacts, lists, segments)",
+        "options": [
+          {
+            "name": "Global",
+            "value": ""
+          },
+          {
+            "name": "EU (data residency)",
+            "value": "eu"
+          }
+        ]
+      },
+      {
+        "name": "start_time",
+        "type": "datetime",
+        "value": null,
+        "label": "Start Time",
+        "placeholder": "Only bounces created on or after this time, e.g. 2026-07-01T00:00:00Z"
+      },
+      {
+        "name": "end_time",
+        "type": "datetime",
+        "value": null,
+        "label": "End Time",
+        "placeholder": "Only bounces created on or before this time, e.g. 2026-07-08T23:59:59Z"
+      },
+      {
+        "name": "limit",
+        "type": "string",
+        "value": null,
+        "label": "Limit",
+        "placeholder": "Max results to return (default 100)"
+      },
+      {
+        "name": "return_all",
+        "type": "boolean",
+        "value": null,
+        "label": "Return All",
+        "placeholder": "Tick to fetch every result page instead of just the first"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "results",
+        "type": "object",
+        "value": null,
+        "label": "Bounces",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Count",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "marketing/sendgrid/contact_count": {
+    "hash": "fba6ace05dba74079b10458bbaa28128d71ddf7bd7823be0ff5ab077378d19c3",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "SendGrid: Count Contacts",
+    "description": "Return the total number of marketing contacts in your SendGrid account, along with the billable contact count.",
+    "website": "https://www.flomation.co",
+    "icon": "sendgrid+hashtag",
+    "date": "09/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Marketing",
+      "icon": "bullhorn",
+      "description": "Email and marketing platforms — contacts, campaigns, and transactional email"
+    },
+    "sub_category": {
+      "name": "SendGrid",
+      "icon": "sendgrid",
+      "description": "Send transactional email and manage contacts, lists, templates, and suppressions in SendGrid"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "API Key",
+        "placeholder": "SendGrid API key (SendGrid → Settings → API Keys), e.g. ${secrets.sendgrid_api}",
+        "required": true
+      },
+      {
+        "name": "region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "Global unless your account uses an EU regional subuser — the EU host has no Marketing endpoints (contacts, lists, segments)",
+        "options": [
+          {
+            "name": "Global",
+            "value": ""
+          },
+          {
+            "name": "EU (data residency)",
+            "value": "eu"
+          }
+        ]
+      }
+    ],
+    "outputs": [
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Counts",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "marketing/sendgrid/contact_delete": {
+    "hash": "e7ffa9ae1f3986d52f5cf934a1f2527c5b45c1f4f3465e1ba6ab98af46721585",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "SendGrid: Delete Contacts",
+    "description": "Delete marketing contacts from SendGrid, either by a list of contact IDs or every contact in the account. SendGrid deletes asynchronously and returns a job ID — poll \"SendGrid: Get Import Status\" with the job ID to see when it completes.",
+    "website": "https://www.flomation.co",
+    "icon": "sendgrid+trash",
+    "date": "09/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Marketing",
+      "icon": "bullhorn",
+      "description": "Email and marketing platforms — contacts, campaigns, and transactional email"
+    },
+    "sub_category": {
+      "name": "SendGrid",
+      "icon": "sendgrid",
+      "description": "Send transactional email and manage contacts, lists, templates, and suppressions in SendGrid"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "API Key",
+        "placeholder": "SendGrid API key (SendGrid → Settings → API Keys), e.g. ${secrets.sendgrid_api}",
+        "required": true
+      },
+      {
+        "name": "region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "Global unless your account uses an EU regional subuser — the EU host has no Marketing endpoints (contacts, lists, segments)",
+        "options": [
+          {
+            "name": "Global",
+            "value": ""
+          },
+          {
+            "name": "EU (data residency)",
+            "value": "eu"
+          }
+        ]
+      },
+      {
+        "name": "contact_ids",
+        "type": "string",
+        "value": null,
+        "label": "Contact IDs",
+        "placeholder": "Comma-separated SendGrid contact IDs to delete — leave blank when deleting all contacts"
+      },
+      {
+        "name": "delete_all_contacts",
+        "type": "boolean",
+        "value": null,
+        "label": "Delete All Contacts",
+        "placeholder": "Tick to delete EVERY contact in the account — leave Contact IDs blank when ticked"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Job ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Result",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "marketing/sendgrid/contact_get": {
+    "hash": "42e578166c344aa2ab3b9fbab80cf4d131195f89eb69de8c8ab529ab434b0f88",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "SendGrid: Get Contact",
+    "description": "Look up a single marketing contact by its SendGrid contact ID and return the full contact record. To find a contact by email address instead, use \"SendGrid: Get Contact by Email\".",
+    "website": "https://www.flomation.co",
+    "icon": "sendgrid+eye",
+    "date": "09/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Marketing",
+      "icon": "bullhorn",
+      "description": "Email and marketing platforms — contacts, campaigns, and transactional email"
+    },
+    "sub_category": {
+      "name": "SendGrid",
+      "icon": "sendgrid",
+      "description": "Send transactional email and manage contacts, lists, templates, and suppressions in SendGrid"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "API Key",
+        "placeholder": "SendGrid API key (SendGrid → Settings → API Keys), e.g. ${secrets.sendgrid_api}",
+        "required": true
+      },
+      {
+        "name": "region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "Global unless your account uses an EU regional subuser — the EU host has no Marketing endpoints (contacts, lists, segments)",
+        "options": [
+          {
+            "name": "Global",
+            "value": ""
+          },
+          {
+            "name": "EU (data residency)",
+            "value": "eu"
+          }
+        ]
+      },
+      {
+        "name": "contact_id",
+        "type": "string",
+        "value": null,
+        "label": "Contact ID",
+        "placeholder": "The SendGrid contact ID to look up",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Contact ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Contact",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "marketing/sendgrid/contact_get_by_email": {
+    "hash": "8c60965260a763c68272764a36efa68eb29b6bfa966904e6edbc58f69436e42b",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "SendGrid: Get Contact by Email",
+    "description": "Look up a single marketing contact by email address (primary or alternate) and return the full contact record. Note that a contact added moments ago may not be found yet — SendGrid applies contact changes asynchronously.",
+    "website": "https://www.flomation.co",
+    "icon": "sendgrid+envelope",
+    "date": "09/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Marketing",
+      "icon": "bullhorn",
+      "description": "Email and marketing platforms — contacts, campaigns, and transactional email"
+    },
+    "sub_category": {
+      "name": "SendGrid",
+      "icon": "sendgrid",
+      "description": "Send transactional email and manage contacts, lists, templates, and suppressions in SendGrid"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "API Key",
+        "placeholder": "SendGrid API key (SendGrid → Settings → API Keys), e.g. ${secrets.sendgrid_api}",
+        "required": true
+      },
+      {
+        "name": "region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "Global unless your account uses an EU regional subuser — the EU host has no Marketing endpoints (contacts, lists, segments)",
+        "options": [
+          {
+            "name": "Global",
+            "value": ""
+          },
+          {
+            "name": "EU (data residency)",
+            "value": "eu"
+          }
+        ]
+      },
+      {
+        "name": "email",
+        "type": "string",
+        "value": null,
+        "label": "Email",
+        "placeholder": "jane@example.com — the address to look up",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Contact ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Contact",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "marketing/sendgrid/contact_import_status": {
+    "hash": "20d18b972242ff97486b6e2c30942d6f0797f58a5d6fbb0667b989f28de87e01",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "SendGrid: Get Import Status",
+    "description": "Check the progress of an asynchronous contact job — the job ID returned by \"SendGrid: Create or Update Contact\" or \"SendGrid: Delete Contacts\". The status is pending, completed, errored, or failed, with counts of what was processed and a link to any error details.",
+    "website": "https://www.flomation.co",
+    "icon": "sendgrid+clock",
+    "date": "09/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Marketing",
+      "icon": "bullhorn",
+      "description": "Email and marketing platforms — contacts, campaigns, and transactional email"
+    },
+    "sub_category": {
+      "name": "SendGrid",
+      "icon": "sendgrid",
+      "description": "Send transactional email and manage contacts, lists, templates, and suppressions in SendGrid"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "API Key",
+        "placeholder": "SendGrid API key (SendGrid → Settings → API Keys), e.g. ${secrets.sendgrid_api}",
+        "required": true
+      },
+      {
+        "name": "region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "Global unless your account uses an EU regional subuser — the EU host has no Marketing endpoints (contacts, lists, segments)",
+        "options": [
+          {
+            "name": "Global",
+            "value": ""
+          },
+          {
+            "name": "EU (data residency)",
+            "value": "eu"
+          }
+        ]
+      },
+      {
+        "name": "job_id",
+        "type": "string",
+        "value": null,
+        "label": "Job ID",
+        "placeholder": "The job ID returned by a contact create/update or delete",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Job ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Job",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "marketing/sendgrid/contact_list": {
+    "hash": "a6c689c48623b36f4de3264cf0b98db2309e456d574a70e2331b996da8fe3fb7",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "SendGrid: List Recent Contacts",
+    "description": "Retrieve a sample of up to 50 most recently updated marketing contacts. SendGrid does not offer a way to page through every contact here — use \"SendGrid: Search Contacts\" to find specific contacts, or \"SendGrid: Count Contacts\" for the account total.",
+    "website": "https://www.flomation.co",
+    "icon": "sendgrid+list",
+    "date": "09/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Marketing",
+      "icon": "bullhorn",
+      "description": "Email and marketing platforms — contacts, campaigns, and transactional email"
+    },
+    "sub_category": {
+      "name": "SendGrid",
+      "icon": "sendgrid",
+      "description": "Send transactional email and manage contacts, lists, templates, and suppressions in SendGrid"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "API Key",
+        "placeholder": "SendGrid API key (SendGrid → Settings → API Keys), e.g. ${secrets.sendgrid_api}",
+        "required": true
+      },
+      {
+        "name": "region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "Global unless your account uses an EU regional subuser — the EU host has no Marketing endpoints (contacts, lists, segments)",
+        "options": [
+          {
+            "name": "Global",
+            "value": ""
+          },
+          {
+            "name": "EU (data residency)",
+            "value": "eu"
+          }
+        ]
+      }
+    ],
+    "outputs": [
+      {
+        "name": "results",
+        "type": "object",
+        "value": null,
+        "label": "Contacts",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Account Total",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "marketing/sendgrid/contact_search": {
+    "hash": "5e9e0ef4ad034ab011c2c88e8d7a12179b762502f18aa8045ab6f9e0a7ea0b8a",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "SendGrid: Search Contacts",
+    "description": "Search your marketing contacts with a SendGrid query (SGQL), e.g. email LIKE 'jane%' AND CONTAINS(list_ids, 'your-list-id'). SendGrid returns at most the first 50 matches; the count output reports the total number matched. Emails are stored lower-case, so compare against lower-case addresses.",
+    "website": "https://www.flomation.co",
+    "icon": "sendgrid+magnifying-glass",
+    "date": "09/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Marketing",
+      "icon": "bullhorn",
+      "description": "Email and marketing platforms — contacts, campaigns, and transactional email"
+    },
+    "sub_category": {
+      "name": "SendGrid",
+      "icon": "sendgrid",
+      "description": "Send transactional email and manage contacts, lists, templates, and suppressions in SendGrid"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "API Key",
+        "placeholder": "SendGrid API key (SendGrid → Settings → API Keys), e.g. ${secrets.sendgrid_api}",
+        "required": true
+      },
+      {
+        "name": "region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "Global unless your account uses an EU regional subuser — the EU host has no Marketing endpoints (contacts, lists, segments)",
+        "options": [
+          {
+            "name": "Global",
+            "value": ""
+          },
+          {
+            "name": "EU (data residency)",
+            "value": "eu"
+          }
+        ]
+      },
+      {
+        "name": "query",
+        "type": "text",
+        "value": null,
+        "label": "Query (SGQL)",
+        "placeholder": "email LIKE 'jane%' AND CONTAINS(list_ids, 'your-list-id')",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "results",
+        "type": "object",
+        "value": null,
+        "label": "Contacts",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Total Matched",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "marketing/sendgrid/contact_upsert": {
+    "hash": "a323d96a199f5c48e3f6864a41f619f5a0462d3a8bdfb8ef7960936bc453e496",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "SendGrid: Create or Update Contact",
+    "description": "Add a marketing contact to SendGrid, or update them if the email address already exists. SendGrid applies the change asynchronously and returns a job ID — the contact will not be visible immediately; poll \"SendGrid: Get Import Status\" with the job ID to see when it completes.",
+    "website": "https://www.flomation.co",
+    "icon": "sendgrid+plus",
+    "date": "09/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Marketing",
+      "icon": "bullhorn",
+      "description": "Email and marketing platforms — contacts, campaigns, and transactional email"
+    },
+    "sub_category": {
+      "name": "SendGrid",
+      "icon": "sendgrid",
+      "description": "Send transactional email and manage contacts, lists, templates, and suppressions in SendGrid"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "API Key",
+        "placeholder": "SendGrid API key (SendGrid → Settings → API Keys), e.g. ${secrets.sendgrid_api}",
+        "required": true
+      },
+      {
+        "name": "region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "Global unless your account uses an EU regional subuser — the EU host has no Marketing endpoints (contacts, lists, segments)",
+        "options": [
+          {
+            "name": "Global",
+            "value": ""
+          },
+          {
+            "name": "EU (data residency)",
+            "value": "eu"
+          }
+        ]
+      },
+      {
+        "name": "email",
+        "type": "string",
+        "value": null,
+        "label": "Email",
+        "placeholder": "jane@example.com — identifies the contact; an existing contact with this address is updated",
+        "required": true
+      },
+      {
+        "name": "first_name",
+        "type": "string",
+        "value": null,
+        "label": "First Name",
+        "placeholder": "Jane"
+      },
+      {
+        "name": "last_name",
+        "type": "string",
+        "value": null,
+        "label": "Last Name",
+        "placeholder": "Doe"
+      },
+      {
+        "name": "alternate_emails",
+        "type": "string",
+        "value": null,
+        "label": "Alternate Emails",
+        "placeholder": "Comma-separated additional addresses for this contact (up to 5)"
+      },
+      {
+        "name": "phone_number",
+        "type": "string",
+        "value": null,
+        "label": "Phone Number",
+        "placeholder": "+441234567890"
+      },
+      {
+        "name": "address_line_1",
+        "type": "string",
+        "value": null,
+        "label": "Address Line 1",
+        "placeholder": "1 High Street"
+      },
+      {
+        "name": "address_line_2",
+        "type": "string",
+        "value": null,
+        "label": "Address Line 2",
+        "placeholder": "Suite 4"
+      },
+      {
+        "name": "city",
+        "type": "string",
+        "value": null,
+        "label": "City",
+        "placeholder": "London"
+      },
+      {
+        "name": "state_province_region",
+        "type": "string",
+        "value": null,
+        "label": "State / Province / Region",
+        "placeholder": "Greater London"
+      },
+      {
+        "name": "postal_code",
+        "type": "string",
+        "value": null,
+        "label": "Postal Code",
+        "placeholder": "SW1A 1AA"
+      },
+      {
+        "name": "country",
+        "type": "string",
+        "value": null,
+        "label": "Country",
+        "placeholder": "United Kingdom"
+      },
+      {
+        "name": "custom_fields",
+        "type": "object",
+        "value": null,
+        "label": "Custom Fields (JSON)",
+        "placeholder": "{\"e1_T\":\"VIP\"} — keyed by custom field ID (not name); use \"SendGrid: List Custom Fields\" to find the IDs"
+      },
+      {
+        "name": "list_ids",
+        "type": "string",
+        "value": null,
+        "label": "List IDs",
+        "placeholder": "Comma-separated marketing list IDs to add the contact to"
+      },
+      {
+        "name": "additional_fields",
+        "type": "object",
+        "value": null,
+        "label": "Additional Fields (JSON)",
+        "placeholder": "Any other SendGrid contact field, e.g. {\"external_id\":\"crm-123\"}"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Job ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Result",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "marketing/sendgrid/custom_field_list": {
+    "hash": "a84dc9bfea0af96c5b85ccdba4d650fe783acd4995c8438c38baba926dfadb7f",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "SendGrid: List Custom Fields",
+    "description": "List the custom field definitions in your SendGrid Marketing account. Use each field's ID (for example e1_T) as the key when setting custom field values on a contact. Optionally include SendGrid's built-in reserved fields too.",
+    "website": "https://www.flomation.co",
+    "icon": "sendgrid+list",
+    "date": "09/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Marketing",
+      "icon": "bullhorn",
+      "description": "Email and marketing platforms — contacts, campaigns, and transactional email"
+    },
+    "sub_category": {
+      "name": "SendGrid",
+      "icon": "sendgrid",
+      "description": "Send transactional email and manage contacts, lists, templates, and suppressions in SendGrid"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "API Key",
+        "placeholder": "SendGrid API key (SendGrid → Settings → API Keys), e.g. ${secrets.sendgrid_api}",
+        "required": true
+      },
+      {
+        "name": "region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "Global unless your account uses an EU regional subuser — the EU host has no Marketing endpoints (contacts, lists, segments)",
+        "options": [
+          {
+            "name": "Global",
+            "value": ""
+          },
+          {
+            "name": "EU (data residency)",
+            "value": "eu"
+          }
+        ]
+      },
+      {
+        "name": "include_reserved",
+        "type": "boolean",
+        "value": null,
+        "label": "Include Reserved Fields",
+        "placeholder": "Tick to also return SendGrid's built-in reserved fields (first_name, email, ...) alongside your custom fields"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "results",
+        "type": "object",
+        "value": null,
+        "label": "Field Definitions",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Count",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "marketing/sendgrid/global_unsubscribe_add": {
+    "hash": "b151bca618752db8f9a24bd1cbda4f2acb8b40d93a7cbfd8678d465e4836a6f1",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "SendGrid: Add Global Unsubscribes",
+    "description": "Add one or more email addresses to SendGrid's global unsubscribe list so they stop receiving all email from your account. Separate multiple addresses with commas.",
+    "website": "https://www.flomation.co",
+    "icon": "sendgrid+ban",
+    "date": "09/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Marketing",
+      "icon": "bullhorn",
+      "description": "Email and marketing platforms — contacts, campaigns, and transactional email"
+    },
+    "sub_category": {
+      "name": "SendGrid",
+      "icon": "sendgrid",
+      "description": "Send transactional email and manage contacts, lists, templates, and suppressions in SendGrid"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "API Key",
+        "placeholder": "SendGrid API key (SendGrid → Settings → API Keys), e.g. ${secrets.sendgrid_api}",
+        "required": true
+      },
+      {
+        "name": "region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "Global unless your account uses an EU regional subuser — the EU host has no Marketing endpoints (contacts, lists, segments)",
+        "options": [
+          {
+            "name": "Global",
+            "value": ""
+          },
+          {
+            "name": "EU (data residency)",
+            "value": "eu"
+          }
+        ]
+      },
+      {
+        "name": "emails",
+        "type": "string",
+        "value": null,
+        "label": "Emails",
+        "placeholder": "recipient@example.com — separate multiple addresses with commas",
+        "required": true
+      },
+      {
+        "name": "additional_fields",
+        "type": "object",
+        "value": null,
+        "label": "Additional Fields (JSON)",
+        "placeholder": "Any other SendGrid field to include in the request body"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Added Emails",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "marketing/sendgrid/global_unsubscribe_check": {
+    "hash": "ff5420d2e4431f9b6f470b15a0d0989b5490765951b5b1c77511841addcfa0ca",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "SendGrid: Check Global Unsubscribe",
+    "description": "Check whether an email address is on SendGrid's global unsubscribe list. Returns a clear yes or no — an address that is not on the list is a normal result, not an error.",
+    "website": "https://www.flomation.co",
+    "icon": "sendgrid+check",
+    "date": "09/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Marketing",
+      "icon": "bullhorn",
+      "description": "Email and marketing platforms — contacts, campaigns, and transactional email"
+    },
+    "sub_category": {
+      "name": "SendGrid",
+      "icon": "sendgrid",
+      "description": "Send transactional email and manage contacts, lists, templates, and suppressions in SendGrid"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "API Key",
+        "placeholder": "SendGrid API key (SendGrid → Settings → API Keys), e.g. ${secrets.sendgrid_api}",
+        "required": true
+      },
+      {
+        "name": "region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "Global unless your account uses an EU regional subuser — the EU host has no Marketing endpoints (contacts, lists, segments)",
+        "options": [
+          {
+            "name": "Global",
+            "value": ""
+          },
+          {
+            "name": "EU (data residency)",
+            "value": "eu"
+          }
+        ]
+      },
+      {
+        "name": "email",
+        "type": "string",
+        "value": null,
+        "label": "Email",
+        "placeholder": "recipient@example.com — the address to check",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Email",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Check Result",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "marketing/sendgrid/global_unsubscribe_delete": {
+    "hash": "daddfe92aa2d65597085962d4c7fa04466ed5dfb8ef1406e2254b9d9347dc148",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "SendGrid: Delete Global Unsubscribe",
+    "description": "Remove an email address from SendGrid's global unsubscribe list so it can receive email from your account again.",
+    "website": "https://www.flomation.co",
+    "icon": "sendgrid+trash",
+    "date": "09/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Marketing",
+      "icon": "bullhorn",
+      "description": "Email and marketing platforms — contacts, campaigns, and transactional email"
+    },
+    "sub_category": {
+      "name": "SendGrid",
+      "icon": "sendgrid",
+      "description": "Send transactional email and manage contacts, lists, templates, and suppressions in SendGrid"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "API Key",
+        "placeholder": "SendGrid API key (SendGrid → Settings → API Keys), e.g. ${secrets.sendgrid_api}",
+        "required": true
+      },
+      {
+        "name": "region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "Global unless your account uses an EU regional subuser — the EU host has no Marketing endpoints (contacts, lists, segments)",
+        "options": [
+          {
+            "name": "Global",
+            "value": ""
+          },
+          {
+            "name": "EU (data residency)",
+            "value": "eu"
+          }
+        ]
+      },
+      {
+        "name": "email",
+        "type": "string",
+        "value": null,
+        "label": "Email",
+        "placeholder": "recipient@example.com — the address to remove from the global unsubscribe list",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Email",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Result",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "marketing/sendgrid/invalid_email_delete": {
+    "hash": "73ffcd45d39332813629dd8c74cdab4344bc0fd74fecf3c92456ed58a2ce560d",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "SendGrid: Delete Invalid Email",
+    "description": "Remove addresses from your SendGrid invalid email list so delivery can be attempted again. Provide a single Email, a comma-separated Emails list, or tick Delete All to clear the entire list.",
+    "website": "https://www.flomation.co",
+    "icon": "sendgrid+trash",
+    "date": "09/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Marketing",
+      "icon": "bullhorn",
+      "description": "Email and marketing platforms — contacts, campaigns, and transactional email"
+    },
+    "sub_category": {
+      "name": "SendGrid",
+      "icon": "sendgrid",
+      "description": "Send transactional email and manage contacts, lists, templates, and suppressions in SendGrid"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "API Key",
+        "placeholder": "SendGrid API key (SendGrid → Settings → API Keys), e.g. ${secrets.sendgrid_api}",
+        "required": true
+      },
+      {
+        "name": "region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "Global unless your account uses an EU regional subuser — the EU host has no Marketing endpoints (contacts, lists, segments)",
+        "options": [
+          {
+            "name": "Global",
+            "value": ""
+          },
+          {
+            "name": "EU (data residency)",
+            "value": "eu"
+          }
+        ]
+      },
+      {
+        "name": "email",
+        "type": "string",
+        "value": null,
+        "label": "Email",
+        "placeholder": "A single address to remove — leave blank to use Emails or Delete All"
+      },
+      {
+        "name": "emails",
+        "type": "string",
+        "value": null,
+        "label": "Emails",
+        "placeholder": "Comma-separated addresses to remove in one go — cannot be combined with Delete All"
+      },
+      {
+        "name": "delete_all",
+        "type": "boolean",
+        "value": null,
+        "label": "Delete All",
+        "placeholder": "Tick to clear the entire invalid email list — cannot be combined with Emails"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Email",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Result",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "marketing/sendgrid/invalid_email_get": {
+    "hash": "bd2f5efecc0095e625cc1ee75a821ccb6ecffec3d7c8de6097c29ce9e8bb2cdc",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "SendGrid: Get Invalid Email",
+    "description": "Look up a single email address on your SendGrid invalid email list. If the address is not on the list, the action reports that no invalid email was found.",
+    "website": "https://www.flomation.co",
+    "icon": "sendgrid+eye",
+    "date": "09/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Marketing",
+      "icon": "bullhorn",
+      "description": "Email and marketing platforms — contacts, campaigns, and transactional email"
+    },
+    "sub_category": {
+      "name": "SendGrid",
+      "icon": "sendgrid",
+      "description": "Send transactional email and manage contacts, lists, templates, and suppressions in SendGrid"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "API Key",
+        "placeholder": "SendGrid API key (SendGrid → Settings → API Keys), e.g. ${secrets.sendgrid_api}",
+        "required": true
+      },
+      {
+        "name": "region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "Global unless your account uses an EU regional subuser — the EU host has no Marketing endpoints (contacts, lists, segments)",
+        "options": [
+          {
+            "name": "Global",
+            "value": ""
+          },
+          {
+            "name": "EU (data residency)",
+            "value": "eu"
+          }
+        ]
+      },
+      {
+        "name": "email",
+        "type": "string",
+        "value": null,
+        "label": "Email",
+        "placeholder": "The address to look up, e.g. jane@example.com",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Email",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Invalid Email",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "marketing/sendgrid/invalid_email_list": {
+    "hash": "245d75b58a355bc9c288665be0612c60900598c2660f9d48dd3cf50cffe62c54",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "SendGrid: List Invalid Emails",
+    "description": "Retrieve the addresses on your SendGrid invalid email list — addresses that could not be delivered because they are malformed or the mailbox does not exist. Optionally narrow the list to a date range.",
+    "website": "https://www.flomation.co",
+    "icon": "sendgrid+list",
+    "date": "09/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Marketing",
+      "icon": "bullhorn",
+      "description": "Email and marketing platforms — contacts, campaigns, and transactional email"
+    },
+    "sub_category": {
+      "name": "SendGrid",
+      "icon": "sendgrid",
+      "description": "Send transactional email and manage contacts, lists, templates, and suppressions in SendGrid"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "API Key",
+        "placeholder": "SendGrid API key (SendGrid → Settings → API Keys), e.g. ${secrets.sendgrid_api}",
+        "required": true
+      },
+      {
+        "name": "region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "Global unless your account uses an EU regional subuser — the EU host has no Marketing endpoints (contacts, lists, segments)",
+        "options": [
+          {
+            "name": "Global",
+            "value": ""
+          },
+          {
+            "name": "EU (data residency)",
+            "value": "eu"
+          }
+        ]
+      },
+      {
+        "name": "start_time",
+        "type": "datetime",
+        "value": null,
+        "label": "Start Time",
+        "placeholder": "Only invalid email entries created on or after this time, e.g. 2026-07-01T00:00:00Z"
+      },
+      {
+        "name": "end_time",
+        "type": "datetime",
+        "value": null,
+        "label": "End Time",
+        "placeholder": "Only invalid email entries created on or before this time, e.g. 2026-07-08T23:59:59Z"
+      },
+      {
+        "name": "limit",
+        "type": "string",
+        "value": null,
+        "label": "Limit",
+        "placeholder": "Max results to return (default 100)"
+      },
+      {
+        "name": "return_all",
+        "type": "boolean",
+        "value": null,
+        "label": "Return All",
+        "placeholder": "Tick to fetch every result page instead of just the first"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "results",
+        "type": "object",
+        "value": null,
+        "label": "Invalid Emails",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Count",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "marketing/sendgrid/list_create": {
+    "hash": "e02db2ef0bdf84384efb6ab0c8421591171a8645c8bba834940629ed19471a5d",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "SendGrid: Create Contact List",
+    "description": "Create a new contact list in SendGrid Marketing. Give the list a name (it must be unique in your account) — you can then add contacts to it with the contact actions.",
+    "website": "https://www.flomation.co",
+    "icon": "sendgrid+plus",
+    "date": "09/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Marketing",
+      "icon": "bullhorn",
+      "description": "Email and marketing platforms — contacts, campaigns, and transactional email"
+    },
+    "sub_category": {
+      "name": "SendGrid",
+      "icon": "sendgrid",
+      "description": "Send transactional email and manage contacts, lists, templates, and suppressions in SendGrid"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "API Key",
+        "placeholder": "SendGrid API key (SendGrid → Settings → API Keys), e.g. ${secrets.sendgrid_api}",
+        "required": true
+      },
+      {
+        "name": "region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "Global unless your account uses an EU regional subuser — the EU host has no Marketing endpoints (contacts, lists, segments)",
+        "options": [
+          {
+            "name": "Global",
+            "value": ""
+          },
+          {
+            "name": "EU (data residency)",
+            "value": "eu"
+          }
+        ]
+      },
+      {
+        "name": "name",
+        "type": "string",
+        "value": null,
+        "label": "Name",
+        "placeholder": "The list's name — must be unique in your account",
+        "required": true
+      },
+      {
+        "name": "additional_fields",
+        "type": "object",
+        "value": null,
+        "label": "Additional Fields (JSON)",
+        "placeholder": "Any other SendGrid list field as JSON, e.g. {\"key\":\"value\"}"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "List ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "List",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "marketing/sendgrid/list_delete": {
+    "hash": "cc9d2b547274b574323348d2a90b5c98d52149008d085108e33f8c7b673caf47",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "SendGrid: Delete Contact List",
+    "description": "Delete a contact list from SendGrid Marketing, optionally deleting its contacts too. The contacts survive unless you tick Also Delete Contacts; when they are deleted SendGrid processes the removal in the background and returns a job ID.",
+    "website": "https://www.flomation.co",
+    "icon": "sendgrid+trash",
+    "date": "09/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Marketing",
+      "icon": "bullhorn",
+      "description": "Email and marketing platforms — contacts, campaigns, and transactional email"
+    },
+    "sub_category": {
+      "name": "SendGrid",
+      "icon": "sendgrid",
+      "description": "Send transactional email and manage contacts, lists, templates, and suppressions in SendGrid"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "API Key",
+        "placeholder": "SendGrid API key (SendGrid → Settings → API Keys), e.g. ${secrets.sendgrid_api}",
+        "required": true
+      },
+      {
+        "name": "region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "Global unless your account uses an EU regional subuser — the EU host has no Marketing endpoints (contacts, lists, segments)",
+        "options": [
+          {
+            "name": "Global",
+            "value": ""
+          },
+          {
+            "name": "EU (data residency)",
+            "value": "eu"
+          }
+        ]
+      },
+      {
+        "name": "list_id",
+        "type": "string",
+        "value": null,
+        "label": "List",
+        "placeholder": "The contact list to delete — see \"SendGrid: List Contact Lists\"",
+        "required": true
+      },
+      {
+        "name": "delete_contacts",
+        "type": "boolean",
+        "value": null,
+        "label": "Also Delete Contacts",
+        "placeholder": "Tick to also delete the list's contacts from your account, not just the list itself"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Job or List ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Result",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "marketing/sendgrid/list_get": {
+    "hash": "ed239de28ce51022254e80923a0492ae8e71bb544e410c433b816de8b6bf1407",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "SendGrid: Get Contact List",
+    "description": "Look up one contact list in SendGrid Marketing — its name and how many contacts it holds, optionally with a sample of up to 50 of its contacts.",
+    "website": "https://www.flomation.co",
+    "icon": "sendgrid+eye",
+    "date": "09/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Marketing",
+      "icon": "bullhorn",
+      "description": "Email and marketing platforms — contacts, campaigns, and transactional email"
+    },
+    "sub_category": {
+      "name": "SendGrid",
+      "icon": "sendgrid",
+      "description": "Send transactional email and manage contacts, lists, templates, and suppressions in SendGrid"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "API Key",
+        "placeholder": "SendGrid API key (SendGrid → Settings → API Keys), e.g. ${secrets.sendgrid_api}",
+        "required": true
+      },
+      {
+        "name": "region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "Global unless your account uses an EU regional subuser — the EU host has no Marketing endpoints (contacts, lists, segments)",
+        "options": [
+          {
+            "name": "Global",
+            "value": ""
+          },
+          {
+            "name": "EU (data residency)",
+            "value": "eu"
+          }
+        ]
+      },
+      {
+        "name": "list_id",
+        "type": "string",
+        "value": null,
+        "label": "List",
+        "placeholder": "The contact list to fetch — see \"SendGrid: List Contact Lists\"",
+        "required": true
+      },
+      {
+        "name": "contact_sample",
+        "type": "boolean",
+        "value": null,
+        "label": "Include Contact Sample",
+        "placeholder": "Tick to also return a sample of up to 50 of the list's contacts"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "List ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "List",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "marketing/sendgrid/list_get_all": {
+    "hash": "1851fd9b84304e3241b0dcd7818bc845d54eb64ad60691e1fb32de5e0bf59cba",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "SendGrid: List Contact Lists",
+    "description": "List the contact lists in your SendGrid Marketing account, with each list's name and contact count.",
+    "website": "https://www.flomation.co",
+    "icon": "sendgrid+list",
+    "date": "09/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Marketing",
+      "icon": "bullhorn",
+      "description": "Email and marketing platforms — contacts, campaigns, and transactional email"
+    },
+    "sub_category": {
+      "name": "SendGrid",
+      "icon": "sendgrid",
+      "description": "Send transactional email and manage contacts, lists, templates, and suppressions in SendGrid"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "API Key",
+        "placeholder": "SendGrid API key (SendGrid → Settings → API Keys), e.g. ${secrets.sendgrid_api}",
+        "required": true
+      },
+      {
+        "name": "region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "Global unless your account uses an EU regional subuser — the EU host has no Marketing endpoints (contacts, lists, segments)",
+        "options": [
+          {
+            "name": "Global",
+            "value": ""
+          },
+          {
+            "name": "EU (data residency)",
+            "value": "eu"
+          }
+        ]
+      },
+      {
+        "name": "limit",
+        "type": "string",
+        "value": null,
+        "label": "Limit",
+        "placeholder": "Max results (default 100)"
+      },
+      {
+        "name": "return_all",
+        "type": "boolean",
+        "value": null,
+        "label": "Return All",
+        "placeholder": "Return every list (ignores Limit)"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "results",
+        "type": "object",
+        "value": null,
+        "label": "Lists",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Count",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "marketing/sendgrid/list_remove_contacts": {
+    "hash": "6d71b15db16a6d990ce6ada862d85df112af74c1d587dc7405d3f41224b478cd",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "SendGrid: Remove Contacts from List",
+    "description": "Remove contacts from a SendGrid Marketing list without deleting them — they stay in your account and in any other lists. SendGrid processes the removal in the background and returns a job ID.",
+    "website": "https://www.flomation.co",
+    "icon": "sendgrid+trash",
+    "date": "09/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Marketing",
+      "icon": "bullhorn",
+      "description": "Email and marketing platforms — contacts, campaigns, and transactional email"
+    },
+    "sub_category": {
+      "name": "SendGrid",
+      "icon": "sendgrid",
+      "description": "Send transactional email and manage contacts, lists, templates, and suppressions in SendGrid"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "API Key",
+        "placeholder": "SendGrid API key (SendGrid → Settings → API Keys), e.g. ${secrets.sendgrid_api}",
+        "required": true
+      },
+      {
+        "name": "region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "Global unless your account uses an EU regional subuser — the EU host has no Marketing endpoints (contacts, lists, segments)",
+        "options": [
+          {
+            "name": "Global",
+            "value": ""
+          },
+          {
+            "name": "EU (data residency)",
+            "value": "eu"
+          }
+        ]
+      },
+      {
+        "name": "list_id",
+        "type": "string",
+        "value": null,
+        "label": "List",
+        "placeholder": "The contact list to remove contacts from — see \"SendGrid: List Contact Lists\"",
+        "required": true
+      },
+      {
+        "name": "contact_ids",
+        "type": "string",
+        "value": null,
+        "label": "Contact IDs",
+        "placeholder": "Comma-separated contact IDs to remove from the list",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Job ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Result",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "marketing/sendgrid/list_update": {
+    "hash": "51b52b056ee935fcd04c7acf6e47c41c0104be4de1c168668d959ad9a4cd3b30",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "SendGrid: Update Contact List",
+    "description": "Rename a contact list in SendGrid Marketing. Choose the list and provide its new name.",
+    "website": "https://www.flomation.co",
+    "icon": "sendgrid+pencil",
+    "date": "09/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Marketing",
+      "icon": "bullhorn",
+      "description": "Email and marketing platforms — contacts, campaigns, and transactional email"
+    },
+    "sub_category": {
+      "name": "SendGrid",
+      "icon": "sendgrid",
+      "description": "Send transactional email and manage contacts, lists, templates, and suppressions in SendGrid"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "API Key",
+        "placeholder": "SendGrid API key (SendGrid → Settings → API Keys), e.g. ${secrets.sendgrid_api}",
+        "required": true
+      },
+      {
+        "name": "region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "Global unless your account uses an EU regional subuser — the EU host has no Marketing endpoints (contacts, lists, segments)",
+        "options": [
+          {
+            "name": "Global",
+            "value": ""
+          },
+          {
+            "name": "EU (data residency)",
+            "value": "eu"
+          }
+        ]
+      },
+      {
+        "name": "list_id",
+        "type": "string",
+        "value": null,
+        "label": "List",
+        "placeholder": "The contact list to rename — see \"SendGrid: List Contact Lists\"",
+        "required": true
+      },
+      {
+        "name": "name",
+        "type": "string",
+        "value": null,
+        "label": "New Name",
+        "placeholder": "The list's new name — must be unique in your account",
+        "required": true
+      },
+      {
+        "name": "additional_fields",
+        "type": "object",
+        "value": null,
+        "label": "Additional Fields (JSON)",
+        "placeholder": "Any other SendGrid list field as JSON, e.g. {\"key\":\"value\"}"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "List ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "List",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "marketing/sendgrid/mail_send": {
+    "hash": "c33ccef886fcb7de4143eb1ce7b4c67da93f1d3d77dda59df4f84b42e28dc1fe",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "SendGrid: Send Email",
+    "description": "Send an email through SendGrid. Provide a verified From address and one or more recipients, then either write the subject and content directly or send a dynamic template. SendGrid accepts the message for delivery and returns its message ID.",
+    "website": "https://www.flomation.co",
+    "icon": "sendgrid+paper-plane",
+    "date": "09/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Marketing",
+      "icon": "bullhorn",
+      "description": "Email and marketing platforms — contacts, campaigns, and transactional email"
+    },
+    "sub_category": {
+      "name": "SendGrid",
+      "icon": "sendgrid",
+      "description": "Send transactional email and manage contacts, lists, templates, and suppressions in SendGrid"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "API Key",
+        "placeholder": "SendGrid API key (SendGrid → Settings → API Keys), e.g. ${secrets.sendgrid_api}",
+        "required": true
+      },
+      {
+        "name": "region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "Global unless your account uses an EU regional subuser — the EU host has no Marketing endpoints (contacts, lists, segments)",
+        "options": [
+          {
+            "name": "Global",
+            "value": ""
+          },
+          {
+            "name": "EU (data residency)",
+            "value": "eu"
+          }
+        ]
+      },
+      {
+        "name": "from_email",
+        "type": "string",
+        "value": null,
+        "label": "From Email",
+        "placeholder": "sender@yourdomain.com — must be a verified sender or an address on your authenticated domain",
+        "required": true
+      },
+      {
+        "name": "from_name",
+        "type": "string",
+        "value": null,
+        "label": "From Name",
+        "placeholder": "Jane at Acme"
+      },
+      {
+        "name": "to",
+        "type": "string",
+        "value": null,
+        "label": "To",
+        "placeholder": "recipient@example.com — separate multiple addresses with commas",
+        "required": true
+      },
+      {
+        "name": "cc",
+        "type": "string",
+        "value": null,
+        "label": "Cc",
+        "placeholder": "Comma-separated — SendGrid rejects an address that appears more than once across To, Cc, and Bcc"
+      },
+      {
+        "name": "bcc",
+        "type": "string",
+        "value": null,
+        "label": "Bcc",
+        "placeholder": "Comma-separated — SendGrid rejects an address that appears more than once across To, Cc, and Bcc"
+      },
+      {
+        "name": "reply_to",
+        "type": "string",
+        "value": null,
+        "label": "Reply To",
+        "placeholder": "Comma-separated addresses replies should go to"
+      },
+      {
+        "name": "use_template",
+        "type": "boolean",
+        "value": null,
+        "label": "Use Template",
+        "placeholder": "Tick to send a dynamic template instead of writing the subject and content here"
+      },
+      {
+        "name": "subject",
+        "type": "string",
+        "value": null,
+        "label": "Subject",
+        "placeholder": "The email subject line",
+        "visible_when": {
+          "field": "use_template",
+          "values": [
+            "",
+            "false"
+          ]
+        }
+      },
+      {
+        "name": "content_type",
+        "type": "string",
+        "value": null,
+        "label": "Content Type",
+        "placeholder": "HTML unless you choose plain text",
+        "options": [
+          {
+            "name": "HTML",
+            "value": "text/html"
+          },
+          {
+            "name": "Plain Text",
+            "value": "text/plain"
+          }
+        ],
+        "visible_when": {
+          "field": "use_template",
+          "values": [
+            "",
+            "false"
+          ]
+        }
+      },
+      {
+        "name": "content",
+        "type": "text",
+        "value": null,
+        "label": "Content",
+        "placeholder": "The email body — HTML or plain text to match the Content Type",
+        "visible_when": {
+          "field": "use_template",
+          "values": [
+            "",
+            "false"
+          ]
+        }
+      },
+      {
+        "name": "template_id",
+        "type": "string",
+        "value": null,
+        "label": "Template",
+        "placeholder": "The dynamic template to send (d-...) — see \"SendGrid: List Templates\"",
+        "visible_when": {
+          "field": "use_template",
+          "values": [
+            "true"
+          ]
+        }
+      },
+      {
+        "name": "dynamic_template_data",
+        "type": "object",
+        "value": null,
+        "label": "Template Data (JSON)",
+        "placeholder": "{\"first_name\":\"Jane\"} — values for the template's {{handlebars}}",
+        "visible_when": {
+          "field": "use_template",
+          "values": [
+            "true"
+          ]
+        }
+      },
+      {
+        "name": "send_at",
+        "type": "datetime",
+        "value": null,
+        "label": "Send At",
+        "placeholder": "Schedule delivery up to 72 hours ahead, e.g. 2026-07-10T09:00:00Z"
+      },
+      {
+        "name": "categories",
+        "type": "string",
+        "value": null,
+        "label": "Categories",
+        "placeholder": "Comma-separated category names (up to 10) for filtering your email stats"
+      },
+      {
+        "name": "asm_group_id",
+        "type": "string",
+        "value": null,
+        "label": "Unsubscribe Group",
+        "placeholder": "The unsubscribe (ASM) group this email belongs to"
+      },
+      {
+        "name": "sandbox_mode",
+        "type": "boolean",
+        "value": null,
+        "label": "Sandbox Mode",
+        "placeholder": "Tick to validate the message without sending it (nothing is delivered or billed)"
+      },
+      {
+        "name": "attachments",
+        "type": "object",
+        "value": null,
+        "label": "Attachments (JSON)",
+        "placeholder": "[{\"content\":\"\u003cbase64\u003e\",\"filename\":\"report.pdf\",\"type\":\"application/pdf\",\"disposition\":\"attachment\"}]"
+      },
+      {
+        "name": "custom_args",
+        "type": "object",
+        "value": null,
+        "label": "Custom Args (JSON)",
+        "placeholder": "{\"order_id\":\"12345\"} — passed through to event webhook events"
+      },
+      {
+        "name": "additional_fields",
+        "type": "object",
+        "value": null,
+        "label": "Additional Fields (JSON)",
+        "placeholder": "Any other SendGrid mail field, e.g. {\"ip_pool_name\":\"marketing\"}"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Message ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Result",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "marketing/sendgrid/segment_get": {
+    "hash": "e88119c1d0ca4fd9f939c0ae7ba193bed743787169a80eb790a5bd6013c41ad5",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "SendGrid: Get Segment",
+    "description": "Look up one segment in SendGrid Marketing — its query, contact count, and a sample of the contacts currently in it.",
+    "website": "https://www.flomation.co",
+    "icon": "sendgrid+eye",
+    "date": "09/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Marketing",
+      "icon": "bullhorn",
+      "description": "Email and marketing platforms — contacts, campaigns, and transactional email"
+    },
+    "sub_category": {
+      "name": "SendGrid",
+      "icon": "sendgrid",
+      "description": "Send transactional email and manage contacts, lists, templates, and suppressions in SendGrid"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "API Key",
+        "placeholder": "SendGrid API key (SendGrid → Settings → API Keys), e.g. ${secrets.sendgrid_api}",
+        "required": true
+      },
+      {
+        "name": "region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "Global unless your account uses an EU regional subuser — the EU host has no Marketing endpoints (contacts, lists, segments)",
+        "options": [
+          {
+            "name": "Global",
+            "value": ""
+          },
+          {
+            "name": "EU (data residency)",
+            "value": "eu"
+          }
+        ]
+      },
+      {
+        "name": "segment_id",
+        "type": "string",
+        "value": null,
+        "label": "Segment",
+        "placeholder": "The segment to fetch — see \"SendGrid: List Segments\"",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Segment ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Segment",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "marketing/sendgrid/segment_list": {
+    "hash": "fc69c155ef9696069e5917797089eba5a8ac3346fdf298c2db5f0908c06e260f",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "SendGrid: List Segments",
+    "description": "List the segments in your SendGrid Marketing account — the dynamic groups of contacts defined by a query. Optionally only return segments attached to specific parent lists.",
+    "website": "https://www.flomation.co",
+    "icon": "sendgrid+list",
+    "date": "09/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Marketing",
+      "icon": "bullhorn",
+      "description": "Email and marketing platforms — contacts, campaigns, and transactional email"
+    },
+    "sub_category": {
+      "name": "SendGrid",
+      "icon": "sendgrid",
+      "description": "Send transactional email and manage contacts, lists, templates, and suppressions in SendGrid"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "API Key",
+        "placeholder": "SendGrid API key (SendGrid → Settings → API Keys), e.g. ${secrets.sendgrid_api}",
+        "required": true
+      },
+      {
+        "name": "region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "Global unless your account uses an EU regional subuser — the EU host has no Marketing endpoints (contacts, lists, segments)",
+        "options": [
+          {
+            "name": "Global",
+            "value": ""
+          },
+          {
+            "name": "EU (data residency)",
+            "value": "eu"
+          }
+        ]
+      },
+      {
+        "name": "parent_list_ids",
+        "type": "string",
+        "value": null,
+        "label": "Parent Lists",
+        "placeholder": "Comma-separated list IDs — only return segments attached to these lists"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "results",
+        "type": "object",
+        "value": null,
+        "label": "Segments",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Count",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "marketing/sendgrid/sender_list": {
+    "hash": "b72efe5410ccfd6405091dab56a82ff94d7324bc7bfa841589de8996372d8f0a",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "SendGrid: List Verified Senders",
+    "description": "Retrieve the verified single senders on your SendGrid account — the From addresses you can send from. A domain you have authenticated additionally allows any From address on that domain.",
+    "website": "https://www.flomation.co",
+    "icon": "sendgrid+list",
+    "date": "09/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Marketing",
+      "icon": "bullhorn",
+      "description": "Email and marketing platforms — contacts, campaigns, and transactional email"
+    },
+    "sub_category": {
+      "name": "SendGrid",
+      "icon": "sendgrid",
+      "description": "Send transactional email and manage contacts, lists, templates, and suppressions in SendGrid"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "API Key",
+        "placeholder": "SendGrid API key (SendGrid → Settings → API Keys), e.g. ${secrets.sendgrid_api}",
+        "required": true
+      },
+      {
+        "name": "region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "Global unless your account uses an EU regional subuser — the EU host has no Marketing endpoints (contacts, lists, segments)",
+        "options": [
+          {
+            "name": "Global",
+            "value": ""
+          },
+          {
+            "name": "EU (data residency)",
+            "value": "eu"
+          }
+        ]
+      },
+      {
+        "name": "limit",
+        "type": "string",
+        "value": null,
+        "label": "Limit",
+        "placeholder": "Max results — leave blank for all senders"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "results",
+        "type": "object",
+        "value": null,
+        "label": "Verified Senders",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Count",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "marketing/sendgrid/spam_report_delete": {
+    "hash": "fefdfe78c33a419ec02a9efbd718421b480ec667d4ec9d7243ec8f7bf647f701",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "SendGrid: Delete Spam Report",
+    "description": "Remove addresses from your SendGrid spam report list so mail can be sent to them again. Provide a single Email, a comma-separated Emails list, or tick Delete All to clear the entire list.",
+    "website": "https://www.flomation.co",
+    "icon": "sendgrid+trash",
+    "date": "09/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Marketing",
+      "icon": "bullhorn",
+      "description": "Email and marketing platforms — contacts, campaigns, and transactional email"
+    },
+    "sub_category": {
+      "name": "SendGrid",
+      "icon": "sendgrid",
+      "description": "Send transactional email and manage contacts, lists, templates, and suppressions in SendGrid"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "API Key",
+        "placeholder": "SendGrid API key (SendGrid → Settings → API Keys), e.g. ${secrets.sendgrid_api}",
+        "required": true
+      },
+      {
+        "name": "region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "Global unless your account uses an EU regional subuser — the EU host has no Marketing endpoints (contacts, lists, segments)",
+        "options": [
+          {
+            "name": "Global",
+            "value": ""
+          },
+          {
+            "name": "EU (data residency)",
+            "value": "eu"
+          }
+        ]
+      },
+      {
+        "name": "email",
+        "type": "string",
+        "value": null,
+        "label": "Email",
+        "placeholder": "A single address to remove — leave blank to use Emails or Delete All"
+      },
+      {
+        "name": "emails",
+        "type": "string",
+        "value": null,
+        "label": "Emails",
+        "placeholder": "Comma-separated addresses to remove in one go — cannot be combined with Delete All"
+      },
+      {
+        "name": "delete_all",
+        "type": "boolean",
+        "value": null,
+        "label": "Delete All",
+        "placeholder": "Tick to clear the entire spam report list — cannot be combined with Emails"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Email",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Result",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "marketing/sendgrid/spam_report_get": {
+    "hash": "7b336f8d31597505ba4f3d2a6c7e4400d532eafcfbdd8ca643a772af70662eaf",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "SendGrid: Get Spam Report",
+    "description": "Look up a single email address on your SendGrid spam report list. If the address has not reported your email as spam, the action reports that no spam report was found.",
+    "website": "https://www.flomation.co",
+    "icon": "sendgrid+eye",
+    "date": "09/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Marketing",
+      "icon": "bullhorn",
+      "description": "Email and marketing platforms — contacts, campaigns, and transactional email"
+    },
+    "sub_category": {
+      "name": "SendGrid",
+      "icon": "sendgrid",
+      "description": "Send transactional email and manage contacts, lists, templates, and suppressions in SendGrid"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "API Key",
+        "placeholder": "SendGrid API key (SendGrid → Settings → API Keys), e.g. ${secrets.sendgrid_api}",
+        "required": true
+      },
+      {
+        "name": "region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "Global unless your account uses an EU regional subuser — the EU host has no Marketing endpoints (contacts, lists, segments)",
+        "options": [
+          {
+            "name": "Global",
+            "value": ""
+          },
+          {
+            "name": "EU (data residency)",
+            "value": "eu"
+          }
+        ]
+      },
+      {
+        "name": "email",
+        "type": "string",
+        "value": null,
+        "label": "Email",
+        "placeholder": "The address to look up, e.g. jane@example.com",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Email",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Spam Report",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "marketing/sendgrid/spam_report_list": {
+    "hash": "a9371c8878c606c871db5ace683c29e7c816c76cd2dfa4a2f519f6397680d0a4",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "SendGrid: List Spam Reports",
+    "description": "Retrieve the addresses on your SendGrid spam report list — recipients who marked your email as spam. Optionally narrow the list to a date range.",
+    "website": "https://www.flomation.co",
+    "icon": "sendgrid+list",
+    "date": "09/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Marketing",
+      "icon": "bullhorn",
+      "description": "Email and marketing platforms — contacts, campaigns, and transactional email"
+    },
+    "sub_category": {
+      "name": "SendGrid",
+      "icon": "sendgrid",
+      "description": "Send transactional email and manage contacts, lists, templates, and suppressions in SendGrid"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "API Key",
+        "placeholder": "SendGrid API key (SendGrid → Settings → API Keys), e.g. ${secrets.sendgrid_api}",
+        "required": true
+      },
+      {
+        "name": "region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "Global unless your account uses an EU regional subuser — the EU host has no Marketing endpoints (contacts, lists, segments)",
+        "options": [
+          {
+            "name": "Global",
+            "value": ""
+          },
+          {
+            "name": "EU (data residency)",
+            "value": "eu"
+          }
+        ]
+      },
+      {
+        "name": "start_time",
+        "type": "datetime",
+        "value": null,
+        "label": "Start Time",
+        "placeholder": "Only spam reports created on or after this time, e.g. 2026-07-01T00:00:00Z"
+      },
+      {
+        "name": "end_time",
+        "type": "datetime",
+        "value": null,
+        "label": "End Time",
+        "placeholder": "Only spam reports created on or before this time, e.g. 2026-07-08T23:59:59Z"
+      },
+      {
+        "name": "limit",
+        "type": "string",
+        "value": null,
+        "label": "Limit",
+        "placeholder": "Max results to return (default 100)"
+      },
+      {
+        "name": "return_all",
+        "type": "boolean",
+        "value": null,
+        "label": "Return All",
+        "placeholder": "Tick to fetch every result page instead of just the first"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "results",
+        "type": "object",
+        "value": null,
+        "label": "Spam Reports",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Count",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "marketing/sendgrid/stats_get": {
+    "hash": "8c3c36026193d6222a635657da7b407744f200dd23feafab536d95eedf94d2b0",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "SendGrid: Get Stats",
+    "description": "Retrieve your SendGrid email statistics — requests, delivered, opens, clicks, bounces, and more — for a date range, optionally aggregated by day, week, or month. Dates use YYYY-MM-DD format.",
+    "website": "https://www.flomation.co",
+    "icon": "sendgrid+pie-chart",
+    "date": "09/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Marketing",
+      "icon": "bullhorn",
+      "description": "Email and marketing platforms — contacts, campaigns, and transactional email"
+    },
+    "sub_category": {
+      "name": "SendGrid",
+      "icon": "sendgrid",
+      "description": "Send transactional email and manage contacts, lists, templates, and suppressions in SendGrid"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "API Key",
+        "placeholder": "SendGrid API key (SendGrid → Settings → API Keys), e.g. ${secrets.sendgrid_api}",
+        "required": true
+      },
+      {
+        "name": "region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "Global unless your account uses an EU regional subuser — the EU host has no Marketing endpoints (contacts, lists, segments)",
+        "options": [
+          {
+            "name": "Global",
+            "value": ""
+          },
+          {
+            "name": "EU (data residency)",
+            "value": "eu"
+          }
+        ]
+      },
+      {
+        "name": "start_date",
+        "type": "string",
+        "value": null,
+        "label": "Start Date",
+        "placeholder": "2026-01-31",
+        "required": true
+      },
+      {
+        "name": "end_date",
+        "type": "string",
+        "value": null,
+        "label": "End Date",
+        "placeholder": "2026-01-31 — defaults to today"
+      },
+      {
+        "name": "aggregated_by",
+        "type": "string",
+        "value": null,
+        "label": "Aggregated By",
+        "placeholder": "How to bucket the statistics — by day unless you choose otherwise",
+        "options": [
+          {
+            "name": "Day",
+            "value": "day"
+          },
+          {
+            "name": "Week",
+            "value": "week"
+          },
+          {
+            "name": "Month",
+            "value": "month"
+          }
+        ]
+      }
+    ],
+    "outputs": [
+      {
+        "name": "results",
+        "type": "object",
+        "value": null,
+        "label": "Stats",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Count",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "marketing/sendgrid/template_create": {
+    "hash": "64ddcae1a820aa59c0adb09d71b9ec7088a2dd1a7752489c6baad50d73a7c4dd",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "SendGrid: Create Template",
+    "description": "Create a new dynamic transactional template in SendGrid. A template starts with no content — add a subject and body with \"SendGrid: Create Template Version\", then send it with \"SendGrid: Send Email\".",
+    "website": "https://www.flomation.co",
+    "icon": "sendgrid+plus",
+    "date": "09/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Marketing",
+      "icon": "bullhorn",
+      "description": "Email and marketing platforms — contacts, campaigns, and transactional email"
+    },
+    "sub_category": {
+      "name": "SendGrid",
+      "icon": "sendgrid",
+      "description": "Send transactional email and manage contacts, lists, templates, and suppressions in SendGrid"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "API Key",
+        "placeholder": "SendGrid API key (SendGrid → Settings → API Keys), e.g. ${secrets.sendgrid_api}",
+        "required": true
+      },
+      {
+        "name": "region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "Global unless your account uses an EU regional subuser — the EU host has no Marketing endpoints (contacts, lists, segments)",
+        "options": [
+          {
+            "name": "Global",
+            "value": ""
+          },
+          {
+            "name": "EU (data residency)",
+            "value": "eu"
+          }
+        ]
+      },
+      {
+        "name": "name",
+        "type": "string",
+        "value": null,
+        "label": "Name",
+        "placeholder": "A name for the template, e.g. Order Confirmation",
+        "required": true
+      },
+      {
+        "name": "additional_fields",
+        "type": "object",
+        "value": null,
+        "label": "Additional Fields (JSON)",
+        "placeholder": "Any other SendGrid template field, e.g. {\"generation\":\"legacy\"}"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Template ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Template",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "marketing/sendgrid/template_delete": {
+    "hash": "56c3ac79bbf1f008b259878d9c0665679b5063d6c6adc6f3dc3e693050b9ab99",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "SendGrid: Delete Template",
+    "description": "Permanently delete a transactional template from SendGrid, including all of its versions. This cannot be undone.",
+    "website": "https://www.flomation.co",
+    "icon": "sendgrid+trash",
+    "date": "09/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Marketing",
+      "icon": "bullhorn",
+      "description": "Email and marketing platforms — contacts, campaigns, and transactional email"
+    },
+    "sub_category": {
+      "name": "SendGrid",
+      "icon": "sendgrid",
+      "description": "Send transactional email and manage contacts, lists, templates, and suppressions in SendGrid"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "API Key",
+        "placeholder": "SendGrid API key (SendGrid → Settings → API Keys), e.g. ${secrets.sendgrid_api}",
+        "required": true
+      },
+      {
+        "name": "region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "Global unless your account uses an EU regional subuser — the EU host has no Marketing endpoints (contacts, lists, segments)",
+        "options": [
+          {
+            "name": "Global",
+            "value": ""
+          },
+          {
+            "name": "EU (data residency)",
+            "value": "eu"
+          }
+        ]
+      },
+      {
+        "name": "template_id",
+        "type": "string",
+        "value": null,
+        "label": "Template",
+        "placeholder": "The template to delete — see \"SendGrid: List Templates\"",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Template ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Result",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "marketing/sendgrid/template_get": {
+    "hash": "7e08bcffef3e8b9e032da6df1f5bb5b1cc2ecf74e8b01fc3ea614e65de240f8a",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "SendGrid: Get Template",
+    "description": "Look up a single transactional template in SendGrid, including every version of the template.",
+    "website": "https://www.flomation.co",
+    "icon": "sendgrid+eye",
+    "date": "09/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Marketing",
+      "icon": "bullhorn",
+      "description": "Email and marketing platforms — contacts, campaigns, and transactional email"
+    },
+    "sub_category": {
+      "name": "SendGrid",
+      "icon": "sendgrid",
+      "description": "Send transactional email and manage contacts, lists, templates, and suppressions in SendGrid"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "API Key",
+        "placeholder": "SendGrid API key (SendGrid → Settings → API Keys), e.g. ${secrets.sendgrid_api}",
+        "required": true
+      },
+      {
+        "name": "region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "Global unless your account uses an EU regional subuser — the EU host has no Marketing endpoints (contacts, lists, segments)",
+        "options": [
+          {
+            "name": "Global",
+            "value": ""
+          },
+          {
+            "name": "EU (data residency)",
+            "value": "eu"
+          }
+        ]
+      },
+      {
+        "name": "template_id",
+        "type": "string",
+        "value": null,
+        "label": "Template",
+        "placeholder": "The template to retrieve — see \"SendGrid: List Templates\"",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Template ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Template",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "marketing/sendgrid/template_list": {
+    "hash": "50966effce252a7028fe5e486e79991b2a4aea97d1d3187af0d30daeaeb3d810",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "SendGrid: List Templates",
+    "description": "Retrieve the transactional templates on your SendGrid account. Shows dynamic (handlebars) templates unless you also ask for legacy ones; tick Return All to fetch every page.",
+    "website": "https://www.flomation.co",
+    "icon": "sendgrid+list",
+    "date": "09/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Marketing",
+      "icon": "bullhorn",
+      "description": "Email and marketing platforms — contacts, campaigns, and transactional email"
+    },
+    "sub_category": {
+      "name": "SendGrid",
+      "icon": "sendgrid",
+      "description": "Send transactional email and manage contacts, lists, templates, and suppressions in SendGrid"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "API Key",
+        "placeholder": "SendGrid API key (SendGrid → Settings → API Keys), e.g. ${secrets.sendgrid_api}",
+        "required": true
+      },
+      {
+        "name": "region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "Global unless your account uses an EU regional subuser — the EU host has no Marketing endpoints (contacts, lists, segments)",
+        "options": [
+          {
+            "name": "Global",
+            "value": ""
+          },
+          {
+            "name": "EU (data residency)",
+            "value": "eu"
+          }
+        ]
+      },
+      {
+        "name": "generations",
+        "type": "string",
+        "value": null,
+        "label": "Generations",
+        "placeholder": "Dynamic unless you also need your legacy templates",
+        "options": [
+          {
+            "name": "Dynamic",
+            "value": "dynamic"
+          },
+          {
+            "name": "Legacy",
+            "value": "legacy"
+          },
+          {
+            "name": "Legacy and Dynamic",
+            "value": "legacy,dynamic"
+          }
+        ]
+      },
+      {
+        "name": "limit",
+        "type": "string",
+        "value": null,
+        "label": "Limit",
+        "placeholder": "Max results (default 100, up to 200 per page)"
+      },
+      {
+        "name": "return_all",
+        "type": "boolean",
+        "value": null,
+        "label": "Return All",
+        "placeholder": "Tick to fetch every page of templates"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "results",
+        "type": "object",
+        "value": null,
+        "label": "Templates",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Count",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "marketing/sendgrid/template_update": {
+    "hash": "b3d6197eef524bba93974abd3a91b6bb6d9f9bd366827cadf60cfb748bec60b1",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "SendGrid: Update Template",
+    "description": "Rename a transactional template in SendGrid. The template's versions and content are unchanged.",
+    "website": "https://www.flomation.co",
+    "icon": "sendgrid+pencil",
+    "date": "09/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Marketing",
+      "icon": "bullhorn",
+      "description": "Email and marketing platforms — contacts, campaigns, and transactional email"
+    },
+    "sub_category": {
+      "name": "SendGrid",
+      "icon": "sendgrid",
+      "description": "Send transactional email and manage contacts, lists, templates, and suppressions in SendGrid"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "API Key",
+        "placeholder": "SendGrid API key (SendGrid → Settings → API Keys), e.g. ${secrets.sendgrid_api}",
+        "required": true
+      },
+      {
+        "name": "region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "Global unless your account uses an EU regional subuser — the EU host has no Marketing endpoints (contacts, lists, segments)",
+        "options": [
+          {
+            "name": "Global",
+            "value": ""
+          },
+          {
+            "name": "EU (data residency)",
+            "value": "eu"
+          }
+        ]
+      },
+      {
+        "name": "template_id",
+        "type": "string",
+        "value": null,
+        "label": "Template",
+        "placeholder": "The template to rename — see \"SendGrid: List Templates\"",
+        "required": true
+      },
+      {
+        "name": "name",
+        "type": "string",
+        "value": null,
+        "label": "Name",
+        "placeholder": "The new name for the template",
+        "required": true
+      },
+      {
+        "name": "additional_fields",
+        "type": "object",
+        "value": null,
+        "label": "Additional Fields (JSON)",
+        "placeholder": "Any other SendGrid template field to update"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Template ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Template",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "marketing/sendgrid/template_version_activate": {
+    "hash": "5861259e6a865250069185b10c67114c4773e001942d2e827e742889e19161f4",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "SendGrid: Activate Template Version",
+    "description": "Make a specific version of a SendGrid transactional template the active one — the version that is used whenever the template is sent.",
+    "website": "https://www.flomation.co",
+    "icon": "sendgrid+play",
+    "date": "09/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Marketing",
+      "icon": "bullhorn",
+      "description": "Email and marketing platforms — contacts, campaigns, and transactional email"
+    },
+    "sub_category": {
+      "name": "SendGrid",
+      "icon": "sendgrid",
+      "description": "Send transactional email and manage contacts, lists, templates, and suppressions in SendGrid"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "API Key",
+        "placeholder": "SendGrid API key (SendGrid → Settings → API Keys), e.g. ${secrets.sendgrid_api}",
+        "required": true
+      },
+      {
+        "name": "region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "Global unless your account uses an EU regional subuser — the EU host has no Marketing endpoints (contacts, lists, segments)",
+        "options": [
+          {
+            "name": "Global",
+            "value": ""
+          },
+          {
+            "name": "EU (data residency)",
+            "value": "eu"
+          }
+        ]
+      },
+      {
+        "name": "template_id",
+        "type": "string",
+        "value": null,
+        "label": "Template",
+        "placeholder": "The template the version belongs to — see \"SendGrid: List Templates\"",
+        "required": true
+      },
+      {
+        "name": "version_id",
+        "type": "string",
+        "value": null,
+        "label": "Version ID",
+        "placeholder": "The version to activate — see \"SendGrid: Get Template\" for the template's versions",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Version ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Template Version",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "marketing/sendgrid/template_version_create": {
+    "hash": "54d7f9202a2949e17909bab7dbbec3fe7f8b805ebf18c9472726bbe919baa527",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "SendGrid: Create Template Version",
+    "description": "Add a new version to a SendGrid transactional template. Provide the subject and HTML content, and tick Active to make this the version that is sent.",
+    "website": "https://www.flomation.co",
+    "icon": "sendgrid+plus",
+    "date": "09/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Marketing",
+      "icon": "bullhorn",
+      "description": "Email and marketing platforms — contacts, campaigns, and transactional email"
+    },
+    "sub_category": {
+      "name": "SendGrid",
+      "icon": "sendgrid",
+      "description": "Send transactional email and manage contacts, lists, templates, and suppressions in SendGrid"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "API Key",
+        "placeholder": "SendGrid API key (SendGrid → Settings → API Keys), e.g. ${secrets.sendgrid_api}",
+        "required": true
+      },
+      {
+        "name": "region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "Global unless your account uses an EU regional subuser — the EU host has no Marketing endpoints (contacts, lists, segments)",
+        "options": [
+          {
+            "name": "Global",
+            "value": ""
+          },
+          {
+            "name": "EU (data residency)",
+            "value": "eu"
+          }
+        ]
+      },
+      {
+        "name": "template_id",
+        "type": "string",
+        "value": null,
+        "label": "Template",
+        "placeholder": "The template to add a version to — see \"SendGrid: List Templates\"",
+        "required": true
+      },
+      {
+        "name": "name",
+        "type": "string",
+        "value": null,
+        "label": "Name",
+        "placeholder": "A name for this version, e.g. July redesign",
+        "required": true
+      },
+      {
+        "name": "subject",
+        "type": "string",
+        "value": null,
+        "label": "Subject",
+        "placeholder": "The email subject line — {{handlebars}} are substituted at send time"
+      },
+      {
+        "name": "html_content",
+        "type": "text",
+        "value": null,
+        "label": "HTML Content",
+        "placeholder": "The HTML body of the email — {{handlebars}} are substituted at send time"
+      },
+      {
+        "name": "plain_content",
+        "type": "text",
+        "value": null,
+        "label": "Plain Text Content",
+        "placeholder": "The plain-text body — leave blank to have SendGrid generate it from the HTML"
+      },
+      {
+        "name": "generate_plain_content",
+        "type": "boolean",
+        "value": null,
+        "label": "Generate Plain Text",
+        "placeholder": "Tick to have SendGrid regenerate the plain-text body from the HTML content"
+      },
+      {
+        "name": "active",
+        "type": "boolean",
+        "value": null,
+        "label": "Active",
+        "placeholder": "Tick to make this the active version — the one used when the template is sent"
+      },
+      {
+        "name": "additional_fields",
+        "type": "object",
+        "value": null,
+        "label": "Additional Fields (JSON)",
+        "placeholder": "Any other SendGrid version field, e.g. {\"test_data\":\"{\\\"first_name\\\":\\\"Jane\\\"}\"}"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Version ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Template Version",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
   "messaging/discord/webhook": {
     "hash": "3ec3a2edc15da5d2d15c4385695720cf9351b0d3cc85ffb71bea0608ba3339ee",
     "author": "Andy Esser",
@@ -89760,6 +95046,234 @@
         "type": "string",
         "value": null,
         "label": "Schedule Mode",
+        "placeholder": ""
+      }
+    ]
+  },
+  "trigger/sendgrid_webhook": {
+    "hash": "e4b90c9a49ee7dc3416ad8105c807b24a2ab396a15444e9d7372231dc4a21701",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "SendGrid Webhook Trigger",
+    "description": "Triggers a flow when SendGrid reports an email event — delivered, bounced, opened, clicked, marked as spam, unsubscribed, and more. The event webhook is registered with SendGrid automatically and signed-event verification is enabled.",
+    "website": "https://www.flomation.co",
+    "icon": "sendgrid+bolt",
+    "date": "09/07/2026",
+    "type": 1,
+    "category": {
+      "name": "Triggers",
+      "icon": "bolt-lightning",
+      "description": "Start a Flow"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "API Key",
+        "placeholder": "SendGrid API key (SendGrid → Settings → API Keys) — used to register the event webhook",
+        "required": true
+      },
+      {
+        "name": "region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "API host region — choose EU only for EU data-residency subusers",
+        "options": [
+          {
+            "name": "Global",
+            "value": ""
+          },
+          {
+            "name": "EU (data residency)",
+            "value": "eu"
+          }
+        ]
+      },
+      {
+        "name": "events",
+        "type": "multi_select",
+        "value": null,
+        "label": "Events",
+        "placeholder": "Events to fire on (leave empty for all). Recommended: Delivered, Bounced, Opened, Link Clicked, Marked as Spam, Unsubscribed",
+        "options": [
+          {
+            "name": "Processed (accepted by SendGrid)",
+            "value": "processed"
+          },
+          {
+            "name": "Delivered",
+            "value": "delivered"
+          },
+          {
+            "name": "Deferred (temporarily rejected)",
+            "value": "deferred"
+          },
+          {
+            "name": "Bounced",
+            "value": "bounce"
+          },
+          {
+            "name": "Blocked",
+            "value": "blocked"
+          },
+          {
+            "name": "Dropped (not sent)",
+            "value": "dropped"
+          },
+          {
+            "name": "Opened",
+            "value": "open"
+          },
+          {
+            "name": "Link Clicked",
+            "value": "click"
+          },
+          {
+            "name": "Marked as Spam",
+            "value": "spamreport"
+          },
+          {
+            "name": "Unsubscribed",
+            "value": "unsubscribe"
+          },
+          {
+            "name": "Group Unsubscribed",
+            "value": "group_unsubscribe"
+          },
+          {
+            "name": "Group Resubscribed",
+            "value": "group_resubscribe"
+          }
+        ]
+      }
+    ],
+    "outputs": [
+      {
+        "name": "content",
+        "type": "string",
+        "value": null,
+        "label": "Event Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "event",
+        "type": "string",
+        "value": null,
+        "label": "Event Type",
+        "placeholder": ""
+      },
+      {
+        "name": "email",
+        "type": "string",
+        "value": null,
+        "label": "Recipient Email",
+        "placeholder": ""
+      },
+      {
+        "name": "timestamp",
+        "type": "string",
+        "value": null,
+        "label": "Timestamp (Unix)",
+        "placeholder": ""
+      },
+      {
+        "name": "sg_message_id",
+        "type": "string",
+        "value": null,
+        "label": "Message ID",
+        "placeholder": ""
+      },
+      {
+        "name": "sg_event_id",
+        "type": "string",
+        "value": null,
+        "label": "Event ID",
+        "placeholder": ""
+      },
+      {
+        "name": "sg_machine_open",
+        "type": "string",
+        "value": null,
+        "label": "Machine Open (Apple MPP)",
+        "placeholder": ""
+      },
+      {
+        "name": "type",
+        "type": "string",
+        "value": null,
+        "label": "Bounce Type",
+        "placeholder": ""
+      },
+      {
+        "name": "reason",
+        "type": "string",
+        "value": null,
+        "label": "Reason",
+        "placeholder": ""
+      },
+      {
+        "name": "status",
+        "type": "string",
+        "value": null,
+        "label": "Status",
+        "placeholder": ""
+      },
+      {
+        "name": "response",
+        "type": "string",
+        "value": null,
+        "label": "SMTP Response",
+        "placeholder": ""
+      },
+      {
+        "name": "attempt",
+        "type": "string",
+        "value": null,
+        "label": "Delivery Attempt",
+        "placeholder": ""
+      },
+      {
+        "name": "category",
+        "type": "string",
+        "value": null,
+        "label": "Categories",
+        "placeholder": ""
+      },
+      {
+        "name": "url",
+        "type": "string",
+        "value": null,
+        "label": "Clicked URL",
+        "placeholder": ""
+      },
+      {
+        "name": "useragent",
+        "type": "string",
+        "value": null,
+        "label": "User Agent",
+        "placeholder": ""
+      },
+      {
+        "name": "ip",
+        "type": "string",
+        "value": null,
+        "label": "IP Address",
+        "placeholder": ""
+      },
+      {
+        "name": "tls",
+        "type": "string",
+        "value": null,
+        "label": "TLS",
+        "placeholder": ""
+      },
+      {
+        "name": "body",
+        "type": "string",
+        "value": null,
+        "label": "Raw JSON Body",
         "placeholder": ""
       }
     ]
