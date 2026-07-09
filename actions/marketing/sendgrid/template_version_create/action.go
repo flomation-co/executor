@@ -69,6 +69,14 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	sendgrid.SetIfPresent(body, inputs, "html_content", "html_content")
 	sendgrid.SetIfPresent(body, inputs, "plain_content", "plain_content")
 	sendgrid.SetBoolIfSet(body, inputs, "generate_plain_content", "generate_plain_content")
+	// SendGrid defaults generate_plain_content to TRUE, which would silently
+	// overwrite a user-supplied plain_content with text derived from the HTML —
+	// so when the checkbox is untouched but plain text was provided, send false.
+	if _, set := sendgrid.OptionalBoolSet("generate_plain_content", inputs); !set {
+		if _, hasPlain := body["plain_content"]; hasPlain {
+			body["generate_plain_content"] = false
+		}
+	}
 	// The API takes active as an integer flag: 1 makes this the active version.
 	active, activeSet := sendgrid.OptionalBoolSet("active", inputs)
 	if activeSet {

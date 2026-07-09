@@ -496,7 +496,9 @@ func extractItems(raw map[string]interface{}, arrayKey string) []interface{} {
 // OptionalString extracts a string input, returning "" if absent.
 func OptionalString(name string, inputs []*core.Connection) string {
 	conn := core.FindConnection(name, inputs)
-	if conn == nil || conn.String() == nil {
+	// Check Value before String(): for non-string-family types (Secret, Object,
+	// Boolean...) Connection.String() renders a nil Value as "<nil>".
+	if conn == nil || conn.Value == nil || conn.String() == nil {
 		return ""
 	}
 	return strings.TrimSpace(*conn.String())

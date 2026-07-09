@@ -57017,7 +57017,7 @@
     ]
   },
   "marketing/sendgrid/contact_upsert": {
-    "hash": "a323d96a199f5c48e3f6864a41f619f5a0462d3a8bdfb8ef7960936bc453e496",
+    "hash": "08f38266aef509d4a7b141d08db7c444bd81cb3a9afca6e4cf7efcf0c16d4b06",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "SendGrid: Create or Update Contact",
@@ -57095,8 +57095,8 @@
         "name": "phone_number",
         "type": "string",
         "value": null,
-        "label": "Phone Number",
-        "placeholder": "+441234567890"
+        "label": "Phone Number (E.164)",
+        "placeholder": "+441234567890 — stored as the contact's Phone Number ID, an additional SendGrid contact identifier"
       },
       {
         "name": "address_line_1",
@@ -60087,7 +60087,7 @@
     ]
   },
   "marketing/sendgrid/template_version_create": {
-    "hash": "54d7f9202a2949e17909bab7dbbec3fe7f8b805ebf18c9472726bbe919baa527",
+    "hash": "64588c6862155227853dc5796d391806f677ed79c2250c2518617e20f3b20e23",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "SendGrid: Create Template Version",

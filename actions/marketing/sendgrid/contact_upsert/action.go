@@ -35,7 +35,7 @@ var Inputs = [...]core.Connection{
 	{Name: "first_name", Type: core.ConnectionTypeString, Label: "First Name", Placeholder: "Jane"},
 	{Name: "last_name", Type: core.ConnectionTypeString, Label: "Last Name", Placeholder: "Doe"},
 	{Name: "alternate_emails", Type: core.ConnectionTypeString, Label: "Alternate Emails", Placeholder: "Comma-separated additional addresses for this contact (up to 5)"},
-	{Name: "phone_number", Type: core.ConnectionTypeString, Label: "Phone Number", Placeholder: "+441234567890"},
+	{Name: "phone_number", Type: core.ConnectionTypeString, Label: "Phone Number (E.164)", Placeholder: "+441234567890 — stored as the contact's Phone Number ID, an additional SendGrid contact identifier"},
 	{Name: "address_line_1", Type: core.ConnectionTypeString, Label: "Address Line 1", Placeholder: "1 High Street"},
 	{Name: "address_line_2", Type: core.ConnectionTypeString, Label: "Address Line 2", Placeholder: "Suite 4"},
 	{Name: "city", Type: core.ConnectionTypeString, Label: "City", Placeholder: "London"},
@@ -70,7 +70,9 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	sendgrid.SetIfPresent(contact, inputs, "first_name", "first_name")
 	sendgrid.SetIfPresent(contact, inputs, "last_name", "last_name")
 	sendgrid.SetCSVIfPresent(contact, inputs, "alternate_emails", "alternate_emails")
-	sendgrid.SetIfPresent(contact, inputs, "phone_number", "phone_number")
+	// The upsert endpoint's writable field is phone_number_id (the E.164 number
+	// acting as a contact identifier); plain phone_number is response-only.
+	sendgrid.SetIfPresent(contact, inputs, "phone_number_id", "phone_number")
 	sendgrid.SetIfPresent(contact, inputs, "address_line_1", "address_line_1")
 	sendgrid.SetIfPresent(contact, inputs, "address_line_2", "address_line_2")
 	sendgrid.SetIfPresent(contact, inputs, "city", "city")
