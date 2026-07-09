@@ -84,11 +84,23 @@ func GetAuth(inputs []*core.Connection) (Auth, error) {
 	if strings.HasPrefix(token, "${") || strings.HasPrefix(realm, "${") {
 		return Auth{}, fmt.Errorf("QuickBooks credential did not resolve — connect and authorise a QuickBooks account in this environment")
 	}
-	sandbox := false
-	if b := OptionalBool("sandbox", inputs); b != nil {
-		sandbox = *b
+	return Auth{Token: token, Realm: realm, Sandbox: resolveSandbox(inputs)}, nil
+}
+
+// resolveSandbox reports whether to target Intuit's sandbox host. The value is
+// no longer a user-facing toggle: the editor auto-fills the hidden `sandbox`
+// input with ${credentials.X.sandbox}, which resolves to "true"/"false" from
+// the credential metadata captured at connect time (driven by the QuickBooks
+// app's OAuth config). Falls back to a legacy boolean input, and defaults to
+// production (false) when unset or unresolved.
+func resolveSandbox(inputs []*core.Connection) bool {
+	if s := strings.TrimSpace(OptionalString("sandbox", inputs)); s != "" && !strings.HasPrefix(s, "${") {
+		return strings.EqualFold(s, "true")
 	}
-	return Auth{Token: token, Realm: realm, Sandbox: sandbox}, nil
+	if b := OptionalBool("sandbox", inputs); b != nil {
+		return *b
+	}
+	return false
 }
 
 func (a Auth) baseURL() string {
