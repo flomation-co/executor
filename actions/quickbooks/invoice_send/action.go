@@ -27,7 +27,13 @@ var Inputs = [...]core.Connection{
 	{Name: "send_to", Type: core.ConnectionTypeString, Label: "Send To (Email)", Placeholder: "ada@example.com"},
 }
 
-var Outputs = quickbooks_common.StandardOutputs
+var Outputs = [...]core.Connection{
+	{Name: "tool_result", Type: core.ConnectionTypeString, Label: "Result Summary"},
+	{Name: "id", Type: core.ConnectionTypeString, Label: "Object ID"},
+	{Name: "result", Type: core.ConnectionTypeObject, Label: "Result"},
+	{Name: "success", Type: core.ConnectionTypeBoolean, Label: "Success"},
+	{Name: "error", Type: core.ConnectionTypeString, Label: "Error"},
+}
 
 func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[string]interface{}, error) {
 	auth, err := quickbooks_common.GetAuth(inputs)

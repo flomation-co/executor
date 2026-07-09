@@ -50961,7 +50961,7 @@
     ]
   },
   "quickbooks/account_create": {
-    "hash": "2d170653920b7a777d3058d1fdfd97f56e223ce4c15ad7de59a2a8aef9a864b5",
+    "hash": "5ba5331ef90a30341f202107ba772c87f235a8316670db1cf0d7e1d96cde50b5",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Account: Create",
@@ -51029,10 +51029,46 @@
         "placeholder": "{\"AcctNum\":\"6000\",\"Description\":\"...\"}"
       }
     ],
-    "outputs": null
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Object ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Result",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
   },
   "quickbooks/account_get": {
-    "hash": "6ca8b4ffc94c466f6c962beaf7daa0e9d73cb5f6eacacf3837555164d7e68f31",
+    "hash": "ee2570c9c823e4710aed78346f654dc4cdb01e39e1a3617140703a63ca4c5ea8",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Account: Get",
@@ -51079,10 +51115,46 @@
         "required": true
       }
     ],
-    "outputs": null
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Object ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Result",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
   },
   "quickbooks/account_query": {
-    "hash": "179cb7b0ef04ab3ef8594e12aeda84c028058382d6cee81c7f64b3c5c1e215d6",
+    "hash": "0ad95e6bfcf9f4b5c519f04536a153a36a4fd1f05f99bb9bc1531095b2c03fdc",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Account: Query",
@@ -51142,10 +51214,46 @@
         "placeholder": "100"
       }
     ],
-    "outputs": null
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Object ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Result",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
   },
   "quickbooks/bill_create": {
-    "hash": "54324f4125885aad6bca0a523175df0804f53400b2cf7186a79b3188c68cf9c0",
+    "hash": "d130eff5f7360fe462b8c7925530a1422e7c525b3884782a2b47826de4e7b079",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Bill: Create",
@@ -51228,10 +51336,46 @@
         "placeholder": "{\"PrivateNote\":\"...\"}"
       }
     ],
-    "outputs": null
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Object ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Result",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
   },
   "quickbooks/bill_get": {
-    "hash": "1c94f2f7a893cb0b306e5e464484eb692450a8ed3b0426b0e18e7d6daabcf076",
+    "hash": "70f9af45a1db09c1fb0966a1b3d66dce1d5e5fb2baec19b84153050e55ed5252",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Bill: Get",
@@ -51278,10 +51422,46 @@
         "required": true
       }
     ],
-    "outputs": null
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Object ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Result",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
   },
   "quickbooks/bill_query": {
-    "hash": "45025c9c39cd77cf96a7f1cd8c3beb10d2ccacd422973840a92d454f68d4b2b0",
+    "hash": "f40145df389c2e3e6cd61188725fec63b499d0e84f582bd534b57197bf165e39",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Bill: Query",
@@ -51327,10 +51507,46 @@
         "placeholder": "select * from Bill where VendorRef = '56'"
       }
     ],
-    "outputs": null
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Object ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Result",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
   },
   "quickbooks/billpayment_create": {
-    "hash": "691c781ae30d461f19ad93ecafc82dcd6d2bd9f375cbe926f3002f6c589c4bbd",
+    "hash": "bfaf7cf6511a1179fba6f1ee709dca7c46b1b1ebf50fd32087fc3da22af33404",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Bill Payment: Create",
@@ -51424,10 +51640,46 @@
         "placeholder": "{\"CheckPayment\":{\"BankAccountRef\":{\"value\":\"36\"}}}"
       }
     ],
-    "outputs": null
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Object ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Result",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
   },
   "quickbooks/billpayment_get": {
-    "hash": "e3125d39ee93ad209a4511b46a12fa9709717193e4338cecce9bd19963c019c2",
+    "hash": "ba0b2d32fe73eeb062507061e208d52db1c2c8ac7a034add0dcbe77fe17c68f2",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Bill Payment: Get",
@@ -51474,10 +51726,46 @@
         "required": true
       }
     ],
-    "outputs": null
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Object ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Result",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
   },
   "quickbooks/billpayment_query": {
-    "hash": "67953b0eadbf490e287f4af1ee44995f4901e720679245c49219ced07422ac8c",
+    "hash": "95ce2103bf27886201fca97c491c310d0127f36ccca2e5a13124fce8bf714e76",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Bill Payment: Query",
@@ -51523,10 +51811,46 @@
         "placeholder": "select * from BillPayment where VendorRef = '56'"
       }
     ],
-    "outputs": null
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Object ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Result",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
   },
   "quickbooks/companyinfo_get": {
-    "hash": "0356332ba8911fd9e114270be46f3a79e43013dfb78f4c712322c0bdbe539636",
+    "hash": "0434bade51a564a373075ded6ce9722ee89471f85e1be874e4a5f32b68afdf38",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Company Info: Get",
@@ -51565,10 +51889,46 @@
         "placeholder": ""
       }
     ],
-    "outputs": null
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Object ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Result",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
   },
   "quickbooks/creditmemo_create": {
-    "hash": "bbd47cb4edc00ceda44cca8135ece880fc10b700eac3c7899f70160a0adecb89",
+    "hash": "9a181114b01a5618d80c7e02fdaaac59321047d5bc1b65dbfa0b5875c60216f2",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Credit Memo: Create",
@@ -51644,10 +52004,46 @@
         "placeholder": "{\"BillEmail\":{\"Address\":\"...\"}}"
       }
     ],
-    "outputs": null
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Object ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Result",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
   },
   "quickbooks/creditmemo_get": {
-    "hash": "71741e1f16c23113b253287a5e729e6616f1acfbebe20ea0285a38f70ebd59a2",
+    "hash": "a22e192941a1cf8f48db6ddf184f493d5eeff603206aceefe9ef85c7aacc2458",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Credit Memo: Get",
@@ -51694,10 +52090,46 @@
         "required": true
       }
     ],
-    "outputs": null
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Object ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Result",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
   },
   "quickbooks/creditmemo_query": {
-    "hash": "14507cd70681298c991c77ed5dc64db366c7fa37a87270b8b85c3b435f852e9b",
+    "hash": "44959d67b34c1d43a59f725c9f6fe4d7e97aeaf4cdc1742cd7ad7d6e328f9b9d",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Credit Memo: Query",
@@ -51757,10 +52189,46 @@
         "placeholder": "100"
       }
     ],
-    "outputs": null
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Object ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Result",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
   },
   "quickbooks/customer_create": {
-    "hash": "f8a2cecd549b802c1321be775314b656d7f6a8b3c94fc9d618e8f197ae054664",
+    "hash": "270d6272abb4f93a1187388bd47518ceaec06fdf12f235e88c755fbdc9002359",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Customer: Create",
@@ -51849,10 +52317,46 @@
         "placeholder": "{\"BillAddr\":{\"Line1\":\"...\",\"City\":\"...\"}}"
       }
     ],
-    "outputs": null
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Object ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Result",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
   },
   "quickbooks/customer_get": {
-    "hash": "2d940d34b186d217530c931eeb741ac87a1cacb8a6692ddc61810ab1dcccbfa8",
+    "hash": "994711ee2ae67aa071e493b09d6b6e799d7d2027f12b77405ba2c50541b4e58d",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Customer: Get",
@@ -51899,10 +52403,46 @@
         "required": true
       }
     ],
-    "outputs": null
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Object ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Result",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
   },
   "quickbooks/customer_query": {
-    "hash": "15c6c14de2ee1b5aa745cd24d0090b0afa9df0efc6da6f8b8429966ddba48a1c",
+    "hash": "dc0deb1eb5feb5960f5604aedf5755d2591746d346cd81a17dedf14c48e4d1a9",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Customer: Query",
@@ -51948,10 +52488,46 @@
         "placeholder": "select * from Customer where Active = true"
       }
     ],
-    "outputs": null
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Object ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Result",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
   },
   "quickbooks/customer_update": {
-    "hash": "e2577a3ef5276977f188aae92611bfa629b5bca53bbb4350066ee1b8a655dc18",
+    "hash": "7e1af194cdcabcfb86dd1cea38e4dac9bb0e417d969b7528f7f3d3c09f027547",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Customer: Update",
@@ -52055,10 +52631,46 @@
         "placeholder": "{\"Notes\":\"...\"}"
       }
     ],
-    "outputs": null
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Object ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Result",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
   },
   "quickbooks/deposit_create": {
-    "hash": "a487de9dd87be99b0d711f6c7797e82d256d326e7ae2b9810c0ccc67a0eb29c9",
+    "hash": "a0d8c7fdbd16ffb8dd009a2ba4f78ce520ea7d8ae04ba502e5194497d3c2f969",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Deposit: Create",
@@ -52134,10 +52746,46 @@
         "placeholder": "{\"CurrencyRef\":{\"value\":\"GBP\"}}"
       }
     ],
-    "outputs": null
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Object ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Result",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
   },
   "quickbooks/deposit_get": {
-    "hash": "0a78e59866ea5a6824e775e71fdf5f6f3b4862c5447c87e40e7e695691bbadfb",
+    "hash": "c1b1b9af412fff251a63216241e8ecb535e0e0c32ea7e9d4b36363f32c49047e",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Deposit: Get",
@@ -52184,10 +52832,46 @@
         "required": true
       }
     ],
-    "outputs": null
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Object ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Result",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
   },
   "quickbooks/deposit_query": {
-    "hash": "00fed09a687b609894eef7a64c98b6856cfc453e769803b3a24c35c7a4fa75de",
+    "hash": "b86bdba2b010f6072a4134ff1db122c39eada1616fae350a9aaa74eaf6596949",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Deposit: Query",
@@ -52247,10 +52931,46 @@
         "placeholder": "select * from Deposit"
       }
     ],
-    "outputs": null
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Object ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Result",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
   },
   "quickbooks/employee_create": {
-    "hash": "ce060f47299fd79c3b122729ef46a3fb23960fc1b7abfd994c4869f3bb6dcb36",
+    "hash": "84bc1ec52b8256347cb117aa2ef410395ac65c163ec8d4b9c6bc1ef142e05761",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Employee: Create",
@@ -52325,10 +53045,46 @@
         "placeholder": "{\"PrimaryAddr\":{\"Line1\":\"...\",\"City\":\"...\"}}"
       }
     ],
-    "outputs": null
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Object ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Result",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
   },
   "quickbooks/employee_get": {
-    "hash": "5fe683514ac35bb193792cd8fad38538f546305cd0804c8dec3c8b103cce13e6",
+    "hash": "562220e4d4f6bc765afe7066318d06951707384e713f785c75e1001d7eda6e99",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Employee: Get",
@@ -52375,10 +53131,46 @@
         "required": true
       }
     ],
-    "outputs": null
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Object ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Result",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
   },
   "quickbooks/employee_query": {
-    "hash": "f5a0bf9a1cf40c066d3b5a52dfb7a8666b9b1af744da0a3cb60fdd2a9549bd60",
+    "hash": "1357e8beaba8044a75fce1073f0d658bac60df9b2b1a22a6447e47248d097a17",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Employee: Query",
@@ -52438,10 +53230,46 @@
         "placeholder": "select * from Employee"
       }
     ],
-    "outputs": null
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Object ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Result",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
   },
   "quickbooks/estimate_create": {
-    "hash": "aaa8de3597521d0e147bca27b16ee5d4e5b70b279fefcf8662915364305c6f14",
+    "hash": "59a6a83990ebca92b93e47616b3bb1b54de788122eeac69992ec4f1e8e1193b5",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Estimate: Create",
@@ -52517,10 +53345,46 @@
         "placeholder": "{\"BillEmail\":{\"Address\":\"...\"}}"
       }
     ],
-    "outputs": null
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Object ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Result",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
   },
   "quickbooks/estimate_get": {
-    "hash": "2793698042a3f2629645e5019469fdc9ca2cef2fc3ee6a6e1cc16de7fd0beab9",
+    "hash": "c8415a67989a9c1ef1e68e19536fadbcca46ac1a55081c61cfcc0a44b37d1356",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Estimate: Get",
@@ -52567,10 +53431,46 @@
         "required": true
       }
     ],
-    "outputs": null
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Object ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Result",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
   },
   "quickbooks/estimate_query": {
-    "hash": "c30531583845050b354fc52b74d873ccc673326d843dd2e256c20a7a1e9db747",
+    "hash": "5357c99393b7d8e8c2de88b666e4ff65069a6343806237463131d6c9791a1c79",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Estimate: Query",
@@ -52630,10 +53530,46 @@
         "placeholder": "100"
       }
     ],
-    "outputs": null
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Object ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Result",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
   },
   "quickbooks/invoice_create": {
-    "hash": "2a36eec39fcfd12c2a6e10c2ae4f7357804a0df1f6ca110d6f4aef9aeb903794",
+    "hash": "d62f36a6d85ec0ddd869f30d8f3c0ea3dd386e5d0c1c5f6671eb02b66b07a30a",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Invoice: Create",
@@ -52716,10 +53652,46 @@
         "placeholder": "{\"CustomerMemo\":{\"value\":\"Thank you\"}}"
       }
     ],
-    "outputs": null
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Object ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Result",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
   },
   "quickbooks/invoice_get": {
-    "hash": "f72608a332e841d437f9addaa919d1b8c754d027a255ed748a541733655f2e05",
+    "hash": "9df4deec5bc5ca9763e1523c7b5471dc87e62c9f5947756ff6df394da7c41a79",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Invoice: Get",
@@ -52766,10 +53738,46 @@
         "required": true
       }
     ],
-    "outputs": null
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Object ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Result",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
   },
   "quickbooks/invoice_query": {
-    "hash": "ce92a4eaec0b071079cb1abcece84ae9e7f52858f7a39bf245b4b51025d3913a",
+    "hash": "1b7fec439e964c742ba79be6d37ac6e166495dbd54612d022823d2f7076752e0",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Invoice: Query",
@@ -52815,10 +53823,46 @@
         "placeholder": "select * from Invoice where TotalAmt \u003e 100"
       }
     ],
-    "outputs": null
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Object ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Result",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
   },
   "quickbooks/invoice_send": {
-    "hash": "9d87d4d958ff91d4a91393e09bd11df2dba4f2f75ec02997320caa8221ac0846",
+    "hash": "bd9009c45a8361d2f765a210c016886c816908b646c999597beec560141d65c4",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Invoice: Send",
@@ -52872,10 +53916,46 @@
         "placeholder": "ada@example.com"
       }
     ],
-    "outputs": null
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Object ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Result",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
   },
   "quickbooks/invoice_update": {
-    "hash": "6fa140e802de022cff5386e6524bbf2b24f47d27e20c20848632362af3ddbba0",
+    "hash": "5dd95dbdf397e45b58fc1725b9c22c398dc6db35387809bdb7bd0bb676bead7d",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Invoice: Update",
@@ -52965,10 +54045,46 @@
         "placeholder": "{\"CustomerMemo\":{\"value\":\"Updated\"}}"
       }
     ],
-    "outputs": null
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Object ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Result",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
   },
   "quickbooks/invoice_void": {
-    "hash": "9ddce2ab2a820f60110fc4f3829263393697df695b079bfb0f44bfd3e8fcef74",
+    "hash": "9b9d0fc7b0862c2cf12ed67194c875214641d128d578850e2dd28aa1e16a273d",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Invoice: Void",
@@ -53023,10 +54139,46 @@
         "required": true
       }
     ],
-    "outputs": null
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Object ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Result",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
   },
   "quickbooks/item_create": {
-    "hash": "62a1c428d5cb73a31fb73b3c96d1ef5a0e85f56fad37cce7538a2987b7ec356c",
+    "hash": "e6f2c22372096c23ceeb971057684fd224998ca37d5bad202d61fbff284d7fab",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Item: Create",
@@ -53117,10 +54269,46 @@
         "placeholder": "{\"Description\":\"...\",\"Taxable\":true}"
       }
     ],
-    "outputs": null
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Object ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Result",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
   },
   "quickbooks/item_get": {
-    "hash": "9ebea997328cd796f65110efa10fadbf4d60e4bc7b0a566909797385ae083cd0",
+    "hash": "51241820988ccf3a45a4c790754b7c286ff1110eeb1c624fa93a81dc7d1a5954",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Item: Get",
@@ -53167,10 +54355,46 @@
         "required": true
       }
     ],
-    "outputs": null
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Object ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Result",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
   },
   "quickbooks/item_query": {
-    "hash": "5e4aa02c5e5677f9ef2ce61761a5c28940083a5fb66cbd36f7a0750416c019e6",
+    "hash": "4e82ab7fd46ce6c47340880866b79ae6aae56ed5beddf2668e648790c004496c",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Item: Query",
@@ -53216,10 +54440,46 @@
         "placeholder": "select * from Item where Type = 'Service'"
       }
     ],
-    "outputs": null
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Object ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Result",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
   },
   "quickbooks/journalentry_create": {
-    "hash": "153f0ccffc787e1354b5f147da34043243eb84de3abdd3b79c5258931c71f807",
+    "hash": "b6351032b2a741e08baded1485e9311112acb3cfb6cb33812f2d1f6686bfa3d9",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Journal Entry: Create",
@@ -53294,10 +54554,46 @@
         "placeholder": "{\"CurrencyRef\":{\"value\":\"GBP\"}}"
       }
     ],
-    "outputs": null
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Object ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Result",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
   },
   "quickbooks/journalentry_get": {
-    "hash": "cc88187213a2ab5229f87f17eb0abcf3036c8d6aa6ec64d4927378b9442f4433",
+    "hash": "b74dce3816a4ecc1a5f4073512af63132d61b1b9813202bae6bbaf03e68e857b",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Journal Entry: Get",
@@ -53344,10 +54640,46 @@
         "required": true
       }
     ],
-    "outputs": null
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Object ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Result",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
   },
   "quickbooks/journalentry_query": {
-    "hash": "273b5a86b4ebb9f421fcf45e70a1e8bb4ebc1c5cfc4232cc89100d681e8396af",
+    "hash": "cffa9885ab10fbcfb1f75210bbbd21d8860c404c2ae315cb247b3c052dc3f049",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Journal Entry: Query",
@@ -53407,10 +54739,46 @@
         "placeholder": "select * from JournalEntry"
       }
     ],
-    "outputs": null
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Object ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Result",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
   },
   "quickbooks/payment_create": {
-    "hash": "6930f56992bb6665b8d50d53870edfb5b01babdcae60fc052f22756ef05b1a2f",
+    "hash": "dff72eb6efb5edae847865e5d3bae3df2b730488dc12384976c9d4ffd30d8159",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Payment: Create",
@@ -53486,10 +54854,46 @@
         "placeholder": "{\"PrivateNote\":\"...\"}"
       }
     ],
-    "outputs": null
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Object ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Result",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
   },
   "quickbooks/payment_get": {
-    "hash": "4532099d23dc25c0557e628180ea0573dcce30b461abd16ff1f9b2a167074c73",
+    "hash": "11145b03425ccabf6c350d0523191614eebcb8c3fe0034c62246c5bed3c9451b",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Payment: Get",
@@ -53536,10 +54940,46 @@
         "required": true
       }
     ],
-    "outputs": null
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Object ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Result",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
   },
   "quickbooks/payment_query": {
-    "hash": "65d860e6584d5996c5002f9aaaa8e91c5b15830d0fa0cb232427e88cd1b95671",
+    "hash": "09fa3d98ce8644de0a2f9f614cf084f167105f7ff5c3ccbbf002e4d2090968a2",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Payment: Query",
@@ -53585,10 +55025,46 @@
         "placeholder": "select * from Payment where CustomerRef = '21'"
       }
     ],
-    "outputs": null
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Object ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Result",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
   },
   "quickbooks/purchaseorder_create": {
-    "hash": "306a1090544221e3693fbdb6c85fdfdc241e05a9cd30f2bb446aa868e8791724",
+    "hash": "4c60cf01ad572423dc61e02e58bb406e6b7b852751bf0ee1da57c8ba458633cc",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Purchase Order: Create",
@@ -53672,10 +55148,46 @@
         "placeholder": "{\"ShipAddr\":{\"Line1\":\"...\"}}"
       }
     ],
-    "outputs": null
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Object ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Result",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
   },
   "quickbooks/purchaseorder_get": {
-    "hash": "77ae2b84b1d88abecccd0acc26d484815ac3864cb8d8f2113b685344476c75cb",
+    "hash": "8a5a1133055ddea881cd6a0141e997ffbd66cc8f1cb89b42ecd8ecdd0b39bda5",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Purchase Order: Get",
@@ -53722,10 +55234,46 @@
         "required": true
       }
     ],
-    "outputs": null
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Object ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Result",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
   },
   "quickbooks/purchaseorder_query": {
-    "hash": "d474c30254f7bf06e71cfe4af9d9acb7240d487a4cc7c8c366c6b50b971cb1f9",
+    "hash": "4ba063f6cc9e9977d7165239fc3d52334f194167be82ec9a70492182a922c3d0",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Purchase Order: Query",
@@ -53785,10 +55333,46 @@
         "placeholder": "100"
       }
     ],
-    "outputs": null
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Object ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Result",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
   },
   "quickbooks/query": {
-    "hash": "7aa3b786793a37d0138efd96722415e0e75e8eaa1db522139b5d24ac1a512295",
+    "hash": "a8b44fb587dc62e1df028b0f69b545337602ead3a3ce62dec7e4a6020de19097",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Query",
@@ -53835,10 +55419,46 @@
         "required": true
       }
     ],
-    "outputs": null
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Object ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Result",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
   },
   "quickbooks/report": {
-    "hash": "f166ce3e4e436b0cb845c3185ae27276e1af6149f8086dcd9970dfe7fe8fd2af",
+    "hash": "026ad3bc3f502497fdb3ac21cb8ed9b8a6eac2275d9000d8f4b709fc9e427734",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Report",
@@ -53899,10 +55519,46 @@
         "placeholder": "2026-12-31"
       }
     ],
-    "outputs": null
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Object ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Result",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
   },
   "quickbooks/salesreceipt_create": {
-    "hash": "f0b67888888fa32bc05048850f5187185712443c6d7b63783b7d36a9f7a9b09f",
+    "hash": "0a3de31ab31822ea2ca9394dff6073dbd6a75c79816de2af38e61b783d07a018",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Sales Receipt: Create",
@@ -53978,10 +55634,46 @@
         "placeholder": "{\"BillEmail\":{\"Address\":\"...\"}}"
       }
     ],
-    "outputs": null
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Object ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Result",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
   },
   "quickbooks/salesreceipt_get": {
-    "hash": "c826cd3d5b5f1ea65e88328ac837bc7f4f164474e8df26cb5057b082ddb413fe",
+    "hash": "32eed0485063fb50bf8000723bc27d00ebdb64b6dd67ed2ddce7fffc1e28a7ea",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Sales Receipt: Get",
@@ -54028,10 +55720,46 @@
         "required": true
       }
     ],
-    "outputs": null
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Object ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Result",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
   },
   "quickbooks/salesreceipt_query": {
-    "hash": "8f0504796ba41b409ebe7dfc743a178e4044cbef4e73333d55064e92fe1344a6",
+    "hash": "e6e599f8e0275effcef34cf625e49f8e7f32749cb3578cc499a8f714cdd5e8cd",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Sales Receipt: Query",
@@ -54091,10 +55819,46 @@
         "placeholder": "100"
       }
     ],
-    "outputs": null
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Object ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Result",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
   },
   "quickbooks/taxcode_get": {
-    "hash": "fa2ee5747c8ac8ec22f2c9bb587bf3f8468c37999caebfb3baec9b50fab17ad4",
+    "hash": "c4993fd86f8fab2e73e902738a42a07744024c6cdd86ec40758b842859e65b4b",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Tax Code: Get",
@@ -54141,10 +55905,46 @@
         "required": true
       }
     ],
-    "outputs": null
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Object ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Result",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
   },
   "quickbooks/taxcode_query": {
-    "hash": "a5d27d067196488fef03053b10fb24e6e8d7d53c07917cbaf4a9a91c369b7a05",
+    "hash": "e53bdfd56fa0d21b0be8bff47998bc299afc6e63a040f96cf1beed5c2111fc44",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Tax Code: Query",
@@ -54204,10 +56004,46 @@
         "placeholder": "select * from TaxCode"
       }
     ],
-    "outputs": null
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Object ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Result",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
   },
   "quickbooks/vendor_create": {
-    "hash": "86c2084e81ba844b23ab3fed555daff586fff76e16ea1dc0993a4b4e496b01bf",
+    "hash": "35d1e4d527d80e5e2b05f93b18158cc4fec5341b697ce4c9194d6ff888c180ae",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Vendor: Create",
@@ -54282,10 +56118,46 @@
         "placeholder": "{\"BillAddr\":{\"Line1\":\"...\",\"City\":\"...\"}}"
       }
     ],
-    "outputs": null
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Object ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Result",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
   },
   "quickbooks/vendor_get": {
-    "hash": "8e6f3fc716db23939bd032b7e8bbd0fd55d4fc60136a7b853b87dfc96b907535",
+    "hash": "ee05799a0d3da8bf344e0c12519c90f24e4b7e5d1deeb4f9f082e8f935010991",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Vendor: Get",
@@ -54332,10 +56204,46 @@
         "required": true
       }
     ],
-    "outputs": null
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Object ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Result",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
   },
   "quickbooks/vendor_query": {
-    "hash": "844116d6010eb33d62e767ce4bec74d9d4e54dbe454c044f1ba2c4276da4f73a",
+    "hash": "aae89b4df7580b8c26845aae7bdb5eb7695e3fed867c7941027b81d1287ab5e0",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Vendor: Query",
@@ -54381,7 +56289,43 @@
         "placeholder": "select * from Vendor where Active = true"
       }
     ],
-    "outputs": null
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Object ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Result",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
   },
   "scheduling/acuity/appointment_cancel": {
     "hash": "6dde627f25272f04109da6dc2f1b7a3ad8006f99b26d247580b82e6d68fe389d",
@@ -79323,7 +81267,7 @@
     ]
   },
   "xero/account_create": {
-    "hash": "828236782c3c60da5e24c30c75fea691e4338dec3391dbfd906fdaf17ed832f7",
+    "hash": "4c5a2e95a252d22532152fbd2ad8028146740da0db771c7e3144b8ef281829ba",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Account: Create",
@@ -79391,10 +81335,46 @@
         "placeholder": "{\"TaxType\":\"OUTPUT2\"}"
       }
     ],
-    "outputs": null
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Object ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Result",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
   },
   "xero/account_get": {
-    "hash": "cf84b6db9f00147484dc132cddc4dd6521bfbac71a48e8bf6e03fa293f591b9c",
+    "hash": "d38cfac968de28603f41d5bd18e8f96f49ed162203c526d59667eb11ca774924",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Account: Get",
@@ -79434,10 +81414,46 @@
         "required": true
       }
     ],
-    "outputs": null
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Object ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Result",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
   },
   "xero/account_list": {
-    "hash": "bd63bd137e8f7d2247a1f2870eda985652d0d9f48c62666c14b428c8b0a0cce0",
+    "hash": "14fbec90fee4c4c75901bd7db1737e8de80a958f3c3410d3af80555986f25bfc",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Account: List",
@@ -79483,10 +81499,46 @@
         "placeholder": "Name"
       }
     ],
-    "outputs": null
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Object ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Result",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
   },
   "xero/account_update": {
-    "hash": "aa2155b7758854f4ec989c32d7cc77d3b53bc35b38ada0fbd2dbb87291db54ef",
+    "hash": "89760ffa954109ee4d288a47022be6be980c6d11efac81c868b4f2a74fe277b5",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Account: Update",
@@ -79561,10 +81613,46 @@
         "placeholder": "{\"TaxType\":\"OUTPUT2\"}"
       }
     ],
-    "outputs": null
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Object ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Result",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
   },
   "xero/bank_transaction_create": {
-    "hash": "63aac7d2ab800915417c29718abaf5e414e5261b8c7c6f3c03fcd45e7953ca9d",
+    "hash": "4533da01cd0cbdba33e641f146b07f96a01f88c28add121aeabc4f998fb6e0b1",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Bank Transaction: Create",
@@ -79665,10 +81753,46 @@
         "placeholder": "{\"IsReconciled\":false}"
       }
     ],
-    "outputs": null
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Object ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Result",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
   },
   "xero/bank_transaction_get": {
-    "hash": "20483399bd13035afc308cada3410aba0f44468ca4e2267c7bee10529aadd3c5",
+    "hash": "ae33d070849e2984103d0564fc952719306e3c93d33581b4c3be1c8e041836b9",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Bank Transaction: Get",
@@ -79708,10 +81832,46 @@
         "required": true
       }
     ],
-    "outputs": null
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Object ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Result",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
   },
   "xero/bank_transaction_list": {
-    "hash": "898dd40739e527137430c25937570bbc81cd347472f5da1bf540e4d44ca1e54b",
+    "hash": "683d2216a99ef568eaf78d6bef734b31ca19b7c809dfd3f9bf5b1b8962a96806",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Bank Transaction: List",
@@ -79757,10 +81917,46 @@
         "placeholder": "1"
       }
     ],
-    "outputs": null
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Object ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Result",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
   },
   "xero/bank_transfer_create": {
-    "hash": "3bf8f54f63f80fa652d12450162df8ed34fb246b6cec91403e5b023187525e86",
+    "hash": "6e7dbf9e3a5c8cca912a5b4e81e81e83964e748a6f1f80e630e7d1279337cb34",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Bank Transfer: Create",
@@ -79830,10 +82026,46 @@
         "placeholder": "{\"Reference\":\"Internal transfer\"}"
       }
     ],
-    "outputs": null
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Object ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Result",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
   },
   "xero/bank_transfer_list": {
-    "hash": "7770a91524cd9f5dad53f46bccd0130f70dc4671d59b61fc28223f4f36f957c9",
+    "hash": "a720dbf54b8d25f08bef3751684d030af02d05209fc6a924a59432bd7865a7f2",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Bank Transfer: List",
@@ -79879,10 +82111,46 @@
         "placeholder": "1"
       }
     ],
-    "outputs": null
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Object ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Result",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
   },
   "xero/contact_create": {
-    "hash": "0000168ebe3b9ed78338387cbedd05e07dea0dce323222af14cad4241002874c",
+    "hash": "ba34d37bb7902f06b806150ecdedd29b8060942c62192d500e2f06aa39d457a9",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Contact: Create",
@@ -79964,10 +82232,46 @@
         "placeholder": "{\"Phones\":[{\"PhoneType\":\"DEFAULT\",\"PhoneNumber\":\"...\"}]}"
       }
     ],
-    "outputs": null
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Object ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Result",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
   },
   "xero/contact_get": {
-    "hash": "a82dcf7472c996c40583419a515369fd9e934b89f5cf62b56b35ccf93985624c",
+    "hash": "9d05936415844b0cf3ac61d0adcb72c8abb6d1c277e8510e4c06c8f0309f81b3",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Contact: Get",
@@ -80007,10 +82311,46 @@
         "required": true
       }
     ],
-    "outputs": null
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Object ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Result",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
   },
   "xero/contact_list": {
-    "hash": "9937d3264e22171f4e1baf7e5fc34ce3f9697296c2184d324535ee23e6bc9cb1",
+    "hash": "31fe4db1e3aed317e99f55b670796d08730b2c00e2489340c834eecb45e1a8e7",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Contact: List",
@@ -80063,10 +82403,46 @@
         "placeholder": "1"
       }
     ],
-    "outputs": null
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Object ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Result",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
   },
   "xero/contact_update": {
-    "hash": "9280954b037ab0adcf91635764aef5c8613b5948380a1433f27274db9e6829ab",
+    "hash": "83420ed345bb3ee22c54fdb1efb51f3c312cd16ce16151cb8a4683c609b239bb",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Contact: Update",
@@ -80155,10 +82531,46 @@
         "placeholder": "{\"Phones\":[{\"PhoneType\":\"DEFAULT\",\"PhoneNumber\":\"...\"}]}"
       }
     ],
-    "outputs": null
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Object ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Result",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
   },
   "xero/credit_note_create": {
-    "hash": "30719f715f99e7e2a31c91298db178fddf747508ec70281ab16803601247f77c",
+    "hash": "3d402c330957433c0d46ae3a29c2904a31c042615c18e70a7909690924295cfb",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Credit Note: Create",
@@ -80264,10 +82676,46 @@
         "placeholder": "{\"SentToContact\":true}"
       }
     ],
-    "outputs": null
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Object ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Result",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
   },
   "xero/credit_note_get": {
-    "hash": "0e98eaa9be6bebbcae1b9616b97a41af390622076764ed3727b40c201130c58e",
+    "hash": "57129f755fb4f5c100279f22484ca0f53a999d68aa73f82d4ed7b04c03157137",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Credit Note: Get",
@@ -80307,10 +82755,46 @@
         "required": true
       }
     ],
-    "outputs": null
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Object ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Result",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
   },
   "xero/credit_note_list": {
-    "hash": "b3c51abba2e157152d08120e8735d80fa2e57f9e8749d63ccf605d27ee5b2083",
+    "hash": "93c8fe18462efe3490acdbb86ac49f123983140ae1f6465d04bce54781ddc560",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Credit Note: List",
@@ -80356,10 +82840,46 @@
         "placeholder": "1"
       }
     ],
-    "outputs": null
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Object ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Result",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
   },
   "xero/invoice_create": {
-    "hash": "74b29090e3634977bdb22e48adaafc696ed290386c96cb992f836921dd122991",
+    "hash": "a44965dd29bd28c56d8deb576fecb5ab2d039d08e91c966423cf79aa8d031748",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Invoice: Create",
@@ -80501,10 +83021,46 @@
         "placeholder": "{\"BrandingThemeID\":\"...\"}"
       }
     ],
-    "outputs": null
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Object ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Result",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
   },
   "xero/invoice_email": {
-    "hash": "8ab7290d6ab5afb3e7cd1cb42ef4a970f3c6f505a6b27b65ba90ff8681885696",
+    "hash": "b93e50a3ca5cf563a9971a0d9d824bf965cbb73dcb93e764ec6829f1eef27bcd",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Invoice: Email",
@@ -80544,10 +83100,46 @@
         "required": true
       }
     ],
-    "outputs": null
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Object ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Result",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
   },
   "xero/invoice_get": {
-    "hash": "80c1f8407a13dd3a99e28baa77d4190b977e94afcb87046800f1342c8666bd8e",
+    "hash": "6012fcec0c25083e8989065ffe59021f2108f48f751b77265ca87a6fc16bbf5f",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Invoice: Get",
@@ -80587,10 +83179,46 @@
         "required": true
       }
     ],
-    "outputs": null
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Object ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Result",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
   },
   "xero/invoice_list": {
-    "hash": "5e4794c38db1b45f97da5788357fc28e1ac945de685371f3eaa88fe3eb3dfee4",
+    "hash": "4f35ce870242cc2322b9bc30306e5fe91ea7abc4e1935d7eee894e1f164b4c03",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Invoice: List",
@@ -80643,10 +83271,46 @@
         "placeholder": "1"
       }
     ],
-    "outputs": null
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Object ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Result",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
   },
   "xero/invoice_update": {
-    "hash": "1a0ba83254234d6a1a16e3264672525df994fbef0ca6a3e0b4acca3756d005c1",
+    "hash": "0df21a41080a8d12eaa889d1af03cb9e00ff5be32ea6340a2f7435edda1050eb",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Invoice: Update",
@@ -80777,10 +83441,46 @@
         "placeholder": "{\"BrandingThemeID\":\"...\"}"
       }
     ],
-    "outputs": null
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Object ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Result",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
   },
   "xero/invoice_void": {
-    "hash": "389c37ceefd73d28fbc7742c6bd4093680bd2151282eec5b3ff7ea638261cd39",
+    "hash": "6a2db3433ebd38d786f48e219c3f95115d59a67d07e13f01bb10bf647bd83408",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Invoice: Void",
@@ -80820,10 +83520,46 @@
         "required": true
       }
     ],
-    "outputs": null
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Object ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Result",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
   },
   "xero/item_create": {
-    "hash": "118b70203eabdebe526a168961cac81b12c9c312885867d054624e8e77cd1e63",
+    "hash": "608db777fda1f01e1bc11a42ebe4a30605dbf469a57aadb979adbbd42c90a8b0",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Item: Create",
@@ -80898,10 +83634,46 @@
         "placeholder": "{\"SalesDetails\":{\"UnitPrice\":10.0,\"AccountCode\":\"200\"}}"
       }
     ],
-    "outputs": null
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Object ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Result",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
   },
   "xero/item_get": {
-    "hash": "56a72fb0d4e1a518c9228f60c4c8759079a0cbb07646ab128f8eefd24a5a3dd2",
+    "hash": "e6e92671a776d38268527838ddf2a435bf5d2fd0c1740af2f71f66c77ba951e9",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Item: Get",
@@ -80941,10 +83713,46 @@
         "required": true
       }
     ],
-    "outputs": null
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Object ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Result",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
   },
   "xero/item_list": {
-    "hash": "181ab094226c36812687e187ae6887edbbe9de89588ec6ed8d779c1ca8c7f0fd",
+    "hash": "a27ee3d6656030692d346007d23c9113a6877d6330862ffc93e3465d8dae63a4",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Item: List",
@@ -80990,10 +83798,46 @@
         "placeholder": "Code"
       }
     ],
-    "outputs": null
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Object ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Result",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
   },
   "xero/item_update": {
-    "hash": "67ecdab49928340b5dccfcd0592e505fe52e6e1f7fea3e327b941bf02869f5fe",
+    "hash": "ed8006119aa303103b0ba5d930bcbdb63b8ebe1dc3d5c2eb7b9c89f43b46de4d",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Item: Update",
@@ -81075,10 +83919,46 @@
         "placeholder": "{\"SalesDetails\":{\"UnitPrice\":10.0,\"AccountCode\":\"200\"}}"
       }
     ],
-    "outputs": null
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Object ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Result",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
   },
   "xero/manual_journal_create": {
-    "hash": "29fd8224d2d6d51305613a12ad2c826d265e0ba73daf9abf3ffc61c6f91c8d52",
+    "hash": "d452d897b5526b9ff790bb574175be50e19ce71464f693b7e12da3a13bbc8902",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Manual Journal: Create",
@@ -81139,10 +84019,46 @@
         "placeholder": "{\"Status\":\"POSTED\"}"
       }
     ],
-    "outputs": null
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Object ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Result",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
   },
   "xero/manual_journal_get": {
-    "hash": "a46e2efb6fd586cb0fe495b096b77a8ba61f6c5722d32d421a0ced0bcde660d4",
+    "hash": "6eb558bf859d0b922a48f8e429ddfad8f498f4a37eee0fb3d7065c1436c0cc12",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Manual Journal: Get",
@@ -81182,10 +84098,46 @@
         "required": true
       }
     ],
-    "outputs": null
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Object ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Result",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
   },
   "xero/manual_journal_list": {
-    "hash": "c4626e203d00b7aa5385f4154a536cb809260775939ae396c339f3dd26c4b8bf",
+    "hash": "463387a0c8d19232a7ca894e086f1d61f4c54854b081089ce9e1f1d19f1b6760",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Manual Journal: List",
@@ -81231,10 +84183,46 @@
         "placeholder": "1"
       }
     ],
-    "outputs": null
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Object ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Result",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
   },
   "xero/organisation_get": {
-    "hash": "4e719e8fabed0322590200c22f17828d7760594cd7c4e2b0f9f3c819330eab82",
+    "hash": "12294b8ebd68331dff5ebd1437152d8bf4bdec19ee5bdb6b9760be3c09161d73",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Organisation: Get",
@@ -81266,10 +84254,46 @@
         "required": true
       }
     ],
-    "outputs": null
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Object ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Result",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
   },
   "xero/payment_create": {
-    "hash": "bdaa73c94a7e6900fd5040b17928dd3d603347c5240fb3245380dbcfc202b2ee",
+    "hash": "9385c0d184c820417452952628ed3bb9e227cca055d1abdbf9efa068d05cab4d",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Payment: Create",
@@ -81346,10 +84370,46 @@
         "placeholder": "{\"CurrencyRate\":1.0}"
       }
     ],
-    "outputs": null
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Object ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Result",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
   },
   "xero/payment_delete": {
-    "hash": "8debc835af96a59ccb1f0515e2e1419f3eca54083617701d3d197176538c5485",
+    "hash": "baeb3eef0aff7dbb61a2177530ba9971456853f1f73ba967c90cb90529e18da0",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Payment: Delete",
@@ -81389,10 +84449,46 @@
         "required": true
       }
     ],
-    "outputs": null
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Object ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Result",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
   },
   "xero/payment_get": {
-    "hash": "a0ceb47c3df5b83ef9bcebe1e1d7dc6084c3cd981821070c542af2acbc827e7f",
+    "hash": "8aca63586e2384b2c0279b74028f70150ebdfa7cc1ce32053f9ae680fe7282c2",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Payment: Get",
@@ -81432,10 +84528,46 @@
         "required": true
       }
     ],
-    "outputs": null
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Object ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Result",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
   },
   "xero/payment_list": {
-    "hash": "913084198011a7e64f7df21a94b00498ef767ea768a6688476c5ba701dbe2fcb",
+    "hash": "968dd41be7478cba46efc9d8846c6a16d9b6faa798d4f574604eb330d3967d8e",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Payment: List",
@@ -81481,10 +84613,46 @@
         "placeholder": "1"
       }
     ],
-    "outputs": null
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Object ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Result",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
   },
   "xero/purchase_order_create": {
-    "hash": "3cfc6bd520fa0c25c2db94a96725bc07d2897e09d16e9bb9618bd8b069803dbc",
+    "hash": "bd58b91996292e8d519cd78bad294cc01b696ed56c69375fddc7855b18359fd3",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Purchase Order: Create",
@@ -81559,10 +84727,46 @@
         "placeholder": "{\"Status\":\"DRAFT\"}"
       }
     ],
-    "outputs": null
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Object ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Result",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
   },
   "xero/purchase_order_get": {
-    "hash": "15356cb695c7bbc89f02e9d2c07421e9de285ea38c07560a0c55236bfdaf1ce5",
+    "hash": "2998e6959052ea5acfd9d9db4916d51d1828e72d857df2b78d8987e041ec0afb",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Purchase Order: Get",
@@ -81602,10 +84806,46 @@
         "required": true
       }
     ],
-    "outputs": null
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Object ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Result",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
   },
   "xero/purchase_order_list": {
-    "hash": "dd9f22bfa28332ce5e2e06f0ac976102cb2685b3306ff863e057c606f95e42e6",
+    "hash": "14e978cccf8e7943bb969a2b59a74c4741716ccb098ba7140e18fc0e52277296",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Purchase Order: List",
@@ -81651,10 +84891,46 @@
         "placeholder": "1"
       }
     ],
-    "outputs": null
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Object ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Result",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
   },
   "xero/purchase_order_update": {
-    "hash": "75947c29c0501f94dd58720cfd83d187838597c9a27051abe88d76d94c8c0ec8",
+    "hash": "648045ec441cdf0defa345d9d821d111298ba29bd512fc821ada6357ee3f48ba",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Purchase Order: Update",
@@ -81736,10 +85012,46 @@
         "placeholder": "{\"Status\":\"AUTHORISED\"}"
       }
     ],
-    "outputs": null
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Object ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Result",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
   },
   "xero/quote_create": {
-    "hash": "fb91267faf3f0422eb5321d27c7307489ae5bd99386333280112a4df97aadfcb",
+    "hash": "561bbb5b884655a3aab1c971163a6402b2e93a1af787a94138910e3b46bbdb4a",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Quote: Create",
@@ -81821,10 +85133,46 @@
         "placeholder": "{\"Status\":\"DRAFT\"}"
       }
     ],
-    "outputs": null
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Object ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Result",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
   },
   "xero/quote_get": {
-    "hash": "2cec3a78e478aa2965ae52fc998b4be0172b5d3f59c8a8860685ff05c89e5e67",
+    "hash": "3815581854745f50f5a282b7f70888c9c223f3f4d2f4e472d551546a80532641",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Quote: Get",
@@ -81864,10 +85212,46 @@
         "required": true
       }
     ],
-    "outputs": null
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Object ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Result",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
   },
   "xero/quote_list": {
-    "hash": "d85cff480528b42b5745a3f0f893980cc85ba6492cfdd3f25cc951e291c0d0ce",
+    "hash": "5d3683a226e23e6b6e5fe8835eaae217894e4215cc87bfd83ce0a87499ccf513",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Quote: List",
@@ -81913,10 +85297,46 @@
         "placeholder": "1"
       }
     ],
-    "outputs": null
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Object ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Result",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
   },
   "xero/quote_update": {
-    "hash": "7c6b8149cde35ef468c906e15442b9b2ec7dc0a288d1565032c54507780b7b7a",
+    "hash": "88d04aa82ce7e39e48b63449a0babb88d5852376a330d0a0cd6847dfaaecffa8",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Quote: Update",
@@ -82005,10 +85425,46 @@
         "placeholder": "{\"Status\":\"SENT\"}"
       }
     ],
-    "outputs": null
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Object ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Result",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
   },
   "xero/report_aged_payables": {
-    "hash": "0379202c79fde8664ddf3905e9e76b31de98fbb5ca599bcd5882964ccec37b28",
+    "hash": "a69469e2262cf44a04cb768054f1f039885320920e0253085f9f45314b8a59e3",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Report: Aged Payables",
@@ -82048,10 +85504,46 @@
         "required": true
       }
     ],
-    "outputs": null
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Object ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Result",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
   },
   "xero/report_aged_receivables": {
-    "hash": "0168fae5480e276c5ebb26502454d53dcf04c1a7df31d0f378e66c5f14639ca1",
+    "hash": "c5131b187f666de821568e08c7d42c8c6451ec07acc35e530c639fe9923109e8",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Report: Aged Receivables",
@@ -82091,10 +85583,46 @@
         "required": true
       }
     ],
-    "outputs": null
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Object ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Result",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
   },
   "xero/report_balance_sheet": {
-    "hash": "0531eef322ec9c38f503057613160c27b8a950d590e1b1d3f8fc1dd05fb58cf3",
+    "hash": "07569c95ea5ebca541b5ff723eb940caad73dc3c0e40c0cd464f7ef6e162b1f0",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Report: Balance Sheet",
@@ -82133,10 +85661,46 @@
         "placeholder": "2026-12-31"
       }
     ],
-    "outputs": null
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Object ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Result",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
   },
   "xero/report_profit_and_loss": {
-    "hash": "bc3cf54e76cb436d0bba31e6bc2cdc93754583ab9ade145f2fe248ceaeb7f81d",
+    "hash": "63854fef2172d95d70b871a117f3b417f308f45c7af25d525f79191301db0627",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Report: Profit and Loss",
@@ -82182,10 +85746,46 @@
         "placeholder": "2026-12-31"
       }
     ],
-    "outputs": null
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Object ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Result",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
   },
   "xero/tax_rate_create": {
-    "hash": "e919c742dea0aae9288ab1abcdc6741e1a8483ca79152e12ac3cf7f35ee9e177",
+    "hash": "91ff7b8059811a707bbbf7e1d84459c3cc2550d7d9206a1ebedd23b740d8237f",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Tax Rate: Create",
@@ -82246,10 +85846,46 @@
         "placeholder": "{\"Status\":\"ACTIVE\"}"
       }
     ],
-    "outputs": null
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Object ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Result",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
   },
   "xero/tax_rate_list": {
-    "hash": "ecda0385c43e6a2064cccaeb24f3a74854a43869711f380bdd2d91d1364d2084",
+    "hash": "25cda9242ae028c7a0b5a13ff7879a2bc422607d146f0c144c3919107541af85",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Tax Rate: List",
@@ -82288,10 +85924,46 @@
         "placeholder": "Status==\"ACTIVE\""
       }
     ],
-    "outputs": null
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Object ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Result",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
   },
   "xero/tracking_category_create": {
-    "hash": "70ed371575d76a60d6e3a1d7cab24cc4d320b1896d80dd00278d3115d1f74a22",
+    "hash": "599e73d3b7ca08303846b3da3a2324a92c31ab8a4054ae056b0e14a6f7bcbf46",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Tracking Category: Create",
@@ -82338,10 +86010,46 @@
         "placeholder": "{\"Options\":[{\"Name\":\"North\"},{\"Name\":\"South\"}]}"
       }
     ],
-    "outputs": null
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Object ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Result",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
   },
   "xero/tracking_category_list": {
-    "hash": "6ef8ce54d5733e535b1fc0ba3923d3432d1298b16a7addbb4a14ccfdb060ce35",
+    "hash": "e626eeb3eb769abb40e68800d9bf5ed3ddf286c114a083ad09870024365305cb",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Tracking Category: List",
@@ -82380,6 +86088,42 @@
         "placeholder": "Status==\"ACTIVE\""
       }
     ],
-    "outputs": null
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Object ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Result",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
   }
 }
