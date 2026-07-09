@@ -62,5 +62,5 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 		return sendgrid.ErrorResult(err.Error()), nil
 	}
 	obj, _ := result.(map[string]interface{})
-	return sendgrid.ResourceResult(groupID, obj, fmt.Sprintf("Retrieved unsubscribe group %s", groupID)), nil
+	return sendgrid.ResourceResult(sendgrid.StringifyID(obj["id"]), obj, fmt.Sprintf("Retrieved unsubscribe group %s", groupID)), nil
 }

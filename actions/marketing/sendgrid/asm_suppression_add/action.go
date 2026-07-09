@@ -62,9 +62,11 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	if err != nil {
 		return sendgrid.ErrorResult(err.Error()), nil
 	}
+	// RequiredString guarantees non-empty input, but a value of only commas
+	// and spaces still splits to nothing.
 	emails := sendgrid.SplitCSV(emailsRaw)
-	if emails == nil {
-		return sendgrid.ErrorResult("emails is required"), nil
+	if len(emails) == 0 {
+		return sendgrid.ErrorResult("emails must contain at least one address"), nil
 	}
 
 	body := map[string]interface{}{"recipient_emails": emails}
