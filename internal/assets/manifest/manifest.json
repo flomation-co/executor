@@ -55659,11 +55659,11 @@
     ]
   },
   "marketing/sendgrid/asm_suppression_list": {
-    "hash": "f0b46cd36b23037567fec73a7bb0bd25f67ff5ffe7bf76ff4487c1e0bdb4c944",
+    "hash": "6350779357187a6c773f289ccfa161cdb96133ac0037a0a23dc7f86c6ff51337",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "SendGrid: List Group Suppressions",
-    "description": "Retrieve every email address suppressed in a SendGrid unsubscribe (ASM) group. Each result is an object with an email field, ready to loop over.",
+    "description": "Retrieve every email address suppressed in a SendGrid unsubscribe (ASM) group. Each result is an object with an email field, ready to loop over. Note: SendGrid applies new suppressions asynchronously, so a just-added address can take a few minutes to appear here.",
     "website": "https://www.flomation.co",
     "icon": "sendgrid+list",
     "date": "09/07/2026",

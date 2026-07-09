@@ -13,7 +13,7 @@ const (
 	Author       = "Dave McElin"
 	Organisation = "Flomation"
 	Name         = "SendGrid: List Group Suppressions"
-	Description  = "Retrieve every email address suppressed in a SendGrid unsubscribe (ASM) group. Each result is an object with an email field, ready to loop over."
+	Description  = "Retrieve every email address suppressed in a SendGrid unsubscribe (ASM) group. Each result is an object with an email field, ready to loop over. Note: SendGrid applies new suppressions asynchronously, so a just-added address can take a few minutes to appear here."
 	Website      = "https://www.flomation.co"
 	Icon         = "sendgrid+list"
 	Date         = "09/07/2026"
