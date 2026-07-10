@@ -52,7 +52,7 @@ var Inputs = [...]core.Connection{
 	{Name: "kubeconfig", Type: core.ConnectionTypeSecret, Label: "Kubeconfig YAML", Placeholder: "Paste the full kubeconfig; the current-context is used", Visible: &core.VisibleWhen{Field: "auth_method", Values: []string{"kubeconfig"}}},
 	{Name: "allow_insecure", Type: core.ConnectionTypeBoolean, Label: "Allow Insecure TLS", Placeholder: "Skip API server certificate verification — only for self-signed clusters with no CA to hand"},
 
-	{Name: "helm_version", Type: core.ConnectionTypeString, Label: "Helm Version", Placeholder: "Leave blank to use the helm on the runner"},
+	{Name: "helm_version", Type: core.ConnectionTypeString, Label: "Helm Version", Placeholder: "Leave blank to use the helm on the runner, or the pinned 3.21.3"},
 	{Name: "binary_path", Type: core.ConnectionTypeString, Label: "Helm Binary Path", Placeholder: "/usr/local/bin/helm — overrides version lookup"},
 
 	{Name: "namespace", Type: core.ConnectionTypeString, Label: "Namespace", Placeholder: "The namespace to install the release into", Required: true},
@@ -60,6 +60,10 @@ var Inputs = [...]core.Connection{
 	{Name: "chart", Type: core.ConnectionTypeString, Label: "Chart", Placeholder: "nginx, or oci://ghcr.io/o/chart, or https://.../chart.tgz", Required: true},
 	{Name: "repo_url", Type: core.ConnectionTypeString, Label: "Repository URL", Placeholder: "https://charts.bitnami.com/bitnami — resolves a named chart without a repo add"},
 	{Name: "chart_version", Type: core.ConnectionTypeString, Label: "Chart Version", Placeholder: "Pin a chart version, e.g. 15.5.2 (blank installs the latest)"},
+	{Name: "repo_username", Type: core.ConnectionTypeString, Label: "Repository Username", Placeholder: "For a private chart repository (Nexus, Artifactory, an OCI registry)"},
+	{Name: "repo_password", Type: core.ConnectionTypeSecret, Label: "Repository Password", Placeholder: "Never passed on the command line — written to a 0600 file, or piped to registry login"},
+	{Name: "repo_ca_cert", Type: core.ConnectionTypeText, Label: "Repository CA Certificate (PEM)", Placeholder: "-----BEGIN CERTIFICATE----- … for a repository behind an internal CA"},
+	{Name: "repo_insecure", Type: core.ConnectionTypeBoolean, Label: "Allow Insecure Repository TLS", Placeholder: "Skip certificate verification when fetching the chart — only for a self-signed internal repository"},
 	{Name: "values", Type: core.ConnectionTypeCode, Label: "Values (YAML)", Placeholder: "YAML overriding the chart defaults, e.g. replicaCount: 2"},
 	{Name: "create_namespace", Type: core.ConnectionTypeBoolean, Label: "Create Namespace", Placeholder: "Create the target namespace if it does not already exist"},
 	{Name: "wait", Type: core.ConnectionTypeBoolean, Label: "Wait for Ready", Placeholder: "Block until every resource is ready, or the timeout elapses"},
@@ -98,6 +102,20 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 
 	repoURL := kubernetes.OptionalString("repo_url", inputs)
 	chartVersion := kubernetes.OptionalString("chart_version", inputs)
+	repoUsername := kubernetes.OptionalString("repo_username", inputs)
+	repoPassword := kubernetes.OptionalString("repo_password", inputs)
+	repoCACert := kubernetes.OptionalString("repo_ca_cert", inputs)
+	repoInsecure := kubernetes.BoolInput("repo_insecure", inputs)
+
+	source := helm.ChartSource{
+		Chart:        chart,
+		RepoURL:      repoURL,
+		ChartVersion: chartVersion,
+		Username:     repoUsername,
+		Password:     repoPassword,
+		CACert:       repoCACert,
+		Insecure:     repoInsecure,
+	}
 	valuesYAML := kubernetes.OptionalString("values", inputs)
 	createNamespace := kubernetes.BoolInput("create_namespace", inputs)
 	wait := kubernetes.BoolInput("wait", inputs)
@@ -114,11 +132,14 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 
 	// Invoke applies its own 15-minute timeout, so a bare Background context is
 	// correct here — a --wait install is legitimately long-running.
-	res, err := helm.InvokeWithValues(context.Background(), auth, version, binaryPath, namespace, valuesYAML, func(valuesArgs []string) []string {
-		args := []string{"install", name}
-		args = helm.AddChartSource(args, chart, repoURL, chartVersion)
+	res, err := helm.WithSession(context.Background(), auth, version, binaryPath, namespace, valuesYAML, func(s *helm.Session) (*helm.RunResult, error) {
+		chartArgs, err := s.ResolveChart(source)
+		if err != nil {
+			return nil, err
+		}
+		args := append([]string{"install", name}, chartArgs...)
 		args = append(args, "-n", namespace)
-		args = append(args, valuesArgs...)
+		args = append(args, s.ValuesArgs...)
 		if createNamespace {
 			args = append(args, "--create-namespace")
 		}
@@ -132,7 +153,7 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 		if dryRun {
 			args = append(args, "--dry-run")
 		}
-		return append(args, "-o", "json")
+		return s.Run(append(args, "-o", "json")...)
 	})
 	if err != nil {
 		return helm.ErrorResult(err.Error()), nil

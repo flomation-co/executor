@@ -22,6 +22,8 @@ import (
 	"testing"
 
 	core "flomation.app/automate/executor"
+	"flomation.app/automate/executor/actions"
+	"flomation.app/automate/executor/actions/infrastructure/helm"
 	"flomation.app/automate/executor/actions/infrastructure/kubernetes"
 
 	hlm_chart_lint "flomation.app/automate/executor/actions/infrastructure/helm/chart_lint"
@@ -485,6 +487,60 @@ func TestStandardOutputsPresent(t *testing.T) {
 		for _, required := range []string{"success", "error", "tool_result"} {
 			if !have[required] {
 				t.Errorf("%s: missing the %q output", id, required)
+			}
+		}
+	}
+}
+
+// TestEveryRegisteredActionIsCovered closes the loop on the tables above.
+//
+// The manifest generator discovers actions by scanning for an exported Execute,
+// so an action cannot be "forgotten" at registration time — it lands in
+// actions.Actions automatically. What CAN be forgotten is adding it to the tables
+// in this file, and then every invariant above silently stops covering it.
+//
+// This asserts the two sets are equal in both directions: nothing registered is
+// unchecked, and nothing checked has been deleted from the tree.
+func TestEveryRegisteredActionIsCovered(t *testing.T) {
+	covered := actionInputs()
+
+	registered := map[string]bool{}
+	for id := range actions.Actions {
+		if strings.HasPrefix(id, "infrastructure/") {
+			// The tables are keyed on the sub-group path, e.g. "kubernetes/pod_list".
+			registered[strings.TrimPrefix(id, "infrastructure/")] = true
+		}
+	}
+
+	for id := range registered {
+		if _, ok := covered[id]; !ok {
+			t.Errorf("infrastructure/%s is registered in actions.Actions but is not covered by this file's tables — add it", id)
+		}
+	}
+	for id := range covered {
+		if !registered[id] {
+			t.Errorf("%s is covered by this file's tables but is not registered in actions.Actions — did the directory move?", id)
+		}
+	}
+}
+
+// TestHelmVersionPlaceholderMatchesThePin keeps the operator-facing text honest.
+//
+// The Inputs literal must be a constant expression the manifest generator can
+// AST-parse, so the placeholder cannot interpolate helm.DefaultVersion at the
+// call sites that spell it out. This asserts the two never drift.
+func TestHelmVersionPlaceholderMatchesThePin(t *testing.T) {
+	for id, inputs := range actionInputs() {
+		if !strings.HasPrefix(id, "helm/") {
+			continue
+		}
+		for _, c := range inputs {
+			if c.Name != "helm_version" {
+				continue
+			}
+			if !strings.Contains(c.Placeholder, helm.DefaultVersion) {
+				t.Errorf("%s: helm_version placeholder %q does not name the pinned version %s",
+					id, c.Placeholder, helm.DefaultVersion)
 			}
 		}
 	}

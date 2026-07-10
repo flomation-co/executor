@@ -57,9 +57,19 @@ var Inputs = [...]core.Connection{
 	}},
 }
 
+// The shape of `result` follows the Content selector: an object for the whole
+// release and for its values, an array for its hooks, a string for its manifest
+// and notes. ConnectionTypeObject is this codebase's "any structured value" — the
+// list actions declare their `results` arrays the same way — so it is the honest
+// declaration for a port whose type varies.
+//
+// Because a downstream node wiring a text field wants a real string rather than a
+// JSON-encoded one, the two string-shaped contents are also published on `text`,
+// which is empty for the others.
 var Outputs = [...]core.Connection{
 	{Name: "id", Type: core.ConnectionTypeString, Label: "Release Name"},
 	{Name: "result", Type: core.ConnectionTypeObject, Label: "Result"},
+	{Name: "text", Type: core.ConnectionTypeText, Label: "Manifest / Notes"},
 	{Name: "revision", Type: core.ConnectionTypeInteger, Label: "Revision"},
 	{Name: "tool_result", Type: core.ConnectionTypeString, Label: "Result summary"},
 	{Name: "success", Type: core.ConnectionTypeBoolean, Label: "Success"},
@@ -90,16 +100,17 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	}
 
 	// content selects the slice to return; a blank or unrecognised value yields
-	// the whole release, which is the safe default.
+	// the whole release, which is the safe default. text mirrors the two contents
+	// that are plain strings, so a downstream text field can bind to a real string.
 	var result interface{}
-	var what string
+	var text, what string
 	switch kubernetes.OptionalString("content", inputs) {
 	case "values":
 		result, what = rel.Config, "values"
 	case "manifest":
-		result, what = rel.Manifest, "manifest"
+		result, text, what = rel.Manifest, rel.Manifest, "manifest"
 	case "notes":
-		result, what = rel.Notes(), "notes"
+		result, text, what = rel.Notes(), rel.Notes(), "notes"
 	case "hooks":
 		result, what = rel.Hooks, "hooks"
 	default:
@@ -108,6 +119,7 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 
 	summary := fmt.Sprintf("Read the %s of release %s revision %d", what, name, rel.Version)
 	out := helm.ReleaseResult(name, result, summary)
+	out["text"] = text
 	out["revision"] = rel.Version
 	return out, nil
 }

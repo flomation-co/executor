@@ -6,8 +6,13 @@
 // cluster state and creates only short-lived test Pods, so it is not destructive
 // and carries no confirm_destructive guard.
 //
-// The output is plain text, not JSON. With "Dump Test Pod Logs" set, helm appends
-// each test pod's logs to that output — the useful detail when a test fails.
+// The output is plain text, not JSON, and it is split across two streams: helm
+// writes the test-pod logs requested by "Dump Test Pod Logs" — and the status
+// table — to stdout, while the one-line "N test(s) failed" summary goes to
+// stderr. A failing run therefore has its useful detail on stdout and its verdict
+// on stderr, so both are surfaced: the logs on the `output` port, the summary on
+// `error`. Reporting only the summary would silently discard exactly the logs the
+// operator turned the option on for.
 package infrastructure_helm_release_test
 
 import (
@@ -49,7 +54,7 @@ var Inputs = [...]core.Connection{
 	{Name: "kubeconfig", Type: core.ConnectionTypeSecret, Label: "Kubeconfig YAML", Placeholder: "Paste the full kubeconfig; the current-context is used", Visible: &core.VisibleWhen{Field: "auth_method", Values: []string{"kubeconfig"}}},
 	{Name: "allow_insecure", Type: core.ConnectionTypeBoolean, Label: "Allow Insecure TLS", Placeholder: "Skip API server certificate verification — only for self-signed clusters with no CA to hand"},
 
-	{Name: "helm_version", Type: core.ConnectionTypeString, Label: "Helm Version", Placeholder: "Leave blank to use the helm on the runner"},
+	{Name: "helm_version", Type: core.ConnectionTypeString, Label: "Helm Version", Placeholder: "Leave blank to use the helm on the runner, or the pinned 3.21.3"},
 	{Name: "binary_path", Type: core.ConnectionTypeString, Label: "Helm Binary Path", Placeholder: "/usr/local/bin/helm — overrides version lookup"},
 
 	{Name: "namespace", Type: core.ConnectionTypeString, Label: "Namespace", Placeholder: "The namespace the release lives in", Required: true},
@@ -60,6 +65,8 @@ var Inputs = [...]core.Connection{
 
 var Outputs = [...]core.Connection{
 	{Name: "id", Type: core.ConnectionTypeString, Label: "Release Name"},
+	{Name: "output", Type: core.ConnectionTypeText, Label: "Test Output"},
+	{Name: "passed", Type: core.ConnectionTypeBoolean, Label: "Passed"},
 	{Name: "tool_result", Type: core.ConnectionTypeString, Label: "Result summary"},
 	{Name: "success", Type: core.ConnectionTypeBoolean, Label: "Success"},
 	{Name: "error", Type: core.ConnectionTypeString, Label: "Error"},
@@ -99,8 +106,20 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	if err != nil {
 		return helm.ErrorResult(err.Error()), nil
 	}
+
+	// A failing test is a result the flow may want to branch on, not a broken
+	// action — so it is a soft failure. res.Stdout carries the status table and,
+	// when logs was set, the test pods' logs; it must survive onto the output port
+	// rather than being replaced by helm's one-line stderr verdict.
 	if res.Failed() {
-		return helm.ErrorResult(res.Message()), nil
+		return map[string]interface{}{
+			"id":          name,
+			"output":      res.Stdout,
+			"passed":      false,
+			"tool_result": fmt.Sprintf("Tests for release %s failed", name),
+			"success":     false,
+			"error":       res.Message(),
+		}, nil
 	}
 
 	summary := strings.TrimSpace(res.Stdout)
@@ -110,6 +129,8 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 
 	return map[string]interface{}{
 		"id":          name,
+		"output":      res.Stdout,
+		"passed":      true,
 		"tool_result": summary,
 		"success":     true,
 		"error":       "",

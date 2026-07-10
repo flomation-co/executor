@@ -138,18 +138,30 @@ type Session struct {
 	// ValuesArgs is the "-f <path>" pair for the supplied values, or nil.
 	ValuesArgs []string
 
-	ctx        context.Context
-	bin        string
-	kubeconfig string
-	auth       kubernetes.Auth
+	ctx          context.Context
+	bin          string
+	kubeconfig   string
+	auth         kubernetes.Auth
+	repoPassword string
 }
 
 // Run executes one helm command in the session's home.
 func (s *Session) Run(args ...string) (*RunResult, error) {
+	return s.RunStdin(nil, args...)
+}
+
+// RunStdin is Run with a body written to the command's standard input. It exists
+// for `helm registry login --password-stdin`: a registry password passed as
+// --password would sit in argv, which /proc exposes to every process on the
+// runner for the lifetime of the command.
+func (s *Session) RunStdin(stdin []byte, args ...string) (*RunResult, error) {
 	full := append([]string{"--kubeconfig", s.kubeconfig}, args...)
 	cmd := exec.CommandContext(s.ctx, s.bin, full...) // #nosec G204 -- bin comes from EnsureBinary; args are built by the actions, never a raw operator string
 	cmd.Dir = s.Home
 	cmd.Env = buildEnv(s.Home)
+	if len(stdin) > 0 {
+		cmd.Stdin = bytes.NewReader(stdin)
+	}
 
 	var stdout, stderr bytes.Buffer
 	cmd.Stdout = &stdout
@@ -161,7 +173,7 @@ func (s *Session) Run(args ...string) (*RunResult, error) {
 	res := &RunResult{}
 	runErr := cmd.Run()
 	res.Stdout = stdout.String()
-	res.Stderr = kubernetes.Redact(s.auth, stderr.String())
+	res.Stderr = redactRepo(s, kubernetes.Redact(s.auth, stderr.String()))
 
 	if runErr != nil {
 		var exitErr *exec.ExitError
@@ -175,6 +187,157 @@ func (s *Session) Run(args ...string) (*RunResult, error) {
 		return res, fmt.Errorf("could not run helm: %w", runErr)
 	}
 	return res, nil
+}
+
+// redactRepo scrubs a chart-repository password from helm's diagnostics, the way
+// kubernetes.Redact scrubs the cluster token.
+func redactRepo(s *Session, msg string) string {
+	if s.repoPassword != "" {
+		msg = strings.ReplaceAll(msg, s.repoPassword, "REDACTED")
+	}
+	return msg
+}
+
+// repoAlias is the name the session gives an operator-supplied chart repository
+// in its throwaway repositories.yaml. Nothing outside the session sees it.
+const repoAlias = "flomation"
+
+// ChartSource is everything needed to locate a chart: the reference itself, and
+// — for a private repository — where it lives, who we are, and how to verify it.
+type ChartSource struct {
+	// Chart is a bare name resolved against RepoURL ("nginx"), an OCI reference
+	// ("oci://registry.example.com/charts/nginx"), a full archive URL, or a path
+	// on the runner's filesystem.
+	Chart        string
+	RepoURL      string
+	ChartVersion string
+
+	Username string
+	Password string
+	// CACert is a PEM bundle that signs the repository's certificate — the usual
+	// need when charts are served from an internal Nexus or Artifactory behind a
+	// corporate CA the runner does not trust.
+	CACert   string
+	Insecure bool
+}
+
+// ResolveChart prepares the session to fetch src and returns the arguments to
+// append after the helm subcommand — the chart reference plus any TLS flags.
+//
+// Credentials never reach argv. For a classic HTTP repository the session writes
+// its own repositories.yaml (0600) into the temp home, which helm reads because
+// buildEnv points HELM_REPOSITORY_CONFIG at it, and the chart is then addressed
+// as "<alias>/<chart>". For an OCI registry it runs `registry login
+// --password-stdin`, which writes the temp HELM_REGISTRY_CONFIG. Either way the
+// password is on a 0600 file or a pipe, never in the process table.
+func (s *Session) ResolveChart(src ChartSource) ([]string, error) {
+	chart := strings.TrimSpace(src.Chart)
+	if chart == "" {
+		return nil, fmt.Errorf("chart is required")
+	}
+	s.repoPassword = src.Password
+
+	// A CA bundle is a path, not a secret, so it rides on the command line.
+	caPath := ""
+	if pem := strings.TrimSpace(src.CACert); pem != "" {
+		if !strings.Contains(pem, "BEGIN CERTIFICATE") {
+			return nil, fmt.Errorf("repo_ca_cert does not look like a PEM certificate — it should start with -----BEGIN CERTIFICATE-----")
+		}
+		caPath = s.Home + "/repo-ca.pem"
+		if err := os.WriteFile(caPath, []byte(pem), 0o600); err != nil {
+			return nil, fmt.Errorf("could not write the repository CA certificate: %w", err)
+		}
+	}
+
+	tlsFlags := func(args []string) []string {
+		if caPath != "" {
+			args = append(args, "--ca-file", caPath)
+		}
+		if src.Insecure {
+			args = append(args, "--insecure-skip-tls-verify")
+		}
+		return args
+	}
+	withVersion := func(args []string) []string {
+		if v := strings.TrimSpace(src.ChartVersion); v != "" {
+			args = append(args, "--version", v)
+		}
+		return args
+	}
+
+	switch {
+	case strings.HasPrefix(chart, "oci://"):
+		if src.Username != "" {
+			host := strings.SplitN(strings.TrimPrefix(chart, "oci://"), "/", 2)[0]
+			login := []string{"registry", "login", host, "--username", src.Username, "--password-stdin"}
+			if caPath != "" {
+				login = append(login, "--ca-file", caPath)
+			}
+			if src.Insecure {
+				login = append(login, "--insecure")
+			}
+			res, err := s.RunStdin([]byte(src.Password), login...)
+			if err != nil {
+				return nil, err
+			}
+			if res.Failed() {
+				return nil, fmt.Errorf("could not sign in to the registry %s: %s", host, res.Message())
+			}
+		}
+		return withVersion(tlsFlags([]string{chart})), nil
+
+	case strings.TrimSpace(src.RepoURL) != "":
+		if strings.ContainsAny(chart, "/:") {
+			return nil, fmt.Errorf("when a Repository URL is set, Chart must be a bare chart name such as \"nginx\" (got %q)", chart)
+		}
+		if err := s.writeRepositoryConfig(src, caPath); err != nil {
+			return nil, err
+		}
+		// The index must be cached before the chart can be addressed by alias.
+		res, err := s.Run("repo", "update", repoAlias)
+		if err != nil {
+			return nil, err
+		}
+		if res.Failed() {
+			return nil, fmt.Errorf("could not read the chart repository %s: %s", src.RepoURL, res.Message())
+		}
+		return withVersion([]string{repoAlias + "/" + chart}), nil
+
+	default:
+		// A local path, or a full https://…/chart.tgz URL.
+		return withVersion(tlsFlags([]string{chart})), nil
+	}
+}
+
+// writeRepositoryConfig emits the repositories.yaml helm reads from
+// HELM_REPOSITORY_CONFIG. The field names are helm's own repo.Entry JSON tags.
+func (s *Session) writeRepositoryConfig(src ChartSource, caPath string) error {
+	entry := map[string]interface{}{
+		"name":                     repoAlias,
+		"url":                      strings.TrimSpace(src.RepoURL),
+		"username":                 src.Username,
+		"password":                 src.Password,
+		"certFile":                 "",
+		"keyFile":                  "",
+		"caFile":                   caPath,
+		"insecure_skip_tls_verify": src.Insecure,
+		"pass_credentials_all":     false,
+	}
+	body, err := yaml.Marshal(map[string]interface{}{
+		"apiVersion":   "v1",
+		"generated":    "0001-01-01T00:00:00Z",
+		"repositories": []interface{}{entry},
+	})
+	if err != nil {
+		return err
+	}
+
+	dir := s.Home + "/config"
+	if err := os.MkdirAll(dir, 0o700); err != nil {
+		return err
+	}
+	// 0600: this file carries the repository password.
+	return os.WriteFile(dir+"/repositories.yaml", body, 0o600)
 }
 
 // WithSession prepares a working directory, hands it to fn, and tears it down.
@@ -271,6 +434,11 @@ func buildEnv(home string) []string {
 		"XDG_CACHE_HOME=" + home + "/cache",
 		"XDG_CONFIG_HOME=" + home + "/config",
 		"XDG_DATA_HOME=" + home + "/data",
+		// Pinned rather than left to helm's own derivation from HELM_CONFIG_HOME,
+		// because ResolveChart writes both files directly and the two must agree.
+		"HELM_REPOSITORY_CONFIG=" + home + "/config/repositories.yaml",
+		"HELM_REPOSITORY_CACHE=" + home + "/cache/repository",
+		"HELM_REGISTRY_CONFIG=" + home + "/config/registry/config.json",
 		"HELM_EXPERIMENTAL_OCI=1",
 		"LANG=en_GB.UTF-8",
 		"TERM=dumb",
@@ -280,26 +448,6 @@ func buildEnv(home string) []string {
 // ---------------------------------------------------------------------------
 // Argument helpers
 // ---------------------------------------------------------------------------
-
-// AddChartSource appends the chart reference and, when the operator supplied a
-// repository URL, the --repo flag that resolves it without a `helm repo add`.
-//
-// This is what keeps the actions stateless. `helm repo add` writes a
-// repositories.yaml into the Helm config home; on a one-shot executor that home
-// is a temp directory discarded when the action returns, so a repo added by one
-// action would not exist for the next. Passing --repo (or an oci:// reference,
-// or a full https:// chart URL) resolves the chart in a single invocation, with
-// nothing to persist.
-func AddChartSource(args []string, chart, repoURL, chartVersion string) []string {
-	args = append(args, chart)
-	if repoURL != "" {
-		args = append(args, "--repo", repoURL)
-	}
-	if chartVersion != "" {
-		args = append(args, "--version", chartVersion)
-	}
-	return args
-}
 
 // WriteValuesFile writes operator-supplied YAML/JSON values into the invocation's
 // working directory and returns the -f arguments for it. Values are passed by
@@ -330,17 +478,6 @@ func WriteValuesFile(dir, valuesYAML string) ([]string, error) {
 		return nil, fmt.Errorf("could not write values file: %w", err)
 	}
 	return []string{"-f", path}, nil
-}
-
-// InvokeWithValues is Invoke plus an optional values document, written into the
-// invocation's temp directory so it lives exactly as long as the process does.
-//
-// buildArgs receives the "-f <path>" pair for the values file (nil when no values
-// were supplied) and returns the full argument list.
-func InvokeWithValues(ctx context.Context, a kubernetes.Auth, version, binaryPath, namespace, valuesYAML string, buildArgs func(valuesArgs []string) []string) (*RunResult, error) {
-	return WithSession(ctx, a, version, binaryPath, namespace, valuesYAML, func(s *Session) (*RunResult, error) {
-		return s.Run(buildArgs(s.ValuesArgs)...)
-	})
 }
 
 // ---------------------------------------------------------------------------

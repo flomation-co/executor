@@ -47085,7 +47085,7 @@
     ]
   },
   "infrastructure/helm/chart_lint": {
-    "hash": "773986f728f5b6e563a42f52cd1d19d7718b3fa9c239687722c792dc01f13c77",
+    "hash": "7d4efdf23c25ecb0af3af3d475077f77abc3fa9585e986aacfb16fa7a4b3e88f",
     "author": "David McElin",
     "organisation": "Flomation",
     "name": "Helm Lint Chart",
@@ -47246,6 +47246,34 @@
         "placeholder": "Pin an exact chart version, e.g. 15.2.1 (blank for the latest)"
       },
       {
+        "name": "repo_username",
+        "type": "string",
+        "value": null,
+        "label": "Repository Username",
+        "placeholder": "For a private chart repository (Nexus, Artifactory, an OCI registry)"
+      },
+      {
+        "name": "repo_password",
+        "type": "secret",
+        "value": null,
+        "label": "Repository Password",
+        "placeholder": "Never passed on the command line — written to a 0600 file, or piped to registry login"
+      },
+      {
+        "name": "repo_ca_cert",
+        "type": "text",
+        "value": null,
+        "label": "Repository CA Certificate (PEM)",
+        "placeholder": "-----BEGIN CERTIFICATE----- … for a repository behind an internal CA"
+      },
+      {
+        "name": "repo_insecure",
+        "type": "boolean",
+        "value": null,
+        "label": "Allow Insecure Repository TLS",
+        "placeholder": "Skip certificate verification when fetching the chart — only for a self-signed internal repository"
+      },
+      {
         "name": "values",
         "type": "code",
         "value": null,
@@ -47299,7 +47327,7 @@
     ]
   },
   "infrastructure/helm/chart_show": {
-    "hash": "455f41ee28bbf953e70d78eed44afc7dfc29551fe8dfd1ea2f20c789942d2a23",
+    "hash": "783b5c7a0c98639de1769352c008dfbbdbcabe6bb19f4669b417bd96f52c6e50",
     "author": "David McElin",
     "organisation": "Flomation",
     "name": "Helm Show Chart",
@@ -47460,6 +47488,34 @@
         "placeholder": "Pin an exact chart version, e.g. 15.2.1 (blank for the latest)"
       },
       {
+        "name": "repo_username",
+        "type": "string",
+        "value": null,
+        "label": "Repository Username",
+        "placeholder": "For a private chart repository (Nexus, Artifactory, an OCI registry)"
+      },
+      {
+        "name": "repo_password",
+        "type": "secret",
+        "value": null,
+        "label": "Repository Password",
+        "placeholder": "Never passed on the command line — written to a 0600 file, or piped to registry login"
+      },
+      {
+        "name": "repo_ca_cert",
+        "type": "text",
+        "value": null,
+        "label": "Repository CA Certificate (PEM)",
+        "placeholder": "-----BEGIN CERTIFICATE----- … for a repository behind an internal CA"
+      },
+      {
+        "name": "repo_insecure",
+        "type": "boolean",
+        "value": null,
+        "label": "Allow Insecure Repository TLS",
+        "placeholder": "Skip certificate verification when fetching the chart — only for a self-signed internal repository"
+      },
+      {
         "name": "info",
         "type": "string",
         "value": null,
@@ -47517,7 +47573,7 @@
     ]
   },
   "infrastructure/helm/chart_template": {
-    "hash": "bce7d7d1cc3a1da8d42d4a774182e66216ab61e009786e5049dfa13651d17fcd",
+    "hash": "97d68da829abeac8f49e717d2102cd902d688966520b6839b14259d05c2cfb1c",
     "author": "David McElin",
     "organisation": "Flomation",
     "name": "Helm Template Chart",
@@ -47686,6 +47742,34 @@
         "placeholder": "Pin an exact chart version, e.g. 15.2.1 (blank for the latest)"
       },
       {
+        "name": "repo_username",
+        "type": "string",
+        "value": null,
+        "label": "Repository Username",
+        "placeholder": "For a private chart repository (Nexus, Artifactory, an OCI registry)"
+      },
+      {
+        "name": "repo_password",
+        "type": "secret",
+        "value": null,
+        "label": "Repository Password",
+        "placeholder": "Never passed on the command line — written to a 0600 file, or piped to registry login"
+      },
+      {
+        "name": "repo_ca_cert",
+        "type": "text",
+        "value": null,
+        "label": "Repository CA Certificate (PEM)",
+        "placeholder": "-----BEGIN CERTIFICATE----- … for a repository behind an internal CA"
+      },
+      {
+        "name": "repo_insecure",
+        "type": "boolean",
+        "value": null,
+        "label": "Allow Insecure Repository TLS",
+        "placeholder": "Skip certificate verification when fetching the chart — only for a self-signed internal repository"
+      },
+      {
         "name": "values",
         "type": "code",
         "value": null,
@@ -47739,7 +47823,7 @@
     ]
   },
   "infrastructure/helm/release_get": {
-    "hash": "42e856cdd03df44e861507b0a6517082a8b88d84105b4d31c04b896b7b89574f",
+    "hash": "ab5c3d5a870fe1c9dddcf02e1651539b08da771e984d25bd7326aec76aefc60a",
     "author": "David McElin",
     "organisation": "Flomation",
     "name": "Helm Get Release",
@@ -47929,6 +48013,13 @@
         "type": "object",
         "value": null,
         "label": "Result",
+        "placeholder": ""
+      },
+      {
+        "name": "text",
+        "type": "text",
+        "value": null,
+        "label": "Manifest / Notes",
         "placeholder": ""
       },
       {
@@ -48142,7 +48233,7 @@
     ]
   },
   "infrastructure/helm/release_install": {
-    "hash": "917f979b10fb111b9f2a2e8b8cc950d1c19248bb18f38daa92ad601db252756f",
+    "hash": "711491293b3af7ba080cef6426ff0aa9f3199131ca00f14a23bfc9e495f3d9f8",
     "author": "David McElin",
     "organisation": "Flomation",
     "name": "Helm Install Release",
@@ -48271,7 +48362,7 @@
         "type": "string",
         "value": null,
         "label": "Helm Version",
-        "placeholder": "Leave blank to use the helm on the runner"
+        "placeholder": "Leave blank to use the helm on the runner, or the pinned 3.21.3"
       },
       {
         "name": "binary_path",
@@ -48317,6 +48408,34 @@
         "value": null,
         "label": "Chart Version",
         "placeholder": "Pin a chart version, e.g. 15.5.2 (blank installs the latest)"
+      },
+      {
+        "name": "repo_username",
+        "type": "string",
+        "value": null,
+        "label": "Repository Username",
+        "placeholder": "For a private chart repository (Nexus, Artifactory, an OCI registry)"
+      },
+      {
+        "name": "repo_password",
+        "type": "secret",
+        "value": null,
+        "label": "Repository Password",
+        "placeholder": "Never passed on the command line — written to a 0600 file, or piped to registry login"
+      },
+      {
+        "name": "repo_ca_cert",
+        "type": "text",
+        "value": null,
+        "label": "Repository CA Certificate (PEM)",
+        "placeholder": "-----BEGIN CERTIFICATE----- … for a repository behind an internal CA"
+      },
+      {
+        "name": "repo_insecure",
+        "type": "boolean",
+        "value": null,
+        "label": "Allow Insecure Repository TLS",
+        "placeholder": "Skip certificate verification when fetching the chart — only for a self-signed internal repository"
       },
       {
         "name": "values",
@@ -48585,7 +48704,7 @@
     ]
   },
   "infrastructure/helm/release_rollback": {
-    "hash": "97c47940ba94d5a29b7ffbdc24a61c3fe0f6317f78db5ed118799116b5938c6f",
+    "hash": "fee8979efa63fe6dce65380e1a6adaad2462887dfce8c17a49ab2a3e7ea83179",
     "author": "David McElin",
     "organisation": "Flomation",
     "name": "Helm Rollback Release",
@@ -48714,7 +48833,7 @@
         "type": "string",
         "value": null,
         "label": "Helm Version",
-        "placeholder": "Leave blank to use the helm on the runner"
+        "placeholder": "Leave blank to use the helm on the runner, or the pinned 3.21.3"
       },
       {
         "name": "binary_path",
@@ -49030,7 +49149,7 @@
     ]
   },
   "infrastructure/helm/release_test": {
-    "hash": "44e5b327cd452883d75b3709a6e18d8429e5fd55367f9bfa386fdb198bcb5630",
+    "hash": "d160b3ef0ad28da5c97a313d1d77b29381ff770479976dd42da145ffffe6575a",
     "author": "David McElin",
     "organisation": "Flomation",
     "name": "Helm Test Release",
@@ -49159,7 +49278,7 @@
         "type": "string",
         "value": null,
         "label": "Helm Version",
-        "placeholder": "Leave blank to use the helm on the runner"
+        "placeholder": "Leave blank to use the helm on the runner, or the pinned 3.21.3"
       },
       {
         "name": "binary_path",
@@ -49208,6 +49327,20 @@
         "placeholder": ""
       },
       {
+        "name": "output",
+        "type": "text",
+        "value": null,
+        "label": "Test Output",
+        "placeholder": ""
+      },
+      {
+        "name": "passed",
+        "type": "boolean",
+        "value": null,
+        "label": "Passed",
+        "placeholder": ""
+      },
+      {
         "name": "tool_result",
         "type": "string",
         "value": null,
@@ -49231,7 +49364,7 @@
     ]
   },
   "infrastructure/helm/release_uninstall": {
-    "hash": "2d70b007745401c9addd0f1fb2a0a6e836841fd26ed8bc3e5544f6562335f073",
+    "hash": "3fc116708254ffc6f4d1092b9a97ab7499cc1a9867406d36517eb02528184d2a",
     "author": "David McElin",
     "organisation": "Flomation",
     "name": "Helm Uninstall Release",
@@ -49360,7 +49493,7 @@
         "type": "string",
         "value": null,
         "label": "Helm Version",
-        "placeholder": "Leave blank to use the helm on the runner"
+        "placeholder": "Leave blank to use the helm on the runner, or the pinned 3.21.3"
       },
       {
         "name": "binary_path",
@@ -49447,7 +49580,7 @@
     ]
   },
   "infrastructure/helm/release_upgrade": {
-    "hash": "de7dc164a3e908c4bd74bc25dd479c73a0faf04606e700e50809bc246313e714",
+    "hash": "12114d0d13251ab6ff631d5e9d2694421c8766809ea161fc4f15a8b074169420",
     "author": "David McElin",
     "organisation": "Flomation",
     "name": "Helm Upgrade Release",
@@ -49576,7 +49709,7 @@
         "type": "string",
         "value": null,
         "label": "Helm Version",
-        "placeholder": "Leave blank to use the helm on the runner"
+        "placeholder": "Leave blank to use the helm on the runner, or the pinned 3.21.3"
       },
       {
         "name": "binary_path",
@@ -49622,6 +49755,34 @@
         "value": null,
         "label": "Chart Version",
         "placeholder": "Pin a chart version, e.g. 15.5.2 (blank uses the latest)"
+      },
+      {
+        "name": "repo_username",
+        "type": "string",
+        "value": null,
+        "label": "Repository Username",
+        "placeholder": "For a private chart repository (Nexus, Artifactory, an OCI registry)"
+      },
+      {
+        "name": "repo_password",
+        "type": "secret",
+        "value": null,
+        "label": "Repository Password",
+        "placeholder": "Never passed on the command line — written to a 0600 file, or piped to registry login"
+      },
+      {
+        "name": "repo_ca_cert",
+        "type": "text",
+        "value": null,
+        "label": "Repository CA Certificate (PEM)",
+        "placeholder": "-----BEGIN CERTIFICATE----- … for a repository behind an internal CA"
+      },
+      {
+        "name": "repo_insecure",
+        "type": "boolean",
+        "value": null,
+        "label": "Allow Insecure Repository TLS",
+        "placeholder": "Skip certificate verification when fetching the chart — only for a self-signed internal repository"
       },
       {
         "name": "values",
@@ -60481,7 +60642,7 @@
     ]
   },
   "infrastructure/kubernetes/service_create": {
-    "hash": "320b837a495738a787f692ec5009afec834471477aec688a3d35c692b489e431",
+    "hash": "40b199ef86eea4d4cdcf800ae0d5cf1f53458938fb6ce37833910d00f377b1d0",
     "author": "David McElin",
     "organisation": "Flomation",
     "name": "Kubernetes Create Service",
@@ -60647,12 +60808,33 @@
         ]
       },
       {
+        "name": "external_name",
+        "type": "string",
+        "value": null,
+        "label": "External Hostname",
+        "placeholder": "db.example.com — the hostname this service resolves to",
+        "visible_when": {
+          "field": "type",
+          "values": [
+            "ExternalName"
+          ]
+        }
+      },
+      {
         "name": "selector",
         "type": "object",
         "value": null,
         "label": "Selector",
         "placeholder": "The label map choosing the pods, e.g. {\"app\":\"web\"}",
-        "required": true
+        "visible_when": {
+          "field": "type",
+          "values": [
+            "",
+            "ClusterIP",
+            "NodePort",
+            "LoadBalancer"
+          ]
+        }
       },
       {
         "name": "port",
@@ -60660,14 +60842,31 @@
         "value": null,
         "label": "Port",
         "placeholder": "The port the service exposes, e.g. 80",
-        "required": true
+        "visible_when": {
+          "field": "type",
+          "values": [
+            "",
+            "ClusterIP",
+            "NodePort",
+            "LoadBalancer"
+          ]
+        }
       },
       {
         "name": "target_port",
         "type": "integer",
         "value": null,
         "label": "Target Port",
-        "placeholder": "The port the pods listen on (defaults to Port)"
+        "placeholder": "The port the pods listen on (defaults to Port)",
+        "visible_when": {
+          "field": "type",
+          "values": [
+            "",
+            "ClusterIP",
+            "NodePort",
+            "LoadBalancer"
+          ]
+        }
       },
       {
         "name": "protocol",
@@ -60684,14 +60883,30 @@
             "name": "UDP",
             "value": "UDP"
           }
-        ]
+        ],
+        "visible_when": {
+          "field": "type",
+          "values": [
+            "",
+            "ClusterIP",
+            "NodePort",
+            "LoadBalancer"
+          ]
+        }
       },
       {
         "name": "node_port",
         "type": "integer",
         "value": null,
         "label": "Node Port",
-        "placeholder": "Only for NodePort/LoadBalancer — leave blank to let the cluster pick (30000–32767)"
+        "placeholder": "Only for NodePort/LoadBalancer — leave blank to let the cluster pick (30000–32767)",
+        "visible_when": {
+          "field": "type",
+          "values": [
+            "NodePort",
+            "LoadBalancer"
+          ]
+        }
       }
     ],
     "outputs": [

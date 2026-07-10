@@ -57,6 +57,10 @@ var Inputs = [...]core.Connection{
 	{Name: "chart", Type: core.ConnectionTypeString, Label: "Chart", Placeholder: "A chart name (with Repository URL), an oci:// reference, or a local path", Required: true},
 	{Name: "repo_url", Type: core.ConnectionTypeString, Label: "Repository URL", Placeholder: "https://charts.bitnami.com/bitnami — resolves the chart without a repo add"},
 	{Name: "chart_version", Type: core.ConnectionTypeString, Label: "Chart Version", Placeholder: "Pin an exact chart version, e.g. 15.2.1 (blank for the latest)"},
+	{Name: "repo_username", Type: core.ConnectionTypeString, Label: "Repository Username", Placeholder: "For a private chart repository (Nexus, Artifactory, an OCI registry)"},
+	{Name: "repo_password", Type: core.ConnectionTypeSecret, Label: "Repository Password", Placeholder: "Never passed on the command line — written to a 0600 file, or piped to registry login"},
+	{Name: "repo_ca_cert", Type: core.ConnectionTypeText, Label: "Repository CA Certificate (PEM)", Placeholder: "-----BEGIN CERTIFICATE----- … for a repository behind an internal CA"},
+	{Name: "repo_insecure", Type: core.ConnectionTypeBoolean, Label: "Allow Insecure Repository TLS", Placeholder: "Skip certificate verification when fetching the chart — only for a self-signed internal repository"},
 	{Name: "values", Type: core.ConnectionTypeCode, Label: "Values (YAML)", Placeholder: "replicaCount: 2\nimage:\n  tag: \"1.27\""},
 	{Name: "strict", Type: core.ConnectionTypeBoolean, Label: "Strict", Placeholder: "Treat warnings as failures too"},
 }
@@ -83,12 +87,30 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	binaryPath := kubernetes.OptionalString("binary_path", inputs)
 	repoURL := kubernetes.OptionalString("repo_url", inputs)
 	chartVersion := kubernetes.OptionalString("chart_version", inputs)
+	repoUsername := kubernetes.OptionalString("repo_username", inputs)
+	repoPassword := kubernetes.OptionalString("repo_password", inputs)
+	repoCACert := kubernetes.OptionalString("repo_ca_cert", inputs)
+	repoInsecure := kubernetes.BoolInput("repo_insecure", inputs)
+
+	source := helm.ChartSource{
+		Chart:        chart,
+		RepoURL:      repoURL,
+		ChartVersion: chartVersion,
+		Username:     repoUsername,
+		Password:     repoPassword,
+		CACert:       repoCACert,
+		Insecure:     repoInsecure,
+	}
 	values := kubernetes.OptionalString("values", inputs)
 	strict := kubernetes.BoolInput("strict", inputs)
 
 	ctx, cancel := kubernetes.Context()
 	defer cancel()
 
+	// auth is threaded through only so the session can synthesise its kubeconfig.
+	// Neither `helm pull` nor `helm lint` contacts the cluster; the connection is
+	// carried so this node and release_install take the same one, and are drop-in
+	// interchangeable in a flow.
 	res, err := helm.WithSession(ctx, auth, version, binaryPath, "", values, func(s *helm.Session) (*helm.RunResult, error) {
 		target := chart
 
@@ -97,7 +119,11 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 		// and unpacked, because lint reads a directory.
 		if !isLocalPath(chart) {
 			untarDir := s.Home + "/chart"
-			pull := helm.AddChartSource([]string{"pull"}, chart, repoURL, chartVersion)
+			chartArgs, err := s.ResolveChart(source)
+			if err != nil {
+				return nil, err
+			}
+			pull := append([]string{"pull"}, chartArgs...)
 			pull = append(pull, "--untar", "--untardir", untarDir)
 
 			pulled, err := s.Run(pull...)

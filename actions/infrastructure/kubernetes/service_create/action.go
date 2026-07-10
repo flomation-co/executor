@@ -2,9 +2,16 @@
 // exposes a set of pods on a stable virtual IP and port.
 //
 // The inputs are the flat, common case: one port, one protocol, a label
-// selector, and a Service type. A Service with several ports, session affinity,
-// or an explicit ExternalName target needs a shape a handful of flat fields
-// cannot express — reach for apply_manifest there.
+// selector, and a Service type. A Service with several ports or session affinity
+// needs a shape a handful of flat fields cannot express — reach for
+// apply_manifest there.
+//
+// An ExternalName Service is a different object entirely, and the fields switch
+// with it. It has no selector, no ports and no virtual IP: it is a CNAME record,
+// mapping an in-cluster DNS name onto an external hostname (a managed database,
+// say). Kubernetes rejects a ports array on one, and requires spec.externalName.
+// So the type dropdown drives which inputs the editor shows, and Execute builds
+// one of two bodies.
 //
 // A few Service semantics the fields do not spell out:
 //   - target_port is the port the pods actually listen on; it defaults to the
@@ -54,14 +61,15 @@ var Inputs = [...]core.Connection{
 		{Name: "LoadBalancer", Value: "LoadBalancer"},
 		{Name: "ExternalName", Value: "ExternalName"},
 	}},
-	{Name: "selector", Type: core.ConnectionTypeObject, Label: "Selector", Placeholder: `The label map choosing the pods, e.g. {"app":"web"}`, Required: true},
-	{Name: "port", Type: core.ConnectionTypeInteger, Label: "Port", Placeholder: "The port the service exposes, e.g. 80", Required: true},
-	{Name: "target_port", Type: core.ConnectionTypeInteger, Label: "Target Port", Placeholder: "The port the pods listen on (defaults to Port)"},
+	{Name: "external_name", Type: core.ConnectionTypeString, Label: "External Hostname", Placeholder: "db.example.com — the hostname this service resolves to", Visible: &core.VisibleWhen{Field: "type", Values: []string{"ExternalName"}}},
+	{Name: "selector", Type: core.ConnectionTypeObject, Label: "Selector", Placeholder: `The label map choosing the pods, e.g. {"app":"web"}`, Visible: &core.VisibleWhen{Field: "type", Values: []string{"", "ClusterIP", "NodePort", "LoadBalancer"}}},
+	{Name: "port", Type: core.ConnectionTypeInteger, Label: "Port", Placeholder: "The port the service exposes, e.g. 80", Visible: &core.VisibleWhen{Field: "type", Values: []string{"", "ClusterIP", "NodePort", "LoadBalancer"}}},
+	{Name: "target_port", Type: core.ConnectionTypeInteger, Label: "Target Port", Placeholder: "The port the pods listen on (defaults to Port)", Visible: &core.VisibleWhen{Field: "type", Values: []string{"", "ClusterIP", "NodePort", "LoadBalancer"}}},
 	{Name: "protocol", Type: core.ConnectionTypeString, Label: "Protocol", Options: []core.ConnectionOption{
 		{Name: "TCP", Value: "TCP"},
 		{Name: "UDP", Value: "UDP"},
-	}},
-	{Name: "node_port", Type: core.ConnectionTypeInteger, Label: "Node Port", Placeholder: "Only for NodePort/LoadBalancer — leave blank to let the cluster pick (30000–32767)"},
+	}, Visible: &core.VisibleWhen{Field: "type", Values: []string{"", "ClusterIP", "NodePort", "LoadBalancer"}}},
+	{Name: "node_port", Type: core.ConnectionTypeInteger, Label: "Node Port", Placeholder: "Only for NodePort/LoadBalancer — leave blank to let the cluster pick (30000–32767)", Visible: &core.VisibleWhen{Field: "type", Values: []string{"NodePort", "LoadBalancer"}}},
 }
 
 var Outputs = [...]core.Connection{
@@ -86,53 +94,75 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 		return nil, err
 	}
 
-	selector, err := kubernetes.StringMapInput("selector", inputs)
-	if err != nil {
-		return nil, err
-	}
-	if len(selector) == 0 {
-		return nil, fmt.Errorf(`selector is required — provide the label map that chooses the pods, e.g. {"app":"web"}`)
-	}
-
-	port, ok := kubernetes.OptionalInt("port", inputs)
-	if !ok {
-		return nil, fmt.Errorf("port is required")
-	}
-
-	targetPort := port
-	if tp, ok := kubernetes.OptionalInt("target_port", inputs); ok {
-		targetPort = tp
-	}
-
 	svcType := kubernetes.OptionalString("type", inputs)
 	if svcType == "" {
 		svcType = "ClusterIP"
 	}
-	protocol := kubernetes.OptionalString("protocol", inputs)
-	if protocol == "" {
-		protocol = "TCP"
-	}
 
-	portEntry := map[string]interface{}{
-		"port":       port,
-		"targetPort": targetPort,
-		"protocol":   protocol,
-	}
-	// nodePort is only valid on NodePort/LoadBalancer services; omit it unless
-	// the operator pinned one, so the cluster allocates a free port itself.
-	if nodePort, ok := kubernetes.OptionalInt("node_port", inputs); ok {
-		portEntry["nodePort"] = nodePort
+	var spec map[string]interface{}
+
+	var summary string
+
+	if svcType == "ExternalName" {
+		// A CNAME, not a virtual IP. Kubernetes requires spec.externalName and
+		// rejects a ports array, so none of the pod-facing fields apply.
+		externalName, err := kubernetes.RequiredString("external_name", inputs)
+		if err != nil {
+			return nil, fmt.Errorf("external_name is required for an ExternalName service — the hostname it should resolve to, e.g. db.example.com")
+		}
+		spec = map[string]interface{}{
+			"type":         svcType,
+			"externalName": externalName,
+		}
+		summary = "Created ExternalName service " + name + " in namespace " + namespace + ", resolving to " + externalName
+	} else {
+		selector, err := kubernetes.StringMapInput("selector", inputs)
+		if err != nil {
+			return nil, err
+		}
+		if len(selector) == 0 {
+			return nil, fmt.Errorf(`selector is required — provide the label map that chooses the pods, e.g. {"app":"web"}`)
+		}
+
+		port, ok := kubernetes.OptionalInt("port", inputs)
+		if !ok {
+			return nil, fmt.Errorf("port is required")
+		}
+
+		targetPort := port
+		if tp, ok := kubernetes.OptionalInt("target_port", inputs); ok {
+			targetPort = tp
+		}
+
+		protocol := kubernetes.OptionalString("protocol", inputs)
+		if protocol == "" {
+			protocol = "TCP"
+		}
+
+		portEntry := map[string]interface{}{
+			"port":       port,
+			"targetPort": targetPort,
+			"protocol":   protocol,
+		}
+		// nodePort is only valid on NodePort/LoadBalancer services; omit it unless
+		// the operator pinned one, so the cluster allocates a free port itself.
+		if nodePort, ok := kubernetes.OptionalInt("node_port", inputs); ok {
+			portEntry["nodePort"] = nodePort
+		}
+
+		spec = map[string]interface{}{
+			"type":     svcType,
+			"selector": selector,
+			"ports":    []interface{}{portEntry},
+		}
+		summary = fmt.Sprintf("Created %s service %s in namespace %s on port %d", svcType, name, namespace, port)
 	}
 
 	body := map[string]interface{}{
 		"apiVersion": "v1",
 		"kind":       "Service",
 		"metadata":   map[string]interface{}{"name": name},
-		"spec": map[string]interface{}{
-			"type":     svcType,
-			"selector": selector,
-			"ports":    []interface{}{portEntry},
-		},
+		"spec":       spec,
 	}
 
 	ctx, cancel := kubernetes.Context()
@@ -143,5 +173,5 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 		return kubernetes.ErrorResult(err.Error()), nil
 	}
 
-	return kubernetes.ObjectResult(obj, fmt.Sprintf("Created %s service %s in namespace %s on port %d", svcType, name, namespace, port)), nil
+	return kubernetes.ObjectResult(obj, summary), nil
 }

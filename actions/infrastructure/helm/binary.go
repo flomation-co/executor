@@ -9,13 +9,37 @@
 // the embedded signing key vouches for them. Helm publishes no such signature —
 // only a <artifact>.tar.gz.sha256sum served from the same host as the tarball.
 // Fetching that checksum would prove only that the bytes we received are the
-// bytes get.helm.sh served, which is what TLS already tells us; a compromised
+// bytes the host served, which is what TLS already tells us; a compromised
 // mirror would happily serve a matching pair.
 //
-// So the checksums are pinned HERE, in source, reviewed like any other code. A
-// version we have no pinned checksum for is never downloaded: the operator is
-// told to install helm on the runner or point binary_path at it. That is a
-// stricter policy than OpenTofu's, and it is the right one given what Helm ships.
+// So the checksums are pinned HERE, in source, reviewed like any other code, and
+// a binary is never installed unless its SHA-256 matches. That invariant holds on
+// every path below, which is what makes the mirror and TLS overrides safe: an
+// operator may redirect the download to an internal Nexus, present a private CA,
+// or even switch verification off — the bytes still have to match a checksum the
+// operator or this file declared in advance.
+//
+// # Air-gapped and corporate environments
+//
+// Resolution never touches the network when a binary is already present, so the
+// simplest answer for an air-gapped runner remains: install helm on the host (or
+// bake it into the image) and it is used as-is. Beyond that, four environment
+// variables on the runner shape the download:
+//
+//	FLOMATION_HELM_DISABLE_DOWNLOAD=1   forbid runtime downloads entirely
+//	FLOMATION_HELM_MIRROR=<base-url>    fetch from an internal mirror instead of
+//	                                    get.helm.sh; the release filename is
+//	                                    appended (helm-v<ver>-<goos>-<arch>.tar.gz)
+//	FLOMATION_HELM_SHA256=<hex>         the expected checksum for the requested
+//	                                    version and platform, for a version this
+//	                                    file does not pin
+//	FLOMATION_HELM_CA_BUNDLE=<path>     PEM bundle used to verify the mirror,
+//	                                    for a Nexus behind an internal CA
+//	FLOMATION_HELM_INSECURE=1           skip TLS verification of the mirror
+//
+// They are environment variables rather than node inputs because which binary a
+// runner may execute, and which CA it trusts, is a property of the host — not of
+// a flow an operator drew.
 package helm
 
 import (
@@ -23,6 +47,8 @@ import (
 	"compress/gzip"
 	"context"
 	"crypto/sha256"
+	"crypto/tls"
+	"crypto/x509"
 	"encoding/hex"
 	"fmt"
 	"io"
@@ -71,7 +97,89 @@ const maxBinarySize = 128 << 20
 // atomic rename at the end of extractBinary.
 var downloadMu sync.Mutex
 
-var httpClient = &http.Client{Timeout: 5 * time.Minute}
+// downloadClient builds the client used to fetch the release archive. It honours
+// FLOMATION_HELM_CA_BUNDLE (an internal CA, for a mirror behind a corporate PKI)
+// and FLOMATION_HELM_INSECURE (skip verification altogether).
+//
+// Switching verification off does not make the download unverified: the archive
+// is still checked against a checksum pinned in this file or supplied through
+// FLOMATION_HELM_SHA256, and a mismatch refuses to install. TLS protects the
+// transport; the checksum protects the artefact.
+func downloadClient() (*http.Client, error) {
+	// #nosec G402 -- InsecureSkipVerify is an explicit operator opt-in for a
+	// mirror behind an internal CA. Integrity is enforced by the checksum, which
+	// no path below can skip.
+	tlsCfg := &tls.Config{MinVersion: tls.VersionTLS12}
+
+	if insecureDownload() {
+		tlsCfg.InsecureSkipVerify = true
+	} else if bundle := strings.TrimSpace(os.Getenv("FLOMATION_HELM_CA_BUNDLE")); bundle != "" {
+		pem, err := os.ReadFile(bundle) // #nosec G304 -- an operator-configured trust store path
+		if err != nil {
+			return nil, fmt.Errorf("could not read FLOMATION_HELM_CA_BUNDLE %q: %w", bundle, err)
+		}
+		pool, err := x509.SystemCertPool()
+		if err != nil || pool == nil {
+			pool = x509.NewCertPool()
+		}
+		if !pool.AppendCertsFromPEM(pem) {
+			return nil, fmt.Errorf("FLOMATION_HELM_CA_BUNDLE %q contains no usable PEM certificate", bundle)
+		}
+		tlsCfg.RootCAs = pool
+	}
+
+	return &http.Client{
+		Timeout:   5 * time.Minute,
+		Transport: &http.Transport{TLSClientConfig: tlsCfg},
+	}, nil
+}
+
+func insecureDownload() bool {
+	switch strings.ToLower(strings.TrimSpace(os.Getenv("FLOMATION_HELM_INSECURE"))) {
+	case "1", "true", "yes":
+		return true
+	}
+	return false
+}
+
+// releaseURL is where the archive is fetched from: an operator-configured mirror
+// when FLOMATION_HELM_MIRROR is set, otherwise the official host.
+func releaseURL(version, platform string) string {
+	name := fmt.Sprintf("helm-v%s-%s.tar.gz", version, platform)
+	if mirror := strings.TrimSpace(os.Getenv("FLOMATION_HELM_MIRROR")); mirror != "" {
+		return strings.TrimRight(mirror, "/") + "/" + name
+	}
+	return "https://get.helm.sh/" + name
+}
+
+// expectedChecksum resolves the SHA-256 the downloaded archive must match:
+// FLOMATION_HELM_SHA256 when the operator mirrors a version this file does not
+// pin, otherwise the pinned value. An empty result means "never download".
+func expectedChecksum(version, platform string) (string, error) {
+	if override := strings.ToLower(strings.TrimSpace(os.Getenv("FLOMATION_HELM_SHA256"))); override != "" {
+		if len(override) != 64 {
+			return "", fmt.Errorf("FLOMATION_HELM_SHA256 must be a 64-character hex SHA-256 digest")
+		}
+		if _, err := hex.DecodeString(override); err != nil {
+			return "", fmt.Errorf("FLOMATION_HELM_SHA256 is not valid hex: %w", err)
+		}
+		return override, nil
+	}
+
+	sums, known := pinnedChecksums[version]
+	if !known {
+		return "", fmt.Errorf("refusing to download helm %s: no checksum is pinned for it. "+
+			"Install Helm on the runner, set binary_path, use the pinned version %s, "+
+			"or declare the digest in FLOMATION_HELM_SHA256", version, DefaultVersion)
+	}
+	sum, known := sums[platform]
+	if !known {
+		return "", fmt.Errorf("refusing to download helm %s: no checksum is pinned for %s. "+
+			"Install Helm on the runner, set binary_path, or declare the digest in FLOMATION_HELM_SHA256",
+			version, platform)
+	}
+	return sum, nil
+}
 
 // EnsureBinary returns a path to a usable `helm`. Resolution order, most to
 // least preferred:
@@ -112,15 +220,9 @@ func EnsureBinary(ctx context.Context, version, override string) (string, error)
 	}
 
 	platform := runtime.GOOS + "-" + runtime.GOARCH
-	sums, ok := pinnedChecksums[version]
-	if !ok {
-		return "", fmt.Errorf("refusing to download helm %s: no checksum is pinned for it. "+
-			"Install Helm on the runner, set binary_path, or use the pinned version %s", version, DefaultVersion)
-	}
-	want, ok := sums[platform]
-	if !ok {
-		return "", fmt.Errorf("refusing to download helm %s: no checksum is pinned for %s. "+
-			"Install Helm on the runner, or set binary_path", version, platform)
+	want, err := expectedChecksum(version, platform)
+	if err != nil {
+		return "", err
 	}
 
 	downloadMu.Lock()
@@ -164,10 +266,10 @@ func isExecutableFile(p string) bool {
 	return err == nil && fi.Mode().IsRegular() && fi.Mode()&0o111 != 0
 }
 
-// download fetches the release tarball, checks it against the pinned checksum,
-// and installs the binary at dest.
+// download fetches the release tarball, checks it against the expected checksum,
+// and installs the binary at dest. A mismatch never installs.
 func download(ctx context.Context, version, platform, wantSum, dest string) error {
-	url := fmt.Sprintf("https://get.helm.sh/helm-v%s-%s.tar.gz", version, platform)
+	url := releaseURL(version, platform)
 
 	tmp, err := os.CreateTemp("", "helm-download-*.tar.gz")
 	if err != nil {
@@ -181,8 +283,8 @@ func download(ctx context.Context, version, platform, wantSum, dest string) erro
 		return fmt.Errorf("downloading %s: %w", url, err)
 	}
 	if !strings.EqualFold(gotSum, wantSum) {
-		return fmt.Errorf("checksum mismatch for helm %s (%s): got %s, want %s — "+
-			"refusing to install", version, platform, gotSum, wantSum)
+		return fmt.Errorf("checksum mismatch for helm %s (%s) from %s: got %s, want %s — "+
+			"refusing to install", version, platform, url, gotSum, wantSum)
 	}
 
 	if err := os.MkdirAll(filepath.Dir(dest), 0o755); err != nil {
@@ -193,11 +295,15 @@ func download(ctx context.Context, version, platform, wantSum, dest string) erro
 
 // fetchToFile streams url into f and returns the hex SHA-256 of what was written.
 func fetchToFile(ctx context.Context, url string, f *os.File) (string, error) {
+	client, err := downloadClient()
+	if err != nil {
+		return "", err
+	}
 	req, err := http.NewRequestWithContext(ctx, http.MethodGet, url, nil)
 	if err != nil {
 		return "", err
 	}
-	resp, err := httpClient.Do(req)
+	resp, err := client.Do(req)
 	if err != nil {
 		return "", err
 	}

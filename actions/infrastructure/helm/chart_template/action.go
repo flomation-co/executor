@@ -51,6 +51,10 @@ var Inputs = [...]core.Connection{
 	{Name: "chart", Type: core.ConnectionTypeString, Label: "Chart", Placeholder: "A chart name (with Repository URL), an oci:// reference, or a local path", Required: true},
 	{Name: "repo_url", Type: core.ConnectionTypeString, Label: "Repository URL", Placeholder: "https://charts.bitnami.com/bitnami — resolves the chart without a repo add"},
 	{Name: "chart_version", Type: core.ConnectionTypeString, Label: "Chart Version", Placeholder: "Pin an exact chart version, e.g. 15.2.1 (blank for the latest)"},
+	{Name: "repo_username", Type: core.ConnectionTypeString, Label: "Repository Username", Placeholder: "For a private chart repository (Nexus, Artifactory, an OCI registry)"},
+	{Name: "repo_password", Type: core.ConnectionTypeSecret, Label: "Repository Password", Placeholder: "Never passed on the command line — written to a 0600 file, or piped to registry login"},
+	{Name: "repo_ca_cert", Type: core.ConnectionTypeText, Label: "Repository CA Certificate (PEM)", Placeholder: "-----BEGIN CERTIFICATE----- … for a repository behind an internal CA"},
+	{Name: "repo_insecure", Type: core.ConnectionTypeBoolean, Label: "Allow Insecure Repository TLS", Placeholder: "Skip certificate verification when fetching the chart — only for a self-signed internal repository"},
 	{Name: "values", Type: core.ConnectionTypeCode, Label: "Values (YAML)", Placeholder: "replicaCount: 2\nimage:\n  tag: \"1.27\""},
 	{Name: "namespace", Type: core.ConnectionTypeString, Label: "Namespace", Placeholder: "The namespace the manifests target (blank for default)"},
 	{Name: "include_crds", Type: core.ConnectionTypeBoolean, Label: "Include CRDs", Placeholder: "Also render the chart's CustomResourceDefinitions"},
@@ -81,6 +85,20 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	binaryPath := kubernetes.OptionalString("binary_path", inputs)
 	repoURL := kubernetes.OptionalString("repo_url", inputs)
 	chartVersion := kubernetes.OptionalString("chart_version", inputs)
+	repoUsername := kubernetes.OptionalString("repo_username", inputs)
+	repoPassword := kubernetes.OptionalString("repo_password", inputs)
+	repoCACert := kubernetes.OptionalString("repo_ca_cert", inputs)
+	repoInsecure := kubernetes.BoolInput("repo_insecure", inputs)
+
+	source := helm.ChartSource{
+		Chart:        chart,
+		RepoURL:      repoURL,
+		ChartVersion: chartVersion,
+		Username:     repoUsername,
+		Password:     repoPassword,
+		CACert:       repoCACert,
+		Insecure:     repoInsecure,
+	}
 	values := kubernetes.OptionalString("values", inputs)
 	namespace := kubernetes.OptionalString("namespace", inputs)
 	includeCRDs := kubernetes.BoolInput("include_crds", inputs)
@@ -88,17 +106,20 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	ctx, cancel := kubernetes.Context()
 	defer cancel()
 
-	res, err := helm.InvokeWithValues(ctx, auth, version, binaryPath, namespace, values, func(valuesArgs []string) []string {
-		args := []string{"template", name}
-		args = helm.AddChartSource(args, chart, repoURL, chartVersion)
+	res, err := helm.WithSession(ctx, auth, version, binaryPath, namespace, values, func(s *helm.Session) (*helm.RunResult, error) {
+		chartArgs, err := s.ResolveChart(source)
+		if err != nil {
+			return nil, err
+		}
+		args := append([]string{"template", name}, chartArgs...)
 		if namespace != "" {
 			args = append(args, "-n", namespace)
 		}
-		args = append(args, valuesArgs...)
+		args = append(args, s.ValuesArgs...)
 		if includeCRDs {
 			args = append(args, "--include-crds")
 		}
-		return args
+		return s.Run(args...)
 	})
 	if err != nil {
 		return helm.ErrorResult(err.Error()), nil
