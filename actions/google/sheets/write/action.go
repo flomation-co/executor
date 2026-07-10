@@ -75,6 +75,13 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 		return google.ErrorResult(fmt.Sprintf("data must be a JSON 2D array: %v", err))
 	}
 
+	// Under USER_ENTERED, Sheets numerically coerces phone/ID-shaped
+	// strings (dropping leading zeros, evaluating a leading +). Guard
+	// them so they land as text. RAW already stores values verbatim.
+	if valueInput == "USER_ENTERED" {
+		google.ProtectPhoneLikeText(values)
+	}
+
 	tokens, err := google.FetchTokens(flow, credential)
 	if err != nil {
 		return google.ErrorResult(err.Error())

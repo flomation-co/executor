@@ -232,6 +232,41 @@ func substitutionString(v interface{}) string {
 	return fmt.Sprintf("%v", v)
 }
 
+// jsonEscapeInner escapes a string for safe insertion INSIDE a JSON string
+// literal — i.e. it returns what would sit between the quotes, with the
+// quotes stripped. Double quotes, backslashes, newlines, tabs and control
+// characters are all escaped, so a value spliced into a `"${x}"` position
+// in a hand-authored JSON template can never break the surrounding JSON.
+// HTML escaping is disabled so &, < and > pass through as themselves,
+// keeping the on-the-wire value identical to what the user entered.
+func jsonEscapeInner(s string) string {
+	var buf bytes.Buffer
+	enc := json.NewEncoder(&buf)
+	enc.SetEscapeHTML(false)
+	if err := enc.Encode(s); err != nil {
+		return s
+	}
+	// Encoder emits the quoted string plus a trailing newline.
+	out := strings.TrimRight(buf.String(), "\n")
+	if len(out) >= 2 && out[0] == '"' && out[len(out)-1] == '"' {
+		return out[1 : len(out)-1]
+	}
+	return s
+}
+
+// replaceToken substitutes every ${token} occurrence in *val with
+// replacement. When jsonCtx is true (the input is a JSON container such as
+// a "rows" 2D array), the replacement is JSON-escaped first so variable
+// values containing quotes, backslashes, newlines or entire JSON blobs
+// can't break the surrounding JSON that downstream actions parse. For
+// non-JSON inputs the escape is skipped, preserving verbatim substitution.
+func replaceToken(val *string, token string, jsonCtx bool, replacement string) {
+	if jsonCtx {
+		replacement = jsonEscapeInner(replacement)
+	}
+	*val = strings.ReplaceAll(*val, "${"+token+"}", replacement)
+}
+
 type Edge struct {
 	ID           string `json:"id"`
 	Type         string `json:"type"`
@@ -1619,6 +1654,17 @@ func (f *Flow) executeNodeActionOnly(actions map[string]Action, node *Node, envi
 		}
 
 		if val != nil {
+			// When the input is a JSON container (a "rows" 2D array,
+			// hand-authored as `[["${name}","${phone}"]]` and later
+			// json.Unmarshal'd by actions like google/sheets/append),
+			// substituted values must be JSON-string-escaped. Otherwise a
+			// variable holding a double quote, backslash, newline or a
+			// whole pasted JSON blob (common in free-text form answers)
+			// breaks the surrounding JSON and the action fails to parse
+			// its input. Escaping a plain value is a no-op, so ordinary
+			// string inputs are unaffected.
+			jsonCtx := v.Type == ConnectionTypeRows
+
 			r := regexp.MustCompile(`\${[^{}]*}`)
 			matches := r.FindAllString(*val, -1)
 
@@ -1649,7 +1695,7 @@ func (f *Flow) executeNodeActionOnly(actions map[string]Action, node *Node, envi
 						continue
 					}
 
-					*val = strings.ReplaceAll(*val, "${"+m+"}", *p.Value)
+					replaceToken(val, m, jsonCtx,*p.Value)
 				} else if strings.HasPrefix(m, "flow.") {
 					name := strings.TrimPrefix(m, "flow.")
 					if f.context != nil {
@@ -1658,7 +1704,7 @@ func (f *Flow) executeNodeActionOnly(actions map[string]Action, node *Node, envi
 						// resolved value (e.g. thread_id when there's no
 						// thread). Leaving the literal ${flow.xxx} in place
 						// causes downstream actions to receive it as text.
-						*val = strings.ReplaceAll(*val, "${"+m+"}", contextVal)
+						replaceToken(val, m, jsonCtx,contextVal)
 					} else {
 						log.WithFields(log.Fields{
 							"name": name,
@@ -1675,7 +1721,7 @@ func (f *Flow) executeNodeActionOnly(actions map[string]Action, node *Node, envi
 					if f.context != nil && f.context.UserVariables != nil {
 						userVal = f.context.UserVariables[name]
 					}
-					*val = strings.ReplaceAll(*val, "${"+m+"}", userVal)
+					replaceToken(val, m, jsonCtx,userVal)
 				} else if strings.HasPrefix(m, "var.") {
 					// ${var.X} — Set-Variable-node-backed flow-scoped
 					// variables. The stored value can be any interface{}
@@ -1698,9 +1744,9 @@ func (f *Flow) executeNodeActionOnly(actions map[string]Action, node *Node, envi
 										"name":  m,
 										"error": err,
 									}).Warn("path resolution failed on ${var.X}")
-									*val = strings.ReplaceAll(*val, "${"+m+"}", "")
+									replaceToken(val, m, jsonCtx,"")
 								} else {
-									*val = strings.ReplaceAll(*val, "${"+m+"}", substitutionString(walked))
+									replaceToken(val, m, jsonCtx,substitutionString(walked))
 								}
 							} else {
 								log.WithFields(log.Fields{
@@ -1710,7 +1756,7 @@ func (f *Flow) executeNodeActionOnly(actions map[string]Action, node *Node, envi
 						}
 					} else if f.variables != nil {
 						if varVal, ok := f.variables[name]; ok {
-							*val = strings.ReplaceAll(*val, "${"+m+"}", substitutionString(varVal))
+							replaceToken(val, m, jsonCtx,substitutionString(varVal))
 						} else {
 							log.WithFields(log.Fields{
 								"name": name,
@@ -1739,7 +1785,7 @@ func (f *Flow) executeNodeActionOnly(actions map[string]Action, node *Node, envi
 						}).Warn("missing credential")
 						continue
 					}
-					*val = strings.ReplaceAll(*val, "${"+m+"}", *token)
+					replaceToken(val, m, jsonCtx,*token)
 				} else if strings.HasPrefix(m, "secrets.") || strings.HasPrefix(m, "secret.") {
 					if environment == nil {
 						log.WithFields(log.Fields{
@@ -1764,7 +1810,7 @@ func (f *Flow) executeNodeActionOnly(actions map[string]Action, node *Node, envi
 						continue
 					}
 
-					*val = strings.ReplaceAll(*val, "${"+m+"}", *p.Value)
+					replaceToken(val, m, jsonCtx,*p.Value)
 				} else {
 					// Parent-output reference. Two forms:
 					//   ${nodeId.key}                      — top-level output
@@ -1781,7 +1827,7 @@ func (f *Flow) executeNodeActionOnly(actions map[string]Action, node *Node, envi
 
 					if !pathPresent {
 						if res, exists := parentResults[m]; exists {
-							*val = strings.ReplaceAll(*val, "${"+m+"}", substitutionString(res))
+							replaceToken(val, m, jsonCtx,substitutionString(res))
 							continue
 						}
 					}
@@ -1895,7 +1941,7 @@ func (f *Flow) executeNodeActionOnly(actions map[string]Action, node *Node, envi
 								"node_id": scopeNodeID,
 							}).Warn("scoped node not found in results cache")
 						}
-						*val = strings.ReplaceAll(*val, "${"+m+"}", replacement)
+						replaceToken(val, m, jsonCtx,replacement)
 					} else {
 						log.WithFields(log.Fields{
 							"output": m,
@@ -1909,7 +1955,7 @@ func (f *Flow) executeNodeActionOnly(actions map[string]Action, node *Node, envi
 						// misses. A leaked ${...} literal reaches downstream
 						// actions and AI prompts as text (see the no-literal
 						// guarantee in flow_scoped_dep_test.go).
-						*val = strings.ReplaceAll(*val, "${"+m+"}", "")
+						replaceToken(val, m, jsonCtx,"")
 					}
 				}
 			}

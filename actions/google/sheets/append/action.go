@@ -73,6 +73,13 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 		return google.ErrorResult(fmt.Sprintf("data must be a JSON 2D array: %v", err))
 	}
 
+	// Under USER_ENTERED, Sheets numerically coerces phone/ID-shaped
+	// strings (dropping leading zeros, evaluating a leading +). Guard
+	// them so they land as text. RAW already stores values verbatim.
+	if valueInput == "USER_ENTERED" {
+		google.ProtectPhoneLikeText(values)
+	}
+
 	tokens, err := google.FetchTokens(flow, credential)
 	if err != nil {
 		return google.ErrorResult(err.Error())
@@ -83,14 +90,19 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	}
 	token := active[0]
 
+	// Anchor a bare sheet-name range to A1 so Google's append aligns new
+	// rows to column A instead of a mis-detected far-column table (e.g.
+	// appending at L2 rather than A2). See google.AnchorAppendRange.
+	searchRange := google.AnchorAppendRange(cellRange)
+
 	payload := map[string]interface{}{
-		"range":  cellRange,
+		"range":  searchRange,
 		"values": values,
 	}
 	body, _ := json.Marshal(payload)
 
 	endpoint := fmt.Sprintf("%s/%s/values/%s:append?valueInputOption=%s&insertDataOption=INSERT_ROWS",
-		sheetsAPI, spreadsheetID, cellRange, valueInput)
+		sheetsAPI, spreadsheetID, searchRange, valueInput)
 
 	status, respBody, err := google.DoRequest(flow, "POST", endpoint, token.AccessToken, body)
 	if err != nil {
