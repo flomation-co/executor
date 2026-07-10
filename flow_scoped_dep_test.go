@@ -172,3 +172,71 @@ func TestScopedDependency_UnresolvedReferenceReplacesWithEmpty(t *testing.T) {
 	Expect(capturedPrompt).NotTo(ContainSubstring("${"),
 		"no ${...} literal should leak through — that's what lets AI hallucinate fake handles from node UUIDs")
 }
+
+// TestBareReference_UnresolvedReplacesWithEmpty locks the same
+// no-literal-leak guarantee for BARE, unscoped references — a `${name}`
+// token with no namespace prefix and no dot. This is the form-field
+// case: a conditionally-hidden form field is stripped from the
+// submission before it reaches the executor, so a downstream
+// `${field_name}` matches no parent output. It previously fell through
+// the substitution switch and left the literal `${field_name}` in the
+// text (surfacing as e.g. the whole snake-cased question title). It must
+// collapse to empty string like every other unresolved reference.
+func TestBareReference_UnresolvedReplacesWithEmpty(t *testing.T) {
+	RegisterTestingT(t)
+
+	var capturedPrompt string
+
+	triggerAction := func(flow *Flow, node *Node, inputs []*Connection) (map[string]interface{}, error) {
+		return map[string]interface{}{}, nil
+	}
+	consumerAction := func(flow *Flow, node *Node, inputs []*Connection) (map[string]interface{}, error) {
+		for _, c := range inputs {
+			if c.Name == "prompt_field" {
+				if s := c.String(); s != nil {
+					capturedPrompt = *s
+				}
+			}
+		}
+		return map[string]interface{}{}, nil
+	}
+
+	f := &Flow{
+		Nodes: []*Node{
+			{ID: "trigger-1", Type: "trigger/manual", Data: &NodeData{
+				Label: "trigger/manual", Config: NodeConfig{Type: ActionTypeTrigger},
+			}},
+			{ID: "consumer", Type: "test/consumer", Data: &NodeData{
+				Label: "test/consumer",
+				Config: NodeConfig{
+					Type: ActionTypeAction,
+					Inputs: []*Connection{
+						// Bare token — no namespace, no dot — matching no
+						// parent output (the hidden field was never submitted).
+						{Name: "prompt_field", Type: ConnectionTypeString, Value: "before ${would_you_use_this_feature} after"},
+					},
+				},
+			}},
+		},
+		Edges: []*Edge{
+			{ID: "e1", Source: "trigger-1", Target: "consumer"},
+		},
+		nodeResults:          make(map[string]map[string]interface{}),
+		nodeExecutionResults: make(map[string]*ExecutionNodeResult),
+		outputs:              make(map[string]interface{}),
+		variables:            make(map[string]interface{}),
+	}
+
+	actions := map[string]Action{
+		"trigger/manual": triggerAction,
+		"test/consumer":  consumerAction,
+	}
+
+	_, err := f.Execute(actions, nil, nil)
+	Expect(err).To(BeNil())
+
+	Expect(capturedPrompt).To(Equal("before  after"),
+		"unresolved bare reference must replace as empty so the literal field name never reaches downstream actions")
+	Expect(capturedPrompt).NotTo(ContainSubstring("${"),
+		"no ${...} literal should leak through for bare references either")
+}

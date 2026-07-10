@@ -1900,6 +1900,16 @@ func (f *Flow) executeNodeActionOnly(actions map[string]Action, node *Node, envi
 						log.WithFields(log.Fields{
 							"output": m,
 						}).Warn("substitution upstream output does not exist")
+						// Bare, unscoped reference (no namespace, no dot) that
+						// matched no parent output — e.g. a form field that was
+						// conditionally hidden and so never submitted. Replace
+						// with empty string rather than leaving the literal
+						// ${field_name} in place, matching the scoped-reference
+						// branch above and the ${flow.X}/${user.X}/${var.X}
+						// misses. A leaked ${...} literal reaches downstream
+						// actions and AI prompts as text (see the no-literal
+						// guarantee in flow_scoped_dep_test.go).
+						*val = strings.ReplaceAll(*val, "${"+m+"}", "")
 					}
 				}
 			}
