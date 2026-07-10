@@ -309,6 +309,79 @@ func OptBool(name string, inputs []*core.Connection) bool {
 	return OptStr(name, inputs) == "true"
 }
 
+// AnchorAppendRange anchors a bare sheet-name range to cell A1 so Google's
+// append aligns new rows to column A. Google's append searches the given
+// range for a "logical table" and writes from that table's first column;
+// with a bare sheet name the whole sheet is searched, so empty leading
+// columns (or a stray far-column block) can make it start at, say, column
+// L. Anchoring to A1 fixes the common header-at-A1 case. A range that
+// already names a cell/range (contains "!") is respected and returned
+// unchanged, so a caller can still target a deliberate non-A anchor.
+func AnchorAppendRange(r string) string {
+	if r == "" || strings.Contains(r, "!") {
+		return r
+	}
+	return r + "!A1"
+}
+
+// ProtectPhoneLikeText guards phone/ID-shaped string cells against Google
+// Sheets' USER_ENTERED coercion. In that mode Sheets parses each value as
+// if a human typed it into the cell, so "07700900123" loses its leading
+// zero (→ 7700900123) and "+447700900123" is evaluated as a number
+// (→ 447700900123). Prefixing such a value with an apostrophe forces Sheets
+// to store it verbatim as text — the apostrophe itself is not displayed.
+//
+// Only string cells whose shape Sheets would corrupt are touched:
+//   - a run of digits with a leading zero (phone, sort code, postcode…),
+//   - an international number: a leading "+" followed by digits.
+// Common separators (spaces, dashes, dots, parentheses) are ignored when
+// testing the shape. Numbers, dates, formulas ("=…"), negatives and
+// ordinary text pass through untouched. Mutates values in place.
+//
+// Only call this for the USER_ENTERED path — under RAW, Sheets already
+// stores values verbatim and a leading apostrophe would be written
+// literally into the cell.
+func ProtectPhoneLikeText(values [][]interface{}) {
+	for i := range values {
+		for j := range values[i] {
+			if s, ok := values[i][j].(string); ok && phoneLikeNeedsTextGuard(s) {
+				values[i][j] = "'" + s
+			}
+		}
+	}
+}
+
+// phoneLikeNeedsTextGuard reports whether a string would be corrupted by
+// Sheets' USER_ENTERED numeric coercion and should be stored as text.
+func phoneLikeNeedsTextGuard(s string) bool {
+	// Strip common phone separators before testing the numeric shape.
+	compact := strings.NewReplacer(" ", "", "-", "", "(", "", ")", "", ".", "").Replace(s)
+	if compact == "" {
+		return false
+	}
+	// International: a leading "+" then all digits.
+	if compact[0] == '+' {
+		return len(compact) > 1 && isAllDigits(compact[1:])
+	}
+	// Leading-zero numeric run (phone, sort code, postcode, account…).
+	if compact[0] == '0' && len(compact) >= 2 && isAllDigits(compact) {
+		return true
+	}
+	return false
+}
+
+func isAllDigits(s string) bool {
+	if s == "" {
+		return false
+	}
+	for _, r := range s {
+		if r < '0' || r > '9' {
+			return false
+		}
+	}
+	return true
+}
+
 // ─── Drive shared-files helpers ────────────────────────────────────
 //
 // Google Drive's files.list / files.get / files.update endpoints
