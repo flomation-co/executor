@@ -693,6 +693,7 @@ import (
 	trigger_microsoft_outlook "flomation.app/automate/executor/actions/trigger/microsoft_outlook"
 	trigger_plan_task "flomation.app/automate/executor/actions/trigger/plan_task"
 	trigger_qr "flomation.app/automate/executor/actions/trigger/qr"
+	trigger_quickbooks_webhook "flomation.app/automate/executor/actions/trigger/quickbooks_webhook"
 	trigger_s3 "flomation.app/automate/executor/actions/trigger/s3"
 	trigger_schedule "flomation.app/automate/executor/actions/trigger/schedule"
 	trigger_shopify_webhook "flomation.app/automate/executor/actions/trigger/shopify_webhook"
@@ -704,6 +705,7 @@ import (
 	trigger_twilio_voice "flomation.app/automate/executor/actions/trigger/twilio_voice"
 	trigger_webhook "flomation.app/automate/executor/actions/trigger/webhook"
 	trigger_woocommerce_webhook "flomation.app/automate/executor/actions/trigger/woocommerce_webhook"
+	trigger_xero_webhook "flomation.app/automate/executor/actions/trigger/xero_webhook"
 	trigger_zendesk_webhook "flomation.app/automate/executor/actions/trigger/zendesk_webhook"
 	twilio_end_call "flomation.app/automate/executor/actions/twilio/end_call"
 	twilio_make_call "flomation.app/automate/executor/actions/twilio/make_call"
@@ -1506,6 +1508,7 @@ var Actions = map[string]core.Action{
 	"trigger/microsoft_outlook":                         trigger_microsoft_outlook.Execute,
 	"trigger/plan_task":                                 trigger_plan_task.Execute,
 	"trigger/qr":                                        trigger_qr.Execute,
+	"trigger/quickbooks_webhook":                        trigger_quickbooks_webhook.Execute,
 	"trigger/s3":                                        trigger_s3.Execute,
 	"trigger/schedule":                                  trigger_schedule.Execute,
 	"trigger/shopify_webhook":                           trigger_shopify_webhook.Execute,
@@ -1517,6 +1520,7 @@ var Actions = map[string]core.Action{
 	"trigger/twilio_voice":                              trigger_twilio_voice.Execute,
 	"trigger/webhook":                                   trigger_webhook.Execute,
 	"trigger/woocommerce_webhook":                       trigger_woocommerce_webhook.Execute,
+	"trigger/xero_webhook":                              trigger_xero_webhook.Execute,
 	"trigger/zendesk_webhook":                           trigger_zendesk_webhook.Execute,
 	"twilio/end_call":                                   twilio_end_call.Execute,
 	"twilio/make_call":                                  twilio_make_call.Execute,

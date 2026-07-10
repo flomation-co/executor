@@ -74287,6 +74287,104 @@
       }
     ]
   },
+  "trigger/quickbooks_webhook": {
+    "hash": "e642455ecc808d9805c8dba17d8fd6e06ca3b05f49633f09cd17087a54165c16",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "QuickBooks Webhook Trigger",
+    "description": "Triggers a flow when a QuickBooks Online entity changes (customer, invoice, payment…)",
+    "website": "https://www.flomation.co",
+    "icon": "quickbooks",
+    "date": "10/07/2026",
+    "type": 1,
+    "category": {
+      "name": "Triggers",
+      "icon": "bolt-lightning",
+      "description": "Start a Flow"
+    },
+    "inputs": [
+      {
+        "name": "verifier_token",
+        "type": "secret",
+        "value": null,
+        "label": "Verifier Token",
+        "placeholder": "From the Intuit app's webhooks settings",
+        "required": true
+      },
+      {
+        "name": "event_filter",
+        "type": "string",
+        "value": null,
+        "label": "Event Filter",
+        "placeholder": "Comma-separated, e.g. Customer.Create,Invoice.Update or Customer (blank = all)"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "content",
+        "type": "string",
+        "value": null,
+        "label": "Event Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "event_type",
+        "type": "string",
+        "value": null,
+        "label": "Event Type",
+        "placeholder": ""
+      },
+      {
+        "name": "entity",
+        "type": "string",
+        "value": null,
+        "label": "Entity",
+        "placeholder": ""
+      },
+      {
+        "name": "entity_id",
+        "type": "string",
+        "value": null,
+        "label": "Entity ID",
+        "placeholder": ""
+      },
+      {
+        "name": "operation",
+        "type": "string",
+        "value": null,
+        "label": "Operation",
+        "placeholder": ""
+      },
+      {
+        "name": "realm_id",
+        "type": "string",
+        "value": null,
+        "label": "Company (Realm ID)",
+        "placeholder": ""
+      },
+      {
+        "name": "last_updated",
+        "type": "string",
+        "value": null,
+        "label": "Last Updated",
+        "placeholder": ""
+      },
+      {
+        "name": "body",
+        "type": "string",
+        "value": null,
+        "label": "Raw JSON Body",
+        "placeholder": ""
+      },
+      {
+        "name": "triggered_at",
+        "type": "string",
+        "value": null,
+        "label": "Triggered At",
+        "placeholder": ""
+      }
+    ]
+  },
   "trigger/s3": {
     "hash": "ffd0a4424b39c12853776f43be2ab03a599a222d9bde1f4f2c63f1206a1ee84d",
     "author": "Andy Esser",
@@ -76146,6 +76244,104 @@
         "type": "string",
         "value": null,
         "label": "Source Store",
+        "placeholder": ""
+      },
+      {
+        "name": "body",
+        "type": "string",
+        "value": null,
+        "label": "Raw JSON Body",
+        "placeholder": ""
+      },
+      {
+        "name": "triggered_at",
+        "type": "string",
+        "value": null,
+        "label": "Triggered At",
+        "placeholder": ""
+      }
+    ]
+  },
+  "trigger/xero_webhook": {
+    "hash": "35e9fff914eb37c59f4bb785b46474cd4c4b9dec80210cec0e82d9478a0e972a",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Xero Webhook Trigger",
+    "description": "Triggers a flow when a Xero record changes (contact or invoice created/updated)",
+    "website": "https://www.flomation.co",
+    "icon": "xero",
+    "date": "10/07/2026",
+    "type": 1,
+    "category": {
+      "name": "Triggers",
+      "icon": "bolt-lightning",
+      "description": "Start a Flow"
+    },
+    "inputs": [
+      {
+        "name": "signing_key",
+        "type": "secret",
+        "value": null,
+        "label": "Webhook Signing Key",
+        "placeholder": "From the Xero app's webhook settings",
+        "required": true
+      },
+      {
+        "name": "event_filter",
+        "type": "string",
+        "value": null,
+        "label": "Event Filter",
+        "placeholder": "Comma-separated, e.g. CONTACT.UPDATE,INVOICE.CREATE or CONTACT (blank = all)"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "content",
+        "type": "string",
+        "value": null,
+        "label": "Event Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "event_type",
+        "type": "string",
+        "value": null,
+        "label": "Event Type",
+        "placeholder": ""
+      },
+      {
+        "name": "event_category",
+        "type": "string",
+        "value": null,
+        "label": "Event Category",
+        "placeholder": ""
+      },
+      {
+        "name": "operation",
+        "type": "string",
+        "value": null,
+        "label": "Operation",
+        "placeholder": ""
+      },
+      {
+        "name": "resource_id",
+        "type": "string",
+        "value": null,
+        "label": "Resource ID",
+        "placeholder": ""
+      },
+      {
+        "name": "tenant_id",
+        "type": "string",
+        "value": null,
+        "label": "Organisation (Tenant ID)",
+        "placeholder": ""
+      },
+      {
+        "name": "resource_url",
+        "type": "string",
+        "value": null,
+        "label": "Resource URL",
         "placeholder": ""
       },
       {
