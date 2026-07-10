@@ -23,19 +23,28 @@
 //
 // Resolution never touches the network when a binary is already present, so the
 // simplest answer for an air-gapped runner remains: install helm on the host (or
-// bake it into the image) and it is used as-is. Beyond that, four environment
+// bake it into the image) and it is used as-is. Beyond that, these environment
 // variables on the runner shape the download:
 //
 //	FLOMATION_HELM_DISABLE_DOWNLOAD=1   forbid runtime downloads entirely
-//	FLOMATION_HELM_MIRROR=<base-url>    fetch from an internal mirror instead of
-//	                                    get.helm.sh; the release filename is
-//	                                    appended (helm-v<ver>-<goos>-<arch>.tar.gz)
-//	FLOMATION_HELM_SHA256=<hex>         the expected checksum for the requested
-//	                                    version and platform, for a version this
-//	                                    file does not pin
-//	FLOMATION_HELM_CA_BUNDLE=<path>     PEM bundle used to verify the mirror,
+//	FLOMATION_HELM_URL=<url>            the exact URL of the artefact, whatever
+//	                                    it is named — https://nexus.corp/helm.tgz
+//	                                    or a naked binary. Wins over MIRROR.
+//	FLOMATION_HELM_MIRROR=<base-url>    a directory the canonical upstream
+//	                                    filename hangs off:
+//	                                    <mirror>/helm-v<ver>-<goos>-<arch>.tar.gz
+//	FLOMATION_HELM_SHA256=<hex>         the expected digest of whatever the two
+//	                                    above resolve to. Required for a version
+//	                                    this file does not pin, or for an artefact
+//	                                    repackaged rather than mirrored verbatim.
+//	FLOMATION_HELM_CA_BUNDLE=<path>     PEM bundle used to verify that host,
 //	                                    for a Nexus behind an internal CA
-//	FLOMATION_HELM_INSECURE=1           skip TLS verification of the mirror
+//	FLOMATION_HELM_INSECURE=1           skip TLS verification of that host
+//
+// URL and MIRROR differ only in who names the file. A mirror that preserves
+// upstream's filename needs no SHA256 override: the bytes, and therefore the
+// digest, are unchanged. An artefact repackaged under a new name has a different
+// digest and must declare it.
 //
 // They are environment variables rather than node inputs because which binary a
 // runner may execute, and which CA it trusts, is a property of the host — not of
@@ -53,6 +62,7 @@ import (
 	"fmt"
 	"io"
 	"net/http"
+	"net/url"
 	"os"
 	"os/exec"
 	"path/filepath"
@@ -142,14 +152,34 @@ func insecureDownload() bool {
 	return false
 }
 
-// releaseURL is where the archive is fetched from: an operator-configured mirror
-// when FLOMATION_HELM_MIRROR is set, otherwise the official host.
-func releaseURL(version, platform string) string {
+// releaseURL is where the artefact is fetched from. Resolution order:
+//
+//  1. FLOMATION_HELM_URL — the exact URL of the artefact, whatever it is called.
+//     Use this when an internal host serves the file under its own name
+//     (https://nexus.corp/raw/helm.tgz) rather than mirroring upstream's.
+//  2. FLOMATION_HELM_MIRROR — a directory the canonical upstream filename hangs
+//     off, which is what a transparent proxy or a filename-preserving mirror
+//     gives you: <mirror>/helm-v<version>-<goos>-<arch>.tar.gz
+//  3. The official host.
+//
+// Only the URL differs; every path lands on the same checksum gate below.
+func releaseURL(version, platform string) (string, error) {
+	if exact := strings.TrimSpace(os.Getenv("FLOMATION_HELM_URL")); exact != "" {
+		u, err := url.Parse(exact)
+		if err != nil || u.Host == "" {
+			return "", fmt.Errorf("FLOMATION_HELM_URL %q is not a valid URL", exact)
+		}
+		if u.Scheme != "http" && u.Scheme != "https" {
+			return "", fmt.Errorf("FLOMATION_HELM_URL must be an http(s) URL (got scheme %q)", u.Scheme)
+		}
+		return exact, nil
+	}
+
 	name := fmt.Sprintf("helm-v%s-%s.tar.gz", version, platform)
 	if mirror := strings.TrimSpace(os.Getenv("FLOMATION_HELM_MIRROR")); mirror != "" {
-		return strings.TrimRight(mirror, "/") + "/" + name
+		return strings.TrimRight(mirror, "/") + "/" + name, nil
 	}
-	return "https://get.helm.sh/" + name
+	return "https://get.helm.sh/" + name, nil
 }
 
 // expectedChecksum resolves the SHA-256 the downloaded archive must match:
@@ -266,31 +296,101 @@ func isExecutableFile(p string) bool {
 	return err == nil && fi.Mode().IsRegular() && fi.Mode()&0o111 != 0
 }
 
-// download fetches the release tarball, checks it against the expected checksum,
-// and installs the binary at dest. A mismatch never installs.
+// download fetches the artefact, checks it against the expected checksum, and
+// installs the binary at dest. A mismatch never installs.
 func download(ctx context.Context, version, platform, wantSum, dest string) error {
-	url := releaseURL(version, platform)
+	src, err := releaseURL(version, platform)
+	if err != nil {
+		return err
+	}
 
-	tmp, err := os.CreateTemp("", "helm-download-*.tar.gz")
+	tmp, err := os.CreateTemp("", "helm-download-*")
 	if err != nil {
 		return err
 	}
 	defer func() { _ = os.Remove(tmp.Name()) }()
 	defer func() { _ = tmp.Close() }()
 
-	gotSum, err := fetchToFile(ctx, url, tmp)
+	gotSum, err := fetchToFile(ctx, src, tmp)
 	if err != nil {
-		return fmt.Errorf("downloading %s: %w", url, err)
+		return fmt.Errorf("downloading %s: %w", src, err)
 	}
 	if !strings.EqualFold(gotSum, wantSum) {
-		return fmt.Errorf("checksum mismatch for helm %s (%s) from %s: got %s, want %s — "+
-			"refusing to install", version, platform, url, gotSum, wantSum)
+		hint := ""
+		if os.Getenv("FLOMATION_HELM_SHA256") == "" {
+			// The likeliest cause when a mirror is in play: the operator is serving
+			// a repackaged artefact, whose digest cannot match upstream's.
+			hint = " — if this artefact was repackaged rather than mirrored byte-for-byte, " +
+				"set FLOMATION_HELM_SHA256 to ITS sha256"
+		}
+		return fmt.Errorf("checksum mismatch for helm %s (%s) from %s: got %s, want %s; refusing to install%s",
+			version, platform, src, gotSum, wantSum, hint)
 	}
 
 	if err := os.MkdirAll(filepath.Dir(dest), 0o755); err != nil {
 		return err
 	}
-	return extractBinary(tmp.Name(), dest)
+	return install(tmp.Name(), dest)
+}
+
+// install places the verified artefact at dest.
+//
+// Upstream ships a gzip tarball with the binary at <goos>-<arch>/helm, but an
+// internal artefact host may just as well serve the naked executable. Which one
+// arrived is decided by gzip's magic bytes rather than by the URL's extension,
+// because a file named .tgz is not obliged to be one.
+//
+// Either way the bytes have already been checked against a checksum declared in
+// advance, so this branch decides only how to unwrap them, never whether to
+// trust them.
+func install(artefact, dest string) error {
+	f, err := os.Open(artefact) // #nosec G304 -- our own CreateTemp result
+	if err != nil {
+		return err
+	}
+	defer func() { _ = f.Close() }()
+
+	var magic [2]byte
+	if _, err := io.ReadFull(f, magic[:]); err != nil {
+		return fmt.Errorf("downloaded artefact is too small to be helm: %w", err)
+	}
+	if magic[0] == 0x1f && magic[1] == 0x8b {
+		return extractBinary(artefact, dest)
+	}
+	return installRaw(artefact, dest)
+}
+
+// installRaw copies a naked executable into the cache, via temp-file-and-rename
+// so a concurrent or aborted install can never leave a half-written binary for
+// another process to execute.
+func installRaw(artefact, dest string) error {
+	src, err := os.Open(artefact) // #nosec G304 -- our own CreateTemp result
+	if err != nil {
+		return err
+	}
+	defer func() { _ = src.Close() }()
+
+	tmp, err := os.CreateTemp(filepath.Dir(dest), ".helm-*")
+	if err != nil {
+		return err
+	}
+	tmpName := tmp.Name()
+
+	if _, err := io.Copy(tmp, io.LimitReader(src, maxBinarySize)); err != nil {
+		_ = tmp.Close()
+		_ = os.Remove(tmpName)
+		return err
+	}
+	if err := tmp.Chmod(0o755); err != nil {
+		_ = tmp.Close()
+		_ = os.Remove(tmpName)
+		return err
+	}
+	if err := tmp.Close(); err != nil {
+		_ = os.Remove(tmpName)
+		return err
+	}
+	return os.Rename(tmpName, dest)
 }
 
 // fetchToFile streams url into f and returns the hex SHA-256 of what was written.
