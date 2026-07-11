@@ -23205,6 +23205,1018 @@
       }
     ]
   },
+  "forms/jotform/form_clone": {
+    "hash": "6fa539ff1c1579bab0fbd8ed2e99eb1f17d083f79c9aec08cb6e4c0bd81c1dbb",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Clone Form",
+    "description": "Clone an existing JotForm form, returning the new form's ID.",
+    "website": "https://www.flomation.co",
+    "icon": "clipboard-list+copy",
+    "date": "11/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Forms",
+      "icon": "clipboard-list",
+      "description": "Create forms, collect responses and trigger flows from external form providers"
+    },
+    "sub_category": {
+      "name": "JotForm",
+      "icon": "clipboard-list",
+      "description": "Create and manage JotForm forms, list submissions and register webhooks"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "JotForm API Key",
+        "placeholder": "${secrets.jotform_api_key}",
+        "required": true
+      },
+      {
+        "name": "region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "us",
+        "options": [
+          {
+            "name": "US (default)",
+            "value": "us"
+          },
+          {
+            "name": "EU",
+            "value": "eu"
+          },
+          {
+            "name": "HIPAA",
+            "value": "hipaa"
+          }
+        ]
+      },
+      {
+        "name": "form_id",
+        "type": "string",
+        "value": null,
+        "label": "Form ID",
+        "placeholder": "231234567890",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "form_id",
+        "type": "string",
+        "value": null,
+        "label": "New Form ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Form",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "forms/jotform/form_create": {
+    "hash": "711b71fc79c8aeee290fa9ff31d38d55935024fc1fed7cb37be82586a2490f5f",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Create Form",
+    "description": "Create a new JotForm form from a JSON questions array and properties object.",
+    "website": "https://www.flomation.co",
+    "icon": "clipboard-list+plus",
+    "date": "11/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Forms",
+      "icon": "clipboard-list",
+      "description": "Create forms, collect responses and trigger flows from external form providers"
+    },
+    "sub_category": {
+      "name": "JotForm",
+      "icon": "clipboard-list",
+      "description": "Create and manage JotForm forms, list submissions and register webhooks"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "JotForm API Key",
+        "placeholder": "${secrets.jotform_api_key}",
+        "required": true
+      },
+      {
+        "name": "region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "us",
+        "options": [
+          {
+            "name": "US (default)",
+            "value": "us"
+          },
+          {
+            "name": "EU",
+            "value": "eu"
+          },
+          {
+            "name": "HIPAA",
+            "value": "hipaa"
+          }
+        ]
+      },
+      {
+        "name": "questions",
+        "type": "string",
+        "value": null,
+        "label": "Questions (JSON)",
+        "placeholder": "{\"1\":{\"type\":\"control_textbox\",\"text\":\"Name\",\"order\":\"1\"}}"
+      },
+      {
+        "name": "properties",
+        "type": "string",
+        "value": null,
+        "label": "Properties (JSON)",
+        "placeholder": "{\"title\":\"My contact form\"}"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "form_id",
+        "type": "string",
+        "value": null,
+        "label": "Form ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Form",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "forms/jotform/form_delete": {
+    "hash": "6d82c330869f9cdd6fb042d3ae76afb4b3857fe76ffec27f0c660fa3b3c660e5",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Delete Form",
+    "description": "Delete a JotForm form permanently by its form ID.",
+    "website": "https://www.flomation.co",
+    "icon": "clipboard-list+trash",
+    "date": "11/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Forms",
+      "icon": "clipboard-list",
+      "description": "Create forms, collect responses and trigger flows from external form providers"
+    },
+    "sub_category": {
+      "name": "JotForm",
+      "icon": "clipboard-list",
+      "description": "Create and manage JotForm forms, list submissions and register webhooks"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "JotForm API Key",
+        "placeholder": "${secrets.jotform_api_key}",
+        "required": true
+      },
+      {
+        "name": "region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "us",
+        "options": [
+          {
+            "name": "US (default)",
+            "value": "us"
+          },
+          {
+            "name": "EU",
+            "value": "eu"
+          },
+          {
+            "name": "HIPAA",
+            "value": "hipaa"
+          }
+        ]
+      },
+      {
+        "name": "form_id",
+        "type": "string",
+        "value": null,
+        "label": "Form ID",
+        "placeholder": "231234567890",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "form_id",
+        "type": "string",
+        "value": null,
+        "label": "Form ID",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "forms/jotform/form_get": {
+    "hash": "c386a71c754822bcfdb108288c3a036d774cf8b315d3764204cc1d4f1dd1131c",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Get Form",
+    "description": "Retrieve a single JotForm form's details by its form ID.",
+    "website": "https://www.flomation.co",
+    "icon": "clipboard-list+eye",
+    "date": "11/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Forms",
+      "icon": "clipboard-list",
+      "description": "Create forms, collect responses and trigger flows from external form providers"
+    },
+    "sub_category": {
+      "name": "JotForm",
+      "icon": "clipboard-list",
+      "description": "Create and manage JotForm forms, list submissions and register webhooks"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "JotForm API Key",
+        "placeholder": "${secrets.jotform_api_key}",
+        "required": true
+      },
+      {
+        "name": "region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "us",
+        "options": [
+          {
+            "name": "US (default)",
+            "value": "us"
+          },
+          {
+            "name": "EU",
+            "value": "eu"
+          },
+          {
+            "name": "HIPAA",
+            "value": "hipaa"
+          }
+        ]
+      },
+      {
+        "name": "form_id",
+        "type": "string",
+        "value": null,
+        "label": "Form ID",
+        "placeholder": "231234567890",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "form_id",
+        "type": "string",
+        "value": null,
+        "label": "Form ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Form",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "forms/jotform/form_list": {
+    "hash": "ba64d58b1636495050bfda089d9e7401a343e15f1dc5ea92e4218acd690f4dac",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "List Forms",
+    "description": "List JotForm forms in the account, with optional limit, offset and filter.",
+    "website": "https://www.flomation.co",
+    "icon": "clipboard-list+list",
+    "date": "11/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Forms",
+      "icon": "clipboard-list",
+      "description": "Create forms, collect responses and trigger flows from external form providers"
+    },
+    "sub_category": {
+      "name": "JotForm",
+      "icon": "clipboard-list",
+      "description": "Create and manage JotForm forms, list submissions and register webhooks"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "JotForm API Key",
+        "placeholder": "${secrets.jotform_api_key}",
+        "required": true
+      },
+      {
+        "name": "region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "us",
+        "options": [
+          {
+            "name": "US (default)",
+            "value": "us"
+          },
+          {
+            "name": "EU",
+            "value": "eu"
+          },
+          {
+            "name": "HIPAA",
+            "value": "hipaa"
+          }
+        ]
+      },
+      {
+        "name": "limit",
+        "type": "integer",
+        "value": null,
+        "label": "Limit",
+        "placeholder": "20"
+      },
+      {
+        "name": "offset",
+        "type": "integer",
+        "value": null,
+        "label": "Offset",
+        "placeholder": "0"
+      },
+      {
+        "name": "filter",
+        "type": "string",
+        "value": null,
+        "label": "Filter (JSON)",
+        "placeholder": "{\"status\":\"ENABLED\"}"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "results",
+        "type": "object",
+        "value": null,
+        "label": "Forms",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Count",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "forms/jotform/submission_delete": {
+    "hash": "a24e4787efdfe0ff3641cc1cb32ac2eeed167eb55ca2ef5b49e3418e1c4d57c6",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Delete Submission",
+    "description": "Delete a JotForm submission permanently by its submission ID.",
+    "website": "https://www.flomation.co",
+    "icon": "envelope-open-text+trash",
+    "date": "11/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Forms",
+      "icon": "clipboard-list",
+      "description": "Create forms, collect responses and trigger flows from external form providers"
+    },
+    "sub_category": {
+      "name": "JotForm",
+      "icon": "clipboard-list",
+      "description": "Create and manage JotForm forms, list submissions and register webhooks"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "JotForm API Key",
+        "placeholder": "${secrets.jotform_api_key}",
+        "required": true
+      },
+      {
+        "name": "region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "us",
+        "options": [
+          {
+            "name": "US (default)",
+            "value": "us"
+          },
+          {
+            "name": "EU",
+            "value": "eu"
+          },
+          {
+            "name": "HIPAA",
+            "value": "hipaa"
+          }
+        ]
+      },
+      {
+        "name": "submission_id",
+        "type": "string",
+        "value": null,
+        "label": "Submission ID",
+        "placeholder": "5551234567890",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "submission_id",
+        "type": "string",
+        "value": null,
+        "label": "Submission ID",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "forms/jotform/submission_get": {
+    "hash": "5894f814dde6e7eb43486b451e26b3dccd353707d9330c73fb34c1bb5f790308",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Get Submission",
+    "description": "Retrieve a single JotForm submission and its answers by submission ID.",
+    "website": "https://www.flomation.co",
+    "icon": "envelope-open-text+eye",
+    "date": "11/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Forms",
+      "icon": "clipboard-list",
+      "description": "Create forms, collect responses and trigger flows from external form providers"
+    },
+    "sub_category": {
+      "name": "JotForm",
+      "icon": "clipboard-list",
+      "description": "Create and manage JotForm forms, list submissions and register webhooks"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "JotForm API Key",
+        "placeholder": "${secrets.jotform_api_key}",
+        "required": true
+      },
+      {
+        "name": "region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "us",
+        "options": [
+          {
+            "name": "US (default)",
+            "value": "us"
+          },
+          {
+            "name": "EU",
+            "value": "eu"
+          },
+          {
+            "name": "HIPAA",
+            "value": "hipaa"
+          }
+        ]
+      },
+      {
+        "name": "submission_id",
+        "type": "string",
+        "value": null,
+        "label": "Submission ID",
+        "placeholder": "5551234567890",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "submission_id",
+        "type": "string",
+        "value": null,
+        "label": "Submission ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Submission",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "forms/jotform/submissions_list": {
+    "hash": "aa3fe8569c5f86b32cf6a82da88b67b85f3184395be7e694c9ab102c775ad6ba",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "List Submissions",
+    "description": "Retrieve the submissions for a JotForm form, with limit, offset and filter.",
+    "website": "https://www.flomation.co",
+    "icon": "clipboard-list+envelope-open-text",
+    "date": "11/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Forms",
+      "icon": "clipboard-list",
+      "description": "Create forms, collect responses and trigger flows from external form providers"
+    },
+    "sub_category": {
+      "name": "JotForm",
+      "icon": "clipboard-list",
+      "description": "Create and manage JotForm forms, list submissions and register webhooks"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "JotForm API Key",
+        "placeholder": "${secrets.jotform_api_key}",
+        "required": true
+      },
+      {
+        "name": "region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "us",
+        "options": [
+          {
+            "name": "US (default)",
+            "value": "us"
+          },
+          {
+            "name": "EU",
+            "value": "eu"
+          },
+          {
+            "name": "HIPAA",
+            "value": "hipaa"
+          }
+        ]
+      },
+      {
+        "name": "form_id",
+        "type": "string",
+        "value": null,
+        "label": "Form ID",
+        "placeholder": "231234567890",
+        "required": true
+      },
+      {
+        "name": "limit",
+        "type": "integer",
+        "value": null,
+        "label": "Limit",
+        "placeholder": "20"
+      },
+      {
+        "name": "offset",
+        "type": "integer",
+        "value": null,
+        "label": "Offset",
+        "placeholder": "0"
+      },
+      {
+        "name": "filter",
+        "type": "string",
+        "value": null,
+        "label": "Filter (JSON)",
+        "placeholder": "{\"status\":\"ACTIVE\"}"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "submissions",
+        "type": "object",
+        "value": null,
+        "label": "Submissions",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Count",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "forms/jotform/webhook_create": {
+    "hash": "77cfebdc8e9fd108cd4cce51dbcb03b32dff587efa5e1f5d1e263bc37b9e5b9c",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Create Webhook",
+    "description": "Register a JotForm webhook that fires on each new submission of a form.",
+    "website": "https://www.flomation.co",
+    "icon": "webhook+plus",
+    "date": "11/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Forms",
+      "icon": "clipboard-list",
+      "description": "Create forms, collect responses and trigger flows from external form providers"
+    },
+    "sub_category": {
+      "name": "JotForm",
+      "icon": "clipboard-list",
+      "description": "Create and manage JotForm forms, list submissions and register webhooks"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "JotForm API Key",
+        "placeholder": "${secrets.jotform_api_key}",
+        "required": true
+      },
+      {
+        "name": "region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "us",
+        "options": [
+          {
+            "name": "US (default)",
+            "value": "us"
+          },
+          {
+            "name": "EU",
+            "value": "eu"
+          },
+          {
+            "name": "HIPAA",
+            "value": "hipaa"
+          }
+        ]
+      },
+      {
+        "name": "form_id",
+        "type": "string",
+        "value": null,
+        "label": "Form ID",
+        "placeholder": "231234567890",
+        "required": true
+      },
+      {
+        "name": "url",
+        "type": "string",
+        "value": null,
+        "label": "Webhook URL",
+        "placeholder": "https://launch.flomation.app/webhook/…",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "form_id",
+        "type": "string",
+        "value": null,
+        "label": "Form ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Webhooks",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "forms/jotform/webhook_delete": {
+    "hash": "a2b8f9ca36cab2f8547afc37ebe98ac466d511207f1bb97119f335a9e3f7e5fd",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Delete Webhook",
+    "description": "Remove a JotForm webhook from a form by its webhook ID (index).",
+    "website": "https://www.flomation.co",
+    "icon": "webhook+trash",
+    "date": "11/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Forms",
+      "icon": "clipboard-list",
+      "description": "Create forms, collect responses and trigger flows from external form providers"
+    },
+    "sub_category": {
+      "name": "JotForm",
+      "icon": "clipboard-list",
+      "description": "Create and manage JotForm forms, list submissions and register webhooks"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "JotForm API Key",
+        "placeholder": "${secrets.jotform_api_key}",
+        "required": true
+      },
+      {
+        "name": "region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "us",
+        "options": [
+          {
+            "name": "US (default)",
+            "value": "us"
+          },
+          {
+            "name": "EU",
+            "value": "eu"
+          },
+          {
+            "name": "HIPAA",
+            "value": "hipaa"
+          }
+        ]
+      },
+      {
+        "name": "form_id",
+        "type": "string",
+        "value": null,
+        "label": "Form ID",
+        "placeholder": "231234567890",
+        "required": true
+      },
+      {
+        "name": "webhook_id",
+        "type": "string",
+        "value": null,
+        "label": "Webhook ID",
+        "placeholder": "0",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "form_id",
+        "type": "string",
+        "value": null,
+        "label": "Form ID",
+        "placeholder": ""
+      },
+      {
+        "name": "webhook_id",
+        "type": "string",
+        "value": null,
+        "label": "Webhook ID",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
   "forms/typeform/form_create": {
     "hash": "132a73f6c3317061534d8cde1bdb9ae76d21140db0b52286385215be6542700c",
     "author": "Andy Esser",
@@ -94290,6 +95302,82 @@
         "type": "string",
         "value": null,
         "label": "Timestamp",
+        "placeholder": ""
+      },
+      {
+        "name": "body",
+        "type": "string",
+        "value": null,
+        "label": "Raw JSON Body",
+        "placeholder": ""
+      }
+    ]
+  },
+  "trigger/jotform_webhook": {
+    "hash": "93126d50f7c9bef0cb012597c42ca4630a091da4fb787210f4a10025b0802826",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "JotForm Webhook Trigger",
+    "description": "Triggers a flow when a JotForm form submission webhook is received.",
+    "website": "https://www.flomation.co",
+    "icon": "clipboard-list",
+    "date": "11/07/2026",
+    "type": 1,
+    "category": {
+      "name": "Triggers",
+      "icon": "bolt-lightning",
+      "description": "Start a Flow"
+    },
+    "inputs": [
+      {
+        "name": "secret",
+        "type": "secret",
+        "value": null,
+        "label": "Shared Token",
+        "placeholder": "${secrets.jotform_webhook_secret}"
+      },
+      {
+        "name": "form_id",
+        "type": "string",
+        "value": null,
+        "label": "Form ID Filter",
+        "placeholder": "231234567890 (blank = any form)"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Event Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "event_type",
+        "type": "string",
+        "value": null,
+        "label": "Event Type",
+        "placeholder": ""
+      },
+      {
+        "name": "form_id",
+        "type": "string",
+        "value": null,
+        "label": "Form ID",
+        "placeholder": ""
+      },
+      {
+        "name": "submission_id",
+        "type": "string",
+        "value": null,
+        "label": "Submission ID",
+        "placeholder": ""
+      },
+      {
+        "name": "answers",
+        "type": "string",
+        "value": null,
+        "label": "Answers (JSON)",
         "placeholder": ""
       },
       {

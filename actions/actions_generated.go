@@ -190,6 +190,16 @@ import (
 	file_read "flomation.app/automate/executor/actions/file/read"
 	file_write "flomation.app/automate/executor/actions/file/write"
 	filetransfer_upload "flomation.app/automate/executor/actions/filetransfer/upload"
+	forms_jotform_form_clone "flomation.app/automate/executor/actions/forms/jotform/form_clone"
+	forms_jotform_form_create "flomation.app/automate/executor/actions/forms/jotform/form_create"
+	forms_jotform_form_delete "flomation.app/automate/executor/actions/forms/jotform/form_delete"
+	forms_jotform_form_get "flomation.app/automate/executor/actions/forms/jotform/form_get"
+	forms_jotform_form_list "flomation.app/automate/executor/actions/forms/jotform/form_list"
+	forms_jotform_submission_delete "flomation.app/automate/executor/actions/forms/jotform/submission_delete"
+	forms_jotform_submission_get "flomation.app/automate/executor/actions/forms/jotform/submission_get"
+	forms_jotform_submissions_list "flomation.app/automate/executor/actions/forms/jotform/submissions_list"
+	forms_jotform_webhook_create "flomation.app/automate/executor/actions/forms/jotform/webhook_create"
+	forms_jotform_webhook_delete "flomation.app/automate/executor/actions/forms/jotform/webhook_delete"
 	forms_typeform_form_create "flomation.app/automate/executor/actions/forms/typeform/form_create"
 	forms_typeform_form_delete "flomation.app/automate/executor/actions/forms/typeform/form_delete"
 	forms_typeform_form_get "flomation.app/automate/executor/actions/forms/typeform/form_get"
@@ -874,6 +884,7 @@ import (
 	trigger_image "flomation.app/automate/executor/actions/trigger/image"
 	trigger_intercom_webhook "flomation.app/automate/executor/actions/trigger/intercom_webhook"
 	trigger_jira_webhook "flomation.app/automate/executor/actions/trigger/jira_webhook"
+	trigger_jotform_webhook "flomation.app/automate/executor/actions/trigger/jotform_webhook"
 	trigger_linkedin_poll "flomation.app/automate/executor/actions/trigger/linkedin_poll"
 	trigger_mailchimp_webhook "flomation.app/automate/executor/actions/trigger/mailchimp_webhook"
 	trigger_manual "flomation.app/automate/executor/actions/trigger/manual"
@@ -1144,6 +1155,16 @@ var Actions = map[string]core.Action{
 	"file/read":                                         file_read.Execute,
 	"file/write":                                        file_write.Execute,
 	"filetransfer/upload":                               filetransfer_upload.Execute,
+	"forms/jotform/form_clone":                          forms_jotform_form_clone.Execute,
+	"forms/jotform/form_create":                         forms_jotform_form_create.Execute,
+	"forms/jotform/form_delete":                         forms_jotform_form_delete.Execute,
+	"forms/jotform/form_get":                            forms_jotform_form_get.Execute,
+	"forms/jotform/form_list":                           forms_jotform_form_list.Execute,
+	"forms/jotform/submission_delete":                   forms_jotform_submission_delete.Execute,
+	"forms/jotform/submission_get":                      forms_jotform_submission_get.Execute,
+	"forms/jotform/submissions_list":                    forms_jotform_submissions_list.Execute,
+	"forms/jotform/webhook_create":                      forms_jotform_webhook_create.Execute,
+	"forms/jotform/webhook_delete":                      forms_jotform_webhook_delete.Execute,
 	"forms/typeform/form_create":                        forms_typeform_form_create.Execute,
 	"forms/typeform/form_delete":                        forms_typeform_form_delete.Execute,
 	"forms/typeform/form_get":                           forms_typeform_form_get.Execute,
@@ -1828,6 +1849,7 @@ var Actions = map[string]core.Action{
 	"trigger/image":                                     trigger_image.Execute,
 	"trigger/intercom_webhook":                          trigger_intercom_webhook.Execute,
 	"trigger/jira_webhook":                              trigger_jira_webhook.Execute,
+	"trigger/jotform_webhook":                           trigger_jotform_webhook.Execute,
 	"trigger/linkedin_poll":                             trigger_linkedin_poll.Execute,
 	"trigger/mailchimp_webhook":                         trigger_mailchimp_webhook.Execute,
 	"trigger/manual":                                    trigger_manual.Execute,
