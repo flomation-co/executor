@@ -190,6 +190,11 @@ import (
 	file_read "flomation.app/automate/executor/actions/file/read"
 	file_write "flomation.app/automate/executor/actions/file/write"
 	filetransfer_upload "flomation.app/automate/executor/actions/filetransfer/upload"
+	forms_googleforms_form_batch_update "flomation.app/automate/executor/actions/forms/googleforms/form_batch_update"
+	forms_googleforms_form_create "flomation.app/automate/executor/actions/forms/googleforms/form_create"
+	forms_googleforms_form_get "flomation.app/automate/executor/actions/forms/googleforms/form_get"
+	forms_googleforms_response_get "flomation.app/automate/executor/actions/forms/googleforms/response_get"
+	forms_googleforms_responses_list "flomation.app/automate/executor/actions/forms/googleforms/responses_list"
 	forms_jotform_form_clone "flomation.app/automate/executor/actions/forms/jotform/form_clone"
 	forms_jotform_form_create "flomation.app/automate/executor/actions/forms/jotform/form_create"
 	forms_jotform_form_delete "flomation.app/automate/executor/actions/forms/jotform/form_delete"
@@ -1166,6 +1171,11 @@ var Actions = map[string]core.Action{
 	"file/read":                                         file_read.Execute,
 	"file/write":                                        file_write.Execute,
 	"filetransfer/upload":                               filetransfer_upload.Execute,
+	"forms/googleforms/form_batch_update":               forms_googleforms_form_batch_update.Execute,
+	"forms/googleforms/form_create":                     forms_googleforms_form_create.Execute,
+	"forms/googleforms/form_get":                        forms_googleforms_form_get.Execute,
+	"forms/googleforms/response_get":                    forms_googleforms_response_get.Execute,
+	"forms/googleforms/responses_list":                  forms_googleforms_responses_list.Execute,
 	"forms/jotform/form_clone":                          forms_jotform_form_clone.Execute,
 	"forms/jotform/form_create":                         forms_jotform_form_create.Execute,
 	"forms/jotform/form_delete":                         forms_jotform_form_delete.Execute,

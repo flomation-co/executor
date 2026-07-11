@@ -23205,6 +23205,446 @@
       }
     ]
   },
+  "forms/googleforms/form_batch_update": {
+    "hash": "128f8feb4bf0732b42dd9515021746806a1b58508d2466ff2db28aee95321a4b",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Batch Update Form",
+    "description": "Add items or questions to a Google Form via a batchUpdate requests JSON array.",
+    "website": "https://www.flomation.co",
+    "icon": "clipboard-list+pencil",
+    "date": "11/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Forms",
+      "icon": "clipboard-list",
+      "description": "Create forms, collect responses and trigger flows from external form providers"
+    },
+    "sub_category": {
+      "name": "Google Forms",
+      "icon": "clipboard-list",
+      "description": "Create Google Forms, add questions and retrieve responses using a connected Google account"
+    },
+    "inputs": [
+      {
+        "name": "account",
+        "type": "string",
+        "value": null,
+        "label": "Google Account (email)",
+        "placeholder": ""
+      },
+      {
+        "name": "credential",
+        "type": "credential",
+        "value": null,
+        "label": "Google OAuth Credential",
+        "placeholder": "${credentials.GOOGLE_DRIVE}"
+      },
+      {
+        "name": "form_id",
+        "type": "string",
+        "value": null,
+        "label": "Form ID",
+        "placeholder": "1FAIpQL...",
+        "required": true
+      },
+      {
+        "name": "requests",
+        "type": "string",
+        "value": null,
+        "label": "Requests (JSON array)",
+        "placeholder": "[{\"createItem\":{\"item\":{\"title\":\"Your name\",\"questionItem\":{\"question\":{\"required\":true,\"textQuestion\":{}}}},\"location\":{\"index\":0}}}]",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "form_id",
+        "type": "string",
+        "value": null,
+        "label": "Form ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Reply",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "forms/googleforms/form_create": {
+    "hash": "262a0af9fbf7e153b857ea7c6a8ca77d0ffadf06416af416c4d5a371b1df21ad",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Create Form",
+    "description": "Create a new Google Form with a title using a connected Google account.",
+    "website": "https://www.flomation.co",
+    "icon": "clipboard-list+plus",
+    "date": "11/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Forms",
+      "icon": "clipboard-list",
+      "description": "Create forms, collect responses and trigger flows from external form providers"
+    },
+    "sub_category": {
+      "name": "Google Forms",
+      "icon": "clipboard-list",
+      "description": "Create Google Forms, add questions and retrieve responses using a connected Google account"
+    },
+    "inputs": [
+      {
+        "name": "account",
+        "type": "string",
+        "value": null,
+        "label": "Google Account (email)",
+        "placeholder": ""
+      },
+      {
+        "name": "credential",
+        "type": "credential",
+        "value": null,
+        "label": "Google OAuth Credential",
+        "placeholder": "${credentials.GOOGLE_DRIVE}"
+      },
+      {
+        "name": "title",
+        "type": "string",
+        "value": null,
+        "label": "Title",
+        "placeholder": "Customer feedback",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "form_id",
+        "type": "string",
+        "value": null,
+        "label": "Form ID",
+        "placeholder": ""
+      },
+      {
+        "name": "responder_uri",
+        "type": "string",
+        "value": null,
+        "label": "Responder URL",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Form",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "forms/googleforms/form_get": {
+    "hash": "e70dd755351b6d8db745b609eb6be02876ff6d450f3d0cfbf2a4c73910c9859c",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Get Form",
+    "description": "Retrieve a Google Form's definition, items and metadata by form ID.",
+    "website": "https://www.flomation.co",
+    "icon": "clipboard-list+eye",
+    "date": "11/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Forms",
+      "icon": "clipboard-list",
+      "description": "Create forms, collect responses and trigger flows from external form providers"
+    },
+    "sub_category": {
+      "name": "Google Forms",
+      "icon": "clipboard-list",
+      "description": "Create Google Forms, add questions and retrieve responses using a connected Google account"
+    },
+    "inputs": [
+      {
+        "name": "account",
+        "type": "string",
+        "value": null,
+        "label": "Google Account (email)",
+        "placeholder": ""
+      },
+      {
+        "name": "credential",
+        "type": "credential",
+        "value": null,
+        "label": "Google OAuth Credential",
+        "placeholder": "${credentials.GOOGLE_DRIVE}"
+      },
+      {
+        "name": "form_id",
+        "type": "string",
+        "value": null,
+        "label": "Form ID",
+        "placeholder": "1FAIpQL...",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "form_id",
+        "type": "string",
+        "value": null,
+        "label": "Form ID",
+        "placeholder": ""
+      },
+      {
+        "name": "responder_uri",
+        "type": "string",
+        "value": null,
+        "label": "Responder URL",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Form",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "forms/googleforms/response_get": {
+    "hash": "1d2be84934d7f3b1a070bf7f1f5e43dba71984a7c19e24af54f3a899298b960b",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Get Response",
+    "description": "Retrieve a single submitted response from a Google Form by response ID.",
+    "website": "https://www.flomation.co",
+    "icon": "clipboard-list+magnifying-glass",
+    "date": "11/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Forms",
+      "icon": "clipboard-list",
+      "description": "Create forms, collect responses and trigger flows from external form providers"
+    },
+    "sub_category": {
+      "name": "Google Forms",
+      "icon": "clipboard-list",
+      "description": "Create Google Forms, add questions and retrieve responses using a connected Google account"
+    },
+    "inputs": [
+      {
+        "name": "account",
+        "type": "string",
+        "value": null,
+        "label": "Google Account (email)",
+        "placeholder": ""
+      },
+      {
+        "name": "credential",
+        "type": "credential",
+        "value": null,
+        "label": "Google OAuth Credential",
+        "placeholder": "${credentials.GOOGLE_DRIVE}"
+      },
+      {
+        "name": "form_id",
+        "type": "string",
+        "value": null,
+        "label": "Form ID",
+        "placeholder": "1FAIpQL...",
+        "required": true
+      },
+      {
+        "name": "response_id",
+        "type": "string",
+        "value": null,
+        "label": "Response ID",
+        "placeholder": "ACYDBNh...",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "response_id",
+        "type": "string",
+        "value": null,
+        "label": "Response ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Response",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "forms/googleforms/responses_list": {
+    "hash": "23bdeb6c0f38452a21decca4e82c9988c908751c6d0fb6e2664e8ac8a90e75ac",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "List Responses",
+    "description": "Retrieve the submitted responses for a Google Form by form ID.",
+    "website": "https://www.flomation.co",
+    "icon": "clipboard-list+envelope-open-text",
+    "date": "11/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Forms",
+      "icon": "clipboard-list",
+      "description": "Create forms, collect responses and trigger flows from external form providers"
+    },
+    "sub_category": {
+      "name": "Google Forms",
+      "icon": "clipboard-list",
+      "description": "Create Google Forms, add questions and retrieve responses using a connected Google account"
+    },
+    "inputs": [
+      {
+        "name": "account",
+        "type": "string",
+        "value": null,
+        "label": "Google Account (email)",
+        "placeholder": ""
+      },
+      {
+        "name": "credential",
+        "type": "credential",
+        "value": null,
+        "label": "Google OAuth Credential",
+        "placeholder": "${credentials.GOOGLE_DRIVE}"
+      },
+      {
+        "name": "form_id",
+        "type": "string",
+        "value": null,
+        "label": "Form ID",
+        "placeholder": "1FAIpQL...",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "responses",
+        "type": "object",
+        "value": null,
+        "label": "Responses",
+        "placeholder": ""
+      },
+      {
+        "name": "total",
+        "type": "integer",
+        "value": null,
+        "label": "Total",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
   "forms/jotform/form_clone": {
     "hash": "6fa539ff1c1579bab0fbd8ed2e99eb1f17d083f79c9aec08cb6e4c0bd81c1dbb",
     "author": "Andy Esser",
