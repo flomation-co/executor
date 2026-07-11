@@ -24217,6 +24217,958 @@
       }
     ]
   },
+  "forms/surveymonkey/collector_create": {
+    "hash": "057515449ab916363d99777bbe9deec28d949e05f008da93eee066198d837865",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Create Collector",
+    "description": "Create a collector (e.g. weblink) that distributes a SurveyMonkey survey.",
+    "website": "https://www.flomation.co",
+    "icon": "link+plus",
+    "date": "11/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Forms",
+      "icon": "clipboard-list",
+      "description": "Create forms, collect responses and trigger flows from external form providers"
+    },
+    "sub_category": {
+      "name": "SurveyMonkey",
+      "icon": "clipboard-list",
+      "description": "Create SurveyMonkey surveys, list responses, manage collectors and register webhooks"
+    },
+    "inputs": [
+      {
+        "name": "access_token",
+        "type": "secret",
+        "value": null,
+        "label": "SurveyMonkey Access Token",
+        "placeholder": "${secrets.surveymonkey_token}",
+        "required": true
+      },
+      {
+        "name": "survey_id",
+        "type": "string",
+        "value": null,
+        "label": "Survey ID",
+        "placeholder": "123456789",
+        "required": true
+      },
+      {
+        "name": "type",
+        "type": "string",
+        "value": null,
+        "label": "Type",
+        "placeholder": "weblink",
+        "options": [
+          {
+            "name": "Web Link",
+            "value": "weblink"
+          },
+          {
+            "name": "Email",
+            "value": "email"
+          }
+        ]
+      },
+      {
+        "name": "name",
+        "type": "string",
+        "value": null,
+        "label": "Name",
+        "placeholder": "Website link"
+      },
+      {
+        "name": "body",
+        "type": "string",
+        "value": null,
+        "label": "Body (JSON object)",
+        "placeholder": "{\"display_survey_results\":false}"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "collector_id",
+        "type": "string",
+        "value": null,
+        "label": "Collector ID",
+        "placeholder": ""
+      },
+      {
+        "name": "collector_url",
+        "type": "string",
+        "value": null,
+        "label": "Collector URL",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Collector",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "forms/surveymonkey/collector_list": {
+    "hash": "aa33382043abbfc518e4f1bc8b459d13c2b15ed0521b7e4857598bce4abd9f93",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "List Collectors",
+    "description": "List the collectors (distribution channels) attached to a SurveyMonkey survey.",
+    "website": "https://www.flomation.co",
+    "icon": "link+list",
+    "date": "11/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Forms",
+      "icon": "clipboard-list",
+      "description": "Create forms, collect responses and trigger flows from external form providers"
+    },
+    "sub_category": {
+      "name": "SurveyMonkey",
+      "icon": "clipboard-list",
+      "description": "Create SurveyMonkey surveys, list responses, manage collectors and register webhooks"
+    },
+    "inputs": [
+      {
+        "name": "access_token",
+        "type": "secret",
+        "value": null,
+        "label": "SurveyMonkey Access Token",
+        "placeholder": "${secrets.surveymonkey_token}",
+        "required": true
+      },
+      {
+        "name": "survey_id",
+        "type": "string",
+        "value": null,
+        "label": "Survey ID",
+        "placeholder": "123456789",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "results",
+        "type": "object",
+        "value": null,
+        "label": "Collectors",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Count",
+        "placeholder": ""
+      },
+      {
+        "name": "total",
+        "type": "integer",
+        "value": null,
+        "label": "Total",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "forms/surveymonkey/response_get": {
+    "hash": "a2e6409d69c901995549ab007024754e9e9b949cd10be26ba551f8bae3993eb8",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Get Response",
+    "description": "Retrieve a single SurveyMonkey survey response by its response ID.",
+    "website": "https://www.flomation.co",
+    "icon": "envelope-open-text+eye",
+    "date": "11/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Forms",
+      "icon": "clipboard-list",
+      "description": "Create forms, collect responses and trigger flows from external form providers"
+    },
+    "sub_category": {
+      "name": "SurveyMonkey",
+      "icon": "clipboard-list",
+      "description": "Create SurveyMonkey surveys, list responses, manage collectors and register webhooks"
+    },
+    "inputs": [
+      {
+        "name": "access_token",
+        "type": "secret",
+        "value": null,
+        "label": "SurveyMonkey Access Token",
+        "placeholder": "${secrets.surveymonkey_token}",
+        "required": true
+      },
+      {
+        "name": "survey_id",
+        "type": "string",
+        "value": null,
+        "label": "Survey ID",
+        "placeholder": "123456789",
+        "required": true
+      },
+      {
+        "name": "response_id",
+        "type": "string",
+        "value": null,
+        "label": "Response ID",
+        "placeholder": "987654321",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "response_id",
+        "type": "string",
+        "value": null,
+        "label": "Response ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Response",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "forms/surveymonkey/responses_list": {
+    "hash": "9be1be8b7fa154fd03393775ef3f3f9f8230f4574e710818fe67d3362d8a4c8e",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "List Responses",
+    "description": "Retrieve bulk responses for a SurveyMonkey survey, with page and per-page paging.",
+    "website": "https://www.flomation.co",
+    "icon": "clipboard-list+envelope-open-text",
+    "date": "11/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Forms",
+      "icon": "clipboard-list",
+      "description": "Create forms, collect responses and trigger flows from external form providers"
+    },
+    "sub_category": {
+      "name": "SurveyMonkey",
+      "icon": "clipboard-list",
+      "description": "Create SurveyMonkey surveys, list responses, manage collectors and register webhooks"
+    },
+    "inputs": [
+      {
+        "name": "access_token",
+        "type": "secret",
+        "value": null,
+        "label": "SurveyMonkey Access Token",
+        "placeholder": "${secrets.surveymonkey_token}",
+        "required": true
+      },
+      {
+        "name": "survey_id",
+        "type": "string",
+        "value": null,
+        "label": "Survey ID",
+        "placeholder": "123456789",
+        "required": true
+      },
+      {
+        "name": "page",
+        "type": "integer",
+        "value": null,
+        "label": "Page",
+        "placeholder": "1"
+      },
+      {
+        "name": "per_page",
+        "type": "integer",
+        "value": null,
+        "label": "Per Page",
+        "placeholder": "50"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "responses",
+        "type": "object",
+        "value": null,
+        "label": "Responses",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Count",
+        "placeholder": ""
+      },
+      {
+        "name": "total",
+        "type": "integer",
+        "value": null,
+        "label": "Total",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "forms/surveymonkey/survey_create": {
+    "hash": "ae84657fae76592f3bd6b2659f70ead241252ba9050bfc3efce2b604942f77cb",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Create Survey",
+    "description": "Create a new SurveyMonkey survey with a title and optional JSON body override.",
+    "website": "https://www.flomation.co",
+    "icon": "clipboard-list+plus",
+    "date": "11/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Forms",
+      "icon": "clipboard-list",
+      "description": "Create forms, collect responses and trigger flows from external form providers"
+    },
+    "sub_category": {
+      "name": "SurveyMonkey",
+      "icon": "clipboard-list",
+      "description": "Create SurveyMonkey surveys, list responses, manage collectors and register webhooks"
+    },
+    "inputs": [
+      {
+        "name": "access_token",
+        "type": "secret",
+        "value": null,
+        "label": "SurveyMonkey Access Token",
+        "placeholder": "${secrets.surveymonkey_token}",
+        "required": true
+      },
+      {
+        "name": "title",
+        "type": "string",
+        "value": null,
+        "label": "Title",
+        "placeholder": "Customer satisfaction",
+        "required": true
+      },
+      {
+        "name": "body",
+        "type": "string",
+        "value": null,
+        "label": "Body (JSON object)",
+        "placeholder": "{\"nickname\":\"CSAT 2026\",\"language\":\"en\"}"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "survey_id",
+        "type": "string",
+        "value": null,
+        "label": "Survey ID",
+        "placeholder": ""
+      },
+      {
+        "name": "survey_url",
+        "type": "string",
+        "value": null,
+        "label": "Survey URL",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Survey",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "forms/surveymonkey/survey_get": {
+    "hash": "f3a37f996ac9707cfabd772305b68a04d4ffb2ea4dca2a9cef8fd475551a8772",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Get Survey",
+    "description": "Retrieve a single SurveyMonkey survey by its survey ID.",
+    "website": "https://www.flomation.co",
+    "icon": "clipboard-list+eye",
+    "date": "11/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Forms",
+      "icon": "clipboard-list",
+      "description": "Create forms, collect responses and trigger flows from external form providers"
+    },
+    "sub_category": {
+      "name": "SurveyMonkey",
+      "icon": "clipboard-list",
+      "description": "Create SurveyMonkey surveys, list responses, manage collectors and register webhooks"
+    },
+    "inputs": [
+      {
+        "name": "access_token",
+        "type": "secret",
+        "value": null,
+        "label": "SurveyMonkey Access Token",
+        "placeholder": "${secrets.surveymonkey_token}",
+        "required": true
+      },
+      {
+        "name": "survey_id",
+        "type": "string",
+        "value": null,
+        "label": "Survey ID",
+        "placeholder": "123456789",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "survey_id",
+        "type": "string",
+        "value": null,
+        "label": "Survey ID",
+        "placeholder": ""
+      },
+      {
+        "name": "survey_url",
+        "type": "string",
+        "value": null,
+        "label": "Survey URL",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Survey",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "forms/surveymonkey/survey_list": {
+    "hash": "40575725d30ca0e2895faa9f4946eb26cce54e901f7c4304176dc6f99277a347",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "List Surveys",
+    "description": "List SurveyMonkey surveys in the account, with page and per-page paging.",
+    "website": "https://www.flomation.co",
+    "icon": "clipboard-list+list",
+    "date": "11/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Forms",
+      "icon": "clipboard-list",
+      "description": "Create forms, collect responses and trigger flows from external form providers"
+    },
+    "sub_category": {
+      "name": "SurveyMonkey",
+      "icon": "clipboard-list",
+      "description": "Create SurveyMonkey surveys, list responses, manage collectors and register webhooks"
+    },
+    "inputs": [
+      {
+        "name": "access_token",
+        "type": "secret",
+        "value": null,
+        "label": "SurveyMonkey Access Token",
+        "placeholder": "${secrets.surveymonkey_token}",
+        "required": true
+      },
+      {
+        "name": "page",
+        "type": "integer",
+        "value": null,
+        "label": "Page",
+        "placeholder": "1"
+      },
+      {
+        "name": "per_page",
+        "type": "integer",
+        "value": null,
+        "label": "Per Page",
+        "placeholder": "50"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "results",
+        "type": "object",
+        "value": null,
+        "label": "Surveys",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Count",
+        "placeholder": ""
+      },
+      {
+        "name": "total",
+        "type": "integer",
+        "value": null,
+        "label": "Total",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "forms/surveymonkey/webhook_create": {
+    "hash": "5e7da517ace7c58af2a8bf62d7576cc3070e28c45a8250815511181383ed0329",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Create Webhook",
+    "description": "Register a SurveyMonkey webhook that fires on survey or response events.",
+    "website": "https://www.flomation.co",
+    "icon": "webhook+plus",
+    "date": "11/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Forms",
+      "icon": "clipboard-list",
+      "description": "Create forms, collect responses and trigger flows from external form providers"
+    },
+    "sub_category": {
+      "name": "SurveyMonkey",
+      "icon": "clipboard-list",
+      "description": "Create SurveyMonkey surveys, list responses, manage collectors and register webhooks"
+    },
+    "inputs": [
+      {
+        "name": "access_token",
+        "type": "secret",
+        "value": null,
+        "label": "SurveyMonkey Access Token",
+        "placeholder": "${secrets.surveymonkey_token}",
+        "required": true
+      },
+      {
+        "name": "name",
+        "type": "string",
+        "value": null,
+        "label": "Name",
+        "placeholder": "Flomation responses",
+        "required": true
+      },
+      {
+        "name": "event_type",
+        "type": "string",
+        "value": null,
+        "label": "Event Type",
+        "placeholder": "response_completed",
+        "options": [
+          {
+            "name": "Response completed",
+            "value": "response_completed"
+          },
+          {
+            "name": "Response created",
+            "value": "response_created"
+          },
+          {
+            "name": "Response updated",
+            "value": "response_updated"
+          },
+          {
+            "name": "Response disqualified",
+            "value": "response_disqualified"
+          },
+          {
+            "name": "Response overquota",
+            "value": "response_overquota"
+          },
+          {
+            "name": "Survey created",
+            "value": "survey_created"
+          },
+          {
+            "name": "Survey updated",
+            "value": "survey_updated"
+          },
+          {
+            "name": "Survey deleted",
+            "value": "survey_deleted"
+          },
+          {
+            "name": "Collector created",
+            "value": "collector_created"
+          },
+          {
+            "name": "Collector updated",
+            "value": "collector_updated"
+          },
+          {
+            "name": "Collector deleted",
+            "value": "collector_deleted"
+          }
+        ]
+      },
+      {
+        "name": "object_type",
+        "type": "string",
+        "value": null,
+        "label": "Object Type",
+        "placeholder": "survey",
+        "options": [
+          {
+            "name": "Survey",
+            "value": "survey"
+          },
+          {
+            "name": "Collector",
+            "value": "collector"
+          }
+        ]
+      },
+      {
+        "name": "object_ids",
+        "type": "string",
+        "value": null,
+        "label": "Object IDs (comma-separated)",
+        "placeholder": "123456789,987654321"
+      },
+      {
+        "name": "subscription_url",
+        "type": "string",
+        "value": null,
+        "label": "Subscription URL",
+        "placeholder": "https://launch.flomation.app/webhook/…",
+        "required": true
+      },
+      {
+        "name": "body",
+        "type": "string",
+        "value": null,
+        "label": "Body (JSON object)",
+        "placeholder": "{\"object_ids\":[\"123\"]}"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "webhook_id",
+        "type": "string",
+        "value": null,
+        "label": "Webhook ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Webhook",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "forms/surveymonkey/webhook_delete": {
+    "hash": "3f2d91eb88551dd180939eb1486a718691065c223dede44608ab19c52ac7b795",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Delete Webhook",
+    "description": "Delete a SurveyMonkey webhook by its webhook ID.",
+    "website": "https://www.flomation.co",
+    "icon": "webhook+trash",
+    "date": "11/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Forms",
+      "icon": "clipboard-list",
+      "description": "Create forms, collect responses and trigger flows from external form providers"
+    },
+    "sub_category": {
+      "name": "SurveyMonkey",
+      "icon": "clipboard-list",
+      "description": "Create SurveyMonkey surveys, list responses, manage collectors and register webhooks"
+    },
+    "inputs": [
+      {
+        "name": "access_token",
+        "type": "secret",
+        "value": null,
+        "label": "SurveyMonkey Access Token",
+        "placeholder": "${secrets.surveymonkey_token}",
+        "required": true
+      },
+      {
+        "name": "webhook_id",
+        "type": "string",
+        "value": null,
+        "label": "Webhook ID",
+        "placeholder": "12345",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "webhook_id",
+        "type": "string",
+        "value": null,
+        "label": "Webhook ID",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "forms/surveymonkey/webhook_list": {
+    "hash": "c26d9a4d43a89fe0ad7b9c13784ed8b45708a64b2fc7da7c36697f6a0b339189",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "List Webhooks",
+    "description": "List the SurveyMonkey webhooks registered on the account.",
+    "website": "https://www.flomation.co",
+    "icon": "webhook+list",
+    "date": "11/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Forms",
+      "icon": "clipboard-list",
+      "description": "Create forms, collect responses and trigger flows from external form providers"
+    },
+    "sub_category": {
+      "name": "SurveyMonkey",
+      "icon": "clipboard-list",
+      "description": "Create SurveyMonkey surveys, list responses, manage collectors and register webhooks"
+    },
+    "inputs": [
+      {
+        "name": "access_token",
+        "type": "secret",
+        "value": null,
+        "label": "SurveyMonkey Access Token",
+        "placeholder": "${secrets.surveymonkey_token}",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "results",
+        "type": "object",
+        "value": null,
+        "label": "Webhooks",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Count",
+        "placeholder": ""
+      },
+      {
+        "name": "total",
+        "type": "integer",
+        "value": null,
+        "label": "Total",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
   "forms/typeform/form_create": {
     "hash": "132a73f6c3317061534d8cde1bdb9ae76d21140db0b52286385215be6542700c",
     "author": "Andy Esser",
@@ -97459,6 +98411,89 @@
         "type": "string",
         "value": null,
         "label": "Triggered At",
+        "placeholder": ""
+      }
+    ]
+  },
+  "trigger/surveymonkey_webhook": {
+    "hash": "fc3def3cd3c992df7d1d844135d24303cb8ce7107ee68a9fe003f9e2635d6978",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "SurveyMonkey Webhook Trigger",
+    "description": "Triggers a flow when a SurveyMonkey webhook event is received.",
+    "website": "https://www.flomation.co",
+    "icon": "clipboard-list",
+    "date": "11/07/2026",
+    "type": 1,
+    "category": {
+      "name": "Triggers",
+      "icon": "bolt-lightning",
+      "description": "Start a Flow"
+    },
+    "inputs": [
+      {
+        "name": "secret",
+        "type": "secret",
+        "value": null,
+        "label": "Webhook Signing Secret",
+        "placeholder": "${secrets.surveymonkey_webhook_secret}"
+      },
+      {
+        "name": "survey_id",
+        "type": "string",
+        "value": null,
+        "label": "Survey ID Filter",
+        "placeholder": "123456789 (blank = any survey)"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Event Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "event_type",
+        "type": "string",
+        "value": null,
+        "label": "Event Type",
+        "placeholder": ""
+      },
+      {
+        "name": "object_type",
+        "type": "string",
+        "value": null,
+        "label": "Object Type",
+        "placeholder": ""
+      },
+      {
+        "name": "object_id",
+        "type": "string",
+        "value": null,
+        "label": "Object ID",
+        "placeholder": ""
+      },
+      {
+        "name": "survey_id",
+        "type": "string",
+        "value": null,
+        "label": "Survey ID",
+        "placeholder": ""
+      },
+      {
+        "name": "response_id",
+        "type": "string",
+        "value": null,
+        "label": "Response ID",
+        "placeholder": ""
+      },
+      {
+        "name": "body",
+        "type": "string",
+        "value": null,
+        "label": "Raw JSON Body",
         "placeholder": ""
       }
     ]

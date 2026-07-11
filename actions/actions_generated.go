@@ -200,6 +200,16 @@ import (
 	forms_jotform_submissions_list "flomation.app/automate/executor/actions/forms/jotform/submissions_list"
 	forms_jotform_webhook_create "flomation.app/automate/executor/actions/forms/jotform/webhook_create"
 	forms_jotform_webhook_delete "flomation.app/automate/executor/actions/forms/jotform/webhook_delete"
+	forms_surveymonkey_collector_create "flomation.app/automate/executor/actions/forms/surveymonkey/collector_create"
+	forms_surveymonkey_collector_list "flomation.app/automate/executor/actions/forms/surveymonkey/collector_list"
+	forms_surveymonkey_response_get "flomation.app/automate/executor/actions/forms/surveymonkey/response_get"
+	forms_surveymonkey_responses_list "flomation.app/automate/executor/actions/forms/surveymonkey/responses_list"
+	forms_surveymonkey_survey_create "flomation.app/automate/executor/actions/forms/surveymonkey/survey_create"
+	forms_surveymonkey_survey_get "flomation.app/automate/executor/actions/forms/surveymonkey/survey_get"
+	forms_surveymonkey_survey_list "flomation.app/automate/executor/actions/forms/surveymonkey/survey_list"
+	forms_surveymonkey_webhook_create "flomation.app/automate/executor/actions/forms/surveymonkey/webhook_create"
+	forms_surveymonkey_webhook_delete "flomation.app/automate/executor/actions/forms/surveymonkey/webhook_delete"
+	forms_surveymonkey_webhook_list "flomation.app/automate/executor/actions/forms/surveymonkey/webhook_list"
 	forms_typeform_form_create "flomation.app/automate/executor/actions/forms/typeform/form_create"
 	forms_typeform_form_delete "flomation.app/automate/executor/actions/forms/typeform/form_delete"
 	forms_typeform_form_get "flomation.app/automate/executor/actions/forms/typeform/form_get"
@@ -898,6 +908,7 @@ import (
 	trigger_shopify_webhook "flomation.app/automate/executor/actions/trigger/shopify_webhook"
 	trigger_slack "flomation.app/automate/executor/actions/trigger/slack"
 	trigger_stripe_webhook "flomation.app/automate/executor/actions/trigger/stripe_webhook"
+	trigger_surveymonkey_webhook "flomation.app/automate/executor/actions/trigger/surveymonkey_webhook"
 	trigger_teams "flomation.app/automate/executor/actions/trigger/teams"
 	trigger_telegram "flomation.app/automate/executor/actions/trigger/telegram"
 	trigger_trello_webhook "flomation.app/automate/executor/actions/trigger/trello_webhook"
@@ -1165,6 +1176,16 @@ var Actions = map[string]core.Action{
 	"forms/jotform/submissions_list":                    forms_jotform_submissions_list.Execute,
 	"forms/jotform/webhook_create":                      forms_jotform_webhook_create.Execute,
 	"forms/jotform/webhook_delete":                      forms_jotform_webhook_delete.Execute,
+	"forms/surveymonkey/collector_create":               forms_surveymonkey_collector_create.Execute,
+	"forms/surveymonkey/collector_list":                 forms_surveymonkey_collector_list.Execute,
+	"forms/surveymonkey/response_get":                   forms_surveymonkey_response_get.Execute,
+	"forms/surveymonkey/responses_list":                 forms_surveymonkey_responses_list.Execute,
+	"forms/surveymonkey/survey_create":                  forms_surveymonkey_survey_create.Execute,
+	"forms/surveymonkey/survey_get":                     forms_surveymonkey_survey_get.Execute,
+	"forms/surveymonkey/survey_list":                    forms_surveymonkey_survey_list.Execute,
+	"forms/surveymonkey/webhook_create":                 forms_surveymonkey_webhook_create.Execute,
+	"forms/surveymonkey/webhook_delete":                 forms_surveymonkey_webhook_delete.Execute,
+	"forms/surveymonkey/webhook_list":                   forms_surveymonkey_webhook_list.Execute,
 	"forms/typeform/form_create":                        forms_typeform_form_create.Execute,
 	"forms/typeform/form_delete":                        forms_typeform_form_delete.Execute,
 	"forms/typeform/form_get":                           forms_typeform_form_get.Execute,
@@ -1863,6 +1884,7 @@ var Actions = map[string]core.Action{
 	"trigger/shopify_webhook":                           trigger_shopify_webhook.Execute,
 	"trigger/slack":                                     trigger_slack.Execute,
 	"trigger/stripe_webhook":                            trigger_stripe_webhook.Execute,
+	"trigger/surveymonkey_webhook":                      trigger_surveymonkey_webhook.Execute,
 	"trigger/teams":                                     trigger_teams.Execute,
 	"trigger/telegram":                                  trigger_telegram.Execute,
 	"trigger/trello_webhook":                            trigger_trello_webhook.Execute,
