@@ -190,6 +190,14 @@ import (
 	file_read "flomation.app/automate/executor/actions/file/read"
 	file_write "flomation.app/automate/executor/actions/file/write"
 	filetransfer_upload "flomation.app/automate/executor/actions/filetransfer/upload"
+	forms_typeform_form_create "flomation.app/automate/executor/actions/forms/typeform/form_create"
+	forms_typeform_form_delete "flomation.app/automate/executor/actions/forms/typeform/form_delete"
+	forms_typeform_form_get "flomation.app/automate/executor/actions/forms/typeform/form_get"
+	forms_typeform_form_list "flomation.app/automate/executor/actions/forms/typeform/form_list"
+	forms_typeform_form_update "flomation.app/automate/executor/actions/forms/typeform/form_update"
+	forms_typeform_responses_list "flomation.app/automate/executor/actions/forms/typeform/responses_list"
+	forms_typeform_webhook_create "flomation.app/automate/executor/actions/forms/typeform/webhook_create"
+	forms_typeform_webhook_delete "flomation.app/automate/executor/actions/forms/typeform/webhook_delete"
 	git_add "flomation.app/automate/executor/actions/git/add"
 	git_branch "flomation.app/automate/executor/actions/git/branch"
 	git_checkout "flomation.app/automate/executor/actions/git/checkout"
@@ -884,6 +892,7 @@ import (
 	trigger_trello_webhook "flomation.app/automate/executor/actions/trigger/trello_webhook"
 	trigger_twilio_sms "flomation.app/automate/executor/actions/trigger/twilio_sms"
 	trigger_twilio_voice "flomation.app/automate/executor/actions/trigger/twilio_voice"
+	trigger_typeform_webhook "flomation.app/automate/executor/actions/trigger/typeform_webhook"
 	trigger_webhook "flomation.app/automate/executor/actions/trigger/webhook"
 	trigger_woocommerce_webhook "flomation.app/automate/executor/actions/trigger/woocommerce_webhook"
 	trigger_zendesk_webhook "flomation.app/automate/executor/actions/trigger/zendesk_webhook"
@@ -1135,6 +1144,14 @@ var Actions = map[string]core.Action{
 	"file/read":                                         file_read.Execute,
 	"file/write":                                        file_write.Execute,
 	"filetransfer/upload":                               filetransfer_upload.Execute,
+	"forms/typeform/form_create":                        forms_typeform_form_create.Execute,
+	"forms/typeform/form_delete":                        forms_typeform_form_delete.Execute,
+	"forms/typeform/form_get":                           forms_typeform_form_get.Execute,
+	"forms/typeform/form_list":                          forms_typeform_form_list.Execute,
+	"forms/typeform/form_update":                        forms_typeform_form_update.Execute,
+	"forms/typeform/responses_list":                     forms_typeform_responses_list.Execute,
+	"forms/typeform/webhook_create":                     forms_typeform_webhook_create.Execute,
+	"forms/typeform/webhook_delete":                     forms_typeform_webhook_delete.Execute,
 	"git/add":                                           git_add.Execute,
 	"git/branch":                                        git_branch.Execute,
 	"git/checkout":                                      git_checkout.Execute,
@@ -1829,6 +1846,7 @@ var Actions = map[string]core.Action{
 	"trigger/trello_webhook":                            trigger_trello_webhook.Execute,
 	"trigger/twilio_sms":                                trigger_twilio_sms.Execute,
 	"trigger/twilio_voice":                              trigger_twilio_voice.Execute,
+	"trigger/typeform_webhook":                          trigger_typeform_webhook.Execute,
 	"trigger/webhook":                                   trigger_webhook.Execute,
 	"trigger/woocommerce_webhook":                       trigger_woocommerce_webhook.Execute,
 	"trigger/zendesk_webhook":                           trigger_zendesk_webhook.Execute,

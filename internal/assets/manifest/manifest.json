@@ -23205,6 +23205,743 @@
       }
     ]
   },
+  "forms/typeform/form_create": {
+    "hash": "132a73f6c3317061534d8cde1bdb9ae76d21140db0b52286385215be6542700c",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Create Form",
+    "description": "Create a new Typeform form with a title and a JSON array of fields.",
+    "website": "https://www.flomation.co",
+    "icon": "clipboard-list+plus",
+    "date": "11/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Forms",
+      "icon": "clipboard-list",
+      "description": "Create forms, collect responses and trigger flows from external form providers"
+    },
+    "sub_category": {
+      "name": "Typeform",
+      "icon": "clipboard-list",
+      "description": "Create and manage Typeform forms, list responses and register webhooks"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "Typeform Personal Access Token",
+        "placeholder": "${secrets.typeform_token}",
+        "required": true
+      },
+      {
+        "name": "title",
+        "type": "string",
+        "value": null,
+        "label": "Title",
+        "placeholder": "My contact form",
+        "required": true
+      },
+      {
+        "name": "fields",
+        "type": "string",
+        "value": null,
+        "label": "Fields (JSON array)",
+        "placeholder": "[{\"title\":\"What is your name?\",\"type\":\"short_text\"}]"
+      },
+      {
+        "name": "settings",
+        "type": "string",
+        "value": null,
+        "label": "Settings (JSON object)",
+        "placeholder": "{\"is_public\":true}"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "form_id",
+        "type": "string",
+        "value": null,
+        "label": "Form ID",
+        "placeholder": ""
+      },
+      {
+        "name": "form_url",
+        "type": "string",
+        "value": null,
+        "label": "Form URL",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Form",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "forms/typeform/form_delete": {
+    "hash": "79e17062d020d2b4aa5c62397697bd9a25d0e67e54909b09a9d4e344396d6338",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Delete Form",
+    "description": "Delete a Typeform form permanently by its form ID.",
+    "website": "https://www.flomation.co",
+    "icon": "clipboard-list+trash",
+    "date": "11/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Forms",
+      "icon": "clipboard-list",
+      "description": "Create forms, collect responses and trigger flows from external form providers"
+    },
+    "sub_category": {
+      "name": "Typeform",
+      "icon": "clipboard-list",
+      "description": "Create and manage Typeform forms, list responses and register webhooks"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "Typeform Personal Access Token",
+        "placeholder": "${secrets.typeform_token}",
+        "required": true
+      },
+      {
+        "name": "form_id",
+        "type": "string",
+        "value": null,
+        "label": "Form ID",
+        "placeholder": "abc123",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "form_id",
+        "type": "string",
+        "value": null,
+        "label": "Form ID",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "forms/typeform/form_get": {
+    "hash": "2ac772c04631ed4a024b8461143736a24796cafd96a8ec757d2d07fdf80e6949",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Get Form",
+    "description": "Retrieve a single Typeform form definition by its form ID.",
+    "website": "https://www.flomation.co",
+    "icon": "clipboard-list+eye",
+    "date": "11/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Forms",
+      "icon": "clipboard-list",
+      "description": "Create forms, collect responses and trigger flows from external form providers"
+    },
+    "sub_category": {
+      "name": "Typeform",
+      "icon": "clipboard-list",
+      "description": "Create and manage Typeform forms, list responses and register webhooks"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "Typeform Personal Access Token",
+        "placeholder": "${secrets.typeform_token}",
+        "required": true
+      },
+      {
+        "name": "form_id",
+        "type": "string",
+        "value": null,
+        "label": "Form ID",
+        "placeholder": "abc123",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "form_id",
+        "type": "string",
+        "value": null,
+        "label": "Form ID",
+        "placeholder": ""
+      },
+      {
+        "name": "form_url",
+        "type": "string",
+        "value": null,
+        "label": "Form URL",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Form",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "forms/typeform/form_list": {
+    "hash": "925d0e9b191f47fc661ba64e727b0fd5580b3aed988fa916c5f9aae9a4444cce",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "List Forms",
+    "description": "List Typeform forms in the account, with optional search and page size.",
+    "website": "https://www.flomation.co",
+    "icon": "clipboard-list+list",
+    "date": "11/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Forms",
+      "icon": "clipboard-list",
+      "description": "Create forms, collect responses and trigger flows from external form providers"
+    },
+    "sub_category": {
+      "name": "Typeform",
+      "icon": "clipboard-list",
+      "description": "Create and manage Typeform forms, list responses and register webhooks"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "Typeform Personal Access Token",
+        "placeholder": "${secrets.typeform_token}",
+        "required": true
+      },
+      {
+        "name": "search",
+        "type": "string",
+        "value": null,
+        "label": "Search",
+        "placeholder": "contact"
+      },
+      {
+        "name": "page_size",
+        "type": "integer",
+        "value": null,
+        "label": "Page Size",
+        "placeholder": "10"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "results",
+        "type": "object",
+        "value": null,
+        "label": "Forms",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Count",
+        "placeholder": ""
+      },
+      {
+        "name": "total_items",
+        "type": "integer",
+        "value": null,
+        "label": "Total Items",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "forms/typeform/form_update": {
+    "hash": "a405ad91939a2a8bc4518f144973a3464e672e4f1e2c2b0803be8335c670ea25",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Update Form",
+    "description": "Replace a Typeform form definition with a full form JSON object.",
+    "website": "https://www.flomation.co",
+    "icon": "clipboard-list+file-pen",
+    "date": "11/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Forms",
+      "icon": "clipboard-list",
+      "description": "Create forms, collect responses and trigger flows from external form providers"
+    },
+    "sub_category": {
+      "name": "Typeform",
+      "icon": "clipboard-list",
+      "description": "Create and manage Typeform forms, list responses and register webhooks"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "Typeform Personal Access Token",
+        "placeholder": "${secrets.typeform_token}",
+        "required": true
+      },
+      {
+        "name": "form_id",
+        "type": "string",
+        "value": null,
+        "label": "Form ID",
+        "placeholder": "abc123",
+        "required": true
+      },
+      {
+        "name": "form",
+        "type": "string",
+        "value": null,
+        "label": "Form (JSON object)",
+        "placeholder": "{\"title\":\"Updated title\",\"fields\":[...]}",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "form_id",
+        "type": "string",
+        "value": null,
+        "label": "Form ID",
+        "placeholder": ""
+      },
+      {
+        "name": "form_url",
+        "type": "string",
+        "value": null,
+        "label": "Form URL",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Form",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "forms/typeform/responses_list": {
+    "hash": "b57836735f2a85efeb1e5ef0abbc9e024a20c61bc356aa79cb32815d227c5a3b",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "List Responses",
+    "description": "Retrieve submitted responses for a Typeform form, with date and completion filters.",
+    "website": "https://www.flomation.co",
+    "icon": "clipboard-list+envelope-open-text",
+    "date": "11/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Forms",
+      "icon": "clipboard-list",
+      "description": "Create forms, collect responses and trigger flows from external form providers"
+    },
+    "sub_category": {
+      "name": "Typeform",
+      "icon": "clipboard-list",
+      "description": "Create and manage Typeform forms, list responses and register webhooks"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "Typeform Personal Access Token",
+        "placeholder": "${secrets.typeform_token}",
+        "required": true
+      },
+      {
+        "name": "form_id",
+        "type": "string",
+        "value": null,
+        "label": "Form ID",
+        "placeholder": "abc123",
+        "required": true
+      },
+      {
+        "name": "page_size",
+        "type": "integer",
+        "value": null,
+        "label": "Page Size",
+        "placeholder": "25"
+      },
+      {
+        "name": "since",
+        "type": "string",
+        "value": null,
+        "label": "Since",
+        "placeholder": "2026-01-01T00:00:00Z"
+      },
+      {
+        "name": "until",
+        "type": "string",
+        "value": null,
+        "label": "Until",
+        "placeholder": "2026-12-31T23:59:59Z"
+      },
+      {
+        "name": "completed",
+        "type": "string",
+        "value": null,
+        "label": "Completed",
+        "placeholder": "true or false",
+        "options": [
+          {
+            "name": "Any",
+            "value": ""
+          },
+          {
+            "name": "Completed only",
+            "value": "true"
+          },
+          {
+            "name": "Incomplete only",
+            "value": "false"
+          }
+        ]
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "responses",
+        "type": "object",
+        "value": null,
+        "label": "Responses",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Count",
+        "placeholder": ""
+      },
+      {
+        "name": "total_items",
+        "type": "integer",
+        "value": null,
+        "label": "Total Items",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "forms/typeform/webhook_create": {
+    "hash": "437243cfdf3c1c812e5e24522d4a2a892bcd679211612643e77b2336ef0c2d17",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Create Webhook",
+    "description": "Register or update a Typeform webhook that fires on each form submission.",
+    "website": "https://www.flomation.co",
+    "icon": "webhook+plus",
+    "date": "11/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Forms",
+      "icon": "clipboard-list",
+      "description": "Create forms, collect responses and trigger flows from external form providers"
+    },
+    "sub_category": {
+      "name": "Typeform",
+      "icon": "clipboard-list",
+      "description": "Create and manage Typeform forms, list responses and register webhooks"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "Typeform Personal Access Token",
+        "placeholder": "${secrets.typeform_token}",
+        "required": true
+      },
+      {
+        "name": "form_id",
+        "type": "string",
+        "value": null,
+        "label": "Form ID",
+        "placeholder": "abc123",
+        "required": true
+      },
+      {
+        "name": "tag",
+        "type": "string",
+        "value": null,
+        "label": "Tag",
+        "placeholder": "flomation",
+        "required": true
+      },
+      {
+        "name": "url",
+        "type": "string",
+        "value": null,
+        "label": "Webhook URL",
+        "placeholder": "https://launch.flomation.app/webhook/…",
+        "required": true
+      },
+      {
+        "name": "secret",
+        "type": "secret",
+        "value": null,
+        "label": "Signing Secret",
+        "placeholder": "${secrets.typeform_webhook_secret}"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "webhook_id",
+        "type": "string",
+        "value": null,
+        "label": "Webhook ID",
+        "placeholder": ""
+      },
+      {
+        "name": "tag",
+        "type": "string",
+        "value": null,
+        "label": "Tag",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Webhook",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "forms/typeform/webhook_delete": {
+    "hash": "707e2150aecdad000549e33bd0a72d1c2c2037934364693b3618bd7421f6b6ac",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Delete Webhook",
+    "description": "Delete a Typeform webhook from a form by its tag.",
+    "website": "https://www.flomation.co",
+    "icon": "webhook+trash",
+    "date": "11/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Forms",
+      "icon": "clipboard-list",
+      "description": "Create forms, collect responses and trigger flows from external form providers"
+    },
+    "sub_category": {
+      "name": "Typeform",
+      "icon": "clipboard-list",
+      "description": "Create and manage Typeform forms, list responses and register webhooks"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "Typeform Personal Access Token",
+        "placeholder": "${secrets.typeform_token}",
+        "required": true
+      },
+      {
+        "name": "form_id",
+        "type": "string",
+        "value": null,
+        "label": "Form ID",
+        "placeholder": "abc123",
+        "required": true
+      },
+      {
+        "name": "tag",
+        "type": "string",
+        "value": null,
+        "label": "Tag",
+        "placeholder": "flomation",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "tag",
+        "type": "string",
+        "value": null,
+        "label": "Tag",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
   "git/add": {
     "hash": "4d307d307e222f349b5286744b8373a9f995d89c13605adaf0f42797d9e344f2",
     "author": "Andy Esser",
@@ -31456,7 +32193,7 @@
     ]
   },
   "google/sheets/append": {
-    "hash": "4c5a72cd202e65a65950f176ec6ca8fa4e1d75a0f6ee9b8c666af9e15bdfaead",
+    "hash": "0806a666cc307a4232b3173fb7fb26923d25a7f0540caf5bde9f42ba8f8440c1",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Append to Sheet",
@@ -32116,7 +32853,7 @@
     ]
   },
   "google/sheets/write": {
-    "hash": "9b8b41e0af0a9462665ffa6b6951f6f7d4cf04b08470a20158cb2c74e272fd0d",
+    "hash": "99e1691f096ac8dadcf60d8f733be336620a66f9722ee8fa8eb689e0f975e29f",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Write to Sheet",
@@ -96222,6 +96959,97 @@
         "type": "boolean",
         "value": null,
         "label": "Is Voice Call",
+        "placeholder": ""
+      }
+    ]
+  },
+  "trigger/typeform_webhook": {
+    "hash": "b147b23d0de7fa3dad377769c58f2cbf09a45629f151fcba6492c09ac28e1b18",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Typeform Webhook Trigger",
+    "description": "Triggers a flow when a Typeform form submission webhook is received.",
+    "website": "https://www.flomation.co",
+    "icon": "clipboard-list",
+    "date": "11/07/2026",
+    "type": 1,
+    "category": {
+      "name": "Triggers",
+      "icon": "bolt-lightning",
+      "description": "Start a Flow"
+    },
+    "inputs": [
+      {
+        "name": "secret",
+        "type": "secret",
+        "value": null,
+        "label": "Webhook Signing Secret",
+        "placeholder": "${secrets.typeform_webhook_secret}",
+        "required": true
+      },
+      {
+        "name": "form_id",
+        "type": "string",
+        "value": null,
+        "label": "Form ID Filter",
+        "placeholder": "abc123 (blank = any form)"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Event Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "event_type",
+        "type": "string",
+        "value": null,
+        "label": "Event Type",
+        "placeholder": ""
+      },
+      {
+        "name": "event_id",
+        "type": "string",
+        "value": null,
+        "label": "Event ID",
+        "placeholder": ""
+      },
+      {
+        "name": "form_id",
+        "type": "string",
+        "value": null,
+        "label": "Form ID",
+        "placeholder": ""
+      },
+      {
+        "name": "response_token",
+        "type": "string",
+        "value": null,
+        "label": "Response Token",
+        "placeholder": ""
+      },
+      {
+        "name": "submitted_at",
+        "type": "string",
+        "value": null,
+        "label": "Submitted At",
+        "placeholder": ""
+      },
+      {
+        "name": "answers",
+        "type": "string",
+        "value": null,
+        "label": "Answers (JSON)",
+        "placeholder": ""
+      },
+      {
+        "name": "body",
+        "type": "string",
+        "value": null,
+        "label": "Raw JSON Body",
         "placeholder": ""
       }
     ]
