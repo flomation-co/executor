@@ -73,6 +73,10 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	}
 
 	qos := mqtt.ParseQoS("qos", inputs)
+	// WaitSeconds enforces the ceiling; it is not merely advertised in the
+	// placeholder. Anything above MaxWaitSeconds (300) is clamped, so a flow
+	// configured with an hour's timeout cannot pin an executor slot and a broker
+	// connection open for an hour.
 	wait := mqtt.WaitSeconds("timeout_seconds", inputs, mqtt.DefaultWaitSeconds)
 	// A retained value is the topic's *stored* last message, delivered the moment
 	// we subscribe. Waiting for "the next message" almost always means a new one,

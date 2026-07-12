@@ -75,6 +75,13 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	// The broker delivers a retained message immediately on subscribe or never,
 	// so a short window is enough — and only the retained flag distinguishes the
 	// stored value from live traffic that happens to arrive while we are listening.
+	//
+	// Subscribing at QoS 1 (rather than 0) so the broker acknowledges the delivery
+	// and the read can't be silently lost. It does not upgrade anything: a message
+	// is delivered at min(published QoS, subscribed QoS), so the retained value
+	// still arrives at whatever QoS the publisher chose. There is no QoS input on
+	// this action because the operator is reading a value, not choosing a delivery
+	// guarantee.
 	msg, err := mqtt.AwaitMessage(flow, client, topic, 1, mqtt.RetainedWait, func(m mqtt.Message) bool {
 		return m.Retained
 	})

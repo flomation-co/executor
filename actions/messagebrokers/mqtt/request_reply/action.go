@@ -76,6 +76,10 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	if err := mqtt.ValidatePublishTopic(requestTopic); err != nil {
 		return mqtt.ErrorResult(err.Error()), nil
 	}
+	// Only the request topic is checked for wildcards. The asymmetry is deliberate:
+	// we PUBLISH to the request topic, where a wildcard is meaningless and the
+	// broker would reject it, but we SUBSCRIBE to the reply topic, where a wildcard
+	// is legitimate — a device answering on devices/+/status is a normal pattern.
 	replyTopic, err := mqtt.RequiredString("reply_topic", "Reply Topic", inputs)
 	if err != nil {
 		return mqtt.ErrorResult(err.Error()), nil
