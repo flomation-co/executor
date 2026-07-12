@@ -31456,7 +31456,7 @@
     ]
   },
   "google/sheets/append": {
-    "hash": "4c5a72cd202e65a65950f176ec6ca8fa4e1d75a0f6ee9b8c666af9e15bdfaead",
+    "hash": "0806a666cc307a4232b3173fb7fb26923d25a7f0540caf5bde9f42ba8f8440c1",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Append to Sheet",
@@ -32116,7 +32116,7 @@
     ]
   },
   "google/sheets/write": {
-    "hash": "9b8b41e0af0a9462665ffa6b6951f6f7d4cf04b08470a20158cb2c74e272fd0d",
+    "hash": "99e1691f096ac8dadcf60d8f733be336620a66f9722ee8fa8eb689e0f975e29f",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Write to Sheet",
@@ -60204,6 +60204,1273 @@
         "type": "object",
         "value": null,
         "label": "Template Version",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "messagebrokers/mqtt/message_wait": {
+    "hash": "480a2c5b11d72ca42d7668d7c92bb8cc5fb1195d07d7c26e5531333606d6e9b8",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "MQTT: Wait for Message",
+    "description": "Pause the flow and wait for the next message on a topic, up to a timeout. Use it to wait for a device to report back mid-flow. Check the Received output to branch on whether a message actually arrived.",
+    "website": "https://www.flomation.co",
+    "icon": "tower-broadcast+hourglass-start",
+    "date": "12/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Message Brokers",
+      "icon": "arrow-right-arrow-left",
+      "description": "Publish and subscribe to message brokers — move events between systems in real time"
+    },
+    "sub_category": {
+      "name": "MQTT",
+      "icon": "tower-broadcast",
+      "description": "Publish messages to an MQTT broker, read retained values, and wait for messages on a topic"
+    },
+    "inputs": [
+      {
+        "name": "protocol",
+        "type": "string",
+        "value": null,
+        "label": "Protocol",
+        "placeholder": "",
+        "required": true,
+        "options": [
+          {
+            "name": "MQTT (TCP)",
+            "value": "mqtt"
+          },
+          {
+            "name": "MQTT over TLS",
+            "value": "mqtts"
+          },
+          {
+            "name": "MQTT over WebSocket",
+            "value": "ws"
+          },
+          {
+            "name": "MQTT over Secure WebSocket",
+            "value": "wss"
+          }
+        ]
+      },
+      {
+        "name": "host",
+        "type": "string",
+        "value": null,
+        "label": "Broker Host",
+        "placeholder": "broker.example.com — hostname or IP, no scheme",
+        "required": true
+      },
+      {
+        "name": "port",
+        "type": "integer",
+        "value": null,
+        "label": "Port",
+        "placeholder": "1883 (MQTT), 8883 (TLS), 8083 (WebSocket)"
+      },
+      {
+        "name": "username",
+        "type": "string",
+        "value": null,
+        "label": "Username",
+        "placeholder": "Leave empty for an anonymous broker"
+      },
+      {
+        "name": "password",
+        "type": "secret",
+        "value": null,
+        "label": "Password",
+        "placeholder": "Broker password"
+      },
+      {
+        "name": "client_id",
+        "type": "string",
+        "value": null,
+        "label": "Client ID",
+        "placeholder": "Leave empty to generate a unique ID per run (recommended)"
+      },
+      {
+        "name": "ws_path",
+        "type": "string",
+        "value": null,
+        "label": "WebSocket Path",
+        "placeholder": "/mqtt",
+        "visible_when": {
+          "field": "protocol",
+          "values": [
+            "ws",
+            "wss"
+          ]
+        }
+      },
+      {
+        "name": "ca_certificate",
+        "type": "secret",
+        "value": null,
+        "label": "CA Certificate",
+        "placeholder": "PEM-encoded CA cert — only for a privately-signed broker",
+        "visible_when": {
+          "field": "protocol",
+          "values": [
+            "mqtts",
+            "wss"
+          ]
+        }
+      },
+      {
+        "name": "client_certificate",
+        "type": "secret",
+        "value": null,
+        "label": "Client Certificate",
+        "placeholder": "PEM-encoded client cert — only for mutual-TLS brokers",
+        "visible_when": {
+          "field": "protocol",
+          "values": [
+            "mqtts",
+            "wss"
+          ]
+        }
+      },
+      {
+        "name": "client_key",
+        "type": "secret",
+        "value": null,
+        "label": "Client Key",
+        "placeholder": "PEM-encoded client private key — only for mutual-TLS brokers",
+        "visible_when": {
+          "field": "protocol",
+          "values": [
+            "mqtts",
+            "wss"
+          ]
+        }
+      },
+      {
+        "name": "allow_insecure",
+        "type": "boolean",
+        "value": null,
+        "label": "Allow Insecure TLS",
+        "placeholder": "Skip certificate verification — only for a self-signed broker",
+        "visible_when": {
+          "field": "protocol",
+          "values": [
+            "mqtts",
+            "wss"
+          ]
+        }
+      },
+      {
+        "name": "topic",
+        "type": "string",
+        "value": null,
+        "label": "Topic",
+        "placeholder": "sensors/kitchen/+ — wildcards allowed (+ one level, # the rest)",
+        "required": true
+      },
+      {
+        "name": "qos",
+        "type": "string",
+        "value": null,
+        "label": "Delivery Guarantee (QoS)",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "0 — At most once (fire and forget)",
+            "value": "0"
+          },
+          {
+            "name": "1 — At least once (acknowledged)",
+            "value": "1"
+          },
+          {
+            "name": "2 — Exactly once",
+            "value": "2"
+          }
+        ]
+      },
+      {
+        "name": "timeout_seconds",
+        "type": "integer",
+        "value": null,
+        "label": "Wait For (seconds)",
+        "placeholder": "30 — how long to listen before giving up (maximum 300)"
+      },
+      {
+        "name": "ignore_retained",
+        "type": "boolean",
+        "value": null,
+        "label": "Ignore Retained Value",
+        "placeholder": "Ticked (default): wait for a genuinely new message, skipping the topic's stored last value"
+      },
+      {
+        "name": "parse_json",
+        "type": "boolean",
+        "value": null,
+        "label": "Parse JSON Payload",
+        "placeholder": "Decode the payload into fields you can reference downstream"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "received",
+        "type": "boolean",
+        "value": null,
+        "label": "Received",
+        "placeholder": ""
+      },
+      {
+        "name": "topic",
+        "type": "string",
+        "value": null,
+        "label": "Topic",
+        "placeholder": ""
+      },
+      {
+        "name": "payload",
+        "type": "string",
+        "value": null,
+        "label": "Payload",
+        "placeholder": ""
+      },
+      {
+        "name": "payload_json",
+        "type": "object",
+        "value": null,
+        "label": "Payload (JSON)",
+        "placeholder": ""
+      },
+      {
+        "name": "qos",
+        "type": "integer",
+        "value": null,
+        "label": "QoS",
+        "placeholder": ""
+      },
+      {
+        "name": "retained",
+        "type": "boolean",
+        "value": null,
+        "label": "Was Retained",
+        "placeholder": ""
+      },
+      {
+        "name": "received_at",
+        "type": "string",
+        "value": null,
+        "label": "Received At",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Message",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "messagebrokers/mqtt/publish": {
+    "hash": "0298b3f0285c6e60858d99f7db5f79374593ddda80918fef41bcedf72e9f6445",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "MQTT: Publish Message",
+    "description": "Publish a message to a topic on an MQTT broker. Choose the delivery guarantee (QoS) and optionally retain the message so the next subscriber receives it immediately.",
+    "website": "https://www.flomation.co",
+    "icon": "tower-broadcast+paper-plane",
+    "date": "12/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Message Brokers",
+      "icon": "arrow-right-arrow-left",
+      "description": "Publish and subscribe to message brokers — move events between systems in real time"
+    },
+    "sub_category": {
+      "name": "MQTT",
+      "icon": "tower-broadcast",
+      "description": "Publish messages to an MQTT broker, read retained values, and wait for messages on a topic"
+    },
+    "inputs": [
+      {
+        "name": "protocol",
+        "type": "string",
+        "value": null,
+        "label": "Protocol",
+        "placeholder": "",
+        "required": true,
+        "options": [
+          {
+            "name": "MQTT (TCP)",
+            "value": "mqtt"
+          },
+          {
+            "name": "MQTT over TLS",
+            "value": "mqtts"
+          },
+          {
+            "name": "MQTT over WebSocket",
+            "value": "ws"
+          },
+          {
+            "name": "MQTT over Secure WebSocket",
+            "value": "wss"
+          }
+        ]
+      },
+      {
+        "name": "host",
+        "type": "string",
+        "value": null,
+        "label": "Broker Host",
+        "placeholder": "broker.example.com — hostname or IP, no scheme",
+        "required": true
+      },
+      {
+        "name": "port",
+        "type": "integer",
+        "value": null,
+        "label": "Port",
+        "placeholder": "1883 (MQTT), 8883 (TLS), 8083 (WebSocket)"
+      },
+      {
+        "name": "username",
+        "type": "string",
+        "value": null,
+        "label": "Username",
+        "placeholder": "Leave empty for an anonymous broker"
+      },
+      {
+        "name": "password",
+        "type": "secret",
+        "value": null,
+        "label": "Password",
+        "placeholder": "Broker password"
+      },
+      {
+        "name": "client_id",
+        "type": "string",
+        "value": null,
+        "label": "Client ID",
+        "placeholder": "Leave empty to generate a unique ID per run (recommended)"
+      },
+      {
+        "name": "ws_path",
+        "type": "string",
+        "value": null,
+        "label": "WebSocket Path",
+        "placeholder": "/mqtt",
+        "visible_when": {
+          "field": "protocol",
+          "values": [
+            "ws",
+            "wss"
+          ]
+        }
+      },
+      {
+        "name": "ca_certificate",
+        "type": "secret",
+        "value": null,
+        "label": "CA Certificate",
+        "placeholder": "PEM-encoded CA cert — only for a privately-signed broker",
+        "visible_when": {
+          "field": "protocol",
+          "values": [
+            "mqtts",
+            "wss"
+          ]
+        }
+      },
+      {
+        "name": "client_certificate",
+        "type": "secret",
+        "value": null,
+        "label": "Client Certificate",
+        "placeholder": "PEM-encoded client cert — only for mutual-TLS brokers",
+        "visible_when": {
+          "field": "protocol",
+          "values": [
+            "mqtts",
+            "wss"
+          ]
+        }
+      },
+      {
+        "name": "client_key",
+        "type": "secret",
+        "value": null,
+        "label": "Client Key",
+        "placeholder": "PEM-encoded client private key — only for mutual-TLS brokers",
+        "visible_when": {
+          "field": "protocol",
+          "values": [
+            "mqtts",
+            "wss"
+          ]
+        }
+      },
+      {
+        "name": "allow_insecure",
+        "type": "boolean",
+        "value": null,
+        "label": "Allow Insecure TLS",
+        "placeholder": "Skip certificate verification — only for a self-signed broker",
+        "visible_when": {
+          "field": "protocol",
+          "values": [
+            "mqtts",
+            "wss"
+          ]
+        }
+      },
+      {
+        "name": "topic",
+        "type": "string",
+        "value": null,
+        "label": "Topic",
+        "placeholder": "sensors/kitchen/temperature — wildcards are not allowed when publishing",
+        "required": true
+      },
+      {
+        "name": "message",
+        "type": "text",
+        "value": null,
+        "label": "Message",
+        "placeholder": "The payload to publish — plain text or JSON"
+      },
+      {
+        "name": "qos",
+        "type": "string",
+        "value": null,
+        "label": "Delivery Guarantee (QoS)",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "0 — At most once (fire and forget)",
+            "value": "0"
+          },
+          {
+            "name": "1 — At least once (acknowledged)",
+            "value": "1"
+          },
+          {
+            "name": "2 — Exactly once",
+            "value": "2"
+          }
+        ]
+      },
+      {
+        "name": "retain",
+        "type": "boolean",
+        "value": null,
+        "label": "Retain",
+        "placeholder": "Keep this as the topic's last known value, delivered to every new subscriber"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "topic",
+        "type": "string",
+        "value": null,
+        "label": "Topic",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Published Message",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "messagebrokers/mqtt/request_reply": {
+    "hash": "82575c1bab73a58b4b09612d08bed9a99ea9d8b00edc9145b188a674516a7358",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "MQTT: Publish and Await Reply",
+    "description": "Publish a request to one topic and wait for the answer on a reply topic — ask a device a question and get its response in a single step. Check the Replied output to branch on whether an answer came back.",
+    "website": "https://www.flomation.co",
+    "icon": "tower-broadcast+reply",
+    "date": "12/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Message Brokers",
+      "icon": "arrow-right-arrow-left",
+      "description": "Publish and subscribe to message brokers — move events between systems in real time"
+    },
+    "sub_category": {
+      "name": "MQTT",
+      "icon": "tower-broadcast",
+      "description": "Publish messages to an MQTT broker, read retained values, and wait for messages on a topic"
+    },
+    "inputs": [
+      {
+        "name": "protocol",
+        "type": "string",
+        "value": null,
+        "label": "Protocol",
+        "placeholder": "",
+        "required": true,
+        "options": [
+          {
+            "name": "MQTT (TCP)",
+            "value": "mqtt"
+          },
+          {
+            "name": "MQTT over TLS",
+            "value": "mqtts"
+          },
+          {
+            "name": "MQTT over WebSocket",
+            "value": "ws"
+          },
+          {
+            "name": "MQTT over Secure WebSocket",
+            "value": "wss"
+          }
+        ]
+      },
+      {
+        "name": "host",
+        "type": "string",
+        "value": null,
+        "label": "Broker Host",
+        "placeholder": "broker.example.com — hostname or IP, no scheme",
+        "required": true
+      },
+      {
+        "name": "port",
+        "type": "integer",
+        "value": null,
+        "label": "Port",
+        "placeholder": "1883 (MQTT), 8883 (TLS), 8083 (WebSocket)"
+      },
+      {
+        "name": "username",
+        "type": "string",
+        "value": null,
+        "label": "Username",
+        "placeholder": "Leave empty for an anonymous broker"
+      },
+      {
+        "name": "password",
+        "type": "secret",
+        "value": null,
+        "label": "Password",
+        "placeholder": "Broker password"
+      },
+      {
+        "name": "client_id",
+        "type": "string",
+        "value": null,
+        "label": "Client ID",
+        "placeholder": "Leave empty to generate a unique ID per run (recommended)"
+      },
+      {
+        "name": "ws_path",
+        "type": "string",
+        "value": null,
+        "label": "WebSocket Path",
+        "placeholder": "/mqtt",
+        "visible_when": {
+          "field": "protocol",
+          "values": [
+            "ws",
+            "wss"
+          ]
+        }
+      },
+      {
+        "name": "ca_certificate",
+        "type": "secret",
+        "value": null,
+        "label": "CA Certificate",
+        "placeholder": "PEM-encoded CA cert — only for a privately-signed broker",
+        "visible_when": {
+          "field": "protocol",
+          "values": [
+            "mqtts",
+            "wss"
+          ]
+        }
+      },
+      {
+        "name": "client_certificate",
+        "type": "secret",
+        "value": null,
+        "label": "Client Certificate",
+        "placeholder": "PEM-encoded client cert — only for mutual-TLS brokers",
+        "visible_when": {
+          "field": "protocol",
+          "values": [
+            "mqtts",
+            "wss"
+          ]
+        }
+      },
+      {
+        "name": "client_key",
+        "type": "secret",
+        "value": null,
+        "label": "Client Key",
+        "placeholder": "PEM-encoded client private key — only for mutual-TLS brokers",
+        "visible_when": {
+          "field": "protocol",
+          "values": [
+            "mqtts",
+            "wss"
+          ]
+        }
+      },
+      {
+        "name": "allow_insecure",
+        "type": "boolean",
+        "value": null,
+        "label": "Allow Insecure TLS",
+        "placeholder": "Skip certificate verification — only for a self-signed broker",
+        "visible_when": {
+          "field": "protocol",
+          "values": [
+            "mqtts",
+            "wss"
+          ]
+        }
+      },
+      {
+        "name": "topic",
+        "type": "string",
+        "value": null,
+        "label": "Request Topic",
+        "placeholder": "devices/boiler/command — where to send the request",
+        "required": true
+      },
+      {
+        "name": "message",
+        "type": "text",
+        "value": null,
+        "label": "Request Message",
+        "placeholder": "The payload to send — plain text or JSON"
+      },
+      {
+        "name": "reply_topic",
+        "type": "string",
+        "value": null,
+        "label": "Reply Topic",
+        "placeholder": "devices/boiler/status — where the answer will arrive (wildcards allowed)",
+        "required": true
+      },
+      {
+        "name": "qos",
+        "type": "string",
+        "value": null,
+        "label": "Delivery Guarantee (QoS)",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "0 — At most once (fire and forget)",
+            "value": "0"
+          },
+          {
+            "name": "1 — At least once (acknowledged)",
+            "value": "1"
+          },
+          {
+            "name": "2 — Exactly once",
+            "value": "2"
+          }
+        ]
+      },
+      {
+        "name": "timeout_seconds",
+        "type": "integer",
+        "value": null,
+        "label": "Wait For Reply (seconds)",
+        "placeholder": "30 — how long to wait for the answer before giving up (maximum 300)"
+      },
+      {
+        "name": "parse_json",
+        "type": "boolean",
+        "value": null,
+        "label": "Parse JSON Reply",
+        "placeholder": "Decode the reply into fields you can reference downstream"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "replied",
+        "type": "boolean",
+        "value": null,
+        "label": "Replied",
+        "placeholder": ""
+      },
+      {
+        "name": "topic",
+        "type": "string",
+        "value": null,
+        "label": "Reply Topic",
+        "placeholder": ""
+      },
+      {
+        "name": "payload",
+        "type": "string",
+        "value": null,
+        "label": "Reply",
+        "placeholder": ""
+      },
+      {
+        "name": "payload_json",
+        "type": "object",
+        "value": null,
+        "label": "Reply (JSON)",
+        "placeholder": ""
+      },
+      {
+        "name": "qos",
+        "type": "integer",
+        "value": null,
+        "label": "QoS",
+        "placeholder": ""
+      },
+      {
+        "name": "retained",
+        "type": "boolean",
+        "value": null,
+        "label": "Was Retained",
+        "placeholder": ""
+      },
+      {
+        "name": "received_at",
+        "type": "string",
+        "value": null,
+        "label": "Replied At",
+        "placeholder": ""
+      },
+      {
+        "name": "request_topic",
+        "type": "string",
+        "value": null,
+        "label": "Request Topic",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Reply Message",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "messagebrokers/mqtt/retained_clear": {
+    "hash": "acbf31fca5b6e8b19c56093c0b3af804a505a28eb100019c39f5871a3cc86efa",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "MQTT: Clear Retained Value",
+    "description": "Delete a topic's stored last known value, so new subscribers no longer receive a stale reading. Live messages on the topic are unaffected.",
+    "website": "https://www.flomation.co",
+    "icon": "tower-broadcast+trash",
+    "date": "12/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Message Brokers",
+      "icon": "arrow-right-arrow-left",
+      "description": "Publish and subscribe to message brokers — move events between systems in real time"
+    },
+    "sub_category": {
+      "name": "MQTT",
+      "icon": "tower-broadcast",
+      "description": "Publish messages to an MQTT broker, read retained values, and wait for messages on a topic"
+    },
+    "inputs": [
+      {
+        "name": "protocol",
+        "type": "string",
+        "value": null,
+        "label": "Protocol",
+        "placeholder": "",
+        "required": true,
+        "options": [
+          {
+            "name": "MQTT (TCP)",
+            "value": "mqtt"
+          },
+          {
+            "name": "MQTT over TLS",
+            "value": "mqtts"
+          },
+          {
+            "name": "MQTT over WebSocket",
+            "value": "ws"
+          },
+          {
+            "name": "MQTT over Secure WebSocket",
+            "value": "wss"
+          }
+        ]
+      },
+      {
+        "name": "host",
+        "type": "string",
+        "value": null,
+        "label": "Broker Host",
+        "placeholder": "broker.example.com — hostname or IP, no scheme",
+        "required": true
+      },
+      {
+        "name": "port",
+        "type": "integer",
+        "value": null,
+        "label": "Port",
+        "placeholder": "1883 (MQTT), 8883 (TLS), 8083 (WebSocket)"
+      },
+      {
+        "name": "username",
+        "type": "string",
+        "value": null,
+        "label": "Username",
+        "placeholder": "Leave empty for an anonymous broker"
+      },
+      {
+        "name": "password",
+        "type": "secret",
+        "value": null,
+        "label": "Password",
+        "placeholder": "Broker password"
+      },
+      {
+        "name": "client_id",
+        "type": "string",
+        "value": null,
+        "label": "Client ID",
+        "placeholder": "Leave empty to generate a unique ID per run (recommended)"
+      },
+      {
+        "name": "ws_path",
+        "type": "string",
+        "value": null,
+        "label": "WebSocket Path",
+        "placeholder": "/mqtt",
+        "visible_when": {
+          "field": "protocol",
+          "values": [
+            "ws",
+            "wss"
+          ]
+        }
+      },
+      {
+        "name": "ca_certificate",
+        "type": "secret",
+        "value": null,
+        "label": "CA Certificate",
+        "placeholder": "PEM-encoded CA cert — only for a privately-signed broker",
+        "visible_when": {
+          "field": "protocol",
+          "values": [
+            "mqtts",
+            "wss"
+          ]
+        }
+      },
+      {
+        "name": "client_certificate",
+        "type": "secret",
+        "value": null,
+        "label": "Client Certificate",
+        "placeholder": "PEM-encoded client cert — only for mutual-TLS brokers",
+        "visible_when": {
+          "field": "protocol",
+          "values": [
+            "mqtts",
+            "wss"
+          ]
+        }
+      },
+      {
+        "name": "client_key",
+        "type": "secret",
+        "value": null,
+        "label": "Client Key",
+        "placeholder": "PEM-encoded client private key — only for mutual-TLS brokers",
+        "visible_when": {
+          "field": "protocol",
+          "values": [
+            "mqtts",
+            "wss"
+          ]
+        }
+      },
+      {
+        "name": "allow_insecure",
+        "type": "boolean",
+        "value": null,
+        "label": "Allow Insecure TLS",
+        "placeholder": "Skip certificate verification — only for a self-signed broker",
+        "visible_when": {
+          "field": "protocol",
+          "values": [
+            "mqtts",
+            "wss"
+          ]
+        }
+      },
+      {
+        "name": "topic",
+        "type": "string",
+        "value": null,
+        "label": "Topic",
+        "placeholder": "sensors/kitchen/temperature — the topic whose stored value to clear",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "topic",
+        "type": "string",
+        "value": null,
+        "label": "Topic",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Result",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "messagebrokers/mqtt/retained_get": {
+    "hash": "ae9629aa8714f63e93c23daea5236dfc9857ceb667c1e1c199008faeff14c463",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "MQTT: Get Retained Value",
+    "description": "Read a topic's last known value — the message the broker has retained. Use it to ask 'what is the current temperature?' without waiting for the next reading. Check the Found output to branch on whether the topic has a stored value.",
+    "website": "https://www.flomation.co",
+    "icon": "tower-broadcast+magnifying-glass",
+    "date": "12/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Message Brokers",
+      "icon": "arrow-right-arrow-left",
+      "description": "Publish and subscribe to message brokers — move events between systems in real time"
+    },
+    "sub_category": {
+      "name": "MQTT",
+      "icon": "tower-broadcast",
+      "description": "Publish messages to an MQTT broker, read retained values, and wait for messages on a topic"
+    },
+    "inputs": [
+      {
+        "name": "protocol",
+        "type": "string",
+        "value": null,
+        "label": "Protocol",
+        "placeholder": "",
+        "required": true,
+        "options": [
+          {
+            "name": "MQTT (TCP)",
+            "value": "mqtt"
+          },
+          {
+            "name": "MQTT over TLS",
+            "value": "mqtts"
+          },
+          {
+            "name": "MQTT over WebSocket",
+            "value": "ws"
+          },
+          {
+            "name": "MQTT over Secure WebSocket",
+            "value": "wss"
+          }
+        ]
+      },
+      {
+        "name": "host",
+        "type": "string",
+        "value": null,
+        "label": "Broker Host",
+        "placeholder": "broker.example.com — hostname or IP, no scheme",
+        "required": true
+      },
+      {
+        "name": "port",
+        "type": "integer",
+        "value": null,
+        "label": "Port",
+        "placeholder": "1883 (MQTT), 8883 (TLS), 8083 (WebSocket)"
+      },
+      {
+        "name": "username",
+        "type": "string",
+        "value": null,
+        "label": "Username",
+        "placeholder": "Leave empty for an anonymous broker"
+      },
+      {
+        "name": "password",
+        "type": "secret",
+        "value": null,
+        "label": "Password",
+        "placeholder": "Broker password"
+      },
+      {
+        "name": "client_id",
+        "type": "string",
+        "value": null,
+        "label": "Client ID",
+        "placeholder": "Leave empty to generate a unique ID per run (recommended)"
+      },
+      {
+        "name": "ws_path",
+        "type": "string",
+        "value": null,
+        "label": "WebSocket Path",
+        "placeholder": "/mqtt",
+        "visible_when": {
+          "field": "protocol",
+          "values": [
+            "ws",
+            "wss"
+          ]
+        }
+      },
+      {
+        "name": "ca_certificate",
+        "type": "secret",
+        "value": null,
+        "label": "CA Certificate",
+        "placeholder": "PEM-encoded CA cert — only for a privately-signed broker",
+        "visible_when": {
+          "field": "protocol",
+          "values": [
+            "mqtts",
+            "wss"
+          ]
+        }
+      },
+      {
+        "name": "client_certificate",
+        "type": "secret",
+        "value": null,
+        "label": "Client Certificate",
+        "placeholder": "PEM-encoded client cert — only for mutual-TLS brokers",
+        "visible_when": {
+          "field": "protocol",
+          "values": [
+            "mqtts",
+            "wss"
+          ]
+        }
+      },
+      {
+        "name": "client_key",
+        "type": "secret",
+        "value": null,
+        "label": "Client Key",
+        "placeholder": "PEM-encoded client private key — only for mutual-TLS brokers",
+        "visible_when": {
+          "field": "protocol",
+          "values": [
+            "mqtts",
+            "wss"
+          ]
+        }
+      },
+      {
+        "name": "allow_insecure",
+        "type": "boolean",
+        "value": null,
+        "label": "Allow Insecure TLS",
+        "placeholder": "Skip certificate verification — only for a self-signed broker",
+        "visible_when": {
+          "field": "protocol",
+          "values": [
+            "mqtts",
+            "wss"
+          ]
+        }
+      },
+      {
+        "name": "topic",
+        "type": "string",
+        "value": null,
+        "label": "Topic",
+        "placeholder": "sensors/kitchen/temperature — the topic whose stored value you want",
+        "required": true
+      },
+      {
+        "name": "parse_json",
+        "type": "boolean",
+        "value": null,
+        "label": "Parse JSON Payload",
+        "placeholder": "Decode the payload into fields you can reference downstream"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "found",
+        "type": "boolean",
+        "value": null,
+        "label": "Found",
+        "placeholder": ""
+      },
+      {
+        "name": "topic",
+        "type": "string",
+        "value": null,
+        "label": "Topic",
+        "placeholder": ""
+      },
+      {
+        "name": "payload",
+        "type": "string",
+        "value": null,
+        "label": "Value",
+        "placeholder": ""
+      },
+      {
+        "name": "payload_json",
+        "type": "object",
+        "value": null,
+        "label": "Value (JSON)",
+        "placeholder": ""
+      },
+      {
+        "name": "qos",
+        "type": "integer",
+        "value": null,
+        "label": "QoS",
+        "placeholder": ""
+      },
+      {
+        "name": "retained",
+        "type": "boolean",
+        "value": null,
+        "label": "Was Retained",
+        "placeholder": ""
+      },
+      {
+        "name": "received_at",
+        "type": "string",
+        "value": null,
+        "label": "Read At",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Message",
         "placeholder": ""
       },
       {
@@ -94079,6 +95346,257 @@
         "type": "string",
         "value": null,
         "label": "Raw JSON Body",
+        "placeholder": ""
+      }
+    ]
+  },
+  "trigger/mqtt": {
+    "hash": "0b1a8a7e197e2dfbe9d4033135800f2b3616a238f619d78d5eb5de3063aa485f",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "MQTT Trigger",
+    "description": "Start a flow whenever a message arrives on an MQTT topic. Flomation holds a subscription open to your broker and runs the flow the moment a message is published. Wildcards are supported: + matches one level, # matches the rest.",
+    "website": "https://www.flomation.co",
+    "icon": "tower-broadcast",
+    "date": "12/07/2026",
+    "type": 1,
+    "category": {
+      "name": "Triggers",
+      "icon": "bolt-lightning",
+      "description": "Start a Flow"
+    },
+    "inputs": [
+      {
+        "name": "protocol",
+        "type": "string",
+        "value": null,
+        "label": "Protocol",
+        "placeholder": "",
+        "required": true,
+        "options": [
+          {
+            "name": "MQTT (TCP)",
+            "value": "mqtt"
+          },
+          {
+            "name": "MQTT over TLS",
+            "value": "mqtts"
+          },
+          {
+            "name": "MQTT over WebSocket",
+            "value": "ws"
+          },
+          {
+            "name": "MQTT over Secure WebSocket",
+            "value": "wss"
+          }
+        ]
+      },
+      {
+        "name": "host",
+        "type": "string",
+        "value": null,
+        "label": "Broker Host",
+        "placeholder": "broker.example.com — hostname or IP, no scheme",
+        "required": true
+      },
+      {
+        "name": "port",
+        "type": "integer",
+        "value": null,
+        "label": "Port",
+        "placeholder": "1883 (MQTT), 8883 (TLS), 8083 (WebSocket)"
+      },
+      {
+        "name": "username",
+        "type": "string",
+        "value": null,
+        "label": "Username",
+        "placeholder": "Leave empty for an anonymous broker"
+      },
+      {
+        "name": "password",
+        "type": "secret",
+        "value": null,
+        "label": "Password",
+        "placeholder": "Broker password"
+      },
+      {
+        "name": "client_id",
+        "type": "string",
+        "value": null,
+        "label": "Client ID",
+        "placeholder": "Leave empty unless your broker requires a specific client ID (AWS IoT Core, Azure IoT Hub)"
+      },
+      {
+        "name": "ws_path",
+        "type": "string",
+        "value": null,
+        "label": "WebSocket Path",
+        "placeholder": "/mqtt",
+        "visible_when": {
+          "field": "protocol",
+          "values": [
+            "ws",
+            "wss"
+          ]
+        }
+      },
+      {
+        "name": "ca_certificate",
+        "type": "secret",
+        "value": null,
+        "label": "CA Certificate",
+        "placeholder": "PEM-encoded CA cert — only for a privately-signed broker",
+        "visible_when": {
+          "field": "protocol",
+          "values": [
+            "mqtts",
+            "wss"
+          ]
+        }
+      },
+      {
+        "name": "client_certificate",
+        "type": "secret",
+        "value": null,
+        "label": "Client Certificate",
+        "placeholder": "PEM-encoded client cert — only for mutual-TLS brokers",
+        "visible_when": {
+          "field": "protocol",
+          "values": [
+            "mqtts",
+            "wss"
+          ]
+        }
+      },
+      {
+        "name": "client_key",
+        "type": "secret",
+        "value": null,
+        "label": "Client Key",
+        "placeholder": "PEM-encoded client private key — only for mutual-TLS brokers",
+        "visible_when": {
+          "field": "protocol",
+          "values": [
+            "mqtts",
+            "wss"
+          ]
+        }
+      },
+      {
+        "name": "allow_insecure",
+        "type": "boolean",
+        "value": null,
+        "label": "Allow Insecure TLS",
+        "placeholder": "Skip certificate verification — only for a self-signed broker",
+        "visible_when": {
+          "field": "protocol",
+          "values": [
+            "mqtts",
+            "wss"
+          ]
+        }
+      },
+      {
+        "name": "topics",
+        "type": "string",
+        "value": null,
+        "label": "Topics",
+        "placeholder": "sensors/# — separate several with commas; add :1 or :2 after a topic to raise its delivery guarantee",
+        "required": true
+      },
+      {
+        "name": "default_qos",
+        "type": "string",
+        "value": null,
+        "label": "Delivery Guarantee (QoS)",
+        "placeholder": "Applies to every topic that doesn't set its own",
+        "options": [
+          {
+            "name": "0 — At most once (fire and forget)",
+            "value": "0"
+          },
+          {
+            "name": "1 — At least once (acknowledged)",
+            "value": "1"
+          },
+          {
+            "name": "2 — Exactly once",
+            "value": "2"
+          }
+        ]
+      },
+      {
+        "name": "parse_json",
+        "type": "boolean",
+        "value": null,
+        "label": "Parse JSON Payload",
+        "placeholder": "Decode the payload into fields you can reference downstream"
+      },
+      {
+        "name": "durable",
+        "type": "boolean",
+        "value": null,
+        "label": "Queue Messages While Disconnected",
+        "placeholder": "Ticked (default): the broker holds QoS 1 and 2 messages for this flow if the connection drops, and delivers them on reconnect"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "content",
+        "type": "string",
+        "value": null,
+        "label": "Message Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "topic",
+        "type": "string",
+        "value": null,
+        "label": "Topic",
+        "placeholder": ""
+      },
+      {
+        "name": "payload",
+        "type": "string",
+        "value": null,
+        "label": "Payload",
+        "placeholder": ""
+      },
+      {
+        "name": "payload_json",
+        "type": "object",
+        "value": null,
+        "label": "Payload (JSON)",
+        "placeholder": ""
+      },
+      {
+        "name": "qos",
+        "type": "integer",
+        "value": null,
+        "label": "QoS",
+        "placeholder": ""
+      },
+      {
+        "name": "retained",
+        "type": "boolean",
+        "value": null,
+        "label": "Was Retained",
+        "placeholder": ""
+      },
+      {
+        "name": "received_at",
+        "type": "string",
+        "value": null,
+        "label": "Received At",
+        "placeholder": ""
+      },
+      {
+        "name": "broker",
+        "type": "string",
+        "value": null,
+        "label": "Broker",
         "placeholder": ""
       }
     ]

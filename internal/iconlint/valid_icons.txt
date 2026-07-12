@@ -4,11 +4,12 @@ align-left
 arrow-down
 arrow-left
 arrow-right
+arrow-right-arrow-left
 arrow-right-from-bracket
 arrow-rotate-right
+arrows-split-up-and-left
 arrow-up
 arrow-up-right-from-square
-arrows-split-up-and-left
 ban
 bell
 bolt
@@ -50,8 +51,8 @@ code
 code-branch
 comment
 comment-dots
-comment-sms
 comments
+comment-sms
 compress
 copy
 cubes
@@ -113,8 +114,8 @@ life-ring
 lightbulb
 linear
 link
-link-slash
 linkedin
+link-slash
 list
 list-check
 location-arrow
@@ -172,6 +173,7 @@ telegram
 terminal
 times
 toolbox
+tower-broadcast
 trash
 triangle-exclamation
 truck-ramp-box
@@ -187,6 +189,6 @@ wifi
 woocommerce
 wordpress
 wrench
-x-twitter
 xmark
+x-twitter
 zendesk

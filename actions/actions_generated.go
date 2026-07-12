@@ -521,6 +521,11 @@ import (
 	marketing_sendgrid_template_update "flomation.app/automate/executor/actions/marketing/sendgrid/template_update"
 	marketing_sendgrid_template_version_activate "flomation.app/automate/executor/actions/marketing/sendgrid/template_version_activate"
 	marketing_sendgrid_template_version_create "flomation.app/automate/executor/actions/marketing/sendgrid/template_version_create"
+	messagebrokers_mqtt_message_wait "flomation.app/automate/executor/actions/messagebrokers/mqtt/message_wait"
+	messagebrokers_mqtt_publish "flomation.app/automate/executor/actions/messagebrokers/mqtt/publish"
+	messagebrokers_mqtt_request_reply "flomation.app/automate/executor/actions/messagebrokers/mqtt/request_reply"
+	messagebrokers_mqtt_retained_clear "flomation.app/automate/executor/actions/messagebrokers/mqtt/retained_clear"
+	messagebrokers_mqtt_retained_get "flomation.app/automate/executor/actions/messagebrokers/mqtt/retained_get"
 	messaging_discord_webhook "flomation.app/automate/executor/actions/messaging/discord/webhook"
 	messaging_email_send "flomation.app/automate/executor/actions/messaging/email/send"
 	messaging_telegram_send_audio "flomation.app/automate/executor/actions/messaging/telegram/send_audio"
@@ -871,6 +876,7 @@ import (
 	trigger_manual "flomation.app/automate/executor/actions/trigger/manual"
 	trigger_microsoft_outlook "flomation.app/automate/executor/actions/trigger/microsoft_outlook"
 	trigger_monday_webhook "flomation.app/automate/executor/actions/trigger/monday_webhook"
+	trigger_mqtt "flomation.app/automate/executor/actions/trigger/mqtt"
 	trigger_plan_task "flomation.app/automate/executor/actions/trigger/plan_task"
 	trigger_qr "flomation.app/automate/executor/actions/trigger/qr"
 	trigger_s3 "flomation.app/automate/executor/actions/trigger/s3"
@@ -1466,6 +1472,11 @@ var Actions = map[string]core.Action{
 	"marketing/sendgrid/template_update":                marketing_sendgrid_template_update.Execute,
 	"marketing/sendgrid/template_version_activate":      marketing_sendgrid_template_version_activate.Execute,
 	"marketing/sendgrid/template_version_create":        marketing_sendgrid_template_version_create.Execute,
+	"messagebrokers/mqtt/message_wait":                  messagebrokers_mqtt_message_wait.Execute,
+	"messagebrokers/mqtt/publish":                       messagebrokers_mqtt_publish.Execute,
+	"messagebrokers/mqtt/request_reply":                 messagebrokers_mqtt_request_reply.Execute,
+	"messagebrokers/mqtt/retained_clear":                messagebrokers_mqtt_retained_clear.Execute,
+	"messagebrokers/mqtt/retained_get":                  messagebrokers_mqtt_retained_get.Execute,
 	"messaging/discord/webhook":                         messaging_discord_webhook.Execute,
 	"messaging/email/send":                              messaging_email_send.Execute,
 	"messaging/telegram/send_audio":                     messaging_telegram_send_audio.Execute,
@@ -1816,6 +1827,7 @@ var Actions = map[string]core.Action{
 	"trigger/manual":                                    trigger_manual.Execute,
 	"trigger/microsoft_outlook":                         trigger_microsoft_outlook.Execute,
 	"trigger/monday_webhook":                            trigger_monday_webhook.Execute,
+	"trigger/mqtt":                                      trigger_mqtt.Execute,
 	"trigger/plan_task":                                 trigger_plan_task.Execute,
 	"trigger/qr":                                        trigger_qr.Execute,
 	"trigger/s3":                                        trigger_s3.Execute,
