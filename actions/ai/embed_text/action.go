@@ -181,13 +181,12 @@ func providerLabel(provider string) string {
 }
 
 // readTexts resolves the two text inputs into the batch to embed. A non-empty
-// Texts array wins: an operator who wired up a list has plainly moved on from the
-// single-text field, and silently embedding the leftover Text instead would be
-// the worst of both.
-// readTexts resolves what to embed. It also reports whether a single Text was
-// supplied but overridden by a non-empty Texts batch, so Execute can say so —
-// an operator who filled in both and got only the batch back would otherwise be
-// left wondering where their single line went.
+// Texts array wins: an operator who wired up a list has plainly moved on from
+// the single-text field, and silently embedding the leftover Text instead would
+// be the worst of both. It also reports whether a single Text was supplied but
+// overridden that way, so Execute can say so — an operator who filled in both
+// and got only the batch back would otherwise wonder where their single line
+// went.
 func readTexts(inputs []*core.Connection) (texts []string, ignoredSingle bool, err error) {
 	batch, err := parseTexts(core.FindConnection("texts", inputs))
 	if err != nil {
