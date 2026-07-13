@@ -744,6 +744,7 @@ import (
 	opentofu_plan "flomation.app/automate/executor/actions/opentofu/plan"
 	output_set "flomation.app/automate/executor/actions/output/set"
 	output_set_outputs "flomation.app/automate/executor/actions/output/set_outputs"
+	output_web_response "flomation.app/automate/executor/actions/output/web_response"
 	plan_block "flomation.app/automate/executor/actions/plan/block"
 	plan_cancel "flomation.app/automate/executor/actions/plan/cancel"
 	plan_create "flomation.app/automate/executor/actions/plan/create"
@@ -1060,6 +1061,7 @@ import (
 	trigger_twilio_sms "flomation.app/automate/executor/actions/trigger/twilio_sms"
 	trigger_twilio_voice "flomation.app/automate/executor/actions/trigger/twilio_voice"
 	trigger_typeform_webhook "flomation.app/automate/executor/actions/trigger/typeform_webhook"
+	trigger_web "flomation.app/automate/executor/actions/trigger/web"
 	trigger_webhook "flomation.app/automate/executor/actions/trigger/webhook"
 	trigger_woocommerce_webhook "flomation.app/automate/executor/actions/trigger/woocommerce_webhook"
 	trigger_xero_webhook "flomation.app/automate/executor/actions/trigger/xero_webhook"
@@ -1916,6 +1918,7 @@ var Actions = map[string]core.Action{
 	"opentofu/plan":                                       opentofu_plan.Execute,
 	"output/set":                                          output_set.Execute,
 	"output/set_outputs":                                  output_set_outputs.Execute,
+	"output/web_response":                                 output_web_response.Execute,
 	"plan/block":                                          plan_block.Execute,
 	"plan/cancel":                                         plan_cancel.Execute,
 	"plan/create":                                         plan_create.Execute,
@@ -2232,6 +2235,7 @@ var Actions = map[string]core.Action{
 	"trigger/twilio_sms":                                  trigger_twilio_sms.Execute,
 	"trigger/twilio_voice":                                trigger_twilio_voice.Execute,
 	"trigger/typeform_webhook":                            trigger_typeform_webhook.Execute,
+	"trigger/web":                                         trigger_web.Execute,
 	"trigger/webhook":                                     trigger_webhook.Execute,
 	"trigger/woocommerce_webhook":                         trigger_woocommerce_webhook.Execute,
 	"trigger/xero_webhook":                                trigger_xero_webhook.Execute,
