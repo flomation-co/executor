@@ -87,6 +87,12 @@ type EmbedConfig struct {
 }
 
 // embedClient is shared so connections are pooled across a batch.
+//
+// The per-request Timeout is a backstop, not the primary deadline: every call
+// already carries a context deadline from the action (flow.GoContext derived, or
+// EmbedTimeout when there is none), and that context is what actually bounds the
+// request. The client Timeout only matters if a caller ever reaches Embed with a
+// context that has no deadline of its own; it is kept so that path cannot hang.
 var embedClient = &http.Client{Timeout: EmbedTimeout}
 
 // Embed returns one vector per input text, in the same order.
@@ -261,7 +267,12 @@ func embedBedrock(ctx context.Context, cfg EmbedConfig, texts []string) ([][]flo
 	contentType := "application/json"
 	out := make([][]float32, len(texts))
 
-	// Titan embeds one input per call — it has no batch endpoint.
+	// Titan embeds one input per call — it has no batch endpoint. If the context
+	// is cancelled part-way through (the flow was killed after text 3 of 50),
+	// InvokeModel returns that error and this returns nil plus the error — never
+	// the partially-filled `out`. That invariant is load-bearing: every caller
+	// treats a non-nil error as a full abort, so a truncated batch can never be
+	// mistaken for a complete one.
 	for i, text := range texts {
 		req := map[string]interface{}{"inputText": text, "normalize": true}
 		if cfg.Dimensions > 0 {

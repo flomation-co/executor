@@ -113,8 +113,9 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 		args = append(args, filter.Args...)
 	}
 
-	// Identifiers only, plus BuildFilter's own bound placeholders — nothing the
-	// operator typed reaches the SQL text.
+	// The only interpolated identifier is `relation`, which came back pre-quoted
+	// from QuoteRelation; the collection filter and BuildFilter contribute only
+	// bound $n placeholders. Nothing the operator typed reaches the SQL text.
 	query := "SELECT count(*) FROM " + relation
 	if len(where) > 0 {
 		query += " WHERE " + strings.Join(where, " AND ")

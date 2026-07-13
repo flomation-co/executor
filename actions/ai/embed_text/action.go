@@ -87,7 +87,7 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 			cfg.Dimensions)), nil
 	}
 
-	texts, err := readTexts(inputs)
+	texts, ignoredSingle, err := readTexts(inputs)
 	if err != nil {
 		return errorResult(err.Error()), nil
 	}
@@ -120,6 +120,11 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	}
 	dimensions := len(vectors[0])
 
+	summary := summarise(cfg, len(vectors), dimensions)
+	if ignoredSingle {
+		summary += " (The Text field was ignored because Texts was also filled in.)"
+	}
+
 	// The vectors go out as plain JSON number arrays, not wrapped in an object,
 	// so the pgvector node's Embedding input reads them straight and a human can
 	// see what came back.
@@ -138,7 +143,7 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 		"count":       len(vectors),
 		"model":       cfg.Model,
 		"result":      result,
-		"tool_result": summarise(cfg, len(vectors), dimensions),
+		"tool_result": summary,
 		"success":     true,
 		"error":       "",
 	}, nil
@@ -179,20 +184,23 @@ func providerLabel(provider string) string {
 // Texts array wins: an operator who wired up a list has plainly moved on from the
 // single-text field, and silently embedding the leftover Text instead would be
 // the worst of both.
-func readTexts(inputs []*core.Connection) ([]string, error) {
+// readTexts resolves what to embed. It also reports whether a single Text was
+// supplied but overridden by a non-empty Texts batch, so Execute can say so —
+// an operator who filled in both and got only the batch back would otherwise be
+// left wondering where their single line went.
+func readTexts(inputs []*core.Connection) (texts []string, ignoredSingle bool, err error) {
 	batch, err := parseTexts(core.FindConnection("texts", inputs))
 	if err != nil {
-		return nil, err
+		return nil, false, err
 	}
-	if len(batch) > 0 {
-		return batch, nil
-	}
-
 	single := optString(core.FindConnection("text", inputs))
-	if single == "" {
-		return nil, nil
+	if len(batch) > 0 {
+		return batch, single != "", nil
 	}
-	return []string{single}, nil
+	if single == "" {
+		return nil, false, nil
+	}
+	return []string{single}, false, nil
 }
 
 // parseTexts accepts every shape the Texts input can arrive in: a real slice when

@@ -1358,7 +1358,7 @@
     ]
   },
   "ai/embed_text": {
-    "hash": "5ccc377c13fa10b498d6977a1e23ddc7d2aeecdea9dc06f37b026c222b6ce580",
+    "hash": "93a5beed524a45f7371ec1c33738ddcd576201a5950517fd9141bae73f55979e",
     "author": "Ethan Tan",
     "organisation": "Flomation",
     "name": "Embed Text",
@@ -126807,7 +126807,7 @@
     ]
   },
   "vectordatabase/pgvector/document_count": {
-    "hash": "cb341212fb5d2eae3e6ad53eb4b9a0b0f590d89c9e0c482b62308b17c7437572",
+    "hash": "5638e94222d83fdea532770fd102a6a918bfb84e2ec0e026f292ae80a72bcb6d",
     "author": "Ethan Tan",
     "organisation": "Flomation",
     "name": "Count Documents",
