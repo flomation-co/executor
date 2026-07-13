@@ -273,6 +273,12 @@ func embedBedrock(ctx context.Context, cfg EmbedConfig, texts []string) ([][]flo
 	// the partially-filled `out`. That invariant is load-bearing: every caller
 	// treats a non-nil error as a full abort, so a truncated batch can never be
 	// mistaken for a complete one.
+	//
+	// The flip side of the serial loop is that a large batch shares one deadline,
+	// so it can run out of time part-way through. The deadline case is caught
+	// below and reported as what it is — a batch too big to finish — rather than
+	// a bare "context deadline exceeded" that gives the operator nothing to act
+	// on.
 	for i, text := range texts {
 		req := map[string]interface{}{"inputText": text, "normalize": true}
 		if cfg.Dimensions > 0 {
@@ -291,6 +297,11 @@ func embedBedrock(ctx context.Context, cfg EmbedConfig, texts []string) ([][]flo
 			Accept:      &contentType,
 		})
 		if err != nil {
+			if errors.Is(err, context.DeadlineExceeded) || errors.Is(ctx.Err(), context.DeadlineExceeded) {
+				return nil, fmt.Errorf(
+					"Bedrock ran out of time on text %d of %d — it embeds one text per request, so a large batch "+
+						"can exceed the time limit. Split it into smaller batches (around 50 at a time)", i+1, len(texts))
+			}
 			return nil, fmt.Errorf("Bedrock rejected the request: %w", err)
 		}
 
@@ -345,6 +356,9 @@ func postJSON(ctx context.Context, cfg EmbedConfig, endpoint string, body, into 
 			Message string `json:"message"`
 		}
 		msg := strings.TrimSpace(string(payload))
+		// Best-effort parse: if the body isn't the JSON error shape we expect,
+		// the Unmarshal failure is deliberately ignored and msg stays as the raw
+		// body text set above — a readable fallback either way.
 		if json.Unmarshal(payload, &e) == nil {
 			if e.Error.Message != "" {
 				msg = e.Error.Message
