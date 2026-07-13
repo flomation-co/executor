@@ -23,7 +23,13 @@ const (
 //     (path/query/header/body) — the API resolves it and passes the values in
 //     as the trigger's runtime outputs (referenced bare, e.g. ${id}, ${message}).
 var Inputs = [...]core.Connection{
-	{Name: "methods", Type: core.ConnectionTypeString, Label: "Accepted Methods", Placeholder: "POST or GET,POST"},
+	{Name: "methods", Type: core.ConnectionTypeMultiSelect, Label: "Accepted Methods", Options: []core.ConnectionOption{
+		{Name: "GET", Value: "GET"},
+		{Name: "POST", Value: "POST"},
+		{Name: "PUT", Value: "PUT"},
+		{Name: "PATCH", Value: "PATCH"},
+		{Name: "DELETE", Value: "DELETE"},
+	}},
 	{Name: "fields", Type: core.ConnectionTypeText, Label: "Request Fields", Placeholder: `{"id":"path","limit":"query","name":"body"}`},
 	// keep_history turns this into a conversational endpoint: the invoke mints/
 	// resumes a thread, injects prior turns as ${history}, and records both turns.
