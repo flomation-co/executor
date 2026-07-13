@@ -16,6 +16,7 @@ func TestExecute(t *testing.T) {
 		{Name: "status_code", Type: "integer", Value: 201},
 		{Name: "content_type", Type: "string", Value: "application/json"},
 		{Name: "headers", Type: "text", Value: `{"Location":"/x"}`},
+		{Name: "history", Type: "text", Value: "Hello there!"},
 	})
 	Expect(err).To(BeNil())
 	Expect(result["set"]).To(BeTrue())
@@ -29,6 +30,7 @@ func TestExecute(t *testing.T) {
 	Expect(resp["status_code"]).To(Equal(201))
 	Expect(resp["content_type"]).To(Equal("application/json"))
 	Expect(resp["headers"]).To(Equal(`{"Location":"/x"}`))
+	Expect(resp["history"]).To(Equal("Hello there!")) // clean turn text, decoupled from body
 }
 
 func TestExecuteEmpty(t *testing.T) {
