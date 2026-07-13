@@ -190,6 +190,39 @@ import (
 	file_read "flomation.app/automate/executor/actions/file/read"
 	file_write "flomation.app/automate/executor/actions/file/write"
 	filetransfer_upload "flomation.app/automate/executor/actions/filetransfer/upload"
+	forms_googleforms_form_batch_update "flomation.app/automate/executor/actions/forms/googleforms/form_batch_update"
+	forms_googleforms_form_create "flomation.app/automate/executor/actions/forms/googleforms/form_create"
+	forms_googleforms_form_get "flomation.app/automate/executor/actions/forms/googleforms/form_get"
+	forms_googleforms_response_get "flomation.app/automate/executor/actions/forms/googleforms/response_get"
+	forms_googleforms_responses_list "flomation.app/automate/executor/actions/forms/googleforms/responses_list"
+	forms_jotform_form_clone "flomation.app/automate/executor/actions/forms/jotform/form_clone"
+	forms_jotform_form_create "flomation.app/automate/executor/actions/forms/jotform/form_create"
+	forms_jotform_form_delete "flomation.app/automate/executor/actions/forms/jotform/form_delete"
+	forms_jotform_form_get "flomation.app/automate/executor/actions/forms/jotform/form_get"
+	forms_jotform_form_list "flomation.app/automate/executor/actions/forms/jotform/form_list"
+	forms_jotform_submission_delete "flomation.app/automate/executor/actions/forms/jotform/submission_delete"
+	forms_jotform_submission_get "flomation.app/automate/executor/actions/forms/jotform/submission_get"
+	forms_jotform_submissions_list "flomation.app/automate/executor/actions/forms/jotform/submissions_list"
+	forms_jotform_webhook_create "flomation.app/automate/executor/actions/forms/jotform/webhook_create"
+	forms_jotform_webhook_delete "flomation.app/automate/executor/actions/forms/jotform/webhook_delete"
+	forms_surveymonkey_collector_create "flomation.app/automate/executor/actions/forms/surveymonkey/collector_create"
+	forms_surveymonkey_collector_list "flomation.app/automate/executor/actions/forms/surveymonkey/collector_list"
+	forms_surveymonkey_response_get "flomation.app/automate/executor/actions/forms/surveymonkey/response_get"
+	forms_surveymonkey_responses_list "flomation.app/automate/executor/actions/forms/surveymonkey/responses_list"
+	forms_surveymonkey_survey_create "flomation.app/automate/executor/actions/forms/surveymonkey/survey_create"
+	forms_surveymonkey_survey_get "flomation.app/automate/executor/actions/forms/surveymonkey/survey_get"
+	forms_surveymonkey_survey_list "flomation.app/automate/executor/actions/forms/surveymonkey/survey_list"
+	forms_surveymonkey_webhook_create "flomation.app/automate/executor/actions/forms/surveymonkey/webhook_create"
+	forms_surveymonkey_webhook_delete "flomation.app/automate/executor/actions/forms/surveymonkey/webhook_delete"
+	forms_surveymonkey_webhook_list "flomation.app/automate/executor/actions/forms/surveymonkey/webhook_list"
+	forms_typeform_form_create "flomation.app/automate/executor/actions/forms/typeform/form_create"
+	forms_typeform_form_delete "flomation.app/automate/executor/actions/forms/typeform/form_delete"
+	forms_typeform_form_get "flomation.app/automate/executor/actions/forms/typeform/form_get"
+	forms_typeform_form_list "flomation.app/automate/executor/actions/forms/typeform/form_list"
+	forms_typeform_form_update "flomation.app/automate/executor/actions/forms/typeform/form_update"
+	forms_typeform_responses_list "flomation.app/automate/executor/actions/forms/typeform/responses_list"
+	forms_typeform_webhook_create "flomation.app/automate/executor/actions/forms/typeform/webhook_create"
+	forms_typeform_webhook_delete "flomation.app/automate/executor/actions/forms/typeform/webhook_delete"
 	git_add "flomation.app/automate/executor/actions/git/add"
 	git_branch "flomation.app/automate/executor/actions/git/branch"
 	git_checkout "flomation.app/automate/executor/actions/git/checkout"
@@ -950,6 +983,7 @@ import (
 	trigger_image "flomation.app/automate/executor/actions/trigger/image"
 	trigger_intercom_webhook "flomation.app/automate/executor/actions/trigger/intercom_webhook"
 	trigger_jira_webhook "flomation.app/automate/executor/actions/trigger/jira_webhook"
+	trigger_jotform_webhook "flomation.app/automate/executor/actions/trigger/jotform_webhook"
 	trigger_linkedin_poll "flomation.app/automate/executor/actions/trigger/linkedin_poll"
 	trigger_mailchimp_webhook "flomation.app/automate/executor/actions/trigger/mailchimp_webhook"
 	trigger_manual "flomation.app/automate/executor/actions/trigger/manual"
@@ -964,11 +998,13 @@ import (
 	trigger_shopify_webhook "flomation.app/automate/executor/actions/trigger/shopify_webhook"
 	trigger_slack "flomation.app/automate/executor/actions/trigger/slack"
 	trigger_stripe_webhook "flomation.app/automate/executor/actions/trigger/stripe_webhook"
+	trigger_surveymonkey_webhook "flomation.app/automate/executor/actions/trigger/surveymonkey_webhook"
 	trigger_teams "flomation.app/automate/executor/actions/trigger/teams"
 	trigger_telegram "flomation.app/automate/executor/actions/trigger/telegram"
 	trigger_trello_webhook "flomation.app/automate/executor/actions/trigger/trello_webhook"
 	trigger_twilio_sms "flomation.app/automate/executor/actions/trigger/twilio_sms"
 	trigger_twilio_voice "flomation.app/automate/executor/actions/trigger/twilio_voice"
+	trigger_typeform_webhook "flomation.app/automate/executor/actions/trigger/typeform_webhook"
 	trigger_webhook "flomation.app/automate/executor/actions/trigger/webhook"
 	trigger_woocommerce_webhook "flomation.app/automate/executor/actions/trigger/woocommerce_webhook"
 	trigger_zendesk_webhook "flomation.app/automate/executor/actions/trigger/zendesk_webhook"
@@ -1220,6 +1256,39 @@ var Actions = map[string]core.Action{
 	"file/read":                                           file_read.Execute,
 	"file/write":                                          file_write.Execute,
 	"filetransfer/upload":                                 filetransfer_upload.Execute,
+	"forms/googleforms/form_batch_update":                 forms_googleforms_form_batch_update.Execute,
+	"forms/googleforms/form_create":                       forms_googleforms_form_create.Execute,
+	"forms/googleforms/form_get":                          forms_googleforms_form_get.Execute,
+	"forms/googleforms/response_get":                      forms_googleforms_response_get.Execute,
+	"forms/googleforms/responses_list":                    forms_googleforms_responses_list.Execute,
+	"forms/jotform/form_clone":                            forms_jotform_form_clone.Execute,
+	"forms/jotform/form_create":                           forms_jotform_form_create.Execute,
+	"forms/jotform/form_delete":                           forms_jotform_form_delete.Execute,
+	"forms/jotform/form_get":                              forms_jotform_form_get.Execute,
+	"forms/jotform/form_list":                             forms_jotform_form_list.Execute,
+	"forms/jotform/submission_delete":                     forms_jotform_submission_delete.Execute,
+	"forms/jotform/submission_get":                        forms_jotform_submission_get.Execute,
+	"forms/jotform/submissions_list":                      forms_jotform_submissions_list.Execute,
+	"forms/jotform/webhook_create":                        forms_jotform_webhook_create.Execute,
+	"forms/jotform/webhook_delete":                        forms_jotform_webhook_delete.Execute,
+	"forms/surveymonkey/collector_create":                 forms_surveymonkey_collector_create.Execute,
+	"forms/surveymonkey/collector_list":                   forms_surveymonkey_collector_list.Execute,
+	"forms/surveymonkey/response_get":                     forms_surveymonkey_response_get.Execute,
+	"forms/surveymonkey/responses_list":                   forms_surveymonkey_responses_list.Execute,
+	"forms/surveymonkey/survey_create":                    forms_surveymonkey_survey_create.Execute,
+	"forms/surveymonkey/survey_get":                       forms_surveymonkey_survey_get.Execute,
+	"forms/surveymonkey/survey_list":                      forms_surveymonkey_survey_list.Execute,
+	"forms/surveymonkey/webhook_create":                   forms_surveymonkey_webhook_create.Execute,
+	"forms/surveymonkey/webhook_delete":                   forms_surveymonkey_webhook_delete.Execute,
+	"forms/surveymonkey/webhook_list":                     forms_surveymonkey_webhook_list.Execute,
+	"forms/typeform/form_create":                          forms_typeform_form_create.Execute,
+	"forms/typeform/form_delete":                          forms_typeform_form_delete.Execute,
+	"forms/typeform/form_get":                             forms_typeform_form_get.Execute,
+	"forms/typeform/form_list":                            forms_typeform_form_list.Execute,
+	"forms/typeform/form_update":                          forms_typeform_form_update.Execute,
+	"forms/typeform/responses_list":                       forms_typeform_responses_list.Execute,
+	"forms/typeform/webhook_create":                       forms_typeform_webhook_create.Execute,
+	"forms/typeform/webhook_delete":                       forms_typeform_webhook_delete.Execute,
 	"git/add":                                             git_add.Execute,
 	"git/branch":                                          git_branch.Execute,
 	"git/checkout":                                        git_checkout.Execute,
@@ -1980,6 +2049,7 @@ var Actions = map[string]core.Action{
 	"trigger/image":                                       trigger_image.Execute,
 	"trigger/intercom_webhook":                            trigger_intercom_webhook.Execute,
 	"trigger/jira_webhook":                                trigger_jira_webhook.Execute,
+	"trigger/jotform_webhook":                             trigger_jotform_webhook.Execute,
 	"trigger/linkedin_poll":                               trigger_linkedin_poll.Execute,
 	"trigger/mailchimp_webhook":                           trigger_mailchimp_webhook.Execute,
 	"trigger/manual":                                      trigger_manual.Execute,
@@ -1994,11 +2064,13 @@ var Actions = map[string]core.Action{
 	"trigger/shopify_webhook":                             trigger_shopify_webhook.Execute,
 	"trigger/slack":                                       trigger_slack.Execute,
 	"trigger/stripe_webhook":                              trigger_stripe_webhook.Execute,
+	"trigger/surveymonkey_webhook":                        trigger_surveymonkey_webhook.Execute,
 	"trigger/teams":                                       trigger_teams.Execute,
 	"trigger/telegram":                                    trigger_telegram.Execute,
 	"trigger/trello_webhook":                              trigger_trello_webhook.Execute,
 	"trigger/twilio_sms":                                  trigger_twilio_sms.Execute,
 	"trigger/twilio_voice":                                trigger_twilio_voice.Execute,
+	"trigger/typeform_webhook":                            trigger_typeform_webhook.Execute,
 	"trigger/webhook":                                     trigger_webhook.Execute,
 	"trigger/woocommerce_webhook":                         trigger_woocommerce_webhook.Execute,
 	"trigger/zendesk_webhook":                             trigger_zendesk_webhook.Execute,

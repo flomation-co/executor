@@ -23205,6 +23205,3147 @@
       }
     ]
   },
+  "forms/googleforms/form_batch_update": {
+    "hash": "128f8feb4bf0732b42dd9515021746806a1b58508d2466ff2db28aee95321a4b",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Batch Update Form",
+    "description": "Add items or questions to a Google Form via a batchUpdate requests JSON array.",
+    "website": "https://www.flomation.co",
+    "icon": "clipboard-list+pencil",
+    "date": "11/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Forms",
+      "icon": "clipboard-list",
+      "description": "Create forms, collect responses and trigger flows from external form providers"
+    },
+    "sub_category": {
+      "name": "Google Forms",
+      "icon": "clipboard-list",
+      "description": "Create Google Forms, add questions and retrieve responses using a connected Google account"
+    },
+    "inputs": [
+      {
+        "name": "account",
+        "type": "string",
+        "value": null,
+        "label": "Google Account (email)",
+        "placeholder": ""
+      },
+      {
+        "name": "credential",
+        "type": "credential",
+        "value": null,
+        "label": "Google OAuth Credential",
+        "placeholder": "${credentials.GOOGLE_DRIVE}"
+      },
+      {
+        "name": "form_id",
+        "type": "string",
+        "value": null,
+        "label": "Form ID",
+        "placeholder": "1FAIpQL...",
+        "required": true
+      },
+      {
+        "name": "requests",
+        "type": "string",
+        "value": null,
+        "label": "Requests (JSON array)",
+        "placeholder": "[{\"createItem\":{\"item\":{\"title\":\"Your name\",\"questionItem\":{\"question\":{\"required\":true,\"textQuestion\":{}}}},\"location\":{\"index\":0}}}]",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "form_id",
+        "type": "string",
+        "value": null,
+        "label": "Form ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Reply",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "forms/googleforms/form_create": {
+    "hash": "262a0af9fbf7e153b857ea7c6a8ca77d0ffadf06416af416c4d5a371b1df21ad",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Create Form",
+    "description": "Create a new Google Form with a title using a connected Google account.",
+    "website": "https://www.flomation.co",
+    "icon": "clipboard-list+plus",
+    "date": "11/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Forms",
+      "icon": "clipboard-list",
+      "description": "Create forms, collect responses and trigger flows from external form providers"
+    },
+    "sub_category": {
+      "name": "Google Forms",
+      "icon": "clipboard-list",
+      "description": "Create Google Forms, add questions and retrieve responses using a connected Google account"
+    },
+    "inputs": [
+      {
+        "name": "account",
+        "type": "string",
+        "value": null,
+        "label": "Google Account (email)",
+        "placeholder": ""
+      },
+      {
+        "name": "credential",
+        "type": "credential",
+        "value": null,
+        "label": "Google OAuth Credential",
+        "placeholder": "${credentials.GOOGLE_DRIVE}"
+      },
+      {
+        "name": "title",
+        "type": "string",
+        "value": null,
+        "label": "Title",
+        "placeholder": "Customer feedback",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "form_id",
+        "type": "string",
+        "value": null,
+        "label": "Form ID",
+        "placeholder": ""
+      },
+      {
+        "name": "responder_uri",
+        "type": "string",
+        "value": null,
+        "label": "Responder URL",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Form",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "forms/googleforms/form_get": {
+    "hash": "e70dd755351b6d8db745b609eb6be02876ff6d450f3d0cfbf2a4c73910c9859c",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Get Form",
+    "description": "Retrieve a Google Form's definition, items and metadata by form ID.",
+    "website": "https://www.flomation.co",
+    "icon": "clipboard-list+eye",
+    "date": "11/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Forms",
+      "icon": "clipboard-list",
+      "description": "Create forms, collect responses and trigger flows from external form providers"
+    },
+    "sub_category": {
+      "name": "Google Forms",
+      "icon": "clipboard-list",
+      "description": "Create Google Forms, add questions and retrieve responses using a connected Google account"
+    },
+    "inputs": [
+      {
+        "name": "account",
+        "type": "string",
+        "value": null,
+        "label": "Google Account (email)",
+        "placeholder": ""
+      },
+      {
+        "name": "credential",
+        "type": "credential",
+        "value": null,
+        "label": "Google OAuth Credential",
+        "placeholder": "${credentials.GOOGLE_DRIVE}"
+      },
+      {
+        "name": "form_id",
+        "type": "string",
+        "value": null,
+        "label": "Form ID",
+        "placeholder": "1FAIpQL...",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "form_id",
+        "type": "string",
+        "value": null,
+        "label": "Form ID",
+        "placeholder": ""
+      },
+      {
+        "name": "responder_uri",
+        "type": "string",
+        "value": null,
+        "label": "Responder URL",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Form",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "forms/googleforms/response_get": {
+    "hash": "1d2be84934d7f3b1a070bf7f1f5e43dba71984a7c19e24af54f3a899298b960b",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Get Response",
+    "description": "Retrieve a single submitted response from a Google Form by response ID.",
+    "website": "https://www.flomation.co",
+    "icon": "clipboard-list+magnifying-glass",
+    "date": "11/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Forms",
+      "icon": "clipboard-list",
+      "description": "Create forms, collect responses and trigger flows from external form providers"
+    },
+    "sub_category": {
+      "name": "Google Forms",
+      "icon": "clipboard-list",
+      "description": "Create Google Forms, add questions and retrieve responses using a connected Google account"
+    },
+    "inputs": [
+      {
+        "name": "account",
+        "type": "string",
+        "value": null,
+        "label": "Google Account (email)",
+        "placeholder": ""
+      },
+      {
+        "name": "credential",
+        "type": "credential",
+        "value": null,
+        "label": "Google OAuth Credential",
+        "placeholder": "${credentials.GOOGLE_DRIVE}"
+      },
+      {
+        "name": "form_id",
+        "type": "string",
+        "value": null,
+        "label": "Form ID",
+        "placeholder": "1FAIpQL...",
+        "required": true
+      },
+      {
+        "name": "response_id",
+        "type": "string",
+        "value": null,
+        "label": "Response ID",
+        "placeholder": "ACYDBNh...",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "response_id",
+        "type": "string",
+        "value": null,
+        "label": "Response ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Response",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "forms/googleforms/responses_list": {
+    "hash": "23bdeb6c0f38452a21decca4e82c9988c908751c6d0fb6e2664e8ac8a90e75ac",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "List Responses",
+    "description": "Retrieve the submitted responses for a Google Form by form ID.",
+    "website": "https://www.flomation.co",
+    "icon": "clipboard-list+envelope-open-text",
+    "date": "11/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Forms",
+      "icon": "clipboard-list",
+      "description": "Create forms, collect responses and trigger flows from external form providers"
+    },
+    "sub_category": {
+      "name": "Google Forms",
+      "icon": "clipboard-list",
+      "description": "Create Google Forms, add questions and retrieve responses using a connected Google account"
+    },
+    "inputs": [
+      {
+        "name": "account",
+        "type": "string",
+        "value": null,
+        "label": "Google Account (email)",
+        "placeholder": ""
+      },
+      {
+        "name": "credential",
+        "type": "credential",
+        "value": null,
+        "label": "Google OAuth Credential",
+        "placeholder": "${credentials.GOOGLE_DRIVE}"
+      },
+      {
+        "name": "form_id",
+        "type": "string",
+        "value": null,
+        "label": "Form ID",
+        "placeholder": "1FAIpQL...",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "responses",
+        "type": "object",
+        "value": null,
+        "label": "Responses",
+        "placeholder": ""
+      },
+      {
+        "name": "total",
+        "type": "integer",
+        "value": null,
+        "label": "Total",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "forms/jotform/form_clone": {
+    "hash": "6fa539ff1c1579bab0fbd8ed2e99eb1f17d083f79c9aec08cb6e4c0bd81c1dbb",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Clone Form",
+    "description": "Clone an existing JotForm form, returning the new form's ID.",
+    "website": "https://www.flomation.co",
+    "icon": "clipboard-list+copy",
+    "date": "11/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Forms",
+      "icon": "clipboard-list",
+      "description": "Create forms, collect responses and trigger flows from external form providers"
+    },
+    "sub_category": {
+      "name": "JotForm",
+      "icon": "clipboard-list",
+      "description": "Create and manage JotForm forms, list submissions and register webhooks"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "JotForm API Key",
+        "placeholder": "${secrets.jotform_api_key}",
+        "required": true
+      },
+      {
+        "name": "region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "us",
+        "options": [
+          {
+            "name": "US (default)",
+            "value": "us"
+          },
+          {
+            "name": "EU",
+            "value": "eu"
+          },
+          {
+            "name": "HIPAA",
+            "value": "hipaa"
+          }
+        ]
+      },
+      {
+        "name": "form_id",
+        "type": "string",
+        "value": null,
+        "label": "Form ID",
+        "placeholder": "231234567890",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "form_id",
+        "type": "string",
+        "value": null,
+        "label": "New Form ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Form",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "forms/jotform/form_create": {
+    "hash": "711b71fc79c8aeee290fa9ff31d38d55935024fc1fed7cb37be82586a2490f5f",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Create Form",
+    "description": "Create a new JotForm form from a JSON questions array and properties object.",
+    "website": "https://www.flomation.co",
+    "icon": "clipboard-list+plus",
+    "date": "11/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Forms",
+      "icon": "clipboard-list",
+      "description": "Create forms, collect responses and trigger flows from external form providers"
+    },
+    "sub_category": {
+      "name": "JotForm",
+      "icon": "clipboard-list",
+      "description": "Create and manage JotForm forms, list submissions and register webhooks"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "JotForm API Key",
+        "placeholder": "${secrets.jotform_api_key}",
+        "required": true
+      },
+      {
+        "name": "region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "us",
+        "options": [
+          {
+            "name": "US (default)",
+            "value": "us"
+          },
+          {
+            "name": "EU",
+            "value": "eu"
+          },
+          {
+            "name": "HIPAA",
+            "value": "hipaa"
+          }
+        ]
+      },
+      {
+        "name": "questions",
+        "type": "string",
+        "value": null,
+        "label": "Questions (JSON)",
+        "placeholder": "{\"1\":{\"type\":\"control_textbox\",\"text\":\"Name\",\"order\":\"1\"}}"
+      },
+      {
+        "name": "properties",
+        "type": "string",
+        "value": null,
+        "label": "Properties (JSON)",
+        "placeholder": "{\"title\":\"My contact form\"}"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "form_id",
+        "type": "string",
+        "value": null,
+        "label": "Form ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Form",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "forms/jotform/form_delete": {
+    "hash": "6d82c330869f9cdd6fb042d3ae76afb4b3857fe76ffec27f0c660fa3b3c660e5",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Delete Form",
+    "description": "Delete a JotForm form permanently by its form ID.",
+    "website": "https://www.flomation.co",
+    "icon": "clipboard-list+trash",
+    "date": "11/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Forms",
+      "icon": "clipboard-list",
+      "description": "Create forms, collect responses and trigger flows from external form providers"
+    },
+    "sub_category": {
+      "name": "JotForm",
+      "icon": "clipboard-list",
+      "description": "Create and manage JotForm forms, list submissions and register webhooks"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "JotForm API Key",
+        "placeholder": "${secrets.jotform_api_key}",
+        "required": true
+      },
+      {
+        "name": "region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "us",
+        "options": [
+          {
+            "name": "US (default)",
+            "value": "us"
+          },
+          {
+            "name": "EU",
+            "value": "eu"
+          },
+          {
+            "name": "HIPAA",
+            "value": "hipaa"
+          }
+        ]
+      },
+      {
+        "name": "form_id",
+        "type": "string",
+        "value": null,
+        "label": "Form ID",
+        "placeholder": "231234567890",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "form_id",
+        "type": "string",
+        "value": null,
+        "label": "Form ID",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "forms/jotform/form_get": {
+    "hash": "c386a71c754822bcfdb108288c3a036d774cf8b315d3764204cc1d4f1dd1131c",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Get Form",
+    "description": "Retrieve a single JotForm form's details by its form ID.",
+    "website": "https://www.flomation.co",
+    "icon": "clipboard-list+eye",
+    "date": "11/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Forms",
+      "icon": "clipboard-list",
+      "description": "Create forms, collect responses and trigger flows from external form providers"
+    },
+    "sub_category": {
+      "name": "JotForm",
+      "icon": "clipboard-list",
+      "description": "Create and manage JotForm forms, list submissions and register webhooks"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "JotForm API Key",
+        "placeholder": "${secrets.jotform_api_key}",
+        "required": true
+      },
+      {
+        "name": "region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "us",
+        "options": [
+          {
+            "name": "US (default)",
+            "value": "us"
+          },
+          {
+            "name": "EU",
+            "value": "eu"
+          },
+          {
+            "name": "HIPAA",
+            "value": "hipaa"
+          }
+        ]
+      },
+      {
+        "name": "form_id",
+        "type": "string",
+        "value": null,
+        "label": "Form ID",
+        "placeholder": "231234567890",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "form_id",
+        "type": "string",
+        "value": null,
+        "label": "Form ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Form",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "forms/jotform/form_list": {
+    "hash": "ba64d58b1636495050bfda089d9e7401a343e15f1dc5ea92e4218acd690f4dac",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "List Forms",
+    "description": "List JotForm forms in the account, with optional limit, offset and filter.",
+    "website": "https://www.flomation.co",
+    "icon": "clipboard-list+list",
+    "date": "11/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Forms",
+      "icon": "clipboard-list",
+      "description": "Create forms, collect responses and trigger flows from external form providers"
+    },
+    "sub_category": {
+      "name": "JotForm",
+      "icon": "clipboard-list",
+      "description": "Create and manage JotForm forms, list submissions and register webhooks"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "JotForm API Key",
+        "placeholder": "${secrets.jotform_api_key}",
+        "required": true
+      },
+      {
+        "name": "region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "us",
+        "options": [
+          {
+            "name": "US (default)",
+            "value": "us"
+          },
+          {
+            "name": "EU",
+            "value": "eu"
+          },
+          {
+            "name": "HIPAA",
+            "value": "hipaa"
+          }
+        ]
+      },
+      {
+        "name": "limit",
+        "type": "integer",
+        "value": null,
+        "label": "Limit",
+        "placeholder": "20"
+      },
+      {
+        "name": "offset",
+        "type": "integer",
+        "value": null,
+        "label": "Offset",
+        "placeholder": "0"
+      },
+      {
+        "name": "filter",
+        "type": "string",
+        "value": null,
+        "label": "Filter (JSON)",
+        "placeholder": "{\"status\":\"ENABLED\"}"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "results",
+        "type": "object",
+        "value": null,
+        "label": "Forms",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Count",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "forms/jotform/submission_delete": {
+    "hash": "a24e4787efdfe0ff3641cc1cb32ac2eeed167eb55ca2ef5b49e3418e1c4d57c6",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Delete Submission",
+    "description": "Delete a JotForm submission permanently by its submission ID.",
+    "website": "https://www.flomation.co",
+    "icon": "envelope-open-text+trash",
+    "date": "11/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Forms",
+      "icon": "clipboard-list",
+      "description": "Create forms, collect responses and trigger flows from external form providers"
+    },
+    "sub_category": {
+      "name": "JotForm",
+      "icon": "clipboard-list",
+      "description": "Create and manage JotForm forms, list submissions and register webhooks"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "JotForm API Key",
+        "placeholder": "${secrets.jotform_api_key}",
+        "required": true
+      },
+      {
+        "name": "region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "us",
+        "options": [
+          {
+            "name": "US (default)",
+            "value": "us"
+          },
+          {
+            "name": "EU",
+            "value": "eu"
+          },
+          {
+            "name": "HIPAA",
+            "value": "hipaa"
+          }
+        ]
+      },
+      {
+        "name": "submission_id",
+        "type": "string",
+        "value": null,
+        "label": "Submission ID",
+        "placeholder": "5551234567890",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "submission_id",
+        "type": "string",
+        "value": null,
+        "label": "Submission ID",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "forms/jotform/submission_get": {
+    "hash": "5894f814dde6e7eb43486b451e26b3dccd353707d9330c73fb34c1bb5f790308",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Get Submission",
+    "description": "Retrieve a single JotForm submission and its answers by submission ID.",
+    "website": "https://www.flomation.co",
+    "icon": "envelope-open-text+eye",
+    "date": "11/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Forms",
+      "icon": "clipboard-list",
+      "description": "Create forms, collect responses and trigger flows from external form providers"
+    },
+    "sub_category": {
+      "name": "JotForm",
+      "icon": "clipboard-list",
+      "description": "Create and manage JotForm forms, list submissions and register webhooks"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "JotForm API Key",
+        "placeholder": "${secrets.jotform_api_key}",
+        "required": true
+      },
+      {
+        "name": "region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "us",
+        "options": [
+          {
+            "name": "US (default)",
+            "value": "us"
+          },
+          {
+            "name": "EU",
+            "value": "eu"
+          },
+          {
+            "name": "HIPAA",
+            "value": "hipaa"
+          }
+        ]
+      },
+      {
+        "name": "submission_id",
+        "type": "string",
+        "value": null,
+        "label": "Submission ID",
+        "placeholder": "5551234567890",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "submission_id",
+        "type": "string",
+        "value": null,
+        "label": "Submission ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Submission",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "forms/jotform/submissions_list": {
+    "hash": "aa3fe8569c5f86b32cf6a82da88b67b85f3184395be7e694c9ab102c775ad6ba",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "List Submissions",
+    "description": "Retrieve the submissions for a JotForm form, with limit, offset and filter.",
+    "website": "https://www.flomation.co",
+    "icon": "clipboard-list+envelope-open-text",
+    "date": "11/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Forms",
+      "icon": "clipboard-list",
+      "description": "Create forms, collect responses and trigger flows from external form providers"
+    },
+    "sub_category": {
+      "name": "JotForm",
+      "icon": "clipboard-list",
+      "description": "Create and manage JotForm forms, list submissions and register webhooks"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "JotForm API Key",
+        "placeholder": "${secrets.jotform_api_key}",
+        "required": true
+      },
+      {
+        "name": "region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "us",
+        "options": [
+          {
+            "name": "US (default)",
+            "value": "us"
+          },
+          {
+            "name": "EU",
+            "value": "eu"
+          },
+          {
+            "name": "HIPAA",
+            "value": "hipaa"
+          }
+        ]
+      },
+      {
+        "name": "form_id",
+        "type": "string",
+        "value": null,
+        "label": "Form ID",
+        "placeholder": "231234567890",
+        "required": true
+      },
+      {
+        "name": "limit",
+        "type": "integer",
+        "value": null,
+        "label": "Limit",
+        "placeholder": "20"
+      },
+      {
+        "name": "offset",
+        "type": "integer",
+        "value": null,
+        "label": "Offset",
+        "placeholder": "0"
+      },
+      {
+        "name": "filter",
+        "type": "string",
+        "value": null,
+        "label": "Filter (JSON)",
+        "placeholder": "{\"status\":\"ACTIVE\"}"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "submissions",
+        "type": "object",
+        "value": null,
+        "label": "Submissions",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Count",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "forms/jotform/webhook_create": {
+    "hash": "77cfebdc8e9fd108cd4cce51dbcb03b32dff587efa5e1f5d1e263bc37b9e5b9c",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Create Webhook",
+    "description": "Register a JotForm webhook that fires on each new submission of a form.",
+    "website": "https://www.flomation.co",
+    "icon": "webhook+plus",
+    "date": "11/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Forms",
+      "icon": "clipboard-list",
+      "description": "Create forms, collect responses and trigger flows from external form providers"
+    },
+    "sub_category": {
+      "name": "JotForm",
+      "icon": "clipboard-list",
+      "description": "Create and manage JotForm forms, list submissions and register webhooks"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "JotForm API Key",
+        "placeholder": "${secrets.jotform_api_key}",
+        "required": true
+      },
+      {
+        "name": "region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "us",
+        "options": [
+          {
+            "name": "US (default)",
+            "value": "us"
+          },
+          {
+            "name": "EU",
+            "value": "eu"
+          },
+          {
+            "name": "HIPAA",
+            "value": "hipaa"
+          }
+        ]
+      },
+      {
+        "name": "form_id",
+        "type": "string",
+        "value": null,
+        "label": "Form ID",
+        "placeholder": "231234567890",
+        "required": true
+      },
+      {
+        "name": "url",
+        "type": "string",
+        "value": null,
+        "label": "Webhook URL",
+        "placeholder": "https://launch.flomation.app/webhook/…",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "form_id",
+        "type": "string",
+        "value": null,
+        "label": "Form ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Webhooks",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "forms/jotform/webhook_delete": {
+    "hash": "a2b8f9ca36cab2f8547afc37ebe98ac466d511207f1bb97119f335a9e3f7e5fd",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Delete Webhook",
+    "description": "Remove a JotForm webhook from a form by its webhook ID (index).",
+    "website": "https://www.flomation.co",
+    "icon": "webhook+trash",
+    "date": "11/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Forms",
+      "icon": "clipboard-list",
+      "description": "Create forms, collect responses and trigger flows from external form providers"
+    },
+    "sub_category": {
+      "name": "JotForm",
+      "icon": "clipboard-list",
+      "description": "Create and manage JotForm forms, list submissions and register webhooks"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "JotForm API Key",
+        "placeholder": "${secrets.jotform_api_key}",
+        "required": true
+      },
+      {
+        "name": "region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "us",
+        "options": [
+          {
+            "name": "US (default)",
+            "value": "us"
+          },
+          {
+            "name": "EU",
+            "value": "eu"
+          },
+          {
+            "name": "HIPAA",
+            "value": "hipaa"
+          }
+        ]
+      },
+      {
+        "name": "form_id",
+        "type": "string",
+        "value": null,
+        "label": "Form ID",
+        "placeholder": "231234567890",
+        "required": true
+      },
+      {
+        "name": "webhook_id",
+        "type": "string",
+        "value": null,
+        "label": "Webhook ID",
+        "placeholder": "0",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "form_id",
+        "type": "string",
+        "value": null,
+        "label": "Form ID",
+        "placeholder": ""
+      },
+      {
+        "name": "webhook_id",
+        "type": "string",
+        "value": null,
+        "label": "Webhook ID",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "forms/surveymonkey/collector_create": {
+    "hash": "057515449ab916363d99777bbe9deec28d949e05f008da93eee066198d837865",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Create Collector",
+    "description": "Create a collector (e.g. weblink) that distributes a SurveyMonkey survey.",
+    "website": "https://www.flomation.co",
+    "icon": "link+plus",
+    "date": "11/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Forms",
+      "icon": "clipboard-list",
+      "description": "Create forms, collect responses and trigger flows from external form providers"
+    },
+    "sub_category": {
+      "name": "SurveyMonkey",
+      "icon": "clipboard-list",
+      "description": "Create SurveyMonkey surveys, list responses, manage collectors and register webhooks"
+    },
+    "inputs": [
+      {
+        "name": "access_token",
+        "type": "secret",
+        "value": null,
+        "label": "SurveyMonkey Access Token",
+        "placeholder": "${secrets.surveymonkey_token}",
+        "required": true
+      },
+      {
+        "name": "survey_id",
+        "type": "string",
+        "value": null,
+        "label": "Survey ID",
+        "placeholder": "123456789",
+        "required": true
+      },
+      {
+        "name": "type",
+        "type": "string",
+        "value": null,
+        "label": "Type",
+        "placeholder": "weblink",
+        "options": [
+          {
+            "name": "Web Link",
+            "value": "weblink"
+          },
+          {
+            "name": "Email",
+            "value": "email"
+          }
+        ]
+      },
+      {
+        "name": "name",
+        "type": "string",
+        "value": null,
+        "label": "Name",
+        "placeholder": "Website link"
+      },
+      {
+        "name": "body",
+        "type": "string",
+        "value": null,
+        "label": "Body (JSON object)",
+        "placeholder": "{\"display_survey_results\":false}"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "collector_id",
+        "type": "string",
+        "value": null,
+        "label": "Collector ID",
+        "placeholder": ""
+      },
+      {
+        "name": "collector_url",
+        "type": "string",
+        "value": null,
+        "label": "Collector URL",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Collector",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "forms/surveymonkey/collector_list": {
+    "hash": "aa33382043abbfc518e4f1bc8b459d13c2b15ed0521b7e4857598bce4abd9f93",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "List Collectors",
+    "description": "List the collectors (distribution channels) attached to a SurveyMonkey survey.",
+    "website": "https://www.flomation.co",
+    "icon": "link+list",
+    "date": "11/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Forms",
+      "icon": "clipboard-list",
+      "description": "Create forms, collect responses and trigger flows from external form providers"
+    },
+    "sub_category": {
+      "name": "SurveyMonkey",
+      "icon": "clipboard-list",
+      "description": "Create SurveyMonkey surveys, list responses, manage collectors and register webhooks"
+    },
+    "inputs": [
+      {
+        "name": "access_token",
+        "type": "secret",
+        "value": null,
+        "label": "SurveyMonkey Access Token",
+        "placeholder": "${secrets.surveymonkey_token}",
+        "required": true
+      },
+      {
+        "name": "survey_id",
+        "type": "string",
+        "value": null,
+        "label": "Survey ID",
+        "placeholder": "123456789",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "results",
+        "type": "object",
+        "value": null,
+        "label": "Collectors",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Count",
+        "placeholder": ""
+      },
+      {
+        "name": "total",
+        "type": "integer",
+        "value": null,
+        "label": "Total",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "forms/surveymonkey/response_get": {
+    "hash": "a2e6409d69c901995549ab007024754e9e9b949cd10be26ba551f8bae3993eb8",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Get Response",
+    "description": "Retrieve a single SurveyMonkey survey response by its response ID.",
+    "website": "https://www.flomation.co",
+    "icon": "envelope-open-text+eye",
+    "date": "11/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Forms",
+      "icon": "clipboard-list",
+      "description": "Create forms, collect responses and trigger flows from external form providers"
+    },
+    "sub_category": {
+      "name": "SurveyMonkey",
+      "icon": "clipboard-list",
+      "description": "Create SurveyMonkey surveys, list responses, manage collectors and register webhooks"
+    },
+    "inputs": [
+      {
+        "name": "access_token",
+        "type": "secret",
+        "value": null,
+        "label": "SurveyMonkey Access Token",
+        "placeholder": "${secrets.surveymonkey_token}",
+        "required": true
+      },
+      {
+        "name": "survey_id",
+        "type": "string",
+        "value": null,
+        "label": "Survey ID",
+        "placeholder": "123456789",
+        "required": true
+      },
+      {
+        "name": "response_id",
+        "type": "string",
+        "value": null,
+        "label": "Response ID",
+        "placeholder": "987654321",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "response_id",
+        "type": "string",
+        "value": null,
+        "label": "Response ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Response",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "forms/surveymonkey/responses_list": {
+    "hash": "9be1be8b7fa154fd03393775ef3f3f9f8230f4574e710818fe67d3362d8a4c8e",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "List Responses",
+    "description": "Retrieve bulk responses for a SurveyMonkey survey, with page and per-page paging.",
+    "website": "https://www.flomation.co",
+    "icon": "clipboard-list+envelope-open-text",
+    "date": "11/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Forms",
+      "icon": "clipboard-list",
+      "description": "Create forms, collect responses and trigger flows from external form providers"
+    },
+    "sub_category": {
+      "name": "SurveyMonkey",
+      "icon": "clipboard-list",
+      "description": "Create SurveyMonkey surveys, list responses, manage collectors and register webhooks"
+    },
+    "inputs": [
+      {
+        "name": "access_token",
+        "type": "secret",
+        "value": null,
+        "label": "SurveyMonkey Access Token",
+        "placeholder": "${secrets.surveymonkey_token}",
+        "required": true
+      },
+      {
+        "name": "survey_id",
+        "type": "string",
+        "value": null,
+        "label": "Survey ID",
+        "placeholder": "123456789",
+        "required": true
+      },
+      {
+        "name": "page",
+        "type": "integer",
+        "value": null,
+        "label": "Page",
+        "placeholder": "1"
+      },
+      {
+        "name": "per_page",
+        "type": "integer",
+        "value": null,
+        "label": "Per Page",
+        "placeholder": "50"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "responses",
+        "type": "object",
+        "value": null,
+        "label": "Responses",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Count",
+        "placeholder": ""
+      },
+      {
+        "name": "total",
+        "type": "integer",
+        "value": null,
+        "label": "Total",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "forms/surveymonkey/survey_create": {
+    "hash": "ae84657fae76592f3bd6b2659f70ead241252ba9050bfc3efce2b604942f77cb",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Create Survey",
+    "description": "Create a new SurveyMonkey survey with a title and optional JSON body override.",
+    "website": "https://www.flomation.co",
+    "icon": "clipboard-list+plus",
+    "date": "11/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Forms",
+      "icon": "clipboard-list",
+      "description": "Create forms, collect responses and trigger flows from external form providers"
+    },
+    "sub_category": {
+      "name": "SurveyMonkey",
+      "icon": "clipboard-list",
+      "description": "Create SurveyMonkey surveys, list responses, manage collectors and register webhooks"
+    },
+    "inputs": [
+      {
+        "name": "access_token",
+        "type": "secret",
+        "value": null,
+        "label": "SurveyMonkey Access Token",
+        "placeholder": "${secrets.surveymonkey_token}",
+        "required": true
+      },
+      {
+        "name": "title",
+        "type": "string",
+        "value": null,
+        "label": "Title",
+        "placeholder": "Customer satisfaction",
+        "required": true
+      },
+      {
+        "name": "body",
+        "type": "string",
+        "value": null,
+        "label": "Body (JSON object)",
+        "placeholder": "{\"nickname\":\"CSAT 2026\",\"language\":\"en\"}"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "survey_id",
+        "type": "string",
+        "value": null,
+        "label": "Survey ID",
+        "placeholder": ""
+      },
+      {
+        "name": "survey_url",
+        "type": "string",
+        "value": null,
+        "label": "Survey URL",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Survey",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "forms/surveymonkey/survey_get": {
+    "hash": "f3a37f996ac9707cfabd772305b68a04d4ffb2ea4dca2a9cef8fd475551a8772",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Get Survey",
+    "description": "Retrieve a single SurveyMonkey survey by its survey ID.",
+    "website": "https://www.flomation.co",
+    "icon": "clipboard-list+eye",
+    "date": "11/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Forms",
+      "icon": "clipboard-list",
+      "description": "Create forms, collect responses and trigger flows from external form providers"
+    },
+    "sub_category": {
+      "name": "SurveyMonkey",
+      "icon": "clipboard-list",
+      "description": "Create SurveyMonkey surveys, list responses, manage collectors and register webhooks"
+    },
+    "inputs": [
+      {
+        "name": "access_token",
+        "type": "secret",
+        "value": null,
+        "label": "SurveyMonkey Access Token",
+        "placeholder": "${secrets.surveymonkey_token}",
+        "required": true
+      },
+      {
+        "name": "survey_id",
+        "type": "string",
+        "value": null,
+        "label": "Survey ID",
+        "placeholder": "123456789",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "survey_id",
+        "type": "string",
+        "value": null,
+        "label": "Survey ID",
+        "placeholder": ""
+      },
+      {
+        "name": "survey_url",
+        "type": "string",
+        "value": null,
+        "label": "Survey URL",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Survey",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "forms/surveymonkey/survey_list": {
+    "hash": "40575725d30ca0e2895faa9f4946eb26cce54e901f7c4304176dc6f99277a347",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "List Surveys",
+    "description": "List SurveyMonkey surveys in the account, with page and per-page paging.",
+    "website": "https://www.flomation.co",
+    "icon": "clipboard-list+list",
+    "date": "11/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Forms",
+      "icon": "clipboard-list",
+      "description": "Create forms, collect responses and trigger flows from external form providers"
+    },
+    "sub_category": {
+      "name": "SurveyMonkey",
+      "icon": "clipboard-list",
+      "description": "Create SurveyMonkey surveys, list responses, manage collectors and register webhooks"
+    },
+    "inputs": [
+      {
+        "name": "access_token",
+        "type": "secret",
+        "value": null,
+        "label": "SurveyMonkey Access Token",
+        "placeholder": "${secrets.surveymonkey_token}",
+        "required": true
+      },
+      {
+        "name": "page",
+        "type": "integer",
+        "value": null,
+        "label": "Page",
+        "placeholder": "1"
+      },
+      {
+        "name": "per_page",
+        "type": "integer",
+        "value": null,
+        "label": "Per Page",
+        "placeholder": "50"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "results",
+        "type": "object",
+        "value": null,
+        "label": "Surveys",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Count",
+        "placeholder": ""
+      },
+      {
+        "name": "total",
+        "type": "integer",
+        "value": null,
+        "label": "Total",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "forms/surveymonkey/webhook_create": {
+    "hash": "5e7da517ace7c58af2a8bf62d7576cc3070e28c45a8250815511181383ed0329",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Create Webhook",
+    "description": "Register a SurveyMonkey webhook that fires on survey or response events.",
+    "website": "https://www.flomation.co",
+    "icon": "webhook+plus",
+    "date": "11/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Forms",
+      "icon": "clipboard-list",
+      "description": "Create forms, collect responses and trigger flows from external form providers"
+    },
+    "sub_category": {
+      "name": "SurveyMonkey",
+      "icon": "clipboard-list",
+      "description": "Create SurveyMonkey surveys, list responses, manage collectors and register webhooks"
+    },
+    "inputs": [
+      {
+        "name": "access_token",
+        "type": "secret",
+        "value": null,
+        "label": "SurveyMonkey Access Token",
+        "placeholder": "${secrets.surveymonkey_token}",
+        "required": true
+      },
+      {
+        "name": "name",
+        "type": "string",
+        "value": null,
+        "label": "Name",
+        "placeholder": "Flomation responses",
+        "required": true
+      },
+      {
+        "name": "event_type",
+        "type": "string",
+        "value": null,
+        "label": "Event Type",
+        "placeholder": "response_completed",
+        "options": [
+          {
+            "name": "Response completed",
+            "value": "response_completed"
+          },
+          {
+            "name": "Response created",
+            "value": "response_created"
+          },
+          {
+            "name": "Response updated",
+            "value": "response_updated"
+          },
+          {
+            "name": "Response disqualified",
+            "value": "response_disqualified"
+          },
+          {
+            "name": "Response overquota",
+            "value": "response_overquota"
+          },
+          {
+            "name": "Survey created",
+            "value": "survey_created"
+          },
+          {
+            "name": "Survey updated",
+            "value": "survey_updated"
+          },
+          {
+            "name": "Survey deleted",
+            "value": "survey_deleted"
+          },
+          {
+            "name": "Collector created",
+            "value": "collector_created"
+          },
+          {
+            "name": "Collector updated",
+            "value": "collector_updated"
+          },
+          {
+            "name": "Collector deleted",
+            "value": "collector_deleted"
+          }
+        ]
+      },
+      {
+        "name": "object_type",
+        "type": "string",
+        "value": null,
+        "label": "Object Type",
+        "placeholder": "survey",
+        "options": [
+          {
+            "name": "Survey",
+            "value": "survey"
+          },
+          {
+            "name": "Collector",
+            "value": "collector"
+          }
+        ]
+      },
+      {
+        "name": "object_ids",
+        "type": "string",
+        "value": null,
+        "label": "Object IDs (comma-separated)",
+        "placeholder": "123456789,987654321"
+      },
+      {
+        "name": "subscription_url",
+        "type": "string",
+        "value": null,
+        "label": "Subscription URL",
+        "placeholder": "https://launch.flomation.app/webhook/…",
+        "required": true
+      },
+      {
+        "name": "body",
+        "type": "string",
+        "value": null,
+        "label": "Body (JSON object)",
+        "placeholder": "{\"object_ids\":[\"123\"]}"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "webhook_id",
+        "type": "string",
+        "value": null,
+        "label": "Webhook ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Webhook",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "forms/surveymonkey/webhook_delete": {
+    "hash": "3f2d91eb88551dd180939eb1486a718691065c223dede44608ab19c52ac7b795",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Delete Webhook",
+    "description": "Delete a SurveyMonkey webhook by its webhook ID.",
+    "website": "https://www.flomation.co",
+    "icon": "webhook+trash",
+    "date": "11/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Forms",
+      "icon": "clipboard-list",
+      "description": "Create forms, collect responses and trigger flows from external form providers"
+    },
+    "sub_category": {
+      "name": "SurveyMonkey",
+      "icon": "clipboard-list",
+      "description": "Create SurveyMonkey surveys, list responses, manage collectors and register webhooks"
+    },
+    "inputs": [
+      {
+        "name": "access_token",
+        "type": "secret",
+        "value": null,
+        "label": "SurveyMonkey Access Token",
+        "placeholder": "${secrets.surveymonkey_token}",
+        "required": true
+      },
+      {
+        "name": "webhook_id",
+        "type": "string",
+        "value": null,
+        "label": "Webhook ID",
+        "placeholder": "12345",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "webhook_id",
+        "type": "string",
+        "value": null,
+        "label": "Webhook ID",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "forms/surveymonkey/webhook_list": {
+    "hash": "c26d9a4d43a89fe0ad7b9c13784ed8b45708a64b2fc7da7c36697f6a0b339189",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "List Webhooks",
+    "description": "List the SurveyMonkey webhooks registered on the account.",
+    "website": "https://www.flomation.co",
+    "icon": "webhook+list",
+    "date": "11/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Forms",
+      "icon": "clipboard-list",
+      "description": "Create forms, collect responses and trigger flows from external form providers"
+    },
+    "sub_category": {
+      "name": "SurveyMonkey",
+      "icon": "clipboard-list",
+      "description": "Create SurveyMonkey surveys, list responses, manage collectors and register webhooks"
+    },
+    "inputs": [
+      {
+        "name": "access_token",
+        "type": "secret",
+        "value": null,
+        "label": "SurveyMonkey Access Token",
+        "placeholder": "${secrets.surveymonkey_token}",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "results",
+        "type": "object",
+        "value": null,
+        "label": "Webhooks",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Count",
+        "placeholder": ""
+      },
+      {
+        "name": "total",
+        "type": "integer",
+        "value": null,
+        "label": "Total",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "forms/typeform/form_create": {
+    "hash": "132a73f6c3317061534d8cde1bdb9ae76d21140db0b52286385215be6542700c",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Create Form",
+    "description": "Create a new Typeform form with a title and a JSON array of fields.",
+    "website": "https://www.flomation.co",
+    "icon": "clipboard-list+plus",
+    "date": "11/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Forms",
+      "icon": "clipboard-list",
+      "description": "Create forms, collect responses and trigger flows from external form providers"
+    },
+    "sub_category": {
+      "name": "Typeform",
+      "icon": "clipboard-list",
+      "description": "Create and manage Typeform forms, list responses and register webhooks"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "Typeform Personal Access Token",
+        "placeholder": "${secrets.typeform_token}",
+        "required": true
+      },
+      {
+        "name": "title",
+        "type": "string",
+        "value": null,
+        "label": "Title",
+        "placeholder": "My contact form",
+        "required": true
+      },
+      {
+        "name": "fields",
+        "type": "string",
+        "value": null,
+        "label": "Fields (JSON array)",
+        "placeholder": "[{\"title\":\"What is your name?\",\"type\":\"short_text\"}]"
+      },
+      {
+        "name": "settings",
+        "type": "string",
+        "value": null,
+        "label": "Settings (JSON object)",
+        "placeholder": "{\"is_public\":true}"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "form_id",
+        "type": "string",
+        "value": null,
+        "label": "Form ID",
+        "placeholder": ""
+      },
+      {
+        "name": "form_url",
+        "type": "string",
+        "value": null,
+        "label": "Form URL",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Form",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "forms/typeform/form_delete": {
+    "hash": "79e17062d020d2b4aa5c62397697bd9a25d0e67e54909b09a9d4e344396d6338",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Delete Form",
+    "description": "Delete a Typeform form permanently by its form ID.",
+    "website": "https://www.flomation.co",
+    "icon": "clipboard-list+trash",
+    "date": "11/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Forms",
+      "icon": "clipboard-list",
+      "description": "Create forms, collect responses and trigger flows from external form providers"
+    },
+    "sub_category": {
+      "name": "Typeform",
+      "icon": "clipboard-list",
+      "description": "Create and manage Typeform forms, list responses and register webhooks"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "Typeform Personal Access Token",
+        "placeholder": "${secrets.typeform_token}",
+        "required": true
+      },
+      {
+        "name": "form_id",
+        "type": "string",
+        "value": null,
+        "label": "Form ID",
+        "placeholder": "abc123",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "form_id",
+        "type": "string",
+        "value": null,
+        "label": "Form ID",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "forms/typeform/form_get": {
+    "hash": "2ac772c04631ed4a024b8461143736a24796cafd96a8ec757d2d07fdf80e6949",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Get Form",
+    "description": "Retrieve a single Typeform form definition by its form ID.",
+    "website": "https://www.flomation.co",
+    "icon": "clipboard-list+eye",
+    "date": "11/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Forms",
+      "icon": "clipboard-list",
+      "description": "Create forms, collect responses and trigger flows from external form providers"
+    },
+    "sub_category": {
+      "name": "Typeform",
+      "icon": "clipboard-list",
+      "description": "Create and manage Typeform forms, list responses and register webhooks"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "Typeform Personal Access Token",
+        "placeholder": "${secrets.typeform_token}",
+        "required": true
+      },
+      {
+        "name": "form_id",
+        "type": "string",
+        "value": null,
+        "label": "Form ID",
+        "placeholder": "abc123",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "form_id",
+        "type": "string",
+        "value": null,
+        "label": "Form ID",
+        "placeholder": ""
+      },
+      {
+        "name": "form_url",
+        "type": "string",
+        "value": null,
+        "label": "Form URL",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Form",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "forms/typeform/form_list": {
+    "hash": "925d0e9b191f47fc661ba64e727b0fd5580b3aed988fa916c5f9aae9a4444cce",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "List Forms",
+    "description": "List Typeform forms in the account, with optional search and page size.",
+    "website": "https://www.flomation.co",
+    "icon": "clipboard-list+list",
+    "date": "11/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Forms",
+      "icon": "clipboard-list",
+      "description": "Create forms, collect responses and trigger flows from external form providers"
+    },
+    "sub_category": {
+      "name": "Typeform",
+      "icon": "clipboard-list",
+      "description": "Create and manage Typeform forms, list responses and register webhooks"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "Typeform Personal Access Token",
+        "placeholder": "${secrets.typeform_token}",
+        "required": true
+      },
+      {
+        "name": "search",
+        "type": "string",
+        "value": null,
+        "label": "Search",
+        "placeholder": "contact"
+      },
+      {
+        "name": "page_size",
+        "type": "integer",
+        "value": null,
+        "label": "Page Size",
+        "placeholder": "10"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "results",
+        "type": "object",
+        "value": null,
+        "label": "Forms",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Count",
+        "placeholder": ""
+      },
+      {
+        "name": "total_items",
+        "type": "integer",
+        "value": null,
+        "label": "Total Items",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "forms/typeform/form_update": {
+    "hash": "a405ad91939a2a8bc4518f144973a3464e672e4f1e2c2b0803be8335c670ea25",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Update Form",
+    "description": "Replace a Typeform form definition with a full form JSON object.",
+    "website": "https://www.flomation.co",
+    "icon": "clipboard-list+file-pen",
+    "date": "11/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Forms",
+      "icon": "clipboard-list",
+      "description": "Create forms, collect responses and trigger flows from external form providers"
+    },
+    "sub_category": {
+      "name": "Typeform",
+      "icon": "clipboard-list",
+      "description": "Create and manage Typeform forms, list responses and register webhooks"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "Typeform Personal Access Token",
+        "placeholder": "${secrets.typeform_token}",
+        "required": true
+      },
+      {
+        "name": "form_id",
+        "type": "string",
+        "value": null,
+        "label": "Form ID",
+        "placeholder": "abc123",
+        "required": true
+      },
+      {
+        "name": "form",
+        "type": "string",
+        "value": null,
+        "label": "Form (JSON object)",
+        "placeholder": "{\"title\":\"Updated title\",\"fields\":[...]}",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "form_id",
+        "type": "string",
+        "value": null,
+        "label": "Form ID",
+        "placeholder": ""
+      },
+      {
+        "name": "form_url",
+        "type": "string",
+        "value": null,
+        "label": "Form URL",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Form",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "forms/typeform/responses_list": {
+    "hash": "b57836735f2a85efeb1e5ef0abbc9e024a20c61bc356aa79cb32815d227c5a3b",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "List Responses",
+    "description": "Retrieve submitted responses for a Typeform form, with date and completion filters.",
+    "website": "https://www.flomation.co",
+    "icon": "clipboard-list+envelope-open-text",
+    "date": "11/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Forms",
+      "icon": "clipboard-list",
+      "description": "Create forms, collect responses and trigger flows from external form providers"
+    },
+    "sub_category": {
+      "name": "Typeform",
+      "icon": "clipboard-list",
+      "description": "Create and manage Typeform forms, list responses and register webhooks"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "Typeform Personal Access Token",
+        "placeholder": "${secrets.typeform_token}",
+        "required": true
+      },
+      {
+        "name": "form_id",
+        "type": "string",
+        "value": null,
+        "label": "Form ID",
+        "placeholder": "abc123",
+        "required": true
+      },
+      {
+        "name": "page_size",
+        "type": "integer",
+        "value": null,
+        "label": "Page Size",
+        "placeholder": "25"
+      },
+      {
+        "name": "since",
+        "type": "string",
+        "value": null,
+        "label": "Since",
+        "placeholder": "2026-01-01T00:00:00Z"
+      },
+      {
+        "name": "until",
+        "type": "string",
+        "value": null,
+        "label": "Until",
+        "placeholder": "2026-12-31T23:59:59Z"
+      },
+      {
+        "name": "completed",
+        "type": "string",
+        "value": null,
+        "label": "Completed",
+        "placeholder": "true or false",
+        "options": [
+          {
+            "name": "Any",
+            "value": ""
+          },
+          {
+            "name": "Completed only",
+            "value": "true"
+          },
+          {
+            "name": "Incomplete only",
+            "value": "false"
+          }
+        ]
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "responses",
+        "type": "object",
+        "value": null,
+        "label": "Responses",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Count",
+        "placeholder": ""
+      },
+      {
+        "name": "total_items",
+        "type": "integer",
+        "value": null,
+        "label": "Total Items",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "forms/typeform/webhook_create": {
+    "hash": "437243cfdf3c1c812e5e24522d4a2a892bcd679211612643e77b2336ef0c2d17",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Create Webhook",
+    "description": "Register or update a Typeform webhook that fires on each form submission.",
+    "website": "https://www.flomation.co",
+    "icon": "webhook+plus",
+    "date": "11/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Forms",
+      "icon": "clipboard-list",
+      "description": "Create forms, collect responses and trigger flows from external form providers"
+    },
+    "sub_category": {
+      "name": "Typeform",
+      "icon": "clipboard-list",
+      "description": "Create and manage Typeform forms, list responses and register webhooks"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "Typeform Personal Access Token",
+        "placeholder": "${secrets.typeform_token}",
+        "required": true
+      },
+      {
+        "name": "form_id",
+        "type": "string",
+        "value": null,
+        "label": "Form ID",
+        "placeholder": "abc123",
+        "required": true
+      },
+      {
+        "name": "tag",
+        "type": "string",
+        "value": null,
+        "label": "Tag",
+        "placeholder": "flomation",
+        "required": true
+      },
+      {
+        "name": "url",
+        "type": "string",
+        "value": null,
+        "label": "Webhook URL",
+        "placeholder": "https://launch.flomation.app/webhook/…",
+        "required": true
+      },
+      {
+        "name": "secret",
+        "type": "secret",
+        "value": null,
+        "label": "Signing Secret",
+        "placeholder": "${secrets.typeform_webhook_secret}"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "webhook_id",
+        "type": "string",
+        "value": null,
+        "label": "Webhook ID",
+        "placeholder": ""
+      },
+      {
+        "name": "tag",
+        "type": "string",
+        "value": null,
+        "label": "Tag",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Webhook",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "forms/typeform/webhook_delete": {
+    "hash": "707e2150aecdad000549e33bd0a72d1c2c2037934364693b3618bd7421f6b6ac",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Delete Webhook",
+    "description": "Delete a Typeform webhook from a form by its tag.",
+    "website": "https://www.flomation.co",
+    "icon": "webhook+trash",
+    "date": "11/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Forms",
+      "icon": "clipboard-list",
+      "description": "Create forms, collect responses and trigger flows from external form providers"
+    },
+    "sub_category": {
+      "name": "Typeform",
+      "icon": "clipboard-list",
+      "description": "Create and manage Typeform forms, list responses and register webhooks"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "Typeform Personal Access Token",
+        "placeholder": "${secrets.typeform_token}",
+        "required": true
+      },
+      {
+        "name": "form_id",
+        "type": "string",
+        "value": null,
+        "label": "Form ID",
+        "placeholder": "abc123",
+        "required": true
+      },
+      {
+        "name": "tag",
+        "type": "string",
+        "value": null,
+        "label": "Tag",
+        "placeholder": "flomation",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "tag",
+        "type": "string",
+        "value": null,
+        "label": "Tag",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
   "git/add": {
     "hash": "4d307d307e222f349b5286744b8373a9f995d89c13605adaf0f42797d9e344f2",
     "author": "Andy Esser",
@@ -111055,6 +114196,82 @@
       }
     ]
   },
+  "trigger/jotform_webhook": {
+    "hash": "93126d50f7c9bef0cb012597c42ca4630a091da4fb787210f4a10025b0802826",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "JotForm Webhook Trigger",
+    "description": "Triggers a flow when a JotForm form submission webhook is received.",
+    "website": "https://www.flomation.co",
+    "icon": "clipboard-list",
+    "date": "11/07/2026",
+    "type": 1,
+    "category": {
+      "name": "Triggers",
+      "icon": "bolt-lightning",
+      "description": "Start a Flow"
+    },
+    "inputs": [
+      {
+        "name": "secret",
+        "type": "secret",
+        "value": null,
+        "label": "Shared Token",
+        "placeholder": "${secrets.jotform_webhook_secret}"
+      },
+      {
+        "name": "form_id",
+        "type": "string",
+        "value": null,
+        "label": "Form ID Filter",
+        "placeholder": "231234567890 (blank = any form)"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Event Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "event_type",
+        "type": "string",
+        "value": null,
+        "label": "Event Type",
+        "placeholder": ""
+      },
+      {
+        "name": "form_id",
+        "type": "string",
+        "value": null,
+        "label": "Form ID",
+        "placeholder": ""
+      },
+      {
+        "name": "submission_id",
+        "type": "string",
+        "value": null,
+        "label": "Submission ID",
+        "placeholder": ""
+      },
+      {
+        "name": "answers",
+        "type": "string",
+        "value": null,
+        "label": "Answers (JSON)",
+        "placeholder": ""
+      },
+      {
+        "name": "body",
+        "type": "string",
+        "value": null,
+        "label": "Raw JSON Body",
+        "placeholder": ""
+      }
+    ]
+  },
   "trigger/linkedin_poll": {
     "hash": "bc80192e7a86d7e14316ce67d0c085868168b5cba8803d12856a74b56e10aeed",
     "author": "Andy Esser",
@@ -113380,6 +116597,89 @@
       }
     ]
   },
+  "trigger/surveymonkey_webhook": {
+    "hash": "fc3def3cd3c992df7d1d844135d24303cb8ce7107ee68a9fe003f9e2635d6978",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "SurveyMonkey Webhook Trigger",
+    "description": "Triggers a flow when a SurveyMonkey webhook event is received.",
+    "website": "https://www.flomation.co",
+    "icon": "clipboard-list",
+    "date": "11/07/2026",
+    "type": 1,
+    "category": {
+      "name": "Triggers",
+      "icon": "bolt-lightning",
+      "description": "Start a Flow"
+    },
+    "inputs": [
+      {
+        "name": "secret",
+        "type": "secret",
+        "value": null,
+        "label": "Webhook Signing Secret",
+        "placeholder": "${secrets.surveymonkey_webhook_secret}"
+      },
+      {
+        "name": "survey_id",
+        "type": "string",
+        "value": null,
+        "label": "Survey ID Filter",
+        "placeholder": "123456789 (blank = any survey)"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Event Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "event_type",
+        "type": "string",
+        "value": null,
+        "label": "Event Type",
+        "placeholder": ""
+      },
+      {
+        "name": "object_type",
+        "type": "string",
+        "value": null,
+        "label": "Object Type",
+        "placeholder": ""
+      },
+      {
+        "name": "object_id",
+        "type": "string",
+        "value": null,
+        "label": "Object ID",
+        "placeholder": ""
+      },
+      {
+        "name": "survey_id",
+        "type": "string",
+        "value": null,
+        "label": "Survey ID",
+        "placeholder": ""
+      },
+      {
+        "name": "response_id",
+        "type": "string",
+        "value": null,
+        "label": "Response ID",
+        "placeholder": ""
+      },
+      {
+        "name": "body",
+        "type": "string",
+        "value": null,
+        "label": "Raw JSON Body",
+        "placeholder": ""
+      }
+    ]
+  },
   "trigger/teams": {
     "hash": "ce02bcd95ebd9ebc45d9fa87058e35b7c1c81e526c989b31091228fc16d0fe14",
     "author": "Andy Esser",
@@ -113964,6 +117264,97 @@
         "type": "boolean",
         "value": null,
         "label": "Is Voice Call",
+        "placeholder": ""
+      }
+    ]
+  },
+  "trigger/typeform_webhook": {
+    "hash": "b147b23d0de7fa3dad377769c58f2cbf09a45629f151fcba6492c09ac28e1b18",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Typeform Webhook Trigger",
+    "description": "Triggers a flow when a Typeform form submission webhook is received.",
+    "website": "https://www.flomation.co",
+    "icon": "clipboard-list",
+    "date": "11/07/2026",
+    "type": 1,
+    "category": {
+      "name": "Triggers",
+      "icon": "bolt-lightning",
+      "description": "Start a Flow"
+    },
+    "inputs": [
+      {
+        "name": "secret",
+        "type": "secret",
+        "value": null,
+        "label": "Webhook Signing Secret",
+        "placeholder": "${secrets.typeform_webhook_secret}",
+        "required": true
+      },
+      {
+        "name": "form_id",
+        "type": "string",
+        "value": null,
+        "label": "Form ID Filter",
+        "placeholder": "abc123 (blank = any form)"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Event Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "event_type",
+        "type": "string",
+        "value": null,
+        "label": "Event Type",
+        "placeholder": ""
+      },
+      {
+        "name": "event_id",
+        "type": "string",
+        "value": null,
+        "label": "Event ID",
+        "placeholder": ""
+      },
+      {
+        "name": "form_id",
+        "type": "string",
+        "value": null,
+        "label": "Form ID",
+        "placeholder": ""
+      },
+      {
+        "name": "response_token",
+        "type": "string",
+        "value": null,
+        "label": "Response Token",
+        "placeholder": ""
+      },
+      {
+        "name": "submitted_at",
+        "type": "string",
+        "value": null,
+        "label": "Submitted At",
+        "placeholder": ""
+      },
+      {
+        "name": "answers",
+        "type": "string",
+        "value": null,
+        "label": "Answers (JSON)",
+        "placeholder": ""
+      },
+      {
+        "name": "body",
+        "type": "string",
+        "value": null,
+        "label": "Raw JSON Body",
         "placeholder": ""
       }
     ]
