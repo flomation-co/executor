@@ -25,6 +25,12 @@ const (
 var Inputs = [...]core.Connection{
 	{Name: "methods", Type: core.ConnectionTypeString, Label: "Accepted Methods", Placeholder: "POST or GET,POST"},
 	{Name: "fields", Type: core.ConnectionTypeText, Label: "Request Fields", Placeholder: `{"id":"path","limit":"query","name":"body"}`},
+	// keep_history turns this into a conversational endpoint: the invoke mints/
+	// resumes a thread, injects prior turns as ${history}, and records both turns.
+	// Off ⇒ a stateless API endpoint. message_field names the input treated as the
+	// user's message for the recorded turn (default "message").
+	{Name: "keep_history", Type: core.ConnectionTypeBoolean, Label: "Keep Conversation History"},
+	{Name: "message_field", Type: core.ConnectionTypeString, Label: "Message Field", Placeholder: "message"},
 }
 
 // Outputs are the baseline request context always available as bare variables.

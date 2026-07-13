@@ -26,6 +26,7 @@ var Inputs = [...]core.Connection{
 	{Name: "status_code", Type: core.ConnectionTypeInteger, Label: "Status Code", Placeholder: "200"},
 	{Name: "content_type", Type: core.ConnectionTypeString, Label: "Content Type", Placeholder: "application/json"},
 	{Name: "headers", Type: core.ConnectionTypeText, Label: "Headers (JSON object)", Placeholder: `{"Location":"/x"}`},
+	{Name: "history", Type: core.ConnectionTypeText, Label: "History Text", Placeholder: "assistant message to record (defaults to the body)"},
 }
 
 var Outputs = [...]core.Connection{
@@ -48,6 +49,13 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	}
 	if headers := core.FindConnection("headers", inputs); headers != nil && headers.Value != nil {
 		resp["headers"] = headers.Value
+	}
+	// Optional clean assistant text to record in conversation history (when the
+	// Web Trigger has keep_history on). Decoupled from the HTTP body so a JSON
+	// API response still records a readable turn; the API falls back to the body
+	// when this is unset.
+	if history := core.FindConnection("history", inputs); history != nil && history.Value != nil {
+		resp["history"] = history.Value
 	}
 
 	flow.SetOutput(WebResponseKey, resp)
