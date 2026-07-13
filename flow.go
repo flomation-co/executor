@@ -347,6 +347,18 @@ func (c *Connection) String() *string {
 	return &v
 }
 
+// Number reads an integer-typed input.
+//
+// The value's dynamic type depends on how it got here: a literal the editor
+// stored is a float64 after JSON decoding, an auto-wired parent output may be an
+// int or int64, and a field carrying a ${...} reference has been rewritten to a
+// string by the substitution pass.
+//
+// The previous implementation ended its type-assertion chain with an unchecked
+// c.Value.(string), which panicked — taking the whole flow run with it — on any
+// integer input whose value was nil (an input present but never filled in) or a
+// bool. The type switch below returns nil for those instead, which is what every
+// caller already treats as "unset".
 func (c *Connection) Number() *int64 {
 	if c == nil {
 		return nil
@@ -356,31 +368,42 @@ func (c *Connection) Number() *int64 {
 		return nil
 	}
 
-	v, ok := c.Value.(int64)
-	if !ok {
-		v, ok := c.Value.(float64)
-		if !ok {
-			v, ok := c.Value.(int)
-			if !ok {
-				v, err := strconv.ParseInt(c.Value.(string), 10, 64)
-				if err != nil {
-					return nil
-				}
-
-				return &v
-			}
-
-			val := int64(v)
-			return &val
-		}
-
+	switch v := c.Value.(type) {
+	case int64:
+		return &v
+	case int:
 		val := int64(v)
 		return &val
+	case float64:
+		val := int64(v)
+		return &val
+	case string:
+		val, err := strconv.ParseInt(strings.TrimSpace(v), 10, 64)
+		if err != nil {
+			return nil
+		}
+		return &val
+	default:
+		return nil
 	}
-
-	return &v
 }
 
+// Boolean reads a boolean-typed input.
+//
+// A checkbox the user ticked arrives as a Go bool. A checkbox bound to a
+// variable does not: the editor's BooleanProperty stores the reference as a
+// string ("${var.approved}"), and ExecuteNode's substitution pass rewrites every
+// ${...} into its resolved text before an action sees it — so the value lands
+// here as the string "true". Asserting c.Value.(bool) would read that as unset
+// and silently ignore the variable the flow author bound.
+//
+// So a string is parsed, the way String() already parses a boolean-typed value
+// with strconv.ParseBool and Number() already falls back to parsing a string.
+// The bool fast path stays exact.
+//
+// Anything unparseable — including the empty string an unresolved ${var.missing}
+// substitutes to — returns nil, i.e. "unset". Callers that gate a destructive
+// action on this therefore fail closed on a typo'd variable name.
 func (c *Connection) Boolean() *bool {
 	if c == nil {
 		return nil
@@ -390,11 +413,26 @@ func (c *Connection) Boolean() *bool {
 		return nil
 	}
 
-	v, ok := c.Value.(bool)
-	if !ok {
+	if v, ok := c.Value.(bool); ok {
+		return &v
+	}
+	if c.Value == nil {
 		return nil
 	}
 
+	switch strings.ToLower(strings.TrimSpace(fmt.Sprintf("%v", c.Value))) {
+	case "yes", "on":
+		v := true
+		return &v
+	case "no", "off":
+		v := false
+		return &v
+	}
+
+	v, err := strconv.ParseBool(strings.TrimSpace(fmt.Sprintf("%v", c.Value)))
+	if err != nil {
+		return nil
+	}
 	return &v
 }
 
