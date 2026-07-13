@@ -16,6 +16,7 @@ import (
 	"net/http"
 	"net/url"
 	"os"
+	"strconv"
 	"time"
 
 	log "github.com/sirupsen/logrus"
@@ -274,23 +275,67 @@ func (e *Environment) GetProperty(name string) (*Property, error) {
 }
 
 // GetCredential fetches an OAuth credential's current access token by name.
-func (e *Environment) GetCredential(name string) (*string, error) {
+// credentialResponse is the execution-time credential resolution returned by
+// the API. Metadata carries the per-account identifier captured at OAuth time
+// (QuickBooks realm_id / Xero tenant_id), absent for token-only providers.
+type credentialResponse struct {
+	Value    string                 `json:"value"`
+	Metadata map[string]interface{} `json:"metadata"`
+}
+
+func (e *Environment) fetchCredential(name string) (*credentialResponse, error) {
 	b, err := e.fetch(fmt.Sprintf("%v/api/v1/execution/%v/environment/%v/credential/%v", e.url, e.execution, e.identifier, url.PathEscape(name)))
 	if err != nil {
 		return nil, err
 	}
-
-	var result struct {
-		Value string `json:"value"`
-	}
+	var result credentialResponse
 	if err := json.Unmarshal(b, &result); err != nil {
 		return nil, err
 	}
+	return &result, nil
+}
 
+func (e *Environment) GetCredential(name string) (*string, error) {
+	result, err := e.fetchCredential(name)
+	if err != nil {
+		return nil, err
+	}
 	if result.Value == "" {
 		return nil, nil
 	}
 	return &result.Value, nil
+}
+
+// GetCredentialMeta returns one metadata value captured for a managed
+// credential at OAuth time — e.g. ${credentials.MyQBO.realm_id} or
+// ${credentials.MyXero.tenant_id}. Non-string values are stringified; a missing
+// key or empty value returns (nil, nil).
+func (e *Environment) GetCredentialMeta(name, key string) (*string, error) {
+	result, err := e.fetchCredential(name)
+	if err != nil {
+		return nil, err
+	}
+	if result.Metadata == nil {
+		return nil, nil
+	}
+	v, ok := result.Metadata[key]
+	if !ok {
+		return nil, nil
+	}
+	s, ok := v.(string)
+	if !ok {
+		// JSON numbers decode to float64; format without scientific notation
+		// so a numeric identifier (e.g. a QuickBooks realmId) stays intact.
+		if f, isFloat := v.(float64); isFloat {
+			s = strconv.FormatFloat(f, 'f', -1, 64)
+		} else {
+			s = fmt.Sprintf("%v", v)
+		}
+	}
+	if s == "" {
+		return nil, nil
+	}
+	return &s, nil
 }
 
 func (e *Environment) GetSecret(name string) (*Secret, error) {

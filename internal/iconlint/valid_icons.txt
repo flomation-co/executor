@@ -159,6 +159,7 @@ play
 plug
 plus
 qrcode
+quickbooks
 recycle
 refresh
 # Regenerate whenever paths.ts changes; a stale snapshot fails iconlint on
@@ -211,6 +212,7 @@ wifi
 woocommerce
 wordpress
 wrench
-xmark
 x-twitter
+xero
+xmark
 zendesk

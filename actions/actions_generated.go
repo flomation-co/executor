@@ -750,6 +750,60 @@ import (
 	plan_get_status "flomation.app/automate/executor/actions/plan/get_status"
 	plan_revise "flomation.app/automate/executor/actions/plan/revise"
 	plan_start "flomation.app/automate/executor/actions/plan/start"
+	quickbooks_account_create "flomation.app/automate/executor/actions/quickbooks/account_create"
+	quickbooks_account_get "flomation.app/automate/executor/actions/quickbooks/account_get"
+	quickbooks_account_query "flomation.app/automate/executor/actions/quickbooks/account_query"
+	quickbooks_bill_create "flomation.app/automate/executor/actions/quickbooks/bill_create"
+	quickbooks_bill_get "flomation.app/automate/executor/actions/quickbooks/bill_get"
+	quickbooks_bill_query "flomation.app/automate/executor/actions/quickbooks/bill_query"
+	quickbooks_billpayment_create "flomation.app/automate/executor/actions/quickbooks/billpayment_create"
+	quickbooks_billpayment_get "flomation.app/automate/executor/actions/quickbooks/billpayment_get"
+	quickbooks_billpayment_query "flomation.app/automate/executor/actions/quickbooks/billpayment_query"
+	quickbooks_companyinfo_get "flomation.app/automate/executor/actions/quickbooks/companyinfo_get"
+	quickbooks_creditmemo_create "flomation.app/automate/executor/actions/quickbooks/creditmemo_create"
+	quickbooks_creditmemo_get "flomation.app/automate/executor/actions/quickbooks/creditmemo_get"
+	quickbooks_creditmemo_query "flomation.app/automate/executor/actions/quickbooks/creditmemo_query"
+	quickbooks_customer_create "flomation.app/automate/executor/actions/quickbooks/customer_create"
+	quickbooks_customer_get "flomation.app/automate/executor/actions/quickbooks/customer_get"
+	quickbooks_customer_query "flomation.app/automate/executor/actions/quickbooks/customer_query"
+	quickbooks_customer_update "flomation.app/automate/executor/actions/quickbooks/customer_update"
+	quickbooks_deposit_create "flomation.app/automate/executor/actions/quickbooks/deposit_create"
+	quickbooks_deposit_get "flomation.app/automate/executor/actions/quickbooks/deposit_get"
+	quickbooks_deposit_query "flomation.app/automate/executor/actions/quickbooks/deposit_query"
+	quickbooks_employee_create "flomation.app/automate/executor/actions/quickbooks/employee_create"
+	quickbooks_employee_get "flomation.app/automate/executor/actions/quickbooks/employee_get"
+	quickbooks_employee_query "flomation.app/automate/executor/actions/quickbooks/employee_query"
+	quickbooks_estimate_create "flomation.app/automate/executor/actions/quickbooks/estimate_create"
+	quickbooks_estimate_get "flomation.app/automate/executor/actions/quickbooks/estimate_get"
+	quickbooks_estimate_query "flomation.app/automate/executor/actions/quickbooks/estimate_query"
+	quickbooks_invoice_create "flomation.app/automate/executor/actions/quickbooks/invoice_create"
+	quickbooks_invoice_get "flomation.app/automate/executor/actions/quickbooks/invoice_get"
+	quickbooks_invoice_query "flomation.app/automate/executor/actions/quickbooks/invoice_query"
+	quickbooks_invoice_send "flomation.app/automate/executor/actions/quickbooks/invoice_send"
+	quickbooks_invoice_update "flomation.app/automate/executor/actions/quickbooks/invoice_update"
+	quickbooks_invoice_void "flomation.app/automate/executor/actions/quickbooks/invoice_void"
+	quickbooks_item_create "flomation.app/automate/executor/actions/quickbooks/item_create"
+	quickbooks_item_get "flomation.app/automate/executor/actions/quickbooks/item_get"
+	quickbooks_item_query "flomation.app/automate/executor/actions/quickbooks/item_query"
+	quickbooks_journalentry_create "flomation.app/automate/executor/actions/quickbooks/journalentry_create"
+	quickbooks_journalentry_get "flomation.app/automate/executor/actions/quickbooks/journalentry_get"
+	quickbooks_journalentry_query "flomation.app/automate/executor/actions/quickbooks/journalentry_query"
+	quickbooks_payment_create "flomation.app/automate/executor/actions/quickbooks/payment_create"
+	quickbooks_payment_get "flomation.app/automate/executor/actions/quickbooks/payment_get"
+	quickbooks_payment_query "flomation.app/automate/executor/actions/quickbooks/payment_query"
+	quickbooks_purchaseorder_create "flomation.app/automate/executor/actions/quickbooks/purchaseorder_create"
+	quickbooks_purchaseorder_get "flomation.app/automate/executor/actions/quickbooks/purchaseorder_get"
+	quickbooks_purchaseorder_query "flomation.app/automate/executor/actions/quickbooks/purchaseorder_query"
+	quickbooks_query "flomation.app/automate/executor/actions/quickbooks/query"
+	quickbooks_report "flomation.app/automate/executor/actions/quickbooks/report"
+	quickbooks_salesreceipt_create "flomation.app/automate/executor/actions/quickbooks/salesreceipt_create"
+	quickbooks_salesreceipt_get "flomation.app/automate/executor/actions/quickbooks/salesreceipt_get"
+	quickbooks_salesreceipt_query "flomation.app/automate/executor/actions/quickbooks/salesreceipt_query"
+	quickbooks_taxcode_get "flomation.app/automate/executor/actions/quickbooks/taxcode_get"
+	quickbooks_taxcode_query "flomation.app/automate/executor/actions/quickbooks/taxcode_query"
+	quickbooks_vendor_create "flomation.app/automate/executor/actions/quickbooks/vendor_create"
+	quickbooks_vendor_get "flomation.app/automate/executor/actions/quickbooks/vendor_get"
+	quickbooks_vendor_query "flomation.app/automate/executor/actions/quickbooks/vendor_query"
 	scheduling_acuity_appointment_cancel "flomation.app/automate/executor/actions/scheduling/acuity/appointment_cancel"
 	scheduling_acuity_appointment_create "flomation.app/automate/executor/actions/scheduling/acuity/appointment_create"
 	scheduling_acuity_appointment_get "flomation.app/automate/executor/actions/scheduling/acuity/appointment_get"
@@ -992,6 +1046,7 @@ import (
 	trigger_mqtt "flomation.app/automate/executor/actions/trigger/mqtt"
 	trigger_plan_task "flomation.app/automate/executor/actions/trigger/plan_task"
 	trigger_qr "flomation.app/automate/executor/actions/trigger/qr"
+	trigger_quickbooks_webhook "flomation.app/automate/executor/actions/trigger/quickbooks_webhook"
 	trigger_s3 "flomation.app/automate/executor/actions/trigger/s3"
 	trigger_schedule "flomation.app/automate/executor/actions/trigger/schedule"
 	trigger_sendgrid_webhook "flomation.app/automate/executor/actions/trigger/sendgrid_webhook"
@@ -1007,6 +1062,7 @@ import (
 	trigger_typeform_webhook "flomation.app/automate/executor/actions/trigger/typeform_webhook"
 	trigger_webhook "flomation.app/automate/executor/actions/trigger/webhook"
 	trigger_woocommerce_webhook "flomation.app/automate/executor/actions/trigger/woocommerce_webhook"
+	trigger_xero_webhook "flomation.app/automate/executor/actions/trigger/xero_webhook"
 	trigger_zendesk_webhook "flomation.app/automate/executor/actions/trigger/zendesk_webhook"
 	twilio_end_call "flomation.app/automate/executor/actions/twilio/end_call"
 	twilio_make_call "flomation.app/automate/executor/actions/twilio/make_call"
@@ -1068,6 +1124,56 @@ import (
 	webflow_update_collection_item "flomation.app/automate/executor/actions/webflow/update_collection_item"
 	webflow_update_page_content "flomation.app/automate/executor/actions/webflow/update_page_content"
 	webflow_update_page_metadata "flomation.app/automate/executor/actions/webflow/update_page_metadata"
+	xero_account_create "flomation.app/automate/executor/actions/xero/account_create"
+	xero_account_get "flomation.app/automate/executor/actions/xero/account_get"
+	xero_account_list "flomation.app/automate/executor/actions/xero/account_list"
+	xero_account_update "flomation.app/automate/executor/actions/xero/account_update"
+	xero_bank_transaction_create "flomation.app/automate/executor/actions/xero/bank_transaction_create"
+	xero_bank_transaction_get "flomation.app/automate/executor/actions/xero/bank_transaction_get"
+	xero_bank_transaction_list "flomation.app/automate/executor/actions/xero/bank_transaction_list"
+	xero_bank_transfer_create "flomation.app/automate/executor/actions/xero/bank_transfer_create"
+	xero_bank_transfer_list "flomation.app/automate/executor/actions/xero/bank_transfer_list"
+	xero_contact_create "flomation.app/automate/executor/actions/xero/contact_create"
+	xero_contact_get "flomation.app/automate/executor/actions/xero/contact_get"
+	xero_contact_list "flomation.app/automate/executor/actions/xero/contact_list"
+	xero_contact_update "flomation.app/automate/executor/actions/xero/contact_update"
+	xero_credit_note_create "flomation.app/automate/executor/actions/xero/credit_note_create"
+	xero_credit_note_get "flomation.app/automate/executor/actions/xero/credit_note_get"
+	xero_credit_note_list "flomation.app/automate/executor/actions/xero/credit_note_list"
+	xero_invoice_create "flomation.app/automate/executor/actions/xero/invoice_create"
+	xero_invoice_email "flomation.app/automate/executor/actions/xero/invoice_email"
+	xero_invoice_get "flomation.app/automate/executor/actions/xero/invoice_get"
+	xero_invoice_list "flomation.app/automate/executor/actions/xero/invoice_list"
+	xero_invoice_update "flomation.app/automate/executor/actions/xero/invoice_update"
+	xero_invoice_void "flomation.app/automate/executor/actions/xero/invoice_void"
+	xero_item_create "flomation.app/automate/executor/actions/xero/item_create"
+	xero_item_get "flomation.app/automate/executor/actions/xero/item_get"
+	xero_item_list "flomation.app/automate/executor/actions/xero/item_list"
+	xero_item_update "flomation.app/automate/executor/actions/xero/item_update"
+	xero_manual_journal_create "flomation.app/automate/executor/actions/xero/manual_journal_create"
+	xero_manual_journal_get "flomation.app/automate/executor/actions/xero/manual_journal_get"
+	xero_manual_journal_list "flomation.app/automate/executor/actions/xero/manual_journal_list"
+	xero_organisation_get "flomation.app/automate/executor/actions/xero/organisation_get"
+	xero_payment_create "flomation.app/automate/executor/actions/xero/payment_create"
+	xero_payment_delete "flomation.app/automate/executor/actions/xero/payment_delete"
+	xero_payment_get "flomation.app/automate/executor/actions/xero/payment_get"
+	xero_payment_list "flomation.app/automate/executor/actions/xero/payment_list"
+	xero_purchase_order_create "flomation.app/automate/executor/actions/xero/purchase_order_create"
+	xero_purchase_order_get "flomation.app/automate/executor/actions/xero/purchase_order_get"
+	xero_purchase_order_list "flomation.app/automate/executor/actions/xero/purchase_order_list"
+	xero_purchase_order_update "flomation.app/automate/executor/actions/xero/purchase_order_update"
+	xero_quote_create "flomation.app/automate/executor/actions/xero/quote_create"
+	xero_quote_get "flomation.app/automate/executor/actions/xero/quote_get"
+	xero_quote_list "flomation.app/automate/executor/actions/xero/quote_list"
+	xero_quote_update "flomation.app/automate/executor/actions/xero/quote_update"
+	xero_report_aged_payables "flomation.app/automate/executor/actions/xero/report_aged_payables"
+	xero_report_aged_receivables "flomation.app/automate/executor/actions/xero/report_aged_receivables"
+	xero_report_balance_sheet "flomation.app/automate/executor/actions/xero/report_balance_sheet"
+	xero_report_profit_and_loss "flomation.app/automate/executor/actions/xero/report_profit_and_loss"
+	xero_tax_rate_create "flomation.app/automate/executor/actions/xero/tax_rate_create"
+	xero_tax_rate_list "flomation.app/automate/executor/actions/xero/tax_rate_list"
+	xero_tracking_category_create "flomation.app/automate/executor/actions/xero/tracking_category_create"
+	xero_tracking_category_list "flomation.app/automate/executor/actions/xero/tracking_category_list"
 )
 
 var Actions = map[string]core.Action{
@@ -1816,6 +1922,60 @@ var Actions = map[string]core.Action{
 	"plan/get_status":                                     plan_get_status.Execute,
 	"plan/revise":                                         plan_revise.Execute,
 	"plan/start":                                          plan_start.Execute,
+	"quickbooks/account_create":                           quickbooks_account_create.Execute,
+	"quickbooks/account_get":                              quickbooks_account_get.Execute,
+	"quickbooks/account_query":                            quickbooks_account_query.Execute,
+	"quickbooks/bill_create":                              quickbooks_bill_create.Execute,
+	"quickbooks/bill_get":                                 quickbooks_bill_get.Execute,
+	"quickbooks/bill_query":                               quickbooks_bill_query.Execute,
+	"quickbooks/billpayment_create":                       quickbooks_billpayment_create.Execute,
+	"quickbooks/billpayment_get":                          quickbooks_billpayment_get.Execute,
+	"quickbooks/billpayment_query":                        quickbooks_billpayment_query.Execute,
+	"quickbooks/companyinfo_get":                          quickbooks_companyinfo_get.Execute,
+	"quickbooks/creditmemo_create":                        quickbooks_creditmemo_create.Execute,
+	"quickbooks/creditmemo_get":                           quickbooks_creditmemo_get.Execute,
+	"quickbooks/creditmemo_query":                         quickbooks_creditmemo_query.Execute,
+	"quickbooks/customer_create":                          quickbooks_customer_create.Execute,
+	"quickbooks/customer_get":                             quickbooks_customer_get.Execute,
+	"quickbooks/customer_query":                           quickbooks_customer_query.Execute,
+	"quickbooks/customer_update":                          quickbooks_customer_update.Execute,
+	"quickbooks/deposit_create":                           quickbooks_deposit_create.Execute,
+	"quickbooks/deposit_get":                              quickbooks_deposit_get.Execute,
+	"quickbooks/deposit_query":                            quickbooks_deposit_query.Execute,
+	"quickbooks/employee_create":                          quickbooks_employee_create.Execute,
+	"quickbooks/employee_get":                             quickbooks_employee_get.Execute,
+	"quickbooks/employee_query":                           quickbooks_employee_query.Execute,
+	"quickbooks/estimate_create":                          quickbooks_estimate_create.Execute,
+	"quickbooks/estimate_get":                             quickbooks_estimate_get.Execute,
+	"quickbooks/estimate_query":                           quickbooks_estimate_query.Execute,
+	"quickbooks/invoice_create":                           quickbooks_invoice_create.Execute,
+	"quickbooks/invoice_get":                              quickbooks_invoice_get.Execute,
+	"quickbooks/invoice_query":                            quickbooks_invoice_query.Execute,
+	"quickbooks/invoice_send":                             quickbooks_invoice_send.Execute,
+	"quickbooks/invoice_update":                           quickbooks_invoice_update.Execute,
+	"quickbooks/invoice_void":                             quickbooks_invoice_void.Execute,
+	"quickbooks/item_create":                              quickbooks_item_create.Execute,
+	"quickbooks/item_get":                                 quickbooks_item_get.Execute,
+	"quickbooks/item_query":                               quickbooks_item_query.Execute,
+	"quickbooks/journalentry_create":                      quickbooks_journalentry_create.Execute,
+	"quickbooks/journalentry_get":                         quickbooks_journalentry_get.Execute,
+	"quickbooks/journalentry_query":                       quickbooks_journalentry_query.Execute,
+	"quickbooks/payment_create":                           quickbooks_payment_create.Execute,
+	"quickbooks/payment_get":                              quickbooks_payment_get.Execute,
+	"quickbooks/payment_query":                            quickbooks_payment_query.Execute,
+	"quickbooks/purchaseorder_create":                     quickbooks_purchaseorder_create.Execute,
+	"quickbooks/purchaseorder_get":                        quickbooks_purchaseorder_get.Execute,
+	"quickbooks/purchaseorder_query":                      quickbooks_purchaseorder_query.Execute,
+	"quickbooks/query":                                    quickbooks_query.Execute,
+	"quickbooks/report":                                   quickbooks_report.Execute,
+	"quickbooks/salesreceipt_create":                      quickbooks_salesreceipt_create.Execute,
+	"quickbooks/salesreceipt_get":                         quickbooks_salesreceipt_get.Execute,
+	"quickbooks/salesreceipt_query":                       quickbooks_salesreceipt_query.Execute,
+	"quickbooks/taxcode_get":                              quickbooks_taxcode_get.Execute,
+	"quickbooks/taxcode_query":                            quickbooks_taxcode_query.Execute,
+	"quickbooks/vendor_create":                            quickbooks_vendor_create.Execute,
+	"quickbooks/vendor_get":                               quickbooks_vendor_get.Execute,
+	"quickbooks/vendor_query":                             quickbooks_vendor_query.Execute,
 	"scheduling/acuity/appointment_cancel":                scheduling_acuity_appointment_cancel.Execute,
 	"scheduling/acuity/appointment_create":                scheduling_acuity_appointment_create.Execute,
 	"scheduling/acuity/appointment_get":                   scheduling_acuity_appointment_get.Execute,
@@ -2058,6 +2218,7 @@ var Actions = map[string]core.Action{
 	"trigger/mqtt":                                        trigger_mqtt.Execute,
 	"trigger/plan_task":                                   trigger_plan_task.Execute,
 	"trigger/qr":                                          trigger_qr.Execute,
+	"trigger/quickbooks_webhook":                          trigger_quickbooks_webhook.Execute,
 	"trigger/s3":                                          trigger_s3.Execute,
 	"trigger/schedule":                                    trigger_schedule.Execute,
 	"trigger/sendgrid_webhook":                            trigger_sendgrid_webhook.Execute,
@@ -2073,6 +2234,7 @@ var Actions = map[string]core.Action{
 	"trigger/typeform_webhook":                            trigger_typeform_webhook.Execute,
 	"trigger/webhook":                                     trigger_webhook.Execute,
 	"trigger/woocommerce_webhook":                         trigger_woocommerce_webhook.Execute,
+	"trigger/xero_webhook":                                trigger_xero_webhook.Execute,
 	"trigger/zendesk_webhook":                             trigger_zendesk_webhook.Execute,
 	"twilio/end_call":                                     twilio_end_call.Execute,
 	"twilio/make_call":                                    twilio_make_call.Execute,
@@ -2134,4 +2296,54 @@ var Actions = map[string]core.Action{
 	"webflow/update_collection_item":                      webflow_update_collection_item.Execute,
 	"webflow/update_page_content":                         webflow_update_page_content.Execute,
 	"webflow/update_page_metadata":                        webflow_update_page_metadata.Execute,
+	"xero/account_create":                                 xero_account_create.Execute,
+	"xero/account_get":                                    xero_account_get.Execute,
+	"xero/account_list":                                   xero_account_list.Execute,
+	"xero/account_update":                                 xero_account_update.Execute,
+	"xero/bank_transaction_create":                        xero_bank_transaction_create.Execute,
+	"xero/bank_transaction_get":                           xero_bank_transaction_get.Execute,
+	"xero/bank_transaction_list":                          xero_bank_transaction_list.Execute,
+	"xero/bank_transfer_create":                           xero_bank_transfer_create.Execute,
+	"xero/bank_transfer_list":                             xero_bank_transfer_list.Execute,
+	"xero/contact_create":                                 xero_contact_create.Execute,
+	"xero/contact_get":                                    xero_contact_get.Execute,
+	"xero/contact_list":                                   xero_contact_list.Execute,
+	"xero/contact_update":                                 xero_contact_update.Execute,
+	"xero/credit_note_create":                             xero_credit_note_create.Execute,
+	"xero/credit_note_get":                                xero_credit_note_get.Execute,
+	"xero/credit_note_list":                               xero_credit_note_list.Execute,
+	"xero/invoice_create":                                 xero_invoice_create.Execute,
+	"xero/invoice_email":                                  xero_invoice_email.Execute,
+	"xero/invoice_get":                                    xero_invoice_get.Execute,
+	"xero/invoice_list":                                   xero_invoice_list.Execute,
+	"xero/invoice_update":                                 xero_invoice_update.Execute,
+	"xero/invoice_void":                                   xero_invoice_void.Execute,
+	"xero/item_create":                                    xero_item_create.Execute,
+	"xero/item_get":                                       xero_item_get.Execute,
+	"xero/item_list":                                      xero_item_list.Execute,
+	"xero/item_update":                                    xero_item_update.Execute,
+	"xero/manual_journal_create":                          xero_manual_journal_create.Execute,
+	"xero/manual_journal_get":                             xero_manual_journal_get.Execute,
+	"xero/manual_journal_list":                            xero_manual_journal_list.Execute,
+	"xero/organisation_get":                               xero_organisation_get.Execute,
+	"xero/payment_create":                                 xero_payment_create.Execute,
+	"xero/payment_delete":                                 xero_payment_delete.Execute,
+	"xero/payment_get":                                    xero_payment_get.Execute,
+	"xero/payment_list":                                   xero_payment_list.Execute,
+	"xero/purchase_order_create":                          xero_purchase_order_create.Execute,
+	"xero/purchase_order_get":                             xero_purchase_order_get.Execute,
+	"xero/purchase_order_list":                            xero_purchase_order_list.Execute,
+	"xero/purchase_order_update":                          xero_purchase_order_update.Execute,
+	"xero/quote_create":                                   xero_quote_create.Execute,
+	"xero/quote_get":                                      xero_quote_get.Execute,
+	"xero/quote_list":                                     xero_quote_list.Execute,
+	"xero/quote_update":                                   xero_quote_update.Execute,
+	"xero/report_aged_payables":                           xero_report_aged_payables.Execute,
+	"xero/report_aged_receivables":                        xero_report_aged_receivables.Execute,
+	"xero/report_balance_sheet":                           xero_report_balance_sheet.Execute,
+	"xero/report_profit_and_loss":                         xero_report_profit_and_loss.Execute,
+	"xero/tax_rate_create":                                xero_tax_rate_create.Execute,
+	"xero/tax_rate_list":                                  xero_tax_rate_list.Execute,
+	"xero/tracking_category_create":                       xero_tracking_category_create.Execute,
+	"xero/tracking_category_list":                         xero_tracking_category_list.Execute,
 }
