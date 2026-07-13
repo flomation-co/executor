@@ -40,13 +40,13 @@ const (
 )
 
 var Inputs = [...]core.Connection{
-	{Name: "provider", Type: core.ConnectionTypeString, Label: "Embedding Provider", Required: true, Options: ai_common.EmbedProviderOptions},
+	{Name: "provider", Type: core.ConnectionTypeString, Label: "Embedding Provider", Required: true, Options: []core.ConnectionOption{{Name: "OpenAI", Value: "openai"}, {Name: "OpenAI-compatible (Azure, vLLM, LocalAI, TEI…)", Value: "openai_compatible"}, {Name: "Ollama (self-hosted)", Value: "ollama"}, {Name: "AWS Bedrock (Titan)", Value: "bedrock"}}},
 	{Name: "api_key", Type: core.ConnectionTypeSecret, Label: "API Key", Visible: &core.VisibleWhen{Field: "provider", Values: []string{"openai", "openai_compatible"}}},
 	{Name: "base_url", Type: core.ConnectionTypeString, Label: "Base URL", Placeholder: "http://ollama.internal:11434", Visible: &core.VisibleWhen{Field: "provider", Values: []string{"openai_compatible", "ollama"}}},
 	{Name: "access_key", Type: core.ConnectionTypeSecret, Label: "AWS Access Key ID", Visible: &core.VisibleWhen{Field: "provider", Values: []string{"bedrock"}}},
 	{Name: "secret_key", Type: core.ConnectionTypeSecret, Label: "AWS Secret Access Key", Visible: &core.VisibleWhen{Field: "provider", Values: []string{"bedrock"}}},
 	{Name: "aws_region", Type: core.ConnectionTypeString, Label: "AWS Region", Placeholder: "us-east-1", Visible: &core.VisibleWhen{Field: "provider", Values: []string{"bedrock"}}},
-	{Name: "model", Type: core.ConnectionTypeString, Label: "Model", Placeholder: "text-embedding-3-small", Required: true, Options: ai_common.EmbedModelOptions},
+	{Name: "model", Type: core.ConnectionTypeComboBox, Label: "Model", Placeholder: "text-embedding-3-small", Required: true, Options: []core.ConnectionOption{{Name: "OpenAI text-embedding-3-small (1536 dimensions)", Value: "text-embedding-3-small"}, {Name: "OpenAI text-embedding-3-large (3072 dimensions)", Value: "text-embedding-3-large"}, {Name: "OpenAI text-embedding-ada-002 (1536 dimensions)", Value: "text-embedding-ada-002"}, {Name: "Bedrock Titan Text v2 (1024 dimensions)", Value: "amazon.titan-embed-text-v2:0"}, {Name: "Bedrock Titan Text v1 (1536 dimensions)", Value: "amazon.titan-embed-text-v1"}, {Name: "Ollama nomic-embed-text (768 dimensions)", Value: "nomic-embed-text"}, {Name: "Ollama mxbai-embed-large (1024 dimensions)", Value: "mxbai-embed-large"}}},
 	{Name: "text", Type: core.ConnectionTypeText, Label: "Text", Placeholder: "The text to embed"},
 	{Name: "texts", Type: core.ConnectionTypeObject, Label: "Texts (JSON array)", Placeholder: `Embed several at once: ["first", "second"] — overrides Text above`},
 	{Name: "dimensions", Type: core.ConnectionTypeInteger, Label: "Dimensions", Placeholder: "Leave empty for the model's default. Must match your vector table (OpenAI 3-small = 1536, Bedrock Titan v2 = 1024)"},

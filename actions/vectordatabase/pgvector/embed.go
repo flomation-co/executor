@@ -53,7 +53,7 @@ var EmbedInputs = []core.Connection{
 	{Name: "access_key", Type: core.ConnectionTypeSecret, Label: "AWS Access Key ID", Visible: &core.VisibleWhen{Field: "provider", Values: []string{"bedrock"}}},
 	{Name: "secret_key", Type: core.ConnectionTypeSecret, Label: "AWS Secret Access Key", Visible: &core.VisibleWhen{Field: "provider", Values: []string{"bedrock"}}},
 	{Name: "aws_region", Type: core.ConnectionTypeString, Label: "AWS Region", Placeholder: "us-east-1", Visible: &core.VisibleWhen{Field: "provider", Values: []string{"bedrock"}}},
-	{Name: "model", Type: core.ConnectionTypeString, Label: "Embedding Model", Placeholder: "text-embedding-3-small", Options: ai_common.EmbedModelOptions, Visible: &core.VisibleWhen{Field: "embedding_source", Values: []string{"inline"}}},
+	{Name: "model", Type: core.ConnectionTypeComboBox, Label: "Embedding Model", Placeholder: "text-embedding-3-small", Options: ai_common.EmbedModelOptions, Visible: &core.VisibleWhen{Field: "embedding_source", Values: []string{"inline"}}},
 	{Name: "dimensions", Type: core.ConnectionTypeInteger, Label: "Dimensions", Placeholder: "Leave empty for the model's default — must match the table", Visible: &core.VisibleWhen{Field: "embedding_source", Values: []string{"inline"}}},
 }
 

@@ -304,6 +304,8 @@ func inspectPackage(dir string) map[string]ManifestEntry {
 										value = "code"
 									case "ConnectionTypeMoney":
 										value = "money"
+									case "ConnectionTypeComboBox":
+										value = "combobox"
 									}
 								case *ast.Ident:
 									if v.Name == "true" {

@@ -1358,7 +1358,7 @@
     ]
   },
   "ai/embed_text": {
-    "hash": "7c212fe9ec078a307abdb9d1137318768a171c535ac6f16388d0ee4d28b7da34",
+    "hash": "52eaba3db6fd3365f2bb74756487f02f307733798a7902bf0f866fbea8f20ddd",
     "author": "Ethan Tan",
     "organisation": "Flomation",
     "name": "Embed Text",
@@ -1379,7 +1379,25 @@
         "value": null,
         "label": "Embedding Provider",
         "placeholder": "",
-        "required": true
+        "required": true,
+        "options": [
+          {
+            "name": "OpenAI",
+            "value": "openai"
+          },
+          {
+            "name": "OpenAI-compatible (Azure, vLLM, LocalAI, TEI…)",
+            "value": "openai_compatible"
+          },
+          {
+            "name": "Ollama (self-hosted)",
+            "value": "ollama"
+          },
+          {
+            "name": "AWS Bedrock (Titan)",
+            "value": "bedrock"
+          }
+        ]
       },
       {
         "name": "api_key",
@@ -1450,11 +1468,41 @@
       },
       {
         "name": "model",
-        "type": "string",
+        "type": "combobox",
         "value": null,
         "label": "Model",
         "placeholder": "text-embedding-3-small",
-        "required": true
+        "required": true,
+        "options": [
+          {
+            "name": "OpenAI text-embedding-3-small (1536 dimensions)",
+            "value": "text-embedding-3-small"
+          },
+          {
+            "name": "OpenAI text-embedding-3-large (3072 dimensions)",
+            "value": "text-embedding-3-large"
+          },
+          {
+            "name": "OpenAI text-embedding-ada-002 (1536 dimensions)",
+            "value": "text-embedding-ada-002"
+          },
+          {
+            "name": "Bedrock Titan Text v2 (1024 dimensions)",
+            "value": "amazon.titan-embed-text-v2:0"
+          },
+          {
+            "name": "Bedrock Titan Text v1 (1536 dimensions)",
+            "value": "amazon.titan-embed-text-v1"
+          },
+          {
+            "name": "Ollama nomic-embed-text (768 dimensions)",
+            "value": "nomic-embed-text"
+          },
+          {
+            "name": "Ollama mxbai-embed-large (1024 dimensions)",
+            "value": "mxbai-embed-large"
+          }
+        ]
       },
       {
         "name": "text",
@@ -126807,7 +126855,7 @@
     ]
   },
   "vectordatabase/pgvector/document_count": {
-    "hash": "5638e94222d83fdea532770fd102a6a918bfb84e2ec0e026f292ae80a72bcb6d",
+    "hash": "d9bc582d4a2f52b2676202504c6b2adc754fe14bd393b9649477d283324d25b5",
     "author": "Ethan Tan",
     "organisation": "Flomation",
     "name": "Count Documents",
@@ -126871,7 +126919,33 @@
         "type": "string",
         "value": null,
         "label": "SSL Mode",
-        "placeholder": "disable"
+        "placeholder": "disable",
+        "options": [
+          {
+            "name": "Disable — no encryption",
+            "value": "disable"
+          },
+          {
+            "name": "Allow",
+            "value": "allow"
+          },
+          {
+            "name": "Prefer — encrypt if the server offers it",
+            "value": "prefer"
+          },
+          {
+            "name": "Require — encrypt, but don't verify the certificate",
+            "value": "require"
+          },
+          {
+            "name": "Verify CA — encrypt and check the certificate authority",
+            "value": "verify-ca"
+          },
+          {
+            "name": "Verify Full — encrypt and check the hostname too",
+            "value": "verify-full"
+          }
+        ]
       },
       {
         "name": "schema",
@@ -126963,7 +127037,7 @@
     ]
   },
   "vectordatabase/pgvector/document_delete": {
-    "hash": "9137b5ba052505762240fe76bec3641f82f8e66f1cf1985b85ea8243f84e2708",
+    "hash": "d450dfbb2fa8b5bbe1f186fa266a212b91b01547ea0df74d18dcb2a9dd478949",
     "author": "Ethan Tan",
     "organisation": "Flomation",
     "name": "Delete Documents",
@@ -127027,7 +127101,33 @@
         "type": "string",
         "value": null,
         "label": "SSL Mode",
-        "placeholder": "disable"
+        "placeholder": "disable",
+        "options": [
+          {
+            "name": "Disable — no encryption",
+            "value": "disable"
+          },
+          {
+            "name": "Allow",
+            "value": "allow"
+          },
+          {
+            "name": "Prefer — encrypt if the server offers it",
+            "value": "prefer"
+          },
+          {
+            "name": "Require — encrypt, but don't verify the certificate",
+            "value": "require"
+          },
+          {
+            "name": "Verify CA — encrypt and check the certificate authority",
+            "value": "verify-ca"
+          },
+          {
+            "name": "Verify Full — encrypt and check the hostname too",
+            "value": "verify-full"
+          }
+        ]
       },
       {
         "name": "schema",
@@ -127190,7 +127290,7 @@
     ]
   },
   "vectordatabase/pgvector/document_get": {
-    "hash": "fb5f9da825492ab775d54aa07d169692b4b5329767427ba3616ff333eb5fbc56",
+    "hash": "e94489cb93408626ef9cd78c5afb56c2d95ae32094491f9d662102476b1bef39",
     "author": "Ethan Tan",
     "organisation": "Flomation",
     "name": "Get Document",
@@ -127254,7 +127354,33 @@
         "type": "string",
         "value": null,
         "label": "SSL Mode",
-        "placeholder": "disable"
+        "placeholder": "disable",
+        "options": [
+          {
+            "name": "Disable — no encryption",
+            "value": "disable"
+          },
+          {
+            "name": "Allow",
+            "value": "allow"
+          },
+          {
+            "name": "Prefer — encrypt if the server offers it",
+            "value": "prefer"
+          },
+          {
+            "name": "Require — encrypt, but don't verify the certificate",
+            "value": "require"
+          },
+          {
+            "name": "Verify CA — encrypt and check the certificate authority",
+            "value": "verify-ca"
+          },
+          {
+            "name": "Verify Full — encrypt and check the hostname too",
+            "value": "verify-full"
+          }
+        ]
       },
       {
         "name": "schema",
@@ -127382,7 +127508,7 @@
     ]
   },
   "vectordatabase/pgvector/document_insert": {
-    "hash": "f5cbafb386093c87e5ec7e94e5b80e0b6ab23a03ab35215c0f823bd48876dbe3",
+    "hash": "ccf45f1db5e6a46c4c2fb1526e3481ca15a886f08d733158062eea5614b0e2b4",
     "author": "Ethan Tan",
     "organisation": "Flomation",
     "name": "Insert Documents",
@@ -127446,7 +127572,33 @@
         "type": "string",
         "value": null,
         "label": "SSL Mode",
-        "placeholder": "disable"
+        "placeholder": "disable",
+        "options": [
+          {
+            "name": "Disable — no encryption",
+            "value": "disable"
+          },
+          {
+            "name": "Allow",
+            "value": "allow"
+          },
+          {
+            "name": "Prefer — encrypt if the server offers it",
+            "value": "prefer"
+          },
+          {
+            "name": "Require — encrypt, but don't verify the certificate",
+            "value": "require"
+          },
+          {
+            "name": "Verify CA — encrypt and check the certificate authority",
+            "value": "verify-ca"
+          },
+          {
+            "name": "Verify Full — encrypt and check the hostname too",
+            "value": "verify-full"
+          }
+        ]
       },
       {
         "name": "schema",
@@ -127497,7 +127649,17 @@
         "value": null,
         "label": "Embedding Source",
         "placeholder": "",
-        "required": true
+        "required": true,
+        "options": [
+          {
+            "name": "Embed the text for me",
+            "value": "inline"
+          },
+          {
+            "name": "Use a vector from a previous step",
+            "value": "vector"
+          }
+        ]
       },
       {
         "name": "embedding",
@@ -127519,6 +127681,24 @@
         "label": "Embedding Provider",
         "placeholder": "",
         "required": true,
+        "options": [
+          {
+            "name": "OpenAI",
+            "value": "openai"
+          },
+          {
+            "name": "OpenAI-compatible (Azure, vLLM, LocalAI, TEI…)",
+            "value": "openai_compatible"
+          },
+          {
+            "name": "Ollama (self-hosted)",
+            "value": "ollama"
+          },
+          {
+            "name": "AWS Bedrock (Titan)",
+            "value": "bedrock"
+          }
+        ],
         "visible_when": {
           "field": "embedding_source",
           "values": [
@@ -127595,10 +127775,40 @@
       },
       {
         "name": "model",
-        "type": "string",
+        "type": "combobox",
         "value": null,
         "label": "Embedding Model",
         "placeholder": "text-embedding-3-small",
+        "options": [
+          {
+            "name": "OpenAI text-embedding-3-small (1536 dimensions)",
+            "value": "text-embedding-3-small"
+          },
+          {
+            "name": "OpenAI text-embedding-3-large (3072 dimensions)",
+            "value": "text-embedding-3-large"
+          },
+          {
+            "name": "OpenAI text-embedding-ada-002 (1536 dimensions)",
+            "value": "text-embedding-ada-002"
+          },
+          {
+            "name": "Bedrock Titan Text v2 (1024 dimensions)",
+            "value": "amazon.titan-embed-text-v2:0"
+          },
+          {
+            "name": "Bedrock Titan Text v1 (1536 dimensions)",
+            "value": "amazon.titan-embed-text-v1"
+          },
+          {
+            "name": "Ollama nomic-embed-text (768 dimensions)",
+            "value": "nomic-embed-text"
+          },
+          {
+            "name": "Ollama mxbai-embed-large (1024 dimensions)",
+            "value": "mxbai-embed-large"
+          }
+        ],
         "visible_when": {
           "field": "embedding_source",
           "values": [
@@ -127743,7 +127953,7 @@
     ]
   },
   "vectordatabase/pgvector/document_list": {
-    "hash": "4b869a897cc9feea17340d2af83d6b2835131151977b78bede6ea420a8f288e9",
+    "hash": "e6eea93c21154b28c35337fd8e1e930110b8611aa3df898dd76dba48fe2fdfb2",
     "author": "Ethan Tan",
     "organisation": "Flomation",
     "name": "List Documents",
@@ -127807,7 +128017,33 @@
         "type": "string",
         "value": null,
         "label": "SSL Mode",
-        "placeholder": "disable"
+        "placeholder": "disable",
+        "options": [
+          {
+            "name": "Disable — no encryption",
+            "value": "disable"
+          },
+          {
+            "name": "Allow",
+            "value": "allow"
+          },
+          {
+            "name": "Prefer — encrypt if the server offers it",
+            "value": "prefer"
+          },
+          {
+            "name": "Require — encrypt, but don't verify the certificate",
+            "value": "require"
+          },
+          {
+            "name": "Verify CA — encrypt and check the certificate authority",
+            "value": "verify-ca"
+          },
+          {
+            "name": "Verify Full — encrypt and check the hostname too",
+            "value": "verify-full"
+          }
+        ]
       },
       {
         "name": "schema",
@@ -127986,7 +128222,7 @@
     ]
   },
   "vectordatabase/pgvector/document_search": {
-    "hash": "9417e9509b66ae52f52cc99e7d652476368080ec7f55c5217e58c10ae4cd5efd",
+    "hash": "e46bebd824d8720a5f41018dd438949a24d622dabe2a63c221e31de029247687",
     "author": "Ethan Tan",
     "organisation": "Flomation",
     "name": "Search Documents",
@@ -128050,7 +128286,33 @@
         "type": "string",
         "value": null,
         "label": "SSL Mode",
-        "placeholder": "disable"
+        "placeholder": "disable",
+        "options": [
+          {
+            "name": "Disable — no encryption",
+            "value": "disable"
+          },
+          {
+            "name": "Allow",
+            "value": "allow"
+          },
+          {
+            "name": "Prefer — encrypt if the server offers it",
+            "value": "prefer"
+          },
+          {
+            "name": "Require — encrypt, but don't verify the certificate",
+            "value": "require"
+          },
+          {
+            "name": "Verify CA — encrypt and check the certificate authority",
+            "value": "verify-ca"
+          },
+          {
+            "name": "Verify Full — encrypt and check the hostname too",
+            "value": "verify-full"
+          }
+        ]
       },
       {
         "name": "schema",
@@ -128101,7 +128363,17 @@
         "value": null,
         "label": "Embedding Source",
         "placeholder": "",
-        "required": true
+        "required": true,
+        "options": [
+          {
+            "name": "Embed the text for me",
+            "value": "inline"
+          },
+          {
+            "name": "Use a vector from a previous step",
+            "value": "vector"
+          }
+        ]
       },
       {
         "name": "embedding",
@@ -128123,6 +128395,24 @@
         "label": "Embedding Provider",
         "placeholder": "",
         "required": true,
+        "options": [
+          {
+            "name": "OpenAI",
+            "value": "openai"
+          },
+          {
+            "name": "OpenAI-compatible (Azure, vLLM, LocalAI, TEI…)",
+            "value": "openai_compatible"
+          },
+          {
+            "name": "Ollama (self-hosted)",
+            "value": "ollama"
+          },
+          {
+            "name": "AWS Bedrock (Titan)",
+            "value": "bedrock"
+          }
+        ],
         "visible_when": {
           "field": "embedding_source",
           "values": [
@@ -128199,10 +128489,40 @@
       },
       {
         "name": "model",
-        "type": "string",
+        "type": "combobox",
         "value": null,
         "label": "Embedding Model",
         "placeholder": "text-embedding-3-small",
+        "options": [
+          {
+            "name": "OpenAI text-embedding-3-small (1536 dimensions)",
+            "value": "text-embedding-3-small"
+          },
+          {
+            "name": "OpenAI text-embedding-3-large (3072 dimensions)",
+            "value": "text-embedding-3-large"
+          },
+          {
+            "name": "OpenAI text-embedding-ada-002 (1536 dimensions)",
+            "value": "text-embedding-ada-002"
+          },
+          {
+            "name": "Bedrock Titan Text v2 (1024 dimensions)",
+            "value": "amazon.titan-embed-text-v2:0"
+          },
+          {
+            "name": "Bedrock Titan Text v1 (1536 dimensions)",
+            "value": "amazon.titan-embed-text-v1"
+          },
+          {
+            "name": "Ollama nomic-embed-text (768 dimensions)",
+            "value": "nomic-embed-text"
+          },
+          {
+            "name": "Ollama mxbai-embed-large (1024 dimensions)",
+            "value": "mxbai-embed-large"
+          }
+        ],
         "visible_when": {
           "field": "embedding_source",
           "values": [
@@ -128248,7 +128568,21 @@
         "type": "string",
         "value": null,
         "label": "Distance Metric",
-        "placeholder": "cosine"
+        "placeholder": "cosine",
+        "options": [
+          {
+            "name": "Cosine — best for text embeddings",
+            "value": "cosine"
+          },
+          {
+            "name": "Inner Product",
+            "value": "inner_product"
+          },
+          {
+            "name": "Euclidean (L2)",
+            "value": "euclidean"
+          }
+        ]
       },
       {
         "name": "min_score",
@@ -128360,7 +128694,7 @@
     ]
   },
   "vectordatabase/pgvector/document_update": {
-    "hash": "3b1b42072d7c7cc4f9660a33e19a92c856530af8a6355a32343d0a7d38866687",
+    "hash": "95127cba33f867f175e693e5c2ea0a35e0945969793d7e5bdd07f59762113966",
     "author": "Ethan Tan",
     "organisation": "Flomation",
     "name": "Update Document",
@@ -128424,7 +128758,33 @@
         "type": "string",
         "value": null,
         "label": "SSL Mode",
-        "placeholder": "disable"
+        "placeholder": "disable",
+        "options": [
+          {
+            "name": "Disable — no encryption",
+            "value": "disable"
+          },
+          {
+            "name": "Allow",
+            "value": "allow"
+          },
+          {
+            "name": "Prefer — encrypt if the server offers it",
+            "value": "prefer"
+          },
+          {
+            "name": "Require — encrypt, but don't verify the certificate",
+            "value": "require"
+          },
+          {
+            "name": "Verify CA — encrypt and check the certificate authority",
+            "value": "verify-ca"
+          },
+          {
+            "name": "Verify Full — encrypt and check the hostname too",
+            "value": "verify-full"
+          }
+        ]
       },
       {
         "name": "schema",
@@ -128475,7 +128835,17 @@
         "value": null,
         "label": "Embedding Source",
         "placeholder": "",
-        "required": true
+        "required": true,
+        "options": [
+          {
+            "name": "Embed the text for me",
+            "value": "inline"
+          },
+          {
+            "name": "Use a vector from a previous step",
+            "value": "vector"
+          }
+        ]
       },
       {
         "name": "embedding",
@@ -128497,6 +128867,24 @@
         "label": "Embedding Provider",
         "placeholder": "",
         "required": true,
+        "options": [
+          {
+            "name": "OpenAI",
+            "value": "openai"
+          },
+          {
+            "name": "OpenAI-compatible (Azure, vLLM, LocalAI, TEI…)",
+            "value": "openai_compatible"
+          },
+          {
+            "name": "Ollama (self-hosted)",
+            "value": "ollama"
+          },
+          {
+            "name": "AWS Bedrock (Titan)",
+            "value": "bedrock"
+          }
+        ],
         "visible_when": {
           "field": "embedding_source",
           "values": [
@@ -128573,10 +128961,40 @@
       },
       {
         "name": "model",
-        "type": "string",
+        "type": "combobox",
         "value": null,
         "label": "Embedding Model",
         "placeholder": "text-embedding-3-small",
+        "options": [
+          {
+            "name": "OpenAI text-embedding-3-small (1536 dimensions)",
+            "value": "text-embedding-3-small"
+          },
+          {
+            "name": "OpenAI text-embedding-3-large (3072 dimensions)",
+            "value": "text-embedding-3-large"
+          },
+          {
+            "name": "OpenAI text-embedding-ada-002 (1536 dimensions)",
+            "value": "text-embedding-ada-002"
+          },
+          {
+            "name": "Bedrock Titan Text v2 (1024 dimensions)",
+            "value": "amazon.titan-embed-text-v2:0"
+          },
+          {
+            "name": "Bedrock Titan Text v1 (1536 dimensions)",
+            "value": "amazon.titan-embed-text-v1"
+          },
+          {
+            "name": "Ollama nomic-embed-text (768 dimensions)",
+            "value": "nomic-embed-text"
+          },
+          {
+            "name": "Ollama mxbai-embed-large (1024 dimensions)",
+            "value": "mxbai-embed-large"
+          }
+        ],
         "visible_when": {
           "field": "embedding_source",
           "values": [
@@ -128680,7 +129098,7 @@
     ]
   },
   "vectordatabase/pgvector/document_upsert": {
-    "hash": "7dd284c5129002e363bf39c33f993cb9d58f8b21757bccb3bfe2db6c2514cc73",
+    "hash": "ddbb615f351bb22d7da75dd600f01365cc8d38884904c0216f55d2a180cb45aa",
     "author": "Ethan Tan",
     "organisation": "Flomation",
     "name": "Upsert Documents",
@@ -128744,7 +129162,33 @@
         "type": "string",
         "value": null,
         "label": "SSL Mode",
-        "placeholder": "disable"
+        "placeholder": "disable",
+        "options": [
+          {
+            "name": "Disable — no encryption",
+            "value": "disable"
+          },
+          {
+            "name": "Allow",
+            "value": "allow"
+          },
+          {
+            "name": "Prefer — encrypt if the server offers it",
+            "value": "prefer"
+          },
+          {
+            "name": "Require — encrypt, but don't verify the certificate",
+            "value": "require"
+          },
+          {
+            "name": "Verify CA — encrypt and check the certificate authority",
+            "value": "verify-ca"
+          },
+          {
+            "name": "Verify Full — encrypt and check the hostname too",
+            "value": "verify-full"
+          }
+        ]
       },
       {
         "name": "schema",
@@ -128795,7 +129239,17 @@
         "value": null,
         "label": "Embedding Source",
         "placeholder": "",
-        "required": true
+        "required": true,
+        "options": [
+          {
+            "name": "Embed the text for me",
+            "value": "inline"
+          },
+          {
+            "name": "Use a vector from a previous step",
+            "value": "vector"
+          }
+        ]
       },
       {
         "name": "embedding",
@@ -128817,6 +129271,24 @@
         "label": "Embedding Provider",
         "placeholder": "",
         "required": true,
+        "options": [
+          {
+            "name": "OpenAI",
+            "value": "openai"
+          },
+          {
+            "name": "OpenAI-compatible (Azure, vLLM, LocalAI, TEI…)",
+            "value": "openai_compatible"
+          },
+          {
+            "name": "Ollama (self-hosted)",
+            "value": "ollama"
+          },
+          {
+            "name": "AWS Bedrock (Titan)",
+            "value": "bedrock"
+          }
+        ],
         "visible_when": {
           "field": "embedding_source",
           "values": [
@@ -128893,10 +129365,40 @@
       },
       {
         "name": "model",
-        "type": "string",
+        "type": "combobox",
         "value": null,
         "label": "Embedding Model",
         "placeholder": "text-embedding-3-small",
+        "options": [
+          {
+            "name": "OpenAI text-embedding-3-small (1536 dimensions)",
+            "value": "text-embedding-3-small"
+          },
+          {
+            "name": "OpenAI text-embedding-3-large (3072 dimensions)",
+            "value": "text-embedding-3-large"
+          },
+          {
+            "name": "OpenAI text-embedding-ada-002 (1536 dimensions)",
+            "value": "text-embedding-ada-002"
+          },
+          {
+            "name": "Bedrock Titan Text v2 (1024 dimensions)",
+            "value": "amazon.titan-embed-text-v2:0"
+          },
+          {
+            "name": "Bedrock Titan Text v1 (1536 dimensions)",
+            "value": "amazon.titan-embed-text-v1"
+          },
+          {
+            "name": "Ollama nomic-embed-text (768 dimensions)",
+            "value": "nomic-embed-text"
+          },
+          {
+            "name": "Ollama mxbai-embed-large (1024 dimensions)",
+            "value": "mxbai-embed-large"
+          }
+        ],
         "visible_when": {
           "field": "embedding_source",
           "values": [
@@ -129050,7 +129552,7 @@
     ]
   },
   "vectordatabase/pgvector/hybrid_search": {
-    "hash": "6b2fdbb27408e369c416741e891a6a3df3bde368c4f5f3e02e710f71e29ba185",
+    "hash": "1ca057f4d890f18d307f823cf8da533d9a145554b9a376e50c0fe2aa48f28fc4",
     "author": "Ethan Tan",
     "organisation": "Flomation",
     "name": "Hybrid Search",
@@ -129114,7 +129616,33 @@
         "type": "string",
         "value": null,
         "label": "SSL Mode",
-        "placeholder": "disable"
+        "placeholder": "disable",
+        "options": [
+          {
+            "name": "Disable — no encryption",
+            "value": "disable"
+          },
+          {
+            "name": "Allow",
+            "value": "allow"
+          },
+          {
+            "name": "Prefer — encrypt if the server offers it",
+            "value": "prefer"
+          },
+          {
+            "name": "Require — encrypt, but don't verify the certificate",
+            "value": "require"
+          },
+          {
+            "name": "Verify CA — encrypt and check the certificate authority",
+            "value": "verify-ca"
+          },
+          {
+            "name": "Verify Full — encrypt and check the hostname too",
+            "value": "verify-full"
+          }
+        ]
       },
       {
         "name": "schema",
@@ -129165,7 +129693,17 @@
         "value": null,
         "label": "Embedding Source",
         "placeholder": "",
-        "required": true
+        "required": true,
+        "options": [
+          {
+            "name": "Embed the text for me",
+            "value": "inline"
+          },
+          {
+            "name": "Use a vector from a previous step",
+            "value": "vector"
+          }
+        ]
       },
       {
         "name": "embedding",
@@ -129187,6 +129725,24 @@
         "label": "Embedding Provider",
         "placeholder": "",
         "required": true,
+        "options": [
+          {
+            "name": "OpenAI",
+            "value": "openai"
+          },
+          {
+            "name": "OpenAI-compatible (Azure, vLLM, LocalAI, TEI…)",
+            "value": "openai_compatible"
+          },
+          {
+            "name": "Ollama (self-hosted)",
+            "value": "ollama"
+          },
+          {
+            "name": "AWS Bedrock (Titan)",
+            "value": "bedrock"
+          }
+        ],
         "visible_when": {
           "field": "embedding_source",
           "values": [
@@ -129263,10 +129819,40 @@
       },
       {
         "name": "model",
-        "type": "string",
+        "type": "combobox",
         "value": null,
         "label": "Embedding Model",
         "placeholder": "text-embedding-3-small",
+        "options": [
+          {
+            "name": "OpenAI text-embedding-3-small (1536 dimensions)",
+            "value": "text-embedding-3-small"
+          },
+          {
+            "name": "OpenAI text-embedding-3-large (3072 dimensions)",
+            "value": "text-embedding-3-large"
+          },
+          {
+            "name": "OpenAI text-embedding-ada-002 (1536 dimensions)",
+            "value": "text-embedding-ada-002"
+          },
+          {
+            "name": "Bedrock Titan Text v2 (1024 dimensions)",
+            "value": "amazon.titan-embed-text-v2:0"
+          },
+          {
+            "name": "Bedrock Titan Text v1 (1536 dimensions)",
+            "value": "amazon.titan-embed-text-v1"
+          },
+          {
+            "name": "Ollama nomic-embed-text (768 dimensions)",
+            "value": "nomic-embed-text"
+          },
+          {
+            "name": "Ollama mxbai-embed-large (1024 dimensions)",
+            "value": "mxbai-embed-large"
+          }
+        ],
         "visible_when": {
           "field": "embedding_source",
           "values": [
@@ -129313,7 +129899,21 @@
         "type": "string",
         "value": null,
         "label": "Distance Metric",
-        "placeholder": "cosine"
+        "placeholder": "cosine",
+        "options": [
+          {
+            "name": "Cosine — best for text embeddings",
+            "value": "cosine"
+          },
+          {
+            "name": "Inner Product",
+            "value": "inner_product"
+          },
+          {
+            "name": "Euclidean (L2)",
+            "value": "euclidean"
+          }
+        ]
       },
       {
         "name": "fts_language",
@@ -129425,7 +130025,7 @@
     ]
   },
   "vectordatabase/pgvector/index_create": {
-    "hash": "6b573f841e1d65c21a48700ade08538187b7805b2237ee282e779b9721d3b6e0",
+    "hash": "998031d8da70389aeeb2a00a5593ae991f383550fa36e232720c5c9554e9030c",
     "author": "Ethan Tan",
     "organisation": "Flomation",
     "name": "Create Search Index",
@@ -129489,7 +130089,33 @@
         "type": "string",
         "value": null,
         "label": "SSL Mode",
-        "placeholder": "disable"
+        "placeholder": "disable",
+        "options": [
+          {
+            "name": "Disable — no encryption",
+            "value": "disable"
+          },
+          {
+            "name": "Allow",
+            "value": "allow"
+          },
+          {
+            "name": "Prefer — encrypt if the server offers it",
+            "value": "prefer"
+          },
+          {
+            "name": "Require — encrypt, but don't verify the certificate",
+            "value": "require"
+          },
+          {
+            "name": "Verify CA — encrypt and check the certificate authority",
+            "value": "verify-ca"
+          },
+          {
+            "name": "Verify Full — encrypt and check the hostname too",
+            "value": "verify-full"
+          }
+        ]
       },
       {
         "name": "schema",
@@ -129535,7 +130161,21 @@
         "type": "string",
         "value": null,
         "label": "Distance Metric",
-        "placeholder": "Must match the metric your searches use, or they can't use the index"
+        "placeholder": "Must match the metric your searches use, or they can't use the index",
+        "options": [
+          {
+            "name": "Cosine — best for text embeddings",
+            "value": "cosine"
+          },
+          {
+            "name": "Inner Product",
+            "value": "inner_product"
+          },
+          {
+            "name": "Euclidean (L2)",
+            "value": "euclidean"
+          }
+        ]
       },
       {
         "name": "hnsw_m",
@@ -129637,7 +130277,7 @@
     ]
   },
   "vectordatabase/pgvector/table_create": {
-    "hash": "a5fa8b9109b456e2fdd05cfb66fce550094552e693c2c2cf25a99e5a15ce4db0",
+    "hash": "523bb7b5f3b57dde5c8f7a3b5988fb97ba8c5ca159a414fed0c0be8c20cb65e6",
     "author": "Ethan Tan",
     "organisation": "Flomation",
     "name": "Create Vector Table",
@@ -129701,7 +130341,33 @@
         "type": "string",
         "value": null,
         "label": "SSL Mode",
-        "placeholder": "disable"
+        "placeholder": "disable",
+        "options": [
+          {
+            "name": "Disable — no encryption",
+            "value": "disable"
+          },
+          {
+            "name": "Allow",
+            "value": "allow"
+          },
+          {
+            "name": "Prefer — encrypt if the server offers it",
+            "value": "prefer"
+          },
+          {
+            "name": "Require — encrypt, but don't verify the certificate",
+            "value": "require"
+          },
+          {
+            "name": "Verify CA — encrypt and check the certificate authority",
+            "value": "verify-ca"
+          },
+          {
+            "name": "Verify Full — encrypt and check the hostname too",
+            "value": "verify-full"
+          }
+        ]
       },
       {
         "name": "schema",
@@ -129796,7 +130462,21 @@
         "type": "string",
         "value": null,
         "label": "Distance Metric",
-        "placeholder": "cosine"
+        "placeholder": "cosine",
+        "options": [
+          {
+            "name": "Cosine — best for text embeddings",
+            "value": "cosine"
+          },
+          {
+            "name": "Inner Product",
+            "value": "inner_product"
+          },
+          {
+            "name": "Euclidean (L2)",
+            "value": "euclidean"
+          }
+        ]
       },
       {
         "name": "enable_hybrid_search",
@@ -129866,7 +130546,7 @@
     ]
   },
   "vectordatabase/pgvector/table_info": {
-    "hash": "473a5c2ae4524aa787ccbd96905e4cf59fc216386e2dd0f09555dd236c31f745",
+    "hash": "b13db047560a6acb7560c4acfc2fc57bac44d53423d45ef4009c6416aeea5db7",
     "author": "Ethan Tan",
     "organisation": "Flomation",
     "name": "Inspect Vector Table",
@@ -129930,7 +130610,33 @@
         "type": "string",
         "value": null,
         "label": "SSL Mode",
-        "placeholder": "disable"
+        "placeholder": "disable",
+        "options": [
+          {
+            "name": "Disable — no encryption",
+            "value": "disable"
+          },
+          {
+            "name": "Allow",
+            "value": "allow"
+          },
+          {
+            "name": "Prefer — encrypt if the server offers it",
+            "value": "prefer"
+          },
+          {
+            "name": "Require — encrypt, but don't verify the certificate",
+            "value": "require"
+          },
+          {
+            "name": "Verify CA — encrypt and check the certificate authority",
+            "value": "verify-ca"
+          },
+          {
+            "name": "Verify Full — encrypt and check the hostname too",
+            "value": "verify-full"
+          }
+        ]
       },
       {
         "name": "schema",

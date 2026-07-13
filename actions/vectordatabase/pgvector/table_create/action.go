@@ -51,7 +51,7 @@ var Inputs = [...]core.Connection{
 	{Name: "database", Type: core.ConnectionTypeString, Label: "Database", Placeholder: "vectordb", Required: true},
 	{Name: "username", Type: core.ConnectionTypeString, Label: "Username", Placeholder: "postgres", Required: true},
 	{Name: "password", Type: core.ConnectionTypeSecret, Label: "Password", Placeholder: "Database password", Required: true},
-	{Name: "ssl_mode", Type: core.ConnectionTypeString, Label: "SSL Mode", Placeholder: "disable", Options: pgvector.SSLModeOptions},
+	{Name: "ssl_mode", Type: core.ConnectionTypeString, Label: "SSL Mode", Placeholder: "disable", Options: []core.ConnectionOption{{Name: "Disable — no encryption", Value: "disable"}, {Name: "Allow", Value: "allow"}, {Name: "Prefer — encrypt if the server offers it", Value: "prefer"}, {Name: "Require — encrypt, but don't verify the certificate", Value: "require"}, {Name: "Verify CA — encrypt and check the certificate authority", Value: "verify-ca"}, {Name: "Verify Full — encrypt and check the hostname too", Value: "verify-full"}}},
 	{Name: "schema", Type: core.ConnectionTypeString, Label: "Schema", Placeholder: "public"},
 	// Free text, not the table dropdown every other action gets: the whole point
 	// of this step is that the table isn't there yet.
@@ -74,7 +74,7 @@ var Inputs = [...]core.Connection{
 		},
 		Visible: &core.VisibleWhen{Field: "create_index", Values: []string{"true"}},
 	},
-	{Name: "distance_metric", Type: core.ConnectionTypeString, Label: "Distance Metric", Placeholder: "cosine", Options: pgvector.DistanceMetricOptions},
+	{Name: "distance_metric", Type: core.ConnectionTypeString, Label: "Distance Metric", Placeholder: "cosine", Options: []core.ConnectionOption{{Name: "Cosine — best for text embeddings", Value: "cosine"}, {Name: "Inner Product", Value: "inner_product"}, {Name: "Euclidean (L2)", Value: "euclidean"}}},
 	{Name: "enable_hybrid_search", Type: core.ConnectionTypeBoolean, Label: "Also index the text for keyword search", Placeholder: "Lets Hybrid Search match on exact words as well as meaning"},
 }
 
