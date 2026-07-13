@@ -31,6 +31,14 @@ var Inputs = [...]core.Connection{
 		{Name: "DELETE", Value: "DELETE"},
 	}},
 	{Name: "fields", Type: core.ConnectionTypeText, Label: "Request Fields", Placeholder: `{"id":"path","limit":"query","name":"body"}`},
+	// auth is the optional gate on the invoke. "none" (default): public — callable
+	// by anyone with the flow id. "publishable": require an embed publishable key +
+	// allowed origin + resource opt-in (the embed-app gate). Identity via a
+	// forwarded Sentinel JWT (${user.X}) works in both modes.
+	{Name: "auth", Type: core.ConnectionTypeString, Label: "Authentication", Options: []core.ConnectionOption{
+		{Name: "Public (no key)", Value: "none"},
+		{Name: "Publishable Key", Value: "publishable"},
+	}},
 	// keep_history turns this into a conversational endpoint: the invoke mints/
 	// resumes a thread, injects prior turns as ${history}, and records both turns.
 	// Off ⇒ a stateless API endpoint. message_field names the input treated as the
