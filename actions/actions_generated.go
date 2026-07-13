@@ -21,6 +21,7 @@ import (
 	agent_send_message "flomation.app/automate/executor/actions/agent/send_message"
 	agent_write_state "flomation.app/automate/executor/actions/agent/write_state"
 	ai_anthropic "flomation.app/automate/executor/actions/ai/anthropic"
+	ai_embed_text "flomation.app/automate/executor/actions/ai/embed_text"
 	ai_gemini "flomation.app/automate/executor/actions/ai/gemini"
 	ai_gemini_image "flomation.app/automate/executor/actions/ai/gemini_image"
 	ai_gemini_tts "flomation.app/automate/executor/actions/ai/gemini_tts"
@@ -1104,6 +1105,18 @@ import (
 	ukgov_postcodes_postcode_lookup "flomation.app/automate/executor/actions/ukgov/postcodes/postcode_lookup"
 	ukgov_postcodes_reverse_geocode "flomation.app/automate/executor/actions/ukgov/postcodes/reverse_geocode"
 	ukgov_postcodes_validate_postcode "flomation.app/automate/executor/actions/ukgov/postcodes/validate_postcode"
+	vectordatabase_pgvector_document_count "flomation.app/automate/executor/actions/vectordatabase/pgvector/document_count"
+	vectordatabase_pgvector_document_delete "flomation.app/automate/executor/actions/vectordatabase/pgvector/document_delete"
+	vectordatabase_pgvector_document_get "flomation.app/automate/executor/actions/vectordatabase/pgvector/document_get"
+	vectordatabase_pgvector_document_insert "flomation.app/automate/executor/actions/vectordatabase/pgvector/document_insert"
+	vectordatabase_pgvector_document_list "flomation.app/automate/executor/actions/vectordatabase/pgvector/document_list"
+	vectordatabase_pgvector_document_search "flomation.app/automate/executor/actions/vectordatabase/pgvector/document_search"
+	vectordatabase_pgvector_document_update "flomation.app/automate/executor/actions/vectordatabase/pgvector/document_update"
+	vectordatabase_pgvector_document_upsert "flomation.app/automate/executor/actions/vectordatabase/pgvector/document_upsert"
+	vectordatabase_pgvector_hybrid_search "flomation.app/automate/executor/actions/vectordatabase/pgvector/hybrid_search"
+	vectordatabase_pgvector_index_create "flomation.app/automate/executor/actions/vectordatabase/pgvector/index_create"
+	vectordatabase_pgvector_table_create "flomation.app/automate/executor/actions/vectordatabase/pgvector/table_create"
+	vectordatabase_pgvector_table_info "flomation.app/automate/executor/actions/vectordatabase/pgvector/table_info"
 	web_fetch "flomation.app/automate/executor/actions/web/fetch"
 	web_request "flomation.app/automate/executor/actions/web/request"
 	web_search "flomation.app/automate/executor/actions/web/search"
@@ -1193,6 +1206,7 @@ var Actions = map[string]core.Action{
 	"agent/send_message":                                  agent_send_message.Execute,
 	"agent/write_state":                                   agent_write_state.Execute,
 	"ai/anthropic":                                        ai_anthropic.Execute,
+	"ai/embed_text":                                       ai_embed_text.Execute,
 	"ai/gemini":                                           ai_gemini.Execute,
 	"ai/gemini_image":                                     ai_gemini_image.Execute,
 	"ai/gemini_tts":                                       ai_gemini_tts.Execute,
@@ -2276,6 +2290,18 @@ var Actions = map[string]core.Action{
 	"ukgov/postcodes/postcode_lookup":                     ukgov_postcodes_postcode_lookup.Execute,
 	"ukgov/postcodes/reverse_geocode":                     ukgov_postcodes_reverse_geocode.Execute,
 	"ukgov/postcodes/validate_postcode":                   ukgov_postcodes_validate_postcode.Execute,
+	"vectordatabase/pgvector/document_count":              vectordatabase_pgvector_document_count.Execute,
+	"vectordatabase/pgvector/document_delete":             vectordatabase_pgvector_document_delete.Execute,
+	"vectordatabase/pgvector/document_get":                vectordatabase_pgvector_document_get.Execute,
+	"vectordatabase/pgvector/document_insert":             vectordatabase_pgvector_document_insert.Execute,
+	"vectordatabase/pgvector/document_list":               vectordatabase_pgvector_document_list.Execute,
+	"vectordatabase/pgvector/document_search":             vectordatabase_pgvector_document_search.Execute,
+	"vectordatabase/pgvector/document_update":             vectordatabase_pgvector_document_update.Execute,
+	"vectordatabase/pgvector/document_upsert":             vectordatabase_pgvector_document_upsert.Execute,
+	"vectordatabase/pgvector/hybrid_search":               vectordatabase_pgvector_hybrid_search.Execute,
+	"vectordatabase/pgvector/index_create":                vectordatabase_pgvector_index_create.Execute,
+	"vectordatabase/pgvector/table_create":                vectordatabase_pgvector_table_create.Execute,
+	"vectordatabase/pgvector/table_info":                  vectordatabase_pgvector_table_info.Execute,
 	"web/fetch":                                           web_fetch.Execute,
 	"web/request":                                         web_request.Execute,
 	"web/search":                                          web_search.Execute,

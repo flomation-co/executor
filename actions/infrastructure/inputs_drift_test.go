@@ -380,6 +380,12 @@ func destructiveActions() map[string]bool {
 		"kubernetes/service_delete":        true,
 		"kubernetes/serviceaccount_delete": true,
 		"kubernetes/statefulset_delete":    true,
+
+		// Vector Database ▸ pgvector: Delete Documents destroys stored documents,
+		// so it carries the same confirm_destructive guard. Its inputs are checked
+		// by the pgvector node's own drift test — the tables in this file only
+		// cover infrastructure/*.
+		"vectordatabase/pgvector/document_delete": true,
 	}
 }
 
