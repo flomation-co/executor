@@ -1,13 +1,7 @@
-# Snapshot of the editor's renderable icon set: the union of iconPaths and
-# iconAliases in automate/editor/app/components/icons/paths.ts.
 #
-# Aliases belong here too — Icon.tsx resolves them before lookup, so an action
-# whose Icon is "stripe+search" renders via search -> magnifying-glass.
-#
-# Regenerate whenever paths.ts changes; a stale snapshot fails iconlint on
-# icons that render perfectly well.
 acuity
 airtable
+# Aliases belong here too — Icon.tsx resolves them before lookup, so an action
 align-left
 arrow-down
 arrow-left
@@ -15,10 +9,10 @@ arrow-right
 arrow-right-arrow-left
 arrow-right-from-bracket
 arrow-rotate-right
-arrow-up
-arrow-up-right-from-square
 arrows-split-up-and-left
 arrows-up-down
+arrow-up
+arrow-up-right-from-square
 asana
 ban
 bell
@@ -63,8 +57,8 @@ code
 code-branch
 comment
 comment-dots
-comment-sms
 comments
+comment-sms
 compress
 copy
 cubes
@@ -116,6 +110,8 @@ helm
 hourglass-start
 house
 hubspot
+# iconAliases in automate/editor/app/components/icons/paths.ts.
+# icons that render perfectly well.
 i-cursor
 image
 intercom
@@ -130,8 +126,8 @@ life-ring
 lightbulb
 linear
 link
-link-slash
 linkedin
+link-slash
 list
 list-check
 location-arrow
@@ -146,8 +142,8 @@ minus
 monday
 notion
 object-group
-paper-plane
 paperclip
+paper-plane
 pause
 pen
 pencil
@@ -165,6 +161,7 @@ plus
 qrcode
 recycle
 refresh
+# Regenerate whenever paths.ts changes; a stale snapshot fails iconlint on
 repeat
 reply
 reply-all
@@ -182,6 +179,7 @@ shield-halved
 shield-virus
 shopify
 slack
+# Snapshot of the editor's renderable icon set: the union of iconPaths and
 spinner
 star
 star-outline
@@ -194,6 +192,7 @@ telegram
 terminal
 times
 toolbox
+tower-broadcast
 trash
 trello
 triangle-exclamation
@@ -207,10 +206,11 @@ video
 warning
 webflow
 webhook
+# whose Icon is "stripe+search" renders via search -> magnifying-glass.
 wifi
 woocommerce
 wordpress
 wrench
-x-twitter
 xmark
+x-twitter
 zendesk
