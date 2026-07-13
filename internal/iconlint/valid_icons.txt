@@ -18,6 +18,7 @@ arrow-rotate-right
 arrow-up
 arrow-up-right-from-square
 arrows-split-up-and-left
+arrows-up-down
 asana
 ban
 bell
@@ -111,6 +112,7 @@ grip-vertical
 hand
 hashtag
 headset
+helm
 hourglass-start
 house
 hubspot
@@ -120,6 +122,7 @@ intercom
 jenkins
 jira
 key
+kubernetes
 landmark
 layer-group
 leaf
@@ -167,6 +170,7 @@ reply
 reply-all
 robot
 rotate
+rotate-left
 rotate-right
 route
 save
