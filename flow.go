@@ -210,6 +210,14 @@ const (
 	// ${...} substitution flows through untouched.
 	ConnectionTypeMoney = "money"
 
+	// ConnectionTypeFieldSourceMap maps a set of named fields to the part of an
+	// HTTP request each is sourced from (path/query/header/body). The editor
+	// renders it as rows of [field name] + [source dropdown]; the stored value is
+	// a JSON OBJECT string ({"id":"path","limit":"query"}). Used by the Web
+	// Trigger's request-field mapping. The dropdown choices come from the input's
+	// Options; the value is an object (not the key_value_array's array form).
+	ConnectionTypeFieldSourceMap = "field_source_map"
+
 	// ConnectionTypeComboBox is a string field that carries Options as
 	// *suggestions* rather than a closed set. The editor renders it as a
 	// text input with a dropdown of the suggested values: the operator can
@@ -1242,7 +1250,15 @@ func (f *Flow) Execute(actions map[string]Action, entry *string, environment *en
 
 	if entry != nil {
 		start = f.FindNode(*entry)
-	} else {
+		if start == nil {
+			// A stale/mismatched entry node id (e.g. from a trigger record whose
+			// __node_id points at a since-removed node) must not hard-fail the
+			// run. Fall back to the trigger scan below rather than erroring.
+			log.WithField("entry", *entry).Warn("entry node not found; falling back to trigger scan")
+		}
+	}
+
+	if start == nil {
 		for _, n := range f.Nodes {
 			if n == nil {
 				continue
