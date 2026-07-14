@@ -3,6 +3,7 @@ acuity
 airtable
 # Aliases belong here too — Icon.tsx resolves them before lookup, so an action
 align-left
+ansible
 arrow-down
 arrow-left
 arrow-right

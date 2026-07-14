@@ -14,6 +14,15 @@
 //     silently renders as "?");
 //   - every action reports success/error/tool_result, which the flow engine and the
 //     AI tool loop both depend on.
+//
+// SCOPE. Infrastructure now holds a third node — AAP / AWX — whose credential
+// block, icon base and destructive set are its own. Its invariants are enforced by
+// a sibling file in this same package (awx_inputs_drift_test.go), on the
+// per-node-sibling precedent of actions/opentofu/inputs_drift_test.go. The
+// per-node tests below therefore scope themselves with scopedToThisFile(), while
+// TestEveryRegisteredActionIsCovered deliberately does NOT: it unions the tables
+// of every file in the package, so an action registered under infrastructure/ that
+// no file covers still fails, whichever node it belongs to.
 package infrastructure_test
 
 import (
@@ -397,6 +406,28 @@ var editorBadges = map[string]bool{
 	"rotate-left": true, "file-lines": true, "clock": true, "arrow-up": true,
 	"arrow-down": true, "pause": true, "magnifying-glass": true, "code": true,
 	"arrows-up-down": true,
+
+	// Added for AAP / AWX (awx_inputs_drift_test.go). This map is a snapshot of the
+	// editor's glyph set, not of any one node's usage, so there is exactly one of it
+	// and a sibling node extends it rather than starting a second copy. Each of these
+	// was checked against editor/app/components/icons/paths.ts before being added —
+	// putting a name here that the editor does not ship turns this test from a guard
+	// into a rubber stamp.
+	"circle-stop": true, "user": true, "link": true, "terminal": true,
+}
+
+// scopedToThisFile reports whether an action ID belongs to one of the two nodes
+// whose invariants THIS file enforces.
+//
+// The tables above only hold kubernetes/* and helm/*, so today this is redundant
+// — which is exactly why it is written down. It states, at the point of use, that
+// the per-node assertions below (one shared credential block, two icon bases, one
+// destructive set) are properties of those two nodes and not of infrastructure/ as
+// a whole, so a sibling node cannot be bolted into these tables by accident. AAP /
+// AWX has its own seven-field credential block, its own `ansible` icon base and
+// its own destructive set; it is covered by awx_inputs_drift_test.go.
+func scopedToThisFile(id string) bool {
+	return strings.HasPrefix(id, "kubernetes/") || strings.HasPrefix(id, "helm/")
 }
 
 // TestAuthBlockDoesNotDrift asserts that every action's first eight inputs
@@ -406,6 +437,9 @@ func TestAuthBlockDoesNotDrift(t *testing.T) {
 	want := kubernetes.AuthInputs
 
 	for id, inputs := range actionInputs() {
+		if !scopedToThisFile(id) {
+			continue
+		}
 		if len(inputs) < len(want) {
 			t.Errorf("%s: has %d inputs, fewer than the %d-field auth block", id, len(inputs), len(want))
 			continue
@@ -429,6 +463,9 @@ func TestNoResourceInputShadowsACredential(t *testing.T) {
 	}
 
 	for id, inputs := range actionInputs() {
+		if !scopedToThisFile(id) {
+			continue
+		}
 		for _, c := range inputs[len(kubernetes.AuthInputs):] {
 			if credential[c.Name] {
 				t.Errorf("%s: resource input %q shadows the credential input of the same name", id, c.Name)
@@ -444,6 +481,9 @@ func TestDestructiveActionsAreGuarded(t *testing.T) {
 	destructive := destructiveActions()
 
 	for id, inputs := range actionInputs() {
+		if !scopedToThisFile(id) {
+			continue
+		}
 		last := inputs[len(inputs)-1]
 		guarded := last.Name == "confirm_destructive"
 
@@ -467,6 +507,9 @@ func TestDestructiveActionsAreGuarded(t *testing.T) {
 // TestIconsResolve keeps every action's Icon inside the glyph set the editor ships.
 func TestIconsResolve(t *testing.T) {
 	for id, icon := range actionIcons() {
+		if !scopedToThisFile(id) {
+			continue
+		}
 		base, badge, composed := strings.Cut(icon, "+")
 		if !composed {
 			t.Errorf("%s: icon %q is not a base+badge composition", id, icon)
@@ -498,15 +541,29 @@ func TestStandardOutputsPresent(t *testing.T) {
 	}
 }
 
+// coveredElsewhere is how a sibling node registers the actions IT enforces, so
+// that TestEveryRegisteredActionIsCovered can see them.
+//
+// Every file in package infrastructure_test that carries its own drift tables
+// must add its action IDs here from an init(), keyed on the sub-group path exactly
+// as the tables above are ("awx/job_wait"). awx_inputs_drift_test.go does this.
+//
+// This is the ONE seam that lets the coverage test span multiple nodes without
+// forcing them to share a credential block or an icon base. It is deliberately not
+// a "skip anything under awx/" prefix rule: an action must be named by SOME table
+// in this package or the test fails, which is the whole point.
+var coveredElsewhere = map[string]bool{}
+
 // TestEveryRegisteredActionIsCovered closes the loop on the tables above.
 //
 // The manifest generator discovers actions by scanning for an exported Execute,
 // so an action cannot be "forgotten" at registration time — it lands in
-// actions.Actions automatically. What CAN be forgotten is adding it to the tables
-// in this file, and then every invariant above silently stops covering it.
+// actions.Actions automatically. What CAN be forgotten is adding it to a drift
+// table, and then every invariant above silently stops covering it.
 //
-// This asserts the two sets are equal in both directions: nothing registered is
-// unchecked, and nothing checked has been deleted from the tree.
+// This asserts the two sets are equal in both directions: nothing registered under
+// infrastructure/ is unchecked by any file in this package, and nothing checked
+// has been deleted from the tree.
 func TestEveryRegisteredActionIsCovered(t *testing.T) {
 	covered := actionInputs()
 
@@ -519,13 +576,22 @@ func TestEveryRegisteredActionIsCovered(t *testing.T) {
 	}
 
 	for id := range registered {
-		if _, ok := covered[id]; !ok {
-			t.Errorf("infrastructure/%s is registered in actions.Actions but is not covered by this file's tables — add it", id)
+		if _, ok := covered[id]; ok {
+			continue
 		}
+		if coveredElsewhere[id] {
+			continue // a sibling file in this package enforces this one
+		}
+		t.Errorf("infrastructure/%s is registered in actions.Actions but no drift table in this package covers it — add it to this file's tables, or to a sibling's (see coveredElsewhere)", id)
 	}
 	for id := range covered {
 		if !registered[id] {
 			t.Errorf("%s is covered by this file's tables but is not registered in actions.Actions — did the directory move?", id)
+		}
+	}
+	for id := range coveredElsewhere {
+		if !registered[id] {
+			t.Errorf("%s is covered by a sibling drift table but is not registered in actions.Actions — did the directory move?", id)
 		}
 	}
 }
