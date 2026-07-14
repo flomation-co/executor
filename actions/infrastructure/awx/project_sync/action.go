@@ -54,7 +54,7 @@ var Inputs = [...]core.Connection{
 	{Name: "project_id", Type: core.ConnectionTypeString, Label: "Project", Placeholder: "Choose the project to sync, or enter its AWX ID", Required: true},
 
 	// --- optionally hold the flow until the sync finishes ---
-	{Name: "wait_for_completion", Type: core.ConnectionTypeBoolean, Label: "Wait For Completion", Placeholder: "Hold the flow until the sync has finished, then report its status"},
+	{Name: "wait_for_completion", Type: core.ConnectionTypeBoolean, Label: "Wait for Completion", Placeholder: "Hold the flow until the sync has finished, then report its status"},
 	{Name: "poll_interval_seconds", Type: core.ConnectionTypeInteger, Label: "Poll Interval (seconds)", Placeholder: "How often to check the sync — default 3s", Visible: &core.VisibleWhen{Field: "wait_for_completion", Values: []string{"true"}}},
 	{Name: "timeout_seconds", Type: core.ConnectionTypeInteger, Label: "Timeout (seconds)", Placeholder: "Give up waiting after this long — default 300s (max 3600)", Visible: &core.VisibleWhen{Field: "wait_for_completion", Values: []string{"true"}}},
 	{Name: "ignore_job_failure", Type: core.ConnectionTypeBoolean, Label: "Ignore Sync Failure", Placeholder: "By default the node fails when the sync ends failed/error/canceled. Tick to succeed regardless.", Visible: &core.VisibleWhen{Field: "wait_for_completion", Values: []string{"true"}}},

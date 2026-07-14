@@ -460,6 +460,78 @@ func TestHostCreateSendsEnabledWhenSet(t *testing.T) {
 	}
 }
 
+func findConn(inputs []core.Connection, name string) *core.Connection {
+	for i := range inputs {
+		if inputs[i].Name == name {
+			return &inputs[i]
+		}
+	}
+	return nil
+}
+
+// TestHostEnabledIsAThreeWayDropdownNotACheckbox pins the disable-is-unreachable fix.
+// A plain boolean checkbox renders unticked and, via SetBoolIfSet, OMITS `enabled` for
+// both an untouched AND a merely-unticked box — so a non-technical operator has NO
+// one-click gesture that disables a host, even though Update Host advertises exactly
+// that. The control must be a String dropdown offering Disabled -> "false" as a
+// first-class choice, exactly like host_list's enabled filter already does.
+func TestHostEnabledIsAThreeWayDropdownNotACheckbox(t *testing.T) {
+	for _, tc := range []struct {
+		action string
+		inputs []core.Connection
+	}{
+		{"host_create", host_create.Inputs[:]},
+		{"host_update", host_update.Inputs[:]},
+	} {
+		enabled := findConn(tc.inputs, "enabled")
+		if enabled == nil {
+			t.Fatalf("%s: no `enabled` input", tc.action)
+		}
+		if enabled.Type != core.ConnectionTypeString {
+			t.Errorf("%s: `enabled` is %v, want a String dropdown — a boolean checkbox cannot express Disabled for a non-technical operator",
+				tc.action, enabled.Type)
+		}
+		values := map[string]bool{}
+		for _, o := range enabled.Options {
+			values[o.Value] = true
+		}
+		if !values[""] {
+			t.Errorf("%s: `enabled` needs an empty (omit / leave-to-AWX) option that SetBoolIfSet drops", tc.action)
+		}
+		if !values["true"] {
+			t.Errorf("%s: `enabled` needs a true/Enabled option", tc.action)
+		}
+		if !values["false"] {
+			t.Errorf("%s: `enabled` needs a false/Disabled option — otherwise disable is unreachable in the plain UI", tc.action)
+		}
+	}
+}
+
+// The dropdown's Disabled gesture (the plain string "false" it writes) reaches AWX as
+// enabled:false, and "Leave unchanged" (empty) is omitted — so an operator can now
+// disable a host with one click, which the old checkbox could not do.
+func TestHostUpdateEnabledDropdownGestures(t *testing.T) {
+	// Disabled -> enabled:false
+	got := &capture{}
+	srv := awxServer(t, got, http.StatusOK, `{"id":5,"name":"web01","enabled":false}`)
+	defer srv.Close()
+	out, err := host_update.Execute(nil, nil, with(srv.URL, str("host_id", "5"), str("enabled", "false")))
+	mustSucceed(t, out, err)
+	if got.Body["enabled"] != false {
+		t.Fatalf(`the "Disabled" gesture sent enabled=%#v, want false. Body: %s`, got.Body["enabled"], got.RawBody)
+	}
+
+	// Leave unchanged (empty) -> omitted
+	got2 := &capture{}
+	srv2 := awxServer(t, got2, http.StatusOK, `{"id":5,"name":"web01-renamed"}`)
+	defer srv2.Close()
+	out, err = host_update.Execute(nil, nil, with(srv2.URL, str("host_id", "5"), str("name", "web01-renamed"), str("enabled", "")))
+	mustSucceed(t, out, err)
+	if _, present := got2.Body["enabled"]; present {
+		t.Fatalf(`"Leave unchanged" (empty) sent enabled=%v — it must be OMITTED. Body: %s`, got2.Body["enabled"], got2.RawBody)
+	}
+}
+
 func TestHostCreateMissingNameIsASoftFailure(t *testing.T) {
 	srv := awxServer(t, &capture{}, http.StatusCreated, `{"id":5}`)
 	defer srv.Close()

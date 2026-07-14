@@ -1,10 +1,13 @@
 // Package infrastructure_awx_schedule_update changes an AWX schedule.
 //
 // The overwhelmingly common use is pause/resume, so Enabled is the first field
-// after the picker. It is set with SetBoolIfSet: an untouched checkbox is OMITTED
-// from the PATCH rather than sent as false, because the manifest cannot carry a
-// default and a "false" would otherwise silently disable every schedule anyone
-// renamed.
+// after the picker. It is a three-way dropdown — Leave unchanged / Enabled / Paused
+// — NOT a checkbox: a plain checkbox renders unticked and the manifest cannot carry
+// a default, so a non-technical operator following "untick to pause" could never
+// actually pause a schedule (the box is already unticked, and the only gestures that
+// send enabled=false are unreachable to them). The dropdown maps through
+// SetBoolIfSet, so "Leave unchanged" (the empty value) is still OMITTED from the
+// PATCH rather than sent as false.
 package infrastructure_awx_schedule_update
 
 import (
@@ -40,7 +43,11 @@ var Inputs = [...]core.Connection{
 
 	// ---- THE CHANGE ----
 	{Name: "schedule_id", Type: core.ConnectionTypeString, Label: "Schedule", Placeholder: "The schedule to change", Required: true},
-	{Name: "enabled", Type: core.ConnectionTypeBoolean, Label: "Enabled", Placeholder: "Tick to resume the schedule, untick to pause it. Leave untouched to keep it as it is."},
+	{Name: "enabled", Type: core.ConnectionTypeString, Label: "Enabled", Placeholder: "Pause or resume the schedule — leave unchanged to keep its current state", Options: []core.ConnectionOption{
+		{Name: "Leave unchanged", Value: ""},
+		{Name: "Enabled", Value: "true"},
+		{Name: "Paused", Value: "false"},
+	}},
 	{Name: "name", Type: core.ConnectionTypeString, Label: "Schedule Name", Placeholder: "Leave blank to keep the current name"},
 	{Name: "description", Type: core.ConnectionTypeString, Label: "Description", Placeholder: "Leave blank to keep the current description"},
 	{Name: "rrule", Type: core.ConnectionTypeString, Label: "Recurrence Rule", Placeholder: `DTSTART;TZID=Europe/London:20260801T090000 RRULE:FREQ=DAILY;INTERVAL=1 — leave blank to keep the current rule`},
@@ -73,7 +80,7 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	}
 
 	body := map[string]interface{}{}
-	// Tri-state — an untouched checkbox is "leave it alone", not "disable it".
+	// Three-way: "Leave unchanged" (empty) is OMITTED; Enabled/Paused send true/false.
 	awx.SetBoolIfSet(body, inputs, "enabled", "enabled")
 	awx.SetIfPresent(body, inputs, "name", "name")
 	awx.SetIfPresent(body, inputs, "description", "description")

@@ -48,10 +48,10 @@ var Inputs = [...]core.Connection{
 
 	{Name: "inventory_id", Type: core.ConnectionTypeString, Label: "Inventory", Placeholder: "Choose the inventory the source belongs to — this narrows the Inventory Source list below"},
 	{Name: "inventory_source_id", Type: core.ConnectionTypeString, Label: "Inventory Source", Placeholder: "The source to re-import hosts from", Required: true},
-	{Name: "wait_for_completion", Type: core.ConnectionTypeBoolean, Label: "Wait for the sync to finish", Placeholder: "Hold the flow until AWX has finished importing, then return the result"},
-	{Name: "poll_interval_seconds", Type: core.ConnectionTypeInteger, Label: "Check Every (seconds)", Placeholder: "How often to check the sync — default 3s", Visible: &core.VisibleWhen{Field: "wait_for_completion", Values: []string{"true"}}},
-	{Name: "timeout_seconds", Type: core.ConnectionTypeInteger, Label: "Give Up After (seconds)", Placeholder: "Stop waiting after this long — default 300s (max 3600)", Visible: &core.VisibleWhen{Field: "wait_for_completion", Values: []string{"true"}}},
-	{Name: "ignore_job_failure", Type: core.ConnectionTypeBoolean, Label: "Succeed even if the sync fails", Placeholder: "By default this node fails when the AWX sync ends failed/error/canceled. Tick to carry on regardless.", Visible: &core.VisibleWhen{Field: "wait_for_completion", Values: []string{"true"}}},
+	{Name: "wait_for_completion", Type: core.ConnectionTypeBoolean, Label: "Wait for Completion", Placeholder: "Hold the flow until AWX has finished importing, then return the result"},
+	{Name: "poll_interval_seconds", Type: core.ConnectionTypeInteger, Label: "Poll Interval (seconds)", Placeholder: "How often to check the sync — default 3s", Visible: &core.VisibleWhen{Field: "wait_for_completion", Values: []string{"true"}}},
+	{Name: "timeout_seconds", Type: core.ConnectionTypeInteger, Label: "Timeout (seconds)", Placeholder: "Stop waiting after this long — default 300s (max 3600)", Visible: &core.VisibleWhen{Field: "wait_for_completion", Values: []string{"true"}}},
+	{Name: "ignore_job_failure", Type: core.ConnectionTypeBoolean, Label: "Ignore Sync Failure", Placeholder: "By default this node fails when the AWX sync ends failed/error/canceled. Tick to carry on regardless.", Visible: &core.VisibleWhen{Field: "wait_for_completion", Values: []string{"true"}}},
 	{Name: "include_stdout", Type: core.ConnectionTypeBoolean, Label: "Include Output", Placeholder: "Return the import log — useful when a sync fails and you need to know why", Visible: &core.VisibleWhen{Field: "wait_for_completion", Values: []string{"true"}}},
 }
 

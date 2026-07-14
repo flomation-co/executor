@@ -1,12 +1,13 @@
 // Package infrastructure_awx_host_create adds a host to an inventory.
 //
-// ★ THE `enabled` TRI-STATE. AWX defaults Host.enabled to TRUE, but the manifest
-// cannot carry a default value, so the editor renders the checkbox UNTICKED. If
-// an untouched checkbox sent enabled=false, every host created by this node would
-// silently be disabled and would be skipped by every job that targets it — a bug
-// nobody would find until a playbook mysteriously ran against nothing. So the
-// field is sent ONLY when the operator actually set it (SetBoolIfSet): untouched
-// means "omit, and let AWX default it to true".
+// ★ THE `enabled` THREE-WAY. AWX defaults Host.enabled to TRUE, and the manifest
+// cannot carry a default value, so this is a Default / Enabled / Disabled DROPDOWN
+// rather than a checkbox: a checkbox renders unticked, and if an untouched box sent
+// enabled=false every host created by this node would silently be disabled and
+// skipped by every job that targets it — a bug nobody would find until a playbook
+// mysteriously ran against nothing. "Default (enabled)" is the empty value, which
+// SetBoolIfSet OMITS so AWX applies its own default of true; Enabled/Disabled send
+// true/false explicitly. NEVER body["enabled"] = BoolInput(...).
 package infrastructure_awx_host_create
 
 import (
@@ -42,7 +43,11 @@ var Inputs = [...]core.Connection{
 	{Name: "inventory_id", Type: core.ConnectionTypeString, Label: "Inventory", Placeholder: "The inventory to add the host to", Required: true},
 	{Name: "name", Type: core.ConnectionTypeString, Label: "Host Name", Placeholder: "web01.example.com", Required: true},
 	{Name: "description", Type: core.ConnectionTypeString, Label: "Description", Placeholder: "What this host is for"},
-	{Name: "enabled", Type: core.ConnectionTypeBoolean, Label: "Enabled", Placeholder: "Leave unticked to let AWX decide (new hosts are enabled by default). Tick to force it enabled."},
+	{Name: "enabled", Type: core.ConnectionTypeString, Label: "Enabled", Placeholder: "Create the host enabled or disabled — the default lets AWX decide (new hosts are enabled)", Options: []core.ConnectionOption{
+		{Name: "Default (enabled)", Value: ""},
+		{Name: "Enabled", Value: "true"},
+		{Name: "Disabled", Value: "false"},
+	}},
 	{Name: "instance_id", Type: core.ConnectionTypeString, Label: "Instance ID", Placeholder: "Optional cloud instance id, e.g. i-0abc123 — used to match this host against a cloud inventory source"},
 	{Name: "variables", Type: core.ConnectionTypeText, Label: "Host Variables", Placeholder: "YAML or JSON, e.g. ansible_host: 10.0.0.5"},
 	{Name: "additional_fields", Type: core.ConnectionTypeObject, Label: "Additional Fields", Placeholder: `Any other AWX host field, as JSON — e.g. {"instance_id":"i-0abc123"}. Takes precedence over the fields above.`},
@@ -75,7 +80,7 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 		"name":      name,
 	}
 	awx.SetIfPresent(body, inputs, "description", "description")
-	// Tri-state — see the package comment. NEVER body["enabled"] = BoolInput(...).
+	// Three-way — see the package comment. NEVER body["enabled"] = BoolInput(...).
 	awx.SetBoolIfSet(body, inputs, "enabled", "enabled")
 	awx.SetIfPresent(body, inputs, "instance_id", "instance_id")
 	// AWX takes host variables as a YAML-or-JSON STRING, not as a nested object.

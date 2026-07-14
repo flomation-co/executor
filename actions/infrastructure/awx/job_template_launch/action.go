@@ -265,7 +265,13 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 
 	summary := fmt.Sprintf("AWX %s %d (%s) finished with status %q after %ss.",
 		kindLabel(kind), jobID, template, status, awx.IDString(job["elapsed"]))
-	if res.StdoutTruncated {
+	if awx.BoolInput("include_stdout", inputs) && kind == awx.JobKindWorkflowJob {
+		// A sliced launch (job_slice_count > 1) produces a WORKFLOW job, whose stdout
+		// is ALWAYS empty — it has no output of its own. Explain that, exactly as Wait
+		// for Job does, rather than hand the operator a blank Output field and a
+		// success message with no clue why.
+		summary += " A workflow job has no output of its own — list its nodes and fetch the output of the child job you want."
+	} else if res.StdoutTruncated {
 		summary += " The output was truncated — raise Max Output Bytes, or use Get Job Output."
 	}
 	return success(out, summary), nil

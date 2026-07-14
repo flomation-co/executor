@@ -17,6 +17,7 @@ import (
 	"net/http"
 	"net/http/httptest"
 	"net/url"
+	"strings"
 	"testing"
 
 	core "flomation.app/automate/executor"
@@ -90,6 +91,15 @@ func decode(t *testing.T, raw string) map[string]interface{} {
 	return out
 }
 
+func findConn(inputs []core.Connection, name string) *core.Connection {
+	for i := range inputs {
+		if inputs[i].Name == name {
+			return &inputs[i]
+		}
+	}
+	return nil
+}
+
 // ---------------------------------------------------------------------------
 // schedule_create
 // ---------------------------------------------------------------------------
@@ -147,9 +157,122 @@ func TestScheduleCreatePreviewsTheRuleThenCreates(t *testing.T) {
 	Expect(sent["unified_job_template"]).To(BeEquivalentTo(7))
 	Expect(sent["name"]).To(Equal("Nightly patching"))
 	Expect(sent["rrule"]).To(Equal("DTSTART;TZID=Europe/London:20260801T090000 RRULE:FREQ=DAILY;INTERVAL=1"))
-	// Untouched Enabled checkbox must be OMITTED, not sent as false — AWX's own
-	// default is enabled, and the manifest cannot carry a default.
+	// Untouched Enabled must be OMITTED, not sent as false — AWX's own default is
+	// enabled, and the manifest cannot carry a default.
 	Expect(sent).NotTo(HaveKey("enabled"))
+}
+
+// TestScheduleEnabledIsAThreeWayDropdownNotACheckbox pins the pause/resume fix. A
+// boolean checkbox renders unticked and, via SetBoolIfSet, OMITS `enabled` for an
+// untouched box — so a non-technical operator following "untick to pause it" could
+// never actually pause a schedule (the box is already unticked, and the only gestures
+// that send enabled=false are unreachable to them). The control must be a String
+// dropdown offering Paused -> "false" as a first-class, one-click choice.
+func TestScheduleEnabledIsAThreeWayDropdownNotACheckbox(t *testing.T) {
+	RegisterTestingT(t)
+	for _, tc := range []struct {
+		name   string
+		inputs []core.Connection
+	}{
+		{"schedule_create", Inputs[:]},
+		{"schedule_update", schedupdate.Inputs[:]},
+	} {
+		enabled := findConn(tc.inputs, "enabled")
+		Expect(enabled).NotTo(BeNil(), tc.name)
+		Expect(enabled.Type).To(Equal(core.ConnectionTypeString),
+			tc.name+": Enabled must be a String dropdown, not a checkbox — a checkbox cannot pause a schedule for a non-technical operator")
+		values := map[string]bool{}
+		for _, o := range enabled.Options {
+			values[o.Value] = true
+		}
+		Expect(values[""]).To(BeTrue(), tc.name+`: needs an empty "leave it as it is" option that SetBoolIfSet omits`)
+		Expect(values["true"]).To(BeTrue(), tc.name+": needs an Enabled option")
+		Expect(values["false"]).To(BeTrue(), tc.name+": needs a Paused option mapping to false — pause must be reachable in the plain UI")
+	}
+}
+
+// The dropdown's Paused gesture (the plain string "false" it writes) actually reaches
+// AWX as enabled:false — so a non-technical operator can pause a schedule with one
+// click, which the old checkbox could not do.
+func TestScheduleCreatePausedGestureSendsEnabledFalse(t *testing.T) {
+	RegisterTestingT(t)
+
+	var createBody string
+	srv := awxServer(t, func(w http.ResponseWriter, r *http.Request) {
+		switch r.URL.Path {
+		case "/api/v2/job_templates/8/launch/":
+			_, _ = w.Write([]byte(`{"can_start_without_user_input":true,"survey_enabled":false,"variables_needed_to_start":[]}`))
+		case "/api/v2/schedules/preview/":
+			_, _ = w.Write([]byte(`{"local":["2026-08-01T09:00:00+01:00"],"utc":["2026-08-01T08:00:00Z"]}`))
+		case "/api/v2/schedules/":
+			b, _ := io.ReadAll(r.Body)
+			createBody = string(b)
+			w.WriteHeader(http.StatusCreated)
+			_, _ = w.Write([]byte(`{"id":12,"name":"Nightly","enabled":false}`))
+		default:
+			w.WriteHeader(http.StatusNotFound)
+		}
+	})
+
+	out, err := Execute(nil, nil, inputs(srv.URL,
+		str("job_template_id", "8"),
+		str("name", "Nightly"),
+		str("rrule", "DTSTART;TZID=Europe/London:20260801T090000 RRULE:FREQ=DAILY;INTERVAL=1"),
+		str("enabled", "false"), // the "Paused" dropdown gesture
+	))
+	Expect(err).To(BeNil())
+	Expect(out["success"]).To(Equal(true))
+	Expect(decode(t, createBody)).To(HaveKeyWithValue("enabled", false))
+}
+
+// ★ SCHEDULE vs LAUNCH SURVEY STRICTNESS. AWX validates a schedule with
+// _exclude_errors=['required'] — it ACCEPTS a schedule whose required survey answers
+// are missing (it applies the survey's own defaults at spawn time), unlike an
+// immediate launch which needs them up front. So Create Schedule must NOT refuse a
+// blank required survey answer client-side, or it is stricter than the controller and
+// blocks a schedule AWX would create. (Launch Job Template still refuses — that path
+// keeps its own required-answer test.) Promptability is still enforced — see
+// TestScheduleCreateRefusesAPromptFieldTheTemplateWillNotAccept.
+func TestScheduleCreateDoesNotEnforceRequiredSurveyAnswers(t *testing.T) {
+	RegisterTestingT(t)
+
+	var created bool
+	var fetchedSurveySpec bool
+	srv := awxServer(t, func(w http.ResponseWriter, r *http.Request) {
+		switch r.URL.Path {
+		case "/api/v2/job_templates/7/launch/":
+			// A survey template with a REQUIRED question; no prompt fields, so the
+			// promptability half of the pre-flight has nothing to refuse.
+			_, _ = w.Write([]byte(`{"can_start_without_user_input":false,"ask_variables_on_launch":false,"survey_enabled":true,"variables_needed_to_start":["target_env"]}`))
+		case "/api/v2/job_templates/7/survey_spec/":
+			fetchedSurveySpec = true
+			_, _ = w.Write([]byte(`{"name":"s","description":"","spec":[{"variable":"target_env","question_name":"Target","type":"text","required":true,"default":"prod"}]}`))
+		case "/api/v2/schedules/preview/":
+			_, _ = w.Write([]byte(`{"local":["2026-08-01T09:00:00+01:00"],"utc":["2026-08-01T08:00:00Z"]}`))
+		case "/api/v2/schedules/":
+			created = true
+			w.WriteHeader(http.StatusCreated)
+			_, _ = w.Write([]byte(`{"id":12,"name":"Nightly","next_run":"2026-08-01T08:00:00Z"}`))
+		default:
+			w.WriteHeader(http.StatusNotFound)
+		}
+	})
+
+	// No Extra Variables / Survey Answers supplied at all: a manual launch would be
+	// refused for the missing required target_env, a schedule must not be.
+	out, err := Execute(nil, nil, inputs(srv.URL,
+		str("job_template_id", "7"),
+		str("name", "Nightly"),
+		str("rrule", "DTSTART;TZID=Europe/London:20260801T090000 RRULE:FREQ=DAILY;INTERVAL=1"),
+	))
+
+	Expect(err).To(BeNil())
+	Expect(out["success"]).To(Equal(true), "a schedule with a missing required survey answer must be created, not refused — AWX accepts it")
+	Expect(out["id"]).To(Equal("12"))
+	Expect(created).To(BeTrue(), "the schedule must actually have been POSTed")
+	// The spec is still FETCHED — ValidatePrompts needs the survey's variable names to
+	// separate survey answers from non-survey extra_vars — it just is not enforced.
+	Expect(fetchedSurveySpec).To(BeTrue())
 }
 
 // ★ THE TRAP. AWX hard-400s a schedule that carries a prompt field the template
@@ -572,6 +695,50 @@ func TestPingDoesNotReadAReachableAWXAsAWorkingCredential(t *testing.T) {
 	Expect(out["api_root"]).To(Equal("/api/v2/")) // still the most useful diagnostic
 	Expect(out["version"]).To(Equal("24.6.1"))
 	Expect(out["error"]).To(ContainSubstring("did not accept the credential"))
+}
+
+// ★ CREDENTIAL LEAK. An operator who pastes a URL with an embedded credential —
+// https://svc:P@ssw0rd@awx, copied from a password manager or a curl command — must
+// never see that password echoed back. The credential-rejected branch is a SOFT
+// failure: its message lands in BOTH error and tool_result, is persisted to the
+// flow-run history and handed to every downstream node. It must echo the NORMALISED
+// base (userinfo stripped by GetAuth), never the raw awx_url input — and Redact does
+// not help, since a URL-embedded password is not the awx_password credential.
+func TestPingNeverEchoesACredentialEmbeddedInTheURL(t *testing.T) {
+	RegisterTestingT(t)
+
+	srv := bannerOnlyServer(t, func(w http.ResponseWriter, r *http.Request) {
+		switch r.URL.Path {
+		case "/api/v2/ping/": // AllowAny: answers even with a bad token
+			_, _ = w.Write([]byte(`{"ha":false,"version":"24.6.1","active_node":"awx-1"}`))
+		case "/api/v2/me/":
+			w.WriteHeader(http.StatusUnauthorized)
+			_, _ = w.Write([]byte(`{"detail":"Authentication credentials were not provided."}`))
+		default:
+			w.WriteHeader(http.StatusNotFound)
+		}
+	})
+
+	// The operator pasted a credentialed URL: user:pass@ smuggled in front of the host.
+	// Go's url.Parse splits userinfo on the LAST '@', so a literal '@' in the password
+	// parses cleanly and NormaliseBaseURL strips it — the raw input still carries it.
+	credentialed := strings.Replace(srv.URL, "://", "://svc:P@ssw0rd@", 1)
+
+	out, err := pingaction.Execute(nil, nil, []*core.Connection{
+		{Name: "awx_url", Type: core.ConnectionTypeString, Value: credentialed},
+		{Name: "api_token", Type: core.ConnectionTypeSecret, Value: testToken},
+	})
+
+	Expect(err).To(BeNil()) // soft failure
+	Expect(out["success"]).To(Equal(false))
+	Expect(out["credential_valid"]).To(Equal(false))
+	Expect(out["error"]).To(ContainSubstring("did not accept the credential"))
+	// ★ The password (and the whole userinfo) must be nowhere in the operator-facing
+	// output — not in the error, and not in the tool_result an AI tool loop reads.
+	for _, key := range []string{"error", "tool_result"} {
+		Expect(out[key]).NotTo(ContainSubstring("P@ssw0rd"), key)
+		Expect(out[key]).NotTo(ContainSubstring("svc:"), key)
+	}
 }
 
 func TestPingReportsAnUnreachableController(t *testing.T) {

@@ -50657,7 +50657,7 @@
     ]
   },
   "infrastructure/awx/adhoc_command_run": {
-    "hash": "b031a270b32c00e382c4197449c6c93ae9ae13244ba2a69a3a44c08da1eb48a0",
+    "hash": "1563be799e0400edbace94c2c0972eec5414cb4bf4f44c61f6d5f0483c45e2f5",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "AWX: Run Ad-Hoc Command",
@@ -52967,7 +52967,7 @@
     ]
   },
   "infrastructure/awx/host_create": {
-    "hash": "cdf90f63523dd28daa7c1f3ccc283695507addca9b60e8e428c026d41eb50487",
+    "hash": "0401c7620298e3ec4a44620fc19ab93df304d9e6031880c9e5dcd57d1b093964",
     "author": "David McElin",
     "organisation": "Flomation",
     "name": "AWX: Create Host",
@@ -53091,10 +53091,24 @@
       },
       {
         "name": "enabled",
-        "type": "boolean",
+        "type": "string",
         "value": null,
         "label": "Enabled",
-        "placeholder": "Leave unticked to let AWX decide (new hosts are enabled by default). Tick to force it enabled."
+        "placeholder": "Create the host enabled or disabled — the default lets AWX decide (new hosts are enabled)",
+        "options": [
+          {
+            "name": "Default (enabled)",
+            "value": ""
+          },
+          {
+            "name": "Enabled",
+            "value": "true"
+          },
+          {
+            "name": "Disabled",
+            "value": "false"
+          }
+        ]
       },
       {
         "name": "instance_id",
@@ -53501,7 +53515,7 @@
     ]
   },
   "infrastructure/awx/host_group_assign": {
-    "hash": "0462914d25a62adcf045b0f7da4efd8986cb2b241dedb915e375b5c4a61ef179",
+    "hash": "af0ca59cbb074084c5c6a46bce3315a2541b9f55d149c58e8506b88b40d1b290",
     "author": "David McElin",
     "organisation": "Flomation",
     "name": "AWX: Add or Remove Host from Group",
@@ -53919,7 +53933,7 @@
     ]
   },
   "infrastructure/awx/host_update": {
-    "hash": "2b9fdc9cb1126c3e3a17a564065fccd98b2c80c32dc5afcaaf0aed0adba54e15",
+    "hash": "8e0f66a9c8b9ad8129a015847439f016877f1505804daffc1fcf5a63bd4d7189",
     "author": "David McElin",
     "organisation": "Flomation",
     "name": "AWX: Update Host",
@@ -54049,10 +54063,24 @@
       },
       {
         "name": "enabled",
-        "type": "boolean",
+        "type": "string",
         "value": null,
         "label": "Enabled",
-        "placeholder": "Tick to enable the host, untick to leave it as it is. To DISABLE a host, bind this to a variable that is false."
+        "placeholder": "Enable or disable the host — leave unchanged to keep its current state",
+        "options": [
+          {
+            "name": "Leave unchanged",
+            "value": ""
+          },
+          {
+            "name": "Enabled",
+            "value": "true"
+          },
+          {
+            "name": "Disabled",
+            "value": "false"
+          }
+        ]
       },
       {
         "name": "variables",
@@ -55292,7 +55320,7 @@
     ]
   },
   "infrastructure/awx/inventory_source_sync": {
-    "hash": "784b4c332dd65f0cfa4387ed601cd4887350d86554400739e5c1262554fe647a",
+    "hash": "626b41ecbd886f644a305028b89bed079e766e76f30b6970b71564cb08da6426",
     "author": "David McElin",
     "organisation": "Flomation",
     "name": "AWX: Sync Inventory Source",
@@ -55410,14 +55438,14 @@
         "name": "wait_for_completion",
         "type": "boolean",
         "value": null,
-        "label": "Wait for the sync to finish",
+        "label": "Wait for Completion",
         "placeholder": "Hold the flow until AWX has finished importing, then return the result"
       },
       {
         "name": "poll_interval_seconds",
         "type": "integer",
         "value": null,
-        "label": "Check Every (seconds)",
+        "label": "Poll Interval (seconds)",
         "placeholder": "How often to check the sync — default 3s",
         "visible_when": {
           "field": "wait_for_completion",
@@ -55430,7 +55458,7 @@
         "name": "timeout_seconds",
         "type": "integer",
         "value": null,
-        "label": "Give Up After (seconds)",
+        "label": "Timeout (seconds)",
         "placeholder": "Stop waiting after this long — default 300s (max 3600)",
         "visible_when": {
           "field": "wait_for_completion",
@@ -55443,7 +55471,7 @@
         "name": "ignore_job_failure",
         "type": "boolean",
         "value": null,
-        "label": "Succeed even if the sync fails",
+        "label": "Ignore Sync Failure",
         "placeholder": "By default this node fails when the AWX sync ends failed/error/canceled. Tick to carry on regardless.",
         "visible_when": {
           "field": "wait_for_completion",
@@ -57479,7 +57507,7 @@
     ]
   },
   "infrastructure/awx/job_template_launch": {
-    "hash": "af4d480efe7e7d96439466142761d855c1f651d86ba59b35ec79a30951719a72",
+    "hash": "8b0712be901719eb04c5a912629e4060496ac73faf747795c84c1d1316a22f11",
     "author": "David McElin",
     "organisation": "Flomation",
     "name": "AWX: Launch Job Template",
@@ -59269,7 +59297,7 @@
     ]
   },
   "infrastructure/awx/ping": {
-    "hash": "9211f738a347ac8b5fe9fe0916c114331e5cab7c56f8c1643e3ee08cc9aaa6d1",
+    "hash": "a62cee1fad58e4d44d8d587094b46629525a0204ca2029b6b2b86c210da4fdee",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "AWX: Ping",
@@ -60406,7 +60434,7 @@
     ]
   },
   "infrastructure/awx/project_sync": {
-    "hash": "e7c1424513d3b90fd1fc17dfb6513a38659a4c142ce1b01b3d47ed02a491e3fd",
+    "hash": "c1db8cce5bc41860e660b22839eff5d449fbbfd26535a3b4a1a089bf1cde70e8",
     "author": "David McElin",
     "organisation": "Flomation",
     "name": "AWX: Sync Project",
@@ -60517,7 +60545,7 @@
         "name": "wait_for_completion",
         "type": "boolean",
         "value": null,
-        "label": "Wait For Completion",
+        "label": "Wait for Completion",
         "placeholder": "Hold the flow until the sync has finished, then report its status"
       },
       {
@@ -60872,7 +60900,7 @@
     ]
   },
   "infrastructure/awx/schedule_create": {
-    "hash": "374e9695bb0f40da1d8564848720115f3db394b62c92345ae0131b86d90a8713",
+    "hash": "d4a34a86023d58a4a8bf62d3e76f34e70fa7bca139707765b128c18f64dd598a",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "AWX: Create Schedule",
@@ -61004,10 +61032,24 @@
       },
       {
         "name": "enabled",
-        "type": "boolean",
+        "type": "string",
         "value": null,
         "label": "Enabled",
-        "placeholder": "Leave untouched to let AWX enable it (its default). Untick to create the schedule paused."
+        "placeholder": "Create the schedule enabled or paused — the default lets AWX enable it",
+        "options": [
+          {
+            "name": "Default (enabled)",
+            "value": ""
+          },
+          {
+            "name": "Enabled",
+            "value": "true"
+          },
+          {
+            "name": "Paused",
+            "value": "false"
+          }
+        ]
       },
       {
         "name": "extra_data",
@@ -61530,7 +61572,7 @@
     ]
   },
   "infrastructure/awx/schedule_update": {
-    "hash": "41b5989156a43b3c5f807e0b1e17948a54730094fd22a1352be81a9bbd914a6a",
+    "hash": "2dc9e27c569dbdbc6afa9afc162285b47ba0cfdbdceb53bfab284c7079153596",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "AWX: Update Schedule",
@@ -61639,10 +61681,24 @@
       },
       {
         "name": "enabled",
-        "type": "boolean",
+        "type": "string",
         "value": null,
         "label": "Enabled",
-        "placeholder": "Tick to resume the schedule, untick to pause it. Leave untouched to keep it as it is."
+        "placeholder": "Pause or resume the schedule — leave unchanged to keep its current state",
+        "options": [
+          {
+            "name": "Leave unchanged",
+            "value": ""
+          },
+          {
+            "name": "Enabled",
+            "value": "true"
+          },
+          {
+            "name": "Paused",
+            "value": "false"
+          }
+        ]
       },
       {
         "name": "name",

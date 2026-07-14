@@ -1168,8 +1168,9 @@ func List(ctx context.Context, a Auth, path string, q url.Values, returnAll bool
 
 // resolveNext turns AWX's relative next link into an absolute URL against the
 // controller's own origin. An absolute link is only followed when it points at
-// the same host — otherwise a compromised or misconfigured AWX could walk our
-// bearer token to a server of its choosing.
+// the same host AND over the base's own scheme — otherwise a compromised or
+// misconfigured AWX could walk our bearer token to a server of its choosing, or
+// downgrade it onto cleartext http.
 func resolveNext(base, next string) (string, error) {
 	n, err := url.Parse(strings.TrimSpace(next))
 	if err != nil {
@@ -1183,6 +1184,13 @@ func resolveNext(base, next string) (string, error) {
 		if !strings.EqualFold(n.Host, b.Host) {
 			return "", fmt.Errorf("AWX returned a next-page link pointing at a different host (%s) — refusing to follow it", n.Host)
 		}
+		// Pin the scheme to the base's. An absolute same-host next link that DOWNGRADES
+		// https -> http (a misconfigured reverse proxy in front of AWX, or a compromised
+		// controller) would otherwise walk our bearer token over CLEARTEXT to a passive
+		// on-path eavesdropper on a Return All. Rewriting only the scheme is safe — it
+		// does not change WHICH server we talk to, unlike a host rewrite — and mirrors
+		// the api's awxNextURL, which pins the scheme the same way.
+		n.Scheme = b.Scheme
 		return n.String(), nil
 	}
 	return b.ResolveReference(n).String(), nil
@@ -1645,15 +1653,39 @@ func ValidatePrompts(cfg LaunchConfig, body map[string]interface{}, surveyVars m
 	return nil
 }
 
-// ValidateLaunch runs the whole client-side pre-flight for a launch: it fetches
-// the template's launch configuration, validates the survey answers, and refuses
-// any prompt override the template would silently ignore. The LaunchConfig it
+// ValidateLaunch runs the whole client-side pre-flight for an immediate launch: it
+// fetches the template's launch configuration, validates the survey answers, and
+// refuses any prompt override the template would silently ignore. The LaunchConfig it
 // returns is the same one the caller would have fetched anyway (its Defaults are
 // worth surfacing), so a launch action needs exactly one call.
 //
 // kind is TemplateKindJob or TemplateKindWorkflow. body is the launch body about
 // to be POSTed.
 func ValidateLaunch(ctx context.Context, a Auth, kind string, id int64, body map[string]interface{}, allowIgnored bool) (LaunchConfig, error) {
+	return validateLaunch(ctx, a, kind, id, body, allowIgnored, true)
+}
+
+// ValidateScheduleLaunch is ValidateLaunch for a SCHEDULE. A schedule is a launch-TIME
+// configuration, not an immediate launch, and AWX validates one with
+// _exclude_errors=['required']: it enforces prompt PROMPTABILITY (setting a field the
+// template does not prompt for is still a hard 400 — "Field is not configured to
+// prompt on launch") but DEFERS required-survey-variable enforcement to spawn time,
+// where it also applies the survey's own defaults. A manual launch, by contrast, needs
+// every required answer up front. So a schedule is checked for promptability ONLY: a
+// missing required survey answer AWX would accept (and default at spawn time) must not
+// be refused here, or the node is stricter than the controller and blocks a schedule
+// AWX would happily create.
+func ValidateScheduleLaunch(ctx context.Context, a Auth, kind string, id int64, body map[string]interface{}, allowIgnored bool) (LaunchConfig, error) {
+	return validateLaunch(ctx, a, kind, id, body, allowIgnored, false)
+}
+
+// validateLaunch is the shared pre-flight. requireSurveyAnswers gates the client-side
+// required-survey-variable check: an immediate launch needs it (AWX rejects a bare
+// required var), a schedule does not (AWX excludes 'required' errors for a launch-time
+// config). The survey SPEC is still fetched either way, because ValidatePrompts needs
+// the survey's variable names to tell survey answers apart from the non-survey
+// extra_vars that DO need ask_variables_on_launch.
+func validateLaunch(ctx context.Context, a Auth, kind string, id int64, body map[string]interface{}, allowIgnored, requireSurveyAnswers bool) (LaunchConfig, error) {
 	cfg, err := PreflightLaunch(ctx, a, kind, id)
 	if err != nil {
 		return LaunchConfig{}, err
@@ -1667,8 +1699,10 @@ func ValidateLaunch(ctx context.Context, a Auth, kind string, id int64, body map
 			return cfg, err
 		}
 		surveyVars = spec.VariableNames()
-		if err := ValidateSurvey(spec, extraVars); err != nil {
-			return cfg, err
+		if requireSurveyAnswers {
+			if err := ValidateSurvey(spec, extraVars); err != nil {
+				return cfg, err
+			}
 		}
 	}
 

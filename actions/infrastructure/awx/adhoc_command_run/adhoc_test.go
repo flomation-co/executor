@@ -232,6 +232,54 @@ func TestRunSoftFailsOnAFailedCommandButKeepsTheJobID(t *testing.T) {
 	Expect(out["failed"]).To(BeTrue())
 }
 
+// ★ HOST RESULTS ARE EVENTS-DERIVED, ALWAYS. host_status_counts is emitted for
+// EVERY ad-hoc run — not only when Include Output is ticked — and AWX writes the
+// events it comes from ASYNCHRONOUSLY. So the wait must settle the events even when
+// Include Output is OFF; gating WaitForEvents on include_stdout left Host Results
+// intermittently empty/partial for a downstream branch on host_status_counts.
+func TestRunSettlesHostResultsEvenWithoutIncludeOutput(t *testing.T) {
+	RegisterTestingT(t)
+
+	var detailGets int32
+	srv := awxServer(func(w http.ResponseWriter, r *http.Request) {
+		switch {
+		case r.Method == http.MethodPost && r.URL.Path == "/api/v2/ad_hoc_commands/":
+			writeJSON(w, http.StatusCreated, `{"id":42,"type":"ad_hoc_command","status":"new"}`)
+		case r.URL.Path == "/api/v2/ad_hoc_commands/" && r.URL.Query().Get("id") == "42":
+			// Terminal on the very first poll…
+			writeJSON(w, http.StatusOK, `{"count":1,"next":null,"results":[{"id":42,"status":"successful","finished":"2026-07-14T10:00:05Z","failed":false}]}`)
+		case r.URL.Path == "/api/v2/ad_hoc_commands/42/":
+			// …but the events are still flushing. host_status_counts is EMPTY until
+			// AWX reports event_processing_finished on the second detail GET.
+			if atomic.AddInt32(&detailGets, 1) == 1 {
+				writeJSON(w, http.StatusOK, `{"id":42,"status":"successful","finished":"2026-07-14T10:00:05Z","failed":false,"event_processing_finished":false,"host_status_counts":{}}`)
+				return
+			}
+			writeJSON(w, http.StatusOK, `{"id":42,"status":"successful","finished":"2026-07-14T10:00:05Z","failed":false,"event_processing_finished":true,"host_status_counts":{"ok":50}}`)
+		default:
+			// Include Output is OFF, so stdout must never be fetched.
+			t.Errorf("unexpected %s %s", r.Method, r.URL.String())
+			w.WriteHeader(http.StatusTeapot)
+		}
+	})
+	defer srv.Close()
+
+	// Wait for completion, but DELIBERATELY do NOT tick Include Output.
+	out, err := adhocrun.Execute(nil, nil, runInputs(srv.URL,
+		boolean("wait_for_completion", true),
+	))
+
+	Expect(err).To(BeNil())
+	Expect(out["success"]).To(BeTrue())
+	Expect(out["event_processing_finished"]).To(BeTrue())
+	// The whole point: read a moment earlier this was {}, and a downstream branch on
+	// host_status_counts.failures would have concluded the command succeeded on every
+	// host while the results were still pending.
+	Expect(out["host_status_counts"]).To(Equal(map[string]interface{}{"ok": float64(50)}))
+	Expect(atomic.LoadInt32(&detailGets)).To(BeNumerically(">=", 2))
+	Expect(out["stdout"]).To(Equal("")) // Include Output off: no stdout fetched
+}
+
 // ---------------------------------------------------------------------------
 // Run — the guards
 // ---------------------------------------------------------------------------

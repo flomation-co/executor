@@ -458,6 +458,48 @@ func TestLaunchSlicedTemplateReturnsAWorkflowJobAndPollsIt(t *testing.T) {
 	Expect(polled).To(ContainElement("/api/v2/workflow_jobs/99/"))
 }
 
+// TestLaunchSlicedTemplateWithIncludeOutputExplainsTheEmptyStdout: a sliced launch
+// produces a WORKFLOW job, which has NO output of its own — its stdout is always
+// empty and WaitForJob never even fetches it. With Include Output ticked the operator
+// would otherwise get a blank Output field and a bare "finished successfully" message
+// with no clue why. The summary must explain it, exactly as Wait for Job does.
+func TestLaunchSlicedTemplateWithIncludeOutputExplainsTheEmptyStdout(t *testing.T) {
+	RegisterTestingT(t)
+
+	srv := awxServer(t, func(w http.ResponseWriter, r *http.Request) {
+		switch {
+		case r.Method == http.MethodGet && r.URL.Path == "/api/v2/job_templates/9/launch/":
+			_, _ = w.Write([]byte(preflight(9, "Sliced Template", false, "ask_job_slice_count_on_launch")))
+		case r.Method == http.MethodPost && r.URL.Path == "/api/v2/job_templates/9/launch/":
+			w.WriteHeader(http.StatusCreated)
+			_, _ = w.Write([]byte(`{"id":99,"workflow_job":99,"type":"workflow_job","status":"pending","ignored_fields":{}}`))
+		case r.URL.Path == "/api/v2/workflow_jobs/":
+			_, _ = w.Write([]byte(listOf(`{"id":99,"status":"successful","finished":"2026-07-14T10:00:05Z","failed":false,"elapsed":5.2}`)))
+		case r.URL.Path == "/api/v2/workflow_jobs/99/":
+			_, _ = w.Write([]byte(`{"id":99,"status":"successful","finished":"2026-07-14T10:00:05Z","failed":false,"elapsed":5.2}`))
+		default:
+			// A workflow job has no stdout endpoint — it must never be fetched.
+			t.Errorf("unexpected %s %s", r.Method, r.URL.Path)
+		}
+	})
+
+	out, err := Execute(nil, nil, inputs(srv.URL,
+		str("job_template_id", "9"),
+		integer("job_slice_count", 4),
+		boolean("wait_for_completion", true),
+		integer("timeout_seconds", 30),
+		boolean("include_stdout", true),
+	))
+
+	Expect(err).To(BeNil())
+	Expect(out["success"]).To(BeTrue())
+	Expect(out["job_kind"]).To(Equal("workflow_job"))
+	Expect(out["stdout"]).To(Equal("")) // a workflow job has no output of its own
+	// The summary must EXPLAIN the empty Output field, not leave the operator staring
+	// at a blank field beside a success message.
+	Expect(out["tool_result"]).To(ContainSubstring("workflow job has no output of its own"))
+}
+
 // ---------------------------------------------------------------------------
 // Launch + wait
 // ---------------------------------------------------------------------------

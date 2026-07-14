@@ -47,7 +47,11 @@ var Inputs = [...]core.Connection{
 	{Name: "host_id", Type: core.ConnectionTypeString, Label: "Host", Placeholder: "The host to update", Required: true},
 	{Name: "name", Type: core.ConnectionTypeString, Label: "Host Name", Placeholder: "Leave blank to keep the current name"},
 	{Name: "description", Type: core.ConnectionTypeString, Label: "Description", Placeholder: "Leave blank to keep the current description"},
-	{Name: "enabled", Type: core.ConnectionTypeBoolean, Label: "Enabled", Placeholder: "Tick to enable the host, untick to leave it as it is. To DISABLE a host, bind this to a variable that is false."},
+	{Name: "enabled", Type: core.ConnectionTypeString, Label: "Enabled", Placeholder: "Enable or disable the host — leave unchanged to keep its current state", Options: []core.ConnectionOption{
+		{Name: "Leave unchanged", Value: ""},
+		{Name: "Enabled", Value: "true"},
+		{Name: "Disabled", Value: "false"},
+	}},
 	{Name: "variables", Type: core.ConnectionTypeText, Label: "Host Variables", Placeholder: "YAML or JSON, e.g. ansible_host: 10.0.0.5 — REPLACES all existing host variables"},
 	{Name: "additional_fields", Type: core.ConnectionTypeObject, Label: "Additional Fields", Placeholder: `Any other AWX host field, as JSON — e.g. {"enabled":false}. Takes precedence over the fields above.`},
 }

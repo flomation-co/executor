@@ -223,7 +223,15 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 			PollIntervalSeconds: poll,
 			TimeoutSeconds:      timeout,
 			IncludeStdout:       includeStdout,
-			WaitForEvents:       includeStdout,
+			// Host Results (host_status_counts) is emitted for EVERY ad-hoc run — not
+			// only when Include Output is ticked — and AWX writes the job events it is
+			// derived from ASYNCHRONOUSLY: status flips to successful the instant the
+			// runner exits while the events are still flushing to Postgres. So the wait
+			// must settle the events UNCONDITIONALLY, exactly as Wait for Job and Launch
+			// Job Template do. Gating this on include_stdout left Host Results
+			// intermittently empty/partial for a downstream branch on
+			// host_status_counts.failures.
+			WaitForEvents: true,
 		})
 		if err != nil {
 			return awx.ErrorResult(err.Error()), nil

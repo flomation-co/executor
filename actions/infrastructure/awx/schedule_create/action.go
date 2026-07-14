@@ -13,8 +13,12 @@
 //   - PROMPT FIELDS ARE REJECTED HERE, NOT IGNORED. A manual launch silently drops
 //     an override the template does not prompt for; a schedule is a hard 400
 //     ({"limit": "Field is not configured to prompt on launch."}). So the action
-//     runs exactly the same pre-flight as Launch Job Template (awx.ValidateLaunch)
-//     and soft-fails naming the field and the checkbox to tick in AWX.
+//     pre-flights with awx.ValidateScheduleLaunch and soft-fails naming the field and
+//     the checkbox to tick in AWX. It validates PROMPTABILITY ONLY, not required
+//     survey answers: AWX validates a schedule with _exclude_errors=['required'], so
+//     it accepts a schedule with a missing required survey variable (applying the
+//     survey's default at spawn time). Reusing the full launch pre-flight here would
+//     make the node stricter than the controller and refuse a schedule AWX creates.
 package infrastructure_awx_schedule_create
 
 import (
@@ -59,7 +63,11 @@ var Inputs = [...]core.Connection{
 		Placeholder: `DTSTART;TZID=Europe/London:20260801T090000 RRULE:FREQ=DAILY;INTERVAL=1 — every day at 09:00 London time. Change FREQ to HOURLY / WEEKLY / MONTHLY, and add BYDAY=MO,WE,FR for particular days.`,
 		Required:    true,
 	},
-	{Name: "enabled", Type: core.ConnectionTypeBoolean, Label: "Enabled", Placeholder: "Leave untouched to let AWX enable it (its default). Untick to create the schedule paused."},
+	{Name: "enabled", Type: core.ConnectionTypeString, Label: "Enabled", Placeholder: "Create the schedule enabled or paused — the default lets AWX enable it", Options: []core.ConnectionOption{
+		{Name: "Default (enabled)", Value: ""},
+		{Name: "Enabled", Value: "true"},
+		{Name: "Paused", Value: "false"},
+	}},
 
 	// ---- PROMPT OVERRIDES — only accepted if the template's matching
 	// 'Prompt on launch' is on; AWX hard-rejects them otherwise, so the node
@@ -121,12 +129,14 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	// ---- PRE-FLIGHT ---------------------------------------------------------
 	// The schedule body names its prompt fields slightly differently from a launch
 	// body (extra_data, not extra_vars; inventory, not inventory_id), so the
-	// pre-flight is handed a launch-shaped copy. ValidateLaunch then does exactly
-	// what Launch Job Template does: refuse any override this template is not
-	// configured to prompt for, and validate the survey answers client-side.
+	// pre-flight is handed a launch-shaped copy. ValidateScheduleLaunch refuses any
+	// override this template is not configured to prompt for — but, unlike a manual
+	// launch, it deliberately does NOT enforce required survey answers: AWX defers
+	// those to spawn time for a schedule (and fills them from the survey's defaults),
+	// so refusing here would block a schedule AWX would accept.
 	//
 	// allowIgnored is false and there is no escape hatch on this action: unlike a
-	// launch, AWX does not silently ignore these fields — it 400s — so "send it
+	// launch, AWX does not silently ignore the prompt fields — it 400s — so "send it
 	// anyway" would never succeed.
 	launchShaped := map[string]interface{}{}
 	if len(extraData) > 0 {
@@ -141,7 +151,7 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	if err := awx.SetIntIfPresent(launchShaped, inputs, "verbosity", "verbosity"); err != nil {
 		return awx.ErrorResult(err.Error()), nil
 	}
-	if _, err := awx.ValidateLaunch(ctx, auth, awx.TemplateKindJob, templateID, launchShaped, false); err != nil {
+	if _, err := awx.ValidateScheduleLaunch(ctx, auth, awx.TemplateKindJob, templateID, launchShaped, false); err != nil {
 		return awx.ErrorResult(err.Error()), nil
 	}
 
@@ -166,8 +176,8 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 		"rrule":                rrule,
 	}
 	awx.SetIfPresent(body, inputs, "description", "description")
-	// Tri-state: AWX defaults a schedule to enabled, and the manifest cannot carry
-	// a default, so an untouched checkbox must be OMITTED rather than sent as false.
+	// Three-way: "Default (enabled)" (empty) is OMITTED so AWX applies its own default
+	// of enabled; Enabled/Paused send true/false explicitly.
 	awx.SetBoolIfSet(body, inputs, "enabled", "enabled")
 	if len(extraData) > 0 {
 		body["extra_data"] = extraData

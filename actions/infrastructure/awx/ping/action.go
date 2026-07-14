@@ -171,10 +171,16 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 		if meErr != nil {
 			detail = meErr.Error()
 		}
+		// Echo the NORMALISED base (auth.BaseURL), never the raw awx_url input: GetAuth's
+		// NormaliseBaseURL has already dropped any user:pass@ userinfo an operator pasted
+		// in from a password manager or a curl command. The raw input would carry it
+		// verbatim into this soft-failure message — which lands in both error and
+		// tool_result, is persisted to the flow-run history, and is handed to every
+		// downstream node — leaking the URL-embedded password past Redact's reach.
 		merge(out, awx.ErrorResult(fmt.Sprintf(
 			"Reached %s at %s (API root %s), but it did not accept the credential. %s "+
 				"(AWX answers its ping endpoint without a credential, so reaching it does not mean the token works.)",
-			product, awx.OptionalString("awx_url", inputs), prefix, detail)))
+			product, auth.BaseURL, prefix, detail)))
 
 	default:
 		summary := fmt.Sprintf("Reached %s", product)

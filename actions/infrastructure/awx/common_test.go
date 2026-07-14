@@ -637,6 +637,32 @@ func TestResolveNextRefusesAForeignHost(t *testing.T) {
 	Expect(err.Error()).To(ContainSubstring("different host"))
 }
 
+// TestResolveNextPinsTheSchemeToTheBase: an absolute same-host next link that
+// downgrades https -> http (a misconfigured reverse proxy, or a compromised
+// controller) would otherwise walk our write-scoped bearer token over CLEARTEXT to a
+// passive on-path eavesdropper on a Return All. The scheme must be pinned back to the
+// base's own, exactly as the api's awxNextURL does.
+func TestResolveNextPinsTheSchemeToTheBase(t *testing.T) {
+	RegisterTestingT(t)
+
+	// The downgrade: base is https, AWX (or a proxy in front of it) hands back an
+	// absolute http next link on the SAME host. It must be followed over https.
+	got, err := resolveNext("https://awx.example.com", "http://awx.example.com/api/v2/jobs/?page=2")
+	Expect(err).To(BeNil())
+	Expect(got).To(Equal("https://awx.example.com/api/v2/jobs/?page=2"), "the scheme must be forced back to https")
+
+	// A same-scheme absolute link is untouched.
+	got, err = resolveNext("https://awx.example.com", "https://awx.example.com/api/v2/jobs/?page=2")
+	Expect(err).To(BeNil())
+	Expect(got).To(Equal("https://awx.example.com/api/v2/jobs/?page=2"))
+
+	// The base's own scheme wins in both directions: an operator running a lab AWX over
+	// http keeps http (the token already travels over http on every request there).
+	got, err = resolveNext("http://awx.lab", "https://awx.lab/api/v2/jobs/?page=2")
+	Expect(err).To(BeNil())
+	Expect(got).To(Equal("http://awx.lab/api/v2/jobs/?page=2"))
+}
+
 // ---------------------------------------------------------------------------
 // Stdout
 // ---------------------------------------------------------------------------
