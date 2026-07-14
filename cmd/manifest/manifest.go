@@ -304,6 +304,8 @@ func inspectPackage(dir string) map[string]ManifestEntry {
 										value = "code"
 									case "ConnectionTypeMoney":
 										value = "money"
+									case "ConnectionTypeFieldSourceMap":
+										value = "field_source_map"
 									case "ConnectionTypeComboBox":
 										value = "combobox"
 									}
