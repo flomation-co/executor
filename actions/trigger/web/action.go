@@ -43,7 +43,12 @@ var Inputs = [...]core.Connection{
 		{Name: "Publishable Key", Value: "publishable"},
 		{Name: "Open", Value: "public"},
 	}},
-	{Name: "fields", Type: core.ConnectionTypeText, Label: "Request Fields", Placeholder: `{"id":"path","limit":"query","name":"body"}`},
+	{Name: "fields", Type: core.ConnectionTypeFieldSourceMap, Label: "Request Fields", Placeholder: `{"id":"path","limit":"query","name":"body"}`, Options: []core.ConnectionOption{
+		{Name: "Path", Value: "path"},
+		{Name: "Query", Value: "query"},
+		{Name: "Header", Value: "header"},
+		{Name: "Body", Value: "body"},
+	}},
 	// keep_history turns this into a conversational endpoint: the invoke mints/
 	// resumes a thread, injects prior turns as ${history}, and records both turns.
 	// Off ⇒ a stateless API endpoint. message_field names the input treated as the

@@ -209,6 +209,14 @@ const (
 	// at execution time via a currency-aware helper. Kept string-typed so
 	// ${...} substitution flows through untouched.
 	ConnectionTypeMoney = "money"
+
+	// ConnectionTypeFieldSourceMap maps a set of named fields to the part of an
+	// HTTP request each is sourced from (path/query/header/body). The editor
+	// renders it as rows of [field name] + [source dropdown]; the stored value is
+	// a JSON OBJECT string ({"id":"path","limit":"query"}). Used by the Web
+	// Trigger's request-field mapping. The dropdown choices come from the input's
+	// Options; the value is an object (not the key_value_array's array form).
+	ConnectionTypeFieldSourceMap = "field_source_map"
 )
 
 type Action func(flow *Flow, node *Node, inputs []*Connection) (map[string]interface{}, error)

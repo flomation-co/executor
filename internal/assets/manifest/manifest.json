@@ -122887,7 +122887,7 @@
     ]
   },
   "trigger/web": {
-    "hash": "59ae6035e5ff9bf6671bc72349e3df3dfb8779e3e8943c9cfeb819502ed3c953",
+    "hash": "b77e8383548985fd9712ac16c6f8663d0b497f5194128e0558fee92b64461c4c",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Web Trigger",
@@ -122950,10 +122950,28 @@
       },
       {
         "name": "fields",
-        "type": "text",
+        "type": "field_source_map",
         "value": null,
         "label": "Request Fields",
-        "placeholder": "{\"id\":\"path\",\"limit\":\"query\",\"name\":\"body\"}"
+        "placeholder": "{\"id\":\"path\",\"limit\":\"query\",\"name\":\"body\"}",
+        "options": [
+          {
+            "name": "Path",
+            "value": "path"
+          },
+          {
+            "name": "Query",
+            "value": "query"
+          },
+          {
+            "name": "Header",
+            "value": "header"
+          },
+          {
+            "name": "Body",
+            "value": "body"
+          }
+        ]
       },
       {
         "name": "keep_history",
