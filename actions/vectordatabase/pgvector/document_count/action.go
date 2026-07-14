@@ -12,7 +12,7 @@ import (
 )
 
 const (
-	Author       = "Ethan Tan"
+	Author       = "Dave McElin"
 	Organisation = "Flomation"
 	Name         = "Count Documents"
 	Description  = "Count the documents in the store, with an optional metadata filter"

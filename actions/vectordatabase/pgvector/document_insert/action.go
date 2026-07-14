@@ -15,7 +15,7 @@ import (
 )
 
 const (
-	Author       = "Ethan Tan"
+	Author       = "Dave McElin"
 	Organisation = "Flomation"
 	Name         = "Insert Documents"
 	Description  = "Add documents to the vector store, embedding the text automatically"

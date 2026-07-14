@@ -37,7 +37,7 @@ import (
 )
 
 const (
-	Author       = "Ethan Tan"
+	Author       = "Dave McElin"
 	Organisation = "Flomation"
 	Name         = "Upsert Documents"
 	Description  = "Insert documents, or overwrite them if they already exist"

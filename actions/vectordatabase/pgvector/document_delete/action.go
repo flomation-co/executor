@@ -27,7 +27,7 @@ import (
 )
 
 const (
-	Author       = "Ethan Tan"
+	Author       = "Dave McElin"
 	Organisation = "Flomation"
 	Name         = "Delete Documents"
 	Description  = "Remove documents by ID or by a metadata filter"

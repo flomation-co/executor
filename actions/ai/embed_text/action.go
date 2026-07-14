@@ -24,7 +24,7 @@ import (
 // side of it.
 
 const (
-	Author       = "Ethan Tan"
+	Author       = "Dave McElin"
 	Organisation = "Flomation"
 	Name         = "Embed Text"
 	Description  = "Turn text into an embedding — the numeric fingerprint of its meaning, for storing in or searching a vector database"

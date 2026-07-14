@@ -11,7 +11,7 @@ import (
 )
 
 const (
-	Author       = "Ethan Tan"
+	Author       = "Dave McElin"
 	Organisation = "Flomation"
 	Name         = "Search Documents"
 	Description  = "Find the documents most similar in meaning to a query"

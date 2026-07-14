@@ -12,7 +12,7 @@ import (
 )
 
 const (
-	Author       = "Ethan Tan"
+	Author       = "Dave McElin"
 	Organisation = "Flomation"
 	Name         = "Inspect Vector Table"
 	Description  = "See a table's columns, embedding dimensions, indexes and row count"

@@ -13,7 +13,7 @@ import (
 )
 
 const (
-	Author       = "Ethan Tan"
+	Author       = "Dave McElin"
 	Organisation = "Flomation"
 	Name         = "Create Vector Table"
 	Description  = "Create a table that stores documents and their embeddings, with the index that makes search fast"

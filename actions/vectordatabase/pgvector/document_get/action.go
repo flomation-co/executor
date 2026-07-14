@@ -12,7 +12,7 @@ import (
 )
 
 const (
-	Author       = "Ethan Tan"
+	Author       = "Dave McElin"
 	Organisation = "Flomation"
 	Name         = "Get Document"
 	Description  = "Fetch a single document by its ID"

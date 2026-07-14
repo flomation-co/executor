@@ -25,7 +25,7 @@ import (
 // the text re-embeds it in the same statement by default.
 
 const (
-	Author       = "Ethan Tan"
+	Author       = "Dave McElin"
 	Organisation = "Flomation"
 	Name         = "Update Document"
 	Description  = "Change a document's text or metadata, re-embedding it automatically"

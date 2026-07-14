@@ -25,7 +25,7 @@ import (
 )
 
 const (
-	Author       = "Ethan Tan"
+	Author       = "Dave McElin"
 	Organisation = "Flomation"
 	Name         = "List Documents"
 	Description  = "Browse the documents in the store, with an optional metadata filter"

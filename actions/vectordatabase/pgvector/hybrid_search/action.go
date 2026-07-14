@@ -33,7 +33,7 @@ import (
 // does the work it is good at and one round trip pays for both halves.
 
 const (
-	Author       = "Ethan Tan"
+	Author       = "Dave McElin"
 	Organisation = "Flomation"
 	Name         = "Hybrid Search"
 	Description  = "Combine meaning-based and keyword search, so exact terms and product codes are not missed"

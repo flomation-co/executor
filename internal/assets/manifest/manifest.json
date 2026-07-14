@@ -1358,8 +1358,8 @@
     ]
   },
   "ai/embed_text": {
-    "hash": "da46b9f8852dd951ce3e569e00b894acc04a6e76e78893e92876f1d16b6b341a",
-    "author": "Ethan Tan",
+    "hash": "a97222badf5505fa05735ea489fb67778147556ec4b9ae863be2765b7d704ab4",
+    "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Embed Text",
     "description": "Turn text into an embedding — the numeric fingerprint of its meaning, for storing in or searching a vector database",
@@ -126855,8 +126855,8 @@
     ]
   },
   "vectordatabase/pgvector/document_count": {
-    "hash": "d9bc582d4a2f52b2676202504c6b2adc754fe14bd393b9649477d283324d25b5",
-    "author": "Ethan Tan",
+    "hash": "7393a6885c28e3a6666f394ce7dd21cd75c72d7f099466a09eacb0434669ea52",
+    "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Count Documents",
     "description": "Count the documents in the store, with an optional metadata filter",
@@ -127037,8 +127037,8 @@
     ]
   },
   "vectordatabase/pgvector/document_delete": {
-    "hash": "d450dfbb2fa8b5bbe1f186fa266a212b91b01547ea0df74d18dcb2a9dd478949",
-    "author": "Ethan Tan",
+    "hash": "0c398c489d1e023368009c0cb540548e6cc9dbae94dee74364cac9da309772d6",
+    "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Delete Documents",
     "description": "Remove documents by ID or by a metadata filter",
@@ -127290,8 +127290,8 @@
     ]
   },
   "vectordatabase/pgvector/document_get": {
-    "hash": "e94489cb93408626ef9cd78c5afb56c2d95ae32094491f9d662102476b1bef39",
-    "author": "Ethan Tan",
+    "hash": "2b6842d73e7ef319e0dc1c6d4ef2c73b2b658069ecdef9a5307390e15bc92abb",
+    "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Get Document",
     "description": "Fetch a single document by its ID",
@@ -127508,8 +127508,8 @@
     ]
   },
   "vectordatabase/pgvector/document_insert": {
-    "hash": "ccf45f1db5e6a46c4c2fb1526e3481ca15a886f08d733158062eea5614b0e2b4",
-    "author": "Ethan Tan",
+    "hash": "c61c718b6163588aad5746955ad454ebbbcfcc7213985c4cc4d0f6c57fc22e16",
+    "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Insert Documents",
     "description": "Add documents to the vector store, embedding the text automatically",
@@ -127953,8 +127953,8 @@
     ]
   },
   "vectordatabase/pgvector/document_list": {
-    "hash": "e6eea93c21154b28c35337fd8e1e930110b8611aa3df898dd76dba48fe2fdfb2",
-    "author": "Ethan Tan",
+    "hash": "c283b96434704636fc5b6362303bc5eb010bfe418614cc31852ceb7e2da08df6",
+    "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "List Documents",
     "description": "Browse the documents in the store, with an optional metadata filter",
@@ -128222,8 +128222,8 @@
     ]
   },
   "vectordatabase/pgvector/document_search": {
-    "hash": "e46bebd824d8720a5f41018dd438949a24d622dabe2a63c221e31de029247687",
-    "author": "Ethan Tan",
+    "hash": "95bbfd8d29b1f9318a60c0c2e44d9f194ff450aafb41cf9f7b27b3d33389bf1f",
+    "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Search Documents",
     "description": "Find the documents most similar in meaning to a query",
@@ -128694,8 +128694,8 @@
     ]
   },
   "vectordatabase/pgvector/document_update": {
-    "hash": "95127cba33f867f175e693e5c2ea0a35e0945969793d7e5bdd07f59762113966",
-    "author": "Ethan Tan",
+    "hash": "733cdecc730355c2b91b1e2b233e5c8b5fdfe320cc3b8cc1b014adfa4ca21860",
+    "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Update Document",
     "description": "Change a document's text or metadata, re-embedding it automatically",
@@ -129098,8 +129098,8 @@
     ]
   },
   "vectordatabase/pgvector/document_upsert": {
-    "hash": "ddbb615f351bb22d7da75dd600f01365cc8d38884904c0216f55d2a180cb45aa",
-    "author": "Ethan Tan",
+    "hash": "1af7d06ab483ad085a1d4b3fc9d44494b4b8d7cf0f545fcb9c4140c4fab9cf09",
+    "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Upsert Documents",
     "description": "Insert documents, or overwrite them if they already exist",
@@ -129552,8 +129552,8 @@
     ]
   },
   "vectordatabase/pgvector/hybrid_search": {
-    "hash": "1ca057f4d890f18d307f823cf8da533d9a145554b9a376e50c0fe2aa48f28fc4",
-    "author": "Ethan Tan",
+    "hash": "d7682965bb37d6420540fd13e570b51669f012f01462c80121448aed70e0b128",
+    "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Hybrid Search",
     "description": "Combine meaning-based and keyword search, so exact terms and product codes are not missed",
@@ -130025,8 +130025,8 @@
     ]
   },
   "vectordatabase/pgvector/index_create": {
-    "hash": "998031d8da70389aeeb2a00a5593ae991f383550fa36e232720c5c9554e9030c",
-    "author": "Ethan Tan",
+    "hash": "cae9039eb464e041386212e09d20e860e377ad58716a810f1b5e89cdb15a12d5",
+    "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Create Search Index",
     "description": "Add an approximate-nearest-neighbour index so similarity search stays fast as the table grows",
@@ -130277,8 +130277,8 @@
     ]
   },
   "vectordatabase/pgvector/table_create": {
-    "hash": "523bb7b5f3b57dde5c8f7a3b5988fb97ba8c5ca159a414fed0c0be8c20cb65e6",
-    "author": "Ethan Tan",
+    "hash": "6ef404616206a2911cb77c39f51a18090d2fb2162a1879d1bac886a09725fbab",
+    "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Create Vector Table",
     "description": "Create a table that stores documents and their embeddings, with the index that makes search fast",
@@ -130546,8 +130546,8 @@
     ]
   },
   "vectordatabase/pgvector/table_info": {
-    "hash": "b13db047560a6acb7560c4acfc2fc57bac44d53423d45ef4009c6416aeea5db7",
-    "author": "Ethan Tan",
+    "hash": "bb28999ecce9faec0e29a1998af266f37f8b71029025f3e9fd3e29d6296e09de",
+    "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Inspect Vector Table",
     "description": "See a table's columns, embedding dimensions, indexes and row count",

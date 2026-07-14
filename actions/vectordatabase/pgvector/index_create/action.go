@@ -13,7 +13,7 @@ import (
 )
 
 const (
-	Author       = "Ethan Tan"
+	Author       = "Dave McElin"
 	Organisation = "Flomation"
 	Name         = "Create Search Index"
 	Description  = "Add an approximate-nearest-neighbour index so similarity search stays fast as the table grows"
