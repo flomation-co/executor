@@ -435,6 +435,65 @@ import (
 	hubspot_ticket_search "flomation.app/automate/executor/actions/hubspot/ticket_search"
 	hubspot_ticket_update "flomation.app/automate/executor/actions/hubspot/ticket_update"
 	humanintheloop_await "flomation.app/automate/executor/actions/humanintheloop/await"
+	infrastructure_awx_adhoc_command_get "flomation.app/automate/executor/actions/infrastructure/awx/adhoc_command_get"
+	infrastructure_awx_adhoc_command_run "flomation.app/automate/executor/actions/infrastructure/awx/adhoc_command_run"
+	infrastructure_awx_credential_create "flomation.app/automate/executor/actions/infrastructure/awx/credential_create"
+	infrastructure_awx_credential_delete "flomation.app/automate/executor/actions/infrastructure/awx/credential_delete"
+	infrastructure_awx_credential_get "flomation.app/automate/executor/actions/infrastructure/awx/credential_get"
+	infrastructure_awx_credential_list "flomation.app/automate/executor/actions/infrastructure/awx/credential_list"
+	infrastructure_awx_execution_environment_list "flomation.app/automate/executor/actions/infrastructure/awx/execution_environment_list"
+	infrastructure_awx_group_create "flomation.app/automate/executor/actions/infrastructure/awx/group_create"
+	infrastructure_awx_group_delete "flomation.app/automate/executor/actions/infrastructure/awx/group_delete"
+	infrastructure_awx_group_get "flomation.app/automate/executor/actions/infrastructure/awx/group_get"
+	infrastructure_awx_group_list "flomation.app/automate/executor/actions/infrastructure/awx/group_list"
+	infrastructure_awx_group_update "flomation.app/automate/executor/actions/infrastructure/awx/group_update"
+	infrastructure_awx_host_create "flomation.app/automate/executor/actions/infrastructure/awx/host_create"
+	infrastructure_awx_host_delete "flomation.app/automate/executor/actions/infrastructure/awx/host_delete"
+	infrastructure_awx_host_get "flomation.app/automate/executor/actions/infrastructure/awx/host_get"
+	infrastructure_awx_host_group_assign "flomation.app/automate/executor/actions/infrastructure/awx/host_group_assign"
+	infrastructure_awx_host_list "flomation.app/automate/executor/actions/infrastructure/awx/host_list"
+	infrastructure_awx_host_update "flomation.app/automate/executor/actions/infrastructure/awx/host_update"
+	infrastructure_awx_inventory_create "flomation.app/automate/executor/actions/infrastructure/awx/inventory_create"
+	infrastructure_awx_inventory_delete "flomation.app/automate/executor/actions/infrastructure/awx/inventory_delete"
+	infrastructure_awx_inventory_get "flomation.app/automate/executor/actions/infrastructure/awx/inventory_get"
+	infrastructure_awx_inventory_list "flomation.app/automate/executor/actions/infrastructure/awx/inventory_list"
+	infrastructure_awx_inventory_source_get "flomation.app/automate/executor/actions/infrastructure/awx/inventory_source_get"
+	infrastructure_awx_inventory_source_list "flomation.app/automate/executor/actions/infrastructure/awx/inventory_source_list"
+	infrastructure_awx_inventory_source_sync "flomation.app/automate/executor/actions/infrastructure/awx/inventory_source_sync"
+	infrastructure_awx_inventory_update "flomation.app/automate/executor/actions/infrastructure/awx/inventory_update"
+	infrastructure_awx_job_cancel "flomation.app/automate/executor/actions/infrastructure/awx/job_cancel"
+	infrastructure_awx_job_events_list "flomation.app/automate/executor/actions/infrastructure/awx/job_events_list"
+	infrastructure_awx_job_get "flomation.app/automate/executor/actions/infrastructure/awx/job_get"
+	infrastructure_awx_job_list "flomation.app/automate/executor/actions/infrastructure/awx/job_list"
+	infrastructure_awx_job_relaunch "flomation.app/automate/executor/actions/infrastructure/awx/job_relaunch"
+	infrastructure_awx_job_stdout_get "flomation.app/automate/executor/actions/infrastructure/awx/job_stdout_get"
+	infrastructure_awx_job_template_get "flomation.app/automate/executor/actions/infrastructure/awx/job_template_get"
+	infrastructure_awx_job_template_launch "flomation.app/automate/executor/actions/infrastructure/awx/job_template_launch"
+	infrastructure_awx_job_template_launch_options_get "flomation.app/automate/executor/actions/infrastructure/awx/job_template_launch_options_get"
+	infrastructure_awx_job_template_list "flomation.app/automate/executor/actions/infrastructure/awx/job_template_list"
+	infrastructure_awx_job_template_survey_get "flomation.app/automate/executor/actions/infrastructure/awx/job_template_survey_get"
+	infrastructure_awx_job_wait "flomation.app/automate/executor/actions/infrastructure/awx/job_wait"
+	infrastructure_awx_me "flomation.app/automate/executor/actions/infrastructure/awx/me"
+	infrastructure_awx_organization_list "flomation.app/automate/executor/actions/infrastructure/awx/organization_list"
+	infrastructure_awx_ping "flomation.app/automate/executor/actions/infrastructure/awx/ping"
+	infrastructure_awx_project_create "flomation.app/automate/executor/actions/infrastructure/awx/project_create"
+	infrastructure_awx_project_delete "flomation.app/automate/executor/actions/infrastructure/awx/project_delete"
+	infrastructure_awx_project_get "flomation.app/automate/executor/actions/infrastructure/awx/project_get"
+	infrastructure_awx_project_list "flomation.app/automate/executor/actions/infrastructure/awx/project_list"
+	infrastructure_awx_project_sync "flomation.app/automate/executor/actions/infrastructure/awx/project_sync"
+	infrastructure_awx_project_update "flomation.app/automate/executor/actions/infrastructure/awx/project_update"
+	infrastructure_awx_schedule_create "flomation.app/automate/executor/actions/infrastructure/awx/schedule_create"
+	infrastructure_awx_schedule_delete "flomation.app/automate/executor/actions/infrastructure/awx/schedule_delete"
+	infrastructure_awx_schedule_list "flomation.app/automate/executor/actions/infrastructure/awx/schedule_list"
+	infrastructure_awx_schedule_update "flomation.app/automate/executor/actions/infrastructure/awx/schedule_update"
+	infrastructure_awx_team_list "flomation.app/automate/executor/actions/infrastructure/awx/team_list"
+	infrastructure_awx_user_list "flomation.app/automate/executor/actions/infrastructure/awx/user_list"
+	infrastructure_awx_workflow_job_get "flomation.app/automate/executor/actions/infrastructure/awx/workflow_job_get"
+	infrastructure_awx_workflow_job_nodes_list "flomation.app/automate/executor/actions/infrastructure/awx/workflow_job_nodes_list"
+	infrastructure_awx_workflow_job_relaunch "flomation.app/automate/executor/actions/infrastructure/awx/workflow_job_relaunch"
+	infrastructure_awx_workflow_launch "flomation.app/automate/executor/actions/infrastructure/awx/workflow_launch"
+	infrastructure_awx_workflow_template_get "flomation.app/automate/executor/actions/infrastructure/awx/workflow_template_get"
+	infrastructure_awx_workflow_template_list "flomation.app/automate/executor/actions/infrastructure/awx/workflow_template_list"
 	infrastructure_helm_chart_lint "flomation.app/automate/executor/actions/infrastructure/helm/chart_lint"
 	infrastructure_helm_chart_show "flomation.app/automate/executor/actions/infrastructure/helm/chart_show"
 	infrastructure_helm_chart_template "flomation.app/automate/executor/actions/infrastructure/helm/chart_template"
@@ -1025,6 +1084,7 @@ import (
 	trigger_acuity_webhook "flomation.app/automate/executor/actions/trigger/acuity_webhook"
 	trigger_airtable_poll "flomation.app/automate/executor/actions/trigger/airtable_poll"
 	trigger_asana_webhook "flomation.app/automate/executor/actions/trigger/asana_webhook"
+	trigger_awx_webhook "flomation.app/automate/executor/actions/trigger/awx_webhook"
 	trigger_calcom_webhook "flomation.app/automate/executor/actions/trigger/calcom_webhook"
 	trigger_calendly_webhook "flomation.app/automate/executor/actions/trigger/calendly_webhook"
 	trigger_email "flomation.app/automate/executor/actions/trigger/email"
@@ -1622,6 +1682,65 @@ var Actions = map[string]core.Action{
 	"hubspot/ticket_search":                               hubspot_ticket_search.Execute,
 	"hubspot/ticket_update":                               hubspot_ticket_update.Execute,
 	"humanintheloop/await":                                humanintheloop_await.Execute,
+	"infrastructure/awx/adhoc_command_get":                infrastructure_awx_adhoc_command_get.Execute,
+	"infrastructure/awx/adhoc_command_run":                infrastructure_awx_adhoc_command_run.Execute,
+	"infrastructure/awx/credential_create":                infrastructure_awx_credential_create.Execute,
+	"infrastructure/awx/credential_delete":                infrastructure_awx_credential_delete.Execute,
+	"infrastructure/awx/credential_get":                   infrastructure_awx_credential_get.Execute,
+	"infrastructure/awx/credential_list":                  infrastructure_awx_credential_list.Execute,
+	"infrastructure/awx/execution_environment_list":       infrastructure_awx_execution_environment_list.Execute,
+	"infrastructure/awx/group_create":                     infrastructure_awx_group_create.Execute,
+	"infrastructure/awx/group_delete":                     infrastructure_awx_group_delete.Execute,
+	"infrastructure/awx/group_get":                        infrastructure_awx_group_get.Execute,
+	"infrastructure/awx/group_list":                       infrastructure_awx_group_list.Execute,
+	"infrastructure/awx/group_update":                     infrastructure_awx_group_update.Execute,
+	"infrastructure/awx/host_create":                      infrastructure_awx_host_create.Execute,
+	"infrastructure/awx/host_delete":                      infrastructure_awx_host_delete.Execute,
+	"infrastructure/awx/host_get":                         infrastructure_awx_host_get.Execute,
+	"infrastructure/awx/host_group_assign":                infrastructure_awx_host_group_assign.Execute,
+	"infrastructure/awx/host_list":                        infrastructure_awx_host_list.Execute,
+	"infrastructure/awx/host_update":                      infrastructure_awx_host_update.Execute,
+	"infrastructure/awx/inventory_create":                 infrastructure_awx_inventory_create.Execute,
+	"infrastructure/awx/inventory_delete":                 infrastructure_awx_inventory_delete.Execute,
+	"infrastructure/awx/inventory_get":                    infrastructure_awx_inventory_get.Execute,
+	"infrastructure/awx/inventory_list":                   infrastructure_awx_inventory_list.Execute,
+	"infrastructure/awx/inventory_source_get":             infrastructure_awx_inventory_source_get.Execute,
+	"infrastructure/awx/inventory_source_list":            infrastructure_awx_inventory_source_list.Execute,
+	"infrastructure/awx/inventory_source_sync":            infrastructure_awx_inventory_source_sync.Execute,
+	"infrastructure/awx/inventory_update":                 infrastructure_awx_inventory_update.Execute,
+	"infrastructure/awx/job_cancel":                       infrastructure_awx_job_cancel.Execute,
+	"infrastructure/awx/job_events_list":                  infrastructure_awx_job_events_list.Execute,
+	"infrastructure/awx/job_get":                          infrastructure_awx_job_get.Execute,
+	"infrastructure/awx/job_list":                         infrastructure_awx_job_list.Execute,
+	"infrastructure/awx/job_relaunch":                     infrastructure_awx_job_relaunch.Execute,
+	"infrastructure/awx/job_stdout_get":                   infrastructure_awx_job_stdout_get.Execute,
+	"infrastructure/awx/job_template_get":                 infrastructure_awx_job_template_get.Execute,
+	"infrastructure/awx/job_template_launch":              infrastructure_awx_job_template_launch.Execute,
+	"infrastructure/awx/job_template_launch_options_get":  infrastructure_awx_job_template_launch_options_get.Execute,
+	"infrastructure/awx/job_template_list":                infrastructure_awx_job_template_list.Execute,
+	"infrastructure/awx/job_template_survey_get":          infrastructure_awx_job_template_survey_get.Execute,
+	"infrastructure/awx/job_wait":                         infrastructure_awx_job_wait.Execute,
+	"infrastructure/awx/me":                               infrastructure_awx_me.Execute,
+	"infrastructure/awx/organization_list":                infrastructure_awx_organization_list.Execute,
+	"infrastructure/awx/ping":                             infrastructure_awx_ping.Execute,
+	"infrastructure/awx/project_create":                   infrastructure_awx_project_create.Execute,
+	"infrastructure/awx/project_delete":                   infrastructure_awx_project_delete.Execute,
+	"infrastructure/awx/project_get":                      infrastructure_awx_project_get.Execute,
+	"infrastructure/awx/project_list":                     infrastructure_awx_project_list.Execute,
+	"infrastructure/awx/project_sync":                     infrastructure_awx_project_sync.Execute,
+	"infrastructure/awx/project_update":                   infrastructure_awx_project_update.Execute,
+	"infrastructure/awx/schedule_create":                  infrastructure_awx_schedule_create.Execute,
+	"infrastructure/awx/schedule_delete":                  infrastructure_awx_schedule_delete.Execute,
+	"infrastructure/awx/schedule_list":                    infrastructure_awx_schedule_list.Execute,
+	"infrastructure/awx/schedule_update":                  infrastructure_awx_schedule_update.Execute,
+	"infrastructure/awx/team_list":                        infrastructure_awx_team_list.Execute,
+	"infrastructure/awx/user_list":                        infrastructure_awx_user_list.Execute,
+	"infrastructure/awx/workflow_job_get":                 infrastructure_awx_workflow_job_get.Execute,
+	"infrastructure/awx/workflow_job_nodes_list":          infrastructure_awx_workflow_job_nodes_list.Execute,
+	"infrastructure/awx/workflow_job_relaunch":            infrastructure_awx_workflow_job_relaunch.Execute,
+	"infrastructure/awx/workflow_launch":                  infrastructure_awx_workflow_launch.Execute,
+	"infrastructure/awx/workflow_template_get":            infrastructure_awx_workflow_template_get.Execute,
+	"infrastructure/awx/workflow_template_list":           infrastructure_awx_workflow_template_list.Execute,
 	"infrastructure/helm/chart_lint":                      infrastructure_helm_chart_lint.Execute,
 	"infrastructure/helm/chart_show":                      infrastructure_helm_chart_show.Execute,
 	"infrastructure/helm/chart_template":                  infrastructure_helm_chart_template.Execute,
@@ -2212,6 +2331,7 @@ var Actions = map[string]core.Action{
 	"trigger/acuity_webhook":                              trigger_acuity_webhook.Execute,
 	"trigger/airtable_poll":                               trigger_airtable_poll.Execute,
 	"trigger/asana_webhook":                               trigger_asana_webhook.Execute,
+	"trigger/awx_webhook":                                 trigger_awx_webhook.Execute,
 	"trigger/calcom_webhook":                              trigger_calcom_webhook.Execute,
 	"trigger/calendly_webhook":                            trigger_calendly_webhook.Execute,
 	"trigger/email":                                       trigger_email.Execute,
