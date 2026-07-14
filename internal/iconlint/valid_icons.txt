@@ -47,6 +47,7 @@ chevron-up
 circle-check
 circle-dot
 circle-exclamation
+circle-nodes
 circle-stop
 circle-xmark
 clipboard-list

@@ -1357,6 +1357,241 @@
       }
     ]
   },
+  "ai/embed_text": {
+    "hash": "a97222badf5505fa05735ea489fb67778147556ec4b9ae863be2765b7d704ab4",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Embed Text",
+    "description": "Turn text into an embedding — the numeric fingerprint of its meaning, for storing in or searching a vector database",
+    "website": "https://www.flomation.co",
+    "icon": "brain+bolt",
+    "date": "13/07/2026",
+    "type": 2,
+    "category": {
+      "name": "AI",
+      "icon": "brain",
+      "description": "Artificial intelligence and large language model integrations"
+    },
+    "inputs": [
+      {
+        "name": "provider",
+        "type": "string",
+        "value": null,
+        "label": "Embedding Provider",
+        "placeholder": "",
+        "required": true,
+        "options": [
+          {
+            "name": "OpenAI",
+            "value": "openai"
+          },
+          {
+            "name": "OpenAI-compatible (Azure, vLLM, LocalAI, TEI…)",
+            "value": "openai_compatible"
+          },
+          {
+            "name": "Ollama (self-hosted)",
+            "value": "ollama"
+          },
+          {
+            "name": "AWS Bedrock (Titan)",
+            "value": "bedrock"
+          }
+        ]
+      },
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "API Key",
+        "placeholder": "",
+        "visible_when": {
+          "field": "provider",
+          "values": [
+            "openai",
+            "openai_compatible"
+          ]
+        }
+      },
+      {
+        "name": "base_url",
+        "type": "string",
+        "value": null,
+        "label": "Base URL",
+        "placeholder": "http://ollama.internal:11434",
+        "visible_when": {
+          "field": "provider",
+          "values": [
+            "openai_compatible",
+            "ollama"
+          ]
+        }
+      },
+      {
+        "name": "access_key",
+        "type": "secret",
+        "value": null,
+        "label": "AWS Access Key ID",
+        "placeholder": "",
+        "visible_when": {
+          "field": "provider",
+          "values": [
+            "bedrock"
+          ]
+        }
+      },
+      {
+        "name": "secret_key",
+        "type": "secret",
+        "value": null,
+        "label": "AWS Secret Access Key",
+        "placeholder": "",
+        "visible_when": {
+          "field": "provider",
+          "values": [
+            "bedrock"
+          ]
+        }
+      },
+      {
+        "name": "aws_region",
+        "type": "string",
+        "value": null,
+        "label": "AWS Region",
+        "placeholder": "us-east-1",
+        "visible_when": {
+          "field": "provider",
+          "values": [
+            "bedrock"
+          ]
+        }
+      },
+      {
+        "name": "model",
+        "type": "combobox",
+        "value": null,
+        "label": "Model",
+        "placeholder": "text-embedding-3-small",
+        "required": true,
+        "options": [
+          {
+            "name": "OpenAI text-embedding-3-small (1536 dimensions)",
+            "value": "text-embedding-3-small"
+          },
+          {
+            "name": "OpenAI text-embedding-3-large (3072 dimensions)",
+            "value": "text-embedding-3-large"
+          },
+          {
+            "name": "OpenAI text-embedding-ada-002 (1536 dimensions)",
+            "value": "text-embedding-ada-002"
+          },
+          {
+            "name": "Bedrock Titan Text v2 (1024 dimensions)",
+            "value": "amazon.titan-embed-text-v2:0"
+          },
+          {
+            "name": "Bedrock Titan Text v1 (1536 dimensions)",
+            "value": "amazon.titan-embed-text-v1"
+          },
+          {
+            "name": "Ollama nomic-embed-text (768 dimensions)",
+            "value": "nomic-embed-text"
+          },
+          {
+            "name": "Ollama mxbai-embed-large (1024 dimensions)",
+            "value": "mxbai-embed-large"
+          }
+        ]
+      },
+      {
+        "name": "text",
+        "type": "text",
+        "value": null,
+        "label": "Text",
+        "placeholder": "The text to embed"
+      },
+      {
+        "name": "texts",
+        "type": "object",
+        "value": null,
+        "label": "Texts (JSON array)",
+        "placeholder": "Embed several at once: [\"first\", \"second\"] — overrides Text above"
+      },
+      {
+        "name": "dimensions",
+        "type": "integer",
+        "value": null,
+        "label": "Dimensions",
+        "placeholder": "Leave empty for the model's default. Must match your vector table (OpenAI 3-small = 1536, Bedrock Titan v2 = 1024)"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "embedding",
+        "type": "object",
+        "value": null,
+        "label": "Embedding",
+        "placeholder": ""
+      },
+      {
+        "name": "embeddings",
+        "type": "object",
+        "value": null,
+        "label": "Embeddings",
+        "placeholder": ""
+      },
+      {
+        "name": "dimensions",
+        "type": "integer",
+        "value": null,
+        "label": "Dimensions",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Texts Embedded",
+        "placeholder": ""
+      },
+      {
+        "name": "model",
+        "type": "string",
+        "value": null,
+        "label": "Model Used",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Result",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
   "ai/gemini": {
     "hash": "1998526dd579be63c267fec8b492722555faa26849a0877f872f15089bd52f52",
     "author": "Andy Esser",
@@ -122887,7 +123122,7 @@
     ]
   },
   "trigger/web": {
-    "hash": "b77e8383548985fd9712ac16c6f8663d0b497f5194128e0558fee92b64461c4c",
+    "hash": "a67db57011da8f055238dcb0b4b8d61174d239f1456d16c2631be3e58ed8ecdd",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Web Trigger",
@@ -126789,6 +127024,3914 @@
         "type": "boolean",
         "value": null,
         "label": "Is Valid",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "vectordatabase/pgvector/document_count": {
+    "hash": "7393a6885c28e3a6666f394ce7dd21cd75c72d7f099466a09eacb0434669ea52",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Count Documents",
+    "description": "Count the documents in the store, with an optional metadata filter",
+    "website": "https://www.flomation.co",
+    "icon": "database+hashtag",
+    "date": "13/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Vector Database",
+      "icon": "circle-nodes",
+      "description": "Store and search embeddings — semantic search, similarity lookups, and retrieval-augmented generation"
+    },
+    "sub_category": {
+      "name": "pgvector",
+      "icon": "database",
+      "description": "Store and query embeddings in a PostgreSQL database with the pgvector extension"
+    },
+    "inputs": [
+      {
+        "name": "host",
+        "type": "string",
+        "value": null,
+        "label": "Database Host",
+        "placeholder": "db.example.com or 192.168.1.20 — hostname or IP, no scheme",
+        "required": true
+      },
+      {
+        "name": "port",
+        "type": "integer",
+        "value": null,
+        "label": "Port",
+        "placeholder": "5432"
+      },
+      {
+        "name": "database",
+        "type": "string",
+        "value": null,
+        "label": "Database",
+        "placeholder": "vectordb",
+        "required": true
+      },
+      {
+        "name": "username",
+        "type": "string",
+        "value": null,
+        "label": "Username",
+        "placeholder": "postgres",
+        "required": true
+      },
+      {
+        "name": "password",
+        "type": "secret",
+        "value": null,
+        "label": "Password",
+        "placeholder": "Database password",
+        "required": true
+      },
+      {
+        "name": "ssl_mode",
+        "type": "string",
+        "value": null,
+        "label": "SSL Mode",
+        "placeholder": "disable",
+        "options": [
+          {
+            "name": "Disable — no encryption",
+            "value": "disable"
+          },
+          {
+            "name": "Allow",
+            "value": "allow"
+          },
+          {
+            "name": "Prefer — encrypt if the server offers it",
+            "value": "prefer"
+          },
+          {
+            "name": "Require — encrypt, but don't verify the certificate",
+            "value": "require"
+          },
+          {
+            "name": "Verify CA — encrypt and check the certificate authority",
+            "value": "verify-ca"
+          },
+          {
+            "name": "Verify Full — encrypt and check the hostname too",
+            "value": "verify-full"
+          }
+        ]
+      },
+      {
+        "name": "schema",
+        "type": "string",
+        "value": null,
+        "label": "Schema",
+        "placeholder": "public"
+      },
+      {
+        "name": "table",
+        "type": "string",
+        "value": null,
+        "label": "Table",
+        "placeholder": "documents",
+        "required": true
+      },
+      {
+        "name": "metadata_column",
+        "type": "string",
+        "value": null,
+        "label": "Metadata Column",
+        "placeholder": "Leave blank to work it out from the table"
+      },
+      {
+        "name": "metadata_filter",
+        "type": "key_value_array",
+        "value": null,
+        "label": "Metadata Filter",
+        "placeholder": "Only count documents whose metadata matches every pair"
+      },
+      {
+        "name": "metadata_filter_json",
+        "type": "object",
+        "value": null,
+        "label": "Advanced Metadata Filter (JSON)",
+        "placeholder": "{\"source\": {\"eq\": \"handbook\"}, \"page\": {\"gt\": 3}}"
+      },
+      {
+        "name": "collection",
+        "type": "string",
+        "value": null,
+        "label": "Collection",
+        "placeholder": "Optional — a named sub-set of the table to work within"
+      },
+      {
+        "name": "collection_table",
+        "type": "string",
+        "value": null,
+        "label": "Collection Table",
+        "placeholder": "flomation_vector_collections — where collection names are recorded"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Document Count",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Result",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "vectordatabase/pgvector/document_delete": {
+    "hash": "0c398c489d1e023368009c0cb540548e6cc9dbae94dee74364cac9da309772d6",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Delete Documents",
+    "description": "Remove documents by ID or by a metadata filter",
+    "website": "https://www.flomation.co",
+    "icon": "database+trash",
+    "date": "13/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Vector Database",
+      "icon": "circle-nodes",
+      "description": "Store and search embeddings — semantic search, similarity lookups, and retrieval-augmented generation"
+    },
+    "sub_category": {
+      "name": "pgvector",
+      "icon": "database",
+      "description": "Store and query embeddings in a PostgreSQL database with the pgvector extension"
+    },
+    "inputs": [
+      {
+        "name": "host",
+        "type": "string",
+        "value": null,
+        "label": "Database Host",
+        "placeholder": "db.example.com or 192.168.1.20 — hostname or IP, no scheme",
+        "required": true
+      },
+      {
+        "name": "port",
+        "type": "integer",
+        "value": null,
+        "label": "Port",
+        "placeholder": "5432"
+      },
+      {
+        "name": "database",
+        "type": "string",
+        "value": null,
+        "label": "Database",
+        "placeholder": "vectordb",
+        "required": true
+      },
+      {
+        "name": "username",
+        "type": "string",
+        "value": null,
+        "label": "Username",
+        "placeholder": "postgres",
+        "required": true
+      },
+      {
+        "name": "password",
+        "type": "secret",
+        "value": null,
+        "label": "Password",
+        "placeholder": "Database password",
+        "required": true
+      },
+      {
+        "name": "ssl_mode",
+        "type": "string",
+        "value": null,
+        "label": "SSL Mode",
+        "placeholder": "disable",
+        "options": [
+          {
+            "name": "Disable — no encryption",
+            "value": "disable"
+          },
+          {
+            "name": "Allow",
+            "value": "allow"
+          },
+          {
+            "name": "Prefer — encrypt if the server offers it",
+            "value": "prefer"
+          },
+          {
+            "name": "Require — encrypt, but don't verify the certificate",
+            "value": "require"
+          },
+          {
+            "name": "Verify CA — encrypt and check the certificate authority",
+            "value": "verify-ca"
+          },
+          {
+            "name": "Verify Full — encrypt and check the hostname too",
+            "value": "verify-full"
+          }
+        ]
+      },
+      {
+        "name": "schema",
+        "type": "string",
+        "value": null,
+        "label": "Schema",
+        "placeholder": "public"
+      },
+      {
+        "name": "table",
+        "type": "string",
+        "value": null,
+        "label": "Table",
+        "placeholder": "documents",
+        "required": true
+      },
+      {
+        "name": "id_column",
+        "type": "string",
+        "value": null,
+        "label": "ID Column",
+        "placeholder": "Leave blank to work it out from the table"
+      },
+      {
+        "name": "content_column",
+        "type": "string",
+        "value": null,
+        "label": "Content Column",
+        "placeholder": "Leave blank to work it out from the table"
+      },
+      {
+        "name": "metadata_column",
+        "type": "string",
+        "value": null,
+        "label": "Metadata Column",
+        "placeholder": "Leave blank to work it out from the table"
+      },
+      {
+        "name": "vector_column",
+        "type": "string",
+        "value": null,
+        "label": "Embedding Column",
+        "placeholder": "Leave blank to work it out from the table"
+      },
+      {
+        "name": "delete_by",
+        "type": "string",
+        "value": null,
+        "label": "Delete",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "Documents with these IDs",
+            "value": "ids"
+          },
+          {
+            "name": "Documents matching a metadata filter",
+            "value": "filter"
+          }
+        ]
+      },
+      {
+        "name": "ids",
+        "type": "string",
+        "value": null,
+        "label": "Document IDs",
+        "placeholder": "One or more IDs, comma-separated — or a JSON array",
+        "visible_when": {
+          "field": "delete_by",
+          "values": [
+            "ids"
+          ]
+        }
+      },
+      {
+        "name": "metadata_filter",
+        "type": "key_value_array",
+        "value": null,
+        "label": "Metadata Filter",
+        "placeholder": "Only documents whose metadata matches every pair are deleted",
+        "visible_when": {
+          "field": "delete_by",
+          "values": [
+            "filter"
+          ]
+        }
+      },
+      {
+        "name": "metadata_filter_json",
+        "type": "object",
+        "value": null,
+        "label": "Advanced Metadata Filter (JSON)",
+        "placeholder": "{\"source\": {\"eq\": \"handbook\"}, \"page\": {\"gt\": 3}}",
+        "visible_when": {
+          "field": "delete_by",
+          "values": [
+            "filter"
+          ]
+        }
+      },
+      {
+        "name": "collection",
+        "type": "string",
+        "value": null,
+        "label": "Collection",
+        "placeholder": "Optional — restrict the delete to one named collection"
+      },
+      {
+        "name": "collection_table",
+        "type": "string",
+        "value": null,
+        "label": "Collection Table",
+        "placeholder": "flomation_vector_collections — where collection names are recorded"
+      },
+      {
+        "name": "confirm_destructive",
+        "type": "boolean",
+        "value": null,
+        "label": "I understand this permanently deletes data",
+        "placeholder": "Deleted documents cannot be recovered. Tick to allow, or bind a variable such as ${var.approved}",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "deleted",
+        "type": "integer",
+        "value": null,
+        "label": "Documents Deleted",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Result",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "vectordatabase/pgvector/document_get": {
+    "hash": "2b6842d73e7ef319e0dc1c6d4ef2c73b2b658069ecdef9a5307390e15bc92abb",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Get Document",
+    "description": "Fetch a single document by its ID",
+    "website": "https://www.flomation.co",
+    "icon": "database+file",
+    "date": "13/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Vector Database",
+      "icon": "circle-nodes",
+      "description": "Store and search embeddings — semantic search, similarity lookups, and retrieval-augmented generation"
+    },
+    "sub_category": {
+      "name": "pgvector",
+      "icon": "database",
+      "description": "Store and query embeddings in a PostgreSQL database with the pgvector extension"
+    },
+    "inputs": [
+      {
+        "name": "host",
+        "type": "string",
+        "value": null,
+        "label": "Database Host",
+        "placeholder": "db.example.com or 192.168.1.20 — hostname or IP, no scheme",
+        "required": true
+      },
+      {
+        "name": "port",
+        "type": "integer",
+        "value": null,
+        "label": "Port",
+        "placeholder": "5432"
+      },
+      {
+        "name": "database",
+        "type": "string",
+        "value": null,
+        "label": "Database",
+        "placeholder": "vectordb",
+        "required": true
+      },
+      {
+        "name": "username",
+        "type": "string",
+        "value": null,
+        "label": "Username",
+        "placeholder": "postgres",
+        "required": true
+      },
+      {
+        "name": "password",
+        "type": "secret",
+        "value": null,
+        "label": "Password",
+        "placeholder": "Database password",
+        "required": true
+      },
+      {
+        "name": "ssl_mode",
+        "type": "string",
+        "value": null,
+        "label": "SSL Mode",
+        "placeholder": "disable",
+        "options": [
+          {
+            "name": "Disable — no encryption",
+            "value": "disable"
+          },
+          {
+            "name": "Allow",
+            "value": "allow"
+          },
+          {
+            "name": "Prefer — encrypt if the server offers it",
+            "value": "prefer"
+          },
+          {
+            "name": "Require — encrypt, but don't verify the certificate",
+            "value": "require"
+          },
+          {
+            "name": "Verify CA — encrypt and check the certificate authority",
+            "value": "verify-ca"
+          },
+          {
+            "name": "Verify Full — encrypt and check the hostname too",
+            "value": "verify-full"
+          }
+        ]
+      },
+      {
+        "name": "schema",
+        "type": "string",
+        "value": null,
+        "label": "Schema",
+        "placeholder": "public"
+      },
+      {
+        "name": "table",
+        "type": "string",
+        "value": null,
+        "label": "Table",
+        "placeholder": "documents",
+        "required": true
+      },
+      {
+        "name": "id_column",
+        "type": "string",
+        "value": null,
+        "label": "ID Column",
+        "placeholder": "Leave empty to work it out — the primary key, or a column called \"id\""
+      },
+      {
+        "name": "content_column",
+        "type": "string",
+        "value": null,
+        "label": "Content Column",
+        "placeholder": "Leave empty to work it out — text, content, document…"
+      },
+      {
+        "name": "metadata_column",
+        "type": "string",
+        "value": null,
+        "label": "Metadata Column",
+        "placeholder": "Leave empty to work it out — metadata, meta…"
+      },
+      {
+        "name": "vector_column",
+        "type": "string",
+        "value": null,
+        "label": "Embedding Column",
+        "placeholder": "Leave empty to work it out — the table's vector column"
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Document ID",
+        "placeholder": "The ID of the document to fetch",
+        "required": true
+      },
+      {
+        "name": "include_vectors",
+        "type": "boolean",
+        "value": null,
+        "label": "Include the raw embedding",
+        "placeholder": "Off by default — an embedding is thousands of numbers and is rarely wanted downstream"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Document ID",
+        "placeholder": ""
+      },
+      {
+        "name": "content",
+        "type": "string",
+        "value": null,
+        "label": "Content",
+        "placeholder": ""
+      },
+      {
+        "name": "metadata",
+        "type": "object",
+        "value": null,
+        "label": "Metadata",
+        "placeholder": ""
+      },
+      {
+        "name": "embedding",
+        "type": "object",
+        "value": null,
+        "label": "Embedding",
+        "placeholder": ""
+      },
+      {
+        "name": "found",
+        "type": "boolean",
+        "value": null,
+        "label": "Found",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Document",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "vectordatabase/pgvector/document_insert": {
+    "hash": "c61c718b6163588aad5746955ad454ebbbcfcc7213985c4cc4d0f6c57fc22e16",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Insert Documents",
+    "description": "Add documents to the vector store, embedding the text automatically",
+    "website": "https://www.flomation.co",
+    "icon": "database+plus",
+    "date": "13/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Vector Database",
+      "icon": "circle-nodes",
+      "description": "Store and search embeddings — semantic search, similarity lookups, and retrieval-augmented generation"
+    },
+    "sub_category": {
+      "name": "pgvector",
+      "icon": "database",
+      "description": "Store and query embeddings in a PostgreSQL database with the pgvector extension"
+    },
+    "inputs": [
+      {
+        "name": "host",
+        "type": "string",
+        "value": null,
+        "label": "Database Host",
+        "placeholder": "db.example.com or 192.168.1.20 — hostname or IP, no scheme",
+        "required": true
+      },
+      {
+        "name": "port",
+        "type": "integer",
+        "value": null,
+        "label": "Port",
+        "placeholder": "5432"
+      },
+      {
+        "name": "database",
+        "type": "string",
+        "value": null,
+        "label": "Database",
+        "placeholder": "vectordb",
+        "required": true
+      },
+      {
+        "name": "username",
+        "type": "string",
+        "value": null,
+        "label": "Username",
+        "placeholder": "postgres",
+        "required": true
+      },
+      {
+        "name": "password",
+        "type": "secret",
+        "value": null,
+        "label": "Password",
+        "placeholder": "Database password",
+        "required": true
+      },
+      {
+        "name": "ssl_mode",
+        "type": "string",
+        "value": null,
+        "label": "SSL Mode",
+        "placeholder": "disable",
+        "options": [
+          {
+            "name": "Disable — no encryption",
+            "value": "disable"
+          },
+          {
+            "name": "Allow",
+            "value": "allow"
+          },
+          {
+            "name": "Prefer — encrypt if the server offers it",
+            "value": "prefer"
+          },
+          {
+            "name": "Require — encrypt, but don't verify the certificate",
+            "value": "require"
+          },
+          {
+            "name": "Verify CA — encrypt and check the certificate authority",
+            "value": "verify-ca"
+          },
+          {
+            "name": "Verify Full — encrypt and check the hostname too",
+            "value": "verify-full"
+          }
+        ]
+      },
+      {
+        "name": "schema",
+        "type": "string",
+        "value": null,
+        "label": "Schema",
+        "placeholder": "public"
+      },
+      {
+        "name": "table",
+        "type": "string",
+        "value": null,
+        "label": "Table",
+        "placeholder": "documents",
+        "required": true
+      },
+      {
+        "name": "id_column",
+        "type": "string",
+        "value": null,
+        "label": "ID Column",
+        "placeholder": "Leave empty to work it out from the table"
+      },
+      {
+        "name": "content_column",
+        "type": "string",
+        "value": null,
+        "label": "Content Column",
+        "placeholder": "Leave empty to work it out from the table"
+      },
+      {
+        "name": "metadata_column",
+        "type": "string",
+        "value": null,
+        "label": "Metadata Column",
+        "placeholder": "Leave empty to work it out from the table"
+      },
+      {
+        "name": "vector_column",
+        "type": "string",
+        "value": null,
+        "label": "Embedding Column",
+        "placeholder": "Leave empty to work it out from the table"
+      },
+      {
+        "name": "embedding_source",
+        "type": "string",
+        "value": null,
+        "label": "Embedding Source",
+        "placeholder": "",
+        "required": true,
+        "options": [
+          {
+            "name": "Embed the text for me",
+            "value": "inline"
+          },
+          {
+            "name": "Use a vector from a previous step",
+            "value": "vector"
+          }
+        ]
+      },
+      {
+        "name": "embedding",
+        "type": "object",
+        "value": null,
+        "label": "Embedding Vector",
+        "placeholder": "Pick the Embedding output of an Embed Text step",
+        "visible_when": {
+          "field": "embedding_source",
+          "values": [
+            "vector"
+          ]
+        }
+      },
+      {
+        "name": "provider",
+        "type": "string",
+        "value": null,
+        "label": "Embedding Provider",
+        "placeholder": "",
+        "required": true,
+        "options": [
+          {
+            "name": "OpenAI",
+            "value": "openai"
+          },
+          {
+            "name": "OpenAI-compatible (Azure, vLLM, LocalAI, TEI…)",
+            "value": "openai_compatible"
+          },
+          {
+            "name": "Ollama (self-hosted)",
+            "value": "ollama"
+          },
+          {
+            "name": "AWS Bedrock (Titan)",
+            "value": "bedrock"
+          }
+        ],
+        "visible_when": {
+          "field": "embedding_source",
+          "values": [
+            "inline"
+          ]
+        }
+      },
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "Embedding API Key",
+        "placeholder": "",
+        "visible_when": {
+          "field": "provider",
+          "values": [
+            "openai",
+            "openai_compatible"
+          ]
+        }
+      },
+      {
+        "name": "base_url",
+        "type": "string",
+        "value": null,
+        "label": "Embedding Base URL",
+        "placeholder": "http://ollama.internal:11434",
+        "visible_when": {
+          "field": "provider",
+          "values": [
+            "openai_compatible",
+            "ollama"
+          ]
+        }
+      },
+      {
+        "name": "access_key",
+        "type": "secret",
+        "value": null,
+        "label": "AWS Access Key ID",
+        "placeholder": "",
+        "visible_when": {
+          "field": "provider",
+          "values": [
+            "bedrock"
+          ]
+        }
+      },
+      {
+        "name": "secret_key",
+        "type": "secret",
+        "value": null,
+        "label": "AWS Secret Access Key",
+        "placeholder": "",
+        "visible_when": {
+          "field": "provider",
+          "values": [
+            "bedrock"
+          ]
+        }
+      },
+      {
+        "name": "aws_region",
+        "type": "string",
+        "value": null,
+        "label": "AWS Region",
+        "placeholder": "us-east-1",
+        "visible_when": {
+          "field": "provider",
+          "values": [
+            "bedrock"
+          ]
+        }
+      },
+      {
+        "name": "model",
+        "type": "combobox",
+        "value": null,
+        "label": "Embedding Model",
+        "placeholder": "text-embedding-3-small",
+        "options": [
+          {
+            "name": "OpenAI text-embedding-3-small (1536 dimensions)",
+            "value": "text-embedding-3-small"
+          },
+          {
+            "name": "OpenAI text-embedding-3-large (3072 dimensions)",
+            "value": "text-embedding-3-large"
+          },
+          {
+            "name": "OpenAI text-embedding-ada-002 (1536 dimensions)",
+            "value": "text-embedding-ada-002"
+          },
+          {
+            "name": "Bedrock Titan Text v2 (1024 dimensions)",
+            "value": "amazon.titan-embed-text-v2:0"
+          },
+          {
+            "name": "Bedrock Titan Text v1 (1536 dimensions)",
+            "value": "amazon.titan-embed-text-v1"
+          },
+          {
+            "name": "Ollama nomic-embed-text (768 dimensions)",
+            "value": "nomic-embed-text"
+          },
+          {
+            "name": "Ollama mxbai-embed-large (1024 dimensions)",
+            "value": "mxbai-embed-large"
+          }
+        ],
+        "visible_when": {
+          "field": "embedding_source",
+          "values": [
+            "inline"
+          ]
+        }
+      },
+      {
+        "name": "dimensions",
+        "type": "integer",
+        "value": null,
+        "label": "Dimensions",
+        "placeholder": "Leave empty for the model's default — must match the table",
+        "visible_when": {
+          "field": "embedding_source",
+          "values": [
+            "inline"
+          ]
+        }
+      },
+      {
+        "name": "content",
+        "type": "text",
+        "value": null,
+        "label": "Content",
+        "placeholder": "The document text to store and make searchable"
+      },
+      {
+        "name": "metadata",
+        "type": "object",
+        "value": null,
+        "label": "Metadata (JSON)",
+        "placeholder": "{\"source\": \"handbook.pdf\", \"page\": 3}"
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "ID",
+        "placeholder": "Leave empty to let the database generate one"
+      },
+      {
+        "name": "documents",
+        "type": "object",
+        "value": null,
+        "label": "Documents (JSON array)",
+        "placeholder": "Bulk insert: [{\"content\": \"…\", \"metadata\": {…}, \"id\": \"…\", \"embedding\": […]}] — overrides the single Content field above"
+      },
+      {
+        "name": "chunk_size",
+        "type": "integer",
+        "value": null,
+        "label": "Chunk Size (characters)",
+        "placeholder": "0 = store the document whole. Set e.g. 1000 to split long text into overlapping chunks"
+      },
+      {
+        "name": "chunk_overlap",
+        "type": "integer",
+        "value": null,
+        "label": "Chunk Overlap (characters)",
+        "placeholder": "Characters of overlap between chunks — only used when Chunk Size is set"
+      },
+      {
+        "name": "ensure_table",
+        "type": "boolean",
+        "value": null,
+        "label": "Create the table if it doesn't exist",
+        "placeholder": "Off by default: a typo in the table name would otherwise build a second, empty table"
+      },
+      {
+        "name": "collection",
+        "type": "string",
+        "value": null,
+        "label": "Collection",
+        "placeholder": "Optional — tag these documents as part of a named collection within the table"
+      },
+      {
+        "name": "collection_table",
+        "type": "string",
+        "value": null,
+        "label": "Collection Table",
+        "placeholder": "flomation_vector_collections — where collection names are recorded"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "ids",
+        "type": "object",
+        "value": null,
+        "label": "Inserted IDs",
+        "placeholder": ""
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "First Inserted ID",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Rows Inserted",
+        "placeholder": ""
+      },
+      {
+        "name": "chunks",
+        "type": "integer",
+        "value": null,
+        "label": "Chunks",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Result",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "vectordatabase/pgvector/document_list": {
+    "hash": "c283b96434704636fc5b6362303bc5eb010bfe418614cc31852ceb7e2da08df6",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "List Documents",
+    "description": "Browse the documents in the store, with an optional metadata filter",
+    "website": "https://www.flomation.co",
+    "icon": "database+list",
+    "date": "13/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Vector Database",
+      "icon": "circle-nodes",
+      "description": "Store and search embeddings — semantic search, similarity lookups, and retrieval-augmented generation"
+    },
+    "sub_category": {
+      "name": "pgvector",
+      "icon": "database",
+      "description": "Store and query embeddings in a PostgreSQL database with the pgvector extension"
+    },
+    "inputs": [
+      {
+        "name": "host",
+        "type": "string",
+        "value": null,
+        "label": "Database Host",
+        "placeholder": "db.example.com or 192.168.1.20 — hostname or IP, no scheme",
+        "required": true
+      },
+      {
+        "name": "port",
+        "type": "integer",
+        "value": null,
+        "label": "Port",
+        "placeholder": "5432"
+      },
+      {
+        "name": "database",
+        "type": "string",
+        "value": null,
+        "label": "Database",
+        "placeholder": "vectordb",
+        "required": true
+      },
+      {
+        "name": "username",
+        "type": "string",
+        "value": null,
+        "label": "Username",
+        "placeholder": "postgres",
+        "required": true
+      },
+      {
+        "name": "password",
+        "type": "secret",
+        "value": null,
+        "label": "Password",
+        "placeholder": "Database password",
+        "required": true
+      },
+      {
+        "name": "ssl_mode",
+        "type": "string",
+        "value": null,
+        "label": "SSL Mode",
+        "placeholder": "disable",
+        "options": [
+          {
+            "name": "Disable — no encryption",
+            "value": "disable"
+          },
+          {
+            "name": "Allow",
+            "value": "allow"
+          },
+          {
+            "name": "Prefer — encrypt if the server offers it",
+            "value": "prefer"
+          },
+          {
+            "name": "Require — encrypt, but don't verify the certificate",
+            "value": "require"
+          },
+          {
+            "name": "Verify CA — encrypt and check the certificate authority",
+            "value": "verify-ca"
+          },
+          {
+            "name": "Verify Full — encrypt and check the hostname too",
+            "value": "verify-full"
+          }
+        ]
+      },
+      {
+        "name": "schema",
+        "type": "string",
+        "value": null,
+        "label": "Schema",
+        "placeholder": "public"
+      },
+      {
+        "name": "table",
+        "type": "string",
+        "value": null,
+        "label": "Table",
+        "placeholder": "documents",
+        "required": true
+      },
+      {
+        "name": "id_column",
+        "type": "string",
+        "value": null,
+        "label": "ID Column",
+        "placeholder": "Leave blank to detect it automatically"
+      },
+      {
+        "name": "content_column",
+        "type": "string",
+        "value": null,
+        "label": "Content Column",
+        "placeholder": "Leave blank to detect it automatically"
+      },
+      {
+        "name": "metadata_column",
+        "type": "string",
+        "value": null,
+        "label": "Metadata Column",
+        "placeholder": "Leave blank to detect it automatically"
+      },
+      {
+        "name": "vector_column",
+        "type": "string",
+        "value": null,
+        "label": "Embedding Column",
+        "placeholder": "Leave blank to detect it automatically"
+      },
+      {
+        "name": "metadata_filter",
+        "type": "key_value_array",
+        "value": null,
+        "label": "Metadata Filter",
+        "placeholder": "Only show documents whose metadata matches every pair, e.g. source = handbook"
+      },
+      {
+        "name": "metadata_filter_json",
+        "type": "object",
+        "value": null,
+        "label": "Advanced Metadata Filter (JSON)",
+        "placeholder": "{\"page\": {\"gt\": 3}, \"tag\": {\"in\": [\"policy\",\"hr\"]}}"
+      },
+      {
+        "name": "limit",
+        "type": "integer",
+        "value": null,
+        "label": "Limit",
+        "placeholder": "Documents to show (default 50, max 1000)"
+      },
+      {
+        "name": "offset",
+        "type": "integer",
+        "value": null,
+        "label": "Offset",
+        "placeholder": "Skip this many documents first (default 0)"
+      },
+      {
+        "name": "order_by",
+        "type": "string",
+        "value": null,
+        "label": "Sort By",
+        "placeholder": "Leave empty to sort by ID"
+      },
+      {
+        "name": "order_direction",
+        "type": "string",
+        "value": null,
+        "label": "Sort Direction",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "Ascending",
+            "value": "asc"
+          },
+          {
+            "name": "Descending",
+            "value": "desc"
+          }
+        ]
+      },
+      {
+        "name": "include_vectors",
+        "type": "boolean",
+        "value": null,
+        "label": "Include Embeddings",
+        "placeholder": "Return the raw vectors too — thousands of numbers per document"
+      },
+      {
+        "name": "return_all",
+        "type": "boolean",
+        "value": null,
+        "label": "Fetch every matching document",
+        "placeholder": "Page through the whole table instead of one page"
+      },
+      {
+        "name": "collection",
+        "type": "string",
+        "value": null,
+        "label": "Collection",
+        "placeholder": "Optional — a named sub-set of the table to list within"
+      },
+      {
+        "name": "collection_table",
+        "type": "string",
+        "value": null,
+        "label": "Collection Table",
+        "placeholder": "flomation_vector_collections — where collection names are recorded"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "results",
+        "type": "object",
+        "value": null,
+        "label": "Documents",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Count",
+        "placeholder": ""
+      },
+      {
+        "name": "total",
+        "type": "integer",
+        "value": null,
+        "label": "Total Matching",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Result",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "vectordatabase/pgvector/document_search": {
+    "hash": "95bbfd8d29b1f9318a60c0c2e44d9f194ff450aafb41cf9f7b27b3d33389bf1f",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Search Documents",
+    "description": "Find the documents most similar in meaning to a query",
+    "website": "https://www.flomation.co",
+    "icon": "database+magnifying-glass",
+    "date": "13/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Vector Database",
+      "icon": "circle-nodes",
+      "description": "Store and search embeddings — semantic search, similarity lookups, and retrieval-augmented generation"
+    },
+    "sub_category": {
+      "name": "pgvector",
+      "icon": "database",
+      "description": "Store and query embeddings in a PostgreSQL database with the pgvector extension"
+    },
+    "inputs": [
+      {
+        "name": "host",
+        "type": "string",
+        "value": null,
+        "label": "Database Host",
+        "placeholder": "db.example.com or 192.168.1.20 — hostname or IP, no scheme",
+        "required": true
+      },
+      {
+        "name": "port",
+        "type": "integer",
+        "value": null,
+        "label": "Port",
+        "placeholder": "5432"
+      },
+      {
+        "name": "database",
+        "type": "string",
+        "value": null,
+        "label": "Database",
+        "placeholder": "vectordb",
+        "required": true
+      },
+      {
+        "name": "username",
+        "type": "string",
+        "value": null,
+        "label": "Username",
+        "placeholder": "postgres",
+        "required": true
+      },
+      {
+        "name": "password",
+        "type": "secret",
+        "value": null,
+        "label": "Password",
+        "placeholder": "Database password",
+        "required": true
+      },
+      {
+        "name": "ssl_mode",
+        "type": "string",
+        "value": null,
+        "label": "SSL Mode",
+        "placeholder": "disable",
+        "options": [
+          {
+            "name": "Disable — no encryption",
+            "value": "disable"
+          },
+          {
+            "name": "Allow",
+            "value": "allow"
+          },
+          {
+            "name": "Prefer — encrypt if the server offers it",
+            "value": "prefer"
+          },
+          {
+            "name": "Require — encrypt, but don't verify the certificate",
+            "value": "require"
+          },
+          {
+            "name": "Verify CA — encrypt and check the certificate authority",
+            "value": "verify-ca"
+          },
+          {
+            "name": "Verify Full — encrypt and check the hostname too",
+            "value": "verify-full"
+          }
+        ]
+      },
+      {
+        "name": "schema",
+        "type": "string",
+        "value": null,
+        "label": "Schema",
+        "placeholder": "public"
+      },
+      {
+        "name": "table",
+        "type": "string",
+        "value": null,
+        "label": "Table",
+        "placeholder": "documents",
+        "required": true
+      },
+      {
+        "name": "id_column",
+        "type": "string",
+        "value": null,
+        "label": "ID Column",
+        "placeholder": "Leave empty to work it out from the table"
+      },
+      {
+        "name": "content_column",
+        "type": "string",
+        "value": null,
+        "label": "Content Column",
+        "placeholder": "Leave empty to work it out from the table"
+      },
+      {
+        "name": "metadata_column",
+        "type": "string",
+        "value": null,
+        "label": "Metadata Column",
+        "placeholder": "Leave empty to work it out from the table"
+      },
+      {
+        "name": "vector_column",
+        "type": "string",
+        "value": null,
+        "label": "Embedding Column",
+        "placeholder": "Leave empty to work it out from the table"
+      },
+      {
+        "name": "embedding_source",
+        "type": "string",
+        "value": null,
+        "label": "Embedding Source",
+        "placeholder": "",
+        "required": true,
+        "options": [
+          {
+            "name": "Embed the text for me",
+            "value": "inline"
+          },
+          {
+            "name": "Use a vector from a previous step",
+            "value": "vector"
+          }
+        ]
+      },
+      {
+        "name": "embedding",
+        "type": "object",
+        "value": null,
+        "label": "Embedding Vector",
+        "placeholder": "Pick the Embedding output of an Embed Text step",
+        "visible_when": {
+          "field": "embedding_source",
+          "values": [
+            "vector"
+          ]
+        }
+      },
+      {
+        "name": "provider",
+        "type": "string",
+        "value": null,
+        "label": "Embedding Provider",
+        "placeholder": "",
+        "required": true,
+        "options": [
+          {
+            "name": "OpenAI",
+            "value": "openai"
+          },
+          {
+            "name": "OpenAI-compatible (Azure, vLLM, LocalAI, TEI…)",
+            "value": "openai_compatible"
+          },
+          {
+            "name": "Ollama (self-hosted)",
+            "value": "ollama"
+          },
+          {
+            "name": "AWS Bedrock (Titan)",
+            "value": "bedrock"
+          }
+        ],
+        "visible_when": {
+          "field": "embedding_source",
+          "values": [
+            "inline"
+          ]
+        }
+      },
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "Embedding API Key",
+        "placeholder": "",
+        "visible_when": {
+          "field": "provider",
+          "values": [
+            "openai",
+            "openai_compatible"
+          ]
+        }
+      },
+      {
+        "name": "base_url",
+        "type": "string",
+        "value": null,
+        "label": "Embedding Base URL",
+        "placeholder": "http://ollama.internal:11434",
+        "visible_when": {
+          "field": "provider",
+          "values": [
+            "openai_compatible",
+            "ollama"
+          ]
+        }
+      },
+      {
+        "name": "access_key",
+        "type": "secret",
+        "value": null,
+        "label": "AWS Access Key ID",
+        "placeholder": "",
+        "visible_when": {
+          "field": "provider",
+          "values": [
+            "bedrock"
+          ]
+        }
+      },
+      {
+        "name": "secret_key",
+        "type": "secret",
+        "value": null,
+        "label": "AWS Secret Access Key",
+        "placeholder": "",
+        "visible_when": {
+          "field": "provider",
+          "values": [
+            "bedrock"
+          ]
+        }
+      },
+      {
+        "name": "aws_region",
+        "type": "string",
+        "value": null,
+        "label": "AWS Region",
+        "placeholder": "us-east-1",
+        "visible_when": {
+          "field": "provider",
+          "values": [
+            "bedrock"
+          ]
+        }
+      },
+      {
+        "name": "model",
+        "type": "combobox",
+        "value": null,
+        "label": "Embedding Model",
+        "placeholder": "text-embedding-3-small",
+        "options": [
+          {
+            "name": "OpenAI text-embedding-3-small (1536 dimensions)",
+            "value": "text-embedding-3-small"
+          },
+          {
+            "name": "OpenAI text-embedding-3-large (3072 dimensions)",
+            "value": "text-embedding-3-large"
+          },
+          {
+            "name": "OpenAI text-embedding-ada-002 (1536 dimensions)",
+            "value": "text-embedding-ada-002"
+          },
+          {
+            "name": "Bedrock Titan Text v2 (1024 dimensions)",
+            "value": "amazon.titan-embed-text-v2:0"
+          },
+          {
+            "name": "Bedrock Titan Text v1 (1536 dimensions)",
+            "value": "amazon.titan-embed-text-v1"
+          },
+          {
+            "name": "Ollama nomic-embed-text (768 dimensions)",
+            "value": "nomic-embed-text"
+          },
+          {
+            "name": "Ollama mxbai-embed-large (1024 dimensions)",
+            "value": "mxbai-embed-large"
+          }
+        ],
+        "visible_when": {
+          "field": "embedding_source",
+          "values": [
+            "inline"
+          ]
+        }
+      },
+      {
+        "name": "dimensions",
+        "type": "integer",
+        "value": null,
+        "label": "Dimensions",
+        "placeholder": "Leave empty for the model's default — must match the table",
+        "visible_when": {
+          "field": "embedding_source",
+          "values": [
+            "inline"
+          ]
+        }
+      },
+      {
+        "name": "query_text",
+        "type": "text",
+        "value": null,
+        "label": "Search Query",
+        "placeholder": "What are you looking for? e.g. \"how do I reset a password\"",
+        "visible_when": {
+          "field": "embedding_source",
+          "values": [
+            "inline"
+          ]
+        }
+      },
+      {
+        "name": "limit",
+        "type": "integer",
+        "value": null,
+        "label": "Number of Results",
+        "placeholder": "4"
+      },
+      {
+        "name": "distance_metric",
+        "type": "string",
+        "value": null,
+        "label": "Distance Metric",
+        "placeholder": "cosine",
+        "options": [
+          {
+            "name": "Cosine — best for text embeddings",
+            "value": "cosine"
+          },
+          {
+            "name": "Inner Product",
+            "value": "inner_product"
+          },
+          {
+            "name": "Euclidean (L2)",
+            "value": "euclidean"
+          }
+        ]
+      },
+      {
+        "name": "min_score",
+        "type": "string",
+        "value": null,
+        "label": "Minimum Score",
+        "placeholder": "0.0–1.0. Leave empty for no minimum. 0.7 is a good starting point for cosine"
+      },
+      {
+        "name": "metadata_filter",
+        "type": "key_value_array",
+        "value": null,
+        "label": "Metadata Filter",
+        "placeholder": "Only search documents whose metadata matches"
+      },
+      {
+        "name": "metadata_filter_json",
+        "type": "object",
+        "value": null,
+        "label": "Advanced Metadata Filter (JSON)",
+        "placeholder": "{\"page\": {\"gt\": 3}, \"tag\": {\"in\": [\"a\",\"b\"]}}"
+      },
+      {
+        "name": "include_metadata",
+        "type": "boolean",
+        "value": null,
+        "label": "Include Metadata",
+        "placeholder": "Return each document's metadata alongside its text"
+      },
+      {
+        "name": "include_vectors",
+        "type": "boolean",
+        "value": null,
+        "label": "Include Embeddings",
+        "placeholder": "Return the raw embeddings too — usually not needed and very large"
+      },
+      {
+        "name": "ef_search",
+        "type": "integer",
+        "value": null,
+        "label": "HNSW ef_search",
+        "placeholder": "Leave empty for the server default. Higher = better recall, slower"
+      },
+      {
+        "name": "collection",
+        "type": "string",
+        "value": null,
+        "label": "Collection",
+        "placeholder": "Optional — a named sub-set of the table to search within"
+      },
+      {
+        "name": "collection_table",
+        "type": "string",
+        "value": null,
+        "label": "Collection Table",
+        "placeholder": "flomation_vector_collections — where collection names are recorded"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "results",
+        "type": "object",
+        "value": null,
+        "label": "Results",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Result Count",
+        "placeholder": ""
+      },
+      {
+        "name": "top_result",
+        "type": "object",
+        "value": null,
+        "label": "Best Match",
+        "placeholder": ""
+      },
+      {
+        "name": "context",
+        "type": "text",
+        "value": null,
+        "label": "Context",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "vectordatabase/pgvector/document_update": {
+    "hash": "733cdecc730355c2b91b1e2b233e5c8b5fdfe320cc3b8cc1b014adfa4ca21860",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Update Document",
+    "description": "Change a document's text or metadata, re-embedding it automatically",
+    "website": "https://www.flomation.co",
+    "icon": "database+pen",
+    "date": "13/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Vector Database",
+      "icon": "circle-nodes",
+      "description": "Store and search embeddings — semantic search, similarity lookups, and retrieval-augmented generation"
+    },
+    "sub_category": {
+      "name": "pgvector",
+      "icon": "database",
+      "description": "Store and query embeddings in a PostgreSQL database with the pgvector extension"
+    },
+    "inputs": [
+      {
+        "name": "host",
+        "type": "string",
+        "value": null,
+        "label": "Database Host",
+        "placeholder": "db.example.com or 192.168.1.20 — hostname or IP, no scheme",
+        "required": true
+      },
+      {
+        "name": "port",
+        "type": "integer",
+        "value": null,
+        "label": "Port",
+        "placeholder": "5432"
+      },
+      {
+        "name": "database",
+        "type": "string",
+        "value": null,
+        "label": "Database",
+        "placeholder": "vectordb",
+        "required": true
+      },
+      {
+        "name": "username",
+        "type": "string",
+        "value": null,
+        "label": "Username",
+        "placeholder": "postgres",
+        "required": true
+      },
+      {
+        "name": "password",
+        "type": "secret",
+        "value": null,
+        "label": "Password",
+        "placeholder": "Database password",
+        "required": true
+      },
+      {
+        "name": "ssl_mode",
+        "type": "string",
+        "value": null,
+        "label": "SSL Mode",
+        "placeholder": "disable",
+        "options": [
+          {
+            "name": "Disable — no encryption",
+            "value": "disable"
+          },
+          {
+            "name": "Allow",
+            "value": "allow"
+          },
+          {
+            "name": "Prefer — encrypt if the server offers it",
+            "value": "prefer"
+          },
+          {
+            "name": "Require — encrypt, but don't verify the certificate",
+            "value": "require"
+          },
+          {
+            "name": "Verify CA — encrypt and check the certificate authority",
+            "value": "verify-ca"
+          },
+          {
+            "name": "Verify Full — encrypt and check the hostname too",
+            "value": "verify-full"
+          }
+        ]
+      },
+      {
+        "name": "schema",
+        "type": "string",
+        "value": null,
+        "label": "Schema",
+        "placeholder": "public"
+      },
+      {
+        "name": "table",
+        "type": "string",
+        "value": null,
+        "label": "Table",
+        "placeholder": "documents",
+        "required": true
+      },
+      {
+        "name": "id_column",
+        "type": "string",
+        "value": null,
+        "label": "ID Column",
+        "placeholder": "Leave empty to work it out automatically"
+      },
+      {
+        "name": "content_column",
+        "type": "string",
+        "value": null,
+        "label": "Content Column",
+        "placeholder": "Leave empty to work it out automatically"
+      },
+      {
+        "name": "metadata_column",
+        "type": "string",
+        "value": null,
+        "label": "Metadata Column",
+        "placeholder": "Leave empty to work it out automatically"
+      },
+      {
+        "name": "vector_column",
+        "type": "string",
+        "value": null,
+        "label": "Embedding Column",
+        "placeholder": "Leave empty to work it out automatically"
+      },
+      {
+        "name": "embedding_source",
+        "type": "string",
+        "value": null,
+        "label": "Embedding Source",
+        "placeholder": "",
+        "required": true,
+        "options": [
+          {
+            "name": "Embed the text for me",
+            "value": "inline"
+          },
+          {
+            "name": "Use a vector from a previous step",
+            "value": "vector"
+          }
+        ]
+      },
+      {
+        "name": "embedding",
+        "type": "object",
+        "value": null,
+        "label": "Embedding Vector",
+        "placeholder": "Pick the Embedding output of an Embed Text step",
+        "visible_when": {
+          "field": "embedding_source",
+          "values": [
+            "vector"
+          ]
+        }
+      },
+      {
+        "name": "provider",
+        "type": "string",
+        "value": null,
+        "label": "Embedding Provider",
+        "placeholder": "",
+        "required": true,
+        "options": [
+          {
+            "name": "OpenAI",
+            "value": "openai"
+          },
+          {
+            "name": "OpenAI-compatible (Azure, vLLM, LocalAI, TEI…)",
+            "value": "openai_compatible"
+          },
+          {
+            "name": "Ollama (self-hosted)",
+            "value": "ollama"
+          },
+          {
+            "name": "AWS Bedrock (Titan)",
+            "value": "bedrock"
+          }
+        ],
+        "visible_when": {
+          "field": "embedding_source",
+          "values": [
+            "inline"
+          ]
+        }
+      },
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "Embedding API Key",
+        "placeholder": "",
+        "visible_when": {
+          "field": "provider",
+          "values": [
+            "openai",
+            "openai_compatible"
+          ]
+        }
+      },
+      {
+        "name": "base_url",
+        "type": "string",
+        "value": null,
+        "label": "Embedding Base URL",
+        "placeholder": "http://ollama.internal:11434",
+        "visible_when": {
+          "field": "provider",
+          "values": [
+            "openai_compatible",
+            "ollama"
+          ]
+        }
+      },
+      {
+        "name": "access_key",
+        "type": "secret",
+        "value": null,
+        "label": "AWS Access Key ID",
+        "placeholder": "",
+        "visible_when": {
+          "field": "provider",
+          "values": [
+            "bedrock"
+          ]
+        }
+      },
+      {
+        "name": "secret_key",
+        "type": "secret",
+        "value": null,
+        "label": "AWS Secret Access Key",
+        "placeholder": "",
+        "visible_when": {
+          "field": "provider",
+          "values": [
+            "bedrock"
+          ]
+        }
+      },
+      {
+        "name": "aws_region",
+        "type": "string",
+        "value": null,
+        "label": "AWS Region",
+        "placeholder": "us-east-1",
+        "visible_when": {
+          "field": "provider",
+          "values": [
+            "bedrock"
+          ]
+        }
+      },
+      {
+        "name": "model",
+        "type": "combobox",
+        "value": null,
+        "label": "Embedding Model",
+        "placeholder": "text-embedding-3-small",
+        "options": [
+          {
+            "name": "OpenAI text-embedding-3-small (1536 dimensions)",
+            "value": "text-embedding-3-small"
+          },
+          {
+            "name": "OpenAI text-embedding-3-large (3072 dimensions)",
+            "value": "text-embedding-3-large"
+          },
+          {
+            "name": "OpenAI text-embedding-ada-002 (1536 dimensions)",
+            "value": "text-embedding-ada-002"
+          },
+          {
+            "name": "Bedrock Titan Text v2 (1024 dimensions)",
+            "value": "amazon.titan-embed-text-v2:0"
+          },
+          {
+            "name": "Bedrock Titan Text v1 (1536 dimensions)",
+            "value": "amazon.titan-embed-text-v1"
+          },
+          {
+            "name": "Ollama nomic-embed-text (768 dimensions)",
+            "value": "nomic-embed-text"
+          },
+          {
+            "name": "Ollama mxbai-embed-large (1024 dimensions)",
+            "value": "mxbai-embed-large"
+          }
+        ],
+        "visible_when": {
+          "field": "embedding_source",
+          "values": [
+            "inline"
+          ]
+        }
+      },
+      {
+        "name": "dimensions",
+        "type": "integer",
+        "value": null,
+        "label": "Dimensions",
+        "placeholder": "Leave empty for the model's default — must match the table",
+        "visible_when": {
+          "field": "embedding_source",
+          "values": [
+            "inline"
+          ]
+        }
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Document ID",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "content",
+        "type": "text",
+        "value": null,
+        "label": "New Content",
+        "placeholder": "Leave empty to keep the current text"
+      },
+      {
+        "name": "metadata",
+        "type": "object",
+        "value": null,
+        "label": "Metadata (JSON)",
+        "placeholder": "{\"reviewed\": true}"
+      },
+      {
+        "name": "metadata_merge",
+        "type": "boolean",
+        "value": null,
+        "label": "Merge into the existing metadata rather than replacing it",
+        "placeholder": ""
+      },
+      {
+        "name": "reembed",
+        "type": "boolean",
+        "value": null,
+        "label": "Re-generate the embedding from the new text",
+        "placeholder": ""
+      }
+    ],
+    "outputs": [
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Document ID",
+        "placeholder": ""
+      },
+      {
+        "name": "updated",
+        "type": "boolean",
+        "value": null,
+        "label": "Updated",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Document",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "vectordatabase/pgvector/document_upsert": {
+    "hash": "1af7d06ab483ad085a1d4b3fc9d44494b4b8d7cf0f545fcb9c4140c4fab9cf09",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Upsert Documents",
+    "description": "Insert documents, or overwrite them if they already exist",
+    "website": "https://www.flomation.co",
+    "icon": "database+pen",
+    "date": "13/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Vector Database",
+      "icon": "circle-nodes",
+      "description": "Store and search embeddings — semantic search, similarity lookups, and retrieval-augmented generation"
+    },
+    "sub_category": {
+      "name": "pgvector",
+      "icon": "database",
+      "description": "Store and query embeddings in a PostgreSQL database with the pgvector extension"
+    },
+    "inputs": [
+      {
+        "name": "host",
+        "type": "string",
+        "value": null,
+        "label": "Database Host",
+        "placeholder": "db.example.com or 192.168.1.20 — hostname or IP, no scheme",
+        "required": true
+      },
+      {
+        "name": "port",
+        "type": "integer",
+        "value": null,
+        "label": "Port",
+        "placeholder": "5432"
+      },
+      {
+        "name": "database",
+        "type": "string",
+        "value": null,
+        "label": "Database",
+        "placeholder": "vectordb",
+        "required": true
+      },
+      {
+        "name": "username",
+        "type": "string",
+        "value": null,
+        "label": "Username",
+        "placeholder": "postgres",
+        "required": true
+      },
+      {
+        "name": "password",
+        "type": "secret",
+        "value": null,
+        "label": "Password",
+        "placeholder": "Database password",
+        "required": true
+      },
+      {
+        "name": "ssl_mode",
+        "type": "string",
+        "value": null,
+        "label": "SSL Mode",
+        "placeholder": "disable",
+        "options": [
+          {
+            "name": "Disable — no encryption",
+            "value": "disable"
+          },
+          {
+            "name": "Allow",
+            "value": "allow"
+          },
+          {
+            "name": "Prefer — encrypt if the server offers it",
+            "value": "prefer"
+          },
+          {
+            "name": "Require — encrypt, but don't verify the certificate",
+            "value": "require"
+          },
+          {
+            "name": "Verify CA — encrypt and check the certificate authority",
+            "value": "verify-ca"
+          },
+          {
+            "name": "Verify Full — encrypt and check the hostname too",
+            "value": "verify-full"
+          }
+        ]
+      },
+      {
+        "name": "schema",
+        "type": "string",
+        "value": null,
+        "label": "Schema",
+        "placeholder": "public"
+      },
+      {
+        "name": "table",
+        "type": "string",
+        "value": null,
+        "label": "Table",
+        "placeholder": "documents",
+        "required": true
+      },
+      {
+        "name": "id_column",
+        "type": "string",
+        "value": null,
+        "label": "ID Column",
+        "placeholder": "Leave empty to work it out from the table"
+      },
+      {
+        "name": "content_column",
+        "type": "string",
+        "value": null,
+        "label": "Content Column",
+        "placeholder": "Leave empty to work it out from the table"
+      },
+      {
+        "name": "metadata_column",
+        "type": "string",
+        "value": null,
+        "label": "Metadata Column",
+        "placeholder": "Leave empty to work it out from the table"
+      },
+      {
+        "name": "vector_column",
+        "type": "string",
+        "value": null,
+        "label": "Embedding Column",
+        "placeholder": "Leave empty to work it out from the table"
+      },
+      {
+        "name": "embedding_source",
+        "type": "string",
+        "value": null,
+        "label": "Embedding Source",
+        "placeholder": "",
+        "required": true,
+        "options": [
+          {
+            "name": "Embed the text for me",
+            "value": "inline"
+          },
+          {
+            "name": "Use a vector from a previous step",
+            "value": "vector"
+          }
+        ]
+      },
+      {
+        "name": "embedding",
+        "type": "object",
+        "value": null,
+        "label": "Embedding Vector",
+        "placeholder": "Pick the Embedding output of an Embed Text step",
+        "visible_when": {
+          "field": "embedding_source",
+          "values": [
+            "vector"
+          ]
+        }
+      },
+      {
+        "name": "provider",
+        "type": "string",
+        "value": null,
+        "label": "Embedding Provider",
+        "placeholder": "",
+        "required": true,
+        "options": [
+          {
+            "name": "OpenAI",
+            "value": "openai"
+          },
+          {
+            "name": "OpenAI-compatible (Azure, vLLM, LocalAI, TEI…)",
+            "value": "openai_compatible"
+          },
+          {
+            "name": "Ollama (self-hosted)",
+            "value": "ollama"
+          },
+          {
+            "name": "AWS Bedrock (Titan)",
+            "value": "bedrock"
+          }
+        ],
+        "visible_when": {
+          "field": "embedding_source",
+          "values": [
+            "inline"
+          ]
+        }
+      },
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "Embedding API Key",
+        "placeholder": "",
+        "visible_when": {
+          "field": "provider",
+          "values": [
+            "openai",
+            "openai_compatible"
+          ]
+        }
+      },
+      {
+        "name": "base_url",
+        "type": "string",
+        "value": null,
+        "label": "Embedding Base URL",
+        "placeholder": "http://ollama.internal:11434",
+        "visible_when": {
+          "field": "provider",
+          "values": [
+            "openai_compatible",
+            "ollama"
+          ]
+        }
+      },
+      {
+        "name": "access_key",
+        "type": "secret",
+        "value": null,
+        "label": "AWS Access Key ID",
+        "placeholder": "",
+        "visible_when": {
+          "field": "provider",
+          "values": [
+            "bedrock"
+          ]
+        }
+      },
+      {
+        "name": "secret_key",
+        "type": "secret",
+        "value": null,
+        "label": "AWS Secret Access Key",
+        "placeholder": "",
+        "visible_when": {
+          "field": "provider",
+          "values": [
+            "bedrock"
+          ]
+        }
+      },
+      {
+        "name": "aws_region",
+        "type": "string",
+        "value": null,
+        "label": "AWS Region",
+        "placeholder": "us-east-1",
+        "visible_when": {
+          "field": "provider",
+          "values": [
+            "bedrock"
+          ]
+        }
+      },
+      {
+        "name": "model",
+        "type": "combobox",
+        "value": null,
+        "label": "Embedding Model",
+        "placeholder": "text-embedding-3-small",
+        "options": [
+          {
+            "name": "OpenAI text-embedding-3-small (1536 dimensions)",
+            "value": "text-embedding-3-small"
+          },
+          {
+            "name": "OpenAI text-embedding-3-large (3072 dimensions)",
+            "value": "text-embedding-3-large"
+          },
+          {
+            "name": "OpenAI text-embedding-ada-002 (1536 dimensions)",
+            "value": "text-embedding-ada-002"
+          },
+          {
+            "name": "Bedrock Titan Text v2 (1024 dimensions)",
+            "value": "amazon.titan-embed-text-v2:0"
+          },
+          {
+            "name": "Bedrock Titan Text v1 (1536 dimensions)",
+            "value": "amazon.titan-embed-text-v1"
+          },
+          {
+            "name": "Ollama nomic-embed-text (768 dimensions)",
+            "value": "nomic-embed-text"
+          },
+          {
+            "name": "Ollama mxbai-embed-large (1024 dimensions)",
+            "value": "mxbai-embed-large"
+          }
+        ],
+        "visible_when": {
+          "field": "embedding_source",
+          "values": [
+            "inline"
+          ]
+        }
+      },
+      {
+        "name": "dimensions",
+        "type": "integer",
+        "value": null,
+        "label": "Dimensions",
+        "placeholder": "Leave empty for the model's default — must match the table",
+        "visible_when": {
+          "field": "embedding_source",
+          "values": [
+            "inline"
+          ]
+        }
+      },
+      {
+        "name": "content",
+        "type": "text",
+        "value": null,
+        "label": "Content",
+        "placeholder": "The document text to store"
+      },
+      {
+        "name": "metadata",
+        "type": "object",
+        "value": null,
+        "label": "Metadata (JSON)",
+        "placeholder": "{\"source\": \"handbook\", \"page\": 3}"
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "ID",
+        "placeholder": "The document's ID — the same ID next time overwrites this document"
+      },
+      {
+        "name": "documents",
+        "type": "object",
+        "value": null,
+        "label": "Documents (JSON list)",
+        "placeholder": "[{\"id\": \"doc-1\", \"content\": \"…\", \"metadata\": {\"source\": \"handbook\"}}] — upsert many at once, instead of Content above"
+      },
+      {
+        "name": "chunk_size",
+        "type": "integer",
+        "value": null,
+        "label": "Chunk Size",
+        "placeholder": "Split long text into pieces of this many characters — leave empty to store it whole"
+      },
+      {
+        "name": "chunk_overlap",
+        "type": "integer",
+        "value": null,
+        "label": "Chunk Overlap",
+        "placeholder": "Characters each piece repeats from the one before, e.g. 200"
+      },
+      {
+        "name": "conflict_target",
+        "type": "string",
+        "value": null,
+        "label": "Match Existing Documents By",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "ID",
+            "value": "id"
+          },
+          {
+            "name": "A metadata field",
+            "value": "metadata_key"
+          }
+        ]
+      },
+      {
+        "name": "conflict_metadata_key",
+        "type": "string",
+        "value": null,
+        "label": "Metadata Field",
+        "placeholder": "external_id — needs a unique index on (metadata-\u003e\u003e'external_id')",
+        "visible_when": {
+          "field": "conflict_target",
+          "values": [
+            "metadata_key"
+          ]
+        }
+      },
+      {
+        "name": "collection",
+        "type": "string",
+        "value": null,
+        "label": "Collection",
+        "placeholder": "Optional — tag these documents as part of a named collection within the table"
+      },
+      {
+        "name": "collection_table",
+        "type": "string",
+        "value": null,
+        "label": "Collection Table",
+        "placeholder": "flomation_vector_collections — where collection names are recorded"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "ids",
+        "type": "object",
+        "value": null,
+        "label": "Document IDs",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Documents Written",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Result",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "vectordatabase/pgvector/hybrid_search": {
+    "hash": "d7682965bb37d6420540fd13e570b51669f012f01462c80121448aed70e0b128",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Hybrid Search",
+    "description": "Combine meaning-based and keyword search, so exact terms and product codes are not missed",
+    "website": "https://www.flomation.co",
+    "icon": "database+bolt",
+    "date": "13/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Vector Database",
+      "icon": "circle-nodes",
+      "description": "Store and search embeddings — semantic search, similarity lookups, and retrieval-augmented generation"
+    },
+    "sub_category": {
+      "name": "pgvector",
+      "icon": "database",
+      "description": "Store and query embeddings in a PostgreSQL database with the pgvector extension"
+    },
+    "inputs": [
+      {
+        "name": "host",
+        "type": "string",
+        "value": null,
+        "label": "Database Host",
+        "placeholder": "db.example.com or 192.168.1.20 — hostname or IP, no scheme",
+        "required": true
+      },
+      {
+        "name": "port",
+        "type": "integer",
+        "value": null,
+        "label": "Port",
+        "placeholder": "5432"
+      },
+      {
+        "name": "database",
+        "type": "string",
+        "value": null,
+        "label": "Database",
+        "placeholder": "vectordb",
+        "required": true
+      },
+      {
+        "name": "username",
+        "type": "string",
+        "value": null,
+        "label": "Username",
+        "placeholder": "postgres",
+        "required": true
+      },
+      {
+        "name": "password",
+        "type": "secret",
+        "value": null,
+        "label": "Password",
+        "placeholder": "Database password",
+        "required": true
+      },
+      {
+        "name": "ssl_mode",
+        "type": "string",
+        "value": null,
+        "label": "SSL Mode",
+        "placeholder": "disable",
+        "options": [
+          {
+            "name": "Disable — no encryption",
+            "value": "disable"
+          },
+          {
+            "name": "Allow",
+            "value": "allow"
+          },
+          {
+            "name": "Prefer — encrypt if the server offers it",
+            "value": "prefer"
+          },
+          {
+            "name": "Require — encrypt, but don't verify the certificate",
+            "value": "require"
+          },
+          {
+            "name": "Verify CA — encrypt and check the certificate authority",
+            "value": "verify-ca"
+          },
+          {
+            "name": "Verify Full — encrypt and check the hostname too",
+            "value": "verify-full"
+          }
+        ]
+      },
+      {
+        "name": "schema",
+        "type": "string",
+        "value": null,
+        "label": "Schema",
+        "placeholder": "public"
+      },
+      {
+        "name": "table",
+        "type": "string",
+        "value": null,
+        "label": "Table",
+        "placeholder": "documents",
+        "required": true
+      },
+      {
+        "name": "id_column",
+        "type": "string",
+        "value": null,
+        "label": "ID Column",
+        "placeholder": "Leave empty to work it out from the table"
+      },
+      {
+        "name": "content_column",
+        "type": "string",
+        "value": null,
+        "label": "Content Column",
+        "placeholder": "Leave empty to work it out from the table"
+      },
+      {
+        "name": "metadata_column",
+        "type": "string",
+        "value": null,
+        "label": "Metadata Column",
+        "placeholder": "Leave empty to work it out from the table"
+      },
+      {
+        "name": "vector_column",
+        "type": "string",
+        "value": null,
+        "label": "Embedding Column",
+        "placeholder": "Leave empty to work it out from the table"
+      },
+      {
+        "name": "embedding_source",
+        "type": "string",
+        "value": null,
+        "label": "Embedding Source",
+        "placeholder": "",
+        "required": true,
+        "options": [
+          {
+            "name": "Embed the text for me",
+            "value": "inline"
+          },
+          {
+            "name": "Use a vector from a previous step",
+            "value": "vector"
+          }
+        ]
+      },
+      {
+        "name": "embedding",
+        "type": "object",
+        "value": null,
+        "label": "Embedding Vector",
+        "placeholder": "Pick the Embedding output of an Embed Text step",
+        "visible_when": {
+          "field": "embedding_source",
+          "values": [
+            "vector"
+          ]
+        }
+      },
+      {
+        "name": "provider",
+        "type": "string",
+        "value": null,
+        "label": "Embedding Provider",
+        "placeholder": "",
+        "required": true,
+        "options": [
+          {
+            "name": "OpenAI",
+            "value": "openai"
+          },
+          {
+            "name": "OpenAI-compatible (Azure, vLLM, LocalAI, TEI…)",
+            "value": "openai_compatible"
+          },
+          {
+            "name": "Ollama (self-hosted)",
+            "value": "ollama"
+          },
+          {
+            "name": "AWS Bedrock (Titan)",
+            "value": "bedrock"
+          }
+        ],
+        "visible_when": {
+          "field": "embedding_source",
+          "values": [
+            "inline"
+          ]
+        }
+      },
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "Embedding API Key",
+        "placeholder": "",
+        "visible_when": {
+          "field": "provider",
+          "values": [
+            "openai",
+            "openai_compatible"
+          ]
+        }
+      },
+      {
+        "name": "base_url",
+        "type": "string",
+        "value": null,
+        "label": "Embedding Base URL",
+        "placeholder": "http://ollama.internal:11434",
+        "visible_when": {
+          "field": "provider",
+          "values": [
+            "openai_compatible",
+            "ollama"
+          ]
+        }
+      },
+      {
+        "name": "access_key",
+        "type": "secret",
+        "value": null,
+        "label": "AWS Access Key ID",
+        "placeholder": "",
+        "visible_when": {
+          "field": "provider",
+          "values": [
+            "bedrock"
+          ]
+        }
+      },
+      {
+        "name": "secret_key",
+        "type": "secret",
+        "value": null,
+        "label": "AWS Secret Access Key",
+        "placeholder": "",
+        "visible_when": {
+          "field": "provider",
+          "values": [
+            "bedrock"
+          ]
+        }
+      },
+      {
+        "name": "aws_region",
+        "type": "string",
+        "value": null,
+        "label": "AWS Region",
+        "placeholder": "us-east-1",
+        "visible_when": {
+          "field": "provider",
+          "values": [
+            "bedrock"
+          ]
+        }
+      },
+      {
+        "name": "model",
+        "type": "combobox",
+        "value": null,
+        "label": "Embedding Model",
+        "placeholder": "text-embedding-3-small",
+        "options": [
+          {
+            "name": "OpenAI text-embedding-3-small (1536 dimensions)",
+            "value": "text-embedding-3-small"
+          },
+          {
+            "name": "OpenAI text-embedding-3-large (3072 dimensions)",
+            "value": "text-embedding-3-large"
+          },
+          {
+            "name": "OpenAI text-embedding-ada-002 (1536 dimensions)",
+            "value": "text-embedding-ada-002"
+          },
+          {
+            "name": "Bedrock Titan Text v2 (1024 dimensions)",
+            "value": "amazon.titan-embed-text-v2:0"
+          },
+          {
+            "name": "Bedrock Titan Text v1 (1536 dimensions)",
+            "value": "amazon.titan-embed-text-v1"
+          },
+          {
+            "name": "Ollama nomic-embed-text (768 dimensions)",
+            "value": "nomic-embed-text"
+          },
+          {
+            "name": "Ollama mxbai-embed-large (1024 dimensions)",
+            "value": "mxbai-embed-large"
+          }
+        ],
+        "visible_when": {
+          "field": "embedding_source",
+          "values": [
+            "inline"
+          ]
+        }
+      },
+      {
+        "name": "dimensions",
+        "type": "integer",
+        "value": null,
+        "label": "Dimensions",
+        "placeholder": "Leave empty for the model's default — must match the table",
+        "visible_when": {
+          "field": "embedding_source",
+          "values": [
+            "inline"
+          ]
+        }
+      },
+      {
+        "name": "query_text",
+        "type": "text",
+        "value": null,
+        "label": "Search Query",
+        "placeholder": "What are you looking for? e.g. my parcel never arrived"
+      },
+      {
+        "name": "text_query",
+        "type": "text",
+        "value": null,
+        "label": "Keyword Query",
+        "placeholder": "Leave empty to use the Search Query above"
+      },
+      {
+        "name": "limit",
+        "type": "integer",
+        "value": null,
+        "label": "Number of Results",
+        "placeholder": "10"
+      },
+      {
+        "name": "distance_metric",
+        "type": "string",
+        "value": null,
+        "label": "Distance Metric",
+        "placeholder": "cosine",
+        "options": [
+          {
+            "name": "Cosine — best for text embeddings",
+            "value": "cosine"
+          },
+          {
+            "name": "Inner Product",
+            "value": "inner_product"
+          },
+          {
+            "name": "Euclidean (L2)",
+            "value": "euclidean"
+          }
+        ]
+      },
+      {
+        "name": "fts_language",
+        "type": "string",
+        "value": null,
+        "label": "Text Search Language",
+        "placeholder": "english"
+      },
+      {
+        "name": "rrf_k",
+        "type": "integer",
+        "value": null,
+        "label": "Fusion Constant (k)",
+        "placeholder": "Reciprocal Rank Fusion constant — 60 is the standard"
+      },
+      {
+        "name": "candidate_limit",
+        "type": "integer",
+        "value": null,
+        "label": "Candidates Per Search",
+        "placeholder": "How many candidates each search contributes before they're fused"
+      },
+      {
+        "name": "tsvector_column",
+        "type": "string",
+        "value": null,
+        "label": "Indexed Text Column",
+        "placeholder": "Leave empty to search the content column directly. Set this to a generated tsvector column for a much faster keyword search"
+      },
+      {
+        "name": "metadata_filter",
+        "type": "key_value_array",
+        "value": null,
+        "label": "Metadata Filter",
+        "placeholder": "Only search documents whose metadata matches, e.g. source = handbook"
+      },
+      {
+        "name": "metadata_filter_json",
+        "type": "text",
+        "value": null,
+        "label": "Advanced Metadata Filter (JSON)",
+        "placeholder": "{\"page\": {\"gt\": 3}, \"tag\": {\"in\": [\"a\",\"b\"]}}"
+      },
+      {
+        "name": "include_metadata",
+        "type": "boolean",
+        "value": null,
+        "label": "Include Metadata",
+        "placeholder": ""
+      },
+      {
+        "name": "include_vectors",
+        "type": "boolean",
+        "value": null,
+        "label": "Include Embeddings",
+        "placeholder": "Return the stored vector with each result — large, and rarely needed"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "results",
+        "type": "object",
+        "value": null,
+        "label": "Results",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Result Count",
+        "placeholder": ""
+      },
+      {
+        "name": "top_result",
+        "type": "object",
+        "value": null,
+        "label": "Top Result",
+        "placeholder": ""
+      },
+      {
+        "name": "context",
+        "type": "text",
+        "value": null,
+        "label": "Context",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "vectordatabase/pgvector/index_create": {
+    "hash": "cae9039eb464e041386212e09d20e860e377ad58716a810f1b5e89cdb15a12d5",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Create Search Index",
+    "description": "Add an approximate-nearest-neighbour index so similarity search stays fast as the table grows",
+    "website": "https://www.flomation.co",
+    "icon": "database+bolt",
+    "date": "13/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Vector Database",
+      "icon": "circle-nodes",
+      "description": "Store and search embeddings — semantic search, similarity lookups, and retrieval-augmented generation"
+    },
+    "sub_category": {
+      "name": "pgvector",
+      "icon": "database",
+      "description": "Store and query embeddings in a PostgreSQL database with the pgvector extension"
+    },
+    "inputs": [
+      {
+        "name": "host",
+        "type": "string",
+        "value": null,
+        "label": "Database Host",
+        "placeholder": "db.example.com or 192.168.1.20 — hostname or IP, no scheme",
+        "required": true
+      },
+      {
+        "name": "port",
+        "type": "integer",
+        "value": null,
+        "label": "Port",
+        "placeholder": "5432"
+      },
+      {
+        "name": "database",
+        "type": "string",
+        "value": null,
+        "label": "Database",
+        "placeholder": "vectordb",
+        "required": true
+      },
+      {
+        "name": "username",
+        "type": "string",
+        "value": null,
+        "label": "Username",
+        "placeholder": "postgres",
+        "required": true
+      },
+      {
+        "name": "password",
+        "type": "secret",
+        "value": null,
+        "label": "Password",
+        "placeholder": "Database password",
+        "required": true
+      },
+      {
+        "name": "ssl_mode",
+        "type": "string",
+        "value": null,
+        "label": "SSL Mode",
+        "placeholder": "disable",
+        "options": [
+          {
+            "name": "Disable — no encryption",
+            "value": "disable"
+          },
+          {
+            "name": "Allow",
+            "value": "allow"
+          },
+          {
+            "name": "Prefer — encrypt if the server offers it",
+            "value": "prefer"
+          },
+          {
+            "name": "Require — encrypt, but don't verify the certificate",
+            "value": "require"
+          },
+          {
+            "name": "Verify CA — encrypt and check the certificate authority",
+            "value": "verify-ca"
+          },
+          {
+            "name": "Verify Full — encrypt and check the hostname too",
+            "value": "verify-full"
+          }
+        ]
+      },
+      {
+        "name": "schema",
+        "type": "string",
+        "value": null,
+        "label": "Schema",
+        "placeholder": "public"
+      },
+      {
+        "name": "table",
+        "type": "string",
+        "value": null,
+        "label": "Table",
+        "placeholder": "documents",
+        "required": true
+      },
+      {
+        "name": "vector_column",
+        "type": "string",
+        "value": null,
+        "label": "Embedding Column",
+        "placeholder": "Leave blank to work it out from the table — set it if the table holds nothing but embeddings"
+      },
+      {
+        "name": "index_type",
+        "type": "string",
+        "value": null,
+        "label": "Index Type",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "HNSW — best recall, slower to build",
+            "value": "hnsw"
+          },
+          {
+            "name": "IVFFlat — faster to build, needs data present",
+            "value": "ivfflat"
+          }
+        ]
+      },
+      {
+        "name": "distance_metric",
+        "type": "string",
+        "value": null,
+        "label": "Distance Metric",
+        "placeholder": "Must match the metric your searches use, or they can't use the index",
+        "options": [
+          {
+            "name": "Cosine — best for text embeddings",
+            "value": "cosine"
+          },
+          {
+            "name": "Inner Product",
+            "value": "inner_product"
+          },
+          {
+            "name": "Euclidean (L2)",
+            "value": "euclidean"
+          }
+        ]
+      },
+      {
+        "name": "hnsw_m",
+        "type": "integer",
+        "value": null,
+        "label": "HNSW: Links per Row (m)",
+        "placeholder": "16 — higher means better recall, a bigger index and a slower build",
+        "visible_when": {
+          "field": "index_type",
+          "values": [
+            "hnsw"
+          ]
+        }
+      },
+      {
+        "name": "hnsw_ef_construction",
+        "type": "integer",
+        "value": null,
+        "label": "HNSW: Build Effort (ef_construction)",
+        "placeholder": "64 — higher means a slower build and better recall (at least twice m)",
+        "visible_when": {
+          "field": "index_type",
+          "values": [
+            "hnsw"
+          ]
+        }
+      },
+      {
+        "name": "ivfflat_lists",
+        "type": "integer",
+        "value": null,
+        "label": "IVFFlat: Lists",
+        "placeholder": "100 — roughly rows ÷ 1000 for tables up to a million rows",
+        "visible_when": {
+          "field": "index_type",
+          "values": [
+            "ivfflat"
+          ]
+        }
+      },
+      {
+        "name": "concurrently",
+        "type": "boolean",
+        "value": null,
+        "label": "Build without locking the table",
+        "placeholder": "Inserts and updates keep working while the index builds, but the build takes longer"
+      },
+      {
+        "name": "analyze_after",
+        "type": "boolean",
+        "value": null,
+        "label": "Update Table Statistics",
+        "placeholder": "Run ANALYZE afterwards so Postgres starts using the new index (recommended)"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "index_name",
+        "type": "string",
+        "value": null,
+        "label": "Index Name",
+        "placeholder": ""
+      },
+      {
+        "name": "created",
+        "type": "boolean",
+        "value": null,
+        "label": "Created",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Index",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "vectordatabase/pgvector/table_create": {
+    "hash": "6ef404616206a2911cb77c39f51a18090d2fb2162a1879d1bac886a09725fbab",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Create Vector Table",
+    "description": "Create a table that stores documents and their embeddings, with the index that makes search fast",
+    "website": "https://www.flomation.co",
+    "icon": "database+plus",
+    "date": "13/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Vector Database",
+      "icon": "circle-nodes",
+      "description": "Store and search embeddings — semantic search, similarity lookups, and retrieval-augmented generation"
+    },
+    "sub_category": {
+      "name": "pgvector",
+      "icon": "database",
+      "description": "Store and query embeddings in a PostgreSQL database with the pgvector extension"
+    },
+    "inputs": [
+      {
+        "name": "host",
+        "type": "string",
+        "value": null,
+        "label": "Database Host",
+        "placeholder": "db.example.com or 192.168.1.20 — hostname or IP, no scheme",
+        "required": true
+      },
+      {
+        "name": "port",
+        "type": "integer",
+        "value": null,
+        "label": "Port",
+        "placeholder": "5432"
+      },
+      {
+        "name": "database",
+        "type": "string",
+        "value": null,
+        "label": "Database",
+        "placeholder": "vectordb",
+        "required": true
+      },
+      {
+        "name": "username",
+        "type": "string",
+        "value": null,
+        "label": "Username",
+        "placeholder": "postgres",
+        "required": true
+      },
+      {
+        "name": "password",
+        "type": "secret",
+        "value": null,
+        "label": "Password",
+        "placeholder": "Database password",
+        "required": true
+      },
+      {
+        "name": "ssl_mode",
+        "type": "string",
+        "value": null,
+        "label": "SSL Mode",
+        "placeholder": "disable",
+        "options": [
+          {
+            "name": "Disable — no encryption",
+            "value": "disable"
+          },
+          {
+            "name": "Allow",
+            "value": "allow"
+          },
+          {
+            "name": "Prefer — encrypt if the server offers it",
+            "value": "prefer"
+          },
+          {
+            "name": "Require — encrypt, but don't verify the certificate",
+            "value": "require"
+          },
+          {
+            "name": "Verify CA — encrypt and check the certificate authority",
+            "value": "verify-ca"
+          },
+          {
+            "name": "Verify Full — encrypt and check the hostname too",
+            "value": "verify-full"
+          }
+        ]
+      },
+      {
+        "name": "schema",
+        "type": "string",
+        "value": null,
+        "label": "Schema",
+        "placeholder": "public"
+      },
+      {
+        "name": "table",
+        "type": "string",
+        "value": null,
+        "label": "Table",
+        "placeholder": "my_documents",
+        "required": true
+      },
+      {
+        "name": "vector_dimensions",
+        "type": "integer",
+        "value": null,
+        "label": "Embedding Dimensions",
+        "placeholder": "1536 for OpenAI text-embedding-3-small, 1024 for Bedrock Titan v2",
+        "required": true
+      },
+      {
+        "name": "id_column",
+        "type": "string",
+        "value": null,
+        "label": "ID Column",
+        "placeholder": "id"
+      },
+      {
+        "name": "content_column",
+        "type": "string",
+        "value": null,
+        "label": "Content Column",
+        "placeholder": "text"
+      },
+      {
+        "name": "metadata_column",
+        "type": "string",
+        "value": null,
+        "label": "Metadata Column",
+        "placeholder": "metadata"
+      },
+      {
+        "name": "vector_column",
+        "type": "string",
+        "value": null,
+        "label": "Embedding Column",
+        "placeholder": "embedding"
+      },
+      {
+        "name": "create_extension",
+        "type": "boolean",
+        "value": null,
+        "label": "Create the pgvector extension if it's missing",
+        "placeholder": "On by default — needs a database user that can install extensions"
+      },
+      {
+        "name": "create_index",
+        "type": "boolean",
+        "value": null,
+        "label": "Create a search index",
+        "placeholder": "On by default — without it every search reads the whole table"
+      },
+      {
+        "name": "index_type",
+        "type": "string",
+        "value": null,
+        "label": "Index Type",
+        "placeholder": "hnsw",
+        "options": [
+          {
+            "name": "HNSW — fastest searches, slower to build",
+            "value": "hnsw"
+          },
+          {
+            "name": "IVFFlat — quicker to build, needs data to be loaded first",
+            "value": "ivfflat"
+          }
+        ],
+        "visible_when": {
+          "field": "create_index",
+          "values": [
+            "true"
+          ]
+        }
+      },
+      {
+        "name": "distance_metric",
+        "type": "string",
+        "value": null,
+        "label": "Distance Metric",
+        "placeholder": "cosine",
+        "options": [
+          {
+            "name": "Cosine — best for text embeddings",
+            "value": "cosine"
+          },
+          {
+            "name": "Inner Product",
+            "value": "inner_product"
+          },
+          {
+            "name": "Euclidean (L2)",
+            "value": "euclidean"
+          }
+        ]
+      },
+      {
+        "name": "enable_hybrid_search",
+        "type": "boolean",
+        "value": null,
+        "label": "Also index the text for keyword search",
+        "placeholder": "Lets Hybrid Search match on exact words as well as meaning"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "table",
+        "type": "string",
+        "value": null,
+        "label": "Table",
+        "placeholder": ""
+      },
+      {
+        "name": "created",
+        "type": "boolean",
+        "value": null,
+        "label": "Created",
+        "placeholder": ""
+      },
+      {
+        "name": "dimensions",
+        "type": "integer",
+        "value": null,
+        "label": "Dimensions",
+        "placeholder": ""
+      },
+      {
+        "name": "index_name",
+        "type": "string",
+        "value": null,
+        "label": "Index Name",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Table",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "vectordatabase/pgvector/table_info": {
+    "hash": "bb28999ecce9faec0e29a1998af266f37f8b71029025f3e9fd3e29d6296e09de",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Inspect Vector Table",
+    "description": "See a table's columns, embedding dimensions, indexes and row count",
+    "website": "https://www.flomation.co",
+    "icon": "database+magnifying-glass",
+    "date": "13/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Vector Database",
+      "icon": "circle-nodes",
+      "description": "Store and search embeddings — semantic search, similarity lookups, and retrieval-augmented generation"
+    },
+    "sub_category": {
+      "name": "pgvector",
+      "icon": "database",
+      "description": "Store and query embeddings in a PostgreSQL database with the pgvector extension"
+    },
+    "inputs": [
+      {
+        "name": "host",
+        "type": "string",
+        "value": null,
+        "label": "Database Host",
+        "placeholder": "db.example.com or 192.168.1.20 — hostname or IP, no scheme",
+        "required": true
+      },
+      {
+        "name": "port",
+        "type": "integer",
+        "value": null,
+        "label": "Port",
+        "placeholder": "5432"
+      },
+      {
+        "name": "database",
+        "type": "string",
+        "value": null,
+        "label": "Database",
+        "placeholder": "vectordb",
+        "required": true
+      },
+      {
+        "name": "username",
+        "type": "string",
+        "value": null,
+        "label": "Username",
+        "placeholder": "postgres",
+        "required": true
+      },
+      {
+        "name": "password",
+        "type": "secret",
+        "value": null,
+        "label": "Password",
+        "placeholder": "Database password",
+        "required": true
+      },
+      {
+        "name": "ssl_mode",
+        "type": "string",
+        "value": null,
+        "label": "SSL Mode",
+        "placeholder": "disable",
+        "options": [
+          {
+            "name": "Disable — no encryption",
+            "value": "disable"
+          },
+          {
+            "name": "Allow",
+            "value": "allow"
+          },
+          {
+            "name": "Prefer — encrypt if the server offers it",
+            "value": "prefer"
+          },
+          {
+            "name": "Require — encrypt, but don't verify the certificate",
+            "value": "require"
+          },
+          {
+            "name": "Verify CA — encrypt and check the certificate authority",
+            "value": "verify-ca"
+          },
+          {
+            "name": "Verify Full — encrypt and check the hostname too",
+            "value": "verify-full"
+          }
+        ]
+      },
+      {
+        "name": "schema",
+        "type": "string",
+        "value": null,
+        "label": "Schema",
+        "placeholder": "public"
+      },
+      {
+        "name": "table",
+        "type": "string",
+        "value": null,
+        "label": "Table",
+        "placeholder": "documents",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "columns",
+        "type": "object",
+        "value": null,
+        "label": "Columns",
+        "placeholder": ""
+      },
+      {
+        "name": "vector_column",
+        "type": "string",
+        "value": null,
+        "label": "Embedding Column",
+        "placeholder": ""
+      },
+      {
+        "name": "content_column",
+        "type": "string",
+        "value": null,
+        "label": "Content Column",
+        "placeholder": ""
+      },
+      {
+        "name": "metadata_column",
+        "type": "string",
+        "value": null,
+        "label": "Metadata Column",
+        "placeholder": ""
+      },
+      {
+        "name": "id_column",
+        "type": "string",
+        "value": null,
+        "label": "ID Column",
+        "placeholder": ""
+      },
+      {
+        "name": "dimensions",
+        "type": "integer",
+        "value": null,
+        "label": "Dimensions",
+        "placeholder": ""
+      },
+      {
+        "name": "row_count",
+        "type": "integer",
+        "value": null,
+        "label": "Row Count",
+        "placeholder": ""
+      },
+      {
+        "name": "indexes",
+        "type": "object",
+        "value": null,
+        "label": "Indexes",
+        "placeholder": ""
+      },
+      {
+        "name": "extension_installed",
+        "type": "boolean",
+        "value": null,
+        "label": "pgvector Installed",
+        "placeholder": ""
+      },
+      {
+        "name": "table_size",
+        "type": "string",
+        "value": null,
+        "label": "Table Size (including indexes)",
+        "placeholder": ""
+      },
+      {
+        "name": "has_vector_index",
+        "type": "boolean",
+        "value": null,
+        "label": "Has Vector Index",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Table Info",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
         "placeholder": ""
       },
       {

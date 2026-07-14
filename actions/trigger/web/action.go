@@ -38,7 +38,8 @@ var Inputs = [...]core.Connection{
 	//     resource-opt-in checks — the existing SDK behaviour.
 	//   - public: the endpoint is publicly open — no key required, any origin.
 	// The secure default is publishable: an empty/absent value is treated as
-	// publishable by both the API projection and Launch's gate.
+	// publishable by both the API projection and Launch's gate. (Supersedes the
+	// interim `auth` none/publishable input; the API maps legacy "none" → public.)
 	{Name: "auth_mode", Type: core.ConnectionTypeString, Label: "Authentication", Placeholder: "Publishable Key", Options: []core.ConnectionOption{
 		{Name: "Publishable Key", Value: "publishable"},
 		{Name: "Open", Value: "public"},

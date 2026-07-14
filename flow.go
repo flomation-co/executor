@@ -217,6 +217,16 @@ const (
 	// Trigger's request-field mapping. The dropdown choices come from the input's
 	// Options; the value is an object (not the key_value_array's array form).
 	ConnectionTypeFieldSourceMap = "field_source_map"
+
+	// ConnectionTypeComboBox is a string field that carries Options as
+	// *suggestions* rather than a closed set. The editor renders it as a
+	// text input with a dropdown of the suggested values: the operator can
+	// pick one or type their own. Use it where a helpful shortlist exists but
+	// the field is genuinely open-ended — the embedding Model, for instance,
+	// where the common models are worth surfacing but any model name is valid.
+	// On the wire it behaves exactly like a string, so ${...} substitution and
+	// every existing string reader flow through untouched.
+	ConnectionTypeComboBox = "combobox"
 )
 
 type Action func(flow *Flow, node *Node, inputs []*Connection) (map[string]interface{}, error)
@@ -320,7 +330,8 @@ func (c *Connection) String() *string {
 
 	if c.Type == ConnectionTypeString || c.Type == ConnectionTypeText ||
 		c.Type == ConnectionTypeDateTime || c.Type == ConnectionTypeMultiSelect ||
-		c.Type == ConnectionTypeRows || c.Type == ConnectionTypeMoney {
+		c.Type == ConnectionTypeRows || c.Type == ConnectionTypeMoney ||
+		c.Type == ConnectionTypeComboBox {
 		if v, ok := c.Value.(string); ok {
 			return &v
 		}
@@ -3240,6 +3251,7 @@ func (f *Flow) injectToolDefinitions(aiNode *Node, toolNodes []*Node, actions ma
 		ConnectionTypeObject:      "object",
 		ConnectionTypeDateTime:    "string",
 		ConnectionTypeMultiSelect: "string",
+		ConnectionTypeComboBox:    "string",
 	}
 
 	var tools []map[string]interface{}
