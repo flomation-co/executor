@@ -10,7 +10,7 @@ const (
 	Name         = "Web Response"
 	Description  = "Set the HTTP response (body, status code, content type, headers) returned by a Web Trigger flow"
 	Website      = "https://www.flomation.co"
-	Icon         = "reply"
+	Icon         = "paper-plane"
 	Date         = "13/07/2026"
 	Type         = core.ActionTypeOutput
 )

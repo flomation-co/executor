@@ -91360,13 +91360,13 @@
     "outputs": null
   },
   "output/web_response": {
-    "hash": "45c62080f60f9cfdb896901bf6bf74d56d9d39f81688df7241de0aa355fe7a4d",
+    "hash": "3b4fd9d9eb6dc3fba0768be1a622fc76a00e374e357c331cccb71dd9488b852d",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Web Response",
     "description": "Set the HTTP response (body, status code, content type, headers) returned by a Web Trigger flow",
     "website": "https://www.flomation.co",
-    "icon": "reply",
+    "icon": "paper-plane",
     "date": "13/07/2026",
     "type": 3,
     "category": {
