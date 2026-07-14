@@ -521,6 +521,35 @@ func TestAWXDeleteActionsAreDeclaredDestructive(t *testing.T) {
 	}
 }
 
+// TestAWXWaitControlsUseConsistentLabels pins the wait-family label convention. Ten
+// actions expose the same async-wait controls; a non-technical operator (Zapier is the
+// benchmark) learns them once — on Launch Job Template — and must recognise them
+// everywhere. Two actions had drifted: inventory_source_sync renamed all four ("Check
+// Every", "Give Up After", …) and project_sync miscased "Wait for Completion". That
+// breaks pattern-learning for the exact audience the node targets.
+func TestAWXWaitControlsUseConsistentLabels(t *testing.T) {
+	// The canonical label for each shared wait input. ignore_job_failure varies its
+	// resource noun on purpose (Job / Workflow / Command / Sync), so it is checked by
+	// shape rather than an exact string.
+	canonical := map[string]string{
+		"wait_for_completion":   "Wait for Completion",
+		"poll_interval_seconds": "Poll Interval (seconds)",
+		"timeout_seconds":       "Timeout (seconds)",
+	}
+	for id, inputs := range awxActionInputs() {
+		for _, in := range inputs {
+			if want, ok := canonical[in.Name]; ok && in.Label != want {
+				t.Errorf("%s: %q Label = %q, want %q — the wait controls must read the same across every waiting action",
+					id, in.Name, in.Label, want)
+			}
+			if in.Name == "ignore_job_failure" &&
+				(!strings.HasPrefix(in.Label, "Ignore ") || !strings.HasSuffix(in.Label, " Failure")) {
+				t.Errorf("%s: ignore_job_failure Label = %q, want the form \"Ignore <resource> Failure\"", id, in.Label)
+			}
+		}
+	}
+}
+
 // TestAWXTriggerIconResolves pins the one property the trigger shares with the 59
 // actions: it wears the same Ansible mark, so the AAP / AWX group reads as one node
 // in the palette rather than as a stray webhook that happens to be named AWX.
