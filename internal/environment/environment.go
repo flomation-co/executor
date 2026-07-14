@@ -17,6 +17,7 @@ import (
 	"net/url"
 	"os"
 	"strconv"
+	"sync"
 	"time"
 
 	log "github.com/sirupsen/logrus"
@@ -220,12 +221,18 @@ type Environment struct {
 	url         string
 	credentials *Credentials
 
+	idMu       sync.Mutex // guards the lazy identifier resolution
 	properties map[string]CachedProperty
 	secrets    map[string]CachedSecret
 }
 
+// NewEnvironment constructs the environment handle WITHOUT any network call. The
+// environment id (needed to fetch secrets/properties/credentials) is resolved
+// lazily the first time one is actually referenced — so a flow that never touches
+// the environment (e.g. a stateless Gateway endpoint) pays zero startup latency,
+// and one that does pays the round-trip off the process-startup critical path.
 func NewEnvironment(name string, url *string, execution string, credentials *Credentials) (*Environment, error) {
-	e := Environment{
+	return &Environment{
 		name:        name,
 		url:         *url,
 		execution:   execution,
@@ -233,21 +240,28 @@ func NewEnvironment(name string, url *string, execution string, credentials *Cre
 
 		properties: make(map[string]CachedProperty),
 		secrets:    make(map[string]CachedSecret),
-	}
+	}, nil
+}
 
-	var summary Summary
-	b, err := e.fetch(fmt.Sprintf("%v/api/v1/execution/%v/environment/%v", e.url, execution, e.name))
+// resolveIdentifier fetches the environment summary once, to learn its id, the
+// first time a secret/property/credential is needed. Safe under concurrent
+// access (tool loops / parallel nodes) via idMu.
+func (e *Environment) resolveIdentifier() error {
+	e.idMu.Lock()
+	defer e.idMu.Unlock()
+	if e.identifier != "" {
+		return nil
+	}
+	b, err := e.fetch(fmt.Sprintf("%v/api/v1/execution/%v/environment/%v", e.url, e.execution, e.name))
 	if err != nil {
-		return nil, err
+		return err
 	}
-
-	if err = json.Unmarshal(b, &summary); err != nil {
-		return nil, err
+	var summary Summary
+	if err := json.Unmarshal(b, &summary); err != nil {
+		return err
 	}
-
 	e.identifier = summary.ID
-
-	return &e, nil
+	return nil
 }
 
 func (e *Environment) GetProperty(name string) (*Property, error) {
@@ -284,6 +298,9 @@ type credentialResponse struct {
 }
 
 func (e *Environment) fetchCredential(name string) (*credentialResponse, error) {
+	if err := e.resolveIdentifier(); err != nil {
+		return nil, err
+	}
 	b, err := e.fetch(fmt.Sprintf("%v/api/v1/execution/%v/environment/%v/credential/%v", e.url, e.execution, e.identifier, url.PathEscape(name)))
 	if err != nil {
 		return nil, err
@@ -363,6 +380,9 @@ func (e *Environment) GetSecret(name string) (*Secret, error) {
 }
 
 func (e *Environment) fetchProperty(name string) (*Property, error) {
+	if err := e.resolveIdentifier(); err != nil {
+		return nil, err
+	}
 	b, err := e.fetch(fmt.Sprintf("%v/api/v1/execution/%v/environment/%v/property/%v", e.url, e.execution, e.identifier, url.PathEscape(name)))
 	if err != nil {
 		return nil, err
@@ -377,6 +397,9 @@ func (e *Environment) fetchProperty(name string) (*Property, error) {
 }
 
 func (e *Environment) fetchSecret(name string) (*Secret, error) {
+	if err := e.resolveIdentifier(); err != nil {
+		return nil, err
+	}
 	b, err := e.fetch(fmt.Sprintf("%v/api/v1/execution/%v/environment/%v/secret/%v", e.url, e.execution, e.identifier, url.PathEscape(name)))
 	if err != nil {
 		return nil, err
