@@ -151,6 +151,14 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 		return awx.ErrorResult(err.Error()), nil
 	}
 
-	return awx.ObjectResult(project, fmt.Sprintf("Created project %q (%s)",
-		awx.StringField(project, "name"), awx.IDString(project["id"]))), nil
+	summary := fmt.Sprintf("Created project %q (%s)", awx.StringField(project, "name"), awx.IDString(project["id"]))
+	if scmType != "" {
+		// ★ AWX starts the FIRST sync itself, inside Project.save() — nobody asked
+		// for it, and the project is busy while it runs. Until it finishes the
+		// project has no playbooks, and a delete or an immediate change is refused
+		// with 409 "Resource is being used by running jobs". VERIFIED on AWX 24.6.1:
+		// the project update is already 'pending' the instant the POST returns.
+		summary += ". AWX has already started the first source-control sync by itself — the project has no playbooks until it finishes, and a change or delete made right now would be refused because that sync is running. Add an AWX: Sync Project node with “Wait For Completion” if you need to be sure the playbooks are there."
+	}
+	return awx.ObjectResult(project, summary), nil
 }

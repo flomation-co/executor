@@ -51,6 +51,10 @@ var Inputs = [...]core.Connection{
 
 var Outputs = [...]core.Connection{
 	{Name: "workflow_job_id", Type: core.ConnectionTypeString, Label: "New Workflow Job ID"},
+	// Always "workflow_job" — wire it into the Job Type of a downstream Get Job /
+	// Wait for Job / Cancel Job node, which otherwise defaults to a plain job and
+	// 404s on a workflow job id.
+	{Name: "job_kind", Type: core.ConnectionTypeString, Label: "Job Type"},
 	{Name: "status", Type: core.ConnectionTypeString, Label: "Status"},
 	{Name: "finished", Type: core.ConnectionTypeBoolean, Label: "Finished"},
 	{Name: "failed", Type: core.ConnectionTypeBoolean, Label: "Failed"},
@@ -92,6 +96,7 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 
 	out := map[string]interface{}{
 		"workflow_job_id": awx.IDString(jobID),
+		"job_kind":        kind,
 		"status":          awx.StringField(relaunched, "status"),
 		"finished":        false,
 		"failed":          false,

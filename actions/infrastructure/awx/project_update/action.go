@@ -102,11 +102,39 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 		return awx.ErrorResult("Nothing to change — fill in at least one field (Name, Description, Source Control URL, Branch, Credential, Update On Launch, Allow Override, or Additional Fields)."), nil
 	}
 
+	// Read BEFORE the PATCH: AWX starts the re-sync inside Project.save(), so by
+	// the time we could ask, the answer would be a race.
+	resync := touchesSourceControl(body)
+
 	project, err := awx.UpdateResource(ctx, auth, fmt.Sprintf("projects/%d/", projectID), body)
 	if err != nil {
 		return awx.ErrorResult(err.Error()), nil
 	}
 
-	return awx.ObjectResult(project, fmt.Sprintf("Updated project %q (%d)",
-		awx.StringField(project, "name"), projectID)), nil
+	summary := fmt.Sprintf("Updated project %q (%d)", awx.StringField(project, "name"), projectID)
+	if resync {
+		summary += ". AWX has automatically started a fresh source-control sync, because a source-control field changed — the project is busy for a few seconds, so a delete or another change made right now would be refused with “a job is still running against this resource”. Wait for the sync, or add an AWX: Get Project node and check its status."
+	}
+	return awx.ObjectResult(project, summary), nil
+}
+
+// touchesSourceControl reports whether this PATCH changes a field that makes AWX
+// re-clone the repository.
+//
+// ★ Project.save() kicks off a NEW project update whenever a source-control field
+// changes (VERIFIED against AWX 24.6.1: patching scm_branch spawns a project
+// update; patching name or description does not). The project is then BUSY, and
+// AWX answers 409 "Resource is being used by running jobs" to a delete or a
+// second change until it finishes — a 409 nobody can explain, since the operator
+// never asked for a sync. Saying so up front is the whole point.
+//
+// Checked against the assembled body, not the inputs, so a source-control field
+// smuggled in through Additional Fields is caught too.
+func touchesSourceControl(body map[string]interface{}) bool {
+	for _, field := range []string{"scm_url", "scm_branch", "scm_type", "scm_refspec", "credential"} {
+		if _, ok := body[field]; ok {
+			return true
+		}
+	}
+	return false
 }

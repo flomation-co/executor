@@ -41,6 +41,9 @@ var Inputs = [...]core.Connection{
 
 var Outputs = [...]core.Connection{
 	{Name: "id", Type: core.ConnectionTypeString, Label: "Workflow Job ID"},
+	// Always "workflow_job" — wire it into the Job Type of a downstream Get Job /
+	// Wait for Job / Cancel Job node rather than remembering to flip the dropdown.
+	{Name: "job_kind", Type: core.ConnectionTypeString, Label: "Job Type"},
 	{Name: "status", Type: core.ConnectionTypeString, Label: "Status"},
 	{Name: "finished", Type: core.ConnectionTypeBoolean, Label: "Finished"},
 	{Name: "failed", Type: core.ConnectionTypeBoolean, Label: "Failed"},
@@ -82,6 +85,7 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	summary := fmt.Sprintf("Workflow job %d %s with status %q", id, state, status)
 
 	out := awx.ObjectResult(job, summary)
+	out["job_kind"] = awx.JobKindWorkflowJob
 	out["status"] = status
 	out["finished"] = finished
 	out["failed"] = awx.BoolField(job, "failed")

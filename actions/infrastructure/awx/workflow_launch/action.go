@@ -10,11 +10,25 @@
 // are JobTemplate-only. Sharing one action would show the operator ten fields that
 // silently do nothing.
 //
-// The ignored-fields pre-flight is the same fail-closed discipline as the job
-// template launch: AWX answers 201 and SILENTLY DROPS any prompt field whose
-// matching ask_*_on_launch flag is off, so sending limit=web* to a workflow that
-// does not prompt for it runs against every host. awx.ValidateLaunch refuses
-// before the launch, and awx.CheckIgnoredFields re-checks the 201.
+// ★ A workflow launch does NOT silently drop a field it does not prompt for —
+// this is where it differs from a job template, and it was verified against a live
+// AWX 24.6.1. WorkflowJobLaunchSerializer does not pass _exclude_errors=['prompts'],
+// so AWX answers 400 — {"limit": ["Field is not configured to prompt on launch."]}
+// — and runs nothing. Two consequences:
+//
+//   - There is NO "Allow Ignored Fields" escape hatch on this action, unlike the
+//     job template launch. It could not do anything: AWX will not take the launch
+//     however nicely we ask. awx.ValidateLaunch refuses first, with a message that
+//     says so.
+//   - ignored_fields is therefore ALWAYS EMPTY on a workflow launch. It is still
+//     emitted (and still re-checked off the 201) for shape-compatibility with the
+//     job template launch, not because AWX ever populates it.
+//
+// A field outside the seven a workflow can prompt for (verbosity, credentials,
+// forks, job_type — all JobTemplate-only) is a third case again: AWX takes the
+// launch, drops the field, and does NOT even record it in ignored_fields. Nothing
+// this action sends can land there — but Additional Fields can, so a power user
+// smuggling verbosity onto a workflow will find it silently ignored by AWX.
 //
 // A workflow job is a pure orchestration record: it has no artifacts, no playbook,
 // no stdout endpoint and no host_status_counts. Everything real lives on the child
@@ -68,12 +82,18 @@ var Inputs = [...]core.Connection{
 	{Name: "job_tags", Type: core.ConnectionTypeString, Label: "Job Tags", Placeholder: "Comma-separated Ansible tags to run — only if the workflow prompts for them"},
 	{Name: "skip_tags", Type: core.ConnectionTypeString, Label: "Skip Tags", Placeholder: "Comma-separated Ansible tags to skip — only if the workflow prompts for them"},
 	{Name: "labels", Type: core.ConnectionTypeString, Label: "Labels", Placeholder: "Comma-separated label IDs, e.g. 2,5 — only if the workflow prompts for labels"},
-	{Name: "allow_ignored_fields", Type: core.ConnectionTypeBoolean, Label: "Allow Ignored Fields", Placeholder: "Send the overrides above even when the workflow is not configured to accept them. AWX will SILENTLY DROP them and run anyway — leave unticked."},
+	// No "Allow Ignored Fields" here, unlike the job template launch: AWX REFUSES a
+	// workflow launch that sets a non-prompted field (400) rather than silently
+	// dropping it, so there is nothing an escape hatch could unlock.
 	{Name: "additional_fields", Type: core.ConnectionTypeObject, Label: "Additional Fields", Placeholder: `{"scm_branch":"main"} — any other launch field; overrides the fields above`},
 }
 
 var Outputs = [...]core.Connection{
 	{Name: "workflow_job_id", Type: core.ConnectionTypeString, Label: "Workflow Job ID"},
+	// Always "workflow_job". Emitted so the Job Type of a downstream Get Job /
+	// Wait for Job / Cancel Job node can be WIRED from this one: those actions
+	// default to a plain job, and /jobs/{id}/ 404s for a workflow job id.
+	{Name: "job_kind", Type: core.ConnectionTypeString, Label: "Job Type"},
 	{Name: "status", Type: core.ConnectionTypeString, Label: "Status"},
 	{Name: "finished", Type: core.ConnectionTypeBoolean, Label: "Finished"},
 	{Name: "failed", Type: core.ConnectionTypeBoolean, Label: "Failed"},
@@ -108,12 +128,11 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 		return awx.ErrorResult(err.Error()), nil
 	}
 
-	allowIgnored := awx.BoolInput("allow_ignored_fields", inputs)
-
 	// ★ The safety property of this node. Refuses, before anything runs, any
-	// override this workflow is not configured to accept — AWX would take the
-	// launch, drop the field and run with the template's own values instead.
-	if _, err := awx.ValidateLaunch(ctx, auth, awx.TemplateKindWorkflow, templateID, body, allowIgnored); err != nil {
+	// override this workflow is not configured to accept. Always fails closed —
+	// AWX would answer 400 and run nothing anyway, so there is no "send it anyway"
+	// to offer (see the package comment).
+	if _, err := awx.ValidateLaunch(ctx, auth, awx.TemplateKindWorkflow, templateID, body, false); err != nil {
 		return awx.ErrorResult(err.Error()), nil
 	}
 
@@ -129,6 +148,7 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 
 	out := map[string]interface{}{
 		"workflow_job_id": awx.IDString(jobID),
+		"job_kind":        kind,
 		"status":          awx.StringField(launched, "status"),
 		"finished":        false,
 		"failed":          false,
@@ -141,8 +161,10 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	}
 
 	// Belt and braces: the workflow could have been reconfigured between the
-	// pre-flight and the launch, so the 201 is re-checked.
-	ignored, ignoredErr := awx.CheckIgnoredFields(launched, allowIgnored)
+	// pre-flight and the launch, so the 201 is re-checked. In practice AWX never
+	// populates ignored_fields on a workflow launch — it 400s instead — so this is
+	// shape-compatibility with the job template launch, not a live code path.
+	ignored, ignoredErr := awx.CheckIgnoredFields(launched, false)
 	if ignored == nil {
 		ignored = map[string]interface{}{}
 	}

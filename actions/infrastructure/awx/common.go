@@ -747,6 +747,11 @@ func CheckResponse(a Auth, resp *Response, acceptable ...int) error {
 		return errors.New(Redact(a, credentialRejected(a, resp.StatusCode)))
 
 	case http.StatusForbidden:
+		// ★ Checked BEFORE the permissions wording: this 403 is not about
+		// permissions at all, and no amount of role-granting will fix it.
+		if msg, ok := processingEventsMessage(resp.Body); ok {
+			return errors.New(Redact(a, msg))
+		}
 		if isLaunchRequest(resp) {
 			return errors.New("AWX accepted the credential but refused the launch (HTTP 403). Either the API token is READ-scoped — create a new one with Scope = Write — or this user does not have the Execute role on that job template.")
 		}
@@ -787,6 +792,33 @@ func credentialRejected(a Auth, status int) string {
 // the only place a read-scoped token fails.
 func isLaunchRequest(resp *Response) bool {
 	return resp.Method == http.MethodPost && strings.Contains(resp.URL, "/launch/")
+}
+
+// processingEventsMessage translates the OTHER refusal a delete gets — and the
+// nastiest one, because AWX reports it as a 403:
+//
+//	{"detail": "Related job project_update 85 (successful) is still processing events."}
+//
+// ★ It is NOT a permissions problem. AWX writes a job's events to Postgres
+// ASYNCHRONOUSLY, so a job flips to `successful` while its output is still being
+// flushed, and DELETE on anything that job touched is refused until
+// event_processing_finished goes true (a second or two later). VERIFIED on AWX
+// 24.6.1: a project deleted the instant its sync reported successful is refused
+// with this 403; the same delete succeeds moments later, unchanged.
+//
+// Without this, the generic 403 branch below reports it as "AWX refused the
+// request", and an operator — or an AI tool loop reading the error — goes hunting
+// for a role they already have, when the answer is simply to try again. Every
+// delete action in the node inherits this, since they all go through
+// CheckResponse.
+func processingEventsMessage(body []byte) (string, bool) {
+	detail := strings.TrimSpace(decodeErrorBody(body))
+	if detail == "" || !strings.Contains(strings.ToLower(detail), "still processing events") {
+		return "", false
+	}
+	return fmt.Sprintf(
+		"AWX refused: a job that ran against this object has finished, but AWX is still writing its output to the database, and it will not delete an object while that is happening. AWX said: %s. This is TEMPORARY and is NOT a permissions problem — wait a few seconds and run this node again.",
+		detail), true
 }
 
 // activeJobsMessage translates AWX's 409 envelope:
@@ -1222,6 +1254,11 @@ var promptLabels = map[string]string{
 // LaunchConfig is a template's answer to "what will you let me set at launch?" —
 // the body of GET {job_templates|workflow_job_templates}/{id}/launch/.
 type LaunchConfig struct {
+	// Kind is TemplateKindJob or TemplateKindWorkflow — the two behave DIFFERENTLY
+	// when handed a field they do not prompt for (see ValidatePrompts), so the
+	// refusal has to know which it is talking about. Zero value means a job
+	// template.
+	Kind string
 	// Ask is keyed by the BODY FIELD name (limit, extra_vars, job_tags…), not by
 	// the ask_* flag name.
 	Ask map[string]bool
@@ -1268,6 +1305,7 @@ func PreflightLaunch(ctx context.Context, a Auth, kind string, id int64) (Launch
 	}
 
 	cfg := LaunchConfig{
+		Kind:                     kind,
 		Ask:                      map[string]bool{},
 		Defaults:                 map[string]interface{}{},
 		Raw:                      raw,
@@ -1327,12 +1365,28 @@ func (s SurveySpec) VariableNames() map[string]bool {
 	return out
 }
 
-// RequiredVariables lists the survey variables that must be answered — required
-// questions with no usable default.
+// RequiredVariables lists the survey variables that must be answered.
+//
+// ★ A DEFAULT DOES NOT EXCUSE A REQUIRED QUESTION. It is the obvious assumption —
+// AWX holds a default, so surely it fills it in — and it is wrong. AWX validates
+// the extra_vars you SUBMITTED (SurveyJobTemplateMixin._survey_element_validation:
+// `if variable not in data and required -> "'x' value missing"`) and only applies
+// the survey defaults afterwards, when it builds the job. So a required question
+// with a default that is not answered is a 400, not a defaulted launch.
+//
+// Verified on AWX 24.6.1: job template 7's target_hosts/target_group are required
+// multiselects with default "none", and
+//
+//	POST job_templates/7/launch/ {"extra_vars":{"stopandrebuilt":"false"}}
+//	-> 400 {"variables_needed_to_start":["'target_hosts' value missing",
+//	                                     "'target_group' value missing"]}
+//
+// This list therefore matches AWX's own variables_needed_to_start exactly, which
+// is the whole point: the two must not disagree.
 func (s SurveySpec) RequiredVariables() []string {
 	out := []string{}
 	for _, q := range s.Spec {
-		if q.Required && !hasDefault(q.Default) {
+		if q.Required {
 			out = append(out, q.Variable)
 		}
 	}
@@ -1393,14 +1447,24 @@ func ValidateSurvey(spec SurveySpec, extraVars map[string]interface{}) error {
 		}
 
 		if !answered {
-			// AWX fills a defaulted question in for us, so only an unanswered
-			// question with no default is a problem.
-			if q.Required && !hasDefault(q.Default) {
+			// ★ A DEFAULT DOES NOT EXCUSE A REQUIRED QUESTION — see
+			// RequiredVariables. AWX checks the extra_vars you submitted and only
+			// applies the survey's defaults afterwards, so an unanswered required
+			// question is a 400 however good its default looks.
+			if q.Required {
 				label := q.QuestionName
 				if label == "" {
 					label = q.Variable
 				}
-				problems = append(problems, fmt.Sprintf("%q is required by this template's survey (%s)", q.Variable, label))
+				problem := fmt.Sprintf("%q is required by this template's survey (%s)", q.Variable, label)
+				// Name the default, because it is almost always the value the
+				// operator wanted — and say plainly that AWX will not apply it, or
+				// the message reads as nonsense to someone looking at the survey.
+				if hasDefault(q.Default) {
+					problem += fmt.Sprintf(" — AWX holds a default of %s but will NOT apply it to a required question, so send it explicitly",
+						defaultExample(q))
+				}
+				problems = append(problems, problem)
 			}
 			continue
 		}
@@ -1437,7 +1501,10 @@ func validateAnswer(q SurveyQuestion, answer interface{}) error {
 	case "multiplechoice":
 		s := fmt.Sprintf("%v", answer)
 		if len(q.Choices) > 0 && !containsString(q.Choices, s) {
-			return fmt.Errorf("%q must be one of: %s", q.Variable, strings.Join(q.Choices, ", "))
+			// Name the REJECTED value, not just the allowed ones: a survey with a
+			// dozen choices otherwise leaves the operator diffing two lists by eye
+			// to find their own typo.
+			return fmt.Errorf("%q does not accept %q — it must be one of: %s", q.Variable, s, strings.Join(q.Choices, ", "))
 		}
 
 	case "multiselect":
@@ -1449,7 +1516,7 @@ func validateAnswer(q SurveyQuestion, answer interface{}) error {
 		for _, v := range values {
 			s := fmt.Sprintf("%v", v)
 			if len(q.Choices) > 0 && !containsString(q.Choices, s) {
-				return fmt.Errorf("%q may only contain: %s", q.Variable, strings.Join(q.Choices, ", "))
+				return fmt.Errorf("%q does not accept %q — it may only contain: %s", q.Variable, s, strings.Join(q.Choices, ", "))
 			}
 		}
 
@@ -1468,22 +1535,40 @@ func validateAnswer(q SurveyQuestion, answer interface{}) error {
 // ValidatePrompts refuses, BEFORE launching, any override the template is not
 // configured to accept.
 //
-// ★ This is the safety core of the node. JobTemplateLaunch.post passes
-// _exclude_errors=['prompts'], so a prompt field whose ask_* flag is off is NOT
-// rejected: the job starts (201), the field is silently DROPPED, and the only
-// trace is "ignored_fields" in the response. Sending limit=web* to a template
-// with ask_limit_on_launch=false RUNS THE PLAYBOOK AGAINST EVERY HOST IN THE
-// INVENTORY. So we fail closed, naming the field and the checkbox to tick.
+// ★ This is the safety core of the node — and the two template kinds behave
+// COMPLETELY DIFFERENTLY when they are handed a field they do not prompt for.
+// Both were verified against a live AWX 24.6.1:
+//
+//   - JOB TEMPLATE — SILENT DROP. JobTemplateLaunch.post passes
+//     _exclude_errors=['prompts'], so the field is NOT rejected: the job starts
+//     (201), the field is silently DROPPED, and the only trace is
+//     "ignored_fields" in the response. Sending limit=web* to a template with
+//     ask_limit_on_launch=false RUNS THE PLAYBOOK AGAINST EVERY HOST IN THE
+//     INVENTORY. This is what the fail-closed guard, and the Allow Ignored Fields
+//     escape hatch, exist for.
+//
+//   - WORKFLOW TEMPLATE — HARD 400. WorkflowJobLaunchSerializer does NOT exclude
+//     prompt errors, so AWX refuses outright:
+//     {"limit": ["Field is not configured to prompt on launch."]}. Nothing runs,
+//     nothing is dropped, and ignored_fields comes back EMPTY. There is therefore
+//     no "send it anyway" for a workflow — the escape hatch cannot exist, so the
+//     refusal must not offer one, and allowIgnored is ignored for a workflow.
 //
 // surveyVars is the set of variable names the template's survey owns (nil when
 // there is no survey). Survey answers bypass ask_variables_on_launch entirely —
 // only NON-survey extra_vars keys are gated on it.
 //
 // allowIgnored is the operator's explicit "send it anyway and let AWX drop it"
-// escape hatch. It still validates the passwords/inventory pre-conditions, which
-// are hard AWX errors rather than silent drops.
+// escape hatch. It applies to a JOB TEMPLATE only (see above), and it still
+// validates the passwords/inventory pre-conditions, which are hard AWX errors
+// rather than silent drops.
 func ValidatePrompts(cfg LaunchConfig, body map[string]interface{}, surveyVars map[string]bool, allowIgnored bool) error {
-	if !allowIgnored {
+	workflow := cfg.Kind == TemplateKindWorkflow
+
+	// On a workflow "send it anyway" is not a thing AWX offers: it answers 400 and
+	// runs nothing, so honouring allowIgnored would only swap this actionable
+	// message for AWX's terse one.
+	if !allowIgnored || workflow {
 		refused := []string{}
 
 		for field := range body {
@@ -1504,11 +1589,27 @@ func ValidatePrompts(cfg LaunchConfig, body map[string]interface{}, surveyVars m
 
 		if len(refused) > 0 {
 			sort.Strings(refused)
-			return fmt.Errorf(
-				"This job template is not configured to accept %s at launch, so AWX would IGNORE what you set and run with the template's own values — which for Limit means running against every host in the inventory. "+
-					"Either turn on 'Prompt on launch' for %s in AWX, or clear the field on this node. "+
-					"(To send it anyway and let AWX drop it, tick 'Allow Ignored Fields'.)",
-				strings.Join(refused, ", "), strings.Join(refused, ", "))
+			fields := strings.Join(refused, ", ")
+
+			if workflow {
+				return fmt.Errorf(
+					"This workflow template is not configured to accept %s at launch, and AWX REFUSES a workflow launch that sets a field it does not prompt for — nothing would run. "+
+						"Either turn on 'Prompt on launch' for %s in AWX, or clear the field on this node.",
+					fields, fields)
+			}
+
+			msg := fmt.Sprintf(
+				"This job template is not configured to accept %s at launch, so AWX would IGNORE what you set and run with the template's own values. ",
+				fields)
+			// Only warn about the blast radius when Limit is actually the field
+			// being dropped — otherwise the sentence is a non-sequitur.
+			if containsString(refused, promptLabels["limit"]) {
+				msg += "For Limit that means running against every host in the inventory. "
+			}
+			msg += fmt.Sprintf(
+				"Either turn on 'Prompt on launch' for %s in AWX, or clear the field on this node. "+
+					"(To send it anyway and let AWX drop it, tick 'Allow Ignored Fields'.)", fields)
+			return errors.New(msg)
 		}
 	}
 
@@ -2665,6 +2766,31 @@ func hasDefault(v interface{}) bool {
 	default:
 		return true
 	}
+}
+
+// defaultExample renders a survey question's default in the JSON shape the ANSWER
+// has to take, so an operator can paste it straight into Extra Variables.
+//
+// The shapes differ, which is the whole reason this is not just a %v. A
+// multiselect's default comes back as the SCALAR "none" (or the newline-separated
+// "none\nosmp-01" when there are several), but its answer must be the ARRAY
+// ["none"] — so echoing the default verbatim would hand the operator a value AWX
+// then rejects for being the wrong type.
+func defaultExample(q SurveyQuestion) string {
+	value := q.Default
+	if q.Type == "multiselect" {
+		if items := normaliseChoices(q.Default); len(items) > 0 {
+			widened := make([]interface{}, 0, len(items))
+			for _, s := range items {
+				widened = append(widened, s)
+			}
+			value = widened
+		}
+	}
+	if encoded, err := json.Marshal(value); err == nil {
+		return string(encoded)
+	}
+	return fmt.Sprintf("%v", q.Default)
 }
 
 func isBlank(v interface{}) bool {

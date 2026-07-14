@@ -58175,7 +58175,7 @@
     ]
   },
   "infrastructure/awx/job_template_list": {
-    "hash": "0464d803a9611aa39122409042c53a6d87283732ab4310a4b61784278f54b129",
+    "hash": "92652e499aa5ff90b759236933b863be832be07318175677f718f4d2b371ebf0",
     "author": "David McElin",
     "organisation": "Flomation",
     "name": "AWX: List Job Templates",
@@ -58406,7 +58406,7 @@
     ]
   },
   "infrastructure/awx/job_template_survey_get": {
-    "hash": "b7b099ff11c96a80ac1d9348cc4a50d9773e6b3b9cc795dcfccd64cb4cf97d9f",
+    "hash": "31d2dc42dac4ea72674842789879b3088c140ef976aa6baf7d0754c5ed8189f7",
     "author": "David McElin",
     "organisation": "Flomation",
     "name": "AWX: Get Job Template Survey",
@@ -59471,7 +59471,7 @@
     ]
   },
   "infrastructure/awx/project_create": {
-    "hash": "6d1107c9df489b02e30177a3c2885d072977d8c8a10a4e8b963c26cb2d7dde05",
+    "hash": "7f22c4a8c07dc382acc76281167decee255af3b3815287eaca1af9739a7e6dc8",
     "author": "David McElin",
     "organisation": "Flomation",
     "name": "AWX: Create Project",
@@ -60661,7 +60661,7 @@
     ]
   },
   "infrastructure/awx/project_update": {
-    "hash": "5baa71a18b32590a7086e639297105e266c25e0221f04625d7654de167430076",
+    "hash": "a6ae836770cadbabfdde8eefec3505e3ff05dd4947e92db0a3f2e68cd3606400",
     "author": "David McElin",
     "organisation": "Flomation",
     "name": "AWX: Update Project",
@@ -62194,7 +62194,7 @@
     ]
   },
   "infrastructure/awx/workflow_job_get": {
-    "hash": "7041899e9c5ca5000fed5fcd6725ddbd0bac23fc9abaf8a368d9df4e9a2e4b1b",
+    "hash": "d56e469112202925c653de42c5cdab96210028c66b48e8e94267996e1c6c4d56",
     "author": "David McElin",
     "organisation": "Flomation",
     "name": "AWX: Get Workflow Job",
@@ -62308,6 +62308,13 @@
         "type": "string",
         "value": null,
         "label": "Workflow Job ID",
+        "placeholder": ""
+      },
+      {
+        "name": "job_kind",
+        "type": "string",
+        "value": null,
+        "label": "Job Type",
         "placeholder": ""
       },
       {
@@ -62579,7 +62586,7 @@
     ]
   },
   "infrastructure/awx/workflow_job_relaunch": {
-    "hash": "a9c118ce051f83442e71485402876539ec521b06ca005fcdcf2b86cff9eeec2d",
+    "hash": "dc2c20c9fa466b3adf55f24a9413362740bcf50f3d7edc7b4e3209215a021aaa",
     "author": "David McElin",
     "organisation": "Flomation",
     "name": "AWX: Relaunch Workflow Job",
@@ -62742,6 +62749,13 @@
         "placeholder": ""
       },
       {
+        "name": "job_kind",
+        "type": "string",
+        "value": null,
+        "label": "Job Type",
+        "placeholder": ""
+      },
+      {
         "name": "status",
         "type": "string",
         "value": null,
@@ -62814,7 +62828,7 @@
     ]
   },
   "infrastructure/awx/workflow_launch": {
-    "hash": "0d2905badcb53e3ced316cb92e6fad550dfe37694760d526bb4e672edaa049cd",
+    "hash": "e65d8eb81d72de14cfd41b384ef6e6365cc9ce2ce2cff041b9f727b771bbffda",
     "author": "David McElin",
     "organisation": "Flomation",
     "name": "AWX: Launch Workflow Template",
@@ -63043,13 +63057,6 @@
         "placeholder": "Comma-separated label IDs, e.g. 2,5 — only if the workflow prompts for labels"
       },
       {
-        "name": "allow_ignored_fields",
-        "type": "boolean",
-        "value": null,
-        "label": "Allow Ignored Fields",
-        "placeholder": "Send the overrides above even when the workflow is not configured to accept them. AWX will SILENTLY DROP them and run anyway — leave unticked."
-      },
-      {
         "name": "additional_fields",
         "type": "object",
         "value": null,
@@ -63063,6 +63070,13 @@
         "type": "string",
         "value": null,
         "label": "Workflow Job ID",
+        "placeholder": ""
+      },
+      {
+        "name": "job_kind",
+        "type": "string",
+        "value": null,
+        "label": "Job Type",
         "placeholder": ""
       },
       {

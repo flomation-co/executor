@@ -130,10 +130,16 @@ func TestLaunchWorkflowWithoutWaiting(t *testing.T) {
 // ★ THE TRAP: a prompt field the workflow does not accept
 // ---------------------------------------------------------------------------
 
-// AWX answers 201 and SILENTLY DROPS a prompt field whose ask_* flag is off.
-// Sending limit=web* to a workflow with ask_limit_on_launch=false would run the
-// playbooks against EVERY host in the inventory, with the only trace being
-// ignored_fields in a response nobody reads. The node must refuse BEFORE launching.
+// ★ A WORKFLOW does not silently drop a non-prompted field the way a job template
+// does — verified against a live AWX 24.6.1:
+//
+//	POST /api/v2/workflow_job_templates/9/launch/ {"limit":"localhost"}
+//	  -> 400 {"limit":["Field is not configured to prompt on launch."]}
+//
+// (WorkflowJobLaunchSerializer does not pass _exclude_errors=['prompts'], unlike
+// JobTemplateLaunch.post.) So the node still refuses BEFORE launching — but the
+// message must say AWX will REJECT the launch, not that it would ignore the field
+// and run against every host. That sentence belongs to the job template only.
 func TestLaunchRefusesAPromptTheWorkflowWouldIgnore(t *testing.T) {
 	RegisterTestingT(t)
 
@@ -159,23 +165,36 @@ func TestLaunchRefusesAPromptTheWorkflowWouldIgnore(t *testing.T) {
 	Expect(err).To(BeNil(), "an AWX-side problem is a SOFT failure — a Go error would abort the whole flow")
 	Expect(out["success"]).To(Equal(false))
 	Expect(out["error"]).To(ContainSubstring("Limit"))
-	Expect(out["error"]).To(ContainSubstring("every host"))
+	Expect(out["error"]).To(ContainSubstring("REFUSES"),
+		"a workflow launch is rejected outright — the refusal must not promise a silent drop")
+	Expect(out["error"]).NotTo(ContainSubstring("every host"),
+		"that is the JOB TEMPLATE's blast radius; a rejected workflow launch runs nothing at all")
+	Expect(out["error"]).NotTo(ContainSubstring("Allow Ignored Fields"),
+		"there is no escape hatch on a workflow — AWX will not take the launch however we ask")
 	Expect(launched).To(BeFalse(), "the node must refuse BEFORE the workflow runs, not after")
 }
 
-// Allow Ignored Fields is the operator's explicit escape hatch.
-func TestLaunchSendsTheIgnoredPromptWhenAllowIgnoredFieldsIsTicked(t *testing.T) {
+// There is NO Allow Ignored Fields input on this action, and the fail-closed
+// pre-flight must hold even if something sets one anyway: AWX answers 400 to a
+// workflow launch carrying a non-prompted field, so "send it anyway" could only
+// ever swap our actionable message for AWX's terse one.
+func TestLaunchHasNoAllowIgnoredFieldsEscapeHatch(t *testing.T) {
 	RegisterTestingT(t)
+
+	for _, in := range Inputs {
+		Expect(in.Name).NotTo(Equal("allow_ignored_fields"),
+			"a workflow cannot ignore a prompt field — AWX rejects the launch")
+	}
 
 	launched := false
 	srv := awxServer(func(w http.ResponseWriter, r *http.Request) {
 		switch {
 		case r.Method == http.MethodGet && r.URL.Path == "/api/v2/workflow_job_templates/3/launch/":
-			_, _ = w.Write([]byte(preflight()))
+			_, _ = w.Write([]byte(preflight("ask_variables_on_launch")))
 		case r.Method == http.MethodPost:
 			launched = true
 			w.WriteHeader(http.StatusCreated)
-			_, _ = w.Write([]byte(`{"workflow_job":99,"type":"workflow_job","status":"pending","ignored_fields":{"limit":"web*"}}`))
+			_, _ = w.Write([]byte(`{"workflow_job":99,"type":"workflow_job","status":"pending"}`))
 		}
 	})
 	defer srv.Close()
@@ -183,13 +202,12 @@ func TestLaunchSendsTheIgnoredPromptWhenAllowIgnoredFieldsIsTicked(t *testing.T)
 	out, err := Execute(nil, nil, with(srv.URL,
 		str("workflow_template_id", "3"),
 		str("limit", "web*"),
-		boolean("allow_ignored_fields", true),
+		boolean("allow_ignored_fields", true), // ignored: the input does not exist
 	))
 
 	Expect(err).To(BeNil())
-	Expect(launched).To(BeTrue())
-	Expect(out["success"]).To(Equal(true))
-	Expect(out["ignored_fields"]).To(HaveKeyWithValue("limit", "web*"))
+	Expect(out["success"]).To(Equal(false))
+	Expect(launched).To(BeFalse(), "ticking a non-existent hatch must not launch the workflow")
 }
 
 // The workflow can be reconfigured between the pre-flight and the launch, so the

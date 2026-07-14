@@ -986,6 +986,87 @@ func TestPreflightAndSurveyAgainstAWXShapes(t *testing.T) {
 	Expect(err).To(BeNil())
 }
 
+// ★ A DEFAULT DOES NOT EXCUSE A REQUIRED SURVEY QUESTION.
+//
+// It is the obvious assumption — AWX is holding a default, so surely it fills it
+// in — and it is wrong. AWX validates the extra_vars you SUBMITTED
+// (SurveyJobTemplateMixin._survey_element_validation: `if variable not in data and
+// required -> "'x' value missing"`) and only applies the survey's defaults
+// afterwards, when it builds the job.
+//
+// Verified against AWX 24.6.1, job template 7, whose target_hosts and target_group
+// are REQUIRED multiselects with default "none":
+//
+//	POST job_templates/7/launch/ {"extra_vars":{"stopandrebuilt":"false"}}
+//	-> 400 {"variables_needed_to_start":["'target_hosts' value missing",
+//	                                     "'target_group' value missing"]}
+//
+// If this exemption ever creeps back, the client-side pre-flight passes a body AWX
+// then rejects — which defeats the entire point of having one.
+func TestRequiredSurveyQuestionIsNotExcusedByItsDefault(t *testing.T) {
+	RegisterTestingT(t)
+
+	spec := SurveySpec{Spec: []SurveyQuestion{
+		{Variable: "stopandrebuilt", QuestionName: "Stop and rebuild", Type: "multiplechoice",
+			Required: true, Default: "", Choices: []string{"true", "false"}},
+		{Variable: "target_hosts", QuestionName: "Inventory to target", Type: "multiselect",
+			Required: true, Default: "none", Choices: []string{"none", "osmp-01"}},
+		{Variable: "optional_forks", QuestionName: "Forks", Type: "integer",
+			Required: false, Default: float64(5)},
+	}}
+
+	// It must agree with AWX's own variables_needed_to_start, which lists EVERY
+	// required question — default or no default.
+	Expect(spec.RequiredVariables()).To(Equal([]string{"stopandrebuilt", "target_hosts"}))
+
+	// Answering only the defaultless one is exactly the 400 above.
+	err := ValidateSurvey(spec, map[string]interface{}{"stopandrebuilt": "false"})
+	Expect(err).To(HaveOccurred())
+	Expect(err.Error()).To(ContainSubstring("target_hosts"))
+	Expect(err.Error()).ToNot(ContainSubstring("optional_forks"), "an OPTIONAL question is still exempt")
+
+	// ★ And the message shows the default in the ARRAY shape a multiselect answer
+	// must take — AWX stores it as the scalar "none", but ["none"] is what it will
+	// accept, so echoing the default verbatim would hand back a value AWX rejects.
+	Expect(err.Error()).To(ContainSubstring(`["none"]`))
+
+	// Sending it explicitly is what AWX wants, and it validates.
+	Expect(ValidateSurvey(spec, map[string]interface{}{
+		"stopandrebuilt": "false",
+		"target_hosts":   []interface{}{"none"},
+	})).To(BeNil())
+}
+
+// A rejected choice names the VALUE that was rejected, not merely the allowed
+// list: a survey with a dozen options otherwise leaves the operator diffing two
+// lists by eye to find their own typo.
+func TestSurveyChoiceErrorNamesTheRejectedValue(t *testing.T) {
+	RegisterTestingT(t)
+
+	spec := SurveySpec{Spec: []SurveyQuestion{
+		{Variable: "target_group", Type: "multiselect", Required: true,
+			Choices: []string{"none", "Corsham", "IICS"}},
+		{Variable: "mode", Type: "multiplechoice", Required: true,
+			Choices: []string{"run", "check"}},
+	}}
+
+	err := ValidateSurvey(spec, map[string]interface{}{
+		"target_group": []interface{}{"Atlantis"},
+		"mode":         "run",
+	})
+	Expect(err).To(HaveOccurred())
+	Expect(err.Error()).To(ContainSubstring("Atlantis"))
+	Expect(err.Error()).To(ContainSubstring("may only contain: none, Corsham, IICS"))
+
+	err = ValidateSurvey(spec, map[string]interface{}{
+		"target_group": []interface{}{"none"},
+		"mode":         "sideways",
+	})
+	Expect(err).To(HaveOccurred())
+	Expect(err.Error()).To(ContainSubstring("sideways"))
+	Expect(err.Error()).To(ContainSubstring("must be one of: run, check"))
+}
+
 // TestCheckIgnoredFields is the belt-and-braces half of the guard: a template can
 // be reconfigured between the pre-flight and the launch.
 func TestCheckIgnoredFields(t *testing.T) {

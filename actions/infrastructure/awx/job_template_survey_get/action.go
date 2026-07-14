@@ -1,12 +1,25 @@
 // Package infrastructure_awx_job_template_survey_get fetches a job template's
 // survey — the questions AWX asks the person launching it.
 //
-// ★ THE TRAP: a template with NO SURVEY answers this endpoint with HTTP 200 AND
+// ★ TRAP ONE: a template with NO SURVEY answers this endpoint with HTTP 200 AND
 // AN EMPTY OBJECT — not a 404, not an error. A naive client reports a successful
 // fetch of an empty survey and the operator is left staring at a blank result
 // wondering what broke. This action says so in words: has_survey=false, a
 // tool_result that explains there are no questions, and success=true, because
 // nothing failed.
+//
+// ★ TRAP TWO, and it is the nastier one: survey_enabled and the survey SPEC are
+// INDEPENDENT in AWX. Switching a survey off does not delete its questions —
+// survey_spec/ goes on answering 200 with the whole spec for ever. So the presence
+// of a spec proves nothing, and a client that trusts it reports a live survey on a
+// template that asks NOTHING at launch (verified on AWX 24.6.1: job template 8,
+// survey_enabled=false, still serves three questions).
+//
+// That is not a cosmetic error. Answers to a disabled survey are not survey
+// answers at all — they are ordinary extra_vars — so awx.ValidatePrompts REFUSES
+// them unless ask_variables_on_launch is on. The operator would be sent to fill in
+// a form whose answers the launch node then rejects. Hence the template's own
+// survey_enabled flag decides here, not the spec.
 //
 // Two shapes are normalised for the flow:
 //
@@ -78,17 +91,36 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 		return awx.ErrorResult(err.Error()), nil
 	}
 
+	// ★ The template's own flag, not the spec, is what says whether a survey is
+	// asked — see TRAP TWO above. AWX serves a disabled survey's questions for ever.
+	template, err := awx.GetResource(ctx, auth, fmt.Sprintf("job_templates/%d/", id), nil)
+	if err != nil {
+		return awx.ErrorResult(err.Error()), nil
+	}
+	enabled := awx.BoolField(template, "survey_enabled")
+
 	spec, err := awx.FetchSurveySpec(ctx, auth, awx.TemplateKindJob, id)
 	if err != nil {
 		return awx.ErrorResult(err.Error()), nil
 	}
 
-	questions := make([]interface{}, 0, len(spec.Spec))
-	for _, q := range spec.Spec {
-		questions = append(questions, question(q))
-	}
-	required := strings2iface(spec.RequiredVariables())
+	// A survey is only live when the template has it switched ON and there is
+	// something in it. Anything else is "no questions", and the derived outputs say
+	// so — a Loop node walking `spec` must not be handed questions AWX never asks.
+	live := enabled && spec.HasSurvey()
 
+	questions := make([]interface{}, 0, len(spec.Spec))
+	required := []interface{}{}
+	if live {
+		for _, q := range spec.Spec {
+			questions = append(questions, question(q))
+		}
+		required = strings2iface(spec.RequiredVariables())
+	}
+
+	// `result` stays the untouched AWX body even when the survey is off: nothing is
+	// destroyed, the disabled questions remain inspectable, and the tool_result
+	// explains what they are. It is the DERIVED outputs that must not lie.
 	raw := spec.Raw
 	if raw == nil {
 		raw = map[string]interface{}{}
@@ -97,10 +129,10 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	return map[string]interface{}{
 		"result":             raw,
 		"spec":               questions,
-		"has_survey":         spec.HasSurvey(),
+		"has_survey":         live,
 		"required_variables": required,
 		"question_count":     len(questions),
-		"tool_result":        summarise(id, spec),
+		"tool_result":        summarise(id, spec, enabled),
 		// Not an error. An empty survey is AWX's honest answer to "what do you
 		// ask?" — "nothing" — and the flow should carry on.
 		"success": true,
@@ -133,7 +165,23 @@ func question(q awx.SurveyQuestion) map[string]interface{} {
 	return out
 }
 
-func summarise(id int64, spec awx.SurveySpec) string {
+func summarise(id int64, spec awx.SurveySpec, enabled bool) string {
+	// ★ Switched OFF. AWX keeps serving the questions, so say out loud both that
+	// there is no survey AND what those leftover questions are — otherwise an
+	// operator who can see them in the AWX UI thinks the node is lying.
+	if !enabled {
+		msg := fmt.Sprintf(
+			"Job template %d has NO SURVEY: its survey is switched OFF, so AWX asks nothing at launch. "+
+				"Launch it with Extra Variables / Survey Answers left blank.", id)
+		if spec.HasSurvey() {
+			msg += fmt.Sprintf(
+				" (AWX is still holding %d question(s) from a survey that has been disabled — switching a survey off does not delete it. "+
+					"They are NOT asked, and answering them would be REFUSED at launch: with the survey off they count as ordinary variables, "+
+					"which this template does not prompt for.)", len(spec.Spec))
+		}
+		return msg
+	}
+
 	if !spec.HasSurvey() {
 		return fmt.Sprintf(
 			"Job template %d has NO SURVEY configured. (AWX answers this with an empty result and HTTP 200 — nothing has failed.) "+
@@ -161,8 +209,11 @@ func summarise(id int64, spec awx.SurveySpec) string {
 	b.WriteString(strings.Join(lines, "; "))
 	b.WriteString(". Answer them on the Launch Job Template node in Extra Variables / Survey Answers, keyed by the variable name.")
 
+	// ★ Every REQUIRED question must be answered, default or no default: AWX
+	// validates the extra_vars you submitted and only applies the survey's defaults
+	// afterwards, so a required question you left to its default is a 400.
 	if required := spec.RequiredVariables(); len(required) > 0 {
-		fmt.Fprintf(&b, " These have no default and MUST be answered: %s.", strings.Join(required, ", "))
+		fmt.Fprintf(&b, " These MUST be answered — AWX does not apply a survey default to a required question: %s.", strings.Join(required, ", "))
 	}
 	if hasPassword(spec) {
 		b.WriteString(" Note a password question's default reads back as the literal \"$encrypted$\" — AWX never returns the stored value.")

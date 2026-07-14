@@ -258,19 +258,27 @@ func TestJobTemplateSurveyGet(t *testing.T) {
 	RegisterTestingT(t)
 
 	srv := awxServer(func(w http.ResponseWriter, r *http.Request) {
-		Expect(r.URL.Path).To(Equal("/api/v2/job_templates/7/survey_spec/"))
-		// choices arrives as a NEWLINE-SEPARATED STRING, not an array.
-		_, _ = w.Write([]byte(`{
-		  "name": "Deploy options", "description": "",
-		  "spec": [
-		    {"variable":"target_env","question_name":"Which environment?","type":"multiplechoice",
-		     "required":true,"default":"","choices":"dev\nstaging\nprod"},
-		    {"variable":"replicas","question_name":"How many?","type":"integer",
-		     "required":true,"default":2,"min":1,"max":10},
-		    {"variable":"vault_pass","question_name":"Vault password","type":"password",
-		     "required":false,"default":"$encrypted$"}
-		  ]
-		}`))
+		switch r.URL.Path {
+		case "/api/v2/job_templates/7/":
+			// The template's own flag is what says a survey is ASKED — the presence
+			// of a spec proves nothing (see the disabled-survey test below).
+			_, _ = w.Write([]byte(`{"id":7,"name":"Deploy","survey_enabled":true}`))
+		case "/api/v2/job_templates/7/survey_spec/":
+			// choices arrives as a NEWLINE-SEPARATED STRING, not an array.
+			_, _ = w.Write([]byte(`{
+			  "name": "Deploy options", "description": "",
+			  "spec": [
+			    {"variable":"target_env","question_name":"Which environment?","type":"multiplechoice",
+			     "required":true,"default":"","choices":"dev\nstaging\nprod"},
+			    {"variable":"replicas","question_name":"How many?","type":"integer",
+			     "required":true,"default":2,"min":1,"max":10},
+			    {"variable":"vault_pass","question_name":"Vault password","type":"password",
+			     "required":false,"default":"$encrypted$"}
+			  ]
+			}`))
+		default:
+			t.Fatalf("unexpected path %s", r.URL.Path)
+		}
 	})
 	defer srv.Close()
 
@@ -280,8 +288,11 @@ func TestJobTemplateSurveyGet(t *testing.T) {
 	Expect(out["has_survey"]).To(BeTrue())
 	Expect(out["question_count"]).To(Equal(3))
 
-	// Only target_env is required-with-no-default: replicas defaults to 2.
-	Expect(out["required_variables"]).To(Equal([]interface{}{"target_env"}))
+	// ★ BOTH required questions, `replicas` included — a DEFAULT DOES NOT EXCUSE A
+	// REQUIRED QUESTION. AWX validates the extra_vars you submitted and only applies
+	// the survey's defaults afterwards, so a required question left to its default
+	// is a 400, not a defaulted launch. (Verified on AWX 24.6.1.)
+	Expect(out["required_variables"]).To(Equal([]interface{}{"target_env", "replicas"}))
 
 	spec, ok := out["spec"].([]interface{})
 	Expect(ok).To(BeTrue())
@@ -298,7 +309,8 @@ func TestJobTemplateSurveyGet(t *testing.T) {
 
 	summary, _ := out["tool_result"].(string)
 	Expect(summary).To(ContainSubstring("dev / staging / prod"))
-	Expect(summary).To(ContainSubstring("MUST be answered: target_env"))
+	Expect(summary).To(ContainSubstring("MUST be answered"))
+	Expect(summary).To(ContainSubstring("target_env, replicas"))
 	Expect(summary).To(ContainSubstring("$encrypted$"))
 }
 
@@ -310,6 +322,10 @@ func TestJobTemplateSurveyGetReportsNoSurveyRatherThanAnEmptyObject(t *testing.T
 
 	srv := awxServer(func(w http.ResponseWriter, r *http.Request) {
 		w.WriteHeader(http.StatusOK)
+		if r.URL.Path == "/api/v2/job_templates/9/" {
+			_, _ = w.Write([]byte(`{"id":9,"survey_enabled":true}`))
+			return
+		}
 		_, _ = w.Write([]byte(`{}`))
 	})
 	defer srv.Close()
@@ -323,6 +339,57 @@ func TestJobTemplateSurveyGetReportsNoSurveyRatherThanAnEmptyObject(t *testing.T
 	Expect(out["spec"]).To(Equal([]interface{}{}))
 	Expect(out["required_variables"]).To(Equal([]interface{}{}))
 	Expect(out["tool_result"]).To(ContainSubstring("NO SURVEY configured"))
+}
+
+// ★ THE NASTIER TRAP, found live on AWX 24.6.1 (job template 8): survey_enabled
+// and the survey SPEC are INDEPENDENT. Switching a survey off does not delete its
+// questions — survey_spec/ answers 200 with the whole spec for ever.
+//
+// Reporting that as a live survey is not cosmetic. With the survey off, answers to
+// those variables are not survey answers at all — they are ordinary extra_vars —
+// so awx.ValidatePrompts REFUSES them unless ask_variables_on_launch is on. The
+// operator would be sent to fill in a form whose answers the launch node rejects.
+func TestJobTemplateSurveyGetIgnoresADisabledSurveysLeftoverSpec(t *testing.T) {
+	RegisterTestingT(t)
+
+	srv := awxServer(func(w http.ResponseWriter, r *http.Request) {
+		switch r.URL.Path {
+		case "/api/v2/job_templates/8/":
+			_, _ = w.Write([]byte(`{"id":8,"name":"Sans Survey","survey_enabled":false}`))
+		case "/api/v2/job_templates/8/survey_spec/":
+			// AWX still serves it, in full, with a 200.
+			_, _ = w.Write([]byte(`{"name":"","description":"","spec":[
+			  {"variable":"stopandrebuilt","question_name":"Stop and rebuild","type":"multiplechoice","required":true,"default":"","choices":["true","false"]},
+			  {"variable":"target_hosts","question_name":"Inventory to target","type":"multiselect","required":true,"default":"none","choices":["none","osmp-01"]},
+			  {"variable":"target_group","question_name":"Group to target","type":"multiselect","required":true,"default":"none","choices":["none","Corsham"]}
+			]}`))
+		default:
+			t.Fatalf("unexpected path %s", r.URL.Path)
+		}
+	})
+	defer srv.Close()
+
+	out, err := survey.Execute(nil, nil, authInputs(srv.URL, str("job_template_id", "8")))
+	Expect(err).ToNot(HaveOccurred())
+	Expect(out["success"]).To(BeTrue())
+
+	// The template asks NOTHING at launch, so the derived outputs must say nothing.
+	Expect(out["has_survey"]).To(BeFalse())
+	Expect(out["question_count"]).To(Equal(0))
+	Expect(out["spec"]).To(Equal([]interface{}{}))
+	Expect(out["required_variables"]).To(Equal([]interface{}{}))
+
+	summary, _ := out["tool_result"].(string)
+	Expect(summary).To(ContainSubstring("NO SURVEY"))
+	Expect(summary).To(ContainSubstring("switched OFF"))
+	// …but the leftover questions are explained, not hidden: an operator who can
+	// see them in the AWX UI would otherwise think the node was lying.
+	Expect(summary).To(ContainSubstring("3 question(s)"))
+
+	// Nothing is destroyed: the raw AWX body is still there to inspect.
+	raw, ok := out["result"].(map[string]interface{})
+	Expect(ok).To(BeTrue())
+	Expect(raw).To(HaveKey("spec"))
 }
 
 // ---------------------------------------------------------------------------
