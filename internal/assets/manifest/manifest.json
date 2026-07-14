@@ -91359,6 +91359,68 @@
     "inputs": null,
     "outputs": null
   },
+  "output/web_response": {
+    "hash": "45c62080f60f9cfdb896901bf6bf74d56d9d39f81688df7241de0aa355fe7a4d",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Web Response",
+    "description": "Set the HTTP response (body, status code, content type, headers) returned by a Web Trigger flow",
+    "website": "https://www.flomation.co",
+    "icon": "reply",
+    "date": "13/07/2026",
+    "type": 3,
+    "category": {
+      "name": "Output",
+      "icon": "location-arrow",
+      "description": "Send data to external destinations"
+    },
+    "inputs": [
+      {
+        "name": "body",
+        "type": "text",
+        "value": null,
+        "label": "Response Body",
+        "placeholder": ""
+      },
+      {
+        "name": "status_code",
+        "type": "integer",
+        "value": null,
+        "label": "Status Code",
+        "placeholder": "200"
+      },
+      {
+        "name": "content_type",
+        "type": "string",
+        "value": null,
+        "label": "Content Type",
+        "placeholder": "application/json"
+      },
+      {
+        "name": "headers",
+        "type": "text",
+        "value": null,
+        "label": "Headers (JSON object)",
+        "placeholder": "{\"Location\":\"/x\"}"
+      },
+      {
+        "name": "history",
+        "type": "text",
+        "value": null,
+        "label": "History Text",
+        "placeholder": "assistant message to record (defaults to the body)"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "set",
+        "type": "boolean",
+        "value": null,
+        "label": "Set",
+        "placeholder": ""
+      }
+    ]
+  },
   "plan/block": {
     "hash": "9d224591eabb9670137612fc2a7fa8ab9d44b6dc8e1bdb685ae589a388708710",
     "author": "Andy Esser",
@@ -122820,6 +122882,114 @@
         "type": "string",
         "value": null,
         "label": "Raw JSON Body",
+        "placeholder": ""
+      }
+    ]
+  },
+  "trigger/web": {
+    "hash": "59ae6035e5ff9bf6671bc72349e3df3dfb8779e3e8943c9cfeb819502ed3c953",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Web Trigger",
+    "description": "Triggers a flow from an HTTP request of any verb; pair with a Web Response action to return a body/status",
+    "website": "https://www.flomation.co",
+    "icon": "globe",
+    "date": "13/07/2026",
+    "type": 1,
+    "category": {
+      "name": "Triggers",
+      "icon": "bolt-lightning",
+      "description": "Start a Flow"
+    },
+    "inputs": [
+      {
+        "name": "methods",
+        "type": "multi_select",
+        "value": null,
+        "label": "Accepted Methods",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "GET",
+            "value": "GET"
+          },
+          {
+            "name": "POST",
+            "value": "POST"
+          },
+          {
+            "name": "PUT",
+            "value": "PUT"
+          },
+          {
+            "name": "PATCH",
+            "value": "PATCH"
+          },
+          {
+            "name": "DELETE",
+            "value": "DELETE"
+          }
+        ]
+      },
+      {
+        "name": "auth_mode",
+        "type": "string",
+        "value": null,
+        "label": "Authentication",
+        "placeholder": "Publishable Key",
+        "options": [
+          {
+            "name": "Publishable Key",
+            "value": "publishable"
+          },
+          {
+            "name": "Open",
+            "value": "public"
+          }
+        ]
+      },
+      {
+        "name": "fields",
+        "type": "text",
+        "value": null,
+        "label": "Request Fields",
+        "placeholder": "{\"id\":\"path\",\"limit\":\"query\",\"name\":\"body\"}"
+      },
+      {
+        "name": "keep_history",
+        "type": "boolean",
+        "value": null,
+        "label": "Keep Conversation History",
+        "placeholder": ""
+      },
+      {
+        "name": "message_field",
+        "type": "string",
+        "value": null,
+        "label": "Message Field",
+        "placeholder": "message"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "method",
+        "type": "string",
+        "value": null,
+        "label": "HTTP Method",
+        "placeholder": ""
+      },
+      {
+        "name": "history",
+        "type": "string",
+        "value": null,
+        "label": "Conversation History",
+        "placeholder": ""
+      },
+      {
+        "name": "raw_body",
+        "type": "string",
+        "value": null,
+        "label": "Raw Body",
         "placeholder": ""
       }
     ]

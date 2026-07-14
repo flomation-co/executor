@@ -24,6 +24,30 @@ func TestExecute(t *testing.T) {
 	Expect(result["message"]).To(Equal("hello"))
 }
 
+// The Web Trigger exposes an auth_mode config with exactly the publishable/public
+// options the API projection and Launch's gate rely on. Guards against the input
+// being renamed or its option values drifting out of lock-step with the edge.
+func TestAuthModeInputContract(t *testing.T) {
+	RegisterTestingT(t)
+
+	var authMode *core.Connection
+	for i := range Inputs {
+		if Inputs[i].Name == "auth_mode" {
+			authMode = &Inputs[i]
+			break
+		}
+	}
+	Expect(authMode).To(Not(BeNil()), "auth_mode input must exist")
+	Expect(authMode.Type).To(Equal(core.ConnectionTypeString))
+
+	values := map[string]bool{}
+	for _, o := range authMode.Options {
+		values[o.Value] = true
+	}
+	Expect(values).To(HaveKey("publishable"))
+	Expect(values).To(HaveKey("public"))
+}
+
 func TestExecuteSkipsNilValues(t *testing.T) {
 	RegisterTestingT(t)
 
