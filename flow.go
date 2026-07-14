@@ -209,6 +209,16 @@ const (
 	// at execution time via a currency-aware helper. Kept string-typed so
 	// ${...} substitution flows through untouched.
 	ConnectionTypeMoney = "money"
+
+	// ConnectionTypeComboBox is a string field that carries Options as
+	// *suggestions* rather than a closed set. The editor renders it as a
+	// text input with a dropdown of the suggested values: the operator can
+	// pick one or type their own. Use it where a helpful shortlist exists but
+	// the field is genuinely open-ended — the embedding Model, for instance,
+	// where the common models are worth surfacing but any model name is valid.
+	// On the wire it behaves exactly like a string, so ${...} substitution and
+	// every existing string reader flow through untouched.
+	ConnectionTypeComboBox = "combobox"
 )
 
 type Action func(flow *Flow, node *Node, inputs []*Connection) (map[string]interface{}, error)
@@ -312,7 +322,8 @@ func (c *Connection) String() *string {
 
 	if c.Type == ConnectionTypeString || c.Type == ConnectionTypeText ||
 		c.Type == ConnectionTypeDateTime || c.Type == ConnectionTypeMultiSelect ||
-		c.Type == ConnectionTypeRows || c.Type == ConnectionTypeMoney {
+		c.Type == ConnectionTypeRows || c.Type == ConnectionTypeMoney ||
+		c.Type == ConnectionTypeComboBox {
 		if v, ok := c.Value.(string); ok {
 			return &v
 		}
@@ -1733,7 +1744,7 @@ func (f *Flow) executeNodeActionOnly(actions map[string]Action, node *Node, envi
 						continue
 					}
 
-					replaceToken(val, m, jsonCtx,*p.Value)
+					replaceToken(val, m, jsonCtx, *p.Value)
 				} else if strings.HasPrefix(m, "flow.") {
 					name := strings.TrimPrefix(m, "flow.")
 					if f.context != nil {
@@ -1742,7 +1753,7 @@ func (f *Flow) executeNodeActionOnly(actions map[string]Action, node *Node, envi
 						// resolved value (e.g. thread_id when there's no
 						// thread). Leaving the literal ${flow.xxx} in place
 						// causes downstream actions to receive it as text.
-						replaceToken(val, m, jsonCtx,contextVal)
+						replaceToken(val, m, jsonCtx, contextVal)
 					} else {
 						log.WithFields(log.Fields{
 							"name": name,
@@ -1759,7 +1770,7 @@ func (f *Flow) executeNodeActionOnly(actions map[string]Action, node *Node, envi
 					if f.context != nil && f.context.UserVariables != nil {
 						userVal = f.context.UserVariables[name]
 					}
-					replaceToken(val, m, jsonCtx,userVal)
+					replaceToken(val, m, jsonCtx, userVal)
 				} else if strings.HasPrefix(m, "var.") {
 					// ${var.X} — Set-Variable-node-backed flow-scoped
 					// variables. The stored value can be any interface{}
@@ -1782,9 +1793,9 @@ func (f *Flow) executeNodeActionOnly(actions map[string]Action, node *Node, envi
 										"name":  m,
 										"error": err,
 									}).Warn("path resolution failed on ${var.X}")
-									replaceToken(val, m, jsonCtx,"")
+									replaceToken(val, m, jsonCtx, "")
 								} else {
-									replaceToken(val, m, jsonCtx,substitutionString(walked))
+									replaceToken(val, m, jsonCtx, substitutionString(walked))
 								}
 							} else {
 								log.WithFields(log.Fields{
@@ -1794,7 +1805,7 @@ func (f *Flow) executeNodeActionOnly(actions map[string]Action, node *Node, envi
 						}
 					} else if f.variables != nil {
 						if varVal, ok := f.variables[name]; ok {
-							replaceToken(val, m, jsonCtx,substitutionString(varVal))
+							replaceToken(val, m, jsonCtx, substitutionString(varVal))
 						} else {
 							log.WithFields(log.Fields{
 								"name": name,
@@ -1851,7 +1862,7 @@ func (f *Flow) executeNodeActionOnly(actions map[string]Action, node *Node, envi
 						}).Warn("missing credential")
 						continue
 					}
-					replaceToken(val, m, jsonCtx,*token)
+					replaceToken(val, m, jsonCtx, *token)
 				} else if strings.HasPrefix(m, "secrets.") || strings.HasPrefix(m, "secret.") {
 					if environment == nil {
 						log.WithFields(log.Fields{
@@ -1876,7 +1887,7 @@ func (f *Flow) executeNodeActionOnly(actions map[string]Action, node *Node, envi
 						continue
 					}
 
-					replaceToken(val, m, jsonCtx,*p.Value)
+					replaceToken(val, m, jsonCtx, *p.Value)
 				} else {
 					// Parent-output reference. Two forms:
 					//   ${nodeId.key}                      — top-level output
@@ -1893,7 +1904,7 @@ func (f *Flow) executeNodeActionOnly(actions map[string]Action, node *Node, envi
 
 					if !pathPresent {
 						if res, exists := parentResults[m]; exists {
-							replaceToken(val, m, jsonCtx,substitutionString(res))
+							replaceToken(val, m, jsonCtx, substitutionString(res))
 							continue
 						}
 					}
@@ -2007,7 +2018,7 @@ func (f *Flow) executeNodeActionOnly(actions map[string]Action, node *Node, envi
 								"node_id": scopeNodeID,
 							}).Warn("scoped node not found in results cache")
 						}
-						replaceToken(val, m, jsonCtx,replacement)
+						replaceToken(val, m, jsonCtx, replacement)
 					} else {
 						log.WithFields(log.Fields{
 							"output": m,
@@ -2021,7 +2032,7 @@ func (f *Flow) executeNodeActionOnly(actions map[string]Action, node *Node, envi
 						// misses. A leaked ${...} literal reaches downstream
 						// actions and AI prompts as text (see the no-literal
 						// guarantee in flow_scoped_dep_test.go).
-						replaceToken(val, m, jsonCtx,"")
+						replaceToken(val, m, jsonCtx, "")
 					}
 				}
 			}
@@ -3224,6 +3235,7 @@ func (f *Flow) injectToolDefinitions(aiNode *Node, toolNodes []*Node, actions ma
 		ConnectionTypeObject:      "object",
 		ConnectionTypeDateTime:    "string",
 		ConnectionTypeMultiSelect: "string",
+		ConnectionTypeComboBox:    "string",
 	}
 
 	var tools []map[string]interface{}
