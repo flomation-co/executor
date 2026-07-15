@@ -435,10 +435,13 @@ import (
 	hubspot_ticket_search "flomation.app/automate/executor/actions/hubspot/ticket_search"
 	hubspot_ticket_update "flomation.app/automate/executor/actions/hubspot/ticket_update"
 	humanintheloop_await "flomation.app/automate/executor/actions/humanintheloop/await"
+	image_adjust "flomation.app/automate/executor/actions/image/adjust"
 	image_convert "flomation.app/automate/executor/actions/image/convert"
 	image_crop "flomation.app/automate/executor/actions/image/crop"
 	image_info "flomation.app/automate/executor/actions/image/info"
 	image_resize "flomation.app/automate/executor/actions/image/resize"
+	image_text "flomation.app/automate/executor/actions/image/text"
+	image_watermark "flomation.app/automate/executor/actions/image/watermark"
 	infrastructure_awx_adhoc_command_get "flomation.app/automate/executor/actions/infrastructure/awx/adhoc_command_get"
 	infrastructure_awx_adhoc_command_run "flomation.app/automate/executor/actions/infrastructure/awx/adhoc_command_run"
 	infrastructure_awx_credential_create "flomation.app/automate/executor/actions/infrastructure/awx/credential_create"
@@ -1183,9 +1186,13 @@ import (
 	vectordatabase_pgvector_index_create "flomation.app/automate/executor/actions/vectordatabase/pgvector/index_create"
 	vectordatabase_pgvector_table_create "flomation.app/automate/executor/actions/vectordatabase/pgvector/table_create"
 	vectordatabase_pgvector_table_info "flomation.app/automate/executor/actions/vectordatabase/pgvector/table_info"
+	video_concat "flomation.app/automate/executor/actions/video/concat"
 	video_extract_audio "flomation.app/automate/executor/actions/video/extract_audio"
+	video_frames "flomation.app/automate/executor/actions/video/frames"
 	video_info "flomation.app/automate/executor/actions/video/info"
+	video_scale "flomation.app/automate/executor/actions/video/scale"
 	video_thumbnail "flomation.app/automate/executor/actions/video/thumbnail"
+	video_transcode "flomation.app/automate/executor/actions/video/transcode"
 	video_trim "flomation.app/automate/executor/actions/video/trim"
 	web_fetch "flomation.app/automate/executor/actions/web/fetch"
 	web_request "flomation.app/automate/executor/actions/web/request"
@@ -1690,10 +1697,13 @@ var Actions = map[string]core.Action{
 	"hubspot/ticket_search":                               hubspot_ticket_search.Execute,
 	"hubspot/ticket_update":                               hubspot_ticket_update.Execute,
 	"humanintheloop/await":                                humanintheloop_await.Execute,
+	"image/adjust":                                        image_adjust.Execute,
 	"image/convert":                                       image_convert.Execute,
 	"image/crop":                                          image_crop.Execute,
 	"image/info":                                          image_info.Execute,
 	"image/resize":                                        image_resize.Execute,
+	"image/text":                                          image_text.Execute,
+	"image/watermark":                                     image_watermark.Execute,
 	"infrastructure/awx/adhoc_command_get":                infrastructure_awx_adhoc_command_get.Execute,
 	"infrastructure/awx/adhoc_command_run":                infrastructure_awx_adhoc_command_run.Execute,
 	"infrastructure/awx/credential_create":                infrastructure_awx_credential_create.Execute,
@@ -2438,9 +2448,13 @@ var Actions = map[string]core.Action{
 	"vectordatabase/pgvector/index_create":                vectordatabase_pgvector_index_create.Execute,
 	"vectordatabase/pgvector/table_create":                vectordatabase_pgvector_table_create.Execute,
 	"vectordatabase/pgvector/table_info":                  vectordatabase_pgvector_table_info.Execute,
+	"video/concat":                                        video_concat.Execute,
 	"video/extract_audio":                                 video_extract_audio.Execute,
+	"video/frames":                                        video_frames.Execute,
 	"video/info":                                          video_info.Execute,
+	"video/scale":                                         video_scale.Execute,
 	"video/thumbnail":                                     video_thumbnail.Execute,
+	"video/transcode":                                     video_transcode.Execute,
 	"video/trim":                                          video_trim.Execute,
 	"web/fetch":                                           web_fetch.Execute,
 	"web/request":                                         web_request.Execute,

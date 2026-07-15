@@ -164,6 +164,24 @@ func OptionalStringDefault(name, def string, inputs []*core.Connection) string {
 	return def
 }
 
+func OptionalInt(name string, def int, inputs []*core.Connection) int {
+	c := core.FindConnection(name, inputs)
+	if c == nil {
+		return def
+	}
+	switch v := c.Value.(type) {
+	case float64:
+		return int(v)
+	case int:
+		return v
+	case string:
+		if n, err := strconv.Atoi(strings.TrimSpace(v)); err == nil {
+			return n
+		}
+	}
+	return def
+}
+
 func OptionalBool(name string, def bool, inputs []*core.Connection) bool {
 	c := core.FindConnection(name, inputs)
 	if c == nil {
