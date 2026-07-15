@@ -227,6 +227,16 @@ const (
 	// On the wire it behaves exactly like a string, so ${...} substitution and
 	// every existing string reader flow through untouched.
 	ConnectionTypeComboBox = "combobox"
+
+	// ConnectionTypeFile marks an input that holds a file REFERENCE (a
+	// flo:blob: token, or flo:file:/base64), not a value the operator types.
+	// The editor renders it as an upload widget: the file is uploaded to the
+	// blob store (POST /api/v1/asset) and the returned flo:blob: token is
+	// stored as the input value. On the wire it is a plain string token, so
+	// ${...} substitution and every file-consuming action (which already
+	// resolves it via ResolveToLocalFile) flow through untouched — no action
+	// or engine change is needed to accept an uploaded asset.
+	ConnectionTypeFile = "file"
 )
 
 type Action func(flow *Flow, node *Node, inputs []*Connection) (map[string]interface{}, error)
@@ -331,7 +341,7 @@ func (c *Connection) String() *string {
 	if c.Type == ConnectionTypeString || c.Type == ConnectionTypeText ||
 		c.Type == ConnectionTypeDateTime || c.Type == ConnectionTypeMultiSelect ||
 		c.Type == ConnectionTypeRows || c.Type == ConnectionTypeMoney ||
-		c.Type == ConnectionTypeComboBox {
+		c.Type == ConnectionTypeComboBox || c.Type == ConnectionTypeFile {
 		if v, ok := c.Value.(string); ok {
 			return &v
 		}

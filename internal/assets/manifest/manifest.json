@@ -13207,6 +13207,62 @@
       }
     ]
   },
+  "common/asset": {
+    "hash": "24ea5c9646840ea32911abf9166b21c531de8b4fbe46aba53c1760612e9e3153",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "File Asset",
+    "description": "Reference an uploaded file (logo, image, PSD) from other nodes",
+    "website": "https://www.flomation.co",
+    "icon": "paperclip",
+    "date": "15/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Common",
+      "icon": "toolbox",
+      "description": "General-purpose data utilities"
+    },
+    "inputs": [
+      {
+        "name": "file",
+        "type": "file",
+        "value": null,
+        "label": "File",
+        "placeholder": "Upload a file",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "file",
+        "type": "string",
+        "value": null,
+        "label": "File (media reference)",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
   "common/data_combine": {
     "hash": "b6f4c73aa6bdbff1c9845c040366feb5f036c55f7646eec6e5d9a7a840c3e2d6",
     "author": "Andy Esser",

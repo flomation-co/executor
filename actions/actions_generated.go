@@ -109,6 +109,7 @@ import (
 	common_array_find "flomation.app/automate/executor/actions/common/array_find"
 	common_array_index "flomation.app/automate/executor/actions/common/array_index"
 	common_array_length "flomation.app/automate/executor/actions/common/array_length"
+	common_asset "flomation.app/automate/executor/actions/common/asset"
 	common_data_combine "flomation.app/automate/executor/actions/common/data_combine"
 	common_data_extract "flomation.app/automate/executor/actions/common/data_extract"
 	common_data_rename "flomation.app/automate/executor/actions/common/data_rename"
@@ -1356,6 +1357,7 @@ var Actions = map[string]core.Action{
 	"common/array_find":                                   common_array_find.Execute,
 	"common/array_index":                                  common_array_index.Execute,
 	"common/array_length":                                 common_array_length.Execute,
+	"common/asset":                                        common_asset.Execute,
 	"common/data_combine":                                 common_data_combine.Execute,
 	"common/data_extract":                                 common_data_extract.Execute,
 	"common/data_rename":                                  common_data_rename.Execute,
