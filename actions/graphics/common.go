@@ -54,9 +54,16 @@ func FontFace(name string, sizePx float64) (font.Face, error) {
 }
 
 // RenderVideo draws each frame with draw(dc, t) — t is the frame time in seconds —
-// to a transparent gg canvas, saves the frames as PNGs, then assembles them into a
-// transparent .mov (qtrle preserves alpha) so the result composites over a base
-// video. Returns the output path.
+// to a transparent gg canvas, saves the frames as PNGs, then assembles them into an
+// animated PNG (APNG). APNG is chosen deliberately over a video container:
+//   - full 8-bit alpha (crisp anti-aliased text), preserved losslessly;
+//   - written by ffmpeg's BUILT-IN apng muxer — no libvpx/libx264, so it works with
+//     any stock ffmpeg (WebM/VP8/VP9 alpha silently drops the alpha channel on many
+//     builds — including Homebrew's — which produced opaque or unplayable output);
+//   - web-native: browsers animate APNG in an <img>, so the editor previews it inline
+//     and a download opens anywhere (a qtrle .mov played in neither);
+//   - still composites downstream: ffmpeg reads the APNG's alpha in the Overlay action.
+// Returns the output path.
 func RenderVideo(ctx context.Context, flow *core.Flow, width, height, fps int, duration float64, draw func(dc *gg.Context, t float64)) (string, error) {
 	if width < 2 {
 		width = 2
@@ -89,13 +96,15 @@ func RenderVideo(ctx context.Context, flow *core.Flow, width, height, fps int, d
 		}
 	}
 
-	out, err := flow.MediaScratchFile("mov")
+	out, err := flow.MediaScratchFile("apng")
 	if err != nil {
 		return "", err
 	}
-	// qtrle carries an alpha channel, so the graphic stays transparent for overlay.
+	// APNG keeps a full alpha channel (transparent for overlay) and is written by
+	// ffmpeg's built-in muxer, so this needs no external codec library. -plays 0
+	// loops forever; -f apng forces the muxer regardless of the output extension.
 	stderr, err := vc.RunFFmpeg(ctx, "-y", "-framerate", strconv.Itoa(fps),
-		"-i", filepath.Join(dir, "f_%05d.png"), "-c:v", "qtrle", out)
+		"-i", filepath.Join(dir, "f_%05d.png"), "-plays", "0", "-f", "apng", out)
 	if err != nil {
 		return "", fmt.Errorf("assemble frames: %v: %s", err, vc.Tail(stderr, 300))
 	}

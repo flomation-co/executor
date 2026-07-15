@@ -36207,7 +36207,7 @@
     ]
   },
   "graphics/animated_counter": {
-    "hash": "14de0d0deec53058701985d4ab74cc872325734950eb81bee3bc8ebd5a172ddc",
+    "hash": "ce2533fad8009e9027974e3bcfadc4841db98be457d7fdf7f3b252ab07772af1",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Animated Counter",
@@ -36333,7 +36333,7 @@
         "name": "video",
         "type": "string",
         "value": null,
-        "label": "Transparent video (media reference)",
+        "label": "Transparent animation (media reference)",
         "placeholder": ""
       },
       {
@@ -36360,7 +36360,7 @@
     ]
   },
   "graphics/animated_title": {
-    "hash": "095bc77587b98c050e4599bfac4802f08e0ec08e3261c6771edf10b5ff67e4fd",
+    "hash": "f09355d57578e3dfd0f7e717ec758af0d87680ec80e04f05cbe91d6a7f26819e",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Animated Title",
@@ -36484,7 +36484,7 @@
         "name": "video",
         "type": "string",
         "value": null,
-        "label": "Transparent video (media reference)",
+        "label": "Transparent animation (media reference)",
         "placeholder": ""
       },
       {
@@ -36511,7 +36511,7 @@
     ]
   },
   "graphics/lower_third": {
-    "hash": "d313da8dea4565146f9c074d340f8e542e7609536d5fd40567a2afdb91c78516",
+    "hash": "8fd8ee1997d116e3a70c8674ff376f4227789d900e458a3bc4de98b4a533fbdb",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Animated Lower-Third",
@@ -36596,7 +36596,7 @@
         "name": "video",
         "type": "string",
         "value": null,
-        "label": "Transparent video (media reference)",
+        "label": "Transparent animation (media reference)",
         "placeholder": ""
       },
       {

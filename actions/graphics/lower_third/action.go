@@ -37,7 +37,7 @@ var Inputs = [...]core.Connection{
 
 var Outputs = [...]core.Connection{
 	{Name: "tool_result", Type: core.ConnectionTypeString, Label: "Result summary"},
-	{Name: "video", Type: core.ConnectionTypeString, Label: "Transparent video (media reference)"},
+	{Name: "video", Type: core.ConnectionTypeString, Label: "Transparent animation (media reference)"},
 	{Name: "size_bytes", Type: core.ConnectionTypeInteger, Label: "Size (bytes)"},
 	{Name: "success", Type: core.ConnectionTypeBoolean, Label: "Success"},
 	{Name: "error", Type: core.ConnectionTypeString, Label: "Error"},
