@@ -40,7 +40,7 @@ var Inputs = [...]core.Connection{
 		},
 	},
 	{Name: "font_size", Type: core.ConnectionTypeInteger, Label: "Font size (px)", Value: 120},
-	{Name: "colour", Type: core.ConnectionTypeString, Label: "Colour", Value: "#ffffff"},
+	{Name: "colour", Type: core.ConnectionTypeColour, Label: "Colour", Value: "#ffffff"},
 	{Name: "width", Type: core.ConnectionTypeInteger, Label: "Width (px)", Value: 700},
 	{Name: "height", Type: core.ConnectionTypeInteger, Label: "Height (px)", Value: 300},
 	{Name: "duration_seconds", Type: core.ConnectionTypeString, Label: "Duration (seconds)", Value: "2"},

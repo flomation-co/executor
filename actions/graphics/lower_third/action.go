@@ -27,8 +27,8 @@ const (
 var Inputs = [...]core.Connection{
 	{Name: "title", Type: core.ConnectionTypeString, Label: "Title", Placeholder: "Jane Doe", Required: true},
 	{Name: "subtitle", Type: core.ConnectionTypeString, Label: "Subtitle (optional)", Placeholder: "Head of Product"},
-	{Name: "accent_colour", Type: core.ConnectionTypeString, Label: "Accent colour", Value: "#00aa9c", Placeholder: "#00aa9c"},
-	{Name: "text_colour", Type: core.ConnectionTypeString, Label: "Text colour", Value: "#ffffff"},
+	{Name: "accent_colour", Type: core.ConnectionTypeColour, Label: "Accent colour", Value: "#00aa9c", Placeholder: "#00aa9c"},
+	{Name: "text_colour", Type: core.ConnectionTypeColour, Label: "Text colour", Value: "#ffffff"},
 	{Name: "width", Type: core.ConnectionTypeInteger, Label: "Width (px)", Value: 1280},
 	{Name: "height", Type: core.ConnectionTypeInteger, Label: "Height (px)", Value: 200},
 	{Name: "duration_seconds", Type: core.ConnectionTypeString, Label: "Duration (seconds)", Value: "5"},

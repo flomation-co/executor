@@ -4,6 +4,7 @@ import (
 	"context"
 	"embed"
 	"fmt"
+	"math"
 	"os"
 	"path/filepath"
 	"strconv"
@@ -126,6 +127,65 @@ func SetColour(dc *gg.Context, spec string, alpha float64) {
 	dc.SetRGBA(r, g, b, clamp01(alpha))
 }
 
+// ── Styled text (fill + optional drop shadow + outline) ──
+
+// TextStyle describes how DrawStyledText paints a string. Empty colour strings
+// disable that layer. Widths/offsets are in pixels. gg has no glyph-path stroke,
+// so the outline is a ring of offset draws — crisp and cheap for a few px.
+type TextStyle struct {
+	Colour string // fill colour (hex or named)
+
+	ShadowColour string  // "" = no shadow
+	ShadowAlpha  float64 // 0..1 (relative to the master alpha)
+	ShadowDX     float64
+	ShadowDY     float64
+
+	OutlineColour string // "" = no outline
+	OutlineWidth  float64
+}
+
+// DrawStyledText paints text anchored at (x,y) with anchors ax/ay, in draw order
+// shadow → outline → fill. masterAlpha (0..1) scales every layer so the whole
+// glyph fades together (e.g. with an intro/outro animation). The caller must
+// have already set the font face on dc.
+func DrawStyledText(dc *gg.Context, text string, x, y, ax, ay, masterAlpha float64, st TextStyle) {
+	m := clamp01(masterAlpha)
+	if m <= 0 {
+		return
+	}
+	if st.ShadowColour != "" {
+		sa := st.ShadowAlpha
+		if sa <= 0 {
+			sa = 0.55
+		}
+		SetColour(dc, st.ShadowColour, clamp01(sa)*m)
+		dc.DrawStringAnchored(text, x+st.ShadowDX, y+st.ShadowDY, ax, ay)
+	}
+	if st.OutlineColour != "" && st.OutlineWidth > 0 {
+		SetColour(dc, st.OutlineColour, m)
+		for _, off := range outlineOffsets(st.OutlineWidth) {
+			dc.DrawStringAnchored(text, x+off[0], y+off[1], ax, ay)
+		}
+	}
+	SetColour(dc, st.Colour, m)
+	dc.DrawStringAnchored(text, x, y, ax, ay)
+}
+
+// outlineOffsets returns a ring of pixel offsets at the given radius, sampled at
+// enough angles to read as a solid outline (denser for thicker widths).
+func outlineOffsets(w float64) [][2]float64 {
+	n := 16
+	if w > 3 {
+		n = 24
+	}
+	pts := make([][2]float64, 0, n)
+	for i := 0; i < n; i++ {
+		a := 2 * math.Pi * float64(i) / float64(n)
+		pts = append(pts, [2]float64{math.Cos(a) * w, math.Sin(a) * w})
+	}
+	return pts
+}
+
 func parseColour(spec string) (r, g, b float64) {
 	s := strings.TrimSpace(strings.ToLower(spec))
 	switch s {
@@ -205,6 +265,22 @@ func OptionalInt(name string, def int, inputs []*core.Connection) int {
 	case string:
 		if n, err := strconv.Atoi(strings.TrimSpace(v)); err == nil {
 			return n
+		}
+	}
+	return def
+}
+
+func OptionalBool(name string, def bool, inputs []*core.Connection) bool {
+	c := core.FindConnection(name, inputs)
+	if c == nil {
+		return def
+	}
+	switch v := c.Value.(type) {
+	case bool:
+		return v
+	case string:
+		if b, err := strconv.ParseBool(strings.TrimSpace(v)); err == nil {
+			return b
 		}
 	}
 	return def

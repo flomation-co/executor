@@ -237,6 +237,14 @@ const (
 	// resolves it via ResolveToLocalFile) flow through untouched — no action
 	// or engine change is needed to accept an uploaded asset.
 	ConnectionTypeFile = "file"
+
+	// ConnectionTypeColour is a colour value. The editor renders it as a swatch
+	// that opens a colour-wheel + hex/RGB picker; the stored value is a hex
+	// string (e.g. "#00aa9c"). It stays string-typed on the wire so ${...}
+	// substitution and named colours (white, flomation-teal, …) flow through
+	// untouched — actions read it exactly like a string and parse the colour
+	// themselves (see graphics_common.parseColour / image colour parsing).
+	ConnectionTypeColour = "colour"
 )
 
 type Action func(flow *Flow, node *Node, inputs []*Connection) (map[string]interface{}, error)
@@ -341,7 +349,8 @@ func (c *Connection) String() *string {
 	if c.Type == ConnectionTypeString || c.Type == ConnectionTypeText ||
 		c.Type == ConnectionTypeDateTime || c.Type == ConnectionTypeMultiSelect ||
 		c.Type == ConnectionTypeRows || c.Type == ConnectionTypeMoney ||
-		c.Type == ConnectionTypeComboBox || c.Type == ConnectionTypeFile {
+		c.Type == ConnectionTypeComboBox || c.Type == ConnectionTypeFile ||
+		c.Type == ConnectionTypeColour {
 		if v, ok := c.Value.(string); ok {
 			return &v
 		}
@@ -3262,6 +3271,7 @@ func (f *Flow) injectToolDefinitions(aiNode *Node, toolNodes []*Node, actions ma
 		ConnectionTypeDateTime:    "string",
 		ConnectionTypeMultiSelect: "string",
 		ConnectionTypeComboBox:    "string",
+		ConnectionTypeColour:      "string",
 	}
 
 	var tools []map[string]interface{}

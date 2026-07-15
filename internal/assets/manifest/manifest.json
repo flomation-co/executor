@@ -36263,7 +36263,7 @@
     ]
   },
   "graphics/animated_counter": {
-    "hash": "ce2533fad8009e9027974e3bcfadc4841db98be457d7fdf7f3b252ab07772af1",
+    "hash": "466ca92db77fb8fb45a392206a0cf2f073cf7aed291eb78fd0acc08f575cd375",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Animated Counter",
@@ -36343,7 +36343,7 @@
       },
       {
         "name": "colour",
-        "type": "string",
+        "type": "colour",
         "value": null,
         "label": "Colour",
         "placeholder": ""
@@ -36416,7 +36416,7 @@
     ]
   },
   "graphics/animated_title": {
-    "hash": "f09355d57578e3dfd0f7e717ec758af0d87680ec80e04f05cbe91d6a7f26819e",
+    "hash": "37a5c4b8f7c86fa668edd89b7eda4cf02c51777f4748d79964cca7fd9c07c7a3",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Animated Title",
@@ -36469,10 +36469,38 @@
       },
       {
         "name": "colour",
-        "type": "string",
+        "type": "colour",
         "value": null,
         "label": "Colour",
         "placeholder": "#ffffff, flomation-teal"
+      },
+      {
+        "name": "shadow",
+        "type": "boolean",
+        "value": null,
+        "label": "Drop shadow",
+        "placeholder": ""
+      },
+      {
+        "name": "shadow_colour",
+        "type": "colour",
+        "value": null,
+        "label": "Shadow colour",
+        "placeholder": ""
+      },
+      {
+        "name": "outline_width",
+        "type": "integer",
+        "value": null,
+        "label": "Outline width (px, 0 = none)",
+        "placeholder": ""
+      },
+      {
+        "name": "outline_colour",
+        "type": "colour",
+        "value": null,
+        "label": "Outline colour",
+        "placeholder": ""
       },
       {
         "name": "animation",
@@ -36567,7 +36595,7 @@
     ]
   },
   "graphics/lower_third": {
-    "hash": "8fd8ee1997d116e3a70c8674ff376f4227789d900e458a3bc4de98b4a533fbdb",
+    "hash": "17c77e4c0e68e2ecea15bf209efefbf3b329a6e11a00d35157d0841e481ae864",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Animated Lower-Third",
@@ -36599,14 +36627,14 @@
       },
       {
         "name": "accent_colour",
-        "type": "string",
+        "type": "colour",
         "value": null,
         "label": "Accent colour",
         "placeholder": "#00aa9c"
       },
       {
         "name": "text_colour",
-        "type": "string",
+        "type": "colour",
         "value": null,
         "label": "Text colour",
         "placeholder": ""
@@ -52109,7 +52137,7 @@
     ]
   },
   "image/psd_render_text": {
-    "hash": "a4ab0fe74c82119f3df0f6daf73964452f95d4564742f1c622d03dd9939d9fd8",
+    "hash": "e52967cbbc4c0f4b1905cc6bbeaad8cbd33de318d6ae823df7d8a0b2961a52b1",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Personalise PSD Text",
@@ -52178,7 +52206,7 @@
       },
       {
         "name": "colour",
-        "type": "string",
+        "type": "colour",
         "value": null,
         "label": "Text colour",
         "placeholder": "#000000, flomation-teal"
