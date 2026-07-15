@@ -124,6 +124,26 @@ func TestResolveToLocalFile_Base64ToScratch(t *testing.T) {
 	Expect(b).To(Equal(original))
 }
 
+func TestEmitMediaFile_FallsBackToFileRefWithoutBlobBackend(t *testing.T) {
+	RegisterTestingT(t)
+	ws := chdirWorkspace(t)
+	f := &Flow{}
+
+	// No blob backend on a bare Flow, so Put fails and we fall back to a
+	// flo:file: workspace reference (never worse than EmitLocalFile).
+	p := filepath.Join(ws, "out.png")
+	Expect(os.WriteFile(p, []byte("img"), 0o600)).To(Succeed())
+
+	ref, err := f.EmitMediaFile(p)
+	Expect(err).To(BeNil())
+	Expect(IsFileRef(ref)).To(BeTrue())
+	Expect(IsBlobToken(ref)).To(BeFalse())
+
+	// A missing file errors (unlike the blob path, there's nothing to fall back to).
+	_, err = f.EmitMediaFile(filepath.Join(ws, "nope.png"))
+	Expect(err).ToNot(BeNil())
+}
+
 func TestMediaScratchFile_UniqueAndInScratchDir(t *testing.T) {
 	RegisterTestingT(t)
 	ws := chdirWorkspace(t)

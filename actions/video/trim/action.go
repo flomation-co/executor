@@ -31,7 +31,7 @@ var Inputs = [...]core.Connection{
 
 var Outputs = [...]core.Connection{
 	{Name: "tool_result", Type: core.ConnectionTypeString, Label: "Result summary"},
-	{Name: "video", Type: core.ConnectionTypeString, Label: "Video (file reference)"},
+	{Name: "video", Type: core.ConnectionTypeString, Label: "Video (media reference)"},
 	{Name: "duration_seconds", Type: core.ConnectionTypeString, Label: "Duration (seconds)"},
 	{Name: "size_bytes", Type: core.ConnectionTypeInteger, Label: "Size (bytes)"},
 	{Name: "success", Type: core.ConnectionTypeBoolean, Label: "Success"},
@@ -79,7 +79,7 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 		return vc.ErrResult(fmt.Sprintf("ffmpeg failed: %v: %s", err, vc.Tail(stderr, 400)))
 	}
 
-	ref, err := flow.EmitLocalFile(outPath)
+	ref, err := flow.EmitMediaFile(outPath)
 	if err != nil {
 		return vc.ErrResult(err.Error())
 	}

@@ -169,6 +169,37 @@ func (f *Flow) EmitLocalFile(path string) (string, error) {
 	return FileRefPrefix + filepath.ToSlash(rel), nil
 }
 
+// mediaBlobLimitBytes mirrors the blob store's per-object cap. Files at or below
+// it are emitted as blob tokens (previewable, sink-compatible, survive a
+// suspension); larger files stay workspace-only.
+const mediaBlobLimitBytes = 25 * 1024 * 1024
+
+// EmitMediaFile returns the most useful reference to a workspace file an action
+// produced, using dual-tier storage:
+//   - small enough for the blob store (≤ mediaBlobLimitBytes) → a flo:blob: token
+//     with a MIME hint, so the editor previews it inline, blob sinks can consume
+//     it, and it survives a HITL/Wait suspension.
+//   - otherwise → a flo:file: workspace reference (unlimited size, ephemeral).
+//
+// Either form is transparently accepted downstream by ResolveToLocalFile, so the
+// choice is invisible to a media→media chain. Any blob failure falls back to the
+// file reference, so this never fails where EmitLocalFile would succeed.
+func (f *Flow) EmitMediaFile(path string) (string, error) {
+	fi, err := os.Stat(path)
+	if err != nil {
+		return "", err
+	}
+	if bs := f.Blobs(); bs != nil && fi.Size() <= mediaBlobLimitBytes {
+		if b, rerr := os.ReadFile(path); rerr == nil {
+			if tok, perr := bs.Put(b, mimeOfFile(path)); perr == nil && tok != "" {
+				return tok, nil
+			}
+		}
+		// Any read/put failure (no backend, quota, oversize) → workspace ref.
+	}
+	return f.EmitLocalFile(path)
+}
+
 // mimeOfFile returns a best-effort MIME type: extension first, then a content
 // sniff of the first bytes. Never errors — returns "" if undetermined.
 func mimeOfFile(path string) string {

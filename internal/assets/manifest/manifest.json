@@ -50461,7 +50461,7 @@
     ]
   },
   "image/convert": {
-    "hash": "7f5d090ffa7cb14c7fa9cdb7373dc81ebc0c0d6a9e6ef698a8ecc3b336e1ca3a",
+    "hash": "58ecae602cee84688c34a5ccf342b1fc5621028bb760e6a7d77e2bc5a169161a",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Convert Image Format",
@@ -50537,7 +50537,7 @@
         "name": "image",
         "type": "string",
         "value": null,
-        "label": "Image (file reference)",
+        "label": "Image (media reference)",
         "placeholder": ""
       },
       {
@@ -50571,7 +50571,7 @@
     ]
   },
   "image/crop": {
-    "hash": "03d45027f06ab5302dc97491f2a3bc5d9ecd21590cc771786cf0cf72d9f6d701",
+    "hash": "2f0bc1b4f5e3cabac6874beb49bc9538f86046657be4585be0d9f775fc9d51d7",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Crop Image",
@@ -50637,7 +50637,7 @@
         "name": "image",
         "type": "string",
         "value": null,
-        "label": "Image (file reference)",
+        "label": "Image (media reference)",
         "placeholder": ""
       },
       {
@@ -50755,7 +50755,7 @@
     ]
   },
   "image/resize": {
-    "hash": "aa1310a06e7141fbe9bf9149b536f97b2e517d974e5b22d850845a765555108f",
+    "hash": "ca885d55664750244136e4df8b14c2b8d30d1aacdddc181ecda05f271bf05911",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Resize Image",
@@ -50833,7 +50833,7 @@
         "name": "image",
         "type": "string",
         "value": null,
-        "label": "Image (file reference)",
+        "label": "Image (media reference)",
         "placeholder": ""
       },
       {
@@ -144821,7 +144821,7 @@
     ]
   },
   "video/extract_audio": {
-    "hash": "2a967de975a295d52c9307a3e947598132e87cf5626d0dddb32b443be7356021",
+    "hash": "b0ab1f6687a05150b6c6f22063f912a96d217e87e225c1c558d495e8ee57a1da",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Extract Audio",
@@ -144907,7 +144907,7 @@
         "name": "audio",
         "type": "string",
         "value": null,
-        "label": "Audio (file reference)",
+        "label": "Audio (media reference)",
         "placeholder": ""
       },
       {
@@ -145053,7 +145053,7 @@
     ]
   },
   "video/thumbnail": {
-    "hash": "610926db5db95a168e3b1e183f0da0de3d5c733977d031327cace71f37f30dc1",
+    "hash": "ee39f11f3a8cfaeb1a0e9667de581e21a3ac864c31892009a06f76f57a70f2bd",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Create Thumbnail",
@@ -145113,7 +145113,7 @@
         "name": "image",
         "type": "string",
         "value": null,
-        "label": "Image (file reference)",
+        "label": "Image (media reference)",
         "placeholder": ""
       },
       {
@@ -145147,7 +145147,7 @@
     ]
   },
   "video/trim": {
-    "hash": "92ae77ccecda283b7a545e6d5f7eddc2d5d020d1be152a58ca7540f251f5f857",
+    "hash": "7e35f419e1f4f2980a3f677e71a38efd49b66be872ae361a3ef59b822947d89b",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Trim Video",
@@ -145205,7 +145205,7 @@
         "name": "video",
         "type": "string",
         "value": null,
-        "label": "Video (file reference)",
+        "label": "Video (media reference)",
         "placeholder": ""
       },
       {

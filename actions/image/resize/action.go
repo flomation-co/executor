@@ -39,7 +39,7 @@ var Inputs = [...]core.Connection{
 
 var Outputs = [...]core.Connection{
 	{Name: "tool_result", Type: core.ConnectionTypeString, Label: "Result summary"},
-	{Name: "image", Type: core.ConnectionTypeString, Label: "Image (file reference)"},
+	{Name: "image", Type: core.ConnectionTypeString, Label: "Image (media reference)"},
 	{Name: "width", Type: core.ConnectionTypeInteger, Label: "Width (px)"},
 	{Name: "height", Type: core.ConnectionTypeInteger, Label: "Height (px)"},
 	{Name: "size_bytes", Type: core.ConnectionTypeInteger, Label: "Size (bytes)"},
@@ -107,7 +107,7 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 		return ic.ErrResult(fmt.Sprintf("magick failed: %v: %s", err, ic.Tail(stderr, 400)))
 	}
 
-	ref, err := flow.EmitLocalFile(outPath)
+	ref, err := flow.EmitMediaFile(outPath)
 	if err != nil {
 		return ic.ErrResult(err.Error())
 	}
