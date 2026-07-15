@@ -52,7 +52,7 @@ var Inputs = [...]core.Connection{
 		},
 	},
 	{Name: "font_size", Type: core.ConnectionTypeInteger, Label: "Font size (px, 0 = auto-fit to the layer box)", Value: 0},
-	{Name: "colour", Type: core.ConnectionTypeString, Label: "Text colour", Value: "#000000", Placeholder: "#000000, flomation-teal"},
+	{Name: "colour", Type: core.ConnectionTypeColour, Label: "Text colour", Value: "#000000", Placeholder: "#000000, flomation-teal"},
 	{
 		Name: "align", Type: core.ConnectionTypeString, Label: "Alignment", Value: "center",
 		Options: []core.ConnectionOption{

@@ -5,6 +5,7 @@ package animated_title
 import (
 	"context"
 	"fmt"
+	"math"
 	"os"
 
 	"github.com/fogleman/gg"
@@ -35,7 +36,11 @@ var Inputs = [...]core.Connection{
 		},
 	},
 	{Name: "font_size", Type: core.ConnectionTypeInteger, Label: "Font size (px)", Value: 80},
-	{Name: "colour", Type: core.ConnectionTypeString, Label: "Colour", Value: "#ffffff", Placeholder: "#ffffff, flomation-teal"},
+	{Name: "colour", Type: core.ConnectionTypeColour, Label: "Colour", Value: "#ffffff", Placeholder: "#ffffff, flomation-teal"},
+	{Name: "shadow", Type: core.ConnectionTypeBoolean, Label: "Drop shadow", Value: false},
+	{Name: "shadow_colour", Type: core.ConnectionTypeColour, Label: "Shadow colour", Value: "#000000"},
+	{Name: "outline_width", Type: core.ConnectionTypeInteger, Label: "Outline width (px, 0 = none)", Value: 0},
+	{Name: "outline_colour", Type: core.ConnectionTypeColour, Label: "Outline colour", Value: "#000000"},
 	{
 		Name: "animation", Type: core.ConnectionTypeString, Label: "Animation", Value: "fade",
 		Options: []core.ConnectionOption{
@@ -92,6 +97,10 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 		fontSize = 4
 	}
 	colour := gc.OptionalStringDefault("colour", "#ffffff", inputs)
+	shadow := gc.OptionalBool("shadow", false, inputs)
+	shadowColour := gc.OptionalStringDefault("shadow_colour", "#000000", inputs)
+	outlineWidth := gc.OptionalInt("outline_width", 0, inputs)
+	outlineColour := gc.OptionalStringDefault("outline_colour", "#000000", inputs)
 	animation := gc.OptionalStringDefault("animation", "fade", inputs)
 	width := gc.OptionalInt("width", 1280, inputs)
 	height := gc.OptionalInt("height", 300, inputs)
@@ -106,11 +115,22 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 		return gc.ErrResult("could not load the font: " + err.Error())
 	}
 
+	// A shadow offset that scales with the font so it reads at any size.
+	shadowOff := math.Max(2, float64(fontSize)*0.06)
+	style := gc.TextStyle{Colour: colour}
+	if shadow {
+		style.ShadowColour = shadowColour
+		style.ShadowDX, style.ShadowDY = shadowOff, shadowOff
+	}
+	if outlineWidth > 0 {
+		style.OutlineColour = outlineColour
+		style.OutlineWidth = float64(outlineWidth)
+	}
+
 	draw := func(dc *gg.Context, t float64) {
 		dx, dy, alpha := titleAnim(animation, t, duration, float64(width), float64(height))
 		dc.SetFontFace(face)
-		gc.SetColour(dc, colour, alpha)
-		dc.DrawStringAnchored(text, float64(width)/2+dx, float64(height)/2+dy, 0.5, 0.5)
+		gc.DrawStyledText(dc, text, float64(width)/2+dx, float64(height)/2+dy, 0.5, 0.5, alpha, style)
 	}
 
 	ctx, cancel := context.WithTimeout(flow.GoContext(), 300e9) // 300s

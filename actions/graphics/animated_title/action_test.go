@@ -107,3 +107,35 @@ func assertHasAlpha(t *testing.T, path string) {
 	}
 	Expect(max).To(BeNumerically(">", min), "alpha plane is flat — transparency was lost")
 }
+
+func TestAnimatedTitle_ShadowAndOutline(t *testing.T) {
+	RegisterTestingT(t)
+	if _, e := exec.LookPath("ffmpeg"); e != nil {
+		t.Skip("ffmpeg not installed")
+	}
+	d := t.TempDir()
+	if r, e := filepath.EvalSymlinks(d); e == nil {
+		d = r
+	}
+	o, _ := os.Getwd()
+	_ = os.Chdir(d)
+	t.Cleanup(func() { _ = os.Chdir(o) })
+	flow := &core.Flow{}
+	out, err := Execute(flow, nil, []*core.Connection{
+		{Name: "text", Type: core.ConnectionTypeText, Value: "Shadowed"},
+		{Name: "colour", Type: core.ConnectionTypeColour, Value: "#00aa9c"},
+		{Name: "shadow", Type: core.ConnectionTypeBoolean, Value: true},
+		{Name: "shadow_colour", Type: core.ConnectionTypeColour, Value: "#000000"},
+		{Name: "outline_width", Type: core.ConnectionTypeInteger, Value: 3},
+		{Name: "outline_colour", Type: core.ConnectionTypeColour, Value: "#ffffff"},
+		{Name: "duration_seconds", Type: core.ConnectionTypeString, Value: "1"},
+		{Name: "fps", Type: core.ConnectionTypeInteger, Value: 10},
+		{Name: "width", Type: core.ConnectionTypeInteger, Value: 640},
+		{Name: "height", Type: core.ConnectionTypeInteger, Value: 160},
+	})
+	Expect(err).To(BeNil())
+	Expect(out["success"]).To(Equal(true), "error: %v", out["error"])
+	p, _, err := flow.ResolveToLocalFile(out["video"].(string))
+	Expect(err).To(BeNil())
+	assertHasAlpha(t, p) // shadow/outline must still preserve a real alpha channel
+}
