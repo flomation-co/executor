@@ -62,13 +62,22 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 		}, nil
 	}
 
-	// Decode base64 audio
-	audioData, err := base64.StdEncoding.DecodeString(audioB64)
-	if err != nil {
-		// Try URL-safe encoding
-		audioData, err = base64.URLEncoding.DecodeString(audioB64)
+	// Accept a flo:file:/flo:blob: reference (e.g. a media action output) or base64.
+	var audioData []byte
+	var err error
+	if core.IsFileRef(audioB64) || core.IsBlobToken(audioB64) {
+		audioData, _, err = flow.ResolveToBytes(audioB64)
 		if err != nil {
-			return errResult(fmt.Sprintf("failed to decode audio: %v", err))
+			return errResult("could not read the audio: " + err.Error())
+		}
+	} else {
+		audioData, err = base64.StdEncoding.DecodeString(audioB64)
+		if err != nil {
+			// Try URL-safe encoding
+			audioData, err = base64.URLEncoding.DecodeString(audioB64)
+			if err != nil {
+				return errResult(fmt.Sprintf("failed to decode audio: %v", err))
+			}
 		}
 	}
 

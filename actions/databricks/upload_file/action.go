@@ -53,7 +53,13 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	content := *contentConn.String()
 
 	data := []byte(content)
-	if conn := core.FindConnection("is_base64", inputs); conn != nil && conn.Boolean() != nil && *conn.Boolean() {
+	if core.IsFileRef(content) || core.IsBlobToken(content) {
+		resolved, _, rerr := flow.ResolveToBytes(content)
+		if rerr != nil {
+			return databricks.ErrorResult("could not read the file: " + rerr.Error()), nil
+		}
+		data = resolved
+	} else if conn := core.FindConnection("is_base64", inputs); conn != nil && conn.Boolean() != nil && *conn.Boolean() {
 		decoded, derr := base64.StdEncoding.DecodeString(content)
 		if derr != nil {
 			return databricks.ErrorResult(fmt.Sprintf("content is not valid base64: %s", derr)), nil

@@ -48,6 +48,15 @@ const (
 // audio_base64 uses on send_voice; Go strings are byte-safe.
 func ResolveFileBytes(flow *core.Flow, fileBlob, fileBase64 string) ([]byte, error) {
 	if fileBlob != "" {
+		if core.IsFileRef(fileBlob) {
+			// A workspace file reference (e.g. a large media action output that
+			// exceeded the blob store). Read the confined workspace file.
+			data, _, err := flow.ResolveToBytes(fileBlob)
+			if err != nil {
+				return nil, fmt.Errorf("resolve file_blob (workspace file): %w", err)
+			}
+			return decodeIfBase64(data), nil
+		}
 		if core.IsBlobToken(fileBlob) {
 			data, err := flow.Blobs().Get(fileBlob)
 			if err != nil {

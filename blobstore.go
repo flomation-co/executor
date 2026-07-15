@@ -30,6 +30,7 @@ package core
 import (
 	"bytes"
 	"encoding/hex"
+	"encoding/json"
 	"fmt"
 	"io"
 	"mime/multipart"
@@ -371,28 +372,33 @@ func isHexHandle(s string) bool {
 // across Put callers.
 func extractTokenFromUploadResponse(body []byte) (string, error) {
 	// The full response shape is { handle, blob_token, size, mime,
-	// purpose }; we only need blob_token. Minimal manual decode
-	// avoids pulling encoding/json into the hot path for a single
-	// string field.
-	// #nosec G101 -- this is a JSON field marker for parsing the API's
-	// upload response (the response has a field named "blob_token"
-	// whose value is the opaque flo:blob:... reference). It is not a
-	// credential and contains no secret material.
-	const blobTokenJSONKey = `"blob_token":"`
-	idx := strings.Index(string(body), blobTokenJSONKey)
-	if idx < 0 {
+	// purpose }; we only need blob_token.
+	//
+	// This MUST be a real JSON decode, not a substring scan. The API
+	// renders the response with encoding/json's default HTML escaping,
+	// so the token's "&" separator (…?size=N&type=mime) arrives on the
+	// wire as the six literal characters `&`. A naive "read until
+	// the next quote" scan captures that literal escape verbatim,
+	// leaving a token whose query string can never be parsed by
+	// URLSearchParams — the MIME hint is silently lost and the editor
+	// falls back to guessing the media type from the output key name.
+	// json.Unmarshal decodes the escape back to "&", keeping the token
+	// canonical.
+	var resp struct {
+		// #nosec G101 -- field name for the API's upload response; the
+		// value is an opaque flo:blob:... reference, not a credential.
+		BlobToken string `json:"blob_token"`
+	}
+	if err := json.Unmarshal(body, &resp); err != nil {
+		return "", fmt.Errorf("upload response parse: %w: %s", err, truncateForErr(string(body)))
+	}
+	if resp.BlobToken == "" {
 		return "", fmt.Errorf("upload response missing blob_token: %s", truncateForErr(string(body)))
 	}
-	rest := string(body)[idx+len(blobTokenJSONKey):]
-	end := strings.Index(rest, `"`)
-	if end < 0 {
-		return "", fmt.Errorf("upload response token not terminated: %s", truncateForErr(string(body)))
+	if !IsBlobToken(resp.BlobToken) {
+		return "", fmt.Errorf("upload response token malformed: %q", resp.BlobToken)
 	}
-	token := rest[:end]
-	if !IsBlobToken(token) {
-		return "", fmt.Errorf("upload response token malformed: %q", token)
-	}
-	return token, nil
+	return resp.BlobToken, nil
 }
 
 // truncateForErr keeps error messages from spilling a multi-KB

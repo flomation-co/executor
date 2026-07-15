@@ -2,7 +2,6 @@
 package upload
 
 import (
-	"encoding/base64"
 	"encoding/json"
 	"fmt"
 
@@ -29,7 +28,7 @@ const (
 var Inputs = [...]core.Connection{
 	{Name: "name", Type: core.ConnectionTypeString, Label: "File Name", Required: true, Placeholder: "report.txt"},
 	{Name: "content", Type: core.ConnectionTypeText, Label: "Text Content"},
-	{Name: "base64_content", Type: core.ConnectionTypeString, Label: "Binary Content (base64)"},
+	{Name: "base64_content", Type: core.ConnectionTypeString, Label: "Binary content (base64, blob or file reference)"},
 	{Name: "mime_type", Type: core.ConnectionTypeString, Label: "MIME Type", Placeholder: "text/plain"},
 	{Name: "folder_id", Type: core.ConnectionTypeString, Label: "Destination Folder ID"},
 	{Name: "account", Type: core.ConnectionTypeString, Label: "Google Account (email)"},
@@ -80,12 +79,19 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 			mimeType = "text/plain"
 		}
 	} else {
-		fileContent, err = base64.StdEncoding.DecodeString(b64Content)
+		// Accept any inbound form: base64, a flo:blob: token, or a flo:file:
+		// workspace reference (e.g. a large media action output).
+		var resolvedMime string
+		fileContent, resolvedMime, err = flow.ResolveToBytes(b64Content)
 		if err != nil {
-			return google.ErrorResult(fmt.Sprintf("failed to decode base64 content: %v", err))
+			return google.ErrorResult(fmt.Sprintf("failed to read file content: %v", err))
 		}
 		if mimeType == "" {
-			mimeType = "application/octet-stream"
+			if resolvedMime != "" {
+				mimeType = resolvedMime
+			} else {
+				mimeType = "application/octet-stream"
+			}
 		}
 	}
 
