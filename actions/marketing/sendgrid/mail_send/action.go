@@ -7,6 +7,8 @@ import (
 	"strconv"
 	"strings"
 
+	"encoding/base64"
+
 	core "flomation.app/automate/executor"
 	sendgrid "flomation.app/automate/executor/actions/marketing/sendgrid"
 )
@@ -173,6 +175,22 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 		arr, ok := attachments.([]interface{})
 		if !ok {
 			return sendgrid.ErrorResult(`attachments must be a JSON array, e.g. [{"content":"<base64>","filename":"report.pdf"}]`), nil
+		}
+		// Resolve any attachment whose "content" is a flo:file:/flo:blob: reference
+		// (e.g. a large media action output) into the base64 SendGrid expects.
+		for _, item := range arr {
+			m, ok := item.(map[string]interface{})
+			if !ok {
+				continue
+			}
+			cs, _ := m["content"].(string)
+			if core.IsFileRef(cs) || core.IsBlobToken(cs) {
+				data, _, rerr := flow.ResolveToBytes(cs)
+				if rerr != nil {
+					return sendgrid.ErrorResult("could not read an attachment: " + rerr.Error()), nil
+				}
+				m["content"] = base64.StdEncoding.EncodeToString(data)
+			}
 		}
 		body["attachments"] = arr
 	}

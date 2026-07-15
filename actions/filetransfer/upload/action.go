@@ -168,7 +168,7 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 		return nil, fmt.Errorf("remote_path is required")
 	}
 
-	data, err := resolveContent(inputs)
+	data, err := resolveContent(flow, inputs)
 	if err != nil {
 		return nil, err
 	}
@@ -201,12 +201,22 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 // resolveContent reads the content input and, when content_is_base64 is set,
 // decodes it so binary payloads (PDFs, images) round-trip intact. Raw text is
 // passed through byte-for-byte.
-func resolveContent(inputs []*core.Connection) ([]byte, error) {
+func resolveContent(flow *core.Flow, inputs []*core.Connection) ([]byte, error) {
 	conn := core.FindConnection("content", inputs)
 	if conn == nil || conn.String() == nil {
 		return nil, fmt.Errorf("content is required")
 	}
 	raw := *conn.String()
+
+	// A workspace file or blob reference (e.g. a large media action output)
+	// takes precedence over the base64/text handling.
+	if core.IsFileRef(raw) || core.IsBlobToken(raw) {
+		data, _, err := flow.ResolveToBytes(raw)
+		if err != nil {
+			return nil, fmt.Errorf("read content reference: %w", err)
+		}
+		return data, nil
+	}
 
 	if boolVal(core.FindConnection("content_is_base64", inputs)) {
 		// Tolerate whitespace/newlines that often creep into pasted base64.

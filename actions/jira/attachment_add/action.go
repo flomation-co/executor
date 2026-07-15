@@ -58,9 +58,17 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 		return jira.ErrorResult(err.Error()), nil
 	}
 
-	raw, err := base64.StdEncoding.DecodeString(b64)
-	if err != nil {
-		return jira.ErrorResult(fmt.Sprintf("base64_content is not valid base64: %v", err)), nil
+	var raw []byte
+	if core.IsFileRef(b64) || core.IsBlobToken(b64) {
+		raw, _, err = flow.ResolveToBytes(b64)
+		if err != nil {
+			return jira.ErrorResult("could not read the attachment: " + err.Error()), nil
+		}
+	} else {
+		raw, err = base64.StdEncoding.DecodeString(b64)
+		if err != nil {
+			return jira.ErrorResult(fmt.Sprintf("base64_content is not valid base64: %v", err)), nil
+		}
 	}
 	if len(raw) > jira.MaxAttachmentBytes {
 		return jira.ErrorResult(fmt.Sprintf("attachment exceeds the %d MB upload limit", jira.MaxAttachmentBytes>>20)), nil

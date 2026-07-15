@@ -69,10 +69,18 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	}
 	token := active[0]
 
-	// Decode the base64 content.
-	decoded, err := base64.StdEncoding.DecodeString(rawContent)
-	if err != nil {
-		return microsoft.ErrorResult(fmt.Sprintf("failed to decode base64 content: %v", err))
+	// Accept a flo:file:/flo:blob: reference (e.g. a large media output) or base64.
+	var decoded []byte
+	if core.IsFileRef(rawContent) || core.IsBlobToken(rawContent) {
+		decoded, _, err = flow.ResolveToBytes(rawContent)
+		if err != nil {
+			return microsoft.ErrorResult("could not read the file: " + err.Error())
+		}
+	} else {
+		decoded, err = base64.StdEncoding.DecodeString(rawContent)
+		if err != nil {
+			return microsoft.ErrorResult(fmt.Sprintf("failed to decode base64 content: %v", err))
+		}
 	}
 
 	var endpoint string

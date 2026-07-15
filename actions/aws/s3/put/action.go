@@ -88,6 +88,18 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	bucket := core.FindConnection("bucket", inputs)
 	contents := core.FindConnection("contents", inputs)
 
+	// The object body accepts a flo:file:/flo:blob: reference (e.g. a large media
+	// action output) as well as inline text.
+	cs := *contents.String()
+	bodyBytes := []byte(cs)
+	if core.IsFileRef(cs) || core.IsBlobToken(cs) {
+		resolved, _, rerr := flow.ResolveToBytes(cs)
+		if rerr != nil {
+			return nil, rerr
+		}
+		bodyBytes = resolved
+	}
+
 	s, err := s3.GetService(*accessKey.String(), *secretKey.String(), "eu-west-2")
 	if err != nil {
 		return nil, err
@@ -96,7 +108,7 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	_, err = s.Client.PutObject(context.Background(), &awsS3.PutObjectInput{
 		Key:    aws.String(*filename.String()),
 		Bucket: aws.String(*bucket.String()),
-		Body:   bytes.NewReader([]byte(*contents.String())),
+		Body:   bytes.NewReader(bodyBytes),
 	})
 	if err != nil {
 		return nil, err
