@@ -308,6 +308,8 @@ func inspectPackage(dir string) map[string]ManifestEntry {
 										value = "field_source_map"
 									case "ConnectionTypeComboBox":
 										value = "combobox"
+									case "ConnectionTypeFile":
+										value = "file"
 									}
 								case *ast.Ident:
 									if v.Name == "true" {
