@@ -1191,17 +1191,24 @@ import (
 	vectordatabase_pgvector_table_info "flomation.app/automate/executor/actions/vectordatabase/pgvector/table_info"
 	video_adjust_audio "flomation.app/automate/executor/actions/video/adjust_audio"
 	video_concat "flomation.app/automate/executor/actions/video/concat"
+	video_convert_audio "flomation.app/automate/executor/actions/video/convert_audio"
+	video_crop_video "flomation.app/automate/executor/actions/video/crop_video"
 	video_extract_audio "flomation.app/automate/executor/actions/video/extract_audio"
 	video_frames "flomation.app/automate/executor/actions/video/frames"
 	video_gif "flomation.app/automate/executor/actions/video/gif"
 	video_info "flomation.app/automate/executor/actions/video/info"
+	video_mix_audio "flomation.app/automate/executor/actions/video/mix_audio"
 	video_mute "flomation.app/automate/executor/actions/video/mute"
+	video_rotate_video "flomation.app/automate/executor/actions/video/rotate_video"
 	video_scale "flomation.app/automate/executor/actions/video/scale"
 	video_set_audio "flomation.app/automate/executor/actions/video/set_audio"
 	video_slideshow "flomation.app/automate/executor/actions/video/slideshow"
+	video_speed "flomation.app/automate/executor/actions/video/speed"
 	video_thumbnail "flomation.app/automate/executor/actions/video/thumbnail"
 	video_transcode "flomation.app/automate/executor/actions/video/transcode"
 	video_trim "flomation.app/automate/executor/actions/video/trim"
+	video_video_watermark "flomation.app/automate/executor/actions/video/video_watermark"
+	video_waveform "flomation.app/automate/executor/actions/video/waveform"
 	web_fetch "flomation.app/automate/executor/actions/web/fetch"
 	web_request "flomation.app/automate/executor/actions/web/request"
 	web_search "flomation.app/automate/executor/actions/web/search"
@@ -2461,17 +2468,24 @@ var Actions = map[string]core.Action{
 	"vectordatabase/pgvector/table_info":                  vectordatabase_pgvector_table_info.Execute,
 	"video/adjust_audio":                                  video_adjust_audio.Execute,
 	"video/concat":                                        video_concat.Execute,
+	"video/convert_audio":                                 video_convert_audio.Execute,
+	"video/crop_video":                                    video_crop_video.Execute,
 	"video/extract_audio":                                 video_extract_audio.Execute,
 	"video/frames":                                        video_frames.Execute,
 	"video/gif":                                           video_gif.Execute,
 	"video/info":                                          video_info.Execute,
+	"video/mix_audio":                                     video_mix_audio.Execute,
 	"video/mute":                                          video_mute.Execute,
+	"video/rotate_video":                                  video_rotate_video.Execute,
 	"video/scale":                                         video_scale.Execute,
 	"video/set_audio":                                     video_set_audio.Execute,
 	"video/slideshow":                                     video_slideshow.Execute,
+	"video/speed":                                         video_speed.Execute,
 	"video/thumbnail":                                     video_thumbnail.Execute,
 	"video/transcode":                                     video_transcode.Execute,
 	"video/trim":                                          video_trim.Execute,
+	"video/video_watermark":                               video_video_watermark.Execute,
+	"video/waveform":                                      video_waveform.Execute,
 	"web/fetch":                                           web_fetch.Execute,
 	"web/request":                                         web_request.Execute,
 	"web/search":                                          web_search.Execute,

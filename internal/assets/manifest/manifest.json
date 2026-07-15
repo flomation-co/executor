@@ -50674,7 +50674,7 @@
     ]
   },
   "image/create": {
-    "hash": "d8eaa8951e31ba31068484fd59d5e33f60d0cb167700643f5d058b930081ff59",
+    "hash": "e2ac96c5379599f046f0a2186f198892f89b616ea8cf0bb5984b827d782cc9b6",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Create Image",
@@ -51321,7 +51321,7 @@
     ]
   },
   "image/to_pdf": {
-    "hash": "b73927f7133d83f8b8b2d9b912c62aecde886e498782a7c53827cc846643a406",
+    "hash": "f768bd4cd20603e2b3d6c464130fc6df2bef040a567b00840bf31e2cdad338cb",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Images to PDF",
@@ -145623,6 +145623,223 @@
       }
     ]
   },
+  "video/convert_audio": {
+    "hash": "81b3648ed766ef9ccabc430c2296bdb39b02d380ca40267a22533e6c2e31c5ea",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Convert Audio",
+    "description": "Convert an audio file to mp3/aac/wav/ogg/flac at a chosen bitrate",
+    "website": "https://www.flomation.co",
+    "icon": "arrow-right-arrow-left",
+    "date": "15/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Video",
+      "icon": "film",
+      "description": "Process audio and video with ffmpeg: extract audio, thumbnails, trimming and info"
+    },
+    "inputs": [
+      {
+        "name": "audio",
+        "type": "string",
+        "value": null,
+        "label": "Audio (file/blob reference)",
+        "placeholder": "flo:file:… or flo:blob:…",
+        "required": true
+      },
+      {
+        "name": "format",
+        "type": "string",
+        "value": null,
+        "label": "Format",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "MP3",
+            "value": "mp3"
+          },
+          {
+            "name": "AAC",
+            "value": "aac"
+          },
+          {
+            "name": "WAV (lossless)",
+            "value": "wav"
+          },
+          {
+            "name": "OGG",
+            "value": "ogg"
+          },
+          {
+            "name": "FLAC (lossless)",
+            "value": "flac"
+          }
+        ]
+      },
+      {
+        "name": "bitrate",
+        "type": "string",
+        "value": null,
+        "label": "Bitrate (lossy formats)",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "128 kbps",
+            "value": "128k"
+          },
+          {
+            "name": "192 kbps",
+            "value": "192k"
+          },
+          {
+            "name": "256 kbps",
+            "value": "256k"
+          },
+          {
+            "name": "320 kbps",
+            "value": "320k"
+          }
+        ]
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "audio",
+        "type": "string",
+        "value": null,
+        "label": "Audio (media reference)",
+        "placeholder": ""
+      },
+      {
+        "name": "format",
+        "type": "string",
+        "value": null,
+        "label": "Format",
+        "placeholder": ""
+      },
+      {
+        "name": "size_bytes",
+        "type": "integer",
+        "value": null,
+        "label": "Size (bytes)",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "video/crop_video": {
+    "hash": "b9548b0b37cf2a2feb1bb38b787ebb08b41211b56223faf61574593345b21bbc",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Crop Video",
+    "description": "Crop a rectangular region from a video by position and size",
+    "website": "https://www.flomation.co",
+    "icon": "object-group",
+    "date": "15/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Video",
+      "icon": "film",
+      "description": "Process audio and video with ffmpeg: extract audio, thumbnails, trimming and info"
+    },
+    "inputs": [
+      {
+        "name": "video",
+        "type": "string",
+        "value": null,
+        "label": "Video (file/blob reference)",
+        "placeholder": "flo:file:… or flo:blob:…",
+        "required": true
+      },
+      {
+        "name": "x",
+        "type": "integer",
+        "value": null,
+        "label": "Left offset (px)",
+        "placeholder": ""
+      },
+      {
+        "name": "y",
+        "type": "integer",
+        "value": null,
+        "label": "Top offset (px)",
+        "placeholder": ""
+      },
+      {
+        "name": "width",
+        "type": "integer",
+        "value": null,
+        "label": "Width (px)",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "height",
+        "type": "integer",
+        "value": null,
+        "label": "Height (px)",
+        "placeholder": "",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "video",
+        "type": "string",
+        "value": null,
+        "label": "Video (media reference)",
+        "placeholder": ""
+      },
+      {
+        "name": "size_bytes",
+        "type": "integer",
+        "value": null,
+        "label": "Size (bytes)",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
   "video/extract_audio": {
     "hash": "e7ee9a2ad2a202f18dcaa899c58d394f8f59ff4f44d1bd1005d68250f07ec74b",
     "author": "Andy Esser",
@@ -145852,7 +146069,7 @@
     ]
   },
   "video/gif": {
-    "hash": "50078b5c003db6ae44d86417bd0100b3acd3896372d8d8cc081e940e84df7db7",
+    "hash": "5d19102359d4b1d8d8510dbaf0fefdc57fb115e4cc444b726004708dc7565db9",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Video to GIF",
@@ -146047,6 +146264,119 @@
       }
     ]
   },
+  "video/mix_audio": {
+    "hash": "b34c8d375a9c56c14e0962d509270f63a671797248d26048d5b2f4239a606c9c",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Mix Audio",
+    "description": "Mix two audio tracks into one (e.g. background music under a voiceover)",
+    "website": "https://www.flomation.co",
+    "icon": "microphone",
+    "date": "15/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Video",
+      "icon": "film",
+      "description": "Process audio and video with ffmpeg: extract audio, thumbnails, trimming and info"
+    },
+    "inputs": [
+      {
+        "name": "audio_a",
+        "type": "string",
+        "value": null,
+        "label": "First audio (file/blob reference)",
+        "placeholder": "flo:file:… or flo:blob:…",
+        "required": true
+      },
+      {
+        "name": "audio_b",
+        "type": "string",
+        "value": null,
+        "label": "Second audio (file/blob reference)",
+        "placeholder": "flo:file:… or flo:blob:…",
+        "required": true
+      },
+      {
+        "name": "duration",
+        "type": "string",
+        "value": null,
+        "label": "Result length",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "As long as the longest",
+            "value": "longest"
+          },
+          {
+            "name": "As long as the shortest",
+            "value": "shortest"
+          },
+          {
+            "name": "As long as the first",
+            "value": "first"
+          }
+        ]
+      },
+      {
+        "name": "format",
+        "type": "string",
+        "value": null,
+        "label": "Format",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "MP3",
+            "value": "mp3"
+          },
+          {
+            "name": "AAC",
+            "value": "aac"
+          },
+          {
+            "name": "WAV",
+            "value": "wav"
+          }
+        ]
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "audio",
+        "type": "string",
+        "value": null,
+        "label": "Audio (media reference)",
+        "placeholder": ""
+      },
+      {
+        "name": "size_bytes",
+        "type": "integer",
+        "value": null,
+        "label": "Size (bytes)",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
   "video/mute": {
     "hash": "fdbcd2654a9d605eb8fe1541dcd174595c417c79d756a68a5c36a56b56360171",
     "author": "Andy Esser",
@@ -146070,6 +146400,115 @@
         "label": "Video (file/blob reference)",
         "placeholder": "flo:file:… or flo:blob:…",
         "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "video",
+        "type": "string",
+        "value": null,
+        "label": "Video (media reference)",
+        "placeholder": ""
+      },
+      {
+        "name": "size_bytes",
+        "type": "integer",
+        "value": null,
+        "label": "Size (bytes)",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "video/rotate_video": {
+    "hash": "06c0724913154ee0a6207c373c3297fc788915655ec669c340c0c637eacde9bc",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Rotate / Flip Video",
+    "description": "Rotate a video by 90/180/270° and/or flip it horizontally or vertically",
+    "website": "https://www.flomation.co",
+    "icon": "rotate-right",
+    "date": "15/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Video",
+      "icon": "film",
+      "description": "Process audio and video with ffmpeg: extract audio, thumbnails, trimming and info"
+    },
+    "inputs": [
+      {
+        "name": "video",
+        "type": "string",
+        "value": null,
+        "label": "Video (file/blob reference)",
+        "placeholder": "flo:file:… or flo:blob:…",
+        "required": true
+      },
+      {
+        "name": "angle",
+        "type": "string",
+        "value": null,
+        "label": "Rotate",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "None",
+            "value": "0"
+          },
+          {
+            "name": "90° clockwise",
+            "value": "90"
+          },
+          {
+            "name": "180°",
+            "value": "180"
+          },
+          {
+            "name": "270° clockwise",
+            "value": "270"
+          }
+        ]
+      },
+      {
+        "name": "flip",
+        "type": "string",
+        "value": null,
+        "label": "Flip",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "None",
+            "value": "none"
+          },
+          {
+            "name": "Horizontal",
+            "value": "horizontal"
+          },
+          {
+            "name": "Vertical",
+            "value": "vertical"
+          }
+        ]
       }
     ],
     "outputs": [
@@ -146374,6 +146813,98 @@
       }
     ]
   },
+  "video/speed": {
+    "hash": "c9de75cb76caba06e0fb9efa99d5280f218ee9386d50dc1a084593491a9522b2",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Change Video Speed",
+    "description": "Speed up or slow down a video (audio pitch is preserved)",
+    "website": "https://www.flomation.co",
+    "icon": "gauge",
+    "date": "15/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Video",
+      "icon": "film",
+      "description": "Process audio and video with ffmpeg: extract audio, thumbnails, trimming and info"
+    },
+    "inputs": [
+      {
+        "name": "video",
+        "type": "string",
+        "value": null,
+        "label": "Video (file/blob reference)",
+        "placeholder": "flo:file:… or flo:blob:…",
+        "required": true
+      },
+      {
+        "name": "factor",
+        "type": "string",
+        "value": null,
+        "label": "Speed",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "0.5× (half speed)",
+            "value": "0.5"
+          },
+          {
+            "name": "1× (unchanged)",
+            "value": "1"
+          },
+          {
+            "name": "1.5×",
+            "value": "1.5"
+          },
+          {
+            "name": "2×",
+            "value": "2"
+          },
+          {
+            "name": "4×",
+            "value": "4"
+          }
+        ]
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "video",
+        "type": "string",
+        "value": null,
+        "label": "Video (media reference)",
+        "placeholder": ""
+      },
+      {
+        "name": "size_bytes",
+        "type": "integer",
+        "value": null,
+        "label": "Size (bytes)",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
   "video/thumbnail": {
     "hash": "ee39f11f3a8cfaeb1a0e9667de581e21a3ac864c31892009a06f76f57a70f2bd",
     "author": "Andy Esser",
@@ -146651,6 +147182,197 @@
         "type": "string",
         "value": null,
         "label": "Duration (seconds)",
+        "placeholder": ""
+      },
+      {
+        "name": "size_bytes",
+        "type": "integer",
+        "value": null,
+        "label": "Size (bytes)",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "video/video_watermark": {
+    "hash": "3d6558a496ce52503b86fdbe8957a6f97a1b11499964336c41f11b92676e7a44",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Watermark Video",
+    "description": "Overlay an image (logo/watermark) onto a video at a chosen position",
+    "website": "https://www.flomation.co",
+    "icon": "layer-group",
+    "date": "15/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Video",
+      "icon": "film",
+      "description": "Process audio and video with ffmpeg: extract audio, thumbnails, trimming and info"
+    },
+    "inputs": [
+      {
+        "name": "video",
+        "type": "string",
+        "value": null,
+        "label": "Video (file/blob reference)",
+        "placeholder": "flo:file:… or flo:blob:…",
+        "required": true
+      },
+      {
+        "name": "overlay",
+        "type": "string",
+        "value": null,
+        "label": "Overlay image (file/blob reference)",
+        "placeholder": "flo:file:… or flo:blob:…",
+        "required": true
+      },
+      {
+        "name": "position",
+        "type": "string",
+        "value": null,
+        "label": "Position",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "Centre",
+            "value": "Center"
+          },
+          {
+            "name": "Top left",
+            "value": "NorthWest"
+          },
+          {
+            "name": "Top right",
+            "value": "NorthEast"
+          },
+          {
+            "name": "Bottom left",
+            "value": "SouthWest"
+          },
+          {
+            "name": "Bottom right",
+            "value": "SouthEast"
+          }
+        ]
+      },
+      {
+        "name": "margin",
+        "type": "integer",
+        "value": null,
+        "label": "Margin (px)",
+        "placeholder": ""
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "video",
+        "type": "string",
+        "value": null,
+        "label": "Video (media reference)",
+        "placeholder": ""
+      },
+      {
+        "name": "size_bytes",
+        "type": "integer",
+        "value": null,
+        "label": "Size (bytes)",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "video/waveform": {
+    "hash": "22316d0d030f516fe4f586072d9a3b9dc1f707a559ba9b63e57cf213f83b93cd",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Audio Waveform Image",
+    "description": "Render an audio track as a waveform PNG image",
+    "website": "https://www.flomation.co",
+    "icon": "chart-line",
+    "date": "15/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Video",
+      "icon": "film",
+      "description": "Process audio and video with ffmpeg: extract audio, thumbnails, trimming and info"
+    },
+    "inputs": [
+      {
+        "name": "audio",
+        "type": "string",
+        "value": null,
+        "label": "Audio (file/blob reference)",
+        "placeholder": "flo:file:… or flo:blob:…",
+        "required": true
+      },
+      {
+        "name": "width",
+        "type": "integer",
+        "value": null,
+        "label": "Width (px)",
+        "placeholder": ""
+      },
+      {
+        "name": "height",
+        "type": "integer",
+        "value": null,
+        "label": "Height (px)",
+        "placeholder": ""
+      },
+      {
+        "name": "colour",
+        "type": "string",
+        "value": null,
+        "label": "Colour",
+        "placeholder": "#00aa9c"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "image",
+        "type": "string",
+        "value": null,
+        "label": "Waveform image (media reference)",
         "placeholder": ""
       },
       {
