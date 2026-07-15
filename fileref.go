@@ -137,6 +137,33 @@ func (f *Flow) ResolveToLocalFile(value string) (path string, mimeType string, e
 	}
 }
 
+// ResolveToBytes turns any inbound media representation into its raw bytes (plus
+// a best-effort MIME type). This is the seam for delivery/sink actions (Slack
+// file, Drive upload, attach, …) so they accept a large flo:file: output the same
+// way they already accept a flo:blob: token or base64 — without the caller having
+// to know which form arrived. flo:file: reads are workspace-confined; blob reads
+// come straight from the store (no scratch round-trip).
+func (f *Flow) ResolveToBytes(value string) ([]byte, string, error) {
+	switch {
+	case IsFileRef(value):
+		path, mimeType, err := f.ResolveToLocalFile(value) // applies confinement
+		if err != nil {
+			return nil, "", err
+		}
+		b, err := os.ReadFile(path)
+		return b, mimeType, err
+	case IsBlobToken(value):
+		b, err := f.Blobs().Get(value)
+		if err != nil {
+			return nil, "", fmt.Errorf("fetch blob: %w", err)
+		}
+		_, _, blobMime, _ := ParseBlobToken(value)
+		return b, blobMime, nil
+	default:
+		return decodeMaybeBase64(value), "", nil
+	}
+}
+
 // writeScratch persists bytes to a fresh workspace scratch file and returns its
 // path + MIME type.
 func (f *Flow) writeScratch(b []byte, ext string) (string, string, error) {

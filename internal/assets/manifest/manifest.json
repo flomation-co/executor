@@ -34276,7 +34276,7 @@
     ]
   },
   "google/drive/upload": {
-    "hash": "07d5d1eeefd1f453648ac7398e0597e9b1c936f4aa788bc035f6fea7e8ddd529",
+    "hash": "cb9a67e47f2045c24b3422ca09de2ae19a28d0bbaf2d13de03c4ae10c50227dc",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Upload to Drive",
@@ -34315,7 +34315,7 @@
         "name": "base64_content",
         "type": "string",
         "value": null,
-        "label": "Binary Content (base64)",
+        "label": "Binary content (base64, blob or file reference)",
         "placeholder": ""
       },
       {
@@ -50461,7 +50461,7 @@
     ]
   },
   "image/adjust": {
-    "hash": "f92e9ffb52060ec47c61987ba9643a7ad8a19d5d2b17401e93e6a4aa9ffed559",
+    "hash": "131db4005142d6ee406913474621481a70e3a5905f80876621bc220fe9a3769f",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Adjust Image",
@@ -119000,7 +119000,7 @@
     ]
   },
   "slack/file_upload": {
-    "hash": "d54cee4455c881877d4be03ab8d9247d97153db584da74fe28c3fee4e26e1d8e",
+    "hash": "23fe0edcb5034c2a5ea4ff80f12bdb9f8d24f9079a17210a18f06995266ea7c3",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Slack File Upload",
@@ -145166,7 +145166,7 @@
     ]
   },
   "video/concat": {
-    "hash": "0d8e14cbfaa0a24aacb2fde26e87174a1c31bbd9adb537eddaeef3c0d0fc660b",
+    "hash": "fc9d424698ae1872e85e858ab3ee05f9ff9ce7ee5e53c18d17f7d4d704f0c8ae",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Concatenate Videos",
@@ -145772,7 +145772,7 @@
     ]
   },
   "video/transcode": {
-    "hash": "b57f6444cff5bcb8fff9146c70efd283b536907566e16fe356a0605289e87afc",
+    "hash": "de2bb690ea3f0d51f399194034833b1ce0f85de9e78b2d37727444fa3ca94450",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Transcode Video",

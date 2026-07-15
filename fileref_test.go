@@ -144,6 +144,29 @@ func TestEmitMediaFile_FallsBackToFileRefWithoutBlobBackend(t *testing.T) {
 	Expect(err).ToNot(BeNil())
 }
 
+func TestResolveToBytes_FileRefAndBase64(t *testing.T) {
+	RegisterTestingT(t)
+	ws := chdirWorkspace(t)
+	f := &Flow{}
+
+	// flo:file: → reads the confined workspace file's bytes.
+	p := filepath.Join(ws, "d.bin")
+	Expect(os.WriteFile(p, []byte("rawbytes"), 0o600)).To(Succeed())
+	ref, _ := f.EmitLocalFile(p)
+	b, _, err := f.ResolveToBytes(ref)
+	Expect(err).To(BeNil())
+	Expect(string(b)).To(Equal("rawbytes"))
+
+	// base64 → decoded.
+	b2, _, err := f.ResolveToBytes(base64.StdEncoding.EncodeToString([]byte("hello from base64 media")))
+	Expect(err).To(BeNil())
+	Expect(string(b2)).To(Equal("hello from base64 media"))
+
+	// A crafted flo:file: escape is rejected here too.
+	_, _, err = f.ResolveToBytes("flo:file:../../etc/passwd")
+	Expect(err).ToNot(BeNil())
+}
+
 func TestMediaScratchFile_UniqueAndInScratchDir(t *testing.T) {
 	RegisterTestingT(t)
 	ws := chdirWorkspace(t)

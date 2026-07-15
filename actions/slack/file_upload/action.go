@@ -223,6 +223,14 @@ func str(name string, inputs []*core.Connection) string {
 // resolved on the way in; Go strings carry arbitrary bytes fine).
 func resolveFileBytes(flow *core.Flow, fileBlob, fileBase64, content string) ([]byte, error) {
 	if fileBlob != "" {
+		if core.IsFileRef(fileBlob) {
+			// A workspace file reference (e.g. a large media action output).
+			data, _, err := flow.ResolveToBytes(fileBlob)
+			if err != nil {
+				return nil, fmt.Errorf("resolve file_blob (workspace file): %w", err)
+			}
+			return data, nil
+		}
 		if core.IsBlobToken(fileBlob) {
 			data, err := flow.Blobs().Get(fileBlob)
 			if err != nil {
