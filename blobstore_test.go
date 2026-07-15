@@ -7,8 +7,10 @@ package core
 // pinning the wire contract we need to round-trip with.
 
 import (
+	"bytes"
 	"crypto/rand"
 	"encoding/hex"
+	"encoding/json"
 	"fmt"
 	"io"
 	"net/http"
@@ -366,4 +368,35 @@ func TestBlobStore_FormatBlobToken_EmitsExpectedShape(t *testing.T) {
 	tokNoMime := formatBlobToken("0123456789abcdef0123456789abcdef", 100, "")
 	Expect(tokNoMime).To(Equal("flo:blob:0123456789abcdef0123456789abcdef?size=100"))
 	Expect(tokNoMime).NotTo(ContainSubstring("type="))
+}
+
+// TestExtractTokenFromUploadResponse_DecodesHTMLEscapedAmpersand pins the
+// regression where the API's blob-upload response — rendered with
+// encoding/json's default HTML escaping — encodes the token's "&" separator
+// as the literal escape "&". A substring scan captured that escape
+// verbatim, producing a token whose "?size=N&type=mime" query string could
+// not be parsed downstream (the editor lost the MIME hint and mislabelled
+// the media). The extractor must JSON-decode the value so "&" is restored.
+func TestExtractTokenFromUploadResponse_DecodesHTMLEscapedAmpersand(t *testing.T) {
+	RegisterTestingT(t)
+	handle := strings.Repeat("a", 32)
+	canonical := "flo:blob:" + handle + "?size=88794&type=image%2Fpng"
+
+	// Reproduce the exact wire bytes the API emits: encoding/json with HTML
+	// escaping ON (gin's c.JSON default) renders the "&" separator as its
+	// & escape. We build it with the same encoder rather than typing the
+	// escape by hand, so the fixture can never drift from real behaviour.
+	var buf bytes.Buffer
+	enc := json.NewEncoder(&buf)
+	Expect(enc.Encode(map[string]string{"blob_token": canonical})).To(Succeed())
+	body := buf.Bytes()
+	// Sanity: the wire form really did escape the separator — no literal "&".
+	Expect(bytes.ContainsRune(body, '&')).To(BeFalse())
+
+	token, err := extractTokenFromUploadResponse(body)
+	Expect(err).To(BeNil())
+	// The extractor must have JSON-decoded the escape back to a real "&", so
+	// the query string parses and the MIME hint survives downstream.
+	Expect(token).To(Equal(canonical))
+	Expect(strings.Contains(token, "&type=image%2Fpng")).To(BeTrue())
 }
