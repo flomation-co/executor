@@ -319,6 +319,9 @@ import (
 	google_slides_create "flomation.app/automate/executor/actions/google/slides/create"
 	google_slides_get "flomation.app/automate/executor/actions/google/slides/get"
 	google_slides_get_slide "flomation.app/automate/executor/actions/google/slides/get_slide"
+	graphics_animated_counter "flomation.app/automate/executor/actions/graphics/animated_counter"
+	graphics_animated_title "flomation.app/automate/executor/actions/graphics/animated_title"
+	graphics_lower_third "flomation.app/automate/executor/actions/graphics/lower_third"
 	helpdesk_intercom_admin_away_set "flomation.app/automate/executor/actions/helpdesk/intercom/admin_away_set"
 	helpdesk_intercom_admin_get "flomation.app/automate/executor/actions/helpdesk/intercom/admin_get"
 	helpdesk_intercom_admin_get_all "flomation.app/automate/executor/actions/helpdesk/intercom/admin_get_all"
@@ -1606,6 +1609,9 @@ var Actions = map[string]core.Action{
 	"google/slides/create":                                google_slides_create.Execute,
 	"google/slides/get":                                   google_slides_get.Execute,
 	"google/slides/get_slide":                             google_slides_get_slide.Execute,
+	"graphics/animated_counter":                           graphics_animated_counter.Execute,
+	"graphics/animated_title":                             graphics_animated_title.Execute,
+	"graphics/lower_third":                                graphics_lower_third.Execute,
 	"helpdesk/intercom/admin_away_set":                    helpdesk_intercom_admin_away_set.Execute,
 	"helpdesk/intercom/admin_get":                         helpdesk_intercom_admin_get.Execute,
 	"helpdesk/intercom/admin_get_all":                     helpdesk_intercom_admin_get_all.Execute,

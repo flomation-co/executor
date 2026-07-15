@@ -36206,6 +36206,422 @@
       }
     ]
   },
+  "graphics/animated_counter": {
+    "hash": "14de0d0deec53058701985d4ab74cc872325734950eb81bee3bc8ebd5a172ddc",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Animated Counter",
+    "description": "Generate a number counting from one value to another as a transparent video",
+    "website": "https://www.flomation.co",
+    "icon": "hashtag",
+    "date": "15/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Graphics",
+      "icon": "pen",
+      "description": "Generate animated graphics — titles, lower-thirds and counters — as transparent overlays"
+    },
+    "inputs": [
+      {
+        "name": "from",
+        "type": "string",
+        "value": null,
+        "label": "From",
+        "placeholder": "0"
+      },
+      {
+        "name": "to",
+        "type": "string",
+        "value": null,
+        "label": "To",
+        "placeholder": "100"
+      },
+      {
+        "name": "decimals",
+        "type": "integer",
+        "value": null,
+        "label": "Decimal places",
+        "placeholder": ""
+      },
+      {
+        "name": "prefix",
+        "type": "string",
+        "value": null,
+        "label": "Prefix",
+        "placeholder": "£"
+      },
+      {
+        "name": "suffix",
+        "type": "string",
+        "value": null,
+        "label": "Suffix",
+        "placeholder": "%"
+      },
+      {
+        "name": "font",
+        "type": "string",
+        "value": null,
+        "label": "Font",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "Poppins Bold",
+            "value": "poppins-bold"
+          },
+          {
+            "name": "Poppins SemiBold",
+            "value": "poppins-semibold"
+          },
+          {
+            "name": "Poppins Regular",
+            "value": "poppins-regular"
+          }
+        ]
+      },
+      {
+        "name": "font_size",
+        "type": "integer",
+        "value": null,
+        "label": "Font size (px)",
+        "placeholder": ""
+      },
+      {
+        "name": "colour",
+        "type": "string",
+        "value": null,
+        "label": "Colour",
+        "placeholder": ""
+      },
+      {
+        "name": "width",
+        "type": "integer",
+        "value": null,
+        "label": "Width (px)",
+        "placeholder": ""
+      },
+      {
+        "name": "height",
+        "type": "integer",
+        "value": null,
+        "label": "Height (px)",
+        "placeholder": ""
+      },
+      {
+        "name": "duration_seconds",
+        "type": "string",
+        "value": null,
+        "label": "Duration (seconds)",
+        "placeholder": ""
+      },
+      {
+        "name": "fps",
+        "type": "integer",
+        "value": null,
+        "label": "Frames per second",
+        "placeholder": ""
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "video",
+        "type": "string",
+        "value": null,
+        "label": "Transparent video (media reference)",
+        "placeholder": ""
+      },
+      {
+        "name": "size_bytes",
+        "type": "integer",
+        "value": null,
+        "label": "Size (bytes)",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "graphics/animated_title": {
+    "hash": "095bc77587b98c050e4599bfac4802f08e0ec08e3261c6771edf10b5ff67e4fd",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Animated Title",
+    "description": "Generate an animated text title as a transparent video for overlaying",
+    "website": "https://www.flomation.co",
+    "icon": "pen",
+    "date": "15/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Graphics",
+      "icon": "pen",
+      "description": "Generate animated graphics — titles, lower-thirds and counters — as transparent overlays"
+    },
+    "inputs": [
+      {
+        "name": "text",
+        "type": "text",
+        "value": null,
+        "label": "Title text",
+        "placeholder": "Your title",
+        "required": true
+      },
+      {
+        "name": "font",
+        "type": "string",
+        "value": null,
+        "label": "Font",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "Poppins Bold",
+            "value": "poppins-bold"
+          },
+          {
+            "name": "Poppins SemiBold",
+            "value": "poppins-semibold"
+          },
+          {
+            "name": "Poppins Regular",
+            "value": "poppins-regular"
+          }
+        ]
+      },
+      {
+        "name": "font_size",
+        "type": "integer",
+        "value": null,
+        "label": "Font size (px)",
+        "placeholder": ""
+      },
+      {
+        "name": "colour",
+        "type": "string",
+        "value": null,
+        "label": "Colour",
+        "placeholder": "#ffffff, flomation-teal"
+      },
+      {
+        "name": "animation",
+        "type": "string",
+        "value": null,
+        "label": "Animation",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "Fade",
+            "value": "fade"
+          },
+          {
+            "name": "Slide from right",
+            "value": "slide_left"
+          },
+          {
+            "name": "Slide from left",
+            "value": "slide_right"
+          },
+          {
+            "name": "Rise up",
+            "value": "rise"
+          }
+        ]
+      },
+      {
+        "name": "width",
+        "type": "integer",
+        "value": null,
+        "label": "Width (px)",
+        "placeholder": ""
+      },
+      {
+        "name": "height",
+        "type": "integer",
+        "value": null,
+        "label": "Height (px)",
+        "placeholder": ""
+      },
+      {
+        "name": "duration_seconds",
+        "type": "string",
+        "value": null,
+        "label": "Duration (seconds)",
+        "placeholder": ""
+      },
+      {
+        "name": "fps",
+        "type": "integer",
+        "value": null,
+        "label": "Frames per second",
+        "placeholder": ""
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "video",
+        "type": "string",
+        "value": null,
+        "label": "Transparent video (media reference)",
+        "placeholder": ""
+      },
+      {
+        "name": "size_bytes",
+        "type": "integer",
+        "value": null,
+        "label": "Size (bytes)",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "graphics/lower_third": {
+    "hash": "d313da8dea4565146f9c074d340f8e542e7609536d5fd40567a2afdb91c78516",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Animated Lower-Third",
+    "description": "Generate an animated lower-third (title + subtitle bar) as a transparent video",
+    "website": "https://www.flomation.co",
+    "icon": "align-left",
+    "date": "15/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Graphics",
+      "icon": "pen",
+      "description": "Generate animated graphics — titles, lower-thirds and counters — as transparent overlays"
+    },
+    "inputs": [
+      {
+        "name": "title",
+        "type": "string",
+        "value": null,
+        "label": "Title",
+        "placeholder": "Jane Doe",
+        "required": true
+      },
+      {
+        "name": "subtitle",
+        "type": "string",
+        "value": null,
+        "label": "Subtitle (optional)",
+        "placeholder": "Head of Product"
+      },
+      {
+        "name": "accent_colour",
+        "type": "string",
+        "value": null,
+        "label": "Accent colour",
+        "placeholder": "#00aa9c"
+      },
+      {
+        "name": "text_colour",
+        "type": "string",
+        "value": null,
+        "label": "Text colour",
+        "placeholder": ""
+      },
+      {
+        "name": "width",
+        "type": "integer",
+        "value": null,
+        "label": "Width (px)",
+        "placeholder": ""
+      },
+      {
+        "name": "height",
+        "type": "integer",
+        "value": null,
+        "label": "Height (px)",
+        "placeholder": ""
+      },
+      {
+        "name": "duration_seconds",
+        "type": "string",
+        "value": null,
+        "label": "Duration (seconds)",
+        "placeholder": ""
+      },
+      {
+        "name": "fps",
+        "type": "integer",
+        "value": null,
+        "label": "Frames per second",
+        "placeholder": ""
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "video",
+        "type": "string",
+        "value": null,
+        "label": "Transparent video (media reference)",
+        "placeholder": ""
+      },
+      {
+        "name": "size_bytes",
+        "type": "integer",
+        "value": null,
+        "label": "Size (bytes)",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
   "helpdesk/intercom/admin_away_set": {
     "hash": "7b15dc14417907709cfee20c57991e8b0fdc44d296c514b0501904838014eb38",
     "author": "Dave McElin",
@@ -146550,7 +146966,7 @@
     ]
   },
   "video/fade": {
-    "hash": "e5c02cc61069618e775206f3e1b978c2437ebb61da5b5ecaf8cd7bb9f4f1b6d3",
+    "hash": "ac93bb91d67dae89f0e7505afd87a9957bfc1a9bfee65dc10f196b6e0c527b96",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Fade Video In / Out",
@@ -146924,7 +147340,7 @@
     ]
   },
   "video/ken_burns": {
-    "hash": "f1face17f0274694e51c14775ff2229a94fdd5c18441ea745144c71ddd701707",
+    "hash": "120fab2609706716b0ab9f42a5412a582e2994861a394019c61b962126313cea",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Ken Burns (Animate Image)",
@@ -147201,7 +147617,7 @@
     ]
   },
   "video/overlay": {
-    "hash": "9f9ce768eb419d71844a3b15336c0f5eecefccc0e1c073ab6b0fece1309a486f",
+    "hash": "d70d23c70ef161cec858e86143c69df1a52b8d6d7a6645c8a17c284bf6e37f93",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Overlay Video / Graphic",
