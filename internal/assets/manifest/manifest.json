@@ -51779,6 +51779,279 @@
       }
     ]
   },
+  "image/psd_extract_layers": {
+    "hash": "3a62cabab6925f1c9d56fbbb0a2eea0c727029a32f640c575cdd49e15104ae11",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Extract PSD Layers",
+    "description": "Export individual PSD layers as separate PNG images",
+    "website": "https://www.flomation.co",
+    "icon": "object-group",
+    "date": "15/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Image",
+      "icon": "image",
+      "description": "Process images with ImageMagick: resize, convert, crop and info"
+    },
+    "inputs": [
+      {
+        "name": "psd",
+        "type": "string",
+        "value": null,
+        "label": "PSD file (file/blob reference)",
+        "placeholder": "flo:file:… or flo:blob:…",
+        "required": true
+      },
+      {
+        "name": "names",
+        "type": "string",
+        "value": null,
+        "label": "Layer names to extract (comma-separated, blank = all named)",
+        "placeholder": "logo, headline"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "layers",
+        "type": "string",
+        "value": null,
+        "label": "Extracted layers (JSON array)",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Layers extracted",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "image/psd_info": {
+    "hash": "2d5911eaa8eb438297c6b9aec0b2aa4b1fdb113591b1ef76adf9945776ee1446",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "PSD Info",
+    "description": "Read a PSD's canvas size, colour mode and layer names/positions",
+    "website": "https://www.flomation.co",
+    "icon": "layer-group",
+    "date": "15/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Image",
+      "icon": "image",
+      "description": "Process images with ImageMagick: resize, convert, crop and info"
+    },
+    "inputs": [
+      {
+        "name": "psd",
+        "type": "string",
+        "value": null,
+        "label": "PSD file (file/blob reference)",
+        "placeholder": "flo:file:… or flo:blob:…",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "layers",
+        "type": "string",
+        "value": null,
+        "label": "Layers (JSON array)",
+        "placeholder": ""
+      },
+      {
+        "name": "layer_count",
+        "type": "integer",
+        "value": null,
+        "label": "Layer count",
+        "placeholder": ""
+      },
+      {
+        "name": "width",
+        "type": "integer",
+        "value": null,
+        "label": "Canvas width (px)",
+        "placeholder": ""
+      },
+      {
+        "name": "height",
+        "type": "integer",
+        "value": null,
+        "label": "Canvas height (px)",
+        "placeholder": ""
+      },
+      {
+        "name": "colour_mode",
+        "type": "string",
+        "value": null,
+        "label": "Colour mode",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "image/psd_rasterise": {
+    "hash": "a828c78b1e26c6176a3e99fd51602c0ddf1fcbac463781deff2ebc2a75b109ac",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Rasterise PSD",
+    "description": "Flatten a PSD to a PNG, JPEG or WebP image (from its embedded composite)",
+    "website": "https://www.flomation.co",
+    "icon": "image",
+    "date": "15/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Image",
+      "icon": "image",
+      "description": "Process images with ImageMagick: resize, convert, crop and info"
+    },
+    "inputs": [
+      {
+        "name": "psd",
+        "type": "string",
+        "value": null,
+        "label": "PSD file (file/blob reference)",
+        "placeholder": "flo:file:… or flo:blob:…",
+        "required": true
+      },
+      {
+        "name": "format",
+        "type": "string",
+        "value": null,
+        "label": "Output format",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "PNG (keeps transparency)",
+            "value": "png"
+          },
+          {
+            "name": "JPEG",
+            "value": "jpg"
+          },
+          {
+            "name": "WebP",
+            "value": "webp"
+          }
+        ]
+      },
+      {
+        "name": "quality",
+        "type": "integer",
+        "value": null,
+        "label": "Quality (JPEG/WebP, 1–100)",
+        "placeholder": ""
+      },
+      {
+        "name": "max_width",
+        "type": "integer",
+        "value": null,
+        "label": "Max width (px, 0 = original; only downscales)",
+        "placeholder": ""
+      },
+      {
+        "name": "background",
+        "type": "string",
+        "value": null,
+        "label": "Flatten onto colour (blank = keep transparency)",
+        "placeholder": "#ffffff"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "image",
+        "type": "string",
+        "value": null,
+        "label": "Image (media reference)",
+        "placeholder": ""
+      },
+      {
+        "name": "width",
+        "type": "integer",
+        "value": null,
+        "label": "Width (px)",
+        "placeholder": ""
+      },
+      {
+        "name": "height",
+        "type": "integer",
+        "value": null,
+        "label": "Height (px)",
+        "placeholder": ""
+      },
+      {
+        "name": "size_bytes",
+        "type": "integer",
+        "value": null,
+        "label": "Size (bytes)",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
   "image/resize": {
     "hash": "ca885d55664750244136e4df8b14c2b8d30d1aacdddc181ecda05f271bf05911",
     "author": "Andy Esser",

@@ -124,6 +124,29 @@ func FindFont() (string, bool) {
 	return "", false
 }
 
+// IdentifyFormat runs `identify -format <format> <path>` and returns raw STDOUT.
+// Use this for multi-scene queries (e.g. a PSD's per-layer listing) where the
+// -format output itself must be captured — RunMagick / RunMagickSub only return
+// stderr (they suit file-producing commands like convert/montage). No safety
+// limits are prepended: identify is a read-only metadata probe, matching Identify.
+func IdentifyFormat(ctx context.Context, format, path string) (string, error) {
+	var bin string
+	var pre []string
+	if p := os.Getenv("FLOMATION_MAGICK_PATH"); p != "" {
+		bin, pre = p, []string{"identify"}
+	} else if p, err := exec.LookPath("magick"); err == nil {
+		bin, pre = p, []string{"identify"}
+	} else if p, err := exec.LookPath("identify"); err == nil {
+		bin = p
+	} else {
+		return "", fmt.Errorf("ImageMagick identify not found on PATH — install it on the runner host")
+	}
+	args := append(append([]string{}, pre...), "-format", format, path)
+	// #nosec G204 -- path is a workspace-confined file, format is action-constant.
+	out, err := exec.CommandContext(ctx, bin, args...).Output()
+	return string(out), err
+}
+
 // ImageInfo is the subset of `identify` output the actions surface.
 type ImageInfo struct {
 	Width  int
