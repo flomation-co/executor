@@ -436,12 +436,18 @@ import (
 	hubspot_ticket_update "flomation.app/automate/executor/actions/hubspot/ticket_update"
 	humanintheloop_await "flomation.app/automate/executor/actions/humanintheloop/await"
 	image_adjust "flomation.app/automate/executor/actions/image/adjust"
+	image_autocrop "flomation.app/automate/executor/actions/image/autocrop"
+	image_border "flomation.app/automate/executor/actions/image/border"
 	image_convert "flomation.app/automate/executor/actions/image/convert"
 	image_create "flomation.app/automate/executor/actions/image/create"
 	image_crop "flomation.app/automate/executor/actions/image/crop"
 	image_info "flomation.app/automate/executor/actions/image/info"
+	image_montage "flomation.app/automate/executor/actions/image/montage"
+	image_optimize "flomation.app/automate/executor/actions/image/optimize"
+	image_palette "flomation.app/automate/executor/actions/image/palette"
 	image_resize "flomation.app/automate/executor/actions/image/resize"
 	image_rotate "flomation.app/automate/executor/actions/image/rotate"
+	image_round_corners "flomation.app/automate/executor/actions/image/round_corners"
 	image_text "flomation.app/automate/executor/actions/image/text"
 	image_to_pdf "flomation.app/automate/executor/actions/image/to_pdf"
 	image_watermark "flomation.app/automate/executor/actions/image/watermark"
@@ -1190,6 +1196,7 @@ import (
 	vectordatabase_pgvector_table_create "flomation.app/automate/executor/actions/vectordatabase/pgvector/table_create"
 	vectordatabase_pgvector_table_info "flomation.app/automate/executor/actions/vectordatabase/pgvector/table_info"
 	video_adjust_audio "flomation.app/automate/executor/actions/video/adjust_audio"
+	video_burn_text "flomation.app/automate/executor/actions/video/burn_text"
 	video_concat "flomation.app/automate/executor/actions/video/concat"
 	video_convert_audio "flomation.app/automate/executor/actions/video/convert_audio"
 	video_crop_video "flomation.app/automate/executor/actions/video/crop_video"
@@ -1713,12 +1720,18 @@ var Actions = map[string]core.Action{
 	"hubspot/ticket_update":                               hubspot_ticket_update.Execute,
 	"humanintheloop/await":                                humanintheloop_await.Execute,
 	"image/adjust":                                        image_adjust.Execute,
+	"image/autocrop":                                      image_autocrop.Execute,
+	"image/border":                                        image_border.Execute,
 	"image/convert":                                       image_convert.Execute,
 	"image/create":                                        image_create.Execute,
 	"image/crop":                                          image_crop.Execute,
 	"image/info":                                          image_info.Execute,
+	"image/montage":                                       image_montage.Execute,
+	"image/optimize":                                      image_optimize.Execute,
+	"image/palette":                                       image_palette.Execute,
 	"image/resize":                                        image_resize.Execute,
 	"image/rotate":                                        image_rotate.Execute,
+	"image/round_corners":                                 image_round_corners.Execute,
 	"image/text":                                          image_text.Execute,
 	"image/to_pdf":                                        image_to_pdf.Execute,
 	"image/watermark":                                     image_watermark.Execute,
@@ -2467,6 +2480,7 @@ var Actions = map[string]core.Action{
 	"vectordatabase/pgvector/table_create":                vectordatabase_pgvector_table_create.Execute,
 	"vectordatabase/pgvector/table_info":                  vectordatabase_pgvector_table_info.Execute,
 	"video/adjust_audio":                                  video_adjust_audio.Execute,
+	"video/burn_text":                                     video_burn_text.Execute,
 	"video/concat":                                        video_concat.Execute,
 	"video/convert_audio":                                 video_convert_audio.Execute,
 	"video/crop_video":                                    video_crop_video.Execute,

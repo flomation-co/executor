@@ -50563,6 +50563,167 @@
       }
     ]
   },
+  "image/autocrop": {
+    "hash": "0c0e287e4208c904edc213c6b8b0f60ab789159649ab30485322aed40fbc58c4",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Auto-crop Image",
+    "description": "Automatically trim a uniform (e.g. whitespace) border from an image",
+    "website": "https://www.flomation.co",
+    "icon": "object-group",
+    "date": "15/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Image",
+      "icon": "image",
+      "description": "Process images with ImageMagick: resize, convert, crop and info"
+    },
+    "inputs": [
+      {
+        "name": "image",
+        "type": "string",
+        "value": null,
+        "label": "Image (file/blob reference)",
+        "placeholder": "flo:file:… or flo:blob:…",
+        "required": true
+      },
+      {
+        "name": "fuzz",
+        "type": "integer",
+        "value": null,
+        "label": "Colour tolerance (%)",
+        "placeholder": ""
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "image",
+        "type": "string",
+        "value": null,
+        "label": "Image (media reference)",
+        "placeholder": ""
+      },
+      {
+        "name": "width",
+        "type": "integer",
+        "value": null,
+        "label": "Width (px)",
+        "placeholder": ""
+      },
+      {
+        "name": "height",
+        "type": "integer",
+        "value": null,
+        "label": "Height (px)",
+        "placeholder": ""
+      },
+      {
+        "name": "size_bytes",
+        "type": "integer",
+        "value": null,
+        "label": "Size (bytes)",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "image/border": {
+    "hash": "a13a2e329b5f27c0ff5d5e24a5a2a117bbd0368091a8f6d1f6bf909474436b13",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Add Border",
+    "description": "Add a solid colour border around an image",
+    "website": "https://www.flomation.co",
+    "icon": "expand",
+    "date": "15/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Image",
+      "icon": "image",
+      "description": "Process images with ImageMagick: resize, convert, crop and info"
+    },
+    "inputs": [
+      {
+        "name": "image",
+        "type": "string",
+        "value": null,
+        "label": "Image (file/blob reference)",
+        "placeholder": "flo:file:… or flo:blob:…",
+        "required": true
+      },
+      {
+        "name": "width",
+        "type": "integer",
+        "value": null,
+        "label": "Border width (px)",
+        "placeholder": ""
+      },
+      {
+        "name": "colour",
+        "type": "string",
+        "value": null,
+        "label": "Colour",
+        "placeholder": "black, #ffffff"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "image",
+        "type": "string",
+        "value": null,
+        "label": "Image (media reference)",
+        "placeholder": ""
+      },
+      {
+        "name": "size_bytes",
+        "type": "integer",
+        "value": null,
+        "label": "Size (bytes)",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
   "image/convert": {
     "hash": "58ecae602cee84688c34a5ccf342b1fc5621028bb760e6a7d77e2bc5a169161a",
     "author": "Andy Esser",
@@ -50964,6 +51125,244 @@
       }
     ]
   },
+  "image/montage": {
+    "hash": "90ac8bd296784da0e8528b2dedd10fc41bcaff59a1ef6b23f1a7889b179cde24",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Montage / Grid",
+    "description": "Arrange several images into a grid (contact sheet or collage)",
+    "website": "https://www.flomation.co",
+    "icon": "grip",
+    "date": "15/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Image",
+      "icon": "image",
+      "description": "Process images with ImageMagick: resize, convert, crop and info"
+    },
+    "inputs": [
+      {
+        "name": "images",
+        "type": "text",
+        "value": null,
+        "label": "Image references (one per line, in order)",
+        "placeholder": "flo:file:…\nflo:blob:…",
+        "required": true
+      },
+      {
+        "name": "columns",
+        "type": "integer",
+        "value": null,
+        "label": "Columns",
+        "placeholder": ""
+      },
+      {
+        "name": "tile_size",
+        "type": "integer",
+        "value": null,
+        "label": "Cell size (px)",
+        "placeholder": ""
+      },
+      {
+        "name": "spacing",
+        "type": "integer",
+        "value": null,
+        "label": "Spacing (px)",
+        "placeholder": ""
+      },
+      {
+        "name": "background",
+        "type": "string",
+        "value": null,
+        "label": "Background colour",
+        "placeholder": ""
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "image",
+        "type": "string",
+        "value": null,
+        "label": "Image (media reference)",
+        "placeholder": ""
+      },
+      {
+        "name": "image_count",
+        "type": "integer",
+        "value": null,
+        "label": "Images used",
+        "placeholder": ""
+      },
+      {
+        "name": "size_bytes",
+        "type": "integer",
+        "value": null,
+        "label": "Size (bytes)",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "image/optimize": {
+    "hash": "cbce20378e14c9aa0c77a5a6730ee78c682eef9363c2aba15b2433b852c91662",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Optimize Image",
+    "description": "Strip metadata and recompress an image to reduce its file size",
+    "website": "https://www.flomation.co",
+    "icon": "compress",
+    "date": "15/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Image",
+      "icon": "image",
+      "description": "Process images with ImageMagick: resize, convert, crop and info"
+    },
+    "inputs": [
+      {
+        "name": "image",
+        "type": "string",
+        "value": null,
+        "label": "Image (file/blob reference)",
+        "placeholder": "flo:file:… or flo:blob:…",
+        "required": true
+      },
+      {
+        "name": "quality",
+        "type": "integer",
+        "value": null,
+        "label": "Quality (1–100, lossy formats)",
+        "placeholder": ""
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "image",
+        "type": "string",
+        "value": null,
+        "label": "Image (media reference)",
+        "placeholder": ""
+      },
+      {
+        "name": "size_bytes",
+        "type": "integer",
+        "value": null,
+        "label": "Size (bytes)",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "image/palette": {
+    "hash": "8b00738928f32a0f1be4ff1c50a7a90780027254f6feac9d3bc0da0877ff6f0b",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Image Colour Palette",
+    "description": "Extract an image's dominant colours as hex codes",
+    "website": "https://www.flomation.co",
+    "icon": "chart-pie",
+    "date": "15/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Image",
+      "icon": "image",
+      "description": "Process images with ImageMagick: resize, convert, crop and info"
+    },
+    "inputs": [
+      {
+        "name": "image",
+        "type": "string",
+        "value": null,
+        "label": "Image (file/blob reference)",
+        "placeholder": "flo:file:… or flo:blob:…",
+        "required": true
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Number of colours",
+        "placeholder": ""
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "colours",
+        "type": "object",
+        "value": null,
+        "label": "Colours (hex array)",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Colours found",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
   "image/resize": {
     "hash": "ca885d55664750244136e4df8b14c2b8d30d1aacdddc181ecda05f271bf05911",
     "author": "Andy Esser",
@@ -51152,6 +51551,76 @@
             "value": "vertical"
           }
         ]
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "image",
+        "type": "string",
+        "value": null,
+        "label": "Image (media reference)",
+        "placeholder": ""
+      },
+      {
+        "name": "size_bytes",
+        "type": "integer",
+        "value": null,
+        "label": "Size (bytes)",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "image/round_corners": {
+    "hash": "0c1b852437d1a7366924a0317843084f32ebd50b77fed580673248346425885d",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Round Corners",
+    "description": "Round the corners of an image (transparent PNG output)",
+    "website": "https://www.flomation.co",
+    "icon": "image",
+    "date": "15/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Image",
+      "icon": "image",
+      "description": "Process images with ImageMagick: resize, convert, crop and info"
+    },
+    "inputs": [
+      {
+        "name": "image",
+        "type": "string",
+        "value": null,
+        "label": "Image (file/blob reference)",
+        "placeholder": "flo:file:… or flo:blob:…",
+        "required": true
+      },
+      {
+        "name": "radius",
+        "type": "integer",
+        "value": null,
+        "label": "Corner radius (px)",
+        "placeholder": ""
       }
     ],
     "outputs": [
@@ -145546,6 +146015,119 @@
       }
     ]
   },
+  "video/burn_text": {
+    "hash": "1e55ac4d9374063f64c78ac35e540c48883ac784f7c522ee23ab328a22b56da5",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Burn Text onto Video",
+    "description": "Overlay a text caption onto a video, burned into the picture",
+    "website": "https://www.flomation.co",
+    "icon": "i-cursor",
+    "date": "15/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Video",
+      "icon": "film",
+      "description": "Process audio and video with ffmpeg: extract audio, thumbnails, trimming and info"
+    },
+    "inputs": [
+      {
+        "name": "video",
+        "type": "string",
+        "value": null,
+        "label": "Video (file/blob reference)",
+        "placeholder": "flo:file:… or flo:blob:…",
+        "required": true
+      },
+      {
+        "name": "text",
+        "type": "text",
+        "value": null,
+        "label": "Caption text",
+        "placeholder": "Your caption",
+        "required": true
+      },
+      {
+        "name": "font_size",
+        "type": "integer",
+        "value": null,
+        "label": "Font size (px)",
+        "placeholder": ""
+      },
+      {
+        "name": "colour",
+        "type": "string",
+        "value": null,
+        "label": "Text colour",
+        "placeholder": "white, #ff0000"
+      },
+      {
+        "name": "position",
+        "type": "string",
+        "value": null,
+        "label": "Position",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "Top",
+            "value": "top"
+          },
+          {
+            "name": "Centre",
+            "value": "center"
+          },
+          {
+            "name": "Bottom",
+            "value": "bottom"
+          }
+        ]
+      },
+      {
+        "name": "font_file",
+        "type": "string",
+        "value": null,
+        "label": "Font file path (optional override)",
+        "placeholder": "/path/to/font.ttf"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "video",
+        "type": "string",
+        "value": null,
+        "label": "Video (media reference)",
+        "placeholder": ""
+      },
+      {
+        "name": "size_bytes",
+        "type": "integer",
+        "value": null,
+        "label": "Size (bytes)",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
   "video/concat": {
     "hash": "fc9d424698ae1872e85e858ab3ee05f9ff9ce7ee5e53c18d17f7d4d704f0c8ae",
     "author": "Andy Esser",
@@ -146441,7 +147023,7 @@
     ]
   },
   "video/rotate_video": {
-    "hash": "06c0724913154ee0a6207c373c3297fc788915655ec669c340c0c637eacde9bc",
+    "hash": "cea610ac891413252aa2d62cd814951b6179aa88f85226a11689212492d9d1be",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Rotate / Flip Video",
@@ -146814,7 +147396,7 @@
     ]
   },
   "video/speed": {
-    "hash": "c9de75cb76caba06e0fb9efa99d5280f218ee9386d50dc1a084593491a9522b2",
+    "hash": "2eda360f3b9fa8f166e9965bf4242e4cb973cd92bd3f9c4739a01dcaacd140a5",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Change Video Speed",
@@ -147208,7 +147790,7 @@
     ]
   },
   "video/video_watermark": {
-    "hash": "3d6558a496ce52503b86fdbe8957a6f97a1b11499964336c41f11b92676e7a44",
+    "hash": "ca4025b28f3718afaaac47c1b4d946c9406fa3bab2b45911b5ec0dc22ed3f612",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Watermark Video",
@@ -147315,7 +147897,7 @@
     ]
   },
   "video/waveform": {
-    "hash": "22316d0d030f516fe4f586072d9a3b9dc1f707a559ba9b63e57cf213f83b93cd",
+    "hash": "95a9fb4cc6c003a381f3c074b3f190b3c74b4022638bdd121a7196d12e00b0f5",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Audio Waveform Image",

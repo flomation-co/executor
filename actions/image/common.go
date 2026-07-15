@@ -79,6 +79,51 @@ func RunMagick(ctx context.Context, args ...string) (string, error) {
 	return stderr.String(), err
 }
 
+// RunMagickSub runs an ImageMagick SUB-COMMAND (e.g. "montage") which must be the
+// first argument — so the safety limits go AFTER the sub-command, not before.
+// Handles both v7 (`magick montage …`) and v6 (the standalone `montage` binary).
+func RunMagickSub(ctx context.Context, subcommand string, args ...string) (string, error) {
+	var bin string
+	var full []string
+	if p := os.Getenv("FLOMATION_MAGICK_PATH"); p != "" {
+		bin, full = p, append([]string{subcommand}, safetyLimits...)
+	} else if p, err := exec.LookPath("magick"); err == nil {
+		bin, full = p, append([]string{subcommand}, safetyLimits...)
+	} else if p, err := exec.LookPath(subcommand); err == nil {
+		bin, full = p, append([]string{}, safetyLimits...)
+	} else {
+		return "", fmt.Errorf("ImageMagick %s not found on PATH — install it on the runner host", subcommand)
+	}
+	full = append(full, args...)
+	// #nosec G204 -- args are built from typed inputs / workspace paths.
+	cmd := exec.CommandContext(ctx, bin, full...)
+	stderr := &limitedBuffer{cap: stderrCap}
+	cmd.Stderr = stderr
+	err := cmd.Run()
+	return stderr.String(), err
+}
+
+// commonFonts are searched so text/label operations have a usable TTF.
+var commonFonts = []string{
+	"/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf",
+	"/usr/share/fonts/dejavu/DejaVuSans.ttf",
+	"/usr/share/fonts/truetype/liberation/LiberationSans-Regular.ttf",
+	"/usr/share/fonts/liberation/LiberationSans-Regular.ttf",
+	"/Library/Fonts/Arial.ttf",
+	"/System/Library/Fonts/Supplemental/Arial.ttf",
+	"/System/Library/Fonts/Supplemental/Verdana.ttf",
+}
+
+// FindFont returns the first available system TTF, if any.
+func FindFont() (string, bool) {
+	for _, f := range commonFonts {
+		if _, err := os.Stat(f); err == nil {
+			return f, true
+		}
+	}
+	return "", false
+}
+
 // ImageInfo is the subset of `identify` output the actions surface.
 type ImageInfo struct {
 	Width  int
