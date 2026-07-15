@@ -451,6 +451,7 @@ import (
 	image_psd_extract_layers "flomation.app/automate/executor/actions/image/psd_extract_layers"
 	image_psd_info "flomation.app/automate/executor/actions/image/psd_info"
 	image_psd_rasterise "flomation.app/automate/executor/actions/image/psd_rasterise"
+	image_psd_render_text "flomation.app/automate/executor/actions/image/psd_render_text"
 	image_resize "flomation.app/automate/executor/actions/image/resize"
 	image_rotate "flomation.app/automate/executor/actions/image/rotate"
 	image_round_corners "flomation.app/automate/executor/actions/image/round_corners"
@@ -1744,6 +1745,7 @@ var Actions = map[string]core.Action{
 	"image/psd_extract_layers":                            image_psd_extract_layers.Execute,
 	"image/psd_info":                                      image_psd_info.Execute,
 	"image/psd_rasterise":                                 image_psd_rasterise.Execute,
+	"image/psd_render_text":                               image_psd_render_text.Execute,
 	"image/resize":                                        image_resize.Execute,
 	"image/rotate":                                        image_rotate.Execute,
 	"image/round_corners":                                 image_round_corners.Execute,

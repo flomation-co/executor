@@ -52052,6 +52052,176 @@
       }
     ]
   },
+  "image/psd_render_text": {
+    "hash": "a4ab0fe74c82119f3df0f6daf73964452f95d4564742f1c622d03dd9939d9fd8",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Personalise PSD Text",
+    "description": "Replace a named text layer in a PSD and render the result as an image",
+    "website": "https://www.flomation.co",
+    "icon": "pen",
+    "date": "15/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Image",
+      "icon": "image",
+      "description": "Process images with ImageMagick: resize, convert, crop and info"
+    },
+    "inputs": [
+      {
+        "name": "psd",
+        "type": "string",
+        "value": null,
+        "label": "PSD file (file/blob reference)",
+        "placeholder": "flo:file:… or flo:blob:…",
+        "required": true
+      },
+      {
+        "name": "layer_name",
+        "type": "string",
+        "value": null,
+        "label": "Text layer name (exact, from PSD Info)",
+        "placeholder": "headline",
+        "required": true
+      },
+      {
+        "name": "text",
+        "type": "text",
+        "value": null,
+        "label": "New text",
+        "placeholder": "Hello Jane",
+        "required": true
+      },
+      {
+        "name": "font",
+        "type": "string",
+        "value": null,
+        "label": "Font",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "Poppins Bold",
+            "value": "poppins-bold"
+          },
+          {
+            "name": "Poppins SemiBold",
+            "value": "poppins-semibold"
+          },
+          {
+            "name": "Poppins Regular",
+            "value": "poppins-regular"
+          }
+        ]
+      },
+      {
+        "name": "font_size",
+        "type": "integer",
+        "value": null,
+        "label": "Font size (px, 0 = auto-fit to the layer box)",
+        "placeholder": ""
+      },
+      {
+        "name": "colour",
+        "type": "string",
+        "value": null,
+        "label": "Text colour",
+        "placeholder": "#000000, flomation-teal"
+      },
+      {
+        "name": "align",
+        "type": "string",
+        "value": null,
+        "label": "Alignment",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "Left",
+            "value": "left"
+          },
+          {
+            "name": "Centre",
+            "value": "center"
+          },
+          {
+            "name": "Right",
+            "value": "right"
+          }
+        ]
+      },
+      {
+        "name": "format",
+        "type": "string",
+        "value": null,
+        "label": "Output format",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "PNG",
+            "value": "png"
+          },
+          {
+            "name": "JPEG",
+            "value": "jpg"
+          },
+          {
+            "name": "WebP",
+            "value": "webp"
+          }
+        ]
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "image",
+        "type": "string",
+        "value": null,
+        "label": "Image (media reference)",
+        "placeholder": ""
+      },
+      {
+        "name": "width",
+        "type": "integer",
+        "value": null,
+        "label": "Width (px)",
+        "placeholder": ""
+      },
+      {
+        "name": "height",
+        "type": "integer",
+        "value": null,
+        "label": "Height (px)",
+        "placeholder": ""
+      },
+      {
+        "name": "size_bytes",
+        "type": "integer",
+        "value": null,
+        "label": "Size (bytes)",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
   "image/resize": {
     "hash": "ca885d55664750244136e4df8b14c2b8d30d1aacdddc181ecda05f271bf05911",
     "author": "Andy Esser",
