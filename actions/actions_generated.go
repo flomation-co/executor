@@ -1201,11 +1201,14 @@ import (
 	video_convert_audio "flomation.app/automate/executor/actions/video/convert_audio"
 	video_crop_video "flomation.app/automate/executor/actions/video/crop_video"
 	video_extract_audio "flomation.app/automate/executor/actions/video/extract_audio"
+	video_fade "flomation.app/automate/executor/actions/video/fade"
 	video_frames "flomation.app/automate/executor/actions/video/frames"
 	video_gif "flomation.app/automate/executor/actions/video/gif"
 	video_info "flomation.app/automate/executor/actions/video/info"
+	video_ken_burns "flomation.app/automate/executor/actions/video/ken_burns"
 	video_mix_audio "flomation.app/automate/executor/actions/video/mix_audio"
 	video_mute "flomation.app/automate/executor/actions/video/mute"
+	video_overlay "flomation.app/automate/executor/actions/video/overlay"
 	video_rotate_video "flomation.app/automate/executor/actions/video/rotate_video"
 	video_scale "flomation.app/automate/executor/actions/video/scale"
 	video_set_audio "flomation.app/automate/executor/actions/video/set_audio"
@@ -2485,11 +2488,14 @@ var Actions = map[string]core.Action{
 	"video/convert_audio":                                 video_convert_audio.Execute,
 	"video/crop_video":                                    video_crop_video.Execute,
 	"video/extract_audio":                                 video_extract_audio.Execute,
+	"video/fade":                                          video_fade.Execute,
 	"video/frames":                                        video_frames.Execute,
 	"video/gif":                                           video_gif.Execute,
 	"video/info":                                          video_info.Execute,
+	"video/ken_burns":                                     video_ken_burns.Execute,
 	"video/mix_audio":                                     video_mix_audio.Execute,
 	"video/mute":                                          video_mute.Execute,
+	"video/overlay":                                       video_overlay.Execute,
 	"video/rotate_video":                                  video_rotate_video.Execute,
 	"video/scale":                                         video_scale.Execute,
 	"video/set_audio":                                     video_set_audio.Execute,

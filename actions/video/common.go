@@ -217,6 +217,34 @@ func OptionalFloat(name string, def float64, inputs []*core.Connection) float64 
 	return def
 }
 
+// commonFonts are searched so drawtext-based actions have a usable TTF.
+var commonFonts = []string{
+	"/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf",
+	"/usr/share/fonts/dejavu/DejaVuSans.ttf",
+	"/usr/share/fonts/truetype/liberation/LiberationSans-Regular.ttf",
+	"/usr/share/fonts/liberation/LiberationSans-Regular.ttf",
+	"/Library/Fonts/Arial.ttf",
+	"/System/Library/Fonts/Supplemental/Arial.ttf",
+	"/System/Library/Fonts/Supplemental/Verdana.ttf",
+}
+
+// FindFont returns the first available system TTF (checking an optional override
+// first), for drawtext-based generators.
+func FindFont(override string) (string, bool) {
+	if override != "" {
+		if _, err := os.Stat(override); err == nil {
+			return override, true
+		}
+		return "", false
+	}
+	for _, f := range commonFonts {
+		if _, err := os.Stat(f); err == nil {
+			return f, true
+		}
+	}
+	return "", false
+}
+
 // ── Result helpers ──
 
 // ErrResult builds the standard failure output map (success=false with the error

@@ -146549,6 +146549,83 @@
       }
     ]
   },
+  "video/fade": {
+    "hash": "e5c02cc61069618e775206f3e1b978c2437ebb61da5b5ecaf8cd7bb9f4f1b6d3",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Fade Video In / Out",
+    "description": "Fade a video in from and/or out to black over a number of seconds",
+    "website": "https://www.flomation.co",
+    "icon": "film",
+    "date": "15/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Video",
+      "icon": "film",
+      "description": "Process audio and video with ffmpeg: extract audio, thumbnails, trimming and info"
+    },
+    "inputs": [
+      {
+        "name": "video",
+        "type": "string",
+        "value": null,
+        "label": "Video (file/blob reference)",
+        "placeholder": "flo:file:… or flo:blob:…",
+        "required": true
+      },
+      {
+        "name": "fade_in_seconds",
+        "type": "string",
+        "value": null,
+        "label": "Fade in (seconds, 0 = none)",
+        "placeholder": "1"
+      },
+      {
+        "name": "fade_out_seconds",
+        "type": "string",
+        "value": null,
+        "label": "Fade out (seconds, 0 = none)",
+        "placeholder": "1"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "video",
+        "type": "string",
+        "value": null,
+        "label": "Video (media reference)",
+        "placeholder": ""
+      },
+      {
+        "name": "size_bytes",
+        "type": "integer",
+        "value": null,
+        "label": "Size (bytes)",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
   "video/frames": {
     "hash": "e83b66696b25bc195e85e278b2abf109e1ce56217b667339b714d413eda8dee1",
     "author": "Andy Esser",
@@ -146846,6 +146923,107 @@
       }
     ]
   },
+  "video/ken_burns": {
+    "hash": "f1face17f0274694e51c14775ff2229a94fdd5c18441ea745144c71ddd701707",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Ken Burns (Animate Image)",
+    "description": "Animate a still image with a slow zoom and pan, producing a video clip",
+    "website": "https://www.flomation.co",
+    "icon": "magnifying-glass",
+    "date": "15/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Video",
+      "icon": "film",
+      "description": "Process audio and video with ffmpeg: extract audio, thumbnails, trimming and info"
+    },
+    "inputs": [
+      {
+        "name": "image",
+        "type": "string",
+        "value": null,
+        "label": "Image (file/blob reference)",
+        "placeholder": "flo:file:… or flo:blob:…",
+        "required": true
+      },
+      {
+        "name": "duration_seconds",
+        "type": "string",
+        "value": null,
+        "label": "Duration (seconds)",
+        "placeholder": "5"
+      },
+      {
+        "name": "zoom",
+        "type": "string",
+        "value": null,
+        "label": "Zoom",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "Zoom in",
+            "value": "in"
+          },
+          {
+            "name": "Zoom out",
+            "value": "out"
+          }
+        ]
+      },
+      {
+        "name": "width",
+        "type": "integer",
+        "value": null,
+        "label": "Width (px)",
+        "placeholder": ""
+      },
+      {
+        "name": "fps",
+        "type": "integer",
+        "value": null,
+        "label": "Frames per second",
+        "placeholder": ""
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "video",
+        "type": "string",
+        "value": null,
+        "label": "Video (media reference)",
+        "placeholder": ""
+      },
+      {
+        "name": "size_bytes",
+        "type": "integer",
+        "value": null,
+        "label": "Size (bytes)",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
   "video/mix_audio": {
     "hash": "b34c8d375a9c56c14e0962d509270f63a671797248d26048d5b2f4239a606c9c",
     "author": "Andy Esser",
@@ -146982,6 +147160,149 @@
         "label": "Video (file/blob reference)",
         "placeholder": "flo:file:… or flo:blob:…",
         "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "video",
+        "type": "string",
+        "value": null,
+        "label": "Video (media reference)",
+        "placeholder": ""
+      },
+      {
+        "name": "size_bytes",
+        "type": "integer",
+        "value": null,
+        "label": "Size (bytes)",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "video/overlay": {
+    "hash": "9f9ce768eb419d71844a3b15336c0f5eecefccc0e1c073ab6b0fece1309a486f",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Overlay Video / Graphic",
+    "description": "Composite an animated or static graphic onto a video (picture-in-picture)",
+    "website": "https://www.flomation.co",
+    "icon": "layer-group",
+    "date": "15/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Video",
+      "icon": "film",
+      "description": "Process audio and video with ffmpeg: extract audio, thumbnails, trimming and info"
+    },
+    "inputs": [
+      {
+        "name": "video",
+        "type": "string",
+        "value": null,
+        "label": "Base video (file/blob reference)",
+        "placeholder": "flo:file:… or flo:blob:…",
+        "required": true
+      },
+      {
+        "name": "overlay",
+        "type": "string",
+        "value": null,
+        "label": "Overlay graphic — video/GIF/image (file/blob reference)",
+        "placeholder": "flo:file:… or flo:blob:…",
+        "required": true
+      },
+      {
+        "name": "position",
+        "type": "string",
+        "value": null,
+        "label": "Position",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "Centre",
+            "value": "Center"
+          },
+          {
+            "name": "Top",
+            "value": "Top"
+          },
+          {
+            "name": "Bottom",
+            "value": "Bottom"
+          },
+          {
+            "name": "Top left",
+            "value": "NorthWest"
+          },
+          {
+            "name": "Top right",
+            "value": "NorthEast"
+          },
+          {
+            "name": "Bottom left",
+            "value": "SouthWest"
+          },
+          {
+            "name": "Bottom right",
+            "value": "SouthEast"
+          }
+        ]
+      },
+      {
+        "name": "margin",
+        "type": "integer",
+        "value": null,
+        "label": "Margin (px)",
+        "placeholder": ""
+      },
+      {
+        "name": "overlay_width",
+        "type": "integer",
+        "value": null,
+        "label": "Overlay width (px, 0 = original)",
+        "placeholder": ""
+      },
+      {
+        "name": "loop",
+        "type": "boolean",
+        "value": null,
+        "label": "Loop the overlay to the video length",
+        "placeholder": ""
+      },
+      {
+        "name": "start_seconds",
+        "type": "string",
+        "value": null,
+        "label": "Show from (seconds, blank = start)",
+        "placeholder": "0"
+      },
+      {
+        "name": "duration_seconds",
+        "type": "string",
+        "value": null,
+        "label": "Show for (seconds, blank = whole)",
+        "placeholder": "5"
       }
     ],
     "outputs": [
