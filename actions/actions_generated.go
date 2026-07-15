@@ -1179,6 +1179,7 @@ import (
 	vectordatabase_pgvector_index_create "flomation.app/automate/executor/actions/vectordatabase/pgvector/index_create"
 	vectordatabase_pgvector_table_create "flomation.app/automate/executor/actions/vectordatabase/pgvector/table_create"
 	vectordatabase_pgvector_table_info "flomation.app/automate/executor/actions/vectordatabase/pgvector/table_info"
+	video_extract_audio "flomation.app/automate/executor/actions/video/extract_audio"
 	web_fetch "flomation.app/automate/executor/actions/web/fetch"
 	web_request "flomation.app/automate/executor/actions/web/request"
 	web_search "flomation.app/automate/executor/actions/web/search"
@@ -2426,6 +2427,7 @@ var Actions = map[string]core.Action{
 	"vectordatabase/pgvector/index_create":                vectordatabase_pgvector_index_create.Execute,
 	"vectordatabase/pgvector/table_create":                vectordatabase_pgvector_table_create.Execute,
 	"vectordatabase/pgvector/table_info":                  vectordatabase_pgvector_table_info.Execute,
+	"video/extract_audio":                                 video_extract_audio.Execute,
 	"web/fetch":                                           web_fetch.Execute,
 	"web/request":                                         web_request.Execute,
 	"web/search":                                          web_search.Execute,

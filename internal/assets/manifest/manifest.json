@@ -144407,6 +144407,133 @@
       }
     ]
   },
+  "video/extract_audio": {
+    "hash": "b6e01cbe5fb36acf24affdba6d6eb351466e25b5ffec055b5cfd5781602b4ebb",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Extract Audio",
+    "description": "Extract the audio track from a video as mp3/aac/wav/ogg",
+    "website": "https://www.flomation.co",
+    "icon": "microphone",
+    "date": "15/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Video",
+      "icon": "film",
+      "description": "Process audio and video with ffmpeg: extract audio, thumbnails, trimming and info"
+    },
+    "inputs": [
+      {
+        "name": "video",
+        "type": "string",
+        "value": null,
+        "label": "Video (file/blob reference)",
+        "placeholder": "flo:file:… or flo:blob:…",
+        "required": true
+      },
+      {
+        "name": "format",
+        "type": "string",
+        "value": null,
+        "label": "Audio format",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "MP3",
+            "value": "mp3"
+          },
+          {
+            "name": "AAC",
+            "value": "aac"
+          },
+          {
+            "name": "WAV",
+            "value": "wav"
+          },
+          {
+            "name": "OGG",
+            "value": "ogg"
+          }
+        ]
+      },
+      {
+        "name": "bitrate",
+        "type": "string",
+        "value": null,
+        "label": "Bitrate",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "128 kbps",
+            "value": "128k"
+          },
+          {
+            "name": "192 kbps",
+            "value": "192k"
+          },
+          {
+            "name": "256 kbps",
+            "value": "256k"
+          },
+          {
+            "name": "320 kbps",
+            "value": "320k"
+          }
+        ]
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "audio",
+        "type": "string",
+        "value": null,
+        "label": "Audio (file reference)",
+        "placeholder": ""
+      },
+      {
+        "name": "format",
+        "type": "string",
+        "value": null,
+        "label": "Audio format",
+        "placeholder": ""
+      },
+      {
+        "name": "duration_seconds",
+        "type": "string",
+        "value": null,
+        "label": "Duration (seconds)",
+        "placeholder": ""
+      },
+      {
+        "name": "size_bytes",
+        "type": "integer",
+        "value": null,
+        "label": "Size (bytes)",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
   "web/fetch": {
     "hash": "80163995f9d887fb64c7a50dd958587b9ce48b9df095be25d5e8d0ddfbec504e",
     "author": "Andy Esser",
