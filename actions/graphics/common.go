@@ -96,7 +96,13 @@ func RenderVideo(ctx context.Context, flow *core.Flow, width, height, fps int, d
 		}
 	}
 
-	out, err := flow.MediaScratchFile("apng")
+	// The file is named .png (not .apng) on purpose: APNG is a backwards-compatible
+	// PNG, so this stamps the universal image/png MIME — which the editor previews as
+	// an <img> (Chrome animates APNG there) and which maps to a .png download name.
+	// image/apng would render but has no download-extension mapping. -f apng below
+	// forces animated content regardless of the extension, and ffmpeg content-probes
+	// on the way back in, so the Overlay action still sees every frame.
+	out, err := flow.MediaScratchFile("png")
 	if err != nil {
 		return "", err
 	}
