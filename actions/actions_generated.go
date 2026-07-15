@@ -437,10 +437,13 @@ import (
 	humanintheloop_await "flomation.app/automate/executor/actions/humanintheloop/await"
 	image_adjust "flomation.app/automate/executor/actions/image/adjust"
 	image_convert "flomation.app/automate/executor/actions/image/convert"
+	image_create "flomation.app/automate/executor/actions/image/create"
 	image_crop "flomation.app/automate/executor/actions/image/crop"
 	image_info "flomation.app/automate/executor/actions/image/info"
 	image_resize "flomation.app/automate/executor/actions/image/resize"
+	image_rotate "flomation.app/automate/executor/actions/image/rotate"
 	image_text "flomation.app/automate/executor/actions/image/text"
+	image_to_pdf "flomation.app/automate/executor/actions/image/to_pdf"
 	image_watermark "flomation.app/automate/executor/actions/image/watermark"
 	infrastructure_awx_adhoc_command_get "flomation.app/automate/executor/actions/infrastructure/awx/adhoc_command_get"
 	infrastructure_awx_adhoc_command_run "flomation.app/automate/executor/actions/infrastructure/awx/adhoc_command_run"
@@ -1186,11 +1189,16 @@ import (
 	vectordatabase_pgvector_index_create "flomation.app/automate/executor/actions/vectordatabase/pgvector/index_create"
 	vectordatabase_pgvector_table_create "flomation.app/automate/executor/actions/vectordatabase/pgvector/table_create"
 	vectordatabase_pgvector_table_info "flomation.app/automate/executor/actions/vectordatabase/pgvector/table_info"
+	video_adjust_audio "flomation.app/automate/executor/actions/video/adjust_audio"
 	video_concat "flomation.app/automate/executor/actions/video/concat"
 	video_extract_audio "flomation.app/automate/executor/actions/video/extract_audio"
 	video_frames "flomation.app/automate/executor/actions/video/frames"
+	video_gif "flomation.app/automate/executor/actions/video/gif"
 	video_info "flomation.app/automate/executor/actions/video/info"
+	video_mute "flomation.app/automate/executor/actions/video/mute"
 	video_scale "flomation.app/automate/executor/actions/video/scale"
+	video_set_audio "flomation.app/automate/executor/actions/video/set_audio"
+	video_slideshow "flomation.app/automate/executor/actions/video/slideshow"
 	video_thumbnail "flomation.app/automate/executor/actions/video/thumbnail"
 	video_transcode "flomation.app/automate/executor/actions/video/transcode"
 	video_trim "flomation.app/automate/executor/actions/video/trim"
@@ -1699,10 +1707,13 @@ var Actions = map[string]core.Action{
 	"humanintheloop/await":                                humanintheloop_await.Execute,
 	"image/adjust":                                        image_adjust.Execute,
 	"image/convert":                                       image_convert.Execute,
+	"image/create":                                        image_create.Execute,
 	"image/crop":                                          image_crop.Execute,
 	"image/info":                                          image_info.Execute,
 	"image/resize":                                        image_resize.Execute,
+	"image/rotate":                                        image_rotate.Execute,
 	"image/text":                                          image_text.Execute,
+	"image/to_pdf":                                        image_to_pdf.Execute,
 	"image/watermark":                                     image_watermark.Execute,
 	"infrastructure/awx/adhoc_command_get":                infrastructure_awx_adhoc_command_get.Execute,
 	"infrastructure/awx/adhoc_command_run":                infrastructure_awx_adhoc_command_run.Execute,
@@ -2448,11 +2459,16 @@ var Actions = map[string]core.Action{
 	"vectordatabase/pgvector/index_create":                vectordatabase_pgvector_index_create.Execute,
 	"vectordatabase/pgvector/table_create":                vectordatabase_pgvector_table_create.Execute,
 	"vectordatabase/pgvector/table_info":                  vectordatabase_pgvector_table_info.Execute,
+	"video/adjust_audio":                                  video_adjust_audio.Execute,
 	"video/concat":                                        video_concat.Execute,
 	"video/extract_audio":                                 video_extract_audio.Execute,
 	"video/frames":                                        video_frames.Execute,
+	"video/gif":                                           video_gif.Execute,
 	"video/info":                                          video_info.Execute,
+	"video/mute":                                          video_mute.Execute,
 	"video/scale":                                         video_scale.Execute,
+	"video/set_audio":                                     video_set_audio.Execute,
+	"video/slideshow":                                     video_slideshow.Execute,
 	"video/thumbnail":                                     video_thumbnail.Execute,
 	"video/transcode":                                     video_transcode.Execute,
 	"video/trim":                                          video_trim.Execute,

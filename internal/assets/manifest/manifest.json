@@ -50673,6 +50673,113 @@
       }
     ]
   },
+  "image/create": {
+    "hash": "d8eaa8951e31ba31068484fd59d5e33f60d0cb167700643f5d058b930081ff59",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Create Image",
+    "description": "Create a new blank image of a given size and colour",
+    "website": "https://www.flomation.co",
+    "icon": "image+plus",
+    "date": "15/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Image",
+      "icon": "image",
+      "description": "Process images with ImageMagick: resize, convert, crop and info"
+    },
+    "inputs": [
+      {
+        "name": "width",
+        "type": "integer",
+        "value": null,
+        "label": "Width (px)",
+        "placeholder": ""
+      },
+      {
+        "name": "height",
+        "type": "integer",
+        "value": null,
+        "label": "Height (px)",
+        "placeholder": ""
+      },
+      {
+        "name": "colour",
+        "type": "string",
+        "value": null,
+        "label": "Colour",
+        "placeholder": "white, #ff0000, transparent"
+      },
+      {
+        "name": "format",
+        "type": "string",
+        "value": null,
+        "label": "Format",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "PNG",
+            "value": "png"
+          },
+          {
+            "name": "JPEG",
+            "value": "jpg"
+          }
+        ]
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "image",
+        "type": "string",
+        "value": null,
+        "label": "Image (media reference)",
+        "placeholder": ""
+      },
+      {
+        "name": "width",
+        "type": "integer",
+        "value": null,
+        "label": "Width (px)",
+        "placeholder": ""
+      },
+      {
+        "name": "height",
+        "type": "integer",
+        "value": null,
+        "label": "Height (px)",
+        "placeholder": ""
+      },
+      {
+        "name": "size_bytes",
+        "type": "integer",
+        "value": null,
+        "label": "Size (bytes)",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
   "image/crop": {
     "hash": "2f0bc1b4f5e3cabac6874beb49bc9538f86046657be4585be0d9f775fc9d51d7",
     "author": "Andy Esser",
@@ -50976,6 +51083,115 @@
       }
     ]
   },
+  "image/rotate": {
+    "hash": "5af174ede8110e00376a124664877e120e80d03be46228293a93b1a393d9fa5c",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Rotate / Flip Image",
+    "description": "Rotate an image by 90/180/270° and/or flip it horizontally or vertically",
+    "website": "https://www.flomation.co",
+    "icon": "rotate-right",
+    "date": "15/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Image",
+      "icon": "image",
+      "description": "Process images with ImageMagick: resize, convert, crop and info"
+    },
+    "inputs": [
+      {
+        "name": "image",
+        "type": "string",
+        "value": null,
+        "label": "Image (file/blob reference)",
+        "placeholder": "flo:file:… or flo:blob:…",
+        "required": true
+      },
+      {
+        "name": "angle",
+        "type": "string",
+        "value": null,
+        "label": "Rotate",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "None",
+            "value": "0"
+          },
+          {
+            "name": "90° clockwise",
+            "value": "90"
+          },
+          {
+            "name": "180°",
+            "value": "180"
+          },
+          {
+            "name": "270° clockwise",
+            "value": "270"
+          }
+        ]
+      },
+      {
+        "name": "flip",
+        "type": "string",
+        "value": null,
+        "label": "Flip",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "None",
+            "value": "none"
+          },
+          {
+            "name": "Horizontal",
+            "value": "horizontal"
+          },
+          {
+            "name": "Vertical",
+            "value": "vertical"
+          }
+        ]
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "image",
+        "type": "string",
+        "value": null,
+        "label": "Image (media reference)",
+        "placeholder": ""
+      },
+      {
+        "name": "size_bytes",
+        "type": "integer",
+        "value": null,
+        "label": "Size (bytes)",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
   "image/text": {
     "hash": "acf7d7e57bcb1067c9581e54aada94228237bf7a4dcd59826d92e301893b3a06",
     "author": "Andy Esser",
@@ -51079,6 +51295,76 @@
         "type": "string",
         "value": null,
         "label": "Image (media reference)",
+        "placeholder": ""
+      },
+      {
+        "name": "size_bytes",
+        "type": "integer",
+        "value": null,
+        "label": "Size (bytes)",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "image/to_pdf": {
+    "hash": "b73927f7133d83f8b8b2d9b912c62aecde886e498782a7c53827cc846643a406",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Images to PDF",
+    "description": "Combine one or more images into a single PDF, one image per page",
+    "website": "https://www.flomation.co",
+    "icon": "file-lines",
+    "date": "15/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Image",
+      "icon": "image",
+      "description": "Process images with ImageMagick: resize, convert, crop and info"
+    },
+    "inputs": [
+      {
+        "name": "images",
+        "type": "text",
+        "value": null,
+        "label": "Image references (one per line, in order)",
+        "placeholder": "flo:file:…\nflo:blob:…",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "pdf",
+        "type": "string",
+        "value": null,
+        "label": "PDF (media reference)",
+        "placeholder": ""
+      },
+      {
+        "name": "page_count",
+        "type": "integer",
+        "value": null,
+        "label": "Pages",
         "placeholder": ""
       },
       {
@@ -145165,6 +145451,101 @@
       }
     ]
   },
+  "video/adjust_audio": {
+    "hash": "82498ed1f32adfeb1ff42298fdd5a89f08d6838a780bbc7a2d3a584e358c506d",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Adjust Audio",
+    "description": "Change volume, loudness-normalise, or fade an audio or video's audio in/out",
+    "website": "https://www.flomation.co",
+    "icon": "microphone",
+    "date": "15/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Video",
+      "icon": "film",
+      "description": "Process audio and video with ffmpeg: extract audio, thumbnails, trimming and info"
+    },
+    "inputs": [
+      {
+        "name": "media",
+        "type": "string",
+        "value": null,
+        "label": "Audio or video (file/blob reference)",
+        "placeholder": "flo:file:… or flo:blob:…",
+        "required": true
+      },
+      {
+        "name": "operation",
+        "type": "string",
+        "value": null,
+        "label": "Operation",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "Normalise loudness",
+            "value": "normalize"
+          },
+          {
+            "name": "Change volume (dB)",
+            "value": "volume"
+          },
+          {
+            "name": "Fade in",
+            "value": "fade_in"
+          },
+          {
+            "name": "Fade out",
+            "value": "fade_out"
+          }
+        ]
+      },
+      {
+        "name": "amount",
+        "type": "string",
+        "value": null,
+        "label": "Amount (dB for volume, seconds for fades)",
+        "placeholder": "3"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "media",
+        "type": "string",
+        "value": null,
+        "label": "Media (media reference)",
+        "placeholder": ""
+      },
+      {
+        "name": "size_bytes",
+        "type": "integer",
+        "value": null,
+        "label": "Size (bytes)",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
   "video/concat": {
     "hash": "fc9d424698ae1872e85e858ab3ee05f9ff9ce7ee5e53c18d17f7d4d704f0c8ae",
     "author": "Andy Esser",
@@ -145470,6 +145851,97 @@
       }
     ]
   },
+  "video/gif": {
+    "hash": "50078b5c003db6ae44d86417bd0100b3acd3896372d8d8cc081e940e84df7db7",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Video to GIF",
+    "description": "Convert a video, or a portion of it, into an animated GIF",
+    "website": "https://www.flomation.co",
+    "icon": "film",
+    "date": "15/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Video",
+      "icon": "film",
+      "description": "Process audio and video with ffmpeg: extract audio, thumbnails, trimming and info"
+    },
+    "inputs": [
+      {
+        "name": "video",
+        "type": "string",
+        "value": null,
+        "label": "Video (file/blob reference)",
+        "placeholder": "flo:file:… or flo:blob:…",
+        "required": true
+      },
+      {
+        "name": "start_seconds",
+        "type": "string",
+        "value": null,
+        "label": "Start (seconds)",
+        "placeholder": "0"
+      },
+      {
+        "name": "duration_seconds",
+        "type": "string",
+        "value": null,
+        "label": "Duration (seconds, blank = whole)",
+        "placeholder": "5"
+      },
+      {
+        "name": "fps",
+        "type": "string",
+        "value": null,
+        "label": "Frames per second",
+        "placeholder": "12"
+      },
+      {
+        "name": "width",
+        "type": "integer",
+        "value": null,
+        "label": "Width (px)",
+        "placeholder": ""
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "gif",
+        "type": "string",
+        "value": null,
+        "label": "GIF (media reference)",
+        "placeholder": ""
+      },
+      {
+        "name": "size_bytes",
+        "type": "integer",
+        "value": null,
+        "label": "Size (bytes)",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
   "video/info": {
     "hash": "0ce4f6418367d08cba757a998c9ebb6f8b971df2d265d6196fcafee6db5dd15f",
     "author": "Andy Esser",
@@ -145575,6 +146047,69 @@
       }
     ]
   },
+  "video/mute": {
+    "hash": "fdbcd2654a9d605eb8fe1541dcd174595c417c79d756a68a5c36a56b56360171",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Mute Video",
+    "description": "Remove the audio track from a video (video is copied, not re-encoded)",
+    "website": "https://www.flomation.co",
+    "icon": "microphone+xmark",
+    "date": "15/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Video",
+      "icon": "film",
+      "description": "Process audio and video with ffmpeg: extract audio, thumbnails, trimming and info"
+    },
+    "inputs": [
+      {
+        "name": "video",
+        "type": "string",
+        "value": null,
+        "label": "Video (file/blob reference)",
+        "placeholder": "flo:file:… or flo:blob:…",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "video",
+        "type": "string",
+        "value": null,
+        "label": "Video (media reference)",
+        "placeholder": ""
+      },
+      {
+        "name": "size_bytes",
+        "type": "integer",
+        "value": null,
+        "label": "Size (bytes)",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
   "video/scale": {
     "hash": "66b894cba5b47d215ff658a801266d61fa657b2c5c8753f40acb32d2b3908b39",
     "author": "Andy Esser",
@@ -145652,6 +146187,168 @@
         "type": "integer",
         "value": null,
         "label": "Height (px)",
+        "placeholder": ""
+      },
+      {
+        "name": "size_bytes",
+        "type": "integer",
+        "value": null,
+        "label": "Size (bytes)",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "video/set_audio": {
+    "hash": "fecb7919bcbe9384eff00252dfe4d3028d59fcaac7a842457f9b930267d50771",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Set Video Audio",
+    "description": "Replace a video's audio track with a supplied audio file",
+    "website": "https://www.flomation.co",
+    "icon": "microphone+plus",
+    "date": "15/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Video",
+      "icon": "film",
+      "description": "Process audio and video with ffmpeg: extract audio, thumbnails, trimming and info"
+    },
+    "inputs": [
+      {
+        "name": "video",
+        "type": "string",
+        "value": null,
+        "label": "Video (file/blob reference)",
+        "placeholder": "flo:file:… or flo:blob:…",
+        "required": true
+      },
+      {
+        "name": "audio",
+        "type": "string",
+        "value": null,
+        "label": "Audio (file/blob reference)",
+        "placeholder": "flo:file:… or flo:blob:…",
+        "required": true
+      },
+      {
+        "name": "shortest",
+        "type": "boolean",
+        "value": null,
+        "label": "Trim to the shorter track",
+        "placeholder": ""
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "video",
+        "type": "string",
+        "value": null,
+        "label": "Video (media reference)",
+        "placeholder": ""
+      },
+      {
+        "name": "size_bytes",
+        "type": "integer",
+        "value": null,
+        "label": "Size (bytes)",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "video/slideshow": {
+    "hash": "099ced8a6fb6b2ec3d2e939ecad07182dcf4a1ce2ce9b941c12265873314f826",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Slideshow from Images",
+    "description": "Build a video from a list of images, each shown for a set number of seconds",
+    "website": "https://www.flomation.co",
+    "icon": "image+play",
+    "date": "15/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Video",
+      "icon": "film",
+      "description": "Process audio and video with ffmpeg: extract audio, thumbnails, trimming and info"
+    },
+    "inputs": [
+      {
+        "name": "images",
+        "type": "text",
+        "value": null,
+        "label": "Image references (one per line, in order)",
+        "placeholder": "flo:file:…\nflo:blob:…",
+        "required": true
+      },
+      {
+        "name": "seconds_per_image",
+        "type": "string",
+        "value": null,
+        "label": "Seconds per image",
+        "placeholder": "3"
+      },
+      {
+        "name": "width",
+        "type": "integer",
+        "value": null,
+        "label": "Width (px)",
+        "placeholder": ""
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "video",
+        "type": "string",
+        "value": null,
+        "label": "Video (media reference)",
+        "placeholder": ""
+      },
+      {
+        "name": "image_count",
+        "type": "integer",
+        "value": null,
+        "label": "Images used",
         "placeholder": ""
       },
       {
