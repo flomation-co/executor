@@ -134092,6 +134092,174 @@
       }
     ]
   },
+  "trigger/database_row": {
+    "hash": "f66ebe35440e8824937f7c421fcdcea3360d392e3a56cda58035b6bf2146b5b8",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Database Row Trigger",
+    "description": "Triggers a flow when a new row is inserted into a SQL table. Polls on an interval, tracking a monotonic cursor column (id or timestamp).",
+    "website": "https://www.flomation.co",
+    "icon": "database+plus",
+    "date": "16/07/2026",
+    "type": 1,
+    "category": {
+      "name": "Triggers",
+      "icon": "bolt-lightning",
+      "description": "Start a Flow"
+    },
+    "inputs": [
+      {
+        "name": "dialect",
+        "type": "string",
+        "value": null,
+        "label": "Database Type",
+        "placeholder": "",
+        "required": true,
+        "options": [
+          {
+            "name": "PostgreSQL",
+            "value": "postgresql"
+          },
+          {
+            "name": "MySQL / MariaDB",
+            "value": "mysql"
+          },
+          {
+            "name": "SQL Server",
+            "value": "sqlserver"
+          }
+        ]
+      },
+      {
+        "name": "host",
+        "type": "string",
+        "value": null,
+        "label": "Database Host",
+        "placeholder": "localhost",
+        "required": true
+      },
+      {
+        "name": "port",
+        "type": "integer",
+        "value": null,
+        "label": "Database Port",
+        "placeholder": "5432 / 3306 / 1433",
+        "required": true
+      },
+      {
+        "name": "username",
+        "type": "string",
+        "value": null,
+        "label": "Username",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "password",
+        "type": "secret",
+        "value": null,
+        "label": "Password",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "database",
+        "type": "string",
+        "value": null,
+        "label": "Database Name",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "ssl_mode",
+        "type": "string",
+        "value": null,
+        "label": "SSL / TLS Mode",
+        "placeholder": "Connection encryption",
+        "options": [
+          {
+            "name": "Disable",
+            "value": "disable"
+          },
+          {
+            "name": "Require",
+            "value": "require"
+          },
+          {
+            "name": "Verify (full)",
+            "value": "verify"
+          }
+        ]
+      },
+      {
+        "name": "table",
+        "type": "string",
+        "value": null,
+        "label": "Table",
+        "placeholder": "orders (optionally schema.orders)",
+        "required": true
+      },
+      {
+        "name": "cursor_column",
+        "type": "string",
+        "value": null,
+        "label": "Cursor Column",
+        "placeholder": "id or created_at — must only ever increase",
+        "required": true
+      },
+      {
+        "name": "poll_interval",
+        "type": "string",
+        "value": null,
+        "label": "Poll Interval",
+        "placeholder": "e.g. 60s, 5m"
+      },
+      {
+        "name": "filter_column",
+        "type": "string",
+        "value": null,
+        "label": "Filter Column",
+        "placeholder": "Only fire when this column equals the value below (optional)"
+      },
+      {
+        "name": "filter_value",
+        "type": "string",
+        "value": null,
+        "label": "Filter Value",
+        "placeholder": "e.g. paid, active (optional)"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "row",
+        "type": "object",
+        "value": null,
+        "label": "Row",
+        "placeholder": ""
+      },
+      {
+        "name": "cursor",
+        "type": "string",
+        "value": null,
+        "label": "Cursor Value",
+        "placeholder": ""
+      },
+      {
+        "name": "table",
+        "type": "string",
+        "value": null,
+        "label": "Table",
+        "placeholder": ""
+      },
+      {
+        "name": "triggered_at",
+        "type": "string",
+        "value": null,
+        "label": "Triggered At",
+        "placeholder": ""
+      }
+    ]
+  },
   "trigger/email": {
     "hash": "691f69495951b10c4cb9226f8584576b4a83b0b31d2dd01c1c7040d61b4a907e",
     "author": "Andy Esser",

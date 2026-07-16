@@ -1111,6 +1111,7 @@ import (
 	trigger_awx_webhook "flomation.app/automate/executor/actions/trigger/awx_webhook"
 	trigger_calcom_webhook "flomation.app/automate/executor/actions/trigger/calcom_webhook"
 	trigger_calendly_webhook "flomation.app/automate/executor/actions/trigger/calendly_webhook"
+	trigger_database_row "flomation.app/automate/executor/actions/trigger/database_row"
 	trigger_email "flomation.app/automate/executor/actions/trigger/email"
 	trigger_facebook_feed "flomation.app/automate/executor/actions/trigger/facebook_feed"
 	trigger_facebook_messenger "flomation.app/automate/executor/actions/trigger/facebook_messenger"
@@ -2406,6 +2407,7 @@ var Actions = map[string]core.Action{
 	"trigger/awx_webhook":                                 trigger_awx_webhook.Execute,
 	"trigger/calcom_webhook":                              trigger_calcom_webhook.Execute,
 	"trigger/calendly_webhook":                            trigger_calendly_webhook.Execute,
+	"trigger/database_row":                                trigger_database_row.Execute,
 	"trigger/email":                                       trigger_email.Execute,
 	"trigger/facebook_feed":                               trigger_facebook_feed.Execute,
 	"trigger/facebook_messenger":                          trigger_facebook_messenger.Execute,
