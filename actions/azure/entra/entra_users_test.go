@@ -10,6 +10,7 @@ import (
 	"net/http/httptest"
 	"strings"
 	"testing"
+	"time"
 
 	core "flomation.app/automate/executor"
 	entra "flomation.app/automate/executor/actions/azure/entra"
@@ -31,9 +32,19 @@ import (
 
 func TestUserCreate(t *testing.T) {
 	defer entra.SetTokenForTest("tok")()
+	defer entra.SetReplicationForTest(2, time.Millisecond)()
 	var gotMethod, gotPath string
 	var gotBody map[string]interface{}
+	var readinessGets int
 	srv := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		// user_create polls GET /users/{id} after the POST until Graph will
+		// serve the new object; record the creating call only.
+		if r.Method == http.MethodGet {
+			readinessGets++
+			w.WriteHeader(200)
+			_, _ = w.Write([]byte(`{"id":"u-new"}`))
+			return
+		}
 		gotMethod, gotPath = r.Method, r.URL.Path
 		gotBody = decodeBody(t, r)
 		w.WriteHeader(201)
@@ -57,6 +68,11 @@ func TestUserCreate(t *testing.T) {
 	}
 	if gotMethod != "POST" || gotPath != "/v1.0/users" {
 		t.Fatalf("call = %s %s", gotMethod, gotPath)
+	}
+	// The wait requires consecutive confirmations: Graph replicas disagree, so
+	// one 200 is no evidence the next reader will find the object.
+	if readinessGets != 2 {
+		t.Errorf("readiness polls = %d, want 2 consecutive confirmations before the id goes downstream", readinessGets)
 	}
 	if gotBody["displayName"] != "Jane" || gotBody["mailNickname"] != "jane" {
 		t.Fatalf("body = %v", gotBody)

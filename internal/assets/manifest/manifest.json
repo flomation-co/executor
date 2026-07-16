@@ -1358,7 +1358,7 @@
     ]
   },
   "ai/azure_openai": {
-    "hash": "4d4c7d63971e2475ba5ef56ce77ba8bda26e512b6a364303595b9b5c9ca8a573",
+    "hash": "9e5136f211759a772160d6714313cd949d586df17e0397062ab53d0ff6497cf4",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Azure OpenAI Prompt",
@@ -1437,7 +1437,7 @@
         "type": "string",
         "value": null,
         "label": "Temperature",
-        "placeholder": "0.7"
+        "placeholder": "Leave blank for the model default — GPT-5 and o-series accept only 1"
       },
       {
         "name": "top_p",
@@ -11455,7 +11455,7 @@
     ]
   },
   "azure/entra/group_create": {
-    "hash": "e82ce4725ec37df383168744aa400adc56ce8177776bdd5aa7bdda852ad05ba3",
+    "hash": "c41fbcb7b842e329f384f558c331b1b01be2aa30f88fb3d1af227a55eaf60645",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Entra ID: Create Group",
@@ -12993,7 +12993,7 @@
     ]
   },
   "azure/entra/user_create": {
-    "hash": "fd32a05cb7f22e5f13e20e095bd05948a77e2da75fc24b5451ddee10cc3a753b",
+    "hash": "ac0d9ef46ef8dfd2078dcb2753fde445088156aaa83848bed62902eeddf0e6d6",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Entra ID: Create User",
@@ -14345,7 +14345,7 @@
     ]
   },
   "azure/storage/blob_delete": {
-    "hash": "4f073274faa3393c5c267b7b5468e83802ef53744103a49a64d22849b0ad630a",
+    "hash": "b6d2cdaf80affe6e3b8388a92648cc70895ac64fd2edb1c4914ecca0810c85ce",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Azure Storage: Delete Blob",
@@ -14493,6 +14493,13 @@
             "value": "only"
           }
         ]
+      },
+      {
+        "name": "lease_id",
+        "type": "string",
+        "value": null,
+        "label": "Lease ID",
+        "placeholder": "Only needed when the blob or container is leased — the Lease ID output of a Lease step"
       }
     ],
     "outputs": [
@@ -14534,7 +14541,7 @@
     ]
   },
   "azure/storage/blob_download": {
-    "hash": "46eb506132e33704be8bcb4b57cdb1a64ee2e7293ba5f9309e1d6b6b2da5f2dd",
+    "hash": "a72f997749f5930c6af061ab9e42597ec0a68f2589a525414c0c150b632561c2",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Azure Storage: Download Blob",
@@ -14668,6 +14675,13 @@
         "value": null,
         "label": "Byte Range",
         "placeholder": "bytes=0-1023 — leave blank for the whole blob"
+      },
+      {
+        "name": "lease_id",
+        "type": "string",
+        "value": null,
+        "label": "Lease ID",
+        "placeholder": "Only needed when the blob or container is leased — the Lease ID output of a Lease step"
       }
     ],
     "outputs": [
@@ -15403,7 +15417,7 @@
     ]
   },
   "azure/storage/blob_get_properties": {
-    "hash": "6e94c40ea98c47689d31b3893af74752e9eb5b7dac115f3fdfe42d4e5d4acafc",
+    "hash": "cd34d6aa9088371f12e8ad5ad9a78c6fbd3328e60ad98c6866c669d0190f3b12",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Azure Storage: Get Blob Properties",
@@ -15530,6 +15544,13 @@
         "label": "Blob Name",
         "placeholder": "reports/2026/summary.pdf",
         "required": true
+      },
+      {
+        "name": "lease_id",
+        "type": "string",
+        "value": null,
+        "label": "Lease ID",
+        "placeholder": "Only needed when the blob or container is leased — the Lease ID output of a Lease step"
       }
     ],
     "outputs": [
@@ -15571,7 +15592,7 @@
     ]
   },
   "azure/storage/blob_get_tags": {
-    "hash": "304dcbafd8cce211ca41a4a0f91a735e7b28ca6e5cd8051ab3727df11dfffc1d",
+    "hash": "8cd9bf8b8fceed7969d8f8312e9949b4ede36081149dec43add5e75f32847224",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Azure Storage: Get Blob Tags",
@@ -15698,6 +15719,13 @@
         "label": "Blob Name",
         "placeholder": "reports/2026/summary.pdf",
         "required": true
+      },
+      {
+        "name": "lease_id",
+        "type": "string",
+        "value": null,
+        "label": "Lease ID",
+        "placeholder": "Only needed when the blob or container is leased — the Lease ID output of a Lease step"
       }
     ],
     "outputs": [
@@ -15738,8 +15766,276 @@
       }
     ]
   },
+  "azure/storage/blob_lease": {
+    "hash": "04d30bdd19e493e0f775bf2610b0f87c6ec653cf488e909d0dc5075696d45171",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Azure Storage: Lease Blob",
+    "description": "Take, extend, or release a write lock on a blob. Acquire returns a Lease ID — pass it to the Lease ID field of any Upload/Delete/Set step to write to the locked blob; every write WITHOUT it is refused while the lease is held. Break ends a lease you do not hold",
+    "website": "https://www.flomation.co",
+    "icon": "azure+lock",
+    "date": "16/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Azure",
+      "icon": "azure",
+      "description": "Microsoft Azure integrations"
+    },
+    "sub_category": {
+      "name": "Storage",
+      "icon": "box-archive",
+      "description": "Azure Blob Storage — containers, blobs, tiers, tags, and shared access links"
+    },
+    "inputs": [
+      {
+        "name": "account_name",
+        "type": "string",
+        "value": null,
+        "label": "Storage Account",
+        "placeholder": "mystorageaccount",
+        "required": true
+      },
+      {
+        "name": "auth_method",
+        "type": "string",
+        "value": null,
+        "label": "Authentication",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "Shared Key",
+            "value": "shared_key"
+          },
+          {
+            "name": "Microsoft Entra (service principal)",
+            "value": "entra"
+          }
+        ]
+      },
+      {
+        "name": "account_key",
+        "type": "secret",
+        "value": null,
+        "label": "Account Key",
+        "placeholder": "Base64 account key — Storage Account ▸ Access keys",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "",
+            "shared_key"
+          ]
+        }
+      },
+      {
+        "name": "azure_tenant_id",
+        "type": "string",
+        "value": null,
+        "label": "Tenant ID",
+        "placeholder": "Directory (tenant) ID — a GUID or your-tenant.onmicrosoft.com",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "entra"
+          ]
+        }
+      },
+      {
+        "name": "azure_client_id",
+        "type": "string",
+        "value": null,
+        "label": "Client ID",
+        "placeholder": "Application (client) ID of the service principal",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "entra"
+          ]
+        }
+      },
+      {
+        "name": "azure_client_secret",
+        "type": "secret",
+        "value": null,
+        "label": "Client Secret",
+        "placeholder": "The app needs a Storage Blob Data role on the account (RBAC)",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "entra"
+          ]
+        }
+      },
+      {
+        "name": "endpoint",
+        "type": "string",
+        "value": null,
+        "label": "Custom Endpoint",
+        "placeholder": "https://myaccount.blob.core.windows.net — leave blank to derive; Azurite: http://host:10000/devstoreaccount1"
+      },
+      {
+        "name": "allow_insecure",
+        "type": "boolean",
+        "value": null,
+        "label": "Allow Insecure TLS",
+        "placeholder": "Skip TLS verification — only for custom endpoints with a self-signed certificate"
+      },
+      {
+        "name": "container",
+        "type": "string",
+        "value": null,
+        "label": "Container",
+        "placeholder": "my-container",
+        "required": true
+      },
+      {
+        "name": "blob_name",
+        "type": "string",
+        "value": null,
+        "label": "Blob Name",
+        "placeholder": "reports/2026/summary.pdf",
+        "required": true
+      },
+      {
+        "name": "lease_action",
+        "type": "string",
+        "value": null,
+        "label": "Lease Action",
+        "placeholder": "",
+        "required": true,
+        "options": [
+          {
+            "name": "Acquire — take the lock",
+            "value": "acquire"
+          },
+          {
+            "name": "Renew — extend the lock you hold",
+            "value": "renew"
+          },
+          {
+            "name": "Change — swap the lock's ID",
+            "value": "change"
+          },
+          {
+            "name": "Release — hand the lock back",
+            "value": "release"
+          },
+          {
+            "name": "Break — end someone else's lock",
+            "value": "break"
+          }
+        ]
+      },
+      {
+        "name": "lease_id",
+        "type": "string",
+        "value": null,
+        "label": "Lease ID",
+        "placeholder": "The Lease ID output of the Acquire step — optional on Break, which does not need it",
+        "visible_when": {
+          "field": "lease_action",
+          "values": [
+            "renew",
+            "change",
+            "release",
+            "break"
+          ]
+        }
+      },
+      {
+        "name": "proposed_lease_id",
+        "type": "string",
+        "value": null,
+        "label": "Proposed Lease ID",
+        "placeholder": "A GUID to use as the lease's ID — leave blank on Acquire to let Azure choose one",
+        "visible_when": {
+          "field": "lease_action",
+          "values": [
+            "acquire",
+            "change"
+          ]
+        }
+      },
+      {
+        "name": "duration",
+        "type": "integer",
+        "value": null,
+        "label": "Duration (seconds)",
+        "placeholder": "15-60 seconds, or -1 to hold the lease until it is released",
+        "visible_when": {
+          "field": "lease_action",
+          "values": [
+            "acquire"
+          ]
+        }
+      },
+      {
+        "name": "break_period",
+        "type": "integer",
+        "value": null,
+        "label": "Break Period (seconds)",
+        "placeholder": "0-60 — how long the lease may still run. 0 ends it immediately. Blank lets it run out its remaining time",
+        "visible_when": {
+          "field": "lease_action",
+          "values": [
+            "break"
+          ]
+        }
+      }
+    ],
+    "outputs": [
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Blob Name",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Result",
+        "placeholder": ""
+      },
+      {
+        "name": "lease_id",
+        "type": "string",
+        "value": null,
+        "label": "Lease ID",
+        "placeholder": ""
+      },
+      {
+        "name": "lease_time",
+        "type": "integer",
+        "value": null,
+        "label": "Lease Time Remaining (seconds)",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
   "azure/storage/blob_set_metadata": {
-    "hash": "a7f3745f38ce6994b480829be9fe3516da7e10e307627e585a05bac687493c19",
+    "hash": "26601b13aa7f80bd311faa2f67f4e1a6112852a03a819e3c98424935902157db",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Azure Storage: Set Blob Metadata",
@@ -15874,6 +16170,13 @@
         "label": "Metadata (JSON)",
         "placeholder": "{\"reviewed\":\"true\"} — replaces ALL existing metadata",
         "required": true
+      },
+      {
+        "name": "lease_id",
+        "type": "string",
+        "value": null,
+        "label": "Lease ID",
+        "placeholder": "Only needed when the blob or container is leased — the Lease ID output of a Lease step"
       }
     ],
     "outputs": [
@@ -15915,7 +16218,7 @@
     ]
   },
   "azure/storage/blob_set_properties": {
-    "hash": "5c773576b3f5df4971bf027a7af9e615ed99f1be8070f7b207b607c7c3deffed",
+    "hash": "434281cea35336e93a7e7d42b12668d550d9e5a6b2b517a127b5ffb3c01aec35",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Azure Storage: Set Blob Properties",
@@ -16077,6 +16380,13 @@
         "value": null,
         "label": "Content Language",
         "placeholder": "en-GB"
+      },
+      {
+        "name": "lease_id",
+        "type": "string",
+        "value": null,
+        "label": "Lease ID",
+        "placeholder": "Only needed when the blob or container is leased — the Lease ID output of a Lease step"
       }
     ],
     "outputs": [
@@ -16118,7 +16428,7 @@
     ]
   },
   "azure/storage/blob_set_tags": {
-    "hash": "886fb728bda5990eefbb465f60373d1443f1731c015b9012dcca069cf93776ff",
+    "hash": "e025bf6075707892c4f9a8181437c03bf62912824867f43ee9b62d6ce672ce80",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Azure Storage: Set Blob Tags",
@@ -16253,6 +16563,13 @@
         "label": "Tags (JSON)",
         "placeholder": "{\"project\":\"alpha\",\"status\":\"final\"} — replaces ALL existing tags",
         "required": true
+      },
+      {
+        "name": "lease_id",
+        "type": "string",
+        "value": null,
+        "label": "Lease ID",
+        "placeholder": "Only needed when the blob or container is leased — the Lease ID output of a Lease step"
       }
     ],
     "outputs": [
@@ -16294,7 +16611,7 @@
     ]
   },
   "azure/storage/blob_set_tier": {
-    "hash": "902cf6d83d333c9f0c124b608ea5a740051b0ae1ff2319815d6eb5860d2e1c67",
+    "hash": "b69cd1f92fa6592a0d9ffb9595d4584b9272420418d1f20bd5998417afd22c94",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Azure Storage: Set Blob Tier",
@@ -16468,6 +16785,13 @@
             "value": "High"
           }
         ]
+      },
+      {
+        "name": "lease_id",
+        "type": "string",
+        "value": null,
+        "label": "Lease ID",
+        "placeholder": "Only needed when the blob or container is leased — the Lease ID output of a Lease step"
       }
     ],
     "outputs": [
@@ -16852,7 +17176,7 @@
     ]
   },
   "azure/storage/blob_upload": {
-    "hash": "223470d33002e4ca3121723a306fef64e8ce5df781a3fc9d2878172e8b071be6",
+    "hash": "347441b03865db7d1f723212db591f69adc884fdb69c564dc67ad225fcbf4371",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Azure Storage: Upload Blob",
@@ -17044,6 +17368,13 @@
         "value": null,
         "label": "Overwrite",
         "placeholder": "On by default. Turn off to fail instead of replacing an existing blob"
+      },
+      {
+        "name": "lease_id",
+        "type": "string",
+        "value": null,
+        "label": "Lease ID",
+        "placeholder": "Only needed when the blob or container is leased — the Lease ID output of a Lease step"
       }
     ],
     "outputs": [
@@ -17463,7 +17794,7 @@
     ]
   },
   "azure/storage/container_delete": {
-    "hash": "7165331ed98ab131a6391dde1e4b7192bac8ec9dfd9a8f33667a240006eb05f4",
+    "hash": "c129001485cc22b9095e02670f1a7a075cdc991d94dff0b37fca90f152c933a2",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Azure Storage: Delete Container",
@@ -17582,6 +17913,13 @@
         "label": "Container Name",
         "placeholder": "my-container",
         "required": true
+      },
+      {
+        "name": "lease_id",
+        "type": "string",
+        "value": null,
+        "label": "Lease ID",
+        "placeholder": "Only needed when the blob or container is leased — the Lease ID output of a Lease step"
       }
     ],
     "outputs": [
@@ -17623,7 +17961,7 @@
     ]
   },
   "azure/storage/container_get": {
-    "hash": "776913cecb69ddb9a8605104af0169345bebe4d26102e0a8e6f9e44c31a2d8da",
+    "hash": "e3eecd5a4dd4676065a8184f452ccd8942be6ba4a8072e22c4c40977375697c9",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Azure Storage: Get Container",
@@ -17742,6 +18080,13 @@
         "label": "Container Name",
         "placeholder": "my-container",
         "required": true
+      },
+      {
+        "name": "lease_id",
+        "type": "string",
+        "value": null,
+        "label": "Lease ID",
+        "placeholder": "Only needed when the blob or container is leased — the Lease ID output of a Lease step"
       }
     ],
     "outputs": [
@@ -17980,8 +18325,268 @@
       }
     ]
   },
+  "azure/storage/container_lease": {
+    "hash": "aa7825068ff58160741b67662648a96fb7c264ac094fe2f7e51dcb34a7ed0984",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Azure Storage: Lease Container",
+    "description": "Take, extend, or release a lock on a container. A container lease guards the container itself — deleting it, or changing its metadata — not the blobs inside it. Acquire returns a Lease ID to pass to the Lease ID field of a Delete Container or Set Container Metadata step",
+    "website": "https://www.flomation.co",
+    "icon": "azure+lock",
+    "date": "16/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Azure",
+      "icon": "azure",
+      "description": "Microsoft Azure integrations"
+    },
+    "sub_category": {
+      "name": "Storage",
+      "icon": "box-archive",
+      "description": "Azure Blob Storage — containers, blobs, tiers, tags, and shared access links"
+    },
+    "inputs": [
+      {
+        "name": "account_name",
+        "type": "string",
+        "value": null,
+        "label": "Storage Account",
+        "placeholder": "mystorageaccount",
+        "required": true
+      },
+      {
+        "name": "auth_method",
+        "type": "string",
+        "value": null,
+        "label": "Authentication",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "Shared Key",
+            "value": "shared_key"
+          },
+          {
+            "name": "Microsoft Entra (service principal)",
+            "value": "entra"
+          }
+        ]
+      },
+      {
+        "name": "account_key",
+        "type": "secret",
+        "value": null,
+        "label": "Account Key",
+        "placeholder": "Base64 account key — Storage Account ▸ Access keys",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "",
+            "shared_key"
+          ]
+        }
+      },
+      {
+        "name": "azure_tenant_id",
+        "type": "string",
+        "value": null,
+        "label": "Tenant ID",
+        "placeholder": "Directory (tenant) ID — a GUID or your-tenant.onmicrosoft.com",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "entra"
+          ]
+        }
+      },
+      {
+        "name": "azure_client_id",
+        "type": "string",
+        "value": null,
+        "label": "Client ID",
+        "placeholder": "Application (client) ID of the service principal",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "entra"
+          ]
+        }
+      },
+      {
+        "name": "azure_client_secret",
+        "type": "secret",
+        "value": null,
+        "label": "Client Secret",
+        "placeholder": "The app needs a Storage Blob Data role on the account (RBAC)",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "entra"
+          ]
+        }
+      },
+      {
+        "name": "endpoint",
+        "type": "string",
+        "value": null,
+        "label": "Custom Endpoint",
+        "placeholder": "https://myaccount.blob.core.windows.net — leave blank to derive; Azurite: http://host:10000/devstoreaccount1"
+      },
+      {
+        "name": "allow_insecure",
+        "type": "boolean",
+        "value": null,
+        "label": "Allow Insecure TLS",
+        "placeholder": "Skip TLS verification — only for custom endpoints with a self-signed certificate"
+      },
+      {
+        "name": "container",
+        "type": "string",
+        "value": null,
+        "label": "Container Name",
+        "placeholder": "my-container",
+        "required": true
+      },
+      {
+        "name": "lease_action",
+        "type": "string",
+        "value": null,
+        "label": "Lease Action",
+        "placeholder": "",
+        "required": true,
+        "options": [
+          {
+            "name": "Acquire — take the lock",
+            "value": "acquire"
+          },
+          {
+            "name": "Renew — extend the lock you hold",
+            "value": "renew"
+          },
+          {
+            "name": "Change — swap the lock's ID",
+            "value": "change"
+          },
+          {
+            "name": "Release — hand the lock back",
+            "value": "release"
+          },
+          {
+            "name": "Break — end someone else's lock",
+            "value": "break"
+          }
+        ]
+      },
+      {
+        "name": "lease_id",
+        "type": "string",
+        "value": null,
+        "label": "Lease ID",
+        "placeholder": "The Lease ID output of the Acquire step — optional on Break, which does not need it",
+        "visible_when": {
+          "field": "lease_action",
+          "values": [
+            "renew",
+            "change",
+            "release",
+            "break"
+          ]
+        }
+      },
+      {
+        "name": "proposed_lease_id",
+        "type": "string",
+        "value": null,
+        "label": "Proposed Lease ID",
+        "placeholder": "A GUID to use as the lease's ID — leave blank on Acquire to let Azure choose one",
+        "visible_when": {
+          "field": "lease_action",
+          "values": [
+            "acquire",
+            "change"
+          ]
+        }
+      },
+      {
+        "name": "duration",
+        "type": "integer",
+        "value": null,
+        "label": "Duration (seconds)",
+        "placeholder": "15-60 seconds, or -1 to hold the lease until it is released",
+        "visible_when": {
+          "field": "lease_action",
+          "values": [
+            "acquire"
+          ]
+        }
+      },
+      {
+        "name": "break_period",
+        "type": "integer",
+        "value": null,
+        "label": "Break Period (seconds)",
+        "placeholder": "0-60 — how long the lease may still run. 0 ends it immediately. Blank lets it run out its remaining time",
+        "visible_when": {
+          "field": "lease_action",
+          "values": [
+            "break"
+          ]
+        }
+      }
+    ],
+    "outputs": [
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Container Name",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Result",
+        "placeholder": ""
+      },
+      {
+        "name": "lease_id",
+        "type": "string",
+        "value": null,
+        "label": "Lease ID",
+        "placeholder": ""
+      },
+      {
+        "name": "lease_time",
+        "type": "integer",
+        "value": null,
+        "label": "Lease Time Remaining (seconds)",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
   "azure/storage/container_set_metadata": {
-    "hash": "c8c5ce43aa0a47e3da41a94b2f916b35cfe1f78cedebf63a6dda014bd39577a7",
+    "hash": "c1286e593d7fcb1effb6e1f3d77f13b6c9a3873a749b90d9e109231a8a3f1781",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Azure Storage: Set Container Metadata",
@@ -18108,6 +18713,13 @@
         "label": "Metadata (JSON)",
         "placeholder": "{\"project\":\"alpha\"} — replaces ALL existing metadata",
         "required": true
+      },
+      {
+        "name": "lease_id",
+        "type": "string",
+        "value": null,
+        "label": "Lease ID",
+        "placeholder": "Only needed when the blob or container is leased — the Lease ID output of a Lease step"
       }
     ],
     "outputs": [
@@ -154459,7 +155071,7 @@
     ]
   },
   "vectordatabase/azureaisearch/index_stats": {
-    "hash": "ba2d13e67a0e504d4c6cd348dcf3fe16b3e2534456be8d43e95cf6e61bdcbab8",
+    "hash": "90e42cdcbbbdb49596c1e77102419572d8426e84d26a240177ba426bb870ba3a",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Azure AI Search: Get Index Statistics",

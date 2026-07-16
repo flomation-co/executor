@@ -31,6 +31,7 @@ var Inputs = [...]core.Connection{
 	{Name: "allow_insecure", Type: core.ConnectionTypeBoolean, Label: "Allow Insecure TLS", Placeholder: "Skip TLS verification — only for custom endpoints with a self-signed certificate"},
 	{Name: "container", Type: core.ConnectionTypeString, Label: "Container Name", Placeholder: "my-container", Required: true},
 	{Name: "metadata", Type: core.ConnectionTypeObject, Label: "Metadata (JSON)", Placeholder: `{"project":"alpha"} — replaces ALL existing metadata`, Required: true},
+	{Name: "lease_id", Type: core.ConnectionTypeString, Label: "Lease ID", Placeholder: "Only needed when the blob or container is leased — the Lease ID output of a Lease step"},
 }
 
 var Outputs = [...]core.Connection{
@@ -58,6 +59,7 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	if len(headers) == 0 {
 		return storage.ErrorResult("metadata is required"), nil
 	}
+	headers = storage.LeaseHeader(headers, inputs)
 
 	resp, err := storage.Do(flow, auth, storage.Request{
 		Method:  http.MethodPut,

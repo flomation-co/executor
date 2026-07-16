@@ -1,3 +1,11 @@
+// Package azureaisearch_index_stats implements vectordatabase/azureaisearch/index_stats.
+//
+// The counts here come from Azure's /stats endpoint, which it recomputes
+// periodically rather than on write: seconds after an upload it still reports
+// documentCount 0 while /docs/$count already reports the true number
+// (verified against a live Free-tier service). That lag is Azure's, not this
+// action's — a flow that needs an authoritative count immediately after
+// indexing should use document_count.
 package vectordatabase_azureaisearch_index_stats
 
 import (

@@ -821,6 +821,225 @@ func TagsHeaderValue(tags map[string]string) string {
 }
 
 // ---------------------------------------------------------------------------
+// Leases
+// ---------------------------------------------------------------------------
+
+// A lease is a write lock on a blob or container, held for a fixed duration
+// (or indefinitely) and identified by a GUID. Two halves live here:
+//
+//   - LeaseIDInput / LeaseHeader — the x-ms-lease-id an EXISTING action sends
+//     to prove it holds the lock. Without it, every write to a leased resource
+//     is refused with 412 LeaseIdMissing. Reads are not blocked by a lease, but
+//     the header is still accepted on them as an assertion: "fail unless the
+//     lease is active and mine".
+//   - LeaseActionOptions / BuildLeaseCall / LeaseResult — the lifecycle
+//     (PUT ?comp=lease) that MINTS those IDs. It is what makes the input above
+//     usable: without an acquire, a lease ID could only ever arrive from
+//     outside the platform.
+const (
+	LeaseAcquire = "acquire"
+	LeaseRenew   = "renew"
+	LeaseChange  = "change"
+	LeaseRelease = "release"
+	LeaseBreak   = "break"
+)
+
+// Lease duration bounds. A finite lease is 15-60 seconds; -1 means "held until
+// released", which is the sharp one — an infinite lease survives the flow that
+// took it, so an operator who never releases it locks the blob for good (only
+// a break clears it).
+const (
+	LeaseInfiniteDuration = -1
+	leaseMinDuration      = 15
+	leaseMaxDuration      = 60
+	// LeaseDefaultDuration is what an unset Duration means. 60s is the longest
+	// FINITE lease: the safest default, because the worst case of a flow that
+	// dies holding it is a minute of waiting, not a permanently locked blob.
+	LeaseDefaultDuration = 60
+	leaseMaxBreakPeriod  = 60
+)
+
+// LeaseActionOptions is the lease_action dropdown, shared by blob_lease and
+// container_lease so the two nodes cannot drift apart.
+var LeaseActionOptions = []core.ConnectionOption{
+	{Name: "Acquire — take the lock", Value: LeaseAcquire},
+	{Name: "Renew — extend the lock you hold", Value: LeaseRenew},
+	{Name: "Change — swap the lock's ID", Value: LeaseChange},
+	{Name: "Release — hand the lock back", Value: LeaseRelease},
+	{Name: "Break — end someone else's lock", Value: LeaseBreak},
+}
+
+// LeaseIDInput is the canonical optional lease-id field carried by every
+// action that touches a resource somebody may have leased. Like AuthInputs it
+// is documentation rather than enforcement (the manifest generator AST-parses
+// each action's literal), so storage_inputs_drift_test.go compares the copies
+// against it.
+//
+// It is deliberately NOT part of the credential block: a lease ID is an
+// operator-supplied fact about one call, not a credential, so it sits with the
+// resource fields and the auth-block drift assertion stays untouched.
+var LeaseIDInput = core.Connection{
+	Name:        "lease_id",
+	Type:        core.ConnectionTypeString,
+	Label:       "Lease ID",
+	Placeholder: "Only needed when the blob or container is leased — the Lease ID output of a Lease step",
+}
+
+// LeaseHeader adds x-ms-lease-id to h when the action's lease_id input is set,
+// allocating h when the caller had no headers of its own. A BLANK input must
+// send no header at all: an empty x-ms-lease-id is not "no lease", it is an
+// invalid one, and the service answers 400 rather than performing the
+// unleased operation the operator meant.
+func LeaseHeader(h map[string]string, inputs []*core.Connection) map[string]string {
+	id := OptionalString("lease_id", inputs)
+	if id == "" {
+		return h
+	}
+	if h == nil {
+		h = map[string]string{}
+	}
+	h["x-ms-lease-id"] = id
+	return h
+}
+
+// leaseIDRe is the GUID form Azure requires of a proposed lease ID. The
+// service rejects anything else with a bare 400 InvalidHeaderValue naming only
+// the header, so the check is worth making here where the message can name the
+// field and the rule.
+var leaseIDRe = regexp.MustCompile(`^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$`)
+
+// LeaseCall is one resolved Lease Blob / Lease Container request: the action
+// chosen, the x-ms-lease-* headers it implies, and the two numbers the summary
+// needs back.
+type LeaseCall struct {
+	Action      string
+	Headers     map[string]string
+	Duration    int // acquire only
+	BreakPeriod int // break only; -1 when not specified
+}
+
+// BuildLeaseCall resolves the lease inputs into headers, rejecting the
+// combinations the service would reject — with a message that names the field
+// instead of the header. Every error is an operator-configuration problem, so
+// callers surface them via ErrorResult.
+func BuildLeaseCall(inputs []*core.Connection) (LeaseCall, error) {
+	action, err := RequiredString("lease_action", inputs)
+	if err != nil {
+		return LeaseCall{}, err
+	}
+	action = strings.ToLower(action)
+
+	c := LeaseCall{Action: action, BreakPeriod: -1, Headers: map[string]string{"x-ms-lease-action": action}}
+	leaseID := OptionalString("lease_id", inputs)
+	proposed := OptionalString("proposed_lease_id", inputs)
+
+	switch action {
+	case LeaseAcquire:
+		duration, ok := OptionalInt("duration", inputs)
+		if !ok {
+			duration = LeaseDefaultDuration
+		}
+		if duration != LeaseInfiniteDuration && (duration < leaseMinDuration || duration > leaseMaxDuration) {
+			return LeaseCall{}, fmt.Errorf("duration must be between %d and %d seconds, or -1 to hold the lease until it is released (got %d)",
+				leaseMinDuration, leaseMaxDuration, duration)
+		}
+		c.Duration = duration
+		c.Headers["x-ms-lease-duration"] = strconv.Itoa(duration)
+		// On acquire the ID travels as x-ms-proposed-lease-id, never
+		// x-ms-lease-id: there is no lease yet to name. Blank means the
+		// service mints one and reports it back.
+		if proposed != "" {
+			if !leaseIDRe.MatchString(proposed) {
+				return LeaseCall{}, fmt.Errorf("proposed_lease_id must be a GUID, e.g. 8b1c6a2e-0f9d-4a3b-9c5e-7d2f1a4b6c8d (got %q) — leave it blank to let Azure choose one", proposed)
+			}
+			c.Headers["x-ms-proposed-lease-id"] = proposed
+		}
+	case LeaseRenew, LeaseRelease:
+		if leaseID == "" {
+			return LeaseCall{}, fmt.Errorf("lease_id is required to %s a lease — it is the Lease ID output of the Acquire step", action)
+		}
+		c.Headers["x-ms-lease-id"] = leaseID
+	case LeaseChange:
+		if leaseID == "" {
+			return LeaseCall{}, fmt.Errorf("lease_id is required to change a lease — it is the ID the lease has now")
+		}
+		if proposed == "" {
+			return LeaseCall{}, fmt.Errorf("proposed_lease_id is required to change a lease — it is the ID the lease will have next")
+		}
+		if !leaseIDRe.MatchString(proposed) {
+			return LeaseCall{}, fmt.Errorf("proposed_lease_id must be a GUID, e.g. 8b1c6a2e-0f9d-4a3b-9c5e-7d2f1a4b6c8d (got %q)", proposed)
+		}
+		c.Headers["x-ms-lease-id"] = leaseID
+		c.Headers["x-ms-proposed-lease-id"] = proposed
+	case LeaseBreak:
+		// Break is the only action that does not need the ID: breaking a lease
+		// is precisely what an operator who never had it does. Sent when known,
+		// which narrows the break to that specific lease.
+		if leaseID != "" {
+			c.Headers["x-ms-lease-id"] = leaseID
+		}
+		if period, ok := OptionalInt("break_period", inputs); ok {
+			if period < 0 || period > leaseMaxBreakPeriod {
+				return LeaseCall{}, fmt.Errorf("break_period must be between 0 and %d seconds — 0 ends the lease immediately (got %d)", leaseMaxBreakPeriod, period)
+			}
+			c.BreakPeriod = period
+			c.Headers["x-ms-lease-break-period"] = strconv.Itoa(period)
+		}
+	default:
+		return LeaseCall{}, fmt.Errorf("lease_action %q is not supported (use acquire, renew, change, release or break)", action)
+	}
+	return c, nil
+}
+
+// LeaseResult shapes a lease response into the standard action output plus the
+// two things a downstream node needs: lease_id — the whole point, since every
+// leased write must quote it — and lease_time, the seconds a break still has
+// to run. target is how the resource is named in the summary ("hello.txt",
+// "container my-container").
+func LeaseResult(c LeaseCall, id, target string, resp *APIResponse) map[string]interface{} {
+	leaseID := resp.Headers.Get("x-ms-lease-id")
+
+	// x-ms-lease-time comes back on break (and on a renew of a finite lease).
+	// Absent ⇒ 0: for a break that is exactly right, because no header means
+	// the lease is already gone.
+	leaseTime := 0
+	if v := resp.Headers.Get("x-ms-lease-time"); v != "" {
+		if n, err := strconv.Atoi(v); err == nil {
+			leaseTime = n
+		}
+	}
+
+	var summary string
+	switch c.Action {
+	case LeaseAcquire:
+		if c.Duration == LeaseInfiniteDuration {
+			summary = fmt.Sprintf("Acquired an infinite lease on %s", target)
+		} else {
+			summary = fmt.Sprintf("Acquired a %ds lease on %s", c.Duration, target)
+		}
+	case LeaseRenew:
+		summary = fmt.Sprintf("Renewed the lease on %s", target)
+	case LeaseChange:
+		summary = fmt.Sprintf("Changed the lease ID on %s", target)
+	case LeaseRelease:
+		summary = fmt.Sprintf("Released the lease on %s", target)
+	case LeaseBreak:
+		if leaseTime > 0 {
+			summary = fmt.Sprintf("Broke the lease on %s — it ends in %ds", target, leaseTime)
+		} else {
+			summary = fmt.Sprintf("Broke the lease on %s", target)
+		}
+	}
+
+	out := ResourceResult(id, HeadersResult(id, resp.Headers), summary)
+	result := out["result"].(map[string]interface{})
+	result["leaseAction"] = c.Action
+	out["lease_id"] = leaseID
+	out["lease_time"] = leaseTime
+	return out
+}
+
+// ---------------------------------------------------------------------------
 // XML envelopes
 // ---------------------------------------------------------------------------
 

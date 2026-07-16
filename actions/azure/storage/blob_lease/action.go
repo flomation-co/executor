@@ -1,7 +1,6 @@
-package azure_storage_blob_set_properties
+package azure_storage_blob_lease
 
 import (
-	"fmt"
 	"net/http"
 	"net/url"
 
@@ -12,10 +11,10 @@ import (
 const (
 	Author       = "Dave McElin"
 	Organisation = "Flomation"
-	Name         = "Azure Storage: Set Blob Properties"
-	Description  = "Change a blob's HTTP properties (content type, cache control, disposition, encoding, language) without re-uploading. CAUTION: Azure treats this as a replace — any of the five properties left blank here is CLEARED on the blob"
+	Name         = "Azure Storage: Lease Blob"
+	Description  = "Take, extend, or release a write lock on a blob. Acquire returns a Lease ID — pass it to the Lease ID field of any Upload/Delete/Set step to write to the locked blob; every write WITHOUT it is refused while the lease is held. Break ends a lease you do not hold"
 	Website      = "https://www.flomation.co"
-	Icon         = "azure+gear"
+	Icon         = "azure+lock"
 	Date         = "16/07/2026"
 	Type         = core.ActionTypeAction
 )
@@ -31,17 +30,55 @@ var Inputs = [...]core.Connection{
 	{Name: "allow_insecure", Type: core.ConnectionTypeBoolean, Label: "Allow Insecure TLS", Placeholder: "Skip TLS verification — only for custom endpoints with a self-signed certificate"},
 	{Name: "container", Type: core.ConnectionTypeString, Label: "Container", Placeholder: "my-container", Required: true},
 	{Name: "blob_name", Type: core.ConnectionTypeString, Label: "Blob Name", Placeholder: "reports/2026/summary.pdf", Required: true},
-	{Name: "content_type", Type: core.ConnectionTypeString, Label: "Content Type", Placeholder: "application/pdf"},
-	{Name: "cache_control", Type: core.ConnectionTypeString, Label: "Cache Control", Placeholder: "max-age=3600"},
-	{Name: "content_disposition", Type: core.ConnectionTypeString, Label: "Content Disposition", Placeholder: `attachment; filename="summary.pdf"`},
-	{Name: "content_encoding", Type: core.ConnectionTypeString, Label: "Content Encoding", Placeholder: "gzip"},
-	{Name: "content_language", Type: core.ConnectionTypeString, Label: "Content Language", Placeholder: "en-GB"},
-	{Name: "lease_id", Type: core.ConnectionTypeString, Label: "Lease ID", Placeholder: "Only needed when the blob or container is leased — the Lease ID output of a Lease step"},
+	{
+		Name:     "lease_action",
+		Type:     core.ConnectionTypeString,
+		Label:    "Lease Action",
+		Required: true,
+		Options: []core.ConnectionOption{
+			{Name: "Acquire — take the lock", Value: "acquire"},
+			{Name: "Renew — extend the lock you hold", Value: "renew"},
+			{Name: "Change — swap the lock's ID", Value: "change"},
+			{Name: "Release — hand the lock back", Value: "release"},
+			{Name: "Break — end someone else's lock", Value: "break"},
+		},
+	},
+	{
+		Name:        "lease_id",
+		Type:        core.ConnectionTypeString,
+		Label:       "Lease ID",
+		Placeholder: "The Lease ID output of the Acquire step — optional on Break, which does not need it",
+		Visible:     &core.VisibleWhen{Field: "lease_action", Values: []string{"renew", "change", "release", "break"}},
+	},
+	{
+		Name:        "proposed_lease_id",
+		Type:        core.ConnectionTypeString,
+		Label:       "Proposed Lease ID",
+		Placeholder: "A GUID to use as the lease's ID — leave blank on Acquire to let Azure choose one",
+		Visible:     &core.VisibleWhen{Field: "lease_action", Values: []string{"acquire", "change"}},
+	},
+	{
+		Name:        "duration",
+		Type:        core.ConnectionTypeInteger,
+		Label:       "Duration (seconds)",
+		Placeholder: "15-60 seconds, or -1 to hold the lease until it is released",
+		Value:       60,
+		Visible:     &core.VisibleWhen{Field: "lease_action", Values: []string{"acquire"}},
+	},
+	{
+		Name:        "break_period",
+		Type:        core.ConnectionTypeInteger,
+		Label:       "Break Period (seconds)",
+		Placeholder: "0-60 — how long the lease may still run. 0 ends it immediately. Blank lets it run out its remaining time",
+		Visible:     &core.VisibleWhen{Field: "lease_action", Values: []string{"break"}},
+	},
 }
 
 var Outputs = [...]core.Connection{
 	{Name: "id", Type: core.ConnectionTypeString, Label: "Blob Name"},
 	{Name: "result", Type: core.ConnectionTypeObject, Label: "Result"},
+	{Name: "lease_id", Type: core.ConnectionTypeString, Label: "Lease ID"},
+	{Name: "lease_time", Type: core.ConnectionTypeInteger, Label: "Lease Time Remaining (seconds)"},
 	{Name: "tool_result", Type: core.ConnectionTypeString, Label: "Result Summary"},
 	{Name: "success", Type: core.ConnectionTypeBoolean, Label: "Success"},
 	{Name: "error", Type: core.ConnectionTypeString, Label: "Error"},
@@ -60,37 +97,16 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	if err != nil {
 		return storage.ErrorResult(err.Error()), nil
 	}
-
-	// Set Blob Properties REPLACES the whole x-ms-blob-content-* set: a slot
-	// omitted from the request is cleared on the blob. There is no read-
-	// modify-write here on purpose — the Description warns instead, and the
-	// operator sends every property they want kept.
-	headers := map[string]string{}
-	for input, header := range map[string]string{
-		"content_type":        "x-ms-blob-content-type",
-		"cache_control":       "x-ms-blob-cache-control",
-		"content_disposition": "x-ms-blob-content-disposition",
-		"content_encoding":    "x-ms-blob-content-encoding",
-		"content_language":    "x-ms-blob-content-language",
-	} {
-		if v := storage.OptionalString(input, inputs); v != "" {
-			headers[header] = v
-		}
+	call, err := storage.BuildLeaseCall(inputs)
+	if err != nil {
+		return storage.ErrorResult(err.Error()), nil
 	}
-	if len(headers) == 0 {
-		return storage.ErrorResult("set at least one property (content_type, cache_control, content_disposition, content_encoding, content_language)"), nil
-	}
-	// Counted BEFORE the lease header joins them: x-ms-lease-id proves the
-	// caller holds the lock, it is not a property being set, and the summary
-	// would otherwise claim one more property than the operator asked for.
-	propertyCount := len(headers)
-	headers = storage.LeaseHeader(headers, inputs)
 
 	resp, err := storage.Do(flow, auth, storage.Request{
 		Method:  http.MethodPut,
 		Path:    storage.BlobPath(container, blobName),
-		Query:   url.Values{"comp": []string{"properties"}},
-		Headers: headers,
+		Query:   url.Values{"comp": []string{"lease"}},
+		Headers: call.Headers,
 	})
 	if err != nil {
 		return storage.ErrorResult(err.Error()), nil
@@ -98,7 +114,5 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	if err := storage.CheckResponse(resp); err != nil {
 		return storage.ErrorResult(err.Error()), nil
 	}
-
-	return storage.ResourceResult(blobName, storage.HeadersResult(blobName, resp.Headers),
-		fmt.Sprintf("Set %d properties on %s", propertyCount, blobName)), nil
+	return storage.LeaseResult(call, blobName, blobName, resp), nil
 }

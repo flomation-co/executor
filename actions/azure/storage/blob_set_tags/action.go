@@ -32,6 +32,7 @@ var Inputs = [...]core.Connection{
 	{Name: "container", Type: core.ConnectionTypeString, Label: "Container", Placeholder: "my-container", Required: true},
 	{Name: "blob_name", Type: core.ConnectionTypeString, Label: "Blob Name", Placeholder: "reports/2026/summary.pdf", Required: true},
 	{Name: "tags", Type: core.ConnectionTypeObject, Label: "Tags (JSON)", Placeholder: `{"project":"alpha","status":"final"} — replaces ALL existing tags`, Required: true},
+	{Name: "lease_id", Type: core.ConnectionTypeString, Label: "Lease ID", Placeholder: "Only needed when the blob or container is leased — the Lease ID output of a Lease step"},
 }
 
 var Outputs = [...]core.Connection{
@@ -70,6 +71,7 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 		Method:      http.MethodPut,
 		Path:        storage.BlobPath(container, blobName),
 		Query:       url.Values{"comp": []string{"tags"}},
+		Headers:     storage.LeaseHeader(nil, inputs),
 		Body:        storage.TagsXMLBody(tags),
 		ContentType: "application/xml; charset=UTF-8",
 	})

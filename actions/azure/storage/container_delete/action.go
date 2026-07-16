@@ -30,6 +30,7 @@ var Inputs = [...]core.Connection{
 	{Name: "endpoint", Type: core.ConnectionTypeString, Label: "Custom Endpoint", Placeholder: "https://myaccount.blob.core.windows.net — leave blank to derive; Azurite: http://host:10000/devstoreaccount1"},
 	{Name: "allow_insecure", Type: core.ConnectionTypeBoolean, Label: "Allow Insecure TLS", Placeholder: "Skip TLS verification — only for custom endpoints with a self-signed certificate"},
 	{Name: "container", Type: core.ConnectionTypeString, Label: "Container Name", Placeholder: "my-container", Required: true},
+	{Name: "lease_id", Type: core.ConnectionTypeString, Label: "Lease ID", Placeholder: "Only needed when the blob or container is leased — the Lease ID output of a Lease step"},
 }
 
 var Outputs = [...]core.Connection{
@@ -51,9 +52,10 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	}
 
 	resp, err := storage.Do(flow, auth, storage.Request{
-		Method: http.MethodDelete,
-		Path:   storage.ContainerPath(container),
-		Query:  url.Values{"restype": []string{"container"}},
+		Method:  http.MethodDelete,
+		Path:    storage.ContainerPath(container),
+		Query:   url.Values{"restype": []string{"container"}},
+		Headers: storage.LeaseHeader(nil, inputs),
 	})
 	if err != nil {
 		return storage.ErrorResult(err.Error()), nil

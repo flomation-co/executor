@@ -31,6 +31,7 @@ var Inputs = [...]core.Connection{
 	{Name: "allow_insecure", Type: core.ConnectionTypeBoolean, Label: "Allow Insecure TLS", Placeholder: "Skip TLS verification — only for custom endpoints with a self-signed certificate"},
 	{Name: "container", Type: core.ConnectionTypeString, Label: "Container", Placeholder: "my-container", Required: true},
 	{Name: "blob_name", Type: core.ConnectionTypeString, Label: "Blob Name", Placeholder: "reports/2026/summary.pdf", Required: true},
+	{Name: "lease_id", Type: core.ConnectionTypeString, Label: "Lease ID", Placeholder: "Only needed when the blob or container is leased — the Lease ID output of a Lease step"},
 }
 
 var Outputs = [...]core.Connection{
@@ -59,9 +60,10 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	// whole body just to learn the same properties. A HEAD error has no XML
 	// body either; CheckResponse falls back to the x-ms-error-code header.
 	resp, err := storage.Do(flow, auth, storage.Request{
-		Method: http.MethodHead,
-		Path:   storage.BlobPath(container, blobName),
-		Query:  url.Values{},
+		Method:  http.MethodHead,
+		Path:    storage.BlobPath(container, blobName),
+		Query:   url.Values{},
+		Headers: storage.LeaseHeader(nil, inputs),
 	})
 	if err != nil {
 		return storage.ErrorResult(err.Error()), nil

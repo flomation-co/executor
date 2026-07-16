@@ -8,6 +8,7 @@ import (
 	"net/http/httptest"
 	"strings"
 	"testing"
+	"time"
 
 	entra "flomation.app/automate/executor/actions/azure/entra"
 
@@ -24,8 +25,16 @@ import (
 
 func TestGroupCreateSecurityDefaults(t *testing.T) {
 	defer entra.SetTokenForTest("tok")()
+	defer entra.SetReplicationForTest(2, time.Millisecond)()
 	var gotBody map[string]interface{}
 	srv := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		// group_create polls GET /groups/{id} after the POST until Graph will
+		// serve the new object — see entra.WaitUntilReadable.
+		if r.Method == http.MethodGet {
+			w.WriteHeader(200)
+			_, _ = w.Write([]byte(`{"id":"g-new"}`))
+			return
+		}
 		if r.Method != "POST" || r.URL.Path != "/v1.0/groups" {
 			t.Errorf("call = %s %s", r.Method, r.URL.Path)
 		}
@@ -56,9 +65,17 @@ func TestGroupCreateSecurityDefaults(t *testing.T) {
 
 func TestGroupCreateUnifiedDynamicWithOwners(t *testing.T) {
 	defer entra.SetTokenForTest("tok")()
+	defer entra.SetReplicationForTest(2, time.Millisecond)()
 	var gotBody map[string]interface{}
 	var srv *httptest.Server
 	srv = httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		// The bodyless readiness GET (entra.WaitUntilReadable) must not clobber
+		// the created body under assertion.
+		if r.Method == http.MethodGet {
+			w.WriteHeader(200)
+			_, _ = w.Write([]byte(`{"id":"g-new"}`))
+			return
+		}
 		gotBody = decodeBody(t, r)
 		w.WriteHeader(201)
 		_, _ = w.Write([]byte(`{"id":"g-new"}`))

@@ -127,6 +127,12 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 		return entra.ErrorResult(err.Error()), nil
 	}
 	out := entra.ResourceResult(obj, "")
+	// Graph replicates a new group asynchronously, so the id above 404s for a
+	// few seconds. Wait for it here rather than hand a downstream "add members"
+	// step an id that is not yet real.
+	if id, ok := out["id"].(string); ok {
+		entra.WaitUntilReadable(flow, auth, "/groups", id)
+	}
 	out["tool_result"] = fmt.Sprintf("Created group %s (%s)", displayName, out["id"])
 	return out, nil
 }

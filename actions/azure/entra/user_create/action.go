@@ -99,6 +99,11 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 		return entra.ErrorResult(err.Error()), nil
 	}
 	out := entra.ResourceResult(obj, "")
+	// As with groups, Graph replicates a new user asynchronously — wait so the
+	// id this hands downstream is one the next step can actually use.
+	if id, ok := out["id"].(string); ok {
+		entra.WaitUntilReadable(flow, auth, "/users", id)
+	}
 	out["tool_result"] = fmt.Sprintf("Created user %s (%s)", upn, out["id"])
 	return out, nil
 }

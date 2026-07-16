@@ -291,9 +291,15 @@ func TestExecuteSamplingParamsOmittedWhenUnset(t *testing.T) {
 	Expect(reqBody).To(Not(HaveKey("frequency_penalty")))
 	Expect(reqBody).To(Not(HaveKey("presence_penalty")))
 	Expect(reqBody).To(Not(HaveKey("response_format")))
-	// The always-sent baseline params remain.
-	Expect(reqBody["temperature"]).To(Equal(0.7))
-	Expect(reqBody["max_tokens"]).To(Equal(float64(2048)))
+	// Temperature is omitted too when blank: reasoning deployments (o-series,
+	// GPT-5) accept ONLY their default of 1 and reject an explicit value with a
+	// 400, so an unasked-for default of ours would break them. Verified against
+	// a live gpt-5-mini deployment.
+	Expect(reqBody).To(Not(HaveKey("temperature")))
+	// The cap travels as max_completion_tokens — the only spelling the
+	// reasoning families accept; legacy deployments get a max_tokens retry.
+	Expect(reqBody).To(Not(HaveKey("max_tokens")))
+	Expect(reqBody["max_completion_tokens"]).To(Equal(float64(2048)))
 }
 
 func TestExecuteToolCalls(t *testing.T) {
@@ -500,7 +506,10 @@ func TestExecuteAPIErrorHardAndRedacted(t *testing.T) {
 	Expect(err.Error()).To(ContainSubstring("********"))
 }
 
-func TestExecuteInvalidTemperatureFallsBack(t *testing.T) {
+// A malformed temperature is omitted rather than replaced with a guess: the
+// deployment's own default is the only value guaranteed to be accepted, and
+// silently substituting 0.7 would 400 against a reasoning deployment.
+func TestExecuteInvalidTemperatureIsOmitted(t *testing.T) {
 	RegisterTestingT(t)
 
 	var reqBody map[string]interface{}
@@ -516,7 +525,62 @@ func TestExecuteInvalidTemperatureFallsBack(t *testing.T) {
 
 	_, err := Execute(&core.Flow{}, nil, inputs)
 	Expect(err).To(BeNil())
-	Expect(reqBody["temperature"]).To(Equal(0.7))
+	Expect(reqBody).To(Not(HaveKey("temperature")))
+}
+
+// TestExecuteRetriesWithLegacyMaxTokens covers the other half of Azure's split
+// token parameter: a legacy deployment rejects max_completion_tokens, and the
+// action must retry once with max_tokens rather than surface the 400.
+func TestExecuteRetriesWithLegacyMaxTokens(t *testing.T) {
+	RegisterTestingT(t)
+
+	var bodies []map[string]interface{}
+	server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		var b map[string]interface{}
+		json.NewDecoder(r.Body).Decode(&b)
+		bodies = append(bodies, b)
+		w.Header().Set("Content-Type", "application/json")
+		if _, ok := b["max_completion_tokens"]; ok {
+			w.WriteHeader(http.StatusBadRequest)
+			json.NewEncoder(w).Encode(map[string]interface{}{"error": map[string]interface{}{
+				"code":    "unsupported_parameter",
+				"param":   "max_completion_tokens",
+				"message": "Unsupported parameter: 'max_completion_tokens' is not supported with this model. Use 'max_tokens' instead.",
+			}})
+			return
+		}
+		json.NewEncoder(w).Encode(chatResponse("gpt-35-turbo", "ok", "stop"))
+	}))
+	defer server.Close()
+
+	out, err := Execute(&core.Flow{}, nil, baseInputs(server.URL))
+	Expect(err).To(BeNil())
+	Expect(out["success"]).To(BeTrue())
+	Expect(bodies).To(HaveLen(2), "expected one retry with the legacy spelling")
+	Expect(bodies[0]).To(HaveKey("max_completion_tokens"))
+	Expect(bodies[1]).To(HaveKey("max_tokens"))
+	Expect(bodies[1]).To(Not(HaveKey("max_completion_tokens")))
+	Expect(bodies[1]["max_tokens"]).To(Equal(float64(2048)))
+}
+
+// An unrelated 400 must NOT retry — only the token-parameter one does.
+func TestExecuteDoesNotRetryUnrelated400(t *testing.T) {
+	RegisterTestingT(t)
+
+	var calls int
+	server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		calls++
+		w.Header().Set("Content-Type", "application/json")
+		w.WriteHeader(http.StatusBadRequest)
+		json.NewEncoder(w).Encode(map[string]interface{}{"error": map[string]interface{}{
+			"code": "context_length_exceeded", "message": "too long",
+		}})
+	}))
+	defer server.Close()
+
+	_, err := Execute(&core.Flow{}, nil, baseInputs(server.URL))
+	Expect(err).To(HaveOccurred())
+	Expect(calls).To(Equal(1), "an unrelated 400 must not be retried")
 }
 
 // ---------------------------------------------------------------------------

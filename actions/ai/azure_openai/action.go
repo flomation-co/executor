@@ -148,10 +148,13 @@ var Inputs = [...]core.Connection{
 		Placeholder: "2048",
 	},
 	{
+		// Blank = the deployment's own default. Reasoning deployments (o-series,
+		// GPT-5) accept only their default of 1 and 400 on anything else, so
+		// this must stay empty for them rather than carry a default of ours.
 		Name:        "temperature",
 		Type:        core.ConnectionTypeString,
 		Label:       "Temperature",
-		Placeholder: "0.7",
+		Placeholder: "Leave blank for the model default — GPT-5 and o-series accept only 1",
 	},
 	{
 		// The sampling controls below are strings because the platform has
@@ -265,19 +268,14 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	// connection type (only Integer); see the action's Inputs. Parse it
 	// explicitly so malformed values warn loudly and fall back to the
 	// default rather than being silently swallowed.
-	temperature := 0.7
-	tempConn := core.FindConnection("temperature", inputs)
-	if tempConn != nil && tempConn.String() != nil && *tempConn.String() != "" {
-		raw := strings.TrimSpace(*tempConn.String())
-		if parsed, err := strconv.ParseFloat(raw, 64); err == nil {
-			temperature = parsed
-		} else {
-			log.WithFields(log.Fields{
-				"value":   raw,
-				"default": temperature,
-			}).Warn("[azure_openai] invalid temperature; falling back to default")
-		}
-	}
+	// Temperature is optional here, unlike in the openrouter template this
+	// package otherwise tracks: the reasoning families (o-series, GPT-5) accept
+	// ONLY their default of 1 and reject any explicit temperature with a 400, so
+	// sending a 0.7 default on the operator's behalf would make this action
+	// unusable against exactly the newest deployments. Blank therefore means
+	// "say nothing and let the deployment decide", the same rule the other
+	// sampling controls below already follow.
+	temperature := optionalFloat("temperature", inputs)
 
 	// Optional sampling controls — only sent when the user set a valid
 	// value, so deployment defaults apply otherwise.
@@ -408,10 +406,20 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 
 	// No "model" body field: on Azure the deployment in the URL path decides
 	// which model runs, and a body model is ignored.
+	//
+	// The token cap travels as max_completion_tokens, which every current model
+	// takes and the reasoning families (o-series, GPT-5) accept ONLY — they
+	// reject max_tokens outright with a 400. Older deployments (GPT-3.5, early
+	// GPT-4) accept only the legacy max_tokens, so a 400 naming the parameter
+	// triggers one retry with the legacy spelling; see sendChatRequest.
+	// Sniffing the deployment name instead is not an option: a deployment name
+	// is operator-chosen and need not mention the model at all.
 	payload := map[string]interface{}{
-		"messages":    messages,
-		"max_tokens":  maxTokens,
-		"temperature": temperature,
+		"messages":              messages,
+		"max_completion_tokens": maxTokens,
+	}
+	if temperature != nil {
+		payload["temperature"] = *temperature
 	}
 	if topP != nil {
 		payload["top_p"] = *topP
@@ -439,27 +447,11 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 		payload["tools"] = tools
 	}
 
-	body, err := json.Marshal(payload)
+	resp, respBody, err := sendChatRequest(flow, requestURL, apiKey, payload)
 	if err != nil {
-		return nil, fmt.Errorf("failed to marshal request: %w", err)
-	}
-
-	req, err := http.NewRequestWithContext(flow.GoContext(), http.MethodPost, requestURL, bytes.NewReader(body))
-	if err != nil {
-		return nil, fmt.Errorf("failed to create request: %w", err)
-	}
-	req.Header.Set("Content-Type", "application/json")
-	// Azure's key auth uses the non-standard api-key header; the data plane
-	// rejects Authorization: Bearer for keys.
-	req.Header.Set("api-key", apiKey)
-
-	resp, err := httpClient.Do(req)
-	if err != nil {
-		return nil, fmt.Errorf("Azure OpenAI request failed: %s", redact(err.Error(), apiKey))
+		return nil, err
 	}
 	defer func() { _ = resp.Body.Close() }()
-
-	respBody, _ := io.ReadAll(io.LimitReader(resp.Body, maxResponseBody))
 
 	if resp.StatusCode != http.StatusOK {
 		var apiErr struct {
@@ -745,4 +737,87 @@ func extractToolExchanges(flow *core.Flow) []ai_common.ToolExchange {
 		exchanges = append(exchanges, ex)
 	}
 	return exchanges
+}
+
+// legacyTokenParam is the pre-reasoning-model spelling of the token cap.
+const legacyTokenParam = "max_tokens"
+
+// sendChatRequest POSTs the completion and transparently reconciles Azure's two
+// mutually exclusive spellings of the token cap.
+//
+// Azure split this parameter across model generations: the reasoning families
+// (o-series, GPT-5) accept max_completion_tokens and reject max_tokens, while
+// older deployments (GPT-3.5, early GPT-4) accept only max_tokens. There is no
+// reliable way to tell which a deployment is before calling it — the deployment
+// name is operator-chosen and need not name the model — so the request goes out
+// with the modern spelling and retries once, with the legacy one, if the
+// service says that parameter is the problem. Only that specific 400 retries;
+// every other error returns untouched.
+func sendChatRequest(flow *core.Flow, requestURL, apiKey string, payload map[string]interface{}) (*http.Response, []byte, error) {
+	resp, body, err := postChat(flow, requestURL, apiKey, payload)
+	if err != nil {
+		return nil, nil, err
+	}
+	if resp.StatusCode != http.StatusBadRequest || !mentionsCompletionTokens(body) {
+		return resp, body, nil
+	}
+	_ = resp.Body.Close()
+
+	cap, ok := payload["max_completion_tokens"]
+	if !ok {
+		return resp, body, nil
+	}
+	retry := make(map[string]interface{}, len(payload))
+	for k, v := range payload {
+		retry[k] = v
+	}
+	delete(retry, "max_completion_tokens")
+	retry[legacyTokenParam] = cap
+
+	log.WithField("deployment", requestURL).Debug("[azure_openai] deployment rejected max_completion_tokens; retrying with max_tokens")
+	return postChat(flow, requestURL, apiKey, retry)
+}
+
+func postChat(flow *core.Flow, requestURL, apiKey string, payload map[string]interface{}) (*http.Response, []byte, error) {
+	body, err := json.Marshal(payload)
+	if err != nil {
+		return nil, nil, fmt.Errorf("failed to marshal request: %w", err)
+	}
+	req, err := http.NewRequestWithContext(flow.GoContext(), http.MethodPost, requestURL, bytes.NewReader(body))
+	if err != nil {
+		return nil, nil, fmt.Errorf("failed to create request: %w", err)
+	}
+	req.Header.Set("Content-Type", "application/json")
+	// Azure's key auth uses the non-standard api-key header; the data plane
+	// rejects Authorization: Bearer for keys.
+	req.Header.Set("api-key", apiKey)
+
+	resp, err := httpClient.Do(req)
+	if err != nil {
+		return nil, nil, fmt.Errorf("Azure OpenAI request failed: %s", redact(err.Error(), apiKey))
+	}
+	respBody, _ := io.ReadAll(io.LimitReader(resp.Body, maxResponseBody))
+	return resp, respBody, nil
+}
+
+// mentionsCompletionTokens reports whether an error body blames the
+// max_completion_tokens parameter, which is how a legacy deployment rejects it
+// ("Unsupported parameter: 'max_completion_tokens' is not supported with this
+// model. Use 'max_tokens' instead."). Matching the parameter name rather than
+// the prose keeps this working if Microsoft rewords the message.
+func mentionsCompletionTokens(body []byte) bool {
+	var apiErr struct {
+		Error struct {
+			Code    string `json:"code"`
+			Message string `json:"message"`
+			Param   string `json:"param"`
+		} `json:"error"`
+	}
+	if err := json.Unmarshal(body, &apiErr); err != nil {
+		return false
+	}
+	if apiErr.Error.Param == "max_completion_tokens" {
+		return true
+	}
+	return strings.Contains(apiErr.Error.Message, "max_completion_tokens")
 }

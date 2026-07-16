@@ -39,6 +39,7 @@ var Inputs = [...]core.Connection{
 	{Name: "container", Type: core.ConnectionTypeString, Label: "Container", Placeholder: "my-container", Required: true},
 	{Name: "blob_name", Type: core.ConnectionTypeString, Label: "Blob Name", Placeholder: "reports/2026/summary.pdf", Required: true},
 	{Name: "range", Type: core.ConnectionTypeString, Label: "Byte Range", Placeholder: "bytes=0-1023 — leave blank for the whole blob"},
+	{Name: "lease_id", Type: core.ConnectionTypeString, Label: "Lease ID", Placeholder: "Only needed when the blob or container is leased — the Lease ID output of a Lease step"},
 }
 
 var Outputs = [...]core.Connection{
@@ -89,6 +90,7 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 		}
 		headers["Range"] = r
 	}
+	headers = storage.LeaseHeader(headers, inputs)
 
 	resp, err := storage.Do(flow, auth, storage.Request{
 		Method:  http.MethodGet,

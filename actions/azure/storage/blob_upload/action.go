@@ -48,6 +48,7 @@ var Inputs = [...]core.Connection{
 	{Name: "metadata", Type: core.ConnectionTypeObject, Label: "Metadata (JSON)", Placeholder: `{"source":"flomation"}`},
 	{Name: "tags", Type: core.ConnectionTypeObject, Label: "Index Tags (JSON)", Placeholder: `{"project":"alpha"} — up to 10 searchable tags`},
 	{Name: "overwrite", Type: core.ConnectionTypeBoolean, Label: "Overwrite", Placeholder: "On by default. Turn off to fail instead of replacing an existing blob", Value: true},
+	{Name: "lease_id", Type: core.ConnectionTypeString, Label: "Lease ID", Placeholder: "Only needed when the blob or container is leased — the Lease ID output of a Lease step"},
 }
 
 var Outputs = [...]core.Connection{
@@ -119,6 +120,7 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 		// service answers 409 BlobAlreadyExists instead of replacing.
 		headers["If-None-Match"] = "*"
 	}
+	headers = storage.LeaseHeader(headers, inputs)
 
 	path := storage.BlobPath(container, blobName)
 	resp, err := storage.Do(flow, auth, storage.Request{

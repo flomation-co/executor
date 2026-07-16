@@ -53,6 +53,7 @@ var Inputs = [...]core.Connection{
 			{Name: "High", Value: "High"},
 		},
 	},
+	{Name: "lease_id", Type: core.ConnectionTypeString, Label: "Lease ID", Placeholder: "Only needed when the blob or container is leased — the Lease ID output of a Lease step"},
 }
 
 var Outputs = [...]core.Connection{
@@ -85,6 +86,7 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	if priority := storage.OptionalString("rehydrate_priority", inputs); priority != "" {
 		headers["x-ms-rehydrate-priority"] = priority
 	}
+	headers = storage.LeaseHeader(headers, inputs)
 
 	resp, err := storage.Do(flow, auth, storage.Request{
 		Method:  http.MethodPut,

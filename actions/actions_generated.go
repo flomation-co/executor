@@ -128,6 +128,7 @@ import (
 	azure_storage_blob_get_all "flomation.app/automate/executor/actions/azure/storage/blob_get_all"
 	azure_storage_blob_get_properties "flomation.app/automate/executor/actions/azure/storage/blob_get_properties"
 	azure_storage_blob_get_tags "flomation.app/automate/executor/actions/azure/storage/blob_get_tags"
+	azure_storage_blob_lease "flomation.app/automate/executor/actions/azure/storage/blob_lease"
 	azure_storage_blob_set_metadata "flomation.app/automate/executor/actions/azure/storage/blob_set_metadata"
 	azure_storage_blob_set_properties "flomation.app/automate/executor/actions/azure/storage/blob_set_properties"
 	azure_storage_blob_set_tags "flomation.app/automate/executor/actions/azure/storage/blob_set_tags"
@@ -140,6 +141,7 @@ import (
 	azure_storage_container_delete "flomation.app/automate/executor/actions/azure/storage/container_delete"
 	azure_storage_container_get "flomation.app/automate/executor/actions/azure/storage/container_get"
 	azure_storage_container_get_all "flomation.app/automate/executor/actions/azure/storage/container_get_all"
+	azure_storage_container_lease "flomation.app/automate/executor/actions/azure/storage/container_lease"
 	azure_storage_container_set_metadata "flomation.app/automate/executor/actions/azure/storage/container_set_metadata"
 	cms_wordpress_category_create "flomation.app/automate/executor/actions/cms/wordpress/category_create"
 	cms_wordpress_category_delete "flomation.app/automate/executor/actions/cms/wordpress/category_delete"
@@ -1498,6 +1500,7 @@ var Actions = map[string]core.Action{
 	"azure/storage/blob_get_all":                          azure_storage_blob_get_all.Execute,
 	"azure/storage/blob_get_properties":                   azure_storage_blob_get_properties.Execute,
 	"azure/storage/blob_get_tags":                         azure_storage_blob_get_tags.Execute,
+	"azure/storage/blob_lease":                            azure_storage_blob_lease.Execute,
 	"azure/storage/blob_set_metadata":                     azure_storage_blob_set_metadata.Execute,
 	"azure/storage/blob_set_properties":                   azure_storage_blob_set_properties.Execute,
 	"azure/storage/blob_set_tags":                         azure_storage_blob_set_tags.Execute,
@@ -1510,6 +1513,7 @@ var Actions = map[string]core.Action{
 	"azure/storage/container_delete":                      azure_storage_container_delete.Execute,
 	"azure/storage/container_get":                         azure_storage_container_get.Execute,
 	"azure/storage/container_get_all":                     azure_storage_container_get_all.Execute,
+	"azure/storage/container_lease":                       azure_storage_container_lease.Execute,
 	"azure/storage/container_set_metadata":                azure_storage_container_set_metadata.Execute,
 	"cms/wordpress/category_create":                       cms_wordpress_category_create.Execute,
 	"cms/wordpress/category_delete":                       cms_wordpress_category_delete.Execute,

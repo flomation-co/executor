@@ -1,4 +1,4 @@
-package azure_storage_blob_delete
+package azure_storage_container_lease
 
 import (
 	"fmt"
@@ -12,10 +12,10 @@ import (
 const (
 	Author       = "Dave McElin"
 	Organisation = "Flomation"
-	Name         = "Azure Storage: Delete Blob"
-	Description  = "Delete a blob. Its snapshots are deleted with it by default (Azure refuses the delete otherwise); choose Snapshots Only to keep the blob and drop the snapshots"
+	Name         = "Azure Storage: Lease Container"
+	Description  = "Take, extend, or release a lock on a container. A container lease guards the container itself — deleting it, or changing its metadata — not the blobs inside it. Acquire returns a Lease ID to pass to the Lease ID field of a Delete Container or Set Container Metadata step"
 	Website      = "https://www.flomation.co"
-	Icon         = "azure+trash"
+	Icon         = "azure+lock"
 	Date         = "16/07/2026"
 	Type         = core.ActionTypeAction
 )
@@ -29,24 +29,56 @@ var Inputs = [...]core.Connection{
 	{Name: "azure_client_secret", Type: core.ConnectionTypeSecret, Label: "Client Secret", Placeholder: "The app needs a Storage Blob Data role on the account (RBAC)", Visible: &core.VisibleWhen{Field: "auth_method", Values: []string{"entra"}}},
 	{Name: "endpoint", Type: core.ConnectionTypeString, Label: "Custom Endpoint", Placeholder: "https://myaccount.blob.core.windows.net — leave blank to derive; Azurite: http://host:10000/devstoreaccount1"},
 	{Name: "allow_insecure", Type: core.ConnectionTypeBoolean, Label: "Allow Insecure TLS", Placeholder: "Skip TLS verification — only for custom endpoints with a self-signed certificate"},
-	{Name: "container", Type: core.ConnectionTypeString, Label: "Container", Placeholder: "my-container", Required: true},
-	{Name: "blob_name", Type: core.ConnectionTypeString, Label: "Blob Name", Placeholder: "reports/2026/summary.pdf", Required: true},
+	{Name: "container", Type: core.ConnectionTypeString, Label: "Container Name", Placeholder: "my-container", Required: true},
 	{
-		Name:  "snapshots",
-		Type:  core.ConnectionTypeString,
-		Label: "Snapshots",
+		Name:     "lease_action",
+		Type:     core.ConnectionTypeString,
+		Label:    "Lease Action",
+		Required: true,
 		Options: []core.ConnectionOption{
-			{Name: "Delete blob and snapshots (default)", Value: ""},
-			{Name: "Delete blob and snapshots", Value: "include"},
-			{Name: "Delete snapshots only", Value: "only"},
+			{Name: "Acquire — take the lock", Value: "acquire"},
+			{Name: "Renew — extend the lock you hold", Value: "renew"},
+			{Name: "Change — swap the lock's ID", Value: "change"},
+			{Name: "Release — hand the lock back", Value: "release"},
+			{Name: "Break — end someone else's lock", Value: "break"},
 		},
 	},
-	{Name: "lease_id", Type: core.ConnectionTypeString, Label: "Lease ID", Placeholder: "Only needed when the blob or container is leased — the Lease ID output of a Lease step"},
+	{
+		Name:        "lease_id",
+		Type:        core.ConnectionTypeString,
+		Label:       "Lease ID",
+		Placeholder: "The Lease ID output of the Acquire step — optional on Break, which does not need it",
+		Visible:     &core.VisibleWhen{Field: "lease_action", Values: []string{"renew", "change", "release", "break"}},
+	},
+	{
+		Name:        "proposed_lease_id",
+		Type:        core.ConnectionTypeString,
+		Label:       "Proposed Lease ID",
+		Placeholder: "A GUID to use as the lease's ID — leave blank on Acquire to let Azure choose one",
+		Visible:     &core.VisibleWhen{Field: "lease_action", Values: []string{"acquire", "change"}},
+	},
+	{
+		Name:        "duration",
+		Type:        core.ConnectionTypeInteger,
+		Label:       "Duration (seconds)",
+		Placeholder: "15-60 seconds, or -1 to hold the lease until it is released",
+		Value:       60,
+		Visible:     &core.VisibleWhen{Field: "lease_action", Values: []string{"acquire"}},
+	},
+	{
+		Name:        "break_period",
+		Type:        core.ConnectionTypeInteger,
+		Label:       "Break Period (seconds)",
+		Placeholder: "0-60 — how long the lease may still run. 0 ends it immediately. Blank lets it run out its remaining time",
+		Visible:     &core.VisibleWhen{Field: "lease_action", Values: []string{"break"}},
+	},
 }
 
 var Outputs = [...]core.Connection{
-	{Name: "id", Type: core.ConnectionTypeString, Label: "Blob Name"},
+	{Name: "id", Type: core.ConnectionTypeString, Label: "Container Name"},
 	{Name: "result", Type: core.ConnectionTypeObject, Label: "Result"},
+	{Name: "lease_id", Type: core.ConnectionTypeString, Label: "Lease ID"},
+	{Name: "lease_time", Type: core.ConnectionTypeInteger, Label: "Lease Time Remaining (seconds)"},
 	{Name: "tool_result", Type: core.ConnectionTypeString, Label: "Result Summary"},
 	{Name: "success", Type: core.ConnectionTypeBoolean, Label: "Success"},
 	{Name: "error", Type: core.ConnectionTypeString, Label: "Error"},
@@ -61,24 +93,19 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	if err != nil {
 		return storage.ErrorResult(err.Error()), nil
 	}
-	blobName, err := storage.RequiredString("blob_name", inputs)
+	call, err := storage.BuildLeaseCall(inputs)
 	if err != nil {
 		return storage.ErrorResult(err.Error()), nil
 	}
 
-	// x-ms-delete-snapshots is always sent, defaulting to include: without the
-	// header, deleting a blob that has snapshots fails outright (n8n never
-	// sets it and inherits exactly that failure).
-	snapshots := storage.OptionalString("snapshots", inputs)
-	if snapshots == "" {
-		snapshots = "include"
-	}
-
 	resp, err := storage.Do(flow, auth, storage.Request{
-		Method:  http.MethodDelete,
-		Path:    storage.BlobPath(container, blobName),
-		Query:   url.Values{},
-		Headers: storage.LeaseHeader(map[string]string{"x-ms-delete-snapshots": snapshots}, inputs),
+		Method: http.MethodPut,
+		Path:   storage.ContainerPath(container),
+		// restype=container is what separates this from Lease Blob: the same
+		// comp=lease against the same path leases the container only when the
+		// resource type says so.
+		Query:   url.Values{"restype": []string{"container"}, "comp": []string{"lease"}},
+		Headers: call.Headers,
 	})
 	if err != nil {
 		return storage.ErrorResult(err.Error()), nil
@@ -86,10 +113,5 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	if err := storage.CheckResponse(resp); err != nil {
 		return storage.ErrorResult(err.Error()), nil
 	}
-
-	summary := fmt.Sprintf("Deleted %s from %s", blobName, container)
-	if snapshots == "only" {
-		summary = fmt.Sprintf("Deleted the snapshots of %s in %s", blobName, container)
-	}
-	return storage.ResourceResult(blobName, map[string]interface{}{"deleted": true, "snapshots": snapshots}, summary), nil
+	return storage.LeaseResult(call, container, fmt.Sprintf("container %s", container), resp), nil
 }

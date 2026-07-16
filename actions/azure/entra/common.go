@@ -47,6 +47,8 @@ import (
 
 	core "flomation.app/automate/executor"
 	azure "flomation.app/automate/executor/actions/azure"
+
+	log "github.com/sirupsen/logrus"
 )
 
 const (
@@ -213,6 +215,14 @@ var acquireToken = func(ctx context.Context, a Auth) (string, error) {
 
 // SetTokenForTest bypasses the real Entra token exchange, handing every
 // request the given bearer token, and returns a restore function. Test-only.
+// SetReplicationForTest collapses the create-readiness wait so unit tests do
+// not pay real sleeps. Returns a restore func.
+func SetReplicationForTest(confirms int, interval time.Duration) func() {
+	pc, pi := replicationConfirms, replicationInterval
+	replicationConfirms, replicationInterval = confirms, interval
+	return func() { replicationConfirms, replicationInterval = pc, pi }
+}
+
 func SetTokenForTest(token string) func() {
 	prev := acquireToken
 	acquireToken = func(context.Context, Auth) (string, error) { return token, nil }
@@ -730,3 +740,74 @@ const DefaultUserSelect = "id,accountEnabled,ageGroup,assignedLicenses,assignedP
 	"onPremisesUserPrincipalName,otherMails,passwordPolicies,postalCode,preferredDataLocation,preferredLanguage," +
 	"provisionedPlans,proxyAddresses,securityIdentifier,showInAddressList,state,streetAddress,surname," +
 	"usageLocation,userPrincipalName,userType"
+
+// replicationBudget bounds how long a create waits for its own object to
+// become readable, how often it asks, and how many consecutive successful
+// reads count as "settled".
+//
+// The consecutive count is not paranoia. Graph's replicas are mutually
+// inconsistent, not merely slow: measured against a live tenant, a GET can
+// return 200 from a replica that is ahead while the very next GET 404s from
+// one that is behind — a single success is no evidence at all. Requiring
+// several in a row samples the fleet rather than one lucky replica.
+var (
+	replicationBudget   = 20 * time.Second
+	replicationInterval = 1 * time.Second
+	replicationConfirms = 3
+)
+
+// WaitUntilReadable polls a freshly created directory object until Graph will
+// serve it back, and gives up quietly once the budget expires.
+//
+// Microsoft Graph is eventually consistent on writes: POST /groups returns 201
+// with an id that GET /groups/{id} then answers 404 for several seconds while
+// the object replicates. That makes the most natural flow an operator can
+// build — create a group, then add members to it — fail intermittently against
+// the very id the create step just handed downstream, and intermittent is the
+// worst kind of broken. Verified live: a group_get immediately after
+// group_create 404s in a real tenant. (n8n hits the same wall and only
+// documents it, telling the user to "wait a few seconds".)
+//
+// A timeout is NOT an error: the object was created, the id is valid, and it
+// will resolve shortly. Failing the create here would be a lie about what
+// happened, so a slow tenant simply returns as before.
+//
+// This is best-effort and deliberately not advertised as more. Graph gives no
+// read-your-writes guarantee, so no amount of client-side polling can promise
+// the next step will find the object; measured against a live tenant this took
+// create-then-read from failing almost every time to failing roughly one run
+// in five, at a cost of ~10s per create. An operator whose flow still races
+// should put a Delay before the dependent step.
+func WaitUntilReadable(flow *core.Flow, a Auth, path, id string) {
+	if id == "" {
+		return
+	}
+	deadline := time.Now().Add(replicationBudget)
+	confirms := 0
+	for time.Now().Before(deadline) {
+		resp, err := ExecuteAPI(flow, a, http.MethodGet, path+"/"+url.PathEscape(id), nil)
+		switch {
+		case err == nil && resp.StatusCode >= 200 && resp.StatusCode < 300:
+			confirms++
+			if confirms >= replicationConfirms {
+				return
+			}
+		case err == nil && resp.StatusCode == http.StatusNotFound:
+			// A 404 after an earlier 200 means the reads are landing on
+			// replicas at different points; the object is not settled, so
+			// start counting again rather than trust the earlier success.
+			confirms = 0
+		case err == nil:
+			// Anything else is not ours to handle: the caller already has its
+			// 201, and a transient auth/network blip must not burn the budget.
+			return
+		}
+		select {
+		case <-reqContext(flow).Done():
+			return
+		case <-time.After(replicationInterval):
+		}
+	}
+	log.WithFields(log.Fields{"path": path, "id": id, "budget": replicationBudget}).
+		Debug("[entra] created object not yet readable; downstream steps may need to retry")
+}

@@ -1,9 +1,9 @@
 // Cross-action invariants for the Azure ▸ Storage node.
 //
-// All 21 azure/storage actions re-declare the eight-field credential block
+// All 23 azure/storage actions re-declare the eight-field credential block
 // INLINE, because the manifest generator AST-parses the Inputs literal and
 // cannot see through a package-level variable. storage.AuthInputs is therefore
-// documentation, not enforcement — 21 copies of eight fields, free to drift
+// documentation, not enforcement — 23 copies of eight fields, free to drift
 // one paste at a time. This file is the enforcement: a copy that drifts fails
 // CI with the action and the field named. Modelled on
 // actions/infrastructure/awx_inputs_drift_test.go.
@@ -25,6 +25,7 @@ import (
 	blob_get_all "flomation.app/automate/executor/actions/azure/storage/blob_get_all"
 	blob_get_properties "flomation.app/automate/executor/actions/azure/storage/blob_get_properties"
 	blob_get_tags "flomation.app/automate/executor/actions/azure/storage/blob_get_tags"
+	blob_lease "flomation.app/automate/executor/actions/azure/storage/blob_lease"
 	blob_set_metadata "flomation.app/automate/executor/actions/azure/storage/blob_set_metadata"
 	blob_set_properties "flomation.app/automate/executor/actions/azure/storage/blob_set_properties"
 	blob_set_tags "flomation.app/automate/executor/actions/azure/storage/blob_set_tags"
@@ -37,10 +38,11 @@ import (
 	container_delete "flomation.app/automate/executor/actions/azure/storage/container_delete"
 	container_get "flomation.app/automate/executor/actions/azure/storage/container_get"
 	container_get_all "flomation.app/automate/executor/actions/azure/storage/container_get_all"
+	container_lease "flomation.app/automate/executor/actions/azure/storage/container_lease"
 	container_set_metadata "flomation.app/automate/executor/actions/azure/storage/container_set_metadata"
 )
 
-// storageActionInputs is the table every assertion below ranges over. All 21
+// storageActionInputs is the table every assertion below ranges over. All 23
 // actions.
 func storageActionInputs() map[string][]core.Connection {
 	return map[string][]core.Connection{
@@ -52,6 +54,7 @@ func storageActionInputs() map[string][]core.Connection {
 		"azure/storage/blob_get_all":           blob_get_all.Inputs[:],
 		"azure/storage/blob_get_properties":    blob_get_properties.Inputs[:],
 		"azure/storage/blob_get_tags":          blob_get_tags.Inputs[:],
+		"azure/storage/blob_lease":             blob_lease.Inputs[:],
 		"azure/storage/blob_set_metadata":      blob_set_metadata.Inputs[:],
 		"azure/storage/blob_set_properties":    blob_set_properties.Inputs[:],
 		"azure/storage/blob_set_tags":          blob_set_tags.Inputs[:],
@@ -64,6 +67,7 @@ func storageActionInputs() map[string][]core.Connection {
 		"azure/storage/container_delete":       container_delete.Inputs[:],
 		"azure/storage/container_get":          container_get.Inputs[:],
 		"azure/storage/container_get_all":      container_get_all.Inputs[:],
+		"azure/storage/container_lease":        container_lease.Inputs[:],
 		"azure/storage/container_set_metadata": container_set_metadata.Inputs[:],
 	}
 }
@@ -79,6 +83,7 @@ func storageActionOutputs() map[string][]core.Connection {
 		"azure/storage/blob_get_all":           blob_get_all.Outputs[:],
 		"azure/storage/blob_get_properties":    blob_get_properties.Outputs[:],
 		"azure/storage/blob_get_tags":          blob_get_tags.Outputs[:],
+		"azure/storage/blob_lease":             blob_lease.Outputs[:],
 		"azure/storage/blob_set_metadata":      blob_set_metadata.Outputs[:],
 		"azure/storage/blob_set_properties":    blob_set_properties.Outputs[:],
 		"azure/storage/blob_set_tags":          blob_set_tags.Outputs[:],
@@ -91,6 +96,7 @@ func storageActionOutputs() map[string][]core.Connection {
 		"azure/storage/container_delete":       container_delete.Outputs[:],
 		"azure/storage/container_get":          container_get.Outputs[:],
 		"azure/storage/container_get_all":      container_get_all.Outputs[:],
+		"azure/storage/container_lease":        container_lease.Outputs[:],
 		"azure/storage/container_set_metadata": container_set_metadata.Outputs[:],
 	}
 }
@@ -106,6 +112,7 @@ func storageActionIcons() map[string]string {
 		"azure/storage/blob_get_all":           blob_get_all.Icon,
 		"azure/storage/blob_get_properties":    blob_get_properties.Icon,
 		"azure/storage/blob_get_tags":          blob_get_tags.Icon,
+		"azure/storage/blob_lease":             blob_lease.Icon,
 		"azure/storage/blob_set_metadata":      blob_set_metadata.Icon,
 		"azure/storage/blob_set_properties":    blob_set_properties.Icon,
 		"azure/storage/blob_set_tags":          blob_set_tags.Icon,
@@ -118,6 +125,7 @@ func storageActionIcons() map[string]string {
 		"azure/storage/container_delete":       container_delete.Icon,
 		"azure/storage/container_get":          container_get.Icon,
 		"azure/storage/container_get_all":      container_get_all.Icon,
+		"azure/storage/container_lease":        container_lease.Icon,
 		"azure/storage/container_set_metadata": container_set_metadata.Icon,
 	}
 }
@@ -137,6 +145,7 @@ var storageBadges = map[string]bool{
 	"key":               true,
 	"layer-group":       true,
 	"link":              true,
+	"lock":              true,
 	"list":              true,
 	"magnifying-glass":  true,
 	"pen":               true,
@@ -201,6 +210,94 @@ func TestStorageNoResourceInputShadowsACredential(t *testing.T) {
 	}
 }
 
+// leaseIDActions is every action that must expose the optional lease_id
+// field, i.e. every operation the Blob service accepts an x-ms-lease-id on.
+//
+// The set is deliberately CLOSED, and the test below asserts both directions.
+// The absences are the interesting half:
+//
+//   - container_create, container_get_all, blob_get_all, blob_find_by_tags —
+//     a container that does not exist yet cannot be leased, and the list
+//     operations enumerate a container or an account rather than touching any
+//     one leased resource. The service takes no lease header on any of them.
+//   - blob_generate_sas signs a token locally and issues no request at all.
+//   - blob_copy, blob_upload_from_url and blob_snapshot DO accept
+//     x-ms-lease-id (for the destination blob) but are out of this change's
+//     scope — recorded here so the gap is a decision on the record rather
+//     than an oversight, and the test names them as knowingly excluded.
+var leaseIDActions = map[string]bool{
+	"azure/storage/blob_upload":            true,
+	"azure/storage/blob_download":          true,
+	"azure/storage/blob_delete":            true,
+	"azure/storage/blob_get_properties":    true,
+	"azure/storage/blob_set_metadata":      true,
+	"azure/storage/blob_set_properties":    true,
+	"azure/storage/blob_set_tier":          true,
+	"azure/storage/blob_get_tags":          true,
+	"azure/storage/blob_set_tags":          true,
+	"azure/storage/container_delete":       true,
+	"azure/storage/container_get":          true,
+	"azure/storage/container_set_metadata": true,
+}
+
+// leaseLifecycleActions redeclare lease_id with their own Visible gate and
+// their own meaning (the ID being renewed/released rather than an optional
+// assertion), so they are exempt from the LeaseIDInput comparison below.
+var leaseLifecycleActions = map[string]bool{
+	"azure/storage/blob_lease":      true,
+	"azure/storage/container_lease": true,
+}
+
+// TestStorageLeaseIDInputDoesNotDrift is the AuthInputs argument applied to the
+// lease field: 12 more copies of one literal, free to drift one paste at a
+// time. It asserts the whole set — a copy that drifts, an action that is
+// missing the field, and an action that grew one it should not have.
+//
+// The last direction matters most. The field is only honest where the service
+// accepts the header: adding it to a list operation would render an input that
+// silently does nothing, which is worse than not offering it.
+func TestStorageLeaseIDInputDoesNotDrift(t *testing.T) {
+	for id, inputs := range storageActionInputs() {
+		if leaseLifecycleActions[id] {
+			continue
+		}
+		var found *core.Connection
+		for i := range inputs {
+			if inputs[i].Name == "lease_id" {
+				found = &inputs[i]
+			}
+		}
+		switch {
+		case leaseIDActions[id] && found == nil:
+			t.Errorf("%s: accepts x-ms-lease-id but declares no lease_id input — a leased blob would be unwritable from this action", id)
+		case !leaseIDActions[id] && found != nil:
+			t.Errorf("%s: declares a lease_id input, but the Blob service takes no lease header on this operation — the field would do nothing", id)
+		case found != nil && !reflect.DeepEqual(*found, storage.LeaseIDInput):
+			t.Errorf("%s: lease_id has drifted from storage.LeaseIDInput\n got: %+v\nwant: %+v", id, *found, storage.LeaseIDInput)
+		}
+	}
+}
+
+// TestStorageLeaseIDIsNotACredential pins where the field lives. It is an
+// operator-supplied fact about one call, not a credential: it must sit AFTER
+// the eight-field auth block, or the auth-block drift assertion — and the api's
+// dynamic-options params, which name those eight inputs positionally by name —
+// would both be reading a different shape than they were written against.
+func TestStorageLeaseIDIsNotACredential(t *testing.T) {
+	for _, c := range storage.AuthInputs {
+		if c.Name == "lease_id" {
+			t.Fatal("lease_id has been added to storage.AuthInputs — it is a resource field, not a credential")
+		}
+	}
+	for id, inputs := range storageActionInputs() {
+		for i, c := range inputs {
+			if c.Name == "lease_id" && i < len(storage.AuthInputs) {
+				t.Errorf("%s: lease_id is at index %d, inside the %d-field credential block", id, i, len(storage.AuthInputs))
+			}
+		}
+	}
+}
+
 // TestStorageIconsResolve keeps every icon inside the glyph set the editor
 // actually ships: the azure base plus a badge from storageBadges.
 func TestStorageIconsResolve(t *testing.T) {
@@ -245,9 +342,9 @@ func TestStorageStandardOutputsPresent(t *testing.T) {
 }
 
 // TestStorageTableCoversEveryActionOnDisk pins the designed action count. If
-// action 22 lands and nobody adds it to the tables here, this is what says so.
+// action 24 lands and nobody adds it to the tables here, this is what says so.
 func TestStorageTableCoversEveryActionOnDisk(t *testing.T) {
-	const designed = 21
+	const designed = 23
 	if got := len(storageActionInputs()); got != designed {
 		t.Errorf("storageActionInputs() covers %d actions, expected %d — a new storage action must be added to the tables in this file", got, designed)
 	}
