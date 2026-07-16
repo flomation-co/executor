@@ -75,7 +75,7 @@ func TestExecutePaginatesWithReturnAll(t *testing.T) {
 	out, err := Execute(&core.Flow{}, nil, baseInputs(srv.URL,
 		&core.Connection{Name: "container", Type: core.ConnectionTypeString, Value: "my-container"},
 		&core.Connection{Name: "prefix", Type: core.ConnectionTypeString, Value: "reports/"},
-		&core.Connection{Name: "include", Type: core.ConnectionTypeString, Value: "metadata"},
+		&core.Connection{Name: "include", Type: core.ConnectionTypeComboBox, Value: "metadata"},
 		&core.Connection{Name: "return_all", Type: core.ConnectionTypeBoolean, Value: true},
 	))
 	if err != nil {
@@ -126,6 +126,62 @@ func TestExecutePaginatesWithReturnAll(t *testing.T) {
 	}
 	if !strings.Contains(out["tool_result"].(string), "Listed 2 blobs in my-container") {
 		t.Errorf("tool_result = %v", out["tool_result"])
+	}
+}
+
+// TestExecuteCombinesIncludeValues — the reason `include` is free text: Azure
+// takes a comma-separated list, and metadata + tags in ONE pass is what saves a
+// tag-driven cleanup flow from listing twice and joining client-side.
+func TestExecuteCombinesIncludeValues(t *testing.T) {
+	var gotInclude string
+	srv := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		gotInclude = r.URL.Query().Get("include")
+		_, _ = w.Write([]byte(pageTwo))
+	}))
+	defer srv.Close()
+
+	for _, tc := range []struct{ in, want string }{
+		{"metadata,tags", "metadata,tags"},
+		{" Metadata , Tags ", "metadata,tags"},
+		{"uncommittedblobs", "uncommittedblobs"}, // unreachable before: not in the old Options set
+		{"copy", "copy"},
+	} {
+		out, err := Execute(&core.Flow{}, nil, baseInputs(srv.URL,
+			&core.Connection{Name: "container", Type: core.ConnectionTypeString, Value: "my-container"},
+			&core.Connection{Name: "include", Type: core.ConnectionTypeComboBox, Value: tc.in},
+		))
+		if err != nil {
+			t.Fatalf("Execute(%q): %v", tc.in, err)
+		}
+		if out["success"] != true {
+			t.Fatalf("Execute(%q): %v", tc.in, out["error"])
+		}
+		if gotInclude != tc.want {
+			t.Errorf("include=%q on the wire for input %q, want %q", gotInclude, tc.in, tc.want)
+		}
+	}
+}
+
+// TestExecuteRejectsAnUnknownIncludeValue — the service answers an unknown
+// include token with a flat 400 that names nothing, so it is caught here.
+func TestExecuteRejectsAnUnknownIncludeValue(t *testing.T) {
+	srv := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		t.Error("an unknown include value must not reach the service")
+	}))
+	defer srv.Close()
+
+	out, err := Execute(&core.Flow{}, nil, baseInputs(srv.URL,
+		&core.Connection{Name: "container", Type: core.ConnectionTypeString, Value: "my-container"},
+		&core.Connection{Name: "include", Type: core.ConnectionTypeComboBox, Value: "metadata,snapshot"},
+	))
+	if err != nil {
+		t.Fatalf("an unknown include value must be a soft failure, got %v", err)
+	}
+	if out["success"] != false || !strings.Contains(out["error"].(string), `"snapshot" is not supported`) {
+		t.Errorf("out = %v, want the offending token named", out)
+	}
+	if !strings.Contains(out["error"].(string), "snapshots") {
+		t.Errorf("error = %v, want the supported values listed", out["error"])
 	}
 }
 

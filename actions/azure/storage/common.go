@@ -85,12 +85,22 @@ var nowFunc = time.Now
 // insecureHTTPClient is the same but skips TLS verification, used only when
 // the action opts in via allow_insecure — a separate client so the secure
 // default can never be weakened by a per-request tweak.
+//
+// DisableCompression is the sharp one. Content-Encoding is a STORED property
+// of a blob, not a transfer encoding: Azure serves the bytes exactly as they
+// were uploaded and never compresses on the fly. Left enabled, net/http adds
+// its own Accept-Encoding: gzip, reads the stored "Content-Encoding: gzip" as
+// its own doing, and hands back the DECOMPRESSED body with Content-Encoding
+// and Content-Length stripped — so a download of a gzip-encoded blob returns
+// different bytes than were uploaded, and disagrees with the Range path
+// (net/http skips its gzip handling whenever a Range header is present).
 var httpClient = &http.Client{
 	Timeout: requestTimeout,
 	Transport: &http.Transport{
 		MaxIdleConns:        100,
 		MaxIdleConnsPerHost: 20,
 		IdleConnTimeout:     90 * time.Second,
+		DisableCompression:  true,
 	},
 }
 
@@ -100,6 +110,7 @@ var insecureHTTPClient = &http.Client{
 		MaxIdleConns:        100,
 		MaxIdleConnsPerHost: 20,
 		IdleConnTimeout:     90 * time.Second,
+		DisableCompression:  true,
 		TLSClientConfig:     &tls.Config{InsecureSkipVerify: true}, // #nosec G402 — opt-in only, for self-signed custom endpoints
 	},
 }
@@ -283,6 +294,16 @@ func redact(msg string) string {
 	return sasSigRe.ReplaceAllString(msg, "${1}REDACTED")
 }
 
+// RedactURL scrubs the SAS signature out of a URL that is about to be echoed
+// into an action's OUTPUT, where errors are not the only leak: result objects
+// are persisted in the run record and forwarded to every downstream node.
+// Only sig= is a credential — the rest of a SAS (sv/sp/se) and any
+// snapshot/versionid identify WHICH source was read, which is provenance worth
+// keeping.
+func RedactURL(raw string) string {
+	return redact(raw)
+}
+
 // redact masks this connection's own secrets in addition to the generic
 // patterns. Every error string that could contain transport detail is passed
 // through here before it reaches an output.
@@ -458,7 +479,7 @@ func Do(flow *core.Flow, a Auth, r Request) (*APIResponse, error) {
 
 	switch a.Method {
 	case AuthEntra:
-		token, err := azure.ClientCredentialsToken(flow.GoContext(), clientFor(a), a.TenantID, a.ClientID, a.ClientSecret, EntraScope)
+		token, err := azure.ClientCredentialsToken(flow.GoContext(), a.TenantID, a.ClientID, a.ClientSecret, EntraScope)
 		if err != nil {
 			return nil, err // already redacted by the shared minting code
 		}
@@ -478,14 +499,34 @@ func Do(flow *core.Flow, a Auth, r Request) (*APIResponse, error) {
 	defer func() { _ = resp.Body.Close() }()
 
 	maxBody := r.MaxBody
-	if maxBody <= 0 {
+	isDownload := maxBody > 0
+	if !isDownload {
 		maxBody = maxResponseBody
 	}
-	body, err := io.ReadAll(io.LimitReader(resp.Body, maxBody))
+	// Read ONE byte past the cap so an oversized body is detected instead of
+	// silently clipped: a plain LimitReader(maxBody) hits EOF exactly at the
+	// cap, which ReadAll reports as success — the caller would then write a
+	// truncated prefix of the blob and call it a download.
+	body, err := io.ReadAll(io.LimitReader(resp.Body, maxBody+1))
 	if err != nil {
 		return nil, fmt.Errorf("failed to read response: %s", a.redact(err.Error()))
 	}
+	if int64(len(body)) > maxBody {
+		return nil, overCapError(isDownload, maxBody)
+	}
 	return &APIResponse{StatusCode: resp.StatusCode, Body: body, Headers: resp.Header}, nil
+}
+
+// overCapError names the cap that was hit and the way out of it. The two caps
+// have different remedies: a download is fetched in pieces (or handed to the
+// service to move), while an envelope over 8 MB means the page asked for too
+// much.
+func overCapError(isDownload bool, maxBody int64) error {
+	if isDownload {
+		return fmt.Errorf("the blob is larger than the %d MB download limit — fetch it in pieces with the Byte Range input (e.g. bytes=0-%d), or use Copy Blob, which transfers server-side at any size",
+			maxBody>>20, maxBody-1)
+	}
+	return fmt.Errorf("the Azure Storage response is larger than the %d MB limit — narrow the request (a smaller Limit, or a Prefix)", maxBody>>20)
 }
 
 // xmlError is the service's error envelope. AuthenticationErrorDetail carries
@@ -682,6 +723,47 @@ func ClampLimit(limit int, set bool) int {
 	return limit
 }
 
+// BlobIncludeTokens / ContainerIncludeTokens are the full sets the List Blobs
+// and List Containers `include` query param accepts, in the service's own
+// order. Anything outside them is a 400 InvalidQueryParameterValue that names
+// nothing useful, so the tokens are checked here instead.
+var (
+	BlobIncludeTokens = []string{
+		"copy", "deleted", "deletedwithversions", "immutabilitypolicy",
+		"legalhold", "metadata", "permissions", "snapshots", "tags",
+		"uncommittedblobs", "versions",
+	}
+	ContainerIncludeTokens = []string{"metadata", "deleted", "system"}
+)
+
+// ParseIncludeTokens turns an `include` input into the comma-separated value
+// the query param takes. The input is a ComboBox — the Options shortlist covers
+// the common single choices, and free text is what allows them to be COMBINED
+// ("metadata,tags"), which is the only way to get both in one listing pass.
+//
+// Blank tokens are skipped and duplicates dropped; an unknown token is an error
+// rather than something forwarded to the service.
+func ParseIncludeTokens(raw string, allowed []string) (string, error) {
+	valid := make(map[string]bool, len(allowed))
+	for _, v := range allowed {
+		valid[v] = true
+	}
+	out := make([]string, 0, len(allowed))
+	seen := make(map[string]bool, len(allowed))
+	for _, part := range strings.Split(raw, ",") {
+		tok := strings.ToLower(strings.TrimSpace(part))
+		if tok == "" || seen[tok] {
+			continue
+		}
+		if !valid[tok] {
+			return "", fmt.Errorf("include value %q is not supported — choose from %s, combining several with commas", tok, strings.Join(allowed, ", "))
+		}
+		seen[tok] = true
+		out = append(out, tok)
+	}
+	return strings.Join(out, ","), nil
+}
+
 // metadataNameRe: metadata names travel as x-ms-meta-{name} headers and must
 // be valid C# identifiers (the service enforces this server-side with an
 // opaque error, so we validate up front).
@@ -742,9 +824,12 @@ func TagsHeaderValue(tags map[string]string) string {
 // XML envelopes
 // ---------------------------------------------------------------------------
 
-// xmlProps decodes a flat XML element (<Properties>, <Metadata>) into a map,
-// camelCasing hyphenated element names (Content-Length → contentLength) and
-// coercing booleans and integers so a flow can branch on them directly.
+// xmlProps decodes a flat XML element (<Properties>) into a map, camelCasing
+// hyphenated element names (Content-Length → contentLength) and coercing
+// booleans and integers so a flow can branch on them directly.
+//
+// It is bound to <Properties> ONLY. Metadata is operator-defined, not a fixed
+// schema, so neither transform may touch it — see xmlMeta.
 type xmlProps map[string]interface{}
 
 func (m *xmlProps) UnmarshalXML(d *xml.Decoder, start xml.StartElement) error {
@@ -761,6 +846,44 @@ func (m *xmlProps) UnmarshalXML(d *xml.Decoder, start xml.StartElement) error {
 				return err
 			}
 			out[camelKey(t.Name.Local)] = coerceScalar(s)
+		case xml.EndElement:
+			if t.Name == start.Name {
+				*m = out
+				return nil
+			}
+		}
+	}
+}
+
+// xmlMeta decodes a <Metadata> element into the SAME shape the header path
+// produces (HeadersResult): names lowercased, values kept as verbatim strings.
+//
+// Both transforms xmlProps applies would corrupt operator-defined metadata —
+// camelKey("ORDER_ID") is "oRDER_ID", and coerceScalar("00123") is int64(123)
+// with the leading zeros gone — so a flow filtering metadata off a list would
+// match nothing that blob_get_properties shows it.
+//
+// Lowercasing rather than preserving the element name is deliberate: metadata
+// travels as x-ms-meta-{name} headers, which are case-INSENSITIVE, so the
+// header path cannot recover the case an operator typed and can only ever emit
+// a lowercase name. Lowercasing here is what makes one flow expression work
+// against both paths.
+type xmlMeta map[string]interface{}
+
+func (m *xmlMeta) UnmarshalXML(d *xml.Decoder, start xml.StartElement) error {
+	out := map[string]interface{}{}
+	for {
+		tok, err := d.Token()
+		if err != nil {
+			return err
+		}
+		switch t := tok.(type) {
+		case xml.StartElement:
+			var s string
+			if err := d.DecodeElement(&s, &t); err != nil {
+				return err
+			}
+			out[strings.ToLower(t.Name.Local)] = s
 		case xml.EndElement:
 			if t.Name == start.Name {
 				*m = out
@@ -859,7 +982,7 @@ type ListContainer struct {
 	Deleted    string   `xml:"Deleted"`
 	Version    string   `xml:"Version"`
 	Properties xmlProps `xml:"Properties"`
-	Metadata   xmlProps `xml:"Metadata"`
+	Metadata   xmlMeta  `xml:"Metadata"`
 }
 
 type ListBlob struct {
@@ -870,7 +993,7 @@ type ListBlob struct {
 	IsCurrentVersion string   `xml:"IsCurrentVersion"`
 	Deleted          string   `xml:"Deleted"`
 	Properties       xmlProps `xml:"Properties"`
-	Metadata         xmlProps `xml:"Metadata"`
+	Metadata         xmlMeta  `xml:"Metadata"`
 	Tags             *struct {
 		Tags []xmlTag `xml:"TagSet>Tag"`
 	} `xml:"Tags"`

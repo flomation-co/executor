@@ -354,11 +354,15 @@ func TestCosmosIconsResolve(t *testing.T) {
 // the extras, then tool_result, success, error. request_charge is an extra on
 // every Cosmos op — the spec pins it node-wide, because RU cost is the number
 // that decides whether a flow is affordable.
+//
+// Every list action additionally carries next_continuation/truncated: a feed
+// that stopped short must be able to SAY so and be resumable, and pinning the
+// pair here stops a new list action from shipping without that contract.
 func TestCosmosStandardOutputsPresent(t *testing.T) {
 	for id, outputs := range cosmosActionOutputs() {
 		var want []string
 		if cosmosListActions[id] {
-			want = []string{"results", "count", "request_charge", "tool_result", "success", "error"}
+			want = []string{"results", "count", "request_charge", "next_continuation", "truncated", "tool_result", "success", "error"}
 		} else {
 			want = []string{"id", "result", "request_charge", "tool_result", "success", "error"}
 		}

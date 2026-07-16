@@ -67,6 +67,9 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	if err := cosmosdb.CheckResponse(resp); err != nil {
 		return cosmosdb.ErrorResult(err.Error()), nil
 	}
+	// Every container went with it — none of their cached paths can be trusted
+	// once the names are recreated.
+	cosmosdb.InvalidateDatabasePartitionKeyPaths(auth, db)
 	return cosmosdb.ResourceResult(map[string]interface{}{"id": db, "deleted": true},
 		cosmosdb.RequestCharge(resp), fmt.Sprintf("Deleted database %q", db)), nil
 }

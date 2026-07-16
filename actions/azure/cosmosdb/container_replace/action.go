@@ -117,5 +117,9 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	if err != nil {
 		return cosmosdb.ErrorResult(err.Error()), nil
 	}
+	// The service forbids changing the partition key on a replace, so the path
+	// itself is stable — but the name may have been dropped and recreated
+	// earlier in this run, which is what would have staled the cache.
+	cosmosdb.InvalidatePartitionKeyPath(auth, db, coll)
 	return cosmosdb.ResourceResult(obj, cosmosdb.RequestCharge(resp), fmt.Sprintf("Replaced definition of container %q", coll)), nil
 }

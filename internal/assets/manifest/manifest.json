@@ -1358,7 +1358,7 @@
     ]
   },
   "ai/azure_openai": {
-    "hash": "52faf12cb59099b1f923d973e06d9816ae4105856bcf0164c31eca7a3384ea6a",
+    "hash": "4d4c7d63971e2475ba5ef56ce77ba8bda26e512b6a364303595b9b5c9ca8a573",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Azure OpenAI Prompt",
@@ -7733,7 +7733,7 @@
     ]
   },
   "azure/cosmosdb/container_create": {
-    "hash": "339f5e3462f062ff5ef6d2b30c0ec259a53b00abc029f20fda3ccf5d9641360d",
+    "hash": "744a86b2cec557fbec74eb09f47f5160382c53581c518fdd623aa46e68bc97fe",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Cosmos DB: Create Container",
@@ -7950,7 +7950,7 @@
     ]
   },
   "azure/cosmosdb/container_delete": {
-    "hash": "6105efaffb428c11e42776674b58b799b2cea6bc6c5d3ebc4543f759898e52e1",
+    "hash": "30e39d1988eb57226f6caa877f991efea1dc05c74760387f885d5a524dfac3ca",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Cosmos DB: Delete Container",
@@ -8307,7 +8307,7 @@
     ]
   },
   "azure/cosmosdb/container_get_all": {
-    "hash": "334a1c85c192fcf24c43c650caa3ac6b791edcabb2dc34f591565abd55f4af8f",
+    "hash": "4183b79ec66108305d0c67857aeca7585f92fcb22a2b81888a514e80a883f3f2",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Cosmos DB: List Containers",
@@ -8442,6 +8442,13 @@
         "placeholder": "Maximum containers per page — default 50, maximum 1000"
       },
       {
+        "name": "continuation",
+        "type": "string",
+        "value": null,
+        "label": "Continuation Token",
+        "placeholder": "Resume from an earlier run's Next Continuation — leave blank to start at the first page"
+      },
+      {
         "name": "simplify",
         "type": "boolean",
         "value": null,
@@ -8472,6 +8479,20 @@
         "placeholder": ""
       },
       {
+        "name": "next_continuation",
+        "type": "string",
+        "value": null,
+        "label": "Next Continuation",
+        "placeholder": ""
+      },
+      {
+        "name": "truncated",
+        "type": "boolean",
+        "value": null,
+        "label": "Truncated",
+        "placeholder": ""
+      },
+      {
         "name": "tool_result",
         "type": "string",
         "value": null,
@@ -8495,7 +8516,7 @@
     ]
   },
   "azure/cosmosdb/container_replace": {
-    "hash": "5c248dad5a67bd3a3b7c683ab5f0993a186a46452112a5cd63e87c1a27cdd127",
+    "hash": "b4e43cde7f7c6c7b5c9c42f5d5aae123c245ede127ae98fdd989bbf05dd9e0c2",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Cosmos DB: Replace Container",
@@ -8865,7 +8886,7 @@
     ]
   },
   "azure/cosmosdb/database_delete": {
-    "hash": "b9c3b8e62dd5bfb420c3fd97bf9a3457b5571e674a6f4ee56230098804fceb1d",
+    "hash": "50c27a41dabcda2602882a2f12e6bbcde214cd91e10f7e4f952ff8047bbbddd3",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Cosmos DB: Delete Database",
@@ -9206,7 +9227,7 @@
     ]
   },
   "azure/cosmosdb/database_get_all": {
-    "hash": "a05178a6e7a1e04183bdad296fa5f8dc1de29610ee48dfd46f13941c7cbe9b35",
+    "hash": "3b485dd824f7bb42c0846c5ee6fd48fbf790e10972f37b7adcb6584cbb81c27e",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Cosmos DB: List Databases",
@@ -9333,6 +9354,13 @@
         "placeholder": "Maximum databases per page — default 50, maximum 1000"
       },
       {
+        "name": "continuation",
+        "type": "string",
+        "value": null,
+        "label": "Continuation Token",
+        "placeholder": "Resume from an earlier run's Next Continuation — leave blank to start at the first page"
+      },
+      {
         "name": "simplify",
         "type": "boolean",
         "value": null,
@@ -9360,6 +9388,20 @@
         "type": "string",
         "value": null,
         "label": "Request Charge (RU)",
+        "placeholder": ""
+      },
+      {
+        "name": "next_continuation",
+        "type": "string",
+        "value": null,
+        "label": "Next Continuation",
+        "placeholder": ""
+      },
+      {
+        "name": "truncated",
+        "type": "boolean",
+        "value": null,
+        "label": "Truncated",
         "placeholder": ""
       },
       {
@@ -9970,7 +10012,7 @@
     ]
   },
   "azure/cosmosdb/item_get_all": {
-    "hash": "8fa74bf2a30504cbe80e3914c1bd16eb3c0075529c8c2b5703a8cc1c76858c93",
+    "hash": "a9f1219680bbe544b670423b3b72275bc94f1bc8ffd90d598312589664e2888a",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Cosmos DB: List Items",
@@ -10113,6 +10155,13 @@
         "placeholder": "Maximum items per page — default 50, maximum 1000"
       },
       {
+        "name": "continuation",
+        "type": "string",
+        "value": null,
+        "label": "Continuation Token",
+        "placeholder": "Resume from an earlier run's Next Continuation — leave blank to start at the first page"
+      },
+      {
         "name": "simplify",
         "type": "boolean",
         "value": null,
@@ -10140,6 +10189,20 @@
         "type": "string",
         "value": null,
         "label": "Request Charge (RU)",
+        "placeholder": ""
+      },
+      {
+        "name": "next_continuation",
+        "type": "string",
+        "value": null,
+        "label": "Next Continuation",
+        "placeholder": ""
+      },
+      {
+        "name": "truncated",
+        "type": "boolean",
+        "value": null,
+        "label": "Truncated",
         "placeholder": ""
       },
       {
@@ -10378,7 +10441,7 @@
     ]
   },
   "azure/cosmosdb/item_query": {
-    "hash": "373fdd2c3303d3be63d9f7481eca9fc5e151509e45d39e77d7728ec2b65a7748",
+    "hash": "58d8ac413710deef75b726d16deeb37de9692323d945fd11fb2ebf69c4f376f6",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Cosmos DB: Query Items",
@@ -10543,6 +10606,13 @@
         "placeholder": "Maximum items per page — default 50, maximum 1000"
       },
       {
+        "name": "continuation",
+        "type": "string",
+        "value": null,
+        "label": "Continuation Token",
+        "placeholder": "Resume from an earlier run's Next Continuation — the Query must be unchanged"
+      },
+      {
         "name": "simplify",
         "type": "boolean",
         "value": null,
@@ -10570,6 +10640,20 @@
         "type": "string",
         "value": null,
         "label": "Request Charge (RU)",
+        "placeholder": ""
+      },
+      {
+        "name": "next_continuation",
+        "type": "string",
+        "value": null,
+        "label": "Next Continuation",
+        "placeholder": ""
+      },
+      {
+        "name": "truncated",
+        "type": "boolean",
+        "value": null,
+        "label": "Truncated",
         "placeholder": ""
       },
       {
@@ -14051,7 +14135,7 @@
     ]
   },
   "azure/storage/blob_copy": {
-    "hash": "36614ba81bc22714095b76a8fd9347202bddd44e45779786116fd568444bc008",
+    "hash": "ce3cdebc084f8e7266748f0bdced35495c8ecfd710c58933da43a6e4368c6bd4",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Azure Storage: Copy Blob",
@@ -14450,7 +14534,7 @@
     ]
   },
   "azure/storage/blob_download": {
-    "hash": "5077c0dde028639c2804abc095c17a840b502a7dd48bcc6b6a27ddd160b83bed",
+    "hash": "46eb506132e33704be8bcb4b57cdb1a64ee2e7293ba5f9309e1d6b6b2da5f2dd",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Azure Storage: Download Blob",
@@ -15081,7 +15165,7 @@
     ]
   },
   "azure/storage/blob_get_all": {
-    "hash": "51d545328b5448b9a1cfaeb4a7570d02d671c554347a0adf40aa7680e0fc3abe",
+    "hash": "645133eedd496be3377b5b4959d3619b1dd50f7d413828f30028fc2a47a84073",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Azure Storage: List Blobs",
@@ -15210,18 +15294,22 @@
       },
       {
         "name": "include",
-        "type": "string",
+        "type": "combobox",
         "value": null,
         "label": "Include",
-        "placeholder": "",
+        "placeholder": "Leave blank for nothing extra; combine with commas, e.g. metadata,tags",
         "options": [
-          {
-            "name": "Nothing extra",
-            "value": ""
-          },
           {
             "name": "Metadata",
             "value": "metadata"
+          },
+          {
+            "name": "Index tags",
+            "value": "tags"
+          },
+          {
+            "name": "Metadata + index tags",
+            "value": "metadata,tags"
           },
           {
             "name": "Snapshots",
@@ -15236,8 +15324,28 @@
             "value": "deleted"
           },
           {
-            "name": "Index tags",
-            "value": "tags"
+            "name": "Soft-deleted blobs with versions",
+            "value": "deletedwithversions"
+          },
+          {
+            "name": "Uncommitted blocks (failed/abandoned uploads)",
+            "value": "uncommittedblobs"
+          },
+          {
+            "name": "Copy state",
+            "value": "copy"
+          },
+          {
+            "name": "Permissions (hierarchical namespace)",
+            "value": "permissions"
+          },
+          {
+            "name": "Immutability policy",
+            "value": "immutabilitypolicy"
+          },
+          {
+            "name": "Legal hold",
+            "value": "legalhold"
           }
         ]
       },
@@ -17675,11 +17783,11 @@
     ]
   },
   "azure/storage/container_get_all": {
-    "hash": "3cb194ecf11a23afb626b5674148340ffb87bc63a7f3d0b145df79f00f7591fd",
+    "hash": "069beef50e4f8854bfed628adc3e04750541b68615bdfb50c861bcb982607da9",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Azure Storage: List Containers",
-    "description": "List the containers in the storage account, optionally filtered by a name prefix",
+    "description": "List the containers in the storage account, optionally filtered by a name prefix and enriched with metadata, soft-deleted containers, or system containers",
     "website": "https://www.flomation.co",
     "icon": "azure+list",
     "date": "16/07/2026",
@@ -17795,11 +17903,29 @@
         "placeholder": "Only containers whose name starts with this"
       },
       {
-        "name": "include_metadata",
-        "type": "boolean",
+        "name": "include",
+        "type": "combobox",
         "value": null,
-        "label": "Include Metadata",
-        "placeholder": "Return each container's metadata alongside its properties"
+        "label": "Include",
+        "placeholder": "Leave blank for nothing extra; combine with commas, e.g. metadata,deleted",
+        "options": [
+          {
+            "name": "Metadata",
+            "value": "metadata"
+          },
+          {
+            "name": "Soft-deleted containers",
+            "value": "deleted"
+          },
+          {
+            "name": "Metadata + soft-deleted containers",
+            "value": "metadata,deleted"
+          },
+          {
+            "name": "System containers ($logs, $blobchangefeed)",
+            "value": "system"
+          }
+        ]
       },
       {
         "name": "return_all",

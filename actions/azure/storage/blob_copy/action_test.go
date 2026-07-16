@@ -125,6 +125,66 @@ func TestExecutePollsPendingCopyToCompletion(t *testing.T) {
 	}
 }
 
+// TestExecuteRedactsTheSourceSASFromOutput — result.source is echoed into the
+// run record and every downstream node, so a source_url carrying a SAS must
+// lose its signature on the way out. The rest of the URL is provenance and
+// stays.
+func TestExecuteRedactsTheSourceSASFromOutput(t *testing.T) {
+	srv := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		w.Header().Set("x-ms-copy-id", "cid-5")
+		w.Header().Set("x-ms-copy-status", "success")
+		w.WriteHeader(http.StatusAccepted)
+	}))
+	defer srv.Close()
+
+	const sourceURL = "https://other.blob.core.windows.net/c/b.bin?sv=2023-11-03&sp=r&se=2026-07-17T10%3A00%3A00Z&sig=LIVE-SAS-SIGNATURE"
+	out, err := Execute(&core.Flow{}, nil, baseInputs(srv.URL,
+		&core.Connection{Name: "container", Type: core.ConnectionTypeString, Value: "dest-container"},
+		&core.Connection{Name: "blob_name", Type: core.ConnectionTypeString, Value: "copy.bin"},
+		&core.Connection{Name: "source_url", Type: core.ConnectionTypeString, Value: sourceURL},
+	))
+	if err != nil {
+		t.Fatalf("Execute: %v", err)
+	}
+	if out["success"] != true {
+		t.Fatalf("error: %v", out["error"])
+	}
+	source := out["result"].(map[string]interface{})["source"].(string)
+	if strings.Contains(source, "LIVE-SAS-SIGNATURE") {
+		t.Errorf("result.source leaked the source SAS signature: %q", source)
+	}
+	if !strings.Contains(source, "sig=REDACTED") {
+		t.Errorf("result.source = %q, want the sig slot marked redacted", source)
+	}
+	if !strings.Contains(source, "other.blob.core.windows.net/c/b.bin") {
+		t.Errorf("result.source = %q, want the source still identifiable", source)
+	}
+}
+
+// TestExecuteEchoesTheResolvedSameAccountSource — a same-account copy reports
+// the URL it actually asked the service to read, which carries no SAS.
+func TestExecuteEchoesTheResolvedSameAccountSource(t *testing.T) {
+	srv := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		w.Header().Set("x-ms-copy-id", "cid-6")
+		w.Header().Set("x-ms-copy-status", "success")
+		w.WriteHeader(http.StatusAccepted)
+	}))
+	defer srv.Close()
+
+	out, err := Execute(&core.Flow{}, nil, baseInputs(srv.URL,
+		&core.Connection{Name: "container", Type: core.ConnectionTypeString, Value: "dest-container"},
+		&core.Connection{Name: "blob_name", Type: core.ConnectionTypeString, Value: "copy.bin"},
+		&core.Connection{Name: "source_container", Type: core.ConnectionTypeString, Value: "src-container"},
+		&core.Connection{Name: "source_blob", Type: core.ConnectionTypeString, Value: "b.bin"},
+	))
+	if err != nil {
+		t.Fatalf("Execute: %v", err)
+	}
+	if got, want := out["result"].(map[string]interface{})["source"], srv.URL+"/src-container/b.bin"; got != want {
+		t.Errorf("result.source = %v, want %q", got, want)
+	}
+}
+
 // TestExecuteWaitOffReturnsPendingImmediately — with the wait turned off the
 // action reports the in-flight status and the copy id to check later.
 func TestExecuteWaitOffReturnsPendingImmediately(t *testing.T) {

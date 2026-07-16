@@ -208,7 +208,7 @@ func normaliseEndpoint(raw string) (string, error) {
 // acquireToken indirects the token exchange so tests can stub it; the real
 // path is the shared per-execution cache in actions/azure/common.go.
 var acquireToken = func(ctx context.Context, a Auth) (string, error) {
-	return azure.ClientCredentialsToken(ctx, httpClient, a.TenantID, a.ClientID, a.ClientSecret, a.Scope())
+	return azure.ClientCredentialsToken(ctx, a.TenantID, a.ClientID, a.ClientSecret, a.Scope())
 }
 
 // SetTokenForTest bypasses the real Entra token exchange, handing every

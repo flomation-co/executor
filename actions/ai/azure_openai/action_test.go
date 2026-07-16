@@ -14,7 +14,9 @@ import (
 // chatResponse is a minimal Azure OpenAI Chat Completions response body.
 // Azure mirrors the OpenAI shape but returns no provider and no usage.cost —
 // the model field carries the underlying model, not the deployment name.
-func chatResponse(model, content, finishReason string) map[string]interface{} {
+// content is interface{} so a test can serve the null Azure returns when the
+// completion-side filter withholds the text.
+func chatResponse(model string, content interface{}, finishReason string) map[string]interface{} {
 	return map[string]interface{}{
 		"id":    "chatcmpl-test",
 		"model": model,
@@ -430,6 +432,47 @@ func TestExecuteContentFilterIsASoftError(t *testing.T) {
 	Expect(result["response"]).To(Equal(""))
 	Expect(result["error"]).To(ContainSubstring("content filter"))
 	Expect(result["error"]).To(ContainSubstring("content management policy"))
+}
+
+// The completion half of the filter is an HTTP 200 with finish_reason
+// "content_filter" and no content — it must fail the same soft way as the
+// prompt half, not report success with an empty response the flow sends on.
+func TestExecuteCompletionContentFilterIsASoftError(t *testing.T) {
+	RegisterTestingT(t)
+
+	server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		w.Header().Set("Content-Type", "application/json")
+		json.NewEncoder(w).Encode(chatResponse("gpt-4o", nil, "content_filter"))
+	}))
+	defer server.Close()
+
+	result, err := Execute(&core.Flow{}, nil, baseInputs(server.URL))
+	Expect(err).To(BeNil(), "content filter must be a soft error, not a run-killing one")
+	Expect(result).To(Not(BeNil()))
+	Expect(result["success"]).To(Equal(false))
+	Expect(result["should_respond"]).To(Equal(false))
+	Expect(result["response"]).To(Equal(""))
+	Expect(result["error"]).To(ContainSubstring("content filter"))
+}
+
+// Azure often returns the text it had emitted before the filter cut in; it is
+// the only context the operator gets on this path, so it rides on the error.
+func TestExecuteCompletionContentFilterKeepsPartialContent(t *testing.T) {
+	RegisterTestingT(t)
+
+	server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		w.Header().Set("Content-Type", "application/json")
+		json.NewEncoder(w).Encode(chatResponse("gpt-4o", "Here is how you could", "content_filter"))
+	}))
+	defer server.Close()
+
+	result, err := Execute(&core.Flow{}, nil, baseInputs(server.URL))
+	Expect(err).To(BeNil())
+	Expect(result["success"]).To(Equal(false))
+	Expect(result["should_respond"]).To(Equal(false))
+	Expect(result["response"]).To(Equal(""), "partial filtered text must not be presented as the response")
+	Expect(result["error"]).To(ContainSubstring("content filter"))
+	Expect(result["error"]).To(ContainSubstring("Here is how you could"))
 }
 
 // Every other API error stays hard — and whatever Azure echoes back, the

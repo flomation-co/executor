@@ -46,13 +46,31 @@ var tokenCache = struct {
 // steady-state eviction policy.
 const maxCachedTokens = 512
 
+// tokenClient talks to the Entra token endpoint, and nothing else.
+//
+// It is package-private and always verifies certificates, deliberately: the
+// endpoint is always login.microsoftonline.com, a public Microsoft host that
+// always presents a valid CA-signed certificate, so there is no legitimate
+// reason to skip verification here — not even when the operator has opted a
+// service's own data-plane endpoint out of TLS verification (a self-signed
+// storage host, the Cosmos emulator). Those opt-outs are consent to trust ONE
+// endpoint the operator named; they are not consent to ship the tenant's
+// client secret over an unverified channel to Microsoft.
+//
+// This is why the mint takes no *http.Client from its callers: an earlier
+// revision did, and two of the three service packages passed their
+// insecure-when-opted-out client straight through, exposing the client secret
+// to anyone able to forge a certificate for login.microsoftonline.com. Keeping
+// the client here makes that class of mistake unrepresentable.
+var tokenClient = &http.Client{Timeout: 30 * time.Second}
+
 // ClientCredentialsToken returns a bearer token for the given service
 // principal and scope, minting one via the OAuth2 client-credentials grant on
 // first use and serving it from the per-execution cache afterwards.
 //
 // scope is the resource default scope, e.g. "https://graph.microsoft.com/.default"
 // or "https://storage.azure.com/.default".
-func ClientCredentialsToken(ctx context.Context, client *http.Client, tenantID, clientID, clientSecret, scope string) (string, error) {
+func ClientCredentialsToken(ctx context.Context, tenantID, clientID, clientSecret, scope string) (string, error) {
 	tenantID = strings.TrimSpace(tenantID)
 	clientID = strings.TrimSpace(clientID)
 	if tenantID == "" {
@@ -81,7 +99,7 @@ func ClientCredentialsToken(ctx context.Context, client *http.Client, tenantID, 
 
 	// Mint outside the lock so a slow token endpoint doesn't serialise other
 	// tenants; a concurrent double-mint is harmless (same credentials).
-	tok, expiresIn, err := mintToken(ctx, client, tenantID, clientID, clientSecret, scope)
+	tok, expiresIn, err := mintToken(ctx, tenantID, clientID, clientSecret, scope)
 	if err != nil {
 		return "", err
 	}
@@ -126,7 +144,7 @@ func pruneExpiredTokens() {
 // tokenURL is a var so tests can point the exchange at an httptest server.
 var tokenURL = "https://login.microsoftonline.com/%s/oauth2/v2.0/token"
 
-func mintToken(ctx context.Context, client *http.Client, tenantID, clientID, clientSecret, scope string) (string, int, error) {
+func mintToken(ctx context.Context, tenantID, clientID, clientSecret, scope string) (string, int, error) {
 	form := url.Values{}
 	form.Set("grant_type", "client_credentials")
 	form.Set("client_id", clientID)
@@ -140,7 +158,7 @@ func mintToken(ctx context.Context, client *http.Client, tenantID, clientID, cli
 	}
 	req.Header.Set("Content-Type", "application/x-www-form-urlencoded")
 
-	resp, err := client.Do(req)
+	resp, err := tokenClient.Do(req)
 	if err != nil {
 		return "", 0, fmt.Errorf("Microsoft Entra token request failed: %s", RedactSecret(err.Error(), clientSecret))
 	}

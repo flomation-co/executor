@@ -131,10 +131,12 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 		}
 	}
 
+	// The source is echoed REDACTED: a source_url carrying a SAS would
+	// otherwise put a live sig= into the run record and every downstream node.
 	result := map[string]interface{}{
 		"copyId":     copyID,
 		"copyStatus": status,
-		"source":     storage.OptionalString("source_url", inputs),
+		"source":     storage.RedactURL(sourceURL),
 	}
 	if srcContainer != "" {
 		result["sourceContainer"] = srcContainer

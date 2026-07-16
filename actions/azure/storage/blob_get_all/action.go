@@ -31,16 +31,23 @@ var Inputs = [...]core.Connection{
 	{Name: "container", Type: core.ConnectionTypeString, Label: "Container", Placeholder: "my-container", Required: true},
 	{Name: "prefix", Type: core.ConnectionTypeString, Label: "Prefix", Placeholder: "Only blobs whose name starts with this, e.g. reports/2026/"},
 	{
-		Name:  "include",
-		Type:  core.ConnectionTypeString,
-		Label: "Include",
+		Name:        "include",
+		Type:        core.ConnectionTypeComboBox,
+		Label:       "Include",
+		Placeholder: "Leave blank for nothing extra; combine with commas, e.g. metadata,tags",
 		Options: []core.ConnectionOption{
-			{Name: "Nothing extra", Value: ""},
 			{Name: "Metadata", Value: "metadata"},
+			{Name: "Index tags", Value: "tags"},
+			{Name: "Metadata + index tags", Value: "metadata,tags"},
 			{Name: "Snapshots", Value: "snapshots"},
 			{Name: "Versions", Value: "versions"},
 			{Name: "Soft-deleted blobs", Value: "deleted"},
-			{Name: "Index tags", Value: "tags"},
+			{Name: "Soft-deleted blobs with versions", Value: "deletedwithversions"},
+			{Name: "Uncommitted blocks (failed/abandoned uploads)", Value: "uncommittedblobs"},
+			{Name: "Copy state", Value: "copy"},
+			{Name: "Permissions (hierarchical namespace)", Value: "permissions"},
+			{Name: "Immutability policy", Value: "immutabilitypolicy"},
+			{Name: "Legal hold", Value: "legalhold"},
 		},
 	},
 	{Name: "return_all", Type: core.ConnectionTypeBoolean, Label: "Return All", Placeholder: "Follow pagination until every blob is fetched"},
@@ -69,7 +76,11 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	if prefix := storage.OptionalString("prefix", inputs); prefix != "" {
 		q.Set("prefix", prefix)
 	}
-	if include := storage.OptionalString("include", inputs); include != "" {
+	include, err := storage.ParseIncludeTokens(storage.OptionalString("include", inputs), storage.BlobIncludeTokens)
+	if err != nil {
+		return storage.ErrorResult(err.Error()), nil
+	}
+	if include != "" {
 		q.Set("include", include)
 	}
 	returnAll := storage.OptionalBool("return_all", inputs)

@@ -126,5 +126,8 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	if err != nil {
 		return cosmosdb.ErrorResult(err.Error()), nil
 	}
+	// pkPath is authoritative here, and a same-named container earlier in this
+	// execution may have cached a different one (delete-then-recreate).
+	cosmosdb.SeedPartitionKeyPath(auth, db, coll, pkPath)
 	return cosmosdb.ResourceResult(obj, cosmosdb.RequestCharge(resp), fmt.Sprintf("Created container %q in database %q", coll, db)), nil
 }

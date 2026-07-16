@@ -154,7 +154,14 @@ func ModelContextWindow(model string) int {
 		return 128000
 	case strings.Contains(m, "gpt-4"):
 		return 128000
-	case strings.Contains(m, "gpt-3.5"):
+	// "gpt-35" is Azure's spelling of the same family: Azure names models and
+	// deployments from [A-Za-z0-9_-] only, so its GPT-3.5 arrives dotless
+	// ("gpt-35-turbo", "gpt-35-turbo-16k") and can never match the case above.
+	// Without this the only caller that passes an Azure deployment name
+	// (ai/azure_openai) falls through to the 32000 default — the one fallback
+	// that is LARGER than the real window, so the truncation guard fails open
+	// and the provider 400s on context length.
+	case strings.Contains(m, "gpt-3.5"), strings.Contains(m, "gpt-35"):
 		return 16000
 	// Groq-hosted open models. Groq publishes large context windows but
 	// caps the practical maximum per deployment; these are conservative

@@ -524,6 +524,21 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 
 	choice := result.Choices[0]
 
+	// The other half of the filter: where a blocked prompt is a 400 (handled
+	// above), a blocked COMPLETION is an HTTP 200 carrying finish_reason
+	// "content_filter" and content that is null or cut off mid-sentence. The
+	// default filter is on for every deployment, so without this branch the
+	// action reports success with an empty/truncated response and the flow
+	// sends it on with nothing naming the filter. Azure supplies no message on
+	// this path, so any partial text is echoed as the only available context.
+	if choice.FinishReason == "content_filter" {
+		msg := "Azure OpenAI's content filter blocked the response"
+		if choice.Message.Content != nil && strings.TrimSpace(*choice.Message.Content) != "" {
+			msg += fmt.Sprintf(" — partial content before it was cut off: %s", strings.TrimSpace(*choice.Message.Content))
+		}
+		return errorResult(msg), nil
+	}
+
 	// Check for tool calls
 	if choice.FinishReason == "tool_calls" && len(choice.Message.ToolCalls) > 0 {
 		var toolRequests []core.ToolRequest

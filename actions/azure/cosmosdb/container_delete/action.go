@@ -71,6 +71,9 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	if err := cosmosdb.CheckResponse(resp); err != nil {
 		return cosmosdb.ErrorResult(err.Error()), nil
 	}
+	// The name may be recreated later in this run on a different partition-key
+	// path; a cached path would then be sent as a wrong-partition header.
+	cosmosdb.InvalidatePartitionKeyPath(auth, db, coll)
 	return cosmosdb.ResourceResult(map[string]interface{}{"id": coll, "database": db, "deleted": true},
 		cosmosdb.RequestCharge(resp), fmt.Sprintf("Deleted container %q from database %q", coll, db)), nil
 }

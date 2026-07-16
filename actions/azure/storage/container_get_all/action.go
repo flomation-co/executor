@@ -12,7 +12,7 @@ const (
 	Author       = "Dave McElin"
 	Organisation = "Flomation"
 	Name         = "Azure Storage: List Containers"
-	Description  = "List the containers in the storage account, optionally filtered by a name prefix"
+	Description  = "List the containers in the storage account, optionally filtered by a name prefix and enriched with metadata, soft-deleted containers, or system containers"
 	Website      = "https://www.flomation.co"
 	Icon         = "azure+list"
 	Date         = "16/07/2026"
@@ -29,7 +29,18 @@ var Inputs = [...]core.Connection{
 	{Name: "endpoint", Type: core.ConnectionTypeString, Label: "Custom Endpoint", Placeholder: "https://myaccount.blob.core.windows.net — leave blank to derive; Azurite: http://host:10000/devstoreaccount1"},
 	{Name: "allow_insecure", Type: core.ConnectionTypeBoolean, Label: "Allow Insecure TLS", Placeholder: "Skip TLS verification — only for custom endpoints with a self-signed certificate"},
 	{Name: "prefix", Type: core.ConnectionTypeString, Label: "Prefix", Placeholder: "Only containers whose name starts with this"},
-	{Name: "include_metadata", Type: core.ConnectionTypeBoolean, Label: "Include Metadata", Placeholder: "Return each container's metadata alongside its properties"},
+	{
+		Name:        "include",
+		Type:        core.ConnectionTypeComboBox,
+		Label:       "Include",
+		Placeholder: "Leave blank for nothing extra; combine with commas, e.g. metadata,deleted",
+		Options: []core.ConnectionOption{
+			{Name: "Metadata", Value: "metadata"},
+			{Name: "Soft-deleted containers", Value: "deleted"},
+			{Name: "Metadata + soft-deleted containers", Value: "metadata,deleted"},
+			{Name: "System containers ($logs, $blobchangefeed)", Value: "system"},
+		},
+	},
 	{Name: "return_all", Type: core.ConnectionTypeBoolean, Label: "Return All", Placeholder: "Follow pagination until every container is fetched"},
 	{Name: "limit", Type: core.ConnectionTypeInteger, Label: "Limit", Placeholder: "Max containers to return when not returning all (default 50, max 5000)"},
 }
@@ -52,8 +63,12 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	if prefix := storage.OptionalString("prefix", inputs); prefix != "" {
 		q.Set("prefix", prefix)
 	}
-	if storage.OptionalBool("include_metadata", inputs) {
-		q.Set("include", "metadata")
+	include, err := storage.ParseIncludeTokens(storage.OptionalString("include", inputs), storage.ContainerIncludeTokens)
+	if err != nil {
+		return storage.ErrorResult(err.Error()), nil
+	}
+	if include != "" {
+		q.Set("include", include)
 	}
 	returnAll := storage.OptionalBool("return_all", inputs)
 	limit := storage.ClampLimit(storage.OptionalInt("limit", inputs))

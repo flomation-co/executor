@@ -1,10 +1,14 @@
 package storage
 
 import (
+	"bytes"
+	"compress/gzip"
 	"encoding/xml"
 	"net/http"
 	"net/http/httptest"
 	"net/url"
+	"reflect"
+	"strconv"
 	"strings"
 	"testing"
 	"time"
@@ -445,6 +449,115 @@ func TestClampLimit(t *testing.T) {
 }
 
 // ---------------------------------------------------------------------------
+// Response body caps
+// ---------------------------------------------------------------------------
+
+// TestDoRejectsABodyOverTheCap — the cap must FAIL, not clip. A LimitReader at
+// the cap returns io.EOF with no error, so an oversized blob would otherwise
+// come back as a truncated prefix that every caller reports as a success.
+func TestDoRejectsABodyOverTheCap(t *testing.T) {
+	const bodyCap = 1 << 20
+
+	serve := func(n int) *httptest.Server {
+		body := bytes.Repeat([]byte("x"), n)
+		return httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+			_, _ = w.Write(body)
+		}))
+	}
+
+	// Exactly at the cap is a legitimate response, not an error.
+	atCap := serve(bodyCap)
+	defer atCap.Close()
+	resp, err := Do(&core.Flow{}, testAuth(t, atCap.URL), Request{
+		Method: http.MethodGet, Path: BlobPath("c", "at-cap.bin"), Query: url.Values{}, MaxBody: bodyCap,
+	})
+	if err != nil {
+		t.Fatalf("a body of exactly the cap must succeed, got: %v", err)
+	}
+	if len(resp.Body) != bodyCap {
+		t.Errorf("body = %d bytes, want the full %d", len(resp.Body), bodyCap)
+	}
+
+	// One byte past it is a truncation, and must be reported as one.
+	overCap := serve(bodyCap + 1)
+	defer overCap.Close()
+	_, err = Do(&core.Flow{}, testAuth(t, overCap.URL), Request{
+		Method: http.MethodGet, Path: BlobPath("c", "over-cap.bin"), Query: url.Values{}, MaxBody: bodyCap,
+	})
+	if err == nil {
+		t.Fatal("a body past the cap must error — silently truncating it reports success on corrupt data")
+	}
+	for _, want := range []string{"1 MB", "Byte Range", "Copy Blob"} {
+		if !strings.Contains(err.Error(), want) {
+			t.Errorf("error %q must name the cap and the way out (%q)", err, want)
+		}
+	}
+}
+
+// TestOverCapErrorRemedyMatchesTheCap — the envelope cap and the download cap
+// have different remedies; an operator told to use the Byte Range input on an
+// 8 MB list response has been sent nowhere.
+func TestOverCapErrorRemedyMatchesTheCap(t *testing.T) {
+	download := overCapError(true, MaxDownloadBody).Error()
+	if !strings.Contains(download, "256 MB") || !strings.Contains(download, "Byte Range") {
+		t.Errorf("download cap error = %q", download)
+	}
+	envelope := overCapError(false, maxResponseBody).Error()
+	if !strings.Contains(envelope, "8 MB") || !strings.Contains(envelope, "Limit") {
+		t.Errorf("envelope cap error = %q", envelope)
+	}
+	if strings.Contains(envelope, "Byte Range") {
+		t.Errorf("a list response over the cap is not fixed by a byte range: %q", envelope)
+	}
+}
+
+// TestDoReturnsBlobBytesAsStored — Content-Encoding is a STORED property of a
+// blob, not a transfer encoding. If net/http is allowed to offer gzip it
+// unwraps the blob on arrival and strips Content-Encoding/Content-Length, so a
+// download returns different bytes than were uploaded — and disagrees with the
+// same blob fetched with a Range header, which net/http leaves alone.
+func TestDoReturnsBlobBytesAsStored(t *testing.T) {
+	var buf bytes.Buffer
+	zw := gzip.NewWriter(&buf)
+	if _, err := zw.Write([]byte(`{"event":"stored gzip-encoded"}`)); err != nil {
+		t.Fatalf("gzip write: %v", err)
+	}
+	if err := zw.Close(); err != nil {
+		t.Fatalf("gzip close: %v", err)
+	}
+	stored := buf.Bytes()
+
+	var gotAcceptEncoding string
+	srv := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		gotAcceptEncoding = r.Header.Get("Accept-Encoding")
+		w.Header().Set("Content-Encoding", "gzip")
+		w.Header().Set("Content-Type", "application/json")
+		w.Header().Set("Content-Length", strconv.Itoa(len(stored)))
+		_, _ = w.Write(stored)
+	}))
+	defer srv.Close()
+
+	resp, err := Do(&core.Flow{}, testAuth(t, srv.URL), Request{
+		Method: http.MethodGet, Path: BlobPath("c", "logs.json.gz"), Query: url.Values{}, MaxBody: MaxDownloadBody,
+	})
+	if err != nil {
+		t.Fatalf("Do: %v", err)
+	}
+	if gotAcceptEncoding != "" {
+		t.Errorf("Accept-Encoding = %q, want none — offering gzip makes net/http unwrap the blob's stored encoding", gotAcceptEncoding)
+	}
+	if !bytes.Equal(resp.Body, stored) {
+		t.Errorf("body = %d bytes, want the %d stored bytes verbatim", len(resp.Body), len(stored))
+	}
+	if resp.Headers.Get("Content-Encoding") != "gzip" {
+		t.Errorf("Content-Encoding = %q, want the stored property intact", resp.Headers.Get("Content-Encoding"))
+	}
+	if got := resp.Headers.Get("Content-Length"); got != strconv.Itoa(len(stored)) {
+		t.Errorf("Content-Length = %q, want %d", got, len(stored))
+	}
+}
+
+// ---------------------------------------------------------------------------
 // Error envelope & redaction
 // ---------------------------------------------------------------------------
 
@@ -490,6 +603,77 @@ func TestRedact(t *testing.T) {
 	e := Auth{ClientSecret: "s3cr3t-value"}
 	if strings.Contains(e.redact("boom s3cr3t-value boom"), "s3cr3t-value") {
 		t.Error("client secret leaked through redact")
+	}
+}
+
+// TestRedactURL — an output-bound URL loses its SAS signature and nothing else:
+// the snapshot/version identify WHICH source was read, and se/sp/sv are not
+// credentials.
+func TestRedactURL(t *testing.T) {
+	got := RedactURL("https://other.blob.core.windows.net/c/b.bin?snapshot=2026-07-16T10:00:00Z&sv=2023-11-03&sp=r&sig=abc123%2Fdef%3D")
+	if strings.Contains(got, "abc123") {
+		t.Errorf("SAS signature survived into output: %q", got)
+	}
+	if !strings.Contains(got, "sig=REDACTED") {
+		t.Errorf("redacted URL = %q, want the sig slot marked", got)
+	}
+	for _, keep := range []string{"snapshot=2026-07-16T10:00:00Z", "sv=2023-11-03", "sp=r", "/c/b.bin"} {
+		if !strings.Contains(got, keep) {
+			t.Errorf("redacted URL = %q, want %q kept — it is provenance, not a credential", got, keep)
+		}
+	}
+	if got := RedactURL("https://acct.blob.core.windows.net/c/b.bin"); got != "https://acct.blob.core.windows.net/c/b.bin" {
+		t.Errorf("a URL with no SAS must pass through untouched, got %q", got)
+	}
+}
+
+// ---------------------------------------------------------------------------
+// include tokens
+// ---------------------------------------------------------------------------
+
+func TestParseIncludeTokens(t *testing.T) {
+	for _, tc := range []struct {
+		raw, want string
+		allowed   []string
+	}{
+		{"", "", BlobIncludeTokens},
+		{"metadata", "metadata", BlobIncludeTokens},
+		// The whole point: values COMBINE, so one pass can carry both.
+		{"metadata,tags", "metadata,tags", BlobIncludeTokens},
+		{" Metadata , TAGS ", "metadata,tags", BlobIncludeTokens},
+		{"metadata,,tags,", "metadata,tags", BlobIncludeTokens},
+		{"metadata,tags,metadata", "metadata,tags", BlobIncludeTokens},
+		{"uncommittedblobs,copy", "uncommittedblobs,copy", BlobIncludeTokens},
+		{"metadata,deleted,system", "metadata,deleted,system", ContainerIncludeTokens},
+	} {
+		got, err := ParseIncludeTokens(tc.raw, tc.allowed)
+		if err != nil {
+			t.Errorf("ParseIncludeTokens(%q) = %v, want nil", tc.raw, err)
+			continue
+		}
+		if got != tc.want {
+			t.Errorf("ParseIncludeTokens(%q) = %q, want %q", tc.raw, got, tc.want)
+		}
+	}
+
+	// An unknown token is caught here — the service answers one with a flat 400
+	// that names nothing.
+	for _, tc := range []struct {
+		raw     string
+		allowed []string
+	}{
+		{"snapshot", BlobIncludeTokens}, // near-miss for "snapshots"
+		{"metadata,everything", BlobIncludeTokens},
+		{"tags", ContainerIncludeTokens}, // a blob token, not a container one
+	} {
+		got, err := ParseIncludeTokens(tc.raw, tc.allowed)
+		if err == nil {
+			t.Errorf("ParseIncludeTokens(%q) = %q, want an error naming the supported values", tc.raw, got)
+			continue
+		}
+		if !strings.Contains(err.Error(), "metadata") {
+			t.Errorf("error %q must list what IS supported", err)
+		}
 	}
 }
 
@@ -541,6 +725,60 @@ func TestEnumerationResultsParsing(t *testing.T) {
 	}
 	if m["metadata"].(map[string]interface{})["owner"] != "ops" {
 		t.Errorf("metadata = %#v", m["metadata"])
+	}
+}
+
+// TestListMetadataMatchesTheHeaderPath is the shape contract between the two
+// ways a flow can read the same metadata: the list envelope (<Metadata> XML)
+// and the properties HEAD (x-ms-meta-* headers). They must agree, or a filter
+// written against one silently matches nothing on the other.
+//
+// The two transforms <Properties> needs are both corrupting here: camelKey
+// mangles the operator's name (ORDER_ID → oRDER_ID) and coerceScalar eats a
+// zero-padded reference ("0012" → 12).
+func TestListMetadataMatchesTheHeaderPath(t *testing.T) {
+	const body = `<?xml version="1.0" encoding="utf-8"?>
+<EnumerationResults>
+  <Containers>
+    <Container>
+      <Name>c</Name>
+      <Metadata><Project_Code>0012</Project_Code><ORDER_ID>00123</ORDER_ID><Archived>true</Archived></Metadata>
+    </Container>
+  </Containers>
+  <Blobs>
+    <Blob>
+      <Name>a.txt</Name>
+      <Properties><Content-Length>1024</Content-Length></Properties>
+      <Metadata><Project_Code>0012</Project_Code><ORDER_ID>00123</ORDER_ID><Archived>true</Archived></Metadata>
+    </Blob>
+  </Blobs>
+</EnumerationResults>`
+
+	var env EnumerationResults
+	if err := xml.Unmarshal([]byte(body), &env); err != nil {
+		t.Fatalf("unmarshal: %v", err)
+	}
+
+	// The same metadata as the service returns it on a properties HEAD.
+	h := http.Header{}
+	h.Set("x-ms-meta-Project_Code", "0012")
+	h.Set("x-ms-meta-ORDER_ID", "00123")
+	h.Set("x-ms-meta-Archived", "true")
+	want := HeadersResult("a.txt", h)["metadata"]
+
+	if got := want.(map[string]interface{}); got["project_code"] != "0012" {
+		t.Fatalf("the header path itself changed shape: %#v", got)
+	}
+	if got := BlobMap(env.Blobs[0])["metadata"]; !reflect.DeepEqual(got, want) {
+		t.Errorf("blob_get_all metadata disagrees with blob_get_properties:\n got: %#v\nwant: %#v", got, want)
+	}
+	if got := ContainerMap(env.Containers[0])["metadata"]; !reflect.DeepEqual(got, want) {
+		t.Errorf("container_get_all metadata disagrees with the header path:\n got: %#v\nwant: %#v", got, want)
+	}
+
+	// <Properties> keeps the camelKey + coercion the header path also applies.
+	if props := BlobMap(env.Blobs[0])["properties"].(map[string]interface{}); props["contentLength"] != int64(1024) {
+		t.Errorf("properties = %#v, want contentLength coerced to int64", props)
 	}
 }
 

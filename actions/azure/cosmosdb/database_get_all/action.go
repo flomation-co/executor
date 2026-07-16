@@ -39,6 +39,7 @@ var Inputs = [...]core.Connection{
 
 	{Name: "return_all", Type: core.ConnectionTypeBoolean, Label: "Return All", Placeholder: "Follow every continuation token until all databases are fetched"},
 	{Name: "limit", Type: core.ConnectionTypeInteger, Label: "Limit", Placeholder: "Maximum databases per page — default 50, maximum 1000"},
+	{Name: "continuation", Type: core.ConnectionTypeString, Label: "Continuation Token", Placeholder: "Resume from an earlier run's Next Continuation — leave blank to start at the first page"},
 	{Name: "simplify", Type: core.ConnectionTypeBoolean, Label: "Simplify", Placeholder: "Strip Cosmos system properties (_rid, _etag, _ts, …) — on by default"},
 }
 
@@ -46,6 +47,8 @@ var Outputs = [...]core.Connection{
 	{Name: "results", Type: core.ConnectionTypeObject, Label: "Databases"},
 	{Name: "count", Type: core.ConnectionTypeInteger, Label: "Count"},
 	{Name: "request_charge", Type: core.ConnectionTypeString, Label: "Request Charge (RU)"},
+	{Name: "next_continuation", Type: core.ConnectionTypeString, Label: "Next Continuation"},
+	{Name: "truncated", Type: core.ConnectionTypeBoolean, Label: "Truncated"},
 	{Name: "tool_result", Type: core.ConnectionTypeString, Label: "Result Summary"},
 	{Name: "success", Type: core.ConnectionTypeBoolean, Label: "Success"},
 	{Name: "error", Type: core.ConnectionTypeString, Label: "Error"},
@@ -59,10 +62,10 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	limit, set := cosmosdb.OptionalInt("limit", inputs)
 	returnAll := cosmosdb.OptionalBool("return_all", inputs)
 
-	items, charge, err := cosmosdb.Feed(flow, auth, http.MethodGet, "/dbs", "dbs", "", "Databases", nil, nil, cosmosdb.ClampLimit(limit, set), returnAll)
+	items, charge, next, err := cosmosdb.Feed(flow, auth, http.MethodGet, "/dbs", "dbs", "", "Databases", nil, nil, cosmosdb.ClampLimit(limit, set), returnAll, cosmosdb.OptionalString("continuation", inputs))
 	if err != nil {
 		return cosmosdb.ErrorResult(err.Error()), nil
 	}
 	items = cosmosdb.SimplifyItems(items, cosmosdb.BoolDefaultTrue("simplify", inputs))
-	return cosmosdb.ListResult(items, charge, fmt.Sprintf("Fetched %d databases", len(items))), nil
+	return cosmosdb.ListResult(items, charge, next, returnAll, fmt.Sprintf("Fetched %d databases", len(items))), nil
 }

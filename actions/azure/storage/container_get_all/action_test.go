@@ -41,7 +41,7 @@ func TestExecutePaginatesWithReturnAll(t *testing.T) {
 
 	out, err := Execute(&core.Flow{}, nil, baseInputs(srv.URL,
 		&core.Connection{Name: "prefix", Type: core.ConnectionTypeString, Value: "prod"},
-		&core.Connection{Name: "include_metadata", Type: core.ConnectionTypeBoolean, Value: true},
+		&core.Connection{Name: "include", Type: core.ConnectionTypeComboBox, Value: "metadata"},
 		&core.Connection{Name: "return_all", Type: core.ConnectionTypeBoolean, Value: true},
 	))
 	if err != nil {
@@ -60,6 +60,71 @@ func TestExecutePaginatesWithReturnAll(t *testing.T) {
 	first := items[0].(map[string]interface{})
 	if first["name"] != "prod-a" || first["metadata"].(map[string]interface{})["owner"] != "ops" {
 		t.Errorf("first = %#v", first)
+	}
+}
+
+// TestExecuteIncludeReachesSoftDeletedAndSystemContainers — soft-deleted
+// containers are invisible to every other action in the node, so include=deleted
+// is the only way to audit or drive a restore; system ($logs) needs its own
+// token, and the two combine with metadata in one pass.
+func TestExecuteIncludeReachesSoftDeletedAndSystemContainers(t *testing.T) {
+	var gotInclude string
+	srv := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		gotInclude = r.URL.Query().Get("include")
+		w.Header().Set("Content-Type", "application/xml")
+		_, _ = w.Write([]byte(`<EnumerationResults><Containers><Container><Name>gone</Name><Deleted>true</Deleted><Version>01D</Version></Container></Containers><NextMarker/></EnumerationResults>`))
+	}))
+	defer srv.Close()
+
+	for _, tc := range []struct{ in, want string }{
+		{"deleted", "deleted"},
+		{"system", "system"},
+		{"metadata,deleted", "metadata,deleted"},
+		{" Metadata , System ", "metadata,system"},
+	} {
+		out, err := Execute(&core.Flow{}, nil, baseInputs(srv.URL,
+			&core.Connection{Name: "include", Type: core.ConnectionTypeComboBox, Value: tc.in},
+		))
+		if err != nil {
+			t.Fatalf("Execute(%q): %v", tc.in, err)
+		}
+		if out["success"] != true {
+			t.Fatalf("Execute(%q): %v", tc.in, out["error"])
+		}
+		if gotInclude != tc.want {
+			t.Errorf("include=%q on the wire for input %q, want %q", gotInclude, tc.in, tc.want)
+		}
+	}
+
+	// The soft-deleted marker survives into the output.
+	out, _ := Execute(&core.Flow{}, nil, baseInputs(srv.URL,
+		&core.Connection{Name: "include", Type: core.ConnectionTypeComboBox, Value: "deleted"},
+	))
+	first := out["results"].([]interface{})[0].(map[string]interface{})
+	if first["deleted"] != true {
+		t.Errorf("listed container = %#v, want deleted flagged", first)
+	}
+}
+
+func TestExecuteRejectsAnUnknownIncludeValue(t *testing.T) {
+	srv := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		t.Error("an unknown include value must not reach the service")
+	}))
+	defer srv.Close()
+
+	// A blob token, not a container one — the service would answer with a flat
+	// 400 that names nothing.
+	out, err := Execute(&core.Flow{}, nil, baseInputs(srv.URL,
+		&core.Connection{Name: "include", Type: core.ConnectionTypeComboBox, Value: "tags"},
+	))
+	if err != nil {
+		t.Fatalf("an unknown include value must be a soft failure, got %v", err)
+	}
+	if out["success"] != false || !strings.Contains(out["error"].(string), `"tags" is not supported`) {
+		t.Errorf("out = %v, want the offending token named", out)
+	}
+	if !strings.Contains(out["error"].(string), "metadata, deleted, system") {
+		t.Errorf("error = %v, want the supported values listed", out["error"])
 	}
 }
 

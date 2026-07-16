@@ -5,6 +5,7 @@ package cosmosdb_test
 
 import (
 	"encoding/json"
+	"fmt"
 	"io"
 	"net/http"
 	"net/http/httptest"
@@ -14,6 +15,10 @@ import (
 
 	. "github.com/onsi/gomega"
 
+	core "flomation.app/automate/executor"
+	container_create "flomation.app/automate/executor/actions/azure/cosmosdb/container_create"
+	container_delete "flomation.app/automate/executor/actions/azure/cosmosdb/container_delete"
+	container_replace "flomation.app/automate/executor/actions/azure/cosmosdb/container_replace"
 	item_create "flomation.app/automate/executor/actions/azure/cosmosdb/item_create"
 	item_delete "flomation.app/automate/executor/actions/azure/cosmosdb/item_delete"
 	item_get "flomation.app/automate/executor/actions/azure/cosmosdb/item_get"
@@ -441,4 +446,182 @@ func TestItemDeleteNotFoundIsSoft(t *testing.T) {
 	Expect(err).To(BeNil())
 	Expect(out["success"]).To(BeFalse())
 	Expect(out["error"]).To(ContainSubstring("not found"))
+}
+
+// TestItemGetAllReturnAllReportsTruncation is the operator's case: a container
+// far bigger than the page budget, listed with Return All. The action must not
+// claim a complete list — a downstream reconcile ("delete anything not in this
+// list") would act on items that were simply never fetched.
+func TestItemGetAllReturnAllReportsTruncation(t *testing.T) {
+	RegisterTestingT(t)
+	var calls int32
+	server := itemServer("/id", func(w http.ResponseWriter, r *http.Request) {
+		n := atomic.AddInt32(&calls, 1)
+		w.Header().Set("x-ms-continuation", fmt.Sprintf("token-%d", n))
+		w.Header().Set("x-ms-request-charge", "1")
+		_, _ = w.Write([]byte(`{"Documents":[{"id":"i1"}]}`))
+	})
+	defer server.Close()
+
+	out, err := item_get_all.Execute(nil, nil, authFor(server.URL,
+		str("database", "d1"), str("container", "c1"), boolean("return_all", true)))
+	Expect(err).To(BeNil())
+	Expect(out["success"]).To(BeTrue())
+	Expect(out["truncated"]).To(BeTrue())
+	Expect(out["next_continuation"]).NotTo(BeEmpty(), "the operator must be able to resume")
+	Expect(out["tool_result"]).To(ContainSubstring("PARTIAL"))
+	Expect(out["tool_result"]).To(ContainSubstring("safety cap"))
+}
+
+// TestItemGetAllResumesFromContinuation: the Next Continuation output feeds
+// straight back into the Continuation input.
+func TestItemGetAllResumesFromContinuation(t *testing.T) {
+	RegisterTestingT(t)
+	var gotContinuation string
+	server := itemServer("/id", func(w http.ResponseWriter, r *http.Request) {
+		gotContinuation = r.Header.Get("x-ms-continuation")
+		_, _ = w.Write([]byte(`{"Documents":[{"id":"i2"}]}`))
+	})
+	defer server.Close()
+
+	out, err := item_get_all.Execute(nil, nil, authFor(server.URL,
+		str("database", "d1"), str("container", "c1"),
+		boolean("return_all", true), str("continuation", "token-200")))
+	Expect(err).To(BeNil())
+	Expect(gotContinuation).To(Equal("token-200"))
+	Expect(out["count"]).To(Equal(1))
+	Expect(out["truncated"]).To(BeFalse())
+}
+
+// TestItemQueryReturnAllReportsTruncation: the same contract on the query path,
+// where a silently short result set is most likely to be trusted.
+func TestItemQueryReturnAllReportsTruncation(t *testing.T) {
+	RegisterTestingT(t)
+	server := itemServer("/id", func(w http.ResponseWriter, r *http.Request) {
+		w.Header().Set("x-ms-continuation", "more")
+		_, _ = w.Write([]byte(`{"Documents":[{"id":"i1"}]}`))
+	})
+	defer server.Close()
+
+	out, err := item_query.Execute(nil, nil, authFor(server.URL,
+		str("database", "d1"), str("container", "c1"),
+		text("query", "SELECT * FROM c"), boolean("return_all", true)))
+	Expect(err).To(BeNil())
+	Expect(out["truncated"]).To(BeTrue())
+	Expect(out["tool_result"]).To(ContainSubstring("safety cap"))
+}
+
+// TestRecreatedContainerDoesNotReuseStalePartitionKey walks the reset-and-
+// reload flow the pk cache used to break: read an /id container, delete it,
+// recreate the SAME name on /customerId, then create an item. The header must
+// carry the new path's value ["c-9"], not the old path's ["o-1"] — Cosmos
+// rejects the mismatch with a message that blames the (correct) flow.
+func TestRecreatedContainerDoesNotReuseStalePartitionKey(t *testing.T) {
+	RegisterTestingT(t)
+	pkPath := "/id"
+	var gotPK string
+	server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		switch {
+		case r.Method == http.MethodGet && strings.HasSuffix(r.URL.Path, "/colls/orders"):
+			_, _ = w.Write([]byte(`{"id":"orders","partitionKey":{"paths":["` + pkPath + `"]}}`))
+		case r.Method == http.MethodDelete && strings.HasSuffix(r.URL.Path, "/colls/orders"):
+			w.WriteHeader(http.StatusNoContent)
+		case r.Method == http.MethodPost && strings.HasSuffix(r.URL.Path, "/colls"):
+			raw, _ := io.ReadAll(r.Body)
+			w.WriteHeader(http.StatusCreated)
+			_, _ = w.Write(raw)
+		default: // the item create
+			gotPK = r.Header.Get("x-ms-documentdb-partitionkey")
+			raw, _ := io.ReadAll(r.Body)
+			w.WriteHeader(http.StatusCreated)
+			_, _ = w.Write(raw)
+		}
+	}))
+	defer server.Close()
+
+	base := func(more ...*core.Connection) []*core.Connection {
+		return authFor(server.URL, append([]*core.Connection{
+			str("database", "d1"), str("container", "orders")}, more...)...)
+	}
+
+	// Touch the container so the old /id path lands in the cache.
+	out, err := item_get.Execute(nil, nil, base(str("item_id", "o-1")))
+	Expect(err).To(BeNil())
+	Expect(out["success"]).To(BeTrue())
+
+	out, err = container_delete.Execute(nil, nil, base())
+	Expect(err).To(BeNil())
+	Expect(out["success"]).To(BeTrue())
+
+	pkPath = "/customerId" // the container comes back partitioned differently
+	out, err = container_create.Execute(nil, nil, base(str("partition_key_path", "/customerId")))
+	Expect(err).To(BeNil())
+	Expect(out["success"]).To(BeTrue())
+
+	out, err = item_create.Execute(nil, nil, base(object("item", `{"id":"o-1","customerId":"c-9"}`)))
+	Expect(err).To(BeNil())
+	Expect(out["success"]).To(BeTrue())
+	Expect(gotPK).To(Equal(`["c-9"]`), "the recreated container is partitioned on /customerId — a cached /id would send [\"o-1\"] and Cosmos would reject the document/header mismatch")
+}
+
+// TestContainerLifecycleForcesPartitionKeyRediscovery covers the half of the
+// stale-cache window that container_create's seed does NOT: a container that is
+// deleted or redefined here and comes back by some other route (a peer flow,
+// the portal, an ARM template). The next item op must re-read the definition
+// rather than answer from a cache entry describing a container that no longer
+// exists.
+func TestContainerLifecycleForcesPartitionKeyRediscovery(t *testing.T) {
+	for _, tc := range []struct {
+		name string
+		run  func(inputs []*core.Connection) (map[string]interface{}, error)
+	}{
+		{"delete", func(in []*core.Connection) (map[string]interface{}, error) {
+			return container_delete.Execute(nil, nil, in)
+		}},
+		{"replace", func(in []*core.Connection) (map[string]interface{}, error) {
+			return container_replace.Execute(nil, nil, append(in, integer("default_ttl", 60)))
+		}},
+	} {
+		t.Run(tc.name, func(t *testing.T) {
+			RegisterTestingT(t)
+			var discoveries int32
+			coll := "orders_" + tc.name // a fresh name per case — the cache is package state
+			server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+				switch {
+				case r.Method == http.MethodGet && strings.HasSuffix(r.URL.Path, "/colls/"+coll):
+					atomic.AddInt32(&discoveries, 1)
+					_, _ = w.Write([]byte(`{"id":"` + coll + `","partitionKey":{"paths":["/id"]}}`))
+				case r.Method == http.MethodDelete:
+					w.WriteHeader(http.StatusNoContent)
+				default: // the container PUT and the item POST both echo their body
+					raw, _ := io.ReadAll(r.Body)
+					w.WriteHeader(http.StatusCreated)
+					_, _ = w.Write(raw)
+				}
+			}))
+			defer server.Close()
+
+			base := func(more ...*core.Connection) []*core.Connection {
+				return authFor(server.URL, append([]*core.Connection{
+					str("database", "d1"), str("container", coll)}, more...)...)
+			}
+
+			_, err := item_get.Execute(nil, nil, base(str("item_id", "o-1")))
+			Expect(err).To(BeNil())
+			before := atomic.LoadInt32(&discoveries)
+			Expect(before).To(Equal(int32(1)), "the first item op discovers the path")
+
+			out, err := tc.run(base())
+			Expect(err).To(BeNil())
+			Expect(out["success"]).To(BeTrue())
+
+			// container_replace reads the definition itself; count only what the
+			// item op forces.
+			atomic.StoreInt32(&discoveries, 0)
+			_, err = item_get.Execute(nil, nil, base(str("item_id", "o-2")))
+			Expect(err).To(BeNil())
+			Expect(atomic.LoadInt32(&discoveries)).To(Equal(int32(1)),
+				"the cached path must not outlive a container_"+tc.name+" — it may describe a container that no longer exists")
+		})
+	}
 }

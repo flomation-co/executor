@@ -353,7 +353,7 @@ func DoRequest(flow *core.Flow, a Auth, method, path, resourceType, resourceID s
 
 	switch a.Method {
 	case AuthMethodEntra:
-		token, err := azure.ClientCredentialsToken(Context(flow), clientFor(a), a.TenantID, a.ClientID, a.ClientSecret, EntraScope(a))
+		token, err := azure.ClientCredentialsToken(Context(flow), a.TenantID, a.ClientID, a.ClientSecret, EntraScope(a))
 		if err != nil {
 			return nil, err // already redacted by the azure package
 		}
@@ -477,14 +477,22 @@ func DocRID(db, coll, id string) string { return CollRID(db, coll) + "/docs/" + 
 // / Offers). One page of `limit` items is fetched unless returnAll, which
 // follows the opaque x-ms-continuation response header (echoed back verbatim
 // as a request header) until it comes back empty or MaxAllPages is hit. body
-// is re-sent on every page (queries POST the same body each time).
+// is re-sent on every page (queries POST the same body each time). start
+// resumes a previous walk from its surviving token ("" starts at page one).
 //
 // The returned charge is the SUM of every page's x-ms-request-charge, so the
 // RU number reported for a return-all matches what the account was billed.
-func Feed(flow *core.Flow, a Auth, method, path, resourceType, resourceID, envelope string, headers map[string]string, body []byte, limit int, returnAll bool) ([]interface{}, string, error) {
+//
+// The third return is the SURVIVING continuation token: "" once the feed is
+// exhausted, non-empty when pages remain — because a single page was asked
+// for, or because a returnAll walk exited on the MaxAllPages bound. Callers
+// must not drop it: a partial feed reported as complete is what makes a
+// downstream reconcile ("delete anything not in this list") destroy rows that
+// were merely never fetched.
+func Feed(flow *core.Flow, a Auth, method, path, resourceType, resourceID, envelope string, headers map[string]string, body []byte, limit int, returnAll bool, start string) ([]interface{}, string, string, error) {
 	items := []interface{}{}
 	var charge float64
-	continuation := ""
+	continuation := start
 
 	for page := 0; page < MaxAllPages; page++ {
 		hdrs := map[string]string{"x-ms-max-item-count": strconv.Itoa(limit)}
@@ -497,14 +505,14 @@ func Feed(flow *core.Flow, a Auth, method, path, resourceType, resourceID, envel
 
 		resp, err := DoRequest(flow, a, method, path, resourceType, resourceID, hdrs, body)
 		if err != nil {
-			return nil, "", err
+			return nil, "", "", err
 		}
 		if err := CheckResponse(resp); err != nil {
-			return nil, "", err
+			return nil, "", "", err
 		}
 		obj, err := DecodeObject(resp)
 		if err != nil {
-			return nil, "", err
+			return nil, "", "", err
 		}
 		if arr, ok := obj[envelope].([]interface{}); ok {
 			items = append(items, arr...)
@@ -518,7 +526,7 @@ func Feed(flow *core.Flow, a Auth, method, path, resourceType, resourceID, envel
 			break
 		}
 	}
-	return items, strconv.FormatFloat(charge, 'f', 2, 64), nil
+	return items, strconv.FormatFloat(charge, 'f', 2, 64), continuation, nil
 }
 
 // ---------------------------------------------------------------------------
@@ -540,7 +548,7 @@ var pkCache = struct {
 // time. Returns "" for a legacy non-partitioned container, which needs no
 // partition-key header at all.
 func ContainerPartitionKeyPath(flow *core.Flow, a Auth, db, coll string) (string, error) {
-	key := a.BaseURL + "|" + db + "|" + coll
+	key := pkCacheKey(a, db, coll)
 	pkCache.mu.Lock()
 	if path, ok := pkCache.m[key]; ok {
 		pkCache.mu.Unlock()
@@ -572,6 +580,48 @@ func ContainerPartitionKeyPath(flow *core.Flow, a Auth, db, coll string) (string
 	pkCache.m[key] = path
 	pkCache.mu.Unlock()
 	return path, nil
+}
+
+func pkCacheKey(a Auth, db, coll string) string {
+	return a.BaseURL + "|" + db + "|" + coll
+}
+
+// SeedPartitionKeyPath records the path a container was just created with.
+// container_create knows it authoritatively, so seeding both saves the
+// discovery GET and overwrites any entry cached for a same-named container
+// that existed earlier in this execution.
+func SeedPartitionKeyPath(a Auth, db, coll, path string) {
+	pkCache.mu.Lock()
+	pkCache.m[pkCacheKey(a, db, coll)] = path
+	pkCache.mu.Unlock()
+}
+
+// InvalidatePartitionKeyPath drops a container's cached path. A container that
+// is dropped or redefined mid-execution may come back under the same name with
+// a DIFFERENT partition-key path (the reset-and-reload shape these actions
+// exist for); the stale path would then be read from the wrong body property
+// and sent as the header, which the service rejects as a document/header
+// mismatch — on a flow that is entirely correct.
+func InvalidatePartitionKeyPath(a Auth, db, coll string) {
+	pkCache.mu.Lock()
+	delete(pkCache.m, pkCacheKey(a, db, coll))
+	pkCache.mu.Unlock()
+}
+
+// InvalidateDatabasePartitionKeyPaths drops every container path cached under
+// a database — deleting a database takes all of its containers with it. The
+// prefix match can over-purge when one database's name is a "db|coll"-shaped
+// prefix of another's (ids may contain "|"); an extra discovery GET is the
+// only cost, whereas under-purging serves a stale path.
+func InvalidateDatabasePartitionKeyPaths(a Auth, db string) {
+	prefix := a.BaseURL + "|" + db + "|"
+	pkCache.mu.Lock()
+	for key := range pkCache.m {
+		if strings.HasPrefix(key, prefix) {
+			delete(pkCache.m, key)
+		}
+	}
+	pkCache.mu.Unlock()
 }
 
 // PartitionKeyHeader renders a partition-key value as the JSON array literal
@@ -951,7 +1001,9 @@ func FindOffer(flow *core.Flow, a Auth, db, coll string) (map[string]interface{}
 		"Content-Type":            "application/query+json",
 		"x-ms-documentdb-isquery": "True",
 	}
-	offers, feedCharge, err := Feed(flow, a, http.MethodPost, "/offers", "offers", "", "Offers", headers, query, DefaultPageLimit, true)
+	// The surviving continuation is ignored: the query is an equality match on
+	// one _rid, so it cannot span pages, let alone the 200-page cap.
+	offers, feedCharge, _, err := Feed(flow, a, http.MethodPost, "/offers", "offers", "", "Offers", headers, query, DefaultPageLimit, true, "")
 	if err != nil {
 		return nil, "", err
 	}
@@ -1025,17 +1077,40 @@ func ResourceResult(obj map[string]interface{}, charge, summary string) map[stri
 	}
 }
 
-// ListResult shapes a feed response into the standard list output.
-func ListResult(items []interface{}, charge, summary string) map[string]interface{} {
+// ListSummary phrases a list tool_result. base is the action's own wording
+// ("Fetched 12 items from container \"orders\""); next is Feed's surviving
+// continuation token. Mirrors the entra sibling's contract: a Return All that
+// stopped at the safety cap says so, in the one field an operator actually
+// reads.
+func ListSummary(base string, returnAll bool, next string) string {
+	switch {
+	case next == "":
+		return base
+	case returnAll:
+		return fmt.Sprintf("%s; stopped at the %d-page safety cap — this is a PARTIAL result, resume from the Next Continuation output or narrow the query", base, MaxAllPages)
+	default:
+		return base + "; more pages remain — resume from the Next Continuation output, or tick Return All"
+	}
+}
+
+// ListResult shapes a feed response into the standard list output. next is
+// Feed's surviving continuation token, taken alongside returnAll rather than a
+// pre-phrased summary so that no call site can report a capped walk as a
+// complete one: truncated is a partial RESULT SET (a Return All that ran out of
+// page budget), while a non-empty next_continuation on a single-page read is
+// just ordinary paging.
+func ListResult(items []interface{}, charge, next string, returnAll bool, base string) map[string]interface{} {
 	if items == nil {
 		items = []interface{}{}
 	}
 	return map[string]interface{}{
-		"results":        items,
-		"count":          len(items),
-		"request_charge": charge,
-		"tool_result":    summary,
-		"success":        true,
-		"error":          "",
+		"results":           items,
+		"count":             len(items),
+		"request_charge":    charge,
+		"next_continuation": next,
+		"truncated":         returnAll && next != "",
+		"tool_result":       ListSummary(base, returnAll, next),
+		"success":           true,
+		"error":             "",
 	}
 }

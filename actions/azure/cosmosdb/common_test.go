@@ -1,6 +1,7 @@
 package cosmosdb
 
 import (
+	"fmt"
 	"net/http"
 	"net/http/httptest"
 	"net/url"
@@ -301,13 +302,54 @@ func TestFeedFollowsContinuation(t *testing.T) {
 	defer server.Close()
 
 	a := Auth{Method: AuthMethodMasterKey, MasterKey: emulatorKey, BaseURL: server.URL}
-	items, charge, err := Feed(nil, a, http.MethodGet, "/dbs", "dbs", "", "Databases", nil, nil, 25, true)
+	items, charge, next, err := Feed(nil, a, http.MethodGet, "/dbs", "dbs", "", "Databases", nil, nil, 25, true, "")
 	Expect(err).To(BeNil())
 	Expect(items).To(HaveLen(2))
 	Expect(atomic.LoadInt32(&calls)).To(Equal(int32(2)))
 	Expect(secondContinuation).To(Equal("token-1"))
 	Expect(gotMaxItems).To(Equal("25"))
 	Expect(charge).To(Equal("6.00"))
+	Expect(next).To(BeEmpty(), "an exhausted feed has no surviving token")
+}
+
+// TestFeedSurvivingContinuationAtPageCap: a Return All walk that runs out of
+// page budget must HAND BACK the token it stopped on. Dropping it is what let
+// a partial feed be reported as a complete one.
+func TestFeedSurvivingContinuationAtPageCap(t *testing.T) {
+	RegisterTestingT(t)
+	var calls int32
+	server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		n := atomic.AddInt32(&calls, 1)
+		w.Header().Set("x-ms-continuation", fmt.Sprintf("token-%d", n))
+		_, _ = w.Write([]byte(`{"Documents":[{"id":"a"}]}`))
+	}))
+	defer server.Close()
+
+	a := Auth{Method: AuthMethodMasterKey, MasterKey: emulatorKey, BaseURL: server.URL}
+	items, _, next, err := Feed(nil, a, http.MethodGet, "/dbs/d/colls/c/docs", "docs", "dbs/d/colls/c", "Documents", nil, nil, 50, true, "")
+	Expect(err).To(BeNil())
+	Expect(atomic.LoadInt32(&calls)).To(Equal(int32(MaxAllPages)), "the safety cap must still bound the walk")
+	Expect(items).To(HaveLen(MaxAllPages))
+	Expect(next).To(Equal(fmt.Sprintf("token-%d", MaxAllPages)), "the token the walk stopped on must survive so the caller can resume and can tell the result set is partial")
+}
+
+// TestFeedResumesFromStartContinuation: the start token goes out on the FIRST
+// request, so a flow can resume a capped walk where it left off.
+func TestFeedResumesFromStartContinuation(t *testing.T) {
+	RegisterTestingT(t)
+	var firstContinuation string
+	server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		firstContinuation = r.Header.Get("x-ms-continuation")
+		_, _ = w.Write([]byte(`{"Documents":[{"id":"z"}]}`))
+	}))
+	defer server.Close()
+
+	a := Auth{Method: AuthMethodMasterKey, MasterKey: emulatorKey, BaseURL: server.URL}
+	items, _, next, err := Feed(nil, a, http.MethodGet, "/dbs/d/colls/c/docs", "docs", "dbs/d/colls/c", "Documents", nil, nil, 50, true, "resume-here")
+	Expect(err).To(BeNil())
+	Expect(firstContinuation).To(Equal("resume-here"))
+	Expect(items).To(HaveLen(1))
+	Expect(next).To(BeEmpty())
 }
 
 // TestFeedSinglePageWithoutReturnAll: a continuation token on the response
@@ -323,10 +365,87 @@ func TestFeedSinglePageWithoutReturnAll(t *testing.T) {
 	defer server.Close()
 
 	a := Auth{Method: AuthMethodMasterKey, MasterKey: emulatorKey, BaseURL: server.URL}
-	items, _, err := Feed(nil, a, http.MethodGet, "/dbs/d/colls/c/docs", "docs", "dbs/d/colls/c", "Documents", nil, nil, 50, false)
+	items, _, next, err := Feed(nil, a, http.MethodGet, "/dbs/d/colls/c/docs", "docs", "dbs/d/colls/c", "Documents", nil, nil, 50, false, "")
 	Expect(err).To(BeNil())
 	Expect(items).To(HaveLen(1))
 	Expect(atomic.LoadInt32(&calls)).To(Equal(int32(1)))
+	Expect(next).To(Equal("more"), "a single-page read still reports that more pages exist")
+}
+
+// TestListResultTruncation: a capped Return All must be visible as a partial
+// result — in tool_result, in truncated, and as a resumable token. A
+// single-page read that leaves pages behind is ordinary paging, NOT truncation.
+func TestListResultTruncation(t *testing.T) {
+	RegisterTestingT(t)
+	items := []interface{}{map[string]interface{}{"id": "a"}}
+
+	capped := ListResult(items, "1.00", "token-200", true, `Fetched 10000 items from container "orders"`)
+	Expect(capped["truncated"]).To(BeTrue())
+	Expect(capped["next_continuation"]).To(Equal("token-200"))
+	Expect(capped["tool_result"]).To(ContainSubstring("safety cap"))
+	Expect(capped["tool_result"]).To(ContainSubstring("PARTIAL"))
+
+	complete := ListResult(items, "1.00", "", true, `Fetched 12 items from container "orders"`)
+	Expect(complete["truncated"]).To(BeFalse())
+	Expect(complete["next_continuation"]).To(BeEmpty())
+	Expect(complete["tool_result"]).To(Equal(`Fetched 12 items from container "orders"`))
+
+	page := ListResult(items, "1.00", "token-1", false, `Fetched 50 items from container "orders"`)
+	Expect(page["truncated"]).To(BeFalse(), "one page of many is not a truncated Return All")
+	Expect(page["next_continuation"]).To(Equal("token-1"))
+	Expect(page["tool_result"]).To(ContainSubstring("more pages remain"))
+}
+
+// TestPartitionKeyCacheInvalidation: the per-execution cache must not outlive
+// the container it describes — a name recreated on a different path inside one
+// run would otherwise be addressed with the old path.
+func TestPartitionKeyCacheInvalidation(t *testing.T) {
+	RegisterTestingT(t)
+	a := Auth{Method: AuthMethodMasterKey, MasterKey: emulatorKey, BaseURL: "https://acct.example"}
+
+	SeedPartitionKeyPath(a, "d1", "c1", "/id")
+	SeedPartitionKeyPath(a, "d1", "c2", "/tenant")
+	SeedPartitionKeyPath(a, "d2", "c1", "/other")
+
+	InvalidatePartitionKeyPath(a, "d1", "c1")
+	pkCache.mu.Lock()
+	_, c1 := pkCache.m[pkCacheKey(a, "d1", "c1")]
+	_, c2 := pkCache.m[pkCacheKey(a, "d1", "c2")]
+	pkCache.mu.Unlock()
+	Expect(c1).To(BeFalse())
+	Expect(c2).To(BeTrue(), "invalidating one container must not evict its siblings")
+
+	InvalidateDatabasePartitionKeyPaths(a, "d1")
+	pkCache.mu.Lock()
+	_, c2After := pkCache.m[pkCacheKey(a, "d1", "c2")]
+	_, otherDB := pkCache.m[pkCacheKey(a, "d2", "c1")]
+	pkCache.mu.Unlock()
+	Expect(c2After).To(BeFalse(), "a deleted database takes every container path with it")
+	Expect(otherDB).To(BeTrue(), "another database's containers must survive")
+
+	InvalidateDatabasePartitionKeyPaths(a, "d2")
+}
+
+// TestSeededPartitionKeyPathSkipsDiscovery: container_create knows the path
+// authoritatively, so a seeded entry must both answer and overwrite whatever a
+// same-named container cached earlier in the run.
+func TestSeededPartitionKeyPathSkipsDiscovery(t *testing.T) {
+	RegisterTestingT(t)
+	var calls int32
+	server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		atomic.AddInt32(&calls, 1)
+		_, _ = w.Write([]byte(`{"id":"c9","partitionKey":{"paths":["/stale"]}}`))
+	}))
+	defer server.Close()
+
+	a := Auth{Method: AuthMethodMasterKey, MasterKey: emulatorKey, BaseURL: server.URL}
+	defer InvalidatePartitionKeyPath(a, "d9", "c9")
+
+	SeedPartitionKeyPath(a, "d9", "c9", "/customerId")
+	path, err := ContainerPartitionKeyPath(nil, a, "d9", "c9")
+	Expect(err).To(BeNil())
+	Expect(path).To(Equal("/customerId"))
+	Expect(atomic.LoadInt32(&calls)).To(Equal(int32(0)), "a seeded path is authoritative — no discovery GET")
 }
 
 // TestContainerPartitionKeyPathCaches: the discovery GET must run once per
