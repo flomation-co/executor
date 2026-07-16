@@ -292,6 +292,161 @@ func TestEmbed_OpenAI_ErrorInA200Body(t *testing.T) {
 }
 
 // ---------------------------------------------------------------------------
+// Azure OpenAI
+// ---------------------------------------------------------------------------
+
+// Azure speaks the OpenAI request/response shape but re-plumbs everything
+// around it: the model is a customer-named DEPLOYMENT in the URL path, every
+// call carries an api-version query param, and the key travels in the
+// non-standard api-key header — Authorization: Bearer is rejected for keys.
+func TestEmbed_AzureOpenAI_RequestShape(t *testing.T) {
+	RegisterTestingT(t)
+
+	var gotPath, gotQuery, gotAPIKey, gotAuth string
+	var gotBody map[string]any
+	srv := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		gotPath = r.URL.Path
+		gotQuery = r.URL.RawQuery
+		gotAPIKey = r.Header.Get("api-key")
+		gotAuth = r.Header.Get("Authorization")
+		raw, _ := io.ReadAll(r.Body)
+		_ = json.Unmarshal(raw, &gotBody)
+		w.Header().Set("Content-Type", "application/json")
+		_ = json.NewEncoder(w).Encode(map[string]any{"data": []openAIData{
+			{Index: 0, Embedding: []float32{0.1, 0.2}},
+			{Index: 1, Embedding: []float32{0.3, 0.4}},
+		}})
+	}))
+	t.Cleanup(srv.Close)
+
+	cfg := EmbedConfig{Provider: "azure_openai", BaseURL: srv.URL, APIKey: "azure-key", Model: "my-embed-deployment"}
+	got, err := Embed(context.Background(), cfg, []string{"alpha", "beta"})
+	Expect(err).ToNot(HaveOccurred())
+	Expect(got).To(Equal([][]float32{{0.1, 0.2}, {0.3, 0.4}}))
+
+	Expect(gotPath).To(Equal("/openai/deployments/my-embed-deployment/embeddings"))
+	Expect(gotQuery).To(Equal("api-version=2024-10-21"), "an empty APIVersion must default, not send an empty param")
+	Expect(gotAPIKey).To(Equal("azure-key"))
+	Expect(gotAuth).To(Equal(""), "Azure key auth must not send Authorization: Bearer")
+	Expect(inputsOf(gotBody)).To(Equal([]string{"alpha", "beta"}))
+}
+
+func TestEmbed_AzureOpenAI_APIVersionOverride(t *testing.T) {
+	RegisterTestingT(t)
+
+	var gotQuery string
+	srv := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		gotQuery = r.URL.RawQuery
+		w.Header().Set("Content-Type", "application/json")
+		_ = json.NewEncoder(w).Encode(map[string]any{"data": []openAIData{{Index: 0, Embedding: []float32{0.1}}}})
+	}))
+	t.Cleanup(srv.Close)
+
+	cfg := EmbedConfig{Provider: "azure_openai", BaseURL: srv.URL, APIKey: "azure-key", Model: "embed", APIVersion: "2025-03-01-preview"}
+	_, err := Embed(context.Background(), cfg, []string{"a"})
+	Expect(err).ToNot(HaveOccurred())
+	Expect(gotQuery).To(Equal("api-version=2025-03-01-preview"))
+}
+
+// A deployment name says nothing about the model behind it, so Azure cannot
+// reuse the text-embedding-3 prefix gate — dimensions pass through whenever
+// set, and stay out of the body when not.
+func TestEmbed_AzureOpenAI_DimensionsPassThrough(t *testing.T) {
+	RegisterTestingT(t)
+
+	tests := []struct {
+		name       string
+		dimensions int
+		wantSent   bool
+	}{
+		{"dimensions set on an arbitrary deployment name", 1024, true},
+		{"dimensions unset", 0, false},
+	}
+
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			RegisterTestingT(t)
+
+			var gotBody map[string]any
+			srv := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+				raw, _ := io.ReadAll(r.Body)
+				_ = json.Unmarshal(raw, &gotBody)
+				w.Header().Set("Content-Type", "application/json")
+				_ = json.NewEncoder(w).Encode(map[string]any{"data": []openAIData{{Index: 0, Embedding: []float32{0.1}}}})
+			}))
+			t.Cleanup(srv.Close)
+
+			cfg := EmbedConfig{
+				Provider: "azure_openai", BaseURL: srv.URL, APIKey: "azure-key",
+				Model: "prod-embedder", Dimensions: tt.dimensions,
+			}
+			_, err := Embed(context.Background(), cfg, []string{"x"})
+			Expect(err).ToNot(HaveOccurred())
+
+			_, sent := gotBody["dimensions"]
+			Expect(sent).To(Equal(tt.wantSent))
+			if tt.wantSent {
+				Expect(gotBody["dimensions"]).To(Equal(float64(tt.dimensions)))
+			}
+		})
+	}
+}
+
+// Azure shares OpenAI's per-request input cap, so the same batching applies.
+func TestEmbed_AzureOpenAI_SplitsBatches(t *testing.T) {
+	RegisterTestingT(t)
+
+	rec := &capture{}
+	srv := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		body := rec.record(r)
+		inputs := inputsOf(body)
+		data := make([]openAIData, len(inputs))
+		for i, text := range inputs {
+			var n float32
+			_, _ = fmt.Sscanf(text, "doc-%f", &n)
+			data[i] = openAIData{Index: i, Embedding: []float32{n}}
+		}
+		w.Header().Set("Content-Type", "application/json")
+		_ = json.NewEncoder(w).Encode(map[string]any{"data": data})
+	}))
+	t.Cleanup(srv.Close)
+
+	texts := make([]string, 100)
+	for i := range texts {
+		texts[i] = fmt.Sprintf("doc-%d", i)
+	}
+
+	cfg := EmbedConfig{Provider: "azure_openai", BaseURL: srv.URL, APIKey: "azure-key", Model: "embed"}
+	got, err := Embed(context.Background(), cfg, texts)
+	Expect(err).ToNot(HaveOccurred())
+
+	// 100 inputs at 96 per request = 96 + 4.
+	Expect(rec.count()).To(Equal(2))
+	Expect(inputsOf(rec.bodies[0])).To(HaveLen(96))
+	Expect(inputsOf(rec.bodies[1])).To(HaveLen(4))
+
+	Expect(got).To(HaveLen(100))
+	for i := range got {
+		Expect(got[i]).To(Equal([]float32{float32(i)}),
+			"document %d got the embedding for document %v after batch reassembly", i, got[i])
+	}
+}
+
+func TestEmbed_AzureOpenAI_Preconditions(t *testing.T) {
+	RegisterTestingT(t)
+
+	// No endpoint to build the deployment URL from — must fail before any dial.
+	_, err := Embed(context.Background(), EmbedConfig{Provider: "azure_openai", APIKey: "k"}, []string{"a"})
+	Expect(err).To(HaveOccurred())
+	Expect(err.Error()).To(ContainSubstring("needs the resource endpoint"))
+
+	// Azure's data plane always wants a key.
+	_, err = Embed(context.Background(), EmbedConfig{Provider: "azure_openai", BaseURL: "https://r.openai.azure.com"}, []string{"a"})
+	Expect(err).To(HaveOccurred())
+	Expect(err.Error()).To(Equal("Azure OpenAI needs an API Key"))
+}
+
+// ---------------------------------------------------------------------------
 // Ollama
 // ---------------------------------------------------------------------------
 
@@ -541,6 +696,7 @@ func TestEmbed_EveryDropdownProviderIsDispatched(t *testing.T) {
 		"":                  true, // an unset provider defaults to OpenAI
 		"openai":            true,
 		"openai_compatible": true,
+		"azure_openai":      true,
 		"ollama":            true,
 		"bedrock":           true,
 	}
