@@ -4,6 +4,16 @@
 // login.microsoftonline.com endpoint — only the requested scope differs — so
 // the exchange and its per-execution cache live here, once.
 //
+// The exchange itself is azidentity's, not ours. An earlier revision
+// hand-rolled the OAuth2 POST, and that code is exactly where a real security
+// hole appeared: it accepted an *http.Client from its callers, two of the three
+// service packages passed the client built from their allow_insecure checkbox,
+// and so an operator opting a self-signed storage host out of TLS verification
+// silently disabled certificate verification on the credential exchange to
+// Microsoft. azidentity owns its own pipeline and cannot be handed a client at
+// all, which is the point: the bug is unrepresentable rather than merely fixed.
+// Azure's auth flow has more edge cases than are worth re-deriving.
+//
 // The service-specific clients (SharedKey signing, Cosmos master-key signing,
 // Graph plumbing) stay in their own sub-packages; this package must not grow
 // service knowledge.
@@ -11,62 +21,63 @@ package azure
 
 import (
 	"context"
-	"encoding/json"
 	"fmt"
-	"io"
-	"net/http"
-	"net/url"
 	"strings"
 	"sync"
-	"time"
+
+	"github.com/Azure/azure-sdk-for-go/sdk/azcore"
+	"github.com/Azure/azure-sdk-for-go/sdk/azcore/cloud"
+	"github.com/Azure/azure-sdk-for-go/sdk/azcore/policy"
+	"github.com/Azure/azure-sdk-for-go/sdk/azidentity"
 )
 
-// maxTokenResponse bounds the token endpoint's reply. A real token response is
-// a few KB; this caps a hostile or misconfigured endpoint.
-const maxTokenResponse = 1 << 20 // 1 MB
+// authorityHost is where the token exchange happens, fed to azidentity as a
+// cloud configuration rather than used to build a URL by hand. It is a var as
+// a test seam; production never changes it.
+var authorityHost = cloud.AzurePublic.ActiveDirectoryAuthorityHost
 
-type cachedToken struct {
-	token     string
-	expiresAt time.Time
-}
+// disableInstanceDiscovery turns off MSAL's authority validation. It is FALSE
+// in production and must stay that way: with discovery on, azidentity asks
+// Microsoft whether the authority is a real one before sending anything to it,
+// which is a check the hand-rolled exchange never had — it would happily POST
+// the client secret at whatever host it was given. Only the tests set this, and
+// only because a local httptest server is by definition not a known Microsoft
+// instance.
+var disableInstanceDiscovery = false
 
-// tokenCache holds minted tokens for the lifetime of one execution. The
-// executor is a one-shot process (one flow run, then exit), so this cache
-// cannot accrete across time — it exists so a flow that calls twenty Azure
-// actions performs one token exchange, not twenty. Modelled on the Shopify
-// client-credentials cache (actions/ecommerce/shopify/common.go): mutex-guarded,
-// proactive expiry buffer, pruned and bounded on the write path.
-var tokenCache = struct {
+// credTransport overrides azidentity's HTTP transport. It is nil in production
+// — azcore supplies its own verifying transport — and is only ever set by this
+// package's own tests, which need their httptest server's certificate trusted
+// to exercise the success path (azidentity refuses a plain-HTTP authority, and
+// rightly refuses a self-signed one).
+//
+// This is NOT the seam that caused the MITM bug and must not become it: that
+// one was an exported *http.Client PARAMETER, so the storage and cosmosdb
+// packages could — and did — hand their insecure client to a credential
+// exchange. This is package-private and unreachable from any service package.
+var credTransport policy.Transporter
+
+// credCache holds one credential per tenant|client for the lifetime of the
+// execution.
+//
+// The credential is what is cached, not the token: azidentity caches and
+// refreshes tokens internally, per scope, so a flow that calls twenty Azure
+// actions performs one token exchange rather than twenty (proved by
+// TestTokenExchangeIsCachedAcrossCalls). The executor is a one-shot process —
+// one flow run, then exit — so this cannot accrete across time; it is bounded
+// anyway against a pathological run touching hundreds of distinct principals.
+var credCache = struct {
 	mu sync.Mutex
-	m  map[string]cachedToken
-}{m: map[string]cachedToken{}}
+	m  map[string]*azidentity.ClientSecretCredential
+}{m: map[string]*azidentity.ClientSecretCredential{}}
 
-// maxCachedTokens bounds the cache. It only bites in a pathological run
-// touching hundreds of distinct tenant|client|scope triples; a backstop, not a
-// steady-state eviction policy.
-const maxCachedTokens = 512
-
-// tokenClient talks to the Entra token endpoint, and nothing else.
-//
-// It is package-private and always verifies certificates, deliberately: the
-// endpoint is always login.microsoftonline.com, a public Microsoft host that
-// always presents a valid CA-signed certificate, so there is no legitimate
-// reason to skip verification here — not even when the operator has opted a
-// service's own data-plane endpoint out of TLS verification (a self-signed
-// storage host, the Cosmos emulator). Those opt-outs are consent to trust ONE
-// endpoint the operator named; they are not consent to ship the tenant's
-// client secret over an unverified channel to Microsoft.
-//
-// This is why the mint takes no *http.Client from its callers: an earlier
-// revision did, and two of the three service packages passed their
-// insecure-when-opted-out client straight through, exposing the client secret
-// to anyone able to forge a certificate for login.microsoftonline.com. Keeping
-// the client here makes that class of mistake unrepresentable.
-var tokenClient = &http.Client{Timeout: 30 * time.Second}
+// maxCachedCredentials bounds the cache. A backstop for a single run that
+// loops over hundreds of service principals, not a steady-state eviction
+// policy.
+const maxCachedCredentials = 512
 
 // ClientCredentialsToken returns a bearer token for the given service
-// principal and scope, minting one via the OAuth2 client-credentials grant on
-// first use and serving it from the per-execution cache afterwards.
+// principal and scope.
 //
 // scope is the resource default scope, e.g. "https://graph.microsoft.com/.default"
 // or "https://storage.azure.com/.default".
@@ -82,120 +93,65 @@ func ClientCredentialsToken(ctx context.Context, tenantID, clientID, clientSecre
 	if clientSecret == "" {
 		return "", fmt.Errorf("client secret is required for Microsoft Entra authentication")
 	}
-	// The tenant is interpolated into the token URL path; a GUID or a
-	// *.onmicrosoft.com domain are both valid, but path or scheme
-	// metacharacters are not.
+	// azidentity validates the tenant itself, but its message is about its own
+	// API; this one names the field the operator filled in.
 	if strings.ContainsAny(tenantID, "/\\?#@ ") {
 		return "", fmt.Errorf("tenant ID %q contains invalid characters", tenantID)
 	}
-
-	key := tenantID + "|" + clientID + "|" + scope
-	tokenCache.mu.Lock()
-	if c, ok := tokenCache.m[key]; ok && time.Now().Before(c.expiresAt) {
-		tokenCache.mu.Unlock()
-		return c.token, nil
+	if scope == "" {
+		return "", fmt.Errorf("a scope is required for Microsoft Entra authentication")
 	}
-	tokenCache.mu.Unlock()
 
-	// Mint outside the lock so a slow token endpoint doesn't serialise other
-	// tenants; a concurrent double-mint is harmless (same credentials).
-	tok, expiresIn, err := mintToken(ctx, tenantID, clientID, clientSecret, scope)
+	cred, err := credentialFor(tenantID, clientID, clientSecret)
 	if err != nil {
-		return "", err
+		return "", fmt.Errorf("Microsoft Entra authentication failed: %s", RedactSecret(err.Error(), clientSecret))
 	}
 
-	ttl := time.Duration(expiresIn) * time.Second
-	if ttl <= 0 {
-		ttl = 55 * time.Minute // Entra omitted a lifetime; tokens are typically 60-90 min.
+	tok, err := cred.GetToken(ctx, policy.TokenRequestOptions{Scopes: []string{scope}})
+	if err != nil {
+		// azidentity's error already carries the AADSTS code and description —
+		// the part that names the real problem (bad secret, unknown tenant,
+		// missing admin consent). Redact anyway: this string reaches
+		// ErrorResult output and the execution log.
+		return "", fmt.Errorf("Microsoft Entra token request failed: %s", RedactSecret(err.Error(), clientSecret))
 	}
-	// Expire the cache entry a margin before the real deadline so a cached
-	// token is never handed out about to die mid-request. 5 minutes for the
-	// usual ~1h grant, capped at half the lifetime for short-lived tokens.
-	buffer := 5 * time.Minute
-	if buffer > ttl/2 {
-		buffer = ttl / 2
+	if tok.Token == "" {
+		return "", fmt.Errorf("Microsoft Entra returned an empty access token")
 	}
-	ttl -= buffer
-
-	tokenCache.mu.Lock()
-	pruneExpiredTokens()
-	tokenCache.m[key] = cachedToken{token: tok, expiresAt: time.Now().Add(ttl)}
-	tokenCache.mu.Unlock()
-	return tok, nil
+	return tok.Token, nil
 }
 
-// pruneExpiredTokens drops timed-out entries and enforces maxCachedTokens.
-// The caller must hold tokenCache.mu.
-func pruneExpiredTokens() {
-	now := time.Now()
-	for k, v := range tokenCache.m {
-		if !now.Before(v.expiresAt) {
-			delete(tokenCache.m, k)
-		}
+func credentialFor(tenantID, clientID, clientSecret string) (*azidentity.ClientSecretCredential, error) {
+	key := tenantID + "|" + clientID
+
+	credCache.mu.Lock()
+	defer credCache.mu.Unlock()
+	if c, ok := credCache.m[key]; ok {
+		return c, nil
 	}
-	for len(tokenCache.m) >= maxCachedTokens {
-		for k := range tokenCache.m {
-			delete(tokenCache.m, k)
+
+	cred, err := azidentity.NewClientSecretCredential(tenantID, clientID, clientSecret,
+		&azidentity.ClientSecretCredentialOptions{
+			DisableInstanceDiscovery: disableInstanceDiscovery,
+			ClientOptions: azcore.ClientOptions{
+				Cloud:     cloud.Configuration{ActiveDirectoryAuthorityHost: authorityHost},
+				Transport: credTransport,
+			},
+		})
+	if err != nil {
+		return nil, err
+	}
+
+	// Evict arbitrarily at the bound: these are interchangeable and a dropped
+	// entry simply rebuilds on next use.
+	for len(credCache.m) >= maxCachedCredentials {
+		for k := range credCache.m {
+			delete(credCache.m, k)
 			break
 		}
 	}
-}
-
-// tokenURL is a var so tests can point the exchange at an httptest server.
-var tokenURL = "https://login.microsoftonline.com/%s/oauth2/v2.0/token"
-
-func mintToken(ctx context.Context, tenantID, clientID, clientSecret, scope string) (string, int, error) {
-	form := url.Values{}
-	form.Set("grant_type", "client_credentials")
-	form.Set("client_id", clientID)
-	form.Set("client_secret", clientSecret)
-	form.Set("scope", scope)
-
-	endpoint := fmt.Sprintf(tokenURL, url.PathEscape(tenantID))
-	req, err := http.NewRequestWithContext(ctx, http.MethodPost, endpoint, strings.NewReader(form.Encode()))
-	if err != nil {
-		return "", 0, fmt.Errorf("failed to build token request: %w", err)
-	}
-	req.Header.Set("Content-Type", "application/x-www-form-urlencoded")
-
-	resp, err := tokenClient.Do(req)
-	if err != nil {
-		return "", 0, fmt.Errorf("Microsoft Entra token request failed: %s", RedactSecret(err.Error(), clientSecret))
-	}
-	defer func() { _ = resp.Body.Close() }()
-
-	body, _ := io.ReadAll(io.LimitReader(resp.Body, maxTokenResponse))
-
-	if resp.StatusCode != http.StatusOK {
-		// AADSTS error bodies are JSON {error, error_description}; surface the
-		// description, which names the actual problem (bad secret, unknown
-		// tenant, missing admin consent) without echoing credentials.
-		var apiErr struct {
-			Error            string `json:"error"`
-			ErrorDescription string `json:"error_description"`
-		}
-		_ = json.Unmarshal(body, &apiErr)
-		msg := apiErr.ErrorDescription
-		if msg == "" {
-			msg = apiErr.Error
-		}
-		if msg == "" {
-			msg = string(body)
-		}
-		return "", 0, fmt.Errorf("Microsoft Entra token request failed (%d): %s", resp.StatusCode, RedactSecret(msg, clientSecret))
-	}
-
-	var tok struct {
-		AccessToken string `json:"access_token"`
-		ExpiresIn   int    `json:"expires_in"`
-	}
-	if err := json.Unmarshal(body, &tok); err != nil {
-		return "", 0, fmt.Errorf("failed to parse Microsoft Entra token response: %w", err)
-	}
-	if tok.AccessToken == "" {
-		return "", 0, fmt.Errorf("Microsoft Entra token response contained no access token")
-	}
-	return tok.AccessToken, tok.ExpiresIn, nil
+	credCache.m[key] = cred
+	return cred, nil
 }
 
 // RedactSecret masks every occurrence of secret in msg. Service packages use

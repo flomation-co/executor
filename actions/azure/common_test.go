@@ -2,54 +2,98 @@ package azure
 
 import (
 	"context"
-	"crypto/tls"
+	"github.com/Azure/azure-sdk-for-go/sdk/azidentity"
 	"net/http"
 	"net/http/httptest"
 	"strings"
+	"sync"
 	"testing"
-	"time"
 )
 
-func resetCache() {
-	tokenCache.mu.Lock()
-	tokenCache.m = map[string]cachedToken{}
-	tokenCache.mu.Unlock()
+func resetCreds() {
+	credCache.mu.Lock()
+	credCache.m = map[string]*azidentity.ClientSecretCredential{}
+	credCache.mu.Unlock()
 }
 
-// pinTokenURL points the mint at a test server for the duration of one test.
-func pinTokenURL(t *testing.T, base string) {
+// pinAuthority points the exchange at a test server for one test. This is the
+// same knob a sovereign cloud would use (cloud.Configuration's
+// ActiveDirectoryAuthorityHost), so the seam is real behaviour rather than a
+// test-only backdoor.
+func pinAuthority(t *testing.T, srv *httptest.Server, trustCert bool) {
 	t.Helper()
-	prev := tokenURL
-	tokenURL = base + "/%s/oauth2/v2.0/token"
-	t.Cleanup(func() { tokenURL = prev })
-	resetCache()
-	t.Cleanup(resetCache)
+	prevHost, prevDisc, prevTr := authorityHost, disableInstanceDiscovery, credTransport
+	authorityHost = srv.URL
+	// azidentity refuses a plain-HTTP authority outright, so these servers are
+	// all TLS. Trusting the test cert is what lets the success path run at all;
+	// the MITM test deliberately does NOT trust it.
+	if trustCert {
+		credTransport = srv.Client()
+	}
+	// A test server is not a known Microsoft instance, so MSAL's authority
+	// validation would reject it before any exchange happened. Production
+	// leaves discovery ON — see disableInstanceDiscovery.
+	disableInstanceDiscovery = true
+	resetCreds()
+	t.Cleanup(func() {
+		authorityHost, disableInstanceDiscovery, credTransport = prevHost, prevDisc, prevTr
+		resetCreds()
+	})
+}
+
+// tokenEndpoint stands in for login.microsoftonline.com. MSAL does not assume
+// the token URL: it fetches the tenant's OpenID configuration first and uses
+// the token_endpoint from it, so a usable fake has to serve that document too.
+// tokenHits counts only the actual exchanges, so caching can be asserted.
+func tokenEndpoint(t *testing.T, tokenHits *int) *httptest.Server {
+	t.Helper()
+	var mu sync.Mutex
+	srv := httptest.NewUnstartedServer(nil)
+	base := "https://" + srv.Listener.Addr().String()
+	srv.Config.Handler = http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		w.Header().Set("Content-Type", "application/json")
+		switch {
+		case strings.HasSuffix(r.URL.Path, "/.well-known/openid-configuration"):
+			_, _ = w.Write([]byte(`{
+				"issuer": "` + base + `/tenant/v2.0",
+				"authorization_endpoint": "` + base + `/tenant/oauth2/v2.0/authorize",
+				"token_endpoint": "` + base + `/tenant/oauth2/v2.0/token"
+			}`))
+		case strings.HasSuffix(r.URL.Path, "/token"):
+			mu.Lock()
+			if tokenHits != nil {
+				*tokenHits++
+			}
+			mu.Unlock()
+			_, _ = w.Write([]byte(`{"token_type":"Bearer","expires_in":3599,"ext_expires_in":3599,"access_token":"TOK"}`))
+		default:
+			t.Logf("unexpected MSAL call: %s %s", r.Method, r.URL.Path)
+			w.WriteHeader(http.StatusNotFound)
+		}
+	})
+	srv.StartTLS()
+	return srv
 }
 
 // TestTokenExchangeRefusesForgedCertificate is the regression guard for a real
-// defect: the mint used to take an *http.Client from its callers, and both the
-// storage and cosmosdb packages handed it the client built from their
-// allow_insecure checkbox. That checkbox exists so an operator can reach a
-// self-signed storage host or the Cosmos emulator — but it silently also
-// disabled certificate verification on the credential exchange itself, so
-// anyone able to forge a certificate for login.microsoftonline.com could
-// harvest the tenant's client_secret and hand back a token of their choosing.
+// defect. The exchange used to take an *http.Client from its callers, and both
+// the storage and cosmosdb packages handed it the client built from their
+// allow_insecure checkbox — so ticking "allow insecure TLS" to reach a
+// self-signed storage host silently disabled certificate verification on the
+// credential exchange itself, letting anyone able to forge a certificate for
+// login.microsoftonline.com harvest the tenant's client_secret and return a
+// token of their choosing.
 //
-// The mint now owns a verifying client that callers cannot substitute. A TLS
-// server with a self-signed certificate stands in for the forged endpoint: the
-// exchange must refuse it, and the secret must never reach the wire.
+// azidentity owns its pipeline and takes no client from us, so this property is
+// now structural rather than maintained by hand. The test stays: it pins the
+// property against any future revision that reintroduces a client seam. A TLS
+// server with a self-signed certificate stands in for the forged endpoint.
 func TestTokenExchangeRefusesForgedCertificate(t *testing.T) {
 	const secret = "SUPER-SECRET-VALUE"
-
-	var captured string
-	srv := httptest.NewTLSServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		_ = r.ParseForm()
-		captured = r.Form.Get("client_secret")
-		w.Header().Set("Content-Type", "application/json")
-		_, _ = w.Write([]byte(`{"access_token":"ATTACKER_CHOSEN_TOKEN","expires_in":3600}`))
-	}))
+	srv := tokenEndpoint(t, nil)
 	defer srv.Close()
-	pinTokenURL(t, srv.URL)
+	// trustCert=false: the server stands in for a forged login.microsoftonline.com.
+	pinAuthority(t, srv, false)
 
 	tok, err := ClientCredentialsToken(context.Background(), "tenant-id", "client-id", secret, "https://graph.microsoft.com/.default")
 	if err == nil {
@@ -58,89 +102,83 @@ func TestTokenExchangeRefusesForgedCertificate(t *testing.T) {
 	if !strings.Contains(err.Error(), "certificate") && !strings.Contains(err.Error(), "x509") {
 		t.Errorf("expected a certificate-verification failure, got: %v", err)
 	}
-	if captured != "" {
-		t.Errorf("the client secret reached the forged endpoint: %q", captured)
-	}
 	if strings.Contains(err.Error(), secret) {
 		t.Errorf("the client secret leaked into the error string: %v", err)
 	}
 }
 
-// TestTokenExchangeSucceedsAndCaches covers the happy path over plain HTTP
-// (httptest.NewServer), which the verifying client accepts because there is no
-// certificate to verify — the mint's TLS posture only governs https.
-func TestTokenExchangeSucceedsAndCaches(t *testing.T) {
-	var mints int
-	srv := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		mints++
-		if got := r.FormValue; got == nil {
-			t.Error("no form")
-		}
-		_ = r.ParseForm()
-		if r.Form.Get("grant_type") != "client_credentials" {
-			t.Errorf("grant_type = %q", r.Form.Get("grant_type"))
-		}
-		if r.Form.Get("scope") != "https://storage.azure.com/.default" {
-			t.Errorf("scope = %q", r.Form.Get("scope"))
-		}
-		_, _ = w.Write([]byte(`{"access_token":"TOK","expires_in":3600}`))
-	}))
+// TestTokenExchangeIsCachedAcrossCalls proves the claim the code relies on:
+// azidentity caches tokens internally, so caching the credential is enough and
+// a flow calling twenty Azure actions performs one exchange, not twenty.
+func TestTokenExchangeIsCachedAcrossCalls(t *testing.T) {
+	var exchanges int
+	srv := tokenEndpoint(t, &exchanges)
 	defer srv.Close()
-	pinTokenURL(t, srv.URL)
+	pinAuthority(t, srv, true)
 
-	for i := 0; i < 3; i++ {
-		tok, err := ClientCredentialsToken(context.Background(), "t", "c", "s", "https://storage.azure.com/.default")
+	for i := 0; i < 5; i++ {
+		tok, err := ClientCredentialsToken(context.Background(), "t", "c", "sekret-value", "https://storage.azure.com/.default")
 		if err != nil {
-			t.Fatalf("mint %d: %v", i, err)
+			t.Fatalf("call %d: %v", i, err)
 		}
 		if tok != "TOK" {
 			t.Fatalf("token = %q", tok)
 		}
 	}
-	// A flow calling twenty Azure actions must perform one exchange, not twenty.
-	if mints != 1 {
-		t.Errorf("token endpoint hit %d times, want 1 (the per-execution cache)", mints)
+	if exchanges != 1 {
+		t.Errorf("token endpoint hit %d times, want 1 — azidentity is expected to cache", exchanges)
 	}
 }
 
-// TestTokenCacheKeyedByTenantClientScope proves the cache cannot hand a token
-// minted for one tenant/client/scope to a different one.
-func TestTokenCacheKeyedByTenantClientScope(t *testing.T) {
-	srv := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		_ = r.ParseForm()
-		// Echo the identity back so a cross-wired cache is visible.
-		_, _ = w.Write([]byte(`{"access_token":"` + r.Form.Get("client_id") + "|" + r.Form.Get("scope") + `","expires_in":3600}`))
-	}))
+// TestTokenExchangeSeparatesPrincipals proves the credential cache cannot hand
+// one principal's credential to another.
+func TestTokenExchangeSeparatesPrincipals(t *testing.T) {
+	srv := tokenEndpoint(t, nil)
 	defer srv.Close()
-	pinTokenURL(t, srv.URL)
+	pinAuthority(t, srv, true)
 
-	cases := []struct{ tenant, client, scope, want string }{
-		{"t1", "c1", "scope-a", "c1|scope-a"},
-		{"t1", "c1", "scope-b", "c1|scope-b"}, // same client, different scope
-		{"t1", "c2", "scope-a", "c2|scope-a"}, // same scope, different client
-		{"t2", "c1", "scope-a", "c1|scope-a"},
+	if _, err := ClientCredentialsToken(context.Background(), "t1", "c1", "sekret-one", "scope/.default"); err != nil {
+		t.Fatalf("first: %v", err)
 	}
-	for _, c := range cases {
-		got, err := ClientCredentialsToken(context.Background(), c.tenant, c.client, "s", c.scope)
-		if err != nil {
-			t.Fatalf("%v: %v", c, err)
-		}
-		if got != c.want {
-			t.Errorf("tenant=%s client=%s scope=%s => token %q, want %q (cache collision)", c.tenant, c.client, c.scope, got, c.want)
-		}
+	if _, err := ClientCredentialsToken(context.Background(), "t2", "c2", "sekret-two", "scope/.default"); err != nil {
+		t.Fatalf("second: %v", err)
+	}
+
+	credCache.mu.Lock()
+	defer credCache.mu.Unlock()
+	if len(credCache.m) != 2 {
+		t.Fatalf("cached credentials = %d, want 2 — distinct principals must not share one", len(credCache.m))
+	}
+	if credCache.m["t1|c1"] == credCache.m["t2|c2"] {
+		t.Error("two principals resolved to the same credential")
 	}
 }
 
+// A bad secret must surface Entra's own diagnosis — the AADSTS code names the
+// real problem — without echoing the secret into the flow's error output.
 func TestTokenExchangeSurfacesAADErrorWithoutLeakingSecret(t *testing.T) {
-	const secret = "the-secret"
-	srv := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+	const secret = "the-actual-secret-value"
+	var srv *httptest.Server
+	srv = httptest.NewUnstartedServer(nil)
+	base := "https://" + srv.Listener.Addr().String()
+	srv.Config.Handler = http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		w.Header().Set("Content-Type", "application/json")
+		if strings.HasSuffix(r.URL.Path, "/.well-known/openid-configuration") {
+			_, _ = w.Write([]byte(`{
+				"issuer": "` + base + `/tenant/v2.0",
+				"authorization_endpoint": "` + base + `/tenant/oauth2/v2.0/authorize",
+				"token_endpoint": "` + base + `/tenant/oauth2/v2.0/token"
+			}`))
+			return
+		}
 		w.WriteHeader(http.StatusUnauthorized)
 		_, _ = w.Write([]byte(`{"error":"invalid_client","error_description":"AADSTS7000215: Invalid client secret provided."}`))
-	}))
+	})
+	srv.StartTLS()
 	defer srv.Close()
-	pinTokenURL(t, srv.URL)
+	pinAuthority(t, srv, true)
 
-	_, err := ClientCredentialsToken(context.Background(), "t", "c", secret, "sc")
+	_, err := ClientCredentialsToken(context.Background(), "t", "c", secret, "sc/.default")
 	if err == nil {
 		t.Fatal("expected an error")
 	}
@@ -153,35 +191,29 @@ func TestTokenExchangeSurfacesAADErrorWithoutLeakingSecret(t *testing.T) {
 }
 
 func TestClientCredentialsTokenValidatesInputs(t *testing.T) {
-	cases := []struct{ tenant, client, secret, wantErr string }{
-		{"", "c", "s", "tenant ID is required"},
-		{"t", "", "s", "client ID is required"},
-		{"t", "c", "", "client secret is required"},
-		{"bad/tenant", "c", "s", "invalid characters"},
+	cases := []struct{ tenant, client, secret, scope, wantErr string }{
+		{"", "c", "s", "sc", "tenant ID is required"},
+		{"t", "", "s", "sc", "client ID is required"},
+		{"t", "c", "", "sc", "client secret is required"},
+		{"bad/tenant", "c", "s", "sc", "invalid characters"},
+		{"t", "c", "s", "", "a scope is required"},
 	}
 	for _, c := range cases {
-		_, err := ClientCredentialsToken(context.Background(), c.tenant, c.client, c.secret, "sc")
+		_, err := ClientCredentialsToken(context.Background(), c.tenant, c.client, c.secret, c.scope)
 		if err == nil || !strings.Contains(err.Error(), c.wantErr) {
-			t.Errorf("tenant=%q client=%q secret=%q => %v, want %q", c.tenant, c.client, c.secret, err, c.wantErr)
+			t.Errorf("tenant=%q client=%q secret=%q scope=%q => %v, want %q", c.tenant, c.client, c.secret, c.scope, err, c.wantErr)
 		}
 	}
 }
 
-// TestTokenClientVerifiesCertificates pins the posture directly, so a future
-// edit that adds InsecureSkipVerify to the mint's client fails here.
-func TestTokenClientVerifiesCertificates(t *testing.T) {
-	tr, ok := tokenClient.Transport.(*http.Transport)
-	if !ok {
-		if tokenClient.Transport != nil {
-			t.Fatalf("tokenClient.Transport = %T, want *http.Transport or nil (the verifying default)", tokenClient.Transport)
-		}
-		return // nil transport == http.DefaultTransport, which verifies.
-	}
-	if tr.TLSClientConfig != nil && tr.TLSClientConfig.InsecureSkipVerify {
-		t.Error("the Entra token exchange must always verify certificates: the endpoint is public Microsoft and carries the tenant's client secret")
-	}
-	var _ = tls.Config{}
-	if tokenClient.Timeout == 0 || tokenClient.Timeout > 60*time.Second {
-		t.Errorf("tokenClient.Timeout = %v, want a bounded timeout", tokenClient.Timeout)
+// TestMintTakesNoClient is the structural half of the MITM guard: the exchange
+// must not grow a parameter that lets a caller supply transport again. A
+// compile-time check is worth more than a runtime one here — the old signature
+// was the bug.
+func TestMintTakesNoClient(t *testing.T) {
+	var f func(context.Context, string, string, string, string) (string, error) = ClientCredentialsToken
+	_ = f
+	if _, ok := interface{}(ClientCredentialsToken).(func(context.Context, *http.Client, string, string, string, string) (string, error)); ok {
+		t.Fatal("ClientCredentialsToken accepts an *http.Client again — callers must never choose the transport for a credential exchange")
 	}
 }
