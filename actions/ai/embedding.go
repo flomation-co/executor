@@ -8,6 +8,7 @@ import (
 	"fmt"
 	"io"
 	"net/http"
+	"net/url"
 	"strings"
 	"time"
 
@@ -43,6 +44,11 @@ const (
 
 	// openAIBatchLimit is the number of inputs OpenAI accepts per request.
 	openAIBatchLimit = 96
+
+	// defaultAzureAPIVersion is Azure OpenAI's current GA data-plane version.
+	// Every Azure call carries an api-version query param; this is used when
+	// the caller left EmbedConfig.APIVersion empty.
+	defaultAzureAPIVersion = "2024-10-21"
 )
 
 // EmbedProviderOptions are the providers the platform can embed with. They are
@@ -54,6 +60,7 @@ const (
 var EmbedProviderOptions = []core.ConnectionOption{
 	{Name: "OpenAI", Value: "openai"},
 	{Name: "OpenAI-compatible (Azure, vLLM, LocalAI, TEI…)", Value: "openai_compatible"},
+	{Name: "Azure OpenAI", Value: "azure_openai"},
 	{Name: "Ollama (self-hosted)", Value: "ollama"},
 	{Name: "AWS Bedrock (Titan)", Value: "bedrock"},
 }
@@ -77,9 +84,10 @@ const DefaultEmbedModel = "text-embedding-3-small"
 // EmbedConfig is one provider's worth of connection detail.
 type EmbedConfig struct {
 	Provider   string
-	Model      string
-	BaseURL    string // openai_compatible, ollama
-	APIKey     string // openai, openai_compatible
+	Model      string // for azure_openai this is the DEPLOYMENT name, not a model id
+	BaseURL    string // openai_compatible, ollama, azure_openai (the resource endpoint)
+	APIKey     string // openai, openai_compatible, azure_openai
+	APIVersion string // azure_openai only — api-version query param; empty = defaultAzureAPIVersion
 	Region     string // bedrock
 	AccessKey  string // bedrock — static credentials, NOT the ambient chain
 	SecretKey  string
@@ -118,6 +126,12 @@ func Embed(ctx context.Context, cfg EmbedConfig, texts []string) ([][]float32, e
 			return nil, errors.New("an OpenAI-compatible provider needs a Base URL")
 		}
 		return embedOpenAI(ctx, cfg, texts)
+	case "azure_openai":
+		if cfg.BaseURL == "" {
+			return nil, errors.New(
+				"Azure OpenAI needs the resource endpoint as Base URL (https://<resource>.openai.azure.com)")
+		}
+		return embedAzureOpenAI(ctx, cfg, texts)
 	case "ollama":
 		if cfg.BaseURL == "" {
 			cfg.BaseURL = "http://localhost:11434"
@@ -143,12 +157,73 @@ func RedactEmbed(cfg EmbedConfig, msg string) string {
 // OpenAI and OpenAI-compatible
 // ---------------------------------------------------------------------------
 
+// authStyle is how a provider wants its key carried. It is passed down
+// explicitly rather than re-derived from cfg.Provider at the point of use:
+// embedOpenAIWire is shared by the OpenAI, OpenAI-compatible and Azure paths,
+// so the transport cannot infer the right header from the provider string
+// without knowing which caller it is serving — the kind of coupling that is
+// merely fragile today and wrong the moment a fourth caller appears.
+type authStyle int
+
+const (
+	// authBearer is the standard Authorization: Bearer {key}.
+	authBearer authStyle = iota
+	// authAPIKey is Azure's data plane, which wants api-key: {key} and
+	// rejects Authorization: Bearer for key auth.
+	authAPIKey
+)
+
+// apply sets the auth header for this style. An empty key sets nothing —
+// a self-hosted OpenAI-compatible server may need no auth at all.
+func (a authStyle) apply(h http.Header, key string) {
+	if key == "" {
+		return
+	}
+	switch a {
+	case authAPIKey:
+		h.Set("api-key", key)
+	default:
+		h.Set("Authorization", "Bearer "+key)
+	}
+}
+
 func embedOpenAI(ctx context.Context, cfg EmbedConfig, texts []string) ([][]float32, error) {
 	if cfg.APIKey == "" && cfg.Provider == "openai" {
 		return nil, errors.New("OpenAI needs an API Key")
 	}
 	endpoint := strings.TrimSuffix(cfg.BaseURL, "/") + "/v1/embeddings"
+	// Only text-embedding-3-* honour this; ada-002 rejects it outright.
+	sendDims := cfg.Dimensions > 0 && strings.HasPrefix(cfg.Model, "text-embedding-3")
+	return embedOpenAIWire(ctx, cfg, authBearer, endpoint, sendDims, texts)
+}
 
+// embedAzureOpenAI speaks the OpenAI embeddings request/response shape against
+// Azure's deployment-scoped URL. The two Azure deltas live elsewhere: the URL
+// is built here (the model is the customer-named DEPLOYMENT, in the path, plus
+// the mandatory api-version query param), and it asks for authAPIKey, Azure's
+// non-standard api-key header, instead of Authorization: Bearer.
+func embedAzureOpenAI(ctx context.Context, cfg EmbedConfig, texts []string) ([][]float32, error) {
+	if cfg.APIKey == "" {
+		return nil, errors.New("Azure OpenAI needs an API Key")
+	}
+	version := cfg.APIVersion
+	if version == "" {
+		version = defaultAzureAPIVersion
+	}
+	endpoint := strings.TrimSuffix(cfg.BaseURL, "/") +
+		"/openai/deployments/" + url.PathEscape(cfg.Model) +
+		"/embeddings?api-version=" + url.QueryEscape(version)
+	// A deployment name says nothing about the model behind it, so the
+	// text-embedding-3 prefix gate can't apply — pass dimensions through
+	// whenever set. A deployment of a model that can't be resized rejects
+	// the request, which is louder (and safer) than silently ignoring the
+	// operator's requested size.
+	return embedOpenAIWire(ctx, cfg, authAPIKey, endpoint, cfg.Dimensions > 0, texts)
+}
+
+// embedOpenAIWire is the shared OpenAI-shape request loop: batches of at most
+// openAIBatchLimit, reassembled by each reply's explicit index.
+func embedOpenAIWire(ctx context.Context, cfg EmbedConfig, auth authStyle, endpoint string, sendDims bool, texts []string) ([][]float32, error) {
 	out := make([][]float32, 0, len(texts))
 	// OpenAI caps the inputs per request, and a self-hosted compatible server
 	// usually caps it lower still, so batch rather than assume.
@@ -163,8 +238,7 @@ func embedOpenAI(ctx context.Context, cfg EmbedConfig, texts []string) ([][]floa
 			"model": cfg.Model,
 			"input": chunk,
 		}
-		// Only text-embedding-3-* honour this; ada-002 rejects it outright.
-		if cfg.Dimensions > 0 && strings.HasPrefix(cfg.Model, "text-embedding-3") {
+		if sendDims {
 			body["dimensions"] = cfg.Dimensions
 		}
 
@@ -177,7 +251,7 @@ func embedOpenAI(ctx context.Context, cfg EmbedConfig, texts []string) ([][]floa
 				Message string `json:"message"`
 			} `json:"error"`
 		}
-		if err := postJSON(ctx, cfg, endpoint, body, &resp); err != nil {
+		if err := postJSON(ctx, cfg, auth, endpoint, body, &resp); err != nil {
 			return nil, err
 		}
 		if resp.Error != nil {
@@ -224,7 +298,7 @@ func embedOllama(ctx context.Context, cfg EmbedConfig, texts []string) ([][]floa
 		"model": cfg.Model,
 		"input": texts,
 	}
-	if err := postJSON(ctx, cfg, endpoint, body, &resp); err != nil {
+	if err := postJSON(ctx, cfg, authBearer, endpoint, body, &resp); err != nil {
 		return nil, err
 	}
 	if resp.Error != "" {
@@ -321,7 +395,7 @@ func embedBedrock(ctx context.Context, cfg EmbedConfig, texts []string) ([][]flo
 
 // ---------------------------------------------------------------------------
 
-func postJSON(ctx context.Context, cfg EmbedConfig, endpoint string, body, into interface{}) error {
+func postJSON(ctx context.Context, cfg EmbedConfig, auth authStyle, endpoint string, body, into interface{}) error {
 	raw, err := json.Marshal(body)
 	if err != nil {
 		return err
@@ -332,9 +406,7 @@ func postJSON(ctx context.Context, cfg EmbedConfig, endpoint string, body, into 
 		return fmt.Errorf("%q isn't a usable URL: %w", endpoint, err)
 	}
 	req.Header.Set("Content-Type", "application/json")
-	if cfg.APIKey != "" {
-		req.Header.Set("Authorization", "Bearer "+cfg.APIKey)
-	}
+	auth.apply(req.Header, cfg.APIKey)
 
 	resp, err := embedClient.Do(req)
 	if err != nil {

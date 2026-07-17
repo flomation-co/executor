@@ -2,6 +2,7 @@ package ai_common
 
 import (
 	"regexp"
+	"strings"
 	"testing"
 
 	. "github.com/onsi/gomega"
@@ -113,6 +114,33 @@ func TestModelContextWindow_KnownModels(t *testing.T) {
 	Expect(ModelContextWindow("gpt-3.5-turbo")).To(Equal(16000))
 }
 
+// Azure passes a deployment name, and Azure names cannot contain '.', so its
+// GPT-3.5 is spelled "gpt-35-turbo". It must size to the same 16k window as
+// the dotted OpenAI id — the 32000 default would exceed the real one and let
+// TruncateHistoryForBudget hand Azure a request it rejects.
+func TestModelContextWindow_AzureDotlessNames(t *testing.T) {
+	RegisterTestingT(t)
+	Expect(ModelContextWindow("gpt-35-turbo")).To(Equal(16000))
+	Expect(ModelContextWindow("gpt-35-turbo-16k")).To(Equal(16000))
+	// Non-Azure ids keep their existing windows: the dotless case must not
+	// widen its net over the rest of the switch.
+	Expect(ModelContextWindow("gpt-4o")).To(Equal(128000))
+	Expect(ModelContextWindow("openai/gpt-4.1-mini")).To(Equal(1000000))
+	Expect(ModelContextWindow("chat-prod")).To(Equal(32000))
+}
+
+// The window drives the truncation budget, so a dotless Azure deployment must
+// actually shed history rather than pass a 28k conversation to a 16k model.
+func TestTruncateHistoryForBudget_AzureGPT35IsTruncated(t *testing.T) {
+	RegisterTestingT(t)
+	var history []Message
+	for i := 0; i < 40; i++ {
+		history = append(history, Message{Role: "user", Content: strings.Repeat("word ", 700)})
+	}
+	got := TruncateHistoryForBudget(history, "sys", "prompt", 2048, ModelContextWindow("gpt-35-turbo"))
+	Expect(len(got)).To(BeNumerically("<", len(history)), "history was not truncated for a 16k Azure deployment")
+}
+
 func TestModelContextWindow_UnknownModel(t *testing.T) {
 	RegisterTestingT(t)
 	Expect(ModelContextWindow("some-future-model")).To(Equal(32000))
@@ -151,12 +179,12 @@ func TestModelContextWindow_OpenRouterPrefixedModels(t *testing.T) {
 // instruction is something Anthropic models will copy verbatim.
 // Three failures in production traced to this:
 //
-//   1. Original example was 16 chars (a3f9c2d1b4e7805f). AI copied
-//      that shape. Caught in execution 2611489e.
-//   2. MR !151 used a 33-char example (typo extra `3`). AI trimmed
-//      to 32 chars to match the prose rule. Caught in 9dcf8bc3.
-//   3. The 32-char correct example a3f9c2d1b4e7805f7e9d0c2b1a8e6f4d
-//      was ALSO copied verbatim by the AI. Caught in ee749f82.
+//  1. Original example was 16 chars (a3f9c2d1b4e7805f). AI copied
+//     that shape. Caught in execution 2611489e.
+//  2. MR !151 used a 33-char example (typo extra `3`). AI trimmed
+//     to 32 chars to match the prose rule. Caught in 9dcf8bc3.
+//  3. The 32-char correct example a3f9c2d1b4e7805f7e9d0c2b1a8e6f4d
+//     was ALSO copied verbatim by the AI. Caught in ee749f82.
 //
 // The fix is to remove any inline real-looking handle from the
 // prompt entirely — replace with `<HANDLE>` placeholder text the

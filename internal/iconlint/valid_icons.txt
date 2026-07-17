@@ -15,6 +15,7 @@ arrows-up-down
 arrow-up
 arrow-up-right-from-square
 asana
+azure
 ban
 bell
 bolt
@@ -115,6 +116,7 @@ hubspot
 # iconAliases in automate/editor/app/components/icons/paths.ts.
 # icons that render perfectly well.
 i-cursor
+id-badge
 image
 intercom
 jenkins

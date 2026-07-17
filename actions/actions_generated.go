@@ -21,6 +21,7 @@ import (
 	agent_send_message "flomation.app/automate/executor/actions/agent/send_message"
 	agent_write_state "flomation.app/automate/executor/actions/agent/write_state"
 	ai_anthropic "flomation.app/automate/executor/actions/ai/anthropic"
+	ai_azure_openai "flomation.app/automate/executor/actions/ai/azure_openai"
 	ai_embed_text "flomation.app/automate/executor/actions/ai/embed_text"
 	ai_gemini "flomation.app/automate/executor/actions/ai/gemini"
 	ai_gemini_image "flomation.app/automate/executor/actions/ai/gemini_image"
@@ -76,6 +77,72 @@ import (
 	aws_s3_get "flomation.app/automate/executor/actions/aws/s3/get"
 	aws_s3_list "flomation.app/automate/executor/actions/aws/s3/list"
 	aws_s3_put "flomation.app/automate/executor/actions/aws/s3/put"
+	azure_cosmosdb_container_create "flomation.app/automate/executor/actions/azure/cosmosdb/container_create"
+	azure_cosmosdb_container_delete "flomation.app/automate/executor/actions/azure/cosmosdb/container_delete"
+	azure_cosmosdb_container_get "flomation.app/automate/executor/actions/azure/cosmosdb/container_get"
+	azure_cosmosdb_container_get_all "flomation.app/automate/executor/actions/azure/cosmosdb/container_get_all"
+	azure_cosmosdb_container_replace "flomation.app/automate/executor/actions/azure/cosmosdb/container_replace"
+	azure_cosmosdb_database_create "flomation.app/automate/executor/actions/azure/cosmosdb/database_create"
+	azure_cosmosdb_database_delete "flomation.app/automate/executor/actions/azure/cosmosdb/database_delete"
+	azure_cosmosdb_database_get "flomation.app/automate/executor/actions/azure/cosmosdb/database_get"
+	azure_cosmosdb_database_get_all "flomation.app/automate/executor/actions/azure/cosmosdb/database_get_all"
+	azure_cosmosdb_item_create "flomation.app/automate/executor/actions/azure/cosmosdb/item_create"
+	azure_cosmosdb_item_delete "flomation.app/automate/executor/actions/azure/cosmosdb/item_delete"
+	azure_cosmosdb_item_get "flomation.app/automate/executor/actions/azure/cosmosdb/item_get"
+	azure_cosmosdb_item_get_all "flomation.app/automate/executor/actions/azure/cosmosdb/item_get_all"
+	azure_cosmosdb_item_patch "flomation.app/automate/executor/actions/azure/cosmosdb/item_patch"
+	azure_cosmosdb_item_query "flomation.app/automate/executor/actions/azure/cosmosdb/item_query"
+	azure_cosmosdb_item_replace "flomation.app/automate/executor/actions/azure/cosmosdb/item_replace"
+	azure_cosmosdb_throughput_get "flomation.app/automate/executor/actions/azure/cosmosdb/throughput_get"
+	azure_cosmosdb_throughput_update "flomation.app/automate/executor/actions/azure/cosmosdb/throughput_update"
+	azure_entra_deleted_item_restore "flomation.app/automate/executor/actions/azure/entra/deleted_item_restore"
+	azure_entra_group_add_members "flomation.app/automate/executor/actions/azure/entra/group_add_members"
+	azure_entra_group_create "flomation.app/automate/executor/actions/azure/entra/group_create"
+	azure_entra_group_delete "flomation.app/automate/executor/actions/azure/entra/group_delete"
+	azure_entra_group_get "flomation.app/automate/executor/actions/azure/entra/group_get"
+	azure_entra_group_get_all "flomation.app/automate/executor/actions/azure/entra/group_get_all"
+	azure_entra_group_list_members "flomation.app/automate/executor/actions/azure/entra/group_list_members"
+	azure_entra_group_list_owners "flomation.app/automate/executor/actions/azure/entra/group_list_owners"
+	azure_entra_group_remove_member "flomation.app/automate/executor/actions/azure/entra/group_remove_member"
+	azure_entra_group_update "flomation.app/automate/executor/actions/azure/entra/group_update"
+	azure_entra_guest_invite "flomation.app/automate/executor/actions/azure/entra/guest_invite"
+	azure_entra_subscribed_skus_get_all "flomation.app/automate/executor/actions/azure/entra/subscribed_skus_get_all"
+	azure_entra_user_add_to_group "flomation.app/automate/executor/actions/azure/entra/user_add_to_group"
+	azure_entra_user_assign_license "flomation.app/automate/executor/actions/azure/entra/user_assign_license"
+	azure_entra_user_check_group_membership "flomation.app/automate/executor/actions/azure/entra/user_check_group_membership"
+	azure_entra_user_create "flomation.app/automate/executor/actions/azure/entra/user_create"
+	azure_entra_user_delete "flomation.app/automate/executor/actions/azure/entra/user_delete"
+	azure_entra_user_get "flomation.app/automate/executor/actions/azure/entra/user_get"
+	azure_entra_user_get_all "flomation.app/automate/executor/actions/azure/entra/user_get_all"
+	azure_entra_user_get_manager "flomation.app/automate/executor/actions/azure/entra/user_get_manager"
+	azure_entra_user_list_groups "flomation.app/automate/executor/actions/azure/entra/user_list_groups"
+	azure_entra_user_remove_from_group "flomation.app/automate/executor/actions/azure/entra/user_remove_from_group"
+	azure_entra_user_revoke_sessions "flomation.app/automate/executor/actions/azure/entra/user_revoke_sessions"
+	azure_entra_user_set_manager "flomation.app/automate/executor/actions/azure/entra/user_set_manager"
+	azure_entra_user_update "flomation.app/automate/executor/actions/azure/entra/user_update"
+	azure_storage_blob_copy "flomation.app/automate/executor/actions/azure/storage/blob_copy"
+	azure_storage_blob_delete "flomation.app/automate/executor/actions/azure/storage/blob_delete"
+	azure_storage_blob_download "flomation.app/automate/executor/actions/azure/storage/blob_download"
+	azure_storage_blob_find_by_tags "flomation.app/automate/executor/actions/azure/storage/blob_find_by_tags"
+	azure_storage_blob_generate_sas "flomation.app/automate/executor/actions/azure/storage/blob_generate_sas"
+	azure_storage_blob_get_all "flomation.app/automate/executor/actions/azure/storage/blob_get_all"
+	azure_storage_blob_get_properties "flomation.app/automate/executor/actions/azure/storage/blob_get_properties"
+	azure_storage_blob_get_tags "flomation.app/automate/executor/actions/azure/storage/blob_get_tags"
+	azure_storage_blob_lease "flomation.app/automate/executor/actions/azure/storage/blob_lease"
+	azure_storage_blob_set_metadata "flomation.app/automate/executor/actions/azure/storage/blob_set_metadata"
+	azure_storage_blob_set_properties "flomation.app/automate/executor/actions/azure/storage/blob_set_properties"
+	azure_storage_blob_set_tags "flomation.app/automate/executor/actions/azure/storage/blob_set_tags"
+	azure_storage_blob_set_tier "flomation.app/automate/executor/actions/azure/storage/blob_set_tier"
+	azure_storage_blob_snapshot "flomation.app/automate/executor/actions/azure/storage/blob_snapshot"
+	azure_storage_blob_undelete "flomation.app/automate/executor/actions/azure/storage/blob_undelete"
+	azure_storage_blob_upload "flomation.app/automate/executor/actions/azure/storage/blob_upload"
+	azure_storage_blob_upload_from_url "flomation.app/automate/executor/actions/azure/storage/blob_upload_from_url"
+	azure_storage_container_create "flomation.app/automate/executor/actions/azure/storage/container_create"
+	azure_storage_container_delete "flomation.app/automate/executor/actions/azure/storage/container_delete"
+	azure_storage_container_get "flomation.app/automate/executor/actions/azure/storage/container_get"
+	azure_storage_container_get_all "flomation.app/automate/executor/actions/azure/storage/container_get_all"
+	azure_storage_container_lease "flomation.app/automate/executor/actions/azure/storage/container_lease"
+	azure_storage_container_set_metadata "flomation.app/automate/executor/actions/azure/storage/container_set_metadata"
 	cms_wordpress_category_create "flomation.app/automate/executor/actions/cms/wordpress/category_create"
 	cms_wordpress_category_delete "flomation.app/automate/executor/actions/cms/wordpress/category_delete"
 	cms_wordpress_category_get "flomation.app/automate/executor/actions/cms/wordpress/category_get"
@@ -1192,6 +1259,16 @@ import (
 	ukgov_postcodes_postcode_lookup "flomation.app/automate/executor/actions/ukgov/postcodes/postcode_lookup"
 	ukgov_postcodes_reverse_geocode "flomation.app/automate/executor/actions/ukgov/postcodes/reverse_geocode"
 	ukgov_postcodes_validate_postcode "flomation.app/automate/executor/actions/ukgov/postcodes/validate_postcode"
+	vectordatabase_azureaisearch_document_count "flomation.app/automate/executor/actions/vectordatabase/azureaisearch/document_count"
+	vectordatabase_azureaisearch_document_delete "flomation.app/automate/executor/actions/vectordatabase/azureaisearch/document_delete"
+	vectordatabase_azureaisearch_document_get "flomation.app/automate/executor/actions/vectordatabase/azureaisearch/document_get"
+	vectordatabase_azureaisearch_document_upload "flomation.app/automate/executor/actions/vectordatabase/azureaisearch/document_upload"
+	vectordatabase_azureaisearch_index_create "flomation.app/automate/executor/actions/vectordatabase/azureaisearch/index_create"
+	vectordatabase_azureaisearch_index_delete "flomation.app/automate/executor/actions/vectordatabase/azureaisearch/index_delete"
+	vectordatabase_azureaisearch_index_get "flomation.app/automate/executor/actions/vectordatabase/azureaisearch/index_get"
+	vectordatabase_azureaisearch_index_get_all "flomation.app/automate/executor/actions/vectordatabase/azureaisearch/index_get_all"
+	vectordatabase_azureaisearch_index_stats "flomation.app/automate/executor/actions/vectordatabase/azureaisearch/index_stats"
+	vectordatabase_azureaisearch_search "flomation.app/automate/executor/actions/vectordatabase/azureaisearch/search"
 	vectordatabase_pgvector_document_count "flomation.app/automate/executor/actions/vectordatabase/pgvector/document_count"
 	vectordatabase_pgvector_document_delete "flomation.app/automate/executor/actions/vectordatabase/pgvector/document_delete"
 	vectordatabase_pgvector_document_get "flomation.app/automate/executor/actions/vectordatabase/pgvector/document_get"
@@ -1317,6 +1394,7 @@ var Actions = map[string]core.Action{
 	"agent/send_message":                                  agent_send_message.Execute,
 	"agent/write_state":                                   agent_write_state.Execute,
 	"ai/anthropic":                                        ai_anthropic.Execute,
+	"ai/azure_openai":                                     ai_azure_openai.Execute,
 	"ai/embed_text":                                       ai_embed_text.Execute,
 	"ai/gemini":                                           ai_gemini.Execute,
 	"ai/gemini_image":                                     ai_gemini_image.Execute,
@@ -1372,6 +1450,72 @@ var Actions = map[string]core.Action{
 	"aws/s3/get":                                          aws_s3_get.Execute,
 	"aws/s3/list":                                         aws_s3_list.Execute,
 	"aws/s3/put":                                          aws_s3_put.Execute,
+	"azure/cosmosdb/container_create":                     azure_cosmosdb_container_create.Execute,
+	"azure/cosmosdb/container_delete":                     azure_cosmosdb_container_delete.Execute,
+	"azure/cosmosdb/container_get":                        azure_cosmosdb_container_get.Execute,
+	"azure/cosmosdb/container_get_all":                    azure_cosmosdb_container_get_all.Execute,
+	"azure/cosmosdb/container_replace":                    azure_cosmosdb_container_replace.Execute,
+	"azure/cosmosdb/database_create":                      azure_cosmosdb_database_create.Execute,
+	"azure/cosmosdb/database_delete":                      azure_cosmosdb_database_delete.Execute,
+	"azure/cosmosdb/database_get":                         azure_cosmosdb_database_get.Execute,
+	"azure/cosmosdb/database_get_all":                     azure_cosmosdb_database_get_all.Execute,
+	"azure/cosmosdb/item_create":                          azure_cosmosdb_item_create.Execute,
+	"azure/cosmosdb/item_delete":                          azure_cosmosdb_item_delete.Execute,
+	"azure/cosmosdb/item_get":                             azure_cosmosdb_item_get.Execute,
+	"azure/cosmosdb/item_get_all":                         azure_cosmosdb_item_get_all.Execute,
+	"azure/cosmosdb/item_patch":                           azure_cosmosdb_item_patch.Execute,
+	"azure/cosmosdb/item_query":                           azure_cosmosdb_item_query.Execute,
+	"azure/cosmosdb/item_replace":                         azure_cosmosdb_item_replace.Execute,
+	"azure/cosmosdb/throughput_get":                       azure_cosmosdb_throughput_get.Execute,
+	"azure/cosmosdb/throughput_update":                    azure_cosmosdb_throughput_update.Execute,
+	"azure/entra/deleted_item_restore":                    azure_entra_deleted_item_restore.Execute,
+	"azure/entra/group_add_members":                       azure_entra_group_add_members.Execute,
+	"azure/entra/group_create":                            azure_entra_group_create.Execute,
+	"azure/entra/group_delete":                            azure_entra_group_delete.Execute,
+	"azure/entra/group_get":                               azure_entra_group_get.Execute,
+	"azure/entra/group_get_all":                           azure_entra_group_get_all.Execute,
+	"azure/entra/group_list_members":                      azure_entra_group_list_members.Execute,
+	"azure/entra/group_list_owners":                       azure_entra_group_list_owners.Execute,
+	"azure/entra/group_remove_member":                     azure_entra_group_remove_member.Execute,
+	"azure/entra/group_update":                            azure_entra_group_update.Execute,
+	"azure/entra/guest_invite":                            azure_entra_guest_invite.Execute,
+	"azure/entra/subscribed_skus_get_all":                 azure_entra_subscribed_skus_get_all.Execute,
+	"azure/entra/user_add_to_group":                       azure_entra_user_add_to_group.Execute,
+	"azure/entra/user_assign_license":                     azure_entra_user_assign_license.Execute,
+	"azure/entra/user_check_group_membership":             azure_entra_user_check_group_membership.Execute,
+	"azure/entra/user_create":                             azure_entra_user_create.Execute,
+	"azure/entra/user_delete":                             azure_entra_user_delete.Execute,
+	"azure/entra/user_get":                                azure_entra_user_get.Execute,
+	"azure/entra/user_get_all":                            azure_entra_user_get_all.Execute,
+	"azure/entra/user_get_manager":                        azure_entra_user_get_manager.Execute,
+	"azure/entra/user_list_groups":                        azure_entra_user_list_groups.Execute,
+	"azure/entra/user_remove_from_group":                  azure_entra_user_remove_from_group.Execute,
+	"azure/entra/user_revoke_sessions":                    azure_entra_user_revoke_sessions.Execute,
+	"azure/entra/user_set_manager":                        azure_entra_user_set_manager.Execute,
+	"azure/entra/user_update":                             azure_entra_user_update.Execute,
+	"azure/storage/blob_copy":                             azure_storage_blob_copy.Execute,
+	"azure/storage/blob_delete":                           azure_storage_blob_delete.Execute,
+	"azure/storage/blob_download":                         azure_storage_blob_download.Execute,
+	"azure/storage/blob_find_by_tags":                     azure_storage_blob_find_by_tags.Execute,
+	"azure/storage/blob_generate_sas":                     azure_storage_blob_generate_sas.Execute,
+	"azure/storage/blob_get_all":                          azure_storage_blob_get_all.Execute,
+	"azure/storage/blob_get_properties":                   azure_storage_blob_get_properties.Execute,
+	"azure/storage/blob_get_tags":                         azure_storage_blob_get_tags.Execute,
+	"azure/storage/blob_lease":                            azure_storage_blob_lease.Execute,
+	"azure/storage/blob_set_metadata":                     azure_storage_blob_set_metadata.Execute,
+	"azure/storage/blob_set_properties":                   azure_storage_blob_set_properties.Execute,
+	"azure/storage/blob_set_tags":                         azure_storage_blob_set_tags.Execute,
+	"azure/storage/blob_set_tier":                         azure_storage_blob_set_tier.Execute,
+	"azure/storage/blob_snapshot":                         azure_storage_blob_snapshot.Execute,
+	"azure/storage/blob_undelete":                         azure_storage_blob_undelete.Execute,
+	"azure/storage/blob_upload":                           azure_storage_blob_upload.Execute,
+	"azure/storage/blob_upload_from_url":                  azure_storage_blob_upload_from_url.Execute,
+	"azure/storage/container_create":                      azure_storage_container_create.Execute,
+	"azure/storage/container_delete":                      azure_storage_container_delete.Execute,
+	"azure/storage/container_get":                         azure_storage_container_get.Execute,
+	"azure/storage/container_get_all":                     azure_storage_container_get_all.Execute,
+	"azure/storage/container_lease":                       azure_storage_container_lease.Execute,
+	"azure/storage/container_set_metadata":                azure_storage_container_set_metadata.Execute,
 	"cms/wordpress/category_create":                       cms_wordpress_category_create.Execute,
 	"cms/wordpress/category_delete":                       cms_wordpress_category_delete.Execute,
 	"cms/wordpress/category_get":                          cms_wordpress_category_get.Execute,
@@ -2488,6 +2632,16 @@ var Actions = map[string]core.Action{
 	"ukgov/postcodes/postcode_lookup":                     ukgov_postcodes_postcode_lookup.Execute,
 	"ukgov/postcodes/reverse_geocode":                     ukgov_postcodes_reverse_geocode.Execute,
 	"ukgov/postcodes/validate_postcode":                   ukgov_postcodes_validate_postcode.Execute,
+	"vectordatabase/azureaisearch/document_count":         vectordatabase_azureaisearch_document_count.Execute,
+	"vectordatabase/azureaisearch/document_delete":        vectordatabase_azureaisearch_document_delete.Execute,
+	"vectordatabase/azureaisearch/document_get":           vectordatabase_azureaisearch_document_get.Execute,
+	"vectordatabase/azureaisearch/document_upload":        vectordatabase_azureaisearch_document_upload.Execute,
+	"vectordatabase/azureaisearch/index_create":           vectordatabase_azureaisearch_index_create.Execute,
+	"vectordatabase/azureaisearch/index_delete":           vectordatabase_azureaisearch_index_delete.Execute,
+	"vectordatabase/azureaisearch/index_get":              vectordatabase_azureaisearch_index_get.Execute,
+	"vectordatabase/azureaisearch/index_get_all":          vectordatabase_azureaisearch_index_get_all.Execute,
+	"vectordatabase/azureaisearch/index_stats":            vectordatabase_azureaisearch_index_stats.Execute,
+	"vectordatabase/azureaisearch/search":                 vectordatabase_azureaisearch_search.Execute,
 	"vectordatabase/pgvector/document_count":              vectordatabase_pgvector_document_count.Execute,
 	"vectordatabase/pgvector/document_delete":             vectordatabase_pgvector_document_delete.Execute,
 	"vectordatabase/pgvector/document_get":                vectordatabase_pgvector_document_get.Execute,

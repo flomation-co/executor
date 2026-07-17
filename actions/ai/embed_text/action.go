@@ -40,9 +40,10 @@ const (
 )
 
 var Inputs = [...]core.Connection{
-	{Name: "provider", Type: core.ConnectionTypeString, Label: "Embedding Provider", Required: true, Options: []core.ConnectionOption{{Name: "OpenAI", Value: "openai"}, {Name: "OpenAI-compatible (Azure, vLLM, LocalAI, TEI…)", Value: "openai_compatible"}, {Name: "Ollama (self-hosted)", Value: "ollama"}, {Name: "AWS Bedrock (Titan)", Value: "bedrock"}}},
-	{Name: "api_key", Type: core.ConnectionTypeSecret, Label: "API Key", Visible: &core.VisibleWhen{Field: "provider", Values: []string{"openai", "openai_compatible"}}},
-	{Name: "base_url", Type: core.ConnectionTypeString, Label: "Base URL", Placeholder: "http://ollama.internal:11434", Visible: &core.VisibleWhen{Field: "provider", Values: []string{"openai_compatible", "ollama"}}},
+	{Name: "provider", Type: core.ConnectionTypeString, Label: "Embedding Provider", Required: true, Options: []core.ConnectionOption{{Name: "OpenAI", Value: "openai"}, {Name: "OpenAI-compatible (Azure, vLLM, LocalAI, TEI…)", Value: "openai_compatible"}, {Name: "Azure OpenAI", Value: "azure_openai"}, {Name: "Ollama (self-hosted)", Value: "ollama"}, {Name: "AWS Bedrock (Titan)", Value: "bedrock"}}},
+	{Name: "api_key", Type: core.ConnectionTypeSecret, Label: "API Key", Visible: &core.VisibleWhen{Field: "provider", Values: []string{"openai", "openai_compatible", "azure_openai"}}},
+	{Name: "base_url", Type: core.ConnectionTypeString, Label: "Base URL", Placeholder: "http://ollama.internal:11434 — Azure OpenAI: https://my-resource.openai.azure.com", Visible: &core.VisibleWhen{Field: "provider", Values: []string{"openai_compatible", "ollama", "azure_openai"}}},
+	{Name: "azure_api_version", Type: core.ConnectionTypeString, Label: "API Version", Placeholder: "2024-10-21", Visible: &core.VisibleWhen{Field: "provider", Values: []string{"azure_openai"}}},
 	{Name: "access_key", Type: core.ConnectionTypeSecret, Label: "AWS Access Key ID", Visible: &core.VisibleWhen{Field: "provider", Values: []string{"bedrock"}}},
 	{Name: "secret_key", Type: core.ConnectionTypeSecret, Label: "AWS Secret Access Key", Visible: &core.VisibleWhen{Field: "provider", Values: []string{"bedrock"}}},
 	{Name: "aws_region", Type: core.ConnectionTypeString, Label: "AWS Region", Placeholder: "us-east-1", Visible: &core.VisibleWhen{Field: "provider", Values: []string{"bedrock"}}},
@@ -70,6 +71,7 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 		Model:      optString(core.FindConnection("model", inputs)),
 		BaseURL:    optString(core.FindConnection("base_url", inputs)),
 		APIKey:     optString(core.FindConnection("api_key", inputs)),
+		APIVersion: optString(core.FindConnection("azure_api_version", inputs)),
 		Region:     optString(core.FindConnection("aws_region", inputs)),
 		AccessKey:  optString(core.FindConnection("access_key", inputs)),
 		SecretKey:  optString(core.FindConnection("secret_key", inputs)),
