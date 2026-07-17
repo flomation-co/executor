@@ -62,8 +62,8 @@ func TestDirectoryCreateMakesParents(t *testing.T) {
 	if leafMeta != "ops" {
 		t.Errorf("leaf metadata = %q, want ops", leafMeta)
 	}
-	if result["levelsCreated"] != 3 {
-		t.Errorf("levelsCreated = %v, want 3", result["levelsCreated"])
+	if result["directoriesCreated"] != 3 {
+		t.Errorf("directoriesCreated = %v, want 3", result["directoriesCreated"])
 	}
 }
 
@@ -83,8 +83,8 @@ func TestDirectoryCreateTolerantOfExistingParents(t *testing.T) {
 	out, err := directory_create.Execute(&core.Flow{}, nil, authInputs(srv.URL,
 		str("share", "my-share"), str("directory", "reports/2026/q1")))
 	result := wantSuccess(t, out, err)
-	if result["levelsCreated"] != 1 {
-		t.Errorf("levelsCreated = %v, want 1 — the two existing parents were skipped", result["levelsCreated"])
+	if result["directoriesCreated"] != 1 {
+		t.Errorf("directoriesCreated = %v, want 1 — the two existing parents were skipped", result["directoriesCreated"])
 	}
 }
 

@@ -14135,7 +14135,7 @@
     ]
   },
   "azure/files/directory_create": {
-    "hash": "ea75be385b17b963baa39b6adb2f0aa772e3dde523b8c03d0f9b478adceb22f6",
+    "hash": "83ffd6e35fb441f4243c5df26e5fb11da3499706f83d9172e535a633b2f3f53d",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Azure Files: Create Directory",

@@ -110,6 +110,11 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 
 	result := files.HeadersResult(dir, nil)
 	result["path"] = dir
-	result["levelsCreated"] = created
+	// How many path segments this call actually created. It is not always the
+	// segment count: with Create Parents on, an existing intermediate is
+	// skipped rather than counted, so 0 here means every level already
+	// existed. Named for the operator reading a run record, not for the loop
+	// that produced it.
+	result["directoriesCreated"] = created
 	return files.ResourceResult(dir, result, fmt.Sprintf("Created directory %s in share %s", dir, share)), nil
 }
