@@ -7144,7 +7144,7 @@
     ]
   },
   "aws/ec2/authorize_security_group_ingress": {
-    "hash": "ec249c237b5b052d9c58c15101ab50d0f3b55dbec0dcf23627d309382f295ac2",
+    "hash": "5d46762c7b1f5339e26ec73851e09837491741497ca5220fd143d14e737b4cad",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "AWS EC2 Authorize Security Group Ingress",
@@ -7179,6 +7179,10 @@
           {
             "name": "Assume Role (cross-account)",
             "value": "assume_role"
+          },
+          {
+            "name": "Managed Role (Credential)",
+            "value": "credential"
           }
         ]
       },
@@ -7255,6 +7259,20 @@
           "field": "auth_method",
           "values": [
             "assume_role"
+          ]
+        }
+      },
+      {
+        "name": "credential",
+        "type": "credential",
+        "value": null,
+        "label": "AWS Role Credential",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "credential"
           ]
         }
       },
@@ -7340,7 +7358,7 @@
     ]
   },
   "aws/ec2/create_security_group": {
-    "hash": "a7970a8e3abe13bf17fb2ff5fc11eac494e827ee26bf360b855ffb7c3fc52d9d",
+    "hash": "dc906d2e1f3ff4e8e50c7e1adbb30745810bcf504c58bb243777ced6f0fb1572",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "AWS EC2 Create Security Group",
@@ -7375,6 +7393,10 @@
           {
             "name": "Assume Role (cross-account)",
             "value": "assume_role"
+          },
+          {
+            "name": "Managed Role (Credential)",
+            "value": "credential"
           }
         ]
       },
@@ -7451,6 +7473,20 @@
           "field": "auth_method",
           "values": [
             "assume_role"
+          ]
+        }
+      },
+      {
+        "name": "credential",
+        "type": "credential",
+        "value": null,
+        "label": "AWS Role Credential",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "credential"
           ]
         }
       },
@@ -7496,7 +7532,7 @@
     ]
   },
   "aws/ec2/create_snapshot": {
-    "hash": "34fc7d677976ddeb0d91da73e11a12d6797c29b66a3bb157233e208502156bcd",
+    "hash": "4d1c9db127c815d2de2b33fe7fc421e04ca8e0faaed84337157ad77d7ebbc97f",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "AWS EC2 Create Snapshot",
@@ -7531,6 +7567,10 @@
           {
             "name": "Assume Role (cross-account)",
             "value": "assume_role"
+          },
+          {
+            "name": "Managed Role (Credential)",
+            "value": "credential"
           }
         ]
       },
@@ -7607,6 +7647,20 @@
           "field": "auth_method",
           "values": [
             "assume_role"
+          ]
+        }
+      },
+      {
+        "name": "credential",
+        "type": "credential",
+        "value": null,
+        "label": "AWS Role Credential",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "credential"
           ]
         }
       },
@@ -7651,7 +7705,7 @@
     ]
   },
   "aws/ec2/create_tags": {
-    "hash": "371de06d5cea2c6c20b624ccd23667e002d9e1f5502f1114344afd5c75f7ac53",
+    "hash": "d96f0b966c5f217949c5fcec766ad5ffd1b0e8d42b72372e455513768ea48964",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "AWS EC2 Create Tags",
@@ -7686,6 +7740,10 @@
           {
             "name": "Assume Role (cross-account)",
             "value": "assume_role"
+          },
+          {
+            "name": "Managed Role (Credential)",
+            "value": "credential"
           }
         ]
       },
@@ -7762,6 +7820,20 @@
           "field": "auth_method",
           "values": [
             "assume_role"
+          ]
+        }
+      },
+      {
+        "name": "credential",
+        "type": "credential",
+        "value": null,
+        "label": "AWS Role Credential",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "credential"
           ]
         }
       },
@@ -7800,7 +7872,7 @@
     ]
   },
   "aws/ec2/delete_security_group": {
-    "hash": "47c029db79edca3e5133f0be7381db1027eddd4e7f5b2f51cf8ed036a0fa4ac8",
+    "hash": "8d7665831264cbba560307fb075d17b596aa68a518baf0d53bfc18ef75626d4d",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "AWS EC2 Delete Security Group",
@@ -7835,6 +7907,10 @@
           {
             "name": "Assume Role (cross-account)",
             "value": "assume_role"
+          },
+          {
+            "name": "Managed Role (Credential)",
+            "value": "credential"
           }
         ]
       },
@@ -7915,6 +7991,20 @@
         }
       },
       {
+        "name": "credential",
+        "type": "credential",
+        "value": null,
+        "label": "AWS Role Credential",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "credential"
+          ]
+        }
+      },
+      {
         "name": "group_id",
         "type": "string",
         "value": null,
@@ -7941,7 +8031,7 @@
     ]
   },
   "aws/ec2/describe_images": {
-    "hash": "146d640aa6c05429b252edba3a084f68bcb2ffe313c8ff5d9a37bbd13fb044f7",
+    "hash": "af676812bd1969a922d07e112bfccd081dc6019305b1e1fd685e267a2ec3da8c",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "AWS EC2 Describe Images",
@@ -7976,6 +8066,10 @@
           {
             "name": "Assume Role (cross-account)",
             "value": "assume_role"
+          },
+          {
+            "name": "Managed Role (Credential)",
+            "value": "credential"
           }
         ]
       },
@@ -8052,6 +8146,20 @@
           "field": "auth_method",
           "values": [
             "assume_role"
+          ]
+        }
+      },
+      {
+        "name": "credential",
+        "type": "credential",
+        "value": null,
+        "label": "AWS Role Credential",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "credential"
           ]
         }
       },
@@ -8095,7 +8203,7 @@
     ]
   },
   "aws/ec2/describe_instances": {
-    "hash": "2d0da95370950a593bd1af36623039e4d9ecd87797d8a543f0c12f6ec0b3ee6f",
+    "hash": "f69b50cf203d43ab74ffa4b593e33a6f4faaae0dbc379f361ceedd52a8445be2",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "AWS EC2 Describe Instances",
@@ -8130,6 +8238,10 @@
           {
             "name": "Assume Role (cross-account)",
             "value": "assume_role"
+          },
+          {
+            "name": "Managed Role (Credential)",
+            "value": "credential"
           }
         ]
       },
@@ -8206,6 +8318,20 @@
           "field": "auth_method",
           "values": [
             "assume_role"
+          ]
+        }
+      },
+      {
+        "name": "credential",
+        "type": "credential",
+        "value": null,
+        "label": "AWS Role Credential",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "credential"
           ]
         }
       },
@@ -8242,7 +8368,7 @@
     ]
   },
   "aws/ec2/describe_key_pairs": {
-    "hash": "6b775af2083dbc93d1416c8febc657aff259f6bf9583a8b1ef80936a9649a62d",
+    "hash": "3d9df8c24391516fd40b86df9412227fef82583aa6baafbbc927ebaadfd1361e",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "AWS EC2 Describe Key Pairs",
@@ -8277,6 +8403,10 @@
           {
             "name": "Assume Role (cross-account)",
             "value": "assume_role"
+          },
+          {
+            "name": "Managed Role (Credential)",
+            "value": "credential"
           }
         ]
       },
@@ -8355,6 +8485,20 @@
             "assume_role"
           ]
         }
+      },
+      {
+        "name": "credential",
+        "type": "credential",
+        "value": null,
+        "label": "AWS Role Credential",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "credential"
+          ]
+        }
       }
     ],
     "outputs": [
@@ -8382,7 +8526,7 @@
     ]
   },
   "aws/ec2/describe_security_groups": {
-    "hash": "570cf3159be085beee606bcdeef6779c05ba7888d411b9cba7b460a7d9f0bae2",
+    "hash": "e4b7718f52483908bddf363e60645967a5b0cf70b03837a83dadfdd40dbe92f2",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "AWS EC2 Describe Security Groups",
@@ -8417,6 +8561,10 @@
           {
             "name": "Assume Role (cross-account)",
             "value": "assume_role"
+          },
+          {
+            "name": "Managed Role (Credential)",
+            "value": "credential"
           }
         ]
       },
@@ -8493,6 +8641,20 @@
           "field": "auth_method",
           "values": [
             "assume_role"
+          ]
+        }
+      },
+      {
+        "name": "credential",
+        "type": "credential",
+        "value": null,
+        "label": "AWS Role Credential",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "credential"
           ]
         }
       },
@@ -8529,7 +8691,7 @@
     ]
   },
   "aws/ec2/describe_snapshots": {
-    "hash": "f0ae592c03f028a4bf6b1901e461f8a6255e254dc195f9b8ee9bca93e6d350d1",
+    "hash": "8c5a0cacee7527bb94c66b567fce59463162e9d44dabce617b372346ecb46fe1",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "AWS EC2 Describe Snapshots",
@@ -8564,6 +8726,10 @@
           {
             "name": "Assume Role (cross-account)",
             "value": "assume_role"
+          },
+          {
+            "name": "Managed Role (Credential)",
+            "value": "credential"
           }
         ]
       },
@@ -8640,6 +8806,20 @@
           "field": "auth_method",
           "values": [
             "assume_role"
+          ]
+        }
+      },
+      {
+        "name": "credential",
+        "type": "credential",
+        "value": null,
+        "label": "AWS Role Credential",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "credential"
           ]
         }
       },
@@ -8683,7 +8863,7 @@
     ]
   },
   "aws/ec2/describe_volumes": {
-    "hash": "8885c6966022f30929a6a0aa82ceb8424f73ba9ea22b455e7182135e52cfbf97",
+    "hash": "75a61f1c4e87e5066641cc4139ba60407dbeb89d194d0f25e1a6541ab352d9d8",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "AWS EC2 Describe Volumes",
@@ -8718,6 +8898,10 @@
           {
             "name": "Assume Role (cross-account)",
             "value": "assume_role"
+          },
+          {
+            "name": "Managed Role (Credential)",
+            "value": "credential"
           }
         ]
       },
@@ -8794,6 +8978,20 @@
           "field": "auth_method",
           "values": [
             "assume_role"
+          ]
+        }
+      },
+      {
+        "name": "credential",
+        "type": "credential",
+        "value": null,
+        "label": "AWS Role Credential",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "credential"
           ]
         }
       },
@@ -8830,7 +9028,7 @@
     ]
   },
   "aws/ec2/reboot_instances": {
-    "hash": "90ae547988313c874e61a67443ef223381f6d5d28c3bbb58a8e037e33b82ff8e",
+    "hash": "8655060d5ed88493a85ce0392281394e673b351a8de3cd9f6ae1ab8908161b29",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "AWS EC2 Reboot Instances",
@@ -8865,6 +9063,10 @@
           {
             "name": "Assume Role (cross-account)",
             "value": "assume_role"
+          },
+          {
+            "name": "Managed Role (Credential)",
+            "value": "credential"
           }
         ]
       },
@@ -8945,6 +9147,20 @@
         }
       },
       {
+        "name": "credential",
+        "type": "credential",
+        "value": null,
+        "label": "AWS Role Credential",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "credential"
+          ]
+        }
+      },
+      {
         "name": "instance_ids",
         "type": "string",
         "value": null,
@@ -8971,7 +9187,7 @@
     ]
   },
   "aws/ec2/revoke_security_group_ingress": {
-    "hash": "0c60ec379d2be3bbf6ee238297014f5ea314208614ecf60954a030b90eeb3f53",
+    "hash": "1b45fbb3a721e285e850cb199595b3a824a19678939a608e23e5fdb426a0e121",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "AWS EC2 Revoke Security Group Ingress",
@@ -9006,6 +9222,10 @@
           {
             "name": "Assume Role (cross-account)",
             "value": "assume_role"
+          },
+          {
+            "name": "Managed Role (Credential)",
+            "value": "credential"
           }
         ]
       },
@@ -9082,6 +9302,20 @@
           "field": "auth_method",
           "values": [
             "assume_role"
+          ]
+        }
+      },
+      {
+        "name": "credential",
+        "type": "credential",
+        "value": null,
+        "label": "AWS Role Credential",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "credential"
           ]
         }
       },
@@ -9160,7 +9394,7 @@
     ]
   },
   "aws/ec2/run_instances": {
-    "hash": "40db9e8b8895b55414e24645512df330d6769b859217ced7f755ee5b411fd2cc",
+    "hash": "77327bbcbe03be0e5c2451fbfeecac82588694980a85ca4fa0178136da26bd2d",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "AWS EC2 Run Instances",
@@ -9195,6 +9429,10 @@
           {
             "name": "Assume Role (cross-account)",
             "value": "assume_role"
+          },
+          {
+            "name": "Managed Role (Credential)",
+            "value": "credential"
           }
         ]
       },
@@ -9271,6 +9509,20 @@
           "field": "auth_method",
           "values": [
             "assume_role"
+          ]
+        }
+      },
+      {
+        "name": "credential",
+        "type": "credential",
+        "value": null,
+        "label": "AWS Role Credential",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "credential"
           ]
         }
       },
@@ -9358,7 +9610,7 @@
     ]
   },
   "aws/ec2/start_instances": {
-    "hash": "6eeef17e5d8caf7ea83f0d7ec0c015dd0656ccc380baa26b633b3a2a182c261c",
+    "hash": "9c09b989bc2c8645dbbb616263a4ff27a9e64c2bf10da85c95365dfe2785e1e5",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "AWS EC2 Start Instances",
@@ -9393,6 +9645,10 @@
           {
             "name": "Assume Role (cross-account)",
             "value": "assume_role"
+          },
+          {
+            "name": "Managed Role (Credential)",
+            "value": "credential"
           }
         ]
       },
@@ -9473,6 +9729,20 @@
         }
       },
       {
+        "name": "credential",
+        "type": "credential",
+        "value": null,
+        "label": "AWS Role Credential",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "credential"
+          ]
+        }
+      },
+      {
         "name": "instance_ids",
         "type": "string",
         "value": null,
@@ -9499,7 +9769,7 @@
     ]
   },
   "aws/ec2/stop_instances": {
-    "hash": "a2561fb87a702c7291665b079a96817349dcc005c1c31000b5364fa3b7f0adff",
+    "hash": "f61b080c015e9b268933f133fc46e1e3ca2c103623753bc7e04a5336f6fff342",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "AWS EC2 Stop Instances",
@@ -9534,6 +9804,10 @@
           {
             "name": "Assume Role (cross-account)",
             "value": "assume_role"
+          },
+          {
+            "name": "Managed Role (Credential)",
+            "value": "credential"
           }
         ]
       },
@@ -9610,6 +9884,20 @@
           "field": "auth_method",
           "values": [
             "assume_role"
+          ]
+        }
+      },
+      {
+        "name": "credential",
+        "type": "credential",
+        "value": null,
+        "label": "AWS Role Credential",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "credential"
           ]
         }
       },
@@ -9647,7 +9935,7 @@
     ]
   },
   "aws/ec2/terminate_instances": {
-    "hash": "10f91ab082642c6c71d8f1b7d55119e4d666a0af48bcf66e6059e717cfb7b7ae",
+    "hash": "9743fe7eb9b097ec88952130396c085399bdfb2ae4478b269905ef54600ba901",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "AWS EC2 Terminate Instances",
@@ -9682,6 +9970,10 @@
           {
             "name": "Assume Role (cross-account)",
             "value": "assume_role"
+          },
+          {
+            "name": "Managed Role (Credential)",
+            "value": "credential"
           }
         ]
       },
@@ -9758,6 +10050,20 @@
           "field": "auth_method",
           "values": [
             "assume_role"
+          ]
+        }
+      },
+      {
+        "name": "credential",
+        "type": "credential",
+        "value": null,
+        "label": "AWS Role Credential",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "credential"
           ]
         }
       },
