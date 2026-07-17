@@ -46,29 +46,42 @@ type Credentials struct {
 	// target role's trust policy. Ignored unless AssumeRoleARN is set.
 }
 
-// Config builds an aws.Config from static credentials, optionally assuming a
-// role. Region is required. When AssumeRoleARN is set, the static credentials
-// are used only to call STS AssumeRole and the returned config carries the
-// assumed-role credentials (cached + auto-refreshed).
+// Config builds an aws.Config for one of two authentication methods:
+//
+//   - Access Keys: the user supplies AccessKey/SecretKey (their own IAM keys).
+//   - Assume Role: the user supplies only AssumeRoleARN (+ optional ExternalID).
+//     The BASE identity that calls STS AssumeRole is then Flomation's own — taken
+//     from the runner host's ambient AWS credential chain (the AWS_ACCESS_KEY_ID/
+//     AWS_SECRET_ACCESS_KEY env of a dedicated Flomation IAM user, or an instance
+//     role where available). The customer never enters Flomation's keys; they
+//     grant Flomation's principal sts:AssumeRole on their role instead.
+//
+// Region is required, and at least one of AccessKey or AssumeRoleARN must be set.
+// The returned config's credentials are cached and auto-refreshed by the SDK.
 func Config(ctx context.Context, c Credentials) (awssdk.Config, error) {
 	if c.Region == "" {
 		return awssdk.Config{}, fmt.Errorf("aws region is required")
 	}
-	if c.AccessKey == "" || c.SecretKey == "" {
-		return awssdk.Config{}, fmt.Errorf("aws access key and secret key are required")
+	if c.AccessKey == "" && c.AssumeRoleARN == "" {
+		return awssdk.Config{}, fmt.Errorf("provide AWS access keys, or a role ARN to assume")
 	}
 
-	cfg, err := config.LoadDefaultConfig(ctx,
-		config.WithRegion(c.Region),
-		config.WithCredentialsProvider(credentials.StaticCredentialsProvider{
+	opts := []func(*config.LoadOptions) error{config.WithRegion(c.Region)}
+	// User-supplied static keys → use them as the base identity. Otherwise fall
+	// through to the SDK default chain (Flomation's ambient identity), which is
+	// only meaningful when assuming a role below.
+	if c.AccessKey != "" && c.SecretKey != "" {
+		opts = append(opts, config.WithCredentialsProvider(credentials.StaticCredentialsProvider{
 			Value: awssdk.Credentials{
 				AccessKeyID:     c.AccessKey,
 				SecretAccessKey: c.SecretKey,
 				SessionToken:    c.SessionToken,
 				Source:          "Flomation AWS",
 			},
-		}),
-	)
+		}))
+	}
+
+	cfg, err := config.LoadDefaultConfig(ctx, opts...)
 	if err != nil {
 		return awssdk.Config{}, fmt.Errorf("load aws config: %w", err)
 	}

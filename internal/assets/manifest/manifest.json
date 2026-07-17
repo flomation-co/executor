@@ -7144,7 +7144,7 @@
     ]
   },
   "aws/ec2/authorize_security_group_ingress": {
-    "hash": "44e1972b9998d857110807cebf807b23e9009b2af19371cc68fdf78ee6801cbf",
+    "hash": "ec249c237b5b052d9c58c15101ab50d0f3b55dbec0dcf23627d309382f295ac2",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "AWS EC2 Authorize Security Group Ingress",
@@ -7188,7 +7188,13 @@
         "value": null,
         "label": "AWS Access Key",
         "placeholder": "",
-        "required": true
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
       },
       {
         "name": "aws_secret_key",
@@ -7196,7 +7202,13 @@
         "value": null,
         "label": "AWS Secret Key",
         "placeholder": "",
-        "required": true
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
       },
       {
         "name": "aws_region",
@@ -7223,8 +7235,9 @@
         "name": "assume_role_arn",
         "type": "string",
         "value": null,
-        "label": "Assume Role ARN",
-        "placeholder": "arn:aws:iam::123456789012:role/MyRole",
+        "label": "Role ARN to Assume",
+        "placeholder": "arn:aws:iam::\u003cyour-account\u003e:role/FlomationAccess",
+        "required": true,
         "visible_when": {
           "field": "auth_method",
           "values": [
@@ -7327,7 +7340,7 @@
     ]
   },
   "aws/ec2/create_security_group": {
-    "hash": "8ea7e1adbca3198c93fb62c338f3870214a2fcceb246624a108bc9d6a3a3c044",
+    "hash": "a7970a8e3abe13bf17fb2ff5fc11eac494e827ee26bf360b855ffb7c3fc52d9d",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "AWS EC2 Create Security Group",
@@ -7371,7 +7384,13 @@
         "value": null,
         "label": "AWS Access Key",
         "placeholder": "",
-        "required": true
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
       },
       {
         "name": "aws_secret_key",
@@ -7379,7 +7398,13 @@
         "value": null,
         "label": "AWS Secret Key",
         "placeholder": "",
-        "required": true
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
       },
       {
         "name": "aws_region",
@@ -7406,8 +7431,9 @@
         "name": "assume_role_arn",
         "type": "string",
         "value": null,
-        "label": "Assume Role ARN",
-        "placeholder": "arn:aws:iam::123456789012:role/MyRole",
+        "label": "Role ARN to Assume",
+        "placeholder": "arn:aws:iam::\u003cyour-account\u003e:role/FlomationAccess",
+        "required": true,
         "visible_when": {
           "field": "auth_method",
           "values": [
@@ -7470,7 +7496,7 @@
     ]
   },
   "aws/ec2/create_snapshot": {
-    "hash": "f4a5166c8fa7f3613d64202aaa844ff40b6eab8d80c749996c5c7b78deb98801",
+    "hash": "34fc7d677976ddeb0d91da73e11a12d6797c29b66a3bb157233e208502156bcd",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "AWS EC2 Create Snapshot",
@@ -7514,7 +7540,13 @@
         "value": null,
         "label": "AWS Access Key",
         "placeholder": "",
-        "required": true
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
       },
       {
         "name": "aws_secret_key",
@@ -7522,7 +7554,13 @@
         "value": null,
         "label": "AWS Secret Key",
         "placeholder": "",
-        "required": true
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
       },
       {
         "name": "aws_region",
@@ -7549,8 +7587,9 @@
         "name": "assume_role_arn",
         "type": "string",
         "value": null,
-        "label": "Assume Role ARN",
-        "placeholder": "arn:aws:iam::123456789012:role/MyRole",
+        "label": "Role ARN to Assume",
+        "placeholder": "arn:aws:iam::\u003cyour-account\u003e:role/FlomationAccess",
+        "required": true,
         "visible_when": {
           "field": "auth_method",
           "values": [
@@ -7612,7 +7651,7 @@
     ]
   },
   "aws/ec2/create_tags": {
-    "hash": "c672033124e735a691a1df75bbefc341a3d27a0b2a27dda2efe85ffdf9080e10",
+    "hash": "371de06d5cea2c6c20b624ccd23667e002d9e1f5502f1114344afd5c75f7ac53",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "AWS EC2 Create Tags",
@@ -7656,7 +7695,13 @@
         "value": null,
         "label": "AWS Access Key",
         "placeholder": "",
-        "required": true
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
       },
       {
         "name": "aws_secret_key",
@@ -7664,7 +7709,13 @@
         "value": null,
         "label": "AWS Secret Key",
         "placeholder": "",
-        "required": true
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
       },
       {
         "name": "aws_region",
@@ -7691,8 +7742,9 @@
         "name": "assume_role_arn",
         "type": "string",
         "value": null,
-        "label": "Assume Role ARN",
-        "placeholder": "arn:aws:iam::123456789012:role/MyRole",
+        "label": "Role ARN to Assume",
+        "placeholder": "arn:aws:iam::\u003cyour-account\u003e:role/FlomationAccess",
+        "required": true,
         "visible_when": {
           "field": "auth_method",
           "values": [
@@ -7748,7 +7800,7 @@
     ]
   },
   "aws/ec2/delete_security_group": {
-    "hash": "4233a5b4d10eed1265964c80e08b35752494421fd3de2576e1518d26a00e85d7",
+    "hash": "47c029db79edca3e5133f0be7381db1027eddd4e7f5b2f51cf8ed036a0fa4ac8",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "AWS EC2 Delete Security Group",
@@ -7792,7 +7844,13 @@
         "value": null,
         "label": "AWS Access Key",
         "placeholder": "",
-        "required": true
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
       },
       {
         "name": "aws_secret_key",
@@ -7800,7 +7858,13 @@
         "value": null,
         "label": "AWS Secret Key",
         "placeholder": "",
-        "required": true
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
       },
       {
         "name": "aws_region",
@@ -7827,8 +7891,9 @@
         "name": "assume_role_arn",
         "type": "string",
         "value": null,
-        "label": "Assume Role ARN",
-        "placeholder": "arn:aws:iam::123456789012:role/MyRole",
+        "label": "Role ARN to Assume",
+        "placeholder": "arn:aws:iam::\u003cyour-account\u003e:role/FlomationAccess",
+        "required": true,
         "visible_when": {
           "field": "auth_method",
           "values": [
@@ -7876,7 +7941,7 @@
     ]
   },
   "aws/ec2/describe_images": {
-    "hash": "5e31c9ea243c0ec7ff88152672d5a987984f7da977287afbde62bbc92a30fd8e",
+    "hash": "146d640aa6c05429b252edba3a084f68bcb2ffe313c8ff5d9a37bbd13fb044f7",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "AWS EC2 Describe Images",
@@ -7920,7 +7985,13 @@
         "value": null,
         "label": "AWS Access Key",
         "placeholder": "",
-        "required": true
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
       },
       {
         "name": "aws_secret_key",
@@ -7928,7 +7999,13 @@
         "value": null,
         "label": "AWS Secret Key",
         "placeholder": "",
-        "required": true
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
       },
       {
         "name": "aws_region",
@@ -7955,8 +8032,9 @@
         "name": "assume_role_arn",
         "type": "string",
         "value": null,
-        "label": "Assume Role ARN",
-        "placeholder": "arn:aws:iam::123456789012:role/MyRole",
+        "label": "Role ARN to Assume",
+        "placeholder": "arn:aws:iam::\u003cyour-account\u003e:role/FlomationAccess",
+        "required": true,
         "visible_when": {
           "field": "auth_method",
           "values": [
@@ -8017,7 +8095,7 @@
     ]
   },
   "aws/ec2/describe_instances": {
-    "hash": "fa68302dcb7ea997c80ef0fb4e28547c6f6cb33fd8e7c6ddd82780fd8e6d460b",
+    "hash": "2d0da95370950a593bd1af36623039e4d9ecd87797d8a543f0c12f6ec0b3ee6f",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "AWS EC2 Describe Instances",
@@ -8061,7 +8139,13 @@
         "value": null,
         "label": "AWS Access Key",
         "placeholder": "",
-        "required": true
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
       },
       {
         "name": "aws_secret_key",
@@ -8069,7 +8153,13 @@
         "value": null,
         "label": "AWS Secret Key",
         "placeholder": "",
-        "required": true
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
       },
       {
         "name": "aws_region",
@@ -8096,8 +8186,9 @@
         "name": "assume_role_arn",
         "type": "string",
         "value": null,
-        "label": "Assume Role ARN",
-        "placeholder": "arn:aws:iam::123456789012:role/MyRole",
+        "label": "Role ARN to Assume",
+        "placeholder": "arn:aws:iam::\u003cyour-account\u003e:role/FlomationAccess",
+        "required": true,
         "visible_when": {
           "field": "auth_method",
           "values": [
@@ -8151,7 +8242,7 @@
     ]
   },
   "aws/ec2/describe_key_pairs": {
-    "hash": "8cbf6f6504a98b11d34b9f628fa528f8d021725bb803f7fdf756d4eb8b1d13d7",
+    "hash": "6b775af2083dbc93d1416c8febc657aff259f6bf9583a8b1ef80936a9649a62d",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "AWS EC2 Describe Key Pairs",
@@ -8195,7 +8286,13 @@
         "value": null,
         "label": "AWS Access Key",
         "placeholder": "",
-        "required": true
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
       },
       {
         "name": "aws_secret_key",
@@ -8203,7 +8300,13 @@
         "value": null,
         "label": "AWS Secret Key",
         "placeholder": "",
-        "required": true
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
       },
       {
         "name": "aws_region",
@@ -8230,8 +8333,9 @@
         "name": "assume_role_arn",
         "type": "string",
         "value": null,
-        "label": "Assume Role ARN",
-        "placeholder": "arn:aws:iam::123456789012:role/MyRole",
+        "label": "Role ARN to Assume",
+        "placeholder": "arn:aws:iam::\u003cyour-account\u003e:role/FlomationAccess",
+        "required": true,
         "visible_when": {
           "field": "auth_method",
           "values": [
@@ -8278,7 +8382,7 @@
     ]
   },
   "aws/ec2/describe_security_groups": {
-    "hash": "dd3be95764516dffe8d4754e7f30b8921e555f9ffa59badb0dd55af866fa5b7d",
+    "hash": "570cf3159be085beee606bcdeef6779c05ba7888d411b9cba7b460a7d9f0bae2",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "AWS EC2 Describe Security Groups",
@@ -8322,7 +8426,13 @@
         "value": null,
         "label": "AWS Access Key",
         "placeholder": "",
-        "required": true
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
       },
       {
         "name": "aws_secret_key",
@@ -8330,7 +8440,13 @@
         "value": null,
         "label": "AWS Secret Key",
         "placeholder": "",
-        "required": true
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
       },
       {
         "name": "aws_region",
@@ -8357,8 +8473,9 @@
         "name": "assume_role_arn",
         "type": "string",
         "value": null,
-        "label": "Assume Role ARN",
-        "placeholder": "arn:aws:iam::123456789012:role/MyRole",
+        "label": "Role ARN to Assume",
+        "placeholder": "arn:aws:iam::\u003cyour-account\u003e:role/FlomationAccess",
+        "required": true,
         "visible_when": {
           "field": "auth_method",
           "values": [
@@ -8412,7 +8529,7 @@
     ]
   },
   "aws/ec2/describe_snapshots": {
-    "hash": "91d817878bd04d678eec8507ab4cb40d9507b8e09c96c7e4cc4fd1f67d5c6a2a",
+    "hash": "f0ae592c03f028a4bf6b1901e461f8a6255e254dc195f9b8ee9bca93e6d350d1",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "AWS EC2 Describe Snapshots",
@@ -8456,7 +8573,13 @@
         "value": null,
         "label": "AWS Access Key",
         "placeholder": "",
-        "required": true
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
       },
       {
         "name": "aws_secret_key",
@@ -8464,7 +8587,13 @@
         "value": null,
         "label": "AWS Secret Key",
         "placeholder": "",
-        "required": true
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
       },
       {
         "name": "aws_region",
@@ -8491,8 +8620,9 @@
         "name": "assume_role_arn",
         "type": "string",
         "value": null,
-        "label": "Assume Role ARN",
-        "placeholder": "arn:aws:iam::123456789012:role/MyRole",
+        "label": "Role ARN to Assume",
+        "placeholder": "arn:aws:iam::\u003cyour-account\u003e:role/FlomationAccess",
+        "required": true,
         "visible_when": {
           "field": "auth_method",
           "values": [
@@ -8553,7 +8683,7 @@
     ]
   },
   "aws/ec2/describe_volumes": {
-    "hash": "7d7e081d7fe83ba29591026ebe883b044c94937cf1da014f8db961bbe7838118",
+    "hash": "8885c6966022f30929a6a0aa82ceb8424f73ba9ea22b455e7182135e52cfbf97",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "AWS EC2 Describe Volumes",
@@ -8597,7 +8727,13 @@
         "value": null,
         "label": "AWS Access Key",
         "placeholder": "",
-        "required": true
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
       },
       {
         "name": "aws_secret_key",
@@ -8605,7 +8741,13 @@
         "value": null,
         "label": "AWS Secret Key",
         "placeholder": "",
-        "required": true
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
       },
       {
         "name": "aws_region",
@@ -8632,8 +8774,9 @@
         "name": "assume_role_arn",
         "type": "string",
         "value": null,
-        "label": "Assume Role ARN",
-        "placeholder": "arn:aws:iam::123456789012:role/MyRole",
+        "label": "Role ARN to Assume",
+        "placeholder": "arn:aws:iam::\u003cyour-account\u003e:role/FlomationAccess",
+        "required": true,
         "visible_when": {
           "field": "auth_method",
           "values": [
@@ -8687,7 +8830,7 @@
     ]
   },
   "aws/ec2/reboot_instances": {
-    "hash": "377875202de27a8315901f6aa52e8a4871383d7ca4e12922d9bd7e2b5597c1b4",
+    "hash": "90ae547988313c874e61a67443ef223381f6d5d28c3bbb58a8e037e33b82ff8e",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "AWS EC2 Reboot Instances",
@@ -8731,7 +8874,13 @@
         "value": null,
         "label": "AWS Access Key",
         "placeholder": "",
-        "required": true
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
       },
       {
         "name": "aws_secret_key",
@@ -8739,7 +8888,13 @@
         "value": null,
         "label": "AWS Secret Key",
         "placeholder": "",
-        "required": true
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
       },
       {
         "name": "aws_region",
@@ -8766,8 +8921,9 @@
         "name": "assume_role_arn",
         "type": "string",
         "value": null,
-        "label": "Assume Role ARN",
-        "placeholder": "arn:aws:iam::123456789012:role/MyRole",
+        "label": "Role ARN to Assume",
+        "placeholder": "arn:aws:iam::\u003cyour-account\u003e:role/FlomationAccess",
+        "required": true,
         "visible_when": {
           "field": "auth_method",
           "values": [
@@ -8815,7 +8971,7 @@
     ]
   },
   "aws/ec2/revoke_security_group_ingress": {
-    "hash": "02aefada2b04de4ea5e00eee9d8162adf43f791e468a6fb86d1656ce19c404a8",
+    "hash": "0c60ec379d2be3bbf6ee238297014f5ea314208614ecf60954a030b90eeb3f53",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "AWS EC2 Revoke Security Group Ingress",
@@ -8859,7 +9015,13 @@
         "value": null,
         "label": "AWS Access Key",
         "placeholder": "",
-        "required": true
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
       },
       {
         "name": "aws_secret_key",
@@ -8867,7 +9029,13 @@
         "value": null,
         "label": "AWS Secret Key",
         "placeholder": "",
-        "required": true
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
       },
       {
         "name": "aws_region",
@@ -8894,8 +9062,9 @@
         "name": "assume_role_arn",
         "type": "string",
         "value": null,
-        "label": "Assume Role ARN",
-        "placeholder": "arn:aws:iam::123456789012:role/MyRole",
+        "label": "Role ARN to Assume",
+        "placeholder": "arn:aws:iam::\u003cyour-account\u003e:role/FlomationAccess",
+        "required": true,
         "visible_when": {
           "field": "auth_method",
           "values": [
@@ -8991,7 +9160,7 @@
     ]
   },
   "aws/ec2/run_instances": {
-    "hash": "531437c7023ce4476a77e3ad8ac6f3ed1d9cf69161a1ba63e287742bea74979a",
+    "hash": "40db9e8b8895b55414e24645512df330d6769b859217ced7f755ee5b411fd2cc",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "AWS EC2 Run Instances",
@@ -9035,7 +9204,13 @@
         "value": null,
         "label": "AWS Access Key",
         "placeholder": "",
-        "required": true
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
       },
       {
         "name": "aws_secret_key",
@@ -9043,7 +9218,13 @@
         "value": null,
         "label": "AWS Secret Key",
         "placeholder": "",
-        "required": true
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
       },
       {
         "name": "aws_region",
@@ -9070,8 +9251,9 @@
         "name": "assume_role_arn",
         "type": "string",
         "value": null,
-        "label": "Assume Role ARN",
-        "placeholder": "arn:aws:iam::123456789012:role/MyRole",
+        "label": "Role ARN to Assume",
+        "placeholder": "arn:aws:iam::\u003cyour-account\u003e:role/FlomationAccess",
+        "required": true,
         "visible_when": {
           "field": "auth_method",
           "values": [
@@ -9176,7 +9358,7 @@
     ]
   },
   "aws/ec2/start_instances": {
-    "hash": "f288e8c290178bc2cc68a244eccee24e0fc9dcda019bb84ffcd1271dee750210",
+    "hash": "6eeef17e5d8caf7ea83f0d7ec0c015dd0656ccc380baa26b633b3a2a182c261c",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "AWS EC2 Start Instances",
@@ -9220,7 +9402,13 @@
         "value": null,
         "label": "AWS Access Key",
         "placeholder": "",
-        "required": true
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
       },
       {
         "name": "aws_secret_key",
@@ -9228,7 +9416,13 @@
         "value": null,
         "label": "AWS Secret Key",
         "placeholder": "",
-        "required": true
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
       },
       {
         "name": "aws_region",
@@ -9255,8 +9449,9 @@
         "name": "assume_role_arn",
         "type": "string",
         "value": null,
-        "label": "Assume Role ARN",
-        "placeholder": "arn:aws:iam::123456789012:role/MyRole",
+        "label": "Role ARN to Assume",
+        "placeholder": "arn:aws:iam::\u003cyour-account\u003e:role/FlomationAccess",
+        "required": true,
         "visible_when": {
           "field": "auth_method",
           "values": [
@@ -9304,7 +9499,7 @@
     ]
   },
   "aws/ec2/stop_instances": {
-    "hash": "d1c188932fd291dab10c0eb26b5e7f611a5cf67efd71b930df36e5d1412e2fcc",
+    "hash": "a2561fb87a702c7291665b079a96817349dcc005c1c31000b5364fa3b7f0adff",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "AWS EC2 Stop Instances",
@@ -9348,7 +9543,13 @@
         "value": null,
         "label": "AWS Access Key",
         "placeholder": "",
-        "required": true
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
       },
       {
         "name": "aws_secret_key",
@@ -9356,7 +9557,13 @@
         "value": null,
         "label": "AWS Secret Key",
         "placeholder": "",
-        "required": true
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
       },
       {
         "name": "aws_region",
@@ -9383,8 +9590,9 @@
         "name": "assume_role_arn",
         "type": "string",
         "value": null,
-        "label": "Assume Role ARN",
-        "placeholder": "arn:aws:iam::123456789012:role/MyRole",
+        "label": "Role ARN to Assume",
+        "placeholder": "arn:aws:iam::\u003cyour-account\u003e:role/FlomationAccess",
+        "required": true,
         "visible_when": {
           "field": "auth_method",
           "values": [
@@ -9439,7 +9647,7 @@
     ]
   },
   "aws/ec2/terminate_instances": {
-    "hash": "8839222ad3b22a5289e2a53e718abc6475fcef4bdf00abc88353f27f55dad2fb",
+    "hash": "10f91ab082642c6c71d8f1b7d55119e4d666a0af48bcf66e6059e717cfb7b7ae",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "AWS EC2 Terminate Instances",
@@ -9483,7 +9691,13 @@
         "value": null,
         "label": "AWS Access Key",
         "placeholder": "",
-        "required": true
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
       },
       {
         "name": "aws_secret_key",
@@ -9491,7 +9705,13 @@
         "value": null,
         "label": "AWS Secret Key",
         "placeholder": "",
-        "required": true
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
       },
       {
         "name": "aws_region",
@@ -9518,8 +9738,9 @@
         "name": "assume_role_arn",
         "type": "string",
         "value": null,
-        "label": "Assume Role ARN",
-        "placeholder": "arn:aws:iam::123456789012:role/MyRole",
+        "label": "Role ARN to Assume",
+        "placeholder": "arn:aws:iam::\u003cyour-account\u003e:role/FlomationAccess",
+        "required": true,
         "visible_when": {
           "field": "auth_method",
           "values": [

@@ -12,16 +12,39 @@ func conn(name, value string) *core.Connection {
 	return &core.Connection{Name: name, Type: core.ConnectionTypeString, Value: value}
 }
 
-func TestConfigRequiresRegionAndKeys(t *testing.T) {
+func TestConfigRequiresRegion(t *testing.T) {
 	RegisterTestingT(t)
 
 	_, err := Config(context.Background(), Credentials{AccessKey: "AKIA", SecretKey: "s"})
 	Expect(err).To(HaveOccurred())
 	Expect(err.Error()).To(ContainSubstring("region"))
+}
 
-	_, err = Config(context.Background(), Credentials{Region: "eu-west-2"})
+func TestConfigRequiresKeysOrRole(t *testing.T) {
+	RegisterTestingT(t)
+
+	// Region alone is not enough: with neither keys nor a role to assume there
+	// is no identity to authenticate with.
+	_, err := Config(context.Background(), Credentials{Region: "eu-west-2"})
 	Expect(err).To(HaveOccurred())
-	Expect(err.Error()).To(ContainSubstring("key"))
+	Expect(err.Error()).To(ContainSubstring("role ARN"))
+}
+
+// The brokered model: assuming a role with NO user-supplied keys. The base
+// identity comes from the SDK default chain (Flomation's ambient credentials);
+// the provider is constructed lazily, so config building succeeds here even
+// though STS is never actually called.
+func TestConfigAssumeRoleWithoutUserKeys(t *testing.T) {
+	RegisterTestingT(t)
+
+	cfg, err := Config(context.Background(), Credentials{
+		Region:        "eu-west-2",
+		AssumeRoleARN: "arn:aws:iam::123456789012:role/FlomationAccess",
+		ExternalID:    "tenant-abc-123",
+	})
+	Expect(err).To(BeNil())
+	Expect(cfg.Region).To(Equal("eu-west-2"))
+	Expect(cfg.Credentials).ToNot(BeNil())
 }
 
 func TestConfigBuildsWithStaticCredentials(t *testing.T) {
