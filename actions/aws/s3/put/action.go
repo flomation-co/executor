@@ -5,6 +5,7 @@ import (
 	"context"
 
 	core "flomation.app/automate/executor"
+	awscommon "flomation.app/automate/executor/actions/aws"
 	"flomation.app/automate/executor/actions/aws/s3"
 	"github.com/aws/aws-sdk-go-v2/aws"
 	awsS3 "github.com/aws/aws-sdk-go-v2/service/s3"
@@ -35,6 +36,12 @@ var Inputs = [...]core.Connection{
 		Label:       "AWS Secret Key",
 		Placeholder: "",
 		Required:    true,
+	},
+	core.Connection{
+		Name:        "aws_region",
+		Type:        core.ConnectionTypeString,
+		Label:       "Region",
+		Placeholder: "eu-west-2",
 	},
 	core.Connection{
 		Name:        "key",
@@ -100,7 +107,11 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 		bodyBytes = resolved
 	}
 
-	s, err := s3.GetService(*accessKey.String(), *secretKey.String(), "eu-west-2")
+	region := awscommon.InputString("aws_region", inputs)
+	if region == "" {
+		region = "eu-west-2"
+	}
+	s, err := s3.GetService(*accessKey.String(), *secretKey.String(), region)
 	if err != nil {
 		return nil, err
 	}

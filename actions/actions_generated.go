@@ -71,7 +71,23 @@ import (
 	asana_user_get_all "flomation.app/automate/executor/actions/asana/user_get_all"
 	asana_workspace_get_all "flomation.app/automate/executor/actions/asana/workspace_get_all"
 	aws_dynamodb "flomation.app/automate/executor/actions/aws/dynamodb"
-	aws_ec2_describe "flomation.app/automate/executor/actions/aws/ec2/describe"
+	aws_ec2_authorize_security_group_ingress "flomation.app/automate/executor/actions/aws/ec2/authorize_security_group_ingress"
+	aws_ec2_create_security_group "flomation.app/automate/executor/actions/aws/ec2/create_security_group"
+	aws_ec2_create_snapshot "flomation.app/automate/executor/actions/aws/ec2/create_snapshot"
+	aws_ec2_create_tags "flomation.app/automate/executor/actions/aws/ec2/create_tags"
+	aws_ec2_delete_security_group "flomation.app/automate/executor/actions/aws/ec2/delete_security_group"
+	aws_ec2_describe_images "flomation.app/automate/executor/actions/aws/ec2/describe_images"
+	aws_ec2_describe_instances "flomation.app/automate/executor/actions/aws/ec2/describe_instances"
+	aws_ec2_describe_key_pairs "flomation.app/automate/executor/actions/aws/ec2/describe_key_pairs"
+	aws_ec2_describe_security_groups "flomation.app/automate/executor/actions/aws/ec2/describe_security_groups"
+	aws_ec2_describe_snapshots "flomation.app/automate/executor/actions/aws/ec2/describe_snapshots"
+	aws_ec2_describe_volumes "flomation.app/automate/executor/actions/aws/ec2/describe_volumes"
+	aws_ec2_reboot_instances "flomation.app/automate/executor/actions/aws/ec2/reboot_instances"
+	aws_ec2_revoke_security_group_ingress "flomation.app/automate/executor/actions/aws/ec2/revoke_security_group_ingress"
+	aws_ec2_run_instances "flomation.app/automate/executor/actions/aws/ec2/run_instances"
+	aws_ec2_start_instances "flomation.app/automate/executor/actions/aws/ec2/start_instances"
+	aws_ec2_stop_instances "flomation.app/automate/executor/actions/aws/ec2/stop_instances"
+	aws_ec2_terminate_instances "flomation.app/automate/executor/actions/aws/ec2/terminate_instances"
 	aws_s3_delete "flomation.app/automate/executor/actions/aws/s3/delete"
 	aws_s3_get "flomation.app/automate/executor/actions/aws/s3/get"
 	aws_s3_list "flomation.app/automate/executor/actions/aws/s3/list"
@@ -1367,7 +1383,23 @@ var Actions = map[string]core.Action{
 	"asana/user_get_all":                                  asana_user_get_all.Execute,
 	"asana/workspace_get_all":                             asana_workspace_get_all.Execute,
 	"aws/dynamodb":                                        aws_dynamodb.Execute,
-	"aws/ec2/describe":                                    aws_ec2_describe.Execute,
+	"aws/ec2/authorize_security_group_ingress":            aws_ec2_authorize_security_group_ingress.Execute,
+	"aws/ec2/create_security_group":                       aws_ec2_create_security_group.Execute,
+	"aws/ec2/create_snapshot":                             aws_ec2_create_snapshot.Execute,
+	"aws/ec2/create_tags":                                 aws_ec2_create_tags.Execute,
+	"aws/ec2/delete_security_group":                       aws_ec2_delete_security_group.Execute,
+	"aws/ec2/describe_images":                             aws_ec2_describe_images.Execute,
+	"aws/ec2/describe_instances":                          aws_ec2_describe_instances.Execute,
+	"aws/ec2/describe_key_pairs":                          aws_ec2_describe_key_pairs.Execute,
+	"aws/ec2/describe_security_groups":                    aws_ec2_describe_security_groups.Execute,
+	"aws/ec2/describe_snapshots":                          aws_ec2_describe_snapshots.Execute,
+	"aws/ec2/describe_volumes":                            aws_ec2_describe_volumes.Execute,
+	"aws/ec2/reboot_instances":                            aws_ec2_reboot_instances.Execute,
+	"aws/ec2/revoke_security_group_ingress":               aws_ec2_revoke_security_group_ingress.Execute,
+	"aws/ec2/run_instances":                               aws_ec2_run_instances.Execute,
+	"aws/ec2/start_instances":                             aws_ec2_start_instances.Execute,
+	"aws/ec2/stop_instances":                              aws_ec2_stop_instances.Execute,
+	"aws/ec2/terminate_instances":                         aws_ec2_terminate_instances.Execute,
 	"aws/s3/delete":                                       aws_s3_delete.Execute,
 	"aws/s3/get":                                          aws_s3_get.Execute,
 	"aws/s3/list":                                         aws_s3_list.Execute,

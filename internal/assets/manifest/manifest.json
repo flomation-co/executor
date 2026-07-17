@@ -7143,15 +7143,15 @@
       }
     ]
   },
-  "aws/ec2/describe": {
-    "hash": "3b9490bd2136c66008690f61d262d1b6b192b2655ba245fcf42177e1297c5c78",
+  "aws/ec2/authorize_security_group_ingress": {
+    "hash": "c384a0642f88f7a0d331ed275dd44bae5f739a3fd52a5beca48eaca98c4744d2",
     "author": "Andy Esser",
     "organisation": "Flomation",
-    "name": "AWS EC2 Describe",
-    "description": "Describe EC2 instances, returning details like state, type, IPs, and tags",
+    "name": "AWS EC2 Authorize Security Group Ingress",
+    "description": "Add an inbound rule to a security group (protocol, port range and CIDR).",
     "website": "https://www.flomation.co",
-    "icon": "server",
-    "date": "05/03/2026",
+    "icon": "shield-halved+plus",
+    "date": "17/07/2026",
     "type": 2,
     "category": {
       "name": "AWS",
@@ -7163,11 +7163,1680 @@
       "icon": "server",
       "description": "Elastic Compute Cloud operations"
     },
-    "inputs": null,
-    "outputs": null
+    "inputs": [
+      {
+        "name": "aws_access_key",
+        "type": "secret",
+        "value": null,
+        "label": "AWS Access Key",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "aws_secret_key",
+        "type": "secret",
+        "value": null,
+        "label": "AWS Secret Key",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "aws_region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "eu-west-2",
+        "required": true
+      },
+      {
+        "name": "aws_session_token",
+        "type": "secret",
+        "value": null,
+        "label": "Session Token (optional)",
+        "placeholder": ""
+      },
+      {
+        "name": "assume_role_arn",
+        "type": "string",
+        "value": null,
+        "label": "Assume Role ARN (optional)",
+        "placeholder": "arn:aws:iam::123456789012:role/MyRole"
+      },
+      {
+        "name": "group_id",
+        "type": "string",
+        "value": null,
+        "label": "Group ID",
+        "placeholder": "sg-0abc123",
+        "required": true
+      },
+      {
+        "name": "protocol",
+        "type": "string",
+        "value": null,
+        "label": "Protocol",
+        "placeholder": "",
+        "required": true,
+        "options": [
+          {
+            "name": "TCP",
+            "value": "tcp"
+          },
+          {
+            "name": "UDP",
+            "value": "udp"
+          },
+          {
+            "name": "ICMP",
+            "value": "icmp"
+          },
+          {
+            "name": "All",
+            "value": "-1"
+          }
+        ]
+      },
+      {
+        "name": "from_port",
+        "type": "integer",
+        "value": null,
+        "label": "From Port",
+        "placeholder": "e.g. 443"
+      },
+      {
+        "name": "to_port",
+        "type": "integer",
+        "value": null,
+        "label": "To Port",
+        "placeholder": "e.g. 443"
+      },
+      {
+        "name": "cidr",
+        "type": "string",
+        "value": null,
+        "label": "CIDR",
+        "placeholder": "0.0.0.0/0",
+        "required": true
+      },
+      {
+        "name": "description",
+        "type": "string",
+        "value": null,
+        "label": "Rule Description",
+        "placeholder": "Optional"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "group_id",
+        "type": "string",
+        "value": null,
+        "label": "Group ID",
+        "placeholder": ""
+      }
+    ]
+  },
+  "aws/ec2/create_security_group": {
+    "hash": "70417697987db2fd9dd51f60c61a8ef4af27d05689aabb8819a5d1f3858cb73d",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "AWS EC2 Create Security Group",
+    "description": "Create a security group in a VPC. Rules are added separately via authorize ingress.",
+    "website": "https://www.flomation.co",
+    "icon": "shield-halved+plus",
+    "date": "17/07/2026",
+    "type": 2,
+    "category": {
+      "name": "AWS",
+      "icon": "cloud",
+      "description": "Amazon Web Services integrations"
+    },
+    "sub_category": {
+      "name": "EC2",
+      "icon": "server",
+      "description": "Elastic Compute Cloud operations"
+    },
+    "inputs": [
+      {
+        "name": "aws_access_key",
+        "type": "secret",
+        "value": null,
+        "label": "AWS Access Key",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "aws_secret_key",
+        "type": "secret",
+        "value": null,
+        "label": "AWS Secret Key",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "aws_region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "eu-west-2",
+        "required": true
+      },
+      {
+        "name": "aws_session_token",
+        "type": "secret",
+        "value": null,
+        "label": "Session Token (optional)",
+        "placeholder": ""
+      },
+      {
+        "name": "assume_role_arn",
+        "type": "string",
+        "value": null,
+        "label": "Assume Role ARN (optional)",
+        "placeholder": "arn:aws:iam::123456789012:role/MyRole"
+      },
+      {
+        "name": "group_name",
+        "type": "string",
+        "value": null,
+        "label": "Group Name",
+        "placeholder": "web-sg",
+        "required": true
+      },
+      {
+        "name": "description",
+        "type": "string",
+        "value": null,
+        "label": "Description",
+        "placeholder": "Allows web traffic",
+        "required": true
+      },
+      {
+        "name": "vpc_id",
+        "type": "string",
+        "value": null,
+        "label": "VPC ID",
+        "placeholder": "vpc-0abc (optional; default VPC if blank)"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "group_id",
+        "type": "string",
+        "value": null,
+        "label": "Group ID",
+        "placeholder": ""
+      }
+    ]
+  },
+  "aws/ec2/create_snapshot": {
+    "hash": "0245f3a1cdce3b8b38d8b9257d1861ef8fd8ecb1c31bdd77d60cadce72bc6b1c",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "AWS EC2 Create Snapshot",
+    "description": "Create a point-in-time snapshot of an EBS volume.",
+    "website": "https://www.flomation.co",
+    "icon": "floppy-disk+plus",
+    "date": "17/07/2026",
+    "type": 2,
+    "category": {
+      "name": "AWS",
+      "icon": "cloud",
+      "description": "Amazon Web Services integrations"
+    },
+    "sub_category": {
+      "name": "EC2",
+      "icon": "server",
+      "description": "Elastic Compute Cloud operations"
+    },
+    "inputs": [
+      {
+        "name": "aws_access_key",
+        "type": "secret",
+        "value": null,
+        "label": "AWS Access Key",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "aws_secret_key",
+        "type": "secret",
+        "value": null,
+        "label": "AWS Secret Key",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "aws_region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "eu-west-2",
+        "required": true
+      },
+      {
+        "name": "aws_session_token",
+        "type": "secret",
+        "value": null,
+        "label": "Session Token (optional)",
+        "placeholder": ""
+      },
+      {
+        "name": "assume_role_arn",
+        "type": "string",
+        "value": null,
+        "label": "Assume Role ARN (optional)",
+        "placeholder": "arn:aws:iam::123456789012:role/MyRole"
+      },
+      {
+        "name": "volume_id",
+        "type": "string",
+        "value": null,
+        "label": "Volume ID",
+        "placeholder": "vol-0abc123",
+        "required": true
+      },
+      {
+        "name": "description",
+        "type": "string",
+        "value": null,
+        "label": "Description",
+        "placeholder": "Optional"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "snapshot_id",
+        "type": "string",
+        "value": null,
+        "label": "Snapshot ID",
+        "placeholder": ""
+      },
+      {
+        "name": "state",
+        "type": "string",
+        "value": null,
+        "label": "State",
+        "placeholder": ""
+      }
+    ]
+  },
+  "aws/ec2/create_tags": {
+    "hash": "42e690e269fd89c0903829592793f0bb2d8692ba6210505441e593971383b46e",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "AWS EC2 Create Tags",
+    "description": "Add or overwrite tags on EC2 resources (instances, volumes, etc).",
+    "website": "https://www.flomation.co",
+    "icon": "hashtag+plus",
+    "date": "17/07/2026",
+    "type": 2,
+    "category": {
+      "name": "AWS",
+      "icon": "cloud",
+      "description": "Amazon Web Services integrations"
+    },
+    "sub_category": {
+      "name": "EC2",
+      "icon": "server",
+      "description": "Elastic Compute Cloud operations"
+    },
+    "inputs": [
+      {
+        "name": "aws_access_key",
+        "type": "secret",
+        "value": null,
+        "label": "AWS Access Key",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "aws_secret_key",
+        "type": "secret",
+        "value": null,
+        "label": "AWS Secret Key",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "aws_region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "eu-west-2",
+        "required": true
+      },
+      {
+        "name": "aws_session_token",
+        "type": "secret",
+        "value": null,
+        "label": "Session Token (optional)",
+        "placeholder": ""
+      },
+      {
+        "name": "assume_role_arn",
+        "type": "string",
+        "value": null,
+        "label": "Assume Role ARN (optional)",
+        "placeholder": "arn:aws:iam::123456789012:role/MyRole"
+      },
+      {
+        "name": "resource_ids",
+        "type": "string",
+        "value": null,
+        "label": "Resource IDs",
+        "placeholder": "Comma-separated, e.g. i-0abc,vol-0def",
+        "required": true
+      },
+      {
+        "name": "tags",
+        "type": "string",
+        "value": null,
+        "label": "Tags",
+        "placeholder": "Key=Value pairs, e.g. Name=web,Env=prod",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "tagged",
+        "type": "integer",
+        "value": null,
+        "label": "Resources Tagged",
+        "placeholder": ""
+      }
+    ]
+  },
+  "aws/ec2/delete_security_group": {
+    "hash": "204604bc0bea0e7254192f79e26d223c0bc7116cdbd3e43e94353f97cc7605d7",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "AWS EC2 Delete Security Group",
+    "description": "Delete a security group by id. Fails if the group is still in use.",
+    "website": "https://www.flomation.co",
+    "icon": "shield-halved+trash",
+    "date": "17/07/2026",
+    "type": 2,
+    "category": {
+      "name": "AWS",
+      "icon": "cloud",
+      "description": "Amazon Web Services integrations"
+    },
+    "sub_category": {
+      "name": "EC2",
+      "icon": "server",
+      "description": "Elastic Compute Cloud operations"
+    },
+    "inputs": [
+      {
+        "name": "aws_access_key",
+        "type": "secret",
+        "value": null,
+        "label": "AWS Access Key",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "aws_secret_key",
+        "type": "secret",
+        "value": null,
+        "label": "AWS Secret Key",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "aws_region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "eu-west-2",
+        "required": true
+      },
+      {
+        "name": "aws_session_token",
+        "type": "secret",
+        "value": null,
+        "label": "Session Token (optional)",
+        "placeholder": ""
+      },
+      {
+        "name": "assume_role_arn",
+        "type": "string",
+        "value": null,
+        "label": "Assume Role ARN (optional)",
+        "placeholder": "arn:aws:iam::123456789012:role/MyRole"
+      },
+      {
+        "name": "group_id",
+        "type": "string",
+        "value": null,
+        "label": "Group ID",
+        "placeholder": "sg-0abc123",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "group_id",
+        "type": "string",
+        "value": null,
+        "label": "Group ID",
+        "placeholder": ""
+      }
+    ]
+  },
+  "aws/ec2/describe_images": {
+    "hash": "b72d208f48a11b3493d939c7ba5446b4320dee1082ef7c3acc5fda5cbd74646b",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "AWS EC2 Describe Images",
+    "description": "List AMIs by id or owner, with name, state, architecture and creation date.",
+    "website": "https://www.flomation.co",
+    "icon": "image",
+    "date": "17/07/2026",
+    "type": 2,
+    "category": {
+      "name": "AWS",
+      "icon": "cloud",
+      "description": "Amazon Web Services integrations"
+    },
+    "sub_category": {
+      "name": "EC2",
+      "icon": "server",
+      "description": "Elastic Compute Cloud operations"
+    },
+    "inputs": [
+      {
+        "name": "aws_access_key",
+        "type": "secret",
+        "value": null,
+        "label": "AWS Access Key",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "aws_secret_key",
+        "type": "secret",
+        "value": null,
+        "label": "AWS Secret Key",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "aws_region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "eu-west-2",
+        "required": true
+      },
+      {
+        "name": "aws_session_token",
+        "type": "secret",
+        "value": null,
+        "label": "Session Token (optional)",
+        "placeholder": ""
+      },
+      {
+        "name": "assume_role_arn",
+        "type": "string",
+        "value": null,
+        "label": "Assume Role ARN (optional)",
+        "placeholder": "arn:aws:iam::123456789012:role/MyRole"
+      },
+      {
+        "name": "image_ids",
+        "type": "string",
+        "value": null,
+        "label": "AMI IDs",
+        "placeholder": "Comma-separated (optional)"
+      },
+      {
+        "name": "owners",
+        "type": "string",
+        "value": null,
+        "label": "Owners",
+        "placeholder": "e.g. self, amazon, or an account id (optional)"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "images",
+        "type": "object",
+        "value": null,
+        "label": "Images",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Count",
+        "placeholder": ""
+      }
+    ]
+  },
+  "aws/ec2/describe_instances": {
+    "hash": "f1105965ce5be844a0ce69b42fa26525cae4c5c11ec5d0489e09cb95ff620bb5",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "AWS EC2 Describe Instances",
+    "description": "List EC2 instances with their state, type, IPs, AZ and tags.",
+    "website": "https://www.flomation.co",
+    "icon": "server",
+    "date": "17/07/2026",
+    "type": 2,
+    "category": {
+      "name": "AWS",
+      "icon": "cloud",
+      "description": "Amazon Web Services integrations"
+    },
+    "sub_category": {
+      "name": "EC2",
+      "icon": "server",
+      "description": "Elastic Compute Cloud operations"
+    },
+    "inputs": [
+      {
+        "name": "aws_access_key",
+        "type": "secret",
+        "value": null,
+        "label": "AWS Access Key",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "aws_secret_key",
+        "type": "secret",
+        "value": null,
+        "label": "AWS Secret Key",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "aws_region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "eu-west-2",
+        "required": true
+      },
+      {
+        "name": "aws_session_token",
+        "type": "secret",
+        "value": null,
+        "label": "Session Token (optional)",
+        "placeholder": ""
+      },
+      {
+        "name": "assume_role_arn",
+        "type": "string",
+        "value": null,
+        "label": "Assume Role ARN (optional)",
+        "placeholder": "arn:aws:iam::123456789012:role/MyRole"
+      },
+      {
+        "name": "instance_ids",
+        "type": "string",
+        "value": null,
+        "label": "Instance IDs",
+        "placeholder": "Comma-separated; leave blank for all (optional)"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "instances",
+        "type": "object",
+        "value": null,
+        "label": "Instances",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Count",
+        "placeholder": ""
+      }
+    ]
+  },
+  "aws/ec2/describe_key_pairs": {
+    "hash": "1655ccccc9525d4cf62e38d6d4317535e238ddfd1c639b56937392c645407e96",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "AWS EC2 Describe Key Pairs",
+    "description": "List EC2 key pairs with their name, id, type and fingerprint.",
+    "website": "https://www.flomation.co",
+    "icon": "key",
+    "date": "17/07/2026",
+    "type": 2,
+    "category": {
+      "name": "AWS",
+      "icon": "cloud",
+      "description": "Amazon Web Services integrations"
+    },
+    "sub_category": {
+      "name": "EC2",
+      "icon": "server",
+      "description": "Elastic Compute Cloud operations"
+    },
+    "inputs": [
+      {
+        "name": "aws_access_key",
+        "type": "secret",
+        "value": null,
+        "label": "AWS Access Key",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "aws_secret_key",
+        "type": "secret",
+        "value": null,
+        "label": "AWS Secret Key",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "aws_region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "eu-west-2",
+        "required": true
+      },
+      {
+        "name": "aws_session_token",
+        "type": "secret",
+        "value": null,
+        "label": "Session Token (optional)",
+        "placeholder": ""
+      },
+      {
+        "name": "assume_role_arn",
+        "type": "string",
+        "value": null,
+        "label": "Assume Role ARN (optional)",
+        "placeholder": "arn:aws:iam::123456789012:role/MyRole"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "key_pairs",
+        "type": "object",
+        "value": null,
+        "label": "Key Pairs",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Count",
+        "placeholder": ""
+      }
+    ]
+  },
+  "aws/ec2/describe_security_groups": {
+    "hash": "04cde1e42955e49a05b7de1723c75b55c1bfbe3bdc755da37f549ec255f812fb",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "AWS EC2 Describe Security Groups",
+    "description": "List security groups with their VPC, description and inbound/outbound rules.",
+    "website": "https://www.flomation.co",
+    "icon": "shield-halved",
+    "date": "17/07/2026",
+    "type": 2,
+    "category": {
+      "name": "AWS",
+      "icon": "cloud",
+      "description": "Amazon Web Services integrations"
+    },
+    "sub_category": {
+      "name": "EC2",
+      "icon": "server",
+      "description": "Elastic Compute Cloud operations"
+    },
+    "inputs": [
+      {
+        "name": "aws_access_key",
+        "type": "secret",
+        "value": null,
+        "label": "AWS Access Key",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "aws_secret_key",
+        "type": "secret",
+        "value": null,
+        "label": "AWS Secret Key",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "aws_region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "eu-west-2",
+        "required": true
+      },
+      {
+        "name": "aws_session_token",
+        "type": "secret",
+        "value": null,
+        "label": "Session Token (optional)",
+        "placeholder": ""
+      },
+      {
+        "name": "assume_role_arn",
+        "type": "string",
+        "value": null,
+        "label": "Assume Role ARN (optional)",
+        "placeholder": "arn:aws:iam::123456789012:role/MyRole"
+      },
+      {
+        "name": "group_ids",
+        "type": "string",
+        "value": null,
+        "label": "Group IDs",
+        "placeholder": "Comma-separated; blank for all (optional)"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "security_groups",
+        "type": "object",
+        "value": null,
+        "label": "Security Groups",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Count",
+        "placeholder": ""
+      }
+    ]
+  },
+  "aws/ec2/describe_snapshots": {
+    "hash": "eaa4058043a23d1d652c932c565645d359efa5989bb31c868bf0d549146c919b",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "AWS EC2 Describe Snapshots",
+    "description": "List EBS snapshots by id or owner, with volume, size, state and progress.",
+    "website": "https://www.flomation.co",
+    "icon": "floppy-disk",
+    "date": "17/07/2026",
+    "type": 2,
+    "category": {
+      "name": "AWS",
+      "icon": "cloud",
+      "description": "Amazon Web Services integrations"
+    },
+    "sub_category": {
+      "name": "EC2",
+      "icon": "server",
+      "description": "Elastic Compute Cloud operations"
+    },
+    "inputs": [
+      {
+        "name": "aws_access_key",
+        "type": "secret",
+        "value": null,
+        "label": "AWS Access Key",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "aws_secret_key",
+        "type": "secret",
+        "value": null,
+        "label": "AWS Secret Key",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "aws_region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "eu-west-2",
+        "required": true
+      },
+      {
+        "name": "aws_session_token",
+        "type": "secret",
+        "value": null,
+        "label": "Session Token (optional)",
+        "placeholder": ""
+      },
+      {
+        "name": "assume_role_arn",
+        "type": "string",
+        "value": null,
+        "label": "Assume Role ARN (optional)",
+        "placeholder": "arn:aws:iam::123456789012:role/MyRole"
+      },
+      {
+        "name": "snapshot_ids",
+        "type": "string",
+        "value": null,
+        "label": "Snapshot IDs",
+        "placeholder": "Comma-separated (optional)"
+      },
+      {
+        "name": "owners",
+        "type": "string",
+        "value": null,
+        "label": "Owners",
+        "placeholder": "e.g. self (optional; blank lists all visible)"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "snapshots",
+        "type": "object",
+        "value": null,
+        "label": "Snapshots",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Count",
+        "placeholder": ""
+      }
+    ]
+  },
+  "aws/ec2/describe_volumes": {
+    "hash": "f3d177ad372e95a6ce095b3e044fa414529143abd04fd4864d50a5cc1dd68f5d",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "AWS EC2 Describe Volumes",
+    "description": "List EBS volumes with size, state, type, AZ and attachments.",
+    "website": "https://www.flomation.co",
+    "icon": "database",
+    "date": "17/07/2026",
+    "type": 2,
+    "category": {
+      "name": "AWS",
+      "icon": "cloud",
+      "description": "Amazon Web Services integrations"
+    },
+    "sub_category": {
+      "name": "EC2",
+      "icon": "server",
+      "description": "Elastic Compute Cloud operations"
+    },
+    "inputs": [
+      {
+        "name": "aws_access_key",
+        "type": "secret",
+        "value": null,
+        "label": "AWS Access Key",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "aws_secret_key",
+        "type": "secret",
+        "value": null,
+        "label": "AWS Secret Key",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "aws_region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "eu-west-2",
+        "required": true
+      },
+      {
+        "name": "aws_session_token",
+        "type": "secret",
+        "value": null,
+        "label": "Session Token (optional)",
+        "placeholder": ""
+      },
+      {
+        "name": "assume_role_arn",
+        "type": "string",
+        "value": null,
+        "label": "Assume Role ARN (optional)",
+        "placeholder": "arn:aws:iam::123456789012:role/MyRole"
+      },
+      {
+        "name": "volume_ids",
+        "type": "string",
+        "value": null,
+        "label": "Volume IDs",
+        "placeholder": "Comma-separated; blank for all (optional)"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "volumes",
+        "type": "object",
+        "value": null,
+        "label": "Volumes",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Count",
+        "placeholder": ""
+      }
+    ]
+  },
+  "aws/ec2/reboot_instances": {
+    "hash": "ae0a3380c14178778dd8b0012c6f722e53c6376658569f51f6c4e31dd09fa0f5",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "AWS EC2 Reboot Instances",
+    "description": "Reboot one or more EC2 instances.",
+    "website": "https://www.flomation.co",
+    "icon": "server+rotate",
+    "date": "17/07/2026",
+    "type": 2,
+    "category": {
+      "name": "AWS",
+      "icon": "cloud",
+      "description": "Amazon Web Services integrations"
+    },
+    "sub_category": {
+      "name": "EC2",
+      "icon": "server",
+      "description": "Elastic Compute Cloud operations"
+    },
+    "inputs": [
+      {
+        "name": "aws_access_key",
+        "type": "secret",
+        "value": null,
+        "label": "AWS Access Key",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "aws_secret_key",
+        "type": "secret",
+        "value": null,
+        "label": "AWS Secret Key",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "aws_region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "eu-west-2",
+        "required": true
+      },
+      {
+        "name": "aws_session_token",
+        "type": "secret",
+        "value": null,
+        "label": "Session Token (optional)",
+        "placeholder": ""
+      },
+      {
+        "name": "assume_role_arn",
+        "type": "string",
+        "value": null,
+        "label": "Assume Role ARN (optional)",
+        "placeholder": "arn:aws:iam::123456789012:role/MyRole"
+      },
+      {
+        "name": "instance_ids",
+        "type": "string",
+        "value": null,
+        "label": "Instance IDs",
+        "placeholder": "Comma-separated, e.g. i-0abc,i-0def",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "instance_ids",
+        "type": "object",
+        "value": null,
+        "label": "Instance IDs",
+        "placeholder": ""
+      }
+    ]
+  },
+  "aws/ec2/revoke_security_group_ingress": {
+    "hash": "020818d9d73ed95732c815a5a715494f5d7d1c40de30fcfc7a4022d52cb7ae44",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "AWS EC2 Revoke Security Group Ingress",
+    "description": "Remove an inbound rule from a security group (protocol, port range and CIDR).",
+    "website": "https://www.flomation.co",
+    "icon": "shield-halved+ban",
+    "date": "17/07/2026",
+    "type": 2,
+    "category": {
+      "name": "AWS",
+      "icon": "cloud",
+      "description": "Amazon Web Services integrations"
+    },
+    "sub_category": {
+      "name": "EC2",
+      "icon": "server",
+      "description": "Elastic Compute Cloud operations"
+    },
+    "inputs": [
+      {
+        "name": "aws_access_key",
+        "type": "secret",
+        "value": null,
+        "label": "AWS Access Key",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "aws_secret_key",
+        "type": "secret",
+        "value": null,
+        "label": "AWS Secret Key",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "aws_region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "eu-west-2",
+        "required": true
+      },
+      {
+        "name": "aws_session_token",
+        "type": "secret",
+        "value": null,
+        "label": "Session Token (optional)",
+        "placeholder": ""
+      },
+      {
+        "name": "assume_role_arn",
+        "type": "string",
+        "value": null,
+        "label": "Assume Role ARN (optional)",
+        "placeholder": "arn:aws:iam::123456789012:role/MyRole"
+      },
+      {
+        "name": "group_id",
+        "type": "string",
+        "value": null,
+        "label": "Group ID",
+        "placeholder": "sg-0abc123",
+        "required": true
+      },
+      {
+        "name": "protocol",
+        "type": "string",
+        "value": null,
+        "label": "Protocol",
+        "placeholder": "",
+        "required": true,
+        "options": [
+          {
+            "name": "TCP",
+            "value": "tcp"
+          },
+          {
+            "name": "UDP",
+            "value": "udp"
+          },
+          {
+            "name": "ICMP",
+            "value": "icmp"
+          },
+          {
+            "name": "All",
+            "value": "-1"
+          }
+        ]
+      },
+      {
+        "name": "from_port",
+        "type": "integer",
+        "value": null,
+        "label": "From Port",
+        "placeholder": "e.g. 443"
+      },
+      {
+        "name": "to_port",
+        "type": "integer",
+        "value": null,
+        "label": "To Port",
+        "placeholder": "e.g. 443"
+      },
+      {
+        "name": "cidr",
+        "type": "string",
+        "value": null,
+        "label": "CIDR",
+        "placeholder": "0.0.0.0/0",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "group_id",
+        "type": "string",
+        "value": null,
+        "label": "Group ID",
+        "placeholder": ""
+      }
+    ]
+  },
+  "aws/ec2/run_instances": {
+    "hash": "73be231b1b767ea9d19d164c00847350ae705df5dfb0404d8403c7022953e717",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "AWS EC2 Run Instances",
+    "description": "Launch new EC2 instances from an AMI, with type, key pair, subnet and security groups.",
+    "website": "https://www.flomation.co",
+    "icon": "server+plus",
+    "date": "17/07/2026",
+    "type": 2,
+    "category": {
+      "name": "AWS",
+      "icon": "cloud",
+      "description": "Amazon Web Services integrations"
+    },
+    "sub_category": {
+      "name": "EC2",
+      "icon": "server",
+      "description": "Elastic Compute Cloud operations"
+    },
+    "inputs": [
+      {
+        "name": "aws_access_key",
+        "type": "secret",
+        "value": null,
+        "label": "AWS Access Key",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "aws_secret_key",
+        "type": "secret",
+        "value": null,
+        "label": "AWS Secret Key",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "aws_region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "eu-west-2",
+        "required": true
+      },
+      {
+        "name": "aws_session_token",
+        "type": "secret",
+        "value": null,
+        "label": "Session Token (optional)",
+        "placeholder": ""
+      },
+      {
+        "name": "assume_role_arn",
+        "type": "string",
+        "value": null,
+        "label": "Assume Role ARN (optional)",
+        "placeholder": "arn:aws:iam::123456789012:role/MyRole"
+      },
+      {
+        "name": "image_id",
+        "type": "string",
+        "value": null,
+        "label": "AMI ID",
+        "placeholder": "ami-0abc123",
+        "required": true
+      },
+      {
+        "name": "instance_type",
+        "type": "string",
+        "value": null,
+        "label": "Instance Type",
+        "placeholder": "t3.micro",
+        "required": true
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Count",
+        "placeholder": "1"
+      },
+      {
+        "name": "key_name",
+        "type": "string",
+        "value": null,
+        "label": "Key Pair Name",
+        "placeholder": "Optional SSH key pair"
+      },
+      {
+        "name": "subnet_id",
+        "type": "string",
+        "value": null,
+        "label": "Subnet ID",
+        "placeholder": "Optional subnet"
+      },
+      {
+        "name": "security_group_ids",
+        "type": "string",
+        "value": null,
+        "label": "Security Group IDs",
+        "placeholder": "Comma-separated (optional)"
+      },
+      {
+        "name": "name_tag",
+        "type": "string",
+        "value": null,
+        "label": "Name Tag",
+        "placeholder": "Sets the Name tag (optional)"
+      },
+      {
+        "name": "user_data",
+        "type": "text",
+        "value": null,
+        "label": "User Data",
+        "placeholder": "Startup script, plain text (optional)"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "instance_ids",
+        "type": "object",
+        "value": null,
+        "label": "Instance IDs",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Count",
+        "placeholder": ""
+      }
+    ]
+  },
+  "aws/ec2/start_instances": {
+    "hash": "cf0fa61c39c1bebd52329fd37631cc95861defd11c71aa0156f8e45753a81f39",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "AWS EC2 Start Instances",
+    "description": "Start one or more stopped EC2 instances.",
+    "website": "https://www.flomation.co",
+    "icon": "server+play",
+    "date": "17/07/2026",
+    "type": 2,
+    "category": {
+      "name": "AWS",
+      "icon": "cloud",
+      "description": "Amazon Web Services integrations"
+    },
+    "sub_category": {
+      "name": "EC2",
+      "icon": "server",
+      "description": "Elastic Compute Cloud operations"
+    },
+    "inputs": [
+      {
+        "name": "aws_access_key",
+        "type": "secret",
+        "value": null,
+        "label": "AWS Access Key",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "aws_secret_key",
+        "type": "secret",
+        "value": null,
+        "label": "AWS Secret Key",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "aws_region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "eu-west-2",
+        "required": true
+      },
+      {
+        "name": "aws_session_token",
+        "type": "secret",
+        "value": null,
+        "label": "Session Token (optional)",
+        "placeholder": ""
+      },
+      {
+        "name": "assume_role_arn",
+        "type": "string",
+        "value": null,
+        "label": "Assume Role ARN (optional)",
+        "placeholder": "arn:aws:iam::123456789012:role/MyRole"
+      },
+      {
+        "name": "instance_ids",
+        "type": "string",
+        "value": null,
+        "label": "Instance IDs",
+        "placeholder": "Comma-separated, e.g. i-0abc,i-0def",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "state_changes",
+        "type": "object",
+        "value": null,
+        "label": "State Changes",
+        "placeholder": ""
+      }
+    ]
+  },
+  "aws/ec2/stop_instances": {
+    "hash": "c966a43ac909804e5faacbd6b050fe53f537b4f9ad8feaf7dbb1c41d9a7aaed9",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "AWS EC2 Stop Instances",
+    "description": "Stop one or more running EC2 instances.",
+    "website": "https://www.flomation.co",
+    "icon": "server+stop",
+    "date": "17/07/2026",
+    "type": 2,
+    "category": {
+      "name": "AWS",
+      "icon": "cloud",
+      "description": "Amazon Web Services integrations"
+    },
+    "sub_category": {
+      "name": "EC2",
+      "icon": "server",
+      "description": "Elastic Compute Cloud operations"
+    },
+    "inputs": [
+      {
+        "name": "aws_access_key",
+        "type": "secret",
+        "value": null,
+        "label": "AWS Access Key",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "aws_secret_key",
+        "type": "secret",
+        "value": null,
+        "label": "AWS Secret Key",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "aws_region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "eu-west-2",
+        "required": true
+      },
+      {
+        "name": "aws_session_token",
+        "type": "secret",
+        "value": null,
+        "label": "Session Token (optional)",
+        "placeholder": ""
+      },
+      {
+        "name": "assume_role_arn",
+        "type": "string",
+        "value": null,
+        "label": "Assume Role ARN (optional)",
+        "placeholder": "arn:aws:iam::123456789012:role/MyRole"
+      },
+      {
+        "name": "instance_ids",
+        "type": "string",
+        "value": null,
+        "label": "Instance IDs",
+        "placeholder": "Comma-separated, e.g. i-0abc,i-0def",
+        "required": true
+      },
+      {
+        "name": "force",
+        "type": "boolean",
+        "value": null,
+        "label": "Force Stop",
+        "placeholder": "Force stop without a clean shutdown"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "state_changes",
+        "type": "object",
+        "value": null,
+        "label": "State Changes",
+        "placeholder": ""
+      }
+    ]
+  },
+  "aws/ec2/terminate_instances": {
+    "hash": "fe80db9fa76d1caed602c5bcea78a7bfff1aabc4c21eca23200649c8afe0cf4a",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "AWS EC2 Terminate Instances",
+    "description": "Permanently terminate EC2 instances. Destructive and irreversible.",
+    "website": "https://www.flomation.co",
+    "icon": "server+trash",
+    "date": "17/07/2026",
+    "type": 2,
+    "category": {
+      "name": "AWS",
+      "icon": "cloud",
+      "description": "Amazon Web Services integrations"
+    },
+    "sub_category": {
+      "name": "EC2",
+      "icon": "server",
+      "description": "Elastic Compute Cloud operations"
+    },
+    "inputs": [
+      {
+        "name": "aws_access_key",
+        "type": "secret",
+        "value": null,
+        "label": "AWS Access Key",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "aws_secret_key",
+        "type": "secret",
+        "value": null,
+        "label": "AWS Secret Key",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "aws_region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "eu-west-2",
+        "required": true
+      },
+      {
+        "name": "aws_session_token",
+        "type": "secret",
+        "value": null,
+        "label": "Session Token (optional)",
+        "placeholder": ""
+      },
+      {
+        "name": "assume_role_arn",
+        "type": "string",
+        "value": null,
+        "label": "Assume Role ARN (optional)",
+        "placeholder": "arn:aws:iam::123456789012:role/MyRole"
+      },
+      {
+        "name": "instance_ids",
+        "type": "string",
+        "value": null,
+        "label": "Instance IDs",
+        "placeholder": "Comma-separated, e.g. i-0abc,i-0def",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "state_changes",
+        "type": "object",
+        "value": null,
+        "label": "State Changes",
+        "placeholder": ""
+      }
+    ]
   },
   "aws/s3/delete": {
-    "hash": "981b4b75e00d35ac315650af4cdea668d43c39c59c79c4e217b6a4c6111269c6",
+    "hash": "cd828e273e49f259113f1aa73ef334bb0454bf0f8a3afc7dda313e4f808c5c12",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "AWS S3 Delete",
@@ -7200,6 +8869,13 @@
         "value": null,
         "label": "AWS Secret Key",
         "placeholder": ""
+      },
+      {
+        "name": "aws_region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "eu-west-2"
       },
       {
         "name": "key",
@@ -7248,7 +8924,7 @@
     ]
   },
   "aws/s3/get": {
-    "hash": "fcbe562ed05f118dde068e9c269310cad2835b7349c265700c85e9ec23526b33",
+    "hash": "3499f39062caf6f0e9d779b38fc0bceeac8766d8118e84b49d64e0011cf20c2f",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "AWS S3 Get Object",
@@ -7281,6 +8957,13 @@
         "value": null,
         "label": "AWS Secret Key",
         "placeholder": ""
+      },
+      {
+        "name": "aws_region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "eu-west-2"
       },
       {
         "name": "key",
@@ -7403,7 +9086,7 @@
     ]
   },
   "aws/s3/put": {
-    "hash": "4a69a603270f33904bbda8366d11196657e7dfb5073ec18ac3d47d2eceb90cab",
+    "hash": "6f703b10078a63e0491435a27c4747a36887edbe834d9537080a9cff3470f9be",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "AWS S3 Put",
@@ -7438,6 +9121,13 @@
         "label": "AWS Secret Key",
         "placeholder": "",
         "required": true
+      },
+      {
+        "name": "aws_region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "eu-west-2"
       },
       {
         "name": "key",
