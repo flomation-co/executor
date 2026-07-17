@@ -118700,7 +118700,7 @@
         "name": "tasks_json",
         "type": "text",
         "value": null,
-        "label": "",
+        "label": "Tasks (JSON array). Each task requires `name` + `description`; optional `inputs`, `depends_on`. Omit `flow_id` to let the agent's orchestrator handle the task (recommended for most work). Specify `flow_id` + `flow_revision_id` together to pin a curated flow when determinism matters.",
         "placeholder": "[{\"name\":\"pull\",\"description\":\"pull this quarter's metrics\",\"inputs\":{\"quarter\":\"Q3\"}}]",
         "required": true
       }
@@ -132232,7 +132232,7 @@
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Slack Rich Message",
-    "description": "",
+    "description": "Send a rich Slack message with Block Kit layouts. Use this when you need structured formatting: sections with fields, images, buttons, dividers, or context blocks. For simple text replies, use the normal response instead. Blocks use Slack mrkdwn (*bold*, _italic_, ~strike~, `code`). IMPORTANT: bot_token, channel_id, and thread_ts are pre-configured — do NOT provide them and do NOT ask the user for them. You only need to provide: text (fallback) and blocks (the Block Kit JSON array).",
     "website": "https://www.flomation.co",
     "icon": "slack+file-lines",
     "date": "15/04/2026",
@@ -132269,7 +132269,7 @@
         "name": "blocks",
         "type": "text",
         "value": null,
-        "label": "",
+        "label": "Block Kit blocks as a JSON array. Common block types: section (with mrkdwn text or fields), divider, image, context, header, actions (buttons). Example: [{\"type\":\"header\",\"text\":{\"type\":\"plain_text\",\"text\":\"Report\"}},{\"type\":\"section\",\"text\":{\"type\":\"mrkdwn\",\"text\":\"*Status:* All clear\"}}]",
         "placeholder": "",
         "required": true
       },
