@@ -30,6 +30,7 @@ var Inputs = [...]core.Connection{
 	{Name: "aws_region", Type: core.ConnectionTypeString, Label: "Region", Placeholder: "eu-west-2", Required: true},
 	{Name: "aws_session_token", Type: core.ConnectionTypeSecret, Label: "Session Token (optional)"},
 	{Name: "assume_role_arn", Type: core.ConnectionTypeString, Label: "Assume Role ARN (optional)", Placeholder: "arn:aws:iam::123456789012:role/MyRole"},
+	{Name: "external_id", Type: core.ConnectionTypeString, Label: "Assume Role External ID (optional)", Placeholder: "Must match the External ID in the role's trust policy"},
 	{Name: "resource_ids", Type: core.ConnectionTypeString, Label: "Resource IDs", Placeholder: "Comma-separated, e.g. i-0abc,vol-0def", Required: true},
 	{Name: "tags", Type: core.ConnectionTypeString, Label: "Tags", Placeholder: "Key=Value pairs, e.g. Name=web,Env=prod", Required: true},
 }

@@ -28,6 +28,7 @@ var Inputs = [...]core.Connection{
 	{Name: "aws_region", Type: core.ConnectionTypeString, Label: "Region", Placeholder: "eu-west-2", Required: true},
 	{Name: "aws_session_token", Type: core.ConnectionTypeSecret, Label: "Session Token (optional)"},
 	{Name: "assume_role_arn", Type: core.ConnectionTypeString, Label: "Assume Role ARN (optional)", Placeholder: "arn:aws:iam::123456789012:role/MyRole"},
+	{Name: "external_id", Type: core.ConnectionTypeString, Label: "Assume Role External ID (optional)", Placeholder: "Must match the External ID in the role's trust policy"},
 	{Name: "group_name", Type: core.ConnectionTypeString, Label: "Group Name", Placeholder: "web-sg", Required: true},
 	{Name: "description", Type: core.ConnectionTypeString, Label: "Description", Placeholder: "Allows web traffic", Required: true},
 	{Name: "vpc_id", Type: core.ConnectionTypeString, Label: "VPC ID", Placeholder: "vpc-0abc (optional; default VPC if blank)"},

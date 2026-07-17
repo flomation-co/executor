@@ -7144,7 +7144,7 @@
     ]
   },
   "aws/ec2/authorize_security_group_ingress": {
-    "hash": "c384a0642f88f7a0d331ed275dd44bae5f739a3fd52a5beca48eaca98c4744d2",
+    "hash": "241c6ea46a9722d3075d7618bcd4ff54b3e728687f26ee2c622847d247b276aa",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "AWS EC2 Authorize Security Group Ingress",
@@ -7201,6 +7201,13 @@
         "value": null,
         "label": "Assume Role ARN (optional)",
         "placeholder": "arn:aws:iam::123456789012:role/MyRole"
+      },
+      {
+        "name": "external_id",
+        "type": "string",
+        "value": null,
+        "label": "Assume Role External ID (optional)",
+        "placeholder": "Must match the External ID in the role's trust policy"
       },
       {
         "name": "group_id",
@@ -7284,7 +7291,7 @@
     ]
   },
   "aws/ec2/create_security_group": {
-    "hash": "70417697987db2fd9dd51f60c61a8ef4af27d05689aabb8819a5d1f3858cb73d",
+    "hash": "5e80ee5028b404f711250ff3dfa83d94dcd0c305d6af5de5962ff31e33476473",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "AWS EC2 Create Security Group",
@@ -7343,6 +7350,13 @@
         "placeholder": "arn:aws:iam::123456789012:role/MyRole"
       },
       {
+        "name": "external_id",
+        "type": "string",
+        "value": null,
+        "label": "Assume Role External ID (optional)",
+        "placeholder": "Must match the External ID in the role's trust policy"
+      },
+      {
         "name": "group_name",
         "type": "string",
         "value": null,
@@ -7384,7 +7398,7 @@
     ]
   },
   "aws/ec2/create_snapshot": {
-    "hash": "0245f3a1cdce3b8b38d8b9257d1861ef8fd8ecb1c31bdd77d60cadce72bc6b1c",
+    "hash": "0ad29ccd09d0376ae9c83140cb2d544ff680697e4977cff6d329a3069ca9a15b",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "AWS EC2 Create Snapshot",
@@ -7443,6 +7457,13 @@
         "placeholder": "arn:aws:iam::123456789012:role/MyRole"
       },
       {
+        "name": "external_id",
+        "type": "string",
+        "value": null,
+        "label": "Assume Role External ID (optional)",
+        "placeholder": "Must match the External ID in the role's trust policy"
+      },
+      {
         "name": "volume_id",
         "type": "string",
         "value": null,
@@ -7483,7 +7504,7 @@
     ]
   },
   "aws/ec2/create_tags": {
-    "hash": "42e690e269fd89c0903829592793f0bb2d8692ba6210505441e593971383b46e",
+    "hash": "d5fdd61cf0d3c0b400c8642f7a2a92744ec86cb58dc7f8fe0ec5fc71925d8ae4",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "AWS EC2 Create Tags",
@@ -7542,6 +7563,13 @@
         "placeholder": "arn:aws:iam::123456789012:role/MyRole"
       },
       {
+        "name": "external_id",
+        "type": "string",
+        "value": null,
+        "label": "Assume Role External ID (optional)",
+        "placeholder": "Must match the External ID in the role's trust policy"
+      },
+      {
         "name": "resource_ids",
         "type": "string",
         "value": null,
@@ -7576,7 +7604,7 @@
     ]
   },
   "aws/ec2/delete_security_group": {
-    "hash": "204604bc0bea0e7254192f79e26d223c0bc7116cdbd3e43e94353f97cc7605d7",
+    "hash": "990e719f1e43c23f06fc0abaa3547f21f29488cf776ae40282f88526b7a4d415",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "AWS EC2 Delete Security Group",
@@ -7635,6 +7663,13 @@
         "placeholder": "arn:aws:iam::123456789012:role/MyRole"
       },
       {
+        "name": "external_id",
+        "type": "string",
+        "value": null,
+        "label": "Assume Role External ID (optional)",
+        "placeholder": "Must match the External ID in the role's trust policy"
+      },
+      {
         "name": "group_id",
         "type": "string",
         "value": null,
@@ -7661,7 +7696,7 @@
     ]
   },
   "aws/ec2/describe_images": {
-    "hash": "b72d208f48a11b3493d939c7ba5446b4320dee1082ef7c3acc5fda5cbd74646b",
+    "hash": "8339fc0128d049fe75fd77c2762b56c5fc5af11878be5cfaa12a19babf7be2fc",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "AWS EC2 Describe Images",
@@ -7720,6 +7755,13 @@
         "placeholder": "arn:aws:iam::123456789012:role/MyRole"
       },
       {
+        "name": "external_id",
+        "type": "string",
+        "value": null,
+        "label": "Assume Role External ID (optional)",
+        "placeholder": "Must match the External ID in the role's trust policy"
+      },
+      {
         "name": "image_ids",
         "type": "string",
         "value": null,
@@ -7759,7 +7801,7 @@
     ]
   },
   "aws/ec2/describe_instances": {
-    "hash": "f1105965ce5be844a0ce69b42fa26525cae4c5c11ec5d0489e09cb95ff620bb5",
+    "hash": "875bf4a86e2dbc6aaddb65fb0816f90dbc67c5f7b02754df62f3b211d0767d23",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "AWS EC2 Describe Instances",
@@ -7818,6 +7860,13 @@
         "placeholder": "arn:aws:iam::123456789012:role/MyRole"
       },
       {
+        "name": "external_id",
+        "type": "string",
+        "value": null,
+        "label": "Assume Role External ID (optional)",
+        "placeholder": "Must match the External ID in the role's trust policy"
+      },
+      {
         "name": "instance_ids",
         "type": "string",
         "value": null,
@@ -7850,7 +7899,7 @@
     ]
   },
   "aws/ec2/describe_key_pairs": {
-    "hash": "1655ccccc9525d4cf62e38d6d4317535e238ddfd1c639b56937392c645407e96",
+    "hash": "d434b5e435f0d02bff59d0fa1a830e304f0487ddc4456c3f7fd98ff61668d705",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "AWS EC2 Describe Key Pairs",
@@ -7907,6 +7956,13 @@
         "value": null,
         "label": "Assume Role ARN (optional)",
         "placeholder": "arn:aws:iam::123456789012:role/MyRole"
+      },
+      {
+        "name": "external_id",
+        "type": "string",
+        "value": null,
+        "label": "Assume Role External ID (optional)",
+        "placeholder": "Must match the External ID in the role's trust policy"
       }
     ],
     "outputs": [
@@ -7934,7 +7990,7 @@
     ]
   },
   "aws/ec2/describe_security_groups": {
-    "hash": "04cde1e42955e49a05b7de1723c75b55c1bfbe3bdc755da37f549ec255f812fb",
+    "hash": "b40ddd08caced0c78d9497527f90a4e3a1b8643f91e08d500a97622fdf832aa4",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "AWS EC2 Describe Security Groups",
@@ -7993,6 +8049,13 @@
         "placeholder": "arn:aws:iam::123456789012:role/MyRole"
       },
       {
+        "name": "external_id",
+        "type": "string",
+        "value": null,
+        "label": "Assume Role External ID (optional)",
+        "placeholder": "Must match the External ID in the role's trust policy"
+      },
+      {
         "name": "group_ids",
         "type": "string",
         "value": null,
@@ -8025,7 +8088,7 @@
     ]
   },
   "aws/ec2/describe_snapshots": {
-    "hash": "eaa4058043a23d1d652c932c565645d359efa5989bb31c868bf0d549146c919b",
+    "hash": "e051b48daf0787513cf88ccc3b1e728bdddc5282e6cb9a7290aae87d3af5644d",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "AWS EC2 Describe Snapshots",
@@ -8084,6 +8147,13 @@
         "placeholder": "arn:aws:iam::123456789012:role/MyRole"
       },
       {
+        "name": "external_id",
+        "type": "string",
+        "value": null,
+        "label": "Assume Role External ID (optional)",
+        "placeholder": "Must match the External ID in the role's trust policy"
+      },
+      {
         "name": "snapshot_ids",
         "type": "string",
         "value": null,
@@ -8123,7 +8193,7 @@
     ]
   },
   "aws/ec2/describe_volumes": {
-    "hash": "f3d177ad372e95a6ce095b3e044fa414529143abd04fd4864d50a5cc1dd68f5d",
+    "hash": "7c50b10c208ae37a55d3ccf58d03e954d72fd3e142e49e1bba6b5a38152b422f",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "AWS EC2 Describe Volumes",
@@ -8182,6 +8252,13 @@
         "placeholder": "arn:aws:iam::123456789012:role/MyRole"
       },
       {
+        "name": "external_id",
+        "type": "string",
+        "value": null,
+        "label": "Assume Role External ID (optional)",
+        "placeholder": "Must match the External ID in the role's trust policy"
+      },
+      {
         "name": "volume_ids",
         "type": "string",
         "value": null,
@@ -8214,7 +8291,7 @@
     ]
   },
   "aws/ec2/reboot_instances": {
-    "hash": "ae0a3380c14178778dd8b0012c6f722e53c6376658569f51f6c4e31dd09fa0f5",
+    "hash": "f10fc8e6a00c9e23dc037b466d572b6be77ab27569a6e24dc391c76cff62dc9e",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "AWS EC2 Reboot Instances",
@@ -8273,6 +8350,13 @@
         "placeholder": "arn:aws:iam::123456789012:role/MyRole"
       },
       {
+        "name": "external_id",
+        "type": "string",
+        "value": null,
+        "label": "Assume Role External ID (optional)",
+        "placeholder": "Must match the External ID in the role's trust policy"
+      },
+      {
         "name": "instance_ids",
         "type": "string",
         "value": null,
@@ -8299,7 +8383,7 @@
     ]
   },
   "aws/ec2/revoke_security_group_ingress": {
-    "hash": "020818d9d73ed95732c815a5a715494f5d7d1c40de30fcfc7a4022d52cb7ae44",
+    "hash": "7025683e88671bc4aedc59c1f882b065e01a6c59456dc1757dba1dcc6d215307",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "AWS EC2 Revoke Security Group Ingress",
@@ -8356,6 +8440,13 @@
         "value": null,
         "label": "Assume Role ARN (optional)",
         "placeholder": "arn:aws:iam::123456789012:role/MyRole"
+      },
+      {
+        "name": "external_id",
+        "type": "string",
+        "value": null,
+        "label": "Assume Role External ID (optional)",
+        "placeholder": "Must match the External ID in the role's trust policy"
       },
       {
         "name": "group_id",
@@ -8432,7 +8523,7 @@
     ]
   },
   "aws/ec2/run_instances": {
-    "hash": "73be231b1b767ea9d19d164c00847350ae705df5dfb0404d8403c7022953e717",
+    "hash": "62bde1a1df54578614e065428fc451d7c62d913437afb983f8b597ac3f585cb2",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "AWS EC2 Run Instances",
@@ -8489,6 +8580,13 @@
         "value": null,
         "label": "Assume Role ARN (optional)",
         "placeholder": "arn:aws:iam::123456789012:role/MyRole"
+      },
+      {
+        "name": "external_id",
+        "type": "string",
+        "value": null,
+        "label": "Assume Role External ID (optional)",
+        "placeholder": "Must match the External ID in the role's trust policy"
       },
       {
         "name": "image_id",
@@ -8574,7 +8672,7 @@
     ]
   },
   "aws/ec2/start_instances": {
-    "hash": "cf0fa61c39c1bebd52329fd37631cc95861defd11c71aa0156f8e45753a81f39",
+    "hash": "756e4c13bd3528ce67aad4b5b7470e445ca66b5a77f523541366891ac0003ea0",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "AWS EC2 Start Instances",
@@ -8633,6 +8731,13 @@
         "placeholder": "arn:aws:iam::123456789012:role/MyRole"
       },
       {
+        "name": "external_id",
+        "type": "string",
+        "value": null,
+        "label": "Assume Role External ID (optional)",
+        "placeholder": "Must match the External ID in the role's trust policy"
+      },
+      {
         "name": "instance_ids",
         "type": "string",
         "value": null,
@@ -8659,7 +8764,7 @@
     ]
   },
   "aws/ec2/stop_instances": {
-    "hash": "c966a43ac909804e5faacbd6b050fe53f537b4f9ad8feaf7dbb1c41d9a7aaed9",
+    "hash": "f6b409a580740de56407e2f5ecece5d32431bba968423292a86fe133a809aa5b",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "AWS EC2 Stop Instances",
@@ -8718,6 +8823,13 @@
         "placeholder": "arn:aws:iam::123456789012:role/MyRole"
       },
       {
+        "name": "external_id",
+        "type": "string",
+        "value": null,
+        "label": "Assume Role External ID (optional)",
+        "placeholder": "Must match the External ID in the role's trust policy"
+      },
+      {
         "name": "instance_ids",
         "type": "string",
         "value": null,
@@ -8751,7 +8863,7 @@
     ]
   },
   "aws/ec2/terminate_instances": {
-    "hash": "fe80db9fa76d1caed602c5bcea78a7bfff1aabc4c21eca23200649c8afe0cf4a",
+    "hash": "67b1a74a5262b535b0d065d0bb88a98b7d9765c2ca99642f50633ccd6626ade6",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "AWS EC2 Terminate Instances",
@@ -8808,6 +8920,13 @@
         "value": null,
         "label": "Assume Role ARN (optional)",
         "placeholder": "arn:aws:iam::123456789012:role/MyRole"
+      },
+      {
+        "name": "external_id",
+        "type": "string",
+        "value": null,
+        "label": "Assume Role External ID (optional)",
+        "placeholder": "Must match the External ID in the role's trust policy"
       },
       {
         "name": "instance_ids",

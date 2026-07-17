@@ -40,6 +40,23 @@ func TestConfigBuildsWithStaticCredentials(t *testing.T) {
 	Expect(creds.SecretAccessKey).To(Equal("secret"))
 }
 
+func TestConfigWithAssumeRoleAndExternalIDBuilds(t *testing.T) {
+	RegisterTestingT(t)
+
+	// The assume-role provider is constructed (not invoked — STS isn't called
+	// until credentials are retrieved), so config building must succeed with a
+	// role ARN + external id present.
+	cfg, err := Config(context.Background(), Credentials{
+		AccessKey:     "AKIA",
+		SecretKey:     "secret",
+		Region:        "eu-west-2",
+		AssumeRoleARN: "arn:aws:iam::123456789012:role/FlomationAccess",
+		ExternalID:    "tenant-abc-123",
+	})
+	Expect(err).To(BeNil())
+	Expect(cfg.Credentials).ToNot(BeNil())
+}
+
 func TestConfigFromInputsReadsStandardBlock(t *testing.T) {
 	RegisterTestingT(t)
 

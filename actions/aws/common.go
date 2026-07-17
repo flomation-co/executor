@@ -31,6 +31,7 @@ const (
 	InputRegion        = "aws_region"
 	InputSessionToken  = "aws_session_token"
 	InputAssumeRoleARN = "assume_role_arn"
+	InputExternalID    = "external_id"
 )
 
 // Credentials bundles the standard AWS auth inputs.
@@ -40,6 +41,9 @@ type Credentials struct {
 	Region        string
 	SessionToken  string // optional (temporary/STS credentials)
 	AssumeRoleARN string // optional (cross-account / least-privilege)
+	ExternalID    string // optional; paired with AssumeRoleARN to defeat the
+	// confused-deputy problem — the value must match the External ID in the
+	// target role's trust policy. Ignored unless AssumeRoleARN is set.
 }
 
 // Config builds an aws.Config from static credentials, optionally assuming a
@@ -71,9 +75,12 @@ func Config(ctx context.Context, c Credentials) (awssdk.Config, error) {
 
 	if c.AssumeRoleARN != "" {
 		stsClient := sts.NewFromConfig(cfg)
-		cfg.Credentials = awssdk.NewCredentialsCache(
-			stscreds.NewAssumeRoleProvider(stsClient, c.AssumeRoleARN),
-		)
+		provider := stscreds.NewAssumeRoleProvider(stsClient, c.AssumeRoleARN, func(o *stscreds.AssumeRoleOptions) {
+			if c.ExternalID != "" {
+				o.ExternalID = awssdk.String(c.ExternalID)
+			}
+		})
+		cfg.Credentials = awssdk.NewCredentialsCache(provider)
 	}
 
 	return cfg, nil
@@ -88,6 +95,7 @@ func ConfigFromInputs(ctx context.Context, inputs []*core.Connection) (awssdk.Co
 		Region:        InputString(InputRegion, inputs),
 		SessionToken:  InputString(InputSessionToken, inputs),
 		AssumeRoleARN: InputString(InputAssumeRoleARN, inputs),
+		ExternalID:    InputString(InputExternalID, inputs),
 	})
 }
 
