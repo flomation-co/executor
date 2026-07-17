@@ -7144,7 +7144,7 @@
     ]
   },
   "aws/ec2/authorize_security_group_ingress": {
-    "hash": "241c6ea46a9722d3075d7618bcd4ff54b3e728687f26ee2c622847d247b276aa",
+    "hash": "44e1972b9998d857110807cebf807b23e9009b2af19371cc68fdf78ee6801cbf",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "AWS EC2 Authorize Security Group Ingress",
@@ -7164,6 +7164,24 @@
       "description": "Elastic Compute Cloud operations"
     },
     "inputs": [
+      {
+        "name": "auth_method",
+        "type": "string",
+        "value": null,
+        "label": "Authentication",
+        "placeholder": "",
+        "required": true,
+        "options": [
+          {
+            "name": "Access Keys",
+            "value": "keys"
+          },
+          {
+            "name": "Assume Role (cross-account)",
+            "value": "assume_role"
+          }
+        ]
+      },
       {
         "name": "aws_access_key",
         "type": "secret",
@@ -7193,21 +7211,39 @@
         "type": "secret",
         "value": null,
         "label": "Session Token (optional)",
-        "placeholder": ""
+        "placeholder": "",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
       },
       {
         "name": "assume_role_arn",
         "type": "string",
         "value": null,
-        "label": "Assume Role ARN (optional)",
-        "placeholder": "arn:aws:iam::123456789012:role/MyRole"
+        "label": "Assume Role ARN",
+        "placeholder": "arn:aws:iam::123456789012:role/MyRole",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "assume_role"
+          ]
+        }
       },
       {
         "name": "external_id",
         "type": "string",
         "value": null,
         "label": "Assume Role External ID (optional)",
-        "placeholder": "Must match the External ID in the role's trust policy"
+        "placeholder": "Must match the External ID in the role's trust policy",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "assume_role"
+          ]
+        }
       },
       {
         "name": "group_id",
@@ -7291,7 +7327,7 @@
     ]
   },
   "aws/ec2/create_security_group": {
-    "hash": "5e80ee5028b404f711250ff3dfa83d94dcd0c305d6af5de5962ff31e33476473",
+    "hash": "8ea7e1adbca3198c93fb62c338f3870214a2fcceb246624a108bc9d6a3a3c044",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "AWS EC2 Create Security Group",
@@ -7311,6 +7347,24 @@
       "description": "Elastic Compute Cloud operations"
     },
     "inputs": [
+      {
+        "name": "auth_method",
+        "type": "string",
+        "value": null,
+        "label": "Authentication",
+        "placeholder": "",
+        "required": true,
+        "options": [
+          {
+            "name": "Access Keys",
+            "value": "keys"
+          },
+          {
+            "name": "Assume Role (cross-account)",
+            "value": "assume_role"
+          }
+        ]
+      },
       {
         "name": "aws_access_key",
         "type": "secret",
@@ -7340,21 +7394,39 @@
         "type": "secret",
         "value": null,
         "label": "Session Token (optional)",
-        "placeholder": ""
+        "placeholder": "",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
       },
       {
         "name": "assume_role_arn",
         "type": "string",
         "value": null,
-        "label": "Assume Role ARN (optional)",
-        "placeholder": "arn:aws:iam::123456789012:role/MyRole"
+        "label": "Assume Role ARN",
+        "placeholder": "arn:aws:iam::123456789012:role/MyRole",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "assume_role"
+          ]
+        }
       },
       {
         "name": "external_id",
         "type": "string",
         "value": null,
         "label": "Assume Role External ID (optional)",
-        "placeholder": "Must match the External ID in the role's trust policy"
+        "placeholder": "Must match the External ID in the role's trust policy",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "assume_role"
+          ]
+        }
       },
       {
         "name": "group_name",
@@ -7398,7 +7470,7 @@
     ]
   },
   "aws/ec2/create_snapshot": {
-    "hash": "0ad29ccd09d0376ae9c83140cb2d544ff680697e4977cff6d329a3069ca9a15b",
+    "hash": "f4a5166c8fa7f3613d64202aaa844ff40b6eab8d80c749996c5c7b78deb98801",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "AWS EC2 Create Snapshot",
@@ -7418,6 +7490,24 @@
       "description": "Elastic Compute Cloud operations"
     },
     "inputs": [
+      {
+        "name": "auth_method",
+        "type": "string",
+        "value": null,
+        "label": "Authentication",
+        "placeholder": "",
+        "required": true,
+        "options": [
+          {
+            "name": "Access Keys",
+            "value": "keys"
+          },
+          {
+            "name": "Assume Role (cross-account)",
+            "value": "assume_role"
+          }
+        ]
+      },
       {
         "name": "aws_access_key",
         "type": "secret",
@@ -7447,21 +7537,39 @@
         "type": "secret",
         "value": null,
         "label": "Session Token (optional)",
-        "placeholder": ""
+        "placeholder": "",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
       },
       {
         "name": "assume_role_arn",
         "type": "string",
         "value": null,
-        "label": "Assume Role ARN (optional)",
-        "placeholder": "arn:aws:iam::123456789012:role/MyRole"
+        "label": "Assume Role ARN",
+        "placeholder": "arn:aws:iam::123456789012:role/MyRole",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "assume_role"
+          ]
+        }
       },
       {
         "name": "external_id",
         "type": "string",
         "value": null,
         "label": "Assume Role External ID (optional)",
-        "placeholder": "Must match the External ID in the role's trust policy"
+        "placeholder": "Must match the External ID in the role's trust policy",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "assume_role"
+          ]
+        }
       },
       {
         "name": "volume_id",
@@ -7504,7 +7612,7 @@
     ]
   },
   "aws/ec2/create_tags": {
-    "hash": "d5fdd61cf0d3c0b400c8642f7a2a92744ec86cb58dc7f8fe0ec5fc71925d8ae4",
+    "hash": "c672033124e735a691a1df75bbefc341a3d27a0b2a27dda2efe85ffdf9080e10",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "AWS EC2 Create Tags",
@@ -7524,6 +7632,24 @@
       "description": "Elastic Compute Cloud operations"
     },
     "inputs": [
+      {
+        "name": "auth_method",
+        "type": "string",
+        "value": null,
+        "label": "Authentication",
+        "placeholder": "",
+        "required": true,
+        "options": [
+          {
+            "name": "Access Keys",
+            "value": "keys"
+          },
+          {
+            "name": "Assume Role (cross-account)",
+            "value": "assume_role"
+          }
+        ]
+      },
       {
         "name": "aws_access_key",
         "type": "secret",
@@ -7553,21 +7679,39 @@
         "type": "secret",
         "value": null,
         "label": "Session Token (optional)",
-        "placeholder": ""
+        "placeholder": "",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
       },
       {
         "name": "assume_role_arn",
         "type": "string",
         "value": null,
-        "label": "Assume Role ARN (optional)",
-        "placeholder": "arn:aws:iam::123456789012:role/MyRole"
+        "label": "Assume Role ARN",
+        "placeholder": "arn:aws:iam::123456789012:role/MyRole",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "assume_role"
+          ]
+        }
       },
       {
         "name": "external_id",
         "type": "string",
         "value": null,
         "label": "Assume Role External ID (optional)",
-        "placeholder": "Must match the External ID in the role's trust policy"
+        "placeholder": "Must match the External ID in the role's trust policy",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "assume_role"
+          ]
+        }
       },
       {
         "name": "resource_ids",
@@ -7604,7 +7748,7 @@
     ]
   },
   "aws/ec2/delete_security_group": {
-    "hash": "990e719f1e43c23f06fc0abaa3547f21f29488cf776ae40282f88526b7a4d415",
+    "hash": "4233a5b4d10eed1265964c80e08b35752494421fd3de2576e1518d26a00e85d7",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "AWS EC2 Delete Security Group",
@@ -7624,6 +7768,24 @@
       "description": "Elastic Compute Cloud operations"
     },
     "inputs": [
+      {
+        "name": "auth_method",
+        "type": "string",
+        "value": null,
+        "label": "Authentication",
+        "placeholder": "",
+        "required": true,
+        "options": [
+          {
+            "name": "Access Keys",
+            "value": "keys"
+          },
+          {
+            "name": "Assume Role (cross-account)",
+            "value": "assume_role"
+          }
+        ]
+      },
       {
         "name": "aws_access_key",
         "type": "secret",
@@ -7653,21 +7815,39 @@
         "type": "secret",
         "value": null,
         "label": "Session Token (optional)",
-        "placeholder": ""
+        "placeholder": "",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
       },
       {
         "name": "assume_role_arn",
         "type": "string",
         "value": null,
-        "label": "Assume Role ARN (optional)",
-        "placeholder": "arn:aws:iam::123456789012:role/MyRole"
+        "label": "Assume Role ARN",
+        "placeholder": "arn:aws:iam::123456789012:role/MyRole",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "assume_role"
+          ]
+        }
       },
       {
         "name": "external_id",
         "type": "string",
         "value": null,
         "label": "Assume Role External ID (optional)",
-        "placeholder": "Must match the External ID in the role's trust policy"
+        "placeholder": "Must match the External ID in the role's trust policy",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "assume_role"
+          ]
+        }
       },
       {
         "name": "group_id",
@@ -7696,7 +7876,7 @@
     ]
   },
   "aws/ec2/describe_images": {
-    "hash": "8339fc0128d049fe75fd77c2762b56c5fc5af11878be5cfaa12a19babf7be2fc",
+    "hash": "5e31c9ea243c0ec7ff88152672d5a987984f7da977287afbde62bbc92a30fd8e",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "AWS EC2 Describe Images",
@@ -7716,6 +7896,24 @@
       "description": "Elastic Compute Cloud operations"
     },
     "inputs": [
+      {
+        "name": "auth_method",
+        "type": "string",
+        "value": null,
+        "label": "Authentication",
+        "placeholder": "",
+        "required": true,
+        "options": [
+          {
+            "name": "Access Keys",
+            "value": "keys"
+          },
+          {
+            "name": "Assume Role (cross-account)",
+            "value": "assume_role"
+          }
+        ]
+      },
       {
         "name": "aws_access_key",
         "type": "secret",
@@ -7745,21 +7943,39 @@
         "type": "secret",
         "value": null,
         "label": "Session Token (optional)",
-        "placeholder": ""
+        "placeholder": "",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
       },
       {
         "name": "assume_role_arn",
         "type": "string",
         "value": null,
-        "label": "Assume Role ARN (optional)",
-        "placeholder": "arn:aws:iam::123456789012:role/MyRole"
+        "label": "Assume Role ARN",
+        "placeholder": "arn:aws:iam::123456789012:role/MyRole",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "assume_role"
+          ]
+        }
       },
       {
         "name": "external_id",
         "type": "string",
         "value": null,
         "label": "Assume Role External ID (optional)",
-        "placeholder": "Must match the External ID in the role's trust policy"
+        "placeholder": "Must match the External ID in the role's trust policy",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "assume_role"
+          ]
+        }
       },
       {
         "name": "image_ids",
@@ -7801,7 +8017,7 @@
     ]
   },
   "aws/ec2/describe_instances": {
-    "hash": "875bf4a86e2dbc6aaddb65fb0816f90dbc67c5f7b02754df62f3b211d0767d23",
+    "hash": "fa68302dcb7ea997c80ef0fb4e28547c6f6cb33fd8e7c6ddd82780fd8e6d460b",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "AWS EC2 Describe Instances",
@@ -7821,6 +8037,24 @@
       "description": "Elastic Compute Cloud operations"
     },
     "inputs": [
+      {
+        "name": "auth_method",
+        "type": "string",
+        "value": null,
+        "label": "Authentication",
+        "placeholder": "",
+        "required": true,
+        "options": [
+          {
+            "name": "Access Keys",
+            "value": "keys"
+          },
+          {
+            "name": "Assume Role (cross-account)",
+            "value": "assume_role"
+          }
+        ]
+      },
       {
         "name": "aws_access_key",
         "type": "secret",
@@ -7850,21 +8084,39 @@
         "type": "secret",
         "value": null,
         "label": "Session Token (optional)",
-        "placeholder": ""
+        "placeholder": "",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
       },
       {
         "name": "assume_role_arn",
         "type": "string",
         "value": null,
-        "label": "Assume Role ARN (optional)",
-        "placeholder": "arn:aws:iam::123456789012:role/MyRole"
+        "label": "Assume Role ARN",
+        "placeholder": "arn:aws:iam::123456789012:role/MyRole",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "assume_role"
+          ]
+        }
       },
       {
         "name": "external_id",
         "type": "string",
         "value": null,
         "label": "Assume Role External ID (optional)",
-        "placeholder": "Must match the External ID in the role's trust policy"
+        "placeholder": "Must match the External ID in the role's trust policy",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "assume_role"
+          ]
+        }
       },
       {
         "name": "instance_ids",
@@ -7899,7 +8151,7 @@
     ]
   },
   "aws/ec2/describe_key_pairs": {
-    "hash": "d434b5e435f0d02bff59d0fa1a830e304f0487ddc4456c3f7fd98ff61668d705",
+    "hash": "8cbf6f6504a98b11d34b9f628fa528f8d021725bb803f7fdf756d4eb8b1d13d7",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "AWS EC2 Describe Key Pairs",
@@ -7919,6 +8171,24 @@
       "description": "Elastic Compute Cloud operations"
     },
     "inputs": [
+      {
+        "name": "auth_method",
+        "type": "string",
+        "value": null,
+        "label": "Authentication",
+        "placeholder": "",
+        "required": true,
+        "options": [
+          {
+            "name": "Access Keys",
+            "value": "keys"
+          },
+          {
+            "name": "Assume Role (cross-account)",
+            "value": "assume_role"
+          }
+        ]
+      },
       {
         "name": "aws_access_key",
         "type": "secret",
@@ -7948,21 +8218,39 @@
         "type": "secret",
         "value": null,
         "label": "Session Token (optional)",
-        "placeholder": ""
+        "placeholder": "",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
       },
       {
         "name": "assume_role_arn",
         "type": "string",
         "value": null,
-        "label": "Assume Role ARN (optional)",
-        "placeholder": "arn:aws:iam::123456789012:role/MyRole"
+        "label": "Assume Role ARN",
+        "placeholder": "arn:aws:iam::123456789012:role/MyRole",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "assume_role"
+          ]
+        }
       },
       {
         "name": "external_id",
         "type": "string",
         "value": null,
         "label": "Assume Role External ID (optional)",
-        "placeholder": "Must match the External ID in the role's trust policy"
+        "placeholder": "Must match the External ID in the role's trust policy",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "assume_role"
+          ]
+        }
       }
     ],
     "outputs": [
@@ -7990,7 +8278,7 @@
     ]
   },
   "aws/ec2/describe_security_groups": {
-    "hash": "b40ddd08caced0c78d9497527f90a4e3a1b8643f91e08d500a97622fdf832aa4",
+    "hash": "dd3be95764516dffe8d4754e7f30b8921e555f9ffa59badb0dd55af866fa5b7d",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "AWS EC2 Describe Security Groups",
@@ -8010,6 +8298,24 @@
       "description": "Elastic Compute Cloud operations"
     },
     "inputs": [
+      {
+        "name": "auth_method",
+        "type": "string",
+        "value": null,
+        "label": "Authentication",
+        "placeholder": "",
+        "required": true,
+        "options": [
+          {
+            "name": "Access Keys",
+            "value": "keys"
+          },
+          {
+            "name": "Assume Role (cross-account)",
+            "value": "assume_role"
+          }
+        ]
+      },
       {
         "name": "aws_access_key",
         "type": "secret",
@@ -8039,21 +8345,39 @@
         "type": "secret",
         "value": null,
         "label": "Session Token (optional)",
-        "placeholder": ""
+        "placeholder": "",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
       },
       {
         "name": "assume_role_arn",
         "type": "string",
         "value": null,
-        "label": "Assume Role ARN (optional)",
-        "placeholder": "arn:aws:iam::123456789012:role/MyRole"
+        "label": "Assume Role ARN",
+        "placeholder": "arn:aws:iam::123456789012:role/MyRole",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "assume_role"
+          ]
+        }
       },
       {
         "name": "external_id",
         "type": "string",
         "value": null,
         "label": "Assume Role External ID (optional)",
-        "placeholder": "Must match the External ID in the role's trust policy"
+        "placeholder": "Must match the External ID in the role's trust policy",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "assume_role"
+          ]
+        }
       },
       {
         "name": "group_ids",
@@ -8088,7 +8412,7 @@
     ]
   },
   "aws/ec2/describe_snapshots": {
-    "hash": "e051b48daf0787513cf88ccc3b1e728bdddc5282e6cb9a7290aae87d3af5644d",
+    "hash": "91d817878bd04d678eec8507ab4cb40d9507b8e09c96c7e4cc4fd1f67d5c6a2a",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "AWS EC2 Describe Snapshots",
@@ -8108,6 +8432,24 @@
       "description": "Elastic Compute Cloud operations"
     },
     "inputs": [
+      {
+        "name": "auth_method",
+        "type": "string",
+        "value": null,
+        "label": "Authentication",
+        "placeholder": "",
+        "required": true,
+        "options": [
+          {
+            "name": "Access Keys",
+            "value": "keys"
+          },
+          {
+            "name": "Assume Role (cross-account)",
+            "value": "assume_role"
+          }
+        ]
+      },
       {
         "name": "aws_access_key",
         "type": "secret",
@@ -8137,21 +8479,39 @@
         "type": "secret",
         "value": null,
         "label": "Session Token (optional)",
-        "placeholder": ""
+        "placeholder": "",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
       },
       {
         "name": "assume_role_arn",
         "type": "string",
         "value": null,
-        "label": "Assume Role ARN (optional)",
-        "placeholder": "arn:aws:iam::123456789012:role/MyRole"
+        "label": "Assume Role ARN",
+        "placeholder": "arn:aws:iam::123456789012:role/MyRole",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "assume_role"
+          ]
+        }
       },
       {
         "name": "external_id",
         "type": "string",
         "value": null,
         "label": "Assume Role External ID (optional)",
-        "placeholder": "Must match the External ID in the role's trust policy"
+        "placeholder": "Must match the External ID in the role's trust policy",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "assume_role"
+          ]
+        }
       },
       {
         "name": "snapshot_ids",
@@ -8193,7 +8553,7 @@
     ]
   },
   "aws/ec2/describe_volumes": {
-    "hash": "7c50b10c208ae37a55d3ccf58d03e954d72fd3e142e49e1bba6b5a38152b422f",
+    "hash": "7d7e081d7fe83ba29591026ebe883b044c94937cf1da014f8db961bbe7838118",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "AWS EC2 Describe Volumes",
@@ -8213,6 +8573,24 @@
       "description": "Elastic Compute Cloud operations"
     },
     "inputs": [
+      {
+        "name": "auth_method",
+        "type": "string",
+        "value": null,
+        "label": "Authentication",
+        "placeholder": "",
+        "required": true,
+        "options": [
+          {
+            "name": "Access Keys",
+            "value": "keys"
+          },
+          {
+            "name": "Assume Role (cross-account)",
+            "value": "assume_role"
+          }
+        ]
+      },
       {
         "name": "aws_access_key",
         "type": "secret",
@@ -8242,21 +8620,39 @@
         "type": "secret",
         "value": null,
         "label": "Session Token (optional)",
-        "placeholder": ""
+        "placeholder": "",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
       },
       {
         "name": "assume_role_arn",
         "type": "string",
         "value": null,
-        "label": "Assume Role ARN (optional)",
-        "placeholder": "arn:aws:iam::123456789012:role/MyRole"
+        "label": "Assume Role ARN",
+        "placeholder": "arn:aws:iam::123456789012:role/MyRole",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "assume_role"
+          ]
+        }
       },
       {
         "name": "external_id",
         "type": "string",
         "value": null,
         "label": "Assume Role External ID (optional)",
-        "placeholder": "Must match the External ID in the role's trust policy"
+        "placeholder": "Must match the External ID in the role's trust policy",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "assume_role"
+          ]
+        }
       },
       {
         "name": "volume_ids",
@@ -8291,7 +8687,7 @@
     ]
   },
   "aws/ec2/reboot_instances": {
-    "hash": "f10fc8e6a00c9e23dc037b466d572b6be77ab27569a6e24dc391c76cff62dc9e",
+    "hash": "377875202de27a8315901f6aa52e8a4871383d7ca4e12922d9bd7e2b5597c1b4",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "AWS EC2 Reboot Instances",
@@ -8311,6 +8707,24 @@
       "description": "Elastic Compute Cloud operations"
     },
     "inputs": [
+      {
+        "name": "auth_method",
+        "type": "string",
+        "value": null,
+        "label": "Authentication",
+        "placeholder": "",
+        "required": true,
+        "options": [
+          {
+            "name": "Access Keys",
+            "value": "keys"
+          },
+          {
+            "name": "Assume Role (cross-account)",
+            "value": "assume_role"
+          }
+        ]
+      },
       {
         "name": "aws_access_key",
         "type": "secret",
@@ -8340,21 +8754,39 @@
         "type": "secret",
         "value": null,
         "label": "Session Token (optional)",
-        "placeholder": ""
+        "placeholder": "",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
       },
       {
         "name": "assume_role_arn",
         "type": "string",
         "value": null,
-        "label": "Assume Role ARN (optional)",
-        "placeholder": "arn:aws:iam::123456789012:role/MyRole"
+        "label": "Assume Role ARN",
+        "placeholder": "arn:aws:iam::123456789012:role/MyRole",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "assume_role"
+          ]
+        }
       },
       {
         "name": "external_id",
         "type": "string",
         "value": null,
         "label": "Assume Role External ID (optional)",
-        "placeholder": "Must match the External ID in the role's trust policy"
+        "placeholder": "Must match the External ID in the role's trust policy",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "assume_role"
+          ]
+        }
       },
       {
         "name": "instance_ids",
@@ -8383,7 +8815,7 @@
     ]
   },
   "aws/ec2/revoke_security_group_ingress": {
-    "hash": "7025683e88671bc4aedc59c1f882b065e01a6c59456dc1757dba1dcc6d215307",
+    "hash": "02aefada2b04de4ea5e00eee9d8162adf43f791e468a6fb86d1656ce19c404a8",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "AWS EC2 Revoke Security Group Ingress",
@@ -8403,6 +8835,24 @@
       "description": "Elastic Compute Cloud operations"
     },
     "inputs": [
+      {
+        "name": "auth_method",
+        "type": "string",
+        "value": null,
+        "label": "Authentication",
+        "placeholder": "",
+        "required": true,
+        "options": [
+          {
+            "name": "Access Keys",
+            "value": "keys"
+          },
+          {
+            "name": "Assume Role (cross-account)",
+            "value": "assume_role"
+          }
+        ]
+      },
       {
         "name": "aws_access_key",
         "type": "secret",
@@ -8432,21 +8882,39 @@
         "type": "secret",
         "value": null,
         "label": "Session Token (optional)",
-        "placeholder": ""
+        "placeholder": "",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
       },
       {
         "name": "assume_role_arn",
         "type": "string",
         "value": null,
-        "label": "Assume Role ARN (optional)",
-        "placeholder": "arn:aws:iam::123456789012:role/MyRole"
+        "label": "Assume Role ARN",
+        "placeholder": "arn:aws:iam::123456789012:role/MyRole",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "assume_role"
+          ]
+        }
       },
       {
         "name": "external_id",
         "type": "string",
         "value": null,
         "label": "Assume Role External ID (optional)",
-        "placeholder": "Must match the External ID in the role's trust policy"
+        "placeholder": "Must match the External ID in the role's trust policy",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "assume_role"
+          ]
+        }
       },
       {
         "name": "group_id",
@@ -8523,7 +8991,7 @@
     ]
   },
   "aws/ec2/run_instances": {
-    "hash": "62bde1a1df54578614e065428fc451d7c62d913437afb983f8b597ac3f585cb2",
+    "hash": "531437c7023ce4476a77e3ad8ac6f3ed1d9cf69161a1ba63e287742bea74979a",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "AWS EC2 Run Instances",
@@ -8543,6 +9011,24 @@
       "description": "Elastic Compute Cloud operations"
     },
     "inputs": [
+      {
+        "name": "auth_method",
+        "type": "string",
+        "value": null,
+        "label": "Authentication",
+        "placeholder": "",
+        "required": true,
+        "options": [
+          {
+            "name": "Access Keys",
+            "value": "keys"
+          },
+          {
+            "name": "Assume Role (cross-account)",
+            "value": "assume_role"
+          }
+        ]
+      },
       {
         "name": "aws_access_key",
         "type": "secret",
@@ -8572,21 +9058,39 @@
         "type": "secret",
         "value": null,
         "label": "Session Token (optional)",
-        "placeholder": ""
+        "placeholder": "",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
       },
       {
         "name": "assume_role_arn",
         "type": "string",
         "value": null,
-        "label": "Assume Role ARN (optional)",
-        "placeholder": "arn:aws:iam::123456789012:role/MyRole"
+        "label": "Assume Role ARN",
+        "placeholder": "arn:aws:iam::123456789012:role/MyRole",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "assume_role"
+          ]
+        }
       },
       {
         "name": "external_id",
         "type": "string",
         "value": null,
         "label": "Assume Role External ID (optional)",
-        "placeholder": "Must match the External ID in the role's trust policy"
+        "placeholder": "Must match the External ID in the role's trust policy",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "assume_role"
+          ]
+        }
       },
       {
         "name": "image_id",
@@ -8672,7 +9176,7 @@
     ]
   },
   "aws/ec2/start_instances": {
-    "hash": "756e4c13bd3528ce67aad4b5b7470e445ca66b5a77f523541366891ac0003ea0",
+    "hash": "f288e8c290178bc2cc68a244eccee24e0fc9dcda019bb84ffcd1271dee750210",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "AWS EC2 Start Instances",
@@ -8692,6 +9196,24 @@
       "description": "Elastic Compute Cloud operations"
     },
     "inputs": [
+      {
+        "name": "auth_method",
+        "type": "string",
+        "value": null,
+        "label": "Authentication",
+        "placeholder": "",
+        "required": true,
+        "options": [
+          {
+            "name": "Access Keys",
+            "value": "keys"
+          },
+          {
+            "name": "Assume Role (cross-account)",
+            "value": "assume_role"
+          }
+        ]
+      },
       {
         "name": "aws_access_key",
         "type": "secret",
@@ -8721,21 +9243,39 @@
         "type": "secret",
         "value": null,
         "label": "Session Token (optional)",
-        "placeholder": ""
+        "placeholder": "",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
       },
       {
         "name": "assume_role_arn",
         "type": "string",
         "value": null,
-        "label": "Assume Role ARN (optional)",
-        "placeholder": "arn:aws:iam::123456789012:role/MyRole"
+        "label": "Assume Role ARN",
+        "placeholder": "arn:aws:iam::123456789012:role/MyRole",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "assume_role"
+          ]
+        }
       },
       {
         "name": "external_id",
         "type": "string",
         "value": null,
         "label": "Assume Role External ID (optional)",
-        "placeholder": "Must match the External ID in the role's trust policy"
+        "placeholder": "Must match the External ID in the role's trust policy",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "assume_role"
+          ]
+        }
       },
       {
         "name": "instance_ids",
@@ -8764,7 +9304,7 @@
     ]
   },
   "aws/ec2/stop_instances": {
-    "hash": "f6b409a580740de56407e2f5ecece5d32431bba968423292a86fe133a809aa5b",
+    "hash": "d1c188932fd291dab10c0eb26b5e7f611a5cf67efd71b930df36e5d1412e2fcc",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "AWS EC2 Stop Instances",
@@ -8784,6 +9324,24 @@
       "description": "Elastic Compute Cloud operations"
     },
     "inputs": [
+      {
+        "name": "auth_method",
+        "type": "string",
+        "value": null,
+        "label": "Authentication",
+        "placeholder": "",
+        "required": true,
+        "options": [
+          {
+            "name": "Access Keys",
+            "value": "keys"
+          },
+          {
+            "name": "Assume Role (cross-account)",
+            "value": "assume_role"
+          }
+        ]
+      },
       {
         "name": "aws_access_key",
         "type": "secret",
@@ -8813,21 +9371,39 @@
         "type": "secret",
         "value": null,
         "label": "Session Token (optional)",
-        "placeholder": ""
+        "placeholder": "",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
       },
       {
         "name": "assume_role_arn",
         "type": "string",
         "value": null,
-        "label": "Assume Role ARN (optional)",
-        "placeholder": "arn:aws:iam::123456789012:role/MyRole"
+        "label": "Assume Role ARN",
+        "placeholder": "arn:aws:iam::123456789012:role/MyRole",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "assume_role"
+          ]
+        }
       },
       {
         "name": "external_id",
         "type": "string",
         "value": null,
         "label": "Assume Role External ID (optional)",
-        "placeholder": "Must match the External ID in the role's trust policy"
+        "placeholder": "Must match the External ID in the role's trust policy",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "assume_role"
+          ]
+        }
       },
       {
         "name": "instance_ids",
@@ -8863,7 +9439,7 @@
     ]
   },
   "aws/ec2/terminate_instances": {
-    "hash": "67b1a74a5262b535b0d065d0bb88a98b7d9765c2ca99642f50633ccd6626ade6",
+    "hash": "8839222ad3b22a5289e2a53e718abc6475fcef4bdf00abc88353f27f55dad2fb",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "AWS EC2 Terminate Instances",
@@ -8883,6 +9459,24 @@
       "description": "Elastic Compute Cloud operations"
     },
     "inputs": [
+      {
+        "name": "auth_method",
+        "type": "string",
+        "value": null,
+        "label": "Authentication",
+        "placeholder": "",
+        "required": true,
+        "options": [
+          {
+            "name": "Access Keys",
+            "value": "keys"
+          },
+          {
+            "name": "Assume Role (cross-account)",
+            "value": "assume_role"
+          }
+        ]
+      },
       {
         "name": "aws_access_key",
         "type": "secret",
@@ -8912,21 +9506,39 @@
         "type": "secret",
         "value": null,
         "label": "Session Token (optional)",
-        "placeholder": ""
+        "placeholder": "",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
       },
       {
         "name": "assume_role_arn",
         "type": "string",
         "value": null,
-        "label": "Assume Role ARN (optional)",
-        "placeholder": "arn:aws:iam::123456789012:role/MyRole"
+        "label": "Assume Role ARN",
+        "placeholder": "arn:aws:iam::123456789012:role/MyRole",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "assume_role"
+          ]
+        }
       },
       {
         "name": "external_id",
         "type": "string",
         "value": null,
         "label": "Assume Role External ID (optional)",
-        "placeholder": "Must match the External ID in the role's trust policy"
+        "placeholder": "Must match the External ID in the role's trust policy",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "assume_role"
+          ]
+        }
       },
       {
         "name": "instance_ids",

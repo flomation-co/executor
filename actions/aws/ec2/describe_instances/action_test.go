@@ -22,7 +22,7 @@ func TestMetadataAndContract(t *testing.T) {
 	for _, i := range Inputs {
 		names[i.Name] = true
 	}
-	for _, want := range []string{"aws_access_key", "aws_secret_key", "aws_region", "aws_session_token", "assume_role_arn", "external_id", "instance_ids"} {
+	for _, want := range []string{"auth_method", "aws_access_key", "aws_secret_key", "aws_region", "aws_session_token", "assume_role_arn", "external_id", "instance_ids"} {
 		Expect(names).To(HaveKey(want))
 	}
 }
