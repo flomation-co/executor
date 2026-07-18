@@ -2,11 +2,12 @@ package azure_storage_container_create
 
 import (
 	"fmt"
-	"net/http"
-	"net/url"
 
 	core "flomation.app/automate/executor"
 	storage "flomation.app/automate/executor/actions/azure/storage"
+
+	"github.com/Azure/azure-sdk-for-go/sdk/storage/azblob/bloberror"
+	"github.com/Azure/azure-sdk-for-go/sdk/storage/azblob/container"
 )
 
 const (
@@ -56,38 +57,38 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	if err != nil {
 		return storage.ErrorResult(err.Error()), nil
 	}
-	container, err := storage.RequiredString("container", inputs)
+	containerName, err := storage.RequiredString("container", inputs)
 	if err != nil {
 		return storage.ErrorResult(err.Error()), nil
 	}
-	if err := storage.ValidateContainerName(container); err != nil {
+	if err := storage.ValidateContainerName(containerName); err != nil {
+		return storage.ErrorResult(err.Error()), nil
+	}
+	meta, err := storage.MetadataMap(inputs, "metadata")
+	if err != nil {
 		return storage.ErrorResult(err.Error()), nil
 	}
 
-	headers := map[string]string{}
+	cc, err := auth.ContainerClient(containerName)
+	if err != nil {
+		return storage.ErrorResult(err.Error()), nil
+	}
+
+	opts := &container.CreateOptions{Metadata: meta}
 	if access := storage.OptionalString("public_access", inputs); access != "" {
-		headers["x-ms-blob-public-access"] = access
-	}
-	if err := storage.MetadataHeaders(headers, inputs, "metadata"); err != nil {
-		return storage.ErrorResult(err.Error()), nil
+		pa := container.PublicAccessType(access)
+		opts.Access = &pa
 	}
 
-	resp, err := storage.Do(flow, auth, storage.Request{
-		Method:  http.MethodPut,
-		Path:    storage.ContainerPath(container),
-		Query:   url.Values{"restype": []string{"container"}},
-		Headers: headers,
-	})
+	resp, err := cc.Create(flow.GoContext(), opts)
 	if err != nil {
-		return storage.ErrorResult(err.Error()), nil
-	}
-	if err := storage.CheckResponse(resp); err != nil {
-		if storage.ErrorCode(resp) == "ContainerAlreadyExists" {
-			return storage.ErrorResult(fmt.Sprintf("container %q already exists", container)), nil
+		if storage.HasCode(err, bloberror.ContainerAlreadyExists) {
+			return storage.ErrorResult(fmt.Sprintf("container %q already exists", containerName)), nil
 		}
-		return storage.ErrorResult(err.Error()), nil
+		_, msg := auth.SDKError(err)
+		return storage.ErrorResult(msg), nil
 	}
 
-	return storage.ResourceResult(container, storage.HeadersResult(container, resp.Headers),
-		fmt.Sprintf("Created container %s", container)), nil
+	return storage.WriteResult(containerName, resp.ETag, resp.LastModified,
+		fmt.Sprintf("Created container %s", containerName)), nil
 }

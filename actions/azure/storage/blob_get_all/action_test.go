@@ -307,7 +307,10 @@ func TestExecuteContainerNotFoundIsSoft(t *testing.T) {
 		t.Fatalf("Execute: %v", err)
 	}
 	msg := out["error"].(string)
-	if out["success"] != false || !strings.Contains(msg, "ContainerNotFound: The specified container does not exist") {
+	// A ContainerNotFound is intercepted and rendered as the friendly message the
+	// action builds (the SDK correctly surfaced the ContainerNotFound code, which
+	// is what HasCode branches on).
+	if out["success"] != false || !strings.Contains(msg, `container "my-container" was not found`) {
 		t.Errorf("out = %v", out)
 	}
 	if strings.Contains(msg, testKey) {

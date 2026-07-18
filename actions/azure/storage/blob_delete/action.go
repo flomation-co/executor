@@ -2,11 +2,12 @@ package azure_storage_blob_delete
 
 import (
 	"fmt"
-	"net/http"
-	"net/url"
 
 	core "flomation.app/automate/executor"
 	storage "flomation.app/automate/executor/actions/azure/storage"
+
+	"github.com/Azure/azure-sdk-for-go/sdk/storage/azblob/blob"
+	"github.com/Azure/azure-sdk-for-go/sdk/storage/azblob/bloberror"
 )
 
 const (
@@ -66,25 +67,33 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 		return storage.ErrorResult(err.Error()), nil
 	}
 
-	// x-ms-delete-snapshots is always sent, defaulting to include: without the
-	// header, deleting a blob that has snapshots fails outright (n8n never
-	// sets it and inherits exactly that failure).
+	// Snapshots default to include: without it, deleting a blob that HAS
+	// snapshots fails outright (n8n never sets it and inherits that failure).
 	snapshots := storage.OptionalString("snapshots", inputs)
 	if snapshots == "" {
 		snapshots = "include"
 	}
+	snapType := blob.DeleteSnapshotsOptionTypeInclude
+	if snapshots == "only" {
+		snapType = blob.DeleteSnapshotsOptionTypeOnly
+	}
 
-	resp, err := storage.Do(flow, auth, storage.Request{
-		Method:  http.MethodDelete,
-		Path:    storage.BlobPath(container, blobName),
-		Query:   url.Values{},
-		Headers: storage.LeaseHeader(map[string]string{"x-ms-delete-snapshots": snapshots}, inputs),
-	})
+	bc, err := auth.BlobClient(container, blobName)
 	if err != nil {
 		return storage.ErrorResult(err.Error()), nil
 	}
-	if err := storage.CheckResponse(resp); err != nil {
-		return storage.ErrorResult(err.Error()), nil
+
+	opts := &blob.DeleteOptions{DeleteSnapshots: &snapType}
+	if lid := storage.LeaseIDPtr(inputs); lid != nil {
+		opts.AccessConditions = &blob.AccessConditions{LeaseAccessConditions: &blob.LeaseAccessConditions{LeaseID: lid}}
+	}
+
+	if _, err := bc.Delete(flow.GoContext(), opts); err != nil {
+		if storage.HasCode(err, bloberror.BlobNotFound) {
+			return storage.ErrorResult(fmt.Sprintf("blob %q was not found in %q", blobName, container)), nil
+		}
+		_, msg := auth.SDKError(err)
+		return storage.ErrorResult(msg), nil
 	}
 
 	summary := fmt.Sprintf("Deleted %s from %s", blobName, container)

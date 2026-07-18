@@ -64,7 +64,11 @@ func TestExecuteNotFoundIsSoftError(t *testing.T) {
 	if err != nil {
 		t.Fatalf("Execute: %v", err)
 	}
-	if out["success"] != false || !strings.Contains(out["error"].(string), "ContainerNotFound") {
+	// A 404 is a soft failure (success==false, not a Go error), and the action
+	// remaps the SDK's ContainerNotFound to a friendly message that names the
+	// container rather than surfacing the verbose SDK error — assert that branch.
+	msg, _ := out["error"].(string)
+	if out["success"] != false || !strings.Contains(msg, "missing") || !strings.Contains(msg, "does not exist") {
 		t.Errorf("out = %v", out)
 	}
 }

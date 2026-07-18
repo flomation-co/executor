@@ -2,11 +2,11 @@ package azure_storage_blob_set_properties
 
 import (
 	"fmt"
-	"net/http"
-	"net/url"
 
 	core "flomation.app/automate/executor"
 	storage "flomation.app/automate/executor/actions/azure/storage"
+
+	"github.com/Azure/azure-sdk-for-go/sdk/storage/azblob/blob"
 )
 
 const (
@@ -61,44 +61,54 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 		return storage.ErrorResult(err.Error()), nil
 	}
 
-	// Set Blob Properties REPLACES the whole x-ms-blob-content-* set: a slot
-	// omitted from the request is cleared on the blob. There is no read-
-	// modify-write here on purpose — the Description warns instead, and the
-	// operator sends every property they want kept.
-	headers := map[string]string{}
-	for input, header := range map[string]string{
-		"content_type":        "x-ms-blob-content-type",
-		"cache_control":       "x-ms-blob-cache-control",
-		"content_disposition": "x-ms-blob-content-disposition",
-		"content_encoding":    "x-ms-blob-content-encoding",
-		"content_language":    "x-ms-blob-content-language",
-	} {
-		if v := storage.OptionalString(input, inputs); v != "" {
-			headers[header] = v
-		}
+	// SetHTTPHeaders REPLACES the whole content-property set: a property left
+	// blank here is cleared on the blob. There is no read-modify-write on
+	// purpose — the Description warns instead, and the operator sends every
+	// property they want kept. Only the five properties present are set; the
+	// rest stay nil and are cleared. propertyCount tracks how many the operator
+	// supplied so the summary matches — the lease ID is not a property.
+	headers := blob.HTTPHeaders{}
+	propertyCount := 0
+	if v := storage.OptionalString("content_type", inputs); v != "" {
+		headers.BlobContentType = &v
+		propertyCount++
 	}
-	if len(headers) == 0 {
+	if v := storage.OptionalString("cache_control", inputs); v != "" {
+		headers.BlobCacheControl = &v
+		propertyCount++
+	}
+	if v := storage.OptionalString("content_disposition", inputs); v != "" {
+		headers.BlobContentDisposition = &v
+		propertyCount++
+	}
+	if v := storage.OptionalString("content_encoding", inputs); v != "" {
+		headers.BlobContentEncoding = &v
+		propertyCount++
+	}
+	if v := storage.OptionalString("content_language", inputs); v != "" {
+		headers.BlobContentLanguage = &v
+		propertyCount++
+	}
+	if propertyCount == 0 {
 		return storage.ErrorResult("set at least one property (content_type, cache_control, content_disposition, content_encoding, content_language)"), nil
 	}
-	// Counted BEFORE the lease header joins them: x-ms-lease-id proves the
-	// caller holds the lock, it is not a property being set, and the summary
-	// would otherwise claim one more property than the operator asked for.
-	propertyCount := len(headers)
-	headers = storage.LeaseHeader(headers, inputs)
 
-	resp, err := storage.Do(flow, auth, storage.Request{
-		Method:  http.MethodPut,
-		Path:    storage.BlobPath(container, blobName),
-		Query:   url.Values{"comp": []string{"properties"}},
-		Headers: headers,
-	})
+	bc, err := auth.BlobClient(container, blobName)
 	if err != nil {
 		return storage.ErrorResult(err.Error()), nil
 	}
-	if err := storage.CheckResponse(resp); err != nil {
-		return storage.ErrorResult(err.Error()), nil
+
+	opts := &blob.SetHTTPHeadersOptions{}
+	if lid := storage.LeaseIDPtr(inputs); lid != nil {
+		opts.AccessConditions = &blob.AccessConditions{LeaseAccessConditions: &blob.LeaseAccessConditions{LeaseID: lid}}
 	}
 
-	return storage.ResourceResult(blobName, storage.HeadersResult(blobName, resp.Headers),
+	resp, err := bc.SetHTTPHeaders(flow.GoContext(), headers, opts)
+	if err != nil {
+		_, msg := auth.SDKError(err)
+		return storage.ErrorResult(msg), nil
+	}
+
+	return storage.WriteResult(blobName, resp.ETag, resp.LastModified,
 		fmt.Sprintf("Set %d properties on %s", propertyCount, blobName)), nil
 }

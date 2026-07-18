@@ -2,10 +2,13 @@ package azure_storage_container_get_all
 
 import (
 	"fmt"
-	"net/url"
+	"strings"
+	"time"
 
 	core "flomation.app/automate/executor"
 	storage "flomation.app/automate/executor/actions/azure/storage"
+
+	"github.com/Azure/azure-sdk-for-go/sdk/storage/azblob/service"
 )
 
 const (
@@ -59,29 +62,118 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 		return storage.ErrorResult(err.Error()), nil
 	}
 
-	q := url.Values{"comp": []string{"list"}}
-	if prefix := storage.OptionalString("prefix", inputs); prefix != "" {
-		q.Set("prefix", prefix)
+	// maxListPages bounds a return_all page walk so an account with a very large
+	// number of containers can never spin unbounded requests — the same backstop
+	// the pre-SDK ListEnumeration applied. At 5000 per page this admits a million.
+	const maxListPages = 200
+
+	// containerItemMap reproduces the pre-SDK storage.ContainerMap output shape
+	// from the SDK's typed service.ContainerItem: the same {name, properties,
+	// metadata, deleted} keys, properties camelCased exactly as the XML path did.
+	containerItemMap := func(item *service.ContainerItem) map[string]interface{} {
+		out := map[string]interface{}{}
+		if item.Name != nil {
+			out["name"] = *item.Name
+		}
+		if p := item.Properties; p != nil {
+			props := map[string]interface{}{}
+			if p.ETag != nil {
+				props["etag"] = string(*p.ETag)
+			}
+			if p.LastModified != nil {
+				props["lastModified"] = p.LastModified.UTC().Format(time.RFC1123)
+			}
+			if p.LeaseStatus != nil {
+				props["leaseStatus"] = string(*p.LeaseStatus)
+			}
+			if p.LeaseState != nil {
+				props["leaseState"] = string(*p.LeaseState)
+			}
+			if p.LeaseDuration != nil {
+				props["leaseDuration"] = string(*p.LeaseDuration)
+			}
+			if p.PublicAccess != nil {
+				props["publicAccess"] = string(*p.PublicAccess)
+			}
+			if p.HasImmutabilityPolicy != nil {
+				props["hasImmutabilityPolicy"] = *p.HasImmutabilityPolicy
+			}
+			if p.HasLegalHold != nil {
+				props["hasLegalHold"] = *p.HasLegalHold
+			}
+			if len(props) > 0 {
+				out["properties"] = props
+			}
+		}
+		if meta := storage.StrMeta(item.Metadata); len(meta) > 0 {
+			out["metadata"] = meta
+		}
+		if item.Deleted != nil {
+			out["deleted"] = *item.Deleted
+		}
+		return out
 	}
+
+	svc, err := auth.ServiceClient()
+	if err != nil {
+		return storage.ErrorResult(err.Error()), nil
+	}
+
+	opts := &service.ListContainersOptions{}
+	if prefix := storage.OptionalString("prefix", inputs); prefix != "" {
+		opts.Prefix = &prefix
+	}
+	// ParseIncludeTokens still validates the ComboBox input (unknown token → the
+	// same error), then the accepted tokens map onto the SDK's include booleans.
 	include, err := storage.ParseIncludeTokens(storage.OptionalString("include", inputs), storage.ContainerIncludeTokens)
 	if err != nil {
 		return storage.ErrorResult(err.Error()), nil
 	}
-	if include != "" {
-		q.Set("include", include)
+	for _, tok := range strings.Split(include, ",") {
+		switch tok {
+		case "metadata":
+			opts.Include.Metadata = true
+		case "deleted":
+			opts.Include.Deleted = true
+		case "system":
+			opts.Include.System = true
+		}
 	}
 	returnAll := storage.OptionalBool("return_all", inputs)
 	limit := storage.ClampLimit(storage.OptionalInt("limit", inputs))
+	pageSize := limit
+	if returnAll {
+		// return_all raises the page size to the 5000 maximum to minimise round
+		// trips, exactly as ListEnumeration did.
+		pageSize = storage.MaxPageLimit
+	}
+	mr := int32(pageSize)
+	opts.MaxResults = &mr
 
-	containers, _, truncated, err := storage.ListEnumeration(flow, auth, "/", q, returnAll, limit)
-	if err != nil {
-		return storage.ErrorResult(err.Error()), nil
+	pager := svc.NewListContainersPager(opts)
+	items := make([]interface{}, 0)
+	truncated := false
+	ctx := flow.GoContext()
+	for page := 0; pager.More(); page++ {
+		if page >= maxListPages {
+			truncated = true
+			break
+		}
+		resp, err := pager.NextPage(ctx)
+		if err != nil {
+			_, msg := auth.SDKError(err)
+			return storage.ErrorResult(msg), nil
+		}
+		for _, item := range resp.ContainerItems {
+			items = append(items, containerItemMap(item))
+		}
+		// Without return_all this is a single page (limit items); with it, walk
+		// the cursor until exhausted or the page cap trips.
+		if !returnAll {
+			break
+		}
 	}
 
-	items := make([]interface{}, 0, len(containers))
-	for _, c := range containers {
-		items = append(items, storage.ContainerMap(c))
-	}
 	summary := fmt.Sprintf("Listed %d containers", len(items))
 	if truncated {
 		summary += " (stopped at the pagination safety cap; more remain)"

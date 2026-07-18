@@ -2,14 +2,18 @@ package azure_storage_blob_download
 
 import (
 	"fmt"
-	"net/http"
-	"net/url"
+	"io"
 	"os"
 	"path"
+	"strconv"
 	"strings"
+	"time"
 
 	core "flomation.app/automate/executor"
 	storage "flomation.app/automate/executor/actions/azure/storage"
+
+	"github.com/Azure/azure-sdk-for-go/sdk/storage/azblob/blob"
+	"github.com/Azure/azure-sdk-for-go/sdk/storage/azblob/bloberror"
 )
 
 const (
@@ -83,30 +87,47 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 		return storage.ErrorResult(err.Error()), nil
 	}
 
-	headers := map[string]string{}
+	opts := &blob.DownloadStreamOptions{}
 	if r := storage.OptionalString("range", inputs); r != "" {
-		if !strings.HasPrefix(r, "bytes=") {
-			return storage.ErrorResult(`range must look like "bytes=0-1023"`), nil
+		httpRange, err := parseByteRange(r)
+		if err != nil {
+			return storage.ErrorResult(err.Error()), nil
 		}
-		headers["Range"] = r
+		opts.Range = httpRange
 	}
-	headers = storage.LeaseHeader(headers, inputs)
+	if lid := storage.LeaseIDPtr(inputs); lid != nil {
+		opts.AccessConditions = &blob.AccessConditions{LeaseAccessConditions: &blob.LeaseAccessConditions{LeaseID: lid}}
+	}
 
-	resp, err := storage.Do(flow, auth, storage.Request{
-		Method:  http.MethodGet,
-		Path:    storage.BlobPath(container, blobName),
-		Query:   url.Values{},
-		Headers: headers,
-		MaxBody: storage.MaxDownloadBody, // blobs are big; the shared 8 MB default is for envelopes
-	})
+	bc, err := auth.BlobClient(container, blobName)
 	if err != nil {
 		return storage.ErrorResult(err.Error()), nil
 	}
-	if err := storage.CheckResponse(resp); err != nil {
-		return storage.ErrorResult(err.Error()), nil
+	resp, err := bc.DownloadStream(flow.GoContext(), opts)
+	if err != nil {
+		if storage.HasCode(err, bloberror.BlobNotFound) {
+			return storage.ErrorResult(fmt.Sprintf("blob %q was not found in %q", blobName, container)), nil
+		}
+		_, msg := auth.SDKError(err)
+		return storage.ErrorResult(msg), nil
+	}
+	defer func() { _ = resp.Body.Close() }()
+
+	// Blobs are large; read up to the 256 MB ceiling and refuse (rather than
+	// silently truncate) anything past it — the same guard the shared REST
+	// client applied via MaxBody.
+	body, err := io.ReadAll(io.LimitReader(resp.Body, storage.MaxDownloadBody+1))
+	if err != nil {
+		return storage.ErrorResult(fmt.Sprintf("failed to read the download: %s", err.Error())), nil
+	}
+	if int64(len(body)) > storage.MaxDownloadBody {
+		return storage.ErrorResult(fmt.Sprintf("blob %q exceeds the %d MB download ceiling", blobName, storage.MaxDownloadBody>>20)), nil
 	}
 
-	contentType := resp.Headers.Get("Content-Type")
+	contentType := ""
+	if resp.ContentType != nil {
+		contentType = *resp.ContentType
+	}
 
 	// The bytes land on the workspace as a media file; EmitMediaFile hands
 	// back a blob token for small files (previewable, survives suspension) or
@@ -115,7 +136,7 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	if err != nil {
 		return storage.ErrorResult(fmt.Sprintf("failed to allocate a scratch file: %s", err.Error())), nil
 	}
-	if err := os.WriteFile(scratch, resp.Body, 0o600); err != nil {
+	if err := os.WriteFile(scratch, body, 0o600); err != nil {
 		return storage.ErrorResult(fmt.Sprintf("failed to write the download: %s", err.Error())), nil
 	}
 	fileRef, err := flow.EmitMediaFile(scratch)
@@ -124,15 +145,71 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	}
 
 	inline := ""
-	if len(resp.Body) <= inlineContentLimit && textLike(contentType) {
-		inline = string(resp.Body)
+	if len(body) <= inlineContentLimit && textLike(contentType) {
+		inline = string(body)
 	}
 
-	out := storage.ResourceResult(blobName, storage.HeadersResult(blobName, resp.Headers),
-		fmt.Sprintf("Downloaded %s from %s (%d bytes)", blobName, container, len(resp.Body)))
+	props := map[string]interface{}{}
+	if contentType != "" {
+		props["contentType"] = contentType
+	}
+	if resp.ContentLength != nil {
+		props["contentLength"] = *resp.ContentLength
+	}
+	// Content-Encoding is a STORED property of the blob, not transfer encoding —
+	// a gzip-encoded blob must report it so downstream knows the bytes are
+	// compressed. The shared client sets DisableCompression precisely so
+	// net/http never strips it. (Dropping these was a real regression the live
+	// round-trip caught.)
+	if resp.ContentEncoding != nil {
+		props["contentEncoding"] = *resp.ContentEncoding
+	}
+	if resp.ContentLanguage != nil {
+		props["contentLanguage"] = *resp.ContentLanguage
+	}
+	if resp.ContentDisposition != nil {
+		props["contentDisposition"] = *resp.ContentDisposition
+	}
+	if resp.CacheControl != nil {
+		props["cacheControl"] = *resp.CacheControl
+	}
+	if resp.ETag != nil {
+		props["etag"] = string(*resp.ETag)
+	}
+	if resp.LastModified != nil {
+		props["lastModified"] = resp.LastModified.UTC().Format(time.RFC1123)
+	}
+	out := storage.PropsResult(blobName,
+		fmt.Sprintf("Downloaded %s from %s (%d bytes)", blobName, container, len(body)),
+		props, storage.StrMeta(resp.Metadata))
 	out["file"] = fileRef
 	out["content"] = inline
 	out["content_type"] = contentType
-	out["size"] = len(resp.Body)
+	out["size"] = len(body)
+	return out, nil
+}
+
+// parseByteRange turns an HTTP byte-range spec ("bytes=0-1023", "bytes=500-")
+// into the SDK's blob.HTTPRange. A missing end means "to the end of the blob"
+// (Count stays 0). This preserves the action's original "bytes=..." input form.
+func parseByteRange(r string) (blob.HTTPRange, error) {
+	var out blob.HTTPRange
+	if !strings.HasPrefix(r, "bytes=") {
+		return out, fmt.Errorf(`range must look like "bytes=0-1023"`)
+	}
+	spec := strings.TrimPrefix(r, "bytes=")
+	parts := strings.SplitN(spec, "-", 2)
+	start, err := strconv.ParseInt(strings.TrimSpace(parts[0]), 10, 64)
+	if err != nil || start < 0 {
+		return out, fmt.Errorf(`range must look like "bytes=0-1023"`)
+	}
+	out.Offset = start
+	if len(parts) == 2 && strings.TrimSpace(parts[1]) != "" {
+		end, err := strconv.ParseInt(strings.TrimSpace(parts[1]), 10, 64)
+		if err != nil || end < start {
+			return out, fmt.Errorf(`range end must be a number no smaller than the start (e.g. "bytes=0-1023")`)
+		}
+		out.Count = end - start + 1
+	}
 	return out, nil
 }

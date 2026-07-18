@@ -2,7 +2,6 @@ package azure_storage_blob_copy
 
 import (
 	"fmt"
-	"net/http"
 	"net/url"
 	"time"
 
@@ -89,22 +88,30 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 		}
 	}
 
-	destPath := storage.BlobPath(container, blobName)
-	resp, err := storage.Do(flow, auth, storage.Request{
-		Method:  http.MethodPut,
-		Path:    destPath,
-		Query:   url.Values{},
-		Headers: map[string]string{"x-ms-copy-source": sourceURL},
-	})
+	// StartCopyFromURL is the server-side async copy: it returns immediately with
+	// the copy id and status, and only wait_for_completion polls it to a final
+	// state. Same-account copies usually come back "success" on this first call.
+	bc, err := auth.BlobClient(container, blobName)
 	if err != nil {
 		return storage.ErrorResult(err.Error()), nil
 	}
-	if err := storage.CheckResponse(resp); err != nil {
-		return storage.ErrorResult(err.Error()), nil
+
+	start, err := bc.StartCopyFromURL(flow.GoContext(), sourceURL, nil)
+	if err != nil {
+		// The source URL may carry a SAS; SDKError redacts sig= before it lands
+		// in an output.
+		_, msg := auth.SDKError(err)
+		return storage.ErrorResult(msg), nil
 	}
 
-	copyID := resp.Headers.Get("x-ms-copy-id")
-	status := resp.Headers.Get("x-ms-copy-status")
+	copyID := ""
+	if start.CopyID != nil {
+		copyID = *start.CopyID
+	}
+	status := ""
+	if start.CopyStatus != nil {
+		status = string(*start.CopyStatus)
+	}
 	statusDescription := ""
 
 	if storage.BoolDefaultTrue("wait_for_completion", inputs) {
@@ -115,19 +122,19 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 				return storage.ErrorResult("copy polling cancelled"), nil
 			case <-time.After(pollInterval):
 			}
-			head, err := storage.Do(flow, auth, storage.Request{
-				Method: http.MethodHead,
-				Path:   destPath,
-				Query:  url.Values{},
-			})
+			props, err := bc.GetProperties(flow.GoContext(), nil)
 			if err != nil {
-				return storage.ErrorResult(err.Error()), nil
+				_, msg := auth.SDKError(err)
+				return storage.ErrorResult(msg), nil
 			}
-			if err := storage.CheckResponse(head); err != nil {
-				return storage.ErrorResult(err.Error()), nil
+			status = ""
+			if props.CopyStatus != nil {
+				status = string(*props.CopyStatus)
 			}
-			status = head.Headers.Get("x-ms-copy-status")
-			statusDescription = head.Headers.Get("x-ms-copy-status-description")
+			statusDescription = ""
+			if props.CopyStatusDescription != nil {
+				statusDescription = *props.CopyStatusDescription
+			}
 		}
 	}
 

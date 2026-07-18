@@ -2,11 +2,13 @@ package azure_storage_container_get
 
 import (
 	"fmt"
-	"net/http"
-	"net/url"
+	"time"
 
 	core "flomation.app/automate/executor"
 	storage "flomation.app/automate/executor/actions/azure/storage"
+
+	"github.com/Azure/azure-sdk-for-go/sdk/storage/azblob/bloberror"
+	"github.com/Azure/azure-sdk-for-go/sdk/storage/azblob/container"
 )
 
 const (
@@ -46,26 +48,60 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	if err != nil {
 		return storage.ErrorResult(err.Error()), nil
 	}
-	container, err := storage.RequiredString("container", inputs)
+	containerName, err := storage.RequiredString("container", inputs)
 	if err != nil {
 		return storage.ErrorResult(err.Error()), nil
 	}
 
-	// Container properties travel entirely in response headers — there is no
-	// body to parse on success.
-	resp, err := storage.Do(flow, auth, storage.Request{
-		Method:  http.MethodGet,
-		Path:    storage.ContainerPath(container),
-		Query:   url.Values{"restype": []string{"container"}},
-		Headers: storage.LeaseHeader(nil, inputs),
-	})
+	cc, err := auth.ContainerClient(containerName)
 	if err != nil {
 		return storage.ErrorResult(err.Error()), nil
 	}
-	if err := storage.CheckResponse(resp); err != nil {
-		return storage.ErrorResult(err.Error()), nil
+
+	// A lease_id is accepted here as an assertion ("fail unless this lease is
+	// active and mine"), exactly as the header path used to send it on GET.
+	opts := &container.GetPropertiesOptions{}
+	if lid := storage.LeaseIDPtr(inputs); lid != nil {
+		opts.LeaseAccessConditions = &container.LeaseAccessConditions{LeaseID: lid}
 	}
 
-	return storage.ResourceResult(container, storage.HeadersResult(container, resp.Headers),
-		fmt.Sprintf("Fetched container %s", container)), nil
+	resp, err := cc.GetProperties(flow.GoContext(), opts)
+	if err != nil {
+		if storage.HasCode(err, bloberror.ContainerNotFound) {
+			return storage.ErrorResult(fmt.Sprintf("container %q does not exist", containerName)), nil
+		}
+		_, msg := auth.SDKError(err)
+		return storage.ErrorResult(msg), nil
+	}
+
+	// The SDK exposes as typed fields what the header path camelCased out of the
+	// x-ms-* response headers; rebuild the same {properties, metadata} envelope.
+	props := map[string]interface{}{}
+	if resp.ETag != nil {
+		props["etag"] = string(*resp.ETag)
+	}
+	if resp.LastModified != nil {
+		props["lastModified"] = resp.LastModified.UTC().Format(time.RFC1123)
+	}
+	if resp.BlobPublicAccess != nil {
+		props["blobPublicAccess"] = string(*resp.BlobPublicAccess)
+	}
+	if resp.LeaseState != nil {
+		props["leaseState"] = string(*resp.LeaseState)
+	}
+	if resp.LeaseStatus != nil {
+		props["leaseStatus"] = string(*resp.LeaseStatus)
+	}
+	if resp.LeaseDuration != nil {
+		props["leaseDuration"] = string(*resp.LeaseDuration)
+	}
+	if resp.HasImmutabilityPolicy != nil {
+		props["hasImmutabilityPolicy"] = *resp.HasImmutabilityPolicy
+	}
+	if resp.HasLegalHold != nil {
+		props["hasLegalHold"] = *resp.HasLegalHold
+	}
+
+	return storage.PropsResult(containerName, fmt.Sprintf("Fetched container %s", containerName),
+		props, storage.StrMeta(resp.Metadata)), nil
 }

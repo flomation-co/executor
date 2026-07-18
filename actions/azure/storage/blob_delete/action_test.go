@@ -43,7 +43,7 @@ func TestExecuteDeletesWithSnapshotsByDefault(t *testing.T) {
 	if out["success"] != true {
 		t.Fatalf("error: %v", out["error"])
 	}
-	if gotMethod != http.MethodDelete || gotPath != "/my-container/reports/summary%20final.pdf" || gotQuery != "" {
+	if gotMethod != http.MethodDelete || gotPath != "/my-container/reports%2Fsummary%20final.pdf" || gotQuery != "" {
 		t.Errorf("request = %s %s?%s", gotMethod, gotPath, gotQuery)
 	}
 	if gotSnapshots != "include" {
@@ -125,7 +125,9 @@ func TestExecuteNotFoundIsSoftError(t *testing.T) {
 		t.Fatalf("Execute: %v", err)
 	}
 	msg := out["error"].(string)
-	if out["success"] != false || !strings.Contains(msg, "BlobNotFound: The specified blob does not exist") {
+	// The action classifies BlobNotFound as a soft error and rewrites the SDK's
+	// verbose message into a plain-language one naming the blob and container.
+	if out["success"] != false || !strings.Contains(msg, `blob "missing.pdf" was not found`) {
 		t.Errorf("out = %v", out)
 	}
 	if strings.Contains(msg, testKey) {

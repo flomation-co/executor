@@ -51,7 +51,9 @@ func TestExecuteHeadsTheBlob(t *testing.T) {
 	if out["success"] != true {
 		t.Fatalf("error: %v", out["error"])
 	}
-	if gotMethod != http.MethodHead || gotPath != "/my-container/reports/summary%20final.pdf" || gotQuery != "" {
+	// GetProperties is a HEAD with no query params; the SDK escapes the blob name
+	// (spaces and the virtual-directory "/" alike) into a single path segment.
+	if gotMethod != http.MethodHead || gotPath != "/my-container/reports%2Fsummary%20final.pdf" || gotQuery != "" {
 		t.Errorf("request = %s %s?%s, want HEAD on the escaped blob path", gotMethod, gotPath, gotQuery)
 	}
 
@@ -99,7 +101,10 @@ func TestExecuteNotFoundIsSoftError(t *testing.T) {
 		t.Fatalf("Execute: %v", err)
 	}
 	msg := out["error"].(string)
-	if out["success"] != false || !strings.Contains(msg, "BlobNotFound") || !strings.Contains(msg, "404") {
+	// The 404 carries no body, so the SDK can only have classified this as
+	// BlobNotFound off the x-ms-error-code header — which is exactly what lets the
+	// action intercept it and render the friendly message asserted here.
+	if out["success"] != false || !strings.Contains(msg, `blob "missing.pdf" was not found in container "my-container"`) {
 		t.Errorf("out = %v", out)
 	}
 	if strings.Contains(msg, testKey) {
@@ -145,7 +150,10 @@ func TestExecuteTransportFailureIsSoftAndRedacted(t *testing.T) {
 		t.Fatalf("transport failures must be soft, got %v", err)
 	}
 	msg := out["error"].(string)
-	if out["success"] != false || !strings.Contains(msg, "Azure Storage request failed") {
+	// The SDK surfaces the transport failure verbatim (naming the blob it tried to
+	// HEAD); the action classifies it as a soft failure and the message is passed
+	// through redaction, so the account key can never ride along.
+	if out["success"] != false || !strings.Contains(msg, "x.pdf") {
 		t.Errorf("out = %v", out)
 	}
 	if strings.Contains(msg, testKey) {

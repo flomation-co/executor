@@ -2,11 +2,13 @@ package azure_storage_container_lease
 
 import (
 	"fmt"
-	"net/http"
-	"net/url"
+	"time"
 
 	core "flomation.app/automate/executor"
 	storage "flomation.app/automate/executor/actions/azure/storage"
+
+	"github.com/Azure/azure-sdk-for-go/sdk/azcore"
+	"github.com/Azure/azure-sdk-for-go/sdk/storage/azblob/lease"
 )
 
 const (
@@ -93,25 +95,129 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	if err != nil {
 		return storage.ErrorResult(err.Error()), nil
 	}
+	// BuildLeaseCall still validates every combination (durations, GUIDs, which
+	// action needs which id) with the same messages; we read the action and the
+	// two numbers it resolved, and take the raw ids for the lease client.
 	call, err := storage.BuildLeaseCall(inputs)
 	if err != nil {
 		return storage.ErrorResult(err.Error()), nil
 	}
+	leaseID := storage.OptionalString("lease_id", inputs)
+	proposed := storage.OptionalString("proposed_lease_id", inputs)
 
-	resp, err := storage.Do(flow, auth, storage.Request{
-		Method: http.MethodPut,
-		Path:   storage.ContainerPath(container),
-		// restype=container is what separates this from Lease Blob: the same
-		// comp=lease against the same path leases the container only when the
-		// resource type says so.
-		Query:   url.Values{"restype": []string{"container"}, "comp": []string{"lease"}},
-		Headers: call.Headers,
-	})
+	cc, err := auth.ContainerClient(container)
 	if err != nil {
 		return storage.ErrorResult(err.Error()), nil
 	}
-	if err := storage.CheckResponse(resp); err != nil {
+
+	// The lease client is seeded with the id the operation acts on: the proposed
+	// id on Acquire (blank ⇒ the SDK mints one, as the service used to), the held
+	// id on Renew/Change/Release. Break needs none.
+	var clientLeaseID *string
+	switch call.Action {
+	case storage.LeaseAcquire:
+		if proposed != "" {
+			clientLeaseID = &proposed
+		}
+	case storage.LeaseRenew, storage.LeaseRelease, storage.LeaseChange:
+		clientLeaseID = &leaseID
+	}
+	lc, err := lease.NewContainerClient(cc, &lease.ContainerClientOptions{LeaseID: clientLeaseID})
+	if err != nil {
 		return storage.ErrorResult(err.Error()), nil
 	}
-	return storage.LeaseResult(call, container, fmt.Sprintf("container %s", container), resp), nil
+
+	ctx := flow.GoContext()
+	var (
+		outETag    *azcore.ETag
+		outLastMod *time.Time
+		outLeaseID *string
+		leaseTime  int
+		callErr    error
+	)
+	switch call.Action {
+	case storage.LeaseAcquire:
+		resp, err := lc.AcquireLease(ctx, int32(call.Duration), nil)
+		if callErr = err; err == nil {
+			outETag, outLastMod, outLeaseID = resp.ETag, resp.LastModified, resp.LeaseID
+		}
+	case storage.LeaseRenew:
+		resp, err := lc.RenewLease(ctx, nil)
+		if callErr = err; err == nil {
+			outETag, outLastMod, outLeaseID = resp.ETag, resp.LastModified, resp.LeaseID
+		}
+	case storage.LeaseChange:
+		resp, err := lc.ChangeLease(ctx, proposed, nil)
+		if callErr = err; err == nil {
+			outETag, outLastMod, outLeaseID = resp.ETag, resp.LastModified, resp.LeaseID
+		}
+	case storage.LeaseRelease:
+		resp, err := lc.ReleaseLease(ctx, nil)
+		if callErr = err; err == nil {
+			outETag, outLastMod = resp.ETag, resp.LastModified
+		}
+	case storage.LeaseBreak:
+		var breakOpts *lease.ContainerBreakOptions
+		// A specified break_period (0-60) travels; blank lets the lease run out
+		// its remaining time. call.BreakPeriod is -1 when unset.
+		if call.BreakPeriod >= 0 {
+			bp := int32(call.BreakPeriod)
+			breakOpts = &lease.ContainerBreakOptions{BreakPeriod: &bp}
+		}
+		resp, err := lc.BreakLease(ctx, breakOpts)
+		if callErr = err; err == nil {
+			outETag, outLastMod = resp.ETag, resp.LastModified
+			if resp.LeaseTime != nil {
+				leaseTime = int(*resp.LeaseTime)
+			}
+		}
+	}
+	if callErr != nil {
+		_, msg := auth.SDKError(callErr)
+		return storage.ErrorResult(msg), nil
+	}
+
+	// Reproduce LeaseResult's output: the standard resource envelope plus the two
+	// things a downstream node needs — lease_id (the whole point) and lease_time
+	// (the seconds a break still has to run).
+	target := fmt.Sprintf("container %s", container)
+	var summary string
+	switch call.Action {
+	case storage.LeaseAcquire:
+		if call.Duration == storage.LeaseInfiniteDuration {
+			summary = fmt.Sprintf("Acquired an infinite lease on %s", target)
+		} else {
+			summary = fmt.Sprintf("Acquired a %ds lease on %s", call.Duration, target)
+		}
+	case storage.LeaseRenew:
+		summary = fmt.Sprintf("Renewed the lease on %s", target)
+	case storage.LeaseChange:
+		summary = fmt.Sprintf("Changed the lease ID on %s", target)
+	case storage.LeaseRelease:
+		summary = fmt.Sprintf("Released the lease on %s", target)
+	case storage.LeaseBreak:
+		if leaseTime > 0 {
+			summary = fmt.Sprintf("Broke the lease on %s — it ends in %ds", target, leaseTime)
+		} else {
+			summary = fmt.Sprintf("Broke the lease on %s", target)
+		}
+	}
+
+	props := map[string]interface{}{}
+	if outETag != nil {
+		props["etag"] = string(*outETag)
+	}
+	if outLastMod != nil {
+		props["lastModified"] = outLastMod.UTC().Format(time.RFC1123)
+	}
+	result := map[string]interface{}{"name": container, "properties": props, "leaseAction": call.Action}
+
+	out := storage.ResourceResult(container, result, summary)
+	leaseIDStr := ""
+	if outLeaseID != nil {
+		leaseIDStr = *outLeaseID
+	}
+	out["lease_id"] = leaseIDStr
+	out["lease_time"] = leaseTime
+	return out, nil
 }

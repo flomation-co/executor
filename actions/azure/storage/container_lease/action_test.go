@@ -282,7 +282,13 @@ func TestLeasedContainerErrorIsSoft(t *testing.T) {
 		t.Fatalf("Execute: hard error %v — a service refusal is data, not a crash", err)
 	}
 	msg, _ := out["error"].(string)
-	if out["success"] != false || !strings.Contains(msg, "LeaseAlreadyPresent: There is already a lease present.") {
+	// The SDK renders a service refusal as a verbose multi-line string ("ERROR
+	// CODE: LeaseAlreadyPresent" plus the <Message> XML), not the old joined
+	// "Code: Message" form — assert the code and the message text as separate
+	// substrings. The refusal is a soft error (success==false), not a Go error.
+	if out["success"] != false ||
+		!strings.Contains(msg, "LeaseAlreadyPresent") ||
+		!strings.Contains(msg, "There is already a lease present.") {
 		t.Errorf("out = %v", out)
 	}
 	if strings.Contains(msg, testKey) {

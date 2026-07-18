@@ -2,11 +2,11 @@ package azure_storage_blob_set_metadata
 
 import (
 	"fmt"
-	"net/http"
-	"net/url"
 
 	core "flomation.app/automate/executor"
 	storage "flomation.app/automate/executor/actions/azure/storage"
+
+	"github.com/Azure/azure-sdk-for-go/sdk/storage/azblob/blob"
 )
 
 const (
@@ -57,28 +57,33 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 		return storage.ErrorResult(err.Error()), nil
 	}
 
-	headers := map[string]string{}
-	if err := storage.MetadataHeaders(headers, inputs, "metadata"); err != nil {
-		return storage.ErrorResult(err.Error()), nil
-	}
-	if len(headers) == 0 {
-		return storage.ErrorResult("metadata is required"), nil
-	}
-	headers = storage.LeaseHeader(headers, inputs)
-
-	resp, err := storage.Do(flow, auth, storage.Request{
-		Method:  http.MethodPut,
-		Path:    storage.BlobPath(container, blobName),
-		Query:   url.Values{"comp": []string{"metadata"}},
-		Headers: headers,
-	})
+	// The supplied object becomes the blob's ENTIRE metadata set — SetMetadata
+	// replaces, so keys not included here are removed. Required, and blank is
+	// rejected up front (an empty set would silently wipe existing metadata).
+	meta, err := storage.MetadataMap(inputs, "metadata")
 	if err != nil {
 		return storage.ErrorResult(err.Error()), nil
 	}
-	if err := storage.CheckResponse(resp); err != nil {
+	if len(meta) == 0 {
+		return storage.ErrorResult("metadata is required"), nil
+	}
+
+	bc, err := auth.BlobClient(container, blobName)
+	if err != nil {
 		return storage.ErrorResult(err.Error()), nil
 	}
 
-	return storage.ResourceResult(blobName, storage.HeadersResult(blobName, resp.Headers),
+	opts := &blob.SetMetadataOptions{}
+	if lid := storage.LeaseIDPtr(inputs); lid != nil {
+		opts.AccessConditions = &blob.AccessConditions{LeaseAccessConditions: &blob.LeaseAccessConditions{LeaseID: lid}}
+	}
+
+	resp, err := bc.SetMetadata(flow.GoContext(), meta, opts)
+	if err != nil {
+		_, msg := auth.SDKError(err)
+		return storage.ErrorResult(msg), nil
+	}
+
+	return storage.WriteResult(blobName, resp.ETag, resp.LastModified,
 		fmt.Sprintf("Set metadata on %s", blobName)), nil
 }

@@ -1,13 +1,13 @@
 package azure_storage_blob_get_tags
 
 import (
-	"encoding/xml"
 	"fmt"
-	"net/http"
-	"net/url"
 
 	core "flomation.app/automate/executor"
 	storage "flomation.app/automate/executor/actions/azure/storage"
+
+	"github.com/Azure/azure-sdk-for-go/sdk/storage/azblob/blob"
+	"github.com/Azure/azure-sdk-for-go/sdk/storage/azblob/bloberror"
 )
 
 const (
@@ -57,24 +57,40 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 		return storage.ErrorResult(err.Error()), nil
 	}
 
-	resp, err := storage.Do(flow, auth, storage.Request{
-		Method:  http.MethodGet,
-		Path:    storage.BlobPath(container, blobName),
-		Query:   url.Values{"comp": []string{"tags"}},
-		Headers: storage.LeaseHeader(nil, inputs),
-	})
+	bc, err := auth.BlobClient(container, blobName)
 	if err != nil {
 		return storage.ErrorResult(err.Error()), nil
 	}
-	if err := storage.CheckResponse(resp); err != nil {
-		return storage.ErrorResult(err.Error()), nil
+
+	// The lease_id (when set) rides as a lease access-condition, the SDK-native
+	// form of the x-ms-lease-id the REST path sent as an assertion.
+	opts := &blob.GetTagsOptions{}
+	if lid := storage.LeaseIDPtr(inputs); lid != nil {
+		opts.BlobAccessConditions = &blob.AccessConditions{LeaseAccessConditions: &blob.LeaseAccessConditions{LeaseID: lid}}
 	}
 
-	var doc storage.TagsDocument
-	if err := xml.Unmarshal(resp.Body, &doc); err != nil {
-		return storage.ErrorResult(fmt.Sprintf("failed to parse tags response: %s", err.Error())), nil
+	resp, err := bc.GetTags(flow.GoContext(), opts)
+	if err != nil {
+		if storage.HasCode(err, bloberror.BlobNotFound) {
+			return storage.ErrorResult(fmt.Sprintf("blob %q was not found in container %q", blobName, container)), nil
+		}
+		_, msg := auth.SDKError(err)
+		return storage.ErrorResult(msg), nil
 	}
-	tags := doc.TagsMap()
+
+	// Flatten the typed TagSet into the same flat {key:value} object TagsMap
+	// produced — the result is this map directly, as before.
+	tags := map[string]interface{}{}
+	for _, t := range resp.BlobTagSet {
+		if t == nil || t.Key == nil {
+			continue
+		}
+		v := ""
+		if t.Value != nil {
+			v = *t.Value
+		}
+		tags[*t.Key] = v
+	}
 
 	return storage.ResourceResult(blobName, tags,
 		fmt.Sprintf("Fetched %d tags from %s", len(tags), blobName)), nil

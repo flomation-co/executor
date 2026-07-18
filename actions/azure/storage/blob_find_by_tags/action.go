@@ -2,10 +2,11 @@ package azure_storage_blob_find_by_tags
 
 import (
 	"fmt"
-	"net/url"
 
 	core "flomation.app/automate/executor"
 	storage "flomation.app/automate/executor/actions/azure/storage"
+
+	"github.com/Azure/azure-sdk-for-go/sdk/storage/azblob/service"
 )
 
 const (
@@ -51,21 +52,78 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 		return storage.ErrorResult(err.Error()), nil
 	}
 
-	q := url.Values{"comp": []string{"blobs"}, "where": []string{where}}
 	returnAll := storage.OptionalBool("return_all", inputs)
 	limit := storage.ClampLimit(storage.OptionalInt("limit", inputs))
 
-	// Account-wide search: the results carry each blob's container name and
-	// the matched tags, not full properties.
-	_, blobs, truncated, err := storage.ListEnumeration(flow, auth, "/", q, returnAll, limit)
+	svc, err := auth.ServiceClient()
 	if err != nil {
 		return storage.ErrorResult(err.Error()), nil
 	}
 
-	items := make([]interface{}, 0, len(blobs))
-	for _, b := range blobs {
-		items = append(items, storage.BlobMap(b))
+	// maxListPages bounds a return_all marker walk so an account with tens of
+	// millions of tagged blobs can never spin unbounded requests — the same 200
+	// backstop storage.ListEnumeration applies (that const is unexported).
+	const maxListPages = 200
+
+	// Account-wide FilterBlobs search: each match carries its container name and
+	// the matched tags, not full properties. When returning all, walk the marker
+	// at the 5000 page size; otherwise fetch a single page of `limit`.
+	pageSize := int32(limit)
+	if returnAll {
+		pageSize = int32(storage.MaxPageLimit)
 	}
+
+	ctx := flow.GoContext()
+	var marker *string
+	items := make([]interface{}, 0, limit)
+	truncated := false
+	for page := 0; ; page++ {
+		if page >= maxListPages {
+			truncated = true
+			break
+		}
+		size := pageSize
+		resp, err := svc.FilterBlobs(ctx, where, &service.FilterBlobsOptions{Marker: marker, MaxResults: &size})
+		if err != nil {
+			_, msg := auth.SDKError(err)
+			return storage.ErrorResult(msg), nil
+		}
+		for _, b := range resp.Blobs {
+			item := map[string]interface{}{"name": ""}
+			if b.Name != nil {
+				item["name"] = *b.Name
+			}
+			if b.ContainerName != nil && *b.ContainerName != "" {
+				item["container"] = *b.ContainerName
+			}
+			if b.VersionID != nil && *b.VersionID != "" {
+				item["versionId"] = *b.VersionID
+			}
+			if b.IsCurrentVersion != nil {
+				item["isCurrentVersion"] = *b.IsCurrentVersion
+			}
+			if b.Tags != nil {
+				tags := map[string]interface{}{}
+				for _, t := range b.Tags.BlobTagSet {
+					if t == nil || t.Key == nil {
+						continue
+					}
+					v := ""
+					if t.Value != nil {
+						v = *t.Value
+					}
+					tags[*t.Key] = v
+				}
+				item["tags"] = tags
+			}
+			items = append(items, item)
+		}
+		if !returnAll || resp.NextMarker == nil || *resp.NextMarker == "" {
+			break
+		}
+		marker = resp.NextMarker
+	}
+
 	summary := fmt.Sprintf("Found %d blobs matching the tag expression", len(items))
 	if truncated {
 		summary += " (stopped at the pagination safety cap; more remain)"

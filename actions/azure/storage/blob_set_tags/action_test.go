@@ -31,8 +31,9 @@ type tagSet struct {
 	} `xml:"TagSet>Tag"`
 }
 
-// TestExecuteSetsTags — PUT ?comp=tags with an XML TagSet body, keys sorted so
-// the payload (and therefore the signature) is deterministic.
+// TestExecuteSetsTags — PUT ?comp=tags with an XML TagSet body carrying every
+// tag; the SDK owns request signing now, so the body is asserted as a set of
+// key/values rather than pinning a serialisation order.
 func TestExecuteSetsTags(t *testing.T) {
 	var gotMethod, gotPath, gotQuery, gotContentType string
 	var gotBody []byte
@@ -55,7 +56,7 @@ func TestExecuteSetsTags(t *testing.T) {
 	if out["success"] != true {
 		t.Fatalf("error: %v", out["error"])
 	}
-	if gotMethod != http.MethodPut || gotPath != "/my-container/reports/summary%20final.pdf" || gotQuery != "comp=tags" {
+	if gotMethod != http.MethodPut || gotPath != "/my-container/reports%2Fsummary%20final.pdf" || gotQuery != "comp=tags" {
 		t.Errorf("request = %s %s?%s", gotMethod, gotPath, gotQuery)
 	}
 	if !strings.HasPrefix(gotContentType, "application/xml") {
@@ -72,12 +73,14 @@ func TestExecuteSetsTags(t *testing.T) {
 	if len(doc.Tags) != 2 {
 		t.Fatalf("body carried %d tags: %q", len(doc.Tags), gotBody)
 	}
-	// Sorted by key regardless of the order they were supplied in.
-	if doc.Tags[0].Key != "project" || doc.Tags[0].Value != "alpha" {
-		t.Errorf("tag[0] = %+v, want project=alpha first", doc.Tags[0])
+	// Both tags reach the body; the SDK owns the serialisation order now, so
+	// assert them as a set rather than pinning a sort.
+	body := map[string]string{}
+	for _, tag := range doc.Tags {
+		body[tag.Key] = tag.Value
 	}
-	if doc.Tags[1].Key != "status" || doc.Tags[1].Value != "final" {
-		t.Errorf("tag[1] = %+v", doc.Tags[1])
+	if body["project"] != "alpha" || body["status"] != "final" {
+		t.Errorf("tags body = %+v, want project=alpha and status=final", doc.Tags)
 	}
 
 	echo := out["result"].(map[string]interface{})

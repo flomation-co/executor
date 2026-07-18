@@ -52,8 +52,11 @@ func TestExecuteSameAccountCopyCompletesImmediately(t *testing.T) {
 	if requests != 1 {
 		t.Errorf("requests = %d, want 1 (a completed copy must not poll)", requests)
 	}
-	if gotMethod != http.MethodPut || gotPath != "/dest-container/backups/summary.pdf" {
-		t.Errorf("request = %s %s", gotMethod, gotPath)
+	// The SDK owns the destination request path and percent-encodes the whole
+	// blob name (slashes included), so it is only checked loosely; the
+	// per-segment escaping is asserted on the source URL the action builds below.
+	if gotMethod != http.MethodPut || !strings.HasPrefix(gotPath, "/dest-container/") {
+		t.Errorf("request = %s %s, want a PUT under /dest-container/", gotMethod, gotPath)
 	}
 	// The source URL is built on this account, with each name segment escaped.
 	wantSource := srv.URL + "/src-container/reports/summary%20final.pdf"

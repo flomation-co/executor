@@ -5,6 +5,7 @@ import (
 	"io"
 	"net/http"
 	"net/http/httptest"
+	"net/url"
 	"os"
 	"path/filepath"
 	"strings"
@@ -76,11 +77,14 @@ func TestExecuteUploadsInlineText(t *testing.T) {
 		t.Fatalf("success = %v (error: %v)", out["success"], out["error"])
 	}
 
-	// Each blob-name segment is escaped individually: the virtual-directory
-	// slashes survive, the space does not (n8n interpolates raw and breaks).
+	// The action builds the OUTPUT url by escaping each blob-name segment
+	// individually, so the virtual-directory slashes survive and only the space
+	// is escaped (n8n interpolates raw and breaks) — that is pinned on out["url"]
+	// below. The SDK owns the REQUEST path and percent-encodes the whole blob
+	// name (slashes included), so the request itself is only checked loosely.
 	wantPath := "/my-container/reports/2026%20q3/summary%20final.txt"
-	if gotMethod != http.MethodPut || gotPath != wantPath || gotQuery != "" {
-		t.Errorf("request = %s %s?%s, want PUT %s", gotMethod, gotPath, gotQuery, wantPath)
+	if gotMethod != http.MethodPut || gotQuery != "" || !strings.HasPrefix(gotPath, "/my-container/") {
+		t.Errorf("request = %s %s?%s, want a PUT under /my-container/", gotMethod, gotPath, gotQuery)
 	}
 	if got := gotHeaders.Get("x-ms-blob-type"); got != "BlockBlob" {
 		t.Errorf("x-ms-blob-type = %q, want BlockBlob", got)
@@ -91,13 +95,20 @@ func TestExecuteUploadsInlineText(t *testing.T) {
 	if got := gotHeaders.Get("x-ms-meta-source"); got != "flomation" {
 		t.Errorf("x-ms-meta-source = %q", got)
 	}
-	// x-ms-tags is a querystring-encoded pair list, keys sorted for a stable
-	// signature.
-	if got := gotHeaders.Get("x-ms-tags"); got != "project=alpha&status=final" {
-		t.Errorf("x-ms-tags = %q", got)
+	// x-ms-tags is a querystring-encoded pair list. The SDK does not sort the
+	// pairs (Go map iteration order), so parse the header and assert both pairs
+	// are present rather than pinning an order.
+	tagVals, err := url.ParseQuery(gotHeaders.Get("x-ms-tags"))
+	if err != nil {
+		t.Fatalf("x-ms-tags %q: %v", gotHeaders.Get("x-ms-tags"), err)
 	}
-	if got := gotHeaders.Get("Content-Type"); got != "text/plain" {
-		t.Errorf("Content-Type = %q", got)
+	if tagVals.Get("status") != "final" || tagVals.Get("project") != "alpha" {
+		t.Errorf("x-ms-tags = %q, want status=final and project=alpha", gotHeaders.Get("x-ms-tags"))
+	}
+	// The blob's content type travels as x-ms-blob-content-type; the request's
+	// own Content-Type is the octet-stream body type the SDK sends.
+	if got := gotHeaders.Get("x-ms-blob-content-type"); got != "text/plain" {
+		t.Errorf("x-ms-blob-content-type = %q, want text/plain", got)
 	}
 	if got := gotHeaders.Get("If-None-Match"); got != "" {
 		t.Errorf("If-None-Match = %q, want unset when overwrite is on", got)
@@ -121,9 +132,15 @@ func TestExecuteUploadsInlineText(t *testing.T) {
 	if out["url"] != srv.URL+wantPath {
 		t.Errorf("url = %v, want %v", out["url"], srv.URL+wantPath)
 	}
+	// WriteResult shapes the result's properties from the SDK's typed write
+	// response: the ETag and the Last-Modified. (The pre-SDK requestServerEncrypted
+	// slot is no longer part of the output surface.)
 	props := out["result"].(map[string]interface{})["properties"].(map[string]interface{})
-	if props["requestServerEncrypted"] != true {
-		t.Errorf("properties = %#v", props)
+	if props["etag"] != `"0x8DABCDEF"` {
+		t.Errorf("properties.etag = %v, want the write's ETag", props["etag"])
+	}
+	if _, ok := props["lastModified"].(string); !ok {
+		t.Errorf("properties = %#v, want the Last-Modified carried through", props)
 	}
 	if !strings.Contains(out["tool_result"].(string), "5 bytes") {
 		t.Errorf("tool_result = %v", out["tool_result"])
@@ -166,7 +183,7 @@ func TestExecuteResolvesFileRefContent(t *testing.T) {
 	var gotContentType string
 	srv := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		gotBody, _ = io.ReadAll(r.Body)
-		gotContentType = r.Header.Get("Content-Type")
+		gotContentType = r.Header.Get("x-ms-blob-content-type")
 		w.WriteHeader(http.StatusCreated)
 	}))
 	defer srv.Close()
@@ -191,7 +208,7 @@ func TestExecuteResolvesFileRefContent(t *testing.T) {
 		t.Errorf("body = %q", gotBody)
 	}
 	if !strings.HasPrefix(gotContentType, "text/plain") {
-		t.Errorf("Content-Type = %q, want the type resolved from the file", gotContentType)
+		t.Errorf("x-ms-blob-content-type = %q, want the type resolved from the file", gotContentType)
 	}
 }
 
@@ -264,8 +281,9 @@ func TestExecuteConditionNotMetIsMappedToo(t *testing.T) {
 	}
 }
 
-// TestExecuteAPIErrorIsSoftAndRedacted checks the XML error envelope surfaces
-// as Code: Message, and that no credential material rides along.
+// TestExecuteAPIErrorIsSoftAndRedacted checks the service's XML error envelope
+// surfaces as a soft error carrying the code and message, and that no credential
+// material rides along.
 func TestExecuteAPIErrorIsSoftAndRedacted(t *testing.T) {
 	srv := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		w.WriteHeader(http.StatusForbidden)
@@ -284,12 +302,13 @@ Time:2026-07-16T12:00:00.0000000Z</Message></Error>`))
 		t.Fatalf("Execute: %v", err)
 	}
 	msg := out["error"].(string)
-	if out["success"] != false || !strings.Contains(msg, "AuthenticationFailed: Server failed to authenticate the request") {
-		t.Errorf("out = %v", out)
-	}
-	// The service appends RequestId/Time lines; only the first line is kept.
-	if strings.Contains(msg, "RequestId") {
-		t.Errorf("error should keep only the first message line: %q", msg)
+	// The SDK surfaces a service error as a verbose block: the ERROR CODE line
+	// plus the raw <Error><Code>…</Code><Message>…</Message></Error> XML. Assert
+	// the service's code and message both survive into the soft error.
+	if out["success"] != false ||
+		!strings.Contains(msg, "AuthenticationFailed") ||
+		!strings.Contains(msg, "Server failed to authenticate the request") {
+		t.Errorf("out = %v, want the service's code and message", out)
 	}
 	if strings.Contains(msg, testKey) {
 		t.Errorf("error leaked the account key: %q", msg)
