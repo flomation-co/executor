@@ -34,10 +34,13 @@ import (
 	"github.com/Azure/azure-sdk-for-go/sdk/resourcemanager/resources/armresources"
 
 	core "flomation.app/automate/executor"
+	azure "flomation.app/automate/executor/actions/azure"
 )
 
 // Standard input names shared by every Azure Compute action.
 const (
+	InputAuthMethod     = "auth_method"
+	InputCredential     = "credential"
 	InputTenantID       = "azure_tenant_id"
 	InputClientID       = "azure_client_id"
 	InputClientSecret   = "azure_client_secret"
@@ -71,6 +74,25 @@ func GetAuth(inputs []*core.Connection) (Auth, error) {
 		ResourceGroup:  strings.TrimSpace(OptionalString(InputResourceGroup, inputs)),
 		Location:       strings.TrimSpace(OptionalString(InputLocation, inputs)),
 	}
+	if a.SubscriptionID == "" {
+		return Auth{}, fmt.Errorf("subscription ID is required")
+	}
+
+	// "Connect Azure": the operator authorised Flomation's identity, so the
+	// credential input resolves to a short-lived, platform-refreshed bearer token
+	// — no tenant/client/secret needed, and no secret ever reaches the executor.
+	// Any other auth_method (including unset, for flows saved before this option
+	// existed) falls through to the service-principal path below.
+	if strings.TrimSpace(OptionalString(InputAuthMethod, inputs)) == "connect" {
+		bearer := strings.TrimSpace(OptionalString(InputCredential, inputs))
+		if bearer == "" {
+			return Auth{}, fmt.Errorf("connect an Azure account, or switch Authentication to Service Principal (keys)")
+		}
+		a.cred = azure.NewManagedTokenCredential(bearer)
+		return a, nil
+	}
+
+	// Service-principal (keys) path.
 	if a.TenantID == "" {
 		return Auth{}, fmt.Errorf("tenant ID is required")
 	}
@@ -79,9 +101,6 @@ func GetAuth(inputs []*core.Connection) (Auth, error) {
 	}
 	if a.ClientSecret == "" {
 		return Auth{}, fmt.Errorf("client secret is required")
-	}
-	if a.SubscriptionID == "" {
-		return Auth{}, fmt.Errorf("subscription ID is required")
 	}
 	// azidentity validates the tenant too, but its message is about its own API;
 	// this one names the field the operator filled in.
