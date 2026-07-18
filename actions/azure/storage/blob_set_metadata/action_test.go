@@ -45,7 +45,7 @@ func TestExecuteSetsMetadata(t *testing.T) {
 	if out["success"] != true {
 		t.Fatalf("error: %v", out["error"])
 	}
-	if gotMethod != http.MethodPut || gotPath != "/my-container/reports/summary%20final.pdf" || gotQuery != "comp=metadata" {
+	if gotMethod != http.MethodPut || gotPath != "/my-container/reports%2Fsummary%20final.pdf" || gotQuery != "comp=metadata" {
 		t.Errorf("request = %s %s?%s", gotMethod, gotPath, gotQuery)
 	}
 	if got := gotHeaders.Get("x-ms-meta-reviewed"); got != "true" {
@@ -100,7 +100,7 @@ func TestExecuteInvalidMetadataNameIsSoftError(t *testing.T) {
 	if err != nil {
 		t.Fatalf("Execute: %v", err)
 	}
-	if out["success"] != false || !strings.Contains(out["error"].(string), `metadata name "not-valid" is invalid`) {
+	if out["success"] != false || !strings.Contains(out["error"].(string), `metadata key "not-valid" is not a valid C# identifier`) {
 		t.Errorf("out = %v", out)
 	}
 }

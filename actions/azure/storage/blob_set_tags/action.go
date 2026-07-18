@@ -2,11 +2,11 @@ package azure_storage_blob_set_tags
 
 import (
 	"fmt"
-	"net/http"
-	"net/url"
 
 	core "flomation.app/automate/executor"
 	storage "flomation.app/automate/executor/actions/azure/storage"
+
+	"github.com/Azure/azure-sdk-for-go/sdk/storage/azblob/blob"
 )
 
 const (
@@ -67,19 +67,19 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 		return storage.ErrorResult(err.Error()), nil
 	}
 
-	resp, err := storage.Do(flow, auth, storage.Request{
-		Method:      http.MethodPut,
-		Path:        storage.BlobPath(container, blobName),
-		Query:       url.Values{"comp": []string{"tags"}},
-		Headers:     storage.LeaseHeader(nil, inputs),
-		Body:        storage.TagsXMLBody(tags),
-		ContentType: "application/xml; charset=UTF-8",
-	})
+	bc, err := auth.BlobClient(container, blobName)
 	if err != nil {
 		return storage.ErrorResult(err.Error()), nil
 	}
-	if err := storage.CheckResponse(resp); err != nil {
-		return storage.ErrorResult(err.Error()), nil
+
+	// SetTags REPLACES the blob's entire tag set with the supplied map.
+	opts := &blob.SetTagsOptions{}
+	if lid := storage.LeaseIDPtr(inputs); lid != nil {
+		opts.AccessConditions = &blob.AccessConditions{LeaseAccessConditions: &blob.LeaseAccessConditions{LeaseID: lid}}
+	}
+	if _, err := bc.SetTags(flow.GoContext(), tags, opts); err != nil {
+		_, msg := auth.SDKError(err)
+		return storage.ErrorResult(msg), nil
 	}
 
 	echo := make(map[string]interface{}, len(tags))

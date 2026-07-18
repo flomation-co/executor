@@ -43,7 +43,9 @@ func TestExecuteCreatesSnapshot(t *testing.T) {
 	if out["success"] != true {
 		t.Fatalf("error: %v", out["error"])
 	}
-	if gotMethod != http.MethodPut || gotPath != "/my-container/reports/summary%20final.pdf" || gotQuery != "comp=snapshot" {
+	// PUT ?comp=snapshot is what makes this a snapshot call; the SDK escapes the
+	// blob name (spaces and the virtual-directory "/") into one path segment.
+	if gotMethod != http.MethodPut || gotPath != "/my-container/reports%2Fsummary%20final.pdf" || gotQuery != "comp=snapshot" {
 		t.Errorf("request = %s %s?%s", gotMethod, gotPath, gotQuery)
 	}
 	// A bodyless PUT must still declare a zero length — the service requires it.
@@ -76,7 +78,9 @@ func TestExecuteNotFoundIsSoftError(t *testing.T) {
 		t.Fatalf("Execute: %v", err)
 	}
 	msg := out["error"].(string)
-	if out["success"] != false || !strings.Contains(msg, "BlobNotFound: The specified blob does not exist") {
+	// BlobNotFound is intercepted and rendered as the friendly message (the SDK
+	// classified the code, which is what HasCode branches on).
+	if out["success"] != false || !strings.Contains(msg, `blob "missing.pdf" was not found in container "my-container"`) {
 		t.Errorf("out = %v", out)
 	}
 	if strings.Contains(msg, testKey) {

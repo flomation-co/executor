@@ -2,11 +2,12 @@ package azure_storage_blob_snapshot
 
 import (
 	"fmt"
-	"net/http"
-	"net/url"
+	"time"
 
 	core "flomation.app/automate/executor"
 	storage "flomation.app/automate/executor/actions/azure/storage"
+
+	"github.com/Azure/azure-sdk-for-go/sdk/storage/azblob/bloberror"
 )
 
 const (
@@ -56,20 +57,40 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 		return storage.ErrorResult(err.Error()), nil
 	}
 
-	resp, err := storage.Do(flow, auth, storage.Request{
-		Method: http.MethodPut,
-		Path:   storage.BlobPath(container, blobName),
-		Query:  url.Values{"comp": []string{"snapshot"}},
-	})
+	bc, err := auth.BlobClient(container, blobName)
 	if err != nil {
 		return storage.ErrorResult(err.Error()), nil
 	}
-	if err := storage.CheckResponse(resp); err != nil {
-		return storage.ErrorResult(err.Error()), nil
+
+	// This action takes no metadata or lease inputs, so the snapshot inherits
+	// the base blob's metadata and is created unconditionally — a nil options
+	// mirrors the bare PUT ?comp=snapshot the REST path sent.
+	resp, err := bc.CreateSnapshot(flow.GoContext(), nil)
+	if err != nil {
+		if storage.HasCode(err, bloberror.BlobNotFound) {
+			return storage.ErrorResult(fmt.Sprintf("blob %q was not found in container %q", blobName, container)), nil
+		}
+		_, msg := auth.SDKError(err)
+		return storage.ErrorResult(msg), nil
 	}
 
-	snapshot := resp.Headers.Get("x-ms-snapshot")
-	out := storage.ResourceResult(blobName, storage.HeadersResult(blobName, resp.Headers),
+	snapshot := ""
+	if resp.Snapshot != nil {
+		snapshot = *resp.Snapshot
+	}
+
+	// Build the {name, properties} envelope directly (not via WriteResult, which
+	// would add a top-level etag key this action never exposed) so the top-level
+	// output keys stay exactly id/result/snapshot/tool_result/success/error.
+	props := map[string]interface{}{}
+	if resp.ETag != nil {
+		props["etag"] = string(*resp.ETag)
+	}
+	if resp.LastModified != nil {
+		props["lastModified"] = resp.LastModified.UTC().Format(time.RFC1123)
+	}
+
+	out := storage.ResourceResult(blobName, map[string]interface{}{"name": blobName, "properties": props},
 		fmt.Sprintf("Created snapshot %s of %s", snapshot, blobName))
 	out["snapshot"] = snapshot
 	return out, nil

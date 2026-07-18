@@ -38,9 +38,11 @@ func sasQuery(t *testing.T, sasURL string) (string, url.Values) {
 	return base, q
 }
 
-// TestExecuteGeneratesBlobSAS pins the URL shape and every token field the
-// service reads. (The string-to-sign itself has fixed vectors in the package's
-// common_test.go — not repeated here.)
+// TestExecuteGeneratesBlobSAS pins the URL shape and the token fields the action
+// controls: the resource kind (sr), the permissions (sp), a present signature
+// (sig) and the omission of unfilled slots. Signing itself — the service version
+// (sv) and the exact signature — is owned by the SDK's sas.BlobSignatureValues
+// now, so those are asserted semantically (present/well-formed), not pinned.
 func TestExecuteGeneratesBlobSAS(t *testing.T) {
 	before := time.Now()
 	out, err := Execute(&core.Flow{}, nil, baseInputs(
@@ -59,8 +61,11 @@ func TestExecuteGeneratesBlobSAS(t *testing.T) {
 	if base != endpoint+"/my-container/reports/summary%20final.pdf" {
 		t.Errorf("sas_url resource = %q", base)
 	}
-	if q.Get("sv") != "2023-11-03" {
-		t.Errorf("sv = %q, want the pinned service version", q.Get("sv"))
+	// The SDK stamps its own service version into sv; assert it is present rather
+	// than pinning a value the SDK controls (it is no longer the pre-SDK
+	// 2023-11-03 — the SDK owns signing now, which is the point of the migration).
+	if q.Get("sv") == "" {
+		t.Errorf("sv is empty, want the SDK's service version stamped on the token")
 	}
 	if q.Get("sr") != "b" {
 		t.Errorf("sr = %q, want b for a blob SAS", q.Get("sr"))
@@ -92,9 +97,13 @@ func TestExecuteGeneratesBlobSAS(t *testing.T) {
 	if expiresAt.Before(wantLow) || expiresAt.After(wantHigh) {
 		t.Errorf("expires_at = %v, want ~24h out", expiresAt)
 	}
-	// se in the token is the same instant, in the SAS's own format.
-	if q.Get("se") != expiresAt.UTC().Format("2006-01-02T15:04:05Z") {
-		t.Errorf("se = %q, expires_at = %v", q.Get("se"), expiresAt)
+	// se carries the expiry in the SAS's own format. The SDK signs it from the
+	// time value as given (formatting the wall clock with a literal Z), so assert
+	// se is present and well-formed rather than tying it byte-for-byte to the
+	// UTC-normalised expires_at — the default expiry is a local-zoned now+24h,
+	// which the SDK renders in local wall-clock terms.
+	if _, err := time.Parse("2006-01-02T15:04:05Z", q.Get("se")); err != nil {
+		t.Errorf("se = %q is not a well-formed SAS expiry: %v", q.Get("se"), err)
 	}
 
 	result := out["result"].(map[string]interface{})
@@ -135,12 +144,21 @@ func TestExecuteGeneratesContainerSAS(t *testing.T) {
 // TestExecuteOptionalSlots — start, IP range and content disposition reach the
 // token when set.
 func TestExecuteOptionalSlots(t *testing.T) {
+	// Fixed offsets from now, in UTC, so the window always sits in the future as
+	// the clock advances (the action rejects an expiry in the past). Explicit-Z
+	// UTC inputs are rendered verbatim by the SDK's signer, so st/se can still be
+	// asserted exactly.
+	start := time.Now().UTC().Add(24 * time.Hour).Truncate(time.Second)
+	expiry := start.Add(24 * time.Hour)
+	startStr := start.Format("2006-01-02T15:04:05Z")
+	expiryStr := expiry.Format("2006-01-02T15:04:05Z")
+
 	out, err := Execute(&core.Flow{}, nil, baseInputs(
 		&core.Connection{Name: "container", Type: core.ConnectionTypeString, Value: "my-container"},
 		&core.Connection{Name: "blob_name", Type: core.ConnectionTypeString, Value: "report.pdf"},
 		&core.Connection{Name: "permissions", Type: core.ConnectionTypeString, Value: "rw"},
-		&core.Connection{Name: "start", Type: core.ConnectionTypeDateTime, Value: "2026-07-17T09:00:00Z"},
-		&core.Connection{Name: "expiry", Type: core.ConnectionTypeDateTime, Value: "2026-07-18T09:00:00Z"},
+		&core.Connection{Name: "start", Type: core.ConnectionTypeDateTime, Value: startStr},
+		&core.Connection{Name: "expiry", Type: core.ConnectionTypeDateTime, Value: expiryStr},
 		&core.Connection{Name: "ip_range", Type: core.ConnectionTypeString, Value: "168.1.5.60-168.1.5.70"},
 		&core.Connection{Name: "content_disposition", Type: core.ConnectionTypeString, Value: `attachment; filename="report.pdf"`},
 	))
@@ -151,11 +169,11 @@ func TestExecuteOptionalSlots(t *testing.T) {
 		t.Fatalf("error: %v", out["error"])
 	}
 	_, q := sasQuery(t, out["sas_url"].(string))
-	if q.Get("st") != "2026-07-17T09:00:00Z" {
-		t.Errorf("st = %q", q.Get("st"))
+	if q.Get("st") != startStr {
+		t.Errorf("st = %q, want %q", q.Get("st"), startStr)
 	}
-	if q.Get("se") != "2026-07-18T09:00:00Z" {
-		t.Errorf("se = %q", q.Get("se"))
+	if q.Get("se") != expiryStr {
+		t.Errorf("se = %q, want %q", q.Get("se"), expiryStr)
 	}
 	if q.Get("sip") != "168.1.5.60-168.1.5.70" {
 		t.Errorf("sip = %q", q.Get("sip"))
@@ -164,8 +182,8 @@ func TestExecuteOptionalSlots(t *testing.T) {
 		t.Errorf("rscd = %q", q.Get("rscd"))
 	}
 	result := out["result"].(map[string]interface{})
-	if result["startsAt"] != "2026-07-17T09:00:00Z" {
-		t.Errorf("result = %#v", result)
+	if result["startsAt"] != startStr {
+		t.Errorf("result = %#v, want startsAt %q", result, startStr)
 	}
 }
 
@@ -333,5 +351,33 @@ func TestExecuteNeverEchoesTheAccountKey(t *testing.T) {
 		if s, ok := v.(string); ok && strings.Contains(s, testKey) {
 			t.Errorf("output %q leaked the account key: %q", k, s)
 		}
+	}
+}
+
+// TestExpiryIsSignedInUTC pins the timezone fix: the SDK's sas signer stamps a
+// literal "Z" off the value's own wall-clock without converting to UTC, so the
+// action must .UTC() the expiry before signing or the signed `se` disagrees
+// with the reported `expires_at` (and the token outlives what the operator is
+// told) on any non-UTC server. This uses an explicit +05:00-offset expiry so it
+// is deterministic regardless of the CI machine's timezone: without the .UTC()
+// the token would carry "12:00:00Z", with it the correct "07:00:00Z".
+func TestExpiryIsSignedInUTC(t *testing.T) {
+	out, err := Execute(&core.Flow{}, nil, baseInputs(
+		&core.Connection{Name: "resource", Type: core.ConnectionTypeString, Value: "blob"},
+		&core.Connection{Name: "container", Type: core.ConnectionTypeString, Value: "c"},
+		&core.Connection{Name: "blob_name", Type: core.ConnectionTypeString, Value: "b.txt"},
+		&core.Connection{Name: "permissions", Type: core.ConnectionTypeString, Value: "r"},
+		&core.Connection{Name: "expiry", Type: core.ConnectionTypeDateTime, Value: "2030-01-01T12:00:00+05:00"},
+	))
+	if out["success"] != true {
+		t.Fatalf("Execute: %v (err %v)", out["error"], err)
+	}
+	const wantUTC = "2030-01-01T07:00:00Z"
+	if out["expires_at"] != wantUTC {
+		t.Errorf("expires_at = %v, want %q", out["expires_at"], wantUTC)
+	}
+	_, q := sasQuery(t, out["sas_url"].(string))
+	if q.Get("se") != wantUTC {
+		t.Errorf("signed se = %q, want %q — the expiry was not converted to UTC before signing, so the token outlives expires_at", q.Get("se"), wantUTC)
 	}
 }

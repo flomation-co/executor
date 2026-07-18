@@ -3,10 +3,12 @@ package azure_storage_blob_set_tier
 import (
 	"fmt"
 	"net/http"
-	"net/url"
 
 	core "flomation.app/automate/executor"
 	storage "flomation.app/automate/executor/actions/azure/storage"
+
+	"github.com/Azure/azure-sdk-for-go/sdk/azcore/runtime"
+	"github.com/Azure/azure-sdk-for-go/sdk/storage/azblob/blob"
 )
 
 const (
@@ -82,29 +84,32 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 		return storage.ErrorResult(err.Error()), nil
 	}
 
-	headers := map[string]string{"x-ms-access-tier": tier}
-	if priority := storage.OptionalString("rehydrate_priority", inputs); priority != "" {
-		headers["x-ms-rehydrate-priority"] = priority
-	}
-	headers = storage.LeaseHeader(headers, inputs)
-
-	resp, err := storage.Do(flow, auth, storage.Request{
-		Method:  http.MethodPut,
-		Path:    storage.BlobPath(container, blobName),
-		Query:   url.Values{"comp": []string{"tier"}},
-		Headers: headers,
-	})
+	bc, err := auth.BlobClient(container, blobName)
 	if err != nil {
 		return storage.ErrorResult(err.Error()), nil
 	}
-	if err := storage.CheckResponse(resp); err != nil {
-		return storage.ErrorResult(err.Error()), nil
+
+	opts := &blob.SetTierOptions{}
+	if priority := storage.OptionalString("rehydrate_priority", inputs); priority != "" {
+		p := blob.RehydratePriority(priority)
+		opts.RehydratePriority = &p
+	}
+	if lid := storage.LeaseIDPtr(inputs); lid != nil {
+		opts.AccessConditions = &blob.AccessConditions{LeaseAccessConditions: &blob.LeaseAccessConditions{LeaseID: lid}}
 	}
 
-	// 200 = tier changed immediately; 202 = archive rehydration accepted and
-	// running in the background.
+	// Capture the raw response so the 200 (changed now) vs 202 (archive
+	// rehydration accepted, running in the background) distinction survives —
+	// the typed SetTierResponse does not carry the status code.
+	var raw *http.Response
+	ctx := runtime.WithCaptureResponse(flow.GoContext(), &raw)
+	if _, err := bc.SetTier(ctx, blob.AccessTier(tier), opts); err != nil {
+		_, msg := auth.SDKError(err)
+		return storage.ErrorResult(msg), nil
+	}
+
 	summary := fmt.Sprintf("Set tier of %s to %s", blobName, tier)
-	pending := resp.StatusCode == http.StatusAccepted
+	pending := raw != nil && raw.StatusCode == http.StatusAccepted
 	if pending {
 		summary = fmt.Sprintf("Rehydration of %s to %s accepted (runs in the background)", blobName, tier)
 	}

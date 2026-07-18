@@ -2,11 +2,13 @@ package azure_storage_blob_upload_from_url
 
 import (
 	"fmt"
-	"net/http"
 	"net/url"
+	"time"
 
 	core "flomation.app/automate/executor"
 	storage "flomation.app/automate/executor/actions/azure/storage"
+
+	"github.com/Azure/azure-sdk-for-go/sdk/storage/azblob/bloberror"
 )
 
 const (
@@ -63,29 +65,32 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 		return storage.ErrorResult("source_url must be an http(s) URL"), nil
 	}
 
-	// Put Blob From URL requires Content-Length: 0 with an empty body. The
-	// zero-length body signs as an EMPTY Content-Length slot (the
-	// post-2015-02-21 rule) while the wire still carries the header — n8n
-	// dropped the header entirely because it signed the literal "0".
-	resp, err := storage.Do(flow, auth, storage.Request{
-		Method: http.MethodPut,
-		Path:   storage.BlobPath(container, blobName),
-		Query:  url.Values{},
-		Headers: map[string]string{
-			"x-ms-blob-type":   "BlockBlob",
-			"x-ms-copy-source": source,
-		},
-	})
+	// UploadBlobFromURL (Put Blob From URL) is the SYNCHRONOUS server-side
+	// put-from-URL: Azure fetches the source and returns only when the block
+	// blob is written, unlike Copy Blob's async start. Source-blob properties
+	// are copied by default, which preserves the old header-echoed shape.
+	bb, err := auth.BlockBlobClient(container, blobName)
 	if err != nil {
 		return storage.ErrorResult(err.Error()), nil
 	}
-	if err := storage.CheckResponse(resp); err != nil {
-		if code := storage.ErrorCode(resp); code == "CannotVerifyCopySource" {
-			return storage.ErrorResult(fmt.Sprintf("Azure could not fetch the source URL (%s): check it is publicly reachable or carries a valid SAS", code)), nil
+
+	resp, err := bb.UploadBlobFromURL(flow.GoContext(), source, nil)
+	if err != nil {
+		// The source URL may carry a SAS; the friendly message names no URL and
+		// SDKError redacts sig= from anything that does.
+		if storage.HasCode(err, bloberror.CannotVerifyCopySource) {
+			return storage.ErrorResult("Azure could not fetch the source URL (CannotVerifyCopySource): check it is publicly reachable or carries a valid SAS"), nil
 		}
-		return storage.ErrorResult(err.Error()), nil
+		_, msg := auth.SDKError(err)
+		return storage.ErrorResult(msg), nil
 	}
 
-	return storage.ResourceResult(blobName, storage.HeadersResult(blobName, resp.Headers),
-		fmt.Sprintf("Created %s in %s from URL", blobName, container)), nil
+	props := map[string]interface{}{}
+	if resp.ETag != nil {
+		props["etag"] = string(*resp.ETag)
+	}
+	if resp.LastModified != nil {
+		props["lastModified"] = resp.LastModified.UTC().Format(time.RFC1123)
+	}
+	return storage.PropsResult(blobName, fmt.Sprintf("Created %s in %s from URL", blobName, container), props, nil), nil
 }

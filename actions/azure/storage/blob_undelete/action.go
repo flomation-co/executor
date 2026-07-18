@@ -2,11 +2,11 @@ package azure_storage_blob_undelete
 
 import (
 	"fmt"
-	"net/http"
-	"net/url"
 
 	core "flomation.app/automate/executor"
 	storage "flomation.app/automate/executor/actions/azure/storage"
+
+	"github.com/Azure/azure-sdk-for-go/sdk/storage/azblob/blob"
 )
 
 const (
@@ -55,16 +55,14 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 		return storage.ErrorResult(err.Error()), nil
 	}
 
-	resp, err := storage.Do(flow, auth, storage.Request{
-		Method: http.MethodPut,
-		Path:   storage.BlobPath(container, blobName),
-		Query:  url.Values{"comp": []string{"undelete"}},
-	})
+	bc, err := auth.BlobClient(container, blobName)
 	if err != nil {
 		return storage.ErrorResult(err.Error()), nil
 	}
-	if err := storage.CheckResponse(resp); err != nil {
-		return storage.ErrorResult(err.Error()), nil
+
+	if _, err := bc.Undelete(flow.GoContext(), &blob.UndeleteOptions{}); err != nil {
+		_, msg := auth.SDKError(err)
+		return storage.ErrorResult(msg), nil
 	}
 
 	return storage.ResourceResult(blobName, map[string]interface{}{"undeleted": true},

@@ -43,7 +43,7 @@ func TestExecuteSetsTier(t *testing.T) {
 	if out["success"] != true {
 		t.Fatalf("error: %v", out["error"])
 	}
-	if gotMethod != http.MethodPut || gotPath != "/my-container/reports/summary%20final.pdf" || gotQuery != "comp=tier" {
+	if gotMethod != http.MethodPut || gotPath != "/my-container/reports%2Fsummary%20final.pdf" || gotQuery != "comp=tier" {
 		t.Errorf("request = %s %s?%s", gotMethod, gotPath, gotQuery)
 	}
 	if gotTier != "Cool" {
@@ -123,7 +123,10 @@ func TestExecuteArchivedBlobErrorIsSoft(t *testing.T) {
 		t.Fatalf("Execute: %v", err)
 	}
 	msg := out["error"].(string)
-	if out["success"] != false || !strings.Contains(msg, "BlobArchived: This operation is not permitted on an archived blob") {
+	// The SDK renders a verbose error; assert the service error code and the
+	// message text both survive into the operator-facing string.
+	if out["success"] != false || !strings.Contains(msg, "BlobArchived") ||
+		!strings.Contains(msg, "This operation is not permitted on an archived blob") {
 		t.Errorf("out = %v", out)
 	}
 	if strings.Contains(msg, testKey) {

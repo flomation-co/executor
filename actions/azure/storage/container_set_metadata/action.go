@@ -2,11 +2,11 @@ package azure_storage_container_set_metadata
 
 import (
 	"fmt"
-	"net/http"
-	"net/url"
 
 	core "flomation.app/automate/executor"
 	storage "flomation.app/automate/executor/actions/azure/storage"
+
+	"github.com/Azure/azure-sdk-for-go/sdk/storage/azblob/container"
 )
 
 const (
@@ -47,33 +47,35 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	if err != nil {
 		return storage.ErrorResult(err.Error()), nil
 	}
-	container, err := storage.RequiredString("container", inputs)
+	containerName, err := storage.RequiredString("container", inputs)
 	if err != nil {
 		return storage.ErrorResult(err.Error()), nil
 	}
 
-	headers := map[string]string{}
-	if err := storage.MetadataHeaders(headers, inputs, "metadata"); err != nil {
+	meta, err := storage.MetadataMap(inputs, "metadata")
+	if err != nil {
 		return storage.ErrorResult(err.Error()), nil
 	}
-	if len(headers) == 0 {
+	if len(meta) == 0 {
 		return storage.ErrorResult("metadata is required"), nil
 	}
-	headers = storage.LeaseHeader(headers, inputs)
 
-	resp, err := storage.Do(flow, auth, storage.Request{
-		Method:  http.MethodPut,
-		Path:    storage.ContainerPath(container),
-		Query:   url.Values{"restype": []string{"container"}, "comp": []string{"metadata"}},
-		Headers: headers,
-	})
+	cc, err := auth.ContainerClient(containerName)
 	if err != nil {
 		return storage.ErrorResult(err.Error()), nil
 	}
-	if err := storage.CheckResponse(resp); err != nil {
-		return storage.ErrorResult(err.Error()), nil
+
+	opts := &container.SetMetadataOptions{Metadata: meta}
+	if lid := storage.LeaseIDPtr(inputs); lid != nil {
+		opts.LeaseAccessConditions = &container.LeaseAccessConditions{LeaseID: lid}
 	}
 
-	return storage.ResourceResult(container, storage.HeadersResult(container, resp.Headers),
-		fmt.Sprintf("Set metadata on container %s", container)), nil
+	resp, err := cc.SetMetadata(flow.GoContext(), opts)
+	if err != nil {
+		_, msg := auth.SDKError(err)
+		return storage.ErrorResult(msg), nil
+	}
+
+	return storage.WriteResult(containerName, resp.ETag, resp.LastModified,
+		fmt.Sprintf("Set metadata on container %s", containerName)), nil
 }

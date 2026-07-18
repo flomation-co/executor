@@ -18019,7 +18019,7 @@
     ]
   },
   "azure/storage/blob_copy": {
-    "hash": "ce3cdebc084f8e7266748f0bdced35495c8ecfd710c58933da43a6e4368c6bd4",
+    "hash": "2da7c04e4c832e6f11e9c116ef8fe1166d831470bfb0b871cf3dc808b31f7c12",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Azure Storage: Copy Blob",
@@ -18229,7 +18229,7 @@
     ]
   },
   "azure/storage/blob_delete": {
-    "hash": "b6d2cdaf80affe6e3b8388a92648cc70895ac64fd2edb1c4914ecca0810c85ce",
+    "hash": "323f02f068555bd4e0893e3992ff362c938bc7fad3a70f6dbd558f79ba987dc1",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Azure Storage: Delete Blob",
@@ -18425,7 +18425,7 @@
     ]
   },
   "azure/storage/blob_download": {
-    "hash": "a72f997749f5930c6af061ab9e42597ec0a68f2589a525414c0c150b632561c2",
+    "hash": "c173deadd89bbaab18ef6bfa7b54d4db244eff40bde6318afe37d55f5c55038e",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Azure Storage: Download Blob",
@@ -18635,7 +18635,7 @@
     ]
   },
   "azure/storage/blob_find_by_tags": {
-    "hash": "515985ecf1c490fa63a0d1c526674240e6befd0b458e0ad7a800be85e8c9962c",
+    "hash": "a4e73fb0f6b7b1a6496b409a3b4ec317662bfc04d0a39a8f70bbc827ce6962f0",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Azure Storage: Find Blobs by Tags",
@@ -18809,7 +18809,7 @@
     ]
   },
   "azure/storage/blob_generate_sas": {
-    "hash": "bccaee3b24bb6b01d952d3d53176e8f44b7161e4e1c17c3a6dd6cb65c629d1b2",
+    "hash": "2287fdd2eb687d97c448cd608a70d342eed7ca377df8f38df96ee02841db3081",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Azure Storage: Generate SAS Link",
@@ -19063,7 +19063,7 @@
     ]
   },
   "azure/storage/blob_get_all": {
-    "hash": "645133eedd496be3377b5b4959d3619b1dd50f7d413828f30028fc2a47a84073",
+    "hash": "5c4bdaf695e1f08d61d4c03108a44f0708d544f415460c2bfa3f8efa74a31b57",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Azure Storage: List Blobs",
@@ -19301,7 +19301,7 @@
     ]
   },
   "azure/storage/blob_get_properties": {
-    "hash": "cd34d6aa9088371f12e8ad5ad9a78c6fbd3328e60ad98c6866c669d0190f3b12",
+    "hash": "426cb11344bf7fba0267b0a1e06bc1ae79ac88f5f9f2bb83d245d3a19654cd61",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Azure Storage: Get Blob Properties",
@@ -19476,7 +19476,7 @@
     ]
   },
   "azure/storage/blob_get_tags": {
-    "hash": "8cd9bf8b8fceed7969d8f8312e9949b4ede36081149dec43add5e75f32847224",
+    "hash": "73c0015c6e575d0f9a1be1468b2302017f23ee91df2e7c84481ad1e7b9f27367",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Azure Storage: Get Blob Tags",
@@ -19651,7 +19651,7 @@
     ]
   },
   "azure/storage/blob_lease": {
-    "hash": "04d30bdd19e493e0f775bf2610b0f87c6ec653cf488e909d0dc5075696d45171",
+    "hash": "7620a11637eada312f4c1d4ebd75f21e0d7bafe2c38e2fbb73258cceab6ade42",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Azure Storage: Lease Blob",
@@ -19919,7 +19919,7 @@
     ]
   },
   "azure/storage/blob_set_metadata": {
-    "hash": "26601b13aa7f80bd311faa2f67f4e1a6112852a03a819e3c98424935902157db",
+    "hash": "f22bb5a737a393096d37202b8fddb69fd03078fc2e3091bb547ab27f356bb5a1",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Azure Storage: Set Blob Metadata",
@@ -20102,7 +20102,7 @@
     ]
   },
   "azure/storage/blob_set_properties": {
-    "hash": "434281cea35336e93a7e7d42b12668d550d9e5a6b2b517a127b5ffb3c01aec35",
+    "hash": "64ee39d157feca30fa56e38d3472d933cbafcac889ba62ec7e15d6aeedff7329",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Azure Storage: Set Blob Properties",
@@ -20312,7 +20312,7 @@
     ]
   },
   "azure/storage/blob_set_tags": {
-    "hash": "e025bf6075707892c4f9a8181437c03bf62912824867f43ee9b62d6ce672ce80",
+    "hash": "28219e7bb0b4d70c9d3d4462b09ff936d2cbc38df0764524c954a1cdaefc1c0a",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Azure Storage: Set Blob Tags",
@@ -20495,7 +20495,7 @@
     ]
   },
   "azure/storage/blob_set_tier": {
-    "hash": "b69cd1f92fa6592a0d9ffb9595d4584b9272420418d1f20bd5998417afd22c94",
+    "hash": "4d664ab3040743d45f44cd10de1689d3a3dee25be5eb39c3dc0a5217d472a08b",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Azure Storage: Set Blob Tier",
@@ -20717,7 +20717,7 @@
     ]
   },
   "azure/storage/blob_snapshot": {
-    "hash": "f6af37ba336822c4a64bddfc3301c5d99dce0a2d4e77a32c164e493690d004e9",
+    "hash": "832a5c67633bb152d1e0a5cd760d632dd131b5927626d6cfb9f2de423913efd4",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Azure Storage: Snapshot Blob",
@@ -20892,7 +20892,7 @@
     ]
   },
   "azure/storage/blob_undelete": {
-    "hash": "9866eb17764547064cab4e597866b4a90e69736d19d79c92b6f034fcdf0e67c4",
+    "hash": "3df57ff7a0f44a5a8967172c34a00b391ba67b1b78f82e9ced6607031b051603",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Azure Storage: Undelete Blob",
@@ -21060,7 +21060,7 @@
     ]
   },
   "azure/storage/blob_upload": {
-    "hash": "347441b03865db7d1f723212db591f69adc884fdb69c564dc67ad225fcbf4371",
+    "hash": "810a985e0582bfbd95824c04b0c2bdc74f41068702a629eaf251e612b98c531e",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Azure Storage: Upload Blob",
@@ -21314,7 +21314,7 @@
     ]
   },
   "azure/storage/blob_upload_from_url": {
-    "hash": "db09442b5abb30265af47696241e5d2b8099a1fd941b9d76791315f1582a73f0",
+    "hash": "30cb9940619067dcbaea77c385cd80adbc67aef4386ae05a47ee6579a034f407",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Azure Storage: Upload Blob from URL",
@@ -21490,7 +21490,7 @@
     ]
   },
   "azure/storage/container_create": {
-    "hash": "232940d93717f51d97449e0eb98572c734001ddd7066576443f1ed0c2c07a854",
+    "hash": "a4cf0abdc83d011185a8bbc76ea62c93355fa24482d9ba5e2e4c2da356810904",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Azure Storage: Create Container",
@@ -21678,7 +21678,7 @@
     ]
   },
   "azure/storage/container_delete": {
-    "hash": "c129001485cc22b9095e02670f1a7a075cdc991d94dff0b37fca90f152c933a2",
+    "hash": "f1d0224c16cb6aa6a880241736dd06928db4d94f8dc740b322ba7dfbe63bb468",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Azure Storage: Delete Container",
@@ -21845,7 +21845,7 @@
     ]
   },
   "azure/storage/container_get": {
-    "hash": "e3eecd5a4dd4676065a8184f452ccd8942be6ba4a8072e22c4c40977375697c9",
+    "hash": "4cd5f7a5d952d9652ad9e73017497270563de1393188aa8836dc9657eab77ea5",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Azure Storage: Get Container",
@@ -22012,7 +22012,7 @@
     ]
   },
   "azure/storage/container_get_all": {
-    "hash": "069beef50e4f8854bfed628adc3e04750541b68615bdfb50c861bcb982607da9",
+    "hash": "31aebea82eb6d21eb534e868113f8556c023ce004ab2013201ac972b354b02bf",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Azure Storage: List Containers",
@@ -22210,7 +22210,7 @@
     ]
   },
   "azure/storage/container_lease": {
-    "hash": "aa7825068ff58160741b67662648a96fb7c264ac094fe2f7e51dcb34a7ed0984",
+    "hash": "328e27990ceebca49fe97e5f24a340c5cba76078cd6be6c2d4b54baa17e6b78f",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Azure Storage: Lease Container",
@@ -22470,7 +22470,7 @@
     ]
   },
   "azure/storage/container_set_metadata": {
-    "hash": "c1286e593d7fcb1effb6e1f3d77f13b6c9a3873a749b90d9e109231a8a3f1781",
+    "hash": "8020c958c77ed07d1638688b2ead6465ae327b07c3cb458ddea842180c274ab2",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Azure Storage: Set Container Metadata",

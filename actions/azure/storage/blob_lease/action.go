@@ -1,11 +1,14 @@
 package azure_storage_blob_lease
 
 import (
-	"net/http"
-	"net/url"
+	"fmt"
+	"time"
 
 	core "flomation.app/automate/executor"
 	storage "flomation.app/automate/executor/actions/azure/storage"
+
+	"github.com/Azure/azure-sdk-for-go/sdk/azcore"
+	"github.com/Azure/azure-sdk-for-go/sdk/storage/azblob/lease"
 )
 
 const (
@@ -97,22 +100,161 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	if err != nil {
 		return storage.ErrorResult(err.Error()), nil
 	}
+	// BuildLeaseCall still validates the action, the duration bounds and the
+	// proposed-lease-id GUID form — only the transport moves to the SDK. Its
+	// x-ms-* Headers are unused here; the lease subpackage sets them itself.
 	call, err := storage.BuildLeaseCall(inputs)
 	if err != nil {
 		return storage.ErrorResult(err.Error()), nil
 	}
 
-	resp, err := storage.Do(flow, auth, storage.Request{
-		Method:  http.MethodPut,
-		Path:    storage.BlobPath(container, blobName),
-		Query:   url.Values{"comp": []string{"lease"}},
-		Headers: call.Headers,
-	})
+	bc, err := auth.BlobClient(container, blobName)
 	if err != nil {
 		return storage.ErrorResult(err.Error()), nil
 	}
-	if err := storage.CheckResponse(resp); err != nil {
-		return storage.ErrorResult(err.Error()), nil
+	ctx := flow.GoContext()
+
+	// fail redacts and shapes any SDK/client error the same way across branches.
+	fail := func(err error) (map[string]interface{}, error) {
+		_, msg := auth.SDKError(err)
+		return storage.ErrorResult(msg), nil
 	}
-	return storage.LeaseResult(call, blobName, blobName, resp), nil
+
+	// The lease subpackage carries the lease ID on the CLIENT (as proposed-id on
+	// acquire, current-id on renew/change/release), so each action builds its
+	// lease client from the right ID. leaseID/leaseTime mirror the two headers
+	// LeaseResult reads: x-ms-lease-id and x-ms-lease-time.
+	var (
+		leaseID   string
+		leaseTime int
+		etag      *azcore.ETag
+		lm        *time.Time
+	)
+
+	switch call.Action {
+	case storage.LeaseAcquire:
+		// Blank proposed ⇒ nil options ⇒ the SDK mints a client-side GUID and
+		// sends it as x-ms-proposed-lease-id; the response echoes it back as the
+		// lease ID, so lease_id is populated exactly as the server-mint path was.
+		var opts *lease.BlobClientOptions
+		if proposed := storage.OptionalString("proposed_lease_id", inputs); proposed != "" {
+			opts = &lease.BlobClientOptions{LeaseID: &proposed}
+		}
+		lc, err := lease.NewBlobClient(bc, opts)
+		if err != nil {
+			return fail(err)
+		}
+		resp, err := lc.AcquireLease(ctx, int32(call.Duration), nil)
+		if err != nil {
+			return fail(err)
+		}
+		if resp.LeaseID != nil {
+			leaseID = *resp.LeaseID
+		}
+		etag, lm = resp.ETag, resp.LastModified
+
+	case storage.LeaseRenew:
+		currentID := storage.OptionalString("lease_id", inputs)
+		lc, err := lease.NewBlobClient(bc, &lease.BlobClientOptions{LeaseID: &currentID})
+		if err != nil {
+			return fail(err)
+		}
+		resp, err := lc.RenewLease(ctx, nil)
+		if err != nil {
+			return fail(err)
+		}
+		if resp.LeaseID != nil {
+			leaseID = *resp.LeaseID
+		}
+		etag, lm = resp.ETag, resp.LastModified
+
+	case storage.LeaseChange:
+		currentID := storage.OptionalString("lease_id", inputs)
+		proposed := storage.OptionalString("proposed_lease_id", inputs)
+		lc, err := lease.NewBlobClient(bc, &lease.BlobClientOptions{LeaseID: &currentID})
+		if err != nil {
+			return fail(err)
+		}
+		resp, err := lc.ChangeLease(ctx, proposed, nil)
+		if err != nil {
+			return fail(err)
+		}
+		if resp.LeaseID != nil {
+			leaseID = *resp.LeaseID
+		}
+		etag, lm = resp.ETag, resp.LastModified
+
+	case storage.LeaseRelease:
+		currentID := storage.OptionalString("lease_id", inputs)
+		lc, err := lease.NewBlobClient(bc, &lease.BlobClientOptions{LeaseID: &currentID})
+		if err != nil {
+			return fail(err)
+		}
+		resp, err := lc.ReleaseLease(ctx, nil)
+		if err != nil {
+			return fail(err)
+		}
+		// Release returns no x-ms-lease-id — the lease is gone; leaseID stays "".
+		etag, lm = resp.ETag, resp.LastModified
+
+	case storage.LeaseBreak:
+		// Break needs no lease ID; only the optional break period. -1 (unset)
+		// means the service uses the remaining lease time.
+		var opts *lease.BlobBreakOptions
+		if call.BreakPeriod >= 0 {
+			period := int32(call.BreakPeriod)
+			opts = &lease.BlobBreakOptions{BreakPeriod: &period}
+		}
+		lc, err := lease.NewBlobClient(bc, nil)
+		if err != nil {
+			return fail(err)
+		}
+		resp, err := lc.BreakLease(ctx, opts)
+		if err != nil {
+			return fail(err)
+		}
+		// x-ms-lease-time: seconds a broken lease still has to run (0 ⇒ gone).
+		if resp.LeaseTime != nil {
+			leaseTime = int(*resp.LeaseTime)
+		}
+		etag, lm = resp.ETag, resp.LastModified
+	}
+
+	props := map[string]interface{}{}
+	if etag != nil {
+		props["etag"] = string(*etag)
+	}
+	if lm != nil {
+		props["lastModified"] = lm.UTC().Format(time.RFC1123)
+	}
+
+	// Summary strings reproduced verbatim from storage.LeaseResult.
+	target := blobName
+	var summary string
+	switch call.Action {
+	case storage.LeaseAcquire:
+		if call.Duration == storage.LeaseInfiniteDuration {
+			summary = fmt.Sprintf("Acquired an infinite lease on %s", target)
+		} else {
+			summary = fmt.Sprintf("Acquired a %ds lease on %s", call.Duration, target)
+		}
+	case storage.LeaseRenew:
+		summary = fmt.Sprintf("Renewed the lease on %s", target)
+	case storage.LeaseChange:
+		summary = fmt.Sprintf("Changed the lease ID on %s", target)
+	case storage.LeaseRelease:
+		summary = fmt.Sprintf("Released the lease on %s", target)
+	case storage.LeaseBreak:
+		if leaseTime > 0 {
+			summary = fmt.Sprintf("Broke the lease on %s — it ends in %ds", target, leaseTime)
+		} else {
+			summary = fmt.Sprintf("Broke the lease on %s", target)
+		}
+	}
+
+	result := map[string]interface{}{"name": blobName, "properties": props, "leaseAction": call.Action}
+	out := storage.ResourceResult(blobName, result, summary)
+	out["lease_id"] = leaseID
+	out["lease_time"] = leaseTime
+	return out, nil
 }

@@ -59,7 +59,8 @@ func TestExecuteDownloadsTextBlob(t *testing.T) {
 	ws := chdirWorkspace(t)
 	var gotMethod, gotPath, gotRange string
 	srv := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		gotMethod, gotPath, gotRange = r.Method, r.URL.EscapedPath(), r.Header.Get("Range")
+		// Azure's SDK sends the range as x-ms-range, not the HTTP Range header.
+		gotMethod, gotPath, gotRange = r.Method, r.URL.EscapedPath(), r.Header.Get("x-ms-range")
 		w.Header().Set("Content-Type", "text/plain; charset=utf-8")
 		w.Header().Set("ETag", `"0x1"`)
 		w.Header().Set("x-ms-blob-type", "BlockBlob")
@@ -78,11 +79,13 @@ func TestExecuteDownloadsTextBlob(t *testing.T) {
 	if out["success"] != true {
 		t.Fatalf("error: %v", out["error"])
 	}
-	if gotMethod != http.MethodGet || gotPath != "/my-container/reports/2026%20q3/summary.txt" {
+	// The SDK escapes the blob name (spaces and the virtual-directory "/") into one
+	// path segment.
+	if gotMethod != http.MethodGet || gotPath != "/my-container/reports%2F2026%20q3%2Fsummary.txt" {
 		t.Errorf("request = %s %s", gotMethod, gotPath)
 	}
 	if gotRange != "" {
-		t.Errorf("Range = %q, want unset for a whole-blob download", gotRange)
+		t.Errorf("x-ms-range = %q, want unset for a whole-blob download", gotRange)
 	}
 
 	// The bytes always travel as a reference; the inline copy is a convenience.
@@ -111,7 +114,8 @@ func TestExecuteRangeRequest(t *testing.T) {
 	ws := chdirWorkspace(t)
 	var gotRange string
 	srv := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		gotRange = r.Header.Get("Range")
+		// The SDK carries the byte range in x-ms-range, not the HTTP Range header.
+		gotRange = r.Header.Get("x-ms-range")
 		w.Header().Set("Content-Type", "text/plain")
 		w.Header().Set("Content-Range", "bytes 0-4/11")
 		w.WriteHeader(http.StatusPartialContent)
@@ -259,7 +263,9 @@ func TestExecuteNotFoundIsSoftError(t *testing.T) {
 		t.Fatalf("Execute: %v", err)
 	}
 	msg := out["error"].(string)
-	if out["success"] != false || !strings.Contains(msg, "BlobNotFound: The specified blob does not exist") {
+	// BlobNotFound is intercepted and rendered as the friendly message (the SDK
+	// classified the code, which is what HasCode branches on).
+	if out["success"] != false || !strings.Contains(msg, `blob "missing.txt" was not found in "my-container"`) {
 		t.Errorf("out = %v", out)
 	}
 	if strings.Contains(msg, testKey) {

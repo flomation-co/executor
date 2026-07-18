@@ -2,11 +2,12 @@ package azure_storage_container_delete
 
 import (
 	"fmt"
-	"net/http"
-	"net/url"
 
 	core "flomation.app/automate/executor"
 	storage "flomation.app/automate/executor/actions/azure/storage"
+
+	"github.com/Azure/azure-sdk-for-go/sdk/storage/azblob/bloberror"
+	"github.com/Azure/azure-sdk-for-go/sdk/storage/azblob/container"
 )
 
 const (
@@ -46,24 +47,31 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	if err != nil {
 		return storage.ErrorResult(err.Error()), nil
 	}
-	container, err := storage.RequiredString("container", inputs)
+	containerName, err := storage.RequiredString("container", inputs)
 	if err != nil {
 		return storage.ErrorResult(err.Error()), nil
 	}
 
-	resp, err := storage.Do(flow, auth, storage.Request{
-		Method:  http.MethodDelete,
-		Path:    storage.ContainerPath(container),
-		Query:   url.Values{"restype": []string{"container"}},
-		Headers: storage.LeaseHeader(nil, inputs),
-	})
+	cc, err := auth.ContainerClient(containerName)
 	if err != nil {
 		return storage.ErrorResult(err.Error()), nil
 	}
-	if err := storage.CheckResponse(resp); err != nil {
-		return storage.ErrorResult(err.Error()), nil
+
+	opts := &container.DeleteOptions{}
+	if lid := storage.LeaseIDPtr(inputs); lid != nil {
+		opts.AccessConditions = &container.AccessConditions{
+			LeaseAccessConditions: &container.LeaseAccessConditions{LeaseID: lid},
+		}
 	}
 
-	return storage.ResourceResult(container, map[string]interface{}{"deleted": true},
-		fmt.Sprintf("Deleted container %s", container)), nil
+	if _, err := cc.Delete(flow.GoContext(), opts); err != nil {
+		if storage.HasCode(err, bloberror.ContainerNotFound) {
+			return storage.ErrorResult(fmt.Sprintf("container %q does not exist", containerName)), nil
+		}
+		_, msg := auth.SDKError(err)
+		return storage.ErrorResult(msg), nil
+	}
+
+	return storage.ResourceResult(containerName, map[string]interface{}{"deleted": true},
+		fmt.Sprintf("Deleted container %s", containerName)), nil
 }

@@ -3,11 +3,25 @@ package azure_storage_container_get_all
 import (
 	"net/http"
 	"net/http/httptest"
+	"sort"
 	"strings"
 	"testing"
 
 	core "flomation.app/automate/executor"
 )
+
+// sortedCSV normalises a comma-separated token list to a canonical order so an
+// assertion on WHICH include tokens reached the wire does not depend on the
+// SDK's own serialization order — the action's contract is the set of tokens it
+// sends (validated, trimmed, lowercased), not the ordering, which the SDK owns.
+func sortedCSV(s string) string {
+	if s == "" {
+		return ""
+	}
+	parts := strings.Split(s, ",")
+	sort.Strings(parts)
+	return strings.Join(parts, ",")
+}
 
 const testKey = "Eby8vdM02xNOcqFlqUwJPLlmEtlCDXJ1OUzFT50uSRZ6IFsuFq2UVErCz4I6tq/K1SZFPTOtr/KBHBeksoGMGw=="
 
@@ -91,8 +105,8 @@ func TestExecuteIncludeReachesSoftDeletedAndSystemContainers(t *testing.T) {
 		if out["success"] != true {
 			t.Fatalf("Execute(%q): %v", tc.in, out["error"])
 		}
-		if gotInclude != tc.want {
-			t.Errorf("include=%q on the wire for input %q, want %q", gotInclude, tc.in, tc.want)
+		if sortedCSV(gotInclude) != sortedCSV(tc.want) {
+			t.Errorf("include=%q on the wire for input %q, want the tokens of %q", gotInclude, tc.in, tc.want)
 		}
 	}
 

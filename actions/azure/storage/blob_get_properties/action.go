@@ -1,12 +1,15 @@
 package azure_storage_blob_get_properties
 
 import (
+	"encoding/base64"
 	"fmt"
-	"net/http"
-	"net/url"
+	"time"
 
 	core "flomation.app/automate/executor"
 	storage "flomation.app/automate/executor/actions/azure/storage"
+
+	"github.com/Azure/azure-sdk-for-go/sdk/storage/azblob/blob"
+	"github.com/Azure/azure-sdk-for-go/sdk/storage/azblob/bloberror"
 )
 
 const (
@@ -56,22 +59,115 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 		return storage.ErrorResult(err.Error()), nil
 	}
 
-	// HEAD carries everything in response headers — n8n's "get" downloads the
-	// whole body just to learn the same properties. A HEAD error has no XML
-	// body either; CheckResponse falls back to the x-ms-error-code header.
-	resp, err := storage.Do(flow, auth, storage.Request{
-		Method:  http.MethodHead,
-		Path:    storage.BlobPath(container, blobName),
-		Query:   url.Values{},
-		Headers: storage.LeaseHeader(nil, inputs),
-	})
+	bc, err := auth.BlobClient(container, blobName)
 	if err != nil {
 		return storage.ErrorResult(err.Error()), nil
 	}
-	if err := storage.CheckResponse(resp); err != nil {
-		return storage.ErrorResult(err.Error()), nil
+
+	// GetProperties is a HEAD under the hood — it returns everything in typed
+	// header fields without downloading the body. The lease_id (when set) rides
+	// as a lease access-condition, the SDK-native form of the x-ms-lease-id the
+	// REST path sent as an assertion.
+	opts := &blob.GetPropertiesOptions{}
+	if lid := storage.LeaseIDPtr(inputs); lid != nil {
+		opts.AccessConditions = &blob.AccessConditions{LeaseAccessConditions: &blob.LeaseAccessConditions{LeaseID: lid}}
 	}
 
-	return storage.ResourceResult(blobName, storage.HeadersResult(blobName, resp.Headers),
-		fmt.Sprintf("Fetched properties of %s", blobName)), nil
+	resp, err := bc.GetProperties(flow.GoContext(), opts)
+	if err != nil {
+		if storage.HasCode(err, bloberror.BlobNotFound) {
+			return storage.ErrorResult(fmt.Sprintf("blob %q was not found in container %q", blobName, container)), nil
+		}
+		_, msg := auth.SDKError(err)
+		return storage.ErrorResult(msg), nil
+	}
+
+	// Rebuild the {properties} map from the SDK's typed fields, using the same
+	// camelCase keys the header path produced — the result object is opaque, so
+	// only the top-level output surface must stay identical.
+	props := map[string]interface{}{}
+	if resp.ETag != nil {
+		props["etag"] = string(*resp.ETag)
+	}
+	if resp.LastModified != nil {
+		props["lastModified"] = resp.LastModified.UTC().Format(time.RFC1123)
+	}
+	if resp.CreationTime != nil {
+		props["creationTime"] = resp.CreationTime.UTC().Format(time.RFC1123)
+	}
+	if resp.ContentLength != nil {
+		props["contentLength"] = *resp.ContentLength
+	}
+	if resp.ContentType != nil {
+		props["contentType"] = *resp.ContentType
+	}
+	if resp.ContentEncoding != nil {
+		props["contentEncoding"] = *resp.ContentEncoding
+	}
+	if resp.ContentLanguage != nil {
+		props["contentLanguage"] = *resp.ContentLanguage
+	}
+	if resp.ContentDisposition != nil {
+		props["contentDisposition"] = *resp.ContentDisposition
+	}
+	if resp.CacheControl != nil {
+		props["cacheControl"] = *resp.CacheControl
+	}
+	if len(resp.ContentMD5) > 0 {
+		props["contentMD5"] = base64.StdEncoding.EncodeToString(resp.ContentMD5)
+	}
+	if resp.BlobType != nil {
+		props["blobType"] = string(*resp.BlobType)
+	}
+	if resp.AccessTier != nil {
+		props["accessTier"] = *resp.AccessTier
+	}
+	if resp.AccessTierInferred != nil {
+		props["accessTierInferred"] = *resp.AccessTierInferred
+	}
+	if resp.ArchiveStatus != nil {
+		props["archiveStatus"] = *resp.ArchiveStatus
+	}
+	if resp.LeaseStatus != nil {
+		props["leaseStatus"] = string(*resp.LeaseStatus)
+	}
+	if resp.LeaseState != nil {
+		props["leaseState"] = string(*resp.LeaseState)
+	}
+	if resp.LeaseDuration != nil {
+		props["leaseDuration"] = string(*resp.LeaseDuration)
+	}
+	if resp.IsServerEncrypted != nil {
+		props["serverEncrypted"] = *resp.IsServerEncrypted
+	}
+	if resp.VersionID != nil {
+		props["versionId"] = *resp.VersionID
+	}
+	if resp.IsCurrentVersion != nil {
+		props["isCurrentVersion"] = *resp.IsCurrentVersion
+	}
+	if resp.TagCount != nil {
+		props["tagCount"] = *resp.TagCount
+	}
+	if resp.CopyStatus != nil {
+		props["copyStatus"] = string(*resp.CopyStatus)
+	}
+	if resp.CopyID != nil {
+		props["copyId"] = *resp.CopyID
+	}
+	if resp.CopyProgress != nil {
+		props["copyProgress"] = *resp.CopyProgress
+	}
+	if resp.CopySource != nil {
+		props["copySource"] = *resp.CopySource
+	}
+	if resp.CopyCompletionTime != nil {
+		props["copyCompletionTime"] = resp.CopyCompletionTime.UTC().Format(time.RFC1123)
+	}
+	if resp.CopyStatusDescription != nil {
+		props["copyStatusDescription"] = *resp.CopyStatusDescription
+	}
+
+	return storage.PropsResult(blobName, fmt.Sprintf("Fetched properties of %s", blobName),
+		props, storage.StrMeta(resp.Metadata)), nil
 }

@@ -1,12 +1,18 @@
 package azure_storage_blob_upload
 
 import (
+	"bytes"
 	"fmt"
-	"net/http"
-	"net/url"
 
 	core "flomation.app/automate/executor"
 	storage "flomation.app/automate/executor/actions/azure/storage"
+
+	"github.com/Azure/azure-sdk-for-go/sdk/azcore"
+	"github.com/Azure/azure-sdk-for-go/sdk/azcore/streaming"
+	"github.com/Azure/azure-sdk-for-go/sdk/azcore/to"
+	"github.com/Azure/azure-sdk-for-go/sdk/storage/azblob/blob"
+	"github.com/Azure/azure-sdk-for-go/sdk/storage/azblob/bloberror"
+	"github.com/Azure/azure-sdk-for-go/sdk/storage/azblob/blockblob"
 )
 
 const (
@@ -94,15 +100,8 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 		contentType = "application/octet-stream"
 	}
 
-	// This action writes block blobs only (x-ms-blob-type: BlockBlob). Page
-	// and append blobs need alignment/append-block protocols that a single
-	// Put Blob cannot express — n8n offers the dropdown, but only BlockBlob
-	// actually works there either.
-	headers := map[string]string{"x-ms-blob-type": "BlockBlob"}
-	if tier := storage.OptionalString("access_tier", inputs); tier != "" {
-		headers["x-ms-access-tier"] = tier
-	}
-	if err := storage.MetadataHeaders(headers, inputs, "metadata"); err != nil {
+	meta, err := storage.MetadataMap(inputs, "metadata")
+	if err != nil {
 		return storage.ErrorResult(err.Error()), nil
 	}
 	tags, err := storage.StringMapInput("tags", inputs)
@@ -113,37 +112,53 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 		if err := storage.ValidateTags(tags); err != nil {
 			return storage.ErrorResult(err.Error()), nil
 		}
-		headers["x-ms-tags"] = storage.TagsHeaderValue(tags)
+	}
+
+	// This action writes block blobs only. Page and append blobs need
+	// alignment/append-block protocols a single Put Blob cannot express — n8n
+	// offers the dropdown, but only BlockBlob actually works there either.
+	bb, err := auth.BlockBlobClient(container, blobName)
+	if err != nil {
+		return storage.ErrorResult(err.Error()), nil
+	}
+
+	opts := &blockblob.UploadOptions{
+		HTTPHeaders: &blob.HTTPHeaders{BlobContentType: &contentType},
+		Metadata:    meta,
+	}
+	if len(tags) > 0 {
+		opts.Tags = tags
+	}
+	if tier := storage.OptionalString("access_tier", inputs); tier != "" {
+		at := blob.AccessTier(tier)
+		opts.Tier = &at
+	}
+	ac := &blob.AccessConditions{}
+	if lid := storage.LeaseIDPtr(inputs); lid != nil {
+		ac.LeaseAccessConditions = &blob.LeaseAccessConditions{LeaseID: lid}
 	}
 	if !storage.BoolDefaultTrue("overwrite", inputs) {
 		// If-None-Match: * makes the create conditional on absence — the
 		// service answers 409 BlobAlreadyExists instead of replacing.
-		headers["If-None-Match"] = "*"
+		ac.ModifiedAccessConditions = &blob.ModifiedAccessConditions{IfNoneMatch: to.Ptr(azcore.ETagAny)}
 	}
-	headers = storage.LeaseHeader(headers, inputs)
+	if ac.LeaseAccessConditions != nil || ac.ModifiedAccessConditions != nil {
+		opts.AccessConditions = ac
+	}
 
-	path := storage.BlobPath(container, blobName)
-	resp, err := storage.Do(flow, auth, storage.Request{
-		Method:      http.MethodPut,
-		Path:        path,
-		Query:       url.Values{},
-		Headers:     headers,
-		Body:        body,
-		ContentType: contentType,
-	})
+	// Single Put Blob (blockblob.Upload), preserving this action's contract —
+	// the platform caps content at its download/upload ceiling upstream.
+	resp, err := bb.Upload(flow.GoContext(), streaming.NopCloser(bytes.NewReader(body)), opts)
 	if err != nil {
-		return storage.ErrorResult(err.Error()), nil
-	}
-	if err := storage.CheckResponse(resp); err != nil {
-		if code := storage.ErrorCode(resp); code == "BlobAlreadyExists" || code == "ConditionNotMet" {
+		if storage.HasCode(err, bloberror.BlobAlreadyExists) || storage.HasCode(err, bloberror.ConditionNotMet) {
 			return storage.ErrorResult(fmt.Sprintf("blob %q already exists in %q and Overwrite is off", blobName, container)), nil
 		}
-		return storage.ErrorResult(err.Error()), nil
+		_, msg := auth.SDKError(err)
+		return storage.ErrorResult(msg), nil
 	}
 
-	out := storage.ResourceResult(blobName, storage.HeadersResult(blobName, resp.Headers),
+	out := storage.WriteResult(blobName, resp.ETag, resp.LastModified,
 		fmt.Sprintf("Uploaded %s to %s (%d bytes)", blobName, container, len(body)))
-	out["etag"] = resp.Headers.Get("ETag")
-	out["url"] = auth.BaseURL + path
+	out["url"] = auth.BaseURL + storage.BlobPath(container, blobName)
 	return out, nil
 }

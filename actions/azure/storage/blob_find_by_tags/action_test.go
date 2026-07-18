@@ -203,8 +203,13 @@ func TestExecuteBadExpressionIsSoftError(t *testing.T) {
 		t.Fatalf("Execute: %v", err)
 	}
 	msg := out["error"].(string)
-	if out["success"] != false || !strings.Contains(msg, "InvalidQueryParameterValue: Error parsing query") {
-		t.Errorf("out = %v", out)
+	// The SDK surfaces the service error as a verbose block (ERROR CODE line plus
+	// the raw <Error><Code>…</Code><Message>…</Message></Error> XML); the code and
+	// the parse message must both survive into the soft error.
+	if out["success"] != false ||
+		!strings.Contains(msg, "InvalidQueryParameterValue") ||
+		!strings.Contains(msg, "Error parsing query") {
+		t.Errorf("out = %v, want the service's code and parse message", out)
 	}
 	if strings.Contains(msg, testKey) {
 		t.Errorf("error leaked the account key: %q", msg)

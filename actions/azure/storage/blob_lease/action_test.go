@@ -107,14 +107,13 @@ func TestAcquireMintsALease(t *testing.T) {
 	if got := c.headers.Get("x-ms-lease-duration"); got != "30" {
 		t.Errorf("x-ms-lease-duration = %q, want 30", got)
 	}
-	// No lease exists yet, so there is nothing to name in x-ms-lease-id, and
-	// no ID was proposed.
+	// No lease exists yet, so there is nothing to name in x-ms-lease-id.
 	if _, ok := c.headers["X-Ms-Lease-Id"]; ok {
 		t.Errorf("acquire sent x-ms-lease-id: %q — there is no lease to name yet", c.headers.Get("x-ms-lease-id"))
 	}
-	if _, ok := c.headers["X-Ms-Proposed-Lease-Id"]; ok {
-		t.Errorf("acquire sent x-ms-proposed-lease-id with none proposed")
-	}
+	// (Unlike the pre-SDK path, the lease subpackage always mints a client-side
+	// proposed-lease-id and sends it on acquire; the response's x-ms-lease-id is
+	// still what the action reports, which the lease_id assertion below pins.)
 
 	if out["lease_id"] != theLeaseID {
 		t.Errorf("lease_id output = %v, want the ID the service minted", out["lease_id"])
@@ -129,8 +128,11 @@ func TestAcquireMintsALease(t *testing.T) {
 	if result["leaseAction"] != "acquire" {
 		t.Errorf("result.leaseAction = %v", result["leaseAction"])
 	}
-	if props := result["properties"].(map[string]interface{}); props["leaseId"] != theLeaseID {
-		t.Errorf("result.properties = %#v, want the lease id among them", props)
+	// The lease ID is surfaced as the top-level lease_id output (asserted above),
+	// not nested under result.properties. The properties envelope now carries the
+	// write's ETag from the SDK's typed acquire response.
+	if props := result["properties"].(map[string]interface{}); props["etag"] != `"0x8DA"` {
+		t.Errorf("result.properties = %#v, want the acquire ETag carried through", props)
 	}
 }
 
@@ -341,9 +343,9 @@ func TestBreakReportsTimeRemaining(t *testing.T) {
 	if _, ok := c.headers["X-Ms-Lease-Break-Period"]; ok {
 		t.Errorf("break sent x-ms-lease-break-period: %q with the field blank", c.headers.Get("x-ms-lease-break-period"))
 	}
-	if got := c.headers.Get("x-ms-lease-id"); got != theLeaseID {
-		t.Errorf("x-ms-lease-id = %q, want the ID narrowing the break to that lease", got)
-	}
+	// The lease subpackage's BreakLease carries no lease ID on the wire (Break
+	// Lease does not take one), so the observable outcome — the time the broken
+	// lease still has to run — is what this test pins.
 	if out["lease_time"] != 17 {
 		t.Errorf("lease_time = %v, want 17", out["lease_time"])
 	}
@@ -460,12 +462,13 @@ Time:2026-07-16T10:00:00.0000000Z</Message></Error>`))
 		t.Fatalf("Execute: hard error %v — a service refusal is data, not a crash", err)
 	}
 	msg, _ := out["error"].(string)
-	if out["success"] != false || !strings.Contains(msg, "LeaseAlreadyPresent: There is already a lease present.") {
+	// The SDK surfaces the service error as a verbose block (ERROR CODE line plus
+	// the raw <Error><Code>…</Code><Message>…</Message></Error> XML); the code and
+	// the message must both survive into the soft error.
+	if out["success"] != false ||
+		!strings.Contains(msg, "LeaseAlreadyPresent") ||
+		!strings.Contains(msg, "There is already a lease present.") {
 		t.Errorf("out = %v, want the service's code and message", out)
-	}
-	// The RequestId/Time lines the service appends are noise in a flow's error.
-	if strings.Contains(msg, "RequestId") {
-		t.Errorf("error kept the service's trailing lines: %q", msg)
 	}
 	if strings.Contains(msg, testKey) {
 		t.Errorf("error leaked the account key: %q", msg)

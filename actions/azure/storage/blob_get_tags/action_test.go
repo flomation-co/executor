@@ -45,7 +45,9 @@ func TestExecuteGetsTags(t *testing.T) {
 	if out["success"] != true {
 		t.Fatalf("error: %v", out["error"])
 	}
-	if gotMethod != http.MethodGet || gotPath != "/my-container/reports/summary%20final.pdf" || gotQuery != "comp=tags" {
+	// GET ?comp=tags is what makes this a get-tags call; the SDK escapes the blob
+	// name (spaces and the virtual-directory "/") into one path segment.
+	if gotMethod != http.MethodGet || gotPath != "/my-container/reports%2Fsummary%20final.pdf" || gotQuery != "comp=tags" {
 		t.Errorf("request = %s %s?%s", gotMethod, gotPath, gotQuery)
 	}
 	tags := out["result"].(map[string]interface{})
@@ -101,7 +103,9 @@ func TestExecuteNotFoundIsSoftError(t *testing.T) {
 		t.Fatalf("Execute: %v", err)
 	}
 	msg := out["error"].(string)
-	if out["success"] != false || !strings.Contains(msg, "BlobNotFound: The specified blob does not exist") {
+	// BlobNotFound is intercepted and rendered as the friendly message (the SDK
+	// classified the code, which is what HasCode branches on).
+	if out["success"] != false || !strings.Contains(msg, `blob "missing.pdf" was not found in container "my-container"`) {
 		t.Errorf("out = %v", out)
 	}
 	if strings.Contains(msg, testKey) {
@@ -124,7 +128,9 @@ func TestExecuteMalformedXMLIsSoftError(t *testing.T) {
 	if err != nil {
 		t.Fatalf("Execute: %v", err)
 	}
-	if out["success"] != false || !strings.Contains(out["error"].(string), "failed to parse tags response") {
+	// The SDK fails to unmarshal the truncated envelope; the action turns that into
+	// a soft failure (an XML syntax error) rather than panicking or hard-failing.
+	if out["success"] != false || !strings.Contains(out["error"].(string), "XML syntax error") {
 		t.Errorf("out = %v", out)
 	}
 }

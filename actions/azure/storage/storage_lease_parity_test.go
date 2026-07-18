@@ -112,7 +112,7 @@ func runLeaseParity(t *testing.T, c leaseParityCase, leaseID string) (sent strin
 			c.respond(w)
 			return
 		}
-		w.WriteHeader(http.StatusOK)
+		leaseParityDefaultRespond(w, r)
 	}))
 	defer srv.Close()
 
@@ -203,5 +203,28 @@ func TestLeaseParityCasesCoverEveryLeaseAction(t *testing.T) {
 		if !covered[id] {
 			t.Errorf("%s: declares lease_id but no lease-parity case proves it is sent", id)
 		}
+	}
+}
+
+// leaseParityDefaultRespond returns a response the azblob SDK accepts as success
+// for each operation the parity cases drive. The old REST code was happy with a
+// bare 200; the SDK checks the status per operation (201 create, 202
+// delete/accepted, 204 for set-tags) and reads ETag/Last-Modified, so a generic
+// 200 makes those actions soft-fail before the header assertion runs. The point
+// of the test is only the x-ms-lease-id header parity, so this just makes every
+// case's request complete successfully.
+func leaseParityDefaultRespond(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("ETag", `"0x8DPARITYTEST"`)
+	w.Header().Set("Last-Modified", "Fri, 18 Jul 2026 10:00:00 GMT")
+	q := r.URL.Query()
+	switch {
+	case r.Method == http.MethodDelete:
+		w.WriteHeader(http.StatusAccepted) // 202 — blob/container delete
+	case r.Method == http.MethodPut && q.Get("comp") == "tags":
+		w.WriteHeader(http.StatusNoContent) // 204 — set tags
+	case r.Method == http.MethodPut && q.Get("comp") == "" && q.Get("restype") != "container":
+		w.WriteHeader(http.StatusCreated) // 201 — block blob upload
+	default:
+		w.WriteHeader(http.StatusOK) // set metadata/properties/tier, container create/get/set
 	}
 }

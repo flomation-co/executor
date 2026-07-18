@@ -2,11 +2,14 @@ package azure_storage_blob_generate_sas
 
 import (
 	"fmt"
+	"net"
 	"strings"
 	"time"
 
 	core "flomation.app/automate/executor"
 	storage "flomation.app/automate/executor/actions/azure/storage"
+
+	"github.com/Azure/azure-sdk-for-go/sdk/storage/azblob/sas"
 )
 
 const (
@@ -156,10 +159,51 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 		return storage.ErrorResult("expiry is in the past"), nil
 	}
 
-	token, err := storage.BuildServiceSAS(auth, params)
+	// The service SAS is signed by the SDK now (sas.BlobSignatureValues), not
+	// by a hand-rolled string-to-sign. This is the whole point of the migration
+	// as it applies to signing: the Blob SAS layout is exactly the kind of
+	// slot-order detail that is better owned by code Microsoft maintains — and
+	// the sibling File SAS (azure/files, still REST) proved in wave 2 how a
+	// one-slot mistake ships a 100%-broken link that only a live fetch catches.
+	//
+	// The permission string is still validated in canonical order above (so an
+	// operator learns the rule rather than getting a silently reordered token),
+	// then handed straight to the SDK. No Protocol (spr) is set — matching the
+	// pre-SDK token, so the link works over http against Azurite as well as
+	// https against real Azure.
+	cred, err := auth.SharedKeyCredential()
 	if err != nil {
 		return storage.ErrorResult(err.Error()), nil
 	}
+	// .UTC() is load-bearing. The SDK's sas signer formats st/se with a literal
+	// "Z" suffix taken from the value's OWN wall-clock — it does NOT convert to
+	// UTC first. So a local-zoned expiry (the default path is time.Now().Add(),
+	// which is server-local) would be stamped e.g. "11:00:00Z" while the real
+	// instant is 10:00 UTC, and the token would outlive the expires_at output
+	// (computed via .UTC()) by the server's UTC offset. Harmless on a UTC
+	// server; wrong by an hour on a BST one. Convert here so the signed token
+	// and the reported expiry always agree, on any server timezone.
+	vals := sas.BlobSignatureValues{
+		StartTime:          params.Start.UTC(), // zero value stays zero → omitted (st)
+		ExpiryTime:         params.Expiry.UTC(),
+		Permissions:        params.Permissions,
+		ContainerName:      container,
+		BlobName:           params.Blob, // "" for a container SAS
+		ContentDisposition: params.ContentDisposition,
+	}
+	if params.IP != "" {
+		ipRange, err := parseSASIPRange(params.IP)
+		if err != nil {
+			return storage.ErrorResult(err.Error()), nil
+		}
+		vals.IPRange = ipRange
+	}
+	qp, err := vals.SignWithSharedKey(cred)
+	if err != nil {
+		_, msg := auth.SDKError(err)
+		return storage.ErrorResult(fmt.Sprintf("failed to sign the SAS: %s", msg)), nil
+	}
+	token := qp.Encode()
 
 	expiresAt := params.Expiry.UTC().Format(time.RFC3339)
 	sasURL := auth.BaseURL + resourcePath + "?" + token
@@ -178,4 +222,31 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	out["sas_token"] = token
 	out["expires_at"] = expiresAt
 	return out, nil
+}
+
+// parseSASIPRange turns the ip_range input ("1.2.3.4" or "1.2.3.4-5.6.7.8")
+// into the SDK's IPRange. The pre-SDK token placed the raw string into sip
+// verbatim; the SDK formats it from net.IP, so an invalid value now fails by
+// rule here rather than producing a token the service silently rejects.
+//
+// net.ParseIP also accepts IPv6, and the SDK formats it into sip without error
+// (verified) — but Azure's SAS signed-IP restriction is IPv4-only, so an IPv6
+// range yields a token the service refuses at fetch time. That is unchanged
+// from the pre-SDK pass-through, so it is left as-is rather than rejected here.
+func parseSASIPRange(raw string) (sas.IPRange, error) {
+	var r sas.IPRange
+	parts := strings.SplitN(raw, "-", 2)
+	start := net.ParseIP(strings.TrimSpace(parts[0]))
+	if start == nil {
+		return r, fmt.Errorf("ip_range start %q is not a valid IP address", strings.TrimSpace(parts[0]))
+	}
+	r.Start = start
+	if len(parts) == 2 {
+		end := net.ParseIP(strings.TrimSpace(parts[1]))
+		if end == nil {
+			return r, fmt.Errorf("ip_range end %q is not a valid IP address", strings.TrimSpace(parts[1]))
+		}
+		r.End = end
+	}
+	return r, nil
 }
