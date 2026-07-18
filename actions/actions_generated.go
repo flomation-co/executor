@@ -77,6 +77,23 @@ import (
 	aws_s3_get "flomation.app/automate/executor/actions/aws/s3/get"
 	aws_s3_list "flomation.app/automate/executor/actions/aws/s3/list"
 	aws_s3_put "flomation.app/automate/executor/actions/aws/s3/put"
+	azure_compute_disk_get_all "flomation.app/automate/executor/actions/azure/compute/disk_get_all"
+	azure_compute_image_get_all "flomation.app/automate/executor/actions/azure/compute/image_get_all"
+	azure_compute_nsg_add_inbound_rule "flomation.app/automate/executor/actions/azure/compute/nsg_add_inbound_rule"
+	azure_compute_nsg_create "flomation.app/automate/executor/actions/azure/compute/nsg_create"
+	azure_compute_nsg_delete "flomation.app/automate/executor/actions/azure/compute/nsg_delete"
+	azure_compute_nsg_get_all "flomation.app/automate/executor/actions/azure/compute/nsg_get_all"
+	azure_compute_nsg_remove_inbound_rule "flomation.app/automate/executor/actions/azure/compute/nsg_remove_inbound_rule"
+	azure_compute_resource_tag_set "flomation.app/automate/executor/actions/azure/compute/resource_tag_set"
+	azure_compute_snapshot_create "flomation.app/automate/executor/actions/azure/compute/snapshot_create"
+	azure_compute_snapshot_get_all "flomation.app/automate/executor/actions/azure/compute/snapshot_get_all"
+	azure_compute_ssh_key_get_all "flomation.app/automate/executor/actions/azure/compute/ssh_key_get_all"
+	azure_compute_vm_create "flomation.app/automate/executor/actions/azure/compute/vm_create"
+	azure_compute_vm_deallocate "flomation.app/automate/executor/actions/azure/compute/vm_deallocate"
+	azure_compute_vm_delete "flomation.app/automate/executor/actions/azure/compute/vm_delete"
+	azure_compute_vm_get_all "flomation.app/automate/executor/actions/azure/compute/vm_get_all"
+	azure_compute_vm_restart "flomation.app/automate/executor/actions/azure/compute/vm_restart"
+	azure_compute_vm_start "flomation.app/automate/executor/actions/azure/compute/vm_start"
 	azure_cosmosdb_container_create "flomation.app/automate/executor/actions/azure/cosmosdb/container_create"
 	azure_cosmosdb_container_delete "flomation.app/automate/executor/actions/azure/cosmosdb/container_delete"
 	azure_cosmosdb_container_get "flomation.app/automate/executor/actions/azure/cosmosdb/container_get"
@@ -1548,6 +1565,23 @@ var Actions = map[string]core.Action{
 	"aws/s3/get":                                                     aws_s3_get.Execute,
 	"aws/s3/list":                                                    aws_s3_list.Execute,
 	"aws/s3/put":                                                     aws_s3_put.Execute,
+	"azure/compute/disk_get_all":                                     azure_compute_disk_get_all.Execute,
+	"azure/compute/image_get_all":                                    azure_compute_image_get_all.Execute,
+	"azure/compute/nsg_add_inbound_rule":                             azure_compute_nsg_add_inbound_rule.Execute,
+	"azure/compute/nsg_create":                                       azure_compute_nsg_create.Execute,
+	"azure/compute/nsg_delete":                                       azure_compute_nsg_delete.Execute,
+	"azure/compute/nsg_get_all":                                      azure_compute_nsg_get_all.Execute,
+	"azure/compute/nsg_remove_inbound_rule":                          azure_compute_nsg_remove_inbound_rule.Execute,
+	"azure/compute/resource_tag_set":                                 azure_compute_resource_tag_set.Execute,
+	"azure/compute/snapshot_create":                                  azure_compute_snapshot_create.Execute,
+	"azure/compute/snapshot_get_all":                                 azure_compute_snapshot_get_all.Execute,
+	"azure/compute/ssh_key_get_all":                                  azure_compute_ssh_key_get_all.Execute,
+	"azure/compute/vm_create":                                        azure_compute_vm_create.Execute,
+	"azure/compute/vm_deallocate":                                    azure_compute_vm_deallocate.Execute,
+	"azure/compute/vm_delete":                                        azure_compute_vm_delete.Execute,
+	"azure/compute/vm_get_all":                                       azure_compute_vm_get_all.Execute,
+	"azure/compute/vm_restart":                                       azure_compute_vm_restart.Execute,
+	"azure/compute/vm_start":                                         azure_compute_vm_start.Execute,
 	"azure/cosmosdb/container_create":                                azure_cosmosdb_container_create.Execute,
 	"azure/cosmosdb/container_delete":                                azure_cosmosdb_container_delete.Execute,
 	"azure/cosmosdb/container_get":                                   azure_cosmosdb_container_get.Execute,

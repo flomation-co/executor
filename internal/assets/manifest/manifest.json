@@ -7732,6 +7732,1940 @@
       }
     ]
   },
+  "azure/compute/disk_get_all": {
+    "hash": "5ebd96ef6798cde0b1a966b51c11d7eb8cebb80664f1aae38f76d3b523c528d4",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Azure Disk: List Managed Disks",
+    "description": "List managed disks in a resource group (or across the whole subscription), with size, SKU and the VM each is attached to.",
+    "website": "https://www.flomation.co",
+    "icon": "azure+database",
+    "date": "18/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Azure",
+      "icon": "azure",
+      "description": "Microsoft Azure integrations"
+    },
+    "sub_category": {
+      "name": "Virtual Machines",
+      "icon": "server",
+      "description": "Azure Virtual Machines — lifecycle, network security groups, disks, snapshots, images, SSH keys and tags"
+    },
+    "inputs": [
+      {
+        "name": "azure_tenant_id",
+        "type": "string",
+        "value": null,
+        "label": "Tenant ID",
+        "placeholder": "Directory (tenant) ID — a GUID or your-tenant.onmicrosoft.com",
+        "required": true
+      },
+      {
+        "name": "azure_client_id",
+        "type": "string",
+        "value": null,
+        "label": "Client ID",
+        "placeholder": "Application (client) ID of the service principal",
+        "required": true
+      },
+      {
+        "name": "azure_client_secret",
+        "type": "secret",
+        "value": null,
+        "label": "Client Secret",
+        "placeholder": "The app needs a role (e.g. Reader) on the subscription or resource group",
+        "required": true
+      },
+      {
+        "name": "subscription_id",
+        "type": "string",
+        "value": null,
+        "label": "Subscription ID",
+        "placeholder": "Azure subscription GUID",
+        "required": true
+      },
+      {
+        "name": "resource_group",
+        "type": "string",
+        "value": null,
+        "label": "Resource Group",
+        "placeholder": "Leave blank to list across the whole subscription (optional)"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "disks",
+        "type": "object",
+        "value": null,
+        "label": "Disks",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Count",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "azure/compute/image_get_all": {
+    "hash": "99340fa03724535e7306d2cfe46867329f57375c98e2b4bd24cbafb844deb16e",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Azure Image: List Custom Images",
+    "description": "List custom managed images in a resource group (or across the whole subscription). Marketplace images are selected by publisher/offer/sku when creating a VM.",
+    "website": "https://www.flomation.co",
+    "icon": "azure+image",
+    "date": "18/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Azure",
+      "icon": "azure",
+      "description": "Microsoft Azure integrations"
+    },
+    "sub_category": {
+      "name": "Virtual Machines",
+      "icon": "server",
+      "description": "Azure Virtual Machines — lifecycle, network security groups, disks, snapshots, images, SSH keys and tags"
+    },
+    "inputs": [
+      {
+        "name": "azure_tenant_id",
+        "type": "string",
+        "value": null,
+        "label": "Tenant ID",
+        "placeholder": "Directory (tenant) ID — a GUID or your-tenant.onmicrosoft.com",
+        "required": true
+      },
+      {
+        "name": "azure_client_id",
+        "type": "string",
+        "value": null,
+        "label": "Client ID",
+        "placeholder": "Application (client) ID of the service principal",
+        "required": true
+      },
+      {
+        "name": "azure_client_secret",
+        "type": "secret",
+        "value": null,
+        "label": "Client Secret",
+        "placeholder": "The app needs a role (e.g. Reader) on the subscription or resource group",
+        "required": true
+      },
+      {
+        "name": "subscription_id",
+        "type": "string",
+        "value": null,
+        "label": "Subscription ID",
+        "placeholder": "Azure subscription GUID",
+        "required": true
+      },
+      {
+        "name": "resource_group",
+        "type": "string",
+        "value": null,
+        "label": "Resource Group",
+        "placeholder": "Leave blank to list across the whole subscription (optional)"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "images",
+        "type": "object",
+        "value": null,
+        "label": "Images",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Count",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "azure/compute/nsg_add_inbound_rule": {
+    "hash": "2dc341c384e5f83ce91642257bc6825e05c910b69127d709cacd45ec013064f6",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Azure NSG: Add Inbound Rule",
+    "description": "Add or update an inbound rule on a Network Security Group (protocol, ports, source/destination, allow or deny).",
+    "website": "https://www.flomation.co",
+    "icon": "azure+plus",
+    "date": "18/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Azure",
+      "icon": "azure",
+      "description": "Microsoft Azure integrations"
+    },
+    "sub_category": {
+      "name": "Virtual Machines",
+      "icon": "server",
+      "description": "Azure Virtual Machines — lifecycle, network security groups, disks, snapshots, images, SSH keys and tags"
+    },
+    "inputs": [
+      {
+        "name": "azure_tenant_id",
+        "type": "string",
+        "value": null,
+        "label": "Tenant ID",
+        "placeholder": "Directory (tenant) ID — a GUID or your-tenant.onmicrosoft.com",
+        "required": true
+      },
+      {
+        "name": "azure_client_id",
+        "type": "string",
+        "value": null,
+        "label": "Client ID",
+        "placeholder": "Application (client) ID of the service principal",
+        "required": true
+      },
+      {
+        "name": "azure_client_secret",
+        "type": "secret",
+        "value": null,
+        "label": "Client Secret",
+        "placeholder": "The app needs a role (e.g. Network Contributor) on the resource group",
+        "required": true
+      },
+      {
+        "name": "subscription_id",
+        "type": "string",
+        "value": null,
+        "label": "Subscription ID",
+        "placeholder": "Azure subscription GUID",
+        "required": true
+      },
+      {
+        "name": "resource_group",
+        "type": "string",
+        "value": null,
+        "label": "Resource Group",
+        "placeholder": "my-resource-group",
+        "required": true
+      },
+      {
+        "name": "nsg_name",
+        "type": "string",
+        "value": null,
+        "label": "Security Group Name",
+        "placeholder": "my-nsg",
+        "required": true
+      },
+      {
+        "name": "rule_name",
+        "type": "string",
+        "value": null,
+        "label": "Rule Name",
+        "placeholder": "allow-ssh",
+        "required": true
+      },
+      {
+        "name": "priority",
+        "type": "integer",
+        "value": null,
+        "label": "Priority",
+        "placeholder": "100–4096; lower wins",
+        "required": true
+      },
+      {
+        "name": "protocol",
+        "type": "string",
+        "value": null,
+        "label": "Protocol",
+        "placeholder": "",
+        "required": true,
+        "options": [
+          {
+            "name": "TCP",
+            "value": "Tcp"
+          },
+          {
+            "name": "UDP",
+            "value": "Udp"
+          },
+          {
+            "name": "Any",
+            "value": "*"
+          }
+        ]
+      },
+      {
+        "name": "destination_port_range",
+        "type": "string",
+        "value": null,
+        "label": "Destination Port(s)",
+        "placeholder": "22, or 80, or a range 8000-8100, or * for any",
+        "required": true
+      },
+      {
+        "name": "access",
+        "type": "string",
+        "value": null,
+        "label": "Access",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "Allow",
+            "value": "Allow"
+          },
+          {
+            "name": "Deny",
+            "value": "Deny"
+          }
+        ]
+      },
+      {
+        "name": "source_address_prefix",
+        "type": "string",
+        "value": null,
+        "label": "Source Address",
+        "placeholder": "* (any), a CIDR like 10.0.0.0/24, or a tag like Internet — default *"
+      },
+      {
+        "name": "source_port_range",
+        "type": "string",
+        "value": null,
+        "label": "Source Port(s)",
+        "placeholder": "* (any) — default *"
+      },
+      {
+        "name": "destination_address_prefix",
+        "type": "string",
+        "value": null,
+        "label": "Destination Address",
+        "placeholder": "* (any), a CIDR, or a tag like VirtualNetwork — default *"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "name",
+        "type": "string",
+        "value": null,
+        "label": "Rule Name",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "azure/compute/nsg_create": {
+    "hash": "ac161647ec1c50339a25ec25e92595302a9acf5720295c2f91fdab2ad0f9c07e",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Azure NSG: Create Security Group",
+    "description": "Create a Network Security Group. It starts with Azure's default rules; add your own with the Add Inbound Rule action.",
+    "website": "https://www.flomation.co",
+    "icon": "azure+lock",
+    "date": "18/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Azure",
+      "icon": "azure",
+      "description": "Microsoft Azure integrations"
+    },
+    "sub_category": {
+      "name": "Virtual Machines",
+      "icon": "server",
+      "description": "Azure Virtual Machines — lifecycle, network security groups, disks, snapshots, images, SSH keys and tags"
+    },
+    "inputs": [
+      {
+        "name": "azure_tenant_id",
+        "type": "string",
+        "value": null,
+        "label": "Tenant ID",
+        "placeholder": "Directory (tenant) ID — a GUID or your-tenant.onmicrosoft.com",
+        "required": true
+      },
+      {
+        "name": "azure_client_id",
+        "type": "string",
+        "value": null,
+        "label": "Client ID",
+        "placeholder": "Application (client) ID of the service principal",
+        "required": true
+      },
+      {
+        "name": "azure_client_secret",
+        "type": "secret",
+        "value": null,
+        "label": "Client Secret",
+        "placeholder": "The app needs a role (e.g. Network Contributor) on the resource group",
+        "required": true
+      },
+      {
+        "name": "subscription_id",
+        "type": "string",
+        "value": null,
+        "label": "Subscription ID",
+        "placeholder": "Azure subscription GUID",
+        "required": true
+      },
+      {
+        "name": "resource_group",
+        "type": "string",
+        "value": null,
+        "label": "Resource Group",
+        "placeholder": "my-resource-group",
+        "required": true
+      },
+      {
+        "name": "nsg_name",
+        "type": "string",
+        "value": null,
+        "label": "Security Group Name",
+        "placeholder": "my-nsg",
+        "required": true
+      },
+      {
+        "name": "location",
+        "type": "string",
+        "value": null,
+        "label": "Location",
+        "placeholder": "uksouth",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "NSG Resource ID",
+        "placeholder": ""
+      },
+      {
+        "name": "name",
+        "type": "string",
+        "value": null,
+        "label": "Security Group Name",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "azure/compute/nsg_delete": {
+    "hash": "361f7e965bbd29e0db7ef8d9675f08a79c47c2abb00c2e8e28694188e3c9a071",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Azure NSG: Delete Security Group",
+    "description": "Delete a Network Security Group. Azure refuses if it is still attached to a subnet or network interface.",
+    "website": "https://www.flomation.co",
+    "icon": "azure+trash",
+    "date": "18/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Azure",
+      "icon": "azure",
+      "description": "Microsoft Azure integrations"
+    },
+    "sub_category": {
+      "name": "Virtual Machines",
+      "icon": "server",
+      "description": "Azure Virtual Machines — lifecycle, network security groups, disks, snapshots, images, SSH keys and tags"
+    },
+    "inputs": [
+      {
+        "name": "azure_tenant_id",
+        "type": "string",
+        "value": null,
+        "label": "Tenant ID",
+        "placeholder": "Directory (tenant) ID — a GUID or your-tenant.onmicrosoft.com",
+        "required": true
+      },
+      {
+        "name": "azure_client_id",
+        "type": "string",
+        "value": null,
+        "label": "Client ID",
+        "placeholder": "Application (client) ID of the service principal",
+        "required": true
+      },
+      {
+        "name": "azure_client_secret",
+        "type": "secret",
+        "value": null,
+        "label": "Client Secret",
+        "placeholder": "The app needs a role (e.g. Network Contributor) on the resource group",
+        "required": true
+      },
+      {
+        "name": "subscription_id",
+        "type": "string",
+        "value": null,
+        "label": "Subscription ID",
+        "placeholder": "Azure subscription GUID",
+        "required": true
+      },
+      {
+        "name": "resource_group",
+        "type": "string",
+        "value": null,
+        "label": "Resource Group",
+        "placeholder": "my-resource-group",
+        "required": true
+      },
+      {
+        "name": "nsg_name",
+        "type": "string",
+        "value": null,
+        "label": "Security Group Name",
+        "placeholder": "my-nsg",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "name",
+        "type": "string",
+        "value": null,
+        "label": "Security Group Name",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "azure/compute/nsg_get_all": {
+    "hash": "aa28ddef2dd272f3593bafb5158b85e63878e7892f52b3cc014c462229774f5d",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Azure NSG: List Security Groups",
+    "description": "List Network Security Groups in a resource group (or across the whole subscription), with their location, rule count and tags.",
+    "website": "https://www.flomation.co",
+    "icon": "azure+list",
+    "date": "18/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Azure",
+      "icon": "azure",
+      "description": "Microsoft Azure integrations"
+    },
+    "sub_category": {
+      "name": "Virtual Machines",
+      "icon": "server",
+      "description": "Azure Virtual Machines — lifecycle, network security groups, disks, snapshots, images, SSH keys and tags"
+    },
+    "inputs": [
+      {
+        "name": "azure_tenant_id",
+        "type": "string",
+        "value": null,
+        "label": "Tenant ID",
+        "placeholder": "Directory (tenant) ID — a GUID or your-tenant.onmicrosoft.com",
+        "required": true
+      },
+      {
+        "name": "azure_client_id",
+        "type": "string",
+        "value": null,
+        "label": "Client ID",
+        "placeholder": "Application (client) ID of the service principal",
+        "required": true
+      },
+      {
+        "name": "azure_client_secret",
+        "type": "secret",
+        "value": null,
+        "label": "Client Secret",
+        "placeholder": "The app needs a role (e.g. Reader) on the subscription or resource group",
+        "required": true
+      },
+      {
+        "name": "subscription_id",
+        "type": "string",
+        "value": null,
+        "label": "Subscription ID",
+        "placeholder": "Azure subscription GUID",
+        "required": true
+      },
+      {
+        "name": "resource_group",
+        "type": "string",
+        "value": null,
+        "label": "Resource Group",
+        "placeholder": "Leave blank to list across the whole subscription (optional)"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "network_security_groups",
+        "type": "object",
+        "value": null,
+        "label": "Network Security Groups",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Count",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "azure/compute/nsg_remove_inbound_rule": {
+    "hash": "6674c11cb92b39699ff67d661a4ac50d29334cad607c01d87daa312001324043",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Azure NSG: Remove Inbound Rule",
+    "description": "Remove a named rule from a Network Security Group.",
+    "website": "https://www.flomation.co",
+    "icon": "azure+minus",
+    "date": "18/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Azure",
+      "icon": "azure",
+      "description": "Microsoft Azure integrations"
+    },
+    "sub_category": {
+      "name": "Virtual Machines",
+      "icon": "server",
+      "description": "Azure Virtual Machines — lifecycle, network security groups, disks, snapshots, images, SSH keys and tags"
+    },
+    "inputs": [
+      {
+        "name": "azure_tenant_id",
+        "type": "string",
+        "value": null,
+        "label": "Tenant ID",
+        "placeholder": "Directory (tenant) ID — a GUID or your-tenant.onmicrosoft.com",
+        "required": true
+      },
+      {
+        "name": "azure_client_id",
+        "type": "string",
+        "value": null,
+        "label": "Client ID",
+        "placeholder": "Application (client) ID of the service principal",
+        "required": true
+      },
+      {
+        "name": "azure_client_secret",
+        "type": "secret",
+        "value": null,
+        "label": "Client Secret",
+        "placeholder": "The app needs a role (e.g. Network Contributor) on the resource group",
+        "required": true
+      },
+      {
+        "name": "subscription_id",
+        "type": "string",
+        "value": null,
+        "label": "Subscription ID",
+        "placeholder": "Azure subscription GUID",
+        "required": true
+      },
+      {
+        "name": "resource_group",
+        "type": "string",
+        "value": null,
+        "label": "Resource Group",
+        "placeholder": "my-resource-group",
+        "required": true
+      },
+      {
+        "name": "nsg_name",
+        "type": "string",
+        "value": null,
+        "label": "Security Group Name",
+        "placeholder": "my-nsg",
+        "required": true
+      },
+      {
+        "name": "rule_name",
+        "type": "string",
+        "value": null,
+        "label": "Rule Name",
+        "placeholder": "allow-ssh",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "name",
+        "type": "string",
+        "value": null,
+        "label": "Rule Name",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "azure/compute/resource_tag_set": {
+    "hash": "e2ddf731cb3a40b31295f073a94ef4999bc23f9af0c95f7c93bd43ecd9e1fd4f",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Azure Resource: Set Tags",
+    "description": "Add or update tags on any Azure resource by its ARM ID. Existing tags are preserved; only the supplied keys are added or overwritten.",
+    "website": "https://www.flomation.co",
+    "icon": "azure+bookmark",
+    "date": "18/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Azure",
+      "icon": "azure",
+      "description": "Microsoft Azure integrations"
+    },
+    "sub_category": {
+      "name": "Virtual Machines",
+      "icon": "server",
+      "description": "Azure Virtual Machines — lifecycle, network security groups, disks, snapshots, images, SSH keys and tags"
+    },
+    "inputs": [
+      {
+        "name": "azure_tenant_id",
+        "type": "string",
+        "value": null,
+        "label": "Tenant ID",
+        "placeholder": "Directory (tenant) ID — a GUID or your-tenant.onmicrosoft.com",
+        "required": true
+      },
+      {
+        "name": "azure_client_id",
+        "type": "string",
+        "value": null,
+        "label": "Client ID",
+        "placeholder": "Application (client) ID of the service principal",
+        "required": true
+      },
+      {
+        "name": "azure_client_secret",
+        "type": "secret",
+        "value": null,
+        "label": "Client Secret",
+        "placeholder": "The app needs a role (e.g. Tag Contributor) on the resource",
+        "required": true
+      },
+      {
+        "name": "subscription_id",
+        "type": "string",
+        "value": null,
+        "label": "Subscription ID",
+        "placeholder": "Azure subscription GUID",
+        "required": true
+      },
+      {
+        "name": "resource_id",
+        "type": "string",
+        "value": null,
+        "label": "Resource ID",
+        "placeholder": "Full ARM ID — /subscriptions/.../resourceGroups/.../providers/.../my-resource",
+        "required": true
+      },
+      {
+        "name": "tags",
+        "type": "string",
+        "value": null,
+        "label": "Tags (JSON)",
+        "placeholder": "{\"env\":\"prod\",\"owner\":\"ops\"}",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "resource_id",
+        "type": "string",
+        "value": null,
+        "label": "Resource ID",
+        "placeholder": ""
+      },
+      {
+        "name": "tags",
+        "type": "object",
+        "value": null,
+        "label": "Applied Tags",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "azure/compute/snapshot_create": {
+    "hash": "03a55b02fda6d3bc60dc596549c0a0e0742d8c7408763bfeb94c7f146399384d",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Azure Snapshot: Create",
+    "description": "Create a point-in-time snapshot of a managed disk. Waits until the snapshot is ready.",
+    "website": "https://www.flomation.co",
+    "icon": "azure+copy",
+    "date": "18/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Azure",
+      "icon": "azure",
+      "description": "Microsoft Azure integrations"
+    },
+    "sub_category": {
+      "name": "Virtual Machines",
+      "icon": "server",
+      "description": "Azure Virtual Machines — lifecycle, network security groups, disks, snapshots, images, SSH keys and tags"
+    },
+    "inputs": [
+      {
+        "name": "azure_tenant_id",
+        "type": "string",
+        "value": null,
+        "label": "Tenant ID",
+        "placeholder": "Directory (tenant) ID — a GUID or your-tenant.onmicrosoft.com",
+        "required": true
+      },
+      {
+        "name": "azure_client_id",
+        "type": "string",
+        "value": null,
+        "label": "Client ID",
+        "placeholder": "Application (client) ID of the service principal",
+        "required": true
+      },
+      {
+        "name": "azure_client_secret",
+        "type": "secret",
+        "value": null,
+        "label": "Client Secret",
+        "placeholder": "The app needs a role (e.g. Disk Snapshot Contributor) on the resource group",
+        "required": true
+      },
+      {
+        "name": "subscription_id",
+        "type": "string",
+        "value": null,
+        "label": "Subscription ID",
+        "placeholder": "Azure subscription GUID",
+        "required": true
+      },
+      {
+        "name": "resource_group",
+        "type": "string",
+        "value": null,
+        "label": "Resource Group",
+        "placeholder": "my-resource-group",
+        "required": true
+      },
+      {
+        "name": "snapshot_name",
+        "type": "string",
+        "value": null,
+        "label": "Snapshot Name",
+        "placeholder": "my-vm-osdisk-snap",
+        "required": true
+      },
+      {
+        "name": "location",
+        "type": "string",
+        "value": null,
+        "label": "Location",
+        "placeholder": "uksouth",
+        "required": true
+      },
+      {
+        "name": "source_disk_id",
+        "type": "string",
+        "value": null,
+        "label": "Source Disk ID",
+        "placeholder": "Full ARM ID of the managed disk — /subscriptions/.../disks/my-disk",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Snapshot Resource ID",
+        "placeholder": ""
+      },
+      {
+        "name": "name",
+        "type": "string",
+        "value": null,
+        "label": "Snapshot Name",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "azure/compute/snapshot_get_all": {
+    "hash": "51dd611cd2094ad076d1bdc403a5fd7f46b097bdbd44e863267d05faf2cae1c0",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Azure Snapshot: List",
+    "description": "List managed-disk snapshots in a resource group (or across the whole subscription), with size, state and location.",
+    "website": "https://www.flomation.co",
+    "icon": "azure+list",
+    "date": "18/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Azure",
+      "icon": "azure",
+      "description": "Microsoft Azure integrations"
+    },
+    "sub_category": {
+      "name": "Virtual Machines",
+      "icon": "server",
+      "description": "Azure Virtual Machines — lifecycle, network security groups, disks, snapshots, images, SSH keys and tags"
+    },
+    "inputs": [
+      {
+        "name": "azure_tenant_id",
+        "type": "string",
+        "value": null,
+        "label": "Tenant ID",
+        "placeholder": "Directory (tenant) ID — a GUID or your-tenant.onmicrosoft.com",
+        "required": true
+      },
+      {
+        "name": "azure_client_id",
+        "type": "string",
+        "value": null,
+        "label": "Client ID",
+        "placeholder": "Application (client) ID of the service principal",
+        "required": true
+      },
+      {
+        "name": "azure_client_secret",
+        "type": "secret",
+        "value": null,
+        "label": "Client Secret",
+        "placeholder": "The app needs a role (e.g. Reader) on the subscription or resource group",
+        "required": true
+      },
+      {
+        "name": "subscription_id",
+        "type": "string",
+        "value": null,
+        "label": "Subscription ID",
+        "placeholder": "Azure subscription GUID",
+        "required": true
+      },
+      {
+        "name": "resource_group",
+        "type": "string",
+        "value": null,
+        "label": "Resource Group",
+        "placeholder": "Leave blank to list across the whole subscription (optional)"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "snapshots",
+        "type": "object",
+        "value": null,
+        "label": "Snapshots",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Count",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "azure/compute/ssh_key_get_all": {
+    "hash": "966b9449caf2eff1acc43d4e9e8540560a154bd029aed751bb6797a77547589e",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Azure SSH Key: List",
+    "description": "List stored SSH public keys in a resource group (or across the whole subscription). Only the public key is stored by Azure.",
+    "website": "https://www.flomation.co",
+    "icon": "azure+key",
+    "date": "18/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Azure",
+      "icon": "azure",
+      "description": "Microsoft Azure integrations"
+    },
+    "sub_category": {
+      "name": "Virtual Machines",
+      "icon": "server",
+      "description": "Azure Virtual Machines — lifecycle, network security groups, disks, snapshots, images, SSH keys and tags"
+    },
+    "inputs": [
+      {
+        "name": "azure_tenant_id",
+        "type": "string",
+        "value": null,
+        "label": "Tenant ID",
+        "placeholder": "Directory (tenant) ID — a GUID or your-tenant.onmicrosoft.com",
+        "required": true
+      },
+      {
+        "name": "azure_client_id",
+        "type": "string",
+        "value": null,
+        "label": "Client ID",
+        "placeholder": "Application (client) ID of the service principal",
+        "required": true
+      },
+      {
+        "name": "azure_client_secret",
+        "type": "secret",
+        "value": null,
+        "label": "Client Secret",
+        "placeholder": "The app needs a role (e.g. Reader) on the subscription or resource group",
+        "required": true
+      },
+      {
+        "name": "subscription_id",
+        "type": "string",
+        "value": null,
+        "label": "Subscription ID",
+        "placeholder": "Azure subscription GUID",
+        "required": true
+      },
+      {
+        "name": "resource_group",
+        "type": "string",
+        "value": null,
+        "label": "Resource Group",
+        "placeholder": "Leave blank to list across the whole subscription (optional)"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "ssh_keys",
+        "type": "object",
+        "value": null,
+        "label": "SSH Public Keys",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Count",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "azure/compute/vm_create": {
+    "hash": "43390ca5072bd9f997381ee86d4936313c31bb7c40a941c0c2a9e0d4ac025821",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Azure VM: Create",
+    "description": "Create a Virtual Machine from a marketplace image, attached to an existing network interface. Waits until the VM is provisioned.",
+    "website": "https://www.flomation.co",
+    "icon": "azure+plus",
+    "date": "18/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Azure",
+      "icon": "azure",
+      "description": "Microsoft Azure integrations"
+    },
+    "sub_category": {
+      "name": "Virtual Machines",
+      "icon": "server",
+      "description": "Azure Virtual Machines — lifecycle, network security groups, disks, snapshots, images, SSH keys and tags"
+    },
+    "inputs": [
+      {
+        "name": "azure_tenant_id",
+        "type": "string",
+        "value": null,
+        "label": "Tenant ID",
+        "placeholder": "Directory (tenant) ID — a GUID or your-tenant.onmicrosoft.com",
+        "required": true
+      },
+      {
+        "name": "azure_client_id",
+        "type": "string",
+        "value": null,
+        "label": "Client ID",
+        "placeholder": "Application (client) ID of the service principal",
+        "required": true
+      },
+      {
+        "name": "azure_client_secret",
+        "type": "secret",
+        "value": null,
+        "label": "Client Secret",
+        "placeholder": "The app needs a role (e.g. Virtual Machine Contributor) on the resource group",
+        "required": true
+      },
+      {
+        "name": "subscription_id",
+        "type": "string",
+        "value": null,
+        "label": "Subscription ID",
+        "placeholder": "Azure subscription GUID",
+        "required": true
+      },
+      {
+        "name": "resource_group",
+        "type": "string",
+        "value": null,
+        "label": "Resource Group",
+        "placeholder": "my-resource-group",
+        "required": true
+      },
+      {
+        "name": "vm_name",
+        "type": "string",
+        "value": null,
+        "label": "VM Name",
+        "placeholder": "my-vm (also used as the computer name)",
+        "required": true
+      },
+      {
+        "name": "location",
+        "type": "string",
+        "value": null,
+        "label": "Location",
+        "placeholder": "uksouth",
+        "required": true
+      },
+      {
+        "name": "vm_size",
+        "type": "string",
+        "value": null,
+        "label": "VM Size",
+        "placeholder": "Standard_B1s",
+        "required": true
+      },
+      {
+        "name": "image_publisher",
+        "type": "string",
+        "value": null,
+        "label": "Image Publisher",
+        "placeholder": "Canonical",
+        "required": true
+      },
+      {
+        "name": "image_offer",
+        "type": "string",
+        "value": null,
+        "label": "Image Offer",
+        "placeholder": "0001-com-ubuntu-server-jammy",
+        "required": true
+      },
+      {
+        "name": "image_sku",
+        "type": "string",
+        "value": null,
+        "label": "Image SKU",
+        "placeholder": "22_04-lts-gen2",
+        "required": true
+      },
+      {
+        "name": "image_version",
+        "type": "string",
+        "value": null,
+        "label": "Image Version",
+        "placeholder": "latest (default)"
+      },
+      {
+        "name": "admin_username",
+        "type": "string",
+        "value": null,
+        "label": "Admin Username",
+        "placeholder": "azureuser",
+        "required": true
+      },
+      {
+        "name": "admin_password",
+        "type": "secret",
+        "value": null,
+        "label": "Admin Password",
+        "placeholder": "Must meet Azure complexity rules (12+ chars, 3 of 4 classes)",
+        "required": true
+      },
+      {
+        "name": "network_interface_id",
+        "type": "string",
+        "value": null,
+        "label": "Network Interface ID",
+        "placeholder": "Full ARM ID of an existing NIC — /subscriptions/.../networkInterfaces/my-nic",
+        "required": true
+      },
+      {
+        "name": "os_disk_storage_type",
+        "type": "string",
+        "value": null,
+        "label": "OS Disk Storage Type",
+        "placeholder": "Standard_LRS (default) — or StandardSSD_LRS, Premium_LRS"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "VM Resource ID",
+        "placeholder": ""
+      },
+      {
+        "name": "name",
+        "type": "string",
+        "value": null,
+        "label": "VM Name",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Virtual Machine",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "azure/compute/vm_deallocate": {
+    "hash": "fc788f0af410b184e186867ed3f5527b01c99013fd149bb26236d2c745da03d6",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Azure VM: Stop (Deallocate)",
+    "description": "Stop a Virtual Machine and release its compute so it stops incurring compute charges. Waits until the VM is deallocated.",
+    "website": "https://www.flomation.co",
+    "icon": "azure+stop",
+    "date": "18/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Azure",
+      "icon": "azure",
+      "description": "Microsoft Azure integrations"
+    },
+    "sub_category": {
+      "name": "Virtual Machines",
+      "icon": "server",
+      "description": "Azure Virtual Machines — lifecycle, network security groups, disks, snapshots, images, SSH keys and tags"
+    },
+    "inputs": [
+      {
+        "name": "azure_tenant_id",
+        "type": "string",
+        "value": null,
+        "label": "Tenant ID",
+        "placeholder": "Directory (tenant) ID — a GUID or your-tenant.onmicrosoft.com",
+        "required": true
+      },
+      {
+        "name": "azure_client_id",
+        "type": "string",
+        "value": null,
+        "label": "Client ID",
+        "placeholder": "Application (client) ID of the service principal",
+        "required": true
+      },
+      {
+        "name": "azure_client_secret",
+        "type": "secret",
+        "value": null,
+        "label": "Client Secret",
+        "placeholder": "The app needs a role (e.g. Virtual Machine Contributor) on the resource group",
+        "required": true
+      },
+      {
+        "name": "subscription_id",
+        "type": "string",
+        "value": null,
+        "label": "Subscription ID",
+        "placeholder": "Azure subscription GUID",
+        "required": true
+      },
+      {
+        "name": "resource_group",
+        "type": "string",
+        "value": null,
+        "label": "Resource Group",
+        "placeholder": "my-resource-group",
+        "required": true
+      },
+      {
+        "name": "vm_name",
+        "type": "string",
+        "value": null,
+        "label": "VM Name",
+        "placeholder": "my-vm",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "name",
+        "type": "string",
+        "value": null,
+        "label": "VM Name",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "azure/compute/vm_delete": {
+    "hash": "360998c74760b7ac9c859d5e11d5eaabe8793d85177c93cbd37234d723edf866",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Azure VM: Delete",
+    "description": "Delete a Virtual Machine and wait until it is removed. Attached disks and network interfaces are not deleted.",
+    "website": "https://www.flomation.co",
+    "icon": "azure+trash",
+    "date": "18/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Azure",
+      "icon": "azure",
+      "description": "Microsoft Azure integrations"
+    },
+    "sub_category": {
+      "name": "Virtual Machines",
+      "icon": "server",
+      "description": "Azure Virtual Machines — lifecycle, network security groups, disks, snapshots, images, SSH keys and tags"
+    },
+    "inputs": [
+      {
+        "name": "azure_tenant_id",
+        "type": "string",
+        "value": null,
+        "label": "Tenant ID",
+        "placeholder": "Directory (tenant) ID — a GUID or your-tenant.onmicrosoft.com",
+        "required": true
+      },
+      {
+        "name": "azure_client_id",
+        "type": "string",
+        "value": null,
+        "label": "Client ID",
+        "placeholder": "Application (client) ID of the service principal",
+        "required": true
+      },
+      {
+        "name": "azure_client_secret",
+        "type": "secret",
+        "value": null,
+        "label": "Client Secret",
+        "placeholder": "The app needs a role (e.g. Virtual Machine Contributor) on the resource group",
+        "required": true
+      },
+      {
+        "name": "subscription_id",
+        "type": "string",
+        "value": null,
+        "label": "Subscription ID",
+        "placeholder": "Azure subscription GUID",
+        "required": true
+      },
+      {
+        "name": "resource_group",
+        "type": "string",
+        "value": null,
+        "label": "Resource Group",
+        "placeholder": "my-resource-group",
+        "required": true
+      },
+      {
+        "name": "vm_name",
+        "type": "string",
+        "value": null,
+        "label": "VM Name",
+        "placeholder": "my-vm",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "name",
+        "type": "string",
+        "value": null,
+        "label": "VM Name",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "azure/compute/vm_get_all": {
+    "hash": "65e84a91fca87794605de39fda7e954ed7a0a7177269cbb0282b2a6dffde7851",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Azure VM: List Virtual Machines",
+    "description": "List Virtual Machines in a resource group (or across the whole subscription), with their power state (running/deallocated), size, location, OS and tags.",
+    "website": "https://www.flomation.co",
+    "icon": "azure+list",
+    "date": "18/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Azure",
+      "icon": "azure",
+      "description": "Microsoft Azure integrations"
+    },
+    "sub_category": {
+      "name": "Virtual Machines",
+      "icon": "server",
+      "description": "Azure Virtual Machines — lifecycle, network security groups, disks, snapshots, images, SSH keys and tags"
+    },
+    "inputs": [
+      {
+        "name": "azure_tenant_id",
+        "type": "string",
+        "value": null,
+        "label": "Tenant ID",
+        "placeholder": "Directory (tenant) ID — a GUID or your-tenant.onmicrosoft.com",
+        "required": true
+      },
+      {
+        "name": "azure_client_id",
+        "type": "string",
+        "value": null,
+        "label": "Client ID",
+        "placeholder": "Application (client) ID of the service principal",
+        "required": true
+      },
+      {
+        "name": "azure_client_secret",
+        "type": "secret",
+        "value": null,
+        "label": "Client Secret",
+        "placeholder": "The app needs a role (e.g. Reader) on the subscription or resource group",
+        "required": true
+      },
+      {
+        "name": "subscription_id",
+        "type": "string",
+        "value": null,
+        "label": "Subscription ID",
+        "placeholder": "Azure subscription GUID",
+        "required": true
+      },
+      {
+        "name": "resource_group",
+        "type": "string",
+        "value": null,
+        "label": "Resource Group",
+        "placeholder": "Leave blank to list across the whole subscription (optional)"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "virtual_machines",
+        "type": "object",
+        "value": null,
+        "label": "Virtual Machines",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Count",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "azure/compute/vm_restart": {
+    "hash": "18b90e5ea90056100b6d0f37d1f8d06327c752b9b468e812828106bcc983b066",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Azure VM: Restart",
+    "description": "Reboot a running Virtual Machine and wait until it is running again.",
+    "website": "https://www.flomation.co",
+    "icon": "azure+rotate-right",
+    "date": "18/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Azure",
+      "icon": "azure",
+      "description": "Microsoft Azure integrations"
+    },
+    "sub_category": {
+      "name": "Virtual Machines",
+      "icon": "server",
+      "description": "Azure Virtual Machines — lifecycle, network security groups, disks, snapshots, images, SSH keys and tags"
+    },
+    "inputs": [
+      {
+        "name": "azure_tenant_id",
+        "type": "string",
+        "value": null,
+        "label": "Tenant ID",
+        "placeholder": "Directory (tenant) ID — a GUID or your-tenant.onmicrosoft.com",
+        "required": true
+      },
+      {
+        "name": "azure_client_id",
+        "type": "string",
+        "value": null,
+        "label": "Client ID",
+        "placeholder": "Application (client) ID of the service principal",
+        "required": true
+      },
+      {
+        "name": "azure_client_secret",
+        "type": "secret",
+        "value": null,
+        "label": "Client Secret",
+        "placeholder": "The app needs a role (e.g. Virtual Machine Contributor) on the resource group",
+        "required": true
+      },
+      {
+        "name": "subscription_id",
+        "type": "string",
+        "value": null,
+        "label": "Subscription ID",
+        "placeholder": "Azure subscription GUID",
+        "required": true
+      },
+      {
+        "name": "resource_group",
+        "type": "string",
+        "value": null,
+        "label": "Resource Group",
+        "placeholder": "my-resource-group",
+        "required": true
+      },
+      {
+        "name": "vm_name",
+        "type": "string",
+        "value": null,
+        "label": "VM Name",
+        "placeholder": "my-vm",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "name",
+        "type": "string",
+        "value": null,
+        "label": "VM Name",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "azure/compute/vm_start": {
+    "hash": "c8270030da8be6710ca25b02b56e34125903fcca558435b0eef40324a1dcdc3a",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Azure VM: Start",
+    "description": "Start a stopped or deallocated Virtual Machine and wait until it is running.",
+    "website": "https://www.flomation.co",
+    "icon": "azure+play",
+    "date": "18/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Azure",
+      "icon": "azure",
+      "description": "Microsoft Azure integrations"
+    },
+    "sub_category": {
+      "name": "Virtual Machines",
+      "icon": "server",
+      "description": "Azure Virtual Machines — lifecycle, network security groups, disks, snapshots, images, SSH keys and tags"
+    },
+    "inputs": [
+      {
+        "name": "azure_tenant_id",
+        "type": "string",
+        "value": null,
+        "label": "Tenant ID",
+        "placeholder": "Directory (tenant) ID — a GUID or your-tenant.onmicrosoft.com",
+        "required": true
+      },
+      {
+        "name": "azure_client_id",
+        "type": "string",
+        "value": null,
+        "label": "Client ID",
+        "placeholder": "Application (client) ID of the service principal",
+        "required": true
+      },
+      {
+        "name": "azure_client_secret",
+        "type": "secret",
+        "value": null,
+        "label": "Client Secret",
+        "placeholder": "The app needs a role (e.g. Virtual Machine Contributor) on the resource group",
+        "required": true
+      },
+      {
+        "name": "subscription_id",
+        "type": "string",
+        "value": null,
+        "label": "Subscription ID",
+        "placeholder": "Azure subscription GUID",
+        "required": true
+      },
+      {
+        "name": "resource_group",
+        "type": "string",
+        "value": null,
+        "label": "Resource Group",
+        "placeholder": "my-resource-group",
+        "required": true
+      },
+      {
+        "name": "vm_name",
+        "type": "string",
+        "value": null,
+        "label": "VM Name",
+        "placeholder": "my-vm",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "name",
+        "type": "string",
+        "value": null,
+        "label": "VM Name",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
   "azure/cosmosdb/container_create": {
     "hash": "744a86b2cec557fbec74eb09f47f5160382c53581c518fdd623aa46e68bc97fe",
     "author": "Dave McElin",
