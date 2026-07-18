@@ -7705,7 +7705,7 @@
     ]
   },
   "aws/ec2/create_tags": {
-    "hash": "d96f0b966c5f217949c5fcec766ad5ffd1b0e8d42b72372e455513768ea48964",
+    "hash": "fe7a682e3982fcf994f989ea0d3c5db42880716942554403d877ad981ea05467",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "AWS EC2 Create Tags",
@@ -7847,10 +7847,10 @@
       },
       {
         "name": "tags",
-        "type": "string",
+        "type": "key_value_array",
         "value": null,
         "label": "Tags",
-        "placeholder": "Key=Value pairs, e.g. Name=web,Env=prod",
+        "placeholder": "Add a Key and Value per tag",
         "required": true
       }
     ],
@@ -16029,7 +16029,7 @@
     ]
   },
   "common/array_index": {
-    "hash": "616570fdd22df2d5d84dc3b2a8849c02f475dbad038ac05c50fbc64750b5c1fa",
+    "hash": "8f54593a70345ffd6701e757b1fa673f6093bb4fd458a639ef76327e4c0b3e23",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Array Index",

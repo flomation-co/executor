@@ -3,15 +3,22 @@ package aws_ec2_create_tags
 import (
 	"testing"
 
+	core "flomation.app/automate/executor"
 	"github.com/aws/aws-sdk-go-v2/aws"
 	. "github.com/onsi/gomega"
 )
 
-func TestParseTags(t *testing.T) {
+func TestBuildTags(t *testing.T) {
 	RegisterTestingT(t)
 
-	tags := parseTags("Name=web , Env=prod ,,Team=Platform=x")
-	Expect(tags).To(HaveLen(3))
+	// Value shape as the editor stores a key_value_array (JSON string of
+	// {key,value} objects). A blank-key row is skipped.
+	inputs := []*core.Connection{
+		{Name: "tags", Type: core.ConnectionTypeKeyValueArray, Value: `[{"key":"Name","value":"web"},{"key":"Env","value":"prod"},{"key":"","value":"skip"}]`},
+	}
+
+	tags := buildTags(inputs)
+	Expect(tags).To(HaveLen(2))
 
 	got := map[string]string{}
 	for _, tg := range tags {
@@ -19,9 +26,9 @@ func TestParseTags(t *testing.T) {
 	}
 	Expect(got["Name"]).To(Equal("web"))
 	Expect(got["Env"]).To(Equal("prod"))
-	// strings.Cut splits on the FIRST '=', so a value may itself contain '='.
-	Expect(got["Team"]).To(Equal("Platform=x"))
+}
 
-	// Entries without a valid Key=Value (empty key, blank, or no '=') are skipped.
-	Expect(parseTags("=novalue,  ,justkey")).To(HaveLen(0))
+func TestBuildTagsEmpty(t *testing.T) {
+	RegisterTestingT(t)
+	Expect(buildTags(nil)).To(BeEmpty())
 }

@@ -38,7 +38,7 @@ var Inputs = [...]core.Connection{
 	{Name: "external_id", Type: core.ConnectionTypeString, Label: "Assume Role External ID (optional)", Placeholder: "Must match the External ID in the role's trust policy", Visible: &core.VisibleWhen{Field: "auth_method", Values: []string{"assume_role"}}},
 	{Name: "credential", Type: core.ConnectionTypeCredential, Label: "AWS Role Credential", Required: true, Visible: &core.VisibleWhen{Field: "auth_method", Values: []string{"credential"}}},
 	{Name: "resource_ids", Type: core.ConnectionTypeString, Label: "Resource IDs", Placeholder: "Comma-separated, e.g. i-0abc,vol-0def", Required: true},
-	{Name: "tags", Type: core.ConnectionTypeString, Label: "Tags", Placeholder: "Key=Value pairs, e.g. Name=web,Env=prod", Required: true},
+	{Name: "tags", Type: core.ConnectionTypeKeyValueArray, Label: "Tags", Placeholder: "Add a Key and Value per tag", Required: true},
 }
 
 var Outputs = [...]core.Connection{
@@ -54,9 +54,9 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 		return nil, fmt.Errorf("at least one resource id is required")
 	}
 
-	tags := parseTags(awscommon.InputString("tags", inputs))
+	tags := buildTags(inputs)
 	if len(tags) == 0 {
-		return nil, fmt.Errorf("at least one Key=Value tag is required")
+		return nil, fmt.Errorf("at least one tag (Key and Value) is required")
 	}
 
 	cfg, err := awscommon.ConfigFromInputs(ctx, inputs)
@@ -75,20 +75,20 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	}, nil
 }
 
-// parseTags reads a "Key=Value,Key2=Value2" string into SDK tags.
-func parseTags(raw string) []types.Tag {
+// buildTags reads the key/value tag rows into SDK tags, skipping rows with a
+// blank key.
+func buildTags(inputs []*core.Connection) []types.Tag {
+	conn := core.FindConnection("tags", inputs)
+	if conn == nil {
+		return nil
+	}
 	var tags []types.Tag
-	for _, pair := range strings.Split(raw, ",") {
-		pair = strings.TrimSpace(pair)
-		if pair == "" {
+	for _, kv := range conn.KeyValuePairs() {
+		k := strings.TrimSpace(kv.Key)
+		if k == "" {
 			continue
 		}
-		k, v, ok := strings.Cut(pair, "=")
-		k = strings.TrimSpace(k)
-		if !ok || k == "" {
-			continue
-		}
-		tags = append(tags, types.Tag{Key: aws.String(k), Value: aws.String(strings.TrimSpace(v))})
+		tags = append(tags, types.Tag{Key: aws.String(k), Value: aws.String(strings.TrimSpace(kv.Value))})
 	}
 	return tags
 }
