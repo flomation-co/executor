@@ -12,7 +12,6 @@ import (
 	core "flomation.app/automate/executor"
 	compute "flomation.app/automate/executor/actions/azure/compute"
 
-	"github.com/Azure/azure-sdk-for-go/sdk/azcore/to"
 	"github.com/Azure/azure-sdk-for-go/sdk/resourcemanager/compute/armcompute/v6"
 )
 
@@ -54,36 +53,50 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	}
 	ctx := compute.Context()
 
+	// The List call itself does NOT carry runtime power state — and the
+	// resource-group List rejects $expand=instanceView outright (400) — so power
+	// state is fetched per VM via InstanceView below.
 	var vms []map[string]interface{}
+	collect := func(vm *armcompute.VirtualMachine) {
+		m := summariseVM(vm)
+		// Best-effort power state: InstanceView is a per-VM read. The RG comes from
+		// the scope when listing a group, else it is parsed from the VM's own ID
+		// (subscription-wide list spans resource groups). A lookup failure just
+		// leaves power_state absent rather than failing the whole listing.
+		rg := auth.ResourceGroup
+		if rg == "" {
+			rg = resourceGroupFromID(compute.Str(vm.ID))
+		}
+		if name := compute.Str(vm.Name); rg != "" && name != "" {
+			if iv, err := client.InstanceView(ctx, rg, name, nil); err == nil {
+				if ps := powerState(&iv.VirtualMachineInstanceView); ps != "" {
+					m["power_state"] = ps
+				}
+			}
+		}
+		vms = append(vms, m)
+	}
+
 	if auth.ResourceGroup != "" {
-		// Expand instanceView so each VM carries its runtime power state, not just
-		// the ARM provisioning state — the resource-group List supports this expand
-		// directly (unlike the subscription-wide List, which uses StatusOnly below).
-		pager := client.NewListPager(auth.ResourceGroup, &armcompute.VirtualMachinesClientListOptions{
-			Expand: to.Ptr(armcompute.ExpandTypeForListVMsInstanceView),
-		})
+		pager := client.NewListPager(auth.ResourceGroup, nil)
 		for pager.More() {
 			page, err := pager.NextPage(ctx)
 			if err != nil {
 				return compute.ErrorResult(auth.AzureError(err)), nil
 			}
 			for _, vm := range page.Value {
-				vms = append(vms, summariseVM(vm))
+				collect(vm)
 			}
 		}
 	} else {
-		// StatusOnly fetches the runtime status (power state) of every VM in the
-		// subscription — the subscription List's way to populate instanceView.
-		pager := client.NewListAllPager(&armcompute.VirtualMachinesClientListAllOptions{
-			StatusOnly: to.Ptr("true"),
-		})
+		pager := client.NewListAllPager(nil)
 		for pager.More() {
 			page, err := pager.NextPage(ctx)
 			if err != nil {
 				return compute.ErrorResult(auth.AzureError(err)), nil
 			}
 			for _, vm := range page.Value {
-				vms = append(vms, summariseVM(vm))
+				collect(vm)
 			}
 		}
 	}
@@ -111,12 +124,10 @@ func summariseVM(vm *armcompute.VirtualMachine) map[string]interface{} {
 		if p.HardwareProfile != nil && p.HardwareProfile.VMSize != nil {
 			m["vm_size"] = string(*p.HardwareProfile.VMSize)
 		}
-		// power_state is the running/stopped/deallocated runtime state — the field
-		// an operator actually acts on (the EC2 instance-state analogue). It is
-		// distinct from provisioning_state (the ARM lifecycle: Succeeded/Creating/
-		// Failed), which is kept as a secondary field. power_state is only present
-		// when the caller expanded instanceView (this action does).
-		m["power_state"] = powerState(p.InstanceView)
+		// provisioning_state is the ARM lifecycle (Succeeded/Creating/Failed) — kept
+		// as a secondary field. The running/stopped/deallocated power_state (the
+		// EC2 instance-state analogue an operator acts on) is added by Execute via a
+		// per-VM InstanceView lookup, since the List response omits it.
 		m["provisioning_state"] = compute.Str(p.ProvisioningState)
 		if p.StorageProfile != nil && p.StorageProfile.OSDisk != nil && p.StorageProfile.OSDisk.OSType != nil {
 			m["os_type"] = string(*p.StorageProfile.OSDisk.OSType)
@@ -128,6 +139,19 @@ func summariseVM(vm *armcompute.VirtualMachine) map[string]interface{} {
 	}
 	m["tags"] = tags
 	return m
+}
+
+// resourceGroupFromID extracts the resource-group name from an ARM resource ID
+// (/subscriptions/{s}/resourceGroups/{rg}/providers/...), case-insensitively on
+// the segment label. Empty if not found.
+func resourceGroupFromID(id string) string {
+	parts := strings.Split(id, "/")
+	for i := 0; i+1 < len(parts); i++ {
+		if strings.EqualFold(parts[i], "resourceGroups") {
+			return parts[i+1]
+		}
+	}
+	return ""
 }
 
 // powerState pulls the runtime power state ("running", "deallocated",

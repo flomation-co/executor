@@ -9366,7 +9366,7 @@
     ]
   },
   "azure/compute/vm_get_all": {
-    "hash": "ca41d3631397d005d9e3c3f538c140eee559568c1422780f92705d60a8ca4670",
+    "hash": "65e84a91fca87794605de39fda7e954ed7a0a7177269cbb0282b2a6dffde7851",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Azure VM: List Virtual Machines",
