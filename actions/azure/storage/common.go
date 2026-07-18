@@ -50,10 +50,12 @@ const (
 	DefaultPageLimit = 50
 	MaxPageLimit     = 5000
 
-	// maxListPages bounds a return_all marker walk so a container with tens of
-	// millions of blobs can never spin unbounded requests. At 5000 items per
-	// page this still admits a million entries.
-	maxListPages = 200
+	// MaxListPages bounds a return_all pagination walk so an account or container
+	// with tens of millions of blobs can never spin unbounded requests. At
+	// MaxPageLimit (5000) items per page this still admits a million entries. It
+	// is exported and shared by every paginating list action (blob_get_all,
+	// container_get_all, blob_find_by_tags) so the cap is defined once.
+	MaxListPages = 200
 )
 
 // nowFunc is the clock for x-ms-date and SAS defaults; a var so the signing

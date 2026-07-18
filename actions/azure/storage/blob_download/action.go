@@ -211,5 +211,7 @@ func parseByteRange(r string) (blob.HTTPRange, error) {
 		}
 		out.Count = end - start + 1
 	}
+	// An open-ended spec ("bytes=500-") leaves Count at its zero value, which
+	// the SDK reads as "from Offset to the end of the blob" — not "zero bytes".
 	return out, nil
 }

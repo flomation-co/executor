@@ -60,11 +60,6 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 		return storage.ErrorResult(err.Error()), nil
 	}
 
-	// maxListPages bounds a return_all marker walk so an account with tens of
-	// millions of tagged blobs can never spin unbounded requests — the same 200
-	// backstop storage.ListEnumeration applies (that const is unexported).
-	const maxListPages = 200
-
 	// Account-wide FilterBlobs search: each match carries its container name and
 	// the matched tags, not full properties. When returning all, walk the marker
 	// at the 5000 page size; otherwise fetch a single page of `limit`.
@@ -78,7 +73,7 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	items := make([]interface{}, 0, limit)
 	truncated := false
 	for page := 0; ; page++ {
-		if page >= maxListPages {
+		if page >= storage.MaxListPages {
 			truncated = true
 			break
 		}

@@ -228,6 +228,11 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 // into the SDK's IPRange. The pre-SDK token placed the raw string into sip
 // verbatim; the SDK formats it from net.IP, so an invalid value now fails by
 // rule here rather than producing a token the service silently rejects.
+//
+// net.ParseIP also accepts IPv6, and the SDK formats it into sip without error
+// (verified) — but Azure's SAS signed-IP restriction is IPv4-only, so an IPv6
+// range yields a token the service refuses at fetch time. That is unchanged
+// from the pre-SDK pass-through, so it is left as-is rather than rejected here.
 func parseSASIPRange(raw string) (sas.IPRange, error) {
 	var r sas.IPRange
 	parts := strings.SplitN(raw, "-", 2)

@@ -62,10 +62,8 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 		return storage.ErrorResult(err.Error()), nil
 	}
 
-	// maxListPages bounds a return_all page walk so an account with a very large
+	// storage.MaxListPages bounds a return_all page walk so an account with a very large
 	// number of containers can never spin unbounded requests — the same backstop
-	// the pre-SDK ListEnumeration applied. At 5000 per page this admits a million.
-	const maxListPages = 200
 
 	// containerItemMap reproduces the pre-SDK storage.ContainerMap output shape
 	// from the SDK's typed service.ContainerItem: the same {name, properties,
@@ -155,7 +153,7 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	truncated := false
 	ctx := flow.GoContext()
 	for page := 0; pager.More(); page++ {
-		if page >= maxListPages {
+		if page >= storage.MaxListPages {
 			truncated = true
 			break
 		}

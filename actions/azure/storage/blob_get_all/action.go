@@ -255,14 +255,12 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 		return out
 	}
 
-	// maxListPages bounds a return_all walk exactly as the REST helper did — at
-	// 5000 items per page this still admits a million entries before truncating.
-	const maxListPages = 200
+	// storage.MaxListPages bounds a return_all walk exactly as the REST helper did — at
 	items := make([]interface{}, 0)
 	truncated := false
 	pager := cc.NewListBlobsFlatPager(opts)
 	for page := 0; pager.More(); page++ {
-		if page >= maxListPages {
+		if page >= storage.MaxListPages {
 			truncated = true
 			break
 		}
