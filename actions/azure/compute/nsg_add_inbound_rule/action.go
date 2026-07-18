@@ -70,6 +70,12 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	if err != nil {
 		return compute.ErrorResult(err.Error()), nil
 	}
+	// Bound-check before the int32 cast below: Azure only accepts 100–4096, and
+	// an out-of-range value would otherwise truncate silently (e.g. 2^31+100
+	// wraps to a valid-looking small number) instead of failing cleanly.
+	if priority < 100 || priority > 4096 {
+		return compute.ErrorResult("priority must be between 100 and 4096"), nil
+	}
 	protocol, err := compute.RequiredString("protocol", inputs)
 	if err != nil {
 		return compute.ErrorResult(err.Error()), nil

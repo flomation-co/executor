@@ -95,6 +95,18 @@ func TestTagMap(t *testing.T) {
 	if _, err := TagMap("tags", in(`{"env":`)); err == nil {
 		t.Error("TagMap(malformed) = nil error, want an error")
 	}
+	// well-formed JSON that isn't an object of strings → error (ARM tags are
+	// string→string). Covers Dan's "double-check the contract" note.
+	for _, bad := range []string{`{"a":1}`, `[1,2]`, `"just a string"`, `42`} {
+		if _, err := TagMap("tags", in(bad)); err == nil {
+			t.Errorf("TagMap(%q) = nil error, want an error", bad)
+		}
+	}
+	// JSON null decodes to an empty map with no error; resource_tag_set's own
+	// len==0 guard is what rejects "no tags", so this must stay non-erroring.
+	if m, err := TagMap("tags", in(`null`)); err != nil || len(m) != 0 {
+		t.Errorf("TagMap(null) = (%v, %v), want (empty, nil)", m, err)
+	}
 }
 
 func TestRequiredInt(t *testing.T) {

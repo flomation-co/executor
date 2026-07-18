@@ -7931,7 +7931,7 @@
     ]
   },
   "azure/compute/nsg_add_inbound_rule": {
-    "hash": "2e8680c459f3912f0d31fb40cb9c3b0cd2a2d191fc27dd4ba1cd50fa31315422",
+    "hash": "2dc341c384e5f83ce91642257bc6825e05c910b69127d709cacd45ec013064f6",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Azure NSG: Add Inbound Rule",
@@ -8971,7 +8971,7 @@
     ]
   },
   "azure/compute/vm_create": {
-    "hash": "c12b38e53715f297568e06890b71aea426681e067634643ecb12cec89ed58dd7",
+    "hash": "43390ca5072bd9f997381ee86d4936313c31bb7c40a941c0c2a9e0d4ac025821",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Azure VM: Create",

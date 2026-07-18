@@ -101,6 +101,12 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	if adminPass == "" {
 		return compute.ErrorResult("admin password is required"), nil
 	}
+	// Azure requires 12–123 chars plus complexity; a fast length check here beats
+	// a slow server-side 400 for the common too-short case. Complexity is left to
+	// Azure to avoid rejecting passwords its own rules would accept.
+	if len(adminPass) < 12 {
+		return compute.ErrorResult("admin password must be at least 12 characters (Azure requirement)"), nil
+	}
 	nicID, err := compute.RequiredString("network_interface_id", inputs)
 	if err != nil {
 		return compute.ErrorResult(err.Error()), nil
