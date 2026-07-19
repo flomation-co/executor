@@ -54,3 +54,30 @@ func TestSummariseInstance(t *testing.T) {
 	Expect(m["launch_time"]).To(Equal("2026-07-17T09:00:00Z"))
 	Expect(m["tags"]).To(HaveKeyWithValue("Name", "web-1"))
 }
+
+func TestBuildFilters(t *testing.T) {
+	RegisterTestingT(t)
+
+	inputs := []*core.Connection{
+		{Name: "filter_tags", Type: core.ConnectionTypeKeyValueArray, Value: `[{"key":"Environment","value":"prod"},{"key":"Owner","value":""}]`},
+		{Name: "filter_state", Type: core.ConnectionTypeString, Value: "running"},
+		{Name: "filter_vpc_id", Type: core.ConnectionTypeString, Value: "vpc-123"},
+		{Name: "filter_instance_type", Type: core.ConnectionTypeString, Value: ""}, // blank → skipped
+	}
+
+	got := map[string][]string{}
+	for _, f := range buildFilters(inputs) {
+		got[*f.Name] = f.Values
+	}
+
+	Expect(got["tag:Environment"]).To(Equal([]string{"prod"}))
+	Expect(got["tag-key"]).To(Equal([]string{"Owner"})) // blank value → "has this tag key"
+	Expect(got["instance-state-name"]).To(Equal([]string{"running"}))
+	Expect(got["vpc-id"]).To(Equal([]string{"vpc-123"}))
+	Expect(got).To(Not(HaveKey("instance-type"))) // blank input skipped
+}
+
+func TestBuildFiltersEmpty(t *testing.T) {
+	RegisterTestingT(t)
+	Expect(buildFilters(nil)).To(BeEmpty())
+}

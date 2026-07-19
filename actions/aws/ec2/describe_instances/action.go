@@ -8,6 +8,7 @@ package aws_ec2_describe_instances
 import (
 	"context"
 	"fmt"
+	"strings"
 
 	core "flomation.app/automate/executor"
 	awscommon "flomation.app/automate/executor/actions/aws"
@@ -41,6 +42,20 @@ var Inputs = [...]core.Connection{
 	{Name: "external_id", Type: core.ConnectionTypeString, Label: "Assume Role External ID (optional)", Placeholder: "Must match the External ID in the role's trust policy", Visible: &core.VisibleWhen{Field: "auth_method", Values: []string{"assume_role"}}},
 	{Name: "credential", Type: core.ConnectionTypeCredential, Label: "AWS Role Credential", Required: true, Visible: &core.VisibleWhen{Field: "auth_method", Values: []string{"credential"}}},
 	{Name: "instance_ids", Type: core.ConnectionTypeString, Label: "Instance IDs", Placeholder: "Comma-separated; leave blank for all (optional)"},
+	{Name: "filter_tags", Type: core.ConnectionTypeKeyValueArray, Label: "Filter by Tags", Placeholder: "Only return instances with these tags (blank Value matches any value for that key)"},
+	{Name: "filter_state", Type: core.ConnectionTypeString, Label: "Filter by State", Options: []core.ConnectionOption{
+		{Name: "Any", Value: ""},
+		{Name: "Running", Value: "running"},
+		{Name: "Stopped", Value: "stopped"},
+		{Name: "Pending", Value: "pending"},
+		{Name: "Stopping", Value: "stopping"},
+		{Name: "Shutting down", Value: "shutting-down"},
+		{Name: "Terminated", Value: "terminated"},
+	}},
+	{Name: "filter_instance_type", Type: core.ConnectionTypeString, Label: "Filter by Instance Type", Placeholder: "e.g. t3.micro (optional)"},
+	{Name: "filter_vpc_id", Type: core.ConnectionTypeString, Label: "Filter by VPC ID", Placeholder: "vpc-0abc (optional)"},
+	{Name: "filter_subnet_id", Type: core.ConnectionTypeString, Label: "Filter by Subnet ID", Placeholder: "subnet-0abc (optional)"},
+	{Name: "filter_availability_zone", Type: core.ConnectionTypeString, Label: "Filter by Availability Zone", Placeholder: "e.g. eu-west-2a (optional)"},
 }
 
 var Outputs = [...]core.Connection{
@@ -62,6 +77,9 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	if ids := awscommon.InputStrings("instance_ids", inputs); len(ids) > 0 {
 		in.InstanceIds = ids
 	}
+	if filters := buildFilters(inputs); len(filters) > 0 {
+		in.Filters = filters
+	}
 
 	var instances []map[string]interface{}
 	paginator := ec2.NewDescribeInstancesPaginator(client, in)
@@ -82,6 +100,43 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 		"instances":   instances,
 		"count":       len(instances),
 	}, nil
+}
+
+// buildFilters assembles the EC2 DescribeInstances filters from the optional
+// filter inputs. Tag rows become "tag:<Key>" = <Value> (or "tag-key" = <Key>
+// when the value is blank); the named filters map to their EC2 filter names.
+// EC2 ANDs all filters together.
+func buildFilters(inputs []*core.Connection) []types.Filter {
+	var filters []types.Filter
+
+	if conn := core.FindConnection("filter_tags", inputs); conn != nil {
+		for _, kv := range conn.KeyValuePairs() {
+			k := strings.TrimSpace(kv.Key)
+			if k == "" {
+				continue
+			}
+			if v := strings.TrimSpace(kv.Value); v != "" {
+				filters = append(filters, types.Filter{Name: aws.String("tag:" + k), Values: []string{v}})
+			} else {
+				filters = append(filters, types.Filter{Name: aws.String("tag-key"), Values: []string{k}})
+			}
+		}
+	}
+
+	named := []struct{ input, filter string }{
+		{"filter_state", "instance-state-name"},
+		{"filter_instance_type", "instance-type"},
+		{"filter_vpc_id", "vpc-id"},
+		{"filter_subnet_id", "subnet-id"},
+		{"filter_availability_zone", "availability-zone"},
+	}
+	for _, n := range named {
+		if v := strings.TrimSpace(awscommon.InputString(n.input, inputs)); v != "" {
+			filters = append(filters, types.Filter{Name: aws.String(n.filter), Values: []string{v}})
+		}
+	}
+
+	return filters
 }
 
 // summariseInstance flattens the SDK instance into a compact, JSON-friendly map.

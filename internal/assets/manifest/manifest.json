@@ -8203,7 +8203,7 @@
     ]
   },
   "aws/ec2/describe_instances": {
-    "hash": "f69b50cf203d43ab74ffa4b593e33a6f4faaae0dbc379f361ceedd52a8445be2",
+    "hash": "5721d029a34ccc0af65fee8885caafff646985ce8da778fc866efd0c000865fd",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "AWS EC2 Describe Instances",
@@ -8341,6 +8341,78 @@
         "value": null,
         "label": "Instance IDs",
         "placeholder": "Comma-separated; leave blank for all (optional)"
+      },
+      {
+        "name": "filter_tags",
+        "type": "key_value_array",
+        "value": null,
+        "label": "Filter by Tags",
+        "placeholder": "Only return instances with these tags (blank Value matches any value for that key)"
+      },
+      {
+        "name": "filter_state",
+        "type": "string",
+        "value": null,
+        "label": "Filter by State",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "Any",
+            "value": ""
+          },
+          {
+            "name": "Running",
+            "value": "running"
+          },
+          {
+            "name": "Stopped",
+            "value": "stopped"
+          },
+          {
+            "name": "Pending",
+            "value": "pending"
+          },
+          {
+            "name": "Stopping",
+            "value": "stopping"
+          },
+          {
+            "name": "Shutting down",
+            "value": "shutting-down"
+          },
+          {
+            "name": "Terminated",
+            "value": "terminated"
+          }
+        ]
+      },
+      {
+        "name": "filter_instance_type",
+        "type": "string",
+        "value": null,
+        "label": "Filter by Instance Type",
+        "placeholder": "e.g. t3.micro (optional)"
+      },
+      {
+        "name": "filter_vpc_id",
+        "type": "string",
+        "value": null,
+        "label": "Filter by VPC ID",
+        "placeholder": "vpc-0abc (optional)"
+      },
+      {
+        "name": "filter_subnet_id",
+        "type": "string",
+        "value": null,
+        "label": "Filter by Subnet ID",
+        "placeholder": "subnet-0abc (optional)"
+      },
+      {
+        "name": "filter_availability_zone",
+        "type": "string",
+        "value": null,
+        "label": "Filter by Availability Zone",
+        "placeholder": "e.g. eu-west-2a (optional)"
       }
     ],
     "outputs": [
