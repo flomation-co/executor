@@ -8203,7 +8203,7 @@
     ]
   },
   "aws/ec2/describe_instances": {
-    "hash": "d79acfb171f91225d34b214b1cff479e1d131ab885482c2b1c30409ff06aa6dc",
+    "hash": "be7f8dac3d2dd4206db42ede70243a8d349561cf070a189d6641b07c9387c4d0",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "AWS EC2 Describe Instances",
@@ -8424,6 +8424,13 @@
         "type": "object",
         "value": null,
         "label": "Instances",
+        "placeholder": ""
+      },
+      {
+        "name": "instance_ids",
+        "type": "object",
+        "value": null,
+        "label": "Instance IDs",
         "placeholder": ""
       },
       {

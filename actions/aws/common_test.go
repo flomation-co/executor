@@ -96,11 +96,21 @@ func TestConfigFromInputsReadsStandardBlock(t *testing.T) {
 func TestInputStrings(t *testing.T) {
 	RegisterTestingT(t)
 
-	inputs := []*core.Connection{conn("instance_ids", " i-1, i-2 ,,i-3 ")}
-	Expect(InputStrings("instance_ids", inputs)).To(Equal([]string{"i-1", "i-2", "i-3"}))
+	// Comma-separated string (manual entry).
+	Expect(InputStrings("x", []*core.Connection{conn("x", " i-1, i-2 ,,i-3 ")})).To(Equal([]string{"i-1", "i-2", "i-3"}))
 
-	// Absent input yields nil, not a slice with an empty string.
-	Expect(InputStrings("missing", inputs)).To(BeNil())
+	// JSON array string (a wired array output substituted into this string input).
+	Expect(InputStrings("x", []*core.Connection{conn("x", `["i-1","i-2"]`)})).To(Equal([]string{"i-1", "i-2"}))
+
+	// Native []string / []interface{} (an array output wired directly).
+	Expect(InputStrings("x", []*core.Connection{{Name: "x", Value: []string{"i-1", "i-2"}}})).To(Equal([]string{"i-1", "i-2"}))
+	Expect(InputStrings("x", []*core.Connection{{Name: "x", Value: []interface{}{"i-1", "i-2"}}})).To(Equal([]string{"i-1", "i-2"}))
+
+	// A JSON object wired by mistake yields nil (so the action errors clearly).
+	Expect(InputStrings("x", []*core.Connection{conn("x", `{"instance_id":"i-1"}`)})).To(BeNil())
+
+	// Absent input yields nil.
+	Expect(InputStrings("missing", nil)).To(BeNil())
 }
 
 func TestInputStringAbsent(t *testing.T) {

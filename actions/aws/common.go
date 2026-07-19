@@ -12,6 +12,7 @@ package aws
 
 import (
 	"context"
+	"encoding/json"
 	"fmt"
 	"strings"
 
@@ -124,17 +125,54 @@ func InputString(name string, inputs []*core.Connection) string {
 	return ""
 }
 
-// InputStrings splits a comma-separated input into a trimmed, non-empty slice.
-// Handy for the many EC2/RDS calls that take a list of ids.
+// InputStrings reads a list-of-ids input robustly, accepting any of the shapes a
+// value can arrive in: a native []string/[]interface{} (e.g. an array output
+// wired directly), a JSON array string (e.g. ${node.instance_ids} substituted
+// into this string input), or a plain comma-separated string. A JSON object
+// wired in by mistake yields nil (so the action reports "id required" rather than
+// passing a mangled fragment to AWS).
 func InputStrings(name string, inputs []*core.Connection) []string {
-	raw := InputString(name, inputs)
-	if raw == "" {
+	conn := core.FindConnection(name, inputs)
+	if conn == nil || conn.Value == nil {
 		return nil
 	}
+	switch v := conn.Value.(type) {
+	case []string:
+		return trimList(v)
+	case []interface{}:
+		out := make([]string, 0, len(v))
+		for _, e := range v {
+			out = append(out, fmt.Sprintf("%v", e))
+		}
+		return trimList(out)
+	case string:
+		s := strings.TrimSpace(v)
+		if s == "" {
+			return nil
+		}
+		if strings.HasPrefix(s, "[") { // JSON array from a wired array output
+			var arr []interface{}
+			if err := json.Unmarshal([]byte(s), &arr); err == nil {
+				out := make([]string, 0, len(arr))
+				for _, e := range arr {
+					out = append(out, fmt.Sprintf("%v", e))
+				}
+				return trimList(out)
+			}
+		}
+		if strings.HasPrefix(s, "{") { // a JSON object wired by mistake — not a list
+			return nil
+		}
+		return trimList(strings.Split(s, ","))
+	}
+	return nil
+}
+
+func trimList(in []string) []string {
 	var out []string
-	for _, part := range strings.Split(raw, ",") {
-		if p := strings.TrimSpace(part); p != "" {
-			out = append(out, p)
+	for _, p := range in {
+		if t := strings.TrimSpace(p); t != "" {
+			out = append(out, t)
 		}
 	}
 	return out

@@ -60,6 +60,7 @@ var Inputs = [...]core.Connection{
 var Outputs = [...]core.Connection{
 	{Name: "tool_result", Type: core.ConnectionTypeString, Label: "Result summary"},
 	{Name: "instances", Type: core.ConnectionTypeObject, Label: "Instances"},
+	{Name: "instance_ids", Type: core.ConnectionTypeObject, Label: "Instance IDs"},
 	{Name: "count", Type: core.ConnectionTypeInteger, Label: "Count"},
 }
 
@@ -81,6 +82,7 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	}
 
 	var instances []map[string]interface{}
+	var ids []string
 	paginator := ec2.NewDescribeInstancesPaginator(client, in)
 	for paginator.HasMorePages() {
 		page, err := paginator.NextPage(ctx)
@@ -90,14 +92,16 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 		for _, res := range page.Reservations {
 			for _, inst := range res.Instances {
 				instances = append(instances, summariseInstance(inst))
+				ids = append(ids, aws.ToString(inst.InstanceId))
 			}
 		}
 	}
 
 	return map[string]interface{}{
-		"tool_result": fmt.Sprintf("Found %d EC2 instance(s)", len(instances)),
-		"instances":   instances,
-		"count":       len(instances),
+		"tool_result":  fmt.Sprintf("Found %d EC2 instance(s)", len(instances)),
+		"instances":    instances,
+		"instance_ids": ids,
+		"count":        len(instances),
 	}, nil
 }
 
