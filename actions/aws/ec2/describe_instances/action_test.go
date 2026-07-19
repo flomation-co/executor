@@ -60,7 +60,7 @@ func TestBuildFilters(t *testing.T) {
 
 	inputs := []*core.Connection{
 		{Name: "filter_tags", Type: core.ConnectionTypeKeyValueArray, Value: `[{"key":"Environment","value":"prod"},{"key":"Owner","value":""}]`},
-		{Name: "filter_state", Type: core.ConnectionTypeString, Value: "running"},
+		{Name: "filter_state", Type: core.ConnectionTypeMultiSelect, Value: "running,stopped"},
 		{Name: "filter_vpc_id", Type: core.ConnectionTypeString, Value: "vpc-123"},
 		{Name: "filter_instance_type", Type: core.ConnectionTypeString, Value: ""}, // blank → skipped
 	}
@@ -71,8 +71,8 @@ func TestBuildFilters(t *testing.T) {
 	}
 
 	Expect(got["tag:Environment"]).To(Equal([]string{"prod"}))
-	Expect(got["tag-key"]).To(Equal([]string{"Owner"})) // blank value → "has this tag key"
-	Expect(got["instance-state-name"]).To(Equal([]string{"running"}))
+	Expect(got["tag-key"]).To(Equal([]string{"Owner"}))                          // blank value → "has this tag key"
+	Expect(got["instance-state-name"]).To(Equal([]string{"running", "stopped"})) // multi-select → OR'd
 	Expect(got["vpc-id"]).To(Equal([]string{"vpc-123"}))
 	Expect(got).To(Not(HaveKey("instance-type"))) // blank input skipped
 }

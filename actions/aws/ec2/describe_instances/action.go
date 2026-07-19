@@ -43,8 +43,7 @@ var Inputs = [...]core.Connection{
 	{Name: "credential", Type: core.ConnectionTypeCredential, Label: "AWS Role Credential", Required: true, Visible: &core.VisibleWhen{Field: "auth_method", Values: []string{"credential"}}},
 	{Name: "instance_ids", Type: core.ConnectionTypeString, Label: "Instance IDs", Placeholder: "Comma-separated; leave blank for all (optional)"},
 	{Name: "filter_tags", Type: core.ConnectionTypeKeyValueArray, Label: "Filter by Tags", Placeholder: "Only return instances with these tags (blank Value matches any value for that key)"},
-	{Name: "filter_state", Type: core.ConnectionTypeString, Label: "Filter by State", Options: []core.ConnectionOption{
-		{Name: "Any", Value: ""},
+	{Name: "filter_state", Type: core.ConnectionTypeMultiSelect, Label: "Filter by State", Placeholder: "Select one or more; none = any state", Options: []core.ConnectionOption{
 		{Name: "Running", Value: "running"},
 		{Name: "Stopped", Value: "stopped"},
 		{Name: "Pending", Value: "pending"},
@@ -123,8 +122,12 @@ func buildFilters(inputs []*core.Connection) []types.Filter {
 		}
 	}
 
+	// State is multi-select: multiple states OR together within the one filter.
+	if states := awscommon.InputStrings("filter_state", inputs); len(states) > 0 {
+		filters = append(filters, types.Filter{Name: aws.String("instance-state-name"), Values: states})
+	}
+
 	named := []struct{ input, filter string }{
-		{"filter_state", "instance-state-name"},
 		{"filter_instance_type", "instance-type"},
 		{"filter_vpc_id", "vpc-id"},
 		{"filter_subnet_id", "subnet-id"},

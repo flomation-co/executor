@@ -8203,7 +8203,7 @@
     ]
   },
   "aws/ec2/describe_instances": {
-    "hash": "5721d029a34ccc0af65fee8885caafff646985ce8da778fc866efd0c000865fd",
+    "hash": "d79acfb171f91225d34b214b1cff479e1d131ab885482c2b1c30409ff06aa6dc",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "AWS EC2 Describe Instances",
@@ -8351,15 +8351,11 @@
       },
       {
         "name": "filter_state",
-        "type": "string",
+        "type": "multi_select",
         "value": null,
         "label": "Filter by State",
-        "placeholder": "",
+        "placeholder": "Select one or more; none = any state",
         "options": [
-          {
-            "name": "Any",
-            "value": ""
-          },
           {
             "name": "Running",
             "value": "running"
