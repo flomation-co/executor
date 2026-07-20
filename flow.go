@@ -1550,7 +1550,7 @@ func (f *Flow) executeNodeActionOnly(actions map[string]Action, node *Node, envi
 		// Skip parents on unmatched Switch/Conditional branches.
 		// If a parent was reached via a Switch edge whose case wasn't
 		// matched at runtime, it should not be executed.
-		if f.isOnUnmatchedBranch(p.ID) {
+		if f.isOnUnmatchedBranch(actions, p.ID, environment) {
 			log.WithFields(log.Fields{
 				"node":   node.ID,
 				"parent": p.ID,
@@ -3647,11 +3647,11 @@ func (f *Flow) executeSubFlow(actions map[string]Action, name string, invokeOutp
 // Switch or Conditional branch. It walks up through the node's ancestors
 // looking for edges from Switch/Conditional nodes whose source handle
 // doesn't match the runtime-selected case.
-func (f *Flow) isOnUnmatchedBranch(nodeID string) bool {
-	return f.checkUnmatchedBranch(nodeID, make(map[string]bool))
+func (f *Flow) isOnUnmatchedBranch(actions map[string]Action, nodeID string, environment *environment.Environment) bool {
+	return f.checkUnmatchedBranch(actions, nodeID, make(map[string]bool), environment)
 }
 
-func (f *Flow) checkUnmatchedBranch(nodeID string, visited map[string]bool) bool {
+func (f *Flow) checkUnmatchedBranch(actions map[string]Action, nodeID string, visited map[string]bool, environment *environment.Environment) bool {
 	if visited[nodeID] {
 		return false
 	}
@@ -3703,6 +3703,30 @@ func (f *Flow) checkUnmatchedBranch(nodeID string, visited map[string]bool) bool
 		sourceType := edges[0].sourceType
 
 		thisSourceUnmatched := false
+
+		// The branch decision lives in the gating node's cached result. When a
+		// node is reached via a PARALLEL path before its gating conditional has
+		// run (e.g. C wired below both a matched sibling and an as-yet-unrun
+		// If → A chain), that result is missing — and without it we would wrongly
+		// treat the unmatched parent as matched and execute it. Evaluate the
+		// gating node's action on demand to obtain the routing decision. This is
+		// safe: routing nodes are pure evaluations, executeNodeActionOnly caches
+		// the result (so the later forward traversal reuses it rather than
+		// re-running), and it resolves only the gating node's own inputs — never
+		// its downstream children.
+		isRoutingNode := sourceType == ActionTypeConditional ||
+			sourceType == ActionTypeSwitch || sourceType == ActionTypeAwait
+		if isRoutingNode {
+			if _, ok := f.nodeResults[sourceNode.ID]; !ok && sourceNode.ID != nodeID && actions != nil {
+				if _, err := f.executeNodeActionOnly(actions, sourceNode, environment); err != nil {
+					log.WithFields(log.Fields{
+						"gating_node": sourceNode.ID,
+						"for_node":    nodeID,
+						"error":       err,
+					}).Debug("could not evaluate gating node on demand for branch check")
+				}
+			}
+		}
 
 		if sourceType == ActionTypeConditional {
 			if cached, ok := f.nodeResults[sourceNode.ID]; ok {
@@ -3763,7 +3787,7 @@ func (f *Flow) checkUnmatchedBranch(nodeID string, visited map[string]bool) bool
 		// branch if its ancestor chain leads through an unmatched branch,
 		// even through intermediate regular actions (e.g. STT between a
 		// Switch and data_rename).
-		if !thisSourceUnmatched && f.checkUnmatchedBranch(sourceNode.ID, visited) {
+		if !thisSourceUnmatched && f.checkUnmatchedBranch(actions, sourceNode.ID, visited, environment) {
 			thisSourceUnmatched = true
 		}
 
