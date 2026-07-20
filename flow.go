@@ -3039,20 +3039,66 @@ func (f *Flow) clearSubgraphResults(source string, handle string) {
 // used to restrict parent resolution so that nodes on unrelated trigger
 // paths are not executed.
 func (f *Flow) computeReachable(startID string) map[string]bool {
-	reachable := map[string]bool{startID: true}
-	queue := []string{startID}
+	// Forward BFS following edges from a start node.
+	forward := func(start string) map[string]bool {
+		seen := map[string]bool{start: true}
+		q := []string{start}
+		for len(q) > 0 {
+			c := q[0]
+			q = q[1:]
+			for _, e := range f.Edges {
+				if e == nil {
+					continue
+				}
+				if e.Source == c && !seen[e.Target] {
+					seen[e.Target] = true
+					q = append(q, e.Target)
+				}
+			}
+		}
+		return seen
+	}
 
+	reachable := forward(startID)
+
+	// Union of every trigger's forward reach. Used to distinguish an independent
+	// trigger path (which must NOT be pulled in — that was the original purpose
+	// of this function, preventing cross-trigger contamination) from a rootless
+	// input-provider subgraph (which MUST run, since a reachable node depends on
+	// its output).
+	triggerForward := map[string]bool{}
+	for _, n := range f.Nodes {
+		if n == nil || n.Data == nil {
+			continue
+		}
+		if strings.HasPrefix(n.Type, "trigger/") || strings.HasPrefix(n.Data.Label, "trigger/") {
+			for id := range forward(n.ID) {
+				triggerForward[id] = true
+			}
+		}
+	}
+
+	// Backward closure: pull in ancestors (input providers) of reachable nodes,
+	// but ONLY rootless ones — nodes not forward-reachable from ANY trigger. This
+	// includes a lookup/constant subgraph wired only as a parent of a reachable
+	// action (e.g. describe -> if -> object_get feeding Run Instances) while
+	// still excluding another trigger's path. Whether a pulled-in ancestor
+	// actually executes is still gated by the unmatched-branch check, so an
+	// ancestor sitting on a disabled conditional branch is correctly skipped.
+	queue := make([]string, 0, len(reachable))
+	for id := range reachable {
+		queue = append(queue, id)
+	}
 	for len(queue) > 0 {
 		current := queue[0]
 		queue = queue[1:]
-
 		for _, e := range f.Edges {
 			if e == nil {
 				continue
 			}
-			if e.Source == current && !reachable[e.Target] {
-				reachable[e.Target] = true
-				queue = append(queue, e.Target)
+			if e.Target == current && !reachable[e.Source] && !triggerForward[e.Source] {
+				reachable[e.Source] = true
+				queue = append(queue, e.Source)
 			}
 		}
 	}
