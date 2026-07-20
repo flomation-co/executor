@@ -6,17 +6,17 @@ import (
 	. "github.com/onsi/gomega"
 )
 
-// Full AWS Self Start topology (all 32 nodes/edges from the live revision) run
-// through the production Execute path. Conditionals: If1(b092088a)=true,
-// If2(f750988f)=false, while(0cc7b1ad)=false (0 iterations) to isolate the
-// branch/diamond behaviour. Create Security Group (8b3867a9) sits on If2's
-// unmatched true-branch and is not forward-reachable from the trigger — it must
-// NOT execute, and Run Instances (3b1fda60) must run exactly once.
-func TestSelfStart_FullTopology(t *testing.T) {
-	RegisterTestingT(t)
-
-	runs := map[string]int{}
-	// per-node stub: counts and returns a benign passthrough output
+// buildSelfStart reconstructs the full AWS Self Start topology (all 32
+// nodes/edges from the live revision) with per-node run counters, and runs it
+// through the production Execute path. If1(b092088a)=true (Run Instances path);
+// while(0cc7b1ad)=false (0 iterations). if2Result controls If2(f750988f): false =
+// "SG already exists" → the object_get false-branch feeds Run Instances; true =
+// "create a new SG" → Create Security Group + its Authorize-Ingress child run.
+//
+// Run Instances' security-group input references ${create-sg.group_id}, exactly
+// as the real flow does — a reference to a node on a disabled branch must resolve
+// to empty (never execute it).
+func buildSelfStart(runs map[string]int, if2Result bool) (*Flow, map[string]Action, string) {
 	mk := func(extra map[string]interface{}) Action {
 		return func(f *Flow, n *Node, in []*Connection) (map[string]interface{}, error) {
 			runs[n.ID]++
@@ -29,6 +29,10 @@ func TestSelfStart_FullTopology(t *testing.T) {
 	}
 	condTrue := mk(map[string]interface{}{"result": true})
 	condFalse := mk(map[string]interface{}{"result": false})
+	if2 := condFalse
+	if if2Result {
+		if2 = condTrue
+	}
 
 	actions := map[string]Action{
 		"a186e891-ee43-4de9-8a78-5e7badcef6a4": mk(nil),   // trigger/form
@@ -53,26 +57,22 @@ func TestSelfStart_FullTopology(t *testing.T) {
 		"f6132576-f2bb-4c84-9f72-b24b3b8c2c11": mk(nil), // array_index (If1 false)
 		"49da5c68-6cb9-4819-a374-5f520ac9feb9": mk(nil), // object_get
 		"a59917c7-7d96-4602-abda-1fe010d1925a": mk(nil),
-		"da2bee64-f382-48ca-9220-91d310fa5fca": mk(nil),   // object_get
-		"55703d11-cf57-465d-a55c-1e3d816c5393": mk(nil),   // start_instances
-		"a3ac7bc1-ec98-4189-bd47-0f27241dc970": mk(nil),   // slack
-		"87bed1a9-8dc7-43b6-bba7-24f0d64a6ec4": mk(nil),   // output/set
-		"a6722aba-57c2-4b5a-8db0-12eae954781d": mk(nil),   // describe_security_groups
-		"f750988f-2c6e-4c63-9326-05ea0a9ce4d2": condFalse, // If2 -> false (CSG unmatched)
-		"8b3867a9-bb22-4cae-a2a3-6ce9dbb82b12": mk(nil),   // create_security_group
-		"c003d862-e610-4c8a-a442-834c037d8499": mk(nil),   // authorize
-		"8e0ff034-b10d-494e-a3c5-b40b581da4c1": mk(nil),   // array_index (If2 false)
-		"9ec8eaf0-4f80-4f0f-a113-9374bc621fe1": mk(nil),   // object_get (If2 false)
+		"da2bee64-f382-48ca-9220-91d310fa5fca": mk(nil), // object_get
+		"55703d11-cf57-465d-a55c-1e3d816c5393": mk(nil), // start_instances
+		"a3ac7bc1-ec98-4189-bd47-0f27241dc970": mk(nil), // slack
+		"87bed1a9-8dc7-43b6-bba7-24f0d64a6ec4": mk(nil), // output/set
+		"a6722aba-57c2-4b5a-8db0-12eae954781d": mk(nil), // describe_security_groups
+		"f750988f-2c6e-4c63-9326-05ea0a9ce4d2": if2,     // If2 (branch under test)
+		"8b3867a9-bb22-4cae-a2a3-6ce9dbb82b12": mk(nil), // create_security_group
+		"c003d862-e610-4c8a-a442-834c037d8499": mk(nil), // authorize
+		"8e0ff034-b10d-494e-a3c5-b40b581da4c1": mk(nil), // array_index (If2 false)
+		"9ec8eaf0-4f80-4f0f-a113-9374bc621fe1": mk(nil), // object_get (If2 false)
 	}
 
 	f := &Flow{
 		Nodes: []*Node{
 			{ID: "a186e891-ee43-4de9-8a78-5e7badcef6a4", Type: "a186e891-ee43-4de9-8a78-5e7badcef6a4", Data: &NodeData{Config: NodeConfig{Type: ActionTypeTrigger}}},
 			{ID: "9dc5d617-89ae-4646-b715-c1826c812884", Type: "9dc5d617-89ae-4646-b715-c1826c812884", Data: &NodeData{Config: NodeConfig{Type: ActionTypeTrigger}}},
-			// Run Instances references the (disabled) Create Security Group's
-			// output in its security-group input — exactly as the real flow does.
-			// A ${nodeId.key} reference must NOT execute a node on a disabled
-			// branch; it should resolve to empty.
 			{ID: "3b1fda60-1b58-43d9-bf9a-178cd911e7fd", Type: "3b1fda60-1b58-43d9-bf9a-178cd911e7fd", Data: &NodeData{Config: NodeConfig{Type: ActionTypeAction, Inputs: []*Connection{
 				{Name: "security_group_ids", Type: ConnectionTypeString, Value: "${8b3867a9-bb22-4cae-a2a3-6ce9dbb82b12.group_id}"},
 			}}}},
@@ -143,24 +143,49 @@ func TestSelfStart_FullTopology(t *testing.T) {
 		nodeResults: make(map[string]map[string]interface{}),
 		outputs:     make(map[string]interface{}),
 	}
+	return f, actions, "9dc5d617-89ae-4646-b715-c1826c812884" // manual trigger entry
+}
 
-	entry := "9dc5d617-89ae-4646-b715-c1826c812884" // manual trigger
+// node id aliases for readability in assertions
+const (
+	nRunInstances = "3b1fda60-1b58-43d9-bf9a-178cd911e7fd"
+	nDescribeSG   = "a6722aba-57c2-4b5a-8db0-12eae954781d"
+	nIf2          = "f750988f-2c6e-4c63-9326-05ea0a9ce4d2"
+	nCreateSG     = "8b3867a9-bb22-4cae-a2a3-6ce9dbb82b12"
+	nAuthorize    = "c003d862-e610-4c8a-a442-834c037d8499"
+	nObjGetFalse  = "9ec8eaf0-4f80-4f0f-a113-9374bc621fe1" // object_get on If2 false-branch
+)
+
+// If2 = false ("SG already exists"): the false-branch (describe_sg -> If2 ->
+// object_get) feeds Run Instances and runs; the unmatched true-branch (Create SG
+// -> Authorize) is skipped; the ${create-sg.group_id} reference resolves empty.
+func TestSelfStart_FalseBranch(t *testing.T) {
+	RegisterTestingT(t)
+	runs := map[string]int{}
+	f, actions, entry := buildSelfStart(runs, false)
 	_, err := f.Execute(actions, &entry, nil)
 	Expect(err).To(BeNil())
-	t.Logf("run_instances=%d create_security_group=%d authorize=%d objget_if2=%d describe_sg=%d",
-		runs["3b1fda60-1b58-43d9-bf9a-178cd911e7fd"],
-		runs["8b3867a9-bb22-4cae-a2a3-6ce9dbb82b12"],
-		runs["c003d862-e610-4c8a-a442-834c037d8499"],
-		runs["9ec8eaf0-4f80-4f0f-a113-9374bc621fe1"],
-		runs["a6722aba-57c2-4b5a-8db0-12eae954781d"])
-	// User's exact expectation: the matched false-branch of If2 (describe_sg ->
-	// If2 -> array_index -> object_get) feeds Run Instances and MUST run; only
-	// the unmatched true-branch (Create SG -> Authorize) must be skipped; and
-	// Run Instances must run exactly once.
-	Expect(runs["a6722aba-57c2-4b5a-8db0-12eae954781d"]).To(Equal(1), "describe_security_groups must run (input provider)")
-	Expect(runs["f750988f-2c6e-4c63-9326-05ea0a9ce4d2"]).To(Equal(1), "If2 must run")
-	Expect(runs["9ec8eaf0-4f80-4f0f-a113-9374bc621fe1"]).To(Equal(1), "object_get (If2 matched false-branch) must run")
-	Expect(runs["8b3867a9-bb22-4cae-a2a3-6ce9dbb82b12"]).To(Equal(0), "create_security_group (unmatched true-branch) must NOT run")
-	Expect(runs["c003d862-e610-4c8a-a442-834c037d8499"]).To(Equal(0), "authorize (child of skipped CSG) must NOT run")
-	Expect(runs["3b1fda60-1b58-43d9-bf9a-178cd911e7fd"]).To(Equal(1), "run_instances must run exactly once")
+	Expect(runs[nDescribeSG]).To(Equal(1), "describe_security_groups must run (input provider)")
+	Expect(runs[nIf2]).To(Equal(1), "If2 must run")
+	Expect(runs[nObjGetFalse]).To(Equal(1), "object_get (matched false-branch) must run")
+	Expect(runs[nCreateSG]).To(Equal(0), "create_security_group (unmatched true-branch) must NOT run")
+	Expect(runs[nAuthorize]).To(Equal(0), "authorize must NOT run")
+	Expect(runs[nRunInstances]).To(Equal(1), "run_instances must run exactly once")
+}
+
+// If2 = true ("create a new SG"): the true-branch runs fully — Create SG AND its
+// child Authorize-Ingress; the unmatched false-branch (object_get) is skipped;
+// Run Instances runs exactly once.
+func TestSelfStart_TrueBranch(t *testing.T) {
+	RegisterTestingT(t)
+	runs := map[string]int{}
+	f, actions, entry := buildSelfStart(runs, true)
+	_, err := f.Execute(actions, &entry, nil)
+	Expect(err).To(BeNil())
+	Expect(runs[nDescribeSG]).To(Equal(1), "describe_security_groups must run")
+	Expect(runs[nIf2]).To(Equal(1), "If2 must run")
+	Expect(runs[nCreateSG]).To(Equal(1), "create_security_group (matched true-branch) must run")
+	Expect(runs[nAuthorize]).To(Equal(1), "authorize (child of matched Create SG) must run")
+	Expect(runs[nObjGetFalse]).To(Equal(0), "object_get (unmatched false-branch) must NOT run")
+	Expect(runs[nRunInstances]).To(Equal(1), "run_instances must run exactly once")
 }

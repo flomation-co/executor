@@ -788,6 +788,7 @@ type Flow struct {
 	resumedSuspendNodeID string                 // the node that caused the original suspend
 	resumeData           map[string]interface{} // data injected on resume (e.g. a human's choice)
 	traversedNodes       map[string]bool        // tracks which nodes have had children traversed
+	executing            map[string]bool        // nodes whose action is mid-execution — re-entrancy guard for diamonds
 	context              *ExecutionContext
 	ctx                  gocontext.Context
 	cancel               gocontext.CancelFunc
@@ -1514,6 +1515,20 @@ func (f *Flow) executeNodeActionOnly(actions map[string]Action, node *Node, envi
 		return v, nil
 	}
 
+	// Re-entrancy guard for diamonds: if this node's action is already mid-
+	// execution higher up the stack, a parent/scoped pull has walked forward back
+	// into it. Do NOT run it a second time — return the (not-yet-cached) empty
+	// state; the outer frame will finish it. Without this, resolving a parent
+	// that also has this node as a child re-runs the node (double-run).
+	if f.executing == nil {
+		f.executing = make(map[string]bool)
+	}
+	if f.executing[node.ID] {
+		return nil, nil
+	}
+	f.executing[node.ID] = true
+	defer delete(f.executing, node.ID)
+
 	log.WithFields(log.Fields{
 		"id":     node.ID,
 		"action": node.Type,
@@ -1559,15 +1574,14 @@ func (f *Flow) executeNodeActionOnly(actions map[string]Action, node *Node, envi
 			continue
 		}
 
-		// Resolve the parent's INPUTS only — its own action plus, recursively,
-		// its ancestors. Deliberately NOT ExecuteNode: that also cascades
-		// FORWARD through the parent's children (Phase 2). In a diamond where the
-		// current node is itself a child of this parent (e.g. Run Instances wired
-		// below an object_get that also feeds it), ExecuteNode would traverse back
-		// into the current node while it is mid-resolution and run it a SECOND
-		// time. Forward progress for every node is driven by executeNodeChildren
-		// from the entry, so backward input-resolution must stay action-only.
-		results, err = f.executeNodeActionOnly(actions, p, environment)
+		// Resolve the parent via ExecuteNode (action + its children). Traversing
+		// children matters for a node reached ONLY as a parent — e.g. a rootless
+		// subgraph pulled in as an input provider: its matched-branch children
+		// (like an Authorize-Ingress after a Create-Security-Group) must still
+		// run. The in-progress guard in executeNodeActionOnly prevents the one
+		// dangerous case — a child that is the very node we're resolving for
+		// (diamond) — from being re-run.
+		results, err = f.ExecuteNode(actions, p, environment)
 		if err != nil {
 			return nil, err
 		}
@@ -2013,12 +2027,13 @@ func (f *Flow) executeNodeActionOnly(actions map[string]Action, node *Node, envi
 										"node_id": scopeNodeID,
 										"key":     scopeKey,
 									}).Info("executing scoped dependency node")
-									// Resolve the referenced node's OUTPUT only (action
-									// + its ancestors), never its forward subtree — an
-									// ExecuteNode here would cascade into the node's
-									// children, re-running the node we're substituting
-									// for when it is one of them (diamond double-run).
-									if _, err := f.executeNodeActionOnly(actions, scopeNode, environment); err != nil {
+									// ExecuteNode (action + children) so a matched-
+									// branch child of the referenced node still runs
+									// (e.g. Authorize-Ingress after Create-Security-
+									// Group). The in-progress guard prevents re-running
+									// the node we're substituting for if it happens to
+									// be a downstream child (diamond double-run).
+									if _, err := f.ExecuteNode(actions, scopeNode, environment); err != nil {
 										log.WithFields(log.Fields{
 											"node_id": scopeNodeID,
 											"error":   err,
@@ -2903,6 +2918,13 @@ func (f *Flow) executeNodeChildren(actions map[string]Action, node *Node, output
 			continue
 		}
 		if c.Data != nil && (c.Data.Label == "subflow/begin" || c.Type == "subflow/begin") {
+			continue
+		}
+		// Skip a child that is currently mid-execution higher up the stack
+		// (diamond). It is being handled by its own outer frame, which will
+		// traverse its children; touching it here would run its action with a
+		// not-yet-ready parent set and prematurely walk its subtree.
+		if f.executing[c.ID] {
 			continue
 		}
 		validChildren = append(validChildren, c)
