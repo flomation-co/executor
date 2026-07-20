@@ -69,11 +69,10 @@ func parseConnectionOptions(compositeLit *ast.CompositeLit) []core.ConnectionOpt
 			if !ok {
 				continue
 			}
-			val, ok := kv.Value.(*ast.BasicLit)
+			s, ok := stringValue(kv.Value)
 			if !ok {
 				continue
 			}
-			s, _ := strconv.Unquote(val.Value)
 			switch key.Name {
 			case "Name":
 				opt.Name = s
@@ -86,6 +85,61 @@ func parseConnectionOptions(compositeLit *ast.CompositeLit) []core.ConnectionOpt
 		options = append(options, opt)
 	}
 	return options
+}
+
+// stringValue resolves a Go expression that the AST walker expects to be a
+// string constant.
+//
+// It exists because "a" + "b" is not an *ast.BasicLit — it is an
+// *ast.BinaryExpr whose operands are. Every site here used to type-assert
+// straight to *ast.BasicLit and `continue` when that failed, so a concatenated
+// constant was not a parse error, it was a SILENT empty value: the action kept
+// building, kept passing tests, and shipped with a blank field in the palette.
+// That is exactly what happened to slack/rich_message, whose Description was
+// split across lines with `+` and had therefore been empty in the manifest for
+// its entire life.
+//
+// Concatenation is unavoidable in practice — it is how you wrap a long
+// description at a sane line length — so the generator has to understand it
+// rather than the actions having to avoid it.
+//
+// The second return reports whether this really was a resolvable string
+// constant, so callers can tell "" (a genuinely empty literal) apart from "I
+// could not read this", and report the latter instead of swallowing it.
+func stringValue(expr ast.Expr) (string, bool) {
+	switch v := expr.(type) {
+	case *ast.BasicLit:
+		if v.Kind != token.STRING {
+			return "", false
+		}
+		s, err := strconv.Unquote(v.Value)
+		if err != nil {
+			return "", false
+		}
+		return s, true
+
+	case *ast.BinaryExpr:
+		// Only `+` concatenates; anything else is not a string constant we can
+		// fold (and no other operator is valid on strings anyway).
+		if v.Op != token.ADD {
+			return "", false
+		}
+		lhs, ok := stringValue(v.X)
+		if !ok {
+			return "", false
+		}
+		rhs, ok := stringValue(v.Y)
+		if !ok {
+			return "", false
+		}
+		return lhs + rhs, true
+
+	case *ast.ParenExpr:
+		return stringValue(v.X)
+
+	default:
+		return "", false
+	}
 }
 
 func parseVisibleWhen(compositeLit *ast.CompositeLit) *core.VisibleWhen {
@@ -101,14 +155,13 @@ func parseVisibleWhen(compositeLit *ast.CompositeLit) *core.VisibleWhen {
 		}
 		switch key.Name {
 		case "Field":
-			if v, ok := kv.Value.(*ast.BasicLit); ok {
-				vw.Field, _ = strconv.Unquote(v.Value)
+			if s, ok := stringValue(kv.Value); ok {
+				vw.Field = s
 			}
 		case "Values":
 			if cl, ok := kv.Value.(*ast.CompositeLit); ok {
 				for _, elt := range cl.Elts {
-					if v, ok := elt.(*ast.BasicLit); ok {
-						s, _ := strconv.Unquote(v.Value)
+					if s, ok := stringValue(elt); ok {
 						vw.Values = append(vw.Values, s)
 					}
 				}
@@ -199,8 +252,13 @@ func inspectPackage(dir string) map[string]ManifestEntry {
 					if len(v.Values) == 0 {
 						continue
 					}
-					val, ok := v.Values[0].(*ast.BasicLit)
-					if !ok {
+					// A string constant (possibly concatenated) covers every
+					// metadata field except Type, which may also be written as a
+					// bare int literal — so keep the raw literal too rather than
+					// silently dropping that form.
+					strVal, isString := stringValue(v.Values[0])
+					lit, isLit := v.Values[0].(*ast.BasicLit)
+					if !isString && !isLit {
 
 						if val, ok := v.Values[0].(*ast.SelectorExpr); ok {
 							for _, name := range v.Names {
@@ -273,8 +331,8 @@ func inspectPackage(dir string) map[string]ManifestEntry {
 								key := el.Key.(*ast.Ident)
 
 								switch v := el.Value.(type) {
-								case *ast.BasicLit:
-									value, _ = strconv.Unquote(v.Value)
+								case *ast.BasicLit, *ast.BinaryExpr, *ast.ParenExpr:
+									value, _ = stringValue(v)
 								case *ast.SelectorExpr:
 									t := v.Sel.Name
 									switch t {
@@ -365,56 +423,48 @@ func inspectPackage(dir string) map[string]ManifestEntry {
 					for _, name := range v.Names {
 						switch name.String() {
 						case "Author":
-							stringVal, _ := strconv.Unquote(val.Value)
-							me.Author = stringVal
+							me.Author = strVal
 							meUpdated = true
 						case "Organisation":
-							stringVal, _ := strconv.Unquote(val.Value)
-							me.Organisation = stringVal
+							me.Organisation = strVal
 							meUpdated = true
 						case "Name":
-							stringVal, _ := strconv.Unquote(val.Value)
-							me.Name = stringVal
+							me.Name = strVal
 							meUpdated = true
 						case "Description":
-							stringVal, _ := strconv.Unquote(val.Value)
-							me.Description = stringVal
+							me.Description = strVal
 							meUpdated = true
 						case "Website":
-							stringVal, _ := strconv.Unquote(val.Value)
-							me.Website = stringVal
+							me.Website = strVal
 							meUpdated = true
 						case "Icon":
-							stringVal, _ := strconv.Unquote(val.Value)
-							me.Icon = stringVal
+							me.Icon = strVal
 							meUpdated = true
 						case "Date":
-							stringVal, _ := strconv.Unquote(val.Value)
-							me.Date = stringVal
+							me.Date = strVal
 							meUpdated = true
 						case "Type":
-							me.Type, _ = strconv.ParseInt(val.Value, 10, 64)
-							meUpdated = true
+							if isLit {
+								me.Type, _ = strconv.ParseInt(lit.Value, 10, 64)
+								meUpdated = true
+							}
 						case "CategoryName":
-							stringVal, _ := strconv.Unquote(val.Value)
 							if me.Category == nil {
 								me.Category = &CategoryMeta{}
 							}
-							me.Category.Name = stringVal
+							me.Category.Name = strVal
 							me.HasCategory = true
 						case "CategoryIcon":
-							stringVal, _ := strconv.Unquote(val.Value)
 							if me.Category == nil {
 								me.Category = &CategoryMeta{}
 							}
-							me.Category.Icon = stringVal
+							me.Category.Icon = strVal
 							me.HasCategory = true
 						case "CategoryDescription":
-							stringVal, _ := strconv.Unquote(val.Value)
 							if me.Category == nil {
 								me.Category = &CategoryMeta{}
 							}
-							me.Category.Description = stringVal
+							me.Category.Description = strVal
 							me.HasCategory = true
 						}
 					}
