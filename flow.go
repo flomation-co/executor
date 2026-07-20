@@ -1559,7 +1559,15 @@ func (f *Flow) executeNodeActionOnly(actions map[string]Action, node *Node, envi
 			continue
 		}
 
-		results, err = f.ExecuteNode(actions, p, environment)
+		// Resolve the parent's INPUTS only — its own action plus, recursively,
+		// its ancestors. Deliberately NOT ExecuteNode: that also cascades
+		// FORWARD through the parent's children (Phase 2). In a diamond where the
+		// current node is itself a child of this parent (e.g. Run Instances wired
+		// below an object_get that also feeds it), ExecuteNode would traverse back
+		// into the current node while it is mid-resolution and run it a SECOND
+		// time. Forward progress for every node is driven by executeNodeChildren
+		// from the entry, so backward input-resolution must stay action-only.
+		results, err = f.executeNodeActionOnly(actions, p, environment)
 		if err != nil {
 			return nil, err
 		}
