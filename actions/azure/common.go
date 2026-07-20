@@ -45,6 +45,13 @@ import (
 type managedTokenCredential struct{ token string }
 
 func (c managedTokenCredential) GetToken(_ context.Context, _ policy.TokenRequestOptions) (azcore.AccessToken, error) {
+	// The bearer is fixed for the life of the run — this adapter holds no refresh
+	// token and cannot mint a new one, so ExpiresOn is a synthetic floor to satisfy
+	// the SDK's cache, not a real expiry. Mid-run refresh is out of scope for
+	// Phase 1: runs are short relative to the ~1h ARM token lifetime, and the api
+	// poller keeps the STORED credential fresh so the NEXT run resolves a live
+	// token. A run that outlives the token would see ARM 401s — acceptable now;
+	// true mid-run refresh (carry the refresh token into the executor) is Phase 2.
 	return azcore.AccessToken{Token: c.token, ExpiresOn: time.Now().Add(5 * time.Minute)}, nil
 }
 
