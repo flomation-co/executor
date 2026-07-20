@@ -52,6 +52,36 @@ func TestGetAuthRejectsBadRegion(t *testing.T) {
 	}
 }
 
+// TestGetAuthRedactsMalformedKey is the malformed-key echo path Dan flagged: a
+// key that passes the non-empty check but fails to parse. The resulting error
+// flows into ErrorResult's error AND tool_result, so neither may contain key
+// material.
+func TestGetAuthRedactsMalformedKey(t *testing.T) {
+	const secretBody = "SUPERSECRETKEYBODY0123456789abcdef"
+	in := []*core.Connection{
+		sc("tenancy_ocid", "ocid1.tenancy.oc1..aaaa"),
+		sc("user_ocid", "ocid1.user.oc1..aaaa"),
+		sc("region", "uk-london-1"),
+		sc("fingerprint", "aa:bb:cc"),
+		sc("private_key", "-----BEGIN RSA PRIVATE KEY-----\n"+secretBody+"\n-----END RSA PRIVATE KEY-----"),
+	}
+	_, err := GetAuth(in)
+	if err == nil {
+		t.Fatal("GetAuth accepted a malformed private key")
+	}
+	if strings.Contains(err.Error(), secretBody) {
+		t.Errorf("GetAuth leaked key material in the error: %q", err)
+	}
+	// The soft-failure envelope built from that error must also be clean on BOTH
+	// the error and tool_result fields.
+	res := ErrorResult(err.Error())
+	for _, k := range []string{"error", "tool_result"} {
+		if s, _ := res[k].(string); strings.Contains(s, secretBody) {
+			t.Errorf("ErrorResult[%q] leaked key material", k)
+		}
+	}
+}
+
 // TestFieldLabel: *_ocid fields render with an upper-cased OCID token, matching
 // RequiredCompartment's wording.
 func TestFieldLabel(t *testing.T) {

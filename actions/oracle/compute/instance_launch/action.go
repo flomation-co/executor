@@ -88,6 +88,11 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	if bv, ok, err := compute.OptionalFloat32("boot_volume_size_in_gbs", inputs); err != nil {
 		return compute.ErrorResult(err.Error()), nil
 	} else if ok {
+		// OCI's minimum boot volume is 50 GB; catch it here so the operator gets a
+		// clear message instead of an opaque 400 from the API.
+		if bv < 50 {
+			return compute.ErrorResult("boot volume size must be at least 50 GB"), nil
+		}
 		size := int64(bv)
 		source.BootVolumeSizeInGBs = &size
 	}
@@ -127,15 +132,14 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	if err != nil {
 		return compute.ErrorResult(err.Error()), nil
 	}
-	if hasOcpus || hasMem {
-		sc := &ocicore.LaunchInstanceShapeConfigDetails{}
-		if hasOcpus {
-			sc.Ocpus = &ocpus
-		}
-		if hasMem {
-			sc.MemoryInGBs = &mem
-		}
-		details.ShapeConfig = sc
+	// A flexible (.Flex) shape needs BOTH OCPUs and Memory in its shape config;
+	// supplying only one makes OCI 400 with a cryptic message. Require them
+	// together (or neither, for a fixed shape) and say so plainly.
+	if hasOcpus != hasMem {
+		return compute.ErrorResult("a flexible (.Flex) shape needs both OCPUs and Memory GB set together — supply both, or leave both blank for a fixed shape"), nil
+	}
+	if hasOcpus {
+		details.ShapeConfig = &ocicore.LaunchInstanceShapeConfigDetails{Ocpus: &ocpus, MemoryInGBs: &mem}
 	}
 
 	resp, err := client.LaunchInstance(compute.Context(), ocicore.LaunchInstanceRequest{LaunchInstanceDetails: details})

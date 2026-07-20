@@ -142374,7 +142374,7 @@
     ]
   },
   "oracle/compute/instance_get_all": {
-    "hash": "619a5c6fd896ad129f06a55f503e18538ad7228d961fd07d087aae63cd43583e",
+    "hash": "27caa035ad0c4d1766da283edbf4077439f0ac81bed15de74c92977123196e6e",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "OCI Compute: List Instances",
@@ -142460,7 +142460,49 @@
         "type": "string",
         "value": null,
         "label": "Lifecycle State filter",
-        "placeholder": "e.g. RUNNING, STOPPED, TERMINATED (optional)"
+        "placeholder": "Filter by state (optional)",
+        "options": [
+          {
+            "name": "Any (all states)",
+            "value": ""
+          },
+          {
+            "name": "Running",
+            "value": "RUNNING"
+          },
+          {
+            "name": "Stopped",
+            "value": "STOPPED"
+          },
+          {
+            "name": "Starting",
+            "value": "STARTING"
+          },
+          {
+            "name": "Stopping",
+            "value": "STOPPING"
+          },
+          {
+            "name": "Provisioning",
+            "value": "PROVISIONING"
+          },
+          {
+            "name": "Terminating",
+            "value": "TERMINATING"
+          },
+          {
+            "name": "Terminated",
+            "value": "TERMINATED"
+          },
+          {
+            "name": "Creating Image",
+            "value": "CREATING_IMAGE"
+          },
+          {
+            "name": "Moving",
+            "value": "MOVING"
+          }
+        ]
       }
     ],
     "outputs": [
@@ -142502,7 +142544,7 @@
     ]
   },
   "oracle/compute/instance_launch": {
-    "hash": "794f1694d238e64a9854a4dc8b70f459a833aadf67312d5e4b2cd472508fd020",
+    "hash": "4989e0b410e073a2bdf912f3a42a9d1032b11d904e414aa5e792e10db25c89cd",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "OCI Compute: Launch Instance",

@@ -36,7 +36,18 @@ var Inputs = [...]core.Connection{
 	{Name: "private_key_passphrase", Type: core.ConnectionTypeSecret, Label: "Private Key Passphrase", Placeholder: "Only if the key is encrypted (optional)"},
 	{Name: "compartment_ocid", Type: core.ConnectionTypeString, Label: "Compartment OCID", Placeholder: "ocid1.compartment.oc1..aaaa… (use the tenancy OCID for the root compartment)", Required: true},
 	{Name: "display_name", Type: core.ConnectionTypeString, Label: "Display Name filter", Placeholder: "Only instances with this exact name (optional)"},
-	{Name: "lifecycle_state", Type: core.ConnectionTypeString, Label: "Lifecycle State filter", Placeholder: "e.g. RUNNING, STOPPED, TERMINATED (optional)"},
+	{Name: "lifecycle_state", Type: core.ConnectionTypeString, Label: "Lifecycle State filter", Placeholder: "Filter by state (optional)", Options: []core.ConnectionOption{
+		{Name: "Any (all states)", Value: ""},
+		{Name: "Running", Value: "RUNNING"},
+		{Name: "Stopped", Value: "STOPPED"},
+		{Name: "Starting", Value: "STARTING"},
+		{Name: "Stopping", Value: "STOPPING"},
+		{Name: "Provisioning", Value: "PROVISIONING"},
+		{Name: "Terminating", Value: "TERMINATING"},
+		{Name: "Terminated", Value: "TERMINATED"},
+		{Name: "Creating Image", Value: "CREATING_IMAGE"},
+		{Name: "Moving", Value: "MOVING"},
+	}},
 }
 
 var Outputs = [...]core.Connection{
