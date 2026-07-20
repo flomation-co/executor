@@ -24,12 +24,42 @@ import (
 	"fmt"
 	"strings"
 	"sync"
+	"time"
 
 	"github.com/Azure/azure-sdk-for-go/sdk/azcore"
 	"github.com/Azure/azure-sdk-for-go/sdk/azcore/cloud"
 	"github.com/Azure/azure-sdk-for-go/sdk/azcore/policy"
 	"github.com/Azure/azure-sdk-for-go/sdk/azidentity"
 )
+
+// managedTokenCredential wraps a platform-minted bearer token (the value an
+// action's ${credentials.X} input resolves to under the "Connect Azure" auth
+// method) as an azcore.TokenCredential the ARM/SDK clients can consume — the
+// counterpart to entraCredential, but with no secret in the executor at all.
+//
+// The token is already scoped (the connector minted it for the right resource),
+// so opts.Scopes is ignored, exactly as entraCredential ignores a non-matching
+// requested scope. Each flow run resolves a fresh token and the api's
+// credential-refresh poller keeps it live, so a short static expiry floor is
+// enough to satisfy the SDK's cache without it trying to refresh here.
+type managedTokenCredential struct{ token string }
+
+func (c managedTokenCredential) GetToken(_ context.Context, _ policy.TokenRequestOptions) (azcore.AccessToken, error) {
+	// The bearer is fixed for the life of the run — this adapter holds no refresh
+	// token and cannot mint a new one, so ExpiresOn is a synthetic floor to satisfy
+	// the SDK's cache, not a real expiry. Mid-run refresh is out of scope for
+	// Phase 1: runs are short relative to the ~1h ARM token lifetime, and the api
+	// poller keeps the STORED credential fresh so the NEXT run resolves a live
+	// token. A run that outlives the token would see ARM 401s — acceptable now;
+	// true mid-run refresh (carry the refresh token into the executor) is Phase 2.
+	return azcore.AccessToken{Token: c.token, ExpiresOn: time.Now().Add(5 * time.Minute)}, nil
+}
+
+// NewManagedTokenCredential adapts a resolved managed bearer token into an
+// azcore.TokenCredential. Empty token is a caller error (validate first).
+func NewManagedTokenCredential(token string) azcore.TokenCredential {
+	return managedTokenCredential{token: token}
+}
 
 // authorityHost is where the token exchange happens, fed to azidentity as a
 // cloud configuration rather than used to build a URL by hand. It is a var as

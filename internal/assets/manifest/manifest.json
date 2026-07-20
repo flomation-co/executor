@@ -11025,7 +11025,7 @@
     ]
   },
   "azure/compute/disk_get_all": {
-    "hash": "5ebd96ef6798cde0b1a966b51c11d7eb8cebb80664f1aae38f76d3b523c528d4",
+    "hash": "52f306302bbfb0397aaf3d20deed700e1031e08008b7fe42c682a58c939fcd6e",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Azure Disk: List Managed Disks",
@@ -11046,12 +11046,48 @@
     },
     "inputs": [
       {
+        "name": "auth_method",
+        "type": "string",
+        "value": null,
+        "label": "Authentication",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "Service Principal (keys)",
+            "value": "keys"
+          },
+          {
+            "name": "Connect Azure",
+            "value": "connect"
+          }
+        ]
+      },
+      {
+        "name": "credential",
+        "type": "credential",
+        "value": null,
+        "label": "Azure Connection",
+        "placeholder": "Pick a connected Azure account",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "connect"
+          ]
+        }
+      },
+      {
         "name": "azure_tenant_id",
         "type": "string",
         "value": null,
         "label": "Tenant ID",
         "placeholder": "Directory (tenant) ID — a GUID or your-tenant.onmicrosoft.com",
-        "required": true
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "",
+            "keys"
+          ]
+        }
       },
       {
         "name": "azure_client_id",
@@ -11059,7 +11095,13 @@
         "value": null,
         "label": "Client ID",
         "placeholder": "Application (client) ID of the service principal",
-        "required": true
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "",
+            "keys"
+          ]
+        }
       },
       {
         "name": "azure_client_secret",
@@ -11067,7 +11109,13 @@
         "value": null,
         "label": "Client Secret",
         "placeholder": "The app needs a role (e.g. Reader) on the subscription or resource group",
-        "required": true
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "",
+            "keys"
+          ]
+        }
       },
       {
         "name": "subscription_id",
@@ -11124,7 +11172,7 @@
     ]
   },
   "azure/compute/image_get_all": {
-    "hash": "99340fa03724535e7306d2cfe46867329f57375c98e2b4bd24cbafb844deb16e",
+    "hash": "948c046a32b1d62e78d35d03f6e1219f0b74ab53bcde70c8c29e65bfb52ab3eb",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Azure Image: List Custom Images",
@@ -11145,12 +11193,48 @@
     },
     "inputs": [
       {
+        "name": "auth_method",
+        "type": "string",
+        "value": null,
+        "label": "Authentication",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "Service Principal (keys)",
+            "value": "keys"
+          },
+          {
+            "name": "Connect Azure",
+            "value": "connect"
+          }
+        ]
+      },
+      {
+        "name": "credential",
+        "type": "credential",
+        "value": null,
+        "label": "Azure Connection",
+        "placeholder": "Pick a connected Azure account",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "connect"
+          ]
+        }
+      },
+      {
         "name": "azure_tenant_id",
         "type": "string",
         "value": null,
         "label": "Tenant ID",
         "placeholder": "Directory (tenant) ID — a GUID or your-tenant.onmicrosoft.com",
-        "required": true
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "",
+            "keys"
+          ]
+        }
       },
       {
         "name": "azure_client_id",
@@ -11158,7 +11242,13 @@
         "value": null,
         "label": "Client ID",
         "placeholder": "Application (client) ID of the service principal",
-        "required": true
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "",
+            "keys"
+          ]
+        }
       },
       {
         "name": "azure_client_secret",
@@ -11166,7 +11256,13 @@
         "value": null,
         "label": "Client Secret",
         "placeholder": "The app needs a role (e.g. Reader) on the subscription or resource group",
-        "required": true
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "",
+            "keys"
+          ]
+        }
       },
       {
         "name": "subscription_id",
@@ -11223,7 +11319,7 @@
     ]
   },
   "azure/compute/nsg_add_inbound_rule": {
-    "hash": "2dc341c384e5f83ce91642257bc6825e05c910b69127d709cacd45ec013064f6",
+    "hash": "0bfa5639c1bda91e27cebb638e3c7666ed82e54b256c567192967e03c193cea2",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Azure NSG: Add Inbound Rule",
@@ -11244,12 +11340,48 @@
     },
     "inputs": [
       {
+        "name": "auth_method",
+        "type": "string",
+        "value": null,
+        "label": "Authentication",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "Service Principal (keys)",
+            "value": "keys"
+          },
+          {
+            "name": "Connect Azure",
+            "value": "connect"
+          }
+        ]
+      },
+      {
+        "name": "credential",
+        "type": "credential",
+        "value": null,
+        "label": "Azure Connection",
+        "placeholder": "Pick a connected Azure account",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "connect"
+          ]
+        }
+      },
+      {
         "name": "azure_tenant_id",
         "type": "string",
         "value": null,
         "label": "Tenant ID",
         "placeholder": "Directory (tenant) ID — a GUID or your-tenant.onmicrosoft.com",
-        "required": true
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "",
+            "keys"
+          ]
+        }
       },
       {
         "name": "azure_client_id",
@@ -11257,7 +11389,13 @@
         "value": null,
         "label": "Client ID",
         "placeholder": "Application (client) ID of the service principal",
-        "required": true
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "",
+            "keys"
+          ]
+        }
       },
       {
         "name": "azure_client_secret",
@@ -11265,7 +11403,13 @@
         "value": null,
         "label": "Client Secret",
         "placeholder": "The app needs a role (e.g. Network Contributor) on the resource group",
-        "required": true
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "",
+            "keys"
+          ]
+        }
       },
       {
         "name": "subscription_id",
@@ -11408,7 +11552,7 @@
     ]
   },
   "azure/compute/nsg_create": {
-    "hash": "ac161647ec1c50339a25ec25e92595302a9acf5720295c2f91fdab2ad0f9c07e",
+    "hash": "de6168c4b0bc6e166235dfc7082d1126894e4e097213e6d73daac4feffcf16a9",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Azure NSG: Create Security Group",
@@ -11429,12 +11573,48 @@
     },
     "inputs": [
       {
+        "name": "auth_method",
+        "type": "string",
+        "value": null,
+        "label": "Authentication",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "Service Principal (keys)",
+            "value": "keys"
+          },
+          {
+            "name": "Connect Azure",
+            "value": "connect"
+          }
+        ]
+      },
+      {
+        "name": "credential",
+        "type": "credential",
+        "value": null,
+        "label": "Azure Connection",
+        "placeholder": "Pick a connected Azure account",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "connect"
+          ]
+        }
+      },
+      {
         "name": "azure_tenant_id",
         "type": "string",
         "value": null,
         "label": "Tenant ID",
         "placeholder": "Directory (tenant) ID — a GUID or your-tenant.onmicrosoft.com",
-        "required": true
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "",
+            "keys"
+          ]
+        }
       },
       {
         "name": "azure_client_id",
@@ -11442,7 +11622,13 @@
         "value": null,
         "label": "Client ID",
         "placeholder": "Application (client) ID of the service principal",
-        "required": true
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "",
+            "keys"
+          ]
+        }
       },
       {
         "name": "azure_client_secret",
@@ -11450,7 +11636,13 @@
         "value": null,
         "label": "Client Secret",
         "placeholder": "The app needs a role (e.g. Network Contributor) on the resource group",
-        "required": true
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "",
+            "keys"
+          ]
+        }
       },
       {
         "name": "subscription_id",
@@ -11524,7 +11716,7 @@
     ]
   },
   "azure/compute/nsg_delete": {
-    "hash": "361f7e965bbd29e0db7ef8d9675f08a79c47c2abb00c2e8e28694188e3c9a071",
+    "hash": "237eed3b149a8063e740a7b838deb0ea826d075f1cfa652ade046cf748b3a97e",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Azure NSG: Delete Security Group",
@@ -11545,12 +11737,48 @@
     },
     "inputs": [
       {
+        "name": "auth_method",
+        "type": "string",
+        "value": null,
+        "label": "Authentication",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "Service Principal (keys)",
+            "value": "keys"
+          },
+          {
+            "name": "Connect Azure",
+            "value": "connect"
+          }
+        ]
+      },
+      {
+        "name": "credential",
+        "type": "credential",
+        "value": null,
+        "label": "Azure Connection",
+        "placeholder": "Pick a connected Azure account",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "connect"
+          ]
+        }
+      },
+      {
         "name": "azure_tenant_id",
         "type": "string",
         "value": null,
         "label": "Tenant ID",
         "placeholder": "Directory (tenant) ID — a GUID or your-tenant.onmicrosoft.com",
-        "required": true
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "",
+            "keys"
+          ]
+        }
       },
       {
         "name": "azure_client_id",
@@ -11558,7 +11786,13 @@
         "value": null,
         "label": "Client ID",
         "placeholder": "Application (client) ID of the service principal",
-        "required": true
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "",
+            "keys"
+          ]
+        }
       },
       {
         "name": "azure_client_secret",
@@ -11566,7 +11800,13 @@
         "value": null,
         "label": "Client Secret",
         "placeholder": "The app needs a role (e.g. Network Contributor) on the resource group",
-        "required": true
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "",
+            "keys"
+          ]
+        }
       },
       {
         "name": "subscription_id",
@@ -11625,7 +11865,7 @@
     ]
   },
   "azure/compute/nsg_get_all": {
-    "hash": "aa28ddef2dd272f3593bafb5158b85e63878e7892f52b3cc014c462229774f5d",
+    "hash": "22a53021c3b466dc6332d4977ba159facd0991f5a8698e4a5137d4f9d992ef6a",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Azure NSG: List Security Groups",
@@ -11646,12 +11886,48 @@
     },
     "inputs": [
       {
+        "name": "auth_method",
+        "type": "string",
+        "value": null,
+        "label": "Authentication",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "Service Principal (keys)",
+            "value": "keys"
+          },
+          {
+            "name": "Connect Azure",
+            "value": "connect"
+          }
+        ]
+      },
+      {
+        "name": "credential",
+        "type": "credential",
+        "value": null,
+        "label": "Azure Connection",
+        "placeholder": "Pick a connected Azure account",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "connect"
+          ]
+        }
+      },
+      {
         "name": "azure_tenant_id",
         "type": "string",
         "value": null,
         "label": "Tenant ID",
         "placeholder": "Directory (tenant) ID — a GUID or your-tenant.onmicrosoft.com",
-        "required": true
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "",
+            "keys"
+          ]
+        }
       },
       {
         "name": "azure_client_id",
@@ -11659,7 +11935,13 @@
         "value": null,
         "label": "Client ID",
         "placeholder": "Application (client) ID of the service principal",
-        "required": true
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "",
+            "keys"
+          ]
+        }
       },
       {
         "name": "azure_client_secret",
@@ -11667,7 +11949,13 @@
         "value": null,
         "label": "Client Secret",
         "placeholder": "The app needs a role (e.g. Reader) on the subscription or resource group",
-        "required": true
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "",
+            "keys"
+          ]
+        }
       },
       {
         "name": "subscription_id",
@@ -11724,7 +12012,7 @@
     ]
   },
   "azure/compute/nsg_remove_inbound_rule": {
-    "hash": "6674c11cb92b39699ff67d661a4ac50d29334cad607c01d87daa312001324043",
+    "hash": "0a4e4121228751ace9a36d02aa4841cfa8a8ed4509630a27c7c0810ba9183565",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Azure NSG: Remove Inbound Rule",
@@ -11745,12 +12033,48 @@
     },
     "inputs": [
       {
+        "name": "auth_method",
+        "type": "string",
+        "value": null,
+        "label": "Authentication",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "Service Principal (keys)",
+            "value": "keys"
+          },
+          {
+            "name": "Connect Azure",
+            "value": "connect"
+          }
+        ]
+      },
+      {
+        "name": "credential",
+        "type": "credential",
+        "value": null,
+        "label": "Azure Connection",
+        "placeholder": "Pick a connected Azure account",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "connect"
+          ]
+        }
+      },
+      {
         "name": "azure_tenant_id",
         "type": "string",
         "value": null,
         "label": "Tenant ID",
         "placeholder": "Directory (tenant) ID — a GUID or your-tenant.onmicrosoft.com",
-        "required": true
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "",
+            "keys"
+          ]
+        }
       },
       {
         "name": "azure_client_id",
@@ -11758,7 +12082,13 @@
         "value": null,
         "label": "Client ID",
         "placeholder": "Application (client) ID of the service principal",
-        "required": true
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "",
+            "keys"
+          ]
+        }
       },
       {
         "name": "azure_client_secret",
@@ -11766,7 +12096,13 @@
         "value": null,
         "label": "Client Secret",
         "placeholder": "The app needs a role (e.g. Network Contributor) on the resource group",
-        "required": true
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "",
+            "keys"
+          ]
+        }
       },
       {
         "name": "subscription_id",
@@ -11833,7 +12169,7 @@
     ]
   },
   "azure/compute/resource_tag_set": {
-    "hash": "e2ddf731cb3a40b31295f073a94ef4999bc23f9af0c95f7c93bd43ecd9e1fd4f",
+    "hash": "478fecff155fcb01d46b9f71e94ecc2e6513bf5f5fa02ee10cb01bd9610f5320",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Azure Resource: Set Tags",
@@ -11854,12 +12190,48 @@
     },
     "inputs": [
       {
+        "name": "auth_method",
+        "type": "string",
+        "value": null,
+        "label": "Authentication",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "Service Principal (keys)",
+            "value": "keys"
+          },
+          {
+            "name": "Connect Azure",
+            "value": "connect"
+          }
+        ]
+      },
+      {
+        "name": "credential",
+        "type": "credential",
+        "value": null,
+        "label": "Azure Connection",
+        "placeholder": "Pick a connected Azure account",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "connect"
+          ]
+        }
+      },
+      {
         "name": "azure_tenant_id",
         "type": "string",
         "value": null,
         "label": "Tenant ID",
         "placeholder": "Directory (tenant) ID — a GUID or your-tenant.onmicrosoft.com",
-        "required": true
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "",
+            "keys"
+          ]
+        }
       },
       {
         "name": "azure_client_id",
@@ -11867,7 +12239,13 @@
         "value": null,
         "label": "Client ID",
         "placeholder": "Application (client) ID of the service principal",
-        "required": true
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "",
+            "keys"
+          ]
+        }
       },
       {
         "name": "azure_client_secret",
@@ -11875,7 +12253,13 @@
         "value": null,
         "label": "Client Secret",
         "placeholder": "The app needs a role (e.g. Tag Contributor) on the resource",
-        "required": true
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "",
+            "keys"
+          ]
+        }
       },
       {
         "name": "subscription_id",
@@ -11941,7 +12325,7 @@
     ]
   },
   "azure/compute/snapshot_create": {
-    "hash": "03a55b02fda6d3bc60dc596549c0a0e0742d8c7408763bfeb94c7f146399384d",
+    "hash": "c422a4b6ca00c75c83dfbed9e8fecddcacbafbdd7d4850b1d1337d1dd2df1dff",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Azure Snapshot: Create",
@@ -11962,12 +12346,48 @@
     },
     "inputs": [
       {
+        "name": "auth_method",
+        "type": "string",
+        "value": null,
+        "label": "Authentication",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "Service Principal (keys)",
+            "value": "keys"
+          },
+          {
+            "name": "Connect Azure",
+            "value": "connect"
+          }
+        ]
+      },
+      {
+        "name": "credential",
+        "type": "credential",
+        "value": null,
+        "label": "Azure Connection",
+        "placeholder": "Pick a connected Azure account",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "connect"
+          ]
+        }
+      },
+      {
         "name": "azure_tenant_id",
         "type": "string",
         "value": null,
         "label": "Tenant ID",
         "placeholder": "Directory (tenant) ID — a GUID or your-tenant.onmicrosoft.com",
-        "required": true
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "",
+            "keys"
+          ]
+        }
       },
       {
         "name": "azure_client_id",
@@ -11975,7 +12395,13 @@
         "value": null,
         "label": "Client ID",
         "placeholder": "Application (client) ID of the service principal",
-        "required": true
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "",
+            "keys"
+          ]
+        }
       },
       {
         "name": "azure_client_secret",
@@ -11983,7 +12409,13 @@
         "value": null,
         "label": "Client Secret",
         "placeholder": "The app needs a role (e.g. Disk Snapshot Contributor) on the resource group",
-        "required": true
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "",
+            "keys"
+          ]
+        }
       },
       {
         "name": "subscription_id",
@@ -12065,7 +12497,7 @@
     ]
   },
   "azure/compute/snapshot_get_all": {
-    "hash": "51dd611cd2094ad076d1bdc403a5fd7f46b097bdbd44e863267d05faf2cae1c0",
+    "hash": "f34aaf52cc7b2c94ef2d2022c235b40846a8c79e584c37e8e07601822f15e036",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Azure Snapshot: List",
@@ -12086,12 +12518,48 @@
     },
     "inputs": [
       {
+        "name": "auth_method",
+        "type": "string",
+        "value": null,
+        "label": "Authentication",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "Service Principal (keys)",
+            "value": "keys"
+          },
+          {
+            "name": "Connect Azure",
+            "value": "connect"
+          }
+        ]
+      },
+      {
+        "name": "credential",
+        "type": "credential",
+        "value": null,
+        "label": "Azure Connection",
+        "placeholder": "Pick a connected Azure account",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "connect"
+          ]
+        }
+      },
+      {
         "name": "azure_tenant_id",
         "type": "string",
         "value": null,
         "label": "Tenant ID",
         "placeholder": "Directory (tenant) ID — a GUID or your-tenant.onmicrosoft.com",
-        "required": true
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "",
+            "keys"
+          ]
+        }
       },
       {
         "name": "azure_client_id",
@@ -12099,7 +12567,13 @@
         "value": null,
         "label": "Client ID",
         "placeholder": "Application (client) ID of the service principal",
-        "required": true
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "",
+            "keys"
+          ]
+        }
       },
       {
         "name": "azure_client_secret",
@@ -12107,7 +12581,13 @@
         "value": null,
         "label": "Client Secret",
         "placeholder": "The app needs a role (e.g. Reader) on the subscription or resource group",
-        "required": true
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "",
+            "keys"
+          ]
+        }
       },
       {
         "name": "subscription_id",
@@ -12164,7 +12644,7 @@
     ]
   },
   "azure/compute/ssh_key_get_all": {
-    "hash": "966b9449caf2eff1acc43d4e9e8540560a154bd029aed751bb6797a77547589e",
+    "hash": "8e405ab028c33ab79b52282bd86669e5c600fc75a50bcd550cdfd19f59062e3c",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Azure SSH Key: List",
@@ -12185,12 +12665,48 @@
     },
     "inputs": [
       {
+        "name": "auth_method",
+        "type": "string",
+        "value": null,
+        "label": "Authentication",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "Service Principal (keys)",
+            "value": "keys"
+          },
+          {
+            "name": "Connect Azure",
+            "value": "connect"
+          }
+        ]
+      },
+      {
+        "name": "credential",
+        "type": "credential",
+        "value": null,
+        "label": "Azure Connection",
+        "placeholder": "Pick a connected Azure account",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "connect"
+          ]
+        }
+      },
+      {
         "name": "azure_tenant_id",
         "type": "string",
         "value": null,
         "label": "Tenant ID",
         "placeholder": "Directory (tenant) ID — a GUID or your-tenant.onmicrosoft.com",
-        "required": true
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "",
+            "keys"
+          ]
+        }
       },
       {
         "name": "azure_client_id",
@@ -12198,7 +12714,13 @@
         "value": null,
         "label": "Client ID",
         "placeholder": "Application (client) ID of the service principal",
-        "required": true
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "",
+            "keys"
+          ]
+        }
       },
       {
         "name": "azure_client_secret",
@@ -12206,7 +12728,13 @@
         "value": null,
         "label": "Client Secret",
         "placeholder": "The app needs a role (e.g. Reader) on the subscription or resource group",
-        "required": true
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "",
+            "keys"
+          ]
+        }
       },
       {
         "name": "subscription_id",
@@ -12263,7 +12791,7 @@
     ]
   },
   "azure/compute/vm_create": {
-    "hash": "43390ca5072bd9f997381ee86d4936313c31bb7c40a941c0c2a9e0d4ac025821",
+    "hash": "0348faae00a06c7eace9da0718f987d654818fe2eaf9d65d7306cfca588c0e9a",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Azure VM: Create",
@@ -12284,12 +12812,48 @@
     },
     "inputs": [
       {
+        "name": "auth_method",
+        "type": "string",
+        "value": null,
+        "label": "Authentication",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "Service Principal (keys)",
+            "value": "keys"
+          },
+          {
+            "name": "Connect Azure",
+            "value": "connect"
+          }
+        ]
+      },
+      {
+        "name": "credential",
+        "type": "credential",
+        "value": null,
+        "label": "Azure Connection",
+        "placeholder": "Pick a connected Azure account",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "connect"
+          ]
+        }
+      },
+      {
         "name": "azure_tenant_id",
         "type": "string",
         "value": null,
         "label": "Tenant ID",
         "placeholder": "Directory (tenant) ID — a GUID or your-tenant.onmicrosoft.com",
-        "required": true
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "",
+            "keys"
+          ]
+        }
       },
       {
         "name": "azure_client_id",
@@ -12297,7 +12861,13 @@
         "value": null,
         "label": "Client ID",
         "placeholder": "Application (client) ID of the service principal",
-        "required": true
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "",
+            "keys"
+          ]
+        }
       },
       {
         "name": "azure_client_secret",
@@ -12305,7 +12875,13 @@
         "value": null,
         "label": "Client Secret",
         "placeholder": "The app needs a role (e.g. Virtual Machine Contributor) on the resource group",
-        "required": true
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "",
+            "keys"
+          ]
+        }
       },
       {
         "name": "subscription_id",
@@ -12456,7 +13032,7 @@
     ]
   },
   "azure/compute/vm_deallocate": {
-    "hash": "fc788f0af410b184e186867ed3f5527b01c99013fd149bb26236d2c745da03d6",
+    "hash": "a82a43eed564775d0f1d07513204490687a0e8d5c8089e333ddb10de1875fae3",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Azure VM: Stop (Deallocate)",
@@ -12477,12 +13053,48 @@
     },
     "inputs": [
       {
+        "name": "auth_method",
+        "type": "string",
+        "value": null,
+        "label": "Authentication",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "Service Principal (keys)",
+            "value": "keys"
+          },
+          {
+            "name": "Connect Azure",
+            "value": "connect"
+          }
+        ]
+      },
+      {
+        "name": "credential",
+        "type": "credential",
+        "value": null,
+        "label": "Azure Connection",
+        "placeholder": "Pick a connected Azure account",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "connect"
+          ]
+        }
+      },
+      {
         "name": "azure_tenant_id",
         "type": "string",
         "value": null,
         "label": "Tenant ID",
         "placeholder": "Directory (tenant) ID — a GUID or your-tenant.onmicrosoft.com",
-        "required": true
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "",
+            "keys"
+          ]
+        }
       },
       {
         "name": "azure_client_id",
@@ -12490,7 +13102,13 @@
         "value": null,
         "label": "Client ID",
         "placeholder": "Application (client) ID of the service principal",
-        "required": true
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "",
+            "keys"
+          ]
+        }
       },
       {
         "name": "azure_client_secret",
@@ -12498,7 +13116,13 @@
         "value": null,
         "label": "Client Secret",
         "placeholder": "The app needs a role (e.g. Virtual Machine Contributor) on the resource group",
-        "required": true
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "",
+            "keys"
+          ]
+        }
       },
       {
         "name": "subscription_id",
@@ -12557,7 +13181,7 @@
     ]
   },
   "azure/compute/vm_delete": {
-    "hash": "360998c74760b7ac9c859d5e11d5eaabe8793d85177c93cbd37234d723edf866",
+    "hash": "9ace982f13056840728b424e2e154684b58bcc40a01de7103b4be905d8e35105",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Azure VM: Delete",
@@ -12578,12 +13202,48 @@
     },
     "inputs": [
       {
+        "name": "auth_method",
+        "type": "string",
+        "value": null,
+        "label": "Authentication",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "Service Principal (keys)",
+            "value": "keys"
+          },
+          {
+            "name": "Connect Azure",
+            "value": "connect"
+          }
+        ]
+      },
+      {
+        "name": "credential",
+        "type": "credential",
+        "value": null,
+        "label": "Azure Connection",
+        "placeholder": "Pick a connected Azure account",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "connect"
+          ]
+        }
+      },
+      {
         "name": "azure_tenant_id",
         "type": "string",
         "value": null,
         "label": "Tenant ID",
         "placeholder": "Directory (tenant) ID — a GUID or your-tenant.onmicrosoft.com",
-        "required": true
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "",
+            "keys"
+          ]
+        }
       },
       {
         "name": "azure_client_id",
@@ -12591,7 +13251,13 @@
         "value": null,
         "label": "Client ID",
         "placeholder": "Application (client) ID of the service principal",
-        "required": true
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "",
+            "keys"
+          ]
+        }
       },
       {
         "name": "azure_client_secret",
@@ -12599,7 +13265,13 @@
         "value": null,
         "label": "Client Secret",
         "placeholder": "The app needs a role (e.g. Virtual Machine Contributor) on the resource group",
-        "required": true
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "",
+            "keys"
+          ]
+        }
       },
       {
         "name": "subscription_id",
@@ -12658,7 +13330,7 @@
     ]
   },
   "azure/compute/vm_get_all": {
-    "hash": "65e84a91fca87794605de39fda7e954ed7a0a7177269cbb0282b2a6dffde7851",
+    "hash": "ecb675846c84604cb79b6121cab120ca64aa81c58c87acaee680550b87f9802d",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Azure VM: List Virtual Machines",
@@ -12679,12 +13351,48 @@
     },
     "inputs": [
       {
+        "name": "auth_method",
+        "type": "string",
+        "value": null,
+        "label": "Authentication",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "Service Principal (keys)",
+            "value": "keys"
+          },
+          {
+            "name": "Connect Azure",
+            "value": "connect"
+          }
+        ]
+      },
+      {
+        "name": "credential",
+        "type": "credential",
+        "value": null,
+        "label": "Azure Connection",
+        "placeholder": "Pick a connected Azure account",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "connect"
+          ]
+        }
+      },
+      {
         "name": "azure_tenant_id",
         "type": "string",
         "value": null,
         "label": "Tenant ID",
         "placeholder": "Directory (tenant) ID — a GUID or your-tenant.onmicrosoft.com",
-        "required": true
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "",
+            "keys"
+          ]
+        }
       },
       {
         "name": "azure_client_id",
@@ -12692,7 +13400,13 @@
         "value": null,
         "label": "Client ID",
         "placeholder": "Application (client) ID of the service principal",
-        "required": true
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "",
+            "keys"
+          ]
+        }
       },
       {
         "name": "azure_client_secret",
@@ -12700,7 +13414,13 @@
         "value": null,
         "label": "Client Secret",
         "placeholder": "The app needs a role (e.g. Reader) on the subscription or resource group",
-        "required": true
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "",
+            "keys"
+          ]
+        }
       },
       {
         "name": "subscription_id",
@@ -12757,7 +13477,7 @@
     ]
   },
   "azure/compute/vm_restart": {
-    "hash": "18b90e5ea90056100b6d0f37d1f8d06327c752b9b468e812828106bcc983b066",
+    "hash": "ea273f15c1c04452aa314d889d6c063a337c668be2224c81a7adc9b070b33660",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Azure VM: Restart",
@@ -12778,12 +13498,48 @@
     },
     "inputs": [
       {
+        "name": "auth_method",
+        "type": "string",
+        "value": null,
+        "label": "Authentication",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "Service Principal (keys)",
+            "value": "keys"
+          },
+          {
+            "name": "Connect Azure",
+            "value": "connect"
+          }
+        ]
+      },
+      {
+        "name": "credential",
+        "type": "credential",
+        "value": null,
+        "label": "Azure Connection",
+        "placeholder": "Pick a connected Azure account",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "connect"
+          ]
+        }
+      },
+      {
         "name": "azure_tenant_id",
         "type": "string",
         "value": null,
         "label": "Tenant ID",
         "placeholder": "Directory (tenant) ID — a GUID or your-tenant.onmicrosoft.com",
-        "required": true
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "",
+            "keys"
+          ]
+        }
       },
       {
         "name": "azure_client_id",
@@ -12791,7 +13547,13 @@
         "value": null,
         "label": "Client ID",
         "placeholder": "Application (client) ID of the service principal",
-        "required": true
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "",
+            "keys"
+          ]
+        }
       },
       {
         "name": "azure_client_secret",
@@ -12799,7 +13561,13 @@
         "value": null,
         "label": "Client Secret",
         "placeholder": "The app needs a role (e.g. Virtual Machine Contributor) on the resource group",
-        "required": true
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "",
+            "keys"
+          ]
+        }
       },
       {
         "name": "subscription_id",
@@ -12858,7 +13626,7 @@
     ]
   },
   "azure/compute/vm_start": {
-    "hash": "c8270030da8be6710ca25b02b56e34125903fcca558435b0eef40324a1dcdc3a",
+    "hash": "49b451da253d61089d3664cf343080a9055aef31df1b6102c78171917475408c",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Azure VM: Start",
@@ -12879,12 +13647,48 @@
     },
     "inputs": [
       {
+        "name": "auth_method",
+        "type": "string",
+        "value": null,
+        "label": "Authentication",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "Service Principal (keys)",
+            "value": "keys"
+          },
+          {
+            "name": "Connect Azure",
+            "value": "connect"
+          }
+        ]
+      },
+      {
+        "name": "credential",
+        "type": "credential",
+        "value": null,
+        "label": "Azure Connection",
+        "placeholder": "Pick a connected Azure account",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "connect"
+          ]
+        }
+      },
+      {
         "name": "azure_tenant_id",
         "type": "string",
         "value": null,
         "label": "Tenant ID",
         "placeholder": "Directory (tenant) ID — a GUID or your-tenant.onmicrosoft.com",
-        "required": true
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "",
+            "keys"
+          ]
+        }
       },
       {
         "name": "azure_client_id",
@@ -12892,7 +13696,13 @@
         "value": null,
         "label": "Client ID",
         "placeholder": "Application (client) ID of the service principal",
-        "required": true
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "",
+            "keys"
+          ]
+        }
       },
       {
         "name": "azure_client_secret",
@@ -12900,7 +13710,13 @@
         "value": null,
         "label": "Client Secret",
         "placeholder": "The app needs a role (e.g. Virtual Machine Contributor) on the resource group",
-        "required": true
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "",
+            "keys"
+          ]
+        }
       },
       {
         "name": "subscription_id",

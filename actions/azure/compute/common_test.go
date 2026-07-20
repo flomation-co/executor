@@ -75,6 +75,36 @@ func TestGetAuth(t *testing.T) {
 	}
 }
 
+func TestGetAuthConnect(t *testing.T) {
+	// "Connect Azure": a resolved managed bearer + subscription is enough — no
+	// tenant/client/secret required.
+	in := []*core.Connection{
+		{Name: "auth_method", Type: core.ConnectionTypeString, Value: "connect"},
+		{Name: "credential", Type: core.ConnectionTypeCredential, Value: "eyJ0eXA.managed.bearer"},
+		{Name: "subscription_id", Type: core.ConnectionTypeString, Value: "22222222-2222-2222-2222-222222222222"},
+		{Name: "resource_group", Type: core.ConnectionTypeString, Value: "my-rg"},
+	}
+	a, err := GetAuth(in)
+	if err != nil {
+		t.Fatalf("GetAuth(connect) = %v, want nil", err)
+	}
+	if a.cred == nil {
+		t.Error("GetAuth(connect) built no credential")
+	}
+	if _, err := a.VMClient(); err != nil {
+		t.Errorf("VMClient() after connect = %v", err)
+	}
+
+	// connect with no credential picked → a clear error, not a nil-token client.
+	noCred := []*core.Connection{
+		{Name: "auth_method", Type: core.ConnectionTypeString, Value: "connect"},
+		{Name: "subscription_id", Type: core.ConnectionTypeString, Value: "22222222-2222-2222-2222-222222222222"},
+	}
+	if _, err := GetAuth(noCred); err == nil {
+		t.Error("GetAuth(connect, no credential) = nil, want an error")
+	}
+}
+
 func TestTagMap(t *testing.T) {
 	in := func(v string) []*core.Connection {
 		return []*core.Connection{{Name: "tags", Type: core.ConnectionTypeString, Value: v}}
