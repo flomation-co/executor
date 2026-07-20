@@ -1,24 +1,27 @@
-// Package aws_rds_modify_db_instance modifies settings of an RDS database instance.
-package aws_rds_modify_db_instance
+// Package aws_rds_create_db_cluster_snapshot creates a snapshot of an Aurora/RDS
+// DB cluster.
+package aws_rds_create_db_cluster_snapshot
 
 import (
 	"context"
 	"fmt"
+	"strings"
 
 	core "flomation.app/automate/executor"
 	awscommon "flomation.app/automate/executor/actions/aws"
 	rdscat "flomation.app/automate/executor/actions/aws/rds"
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/service/rds"
+	rdstypes "github.com/aws/aws-sdk-go-v2/service/rds/types"
 )
 
 const (
 	Author       = "Andy Esser"
 	Organisation = "Flomation"
-	Name         = "AWS RDS Modify DB Instance"
-	Description  = "Modify an RDS database instance (class, storage, version or password)."
+	Name         = "AWS RDS Create DB Cluster Snapshot"
+	Description  = "Create a snapshot of an Aurora/RDS DB cluster."
 	Website      = "https://www.flomation.co"
-	Icon         = "database+pen"
+	Icon         = "box-archive+plus"
 	Date         = "20/07/2026"
 	Type         = core.ActionTypeAction
 )
@@ -36,30 +39,23 @@ var Inputs = [...]core.Connection{
 	{Name: "assume_role_arn", Type: core.ConnectionTypeString, Label: "Role ARN to Assume", Placeholder: "arn:aws:iam::<your-account>:role/FlomationAccess", Required: true, Visible: &core.VisibleWhen{Field: "auth_method", Values: []string{"assume_role"}}},
 	{Name: "external_id", Type: core.ConnectionTypeString, Label: "Assume Role External ID (optional)", Placeholder: "Must match the External ID in the role's trust policy", Visible: &core.VisibleWhen{Field: "auth_method", Values: []string{"assume_role"}}},
 	{Name: "credential", Type: core.ConnectionTypeCredential, Label: "AWS Role Credential", Required: true, Visible: &core.VisibleWhen{Field: "auth_method", Values: []string{"credential"}}},
-	{Name: "db_instance_identifier", Type: core.ConnectionTypeString, Label: "DB Instance Identifier", Placeholder: "my-database", Required: true},
-	{Name: "db_instance_class", Type: core.ConnectionTypeString, Label: "New Instance Class (optional)", Placeholder: "db.t3.small"},
-	{Name: "allocated_storage", Type: core.ConnectionTypeInteger, Label: "New Allocated Storage (GiB, optional)"},
-	{Name: "engine_version", Type: core.ConnectionTypeString, Label: "New Engine Version (optional)"},
-	{Name: "master_password", Type: core.ConnectionTypeSecret, Label: "New Master Password (optional)"},
-	{Name: "multi_az", Type: core.ConnectionTypeString, Label: "Multi-AZ", Options: []core.ConnectionOption{
-		{Name: "No change", Value: ""},
-		{Name: "Convert to Multi-AZ", Value: "true"},
-		{Name: "Convert to Single-AZ", Value: "false"},
-	}},
-	{Name: "apply_immediately", Type: core.ConnectionTypeBoolean, Label: "Apply Immediately"},
+	{Name: "db_cluster_identifier", Type: core.ConnectionTypeString, Label: "DB Cluster Identifier", Placeholder: "my-aurora-cluster", Required: true},
+	{Name: "db_cluster_snapshot_identifier", Type: core.ConnectionTypeString, Label: "Snapshot Identifier", Placeholder: "my-aurora-cluster-2026-07-20", Required: true},
+	{Name: "tags", Type: core.ConnectionTypeKeyValueArray, Label: "Tags (optional)"},
 }
 
 var Outputs = [...]core.Connection{
 	{Name: "tool_result", Type: core.ConnectionTypeString, Label: "Result summary"},
-	{Name: "instance", Type: core.ConnectionTypeObject, Label: "DB Instance"},
+	{Name: "snapshot", Type: core.ConnectionTypeObject, Label: "DB Cluster Snapshot"},
 }
 
 func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[string]interface{}, error) {
 	ctx := context.Background()
 
-	id := awscommon.InputString("db_instance_identifier", inputs)
-	if id == "" {
-		return nil, fmt.Errorf("db instance identifier is required")
+	cluster := awscommon.InputString("db_cluster_identifier", inputs)
+	snapshot := awscommon.InputString("db_cluster_snapshot_identifier", inputs)
+	if cluster == "" || snapshot == "" {
+		return nil, fmt.Errorf("both db cluster identifier and snapshot identifier are required")
 	}
 
 	cfg, err := awscommon.ConfigFromInputs(ctx, inputs)
@@ -68,42 +64,37 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	}
 	client := rds.NewFromConfig(cfg)
 
-	in := &rds.ModifyDBInstanceInput{
-		DBInstanceIdentifier: aws.String(id),
-		ApplyImmediately:     aws.Bool(awscommon.InputBool("apply_immediately", inputs)),
+	in := &rds.CreateDBClusterSnapshotInput{
+		DBClusterIdentifier:         aws.String(cluster),
+		DBClusterSnapshotIdentifier: aws.String(snapshot),
 	}
-	changed := 0
-	if v := awscommon.InputString("db_instance_class", inputs); v != "" {
-		in.DBInstanceClass = aws.String(v)
-		changed++
-	}
-	if v, ok := awscommon.InputInt("allocated_storage", inputs); ok {
-		in.AllocatedStorage = aws.Int32(int32(v))
-		changed++
-	}
-	if v := awscommon.InputString("engine_version", inputs); v != "" {
-		in.EngineVersion = aws.String(v)
-		changed++
-	}
-	if v := awscommon.InputString("master_password", inputs); v != "" {
-		in.MasterUserPassword = aws.String(v)
-		changed++
-	}
-	if v := awscommon.InputString("multi_az", inputs); v != "" {
-		in.MultiAZ = aws.Bool(v == "true")
-		changed++
-	}
-	if changed == 0 {
-		return nil, fmt.Errorf("provide at least one setting to modify (class, storage, engine version or password)")
+	if tags := buildTags(inputs); len(tags) > 0 {
+		in.Tags = tags
 	}
 
-	out, err := client.ModifyDBInstance(ctx, in)
+	out, err := client.CreateDBClusterSnapshot(ctx, in)
 	if err != nil {
 		return nil, err
 	}
 
 	return map[string]interface{}{
-		"tool_result": fmt.Sprintf("Modifying DB instance %q (%d change(s), status: %s)", id, changed, aws.ToString(out.DBInstance.DBInstanceStatus)),
-		"instance":    rdscat.SummariseInstance(out.DBInstance),
+		"tool_result": fmt.Sprintf("Creating cluster snapshot %q of %q (status: %s)", snapshot, cluster, aws.ToString(out.DBClusterSnapshot.Status)),
+		"snapshot":    rdscat.SummariseClusterSnapshot(out.DBClusterSnapshot),
 	}, nil
+}
+
+func buildTags(inputs []*core.Connection) []rdstypes.Tag {
+	conn := core.FindConnection("tags", inputs)
+	if conn == nil {
+		return nil
+	}
+	var tags []rdstypes.Tag
+	for _, kv := range conn.KeyValuePairs() {
+		k := strings.TrimSpace(kv.Key)
+		if k == "" {
+			continue
+		}
+		tags = append(tags, rdstypes.Tag{Key: aws.String(k), Value: aws.String(kv.Value)})
+	}
+	return tags
 }

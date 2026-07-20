@@ -69,3 +69,52 @@ func TestSummariseSnapshot(t *testing.T) {
 
 	Expect(SummariseSnapshot(nil)).To(BeNil())
 }
+
+func TestSummariseCluster(t *testing.T) {
+	RegisterTestingT(t)
+
+	writer := true
+	reader := false
+	c := &rdstypes.DBCluster{
+		DBClusterIdentifier: awssdk.String("my-aurora"),
+		Status:              awssdk.String("available"),
+		Engine:              awssdk.String("aurora-postgresql"),
+		MultiAZ:             awssdk.Bool(true),
+		Endpoint:            awssdk.String("my-aurora.cluster-abc.eu-west-2.rds.amazonaws.com"),
+		ReaderEndpoint:      awssdk.String("my-aurora.cluster-ro-abc.eu-west-2.rds.amazonaws.com"),
+		DBClusterMembers: []rdstypes.DBClusterMember{
+			{DBInstanceIdentifier: awssdk.String("my-aurora-1"), IsClusterWriter: &writer},
+			{DBInstanceIdentifier: awssdk.String("my-aurora-2"), IsClusterWriter: &reader},
+		},
+	}
+
+	m := SummariseCluster(c)
+	Expect(m["db_cluster_identifier"]).To(Equal("my-aurora"))
+	Expect(m["multi_az"]).To(Equal(true))
+	Expect(m["writer_endpoint"]).To(ContainSubstring("cluster-abc"))
+	Expect(m["reader_endpoint"]).To(ContainSubstring("cluster-ro-abc"))
+
+	members := m["members"].([]map[string]interface{})
+	Expect(members).To(HaveLen(2))
+	Expect(members[0]["db_instance_identifier"]).To(Equal("my-aurora-1"))
+	Expect(members[0]["is_writer"]).To(Equal(true))
+	Expect(members[1]["is_writer"]).To(Equal(false))
+
+	Expect(SummariseCluster(nil)).To(BeNil())
+}
+
+func TestSummariseClusterSnapshot(t *testing.T) {
+	RegisterTestingT(t)
+
+	m := SummariseClusterSnapshot(&rdstypes.DBClusterSnapshot{
+		DBClusterSnapshotIdentifier: awssdk.String("my-aurora-snap"),
+		DBClusterIdentifier:         awssdk.String("my-aurora"),
+		Status:                      awssdk.String("available"),
+		SnapshotType:                awssdk.String("manual"),
+	})
+	Expect(m["db_cluster_snapshot_identifier"]).To(Equal("my-aurora-snap"))
+	Expect(m["db_cluster_identifier"]).To(Equal("my-aurora"))
+	Expect(m["snapshot_type"]).To(Equal("manual"))
+
+	Expect(SummariseClusterSnapshot(nil)).To(BeNil())
+}

@@ -1,4 +1,7 @@
 // Package aws_rds_create_db_instance provisions a new RDS database instance.
+// It creates either a standalone instance (master credentials + storage supplied
+// here) or an Aurora cluster member (when a cluster identifier is given, the
+// credentials and storage come from the cluster instead).
 package aws_rds_create_db_instance
 
 import (
@@ -18,7 +21,7 @@ const (
 	Author       = "Andy Esser"
 	Organisation = "Flomation"
 	Name         = "AWS RDS Create DB Instance"
-	Description  = "Provision a new RDS database instance."
+	Description  = "Provision a new RDS DB instance (standalone or as an Aurora cluster member)."
 	Website      = "https://www.flomation.co"
 	Icon         = "database+plus"
 	Date         = "20/07/2026"
@@ -46,10 +49,13 @@ var Inputs = [...]core.Connection{
 		{Name: "MariaDB", Value: "mariadb"},
 		{Name: "Oracle (SE2)", Value: "oracle-se2"},
 		{Name: "SQL Server (Express)", Value: "sqlserver-ex"},
+		{Name: "Aurora MySQL (cluster member)", Value: "aurora-mysql"},
+		{Name: "Aurora PostgreSQL (cluster member)", Value: "aurora-postgresql"},
 	}},
-	{Name: "allocated_storage", Type: core.ConnectionTypeInteger, Label: "Allocated Storage (GiB)", Placeholder: "20", Required: true},
-	{Name: "master_username", Type: core.ConnectionTypeString, Label: "Master Username", Placeholder: "admin", Required: true},
-	{Name: "master_password", Type: core.ConnectionTypeSecret, Label: "Master Password", Required: true},
+	{Name: "db_cluster_identifier", Type: core.ConnectionTypeString, Label: "Aurora Cluster Identifier (optional)", Placeholder: "Set to add this instance to an Aurora cluster"},
+	{Name: "allocated_storage", Type: core.ConnectionTypeInteger, Label: "Allocated Storage (GiB)", Placeholder: "20 (standalone only)"},
+	{Name: "master_username", Type: core.ConnectionTypeString, Label: "Master Username", Placeholder: "admin (standalone only)"},
+	{Name: "master_password", Type: core.ConnectionTypeSecret, Label: "Master Password", Placeholder: "standalone only"},
 	{Name: "db_name", Type: core.ConnectionTypeString, Label: "Initial Database Name (optional)"},
 	{Name: "engine_version", Type: core.ConnectionTypeString, Label: "Engine Version (optional)", Placeholder: "e.g. 16.3"},
 	{Name: "port", Type: core.ConnectionTypeInteger, Label: "Port (optional)", Placeholder: "Engine default"},
@@ -59,6 +65,8 @@ var Inputs = [...]core.Connection{
 		{Name: "Provisioned IOPS (io1)", Value: "io1"},
 		{Name: "Magnetic (standard)", Value: "standard"},
 	}},
+	{Name: "multi_az", Type: core.ConnectionTypeBoolean, Label: "Multi-AZ Deployment"},
+	{Name: "availability_zone", Type: core.ConnectionTypeString, Label: "Availability Zone (optional, Single-AZ only)", Placeholder: "eu-west-2a"},
 	{Name: "publicly_accessible", Type: core.ConnectionTypeBoolean, Label: "Publicly Accessible"},
 	{Name: "tags", Type: core.ConnectionTypeKeyValueArray, Label: "Tags (optional)"},
 }
@@ -74,11 +82,9 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	id := awscommon.InputString("db_instance_identifier", inputs)
 	class := awscommon.InputString("db_instance_class", inputs)
 	engine := awscommon.InputString("engine", inputs)
-	username := awscommon.InputString("master_username", inputs)
-	password := awscommon.InputString("master_password", inputs)
-	storage, hasStorage := awscommon.InputInt("allocated_storage", inputs)
-	if id == "" || class == "" || engine == "" || username == "" || password == "" || !hasStorage {
-		return nil, fmt.Errorf("identifier, instance class, engine, master username, master password and allocated storage are all required")
+	cluster := awscommon.InputString("db_cluster_identifier", inputs)
+	if id == "" || class == "" || engine == "" {
+		return nil, fmt.Errorf("db instance identifier, instance class and engine are required")
 	}
 
 	cfg, err := awscommon.ConfigFromInputs(ctx, inputs)
@@ -91,21 +97,42 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 		DBInstanceIdentifier: aws.String(id),
 		DBInstanceClass:      aws.String(class),
 		Engine:               aws.String(engine),
-		MasterUsername:       aws.String(username),
-		MasterUserPassword:   aws.String(password),
-		AllocatedStorage:     aws.Int32(int32(storage)),
 	}
-	if v := awscommon.InputString("db_name", inputs); v != "" {
-		in.DBName = aws.String(v)
+
+	if cluster != "" {
+		// Aurora cluster member: master credentials, storage and DB name all
+		// live on the cluster, not the instance.
+		in.DBClusterIdentifier = aws.String(cluster)
+	} else {
+		username := awscommon.InputString("master_username", inputs)
+		password := awscommon.InputString("master_password", inputs)
+		storage, hasStorage := awscommon.InputInt("allocated_storage", inputs)
+		if username == "" || password == "" || !hasStorage {
+			return nil, fmt.Errorf("master username, master password and allocated storage are required for a standalone instance")
+		}
+		in.MasterUsername = aws.String(username)
+		in.MasterUserPassword = aws.String(password)
+		in.AllocatedStorage = aws.Int32(int32(storage))
+		if v := awscommon.InputString("db_name", inputs); v != "" {
+			in.DBName = aws.String(v)
+		}
+		if v := strings.TrimSpace(awscommon.InputString("storage_type", inputs)); v != "" {
+			in.StorageType = aws.String(v)
+		}
 	}
+
 	if v := awscommon.InputString("engine_version", inputs); v != "" {
 		in.EngineVersion = aws.String(v)
 	}
-	if v := strings.TrimSpace(awscommon.InputString("storage_type", inputs)); v != "" {
-		in.StorageType = aws.String(v)
-	}
 	if p, ok := awscommon.InputInt("port", inputs); ok {
 		in.Port = aws.Int32(int32(p))
+	}
+	if awscommon.InputBool("multi_az", inputs) {
+		in.MultiAZ = aws.Bool(true)
+	} else if az := strings.TrimSpace(awscommon.InputString("availability_zone", inputs)); az != "" {
+		// AvailabilityZone and MultiAZ are mutually exclusive; only pin an AZ for
+		// a Single-AZ instance.
+		in.AvailabilityZone = aws.String(az)
 	}
 	if awscommon.InputBool("publicly_accessible", inputs) {
 		in.PubliclyAccessible = aws.Bool(true)

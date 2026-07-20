@@ -1,5 +1,6 @@
-// Package aws_rds_modify_db_instance modifies settings of an RDS database instance.
-package aws_rds_modify_db_instance
+// Package aws_rds_failover_db_cluster forces a failover of an Aurora DB cluster,
+// promoting a reader instance to writer.
+package aws_rds_failover_db_cluster
 
 import (
 	"context"
@@ -15,10 +16,10 @@ import (
 const (
 	Author       = "Andy Esser"
 	Organisation = "Flomation"
-	Name         = "AWS RDS Modify DB Instance"
-	Description  = "Modify an RDS database instance (class, storage, version or password)."
+	Name         = "AWS RDS Failover DB Cluster"
+	Description  = "Fail over an Aurora DB cluster, promoting a reader instance to writer."
 	Website      = "https://www.flomation.co"
-	Icon         = "database+pen"
+	Icon         = "circle-nodes+arrow-right-arrow-left"
 	Date         = "20/07/2026"
 	Type         = core.ActionTypeAction
 )
@@ -36,30 +37,21 @@ var Inputs = [...]core.Connection{
 	{Name: "assume_role_arn", Type: core.ConnectionTypeString, Label: "Role ARN to Assume", Placeholder: "arn:aws:iam::<your-account>:role/FlomationAccess", Required: true, Visible: &core.VisibleWhen{Field: "auth_method", Values: []string{"assume_role"}}},
 	{Name: "external_id", Type: core.ConnectionTypeString, Label: "Assume Role External ID (optional)", Placeholder: "Must match the External ID in the role's trust policy", Visible: &core.VisibleWhen{Field: "auth_method", Values: []string{"assume_role"}}},
 	{Name: "credential", Type: core.ConnectionTypeCredential, Label: "AWS Role Credential", Required: true, Visible: &core.VisibleWhen{Field: "auth_method", Values: []string{"credential"}}},
-	{Name: "db_instance_identifier", Type: core.ConnectionTypeString, Label: "DB Instance Identifier", Placeholder: "my-database", Required: true},
-	{Name: "db_instance_class", Type: core.ConnectionTypeString, Label: "New Instance Class (optional)", Placeholder: "db.t3.small"},
-	{Name: "allocated_storage", Type: core.ConnectionTypeInteger, Label: "New Allocated Storage (GiB, optional)"},
-	{Name: "engine_version", Type: core.ConnectionTypeString, Label: "New Engine Version (optional)"},
-	{Name: "master_password", Type: core.ConnectionTypeSecret, Label: "New Master Password (optional)"},
-	{Name: "multi_az", Type: core.ConnectionTypeString, Label: "Multi-AZ", Options: []core.ConnectionOption{
-		{Name: "No change", Value: ""},
-		{Name: "Convert to Multi-AZ", Value: "true"},
-		{Name: "Convert to Single-AZ", Value: "false"},
-	}},
-	{Name: "apply_immediately", Type: core.ConnectionTypeBoolean, Label: "Apply Immediately"},
+	{Name: "db_cluster_identifier", Type: core.ConnectionTypeString, Label: "DB Cluster Identifier", Placeholder: "my-aurora-cluster", Required: true},
+	{Name: "target_db_instance_identifier", Type: core.ConnectionTypeString, Label: "Target Instance to Promote (optional)", Placeholder: "A reader instance; blank = any reader"},
 }
 
 var Outputs = [...]core.Connection{
 	{Name: "tool_result", Type: core.ConnectionTypeString, Label: "Result summary"},
-	{Name: "instance", Type: core.ConnectionTypeObject, Label: "DB Instance"},
+	{Name: "cluster", Type: core.ConnectionTypeObject, Label: "DB Cluster"},
 }
 
 func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[string]interface{}, error) {
 	ctx := context.Background()
 
-	id := awscommon.InputString("db_instance_identifier", inputs)
+	id := awscommon.InputString("db_cluster_identifier", inputs)
 	if id == "" {
-		return nil, fmt.Errorf("db instance identifier is required")
+		return nil, fmt.Errorf("db cluster identifier is required")
 	}
 
 	cfg, err := awscommon.ConfigFromInputs(ctx, inputs)
@@ -68,42 +60,18 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	}
 	client := rds.NewFromConfig(cfg)
 
-	in := &rds.ModifyDBInstanceInput{
-		DBInstanceIdentifier: aws.String(id),
-		ApplyImmediately:     aws.Bool(awscommon.InputBool("apply_immediately", inputs)),
-	}
-	changed := 0
-	if v := awscommon.InputString("db_instance_class", inputs); v != "" {
-		in.DBInstanceClass = aws.String(v)
-		changed++
-	}
-	if v, ok := awscommon.InputInt("allocated_storage", inputs); ok {
-		in.AllocatedStorage = aws.Int32(int32(v))
-		changed++
-	}
-	if v := awscommon.InputString("engine_version", inputs); v != "" {
-		in.EngineVersion = aws.String(v)
-		changed++
-	}
-	if v := awscommon.InputString("master_password", inputs); v != "" {
-		in.MasterUserPassword = aws.String(v)
-		changed++
-	}
-	if v := awscommon.InputString("multi_az", inputs); v != "" {
-		in.MultiAZ = aws.Bool(v == "true")
-		changed++
-	}
-	if changed == 0 {
-		return nil, fmt.Errorf("provide at least one setting to modify (class, storage, engine version or password)")
+	in := &rds.FailoverDBClusterInput{DBClusterIdentifier: aws.String(id)}
+	if t := awscommon.InputString("target_db_instance_identifier", inputs); t != "" {
+		in.TargetDBInstanceIdentifier = aws.String(t)
 	}
 
-	out, err := client.ModifyDBInstance(ctx, in)
+	out, err := client.FailoverDBCluster(ctx, in)
 	if err != nil {
 		return nil, err
 	}
 
 	return map[string]interface{}{
-		"tool_result": fmt.Sprintf("Modifying DB instance %q (%d change(s), status: %s)", id, changed, aws.ToString(out.DBInstance.DBInstanceStatus)),
-		"instance":    rdscat.SummariseInstance(out.DBInstance),
+		"tool_result": fmt.Sprintf("Failing over DB cluster %q (status: %s)", id, aws.ToString(out.DBCluster.Status)),
+		"cluster":     rdscat.SummariseCluster(out.DBCluster),
 	}, nil
 }

@@ -53,3 +53,54 @@ func SummariseSnapshot(s *rdstypes.DBSnapshot) map[string]interface{} {
 	}
 	return m
 }
+
+// SummariseCluster flattens an Aurora/RDS DB cluster, exposing both the writer
+// endpoint and the reader endpoint and each member's writer/reader role — the
+// read/write split that the instance-level actions can't express.
+func SummariseCluster(c *rdstypes.DBCluster) map[string]interface{} {
+	if c == nil {
+		return nil
+	}
+	var members []map[string]interface{}
+	for _, mem := range c.DBClusterMembers {
+		members = append(members, map[string]interface{}{
+			"db_instance_identifier": awssdk.ToString(mem.DBInstanceIdentifier),
+			"is_writer":              awssdk.ToBool(mem.IsClusterWriter),
+		})
+	}
+	return map[string]interface{}{
+		"db_cluster_identifier": awssdk.ToString(c.DBClusterIdentifier),
+		"status":                awssdk.ToString(c.Status),
+		"engine":                awssdk.ToString(c.Engine),
+		"engine_version":        awssdk.ToString(c.EngineVersion),
+		"database_name":         awssdk.ToString(c.DatabaseName),
+		"master_username":       awssdk.ToString(c.MasterUsername),
+		"multi_az":              awssdk.ToBool(c.MultiAZ),
+		"writer_endpoint":       awssdk.ToString(c.Endpoint),
+		"reader_endpoint":       awssdk.ToString(c.ReaderEndpoint),
+		"allocated_storage":     awssdk.ToInt32(c.AllocatedStorage),
+		"arn":                   awssdk.ToString(c.DBClusterArn),
+		"members":               members,
+	}
+}
+
+// SummariseClusterSnapshot flattens a DB cluster snapshot.
+func SummariseClusterSnapshot(s *rdstypes.DBClusterSnapshot) map[string]interface{} {
+	if s == nil {
+		return nil
+	}
+	m := map[string]interface{}{
+		"db_cluster_snapshot_identifier": awssdk.ToString(s.DBClusterSnapshotIdentifier),
+		"db_cluster_identifier":          awssdk.ToString(s.DBClusterIdentifier),
+		"status":                         awssdk.ToString(s.Status),
+		"snapshot_type":                  awssdk.ToString(s.SnapshotType),
+		"engine":                         awssdk.ToString(s.Engine),
+		"engine_version":                 awssdk.ToString(s.EngineVersion),
+		"allocated_storage":              awssdk.ToInt32(s.AllocatedStorage),
+		"arn":                            awssdk.ToString(s.DBClusterSnapshotArn),
+	}
+	if s.SnapshotCreateTime != nil {
+		m["created_at"] = s.SnapshotCreateTime.UTC().Format("2006-01-02T15:04:05Z")
+	}
+	return m
+}

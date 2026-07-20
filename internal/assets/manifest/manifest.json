@@ -10841,12 +10841,415 @@
       }
     ]
   },
+  "aws/rds/create_db_cluster": {
+    "hash": "d6a18171990df4f4c460fe23e256a77774bdfd873801bc62d67a8938c4d46f5c",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "AWS RDS Create DB Cluster",
+    "description": "Provision a new Aurora/RDS DB cluster. Add instances to it afterwards.",
+    "website": "https://www.flomation.co",
+    "icon": "circle-nodes+plus",
+    "date": "20/07/2026",
+    "type": 2,
+    "category": {
+      "name": "AWS",
+      "icon": "cloud",
+      "description": "Amazon Web Services integrations"
+    },
+    "sub_category": {
+      "name": "RDS",
+      "icon": "database",
+      "description": "Relational Database Service operations"
+    },
+    "inputs": [
+      {
+        "name": "auth_method",
+        "type": "string",
+        "value": null,
+        "label": "Authentication",
+        "placeholder": "",
+        "required": true,
+        "options": [
+          {
+            "name": "Access Keys",
+            "value": "keys"
+          },
+          {
+            "name": "Assume Role (cross-account)",
+            "value": "assume_role"
+          },
+          {
+            "name": "Managed Role (Credential)",
+            "value": "credential"
+          }
+        ]
+      },
+      {
+        "name": "aws_access_key",
+        "type": "secret",
+        "value": null,
+        "label": "AWS Access Key",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "aws_secret_key",
+        "type": "secret",
+        "value": null,
+        "label": "AWS Secret Key",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "aws_region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "eu-west-2",
+        "required": true
+      },
+      {
+        "name": "aws_session_token",
+        "type": "secret",
+        "value": null,
+        "label": "Session Token (optional)",
+        "placeholder": "",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "assume_role_arn",
+        "type": "string",
+        "value": null,
+        "label": "Role ARN to Assume",
+        "placeholder": "arn:aws:iam::\u003cyour-account\u003e:role/FlomationAccess",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "assume_role"
+          ]
+        }
+      },
+      {
+        "name": "external_id",
+        "type": "string",
+        "value": null,
+        "label": "Assume Role External ID (optional)",
+        "placeholder": "Must match the External ID in the role's trust policy",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "assume_role"
+          ]
+        }
+      },
+      {
+        "name": "credential",
+        "type": "credential",
+        "value": null,
+        "label": "AWS Role Credential",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "credential"
+          ]
+        }
+      },
+      {
+        "name": "db_cluster_identifier",
+        "type": "string",
+        "value": null,
+        "label": "DB Cluster Identifier",
+        "placeholder": "my-aurora-cluster",
+        "required": true
+      },
+      {
+        "name": "engine",
+        "type": "string",
+        "value": null,
+        "label": "Engine",
+        "placeholder": "",
+        "required": true,
+        "options": [
+          {
+            "name": "Aurora MySQL",
+            "value": "aurora-mysql"
+          },
+          {
+            "name": "Aurora PostgreSQL",
+            "value": "aurora-postgresql"
+          },
+          {
+            "name": "MySQL (Multi-AZ cluster)",
+            "value": "mysql"
+          },
+          {
+            "name": "PostgreSQL (Multi-AZ cluster)",
+            "value": "postgres"
+          }
+        ]
+      },
+      {
+        "name": "master_username",
+        "type": "string",
+        "value": null,
+        "label": "Master Username",
+        "placeholder": "admin",
+        "required": true
+      },
+      {
+        "name": "master_password",
+        "type": "secret",
+        "value": null,
+        "label": "Master Password",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "database_name",
+        "type": "string",
+        "value": null,
+        "label": "Initial Database Name (optional)",
+        "placeholder": ""
+      },
+      {
+        "name": "engine_version",
+        "type": "string",
+        "value": null,
+        "label": "Engine Version (optional)",
+        "placeholder": ""
+      },
+      {
+        "name": "port",
+        "type": "integer",
+        "value": null,
+        "label": "Port (optional)",
+        "placeholder": "Engine default"
+      },
+      {
+        "name": "tags",
+        "type": "key_value_array",
+        "value": null,
+        "label": "Tags (optional)",
+        "placeholder": ""
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "cluster",
+        "type": "object",
+        "value": null,
+        "label": "DB Cluster",
+        "placeholder": ""
+      }
+    ]
+  },
+  "aws/rds/create_db_cluster_snapshot": {
+    "hash": "e440e9a00d8951d8ce916965b34e4043becf191ffa8e4326054f881dbfb4221a",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "AWS RDS Create DB Cluster Snapshot",
+    "description": "Create a snapshot of an Aurora/RDS DB cluster.",
+    "website": "https://www.flomation.co",
+    "icon": "box-archive+plus",
+    "date": "20/07/2026",
+    "type": 2,
+    "category": {
+      "name": "AWS",
+      "icon": "cloud",
+      "description": "Amazon Web Services integrations"
+    },
+    "sub_category": {
+      "name": "RDS",
+      "icon": "database",
+      "description": "Relational Database Service operations"
+    },
+    "inputs": [
+      {
+        "name": "auth_method",
+        "type": "string",
+        "value": null,
+        "label": "Authentication",
+        "placeholder": "",
+        "required": true,
+        "options": [
+          {
+            "name": "Access Keys",
+            "value": "keys"
+          },
+          {
+            "name": "Assume Role (cross-account)",
+            "value": "assume_role"
+          },
+          {
+            "name": "Managed Role (Credential)",
+            "value": "credential"
+          }
+        ]
+      },
+      {
+        "name": "aws_access_key",
+        "type": "secret",
+        "value": null,
+        "label": "AWS Access Key",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "aws_secret_key",
+        "type": "secret",
+        "value": null,
+        "label": "AWS Secret Key",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "aws_region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "eu-west-2",
+        "required": true
+      },
+      {
+        "name": "aws_session_token",
+        "type": "secret",
+        "value": null,
+        "label": "Session Token (optional)",
+        "placeholder": "",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "assume_role_arn",
+        "type": "string",
+        "value": null,
+        "label": "Role ARN to Assume",
+        "placeholder": "arn:aws:iam::\u003cyour-account\u003e:role/FlomationAccess",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "assume_role"
+          ]
+        }
+      },
+      {
+        "name": "external_id",
+        "type": "string",
+        "value": null,
+        "label": "Assume Role External ID (optional)",
+        "placeholder": "Must match the External ID in the role's trust policy",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "assume_role"
+          ]
+        }
+      },
+      {
+        "name": "credential",
+        "type": "credential",
+        "value": null,
+        "label": "AWS Role Credential",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "credential"
+          ]
+        }
+      },
+      {
+        "name": "db_cluster_identifier",
+        "type": "string",
+        "value": null,
+        "label": "DB Cluster Identifier",
+        "placeholder": "my-aurora-cluster",
+        "required": true
+      },
+      {
+        "name": "db_cluster_snapshot_identifier",
+        "type": "string",
+        "value": null,
+        "label": "Snapshot Identifier",
+        "placeholder": "my-aurora-cluster-2026-07-20",
+        "required": true
+      },
+      {
+        "name": "tags",
+        "type": "key_value_array",
+        "value": null,
+        "label": "Tags (optional)",
+        "placeholder": ""
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "snapshot",
+        "type": "object",
+        "value": null,
+        "label": "DB Cluster Snapshot",
+        "placeholder": ""
+      }
+    ]
+  },
   "aws/rds/create_db_instance": {
-    "hash": "a0edd26a20faf1269ab4905f5933629ab24a8890b2cc19860e9e4f82e7cf5e65",
+    "hash": "acba82ed5089565bc6a326d83584be448ae610ecc7751ee8c699932260542b57",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "AWS RDS Create DB Instance",
-    "description": "Provision a new RDS database instance.",
+    "description": "Provision a new RDS DB instance (standalone or as an Aurora cluster member).",
     "website": "https://www.flomation.co",
     "icon": "database+plus",
     "date": "20/07/2026",
@@ -11017,32 +11420,44 @@
           {
             "name": "SQL Server (Express)",
             "value": "sqlserver-ex"
+          },
+          {
+            "name": "Aurora MySQL (cluster member)",
+            "value": "aurora-mysql"
+          },
+          {
+            "name": "Aurora PostgreSQL (cluster member)",
+            "value": "aurora-postgresql"
           }
         ]
+      },
+      {
+        "name": "db_cluster_identifier",
+        "type": "string",
+        "value": null,
+        "label": "Aurora Cluster Identifier (optional)",
+        "placeholder": "Set to add this instance to an Aurora cluster"
       },
       {
         "name": "allocated_storage",
         "type": "integer",
         "value": null,
         "label": "Allocated Storage (GiB)",
-        "placeholder": "20",
-        "required": true
+        "placeholder": "20 (standalone only)"
       },
       {
         "name": "master_username",
         "type": "string",
         "value": null,
         "label": "Master Username",
-        "placeholder": "admin",
-        "required": true
+        "placeholder": "admin (standalone only)"
       },
       {
         "name": "master_password",
         "type": "secret",
         "value": null,
         "label": "Master Password",
-        "placeholder": "",
-        "required": true
+        "placeholder": "standalone only"
       },
       {
         "name": "db_name",
@@ -11091,6 +11506,20 @@
         ]
       },
       {
+        "name": "multi_az",
+        "type": "boolean",
+        "value": null,
+        "label": "Multi-AZ Deployment",
+        "placeholder": ""
+      },
+      {
+        "name": "availability_zone",
+        "type": "string",
+        "value": null,
+        "label": "Availability Zone (optional, Single-AZ only)",
+        "placeholder": "eu-west-2a"
+      },
+      {
         "name": "publicly_accessible",
         "type": "boolean",
         "value": null,
@@ -11118,6 +11547,208 @@
         "type": "object",
         "value": null,
         "label": "DB Instance",
+        "placeholder": ""
+      }
+    ]
+  },
+  "aws/rds/create_db_instance_read_replica": {
+    "hash": "ad73e58fcdfb6f3feb71586fd316fa7c531b17c51ccefed4b4c92fd0d3da4e7c",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "AWS RDS Create Read Replica",
+    "description": "Create a read replica of an existing RDS database instance.",
+    "website": "https://www.flomation.co",
+    "icon": "database+copy",
+    "date": "20/07/2026",
+    "type": 2,
+    "category": {
+      "name": "AWS",
+      "icon": "cloud",
+      "description": "Amazon Web Services integrations"
+    },
+    "sub_category": {
+      "name": "RDS",
+      "icon": "database",
+      "description": "Relational Database Service operations"
+    },
+    "inputs": [
+      {
+        "name": "auth_method",
+        "type": "string",
+        "value": null,
+        "label": "Authentication",
+        "placeholder": "",
+        "required": true,
+        "options": [
+          {
+            "name": "Access Keys",
+            "value": "keys"
+          },
+          {
+            "name": "Assume Role (cross-account)",
+            "value": "assume_role"
+          },
+          {
+            "name": "Managed Role (Credential)",
+            "value": "credential"
+          }
+        ]
+      },
+      {
+        "name": "aws_access_key",
+        "type": "secret",
+        "value": null,
+        "label": "AWS Access Key",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "aws_secret_key",
+        "type": "secret",
+        "value": null,
+        "label": "AWS Secret Key",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "aws_region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "eu-west-2",
+        "required": true
+      },
+      {
+        "name": "aws_session_token",
+        "type": "secret",
+        "value": null,
+        "label": "Session Token (optional)",
+        "placeholder": "",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "assume_role_arn",
+        "type": "string",
+        "value": null,
+        "label": "Role ARN to Assume",
+        "placeholder": "arn:aws:iam::\u003cyour-account\u003e:role/FlomationAccess",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "assume_role"
+          ]
+        }
+      },
+      {
+        "name": "external_id",
+        "type": "string",
+        "value": null,
+        "label": "Assume Role External ID (optional)",
+        "placeholder": "Must match the External ID in the role's trust policy",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "assume_role"
+          ]
+        }
+      },
+      {
+        "name": "credential",
+        "type": "credential",
+        "value": null,
+        "label": "AWS Role Credential",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "credential"
+          ]
+        }
+      },
+      {
+        "name": "source_db_instance_identifier",
+        "type": "string",
+        "value": null,
+        "label": "Source DB Instance Identifier",
+        "placeholder": "my-database",
+        "required": true
+      },
+      {
+        "name": "db_instance_identifier",
+        "type": "string",
+        "value": null,
+        "label": "Replica Identifier",
+        "placeholder": "my-database-replica",
+        "required": true
+      },
+      {
+        "name": "db_instance_class",
+        "type": "string",
+        "value": null,
+        "label": "Instance Class (optional)",
+        "placeholder": "Defaults to the source class"
+      },
+      {
+        "name": "availability_zone",
+        "type": "string",
+        "value": null,
+        "label": "Availability Zone (optional)",
+        "placeholder": "eu-west-2b"
+      },
+      {
+        "name": "multi_az",
+        "type": "boolean",
+        "value": null,
+        "label": "Multi-AZ Replica",
+        "placeholder": ""
+      },
+      {
+        "name": "publicly_accessible",
+        "type": "boolean",
+        "value": null,
+        "label": "Publicly Accessible",
+        "placeholder": ""
+      },
+      {
+        "name": "tags",
+        "type": "key_value_array",
+        "value": null,
+        "label": "Tags (optional)",
+        "placeholder": ""
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "instance",
+        "type": "object",
+        "value": null,
+        "label": "Replica DB Instance",
         "placeholder": ""
       }
     ]
@@ -11296,8 +11927,346 @@
       }
     ]
   },
+  "aws/rds/delete_db_cluster": {
+    "hash": "7df8869ecc0ddfda6d5b2ff3d506a7bd4fea6d135380794c65ae05c9d7f46d04",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "AWS RDS Delete DB Cluster",
+    "description": "Delete an Aurora/RDS DB cluster, with an optional final snapshot.",
+    "website": "https://www.flomation.co",
+    "icon": "circle-nodes+trash",
+    "date": "20/07/2026",
+    "type": 2,
+    "category": {
+      "name": "AWS",
+      "icon": "cloud",
+      "description": "Amazon Web Services integrations"
+    },
+    "sub_category": {
+      "name": "RDS",
+      "icon": "database",
+      "description": "Relational Database Service operations"
+    },
+    "inputs": [
+      {
+        "name": "auth_method",
+        "type": "string",
+        "value": null,
+        "label": "Authentication",
+        "placeholder": "",
+        "required": true,
+        "options": [
+          {
+            "name": "Access Keys",
+            "value": "keys"
+          },
+          {
+            "name": "Assume Role (cross-account)",
+            "value": "assume_role"
+          },
+          {
+            "name": "Managed Role (Credential)",
+            "value": "credential"
+          }
+        ]
+      },
+      {
+        "name": "aws_access_key",
+        "type": "secret",
+        "value": null,
+        "label": "AWS Access Key",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "aws_secret_key",
+        "type": "secret",
+        "value": null,
+        "label": "AWS Secret Key",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "aws_region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "eu-west-2",
+        "required": true
+      },
+      {
+        "name": "aws_session_token",
+        "type": "secret",
+        "value": null,
+        "label": "Session Token (optional)",
+        "placeholder": "",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "assume_role_arn",
+        "type": "string",
+        "value": null,
+        "label": "Role ARN to Assume",
+        "placeholder": "arn:aws:iam::\u003cyour-account\u003e:role/FlomationAccess",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "assume_role"
+          ]
+        }
+      },
+      {
+        "name": "external_id",
+        "type": "string",
+        "value": null,
+        "label": "Assume Role External ID (optional)",
+        "placeholder": "Must match the External ID in the role's trust policy",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "assume_role"
+          ]
+        }
+      },
+      {
+        "name": "credential",
+        "type": "credential",
+        "value": null,
+        "label": "AWS Role Credential",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "credential"
+          ]
+        }
+      },
+      {
+        "name": "db_cluster_identifier",
+        "type": "string",
+        "value": null,
+        "label": "DB Cluster Identifier",
+        "placeholder": "my-aurora-cluster",
+        "required": true
+      },
+      {
+        "name": "skip_final_snapshot",
+        "type": "boolean",
+        "value": null,
+        "label": "Skip Final Snapshot",
+        "placeholder": ""
+      },
+      {
+        "name": "final_snapshot_identifier",
+        "type": "string",
+        "value": null,
+        "label": "Final Snapshot Identifier",
+        "placeholder": "Required unless 'Skip Final Snapshot' is on",
+        "visible_when": {
+          "field": "skip_final_snapshot",
+          "values": [
+            "false"
+          ]
+        }
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "cluster",
+        "type": "object",
+        "value": null,
+        "label": "DB Cluster",
+        "placeholder": ""
+      }
+    ]
+  },
+  "aws/rds/delete_db_cluster_snapshot": {
+    "hash": "b06ad4aeecfa38ace6c8f00fc04dcebfdf98615a50b4eba61eadcefbb0df4c21",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "AWS RDS Delete DB Cluster Snapshot",
+    "description": "Delete an Aurora/RDS DB cluster snapshot.",
+    "website": "https://www.flomation.co",
+    "icon": "box-archive+trash",
+    "date": "20/07/2026",
+    "type": 2,
+    "category": {
+      "name": "AWS",
+      "icon": "cloud",
+      "description": "Amazon Web Services integrations"
+    },
+    "sub_category": {
+      "name": "RDS",
+      "icon": "database",
+      "description": "Relational Database Service operations"
+    },
+    "inputs": [
+      {
+        "name": "auth_method",
+        "type": "string",
+        "value": null,
+        "label": "Authentication",
+        "placeholder": "",
+        "required": true,
+        "options": [
+          {
+            "name": "Access Keys",
+            "value": "keys"
+          },
+          {
+            "name": "Assume Role (cross-account)",
+            "value": "assume_role"
+          },
+          {
+            "name": "Managed Role (Credential)",
+            "value": "credential"
+          }
+        ]
+      },
+      {
+        "name": "aws_access_key",
+        "type": "secret",
+        "value": null,
+        "label": "AWS Access Key",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "aws_secret_key",
+        "type": "secret",
+        "value": null,
+        "label": "AWS Secret Key",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "aws_region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "eu-west-2",
+        "required": true
+      },
+      {
+        "name": "aws_session_token",
+        "type": "secret",
+        "value": null,
+        "label": "Session Token (optional)",
+        "placeholder": "",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "assume_role_arn",
+        "type": "string",
+        "value": null,
+        "label": "Role ARN to Assume",
+        "placeholder": "arn:aws:iam::\u003cyour-account\u003e:role/FlomationAccess",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "assume_role"
+          ]
+        }
+      },
+      {
+        "name": "external_id",
+        "type": "string",
+        "value": null,
+        "label": "Assume Role External ID (optional)",
+        "placeholder": "Must match the External ID in the role's trust policy",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "assume_role"
+          ]
+        }
+      },
+      {
+        "name": "credential",
+        "type": "credential",
+        "value": null,
+        "label": "AWS Role Credential",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "credential"
+          ]
+        }
+      },
+      {
+        "name": "db_cluster_snapshot_identifier",
+        "type": "string",
+        "value": null,
+        "label": "Snapshot Identifier",
+        "placeholder": "my-aurora-cluster-2026-07-20",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "snapshot",
+        "type": "object",
+        "value": null,
+        "label": "DB Cluster Snapshot",
+        "placeholder": ""
+      }
+    ]
+  },
   "aws/rds/delete_db_instance": {
-    "hash": "836ee2c73d3ce12b768130242753e76d1cdf9017c9b710171434dc3cc2ad6fab",
+    "hash": "4a581c43767d224f005a6aa9eecfe503ed5704da36776549ee1f0b4a9ad6129e",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "AWS RDS Delete DB Instance",
@@ -11637,6 +12606,372 @@
         "type": "object",
         "value": null,
         "label": "DB Snapshot",
+        "placeholder": ""
+      }
+    ]
+  },
+  "aws/rds/describe_db_cluster_snapshots": {
+    "hash": "6703cb4d2db8da6e23f2bee9f70e86b5b11a7cacb4b44ccda554ad84c16656b3",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "AWS RDS Describe DB Cluster Snapshots",
+    "description": "List Aurora/RDS DB cluster snapshots, optionally filtered by cluster, snapshot or type.",
+    "website": "https://www.flomation.co",
+    "icon": "box-archive+magnifying-glass",
+    "date": "20/07/2026",
+    "type": 2,
+    "category": {
+      "name": "AWS",
+      "icon": "cloud",
+      "description": "Amazon Web Services integrations"
+    },
+    "sub_category": {
+      "name": "RDS",
+      "icon": "database",
+      "description": "Relational Database Service operations"
+    },
+    "inputs": [
+      {
+        "name": "auth_method",
+        "type": "string",
+        "value": null,
+        "label": "Authentication",
+        "placeholder": "",
+        "required": true,
+        "options": [
+          {
+            "name": "Access Keys",
+            "value": "keys"
+          },
+          {
+            "name": "Assume Role (cross-account)",
+            "value": "assume_role"
+          },
+          {
+            "name": "Managed Role (Credential)",
+            "value": "credential"
+          }
+        ]
+      },
+      {
+        "name": "aws_access_key",
+        "type": "secret",
+        "value": null,
+        "label": "AWS Access Key",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "aws_secret_key",
+        "type": "secret",
+        "value": null,
+        "label": "AWS Secret Key",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "aws_region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "eu-west-2",
+        "required": true
+      },
+      {
+        "name": "aws_session_token",
+        "type": "secret",
+        "value": null,
+        "label": "Session Token (optional)",
+        "placeholder": "",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "assume_role_arn",
+        "type": "string",
+        "value": null,
+        "label": "Role ARN to Assume",
+        "placeholder": "arn:aws:iam::\u003cyour-account\u003e:role/FlomationAccess",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "assume_role"
+          ]
+        }
+      },
+      {
+        "name": "external_id",
+        "type": "string",
+        "value": null,
+        "label": "Assume Role External ID (optional)",
+        "placeholder": "Must match the External ID in the role's trust policy",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "assume_role"
+          ]
+        }
+      },
+      {
+        "name": "credential",
+        "type": "credential",
+        "value": null,
+        "label": "AWS Role Credential",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "credential"
+          ]
+        }
+      },
+      {
+        "name": "db_cluster_identifier",
+        "type": "string",
+        "value": null,
+        "label": "DB Cluster Identifier (optional)",
+        "placeholder": "Leave blank to list all"
+      },
+      {
+        "name": "db_cluster_snapshot_identifier",
+        "type": "string",
+        "value": null,
+        "label": "Snapshot Identifier (optional)",
+        "placeholder": ""
+      },
+      {
+        "name": "snapshot_type",
+        "type": "string",
+        "value": null,
+        "label": "Snapshot Type (optional)",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "Any",
+            "value": ""
+          },
+          {
+            "name": "Manual",
+            "value": "manual"
+          },
+          {
+            "name": "Automated",
+            "value": "automated"
+          },
+          {
+            "name": "Shared",
+            "value": "shared"
+          },
+          {
+            "name": "Public",
+            "value": "public"
+          }
+        ]
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "snapshots",
+        "type": "object",
+        "value": null,
+        "label": "DB Cluster Snapshots",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Count",
+        "placeholder": ""
+      }
+    ]
+  },
+  "aws/rds/describe_db_clusters": {
+    "hash": "2e2e5786af20c850f128045fcd16467578150f521fca0d0b0081f7b03872032f",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "AWS RDS Describe DB Clusters",
+    "description": "List Aurora/RDS DB clusters, with writer and reader endpoints and member roles.",
+    "website": "https://www.flomation.co",
+    "icon": "circle-nodes+magnifying-glass",
+    "date": "20/07/2026",
+    "type": 2,
+    "category": {
+      "name": "AWS",
+      "icon": "cloud",
+      "description": "Amazon Web Services integrations"
+    },
+    "sub_category": {
+      "name": "RDS",
+      "icon": "database",
+      "description": "Relational Database Service operations"
+    },
+    "inputs": [
+      {
+        "name": "auth_method",
+        "type": "string",
+        "value": null,
+        "label": "Authentication",
+        "placeholder": "",
+        "required": true,
+        "options": [
+          {
+            "name": "Access Keys",
+            "value": "keys"
+          },
+          {
+            "name": "Assume Role (cross-account)",
+            "value": "assume_role"
+          },
+          {
+            "name": "Managed Role (Credential)",
+            "value": "credential"
+          }
+        ]
+      },
+      {
+        "name": "aws_access_key",
+        "type": "secret",
+        "value": null,
+        "label": "AWS Access Key",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "aws_secret_key",
+        "type": "secret",
+        "value": null,
+        "label": "AWS Secret Key",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "aws_region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "eu-west-2",
+        "required": true
+      },
+      {
+        "name": "aws_session_token",
+        "type": "secret",
+        "value": null,
+        "label": "Session Token (optional)",
+        "placeholder": "",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "assume_role_arn",
+        "type": "string",
+        "value": null,
+        "label": "Role ARN to Assume",
+        "placeholder": "arn:aws:iam::\u003cyour-account\u003e:role/FlomationAccess",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "assume_role"
+          ]
+        }
+      },
+      {
+        "name": "external_id",
+        "type": "string",
+        "value": null,
+        "label": "Assume Role External ID (optional)",
+        "placeholder": "Must match the External ID in the role's trust policy",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "assume_role"
+          ]
+        }
+      },
+      {
+        "name": "credential",
+        "type": "credential",
+        "value": null,
+        "label": "AWS Role Credential",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "credential"
+          ]
+        }
+      },
+      {
+        "name": "db_cluster_identifier",
+        "type": "string",
+        "value": null,
+        "label": "DB Cluster Identifier (optional)",
+        "placeholder": "Leave blank to list all"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "clusters",
+        "type": "object",
+        "value": null,
+        "label": "DB Clusters",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Count",
         "placeholder": ""
       }
     ]
@@ -12014,6 +13349,172 @@
       }
     ]
   },
+  "aws/rds/failover_db_cluster": {
+    "hash": "5642f72136fb615b00e2aa5954345677e28eafe45df31c8ed1b938e9ff0631d1",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "AWS RDS Failover DB Cluster",
+    "description": "Fail over an Aurora DB cluster, promoting a reader instance to writer.",
+    "website": "https://www.flomation.co",
+    "icon": "circle-nodes+arrow-right-arrow-left",
+    "date": "20/07/2026",
+    "type": 2,
+    "category": {
+      "name": "AWS",
+      "icon": "cloud",
+      "description": "Amazon Web Services integrations"
+    },
+    "sub_category": {
+      "name": "RDS",
+      "icon": "database",
+      "description": "Relational Database Service operations"
+    },
+    "inputs": [
+      {
+        "name": "auth_method",
+        "type": "string",
+        "value": null,
+        "label": "Authentication",
+        "placeholder": "",
+        "required": true,
+        "options": [
+          {
+            "name": "Access Keys",
+            "value": "keys"
+          },
+          {
+            "name": "Assume Role (cross-account)",
+            "value": "assume_role"
+          },
+          {
+            "name": "Managed Role (Credential)",
+            "value": "credential"
+          }
+        ]
+      },
+      {
+        "name": "aws_access_key",
+        "type": "secret",
+        "value": null,
+        "label": "AWS Access Key",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "aws_secret_key",
+        "type": "secret",
+        "value": null,
+        "label": "AWS Secret Key",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "aws_region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "eu-west-2",
+        "required": true
+      },
+      {
+        "name": "aws_session_token",
+        "type": "secret",
+        "value": null,
+        "label": "Session Token (optional)",
+        "placeholder": "",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "assume_role_arn",
+        "type": "string",
+        "value": null,
+        "label": "Role ARN to Assume",
+        "placeholder": "arn:aws:iam::\u003cyour-account\u003e:role/FlomationAccess",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "assume_role"
+          ]
+        }
+      },
+      {
+        "name": "external_id",
+        "type": "string",
+        "value": null,
+        "label": "Assume Role External ID (optional)",
+        "placeholder": "Must match the External ID in the role's trust policy",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "assume_role"
+          ]
+        }
+      },
+      {
+        "name": "credential",
+        "type": "credential",
+        "value": null,
+        "label": "AWS Role Credential",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "credential"
+          ]
+        }
+      },
+      {
+        "name": "db_cluster_identifier",
+        "type": "string",
+        "value": null,
+        "label": "DB Cluster Identifier",
+        "placeholder": "my-aurora-cluster",
+        "required": true
+      },
+      {
+        "name": "target_db_instance_identifier",
+        "type": "string",
+        "value": null,
+        "label": "Target Instance to Promote (optional)",
+        "placeholder": "A reader instance; blank = any reader"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "cluster",
+        "type": "object",
+        "value": null,
+        "label": "DB Cluster",
+        "placeholder": ""
+      }
+    ]
+  },
   "aws/rds/list_tags_for_resource": {
     "hash": "71d0474cf09bb785546adc4ae67c0959bf5b9267a70eb5f5051cad663adf109a",
     "author": "Andy Esser",
@@ -12180,8 +13681,202 @@
       }
     ]
   },
+  "aws/rds/modify_db_cluster": {
+    "hash": "9fabaa0478c94de595ae815f911754b9a7e3d4cc696cea4a4f9b9b5eb744a84d",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "AWS RDS Modify DB Cluster",
+    "description": "Modify an Aurora/RDS DB cluster (version, port, password or backup retention).",
+    "website": "https://www.flomation.co",
+    "icon": "circle-nodes+pen",
+    "date": "20/07/2026",
+    "type": 2,
+    "category": {
+      "name": "AWS",
+      "icon": "cloud",
+      "description": "Amazon Web Services integrations"
+    },
+    "sub_category": {
+      "name": "RDS",
+      "icon": "database",
+      "description": "Relational Database Service operations"
+    },
+    "inputs": [
+      {
+        "name": "auth_method",
+        "type": "string",
+        "value": null,
+        "label": "Authentication",
+        "placeholder": "",
+        "required": true,
+        "options": [
+          {
+            "name": "Access Keys",
+            "value": "keys"
+          },
+          {
+            "name": "Assume Role (cross-account)",
+            "value": "assume_role"
+          },
+          {
+            "name": "Managed Role (Credential)",
+            "value": "credential"
+          }
+        ]
+      },
+      {
+        "name": "aws_access_key",
+        "type": "secret",
+        "value": null,
+        "label": "AWS Access Key",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "aws_secret_key",
+        "type": "secret",
+        "value": null,
+        "label": "AWS Secret Key",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "aws_region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "eu-west-2",
+        "required": true
+      },
+      {
+        "name": "aws_session_token",
+        "type": "secret",
+        "value": null,
+        "label": "Session Token (optional)",
+        "placeholder": "",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "assume_role_arn",
+        "type": "string",
+        "value": null,
+        "label": "Role ARN to Assume",
+        "placeholder": "arn:aws:iam::\u003cyour-account\u003e:role/FlomationAccess",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "assume_role"
+          ]
+        }
+      },
+      {
+        "name": "external_id",
+        "type": "string",
+        "value": null,
+        "label": "Assume Role External ID (optional)",
+        "placeholder": "Must match the External ID in the role's trust policy",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "assume_role"
+          ]
+        }
+      },
+      {
+        "name": "credential",
+        "type": "credential",
+        "value": null,
+        "label": "AWS Role Credential",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "credential"
+          ]
+        }
+      },
+      {
+        "name": "db_cluster_identifier",
+        "type": "string",
+        "value": null,
+        "label": "DB Cluster Identifier",
+        "placeholder": "my-aurora-cluster",
+        "required": true
+      },
+      {
+        "name": "master_password",
+        "type": "secret",
+        "value": null,
+        "label": "New Master Password (optional)",
+        "placeholder": ""
+      },
+      {
+        "name": "engine_version",
+        "type": "string",
+        "value": null,
+        "label": "New Engine Version (optional)",
+        "placeholder": ""
+      },
+      {
+        "name": "port",
+        "type": "integer",
+        "value": null,
+        "label": "New Port (optional)",
+        "placeholder": ""
+      },
+      {
+        "name": "backup_retention_period",
+        "type": "integer",
+        "value": null,
+        "label": "Backup Retention (days, optional)",
+        "placeholder": ""
+      },
+      {
+        "name": "apply_immediately",
+        "type": "boolean",
+        "value": null,
+        "label": "Apply Immediately",
+        "placeholder": ""
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "cluster",
+        "type": "object",
+        "value": null,
+        "label": "DB Cluster",
+        "placeholder": ""
+      }
+    ]
+  },
   "aws/rds/modify_db_instance": {
-    "hash": "8d8b07b9d2e5f5b5ba4f1d69710db2998a391aa21f4e1b68bab8f7f7c99f9f76",
+    "hash": "d0aa62c7f4e5cd6aaaba333598b33946191e290a313e81c1bc734369df918ec1",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "AWS RDS Modify DB Instance",
@@ -12350,11 +14045,198 @@
         "placeholder": ""
       },
       {
+        "name": "multi_az",
+        "type": "string",
+        "value": null,
+        "label": "Multi-AZ",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "No change",
+            "value": ""
+          },
+          {
+            "name": "Convert to Multi-AZ",
+            "value": "true"
+          },
+          {
+            "name": "Convert to Single-AZ",
+            "value": "false"
+          }
+        ]
+      },
+      {
         "name": "apply_immediately",
         "type": "boolean",
         "value": null,
         "label": "Apply Immediately",
         "placeholder": ""
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "instance",
+        "type": "object",
+        "value": null,
+        "label": "DB Instance",
+        "placeholder": ""
+      }
+    ]
+  },
+  "aws/rds/promote_read_replica": {
+    "hash": "1aa34480e1878388825f444f2935614b105f28aea51e4128afb6fa7d15e9b259",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "AWS RDS Promote Read Replica",
+    "description": "Promote a read replica to a standalone read/write DB instance.",
+    "website": "https://www.flomation.co",
+    "icon": "database+arrow-up",
+    "date": "20/07/2026",
+    "type": 2,
+    "category": {
+      "name": "AWS",
+      "icon": "cloud",
+      "description": "Amazon Web Services integrations"
+    },
+    "sub_category": {
+      "name": "RDS",
+      "icon": "database",
+      "description": "Relational Database Service operations"
+    },
+    "inputs": [
+      {
+        "name": "auth_method",
+        "type": "string",
+        "value": null,
+        "label": "Authentication",
+        "placeholder": "",
+        "required": true,
+        "options": [
+          {
+            "name": "Access Keys",
+            "value": "keys"
+          },
+          {
+            "name": "Assume Role (cross-account)",
+            "value": "assume_role"
+          },
+          {
+            "name": "Managed Role (Credential)",
+            "value": "credential"
+          }
+        ]
+      },
+      {
+        "name": "aws_access_key",
+        "type": "secret",
+        "value": null,
+        "label": "AWS Access Key",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "aws_secret_key",
+        "type": "secret",
+        "value": null,
+        "label": "AWS Secret Key",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "aws_region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "eu-west-2",
+        "required": true
+      },
+      {
+        "name": "aws_session_token",
+        "type": "secret",
+        "value": null,
+        "label": "Session Token (optional)",
+        "placeholder": "",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "assume_role_arn",
+        "type": "string",
+        "value": null,
+        "label": "Role ARN to Assume",
+        "placeholder": "arn:aws:iam::\u003cyour-account\u003e:role/FlomationAccess",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "assume_role"
+          ]
+        }
+      },
+      {
+        "name": "external_id",
+        "type": "string",
+        "value": null,
+        "label": "Assume Role External ID (optional)",
+        "placeholder": "Must match the External ID in the role's trust policy",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "assume_role"
+          ]
+        }
+      },
+      {
+        "name": "credential",
+        "type": "credential",
+        "value": null,
+        "label": "AWS Role Credential",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "credential"
+          ]
+        }
+      },
+      {
+        "name": "db_instance_identifier",
+        "type": "string",
+        "value": null,
+        "label": "Replica Identifier",
+        "placeholder": "my-database-replica",
+        "required": true
+      },
+      {
+        "name": "backup_retention_period",
+        "type": "integer",
+        "value": null,
+        "label": "Backup Retention (days, optional)",
+        "placeholder": "e.g. 7"
       }
     ],
     "outputs": [
@@ -12540,6 +14422,165 @@
       }
     ]
   },
+  "aws/rds/start_db_cluster": {
+    "hash": "471bd47bcafdd371e91e13961e242c86a703e2abcd25a54118c679e87febebaf",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "AWS RDS Start DB Cluster",
+    "description": "Start a stopped Aurora/RDS DB cluster.",
+    "website": "https://www.flomation.co",
+    "icon": "circle-nodes+play",
+    "date": "20/07/2026",
+    "type": 2,
+    "category": {
+      "name": "AWS",
+      "icon": "cloud",
+      "description": "Amazon Web Services integrations"
+    },
+    "sub_category": {
+      "name": "RDS",
+      "icon": "database",
+      "description": "Relational Database Service operations"
+    },
+    "inputs": [
+      {
+        "name": "auth_method",
+        "type": "string",
+        "value": null,
+        "label": "Authentication",
+        "placeholder": "",
+        "required": true,
+        "options": [
+          {
+            "name": "Access Keys",
+            "value": "keys"
+          },
+          {
+            "name": "Assume Role (cross-account)",
+            "value": "assume_role"
+          },
+          {
+            "name": "Managed Role (Credential)",
+            "value": "credential"
+          }
+        ]
+      },
+      {
+        "name": "aws_access_key",
+        "type": "secret",
+        "value": null,
+        "label": "AWS Access Key",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "aws_secret_key",
+        "type": "secret",
+        "value": null,
+        "label": "AWS Secret Key",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "aws_region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "eu-west-2",
+        "required": true
+      },
+      {
+        "name": "aws_session_token",
+        "type": "secret",
+        "value": null,
+        "label": "Session Token (optional)",
+        "placeholder": "",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "assume_role_arn",
+        "type": "string",
+        "value": null,
+        "label": "Role ARN to Assume",
+        "placeholder": "arn:aws:iam::\u003cyour-account\u003e:role/FlomationAccess",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "assume_role"
+          ]
+        }
+      },
+      {
+        "name": "external_id",
+        "type": "string",
+        "value": null,
+        "label": "Assume Role External ID (optional)",
+        "placeholder": "Must match the External ID in the role's trust policy",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "assume_role"
+          ]
+        }
+      },
+      {
+        "name": "credential",
+        "type": "credential",
+        "value": null,
+        "label": "AWS Role Credential",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "credential"
+          ]
+        }
+      },
+      {
+        "name": "db_cluster_identifier",
+        "type": "string",
+        "value": null,
+        "label": "DB Cluster Identifier",
+        "placeholder": "my-aurora-cluster",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "cluster",
+        "type": "object",
+        "value": null,
+        "label": "DB Cluster",
+        "placeholder": ""
+      }
+    ]
+  },
   "aws/rds/start_db_instance": {
     "hash": "80431a3f4c9609725ac0f77fc95fe765954f95cb1756cd97bdbd3ee160f49fac",
     "author": "Andy Esser",
@@ -12695,6 +14736,165 @@
         "type": "object",
         "value": null,
         "label": "DB Instance",
+        "placeholder": ""
+      }
+    ]
+  },
+  "aws/rds/stop_db_cluster": {
+    "hash": "7a4c0a144f32ea773a423da75f5080d124f68a7dc3c34919e9fc655b7cba3267",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "AWS RDS Stop DB Cluster",
+    "description": "Stop a running Aurora/RDS DB cluster.",
+    "website": "https://www.flomation.co",
+    "icon": "circle-nodes+stop",
+    "date": "20/07/2026",
+    "type": 2,
+    "category": {
+      "name": "AWS",
+      "icon": "cloud",
+      "description": "Amazon Web Services integrations"
+    },
+    "sub_category": {
+      "name": "RDS",
+      "icon": "database",
+      "description": "Relational Database Service operations"
+    },
+    "inputs": [
+      {
+        "name": "auth_method",
+        "type": "string",
+        "value": null,
+        "label": "Authentication",
+        "placeholder": "",
+        "required": true,
+        "options": [
+          {
+            "name": "Access Keys",
+            "value": "keys"
+          },
+          {
+            "name": "Assume Role (cross-account)",
+            "value": "assume_role"
+          },
+          {
+            "name": "Managed Role (Credential)",
+            "value": "credential"
+          }
+        ]
+      },
+      {
+        "name": "aws_access_key",
+        "type": "secret",
+        "value": null,
+        "label": "AWS Access Key",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "aws_secret_key",
+        "type": "secret",
+        "value": null,
+        "label": "AWS Secret Key",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "aws_region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "eu-west-2",
+        "required": true
+      },
+      {
+        "name": "aws_session_token",
+        "type": "secret",
+        "value": null,
+        "label": "Session Token (optional)",
+        "placeholder": "",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "assume_role_arn",
+        "type": "string",
+        "value": null,
+        "label": "Role ARN to Assume",
+        "placeholder": "arn:aws:iam::\u003cyour-account\u003e:role/FlomationAccess",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "assume_role"
+          ]
+        }
+      },
+      {
+        "name": "external_id",
+        "type": "string",
+        "value": null,
+        "label": "Assume Role External ID (optional)",
+        "placeholder": "Must match the External ID in the role's trust policy",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "assume_role"
+          ]
+        }
+      },
+      {
+        "name": "credential",
+        "type": "credential",
+        "value": null,
+        "label": "AWS Role Credential",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "credential"
+          ]
+        }
+      },
+      {
+        "name": "db_cluster_identifier",
+        "type": "string",
+        "value": null,
+        "label": "DB Cluster Identifier",
+        "placeholder": "my-aurora-cluster",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "cluster",
+        "type": "object",
+        "value": null,
+        "label": "DB Cluster",
         "placeholder": ""
       }
     ]

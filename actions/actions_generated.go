@@ -90,16 +90,28 @@ import (
 	aws_ec2_stop_instances "flomation.app/automate/executor/actions/aws/ec2/stop_instances"
 	aws_ec2_terminate_instances "flomation.app/automate/executor/actions/aws/ec2/terminate_instances"
 	aws_rds_add_tags_to_resource "flomation.app/automate/executor/actions/aws/rds/add_tags_to_resource"
+	aws_rds_create_db_cluster "flomation.app/automate/executor/actions/aws/rds/create_db_cluster"
+	aws_rds_create_db_cluster_snapshot "flomation.app/automate/executor/actions/aws/rds/create_db_cluster_snapshot"
 	aws_rds_create_db_instance "flomation.app/automate/executor/actions/aws/rds/create_db_instance"
+	aws_rds_create_db_instance_read_replica "flomation.app/automate/executor/actions/aws/rds/create_db_instance_read_replica"
 	aws_rds_create_db_snapshot "flomation.app/automate/executor/actions/aws/rds/create_db_snapshot"
+	aws_rds_delete_db_cluster "flomation.app/automate/executor/actions/aws/rds/delete_db_cluster"
+	aws_rds_delete_db_cluster_snapshot "flomation.app/automate/executor/actions/aws/rds/delete_db_cluster_snapshot"
 	aws_rds_delete_db_instance "flomation.app/automate/executor/actions/aws/rds/delete_db_instance"
 	aws_rds_delete_db_snapshot "flomation.app/automate/executor/actions/aws/rds/delete_db_snapshot"
+	aws_rds_describe_db_cluster_snapshots "flomation.app/automate/executor/actions/aws/rds/describe_db_cluster_snapshots"
+	aws_rds_describe_db_clusters "flomation.app/automate/executor/actions/aws/rds/describe_db_clusters"
 	aws_rds_describe_db_instances "flomation.app/automate/executor/actions/aws/rds/describe_db_instances"
 	aws_rds_describe_db_snapshots "flomation.app/automate/executor/actions/aws/rds/describe_db_snapshots"
+	aws_rds_failover_db_cluster "flomation.app/automate/executor/actions/aws/rds/failover_db_cluster"
 	aws_rds_list_tags_for_resource "flomation.app/automate/executor/actions/aws/rds/list_tags_for_resource"
+	aws_rds_modify_db_cluster "flomation.app/automate/executor/actions/aws/rds/modify_db_cluster"
 	aws_rds_modify_db_instance "flomation.app/automate/executor/actions/aws/rds/modify_db_instance"
+	aws_rds_promote_read_replica "flomation.app/automate/executor/actions/aws/rds/promote_read_replica"
 	aws_rds_reboot_db_instance "flomation.app/automate/executor/actions/aws/rds/reboot_db_instance"
+	aws_rds_start_db_cluster "flomation.app/automate/executor/actions/aws/rds/start_db_cluster"
 	aws_rds_start_db_instance "flomation.app/automate/executor/actions/aws/rds/start_db_instance"
+	aws_rds_stop_db_cluster "flomation.app/automate/executor/actions/aws/rds/stop_db_cluster"
 	aws_rds_stop_db_instance "flomation.app/automate/executor/actions/aws/rds/stop_db_instance"
 	aws_s3_delete "flomation.app/automate/executor/actions/aws/s3/delete"
 	aws_s3_get "flomation.app/automate/executor/actions/aws/s3/get"
@@ -1606,16 +1618,28 @@ var Actions = map[string]core.Action{
 	"aws/ec2/stop_instances":                                         aws_ec2_stop_instances.Execute,
 	"aws/ec2/terminate_instances":                                    aws_ec2_terminate_instances.Execute,
 	"aws/rds/add_tags_to_resource":                                   aws_rds_add_tags_to_resource.Execute,
+	"aws/rds/create_db_cluster":                                      aws_rds_create_db_cluster.Execute,
+	"aws/rds/create_db_cluster_snapshot":                             aws_rds_create_db_cluster_snapshot.Execute,
 	"aws/rds/create_db_instance":                                     aws_rds_create_db_instance.Execute,
+	"aws/rds/create_db_instance_read_replica":                        aws_rds_create_db_instance_read_replica.Execute,
 	"aws/rds/create_db_snapshot":                                     aws_rds_create_db_snapshot.Execute,
+	"aws/rds/delete_db_cluster":                                      aws_rds_delete_db_cluster.Execute,
+	"aws/rds/delete_db_cluster_snapshot":                             aws_rds_delete_db_cluster_snapshot.Execute,
 	"aws/rds/delete_db_instance":                                     aws_rds_delete_db_instance.Execute,
 	"aws/rds/delete_db_snapshot":                                     aws_rds_delete_db_snapshot.Execute,
+	"aws/rds/describe_db_cluster_snapshots":                          aws_rds_describe_db_cluster_snapshots.Execute,
+	"aws/rds/describe_db_clusters":                                   aws_rds_describe_db_clusters.Execute,
 	"aws/rds/describe_db_instances":                                  aws_rds_describe_db_instances.Execute,
 	"aws/rds/describe_db_snapshots":                                  aws_rds_describe_db_snapshots.Execute,
+	"aws/rds/failover_db_cluster":                                    aws_rds_failover_db_cluster.Execute,
 	"aws/rds/list_tags_for_resource":                                 aws_rds_list_tags_for_resource.Execute,
+	"aws/rds/modify_db_cluster":                                      aws_rds_modify_db_cluster.Execute,
 	"aws/rds/modify_db_instance":                                     aws_rds_modify_db_instance.Execute,
+	"aws/rds/promote_read_replica":                                   aws_rds_promote_read_replica.Execute,
 	"aws/rds/reboot_db_instance":                                     aws_rds_reboot_db_instance.Execute,
+	"aws/rds/start_db_cluster":                                       aws_rds_start_db_cluster.Execute,
 	"aws/rds/start_db_instance":                                      aws_rds_start_db_instance.Execute,
+	"aws/rds/stop_db_cluster":                                        aws_rds_stop_db_cluster.Execute,
 	"aws/rds/stop_db_instance":                                       aws_rds_stop_db_instance.Execute,
 	"aws/s3/delete":                                                  aws_s3_delete.Execute,
 	"aws/s3/get":                                                     aws_s3_get.Execute,
