@@ -69,7 +69,13 @@ func TestSelfStart_FullTopology(t *testing.T) {
 		Nodes: []*Node{
 			{ID: "a186e891-ee43-4de9-8a78-5e7badcef6a4", Type: "a186e891-ee43-4de9-8a78-5e7badcef6a4", Data: &NodeData{Config: NodeConfig{Type: ActionTypeTrigger}}},
 			{ID: "9dc5d617-89ae-4646-b715-c1826c812884", Type: "9dc5d617-89ae-4646-b715-c1826c812884", Data: &NodeData{Config: NodeConfig{Type: ActionTypeTrigger}}},
-			{ID: "3b1fda60-1b58-43d9-bf9a-178cd911e7fd", Type: "3b1fda60-1b58-43d9-bf9a-178cd911e7fd", Data: &NodeData{Config: NodeConfig{Type: ActionTypeAction}}},
+			// Run Instances references the (disabled) Create Security Group's
+			// output in its security-group input — exactly as the real flow does.
+			// A ${nodeId.key} reference must NOT execute a node on a disabled
+			// branch; it should resolve to empty.
+			{ID: "3b1fda60-1b58-43d9-bf9a-178cd911e7fd", Type: "3b1fda60-1b58-43d9-bf9a-178cd911e7fd", Data: &NodeData{Config: NodeConfig{Type: ActionTypeAction, Inputs: []*Connection{
+				{Name: "security_group_ids", Type: ConnectionTypeString, Value: "${8b3867a9-bb22-4cae-a2a3-6ce9dbb82b12.group_id}"},
+			}}}},
 			{ID: "9f656857-6b19-4304-b025-33bad6493d8a", Type: "9f656857-6b19-4304-b025-33bad6493d8a", Data: &NodeData{Config: NodeConfig{Type: ActionTypeAction}}},
 			{ID: "c3213622-7eae-44d2-a9b9-633bc9fa9d52", Type: "c3213622-7eae-44d2-a9b9-633bc9fa9d52", Data: &NodeData{Config: NodeConfig{Type: ActionTypeAction}}},
 			{ID: "2617d842-d670-47b5-8533-f349113733e1", Type: "2617d842-d670-47b5-8533-f349113733e1", Data: &NodeData{Config: NodeConfig{Type: ActionTypeAction}}},

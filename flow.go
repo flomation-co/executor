@@ -1996,12 +1996,29 @@ func (f *Flow) executeNodeActionOnly(actions map[string]Action, node *Node, envi
 										"node_id": scopeNodeID,
 										"key":     scopeKey,
 									}).Debug("skipping scoped dependency execution for trigger node — only the firing trigger should run")
+								} else if f.isOnUnmatchedBranch(actions, scopeNodeID, environment) {
+									// The referenced node sits on a conditional
+									// branch that wasn't taken (e.g. a Create
+									// Security Group under an If whose OTHER branch
+									// matched). Resolving ${nodeId.key} must not run
+									// an action on a disabled branch — leave the
+									// reference unresolved so it falls through to the
+									// empty-string replacement below.
+									log.WithFields(log.Fields{
+										"node_id": scopeNodeID,
+										"key":     scopeKey,
+									}).Debug("skipping scoped dependency on unmatched branch — resolving to empty")
 								} else {
 									log.WithFields(log.Fields{
 										"node_id": scopeNodeID,
 										"key":     scopeKey,
 									}).Info("executing scoped dependency node")
-									if _, err := f.ExecuteNode(actions, scopeNode, environment); err != nil {
+									// Resolve the referenced node's OUTPUT only (action
+									// + its ancestors), never its forward subtree — an
+									// ExecuteNode here would cascade into the node's
+									// children, re-running the node we're substituting
+									// for when it is one of them (diamond double-run).
+									if _, err := f.executeNodeActionOnly(actions, scopeNode, environment); err != nil {
 										log.WithFields(log.Fields{
 											"node_id": scopeNodeID,
 											"error":   err,
