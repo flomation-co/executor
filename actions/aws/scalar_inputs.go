@@ -53,3 +53,31 @@ func InputInt(name string, inputs []*core.Connection) (int64, bool) {
 	}
 	return 0, false
 }
+
+// InputFloat reads a floating-point input (e.g. an Aurora Serverless v2 ACU
+// capacity like 0.5 or 16), accepting a native number or a numeric string. The
+// bool return is false when absent/blank/unparseable so callers leave the AWS
+// field unset rather than sending 0.
+func InputFloat(name string, inputs []*core.Connection) (float64, bool) {
+	c := core.FindConnection(name, inputs)
+	if c == nil || c.Value == nil {
+		return 0, false
+	}
+	switch v := c.Value.(type) {
+	case float64:
+		return v, true
+	case int:
+		return float64(v), true
+	case int64:
+		return float64(v), true
+	case string:
+		s := strings.TrimSpace(v)
+		if s == "" {
+			return 0, false
+		}
+		if f, err := strconv.ParseFloat(s, 64); err == nil {
+			return f, true
+		}
+	}
+	return 0, false
+}

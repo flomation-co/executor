@@ -50,6 +50,15 @@ var Inputs = [...]core.Connection{
 	{Name: "database_name", Type: core.ConnectionTypeString, Label: "Initial Database Name (optional)"},
 	{Name: "engine_version", Type: core.ConnectionTypeString, Label: "Engine Version (optional)"},
 	{Name: "port", Type: core.ConnectionTypeInteger, Label: "Port (optional)", Placeholder: "Engine default"},
+	{Name: "db_subnet_group_name", Type: core.ConnectionTypeString, Label: "DB Subnet Group (optional)", Placeholder: "Places the cluster in a specific VPC"},
+	{Name: "vpc_security_group_ids", Type: core.ConnectionTypeString, Label: "VPC Security Group IDs (optional)", Placeholder: "Comma-separated, e.g. sg-0abc,sg-0def"},
+	{Name: "storage_encrypted", Type: core.ConnectionTypeBoolean, Label: "Encrypt Storage at Rest"},
+	{Name: "kms_key_id", Type: core.ConnectionTypeString, Label: "KMS Key ID/ARN (optional)"},
+	{Name: "backup_retention_period", Type: core.ConnectionTypeInteger, Label: "Backup Retention (days, optional)", Placeholder: "1-35"},
+	{Name: "preferred_backup_window", Type: core.ConnectionTypeString, Label: "Preferred Backup Window (optional)", Placeholder: "hh24:mi-hh24:mi UTC"},
+	{Name: "deletion_protection", Type: core.ConnectionTypeBoolean, Label: "Deletion Protection"},
+	{Name: "serverless_v2_min_capacity", Type: core.ConnectionTypeString, Label: "Serverless v2 Min ACU (optional)", Placeholder: "e.g. 0.5"},
+	{Name: "serverless_v2_max_capacity", Type: core.ConnectionTypeString, Label: "Serverless v2 Max ACU (optional)", Placeholder: "e.g. 16"},
 	{Name: "tags", Type: core.ConnectionTypeKeyValueArray, Label: "Tags (optional)"},
 }
 
@@ -89,6 +98,30 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	}
 	if p, ok := awscommon.InputInt("port", inputs); ok {
 		in.Port = aws.Int32(int32(p))
+	}
+	if v := awscommon.InputString("db_subnet_group_name", inputs); v != "" {
+		in.DBSubnetGroupName = aws.String(v)
+	}
+	if ids := awscommon.InputStrings("vpc_security_group_ids", inputs); len(ids) > 0 {
+		in.VpcSecurityGroupIds = ids
+	}
+	if awscommon.InputBool("storage_encrypted", inputs) {
+		in.StorageEncrypted = aws.Bool(true)
+	}
+	if v := awscommon.InputString("kms_key_id", inputs); v != "" {
+		in.KmsKeyId = aws.String(v)
+	}
+	if n, ok := awscommon.InputInt("backup_retention_period", inputs); ok {
+		in.BackupRetentionPeriod = aws.Int32(int32(n))
+	}
+	if v := awscommon.InputString("preferred_backup_window", inputs); v != "" {
+		in.PreferredBackupWindow = aws.String(v)
+	}
+	if awscommon.InputBool("deletion_protection", inputs) {
+		in.DeletionProtection = aws.Bool(true)
+	}
+	if sv2 := rdscat.BuildServerlessV2(inputs); sv2 != nil {
+		in.ServerlessV2ScalingConfiguration = sv2
 	}
 	if tags := buildTags(inputs); len(tags) > 0 {
 		in.Tags = tags

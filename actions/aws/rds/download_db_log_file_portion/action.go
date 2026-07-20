@@ -1,0 +1,107 @@
+// Package aws_rds_download_db_log_file_portion downloads the contents of an RDS
+// DB instance log file.
+package aws_rds_download_db_log_file_portion
+
+import (
+	"context"
+	"fmt"
+	"strings"
+
+	core "flomation.app/automate/executor"
+	awscommon "flomation.app/automate/executor/actions/aws"
+	"github.com/aws/aws-sdk-go-v2/aws"
+	"github.com/aws/aws-sdk-go-v2/service/rds"
+)
+
+const (
+	Author       = "Andy Esser"
+	Organisation = "Flomation"
+	Name         = "AWS RDS Download DB Log File Portion"
+	Description  = "Download the contents of an RDS DB instance log file."
+	Website      = "https://www.flomation.co"
+	Icon         = "file-lines+list"
+	Date         = "20/07/2026"
+	Type         = core.ActionTypeAction
+)
+
+// maxLogBytes caps the concatenated log payload so a very large file can't
+// exhaust memory or overflow downstream consumers.
+const maxLogBytes = 5 * 1024 * 1024
+
+var Inputs = [...]core.Connection{
+	{Name: "auth_method", Type: core.ConnectionTypeString, Label: "Authentication", Required: true, Options: []core.ConnectionOption{
+		{Name: "Access Keys", Value: "keys"},
+		{Name: "Assume Role (cross-account)", Value: "assume_role"},
+		{Name: "Managed Role (Credential)", Value: "credential"},
+	}},
+	{Name: "aws_access_key", Type: core.ConnectionTypeSecret, Label: "AWS Access Key", Required: true, Visible: &core.VisibleWhen{Field: "auth_method", Values: []string{"keys"}}},
+	{Name: "aws_secret_key", Type: core.ConnectionTypeSecret, Label: "AWS Secret Key", Required: true, Visible: &core.VisibleWhen{Field: "auth_method", Values: []string{"keys"}}},
+	{Name: "aws_region", Type: core.ConnectionTypeString, Label: "Region", Placeholder: "eu-west-2", Required: true},
+	{Name: "aws_session_token", Type: core.ConnectionTypeSecret, Label: "Session Token (optional)", Visible: &core.VisibleWhen{Field: "auth_method", Values: []string{"keys"}}},
+	{Name: "assume_role_arn", Type: core.ConnectionTypeString, Label: "Role ARN to Assume", Placeholder: "arn:aws:iam::<your-account>:role/FlomationAccess", Required: true, Visible: &core.VisibleWhen{Field: "auth_method", Values: []string{"assume_role"}}},
+	{Name: "external_id", Type: core.ConnectionTypeString, Label: "Assume Role External ID (optional)", Placeholder: "Must match the External ID in the role's trust policy", Visible: &core.VisibleWhen{Field: "auth_method", Values: []string{"assume_role"}}},
+	{Name: "credential", Type: core.ConnectionTypeCredential, Label: "AWS Role Credential", Required: true, Visible: &core.VisibleWhen{Field: "auth_method", Values: []string{"credential"}}},
+	{Name: "db_instance_identifier", Type: core.ConnectionTypeString, Label: "DB Instance Identifier", Placeholder: "my-database", Required: true},
+	{Name: "log_file_name", Type: core.ConnectionTypeString, Label: "Log File Name", Placeholder: "error/postgresql.log.2026-07-20-12", Required: true},
+	{Name: "number_of_lines", Type: core.ConnectionTypeInteger, Label: "Number of Lines (optional)", Placeholder: "e.g. 1000"},
+}
+
+var Outputs = [...]core.Connection{
+	{Name: "tool_result", Type: core.ConnectionTypeString, Label: "Result summary"},
+	{Name: "log_data", Type: core.ConnectionTypeString, Label: "Log Data"},
+	{Name: "additional_data_pending", Type: core.ConnectionTypeBoolean, Label: "Additional Data Pending"},
+}
+
+func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[string]interface{}, error) {
+	ctx := context.Background()
+
+	id := awscommon.InputString("db_instance_identifier", inputs)
+	if id == "" {
+		return nil, fmt.Errorf("db instance identifier is required")
+	}
+	logFile := awscommon.InputString("log_file_name", inputs)
+	if logFile == "" {
+		return nil, fmt.Errorf("log file name is required")
+	}
+
+	cfg, err := awscommon.ConfigFromInputs(ctx, inputs)
+	if err != nil {
+		return nil, err
+	}
+	client := rds.NewFromConfig(cfg)
+
+	in := &rds.DownloadDBLogFilePortionInput{
+		DBInstanceIdentifier: aws.String(id),
+		LogFileName:          aws.String(logFile),
+	}
+	if n, ok := awscommon.InputInt("number_of_lines", inputs); ok {
+		in.NumberOfLines = aws.Int32(int32(n))
+	}
+
+	var builder strings.Builder
+	pending := false
+	paginator := rds.NewDownloadDBLogFilePortionPaginator(client, in)
+	for paginator.HasMorePages() {
+		page, err := paginator.NextPage(ctx)
+		if err != nil {
+			return nil, err
+		}
+		builder.WriteString(aws.ToString(page.LogFileData))
+		pending = aws.ToBool(page.AdditionalDataPending)
+		if builder.Len() >= maxLogBytes {
+			pending = true
+			break
+		}
+	}
+
+	data := builder.String()
+	if len(data) > maxLogBytes {
+		data = data[:maxLogBytes]
+	}
+
+	return map[string]interface{}{
+		"tool_result":             fmt.Sprintf("Downloaded %d byte(s) from %q", len(data), logFile),
+		"log_data":                data,
+		"additional_data_pending": pending,
+	}, nil
+}

@@ -68,6 +68,21 @@ var Inputs = [...]core.Connection{
 	{Name: "multi_az", Type: core.ConnectionTypeBoolean, Label: "Multi-AZ Deployment"},
 	{Name: "availability_zone", Type: core.ConnectionTypeString, Label: "Availability Zone (optional, Single-AZ only)", Placeholder: "eu-west-2a"},
 	{Name: "publicly_accessible", Type: core.ConnectionTypeBoolean, Label: "Publicly Accessible"},
+	{Name: "db_subnet_group_name", Type: core.ConnectionTypeString, Label: "DB Subnet Group (optional)", Placeholder: "Places the DB in a specific VPC"},
+	{Name: "vpc_security_group_ids", Type: core.ConnectionTypeString, Label: "VPC Security Group IDs (optional)", Placeholder: "Comma-separated, e.g. sg-0abc,sg-0def"},
+	{Name: "storage_encrypted", Type: core.ConnectionTypeBoolean, Label: "Encrypt Storage at Rest"},
+	{Name: "kms_key_id", Type: core.ConnectionTypeString, Label: "KMS Key ID/ARN (optional)", Placeholder: "Defaults to the RDS AWS-managed key"},
+	{Name: "iops", Type: core.ConnectionTypeInteger, Label: "Provisioned IOPS (optional)", Placeholder: "Required for io1; optional for gp3"},
+	{Name: "backup_retention_period", Type: core.ConnectionTypeInteger, Label: "Backup Retention (days, optional)", Placeholder: "0-35; 0 disables backups"},
+	{Name: "preferred_backup_window", Type: core.ConnectionTypeString, Label: "Preferred Backup Window (optional)", Placeholder: "hh24:mi-hh24:mi UTC, e.g. 03:00-04:00"},
+	{Name: "preferred_maintenance_window", Type: core.ConnectionTypeString, Label: "Preferred Maintenance Window (optional)", Placeholder: "ddd:hh24:mi-ddd:hh24:mi, e.g. sun:05:00-sun:06:00"},
+	{Name: "deletion_protection", Type: core.ConnectionTypeBoolean, Label: "Deletion Protection"},
+	{Name: "copy_tags_to_snapshot", Type: core.ConnectionTypeBoolean, Label: "Copy Tags to Snapshots"},
+	{Name: "auto_minor_version_upgrade", Type: core.ConnectionTypeString, Label: "Auto Minor Version Upgrade", Options: []core.ConnectionOption{
+		{Name: "AWS default (on)", Value: ""},
+		{Name: "Enabled", Value: "true"},
+		{Name: "Disabled", Value: "false"},
+	}},
 	{Name: "tags", Type: core.ConnectionTypeKeyValueArray, Label: "Tags (optional)"},
 }
 
@@ -119,6 +134,39 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 		if v := strings.TrimSpace(awscommon.InputString("storage_type", inputs)); v != "" {
 			in.StorageType = aws.String(v)
 		}
+		if v := awscommon.InputString("db_subnet_group_name", inputs); v != "" {
+			in.DBSubnetGroupName = aws.String(v)
+		}
+		if ids := awscommon.InputStrings("vpc_security_group_ids", inputs); len(ids) > 0 {
+			in.VpcSecurityGroupIds = ids
+		}
+		if awscommon.InputBool("storage_encrypted", inputs) {
+			in.StorageEncrypted = aws.Bool(true)
+		}
+		if v := awscommon.InputString("kms_key_id", inputs); v != "" {
+			in.KmsKeyId = aws.String(v)
+		}
+		if n, ok := awscommon.InputInt("iops", inputs); ok {
+			in.Iops = aws.Int32(int32(n))
+		}
+		if n, ok := awscommon.InputInt("backup_retention_period", inputs); ok {
+			in.BackupRetentionPeriod = aws.Int32(int32(n))
+		}
+		if v := awscommon.InputString("preferred_backup_window", inputs); v != "" {
+			in.PreferredBackupWindow = aws.String(v)
+		}
+		if v := awscommon.InputString("preferred_maintenance_window", inputs); v != "" {
+			in.PreferredMaintenanceWindow = aws.String(v)
+		}
+		if awscommon.InputBool("copy_tags_to_snapshot", inputs) {
+			in.CopyTagsToSnapshot = aws.Bool(true)
+		}
+	}
+	if awscommon.InputBool("deletion_protection", inputs) {
+		in.DeletionProtection = aws.Bool(true)
+	}
+	if v := awscommon.InputString("auto_minor_version_upgrade", inputs); v != "" {
+		in.AutoMinorVersionUpgrade = aws.Bool(v == "true")
 	}
 
 	if v := awscommon.InputString("engine_version", inputs); v != "" {

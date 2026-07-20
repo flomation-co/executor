@@ -89,30 +89,84 @@ import (
 	aws_ec2_start_instances "flomation.app/automate/executor/actions/aws/ec2/start_instances"
 	aws_ec2_stop_instances "flomation.app/automate/executor/actions/aws/ec2/stop_instances"
 	aws_ec2_terminate_instances "flomation.app/automate/executor/actions/aws/ec2/terminate_instances"
+	aws_rds_add_role_to_db_cluster "flomation.app/automate/executor/actions/aws/rds/add_role_to_db_cluster"
 	aws_rds_add_tags_to_resource "flomation.app/automate/executor/actions/aws/rds/add_tags_to_resource"
+	aws_rds_copy_db_cluster_snapshot "flomation.app/automate/executor/actions/aws/rds/copy_db_cluster_snapshot"
+	aws_rds_copy_db_snapshot "flomation.app/automate/executor/actions/aws/rds/copy_db_snapshot"
+	aws_rds_create_blue_green_deployment "flomation.app/automate/executor/actions/aws/rds/create_blue_green_deployment"
 	aws_rds_create_db_cluster "flomation.app/automate/executor/actions/aws/rds/create_db_cluster"
+	aws_rds_create_db_cluster_endpoint "flomation.app/automate/executor/actions/aws/rds/create_db_cluster_endpoint"
+	aws_rds_create_db_cluster_parameter_group "flomation.app/automate/executor/actions/aws/rds/create_db_cluster_parameter_group"
 	aws_rds_create_db_cluster_snapshot "flomation.app/automate/executor/actions/aws/rds/create_db_cluster_snapshot"
 	aws_rds_create_db_instance "flomation.app/automate/executor/actions/aws/rds/create_db_instance"
 	aws_rds_create_db_instance_read_replica "flomation.app/automate/executor/actions/aws/rds/create_db_instance_read_replica"
+	aws_rds_create_db_parameter_group "flomation.app/automate/executor/actions/aws/rds/create_db_parameter_group"
+	aws_rds_create_db_proxy "flomation.app/automate/executor/actions/aws/rds/create_db_proxy"
 	aws_rds_create_db_snapshot "flomation.app/automate/executor/actions/aws/rds/create_db_snapshot"
+	aws_rds_create_db_subnet_group "flomation.app/automate/executor/actions/aws/rds/create_db_subnet_group"
+	aws_rds_create_event_subscription "flomation.app/automate/executor/actions/aws/rds/create_event_subscription"
+	aws_rds_create_global_cluster "flomation.app/automate/executor/actions/aws/rds/create_global_cluster"
+	aws_rds_create_option_group "flomation.app/automate/executor/actions/aws/rds/create_option_group"
+	aws_rds_delete_blue_green_deployment "flomation.app/automate/executor/actions/aws/rds/delete_blue_green_deployment"
 	aws_rds_delete_db_cluster "flomation.app/automate/executor/actions/aws/rds/delete_db_cluster"
+	aws_rds_delete_db_cluster_endpoint "flomation.app/automate/executor/actions/aws/rds/delete_db_cluster_endpoint"
+	aws_rds_delete_db_cluster_parameter_group "flomation.app/automate/executor/actions/aws/rds/delete_db_cluster_parameter_group"
 	aws_rds_delete_db_cluster_snapshot "flomation.app/automate/executor/actions/aws/rds/delete_db_cluster_snapshot"
 	aws_rds_delete_db_instance "flomation.app/automate/executor/actions/aws/rds/delete_db_instance"
+	aws_rds_delete_db_parameter_group "flomation.app/automate/executor/actions/aws/rds/delete_db_parameter_group"
+	aws_rds_delete_db_proxy "flomation.app/automate/executor/actions/aws/rds/delete_db_proxy"
 	aws_rds_delete_db_snapshot "flomation.app/automate/executor/actions/aws/rds/delete_db_snapshot"
+	aws_rds_delete_db_subnet_group "flomation.app/automate/executor/actions/aws/rds/delete_db_subnet_group"
+	aws_rds_delete_event_subscription "flomation.app/automate/executor/actions/aws/rds/delete_event_subscription"
+	aws_rds_delete_global_cluster "flomation.app/automate/executor/actions/aws/rds/delete_global_cluster"
+	aws_rds_delete_option_group "flomation.app/automate/executor/actions/aws/rds/delete_option_group"
+	aws_rds_deregister_db_proxy_targets "flomation.app/automate/executor/actions/aws/rds/deregister_db_proxy_targets"
+	aws_rds_describe_blue_green_deployments "flomation.app/automate/executor/actions/aws/rds/describe_blue_green_deployments"
+	aws_rds_describe_certificates "flomation.app/automate/executor/actions/aws/rds/describe_certificates"
+	aws_rds_describe_db_cluster_endpoints "flomation.app/automate/executor/actions/aws/rds/describe_db_cluster_endpoints"
+	aws_rds_describe_db_cluster_parameter_groups "flomation.app/automate/executor/actions/aws/rds/describe_db_cluster_parameter_groups"
 	aws_rds_describe_db_cluster_snapshots "flomation.app/automate/executor/actions/aws/rds/describe_db_cluster_snapshots"
 	aws_rds_describe_db_clusters "flomation.app/automate/executor/actions/aws/rds/describe_db_clusters"
+	aws_rds_describe_db_engine_versions "flomation.app/automate/executor/actions/aws/rds/describe_db_engine_versions"
 	aws_rds_describe_db_instances "flomation.app/automate/executor/actions/aws/rds/describe_db_instances"
+	aws_rds_describe_db_log_files "flomation.app/automate/executor/actions/aws/rds/describe_db_log_files"
+	aws_rds_describe_db_parameter_groups "flomation.app/automate/executor/actions/aws/rds/describe_db_parameter_groups"
+	aws_rds_describe_db_parameters "flomation.app/automate/executor/actions/aws/rds/describe_db_parameters"
+	aws_rds_describe_db_proxies "flomation.app/automate/executor/actions/aws/rds/describe_db_proxies"
 	aws_rds_describe_db_snapshots "flomation.app/automate/executor/actions/aws/rds/describe_db_snapshots"
+	aws_rds_describe_db_subnet_groups "flomation.app/automate/executor/actions/aws/rds/describe_db_subnet_groups"
+	aws_rds_describe_events "flomation.app/automate/executor/actions/aws/rds/describe_events"
+	aws_rds_describe_global_clusters "flomation.app/automate/executor/actions/aws/rds/describe_global_clusters"
+	aws_rds_describe_option_groups "flomation.app/automate/executor/actions/aws/rds/describe_option_groups"
+	aws_rds_describe_reserved_db_instances "flomation.app/automate/executor/actions/aws/rds/describe_reserved_db_instances"
+	aws_rds_download_db_log_file_portion "flomation.app/automate/executor/actions/aws/rds/download_db_log_file_portion"
 	aws_rds_failover_db_cluster "flomation.app/automate/executor/actions/aws/rds/failover_db_cluster"
+	aws_rds_failover_global_cluster "flomation.app/automate/executor/actions/aws/rds/failover_global_cluster"
 	aws_rds_list_tags_for_resource "flomation.app/automate/executor/actions/aws/rds/list_tags_for_resource"
 	aws_rds_modify_db_cluster "flomation.app/automate/executor/actions/aws/rds/modify_db_cluster"
+	aws_rds_modify_db_cluster_parameter_group "flomation.app/automate/executor/actions/aws/rds/modify_db_cluster_parameter_group"
+	aws_rds_modify_db_cluster_snapshot_attribute "flomation.app/automate/executor/actions/aws/rds/modify_db_cluster_snapshot_attribute"
 	aws_rds_modify_db_instance "flomation.app/automate/executor/actions/aws/rds/modify_db_instance"
+	aws_rds_modify_db_parameter_group "flomation.app/automate/executor/actions/aws/rds/modify_db_parameter_group"
+	aws_rds_modify_db_proxy "flomation.app/automate/executor/actions/aws/rds/modify_db_proxy"
+	aws_rds_modify_db_snapshot_attribute "flomation.app/automate/executor/actions/aws/rds/modify_db_snapshot_attribute"
+	aws_rds_modify_db_subnet_group "flomation.app/automate/executor/actions/aws/rds/modify_db_subnet_group"
+	aws_rds_modify_global_cluster "flomation.app/automate/executor/actions/aws/rds/modify_global_cluster"
 	aws_rds_promote_read_replica "flomation.app/automate/executor/actions/aws/rds/promote_read_replica"
 	aws_rds_reboot_db_instance "flomation.app/automate/executor/actions/aws/rds/reboot_db_instance"
+	aws_rds_register_db_proxy_targets "flomation.app/automate/executor/actions/aws/rds/register_db_proxy_targets"
+	aws_rds_remove_role_from_db_cluster "flomation.app/automate/executor/actions/aws/rds/remove_role_from_db_cluster"
+	aws_rds_remove_tags_from_resource "flomation.app/automate/executor/actions/aws/rds/remove_tags_from_resource"
+	aws_rds_reset_db_parameter_group "flomation.app/automate/executor/actions/aws/rds/reset_db_parameter_group"
+	aws_rds_restore_db_cluster_from_snapshot "flomation.app/automate/executor/actions/aws/rds/restore_db_cluster_from_snapshot"
+	aws_rds_restore_db_cluster_to_point_in_time "flomation.app/automate/executor/actions/aws/rds/restore_db_cluster_to_point_in_time"
+	aws_rds_restore_db_instance_from_db_snapshot "flomation.app/automate/executor/actions/aws/rds/restore_db_instance_from_db_snapshot"
+	aws_rds_restore_db_instance_to_point_in_time "flomation.app/automate/executor/actions/aws/rds/restore_db_instance_to_point_in_time"
 	aws_rds_start_db_cluster "flomation.app/automate/executor/actions/aws/rds/start_db_cluster"
 	aws_rds_start_db_instance "flomation.app/automate/executor/actions/aws/rds/start_db_instance"
 	aws_rds_stop_db_cluster "flomation.app/automate/executor/actions/aws/rds/stop_db_cluster"
 	aws_rds_stop_db_instance "flomation.app/automate/executor/actions/aws/rds/stop_db_instance"
+	aws_rds_switchover_blue_green_deployment "flomation.app/automate/executor/actions/aws/rds/switchover_blue_green_deployment"
 	aws_s3_delete "flomation.app/automate/executor/actions/aws/s3/delete"
 	aws_s3_get "flomation.app/automate/executor/actions/aws/s3/get"
 	aws_s3_list "flomation.app/automate/executor/actions/aws/s3/list"
@@ -1617,30 +1671,84 @@ var Actions = map[string]core.Action{
 	"aws/ec2/start_instances":                                        aws_ec2_start_instances.Execute,
 	"aws/ec2/stop_instances":                                         aws_ec2_stop_instances.Execute,
 	"aws/ec2/terminate_instances":                                    aws_ec2_terminate_instances.Execute,
+	"aws/rds/add_role_to_db_cluster":                                 aws_rds_add_role_to_db_cluster.Execute,
 	"aws/rds/add_tags_to_resource":                                   aws_rds_add_tags_to_resource.Execute,
+	"aws/rds/copy_db_cluster_snapshot":                               aws_rds_copy_db_cluster_snapshot.Execute,
+	"aws/rds/copy_db_snapshot":                                       aws_rds_copy_db_snapshot.Execute,
+	"aws/rds/create_blue_green_deployment":                           aws_rds_create_blue_green_deployment.Execute,
 	"aws/rds/create_db_cluster":                                      aws_rds_create_db_cluster.Execute,
+	"aws/rds/create_db_cluster_endpoint":                             aws_rds_create_db_cluster_endpoint.Execute,
+	"aws/rds/create_db_cluster_parameter_group":                      aws_rds_create_db_cluster_parameter_group.Execute,
 	"aws/rds/create_db_cluster_snapshot":                             aws_rds_create_db_cluster_snapshot.Execute,
 	"aws/rds/create_db_instance":                                     aws_rds_create_db_instance.Execute,
 	"aws/rds/create_db_instance_read_replica":                        aws_rds_create_db_instance_read_replica.Execute,
+	"aws/rds/create_db_parameter_group":                              aws_rds_create_db_parameter_group.Execute,
+	"aws/rds/create_db_proxy":                                        aws_rds_create_db_proxy.Execute,
 	"aws/rds/create_db_snapshot":                                     aws_rds_create_db_snapshot.Execute,
+	"aws/rds/create_db_subnet_group":                                 aws_rds_create_db_subnet_group.Execute,
+	"aws/rds/create_event_subscription":                              aws_rds_create_event_subscription.Execute,
+	"aws/rds/create_global_cluster":                                  aws_rds_create_global_cluster.Execute,
+	"aws/rds/create_option_group":                                    aws_rds_create_option_group.Execute,
+	"aws/rds/delete_blue_green_deployment":                           aws_rds_delete_blue_green_deployment.Execute,
 	"aws/rds/delete_db_cluster":                                      aws_rds_delete_db_cluster.Execute,
+	"aws/rds/delete_db_cluster_endpoint":                             aws_rds_delete_db_cluster_endpoint.Execute,
+	"aws/rds/delete_db_cluster_parameter_group":                      aws_rds_delete_db_cluster_parameter_group.Execute,
 	"aws/rds/delete_db_cluster_snapshot":                             aws_rds_delete_db_cluster_snapshot.Execute,
 	"aws/rds/delete_db_instance":                                     aws_rds_delete_db_instance.Execute,
+	"aws/rds/delete_db_parameter_group":                              aws_rds_delete_db_parameter_group.Execute,
+	"aws/rds/delete_db_proxy":                                        aws_rds_delete_db_proxy.Execute,
 	"aws/rds/delete_db_snapshot":                                     aws_rds_delete_db_snapshot.Execute,
+	"aws/rds/delete_db_subnet_group":                                 aws_rds_delete_db_subnet_group.Execute,
+	"aws/rds/delete_event_subscription":                              aws_rds_delete_event_subscription.Execute,
+	"aws/rds/delete_global_cluster":                                  aws_rds_delete_global_cluster.Execute,
+	"aws/rds/delete_option_group":                                    aws_rds_delete_option_group.Execute,
+	"aws/rds/deregister_db_proxy_targets":                            aws_rds_deregister_db_proxy_targets.Execute,
+	"aws/rds/describe_blue_green_deployments":                        aws_rds_describe_blue_green_deployments.Execute,
+	"aws/rds/describe_certificates":                                  aws_rds_describe_certificates.Execute,
+	"aws/rds/describe_db_cluster_endpoints":                          aws_rds_describe_db_cluster_endpoints.Execute,
+	"aws/rds/describe_db_cluster_parameter_groups":                   aws_rds_describe_db_cluster_parameter_groups.Execute,
 	"aws/rds/describe_db_cluster_snapshots":                          aws_rds_describe_db_cluster_snapshots.Execute,
 	"aws/rds/describe_db_clusters":                                   aws_rds_describe_db_clusters.Execute,
+	"aws/rds/describe_db_engine_versions":                            aws_rds_describe_db_engine_versions.Execute,
 	"aws/rds/describe_db_instances":                                  aws_rds_describe_db_instances.Execute,
+	"aws/rds/describe_db_log_files":                                  aws_rds_describe_db_log_files.Execute,
+	"aws/rds/describe_db_parameter_groups":                           aws_rds_describe_db_parameter_groups.Execute,
+	"aws/rds/describe_db_parameters":                                 aws_rds_describe_db_parameters.Execute,
+	"aws/rds/describe_db_proxies":                                    aws_rds_describe_db_proxies.Execute,
 	"aws/rds/describe_db_snapshots":                                  aws_rds_describe_db_snapshots.Execute,
+	"aws/rds/describe_db_subnet_groups":                              aws_rds_describe_db_subnet_groups.Execute,
+	"aws/rds/describe_events":                                        aws_rds_describe_events.Execute,
+	"aws/rds/describe_global_clusters":                               aws_rds_describe_global_clusters.Execute,
+	"aws/rds/describe_option_groups":                                 aws_rds_describe_option_groups.Execute,
+	"aws/rds/describe_reserved_db_instances":                         aws_rds_describe_reserved_db_instances.Execute,
+	"aws/rds/download_db_log_file_portion":                           aws_rds_download_db_log_file_portion.Execute,
 	"aws/rds/failover_db_cluster":                                    aws_rds_failover_db_cluster.Execute,
+	"aws/rds/failover_global_cluster":                                aws_rds_failover_global_cluster.Execute,
 	"aws/rds/list_tags_for_resource":                                 aws_rds_list_tags_for_resource.Execute,
 	"aws/rds/modify_db_cluster":                                      aws_rds_modify_db_cluster.Execute,
+	"aws/rds/modify_db_cluster_parameter_group":                      aws_rds_modify_db_cluster_parameter_group.Execute,
+	"aws/rds/modify_db_cluster_snapshot_attribute":                   aws_rds_modify_db_cluster_snapshot_attribute.Execute,
 	"aws/rds/modify_db_instance":                                     aws_rds_modify_db_instance.Execute,
+	"aws/rds/modify_db_parameter_group":                              aws_rds_modify_db_parameter_group.Execute,
+	"aws/rds/modify_db_proxy":                                        aws_rds_modify_db_proxy.Execute,
+	"aws/rds/modify_db_snapshot_attribute":                           aws_rds_modify_db_snapshot_attribute.Execute,
+	"aws/rds/modify_db_subnet_group":                                 aws_rds_modify_db_subnet_group.Execute,
+	"aws/rds/modify_global_cluster":                                  aws_rds_modify_global_cluster.Execute,
 	"aws/rds/promote_read_replica":                                   aws_rds_promote_read_replica.Execute,
 	"aws/rds/reboot_db_instance":                                     aws_rds_reboot_db_instance.Execute,
+	"aws/rds/register_db_proxy_targets":                              aws_rds_register_db_proxy_targets.Execute,
+	"aws/rds/remove_role_from_db_cluster":                            aws_rds_remove_role_from_db_cluster.Execute,
+	"aws/rds/remove_tags_from_resource":                              aws_rds_remove_tags_from_resource.Execute,
+	"aws/rds/reset_db_parameter_group":                               aws_rds_reset_db_parameter_group.Execute,
+	"aws/rds/restore_db_cluster_from_snapshot":                       aws_rds_restore_db_cluster_from_snapshot.Execute,
+	"aws/rds/restore_db_cluster_to_point_in_time":                    aws_rds_restore_db_cluster_to_point_in_time.Execute,
+	"aws/rds/restore_db_instance_from_db_snapshot":                   aws_rds_restore_db_instance_from_db_snapshot.Execute,
+	"aws/rds/restore_db_instance_to_point_in_time":                   aws_rds_restore_db_instance_to_point_in_time.Execute,
 	"aws/rds/start_db_cluster":                                       aws_rds_start_db_cluster.Execute,
 	"aws/rds/start_db_instance":                                      aws_rds_start_db_instance.Execute,
 	"aws/rds/stop_db_cluster":                                        aws_rds_stop_db_cluster.Execute,
 	"aws/rds/stop_db_instance":                                       aws_rds_stop_db_instance.Execute,
+	"aws/rds/switchover_blue_green_deployment":                       aws_rds_switchover_blue_green_deployment.Execute,
 	"aws/s3/delete":                                                  aws_s3_delete.Execute,
 	"aws/s3/get":                                                     aws_s3_get.Execute,
 	"aws/s3/list":                                                    aws_s3_list.Execute,

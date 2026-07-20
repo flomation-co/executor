@@ -1,24 +1,27 @@
-// Package aws_rds_modify_db_cluster modifies settings of an Aurora/RDS DB cluster.
-package aws_rds_modify_db_cluster
+// Package aws_rds_restore_db_cluster_from_snapshot restores a new Aurora/RDS DB
+// cluster from a cluster snapshot.
+package aws_rds_restore_db_cluster_from_snapshot
 
 import (
 	"context"
 	"fmt"
+	"strings"
 
 	core "flomation.app/automate/executor"
 	awscommon "flomation.app/automate/executor/actions/aws"
 	rdscat "flomation.app/automate/executor/actions/aws/rds"
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/service/rds"
+	rdstypes "github.com/aws/aws-sdk-go-v2/service/rds/types"
 )
 
 const (
 	Author       = "Andy Esser"
 	Organisation = "Flomation"
-	Name         = "AWS RDS Modify DB Cluster"
-	Description  = "Modify an Aurora/RDS DB cluster (version, port, password or backup retention)."
+	Name         = "AWS RDS Restore Cluster from Snapshot"
+	Description  = "Restore a new Aurora/RDS DB cluster from a cluster snapshot."
 	Website      = "https://www.flomation.co"
-	Icon         = "circle-nodes+pen"
+	Icon         = "circle-nodes+box-archive"
 	Date         = "20/07/2026"
 	Type         = core.ActionTypeAction
 )
@@ -36,20 +39,13 @@ var Inputs = [...]core.Connection{
 	{Name: "assume_role_arn", Type: core.ConnectionTypeString, Label: "Role ARN to Assume", Placeholder: "arn:aws:iam::<your-account>:role/FlomationAccess", Required: true, Visible: &core.VisibleWhen{Field: "auth_method", Values: []string{"assume_role"}}},
 	{Name: "external_id", Type: core.ConnectionTypeString, Label: "Assume Role External ID (optional)", Placeholder: "Must match the External ID in the role's trust policy", Visible: &core.VisibleWhen{Field: "auth_method", Values: []string{"assume_role"}}},
 	{Name: "credential", Type: core.ConnectionTypeCredential, Label: "AWS Role Credential", Required: true, Visible: &core.VisibleWhen{Field: "auth_method", Values: []string{"credential"}}},
-	{Name: "db_cluster_identifier", Type: core.ConnectionTypeString, Label: "DB Cluster Identifier", Placeholder: "my-aurora-cluster", Required: true},
-	{Name: "master_password", Type: core.ConnectionTypeSecret, Label: "New Master Password (optional)"},
-	{Name: "engine_version", Type: core.ConnectionTypeString, Label: "New Engine Version (optional)"},
-	{Name: "port", Type: core.ConnectionTypeInteger, Label: "New Port (optional)"},
-	{Name: "backup_retention_period", Type: core.ConnectionTypeInteger, Label: "Backup Retention (days, optional)"},
-	{Name: "vpc_security_group_ids", Type: core.ConnectionTypeString, Label: "New VPC Security Group IDs (optional)", Placeholder: "Comma-separated; replaces the current set"},
-	{Name: "deletion_protection", Type: core.ConnectionTypeString, Label: "Deletion Protection", Options: []core.ConnectionOption{
-		{Name: "No change", Value: ""},
-		{Name: "Enable", Value: "true"},
-		{Name: "Disable", Value: "false"},
-	}},
-	{Name: "serverless_v2_min_capacity", Type: core.ConnectionTypeString, Label: "Serverless v2 Min ACU (optional)", Placeholder: "e.g. 0.5"},
-	{Name: "serverless_v2_max_capacity", Type: core.ConnectionTypeString, Label: "Serverless v2 Max ACU (optional)", Placeholder: "e.g. 16"},
-	{Name: "apply_immediately", Type: core.ConnectionTypeBoolean, Label: "Apply Immediately"},
+	{Name: "db_cluster_identifier", Type: core.ConnectionTypeString, Label: "New DB Cluster Identifier", Placeholder: "restored-cluster", Required: true},
+	{Name: "snapshot_identifier", Type: core.ConnectionTypeString, Label: "Cluster Snapshot Identifier or ARN", Placeholder: "my-cluster-snapshot", Required: true},
+	{Name: "engine", Type: core.ConnectionTypeString, Label: "Engine", Placeholder: "aurora-postgresql", Required: true},
+	{Name: "engine_version", Type: core.ConnectionTypeString, Label: "Engine Version (optional)"},
+	{Name: "db_subnet_group_name", Type: core.ConnectionTypeString, Label: "DB Subnet Group Name (optional)"},
+	{Name: "vpc_security_group_ids", Type: core.ConnectionTypeString, Label: "VPC Security Group IDs (optional)", Placeholder: "Comma-separated, e.g. sg-123,sg-456"},
+	{Name: "tags", Type: core.ConnectionTypeKeyValueArray, Label: "Tags (optional)"},
 }
 
 var Outputs = [...]core.Connection{
@@ -62,7 +58,15 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 
 	id := awscommon.InputString("db_cluster_identifier", inputs)
 	if id == "" {
-		return nil, fmt.Errorf("db cluster identifier is required")
+		return nil, fmt.Errorf("new db cluster identifier is required")
+	}
+	snapshot := awscommon.InputString("snapshot_identifier", inputs)
+	if snapshot == "" {
+		return nil, fmt.Errorf("cluster snapshot identifier is required")
+	}
+	engine := awscommon.InputString("engine", inputs)
+	if engine == "" {
+		return nil, fmt.Errorf("engine is required")
 	}
 
 	cfg, err := awscommon.ConfigFromInputs(ctx, inputs)
@@ -71,50 +75,47 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	}
 	client := rds.NewFromConfig(cfg)
 
-	in := &rds.ModifyDBClusterInput{
+	in := &rds.RestoreDBClusterFromSnapshotInput{
 		DBClusterIdentifier: aws.String(id),
-		ApplyImmediately:    aws.Bool(awscommon.InputBool("apply_immediately", inputs)),
-	}
-	changed := 0
-	if v := awscommon.InputString("master_password", inputs); v != "" {
-		in.MasterUserPassword = aws.String(v)
-		changed++
+		SnapshotIdentifier:  aws.String(snapshot),
+		Engine:              aws.String(engine),
 	}
 	if v := awscommon.InputString("engine_version", inputs); v != "" {
 		in.EngineVersion = aws.String(v)
-		changed++
 	}
-	if p, ok := awscommon.InputInt("port", inputs); ok {
-		in.Port = aws.Int32(int32(p))
-		changed++
+	if v := awscommon.InputString("db_subnet_group_name", inputs); v != "" {
+		in.DBSubnetGroupName = aws.String(v)
 	}
-	if d, ok := awscommon.InputInt("backup_retention_period", inputs); ok {
-		in.BackupRetentionPeriod = aws.Int32(int32(d))
-		changed++
+	if sgs := awscommon.InputStrings("vpc_security_group_ids", inputs); len(sgs) > 0 {
+		in.VpcSecurityGroupIds = sgs
 	}
-	if ids := awscommon.InputStrings("vpc_security_group_ids", inputs); len(ids) > 0 {
-		in.VpcSecurityGroupIds = ids
-		changed++
-	}
-	if v := awscommon.InputString("deletion_protection", inputs); v != "" {
-		in.DeletionProtection = aws.Bool(v == "true")
-		changed++
-	}
-	if sv2 := rdscat.BuildServerlessV2(inputs); sv2 != nil {
-		in.ServerlessV2ScalingConfiguration = sv2
-		changed++
-	}
-	if changed == 0 {
-		return nil, fmt.Errorf("provide at least one setting to modify (password, engine version, port or backup retention)")
+	if tags := buildTags(inputs); len(tags) > 0 {
+		in.Tags = tags
 	}
 
-	out, err := client.ModifyDBCluster(ctx, in)
+	out, err := client.RestoreDBClusterFromSnapshot(ctx, in)
 	if err != nil {
 		return nil, err
 	}
 
 	return map[string]interface{}{
-		"tool_result": fmt.Sprintf("Modifying DB cluster %q (%d change(s), status: %s)", id, changed, aws.ToString(out.DBCluster.Status)),
+		"tool_result": fmt.Sprintf("Restored DB cluster %q from snapshot %q (status: %s)", id, snapshot, aws.ToString(out.DBCluster.Status)),
 		"cluster":     rdscat.SummariseCluster(out.DBCluster),
 	}, nil
+}
+
+func buildTags(inputs []*core.Connection) []rdstypes.Tag {
+	conn := core.FindConnection("tags", inputs)
+	if conn == nil {
+		return nil
+	}
+	var tags []rdstypes.Tag
+	for _, kv := range conn.KeyValuePairs() {
+		k := strings.TrimSpace(kv.Key)
+		if k == "" {
+			continue
+		}
+		tags = append(tags, rdstypes.Tag{Key: aws.String(k), Value: aws.String(kv.Value)})
+	}
+	return tags
 }

@@ -46,6 +46,18 @@ var Inputs = [...]core.Connection{
 		{Name: "Convert to Multi-AZ", Value: "true"},
 		{Name: "Convert to Single-AZ", Value: "false"},
 	}},
+	{Name: "backup_retention_period", Type: core.ConnectionTypeInteger, Label: "New Backup Retention (days, optional)"},
+	{Name: "vpc_security_group_ids", Type: core.ConnectionTypeString, Label: "New VPC Security Group IDs (optional)", Placeholder: "Comma-separated; replaces the current set"},
+	{Name: "deletion_protection", Type: core.ConnectionTypeString, Label: "Deletion Protection", Options: []core.ConnectionOption{
+		{Name: "No change", Value: ""},
+		{Name: "Enable", Value: "true"},
+		{Name: "Disable", Value: "false"},
+	}},
+	{Name: "auto_minor_version_upgrade", Type: core.ConnectionTypeString, Label: "Auto Minor Version Upgrade", Options: []core.ConnectionOption{
+		{Name: "No change", Value: ""},
+		{Name: "Enable", Value: "true"},
+		{Name: "Disable", Value: "false"},
+	}},
 	{Name: "apply_immediately", Type: core.ConnectionTypeBoolean, Label: "Apply Immediately"},
 }
 
@@ -91,6 +103,22 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	}
 	if v := awscommon.InputString("multi_az", inputs); v != "" {
 		in.MultiAZ = aws.Bool(v == "true")
+		changed++
+	}
+	if n, ok := awscommon.InputInt("backup_retention_period", inputs); ok {
+		in.BackupRetentionPeriod = aws.Int32(int32(n))
+		changed++
+	}
+	if ids := awscommon.InputStrings("vpc_security_group_ids", inputs); len(ids) > 0 {
+		in.VpcSecurityGroupIds = ids
+		changed++
+	}
+	if v := awscommon.InputString("deletion_protection", inputs); v != "" {
+		in.DeletionProtection = aws.Bool(v == "true")
+		changed++
+	}
+	if v := awscommon.InputString("auto_minor_version_upgrade", inputs); v != "" {
+		in.AutoMinorVersionUpgrade = aws.Bool(v == "true")
 		changed++
 	}
 	if changed == 0 {
