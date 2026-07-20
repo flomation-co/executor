@@ -37,6 +37,13 @@ var Inputs = [...]core.Connection{
 	{Name: "credential", Type: core.ConnectionTypeCredential, Label: "AWS Role Credential", Required: true, Visible: &core.VisibleWhen{Field: "auth_method", Values: []string{"credential"}}},
 	{Name: "snapshot_ids", Type: core.ConnectionTypeString, Label: "Snapshot IDs", Placeholder: "Comma-separated (optional)"},
 	{Name: "owners", Type: core.ConnectionTypeString, Label: "Owners", Placeholder: "e.g. self (optional; blank lists all visible)"},
+	{Name: "filter_status", Type: core.ConnectionTypeMultiSelect, Label: "Filter by Status", Placeholder: "Select one or more; none = any status", Options: []core.ConnectionOption{
+		{Name: "Completed", Value: "completed"},
+		{Name: "Pending", Value: "pending"},
+		{Name: "Error", Value: "error"},
+	}},
+	{Name: "filter_volume_id", Type: core.ConnectionTypeString, Label: "Filter by Source Volume ID", Placeholder: "vol-0abc — snapshots of this volume (optional)"},
+	{Name: "filter_tags", Type: core.ConnectionTypeKeyValueArray, Label: "Filter by Tags", Placeholder: "Only return snapshots with these tags (blank Value matches any value for that key)"},
 }
 
 var Outputs = [...]core.Connection{
@@ -60,6 +67,12 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	}
 	if owners := awscommon.InputStrings("owners", inputs); len(owners) > 0 {
 		in.OwnerIds = owners
+	}
+	if filters := awscommon.BuildEC2Filters(inputs, []awscommon.FilterSpec{
+		{Input: "filter_status", Filter: "status", Multi: true},
+		{Input: "filter_volume_id", Filter: "volume-id"},
+	}); len(filters) > 0 {
+		in.Filters = filters
 	}
 
 	var snapshots []map[string]interface{}

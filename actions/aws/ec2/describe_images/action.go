@@ -38,6 +38,24 @@ var Inputs = [...]core.Connection{
 	{Name: "credential", Type: core.ConnectionTypeCredential, Label: "AWS Role Credential", Required: true, Visible: &core.VisibleWhen{Field: "auth_method", Values: []string{"credential"}}},
 	{Name: "image_ids", Type: core.ConnectionTypeString, Label: "AMI IDs", Placeholder: "Comma-separated (optional)"},
 	{Name: "owners", Type: core.ConnectionTypeString, Label: "Owners", Placeholder: "e.g. self, amazon, or an account id (optional)"},
+	{Name: "filter_name", Type: core.ConnectionTypeString, Label: "Filter by Name", Placeholder: "AMI name; wildcards allowed e.g. ubuntu-*/22.04* (optional)"},
+	{Name: "filter_state", Type: core.ConnectionTypeMultiSelect, Label: "Filter by State", Placeholder: "Select one or more; none = any state", Options: []core.ConnectionOption{
+		{Name: "Available", Value: "available"},
+		{Name: "Pending", Value: "pending"},
+		{Name: "Failed", Value: "failed"},
+	}},
+	{Name: "filter_architecture", Type: core.ConnectionTypeMultiSelect, Label: "Filter by Architecture", Placeholder: "Select one or more; none = any", Options: []core.ConnectionOption{
+		{Name: "x86_64", Value: "x86_64"},
+		{Name: "arm64", Value: "arm64"},
+		{Name: "i386", Value: "i386"},
+	}},
+	{Name: "filter_is_public", Type: core.ConnectionTypeString, Label: "Filter by Visibility", Options: []core.ConnectionOption{
+		{Name: "Any", Value: ""},
+		{Name: "Public only", Value: "true"},
+		{Name: "Private only", Value: "false"},
+	}},
+	{Name: "filter_platform", Type: core.ConnectionTypeString, Label: "Filter by Platform", Placeholder: "e.g. windows — blank includes Linux/UNIX (optional)"},
+	{Name: "filter_tags", Type: core.ConnectionTypeKeyValueArray, Label: "Filter by Tags", Placeholder: "Only return images with these tags (blank Value matches any value for that key)"},
 }
 
 var Outputs = [...]core.Connection{
@@ -61,6 +79,15 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	}
 	if owners := awscommon.InputStrings("owners", inputs); len(owners) > 0 {
 		in.Owners = owners
+	}
+	if filters := awscommon.BuildEC2Filters(inputs, []awscommon.FilterSpec{
+		{Input: "filter_name", Filter: "name"},
+		{Input: "filter_state", Filter: "state", Multi: true},
+		{Input: "filter_architecture", Filter: "architecture", Multi: true},
+		{Input: "filter_is_public", Filter: "is-public"},
+		{Input: "filter_platform", Filter: "platform"},
+	}); len(filters) > 0 {
+		in.Filters = filters
 	}
 
 	out, err := client.DescribeImages(ctx, in)

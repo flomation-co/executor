@@ -37,6 +37,10 @@ var Inputs = [...]core.Connection{
 	{Name: "external_id", Type: core.ConnectionTypeString, Label: "Assume Role External ID (optional)", Placeholder: "Must match the External ID in the role's trust policy", Visible: &core.VisibleWhen{Field: "auth_method", Values: []string{"assume_role"}}},
 	{Name: "credential", Type: core.ConnectionTypeCredential, Label: "AWS Role Credential", Required: true, Visible: &core.VisibleWhen{Field: "auth_method", Values: []string{"credential"}}},
 	{Name: "group_ids", Type: core.ConnectionTypeString, Label: "Group IDs", Placeholder: "Comma-separated; blank for all (optional)"},
+	{Name: "filter_group_name", Type: core.ConnectionTypeString, Label: "Filter by Group Name", Placeholder: "e.g. web-sg (optional)"},
+	{Name: "filter_vpc_id", Type: core.ConnectionTypeString, Label: "Filter by VPC ID", Placeholder: "vpc-0abc (optional)"},
+	{Name: "filter_description", Type: core.ConnectionTypeString, Label: "Filter by Description", Placeholder: "Exact description text (optional)"},
+	{Name: "filter_tags", Type: core.ConnectionTypeKeyValueArray, Label: "Filter by Tags", Placeholder: "Only return groups with these tags (blank Value matches any value for that key)"},
 }
 
 var Outputs = [...]core.Connection{
@@ -57,6 +61,13 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	in := &ec2.DescribeSecurityGroupsInput{}
 	if ids := awscommon.InputStrings("group_ids", inputs); len(ids) > 0 {
 		in.GroupIds = ids
+	}
+	if filters := awscommon.BuildEC2Filters(inputs, []awscommon.FilterSpec{
+		{Input: "filter_group_name", Filter: "group-name"},
+		{Input: "filter_vpc_id", Filter: "vpc-id"},
+		{Input: "filter_description", Filter: "description"},
+	}); len(filters) > 0 {
+		in.Filters = filters
 	}
 
 	var groups []map[string]interface{}

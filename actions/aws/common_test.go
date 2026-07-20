@@ -117,3 +117,40 @@ func TestInputStringAbsent(t *testing.T) {
 	RegisterTestingT(t)
 	Expect(InputString("nope", nil)).To(Equal(""))
 }
+
+func TestBuildEC2Filters(t *testing.T) {
+	RegisterTestingT(t)
+
+	inputs := []*core.Connection{
+		{Name: "filter_tags", Type: core.ConnectionTypeKeyValueArray, Value: `[{"key":"Environment","value":"prod"},{"key":"Owner","value":""}]`},
+		{Name: "filter_status", Type: core.ConnectionTypeMultiSelect, Value: "available,in-use"},
+		{Name: "filter_vpc_id", Type: core.ConnectionTypeString, Value: "vpc-123"},
+		{Name: "filter_blank", Type: core.ConnectionTypeString, Value: ""}, // blank → skipped
+	}
+
+	got := map[string][]string{}
+	for _, f := range BuildEC2Filters(inputs, []FilterSpec{
+		{Input: "filter_status", Filter: "status", Multi: true},
+		{Input: "filter_vpc_id", Filter: "vpc-id"},
+		{Input: "filter_blank", Filter: "blank"},
+	}) {
+		got[*f.Name] = f.Values
+	}
+
+	Expect(got["tag:Environment"]).To(Equal([]string{"prod"}))
+	Expect(got["tag-key"]).To(Equal([]string{"Owner"}))              // blank value → "has this tag key"
+	Expect(got["status"]).To(Equal([]string{"available", "in-use"})) // multi-select → OR'd
+	Expect(got["vpc-id"]).To(Equal([]string{"vpc-123"}))
+	Expect(got).To(Not(HaveKey("blank"))) // blank input skipped
+}
+
+func TestBuildEC2FiltersEmpty(t *testing.T) {
+	RegisterTestingT(t)
+	Expect(BuildEC2Filters(nil, []FilterSpec{{Input: "x", Filter: "x"}})).To(BeEmpty())
+}
+
+func TestEC2TagFiltersAbsent(t *testing.T) {
+	RegisterTestingT(t)
+	// No filter_tags input at all → nil, never a spurious filter.
+	Expect(EC2TagFilters([]*core.Connection{conn("other", "v")})).To(BeNil())
+}

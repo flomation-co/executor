@@ -35,6 +35,12 @@ var Inputs = [...]core.Connection{
 	{Name: "assume_role_arn", Type: core.ConnectionTypeString, Label: "Role ARN to Assume", Placeholder: "arn:aws:iam::<your-account>:role/FlomationAccess", Required: true, Visible: &core.VisibleWhen{Field: "auth_method", Values: []string{"assume_role"}}},
 	{Name: "external_id", Type: core.ConnectionTypeString, Label: "Assume Role External ID (optional)", Placeholder: "Must match the External ID in the role's trust policy", Visible: &core.VisibleWhen{Field: "auth_method", Values: []string{"assume_role"}}},
 	{Name: "credential", Type: core.ConnectionTypeCredential, Label: "AWS Role Credential", Required: true, Visible: &core.VisibleWhen{Field: "auth_method", Values: []string{"credential"}}},
+	{Name: "filter_key_name", Type: core.ConnectionTypeString, Label: "Filter by Key Name", Placeholder: "e.g. deploy-key (optional)"},
+	{Name: "filter_key_type", Type: core.ConnectionTypeMultiSelect, Label: "Filter by Key Type", Placeholder: "Select one or more; none = any type", Options: []core.ConnectionOption{
+		{Name: "RSA", Value: "rsa"},
+		{Name: "ED25519", Value: "ed25519"},
+	}},
+	{Name: "filter_tags", Type: core.ConnectionTypeKeyValueArray, Label: "Filter by Tags", Placeholder: "Only return key pairs with these tags (blank Value matches any value for that key)"},
 }
 
 var Outputs = [...]core.Connection{
@@ -52,7 +58,15 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	}
 	client := ec2.NewFromConfig(cfg)
 
-	out, err := client.DescribeKeyPairs(ctx, &ec2.DescribeKeyPairsInput{})
+	in := &ec2.DescribeKeyPairsInput{}
+	if filters := awscommon.BuildEC2Filters(inputs, []awscommon.FilterSpec{
+		{Input: "filter_key_name", Filter: "key-name"},
+		{Input: "filter_key_type", Filter: "key-type", Multi: true},
+	}); len(filters) > 0 {
+		in.Filters = filters
+	}
+
+	out, err := client.DescribeKeyPairs(ctx, in)
 	if err != nil {
 		return nil, err
 	}

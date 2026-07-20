@@ -8,7 +8,6 @@ package aws_ec2_describe_instances
 import (
 	"context"
 	"fmt"
-	"strings"
 
 	core "flomation.app/automate/executor"
 	awscommon "flomation.app/automate/executor/actions/aws"
@@ -106,44 +105,17 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 }
 
 // buildFilters assembles the EC2 DescribeInstances filters from the optional
-// filter inputs. Tag rows become "tag:<Key>" = <Value> (or "tag-key" = <Key>
-// when the value is blank); the named filters map to their EC2 filter names.
-// EC2 ANDs all filters together.
+// filter inputs, via the shared awscommon helper (tag rows become "tag:<Key>" =
+// <Value> or "tag-key" = <Key> when blank; state is multi-select OR'd; the named
+// filters map to their EC2 filter names). EC2 ANDs all filters together.
 func buildFilters(inputs []*core.Connection) []types.Filter {
-	var filters []types.Filter
-
-	if conn := core.FindConnection("filter_tags", inputs); conn != nil {
-		for _, kv := range conn.KeyValuePairs() {
-			k := strings.TrimSpace(kv.Key)
-			if k == "" {
-				continue
-			}
-			if v := strings.TrimSpace(kv.Value); v != "" {
-				filters = append(filters, types.Filter{Name: aws.String("tag:" + k), Values: []string{v}})
-			} else {
-				filters = append(filters, types.Filter{Name: aws.String("tag-key"), Values: []string{k}})
-			}
-		}
-	}
-
-	// State is multi-select: multiple states OR together within the one filter.
-	if states := awscommon.InputStrings("filter_state", inputs); len(states) > 0 {
-		filters = append(filters, types.Filter{Name: aws.String("instance-state-name"), Values: states})
-	}
-
-	named := []struct{ input, filter string }{
-		{"filter_instance_type", "instance-type"},
-		{"filter_vpc_id", "vpc-id"},
-		{"filter_subnet_id", "subnet-id"},
-		{"filter_availability_zone", "availability-zone"},
-	}
-	for _, n := range named {
-		if v := strings.TrimSpace(awscommon.InputString(n.input, inputs)); v != "" {
-			filters = append(filters, types.Filter{Name: aws.String(n.filter), Values: []string{v}})
-		}
-	}
-
-	return filters
+	return awscommon.BuildEC2Filters(inputs, []awscommon.FilterSpec{
+		{Input: "filter_state", Filter: "instance-state-name", Multi: true},
+		{Input: "filter_instance_type", Filter: "instance-type"},
+		{Input: "filter_vpc_id", Filter: "vpc-id"},
+		{Input: "filter_subnet_id", Filter: "subnet-id"},
+		{Input: "filter_availability_zone", Filter: "availability-zone"},
+	})
 }
 
 // summariseInstance flattens the SDK instance into a compact, JSON-friendly map.

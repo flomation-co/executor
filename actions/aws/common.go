@@ -20,6 +20,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/config"
 	"github.com/aws/aws-sdk-go-v2/credentials"
 	"github.com/aws/aws-sdk-go-v2/credentials/stscreds"
+	ec2types "github.com/aws/aws-sdk-go-v2/service/ec2/types"
 	"github.com/aws/aws-sdk-go-v2/service/sts"
 
 	core "flomation.app/automate/executor"
@@ -176,4 +177,57 @@ func trimList(in []string) []string {
 		}
 	}
 	return out
+}
+
+// FilterSpec maps an action input to an EC2 filter name. Multi means the input
+// holds several OR'd values (a multi-select or comma-separated list, read via
+// InputStrings); otherwise it's a single string value. Blank/absent inputs are
+// skipped, so an unset filter never constrains the query.
+type FilterSpec struct {
+	Input  string
+	Filter string
+	Multi  bool
+}
+
+// EC2TagFilters converts the standard "filter_tags" key-value-array input into
+// EC2 tag filters: "tag:<Key>" = <Value>, or "tag-key" = <Key> when the value is
+// blank (i.e. "has this tag key, any value"). EC2 ANDs all returned filters.
+func EC2TagFilters(inputs []*core.Connection) []ec2types.Filter {
+	var filters []ec2types.Filter
+	conn := core.FindConnection("filter_tags", inputs)
+	if conn == nil {
+		return nil
+	}
+	for _, kv := range conn.KeyValuePairs() {
+		k := strings.TrimSpace(kv.Key)
+		if k == "" {
+			continue
+		}
+		if v := strings.TrimSpace(kv.Value); v != "" {
+			filters = append(filters, ec2types.Filter{Name: awssdk.String("tag:" + k), Values: []string{v}})
+		} else {
+			filters = append(filters, ec2types.Filter{Name: awssdk.String("tag-key"), Values: []string{k}})
+		}
+	}
+	return filters
+}
+
+// BuildEC2Filters assembles the combined EC2 filter list for a Describe call: the
+// standard tag filters (from "filter_tags") plus each named spec. It is the one
+// place the tag/named/multi filter conventions live, so every AWS Describe action
+// gets identical, tested behaviour by just declaring its relevant specs.
+func BuildEC2Filters(inputs []*core.Connection, specs []FilterSpec) []ec2types.Filter {
+	filters := EC2TagFilters(inputs)
+	for _, s := range specs {
+		if s.Multi {
+			if vals := InputStrings(s.Input, inputs); len(vals) > 0 {
+				filters = append(filters, ec2types.Filter{Name: awssdk.String(s.Filter), Values: vals})
+			}
+			continue
+		}
+		if v := strings.TrimSpace(InputString(s.Input, inputs)); v != "" {
+			filters = append(filters, ec2types.Filter{Name: awssdk.String(s.Filter), Values: []string{v}})
+		}
+	}
+	return filters
 }
