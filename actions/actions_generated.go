@@ -1024,6 +1024,23 @@ import (
 	opentofu_apply "flomation.app/automate/executor/actions/opentofu/apply"
 	opentofu_destroy "flomation.app/automate/executor/actions/opentofu/destroy"
 	opentofu_plan "flomation.app/automate/executor/actions/opentofu/plan"
+	oracle_compute_availability_domain_get_all "flomation.app/automate/executor/actions/oracle/compute/availability_domain_get_all"
+	oracle_compute_boot_volume_get_all "flomation.app/automate/executor/actions/oracle/compute/boot_volume_get_all"
+	oracle_compute_compartment_get_all "flomation.app/automate/executor/actions/oracle/compute/compartment_get_all"
+	oracle_compute_image_get_all "flomation.app/automate/executor/actions/oracle/compute/image_get_all"
+	oracle_compute_instance_get "flomation.app/automate/executor/actions/oracle/compute/instance_get"
+	oracle_compute_instance_get_all "flomation.app/automate/executor/actions/oracle/compute/instance_get_all"
+	oracle_compute_instance_launch "flomation.app/automate/executor/actions/oracle/compute/instance_launch"
+	oracle_compute_instance_list_vnics "flomation.app/automate/executor/actions/oracle/compute/instance_list_vnics"
+	oracle_compute_instance_reset "flomation.app/automate/executor/actions/oracle/compute/instance_reset"
+	oracle_compute_instance_start "flomation.app/automate/executor/actions/oracle/compute/instance_start"
+	oracle_compute_instance_stop "flomation.app/automate/executor/actions/oracle/compute/instance_stop"
+	oracle_compute_instance_tag_set "flomation.app/automate/executor/actions/oracle/compute/instance_tag_set"
+	oracle_compute_instance_terminate "flomation.app/automate/executor/actions/oracle/compute/instance_terminate"
+	oracle_compute_instance_update "flomation.app/automate/executor/actions/oracle/compute/instance_update"
+	oracle_compute_shape_get_all "flomation.app/automate/executor/actions/oracle/compute/shape_get_all"
+	oracle_compute_subnet_get_all "flomation.app/automate/executor/actions/oracle/compute/subnet_get_all"
+	oracle_compute_vcn_get_all "flomation.app/automate/executor/actions/oracle/compute/vcn_get_all"
 	output_set "flomation.app/automate/executor/actions/output/set"
 	output_set_outputs "flomation.app/automate/executor/actions/output/set_outputs"
 	output_web_response "flomation.app/automate/executor/actions/output/web_response"
@@ -2528,6 +2545,23 @@ var Actions = map[string]core.Action{
 	"opentofu/apply":                                                 opentofu_apply.Execute,
 	"opentofu/destroy":                                               opentofu_destroy.Execute,
 	"opentofu/plan":                                                  opentofu_plan.Execute,
+	"oracle/compute/availability_domain_get_all":                     oracle_compute_availability_domain_get_all.Execute,
+	"oracle/compute/boot_volume_get_all":                             oracle_compute_boot_volume_get_all.Execute,
+	"oracle/compute/compartment_get_all":                             oracle_compute_compartment_get_all.Execute,
+	"oracle/compute/image_get_all":                                   oracle_compute_image_get_all.Execute,
+	"oracle/compute/instance_get":                                    oracle_compute_instance_get.Execute,
+	"oracle/compute/instance_get_all":                                oracle_compute_instance_get_all.Execute,
+	"oracle/compute/instance_launch":                                 oracle_compute_instance_launch.Execute,
+	"oracle/compute/instance_list_vnics":                             oracle_compute_instance_list_vnics.Execute,
+	"oracle/compute/instance_reset":                                  oracle_compute_instance_reset.Execute,
+	"oracle/compute/instance_start":                                  oracle_compute_instance_start.Execute,
+	"oracle/compute/instance_stop":                                   oracle_compute_instance_stop.Execute,
+	"oracle/compute/instance_tag_set":                                oracle_compute_instance_tag_set.Execute,
+	"oracle/compute/instance_terminate":                              oracle_compute_instance_terminate.Execute,
+	"oracle/compute/instance_update":                                 oracle_compute_instance_update.Execute,
+	"oracle/compute/shape_get_all":                                   oracle_compute_shape_get_all.Execute,
+	"oracle/compute/subnet_get_all":                                  oracle_compute_subnet_get_all.Execute,
+	"oracle/compute/vcn_get_all":                                     oracle_compute_vcn_get_all.Execute,
 	"output/set":                                                     output_set.Execute,
 	"output/set_outputs":                                             output_set_outputs.Execute,
 	"output/web_response":                                            output_web_response.Execute,

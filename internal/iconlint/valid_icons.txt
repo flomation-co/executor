@@ -62,11 +62,13 @@ comment
 comment-dots
 comments
 comment-sms
+compact-disc
 compress
 copy
 cubes
 cubes-stacked
 database
+diagram-project
 discord
 display
 divide
@@ -77,6 +79,7 @@ envelope
 envelope-circle-check
 envelope-open-text
 envelopes-bulk
+ethernet
 exclamation-triangle
 expand
 eye
@@ -107,6 +110,7 @@ grid
 grip
 grip-vertical
 hand
+hard-drive
 hashtag
 headset
 helm
@@ -144,8 +148,10 @@ microphone
 microsoft
 minus
 monday
+network-wired
 notion
 object-group
+oracle
 paperclip
 paper-plane
 pause
@@ -193,6 +199,7 @@ stop
 stripe
 sync
 table
+tag
 telegram
 terminal
 times
