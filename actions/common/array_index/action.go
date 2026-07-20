@@ -4,6 +4,7 @@ package array_index
 import (
 	"encoding/json"
 	"fmt"
+	"reflect"
 
 	core "flomation.app/automate/executor"
 )
@@ -67,7 +68,15 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 			return errResult(fmt.Sprintf("value is not an array: %s", v[:min(len(v), 100)]))
 		}
 	default:
-		return errResult(fmt.Sprintf("expected array, got %T", arrayConn.Value))
+		// Any other slice/array type (e.g. []string, []int from action outputs
+		// that return native Go slices) — index into it generically.
+		rv := reflect.ValueOf(arrayConn.Value)
+		if rv.Kind() != reflect.Slice && rv.Kind() != reflect.Array {
+			return errResult(fmt.Sprintf("expected array, got %T", arrayConn.Value))
+		}
+		for i := 0; i < rv.Len(); i++ {
+			arr = append(arr, rv.Index(i).Interface())
+		}
 	}
 
 	// Support negative indexing (Python-style)

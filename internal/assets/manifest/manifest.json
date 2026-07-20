@@ -7380,15 +7380,15 @@
       }
     ]
   },
-  "aws/ec2/describe": {
-    "hash": "3b9490bd2136c66008690f61d262d1b6b192b2655ba245fcf42177e1297c5c78",
+  "aws/ec2/authorize_security_group_ingress": {
+    "hash": "5d46762c7b1f5339e26ec73851e09837491741497ca5220fd143d14e737b4cad",
     "author": "Andy Esser",
     "organisation": "Flomation",
-    "name": "AWS EC2 Describe",
-    "description": "Describe EC2 instances, returning details like state, type, IPs, and tags",
+    "name": "AWS EC2 Authorize Security Group Ingress",
+    "description": "Add an inbound rule to a security group (protocol, port range and CIDR).",
     "website": "https://www.flomation.co",
-    "icon": "server",
-    "date": "05/03/2026",
+    "icon": "shield-halved+plus",
+    "date": "17/07/2026",
     "type": 2,
     "category": {
       "name": "AWS",
@@ -7400,11 +7400,3282 @@
       "icon": "server",
       "description": "Elastic Compute Cloud operations"
     },
-    "inputs": null,
-    "outputs": null
+    "inputs": [
+      {
+        "name": "auth_method",
+        "type": "string",
+        "value": null,
+        "label": "Authentication",
+        "placeholder": "",
+        "required": true,
+        "options": [
+          {
+            "name": "Access Keys",
+            "value": "keys"
+          },
+          {
+            "name": "Assume Role (cross-account)",
+            "value": "assume_role"
+          },
+          {
+            "name": "Managed Role (Credential)",
+            "value": "credential"
+          }
+        ]
+      },
+      {
+        "name": "aws_access_key",
+        "type": "secret",
+        "value": null,
+        "label": "AWS Access Key",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "aws_secret_key",
+        "type": "secret",
+        "value": null,
+        "label": "AWS Secret Key",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "aws_region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "eu-west-2",
+        "required": true
+      },
+      {
+        "name": "aws_session_token",
+        "type": "secret",
+        "value": null,
+        "label": "Session Token (optional)",
+        "placeholder": "",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "assume_role_arn",
+        "type": "string",
+        "value": null,
+        "label": "Role ARN to Assume",
+        "placeholder": "arn:aws:iam::\u003cyour-account\u003e:role/FlomationAccess",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "assume_role"
+          ]
+        }
+      },
+      {
+        "name": "external_id",
+        "type": "string",
+        "value": null,
+        "label": "Assume Role External ID (optional)",
+        "placeholder": "Must match the External ID in the role's trust policy",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "assume_role"
+          ]
+        }
+      },
+      {
+        "name": "credential",
+        "type": "credential",
+        "value": null,
+        "label": "AWS Role Credential",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "credential"
+          ]
+        }
+      },
+      {
+        "name": "group_id",
+        "type": "string",
+        "value": null,
+        "label": "Group ID",
+        "placeholder": "sg-0abc123",
+        "required": true
+      },
+      {
+        "name": "protocol",
+        "type": "string",
+        "value": null,
+        "label": "Protocol",
+        "placeholder": "",
+        "required": true,
+        "options": [
+          {
+            "name": "TCP",
+            "value": "tcp"
+          },
+          {
+            "name": "UDP",
+            "value": "udp"
+          },
+          {
+            "name": "ICMP",
+            "value": "icmp"
+          },
+          {
+            "name": "All",
+            "value": "-1"
+          }
+        ]
+      },
+      {
+        "name": "from_port",
+        "type": "integer",
+        "value": null,
+        "label": "From Port",
+        "placeholder": "e.g. 443"
+      },
+      {
+        "name": "to_port",
+        "type": "integer",
+        "value": null,
+        "label": "To Port",
+        "placeholder": "e.g. 443"
+      },
+      {
+        "name": "cidr",
+        "type": "string",
+        "value": null,
+        "label": "CIDR",
+        "placeholder": "0.0.0.0/0",
+        "required": true
+      },
+      {
+        "name": "description",
+        "type": "string",
+        "value": null,
+        "label": "Rule Description",
+        "placeholder": "Optional"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "group_id",
+        "type": "string",
+        "value": null,
+        "label": "Group ID",
+        "placeholder": ""
+      }
+    ]
+  },
+  "aws/ec2/create_security_group": {
+    "hash": "dc906d2e1f3ff4e8e50c7e1adbb30745810bcf504c58bb243777ced6f0fb1572",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "AWS EC2 Create Security Group",
+    "description": "Create a security group in a VPC. Rules are added separately via authorize ingress.",
+    "website": "https://www.flomation.co",
+    "icon": "shield-halved+plus",
+    "date": "17/07/2026",
+    "type": 2,
+    "category": {
+      "name": "AWS",
+      "icon": "cloud",
+      "description": "Amazon Web Services integrations"
+    },
+    "sub_category": {
+      "name": "EC2",
+      "icon": "server",
+      "description": "Elastic Compute Cloud operations"
+    },
+    "inputs": [
+      {
+        "name": "auth_method",
+        "type": "string",
+        "value": null,
+        "label": "Authentication",
+        "placeholder": "",
+        "required": true,
+        "options": [
+          {
+            "name": "Access Keys",
+            "value": "keys"
+          },
+          {
+            "name": "Assume Role (cross-account)",
+            "value": "assume_role"
+          },
+          {
+            "name": "Managed Role (Credential)",
+            "value": "credential"
+          }
+        ]
+      },
+      {
+        "name": "aws_access_key",
+        "type": "secret",
+        "value": null,
+        "label": "AWS Access Key",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "aws_secret_key",
+        "type": "secret",
+        "value": null,
+        "label": "AWS Secret Key",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "aws_region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "eu-west-2",
+        "required": true
+      },
+      {
+        "name": "aws_session_token",
+        "type": "secret",
+        "value": null,
+        "label": "Session Token (optional)",
+        "placeholder": "",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "assume_role_arn",
+        "type": "string",
+        "value": null,
+        "label": "Role ARN to Assume",
+        "placeholder": "arn:aws:iam::\u003cyour-account\u003e:role/FlomationAccess",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "assume_role"
+          ]
+        }
+      },
+      {
+        "name": "external_id",
+        "type": "string",
+        "value": null,
+        "label": "Assume Role External ID (optional)",
+        "placeholder": "Must match the External ID in the role's trust policy",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "assume_role"
+          ]
+        }
+      },
+      {
+        "name": "credential",
+        "type": "credential",
+        "value": null,
+        "label": "AWS Role Credential",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "credential"
+          ]
+        }
+      },
+      {
+        "name": "group_name",
+        "type": "string",
+        "value": null,
+        "label": "Group Name",
+        "placeholder": "web-sg",
+        "required": true
+      },
+      {
+        "name": "description",
+        "type": "string",
+        "value": null,
+        "label": "Description",
+        "placeholder": "Allows web traffic",
+        "required": true
+      },
+      {
+        "name": "vpc_id",
+        "type": "string",
+        "value": null,
+        "label": "VPC ID",
+        "placeholder": "vpc-0abc (optional; default VPC if blank)"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "group_id",
+        "type": "string",
+        "value": null,
+        "label": "Group ID",
+        "placeholder": ""
+      }
+    ]
+  },
+  "aws/ec2/create_snapshot": {
+    "hash": "4d1c9db127c815d2de2b33fe7fc421e04ca8e0faaed84337157ad77d7ebbc97f",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "AWS EC2 Create Snapshot",
+    "description": "Create a point-in-time snapshot of an EBS volume.",
+    "website": "https://www.flomation.co",
+    "icon": "floppy-disk+plus",
+    "date": "17/07/2026",
+    "type": 2,
+    "category": {
+      "name": "AWS",
+      "icon": "cloud",
+      "description": "Amazon Web Services integrations"
+    },
+    "sub_category": {
+      "name": "EC2",
+      "icon": "server",
+      "description": "Elastic Compute Cloud operations"
+    },
+    "inputs": [
+      {
+        "name": "auth_method",
+        "type": "string",
+        "value": null,
+        "label": "Authentication",
+        "placeholder": "",
+        "required": true,
+        "options": [
+          {
+            "name": "Access Keys",
+            "value": "keys"
+          },
+          {
+            "name": "Assume Role (cross-account)",
+            "value": "assume_role"
+          },
+          {
+            "name": "Managed Role (Credential)",
+            "value": "credential"
+          }
+        ]
+      },
+      {
+        "name": "aws_access_key",
+        "type": "secret",
+        "value": null,
+        "label": "AWS Access Key",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "aws_secret_key",
+        "type": "secret",
+        "value": null,
+        "label": "AWS Secret Key",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "aws_region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "eu-west-2",
+        "required": true
+      },
+      {
+        "name": "aws_session_token",
+        "type": "secret",
+        "value": null,
+        "label": "Session Token (optional)",
+        "placeholder": "",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "assume_role_arn",
+        "type": "string",
+        "value": null,
+        "label": "Role ARN to Assume",
+        "placeholder": "arn:aws:iam::\u003cyour-account\u003e:role/FlomationAccess",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "assume_role"
+          ]
+        }
+      },
+      {
+        "name": "external_id",
+        "type": "string",
+        "value": null,
+        "label": "Assume Role External ID (optional)",
+        "placeholder": "Must match the External ID in the role's trust policy",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "assume_role"
+          ]
+        }
+      },
+      {
+        "name": "credential",
+        "type": "credential",
+        "value": null,
+        "label": "AWS Role Credential",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "credential"
+          ]
+        }
+      },
+      {
+        "name": "volume_id",
+        "type": "string",
+        "value": null,
+        "label": "Volume ID",
+        "placeholder": "vol-0abc123",
+        "required": true
+      },
+      {
+        "name": "description",
+        "type": "string",
+        "value": null,
+        "label": "Description",
+        "placeholder": "Optional"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "snapshot_id",
+        "type": "string",
+        "value": null,
+        "label": "Snapshot ID",
+        "placeholder": ""
+      },
+      {
+        "name": "state",
+        "type": "string",
+        "value": null,
+        "label": "State",
+        "placeholder": ""
+      }
+    ]
+  },
+  "aws/ec2/create_tags": {
+    "hash": "fe7a682e3982fcf994f989ea0d3c5db42880716942554403d877ad981ea05467",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "AWS EC2 Create Tags",
+    "description": "Add or overwrite tags on EC2 resources (instances, volumes, etc).",
+    "website": "https://www.flomation.co",
+    "icon": "hashtag+plus",
+    "date": "17/07/2026",
+    "type": 2,
+    "category": {
+      "name": "AWS",
+      "icon": "cloud",
+      "description": "Amazon Web Services integrations"
+    },
+    "sub_category": {
+      "name": "EC2",
+      "icon": "server",
+      "description": "Elastic Compute Cloud operations"
+    },
+    "inputs": [
+      {
+        "name": "auth_method",
+        "type": "string",
+        "value": null,
+        "label": "Authentication",
+        "placeholder": "",
+        "required": true,
+        "options": [
+          {
+            "name": "Access Keys",
+            "value": "keys"
+          },
+          {
+            "name": "Assume Role (cross-account)",
+            "value": "assume_role"
+          },
+          {
+            "name": "Managed Role (Credential)",
+            "value": "credential"
+          }
+        ]
+      },
+      {
+        "name": "aws_access_key",
+        "type": "secret",
+        "value": null,
+        "label": "AWS Access Key",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "aws_secret_key",
+        "type": "secret",
+        "value": null,
+        "label": "AWS Secret Key",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "aws_region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "eu-west-2",
+        "required": true
+      },
+      {
+        "name": "aws_session_token",
+        "type": "secret",
+        "value": null,
+        "label": "Session Token (optional)",
+        "placeholder": "",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "assume_role_arn",
+        "type": "string",
+        "value": null,
+        "label": "Role ARN to Assume",
+        "placeholder": "arn:aws:iam::\u003cyour-account\u003e:role/FlomationAccess",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "assume_role"
+          ]
+        }
+      },
+      {
+        "name": "external_id",
+        "type": "string",
+        "value": null,
+        "label": "Assume Role External ID (optional)",
+        "placeholder": "Must match the External ID in the role's trust policy",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "assume_role"
+          ]
+        }
+      },
+      {
+        "name": "credential",
+        "type": "credential",
+        "value": null,
+        "label": "AWS Role Credential",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "credential"
+          ]
+        }
+      },
+      {
+        "name": "resource_ids",
+        "type": "string",
+        "value": null,
+        "label": "Resource IDs",
+        "placeholder": "Comma-separated, e.g. i-0abc,vol-0def",
+        "required": true
+      },
+      {
+        "name": "tags",
+        "type": "key_value_array",
+        "value": null,
+        "label": "Tags",
+        "placeholder": "Add a Key and Value per tag",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "tagged",
+        "type": "integer",
+        "value": null,
+        "label": "Resources Tagged",
+        "placeholder": ""
+      }
+    ]
+  },
+  "aws/ec2/delete_security_group": {
+    "hash": "8d7665831264cbba560307fb075d17b596aa68a518baf0d53bfc18ef75626d4d",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "AWS EC2 Delete Security Group",
+    "description": "Delete a security group by id. Fails if the group is still in use.",
+    "website": "https://www.flomation.co",
+    "icon": "shield-halved+trash",
+    "date": "17/07/2026",
+    "type": 2,
+    "category": {
+      "name": "AWS",
+      "icon": "cloud",
+      "description": "Amazon Web Services integrations"
+    },
+    "sub_category": {
+      "name": "EC2",
+      "icon": "server",
+      "description": "Elastic Compute Cloud operations"
+    },
+    "inputs": [
+      {
+        "name": "auth_method",
+        "type": "string",
+        "value": null,
+        "label": "Authentication",
+        "placeholder": "",
+        "required": true,
+        "options": [
+          {
+            "name": "Access Keys",
+            "value": "keys"
+          },
+          {
+            "name": "Assume Role (cross-account)",
+            "value": "assume_role"
+          },
+          {
+            "name": "Managed Role (Credential)",
+            "value": "credential"
+          }
+        ]
+      },
+      {
+        "name": "aws_access_key",
+        "type": "secret",
+        "value": null,
+        "label": "AWS Access Key",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "aws_secret_key",
+        "type": "secret",
+        "value": null,
+        "label": "AWS Secret Key",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "aws_region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "eu-west-2",
+        "required": true
+      },
+      {
+        "name": "aws_session_token",
+        "type": "secret",
+        "value": null,
+        "label": "Session Token (optional)",
+        "placeholder": "",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "assume_role_arn",
+        "type": "string",
+        "value": null,
+        "label": "Role ARN to Assume",
+        "placeholder": "arn:aws:iam::\u003cyour-account\u003e:role/FlomationAccess",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "assume_role"
+          ]
+        }
+      },
+      {
+        "name": "external_id",
+        "type": "string",
+        "value": null,
+        "label": "Assume Role External ID (optional)",
+        "placeholder": "Must match the External ID in the role's trust policy",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "assume_role"
+          ]
+        }
+      },
+      {
+        "name": "credential",
+        "type": "credential",
+        "value": null,
+        "label": "AWS Role Credential",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "credential"
+          ]
+        }
+      },
+      {
+        "name": "group_id",
+        "type": "string",
+        "value": null,
+        "label": "Group ID",
+        "placeholder": "sg-0abc123",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "group_id",
+        "type": "string",
+        "value": null,
+        "label": "Group ID",
+        "placeholder": ""
+      }
+    ]
+  },
+  "aws/ec2/describe_images": {
+    "hash": "c06806c64433a6e619d932f2d5f236342673e057a967f0c1ce38c0627fe643d4",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "AWS EC2 Describe Images",
+    "description": "List AMIs by id or owner, with name, state, architecture and creation date.",
+    "website": "https://www.flomation.co",
+    "icon": "image",
+    "date": "17/07/2026",
+    "type": 2,
+    "category": {
+      "name": "AWS",
+      "icon": "cloud",
+      "description": "Amazon Web Services integrations"
+    },
+    "sub_category": {
+      "name": "EC2",
+      "icon": "server",
+      "description": "Elastic Compute Cloud operations"
+    },
+    "inputs": [
+      {
+        "name": "auth_method",
+        "type": "string",
+        "value": null,
+        "label": "Authentication",
+        "placeholder": "",
+        "required": true,
+        "options": [
+          {
+            "name": "Access Keys",
+            "value": "keys"
+          },
+          {
+            "name": "Assume Role (cross-account)",
+            "value": "assume_role"
+          },
+          {
+            "name": "Managed Role (Credential)",
+            "value": "credential"
+          }
+        ]
+      },
+      {
+        "name": "aws_access_key",
+        "type": "secret",
+        "value": null,
+        "label": "AWS Access Key",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "aws_secret_key",
+        "type": "secret",
+        "value": null,
+        "label": "AWS Secret Key",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "aws_region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "eu-west-2",
+        "required": true
+      },
+      {
+        "name": "aws_session_token",
+        "type": "secret",
+        "value": null,
+        "label": "Session Token (optional)",
+        "placeholder": "",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "assume_role_arn",
+        "type": "string",
+        "value": null,
+        "label": "Role ARN to Assume",
+        "placeholder": "arn:aws:iam::\u003cyour-account\u003e:role/FlomationAccess",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "assume_role"
+          ]
+        }
+      },
+      {
+        "name": "external_id",
+        "type": "string",
+        "value": null,
+        "label": "Assume Role External ID (optional)",
+        "placeholder": "Must match the External ID in the role's trust policy",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "assume_role"
+          ]
+        }
+      },
+      {
+        "name": "credential",
+        "type": "credential",
+        "value": null,
+        "label": "AWS Role Credential",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "credential"
+          ]
+        }
+      },
+      {
+        "name": "image_ids",
+        "type": "string",
+        "value": null,
+        "label": "AMI IDs",
+        "placeholder": "Comma-separated (optional)"
+      },
+      {
+        "name": "owners",
+        "type": "string",
+        "value": null,
+        "label": "Owners",
+        "placeholder": "e.g. self, amazon, or an account id (optional)"
+      },
+      {
+        "name": "filter_name",
+        "type": "string",
+        "value": null,
+        "label": "Filter by Name",
+        "placeholder": "AMI name; wildcards allowed e.g. ubuntu-*/22.04* (optional)"
+      },
+      {
+        "name": "filter_state",
+        "type": "multi_select",
+        "value": null,
+        "label": "Filter by State",
+        "placeholder": "Select one or more; none = any state",
+        "options": [
+          {
+            "name": "Available",
+            "value": "available"
+          },
+          {
+            "name": "Pending",
+            "value": "pending"
+          },
+          {
+            "name": "Failed",
+            "value": "failed"
+          }
+        ]
+      },
+      {
+        "name": "filter_architecture",
+        "type": "multi_select",
+        "value": null,
+        "label": "Filter by Architecture",
+        "placeholder": "Select one or more; none = any",
+        "options": [
+          {
+            "name": "x86_64",
+            "value": "x86_64"
+          },
+          {
+            "name": "arm64",
+            "value": "arm64"
+          },
+          {
+            "name": "i386",
+            "value": "i386"
+          }
+        ]
+      },
+      {
+        "name": "filter_is_public",
+        "type": "string",
+        "value": null,
+        "label": "Filter by Visibility",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "Any",
+            "value": ""
+          },
+          {
+            "name": "Public only",
+            "value": "true"
+          },
+          {
+            "name": "Private only",
+            "value": "false"
+          }
+        ]
+      },
+      {
+        "name": "filter_platform",
+        "type": "string",
+        "value": null,
+        "label": "Filter by Platform",
+        "placeholder": "e.g. windows — blank includes Linux/UNIX (optional)"
+      },
+      {
+        "name": "filter_tags",
+        "type": "key_value_array",
+        "value": null,
+        "label": "Filter by Tags",
+        "placeholder": "Only return images with these tags (blank Value matches any value for that key)"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "images",
+        "type": "object",
+        "value": null,
+        "label": "Images",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Count",
+        "placeholder": ""
+      }
+    ]
+  },
+  "aws/ec2/describe_instances": {
+    "hash": "3f49b89bb21fcaa394dce1b07608714ee89ec43c3e29114c146245d4510b4fa1",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "AWS EC2 Describe Instances",
+    "description": "List EC2 instances with their state, type, IPs, AZ and tags.",
+    "website": "https://www.flomation.co",
+    "icon": "server",
+    "date": "17/07/2026",
+    "type": 2,
+    "category": {
+      "name": "AWS",
+      "icon": "cloud",
+      "description": "Amazon Web Services integrations"
+    },
+    "sub_category": {
+      "name": "EC2",
+      "icon": "server",
+      "description": "Elastic Compute Cloud operations"
+    },
+    "inputs": [
+      {
+        "name": "auth_method",
+        "type": "string",
+        "value": null,
+        "label": "Authentication",
+        "placeholder": "",
+        "required": true,
+        "options": [
+          {
+            "name": "Access Keys",
+            "value": "keys"
+          },
+          {
+            "name": "Assume Role (cross-account)",
+            "value": "assume_role"
+          },
+          {
+            "name": "Managed Role (Credential)",
+            "value": "credential"
+          }
+        ]
+      },
+      {
+        "name": "aws_access_key",
+        "type": "secret",
+        "value": null,
+        "label": "AWS Access Key",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "aws_secret_key",
+        "type": "secret",
+        "value": null,
+        "label": "AWS Secret Key",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "aws_region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "eu-west-2",
+        "required": true
+      },
+      {
+        "name": "aws_session_token",
+        "type": "secret",
+        "value": null,
+        "label": "Session Token (optional)",
+        "placeholder": "",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "assume_role_arn",
+        "type": "string",
+        "value": null,
+        "label": "Role ARN to Assume",
+        "placeholder": "arn:aws:iam::\u003cyour-account\u003e:role/FlomationAccess",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "assume_role"
+          ]
+        }
+      },
+      {
+        "name": "external_id",
+        "type": "string",
+        "value": null,
+        "label": "Assume Role External ID (optional)",
+        "placeholder": "Must match the External ID in the role's trust policy",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "assume_role"
+          ]
+        }
+      },
+      {
+        "name": "credential",
+        "type": "credential",
+        "value": null,
+        "label": "AWS Role Credential",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "credential"
+          ]
+        }
+      },
+      {
+        "name": "instance_ids",
+        "type": "string",
+        "value": null,
+        "label": "Instance IDs",
+        "placeholder": "Comma-separated; leave blank for all (optional)"
+      },
+      {
+        "name": "filter_tags",
+        "type": "key_value_array",
+        "value": null,
+        "label": "Filter by Tags",
+        "placeholder": "Only return instances with these tags (blank Value matches any value for that key)"
+      },
+      {
+        "name": "filter_state",
+        "type": "multi_select",
+        "value": null,
+        "label": "Filter by State",
+        "placeholder": "Select one or more; none = any state",
+        "options": [
+          {
+            "name": "Running",
+            "value": "running"
+          },
+          {
+            "name": "Stopped",
+            "value": "stopped"
+          },
+          {
+            "name": "Pending",
+            "value": "pending"
+          },
+          {
+            "name": "Stopping",
+            "value": "stopping"
+          },
+          {
+            "name": "Shutting down",
+            "value": "shutting-down"
+          },
+          {
+            "name": "Terminated",
+            "value": "terminated"
+          }
+        ]
+      },
+      {
+        "name": "filter_instance_type",
+        "type": "string",
+        "value": null,
+        "label": "Filter by Instance Type",
+        "placeholder": "e.g. t3.micro (optional)"
+      },
+      {
+        "name": "filter_vpc_id",
+        "type": "string",
+        "value": null,
+        "label": "Filter by VPC ID",
+        "placeholder": "vpc-0abc (optional)"
+      },
+      {
+        "name": "filter_subnet_id",
+        "type": "string",
+        "value": null,
+        "label": "Filter by Subnet ID",
+        "placeholder": "subnet-0abc (optional)"
+      },
+      {
+        "name": "filter_availability_zone",
+        "type": "string",
+        "value": null,
+        "label": "Filter by Availability Zone",
+        "placeholder": "e.g. eu-west-2a (optional)"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "instances",
+        "type": "object",
+        "value": null,
+        "label": "Instances",
+        "placeholder": ""
+      },
+      {
+        "name": "instance_ids",
+        "type": "object",
+        "value": null,
+        "label": "Instance IDs",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Count",
+        "placeholder": ""
+      }
+    ]
+  },
+  "aws/ec2/describe_key_pairs": {
+    "hash": "1b32180959658dcf2988a39317c4aaa571471b1d675411640df63c994c98b555",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "AWS EC2 Describe Key Pairs",
+    "description": "List EC2 key pairs with their name, id, type and fingerprint.",
+    "website": "https://www.flomation.co",
+    "icon": "key",
+    "date": "17/07/2026",
+    "type": 2,
+    "category": {
+      "name": "AWS",
+      "icon": "cloud",
+      "description": "Amazon Web Services integrations"
+    },
+    "sub_category": {
+      "name": "EC2",
+      "icon": "server",
+      "description": "Elastic Compute Cloud operations"
+    },
+    "inputs": [
+      {
+        "name": "auth_method",
+        "type": "string",
+        "value": null,
+        "label": "Authentication",
+        "placeholder": "",
+        "required": true,
+        "options": [
+          {
+            "name": "Access Keys",
+            "value": "keys"
+          },
+          {
+            "name": "Assume Role (cross-account)",
+            "value": "assume_role"
+          },
+          {
+            "name": "Managed Role (Credential)",
+            "value": "credential"
+          }
+        ]
+      },
+      {
+        "name": "aws_access_key",
+        "type": "secret",
+        "value": null,
+        "label": "AWS Access Key",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "aws_secret_key",
+        "type": "secret",
+        "value": null,
+        "label": "AWS Secret Key",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "aws_region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "eu-west-2",
+        "required": true
+      },
+      {
+        "name": "aws_session_token",
+        "type": "secret",
+        "value": null,
+        "label": "Session Token (optional)",
+        "placeholder": "",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "assume_role_arn",
+        "type": "string",
+        "value": null,
+        "label": "Role ARN to Assume",
+        "placeholder": "arn:aws:iam::\u003cyour-account\u003e:role/FlomationAccess",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "assume_role"
+          ]
+        }
+      },
+      {
+        "name": "external_id",
+        "type": "string",
+        "value": null,
+        "label": "Assume Role External ID (optional)",
+        "placeholder": "Must match the External ID in the role's trust policy",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "assume_role"
+          ]
+        }
+      },
+      {
+        "name": "credential",
+        "type": "credential",
+        "value": null,
+        "label": "AWS Role Credential",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "credential"
+          ]
+        }
+      },
+      {
+        "name": "filter_key_name",
+        "type": "string",
+        "value": null,
+        "label": "Filter by Key Name",
+        "placeholder": "e.g. deploy-key (optional)"
+      },
+      {
+        "name": "filter_key_type",
+        "type": "multi_select",
+        "value": null,
+        "label": "Filter by Key Type",
+        "placeholder": "Select one or more; none = any type",
+        "options": [
+          {
+            "name": "RSA",
+            "value": "rsa"
+          },
+          {
+            "name": "ED25519",
+            "value": "ed25519"
+          }
+        ]
+      },
+      {
+        "name": "filter_tags",
+        "type": "key_value_array",
+        "value": null,
+        "label": "Filter by Tags",
+        "placeholder": "Only return key pairs with these tags (blank Value matches any value for that key)"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "key_pairs",
+        "type": "object",
+        "value": null,
+        "label": "Key Pairs",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Count",
+        "placeholder": ""
+      }
+    ]
+  },
+  "aws/ec2/describe_security_groups": {
+    "hash": "3626af7fcc32a86c571733bd9c19be3ab952f158fb420667f9405c85d876c673",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "AWS EC2 Describe Security Groups",
+    "description": "List security groups with their VPC, description and inbound/outbound rules.",
+    "website": "https://www.flomation.co",
+    "icon": "shield-halved",
+    "date": "17/07/2026",
+    "type": 2,
+    "category": {
+      "name": "AWS",
+      "icon": "cloud",
+      "description": "Amazon Web Services integrations"
+    },
+    "sub_category": {
+      "name": "EC2",
+      "icon": "server",
+      "description": "Elastic Compute Cloud operations"
+    },
+    "inputs": [
+      {
+        "name": "auth_method",
+        "type": "string",
+        "value": null,
+        "label": "Authentication",
+        "placeholder": "",
+        "required": true,
+        "options": [
+          {
+            "name": "Access Keys",
+            "value": "keys"
+          },
+          {
+            "name": "Assume Role (cross-account)",
+            "value": "assume_role"
+          },
+          {
+            "name": "Managed Role (Credential)",
+            "value": "credential"
+          }
+        ]
+      },
+      {
+        "name": "aws_access_key",
+        "type": "secret",
+        "value": null,
+        "label": "AWS Access Key",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "aws_secret_key",
+        "type": "secret",
+        "value": null,
+        "label": "AWS Secret Key",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "aws_region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "eu-west-2",
+        "required": true
+      },
+      {
+        "name": "aws_session_token",
+        "type": "secret",
+        "value": null,
+        "label": "Session Token (optional)",
+        "placeholder": "",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "assume_role_arn",
+        "type": "string",
+        "value": null,
+        "label": "Role ARN to Assume",
+        "placeholder": "arn:aws:iam::\u003cyour-account\u003e:role/FlomationAccess",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "assume_role"
+          ]
+        }
+      },
+      {
+        "name": "external_id",
+        "type": "string",
+        "value": null,
+        "label": "Assume Role External ID (optional)",
+        "placeholder": "Must match the External ID in the role's trust policy",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "assume_role"
+          ]
+        }
+      },
+      {
+        "name": "credential",
+        "type": "credential",
+        "value": null,
+        "label": "AWS Role Credential",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "credential"
+          ]
+        }
+      },
+      {
+        "name": "group_ids",
+        "type": "string",
+        "value": null,
+        "label": "Group IDs",
+        "placeholder": "Comma-separated; blank for all (optional)"
+      },
+      {
+        "name": "filter_group_name",
+        "type": "string",
+        "value": null,
+        "label": "Filter by Group Name",
+        "placeholder": "e.g. web-sg (optional)"
+      },
+      {
+        "name": "filter_vpc_id",
+        "type": "string",
+        "value": null,
+        "label": "Filter by VPC ID",
+        "placeholder": "vpc-0abc (optional)"
+      },
+      {
+        "name": "filter_description",
+        "type": "string",
+        "value": null,
+        "label": "Filter by Description",
+        "placeholder": "Exact description text (optional)"
+      },
+      {
+        "name": "filter_tags",
+        "type": "key_value_array",
+        "value": null,
+        "label": "Filter by Tags",
+        "placeholder": "Only return groups with these tags (blank Value matches any value for that key)"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "security_groups",
+        "type": "object",
+        "value": null,
+        "label": "Security Groups",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Count",
+        "placeholder": ""
+      }
+    ]
+  },
+  "aws/ec2/describe_snapshots": {
+    "hash": "8d557e9edc315ba1b5f6e26d948788b84fb9f073404ec2ef5221dc99e371ced6",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "AWS EC2 Describe Snapshots",
+    "description": "List EBS snapshots by id or owner, with volume, size, state and progress.",
+    "website": "https://www.flomation.co",
+    "icon": "floppy-disk",
+    "date": "17/07/2026",
+    "type": 2,
+    "category": {
+      "name": "AWS",
+      "icon": "cloud",
+      "description": "Amazon Web Services integrations"
+    },
+    "sub_category": {
+      "name": "EC2",
+      "icon": "server",
+      "description": "Elastic Compute Cloud operations"
+    },
+    "inputs": [
+      {
+        "name": "auth_method",
+        "type": "string",
+        "value": null,
+        "label": "Authentication",
+        "placeholder": "",
+        "required": true,
+        "options": [
+          {
+            "name": "Access Keys",
+            "value": "keys"
+          },
+          {
+            "name": "Assume Role (cross-account)",
+            "value": "assume_role"
+          },
+          {
+            "name": "Managed Role (Credential)",
+            "value": "credential"
+          }
+        ]
+      },
+      {
+        "name": "aws_access_key",
+        "type": "secret",
+        "value": null,
+        "label": "AWS Access Key",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "aws_secret_key",
+        "type": "secret",
+        "value": null,
+        "label": "AWS Secret Key",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "aws_region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "eu-west-2",
+        "required": true
+      },
+      {
+        "name": "aws_session_token",
+        "type": "secret",
+        "value": null,
+        "label": "Session Token (optional)",
+        "placeholder": "",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "assume_role_arn",
+        "type": "string",
+        "value": null,
+        "label": "Role ARN to Assume",
+        "placeholder": "arn:aws:iam::\u003cyour-account\u003e:role/FlomationAccess",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "assume_role"
+          ]
+        }
+      },
+      {
+        "name": "external_id",
+        "type": "string",
+        "value": null,
+        "label": "Assume Role External ID (optional)",
+        "placeholder": "Must match the External ID in the role's trust policy",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "assume_role"
+          ]
+        }
+      },
+      {
+        "name": "credential",
+        "type": "credential",
+        "value": null,
+        "label": "AWS Role Credential",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "credential"
+          ]
+        }
+      },
+      {
+        "name": "snapshot_ids",
+        "type": "string",
+        "value": null,
+        "label": "Snapshot IDs",
+        "placeholder": "Comma-separated (optional)"
+      },
+      {
+        "name": "owners",
+        "type": "string",
+        "value": null,
+        "label": "Owners",
+        "placeholder": "e.g. self (optional; blank lists all visible)"
+      },
+      {
+        "name": "filter_status",
+        "type": "multi_select",
+        "value": null,
+        "label": "Filter by Status",
+        "placeholder": "Select one or more; none = any status",
+        "options": [
+          {
+            "name": "Completed",
+            "value": "completed"
+          },
+          {
+            "name": "Pending",
+            "value": "pending"
+          },
+          {
+            "name": "Error",
+            "value": "error"
+          }
+        ]
+      },
+      {
+        "name": "filter_volume_id",
+        "type": "string",
+        "value": null,
+        "label": "Filter by Source Volume ID",
+        "placeholder": "vol-0abc — snapshots of this volume (optional)"
+      },
+      {
+        "name": "filter_tags",
+        "type": "key_value_array",
+        "value": null,
+        "label": "Filter by Tags",
+        "placeholder": "Only return snapshots with these tags (blank Value matches any value for that key)"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "snapshots",
+        "type": "object",
+        "value": null,
+        "label": "Snapshots",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Count",
+        "placeholder": ""
+      }
+    ]
+  },
+  "aws/ec2/describe_volumes": {
+    "hash": "16e3fb7aa56f121281daee40aad01196bd858d145f397719582d6b3f67530120",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "AWS EC2 Describe Volumes",
+    "description": "List EBS volumes with size, state, type, AZ and attachments.",
+    "website": "https://www.flomation.co",
+    "icon": "database",
+    "date": "17/07/2026",
+    "type": 2,
+    "category": {
+      "name": "AWS",
+      "icon": "cloud",
+      "description": "Amazon Web Services integrations"
+    },
+    "sub_category": {
+      "name": "EC2",
+      "icon": "server",
+      "description": "Elastic Compute Cloud operations"
+    },
+    "inputs": [
+      {
+        "name": "auth_method",
+        "type": "string",
+        "value": null,
+        "label": "Authentication",
+        "placeholder": "",
+        "required": true,
+        "options": [
+          {
+            "name": "Access Keys",
+            "value": "keys"
+          },
+          {
+            "name": "Assume Role (cross-account)",
+            "value": "assume_role"
+          },
+          {
+            "name": "Managed Role (Credential)",
+            "value": "credential"
+          }
+        ]
+      },
+      {
+        "name": "aws_access_key",
+        "type": "secret",
+        "value": null,
+        "label": "AWS Access Key",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "aws_secret_key",
+        "type": "secret",
+        "value": null,
+        "label": "AWS Secret Key",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "aws_region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "eu-west-2",
+        "required": true
+      },
+      {
+        "name": "aws_session_token",
+        "type": "secret",
+        "value": null,
+        "label": "Session Token (optional)",
+        "placeholder": "",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "assume_role_arn",
+        "type": "string",
+        "value": null,
+        "label": "Role ARN to Assume",
+        "placeholder": "arn:aws:iam::\u003cyour-account\u003e:role/FlomationAccess",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "assume_role"
+          ]
+        }
+      },
+      {
+        "name": "external_id",
+        "type": "string",
+        "value": null,
+        "label": "Assume Role External ID (optional)",
+        "placeholder": "Must match the External ID in the role's trust policy",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "assume_role"
+          ]
+        }
+      },
+      {
+        "name": "credential",
+        "type": "credential",
+        "value": null,
+        "label": "AWS Role Credential",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "credential"
+          ]
+        }
+      },
+      {
+        "name": "volume_ids",
+        "type": "string",
+        "value": null,
+        "label": "Volume IDs",
+        "placeholder": "Comma-separated; blank for all (optional)"
+      },
+      {
+        "name": "filter_status",
+        "type": "multi_select",
+        "value": null,
+        "label": "Filter by Status",
+        "placeholder": "Select one or more; none = any status",
+        "options": [
+          {
+            "name": "Available",
+            "value": "available"
+          },
+          {
+            "name": "In use",
+            "value": "in-use"
+          },
+          {
+            "name": "Creating",
+            "value": "creating"
+          },
+          {
+            "name": "Deleting",
+            "value": "deleting"
+          },
+          {
+            "name": "Deleted",
+            "value": "deleted"
+          },
+          {
+            "name": "Error",
+            "value": "error"
+          }
+        ]
+      },
+      {
+        "name": "filter_volume_type",
+        "type": "multi_select",
+        "value": null,
+        "label": "Filter by Volume Type",
+        "placeholder": "Select one or more; none = any type",
+        "options": [
+          {
+            "name": "gp3",
+            "value": "gp3"
+          },
+          {
+            "name": "gp2",
+            "value": "gp2"
+          },
+          {
+            "name": "io1",
+            "value": "io1"
+          },
+          {
+            "name": "io2",
+            "value": "io2"
+          },
+          {
+            "name": "st1",
+            "value": "st1"
+          },
+          {
+            "name": "sc1",
+            "value": "sc1"
+          },
+          {
+            "name": "standard (magnetic)",
+            "value": "standard"
+          }
+        ]
+      },
+      {
+        "name": "filter_availability_zone",
+        "type": "string",
+        "value": null,
+        "label": "Filter by Availability Zone",
+        "placeholder": "e.g. eu-west-2a (optional)"
+      },
+      {
+        "name": "filter_instance_id",
+        "type": "string",
+        "value": null,
+        "label": "Filter by Attached Instance ID",
+        "placeholder": "i-0abc — volumes attached to this instance (optional)"
+      },
+      {
+        "name": "filter_tags",
+        "type": "key_value_array",
+        "value": null,
+        "label": "Filter by Tags",
+        "placeholder": "Only return volumes with these tags (blank Value matches any value for that key)"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "volumes",
+        "type": "object",
+        "value": null,
+        "label": "Volumes",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Count",
+        "placeholder": ""
+      }
+    ]
+  },
+  "aws/ec2/reboot_instances": {
+    "hash": "8655060d5ed88493a85ce0392281394e673b351a8de3cd9f6ae1ab8908161b29",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "AWS EC2 Reboot Instances",
+    "description": "Reboot one or more EC2 instances.",
+    "website": "https://www.flomation.co",
+    "icon": "server+rotate",
+    "date": "17/07/2026",
+    "type": 2,
+    "category": {
+      "name": "AWS",
+      "icon": "cloud",
+      "description": "Amazon Web Services integrations"
+    },
+    "sub_category": {
+      "name": "EC2",
+      "icon": "server",
+      "description": "Elastic Compute Cloud operations"
+    },
+    "inputs": [
+      {
+        "name": "auth_method",
+        "type": "string",
+        "value": null,
+        "label": "Authentication",
+        "placeholder": "",
+        "required": true,
+        "options": [
+          {
+            "name": "Access Keys",
+            "value": "keys"
+          },
+          {
+            "name": "Assume Role (cross-account)",
+            "value": "assume_role"
+          },
+          {
+            "name": "Managed Role (Credential)",
+            "value": "credential"
+          }
+        ]
+      },
+      {
+        "name": "aws_access_key",
+        "type": "secret",
+        "value": null,
+        "label": "AWS Access Key",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "aws_secret_key",
+        "type": "secret",
+        "value": null,
+        "label": "AWS Secret Key",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "aws_region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "eu-west-2",
+        "required": true
+      },
+      {
+        "name": "aws_session_token",
+        "type": "secret",
+        "value": null,
+        "label": "Session Token (optional)",
+        "placeholder": "",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "assume_role_arn",
+        "type": "string",
+        "value": null,
+        "label": "Role ARN to Assume",
+        "placeholder": "arn:aws:iam::\u003cyour-account\u003e:role/FlomationAccess",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "assume_role"
+          ]
+        }
+      },
+      {
+        "name": "external_id",
+        "type": "string",
+        "value": null,
+        "label": "Assume Role External ID (optional)",
+        "placeholder": "Must match the External ID in the role's trust policy",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "assume_role"
+          ]
+        }
+      },
+      {
+        "name": "credential",
+        "type": "credential",
+        "value": null,
+        "label": "AWS Role Credential",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "credential"
+          ]
+        }
+      },
+      {
+        "name": "instance_ids",
+        "type": "string",
+        "value": null,
+        "label": "Instance IDs",
+        "placeholder": "Comma-separated, e.g. i-0abc,i-0def",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "instance_ids",
+        "type": "object",
+        "value": null,
+        "label": "Instance IDs",
+        "placeholder": ""
+      }
+    ]
+  },
+  "aws/ec2/revoke_security_group_ingress": {
+    "hash": "1b45fbb3a721e285e850cb199595b3a824a19678939a608e23e5fdb426a0e121",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "AWS EC2 Revoke Security Group Ingress",
+    "description": "Remove an inbound rule from a security group (protocol, port range and CIDR).",
+    "website": "https://www.flomation.co",
+    "icon": "shield-halved+ban",
+    "date": "17/07/2026",
+    "type": 2,
+    "category": {
+      "name": "AWS",
+      "icon": "cloud",
+      "description": "Amazon Web Services integrations"
+    },
+    "sub_category": {
+      "name": "EC2",
+      "icon": "server",
+      "description": "Elastic Compute Cloud operations"
+    },
+    "inputs": [
+      {
+        "name": "auth_method",
+        "type": "string",
+        "value": null,
+        "label": "Authentication",
+        "placeholder": "",
+        "required": true,
+        "options": [
+          {
+            "name": "Access Keys",
+            "value": "keys"
+          },
+          {
+            "name": "Assume Role (cross-account)",
+            "value": "assume_role"
+          },
+          {
+            "name": "Managed Role (Credential)",
+            "value": "credential"
+          }
+        ]
+      },
+      {
+        "name": "aws_access_key",
+        "type": "secret",
+        "value": null,
+        "label": "AWS Access Key",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "aws_secret_key",
+        "type": "secret",
+        "value": null,
+        "label": "AWS Secret Key",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "aws_region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "eu-west-2",
+        "required": true
+      },
+      {
+        "name": "aws_session_token",
+        "type": "secret",
+        "value": null,
+        "label": "Session Token (optional)",
+        "placeholder": "",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "assume_role_arn",
+        "type": "string",
+        "value": null,
+        "label": "Role ARN to Assume",
+        "placeholder": "arn:aws:iam::\u003cyour-account\u003e:role/FlomationAccess",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "assume_role"
+          ]
+        }
+      },
+      {
+        "name": "external_id",
+        "type": "string",
+        "value": null,
+        "label": "Assume Role External ID (optional)",
+        "placeholder": "Must match the External ID in the role's trust policy",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "assume_role"
+          ]
+        }
+      },
+      {
+        "name": "credential",
+        "type": "credential",
+        "value": null,
+        "label": "AWS Role Credential",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "credential"
+          ]
+        }
+      },
+      {
+        "name": "group_id",
+        "type": "string",
+        "value": null,
+        "label": "Group ID",
+        "placeholder": "sg-0abc123",
+        "required": true
+      },
+      {
+        "name": "protocol",
+        "type": "string",
+        "value": null,
+        "label": "Protocol",
+        "placeholder": "",
+        "required": true,
+        "options": [
+          {
+            "name": "TCP",
+            "value": "tcp"
+          },
+          {
+            "name": "UDP",
+            "value": "udp"
+          },
+          {
+            "name": "ICMP",
+            "value": "icmp"
+          },
+          {
+            "name": "All",
+            "value": "-1"
+          }
+        ]
+      },
+      {
+        "name": "from_port",
+        "type": "integer",
+        "value": null,
+        "label": "From Port",
+        "placeholder": "e.g. 443"
+      },
+      {
+        "name": "to_port",
+        "type": "integer",
+        "value": null,
+        "label": "To Port",
+        "placeholder": "e.g. 443"
+      },
+      {
+        "name": "cidr",
+        "type": "string",
+        "value": null,
+        "label": "CIDR",
+        "placeholder": "0.0.0.0/0",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "group_id",
+        "type": "string",
+        "value": null,
+        "label": "Group ID",
+        "placeholder": ""
+      }
+    ]
+  },
+  "aws/ec2/run_instances": {
+    "hash": "77327bbcbe03be0e5c2451fbfeecac82588694980a85ca4fa0178136da26bd2d",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "AWS EC2 Run Instances",
+    "description": "Launch new EC2 instances from an AMI, with type, key pair, subnet and security groups.",
+    "website": "https://www.flomation.co",
+    "icon": "server+plus",
+    "date": "17/07/2026",
+    "type": 2,
+    "category": {
+      "name": "AWS",
+      "icon": "cloud",
+      "description": "Amazon Web Services integrations"
+    },
+    "sub_category": {
+      "name": "EC2",
+      "icon": "server",
+      "description": "Elastic Compute Cloud operations"
+    },
+    "inputs": [
+      {
+        "name": "auth_method",
+        "type": "string",
+        "value": null,
+        "label": "Authentication",
+        "placeholder": "",
+        "required": true,
+        "options": [
+          {
+            "name": "Access Keys",
+            "value": "keys"
+          },
+          {
+            "name": "Assume Role (cross-account)",
+            "value": "assume_role"
+          },
+          {
+            "name": "Managed Role (Credential)",
+            "value": "credential"
+          }
+        ]
+      },
+      {
+        "name": "aws_access_key",
+        "type": "secret",
+        "value": null,
+        "label": "AWS Access Key",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "aws_secret_key",
+        "type": "secret",
+        "value": null,
+        "label": "AWS Secret Key",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "aws_region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "eu-west-2",
+        "required": true
+      },
+      {
+        "name": "aws_session_token",
+        "type": "secret",
+        "value": null,
+        "label": "Session Token (optional)",
+        "placeholder": "",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "assume_role_arn",
+        "type": "string",
+        "value": null,
+        "label": "Role ARN to Assume",
+        "placeholder": "arn:aws:iam::\u003cyour-account\u003e:role/FlomationAccess",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "assume_role"
+          ]
+        }
+      },
+      {
+        "name": "external_id",
+        "type": "string",
+        "value": null,
+        "label": "Assume Role External ID (optional)",
+        "placeholder": "Must match the External ID in the role's trust policy",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "assume_role"
+          ]
+        }
+      },
+      {
+        "name": "credential",
+        "type": "credential",
+        "value": null,
+        "label": "AWS Role Credential",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "credential"
+          ]
+        }
+      },
+      {
+        "name": "image_id",
+        "type": "string",
+        "value": null,
+        "label": "AMI ID",
+        "placeholder": "ami-0abc123",
+        "required": true
+      },
+      {
+        "name": "instance_type",
+        "type": "string",
+        "value": null,
+        "label": "Instance Type",
+        "placeholder": "t3.micro",
+        "required": true
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Count",
+        "placeholder": "1"
+      },
+      {
+        "name": "key_name",
+        "type": "string",
+        "value": null,
+        "label": "Key Pair Name",
+        "placeholder": "Optional SSH key pair"
+      },
+      {
+        "name": "subnet_id",
+        "type": "string",
+        "value": null,
+        "label": "Subnet ID",
+        "placeholder": "Optional subnet"
+      },
+      {
+        "name": "security_group_ids",
+        "type": "string",
+        "value": null,
+        "label": "Security Group IDs",
+        "placeholder": "Comma-separated (optional)"
+      },
+      {
+        "name": "name_tag",
+        "type": "string",
+        "value": null,
+        "label": "Name Tag",
+        "placeholder": "Sets the Name tag (optional)"
+      },
+      {
+        "name": "user_data",
+        "type": "text",
+        "value": null,
+        "label": "User Data",
+        "placeholder": "Startup script, plain text (optional)"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "instance_ids",
+        "type": "object",
+        "value": null,
+        "label": "Instance IDs",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Count",
+        "placeholder": ""
+      }
+    ]
+  },
+  "aws/ec2/start_instances": {
+    "hash": "9c09b989bc2c8645dbbb616263a4ff27a9e64c2bf10da85c95365dfe2785e1e5",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "AWS EC2 Start Instances",
+    "description": "Start one or more stopped EC2 instances.",
+    "website": "https://www.flomation.co",
+    "icon": "server+play",
+    "date": "17/07/2026",
+    "type": 2,
+    "category": {
+      "name": "AWS",
+      "icon": "cloud",
+      "description": "Amazon Web Services integrations"
+    },
+    "sub_category": {
+      "name": "EC2",
+      "icon": "server",
+      "description": "Elastic Compute Cloud operations"
+    },
+    "inputs": [
+      {
+        "name": "auth_method",
+        "type": "string",
+        "value": null,
+        "label": "Authentication",
+        "placeholder": "",
+        "required": true,
+        "options": [
+          {
+            "name": "Access Keys",
+            "value": "keys"
+          },
+          {
+            "name": "Assume Role (cross-account)",
+            "value": "assume_role"
+          },
+          {
+            "name": "Managed Role (Credential)",
+            "value": "credential"
+          }
+        ]
+      },
+      {
+        "name": "aws_access_key",
+        "type": "secret",
+        "value": null,
+        "label": "AWS Access Key",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "aws_secret_key",
+        "type": "secret",
+        "value": null,
+        "label": "AWS Secret Key",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "aws_region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "eu-west-2",
+        "required": true
+      },
+      {
+        "name": "aws_session_token",
+        "type": "secret",
+        "value": null,
+        "label": "Session Token (optional)",
+        "placeholder": "",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "assume_role_arn",
+        "type": "string",
+        "value": null,
+        "label": "Role ARN to Assume",
+        "placeholder": "arn:aws:iam::\u003cyour-account\u003e:role/FlomationAccess",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "assume_role"
+          ]
+        }
+      },
+      {
+        "name": "external_id",
+        "type": "string",
+        "value": null,
+        "label": "Assume Role External ID (optional)",
+        "placeholder": "Must match the External ID in the role's trust policy",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "assume_role"
+          ]
+        }
+      },
+      {
+        "name": "credential",
+        "type": "credential",
+        "value": null,
+        "label": "AWS Role Credential",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "credential"
+          ]
+        }
+      },
+      {
+        "name": "instance_ids",
+        "type": "string",
+        "value": null,
+        "label": "Instance IDs",
+        "placeholder": "Comma-separated, e.g. i-0abc,i-0def",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "state_changes",
+        "type": "object",
+        "value": null,
+        "label": "State Changes",
+        "placeholder": ""
+      }
+    ]
+  },
+  "aws/ec2/stop_instances": {
+    "hash": "f61b080c015e9b268933f133fc46e1e3ca2c103623753bc7e04a5336f6fff342",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "AWS EC2 Stop Instances",
+    "description": "Stop one or more running EC2 instances.",
+    "website": "https://www.flomation.co",
+    "icon": "server+stop",
+    "date": "17/07/2026",
+    "type": 2,
+    "category": {
+      "name": "AWS",
+      "icon": "cloud",
+      "description": "Amazon Web Services integrations"
+    },
+    "sub_category": {
+      "name": "EC2",
+      "icon": "server",
+      "description": "Elastic Compute Cloud operations"
+    },
+    "inputs": [
+      {
+        "name": "auth_method",
+        "type": "string",
+        "value": null,
+        "label": "Authentication",
+        "placeholder": "",
+        "required": true,
+        "options": [
+          {
+            "name": "Access Keys",
+            "value": "keys"
+          },
+          {
+            "name": "Assume Role (cross-account)",
+            "value": "assume_role"
+          },
+          {
+            "name": "Managed Role (Credential)",
+            "value": "credential"
+          }
+        ]
+      },
+      {
+        "name": "aws_access_key",
+        "type": "secret",
+        "value": null,
+        "label": "AWS Access Key",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "aws_secret_key",
+        "type": "secret",
+        "value": null,
+        "label": "AWS Secret Key",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "aws_region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "eu-west-2",
+        "required": true
+      },
+      {
+        "name": "aws_session_token",
+        "type": "secret",
+        "value": null,
+        "label": "Session Token (optional)",
+        "placeholder": "",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "assume_role_arn",
+        "type": "string",
+        "value": null,
+        "label": "Role ARN to Assume",
+        "placeholder": "arn:aws:iam::\u003cyour-account\u003e:role/FlomationAccess",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "assume_role"
+          ]
+        }
+      },
+      {
+        "name": "external_id",
+        "type": "string",
+        "value": null,
+        "label": "Assume Role External ID (optional)",
+        "placeholder": "Must match the External ID in the role's trust policy",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "assume_role"
+          ]
+        }
+      },
+      {
+        "name": "credential",
+        "type": "credential",
+        "value": null,
+        "label": "AWS Role Credential",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "credential"
+          ]
+        }
+      },
+      {
+        "name": "instance_ids",
+        "type": "string",
+        "value": null,
+        "label": "Instance IDs",
+        "placeholder": "Comma-separated, e.g. i-0abc,i-0def",
+        "required": true
+      },
+      {
+        "name": "force",
+        "type": "boolean",
+        "value": null,
+        "label": "Force Stop",
+        "placeholder": "Force stop without a clean shutdown"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "state_changes",
+        "type": "object",
+        "value": null,
+        "label": "State Changes",
+        "placeholder": ""
+      }
+    ]
+  },
+  "aws/ec2/terminate_instances": {
+    "hash": "9743fe7eb9b097ec88952130396c085399bdfb2ae4478b269905ef54600ba901",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "AWS EC2 Terminate Instances",
+    "description": "Permanently terminate EC2 instances. Destructive and irreversible.",
+    "website": "https://www.flomation.co",
+    "icon": "server+trash",
+    "date": "17/07/2026",
+    "type": 2,
+    "category": {
+      "name": "AWS",
+      "icon": "cloud",
+      "description": "Amazon Web Services integrations"
+    },
+    "sub_category": {
+      "name": "EC2",
+      "icon": "server",
+      "description": "Elastic Compute Cloud operations"
+    },
+    "inputs": [
+      {
+        "name": "auth_method",
+        "type": "string",
+        "value": null,
+        "label": "Authentication",
+        "placeholder": "",
+        "required": true,
+        "options": [
+          {
+            "name": "Access Keys",
+            "value": "keys"
+          },
+          {
+            "name": "Assume Role (cross-account)",
+            "value": "assume_role"
+          },
+          {
+            "name": "Managed Role (Credential)",
+            "value": "credential"
+          }
+        ]
+      },
+      {
+        "name": "aws_access_key",
+        "type": "secret",
+        "value": null,
+        "label": "AWS Access Key",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "aws_secret_key",
+        "type": "secret",
+        "value": null,
+        "label": "AWS Secret Key",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "aws_region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "eu-west-2",
+        "required": true
+      },
+      {
+        "name": "aws_session_token",
+        "type": "secret",
+        "value": null,
+        "label": "Session Token (optional)",
+        "placeholder": "",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "assume_role_arn",
+        "type": "string",
+        "value": null,
+        "label": "Role ARN to Assume",
+        "placeholder": "arn:aws:iam::\u003cyour-account\u003e:role/FlomationAccess",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "assume_role"
+          ]
+        }
+      },
+      {
+        "name": "external_id",
+        "type": "string",
+        "value": null,
+        "label": "Assume Role External ID (optional)",
+        "placeholder": "Must match the External ID in the role's trust policy",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "assume_role"
+          ]
+        }
+      },
+      {
+        "name": "credential",
+        "type": "credential",
+        "value": null,
+        "label": "AWS Role Credential",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "credential"
+          ]
+        }
+      },
+      {
+        "name": "instance_ids",
+        "type": "string",
+        "value": null,
+        "label": "Instance IDs",
+        "placeholder": "Comma-separated, e.g. i-0abc,i-0def",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "state_changes",
+        "type": "object",
+        "value": null,
+        "label": "State Changes",
+        "placeholder": ""
+      }
+    ]
   },
   "aws/s3/delete": {
-    "hash": "981b4b75e00d35ac315650af4cdea668d43c39c59c79c4e217b6a4c6111269c6",
+    "hash": "cd828e273e49f259113f1aa73ef334bb0454bf0f8a3afc7dda313e4f808c5c12",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "AWS S3 Delete",
@@ -7437,6 +10708,13 @@
         "value": null,
         "label": "AWS Secret Key",
         "placeholder": ""
+      },
+      {
+        "name": "aws_region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "eu-west-2"
       },
       {
         "name": "key",
@@ -7485,7 +10763,7 @@
     ]
   },
   "aws/s3/get": {
-    "hash": "fcbe562ed05f118dde068e9c269310cad2835b7349c265700c85e9ec23526b33",
+    "hash": "3499f39062caf6f0e9d779b38fc0bceeac8766d8118e84b49d64e0011cf20c2f",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "AWS S3 Get Object",
@@ -7518,6 +10796,13 @@
         "value": null,
         "label": "AWS Secret Key",
         "placeholder": ""
+      },
+      {
+        "name": "aws_region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "eu-west-2"
       },
       {
         "name": "key",
@@ -7640,7 +10925,7 @@
     ]
   },
   "aws/s3/put": {
-    "hash": "4a69a603270f33904bbda8366d11196657e7dfb5073ec18ac3d47d2eceb90cab",
+    "hash": "6f703b10078a63e0491435a27c4747a36887edbe834d9537080a9cff3470f9be",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "AWS S3 Put",
@@ -7675,6 +10960,13 @@
         "label": "AWS Secret Key",
         "placeholder": "",
         "required": true
+      },
+      {
+        "name": "aws_region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "eu-west-2"
       },
       {
         "name": "key",
@@ -33012,7 +36304,7 @@
     ]
   },
   "common/array_index": {
-    "hash": "616570fdd22df2d5d84dc3b2a8849c02f475dbad038ac05c50fbc64750b5c1fa",
+    "hash": "8f54593a70345ffd6701e757b1fa673f6093bb4fd458a639ef76327e4c0b3e23",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Array Index",

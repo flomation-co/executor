@@ -788,6 +788,7 @@ type Flow struct {
 	resumedSuspendNodeID string                 // the node that caused the original suspend
 	resumeData           map[string]interface{} // data injected on resume (e.g. a human's choice)
 	traversedNodes       map[string]bool        // tracks which nodes have had children traversed
+	executing            map[string]bool        // nodes whose action is mid-execution — re-entrancy guard for diamonds
 	context              *ExecutionContext
 	ctx                  gocontext.Context
 	cancel               gocontext.CancelFunc
@@ -1514,6 +1515,20 @@ func (f *Flow) executeNodeActionOnly(actions map[string]Action, node *Node, envi
 		return v, nil
 	}
 
+	// Re-entrancy guard for diamonds: if this node's action is already mid-
+	// execution higher up the stack, a parent/scoped pull has walked forward back
+	// into it. Do NOT run it a second time — return the (not-yet-cached) empty
+	// state; the outer frame will finish it. Without this, resolving a parent
+	// that also has this node as a child re-runs the node (double-run).
+	if f.executing == nil {
+		f.executing = make(map[string]bool)
+	}
+	if f.executing[node.ID] {
+		return nil, nil
+	}
+	f.executing[node.ID] = true
+	defer delete(f.executing, node.ID)
+
 	log.WithFields(log.Fields{
 		"id":     node.ID,
 		"action": node.Type,
@@ -1550,7 +1565,7 @@ func (f *Flow) executeNodeActionOnly(actions map[string]Action, node *Node, envi
 		// Skip parents on unmatched Switch/Conditional branches.
 		// If a parent was reached via a Switch edge whose case wasn't
 		// matched at runtime, it should not be executed.
-		if f.isOnUnmatchedBranch(p.ID) {
+		if f.isOnUnmatchedBranch(actions, p.ID, environment) {
 			log.WithFields(log.Fields{
 				"node":   node.ID,
 				"parent": p.ID,
@@ -1559,6 +1574,13 @@ func (f *Flow) executeNodeActionOnly(actions map[string]Action, node *Node, envi
 			continue
 		}
 
+		// Resolve the parent via ExecuteNode (action + its children). Traversing
+		// children matters for a node reached ONLY as a parent — e.g. a rootless
+		// subgraph pulled in as an input provider: its matched-branch children
+		// (like an Authorize-Ingress after a Create-Security-Group) must still
+		// run. The in-progress guard in executeNodeActionOnly prevents the one
+		// dangerous case — a child that is the very node we're resolving for
+		// (diamond) — from being re-run.
 		results, err = f.ExecuteNode(actions, p, environment)
 		if err != nil {
 			return nil, err
@@ -1988,11 +2010,29 @@ func (f *Flow) executeNodeActionOnly(actions map[string]Action, node *Node, envi
 										"node_id": scopeNodeID,
 										"key":     scopeKey,
 									}).Debug("skipping scoped dependency execution for trigger node — only the firing trigger should run")
+								} else if f.isOnUnmatchedBranch(actions, scopeNodeID, environment) {
+									// The referenced node sits on a conditional
+									// branch that wasn't taken (e.g. a Create
+									// Security Group under an If whose OTHER branch
+									// matched). Resolving ${nodeId.key} must not run
+									// an action on a disabled branch — leave the
+									// reference unresolved so it falls through to the
+									// empty-string replacement below.
+									log.WithFields(log.Fields{
+										"node_id": scopeNodeID,
+										"key":     scopeKey,
+									}).Debug("skipping scoped dependency on unmatched branch — resolving to empty")
 								} else {
 									log.WithFields(log.Fields{
 										"node_id": scopeNodeID,
 										"key":     scopeKey,
 									}).Info("executing scoped dependency node")
+									// ExecuteNode (action + children) so a matched-
+									// branch child of the referenced node still runs
+									// (e.g. Authorize-Ingress after Create-Security-
+									// Group). The in-progress guard prevents re-running
+									// the node we're substituting for if it happens to
+									// be a downstream child (diamond double-run).
 									if _, err := f.ExecuteNode(actions, scopeNode, environment); err != nil {
 										log.WithFields(log.Fields{
 											"node_id": scopeNodeID,
@@ -2880,6 +2920,13 @@ func (f *Flow) executeNodeChildren(actions map[string]Action, node *Node, output
 		if c.Data != nil && (c.Data.Label == "subflow/begin" || c.Type == "subflow/begin") {
 			continue
 		}
+		// Skip a child that is currently mid-execution higher up the stack
+		// (diamond). It is being handled by its own outer frame, which will
+		// traverse its children; touching it here would run its action with a
+		// not-yet-ready parent set and prematurely walk its subtree.
+		if f.executing[c.ID] {
+			continue
+		}
 		validChildren = append(validChildren, c)
 	}
 
@@ -3031,20 +3078,66 @@ func (f *Flow) clearSubgraphResults(source string, handle string) {
 // used to restrict parent resolution so that nodes on unrelated trigger
 // paths are not executed.
 func (f *Flow) computeReachable(startID string) map[string]bool {
-	reachable := map[string]bool{startID: true}
-	queue := []string{startID}
+	// Forward BFS following edges from a start node.
+	forward := func(start string) map[string]bool {
+		seen := map[string]bool{start: true}
+		q := []string{start}
+		for len(q) > 0 {
+			c := q[0]
+			q = q[1:]
+			for _, e := range f.Edges {
+				if e == nil {
+					continue
+				}
+				if e.Source == c && !seen[e.Target] {
+					seen[e.Target] = true
+					q = append(q, e.Target)
+				}
+			}
+		}
+		return seen
+	}
 
+	reachable := forward(startID)
+
+	// Union of every trigger's forward reach. Used to distinguish an independent
+	// trigger path (which must NOT be pulled in — that was the original purpose
+	// of this function, preventing cross-trigger contamination) from a rootless
+	// input-provider subgraph (which MUST run, since a reachable node depends on
+	// its output).
+	triggerForward := map[string]bool{}
+	for _, n := range f.Nodes {
+		if n == nil || n.Data == nil {
+			continue
+		}
+		if strings.HasPrefix(n.Type, "trigger/") || strings.HasPrefix(n.Data.Label, "trigger/") {
+			for id := range forward(n.ID) {
+				triggerForward[id] = true
+			}
+		}
+	}
+
+	// Backward closure: pull in ancestors (input providers) of reachable nodes,
+	// but ONLY rootless ones — nodes not forward-reachable from ANY trigger. This
+	// includes a lookup/constant subgraph wired only as a parent of a reachable
+	// action (e.g. describe -> if -> object_get feeding Run Instances) while
+	// still excluding another trigger's path. Whether a pulled-in ancestor
+	// actually executes is still gated by the unmatched-branch check, so an
+	// ancestor sitting on a disabled conditional branch is correctly skipped.
+	queue := make([]string, 0, len(reachable))
+	for id := range reachable {
+		queue = append(queue, id)
+	}
 	for len(queue) > 0 {
 		current := queue[0]
 		queue = queue[1:]
-
 		for _, e := range f.Edges {
 			if e == nil {
 				continue
 			}
-			if e.Source == current && !reachable[e.Target] {
-				reachable[e.Target] = true
-				queue = append(queue, e.Target)
+			if e.Target == current && !reachable[e.Source] && !triggerForward[e.Source] {
+				reachable[e.Source] = true
+				queue = append(queue, e.Source)
 			}
 		}
 	}
@@ -3647,11 +3740,11 @@ func (f *Flow) executeSubFlow(actions map[string]Action, name string, invokeOutp
 // Switch or Conditional branch. It walks up through the node's ancestors
 // looking for edges from Switch/Conditional nodes whose source handle
 // doesn't match the runtime-selected case.
-func (f *Flow) isOnUnmatchedBranch(nodeID string) bool {
-	return f.checkUnmatchedBranch(nodeID, make(map[string]bool))
+func (f *Flow) isOnUnmatchedBranch(actions map[string]Action, nodeID string, environment *environment.Environment) bool {
+	return f.checkUnmatchedBranch(actions, nodeID, make(map[string]bool), environment)
 }
 
-func (f *Flow) checkUnmatchedBranch(nodeID string, visited map[string]bool) bool {
+func (f *Flow) checkUnmatchedBranch(actions map[string]Action, nodeID string, visited map[string]bool, environment *environment.Environment) bool {
 	if visited[nodeID] {
 		return false
 	}
@@ -3703,6 +3796,30 @@ func (f *Flow) checkUnmatchedBranch(nodeID string, visited map[string]bool) bool
 		sourceType := edges[0].sourceType
 
 		thisSourceUnmatched := false
+
+		// The branch decision lives in the gating node's cached result. When a
+		// node is reached via a PARALLEL path before its gating conditional has
+		// run (e.g. C wired below both a matched sibling and an as-yet-unrun
+		// If → A chain), that result is missing — and without it we would wrongly
+		// treat the unmatched parent as matched and execute it. Evaluate the
+		// gating node's action on demand to obtain the routing decision. This is
+		// safe: routing nodes are pure evaluations, executeNodeActionOnly caches
+		// the result (so the later forward traversal reuses it rather than
+		// re-running), and it resolves only the gating node's own inputs — never
+		// its downstream children.
+		isRoutingNode := sourceType == ActionTypeConditional ||
+			sourceType == ActionTypeSwitch || sourceType == ActionTypeAwait
+		if isRoutingNode {
+			if _, ok := f.nodeResults[sourceNode.ID]; !ok && sourceNode.ID != nodeID && actions != nil {
+				if _, err := f.executeNodeActionOnly(actions, sourceNode, environment); err != nil {
+					log.WithFields(log.Fields{
+						"gating_node": sourceNode.ID,
+						"for_node":    nodeID,
+						"error":       err,
+					}).Debug("could not evaluate gating node on demand for branch check")
+				}
+			}
+		}
 
 		if sourceType == ActionTypeConditional {
 			if cached, ok := f.nodeResults[sourceNode.ID]; ok {
@@ -3763,7 +3880,7 @@ func (f *Flow) checkUnmatchedBranch(nodeID string, visited map[string]bool) bool
 		// branch if its ancestor chain leads through an unmatched branch,
 		// even through intermediate regular actions (e.g. STT between a
 		// Switch and data_rename).
-		if !thisSourceUnmatched && f.checkUnmatchedBranch(sourceNode.ID, visited) {
+		if !thisSourceUnmatched && f.checkUnmatchedBranch(actions, sourceNode.ID, visited, environment) {
 			thisSourceUnmatched = true
 		}
 
