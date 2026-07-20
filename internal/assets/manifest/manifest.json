@@ -143964,6 +143964,2018 @@
       }
     ]
   },
+  "oracle/objectstorage/bucket_create": {
+    "hash": "fe4d2bf9b1f6a674c7734e025380a9d12b53771eceb8666f420b49ef93e4dbf7",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "OCI Object Storage: Create Bucket",
+    "description": "Create an Oracle Cloud Object Storage bucket in a compartment. The tenancy namespace is resolved automatically; optionally set the public-access type, storage tier and tags.",
+    "website": "https://www.flomation.co",
+    "icon": "oracle+plus",
+    "date": "21/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Oracle Cloud",
+      "icon": "oracle",
+      "description": "Oracle Cloud Infrastructure (OCI) integrations"
+    },
+    "sub_category": {
+      "name": "Object Storage",
+      "icon": "box",
+      "description": "Oracle Cloud Object Storage — buckets, objects, copy/rename, and pre-authenticated (presigned) request URLs"
+    },
+    "inputs": [
+      {
+        "name": "tenancy_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Tenancy OCID",
+        "placeholder": "ocid1.tenancy.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "user_ocid",
+        "type": "string",
+        "value": null,
+        "label": "User OCID",
+        "placeholder": "ocid1.user.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "e.g. uk-london-1",
+        "required": true
+      },
+      {
+        "name": "fingerprint",
+        "type": "string",
+        "value": null,
+        "label": "Key Fingerprint",
+        "placeholder": "aa:bb:cc:… fingerprint of the uploaded API key",
+        "required": true
+      },
+      {
+        "name": "private_key",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key (PEM)",
+        "placeholder": "The API signing private key — full PEM, incl. BEGIN/END lines"
+      },
+      {
+        "name": "private_key_passphrase",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key Passphrase",
+        "placeholder": "Only if the key is encrypted (optional)"
+      },
+      {
+        "name": "compartment_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Compartment OCID",
+        "placeholder": "ocid1.compartment.oc1..aaaa… (use the tenancy OCID for the root)",
+        "required": true
+      },
+      {
+        "name": "bucket_name",
+        "type": "string",
+        "value": null,
+        "label": "Bucket Name",
+        "placeholder": "A unique bucket name within the namespace",
+        "required": true
+      },
+      {
+        "name": "public_access_type",
+        "type": "string",
+        "value": null,
+        "label": "Public Access",
+        "placeholder": "Bucket visibility",
+        "options": [
+          {
+            "name": "None (private)",
+            "value": "NoPublicAccess"
+          },
+          {
+            "name": "Read objects",
+            "value": "ObjectRead"
+          },
+          {
+            "name": "Read objects \u0026 list",
+            "value": "ObjectReadWithoutList"
+          }
+        ]
+      },
+      {
+        "name": "storage_tier",
+        "type": "string",
+        "value": null,
+        "label": "Storage Tier",
+        "placeholder": "Default is Standard",
+        "options": [
+          {
+            "name": "Standard",
+            "value": "Standard"
+          },
+          {
+            "name": "Archive",
+            "value": "Archive"
+          }
+        ]
+      },
+      {
+        "name": "tags",
+        "type": "string",
+        "value": null,
+        "label": "Freeform Tags (JSON)",
+        "placeholder": "{\"env\":\"prod\"} (optional)"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "bucket",
+        "type": "object",
+        "value": null,
+        "label": "Bucket",
+        "placeholder": ""
+      },
+      {
+        "name": "namespace",
+        "type": "string",
+        "value": null,
+        "label": "Namespace",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "oracle/objectstorage/bucket_delete": {
+    "hash": "ccbe19c576490bb7518fdb1a94013f088134b8843bc56a16b096982949271edf",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "OCI Object Storage: Delete Bucket",
+    "description": "Delete an Oracle Cloud Object Storage bucket by name. The bucket must be empty (delete its objects first). The namespace is resolved automatically.",
+    "website": "https://www.flomation.co",
+    "icon": "oracle+trash",
+    "date": "21/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Oracle Cloud",
+      "icon": "oracle",
+      "description": "Oracle Cloud Infrastructure (OCI) integrations"
+    },
+    "sub_category": {
+      "name": "Object Storage",
+      "icon": "box",
+      "description": "Oracle Cloud Object Storage — buckets, objects, copy/rename, and pre-authenticated (presigned) request URLs"
+    },
+    "inputs": [
+      {
+        "name": "tenancy_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Tenancy OCID",
+        "placeholder": "ocid1.tenancy.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "user_ocid",
+        "type": "string",
+        "value": null,
+        "label": "User OCID",
+        "placeholder": "ocid1.user.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "e.g. uk-london-1",
+        "required": true
+      },
+      {
+        "name": "fingerprint",
+        "type": "string",
+        "value": null,
+        "label": "Key Fingerprint",
+        "placeholder": "aa:bb:cc:… fingerprint of the uploaded API key",
+        "required": true
+      },
+      {
+        "name": "private_key",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key (PEM)",
+        "placeholder": "The API signing private key — full PEM, incl. BEGIN/END lines"
+      },
+      {
+        "name": "private_key_passphrase",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key Passphrase",
+        "placeholder": "Only if the key is encrypted (optional)"
+      },
+      {
+        "name": "bucket_name",
+        "type": "string",
+        "value": null,
+        "label": "Bucket Name",
+        "placeholder": "The bucket to delete (must be empty)",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "bucket_name",
+        "type": "string",
+        "value": null,
+        "label": "Bucket Name",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "oracle/objectstorage/bucket_get": {
+    "hash": "e3df8d570264ac690175d1321f6be6640fcc0831616771ccf9de738984ffad23",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "OCI Object Storage: Get Bucket",
+    "description": "Fetch a single Oracle Cloud Object Storage bucket by name — access type, storage tier, and approximate object count and size. The namespace is resolved automatically.",
+    "website": "https://www.flomation.co",
+    "icon": "oracle+magnifying-glass",
+    "date": "21/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Oracle Cloud",
+      "icon": "oracle",
+      "description": "Oracle Cloud Infrastructure (OCI) integrations"
+    },
+    "sub_category": {
+      "name": "Object Storage",
+      "icon": "box",
+      "description": "Oracle Cloud Object Storage — buckets, objects, copy/rename, and pre-authenticated (presigned) request URLs"
+    },
+    "inputs": [
+      {
+        "name": "tenancy_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Tenancy OCID",
+        "placeholder": "ocid1.tenancy.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "user_ocid",
+        "type": "string",
+        "value": null,
+        "label": "User OCID",
+        "placeholder": "ocid1.user.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "e.g. uk-london-1",
+        "required": true
+      },
+      {
+        "name": "fingerprint",
+        "type": "string",
+        "value": null,
+        "label": "Key Fingerprint",
+        "placeholder": "aa:bb:cc:… fingerprint of the uploaded API key",
+        "required": true
+      },
+      {
+        "name": "private_key",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key (PEM)",
+        "placeholder": "The API signing private key — full PEM, incl. BEGIN/END lines"
+      },
+      {
+        "name": "private_key_passphrase",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key Passphrase",
+        "placeholder": "Only if the key is encrypted (optional)"
+      },
+      {
+        "name": "bucket_name",
+        "type": "string",
+        "value": null,
+        "label": "Bucket Name",
+        "placeholder": "The bucket to fetch",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "bucket",
+        "type": "object",
+        "value": null,
+        "label": "Bucket",
+        "placeholder": ""
+      },
+      {
+        "name": "namespace",
+        "type": "string",
+        "value": null,
+        "label": "Namespace",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "oracle/objectstorage/bucket_get_all": {
+    "hash": "2779711dd9fe119627df85741ae761c4325d4ff6ab7338f7eb24fdf70392f0d2",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "OCI Object Storage: List Buckets",
+    "description": "List the Object Storage buckets in an Oracle Cloud compartment, with their namespace and creation time. The tenancy namespace is resolved automatically.",
+    "website": "https://www.flomation.co",
+    "icon": "oracle+list",
+    "date": "21/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Oracle Cloud",
+      "icon": "oracle",
+      "description": "Oracle Cloud Infrastructure (OCI) integrations"
+    },
+    "sub_category": {
+      "name": "Object Storage",
+      "icon": "box",
+      "description": "Oracle Cloud Object Storage — buckets, objects, copy/rename, and pre-authenticated (presigned) request URLs"
+    },
+    "inputs": [
+      {
+        "name": "tenancy_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Tenancy OCID",
+        "placeholder": "ocid1.tenancy.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "user_ocid",
+        "type": "string",
+        "value": null,
+        "label": "User OCID",
+        "placeholder": "ocid1.user.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "e.g. uk-london-1",
+        "required": true
+      },
+      {
+        "name": "fingerprint",
+        "type": "string",
+        "value": null,
+        "label": "Key Fingerprint",
+        "placeholder": "aa:bb:cc:… fingerprint of the uploaded API key",
+        "required": true
+      },
+      {
+        "name": "private_key",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key (PEM)",
+        "placeholder": "The API signing private key — full PEM, incl. BEGIN/END lines"
+      },
+      {
+        "name": "private_key_passphrase",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key Passphrase",
+        "placeholder": "Only if the key is encrypted (optional)"
+      },
+      {
+        "name": "compartment_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Compartment OCID",
+        "placeholder": "ocid1.compartment.oc1..aaaa… (use the tenancy OCID for the root)",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "buckets",
+        "type": "object",
+        "value": null,
+        "label": "Buckets",
+        "placeholder": ""
+      },
+      {
+        "name": "namespace",
+        "type": "string",
+        "value": null,
+        "label": "Namespace",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Count",
+        "placeholder": ""
+      },
+      {
+        "name": "truncated",
+        "type": "boolean",
+        "value": null,
+        "label": "Truncated",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "oracle/objectstorage/namespace_get": {
+    "hash": "a005ad2dffa03d368e46e9f6b645b9d071365d460af1e79390cd8572bbc4c651",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "OCI Object Storage: Get Namespace",
+    "description": "Return the tenancy's Object Storage namespace — the top-level container every bucket lives under. The other actions resolve it automatically; use this when a flow needs the namespace value directly.",
+    "website": "https://www.flomation.co",
+    "icon": "oracle+circle-info",
+    "date": "21/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Oracle Cloud",
+      "icon": "oracle",
+      "description": "Oracle Cloud Infrastructure (OCI) integrations"
+    },
+    "sub_category": {
+      "name": "Object Storage",
+      "icon": "box",
+      "description": "Oracle Cloud Object Storage — buckets, objects, copy/rename, and pre-authenticated (presigned) request URLs"
+    },
+    "inputs": [
+      {
+        "name": "tenancy_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Tenancy OCID",
+        "placeholder": "ocid1.tenancy.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "user_ocid",
+        "type": "string",
+        "value": null,
+        "label": "User OCID",
+        "placeholder": "ocid1.user.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "e.g. uk-london-1",
+        "required": true
+      },
+      {
+        "name": "fingerprint",
+        "type": "string",
+        "value": null,
+        "label": "Key Fingerprint",
+        "placeholder": "aa:bb:cc:… fingerprint of the uploaded API key",
+        "required": true
+      },
+      {
+        "name": "private_key",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key (PEM)",
+        "placeholder": "The API signing private key — full PEM, incl. BEGIN/END lines"
+      },
+      {
+        "name": "private_key_passphrase",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key Passphrase",
+        "placeholder": "Only if the key is encrypted (optional)"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "namespace",
+        "type": "string",
+        "value": null,
+        "label": "Namespace",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "oracle/objectstorage/object_copy": {
+    "hash": "a3895c7384563727bf9072fb052ebef9e76b06f46f7408ac6bf16dba79b32b05",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "OCI Object Storage: Copy Object",
+    "description": "Copy an object to another name and/or bucket (and optionally another region). The copy runs asynchronously; the work-request id is returned. Destination bucket and region default to the source. The namespace is resolved automatically.",
+    "website": "https://www.flomation.co",
+    "icon": "oracle+copy",
+    "date": "21/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Oracle Cloud",
+      "icon": "oracle",
+      "description": "Oracle Cloud Infrastructure (OCI) integrations"
+    },
+    "sub_category": {
+      "name": "Object Storage",
+      "icon": "box",
+      "description": "Oracle Cloud Object Storage — buckets, objects, copy/rename, and pre-authenticated (presigned) request URLs"
+    },
+    "inputs": [
+      {
+        "name": "tenancy_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Tenancy OCID",
+        "placeholder": "ocid1.tenancy.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "user_ocid",
+        "type": "string",
+        "value": null,
+        "label": "User OCID",
+        "placeholder": "ocid1.user.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "e.g. uk-london-1",
+        "required": true
+      },
+      {
+        "name": "fingerprint",
+        "type": "string",
+        "value": null,
+        "label": "Key Fingerprint",
+        "placeholder": "aa:bb:cc:… fingerprint of the uploaded API key",
+        "required": true
+      },
+      {
+        "name": "private_key",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key (PEM)",
+        "placeholder": "The API signing private key — full PEM, incl. BEGIN/END lines"
+      },
+      {
+        "name": "private_key_passphrase",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key Passphrase",
+        "placeholder": "Only if the key is encrypted (optional)"
+      },
+      {
+        "name": "bucket_name",
+        "type": "string",
+        "value": null,
+        "label": "Source Bucket",
+        "placeholder": "The bucket the object is in",
+        "required": true
+      },
+      {
+        "name": "object_name",
+        "type": "string",
+        "value": null,
+        "label": "Source Object Name",
+        "placeholder": "The object to copy",
+        "required": true
+      },
+      {
+        "name": "destination_object_name",
+        "type": "string",
+        "value": null,
+        "label": "Destination Object Name",
+        "placeholder": "The name for the copy",
+        "required": true
+      },
+      {
+        "name": "destination_bucket",
+        "type": "string",
+        "value": null,
+        "label": "Destination Bucket",
+        "placeholder": "Leave blank to copy within the source bucket"
+      },
+      {
+        "name": "destination_region",
+        "type": "string",
+        "value": null,
+        "label": "Destination Region",
+        "placeholder": "Leave blank for the same region (e.g. uk-london-1)"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "work_request_id",
+        "type": "string",
+        "value": null,
+        "label": "Work Request ID",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "oracle/objectstorage/object_delete": {
+    "hash": "813b8787fd8b716955f2f7754e5813a369a0612991fea009af45e3a331e9f5ad",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "OCI Object Storage: Delete Object",
+    "description": "Permanently delete an object from an Oracle Cloud Object Storage bucket. The namespace is resolved automatically.",
+    "website": "https://www.flomation.co",
+    "icon": "oracle+trash",
+    "date": "21/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Oracle Cloud",
+      "icon": "oracle",
+      "description": "Oracle Cloud Infrastructure (OCI) integrations"
+    },
+    "sub_category": {
+      "name": "Object Storage",
+      "icon": "box",
+      "description": "Oracle Cloud Object Storage — buckets, objects, copy/rename, and pre-authenticated (presigned) request URLs"
+    },
+    "inputs": [
+      {
+        "name": "tenancy_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Tenancy OCID",
+        "placeholder": "ocid1.tenancy.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "user_ocid",
+        "type": "string",
+        "value": null,
+        "label": "User OCID",
+        "placeholder": "ocid1.user.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "e.g. uk-london-1",
+        "required": true
+      },
+      {
+        "name": "fingerprint",
+        "type": "string",
+        "value": null,
+        "label": "Key Fingerprint",
+        "placeholder": "aa:bb:cc:… fingerprint of the uploaded API key",
+        "required": true
+      },
+      {
+        "name": "private_key",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key (PEM)",
+        "placeholder": "The API signing private key — full PEM, incl. BEGIN/END lines"
+      },
+      {
+        "name": "private_key_passphrase",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key Passphrase",
+        "placeholder": "Only if the key is encrypted (optional)"
+      },
+      {
+        "name": "bucket_name",
+        "type": "string",
+        "value": null,
+        "label": "Bucket Name",
+        "placeholder": "The bucket",
+        "required": true
+      },
+      {
+        "name": "object_name",
+        "type": "string",
+        "value": null,
+        "label": "Object Name",
+        "placeholder": "The object key to delete",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "object_name",
+        "type": "string",
+        "value": null,
+        "label": "Object Name",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "oracle/objectstorage/object_get": {
+    "hash": "37f95d6d073c869b8d8ed658c208d9a9678d5bb28799fd157e6c3580b3f5138f",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "OCI Object Storage: Get Object",
+    "description": "Download an object's content from an Oracle Cloud Object Storage bucket. Returns the content as text plus a base64 encoding (use the base64 output for binary objects). The namespace is resolved automatically.",
+    "website": "https://www.flomation.co",
+    "icon": "oracle+cloud-arrow-down",
+    "date": "21/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Oracle Cloud",
+      "icon": "oracle",
+      "description": "Oracle Cloud Infrastructure (OCI) integrations"
+    },
+    "sub_category": {
+      "name": "Object Storage",
+      "icon": "box",
+      "description": "Oracle Cloud Object Storage — buckets, objects, copy/rename, and pre-authenticated (presigned) request URLs"
+    },
+    "inputs": [
+      {
+        "name": "tenancy_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Tenancy OCID",
+        "placeholder": "ocid1.tenancy.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "user_ocid",
+        "type": "string",
+        "value": null,
+        "label": "User OCID",
+        "placeholder": "ocid1.user.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "e.g. uk-london-1",
+        "required": true
+      },
+      {
+        "name": "fingerprint",
+        "type": "string",
+        "value": null,
+        "label": "Key Fingerprint",
+        "placeholder": "aa:bb:cc:… fingerprint of the uploaded API key",
+        "required": true
+      },
+      {
+        "name": "private_key",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key (PEM)",
+        "placeholder": "The API signing private key — full PEM, incl. BEGIN/END lines"
+      },
+      {
+        "name": "private_key_passphrase",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key Passphrase",
+        "placeholder": "Only if the key is encrypted (optional)"
+      },
+      {
+        "name": "bucket_name",
+        "type": "string",
+        "value": null,
+        "label": "Bucket Name",
+        "placeholder": "The source bucket",
+        "required": true
+      },
+      {
+        "name": "object_name",
+        "type": "string",
+        "value": null,
+        "label": "Object Name",
+        "placeholder": "The object key to download",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "content",
+        "type": "string",
+        "value": null,
+        "label": "Content (text)",
+        "placeholder": ""
+      },
+      {
+        "name": "content_base64",
+        "type": "string",
+        "value": null,
+        "label": "Content (base64)",
+        "placeholder": ""
+      },
+      {
+        "name": "content_type",
+        "type": "string",
+        "value": null,
+        "label": "Content Type",
+        "placeholder": ""
+      },
+      {
+        "name": "size_bytes",
+        "type": "integer",
+        "value": null,
+        "label": "Size (bytes)",
+        "placeholder": ""
+      },
+      {
+        "name": "etag",
+        "type": "string",
+        "value": null,
+        "label": "ETag",
+        "placeholder": ""
+      },
+      {
+        "name": "storage_tier",
+        "type": "string",
+        "value": null,
+        "label": "Storage Tier",
+        "placeholder": ""
+      },
+      {
+        "name": "archival_state",
+        "type": "string",
+        "value": null,
+        "label": "Archival State",
+        "placeholder": ""
+      },
+      {
+        "name": "metadata",
+        "type": "object",
+        "value": null,
+        "label": "Custom Metadata",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "oracle/objectstorage/object_get_all": {
+    "hash": "a80e05dd6defddd764ed1261d653bb2ccbd8e09fe963b21ff2b2541cd5eb45eb",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "OCI Object Storage: List Objects",
+    "description": "List the objects in an Oracle Cloud Object Storage bucket, with their size, creation time and last-modified time. Optionally filter by name prefix (e.g. a folder). The namespace is resolved automatically. Large buckets are capped — check the 'truncated' output to tell a complete listing from a partial one.",
+    "website": "https://www.flomation.co",
+    "icon": "oracle+list",
+    "date": "21/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Oracle Cloud",
+      "icon": "oracle",
+      "description": "Oracle Cloud Infrastructure (OCI) integrations"
+    },
+    "sub_category": {
+      "name": "Object Storage",
+      "icon": "box",
+      "description": "Oracle Cloud Object Storage — buckets, objects, copy/rename, and pre-authenticated (presigned) request URLs"
+    },
+    "inputs": [
+      {
+        "name": "tenancy_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Tenancy OCID",
+        "placeholder": "ocid1.tenancy.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "user_ocid",
+        "type": "string",
+        "value": null,
+        "label": "User OCID",
+        "placeholder": "ocid1.user.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "e.g. uk-london-1",
+        "required": true
+      },
+      {
+        "name": "fingerprint",
+        "type": "string",
+        "value": null,
+        "label": "Key Fingerprint",
+        "placeholder": "aa:bb:cc:… fingerprint of the uploaded API key",
+        "required": true
+      },
+      {
+        "name": "private_key",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key (PEM)",
+        "placeholder": "The API signing private key — full PEM, incl. BEGIN/END lines"
+      },
+      {
+        "name": "private_key_passphrase",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key Passphrase",
+        "placeholder": "Only if the key is encrypted (optional)"
+      },
+      {
+        "name": "bucket_name",
+        "type": "string",
+        "value": null,
+        "label": "Bucket Name",
+        "placeholder": "The bucket to list",
+        "required": true
+      },
+      {
+        "name": "prefix",
+        "type": "string",
+        "value": null,
+        "label": "Name Prefix",
+        "placeholder": "Only objects whose name starts with this, e.g. reports/ (optional)"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "objects",
+        "type": "object",
+        "value": null,
+        "label": "Objects",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Count",
+        "placeholder": ""
+      },
+      {
+        "name": "truncated",
+        "type": "boolean",
+        "value": null,
+        "label": "Truncated",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "oracle/objectstorage/object_head": {
+    "hash": "fbb903f5430f482a4110264ea5717524c564058bf2d9e4546c5dd8bab4674fa7",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "OCI Object Storage: Head Object",
+    "description": "Fetch an object's metadata (size, content type, ETag, storage tier, archival state and any custom metadata) without downloading its content — use it to check whether an object exists, how big it is, or whether it must be restored from Archive first. The namespace is resolved automatically.",
+    "website": "https://www.flomation.co",
+    "icon": "oracle+circle-info",
+    "date": "21/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Oracle Cloud",
+      "icon": "oracle",
+      "description": "Oracle Cloud Infrastructure (OCI) integrations"
+    },
+    "sub_category": {
+      "name": "Object Storage",
+      "icon": "box",
+      "description": "Oracle Cloud Object Storage — buckets, objects, copy/rename, and pre-authenticated (presigned) request URLs"
+    },
+    "inputs": [
+      {
+        "name": "tenancy_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Tenancy OCID",
+        "placeholder": "ocid1.tenancy.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "user_ocid",
+        "type": "string",
+        "value": null,
+        "label": "User OCID",
+        "placeholder": "ocid1.user.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "e.g. uk-london-1",
+        "required": true
+      },
+      {
+        "name": "fingerprint",
+        "type": "string",
+        "value": null,
+        "label": "Key Fingerprint",
+        "placeholder": "aa:bb:cc:… fingerprint of the uploaded API key",
+        "required": true
+      },
+      {
+        "name": "private_key",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key (PEM)",
+        "placeholder": "The API signing private key — full PEM, incl. BEGIN/END lines"
+      },
+      {
+        "name": "private_key_passphrase",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key Passphrase",
+        "placeholder": "Only if the key is encrypted (optional)"
+      },
+      {
+        "name": "bucket_name",
+        "type": "string",
+        "value": null,
+        "label": "Bucket Name",
+        "placeholder": "The bucket",
+        "required": true
+      },
+      {
+        "name": "object_name",
+        "type": "string",
+        "value": null,
+        "label": "Object Name",
+        "placeholder": "The object key",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "size_bytes",
+        "type": "integer",
+        "value": null,
+        "label": "Size (bytes)",
+        "placeholder": ""
+      },
+      {
+        "name": "content_type",
+        "type": "string",
+        "value": null,
+        "label": "Content Type",
+        "placeholder": ""
+      },
+      {
+        "name": "etag",
+        "type": "string",
+        "value": null,
+        "label": "ETag",
+        "placeholder": ""
+      },
+      {
+        "name": "storage_tier",
+        "type": "string",
+        "value": null,
+        "label": "Storage Tier",
+        "placeholder": ""
+      },
+      {
+        "name": "archival_state",
+        "type": "string",
+        "value": null,
+        "label": "Archival State",
+        "placeholder": ""
+      },
+      {
+        "name": "metadata",
+        "type": "object",
+        "value": null,
+        "label": "Custom Metadata",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "oracle/objectstorage/object_put": {
+    "hash": "0531993d9ba7da55bd9bc6eba0942c2a8841f4cc0ce8d65759f2705fb9da3266",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "OCI Object Storage: Put Object",
+    "description": "Upload an object into an Oracle Cloud Object Storage bucket. Content is a string (text or upstream data); enable Base64 to upload binary content that was base64-encoded upstream. The namespace is resolved automatically.",
+    "website": "https://www.flomation.co",
+    "icon": "oracle+cloud-arrow-up",
+    "date": "21/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Oracle Cloud",
+      "icon": "oracle",
+      "description": "Oracle Cloud Infrastructure (OCI) integrations"
+    },
+    "sub_category": {
+      "name": "Object Storage",
+      "icon": "box",
+      "description": "Oracle Cloud Object Storage — buckets, objects, copy/rename, and pre-authenticated (presigned) request URLs"
+    },
+    "inputs": [
+      {
+        "name": "tenancy_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Tenancy OCID",
+        "placeholder": "ocid1.tenancy.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "user_ocid",
+        "type": "string",
+        "value": null,
+        "label": "User OCID",
+        "placeholder": "ocid1.user.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "e.g. uk-london-1",
+        "required": true
+      },
+      {
+        "name": "fingerprint",
+        "type": "string",
+        "value": null,
+        "label": "Key Fingerprint",
+        "placeholder": "aa:bb:cc:… fingerprint of the uploaded API key",
+        "required": true
+      },
+      {
+        "name": "private_key",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key (PEM)",
+        "placeholder": "The API signing private key — full PEM, incl. BEGIN/END lines"
+      },
+      {
+        "name": "private_key_passphrase",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key Passphrase",
+        "placeholder": "Only if the key is encrypted (optional)"
+      },
+      {
+        "name": "bucket_name",
+        "type": "string",
+        "value": null,
+        "label": "Bucket Name",
+        "placeholder": "The target bucket",
+        "required": true
+      },
+      {
+        "name": "object_name",
+        "type": "string",
+        "value": null,
+        "label": "Object Name",
+        "placeholder": "The object key, e.g. reports/2026-07.csv",
+        "required": true
+      },
+      {
+        "name": "content",
+        "type": "text",
+        "value": null,
+        "label": "Content",
+        "placeholder": "The object's contents (text, or base64 if Base64 is on)"
+      },
+      {
+        "name": "content_type",
+        "type": "string",
+        "value": null,
+        "label": "Content Type",
+        "placeholder": "e.g. text/plain, application/json (optional)"
+      },
+      {
+        "name": "metadata",
+        "type": "string",
+        "value": null,
+        "label": "Custom Metadata (JSON)",
+        "placeholder": "{\"source\":\"crm\"} — stored as opc-meta-* headers (optional)"
+      },
+      {
+        "name": "base64",
+        "type": "boolean",
+        "value": null,
+        "label": "Content is Base64",
+        "placeholder": "Decode the content from base64 before upload (for binary data)"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "object_name",
+        "type": "string",
+        "value": null,
+        "label": "Object Name",
+        "placeholder": ""
+      },
+      {
+        "name": "etag",
+        "type": "string",
+        "value": null,
+        "label": "ETag",
+        "placeholder": ""
+      },
+      {
+        "name": "size_bytes",
+        "type": "integer",
+        "value": null,
+        "label": "Size (bytes)",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "oracle/objectstorage/object_rename": {
+    "hash": "996e143b59c2872f19d4e01f43df9d028a37342c935a241ef21c28401b86228d",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "OCI Object Storage: Rename Object",
+    "description": "Rename an object within an Oracle Cloud Object Storage bucket — a server-side move, no re-upload. By default the rename fails if an object already exists at the new name, so it can't silently overwrite an unrelated object; enable Overwrite to replace it. The namespace is resolved automatically.",
+    "website": "https://www.flomation.co",
+    "icon": "oracle+pen",
+    "date": "21/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Oracle Cloud",
+      "icon": "oracle",
+      "description": "Oracle Cloud Infrastructure (OCI) integrations"
+    },
+    "sub_category": {
+      "name": "Object Storage",
+      "icon": "box",
+      "description": "Oracle Cloud Object Storage — buckets, objects, copy/rename, and pre-authenticated (presigned) request URLs"
+    },
+    "inputs": [
+      {
+        "name": "tenancy_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Tenancy OCID",
+        "placeholder": "ocid1.tenancy.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "user_ocid",
+        "type": "string",
+        "value": null,
+        "label": "User OCID",
+        "placeholder": "ocid1.user.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "e.g. uk-london-1",
+        "required": true
+      },
+      {
+        "name": "fingerprint",
+        "type": "string",
+        "value": null,
+        "label": "Key Fingerprint",
+        "placeholder": "aa:bb:cc:… fingerprint of the uploaded API key",
+        "required": true
+      },
+      {
+        "name": "private_key",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key (PEM)",
+        "placeholder": "The API signing private key — full PEM, incl. BEGIN/END lines"
+      },
+      {
+        "name": "private_key_passphrase",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key Passphrase",
+        "placeholder": "Only if the key is encrypted (optional)"
+      },
+      {
+        "name": "bucket_name",
+        "type": "string",
+        "value": null,
+        "label": "Bucket Name",
+        "placeholder": "The bucket",
+        "required": true
+      },
+      {
+        "name": "object_name",
+        "type": "string",
+        "value": null,
+        "label": "Current Object Name",
+        "placeholder": "The object to rename",
+        "required": true
+      },
+      {
+        "name": "new_object_name",
+        "type": "string",
+        "value": null,
+        "label": "New Object Name",
+        "placeholder": "The new name/key",
+        "required": true
+      },
+      {
+        "name": "overwrite",
+        "type": "boolean",
+        "value": null,
+        "label": "Overwrite if exists",
+        "placeholder": "If the new name already exists: off (default) fails without touching it, on replaces it"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "object_name",
+        "type": "string",
+        "value": null,
+        "label": "New Object Name",
+        "placeholder": ""
+      },
+      {
+        "name": "etag",
+        "type": "string",
+        "value": null,
+        "label": "ETag",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "oracle/objectstorage/presigned_url_create": {
+    "hash": "4772d2f9f3e83fd838c4b3a613dee9e090c04f2b98e70ea25652b6d7d749f56a",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "OCI Object Storage: Create Presigned URL",
+    "description": "Create a pre-authenticated request (PAR) for an object — a time-limited URL granting read (download) or write (upload) access with no credentials, like an S3 presigned URL. The namespace is resolved automatically.",
+    "website": "https://www.flomation.co",
+    "icon": "oracle+link",
+    "date": "21/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Oracle Cloud",
+      "icon": "oracle",
+      "description": "Oracle Cloud Infrastructure (OCI) integrations"
+    },
+    "sub_category": {
+      "name": "Object Storage",
+      "icon": "box",
+      "description": "Oracle Cloud Object Storage — buckets, objects, copy/rename, and pre-authenticated (presigned) request URLs"
+    },
+    "inputs": [
+      {
+        "name": "tenancy_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Tenancy OCID",
+        "placeholder": "ocid1.tenancy.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "user_ocid",
+        "type": "string",
+        "value": null,
+        "label": "User OCID",
+        "placeholder": "ocid1.user.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "e.g. uk-london-1",
+        "required": true
+      },
+      {
+        "name": "fingerprint",
+        "type": "string",
+        "value": null,
+        "label": "Key Fingerprint",
+        "placeholder": "aa:bb:cc:… fingerprint of the uploaded API key",
+        "required": true
+      },
+      {
+        "name": "private_key",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key (PEM)",
+        "placeholder": "The API signing private key — full PEM, incl. BEGIN/END lines"
+      },
+      {
+        "name": "private_key_passphrase",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key Passphrase",
+        "placeholder": "Only if the key is encrypted (optional)"
+      },
+      {
+        "name": "bucket_name",
+        "type": "string",
+        "value": null,
+        "label": "Bucket Name",
+        "placeholder": "The bucket the object is in",
+        "required": true
+      },
+      {
+        "name": "object_name",
+        "type": "string",
+        "value": null,
+        "label": "Object Name",
+        "placeholder": "The object to grant access to",
+        "required": true
+      },
+      {
+        "name": "name",
+        "type": "string",
+        "value": null,
+        "label": "PAR Name",
+        "placeholder": "A label for this pre-authenticated request",
+        "required": true
+      },
+      {
+        "name": "access_type",
+        "type": "string",
+        "value": null,
+        "label": "Access",
+        "placeholder": "What the URL allows",
+        "required": true,
+        "options": [
+          {
+            "name": "Read (download)",
+            "value": "ObjectRead"
+          },
+          {
+            "name": "Write (upload)",
+            "value": "ObjectWrite"
+          },
+          {
+            "name": "Read \u0026 write",
+            "value": "ObjectReadWrite"
+          }
+        ]
+      },
+      {
+        "name": "expires_in_hours",
+        "type": "integer",
+        "value": null,
+        "label": "Expires in (hours)",
+        "placeholder": "How long the URL is valid — default 24"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "url",
+        "type": "string",
+        "value": null,
+        "label": "Presigned URL",
+        "placeholder": ""
+      },
+      {
+        "name": "access_uri",
+        "type": "string",
+        "value": null,
+        "label": "Access URI (path)",
+        "placeholder": ""
+      },
+      {
+        "name": "par_id",
+        "type": "string",
+        "value": null,
+        "label": "PAR ID",
+        "placeholder": ""
+      },
+      {
+        "name": "expires_at",
+        "type": "string",
+        "value": null,
+        "label": "Expires At",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "oracle/objectstorage/presigned_url_delete": {
+    "hash": "dd242b2cc0379ba83ea2975fc174a03f2d370966e7133c53e27c8167484ea8a6",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "OCI Object Storage: Delete Presigned URL",
+    "description": "Revoke a pre-authenticated request (PAR) by its id, immediately invalidating the URL. The namespace is resolved automatically.",
+    "website": "https://www.flomation.co",
+    "icon": "oracle+trash",
+    "date": "21/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Oracle Cloud",
+      "icon": "oracle",
+      "description": "Oracle Cloud Infrastructure (OCI) integrations"
+    },
+    "sub_category": {
+      "name": "Object Storage",
+      "icon": "box",
+      "description": "Oracle Cloud Object Storage — buckets, objects, copy/rename, and pre-authenticated (presigned) request URLs"
+    },
+    "inputs": [
+      {
+        "name": "tenancy_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Tenancy OCID",
+        "placeholder": "ocid1.tenancy.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "user_ocid",
+        "type": "string",
+        "value": null,
+        "label": "User OCID",
+        "placeholder": "ocid1.user.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "e.g. uk-london-1",
+        "required": true
+      },
+      {
+        "name": "fingerprint",
+        "type": "string",
+        "value": null,
+        "label": "Key Fingerprint",
+        "placeholder": "aa:bb:cc:… fingerprint of the uploaded API key",
+        "required": true
+      },
+      {
+        "name": "private_key",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key (PEM)",
+        "placeholder": "The API signing private key — full PEM, incl. BEGIN/END lines"
+      },
+      {
+        "name": "private_key_passphrase",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key Passphrase",
+        "placeholder": "Only if the key is encrypted (optional)"
+      },
+      {
+        "name": "bucket_name",
+        "type": "string",
+        "value": null,
+        "label": "Bucket Name",
+        "placeholder": "The bucket the PAR is on",
+        "required": true
+      },
+      {
+        "name": "par_id",
+        "type": "string",
+        "value": null,
+        "label": "PAR ID",
+        "placeholder": "The pre-authenticated request id (from List Presigned URLs)",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "par_id",
+        "type": "string",
+        "value": null,
+        "label": "PAR ID",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "oracle/objectstorage/presigned_url_get_all": {
+    "hash": "3f059ddd9f18ecc7a276c984a4e36ac975ef07d87389e554f1d3047db9aa6fd2",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "OCI Object Storage: List Presigned URLs",
+    "description": "List the pre-authenticated requests (PARs) on a bucket — their name, target object, access type and expiry. The URLs themselves are only shown at creation time. The namespace is resolved automatically.",
+    "website": "https://www.flomation.co",
+    "icon": "oracle+list",
+    "date": "21/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Oracle Cloud",
+      "icon": "oracle",
+      "description": "Oracle Cloud Infrastructure (OCI) integrations"
+    },
+    "sub_category": {
+      "name": "Object Storage",
+      "icon": "box",
+      "description": "Oracle Cloud Object Storage — buckets, objects, copy/rename, and pre-authenticated (presigned) request URLs"
+    },
+    "inputs": [
+      {
+        "name": "tenancy_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Tenancy OCID",
+        "placeholder": "ocid1.tenancy.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "user_ocid",
+        "type": "string",
+        "value": null,
+        "label": "User OCID",
+        "placeholder": "ocid1.user.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "e.g. uk-london-1",
+        "required": true
+      },
+      {
+        "name": "fingerprint",
+        "type": "string",
+        "value": null,
+        "label": "Key Fingerprint",
+        "placeholder": "aa:bb:cc:… fingerprint of the uploaded API key",
+        "required": true
+      },
+      {
+        "name": "private_key",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key (PEM)",
+        "placeholder": "The API signing private key — full PEM, incl. BEGIN/END lines"
+      },
+      {
+        "name": "private_key_passphrase",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key Passphrase",
+        "placeholder": "Only if the key is encrypted (optional)"
+      },
+      {
+        "name": "bucket_name",
+        "type": "string",
+        "value": null,
+        "label": "Bucket Name",
+        "placeholder": "The bucket",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "presigned_urls",
+        "type": "object",
+        "value": null,
+        "label": "Presigned URLs (PARs)",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Count",
+        "placeholder": ""
+      },
+      {
+        "name": "truncated",
+        "type": "boolean",
+        "value": null,
+        "label": "Truncated",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
   "output/set": {
     "hash": "05f0e3818a441c5837d9b6543e663da5f0a4e6febe515914d851620eb82ec9b3",
     "author": "Andy Esser",

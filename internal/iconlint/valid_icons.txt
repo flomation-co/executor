@@ -49,6 +49,7 @@ chevron-up
 circle-check
 circle-dot
 circle-exclamation
+circle-info
 circle-nodes
 circle-stop
 circle-xmark
@@ -56,6 +57,8 @@ clipboard-list
 clock
 clock-rotate-left
 cloud
+cloud-arrow-down
+cloud-arrow-up
 code
 code-branch
 comment
