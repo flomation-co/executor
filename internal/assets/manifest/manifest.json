@@ -141775,6 +141775,2195 @@
       }
     ]
   },
+  "oracle/compute/availability_domain_get_all": {
+    "hash": "37331990ad8c86672054deb3721080f0599983bc53827d15e6793e4aee47b92a",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "OCI Compute: List Availability Domains",
+    "description": "List the availability domains in the region — the fault-isolation zones an instance is launched into. Needed to pick a domain for List Shapes / Launch Instance.",
+    "website": "https://www.flomation.co",
+    "icon": "oracle+layer-group",
+    "date": "20/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Oracle Cloud",
+      "icon": "oracle",
+      "description": "Oracle Cloud Infrastructure (OCI) integrations"
+    },
+    "sub_category": {
+      "name": "Compute",
+      "icon": "server",
+      "description": "Oracle Cloud Compute — instance lifecycle, shapes, images, VNICs, networking and tags"
+    },
+    "inputs": [
+      {
+        "name": "tenancy_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Tenancy OCID",
+        "placeholder": "ocid1.tenancy.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "user_ocid",
+        "type": "string",
+        "value": null,
+        "label": "User OCID",
+        "placeholder": "ocid1.user.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "e.g. uk-london-1",
+        "required": true
+      },
+      {
+        "name": "fingerprint",
+        "type": "string",
+        "value": null,
+        "label": "Key Fingerprint",
+        "placeholder": "aa:bb:cc:… fingerprint of the uploaded API key",
+        "required": true
+      },
+      {
+        "name": "private_key",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key (PEM)",
+        "placeholder": "The API signing private key — full PEM, incl. BEGIN/END lines"
+      },
+      {
+        "name": "private_key_passphrase",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key Passphrase",
+        "placeholder": "Only if the key is encrypted (optional)"
+      },
+      {
+        "name": "compartment_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Compartment OCID",
+        "placeholder": "ocid1.compartment.oc1..aaaa… (use the tenancy OCID for the root)",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "availability_domains",
+        "type": "object",
+        "value": null,
+        "label": "Availability Domains",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Count",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "oracle/compute/boot_volume_get_all": {
+    "hash": "8dc3b4bcd157098b3bb5a26feebcba690e66425c0ff4071044c35c571d0cb842",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "OCI Compute: List Boot Volumes",
+    "description": "List the boot volumes (instance root disks) in an Oracle Cloud compartment, optionally scoped to one availability domain. Includes volumes preserved after an instance was terminated.",
+    "website": "https://www.flomation.co",
+    "icon": "oracle+hard-drive",
+    "date": "20/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Oracle Cloud",
+      "icon": "oracle",
+      "description": "Oracle Cloud Infrastructure (OCI) integrations"
+    },
+    "sub_category": {
+      "name": "Compute",
+      "icon": "server",
+      "description": "Oracle Cloud Compute — instance lifecycle, shapes, images, VNICs, networking and tags"
+    },
+    "inputs": [
+      {
+        "name": "tenancy_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Tenancy OCID",
+        "placeholder": "ocid1.tenancy.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "user_ocid",
+        "type": "string",
+        "value": null,
+        "label": "User OCID",
+        "placeholder": "ocid1.user.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "e.g. uk-london-1",
+        "required": true
+      },
+      {
+        "name": "fingerprint",
+        "type": "string",
+        "value": null,
+        "label": "Key Fingerprint",
+        "placeholder": "aa:bb:cc:… fingerprint of the uploaded API key",
+        "required": true
+      },
+      {
+        "name": "private_key",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key (PEM)",
+        "placeholder": "The API signing private key — full PEM, incl. BEGIN/END lines"
+      },
+      {
+        "name": "private_key_passphrase",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key Passphrase",
+        "placeholder": "Only if the key is encrypted (optional)"
+      },
+      {
+        "name": "compartment_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Compartment OCID",
+        "placeholder": "ocid1.compartment.oc1..aaaa… (use the tenancy OCID for the root)",
+        "required": true
+      },
+      {
+        "name": "availability_domain",
+        "type": "string",
+        "value": null,
+        "label": "Availability Domain",
+        "placeholder": "e.g. Uocm:UK-LONDON-1-AD-1 (optional)"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "boot_volumes",
+        "type": "object",
+        "value": null,
+        "label": "Boot Volumes",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Count",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "oracle/compute/compartment_get_all": {
+    "hash": "c34c439428245e3fe7a1c8667a0edb4f48f8bc92e31fd7aefdc36a0b0a7dfb9d",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "OCI: List Compartments",
+    "description": "List the compartments under a parent compartment (or the tenancy root) — OCI's resource-grouping unit. Optionally recurse the whole subtree.",
+    "website": "https://www.flomation.co",
+    "icon": "oracle+folder-tree",
+    "date": "20/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Oracle Cloud",
+      "icon": "oracle",
+      "description": "Oracle Cloud Infrastructure (OCI) integrations"
+    },
+    "sub_category": {
+      "name": "Compute",
+      "icon": "server",
+      "description": "Oracle Cloud Compute — instance lifecycle, shapes, images, VNICs, networking and tags"
+    },
+    "inputs": [
+      {
+        "name": "tenancy_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Tenancy OCID",
+        "placeholder": "ocid1.tenancy.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "user_ocid",
+        "type": "string",
+        "value": null,
+        "label": "User OCID",
+        "placeholder": "ocid1.user.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "e.g. uk-london-1",
+        "required": true
+      },
+      {
+        "name": "fingerprint",
+        "type": "string",
+        "value": null,
+        "label": "Key Fingerprint",
+        "placeholder": "aa:bb:cc:… fingerprint of the uploaded API key",
+        "required": true
+      },
+      {
+        "name": "private_key",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key (PEM)",
+        "placeholder": "The API signing private key — full PEM, incl. BEGIN/END lines"
+      },
+      {
+        "name": "private_key_passphrase",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key Passphrase",
+        "placeholder": "Only if the key is encrypted (optional)"
+      },
+      {
+        "name": "compartment_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Parent Compartment OCID",
+        "placeholder": "ocid1.compartment.oc1..aaaa… (use the tenancy OCID for the root)",
+        "required": true
+      },
+      {
+        "name": "subtree",
+        "type": "boolean",
+        "value": null,
+        "label": "Include whole subtree",
+        "placeholder": "List nested compartments recursively, not just direct children"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "compartments",
+        "type": "object",
+        "value": null,
+        "label": "Compartments",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Count",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "oracle/compute/image_get_all": {
+    "hash": "fc28672b85475bbe65f19c21662dfe0b55460ecb4f39b081bb05de8920a37244",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "OCI Compute: List Images",
+    "description": "List the Compute images (OS/boot images) available in an Oracle Cloud compartment. Optionally filter by operating system or shape.",
+    "website": "https://www.flomation.co",
+    "icon": "oracle+compact-disc",
+    "date": "20/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Oracle Cloud",
+      "icon": "oracle",
+      "description": "Oracle Cloud Infrastructure (OCI) integrations"
+    },
+    "sub_category": {
+      "name": "Compute",
+      "icon": "server",
+      "description": "Oracle Cloud Compute — instance lifecycle, shapes, images, VNICs, networking and tags"
+    },
+    "inputs": [
+      {
+        "name": "tenancy_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Tenancy OCID",
+        "placeholder": "ocid1.tenancy.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "user_ocid",
+        "type": "string",
+        "value": null,
+        "label": "User OCID",
+        "placeholder": "ocid1.user.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "e.g. uk-london-1",
+        "required": true
+      },
+      {
+        "name": "fingerprint",
+        "type": "string",
+        "value": null,
+        "label": "Key Fingerprint",
+        "placeholder": "aa:bb:cc:… fingerprint of the uploaded API key",
+        "required": true
+      },
+      {
+        "name": "private_key",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key (PEM)",
+        "placeholder": "The API signing private key — full PEM, incl. BEGIN/END lines"
+      },
+      {
+        "name": "private_key_passphrase",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key Passphrase",
+        "placeholder": "Only if the key is encrypted (optional)"
+      },
+      {
+        "name": "compartment_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Compartment OCID",
+        "placeholder": "ocid1.compartment.oc1..aaaa… (use the tenancy OCID for the root)",
+        "required": true
+      },
+      {
+        "name": "operating_system",
+        "type": "string",
+        "value": null,
+        "label": "Operating System filter",
+        "placeholder": "e.g. Oracle Linux, Canonical Ubuntu (optional)"
+      },
+      {
+        "name": "shape",
+        "type": "string",
+        "value": null,
+        "label": "Shape filter",
+        "placeholder": "Only images compatible with this shape (optional)"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "images",
+        "type": "object",
+        "value": null,
+        "label": "Images",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Count",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "oracle/compute/instance_get": {
+    "hash": "4f487087218f3d917deae56cd4c250fb15f7300c8564b2b180f5d2e076874b12",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "OCI Compute: Get Instance",
+    "description": "Fetch a single Oracle Cloud Compute instance by its OCID — lifecycle state, shape, availability domain, region and tags.",
+    "website": "https://www.flomation.co",
+    "icon": "oracle+magnifying-glass",
+    "date": "20/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Oracle Cloud",
+      "icon": "oracle",
+      "description": "Oracle Cloud Infrastructure (OCI) integrations"
+    },
+    "sub_category": {
+      "name": "Compute",
+      "icon": "server",
+      "description": "Oracle Cloud Compute — instance lifecycle, shapes, images, VNICs, networking and tags"
+    },
+    "inputs": [
+      {
+        "name": "tenancy_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Tenancy OCID",
+        "placeholder": "ocid1.tenancy.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "user_ocid",
+        "type": "string",
+        "value": null,
+        "label": "User OCID",
+        "placeholder": "ocid1.user.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "e.g. uk-london-1",
+        "required": true
+      },
+      {
+        "name": "fingerprint",
+        "type": "string",
+        "value": null,
+        "label": "Key Fingerprint",
+        "placeholder": "aa:bb:cc:… fingerprint of the uploaded API key",
+        "required": true
+      },
+      {
+        "name": "private_key",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key (PEM)",
+        "placeholder": "The API signing private key — full PEM, incl. BEGIN/END lines"
+      },
+      {
+        "name": "private_key_passphrase",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key Passphrase",
+        "placeholder": "Only if the key is encrypted (optional)"
+      },
+      {
+        "name": "instance_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Instance OCID",
+        "placeholder": "ocid1.instance.oc1..aaaa…",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "instance",
+        "type": "object",
+        "value": null,
+        "label": "Instance",
+        "placeholder": ""
+      },
+      {
+        "name": "lifecycle_state",
+        "type": "string",
+        "value": null,
+        "label": "Lifecycle State",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "oracle/compute/instance_get_all": {
+    "hash": "27caa035ad0c4d1766da283edbf4077439f0ac81bed15de74c92977123196e6e",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "OCI Compute: List Instances",
+    "description": "List Compute instances in an Oracle Cloud compartment, with their lifecycle state (running/stopped), shape, availability domain, region and tags. Optionally filter by display name or lifecycle state.",
+    "website": "https://www.flomation.co",
+    "icon": "oracle+list",
+    "date": "20/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Oracle Cloud",
+      "icon": "oracle",
+      "description": "Oracle Cloud Infrastructure (OCI) integrations"
+    },
+    "sub_category": {
+      "name": "Compute",
+      "icon": "server",
+      "description": "Oracle Cloud Compute — instance lifecycle, shapes, images, VNICs, networking and tags"
+    },
+    "inputs": [
+      {
+        "name": "tenancy_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Tenancy OCID",
+        "placeholder": "ocid1.tenancy.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "user_ocid",
+        "type": "string",
+        "value": null,
+        "label": "User OCID",
+        "placeholder": "ocid1.user.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "e.g. uk-london-1",
+        "required": true
+      },
+      {
+        "name": "fingerprint",
+        "type": "string",
+        "value": null,
+        "label": "Key Fingerprint",
+        "placeholder": "aa:bb:cc:… fingerprint of the uploaded API key",
+        "required": true
+      },
+      {
+        "name": "private_key",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key (PEM)",
+        "placeholder": "The API signing private key — full PEM, incl. BEGIN/END lines"
+      },
+      {
+        "name": "private_key_passphrase",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key Passphrase",
+        "placeholder": "Only if the key is encrypted (optional)"
+      },
+      {
+        "name": "compartment_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Compartment OCID",
+        "placeholder": "ocid1.compartment.oc1..aaaa… (use the tenancy OCID for the root compartment)",
+        "required": true
+      },
+      {
+        "name": "display_name",
+        "type": "string",
+        "value": null,
+        "label": "Display Name filter",
+        "placeholder": "Only instances with this exact name (optional)"
+      },
+      {
+        "name": "lifecycle_state",
+        "type": "string",
+        "value": null,
+        "label": "Lifecycle State filter",
+        "placeholder": "Filter by state (optional)",
+        "options": [
+          {
+            "name": "Any (all states)",
+            "value": ""
+          },
+          {
+            "name": "Running",
+            "value": "RUNNING"
+          },
+          {
+            "name": "Stopped",
+            "value": "STOPPED"
+          },
+          {
+            "name": "Starting",
+            "value": "STARTING"
+          },
+          {
+            "name": "Stopping",
+            "value": "STOPPING"
+          },
+          {
+            "name": "Provisioning",
+            "value": "PROVISIONING"
+          },
+          {
+            "name": "Terminating",
+            "value": "TERMINATING"
+          },
+          {
+            "name": "Terminated",
+            "value": "TERMINATED"
+          },
+          {
+            "name": "Creating Image",
+            "value": "CREATING_IMAGE"
+          },
+          {
+            "name": "Moving",
+            "value": "MOVING"
+          }
+        ]
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "instances",
+        "type": "object",
+        "value": null,
+        "label": "Instances",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Count",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "oracle/compute/instance_launch": {
+    "hash": "4989e0b410e073a2bdf912f3a42a9d1032b11d904e414aa5e792e10db25c89cd",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "OCI Compute: Launch Instance",
+    "description": "Create (launch) a new Oracle Cloud Compute instance from an image into a subnet. Supply the availability domain, shape, image and subnet; for flexible shapes set the OCPUs and memory.",
+    "website": "https://www.flomation.co",
+    "icon": "oracle+plus",
+    "date": "20/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Oracle Cloud",
+      "icon": "oracle",
+      "description": "Oracle Cloud Infrastructure (OCI) integrations"
+    },
+    "sub_category": {
+      "name": "Compute",
+      "icon": "server",
+      "description": "Oracle Cloud Compute — instance lifecycle, shapes, images, VNICs, networking and tags"
+    },
+    "inputs": [
+      {
+        "name": "tenancy_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Tenancy OCID",
+        "placeholder": "ocid1.tenancy.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "user_ocid",
+        "type": "string",
+        "value": null,
+        "label": "User OCID",
+        "placeholder": "ocid1.user.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "e.g. uk-london-1",
+        "required": true
+      },
+      {
+        "name": "fingerprint",
+        "type": "string",
+        "value": null,
+        "label": "Key Fingerprint",
+        "placeholder": "aa:bb:cc:… fingerprint of the uploaded API key",
+        "required": true
+      },
+      {
+        "name": "private_key",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key (PEM)",
+        "placeholder": "The API signing private key — full PEM, incl. BEGIN/END lines"
+      },
+      {
+        "name": "private_key_passphrase",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key Passphrase",
+        "placeholder": "Only if the key is encrypted (optional)"
+      },
+      {
+        "name": "compartment_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Compartment OCID",
+        "placeholder": "ocid1.compartment.oc1..aaaa… (use the tenancy OCID for the root)",
+        "required": true
+      },
+      {
+        "name": "availability_domain",
+        "type": "string",
+        "value": null,
+        "label": "Availability Domain",
+        "placeholder": "e.g. Uocm:UK-LONDON-1-AD-1 (from List Availability Domains)",
+        "required": true
+      },
+      {
+        "name": "shape",
+        "type": "string",
+        "value": null,
+        "label": "Shape",
+        "placeholder": "e.g. VM.Standard.E5.Flex (from List Shapes)",
+        "required": true
+      },
+      {
+        "name": "image_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Image OCID",
+        "placeholder": "ocid1.image.oc1..aaaa… (from List Images)",
+        "required": true
+      },
+      {
+        "name": "subnet_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Subnet OCID",
+        "placeholder": "ocid1.subnet.oc1..aaaa… (from List Subnets)",
+        "required": true
+      },
+      {
+        "name": "display_name",
+        "type": "string",
+        "value": null,
+        "label": "Display Name",
+        "placeholder": "A friendly name for the instance (optional)"
+      },
+      {
+        "name": "ocpus",
+        "type": "string",
+        "value": null,
+        "label": "OCPUs (flex shapes)",
+        "placeholder": "e.g. 1 — required for .Flex shapes"
+      },
+      {
+        "name": "memory_in_gbs",
+        "type": "string",
+        "value": null,
+        "label": "Memory GB (flex shapes)",
+        "placeholder": "e.g. 16 — required for .Flex shapes"
+      },
+      {
+        "name": "boot_volume_size_in_gbs",
+        "type": "string",
+        "value": null,
+        "label": "Boot Volume Size (GB)",
+        "placeholder": "Override the image default (optional, min 50)"
+      },
+      {
+        "name": "ssh_authorized_key",
+        "type": "text",
+        "value": null,
+        "label": "SSH Public Key",
+        "placeholder": "ssh-rsa AAAA… — public key for the default OS user (optional)"
+      },
+      {
+        "name": "assign_public_ip",
+        "type": "boolean",
+        "value": null,
+        "label": "Assign Public IP",
+        "placeholder": "Give the primary VNIC a public IP (subnet must be public)"
+      },
+      {
+        "name": "tags",
+        "type": "string",
+        "value": null,
+        "label": "Freeform Tags (JSON)",
+        "placeholder": "{\"env\":\"prod\"} (optional)"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "instance",
+        "type": "object",
+        "value": null,
+        "label": "Instance",
+        "placeholder": ""
+      },
+      {
+        "name": "instance_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Instance OCID",
+        "placeholder": ""
+      },
+      {
+        "name": "lifecycle_state",
+        "type": "string",
+        "value": null,
+        "label": "Lifecycle State",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "oracle/compute/instance_list_vnics": {
+    "hash": "ca14ef71203d4ee916e0c59151de13eddf8f0c1c3b716891e81e42d4781dd94c",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "OCI Compute: List Instance VNICs",
+    "description": "List an instance's attached VNICs with their private and public IP addresses — how to reach the instance. Resolves each VNIC attachment to its IPs.",
+    "website": "https://www.flomation.co",
+    "icon": "oracle+ethernet",
+    "date": "20/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Oracle Cloud",
+      "icon": "oracle",
+      "description": "Oracle Cloud Infrastructure (OCI) integrations"
+    },
+    "sub_category": {
+      "name": "Compute",
+      "icon": "server",
+      "description": "Oracle Cloud Compute — instance lifecycle, shapes, images, VNICs, networking and tags"
+    },
+    "inputs": [
+      {
+        "name": "tenancy_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Tenancy OCID",
+        "placeholder": "ocid1.tenancy.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "user_ocid",
+        "type": "string",
+        "value": null,
+        "label": "User OCID",
+        "placeholder": "ocid1.user.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "e.g. uk-london-1",
+        "required": true
+      },
+      {
+        "name": "fingerprint",
+        "type": "string",
+        "value": null,
+        "label": "Key Fingerprint",
+        "placeholder": "aa:bb:cc:… fingerprint of the uploaded API key",
+        "required": true
+      },
+      {
+        "name": "private_key",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key (PEM)",
+        "placeholder": "The API signing private key — full PEM, incl. BEGIN/END lines"
+      },
+      {
+        "name": "private_key_passphrase",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key Passphrase",
+        "placeholder": "Only if the key is encrypted (optional)"
+      },
+      {
+        "name": "compartment_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Compartment OCID",
+        "placeholder": "The instance's compartment OCID",
+        "required": true
+      },
+      {
+        "name": "instance_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Instance OCID",
+        "placeholder": "ocid1.instance.oc1..aaaa…",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "vnics",
+        "type": "object",
+        "value": null,
+        "label": "VNICs",
+        "placeholder": ""
+      },
+      {
+        "name": "primary_public_ip",
+        "type": "string",
+        "value": null,
+        "label": "Primary Public IP",
+        "placeholder": ""
+      },
+      {
+        "name": "primary_private_ip",
+        "type": "string",
+        "value": null,
+        "label": "Primary Private IP",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Count",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "oracle/compute/instance_reset": {
+    "hash": "3cd5634847b43afbb21ad42aed5503202e7fe8ff5510f18a9208a4b251d01545",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "OCI Compute: Reset Instance",
+    "description": "Reboot an Oracle Cloud Compute instance. Defaults to a graceful reboot; enable Force for an immediate power-cycle.",
+    "website": "https://www.flomation.co",
+    "icon": "oracle+rotate",
+    "date": "20/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Oracle Cloud",
+      "icon": "oracle",
+      "description": "Oracle Cloud Infrastructure (OCI) integrations"
+    },
+    "sub_category": {
+      "name": "Compute",
+      "icon": "server",
+      "description": "Oracle Cloud Compute — instance lifecycle, shapes, images, VNICs, networking and tags"
+    },
+    "inputs": [
+      {
+        "name": "tenancy_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Tenancy OCID",
+        "placeholder": "ocid1.tenancy.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "user_ocid",
+        "type": "string",
+        "value": null,
+        "label": "User OCID",
+        "placeholder": "ocid1.user.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "e.g. uk-london-1",
+        "required": true
+      },
+      {
+        "name": "fingerprint",
+        "type": "string",
+        "value": null,
+        "label": "Key Fingerprint",
+        "placeholder": "aa:bb:cc:… fingerprint of the uploaded API key",
+        "required": true
+      },
+      {
+        "name": "private_key",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key (PEM)",
+        "placeholder": "The API signing private key — full PEM, incl. BEGIN/END lines"
+      },
+      {
+        "name": "private_key_passphrase",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key Passphrase",
+        "placeholder": "Only if the key is encrypted (optional)"
+      },
+      {
+        "name": "instance_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Instance OCID",
+        "placeholder": "ocid1.instance.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "force",
+        "type": "boolean",
+        "value": null,
+        "label": "Force (immediate power-cycle)",
+        "placeholder": "Skip the graceful OS shutdown — risks data loss"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "instance",
+        "type": "object",
+        "value": null,
+        "label": "Instance",
+        "placeholder": ""
+      },
+      {
+        "name": "lifecycle_state",
+        "type": "string",
+        "value": null,
+        "label": "Lifecycle State",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "oracle/compute/instance_start": {
+    "hash": "15a99405198fa3b85f29fa815b310f8e8736d75455af099e8223fd3f78191da7",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "OCI Compute: Start Instance",
+    "description": "Power on a stopped Oracle Cloud Compute instance.",
+    "website": "https://www.flomation.co",
+    "icon": "oracle+play",
+    "date": "20/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Oracle Cloud",
+      "icon": "oracle",
+      "description": "Oracle Cloud Infrastructure (OCI) integrations"
+    },
+    "sub_category": {
+      "name": "Compute",
+      "icon": "server",
+      "description": "Oracle Cloud Compute — instance lifecycle, shapes, images, VNICs, networking and tags"
+    },
+    "inputs": [
+      {
+        "name": "tenancy_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Tenancy OCID",
+        "placeholder": "ocid1.tenancy.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "user_ocid",
+        "type": "string",
+        "value": null,
+        "label": "User OCID",
+        "placeholder": "ocid1.user.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "e.g. uk-london-1",
+        "required": true
+      },
+      {
+        "name": "fingerprint",
+        "type": "string",
+        "value": null,
+        "label": "Key Fingerprint",
+        "placeholder": "aa:bb:cc:… fingerprint of the uploaded API key",
+        "required": true
+      },
+      {
+        "name": "private_key",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key (PEM)",
+        "placeholder": "The API signing private key — full PEM, incl. BEGIN/END lines"
+      },
+      {
+        "name": "private_key_passphrase",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key Passphrase",
+        "placeholder": "Only if the key is encrypted (optional)"
+      },
+      {
+        "name": "instance_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Instance OCID",
+        "placeholder": "ocid1.instance.oc1..aaaa…",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "instance",
+        "type": "object",
+        "value": null,
+        "label": "Instance",
+        "placeholder": ""
+      },
+      {
+        "name": "lifecycle_state",
+        "type": "string",
+        "value": null,
+        "label": "Lifecycle State",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "oracle/compute/instance_stop": {
+    "hash": "29f4a0690cba605bac4621543bb7e776b0e8e3e8008448f6a88b797ea9b5923d",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "OCI Compute: Stop Instance",
+    "description": "Power off a running Oracle Cloud Compute instance. Defaults to a graceful OS shutdown; enable Force for an immediate power-off.",
+    "website": "https://www.flomation.co",
+    "icon": "oracle+stop",
+    "date": "20/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Oracle Cloud",
+      "icon": "oracle",
+      "description": "Oracle Cloud Infrastructure (OCI) integrations"
+    },
+    "sub_category": {
+      "name": "Compute",
+      "icon": "server",
+      "description": "Oracle Cloud Compute — instance lifecycle, shapes, images, VNICs, networking and tags"
+    },
+    "inputs": [
+      {
+        "name": "tenancy_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Tenancy OCID",
+        "placeholder": "ocid1.tenancy.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "user_ocid",
+        "type": "string",
+        "value": null,
+        "label": "User OCID",
+        "placeholder": "ocid1.user.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "e.g. uk-london-1",
+        "required": true
+      },
+      {
+        "name": "fingerprint",
+        "type": "string",
+        "value": null,
+        "label": "Key Fingerprint",
+        "placeholder": "aa:bb:cc:… fingerprint of the uploaded API key",
+        "required": true
+      },
+      {
+        "name": "private_key",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key (PEM)",
+        "placeholder": "The API signing private key — full PEM, incl. BEGIN/END lines"
+      },
+      {
+        "name": "private_key_passphrase",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key Passphrase",
+        "placeholder": "Only if the key is encrypted (optional)"
+      },
+      {
+        "name": "instance_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Instance OCID",
+        "placeholder": "ocid1.instance.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "force",
+        "type": "boolean",
+        "value": null,
+        "label": "Force (immediate power-off)",
+        "placeholder": "Skip the graceful OS shutdown — risks data loss"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "instance",
+        "type": "object",
+        "value": null,
+        "label": "Instance",
+        "placeholder": ""
+      },
+      {
+        "name": "lifecycle_state",
+        "type": "string",
+        "value": null,
+        "label": "Lifecycle State",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "oracle/compute/instance_tag_set": {
+    "hash": "5160d0c2448536c04cea4305ad3c32d235668e021bcf88765ededd503e0378bb",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "OCI Compute: Set Instance Tags",
+    "description": "Replace the freeform tags on an Oracle Cloud Compute instance with a JSON object of string key/values. Replaces all freeform tags on the instance.",
+    "website": "https://www.flomation.co",
+    "icon": "oracle+tag",
+    "date": "20/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Oracle Cloud",
+      "icon": "oracle",
+      "description": "Oracle Cloud Infrastructure (OCI) integrations"
+    },
+    "sub_category": {
+      "name": "Compute",
+      "icon": "server",
+      "description": "Oracle Cloud Compute — instance lifecycle, shapes, images, VNICs, networking and tags"
+    },
+    "inputs": [
+      {
+        "name": "tenancy_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Tenancy OCID",
+        "placeholder": "ocid1.tenancy.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "user_ocid",
+        "type": "string",
+        "value": null,
+        "label": "User OCID",
+        "placeholder": "ocid1.user.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "e.g. uk-london-1",
+        "required": true
+      },
+      {
+        "name": "fingerprint",
+        "type": "string",
+        "value": null,
+        "label": "Key Fingerprint",
+        "placeholder": "aa:bb:cc:… fingerprint of the uploaded API key",
+        "required": true
+      },
+      {
+        "name": "private_key",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key (PEM)",
+        "placeholder": "The API signing private key — full PEM, incl. BEGIN/END lines"
+      },
+      {
+        "name": "private_key_passphrase",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key Passphrase",
+        "placeholder": "Only if the key is encrypted (optional)"
+      },
+      {
+        "name": "instance_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Instance OCID",
+        "placeholder": "ocid1.instance.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "tags",
+        "type": "string",
+        "value": null,
+        "label": "Freeform Tags (JSON)",
+        "placeholder": "{\"env\":\"prod\",\"owner\":\"ops\"}",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "instance",
+        "type": "object",
+        "value": null,
+        "label": "Instance",
+        "placeholder": ""
+      },
+      {
+        "name": "lifecycle_state",
+        "type": "string",
+        "value": null,
+        "label": "Lifecycle State",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "oracle/compute/instance_terminate": {
+    "hash": "6f0e1651e95c1de7af540a14dfaedc3ca70b9b271dc4464460d8eb3958802dcb",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "OCI Compute: Terminate Instance",
+    "description": "Permanently delete an Oracle Cloud Compute instance. The boot volume is preserved by default (matching the OCI console); enable Delete Boot Volume to remove it too.",
+    "website": "https://www.flomation.co",
+    "icon": "oracle+trash",
+    "date": "20/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Oracle Cloud",
+      "icon": "oracle",
+      "description": "Oracle Cloud Infrastructure (OCI) integrations"
+    },
+    "sub_category": {
+      "name": "Compute",
+      "icon": "server",
+      "description": "Oracle Cloud Compute — instance lifecycle, shapes, images, VNICs, networking and tags"
+    },
+    "inputs": [
+      {
+        "name": "tenancy_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Tenancy OCID",
+        "placeholder": "ocid1.tenancy.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "user_ocid",
+        "type": "string",
+        "value": null,
+        "label": "User OCID",
+        "placeholder": "ocid1.user.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "e.g. uk-london-1",
+        "required": true
+      },
+      {
+        "name": "fingerprint",
+        "type": "string",
+        "value": null,
+        "label": "Key Fingerprint",
+        "placeholder": "aa:bb:cc:… fingerprint of the uploaded API key",
+        "required": true
+      },
+      {
+        "name": "private_key",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key (PEM)",
+        "placeholder": "The API signing private key — full PEM, incl. BEGIN/END lines"
+      },
+      {
+        "name": "private_key_passphrase",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key Passphrase",
+        "placeholder": "Only if the key is encrypted (optional)"
+      },
+      {
+        "name": "instance_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Instance OCID",
+        "placeholder": "ocid1.instance.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "delete_boot_volume",
+        "type": "boolean",
+        "value": null,
+        "label": "Delete Boot Volume",
+        "placeholder": "Also permanently delete the boot volume (default: preserved, matching the OCI console)"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "instance_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Instance OCID",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "oracle/compute/instance_update": {
+    "hash": "a8315e6ee6947679d35e403f25e65d45705553010707b3f020efaf1dd0e580c6",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "OCI Compute: Update Instance",
+    "description": "Rename an Oracle Cloud Compute instance and/or replace its freeform tags. Supply a new display name, a tags JSON object, or both.",
+    "website": "https://www.flomation.co",
+    "icon": "oracle+pen",
+    "date": "20/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Oracle Cloud",
+      "icon": "oracle",
+      "description": "Oracle Cloud Infrastructure (OCI) integrations"
+    },
+    "sub_category": {
+      "name": "Compute",
+      "icon": "server",
+      "description": "Oracle Cloud Compute — instance lifecycle, shapes, images, VNICs, networking and tags"
+    },
+    "inputs": [
+      {
+        "name": "tenancy_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Tenancy OCID",
+        "placeholder": "ocid1.tenancy.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "user_ocid",
+        "type": "string",
+        "value": null,
+        "label": "User OCID",
+        "placeholder": "ocid1.user.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "e.g. uk-london-1",
+        "required": true
+      },
+      {
+        "name": "fingerprint",
+        "type": "string",
+        "value": null,
+        "label": "Key Fingerprint",
+        "placeholder": "aa:bb:cc:… fingerprint of the uploaded API key",
+        "required": true
+      },
+      {
+        "name": "private_key",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key (PEM)",
+        "placeholder": "The API signing private key — full PEM, incl. BEGIN/END lines"
+      },
+      {
+        "name": "private_key_passphrase",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key Passphrase",
+        "placeholder": "Only if the key is encrypted (optional)"
+      },
+      {
+        "name": "instance_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Instance OCID",
+        "placeholder": "ocid1.instance.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "display_name",
+        "type": "string",
+        "value": null,
+        "label": "New Display Name",
+        "placeholder": "Leave blank to keep the current name"
+      },
+      {
+        "name": "tags",
+        "type": "string",
+        "value": null,
+        "label": "Freeform Tags (JSON)",
+        "placeholder": "{\"env\":\"prod\",\"owner\":\"ops\"} — replaces all freeform tags"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "instance",
+        "type": "object",
+        "value": null,
+        "label": "Instance",
+        "placeholder": ""
+      },
+      {
+        "name": "lifecycle_state",
+        "type": "string",
+        "value": null,
+        "label": "Lifecycle State",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "oracle/compute/shape_get_all": {
+    "hash": "d8adb0e521076336655c26822988023ab7b4bb9c7bdb523b8bd38c0f2e6309fe",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "OCI Compute: List Shapes",
+    "description": "List the Compute shapes (instance sizes — OCPUs and memory) available in an Oracle Cloud compartment. Optionally scope to one availability domain.",
+    "website": "https://www.flomation.co",
+    "icon": "oracle+microchip",
+    "date": "20/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Oracle Cloud",
+      "icon": "oracle",
+      "description": "Oracle Cloud Infrastructure (OCI) integrations"
+    },
+    "sub_category": {
+      "name": "Compute",
+      "icon": "server",
+      "description": "Oracle Cloud Compute — instance lifecycle, shapes, images, VNICs, networking and tags"
+    },
+    "inputs": [
+      {
+        "name": "tenancy_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Tenancy OCID",
+        "placeholder": "ocid1.tenancy.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "user_ocid",
+        "type": "string",
+        "value": null,
+        "label": "User OCID",
+        "placeholder": "ocid1.user.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "e.g. uk-london-1",
+        "required": true
+      },
+      {
+        "name": "fingerprint",
+        "type": "string",
+        "value": null,
+        "label": "Key Fingerprint",
+        "placeholder": "aa:bb:cc:… fingerprint of the uploaded API key",
+        "required": true
+      },
+      {
+        "name": "private_key",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key (PEM)",
+        "placeholder": "The API signing private key — full PEM, incl. BEGIN/END lines"
+      },
+      {
+        "name": "private_key_passphrase",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key Passphrase",
+        "placeholder": "Only if the key is encrypted (optional)"
+      },
+      {
+        "name": "compartment_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Compartment OCID",
+        "placeholder": "ocid1.compartment.oc1..aaaa… (use the tenancy OCID for the root)",
+        "required": true
+      },
+      {
+        "name": "availability_domain",
+        "type": "string",
+        "value": null,
+        "label": "Availability Domain",
+        "placeholder": "e.g. Uocm:UK-LONDON-1-AD-1 (optional)"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "shapes",
+        "type": "object",
+        "value": null,
+        "label": "Shapes",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Count",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "oracle/compute/subnet_get_all": {
+    "hash": "d209407d489238318171ac721c365c1b782b559c864e13bb66f88e33f774c55a",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "OCI Compute: List Subnets",
+    "description": "List the subnets in an Oracle Cloud compartment, optionally within one VCN — the network an instance's VNIC is placed in at launch.",
+    "website": "https://www.flomation.co",
+    "icon": "oracle+diagram-project",
+    "date": "20/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Oracle Cloud",
+      "icon": "oracle",
+      "description": "Oracle Cloud Infrastructure (OCI) integrations"
+    },
+    "sub_category": {
+      "name": "Compute",
+      "icon": "server",
+      "description": "Oracle Cloud Compute — instance lifecycle, shapes, images, VNICs, networking and tags"
+    },
+    "inputs": [
+      {
+        "name": "tenancy_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Tenancy OCID",
+        "placeholder": "ocid1.tenancy.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "user_ocid",
+        "type": "string",
+        "value": null,
+        "label": "User OCID",
+        "placeholder": "ocid1.user.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "e.g. uk-london-1",
+        "required": true
+      },
+      {
+        "name": "fingerprint",
+        "type": "string",
+        "value": null,
+        "label": "Key Fingerprint",
+        "placeholder": "aa:bb:cc:… fingerprint of the uploaded API key",
+        "required": true
+      },
+      {
+        "name": "private_key",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key (PEM)",
+        "placeholder": "The API signing private key — full PEM, incl. BEGIN/END lines"
+      },
+      {
+        "name": "private_key_passphrase",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key Passphrase",
+        "placeholder": "Only if the key is encrypted (optional)"
+      },
+      {
+        "name": "compartment_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Compartment OCID",
+        "placeholder": "ocid1.compartment.oc1..aaaa… (use the tenancy OCID for the root)",
+        "required": true
+      },
+      {
+        "name": "vcn_ocid",
+        "type": "string",
+        "value": null,
+        "label": "VCN OCID",
+        "placeholder": "Only subnets in this VCN (optional)"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "subnets",
+        "type": "object",
+        "value": null,
+        "label": "Subnets",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Count",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "oracle/compute/vcn_get_all": {
+    "hash": "8cc42a8c6b1bb16af7d8e1be48b77c989b6d1de6a801e088e94d7819ade17485",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "OCI Compute: List VCNs",
+    "description": "List the Virtual Cloud Networks (VCNs) in an Oracle Cloud compartment — the networks that hold subnets and instances.",
+    "website": "https://www.flomation.co",
+    "icon": "oracle+network-wired",
+    "date": "20/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Oracle Cloud",
+      "icon": "oracle",
+      "description": "Oracle Cloud Infrastructure (OCI) integrations"
+    },
+    "sub_category": {
+      "name": "Compute",
+      "icon": "server",
+      "description": "Oracle Cloud Compute — instance lifecycle, shapes, images, VNICs, networking and tags"
+    },
+    "inputs": [
+      {
+        "name": "tenancy_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Tenancy OCID",
+        "placeholder": "ocid1.tenancy.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "user_ocid",
+        "type": "string",
+        "value": null,
+        "label": "User OCID",
+        "placeholder": "ocid1.user.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "e.g. uk-london-1",
+        "required": true
+      },
+      {
+        "name": "fingerprint",
+        "type": "string",
+        "value": null,
+        "label": "Key Fingerprint",
+        "placeholder": "aa:bb:cc:… fingerprint of the uploaded API key",
+        "required": true
+      },
+      {
+        "name": "private_key",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key (PEM)",
+        "placeholder": "The API signing private key — full PEM, incl. BEGIN/END lines"
+      },
+      {
+        "name": "private_key_passphrase",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key Passphrase",
+        "placeholder": "Only if the key is encrypted (optional)"
+      },
+      {
+        "name": "compartment_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Compartment OCID",
+        "placeholder": "ocid1.compartment.oc1..aaaa… (use the tenancy OCID for the root)",
+        "required": true
+      },
+      {
+        "name": "display_name",
+        "type": "string",
+        "value": null,
+        "label": "Display Name filter",
+        "placeholder": "Only VCNs with this exact name (optional)"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "vcns",
+        "type": "object",
+        "value": null,
+        "label": "VCNs",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Count",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
   "output/set": {
     "hash": "05f0e3818a441c5837d9b6543e663da5f0a4e6febe515914d851620eb82ec9b3",
     "author": "Andy Esser",
