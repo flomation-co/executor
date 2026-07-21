@@ -11008,6 +11008,195 @@
       }
     ]
   },
+  "aws/rds/apply_pending_maintenance_action": {
+    "hash": "e6578abaa932eaf7fce346dc31be4dc022514238e001c7663a0f30f5343ef32d",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "AWS RDS Apply Pending Maintenance Action",
+    "description": "Apply or opt in/out of a pending maintenance action on an RDS resource.",
+    "website": "https://www.flomation.co",
+    "icon": "calendar+play",
+    "date": "21/07/2026",
+    "type": 2,
+    "category": {
+      "name": "AWS",
+      "icon": "cloud",
+      "description": "Amazon Web Services integrations"
+    },
+    "sub_category": {
+      "name": "RDS",
+      "icon": "database",
+      "description": "Relational Database Service operations"
+    },
+    "inputs": [
+      {
+        "name": "auth_method",
+        "type": "string",
+        "value": null,
+        "label": "Authentication",
+        "placeholder": "",
+        "required": true,
+        "options": [
+          {
+            "name": "Access Keys",
+            "value": "keys"
+          },
+          {
+            "name": "Assume Role (cross-account)",
+            "value": "assume_role"
+          },
+          {
+            "name": "Managed Role (Credential)",
+            "value": "credential"
+          }
+        ]
+      },
+      {
+        "name": "aws_access_key",
+        "type": "secret",
+        "value": null,
+        "label": "AWS Access Key",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "aws_secret_key",
+        "type": "secret",
+        "value": null,
+        "label": "AWS Secret Key",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "aws_region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "eu-west-2",
+        "required": true
+      },
+      {
+        "name": "aws_session_token",
+        "type": "secret",
+        "value": null,
+        "label": "Session Token (optional)",
+        "placeholder": "",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "assume_role_arn",
+        "type": "string",
+        "value": null,
+        "label": "Role ARN to Assume",
+        "placeholder": "arn:aws:iam::\u003cyour-account\u003e:role/FlomationAccess",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "assume_role"
+          ]
+        }
+      },
+      {
+        "name": "external_id",
+        "type": "string",
+        "value": null,
+        "label": "Assume Role External ID (optional)",
+        "placeholder": "Must match the External ID in the role's trust policy",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "assume_role"
+          ]
+        }
+      },
+      {
+        "name": "credential",
+        "type": "credential",
+        "value": null,
+        "label": "AWS Role Credential",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "credential"
+          ]
+        }
+      },
+      {
+        "name": "resource_identifier",
+        "type": "string",
+        "value": null,
+        "label": "Resource ARN",
+        "placeholder": "arn:aws:rds:...:db:my-database",
+        "required": true
+      },
+      {
+        "name": "apply_action",
+        "type": "string",
+        "value": null,
+        "label": "Maintenance Action",
+        "placeholder": "system-update",
+        "required": true
+      },
+      {
+        "name": "opt_in_type",
+        "type": "string",
+        "value": null,
+        "label": "Opt-in Type",
+        "placeholder": "",
+        "required": true,
+        "options": [
+          {
+            "name": "Immediate",
+            "value": "immediate"
+          },
+          {
+            "name": "Next Maintenance Window",
+            "value": "next-maintenance"
+          },
+          {
+            "name": "Undo Opt-in",
+            "value": "undo-opt-in"
+          }
+        ]
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "resource",
+        "type": "object",
+        "value": null,
+        "label": "Resource Pending Actions",
+        "placeholder": ""
+      }
+    ]
+  },
   "aws/rds/batch_execute_statement": {
     "hash": "0aa9da5ea5a14069da0167f395fdfb10f6fd379f56e499beb1b8b8227f7d8542",
     "author": "Andy Esser",
@@ -11375,6 +11564,165 @@
         "type": "string",
         "value": null,
         "label": "Transaction ID",
+        "placeholder": ""
+      }
+    ]
+  },
+  "aws/rds/cancel_export_task": {
+    "hash": "4ef360449d95762380d1c255614b52b66b264f9d7a5d4ed87d8d88ad9861b517",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "AWS RDS Cancel Export Task",
+    "description": "Cancel an in-progress RDS snapshot/cluster export task.",
+    "website": "https://www.flomation.co",
+    "icon": "box-archive+xmark",
+    "date": "21/07/2026",
+    "type": 2,
+    "category": {
+      "name": "AWS",
+      "icon": "cloud",
+      "description": "Amazon Web Services integrations"
+    },
+    "sub_category": {
+      "name": "RDS",
+      "icon": "database",
+      "description": "Relational Database Service operations"
+    },
+    "inputs": [
+      {
+        "name": "auth_method",
+        "type": "string",
+        "value": null,
+        "label": "Authentication",
+        "placeholder": "",
+        "required": true,
+        "options": [
+          {
+            "name": "Access Keys",
+            "value": "keys"
+          },
+          {
+            "name": "Assume Role (cross-account)",
+            "value": "assume_role"
+          },
+          {
+            "name": "Managed Role (Credential)",
+            "value": "credential"
+          }
+        ]
+      },
+      {
+        "name": "aws_access_key",
+        "type": "secret",
+        "value": null,
+        "label": "AWS Access Key",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "aws_secret_key",
+        "type": "secret",
+        "value": null,
+        "label": "AWS Secret Key",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "aws_region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "eu-west-2",
+        "required": true
+      },
+      {
+        "name": "aws_session_token",
+        "type": "secret",
+        "value": null,
+        "label": "Session Token (optional)",
+        "placeholder": "",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "assume_role_arn",
+        "type": "string",
+        "value": null,
+        "label": "Role ARN to Assume",
+        "placeholder": "arn:aws:iam::\u003cyour-account\u003e:role/FlomationAccess",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "assume_role"
+          ]
+        }
+      },
+      {
+        "name": "external_id",
+        "type": "string",
+        "value": null,
+        "label": "Assume Role External ID (optional)",
+        "placeholder": "Must match the External ID in the role's trust policy",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "assume_role"
+          ]
+        }
+      },
+      {
+        "name": "credential",
+        "type": "credential",
+        "value": null,
+        "label": "AWS Role Credential",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "credential"
+          ]
+        }
+      },
+      {
+        "name": "export_task_identifier",
+        "type": "string",
+        "value": null,
+        "label": "Export Task Identifier",
+        "placeholder": "my-export",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "export_task",
+        "type": "object",
+        "value": null,
+        "label": "Export Task",
         "placeholder": ""
       }
     ]
@@ -15923,6 +16271,171 @@
       }
     ]
   },
+  "aws/rds/delete_db_instance_automated_backup": {
+    "hash": "21961b7b2fc0a874603dcd63c0bdea0af9cd13142b5426ba44cee6b15a698cdd",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "AWS RDS Delete DB Instance Automated Backup",
+    "description": "Delete a retained RDS DB instance automated backup by resource id or ARN.",
+    "website": "https://www.flomation.co",
+    "icon": "clock-rotate-left+trash",
+    "date": "21/07/2026",
+    "type": 2,
+    "category": {
+      "name": "AWS",
+      "icon": "cloud",
+      "description": "Amazon Web Services integrations"
+    },
+    "sub_category": {
+      "name": "RDS",
+      "icon": "database",
+      "description": "Relational Database Service operations"
+    },
+    "inputs": [
+      {
+        "name": "auth_method",
+        "type": "string",
+        "value": null,
+        "label": "Authentication",
+        "placeholder": "",
+        "required": true,
+        "options": [
+          {
+            "name": "Access Keys",
+            "value": "keys"
+          },
+          {
+            "name": "Assume Role (cross-account)",
+            "value": "assume_role"
+          },
+          {
+            "name": "Managed Role (Credential)",
+            "value": "credential"
+          }
+        ]
+      },
+      {
+        "name": "aws_access_key",
+        "type": "secret",
+        "value": null,
+        "label": "AWS Access Key",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "aws_secret_key",
+        "type": "secret",
+        "value": null,
+        "label": "AWS Secret Key",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "aws_region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "eu-west-2",
+        "required": true
+      },
+      {
+        "name": "aws_session_token",
+        "type": "secret",
+        "value": null,
+        "label": "Session Token (optional)",
+        "placeholder": "",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "assume_role_arn",
+        "type": "string",
+        "value": null,
+        "label": "Role ARN to Assume",
+        "placeholder": "arn:aws:iam::\u003cyour-account\u003e:role/FlomationAccess",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "assume_role"
+          ]
+        }
+      },
+      {
+        "name": "external_id",
+        "type": "string",
+        "value": null,
+        "label": "Assume Role External ID (optional)",
+        "placeholder": "Must match the External ID in the role's trust policy",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "assume_role"
+          ]
+        }
+      },
+      {
+        "name": "credential",
+        "type": "credential",
+        "value": null,
+        "label": "AWS Role Credential",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "credential"
+          ]
+        }
+      },
+      {
+        "name": "dbi_resource_id",
+        "type": "string",
+        "value": null,
+        "label": "DBI Resource ID (optional)",
+        "placeholder": "db-XXXXXXXXXXXXXXXX"
+      },
+      {
+        "name": "db_instance_automated_backups_arn",
+        "type": "string",
+        "value": null,
+        "label": "Automated Backups ARN (optional)",
+        "placeholder": "arn:aws:rds:...:auto-backup:..."
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "backup",
+        "type": "object",
+        "value": null,
+        "label": "Automated Backup",
+        "placeholder": ""
+      }
+    ]
+  },
   "aws/rds/delete_db_parameter_group": {
     "hash": "42a68a737ddcdc2e5acab45008bc6f288bbfdfe0a8cc864c293a8c3c56538ca5",
     "author": "Andy Esser",
@@ -18400,6 +18913,178 @@
       }
     ]
   },
+  "aws/rds/describe_db_instance_automated_backups": {
+    "hash": "b7234e8cbaae545d819f2017e3dea7da591da21a83bcdca74fca65fe62b71d93",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "AWS RDS Describe DB Instance Automated Backups",
+    "description": "List RDS DB instance automated backups, optionally by identifier or resource id.",
+    "website": "https://www.flomation.co",
+    "icon": "clock-rotate-left+magnifying-glass",
+    "date": "21/07/2026",
+    "type": 2,
+    "category": {
+      "name": "AWS",
+      "icon": "cloud",
+      "description": "Amazon Web Services integrations"
+    },
+    "sub_category": {
+      "name": "RDS",
+      "icon": "database",
+      "description": "Relational Database Service operations"
+    },
+    "inputs": [
+      {
+        "name": "auth_method",
+        "type": "string",
+        "value": null,
+        "label": "Authentication",
+        "placeholder": "",
+        "required": true,
+        "options": [
+          {
+            "name": "Access Keys",
+            "value": "keys"
+          },
+          {
+            "name": "Assume Role (cross-account)",
+            "value": "assume_role"
+          },
+          {
+            "name": "Managed Role (Credential)",
+            "value": "credential"
+          }
+        ]
+      },
+      {
+        "name": "aws_access_key",
+        "type": "secret",
+        "value": null,
+        "label": "AWS Access Key",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "aws_secret_key",
+        "type": "secret",
+        "value": null,
+        "label": "AWS Secret Key",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "aws_region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "eu-west-2",
+        "required": true
+      },
+      {
+        "name": "aws_session_token",
+        "type": "secret",
+        "value": null,
+        "label": "Session Token (optional)",
+        "placeholder": "",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "assume_role_arn",
+        "type": "string",
+        "value": null,
+        "label": "Role ARN to Assume",
+        "placeholder": "arn:aws:iam::\u003cyour-account\u003e:role/FlomationAccess",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "assume_role"
+          ]
+        }
+      },
+      {
+        "name": "external_id",
+        "type": "string",
+        "value": null,
+        "label": "Assume Role External ID (optional)",
+        "placeholder": "Must match the External ID in the role's trust policy",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "assume_role"
+          ]
+        }
+      },
+      {
+        "name": "credential",
+        "type": "credential",
+        "value": null,
+        "label": "AWS Role Credential",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "credential"
+          ]
+        }
+      },
+      {
+        "name": "db_instance_identifier",
+        "type": "string",
+        "value": null,
+        "label": "DB Instance Identifier (optional)",
+        "placeholder": "Leave blank to list all"
+      },
+      {
+        "name": "dbi_resource_id",
+        "type": "string",
+        "value": null,
+        "label": "DBI Resource ID (optional)",
+        "placeholder": "db-XXXXXXXXXXXXXXXX"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "backups",
+        "type": "object",
+        "value": null,
+        "label": "Automated Backups",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Count",
+        "placeholder": ""
+      }
+    ]
+  },
   "aws/rds/describe_db_instances": {
     "hash": "efcb81eab5e2862bb45a3743e4e89a720d7849cb751f1462606986eef4284856",
     "author": "Andy Esser",
@@ -19632,6 +20317,201 @@
       }
     ]
   },
+  "aws/rds/describe_event_categories": {
+    "hash": "846d6323bde711250b099cbb92a4ea9d93a448e99ba7ca92fcf597c8edc83430",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "AWS RDS Describe Event Categories",
+    "description": "List the RDS event categories available for each source type.",
+    "website": "https://www.flomation.co",
+    "icon": "bell+list",
+    "date": "21/07/2026",
+    "type": 2,
+    "category": {
+      "name": "AWS",
+      "icon": "cloud",
+      "description": "Amazon Web Services integrations"
+    },
+    "sub_category": {
+      "name": "RDS",
+      "icon": "database",
+      "description": "Relational Database Service operations"
+    },
+    "inputs": [
+      {
+        "name": "auth_method",
+        "type": "string",
+        "value": null,
+        "label": "Authentication",
+        "placeholder": "",
+        "required": true,
+        "options": [
+          {
+            "name": "Access Keys",
+            "value": "keys"
+          },
+          {
+            "name": "Assume Role (cross-account)",
+            "value": "assume_role"
+          },
+          {
+            "name": "Managed Role (Credential)",
+            "value": "credential"
+          }
+        ]
+      },
+      {
+        "name": "aws_access_key",
+        "type": "secret",
+        "value": null,
+        "label": "AWS Access Key",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "aws_secret_key",
+        "type": "secret",
+        "value": null,
+        "label": "AWS Secret Key",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "aws_region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "eu-west-2",
+        "required": true
+      },
+      {
+        "name": "aws_session_token",
+        "type": "secret",
+        "value": null,
+        "label": "Session Token (optional)",
+        "placeholder": "",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "assume_role_arn",
+        "type": "string",
+        "value": null,
+        "label": "Role ARN to Assume",
+        "placeholder": "arn:aws:iam::\u003cyour-account\u003e:role/FlomationAccess",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "assume_role"
+          ]
+        }
+      },
+      {
+        "name": "external_id",
+        "type": "string",
+        "value": null,
+        "label": "Assume Role External ID (optional)",
+        "placeholder": "Must match the External ID in the role's trust policy",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "assume_role"
+          ]
+        }
+      },
+      {
+        "name": "credential",
+        "type": "credential",
+        "value": null,
+        "label": "AWS Role Credential",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "credential"
+          ]
+        }
+      },
+      {
+        "name": "source_type",
+        "type": "string",
+        "value": null,
+        "label": "Source Type (optional)",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "All source types",
+            "value": ""
+          },
+          {
+            "name": "DB Instance",
+            "value": "db-instance"
+          },
+          {
+            "name": "DB Cluster",
+            "value": "db-cluster"
+          },
+          {
+            "name": "DB Snapshot",
+            "value": "db-snapshot"
+          },
+          {
+            "name": "DB Parameter Group",
+            "value": "db-parameter-group"
+          },
+          {
+            "name": "DB Security Group",
+            "value": "db-security-group"
+          },
+          {
+            "name": "DB Cluster Snapshot",
+            "value": "db-cluster-snapshot"
+          }
+        ]
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "categories",
+        "type": "object",
+        "value": null,
+        "label": "Event Categories",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Count",
+        "placeholder": ""
+      }
+    ]
+  },
   "aws/rds/describe_events": {
     "hash": "c39d132104f39d593c933eb551b898a50c9ce5b7a52a9fb5ff25a0729d3edc04",
     "author": "Andy Esser",
@@ -19830,6 +20710,178 @@
         "type": "object",
         "value": null,
         "label": "Events",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Count",
+        "placeholder": ""
+      }
+    ]
+  },
+  "aws/rds/describe_export_tasks": {
+    "hash": "5f6faa17e1d82c33ddf1314d8ebd126af5cf4ae8001e692fcfe6fb18fc2411f0",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "AWS RDS Describe Export Tasks",
+    "description": "List RDS snapshot/cluster export tasks, optionally by identifier or source ARN.",
+    "website": "https://www.flomation.co",
+    "icon": "box-archive+magnifying-glass",
+    "date": "21/07/2026",
+    "type": 2,
+    "category": {
+      "name": "AWS",
+      "icon": "cloud",
+      "description": "Amazon Web Services integrations"
+    },
+    "sub_category": {
+      "name": "RDS",
+      "icon": "database",
+      "description": "Relational Database Service operations"
+    },
+    "inputs": [
+      {
+        "name": "auth_method",
+        "type": "string",
+        "value": null,
+        "label": "Authentication",
+        "placeholder": "",
+        "required": true,
+        "options": [
+          {
+            "name": "Access Keys",
+            "value": "keys"
+          },
+          {
+            "name": "Assume Role (cross-account)",
+            "value": "assume_role"
+          },
+          {
+            "name": "Managed Role (Credential)",
+            "value": "credential"
+          }
+        ]
+      },
+      {
+        "name": "aws_access_key",
+        "type": "secret",
+        "value": null,
+        "label": "AWS Access Key",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "aws_secret_key",
+        "type": "secret",
+        "value": null,
+        "label": "AWS Secret Key",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "aws_region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "eu-west-2",
+        "required": true
+      },
+      {
+        "name": "aws_session_token",
+        "type": "secret",
+        "value": null,
+        "label": "Session Token (optional)",
+        "placeholder": "",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "assume_role_arn",
+        "type": "string",
+        "value": null,
+        "label": "Role ARN to Assume",
+        "placeholder": "arn:aws:iam::\u003cyour-account\u003e:role/FlomationAccess",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "assume_role"
+          ]
+        }
+      },
+      {
+        "name": "external_id",
+        "type": "string",
+        "value": null,
+        "label": "Assume Role External ID (optional)",
+        "placeholder": "Must match the External ID in the role's trust policy",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "assume_role"
+          ]
+        }
+      },
+      {
+        "name": "credential",
+        "type": "credential",
+        "value": null,
+        "label": "AWS Role Credential",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "credential"
+          ]
+        }
+      },
+      {
+        "name": "export_task_identifier",
+        "type": "string",
+        "value": null,
+        "label": "Export Task Identifier (optional)",
+        "placeholder": "Leave blank to list all"
+      },
+      {
+        "name": "source_arn",
+        "type": "string",
+        "value": null,
+        "label": "Source ARN (optional)",
+        "placeholder": "arn:aws:rds:...:snapshot:..."
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "export_tasks",
+        "type": "object",
+        "value": null,
+        "label": "Export Tasks",
         "placeholder": ""
       },
       {
@@ -20178,6 +21230,400 @@
       }
     ]
   },
+  "aws/rds/describe_orderable_db_instance_options": {
+    "hash": "05fd9eb1cf7e1846df3a664488cb66fd0921bff780f2cf8b926f2dde0109d5d1",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "AWS RDS Describe Orderable DB Instance Options",
+    "description": "List orderable RDS DB instance options for an engine (class, version, storage).",
+    "website": "https://www.flomation.co",
+    "icon": "server+magnifying-glass",
+    "date": "21/07/2026",
+    "type": 2,
+    "category": {
+      "name": "AWS",
+      "icon": "cloud",
+      "description": "Amazon Web Services integrations"
+    },
+    "sub_category": {
+      "name": "RDS",
+      "icon": "database",
+      "description": "Relational Database Service operations"
+    },
+    "inputs": [
+      {
+        "name": "auth_method",
+        "type": "string",
+        "value": null,
+        "label": "Authentication",
+        "placeholder": "",
+        "required": true,
+        "options": [
+          {
+            "name": "Access Keys",
+            "value": "keys"
+          },
+          {
+            "name": "Assume Role (cross-account)",
+            "value": "assume_role"
+          },
+          {
+            "name": "Managed Role (Credential)",
+            "value": "credential"
+          }
+        ]
+      },
+      {
+        "name": "aws_access_key",
+        "type": "secret",
+        "value": null,
+        "label": "AWS Access Key",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "aws_secret_key",
+        "type": "secret",
+        "value": null,
+        "label": "AWS Secret Key",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "aws_region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "eu-west-2",
+        "required": true
+      },
+      {
+        "name": "aws_session_token",
+        "type": "secret",
+        "value": null,
+        "label": "Session Token (optional)",
+        "placeholder": "",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "assume_role_arn",
+        "type": "string",
+        "value": null,
+        "label": "Role ARN to Assume",
+        "placeholder": "arn:aws:iam::\u003cyour-account\u003e:role/FlomationAccess",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "assume_role"
+          ]
+        }
+      },
+      {
+        "name": "external_id",
+        "type": "string",
+        "value": null,
+        "label": "Assume Role External ID (optional)",
+        "placeholder": "Must match the External ID in the role's trust policy",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "assume_role"
+          ]
+        }
+      },
+      {
+        "name": "credential",
+        "type": "credential",
+        "value": null,
+        "label": "AWS Role Credential",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "credential"
+          ]
+        }
+      },
+      {
+        "name": "engine",
+        "type": "string",
+        "value": null,
+        "label": "Engine",
+        "placeholder": "",
+        "required": true,
+        "options": [
+          {
+            "name": "PostgreSQL",
+            "value": "postgres"
+          },
+          {
+            "name": "MySQL",
+            "value": "mysql"
+          },
+          {
+            "name": "MariaDB",
+            "value": "mariadb"
+          },
+          {
+            "name": "Oracle (SE2)",
+            "value": "oracle-se2"
+          },
+          {
+            "name": "Oracle (EE)",
+            "value": "oracle-ee"
+          },
+          {
+            "name": "SQL Server (Express)",
+            "value": "sqlserver-ex"
+          },
+          {
+            "name": "SQL Server (SE)",
+            "value": "sqlserver-se"
+          },
+          {
+            "name": "SQL Server (EE)",
+            "value": "sqlserver-ee"
+          },
+          {
+            "name": "Aurora MySQL",
+            "value": "aurora-mysql"
+          },
+          {
+            "name": "Aurora PostgreSQL",
+            "value": "aurora-postgresql"
+          }
+        ]
+      },
+      {
+        "name": "engine_version",
+        "type": "string",
+        "value": null,
+        "label": "Engine Version (optional)",
+        "placeholder": "e.g. 16.3"
+      },
+      {
+        "name": "db_instance_class",
+        "type": "string",
+        "value": null,
+        "label": "DB Instance Class (optional)",
+        "placeholder": "e.g. db.t3.micro"
+      },
+      {
+        "name": "license_model",
+        "type": "string",
+        "value": null,
+        "label": "License Model (optional)",
+        "placeholder": "e.g. license-included, general-public-license"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "options",
+        "type": "object",
+        "value": null,
+        "label": "Orderable Options",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Count",
+        "placeholder": ""
+      }
+    ]
+  },
+  "aws/rds/describe_pending_maintenance_actions": {
+    "hash": "7c4412cea8c2005548a818f183e403f6a096a1eb6bbbac9e1b6414b038fcdd34",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "AWS RDS Describe Pending Maintenance Actions",
+    "description": "List pending maintenance actions for RDS resources, optionally by resource ARN.",
+    "website": "https://www.flomation.co",
+    "icon": "calendar+magnifying-glass",
+    "date": "21/07/2026",
+    "type": 2,
+    "category": {
+      "name": "AWS",
+      "icon": "cloud",
+      "description": "Amazon Web Services integrations"
+    },
+    "sub_category": {
+      "name": "RDS",
+      "icon": "database",
+      "description": "Relational Database Service operations"
+    },
+    "inputs": [
+      {
+        "name": "auth_method",
+        "type": "string",
+        "value": null,
+        "label": "Authentication",
+        "placeholder": "",
+        "required": true,
+        "options": [
+          {
+            "name": "Access Keys",
+            "value": "keys"
+          },
+          {
+            "name": "Assume Role (cross-account)",
+            "value": "assume_role"
+          },
+          {
+            "name": "Managed Role (Credential)",
+            "value": "credential"
+          }
+        ]
+      },
+      {
+        "name": "aws_access_key",
+        "type": "secret",
+        "value": null,
+        "label": "AWS Access Key",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "aws_secret_key",
+        "type": "secret",
+        "value": null,
+        "label": "AWS Secret Key",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "aws_region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "eu-west-2",
+        "required": true
+      },
+      {
+        "name": "aws_session_token",
+        "type": "secret",
+        "value": null,
+        "label": "Session Token (optional)",
+        "placeholder": "",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "assume_role_arn",
+        "type": "string",
+        "value": null,
+        "label": "Role ARN to Assume",
+        "placeholder": "arn:aws:iam::\u003cyour-account\u003e:role/FlomationAccess",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "assume_role"
+          ]
+        }
+      },
+      {
+        "name": "external_id",
+        "type": "string",
+        "value": null,
+        "label": "Assume Role External ID (optional)",
+        "placeholder": "Must match the External ID in the role's trust policy",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "assume_role"
+          ]
+        }
+      },
+      {
+        "name": "credential",
+        "type": "credential",
+        "value": null,
+        "label": "AWS Role Credential",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "credential"
+          ]
+        }
+      },
+      {
+        "name": "resource_identifier",
+        "type": "string",
+        "value": null,
+        "label": "Resource ARN (optional)",
+        "placeholder": "Leave blank to list all; e.g. arn:aws:rds:...:db:my-database"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "pending",
+        "type": "object",
+        "value": null,
+        "label": "Pending Maintenance Actions",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Count",
+        "placeholder": ""
+      }
+    ]
+  },
   "aws/rds/describe_reserved_db_instances": {
     "hash": "6501d6065d540f485d52bf2549004e77c8b364ecf2c33b96bbedb1bff0303161",
     "author": "Andy Esser",
@@ -20339,6 +21785,171 @@
         "type": "object",
         "value": null,
         "label": "Reserved Instances",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Count",
+        "placeholder": ""
+      }
+    ]
+  },
+  "aws/rds/describe_source_regions": {
+    "hash": "ca85fa423d5424f3b45bb529ae162417a27bf9e9ece70904d4ce0ad993ac6a87",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "AWS RDS Describe Source Regions",
+    "description": "List Regions that can be a source for RDS read replicas or snapshots.",
+    "website": "https://www.flomation.co",
+    "icon": "globe+list",
+    "date": "21/07/2026",
+    "type": 2,
+    "category": {
+      "name": "AWS",
+      "icon": "cloud",
+      "description": "Amazon Web Services integrations"
+    },
+    "sub_category": {
+      "name": "RDS",
+      "icon": "database",
+      "description": "Relational Database Service operations"
+    },
+    "inputs": [
+      {
+        "name": "auth_method",
+        "type": "string",
+        "value": null,
+        "label": "Authentication",
+        "placeholder": "",
+        "required": true,
+        "options": [
+          {
+            "name": "Access Keys",
+            "value": "keys"
+          },
+          {
+            "name": "Assume Role (cross-account)",
+            "value": "assume_role"
+          },
+          {
+            "name": "Managed Role (Credential)",
+            "value": "credential"
+          }
+        ]
+      },
+      {
+        "name": "aws_access_key",
+        "type": "secret",
+        "value": null,
+        "label": "AWS Access Key",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "aws_secret_key",
+        "type": "secret",
+        "value": null,
+        "label": "AWS Secret Key",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "aws_region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "eu-west-2",
+        "required": true
+      },
+      {
+        "name": "aws_session_token",
+        "type": "secret",
+        "value": null,
+        "label": "Session Token (optional)",
+        "placeholder": "",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "assume_role_arn",
+        "type": "string",
+        "value": null,
+        "label": "Role ARN to Assume",
+        "placeholder": "arn:aws:iam::\u003cyour-account\u003e:role/FlomationAccess",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "assume_role"
+          ]
+        }
+      },
+      {
+        "name": "external_id",
+        "type": "string",
+        "value": null,
+        "label": "Assume Role External ID (optional)",
+        "placeholder": "Must match the External ID in the role's trust policy",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "assume_role"
+          ]
+        }
+      },
+      {
+        "name": "credential",
+        "type": "credential",
+        "value": null,
+        "label": "AWS Role Credential",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "credential"
+          ]
+        }
+      },
+      {
+        "name": "region_name",
+        "type": "string",
+        "value": null,
+        "label": "Source Region Name (optional)",
+        "placeholder": "Leave blank to list all, e.g. us-east-1"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "regions",
+        "type": "object",
+        "value": null,
+        "label": "Source Regions",
         "placeholder": ""
       },
       {
@@ -21243,6 +22854,171 @@
         "type": "integer",
         "value": null,
         "label": "Count",
+        "placeholder": ""
+      }
+    ]
+  },
+  "aws/rds/modify_certificates": {
+    "hash": "3dfa4f07f4694b3b35b26b2987e4b5d28e9534b748eb152394d0e72fad4cf28f",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "AWS RDS Modify Certificates",
+    "description": "Override or reset the account-default RDS CA certificate.",
+    "website": "https://www.flomation.co",
+    "icon": "lock+pen",
+    "date": "21/07/2026",
+    "type": 2,
+    "category": {
+      "name": "AWS",
+      "icon": "cloud",
+      "description": "Amazon Web Services integrations"
+    },
+    "sub_category": {
+      "name": "RDS",
+      "icon": "database",
+      "description": "Relational Database Service operations"
+    },
+    "inputs": [
+      {
+        "name": "auth_method",
+        "type": "string",
+        "value": null,
+        "label": "Authentication",
+        "placeholder": "",
+        "required": true,
+        "options": [
+          {
+            "name": "Access Keys",
+            "value": "keys"
+          },
+          {
+            "name": "Assume Role (cross-account)",
+            "value": "assume_role"
+          },
+          {
+            "name": "Managed Role (Credential)",
+            "value": "credential"
+          }
+        ]
+      },
+      {
+        "name": "aws_access_key",
+        "type": "secret",
+        "value": null,
+        "label": "AWS Access Key",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "aws_secret_key",
+        "type": "secret",
+        "value": null,
+        "label": "AWS Secret Key",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "aws_region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "eu-west-2",
+        "required": true
+      },
+      {
+        "name": "aws_session_token",
+        "type": "secret",
+        "value": null,
+        "label": "Session Token (optional)",
+        "placeholder": "",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "assume_role_arn",
+        "type": "string",
+        "value": null,
+        "label": "Role ARN to Assume",
+        "placeholder": "arn:aws:iam::\u003cyour-account\u003e:role/FlomationAccess",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "assume_role"
+          ]
+        }
+      },
+      {
+        "name": "external_id",
+        "type": "string",
+        "value": null,
+        "label": "Assume Role External ID (optional)",
+        "placeholder": "Must match the External ID in the role's trust policy",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "assume_role"
+          ]
+        }
+      },
+      {
+        "name": "credential",
+        "type": "credential",
+        "value": null,
+        "label": "AWS Role Credential",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "credential"
+          ]
+        }
+      },
+      {
+        "name": "certificate_identifier",
+        "type": "string",
+        "value": null,
+        "label": "Certificate Identifier (optional)",
+        "placeholder": "rds-ca-rsa2048-g1"
+      },
+      {
+        "name": "remove_customer_override",
+        "type": "boolean",
+        "value": null,
+        "label": "Remove Customer Override",
+        "placeholder": ""
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "certificate",
+        "type": "object",
+        "value": null,
+        "label": "Certificate",
         "placeholder": ""
       }
     ]
@@ -23043,6 +24819,186 @@
       }
     ]
   },
+  "aws/rds/modify_option_group": {
+    "hash": "ae2e91adb40f90f4a0264af16aa9310985df094a78787fd94ce0b05421e3292b",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "AWS RDS Modify Option Group",
+    "description": "Add or remove options in an RDS option group.",
+    "website": "https://www.flomation.co",
+    "icon": "layer-group+pen",
+    "date": "21/07/2026",
+    "type": 2,
+    "category": {
+      "name": "AWS",
+      "icon": "cloud",
+      "description": "Amazon Web Services integrations"
+    },
+    "sub_category": {
+      "name": "RDS",
+      "icon": "database",
+      "description": "Relational Database Service operations"
+    },
+    "inputs": [
+      {
+        "name": "auth_method",
+        "type": "string",
+        "value": null,
+        "label": "Authentication",
+        "placeholder": "",
+        "required": true,
+        "options": [
+          {
+            "name": "Access Keys",
+            "value": "keys"
+          },
+          {
+            "name": "Assume Role (cross-account)",
+            "value": "assume_role"
+          },
+          {
+            "name": "Managed Role (Credential)",
+            "value": "credential"
+          }
+        ]
+      },
+      {
+        "name": "aws_access_key",
+        "type": "secret",
+        "value": null,
+        "label": "AWS Access Key",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "aws_secret_key",
+        "type": "secret",
+        "value": null,
+        "label": "AWS Secret Key",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "aws_region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "eu-west-2",
+        "required": true
+      },
+      {
+        "name": "aws_session_token",
+        "type": "secret",
+        "value": null,
+        "label": "Session Token (optional)",
+        "placeholder": "",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "assume_role_arn",
+        "type": "string",
+        "value": null,
+        "label": "Role ARN to Assume",
+        "placeholder": "arn:aws:iam::\u003cyour-account\u003e:role/FlomationAccess",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "assume_role"
+          ]
+        }
+      },
+      {
+        "name": "external_id",
+        "type": "string",
+        "value": null,
+        "label": "Assume Role External ID (optional)",
+        "placeholder": "Must match the External ID in the role's trust policy",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "assume_role"
+          ]
+        }
+      },
+      {
+        "name": "credential",
+        "type": "credential",
+        "value": null,
+        "label": "AWS Role Credential",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "credential"
+          ]
+        }
+      },
+      {
+        "name": "option_group_name",
+        "type": "string",
+        "value": null,
+        "label": "Option Group Name",
+        "placeholder": "my-option-group",
+        "required": true
+      },
+      {
+        "name": "options_to_include",
+        "type": "string",
+        "value": null,
+        "label": "Options to Include (JSON)",
+        "placeholder": "[{\"option_name\":\"OEM\"}]"
+      },
+      {
+        "name": "options_to_remove",
+        "type": "string",
+        "value": null,
+        "label": "Options to Remove",
+        "placeholder": "Comma-separated option names"
+      },
+      {
+        "name": "apply_immediately",
+        "type": "boolean",
+        "value": null,
+        "label": "Apply Immediately",
+        "placeholder": ""
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "option_group",
+        "type": "object",
+        "value": null,
+        "label": "Option Group",
+        "placeholder": ""
+      }
+    ]
+  },
   "aws/rds/promote_read_replica": {
     "hash": "1aa34480e1878388825f444f2935614b105f28aea51e4128afb6fa7d15e9b259",
     "author": "Andy Esser",
@@ -24686,6 +26642,272 @@
       }
     ]
   },
+  "aws/rds/restore_db_instance_from_s3": {
+    "hash": "e2506a6ae5941bcc9ab5218f4f82f62e6a2e406b857d719038df9464298cadb4",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "AWS RDS Restore DB Instance From S3",
+    "description": "Create a new RDS DB instance from a database backup stored in S3.",
+    "website": "https://www.flomation.co",
+    "icon": "database+arrow-up",
+    "date": "21/07/2026",
+    "type": 2,
+    "category": {
+      "name": "AWS",
+      "icon": "cloud",
+      "description": "Amazon Web Services integrations"
+    },
+    "sub_category": {
+      "name": "RDS",
+      "icon": "database",
+      "description": "Relational Database Service operations"
+    },
+    "inputs": [
+      {
+        "name": "auth_method",
+        "type": "string",
+        "value": null,
+        "label": "Authentication",
+        "placeholder": "",
+        "required": true,
+        "options": [
+          {
+            "name": "Access Keys",
+            "value": "keys"
+          },
+          {
+            "name": "Assume Role (cross-account)",
+            "value": "assume_role"
+          },
+          {
+            "name": "Managed Role (Credential)",
+            "value": "credential"
+          }
+        ]
+      },
+      {
+        "name": "aws_access_key",
+        "type": "secret",
+        "value": null,
+        "label": "AWS Access Key",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "aws_secret_key",
+        "type": "secret",
+        "value": null,
+        "label": "AWS Secret Key",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "aws_region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "eu-west-2",
+        "required": true
+      },
+      {
+        "name": "aws_session_token",
+        "type": "secret",
+        "value": null,
+        "label": "Session Token (optional)",
+        "placeholder": "",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "assume_role_arn",
+        "type": "string",
+        "value": null,
+        "label": "Role ARN to Assume",
+        "placeholder": "arn:aws:iam::\u003cyour-account\u003e:role/FlomationAccess",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "assume_role"
+          ]
+        }
+      },
+      {
+        "name": "external_id",
+        "type": "string",
+        "value": null,
+        "label": "Assume Role External ID (optional)",
+        "placeholder": "Must match the External ID in the role's trust policy",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "assume_role"
+          ]
+        }
+      },
+      {
+        "name": "credential",
+        "type": "credential",
+        "value": null,
+        "label": "AWS Role Credential",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "credential"
+          ]
+        }
+      },
+      {
+        "name": "db_instance_identifier",
+        "type": "string",
+        "value": null,
+        "label": "DB Instance Identifier",
+        "placeholder": "my-database",
+        "required": true
+      },
+      {
+        "name": "db_instance_class",
+        "type": "string",
+        "value": null,
+        "label": "Instance Class",
+        "placeholder": "db.t3.micro",
+        "required": true
+      },
+      {
+        "name": "engine",
+        "type": "string",
+        "value": null,
+        "label": "Engine",
+        "placeholder": "mysql",
+        "required": true
+      },
+      {
+        "name": "master_username",
+        "type": "string",
+        "value": null,
+        "label": "Master Username",
+        "placeholder": "admin",
+        "required": true
+      },
+      {
+        "name": "master_password",
+        "type": "secret",
+        "value": null,
+        "label": "Master Password",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "allocated_storage",
+        "type": "integer",
+        "value": null,
+        "label": "Allocated Storage (GiB)",
+        "placeholder": "20",
+        "required": true
+      },
+      {
+        "name": "s3_bucket_name",
+        "type": "string",
+        "value": null,
+        "label": "S3 Bucket Name",
+        "placeholder": "my-backup-bucket",
+        "required": true
+      },
+      {
+        "name": "s3_ingestion_role_arn",
+        "type": "string",
+        "value": null,
+        "label": "S3 Ingestion Role ARN",
+        "placeholder": "arn:aws:iam::\u003caccount\u003e:role/rds-s3-import",
+        "required": true
+      },
+      {
+        "name": "source_engine",
+        "type": "string",
+        "value": null,
+        "label": "Source Engine",
+        "placeholder": "mysql",
+        "required": true
+      },
+      {
+        "name": "source_engine_version",
+        "type": "string",
+        "value": null,
+        "label": "Source Engine Version",
+        "placeholder": "e.g. 8.0.36",
+        "required": true
+      },
+      {
+        "name": "s3_prefix",
+        "type": "string",
+        "value": null,
+        "label": "S3 Prefix (optional)",
+        "placeholder": "Path within the bucket to the backup files"
+      },
+      {
+        "name": "db_subnet_group_name",
+        "type": "string",
+        "value": null,
+        "label": "DB Subnet Group (optional)",
+        "placeholder": "Places the DB in a specific VPC"
+      },
+      {
+        "name": "vpc_security_group_ids",
+        "type": "string",
+        "value": null,
+        "label": "VPC Security Group IDs (optional)",
+        "placeholder": "Comma-separated, e.g. sg-0abc,sg-0def"
+      },
+      {
+        "name": "publicly_accessible",
+        "type": "boolean",
+        "value": null,
+        "label": "Publicly Accessible",
+        "placeholder": ""
+      },
+      {
+        "name": "tags",
+        "type": "key_value_array",
+        "value": null,
+        "label": "Tags (optional)",
+        "placeholder": ""
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "instance",
+        "type": "object",
+        "value": null,
+        "label": "DB Instance",
+        "placeholder": ""
+      }
+    ]
+  },
   "aws/rds/restore_db_instance_to_point_in_time": {
     "hash": "f451ca3bc2078d12eb41d617554431e0da86ba125e6343983be8729b47c0634d",
     "author": "Andy Esser",
@@ -25381,6 +27603,384 @@
       }
     ]
   },
+  "aws/rds/start_db_instance_automated_backups_replication": {
+    "hash": "65a81b27f4163adfaa15901271988593b75e0b6db85b8876927ddd6cc7e8cb48",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "AWS RDS Start Automated Backups Replication",
+    "description": "Enable cross-region replication of automated backups for an RDS DB instance.",
+    "website": "https://www.flomation.co",
+    "icon": "clock-rotate-left+play",
+    "date": "21/07/2026",
+    "type": 2,
+    "category": {
+      "name": "AWS",
+      "icon": "cloud",
+      "description": "Amazon Web Services integrations"
+    },
+    "sub_category": {
+      "name": "RDS",
+      "icon": "database",
+      "description": "Relational Database Service operations"
+    },
+    "inputs": [
+      {
+        "name": "auth_method",
+        "type": "string",
+        "value": null,
+        "label": "Authentication",
+        "placeholder": "",
+        "required": true,
+        "options": [
+          {
+            "name": "Access Keys",
+            "value": "keys"
+          },
+          {
+            "name": "Assume Role (cross-account)",
+            "value": "assume_role"
+          },
+          {
+            "name": "Managed Role (Credential)",
+            "value": "credential"
+          }
+        ]
+      },
+      {
+        "name": "aws_access_key",
+        "type": "secret",
+        "value": null,
+        "label": "AWS Access Key",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "aws_secret_key",
+        "type": "secret",
+        "value": null,
+        "label": "AWS Secret Key",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "aws_region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "eu-west-2",
+        "required": true
+      },
+      {
+        "name": "aws_session_token",
+        "type": "secret",
+        "value": null,
+        "label": "Session Token (optional)",
+        "placeholder": "",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "assume_role_arn",
+        "type": "string",
+        "value": null,
+        "label": "Role ARN to Assume",
+        "placeholder": "arn:aws:iam::\u003cyour-account\u003e:role/FlomationAccess",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "assume_role"
+          ]
+        }
+      },
+      {
+        "name": "external_id",
+        "type": "string",
+        "value": null,
+        "label": "Assume Role External ID (optional)",
+        "placeholder": "Must match the External ID in the role's trust policy",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "assume_role"
+          ]
+        }
+      },
+      {
+        "name": "credential",
+        "type": "credential",
+        "value": null,
+        "label": "AWS Role Credential",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "credential"
+          ]
+        }
+      },
+      {
+        "name": "source_db_instance_arn",
+        "type": "string",
+        "value": null,
+        "label": "Source DB Instance ARN",
+        "placeholder": "arn:aws:rds:us-east-1:123456789012:db:my-database",
+        "required": true
+      },
+      {
+        "name": "backup_retention_period",
+        "type": "integer",
+        "value": null,
+        "label": "Backup Retention Period (days, optional)",
+        "placeholder": "7"
+      },
+      {
+        "name": "kms_key_id",
+        "type": "string",
+        "value": null,
+        "label": "KMS Key ID (optional)",
+        "placeholder": ""
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "backup",
+        "type": "object",
+        "value": null,
+        "label": "Automated Backup",
+        "placeholder": ""
+      }
+    ]
+  },
+  "aws/rds/start_export_task": {
+    "hash": "df1b3ae6201a1e6f74e68b14e04d9aca1f011b6df5c863f00484516103be4e9c",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "AWS RDS Start Export Task",
+    "description": "Export an RDS snapshot or cluster to Amazon S3.",
+    "website": "https://www.flomation.co",
+    "icon": "box-archive+arrow-up",
+    "date": "21/07/2026",
+    "type": 2,
+    "category": {
+      "name": "AWS",
+      "icon": "cloud",
+      "description": "Amazon Web Services integrations"
+    },
+    "sub_category": {
+      "name": "RDS",
+      "icon": "database",
+      "description": "Relational Database Service operations"
+    },
+    "inputs": [
+      {
+        "name": "auth_method",
+        "type": "string",
+        "value": null,
+        "label": "Authentication",
+        "placeholder": "",
+        "required": true,
+        "options": [
+          {
+            "name": "Access Keys",
+            "value": "keys"
+          },
+          {
+            "name": "Assume Role (cross-account)",
+            "value": "assume_role"
+          },
+          {
+            "name": "Managed Role (Credential)",
+            "value": "credential"
+          }
+        ]
+      },
+      {
+        "name": "aws_access_key",
+        "type": "secret",
+        "value": null,
+        "label": "AWS Access Key",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "aws_secret_key",
+        "type": "secret",
+        "value": null,
+        "label": "AWS Secret Key",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "aws_region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "eu-west-2",
+        "required": true
+      },
+      {
+        "name": "aws_session_token",
+        "type": "secret",
+        "value": null,
+        "label": "Session Token (optional)",
+        "placeholder": "",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "assume_role_arn",
+        "type": "string",
+        "value": null,
+        "label": "Role ARN to Assume",
+        "placeholder": "arn:aws:iam::\u003cyour-account\u003e:role/FlomationAccess",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "assume_role"
+          ]
+        }
+      },
+      {
+        "name": "external_id",
+        "type": "string",
+        "value": null,
+        "label": "Assume Role External ID (optional)",
+        "placeholder": "Must match the External ID in the role's trust policy",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "assume_role"
+          ]
+        }
+      },
+      {
+        "name": "credential",
+        "type": "credential",
+        "value": null,
+        "label": "AWS Role Credential",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "credential"
+          ]
+        }
+      },
+      {
+        "name": "export_task_identifier",
+        "type": "string",
+        "value": null,
+        "label": "Export Task Identifier",
+        "placeholder": "my-export",
+        "required": true
+      },
+      {
+        "name": "source_arn",
+        "type": "string",
+        "value": null,
+        "label": "Source ARN (snapshot or cluster)",
+        "placeholder": "arn:aws:rds:...:snapshot:...",
+        "required": true
+      },
+      {
+        "name": "s3_bucket_name",
+        "type": "string",
+        "value": null,
+        "label": "S3 Bucket Name",
+        "placeholder": "my-export-bucket",
+        "required": true
+      },
+      {
+        "name": "iam_role_arn",
+        "type": "string",
+        "value": null,
+        "label": "IAM Role ARN",
+        "placeholder": "arn:aws:iam::123456789012:role/rds-s3-export",
+        "required": true
+      },
+      {
+        "name": "kms_key_id",
+        "type": "string",
+        "value": null,
+        "label": "KMS Key ID",
+        "placeholder": "arn:aws:kms:...:key/...",
+        "required": true
+      },
+      {
+        "name": "s3_prefix",
+        "type": "string",
+        "value": null,
+        "label": "S3 Prefix (optional)",
+        "placeholder": ""
+      },
+      {
+        "name": "export_only",
+        "type": "string",
+        "value": null,
+        "label": "Export Only (optional)",
+        "placeholder": "Comma-separated schemas/tables, e.g. mydb.public.users"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "export_task",
+        "type": "object",
+        "value": null,
+        "label": "Export Task",
+        "placeholder": ""
+      }
+    ]
+  },
   "aws/rds/stop_db_cluster": {
     "hash": "7a4c0a144f32ea773a423da75f5080d124f68a7dc3c34919e9fc655b7cba3267",
     "author": "Andy Esser",
@@ -25706,6 +28306,165 @@
       }
     ]
   },
+  "aws/rds/stop_db_instance_automated_backups_replication": {
+    "hash": "cc4262e384bbd7848d357a2291f4c9aa08d3a5f5d663efb8b005643c07c182fb",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "AWS RDS Stop Automated Backups Replication",
+    "description": "Disable cross-region replication of automated backups for an RDS DB instance.",
+    "website": "https://www.flomation.co",
+    "icon": "clock-rotate-left+stop",
+    "date": "21/07/2026",
+    "type": 2,
+    "category": {
+      "name": "AWS",
+      "icon": "cloud",
+      "description": "Amazon Web Services integrations"
+    },
+    "sub_category": {
+      "name": "RDS",
+      "icon": "database",
+      "description": "Relational Database Service operations"
+    },
+    "inputs": [
+      {
+        "name": "auth_method",
+        "type": "string",
+        "value": null,
+        "label": "Authentication",
+        "placeholder": "",
+        "required": true,
+        "options": [
+          {
+            "name": "Access Keys",
+            "value": "keys"
+          },
+          {
+            "name": "Assume Role (cross-account)",
+            "value": "assume_role"
+          },
+          {
+            "name": "Managed Role (Credential)",
+            "value": "credential"
+          }
+        ]
+      },
+      {
+        "name": "aws_access_key",
+        "type": "secret",
+        "value": null,
+        "label": "AWS Access Key",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "aws_secret_key",
+        "type": "secret",
+        "value": null,
+        "label": "AWS Secret Key",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "aws_region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "eu-west-2",
+        "required": true
+      },
+      {
+        "name": "aws_session_token",
+        "type": "secret",
+        "value": null,
+        "label": "Session Token (optional)",
+        "placeholder": "",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "assume_role_arn",
+        "type": "string",
+        "value": null,
+        "label": "Role ARN to Assume",
+        "placeholder": "arn:aws:iam::\u003cyour-account\u003e:role/FlomationAccess",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "assume_role"
+          ]
+        }
+      },
+      {
+        "name": "external_id",
+        "type": "string",
+        "value": null,
+        "label": "Assume Role External ID (optional)",
+        "placeholder": "Must match the External ID in the role's trust policy",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "assume_role"
+          ]
+        }
+      },
+      {
+        "name": "credential",
+        "type": "credential",
+        "value": null,
+        "label": "AWS Role Credential",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "credential"
+          ]
+        }
+      },
+      {
+        "name": "source_db_instance_arn",
+        "type": "string",
+        "value": null,
+        "label": "Source DB Instance ARN",
+        "placeholder": "arn:aws:rds:us-east-1:123456789012:db:my-database",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "backup",
+        "type": "object",
+        "value": null,
+        "label": "Automated Backup",
+        "placeholder": ""
+      }
+    ]
+  },
   "aws/rds/switchover_blue_green_deployment": {
     "hash": "39617a8ab28760e88d11eca145941d304c23b4a915bc500ec9e33278e368fd96",
     "author": "Andy Esser",
@@ -25868,6 +28627,332 @@
         "type": "object",
         "value": null,
         "label": "Blue/Green Deployment",
+        "placeholder": ""
+      }
+    ]
+  },
+  "aws/rds/switchover_global_cluster": {
+    "hash": "2db5dad039a80fced482f10ed84538695c2c78834de9ffbedc19ee5ac6414510",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "AWS RDS Switchover Global Cluster",
+    "description": "Planned switchover promoting a secondary Aurora cluster to primary in a global database.",
+    "website": "https://www.flomation.co",
+    "icon": "globe+arrow-right-arrow-left",
+    "date": "21/07/2026",
+    "type": 2,
+    "category": {
+      "name": "AWS",
+      "icon": "cloud",
+      "description": "Amazon Web Services integrations"
+    },
+    "sub_category": {
+      "name": "RDS",
+      "icon": "database",
+      "description": "Relational Database Service operations"
+    },
+    "inputs": [
+      {
+        "name": "auth_method",
+        "type": "string",
+        "value": null,
+        "label": "Authentication",
+        "placeholder": "",
+        "required": true,
+        "options": [
+          {
+            "name": "Access Keys",
+            "value": "keys"
+          },
+          {
+            "name": "Assume Role (cross-account)",
+            "value": "assume_role"
+          },
+          {
+            "name": "Managed Role (Credential)",
+            "value": "credential"
+          }
+        ]
+      },
+      {
+        "name": "aws_access_key",
+        "type": "secret",
+        "value": null,
+        "label": "AWS Access Key",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "aws_secret_key",
+        "type": "secret",
+        "value": null,
+        "label": "AWS Secret Key",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "aws_region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "eu-west-2",
+        "required": true
+      },
+      {
+        "name": "aws_session_token",
+        "type": "secret",
+        "value": null,
+        "label": "Session Token (optional)",
+        "placeholder": "",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "assume_role_arn",
+        "type": "string",
+        "value": null,
+        "label": "Role ARN to Assume",
+        "placeholder": "arn:aws:iam::\u003cyour-account\u003e:role/FlomationAccess",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "assume_role"
+          ]
+        }
+      },
+      {
+        "name": "external_id",
+        "type": "string",
+        "value": null,
+        "label": "Assume Role External ID (optional)",
+        "placeholder": "Must match the External ID in the role's trust policy",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "assume_role"
+          ]
+        }
+      },
+      {
+        "name": "credential",
+        "type": "credential",
+        "value": null,
+        "label": "AWS Role Credential",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "credential"
+          ]
+        }
+      },
+      {
+        "name": "global_cluster_identifier",
+        "type": "string",
+        "value": null,
+        "label": "Global Cluster Identifier",
+        "placeholder": "my-global-database",
+        "required": true
+      },
+      {
+        "name": "target_db_cluster_identifier",
+        "type": "string",
+        "value": null,
+        "label": "Target DB Cluster ARN",
+        "placeholder": "arn:aws:rds:...:cluster:my-secondary",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "global_cluster",
+        "type": "object",
+        "value": null,
+        "label": "Global Cluster",
+        "placeholder": ""
+      }
+    ]
+  },
+  "aws/rds/switchover_read_replica": {
+    "hash": "ceb59dce3bdf78595494c4955979d62f7d575d9118bbcd8ab150f52221d699ff",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "AWS RDS Switchover Read Replica",
+    "description": "Switch over an Oracle read replica to become the new primary DB instance.",
+    "website": "https://www.flomation.co",
+    "icon": "database+arrow-right-arrow-left",
+    "date": "21/07/2026",
+    "type": 2,
+    "category": {
+      "name": "AWS",
+      "icon": "cloud",
+      "description": "Amazon Web Services integrations"
+    },
+    "sub_category": {
+      "name": "RDS",
+      "icon": "database",
+      "description": "Relational Database Service operations"
+    },
+    "inputs": [
+      {
+        "name": "auth_method",
+        "type": "string",
+        "value": null,
+        "label": "Authentication",
+        "placeholder": "",
+        "required": true,
+        "options": [
+          {
+            "name": "Access Keys",
+            "value": "keys"
+          },
+          {
+            "name": "Assume Role (cross-account)",
+            "value": "assume_role"
+          },
+          {
+            "name": "Managed Role (Credential)",
+            "value": "credential"
+          }
+        ]
+      },
+      {
+        "name": "aws_access_key",
+        "type": "secret",
+        "value": null,
+        "label": "AWS Access Key",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "aws_secret_key",
+        "type": "secret",
+        "value": null,
+        "label": "AWS Secret Key",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "aws_region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "eu-west-2",
+        "required": true
+      },
+      {
+        "name": "aws_session_token",
+        "type": "secret",
+        "value": null,
+        "label": "Session Token (optional)",
+        "placeholder": "",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "assume_role_arn",
+        "type": "string",
+        "value": null,
+        "label": "Role ARN to Assume",
+        "placeholder": "arn:aws:iam::\u003cyour-account\u003e:role/FlomationAccess",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "assume_role"
+          ]
+        }
+      },
+      {
+        "name": "external_id",
+        "type": "string",
+        "value": null,
+        "label": "Assume Role External ID (optional)",
+        "placeholder": "Must match the External ID in the role's trust policy",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "assume_role"
+          ]
+        }
+      },
+      {
+        "name": "credential",
+        "type": "credential",
+        "value": null,
+        "label": "AWS Role Credential",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "credential"
+          ]
+        }
+      },
+      {
+        "name": "db_instance_identifier",
+        "type": "string",
+        "value": null,
+        "label": "DB Instance Identifier",
+        "placeholder": "my-standby-replica",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "instance",
+        "type": "object",
+        "value": null,
+        "label": "DB Instance",
         "placeholder": ""
       }
     ]
