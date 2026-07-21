@@ -33,7 +33,7 @@ var Inputs = [...]core.Connection{
 	{Name: "private_key_passphrase", Type: core.ConnectionTypeSecret, Label: "Private Key Passphrase", Placeholder: "Only if the key is encrypted (optional)"},
 	{Name: "compartment_ocid", Type: core.ConnectionTypeString, Label: "Compartment OCID", Placeholder: "ocid1.compartment.oc1..aaaa… (use the tenancy OCID for the root)", Required: true},
 	{Name: "db_name", Type: core.ConnectionTypeString, Label: "Database Name", Placeholder: "Alphanumeric, e.g. SALESDB (no spaces, ≤30 chars)", Required: true},
-	{Name: "admin_password", Type: core.ConnectionTypeSecret, Label: "ADMIN Password", Placeholder: "12–30 chars, incl. upper, lower and a digit"},
+	{Name: "admin_password", Type: core.ConnectionTypeSecret, Label: "ADMIN Password", Placeholder: "12–30 chars, incl. upper, lower and a digit", Required: true},
 	{Name: "display_name", Type: core.ConnectionTypeString, Label: "Display Name", Placeholder: "Friendly name shown in the console (optional)"},
 	{Name: "db_workload", Type: core.ConnectionTypeString, Label: "Workload", Placeholder: "Default OLTP", Options: []core.ConnectionOption{
 		{Name: "Transaction Processing (OLTP)", Value: "OLTP"},
@@ -99,27 +99,33 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	}
 	details.DbWorkload = database.CreateAutonomousDatabaseBaseDbWorkloadEnum(workload)
 
-	if adb.OptionalBool("is_free_tier", inputs, false) {
+	freeTier := adb.OptionalBool("is_free_tier", inputs, false)
+	if freeTier {
 		free := true
 		details.IsFreeTier = &free
 	}
-	model := strings.TrimSpace(adb.OptionalString("compute_model", inputs))
-	if model != "" {
-		details.ComputeModel = database.CreateAutonomousDatabaseBaseComputeModelEnum(model)
-	}
-	if cnt, ok, err := adb.OptionalFloat32("cpu_count", inputs); err != nil {
-		return adb.ErrorResult(err.Error()), nil
-	} else if ok {
-		if strings.EqualFold(model, "OCPU") {
-			details.OcpuCount = &cnt
-		} else {
-			details.ComputeCount = &cnt
+	// Compute model, CPU count and storage only apply to paid databases — Always
+	// Free is fixed-size, and sending explicit sizing alongside is_free_tier makes
+	// OCI reject the request. Skip them entirely when Always Free is set.
+	if !freeTier {
+		model := strings.TrimSpace(adb.OptionalString("compute_model", inputs))
+		if model != "" {
+			details.ComputeModel = database.CreateAutonomousDatabaseBaseComputeModelEnum(model)
 		}
-	}
-	if tbs, ok, err := adb.OptionalInt("data_storage_in_tbs", inputs); err != nil {
-		return adb.ErrorResult(err.Error()), nil
-	} else if ok {
-		details.DataStorageSizeInTBs = &tbs
+		if cnt, ok, err := adb.OptionalFloat32("cpu_count", inputs); err != nil {
+			return adb.ErrorResult(err.Error()), nil
+		} else if ok {
+			if strings.EqualFold(model, "OCPU") {
+				details.OcpuCount = &cnt
+			} else {
+				details.ComputeCount = &cnt
+			}
+		}
+		if tbs, ok, err := adb.OptionalInt("data_storage_in_tbs", inputs); err != nil {
+			return adb.ErrorResult(err.Error()), nil
+		} else if ok {
+			details.DataStorageSizeInTBs = &tbs
+		}
 	}
 	if adb.OptionalBool("is_auto_scaling_enabled", inputs, false) {
 		as := true

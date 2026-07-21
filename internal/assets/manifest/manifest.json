@@ -7381,7 +7381,7 @@
     ]
   },
   "aws/ec2/attach_volume": {
-    "hash": "e9f5a03be50965bb6e780ce8a9fefd5a47f93fba9baceea8798acf6932641f31",
+    "hash": "fd44de1e96c6ea9a1e945161d3eead4a32f8f6d6f07a5b1d22d4a60eaa499b1c",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "AWS EC2 Attach Volume",
@@ -8375,7 +8375,7 @@
     ]
   },
   "aws/ec2/create_image": {
-    "hash": "0fac7a806b968a10f1abae69b3797a773634cc575b90d73e8285ff4a7db3b233",
+    "hash": "2a4137b75f27f086476e014ca849e60c204f5e18f8060965b386823d5758e80d",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "AWS EC2 Create Image",
@@ -9274,7 +9274,7 @@
     ]
   },
   "aws/ec2/create_volume": {
-    "hash": "0d0a0069b195cb50dc4ea584c0679b1f61d59dd61cae7955d31c6b351a4a8732",
+    "hash": "bec37f1031caef7b413f016fa3b59a3f5ac13b3fd8879eba3e4ed65051f6c5d5",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "AWS EC2 Create Volume",
@@ -36537,7 +36537,7 @@
     ]
   },
   "aws/s3/copy_object": {
-    "hash": "c2514bb4d505238d4732c542e49456d3c51e5d996d6619165a90d27e8f8f766f",
+    "hash": "507fd3fe82b556540efa84624672c170f63e810144e4f0ba4e7f63e34ed682dc",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "AWS S3 Copy Object",
@@ -36712,7 +36712,7 @@
     ]
   },
   "aws/s3/create_bucket": {
-    "hash": "1820ec0fd8ede588879a1b5a82eb2349b3cf9ec74506d0f36a78b866aab3e925",
+    "hash": "7c82e0d057a864222533172b4857ef9d5b36370c119886f44dacd1babd2db2ea",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "AWS S3 Create Bucket",
@@ -38211,7 +38211,7 @@
     ]
   },
   "aws/s3/delete_objects": {
-    "hash": "b5a0255ac81d00fddd8941bf933319f15ef24ea6dbac494a94403d064a403b64",
+    "hash": "b70dcf3c7171a41590c075fb13226a2c6f5bc63caa2176ed973a4b1a64afb422",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "AWS S3 Delete Objects",
@@ -40619,7 +40619,7 @@
     ]
   },
   "aws/s3/head_object": {
-    "hash": "7b0ae18a656584650c01c7b9e697cbfda0e1bb6c3197c3433632eac3064ef163",
+    "hash": "5980b2f1362b73a36bed9753b389464b1735713b3173b7dfe87d538d769c685e",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "AWS S3 Head Object",
@@ -41212,7 +41212,7 @@
     ]
   },
   "aws/s3/presign_get_object": {
-    "hash": "364475b7231f56ca3f384bb4ca44674285e992a381463046135459715f984036",
+    "hash": "7494c0a9310fd0b94793e91c8df586ef4fd2e9c493f437ad2274d32457461581",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "AWS S3 Presign Get Object",
@@ -206489,7 +206489,7 @@
     ]
   },
   "oracle/autonomousdatabase/db_create": {
-    "hash": "abb9559fc063d64d2db43ef6b7aecaa5c13db5a4e5909da08198092c6c6c754a",
+    "hash": "9676f4bd283ccafcd91ae9b3e194d712564d424d9000e7f6cea391518469d753",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "OCI Autonomous Database: Create",
@@ -206576,7 +206576,8 @@
         "type": "secret",
         "value": null,
         "label": "ADMIN Password",
-        "placeholder": "12–30 chars, incl. upper, lower and a digit"
+        "placeholder": "12–30 chars, incl. upper, lower and a digit",
+        "required": true
       },
       {
         "name": "display_name",
@@ -206989,7 +206990,7 @@
     ]
   },
   "oracle/autonomousdatabase/db_delete_backup": {
-    "hash": "b1135a02f046183e4eaf87084bc54edfd5f6168a0aacedecc217f7be21652bf5",
+    "hash": "84a553f96a2567fb12c3e747e3ead2cace659795f7340854af2e26da96334c1e",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "OCI Autonomous Database: Delete Backup",
@@ -207096,7 +207097,7 @@
     ]
   },
   "oracle/autonomousdatabase/db_generate_regional_wallet": {
-    "hash": "2d3b69726fe12f6b2f66874456826f17c1358c008bf2c37c19851a036107e514",
+    "hash": "c35f39641f84a1f3b610a8744f0c8f5c570bfc49e02deb970f08bee90fd99878",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "OCI Autonomous Database: Generate Regional Wallet",
@@ -207175,7 +207176,8 @@
         "type": "secret",
         "value": null,
         "label": "Wallet Password",
-        "placeholder": "Password to protect the wallet zip (min 8 chars)"
+        "placeholder": "Password to protect the wallet zip (min 8 chars)",
+        "required": true
       }
     ],
     "outputs": [
@@ -207217,7 +207219,7 @@
     ]
   },
   "oracle/autonomousdatabase/db_generate_wallet": {
-    "hash": "f0100d4ebb734d902b1f6cf7eb6301e17abbfb1bd2631d3183ec56667b3b395e",
+    "hash": "e366a451021a895eabd3331456d0d9df4afa5d713dad59b62b41ee374a3bd899",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "OCI Autonomous Database: Generate Wallet",
@@ -207296,7 +207298,8 @@
         "type": "secret",
         "value": null,
         "label": "Wallet Password",
-        "placeholder": "Password to protect the wallet zip (min 8 chars)"
+        "placeholder": "Password to protect the wallet zip (min 8 chars)",
+        "required": true
       },
       {
         "name": "generate_type",

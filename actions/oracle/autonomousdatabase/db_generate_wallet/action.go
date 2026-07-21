@@ -37,7 +37,7 @@ var Inputs = [...]core.Connection{
 	{Name: "private_key", Type: core.ConnectionTypeSecret, Label: "Private Key (PEM)", Placeholder: "The API signing private key — full PEM, incl. BEGIN/END lines"},
 	{Name: "private_key_passphrase", Type: core.ConnectionTypeSecret, Label: "Private Key Passphrase", Placeholder: "Only if the key is encrypted (optional)"},
 	{Name: "autonomous_database_id", Type: core.ConnectionTypeString, Label: "Autonomous Database OCID", Placeholder: "ocid1.autonomousdatabase.oc1..aaaa…", Required: true},
-	{Name: "wallet_password", Type: core.ConnectionTypeSecret, Label: "Wallet Password", Placeholder: "Password to protect the wallet zip (min 8 chars)"},
+	{Name: "wallet_password", Type: core.ConnectionTypeSecret, Label: "Wallet Password", Placeholder: "Password to protect the wallet zip (min 8 chars)", Required: true},
 	{Name: "generate_type", Type: core.ConnectionTypeString, Label: "Wallet Type", Placeholder: "ALL = all connection strings (default); SINGLE = one", Options: []core.ConnectionOption{
 		{Name: "All connection strings (default)", Value: "ALL"},
 		{Name: "Single connection string", Value: "SINGLE"},

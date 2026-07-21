@@ -59,12 +59,9 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 		return adb.ErrorResult(auth.OCIError(err)), nil
 	}
 
-	result := map[string]interface{}{
-		"tool_result": fmt.Sprintf("Delete requested for backup %s", id),
-		"success":     true,
-	}
-	if resp.OpcWorkRequestId != nil {
-		result["work_request_id"] = adb.Str(resp.OpcWorkRequestId)
-	}
-	return result, nil
+	return map[string]interface{}{
+		"tool_result":     fmt.Sprintf("Delete requested for backup %s", id),
+		"work_request_id": adb.Str(resp.OpcWorkRequestId),
+		"success":         true,
+	}, nil
 }
