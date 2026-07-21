@@ -13,7 +13,7 @@ import (
 const (
 	Author       = "Dave McElin"
 	Organisation = "Flomation"
-	Name         = "OCI Networking: Get Security list"
+	Name         = "OCI Networking: Get Security List"
 	Description  = "Fetch one Oracle Cloud security list by OCID."
 	Website      = "https://www.flomation.co"
 	Icon         = "oracle+shield-halved"

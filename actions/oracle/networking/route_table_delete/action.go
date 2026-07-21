@@ -14,7 +14,7 @@ import (
 const (
 	Author       = "Dave McElin"
 	Organisation = "Flomation"
-	Name         = "OCI Networking: Delete Route table"
+	Name         = "OCI Networking: Delete Route Table"
 	Description  = "Delete an Oracle Cloud route table by OCID."
 	Website      = "https://www.flomation.co"
 	Icon         = "oracle+route"

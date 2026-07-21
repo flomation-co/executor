@@ -13,7 +13,7 @@ import (
 const (
 	Author       = "Dave McElin"
 	Organisation = "Flomation"
-	Name         = "OCI Networking: Get Service gateway"
+	Name         = "OCI Networking: Get Service Gateway"
 	Description  = "Fetch one Oracle Cloud service gateway by OCID."
 	Website      = "https://www.flomation.co"
 	Icon         = "oracle+plug"

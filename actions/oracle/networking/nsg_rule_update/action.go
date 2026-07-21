@@ -16,7 +16,7 @@ const (
 	Author       = "Dave McElin"
 	Organisation = "Flomation"
 	Name         = "OCI Networking: Update NSG Rules"
-	Description  = "Update existing security rules in a Network Security Group. Each rule in the JSON array must include its id."
+	Description  = "Update specific existing security rules in a Network Security Group BY ID — this changes only the rules you list, it does not replace the whole rule set. Each rule in the JSON array must carry the id OCI assigned it (see List NSG Rules); an unknown id is rejected, not silently ignored."
 	Website      = "https://www.flomation.co"
 	Icon         = "oracle+pen"
 	Date         = "21/07/2026"

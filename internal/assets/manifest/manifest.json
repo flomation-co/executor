@@ -211762,10 +211762,10 @@
     ]
   },
   "oracle/networking/dhcp_options_delete": {
-    "hash": "9aed64d1ad9cf26b36dbdad3926c3d9216f7edaa3b5354d57397952b4d9493c6",
+    "hash": "c33e867afc638d328aaefb8d236877a73764a543a1ba15832bb7f33c2264e6f5",
     "author": "Dave McElin",
     "organisation": "Flomation",
-    "name": "OCI Networking: Delete DHCP options",
+    "name": "OCI Networking: Delete DHCP Options",
     "description": "Delete an Oracle Cloud DHCP options by OCID.",
     "website": "https://www.flomation.co",
     "icon": "oracle+gear",
@@ -211862,10 +211862,10 @@
     ]
   },
   "oracle/networking/dhcp_options_get": {
-    "hash": "4178cb09d764ef2b8cc088298a1d0eae00cbef10bbc5d4f2a963753dd80e5703",
+    "hash": "f7f322ebfe730095b68b836b9b7ae1f2731217710acd8f25272aec4830d00ef6",
     "author": "Dave McElin",
     "organisation": "Flomation",
-    "name": "OCI Networking: Get DHCP options",
+    "name": "OCI Networking: Get DHCP Options",
     "description": "Fetch one Oracle Cloud DHCP options by OCID.",
     "website": "https://www.flomation.co",
     "icon": "oracle+gear",
@@ -211976,10 +211976,10 @@
     ]
   },
   "oracle/networking/dhcp_options_get_all": {
-    "hash": "719d69925ac6170f4a8a4da33f96a4cc03773fa8ec51174a92f8eed55a9b05ce",
+    "hash": "54762920a330fd06ec8e12117e63dbcfd2136003d4a4722507862bb865f55461",
     "author": "Dave McElin",
     "organisation": "Flomation",
-    "name": "OCI Networking: List DHCP options",
+    "name": "OCI Networking: List DHCP Options",
     "description": "List the DHCP options in an Oracle Cloud compartment, optionally filtered by VCN.",
     "website": "https://www.flomation.co",
     "icon": "oracle+list",
@@ -212104,7 +212104,7 @@
     ]
   },
   "oracle/networking/dhcp_options_update": {
-    "hash": "0715080b12e022147014d633e93e50fe13451d4f0b609ea81cac963b2516c7a7",
+    "hash": "ffc48c69c783039ec142d14e3671e46b67c805668e0fc7ccc9e7755d6fcf96d6",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "OCI Networking: Update DHCP Options",
@@ -212246,10 +212246,10 @@
     ]
   },
   "oracle/networking/internet_gateway_change_compartment": {
-    "hash": "0a268c858938618267da5f9d6a6935751523b53df4dad737a527ef55f2868545",
+    "hash": "f64f236f010118ee1ba3efc552d68b327cfdaca7845c3c2528d2e4049616f7a1",
     "author": "Dave McElin",
     "organisation": "Flomation",
-    "name": "OCI Networking: Move Internet gateway to Compartment",
+    "name": "OCI Networking: Move Internet Gateway to Compartment",
     "description": "Move an Oracle Cloud internet gateway to a different compartment.",
     "website": "https://www.flomation.co",
     "icon": "oracle+folder",
@@ -212497,10 +212497,10 @@
     ]
   },
   "oracle/networking/internet_gateway_delete": {
-    "hash": "f053b55eaa3515bb62380ec6b5c4e5cd58cef204a999db215d662c4a47741c85",
+    "hash": "abc27c11a8f80f613ad47ade1e5b3865286b87a105bf697a99944914a6662ab0",
     "author": "Dave McElin",
     "organisation": "Flomation",
-    "name": "OCI Networking: Delete Internet gateway",
+    "name": "OCI Networking: Delete Internet Gateway",
     "description": "Delete an Oracle Cloud internet gateway by OCID.",
     "website": "https://www.flomation.co",
     "icon": "oracle+globe",
@@ -212597,10 +212597,10 @@
     ]
   },
   "oracle/networking/internet_gateway_get": {
-    "hash": "2304a6aab795cb49a5113d17d014c8deda73798ca0497fcd7363b7c012d5ea35",
+    "hash": "b43f591da06606df96e49fa830e252fd2d81a9cf112be4d506d879fe432941e0",
     "author": "Dave McElin",
     "organisation": "Flomation",
-    "name": "OCI Networking: Get Internet gateway",
+    "name": "OCI Networking: Get Internet Gateway",
     "description": "Fetch one Oracle Cloud internet gateway by OCID.",
     "website": "https://www.flomation.co",
     "icon": "oracle+globe",
@@ -212711,10 +212711,10 @@
     ]
   },
   "oracle/networking/internet_gateway_get_all": {
-    "hash": "3923119e3152e09f42c9795cbce921af336b933e1f59ab6d09b7081d437ff2ce",
+    "hash": "cfdea976ef9d831150de5e298ff2a88595914e6f86500b07a5f53e9b9c6ba7d5",
     "author": "Dave McElin",
     "organisation": "Flomation",
-    "name": "OCI Networking: List Internet gateways",
+    "name": "OCI Networking: List Internet Gateways",
     "description": "List the internet gateways in an Oracle Cloud compartment, optionally filtered by VCN.",
     "website": "https://www.flomation.co",
     "icon": "oracle+list",
@@ -212839,10 +212839,10 @@
     ]
   },
   "oracle/networking/internet_gateway_update": {
-    "hash": "8306e980f1157cef7310add60d2ca51207696072547233146c8620c74735d7fb",
+    "hash": "78c13b93ed7a6298da0d9fc816d78f41603f3ab17f2d30fb4f4a1ad0bdf988f7",
     "author": "Dave McElin",
     "organisation": "Flomation",
-    "name": "OCI Networking: Update Internet gateway",
+    "name": "OCI Networking: Update Internet Gateway",
     "description": "Update editable attributes of an Oracle Cloud internet gateway.",
     "website": "https://www.flomation.co",
     "icon": "oracle+pen",
@@ -212981,10 +212981,10 @@
     ]
   },
   "oracle/networking/nat_gateway_change_compartment": {
-    "hash": "7ddf568dd302445617b91340e02db9bc9fac39b3d249a5146b2f4a82c17c336b",
+    "hash": "95a6b46661397b64836bb08a40a73125b38ef5193f8b408fd86bf0f6073adde5",
     "author": "Dave McElin",
     "organisation": "Flomation",
-    "name": "OCI Networking: Move NAT gateway to Compartment",
+    "name": "OCI Networking: Move NAT Gateway to Compartment",
     "description": "Move an Oracle Cloud NAT gateway to a different compartment.",
     "website": "https://www.flomation.co",
     "icon": "oracle+folder",
@@ -213246,10 +213246,10 @@
     ]
   },
   "oracle/networking/nat_gateway_delete": {
-    "hash": "a5efed238924216b9bfa502439cf1e35f3b671d68a6027f1afbb47d3982ac208",
+    "hash": "93e189ace03b9c9c082c93458fb62cfb0c84e8b027488fa2b4c3f159bd8c7a06",
     "author": "Dave McElin",
     "organisation": "Flomation",
-    "name": "OCI Networking: Delete NAT gateway",
+    "name": "OCI Networking: Delete NAT Gateway",
     "description": "Delete an Oracle Cloud NAT gateway by OCID.",
     "website": "https://www.flomation.co",
     "icon": "oracle+ethernet",
@@ -213346,10 +213346,10 @@
     ]
   },
   "oracle/networking/nat_gateway_get": {
-    "hash": "a5eddb6d4d0ef90fac05d6c8b94bc6f62adc8557bee8969bd741c1db0e872772",
+    "hash": "648138de0fc1c2a12a5d179f9f9f6d42ab879b64676ae753741471c86ed96a48",
     "author": "Dave McElin",
     "organisation": "Flomation",
-    "name": "OCI Networking: Get NAT gateway",
+    "name": "OCI Networking: Get NAT Gateway",
     "description": "Fetch one Oracle Cloud NAT gateway by OCID.",
     "website": "https://www.flomation.co",
     "icon": "oracle+ethernet",
@@ -213460,10 +213460,10 @@
     ]
   },
   "oracle/networking/nat_gateway_get_all": {
-    "hash": "5a012d86a27301c8d6946947fc0194bd8c39fd92ab0e8f9eedff6ce1a97a7d5a",
+    "hash": "cf4f6824d808f8f9ed7401e6f2f11d774412387de87d45173db9a5541d3c0db7",
     "author": "Dave McElin",
     "organisation": "Flomation",
-    "name": "OCI Networking: List NAT gateways",
+    "name": "OCI Networking: List NAT Gateways",
     "description": "List the NAT gateways in an Oracle Cloud compartment, optionally filtered by VCN.",
     "website": "https://www.flomation.co",
     "icon": "oracle+list",
@@ -213588,10 +213588,10 @@
     ]
   },
   "oracle/networking/nat_gateway_update": {
-    "hash": "c1c34ae9418a01e179d1bcd4fdb32d3536ffd5f997413c0c872b2632d46f60f0",
+    "hash": "5f06ad5148eb37ae7ffd12a053c648ca8df86a775b85aaf5ff99b831ac8748a1",
     "author": "Dave McElin",
     "organisation": "Flomation",
-    "name": "OCI Networking: Update NAT gateway",
+    "name": "OCI Networking: Update NAT Gateway",
     "description": "Update editable attributes of an Oracle Cloud NAT gateway.",
     "website": "https://www.flomation.co",
     "icon": "oracle+pen",
@@ -214688,11 +214688,11 @@
     ]
   },
   "oracle/networking/nsg_rule_update": {
-    "hash": "7335bc812d926a158863d40ee2944bf1654da0ddef50b37a4f4600c53cd1bdd7",
+    "hash": "0242acc0a02c6d1a588dc8a0ad76c45fd49156c5b5ba51a7f22fcefe041cf685",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "OCI Networking: Update NSG Rules",
-    "description": "Update existing security rules in a Network Security Group. Each rule in the JSON array must include its id.",
+    "description": "Update specific existing security rules in a Network Security Group BY ID — this changes only the rules you list, it does not replace the whole rule set. Each rule in the JSON array must carry the id OCI assigned it (see List NSG Rules); an unknown id is rejected, not silently ignored.",
     "website": "https://www.flomation.co",
     "icon": "oracle+pen",
     "date": "21/07/2026",
@@ -215609,10 +215609,10 @@
     ]
   },
   "oracle/networking/route_table_change_compartment": {
-    "hash": "ab3897621ff73ef09b27e39c96079ca3fc3b0a5147811a878f498b9cd1d348b2",
+    "hash": "ae40d74ac7b0cdbe10467d7f15ccc60b4823670af82d403bde04ba3f8ab1e2a1",
     "author": "Dave McElin",
     "organisation": "Flomation",
-    "name": "OCI Networking: Move Route table to Compartment",
+    "name": "OCI Networking: Move Route Table to Compartment",
     "description": "Move an Oracle Cloud route table to a different compartment.",
     "website": "https://www.flomation.co",
     "icon": "oracle+folder",
@@ -215860,10 +215860,10 @@
     ]
   },
   "oracle/networking/route_table_delete": {
-    "hash": "48c0b510eb780f716ff1597c2b4d20f15f44028303edc7386c888b7958061aab",
+    "hash": "7da01c0f7b937d3446f5faa54e5d6d43968cb5f4761218d87a5a80664459f647",
     "author": "Dave McElin",
     "organisation": "Flomation",
-    "name": "OCI Networking: Delete Route table",
+    "name": "OCI Networking: Delete Route Table",
     "description": "Delete an Oracle Cloud route table by OCID.",
     "website": "https://www.flomation.co",
     "icon": "oracle+route",
@@ -215960,10 +215960,10 @@
     ]
   },
   "oracle/networking/route_table_get": {
-    "hash": "edb282f73e04236f49bf84338a9b5f269124f65bee349ab3da6139d0c8d55bff",
+    "hash": "78d2d1f4197b36c8d9da5837d85cfb1e8a9cc5d8ffc5b5eff889cd3c4ce2e32c",
     "author": "Dave McElin",
     "organisation": "Flomation",
-    "name": "OCI Networking: Get Route table",
+    "name": "OCI Networking: Get Route Table",
     "description": "Fetch one Oracle Cloud route table by OCID.",
     "website": "https://www.flomation.co",
     "icon": "oracle+route",
@@ -216074,10 +216074,10 @@
     ]
   },
   "oracle/networking/route_table_get_all": {
-    "hash": "9627c7e8659b5101d73467c938517c5920c38b1f2ae868dad444ee080e46bdb3",
+    "hash": "ee18fb9ee4f985674b70d2285baa362e3a2d22eab2d30e80abb834c01eadc427",
     "author": "Dave McElin",
     "organisation": "Flomation",
-    "name": "OCI Networking: List Route tables",
+    "name": "OCI Networking: List Route Tables",
     "description": "List the route tables in an Oracle Cloud compartment, optionally filtered by VCN.",
     "website": "https://www.flomation.co",
     "icon": "oracle+list",
@@ -216202,10 +216202,10 @@
     ]
   },
   "oracle/networking/route_table_update": {
-    "hash": "4b78b010c15b2f406fa381006ebea13ece13e9719ac4b7b1a389e0937814eb95",
+    "hash": "d14db68ea2ff92594404f9b0c0bc3358010d08ced262a74efe8990ebff049cd3",
     "author": "Dave McElin",
     "organisation": "Flomation",
-    "name": "OCI Networking: Update Route table",
+    "name": "OCI Networking: Update Route Table",
     "description": "Update editable attributes of an Oracle Cloud route table.",
     "website": "https://www.flomation.co",
     "icon": "oracle+pen",
@@ -216337,10 +216337,10 @@
     ]
   },
   "oracle/networking/security_list_change_compartment": {
-    "hash": "ea78a83cdc52ad70b8c975bf3beeebe240a56bde2f6e91c7e46baacdecaf0b20",
+    "hash": "bb56d8d411bf032c30a1ee99ee2235a3247f76634dff8ebe906d7d45b6d95adb",
     "author": "Dave McElin",
     "organisation": "Flomation",
-    "name": "OCI Networking: Move Security list to Compartment",
+    "name": "OCI Networking: Move Security List to Compartment",
     "description": "Move an Oracle Cloud security list to a different compartment.",
     "website": "https://www.flomation.co",
     "icon": "oracle+folder",
@@ -216595,10 +216595,10 @@
     ]
   },
   "oracle/networking/security_list_delete": {
-    "hash": "915af45f53733d7853fbcbf9f1c600bef988ef1cc4f7b3c2a6abff22107b2c82",
+    "hash": "239385012c30b19df20c25ecdce2dd6f601104210226e9990f91d2324945bd47",
     "author": "Dave McElin",
     "organisation": "Flomation",
-    "name": "OCI Networking: Delete Security list",
+    "name": "OCI Networking: Delete Security List",
     "description": "Delete an Oracle Cloud security list by OCID.",
     "website": "https://www.flomation.co",
     "icon": "oracle+shield-halved",
@@ -216695,10 +216695,10 @@
     ]
   },
   "oracle/networking/security_list_get": {
-    "hash": "f5eb14b370e311c4e3f7458d8ffc0ba032d33415418a566866497511c5e7fee7",
+    "hash": "7da400568aaa8e8880148e4651a638a991c42c5e8f0cecd674b5c7fcf545c056",
     "author": "Dave McElin",
     "organisation": "Flomation",
-    "name": "OCI Networking: Get Security list",
+    "name": "OCI Networking: Get Security List",
     "description": "Fetch one Oracle Cloud security list by OCID.",
     "website": "https://www.flomation.co",
     "icon": "oracle+shield-halved",
@@ -216809,10 +216809,10 @@
     ]
   },
   "oracle/networking/security_list_get_all": {
-    "hash": "993d9a11ea967a720ede444a5b9908db1eed4a97b1e3eb05c4aaf76dd87ef831",
+    "hash": "7178ff252e3e042122aec4b7ca6b59a3a8b37012fce90c0e9b50e379c6b45da8",
     "author": "Dave McElin",
     "organisation": "Flomation",
-    "name": "OCI Networking: List Security lists",
+    "name": "OCI Networking: List Security Lists",
     "description": "List the security lists in an Oracle Cloud compartment, optionally filtered by VCN.",
     "website": "https://www.flomation.co",
     "icon": "oracle+list",
@@ -216937,10 +216937,10 @@
     ]
   },
   "oracle/networking/security_list_update": {
-    "hash": "e4e06171c30adeefdda6ceeaf04441c0dcfb9768c3079a060c9eeea410b7d1b3",
+    "hash": "6205282e893e412874e56d672cf5c93814a0ff46bcc9fd964846cb5cdf939066",
     "author": "Dave McElin",
     "organisation": "Flomation",
-    "name": "OCI Networking: Update Security list",
+    "name": "OCI Networking: Update Security List",
     "description": "Update editable attributes of an Oracle Cloud security list.",
     "website": "https://www.flomation.co",
     "icon": "oracle+pen",
@@ -217223,10 +217223,10 @@
     ]
   },
   "oracle/networking/service_gateway_delete": {
-    "hash": "624e59f812a264ee92430cc07372b0dde0e21cf4ec06cd128ab4f9ef70013c29",
+    "hash": "a6f4fff7c23009d3e71d6223996c85e2f22cc7811cfec210365ac53436341eee",
     "author": "Dave McElin",
     "organisation": "Flomation",
-    "name": "OCI Networking: Delete Service gateway",
+    "name": "OCI Networking: Delete Service Gateway",
     "description": "Delete an Oracle Cloud service gateway by OCID.",
     "website": "https://www.flomation.co",
     "icon": "oracle+plug",
@@ -217323,10 +217323,10 @@
     ]
   },
   "oracle/networking/service_gateway_get": {
-    "hash": "03333b7316e39b187039b38385e1e18fcd92f61edc265f1b208f6cd545434f64",
+    "hash": "6453cbbfb3ccf9d116d455a50f45d1d125ce2ac845076c2dfec9b9dcf9ee4039",
     "author": "Dave McElin",
     "organisation": "Flomation",
-    "name": "OCI Networking: Get Service gateway",
+    "name": "OCI Networking: Get Service Gateway",
     "description": "Fetch one Oracle Cloud service gateway by OCID.",
     "website": "https://www.flomation.co",
     "icon": "oracle+plug",
@@ -217437,10 +217437,10 @@
     ]
   },
   "oracle/networking/service_gateway_get_all": {
-    "hash": "27f3ae8d414e26740e55dd62e907efb778fe6919e74d9d0da452d03c9d08de92",
+    "hash": "829418daee35de701d93f4320a411f8d286be2dfa827b243bdefef5011a6e271",
     "author": "Dave McElin",
     "organisation": "Flomation",
-    "name": "OCI Networking: List Service gateways",
+    "name": "OCI Networking: List Service Gateways",
     "description": "List the service gateways in an Oracle Cloud compartment, optionally filtered by VCN.",
     "website": "https://www.flomation.co",
     "icon": "oracle+list",
@@ -217565,10 +217565,10 @@
     ]
   },
   "oracle/networking/service_gateway_update": {
-    "hash": "e86dfa2dbc7644fc275abcea0098e11ed7211828014955b0fe125f359494d559",
+    "hash": "6aab1d25e45917770f9b7284e8a161bbb4e991191b2e2a74cb83411c02f7e66d",
     "author": "Dave McElin",
     "organisation": "Flomation",
-    "name": "OCI Networking: Update Service gateway",
+    "name": "OCI Networking: Update Service Gateway",
     "description": "Update editable attributes of an Oracle Cloud service gateway.",
     "website": "https://www.flomation.co",
     "icon": "oracle+pen",

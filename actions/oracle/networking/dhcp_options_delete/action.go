@@ -14,7 +14,7 @@ import (
 const (
 	Author       = "Dave McElin"
 	Organisation = "Flomation"
-	Name         = "OCI Networking: Delete DHCP options"
+	Name         = "OCI Networking: Delete DHCP Options"
 	Description  = "Delete an Oracle Cloud DHCP options by OCID."
 	Website      = "https://www.flomation.co"
 	Icon         = "oracle+gear"

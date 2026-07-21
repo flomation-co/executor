@@ -15,7 +15,7 @@ import (
 const (
 	Author       = "Dave McElin"
 	Organisation = "Flomation"
-	Name         = "OCI Networking: Delete Security list"
+	Name         = "OCI Networking: Delete Security List"
 	Description  = "Delete an Oracle Cloud security list by OCID."
 	Website      = "https://www.flomation.co"
 	Icon         = "oracle+shield-halved"

@@ -15,7 +15,7 @@ import (
 const (
 	Author       = "Dave McElin"
 	Organisation = "Flomation"
-	Name         = "OCI Networking: List DHCP options"
+	Name         = "OCI Networking: List DHCP Options"
 	Description  = "List the DHCP options in an Oracle Cloud compartment, optionally filtered by VCN."
 	Website      = "https://www.flomation.co"
 	Icon         = "oracle+list"

@@ -15,7 +15,7 @@ import (
 const (
 	Author       = "Dave McElin"
 	Organisation = "Flomation"
-	Name         = "OCI Networking: List Route tables"
+	Name         = "OCI Networking: List Route Tables"
 	Description  = "List the route tables in an Oracle Cloud compartment, optionally filtered by VCN."
 	Website      = "https://www.flomation.co"
 	Icon         = "oracle+list"

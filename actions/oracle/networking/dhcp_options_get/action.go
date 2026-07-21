@@ -13,7 +13,7 @@ import (
 const (
 	Author       = "Dave McElin"
 	Organisation = "Flomation"
-	Name         = "OCI Networking: Get DHCP options"
+	Name         = "OCI Networking: Get DHCP Options"
 	Description  = "Fetch one Oracle Cloud DHCP options by OCID."
 	Website      = "https://www.flomation.co"
 	Icon         = "oracle+gear"

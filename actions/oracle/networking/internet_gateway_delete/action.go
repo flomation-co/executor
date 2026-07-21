@@ -14,7 +14,7 @@ import (
 const (
 	Author       = "Dave McElin"
 	Organisation = "Flomation"
-	Name         = "OCI Networking: Delete Internet gateway"
+	Name         = "OCI Networking: Delete Internet Gateway"
 	Description  = "Delete an Oracle Cloud internet gateway by OCID."
 	Website      = "https://www.flomation.co"
 	Icon         = "oracle+globe"

@@ -15,7 +15,7 @@ import (
 const (
 	Author       = "Dave McElin"
 	Organisation = "Flomation"
-	Name         = "OCI Networking: Update Security list"
+	Name         = "OCI Networking: Update Security List"
 	Description  = "Update editable attributes of an Oracle Cloud security list."
 	Website      = "https://www.flomation.co"
 	Icon         = "oracle+pen"
@@ -53,8 +53,10 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	if v := strings.TrimSpace(net.OptionalString("display_name", inputs)); v != "" {
 		details.DisplayName = &v
 	}
-	// REPLACE semantics: the arrays overwrite the whole rule set, so only send
-	// them when the operator actually supplied JSON.
+	// REPLACE semantics: a supplied array OVERWRITES the whole rule set. A blank
+	// input (decodes to nil) leaves the current rules untouched; an explicit empty
+	// array "[]" clears all rules (a security list with no rules is valid) — hence
+	// the != nil gate rather than len() > 0.
 	ingress, err := net.DecodeIngressRules("ingress_security_rules", inputs)
 	if err != nil {
 		return net.ErrorResult(err.Error()), nil

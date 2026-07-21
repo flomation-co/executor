@@ -14,7 +14,7 @@ import (
 const (
 	Author       = "Dave McElin"
 	Organisation = "Flomation"
-	Name         = "OCI Networking: Move NAT gateway to Compartment"
+	Name         = "OCI Networking: Move NAT Gateway to Compartment"
 	Description  = "Move an Oracle Cloud NAT gateway to a different compartment."
 	Website      = "https://www.flomation.co"
 	Icon         = "oracle+folder"

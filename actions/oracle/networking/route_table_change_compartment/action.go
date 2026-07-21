@@ -14,7 +14,7 @@ import (
 const (
 	Author       = "Dave McElin"
 	Organisation = "Flomation"
-	Name         = "OCI Networking: Move Route table to Compartment"
+	Name         = "OCI Networking: Move Route Table to Compartment"
 	Description  = "Move an Oracle Cloud route table to a different compartment."
 	Website      = "https://www.flomation.co"
 	Icon         = "oracle+folder"

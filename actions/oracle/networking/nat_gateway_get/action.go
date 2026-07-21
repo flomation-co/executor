@@ -13,7 +13,7 @@ import (
 const (
 	Author       = "Dave McElin"
 	Organisation = "Flomation"
-	Name         = "OCI Networking: Get NAT gateway"
+	Name         = "OCI Networking: Get NAT Gateway"
 	Description  = "Fetch one Oracle Cloud NAT gateway by OCID."
 	Website      = "https://www.flomation.co"
 	Icon         = "oracle+ethernet"

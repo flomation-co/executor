@@ -15,7 +15,7 @@ import (
 const (
 	Author       = "Dave McElin"
 	Organisation = "Flomation"
-	Name         = "OCI Networking: List Service gateways"
+	Name         = "OCI Networking: List Service Gateways"
 	Description  = "List the service gateways in an Oracle Cloud compartment, optionally filtered by VCN."
 	Website      = "https://www.flomation.co"
 	Icon         = "oracle+list"

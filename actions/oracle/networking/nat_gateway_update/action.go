@@ -16,7 +16,7 @@ import (
 const (
 	Author       = "Dave McElin"
 	Organisation = "Flomation"
-	Name         = "OCI Networking: Update NAT gateway"
+	Name         = "OCI Networking: Update NAT Gateway"
 	Description  = "Update editable attributes of an Oracle Cloud NAT gateway."
 	Website      = "https://www.flomation.co"
 	Icon         = "oracle+pen"

@@ -13,7 +13,7 @@ import (
 const (
 	Author       = "Dave McElin"
 	Organisation = "Flomation"
-	Name         = "OCI Networking: Get Route table"
+	Name         = "OCI Networking: Get Route Table"
 	Description  = "Fetch one Oracle Cloud route table by OCID."
 	Website      = "https://www.flomation.co"
 	Icon         = "oracle+route"

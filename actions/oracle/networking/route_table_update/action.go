@@ -15,7 +15,7 @@ import (
 const (
 	Author       = "Dave McElin"
 	Organisation = "Flomation"
-	Name         = "OCI Networking: Update Route table"
+	Name         = "OCI Networking: Update Route Table"
 	Description  = "Update editable attributes of an Oracle Cloud route table."
 	Website      = "https://www.flomation.co"
 	Icon         = "oracle+pen"
@@ -61,6 +61,9 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	if v := strings.TrimSpace(net.OptionalString("display_name", inputs)); v != "" {
 		details.DisplayName = &v
 	}
+	// REPLACE semantics: a supplied array OVERWRITES the whole route-rule set. A
+	// blank input (nil) preserves the current rules; an explicit empty array "[]"
+	// clears them (an empty route table is valid) — hence != nil, not len() > 0.
 	if rules != nil {
 		details.RouteRules = rules
 	}

@@ -14,7 +14,7 @@ import (
 const (
 	Author       = "Dave McElin"
 	Organisation = "Flomation"
-	Name         = "OCI Networking: Delete NAT gateway"
+	Name         = "OCI Networking: Delete NAT Gateway"
 	Description  = "Delete an Oracle Cloud NAT gateway by OCID."
 	Website      = "https://www.flomation.co"
 	Icon         = "oracle+ethernet"

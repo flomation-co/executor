@@ -68,6 +68,10 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	if v := strings.TrimSpace(net.OptionalString("domain_name_type", inputs)); v != "" {
 		details.DomainNameType = ocicore.UpdateDhcpDetailsDomainNameTypeEnum(v)
 	}
+	// REPLACE semantics, but with a len() > 0 gate (not != nil): a blank OR an
+	// explicit empty array "[]" both leave the current options untouched. Unlike a
+	// security list, a DHCP options set cannot be empty (OCI requires ≥1 option),
+	// so there is deliberately no way to clear it to zero here.
 	if len(options) > 0 {
 		details.Options = options
 	}
