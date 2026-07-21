@@ -36536,6 +36536,371 @@
       }
     ]
   },
+  "aws/s3/abort_multipart_upload": {
+    "hash": "a8e3dde2dd397a6d15071c1ae9ba4bb8ee869ec7bb102aab33c449a416b21f2e",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "AWS S3 Abort Multipart Upload",
+    "description": "Abort an in-progress S3 multipart upload and discard its parts.",
+    "website": "https://www.flomation.co",
+    "icon": "layer-group+trash",
+    "date": "21/07/2026",
+    "type": 2,
+    "category": {
+      "name": "AWS",
+      "icon": "cloud",
+      "description": "Amazon Web Services integrations"
+    },
+    "sub_category": {
+      "name": "S3",
+      "icon": "box-archive",
+      "description": "Simple Storage Service operations"
+    },
+    "inputs": [
+      {
+        "name": "auth_method",
+        "type": "string",
+        "value": null,
+        "label": "Authentication",
+        "placeholder": "",
+        "required": true,
+        "options": [
+          {
+            "name": "Access Keys",
+            "value": "keys"
+          },
+          {
+            "name": "Assume Role (cross-account)",
+            "value": "assume_role"
+          },
+          {
+            "name": "Managed Role (Credential)",
+            "value": "credential"
+          }
+        ]
+      },
+      {
+        "name": "aws_access_key",
+        "type": "secret",
+        "value": null,
+        "label": "AWS Access Key",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "aws_secret_key",
+        "type": "secret",
+        "value": null,
+        "label": "AWS Secret Key",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "aws_region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "eu-west-2",
+        "required": true
+      },
+      {
+        "name": "aws_session_token",
+        "type": "secret",
+        "value": null,
+        "label": "Session Token (optional)",
+        "placeholder": "",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "assume_role_arn",
+        "type": "string",
+        "value": null,
+        "label": "Role ARN to Assume",
+        "placeholder": "arn:aws:iam::\u003cyour-account\u003e:role/FlomationAccess",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "assume_role"
+          ]
+        }
+      },
+      {
+        "name": "external_id",
+        "type": "string",
+        "value": null,
+        "label": "Assume Role External ID (optional)",
+        "placeholder": "Must match the External ID in the role's trust policy",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "assume_role"
+          ]
+        }
+      },
+      {
+        "name": "credential",
+        "type": "credential",
+        "value": null,
+        "label": "AWS Role Credential",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "credential"
+          ]
+        }
+      },
+      {
+        "name": "bucket",
+        "type": "string",
+        "value": null,
+        "label": "Bucket",
+        "placeholder": "my-bucket",
+        "required": true
+      },
+      {
+        "name": "key",
+        "type": "string",
+        "value": null,
+        "label": "Object Key",
+        "placeholder": "path/to/large-object",
+        "required": true
+      },
+      {
+        "name": "upload_id",
+        "type": "string",
+        "value": null,
+        "label": "Upload ID",
+        "placeholder": "",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      }
+    ]
+  },
+  "aws/s3/complete_multipart_upload": {
+    "hash": "46020801d9ca3b4193cca56c3d871a7d4db0acc5059ca3cd68f6bcfd3ea177f0",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "AWS S3 Complete Multipart Upload",
+    "description": "Complete an S3 multipart upload from a JSON list of part ETags.",
+    "website": "https://www.flomation.co",
+    "icon": "layer-group+circle-check",
+    "date": "21/07/2026",
+    "type": 2,
+    "category": {
+      "name": "AWS",
+      "icon": "cloud",
+      "description": "Amazon Web Services integrations"
+    },
+    "sub_category": {
+      "name": "S3",
+      "icon": "box-archive",
+      "description": "Simple Storage Service operations"
+    },
+    "inputs": [
+      {
+        "name": "auth_method",
+        "type": "string",
+        "value": null,
+        "label": "Authentication",
+        "placeholder": "",
+        "required": true,
+        "options": [
+          {
+            "name": "Access Keys",
+            "value": "keys"
+          },
+          {
+            "name": "Assume Role (cross-account)",
+            "value": "assume_role"
+          },
+          {
+            "name": "Managed Role (Credential)",
+            "value": "credential"
+          }
+        ]
+      },
+      {
+        "name": "aws_access_key",
+        "type": "secret",
+        "value": null,
+        "label": "AWS Access Key",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "aws_secret_key",
+        "type": "secret",
+        "value": null,
+        "label": "AWS Secret Key",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "aws_region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "eu-west-2",
+        "required": true
+      },
+      {
+        "name": "aws_session_token",
+        "type": "secret",
+        "value": null,
+        "label": "Session Token (optional)",
+        "placeholder": "",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "assume_role_arn",
+        "type": "string",
+        "value": null,
+        "label": "Role ARN to Assume",
+        "placeholder": "arn:aws:iam::\u003cyour-account\u003e:role/FlomationAccess",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "assume_role"
+          ]
+        }
+      },
+      {
+        "name": "external_id",
+        "type": "string",
+        "value": null,
+        "label": "Assume Role External ID (optional)",
+        "placeholder": "Must match the External ID in the role's trust policy",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "assume_role"
+          ]
+        }
+      },
+      {
+        "name": "credential",
+        "type": "credential",
+        "value": null,
+        "label": "AWS Role Credential",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "credential"
+          ]
+        }
+      },
+      {
+        "name": "bucket",
+        "type": "string",
+        "value": null,
+        "label": "Bucket",
+        "placeholder": "my-bucket",
+        "required": true
+      },
+      {
+        "name": "key",
+        "type": "string",
+        "value": null,
+        "label": "Object Key",
+        "placeholder": "path/to/large-object",
+        "required": true
+      },
+      {
+        "name": "upload_id",
+        "type": "string",
+        "value": null,
+        "label": "Upload ID",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "parts",
+        "type": "string",
+        "value": null,
+        "label": "Parts (JSON array)",
+        "placeholder": "[{\"etag\":\"\\\"abc123\\\"\",\"part_number\":1}]",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "location",
+        "type": "string",
+        "value": null,
+        "label": "Location",
+        "placeholder": ""
+      },
+      {
+        "name": "etag",
+        "type": "string",
+        "value": null,
+        "label": "ETag",
+        "placeholder": ""
+      },
+      {
+        "name": "version_id",
+        "type": "string",
+        "value": null,
+        "label": "Version ID",
+        "placeholder": ""
+      }
+    ]
+  },
   "aws/s3/copy_object": {
     "hash": "507fd3fe82b556540efa84624672c170f63e810144e4f0ba4e7f63e34ed682dc",
     "author": "Andy Esser",
@@ -36873,6 +37238,194 @@
         "type": "string",
         "value": null,
         "label": "Location",
+        "placeholder": ""
+      }
+    ]
+  },
+  "aws/s3/create_multipart_upload": {
+    "hash": "a229bbbb10b570c31db48ce2ced736072f09ac98a8f9e6ea20ea57f497064a38",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "AWS S3 Create Multipart Upload",
+    "description": "Initiate an S3 multipart upload and return an upload ID for the parts.",
+    "website": "https://www.flomation.co",
+    "icon": "layer-group+plus",
+    "date": "21/07/2026",
+    "type": 2,
+    "category": {
+      "name": "AWS",
+      "icon": "cloud",
+      "description": "Amazon Web Services integrations"
+    },
+    "sub_category": {
+      "name": "S3",
+      "icon": "box-archive",
+      "description": "Simple Storage Service operations"
+    },
+    "inputs": [
+      {
+        "name": "auth_method",
+        "type": "string",
+        "value": null,
+        "label": "Authentication",
+        "placeholder": "",
+        "required": true,
+        "options": [
+          {
+            "name": "Access Keys",
+            "value": "keys"
+          },
+          {
+            "name": "Assume Role (cross-account)",
+            "value": "assume_role"
+          },
+          {
+            "name": "Managed Role (Credential)",
+            "value": "credential"
+          }
+        ]
+      },
+      {
+        "name": "aws_access_key",
+        "type": "secret",
+        "value": null,
+        "label": "AWS Access Key",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "aws_secret_key",
+        "type": "secret",
+        "value": null,
+        "label": "AWS Secret Key",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "aws_region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "eu-west-2",
+        "required": true
+      },
+      {
+        "name": "aws_session_token",
+        "type": "secret",
+        "value": null,
+        "label": "Session Token (optional)",
+        "placeholder": "",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "assume_role_arn",
+        "type": "string",
+        "value": null,
+        "label": "Role ARN to Assume",
+        "placeholder": "arn:aws:iam::\u003cyour-account\u003e:role/FlomationAccess",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "assume_role"
+          ]
+        }
+      },
+      {
+        "name": "external_id",
+        "type": "string",
+        "value": null,
+        "label": "Assume Role External ID (optional)",
+        "placeholder": "Must match the External ID in the role's trust policy",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "assume_role"
+          ]
+        }
+      },
+      {
+        "name": "credential",
+        "type": "credential",
+        "value": null,
+        "label": "AWS Role Credential",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "credential"
+          ]
+        }
+      },
+      {
+        "name": "bucket",
+        "type": "string",
+        "value": null,
+        "label": "Bucket",
+        "placeholder": "my-bucket",
+        "required": true
+      },
+      {
+        "name": "key",
+        "type": "string",
+        "value": null,
+        "label": "Object Key",
+        "placeholder": "path/to/large-object",
+        "required": true
+      },
+      {
+        "name": "content_type",
+        "type": "string",
+        "value": null,
+        "label": "Content Type (optional)",
+        "placeholder": "application/octet-stream"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "upload_id",
+        "type": "string",
+        "value": null,
+        "label": "Upload ID",
+        "placeholder": ""
+      },
+      {
+        "name": "bucket",
+        "type": "string",
+        "value": null,
+        "label": "Bucket",
+        "placeholder": ""
+      },
+      {
+        "name": "key",
+        "type": "string",
+        "value": null,
+        "label": "Object Key",
         "placeholder": ""
       }
     ]
@@ -37587,6 +38140,165 @@
       }
     ]
   },
+  "aws/s3/delete_bucket_ownership_controls": {
+    "hash": "4cb7955b61458214bf613dc19b46107c283cc1ba5ebfc04056f8c5e045e79e64",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "AWS S3 Delete Bucket Ownership Controls",
+    "description": "Remove the object ownership controls from an S3 bucket.",
+    "website": "https://www.flomation.co",
+    "icon": "user-group+trash",
+    "date": "21/07/2026",
+    "type": 2,
+    "category": {
+      "name": "AWS",
+      "icon": "cloud",
+      "description": "Amazon Web Services integrations"
+    },
+    "sub_category": {
+      "name": "S3",
+      "icon": "box-archive",
+      "description": "Simple Storage Service operations"
+    },
+    "inputs": [
+      {
+        "name": "auth_method",
+        "type": "string",
+        "value": null,
+        "label": "Authentication",
+        "placeholder": "",
+        "required": true,
+        "options": [
+          {
+            "name": "Access Keys",
+            "value": "keys"
+          },
+          {
+            "name": "Assume Role (cross-account)",
+            "value": "assume_role"
+          },
+          {
+            "name": "Managed Role (Credential)",
+            "value": "credential"
+          }
+        ]
+      },
+      {
+        "name": "aws_access_key",
+        "type": "secret",
+        "value": null,
+        "label": "AWS Access Key",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "aws_secret_key",
+        "type": "secret",
+        "value": null,
+        "label": "AWS Secret Key",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "aws_region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "eu-west-2",
+        "required": true
+      },
+      {
+        "name": "aws_session_token",
+        "type": "secret",
+        "value": null,
+        "label": "Session Token (optional)",
+        "placeholder": "",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "assume_role_arn",
+        "type": "string",
+        "value": null,
+        "label": "Role ARN to Assume",
+        "placeholder": "arn:aws:iam::\u003cyour-account\u003e:role/FlomationAccess",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "assume_role"
+          ]
+        }
+      },
+      {
+        "name": "external_id",
+        "type": "string",
+        "value": null,
+        "label": "Assume Role External ID (optional)",
+        "placeholder": "Must match the External ID in the role's trust policy",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "assume_role"
+          ]
+        }
+      },
+      {
+        "name": "credential",
+        "type": "credential",
+        "value": null,
+        "label": "AWS Role Credential",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "credential"
+          ]
+        }
+      },
+      {
+        "name": "bucket",
+        "type": "string",
+        "value": null,
+        "label": "Bucket",
+        "placeholder": "my-bucket",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "bucket",
+        "type": "string",
+        "value": null,
+        "label": "Bucket",
+        "placeholder": ""
+      }
+    ]
+  },
   "aws/s3/delete_bucket_policy": {
     "hash": "4d8230ed49f0c8704f8a4b73ff8645541878356677496a567247d3f6a63fcc47",
     "author": "Andy Esser",
@@ -37742,6 +38454,158 @@
         "type": "string",
         "value": null,
         "label": "Bucket",
+        "placeholder": ""
+      }
+    ]
+  },
+  "aws/s3/delete_bucket_replication": {
+    "hash": "c1f6d634743412a1f65ff0b334018a1d9e78bd285f44cc00775859ba5cfe58db",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "AWS S3 Delete Bucket Replication",
+    "description": "Remove the replication configuration from an S3 bucket.",
+    "website": "https://www.flomation.co",
+    "icon": "copy+trash",
+    "date": "21/07/2026",
+    "type": 2,
+    "category": {
+      "name": "AWS",
+      "icon": "cloud",
+      "description": "Amazon Web Services integrations"
+    },
+    "sub_category": {
+      "name": "S3",
+      "icon": "box-archive",
+      "description": "Simple Storage Service operations"
+    },
+    "inputs": [
+      {
+        "name": "auth_method",
+        "type": "string",
+        "value": null,
+        "label": "Authentication",
+        "placeholder": "",
+        "required": true,
+        "options": [
+          {
+            "name": "Access Keys",
+            "value": "keys"
+          },
+          {
+            "name": "Assume Role (cross-account)",
+            "value": "assume_role"
+          },
+          {
+            "name": "Managed Role (Credential)",
+            "value": "credential"
+          }
+        ]
+      },
+      {
+        "name": "aws_access_key",
+        "type": "secret",
+        "value": null,
+        "label": "AWS Access Key",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "aws_secret_key",
+        "type": "secret",
+        "value": null,
+        "label": "AWS Secret Key",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "aws_region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "eu-west-2",
+        "required": true
+      },
+      {
+        "name": "aws_session_token",
+        "type": "secret",
+        "value": null,
+        "label": "Session Token (optional)",
+        "placeholder": "",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "assume_role_arn",
+        "type": "string",
+        "value": null,
+        "label": "Role ARN to Assume",
+        "placeholder": "arn:aws:iam::\u003cyour-account\u003e:role/FlomationAccess",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "assume_role"
+          ]
+        }
+      },
+      {
+        "name": "external_id",
+        "type": "string",
+        "value": null,
+        "label": "Assume Role External ID (optional)",
+        "placeholder": "Must match the External ID in the role's trust policy",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "assume_role"
+          ]
+        }
+      },
+      {
+        "name": "credential",
+        "type": "credential",
+        "value": null,
+        "label": "AWS Role Credential",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "credential"
+          ]
+        }
+      },
+      {
+        "name": "bucket",
+        "type": "string",
+        "value": null,
+        "label": "Bucket",
+        "placeholder": "my-bucket",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
         "placeholder": ""
       }
     ]
@@ -38475,6 +39339,165 @@
         "type": "string",
         "value": null,
         "label": "Content Type",
+        "placeholder": ""
+      }
+    ]
+  },
+  "aws/s3/get_bucket_accelerate_configuration": {
+    "hash": "c45b90f53511a5212b0442f29bd7b155a02baaf59b9b071c407b8fa95d553559",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "AWS S3 Get Bucket Acceleration",
+    "description": "Read the transfer acceleration state of an S3 bucket.",
+    "website": "https://www.flomation.co",
+    "icon": "bolt+magnifying-glass",
+    "date": "21/07/2026",
+    "type": 2,
+    "category": {
+      "name": "AWS",
+      "icon": "cloud",
+      "description": "Amazon Web Services integrations"
+    },
+    "sub_category": {
+      "name": "S3",
+      "icon": "box-archive",
+      "description": "Simple Storage Service operations"
+    },
+    "inputs": [
+      {
+        "name": "auth_method",
+        "type": "string",
+        "value": null,
+        "label": "Authentication",
+        "placeholder": "",
+        "required": true,
+        "options": [
+          {
+            "name": "Access Keys",
+            "value": "keys"
+          },
+          {
+            "name": "Assume Role (cross-account)",
+            "value": "assume_role"
+          },
+          {
+            "name": "Managed Role (Credential)",
+            "value": "credential"
+          }
+        ]
+      },
+      {
+        "name": "aws_access_key",
+        "type": "secret",
+        "value": null,
+        "label": "AWS Access Key",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "aws_secret_key",
+        "type": "secret",
+        "value": null,
+        "label": "AWS Secret Key",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "aws_region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "eu-west-2",
+        "required": true
+      },
+      {
+        "name": "aws_session_token",
+        "type": "secret",
+        "value": null,
+        "label": "Session Token (optional)",
+        "placeholder": "",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "assume_role_arn",
+        "type": "string",
+        "value": null,
+        "label": "Role ARN to Assume",
+        "placeholder": "arn:aws:iam::\u003cyour-account\u003e:role/FlomationAccess",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "assume_role"
+          ]
+        }
+      },
+      {
+        "name": "external_id",
+        "type": "string",
+        "value": null,
+        "label": "Assume Role External ID (optional)",
+        "placeholder": "Must match the External ID in the role's trust policy",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "assume_role"
+          ]
+        }
+      },
+      {
+        "name": "credential",
+        "type": "credential",
+        "value": null,
+        "label": "AWS Role Credential",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "credential"
+          ]
+        }
+      },
+      {
+        "name": "bucket",
+        "type": "string",
+        "value": null,
+        "label": "Bucket",
+        "placeholder": "my-bucket",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "status",
+        "type": "string",
+        "value": null,
+        "label": "Acceleration Status",
         "placeholder": ""
       }
     ]
@@ -39288,6 +40311,511 @@
       }
     ]
   },
+  "aws/s3/get_bucket_logging": {
+    "hash": "9673a81f4758bed6dab43d07ba808d40a8fbc3b946015deb44c20f5690d41528",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "AWS S3 Get Bucket Logging",
+    "description": "Read the server access logging configuration of an S3 bucket.",
+    "website": "https://www.flomation.co",
+    "icon": "file-lines+magnifying-glass",
+    "date": "21/07/2026",
+    "type": 2,
+    "category": {
+      "name": "AWS",
+      "icon": "cloud",
+      "description": "Amazon Web Services integrations"
+    },
+    "sub_category": {
+      "name": "S3",
+      "icon": "box-archive",
+      "description": "Simple Storage Service operations"
+    },
+    "inputs": [
+      {
+        "name": "auth_method",
+        "type": "string",
+        "value": null,
+        "label": "Authentication",
+        "placeholder": "",
+        "required": true,
+        "options": [
+          {
+            "name": "Access Keys",
+            "value": "keys"
+          },
+          {
+            "name": "Assume Role (cross-account)",
+            "value": "assume_role"
+          },
+          {
+            "name": "Managed Role (Credential)",
+            "value": "credential"
+          }
+        ]
+      },
+      {
+        "name": "aws_access_key",
+        "type": "secret",
+        "value": null,
+        "label": "AWS Access Key",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "aws_secret_key",
+        "type": "secret",
+        "value": null,
+        "label": "AWS Secret Key",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "aws_region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "eu-west-2",
+        "required": true
+      },
+      {
+        "name": "aws_session_token",
+        "type": "secret",
+        "value": null,
+        "label": "Session Token (optional)",
+        "placeholder": "",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "assume_role_arn",
+        "type": "string",
+        "value": null,
+        "label": "Role ARN to Assume",
+        "placeholder": "arn:aws:iam::\u003cyour-account\u003e:role/FlomationAccess",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "assume_role"
+          ]
+        }
+      },
+      {
+        "name": "external_id",
+        "type": "string",
+        "value": null,
+        "label": "Assume Role External ID (optional)",
+        "placeholder": "Must match the External ID in the role's trust policy",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "assume_role"
+          ]
+        }
+      },
+      {
+        "name": "credential",
+        "type": "credential",
+        "value": null,
+        "label": "AWS Role Credential",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "credential"
+          ]
+        }
+      },
+      {
+        "name": "bucket",
+        "type": "string",
+        "value": null,
+        "label": "Bucket",
+        "placeholder": "my-bucket",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "target_bucket",
+        "type": "string",
+        "value": null,
+        "label": "Target Bucket",
+        "placeholder": ""
+      },
+      {
+        "name": "target_prefix",
+        "type": "string",
+        "value": null,
+        "label": "Target Prefix",
+        "placeholder": ""
+      },
+      {
+        "name": "enabled",
+        "type": "boolean",
+        "value": null,
+        "label": "Logging Enabled",
+        "placeholder": ""
+      }
+    ]
+  },
+  "aws/s3/get_bucket_notification_configuration": {
+    "hash": "0b69fcbe2c639eed4b587de38d5fdca45428791346a2d64b0d744e91999765eb",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "AWS S3 Get Bucket Notification",
+    "description": "Read the event notification configuration of an S3 bucket.",
+    "website": "https://www.flomation.co",
+    "icon": "bell+magnifying-glass",
+    "date": "21/07/2026",
+    "type": 2,
+    "category": {
+      "name": "AWS",
+      "icon": "cloud",
+      "description": "Amazon Web Services integrations"
+    },
+    "sub_category": {
+      "name": "S3",
+      "icon": "box-archive",
+      "description": "Simple Storage Service operations"
+    },
+    "inputs": [
+      {
+        "name": "auth_method",
+        "type": "string",
+        "value": null,
+        "label": "Authentication",
+        "placeholder": "",
+        "required": true,
+        "options": [
+          {
+            "name": "Access Keys",
+            "value": "keys"
+          },
+          {
+            "name": "Assume Role (cross-account)",
+            "value": "assume_role"
+          },
+          {
+            "name": "Managed Role (Credential)",
+            "value": "credential"
+          }
+        ]
+      },
+      {
+        "name": "aws_access_key",
+        "type": "secret",
+        "value": null,
+        "label": "AWS Access Key",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "aws_secret_key",
+        "type": "secret",
+        "value": null,
+        "label": "AWS Secret Key",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "aws_region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "eu-west-2",
+        "required": true
+      },
+      {
+        "name": "aws_session_token",
+        "type": "secret",
+        "value": null,
+        "label": "Session Token (optional)",
+        "placeholder": "",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "assume_role_arn",
+        "type": "string",
+        "value": null,
+        "label": "Role ARN to Assume",
+        "placeholder": "arn:aws:iam::\u003cyour-account\u003e:role/FlomationAccess",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "assume_role"
+          ]
+        }
+      },
+      {
+        "name": "external_id",
+        "type": "string",
+        "value": null,
+        "label": "Assume Role External ID (optional)",
+        "placeholder": "Must match the External ID in the role's trust policy",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "assume_role"
+          ]
+        }
+      },
+      {
+        "name": "credential",
+        "type": "credential",
+        "value": null,
+        "label": "AWS Role Credential",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "credential"
+          ]
+        }
+      },
+      {
+        "name": "bucket",
+        "type": "string",
+        "value": null,
+        "label": "Bucket",
+        "placeholder": "my-bucket",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "queue_configurations",
+        "type": "string",
+        "value": null,
+        "label": "Queue Configurations (JSON)",
+        "placeholder": ""
+      },
+      {
+        "name": "topic_configurations",
+        "type": "string",
+        "value": null,
+        "label": "Topic Configurations (JSON)",
+        "placeholder": ""
+      },
+      {
+        "name": "lambda_configurations",
+        "type": "string",
+        "value": null,
+        "label": "Lambda Configurations (JSON)",
+        "placeholder": ""
+      }
+    ]
+  },
+  "aws/s3/get_bucket_ownership_controls": {
+    "hash": "f5ab301f4c118bc5f72c8d9616246b6e506c4338c35235d24a1dc995045ef6d5",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "AWS S3 Get Bucket Ownership Controls",
+    "description": "Read the object ownership controls of an S3 bucket.",
+    "website": "https://www.flomation.co",
+    "icon": "user-group+magnifying-glass",
+    "date": "21/07/2026",
+    "type": 2,
+    "category": {
+      "name": "AWS",
+      "icon": "cloud",
+      "description": "Amazon Web Services integrations"
+    },
+    "sub_category": {
+      "name": "S3",
+      "icon": "box-archive",
+      "description": "Simple Storage Service operations"
+    },
+    "inputs": [
+      {
+        "name": "auth_method",
+        "type": "string",
+        "value": null,
+        "label": "Authentication",
+        "placeholder": "",
+        "required": true,
+        "options": [
+          {
+            "name": "Access Keys",
+            "value": "keys"
+          },
+          {
+            "name": "Assume Role (cross-account)",
+            "value": "assume_role"
+          },
+          {
+            "name": "Managed Role (Credential)",
+            "value": "credential"
+          }
+        ]
+      },
+      {
+        "name": "aws_access_key",
+        "type": "secret",
+        "value": null,
+        "label": "AWS Access Key",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "aws_secret_key",
+        "type": "secret",
+        "value": null,
+        "label": "AWS Secret Key",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "aws_region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "eu-west-2",
+        "required": true
+      },
+      {
+        "name": "aws_session_token",
+        "type": "secret",
+        "value": null,
+        "label": "Session Token (optional)",
+        "placeholder": "",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "assume_role_arn",
+        "type": "string",
+        "value": null,
+        "label": "Role ARN to Assume",
+        "placeholder": "arn:aws:iam::\u003cyour-account\u003e:role/FlomationAccess",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "assume_role"
+          ]
+        }
+      },
+      {
+        "name": "external_id",
+        "type": "string",
+        "value": null,
+        "label": "Assume Role External ID (optional)",
+        "placeholder": "Must match the External ID in the role's trust policy",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "assume_role"
+          ]
+        }
+      },
+      {
+        "name": "credential",
+        "type": "credential",
+        "value": null,
+        "label": "AWS Role Credential",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "credential"
+          ]
+        }
+      },
+      {
+        "name": "bucket",
+        "type": "string",
+        "value": null,
+        "label": "Bucket",
+        "placeholder": "my-bucket",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "object_ownership",
+        "type": "string",
+        "value": null,
+        "label": "Object Ownership",
+        "placeholder": ""
+      }
+    ]
+  },
   "aws/s3/get_bucket_policy": {
     "hash": "aa154be28834c06b8ef5ebcb0b5e6c4b6a940bf199a6ef7549a74c204b9f8430",
     "author": "Andy Esser",
@@ -39443,6 +40971,497 @@
         "type": "string",
         "value": null,
         "label": "Policy (JSON)",
+        "placeholder": ""
+      }
+    ]
+  },
+  "aws/s3/get_bucket_policy_status": {
+    "hash": "c20352964901b01feb2bb2efb98d0d04722fbf98fa4cb902e7bf54d677ff9894",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "AWS S3 Get Bucket Policy Status",
+    "description": "Report whether an S3 bucket is public according to its policy status.",
+    "website": "https://www.flomation.co",
+    "icon": "shield-halved+magnifying-glass",
+    "date": "21/07/2026",
+    "type": 2,
+    "category": {
+      "name": "AWS",
+      "icon": "cloud",
+      "description": "Amazon Web Services integrations"
+    },
+    "sub_category": {
+      "name": "S3",
+      "icon": "box-archive",
+      "description": "Simple Storage Service operations"
+    },
+    "inputs": [
+      {
+        "name": "auth_method",
+        "type": "string",
+        "value": null,
+        "label": "Authentication",
+        "placeholder": "",
+        "required": true,
+        "options": [
+          {
+            "name": "Access Keys",
+            "value": "keys"
+          },
+          {
+            "name": "Assume Role (cross-account)",
+            "value": "assume_role"
+          },
+          {
+            "name": "Managed Role (Credential)",
+            "value": "credential"
+          }
+        ]
+      },
+      {
+        "name": "aws_access_key",
+        "type": "secret",
+        "value": null,
+        "label": "AWS Access Key",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "aws_secret_key",
+        "type": "secret",
+        "value": null,
+        "label": "AWS Secret Key",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "aws_region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "eu-west-2",
+        "required": true
+      },
+      {
+        "name": "aws_session_token",
+        "type": "secret",
+        "value": null,
+        "label": "Session Token (optional)",
+        "placeholder": "",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "assume_role_arn",
+        "type": "string",
+        "value": null,
+        "label": "Role ARN to Assume",
+        "placeholder": "arn:aws:iam::\u003cyour-account\u003e:role/FlomationAccess",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "assume_role"
+          ]
+        }
+      },
+      {
+        "name": "external_id",
+        "type": "string",
+        "value": null,
+        "label": "Assume Role External ID (optional)",
+        "placeholder": "Must match the External ID in the role's trust policy",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "assume_role"
+          ]
+        }
+      },
+      {
+        "name": "credential",
+        "type": "credential",
+        "value": null,
+        "label": "AWS Role Credential",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "credential"
+          ]
+        }
+      },
+      {
+        "name": "bucket",
+        "type": "string",
+        "value": null,
+        "label": "Bucket Name",
+        "placeholder": "my-bucket",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "is_public",
+        "type": "boolean",
+        "value": null,
+        "label": "Is Public",
+        "placeholder": ""
+      }
+    ]
+  },
+  "aws/s3/get_bucket_replication": {
+    "hash": "7837a55d70c4bcdbb56e69b199f248f178fb6cc4b7790fa67ebd5b9171cb13ee",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "AWS S3 Get Bucket Replication",
+    "description": "Read a bucket's replication configuration, returning the IAM role and its rules.",
+    "website": "https://www.flomation.co",
+    "icon": "copy+magnifying-glass",
+    "date": "21/07/2026",
+    "type": 2,
+    "category": {
+      "name": "AWS",
+      "icon": "cloud",
+      "description": "Amazon Web Services integrations"
+    },
+    "sub_category": {
+      "name": "S3",
+      "icon": "box-archive",
+      "description": "Simple Storage Service operations"
+    },
+    "inputs": [
+      {
+        "name": "auth_method",
+        "type": "string",
+        "value": null,
+        "label": "Authentication",
+        "placeholder": "",
+        "required": true,
+        "options": [
+          {
+            "name": "Access Keys",
+            "value": "keys"
+          },
+          {
+            "name": "Assume Role (cross-account)",
+            "value": "assume_role"
+          },
+          {
+            "name": "Managed Role (Credential)",
+            "value": "credential"
+          }
+        ]
+      },
+      {
+        "name": "aws_access_key",
+        "type": "secret",
+        "value": null,
+        "label": "AWS Access Key",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "aws_secret_key",
+        "type": "secret",
+        "value": null,
+        "label": "AWS Secret Key",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "aws_region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "eu-west-2",
+        "required": true
+      },
+      {
+        "name": "aws_session_token",
+        "type": "secret",
+        "value": null,
+        "label": "Session Token (optional)",
+        "placeholder": "",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "assume_role_arn",
+        "type": "string",
+        "value": null,
+        "label": "Role ARN to Assume",
+        "placeholder": "arn:aws:iam::\u003cyour-account\u003e:role/FlomationAccess",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "assume_role"
+          ]
+        }
+      },
+      {
+        "name": "external_id",
+        "type": "string",
+        "value": null,
+        "label": "Assume Role External ID (optional)",
+        "placeholder": "Must match the External ID in the role's trust policy",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "assume_role"
+          ]
+        }
+      },
+      {
+        "name": "credential",
+        "type": "credential",
+        "value": null,
+        "label": "AWS Role Credential",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "credential"
+          ]
+        }
+      },
+      {
+        "name": "bucket",
+        "type": "string",
+        "value": null,
+        "label": "Bucket",
+        "placeholder": "my-bucket",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "role",
+        "type": "string",
+        "value": null,
+        "label": "Replication IAM Role ARN",
+        "placeholder": ""
+      },
+      {
+        "name": "rules",
+        "type": "string",
+        "value": null,
+        "label": "Rules (JSON)",
+        "placeholder": ""
+      },
+      {
+        "name": "rule_count",
+        "type": "integer",
+        "value": null,
+        "label": "Rule Count",
+        "placeholder": ""
+      }
+    ]
+  },
+  "aws/s3/get_bucket_request_payment": {
+    "hash": "8bed227d31ec410dbf6b23eaf5e28833a121caa96be45297db1e15443fbe004e",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "AWS S3 Get Bucket Request Payment",
+    "description": "Read who pays for downloads on an S3 bucket.",
+    "website": "https://www.flomation.co",
+    "icon": "bucket+magnifying-glass",
+    "date": "21/07/2026",
+    "type": 2,
+    "category": {
+      "name": "AWS",
+      "icon": "cloud",
+      "description": "Amazon Web Services integrations"
+    },
+    "sub_category": {
+      "name": "S3",
+      "icon": "box-archive",
+      "description": "Simple Storage Service operations"
+    },
+    "inputs": [
+      {
+        "name": "auth_method",
+        "type": "string",
+        "value": null,
+        "label": "Authentication",
+        "placeholder": "",
+        "required": true,
+        "options": [
+          {
+            "name": "Access Keys",
+            "value": "keys"
+          },
+          {
+            "name": "Assume Role (cross-account)",
+            "value": "assume_role"
+          },
+          {
+            "name": "Managed Role (Credential)",
+            "value": "credential"
+          }
+        ]
+      },
+      {
+        "name": "aws_access_key",
+        "type": "secret",
+        "value": null,
+        "label": "AWS Access Key",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "aws_secret_key",
+        "type": "secret",
+        "value": null,
+        "label": "AWS Secret Key",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "aws_region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "eu-west-2",
+        "required": true
+      },
+      {
+        "name": "aws_session_token",
+        "type": "secret",
+        "value": null,
+        "label": "Session Token (optional)",
+        "placeholder": "",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "assume_role_arn",
+        "type": "string",
+        "value": null,
+        "label": "Role ARN to Assume",
+        "placeholder": "arn:aws:iam::\u003cyour-account\u003e:role/FlomationAccess",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "assume_role"
+          ]
+        }
+      },
+      {
+        "name": "external_id",
+        "type": "string",
+        "value": null,
+        "label": "Assume Role External ID (optional)",
+        "placeholder": "Must match the External ID in the role's trust policy",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "assume_role"
+          ]
+        }
+      },
+      {
+        "name": "credential",
+        "type": "credential",
+        "value": null,
+        "label": "AWS Role Credential",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "credential"
+          ]
+        }
+      },
+      {
+        "name": "bucket",
+        "type": "string",
+        "value": null,
+        "label": "Bucket",
+        "placeholder": "my-bucket",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "payer",
+        "type": "string",
+        "value": null,
+        "label": "Payer",
         "placeholder": ""
       }
     ]
@@ -40112,6 +42131,736 @@
       }
     ]
   },
+  "aws/s3/get_object_attributes": {
+    "hash": "5def1b0e48a230777f3867cdf88d3fd3e7cf593bfff6a38f132c4fc2ecc14b8b",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "AWS S3 Get Object Attributes",
+    "description": "Retrieve an S3 object's ETag, storage class and size without downloading the body.",
+    "website": "https://www.flomation.co",
+    "icon": "file-lines+circle-info",
+    "date": "21/07/2026",
+    "type": 2,
+    "category": {
+      "name": "AWS",
+      "icon": "cloud",
+      "description": "Amazon Web Services integrations"
+    },
+    "sub_category": {
+      "name": "S3",
+      "icon": "box-archive",
+      "description": "Simple Storage Service operations"
+    },
+    "inputs": [
+      {
+        "name": "auth_method",
+        "type": "string",
+        "value": null,
+        "label": "Authentication",
+        "placeholder": "",
+        "required": true,
+        "options": [
+          {
+            "name": "Access Keys",
+            "value": "keys"
+          },
+          {
+            "name": "Assume Role (cross-account)",
+            "value": "assume_role"
+          },
+          {
+            "name": "Managed Role (Credential)",
+            "value": "credential"
+          }
+        ]
+      },
+      {
+        "name": "aws_access_key",
+        "type": "secret",
+        "value": null,
+        "label": "AWS Access Key",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "aws_secret_key",
+        "type": "secret",
+        "value": null,
+        "label": "AWS Secret Key",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "aws_region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "eu-west-2",
+        "required": true
+      },
+      {
+        "name": "aws_session_token",
+        "type": "secret",
+        "value": null,
+        "label": "Session Token (optional)",
+        "placeholder": "",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "assume_role_arn",
+        "type": "string",
+        "value": null,
+        "label": "Role ARN to Assume",
+        "placeholder": "arn:aws:iam::\u003cyour-account\u003e:role/FlomationAccess",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "assume_role"
+          ]
+        }
+      },
+      {
+        "name": "external_id",
+        "type": "string",
+        "value": null,
+        "label": "Assume Role External ID (optional)",
+        "placeholder": "Must match the External ID in the role's trust policy",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "assume_role"
+          ]
+        }
+      },
+      {
+        "name": "credential",
+        "type": "credential",
+        "value": null,
+        "label": "AWS Role Credential",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "credential"
+          ]
+        }
+      },
+      {
+        "name": "bucket",
+        "type": "string",
+        "value": null,
+        "label": "Bucket",
+        "placeholder": "my-bucket",
+        "required": true
+      },
+      {
+        "name": "key",
+        "type": "string",
+        "value": null,
+        "label": "Object Key",
+        "placeholder": "path/to/object.txt",
+        "required": true
+      },
+      {
+        "name": "version_id",
+        "type": "string",
+        "value": null,
+        "label": "Version ID (optional)",
+        "placeholder": ""
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "etag",
+        "type": "string",
+        "value": null,
+        "label": "ETag",
+        "placeholder": ""
+      },
+      {
+        "name": "storage_class",
+        "type": "string",
+        "value": null,
+        "label": "Storage Class",
+        "placeholder": ""
+      },
+      {
+        "name": "object_size",
+        "type": "integer",
+        "value": null,
+        "label": "Object Size",
+        "placeholder": ""
+      },
+      {
+        "name": "last_modified",
+        "type": "string",
+        "value": null,
+        "label": "Last Modified",
+        "placeholder": ""
+      }
+    ]
+  },
+  "aws/s3/get_object_legal_hold": {
+    "hash": "8dcf5213267a9a322e2e31c094382384b257d1b5fde95e2e60773680c749cbfe",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "AWS S3 Get Object Legal Hold",
+    "description": "Read the legal hold status of an AWS S3 object version.",
+    "website": "https://www.flomation.co",
+    "icon": "lock+magnifying-glass",
+    "date": "21/07/2026",
+    "type": 2,
+    "category": {
+      "name": "AWS",
+      "icon": "cloud",
+      "description": "Amazon Web Services integrations"
+    },
+    "sub_category": {
+      "name": "S3",
+      "icon": "box-archive",
+      "description": "Simple Storage Service operations"
+    },
+    "inputs": [
+      {
+        "name": "auth_method",
+        "type": "string",
+        "value": null,
+        "label": "Authentication",
+        "placeholder": "",
+        "required": true,
+        "options": [
+          {
+            "name": "Access Keys",
+            "value": "keys"
+          },
+          {
+            "name": "Assume Role (cross-account)",
+            "value": "assume_role"
+          },
+          {
+            "name": "Managed Role (Credential)",
+            "value": "credential"
+          }
+        ]
+      },
+      {
+        "name": "aws_access_key",
+        "type": "secret",
+        "value": null,
+        "label": "AWS Access Key",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "aws_secret_key",
+        "type": "secret",
+        "value": null,
+        "label": "AWS Secret Key",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "aws_region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "eu-west-2",
+        "required": true
+      },
+      {
+        "name": "aws_session_token",
+        "type": "secret",
+        "value": null,
+        "label": "Session Token (optional)",
+        "placeholder": "",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "assume_role_arn",
+        "type": "string",
+        "value": null,
+        "label": "Role ARN to Assume",
+        "placeholder": "arn:aws:iam::\u003cyour-account\u003e:role/FlomationAccess",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "assume_role"
+          ]
+        }
+      },
+      {
+        "name": "external_id",
+        "type": "string",
+        "value": null,
+        "label": "Assume Role External ID (optional)",
+        "placeholder": "Must match the External ID in the role's trust policy",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "assume_role"
+          ]
+        }
+      },
+      {
+        "name": "credential",
+        "type": "credential",
+        "value": null,
+        "label": "AWS Role Credential",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "credential"
+          ]
+        }
+      },
+      {
+        "name": "bucket",
+        "type": "string",
+        "value": null,
+        "label": "Bucket",
+        "placeholder": "my-bucket",
+        "required": true
+      },
+      {
+        "name": "key",
+        "type": "string",
+        "value": null,
+        "label": "Object Key",
+        "placeholder": "path/to/object",
+        "required": true
+      },
+      {
+        "name": "version_id",
+        "type": "string",
+        "value": null,
+        "label": "Version ID (optional)",
+        "placeholder": "Leave blank for latest version"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "status",
+        "type": "string",
+        "value": null,
+        "label": "Legal Hold Status",
+        "placeholder": ""
+      }
+    ]
+  },
+  "aws/s3/get_object_lock_configuration": {
+    "hash": "6a7ff117e7d25e74cc099d3b89b4b10a268c5d80090cbe7d274daf634d160cdf",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "AWS S3 Get Object Lock Configuration",
+    "description": "Read the Object Lock and default WORM retention of an AWS S3 bucket.",
+    "website": "https://www.flomation.co",
+    "icon": "lock+magnifying-glass",
+    "date": "21/07/2026",
+    "type": 2,
+    "category": {
+      "name": "AWS",
+      "icon": "cloud",
+      "description": "Amazon Web Services integrations"
+    },
+    "sub_category": {
+      "name": "S3",
+      "icon": "box-archive",
+      "description": "Simple Storage Service operations"
+    },
+    "inputs": [
+      {
+        "name": "auth_method",
+        "type": "string",
+        "value": null,
+        "label": "Authentication",
+        "placeholder": "",
+        "required": true,
+        "options": [
+          {
+            "name": "Access Keys",
+            "value": "keys"
+          },
+          {
+            "name": "Assume Role (cross-account)",
+            "value": "assume_role"
+          },
+          {
+            "name": "Managed Role (Credential)",
+            "value": "credential"
+          }
+        ]
+      },
+      {
+        "name": "aws_access_key",
+        "type": "secret",
+        "value": null,
+        "label": "AWS Access Key",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "aws_secret_key",
+        "type": "secret",
+        "value": null,
+        "label": "AWS Secret Key",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "aws_region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "eu-west-2",
+        "required": true
+      },
+      {
+        "name": "aws_session_token",
+        "type": "secret",
+        "value": null,
+        "label": "Session Token (optional)",
+        "placeholder": "",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "assume_role_arn",
+        "type": "string",
+        "value": null,
+        "label": "Role ARN to Assume",
+        "placeholder": "arn:aws:iam::\u003cyour-account\u003e:role/FlomationAccess",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "assume_role"
+          ]
+        }
+      },
+      {
+        "name": "external_id",
+        "type": "string",
+        "value": null,
+        "label": "Assume Role External ID (optional)",
+        "placeholder": "Must match the External ID in the role's trust policy",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "assume_role"
+          ]
+        }
+      },
+      {
+        "name": "credential",
+        "type": "credential",
+        "value": null,
+        "label": "AWS Role Credential",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "credential"
+          ]
+        }
+      },
+      {
+        "name": "bucket",
+        "type": "string",
+        "value": null,
+        "label": "Bucket",
+        "placeholder": "my-bucket",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "object_lock_enabled",
+        "type": "boolean",
+        "value": null,
+        "label": "Object Lock Enabled",
+        "placeholder": ""
+      },
+      {
+        "name": "default_mode",
+        "type": "string",
+        "value": null,
+        "label": "Default Retention Mode",
+        "placeholder": ""
+      },
+      {
+        "name": "default_days",
+        "type": "integer",
+        "value": null,
+        "label": "Default Retention Days",
+        "placeholder": ""
+      },
+      {
+        "name": "default_years",
+        "type": "integer",
+        "value": null,
+        "label": "Default Retention Years",
+        "placeholder": ""
+      }
+    ]
+  },
+  "aws/s3/get_object_retention": {
+    "hash": "9ef5ce8dcf52206e126537f763206105d13314f6de6fdce6ee629dafdb0f2a7f",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "AWS S3 Get Object Retention",
+    "description": "Read the WORM retention mode and retain-until date of an AWS S3 object.",
+    "website": "https://www.flomation.co",
+    "icon": "lock+clock",
+    "date": "21/07/2026",
+    "type": 2,
+    "category": {
+      "name": "AWS",
+      "icon": "cloud",
+      "description": "Amazon Web Services integrations"
+    },
+    "sub_category": {
+      "name": "S3",
+      "icon": "box-archive",
+      "description": "Simple Storage Service operations"
+    },
+    "inputs": [
+      {
+        "name": "auth_method",
+        "type": "string",
+        "value": null,
+        "label": "Authentication",
+        "placeholder": "",
+        "required": true,
+        "options": [
+          {
+            "name": "Access Keys",
+            "value": "keys"
+          },
+          {
+            "name": "Assume Role (cross-account)",
+            "value": "assume_role"
+          },
+          {
+            "name": "Managed Role (Credential)",
+            "value": "credential"
+          }
+        ]
+      },
+      {
+        "name": "aws_access_key",
+        "type": "secret",
+        "value": null,
+        "label": "AWS Access Key",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "aws_secret_key",
+        "type": "secret",
+        "value": null,
+        "label": "AWS Secret Key",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "aws_region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "eu-west-2",
+        "required": true
+      },
+      {
+        "name": "aws_session_token",
+        "type": "secret",
+        "value": null,
+        "label": "Session Token (optional)",
+        "placeholder": "",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "assume_role_arn",
+        "type": "string",
+        "value": null,
+        "label": "Role ARN to Assume",
+        "placeholder": "arn:aws:iam::\u003cyour-account\u003e:role/FlomationAccess",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "assume_role"
+          ]
+        }
+      },
+      {
+        "name": "external_id",
+        "type": "string",
+        "value": null,
+        "label": "Assume Role External ID (optional)",
+        "placeholder": "Must match the External ID in the role's trust policy",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "assume_role"
+          ]
+        }
+      },
+      {
+        "name": "credential",
+        "type": "credential",
+        "value": null,
+        "label": "AWS Role Credential",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "credential"
+          ]
+        }
+      },
+      {
+        "name": "bucket",
+        "type": "string",
+        "value": null,
+        "label": "Bucket",
+        "placeholder": "my-bucket",
+        "required": true
+      },
+      {
+        "name": "key",
+        "type": "string",
+        "value": null,
+        "label": "Object Key",
+        "placeholder": "path/to/object",
+        "required": true
+      },
+      {
+        "name": "version_id",
+        "type": "string",
+        "value": null,
+        "label": "Version ID (optional)",
+        "placeholder": "Leave blank for latest version"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "mode",
+        "type": "string",
+        "value": null,
+        "label": "Retention Mode",
+        "placeholder": ""
+      },
+      {
+        "name": "retain_until",
+        "type": "string",
+        "value": null,
+        "label": "Retain Until",
+        "placeholder": ""
+      }
+    ]
+  },
   "aws/s3/get_object_tagging": {
     "hash": "4a6ed5a2edb95b90b98aa2cb23cb8dee0feac0eeb3eec3a0f03ab39d8dc82ada",
     "author": "Andy Esser",
@@ -40275,6 +43024,180 @@
         "type": "string",
         "value": null,
         "label": "Tags (JSON object)",
+        "placeholder": ""
+      }
+    ]
+  },
+  "aws/s3/get_object_torrent": {
+    "hash": "4622749116b1f1cbfd0cd862e80ab00171f16250021257a87f3d48939af112a4",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "AWS S3 Get Object Torrent",
+    "description": "Retrieve the BitTorrent .torrent file for an S3 object, base64-encoded.",
+    "website": "https://www.flomation.co",
+    "icon": "arrow-down+file-lines",
+    "date": "21/07/2026",
+    "type": 2,
+    "category": {
+      "name": "AWS",
+      "icon": "cloud",
+      "description": "Amazon Web Services integrations"
+    },
+    "sub_category": {
+      "name": "S3",
+      "icon": "box-archive",
+      "description": "Simple Storage Service operations"
+    },
+    "inputs": [
+      {
+        "name": "auth_method",
+        "type": "string",
+        "value": null,
+        "label": "Authentication",
+        "placeholder": "",
+        "required": true,
+        "options": [
+          {
+            "name": "Access Keys",
+            "value": "keys"
+          },
+          {
+            "name": "Assume Role (cross-account)",
+            "value": "assume_role"
+          },
+          {
+            "name": "Managed Role (Credential)",
+            "value": "credential"
+          }
+        ]
+      },
+      {
+        "name": "aws_access_key",
+        "type": "secret",
+        "value": null,
+        "label": "AWS Access Key",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "aws_secret_key",
+        "type": "secret",
+        "value": null,
+        "label": "AWS Secret Key",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "aws_region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "eu-west-2",
+        "required": true
+      },
+      {
+        "name": "aws_session_token",
+        "type": "secret",
+        "value": null,
+        "label": "Session Token (optional)",
+        "placeholder": "",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "assume_role_arn",
+        "type": "string",
+        "value": null,
+        "label": "Role ARN to Assume",
+        "placeholder": "arn:aws:iam::\u003cyour-account\u003e:role/FlomationAccess",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "assume_role"
+          ]
+        }
+      },
+      {
+        "name": "external_id",
+        "type": "string",
+        "value": null,
+        "label": "Assume Role External ID (optional)",
+        "placeholder": "Must match the External ID in the role's trust policy",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "assume_role"
+          ]
+        }
+      },
+      {
+        "name": "credential",
+        "type": "credential",
+        "value": null,
+        "label": "AWS Role Credential",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "credential"
+          ]
+        }
+      },
+      {
+        "name": "bucket",
+        "type": "string",
+        "value": null,
+        "label": "Bucket",
+        "placeholder": "my-bucket",
+        "required": true
+      },
+      {
+        "name": "key",
+        "type": "string",
+        "value": null,
+        "label": "Object Key",
+        "placeholder": "path/to/object.txt",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "torrent_base64",
+        "type": "string",
+        "value": null,
+        "label": "Torrent (base64)",
+        "placeholder": ""
+      },
+      {
+        "name": "byte_length",
+        "type": "integer",
+        "value": null,
+        "label": "Byte Length",
         "placeholder": ""
       }
     ]
@@ -41038,6 +43961,179 @@
       }
     ]
   },
+  "aws/s3/list_multipart_uploads": {
+    "hash": "fcbf8b6c4412d8f255b7d09a6db10f5c8c1c6e0b7a1ea25db80e224d44cee4b8",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "AWS S3 List Multipart Uploads",
+    "description": "List in-progress multipart uploads in an S3 bucket.",
+    "website": "https://www.flomation.co",
+    "icon": "layer-group+list",
+    "date": "21/07/2026",
+    "type": 2,
+    "category": {
+      "name": "AWS",
+      "icon": "cloud",
+      "description": "Amazon Web Services integrations"
+    },
+    "sub_category": {
+      "name": "S3",
+      "icon": "box-archive",
+      "description": "Simple Storage Service operations"
+    },
+    "inputs": [
+      {
+        "name": "auth_method",
+        "type": "string",
+        "value": null,
+        "label": "Authentication",
+        "placeholder": "",
+        "required": true,
+        "options": [
+          {
+            "name": "Access Keys",
+            "value": "keys"
+          },
+          {
+            "name": "Assume Role (cross-account)",
+            "value": "assume_role"
+          },
+          {
+            "name": "Managed Role (Credential)",
+            "value": "credential"
+          }
+        ]
+      },
+      {
+        "name": "aws_access_key",
+        "type": "secret",
+        "value": null,
+        "label": "AWS Access Key",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "aws_secret_key",
+        "type": "secret",
+        "value": null,
+        "label": "AWS Secret Key",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "aws_region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "eu-west-2",
+        "required": true
+      },
+      {
+        "name": "aws_session_token",
+        "type": "secret",
+        "value": null,
+        "label": "Session Token (optional)",
+        "placeholder": "",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "assume_role_arn",
+        "type": "string",
+        "value": null,
+        "label": "Role ARN to Assume",
+        "placeholder": "arn:aws:iam::\u003cyour-account\u003e:role/FlomationAccess",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "assume_role"
+          ]
+        }
+      },
+      {
+        "name": "external_id",
+        "type": "string",
+        "value": null,
+        "label": "Assume Role External ID (optional)",
+        "placeholder": "Must match the External ID in the role's trust policy",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "assume_role"
+          ]
+        }
+      },
+      {
+        "name": "credential",
+        "type": "credential",
+        "value": null,
+        "label": "AWS Role Credential",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "credential"
+          ]
+        }
+      },
+      {
+        "name": "bucket",
+        "type": "string",
+        "value": null,
+        "label": "Bucket",
+        "placeholder": "my-bucket",
+        "required": true
+      },
+      {
+        "name": "prefix",
+        "type": "string",
+        "value": null,
+        "label": "Key Prefix (optional)",
+        "placeholder": "path/to/"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "uploads",
+        "type": "string",
+        "value": null,
+        "label": "Uploads (JSON)",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Count",
+        "placeholder": ""
+      }
+    ]
+  },
   "aws/s3/list_object_versions": {
     "hash": "54f7d663f076d94d5290fc2be48b9d4585fcb94ead1611e0b0e26aec52c1d01c",
     "author": "Andy Esser",
@@ -41207,6 +44303,188 @@
         "type": "integer",
         "value": null,
         "label": "Version Count",
+        "placeholder": ""
+      }
+    ]
+  },
+  "aws/s3/list_parts": {
+    "hash": "6377da01108c85e37809bdcca1a367f2de36669f14f2fc1590149de7db7a4186",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "AWS S3 List Parts",
+    "description": "List the parts already uploaded for an S3 multipart upload.",
+    "website": "https://www.flomation.co",
+    "icon": "layer-group+magnifying-glass",
+    "date": "21/07/2026",
+    "type": 2,
+    "category": {
+      "name": "AWS",
+      "icon": "cloud",
+      "description": "Amazon Web Services integrations"
+    },
+    "sub_category": {
+      "name": "S3",
+      "icon": "box-archive",
+      "description": "Simple Storage Service operations"
+    },
+    "inputs": [
+      {
+        "name": "auth_method",
+        "type": "string",
+        "value": null,
+        "label": "Authentication",
+        "placeholder": "",
+        "required": true,
+        "options": [
+          {
+            "name": "Access Keys",
+            "value": "keys"
+          },
+          {
+            "name": "Assume Role (cross-account)",
+            "value": "assume_role"
+          },
+          {
+            "name": "Managed Role (Credential)",
+            "value": "credential"
+          }
+        ]
+      },
+      {
+        "name": "aws_access_key",
+        "type": "secret",
+        "value": null,
+        "label": "AWS Access Key",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "aws_secret_key",
+        "type": "secret",
+        "value": null,
+        "label": "AWS Secret Key",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "aws_region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "eu-west-2",
+        "required": true
+      },
+      {
+        "name": "aws_session_token",
+        "type": "secret",
+        "value": null,
+        "label": "Session Token (optional)",
+        "placeholder": "",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "assume_role_arn",
+        "type": "string",
+        "value": null,
+        "label": "Role ARN to Assume",
+        "placeholder": "arn:aws:iam::\u003cyour-account\u003e:role/FlomationAccess",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "assume_role"
+          ]
+        }
+      },
+      {
+        "name": "external_id",
+        "type": "string",
+        "value": null,
+        "label": "Assume Role External ID (optional)",
+        "placeholder": "Must match the External ID in the role's trust policy",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "assume_role"
+          ]
+        }
+      },
+      {
+        "name": "credential",
+        "type": "credential",
+        "value": null,
+        "label": "AWS Role Credential",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "credential"
+          ]
+        }
+      },
+      {
+        "name": "bucket",
+        "type": "string",
+        "value": null,
+        "label": "Bucket",
+        "placeholder": "my-bucket",
+        "required": true
+      },
+      {
+        "name": "key",
+        "type": "string",
+        "value": null,
+        "label": "Object Key",
+        "placeholder": "path/to/large-object",
+        "required": true
+      },
+      {
+        "name": "upload_id",
+        "type": "string",
+        "value": null,
+        "label": "Upload ID",
+        "placeholder": "",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "parts",
+        "type": "string",
+        "value": null,
+        "label": "Parts (JSON)",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Count",
         "placeholder": ""
       }
     ]
@@ -41676,6 +44954,190 @@
         "type": "integer",
         "value": null,
         "label": "Filename",
+        "placeholder": ""
+      }
+    ]
+  },
+  "aws/s3/put_bucket_accelerate_configuration": {
+    "hash": "8c183b20e58504b844bd8cf51878dc7ca4a2ff829969a49542d4f1bb01c05ae4",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "AWS S3 Put Bucket Acceleration",
+    "description": "Enable or suspend transfer acceleration on an S3 bucket.",
+    "website": "https://www.flomation.co",
+    "icon": "bolt+pen",
+    "date": "21/07/2026",
+    "type": 2,
+    "category": {
+      "name": "AWS",
+      "icon": "cloud",
+      "description": "Amazon Web Services integrations"
+    },
+    "sub_category": {
+      "name": "S3",
+      "icon": "box-archive",
+      "description": "Simple Storage Service operations"
+    },
+    "inputs": [
+      {
+        "name": "auth_method",
+        "type": "string",
+        "value": null,
+        "label": "Authentication",
+        "placeholder": "",
+        "required": true,
+        "options": [
+          {
+            "name": "Access Keys",
+            "value": "keys"
+          },
+          {
+            "name": "Assume Role (cross-account)",
+            "value": "assume_role"
+          },
+          {
+            "name": "Managed Role (Credential)",
+            "value": "credential"
+          }
+        ]
+      },
+      {
+        "name": "aws_access_key",
+        "type": "secret",
+        "value": null,
+        "label": "AWS Access Key",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "aws_secret_key",
+        "type": "secret",
+        "value": null,
+        "label": "AWS Secret Key",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "aws_region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "eu-west-2",
+        "required": true
+      },
+      {
+        "name": "aws_session_token",
+        "type": "secret",
+        "value": null,
+        "label": "Session Token (optional)",
+        "placeholder": "",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "assume_role_arn",
+        "type": "string",
+        "value": null,
+        "label": "Role ARN to Assume",
+        "placeholder": "arn:aws:iam::\u003cyour-account\u003e:role/FlomationAccess",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "assume_role"
+          ]
+        }
+      },
+      {
+        "name": "external_id",
+        "type": "string",
+        "value": null,
+        "label": "Assume Role External ID (optional)",
+        "placeholder": "Must match the External ID in the role's trust policy",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "assume_role"
+          ]
+        }
+      },
+      {
+        "name": "credential",
+        "type": "credential",
+        "value": null,
+        "label": "AWS Role Credential",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "credential"
+          ]
+        }
+      },
+      {
+        "name": "bucket",
+        "type": "string",
+        "value": null,
+        "label": "Bucket",
+        "placeholder": "my-bucket",
+        "required": true
+      },
+      {
+        "name": "status",
+        "type": "string",
+        "value": null,
+        "label": "Acceleration Status",
+        "placeholder": "",
+        "required": true,
+        "options": [
+          {
+            "name": "Enabled",
+            "value": "Enabled"
+          },
+          {
+            "name": "Suspended",
+            "value": "Suspended"
+          }
+        ]
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "bucket",
+        "type": "string",
+        "value": null,
+        "label": "Bucket",
+        "placeholder": ""
+      },
+      {
+        "name": "status",
+        "type": "string",
+        "value": null,
+        "label": "Acceleration Status",
         "placeholder": ""
       }
     ]
@@ -42409,6 +45871,578 @@
       }
     ]
   },
+  "aws/s3/put_bucket_logging": {
+    "hash": "ab1b03101c4e6a4d65e0ddc1d4c334f4cc8c0fd6c254c655ab8901c474693318",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "AWS S3 Put Bucket Logging",
+    "description": "Enable or disable S3 server access logging (empty target bucket disables it).",
+    "website": "https://www.flomation.co",
+    "icon": "file-lines+pen",
+    "date": "21/07/2026",
+    "type": 2,
+    "category": {
+      "name": "AWS",
+      "icon": "cloud",
+      "description": "Amazon Web Services integrations"
+    },
+    "sub_category": {
+      "name": "S3",
+      "icon": "box-archive",
+      "description": "Simple Storage Service operations"
+    },
+    "inputs": [
+      {
+        "name": "auth_method",
+        "type": "string",
+        "value": null,
+        "label": "Authentication",
+        "placeholder": "",
+        "required": true,
+        "options": [
+          {
+            "name": "Access Keys",
+            "value": "keys"
+          },
+          {
+            "name": "Assume Role (cross-account)",
+            "value": "assume_role"
+          },
+          {
+            "name": "Managed Role (Credential)",
+            "value": "credential"
+          }
+        ]
+      },
+      {
+        "name": "aws_access_key",
+        "type": "secret",
+        "value": null,
+        "label": "AWS Access Key",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "aws_secret_key",
+        "type": "secret",
+        "value": null,
+        "label": "AWS Secret Key",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "aws_region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "eu-west-2",
+        "required": true
+      },
+      {
+        "name": "aws_session_token",
+        "type": "secret",
+        "value": null,
+        "label": "Session Token (optional)",
+        "placeholder": "",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "assume_role_arn",
+        "type": "string",
+        "value": null,
+        "label": "Role ARN to Assume",
+        "placeholder": "arn:aws:iam::\u003cyour-account\u003e:role/FlomationAccess",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "assume_role"
+          ]
+        }
+      },
+      {
+        "name": "external_id",
+        "type": "string",
+        "value": null,
+        "label": "Assume Role External ID (optional)",
+        "placeholder": "Must match the External ID in the role's trust policy",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "assume_role"
+          ]
+        }
+      },
+      {
+        "name": "credential",
+        "type": "credential",
+        "value": null,
+        "label": "AWS Role Credential",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "credential"
+          ]
+        }
+      },
+      {
+        "name": "bucket",
+        "type": "string",
+        "value": null,
+        "label": "Bucket",
+        "placeholder": "my-bucket",
+        "required": true
+      },
+      {
+        "name": "target_bucket",
+        "type": "string",
+        "value": null,
+        "label": "Target Bucket (empty to disable)",
+        "placeholder": "my-log-bucket"
+      },
+      {
+        "name": "target_prefix",
+        "type": "string",
+        "value": null,
+        "label": "Target Prefix (optional)",
+        "placeholder": "logs/"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "bucket",
+        "type": "string",
+        "value": null,
+        "label": "Bucket",
+        "placeholder": ""
+      },
+      {
+        "name": "enabled",
+        "type": "boolean",
+        "value": null,
+        "label": "Logging Enabled",
+        "placeholder": ""
+      }
+    ]
+  },
+  "aws/s3/put_bucket_notification_configuration": {
+    "hash": "bdd21a79cf39fe2857a1979db7efc1c4bea2107bf28624d8e2c16e7d67f76cb6",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "AWS S3 Put Bucket Notification",
+    "description": "Set an S3 bucket's event notifications (v1: one queue/topic/lambda destination).",
+    "website": "https://www.flomation.co",
+    "icon": "bell+pen",
+    "date": "21/07/2026",
+    "type": 2,
+    "category": {
+      "name": "AWS",
+      "icon": "cloud",
+      "description": "Amazon Web Services integrations"
+    },
+    "sub_category": {
+      "name": "S3",
+      "icon": "box-archive",
+      "description": "Simple Storage Service operations"
+    },
+    "inputs": [
+      {
+        "name": "auth_method",
+        "type": "string",
+        "value": null,
+        "label": "Authentication",
+        "placeholder": "",
+        "required": true,
+        "options": [
+          {
+            "name": "Access Keys",
+            "value": "keys"
+          },
+          {
+            "name": "Assume Role (cross-account)",
+            "value": "assume_role"
+          },
+          {
+            "name": "Managed Role (Credential)",
+            "value": "credential"
+          }
+        ]
+      },
+      {
+        "name": "aws_access_key",
+        "type": "secret",
+        "value": null,
+        "label": "AWS Access Key",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "aws_secret_key",
+        "type": "secret",
+        "value": null,
+        "label": "AWS Secret Key",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "aws_region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "eu-west-2",
+        "required": true
+      },
+      {
+        "name": "aws_session_token",
+        "type": "secret",
+        "value": null,
+        "label": "Session Token (optional)",
+        "placeholder": "",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "assume_role_arn",
+        "type": "string",
+        "value": null,
+        "label": "Role ARN to Assume",
+        "placeholder": "arn:aws:iam::\u003cyour-account\u003e:role/FlomationAccess",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "assume_role"
+          ]
+        }
+      },
+      {
+        "name": "external_id",
+        "type": "string",
+        "value": null,
+        "label": "Assume Role External ID (optional)",
+        "placeholder": "Must match the External ID in the role's trust policy",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "assume_role"
+          ]
+        }
+      },
+      {
+        "name": "credential",
+        "type": "credential",
+        "value": null,
+        "label": "AWS Role Credential",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "credential"
+          ]
+        }
+      },
+      {
+        "name": "bucket",
+        "type": "string",
+        "value": null,
+        "label": "Bucket",
+        "placeholder": "my-bucket",
+        "required": true
+      },
+      {
+        "name": "destination_type",
+        "type": "string",
+        "value": null,
+        "label": "Destination Type",
+        "placeholder": "",
+        "required": true,
+        "options": [
+          {
+            "name": "SQS Queue",
+            "value": "queue"
+          },
+          {
+            "name": "SNS Topic",
+            "value": "topic"
+          },
+          {
+            "name": "Lambda Function",
+            "value": "lambda"
+          }
+        ]
+      },
+      {
+        "name": "destination_arn",
+        "type": "string",
+        "value": null,
+        "label": "Destination ARN",
+        "placeholder": "arn:aws:sqs:eu-west-2:123456789012:my-queue",
+        "required": true
+      },
+      {
+        "name": "events",
+        "type": "string",
+        "value": null,
+        "label": "Events (comma-separated)",
+        "placeholder": "s3:ObjectCreated:*, s3:ObjectRemoved:*",
+        "required": true
+      },
+      {
+        "name": "configuration",
+        "type": "string",
+        "value": null,
+        "label": "Configuration JSON (optional override)",
+        "placeholder": "{\"QueueConfigurations\":[{\"QueueArn\":\"...\",\"Events\":[\"s3:ObjectCreated:*\"]}]}"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "bucket",
+        "type": "string",
+        "value": null,
+        "label": "Bucket",
+        "placeholder": ""
+      }
+    ]
+  },
+  "aws/s3/put_bucket_ownership_controls": {
+    "hash": "452afbe80ab23401cd0fd010399f55d2159ef983a65b3422e5672d6e25ed03b2",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "AWS S3 Put Bucket Ownership Controls",
+    "description": "Set the object ownership controls on an S3 bucket.",
+    "website": "https://www.flomation.co",
+    "icon": "user-group+pen",
+    "date": "21/07/2026",
+    "type": 2,
+    "category": {
+      "name": "AWS",
+      "icon": "cloud",
+      "description": "Amazon Web Services integrations"
+    },
+    "sub_category": {
+      "name": "S3",
+      "icon": "box-archive",
+      "description": "Simple Storage Service operations"
+    },
+    "inputs": [
+      {
+        "name": "auth_method",
+        "type": "string",
+        "value": null,
+        "label": "Authentication",
+        "placeholder": "",
+        "required": true,
+        "options": [
+          {
+            "name": "Access Keys",
+            "value": "keys"
+          },
+          {
+            "name": "Assume Role (cross-account)",
+            "value": "assume_role"
+          },
+          {
+            "name": "Managed Role (Credential)",
+            "value": "credential"
+          }
+        ]
+      },
+      {
+        "name": "aws_access_key",
+        "type": "secret",
+        "value": null,
+        "label": "AWS Access Key",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "aws_secret_key",
+        "type": "secret",
+        "value": null,
+        "label": "AWS Secret Key",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "aws_region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "eu-west-2",
+        "required": true
+      },
+      {
+        "name": "aws_session_token",
+        "type": "secret",
+        "value": null,
+        "label": "Session Token (optional)",
+        "placeholder": "",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "assume_role_arn",
+        "type": "string",
+        "value": null,
+        "label": "Role ARN to Assume",
+        "placeholder": "arn:aws:iam::\u003cyour-account\u003e:role/FlomationAccess",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "assume_role"
+          ]
+        }
+      },
+      {
+        "name": "external_id",
+        "type": "string",
+        "value": null,
+        "label": "Assume Role External ID (optional)",
+        "placeholder": "Must match the External ID in the role's trust policy",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "assume_role"
+          ]
+        }
+      },
+      {
+        "name": "credential",
+        "type": "credential",
+        "value": null,
+        "label": "AWS Role Credential",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "credential"
+          ]
+        }
+      },
+      {
+        "name": "bucket",
+        "type": "string",
+        "value": null,
+        "label": "Bucket",
+        "placeholder": "my-bucket",
+        "required": true
+      },
+      {
+        "name": "object_ownership",
+        "type": "string",
+        "value": null,
+        "label": "Object Ownership",
+        "placeholder": "",
+        "required": true,
+        "options": [
+          {
+            "name": "Bucket Owner Enforced (ACLs disabled)",
+            "value": "BucketOwnerEnforced"
+          },
+          {
+            "name": "Bucket Owner Preferred",
+            "value": "BucketOwnerPreferred"
+          },
+          {
+            "name": "Object Writer",
+            "value": "ObjectWriter"
+          }
+        ]
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "bucket",
+        "type": "string",
+        "value": null,
+        "label": "Bucket",
+        "placeholder": ""
+      },
+      {
+        "name": "object_ownership",
+        "type": "string",
+        "value": null,
+        "label": "Object Ownership",
+        "placeholder": ""
+      }
+    ]
+  },
   "aws/s3/put_bucket_policy": {
     "hash": "5d4615d87c11326b4293dbc17291e629a59cb575f3cb549c60d620944b080eec",
     "author": "Andy Esser",
@@ -42572,6 +46606,365 @@
         "type": "string",
         "value": null,
         "label": "Bucket",
+        "placeholder": ""
+      }
+    ]
+  },
+  "aws/s3/put_bucket_replication": {
+    "hash": "6adc1b2ddb0808afa3020f1523a73ac5cdf9fd12a3e46dc05fbb34add296ea5f",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "AWS S3 Put Bucket Replication",
+    "description": "Set a bucket's replication rules (curated subset) from a JSON list. Requires an IAM role ARN.",
+    "website": "https://www.flomation.co",
+    "icon": "copy+pen",
+    "date": "21/07/2026",
+    "type": 2,
+    "category": {
+      "name": "AWS",
+      "icon": "cloud",
+      "description": "Amazon Web Services integrations"
+    },
+    "sub_category": {
+      "name": "S3",
+      "icon": "box-archive",
+      "description": "Simple Storage Service operations"
+    },
+    "inputs": [
+      {
+        "name": "auth_method",
+        "type": "string",
+        "value": null,
+        "label": "Authentication",
+        "placeholder": "",
+        "required": true,
+        "options": [
+          {
+            "name": "Access Keys",
+            "value": "keys"
+          },
+          {
+            "name": "Assume Role (cross-account)",
+            "value": "assume_role"
+          },
+          {
+            "name": "Managed Role (Credential)",
+            "value": "credential"
+          }
+        ]
+      },
+      {
+        "name": "aws_access_key",
+        "type": "secret",
+        "value": null,
+        "label": "AWS Access Key",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "aws_secret_key",
+        "type": "secret",
+        "value": null,
+        "label": "AWS Secret Key",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "aws_region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "eu-west-2",
+        "required": true
+      },
+      {
+        "name": "aws_session_token",
+        "type": "secret",
+        "value": null,
+        "label": "Session Token (optional)",
+        "placeholder": "",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "assume_role_arn",
+        "type": "string",
+        "value": null,
+        "label": "Role ARN to Assume",
+        "placeholder": "arn:aws:iam::\u003cyour-account\u003e:role/FlomationAccess",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "assume_role"
+          ]
+        }
+      },
+      {
+        "name": "external_id",
+        "type": "string",
+        "value": null,
+        "label": "Assume Role External ID (optional)",
+        "placeholder": "Must match the External ID in the role's trust policy",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "assume_role"
+          ]
+        }
+      },
+      {
+        "name": "credential",
+        "type": "credential",
+        "value": null,
+        "label": "AWS Role Credential",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "credential"
+          ]
+        }
+      },
+      {
+        "name": "bucket",
+        "type": "string",
+        "value": null,
+        "label": "Bucket",
+        "placeholder": "my-source-bucket",
+        "required": true
+      },
+      {
+        "name": "role",
+        "type": "string",
+        "value": null,
+        "label": "Replication IAM Role ARN",
+        "placeholder": "arn:aws:iam::\u003caccount\u003e:role/replication-role",
+        "required": true
+      },
+      {
+        "name": "rules",
+        "type": "string",
+        "value": null,
+        "label": "Rules (JSON array)",
+        "placeholder": "[{\"id\":\"repl-1\",\"status\":\"Enabled\",\"priority\":1,\"prefix\":\"\",\"dest_bucket\":\"arn:aws:s3:::dest-bucket\",\"dest_storage_class\":\"STANDARD\"}]",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "rule_count",
+        "type": "integer",
+        "value": null,
+        "label": "Rules Applied",
+        "placeholder": ""
+      }
+    ]
+  },
+  "aws/s3/put_bucket_request_payment": {
+    "hash": "21e0730baacc58f7078fe734e1e98a6ebeb4c099769f996c677f0fc8251b4fca",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "AWS S3 Put Bucket Request Payment",
+    "description": "Set who pays for downloads on an S3 bucket (Requester or BucketOwner).",
+    "website": "https://www.flomation.co",
+    "icon": "bucket+pen",
+    "date": "21/07/2026",
+    "type": 2,
+    "category": {
+      "name": "AWS",
+      "icon": "cloud",
+      "description": "Amazon Web Services integrations"
+    },
+    "sub_category": {
+      "name": "S3",
+      "icon": "box-archive",
+      "description": "Simple Storage Service operations"
+    },
+    "inputs": [
+      {
+        "name": "auth_method",
+        "type": "string",
+        "value": null,
+        "label": "Authentication",
+        "placeholder": "",
+        "required": true,
+        "options": [
+          {
+            "name": "Access Keys",
+            "value": "keys"
+          },
+          {
+            "name": "Assume Role (cross-account)",
+            "value": "assume_role"
+          },
+          {
+            "name": "Managed Role (Credential)",
+            "value": "credential"
+          }
+        ]
+      },
+      {
+        "name": "aws_access_key",
+        "type": "secret",
+        "value": null,
+        "label": "AWS Access Key",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "aws_secret_key",
+        "type": "secret",
+        "value": null,
+        "label": "AWS Secret Key",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "aws_region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "eu-west-2",
+        "required": true
+      },
+      {
+        "name": "aws_session_token",
+        "type": "secret",
+        "value": null,
+        "label": "Session Token (optional)",
+        "placeholder": "",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "assume_role_arn",
+        "type": "string",
+        "value": null,
+        "label": "Role ARN to Assume",
+        "placeholder": "arn:aws:iam::\u003cyour-account\u003e:role/FlomationAccess",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "assume_role"
+          ]
+        }
+      },
+      {
+        "name": "external_id",
+        "type": "string",
+        "value": null,
+        "label": "Assume Role External ID (optional)",
+        "placeholder": "Must match the External ID in the role's trust policy",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "assume_role"
+          ]
+        }
+      },
+      {
+        "name": "credential",
+        "type": "credential",
+        "value": null,
+        "label": "AWS Role Credential",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "credential"
+          ]
+        }
+      },
+      {
+        "name": "bucket",
+        "type": "string",
+        "value": null,
+        "label": "Bucket",
+        "placeholder": "my-bucket",
+        "required": true
+      },
+      {
+        "name": "payer",
+        "type": "string",
+        "value": null,
+        "label": "Payer",
+        "placeholder": "",
+        "required": true,
+        "options": [
+          {
+            "name": "Requester",
+            "value": "Requester"
+          },
+          {
+            "name": "Bucket Owner",
+            "value": "BucketOwner"
+          }
+        ]
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "bucket",
+        "type": "string",
+        "value": null,
+        "label": "Bucket",
+        "placeholder": ""
+      },
+      {
+        "name": "payer",
+        "type": "string",
+        "value": null,
+        "label": "Payer",
         "placeholder": ""
       }
     ]
@@ -43292,6 +47685,637 @@
       }
     ]
   },
+  "aws/s3/put_object_legal_hold": {
+    "hash": "792864a38f4f557d4e763385960ebaed263d6967403150d8fe5d7820113ebddd",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "AWS S3 Put Object Legal Hold",
+    "description": "Place or remove a legal hold on an AWS S3 object version.",
+    "website": "https://www.flomation.co",
+    "icon": "lock+circle-check",
+    "date": "21/07/2026",
+    "type": 2,
+    "category": {
+      "name": "AWS",
+      "icon": "cloud",
+      "description": "Amazon Web Services integrations"
+    },
+    "sub_category": {
+      "name": "S3",
+      "icon": "box-archive",
+      "description": "Simple Storage Service operations"
+    },
+    "inputs": [
+      {
+        "name": "auth_method",
+        "type": "string",
+        "value": null,
+        "label": "Authentication",
+        "placeholder": "",
+        "required": true,
+        "options": [
+          {
+            "name": "Access Keys",
+            "value": "keys"
+          },
+          {
+            "name": "Assume Role (cross-account)",
+            "value": "assume_role"
+          },
+          {
+            "name": "Managed Role (Credential)",
+            "value": "credential"
+          }
+        ]
+      },
+      {
+        "name": "aws_access_key",
+        "type": "secret",
+        "value": null,
+        "label": "AWS Access Key",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "aws_secret_key",
+        "type": "secret",
+        "value": null,
+        "label": "AWS Secret Key",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "aws_region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "eu-west-2",
+        "required": true
+      },
+      {
+        "name": "aws_session_token",
+        "type": "secret",
+        "value": null,
+        "label": "Session Token (optional)",
+        "placeholder": "",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "assume_role_arn",
+        "type": "string",
+        "value": null,
+        "label": "Role ARN to Assume",
+        "placeholder": "arn:aws:iam::\u003cyour-account\u003e:role/FlomationAccess",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "assume_role"
+          ]
+        }
+      },
+      {
+        "name": "external_id",
+        "type": "string",
+        "value": null,
+        "label": "Assume Role External ID (optional)",
+        "placeholder": "Must match the External ID in the role's trust policy",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "assume_role"
+          ]
+        }
+      },
+      {
+        "name": "credential",
+        "type": "credential",
+        "value": null,
+        "label": "AWS Role Credential",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "credential"
+          ]
+        }
+      },
+      {
+        "name": "bucket",
+        "type": "string",
+        "value": null,
+        "label": "Bucket",
+        "placeholder": "my-bucket",
+        "required": true
+      },
+      {
+        "name": "key",
+        "type": "string",
+        "value": null,
+        "label": "Object Key",
+        "placeholder": "path/to/object",
+        "required": true
+      },
+      {
+        "name": "status",
+        "type": "string",
+        "value": null,
+        "label": "Legal Hold Status",
+        "placeholder": "",
+        "required": true,
+        "options": [
+          {
+            "name": "On",
+            "value": "ON"
+          },
+          {
+            "name": "Off",
+            "value": "OFF"
+          }
+        ]
+      },
+      {
+        "name": "version_id",
+        "type": "string",
+        "value": null,
+        "label": "Version ID (optional)",
+        "placeholder": "Leave blank for latest version"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "bucket",
+        "type": "string",
+        "value": null,
+        "label": "Bucket",
+        "placeholder": ""
+      },
+      {
+        "name": "key",
+        "type": "string",
+        "value": null,
+        "label": "Object Key",
+        "placeholder": ""
+      },
+      {
+        "name": "status",
+        "type": "string",
+        "value": null,
+        "label": "Legal Hold Status",
+        "placeholder": ""
+      }
+    ]
+  },
+  "aws/s3/put_object_lock_configuration": {
+    "hash": "6a20a424600651af0648c3641ad6c4d476931e1524d02077f3ba5a4daade2c2a",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "AWS S3 Put Object Lock Configuration",
+    "description": "Enable Object Lock and set default WORM retention on an AWS S3 bucket.",
+    "website": "https://www.flomation.co",
+    "icon": "lock+pen",
+    "date": "21/07/2026",
+    "type": 2,
+    "category": {
+      "name": "AWS",
+      "icon": "cloud",
+      "description": "Amazon Web Services integrations"
+    },
+    "sub_category": {
+      "name": "S3",
+      "icon": "box-archive",
+      "description": "Simple Storage Service operations"
+    },
+    "inputs": [
+      {
+        "name": "auth_method",
+        "type": "string",
+        "value": null,
+        "label": "Authentication",
+        "placeholder": "",
+        "required": true,
+        "options": [
+          {
+            "name": "Access Keys",
+            "value": "keys"
+          },
+          {
+            "name": "Assume Role (cross-account)",
+            "value": "assume_role"
+          },
+          {
+            "name": "Managed Role (Credential)",
+            "value": "credential"
+          }
+        ]
+      },
+      {
+        "name": "aws_access_key",
+        "type": "secret",
+        "value": null,
+        "label": "AWS Access Key",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "aws_secret_key",
+        "type": "secret",
+        "value": null,
+        "label": "AWS Secret Key",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "aws_region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "eu-west-2",
+        "required": true
+      },
+      {
+        "name": "aws_session_token",
+        "type": "secret",
+        "value": null,
+        "label": "Session Token (optional)",
+        "placeholder": "",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "assume_role_arn",
+        "type": "string",
+        "value": null,
+        "label": "Role ARN to Assume",
+        "placeholder": "arn:aws:iam::\u003cyour-account\u003e:role/FlomationAccess",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "assume_role"
+          ]
+        }
+      },
+      {
+        "name": "external_id",
+        "type": "string",
+        "value": null,
+        "label": "Assume Role External ID (optional)",
+        "placeholder": "Must match the External ID in the role's trust policy",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "assume_role"
+          ]
+        }
+      },
+      {
+        "name": "credential",
+        "type": "credential",
+        "value": null,
+        "label": "AWS Role Credential",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "credential"
+          ]
+        }
+      },
+      {
+        "name": "bucket",
+        "type": "string",
+        "value": null,
+        "label": "Bucket",
+        "placeholder": "my-bucket",
+        "required": true
+      },
+      {
+        "name": "object_lock_enabled",
+        "type": "boolean",
+        "value": null,
+        "label": "Object Lock Enabled",
+        "placeholder": ""
+      },
+      {
+        "name": "default_mode",
+        "type": "string",
+        "value": null,
+        "label": "Default Retention Mode (optional)",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "Governance",
+            "value": "GOVERNANCE"
+          },
+          {
+            "name": "Compliance",
+            "value": "COMPLIANCE"
+          }
+        ]
+      },
+      {
+        "name": "default_days",
+        "type": "integer",
+        "value": null,
+        "label": "Default Retention Days (optional)",
+        "placeholder": "30"
+      },
+      {
+        "name": "default_years",
+        "type": "integer",
+        "value": null,
+        "label": "Default Retention Years (optional)",
+        "placeholder": "1"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "bucket",
+        "type": "string",
+        "value": null,
+        "label": "Bucket",
+        "placeholder": ""
+      }
+    ]
+  },
+  "aws/s3/put_object_retention": {
+    "hash": "9494402c0aec108e9b68bb7f5b58a1929ede3a951bb7d46070e475c07c1e3f9e",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "AWS S3 Put Object Retention",
+    "description": "Apply a WORM retention mode and retain-until date to an AWS S3 object.",
+    "website": "https://www.flomation.co",
+    "icon": "lock+clock",
+    "date": "21/07/2026",
+    "type": 2,
+    "category": {
+      "name": "AWS",
+      "icon": "cloud",
+      "description": "Amazon Web Services integrations"
+    },
+    "sub_category": {
+      "name": "S3",
+      "icon": "box-archive",
+      "description": "Simple Storage Service operations"
+    },
+    "inputs": [
+      {
+        "name": "auth_method",
+        "type": "string",
+        "value": null,
+        "label": "Authentication",
+        "placeholder": "",
+        "required": true,
+        "options": [
+          {
+            "name": "Access Keys",
+            "value": "keys"
+          },
+          {
+            "name": "Assume Role (cross-account)",
+            "value": "assume_role"
+          },
+          {
+            "name": "Managed Role (Credential)",
+            "value": "credential"
+          }
+        ]
+      },
+      {
+        "name": "aws_access_key",
+        "type": "secret",
+        "value": null,
+        "label": "AWS Access Key",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "aws_secret_key",
+        "type": "secret",
+        "value": null,
+        "label": "AWS Secret Key",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "aws_region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "eu-west-2",
+        "required": true
+      },
+      {
+        "name": "aws_session_token",
+        "type": "secret",
+        "value": null,
+        "label": "Session Token (optional)",
+        "placeholder": "",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "assume_role_arn",
+        "type": "string",
+        "value": null,
+        "label": "Role ARN to Assume",
+        "placeholder": "arn:aws:iam::\u003cyour-account\u003e:role/FlomationAccess",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "assume_role"
+          ]
+        }
+      },
+      {
+        "name": "external_id",
+        "type": "string",
+        "value": null,
+        "label": "Assume Role External ID (optional)",
+        "placeholder": "Must match the External ID in the role's trust policy",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "assume_role"
+          ]
+        }
+      },
+      {
+        "name": "credential",
+        "type": "credential",
+        "value": null,
+        "label": "AWS Role Credential",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "credential"
+          ]
+        }
+      },
+      {
+        "name": "bucket",
+        "type": "string",
+        "value": null,
+        "label": "Bucket",
+        "placeholder": "my-bucket",
+        "required": true
+      },
+      {
+        "name": "key",
+        "type": "string",
+        "value": null,
+        "label": "Object Key",
+        "placeholder": "path/to/object",
+        "required": true
+      },
+      {
+        "name": "mode",
+        "type": "string",
+        "value": null,
+        "label": "Retention Mode",
+        "placeholder": "",
+        "required": true,
+        "options": [
+          {
+            "name": "Governance",
+            "value": "GOVERNANCE"
+          },
+          {
+            "name": "Compliance",
+            "value": "COMPLIANCE"
+          }
+        ]
+      },
+      {
+        "name": "retain_until",
+        "type": "string",
+        "value": null,
+        "label": "Retain Until (RFC3339)",
+        "placeholder": "2027-01-01T00:00:00Z",
+        "required": true
+      },
+      {
+        "name": "bypass_governance_retention",
+        "type": "boolean",
+        "value": null,
+        "label": "Bypass Governance Retention",
+        "placeholder": ""
+      },
+      {
+        "name": "version_id",
+        "type": "string",
+        "value": null,
+        "label": "Version ID (optional)",
+        "placeholder": "Leave blank for latest version"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "bucket",
+        "type": "string",
+        "value": null,
+        "label": "Bucket",
+        "placeholder": ""
+      },
+      {
+        "name": "key",
+        "type": "string",
+        "value": null,
+        "label": "Object Key",
+        "placeholder": ""
+      },
+      {
+        "name": "mode",
+        "type": "string",
+        "value": null,
+        "label": "Retention Mode",
+        "placeholder": ""
+      },
+      {
+        "name": "retain_until",
+        "type": "string",
+        "value": null,
+        "label": "Retain Until",
+        "placeholder": ""
+      }
+    ]
+  },
   "aws/s3/put_object_tagging": {
     "hash": "b40ef009362109342409bacbbe9ba2920a10e6222da41b31419e69e18513736f",
     "author": "Andy Esser",
@@ -43840,6 +48864,664 @@
         "type": "string",
         "value": null,
         "label": "Result summary",
+        "placeholder": ""
+      }
+    ]
+  },
+  "aws/s3/select_object_content": {
+    "hash": "2003ff9fdbaa5f669c1cb2d3fc1150690e9805f46867569a9af8f9770f379182",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "AWS S3 Select Object Content",
+    "description": "Run a SQL query over a single S3 object (CSV/JSON/Parquet) and return matching records.",
+    "website": "https://www.flomation.co",
+    "icon": "code+magnifying-glass",
+    "date": "21/07/2026",
+    "type": 2,
+    "category": {
+      "name": "AWS",
+      "icon": "cloud",
+      "description": "Amazon Web Services integrations"
+    },
+    "sub_category": {
+      "name": "S3",
+      "icon": "box-archive",
+      "description": "Simple Storage Service operations"
+    },
+    "inputs": [
+      {
+        "name": "auth_method",
+        "type": "string",
+        "value": null,
+        "label": "Authentication",
+        "placeholder": "",
+        "required": true,
+        "options": [
+          {
+            "name": "Access Keys",
+            "value": "keys"
+          },
+          {
+            "name": "Assume Role (cross-account)",
+            "value": "assume_role"
+          },
+          {
+            "name": "Managed Role (Credential)",
+            "value": "credential"
+          }
+        ]
+      },
+      {
+        "name": "aws_access_key",
+        "type": "secret",
+        "value": null,
+        "label": "AWS Access Key",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "aws_secret_key",
+        "type": "secret",
+        "value": null,
+        "label": "AWS Secret Key",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "aws_region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "eu-west-2",
+        "required": true
+      },
+      {
+        "name": "aws_session_token",
+        "type": "secret",
+        "value": null,
+        "label": "Session Token (optional)",
+        "placeholder": "",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "assume_role_arn",
+        "type": "string",
+        "value": null,
+        "label": "Role ARN to Assume",
+        "placeholder": "arn:aws:iam::\u003cyour-account\u003e:role/FlomationAccess",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "assume_role"
+          ]
+        }
+      },
+      {
+        "name": "external_id",
+        "type": "string",
+        "value": null,
+        "label": "Assume Role External ID (optional)",
+        "placeholder": "Must match the External ID in the role's trust policy",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "assume_role"
+          ]
+        }
+      },
+      {
+        "name": "credential",
+        "type": "credential",
+        "value": null,
+        "label": "AWS Role Credential",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "credential"
+          ]
+        }
+      },
+      {
+        "name": "bucket",
+        "type": "string",
+        "value": null,
+        "label": "Bucket",
+        "placeholder": "my-bucket",
+        "required": true
+      },
+      {
+        "name": "key",
+        "type": "string",
+        "value": null,
+        "label": "Object Key",
+        "placeholder": "path/to/object.csv",
+        "required": true
+      },
+      {
+        "name": "expression",
+        "type": "string",
+        "value": null,
+        "label": "SQL Expression",
+        "placeholder": "SELECT * FROM S3Object s LIMIT 10",
+        "required": true
+      },
+      {
+        "name": "input_format",
+        "type": "string",
+        "value": null,
+        "label": "Input Format",
+        "placeholder": "",
+        "required": true,
+        "options": [
+          {
+            "name": "CSV",
+            "value": "csv"
+          },
+          {
+            "name": "JSON",
+            "value": "json"
+          },
+          {
+            "name": "Parquet",
+            "value": "parquet"
+          }
+        ]
+      },
+      {
+        "name": "csv_file_header",
+        "type": "string",
+        "value": null,
+        "label": "CSV File Header (CSV only)",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "Use header names",
+            "value": "USE"
+          },
+          {
+            "name": "Ignore header line",
+            "value": "IGNORE"
+          },
+          {
+            "name": "No header",
+            "value": "NONE"
+          }
+        ],
+        "visible_when": {
+          "field": "input_format",
+          "values": [
+            "csv"
+          ]
+        }
+      },
+      {
+        "name": "compression",
+        "type": "string",
+        "value": null,
+        "label": "Compression",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "None",
+            "value": "NONE"
+          },
+          {
+            "name": "GZIP",
+            "value": "GZIP"
+          },
+          {
+            "name": "BZIP2",
+            "value": "BZIP2"
+          }
+        ]
+      },
+      {
+        "name": "output_format",
+        "type": "string",
+        "value": null,
+        "label": "Output Format",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "JSON",
+            "value": "json"
+          },
+          {
+            "name": "CSV",
+            "value": "csv"
+          }
+        ]
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "records",
+        "type": "string",
+        "value": null,
+        "label": "Records",
+        "placeholder": ""
+      }
+    ]
+  },
+  "aws/s3/upload_part": {
+    "hash": "f3f39bbdb1ebf4015d8aaa5216f6ce6fab01cadc55aa70f454b2a825c8e1bf2d",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "AWS S3 Upload Part",
+    "description": "Upload one part of an S3 multipart upload and return its ETag.",
+    "website": "https://www.flomation.co",
+    "icon": "layer-group+arrow-up",
+    "date": "21/07/2026",
+    "type": 2,
+    "category": {
+      "name": "AWS",
+      "icon": "cloud",
+      "description": "Amazon Web Services integrations"
+    },
+    "sub_category": {
+      "name": "S3",
+      "icon": "box-archive",
+      "description": "Simple Storage Service operations"
+    },
+    "inputs": [
+      {
+        "name": "auth_method",
+        "type": "string",
+        "value": null,
+        "label": "Authentication",
+        "placeholder": "",
+        "required": true,
+        "options": [
+          {
+            "name": "Access Keys",
+            "value": "keys"
+          },
+          {
+            "name": "Assume Role (cross-account)",
+            "value": "assume_role"
+          },
+          {
+            "name": "Managed Role (Credential)",
+            "value": "credential"
+          }
+        ]
+      },
+      {
+        "name": "aws_access_key",
+        "type": "secret",
+        "value": null,
+        "label": "AWS Access Key",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "aws_secret_key",
+        "type": "secret",
+        "value": null,
+        "label": "AWS Secret Key",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "aws_region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "eu-west-2",
+        "required": true
+      },
+      {
+        "name": "aws_session_token",
+        "type": "secret",
+        "value": null,
+        "label": "Session Token (optional)",
+        "placeholder": "",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "assume_role_arn",
+        "type": "string",
+        "value": null,
+        "label": "Role ARN to Assume",
+        "placeholder": "arn:aws:iam::\u003cyour-account\u003e:role/FlomationAccess",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "assume_role"
+          ]
+        }
+      },
+      {
+        "name": "external_id",
+        "type": "string",
+        "value": null,
+        "label": "Assume Role External ID (optional)",
+        "placeholder": "Must match the External ID in the role's trust policy",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "assume_role"
+          ]
+        }
+      },
+      {
+        "name": "credential",
+        "type": "credential",
+        "value": null,
+        "label": "AWS Role Credential",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "credential"
+          ]
+        }
+      },
+      {
+        "name": "bucket",
+        "type": "string",
+        "value": null,
+        "label": "Bucket",
+        "placeholder": "my-bucket",
+        "required": true
+      },
+      {
+        "name": "key",
+        "type": "string",
+        "value": null,
+        "label": "Object Key",
+        "placeholder": "path/to/large-object",
+        "required": true
+      },
+      {
+        "name": "upload_id",
+        "type": "string",
+        "value": null,
+        "label": "Upload ID",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "part_number",
+        "type": "integer",
+        "value": null,
+        "label": "Part Number",
+        "placeholder": "1",
+        "required": true
+      },
+      {
+        "name": "content",
+        "type": "string",
+        "value": null,
+        "label": "Part Contents",
+        "placeholder": "Inline text, or a file/blob reference",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "etag",
+        "type": "string",
+        "value": null,
+        "label": "ETag",
+        "placeholder": ""
+      },
+      {
+        "name": "part_number",
+        "type": "integer",
+        "value": null,
+        "label": "Part Number",
+        "placeholder": ""
+      }
+    ]
+  },
+  "aws/s3/upload_part_copy": {
+    "hash": "331ab1de37f78fbac8a676dd37a6f0a47f6f43a918258d6f29ad2c7bf6b9bc54",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "AWS S3 Upload Part Copy",
+    "description": "Upload a multipart part by copying from an existing S3 object.",
+    "website": "https://www.flomation.co",
+    "icon": "layer-group+copy",
+    "date": "21/07/2026",
+    "type": 2,
+    "category": {
+      "name": "AWS",
+      "icon": "cloud",
+      "description": "Amazon Web Services integrations"
+    },
+    "sub_category": {
+      "name": "S3",
+      "icon": "box-archive",
+      "description": "Simple Storage Service operations"
+    },
+    "inputs": [
+      {
+        "name": "auth_method",
+        "type": "string",
+        "value": null,
+        "label": "Authentication",
+        "placeholder": "",
+        "required": true,
+        "options": [
+          {
+            "name": "Access Keys",
+            "value": "keys"
+          },
+          {
+            "name": "Assume Role (cross-account)",
+            "value": "assume_role"
+          },
+          {
+            "name": "Managed Role (Credential)",
+            "value": "credential"
+          }
+        ]
+      },
+      {
+        "name": "aws_access_key",
+        "type": "secret",
+        "value": null,
+        "label": "AWS Access Key",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "aws_secret_key",
+        "type": "secret",
+        "value": null,
+        "label": "AWS Secret Key",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "aws_region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "eu-west-2",
+        "required": true
+      },
+      {
+        "name": "aws_session_token",
+        "type": "secret",
+        "value": null,
+        "label": "Session Token (optional)",
+        "placeholder": "",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "assume_role_arn",
+        "type": "string",
+        "value": null,
+        "label": "Role ARN to Assume",
+        "placeholder": "arn:aws:iam::\u003cyour-account\u003e:role/FlomationAccess",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "assume_role"
+          ]
+        }
+      },
+      {
+        "name": "external_id",
+        "type": "string",
+        "value": null,
+        "label": "Assume Role External ID (optional)",
+        "placeholder": "Must match the External ID in the role's trust policy",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "assume_role"
+          ]
+        }
+      },
+      {
+        "name": "credential",
+        "type": "credential",
+        "value": null,
+        "label": "AWS Role Credential",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "credential"
+          ]
+        }
+      },
+      {
+        "name": "bucket",
+        "type": "string",
+        "value": null,
+        "label": "Destination Bucket",
+        "placeholder": "my-bucket",
+        "required": true
+      },
+      {
+        "name": "key",
+        "type": "string",
+        "value": null,
+        "label": "Destination Object Key",
+        "placeholder": "path/to/large-object",
+        "required": true
+      },
+      {
+        "name": "upload_id",
+        "type": "string",
+        "value": null,
+        "label": "Upload ID",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "part_number",
+        "type": "integer",
+        "value": null,
+        "label": "Part Number",
+        "placeholder": "1",
+        "required": true
+      },
+      {
+        "name": "copy_source",
+        "type": "string",
+        "value": null,
+        "label": "Copy Source",
+        "placeholder": "source-bucket/source-key",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "etag",
+        "type": "string",
+        "value": null,
+        "label": "ETag",
+        "placeholder": ""
+      },
+      {
+        "name": "part_number",
+        "type": "integer",
+        "value": null,
+        "label": "Part Number",
         "placeholder": ""
       }
     ]
