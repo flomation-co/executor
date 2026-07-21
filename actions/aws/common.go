@@ -114,6 +114,27 @@ func ConfigFromInputs(ctx context.Context, inputs []*core.Connection) (awssdk.Co
 	})
 }
 
+// InputAccountID is the standard account-scope input for s3control and other
+// account-scoped AWS actions.
+const InputAccountID = "account_id"
+
+// ResolveAccountID returns the 12-digit AWS account ID that account-scoped
+// services (notably s3control) require on every call. If the account_id input
+// is set it is used verbatim; otherwise it is derived from the active
+// credentials via STS GetCallerIdentity, so users can leave the field blank and
+// let Flomation infer it from whichever identity the action is running as
+// (static keys, an assumed role, or a managed credential).
+func ResolveAccountID(ctx context.Context, cfg awssdk.Config, inputs []*core.Connection) (string, error) {
+	if id := strings.TrimSpace(InputString(InputAccountID, inputs)); id != "" {
+		return id, nil
+	}
+	out, err := sts.NewFromConfig(cfg).GetCallerIdentity(ctx, &sts.GetCallerIdentityInput{})
+	if err != nil {
+		return "", fmt.Errorf("could not resolve AWS account id via STS GetCallerIdentity (or set the Account ID input): %w", err)
+	}
+	return awssdk.ToString(out.Account), nil
+}
+
 // InputString returns a string input's value, or "" when absent/unset.
 func InputString(name string, inputs []*core.Connection) string {
 	c := core.FindConnection(name, inputs)
