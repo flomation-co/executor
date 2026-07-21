@@ -53,12 +53,14 @@ compile:
     # concurrent cross-compiles and GOMAXPROCS=2 caps Go's per-build package
     # concurrency (go build -p defaults to GOMAXPROCS), cutting peak memory ~4x.
     # GOMAXPROCS is used rather than GOFLAGS=-p so it stays valid for `go mod`
-    # subcommands too. Slower, but it fits. Bump JOBS back up only alongside a
-    # matching KUBERNETES_MEMORY_LIMIT the runner actually honours.
+    # subcommands too. Slower, but it fits within the runner's hard 4Gi ceiling —
+    # the runner rejects any MemoryRequest above 4Gi ("higher than limit allowed
+    # 4Gi"), so we pin request=limit=4Gi to guarantee the full allowance rather
+    # than a lower default that the growing build would blow past.
     KUBERNETES_CPU_REQUEST: "2"
     KUBERNETES_CPU_LIMIT: "4"
-    KUBERNETES_MEMORY_REQUEST: "6Gi"
-    KUBERNETES_MEMORY_LIMIT: "10Gi"
+    KUBERNETES_MEMORY_REQUEST: "4Gi"
+    KUBERNETES_MEMORY_LIMIT: "4Gi"
     JOBS: "2"
     GOMAXPROCS: "2"
   script:
