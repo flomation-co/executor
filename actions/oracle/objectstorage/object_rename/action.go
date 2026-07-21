@@ -69,8 +69,9 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	if err != nil {
 		return os.ErrorResult(auth.OCIError(err)), nil
 	}
+	overwrite := os.OptionalBool("overwrite", inputs, false)
 	details := ocios.RenameObjectDetails{SourceName: &source, NewName: &newName}
-	if !os.OptionalBool("overwrite", inputs, false) {
+	if !overwrite {
 		// "*" makes OCI fail the rename if an object already exists at NewName,
 		// so a rename can't silently destroy an unrelated object.
 		details.NewObjIfNoneMatchETag = os.StringPtr("*")
@@ -81,6 +82,14 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 		RenameObjectDetails: details,
 	})
 	if err != nil {
+		// Our fail-safe guard tripped: OCI returns IfNoneMatchFailed / HTTP 412
+		// because an object already exists at the new name. Turn that raw code
+		// into something the operator can act on.
+		if !overwrite {
+			if code, status := os.ServiceErrorCode(err); code == "IfNoneMatchFailed" || status == 412 {
+				return os.ErrorResult(fmt.Sprintf("an object named %q already exists in bucket %q — enable Overwrite to replace it", newName, bucket)), nil
+			}
+		}
 		return os.ErrorResult(auth.OCIError(err)), nil
 	}
 	return map[string]interface{}{

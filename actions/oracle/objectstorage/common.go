@@ -36,6 +36,11 @@ const (
 	InputCompartmentOCID = "compartment_ocid"
 )
 
+// ListMaxPages bounds every list action's pagination walk so one node run can't
+// turn into an unbounded sequence of API calls; a walk that hits the cap sets
+// truncated=true so a capped result is distinguishable from a complete one.
+const ListMaxPages = 25
+
 // validRegion constrains the host-selecting region to a plain label (see GetAuth).
 var validRegion = regexp.MustCompile(`^[a-z0-9-]+$`)
 
@@ -206,6 +211,16 @@ func FormatTime(t *common.SDKTime) string {
 
 func ErrorResult(msg string) map[string]interface{} {
 	return map[string]interface{}{"success": false, "error": msg, "tool_result": msg}
+}
+
+// ServiceErrorCode returns the OCI service error code (e.g. "IfNoneMatchFailed")
+// and HTTP status for err, or ("", 0) when err is not an OCI service error. Use
+// it to give a targeted message on a specific code before falling back to OCIError.
+func ServiceErrorCode(err error) (string, int) {
+	if se, ok := common.IsServiceError(err); ok {
+		return se.GetCode(), se.GetHTTPStatusCode()
+	}
+	return "", 0
 }
 
 // OCIError summarises an OCI SDK error, redacting the key/passphrase defensively.

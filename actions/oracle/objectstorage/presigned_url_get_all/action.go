@@ -43,8 +43,6 @@ var Outputs = [...]core.Connection{
 	{Name: "error", Type: core.ConnectionTypeString, Label: "Error"},
 }
 
-const maxPages = 25
-
 func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[string]interface{}, error) {
 	auth, err := os.GetAuth(inputs)
 	if err != nil {
@@ -67,7 +65,7 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	var pars []map[string]interface{}
 	req := ocios.ListPreauthenticatedRequestsRequest{NamespaceName: &ns, BucketName: &bucket}
 	truncated := false
-	for page := 0; page < maxPages; page++ {
+	for page := 0; page < os.ListMaxPages; page++ {
 		resp, err := client.ListPreauthenticatedRequests(ctx, req)
 		if err != nil {
 			return os.ErrorResult(auth.OCIError(err)), nil
@@ -92,14 +90,14 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 			break
 		}
 		req.Page = resp.OpcNextPage
-		if page == maxPages-1 {
+		if page == os.ListMaxPages-1 {
 			truncated = true
 		}
 	}
 
 	summary := fmt.Sprintf("Found %d presigned URL(s) on bucket %q", len(pars), bucket)
 	if truncated {
-		summary = fmt.Sprintf("Found at least %d presigned URL(s) on bucket %q (list truncated at %d pages — more available)", len(pars), bucket, maxPages)
+		summary = fmt.Sprintf("Found at least %d presigned URL(s) on bucket %q (list truncated at %d pages — more available)", len(pars), bucket, os.ListMaxPages)
 	}
 	return map[string]interface{}{
 		"tool_result":    summary,

@@ -130,6 +130,21 @@ func TestOptionalBool(t *testing.T) {
 	}
 }
 
+// TestServiceErrorCode: a plain (non-OCI) error yields ("", 0) so the rename
+// 412 special-case only fires on a real OCI service error.
+func TestServiceErrorCode(t *testing.T) {
+	if code, status := ServiceErrorCode(nil); code != "" || status != 0 {
+		t.Errorf("ServiceErrorCode(nil) = (%q, %d), want (\"\", 0)", code, status)
+	}
+	if code, status := ServiceErrorCode(errPlain("boom")); code != "" || status != 0 {
+		t.Errorf("ServiceErrorCode(plain) = (%q, %d), want (\"\", 0)", code, status)
+	}
+}
+
+type errPlain string
+
+func (e errPlain) Error() string { return string(e) }
+
 // TestFormatTime pins the RFC3339 output shared across the list actions, so the
 // same timestamp field is parseable whether it came from create or list.
 func TestFormatTime(t *testing.T) {

@@ -43,10 +43,6 @@ var Outputs = [...]core.Connection{
 	{Name: "error", Type: core.ConnectionTypeString, Label: "Error"},
 }
 
-// maxPages bounds the walk so a bucket with millions of objects can't turn one
-// list into an unbounded request.
-const maxPages = 25
-
 func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[string]interface{}, error) {
 	auth, err := os.GetAuth(inputs)
 	if err != nil {
@@ -72,7 +68,7 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	}
 	var objects []map[string]interface{}
 	truncated := false
-	for page := 0; page < maxPages; page++ {
+	for page := 0; page < os.ListMaxPages; page++ {
 		resp, err := client.ListObjects(ctx, req)
 		if err != nil {
 			return os.ErrorResult(auth.OCIError(err)), nil
@@ -96,7 +92,7 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 			break
 		}
 		req.Start = resp.NextStartWith
-		if page == maxPages-1 {
+		if page == os.ListMaxPages-1 {
 			// Hit the page cap with more objects still available.
 			truncated = true
 		}
@@ -104,7 +100,7 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 
 	summary := fmt.Sprintf("Found %d object(s) in bucket %q", len(objects), bucket)
 	if truncated {
-		summary = fmt.Sprintf("Found at least %d object(s) in bucket %q (list truncated at %d pages — more available)", len(objects), bucket, maxPages)
+		summary = fmt.Sprintf("Found at least %d object(s) in bucket %q (list truncated at %d pages — more available)", len(objects), bucket, os.ListMaxPages)
 	}
 	return map[string]interface{}{
 		"tool_result": summary,

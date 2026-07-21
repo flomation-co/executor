@@ -144353,7 +144353,7 @@
     ]
   },
   "oracle/objectstorage/bucket_get_all": {
-    "hash": "2779711dd9fe119627df85741ae761c4325d4ff6ab7338f7eb24fdf70392f0d2",
+    "hash": "7bcbec6bfae6b3da6c47e8c03c47923c5a2b4911f2ffbfbf56c1196b91e65f67",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "OCI Object Storage: List Buckets",
@@ -144832,11 +144832,11 @@
     ]
   },
   "oracle/objectstorage/object_get": {
-    "hash": "37f95d6d073c869b8d8ed658c208d9a9678d5bb28799fd157e6c3580b3f5138f",
+    "hash": "8922b8b996cc27c05bff94f50d928bfa7f64969fc0a90c01c26b51d86e0a5b12",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "OCI Object Storage: Get Object",
-    "description": "Download an object's content from an Oracle Cloud Object Storage bucket. Returns the content as text plus a base64 encoding (use the base64 output for binary objects). The namespace is resolved automatically.",
+    "description": "Download an object's content from an Oracle Cloud Object Storage bucket. Returns the content as text plus a base64 encoding (use the base64 output for binary objects). Objects up to 100 MiB are supported — for larger objects, create a presigned URL to download instead. The namespace is resolved automatically.",
     "website": "https://www.flomation.co",
     "icon": "oracle+cloud-arrow-down",
     "date": "21/07/2026",
@@ -144996,7 +144996,7 @@
     ]
   },
   "oracle/objectstorage/object_get_all": {
-    "hash": "a80e05dd6defddd764ed1261d653bb2ccbd8e09fe963b21ff2b2541cd5eb45eb",
+    "hash": "c6b3e555868540455fa23825e6a66759e303e4372991ff619a337b4fd17821a7",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "OCI Object Storage: List Objects",
@@ -145431,7 +145431,7 @@
     ]
   },
   "oracle/objectstorage/object_rename": {
-    "hash": "996e143b59c2872f19d4e01f43df9d028a37342c935a241ef21c28401b86228d",
+    "hash": "8936c972afde70f8cddef495fae534ef587e259a9c6007725aca1d7a85633905",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "OCI Object Storage: Rename Object",
@@ -145856,7 +145856,7 @@
     ]
   },
   "oracle/objectstorage/presigned_url_get_all": {
-    "hash": "3f059ddd9f18ecc7a276c984a4e36ac975ef07d87389e554f1d3047db9aa6fd2",
+    "hash": "8f5709a32889154a64c2eda300f3c956bc97ca82ab402152ce5ecb6075106284",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "OCI Object Storage: List Presigned URLs",

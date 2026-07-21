@@ -18,7 +18,7 @@ const (
 	Author       = "Dave McElin"
 	Organisation = "Flomation"
 	Name         = "OCI Object Storage: Get Object"
-	Description  = "Download an object's content from an Oracle Cloud Object Storage bucket. Returns the content as text plus a base64 encoding (use the base64 output for binary objects). The namespace is resolved automatically."
+	Description  = "Download an object's content from an Oracle Cloud Object Storage bucket. Returns the content as text plus a base64 encoding (use the base64 output for binary objects). Objects up to 100 MiB are supported — for larger objects, create a presigned URL to download instead. The namespace is resolved automatically."
 	Website      = "https://www.flomation.co"
 	Icon         = "oracle+cloud-arrow-down"
 	Date         = "21/07/2026"
@@ -76,12 +76,26 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	if err != nil {
 		return os.ErrorResult(auth.OCIError(err)), nil
 	}
+	if resp.Content != nil {
+		defer func() { _ = resp.Content.Close() }()
+	}
+	// This action reads the whole object into memory (as a string plus a base64
+	// copy), so cap the size to protect the executor — larger objects should be
+	// fetched with a presigned URL instead. Check the declared length first (fast
+	// fail, no download), then bound the read itself.
+	const maxDownloadBytes = 100 << 20 // 100 MiB
+	if resp.ContentLength != nil && *resp.ContentLength > maxDownloadBytes {
+		return os.ErrorResult(fmt.Sprintf("object %q is %d bytes, over the %d MiB limit for reading into a flow — create a presigned URL to download it instead", object, *resp.ContentLength, maxDownloadBytes>>20)), nil
+	}
 	var data []byte
 	if resp.Content != nil {
-		data, err = io.ReadAll(resp.Content)
-		_ = resp.Content.Close()
+		// LimitReader guards against a missing or understated Content-Length.
+		data, err = io.ReadAll(io.LimitReader(resp.Content, maxDownloadBytes+1))
 		if err != nil {
 			return os.ErrorResult(auth.OCIError(err)), nil
+		}
+		if int64(len(data)) > maxDownloadBytes {
+			return os.ErrorResult(fmt.Sprintf("object %q is over the %d MiB limit for reading into a flow — create a presigned URL to download it instead", object, maxDownloadBytes>>20)), nil
 		}
 	}
 	return map[string]interface{}{

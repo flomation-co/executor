@@ -42,11 +42,6 @@ var Outputs = [...]core.Connection{
 	{Name: "error", Type: core.ConnectionTypeString, Label: "Error"},
 }
 
-// maxPages bounds the walk so a compartment with a huge number of buckets (or a
-// pagination anomaly) can't turn one list into an unbounded request — matching
-// the object/PAR list actions.
-const maxPages = 25
-
 func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[string]interface{}, error) {
 	auth, err := os.GetAuth(inputs)
 	if err != nil {
@@ -69,7 +64,7 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	var buckets []map[string]interface{}
 	req := ocios.ListBucketsRequest{NamespaceName: &ns, CompartmentId: &compartment}
 	truncated := false
-	for page := 0; page < maxPages; page++ {
+	for page := 0; page < os.ListMaxPages; page++ {
 		resp, err := client.ListBuckets(ctx, req)
 		if err != nil {
 			return os.ErrorResult(auth.OCIError(err)), nil
@@ -90,14 +85,14 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 			break
 		}
 		req.Page = resp.OpcNextPage
-		if page == maxPages-1 {
+		if page == os.ListMaxPages-1 {
 			truncated = true
 		}
 	}
 
 	summary := fmt.Sprintf("Found %d bucket(s) in namespace %s", len(buckets), ns)
 	if truncated {
-		summary = fmt.Sprintf("Found at least %d bucket(s) in namespace %s (list truncated at %d pages — more available)", len(buckets), ns, maxPages)
+		summary = fmt.Sprintf("Found at least %d bucket(s) in namespace %s (list truncated at %d pages — more available)", len(buckets), ns, os.ListMaxPages)
 	}
 	return map[string]interface{}{
 		"tool_result": summary,
