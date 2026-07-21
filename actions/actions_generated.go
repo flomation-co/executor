@@ -1389,6 +1389,30 @@ import (
 	opentofu_apply "flomation.app/automate/executor/actions/opentofu/apply"
 	opentofu_destroy "flomation.app/automate/executor/actions/opentofu/destroy"
 	opentofu_plan "flomation.app/automate/executor/actions/opentofu/plan"
+	oracle_autonomousdatabase_db_change_compartment "flomation.app/automate/executor/actions/oracle/autonomousdatabase/db_change_compartment"
+	oracle_autonomousdatabase_db_clone "flomation.app/automate/executor/actions/oracle/autonomousdatabase/db_clone"
+	oracle_autonomousdatabase_db_create "flomation.app/automate/executor/actions/oracle/autonomousdatabase/db_create"
+	oracle_autonomousdatabase_db_create_backup "flomation.app/automate/executor/actions/oracle/autonomousdatabase/db_create_backup"
+	oracle_autonomousdatabase_db_delete "flomation.app/automate/executor/actions/oracle/autonomousdatabase/db_delete"
+	oracle_autonomousdatabase_db_delete_backup "flomation.app/automate/executor/actions/oracle/autonomousdatabase/db_delete_backup"
+	oracle_autonomousdatabase_db_generate_regional_wallet "flomation.app/automate/executor/actions/oracle/autonomousdatabase/db_generate_regional_wallet"
+	oracle_autonomousdatabase_db_generate_wallet "flomation.app/automate/executor/actions/oracle/autonomousdatabase/db_generate_wallet"
+	oracle_autonomousdatabase_db_get "flomation.app/automate/executor/actions/oracle/autonomousdatabase/db_get"
+	oracle_autonomousdatabase_db_get_all "flomation.app/automate/executor/actions/oracle/autonomousdatabase/db_get_all"
+	oracle_autonomousdatabase_db_get_backup "flomation.app/automate/executor/actions/oracle/autonomousdatabase/db_get_backup"
+	oracle_autonomousdatabase_db_get_connection_info "flomation.app/automate/executor/actions/oracle/autonomousdatabase/db_get_connection_info"
+	oracle_autonomousdatabase_db_list_backups "flomation.app/automate/executor/actions/oracle/autonomousdatabase/db_list_backups"
+	oracle_autonomousdatabase_db_list_character_sets "flomation.app/automate/executor/actions/oracle/autonomousdatabase/db_list_character_sets"
+	oracle_autonomousdatabase_db_list_clones "flomation.app/automate/executor/actions/oracle/autonomousdatabase/db_list_clones"
+	oracle_autonomousdatabase_db_list_versions "flomation.app/automate/executor/actions/oracle/autonomousdatabase/db_list_versions"
+	oracle_autonomousdatabase_db_restart "flomation.app/automate/executor/actions/oracle/autonomousdatabase/db_restart"
+	oracle_autonomousdatabase_db_restore "flomation.app/automate/executor/actions/oracle/autonomousdatabase/db_restore"
+	oracle_autonomousdatabase_db_rotate_wallet "flomation.app/automate/executor/actions/oracle/autonomousdatabase/db_rotate_wallet"
+	oracle_autonomousdatabase_db_scale "flomation.app/automate/executor/actions/oracle/autonomousdatabase/db_scale"
+	oracle_autonomousdatabase_db_shrink "flomation.app/automate/executor/actions/oracle/autonomousdatabase/db_shrink"
+	oracle_autonomousdatabase_db_start "flomation.app/automate/executor/actions/oracle/autonomousdatabase/db_start"
+	oracle_autonomousdatabase_db_stop "flomation.app/automate/executor/actions/oracle/autonomousdatabase/db_stop"
+	oracle_autonomousdatabase_db_update "flomation.app/automate/executor/actions/oracle/autonomousdatabase/db_update"
 	oracle_compute_availability_domain_get_all "flomation.app/automate/executor/actions/oracle/compute/availability_domain_get_all"
 	oracle_compute_boot_volume_get_all "flomation.app/automate/executor/actions/oracle/compute/boot_volume_get_all"
 	oracle_compute_compartment_get_all "flomation.app/automate/executor/actions/oracle/compute/compartment_get_all"
@@ -3291,6 +3315,30 @@ var Actions = map[string]core.Action{
 	"opentofu/apply":                                                 opentofu_apply.Execute,
 	"opentofu/destroy":                                               opentofu_destroy.Execute,
 	"opentofu/plan":                                                  opentofu_plan.Execute,
+	"oracle/autonomousdatabase/db_change_compartment":                oracle_autonomousdatabase_db_change_compartment.Execute,
+	"oracle/autonomousdatabase/db_clone":                             oracle_autonomousdatabase_db_clone.Execute,
+	"oracle/autonomousdatabase/db_create":                            oracle_autonomousdatabase_db_create.Execute,
+	"oracle/autonomousdatabase/db_create_backup":                     oracle_autonomousdatabase_db_create_backup.Execute,
+	"oracle/autonomousdatabase/db_delete":                            oracle_autonomousdatabase_db_delete.Execute,
+	"oracle/autonomousdatabase/db_delete_backup":                     oracle_autonomousdatabase_db_delete_backup.Execute,
+	"oracle/autonomousdatabase/db_generate_regional_wallet":          oracle_autonomousdatabase_db_generate_regional_wallet.Execute,
+	"oracle/autonomousdatabase/db_generate_wallet":                   oracle_autonomousdatabase_db_generate_wallet.Execute,
+	"oracle/autonomousdatabase/db_get":                               oracle_autonomousdatabase_db_get.Execute,
+	"oracle/autonomousdatabase/db_get_all":                           oracle_autonomousdatabase_db_get_all.Execute,
+	"oracle/autonomousdatabase/db_get_backup":                        oracle_autonomousdatabase_db_get_backup.Execute,
+	"oracle/autonomousdatabase/db_get_connection_info":               oracle_autonomousdatabase_db_get_connection_info.Execute,
+	"oracle/autonomousdatabase/db_list_backups":                      oracle_autonomousdatabase_db_list_backups.Execute,
+	"oracle/autonomousdatabase/db_list_character_sets":               oracle_autonomousdatabase_db_list_character_sets.Execute,
+	"oracle/autonomousdatabase/db_list_clones":                       oracle_autonomousdatabase_db_list_clones.Execute,
+	"oracle/autonomousdatabase/db_list_versions":                     oracle_autonomousdatabase_db_list_versions.Execute,
+	"oracle/autonomousdatabase/db_restart":                           oracle_autonomousdatabase_db_restart.Execute,
+	"oracle/autonomousdatabase/db_restore":                           oracle_autonomousdatabase_db_restore.Execute,
+	"oracle/autonomousdatabase/db_rotate_wallet":                     oracle_autonomousdatabase_db_rotate_wallet.Execute,
+	"oracle/autonomousdatabase/db_scale":                             oracle_autonomousdatabase_db_scale.Execute,
+	"oracle/autonomousdatabase/db_shrink":                            oracle_autonomousdatabase_db_shrink.Execute,
+	"oracle/autonomousdatabase/db_start":                             oracle_autonomousdatabase_db_start.Execute,
+	"oracle/autonomousdatabase/db_stop":                              oracle_autonomousdatabase_db_stop.Execute,
+	"oracle/autonomousdatabase/db_update":                            oracle_autonomousdatabase_db_update.Execute,
 	"oracle/compute/availability_domain_get_all":                     oracle_compute_availability_domain_get_all.Execute,
 	"oracle/compute/boot_volume_get_all":                             oracle_compute_boot_volume_get_all.Execute,
 	"oracle/compute/compartment_get_all":                             oracle_compute_compartment_get_all.Execute,
