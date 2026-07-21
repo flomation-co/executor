@@ -234,14 +234,24 @@ import (
 	aws_s3_abort_multipart_upload "flomation.app/automate/executor/actions/aws/s3/abort_multipart_upload"
 	aws_s3_complete_multipart_upload "flomation.app/automate/executor/actions/aws/s3/complete_multipart_upload"
 	aws_s3_copy_object "flomation.app/automate/executor/actions/aws/s3/copy_object"
+	aws_s3_create_access_grant "flomation.app/automate/executor/actions/aws/s3/create_access_grant"
+	aws_s3_create_access_grants_instance "flomation.app/automate/executor/actions/aws/s3/create_access_grants_instance"
+	aws_s3_create_access_grants_location "flomation.app/automate/executor/actions/aws/s3/create_access_grants_location"
 	aws_s3_create_access_point "flomation.app/automate/executor/actions/aws/s3/create_access_point"
+	aws_s3_create_access_point_for_object_lambda "flomation.app/automate/executor/actions/aws/s3/create_access_point_for_object_lambda"
 	aws_s3_create_bucket "flomation.app/automate/executor/actions/aws/s3/create_bucket"
 	aws_s3_create_job "flomation.app/automate/executor/actions/aws/s3/create_job"
 	aws_s3_create_multi_region_access_point "flomation.app/automate/executor/actions/aws/s3/create_multi_region_access_point"
 	aws_s3_create_multipart_upload "flomation.app/automate/executor/actions/aws/s3/create_multipart_upload"
 	aws_s3_delete "flomation.app/automate/executor/actions/aws/s3/delete"
+	aws_s3_delete_access_grant "flomation.app/automate/executor/actions/aws/s3/delete_access_grant"
+	aws_s3_delete_access_grants_instance "flomation.app/automate/executor/actions/aws/s3/delete_access_grants_instance"
+	aws_s3_delete_access_grants_instance_resource_policy "flomation.app/automate/executor/actions/aws/s3/delete_access_grants_instance_resource_policy"
+	aws_s3_delete_access_grants_location "flomation.app/automate/executor/actions/aws/s3/delete_access_grants_location"
 	aws_s3_delete_access_point "flomation.app/automate/executor/actions/aws/s3/delete_access_point"
+	aws_s3_delete_access_point_for_object_lambda "flomation.app/automate/executor/actions/aws/s3/delete_access_point_for_object_lambda"
 	aws_s3_delete_access_point_policy "flomation.app/automate/executor/actions/aws/s3/delete_access_point_policy"
+	aws_s3_delete_access_point_policy_for_object_lambda "flomation.app/automate/executor/actions/aws/s3/delete_access_point_policy_for_object_lambda"
 	aws_s3_delete_account_public_access_block "flomation.app/automate/executor/actions/aws/s3/delete_account_public_access_block"
 	aws_s3_delete_bucket "flomation.app/automate/executor/actions/aws/s3/delete_bucket"
 	aws_s3_delete_bucket_cors "flomation.app/automate/executor/actions/aws/s3/delete_bucket_cors"
@@ -258,10 +268,18 @@ import (
 	aws_s3_delete_objects "flomation.app/automate/executor/actions/aws/s3/delete_objects"
 	aws_s3_delete_storage_lens_configuration "flomation.app/automate/executor/actions/aws/s3/delete_storage_lens_configuration"
 	aws_s3_describe_job "flomation.app/automate/executor/actions/aws/s3/describe_job"
+	aws_s3_describe_multi_region_access_point_operation "flomation.app/automate/executor/actions/aws/s3/describe_multi_region_access_point_operation"
 	aws_s3_get "flomation.app/automate/executor/actions/aws/s3/get"
+	aws_s3_get_access_grant "flomation.app/automate/executor/actions/aws/s3/get_access_grant"
+	aws_s3_get_access_grants_instance "flomation.app/automate/executor/actions/aws/s3/get_access_grants_instance"
+	aws_s3_get_access_grants_instance_resource_policy "flomation.app/automate/executor/actions/aws/s3/get_access_grants_instance_resource_policy"
 	aws_s3_get_access_point "flomation.app/automate/executor/actions/aws/s3/get_access_point"
+	aws_s3_get_access_point_configuration_for_object_lambda "flomation.app/automate/executor/actions/aws/s3/get_access_point_configuration_for_object_lambda"
+	aws_s3_get_access_point_for_object_lambda "flomation.app/automate/executor/actions/aws/s3/get_access_point_for_object_lambda"
 	aws_s3_get_access_point_policy "flomation.app/automate/executor/actions/aws/s3/get_access_point_policy"
+	aws_s3_get_access_point_policy_for_object_lambda "flomation.app/automate/executor/actions/aws/s3/get_access_point_policy_for_object_lambda"
 	aws_s3_get_access_point_policy_status "flomation.app/automate/executor/actions/aws/s3/get_access_point_policy_status"
+	aws_s3_get_access_point_policy_status_for_object_lambda "flomation.app/automate/executor/actions/aws/s3/get_access_point_policy_status_for_object_lambda"
 	aws_s3_get_account_public_access_block "flomation.app/automate/executor/actions/aws/s3/get_account_public_access_block"
 	aws_s3_get_bucket_accelerate_configuration "flomation.app/automate/executor/actions/aws/s3/get_bucket_accelerate_configuration"
 	aws_s3_get_bucket_acl "flomation.app/automate/executor/actions/aws/s3/get_bucket_acl"
@@ -279,6 +297,7 @@ import (
 	aws_s3_get_bucket_tagging "flomation.app/automate/executor/actions/aws/s3/get_bucket_tagging"
 	aws_s3_get_bucket_versioning "flomation.app/automate/executor/actions/aws/s3/get_bucket_versioning"
 	aws_s3_get_bucket_website "flomation.app/automate/executor/actions/aws/s3/get_bucket_website"
+	aws_s3_get_data_access "flomation.app/automate/executor/actions/aws/s3/get_data_access"
 	aws_s3_get_job_tagging "flomation.app/automate/executor/actions/aws/s3/get_job_tagging"
 	aws_s3_get_multi_region_access_point "flomation.app/automate/executor/actions/aws/s3/get_multi_region_access_point"
 	aws_s3_get_object_acl "flomation.app/automate/executor/actions/aws/s3/get_object_acl"
@@ -294,7 +313,11 @@ import (
 	aws_s3_head_bucket "flomation.app/automate/executor/actions/aws/s3/head_bucket"
 	aws_s3_head_object "flomation.app/automate/executor/actions/aws/s3/head_object"
 	aws_s3_list "flomation.app/automate/executor/actions/aws/s3/list"
+	aws_s3_list_access_grants "flomation.app/automate/executor/actions/aws/s3/list_access_grants"
+	aws_s3_list_access_grants_instances "flomation.app/automate/executor/actions/aws/s3/list_access_grants_instances"
+	aws_s3_list_access_grants_locations "flomation.app/automate/executor/actions/aws/s3/list_access_grants_locations"
 	aws_s3_list_access_points "flomation.app/automate/executor/actions/aws/s3/list_access_points"
+	aws_s3_list_access_points_for_object_lambda "flomation.app/automate/executor/actions/aws/s3/list_access_points_for_object_lambda"
 	aws_s3_list_buckets "flomation.app/automate/executor/actions/aws/s3/list_buckets"
 	aws_s3_list_jobs "flomation.app/automate/executor/actions/aws/s3/list_jobs"
 	aws_s3_list_multi_region_access_points "flomation.app/automate/executor/actions/aws/s3/list_multi_region_access_points"
@@ -305,7 +328,10 @@ import (
 	aws_s3_presign_get_object "flomation.app/automate/executor/actions/aws/s3/presign_get_object"
 	aws_s3_presign_put_object "flomation.app/automate/executor/actions/aws/s3/presign_put_object"
 	aws_s3_put "flomation.app/automate/executor/actions/aws/s3/put"
+	aws_s3_put_access_grants_instance_resource_policy "flomation.app/automate/executor/actions/aws/s3/put_access_grants_instance_resource_policy"
+	aws_s3_put_access_point_configuration_for_object_lambda "flomation.app/automate/executor/actions/aws/s3/put_access_point_configuration_for_object_lambda"
 	aws_s3_put_access_point_policy "flomation.app/automate/executor/actions/aws/s3/put_access_point_policy"
+	aws_s3_put_access_point_policy_for_object_lambda "flomation.app/automate/executor/actions/aws/s3/put_access_point_policy_for_object_lambda"
 	aws_s3_put_account_public_access_block "flomation.app/automate/executor/actions/aws/s3/put_account_public_access_block"
 	aws_s3_put_bucket_accelerate_configuration "flomation.app/automate/executor/actions/aws/s3/put_bucket_accelerate_configuration"
 	aws_s3_put_bucket_acl "flomation.app/automate/executor/actions/aws/s3/put_bucket_acl"
@@ -332,6 +358,7 @@ import (
 	aws_s3_put_storage_lens_configuration_tagging "flomation.app/automate/executor/actions/aws/s3/put_storage_lens_configuration_tagging"
 	aws_s3_restore_object "flomation.app/automate/executor/actions/aws/s3/restore_object"
 	aws_s3_select_object_content "flomation.app/automate/executor/actions/aws/s3/select_object_content"
+	aws_s3_update_access_grants_location "flomation.app/automate/executor/actions/aws/s3/update_access_grants_location"
 	aws_s3_update_job_priority "flomation.app/automate/executor/actions/aws/s3/update_job_priority"
 	aws_s3_update_job_status "flomation.app/automate/executor/actions/aws/s3/update_job_status"
 	aws_s3_upload_part "flomation.app/automate/executor/actions/aws/s3/upload_part"
@@ -2100,154 +2127,172 @@ var Actions = map[string]core.Action{
 	"aws/ec2/stop_instances":                   aws_ec2_stop_instances.Execute,
 	"aws/ec2/terminate_instances":              aws_ec2_terminate_instances.Execute,
 	"aws/ec2/unmonitor_instances":              aws_ec2_unmonitor_instances.Execute,
-	"aws/ec2/update_security_group_rule_descriptions_egress":         aws_ec2_update_security_group_rule_descriptions_egress.Execute,
-	"aws/ec2/update_security_group_rule_descriptions_ingress":        aws_ec2_update_security_group_rule_descriptions_ingress.Execute,
-	"aws/rds/add_role_to_db_cluster":                                 aws_rds_add_role_to_db_cluster.Execute,
-	"aws/rds/add_tags_to_resource":                                   aws_rds_add_tags_to_resource.Execute,
-	"aws/rds/apply_pending_maintenance_action":                       aws_rds_apply_pending_maintenance_action.Execute,
-	"aws/rds/batch_execute_statement":                                aws_rds_batch_execute_statement.Execute,
-	"aws/rds/begin_transaction":                                      aws_rds_begin_transaction.Execute,
-	"aws/rds/cancel_export_task":                                     aws_rds_cancel_export_task.Execute,
-	"aws/rds/commit_transaction":                                     aws_rds_commit_transaction.Execute,
-	"aws/rds/copy_db_cluster_snapshot":                               aws_rds_copy_db_cluster_snapshot.Execute,
-	"aws/rds/copy_db_snapshot":                                       aws_rds_copy_db_snapshot.Execute,
-	"aws/rds/create_blue_green_deployment":                           aws_rds_create_blue_green_deployment.Execute,
-	"aws/rds/create_custom_db_engine_version":                        aws_rds_create_custom_db_engine_version.Execute,
-	"aws/rds/create_db_cluster":                                      aws_rds_create_db_cluster.Execute,
-	"aws/rds/create_db_cluster_endpoint":                             aws_rds_create_db_cluster_endpoint.Execute,
-	"aws/rds/create_db_cluster_parameter_group":                      aws_rds_create_db_cluster_parameter_group.Execute,
-	"aws/rds/create_db_cluster_snapshot":                             aws_rds_create_db_cluster_snapshot.Execute,
-	"aws/rds/create_db_instance":                                     aws_rds_create_db_instance.Execute,
-	"aws/rds/create_db_instance_read_replica":                        aws_rds_create_db_instance_read_replica.Execute,
-	"aws/rds/create_db_parameter_group":                              aws_rds_create_db_parameter_group.Execute,
-	"aws/rds/create_db_proxy":                                        aws_rds_create_db_proxy.Execute,
-	"aws/rds/create_db_shard_group":                                  aws_rds_create_db_shard_group.Execute,
-	"aws/rds/create_db_snapshot":                                     aws_rds_create_db_snapshot.Execute,
-	"aws/rds/create_db_subnet_group":                                 aws_rds_create_db_subnet_group.Execute,
-	"aws/rds/create_event_subscription":                              aws_rds_create_event_subscription.Execute,
-	"aws/rds/create_global_cluster":                                  aws_rds_create_global_cluster.Execute,
-	"aws/rds/create_integration":                                     aws_rds_create_integration.Execute,
-	"aws/rds/create_option_group":                                    aws_rds_create_option_group.Execute,
-	"aws/rds/create_tenant_database":                                 aws_rds_create_tenant_database.Execute,
-	"aws/rds/delete_blue_green_deployment":                           aws_rds_delete_blue_green_deployment.Execute,
-	"aws/rds/delete_custom_db_engine_version":                        aws_rds_delete_custom_db_engine_version.Execute,
-	"aws/rds/delete_db_cluster":                                      aws_rds_delete_db_cluster.Execute,
-	"aws/rds/delete_db_cluster_endpoint":                             aws_rds_delete_db_cluster_endpoint.Execute,
-	"aws/rds/delete_db_cluster_parameter_group":                      aws_rds_delete_db_cluster_parameter_group.Execute,
-	"aws/rds/delete_db_cluster_snapshot":                             aws_rds_delete_db_cluster_snapshot.Execute,
-	"aws/rds/delete_db_instance":                                     aws_rds_delete_db_instance.Execute,
-	"aws/rds/delete_db_instance_automated_backup":                    aws_rds_delete_db_instance_automated_backup.Execute,
-	"aws/rds/delete_db_parameter_group":                              aws_rds_delete_db_parameter_group.Execute,
-	"aws/rds/delete_db_proxy":                                        aws_rds_delete_db_proxy.Execute,
-	"aws/rds/delete_db_shard_group":                                  aws_rds_delete_db_shard_group.Execute,
-	"aws/rds/delete_db_snapshot":                                     aws_rds_delete_db_snapshot.Execute,
-	"aws/rds/delete_db_subnet_group":                                 aws_rds_delete_db_subnet_group.Execute,
-	"aws/rds/delete_event_subscription":                              aws_rds_delete_event_subscription.Execute,
-	"aws/rds/delete_global_cluster":                                  aws_rds_delete_global_cluster.Execute,
-	"aws/rds/delete_integration":                                     aws_rds_delete_integration.Execute,
-	"aws/rds/delete_option_group":                                    aws_rds_delete_option_group.Execute,
-	"aws/rds/delete_tenant_database":                                 aws_rds_delete_tenant_database.Execute,
-	"aws/rds/deregister_db_proxy_targets":                            aws_rds_deregister_db_proxy_targets.Execute,
-	"aws/rds/describe_blue_green_deployments":                        aws_rds_describe_blue_green_deployments.Execute,
-	"aws/rds/describe_certificates":                                  aws_rds_describe_certificates.Execute,
-	"aws/rds/describe_db_cluster_endpoints":                          aws_rds_describe_db_cluster_endpoints.Execute,
-	"aws/rds/describe_db_cluster_parameter_groups":                   aws_rds_describe_db_cluster_parameter_groups.Execute,
-	"aws/rds/describe_db_cluster_snapshots":                          aws_rds_describe_db_cluster_snapshots.Execute,
-	"aws/rds/describe_db_clusters":                                   aws_rds_describe_db_clusters.Execute,
-	"aws/rds/describe_db_engine_versions":                            aws_rds_describe_db_engine_versions.Execute,
-	"aws/rds/describe_db_instance_automated_backups":                 aws_rds_describe_db_instance_automated_backups.Execute,
-	"aws/rds/describe_db_instances":                                  aws_rds_describe_db_instances.Execute,
-	"aws/rds/describe_db_log_files":                                  aws_rds_describe_db_log_files.Execute,
-	"aws/rds/describe_db_parameter_groups":                           aws_rds_describe_db_parameter_groups.Execute,
-	"aws/rds/describe_db_parameters":                                 aws_rds_describe_db_parameters.Execute,
-	"aws/rds/describe_db_proxies":                                    aws_rds_describe_db_proxies.Execute,
-	"aws/rds/describe_db_shard_groups":                               aws_rds_describe_db_shard_groups.Execute,
-	"aws/rds/describe_db_snapshots":                                  aws_rds_describe_db_snapshots.Execute,
-	"aws/rds/describe_db_subnet_groups":                              aws_rds_describe_db_subnet_groups.Execute,
-	"aws/rds/describe_event_categories":                              aws_rds_describe_event_categories.Execute,
-	"aws/rds/describe_events":                                        aws_rds_describe_events.Execute,
-	"aws/rds/describe_export_tasks":                                  aws_rds_describe_export_tasks.Execute,
-	"aws/rds/describe_global_clusters":                               aws_rds_describe_global_clusters.Execute,
-	"aws/rds/describe_integrations":                                  aws_rds_describe_integrations.Execute,
-	"aws/rds/describe_option_groups":                                 aws_rds_describe_option_groups.Execute,
-	"aws/rds/describe_orderable_db_instance_options":                 aws_rds_describe_orderable_db_instance_options.Execute,
-	"aws/rds/describe_pending_maintenance_actions":                   aws_rds_describe_pending_maintenance_actions.Execute,
-	"aws/rds/describe_reserved_db_instances":                         aws_rds_describe_reserved_db_instances.Execute,
-	"aws/rds/describe_source_regions":                                aws_rds_describe_source_regions.Execute,
-	"aws/rds/describe_tenant_databases":                              aws_rds_describe_tenant_databases.Execute,
-	"aws/rds/download_db_log_file_portion":                           aws_rds_download_db_log_file_portion.Execute,
-	"aws/rds/execute_statement":                                      aws_rds_execute_statement.Execute,
-	"aws/rds/failover_db_cluster":                                    aws_rds_failover_db_cluster.Execute,
-	"aws/rds/failover_global_cluster":                                aws_rds_failover_global_cluster.Execute,
-	"aws/rds/list_tags_for_resource":                                 aws_rds_list_tags_for_resource.Execute,
-	"aws/rds/modify_certificates":                                    aws_rds_modify_certificates.Execute,
-	"aws/rds/modify_custom_db_engine_version":                        aws_rds_modify_custom_db_engine_version.Execute,
-	"aws/rds/modify_db_cluster":                                      aws_rds_modify_db_cluster.Execute,
-	"aws/rds/modify_db_cluster_parameter_group":                      aws_rds_modify_db_cluster_parameter_group.Execute,
-	"aws/rds/modify_db_cluster_snapshot_attribute":                   aws_rds_modify_db_cluster_snapshot_attribute.Execute,
-	"aws/rds/modify_db_instance":                                     aws_rds_modify_db_instance.Execute,
-	"aws/rds/modify_db_parameter_group":                              aws_rds_modify_db_parameter_group.Execute,
-	"aws/rds/modify_db_proxy":                                        aws_rds_modify_db_proxy.Execute,
-	"aws/rds/modify_db_shard_group":                                  aws_rds_modify_db_shard_group.Execute,
-	"aws/rds/modify_db_snapshot_attribute":                           aws_rds_modify_db_snapshot_attribute.Execute,
-	"aws/rds/modify_db_subnet_group":                                 aws_rds_modify_db_subnet_group.Execute,
-	"aws/rds/modify_global_cluster":                                  aws_rds_modify_global_cluster.Execute,
-	"aws/rds/modify_integration":                                     aws_rds_modify_integration.Execute,
-	"aws/rds/modify_option_group":                                    aws_rds_modify_option_group.Execute,
-	"aws/rds/modify_tenant_database":                                 aws_rds_modify_tenant_database.Execute,
-	"aws/rds/promote_read_replica":                                   aws_rds_promote_read_replica.Execute,
-	"aws/rds/reboot_db_instance":                                     aws_rds_reboot_db_instance.Execute,
-	"aws/rds/register_db_proxy_targets":                              aws_rds_register_db_proxy_targets.Execute,
-	"aws/rds/remove_role_from_db_cluster":                            aws_rds_remove_role_from_db_cluster.Execute,
-	"aws/rds/remove_tags_from_resource":                              aws_rds_remove_tags_from_resource.Execute,
-	"aws/rds/reset_db_parameter_group":                               aws_rds_reset_db_parameter_group.Execute,
-	"aws/rds/restore_db_cluster_from_snapshot":                       aws_rds_restore_db_cluster_from_snapshot.Execute,
-	"aws/rds/restore_db_cluster_to_point_in_time":                    aws_rds_restore_db_cluster_to_point_in_time.Execute,
-	"aws/rds/restore_db_instance_from_db_snapshot":                   aws_rds_restore_db_instance_from_db_snapshot.Execute,
-	"aws/rds/restore_db_instance_from_s3":                            aws_rds_restore_db_instance_from_s3.Execute,
-	"aws/rds/restore_db_instance_to_point_in_time":                   aws_rds_restore_db_instance_to_point_in_time.Execute,
-	"aws/rds/rollback_transaction":                                   aws_rds_rollback_transaction.Execute,
-	"aws/rds/start_db_cluster":                                       aws_rds_start_db_cluster.Execute,
-	"aws/rds/start_db_instance":                                      aws_rds_start_db_instance.Execute,
-	"aws/rds/start_db_instance_automated_backups_replication":        aws_rds_start_db_instance_automated_backups_replication.Execute,
-	"aws/rds/start_export_task":                                      aws_rds_start_export_task.Execute,
-	"aws/rds/stop_db_cluster":                                        aws_rds_stop_db_cluster.Execute,
-	"aws/rds/stop_db_instance":                                       aws_rds_stop_db_instance.Execute,
-	"aws/rds/stop_db_instance_automated_backups_replication":         aws_rds_stop_db_instance_automated_backups_replication.Execute,
-	"aws/rds/switchover_blue_green_deployment":                       aws_rds_switchover_blue_green_deployment.Execute,
-	"aws/rds/switchover_global_cluster":                              aws_rds_switchover_global_cluster.Execute,
-	"aws/rds/switchover_read_replica":                                aws_rds_switchover_read_replica.Execute,
-	"aws/s3/abort_multipart_upload":                                  aws_s3_abort_multipart_upload.Execute,
-	"aws/s3/complete_multipart_upload":                               aws_s3_complete_multipart_upload.Execute,
-	"aws/s3/copy_object":                                             aws_s3_copy_object.Execute,
-	"aws/s3/create_access_point":                                     aws_s3_create_access_point.Execute,
-	"aws/s3/create_bucket":                                           aws_s3_create_bucket.Execute,
-	"aws/s3/create_job":                                              aws_s3_create_job.Execute,
-	"aws/s3/create_multi_region_access_point":                        aws_s3_create_multi_region_access_point.Execute,
-	"aws/s3/create_multipart_upload":                                 aws_s3_create_multipart_upload.Execute,
-	"aws/s3/delete":                                                  aws_s3_delete.Execute,
-	"aws/s3/delete_access_point":                                     aws_s3_delete_access_point.Execute,
-	"aws/s3/delete_access_point_policy":                              aws_s3_delete_access_point_policy.Execute,
-	"aws/s3/delete_account_public_access_block":                      aws_s3_delete_account_public_access_block.Execute,
-	"aws/s3/delete_bucket":                                           aws_s3_delete_bucket.Execute,
-	"aws/s3/delete_bucket_cors":                                      aws_s3_delete_bucket_cors.Execute,
-	"aws/s3/delete_bucket_encryption":                                aws_s3_delete_bucket_encryption.Execute,
-	"aws/s3/delete_bucket_lifecycle":                                 aws_s3_delete_bucket_lifecycle.Execute,
-	"aws/s3/delete_bucket_ownership_controls":                        aws_s3_delete_bucket_ownership_controls.Execute,
-	"aws/s3/delete_bucket_policy":                                    aws_s3_delete_bucket_policy.Execute,
-	"aws/s3/delete_bucket_replication":                               aws_s3_delete_bucket_replication.Execute,
-	"aws/s3/delete_bucket_tagging":                                   aws_s3_delete_bucket_tagging.Execute,
-	"aws/s3/delete_bucket_website":                                   aws_s3_delete_bucket_website.Execute,
-	"aws/s3/delete_job_tagging":                                      aws_s3_delete_job_tagging.Execute,
-	"aws/s3/delete_multi_region_access_point":                        aws_s3_delete_multi_region_access_point.Execute,
-	"aws/s3/delete_object_tagging":                                   aws_s3_delete_object_tagging.Execute,
-	"aws/s3/delete_objects":                                          aws_s3_delete_objects.Execute,
-	"aws/s3/delete_storage_lens_configuration":                       aws_s3_delete_storage_lens_configuration.Execute,
-	"aws/s3/describe_job":                                            aws_s3_describe_job.Execute,
+	"aws/ec2/update_security_group_rule_descriptions_egress":  aws_ec2_update_security_group_rule_descriptions_egress.Execute,
+	"aws/ec2/update_security_group_rule_descriptions_ingress": aws_ec2_update_security_group_rule_descriptions_ingress.Execute,
+	"aws/rds/add_role_to_db_cluster":                          aws_rds_add_role_to_db_cluster.Execute,
+	"aws/rds/add_tags_to_resource":                            aws_rds_add_tags_to_resource.Execute,
+	"aws/rds/apply_pending_maintenance_action":                aws_rds_apply_pending_maintenance_action.Execute,
+	"aws/rds/batch_execute_statement":                         aws_rds_batch_execute_statement.Execute,
+	"aws/rds/begin_transaction":                               aws_rds_begin_transaction.Execute,
+	"aws/rds/cancel_export_task":                              aws_rds_cancel_export_task.Execute,
+	"aws/rds/commit_transaction":                              aws_rds_commit_transaction.Execute,
+	"aws/rds/copy_db_cluster_snapshot":                        aws_rds_copy_db_cluster_snapshot.Execute,
+	"aws/rds/copy_db_snapshot":                                aws_rds_copy_db_snapshot.Execute,
+	"aws/rds/create_blue_green_deployment":                    aws_rds_create_blue_green_deployment.Execute,
+	"aws/rds/create_custom_db_engine_version":                 aws_rds_create_custom_db_engine_version.Execute,
+	"aws/rds/create_db_cluster":                               aws_rds_create_db_cluster.Execute,
+	"aws/rds/create_db_cluster_endpoint":                      aws_rds_create_db_cluster_endpoint.Execute,
+	"aws/rds/create_db_cluster_parameter_group":               aws_rds_create_db_cluster_parameter_group.Execute,
+	"aws/rds/create_db_cluster_snapshot":                      aws_rds_create_db_cluster_snapshot.Execute,
+	"aws/rds/create_db_instance":                              aws_rds_create_db_instance.Execute,
+	"aws/rds/create_db_instance_read_replica":                 aws_rds_create_db_instance_read_replica.Execute,
+	"aws/rds/create_db_parameter_group":                       aws_rds_create_db_parameter_group.Execute,
+	"aws/rds/create_db_proxy":                                 aws_rds_create_db_proxy.Execute,
+	"aws/rds/create_db_shard_group":                           aws_rds_create_db_shard_group.Execute,
+	"aws/rds/create_db_snapshot":                              aws_rds_create_db_snapshot.Execute,
+	"aws/rds/create_db_subnet_group":                          aws_rds_create_db_subnet_group.Execute,
+	"aws/rds/create_event_subscription":                       aws_rds_create_event_subscription.Execute,
+	"aws/rds/create_global_cluster":                           aws_rds_create_global_cluster.Execute,
+	"aws/rds/create_integration":                              aws_rds_create_integration.Execute,
+	"aws/rds/create_option_group":                             aws_rds_create_option_group.Execute,
+	"aws/rds/create_tenant_database":                          aws_rds_create_tenant_database.Execute,
+	"aws/rds/delete_blue_green_deployment":                    aws_rds_delete_blue_green_deployment.Execute,
+	"aws/rds/delete_custom_db_engine_version":                 aws_rds_delete_custom_db_engine_version.Execute,
+	"aws/rds/delete_db_cluster":                               aws_rds_delete_db_cluster.Execute,
+	"aws/rds/delete_db_cluster_endpoint":                      aws_rds_delete_db_cluster_endpoint.Execute,
+	"aws/rds/delete_db_cluster_parameter_group":               aws_rds_delete_db_cluster_parameter_group.Execute,
+	"aws/rds/delete_db_cluster_snapshot":                      aws_rds_delete_db_cluster_snapshot.Execute,
+	"aws/rds/delete_db_instance":                              aws_rds_delete_db_instance.Execute,
+	"aws/rds/delete_db_instance_automated_backup":             aws_rds_delete_db_instance_automated_backup.Execute,
+	"aws/rds/delete_db_parameter_group":                       aws_rds_delete_db_parameter_group.Execute,
+	"aws/rds/delete_db_proxy":                                 aws_rds_delete_db_proxy.Execute,
+	"aws/rds/delete_db_shard_group":                           aws_rds_delete_db_shard_group.Execute,
+	"aws/rds/delete_db_snapshot":                              aws_rds_delete_db_snapshot.Execute,
+	"aws/rds/delete_db_subnet_group":                          aws_rds_delete_db_subnet_group.Execute,
+	"aws/rds/delete_event_subscription":                       aws_rds_delete_event_subscription.Execute,
+	"aws/rds/delete_global_cluster":                           aws_rds_delete_global_cluster.Execute,
+	"aws/rds/delete_integration":                              aws_rds_delete_integration.Execute,
+	"aws/rds/delete_option_group":                             aws_rds_delete_option_group.Execute,
+	"aws/rds/delete_tenant_database":                          aws_rds_delete_tenant_database.Execute,
+	"aws/rds/deregister_db_proxy_targets":                     aws_rds_deregister_db_proxy_targets.Execute,
+	"aws/rds/describe_blue_green_deployments":                 aws_rds_describe_blue_green_deployments.Execute,
+	"aws/rds/describe_certificates":                           aws_rds_describe_certificates.Execute,
+	"aws/rds/describe_db_cluster_endpoints":                   aws_rds_describe_db_cluster_endpoints.Execute,
+	"aws/rds/describe_db_cluster_parameter_groups":            aws_rds_describe_db_cluster_parameter_groups.Execute,
+	"aws/rds/describe_db_cluster_snapshots":                   aws_rds_describe_db_cluster_snapshots.Execute,
+	"aws/rds/describe_db_clusters":                            aws_rds_describe_db_clusters.Execute,
+	"aws/rds/describe_db_engine_versions":                     aws_rds_describe_db_engine_versions.Execute,
+	"aws/rds/describe_db_instance_automated_backups":          aws_rds_describe_db_instance_automated_backups.Execute,
+	"aws/rds/describe_db_instances":                           aws_rds_describe_db_instances.Execute,
+	"aws/rds/describe_db_log_files":                           aws_rds_describe_db_log_files.Execute,
+	"aws/rds/describe_db_parameter_groups":                    aws_rds_describe_db_parameter_groups.Execute,
+	"aws/rds/describe_db_parameters":                          aws_rds_describe_db_parameters.Execute,
+	"aws/rds/describe_db_proxies":                             aws_rds_describe_db_proxies.Execute,
+	"aws/rds/describe_db_shard_groups":                        aws_rds_describe_db_shard_groups.Execute,
+	"aws/rds/describe_db_snapshots":                           aws_rds_describe_db_snapshots.Execute,
+	"aws/rds/describe_db_subnet_groups":                       aws_rds_describe_db_subnet_groups.Execute,
+	"aws/rds/describe_event_categories":                       aws_rds_describe_event_categories.Execute,
+	"aws/rds/describe_events":                                 aws_rds_describe_events.Execute,
+	"aws/rds/describe_export_tasks":                           aws_rds_describe_export_tasks.Execute,
+	"aws/rds/describe_global_clusters":                        aws_rds_describe_global_clusters.Execute,
+	"aws/rds/describe_integrations":                           aws_rds_describe_integrations.Execute,
+	"aws/rds/describe_option_groups":                          aws_rds_describe_option_groups.Execute,
+	"aws/rds/describe_orderable_db_instance_options":          aws_rds_describe_orderable_db_instance_options.Execute,
+	"aws/rds/describe_pending_maintenance_actions":            aws_rds_describe_pending_maintenance_actions.Execute,
+	"aws/rds/describe_reserved_db_instances":                  aws_rds_describe_reserved_db_instances.Execute,
+	"aws/rds/describe_source_regions":                         aws_rds_describe_source_regions.Execute,
+	"aws/rds/describe_tenant_databases":                       aws_rds_describe_tenant_databases.Execute,
+	"aws/rds/download_db_log_file_portion":                    aws_rds_download_db_log_file_portion.Execute,
+	"aws/rds/execute_statement":                               aws_rds_execute_statement.Execute,
+	"aws/rds/failover_db_cluster":                             aws_rds_failover_db_cluster.Execute,
+	"aws/rds/failover_global_cluster":                         aws_rds_failover_global_cluster.Execute,
+	"aws/rds/list_tags_for_resource":                          aws_rds_list_tags_for_resource.Execute,
+	"aws/rds/modify_certificates":                             aws_rds_modify_certificates.Execute,
+	"aws/rds/modify_custom_db_engine_version":                 aws_rds_modify_custom_db_engine_version.Execute,
+	"aws/rds/modify_db_cluster":                               aws_rds_modify_db_cluster.Execute,
+	"aws/rds/modify_db_cluster_parameter_group":               aws_rds_modify_db_cluster_parameter_group.Execute,
+	"aws/rds/modify_db_cluster_snapshot_attribute":            aws_rds_modify_db_cluster_snapshot_attribute.Execute,
+	"aws/rds/modify_db_instance":                              aws_rds_modify_db_instance.Execute,
+	"aws/rds/modify_db_parameter_group":                       aws_rds_modify_db_parameter_group.Execute,
+	"aws/rds/modify_db_proxy":                                 aws_rds_modify_db_proxy.Execute,
+	"aws/rds/modify_db_shard_group":                           aws_rds_modify_db_shard_group.Execute,
+	"aws/rds/modify_db_snapshot_attribute":                    aws_rds_modify_db_snapshot_attribute.Execute,
+	"aws/rds/modify_db_subnet_group":                          aws_rds_modify_db_subnet_group.Execute,
+	"aws/rds/modify_global_cluster":                           aws_rds_modify_global_cluster.Execute,
+	"aws/rds/modify_integration":                              aws_rds_modify_integration.Execute,
+	"aws/rds/modify_option_group":                             aws_rds_modify_option_group.Execute,
+	"aws/rds/modify_tenant_database":                          aws_rds_modify_tenant_database.Execute,
+	"aws/rds/promote_read_replica":                            aws_rds_promote_read_replica.Execute,
+	"aws/rds/reboot_db_instance":                              aws_rds_reboot_db_instance.Execute,
+	"aws/rds/register_db_proxy_targets":                       aws_rds_register_db_proxy_targets.Execute,
+	"aws/rds/remove_role_from_db_cluster":                     aws_rds_remove_role_from_db_cluster.Execute,
+	"aws/rds/remove_tags_from_resource":                       aws_rds_remove_tags_from_resource.Execute,
+	"aws/rds/reset_db_parameter_group":                        aws_rds_reset_db_parameter_group.Execute,
+	"aws/rds/restore_db_cluster_from_snapshot":                aws_rds_restore_db_cluster_from_snapshot.Execute,
+	"aws/rds/restore_db_cluster_to_point_in_time":             aws_rds_restore_db_cluster_to_point_in_time.Execute,
+	"aws/rds/restore_db_instance_from_db_snapshot":            aws_rds_restore_db_instance_from_db_snapshot.Execute,
+	"aws/rds/restore_db_instance_from_s3":                     aws_rds_restore_db_instance_from_s3.Execute,
+	"aws/rds/restore_db_instance_to_point_in_time":            aws_rds_restore_db_instance_to_point_in_time.Execute,
+	"aws/rds/rollback_transaction":                            aws_rds_rollback_transaction.Execute,
+	"aws/rds/start_db_cluster":                                aws_rds_start_db_cluster.Execute,
+	"aws/rds/start_db_instance":                               aws_rds_start_db_instance.Execute,
+	"aws/rds/start_db_instance_automated_backups_replication": aws_rds_start_db_instance_automated_backups_replication.Execute,
+	"aws/rds/start_export_task":                               aws_rds_start_export_task.Execute,
+	"aws/rds/stop_db_cluster":                                 aws_rds_stop_db_cluster.Execute,
+	"aws/rds/stop_db_instance":                                aws_rds_stop_db_instance.Execute,
+	"aws/rds/stop_db_instance_automated_backups_replication":  aws_rds_stop_db_instance_automated_backups_replication.Execute,
+	"aws/rds/switchover_blue_green_deployment":                aws_rds_switchover_blue_green_deployment.Execute,
+	"aws/rds/switchover_global_cluster":                       aws_rds_switchover_global_cluster.Execute,
+	"aws/rds/switchover_read_replica":                         aws_rds_switchover_read_replica.Execute,
+	"aws/s3/abort_multipart_upload":                           aws_s3_abort_multipart_upload.Execute,
+	"aws/s3/complete_multipart_upload":                        aws_s3_complete_multipart_upload.Execute,
+	"aws/s3/copy_object":                                      aws_s3_copy_object.Execute,
+	"aws/s3/create_access_grant":                              aws_s3_create_access_grant.Execute,
+	"aws/s3/create_access_grants_instance":                    aws_s3_create_access_grants_instance.Execute,
+	"aws/s3/create_access_grants_location":                    aws_s3_create_access_grants_location.Execute,
+	"aws/s3/create_access_point":                              aws_s3_create_access_point.Execute,
+	"aws/s3/create_access_point_for_object_lambda":            aws_s3_create_access_point_for_object_lambda.Execute,
+	"aws/s3/create_bucket":                                    aws_s3_create_bucket.Execute,
+	"aws/s3/create_job":                                       aws_s3_create_job.Execute,
+	"aws/s3/create_multi_region_access_point":                 aws_s3_create_multi_region_access_point.Execute,
+	"aws/s3/create_multipart_upload":                          aws_s3_create_multipart_upload.Execute,
+	"aws/s3/delete":                                           aws_s3_delete.Execute,
+	"aws/s3/delete_access_grant":                              aws_s3_delete_access_grant.Execute,
+	"aws/s3/delete_access_grants_instance":                    aws_s3_delete_access_grants_instance.Execute,
+	"aws/s3/delete_access_grants_instance_resource_policy":    aws_s3_delete_access_grants_instance_resource_policy.Execute,
+	"aws/s3/delete_access_grants_location":                    aws_s3_delete_access_grants_location.Execute,
+	"aws/s3/delete_access_point":                              aws_s3_delete_access_point.Execute,
+	"aws/s3/delete_access_point_for_object_lambda":            aws_s3_delete_access_point_for_object_lambda.Execute,
+	"aws/s3/delete_access_point_policy":                       aws_s3_delete_access_point_policy.Execute,
+	"aws/s3/delete_access_point_policy_for_object_lambda":     aws_s3_delete_access_point_policy_for_object_lambda.Execute,
+	"aws/s3/delete_account_public_access_block":               aws_s3_delete_account_public_access_block.Execute,
+	"aws/s3/delete_bucket":                                    aws_s3_delete_bucket.Execute,
+	"aws/s3/delete_bucket_cors":                               aws_s3_delete_bucket_cors.Execute,
+	"aws/s3/delete_bucket_encryption":                         aws_s3_delete_bucket_encryption.Execute,
+	"aws/s3/delete_bucket_lifecycle":                          aws_s3_delete_bucket_lifecycle.Execute,
+	"aws/s3/delete_bucket_ownership_controls":                 aws_s3_delete_bucket_ownership_controls.Execute,
+	"aws/s3/delete_bucket_policy":                             aws_s3_delete_bucket_policy.Execute,
+	"aws/s3/delete_bucket_replication":                        aws_s3_delete_bucket_replication.Execute,
+	"aws/s3/delete_bucket_tagging":                            aws_s3_delete_bucket_tagging.Execute,
+	"aws/s3/delete_bucket_website":                            aws_s3_delete_bucket_website.Execute,
+	"aws/s3/delete_job_tagging":                               aws_s3_delete_job_tagging.Execute,
+	"aws/s3/delete_multi_region_access_point":                 aws_s3_delete_multi_region_access_point.Execute,
+	"aws/s3/delete_object_tagging":                            aws_s3_delete_object_tagging.Execute,
+	"aws/s3/delete_objects":                                   aws_s3_delete_objects.Execute,
+	"aws/s3/delete_storage_lens_configuration":                aws_s3_delete_storage_lens_configuration.Execute,
+	"aws/s3/describe_job":                                     aws_s3_describe_job.Execute,
+	"aws/s3/describe_multi_region_access_point_operation":     aws_s3_describe_multi_region_access_point_operation.Execute,
 	"aws/s3/get":                                                     aws_s3_get.Execute,
+	"aws/s3/get_access_grant":                                        aws_s3_get_access_grant.Execute,
+	"aws/s3/get_access_grants_instance":                              aws_s3_get_access_grants_instance.Execute,
+	"aws/s3/get_access_grants_instance_resource_policy":              aws_s3_get_access_grants_instance_resource_policy.Execute,
 	"aws/s3/get_access_point":                                        aws_s3_get_access_point.Execute,
+	"aws/s3/get_access_point_configuration_for_object_lambda":        aws_s3_get_access_point_configuration_for_object_lambda.Execute,
+	"aws/s3/get_access_point_for_object_lambda":                      aws_s3_get_access_point_for_object_lambda.Execute,
 	"aws/s3/get_access_point_policy":                                 aws_s3_get_access_point_policy.Execute,
+	"aws/s3/get_access_point_policy_for_object_lambda":               aws_s3_get_access_point_policy_for_object_lambda.Execute,
 	"aws/s3/get_access_point_policy_status":                          aws_s3_get_access_point_policy_status.Execute,
+	"aws/s3/get_access_point_policy_status_for_object_lambda":        aws_s3_get_access_point_policy_status_for_object_lambda.Execute,
 	"aws/s3/get_account_public_access_block":                         aws_s3_get_account_public_access_block.Execute,
 	"aws/s3/get_bucket_accelerate_configuration":                     aws_s3_get_bucket_accelerate_configuration.Execute,
 	"aws/s3/get_bucket_acl":                                          aws_s3_get_bucket_acl.Execute,
@@ -2265,6 +2310,7 @@ var Actions = map[string]core.Action{
 	"aws/s3/get_bucket_tagging":                                      aws_s3_get_bucket_tagging.Execute,
 	"aws/s3/get_bucket_versioning":                                   aws_s3_get_bucket_versioning.Execute,
 	"aws/s3/get_bucket_website":                                      aws_s3_get_bucket_website.Execute,
+	"aws/s3/get_data_access":                                         aws_s3_get_data_access.Execute,
 	"aws/s3/get_job_tagging":                                         aws_s3_get_job_tagging.Execute,
 	"aws/s3/get_multi_region_access_point":                           aws_s3_get_multi_region_access_point.Execute,
 	"aws/s3/get_object_acl":                                          aws_s3_get_object_acl.Execute,
@@ -2280,7 +2326,11 @@ var Actions = map[string]core.Action{
 	"aws/s3/head_bucket":                                             aws_s3_head_bucket.Execute,
 	"aws/s3/head_object":                                             aws_s3_head_object.Execute,
 	"aws/s3/list":                                                    aws_s3_list.Execute,
+	"aws/s3/list_access_grants":                                      aws_s3_list_access_grants.Execute,
+	"aws/s3/list_access_grants_instances":                            aws_s3_list_access_grants_instances.Execute,
+	"aws/s3/list_access_grants_locations":                            aws_s3_list_access_grants_locations.Execute,
 	"aws/s3/list_access_points":                                      aws_s3_list_access_points.Execute,
+	"aws/s3/list_access_points_for_object_lambda":                    aws_s3_list_access_points_for_object_lambda.Execute,
 	"aws/s3/list_buckets":                                            aws_s3_list_buckets.Execute,
 	"aws/s3/list_jobs":                                               aws_s3_list_jobs.Execute,
 	"aws/s3/list_multi_region_access_points":                         aws_s3_list_multi_region_access_points.Execute,
@@ -2291,7 +2341,10 @@ var Actions = map[string]core.Action{
 	"aws/s3/presign_get_object":                                      aws_s3_presign_get_object.Execute,
 	"aws/s3/presign_put_object":                                      aws_s3_presign_put_object.Execute,
 	"aws/s3/put":                                                     aws_s3_put.Execute,
+	"aws/s3/put_access_grants_instance_resource_policy":              aws_s3_put_access_grants_instance_resource_policy.Execute,
+	"aws/s3/put_access_point_configuration_for_object_lambda":        aws_s3_put_access_point_configuration_for_object_lambda.Execute,
 	"aws/s3/put_access_point_policy":                                 aws_s3_put_access_point_policy.Execute,
+	"aws/s3/put_access_point_policy_for_object_lambda":               aws_s3_put_access_point_policy_for_object_lambda.Execute,
 	"aws/s3/put_account_public_access_block":                         aws_s3_put_account_public_access_block.Execute,
 	"aws/s3/put_bucket_accelerate_configuration":                     aws_s3_put_bucket_accelerate_configuration.Execute,
 	"aws/s3/put_bucket_acl":                                          aws_s3_put_bucket_acl.Execute,
@@ -2318,6 +2371,7 @@ var Actions = map[string]core.Action{
 	"aws/s3/put_storage_lens_configuration_tagging":                  aws_s3_put_storage_lens_configuration_tagging.Execute,
 	"aws/s3/restore_object":                                          aws_s3_restore_object.Execute,
 	"aws/s3/select_object_content":                                   aws_s3_select_object_content.Execute,
+	"aws/s3/update_access_grants_location":                           aws_s3_update_access_grants_location.Execute,
 	"aws/s3/update_job_priority":                                     aws_s3_update_job_priority.Execute,
 	"aws/s3/update_job_status":                                       aws_s3_update_job_status.Execute,
 	"aws/s3/upload_part":                                             aws_s3_upload_part.Execute,
