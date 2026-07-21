@@ -1490,6 +1490,68 @@ import (
 	oracle_compute_shape_get_all "flomation.app/automate/executor/actions/oracle/compute/shape_get_all"
 	oracle_compute_subnet_get_all "flomation.app/automate/executor/actions/oracle/compute/subnet_get_all"
 	oracle_compute_vcn_get_all "flomation.app/automate/executor/actions/oracle/compute/vcn_get_all"
+	oracle_networking_dhcp_options_create "flomation.app/automate/executor/actions/oracle/networking/dhcp_options_create"
+	oracle_networking_dhcp_options_delete "flomation.app/automate/executor/actions/oracle/networking/dhcp_options_delete"
+	oracle_networking_dhcp_options_get "flomation.app/automate/executor/actions/oracle/networking/dhcp_options_get"
+	oracle_networking_dhcp_options_get_all "flomation.app/automate/executor/actions/oracle/networking/dhcp_options_get_all"
+	oracle_networking_dhcp_options_update "flomation.app/automate/executor/actions/oracle/networking/dhcp_options_update"
+	oracle_networking_internet_gateway_change_compartment "flomation.app/automate/executor/actions/oracle/networking/internet_gateway_change_compartment"
+	oracle_networking_internet_gateway_create "flomation.app/automate/executor/actions/oracle/networking/internet_gateway_create"
+	oracle_networking_internet_gateway_delete "flomation.app/automate/executor/actions/oracle/networking/internet_gateway_delete"
+	oracle_networking_internet_gateway_get "flomation.app/automate/executor/actions/oracle/networking/internet_gateway_get"
+	oracle_networking_internet_gateway_get_all "flomation.app/automate/executor/actions/oracle/networking/internet_gateway_get_all"
+	oracle_networking_internet_gateway_update "flomation.app/automate/executor/actions/oracle/networking/internet_gateway_update"
+	oracle_networking_nat_gateway_change_compartment "flomation.app/automate/executor/actions/oracle/networking/nat_gateway_change_compartment"
+	oracle_networking_nat_gateway_create "flomation.app/automate/executor/actions/oracle/networking/nat_gateway_create"
+	oracle_networking_nat_gateway_delete "flomation.app/automate/executor/actions/oracle/networking/nat_gateway_delete"
+	oracle_networking_nat_gateway_get "flomation.app/automate/executor/actions/oracle/networking/nat_gateway_get"
+	oracle_networking_nat_gateway_get_all "flomation.app/automate/executor/actions/oracle/networking/nat_gateway_get_all"
+	oracle_networking_nat_gateway_update "flomation.app/automate/executor/actions/oracle/networking/nat_gateway_update"
+	oracle_networking_nsg_change_compartment "flomation.app/automate/executor/actions/oracle/networking/nsg_change_compartment"
+	oracle_networking_nsg_create "flomation.app/automate/executor/actions/oracle/networking/nsg_create"
+	oracle_networking_nsg_delete "flomation.app/automate/executor/actions/oracle/networking/nsg_delete"
+	oracle_networking_nsg_get "flomation.app/automate/executor/actions/oracle/networking/nsg_get"
+	oracle_networking_nsg_get_all "flomation.app/automate/executor/actions/oracle/networking/nsg_get_all"
+	oracle_networking_nsg_rule_add "flomation.app/automate/executor/actions/oracle/networking/nsg_rule_add"
+	oracle_networking_nsg_rule_get_all "flomation.app/automate/executor/actions/oracle/networking/nsg_rule_get_all"
+	oracle_networking_nsg_rule_remove "flomation.app/automate/executor/actions/oracle/networking/nsg_rule_remove"
+	oracle_networking_nsg_rule_update "flomation.app/automate/executor/actions/oracle/networking/nsg_rule_update"
+	oracle_networking_nsg_update "flomation.app/automate/executor/actions/oracle/networking/nsg_update"
+	oracle_networking_public_ip_create "flomation.app/automate/executor/actions/oracle/networking/public_ip_create"
+	oracle_networking_public_ip_delete "flomation.app/automate/executor/actions/oracle/networking/public_ip_delete"
+	oracle_networking_public_ip_get "flomation.app/automate/executor/actions/oracle/networking/public_ip_get"
+	oracle_networking_public_ip_get_all "flomation.app/automate/executor/actions/oracle/networking/public_ip_get_all"
+	oracle_networking_public_ip_update "flomation.app/automate/executor/actions/oracle/networking/public_ip_update"
+	oracle_networking_route_table_change_compartment "flomation.app/automate/executor/actions/oracle/networking/route_table_change_compartment"
+	oracle_networking_route_table_create "flomation.app/automate/executor/actions/oracle/networking/route_table_create"
+	oracle_networking_route_table_delete "flomation.app/automate/executor/actions/oracle/networking/route_table_delete"
+	oracle_networking_route_table_get "flomation.app/automate/executor/actions/oracle/networking/route_table_get"
+	oracle_networking_route_table_get_all "flomation.app/automate/executor/actions/oracle/networking/route_table_get_all"
+	oracle_networking_route_table_update "flomation.app/automate/executor/actions/oracle/networking/route_table_update"
+	oracle_networking_security_list_change_compartment "flomation.app/automate/executor/actions/oracle/networking/security_list_change_compartment"
+	oracle_networking_security_list_create "flomation.app/automate/executor/actions/oracle/networking/security_list_create"
+	oracle_networking_security_list_delete "flomation.app/automate/executor/actions/oracle/networking/security_list_delete"
+	oracle_networking_security_list_get "flomation.app/automate/executor/actions/oracle/networking/security_list_get"
+	oracle_networking_security_list_get_all "flomation.app/automate/executor/actions/oracle/networking/security_list_get_all"
+	oracle_networking_security_list_update "flomation.app/automate/executor/actions/oracle/networking/security_list_update"
+	oracle_networking_service_gateway_create "flomation.app/automate/executor/actions/oracle/networking/service_gateway_create"
+	oracle_networking_service_gateway_delete "flomation.app/automate/executor/actions/oracle/networking/service_gateway_delete"
+	oracle_networking_service_gateway_get "flomation.app/automate/executor/actions/oracle/networking/service_gateway_get"
+	oracle_networking_service_gateway_get_all "flomation.app/automate/executor/actions/oracle/networking/service_gateway_get_all"
+	oracle_networking_service_gateway_update "flomation.app/automate/executor/actions/oracle/networking/service_gateway_update"
+	oracle_networking_service_list_all "flomation.app/automate/executor/actions/oracle/networking/service_list_all"
+	oracle_networking_subnet_change_compartment "flomation.app/automate/executor/actions/oracle/networking/subnet_change_compartment"
+	oracle_networking_subnet_create "flomation.app/automate/executor/actions/oracle/networking/subnet_create"
+	oracle_networking_subnet_delete "flomation.app/automate/executor/actions/oracle/networking/subnet_delete"
+	oracle_networking_subnet_get "flomation.app/automate/executor/actions/oracle/networking/subnet_get"
+	oracle_networking_subnet_get_all "flomation.app/automate/executor/actions/oracle/networking/subnet_get_all"
+	oracle_networking_subnet_update "flomation.app/automate/executor/actions/oracle/networking/subnet_update"
+	oracle_networking_vcn_change_compartment "flomation.app/automate/executor/actions/oracle/networking/vcn_change_compartment"
+	oracle_networking_vcn_create "flomation.app/automate/executor/actions/oracle/networking/vcn_create"
+	oracle_networking_vcn_delete "flomation.app/automate/executor/actions/oracle/networking/vcn_delete"
+	oracle_networking_vcn_get "flomation.app/automate/executor/actions/oracle/networking/vcn_get"
+	oracle_networking_vcn_get_all "flomation.app/automate/executor/actions/oracle/networking/vcn_get_all"
+	oracle_networking_vcn_update "flomation.app/automate/executor/actions/oracle/networking/vcn_update"
 	oracle_objectstorage_bucket_create "flomation.app/automate/executor/actions/oracle/objectstorage/bucket_create"
 	oracle_objectstorage_bucket_delete "flomation.app/automate/executor/actions/oracle/objectstorage/bucket_delete"
 	oracle_objectstorage_bucket_get "flomation.app/automate/executor/actions/oracle/objectstorage/bucket_get"
@@ -3476,6 +3538,68 @@ var Actions = map[string]core.Action{
 	"oracle/compute/shape_get_all":                                   oracle_compute_shape_get_all.Execute,
 	"oracle/compute/subnet_get_all":                                  oracle_compute_subnet_get_all.Execute,
 	"oracle/compute/vcn_get_all":                                     oracle_compute_vcn_get_all.Execute,
+	"oracle/networking/dhcp_options_create":                          oracle_networking_dhcp_options_create.Execute,
+	"oracle/networking/dhcp_options_delete":                          oracle_networking_dhcp_options_delete.Execute,
+	"oracle/networking/dhcp_options_get":                             oracle_networking_dhcp_options_get.Execute,
+	"oracle/networking/dhcp_options_get_all":                         oracle_networking_dhcp_options_get_all.Execute,
+	"oracle/networking/dhcp_options_update":                          oracle_networking_dhcp_options_update.Execute,
+	"oracle/networking/internet_gateway_change_compartment":          oracle_networking_internet_gateway_change_compartment.Execute,
+	"oracle/networking/internet_gateway_create":                      oracle_networking_internet_gateway_create.Execute,
+	"oracle/networking/internet_gateway_delete":                      oracle_networking_internet_gateway_delete.Execute,
+	"oracle/networking/internet_gateway_get":                         oracle_networking_internet_gateway_get.Execute,
+	"oracle/networking/internet_gateway_get_all":                     oracle_networking_internet_gateway_get_all.Execute,
+	"oracle/networking/internet_gateway_update":                      oracle_networking_internet_gateway_update.Execute,
+	"oracle/networking/nat_gateway_change_compartment":               oracle_networking_nat_gateway_change_compartment.Execute,
+	"oracle/networking/nat_gateway_create":                           oracle_networking_nat_gateway_create.Execute,
+	"oracle/networking/nat_gateway_delete":                           oracle_networking_nat_gateway_delete.Execute,
+	"oracle/networking/nat_gateway_get":                              oracle_networking_nat_gateway_get.Execute,
+	"oracle/networking/nat_gateway_get_all":                          oracle_networking_nat_gateway_get_all.Execute,
+	"oracle/networking/nat_gateway_update":                           oracle_networking_nat_gateway_update.Execute,
+	"oracle/networking/nsg_change_compartment":                       oracle_networking_nsg_change_compartment.Execute,
+	"oracle/networking/nsg_create":                                   oracle_networking_nsg_create.Execute,
+	"oracle/networking/nsg_delete":                                   oracle_networking_nsg_delete.Execute,
+	"oracle/networking/nsg_get":                                      oracle_networking_nsg_get.Execute,
+	"oracle/networking/nsg_get_all":                                  oracle_networking_nsg_get_all.Execute,
+	"oracle/networking/nsg_rule_add":                                 oracle_networking_nsg_rule_add.Execute,
+	"oracle/networking/nsg_rule_get_all":                             oracle_networking_nsg_rule_get_all.Execute,
+	"oracle/networking/nsg_rule_remove":                              oracle_networking_nsg_rule_remove.Execute,
+	"oracle/networking/nsg_rule_update":                              oracle_networking_nsg_rule_update.Execute,
+	"oracle/networking/nsg_update":                                   oracle_networking_nsg_update.Execute,
+	"oracle/networking/public_ip_create":                             oracle_networking_public_ip_create.Execute,
+	"oracle/networking/public_ip_delete":                             oracle_networking_public_ip_delete.Execute,
+	"oracle/networking/public_ip_get":                                oracle_networking_public_ip_get.Execute,
+	"oracle/networking/public_ip_get_all":                            oracle_networking_public_ip_get_all.Execute,
+	"oracle/networking/public_ip_update":                             oracle_networking_public_ip_update.Execute,
+	"oracle/networking/route_table_change_compartment":               oracle_networking_route_table_change_compartment.Execute,
+	"oracle/networking/route_table_create":                           oracle_networking_route_table_create.Execute,
+	"oracle/networking/route_table_delete":                           oracle_networking_route_table_delete.Execute,
+	"oracle/networking/route_table_get":                              oracle_networking_route_table_get.Execute,
+	"oracle/networking/route_table_get_all":                          oracle_networking_route_table_get_all.Execute,
+	"oracle/networking/route_table_update":                           oracle_networking_route_table_update.Execute,
+	"oracle/networking/security_list_change_compartment":             oracle_networking_security_list_change_compartment.Execute,
+	"oracle/networking/security_list_create":                         oracle_networking_security_list_create.Execute,
+	"oracle/networking/security_list_delete":                         oracle_networking_security_list_delete.Execute,
+	"oracle/networking/security_list_get":                            oracle_networking_security_list_get.Execute,
+	"oracle/networking/security_list_get_all":                        oracle_networking_security_list_get_all.Execute,
+	"oracle/networking/security_list_update":                         oracle_networking_security_list_update.Execute,
+	"oracle/networking/service_gateway_create":                       oracle_networking_service_gateway_create.Execute,
+	"oracle/networking/service_gateway_delete":                       oracle_networking_service_gateway_delete.Execute,
+	"oracle/networking/service_gateway_get":                          oracle_networking_service_gateway_get.Execute,
+	"oracle/networking/service_gateway_get_all":                      oracle_networking_service_gateway_get_all.Execute,
+	"oracle/networking/service_gateway_update":                       oracle_networking_service_gateway_update.Execute,
+	"oracle/networking/service_list_all":                             oracle_networking_service_list_all.Execute,
+	"oracle/networking/subnet_change_compartment":                    oracle_networking_subnet_change_compartment.Execute,
+	"oracle/networking/subnet_create":                                oracle_networking_subnet_create.Execute,
+	"oracle/networking/subnet_delete":                                oracle_networking_subnet_delete.Execute,
+	"oracle/networking/subnet_get":                                   oracle_networking_subnet_get.Execute,
+	"oracle/networking/subnet_get_all":                               oracle_networking_subnet_get_all.Execute,
+	"oracle/networking/subnet_update":                                oracle_networking_subnet_update.Execute,
+	"oracle/networking/vcn_change_compartment":                       oracle_networking_vcn_change_compartment.Execute,
+	"oracle/networking/vcn_create":                                   oracle_networking_vcn_create.Execute,
+	"oracle/networking/vcn_delete":                                   oracle_networking_vcn_delete.Execute,
+	"oracle/networking/vcn_get":                                      oracle_networking_vcn_get.Execute,
+	"oracle/networking/vcn_get_all":                                  oracle_networking_vcn_get_all.Execute,
+	"oracle/networking/vcn_update":                                   oracle_networking_vcn_update.Execute,
 	"oracle/objectstorage/bucket_create":                             oracle_objectstorage_bucket_create.Execute,
 	"oracle/objectstorage/bucket_delete":                             oracle_objectstorage_bucket_delete.Execute,
 	"oracle/objectstorage/bucket_get":                                oracle_objectstorage_bucket_get.Execute,
