@@ -215,10 +215,12 @@ import (
 	aws_s3_get "flomation.app/automate/executor/actions/aws/s3/get"
 	aws_s3_list "flomation.app/automate/executor/actions/aws/s3/list"
 	aws_s3_put "flomation.app/automate/executor/actions/aws/s3/put"
+	aws_vpc_accept_transit_gateway_peering_attachment "flomation.app/automate/executor/actions/aws/vpc/accept_transit_gateway_peering_attachment"
 	aws_vpc_accept_transit_gateway_vpc_attachment "flomation.app/automate/executor/actions/aws/vpc/accept_transit_gateway_vpc_attachment"
 	aws_vpc_accept_vpc_endpoint_connections "flomation.app/automate/executor/actions/aws/vpc/accept_vpc_endpoint_connections"
 	aws_vpc_accept_vpc_peering_connection "flomation.app/automate/executor/actions/aws/vpc/accept_vpc_peering_connection"
 	aws_vpc_allocate_address "flomation.app/automate/executor/actions/aws/vpc/allocate_address"
+	aws_vpc_allocate_ipam_pool_cidr "flomation.app/automate/executor/actions/aws/vpc/allocate_ipam_pool_cidr"
 	aws_vpc_assign_ipv6_addresses "flomation.app/automate/executor/actions/aws/vpc/assign_ipv6_addresses"
 	aws_vpc_assign_private_ip_addresses "flomation.app/automate/executor/actions/aws/vpc/assign_private_ip_addresses"
 	aws_vpc_associate_address "flomation.app/automate/executor/actions/aws/vpc/associate_address"
@@ -239,15 +241,26 @@ import (
 	aws_vpc_create_egress_only_internet_gateway "flomation.app/automate/executor/actions/aws/vpc/create_egress_only_internet_gateway"
 	aws_vpc_create_flow_logs "flomation.app/automate/executor/actions/aws/vpc/create_flow_logs"
 	aws_vpc_create_internet_gateway "flomation.app/automate/executor/actions/aws/vpc/create_internet_gateway"
+	aws_vpc_create_ipam "flomation.app/automate/executor/actions/aws/vpc/create_ipam"
+	aws_vpc_create_ipam_pool "flomation.app/automate/executor/actions/aws/vpc/create_ipam_pool"
+	aws_vpc_create_ipam_scope "flomation.app/automate/executor/actions/aws/vpc/create_ipam_scope"
 	aws_vpc_create_managed_prefix_list "flomation.app/automate/executor/actions/aws/vpc/create_managed_prefix_list"
 	aws_vpc_create_nat_gateway "flomation.app/automate/executor/actions/aws/vpc/create_nat_gateway"
 	aws_vpc_create_network_acl "flomation.app/automate/executor/actions/aws/vpc/create_network_acl"
 	aws_vpc_create_network_acl_entry "flomation.app/automate/executor/actions/aws/vpc/create_network_acl_entry"
+	aws_vpc_create_network_insights_path "flomation.app/automate/executor/actions/aws/vpc/create_network_insights_path"
 	aws_vpc_create_network_interface "flomation.app/automate/executor/actions/aws/vpc/create_network_interface"
 	aws_vpc_create_route "flomation.app/automate/executor/actions/aws/vpc/create_route"
 	aws_vpc_create_route_table "flomation.app/automate/executor/actions/aws/vpc/create_route_table"
 	aws_vpc_create_subnet "flomation.app/automate/executor/actions/aws/vpc/create_subnet"
+	aws_vpc_create_traffic_mirror_filter "flomation.app/automate/executor/actions/aws/vpc/create_traffic_mirror_filter"
+	aws_vpc_create_traffic_mirror_filter_rule "flomation.app/automate/executor/actions/aws/vpc/create_traffic_mirror_filter_rule"
+	aws_vpc_create_traffic_mirror_session "flomation.app/automate/executor/actions/aws/vpc/create_traffic_mirror_session"
+	aws_vpc_create_traffic_mirror_target "flomation.app/automate/executor/actions/aws/vpc/create_traffic_mirror_target"
 	aws_vpc_create_transit_gateway "flomation.app/automate/executor/actions/aws/vpc/create_transit_gateway"
+	aws_vpc_create_transit_gateway_connect "flomation.app/automate/executor/actions/aws/vpc/create_transit_gateway_connect"
+	aws_vpc_create_transit_gateway_multicast_domain "flomation.app/automate/executor/actions/aws/vpc/create_transit_gateway_multicast_domain"
+	aws_vpc_create_transit_gateway_peering_attachment "flomation.app/automate/executor/actions/aws/vpc/create_transit_gateway_peering_attachment"
 	aws_vpc_create_transit_gateway_route "flomation.app/automate/executor/actions/aws/vpc/create_transit_gateway_route"
 	aws_vpc_create_transit_gateway_route_table "flomation.app/automate/executor/actions/aws/vpc/create_transit_gateway_route_table"
 	aws_vpc_create_transit_gateway_vpc_attachment "flomation.app/automate/executor/actions/aws/vpc/create_transit_gateway_vpc_attachment"
@@ -265,15 +278,27 @@ import (
 	aws_vpc_delete_egress_only_internet_gateway "flomation.app/automate/executor/actions/aws/vpc/delete_egress_only_internet_gateway"
 	aws_vpc_delete_flow_logs "flomation.app/automate/executor/actions/aws/vpc/delete_flow_logs"
 	aws_vpc_delete_internet_gateway "flomation.app/automate/executor/actions/aws/vpc/delete_internet_gateway"
+	aws_vpc_delete_ipam "flomation.app/automate/executor/actions/aws/vpc/delete_ipam"
+	aws_vpc_delete_ipam_pool "flomation.app/automate/executor/actions/aws/vpc/delete_ipam_pool"
+	aws_vpc_delete_ipam_scope "flomation.app/automate/executor/actions/aws/vpc/delete_ipam_scope"
 	aws_vpc_delete_managed_prefix_list "flomation.app/automate/executor/actions/aws/vpc/delete_managed_prefix_list"
 	aws_vpc_delete_nat_gateway "flomation.app/automate/executor/actions/aws/vpc/delete_nat_gateway"
 	aws_vpc_delete_network_acl "flomation.app/automate/executor/actions/aws/vpc/delete_network_acl"
 	aws_vpc_delete_network_acl_entry "flomation.app/automate/executor/actions/aws/vpc/delete_network_acl_entry"
+	aws_vpc_delete_network_insights_analysis "flomation.app/automate/executor/actions/aws/vpc/delete_network_insights_analysis"
+	aws_vpc_delete_network_insights_path "flomation.app/automate/executor/actions/aws/vpc/delete_network_insights_path"
 	aws_vpc_delete_network_interface "flomation.app/automate/executor/actions/aws/vpc/delete_network_interface"
 	aws_vpc_delete_route "flomation.app/automate/executor/actions/aws/vpc/delete_route"
 	aws_vpc_delete_route_table "flomation.app/automate/executor/actions/aws/vpc/delete_route_table"
 	aws_vpc_delete_subnet "flomation.app/automate/executor/actions/aws/vpc/delete_subnet"
+	aws_vpc_delete_traffic_mirror_filter "flomation.app/automate/executor/actions/aws/vpc/delete_traffic_mirror_filter"
+	aws_vpc_delete_traffic_mirror_filter_rule "flomation.app/automate/executor/actions/aws/vpc/delete_traffic_mirror_filter_rule"
+	aws_vpc_delete_traffic_mirror_session "flomation.app/automate/executor/actions/aws/vpc/delete_traffic_mirror_session"
+	aws_vpc_delete_traffic_mirror_target "flomation.app/automate/executor/actions/aws/vpc/delete_traffic_mirror_target"
 	aws_vpc_delete_transit_gateway "flomation.app/automate/executor/actions/aws/vpc/delete_transit_gateway"
+	aws_vpc_delete_transit_gateway_connect "flomation.app/automate/executor/actions/aws/vpc/delete_transit_gateway_connect"
+	aws_vpc_delete_transit_gateway_multicast_domain "flomation.app/automate/executor/actions/aws/vpc/delete_transit_gateway_multicast_domain"
+	aws_vpc_delete_transit_gateway_peering_attachment "flomation.app/automate/executor/actions/aws/vpc/delete_transit_gateway_peering_attachment"
 	aws_vpc_delete_transit_gateway_route "flomation.app/automate/executor/actions/aws/vpc/delete_transit_gateway_route"
 	aws_vpc_delete_transit_gateway_route_table "flomation.app/automate/executor/actions/aws/vpc/delete_transit_gateway_route_table"
 	aws_vpc_delete_transit_gateway_vpc_attachment "flomation.app/automate/executor/actions/aws/vpc/delete_transit_gateway_vpc_attachment"
@@ -294,12 +319,22 @@ import (
 	aws_vpc_describe_egress_only_internet_gateways "flomation.app/automate/executor/actions/aws/vpc/describe_egress_only_internet_gateways"
 	aws_vpc_describe_flow_logs "flomation.app/automate/executor/actions/aws/vpc/describe_flow_logs"
 	aws_vpc_describe_internet_gateways "flomation.app/automate/executor/actions/aws/vpc/describe_internet_gateways"
+	aws_vpc_describe_ipam_pools "flomation.app/automate/executor/actions/aws/vpc/describe_ipam_pools"
+	aws_vpc_describe_ipam_scopes "flomation.app/automate/executor/actions/aws/vpc/describe_ipam_scopes"
+	aws_vpc_describe_ipams "flomation.app/automate/executor/actions/aws/vpc/describe_ipams"
 	aws_vpc_describe_managed_prefix_lists "flomation.app/automate/executor/actions/aws/vpc/describe_managed_prefix_lists"
 	aws_vpc_describe_nat_gateways "flomation.app/automate/executor/actions/aws/vpc/describe_nat_gateways"
 	aws_vpc_describe_network_acls "flomation.app/automate/executor/actions/aws/vpc/describe_network_acls"
+	aws_vpc_describe_network_insights_analyses "flomation.app/automate/executor/actions/aws/vpc/describe_network_insights_analyses"
+	aws_vpc_describe_network_insights_paths "flomation.app/automate/executor/actions/aws/vpc/describe_network_insights_paths"
 	aws_vpc_describe_network_interfaces "flomation.app/automate/executor/actions/aws/vpc/describe_network_interfaces"
 	aws_vpc_describe_route_tables "flomation.app/automate/executor/actions/aws/vpc/describe_route_tables"
 	aws_vpc_describe_subnets "flomation.app/automate/executor/actions/aws/vpc/describe_subnets"
+	aws_vpc_describe_traffic_mirror_filters "flomation.app/automate/executor/actions/aws/vpc/describe_traffic_mirror_filters"
+	aws_vpc_describe_traffic_mirror_sessions "flomation.app/automate/executor/actions/aws/vpc/describe_traffic_mirror_sessions"
+	aws_vpc_describe_traffic_mirror_targets "flomation.app/automate/executor/actions/aws/vpc/describe_traffic_mirror_targets"
+	aws_vpc_describe_transit_gateway_multicast_domains "flomation.app/automate/executor/actions/aws/vpc/describe_transit_gateway_multicast_domains"
+	aws_vpc_describe_transit_gateway_peering_attachments "flomation.app/automate/executor/actions/aws/vpc/describe_transit_gateway_peering_attachments"
 	aws_vpc_describe_transit_gateway_route_tables "flomation.app/automate/executor/actions/aws/vpc/describe_transit_gateway_route_tables"
 	aws_vpc_describe_transit_gateway_vpc_attachments "flomation.app/automate/executor/actions/aws/vpc/describe_transit_gateway_vpc_attachments"
 	aws_vpc_describe_transit_gateways "flomation.app/automate/executor/actions/aws/vpc/describe_transit_gateways"
@@ -324,12 +359,17 @@ import (
 	aws_vpc_disassociate_vpc_cidr_block "flomation.app/automate/executor/actions/aws/vpc/disassociate_vpc_cidr_block"
 	aws_vpc_enable_transit_gateway_route_table_propagation "flomation.app/automate/executor/actions/aws/vpc/enable_transit_gateway_route_table_propagation"
 	aws_vpc_export_client_vpn_client_configuration "flomation.app/automate/executor/actions/aws/vpc/export_client_vpn_client_configuration"
+	aws_vpc_get_ipam_pool_allocations "flomation.app/automate/executor/actions/aws/vpc/get_ipam_pool_allocations"
+	aws_vpc_get_ipam_pool_cidrs "flomation.app/automate/executor/actions/aws/vpc/get_ipam_pool_cidrs"
 	aws_vpc_get_managed_prefix_list_associations "flomation.app/automate/executor/actions/aws/vpc/get_managed_prefix_list_associations"
 	aws_vpc_get_managed_prefix_list_entries "flomation.app/automate/executor/actions/aws/vpc/get_managed_prefix_list_entries"
 	aws_vpc_modify_client_vpn_endpoint "flomation.app/automate/executor/actions/aws/vpc/modify_client_vpn_endpoint"
+	aws_vpc_modify_ipam "flomation.app/automate/executor/actions/aws/vpc/modify_ipam"
+	aws_vpc_modify_ipam_pool "flomation.app/automate/executor/actions/aws/vpc/modify_ipam_pool"
 	aws_vpc_modify_managed_prefix_list "flomation.app/automate/executor/actions/aws/vpc/modify_managed_prefix_list"
 	aws_vpc_modify_network_interface_attribute "flomation.app/automate/executor/actions/aws/vpc/modify_network_interface_attribute"
 	aws_vpc_modify_subnet_attribute "flomation.app/automate/executor/actions/aws/vpc/modify_subnet_attribute"
+	aws_vpc_modify_traffic_mirror_session "flomation.app/automate/executor/actions/aws/vpc/modify_traffic_mirror_session"
 	aws_vpc_modify_transit_gateway "flomation.app/automate/executor/actions/aws/vpc/modify_transit_gateway"
 	aws_vpc_modify_transit_gateway_vpc_attachment "flomation.app/automate/executor/actions/aws/vpc/modify_transit_gateway_vpc_attachment"
 	aws_vpc_modify_vpc_attribute "flomation.app/automate/executor/actions/aws/vpc/modify_vpc_attribute"
@@ -341,16 +381,20 @@ import (
 	aws_vpc_modify_vpn_connection "flomation.app/automate/executor/actions/aws/vpc/modify_vpn_connection"
 	aws_vpc_modify_vpn_connection_options "flomation.app/automate/executor/actions/aws/vpc/modify_vpn_connection_options"
 	aws_vpc_modify_vpn_tunnel_options "flomation.app/automate/executor/actions/aws/vpc/modify_vpn_tunnel_options"
+	aws_vpc_provision_ipam_pool_cidr "flomation.app/automate/executor/actions/aws/vpc/provision_ipam_pool_cidr"
+	aws_vpc_reject_transit_gateway_peering_attachment "flomation.app/automate/executor/actions/aws/vpc/reject_transit_gateway_peering_attachment"
 	aws_vpc_reject_transit_gateway_vpc_attachment "flomation.app/automate/executor/actions/aws/vpc/reject_transit_gateway_vpc_attachment"
 	aws_vpc_reject_vpc_endpoint_connections "flomation.app/automate/executor/actions/aws/vpc/reject_vpc_endpoint_connections"
 	aws_vpc_reject_vpc_peering_connection "flomation.app/automate/executor/actions/aws/vpc/reject_vpc_peering_connection"
 	aws_vpc_release_address "flomation.app/automate/executor/actions/aws/vpc/release_address"
+	aws_vpc_release_ipam_pool_allocation "flomation.app/automate/executor/actions/aws/vpc/release_ipam_pool_allocation"
 	aws_vpc_replace_network_acl_association "flomation.app/automate/executor/actions/aws/vpc/replace_network_acl_association"
 	aws_vpc_replace_network_acl_entry "flomation.app/automate/executor/actions/aws/vpc/replace_network_acl_entry"
 	aws_vpc_replace_route "flomation.app/automate/executor/actions/aws/vpc/replace_route"
 	aws_vpc_replace_route_table_association "flomation.app/automate/executor/actions/aws/vpc/replace_route_table_association"
 	aws_vpc_replace_transit_gateway_route "flomation.app/automate/executor/actions/aws/vpc/replace_transit_gateway_route"
 	aws_vpc_revoke_client_vpn_ingress "flomation.app/automate/executor/actions/aws/vpc/revoke_client_vpn_ingress"
+	aws_vpc_start_network_insights_analysis "flomation.app/automate/executor/actions/aws/vpc/start_network_insights_analysis"
 	aws_vpc_unassign_ipv6_addresses "flomation.app/automate/executor/actions/aws/vpc/unassign_ipv6_addresses"
 	aws_vpc_unassign_private_ip_addresses "flomation.app/automate/executor/actions/aws/vpc/unassign_private_ip_addresses"
 	azure_compute_disk_get_all "flomation.app/automate/executor/actions/azure/compute/disk_get_all"
@@ -2012,10 +2056,12 @@ var Actions = map[string]core.Action{
 	"aws/s3/get":                                                     aws_s3_get.Execute,
 	"aws/s3/list":                                                    aws_s3_list.Execute,
 	"aws/s3/put":                                                     aws_s3_put.Execute,
+	"aws/vpc/accept_transit_gateway_peering_attachment":              aws_vpc_accept_transit_gateway_peering_attachment.Execute,
 	"aws/vpc/accept_transit_gateway_vpc_attachment":                  aws_vpc_accept_transit_gateway_vpc_attachment.Execute,
 	"aws/vpc/accept_vpc_endpoint_connections":                        aws_vpc_accept_vpc_endpoint_connections.Execute,
 	"aws/vpc/accept_vpc_peering_connection":                          aws_vpc_accept_vpc_peering_connection.Execute,
 	"aws/vpc/allocate_address":                                       aws_vpc_allocate_address.Execute,
+	"aws/vpc/allocate_ipam_pool_cidr":                                aws_vpc_allocate_ipam_pool_cidr.Execute,
 	"aws/vpc/assign_ipv6_addresses":                                  aws_vpc_assign_ipv6_addresses.Execute,
 	"aws/vpc/assign_private_ip_addresses":                            aws_vpc_assign_private_ip_addresses.Execute,
 	"aws/vpc/associate_address":                                      aws_vpc_associate_address.Execute,
@@ -2036,15 +2082,26 @@ var Actions = map[string]core.Action{
 	"aws/vpc/create_egress_only_internet_gateway":                    aws_vpc_create_egress_only_internet_gateway.Execute,
 	"aws/vpc/create_flow_logs":                                       aws_vpc_create_flow_logs.Execute,
 	"aws/vpc/create_internet_gateway":                                aws_vpc_create_internet_gateway.Execute,
+	"aws/vpc/create_ipam":                                            aws_vpc_create_ipam.Execute,
+	"aws/vpc/create_ipam_pool":                                       aws_vpc_create_ipam_pool.Execute,
+	"aws/vpc/create_ipam_scope":                                      aws_vpc_create_ipam_scope.Execute,
 	"aws/vpc/create_managed_prefix_list":                             aws_vpc_create_managed_prefix_list.Execute,
 	"aws/vpc/create_nat_gateway":                                     aws_vpc_create_nat_gateway.Execute,
 	"aws/vpc/create_network_acl":                                     aws_vpc_create_network_acl.Execute,
 	"aws/vpc/create_network_acl_entry":                               aws_vpc_create_network_acl_entry.Execute,
+	"aws/vpc/create_network_insights_path":                           aws_vpc_create_network_insights_path.Execute,
 	"aws/vpc/create_network_interface":                               aws_vpc_create_network_interface.Execute,
 	"aws/vpc/create_route":                                           aws_vpc_create_route.Execute,
 	"aws/vpc/create_route_table":                                     aws_vpc_create_route_table.Execute,
 	"aws/vpc/create_subnet":                                          aws_vpc_create_subnet.Execute,
+	"aws/vpc/create_traffic_mirror_filter":                           aws_vpc_create_traffic_mirror_filter.Execute,
+	"aws/vpc/create_traffic_mirror_filter_rule":                      aws_vpc_create_traffic_mirror_filter_rule.Execute,
+	"aws/vpc/create_traffic_mirror_session":                          aws_vpc_create_traffic_mirror_session.Execute,
+	"aws/vpc/create_traffic_mirror_target":                           aws_vpc_create_traffic_mirror_target.Execute,
 	"aws/vpc/create_transit_gateway":                                 aws_vpc_create_transit_gateway.Execute,
+	"aws/vpc/create_transit_gateway_connect":                         aws_vpc_create_transit_gateway_connect.Execute,
+	"aws/vpc/create_transit_gateway_multicast_domain":                aws_vpc_create_transit_gateway_multicast_domain.Execute,
+	"aws/vpc/create_transit_gateway_peering_attachment":              aws_vpc_create_transit_gateway_peering_attachment.Execute,
 	"aws/vpc/create_transit_gateway_route":                           aws_vpc_create_transit_gateway_route.Execute,
 	"aws/vpc/create_transit_gateway_route_table":                     aws_vpc_create_transit_gateway_route_table.Execute,
 	"aws/vpc/create_transit_gateway_vpc_attachment":                  aws_vpc_create_transit_gateway_vpc_attachment.Execute,
@@ -2062,15 +2119,27 @@ var Actions = map[string]core.Action{
 	"aws/vpc/delete_egress_only_internet_gateway":                    aws_vpc_delete_egress_only_internet_gateway.Execute,
 	"aws/vpc/delete_flow_logs":                                       aws_vpc_delete_flow_logs.Execute,
 	"aws/vpc/delete_internet_gateway":                                aws_vpc_delete_internet_gateway.Execute,
+	"aws/vpc/delete_ipam":                                            aws_vpc_delete_ipam.Execute,
+	"aws/vpc/delete_ipam_pool":                                       aws_vpc_delete_ipam_pool.Execute,
+	"aws/vpc/delete_ipam_scope":                                      aws_vpc_delete_ipam_scope.Execute,
 	"aws/vpc/delete_managed_prefix_list":                             aws_vpc_delete_managed_prefix_list.Execute,
 	"aws/vpc/delete_nat_gateway":                                     aws_vpc_delete_nat_gateway.Execute,
 	"aws/vpc/delete_network_acl":                                     aws_vpc_delete_network_acl.Execute,
 	"aws/vpc/delete_network_acl_entry":                               aws_vpc_delete_network_acl_entry.Execute,
+	"aws/vpc/delete_network_insights_analysis":                       aws_vpc_delete_network_insights_analysis.Execute,
+	"aws/vpc/delete_network_insights_path":                           aws_vpc_delete_network_insights_path.Execute,
 	"aws/vpc/delete_network_interface":                               aws_vpc_delete_network_interface.Execute,
 	"aws/vpc/delete_route":                                           aws_vpc_delete_route.Execute,
 	"aws/vpc/delete_route_table":                                     aws_vpc_delete_route_table.Execute,
 	"aws/vpc/delete_subnet":                                          aws_vpc_delete_subnet.Execute,
+	"aws/vpc/delete_traffic_mirror_filter":                           aws_vpc_delete_traffic_mirror_filter.Execute,
+	"aws/vpc/delete_traffic_mirror_filter_rule":                      aws_vpc_delete_traffic_mirror_filter_rule.Execute,
+	"aws/vpc/delete_traffic_mirror_session":                          aws_vpc_delete_traffic_mirror_session.Execute,
+	"aws/vpc/delete_traffic_mirror_target":                           aws_vpc_delete_traffic_mirror_target.Execute,
 	"aws/vpc/delete_transit_gateway":                                 aws_vpc_delete_transit_gateway.Execute,
+	"aws/vpc/delete_transit_gateway_connect":                         aws_vpc_delete_transit_gateway_connect.Execute,
+	"aws/vpc/delete_transit_gateway_multicast_domain":                aws_vpc_delete_transit_gateway_multicast_domain.Execute,
+	"aws/vpc/delete_transit_gateway_peering_attachment":              aws_vpc_delete_transit_gateway_peering_attachment.Execute,
 	"aws/vpc/delete_transit_gateway_route":                           aws_vpc_delete_transit_gateway_route.Execute,
 	"aws/vpc/delete_transit_gateway_route_table":                     aws_vpc_delete_transit_gateway_route_table.Execute,
 	"aws/vpc/delete_transit_gateway_vpc_attachment":                  aws_vpc_delete_transit_gateway_vpc_attachment.Execute,
@@ -2091,12 +2160,22 @@ var Actions = map[string]core.Action{
 	"aws/vpc/describe_egress_only_internet_gateways":                 aws_vpc_describe_egress_only_internet_gateways.Execute,
 	"aws/vpc/describe_flow_logs":                                     aws_vpc_describe_flow_logs.Execute,
 	"aws/vpc/describe_internet_gateways":                             aws_vpc_describe_internet_gateways.Execute,
+	"aws/vpc/describe_ipam_pools":                                    aws_vpc_describe_ipam_pools.Execute,
+	"aws/vpc/describe_ipam_scopes":                                   aws_vpc_describe_ipam_scopes.Execute,
+	"aws/vpc/describe_ipams":                                         aws_vpc_describe_ipams.Execute,
 	"aws/vpc/describe_managed_prefix_lists":                          aws_vpc_describe_managed_prefix_lists.Execute,
 	"aws/vpc/describe_nat_gateways":                                  aws_vpc_describe_nat_gateways.Execute,
 	"aws/vpc/describe_network_acls":                                  aws_vpc_describe_network_acls.Execute,
+	"aws/vpc/describe_network_insights_analyses":                     aws_vpc_describe_network_insights_analyses.Execute,
+	"aws/vpc/describe_network_insights_paths":                        aws_vpc_describe_network_insights_paths.Execute,
 	"aws/vpc/describe_network_interfaces":                            aws_vpc_describe_network_interfaces.Execute,
 	"aws/vpc/describe_route_tables":                                  aws_vpc_describe_route_tables.Execute,
 	"aws/vpc/describe_subnets":                                       aws_vpc_describe_subnets.Execute,
+	"aws/vpc/describe_traffic_mirror_filters":                        aws_vpc_describe_traffic_mirror_filters.Execute,
+	"aws/vpc/describe_traffic_mirror_sessions":                       aws_vpc_describe_traffic_mirror_sessions.Execute,
+	"aws/vpc/describe_traffic_mirror_targets":                        aws_vpc_describe_traffic_mirror_targets.Execute,
+	"aws/vpc/describe_transit_gateway_multicast_domains":             aws_vpc_describe_transit_gateway_multicast_domains.Execute,
+	"aws/vpc/describe_transit_gateway_peering_attachments":           aws_vpc_describe_transit_gateway_peering_attachments.Execute,
 	"aws/vpc/describe_transit_gateway_route_tables":                  aws_vpc_describe_transit_gateway_route_tables.Execute,
 	"aws/vpc/describe_transit_gateway_vpc_attachments":               aws_vpc_describe_transit_gateway_vpc_attachments.Execute,
 	"aws/vpc/describe_transit_gateways":                              aws_vpc_describe_transit_gateways.Execute,
@@ -2121,12 +2200,17 @@ var Actions = map[string]core.Action{
 	"aws/vpc/disassociate_vpc_cidr_block":                            aws_vpc_disassociate_vpc_cidr_block.Execute,
 	"aws/vpc/enable_transit_gateway_route_table_propagation":         aws_vpc_enable_transit_gateway_route_table_propagation.Execute,
 	"aws/vpc/export_client_vpn_client_configuration":                 aws_vpc_export_client_vpn_client_configuration.Execute,
+	"aws/vpc/get_ipam_pool_allocations":                              aws_vpc_get_ipam_pool_allocations.Execute,
+	"aws/vpc/get_ipam_pool_cidrs":                                    aws_vpc_get_ipam_pool_cidrs.Execute,
 	"aws/vpc/get_managed_prefix_list_associations":                   aws_vpc_get_managed_prefix_list_associations.Execute,
 	"aws/vpc/get_managed_prefix_list_entries":                        aws_vpc_get_managed_prefix_list_entries.Execute,
 	"aws/vpc/modify_client_vpn_endpoint":                             aws_vpc_modify_client_vpn_endpoint.Execute,
+	"aws/vpc/modify_ipam":                                            aws_vpc_modify_ipam.Execute,
+	"aws/vpc/modify_ipam_pool":                                       aws_vpc_modify_ipam_pool.Execute,
 	"aws/vpc/modify_managed_prefix_list":                             aws_vpc_modify_managed_prefix_list.Execute,
 	"aws/vpc/modify_network_interface_attribute":                     aws_vpc_modify_network_interface_attribute.Execute,
 	"aws/vpc/modify_subnet_attribute":                                aws_vpc_modify_subnet_attribute.Execute,
+	"aws/vpc/modify_traffic_mirror_session":                          aws_vpc_modify_traffic_mirror_session.Execute,
 	"aws/vpc/modify_transit_gateway":                                 aws_vpc_modify_transit_gateway.Execute,
 	"aws/vpc/modify_transit_gateway_vpc_attachment":                  aws_vpc_modify_transit_gateway_vpc_attachment.Execute,
 	"aws/vpc/modify_vpc_attribute":                                   aws_vpc_modify_vpc_attribute.Execute,
@@ -2138,16 +2222,20 @@ var Actions = map[string]core.Action{
 	"aws/vpc/modify_vpn_connection":                                  aws_vpc_modify_vpn_connection.Execute,
 	"aws/vpc/modify_vpn_connection_options":                          aws_vpc_modify_vpn_connection_options.Execute,
 	"aws/vpc/modify_vpn_tunnel_options":                              aws_vpc_modify_vpn_tunnel_options.Execute,
+	"aws/vpc/provision_ipam_pool_cidr":                               aws_vpc_provision_ipam_pool_cidr.Execute,
+	"aws/vpc/reject_transit_gateway_peering_attachment":              aws_vpc_reject_transit_gateway_peering_attachment.Execute,
 	"aws/vpc/reject_transit_gateway_vpc_attachment":                  aws_vpc_reject_transit_gateway_vpc_attachment.Execute,
 	"aws/vpc/reject_vpc_endpoint_connections":                        aws_vpc_reject_vpc_endpoint_connections.Execute,
 	"aws/vpc/reject_vpc_peering_connection":                          aws_vpc_reject_vpc_peering_connection.Execute,
 	"aws/vpc/release_address":                                        aws_vpc_release_address.Execute,
+	"aws/vpc/release_ipam_pool_allocation":                           aws_vpc_release_ipam_pool_allocation.Execute,
 	"aws/vpc/replace_network_acl_association":                        aws_vpc_replace_network_acl_association.Execute,
 	"aws/vpc/replace_network_acl_entry":                              aws_vpc_replace_network_acl_entry.Execute,
 	"aws/vpc/replace_route":                                          aws_vpc_replace_route.Execute,
 	"aws/vpc/replace_route_table_association":                        aws_vpc_replace_route_table_association.Execute,
 	"aws/vpc/replace_transit_gateway_route":                          aws_vpc_replace_transit_gateway_route.Execute,
 	"aws/vpc/revoke_client_vpn_ingress":                              aws_vpc_revoke_client_vpn_ingress.Execute,
+	"aws/vpc/start_network_insights_analysis":                        aws_vpc_start_network_insights_analysis.Execute,
 	"aws/vpc/unassign_ipv6_addresses":                                aws_vpc_unassign_ipv6_addresses.Execute,
 	"aws/vpc/unassign_private_ip_addresses":                          aws_vpc_unassign_private_ip_addresses.Execute,
 	"azure/compute/disk_get_all":                                     azure_compute_disk_get_all.Execute,
