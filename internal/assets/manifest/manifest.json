@@ -185104,6 +185104,157 @@
       }
     ]
   },
+  "trigger/rds_event": {
+    "hash": "14c64c62982aad7ac1855bb9e099b37b7aeb00ac40d68ff528213303930887b6",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "RDS Event Trigger",
+    "description": "Triggers a flow on AWS RDS/Aurora events (failover, backup complete, low storage, availability change). Polls DescribeEvents on an interval.",
+    "website": "https://www.flomation.co",
+    "icon": "database+bell",
+    "date": "21/07/2026",
+    "type": 1,
+    "category": {
+      "name": "Triggers",
+      "icon": "bolt-lightning",
+      "description": "Start a Flow"
+    },
+    "inputs": [
+      {
+        "name": "aws_access_key",
+        "type": "secret",
+        "value": null,
+        "label": "AWS Access Key",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "aws_secret_key",
+        "type": "secret",
+        "value": null,
+        "label": "AWS Secret Key",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "aws_region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "eu-west-2",
+        "required": true
+      },
+      {
+        "name": "source_type",
+        "type": "string",
+        "value": null,
+        "label": "Source Type",
+        "placeholder": "Any",
+        "options": [
+          {
+            "name": "Any",
+            "value": ""
+          },
+          {
+            "name": "DB Instance",
+            "value": "db-instance"
+          },
+          {
+            "name": "DB Cluster",
+            "value": "db-cluster"
+          },
+          {
+            "name": "DB Snapshot",
+            "value": "db-snapshot"
+          },
+          {
+            "name": "DB Cluster Snapshot",
+            "value": "db-cluster-snapshot"
+          },
+          {
+            "name": "DB Parameter Group",
+            "value": "db-parameter-group"
+          },
+          {
+            "name": "DB Security Group",
+            "value": "db-security-group"
+          }
+        ]
+      },
+      {
+        "name": "source_identifier",
+        "type": "string",
+        "value": null,
+        "label": "Source Identifier",
+        "placeholder": "Only this instance/cluster (optional; requires a Source Type)"
+      },
+      {
+        "name": "event_categories",
+        "type": "string",
+        "value": null,
+        "label": "Event Categories",
+        "placeholder": "Comma-separated filter, e.g. failover,availability (optional)"
+      },
+      {
+        "name": "poll_interval",
+        "type": "string",
+        "value": null,
+        "label": "Poll Interval",
+        "placeholder": "e.g. 60s, 5m"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "source_identifier",
+        "type": "string",
+        "value": null,
+        "label": "Source Identifier",
+        "placeholder": ""
+      },
+      {
+        "name": "source_type",
+        "type": "string",
+        "value": null,
+        "label": "Source Type",
+        "placeholder": ""
+      },
+      {
+        "name": "source_arn",
+        "type": "string",
+        "value": null,
+        "label": "Source ARN",
+        "placeholder": ""
+      },
+      {
+        "name": "message",
+        "type": "string",
+        "value": null,
+        "label": "Message",
+        "placeholder": ""
+      },
+      {
+        "name": "event_categories",
+        "type": "string",
+        "value": null,
+        "label": "Event Categories",
+        "placeholder": ""
+      },
+      {
+        "name": "date",
+        "type": "string",
+        "value": null,
+        "label": "Event Time",
+        "placeholder": ""
+      },
+      {
+        "name": "triggered_at",
+        "type": "string",
+        "value": null,
+        "label": "Triggered At",
+        "placeholder": ""
+      }
+    ]
+  },
   "trigger/s3": {
     "hash": "ffd0a4424b39c12853776f43be2ab03a599a222d9bde1f4f2c63f1206a1ee84d",
     "author": "Andy Esser",

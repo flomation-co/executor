@@ -1410,6 +1410,7 @@ import (
 	trigger_plan_task "flomation.app/automate/executor/actions/trigger/plan_task"
 	trigger_qr "flomation.app/automate/executor/actions/trigger/qr"
 	trigger_quickbooks_webhook "flomation.app/automate/executor/actions/trigger/quickbooks_webhook"
+	trigger_rds_event "flomation.app/automate/executor/actions/trigger/rds_event"
 	trigger_s3 "flomation.app/automate/executor/actions/trigger/s3"
 	trigger_schedule "flomation.app/automate/executor/actions/trigger/schedule"
 	trigger_sendgrid_webhook "flomation.app/automate/executor/actions/trigger/sendgrid_webhook"
@@ -2992,6 +2993,7 @@ var Actions = map[string]core.Action{
 	"trigger/plan_task":                                              trigger_plan_task.Execute,
 	"trigger/qr":                                                     trigger_qr.Execute,
 	"trigger/quickbooks_webhook":                                     trigger_quickbooks_webhook.Execute,
+	"trigger/rds_event":                                              trigger_rds_event.Execute,
 	"trigger/s3":                                                     trigger_s3.Execute,
 	"trigger/schedule":                                               trigger_schedule.Execute,
 	"trigger/sendgrid_webhook":                                       trigger_sendgrid_webhook.Execute,
