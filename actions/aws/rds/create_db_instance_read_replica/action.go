@@ -1,0 +1,115 @@
+// Package aws_rds_create_db_instance_read_replica creates a read replica of an
+// existing RDS database instance.
+package aws_rds_create_db_instance_read_replica
+
+import (
+	"context"
+	"fmt"
+	"strings"
+
+	core "flomation.app/automate/executor"
+	awscommon "flomation.app/automate/executor/actions/aws"
+	rdscat "flomation.app/automate/executor/actions/aws/rds"
+	"github.com/aws/aws-sdk-go-v2/aws"
+	"github.com/aws/aws-sdk-go-v2/service/rds"
+	rdstypes "github.com/aws/aws-sdk-go-v2/service/rds/types"
+)
+
+const (
+	Author       = "Andy Esser"
+	Organisation = "Flomation"
+	Name         = "AWS RDS Create Read Replica"
+	Description  = "Create a read replica of an existing RDS database instance."
+	Website      = "https://www.flomation.co"
+	Icon         = "database+copy"
+	Date         = "20/07/2026"
+	Type         = core.ActionTypeAction
+)
+
+var Inputs = [...]core.Connection{
+	{Name: "auth_method", Type: core.ConnectionTypeString, Label: "Authentication", Required: true, Options: []core.ConnectionOption{
+		{Name: "Access Keys", Value: "keys"},
+		{Name: "Assume Role (cross-account)", Value: "assume_role"},
+		{Name: "Managed Role (Credential)", Value: "credential"},
+	}},
+	{Name: "aws_access_key", Type: core.ConnectionTypeSecret, Label: "AWS Access Key", Required: true, Visible: &core.VisibleWhen{Field: "auth_method", Values: []string{"keys"}}},
+	{Name: "aws_secret_key", Type: core.ConnectionTypeSecret, Label: "AWS Secret Key", Required: true, Visible: &core.VisibleWhen{Field: "auth_method", Values: []string{"keys"}}},
+	{Name: "aws_region", Type: core.ConnectionTypeString, Label: "Region", Placeholder: "eu-west-2", Required: true},
+	{Name: "aws_session_token", Type: core.ConnectionTypeSecret, Label: "Session Token (optional)", Visible: &core.VisibleWhen{Field: "auth_method", Values: []string{"keys"}}},
+	{Name: "assume_role_arn", Type: core.ConnectionTypeString, Label: "Role ARN to Assume", Placeholder: "arn:aws:iam::<your-account>:role/FlomationAccess", Required: true, Visible: &core.VisibleWhen{Field: "auth_method", Values: []string{"assume_role"}}},
+	{Name: "external_id", Type: core.ConnectionTypeString, Label: "Assume Role External ID (optional)", Placeholder: "Must match the External ID in the role's trust policy", Visible: &core.VisibleWhen{Field: "auth_method", Values: []string{"assume_role"}}},
+	{Name: "credential", Type: core.ConnectionTypeCredential, Label: "AWS Role Credential", Required: true, Visible: &core.VisibleWhen{Field: "auth_method", Values: []string{"credential"}}},
+	{Name: "source_db_instance_identifier", Type: core.ConnectionTypeString, Label: "Source DB Instance Identifier", Placeholder: "my-database", Required: true},
+	{Name: "db_instance_identifier", Type: core.ConnectionTypeString, Label: "Replica Identifier", Placeholder: "my-database-replica", Required: true},
+	{Name: "db_instance_class", Type: core.ConnectionTypeString, Label: "Instance Class (optional)", Placeholder: "Defaults to the source class"},
+	{Name: "availability_zone", Type: core.ConnectionTypeString, Label: "Availability Zone (optional)", Placeholder: "eu-west-2b"},
+	{Name: "multi_az", Type: core.ConnectionTypeBoolean, Label: "Multi-AZ Replica"},
+	{Name: "publicly_accessible", Type: core.ConnectionTypeBoolean, Label: "Publicly Accessible"},
+	{Name: "tags", Type: core.ConnectionTypeKeyValueArray, Label: "Tags (optional)"},
+}
+
+var Outputs = [...]core.Connection{
+	{Name: "tool_result", Type: core.ConnectionTypeString, Label: "Result summary"},
+	{Name: "instance", Type: core.ConnectionTypeObject, Label: "Replica DB Instance"},
+}
+
+func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[string]interface{}, error) {
+	ctx := context.Background()
+
+	source := awscommon.InputString("source_db_instance_identifier", inputs)
+	replica := awscommon.InputString("db_instance_identifier", inputs)
+	if source == "" || replica == "" {
+		return nil, fmt.Errorf("both source and replica db instance identifiers are required")
+	}
+
+	cfg, err := awscommon.ConfigFromInputs(ctx, inputs)
+	if err != nil {
+		return nil, err
+	}
+	client := rds.NewFromConfig(cfg)
+
+	in := &rds.CreateDBInstanceReadReplicaInput{
+		SourceDBInstanceIdentifier: aws.String(source),
+		DBInstanceIdentifier:       aws.String(replica),
+	}
+	if v := awscommon.InputString("db_instance_class", inputs); v != "" {
+		in.DBInstanceClass = aws.String(v)
+	}
+	if awscommon.InputBool("multi_az", inputs) {
+		in.MultiAZ = aws.Bool(true)
+	} else if az := strings.TrimSpace(awscommon.InputString("availability_zone", inputs)); az != "" {
+		in.AvailabilityZone = aws.String(az)
+	}
+	if awscommon.InputBool("publicly_accessible", inputs) {
+		in.PubliclyAccessible = aws.Bool(true)
+	}
+	if tags := buildTags(inputs); len(tags) > 0 {
+		in.Tags = tags
+	}
+
+	out, err := client.CreateDBInstanceReadReplica(ctx, in)
+	if err != nil {
+		return nil, err
+	}
+
+	return map[string]interface{}{
+		"tool_result": fmt.Sprintf("Creating read replica %q of %q (status: %s)", replica, source, aws.ToString(out.DBInstance.DBInstanceStatus)),
+		"instance":    rdscat.SummariseInstance(out.DBInstance),
+	}, nil
+}
+
+func buildTags(inputs []*core.Connection) []rdstypes.Tag {
+	conn := core.FindConnection("tags", inputs)
+	if conn == nil {
+		return nil
+	}
+	var tags []rdstypes.Tag
+	for _, kv := range conn.KeyValuePairs() {
+		k := strings.TrimSpace(kv.Key)
+		if k == "" {
+			continue
+		}
+		tags = append(tags, rdstypes.Tag{Key: aws.String(k), Value: aws.String(kv.Value)})
+	}
+	return tags
+}
