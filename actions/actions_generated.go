@@ -1041,6 +1041,21 @@ import (
 	oracle_compute_shape_get_all "flomation.app/automate/executor/actions/oracle/compute/shape_get_all"
 	oracle_compute_subnet_get_all "flomation.app/automate/executor/actions/oracle/compute/subnet_get_all"
 	oracle_compute_vcn_get_all "flomation.app/automate/executor/actions/oracle/compute/vcn_get_all"
+	oracle_objectstorage_bucket_create "flomation.app/automate/executor/actions/oracle/objectstorage/bucket_create"
+	oracle_objectstorage_bucket_delete "flomation.app/automate/executor/actions/oracle/objectstorage/bucket_delete"
+	oracle_objectstorage_bucket_get "flomation.app/automate/executor/actions/oracle/objectstorage/bucket_get"
+	oracle_objectstorage_bucket_get_all "flomation.app/automate/executor/actions/oracle/objectstorage/bucket_get_all"
+	oracle_objectstorage_namespace_get "flomation.app/automate/executor/actions/oracle/objectstorage/namespace_get"
+	oracle_objectstorage_object_copy "flomation.app/automate/executor/actions/oracle/objectstorage/object_copy"
+	oracle_objectstorage_object_delete "flomation.app/automate/executor/actions/oracle/objectstorage/object_delete"
+	oracle_objectstorage_object_get "flomation.app/automate/executor/actions/oracle/objectstorage/object_get"
+	oracle_objectstorage_object_get_all "flomation.app/automate/executor/actions/oracle/objectstorage/object_get_all"
+	oracle_objectstorage_object_head "flomation.app/automate/executor/actions/oracle/objectstorage/object_head"
+	oracle_objectstorage_object_put "flomation.app/automate/executor/actions/oracle/objectstorage/object_put"
+	oracle_objectstorage_object_rename "flomation.app/automate/executor/actions/oracle/objectstorage/object_rename"
+	oracle_objectstorage_presigned_url_create "flomation.app/automate/executor/actions/oracle/objectstorage/presigned_url_create"
+	oracle_objectstorage_presigned_url_delete "flomation.app/automate/executor/actions/oracle/objectstorage/presigned_url_delete"
+	oracle_objectstorage_presigned_url_get_all "flomation.app/automate/executor/actions/oracle/objectstorage/presigned_url_get_all"
 	output_set "flomation.app/automate/executor/actions/output/set"
 	output_set_outputs "flomation.app/automate/executor/actions/output/set_outputs"
 	output_web_response "flomation.app/automate/executor/actions/output/web_response"
@@ -2562,6 +2577,21 @@ var Actions = map[string]core.Action{
 	"oracle/compute/shape_get_all":                                   oracle_compute_shape_get_all.Execute,
 	"oracle/compute/subnet_get_all":                                  oracle_compute_subnet_get_all.Execute,
 	"oracle/compute/vcn_get_all":                                     oracle_compute_vcn_get_all.Execute,
+	"oracle/objectstorage/bucket_create":                             oracle_objectstorage_bucket_create.Execute,
+	"oracle/objectstorage/bucket_delete":                             oracle_objectstorage_bucket_delete.Execute,
+	"oracle/objectstorage/bucket_get":                                oracle_objectstorage_bucket_get.Execute,
+	"oracle/objectstorage/bucket_get_all":                            oracle_objectstorage_bucket_get_all.Execute,
+	"oracle/objectstorage/namespace_get":                             oracle_objectstorage_namespace_get.Execute,
+	"oracle/objectstorage/object_copy":                               oracle_objectstorage_object_copy.Execute,
+	"oracle/objectstorage/object_delete":                             oracle_objectstorage_object_delete.Execute,
+	"oracle/objectstorage/object_get":                                oracle_objectstorage_object_get.Execute,
+	"oracle/objectstorage/object_get_all":                            oracle_objectstorage_object_get_all.Execute,
+	"oracle/objectstorage/object_head":                               oracle_objectstorage_object_head.Execute,
+	"oracle/objectstorage/object_put":                                oracle_objectstorage_object_put.Execute,
+	"oracle/objectstorage/object_rename":                             oracle_objectstorage_object_rename.Execute,
+	"oracle/objectstorage/presigned_url_create":                      oracle_objectstorage_presigned_url_create.Execute,
+	"oracle/objectstorage/presigned_url_delete":                      oracle_objectstorage_presigned_url_delete.Execute,
+	"oracle/objectstorage/presigned_url_get_all":                     oracle_objectstorage_presigned_url_get_all.Execute,
 	"output/set":                                                     output_set.Execute,
 	"output/set_outputs":                                             output_set_outputs.Execute,
 	"output/web_response":                                            output_web_response.Execute,
