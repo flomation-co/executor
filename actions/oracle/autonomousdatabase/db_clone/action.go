@@ -1,0 +1,105 @@
+// Package oracle_autonomousdatabase_db_clone clones an existing Oracle Cloud
+// Autonomous Database into a brand-new database. The operation is asynchronous — it
+// returns immediately with a work-request id while the clone provisions.
+package oracle_autonomousdatabase_db_clone
+
+import (
+	"fmt"
+	"strings"
+
+	core "flomation.app/automate/executor"
+	adb "flomation.app/automate/executor/actions/oracle/autonomousdatabase"
+
+	"github.com/oracle/oci-go-sdk/v65/database"
+)
+
+const (
+	Author       = "Dave McElin"
+	Organisation = "Flomation"
+	Name         = "OCI Autonomous Database: Clone"
+	Description  = "Clone an Oracle Cloud Autonomous Database into a new database (full or metadata clone). Asynchronous — returns a work-request id for the new database."
+	Website      = "https://www.flomation.co"
+	Icon         = "oracle+copy"
+	Date         = "21/07/2026"
+	Type         = core.ActionTypeAction
+)
+
+var Inputs = [...]core.Connection{
+	{Name: "tenancy_ocid", Type: core.ConnectionTypeString, Label: "Tenancy OCID", Placeholder: "ocid1.tenancy.oc1..aaaa…", Required: true},
+	{Name: "user_ocid", Type: core.ConnectionTypeString, Label: "User OCID", Placeholder: "ocid1.user.oc1..aaaa…", Required: true},
+	{Name: "region", Type: core.ConnectionTypeString, Label: "Region", Placeholder: "e.g. uk-london-1", Required: true},
+	{Name: "fingerprint", Type: core.ConnectionTypeString, Label: "Key Fingerprint", Placeholder: "aa:bb:cc:… fingerprint of the uploaded API key", Required: true},
+	{Name: "private_key", Type: core.ConnectionTypeSecret, Label: "Private Key (PEM)", Placeholder: "The API signing private key — full PEM, incl. BEGIN/END lines"},
+	{Name: "private_key_passphrase", Type: core.ConnectionTypeSecret, Label: "Private Key Passphrase", Placeholder: "Only if the key is encrypted (optional)"},
+	{Name: "compartment_ocid", Type: core.ConnectionTypeString, Label: "Compartment OCID", Placeholder: "ocid1.compartment.oc1..aaaa… destination compartment for the clone", Required: true},
+	{Name: "source_autonomous_database_id", Type: core.ConnectionTypeString, Label: "Source Database OCID", Placeholder: "ocid1.autonomousdatabase.oc1..aaaa… the database to clone", Required: true},
+	{Name: "db_name", Type: core.ConnectionTypeString, Label: "New Database Name", Placeholder: "Alphanumeric, e.g. SALESDBCLONE (no spaces, ≤30 chars)", Required: true},
+	{Name: "display_name", Type: core.ConnectionTypeString, Label: "Display Name", Placeholder: "Friendly name shown in the console (optional)"},
+	{Name: "clone_type", Type: core.ConnectionTypeString, Label: "Clone Type", Placeholder: "Default Full clone", Options: []core.ConnectionOption{
+		{Name: "Full Clone (data + metadata)", Value: "FULL"},
+		{Name: "Metadata Clone (schema only)", Value: "METADATA"},
+	}},
+}
+
+var Outputs = [...]core.Connection{
+	{Name: "tool_result", Type: core.ConnectionTypeString, Label: "Result summary"},
+	{Name: "database", Type: core.ConnectionTypeObject, Label: "Database"},
+	{Name: "id", Type: core.ConnectionTypeString, Label: "Database OCID"},
+	{Name: "lifecycle_state", Type: core.ConnectionTypeString, Label: "Lifecycle State"},
+	{Name: "work_request_id", Type: core.ConnectionTypeString, Label: "Work Request ID"},
+	{Name: "success", Type: core.ConnectionTypeBoolean, Label: "Success"},
+	{Name: "error", Type: core.ConnectionTypeString, Label: "Error"},
+}
+
+func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[string]interface{}, error) {
+	auth, err := adb.GetAuth(inputs)
+	if err != nil {
+		return adb.ErrorResult(err.Error()), nil
+	}
+	compartment, err := auth.RequiredCompartment()
+	if err != nil {
+		return adb.ErrorResult(err.Error()), nil
+	}
+	source, err := adb.RequiredString("source_autonomous_database_id", inputs)
+	if err != nil {
+		return adb.ErrorResult(err.Error()), nil
+	}
+	dbName, err := adb.RequiredString("db_name", inputs)
+	if err != nil {
+		return adb.ErrorResult(err.Error()), nil
+	}
+
+	details := database.CreateAutonomousDatabaseCloneDetails{
+		CompartmentId: &compartment,
+		SourceId:      &source,
+		DbName:        &dbName,
+	}
+	if v := strings.TrimSpace(adb.OptionalString("display_name", inputs)); v != "" {
+		details.DisplayName = &v
+	}
+	cloneType := strings.TrimSpace(adb.OptionalString("clone_type", inputs))
+	if cloneType == "" {
+		cloneType = "FULL"
+	}
+	details.CloneType = database.CreateAutonomousDatabaseCloneDetailsCloneTypeEnum(cloneType)
+
+	client, err := auth.DatabaseClient()
+	if err != nil {
+		return adb.ErrorResult(auth.OCIError(err)), nil
+	}
+	resp, err := client.CreateAutonomousDatabase(adb.Context(), database.CreateAutonomousDatabaseRequest{
+		CreateAutonomousDatabaseDetails: details,
+	})
+	if err != nil {
+		return adb.ErrorResult(auth.OCIError(err)), nil
+	}
+	db := adb.SummariseAutonomousDatabase(&resp.AutonomousDatabase)
+	return map[string]interface{}{
+		"tool_result":     fmt.Sprintf("Cloning Autonomous Database into %q (%s)", db["display_name"], db["lifecycle_state"]),
+		"database":        db,
+		"id":              db["id"],
+		"lifecycle_state": db["lifecycle_state"],
+		"work_request_id": adb.Str(resp.OpcWorkRequestId),
+		"success":         true,
+	}, nil
+}

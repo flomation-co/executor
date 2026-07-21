@@ -206205,6 +206205,3226 @@
       }
     ]
   },
+  "oracle/autonomousdatabase/db_change_compartment": {
+    "hash": "79e673465b3f9ad10b573c55b9c8e314b14466889c218afe58f4bc0f30d6943e",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "OCI Autonomous Database: Move to Compartment",
+    "description": "Move an Oracle Cloud Autonomous Database to a different compartment. Asynchronous — returns a work-request id.",
+    "website": "https://www.flomation.co",
+    "icon": "oracle+folder",
+    "date": "21/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Oracle Cloud",
+      "icon": "oracle",
+      "description": "Oracle Cloud Infrastructure (OCI) integrations"
+    },
+    "sub_category": {
+      "name": "Autonomous Database",
+      "icon": "database",
+      "description": "Oracle Cloud Autonomous Database — provision, scale, back up, clone and generate connection wallets for self-driving Oracle databases"
+    },
+    "inputs": [
+      {
+        "name": "tenancy_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Tenancy OCID",
+        "placeholder": "ocid1.tenancy.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "user_ocid",
+        "type": "string",
+        "value": null,
+        "label": "User OCID",
+        "placeholder": "ocid1.user.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "e.g. uk-london-1",
+        "required": true
+      },
+      {
+        "name": "fingerprint",
+        "type": "string",
+        "value": null,
+        "label": "Key Fingerprint",
+        "placeholder": "aa:bb:cc:… fingerprint of the uploaded API key",
+        "required": true
+      },
+      {
+        "name": "private_key",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key (PEM)",
+        "placeholder": "The API signing private key — full PEM, incl. BEGIN/END lines"
+      },
+      {
+        "name": "private_key_passphrase",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key Passphrase",
+        "placeholder": "Only if the key is encrypted (optional)"
+      },
+      {
+        "name": "autonomous_database_id",
+        "type": "string",
+        "value": null,
+        "label": "Autonomous Database OCID",
+        "placeholder": "ocid1.autonomousdatabase.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "target_compartment_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Target Compartment OCID",
+        "placeholder": "ocid1.compartment.oc1..aaaa… — the compartment to move the database into",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "work_request_id",
+        "type": "string",
+        "value": null,
+        "label": "Work Request ID",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "oracle/autonomousdatabase/db_clone": {
+    "hash": "41f0b7309254361329925327cf27f4b25d72dd3038d6f63b21c55f74d2ac1729",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "OCI Autonomous Database: Clone",
+    "description": "Clone an Oracle Cloud Autonomous Database into a new database (full or metadata clone). Asynchronous — returns a work-request id for the new database.",
+    "website": "https://www.flomation.co",
+    "icon": "oracle+copy",
+    "date": "21/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Oracle Cloud",
+      "icon": "oracle",
+      "description": "Oracle Cloud Infrastructure (OCI) integrations"
+    },
+    "sub_category": {
+      "name": "Autonomous Database",
+      "icon": "database",
+      "description": "Oracle Cloud Autonomous Database — provision, scale, back up, clone and generate connection wallets for self-driving Oracle databases"
+    },
+    "inputs": [
+      {
+        "name": "tenancy_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Tenancy OCID",
+        "placeholder": "ocid1.tenancy.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "user_ocid",
+        "type": "string",
+        "value": null,
+        "label": "User OCID",
+        "placeholder": "ocid1.user.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "e.g. uk-london-1",
+        "required": true
+      },
+      {
+        "name": "fingerprint",
+        "type": "string",
+        "value": null,
+        "label": "Key Fingerprint",
+        "placeholder": "aa:bb:cc:… fingerprint of the uploaded API key",
+        "required": true
+      },
+      {
+        "name": "private_key",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key (PEM)",
+        "placeholder": "The API signing private key — full PEM, incl. BEGIN/END lines"
+      },
+      {
+        "name": "private_key_passphrase",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key Passphrase",
+        "placeholder": "Only if the key is encrypted (optional)"
+      },
+      {
+        "name": "compartment_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Compartment OCID",
+        "placeholder": "ocid1.compartment.oc1..aaaa… destination compartment for the clone",
+        "required": true
+      },
+      {
+        "name": "source_autonomous_database_id",
+        "type": "string",
+        "value": null,
+        "label": "Source Database OCID",
+        "placeholder": "ocid1.autonomousdatabase.oc1..aaaa… the database to clone",
+        "required": true
+      },
+      {
+        "name": "db_name",
+        "type": "string",
+        "value": null,
+        "label": "New Database Name",
+        "placeholder": "Alphanumeric, e.g. SALESDBCLONE (no spaces, ≤30 chars)",
+        "required": true
+      },
+      {
+        "name": "display_name",
+        "type": "string",
+        "value": null,
+        "label": "Display Name",
+        "placeholder": "Friendly name shown in the console (optional)"
+      },
+      {
+        "name": "clone_type",
+        "type": "string",
+        "value": null,
+        "label": "Clone Type",
+        "placeholder": "Default Full clone",
+        "options": [
+          {
+            "name": "Full Clone (data + metadata)",
+            "value": "FULL"
+          },
+          {
+            "name": "Metadata Clone (schema only)",
+            "value": "METADATA"
+          }
+        ]
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "database",
+        "type": "object",
+        "value": null,
+        "label": "Database",
+        "placeholder": ""
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Database OCID",
+        "placeholder": ""
+      },
+      {
+        "name": "lifecycle_state",
+        "type": "string",
+        "value": null,
+        "label": "Lifecycle State",
+        "placeholder": ""
+      },
+      {
+        "name": "work_request_id",
+        "type": "string",
+        "value": null,
+        "label": "Work Request ID",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "oracle/autonomousdatabase/db_create": {
+    "hash": "abb9559fc063d64d2db43ef6b7aecaa5c13db5a4e5909da08198092c6c6c754a",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "OCI Autonomous Database: Create",
+    "description": "Provision a new Oracle Cloud Autonomous Database in a compartment. Asynchronous — returns a work-request id while the database provisions. Set 'Always Free' for a no-cost database, or choose the workload, compute and storage.",
+    "website": "https://www.flomation.co",
+    "icon": "oracle+plus",
+    "date": "21/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Oracle Cloud",
+      "icon": "oracle",
+      "description": "Oracle Cloud Infrastructure (OCI) integrations"
+    },
+    "sub_category": {
+      "name": "Autonomous Database",
+      "icon": "database",
+      "description": "Oracle Cloud Autonomous Database — provision, scale, back up, clone and generate connection wallets for self-driving Oracle databases"
+    },
+    "inputs": [
+      {
+        "name": "tenancy_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Tenancy OCID",
+        "placeholder": "ocid1.tenancy.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "user_ocid",
+        "type": "string",
+        "value": null,
+        "label": "User OCID",
+        "placeholder": "ocid1.user.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "e.g. uk-london-1",
+        "required": true
+      },
+      {
+        "name": "fingerprint",
+        "type": "string",
+        "value": null,
+        "label": "Key Fingerprint",
+        "placeholder": "aa:bb:cc:… fingerprint of the uploaded API key",
+        "required": true
+      },
+      {
+        "name": "private_key",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key (PEM)",
+        "placeholder": "The API signing private key — full PEM, incl. BEGIN/END lines"
+      },
+      {
+        "name": "private_key_passphrase",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key Passphrase",
+        "placeholder": "Only if the key is encrypted (optional)"
+      },
+      {
+        "name": "compartment_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Compartment OCID",
+        "placeholder": "ocid1.compartment.oc1..aaaa… (use the tenancy OCID for the root)",
+        "required": true
+      },
+      {
+        "name": "db_name",
+        "type": "string",
+        "value": null,
+        "label": "Database Name",
+        "placeholder": "Alphanumeric, e.g. SALESDB (no spaces, ≤30 chars)",
+        "required": true
+      },
+      {
+        "name": "admin_password",
+        "type": "secret",
+        "value": null,
+        "label": "ADMIN Password",
+        "placeholder": "12–30 chars, incl. upper, lower and a digit"
+      },
+      {
+        "name": "display_name",
+        "type": "string",
+        "value": null,
+        "label": "Display Name",
+        "placeholder": "Friendly name shown in the console (optional)"
+      },
+      {
+        "name": "db_workload",
+        "type": "string",
+        "value": null,
+        "label": "Workload",
+        "placeholder": "Default OLTP",
+        "options": [
+          {
+            "name": "Transaction Processing (OLTP)",
+            "value": "OLTP"
+          },
+          {
+            "name": "Data Warehouse (DW)",
+            "value": "DW"
+          },
+          {
+            "name": "JSON Database (AJD)",
+            "value": "AJD"
+          },
+          {
+            "name": "APEX",
+            "value": "APEX"
+          }
+        ]
+      },
+      {
+        "name": "is_free_tier",
+        "type": "boolean",
+        "value": null,
+        "label": "Always Free",
+        "placeholder": "Provision a no-cost Always Free database (fixed small sizing)"
+      },
+      {
+        "name": "compute_model",
+        "type": "string",
+        "value": null,
+        "label": "Compute Model",
+        "placeholder": "Default ECPU",
+        "options": [
+          {
+            "name": "ECPU",
+            "value": "ECPU"
+          },
+          {
+            "name": "OCPU",
+            "value": "OCPU"
+          }
+        ]
+      },
+      {
+        "name": "cpu_count",
+        "type": "string",
+        "value": null,
+        "label": "CPU Count",
+        "placeholder": "ECPU or OCPU count, e.g. 2 (ignored for Always Free)"
+      },
+      {
+        "name": "data_storage_in_tbs",
+        "type": "string",
+        "value": null,
+        "label": "Storage (TB)",
+        "placeholder": "Data storage in TB, e.g. 1 (ignored for Always Free)"
+      },
+      {
+        "name": "is_auto_scaling_enabled",
+        "type": "boolean",
+        "value": null,
+        "label": "Auto-scaling",
+        "placeholder": "Allow compute auto-scaling up to 3x"
+      },
+      {
+        "name": "license_model",
+        "type": "string",
+        "value": null,
+        "label": "License Model",
+        "placeholder": "Optional",
+        "options": [
+          {
+            "name": "License Included",
+            "value": "LICENSE_INCLUDED"
+          },
+          {
+            "name": "Bring Your Own License",
+            "value": "BRING_YOUR_OWN_LICENSE"
+          }
+        ]
+      },
+      {
+        "name": "whitelisted_ips",
+        "type": "string",
+        "value": null,
+        "label": "Allowed IPs",
+        "placeholder": "Comma-separated IPs/CIDRs to allow (optional)"
+      },
+      {
+        "name": "tags",
+        "type": "string",
+        "value": null,
+        "label": "Freeform Tags (JSON)",
+        "placeholder": "{\"env\":\"prod\"} (optional)"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "database",
+        "type": "object",
+        "value": null,
+        "label": "Database",
+        "placeholder": ""
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Database OCID",
+        "placeholder": ""
+      },
+      {
+        "name": "lifecycle_state",
+        "type": "string",
+        "value": null,
+        "label": "Lifecycle State",
+        "placeholder": ""
+      },
+      {
+        "name": "work_request_id",
+        "type": "string",
+        "value": null,
+        "label": "Work Request ID",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "oracle/autonomousdatabase/db_create_backup": {
+    "hash": "6e6eef0ffa28aa5900c9e3fc155fbebdc5701fa00a6f133f17036137ee2dfdaf",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "OCI Autonomous Database: Create Backup",
+    "description": "Create a backup of an Oracle Cloud Autonomous Database. Defaults to a long-term backup (manual backups are deprecated on Autonomous Database Serverless) retained for 90 days unless you set a retention period. Asynchronous — returns a work-request id.",
+    "website": "https://www.flomation.co",
+    "icon": "oracle+floppy-disk",
+    "date": "21/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Oracle Cloud",
+      "icon": "oracle",
+      "description": "Oracle Cloud Infrastructure (OCI) integrations"
+    },
+    "sub_category": {
+      "name": "Autonomous Database",
+      "icon": "database",
+      "description": "Oracle Cloud Autonomous Database — provision, scale, back up, clone and generate connection wallets for self-driving Oracle databases"
+    },
+    "inputs": [
+      {
+        "name": "tenancy_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Tenancy OCID",
+        "placeholder": "ocid1.tenancy.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "user_ocid",
+        "type": "string",
+        "value": null,
+        "label": "User OCID",
+        "placeholder": "ocid1.user.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "e.g. uk-london-1",
+        "required": true
+      },
+      {
+        "name": "fingerprint",
+        "type": "string",
+        "value": null,
+        "label": "Key Fingerprint",
+        "placeholder": "aa:bb:cc:… fingerprint of the uploaded API key",
+        "required": true
+      },
+      {
+        "name": "private_key",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key (PEM)",
+        "placeholder": "The API signing private key — full PEM, incl. BEGIN/END lines"
+      },
+      {
+        "name": "private_key_passphrase",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key Passphrase",
+        "placeholder": "Only if the key is encrypted (optional)"
+      },
+      {
+        "name": "autonomous_database_id",
+        "type": "string",
+        "value": null,
+        "label": "Autonomous Database OCID",
+        "placeholder": "ocid1.autonomousdatabase.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "display_name",
+        "type": "string",
+        "value": null,
+        "label": "Backup Name",
+        "placeholder": "Friendly name for the backup (optional)"
+      },
+      {
+        "name": "retention_period_in_days",
+        "type": "string",
+        "value": null,
+        "label": "Retention Period (days)",
+        "placeholder": "Long-term retention in days, 90–3650 (default 90)"
+      },
+      {
+        "name": "is_long_term_backup",
+        "type": "boolean",
+        "value": null,
+        "label": "Long-term Backup",
+        "placeholder": "On by default — required on Serverless; turn off only for dedicated infrastructure"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "backup",
+        "type": "object",
+        "value": null,
+        "label": "Backup",
+        "placeholder": ""
+      },
+      {
+        "name": "backup_id",
+        "type": "string",
+        "value": null,
+        "label": "Backup OCID",
+        "placeholder": ""
+      },
+      {
+        "name": "work_request_id",
+        "type": "string",
+        "value": null,
+        "label": "Work Request ID",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "oracle/autonomousdatabase/db_delete": {
+    "hash": "55e9529d6855bd77679ec8ca424257c8e2fc0772d4dc042b8da64564838ead3b",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "OCI Autonomous Database: Delete",
+    "description": "Permanently terminate an Oracle Cloud Autonomous Database. Asynchronous and IRREVERSIBLE — returns a work-request id while the database terminates.",
+    "website": "https://www.flomation.co",
+    "icon": "oracle+trash",
+    "date": "21/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Oracle Cloud",
+      "icon": "oracle",
+      "description": "Oracle Cloud Infrastructure (OCI) integrations"
+    },
+    "sub_category": {
+      "name": "Autonomous Database",
+      "icon": "database",
+      "description": "Oracle Cloud Autonomous Database — provision, scale, back up, clone and generate connection wallets for self-driving Oracle databases"
+    },
+    "inputs": [
+      {
+        "name": "tenancy_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Tenancy OCID",
+        "placeholder": "ocid1.tenancy.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "user_ocid",
+        "type": "string",
+        "value": null,
+        "label": "User OCID",
+        "placeholder": "ocid1.user.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "e.g. uk-london-1",
+        "required": true
+      },
+      {
+        "name": "fingerprint",
+        "type": "string",
+        "value": null,
+        "label": "Key Fingerprint",
+        "placeholder": "aa:bb:cc:… fingerprint of the uploaded API key",
+        "required": true
+      },
+      {
+        "name": "private_key",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key (PEM)",
+        "placeholder": "The API signing private key — full PEM, incl. BEGIN/END lines"
+      },
+      {
+        "name": "private_key_passphrase",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key Passphrase",
+        "placeholder": "Only if the key is encrypted (optional)"
+      },
+      {
+        "name": "autonomous_database_id",
+        "type": "string",
+        "value": null,
+        "label": "Autonomous Database OCID",
+        "placeholder": "ocid1.autonomousdatabase.oc1..aaaa…",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "work_request_id",
+        "type": "string",
+        "value": null,
+        "label": "Work Request ID",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "oracle/autonomousdatabase/db_delete_backup": {
+    "hash": "b1135a02f046183e4eaf87084bc54edfd5f6168a0aacedecc217f7be21652bf5",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "OCI Autonomous Database: Delete Backup",
+    "description": "Delete an Oracle Cloud Autonomous Database backup by OCID. Asynchronous — returns a work-request id.",
+    "website": "https://www.flomation.co",
+    "icon": "oracle+trash",
+    "date": "21/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Oracle Cloud",
+      "icon": "oracle",
+      "description": "Oracle Cloud Infrastructure (OCI) integrations"
+    },
+    "sub_category": {
+      "name": "Autonomous Database",
+      "icon": "database",
+      "description": "Oracle Cloud Autonomous Database — provision, scale, back up, clone and generate connection wallets for self-driving Oracle databases"
+    },
+    "inputs": [
+      {
+        "name": "tenancy_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Tenancy OCID",
+        "placeholder": "ocid1.tenancy.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "user_ocid",
+        "type": "string",
+        "value": null,
+        "label": "User OCID",
+        "placeholder": "ocid1.user.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "e.g. uk-london-1",
+        "required": true
+      },
+      {
+        "name": "fingerprint",
+        "type": "string",
+        "value": null,
+        "label": "Key Fingerprint",
+        "placeholder": "aa:bb:cc:… fingerprint of the uploaded API key",
+        "required": true
+      },
+      {
+        "name": "private_key",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key (PEM)",
+        "placeholder": "The API signing private key — full PEM, incl. BEGIN/END lines"
+      },
+      {
+        "name": "private_key_passphrase",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key Passphrase",
+        "placeholder": "Only if the key is encrypted (optional)"
+      },
+      {
+        "name": "autonomous_database_backup_id",
+        "type": "string",
+        "value": null,
+        "label": "Autonomous Database Backup OCID",
+        "placeholder": "ocid1.autonomousdatabasebackup.oc1..aaaa…",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "work_request_id",
+        "type": "string",
+        "value": null,
+        "label": "Work Request ID",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "oracle/autonomousdatabase/db_generate_regional_wallet": {
+    "hash": "2d3b69726fe12f6b2f66874456826f17c1358c008bf2c37c19851a036107e514",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "OCI Autonomous Database: Generate Regional Wallet",
+    "description": "Download the regional wallet for Oracle Cloud Autonomous Databases — a single wallet covering all databases in the region. Returned base64-encoded. The password protects the zip and is required.",
+    "website": "https://www.flomation.co",
+    "icon": "oracle+key",
+    "date": "21/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Oracle Cloud",
+      "icon": "oracle",
+      "description": "Oracle Cloud Infrastructure (OCI) integrations"
+    },
+    "sub_category": {
+      "name": "Autonomous Database",
+      "icon": "database",
+      "description": "Oracle Cloud Autonomous Database — provision, scale, back up, clone and generate connection wallets for self-driving Oracle databases"
+    },
+    "inputs": [
+      {
+        "name": "tenancy_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Tenancy OCID",
+        "placeholder": "ocid1.tenancy.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "user_ocid",
+        "type": "string",
+        "value": null,
+        "label": "User OCID",
+        "placeholder": "ocid1.user.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "e.g. uk-london-1",
+        "required": true
+      },
+      {
+        "name": "fingerprint",
+        "type": "string",
+        "value": null,
+        "label": "Key Fingerprint",
+        "placeholder": "aa:bb:cc:… fingerprint of the uploaded API key",
+        "required": true
+      },
+      {
+        "name": "private_key",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key (PEM)",
+        "placeholder": "The API signing private key — full PEM, incl. BEGIN/END lines"
+      },
+      {
+        "name": "private_key_passphrase",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key Passphrase",
+        "placeholder": "Only if the key is encrypted (optional)"
+      },
+      {
+        "name": "autonomous_database_id",
+        "type": "string",
+        "value": null,
+        "label": "Autonomous Database OCID",
+        "placeholder": "ocid1.autonomousdatabase.oc1..aaaa… — any database in the region anchors the wallet",
+        "required": true
+      },
+      {
+        "name": "wallet_password",
+        "type": "secret",
+        "value": null,
+        "label": "Wallet Password",
+        "placeholder": "Password to protect the wallet zip (min 8 chars)"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "wallet_base64",
+        "type": "string",
+        "value": null,
+        "label": "Wallet (base64 zip)",
+        "placeholder": ""
+      },
+      {
+        "name": "size_bytes",
+        "type": "integer",
+        "value": null,
+        "label": "Size (bytes)",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "oracle/autonomousdatabase/db_generate_wallet": {
+    "hash": "f0100d4ebb734d902b1f6cf7eb6301e17abbfb1bd2631d3183ec56667b3b395e",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "OCI Autonomous Database: Generate Wallet",
+    "description": "Download the client credentials (instance) wallet for an Oracle Cloud Autonomous Database — the password-protected zip a client needs to connect. Returned base64-encoded. The password protects the zip and is required.",
+    "website": "https://www.flomation.co",
+    "icon": "oracle+key",
+    "date": "21/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Oracle Cloud",
+      "icon": "oracle",
+      "description": "Oracle Cloud Infrastructure (OCI) integrations"
+    },
+    "sub_category": {
+      "name": "Autonomous Database",
+      "icon": "database",
+      "description": "Oracle Cloud Autonomous Database — provision, scale, back up, clone and generate connection wallets for self-driving Oracle databases"
+    },
+    "inputs": [
+      {
+        "name": "tenancy_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Tenancy OCID",
+        "placeholder": "ocid1.tenancy.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "user_ocid",
+        "type": "string",
+        "value": null,
+        "label": "User OCID",
+        "placeholder": "ocid1.user.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "e.g. uk-london-1",
+        "required": true
+      },
+      {
+        "name": "fingerprint",
+        "type": "string",
+        "value": null,
+        "label": "Key Fingerprint",
+        "placeholder": "aa:bb:cc:… fingerprint of the uploaded API key",
+        "required": true
+      },
+      {
+        "name": "private_key",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key (PEM)",
+        "placeholder": "The API signing private key — full PEM, incl. BEGIN/END lines"
+      },
+      {
+        "name": "private_key_passphrase",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key Passphrase",
+        "placeholder": "Only if the key is encrypted (optional)"
+      },
+      {
+        "name": "autonomous_database_id",
+        "type": "string",
+        "value": null,
+        "label": "Autonomous Database OCID",
+        "placeholder": "ocid1.autonomousdatabase.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "wallet_password",
+        "type": "secret",
+        "value": null,
+        "label": "Wallet Password",
+        "placeholder": "Password to protect the wallet zip (min 8 chars)"
+      },
+      {
+        "name": "generate_type",
+        "type": "string",
+        "value": null,
+        "label": "Wallet Type",
+        "placeholder": "ALL = all connection strings (default); SINGLE = one",
+        "options": [
+          {
+            "name": "All connection strings (default)",
+            "value": "ALL"
+          },
+          {
+            "name": "Single connection string",
+            "value": "SINGLE"
+          }
+        ]
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "wallet_base64",
+        "type": "string",
+        "value": null,
+        "label": "Wallet (base64 zip)",
+        "placeholder": ""
+      },
+      {
+        "name": "size_bytes",
+        "type": "integer",
+        "value": null,
+        "label": "Size (bytes)",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "oracle/autonomousdatabase/db_get": {
+    "hash": "36067d7b6fe8c13964dc0e1bbeae40d9bc75807e78a05494877d72d575465c30",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "OCI Autonomous Database: Get",
+    "description": "Fetch the full state of one Oracle Cloud Autonomous Database by OCID — lifecycle state, compute and storage sizing, workload type and metadata.",
+    "website": "https://www.flomation.co",
+    "icon": "oracle+magnifying-glass",
+    "date": "21/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Oracle Cloud",
+      "icon": "oracle",
+      "description": "Oracle Cloud Infrastructure (OCI) integrations"
+    },
+    "sub_category": {
+      "name": "Autonomous Database",
+      "icon": "database",
+      "description": "Oracle Cloud Autonomous Database — provision, scale, back up, clone and generate connection wallets for self-driving Oracle databases"
+    },
+    "inputs": [
+      {
+        "name": "tenancy_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Tenancy OCID",
+        "placeholder": "ocid1.tenancy.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "user_ocid",
+        "type": "string",
+        "value": null,
+        "label": "User OCID",
+        "placeholder": "ocid1.user.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "e.g. uk-london-1",
+        "required": true
+      },
+      {
+        "name": "fingerprint",
+        "type": "string",
+        "value": null,
+        "label": "Key Fingerprint",
+        "placeholder": "aa:bb:cc:… fingerprint of the uploaded API key",
+        "required": true
+      },
+      {
+        "name": "private_key",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key (PEM)",
+        "placeholder": "The API signing private key — full PEM, incl. BEGIN/END lines"
+      },
+      {
+        "name": "private_key_passphrase",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key Passphrase",
+        "placeholder": "Only if the key is encrypted (optional)"
+      },
+      {
+        "name": "autonomous_database_id",
+        "type": "string",
+        "value": null,
+        "label": "Autonomous Database OCID",
+        "placeholder": "ocid1.autonomousdatabase.oc1..aaaa…",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "database",
+        "type": "object",
+        "value": null,
+        "label": "Database",
+        "placeholder": ""
+      },
+      {
+        "name": "lifecycle_state",
+        "type": "string",
+        "value": null,
+        "label": "Lifecycle State",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "oracle/autonomousdatabase/db_get_all": {
+    "hash": "ce5a27ed9a79e358b91726ae01ce64e9bc3b6c230b86cf3f99529f52dab9adaf",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "OCI Autonomous Database: List",
+    "description": "List the Autonomous Databases in an Oracle Cloud compartment, with their lifecycle state, workload and sizing. Optionally filter by display name or workload type. Large compartments are capped — check the 'truncated' output to tell a complete listing from a partial one.",
+    "website": "https://www.flomation.co",
+    "icon": "oracle+list",
+    "date": "21/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Oracle Cloud",
+      "icon": "oracle",
+      "description": "Oracle Cloud Infrastructure (OCI) integrations"
+    },
+    "sub_category": {
+      "name": "Autonomous Database",
+      "icon": "database",
+      "description": "Oracle Cloud Autonomous Database — provision, scale, back up, clone and generate connection wallets for self-driving Oracle databases"
+    },
+    "inputs": [
+      {
+        "name": "tenancy_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Tenancy OCID",
+        "placeholder": "ocid1.tenancy.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "user_ocid",
+        "type": "string",
+        "value": null,
+        "label": "User OCID",
+        "placeholder": "ocid1.user.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "e.g. uk-london-1",
+        "required": true
+      },
+      {
+        "name": "fingerprint",
+        "type": "string",
+        "value": null,
+        "label": "Key Fingerprint",
+        "placeholder": "aa:bb:cc:… fingerprint of the uploaded API key",
+        "required": true
+      },
+      {
+        "name": "private_key",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key (PEM)",
+        "placeholder": "The API signing private key — full PEM, incl. BEGIN/END lines"
+      },
+      {
+        "name": "private_key_passphrase",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key Passphrase",
+        "placeholder": "Only if the key is encrypted (optional)"
+      },
+      {
+        "name": "compartment_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Compartment OCID",
+        "placeholder": "ocid1.compartment.oc1..aaaa… (use the tenancy OCID for the root)",
+        "required": true
+      },
+      {
+        "name": "display_name",
+        "type": "string",
+        "value": null,
+        "label": "Display Name Filter",
+        "placeholder": "Only databases with this exact display name (optional)"
+      },
+      {
+        "name": "db_workload",
+        "type": "string",
+        "value": null,
+        "label": "Workload Filter",
+        "placeholder": "Only this workload type (optional)",
+        "options": [
+          {
+            "name": "Transaction Processing (OLTP)",
+            "value": "OLTP"
+          },
+          {
+            "name": "Data Warehouse (DW)",
+            "value": "DW"
+          },
+          {
+            "name": "JSON Database (AJD)",
+            "value": "AJD"
+          },
+          {
+            "name": "APEX",
+            "value": "APEX"
+          }
+        ]
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "databases",
+        "type": "object",
+        "value": null,
+        "label": "Databases",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Count",
+        "placeholder": ""
+      },
+      {
+        "name": "truncated",
+        "type": "boolean",
+        "value": null,
+        "label": "Truncated",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "oracle/autonomousdatabase/db_get_backup": {
+    "hash": "d4614bddbefbf1ca400670c70951955d7d4d5e879bc9a3eda5219f0aea7c7969",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "OCI Autonomous Database: Get Backup",
+    "description": "Fetch the details of one Oracle Cloud Autonomous Database backup by OCID.",
+    "website": "https://www.flomation.co",
+    "icon": "oracle+circle-info",
+    "date": "21/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Oracle Cloud",
+      "icon": "oracle",
+      "description": "Oracle Cloud Infrastructure (OCI) integrations"
+    },
+    "sub_category": {
+      "name": "Autonomous Database",
+      "icon": "database",
+      "description": "Oracle Cloud Autonomous Database — provision, scale, back up, clone and generate connection wallets for self-driving Oracle databases"
+    },
+    "inputs": [
+      {
+        "name": "tenancy_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Tenancy OCID",
+        "placeholder": "ocid1.tenancy.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "user_ocid",
+        "type": "string",
+        "value": null,
+        "label": "User OCID",
+        "placeholder": "ocid1.user.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "e.g. uk-london-1",
+        "required": true
+      },
+      {
+        "name": "fingerprint",
+        "type": "string",
+        "value": null,
+        "label": "Key Fingerprint",
+        "placeholder": "aa:bb:cc:… fingerprint of the uploaded API key",
+        "required": true
+      },
+      {
+        "name": "private_key",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key (PEM)",
+        "placeholder": "The API signing private key — full PEM, incl. BEGIN/END lines"
+      },
+      {
+        "name": "private_key_passphrase",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key Passphrase",
+        "placeholder": "Only if the key is encrypted (optional)"
+      },
+      {
+        "name": "autonomous_database_backup_id",
+        "type": "string",
+        "value": null,
+        "label": "Autonomous Database Backup OCID",
+        "placeholder": "ocid1.autonomousdatabasebackup.oc1..aaaa…",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "backup",
+        "type": "object",
+        "value": null,
+        "label": "Backup",
+        "placeholder": ""
+      },
+      {
+        "name": "lifecycle_state",
+        "type": "string",
+        "value": null,
+        "label": "Lifecycle State",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "oracle/autonomousdatabase/db_get_connection_info": {
+    "hash": "c27afd99574e68c722bbb86c19b66fb869f7d73816009553fa46dc41acd25eb4",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "OCI Autonomous Database: Get Connection Info",
+    "description": "Get the connection strings and service console URLs for an Oracle Cloud Autonomous Database — everything a client or tool needs to connect, without downloading a wallet.",
+    "website": "https://www.flomation.co",
+    "icon": "oracle+plug",
+    "date": "21/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Oracle Cloud",
+      "icon": "oracle",
+      "description": "Oracle Cloud Infrastructure (OCI) integrations"
+    },
+    "sub_category": {
+      "name": "Autonomous Database",
+      "icon": "database",
+      "description": "Oracle Cloud Autonomous Database — provision, scale, back up, clone and generate connection wallets for self-driving Oracle databases"
+    },
+    "inputs": [
+      {
+        "name": "tenancy_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Tenancy OCID",
+        "placeholder": "ocid1.tenancy.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "user_ocid",
+        "type": "string",
+        "value": null,
+        "label": "User OCID",
+        "placeholder": "ocid1.user.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "e.g. uk-london-1",
+        "required": true
+      },
+      {
+        "name": "fingerprint",
+        "type": "string",
+        "value": null,
+        "label": "Key Fingerprint",
+        "placeholder": "aa:bb:cc:… fingerprint of the uploaded API key",
+        "required": true
+      },
+      {
+        "name": "private_key",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key (PEM)",
+        "placeholder": "The API signing private key — full PEM, incl. BEGIN/END lines"
+      },
+      {
+        "name": "private_key_passphrase",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key Passphrase",
+        "placeholder": "Only if the key is encrypted (optional)"
+      },
+      {
+        "name": "autonomous_database_id",
+        "type": "string",
+        "value": null,
+        "label": "Autonomous Database OCID",
+        "placeholder": "ocid1.autonomousdatabase.oc1..aaaa…",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "connection_strings",
+        "type": "object",
+        "value": null,
+        "label": "Connection Strings",
+        "placeholder": ""
+      },
+      {
+        "name": "connection_urls",
+        "type": "object",
+        "value": null,
+        "label": "Connection URLs",
+        "placeholder": ""
+      },
+      {
+        "name": "lifecycle_state",
+        "type": "string",
+        "value": null,
+        "label": "Lifecycle State",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "oracle/autonomousdatabase/db_list_backups": {
+    "hash": "76e785074d8a522503b2a19dddbabf6b741aa56d38f8e296a165892bbbd6e249",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "OCI Autonomous Database: List Backups",
+    "description": "List the backups of an Oracle Cloud Autonomous Database, or all backups in a compartment. Provide a database OCID or a compartment.",
+    "website": "https://www.flomation.co",
+    "icon": "oracle+list",
+    "date": "21/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Oracle Cloud",
+      "icon": "oracle",
+      "description": "Oracle Cloud Infrastructure (OCI) integrations"
+    },
+    "sub_category": {
+      "name": "Autonomous Database",
+      "icon": "database",
+      "description": "Oracle Cloud Autonomous Database — provision, scale, back up, clone and generate connection wallets for self-driving Oracle databases"
+    },
+    "inputs": [
+      {
+        "name": "tenancy_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Tenancy OCID",
+        "placeholder": "ocid1.tenancy.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "user_ocid",
+        "type": "string",
+        "value": null,
+        "label": "User OCID",
+        "placeholder": "ocid1.user.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "e.g. uk-london-1",
+        "required": true
+      },
+      {
+        "name": "fingerprint",
+        "type": "string",
+        "value": null,
+        "label": "Key Fingerprint",
+        "placeholder": "aa:bb:cc:… fingerprint of the uploaded API key",
+        "required": true
+      },
+      {
+        "name": "private_key",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key (PEM)",
+        "placeholder": "The API signing private key — full PEM, incl. BEGIN/END lines"
+      },
+      {
+        "name": "private_key_passphrase",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key Passphrase",
+        "placeholder": "Only if the key is encrypted (optional)"
+      },
+      {
+        "name": "autonomous_database_id",
+        "type": "string",
+        "value": null,
+        "label": "Autonomous Database OCID",
+        "placeholder": "ocid1.autonomousdatabase.oc1..aaaa… — backups of this one database (optional)"
+      },
+      {
+        "name": "compartment_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Compartment OCID",
+        "placeholder": "ocid1.compartment.oc1..aaaa… — every backup in this compartment (optional)"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "backups",
+        "type": "object",
+        "value": null,
+        "label": "Backups",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Count",
+        "placeholder": ""
+      },
+      {
+        "name": "truncated",
+        "type": "boolean",
+        "value": null,
+        "label": "Truncated",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "oracle/autonomousdatabase/db_list_character_sets": {
+    "hash": "17cfea1265c8f492322a15dd62203469534b9d1d4b6f86312ca107bbe3c177b0",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "OCI Autonomous Database: List Character Sets",
+    "description": "List the valid database or national character sets for provisioning an Oracle Cloud Autonomous Database.",
+    "website": "https://www.flomation.co",
+    "icon": "oracle+list",
+    "date": "21/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Oracle Cloud",
+      "icon": "oracle",
+      "description": "Oracle Cloud Infrastructure (OCI) integrations"
+    },
+    "sub_category": {
+      "name": "Autonomous Database",
+      "icon": "database",
+      "description": "Oracle Cloud Autonomous Database — provision, scale, back up, clone and generate connection wallets for self-driving Oracle databases"
+    },
+    "inputs": [
+      {
+        "name": "tenancy_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Tenancy OCID",
+        "placeholder": "ocid1.tenancy.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "user_ocid",
+        "type": "string",
+        "value": null,
+        "label": "User OCID",
+        "placeholder": "ocid1.user.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "e.g. uk-london-1",
+        "required": true
+      },
+      {
+        "name": "fingerprint",
+        "type": "string",
+        "value": null,
+        "label": "Key Fingerprint",
+        "placeholder": "aa:bb:cc:… fingerprint of the uploaded API key",
+        "required": true
+      },
+      {
+        "name": "private_key",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key (PEM)",
+        "placeholder": "The API signing private key — full PEM, incl. BEGIN/END lines"
+      },
+      {
+        "name": "private_key_passphrase",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key Passphrase",
+        "placeholder": "Only if the key is encrypted (optional)"
+      },
+      {
+        "name": "character_set_type",
+        "type": "string",
+        "value": null,
+        "label": "Character Set Type",
+        "placeholder": "Database or national character sets (optional)",
+        "options": [
+          {
+            "name": "Database Character Sets",
+            "value": "DATABASE"
+          },
+          {
+            "name": "National Character Sets",
+            "value": "NATIONAL"
+          }
+        ]
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "character_sets",
+        "type": "object",
+        "value": null,
+        "label": "Character Sets",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Count",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "oracle/autonomousdatabase/db_list_clones": {
+    "hash": "4f0999b60827fb2130ff30e96fe55824fa0563098dc598b3f71936952a74f74e",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "OCI Autonomous Database: List Clones",
+    "description": "List the clones created from a source Oracle Cloud Autonomous Database within a compartment.",
+    "website": "https://www.flomation.co",
+    "icon": "oracle+list",
+    "date": "21/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Oracle Cloud",
+      "icon": "oracle",
+      "description": "Oracle Cloud Infrastructure (OCI) integrations"
+    },
+    "sub_category": {
+      "name": "Autonomous Database",
+      "icon": "database",
+      "description": "Oracle Cloud Autonomous Database — provision, scale, back up, clone and generate connection wallets for self-driving Oracle databases"
+    },
+    "inputs": [
+      {
+        "name": "tenancy_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Tenancy OCID",
+        "placeholder": "ocid1.tenancy.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "user_ocid",
+        "type": "string",
+        "value": null,
+        "label": "User OCID",
+        "placeholder": "ocid1.user.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "e.g. uk-london-1",
+        "required": true
+      },
+      {
+        "name": "fingerprint",
+        "type": "string",
+        "value": null,
+        "label": "Key Fingerprint",
+        "placeholder": "aa:bb:cc:… fingerprint of the uploaded API key",
+        "required": true
+      },
+      {
+        "name": "private_key",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key (PEM)",
+        "placeholder": "The API signing private key — full PEM, incl. BEGIN/END lines"
+      },
+      {
+        "name": "private_key_passphrase",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key Passphrase",
+        "placeholder": "Only if the key is encrypted (optional)"
+      },
+      {
+        "name": "compartment_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Compartment OCID",
+        "placeholder": "ocid1.compartment.oc1..aaaa… (use the tenancy OCID for the root)",
+        "required": true
+      },
+      {
+        "name": "source_autonomous_database_id",
+        "type": "string",
+        "value": null,
+        "label": "Source Autonomous Database OCID",
+        "placeholder": "ocid1.autonomousdatabase.oc1..aaaa… (the database whose clones to list)",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "databases",
+        "type": "object",
+        "value": null,
+        "label": "Clones",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Count",
+        "placeholder": ""
+      },
+      {
+        "name": "truncated",
+        "type": "boolean",
+        "value": null,
+        "label": "Truncated",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "oracle/autonomousdatabase/db_list_versions": {
+    "hash": "f5cf429fe6e68e8780394ba3ddab9c529b7f8a033ee358969fba71b5386e5454",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "OCI Autonomous Database: List DB Versions",
+    "description": "List the available Autonomous Database engine versions in a compartment, optionally filtered by workload.",
+    "website": "https://www.flomation.co",
+    "icon": "oracle+list",
+    "date": "21/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Oracle Cloud",
+      "icon": "oracle",
+      "description": "Oracle Cloud Infrastructure (OCI) integrations"
+    },
+    "sub_category": {
+      "name": "Autonomous Database",
+      "icon": "database",
+      "description": "Oracle Cloud Autonomous Database — provision, scale, back up, clone and generate connection wallets for self-driving Oracle databases"
+    },
+    "inputs": [
+      {
+        "name": "tenancy_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Tenancy OCID",
+        "placeholder": "ocid1.tenancy.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "user_ocid",
+        "type": "string",
+        "value": null,
+        "label": "User OCID",
+        "placeholder": "ocid1.user.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "e.g. uk-london-1",
+        "required": true
+      },
+      {
+        "name": "fingerprint",
+        "type": "string",
+        "value": null,
+        "label": "Key Fingerprint",
+        "placeholder": "aa:bb:cc:… fingerprint of the uploaded API key",
+        "required": true
+      },
+      {
+        "name": "private_key",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key (PEM)",
+        "placeholder": "The API signing private key — full PEM, incl. BEGIN/END lines"
+      },
+      {
+        "name": "private_key_passphrase",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key Passphrase",
+        "placeholder": "Only if the key is encrypted (optional)"
+      },
+      {
+        "name": "compartment_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Compartment OCID",
+        "placeholder": "ocid1.compartment.oc1..aaaa… (use the tenancy OCID for the root)",
+        "required": true
+      },
+      {
+        "name": "db_workload",
+        "type": "string",
+        "value": null,
+        "label": "Workload Filter",
+        "placeholder": "Only versions for this workload type (optional)",
+        "options": [
+          {
+            "name": "Transaction Processing (OLTP)",
+            "value": "OLTP"
+          },
+          {
+            "name": "Data Warehouse (DW)",
+            "value": "DW"
+          },
+          {
+            "name": "JSON Database (AJD)",
+            "value": "AJD"
+          },
+          {
+            "name": "APEX",
+            "value": "APEX"
+          }
+        ]
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "versions",
+        "type": "object",
+        "value": null,
+        "label": "Versions",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Count",
+        "placeholder": ""
+      },
+      {
+        "name": "truncated",
+        "type": "boolean",
+        "value": null,
+        "label": "Truncated",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "oracle/autonomousdatabase/db_restart": {
+    "hash": "b81ff8503e37f92b2a474cdf04a4796e9615745b3c5355d4e0818b27351e2af7",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "OCI Autonomous Database: Restart",
+    "description": "Restart an Oracle Cloud Autonomous Database. Asynchronous — returns a work-request id while the database restarts.",
+    "website": "https://www.flomation.co",
+    "icon": "oracle+rotate",
+    "date": "21/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Oracle Cloud",
+      "icon": "oracle",
+      "description": "Oracle Cloud Infrastructure (OCI) integrations"
+    },
+    "sub_category": {
+      "name": "Autonomous Database",
+      "icon": "database",
+      "description": "Oracle Cloud Autonomous Database — provision, scale, back up, clone and generate connection wallets for self-driving Oracle databases"
+    },
+    "inputs": [
+      {
+        "name": "tenancy_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Tenancy OCID",
+        "placeholder": "ocid1.tenancy.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "user_ocid",
+        "type": "string",
+        "value": null,
+        "label": "User OCID",
+        "placeholder": "ocid1.user.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "e.g. uk-london-1",
+        "required": true
+      },
+      {
+        "name": "fingerprint",
+        "type": "string",
+        "value": null,
+        "label": "Key Fingerprint",
+        "placeholder": "aa:bb:cc:… fingerprint of the uploaded API key",
+        "required": true
+      },
+      {
+        "name": "private_key",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key (PEM)",
+        "placeholder": "The API signing private key — full PEM, incl. BEGIN/END lines"
+      },
+      {
+        "name": "private_key_passphrase",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key Passphrase",
+        "placeholder": "Only if the key is encrypted (optional)"
+      },
+      {
+        "name": "autonomous_database_id",
+        "type": "string",
+        "value": null,
+        "label": "Autonomous Database OCID",
+        "placeholder": "ocid1.autonomousdatabase.oc1..aaaa…",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "database",
+        "type": "object",
+        "value": null,
+        "label": "Database",
+        "placeholder": ""
+      },
+      {
+        "name": "lifecycle_state",
+        "type": "string",
+        "value": null,
+        "label": "Lifecycle State",
+        "placeholder": ""
+      },
+      {
+        "name": "work_request_id",
+        "type": "string",
+        "value": null,
+        "label": "Work Request ID",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "oracle/autonomousdatabase/db_restore": {
+    "hash": "272bd8e9cf5292166306ecacfc6a1aa2b4bfc035dd2c8992a7068f66d98a6a9d",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "OCI Autonomous Database: Restore",
+    "description": "Restore an Oracle Cloud Autonomous Database to a point in time (a timestamp, or the latest restore point). Asynchronous — returns a work-request id.",
+    "website": "https://www.flomation.co",
+    "icon": "oracle+clock-rotate-left",
+    "date": "21/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Oracle Cloud",
+      "icon": "oracle",
+      "description": "Oracle Cloud Infrastructure (OCI) integrations"
+    },
+    "sub_category": {
+      "name": "Autonomous Database",
+      "icon": "database",
+      "description": "Oracle Cloud Autonomous Database — provision, scale, back up, clone and generate connection wallets for self-driving Oracle databases"
+    },
+    "inputs": [
+      {
+        "name": "tenancy_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Tenancy OCID",
+        "placeholder": "ocid1.tenancy.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "user_ocid",
+        "type": "string",
+        "value": null,
+        "label": "User OCID",
+        "placeholder": "ocid1.user.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "e.g. uk-london-1",
+        "required": true
+      },
+      {
+        "name": "fingerprint",
+        "type": "string",
+        "value": null,
+        "label": "Key Fingerprint",
+        "placeholder": "aa:bb:cc:… fingerprint of the uploaded API key",
+        "required": true
+      },
+      {
+        "name": "private_key",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key (PEM)",
+        "placeholder": "The API signing private key — full PEM, incl. BEGIN/END lines"
+      },
+      {
+        "name": "private_key_passphrase",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key Passphrase",
+        "placeholder": "Only if the key is encrypted (optional)"
+      },
+      {
+        "name": "autonomous_database_id",
+        "type": "string",
+        "value": null,
+        "label": "Autonomous Database OCID",
+        "placeholder": "ocid1.autonomousdatabase.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "restore_timestamp",
+        "type": "string",
+        "value": null,
+        "label": "Restore Timestamp",
+        "placeholder": "Point in time to restore to, RFC3339 e.g. 2026-07-21T14:30:00Z (optional)"
+      },
+      {
+        "name": "restore_latest",
+        "type": "boolean",
+        "value": null,
+        "label": "Restore to Latest",
+        "placeholder": "Restore to the last known good state with the least possible data loss"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "database",
+        "type": "object",
+        "value": null,
+        "label": "Database",
+        "placeholder": ""
+      },
+      {
+        "name": "lifecycle_state",
+        "type": "string",
+        "value": null,
+        "label": "Lifecycle State",
+        "placeholder": ""
+      },
+      {
+        "name": "work_request_id",
+        "type": "string",
+        "value": null,
+        "label": "Work Request ID",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "oracle/autonomousdatabase/db_rotate_wallet": {
+    "hash": "3dc170d1da8cd7ac74cfac250dba467929ecf7e6bcc49b90250923ca57c53bbf",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "OCI Autonomous Database: Rotate Wallet",
+    "description": "Rotate (invalidate and reissue) the client wallet for an Oracle Cloud Autonomous Database. Existing downloaded wallets stop working.",
+    "website": "https://www.flomation.co",
+    "icon": "oracle+rotate",
+    "date": "21/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Oracle Cloud",
+      "icon": "oracle",
+      "description": "Oracle Cloud Infrastructure (OCI) integrations"
+    },
+    "sub_category": {
+      "name": "Autonomous Database",
+      "icon": "database",
+      "description": "Oracle Cloud Autonomous Database — provision, scale, back up, clone and generate connection wallets for self-driving Oracle databases"
+    },
+    "inputs": [
+      {
+        "name": "tenancy_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Tenancy OCID",
+        "placeholder": "ocid1.tenancy.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "user_ocid",
+        "type": "string",
+        "value": null,
+        "label": "User OCID",
+        "placeholder": "ocid1.user.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "e.g. uk-london-1",
+        "required": true
+      },
+      {
+        "name": "fingerprint",
+        "type": "string",
+        "value": null,
+        "label": "Key Fingerprint",
+        "placeholder": "aa:bb:cc:… fingerprint of the uploaded API key",
+        "required": true
+      },
+      {
+        "name": "private_key",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key (PEM)",
+        "placeholder": "The API signing private key — full PEM, incl. BEGIN/END lines"
+      },
+      {
+        "name": "private_key_passphrase",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key Passphrase",
+        "placeholder": "Only if the key is encrypted (optional)"
+      },
+      {
+        "name": "autonomous_database_id",
+        "type": "string",
+        "value": null,
+        "label": "Autonomous Database OCID",
+        "placeholder": "ocid1.autonomousdatabase.oc1..aaaa…",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "oracle/autonomousdatabase/db_scale": {
+    "hash": "9e96320750146e56fdfca05c48a8843fffb528f23c81975bf80e0ae90de5974b",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "OCI Autonomous Database: Scale",
+    "description": "Scale an Oracle Cloud Autonomous Database — change CPU count, storage, or toggle auto-scaling. Asynchronous — returns a work-request id.",
+    "website": "https://www.flomation.co",
+    "icon": "oracle+gauge",
+    "date": "21/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Oracle Cloud",
+      "icon": "oracle",
+      "description": "Oracle Cloud Infrastructure (OCI) integrations"
+    },
+    "sub_category": {
+      "name": "Autonomous Database",
+      "icon": "database",
+      "description": "Oracle Cloud Autonomous Database — provision, scale, back up, clone and generate connection wallets for self-driving Oracle databases"
+    },
+    "inputs": [
+      {
+        "name": "tenancy_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Tenancy OCID",
+        "placeholder": "ocid1.tenancy.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "user_ocid",
+        "type": "string",
+        "value": null,
+        "label": "User OCID",
+        "placeholder": "ocid1.user.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "e.g. uk-london-1",
+        "required": true
+      },
+      {
+        "name": "fingerprint",
+        "type": "string",
+        "value": null,
+        "label": "Key Fingerprint",
+        "placeholder": "aa:bb:cc:… fingerprint of the uploaded API key",
+        "required": true
+      },
+      {
+        "name": "private_key",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key (PEM)",
+        "placeholder": "The API signing private key — full PEM, incl. BEGIN/END lines"
+      },
+      {
+        "name": "private_key_passphrase",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key Passphrase",
+        "placeholder": "Only if the key is encrypted (optional)"
+      },
+      {
+        "name": "autonomous_database_id",
+        "type": "string",
+        "value": null,
+        "label": "Autonomous Database OCID",
+        "placeholder": "ocid1.autonomousdatabase.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "compute_model",
+        "type": "string",
+        "value": null,
+        "label": "Compute Model",
+        "placeholder": "Default ECPU",
+        "options": [
+          {
+            "name": "ECPU",
+            "value": "ECPU"
+          },
+          {
+            "name": "OCPU",
+            "value": "OCPU"
+          }
+        ]
+      },
+      {
+        "name": "cpu_count",
+        "type": "string",
+        "value": null,
+        "label": "CPU Count",
+        "placeholder": "New ECPU or OCPU count, e.g. 4 (leave blank to keep current)"
+      },
+      {
+        "name": "data_storage_in_tbs",
+        "type": "string",
+        "value": null,
+        "label": "Storage (TB)",
+        "placeholder": "New data storage in TB, e.g. 2 (leave blank to keep current)"
+      },
+      {
+        "name": "is_auto_scaling_enabled",
+        "type": "boolean",
+        "value": null,
+        "label": "Compute Auto-scaling",
+        "placeholder": "Toggle compute auto-scaling (leave blank to keep current)"
+      },
+      {
+        "name": "is_auto_scaling_for_storage_enabled",
+        "type": "boolean",
+        "value": null,
+        "label": "Storage Auto-scaling",
+        "placeholder": "Toggle storage auto-scaling (leave blank to keep current)"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "database",
+        "type": "object",
+        "value": null,
+        "label": "Database",
+        "placeholder": ""
+      },
+      {
+        "name": "lifecycle_state",
+        "type": "string",
+        "value": null,
+        "label": "Lifecycle State",
+        "placeholder": ""
+      },
+      {
+        "name": "work_request_id",
+        "type": "string",
+        "value": null,
+        "label": "Work Request ID",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "oracle/autonomousdatabase/db_shrink": {
+    "hash": "dac9c516436a7d4ab701107f7bacd30578e647d20b5fc30b99b088d2a8cf6860",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "OCI Autonomous Database: Shrink Storage",
+    "description": "Reclaim unused allocated storage on an Oracle Cloud Autonomous Database. Asynchronous — returns a work-request id.",
+    "website": "https://www.flomation.co",
+    "icon": "oracle+compress",
+    "date": "21/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Oracle Cloud",
+      "icon": "oracle",
+      "description": "Oracle Cloud Infrastructure (OCI) integrations"
+    },
+    "sub_category": {
+      "name": "Autonomous Database",
+      "icon": "database",
+      "description": "Oracle Cloud Autonomous Database — provision, scale, back up, clone and generate connection wallets for self-driving Oracle databases"
+    },
+    "inputs": [
+      {
+        "name": "tenancy_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Tenancy OCID",
+        "placeholder": "ocid1.tenancy.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "user_ocid",
+        "type": "string",
+        "value": null,
+        "label": "User OCID",
+        "placeholder": "ocid1.user.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "e.g. uk-london-1",
+        "required": true
+      },
+      {
+        "name": "fingerprint",
+        "type": "string",
+        "value": null,
+        "label": "Key Fingerprint",
+        "placeholder": "aa:bb:cc:… fingerprint of the uploaded API key",
+        "required": true
+      },
+      {
+        "name": "private_key",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key (PEM)",
+        "placeholder": "The API signing private key — full PEM, incl. BEGIN/END lines"
+      },
+      {
+        "name": "private_key_passphrase",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key Passphrase",
+        "placeholder": "Only if the key is encrypted (optional)"
+      },
+      {
+        "name": "autonomous_database_id",
+        "type": "string",
+        "value": null,
+        "label": "Autonomous Database OCID",
+        "placeholder": "ocid1.autonomousdatabase.oc1..aaaa…",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "database",
+        "type": "object",
+        "value": null,
+        "label": "Database",
+        "placeholder": ""
+      },
+      {
+        "name": "lifecycle_state",
+        "type": "string",
+        "value": null,
+        "label": "Lifecycle State",
+        "placeholder": ""
+      },
+      {
+        "name": "work_request_id",
+        "type": "string",
+        "value": null,
+        "label": "Work Request ID",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "oracle/autonomousdatabase/db_start": {
+    "hash": "b00055c099cfc77a44e84ae559dfa1468e6f810e41f9863f1ace88f98685ac6a",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "OCI Autonomous Database: Start",
+    "description": "Start a stopped Oracle Cloud Autonomous Database. Asynchronous — returns a work-request id while the database transitions to AVAILABLE.",
+    "website": "https://www.flomation.co",
+    "icon": "oracle+play",
+    "date": "21/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Oracle Cloud",
+      "icon": "oracle",
+      "description": "Oracle Cloud Infrastructure (OCI) integrations"
+    },
+    "sub_category": {
+      "name": "Autonomous Database",
+      "icon": "database",
+      "description": "Oracle Cloud Autonomous Database — provision, scale, back up, clone and generate connection wallets for self-driving Oracle databases"
+    },
+    "inputs": [
+      {
+        "name": "tenancy_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Tenancy OCID",
+        "placeholder": "ocid1.tenancy.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "user_ocid",
+        "type": "string",
+        "value": null,
+        "label": "User OCID",
+        "placeholder": "ocid1.user.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "e.g. uk-london-1",
+        "required": true
+      },
+      {
+        "name": "fingerprint",
+        "type": "string",
+        "value": null,
+        "label": "Key Fingerprint",
+        "placeholder": "aa:bb:cc:… fingerprint of the uploaded API key",
+        "required": true
+      },
+      {
+        "name": "private_key",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key (PEM)",
+        "placeholder": "The API signing private key — full PEM, incl. BEGIN/END lines"
+      },
+      {
+        "name": "private_key_passphrase",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key Passphrase",
+        "placeholder": "Only if the key is encrypted (optional)"
+      },
+      {
+        "name": "autonomous_database_id",
+        "type": "string",
+        "value": null,
+        "label": "Autonomous Database OCID",
+        "placeholder": "ocid1.autonomousdatabase.oc1..aaaa…",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "database",
+        "type": "object",
+        "value": null,
+        "label": "Database",
+        "placeholder": ""
+      },
+      {
+        "name": "lifecycle_state",
+        "type": "string",
+        "value": null,
+        "label": "Lifecycle State",
+        "placeholder": ""
+      },
+      {
+        "name": "work_request_id",
+        "type": "string",
+        "value": null,
+        "label": "Work Request ID",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "oracle/autonomousdatabase/db_stop": {
+    "hash": "e128a109ba26cfd23a257b040b8743f03817dc687dc1ae5e6c011a503d269dff",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "OCI Autonomous Database: Stop",
+    "description": "Stop a running Oracle Cloud Autonomous Database (halts compute billing). Asynchronous — returns a work-request id while the database transitions to STOPPED.",
+    "website": "https://www.flomation.co",
+    "icon": "oracle+stop",
+    "date": "21/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Oracle Cloud",
+      "icon": "oracle",
+      "description": "Oracle Cloud Infrastructure (OCI) integrations"
+    },
+    "sub_category": {
+      "name": "Autonomous Database",
+      "icon": "database",
+      "description": "Oracle Cloud Autonomous Database — provision, scale, back up, clone and generate connection wallets for self-driving Oracle databases"
+    },
+    "inputs": [
+      {
+        "name": "tenancy_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Tenancy OCID",
+        "placeholder": "ocid1.tenancy.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "user_ocid",
+        "type": "string",
+        "value": null,
+        "label": "User OCID",
+        "placeholder": "ocid1.user.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "e.g. uk-london-1",
+        "required": true
+      },
+      {
+        "name": "fingerprint",
+        "type": "string",
+        "value": null,
+        "label": "Key Fingerprint",
+        "placeholder": "aa:bb:cc:… fingerprint of the uploaded API key",
+        "required": true
+      },
+      {
+        "name": "private_key",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key (PEM)",
+        "placeholder": "The API signing private key — full PEM, incl. BEGIN/END lines"
+      },
+      {
+        "name": "private_key_passphrase",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key Passphrase",
+        "placeholder": "Only if the key is encrypted (optional)"
+      },
+      {
+        "name": "autonomous_database_id",
+        "type": "string",
+        "value": null,
+        "label": "Autonomous Database OCID",
+        "placeholder": "ocid1.autonomousdatabase.oc1..aaaa…",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "database",
+        "type": "object",
+        "value": null,
+        "label": "Database",
+        "placeholder": ""
+      },
+      {
+        "name": "lifecycle_state",
+        "type": "string",
+        "value": null,
+        "label": "Lifecycle State",
+        "placeholder": ""
+      },
+      {
+        "name": "work_request_id",
+        "type": "string",
+        "value": null,
+        "label": "Work Request ID",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "oracle/autonomousdatabase/db_update": {
+    "hash": "9e1e0c476918a6ace4a17148f64a1ee076e7f1339db8f9132a6271d24e90e8cc",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "OCI Autonomous Database: Update Attributes",
+    "description": "Update editable attributes of an Oracle Cloud Autonomous Database — display name, ADMIN password, license model or allowed IPs. Asynchronous — returns a work-request id.",
+    "website": "https://www.flomation.co",
+    "icon": "oracle+pen",
+    "date": "21/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Oracle Cloud",
+      "icon": "oracle",
+      "description": "Oracle Cloud Infrastructure (OCI) integrations"
+    },
+    "sub_category": {
+      "name": "Autonomous Database",
+      "icon": "database",
+      "description": "Oracle Cloud Autonomous Database — provision, scale, back up, clone and generate connection wallets for self-driving Oracle databases"
+    },
+    "inputs": [
+      {
+        "name": "tenancy_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Tenancy OCID",
+        "placeholder": "ocid1.tenancy.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "user_ocid",
+        "type": "string",
+        "value": null,
+        "label": "User OCID",
+        "placeholder": "ocid1.user.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "e.g. uk-london-1",
+        "required": true
+      },
+      {
+        "name": "fingerprint",
+        "type": "string",
+        "value": null,
+        "label": "Key Fingerprint",
+        "placeholder": "aa:bb:cc:… fingerprint of the uploaded API key",
+        "required": true
+      },
+      {
+        "name": "private_key",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key (PEM)",
+        "placeholder": "The API signing private key — full PEM, incl. BEGIN/END lines"
+      },
+      {
+        "name": "private_key_passphrase",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key Passphrase",
+        "placeholder": "Only if the key is encrypted (optional)"
+      },
+      {
+        "name": "autonomous_database_id",
+        "type": "string",
+        "value": null,
+        "label": "Autonomous Database OCID",
+        "placeholder": "ocid1.autonomousdatabase.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "display_name",
+        "type": "string",
+        "value": null,
+        "label": "Display Name",
+        "placeholder": "New friendly name shown in the console (optional)"
+      },
+      {
+        "name": "admin_password",
+        "type": "secret",
+        "value": null,
+        "label": "ADMIN Password",
+        "placeholder": "New ADMIN password — 12–30 chars, incl. upper, lower and a digit (optional)"
+      },
+      {
+        "name": "license_model",
+        "type": "string",
+        "value": null,
+        "label": "License Model",
+        "placeholder": "Optional",
+        "options": [
+          {
+            "name": "License Included",
+            "value": "LICENSE_INCLUDED"
+          },
+          {
+            "name": "Bring Your Own License",
+            "value": "BRING_YOUR_OWN_LICENSE"
+          }
+        ]
+      },
+      {
+        "name": "whitelisted_ips",
+        "type": "string",
+        "value": null,
+        "label": "Allowed IPs",
+        "placeholder": "Comma-separated IPs/CIDRs to allow (optional)"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "database",
+        "type": "object",
+        "value": null,
+        "label": "Database",
+        "placeholder": ""
+      },
+      {
+        "name": "lifecycle_state",
+        "type": "string",
+        "value": null,
+        "label": "Lifecycle State",
+        "placeholder": ""
+      },
+      {
+        "name": "work_request_id",
+        "type": "string",
+        "value": null,
+        "label": "Work Request ID",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
   "oracle/compute/availability_domain_get_all": {
     "hash": "37331990ad8c86672054deb3721080f0599983bc53827d15e6793e4aee47b92a",
     "author": "Dave McElin",
