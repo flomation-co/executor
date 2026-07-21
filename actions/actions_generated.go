@@ -72,21 +72,40 @@ import (
 	asana_user_get_all "flomation.app/automate/executor/actions/asana/user_get_all"
 	asana_workspace_get_all "flomation.app/automate/executor/actions/asana/workspace_get_all"
 	aws_dynamodb "flomation.app/automate/executor/actions/aws/dynamodb"
+	aws_ec2_attach_volume "flomation.app/automate/executor/actions/aws/ec2/attach_volume"
 	aws_ec2_authorize_security_group_egress "flomation.app/automate/executor/actions/aws/ec2/authorize_security_group_egress"
 	aws_ec2_authorize_security_group_ingress "flomation.app/automate/executor/actions/aws/ec2/authorize_security_group_ingress"
+	aws_ec2_copy_image "flomation.app/automate/executor/actions/aws/ec2/copy_image"
+	aws_ec2_copy_snapshot "flomation.app/automate/executor/actions/aws/ec2/copy_snapshot"
+	aws_ec2_create_image "flomation.app/automate/executor/actions/aws/ec2/create_image"
+	aws_ec2_create_key_pair "flomation.app/automate/executor/actions/aws/ec2/create_key_pair"
 	aws_ec2_create_security_group "flomation.app/automate/executor/actions/aws/ec2/create_security_group"
 	aws_ec2_create_snapshot "flomation.app/automate/executor/actions/aws/ec2/create_snapshot"
 	aws_ec2_create_tags "flomation.app/automate/executor/actions/aws/ec2/create_tags"
+	aws_ec2_create_volume "flomation.app/automate/executor/actions/aws/ec2/create_volume"
+	aws_ec2_delete_key_pair "flomation.app/automate/executor/actions/aws/ec2/delete_key_pair"
 	aws_ec2_delete_security_group "flomation.app/automate/executor/actions/aws/ec2/delete_security_group"
+	aws_ec2_delete_snapshot "flomation.app/automate/executor/actions/aws/ec2/delete_snapshot"
 	aws_ec2_delete_tags "flomation.app/automate/executor/actions/aws/ec2/delete_tags"
+	aws_ec2_delete_volume "flomation.app/automate/executor/actions/aws/ec2/delete_volume"
+	aws_ec2_deregister_image "flomation.app/automate/executor/actions/aws/ec2/deregister_image"
+	aws_ec2_describe_availability_zones "flomation.app/automate/executor/actions/aws/ec2/describe_availability_zones"
 	aws_ec2_describe_images "flomation.app/automate/executor/actions/aws/ec2/describe_images"
+	aws_ec2_describe_instance_status "flomation.app/automate/executor/actions/aws/ec2/describe_instance_status"
+	aws_ec2_describe_instance_types "flomation.app/automate/executor/actions/aws/ec2/describe_instance_types"
 	aws_ec2_describe_instances "flomation.app/automate/executor/actions/aws/ec2/describe_instances"
 	aws_ec2_describe_key_pairs "flomation.app/automate/executor/actions/aws/ec2/describe_key_pairs"
 	aws_ec2_describe_security_group_rules "flomation.app/automate/executor/actions/aws/ec2/describe_security_group_rules"
 	aws_ec2_describe_security_groups "flomation.app/automate/executor/actions/aws/ec2/describe_security_groups"
 	aws_ec2_describe_snapshots "flomation.app/automate/executor/actions/aws/ec2/describe_snapshots"
 	aws_ec2_describe_volumes "flomation.app/automate/executor/actions/aws/ec2/describe_volumes"
+	aws_ec2_detach_volume "flomation.app/automate/executor/actions/aws/ec2/detach_volume"
+	aws_ec2_get_console_output "flomation.app/automate/executor/actions/aws/ec2/get_console_output"
+	aws_ec2_import_key_pair "flomation.app/automate/executor/actions/aws/ec2/import_key_pair"
+	aws_ec2_modify_instance_attribute "flomation.app/automate/executor/actions/aws/ec2/modify_instance_attribute"
 	aws_ec2_modify_security_group_rules "flomation.app/automate/executor/actions/aws/ec2/modify_security_group_rules"
+	aws_ec2_modify_volume "flomation.app/automate/executor/actions/aws/ec2/modify_volume"
+	aws_ec2_monitor_instances "flomation.app/automate/executor/actions/aws/ec2/monitor_instances"
 	aws_ec2_reboot_instances "flomation.app/automate/executor/actions/aws/ec2/reboot_instances"
 	aws_ec2_revoke_security_group_egress "flomation.app/automate/executor/actions/aws/ec2/revoke_security_group_egress"
 	aws_ec2_revoke_security_group_ingress "flomation.app/automate/executor/actions/aws/ec2/revoke_security_group_ingress"
@@ -94,6 +113,7 @@ import (
 	aws_ec2_start_instances "flomation.app/automate/executor/actions/aws/ec2/start_instances"
 	aws_ec2_stop_instances "flomation.app/automate/executor/actions/aws/ec2/stop_instances"
 	aws_ec2_terminate_instances "flomation.app/automate/executor/actions/aws/ec2/terminate_instances"
+	aws_ec2_unmonitor_instances "flomation.app/automate/executor/actions/aws/ec2/unmonitor_instances"
 	aws_ec2_update_security_group_rule_descriptions_egress "flomation.app/automate/executor/actions/aws/ec2/update_security_group_rule_descriptions_egress"
 	aws_ec2_update_security_group_rule_descriptions_ingress "flomation.app/automate/executor/actions/aws/ec2/update_security_group_rule_descriptions_ingress"
 	aws_rds_add_role_to_db_cluster "flomation.app/automate/executor/actions/aws/rds/add_role_to_db_cluster"
@@ -211,10 +231,51 @@ import (
 	aws_rds_switchover_blue_green_deployment "flomation.app/automate/executor/actions/aws/rds/switchover_blue_green_deployment"
 	aws_rds_switchover_global_cluster "flomation.app/automate/executor/actions/aws/rds/switchover_global_cluster"
 	aws_rds_switchover_read_replica "flomation.app/automate/executor/actions/aws/rds/switchover_read_replica"
+	aws_s3_copy_object "flomation.app/automate/executor/actions/aws/s3/copy_object"
+	aws_s3_create_bucket "flomation.app/automate/executor/actions/aws/s3/create_bucket"
 	aws_s3_delete "flomation.app/automate/executor/actions/aws/s3/delete"
+	aws_s3_delete_bucket "flomation.app/automate/executor/actions/aws/s3/delete_bucket"
+	aws_s3_delete_bucket_cors "flomation.app/automate/executor/actions/aws/s3/delete_bucket_cors"
+	aws_s3_delete_bucket_encryption "flomation.app/automate/executor/actions/aws/s3/delete_bucket_encryption"
+	aws_s3_delete_bucket_lifecycle "flomation.app/automate/executor/actions/aws/s3/delete_bucket_lifecycle"
+	aws_s3_delete_bucket_policy "flomation.app/automate/executor/actions/aws/s3/delete_bucket_policy"
+	aws_s3_delete_bucket_tagging "flomation.app/automate/executor/actions/aws/s3/delete_bucket_tagging"
+	aws_s3_delete_bucket_website "flomation.app/automate/executor/actions/aws/s3/delete_bucket_website"
+	aws_s3_delete_object_tagging "flomation.app/automate/executor/actions/aws/s3/delete_object_tagging"
+	aws_s3_delete_objects "flomation.app/automate/executor/actions/aws/s3/delete_objects"
 	aws_s3_get "flomation.app/automate/executor/actions/aws/s3/get"
+	aws_s3_get_bucket_acl "flomation.app/automate/executor/actions/aws/s3/get_bucket_acl"
+	aws_s3_get_bucket_cors "flomation.app/automate/executor/actions/aws/s3/get_bucket_cors"
+	aws_s3_get_bucket_encryption "flomation.app/automate/executor/actions/aws/s3/get_bucket_encryption"
+	aws_s3_get_bucket_lifecycle_configuration "flomation.app/automate/executor/actions/aws/s3/get_bucket_lifecycle_configuration"
+	aws_s3_get_bucket_location "flomation.app/automate/executor/actions/aws/s3/get_bucket_location"
+	aws_s3_get_bucket_policy "flomation.app/automate/executor/actions/aws/s3/get_bucket_policy"
+	aws_s3_get_bucket_tagging "flomation.app/automate/executor/actions/aws/s3/get_bucket_tagging"
+	aws_s3_get_bucket_versioning "flomation.app/automate/executor/actions/aws/s3/get_bucket_versioning"
+	aws_s3_get_bucket_website "flomation.app/automate/executor/actions/aws/s3/get_bucket_website"
+	aws_s3_get_object_acl "flomation.app/automate/executor/actions/aws/s3/get_object_acl"
+	aws_s3_get_object_tagging "flomation.app/automate/executor/actions/aws/s3/get_object_tagging"
+	aws_s3_get_public_access_block "flomation.app/automate/executor/actions/aws/s3/get_public_access_block"
+	aws_s3_head_bucket "flomation.app/automate/executor/actions/aws/s3/head_bucket"
+	aws_s3_head_object "flomation.app/automate/executor/actions/aws/s3/head_object"
 	aws_s3_list "flomation.app/automate/executor/actions/aws/s3/list"
+	aws_s3_list_buckets "flomation.app/automate/executor/actions/aws/s3/list_buckets"
+	aws_s3_list_object_versions "flomation.app/automate/executor/actions/aws/s3/list_object_versions"
+	aws_s3_presign_get_object "flomation.app/automate/executor/actions/aws/s3/presign_get_object"
+	aws_s3_presign_put_object "flomation.app/automate/executor/actions/aws/s3/presign_put_object"
 	aws_s3_put "flomation.app/automate/executor/actions/aws/s3/put"
+	aws_s3_put_bucket_acl "flomation.app/automate/executor/actions/aws/s3/put_bucket_acl"
+	aws_s3_put_bucket_cors "flomation.app/automate/executor/actions/aws/s3/put_bucket_cors"
+	aws_s3_put_bucket_encryption "flomation.app/automate/executor/actions/aws/s3/put_bucket_encryption"
+	aws_s3_put_bucket_lifecycle_configuration "flomation.app/automate/executor/actions/aws/s3/put_bucket_lifecycle_configuration"
+	aws_s3_put_bucket_policy "flomation.app/automate/executor/actions/aws/s3/put_bucket_policy"
+	aws_s3_put_bucket_tagging "flomation.app/automate/executor/actions/aws/s3/put_bucket_tagging"
+	aws_s3_put_bucket_versioning "flomation.app/automate/executor/actions/aws/s3/put_bucket_versioning"
+	aws_s3_put_bucket_website "flomation.app/automate/executor/actions/aws/s3/put_bucket_website"
+	aws_s3_put_object_acl "flomation.app/automate/executor/actions/aws/s3/put_object_acl"
+	aws_s3_put_object_tagging "flomation.app/automate/executor/actions/aws/s3/put_object_tagging"
+	aws_s3_put_public_access_block "flomation.app/automate/executor/actions/aws/s3/put_public_access_block"
+	aws_s3_restore_object "flomation.app/automate/executor/actions/aws/s3/restore_object"
 	aws_vpc_accept_transit_gateway_peering_attachment "flomation.app/automate/executor/actions/aws/vpc/accept_transit_gateway_peering_attachment"
 	aws_vpc_accept_transit_gateway_vpc_attachment "flomation.app/automate/executor/actions/aws/vpc/accept_transit_gateway_vpc_attachment"
 	aws_vpc_accept_vpc_endpoint_connections "flomation.app/automate/executor/actions/aws/vpc/accept_vpc_endpoint_connections"
@@ -1913,21 +1974,40 @@ var Actions = map[string]core.Action{
 	"asana/user_get_all":                       asana_user_get_all.Execute,
 	"asana/workspace_get_all":                  asana_workspace_get_all.Execute,
 	"aws/dynamodb":                             aws_dynamodb.Execute,
+	"aws/ec2/attach_volume":                    aws_ec2_attach_volume.Execute,
 	"aws/ec2/authorize_security_group_egress":  aws_ec2_authorize_security_group_egress.Execute,
 	"aws/ec2/authorize_security_group_ingress": aws_ec2_authorize_security_group_ingress.Execute,
+	"aws/ec2/copy_image":                       aws_ec2_copy_image.Execute,
+	"aws/ec2/copy_snapshot":                    aws_ec2_copy_snapshot.Execute,
+	"aws/ec2/create_image":                     aws_ec2_create_image.Execute,
+	"aws/ec2/create_key_pair":                  aws_ec2_create_key_pair.Execute,
 	"aws/ec2/create_security_group":            aws_ec2_create_security_group.Execute,
 	"aws/ec2/create_snapshot":                  aws_ec2_create_snapshot.Execute,
 	"aws/ec2/create_tags":                      aws_ec2_create_tags.Execute,
+	"aws/ec2/create_volume":                    aws_ec2_create_volume.Execute,
+	"aws/ec2/delete_key_pair":                  aws_ec2_delete_key_pair.Execute,
 	"aws/ec2/delete_security_group":            aws_ec2_delete_security_group.Execute,
+	"aws/ec2/delete_snapshot":                  aws_ec2_delete_snapshot.Execute,
 	"aws/ec2/delete_tags":                      aws_ec2_delete_tags.Execute,
+	"aws/ec2/delete_volume":                    aws_ec2_delete_volume.Execute,
+	"aws/ec2/deregister_image":                 aws_ec2_deregister_image.Execute,
+	"aws/ec2/describe_availability_zones":      aws_ec2_describe_availability_zones.Execute,
 	"aws/ec2/describe_images":                  aws_ec2_describe_images.Execute,
+	"aws/ec2/describe_instance_status":         aws_ec2_describe_instance_status.Execute,
+	"aws/ec2/describe_instance_types":          aws_ec2_describe_instance_types.Execute,
 	"aws/ec2/describe_instances":               aws_ec2_describe_instances.Execute,
 	"aws/ec2/describe_key_pairs":               aws_ec2_describe_key_pairs.Execute,
 	"aws/ec2/describe_security_group_rules":    aws_ec2_describe_security_group_rules.Execute,
 	"aws/ec2/describe_security_groups":         aws_ec2_describe_security_groups.Execute,
 	"aws/ec2/describe_snapshots":               aws_ec2_describe_snapshots.Execute,
 	"aws/ec2/describe_volumes":                 aws_ec2_describe_volumes.Execute,
+	"aws/ec2/detach_volume":                    aws_ec2_detach_volume.Execute,
+	"aws/ec2/get_console_output":               aws_ec2_get_console_output.Execute,
+	"aws/ec2/import_key_pair":                  aws_ec2_import_key_pair.Execute,
+	"aws/ec2/modify_instance_attribute":        aws_ec2_modify_instance_attribute.Execute,
 	"aws/ec2/modify_security_group_rules":      aws_ec2_modify_security_group_rules.Execute,
+	"aws/ec2/modify_volume":                    aws_ec2_modify_volume.Execute,
+	"aws/ec2/monitor_instances":                aws_ec2_monitor_instances.Execute,
 	"aws/ec2/reboot_instances":                 aws_ec2_reboot_instances.Execute,
 	"aws/ec2/revoke_security_group_egress":     aws_ec2_revoke_security_group_egress.Execute,
 	"aws/ec2/revoke_security_group_ingress":    aws_ec2_revoke_security_group_ingress.Execute,
@@ -1935,6 +2015,7 @@ var Actions = map[string]core.Action{
 	"aws/ec2/start_instances":                  aws_ec2_start_instances.Execute,
 	"aws/ec2/stop_instances":                   aws_ec2_stop_instances.Execute,
 	"aws/ec2/terminate_instances":              aws_ec2_terminate_instances.Execute,
+	"aws/ec2/unmonitor_instances":              aws_ec2_unmonitor_instances.Execute,
 	"aws/ec2/update_security_group_rule_descriptions_egress":         aws_ec2_update_security_group_rule_descriptions_egress.Execute,
 	"aws/ec2/update_security_group_rule_descriptions_ingress":        aws_ec2_update_security_group_rule_descriptions_ingress.Execute,
 	"aws/rds/add_role_to_db_cluster":                                 aws_rds_add_role_to_db_cluster.Execute,
@@ -2052,10 +2133,51 @@ var Actions = map[string]core.Action{
 	"aws/rds/switchover_blue_green_deployment":                       aws_rds_switchover_blue_green_deployment.Execute,
 	"aws/rds/switchover_global_cluster":                              aws_rds_switchover_global_cluster.Execute,
 	"aws/rds/switchover_read_replica":                                aws_rds_switchover_read_replica.Execute,
+	"aws/s3/copy_object":                                             aws_s3_copy_object.Execute,
+	"aws/s3/create_bucket":                                           aws_s3_create_bucket.Execute,
 	"aws/s3/delete":                                                  aws_s3_delete.Execute,
+	"aws/s3/delete_bucket":                                           aws_s3_delete_bucket.Execute,
+	"aws/s3/delete_bucket_cors":                                      aws_s3_delete_bucket_cors.Execute,
+	"aws/s3/delete_bucket_encryption":                                aws_s3_delete_bucket_encryption.Execute,
+	"aws/s3/delete_bucket_lifecycle":                                 aws_s3_delete_bucket_lifecycle.Execute,
+	"aws/s3/delete_bucket_policy":                                    aws_s3_delete_bucket_policy.Execute,
+	"aws/s3/delete_bucket_tagging":                                   aws_s3_delete_bucket_tagging.Execute,
+	"aws/s3/delete_bucket_website":                                   aws_s3_delete_bucket_website.Execute,
+	"aws/s3/delete_object_tagging":                                   aws_s3_delete_object_tagging.Execute,
+	"aws/s3/delete_objects":                                          aws_s3_delete_objects.Execute,
 	"aws/s3/get":                                                     aws_s3_get.Execute,
+	"aws/s3/get_bucket_acl":                                          aws_s3_get_bucket_acl.Execute,
+	"aws/s3/get_bucket_cors":                                         aws_s3_get_bucket_cors.Execute,
+	"aws/s3/get_bucket_encryption":                                   aws_s3_get_bucket_encryption.Execute,
+	"aws/s3/get_bucket_lifecycle_configuration":                      aws_s3_get_bucket_lifecycle_configuration.Execute,
+	"aws/s3/get_bucket_location":                                     aws_s3_get_bucket_location.Execute,
+	"aws/s3/get_bucket_policy":                                       aws_s3_get_bucket_policy.Execute,
+	"aws/s3/get_bucket_tagging":                                      aws_s3_get_bucket_tagging.Execute,
+	"aws/s3/get_bucket_versioning":                                   aws_s3_get_bucket_versioning.Execute,
+	"aws/s3/get_bucket_website":                                      aws_s3_get_bucket_website.Execute,
+	"aws/s3/get_object_acl":                                          aws_s3_get_object_acl.Execute,
+	"aws/s3/get_object_tagging":                                      aws_s3_get_object_tagging.Execute,
+	"aws/s3/get_public_access_block":                                 aws_s3_get_public_access_block.Execute,
+	"aws/s3/head_bucket":                                             aws_s3_head_bucket.Execute,
+	"aws/s3/head_object":                                             aws_s3_head_object.Execute,
 	"aws/s3/list":                                                    aws_s3_list.Execute,
+	"aws/s3/list_buckets":                                            aws_s3_list_buckets.Execute,
+	"aws/s3/list_object_versions":                                    aws_s3_list_object_versions.Execute,
+	"aws/s3/presign_get_object":                                      aws_s3_presign_get_object.Execute,
+	"aws/s3/presign_put_object":                                      aws_s3_presign_put_object.Execute,
 	"aws/s3/put":                                                     aws_s3_put.Execute,
+	"aws/s3/put_bucket_acl":                                          aws_s3_put_bucket_acl.Execute,
+	"aws/s3/put_bucket_cors":                                         aws_s3_put_bucket_cors.Execute,
+	"aws/s3/put_bucket_encryption":                                   aws_s3_put_bucket_encryption.Execute,
+	"aws/s3/put_bucket_lifecycle_configuration":                      aws_s3_put_bucket_lifecycle_configuration.Execute,
+	"aws/s3/put_bucket_policy":                                       aws_s3_put_bucket_policy.Execute,
+	"aws/s3/put_bucket_tagging":                                      aws_s3_put_bucket_tagging.Execute,
+	"aws/s3/put_bucket_versioning":                                   aws_s3_put_bucket_versioning.Execute,
+	"aws/s3/put_bucket_website":                                      aws_s3_put_bucket_website.Execute,
+	"aws/s3/put_object_acl":                                          aws_s3_put_object_acl.Execute,
+	"aws/s3/put_object_tagging":                                      aws_s3_put_object_tagging.Execute,
+	"aws/s3/put_public_access_block":                                 aws_s3_put_public_access_block.Execute,
+	"aws/s3/restore_object":                                          aws_s3_restore_object.Execute,
 	"aws/vpc/accept_transit_gateway_peering_attachment":              aws_vpc_accept_transit_gateway_peering_attachment.Execute,
 	"aws/vpc/accept_transit_gateway_vpc_attachment":                  aws_vpc_accept_transit_gateway_vpc_attachment.Execute,
 	"aws/vpc/accept_vpc_endpoint_connections":                        aws_vpc_accept_vpc_endpoint_connections.Execute,
