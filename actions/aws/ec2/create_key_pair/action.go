@@ -1,0 +1,86 @@
+// Package aws_ec2_create_key_pair creates an EC2 key pair and returns the
+// private key material.
+package aws_ec2_create_key_pair
+
+import (
+	"context"
+	"fmt"
+
+	core "flomation.app/automate/executor"
+	awscommon "flomation.app/automate/executor/actions/aws"
+	"github.com/aws/aws-sdk-go-v2/aws"
+	"github.com/aws/aws-sdk-go-v2/service/ec2"
+	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
+)
+
+const (
+	Author       = "Andy Esser"
+	Organisation = "Flomation"
+	Name         = "AWS EC2 Create Key Pair"
+	Description  = "Create an EC2 key pair and return its private key material."
+	Website      = "https://www.flomation.co"
+	Icon         = "key+plus"
+	Date         = "21/07/2026"
+	Type         = core.ActionTypeAction
+)
+
+var Inputs = [...]core.Connection{
+	{Name: "auth_method", Type: core.ConnectionTypeString, Label: "Authentication", Required: true, Options: []core.ConnectionOption{
+		{Name: "Access Keys", Value: "keys"},
+		{Name: "Assume Role (cross-account)", Value: "assume_role"},
+		{Name: "Managed Role (Credential)", Value: "credential"},
+	}},
+	{Name: "aws_access_key", Type: core.ConnectionTypeSecret, Label: "AWS Access Key", Required: true, Visible: &core.VisibleWhen{Field: "auth_method", Values: []string{"keys"}}},
+	{Name: "aws_secret_key", Type: core.ConnectionTypeSecret, Label: "AWS Secret Key", Required: true, Visible: &core.VisibleWhen{Field: "auth_method", Values: []string{"keys"}}},
+	{Name: "aws_region", Type: core.ConnectionTypeString, Label: "Region", Placeholder: "eu-west-2", Required: true},
+	{Name: "aws_session_token", Type: core.ConnectionTypeSecret, Label: "Session Token (optional)", Visible: &core.VisibleWhen{Field: "auth_method", Values: []string{"keys"}}},
+	{Name: "assume_role_arn", Type: core.ConnectionTypeString, Label: "Role ARN to Assume", Placeholder: "arn:aws:iam::<your-account>:role/FlomationAccess", Required: true, Visible: &core.VisibleWhen{Field: "auth_method", Values: []string{"assume_role"}}},
+	{Name: "external_id", Type: core.ConnectionTypeString, Label: "Assume Role External ID (optional)", Placeholder: "Must match the External ID in the role's trust policy", Visible: &core.VisibleWhen{Field: "auth_method", Values: []string{"assume_role"}}},
+	{Name: "credential", Type: core.ConnectionTypeCredential, Label: "AWS Role Credential", Required: true, Visible: &core.VisibleWhen{Field: "auth_method", Values: []string{"credential"}}},
+	{Name: "key_name", Type: core.ConnectionTypeString, Label: "Key Pair Name", Placeholder: "my-key-pair", Required: true},
+	{Name: "key_type", Type: core.ConnectionTypeString, Label: "Key Type", Options: []core.ConnectionOption{
+		{Name: "RSA", Value: "rsa"},
+		{Name: "ED25519", Value: "ed25519"},
+	}},
+}
+
+var Outputs = [...]core.Connection{
+	{Name: "tool_result", Type: core.ConnectionTypeString, Label: "Result summary"},
+	{Name: "key_name", Type: core.ConnectionTypeString, Label: "Key Pair Name"},
+	{Name: "key_pair_id", Type: core.ConnectionTypeString, Label: "Key Pair ID"},
+	{Name: "key_fingerprint", Type: core.ConnectionTypeString, Label: "Key Fingerprint"},
+	{Name: "key_material", Type: core.ConnectionTypeString, Label: "Private Key Material (SENSITIVE)"},
+}
+
+func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[string]interface{}, error) {
+	ctx := context.Background()
+
+	keyName := awscommon.InputString("key_name", inputs)
+	if keyName == "" {
+		return nil, fmt.Errorf("key name is required")
+	}
+
+	cfg, err := awscommon.ConfigFromInputs(ctx, inputs)
+	if err != nil {
+		return nil, err
+	}
+	client := ec2.NewFromConfig(cfg)
+
+	in := &ec2.CreateKeyPairInput{KeyName: aws.String(keyName)}
+	if kt := awscommon.InputString("key_type", inputs); kt != "" {
+		in.KeyType = types.KeyType(kt)
+	}
+
+	out, err := client.CreateKeyPair(ctx, in)
+	if err != nil {
+		return nil, err
+	}
+
+	return map[string]interface{}{
+		"tool_result":     fmt.Sprintf("Created key pair %s (%s)", keyName, aws.ToString(out.KeyPairId)),
+		"key_name":        aws.ToString(out.KeyName),
+		"key_pair_id":     aws.ToString(out.KeyPairId),
+		"key_fingerprint": aws.ToString(out.KeyFingerprint),
+		"key_material":    aws.ToString(out.KeyMaterial),
+	}, nil
+}
