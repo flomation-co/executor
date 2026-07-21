@@ -91,6 +91,9 @@ import (
 	aws_ec2_terminate_instances "flomation.app/automate/executor/actions/aws/ec2/terminate_instances"
 	aws_rds_add_role_to_db_cluster "flomation.app/automate/executor/actions/aws/rds/add_role_to_db_cluster"
 	aws_rds_add_tags_to_resource "flomation.app/automate/executor/actions/aws/rds/add_tags_to_resource"
+	aws_rds_batch_execute_statement "flomation.app/automate/executor/actions/aws/rds/batch_execute_statement"
+	aws_rds_begin_transaction "flomation.app/automate/executor/actions/aws/rds/begin_transaction"
+	aws_rds_commit_transaction "flomation.app/automate/executor/actions/aws/rds/commit_transaction"
 	aws_rds_copy_db_cluster_snapshot "flomation.app/automate/executor/actions/aws/rds/copy_db_cluster_snapshot"
 	aws_rds_copy_db_snapshot "flomation.app/automate/executor/actions/aws/rds/copy_db_snapshot"
 	aws_rds_create_blue_green_deployment "flomation.app/automate/executor/actions/aws/rds/create_blue_green_deployment"
@@ -140,6 +143,7 @@ import (
 	aws_rds_describe_option_groups "flomation.app/automate/executor/actions/aws/rds/describe_option_groups"
 	aws_rds_describe_reserved_db_instances "flomation.app/automate/executor/actions/aws/rds/describe_reserved_db_instances"
 	aws_rds_download_db_log_file_portion "flomation.app/automate/executor/actions/aws/rds/download_db_log_file_portion"
+	aws_rds_execute_statement "flomation.app/automate/executor/actions/aws/rds/execute_statement"
 	aws_rds_failover_db_cluster "flomation.app/automate/executor/actions/aws/rds/failover_db_cluster"
 	aws_rds_failover_global_cluster "flomation.app/automate/executor/actions/aws/rds/failover_global_cluster"
 	aws_rds_list_tags_for_resource "flomation.app/automate/executor/actions/aws/rds/list_tags_for_resource"
@@ -162,6 +166,7 @@ import (
 	aws_rds_restore_db_cluster_to_point_in_time "flomation.app/automate/executor/actions/aws/rds/restore_db_cluster_to_point_in_time"
 	aws_rds_restore_db_instance_from_db_snapshot "flomation.app/automate/executor/actions/aws/rds/restore_db_instance_from_db_snapshot"
 	aws_rds_restore_db_instance_to_point_in_time "flomation.app/automate/executor/actions/aws/rds/restore_db_instance_to_point_in_time"
+	aws_rds_rollback_transaction "flomation.app/automate/executor/actions/aws/rds/rollback_transaction"
 	aws_rds_start_db_cluster "flomation.app/automate/executor/actions/aws/rds/start_db_cluster"
 	aws_rds_start_db_instance "flomation.app/automate/executor/actions/aws/rds/start_db_instance"
 	aws_rds_stop_db_cluster "flomation.app/automate/executor/actions/aws/rds/stop_db_cluster"
@@ -1674,6 +1679,9 @@ var Actions = map[string]core.Action{
 	"aws/ec2/terminate_instances":                                    aws_ec2_terminate_instances.Execute,
 	"aws/rds/add_role_to_db_cluster":                                 aws_rds_add_role_to_db_cluster.Execute,
 	"aws/rds/add_tags_to_resource":                                   aws_rds_add_tags_to_resource.Execute,
+	"aws/rds/batch_execute_statement":                                aws_rds_batch_execute_statement.Execute,
+	"aws/rds/begin_transaction":                                      aws_rds_begin_transaction.Execute,
+	"aws/rds/commit_transaction":                                     aws_rds_commit_transaction.Execute,
 	"aws/rds/copy_db_cluster_snapshot":                               aws_rds_copy_db_cluster_snapshot.Execute,
 	"aws/rds/copy_db_snapshot":                                       aws_rds_copy_db_snapshot.Execute,
 	"aws/rds/create_blue_green_deployment":                           aws_rds_create_blue_green_deployment.Execute,
@@ -1723,6 +1731,7 @@ var Actions = map[string]core.Action{
 	"aws/rds/describe_option_groups":                                 aws_rds_describe_option_groups.Execute,
 	"aws/rds/describe_reserved_db_instances":                         aws_rds_describe_reserved_db_instances.Execute,
 	"aws/rds/download_db_log_file_portion":                           aws_rds_download_db_log_file_portion.Execute,
+	"aws/rds/execute_statement":                                      aws_rds_execute_statement.Execute,
 	"aws/rds/failover_db_cluster":                                    aws_rds_failover_db_cluster.Execute,
 	"aws/rds/failover_global_cluster":                                aws_rds_failover_global_cluster.Execute,
 	"aws/rds/list_tags_for_resource":                                 aws_rds_list_tags_for_resource.Execute,
@@ -1745,6 +1754,7 @@ var Actions = map[string]core.Action{
 	"aws/rds/restore_db_cluster_to_point_in_time":                    aws_rds_restore_db_cluster_to_point_in_time.Execute,
 	"aws/rds/restore_db_instance_from_db_snapshot":                   aws_rds_restore_db_instance_from_db_snapshot.Execute,
 	"aws/rds/restore_db_instance_to_point_in_time":                   aws_rds_restore_db_instance_to_point_in_time.Execute,
+	"aws/rds/rollback_transaction":                                   aws_rds_rollback_transaction.Execute,
 	"aws/rds/start_db_cluster":                                       aws_rds_start_db_cluster.Execute,
 	"aws/rds/start_db_instance":                                      aws_rds_start_db_instance.Execute,
 	"aws/rds/stop_db_cluster":                                        aws_rds_stop_db_cluster.Execute,
