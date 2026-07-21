@@ -234,9 +234,15 @@ import (
 	aws_s3_abort_multipart_upload "flomation.app/automate/executor/actions/aws/s3/abort_multipart_upload"
 	aws_s3_complete_multipart_upload "flomation.app/automate/executor/actions/aws/s3/complete_multipart_upload"
 	aws_s3_copy_object "flomation.app/automate/executor/actions/aws/s3/copy_object"
+	aws_s3_create_access_point "flomation.app/automate/executor/actions/aws/s3/create_access_point"
 	aws_s3_create_bucket "flomation.app/automate/executor/actions/aws/s3/create_bucket"
+	aws_s3_create_job "flomation.app/automate/executor/actions/aws/s3/create_job"
+	aws_s3_create_multi_region_access_point "flomation.app/automate/executor/actions/aws/s3/create_multi_region_access_point"
 	aws_s3_create_multipart_upload "flomation.app/automate/executor/actions/aws/s3/create_multipart_upload"
 	aws_s3_delete "flomation.app/automate/executor/actions/aws/s3/delete"
+	aws_s3_delete_access_point "flomation.app/automate/executor/actions/aws/s3/delete_access_point"
+	aws_s3_delete_access_point_policy "flomation.app/automate/executor/actions/aws/s3/delete_access_point_policy"
+	aws_s3_delete_account_public_access_block "flomation.app/automate/executor/actions/aws/s3/delete_account_public_access_block"
 	aws_s3_delete_bucket "flomation.app/automate/executor/actions/aws/s3/delete_bucket"
 	aws_s3_delete_bucket_cors "flomation.app/automate/executor/actions/aws/s3/delete_bucket_cors"
 	aws_s3_delete_bucket_encryption "flomation.app/automate/executor/actions/aws/s3/delete_bucket_encryption"
@@ -246,9 +252,17 @@ import (
 	aws_s3_delete_bucket_replication "flomation.app/automate/executor/actions/aws/s3/delete_bucket_replication"
 	aws_s3_delete_bucket_tagging "flomation.app/automate/executor/actions/aws/s3/delete_bucket_tagging"
 	aws_s3_delete_bucket_website "flomation.app/automate/executor/actions/aws/s3/delete_bucket_website"
+	aws_s3_delete_job_tagging "flomation.app/automate/executor/actions/aws/s3/delete_job_tagging"
+	aws_s3_delete_multi_region_access_point "flomation.app/automate/executor/actions/aws/s3/delete_multi_region_access_point"
 	aws_s3_delete_object_tagging "flomation.app/automate/executor/actions/aws/s3/delete_object_tagging"
 	aws_s3_delete_objects "flomation.app/automate/executor/actions/aws/s3/delete_objects"
+	aws_s3_delete_storage_lens_configuration "flomation.app/automate/executor/actions/aws/s3/delete_storage_lens_configuration"
+	aws_s3_describe_job "flomation.app/automate/executor/actions/aws/s3/describe_job"
 	aws_s3_get "flomation.app/automate/executor/actions/aws/s3/get"
+	aws_s3_get_access_point "flomation.app/automate/executor/actions/aws/s3/get_access_point"
+	aws_s3_get_access_point_policy "flomation.app/automate/executor/actions/aws/s3/get_access_point_policy"
+	aws_s3_get_access_point_policy_status "flomation.app/automate/executor/actions/aws/s3/get_access_point_policy_status"
+	aws_s3_get_account_public_access_block "flomation.app/automate/executor/actions/aws/s3/get_account_public_access_block"
 	aws_s3_get_bucket_accelerate_configuration "flomation.app/automate/executor/actions/aws/s3/get_bucket_accelerate_configuration"
 	aws_s3_get_bucket_acl "flomation.app/automate/executor/actions/aws/s3/get_bucket_acl"
 	aws_s3_get_bucket_cors "flomation.app/automate/executor/actions/aws/s3/get_bucket_cors"
@@ -265,6 +279,8 @@ import (
 	aws_s3_get_bucket_tagging "flomation.app/automate/executor/actions/aws/s3/get_bucket_tagging"
 	aws_s3_get_bucket_versioning "flomation.app/automate/executor/actions/aws/s3/get_bucket_versioning"
 	aws_s3_get_bucket_website "flomation.app/automate/executor/actions/aws/s3/get_bucket_website"
+	aws_s3_get_job_tagging "flomation.app/automate/executor/actions/aws/s3/get_job_tagging"
+	aws_s3_get_multi_region_access_point "flomation.app/automate/executor/actions/aws/s3/get_multi_region_access_point"
 	aws_s3_get_object_acl "flomation.app/automate/executor/actions/aws/s3/get_object_acl"
 	aws_s3_get_object_attributes "flomation.app/automate/executor/actions/aws/s3/get_object_attributes"
 	aws_s3_get_object_legal_hold "flomation.app/automate/executor/actions/aws/s3/get_object_legal_hold"
@@ -273,16 +289,24 @@ import (
 	aws_s3_get_object_tagging "flomation.app/automate/executor/actions/aws/s3/get_object_tagging"
 	aws_s3_get_object_torrent "flomation.app/automate/executor/actions/aws/s3/get_object_torrent"
 	aws_s3_get_public_access_block "flomation.app/automate/executor/actions/aws/s3/get_public_access_block"
+	aws_s3_get_storage_lens_configuration "flomation.app/automate/executor/actions/aws/s3/get_storage_lens_configuration"
+	aws_s3_get_storage_lens_configuration_tagging "flomation.app/automate/executor/actions/aws/s3/get_storage_lens_configuration_tagging"
 	aws_s3_head_bucket "flomation.app/automate/executor/actions/aws/s3/head_bucket"
 	aws_s3_head_object "flomation.app/automate/executor/actions/aws/s3/head_object"
 	aws_s3_list "flomation.app/automate/executor/actions/aws/s3/list"
+	aws_s3_list_access_points "flomation.app/automate/executor/actions/aws/s3/list_access_points"
 	aws_s3_list_buckets "flomation.app/automate/executor/actions/aws/s3/list_buckets"
+	aws_s3_list_jobs "flomation.app/automate/executor/actions/aws/s3/list_jobs"
+	aws_s3_list_multi_region_access_points "flomation.app/automate/executor/actions/aws/s3/list_multi_region_access_points"
 	aws_s3_list_multipart_uploads "flomation.app/automate/executor/actions/aws/s3/list_multipart_uploads"
 	aws_s3_list_object_versions "flomation.app/automate/executor/actions/aws/s3/list_object_versions"
 	aws_s3_list_parts "flomation.app/automate/executor/actions/aws/s3/list_parts"
+	aws_s3_list_storage_lens_configurations "flomation.app/automate/executor/actions/aws/s3/list_storage_lens_configurations"
 	aws_s3_presign_get_object "flomation.app/automate/executor/actions/aws/s3/presign_get_object"
 	aws_s3_presign_put_object "flomation.app/automate/executor/actions/aws/s3/presign_put_object"
 	aws_s3_put "flomation.app/automate/executor/actions/aws/s3/put"
+	aws_s3_put_access_point_policy "flomation.app/automate/executor/actions/aws/s3/put_access_point_policy"
+	aws_s3_put_account_public_access_block "flomation.app/automate/executor/actions/aws/s3/put_account_public_access_block"
 	aws_s3_put_bucket_accelerate_configuration "flomation.app/automate/executor/actions/aws/s3/put_bucket_accelerate_configuration"
 	aws_s3_put_bucket_acl "flomation.app/automate/executor/actions/aws/s3/put_bucket_acl"
 	aws_s3_put_bucket_cors "flomation.app/automate/executor/actions/aws/s3/put_bucket_cors"
@@ -297,14 +321,19 @@ import (
 	aws_s3_put_bucket_tagging "flomation.app/automate/executor/actions/aws/s3/put_bucket_tagging"
 	aws_s3_put_bucket_versioning "flomation.app/automate/executor/actions/aws/s3/put_bucket_versioning"
 	aws_s3_put_bucket_website "flomation.app/automate/executor/actions/aws/s3/put_bucket_website"
+	aws_s3_put_job_tagging "flomation.app/automate/executor/actions/aws/s3/put_job_tagging"
 	aws_s3_put_object_acl "flomation.app/automate/executor/actions/aws/s3/put_object_acl"
 	aws_s3_put_object_legal_hold "flomation.app/automate/executor/actions/aws/s3/put_object_legal_hold"
 	aws_s3_put_object_lock_configuration "flomation.app/automate/executor/actions/aws/s3/put_object_lock_configuration"
 	aws_s3_put_object_retention "flomation.app/automate/executor/actions/aws/s3/put_object_retention"
 	aws_s3_put_object_tagging "flomation.app/automate/executor/actions/aws/s3/put_object_tagging"
 	aws_s3_put_public_access_block "flomation.app/automate/executor/actions/aws/s3/put_public_access_block"
+	aws_s3_put_storage_lens_configuration "flomation.app/automate/executor/actions/aws/s3/put_storage_lens_configuration"
+	aws_s3_put_storage_lens_configuration_tagging "flomation.app/automate/executor/actions/aws/s3/put_storage_lens_configuration_tagging"
 	aws_s3_restore_object "flomation.app/automate/executor/actions/aws/s3/restore_object"
 	aws_s3_select_object_content "flomation.app/automate/executor/actions/aws/s3/select_object_content"
+	aws_s3_update_job_priority "flomation.app/automate/executor/actions/aws/s3/update_job_priority"
+	aws_s3_update_job_status "flomation.app/automate/executor/actions/aws/s3/update_job_status"
 	aws_s3_upload_part "flomation.app/automate/executor/actions/aws/s3/upload_part"
 	aws_s3_upload_part_copy "flomation.app/automate/executor/actions/aws/s3/upload_part_copy"
 	aws_vpc_accept_transit_gateway_peering_attachment "flomation.app/automate/executor/actions/aws/vpc/accept_transit_gateway_peering_attachment"
@@ -2191,9 +2220,15 @@ var Actions = map[string]core.Action{
 	"aws/s3/abort_multipart_upload":                                  aws_s3_abort_multipart_upload.Execute,
 	"aws/s3/complete_multipart_upload":                               aws_s3_complete_multipart_upload.Execute,
 	"aws/s3/copy_object":                                             aws_s3_copy_object.Execute,
+	"aws/s3/create_access_point":                                     aws_s3_create_access_point.Execute,
 	"aws/s3/create_bucket":                                           aws_s3_create_bucket.Execute,
+	"aws/s3/create_job":                                              aws_s3_create_job.Execute,
+	"aws/s3/create_multi_region_access_point":                        aws_s3_create_multi_region_access_point.Execute,
 	"aws/s3/create_multipart_upload":                                 aws_s3_create_multipart_upload.Execute,
 	"aws/s3/delete":                                                  aws_s3_delete.Execute,
+	"aws/s3/delete_access_point":                                     aws_s3_delete_access_point.Execute,
+	"aws/s3/delete_access_point_policy":                              aws_s3_delete_access_point_policy.Execute,
+	"aws/s3/delete_account_public_access_block":                      aws_s3_delete_account_public_access_block.Execute,
 	"aws/s3/delete_bucket":                                           aws_s3_delete_bucket.Execute,
 	"aws/s3/delete_bucket_cors":                                      aws_s3_delete_bucket_cors.Execute,
 	"aws/s3/delete_bucket_encryption":                                aws_s3_delete_bucket_encryption.Execute,
@@ -2203,9 +2238,17 @@ var Actions = map[string]core.Action{
 	"aws/s3/delete_bucket_replication":                               aws_s3_delete_bucket_replication.Execute,
 	"aws/s3/delete_bucket_tagging":                                   aws_s3_delete_bucket_tagging.Execute,
 	"aws/s3/delete_bucket_website":                                   aws_s3_delete_bucket_website.Execute,
+	"aws/s3/delete_job_tagging":                                      aws_s3_delete_job_tagging.Execute,
+	"aws/s3/delete_multi_region_access_point":                        aws_s3_delete_multi_region_access_point.Execute,
 	"aws/s3/delete_object_tagging":                                   aws_s3_delete_object_tagging.Execute,
 	"aws/s3/delete_objects":                                          aws_s3_delete_objects.Execute,
+	"aws/s3/delete_storage_lens_configuration":                       aws_s3_delete_storage_lens_configuration.Execute,
+	"aws/s3/describe_job":                                            aws_s3_describe_job.Execute,
 	"aws/s3/get":                                                     aws_s3_get.Execute,
+	"aws/s3/get_access_point":                                        aws_s3_get_access_point.Execute,
+	"aws/s3/get_access_point_policy":                                 aws_s3_get_access_point_policy.Execute,
+	"aws/s3/get_access_point_policy_status":                          aws_s3_get_access_point_policy_status.Execute,
+	"aws/s3/get_account_public_access_block":                         aws_s3_get_account_public_access_block.Execute,
 	"aws/s3/get_bucket_accelerate_configuration":                     aws_s3_get_bucket_accelerate_configuration.Execute,
 	"aws/s3/get_bucket_acl":                                          aws_s3_get_bucket_acl.Execute,
 	"aws/s3/get_bucket_cors":                                         aws_s3_get_bucket_cors.Execute,
@@ -2222,6 +2265,8 @@ var Actions = map[string]core.Action{
 	"aws/s3/get_bucket_tagging":                                      aws_s3_get_bucket_tagging.Execute,
 	"aws/s3/get_bucket_versioning":                                   aws_s3_get_bucket_versioning.Execute,
 	"aws/s3/get_bucket_website":                                      aws_s3_get_bucket_website.Execute,
+	"aws/s3/get_job_tagging":                                         aws_s3_get_job_tagging.Execute,
+	"aws/s3/get_multi_region_access_point":                           aws_s3_get_multi_region_access_point.Execute,
 	"aws/s3/get_object_acl":                                          aws_s3_get_object_acl.Execute,
 	"aws/s3/get_object_attributes":                                   aws_s3_get_object_attributes.Execute,
 	"aws/s3/get_object_legal_hold":                                   aws_s3_get_object_legal_hold.Execute,
@@ -2230,16 +2275,24 @@ var Actions = map[string]core.Action{
 	"aws/s3/get_object_tagging":                                      aws_s3_get_object_tagging.Execute,
 	"aws/s3/get_object_torrent":                                      aws_s3_get_object_torrent.Execute,
 	"aws/s3/get_public_access_block":                                 aws_s3_get_public_access_block.Execute,
+	"aws/s3/get_storage_lens_configuration":                          aws_s3_get_storage_lens_configuration.Execute,
+	"aws/s3/get_storage_lens_configuration_tagging":                  aws_s3_get_storage_lens_configuration_tagging.Execute,
 	"aws/s3/head_bucket":                                             aws_s3_head_bucket.Execute,
 	"aws/s3/head_object":                                             aws_s3_head_object.Execute,
 	"aws/s3/list":                                                    aws_s3_list.Execute,
+	"aws/s3/list_access_points":                                      aws_s3_list_access_points.Execute,
 	"aws/s3/list_buckets":                                            aws_s3_list_buckets.Execute,
+	"aws/s3/list_jobs":                                               aws_s3_list_jobs.Execute,
+	"aws/s3/list_multi_region_access_points":                         aws_s3_list_multi_region_access_points.Execute,
 	"aws/s3/list_multipart_uploads":                                  aws_s3_list_multipart_uploads.Execute,
 	"aws/s3/list_object_versions":                                    aws_s3_list_object_versions.Execute,
 	"aws/s3/list_parts":                                              aws_s3_list_parts.Execute,
+	"aws/s3/list_storage_lens_configurations":                        aws_s3_list_storage_lens_configurations.Execute,
 	"aws/s3/presign_get_object":                                      aws_s3_presign_get_object.Execute,
 	"aws/s3/presign_put_object":                                      aws_s3_presign_put_object.Execute,
 	"aws/s3/put":                                                     aws_s3_put.Execute,
+	"aws/s3/put_access_point_policy":                                 aws_s3_put_access_point_policy.Execute,
+	"aws/s3/put_account_public_access_block":                         aws_s3_put_account_public_access_block.Execute,
 	"aws/s3/put_bucket_accelerate_configuration":                     aws_s3_put_bucket_accelerate_configuration.Execute,
 	"aws/s3/put_bucket_acl":                                          aws_s3_put_bucket_acl.Execute,
 	"aws/s3/put_bucket_cors":                                         aws_s3_put_bucket_cors.Execute,
@@ -2254,14 +2307,19 @@ var Actions = map[string]core.Action{
 	"aws/s3/put_bucket_tagging":                                      aws_s3_put_bucket_tagging.Execute,
 	"aws/s3/put_bucket_versioning":                                   aws_s3_put_bucket_versioning.Execute,
 	"aws/s3/put_bucket_website":                                      aws_s3_put_bucket_website.Execute,
+	"aws/s3/put_job_tagging":                                         aws_s3_put_job_tagging.Execute,
 	"aws/s3/put_object_acl":                                          aws_s3_put_object_acl.Execute,
 	"aws/s3/put_object_legal_hold":                                   aws_s3_put_object_legal_hold.Execute,
 	"aws/s3/put_object_lock_configuration":                           aws_s3_put_object_lock_configuration.Execute,
 	"aws/s3/put_object_retention":                                    aws_s3_put_object_retention.Execute,
 	"aws/s3/put_object_tagging":                                      aws_s3_put_object_tagging.Execute,
 	"aws/s3/put_public_access_block":                                 aws_s3_put_public_access_block.Execute,
+	"aws/s3/put_storage_lens_configuration":                          aws_s3_put_storage_lens_configuration.Execute,
+	"aws/s3/put_storage_lens_configuration_tagging":                  aws_s3_put_storage_lens_configuration_tagging.Execute,
 	"aws/s3/restore_object":                                          aws_s3_restore_object.Execute,
 	"aws/s3/select_object_content":                                   aws_s3_select_object_content.Execute,
+	"aws/s3/update_job_priority":                                     aws_s3_update_job_priority.Execute,
+	"aws/s3/update_job_status":                                       aws_s3_update_job_status.Execute,
 	"aws/s3/upload_part":                                             aws_s3_upload_part.Execute,
 	"aws/s3/upload_part_copy":                                        aws_s3_upload_part_copy.Execute,
 	"aws/vpc/accept_transit_gateway_peering_attachment":              aws_vpc_accept_transit_gateway_peering_attachment.Execute,
