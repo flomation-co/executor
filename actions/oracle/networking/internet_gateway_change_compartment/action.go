@@ -56,7 +56,7 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 		return net.ErrorResult(auth.OCIError(err)), nil
 	}
 	return map[string]interface{}{
-		"tool_result": fmt.Sprintf("Move requested for internet gateway %s", id),
+		"tool_result": fmt.Sprintf("Moved internet gateway %s", id),
 		"success":     true,
 	}, nil
 }

@@ -47,7 +47,7 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 		return net.ErrorResult(auth.OCIError(err)), nil
 	}
 	return map[string]interface{}{
-		"tool_result": fmt.Sprintf("Delete requested for public IP %s", id),
+		"tool_result": fmt.Sprintf("Deleted public IP %s", id),
 		"success":     true,
 	}, nil
 }

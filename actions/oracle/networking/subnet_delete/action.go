@@ -48,7 +48,7 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 		return net.ErrorResult(auth.OCIError(err)), nil
 	}
 	return map[string]interface{}{
-		"tool_result": fmt.Sprintf("Delete requested for subnet %s", id),
+		"tool_result": fmt.Sprintf("Deleted subnet %s", id),
 		"success":     true,
 	}, nil
 }
