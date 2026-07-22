@@ -1629,6 +1629,60 @@ import (
 	oracle_compute_shape_get_all "flomation.app/automate/executor/actions/oracle/compute/shape_get_all"
 	oracle_compute_subnet_get_all "flomation.app/automate/executor/actions/oracle/compute/subnet_get_all"
 	oracle_compute_vcn_get_all "flomation.app/automate/executor/actions/oracle/compute/vcn_get_all"
+	oracle_dns_domain_records_delete "flomation.app/automate/executor/actions/oracle/dns/domain_records_delete"
+	oracle_dns_domain_records_get "flomation.app/automate/executor/actions/oracle/dns/domain_records_get"
+	oracle_dns_domain_records_patch "flomation.app/automate/executor/actions/oracle/dns/domain_records_patch"
+	oracle_dns_domain_records_update "flomation.app/automate/executor/actions/oracle/dns/domain_records_update"
+	oracle_dns_resolver_change_compartment "flomation.app/automate/executor/actions/oracle/dns/resolver_change_compartment"
+	oracle_dns_resolver_endpoint_create "flomation.app/automate/executor/actions/oracle/dns/resolver_endpoint_create"
+	oracle_dns_resolver_endpoint_delete "flomation.app/automate/executor/actions/oracle/dns/resolver_endpoint_delete"
+	oracle_dns_resolver_endpoint_get "flomation.app/automate/executor/actions/oracle/dns/resolver_endpoint_get"
+	oracle_dns_resolver_endpoint_list "flomation.app/automate/executor/actions/oracle/dns/resolver_endpoint_list"
+	oracle_dns_resolver_endpoint_update "flomation.app/automate/executor/actions/oracle/dns/resolver_endpoint_update"
+	oracle_dns_resolver_get "flomation.app/automate/executor/actions/oracle/dns/resolver_get"
+	oracle_dns_resolver_list "flomation.app/automate/executor/actions/oracle/dns/resolver_list"
+	oracle_dns_resolver_update "flomation.app/automate/executor/actions/oracle/dns/resolver_update"
+	oracle_dns_rrset_delete "flomation.app/automate/executor/actions/oracle/dns/rrset_delete"
+	oracle_dns_rrset_get "flomation.app/automate/executor/actions/oracle/dns/rrset_get"
+	oracle_dns_rrset_patch "flomation.app/automate/executor/actions/oracle/dns/rrset_patch"
+	oracle_dns_rrset_update "flomation.app/automate/executor/actions/oracle/dns/rrset_update"
+	oracle_dns_steering_policy_attachment_create "flomation.app/automate/executor/actions/oracle/dns/steering_policy_attachment_create"
+	oracle_dns_steering_policy_attachment_delete "flomation.app/automate/executor/actions/oracle/dns/steering_policy_attachment_delete"
+	oracle_dns_steering_policy_attachment_get "flomation.app/automate/executor/actions/oracle/dns/steering_policy_attachment_get"
+	oracle_dns_steering_policy_attachment_list "flomation.app/automate/executor/actions/oracle/dns/steering_policy_attachment_list"
+	oracle_dns_steering_policy_attachment_update "flomation.app/automate/executor/actions/oracle/dns/steering_policy_attachment_update"
+	oracle_dns_steering_policy_change_compartment "flomation.app/automate/executor/actions/oracle/dns/steering_policy_change_compartment"
+	oracle_dns_steering_policy_create "flomation.app/automate/executor/actions/oracle/dns/steering_policy_create"
+	oracle_dns_steering_policy_delete "flomation.app/automate/executor/actions/oracle/dns/steering_policy_delete"
+	oracle_dns_steering_policy_get "flomation.app/automate/executor/actions/oracle/dns/steering_policy_get"
+	oracle_dns_steering_policy_list "flomation.app/automate/executor/actions/oracle/dns/steering_policy_list"
+	oracle_dns_steering_policy_update "flomation.app/automate/executor/actions/oracle/dns/steering_policy_update"
+	oracle_dns_tsig_key_change_compartment "flomation.app/automate/executor/actions/oracle/dns/tsig_key_change_compartment"
+	oracle_dns_tsig_key_create "flomation.app/automate/executor/actions/oracle/dns/tsig_key_create"
+	oracle_dns_tsig_key_delete "flomation.app/automate/executor/actions/oracle/dns/tsig_key_delete"
+	oracle_dns_tsig_key_get "flomation.app/automate/executor/actions/oracle/dns/tsig_key_get"
+	oracle_dns_tsig_key_list "flomation.app/automate/executor/actions/oracle/dns/tsig_key_list"
+	oracle_dns_tsig_key_update "flomation.app/automate/executor/actions/oracle/dns/tsig_key_update"
+	oracle_dns_view_change_compartment "flomation.app/automate/executor/actions/oracle/dns/view_change_compartment"
+	oracle_dns_view_create "flomation.app/automate/executor/actions/oracle/dns/view_create"
+	oracle_dns_view_delete "flomation.app/automate/executor/actions/oracle/dns/view_delete"
+	oracle_dns_view_get "flomation.app/automate/executor/actions/oracle/dns/view_get"
+	oracle_dns_view_list "flomation.app/automate/executor/actions/oracle/dns/view_list"
+	oracle_dns_view_update "flomation.app/automate/executor/actions/oracle/dns/view_update"
+	oracle_dns_zone_change_compartment "flomation.app/automate/executor/actions/oracle/dns/zone_change_compartment"
+	oracle_dns_zone_create "flomation.app/automate/executor/actions/oracle/dns/zone_create"
+	oracle_dns_zone_create_from_file "flomation.app/automate/executor/actions/oracle/dns/zone_create_from_file"
+	oracle_dns_zone_delete "flomation.app/automate/executor/actions/oracle/dns/zone_delete"
+	oracle_dns_zone_dnssec_promote_key_version "flomation.app/automate/executor/actions/oracle/dns/zone_dnssec_promote_key_version"
+	oracle_dns_zone_dnssec_stage_key_version "flomation.app/automate/executor/actions/oracle/dns/zone_dnssec_stage_key_version"
+	oracle_dns_zone_get "flomation.app/automate/executor/actions/oracle/dns/zone_get"
+	oracle_dns_zone_get_content "flomation.app/automate/executor/actions/oracle/dns/zone_get_content"
+	oracle_dns_zone_list "flomation.app/automate/executor/actions/oracle/dns/zone_list"
+	oracle_dns_zone_list_transfer_servers "flomation.app/automate/executor/actions/oracle/dns/zone_list_transfer_servers"
+	oracle_dns_zone_records_get "flomation.app/automate/executor/actions/oracle/dns/zone_records_get"
+	oracle_dns_zone_records_patch "flomation.app/automate/executor/actions/oracle/dns/zone_records_patch"
+	oracle_dns_zone_records_update "flomation.app/automate/executor/actions/oracle/dns/zone_records_update"
+	oracle_dns_zone_update "flomation.app/automate/executor/actions/oracle/dns/zone_update"
 	oracle_loadbalancer_backend_create "flomation.app/automate/executor/actions/oracle/loadbalancer/backend_create"
 	oracle_loadbalancer_backend_delete "flomation.app/automate/executor/actions/oracle/loadbalancer/backend_delete"
 	oracle_loadbalancer_backend_get "flomation.app/automate/executor/actions/oracle/loadbalancer/backend_get"
@@ -3910,6 +3964,60 @@ var Actions = map[string]core.Action{
 	"oracle/compute/shape_get_all":                                        oracle_compute_shape_get_all.Execute,
 	"oracle/compute/subnet_get_all":                                       oracle_compute_subnet_get_all.Execute,
 	"oracle/compute/vcn_get_all":                                          oracle_compute_vcn_get_all.Execute,
+	"oracle/dns/domain_records_delete":                                    oracle_dns_domain_records_delete.Execute,
+	"oracle/dns/domain_records_get":                                       oracle_dns_domain_records_get.Execute,
+	"oracle/dns/domain_records_patch":                                     oracle_dns_domain_records_patch.Execute,
+	"oracle/dns/domain_records_update":                                    oracle_dns_domain_records_update.Execute,
+	"oracle/dns/resolver_change_compartment":                              oracle_dns_resolver_change_compartment.Execute,
+	"oracle/dns/resolver_endpoint_create":                                 oracle_dns_resolver_endpoint_create.Execute,
+	"oracle/dns/resolver_endpoint_delete":                                 oracle_dns_resolver_endpoint_delete.Execute,
+	"oracle/dns/resolver_endpoint_get":                                    oracle_dns_resolver_endpoint_get.Execute,
+	"oracle/dns/resolver_endpoint_list":                                   oracle_dns_resolver_endpoint_list.Execute,
+	"oracle/dns/resolver_endpoint_update":                                 oracle_dns_resolver_endpoint_update.Execute,
+	"oracle/dns/resolver_get":                                             oracle_dns_resolver_get.Execute,
+	"oracle/dns/resolver_list":                                            oracle_dns_resolver_list.Execute,
+	"oracle/dns/resolver_update":                                          oracle_dns_resolver_update.Execute,
+	"oracle/dns/rrset_delete":                                             oracle_dns_rrset_delete.Execute,
+	"oracle/dns/rrset_get":                                                oracle_dns_rrset_get.Execute,
+	"oracle/dns/rrset_patch":                                              oracle_dns_rrset_patch.Execute,
+	"oracle/dns/rrset_update":                                             oracle_dns_rrset_update.Execute,
+	"oracle/dns/steering_policy_attachment_create":                        oracle_dns_steering_policy_attachment_create.Execute,
+	"oracle/dns/steering_policy_attachment_delete":                        oracle_dns_steering_policy_attachment_delete.Execute,
+	"oracle/dns/steering_policy_attachment_get":                           oracle_dns_steering_policy_attachment_get.Execute,
+	"oracle/dns/steering_policy_attachment_list":                          oracle_dns_steering_policy_attachment_list.Execute,
+	"oracle/dns/steering_policy_attachment_update":                        oracle_dns_steering_policy_attachment_update.Execute,
+	"oracle/dns/steering_policy_change_compartment":                       oracle_dns_steering_policy_change_compartment.Execute,
+	"oracle/dns/steering_policy_create":                                   oracle_dns_steering_policy_create.Execute,
+	"oracle/dns/steering_policy_delete":                                   oracle_dns_steering_policy_delete.Execute,
+	"oracle/dns/steering_policy_get":                                      oracle_dns_steering_policy_get.Execute,
+	"oracle/dns/steering_policy_list":                                     oracle_dns_steering_policy_list.Execute,
+	"oracle/dns/steering_policy_update":                                   oracle_dns_steering_policy_update.Execute,
+	"oracle/dns/tsig_key_change_compartment":                              oracle_dns_tsig_key_change_compartment.Execute,
+	"oracle/dns/tsig_key_create":                                          oracle_dns_tsig_key_create.Execute,
+	"oracle/dns/tsig_key_delete":                                          oracle_dns_tsig_key_delete.Execute,
+	"oracle/dns/tsig_key_get":                                             oracle_dns_tsig_key_get.Execute,
+	"oracle/dns/tsig_key_list":                                            oracle_dns_tsig_key_list.Execute,
+	"oracle/dns/tsig_key_update":                                          oracle_dns_tsig_key_update.Execute,
+	"oracle/dns/view_change_compartment":                                  oracle_dns_view_change_compartment.Execute,
+	"oracle/dns/view_create":                                              oracle_dns_view_create.Execute,
+	"oracle/dns/view_delete":                                              oracle_dns_view_delete.Execute,
+	"oracle/dns/view_get":                                                 oracle_dns_view_get.Execute,
+	"oracle/dns/view_list":                                                oracle_dns_view_list.Execute,
+	"oracle/dns/view_update":                                              oracle_dns_view_update.Execute,
+	"oracle/dns/zone_change_compartment":                                  oracle_dns_zone_change_compartment.Execute,
+	"oracle/dns/zone_create":                                              oracle_dns_zone_create.Execute,
+	"oracle/dns/zone_create_from_file":                                    oracle_dns_zone_create_from_file.Execute,
+	"oracle/dns/zone_delete":                                              oracle_dns_zone_delete.Execute,
+	"oracle/dns/zone_dnssec_promote_key_version":                          oracle_dns_zone_dnssec_promote_key_version.Execute,
+	"oracle/dns/zone_dnssec_stage_key_version":                            oracle_dns_zone_dnssec_stage_key_version.Execute,
+	"oracle/dns/zone_get":                                                 oracle_dns_zone_get.Execute,
+	"oracle/dns/zone_get_content":                                         oracle_dns_zone_get_content.Execute,
+	"oracle/dns/zone_list":                                                oracle_dns_zone_list.Execute,
+	"oracle/dns/zone_list_transfer_servers":                               oracle_dns_zone_list_transfer_servers.Execute,
+	"oracle/dns/zone_records_get":                                         oracle_dns_zone_records_get.Execute,
+	"oracle/dns/zone_records_patch":                                       oracle_dns_zone_records_patch.Execute,
+	"oracle/dns/zone_records_update":                                      oracle_dns_zone_records_update.Execute,
+	"oracle/dns/zone_update":                                              oracle_dns_zone_update.Execute,
 	"oracle/loadbalancer/backend_create":                                  oracle_loadbalancer_backend_create.Execute,
 	"oracle/loadbalancer/backend_delete":                                  oracle_loadbalancer_backend_delete.Execute,
 	"oracle/loadbalancer/backend_get":                                     oracle_loadbalancer_backend_get.Execute,
