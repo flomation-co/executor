@@ -39,13 +39,6 @@ var Outputs = [...]core.Connection{
 	{Name: "error", Type: core.ConnectionTypeString, Label: "Error"},
 }
 
-func intOrNil(p *int) interface{} {
-	if p == nil {
-		return nil
-	}
-	return *p
-}
-
 func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[string]interface{}, error) {
 	auth, client, errResult := iam.Client(inputs)
 	if errResult != nil {
@@ -63,7 +56,7 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	minLen := "unset"
 	if pp := resp.PasswordPolicy; pp != nil {
 		policy["password_policy"] = map[string]interface{}{
-			"minimum_password_length":          intOrNil(pp.MinimumPasswordLength),
+			"minimum_password_length":          iam.IntOrNil(pp.MinimumPasswordLength),
 			"is_uppercase_characters_required": pp.IsUppercaseCharactersRequired != nil && *pp.IsUppercaseCharactersRequired,
 			"is_lowercase_characters_required": pp.IsLowercaseCharactersRequired != nil && *pp.IsLowercaseCharactersRequired,
 			"is_numeric_characters_required":   pp.IsNumericCharactersRequired != nil && *pp.IsNumericCharactersRequired,

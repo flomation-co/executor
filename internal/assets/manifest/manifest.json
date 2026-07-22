@@ -259121,7 +259121,7 @@
     ]
   },
   "oracle/identity/api_key_delete": {
-    "hash": "78017339b2fd5db8cf877dc22896fc4b4a8b2f249a62ae825065d8022666469d",
+    "hash": "499d483fef7854117dad6c2d6adbcf36cc6f09c256a8d345b980c7262497294b",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "OCI Identity: Delete API Key",
@@ -259206,8 +259206,8 @@
         "name": "fingerprint_to_delete",
         "type": "string",
         "value": null,
-        "label": "Fingerprint to Delete",
-        "placeholder": "aa:bb:cc:… fingerprint of the API key to remove",
+        "label": "API Key Fingerprint (to delete)",
+        "placeholder": "aa:bb:cc:… fingerprint of the target user's API key to remove (NOT your signing key)",
         "required": true
       }
     ],
@@ -260030,7 +260030,7 @@
     ]
   },
   "oracle/identity/authentication_policy_get": {
-    "hash": "eee446987e2dec5609a1c891651e908057663cd25e25e4e043e249b4219d0840",
+    "hash": "7c0ba0b8c6283ab04bd7554cd71ed25f1ef18472b7f4a1884d24a4c199aa8cff",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "OCI Identity: Get Authentication Policy",

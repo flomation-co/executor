@@ -30,7 +30,7 @@ var Inputs = [...]core.Connection{
 	{Name: "private_key_passphrase", Type: core.ConnectionTypeSecret, Label: "Private Key Passphrase", Placeholder: "Only if the key is encrypted (optional)"},
 	{Name: "compartment_ocid", Type: core.ConnectionTypeString, Label: "Compartment OCID", Placeholder: "Leave blank for the tenancy (scopes the user picker)"},
 	{Name: "target_user_ocid", Type: core.ConnectionTypeString, Label: "User OCID (key owner)", Placeholder: "ocid1.user.oc1..aaaa… of the user the key belongs to", Required: true},
-	{Name: "fingerprint_to_delete", Type: core.ConnectionTypeString, Label: "Fingerprint to Delete", Placeholder: "aa:bb:cc:… fingerprint of the API key to remove", Required: true},
+	{Name: "fingerprint_to_delete", Type: core.ConnectionTypeString, Label: "API Key Fingerprint (to delete)", Placeholder: "aa:bb:cc:… fingerprint of the target user's API key to remove (NOT your signing key)", Required: true},
 }
 
 var Outputs = [...]core.Connection{

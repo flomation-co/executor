@@ -241,6 +241,15 @@ func Str(p *string) string {
 	return *p
 }
 
+// IntOrNil returns the dereferenced int, or nil when the pointer is unset — so a result
+// map surfaces a genuinely-absent value as null rather than a misleading zero.
+func IntOrNil(p *int) interface{} {
+	if p == nil {
+		return nil
+	}
+	return *p
+}
+
 func FormatTime(t *common.SDKTime) string {
 	if t == nil {
 		return ""
