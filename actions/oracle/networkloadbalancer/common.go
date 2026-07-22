@@ -43,12 +43,24 @@ const ListMaxPages = 25
 
 var validRegion = regexp.MustCompile(`^[a-z0-9-]+$`)
 
-// Allowed enum sets, confirmed against the live OCI Network Load Balancer API.
+// Allowed enum sets — DERIVED from the SDK's own enum-value functions rather than
+// hardcoded, so they track the oci-go-sdk version exactly. If OCI extends an enum it
+// arrives with an SDK bump and these update automatically, so ValidateEnum never
+// rejects a value the SDK (and therefore the service) accepts.
 var (
-	NlbPolicies          = []string{"TWO_TUPLE", "THREE_TUPLE", "FIVE_TUPLE"}
-	ListenerProtocols    = []string{"ANY", "TCP", "UDP", "TCP_AND_UDP", "L3IP"}
-	HealthCheckProtocols = []string{"HTTP", "HTTPS", "TCP", "UDP", "DNS"}
+	NlbPolicies          = enumStrings(nlb.GetNetworkLoadBalancingPolicyEnumValues())
+	ListenerProtocols    = enumStrings(nlb.GetListenerProtocolsEnumValues())
+	HealthCheckProtocols = enumStrings(nlb.GetHealthCheckProtocolsEnumValues())
 )
+
+// enumStrings converts a slice of any string-backed SDK enum into a plain []string.
+func enumStrings[T ~string](vs []T) []string {
+	out := make([]string, len(vs))
+	for i, v := range vs {
+		out[i] = string(v)
+	}
+	return out
+}
 
 // Auth carries the API-signing-key material plus the compartment scope.
 type Auth struct {
