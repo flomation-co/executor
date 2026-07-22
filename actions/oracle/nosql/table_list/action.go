@@ -1,0 +1,86 @@
+// Package oracle_nosql_table_list lists the NoSQL Database tables in a compartment, optionally
+// filtered by a shell-globbing-style name pattern. Walks pagination up to a safe cap.
+package oracle_nosql_table_list
+
+import (
+	"fmt"
+
+	core "flomation.app/automate/executor"
+	ns "flomation.app/automate/executor/actions/oracle/nosql"
+
+	"github.com/oracle/oci-go-sdk/v65/nosql"
+)
+
+const (
+	Author       = "Dave McElin"
+	Organisation = "Flomation"
+	Name         = "OCI NoSQL: List Tables"
+	Description  = "List the NoSQL Database tables in a compartment, optionally filtered by a shell-globbing-style (*?[]) name pattern. Walks pagination up to a safe cap."
+	Website      = "https://www.flomation.co"
+	Icon         = "oracle+table"
+	Date         = "22/07/2026"
+	Type         = core.ActionTypeAction
+)
+
+var Inputs = [...]core.Connection{
+	{Name: "tenancy_ocid", Type: core.ConnectionTypeString, Label: "Tenancy OCID", Placeholder: "ocid1.tenancy.oc1..aaaa…", Required: true},
+	{Name: "user_ocid", Type: core.ConnectionTypeString, Label: "User OCID", Placeholder: "ocid1.user.oc1..aaaa…", Required: true},
+	{Name: "region", Type: core.ConnectionTypeString, Label: "Region", Placeholder: "e.g. uk-london-1", Required: true},
+	{Name: "fingerprint", Type: core.ConnectionTypeString, Label: "Key Fingerprint", Placeholder: "aa:bb:cc:… fingerprint of the uploaded API key", Required: true},
+	{Name: "private_key", Type: core.ConnectionTypeSecret, Label: "Private Key (PEM)", Placeholder: "The API signing private key — full PEM, incl. BEGIN/END lines"},
+	{Name: "private_key_passphrase", Type: core.ConnectionTypeSecret, Label: "Private Key Passphrase", Placeholder: "Only if the key is encrypted (optional)"},
+	{Name: "compartment_ocid", Type: core.ConnectionTypeString, Label: "Compartment OCID", Placeholder: "ocid1.compartment.oc1..aaaa… (use the tenancy OCID for the root)", Required: true},
+	{Name: "name", Type: core.ConnectionTypeString, Label: "Name Filter", Placeholder: "Shell-globbing-style (*?[]) filter for table names (optional)"},
+	{Name: "limit", Type: core.ConnectionTypeString, Label: "Page Size", Placeholder: "Max items to fetch per page (optional)"},
+}
+
+var Outputs = [...]core.Connection{
+	{Name: "tool_result", Type: core.ConnectionTypeString, Label: "Result summary"},
+	{Name: "tables", Type: core.ConnectionTypeObject, Label: "Tables"},
+	{Name: "count", Type: core.ConnectionTypeString, Label: "Count"},
+	{Name: "truncated", Type: core.ConnectionTypeBoolean, Label: "Truncated"},
+	{Name: "success", Type: core.ConnectionTypeBoolean, Label: "Success"},
+	{Name: "error", Type: core.ConnectionTypeString, Label: "Error"},
+}
+
+func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[string]interface{}, error) {
+	auth, client, errResult := ns.Client(inputs)
+	if errResult != nil {
+		return errResult, nil
+	}
+	compartment, err := auth.RequiredCompartment()
+	if err != nil {
+		return ns.ErrorResult(err.Error()), nil
+	}
+	req := nosql.ListTablesRequest{CompartmentId: &compartment}
+	if name := ns.OptionalString("name", inputs); name != "" {
+		req.Name = &name
+	}
+	if limit, ok, err := ns.OptionalInt("limit", inputs); err != nil {
+		return ns.ErrorResult(err.Error()), nil
+	} else if ok {
+		req.Limit = &limit
+	}
+	var out []map[string]interface{}
+	truncated := false
+	for page := 0; ; page++ {
+		if page >= ns.ListMaxPages {
+			truncated = true
+			break
+		}
+		resp, err := client.ListTables(ns.Context(), req)
+		if err != nil {
+			return ns.ErrorResult(auth.OCIError(err)), nil
+		}
+		for i := range resp.Items {
+			out = append(out, ns.SummariseTableSummary(&resp.Items[i]))
+		}
+		if resp.OpcNextPage == nil || *resp.OpcNextPage == "" {
+			break
+		}
+		req.Page = resp.OpcNextPage
+	}
+	return ns.Result(fmt.Sprintf("Found %d table(s)", len(out)), map[string]interface{}{
+		"tables": out, "count": fmt.Sprintf("%d", len(out)), "truncated": truncated,
+	}), nil
+}

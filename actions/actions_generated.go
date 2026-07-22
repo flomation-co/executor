@@ -1840,6 +1840,24 @@ import (
 	opentofu_apply "flomation.app/automate/executor/actions/opentofu/apply"
 	opentofu_destroy "flomation.app/automate/executor/actions/opentofu/destroy"
 	opentofu_plan "flomation.app/automate/executor/actions/opentofu/plan"
+	oracle_apigateway_api_change_compartment "flomation.app/automate/executor/actions/oracle/apigateway/api_change_compartment"
+	oracle_apigateway_api_create "flomation.app/automate/executor/actions/oracle/apigateway/api_create"
+	oracle_apigateway_api_delete "flomation.app/automate/executor/actions/oracle/apigateway/api_delete"
+	oracle_apigateway_api_get "flomation.app/automate/executor/actions/oracle/apigateway/api_get"
+	oracle_apigateway_api_list "flomation.app/automate/executor/actions/oracle/apigateway/api_list"
+	oracle_apigateway_api_update "flomation.app/automate/executor/actions/oracle/apigateway/api_update"
+	oracle_apigateway_deployment_change_compartment "flomation.app/automate/executor/actions/oracle/apigateway/deployment_change_compartment"
+	oracle_apigateway_deployment_create "flomation.app/automate/executor/actions/oracle/apigateway/deployment_create"
+	oracle_apigateway_deployment_delete "flomation.app/automate/executor/actions/oracle/apigateway/deployment_delete"
+	oracle_apigateway_deployment_get "flomation.app/automate/executor/actions/oracle/apigateway/deployment_get"
+	oracle_apigateway_deployment_list "flomation.app/automate/executor/actions/oracle/apigateway/deployment_list"
+	oracle_apigateway_deployment_update "flomation.app/automate/executor/actions/oracle/apigateway/deployment_update"
+	oracle_apigateway_gateway_change_compartment "flomation.app/automate/executor/actions/oracle/apigateway/gateway_change_compartment"
+	oracle_apigateway_gateway_create "flomation.app/automate/executor/actions/oracle/apigateway/gateway_create"
+	oracle_apigateway_gateway_delete "flomation.app/automate/executor/actions/oracle/apigateway/gateway_delete"
+	oracle_apigateway_gateway_get "flomation.app/automate/executor/actions/oracle/apigateway/gateway_get"
+	oracle_apigateway_gateway_list "flomation.app/automate/executor/actions/oracle/apigateway/gateway_list"
+	oracle_apigateway_gateway_update "flomation.app/automate/executor/actions/oracle/apigateway/gateway_update"
 	oracle_autonomousdatabase_db_change_compartment "flomation.app/automate/executor/actions/oracle/autonomousdatabase/db_change_compartment"
 	oracle_autonomousdatabase_db_clone "flomation.app/automate/executor/actions/oracle/autonomousdatabase/db_clone"
 	oracle_autonomousdatabase_db_create "flomation.app/automate/executor/actions/oracle/autonomousdatabase/db_create"
@@ -1933,6 +1951,26 @@ import (
 	oracle_blockvolume_volume_replica_get "flomation.app/automate/executor/actions/oracle/blockvolume/volume_replica_get"
 	oracle_blockvolume_volume_replica_get_all "flomation.app/automate/executor/actions/oracle/blockvolume/volume_replica_get_all"
 	oracle_blockvolume_volume_update "flomation.app/automate/executor/actions/oracle/blockvolume/volume_update"
+	oracle_certificates_association_list "flomation.app/automate/executor/actions/oracle/certificates/association_list"
+	oracle_certificates_ca_bundle_content_get "flomation.app/automate/executor/actions/oracle/certificates/ca_bundle_content_get"
+	oracle_certificates_ca_bundle_create "flomation.app/automate/executor/actions/oracle/certificates/ca_bundle_create"
+	oracle_certificates_ca_bundle_delete "flomation.app/automate/executor/actions/oracle/certificates/ca_bundle_delete"
+	oracle_certificates_ca_bundle_get "flomation.app/automate/executor/actions/oracle/certificates/ca_bundle_get"
+	oracle_certificates_ca_bundle_list "flomation.app/automate/executor/actions/oracle/certificates/ca_bundle_list"
+	oracle_certificates_ca_bundle_update "flomation.app/automate/executor/actions/oracle/certificates/ca_bundle_update"
+	oracle_certificates_certificate_authority_create "flomation.app/automate/executor/actions/oracle/certificates/certificate_authority_create"
+	oracle_certificates_certificate_authority_get "flomation.app/automate/executor/actions/oracle/certificates/certificate_authority_get"
+	oracle_certificates_certificate_authority_list "flomation.app/automate/executor/actions/oracle/certificates/certificate_authority_list"
+	oracle_certificates_certificate_authority_schedule_deletion "flomation.app/automate/executor/actions/oracle/certificates/certificate_authority_schedule_deletion"
+	oracle_certificates_certificate_authority_update "flomation.app/automate/executor/actions/oracle/certificates/certificate_authority_update"
+	oracle_certificates_certificate_bundle_get "flomation.app/automate/executor/actions/oracle/certificates/certificate_bundle_get"
+	oracle_certificates_certificate_change_compartment "flomation.app/automate/executor/actions/oracle/certificates/certificate_change_compartment"
+	oracle_certificates_certificate_create "flomation.app/automate/executor/actions/oracle/certificates/certificate_create"
+	oracle_certificates_certificate_get "flomation.app/automate/executor/actions/oracle/certificates/certificate_get"
+	oracle_certificates_certificate_list "flomation.app/automate/executor/actions/oracle/certificates/certificate_list"
+	oracle_certificates_certificate_schedule_deletion "flomation.app/automate/executor/actions/oracle/certificates/certificate_schedule_deletion"
+	oracle_certificates_certificate_update "flomation.app/automate/executor/actions/oracle/certificates/certificate_update"
+	oracle_certificates_certificate_version_list "flomation.app/automate/executor/actions/oracle/certificates/certificate_version_list"
 	oracle_compute_availability_domain_get_all "flomation.app/automate/executor/actions/oracle/compute/availability_domain_get_all"
 	oracle_compute_boot_volume_get_all "flomation.app/automate/executor/actions/oracle/compute/boot_volume_get_all"
 	oracle_compute_compartment_get_all "flomation.app/automate/executor/actions/oracle/compute/compartment_get_all"
@@ -1994,6 +2032,52 @@ import (
 	oracle_containerengine_workload_mapping_get "flomation.app/automate/executor/actions/oracle/containerengine/workload_mapping_get"
 	oracle_containerengine_workload_mapping_list "flomation.app/automate/executor/actions/oracle/containerengine/workload_mapping_list"
 	oracle_containerengine_workload_mapping_update "flomation.app/automate/executor/actions/oracle/containerengine/workload_mapping_update"
+	oracle_datacatalog_catalog_change_compartment "flomation.app/automate/executor/actions/oracle/datacatalog/catalog_change_compartment"
+	oracle_datacatalog_catalog_create "flomation.app/automate/executor/actions/oracle/datacatalog/catalog_create"
+	oracle_datacatalog_catalog_delete "flomation.app/automate/executor/actions/oracle/datacatalog/catalog_delete"
+	oracle_datacatalog_catalog_get "flomation.app/automate/executor/actions/oracle/datacatalog/catalog_get"
+	oracle_datacatalog_catalog_list "flomation.app/automate/executor/actions/oracle/datacatalog/catalog_list"
+	oracle_datacatalog_catalog_update "flomation.app/automate/executor/actions/oracle/datacatalog/catalog_update"
+	oracle_datacatalog_connection_create "flomation.app/automate/executor/actions/oracle/datacatalog/connection_create"
+	oracle_datacatalog_connection_delete "flomation.app/automate/executor/actions/oracle/datacatalog/connection_delete"
+	oracle_datacatalog_connection_get "flomation.app/automate/executor/actions/oracle/datacatalog/connection_get"
+	oracle_datacatalog_connection_list "flomation.app/automate/executor/actions/oracle/datacatalog/connection_list"
+	oracle_datacatalog_connection_test "flomation.app/automate/executor/actions/oracle/datacatalog/connection_test"
+	oracle_datacatalog_data_asset_create "flomation.app/automate/executor/actions/oracle/datacatalog/data_asset_create"
+	oracle_datacatalog_data_asset_delete "flomation.app/automate/executor/actions/oracle/datacatalog/data_asset_delete"
+	oracle_datacatalog_data_asset_get "flomation.app/automate/executor/actions/oracle/datacatalog/data_asset_get"
+	oracle_datacatalog_data_asset_list "flomation.app/automate/executor/actions/oracle/datacatalog/data_asset_list"
+	oracle_datacatalog_data_asset_update "flomation.app/automate/executor/actions/oracle/datacatalog/data_asset_update"
+	oracle_datacatalog_entity_get "flomation.app/automate/executor/actions/oracle/datacatalog/entity_get"
+	oracle_datacatalog_entity_list "flomation.app/automate/executor/actions/oracle/datacatalog/entity_list"
+	oracle_datacatalog_glossary_create "flomation.app/automate/executor/actions/oracle/datacatalog/glossary_create"
+	oracle_datacatalog_glossary_delete "flomation.app/automate/executor/actions/oracle/datacatalog/glossary_delete"
+	oracle_datacatalog_glossary_get "flomation.app/automate/executor/actions/oracle/datacatalog/glossary_get"
+	oracle_datacatalog_glossary_list "flomation.app/automate/executor/actions/oracle/datacatalog/glossary_list"
+	oracle_datacatalog_term_create "flomation.app/automate/executor/actions/oracle/datacatalog/term_create"
+	oracle_datacatalog_term_delete "flomation.app/automate/executor/actions/oracle/datacatalog/term_delete"
+	oracle_datacatalog_term_get "flomation.app/automate/executor/actions/oracle/datacatalog/term_get"
+	oracle_datacatalog_term_list "flomation.app/automate/executor/actions/oracle/datacatalog/term_list"
+	oracle_dataflow_application_change_compartment "flomation.app/automate/executor/actions/oracle/dataflow/application_change_compartment"
+	oracle_dataflow_application_create "flomation.app/automate/executor/actions/oracle/dataflow/application_create"
+	oracle_dataflow_application_delete "flomation.app/automate/executor/actions/oracle/dataflow/application_delete"
+	oracle_dataflow_application_get "flomation.app/automate/executor/actions/oracle/dataflow/application_get"
+	oracle_dataflow_application_list "flomation.app/automate/executor/actions/oracle/dataflow/application_list"
+	oracle_dataflow_application_update "flomation.app/automate/executor/actions/oracle/dataflow/application_update"
+	oracle_dataflow_private_endpoint_create "flomation.app/automate/executor/actions/oracle/dataflow/private_endpoint_create"
+	oracle_dataflow_private_endpoint_delete "flomation.app/automate/executor/actions/oracle/dataflow/private_endpoint_delete"
+	oracle_dataflow_private_endpoint_get "flomation.app/automate/executor/actions/oracle/dataflow/private_endpoint_get"
+	oracle_dataflow_private_endpoint_list "flomation.app/automate/executor/actions/oracle/dataflow/private_endpoint_list"
+	oracle_dataflow_run_create "flomation.app/automate/executor/actions/oracle/dataflow/run_create"
+	oracle_dataflow_run_delete "flomation.app/automate/executor/actions/oracle/dataflow/run_delete"
+	oracle_dataflow_run_get "flomation.app/automate/executor/actions/oracle/dataflow/run_get"
+	oracle_dataflow_run_list "flomation.app/automate/executor/actions/oracle/dataflow/run_list"
+	oracle_dataflow_run_log_get "flomation.app/automate/executor/actions/oracle/dataflow/run_log_get"
+	oracle_dataflow_run_update "flomation.app/automate/executor/actions/oracle/dataflow/run_update"
+	oracle_dataflow_statement_create "flomation.app/automate/executor/actions/oracle/dataflow/statement_create"
+	oracle_dataflow_statement_delete "flomation.app/automate/executor/actions/oracle/dataflow/statement_delete"
+	oracle_dataflow_statement_get "flomation.app/automate/executor/actions/oracle/dataflow/statement_get"
+	oracle_dataflow_statement_list "flomation.app/automate/executor/actions/oracle/dataflow/statement_list"
 	oracle_dns_domain_records_delete "flomation.app/automate/executor/actions/oracle/dns/domain_records_delete"
 	oracle_dns_domain_records_get "flomation.app/automate/executor/actions/oracle/dns/domain_records_get"
 	oracle_dns_domain_records_patch "flomation.app/automate/executor/actions/oracle/dns/domain_records_patch"
@@ -2048,6 +2132,25 @@ import (
 	oracle_dns_zone_records_patch "flomation.app/automate/executor/actions/oracle/dns/zone_records_patch"
 	oracle_dns_zone_records_update "flomation.app/automate/executor/actions/oracle/dns/zone_records_update"
 	oracle_dns_zone_update "flomation.app/automate/executor/actions/oracle/dns/zone_update"
+	oracle_email_dkim_create "flomation.app/automate/executor/actions/oracle/email/dkim_create"
+	oracle_email_dkim_delete "flomation.app/automate/executor/actions/oracle/email/dkim_delete"
+	oracle_email_dkim_get "flomation.app/automate/executor/actions/oracle/email/dkim_get"
+	oracle_email_dkim_list "flomation.app/automate/executor/actions/oracle/email/dkim_list"
+	oracle_email_email_domain_change_compartment "flomation.app/automate/executor/actions/oracle/email/email_domain_change_compartment"
+	oracle_email_email_domain_create "flomation.app/automate/executor/actions/oracle/email/email_domain_create"
+	oracle_email_email_domain_delete "flomation.app/automate/executor/actions/oracle/email/email_domain_delete"
+	oracle_email_email_domain_get "flomation.app/automate/executor/actions/oracle/email/email_domain_get"
+	oracle_email_email_domain_list "flomation.app/automate/executor/actions/oracle/email/email_domain_list"
+	oracle_email_email_domain_update "flomation.app/automate/executor/actions/oracle/email/email_domain_update"
+	oracle_email_sender_change_compartment "flomation.app/automate/executor/actions/oracle/email/sender_change_compartment"
+	oracle_email_sender_create "flomation.app/automate/executor/actions/oracle/email/sender_create"
+	oracle_email_sender_delete "flomation.app/automate/executor/actions/oracle/email/sender_delete"
+	oracle_email_sender_get "flomation.app/automate/executor/actions/oracle/email/sender_get"
+	oracle_email_sender_list "flomation.app/automate/executor/actions/oracle/email/sender_list"
+	oracle_email_suppression_create "flomation.app/automate/executor/actions/oracle/email/suppression_create"
+	oracle_email_suppression_delete "flomation.app/automate/executor/actions/oracle/email/suppression_delete"
+	oracle_email_suppression_get "flomation.app/automate/executor/actions/oracle/email/suppression_get"
+	oracle_email_suppression_list "flomation.app/automate/executor/actions/oracle/email/suppression_list"
 	oracle_events_rule_change_compartment "flomation.app/automate/executor/actions/oracle/events/rule_change_compartment"
 	oracle_events_rule_create "flomation.app/automate/executor/actions/oracle/events/rule_create"
 	oracle_events_rule_delete "flomation.app/automate/executor/actions/oracle/events/rule_delete"
@@ -2296,6 +2399,23 @@ import (
 	oracle_loadbalancer_ssl_cipher_suite_update "flomation.app/automate/executor/actions/oracle/loadbalancer/ssl_cipher_suite_update"
 	oracle_loadbalancer_work_request_get "flomation.app/automate/executor/actions/oracle/loadbalancer/work_request_get"
 	oracle_loadbalancer_work_request_list "flomation.app/automate/executor/actions/oracle/loadbalancer/work_request_list"
+	oracle_logging_log_change_log_group "flomation.app/automate/executor/actions/oracle/logging/log_change_log_group"
+	oracle_logging_log_create "flomation.app/automate/executor/actions/oracle/logging/log_create"
+	oracle_logging_log_delete "flomation.app/automate/executor/actions/oracle/logging/log_delete"
+	oracle_logging_log_get "flomation.app/automate/executor/actions/oracle/logging/log_get"
+	oracle_logging_log_group_change_compartment "flomation.app/automate/executor/actions/oracle/logging/log_group_change_compartment"
+	oracle_logging_log_group_create "flomation.app/automate/executor/actions/oracle/logging/log_group_create"
+	oracle_logging_log_group_delete "flomation.app/automate/executor/actions/oracle/logging/log_group_delete"
+	oracle_logging_log_group_get "flomation.app/automate/executor/actions/oracle/logging/log_group_get"
+	oracle_logging_log_group_list "flomation.app/automate/executor/actions/oracle/logging/log_group_list"
+	oracle_logging_log_group_update "flomation.app/automate/executor/actions/oracle/logging/log_group_update"
+	oracle_logging_log_list "flomation.app/automate/executor/actions/oracle/logging/log_list"
+	oracle_logging_log_update "flomation.app/automate/executor/actions/oracle/logging/log_update"
+	oracle_logging_search_logs "flomation.app/automate/executor/actions/oracle/logging/search_logs"
+	oracle_logging_service_list "flomation.app/automate/executor/actions/oracle/logging/service_list"
+	oracle_logging_unified_agent_config_delete "flomation.app/automate/executor/actions/oracle/logging/unified_agent_config_delete"
+	oracle_logging_unified_agent_config_get "flomation.app/automate/executor/actions/oracle/logging/unified_agent_config_get"
+	oracle_logging_unified_agent_config_list "flomation.app/automate/executor/actions/oracle/logging/unified_agent_config_list"
 	oracle_monitoring_alarm_change_compartment "flomation.app/automate/executor/actions/oracle/monitoring/alarm_change_compartment"
 	oracle_monitoring_alarm_create "flomation.app/automate/executor/actions/oracle/monitoring/alarm_create"
 	oracle_monitoring_alarm_delete "flomation.app/automate/executor/actions/oracle/monitoring/alarm_delete"
@@ -2311,6 +2431,23 @@ import (
 	oracle_monitoring_metrics_list "flomation.app/automate/executor/actions/oracle/monitoring/metrics_list"
 	oracle_monitoring_post_metric_data "flomation.app/automate/executor/actions/oracle/monitoring/post_metric_data"
 	oracle_monitoring_summarize_metrics_data "flomation.app/automate/executor/actions/oracle/monitoring/summarize_metrics_data"
+	oracle_mysql_backup_create "flomation.app/automate/executor/actions/oracle/mysql/backup_create"
+	oracle_mysql_backup_delete "flomation.app/automate/executor/actions/oracle/mysql/backup_delete"
+	oracle_mysql_backup_get "flomation.app/automate/executor/actions/oracle/mysql/backup_get"
+	oracle_mysql_backup_list "flomation.app/automate/executor/actions/oracle/mysql/backup_list"
+	oracle_mysql_configuration_get "flomation.app/automate/executor/actions/oracle/mysql/configuration_get"
+	oracle_mysql_configuration_list "flomation.app/automate/executor/actions/oracle/mysql/configuration_list"
+	oracle_mysql_db_system_change_compartment "flomation.app/automate/executor/actions/oracle/mysql/db_system_change_compartment"
+	oracle_mysql_db_system_create "flomation.app/automate/executor/actions/oracle/mysql/db_system_create"
+	oracle_mysql_db_system_delete "flomation.app/automate/executor/actions/oracle/mysql/db_system_delete"
+	oracle_mysql_db_system_get "flomation.app/automate/executor/actions/oracle/mysql/db_system_get"
+	oracle_mysql_db_system_list "flomation.app/automate/executor/actions/oracle/mysql/db_system_list"
+	oracle_mysql_db_system_start "flomation.app/automate/executor/actions/oracle/mysql/db_system_start"
+	oracle_mysql_db_system_stop "flomation.app/automate/executor/actions/oracle/mysql/db_system_stop"
+	oracle_mysql_db_system_update "flomation.app/automate/executor/actions/oracle/mysql/db_system_update"
+	oracle_mysql_heatwave_add "flomation.app/automate/executor/actions/oracle/mysql/heatwave_add"
+	oracle_mysql_heatwave_delete "flomation.app/automate/executor/actions/oracle/mysql/heatwave_delete"
+	oracle_mysql_heatwave_get "flomation.app/automate/executor/actions/oracle/mysql/heatwave_get"
 	oracle_networking_dhcp_options_create "flomation.app/automate/executor/actions/oracle/networking/dhcp_options_create"
 	oracle_networking_dhcp_options_delete "flomation.app/automate/executor/actions/oracle/networking/dhcp_options_delete"
 	oracle_networking_dhcp_options_get "flomation.app/automate/executor/actions/oracle/networking/dhcp_options_get"
@@ -2406,6 +2543,22 @@ import (
 	oracle_networkloadbalancer_protocol_list "flomation.app/automate/executor/actions/oracle/networkloadbalancer/protocol_list"
 	oracle_networkloadbalancer_work_request_get "flomation.app/automate/executor/actions/oracle/networkloadbalancer/work_request_get"
 	oracle_networkloadbalancer_work_request_list "flomation.app/automate/executor/actions/oracle/networkloadbalancer/work_request_list"
+	oracle_nosql_index_create "flomation.app/automate/executor/actions/oracle/nosql/index_create"
+	oracle_nosql_index_delete "flomation.app/automate/executor/actions/oracle/nosql/index_delete"
+	oracle_nosql_index_get "flomation.app/automate/executor/actions/oracle/nosql/index_get"
+	oracle_nosql_index_list "flomation.app/automate/executor/actions/oracle/nosql/index_list"
+	oracle_nosql_prepare_statement "flomation.app/automate/executor/actions/oracle/nosql/prepare_statement"
+	oracle_nosql_query "flomation.app/automate/executor/actions/oracle/nosql/query"
+	oracle_nosql_row_delete "flomation.app/automate/executor/actions/oracle/nosql/row_delete"
+	oracle_nosql_row_get "flomation.app/automate/executor/actions/oracle/nosql/row_get"
+	oracle_nosql_row_update "flomation.app/automate/executor/actions/oracle/nosql/row_update"
+	oracle_nosql_table_change_compartment "flomation.app/automate/executor/actions/oracle/nosql/table_change_compartment"
+	oracle_nosql_table_create "flomation.app/automate/executor/actions/oracle/nosql/table_create"
+	oracle_nosql_table_delete "flomation.app/automate/executor/actions/oracle/nosql/table_delete"
+	oracle_nosql_table_get "flomation.app/automate/executor/actions/oracle/nosql/table_get"
+	oracle_nosql_table_list "flomation.app/automate/executor/actions/oracle/nosql/table_list"
+	oracle_nosql_table_update "flomation.app/automate/executor/actions/oracle/nosql/table_update"
+	oracle_nosql_table_usage_list "flomation.app/automate/executor/actions/oracle/nosql/table_usage_list"
 	oracle_notifications_publish_message "flomation.app/automate/executor/actions/oracle/notifications/publish_message"
 	oracle_notifications_subscription_change_compartment "flomation.app/automate/executor/actions/oracle/notifications/subscription_change_compartment"
 	oracle_notifications_subscription_confirm "flomation.app/automate/executor/actions/oracle/notifications/subscription_confirm"
@@ -2536,6 +2689,23 @@ import (
 	oracle_vault_vault_update "flomation.app/automate/executor/actions/oracle/vault/vault_update"
 	oracle_vault_verify "flomation.app/automate/executor/actions/oracle/vault/verify"
 	oracle_vault_wrapping_key_get "flomation.app/automate/executor/actions/oracle/vault/wrapping_key_get"
+	oracle_waf_network_address_list_create "flomation.app/automate/executor/actions/oracle/waf/network_address_list_create"
+	oracle_waf_network_address_list_delete "flomation.app/automate/executor/actions/oracle/waf/network_address_list_delete"
+	oracle_waf_network_address_list_get "flomation.app/automate/executor/actions/oracle/waf/network_address_list_get"
+	oracle_waf_network_address_list_list "flomation.app/automate/executor/actions/oracle/waf/network_address_list_list"
+	oracle_waf_policy_change_compartment "flomation.app/automate/executor/actions/oracle/waf/policy_change_compartment"
+	oracle_waf_policy_create "flomation.app/automate/executor/actions/oracle/waf/policy_create"
+	oracle_waf_policy_delete "flomation.app/automate/executor/actions/oracle/waf/policy_delete"
+	oracle_waf_policy_get "flomation.app/automate/executor/actions/oracle/waf/policy_get"
+	oracle_waf_policy_list "flomation.app/automate/executor/actions/oracle/waf/policy_list"
+	oracle_waf_policy_update "flomation.app/automate/executor/actions/oracle/waf/policy_update"
+	oracle_waf_protection_capability_list "flomation.app/automate/executor/actions/oracle/waf/protection_capability_list"
+	oracle_waf_web_app_firewall_change_compartment "flomation.app/automate/executor/actions/oracle/waf/web_app_firewall_change_compartment"
+	oracle_waf_web_app_firewall_create "flomation.app/automate/executor/actions/oracle/waf/web_app_firewall_create"
+	oracle_waf_web_app_firewall_delete "flomation.app/automate/executor/actions/oracle/waf/web_app_firewall_delete"
+	oracle_waf_web_app_firewall_get "flomation.app/automate/executor/actions/oracle/waf/web_app_firewall_get"
+	oracle_waf_web_app_firewall_list "flomation.app/automate/executor/actions/oracle/waf/web_app_firewall_list"
+	oracle_waf_web_app_firewall_update "flomation.app/automate/executor/actions/oracle/waf/web_app_firewall_update"
 	output_set "flomation.app/automate/executor/actions/output/set"
 	output_set_outputs "flomation.app/automate/executor/actions/output/set_outputs"
 	output_web_response "flomation.app/automate/executor/actions/output/web_response"
@@ -4861,6 +5031,24 @@ var Actions = map[string]core.Action{
 	"opentofu/apply":                                                                  opentofu_apply.Execute,
 	"opentofu/destroy":                                                                opentofu_destroy.Execute,
 	"opentofu/plan":                                                                   opentofu_plan.Execute,
+	"oracle/apigateway/api_change_compartment":                                        oracle_apigateway_api_change_compartment.Execute,
+	"oracle/apigateway/api_create":                                                    oracle_apigateway_api_create.Execute,
+	"oracle/apigateway/api_delete":                                                    oracle_apigateway_api_delete.Execute,
+	"oracle/apigateway/api_get":                                                       oracle_apigateway_api_get.Execute,
+	"oracle/apigateway/api_list":                                                      oracle_apigateway_api_list.Execute,
+	"oracle/apigateway/api_update":                                                    oracle_apigateway_api_update.Execute,
+	"oracle/apigateway/deployment_change_compartment":                                 oracle_apigateway_deployment_change_compartment.Execute,
+	"oracle/apigateway/deployment_create":                                             oracle_apigateway_deployment_create.Execute,
+	"oracle/apigateway/deployment_delete":                                             oracle_apigateway_deployment_delete.Execute,
+	"oracle/apigateway/deployment_get":                                                oracle_apigateway_deployment_get.Execute,
+	"oracle/apigateway/deployment_list":                                               oracle_apigateway_deployment_list.Execute,
+	"oracle/apigateway/deployment_update":                                             oracle_apigateway_deployment_update.Execute,
+	"oracle/apigateway/gateway_change_compartment":                                    oracle_apigateway_gateway_change_compartment.Execute,
+	"oracle/apigateway/gateway_create":                                                oracle_apigateway_gateway_create.Execute,
+	"oracle/apigateway/gateway_delete":                                                oracle_apigateway_gateway_delete.Execute,
+	"oracle/apigateway/gateway_get":                                                   oracle_apigateway_gateway_get.Execute,
+	"oracle/apigateway/gateway_list":                                                  oracle_apigateway_gateway_list.Execute,
+	"oracle/apigateway/gateway_update":                                                oracle_apigateway_gateway_update.Execute,
 	"oracle/autonomousdatabase/db_change_compartment":                                 oracle_autonomousdatabase_db_change_compartment.Execute,
 	"oracle/autonomousdatabase/db_clone":                                              oracle_autonomousdatabase_db_clone.Execute,
 	"oracle/autonomousdatabase/db_create":                                             oracle_autonomousdatabase_db_create.Execute,
@@ -4954,6 +5142,26 @@ var Actions = map[string]core.Action{
 	"oracle/blockvolume/volume_replica_get":                                           oracle_blockvolume_volume_replica_get.Execute,
 	"oracle/blockvolume/volume_replica_get_all":                                       oracle_blockvolume_volume_replica_get_all.Execute,
 	"oracle/blockvolume/volume_update":                                                oracle_blockvolume_volume_update.Execute,
+	"oracle/certificates/association_list":                                            oracle_certificates_association_list.Execute,
+	"oracle/certificates/ca_bundle_content_get":                                       oracle_certificates_ca_bundle_content_get.Execute,
+	"oracle/certificates/ca_bundle_create":                                            oracle_certificates_ca_bundle_create.Execute,
+	"oracle/certificates/ca_bundle_delete":                                            oracle_certificates_ca_bundle_delete.Execute,
+	"oracle/certificates/ca_bundle_get":                                               oracle_certificates_ca_bundle_get.Execute,
+	"oracle/certificates/ca_bundle_list":                                              oracle_certificates_ca_bundle_list.Execute,
+	"oracle/certificates/ca_bundle_update":                                            oracle_certificates_ca_bundle_update.Execute,
+	"oracle/certificates/certificate_authority_create":                                oracle_certificates_certificate_authority_create.Execute,
+	"oracle/certificates/certificate_authority_get":                                   oracle_certificates_certificate_authority_get.Execute,
+	"oracle/certificates/certificate_authority_list":                                  oracle_certificates_certificate_authority_list.Execute,
+	"oracle/certificates/certificate_authority_schedule_deletion":                     oracle_certificates_certificate_authority_schedule_deletion.Execute,
+	"oracle/certificates/certificate_authority_update":                                oracle_certificates_certificate_authority_update.Execute,
+	"oracle/certificates/certificate_bundle_get":                                      oracle_certificates_certificate_bundle_get.Execute,
+	"oracle/certificates/certificate_change_compartment":                              oracle_certificates_certificate_change_compartment.Execute,
+	"oracle/certificates/certificate_create":                                          oracle_certificates_certificate_create.Execute,
+	"oracle/certificates/certificate_get":                                             oracle_certificates_certificate_get.Execute,
+	"oracle/certificates/certificate_list":                                            oracle_certificates_certificate_list.Execute,
+	"oracle/certificates/certificate_schedule_deletion":                               oracle_certificates_certificate_schedule_deletion.Execute,
+	"oracle/certificates/certificate_update":                                          oracle_certificates_certificate_update.Execute,
+	"oracle/certificates/certificate_version_list":                                    oracle_certificates_certificate_version_list.Execute,
 	"oracle/compute/availability_domain_get_all":                                      oracle_compute_availability_domain_get_all.Execute,
 	"oracle/compute/boot_volume_get_all":                                              oracle_compute_boot_volume_get_all.Execute,
 	"oracle/compute/compartment_get_all":                                              oracle_compute_compartment_get_all.Execute,
@@ -5015,6 +5223,52 @@ var Actions = map[string]core.Action{
 	"oracle/containerengine/workload_mapping_get":                                     oracle_containerengine_workload_mapping_get.Execute,
 	"oracle/containerengine/workload_mapping_list":                                    oracle_containerengine_workload_mapping_list.Execute,
 	"oracle/containerengine/workload_mapping_update":                                  oracle_containerengine_workload_mapping_update.Execute,
+	"oracle/datacatalog/catalog_change_compartment":                                   oracle_datacatalog_catalog_change_compartment.Execute,
+	"oracle/datacatalog/catalog_create":                                               oracle_datacatalog_catalog_create.Execute,
+	"oracle/datacatalog/catalog_delete":                                               oracle_datacatalog_catalog_delete.Execute,
+	"oracle/datacatalog/catalog_get":                                                  oracle_datacatalog_catalog_get.Execute,
+	"oracle/datacatalog/catalog_list":                                                 oracle_datacatalog_catalog_list.Execute,
+	"oracle/datacatalog/catalog_update":                                               oracle_datacatalog_catalog_update.Execute,
+	"oracle/datacatalog/connection_create":                                            oracle_datacatalog_connection_create.Execute,
+	"oracle/datacatalog/connection_delete":                                            oracle_datacatalog_connection_delete.Execute,
+	"oracle/datacatalog/connection_get":                                               oracle_datacatalog_connection_get.Execute,
+	"oracle/datacatalog/connection_list":                                              oracle_datacatalog_connection_list.Execute,
+	"oracle/datacatalog/connection_test":                                              oracle_datacatalog_connection_test.Execute,
+	"oracle/datacatalog/data_asset_create":                                            oracle_datacatalog_data_asset_create.Execute,
+	"oracle/datacatalog/data_asset_delete":                                            oracle_datacatalog_data_asset_delete.Execute,
+	"oracle/datacatalog/data_asset_get":                                               oracle_datacatalog_data_asset_get.Execute,
+	"oracle/datacatalog/data_asset_list":                                              oracle_datacatalog_data_asset_list.Execute,
+	"oracle/datacatalog/data_asset_update":                                            oracle_datacatalog_data_asset_update.Execute,
+	"oracle/datacatalog/entity_get":                                                   oracle_datacatalog_entity_get.Execute,
+	"oracle/datacatalog/entity_list":                                                  oracle_datacatalog_entity_list.Execute,
+	"oracle/datacatalog/glossary_create":                                              oracle_datacatalog_glossary_create.Execute,
+	"oracle/datacatalog/glossary_delete":                                              oracle_datacatalog_glossary_delete.Execute,
+	"oracle/datacatalog/glossary_get":                                                 oracle_datacatalog_glossary_get.Execute,
+	"oracle/datacatalog/glossary_list":                                                oracle_datacatalog_glossary_list.Execute,
+	"oracle/datacatalog/term_create":                                                  oracle_datacatalog_term_create.Execute,
+	"oracle/datacatalog/term_delete":                                                  oracle_datacatalog_term_delete.Execute,
+	"oracle/datacatalog/term_get":                                                     oracle_datacatalog_term_get.Execute,
+	"oracle/datacatalog/term_list":                                                    oracle_datacatalog_term_list.Execute,
+	"oracle/dataflow/application_change_compartment":                                  oracle_dataflow_application_change_compartment.Execute,
+	"oracle/dataflow/application_create":                                              oracle_dataflow_application_create.Execute,
+	"oracle/dataflow/application_delete":                                              oracle_dataflow_application_delete.Execute,
+	"oracle/dataflow/application_get":                                                 oracle_dataflow_application_get.Execute,
+	"oracle/dataflow/application_list":                                                oracle_dataflow_application_list.Execute,
+	"oracle/dataflow/application_update":                                              oracle_dataflow_application_update.Execute,
+	"oracle/dataflow/private_endpoint_create":                                         oracle_dataflow_private_endpoint_create.Execute,
+	"oracle/dataflow/private_endpoint_delete":                                         oracle_dataflow_private_endpoint_delete.Execute,
+	"oracle/dataflow/private_endpoint_get":                                            oracle_dataflow_private_endpoint_get.Execute,
+	"oracle/dataflow/private_endpoint_list":                                           oracle_dataflow_private_endpoint_list.Execute,
+	"oracle/dataflow/run_create":                                                      oracle_dataflow_run_create.Execute,
+	"oracle/dataflow/run_delete":                                                      oracle_dataflow_run_delete.Execute,
+	"oracle/dataflow/run_get":                                                         oracle_dataflow_run_get.Execute,
+	"oracle/dataflow/run_list":                                                        oracle_dataflow_run_list.Execute,
+	"oracle/dataflow/run_log_get":                                                     oracle_dataflow_run_log_get.Execute,
+	"oracle/dataflow/run_update":                                                      oracle_dataflow_run_update.Execute,
+	"oracle/dataflow/statement_create":                                                oracle_dataflow_statement_create.Execute,
+	"oracle/dataflow/statement_delete":                                                oracle_dataflow_statement_delete.Execute,
+	"oracle/dataflow/statement_get":                                                   oracle_dataflow_statement_get.Execute,
+	"oracle/dataflow/statement_list":                                                  oracle_dataflow_statement_list.Execute,
 	"oracle/dns/domain_records_delete":                                                oracle_dns_domain_records_delete.Execute,
 	"oracle/dns/domain_records_get":                                                   oracle_dns_domain_records_get.Execute,
 	"oracle/dns/domain_records_patch":                                                 oracle_dns_domain_records_patch.Execute,
@@ -5069,6 +5323,25 @@ var Actions = map[string]core.Action{
 	"oracle/dns/zone_records_patch":                                                   oracle_dns_zone_records_patch.Execute,
 	"oracle/dns/zone_records_update":                                                  oracle_dns_zone_records_update.Execute,
 	"oracle/dns/zone_update":                                                          oracle_dns_zone_update.Execute,
+	"oracle/email/dkim_create":                                                        oracle_email_dkim_create.Execute,
+	"oracle/email/dkim_delete":                                                        oracle_email_dkim_delete.Execute,
+	"oracle/email/dkim_get":                                                           oracle_email_dkim_get.Execute,
+	"oracle/email/dkim_list":                                                          oracle_email_dkim_list.Execute,
+	"oracle/email/email_domain_change_compartment":                                    oracle_email_email_domain_change_compartment.Execute,
+	"oracle/email/email_domain_create":                                                oracle_email_email_domain_create.Execute,
+	"oracle/email/email_domain_delete":                                                oracle_email_email_domain_delete.Execute,
+	"oracle/email/email_domain_get":                                                   oracle_email_email_domain_get.Execute,
+	"oracle/email/email_domain_list":                                                  oracle_email_email_domain_list.Execute,
+	"oracle/email/email_domain_update":                                                oracle_email_email_domain_update.Execute,
+	"oracle/email/sender_change_compartment":                                          oracle_email_sender_change_compartment.Execute,
+	"oracle/email/sender_create":                                                      oracle_email_sender_create.Execute,
+	"oracle/email/sender_delete":                                                      oracle_email_sender_delete.Execute,
+	"oracle/email/sender_get":                                                         oracle_email_sender_get.Execute,
+	"oracle/email/sender_list":                                                        oracle_email_sender_list.Execute,
+	"oracle/email/suppression_create":                                                 oracle_email_suppression_create.Execute,
+	"oracle/email/suppression_delete":                                                 oracle_email_suppression_delete.Execute,
+	"oracle/email/suppression_get":                                                    oracle_email_suppression_get.Execute,
+	"oracle/email/suppression_list":                                                   oracle_email_suppression_list.Execute,
 	"oracle/events/rule_change_compartment":                                           oracle_events_rule_change_compartment.Execute,
 	"oracle/events/rule_create":                                                       oracle_events_rule_create.Execute,
 	"oracle/events/rule_delete":                                                       oracle_events_rule_delete.Execute,
@@ -5317,6 +5590,23 @@ var Actions = map[string]core.Action{
 	"oracle/loadbalancer/ssl_cipher_suite_update":                                     oracle_loadbalancer_ssl_cipher_suite_update.Execute,
 	"oracle/loadbalancer/work_request_get":                                            oracle_loadbalancer_work_request_get.Execute,
 	"oracle/loadbalancer/work_request_list":                                           oracle_loadbalancer_work_request_list.Execute,
+	"oracle/logging/log_change_log_group":                                             oracle_logging_log_change_log_group.Execute,
+	"oracle/logging/log_create":                                                       oracle_logging_log_create.Execute,
+	"oracle/logging/log_delete":                                                       oracle_logging_log_delete.Execute,
+	"oracle/logging/log_get":                                                          oracle_logging_log_get.Execute,
+	"oracle/logging/log_group_change_compartment":                                     oracle_logging_log_group_change_compartment.Execute,
+	"oracle/logging/log_group_create":                                                 oracle_logging_log_group_create.Execute,
+	"oracle/logging/log_group_delete":                                                 oracle_logging_log_group_delete.Execute,
+	"oracle/logging/log_group_get":                                                    oracle_logging_log_group_get.Execute,
+	"oracle/logging/log_group_list":                                                   oracle_logging_log_group_list.Execute,
+	"oracle/logging/log_group_update":                                                 oracle_logging_log_group_update.Execute,
+	"oracle/logging/log_list":                                                         oracle_logging_log_list.Execute,
+	"oracle/logging/log_update":                                                       oracle_logging_log_update.Execute,
+	"oracle/logging/search_logs":                                                      oracle_logging_search_logs.Execute,
+	"oracle/logging/service_list":                                                     oracle_logging_service_list.Execute,
+	"oracle/logging/unified_agent_config_delete":                                      oracle_logging_unified_agent_config_delete.Execute,
+	"oracle/logging/unified_agent_config_get":                                         oracle_logging_unified_agent_config_get.Execute,
+	"oracle/logging/unified_agent_config_list":                                        oracle_logging_unified_agent_config_list.Execute,
 	"oracle/monitoring/alarm_change_compartment":                                      oracle_monitoring_alarm_change_compartment.Execute,
 	"oracle/monitoring/alarm_create":                                                  oracle_monitoring_alarm_create.Execute,
 	"oracle/monitoring/alarm_delete":                                                  oracle_monitoring_alarm_delete.Execute,
@@ -5332,6 +5622,23 @@ var Actions = map[string]core.Action{
 	"oracle/monitoring/metrics_list":                                                  oracle_monitoring_metrics_list.Execute,
 	"oracle/monitoring/post_metric_data":                                              oracle_monitoring_post_metric_data.Execute,
 	"oracle/monitoring/summarize_metrics_data":                                        oracle_monitoring_summarize_metrics_data.Execute,
+	"oracle/mysql/backup_create":                                                      oracle_mysql_backup_create.Execute,
+	"oracle/mysql/backup_delete":                                                      oracle_mysql_backup_delete.Execute,
+	"oracle/mysql/backup_get":                                                         oracle_mysql_backup_get.Execute,
+	"oracle/mysql/backup_list":                                                        oracle_mysql_backup_list.Execute,
+	"oracle/mysql/configuration_get":                                                  oracle_mysql_configuration_get.Execute,
+	"oracle/mysql/configuration_list":                                                 oracle_mysql_configuration_list.Execute,
+	"oracle/mysql/db_system_change_compartment":                                       oracle_mysql_db_system_change_compartment.Execute,
+	"oracle/mysql/db_system_create":                                                   oracle_mysql_db_system_create.Execute,
+	"oracle/mysql/db_system_delete":                                                   oracle_mysql_db_system_delete.Execute,
+	"oracle/mysql/db_system_get":                                                      oracle_mysql_db_system_get.Execute,
+	"oracle/mysql/db_system_list":                                                     oracle_mysql_db_system_list.Execute,
+	"oracle/mysql/db_system_start":                                                    oracle_mysql_db_system_start.Execute,
+	"oracle/mysql/db_system_stop":                                                     oracle_mysql_db_system_stop.Execute,
+	"oracle/mysql/db_system_update":                                                   oracle_mysql_db_system_update.Execute,
+	"oracle/mysql/heatwave_add":                                                       oracle_mysql_heatwave_add.Execute,
+	"oracle/mysql/heatwave_delete":                                                    oracle_mysql_heatwave_delete.Execute,
+	"oracle/mysql/heatwave_get":                                                       oracle_mysql_heatwave_get.Execute,
 	"oracle/networking/dhcp_options_create":                                           oracle_networking_dhcp_options_create.Execute,
 	"oracle/networking/dhcp_options_delete":                                           oracle_networking_dhcp_options_delete.Execute,
 	"oracle/networking/dhcp_options_get":                                              oracle_networking_dhcp_options_get.Execute,
@@ -5427,6 +5734,22 @@ var Actions = map[string]core.Action{
 	"oracle/networkloadbalancer/protocol_list":                                        oracle_networkloadbalancer_protocol_list.Execute,
 	"oracle/networkloadbalancer/work_request_get":                                     oracle_networkloadbalancer_work_request_get.Execute,
 	"oracle/networkloadbalancer/work_request_list":                                    oracle_networkloadbalancer_work_request_list.Execute,
+	"oracle/nosql/index_create":                                                       oracle_nosql_index_create.Execute,
+	"oracle/nosql/index_delete":                                                       oracle_nosql_index_delete.Execute,
+	"oracle/nosql/index_get":                                                          oracle_nosql_index_get.Execute,
+	"oracle/nosql/index_list":                                                         oracle_nosql_index_list.Execute,
+	"oracle/nosql/prepare_statement":                                                  oracle_nosql_prepare_statement.Execute,
+	"oracle/nosql/query":                                                              oracle_nosql_query.Execute,
+	"oracle/nosql/row_delete":                                                         oracle_nosql_row_delete.Execute,
+	"oracle/nosql/row_get":                                                            oracle_nosql_row_get.Execute,
+	"oracle/nosql/row_update":                                                         oracle_nosql_row_update.Execute,
+	"oracle/nosql/table_change_compartment":                                           oracle_nosql_table_change_compartment.Execute,
+	"oracle/nosql/table_create":                                                       oracle_nosql_table_create.Execute,
+	"oracle/nosql/table_delete":                                                       oracle_nosql_table_delete.Execute,
+	"oracle/nosql/table_get":                                                          oracle_nosql_table_get.Execute,
+	"oracle/nosql/table_list":                                                         oracle_nosql_table_list.Execute,
+	"oracle/nosql/table_update":                                                       oracle_nosql_table_update.Execute,
+	"oracle/nosql/table_usage_list":                                                   oracle_nosql_table_usage_list.Execute,
 	"oracle/notifications/publish_message":                                            oracle_notifications_publish_message.Execute,
 	"oracle/notifications/subscription_change_compartment":                            oracle_notifications_subscription_change_compartment.Execute,
 	"oracle/notifications/subscription_confirm":                                       oracle_notifications_subscription_confirm.Execute,
@@ -5557,6 +5880,23 @@ var Actions = map[string]core.Action{
 	"oracle/vault/vault_update":                                                       oracle_vault_vault_update.Execute,
 	"oracle/vault/verify":                                                             oracle_vault_verify.Execute,
 	"oracle/vault/wrapping_key_get":                                                   oracle_vault_wrapping_key_get.Execute,
+	"oracle/waf/network_address_list_create":                                          oracle_waf_network_address_list_create.Execute,
+	"oracle/waf/network_address_list_delete":                                          oracle_waf_network_address_list_delete.Execute,
+	"oracle/waf/network_address_list_get":                                             oracle_waf_network_address_list_get.Execute,
+	"oracle/waf/network_address_list_list":                                            oracle_waf_network_address_list_list.Execute,
+	"oracle/waf/policy_change_compartment":                                            oracle_waf_policy_change_compartment.Execute,
+	"oracle/waf/policy_create":                                                        oracle_waf_policy_create.Execute,
+	"oracle/waf/policy_delete":                                                        oracle_waf_policy_delete.Execute,
+	"oracle/waf/policy_get":                                                           oracle_waf_policy_get.Execute,
+	"oracle/waf/policy_list":                                                          oracle_waf_policy_list.Execute,
+	"oracle/waf/policy_update":                                                        oracle_waf_policy_update.Execute,
+	"oracle/waf/protection_capability_list":                                           oracle_waf_protection_capability_list.Execute,
+	"oracle/waf/web_app_firewall_change_compartment":                                  oracle_waf_web_app_firewall_change_compartment.Execute,
+	"oracle/waf/web_app_firewall_create":                                              oracle_waf_web_app_firewall_create.Execute,
+	"oracle/waf/web_app_firewall_delete":                                              oracle_waf_web_app_firewall_delete.Execute,
+	"oracle/waf/web_app_firewall_get":                                                 oracle_waf_web_app_firewall_get.Execute,
+	"oracle/waf/web_app_firewall_list":                                                oracle_waf_web_app_firewall_list.Execute,
+	"oracle/waf/web_app_firewall_update":                                              oracle_waf_web_app_firewall_update.Execute,
 	"output/set":                                                                      output_set.Execute,
 	"output/set_outputs":                                                              output_set_outputs.Execute,
 	"output/web_response":                                                             output_web_response.Execute,
