@@ -2233,6 +2233,22 @@ import (
 	oracle_networkloadbalancer_protocol_list "flomation.app/automate/executor/actions/oracle/networkloadbalancer/protocol_list"
 	oracle_networkloadbalancer_work_request_get "flomation.app/automate/executor/actions/oracle/networkloadbalancer/work_request_get"
 	oracle_networkloadbalancer_work_request_list "flomation.app/automate/executor/actions/oracle/networkloadbalancer/work_request_list"
+	oracle_notifications_publish_message "flomation.app/automate/executor/actions/oracle/notifications/publish_message"
+	oracle_notifications_subscription_change_compartment "flomation.app/automate/executor/actions/oracle/notifications/subscription_change_compartment"
+	oracle_notifications_subscription_confirm "flomation.app/automate/executor/actions/oracle/notifications/subscription_confirm"
+	oracle_notifications_subscription_create "flomation.app/automate/executor/actions/oracle/notifications/subscription_create"
+	oracle_notifications_subscription_delete "flomation.app/automate/executor/actions/oracle/notifications/subscription_delete"
+	oracle_notifications_subscription_get "flomation.app/automate/executor/actions/oracle/notifications/subscription_get"
+	oracle_notifications_subscription_list "flomation.app/automate/executor/actions/oracle/notifications/subscription_list"
+	oracle_notifications_subscription_resend_confirmation "flomation.app/automate/executor/actions/oracle/notifications/subscription_resend_confirmation"
+	oracle_notifications_subscription_unsubscribe "flomation.app/automate/executor/actions/oracle/notifications/subscription_unsubscribe"
+	oracle_notifications_subscription_update "flomation.app/automate/executor/actions/oracle/notifications/subscription_update"
+	oracle_notifications_topic_change_compartment "flomation.app/automate/executor/actions/oracle/notifications/topic_change_compartment"
+	oracle_notifications_topic_create "flomation.app/automate/executor/actions/oracle/notifications/topic_create"
+	oracle_notifications_topic_delete "flomation.app/automate/executor/actions/oracle/notifications/topic_delete"
+	oracle_notifications_topic_get "flomation.app/automate/executor/actions/oracle/notifications/topic_get"
+	oracle_notifications_topic_list "flomation.app/automate/executor/actions/oracle/notifications/topic_list"
+	oracle_notifications_topic_update "flomation.app/automate/executor/actions/oracle/notifications/topic_update"
 	oracle_objectstorage_bucket_create "flomation.app/automate/executor/actions/oracle/objectstorage/bucket_create"
 	oracle_objectstorage_bucket_delete "flomation.app/automate/executor/actions/oracle/objectstorage/bucket_delete"
 	oracle_objectstorage_bucket_get "flomation.app/automate/executor/actions/oracle/objectstorage/bucket_get"
@@ -5016,6 +5032,22 @@ var Actions = map[string]core.Action{
 	"oracle/networkloadbalancer/protocol_list":                                        oracle_networkloadbalancer_protocol_list.Execute,
 	"oracle/networkloadbalancer/work_request_get":                                     oracle_networkloadbalancer_work_request_get.Execute,
 	"oracle/networkloadbalancer/work_request_list":                                    oracle_networkloadbalancer_work_request_list.Execute,
+	"oracle/notifications/publish_message":                                            oracle_notifications_publish_message.Execute,
+	"oracle/notifications/subscription_change_compartment":                            oracle_notifications_subscription_change_compartment.Execute,
+	"oracle/notifications/subscription_confirm":                                       oracle_notifications_subscription_confirm.Execute,
+	"oracle/notifications/subscription_create":                                        oracle_notifications_subscription_create.Execute,
+	"oracle/notifications/subscription_delete":                                        oracle_notifications_subscription_delete.Execute,
+	"oracle/notifications/subscription_get":                                           oracle_notifications_subscription_get.Execute,
+	"oracle/notifications/subscription_list":                                          oracle_notifications_subscription_list.Execute,
+	"oracle/notifications/subscription_resend_confirmation":                           oracle_notifications_subscription_resend_confirmation.Execute,
+	"oracle/notifications/subscription_unsubscribe":                                   oracle_notifications_subscription_unsubscribe.Execute,
+	"oracle/notifications/subscription_update":                                        oracle_notifications_subscription_update.Execute,
+	"oracle/notifications/topic_change_compartment":                                   oracle_notifications_topic_change_compartment.Execute,
+	"oracle/notifications/topic_create":                                               oracle_notifications_topic_create.Execute,
+	"oracle/notifications/topic_delete":                                               oracle_notifications_topic_delete.Execute,
+	"oracle/notifications/topic_get":                                                  oracle_notifications_topic_get.Execute,
+	"oracle/notifications/topic_list":                                                 oracle_notifications_topic_list.Execute,
+	"oracle/notifications/topic_update":                                               oracle_notifications_topic_update.Execute,
 	"oracle/objectstorage/bucket_create":                                              oracle_objectstorage_bucket_create.Execute,
 	"oracle/objectstorage/bucket_delete":                                              oracle_objectstorage_bucket_delete.Execute,
 	"oracle/objectstorage/bucket_get":                                                 oracle_objectstorage_bucket_get.Execute,
