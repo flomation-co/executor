@@ -82,7 +82,11 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 		IsForcePlainText:  cur.HealthChecker.IsForcePlainText,
 	}
 	if v := strings.TrimSpace(lbn.OptionalString("protocol", inputs)); v != "" {
-		details.Protocol = &v
+		p, err := lbn.ValidateEnum("protocol", v, lbn.HealthCheckProtocols...)
+		if err != nil {
+			return lbn.ErrorResult(err.Error()), nil
+		}
+		details.Protocol = &p
 	}
 	if v, ok, err := lbn.OptionalInt("port", inputs); err != nil {
 		return lbn.ErrorResult(err.Error()), nil

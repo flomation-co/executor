@@ -71,6 +71,9 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	if err != nil {
 		return lbn.ErrorResult(err.Error()), nil
 	}
+	if protocol, err = lbn.ValidateEnum("protocol", protocol, lbn.ListenerProtocols...); err != nil {
+		return lbn.ErrorResult(err.Error()), nil
+	}
 	// Replace-semantics: UpdateListenerDetails overwrites the whole listener, so build
 	// it from the operator's inputs exactly as listener_create builds CreateListenerDetails.
 	details := lb.UpdateListenerDetails{

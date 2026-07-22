@@ -62,8 +62,14 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	if err != nil {
 		return lbn.ErrorResult(err.Error()), nil
 	}
+	if policy, err = lbn.ValidateEnum("policy", policy, lbn.BackendPolicies...); err != nil {
+		return lbn.ErrorResult(err.Error()), nil
+	}
 	hcProtocol, err := lbn.RequiredString("health_check_protocol", inputs)
 	if err != nil {
+		return lbn.ErrorResult(err.Error()), nil
+	}
+	if hcProtocol, err = lbn.ValidateEnum("health check protocol", hcProtocol, lbn.HealthCheckProtocols...); err != nil {
 		return lbn.ErrorResult(err.Error()), nil
 	}
 	hc := &lb.HealthCheckerDetails{Protocol: &hcProtocol}

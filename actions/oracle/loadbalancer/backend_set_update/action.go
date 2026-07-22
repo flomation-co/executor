@@ -71,7 +71,9 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	}
 	policy := lbn.Str(cur.BackendSet.Policy)
 	if v := strings.TrimSpace(lbn.OptionalString("policy", inputs)); v != "" {
-		policy = v
+		if policy, err = lbn.ValidateEnum("policy", v, lbn.BackendPolicies...); err != nil {
+			return lbn.ErrorResult(err.Error()), nil
+		}
 	}
 	hc := &lb.HealthCheckerDetails{}
 	if h := cur.BackendSet.HealthChecker; h != nil {
@@ -86,7 +88,11 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 		hc.IsForcePlainText = h.IsForcePlainText
 	}
 	if v := strings.TrimSpace(lbn.OptionalString("health_check_protocol", inputs)); v != "" {
-		hc.Protocol = &v
+		hcp, err := lbn.ValidateEnum("health check protocol", v, lbn.HealthCheckProtocols...)
+		if err != nil {
+			return lbn.ErrorResult(err.Error()), nil
+		}
+		hc.Protocol = &hcp
 	}
 	if v, ok, err := lbn.OptionalInt("health_check_port", inputs); err != nil {
 		return lbn.ErrorResult(err.Error()), nil

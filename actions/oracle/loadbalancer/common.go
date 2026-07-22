@@ -252,6 +252,29 @@ func FormatTime(t *common.SDKTime) string {
 	return t.Time.UTC().Format(time.RFC3339)
 }
 
+// ValidateEnum upper-cases an operator-entered constrained-string value and checks it
+// against the allowed set, returning the canonical (upper-case) value or a helpful
+// error listing the choices. OCI enum values are upper-case, so this accepts
+// lower-case input (a common slip, e.g. "round_robin") and catches typos up front
+// rather than letting a raw OCI rejection surface mid-flow. The live pickers supply
+// the correct value in the editor; this guards programmatic/chained callers.
+func ValidateEnum(field, value string, allowed ...string) (string, error) {
+	v := strings.ToUpper(strings.TrimSpace(value))
+	for _, a := range allowed {
+		if v == a {
+			return v, nil
+		}
+	}
+	return "", fmt.Errorf("%s must be one of: %s", field, strings.Join(allowed, ", "))
+}
+
+// Allowed enum sets, confirmed against the live OCI Load Balancer API.
+var (
+	BackendPolicies      = []string{"ROUND_ROBIN", "LEAST_CONNECTIONS", "IP_HASH"}
+	ListenerProtocols    = []string{"HTTP", "HTTP2", "HTTP3", "TCP", "GRPC"}
+	HealthCheckProtocols = []string{"HTTP", "HTTPS", "TCP"}
+)
+
 // NormaliseRegion trims and lower-cases an operator-entered OCI region identifier —
 // region keys are canonically lower-case, so we normalise free-text input the same
 // way GetAuth treats the auth region.

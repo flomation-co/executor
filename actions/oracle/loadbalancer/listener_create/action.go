@@ -71,6 +71,9 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	if err != nil {
 		return lbn.ErrorResult(err.Error()), nil
 	}
+	if protocol, err = lbn.ValidateEnum("protocol", protocol, lbn.ListenerProtocols...); err != nil {
+		return lbn.ErrorResult(err.Error()), nil
+	}
 	details := lb.CreateListenerDetails{
 		Name:                  &name,
 		DefaultBackendSetName: &backendSet,
