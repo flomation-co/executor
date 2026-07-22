@@ -313904,6 +313904,3851 @@
       }
     ]
   },
+  "oracle/exadata/cloud_exadata_infrastructure_add_storage": {
+    "hash": "a7cca794f2d9ade2a38f16d21440c4c3aedb0803abc299f101d809facf478fe7",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "OCI Exadata: Add Storage Capacity",
+    "description": "Activate the storage servers already installed on a cloud Exadata infrastructure so their capacity becomes available to VM clusters. Asynchronous — poll Get Cloud Exadata Infrastructure until AVAILABLE.",
+    "website": "https://www.flomation.co",
+    "icon": "oracle+microchip",
+    "date": "22/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Oracle Cloud",
+      "icon": "oracle",
+      "description": "Oracle Cloud Infrastructure (OCI) integrations"
+    },
+    "sub_category": {
+      "name": "Exadata",
+      "icon": "microchip",
+      "description": "Oracle Cloud Exadata Database Service on Dedicated Infrastructure — provision and manage cloud Exadata infrastructure and VM clusters, inspect DB servers and nodes, and schedule maintenance runs"
+    },
+    "inputs": [
+      {
+        "name": "tenancy_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Tenancy OCID",
+        "placeholder": "ocid1.tenancy.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "user_ocid",
+        "type": "string",
+        "value": null,
+        "label": "User OCID",
+        "placeholder": "ocid1.user.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "e.g. uk-london-1",
+        "required": true
+      },
+      {
+        "name": "fingerprint",
+        "type": "string",
+        "value": null,
+        "label": "Key Fingerprint",
+        "placeholder": "aa:bb:cc:… fingerprint of the uploaded API key",
+        "required": true
+      },
+      {
+        "name": "private_key",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key (PEM)",
+        "placeholder": "The API signing private key — full PEM, incl. BEGIN/END lines"
+      },
+      {
+        "name": "private_key_passphrase",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key Passphrase",
+        "placeholder": "Only if the key is encrypted (optional)"
+      },
+      {
+        "name": "compartment_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Compartment OCID",
+        "placeholder": "ocid1.compartment.oc1..aaaa… (scopes the picker)"
+      },
+      {
+        "name": "cloud_exadata_infrastructure_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Cloud Exadata Infrastructure OCID",
+        "placeholder": "ocid1.cloudexadatainfrastructure.oc1..aaaa…",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "infrastructure",
+        "type": "object",
+        "value": null,
+        "label": "Infrastructure",
+        "placeholder": ""
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Infrastructure OCID",
+        "placeholder": ""
+      },
+      {
+        "name": "lifecycle_state",
+        "type": "string",
+        "value": null,
+        "label": "Lifecycle State",
+        "placeholder": ""
+      },
+      {
+        "name": "work_request_id",
+        "type": "string",
+        "value": null,
+        "label": "Work Request OCID",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "oracle/exadata/cloud_exadata_infrastructure_change_compartment": {
+    "hash": "497d50abc1086f2251d9663858d7556b342e2027e0017091cdb587fde1d947dc",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "OCI Exadata: Move Cloud Exadata Infrastructure to Compartment",
+    "description": "Move a cloud Exadata infrastructure rack into a different compartment — an asynchronous move returning a work-request id to track.",
+    "website": "https://www.flomation.co",
+    "icon": "oracle+microchip",
+    "date": "22/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Oracle Cloud",
+      "icon": "oracle",
+      "description": "Oracle Cloud Infrastructure (OCI) integrations"
+    },
+    "sub_category": {
+      "name": "Exadata",
+      "icon": "microchip",
+      "description": "Oracle Cloud Exadata Database Service on Dedicated Infrastructure — provision and manage cloud Exadata infrastructure and VM clusters, inspect DB servers and nodes, and schedule maintenance runs"
+    },
+    "inputs": [
+      {
+        "name": "tenancy_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Tenancy OCID",
+        "placeholder": "ocid1.tenancy.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "user_ocid",
+        "type": "string",
+        "value": null,
+        "label": "User OCID",
+        "placeholder": "ocid1.user.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "e.g. uk-london-1",
+        "required": true
+      },
+      {
+        "name": "fingerprint",
+        "type": "string",
+        "value": null,
+        "label": "Key Fingerprint",
+        "placeholder": "aa:bb:cc:… fingerprint of the uploaded API key",
+        "required": true
+      },
+      {
+        "name": "private_key",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key (PEM)",
+        "placeholder": "The API signing private key — full PEM, incl. BEGIN/END lines"
+      },
+      {
+        "name": "private_key_passphrase",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key Passphrase",
+        "placeholder": "Only if the key is encrypted (optional)"
+      },
+      {
+        "name": "compartment_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Compartment OCID",
+        "placeholder": "ocid1.compartment.oc1..aaaa… (scopes the picker)"
+      },
+      {
+        "name": "cloud_exadata_infrastructure_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Cloud Exadata Infrastructure OCID",
+        "placeholder": "ocid1.cloudexadatainfrastructure.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "destination_compartment_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Destination Compartment OCID",
+        "placeholder": "ocid1.compartment.oc1..aaaa… — where to move it",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Infrastructure OCID",
+        "placeholder": ""
+      },
+      {
+        "name": "destination_compartment_id",
+        "type": "string",
+        "value": null,
+        "label": "Destination Compartment OCID",
+        "placeholder": ""
+      },
+      {
+        "name": "work_request_id",
+        "type": "string",
+        "value": null,
+        "label": "Work Request OCID",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "oracle/exadata/cloud_exadata_infrastructure_create": {
+    "hash": "4a71b69a2617cf9e180f7b9b996eab6a3a214d7450b62ad3f8feef2b87900a1c",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "OCI Exadata: Create Cloud Exadata Infrastructure",
+    "description": "Provision cloud Exadata infrastructure — the dedicated rack of compute and storage servers a VM cluster runs on. Pick the shape and the number of compute and storage servers to scale it. Asynchronous — poll Get Cloud Exadata Infrastructure until AVAILABLE.",
+    "website": "https://www.flomation.co",
+    "icon": "oracle+microchip",
+    "date": "22/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Oracle Cloud",
+      "icon": "oracle",
+      "description": "Oracle Cloud Infrastructure (OCI) integrations"
+    },
+    "sub_category": {
+      "name": "Exadata",
+      "icon": "microchip",
+      "description": "Oracle Cloud Exadata Database Service on Dedicated Infrastructure — provision and manage cloud Exadata infrastructure and VM clusters, inspect DB servers and nodes, and schedule maintenance runs"
+    },
+    "inputs": [
+      {
+        "name": "tenancy_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Tenancy OCID",
+        "placeholder": "ocid1.tenancy.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "user_ocid",
+        "type": "string",
+        "value": null,
+        "label": "User OCID",
+        "placeholder": "ocid1.user.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "e.g. uk-london-1",
+        "required": true
+      },
+      {
+        "name": "fingerprint",
+        "type": "string",
+        "value": null,
+        "label": "Key Fingerprint",
+        "placeholder": "aa:bb:cc:… fingerprint of the uploaded API key",
+        "required": true
+      },
+      {
+        "name": "private_key",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key (PEM)",
+        "placeholder": "The API signing private key — full PEM, incl. BEGIN/END lines"
+      },
+      {
+        "name": "private_key_passphrase",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key Passphrase",
+        "placeholder": "Only if the key is encrypted (optional)"
+      },
+      {
+        "name": "compartment_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Compartment OCID",
+        "placeholder": "ocid1.compartment.oc1..aaaa… (use the tenancy OCID for the root)",
+        "required": true
+      },
+      {
+        "name": "display_name",
+        "type": "string",
+        "value": null,
+        "label": "Display Name",
+        "placeholder": "A friendly name for the infrastructure",
+        "required": true
+      },
+      {
+        "name": "availability_domain",
+        "type": "string",
+        "value": null,
+        "label": "Availability Domain",
+        "placeholder": "e.g. Vgqo:UK-LONDON-1-AD-1",
+        "required": true
+      },
+      {
+        "name": "shape",
+        "type": "string",
+        "value": null,
+        "label": "Shape",
+        "placeholder": "e.g. Exadata.X9M — the Exadata system shape",
+        "required": true
+      },
+      {
+        "name": "compute_count",
+        "type": "string",
+        "value": null,
+        "label": "Compute Count",
+        "placeholder": "Number of database (compute) servers",
+        "required": true
+      },
+      {
+        "name": "storage_count",
+        "type": "string",
+        "value": null,
+        "label": "Storage Count",
+        "placeholder": "Number of storage servers",
+        "required": true
+      },
+      {
+        "name": "tags",
+        "type": "string",
+        "value": null,
+        "label": "Freeform Tags (JSON)",
+        "placeholder": "{\"env\":\"prod\"} (optional)"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "infrastructure",
+        "type": "object",
+        "value": null,
+        "label": "Infrastructure",
+        "placeholder": ""
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Infrastructure OCID",
+        "placeholder": ""
+      },
+      {
+        "name": "lifecycle_state",
+        "type": "string",
+        "value": null,
+        "label": "Lifecycle State",
+        "placeholder": ""
+      },
+      {
+        "name": "work_request_id",
+        "type": "string",
+        "value": null,
+        "label": "Work Request OCID",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "oracle/exadata/cloud_exadata_infrastructure_delete": {
+    "hash": "88531e03458b93da11569e3e3855e99b719328fb831353db4ad7a26a3a49c6e3",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "OCI Exadata: Delete Cloud Exadata Infrastructure",
+    "description": "Tear down a cloud Exadata infrastructure by OCID. Asynchronous — returns a work-request id you can poll to confirm the teardown.",
+    "website": "https://www.flomation.co",
+    "icon": "oracle+microchip",
+    "date": "22/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Oracle Cloud",
+      "icon": "oracle",
+      "description": "Oracle Cloud Infrastructure (OCI) integrations"
+    },
+    "sub_category": {
+      "name": "Exadata",
+      "icon": "microchip",
+      "description": "Oracle Cloud Exadata Database Service on Dedicated Infrastructure — provision and manage cloud Exadata infrastructure and VM clusters, inspect DB servers and nodes, and schedule maintenance runs"
+    },
+    "inputs": [
+      {
+        "name": "tenancy_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Tenancy OCID",
+        "placeholder": "ocid1.tenancy.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "user_ocid",
+        "type": "string",
+        "value": null,
+        "label": "User OCID",
+        "placeholder": "ocid1.user.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "e.g. uk-london-1",
+        "required": true
+      },
+      {
+        "name": "fingerprint",
+        "type": "string",
+        "value": null,
+        "label": "Key Fingerprint",
+        "placeholder": "aa:bb:cc:… fingerprint of the uploaded API key",
+        "required": true
+      },
+      {
+        "name": "private_key",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key (PEM)",
+        "placeholder": "The API signing private key — full PEM, incl. BEGIN/END lines"
+      },
+      {
+        "name": "private_key_passphrase",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key Passphrase",
+        "placeholder": "Only if the key is encrypted (optional)"
+      },
+      {
+        "name": "compartment_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Compartment OCID",
+        "placeholder": "ocid1.compartment.oc1..aaaa… (scopes the picker)"
+      },
+      {
+        "name": "cloud_exadata_infrastructure_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Cloud Exadata Infrastructure OCID",
+        "placeholder": "ocid1.cloudexadatainfrastructure.oc1..aaaa…",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Infrastructure OCID",
+        "placeholder": ""
+      },
+      {
+        "name": "work_request_id",
+        "type": "string",
+        "value": null,
+        "label": "Work Request OCID",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "oracle/exadata/cloud_exadata_infrastructure_get": {
+    "hash": "308903ac274e9303175039a6d513bf4ba3940f4911865ba6be0fea13b965c321",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "OCI Exadata: Get Cloud Exadata Infrastructure",
+    "description": "Fetch a single cloud Exadata infrastructure by OCID — its shape, compute/storage server counts, capacity and lifecycle state.",
+    "website": "https://www.flomation.co",
+    "icon": "oracle+microchip",
+    "date": "22/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Oracle Cloud",
+      "icon": "oracle",
+      "description": "Oracle Cloud Infrastructure (OCI) integrations"
+    },
+    "sub_category": {
+      "name": "Exadata",
+      "icon": "microchip",
+      "description": "Oracle Cloud Exadata Database Service on Dedicated Infrastructure — provision and manage cloud Exadata infrastructure and VM clusters, inspect DB servers and nodes, and schedule maintenance runs"
+    },
+    "inputs": [
+      {
+        "name": "tenancy_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Tenancy OCID",
+        "placeholder": "ocid1.tenancy.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "user_ocid",
+        "type": "string",
+        "value": null,
+        "label": "User OCID",
+        "placeholder": "ocid1.user.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "e.g. uk-london-1",
+        "required": true
+      },
+      {
+        "name": "fingerprint",
+        "type": "string",
+        "value": null,
+        "label": "Key Fingerprint",
+        "placeholder": "aa:bb:cc:… fingerprint of the uploaded API key",
+        "required": true
+      },
+      {
+        "name": "private_key",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key (PEM)",
+        "placeholder": "The API signing private key — full PEM, incl. BEGIN/END lines"
+      },
+      {
+        "name": "private_key_passphrase",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key Passphrase",
+        "placeholder": "Only if the key is encrypted (optional)"
+      },
+      {
+        "name": "compartment_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Compartment OCID",
+        "placeholder": "ocid1.compartment.oc1..aaaa… (scopes the picker)"
+      },
+      {
+        "name": "cloud_exadata_infrastructure_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Cloud Exadata Infrastructure OCID",
+        "placeholder": "ocid1.cloudexadatainfrastructure.oc1..aaaa…",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "infrastructure",
+        "type": "object",
+        "value": null,
+        "label": "Infrastructure",
+        "placeholder": ""
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Infrastructure OCID",
+        "placeholder": ""
+      },
+      {
+        "name": "lifecycle_state",
+        "type": "string",
+        "value": null,
+        "label": "Lifecycle State",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "oracle/exadata/cloud_exadata_infrastructure_list": {
+    "hash": "4236abd0a2c0800fd360c93694b85224e304b5c8036b76ae53e7e45495c57b7d",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "OCI Exadata: List Cloud Exadata Infrastructures",
+    "description": "List the cloud Exadata infrastructures in a compartment. Walks pagination up to a safe cap.",
+    "website": "https://www.flomation.co",
+    "icon": "oracle+microchip",
+    "date": "22/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Oracle Cloud",
+      "icon": "oracle",
+      "description": "Oracle Cloud Infrastructure (OCI) integrations"
+    },
+    "sub_category": {
+      "name": "Exadata",
+      "icon": "microchip",
+      "description": "Oracle Cloud Exadata Database Service on Dedicated Infrastructure — provision and manage cloud Exadata infrastructure and VM clusters, inspect DB servers and nodes, and schedule maintenance runs"
+    },
+    "inputs": [
+      {
+        "name": "tenancy_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Tenancy OCID",
+        "placeholder": "ocid1.tenancy.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "user_ocid",
+        "type": "string",
+        "value": null,
+        "label": "User OCID",
+        "placeholder": "ocid1.user.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "e.g. uk-london-1",
+        "required": true
+      },
+      {
+        "name": "fingerprint",
+        "type": "string",
+        "value": null,
+        "label": "Key Fingerprint",
+        "placeholder": "aa:bb:cc:… fingerprint of the uploaded API key",
+        "required": true
+      },
+      {
+        "name": "private_key",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key (PEM)",
+        "placeholder": "The API signing private key — full PEM, incl. BEGIN/END lines"
+      },
+      {
+        "name": "private_key_passphrase",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key Passphrase",
+        "placeholder": "Only if the key is encrypted (optional)"
+      },
+      {
+        "name": "compartment_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Compartment OCID",
+        "placeholder": "ocid1.compartment.oc1..aaaa… (use the tenancy OCID for the root)",
+        "required": true
+      },
+      {
+        "name": "display_name",
+        "type": "string",
+        "value": null,
+        "label": "Name Filter",
+        "placeholder": "Only infrastructures with this exact display name (optional)"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "infrastructures",
+        "type": "object",
+        "value": null,
+        "label": "Infrastructures",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "string",
+        "value": null,
+        "label": "Count",
+        "placeholder": ""
+      },
+      {
+        "name": "truncated",
+        "type": "boolean",
+        "value": null,
+        "label": "Truncated",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "oracle/exadata/cloud_exadata_infrastructure_unallocated_resources_get": {
+    "hash": "0f65b417092dfc2f6f300c323072c549a8360cb292ad1476d950214091cebf08",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "OCI Exadata: Get Unallocated Resources",
+    "description": "Report the spare capacity of a cloud Exadata infrastructure — unallocated local storage, OCPUs, memory and Exadata storage still available.",
+    "website": "https://www.flomation.co",
+    "icon": "oracle+microchip",
+    "date": "22/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Oracle Cloud",
+      "icon": "oracle",
+      "description": "Oracle Cloud Infrastructure (OCI) integrations"
+    },
+    "sub_category": {
+      "name": "Exadata",
+      "icon": "microchip",
+      "description": "Oracle Cloud Exadata Database Service on Dedicated Infrastructure — provision and manage cloud Exadata infrastructure and VM clusters, inspect DB servers and nodes, and schedule maintenance runs"
+    },
+    "inputs": [
+      {
+        "name": "tenancy_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Tenancy OCID",
+        "placeholder": "ocid1.tenancy.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "user_ocid",
+        "type": "string",
+        "value": null,
+        "label": "User OCID",
+        "placeholder": "ocid1.user.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "e.g. uk-london-1",
+        "required": true
+      },
+      {
+        "name": "fingerprint",
+        "type": "string",
+        "value": null,
+        "label": "Key Fingerprint",
+        "placeholder": "aa:bb:cc:… fingerprint of the uploaded API key",
+        "required": true
+      },
+      {
+        "name": "private_key",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key (PEM)",
+        "placeholder": "The API signing private key — full PEM, incl. BEGIN/END lines"
+      },
+      {
+        "name": "private_key_passphrase",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key Passphrase",
+        "placeholder": "Only if the key is encrypted (optional)"
+      },
+      {
+        "name": "compartment_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Compartment OCID",
+        "placeholder": "ocid1.compartment.oc1..aaaa… (scopes the picker)"
+      },
+      {
+        "name": "cloud_exadata_infrastructure_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Cloud Exadata Infrastructure OCID",
+        "placeholder": "ocid1.cloudexadatainfrastructure.oc1..aaaa…",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Infrastructure OCID",
+        "placeholder": ""
+      },
+      {
+        "name": "display_name",
+        "type": "string",
+        "value": null,
+        "label": "Infrastructure Display Name",
+        "placeholder": ""
+      },
+      {
+        "name": "local_storage_gb",
+        "type": "integer",
+        "value": null,
+        "label": "Unallocated Local Storage (GB)",
+        "placeholder": ""
+      },
+      {
+        "name": "ocpus",
+        "type": "integer",
+        "value": null,
+        "label": "Unallocated OCPUs",
+        "placeholder": ""
+      },
+      {
+        "name": "memory_gb",
+        "type": "integer",
+        "value": null,
+        "label": "Unallocated Memory (GB)",
+        "placeholder": ""
+      },
+      {
+        "name": "exadata_storage_tb",
+        "type": "string",
+        "value": null,
+        "label": "Unallocated Exadata Storage (TB)",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "oracle/exadata/cloud_exadata_infrastructure_update": {
+    "hash": "dfa967c55f734e3a20d41a7a50b0d5d38048e548e3ee74985a0e5ae2f3784155",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "OCI Exadata: Update Cloud Exadata Infrastructure",
+    "description": "Update a cloud Exadata infrastructure by OCID — rename it, or scale its compute and storage server counts.",
+    "website": "https://www.flomation.co",
+    "icon": "oracle+microchip",
+    "date": "22/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Oracle Cloud",
+      "icon": "oracle",
+      "description": "Oracle Cloud Infrastructure (OCI) integrations"
+    },
+    "sub_category": {
+      "name": "Exadata",
+      "icon": "microchip",
+      "description": "Oracle Cloud Exadata Database Service on Dedicated Infrastructure — provision and manage cloud Exadata infrastructure and VM clusters, inspect DB servers and nodes, and schedule maintenance runs"
+    },
+    "inputs": [
+      {
+        "name": "tenancy_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Tenancy OCID",
+        "placeholder": "ocid1.tenancy.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "user_ocid",
+        "type": "string",
+        "value": null,
+        "label": "User OCID",
+        "placeholder": "ocid1.user.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "e.g. uk-london-1",
+        "required": true
+      },
+      {
+        "name": "fingerprint",
+        "type": "string",
+        "value": null,
+        "label": "Key Fingerprint",
+        "placeholder": "aa:bb:cc:… fingerprint of the uploaded API key",
+        "required": true
+      },
+      {
+        "name": "private_key",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key (PEM)",
+        "placeholder": "The API signing private key — full PEM, incl. BEGIN/END lines"
+      },
+      {
+        "name": "private_key_passphrase",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key Passphrase",
+        "placeholder": "Only if the key is encrypted (optional)"
+      },
+      {
+        "name": "compartment_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Compartment OCID",
+        "placeholder": "ocid1.compartment.oc1..aaaa… (scopes the picker)"
+      },
+      {
+        "name": "cloud_exadata_infrastructure_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Cloud Exadata Infrastructure OCID",
+        "placeholder": "ocid1.cloudexadatainfrastructure.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "display_name",
+        "type": "string",
+        "value": null,
+        "label": "Display Name",
+        "placeholder": "New user-friendly name (optional)"
+      },
+      {
+        "name": "compute_count",
+        "type": "string",
+        "value": null,
+        "label": "Compute Server Count",
+        "placeholder": "Scale the number of compute servers (optional)"
+      },
+      {
+        "name": "storage_count",
+        "type": "string",
+        "value": null,
+        "label": "Storage Server Count",
+        "placeholder": "Scale the number of storage servers (optional)"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "infrastructure",
+        "type": "object",
+        "value": null,
+        "label": "Infrastructure",
+        "placeholder": ""
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Infrastructure OCID",
+        "placeholder": ""
+      },
+      {
+        "name": "lifecycle_state",
+        "type": "string",
+        "value": null,
+        "label": "Lifecycle State",
+        "placeholder": ""
+      },
+      {
+        "name": "work_request_id",
+        "type": "string",
+        "value": null,
+        "label": "Work Request OCID",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "oracle/exadata/cloud_vm_cluster_add_vm": {
+    "hash": "b423d8071b56ca34c0bacf4a4e4be04d40042bd2850171ddf7b2ea67ba044ee6",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "OCI Exadata: Add VM to Cloud VM Cluster",
+    "description": "Scale a cloud VM cluster out by adding virtual machines — one per supplied ExaDB-D DB server OCID. Asynchronous — poll Get Cloud VM Cluster until AVAILABLE.",
+    "website": "https://www.flomation.co",
+    "icon": "oracle+microchip",
+    "date": "22/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Oracle Cloud",
+      "icon": "oracle",
+      "description": "Oracle Cloud Infrastructure (OCI) integrations"
+    },
+    "sub_category": {
+      "name": "Exadata",
+      "icon": "microchip",
+      "description": "Oracle Cloud Exadata Database Service on Dedicated Infrastructure — provision and manage cloud Exadata infrastructure and VM clusters, inspect DB servers and nodes, and schedule maintenance runs"
+    },
+    "inputs": [
+      {
+        "name": "tenancy_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Tenancy OCID",
+        "placeholder": "ocid1.tenancy.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "user_ocid",
+        "type": "string",
+        "value": null,
+        "label": "User OCID",
+        "placeholder": "ocid1.user.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "e.g. uk-london-1",
+        "required": true
+      },
+      {
+        "name": "fingerprint",
+        "type": "string",
+        "value": null,
+        "label": "Key Fingerprint",
+        "placeholder": "aa:bb:cc:… fingerprint of the uploaded API key",
+        "required": true
+      },
+      {
+        "name": "private_key",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key (PEM)",
+        "placeholder": "The API signing private key — full PEM, incl. BEGIN/END lines"
+      },
+      {
+        "name": "private_key_passphrase",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key Passphrase",
+        "placeholder": "Only if the key is encrypted (optional)"
+      },
+      {
+        "name": "compartment_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Compartment OCID",
+        "placeholder": "ocid1.compartment.oc1..aaaa… (scopes the picker)"
+      },
+      {
+        "name": "cloud_vm_cluster_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Cloud VM Cluster OCID",
+        "placeholder": "ocid1.cloudvmcluster.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "db_server_ocids",
+        "type": "string",
+        "value": null,
+        "label": "DB Server OCIDs",
+        "placeholder": "Comma-separated ExaDB-D DB server OCIDs to add as VMs",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "vm_cluster",
+        "type": "object",
+        "value": null,
+        "label": "VM Cluster",
+        "placeholder": ""
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "VM Cluster OCID",
+        "placeholder": ""
+      },
+      {
+        "name": "lifecycle_state",
+        "type": "string",
+        "value": null,
+        "label": "Lifecycle State",
+        "placeholder": ""
+      },
+      {
+        "name": "work_request_id",
+        "type": "string",
+        "value": null,
+        "label": "Work Request OCID",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "oracle/exadata/cloud_vm_cluster_change_compartment": {
+    "hash": "ba41417058174bd4cb9231949d8235f2b1ecdabf6f9542c29cbfd707675180a9",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "OCI Exadata: Move Cloud VM Cluster to Compartment",
+    "description": "Move a cloud VM cluster and its dependent resources to another compartment — asynchronous, returns a work-request id to track.",
+    "website": "https://www.flomation.co",
+    "icon": "oracle+microchip",
+    "date": "22/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Oracle Cloud",
+      "icon": "oracle",
+      "description": "Oracle Cloud Infrastructure (OCI) integrations"
+    },
+    "sub_category": {
+      "name": "Exadata",
+      "icon": "microchip",
+      "description": "Oracle Cloud Exadata Database Service on Dedicated Infrastructure — provision and manage cloud Exadata infrastructure and VM clusters, inspect DB servers and nodes, and schedule maintenance runs"
+    },
+    "inputs": [
+      {
+        "name": "tenancy_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Tenancy OCID",
+        "placeholder": "ocid1.tenancy.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "user_ocid",
+        "type": "string",
+        "value": null,
+        "label": "User OCID",
+        "placeholder": "ocid1.user.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "e.g. uk-london-1",
+        "required": true
+      },
+      {
+        "name": "fingerprint",
+        "type": "string",
+        "value": null,
+        "label": "Key Fingerprint",
+        "placeholder": "aa:bb:cc:… fingerprint of the uploaded API key",
+        "required": true
+      },
+      {
+        "name": "private_key",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key (PEM)",
+        "placeholder": "The API signing private key — full PEM, incl. BEGIN/END lines"
+      },
+      {
+        "name": "private_key_passphrase",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key Passphrase",
+        "placeholder": "Only if the key is encrypted (optional)"
+      },
+      {
+        "name": "compartment_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Compartment OCID",
+        "placeholder": "ocid1.compartment.oc1..aaaa… (scopes the picker)"
+      },
+      {
+        "name": "cloud_vm_cluster_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Cloud VM Cluster OCID",
+        "placeholder": "ocid1.cloudvmcluster.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "destination_compartment_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Destination Compartment OCID",
+        "placeholder": "ocid1.compartment.oc1..aaaa… — the compartment to move it into",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Cloud VM Cluster OCID",
+        "placeholder": ""
+      },
+      {
+        "name": "destination_compartment_id",
+        "type": "string",
+        "value": null,
+        "label": "Destination Compartment OCID",
+        "placeholder": ""
+      },
+      {
+        "name": "work_request_id",
+        "type": "string",
+        "value": null,
+        "label": "Work Request OCID",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "oracle/exadata/cloud_vm_cluster_create": {
+    "hash": "45f7fe8d0847730fb4dacd39c1edcceb4a544bcb6f6c991e1c6a1906b79c81f8",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "OCI Exadata: Create Cloud VM Cluster",
+    "description": "Provision a cloud VM cluster on existing Exadata infrastructure — the database VMs that host your Oracle databases. Give it a subnet, a backup subnet, a hostname, an SSH key, a CPU core count and a Grid Infrastructure version. Asynchronous — poll Get Cloud VM Cluster until AVAILABLE.",
+    "website": "https://www.flomation.co",
+    "icon": "oracle+microchip",
+    "date": "22/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Oracle Cloud",
+      "icon": "oracle",
+      "description": "Oracle Cloud Infrastructure (OCI) integrations"
+    },
+    "sub_category": {
+      "name": "Exadata",
+      "icon": "microchip",
+      "description": "Oracle Cloud Exadata Database Service on Dedicated Infrastructure — provision and manage cloud Exadata infrastructure and VM clusters, inspect DB servers and nodes, and schedule maintenance runs"
+    },
+    "inputs": [
+      {
+        "name": "tenancy_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Tenancy OCID",
+        "placeholder": "ocid1.tenancy.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "user_ocid",
+        "type": "string",
+        "value": null,
+        "label": "User OCID",
+        "placeholder": "ocid1.user.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "e.g. uk-london-1",
+        "required": true
+      },
+      {
+        "name": "fingerprint",
+        "type": "string",
+        "value": null,
+        "label": "Key Fingerprint",
+        "placeholder": "aa:bb:cc:… fingerprint of the uploaded API key",
+        "required": true
+      },
+      {
+        "name": "private_key",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key (PEM)",
+        "placeholder": "The API signing private key — full PEM, incl. BEGIN/END lines"
+      },
+      {
+        "name": "private_key_passphrase",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key Passphrase",
+        "placeholder": "Only if the key is encrypted (optional)"
+      },
+      {
+        "name": "compartment_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Compartment OCID",
+        "placeholder": "ocid1.compartment.oc1..aaaa… (use the tenancy OCID for the root)",
+        "required": true
+      },
+      {
+        "name": "display_name",
+        "type": "string",
+        "value": null,
+        "label": "Display Name",
+        "placeholder": "A friendly name for the VM cluster",
+        "required": true
+      },
+      {
+        "name": "cloud_exadata_infrastructure_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Cloud Exadata Infrastructure OCID",
+        "placeholder": "ocid1.cloudexadatainfrastructure.oc1..aaaa… to run on",
+        "required": true
+      },
+      {
+        "name": "subnet_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Client Subnet OCID",
+        "placeholder": "ocid1.subnet.oc1..aaaa… for client access",
+        "required": true
+      },
+      {
+        "name": "backup_subnet_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Backup Subnet OCID",
+        "placeholder": "ocid1.subnet.oc1..aaaa… for backups",
+        "required": true
+      },
+      {
+        "name": "hostname",
+        "type": "string",
+        "value": null,
+        "label": "Hostname",
+        "placeholder": "The cluster hostname prefix",
+        "required": true
+      },
+      {
+        "name": "cpu_core_count",
+        "type": "string",
+        "value": null,
+        "label": "CPU Core Count",
+        "placeholder": "Total OCPU cores across the cluster",
+        "required": true
+      },
+      {
+        "name": "gi_version",
+        "type": "string",
+        "value": null,
+        "label": "Grid Infrastructure Version",
+        "placeholder": "e.g. 19.0.0.0 — the Oracle Grid Infrastructure version",
+        "required": true
+      },
+      {
+        "name": "ssh_public_keys",
+        "type": "text",
+        "value": null,
+        "label": "SSH Public Keys",
+        "placeholder": "One or more SSH public keys, comma-separated",
+        "required": true
+      },
+      {
+        "name": "cluster_name",
+        "type": "string",
+        "value": null,
+        "label": "Cluster Name",
+        "placeholder": "The Grid Infrastructure cluster name (optional)"
+      },
+      {
+        "name": "domain",
+        "type": "string",
+        "value": null,
+        "label": "Domain",
+        "placeholder": "A domain for the cluster (optional)"
+      },
+      {
+        "name": "tags",
+        "type": "string",
+        "value": null,
+        "label": "Freeform Tags (JSON)",
+        "placeholder": "{\"env\":\"prod\"} (optional)"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "vm_cluster",
+        "type": "object",
+        "value": null,
+        "label": "VM Cluster",
+        "placeholder": ""
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "VM Cluster OCID",
+        "placeholder": ""
+      },
+      {
+        "name": "lifecycle_state",
+        "type": "string",
+        "value": null,
+        "label": "Lifecycle State",
+        "placeholder": ""
+      },
+      {
+        "name": "work_request_id",
+        "type": "string",
+        "value": null,
+        "label": "Work Request OCID",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "oracle/exadata/cloud_vm_cluster_delete": {
+    "hash": "a7ee086be05738790805cf367275b22976954917289c202da8377838e02a0878",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "OCI Exadata: Delete Cloud VM Cluster",
+    "description": "Terminate a cloud VM cluster by OCID. Asynchronous — returns a work-request id; poll until the cluster is gone.",
+    "website": "https://www.flomation.co",
+    "icon": "oracle+microchip",
+    "date": "22/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Oracle Cloud",
+      "icon": "oracle",
+      "description": "Oracle Cloud Infrastructure (OCI) integrations"
+    },
+    "sub_category": {
+      "name": "Exadata",
+      "icon": "microchip",
+      "description": "Oracle Cloud Exadata Database Service on Dedicated Infrastructure — provision and manage cloud Exadata infrastructure and VM clusters, inspect DB servers and nodes, and schedule maintenance runs"
+    },
+    "inputs": [
+      {
+        "name": "tenancy_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Tenancy OCID",
+        "placeholder": "ocid1.tenancy.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "user_ocid",
+        "type": "string",
+        "value": null,
+        "label": "User OCID",
+        "placeholder": "ocid1.user.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "e.g. uk-london-1",
+        "required": true
+      },
+      {
+        "name": "fingerprint",
+        "type": "string",
+        "value": null,
+        "label": "Key Fingerprint",
+        "placeholder": "aa:bb:cc:… fingerprint of the uploaded API key",
+        "required": true
+      },
+      {
+        "name": "private_key",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key (PEM)",
+        "placeholder": "The API signing private key — full PEM, incl. BEGIN/END lines"
+      },
+      {
+        "name": "private_key_passphrase",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key Passphrase",
+        "placeholder": "Only if the key is encrypted (optional)"
+      },
+      {
+        "name": "compartment_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Compartment OCID",
+        "placeholder": "ocid1.compartment.oc1..aaaa… (scopes the picker)"
+      },
+      {
+        "name": "cloud_vm_cluster_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Cloud VM Cluster OCID",
+        "placeholder": "ocid1.cloudvmcluster.oc1..aaaa…",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Cloud VM Cluster OCID",
+        "placeholder": ""
+      },
+      {
+        "name": "work_request_id",
+        "type": "string",
+        "value": null,
+        "label": "Work Request OCID",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "oracle/exadata/cloud_vm_cluster_get": {
+    "hash": "5be64804c3ce9b49447ab6fb67f0eebbd0c1c54161d57ff95a103882fafc343c",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "OCI Exadata: Get Cloud VM Cluster",
+    "description": "Fetch a single cloud VM cluster by OCID — its shape, host, CPU cores, listener port and lifecycle state.",
+    "website": "https://www.flomation.co",
+    "icon": "oracle+microchip",
+    "date": "22/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Oracle Cloud",
+      "icon": "oracle",
+      "description": "Oracle Cloud Infrastructure (OCI) integrations"
+    },
+    "sub_category": {
+      "name": "Exadata",
+      "icon": "microchip",
+      "description": "Oracle Cloud Exadata Database Service on Dedicated Infrastructure — provision and manage cloud Exadata infrastructure and VM clusters, inspect DB servers and nodes, and schedule maintenance runs"
+    },
+    "inputs": [
+      {
+        "name": "tenancy_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Tenancy OCID",
+        "placeholder": "ocid1.tenancy.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "user_ocid",
+        "type": "string",
+        "value": null,
+        "label": "User OCID",
+        "placeholder": "ocid1.user.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "e.g. uk-london-1",
+        "required": true
+      },
+      {
+        "name": "fingerprint",
+        "type": "string",
+        "value": null,
+        "label": "Key Fingerprint",
+        "placeholder": "aa:bb:cc:… fingerprint of the uploaded API key",
+        "required": true
+      },
+      {
+        "name": "private_key",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key (PEM)",
+        "placeholder": "The API signing private key — full PEM, incl. BEGIN/END lines"
+      },
+      {
+        "name": "private_key_passphrase",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key Passphrase",
+        "placeholder": "Only if the key is encrypted (optional)"
+      },
+      {
+        "name": "compartment_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Compartment OCID",
+        "placeholder": "ocid1.compartment.oc1..aaaa… (scopes the picker)"
+      },
+      {
+        "name": "cloud_vm_cluster_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Cloud VM Cluster OCID",
+        "placeholder": "ocid1.cloudvmcluster.oc1..aaaa…",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "vm_cluster",
+        "type": "object",
+        "value": null,
+        "label": "VM Cluster",
+        "placeholder": ""
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "VM Cluster OCID",
+        "placeholder": ""
+      },
+      {
+        "name": "lifecycle_state",
+        "type": "string",
+        "value": null,
+        "label": "Lifecycle State",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "oracle/exadata/cloud_vm_cluster_iorm_config_get": {
+    "hash": "e99740faba65666eb095cfd09e3222fb4722a282cd302ef9ed31a73b40136cad",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "OCI Exadata: Get VM Cluster IORM Config",
+    "description": "Fetch the I/O Resource Management (IORM) configuration for a cloud VM cluster — its objective, lifecycle state and per-database share plans.",
+    "website": "https://www.flomation.co",
+    "icon": "oracle+microchip",
+    "date": "22/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Oracle Cloud",
+      "icon": "oracle",
+      "description": "Oracle Cloud Infrastructure (OCI) integrations"
+    },
+    "sub_category": {
+      "name": "Exadata",
+      "icon": "microchip",
+      "description": "Oracle Cloud Exadata Database Service on Dedicated Infrastructure — provision and manage cloud Exadata infrastructure and VM clusters, inspect DB servers and nodes, and schedule maintenance runs"
+    },
+    "inputs": [
+      {
+        "name": "tenancy_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Tenancy OCID",
+        "placeholder": "ocid1.tenancy.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "user_ocid",
+        "type": "string",
+        "value": null,
+        "label": "User OCID",
+        "placeholder": "ocid1.user.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "e.g. uk-london-1",
+        "required": true
+      },
+      {
+        "name": "fingerprint",
+        "type": "string",
+        "value": null,
+        "label": "Key Fingerprint",
+        "placeholder": "aa:bb:cc:… fingerprint of the uploaded API key",
+        "required": true
+      },
+      {
+        "name": "private_key",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key (PEM)",
+        "placeholder": "The API signing private key — full PEM, incl. BEGIN/END lines"
+      },
+      {
+        "name": "private_key_passphrase",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key Passphrase",
+        "placeholder": "Only if the key is encrypted (optional)"
+      },
+      {
+        "name": "compartment_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Compartment OCID",
+        "placeholder": "ocid1.compartment.oc1..aaaa… (scopes the picker)"
+      },
+      {
+        "name": "cloud_vm_cluster_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Cloud VM Cluster OCID",
+        "placeholder": "ocid1.cloudvmcluster.oc1..aaaa…",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "lifecycle_state",
+        "type": "string",
+        "value": null,
+        "label": "Lifecycle State",
+        "placeholder": ""
+      },
+      {
+        "name": "objective",
+        "type": "string",
+        "value": null,
+        "label": "Objective",
+        "placeholder": ""
+      },
+      {
+        "name": "db_plans",
+        "type": "object",
+        "value": null,
+        "label": "Database Plans",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "oracle/exadata/cloud_vm_cluster_list": {
+    "hash": "1779d2749389cb38b37abaf9938219ada72d3f799b3811084abcbcbb36569b5f",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "OCI Exadata: List Cloud VM Clusters",
+    "description": "List the cloud VM clusters in a compartment, optionally narrowed to one cloud Exadata infrastructure. Walks pagination up to a safe cap.",
+    "website": "https://www.flomation.co",
+    "icon": "oracle+microchip",
+    "date": "22/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Oracle Cloud",
+      "icon": "oracle",
+      "description": "Oracle Cloud Infrastructure (OCI) integrations"
+    },
+    "sub_category": {
+      "name": "Exadata",
+      "icon": "microchip",
+      "description": "Oracle Cloud Exadata Database Service on Dedicated Infrastructure — provision and manage cloud Exadata infrastructure and VM clusters, inspect DB servers and nodes, and schedule maintenance runs"
+    },
+    "inputs": [
+      {
+        "name": "tenancy_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Tenancy OCID",
+        "placeholder": "ocid1.tenancy.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "user_ocid",
+        "type": "string",
+        "value": null,
+        "label": "User OCID",
+        "placeholder": "ocid1.user.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "e.g. uk-london-1",
+        "required": true
+      },
+      {
+        "name": "fingerprint",
+        "type": "string",
+        "value": null,
+        "label": "Key Fingerprint",
+        "placeholder": "aa:bb:cc:… fingerprint of the uploaded API key",
+        "required": true
+      },
+      {
+        "name": "private_key",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key (PEM)",
+        "placeholder": "The API signing private key — full PEM, incl. BEGIN/END lines"
+      },
+      {
+        "name": "private_key_passphrase",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key Passphrase",
+        "placeholder": "Only if the key is encrypted (optional)"
+      },
+      {
+        "name": "compartment_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Compartment OCID",
+        "placeholder": "ocid1.compartment.oc1..aaaa… (use the tenancy OCID for the root)",
+        "required": true
+      },
+      {
+        "name": "cloud_exadata_infrastructure_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Cloud Exadata Infrastructure OCID",
+        "placeholder": "Only clusters on this infrastructure rack (optional)"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "vm_clusters",
+        "type": "object",
+        "value": null,
+        "label": "VM Clusters",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "string",
+        "value": null,
+        "label": "Count",
+        "placeholder": ""
+      },
+      {
+        "name": "truncated",
+        "type": "boolean",
+        "value": null,
+        "label": "Truncated",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "oracle/exadata/cloud_vm_cluster_remove_vm": {
+    "hash": "42959ed46dfe32b2c013df2c3f09e8d2d32d5bdf0c426806d0b1f0bb210710b5",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "OCI Exadata: Remove VM from Cloud VM Cluster",
+    "description": "Remove one or more DB servers' virtual machines from a cloud VM cluster — asynchronous, returns the cluster in UPDATING plus a work-request id.",
+    "website": "https://www.flomation.co",
+    "icon": "oracle+microchip",
+    "date": "22/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Oracle Cloud",
+      "icon": "oracle",
+      "description": "Oracle Cloud Infrastructure (OCI) integrations"
+    },
+    "sub_category": {
+      "name": "Exadata",
+      "icon": "microchip",
+      "description": "Oracle Cloud Exadata Database Service on Dedicated Infrastructure — provision and manage cloud Exadata infrastructure and VM clusters, inspect DB servers and nodes, and schedule maintenance runs"
+    },
+    "inputs": [
+      {
+        "name": "tenancy_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Tenancy OCID",
+        "placeholder": "ocid1.tenancy.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "user_ocid",
+        "type": "string",
+        "value": null,
+        "label": "User OCID",
+        "placeholder": "ocid1.user.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "e.g. uk-london-1",
+        "required": true
+      },
+      {
+        "name": "fingerprint",
+        "type": "string",
+        "value": null,
+        "label": "Key Fingerprint",
+        "placeholder": "aa:bb:cc:… fingerprint of the uploaded API key",
+        "required": true
+      },
+      {
+        "name": "private_key",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key (PEM)",
+        "placeholder": "The API signing private key — full PEM, incl. BEGIN/END lines"
+      },
+      {
+        "name": "private_key_passphrase",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key Passphrase",
+        "placeholder": "Only if the key is encrypted (optional)"
+      },
+      {
+        "name": "compartment_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Compartment OCID",
+        "placeholder": "ocid1.compartment.oc1..aaaa… (scopes the picker)"
+      },
+      {
+        "name": "cloud_vm_cluster_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Cloud VM Cluster OCID",
+        "placeholder": "ocid1.cloudvmcluster.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "db_server_ocids",
+        "type": "string",
+        "value": null,
+        "label": "DB Server OCIDs",
+        "placeholder": "Comma-separated ocid1.dbserver.oc1..aaaa… to remove",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "vm_cluster",
+        "type": "object",
+        "value": null,
+        "label": "VM Cluster",
+        "placeholder": ""
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "VM Cluster OCID",
+        "placeholder": ""
+      },
+      {
+        "name": "lifecycle_state",
+        "type": "string",
+        "value": null,
+        "label": "Lifecycle State",
+        "placeholder": ""
+      },
+      {
+        "name": "work_request_id",
+        "type": "string",
+        "value": null,
+        "label": "Work Request OCID",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "oracle/exadata/cloud_vm_cluster_update": {
+    "hash": "8e9b7d4b9fc9b8fa2a29281d1df0ca54ca9ff5c2260bae9e2434a950d2de9d2d",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "OCI Exadata: Update Cloud VM Cluster",
+    "description": "Rename a cloud VM cluster or scale its total CPU core count. Asynchronous — poll Get Cloud VM Cluster until it settles back to AVAILABLE.",
+    "website": "https://www.flomation.co",
+    "icon": "oracle+microchip",
+    "date": "22/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Oracle Cloud",
+      "icon": "oracle",
+      "description": "Oracle Cloud Infrastructure (OCI) integrations"
+    },
+    "sub_category": {
+      "name": "Exadata",
+      "icon": "microchip",
+      "description": "Oracle Cloud Exadata Database Service on Dedicated Infrastructure — provision and manage cloud Exadata infrastructure and VM clusters, inspect DB servers and nodes, and schedule maintenance runs"
+    },
+    "inputs": [
+      {
+        "name": "tenancy_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Tenancy OCID",
+        "placeholder": "ocid1.tenancy.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "user_ocid",
+        "type": "string",
+        "value": null,
+        "label": "User OCID",
+        "placeholder": "ocid1.user.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "e.g. uk-london-1",
+        "required": true
+      },
+      {
+        "name": "fingerprint",
+        "type": "string",
+        "value": null,
+        "label": "Key Fingerprint",
+        "placeholder": "aa:bb:cc:… fingerprint of the uploaded API key",
+        "required": true
+      },
+      {
+        "name": "private_key",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key (PEM)",
+        "placeholder": "The API signing private key — full PEM, incl. BEGIN/END lines"
+      },
+      {
+        "name": "private_key_passphrase",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key Passphrase",
+        "placeholder": "Only if the key is encrypted (optional)"
+      },
+      {
+        "name": "compartment_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Compartment OCID",
+        "placeholder": "ocid1.compartment.oc1..aaaa… (scopes the picker)"
+      },
+      {
+        "name": "cloud_vm_cluster_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Cloud VM Cluster OCID",
+        "placeholder": "ocid1.cloudvmcluster.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "display_name",
+        "type": "string",
+        "value": null,
+        "label": "Display Name",
+        "placeholder": "A new friendly name for the VM cluster (optional)"
+      },
+      {
+        "name": "cpu_core_count",
+        "type": "string",
+        "value": null,
+        "label": "CPU Core Count",
+        "placeholder": "New total OCPU cores across the cluster (optional)"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "vm_cluster",
+        "type": "object",
+        "value": null,
+        "label": "VM Cluster",
+        "placeholder": ""
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "VM Cluster OCID",
+        "placeholder": ""
+      },
+      {
+        "name": "lifecycle_state",
+        "type": "string",
+        "value": null,
+        "label": "Lifecycle State",
+        "placeholder": ""
+      },
+      {
+        "name": "work_request_id",
+        "type": "string",
+        "value": null,
+        "label": "Work Request OCID",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "oracle/exadata/db_node_action": {
+    "hash": "bd52f7f65f74d97b3313cdf8a647838c4cfcf0a759fd5f0b4024d7c6cc6363d9",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "OCI Exadata: DB Node Action",
+    "description": "Start, stop or reset a database node (one of the VMs in a VM cluster). SOFTRESET does a graceful OS reboot; RESET is a hard power-cycle. Asynchronous — poll Get DB Node until the state settles.",
+    "website": "https://www.flomation.co",
+    "icon": "oracle+microchip",
+    "date": "22/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Oracle Cloud",
+      "icon": "oracle",
+      "description": "Oracle Cloud Infrastructure (OCI) integrations"
+    },
+    "sub_category": {
+      "name": "Exadata",
+      "icon": "microchip",
+      "description": "Oracle Cloud Exadata Database Service on Dedicated Infrastructure — provision and manage cloud Exadata infrastructure and VM clusters, inspect DB servers and nodes, and schedule maintenance runs"
+    },
+    "inputs": [
+      {
+        "name": "tenancy_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Tenancy OCID",
+        "placeholder": "ocid1.tenancy.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "user_ocid",
+        "type": "string",
+        "value": null,
+        "label": "User OCID",
+        "placeholder": "ocid1.user.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "e.g. uk-london-1",
+        "required": true
+      },
+      {
+        "name": "fingerprint",
+        "type": "string",
+        "value": null,
+        "label": "Key Fingerprint",
+        "placeholder": "aa:bb:cc:… fingerprint of the uploaded API key",
+        "required": true
+      },
+      {
+        "name": "private_key",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key (PEM)",
+        "placeholder": "The API signing private key — full PEM, incl. BEGIN/END lines"
+      },
+      {
+        "name": "private_key_passphrase",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key Passphrase",
+        "placeholder": "Only if the key is encrypted (optional)"
+      },
+      {
+        "name": "compartment_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Compartment OCID",
+        "placeholder": "ocid1.compartment.oc1..aaaa… (scopes the picker)"
+      },
+      {
+        "name": "db_node_ocid",
+        "type": "string",
+        "value": null,
+        "label": "DB Node OCID",
+        "placeholder": "ocid1.dbnode.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "action",
+        "type": "string",
+        "value": null,
+        "label": "Action",
+        "placeholder": "What to do to the node",
+        "required": true,
+        "options": [
+          {
+            "name": "Start",
+            "value": "START"
+          },
+          {
+            "name": "Stop",
+            "value": "STOP"
+          },
+          {
+            "name": "Soft reset (graceful reboot)",
+            "value": "SOFTRESET"
+          },
+          {
+            "name": "Reset (hard power-cycle)",
+            "value": "RESET"
+          }
+        ]
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "db_node",
+        "type": "object",
+        "value": null,
+        "label": "DB Node",
+        "placeholder": ""
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "DB Node OCID",
+        "placeholder": ""
+      },
+      {
+        "name": "lifecycle_state",
+        "type": "string",
+        "value": null,
+        "label": "Lifecycle State",
+        "placeholder": ""
+      },
+      {
+        "name": "work_request_id",
+        "type": "string",
+        "value": null,
+        "label": "Work Request OCID",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "oracle/exadata/db_node_get": {
+    "hash": "a8253640960cb8845e74ff61413c2f4a97165334e1b3f811262d231363614226",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "OCI Exadata: Get DB Node",
+    "description": "Fetch a single Exadata DB node by OCID — its hostname, DB system, fault domain and lifecycle state.",
+    "website": "https://www.flomation.co",
+    "icon": "oracle+microchip",
+    "date": "22/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Oracle Cloud",
+      "icon": "oracle",
+      "description": "Oracle Cloud Infrastructure (OCI) integrations"
+    },
+    "sub_category": {
+      "name": "Exadata",
+      "icon": "microchip",
+      "description": "Oracle Cloud Exadata Database Service on Dedicated Infrastructure — provision and manage cloud Exadata infrastructure and VM clusters, inspect DB servers and nodes, and schedule maintenance runs"
+    },
+    "inputs": [
+      {
+        "name": "tenancy_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Tenancy OCID",
+        "placeholder": "ocid1.tenancy.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "user_ocid",
+        "type": "string",
+        "value": null,
+        "label": "User OCID",
+        "placeholder": "ocid1.user.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "e.g. uk-london-1",
+        "required": true
+      },
+      {
+        "name": "fingerprint",
+        "type": "string",
+        "value": null,
+        "label": "Key Fingerprint",
+        "placeholder": "aa:bb:cc:… fingerprint of the uploaded API key",
+        "required": true
+      },
+      {
+        "name": "private_key",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key (PEM)",
+        "placeholder": "The API signing private key — full PEM, incl. BEGIN/END lines"
+      },
+      {
+        "name": "private_key_passphrase",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key Passphrase",
+        "placeholder": "Only if the key is encrypted (optional)"
+      },
+      {
+        "name": "compartment_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Compartment OCID",
+        "placeholder": "ocid1.compartment.oc1..aaaa… (scopes the picker)"
+      },
+      {
+        "name": "db_node_ocid",
+        "type": "string",
+        "value": null,
+        "label": "DB Node OCID",
+        "placeholder": "ocid1.dbnode.oc1..aaaa…",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "db_node",
+        "type": "object",
+        "value": null,
+        "label": "DB Node",
+        "placeholder": ""
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "DB Node OCID",
+        "placeholder": ""
+      },
+      {
+        "name": "lifecycle_state",
+        "type": "string",
+        "value": null,
+        "label": "Lifecycle State",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "oracle/exadata/db_node_list": {
+    "hash": "132f698c5ec693924abe9a2d42bfc49c18be25fd62e86b193e1edbf81c4b5010",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "OCI Exadata: List DB Nodes",
+    "description": "List the DB nodes of a cloud VM cluster (or DB system) in a compartment. Walks pagination up to a safe cap.",
+    "website": "https://www.flomation.co",
+    "icon": "oracle+microchip",
+    "date": "22/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Oracle Cloud",
+      "icon": "oracle",
+      "description": "Oracle Cloud Infrastructure (OCI) integrations"
+    },
+    "sub_category": {
+      "name": "Exadata",
+      "icon": "microchip",
+      "description": "Oracle Cloud Exadata Database Service on Dedicated Infrastructure — provision and manage cloud Exadata infrastructure and VM clusters, inspect DB servers and nodes, and schedule maintenance runs"
+    },
+    "inputs": [
+      {
+        "name": "tenancy_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Tenancy OCID",
+        "placeholder": "ocid1.tenancy.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "user_ocid",
+        "type": "string",
+        "value": null,
+        "label": "User OCID",
+        "placeholder": "ocid1.user.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "e.g. uk-london-1",
+        "required": true
+      },
+      {
+        "name": "fingerprint",
+        "type": "string",
+        "value": null,
+        "label": "Key Fingerprint",
+        "placeholder": "aa:bb:cc:… fingerprint of the uploaded API key",
+        "required": true
+      },
+      {
+        "name": "private_key",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key (PEM)",
+        "placeholder": "The API signing private key — full PEM, incl. BEGIN/END lines"
+      },
+      {
+        "name": "private_key_passphrase",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key Passphrase",
+        "placeholder": "Only if the key is encrypted (optional)"
+      },
+      {
+        "name": "compartment_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Compartment OCID",
+        "placeholder": "ocid1.compartment.oc1..aaaa… (use the tenancy OCID for the root)",
+        "required": true
+      },
+      {
+        "name": "vm_cluster_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Cloud VM Cluster OCID",
+        "placeholder": "ocid1.cloudvmcluster.oc1..aaaa… (list this cluster's DB nodes)"
+      },
+      {
+        "name": "db_system_ocid",
+        "type": "string",
+        "value": null,
+        "label": "DB System OCID",
+        "placeholder": "ocid1.dbsystem.oc1..aaaa… (alternative parent)"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "db_nodes",
+        "type": "object",
+        "value": null,
+        "label": "DB Nodes",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "string",
+        "value": null,
+        "label": "Count",
+        "placeholder": ""
+      },
+      {
+        "name": "truncated",
+        "type": "boolean",
+        "value": null,
+        "label": "Truncated",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "oracle/exadata/db_node_update": {
+    "hash": "d7be0124e3a35ae5d16a4313708e9043f4a8727ec5e79be618f952a58f843db9",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "OCI Exadata: Update DB Node",
+    "description": "Update a database node (one of the VMs in a VM cluster) by OCID — set its freeform tags. Asynchronous — poll Get DB Node until the state settles.",
+    "website": "https://www.flomation.co",
+    "icon": "oracle+microchip",
+    "date": "22/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Oracle Cloud",
+      "icon": "oracle",
+      "description": "Oracle Cloud Infrastructure (OCI) integrations"
+    },
+    "sub_category": {
+      "name": "Exadata",
+      "icon": "microchip",
+      "description": "Oracle Cloud Exadata Database Service on Dedicated Infrastructure — provision and manage cloud Exadata infrastructure and VM clusters, inspect DB servers and nodes, and schedule maintenance runs"
+    },
+    "inputs": [
+      {
+        "name": "tenancy_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Tenancy OCID",
+        "placeholder": "ocid1.tenancy.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "user_ocid",
+        "type": "string",
+        "value": null,
+        "label": "User OCID",
+        "placeholder": "ocid1.user.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "e.g. uk-london-1",
+        "required": true
+      },
+      {
+        "name": "fingerprint",
+        "type": "string",
+        "value": null,
+        "label": "Key Fingerprint",
+        "placeholder": "aa:bb:cc:… fingerprint of the uploaded API key",
+        "required": true
+      },
+      {
+        "name": "private_key",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key (PEM)",
+        "placeholder": "The API signing private key — full PEM, incl. BEGIN/END lines"
+      },
+      {
+        "name": "private_key_passphrase",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key Passphrase",
+        "placeholder": "Only if the key is encrypted (optional)"
+      },
+      {
+        "name": "compartment_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Compartment OCID",
+        "placeholder": "ocid1.compartment.oc1..aaaa… (scopes the picker)"
+      },
+      {
+        "name": "db_node_ocid",
+        "type": "string",
+        "value": null,
+        "label": "DB Node OCID",
+        "placeholder": "ocid1.dbnode.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "tags",
+        "type": "string",
+        "value": null,
+        "label": "Freeform Tags (JSON)",
+        "placeholder": "{\"env\":\"prod\"} (optional)"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "db_node",
+        "type": "object",
+        "value": null,
+        "label": "DB Node",
+        "placeholder": ""
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "DB Node OCID",
+        "placeholder": ""
+      },
+      {
+        "name": "lifecycle_state",
+        "type": "string",
+        "value": null,
+        "label": "Lifecycle State",
+        "placeholder": ""
+      },
+      {
+        "name": "work_request_id",
+        "type": "string",
+        "value": null,
+        "label": "Work Request OCID",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "oracle/exadata/db_server_get": {
+    "hash": "a5d1c5ac2fb0c83480c692d1f32c6ba30ed2c774f9224d9f3add12bc54a2f2e2",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "OCI Exadata: Get DB Server",
+    "description": "Fetch a single Exadata infrastructure DB server by OCID — its shape, CPU/memory capacity and lifecycle state.",
+    "website": "https://www.flomation.co",
+    "icon": "oracle+microchip",
+    "date": "22/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Oracle Cloud",
+      "icon": "oracle",
+      "description": "Oracle Cloud Infrastructure (OCI) integrations"
+    },
+    "sub_category": {
+      "name": "Exadata",
+      "icon": "microchip",
+      "description": "Oracle Cloud Exadata Database Service on Dedicated Infrastructure — provision and manage cloud Exadata infrastructure and VM clusters, inspect DB servers and nodes, and schedule maintenance runs"
+    },
+    "inputs": [
+      {
+        "name": "tenancy_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Tenancy OCID",
+        "placeholder": "ocid1.tenancy.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "user_ocid",
+        "type": "string",
+        "value": null,
+        "label": "User OCID",
+        "placeholder": "ocid1.user.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "e.g. uk-london-1",
+        "required": true
+      },
+      {
+        "name": "fingerprint",
+        "type": "string",
+        "value": null,
+        "label": "Key Fingerprint",
+        "placeholder": "aa:bb:cc:… fingerprint of the uploaded API key",
+        "required": true
+      },
+      {
+        "name": "private_key",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key (PEM)",
+        "placeholder": "The API signing private key — full PEM, incl. BEGIN/END lines"
+      },
+      {
+        "name": "private_key_passphrase",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key Passphrase",
+        "placeholder": "Only if the key is encrypted (optional)"
+      },
+      {
+        "name": "compartment_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Compartment OCID",
+        "placeholder": "ocid1.compartment.oc1..aaaa… (scopes the picker)"
+      },
+      {
+        "name": "cloud_exadata_infrastructure_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Cloud Exadata Infrastructure OCID",
+        "placeholder": "ocid1.cloudexadatainfrastructure.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "db_server_ocid",
+        "type": "string",
+        "value": null,
+        "label": "DB Server OCID",
+        "placeholder": "ocid1.dbserver.oc1..aaaa…",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "db_server",
+        "type": "object",
+        "value": null,
+        "label": "DB Server",
+        "placeholder": ""
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "DB Server OCID",
+        "placeholder": ""
+      },
+      {
+        "name": "lifecycle_state",
+        "type": "string",
+        "value": null,
+        "label": "Lifecycle State",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "oracle/exadata/db_server_list": {
+    "hash": "d44ea861e0e67c5c1b228cc04c3b637a4d2818d3b587f23698a60ba82c91a906",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "OCI Exadata: List DB Servers",
+    "description": "List the database servers on a cloud Exadata infrastructure. Walks pagination up to a safe cap.",
+    "website": "https://www.flomation.co",
+    "icon": "oracle+microchip",
+    "date": "22/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Oracle Cloud",
+      "icon": "oracle",
+      "description": "Oracle Cloud Infrastructure (OCI) integrations"
+    },
+    "sub_category": {
+      "name": "Exadata",
+      "icon": "microchip",
+      "description": "Oracle Cloud Exadata Database Service on Dedicated Infrastructure — provision and manage cloud Exadata infrastructure and VM clusters, inspect DB servers and nodes, and schedule maintenance runs"
+    },
+    "inputs": [
+      {
+        "name": "tenancy_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Tenancy OCID",
+        "placeholder": "ocid1.tenancy.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "user_ocid",
+        "type": "string",
+        "value": null,
+        "label": "User OCID",
+        "placeholder": "ocid1.user.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "e.g. uk-london-1",
+        "required": true
+      },
+      {
+        "name": "fingerprint",
+        "type": "string",
+        "value": null,
+        "label": "Key Fingerprint",
+        "placeholder": "aa:bb:cc:… fingerprint of the uploaded API key",
+        "required": true
+      },
+      {
+        "name": "private_key",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key (PEM)",
+        "placeholder": "The API signing private key — full PEM, incl. BEGIN/END lines"
+      },
+      {
+        "name": "private_key_passphrase",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key Passphrase",
+        "placeholder": "Only if the key is encrypted (optional)"
+      },
+      {
+        "name": "compartment_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Compartment OCID",
+        "placeholder": "ocid1.compartment.oc1..aaaa… (use the tenancy OCID for the root)",
+        "required": true
+      },
+      {
+        "name": "cloud_exadata_infrastructure_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Cloud Exadata Infrastructure OCID",
+        "placeholder": "ocid1.cloudexadatainfrastructure.oc1..aaaa…",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "db_servers",
+        "type": "object",
+        "value": null,
+        "label": "DB Servers",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "string",
+        "value": null,
+        "label": "Count",
+        "placeholder": ""
+      },
+      {
+        "name": "truncated",
+        "type": "boolean",
+        "value": null,
+        "label": "Truncated",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "oracle/exadata/maintenance_run_create": {
+    "hash": "b9c608acfd2cfa8201813291e25d98237f8fa292fde55b6cdcebdde75d0adb99",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "OCI Exadata: Create Maintenance Run",
+    "description": "Schedule a maintenance run for an Exadata resource — the window in which Oracle applies the latest Release Update. Give it the target resource OCID, an RFC3339 scheduled time, and optionally a rolling or non-rolling patching mode.",
+    "website": "https://www.flomation.co",
+    "icon": "oracle+microchip",
+    "date": "22/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Oracle Cloud",
+      "icon": "oracle",
+      "description": "Oracle Cloud Infrastructure (OCI) integrations"
+    },
+    "sub_category": {
+      "name": "Exadata",
+      "icon": "microchip",
+      "description": "Oracle Cloud Exadata Database Service on Dedicated Infrastructure — provision and manage cloud Exadata infrastructure and VM clusters, inspect DB servers and nodes, and schedule maintenance runs"
+    },
+    "inputs": [
+      {
+        "name": "tenancy_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Tenancy OCID",
+        "placeholder": "ocid1.tenancy.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "user_ocid",
+        "type": "string",
+        "value": null,
+        "label": "User OCID",
+        "placeholder": "ocid1.user.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "e.g. uk-london-1",
+        "required": true
+      },
+      {
+        "name": "fingerprint",
+        "type": "string",
+        "value": null,
+        "label": "Key Fingerprint",
+        "placeholder": "aa:bb:cc:… fingerprint of the uploaded API key",
+        "required": true
+      },
+      {
+        "name": "private_key",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key (PEM)",
+        "placeholder": "The API signing private key — full PEM, incl. BEGIN/END lines"
+      },
+      {
+        "name": "private_key_passphrase",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key Passphrase",
+        "placeholder": "Only if the key is encrypted (optional)"
+      },
+      {
+        "name": "compartment_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Compartment OCID",
+        "placeholder": "ocid1.compartment.oc1..aaaa… for the maintenance run (optional)"
+      },
+      {
+        "name": "target_resource_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Target Resource OCID",
+        "placeholder": "ocid1..aaaa… of the resource to maintain (VM cluster, infrastructure, …)",
+        "required": true
+      },
+      {
+        "name": "patch_type",
+        "type": "string",
+        "value": null,
+        "label": "Patch Type",
+        "placeholder": "What kind of maintenance to schedule",
+        "required": true,
+        "options": [
+          {
+            "name": "Quarterly (infrastructure RU)",
+            "value": "QUARTERLY"
+          },
+          {
+            "name": "Time zone",
+            "value": "TIMEZONE"
+          },
+          {
+            "name": "Custom database software image",
+            "value": "CUSTOM_DATABASE_SOFTWARE_IMAGE"
+          }
+        ]
+      },
+      {
+        "name": "time_scheduled",
+        "type": "string",
+        "value": null,
+        "label": "Time Scheduled",
+        "placeholder": "RFC3339, e.g. 2026-08-01T02:00:00Z",
+        "required": true
+      },
+      {
+        "name": "patching_mode",
+        "type": "string",
+        "value": null,
+        "label": "Patching Mode",
+        "placeholder": "Rolling or non-rolling (optional)",
+        "options": [
+          {
+            "name": "Rolling",
+            "value": "ROLLING"
+          },
+          {
+            "name": "Non-rolling (involves downtime)",
+            "value": "NONROLLING"
+          }
+        ]
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "maintenance_run",
+        "type": "object",
+        "value": null,
+        "label": "Maintenance Run",
+        "placeholder": ""
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Maintenance Run OCID",
+        "placeholder": ""
+      },
+      {
+        "name": "lifecycle_state",
+        "type": "string",
+        "value": null,
+        "label": "Lifecycle State",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "oracle/exadata/maintenance_run_get": {
+    "hash": "b935a81cb6e9547f1ea03da810213ceb06b6a403fd2accb7d64afc438a6ed90d",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "OCI Exadata: Get Maintenance Run",
+    "description": "Fetch a single Exadata maintenance run by OCID — its maintenance type, target resource, schedule and lifecycle state.",
+    "website": "https://www.flomation.co",
+    "icon": "oracle+microchip",
+    "date": "22/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Oracle Cloud",
+      "icon": "oracle",
+      "description": "Oracle Cloud Infrastructure (OCI) integrations"
+    },
+    "sub_category": {
+      "name": "Exadata",
+      "icon": "microchip",
+      "description": "Oracle Cloud Exadata Database Service on Dedicated Infrastructure — provision and manage cloud Exadata infrastructure and VM clusters, inspect DB servers and nodes, and schedule maintenance runs"
+    },
+    "inputs": [
+      {
+        "name": "tenancy_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Tenancy OCID",
+        "placeholder": "ocid1.tenancy.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "user_ocid",
+        "type": "string",
+        "value": null,
+        "label": "User OCID",
+        "placeholder": "ocid1.user.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "e.g. uk-london-1",
+        "required": true
+      },
+      {
+        "name": "fingerprint",
+        "type": "string",
+        "value": null,
+        "label": "Key Fingerprint",
+        "placeholder": "aa:bb:cc:… fingerprint of the uploaded API key",
+        "required": true
+      },
+      {
+        "name": "private_key",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key (PEM)",
+        "placeholder": "The API signing private key — full PEM, incl. BEGIN/END lines"
+      },
+      {
+        "name": "private_key_passphrase",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key Passphrase",
+        "placeholder": "Only if the key is encrypted (optional)"
+      },
+      {
+        "name": "compartment_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Compartment OCID",
+        "placeholder": "ocid1.compartment.oc1..aaaa… (scopes the picker)"
+      },
+      {
+        "name": "maintenance_run_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Maintenance Run OCID",
+        "placeholder": "ocid1.maintenancerun.oc1..aaaa…",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "maintenance_run",
+        "type": "object",
+        "value": null,
+        "label": "Maintenance Run",
+        "placeholder": ""
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Maintenance Run OCID",
+        "placeholder": ""
+      },
+      {
+        "name": "lifecycle_state",
+        "type": "string",
+        "value": null,
+        "label": "Lifecycle State",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "oracle/exadata/maintenance_run_list": {
+    "hash": "104ddc7c5ad616bdde7cc4fa6b899c290c55ea74581a0751397eb1f6252d69bc",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "OCI Exadata: List Maintenance Runs",
+    "description": "List the maintenance runs in a compartment, optionally filtered to one target resource. Walks pagination up to a safe cap.",
+    "website": "https://www.flomation.co",
+    "icon": "oracle+microchip",
+    "date": "22/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Oracle Cloud",
+      "icon": "oracle",
+      "description": "Oracle Cloud Infrastructure (OCI) integrations"
+    },
+    "sub_category": {
+      "name": "Exadata",
+      "icon": "microchip",
+      "description": "Oracle Cloud Exadata Database Service on Dedicated Infrastructure — provision and manage cloud Exadata infrastructure and VM clusters, inspect DB servers and nodes, and schedule maintenance runs"
+    },
+    "inputs": [
+      {
+        "name": "tenancy_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Tenancy OCID",
+        "placeholder": "ocid1.tenancy.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "user_ocid",
+        "type": "string",
+        "value": null,
+        "label": "User OCID",
+        "placeholder": "ocid1.user.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "e.g. uk-london-1",
+        "required": true
+      },
+      {
+        "name": "fingerprint",
+        "type": "string",
+        "value": null,
+        "label": "Key Fingerprint",
+        "placeholder": "aa:bb:cc:… fingerprint of the uploaded API key",
+        "required": true
+      },
+      {
+        "name": "private_key",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key (PEM)",
+        "placeholder": "The API signing private key — full PEM, incl. BEGIN/END lines"
+      },
+      {
+        "name": "private_key_passphrase",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key Passphrase",
+        "placeholder": "Only if the key is encrypted (optional)"
+      },
+      {
+        "name": "compartment_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Compartment OCID",
+        "placeholder": "ocid1.compartment.oc1..aaaa… (use the tenancy OCID for the root)",
+        "required": true
+      },
+      {
+        "name": "target_resource_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Target Resource OCID",
+        "placeholder": "Only maintenance runs for this resource (optional)"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "maintenance_runs",
+        "type": "object",
+        "value": null,
+        "label": "Maintenance runs",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "string",
+        "value": null,
+        "label": "Count",
+        "placeholder": ""
+      },
+      {
+        "name": "truncated",
+        "type": "boolean",
+        "value": null,
+        "label": "Truncated",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "oracle/exadata/maintenance_run_update": {
+    "hash": "f5117c9e7581635657fe1569c2ec0cc8d11c0ffcdfc929e929566810fdb1f56e",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "OCI Exadata: Update Maintenance Run",
+    "description": "Modify a scheduled Exadata maintenance run — reschedule it, enable or skip it, start patching now, or switch its patching mode.",
+    "website": "https://www.flomation.co",
+    "icon": "oracle+microchip",
+    "date": "22/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Oracle Cloud",
+      "icon": "oracle",
+      "description": "Oracle Cloud Infrastructure (OCI) integrations"
+    },
+    "sub_category": {
+      "name": "Exadata",
+      "icon": "microchip",
+      "description": "Oracle Cloud Exadata Database Service on Dedicated Infrastructure — provision and manage cloud Exadata infrastructure and VM clusters, inspect DB servers and nodes, and schedule maintenance runs"
+    },
+    "inputs": [
+      {
+        "name": "tenancy_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Tenancy OCID",
+        "placeholder": "ocid1.tenancy.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "user_ocid",
+        "type": "string",
+        "value": null,
+        "label": "User OCID",
+        "placeholder": "ocid1.user.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "e.g. uk-london-1",
+        "required": true
+      },
+      {
+        "name": "fingerprint",
+        "type": "string",
+        "value": null,
+        "label": "Key Fingerprint",
+        "placeholder": "aa:bb:cc:… fingerprint of the uploaded API key",
+        "required": true
+      },
+      {
+        "name": "private_key",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key (PEM)",
+        "placeholder": "The API signing private key — full PEM, incl. BEGIN/END lines"
+      },
+      {
+        "name": "private_key_passphrase",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key Passphrase",
+        "placeholder": "Only if the key is encrypted (optional)"
+      },
+      {
+        "name": "compartment_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Compartment OCID",
+        "placeholder": "ocid1.compartment.oc1..aaaa… (scopes the picker)"
+      },
+      {
+        "name": "maintenance_run_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Maintenance Run OCID",
+        "placeholder": "ocid1.maintenancerun.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "is_enabled",
+        "type": "boolean",
+        "value": null,
+        "label": "Enabled",
+        "placeholder": "Set false to skip this maintenance run (optional)"
+      },
+      {
+        "name": "time_scheduled",
+        "type": "string",
+        "value": null,
+        "label": "Scheduled Time",
+        "placeholder": "Reschedule to, RFC3339 e.g. 2026-07-22T14:30:00Z (optional)"
+      },
+      {
+        "name": "is_patch_now_enabled",
+        "type": "boolean",
+        "value": null,
+        "label": "Patch Now",
+        "placeholder": "Set true to start patching immediately (optional)"
+      },
+      {
+        "name": "patching_mode",
+        "type": "string",
+        "value": null,
+        "label": "Patching Mode",
+        "placeholder": "Infrastructure node patching method (optional)",
+        "options": [
+          {
+            "name": "Rolling",
+            "value": "ROLLING"
+          },
+          {
+            "name": "Non-rolling (involves downtime)",
+            "value": "NONROLLING"
+          }
+        ]
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "maintenance_run",
+        "type": "object",
+        "value": null,
+        "label": "Maintenance Run",
+        "placeholder": ""
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Maintenance Run OCID",
+        "placeholder": ""
+      },
+      {
+        "name": "lifecycle_state",
+        "type": "string",
+        "value": null,
+        "label": "Lifecycle State",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
   "oracle/filestorage/export_create": {
     "hash": "519c7bf08522cfdb8e6cebafb8fad5da2d9d9e02e01eb2f6fdb47f7485a94d58",
     "author": "Dave McElin",

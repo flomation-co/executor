@@ -2048,6 +2048,33 @@ import (
 	oracle_dns_zone_records_patch "flomation.app/automate/executor/actions/oracle/dns/zone_records_patch"
 	oracle_dns_zone_records_update "flomation.app/automate/executor/actions/oracle/dns/zone_records_update"
 	oracle_dns_zone_update "flomation.app/automate/executor/actions/oracle/dns/zone_update"
+	oracle_exadata_cloud_exadata_infrastructure_add_storage "flomation.app/automate/executor/actions/oracle/exadata/cloud_exadata_infrastructure_add_storage"
+	oracle_exadata_cloud_exadata_infrastructure_change_compartment "flomation.app/automate/executor/actions/oracle/exadata/cloud_exadata_infrastructure_change_compartment"
+	oracle_exadata_cloud_exadata_infrastructure_create "flomation.app/automate/executor/actions/oracle/exadata/cloud_exadata_infrastructure_create"
+	oracle_exadata_cloud_exadata_infrastructure_delete "flomation.app/automate/executor/actions/oracle/exadata/cloud_exadata_infrastructure_delete"
+	oracle_exadata_cloud_exadata_infrastructure_get "flomation.app/automate/executor/actions/oracle/exadata/cloud_exadata_infrastructure_get"
+	oracle_exadata_cloud_exadata_infrastructure_list "flomation.app/automate/executor/actions/oracle/exadata/cloud_exadata_infrastructure_list"
+	oracle_exadata_cloud_exadata_infrastructure_unallocated_resources_get "flomation.app/automate/executor/actions/oracle/exadata/cloud_exadata_infrastructure_unallocated_resources_get"
+	oracle_exadata_cloud_exadata_infrastructure_update "flomation.app/automate/executor/actions/oracle/exadata/cloud_exadata_infrastructure_update"
+	oracle_exadata_cloud_vm_cluster_add_vm "flomation.app/automate/executor/actions/oracle/exadata/cloud_vm_cluster_add_vm"
+	oracle_exadata_cloud_vm_cluster_change_compartment "flomation.app/automate/executor/actions/oracle/exadata/cloud_vm_cluster_change_compartment"
+	oracle_exadata_cloud_vm_cluster_create "flomation.app/automate/executor/actions/oracle/exadata/cloud_vm_cluster_create"
+	oracle_exadata_cloud_vm_cluster_delete "flomation.app/automate/executor/actions/oracle/exadata/cloud_vm_cluster_delete"
+	oracle_exadata_cloud_vm_cluster_get "flomation.app/automate/executor/actions/oracle/exadata/cloud_vm_cluster_get"
+	oracle_exadata_cloud_vm_cluster_iorm_config_get "flomation.app/automate/executor/actions/oracle/exadata/cloud_vm_cluster_iorm_config_get"
+	oracle_exadata_cloud_vm_cluster_list "flomation.app/automate/executor/actions/oracle/exadata/cloud_vm_cluster_list"
+	oracle_exadata_cloud_vm_cluster_remove_vm "flomation.app/automate/executor/actions/oracle/exadata/cloud_vm_cluster_remove_vm"
+	oracle_exadata_cloud_vm_cluster_update "flomation.app/automate/executor/actions/oracle/exadata/cloud_vm_cluster_update"
+	oracle_exadata_db_node_action "flomation.app/automate/executor/actions/oracle/exadata/db_node_action"
+	oracle_exadata_db_node_get "flomation.app/automate/executor/actions/oracle/exadata/db_node_get"
+	oracle_exadata_db_node_list "flomation.app/automate/executor/actions/oracle/exadata/db_node_list"
+	oracle_exadata_db_node_update "flomation.app/automate/executor/actions/oracle/exadata/db_node_update"
+	oracle_exadata_db_server_get "flomation.app/automate/executor/actions/oracle/exadata/db_server_get"
+	oracle_exadata_db_server_list "flomation.app/automate/executor/actions/oracle/exadata/db_server_list"
+	oracle_exadata_maintenance_run_create "flomation.app/automate/executor/actions/oracle/exadata/maintenance_run_create"
+	oracle_exadata_maintenance_run_get "flomation.app/automate/executor/actions/oracle/exadata/maintenance_run_get"
+	oracle_exadata_maintenance_run_list "flomation.app/automate/executor/actions/oracle/exadata/maintenance_run_list"
+	oracle_exadata_maintenance_run_update "flomation.app/automate/executor/actions/oracle/exadata/maintenance_run_update"
 	oracle_filestorage_export_create "flomation.app/automate/executor/actions/oracle/filestorage/export_create"
 	oracle_filestorage_export_delete "flomation.app/automate/executor/actions/oracle/filestorage/export_delete"
 	oracle_filestorage_export_get "flomation.app/automate/executor/actions/oracle/filestorage/export_get"
@@ -4957,6 +4984,33 @@ var Actions = map[string]core.Action{
 	"oracle/dns/zone_records_patch":                                                   oracle_dns_zone_records_patch.Execute,
 	"oracle/dns/zone_records_update":                                                  oracle_dns_zone_records_update.Execute,
 	"oracle/dns/zone_update":                                                          oracle_dns_zone_update.Execute,
+	"oracle/exadata/cloud_exadata_infrastructure_add_storage":                         oracle_exadata_cloud_exadata_infrastructure_add_storage.Execute,
+	"oracle/exadata/cloud_exadata_infrastructure_change_compartment":                  oracle_exadata_cloud_exadata_infrastructure_change_compartment.Execute,
+	"oracle/exadata/cloud_exadata_infrastructure_create":                              oracle_exadata_cloud_exadata_infrastructure_create.Execute,
+	"oracle/exadata/cloud_exadata_infrastructure_delete":                              oracle_exadata_cloud_exadata_infrastructure_delete.Execute,
+	"oracle/exadata/cloud_exadata_infrastructure_get":                                 oracle_exadata_cloud_exadata_infrastructure_get.Execute,
+	"oracle/exadata/cloud_exadata_infrastructure_list":                                oracle_exadata_cloud_exadata_infrastructure_list.Execute,
+	"oracle/exadata/cloud_exadata_infrastructure_unallocated_resources_get":           oracle_exadata_cloud_exadata_infrastructure_unallocated_resources_get.Execute,
+	"oracle/exadata/cloud_exadata_infrastructure_update":                              oracle_exadata_cloud_exadata_infrastructure_update.Execute,
+	"oracle/exadata/cloud_vm_cluster_add_vm":                                          oracle_exadata_cloud_vm_cluster_add_vm.Execute,
+	"oracle/exadata/cloud_vm_cluster_change_compartment":                              oracle_exadata_cloud_vm_cluster_change_compartment.Execute,
+	"oracle/exadata/cloud_vm_cluster_create":                                          oracle_exadata_cloud_vm_cluster_create.Execute,
+	"oracle/exadata/cloud_vm_cluster_delete":                                          oracle_exadata_cloud_vm_cluster_delete.Execute,
+	"oracle/exadata/cloud_vm_cluster_get":                                             oracle_exadata_cloud_vm_cluster_get.Execute,
+	"oracle/exadata/cloud_vm_cluster_iorm_config_get":                                 oracle_exadata_cloud_vm_cluster_iorm_config_get.Execute,
+	"oracle/exadata/cloud_vm_cluster_list":                                            oracle_exadata_cloud_vm_cluster_list.Execute,
+	"oracle/exadata/cloud_vm_cluster_remove_vm":                                       oracle_exadata_cloud_vm_cluster_remove_vm.Execute,
+	"oracle/exadata/cloud_vm_cluster_update":                                          oracle_exadata_cloud_vm_cluster_update.Execute,
+	"oracle/exadata/db_node_action":                                                   oracle_exadata_db_node_action.Execute,
+	"oracle/exadata/db_node_get":                                                      oracle_exadata_db_node_get.Execute,
+	"oracle/exadata/db_node_list":                                                     oracle_exadata_db_node_list.Execute,
+	"oracle/exadata/db_node_update":                                                   oracle_exadata_db_node_update.Execute,
+	"oracle/exadata/db_server_get":                                                    oracle_exadata_db_server_get.Execute,
+	"oracle/exadata/db_server_list":                                                   oracle_exadata_db_server_list.Execute,
+	"oracle/exadata/maintenance_run_create":                                           oracle_exadata_maintenance_run_create.Execute,
+	"oracle/exadata/maintenance_run_get":                                              oracle_exadata_maintenance_run_get.Execute,
+	"oracle/exadata/maintenance_run_list":                                             oracle_exadata_maintenance_run_list.Execute,
+	"oracle/exadata/maintenance_run_update":                                           oracle_exadata_maintenance_run_update.Execute,
 	"oracle/filestorage/export_create":                                                oracle_filestorage_export_create.Execute,
 	"oracle/filestorage/export_delete":                                                oracle_filestorage_export_delete.Execute,
 	"oracle/filestorage/export_get":                                                   oracle_filestorage_export_get.Execute,
