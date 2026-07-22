@@ -16,7 +16,7 @@ const (
 	Author       = "Dave McElin"
 	Organisation = "Flomation"
 	Name         = "OCI DNS: Patch Domain Records"
-	Description   = "Apply a list of add/remove/precondition operations to the records at one domain (across all record types) in a zone — a targeted alternative to replacing a whole RRSet. Synchronous."
+	Description  = "Apply a list of add/remove/precondition operations to the records at one domain (across all record types) in a zone — a targeted alternative to replacing a whole RRSet. Synchronous."
 	Website      = "https://www.flomation.co"
 	Icon         = "oracle+list"
 	Date         = "22/07/2026"

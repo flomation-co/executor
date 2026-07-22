@@ -45,6 +45,7 @@ var Outputs = [...]core.Connection{
 	{Name: "name", Type: core.ConnectionTypeString, Label: "Endpoint Name"},
 	{Name: "resolver_id", Type: core.ConnectionTypeString, Label: "Resolver OCID"},
 	{Name: "lifecycle_state", Type: core.ConnectionTypeString, Label: "Lifecycle State"},
+	{Name: "work_request_id", Type: core.ConnectionTypeString, Label: "Work Request OCID"},
 	{Name: "success", Type: core.ConnectionTypeBoolean, Label: "Success"},
 	{Name: "error", Type: core.ConnectionTypeString, Label: "Error"},
 }
@@ -111,6 +112,9 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 		"name":            endpoint["name"],
 		"resolver_id":     endpoint["resolver_id"],
 		"lifecycle_state": endpoint["lifecycle_state"],
+		// UpdateResolverEndpoint is async (202) — surface the work-request id so a flow
+		// can poll for completion, like the create/delete siblings.
+		"work_request_id": dnsn.Str(resp.OpcWorkRequestId),
 		"success":         true,
 	}, nil
 }

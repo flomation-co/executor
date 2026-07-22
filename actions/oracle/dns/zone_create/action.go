@@ -5,6 +5,7 @@
 package oracle_dns_zone_create
 
 import (
+	"encoding/json"
 	"fmt"
 	"strings"
 
@@ -38,6 +39,7 @@ var Inputs = [...]core.Connection{
 		{Name: "Primary", Value: "PRIMARY"},
 		{Name: "Secondary", Value: "SECONDARY"},
 	}},
+	{Name: "external_masters_json", Type: core.ConnectionTypeText, Label: "External Masters (JSON array)", Placeholder: `[{"address":"192.0.2.1","port":53,"tsigKeyId":"ocid1.dnstsigkey.oc1..aaaa…"}] — REQUIRED for a SECONDARY zone (the masters it transfers from); ignored for PRIMARY`},
 	{Name: "scope", Type: core.ConnectionTypeString, Label: "Scope", Placeholder: "GLOBAL (public, default) or PRIVATE", Options: []core.ConnectionOption{
 		{Name: "Global (public)", Value: "GLOBAL"},
 		{Name: "Private", Value: "PRIVATE"},
@@ -81,6 +83,20 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 		details.ZoneType = dns.CreateZoneDetailsZoneTypePrimary
 	default:
 		return dnsn.ErrorResult("zone type must be PRIMARY or SECONDARY"), nil
+	}
+	// A SECONDARY zone transfers from external master servers, so OCI requires at least
+	// one — catch a missing/empty set up front rather than surfacing an opaque 400.
+	if details.ZoneType == dns.CreateZoneDetailsZoneTypeSecondary {
+		var masters []dns.ExternalMaster
+		if raw := strings.TrimSpace(dnsn.OptionalString("external_masters_json", inputs)); raw != "" {
+			if err := json.Unmarshal([]byte(raw), &masters); err != nil {
+				return dnsn.ErrorResult(fmt.Sprintf(`external masters must be a JSON array of {address, port, tsigKeyId} objects, e.g. [{"address":"192.0.2.1","port":53}]: %s`, err.Error())), nil
+			}
+		}
+		if len(masters) == 0 {
+			return dnsn.ErrorResult(`a SECONDARY zone requires at least one external master — supply external_masters_json, e.g. [{"address":"192.0.2.1","port":53}]`), nil
+		}
+		details.ExternalMasters = masters
 	}
 	if scope != "" {
 		details.Scope = dns.ScopeEnum(scope)

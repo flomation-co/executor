@@ -17,7 +17,7 @@ const (
 	Author       = "Dave McElin"
 	Organisation = "Flomation"
 	Name         = "OCI DNS: Update Zone Records"
-	Description   = "Replace EVERY record in a DNS zone with a supplied set. This is a whole-zone overwrite: any record not in the list you provide is deleted, and the zone ends up holding exactly the records you supply. Synchronous."
+	Description  = "Replace EVERY record in a DNS zone with a supplied set. This is a whole-zone overwrite: any record not in the list you provide is deleted, and the zone ends up holding exactly the records you supply. Synchronous."
 	Website      = "https://www.flomation.co"
 	Icon         = "oracle+list"
 	Date         = "22/07/2026"

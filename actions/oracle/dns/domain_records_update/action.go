@@ -72,7 +72,7 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 		return dnsn.ErrorResult(fmt.Sprintf(`records must be a JSON array of {rtype, rdata, ttl} objects, e.g. [{"rtype":"A","rdata":"10.0.0.5","ttl":300}]: %s`, err.Error())), nil
 	}
 	if len(items) == 0 {
-		return dnsn.ErrorResult("at least one record is required (an empty set would delete every record at the domain — use Delete Domain Records for that)"), nil
+		return dnsn.ErrorResult("at least one record is required — an empty set would delete every record at the domain (use the dedicated delete action if that is the intent)"), nil
 	}
 	// Default each record's domain to the target domain so callers only supply rtype/rdata/ttl.
 	for i := range items {

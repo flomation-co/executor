@@ -79,6 +79,11 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	}
 	isForwarding := dnsn.OptionalBool("is_forwarding", inputs, false)
 	isListening := dnsn.OptionalBool("is_listening", inputs, false)
+	// A resolver endpoint must forward, listen, or both — OCI rejects one that does
+	// neither, so catch it up front with a clear message.
+	if !isForwarding && !isListening {
+		return dnsn.ErrorResult("a resolver endpoint must forward, listen, or both — enable Is Forwarding and/or Is Listening"), nil
+	}
 	details := dns.CreateResolverVnicEndpointDetails{
 		Name:         &name,
 		IsForwarding: &isForwarding,

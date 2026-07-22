@@ -244339,7 +244339,7 @@
     ]
   },
   "oracle/dns/domain_records_patch": {
-    "hash": "d33fe0dff1e6b47d9aba0a4d41d1aa6d011c15a9f278227de894247ce9c69fb6",
+    "hash": "370975eb2deb24cdb9c1a498e0765636855a109d21c422fea86b79300aa8fec8",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "OCI DNS: Patch Domain Records",
@@ -244493,7 +244493,7 @@
     ]
   },
   "oracle/dns/domain_records_update": {
-    "hash": "6b6315711b00decb25f1f2dd5e450b5407849c36ba49a3172bf819283451fa19",
+    "hash": "e1e9fb385a71f443f9619abf5d16adace1ed2f65235b6f6083210d7f61edcb66",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "OCI DNS: Update Domain Records",
@@ -244793,7 +244793,7 @@
     ]
   },
   "oracle/dns/resolver_endpoint_create": {
-    "hash": "b95ce1dd4464d2695737007bfddee16ffb82b3612ac9c8155dfa9f20e251d3d2",
+    "hash": "4753a62efa2a8c4be1063c77841354e1e6393fde81882ded9797a743bed6430d",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "OCI DNS: Create Resolver Endpoint",
@@ -245433,7 +245433,7 @@
     ]
   },
   "oracle/dns/resolver_endpoint_update": {
-    "hash": "838b9b0060cbffa5b773f3b021cdbf20c9a7d2032695cbe3455853808e4c8029",
+    "hash": "995b59e35923de06da35fe0e0037d56a1a74924b7fb2c35c094e95b57d250d36",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "OCI DNS: Update Resolver Endpoint",
@@ -245581,6 +245581,13 @@
         "type": "string",
         "value": null,
         "label": "Lifecycle State",
+        "placeholder": ""
+      },
+      {
+        "name": "work_request_id",
+        "type": "string",
+        "value": null,
+        "label": "Work Request OCID",
         "placeholder": ""
       },
       {
@@ -246540,7 +246547,7 @@
     ]
   },
   "oracle/dns/rrset_update": {
-    "hash": "15e236ae4d68e21725278be62c0ef56602cea1ec49524712b382e89a62857808",
+    "hash": "aecf75c8c23acb282fbd2dc3433d0a909dfe2bcbba0a32dbf42a1f09a5a25b37",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "OCI DNS: Update RRSet",
@@ -249961,7 +249968,7 @@
     ]
   },
   "oracle/dns/zone_create": {
-    "hash": "d624bba83dd6f233da7a9d72b7ef651ac631fbadd9150fd06982d9b25443f565",
+    "hash": "6fdef58dbb1c0e121b6b44559a5e1bf67829a4ce243fa5c39604ddf88cc828a8",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "OCI DNS: Create Zone",
@@ -250059,6 +250066,13 @@
             "value": "SECONDARY"
           }
         ]
+      },
+      {
+        "name": "external_masters_json",
+        "type": "text",
+        "value": null,
+        "label": "External Masters (JSON array)",
+        "placeholder": "[{\"address\":\"192.0.2.1\",\"port\":53,\"tsigKeyId\":\"ocid1.dnstsigkey.oc1..aaaa…\"}] — REQUIRED for a SECONDARY zone (the masters it transfers from); ignored for PRIMARY"
       },
       {
         "name": "scope",
@@ -251606,7 +251620,7 @@
     ]
   },
   "oracle/dns/zone_records_update": {
-    "hash": "c346ba9f49566e0ccbb0e8464ed4ab218eb0a80b83e4f0ea8bb9057721e7fbed",
+    "hash": "9a2e7fac034d8e45c893847e35061c4f5d972c07242500413dca3f722561404a",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "OCI DNS: Update Zone Records",
