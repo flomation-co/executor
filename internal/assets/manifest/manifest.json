@@ -314877,7 +314877,7 @@
     ]
   },
   "oracle/exadata/cloud_exadata_infrastructure_update": {
-    "hash": "dfa967c55f734e3a20d41a7a50b0d5d38048e548e3ee74985a0e5ae2f3784155",
+    "hash": "f9c2d0aa1b3a43adc3a92314004e4020934e8830618ff2d4b261023837de60df",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "OCI Exadata: Update Cloud Exadata Infrastructure",
@@ -360777,6 +360777,4306 @@
       {
         "name": "count",
         "type": "integer",
+        "value": null,
+        "label": "Count",
+        "placeholder": ""
+      },
+      {
+        "name": "truncated",
+        "type": "boolean",
+        "value": null,
+        "label": "Truncated",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "oracle/streaming/connect_harness_change_compartment": {
+    "hash": "087d62e71eaa5ee9e1cc9a4565f29b149bcfff56324a64dff53c7f0b9cef11ef",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "OCI Streaming: Move Connect Harness to Compartment",
+    "description": "Move a connect harness into a different compartment. Supply the connect harness OCID and the destination compartment OCID. The move is asynchronous and returns a work request OCID to poll.",
+    "website": "https://www.flomation.co",
+    "icon": "oracle+tower-broadcast",
+    "date": "22/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Oracle Cloud",
+      "icon": "oracle",
+      "description": "Oracle Cloud Infrastructure (OCI) integrations"
+    },
+    "sub_category": {
+      "name": "Streaming",
+      "icon": "tower-broadcast",
+      "description": "Oracle Cloud Streaming — a Kafka-compatible managed streaming service: create and manage streams, stream pools and connect harnesses, publish messages, and consume them with cursors and consumer groups"
+    },
+    "inputs": [
+      {
+        "name": "tenancy_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Tenancy OCID",
+        "placeholder": "ocid1.tenancy.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "user_ocid",
+        "type": "string",
+        "value": null,
+        "label": "User OCID",
+        "placeholder": "ocid1.user.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "e.g. uk-london-1",
+        "required": true
+      },
+      {
+        "name": "fingerprint",
+        "type": "string",
+        "value": null,
+        "label": "Key Fingerprint",
+        "placeholder": "aa:bb:cc:… fingerprint of the uploaded API key",
+        "required": true
+      },
+      {
+        "name": "private_key",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key (PEM)",
+        "placeholder": "The API signing private key — full PEM, incl. BEGIN/END lines"
+      },
+      {
+        "name": "private_key_passphrase",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key Passphrase",
+        "placeholder": "Only if the key is encrypted (optional)"
+      },
+      {
+        "name": "compartment_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Compartment OCID",
+        "placeholder": "ocid1.compartment.oc1..aaaa… (scopes the picker)"
+      },
+      {
+        "name": "connect_harness_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Connect Harness OCID",
+        "placeholder": "ocid1.connectharness.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "destination_compartment_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Destination Compartment OCID",
+        "placeholder": "ocid1.compartment.oc1..aaaa… (where the connect harness should move to)",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Connect Harness OCID",
+        "placeholder": ""
+      },
+      {
+        "name": "destination_compartment_id",
+        "type": "string",
+        "value": null,
+        "label": "Destination Compartment OCID",
+        "placeholder": ""
+      },
+      {
+        "name": "work_request_id",
+        "type": "string",
+        "value": null,
+        "label": "Work Request OCID",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "oracle/streaming/connect_harness_create": {
+    "hash": "b694b190d93b767338ebcf1f1d6f6a3439c9e86f459cca3109c82f489dc6e98c",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "OCI Streaming: Create Connect Harness",
+    "description": "Create a connect harness for Kafka Connect support. Give it a name and a compartment. Returns the harness in a CREATING state — poll Get Connect Harness until ACTIVE.",
+    "website": "https://www.flomation.co",
+    "icon": "oracle+tower-broadcast",
+    "date": "22/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Oracle Cloud",
+      "icon": "oracle",
+      "description": "Oracle Cloud Infrastructure (OCI) integrations"
+    },
+    "sub_category": {
+      "name": "Streaming",
+      "icon": "tower-broadcast",
+      "description": "Oracle Cloud Streaming — a Kafka-compatible managed streaming service: create and manage streams, stream pools and connect harnesses, publish messages, and consume them with cursors and consumer groups"
+    },
+    "inputs": [
+      {
+        "name": "tenancy_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Tenancy OCID",
+        "placeholder": "ocid1.tenancy.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "user_ocid",
+        "type": "string",
+        "value": null,
+        "label": "User OCID",
+        "placeholder": "ocid1.user.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "e.g. uk-london-1",
+        "required": true
+      },
+      {
+        "name": "fingerprint",
+        "type": "string",
+        "value": null,
+        "label": "Key Fingerprint",
+        "placeholder": "aa:bb:cc:… fingerprint of the uploaded API key",
+        "required": true
+      },
+      {
+        "name": "private_key",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key (PEM)",
+        "placeholder": "The API signing private key — full PEM, incl. BEGIN/END lines"
+      },
+      {
+        "name": "private_key_passphrase",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key Passphrase",
+        "placeholder": "Only if the key is encrypted (optional)"
+      },
+      {
+        "name": "compartment_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Compartment OCID",
+        "placeholder": "ocid1.compartment.oc1..aaaa… (holds the connect harness)",
+        "required": true
+      },
+      {
+        "name": "name",
+        "type": "string",
+        "value": null,
+        "label": "Connect Harness Name",
+        "placeholder": "e.g. JDBCConnector",
+        "required": true
+      },
+      {
+        "name": "freeform_tags",
+        "type": "string",
+        "value": null,
+        "label": "Freeform Tags (JSON)",
+        "placeholder": "{\"env\":\"prod\"} (optional)"
+      },
+      {
+        "name": "defined_tags",
+        "type": "string",
+        "value": null,
+        "label": "Defined Tags (JSON)",
+        "placeholder": "{\"Ops\":{\"env\":\"prod\"}} (optional)"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "connect_harness",
+        "type": "object",
+        "value": null,
+        "label": "Connect Harness",
+        "placeholder": ""
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Connect Harness OCID",
+        "placeholder": ""
+      },
+      {
+        "name": "lifecycle_state",
+        "type": "string",
+        "value": null,
+        "label": "Lifecycle State",
+        "placeholder": ""
+      },
+      {
+        "name": "work_request_id",
+        "type": "string",
+        "value": null,
+        "label": "Work Request OCID",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "oracle/streaming/connect_harness_delete": {
+    "hash": "7e6092998eadc86c7fc194391782b6ae104a68e1b51c1cf3ca58027f25773a53",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "OCI Streaming: Delete Connect Harness",
+    "description": "Delete a connect harness by OCID. Asynchronous — returns a work request OCID you can poll with Get Work Request to confirm removal.",
+    "website": "https://www.flomation.co",
+    "icon": "oracle+tower-broadcast",
+    "date": "22/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Oracle Cloud",
+      "icon": "oracle",
+      "description": "Oracle Cloud Infrastructure (OCI) integrations"
+    },
+    "sub_category": {
+      "name": "Streaming",
+      "icon": "tower-broadcast",
+      "description": "Oracle Cloud Streaming — a Kafka-compatible managed streaming service: create and manage streams, stream pools and connect harnesses, publish messages, and consume them with cursors and consumer groups"
+    },
+    "inputs": [
+      {
+        "name": "tenancy_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Tenancy OCID",
+        "placeholder": "ocid1.tenancy.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "user_ocid",
+        "type": "string",
+        "value": null,
+        "label": "User OCID",
+        "placeholder": "ocid1.user.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "e.g. uk-london-1",
+        "required": true
+      },
+      {
+        "name": "fingerprint",
+        "type": "string",
+        "value": null,
+        "label": "Key Fingerprint",
+        "placeholder": "aa:bb:cc:… fingerprint of the uploaded API key",
+        "required": true
+      },
+      {
+        "name": "private_key",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key (PEM)",
+        "placeholder": "The API signing private key — full PEM, incl. BEGIN/END lines"
+      },
+      {
+        "name": "private_key_passphrase",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key Passphrase",
+        "placeholder": "Only if the key is encrypted (optional)"
+      },
+      {
+        "name": "compartment_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Compartment OCID",
+        "placeholder": "ocid1.compartment.oc1..aaaa… (scopes the picker)"
+      },
+      {
+        "name": "connect_harness_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Connect Harness OCID",
+        "placeholder": "ocid1.connectharness.oc1..aaaa…",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Connect Harness OCID",
+        "placeholder": ""
+      },
+      {
+        "name": "work_request_id",
+        "type": "string",
+        "value": null,
+        "label": "Work Request OCID",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "oracle/streaming/connect_harness_get": {
+    "hash": "29e69746673ed333eb13e15674affd69bc24937bc9e8744f89311ed4d060a3e7",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "OCI Streaming: Get Connect Harness",
+    "description": "Read a connect harness by OCID — its lifecycle state, name and compartment.",
+    "website": "https://www.flomation.co",
+    "icon": "oracle+tower-broadcast",
+    "date": "22/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Oracle Cloud",
+      "icon": "oracle",
+      "description": "Oracle Cloud Infrastructure (OCI) integrations"
+    },
+    "sub_category": {
+      "name": "Streaming",
+      "icon": "tower-broadcast",
+      "description": "Oracle Cloud Streaming — a Kafka-compatible managed streaming service: create and manage streams, stream pools and connect harnesses, publish messages, and consume them with cursors and consumer groups"
+    },
+    "inputs": [
+      {
+        "name": "tenancy_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Tenancy OCID",
+        "placeholder": "ocid1.tenancy.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "user_ocid",
+        "type": "string",
+        "value": null,
+        "label": "User OCID",
+        "placeholder": "ocid1.user.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "e.g. uk-london-1",
+        "required": true
+      },
+      {
+        "name": "fingerprint",
+        "type": "string",
+        "value": null,
+        "label": "Key Fingerprint",
+        "placeholder": "aa:bb:cc:… fingerprint of the uploaded API key",
+        "required": true
+      },
+      {
+        "name": "private_key",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key (PEM)",
+        "placeholder": "The API signing private key — full PEM, incl. BEGIN/END lines"
+      },
+      {
+        "name": "private_key_passphrase",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key Passphrase",
+        "placeholder": "Only if the key is encrypted (optional)"
+      },
+      {
+        "name": "compartment_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Compartment OCID",
+        "placeholder": "ocid1.compartment.oc1..aaaa… (scopes the picker)"
+      },
+      {
+        "name": "connect_harness_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Connect Harness OCID",
+        "placeholder": "ocid1.connectharness.oc1..aaaa…",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "connect_harness",
+        "type": "object",
+        "value": null,
+        "label": "Connect Harness",
+        "placeholder": ""
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Connect Harness OCID",
+        "placeholder": ""
+      },
+      {
+        "name": "lifecycle_state",
+        "type": "string",
+        "value": null,
+        "label": "Lifecycle State",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "oracle/streaming/connect_harness_list": {
+    "hash": "9d2396ca4180dda6b6ee3380c29e1d2eed7ae1c91632d08d95d33d67c2907d19",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "OCI Streaming: List Connect Harnesses",
+    "description": "List the connect harnesses in a compartment, optionally filtered by OCID, exact name or lifecycle state. Walks pagination up to a safe cap.",
+    "website": "https://www.flomation.co",
+    "icon": "oracle+tower-broadcast",
+    "date": "22/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Oracle Cloud",
+      "icon": "oracle",
+      "description": "Oracle Cloud Infrastructure (OCI) integrations"
+    },
+    "sub_category": {
+      "name": "Streaming",
+      "icon": "tower-broadcast",
+      "description": "Oracle Cloud Streaming — a Kafka-compatible managed streaming service: create and manage streams, stream pools and connect harnesses, publish messages, and consume them with cursors and consumer groups"
+    },
+    "inputs": [
+      {
+        "name": "tenancy_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Tenancy OCID",
+        "placeholder": "ocid1.tenancy.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "user_ocid",
+        "type": "string",
+        "value": null,
+        "label": "User OCID",
+        "placeholder": "ocid1.user.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "e.g. uk-london-1",
+        "required": true
+      },
+      {
+        "name": "fingerprint",
+        "type": "string",
+        "value": null,
+        "label": "Key Fingerprint",
+        "placeholder": "aa:bb:cc:… fingerprint of the uploaded API key",
+        "required": true
+      },
+      {
+        "name": "private_key",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key (PEM)",
+        "placeholder": "The API signing private key — full PEM, incl. BEGIN/END lines"
+      },
+      {
+        "name": "private_key_passphrase",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key Passphrase",
+        "placeholder": "Only if the key is encrypted (optional)"
+      },
+      {
+        "name": "compartment_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Compartment OCID",
+        "placeholder": "ocid1.compartment.oc1..aaaa… (use the tenancy OCID for the root)",
+        "required": true
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Connect Harness OCID Filter",
+        "placeholder": "Only the harness with this exact OCID (optional)"
+      },
+      {
+        "name": "name",
+        "type": "string",
+        "value": null,
+        "label": "Name Filter",
+        "placeholder": "Only harnesses with this exact name (optional)"
+      },
+      {
+        "name": "lifecycle_state",
+        "type": "string",
+        "value": null,
+        "label": "Lifecycle State",
+        "placeholder": "Only harnesses in this state (optional)",
+        "options": [
+          {
+            "name": "Creating",
+            "value": "CREATING"
+          },
+          {
+            "name": "Active",
+            "value": "ACTIVE"
+          },
+          {
+            "name": "Updating",
+            "value": "UPDATING"
+          },
+          {
+            "name": "Deleting",
+            "value": "DELETING"
+          },
+          {
+            "name": "Deleted",
+            "value": "DELETED"
+          },
+          {
+            "name": "Failed",
+            "value": "FAILED"
+          }
+        ]
+      },
+      {
+        "name": "limit",
+        "type": "string",
+        "value": null,
+        "label": "Page Size",
+        "placeholder": "Items per page, 1–50 (optional)"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "connect_harnesses",
+        "type": "object",
+        "value": null,
+        "label": "Connect Harnesses",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "string",
+        "value": null,
+        "label": "Count",
+        "placeholder": ""
+      },
+      {
+        "name": "truncated",
+        "type": "boolean",
+        "value": null,
+        "label": "Truncated",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "oracle/streaming/connect_harness_update": {
+    "hash": "9e565ac53f2705bf422ede233129bad33a13dc851405570d4c193e19159b31a4",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "OCI Streaming: Update Connect Harness",
+    "description": "Update a connect harness by OCID — change its freeform and defined tags. Only the fields you supply are changed. Returns the harness in an UPDATING state along with a work request OCID.",
+    "website": "https://www.flomation.co",
+    "icon": "oracle+tower-broadcast",
+    "date": "22/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Oracle Cloud",
+      "icon": "oracle",
+      "description": "Oracle Cloud Infrastructure (OCI) integrations"
+    },
+    "sub_category": {
+      "name": "Streaming",
+      "icon": "tower-broadcast",
+      "description": "Oracle Cloud Streaming — a Kafka-compatible managed streaming service: create and manage streams, stream pools and connect harnesses, publish messages, and consume them with cursors and consumer groups"
+    },
+    "inputs": [
+      {
+        "name": "tenancy_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Tenancy OCID",
+        "placeholder": "ocid1.tenancy.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "user_ocid",
+        "type": "string",
+        "value": null,
+        "label": "User OCID",
+        "placeholder": "ocid1.user.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "e.g. uk-london-1",
+        "required": true
+      },
+      {
+        "name": "fingerprint",
+        "type": "string",
+        "value": null,
+        "label": "Key Fingerprint",
+        "placeholder": "aa:bb:cc:… fingerprint of the uploaded API key",
+        "required": true
+      },
+      {
+        "name": "private_key",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key (PEM)",
+        "placeholder": "The API signing private key — full PEM, incl. BEGIN/END lines"
+      },
+      {
+        "name": "private_key_passphrase",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key Passphrase",
+        "placeholder": "Only if the key is encrypted (optional)"
+      },
+      {
+        "name": "compartment_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Compartment OCID",
+        "placeholder": "ocid1.compartment.oc1..aaaa… (scopes the picker)"
+      },
+      {
+        "name": "connect_harness_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Connect Harness OCID",
+        "placeholder": "ocid1.connectharness.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "freeform_tags",
+        "type": "string",
+        "value": null,
+        "label": "Freeform Tags (JSON)",
+        "placeholder": "{\"env\":\"prod\"} (optional)"
+      },
+      {
+        "name": "defined_tags",
+        "type": "string",
+        "value": null,
+        "label": "Defined Tags (JSON)",
+        "placeholder": "{\"Ops\":{\"env\":\"prod\"}} (optional)"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "connect_harness",
+        "type": "object",
+        "value": null,
+        "label": "Connect Harness",
+        "placeholder": ""
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Connect Harness OCID",
+        "placeholder": ""
+      },
+      {
+        "name": "lifecycle_state",
+        "type": "string",
+        "value": null,
+        "label": "Lifecycle State",
+        "placeholder": ""
+      },
+      {
+        "name": "work_request_id",
+        "type": "string",
+        "value": null,
+        "label": "Work Request OCID",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "oracle/streaming/consumer_commit": {
+    "hash": "6d55463edae6b4dc07e1b69d1be05e73d5b852fc6c89920dca80849eb329d627",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "OCI Streaming: Commit Consumer Offsets",
+    "description": "Commit a consumer group's cursor offsets so a later reader resumes where the group left off instead of replaying. Supply the stream OCID and the group cursor (from Create Group Cursor); the committed cursor is returned to reuse. The stream's endpoint is resolved automatically.",
+    "website": "https://www.flomation.co",
+    "icon": "oracle+tower-broadcast",
+    "date": "22/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Oracle Cloud",
+      "icon": "oracle",
+      "description": "Oracle Cloud Infrastructure (OCI) integrations"
+    },
+    "sub_category": {
+      "name": "Streaming",
+      "icon": "tower-broadcast",
+      "description": "Oracle Cloud Streaming — a Kafka-compatible managed streaming service: create and manage streams, stream pools and connect harnesses, publish messages, and consume them with cursors and consumer groups"
+    },
+    "inputs": [
+      {
+        "name": "tenancy_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Tenancy OCID",
+        "placeholder": "ocid1.tenancy.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "user_ocid",
+        "type": "string",
+        "value": null,
+        "label": "User OCID",
+        "placeholder": "ocid1.user.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "e.g. uk-london-1",
+        "required": true
+      },
+      {
+        "name": "fingerprint",
+        "type": "string",
+        "value": null,
+        "label": "Key Fingerprint",
+        "placeholder": "aa:bb:cc:… fingerprint of the uploaded API key",
+        "required": true
+      },
+      {
+        "name": "private_key",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key (PEM)",
+        "placeholder": "The API signing private key — full PEM, incl. BEGIN/END lines"
+      },
+      {
+        "name": "private_key_passphrase",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key Passphrase",
+        "placeholder": "Only if the key is encrypted (optional)"
+      },
+      {
+        "name": "compartment_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Compartment OCID",
+        "placeholder": "ocid1.compartment.oc1..aaaa… (scopes the picker)"
+      },
+      {
+        "name": "stream_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Stream OCID",
+        "placeholder": "ocid1.stream.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "cursor",
+        "type": "text",
+        "value": null,
+        "label": "Group Cursor",
+        "placeholder": "The group cursor to commit (from Create Group Cursor)",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "cursor",
+        "type": "string",
+        "value": null,
+        "label": "Committed Cursor",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "oracle/streaming/consumer_heartbeat": {
+    "hash": "7910a8bafdacd3f80e13cb3f0cd5ff8734d87c9039b1e0ab7cf5aea521351493",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "OCI Streaming: Heartbeat Consumer",
+    "description": "Heartbeat a group cursor to keep this consumer's partition lease alive so the group does not rebalance away from it. Returns a refreshed cursor to use on the next heartbeat or consume call. The stream's endpoint is resolved automatically.",
+    "website": "https://www.flomation.co",
+    "icon": "oracle+tower-broadcast",
+    "date": "22/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Oracle Cloud",
+      "icon": "oracle",
+      "description": "Oracle Cloud Infrastructure (OCI) integrations"
+    },
+    "sub_category": {
+      "name": "Streaming",
+      "icon": "tower-broadcast",
+      "description": "Oracle Cloud Streaming — a Kafka-compatible managed streaming service: create and manage streams, stream pools and connect harnesses, publish messages, and consume them with cursors and consumer groups"
+    },
+    "inputs": [
+      {
+        "name": "tenancy_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Tenancy OCID",
+        "placeholder": "ocid1.tenancy.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "user_ocid",
+        "type": "string",
+        "value": null,
+        "label": "User OCID",
+        "placeholder": "ocid1.user.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "e.g. uk-london-1",
+        "required": true
+      },
+      {
+        "name": "fingerprint",
+        "type": "string",
+        "value": null,
+        "label": "Key Fingerprint",
+        "placeholder": "aa:bb:cc:… fingerprint of the uploaded API key",
+        "required": true
+      },
+      {
+        "name": "private_key",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key (PEM)",
+        "placeholder": "The API signing private key — full PEM, incl. BEGIN/END lines"
+      },
+      {
+        "name": "private_key_passphrase",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key Passphrase",
+        "placeholder": "Only if the key is encrypted (optional)"
+      },
+      {
+        "name": "compartment_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Compartment OCID",
+        "placeholder": "ocid1.compartment.oc1..aaaa… (scopes the picker)"
+      },
+      {
+        "name": "stream_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Stream OCID",
+        "placeholder": "ocid1.stream.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "cursor",
+        "type": "text",
+        "value": null,
+        "label": "Group Cursor",
+        "placeholder": "A group cursor value from Create Group Cursor",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "cursor",
+        "type": "string",
+        "value": null,
+        "label": "Refreshed Cursor",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "oracle/streaming/cursor_create": {
+    "hash": "890950e377b6eec0edd1e03df31d7ac52e95347ab7f9c2ec06ee5e9932f4ef69",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "OCI Streaming: Create Cursor",
+    "description": "Create a partition cursor marking where a consumer starts reading — the oldest retained message (TRIM_HORIZON), only new messages (LATEST), a specific offset (AT_OFFSET / AFTER_OFFSET) or a point in time (AT_TIME). Pass the returned cursor into Consume Messages.",
+    "website": "https://www.flomation.co",
+    "icon": "oracle+tower-broadcast",
+    "date": "22/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Oracle Cloud",
+      "icon": "oracle",
+      "description": "Oracle Cloud Infrastructure (OCI) integrations"
+    },
+    "sub_category": {
+      "name": "Streaming",
+      "icon": "tower-broadcast",
+      "description": "Oracle Cloud Streaming — a Kafka-compatible managed streaming service: create and manage streams, stream pools and connect harnesses, publish messages, and consume them with cursors and consumer groups"
+    },
+    "inputs": [
+      {
+        "name": "tenancy_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Tenancy OCID",
+        "placeholder": "ocid1.tenancy.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "user_ocid",
+        "type": "string",
+        "value": null,
+        "label": "User OCID",
+        "placeholder": "ocid1.user.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "e.g. uk-london-1",
+        "required": true
+      },
+      {
+        "name": "fingerprint",
+        "type": "string",
+        "value": null,
+        "label": "Key Fingerprint",
+        "placeholder": "aa:bb:cc:… fingerprint of the uploaded API key",
+        "required": true
+      },
+      {
+        "name": "private_key",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key (PEM)",
+        "placeholder": "The API signing private key — full PEM, incl. BEGIN/END lines"
+      },
+      {
+        "name": "private_key_passphrase",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key Passphrase",
+        "placeholder": "Only if the key is encrypted (optional)"
+      },
+      {
+        "name": "compartment_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Compartment OCID",
+        "placeholder": "ocid1.compartment.oc1..aaaa… (scopes the picker)"
+      },
+      {
+        "name": "stream_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Stream OCID",
+        "placeholder": "ocid1.stream.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "partition",
+        "type": "string",
+        "value": null,
+        "label": "Partition",
+        "placeholder": "The partition to read from, e.g. 0",
+        "required": true
+      },
+      {
+        "name": "cursor_type",
+        "type": "string",
+        "value": null,
+        "label": "Cursor Type",
+        "placeholder": "Where to start reading",
+        "required": true,
+        "options": [
+          {
+            "name": "Trim Horizon (oldest retained)",
+            "value": "TRIM_HORIZON"
+          },
+          {
+            "name": "Latest (only new messages)",
+            "value": "LATEST"
+          },
+          {
+            "name": "At Offset",
+            "value": "AT_OFFSET"
+          },
+          {
+            "name": "After Offset",
+            "value": "AFTER_OFFSET"
+          },
+          {
+            "name": "At Time",
+            "value": "AT_TIME"
+          }
+        ]
+      },
+      {
+        "name": "offset",
+        "type": "string",
+        "value": null,
+        "label": "Offset",
+        "placeholder": "Required for At Offset / After Offset, e.g. 42"
+      },
+      {
+        "name": "time",
+        "type": "string",
+        "value": null,
+        "label": "Time (RFC 3339)",
+        "placeholder": "Required for At Time, e.g. 2026-07-22T09:00:00Z"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "cursor",
+        "type": "string",
+        "value": null,
+        "label": "Cursor",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "oracle/streaming/group_cursor_create": {
+    "hash": "bf280bcd84a7b9cfd6a2f34c0433a117f4ba248e0d8cd030414abfa44042e251",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "OCI Streaming: Create Group Cursor",
+    "description": "Create a consumer-group cursor for a stream. Give it a group name and a starting position (LATEST, TRIM_HORIZON, or AT_TIME with a timestamp); the group shares the stream's partitions and tracks its own committed position. Returns a cursor to feed into Consume Messages. The stream's endpoint is resolved automatically.",
+    "website": "https://www.flomation.co",
+    "icon": "oracle+tower-broadcast",
+    "date": "22/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Oracle Cloud",
+      "icon": "oracle",
+      "description": "Oracle Cloud Infrastructure (OCI) integrations"
+    },
+    "sub_category": {
+      "name": "Streaming",
+      "icon": "tower-broadcast",
+      "description": "Oracle Cloud Streaming — a Kafka-compatible managed streaming service: create and manage streams, stream pools and connect harnesses, publish messages, and consume them with cursors and consumer groups"
+    },
+    "inputs": [
+      {
+        "name": "tenancy_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Tenancy OCID",
+        "placeholder": "ocid1.tenancy.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "user_ocid",
+        "type": "string",
+        "value": null,
+        "label": "User OCID",
+        "placeholder": "ocid1.user.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "e.g. uk-london-1",
+        "required": true
+      },
+      {
+        "name": "fingerprint",
+        "type": "string",
+        "value": null,
+        "label": "Key Fingerprint",
+        "placeholder": "aa:bb:cc:… fingerprint of the uploaded API key",
+        "required": true
+      },
+      {
+        "name": "private_key",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key (PEM)",
+        "placeholder": "The API signing private key — full PEM, incl. BEGIN/END lines"
+      },
+      {
+        "name": "private_key_passphrase",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key Passphrase",
+        "placeholder": "Only if the key is encrypted (optional)"
+      },
+      {
+        "name": "compartment_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Compartment OCID",
+        "placeholder": "ocid1.compartment.oc1..aaaa… (scopes the picker)"
+      },
+      {
+        "name": "stream_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Stream OCID",
+        "placeholder": "ocid1.stream.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "group_name",
+        "type": "string",
+        "value": null,
+        "label": "Group Name",
+        "placeholder": "Name of the consumer group, e.g. billing-workers",
+        "required": true
+      },
+      {
+        "name": "cursor_type",
+        "type": "string",
+        "value": null,
+        "label": "Cursor Type",
+        "placeholder": "Where to start consuming",
+        "required": true,
+        "options": [
+          {
+            "name": "Latest — only messages published from now on",
+            "value": "LATEST"
+          },
+          {
+            "name": "Trim horizon — the oldest retained message",
+            "value": "TRIM_HORIZON"
+          },
+          {
+            "name": "At time — from a specific timestamp (set Time)",
+            "value": "AT_TIME"
+          }
+        ]
+      },
+      {
+        "name": "instance_name",
+        "type": "string",
+        "value": null,
+        "label": "Instance Name",
+        "placeholder": "Unique id for this instance in the group (optional — a UUID is generated)"
+      },
+      {
+        "name": "timeout_ms",
+        "type": "string",
+        "value": null,
+        "label": "Timeout (ms)",
+        "placeholder": "Inactivity before partition reservations are released (optional)"
+      },
+      {
+        "name": "commit_on_get",
+        "type": "boolean",
+        "value": null,
+        "label": "Commit On Get",
+        "placeholder": "Auto-commit each read (default true; set false to commit manually)"
+      },
+      {
+        "name": "time",
+        "type": "string",
+        "value": null,
+        "label": "Time (AT_TIME only)",
+        "placeholder": "RFC3339, e.g. 2026-08-01T02:00:00Z — required when Cursor Type is AT_TIME"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "cursor",
+        "type": "string",
+        "value": null,
+        "label": "Cursor",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "oracle/streaming/group_get": {
+    "hash": "051d7c0b2c950422bce2bbe844f0889174530d0dead92204c596922a8cde5df1",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "OCI Streaming: Get Consumer Group",
+    "description": "Read the current state of a consumer group on a stream — its partition reservations, the instance holding each partition, and the latest committed offset. The stream's endpoint is resolved automatically.",
+    "website": "https://www.flomation.co",
+    "icon": "oracle+tower-broadcast",
+    "date": "22/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Oracle Cloud",
+      "icon": "oracle",
+      "description": "Oracle Cloud Infrastructure (OCI) integrations"
+    },
+    "sub_category": {
+      "name": "Streaming",
+      "icon": "tower-broadcast",
+      "description": "Oracle Cloud Streaming — a Kafka-compatible managed streaming service: create and manage streams, stream pools and connect harnesses, publish messages, and consume them with cursors and consumer groups"
+    },
+    "inputs": [
+      {
+        "name": "tenancy_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Tenancy OCID",
+        "placeholder": "ocid1.tenancy.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "user_ocid",
+        "type": "string",
+        "value": null,
+        "label": "User OCID",
+        "placeholder": "ocid1.user.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "e.g. uk-london-1",
+        "required": true
+      },
+      {
+        "name": "fingerprint",
+        "type": "string",
+        "value": null,
+        "label": "Key Fingerprint",
+        "placeholder": "aa:bb:cc:… fingerprint of the uploaded API key",
+        "required": true
+      },
+      {
+        "name": "private_key",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key (PEM)",
+        "placeholder": "The API signing private key — full PEM, incl. BEGIN/END lines"
+      },
+      {
+        "name": "private_key_passphrase",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key Passphrase",
+        "placeholder": "Only if the key is encrypted (optional)"
+      },
+      {
+        "name": "compartment_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Compartment OCID",
+        "placeholder": "ocid1.compartment.oc1..aaaa… (scopes the picker)"
+      },
+      {
+        "name": "stream_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Stream OCID",
+        "placeholder": "ocid1.stream.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "group_name",
+        "type": "string",
+        "value": null,
+        "label": "Consumer Group",
+        "placeholder": "The name of the consumer group",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "group",
+        "type": "object",
+        "value": null,
+        "label": "Consumer Group",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "oracle/streaming/group_update": {
+    "hash": "aed766b64a5caed6f1b43bb913c5128082c0bb65f5b04f513dca32acc0ce5c36",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "OCI Streaming: Reset Consumer Group",
+    "description": "Forcefully move a consumer group to a new position in a stream, resetting every consumer at once — to the latest messages, the oldest retained message, or a specific time. The stream's endpoint is resolved automatically.",
+    "website": "https://www.flomation.co",
+    "icon": "oracle+tower-broadcast",
+    "date": "22/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Oracle Cloud",
+      "icon": "oracle",
+      "description": "Oracle Cloud Infrastructure (OCI) integrations"
+    },
+    "sub_category": {
+      "name": "Streaming",
+      "icon": "tower-broadcast",
+      "description": "Oracle Cloud Streaming — a Kafka-compatible managed streaming service: create and manage streams, stream pools and connect harnesses, publish messages, and consume them with cursors and consumer groups"
+    },
+    "inputs": [
+      {
+        "name": "tenancy_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Tenancy OCID",
+        "placeholder": "ocid1.tenancy.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "user_ocid",
+        "type": "string",
+        "value": null,
+        "label": "User OCID",
+        "placeholder": "ocid1.user.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "e.g. uk-london-1",
+        "required": true
+      },
+      {
+        "name": "fingerprint",
+        "type": "string",
+        "value": null,
+        "label": "Key Fingerprint",
+        "placeholder": "aa:bb:cc:… fingerprint of the uploaded API key",
+        "required": true
+      },
+      {
+        "name": "private_key",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key (PEM)",
+        "placeholder": "The API signing private key — full PEM, incl. BEGIN/END lines"
+      },
+      {
+        "name": "private_key_passphrase",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key Passphrase",
+        "placeholder": "Only if the key is encrypted (optional)"
+      },
+      {
+        "name": "compartment_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Compartment OCID",
+        "placeholder": "ocid1.compartment.oc1..aaaa… (scopes the picker)"
+      },
+      {
+        "name": "stream_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Stream OCID",
+        "placeholder": "ocid1.stream.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "group_name",
+        "type": "string",
+        "value": null,
+        "label": "Consumer Group",
+        "placeholder": "The name of the consumer group to reset",
+        "required": true
+      },
+      {
+        "name": "reset_type",
+        "type": "string",
+        "value": null,
+        "label": "Reset To",
+        "placeholder": "",
+        "required": true,
+        "options": [
+          {
+            "name": "Latest (only new messages)",
+            "value": "LATEST"
+          },
+          {
+            "name": "Trim Horizon (oldest retained message)",
+            "value": "TRIM_HORIZON"
+          },
+          {
+            "name": "At Time (a specific timestamp)",
+            "value": "AT_TIME"
+          }
+        ]
+      },
+      {
+        "name": "time",
+        "type": "string",
+        "value": null,
+        "label": "Time",
+        "placeholder": "RFC3339, e.g. 2026-12-31T00:00:00Z (required when Reset To is At Time)"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "oracle/streaming/message_get": {
+    "hash": "404a77415d61042dcd7f077928758313c5a3f7e6886b7766d3ef5330149dc2a2",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "OCI Streaming: Consume Messages",
+    "description": "Read a batch of messages from a stream using a cursor (from Create Cursor or Create Group Cursor). Returns the messages plus a next cursor to feed into the following call to page forward. The stream's endpoint is resolved automatically.",
+    "website": "https://www.flomation.co",
+    "icon": "oracle+tower-broadcast",
+    "date": "22/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Oracle Cloud",
+      "icon": "oracle",
+      "description": "Oracle Cloud Infrastructure (OCI) integrations"
+    },
+    "sub_category": {
+      "name": "Streaming",
+      "icon": "tower-broadcast",
+      "description": "Oracle Cloud Streaming — a Kafka-compatible managed streaming service: create and manage streams, stream pools and connect harnesses, publish messages, and consume them with cursors and consumer groups"
+    },
+    "inputs": [
+      {
+        "name": "tenancy_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Tenancy OCID",
+        "placeholder": "ocid1.tenancy.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "user_ocid",
+        "type": "string",
+        "value": null,
+        "label": "User OCID",
+        "placeholder": "ocid1.user.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "e.g. uk-london-1",
+        "required": true
+      },
+      {
+        "name": "fingerprint",
+        "type": "string",
+        "value": null,
+        "label": "Key Fingerprint",
+        "placeholder": "aa:bb:cc:… fingerprint of the uploaded API key",
+        "required": true
+      },
+      {
+        "name": "private_key",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key (PEM)",
+        "placeholder": "The API signing private key — full PEM, incl. BEGIN/END lines"
+      },
+      {
+        "name": "private_key_passphrase",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key Passphrase",
+        "placeholder": "Only if the key is encrypted (optional)"
+      },
+      {
+        "name": "compartment_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Compartment OCID",
+        "placeholder": "ocid1.compartment.oc1..aaaa… (scopes the picker)"
+      },
+      {
+        "name": "stream_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Stream OCID",
+        "placeholder": "ocid1.stream.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "cursor",
+        "type": "text",
+        "value": null,
+        "label": "Cursor",
+        "placeholder": "A cursor value from Create Cursor / Create Group Cursor",
+        "required": true
+      },
+      {
+        "name": "limit",
+        "type": "string",
+        "value": null,
+        "label": "Limit",
+        "placeholder": "Max messages to return, 1–10000 (default service max)"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "messages",
+        "type": "object",
+        "value": null,
+        "label": "Messages",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Message count",
+        "placeholder": ""
+      },
+      {
+        "name": "next_cursor",
+        "type": "string",
+        "value": null,
+        "label": "Next Cursor",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "oracle/streaming/message_put": {
+    "hash": "f04ba59da7e7ed1d47e1eb632eefffedd911e6541b9df890d1fa512636e712c5",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "OCI Streaming: Publish Message",
+    "description": "Publish a message to a stream. Supply the stream OCID and a value; an optional key pins related messages to the same partition to preserve their order. The stream's endpoint is resolved automatically.",
+    "website": "https://www.flomation.co",
+    "icon": "oracle+tower-broadcast",
+    "date": "22/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Oracle Cloud",
+      "icon": "oracle",
+      "description": "Oracle Cloud Infrastructure (OCI) integrations"
+    },
+    "sub_category": {
+      "name": "Streaming",
+      "icon": "tower-broadcast",
+      "description": "Oracle Cloud Streaming — a Kafka-compatible managed streaming service: create and manage streams, stream pools and connect harnesses, publish messages, and consume them with cursors and consumer groups"
+    },
+    "inputs": [
+      {
+        "name": "tenancy_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Tenancy OCID",
+        "placeholder": "ocid1.tenancy.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "user_ocid",
+        "type": "string",
+        "value": null,
+        "label": "User OCID",
+        "placeholder": "ocid1.user.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "e.g. uk-london-1",
+        "required": true
+      },
+      {
+        "name": "fingerprint",
+        "type": "string",
+        "value": null,
+        "label": "Key Fingerprint",
+        "placeholder": "aa:bb:cc:… fingerprint of the uploaded API key",
+        "required": true
+      },
+      {
+        "name": "private_key",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key (PEM)",
+        "placeholder": "The API signing private key — full PEM, incl. BEGIN/END lines"
+      },
+      {
+        "name": "private_key_passphrase",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key Passphrase",
+        "placeholder": "Only if the key is encrypted (optional)"
+      },
+      {
+        "name": "compartment_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Compartment OCID",
+        "placeholder": "ocid1.compartment.oc1..aaaa… (scopes the picker)"
+      },
+      {
+        "name": "stream_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Stream OCID",
+        "placeholder": "ocid1.stream.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "value",
+        "type": "text",
+        "value": null,
+        "label": "Message Value",
+        "placeholder": "The message body (any UTF-8 text or JSON)",
+        "required": true
+      },
+      {
+        "name": "key",
+        "type": "string",
+        "value": null,
+        "label": "Message Key",
+        "placeholder": "Optional partition key — same key ⇒ same partition (ordered)"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "partition",
+        "type": "string",
+        "value": null,
+        "label": "Partition",
+        "placeholder": ""
+      },
+      {
+        "name": "offset",
+        "type": "integer",
+        "value": null,
+        "label": "Offset",
+        "placeholder": ""
+      },
+      {
+        "name": "timestamp",
+        "type": "string",
+        "value": null,
+        "label": "Timestamp",
+        "placeholder": ""
+      },
+      {
+        "name": "failures",
+        "type": "integer",
+        "value": null,
+        "label": "Failures",
+        "placeholder": ""
+      },
+      {
+        "name": "results",
+        "type": "object",
+        "value": null,
+        "label": "Per-message results",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "oracle/streaming/stream_change_compartment": {
+    "hash": "096a4c8102d24723e0a910bc1f61e827a340f26567375981309cefc7abd269e7",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "OCI Streaming: Move Stream to Compartment",
+    "description": "Move a stream into a different compartment. Supply the stream OCID and the destination compartment OCID. The move is asynchronous and returns a work request OCID to poll.",
+    "website": "https://www.flomation.co",
+    "icon": "oracle+tower-broadcast",
+    "date": "22/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Oracle Cloud",
+      "icon": "oracle",
+      "description": "Oracle Cloud Infrastructure (OCI) integrations"
+    },
+    "sub_category": {
+      "name": "Streaming",
+      "icon": "tower-broadcast",
+      "description": "Oracle Cloud Streaming — a Kafka-compatible managed streaming service: create and manage streams, stream pools and connect harnesses, publish messages, and consume them with cursors and consumer groups"
+    },
+    "inputs": [
+      {
+        "name": "tenancy_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Tenancy OCID",
+        "placeholder": "ocid1.tenancy.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "user_ocid",
+        "type": "string",
+        "value": null,
+        "label": "User OCID",
+        "placeholder": "ocid1.user.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "e.g. uk-london-1",
+        "required": true
+      },
+      {
+        "name": "fingerprint",
+        "type": "string",
+        "value": null,
+        "label": "Key Fingerprint",
+        "placeholder": "aa:bb:cc:… fingerprint of the uploaded API key",
+        "required": true
+      },
+      {
+        "name": "private_key",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key (PEM)",
+        "placeholder": "The API signing private key — full PEM, incl. BEGIN/END lines"
+      },
+      {
+        "name": "private_key_passphrase",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key Passphrase",
+        "placeholder": "Only if the key is encrypted (optional)"
+      },
+      {
+        "name": "compartment_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Compartment OCID",
+        "placeholder": "ocid1.compartment.oc1..aaaa… (scopes the picker)"
+      },
+      {
+        "name": "stream_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Stream OCID",
+        "placeholder": "ocid1.stream.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "destination_compartment_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Destination Compartment OCID",
+        "placeholder": "ocid1.compartment.oc1..aaaa… (where the stream should move to)",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Stream OCID",
+        "placeholder": ""
+      },
+      {
+        "name": "destination_compartment_id",
+        "type": "string",
+        "value": null,
+        "label": "Destination Compartment OCID",
+        "placeholder": ""
+      },
+      {
+        "name": "work_request_id",
+        "type": "string",
+        "value": null,
+        "label": "Work Request OCID",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "oracle/streaming/stream_create": {
+    "hash": "e7a0f5624c53e2829a841a74d57842f24a356cca832d6d1dfa2453c792b1e892",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "OCI Streaming: Create Stream",
+    "description": "Create a Kafka-compatible stream. Give it a name and a partition count, and either a compartment (uses that compartment's default stream pool) or a specific stream pool. Returns the stream in a CREATING state — poll Get Stream until ACTIVE.",
+    "website": "https://www.flomation.co",
+    "icon": "oracle+tower-broadcast",
+    "date": "22/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Oracle Cloud",
+      "icon": "oracle",
+      "description": "Oracle Cloud Infrastructure (OCI) integrations"
+    },
+    "sub_category": {
+      "name": "Streaming",
+      "icon": "tower-broadcast",
+      "description": "Oracle Cloud Streaming — a Kafka-compatible managed streaming service: create and manage streams, stream pools and connect harnesses, publish messages, and consume them with cursors and consumer groups"
+    },
+    "inputs": [
+      {
+        "name": "tenancy_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Tenancy OCID",
+        "placeholder": "ocid1.tenancy.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "user_ocid",
+        "type": "string",
+        "value": null,
+        "label": "User OCID",
+        "placeholder": "ocid1.user.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "e.g. uk-london-1",
+        "required": true
+      },
+      {
+        "name": "fingerprint",
+        "type": "string",
+        "value": null,
+        "label": "Key Fingerprint",
+        "placeholder": "aa:bb:cc:… fingerprint of the uploaded API key",
+        "required": true
+      },
+      {
+        "name": "private_key",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key (PEM)",
+        "placeholder": "The API signing private key — full PEM, incl. BEGIN/END lines"
+      },
+      {
+        "name": "private_key_passphrase",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key Passphrase",
+        "placeholder": "Only if the key is encrypted (optional)"
+      },
+      {
+        "name": "compartment_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Compartment OCID",
+        "placeholder": "ocid1.compartment.oc1..aaaa… (uses its default stream pool)"
+      },
+      {
+        "name": "name",
+        "type": "string",
+        "value": null,
+        "label": "Stream Name",
+        "placeholder": "e.g. orders-events",
+        "required": true
+      },
+      {
+        "name": "partitions",
+        "type": "string",
+        "value": null,
+        "label": "Partitions",
+        "placeholder": "Number of partitions, e.g. 1",
+        "required": true
+      },
+      {
+        "name": "retention_hours",
+        "type": "string",
+        "value": null,
+        "label": "Retention (hours)",
+        "placeholder": "How long to keep messages, 24–168 (default 24)"
+      },
+      {
+        "name": "stream_pool_id",
+        "type": "string",
+        "value": null,
+        "label": "Stream Pool OCID",
+        "placeholder": "ocid1.streampool.oc1..aaaa… (instead of a compartment)"
+      },
+      {
+        "name": "freeform_tags",
+        "type": "string",
+        "value": null,
+        "label": "Freeform Tags (JSON)",
+        "placeholder": "{\"env\":\"prod\"} (optional)"
+      },
+      {
+        "name": "defined_tags",
+        "type": "string",
+        "value": null,
+        "label": "Defined Tags (JSON)",
+        "placeholder": "{\"Ops\":{\"env\":\"prod\"}} (optional)"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "stream",
+        "type": "object",
+        "value": null,
+        "label": "Stream",
+        "placeholder": ""
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Stream OCID",
+        "placeholder": ""
+      },
+      {
+        "name": "lifecycle_state",
+        "type": "string",
+        "value": null,
+        "label": "Lifecycle State",
+        "placeholder": ""
+      },
+      {
+        "name": "messages_endpoint",
+        "type": "string",
+        "value": null,
+        "label": "Messages Endpoint",
+        "placeholder": ""
+      },
+      {
+        "name": "work_request_id",
+        "type": "string",
+        "value": null,
+        "label": "Work Request OCID",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "oracle/streaming/stream_delete": {
+    "hash": "b95587b087bf92b541e65ecdf68998328758677a902927bb35a8cd231e774b47",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "OCI Streaming: Delete Stream",
+    "description": "Delete a stream by OCID. The stream moves to a DELETING state and its messages are discarded — this cannot be undone. Returns a work request OCID to track the asynchronous removal.",
+    "website": "https://www.flomation.co",
+    "icon": "oracle+tower-broadcast",
+    "date": "22/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Oracle Cloud",
+      "icon": "oracle",
+      "description": "Oracle Cloud Infrastructure (OCI) integrations"
+    },
+    "sub_category": {
+      "name": "Streaming",
+      "icon": "tower-broadcast",
+      "description": "Oracle Cloud Streaming — a Kafka-compatible managed streaming service: create and manage streams, stream pools and connect harnesses, publish messages, and consume them with cursors and consumer groups"
+    },
+    "inputs": [
+      {
+        "name": "tenancy_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Tenancy OCID",
+        "placeholder": "ocid1.tenancy.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "user_ocid",
+        "type": "string",
+        "value": null,
+        "label": "User OCID",
+        "placeholder": "ocid1.user.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "e.g. uk-london-1",
+        "required": true
+      },
+      {
+        "name": "fingerprint",
+        "type": "string",
+        "value": null,
+        "label": "Key Fingerprint",
+        "placeholder": "aa:bb:cc:… fingerprint of the uploaded API key",
+        "required": true
+      },
+      {
+        "name": "private_key",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key (PEM)",
+        "placeholder": "The API signing private key — full PEM, incl. BEGIN/END lines"
+      },
+      {
+        "name": "private_key_passphrase",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key Passphrase",
+        "placeholder": "Only if the key is encrypted (optional)"
+      },
+      {
+        "name": "compartment_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Compartment OCID",
+        "placeholder": "ocid1.compartment.oc1..aaaa… (scopes the picker)"
+      },
+      {
+        "name": "stream_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Stream OCID",
+        "placeholder": "ocid1.stream.oc1..aaaa…",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Stream OCID",
+        "placeholder": ""
+      },
+      {
+        "name": "work_request_id",
+        "type": "string",
+        "value": null,
+        "label": "Work Request OCID",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "oracle/streaming/stream_get": {
+    "hash": "a65d917f213371456939ac84d3c9a31fd19700e24e4d0c7868dfd6118b69ef4f",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "OCI Streaming: Get Stream",
+    "description": "Read a stream by OCID — its lifecycle state, partitions, retention and messages endpoint.",
+    "website": "https://www.flomation.co",
+    "icon": "oracle+tower-broadcast",
+    "date": "22/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Oracle Cloud",
+      "icon": "oracle",
+      "description": "Oracle Cloud Infrastructure (OCI) integrations"
+    },
+    "sub_category": {
+      "name": "Streaming",
+      "icon": "tower-broadcast",
+      "description": "Oracle Cloud Streaming — a Kafka-compatible managed streaming service: create and manage streams, stream pools and connect harnesses, publish messages, and consume them with cursors and consumer groups"
+    },
+    "inputs": [
+      {
+        "name": "tenancy_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Tenancy OCID",
+        "placeholder": "ocid1.tenancy.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "user_ocid",
+        "type": "string",
+        "value": null,
+        "label": "User OCID",
+        "placeholder": "ocid1.user.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "e.g. uk-london-1",
+        "required": true
+      },
+      {
+        "name": "fingerprint",
+        "type": "string",
+        "value": null,
+        "label": "Key Fingerprint",
+        "placeholder": "aa:bb:cc:… fingerprint of the uploaded API key",
+        "required": true
+      },
+      {
+        "name": "private_key",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key (PEM)",
+        "placeholder": "The API signing private key — full PEM, incl. BEGIN/END lines"
+      },
+      {
+        "name": "private_key_passphrase",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key Passphrase",
+        "placeholder": "Only if the key is encrypted (optional)"
+      },
+      {
+        "name": "compartment_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Compartment OCID",
+        "placeholder": "ocid1.compartment.oc1..aaaa… (scopes the picker)"
+      },
+      {
+        "name": "stream_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Stream OCID",
+        "placeholder": "ocid1.stream.oc1..aaaa…",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "stream",
+        "type": "object",
+        "value": null,
+        "label": "Stream",
+        "placeholder": ""
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Stream OCID",
+        "placeholder": ""
+      },
+      {
+        "name": "lifecycle_state",
+        "type": "string",
+        "value": null,
+        "label": "Lifecycle State",
+        "placeholder": ""
+      },
+      {
+        "name": "messages_endpoint",
+        "type": "string",
+        "value": null,
+        "label": "Messages Endpoint",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "oracle/streaming/stream_list": {
+    "hash": "b401746a7e33110a15a7d89bb14cd426a2647560f6ddffb927f483143420fc39",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "OCI Streaming: List Streams",
+    "description": "List the streams in a compartment, optionally narrowed to a stream pool or filtered by name, OCID or lifecycle state. Walks pagination up to a safe cap.",
+    "website": "https://www.flomation.co",
+    "icon": "oracle+tower-broadcast",
+    "date": "22/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Oracle Cloud",
+      "icon": "oracle",
+      "description": "Oracle Cloud Infrastructure (OCI) integrations"
+    },
+    "sub_category": {
+      "name": "Streaming",
+      "icon": "tower-broadcast",
+      "description": "Oracle Cloud Streaming — a Kafka-compatible managed streaming service: create and manage streams, stream pools and connect harnesses, publish messages, and consume them with cursors and consumer groups"
+    },
+    "inputs": [
+      {
+        "name": "tenancy_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Tenancy OCID",
+        "placeholder": "ocid1.tenancy.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "user_ocid",
+        "type": "string",
+        "value": null,
+        "label": "User OCID",
+        "placeholder": "ocid1.user.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "e.g. uk-london-1",
+        "required": true
+      },
+      {
+        "name": "fingerprint",
+        "type": "string",
+        "value": null,
+        "label": "Key Fingerprint",
+        "placeholder": "aa:bb:cc:… fingerprint of the uploaded API key",
+        "required": true
+      },
+      {
+        "name": "private_key",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key (PEM)",
+        "placeholder": "The API signing private key — full PEM, incl. BEGIN/END lines"
+      },
+      {
+        "name": "private_key_passphrase",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key Passphrase",
+        "placeholder": "Only if the key is encrypted (optional)"
+      },
+      {
+        "name": "compartment_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Compartment OCID",
+        "placeholder": "ocid1.compartment.oc1..aaaa… (use the tenancy OCID for the root)",
+        "required": true
+      },
+      {
+        "name": "stream_pool_id",
+        "type": "string",
+        "value": null,
+        "label": "Stream Pool OCID",
+        "placeholder": "ocid1.streampool.oc1..aaaa… — limit to one pool (optional)"
+      },
+      {
+        "name": "name",
+        "type": "string",
+        "value": null,
+        "label": "Name Filter",
+        "placeholder": "Only streams with this exact name (optional)"
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Stream OCID Filter",
+        "placeholder": "Only the stream with this exact OCID (optional)"
+      },
+      {
+        "name": "lifecycle_state",
+        "type": "string",
+        "value": null,
+        "label": "Lifecycle State",
+        "placeholder": "Only streams in this state (optional)",
+        "options": [
+          {
+            "name": "Creating",
+            "value": "CREATING"
+          },
+          {
+            "name": "Active",
+            "value": "ACTIVE"
+          },
+          {
+            "name": "Updating",
+            "value": "UPDATING"
+          },
+          {
+            "name": "Deleting",
+            "value": "DELETING"
+          },
+          {
+            "name": "Deleted",
+            "value": "DELETED"
+          },
+          {
+            "name": "Failed",
+            "value": "FAILED"
+          }
+        ]
+      },
+      {
+        "name": "limit",
+        "type": "string",
+        "value": null,
+        "label": "Page Size",
+        "placeholder": "Items per page, 1–50 (default 10)"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "streams",
+        "type": "object",
+        "value": null,
+        "label": "Streams",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Count",
+        "placeholder": ""
+      },
+      {
+        "name": "truncated",
+        "type": "boolean",
+        "value": null,
+        "label": "Truncated",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "oracle/streaming/stream_pool_change_compartment": {
+    "hash": "259b1871fdc018fd9006d9fb47d9c9d6bdbf9f5597f723ddb23bb23694c3c003",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "OCI Streaming: Move Stream Pool",
+    "description": "Move a stream pool into a different compartment. Give it the stream pool OCID and the destination compartment OCID. Asynchronous — returns a work request OCID you can poll.",
+    "website": "https://www.flomation.co",
+    "icon": "oracle+tower-broadcast",
+    "date": "22/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Oracle Cloud",
+      "icon": "oracle",
+      "description": "Oracle Cloud Infrastructure (OCI) integrations"
+    },
+    "sub_category": {
+      "name": "Streaming",
+      "icon": "tower-broadcast",
+      "description": "Oracle Cloud Streaming — a Kafka-compatible managed streaming service: create and manage streams, stream pools and connect harnesses, publish messages, and consume them with cursors and consumer groups"
+    },
+    "inputs": [
+      {
+        "name": "tenancy_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Tenancy OCID",
+        "placeholder": "ocid1.tenancy.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "user_ocid",
+        "type": "string",
+        "value": null,
+        "label": "User OCID",
+        "placeholder": "ocid1.user.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "e.g. uk-london-1",
+        "required": true
+      },
+      {
+        "name": "fingerprint",
+        "type": "string",
+        "value": null,
+        "label": "Key Fingerprint",
+        "placeholder": "aa:bb:cc:… fingerprint of the uploaded API key",
+        "required": true
+      },
+      {
+        "name": "private_key",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key (PEM)",
+        "placeholder": "The API signing private key — full PEM, incl. BEGIN/END lines"
+      },
+      {
+        "name": "private_key_passphrase",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key Passphrase",
+        "placeholder": "Only if the key is encrypted (optional)"
+      },
+      {
+        "name": "compartment_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Compartment OCID",
+        "placeholder": "ocid1.compartment.oc1..aaaa… (scopes the picker)"
+      },
+      {
+        "name": "stream_pool_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Stream Pool OCID",
+        "placeholder": "ocid1.streampool.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "destination_compartment_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Destination Compartment OCID",
+        "placeholder": "ocid1.compartment.oc1..aaaa… (where to move the pool)",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Stream Pool OCID",
+        "placeholder": ""
+      },
+      {
+        "name": "destination_compartment_id",
+        "type": "string",
+        "value": null,
+        "label": "Destination Compartment OCID",
+        "placeholder": ""
+      },
+      {
+        "name": "work_request_id",
+        "type": "string",
+        "value": null,
+        "label": "Work Request OCID",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "oracle/streaming/stream_pool_create": {
+    "hash": "042208f970362e699c701c7bbc85b65b628094f7fdad48792170b578f3b094c6",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "OCI Streaming: Create Stream Pool",
+    "description": "Create a stream pool in a compartment to hold your streams. Give it a name and optional tags; Kafka settings, private endpoint and encryption are left at their defaults. Returns the pool in a CREATING state — poll Get Stream Pool until ACTIVE.",
+    "website": "https://www.flomation.co",
+    "icon": "oracle+tower-broadcast",
+    "date": "22/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Oracle Cloud",
+      "icon": "oracle",
+      "description": "Oracle Cloud Infrastructure (OCI) integrations"
+    },
+    "sub_category": {
+      "name": "Streaming",
+      "icon": "tower-broadcast",
+      "description": "Oracle Cloud Streaming — a Kafka-compatible managed streaming service: create and manage streams, stream pools and connect harnesses, publish messages, and consume them with cursors and consumer groups"
+    },
+    "inputs": [
+      {
+        "name": "tenancy_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Tenancy OCID",
+        "placeholder": "ocid1.tenancy.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "user_ocid",
+        "type": "string",
+        "value": null,
+        "label": "User OCID",
+        "placeholder": "ocid1.user.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "e.g. uk-london-1",
+        "required": true
+      },
+      {
+        "name": "fingerprint",
+        "type": "string",
+        "value": null,
+        "label": "Key Fingerprint",
+        "placeholder": "aa:bb:cc:… fingerprint of the uploaded API key",
+        "required": true
+      },
+      {
+        "name": "private_key",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key (PEM)",
+        "placeholder": "The API signing private key — full PEM, incl. BEGIN/END lines"
+      },
+      {
+        "name": "private_key_passphrase",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key Passphrase",
+        "placeholder": "Only if the key is encrypted (optional)"
+      },
+      {
+        "name": "compartment_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Compartment OCID",
+        "placeholder": "ocid1.compartment.oc1..aaaa… (use the tenancy OCID for the root)",
+        "required": true
+      },
+      {
+        "name": "name",
+        "type": "string",
+        "value": null,
+        "label": "Stream Pool Name",
+        "placeholder": "e.g. orders-pool",
+        "required": true
+      },
+      {
+        "name": "freeform_tags",
+        "type": "string",
+        "value": null,
+        "label": "Freeform Tags (JSON)",
+        "placeholder": "{\"env\":\"prod\"} (optional)"
+      },
+      {
+        "name": "defined_tags",
+        "type": "string",
+        "value": null,
+        "label": "Defined Tags (JSON)",
+        "placeholder": "{\"Ops\":{\"env\":\"prod\"}} (optional)"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "stream_pool",
+        "type": "object",
+        "value": null,
+        "label": "Stream Pool",
+        "placeholder": ""
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Stream Pool OCID",
+        "placeholder": ""
+      },
+      {
+        "name": "lifecycle_state",
+        "type": "string",
+        "value": null,
+        "label": "Lifecycle State",
+        "placeholder": ""
+      },
+      {
+        "name": "work_request_id",
+        "type": "string",
+        "value": null,
+        "label": "Work Request OCID",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "oracle/streaming/stream_pool_delete": {
+    "hash": "525981b14758d985edbb8acb3bce3e48cc1b33454cd6b3ac3a3807b0f5fc8bd8",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "OCI Streaming: Delete Stream Pool",
+    "description": "Delete a stream pool by OCID. Asynchronous — the pool moves to DELETING and a work request OCID is returned to track the teardown.",
+    "website": "https://www.flomation.co",
+    "icon": "oracle+tower-broadcast",
+    "date": "22/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Oracle Cloud",
+      "icon": "oracle",
+      "description": "Oracle Cloud Infrastructure (OCI) integrations"
+    },
+    "sub_category": {
+      "name": "Streaming",
+      "icon": "tower-broadcast",
+      "description": "Oracle Cloud Streaming — a Kafka-compatible managed streaming service: create and manage streams, stream pools and connect harnesses, publish messages, and consume them with cursors and consumer groups"
+    },
+    "inputs": [
+      {
+        "name": "tenancy_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Tenancy OCID",
+        "placeholder": "ocid1.tenancy.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "user_ocid",
+        "type": "string",
+        "value": null,
+        "label": "User OCID",
+        "placeholder": "ocid1.user.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "e.g. uk-london-1",
+        "required": true
+      },
+      {
+        "name": "fingerprint",
+        "type": "string",
+        "value": null,
+        "label": "Key Fingerprint",
+        "placeholder": "aa:bb:cc:… fingerprint of the uploaded API key",
+        "required": true
+      },
+      {
+        "name": "private_key",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key (PEM)",
+        "placeholder": "The API signing private key — full PEM, incl. BEGIN/END lines"
+      },
+      {
+        "name": "private_key_passphrase",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key Passphrase",
+        "placeholder": "Only if the key is encrypted (optional)"
+      },
+      {
+        "name": "compartment_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Compartment OCID",
+        "placeholder": "ocid1.compartment.oc1..aaaa… (scopes the picker)"
+      },
+      {
+        "name": "stream_pool_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Stream Pool OCID",
+        "placeholder": "ocid1.streampool.oc1..aaaa…",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Stream Pool OCID",
+        "placeholder": ""
+      },
+      {
+        "name": "work_request_id",
+        "type": "string",
+        "value": null,
+        "label": "Work Request OCID",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "oracle/streaming/stream_pool_get": {
+    "hash": "d65f7e05bc18df89205003e972a383085c00611d717b9b65abfc7b971ac431ee",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "OCI Streaming: Get Stream Pool",
+    "description": "Read a stream pool by OCID — its lifecycle state, compartment, privacy and endpoint FQDN.",
+    "website": "https://www.flomation.co",
+    "icon": "oracle+tower-broadcast",
+    "date": "22/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Oracle Cloud",
+      "icon": "oracle",
+      "description": "Oracle Cloud Infrastructure (OCI) integrations"
+    },
+    "sub_category": {
+      "name": "Streaming",
+      "icon": "tower-broadcast",
+      "description": "Oracle Cloud Streaming — a Kafka-compatible managed streaming service: create and manage streams, stream pools and connect harnesses, publish messages, and consume them with cursors and consumer groups"
+    },
+    "inputs": [
+      {
+        "name": "tenancy_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Tenancy OCID",
+        "placeholder": "ocid1.tenancy.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "user_ocid",
+        "type": "string",
+        "value": null,
+        "label": "User OCID",
+        "placeholder": "ocid1.user.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "e.g. uk-london-1",
+        "required": true
+      },
+      {
+        "name": "fingerprint",
+        "type": "string",
+        "value": null,
+        "label": "Key Fingerprint",
+        "placeholder": "aa:bb:cc:… fingerprint of the uploaded API key",
+        "required": true
+      },
+      {
+        "name": "private_key",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key (PEM)",
+        "placeholder": "The API signing private key — full PEM, incl. BEGIN/END lines"
+      },
+      {
+        "name": "private_key_passphrase",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key Passphrase",
+        "placeholder": "Only if the key is encrypted (optional)"
+      },
+      {
+        "name": "compartment_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Compartment OCID",
+        "placeholder": "ocid1.compartment.oc1..aaaa… (scopes the picker)"
+      },
+      {
+        "name": "stream_pool_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Stream Pool OCID",
+        "placeholder": "ocid1.streampool.oc1..aaaa…",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "stream_pool",
+        "type": "object",
+        "value": null,
+        "label": "Stream Pool",
+        "placeholder": ""
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Stream Pool OCID",
+        "placeholder": ""
+      },
+      {
+        "name": "lifecycle_state",
+        "type": "string",
+        "value": null,
+        "label": "Lifecycle State",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "oracle/streaming/stream_pool_list": {
+    "hash": "4b5c9be6b4c64302b46942ba93aec4da9381451a0be00cb5d3c5935f1355208f",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "OCI Streaming: List Stream Pools",
+    "description": "List the stream pools in a compartment, optionally filtered by OCID, exact name, or lifecycle state. Walks pagination up to a safe cap.",
+    "website": "https://www.flomation.co",
+    "icon": "oracle+tower-broadcast",
+    "date": "22/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Oracle Cloud",
+      "icon": "oracle",
+      "description": "Oracle Cloud Infrastructure (OCI) integrations"
+    },
+    "sub_category": {
+      "name": "Streaming",
+      "icon": "tower-broadcast",
+      "description": "Oracle Cloud Streaming — a Kafka-compatible managed streaming service: create and manage streams, stream pools and connect harnesses, publish messages, and consume them with cursors and consumer groups"
+    },
+    "inputs": [
+      {
+        "name": "tenancy_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Tenancy OCID",
+        "placeholder": "ocid1.tenancy.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "user_ocid",
+        "type": "string",
+        "value": null,
+        "label": "User OCID",
+        "placeholder": "ocid1.user.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "e.g. uk-london-1",
+        "required": true
+      },
+      {
+        "name": "fingerprint",
+        "type": "string",
+        "value": null,
+        "label": "Key Fingerprint",
+        "placeholder": "aa:bb:cc:… fingerprint of the uploaded API key",
+        "required": true
+      },
+      {
+        "name": "private_key",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key (PEM)",
+        "placeholder": "The API signing private key — full PEM, incl. BEGIN/END lines"
+      },
+      {
+        "name": "private_key_passphrase",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key Passphrase",
+        "placeholder": "Only if the key is encrypted (optional)"
+      },
+      {
+        "name": "compartment_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Compartment OCID",
+        "placeholder": "ocid1.compartment.oc1..aaaa… (use the tenancy OCID for the root)",
+        "required": true
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Stream Pool OCID Filter",
+        "placeholder": "Only the pool with this exact OCID (optional)"
+      },
+      {
+        "name": "name",
+        "type": "string",
+        "value": null,
+        "label": "Name Filter",
+        "placeholder": "Only pools with this exact name (optional)"
+      },
+      {
+        "name": "lifecycle_state",
+        "type": "string",
+        "value": null,
+        "label": "Lifecycle State",
+        "placeholder": "Only pools in this state (optional)",
+        "options": [
+          {
+            "name": "Creating",
+            "value": "CREATING"
+          },
+          {
+            "name": "Active",
+            "value": "ACTIVE"
+          },
+          {
+            "name": "Updating",
+            "value": "UPDATING"
+          },
+          {
+            "name": "Deleting",
+            "value": "DELETING"
+          },
+          {
+            "name": "Deleted",
+            "value": "DELETED"
+          },
+          {
+            "name": "Failed",
+            "value": "FAILED"
+          }
+        ]
+      },
+      {
+        "name": "limit",
+        "type": "string",
+        "value": null,
+        "label": "Page Size",
+        "placeholder": "Items per page, 1–50 (default 10)"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "stream_pools",
+        "type": "object",
+        "value": null,
+        "label": "Stream Pools",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "string",
+        "value": null,
+        "label": "Count",
+        "placeholder": ""
+      },
+      {
+        "name": "truncated",
+        "type": "boolean",
+        "value": null,
+        "label": "Truncated",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "oracle/streaming/stream_pool_update": {
+    "hash": "0293aa76d4becd60dd07200746d0648692b718efea202421c18d559796e51bd3",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "OCI Streaming: Update Stream Pool",
+    "description": "Update a stream pool by OCID — change its name and/or its freeform and defined tags. Only the fields you supply are changed. Returns the pool in an UPDATING state along with a work request OCID.",
+    "website": "https://www.flomation.co",
+    "icon": "oracle+tower-broadcast",
+    "date": "22/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Oracle Cloud",
+      "icon": "oracle",
+      "description": "Oracle Cloud Infrastructure (OCI) integrations"
+    },
+    "sub_category": {
+      "name": "Streaming",
+      "icon": "tower-broadcast",
+      "description": "Oracle Cloud Streaming — a Kafka-compatible managed streaming service: create and manage streams, stream pools and connect harnesses, publish messages, and consume them with cursors and consumer groups"
+    },
+    "inputs": [
+      {
+        "name": "tenancy_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Tenancy OCID",
+        "placeholder": "ocid1.tenancy.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "user_ocid",
+        "type": "string",
+        "value": null,
+        "label": "User OCID",
+        "placeholder": "ocid1.user.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "e.g. uk-london-1",
+        "required": true
+      },
+      {
+        "name": "fingerprint",
+        "type": "string",
+        "value": null,
+        "label": "Key Fingerprint",
+        "placeholder": "aa:bb:cc:… fingerprint of the uploaded API key",
+        "required": true
+      },
+      {
+        "name": "private_key",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key (PEM)",
+        "placeholder": "The API signing private key — full PEM, incl. BEGIN/END lines"
+      },
+      {
+        "name": "private_key_passphrase",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key Passphrase",
+        "placeholder": "Only if the key is encrypted (optional)"
+      },
+      {
+        "name": "compartment_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Compartment OCID",
+        "placeholder": "ocid1.compartment.oc1..aaaa… (scopes the picker)"
+      },
+      {
+        "name": "stream_pool_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Stream Pool OCID",
+        "placeholder": "ocid1.streampool.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "name",
+        "type": "string",
+        "value": null,
+        "label": "Stream Pool Name",
+        "placeholder": "New name (leave blank to keep the current name)"
+      },
+      {
+        "name": "freeform_tags",
+        "type": "string",
+        "value": null,
+        "label": "Freeform Tags (JSON)",
+        "placeholder": "{\"env\":\"prod\"} (optional)"
+      },
+      {
+        "name": "defined_tags",
+        "type": "string",
+        "value": null,
+        "label": "Defined Tags (JSON)",
+        "placeholder": "{\"Ops\":{\"env\":\"prod\"}} (optional)"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "stream_pool",
+        "type": "object",
+        "value": null,
+        "label": "Stream Pool",
+        "placeholder": ""
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Stream Pool OCID",
+        "placeholder": ""
+      },
+      {
+        "name": "lifecycle_state",
+        "type": "string",
+        "value": null,
+        "label": "Lifecycle State",
+        "placeholder": ""
+      },
+      {
+        "name": "work_request_id",
+        "type": "string",
+        "value": null,
+        "label": "Work Request OCID",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "oracle/streaming/stream_update": {
+    "hash": "f4332a7318024c9b10bd9ec3f00e27a6fae1e7a97012ade8b5c302e412b475cb",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "OCI Streaming: Update Stream",
+    "description": "Update a stream in place. Move it to a different stream pool and/or replace its freeform or defined tags — only the fields you provide are changed. Returns the stream in an UPDATING state; poll Get Stream until ACTIVE.",
+    "website": "https://www.flomation.co",
+    "icon": "oracle+tower-broadcast",
+    "date": "22/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Oracle Cloud",
+      "icon": "oracle",
+      "description": "Oracle Cloud Infrastructure (OCI) integrations"
+    },
+    "sub_category": {
+      "name": "Streaming",
+      "icon": "tower-broadcast",
+      "description": "Oracle Cloud Streaming — a Kafka-compatible managed streaming service: create and manage streams, stream pools and connect harnesses, publish messages, and consume them with cursors and consumer groups"
+    },
+    "inputs": [
+      {
+        "name": "tenancy_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Tenancy OCID",
+        "placeholder": "ocid1.tenancy.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "user_ocid",
+        "type": "string",
+        "value": null,
+        "label": "User OCID",
+        "placeholder": "ocid1.user.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "e.g. uk-london-1",
+        "required": true
+      },
+      {
+        "name": "fingerprint",
+        "type": "string",
+        "value": null,
+        "label": "Key Fingerprint",
+        "placeholder": "aa:bb:cc:… fingerprint of the uploaded API key",
+        "required": true
+      },
+      {
+        "name": "private_key",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key (PEM)",
+        "placeholder": "The API signing private key — full PEM, incl. BEGIN/END lines"
+      },
+      {
+        "name": "private_key_passphrase",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key Passphrase",
+        "placeholder": "Only if the key is encrypted (optional)"
+      },
+      {
+        "name": "compartment_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Compartment OCID",
+        "placeholder": "ocid1.compartment.oc1..aaaa… (scopes the picker)"
+      },
+      {
+        "name": "stream_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Stream OCID",
+        "placeholder": "ocid1.stream.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "stream_pool_id",
+        "type": "string",
+        "value": null,
+        "label": "Move to Stream Pool OCID",
+        "placeholder": "ocid1.streampool.oc1..aaaa… (optional — moves the stream)"
+      },
+      {
+        "name": "freeform_tags",
+        "type": "string",
+        "value": null,
+        "label": "Freeform Tags (JSON)",
+        "placeholder": "{\"env\":\"prod\"} — replaces all freeform tags (optional)"
+      },
+      {
+        "name": "defined_tags",
+        "type": "string",
+        "value": null,
+        "label": "Defined Tags (JSON)",
+        "placeholder": "{\"Ops\":{\"env\":\"prod\"}} — replaces all defined tags (optional)"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "stream",
+        "type": "object",
+        "value": null,
+        "label": "Stream",
+        "placeholder": ""
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Stream OCID",
+        "placeholder": ""
+      },
+      {
+        "name": "lifecycle_state",
+        "type": "string",
+        "value": null,
+        "label": "Lifecycle State",
+        "placeholder": ""
+      },
+      {
+        "name": "work_request_id",
+        "type": "string",
+        "value": null,
+        "label": "Work Request OCID",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "oracle/streaming/work_request_errors_list": {
+    "hash": "02dc32377013bc8b4bf07bb8d567bfa69e61f8143f0490ae758186ac3ff781b0",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "OCI Streaming: List Work Request Errors",
+    "description": "List the errors recorded against a Streaming work request — each error's code, message and timestamp.",
+    "website": "https://www.flomation.co",
+    "icon": "oracle+tower-broadcast",
+    "date": "22/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Oracle Cloud",
+      "icon": "oracle",
+      "description": "Oracle Cloud Infrastructure (OCI) integrations"
+    },
+    "sub_category": {
+      "name": "Streaming",
+      "icon": "tower-broadcast",
+      "description": "Oracle Cloud Streaming — a Kafka-compatible managed streaming service: create and manage streams, stream pools and connect harnesses, publish messages, and consume them with cursors and consumer groups"
+    },
+    "inputs": [
+      {
+        "name": "tenancy_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Tenancy OCID",
+        "placeholder": "ocid1.tenancy.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "user_ocid",
+        "type": "string",
+        "value": null,
+        "label": "User OCID",
+        "placeholder": "ocid1.user.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "e.g. uk-london-1",
+        "required": true
+      },
+      {
+        "name": "fingerprint",
+        "type": "string",
+        "value": null,
+        "label": "Key Fingerprint",
+        "placeholder": "aa:bb:cc:… fingerprint of the uploaded API key",
+        "required": true
+      },
+      {
+        "name": "private_key",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key (PEM)",
+        "placeholder": "The API signing private key — full PEM, incl. BEGIN/END lines"
+      },
+      {
+        "name": "private_key_passphrase",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key Passphrase",
+        "placeholder": "Only if the key is encrypted (optional)"
+      },
+      {
+        "name": "compartment_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Compartment OCID",
+        "placeholder": "ocid1.compartment.oc1..aaaa… (scopes the picker)"
+      },
+      {
+        "name": "work_request_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Work Request OCID",
+        "placeholder": "ocid1.streamingworkrequest.oc1..aaaa…",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "errors",
+        "type": "object",
+        "value": null,
+        "label": "Errors",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "string",
+        "value": null,
+        "label": "Count",
+        "placeholder": ""
+      },
+      {
+        "name": "truncated",
+        "type": "boolean",
+        "value": null,
+        "label": "Truncated",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "oracle/streaming/work_request_get": {
+    "hash": "0b70802ff32ae7b69263a7d4b1b6f0dce79634d867fdf66bf7ef6d1476e33b96",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "OCI Streaming: Get Work Request",
+    "description": "Read a Streaming work request by OCID — its operation type, status and percent-complete — to track a long-running create, update, delete or move.",
+    "website": "https://www.flomation.co",
+    "icon": "oracle+tower-broadcast",
+    "date": "22/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Oracle Cloud",
+      "icon": "oracle",
+      "description": "Oracle Cloud Infrastructure (OCI) integrations"
+    },
+    "sub_category": {
+      "name": "Streaming",
+      "icon": "tower-broadcast",
+      "description": "Oracle Cloud Streaming — a Kafka-compatible managed streaming service: create and manage streams, stream pools and connect harnesses, publish messages, and consume them with cursors and consumer groups"
+    },
+    "inputs": [
+      {
+        "name": "tenancy_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Tenancy OCID",
+        "placeholder": "ocid1.tenancy.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "user_ocid",
+        "type": "string",
+        "value": null,
+        "label": "User OCID",
+        "placeholder": "ocid1.user.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "e.g. uk-london-1",
+        "required": true
+      },
+      {
+        "name": "fingerprint",
+        "type": "string",
+        "value": null,
+        "label": "Key Fingerprint",
+        "placeholder": "aa:bb:cc:… fingerprint of the uploaded API key",
+        "required": true
+      },
+      {
+        "name": "private_key",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key (PEM)",
+        "placeholder": "The API signing private key — full PEM, incl. BEGIN/END lines"
+      },
+      {
+        "name": "private_key_passphrase",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key Passphrase",
+        "placeholder": "Only if the key is encrypted (optional)"
+      },
+      {
+        "name": "compartment_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Compartment OCID",
+        "placeholder": "ocid1.compartment.oc1..aaaa… (scopes the picker)"
+      },
+      {
+        "name": "work_request_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Work Request OCID",
+        "placeholder": "ocid1.streamingworkrequest.oc1..aaaa…",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "work_request",
+        "type": "object",
+        "value": null,
+        "label": "Work Request",
+        "placeholder": ""
+      },
+      {
+        "name": "status",
+        "type": "string",
+        "value": null,
+        "label": "Status",
+        "placeholder": ""
+      },
+      {
+        "name": "percent_complete",
+        "type": "string",
+        "value": null,
+        "label": "Percent Complete",
+        "placeholder": ""
+      },
+      {
+        "name": "operation_type",
+        "type": "string",
+        "value": null,
+        "label": "Operation Type",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "oracle/streaming/work_request_list": {
+    "hash": "49dcb477f1b9cfdff8b33f97cbaf0a47377890b0be7fae0a9bcd7114e79e60ff",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "OCI Streaming: List Work Requests",
+    "description": "List the asynchronous work requests in a compartment — each tracks a long-running Streaming operation with its operation type, status and percent complete. Walks pagination up to a safe cap.",
+    "website": "https://www.flomation.co",
+    "icon": "oracle+tower-broadcast",
+    "date": "22/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Oracle Cloud",
+      "icon": "oracle",
+      "description": "Oracle Cloud Infrastructure (OCI) integrations"
+    },
+    "sub_category": {
+      "name": "Streaming",
+      "icon": "tower-broadcast",
+      "description": "Oracle Cloud Streaming — a Kafka-compatible managed streaming service: create and manage streams, stream pools and connect harnesses, publish messages, and consume them with cursors and consumer groups"
+    },
+    "inputs": [
+      {
+        "name": "tenancy_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Tenancy OCID",
+        "placeholder": "ocid1.tenancy.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "user_ocid",
+        "type": "string",
+        "value": null,
+        "label": "User OCID",
+        "placeholder": "ocid1.user.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "e.g. uk-london-1",
+        "required": true
+      },
+      {
+        "name": "fingerprint",
+        "type": "string",
+        "value": null,
+        "label": "Key Fingerprint",
+        "placeholder": "aa:bb:cc:… fingerprint of the uploaded API key",
+        "required": true
+      },
+      {
+        "name": "private_key",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key (PEM)",
+        "placeholder": "The API signing private key — full PEM, incl. BEGIN/END lines"
+      },
+      {
+        "name": "private_key_passphrase",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key Passphrase",
+        "placeholder": "Only if the key is encrypted (optional)"
+      },
+      {
+        "name": "compartment_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Compartment OCID",
+        "placeholder": "ocid1.compartment.oc1..aaaa… (use the tenancy OCID for the root)",
+        "required": true
+      },
+      {
+        "name": "limit",
+        "type": "string",
+        "value": null,
+        "label": "Page Size",
+        "placeholder": "Items per page, 1–50 (default 10)"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "work_requests",
+        "type": "object",
+        "value": null,
+        "label": "Work Requests",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "string",
+        "value": null,
+        "label": "Count",
+        "placeholder": ""
+      },
+      {
+        "name": "truncated",
+        "type": "boolean",
+        "value": null,
+        "label": "Truncated",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "oracle/streaming/work_request_logs_list": {
+    "hash": "014fd6446d713a4ef0e463befdb233e319bb95c2b3de8767ae07dff35f76e10c",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "OCI Streaming: List Work Request Logs",
+    "description": "List the log entries for a Streaming work request — the progress messages recorded as an asynchronous stream, stream pool or connect harness operation runs. Walks pagination up to a safe cap.",
+    "website": "https://www.flomation.co",
+    "icon": "oracle+tower-broadcast",
+    "date": "22/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Oracle Cloud",
+      "icon": "oracle",
+      "description": "Oracle Cloud Infrastructure (OCI) integrations"
+    },
+    "sub_category": {
+      "name": "Streaming",
+      "icon": "tower-broadcast",
+      "description": "Oracle Cloud Streaming — a Kafka-compatible managed streaming service: create and manage streams, stream pools and connect harnesses, publish messages, and consume them with cursors and consumer groups"
+    },
+    "inputs": [
+      {
+        "name": "tenancy_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Tenancy OCID",
+        "placeholder": "ocid1.tenancy.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "user_ocid",
+        "type": "string",
+        "value": null,
+        "label": "User OCID",
+        "placeholder": "ocid1.user.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "e.g. uk-london-1",
+        "required": true
+      },
+      {
+        "name": "fingerprint",
+        "type": "string",
+        "value": null,
+        "label": "Key Fingerprint",
+        "placeholder": "aa:bb:cc:… fingerprint of the uploaded API key",
+        "required": true
+      },
+      {
+        "name": "private_key",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key (PEM)",
+        "placeholder": "The API signing private key — full PEM, incl. BEGIN/END lines"
+      },
+      {
+        "name": "private_key_passphrase",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key Passphrase",
+        "placeholder": "Only if the key is encrypted (optional)"
+      },
+      {
+        "name": "compartment_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Compartment OCID",
+        "placeholder": "ocid1.compartment.oc1..aaaa… (scopes the picker)"
+      },
+      {
+        "name": "work_request_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Work Request OCID",
+        "placeholder": "ocid1.streamingworkrequest.oc1..aaaa…",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "logs",
+        "type": "object",
+        "value": null,
+        "label": "Log Entries",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "string",
         "value": null,
         "label": "Count",
         "placeholder": ""
