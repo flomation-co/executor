@@ -33,6 +33,7 @@ var Inputs = [...]core.Connection{
 	{Name: "private_key", Type: core.ConnectionTypeSecret, Label: "Private Key (PEM)", Placeholder: "The API signing private key — full PEM, incl. BEGIN/END lines"},
 	{Name: "private_key_passphrase", Type: core.ConnectionTypeSecret, Label: "Private Key Passphrase", Placeholder: "Only if the key is encrypted (optional)"},
 	{Name: "compartment_ocid", Type: core.ConnectionTypeString, Label: "Compartment OCID", Placeholder: "ocid1.compartment.oc1..aaaa… (optional — scopes the export-set / file-system pickers)"},
+	{Name: "availability_domain", Type: core.ConnectionTypeString, Label: "Availability Domain", Placeholder: "e.g. Uocm:UK-LONDON-1-AD-1 (scopes the file-system / export-set picker; not otherwise used)"},
 	{Name: "export_set_ocid", Type: core.ConnectionTypeString, Label: "Export Set OCID Filter", Placeholder: "ocid1.exportset.oc1..aaaa… — only exports in this export set (optional)"},
 	{Name: "file_system_ocid", Type: core.ConnectionTypeString, Label: "File System OCID Filter", Placeholder: "ocid1.filesystem.oc1..aaaa… — only exports of this file system (optional)"},
 }
@@ -60,6 +61,9 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	}
 	if v := strings.TrimSpace(fss.OptionalString("file_system_ocid", inputs)); v != "" {
 		req.FileSystemId = &v
+	}
+	if req.CompartmentId == nil && req.ExportSetId == nil && req.FileSystemId == nil {
+		return fss.ErrorResult("at least one of compartment_ocid, export_set_ocid or file_system_ocid is required to list exports"), nil
 	}
 	var out []map[string]interface{}
 	truncated := false

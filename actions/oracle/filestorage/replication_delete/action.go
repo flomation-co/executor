@@ -60,5 +60,5 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	if _, err := client.DeleteReplication(fss.Context(), req); err != nil {
 		return fss.ErrorResult(auth.OCIError(err)), nil
 	}
-	return fss.Result(fmt.Sprintf("Deleted replication %s", id), map[string]interface{}{"id": id}), nil
+	return fss.Result(fmt.Sprintf("Delete requested for replication %s (it moves to DELETING; no work request to poll)", id), map[string]interface{}{"id": id}), nil
 }

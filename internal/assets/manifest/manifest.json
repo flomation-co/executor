@@ -278753,7 +278753,7 @@
     ]
   },
   "oracle/filestorage/export_create": {
-    "hash": "4a9a1c61b63d5535e6d99442be68f02c8a86ba1cb07e27e04b23f531d1efec2b",
+    "hash": "519c7bf08522cfdb8e6cebafb8fad5da2d9d9e02e01eb2f6fdb47f7485a94d58",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "OCI File Storage: Create Export",
@@ -278825,6 +278825,13 @@
         "value": null,
         "label": "Compartment OCID",
         "placeholder": "ocid1.compartment.oc1..aaaa… (scopes the pickers)"
+      },
+      {
+        "name": "availability_domain",
+        "type": "string",
+        "value": null,
+        "label": "Availability Domain",
+        "placeholder": "e.g. Uocm:UK-LONDON-1-AD-1 (scopes the file-system / export-set picker; not otherwise used)"
       },
       {
         "name": "export_set_ocid",
@@ -279146,7 +279153,7 @@
     ]
   },
   "oracle/filestorage/export_list": {
-    "hash": "bf9d3128bb16ce8b2214deb21db3afac67d6f60ed24219e82cae1c1d356371bb",
+    "hash": "b7b1ea936aaf4fd04dcd982db0b2866c5593934ae028e71d60256d86c9f6cf7e",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "OCI File Storage: List Exports",
@@ -279218,6 +279225,13 @@
         "value": null,
         "label": "Compartment OCID",
         "placeholder": "ocid1.compartment.oc1..aaaa… (optional — scopes the export-set / file-system pickers)"
+      },
+      {
+        "name": "availability_domain",
+        "type": "string",
+        "value": null,
+        "label": "Availability Domain",
+        "placeholder": "e.g. Uocm:UK-LONDON-1-AD-1 (scopes the file-system / export-set picker; not otherwise used)"
       },
       {
         "name": "export_set_ocid",
@@ -282666,7 +282680,7 @@
     ]
   },
   "oracle/filestorage/quota_rule_delete": {
-    "hash": "f5557f27047a06a93a4c52100b4ae6614c408e9f4f4d4279730f8aa9eec39126",
+    "hash": "b06c14884e73ac03920e65db3e9e613d8b61fda9cc4e02da1081b7912ac1c03f",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "OCI File Storage: Delete Quota Rule",
@@ -282740,6 +282754,13 @@
         "placeholder": "ocid1.compartment.oc1..aaaa… (scopes the file-system picker)"
       },
       {
+        "name": "availability_domain",
+        "type": "string",
+        "value": null,
+        "label": "Availability Domain",
+        "placeholder": "e.g. Uocm:UK-LONDON-1-AD-1 (scopes the file-system / export-set picker; not otherwise used)"
+      },
+      {
         "name": "file_system_ocid",
         "type": "string",
         "value": null,
@@ -282788,7 +282809,7 @@
     ]
   },
   "oracle/filestorage/quota_rule_get": {
-    "hash": "be84d1fdaf8cf1f8311411a2e77f6cea6f0a2a18d2f7a20254105dbe962f0c23",
+    "hash": "be0be92f0ceac6b0d8549cc0c52c00fc1124424f13772dd35a3755110ab8f31d",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "OCI File Storage: Get Quota Rule",
@@ -282860,6 +282881,13 @@
         "value": null,
         "label": "Compartment OCID",
         "placeholder": "ocid1.compartment.oc1..aaaa… (scopes the file-system picker)"
+      },
+      {
+        "name": "availability_domain",
+        "type": "string",
+        "value": null,
+        "label": "Availability Domain",
+        "placeholder": "e.g. Uocm:UK-LONDON-1-AD-1 (scopes the file-system / export-set picker; not otherwise used)"
       },
       {
         "name": "file_system_ocid",
@@ -283067,7 +283095,7 @@
     ]
   },
   "oracle/filestorage/quota_rule_update": {
-    "hash": "4914b4800aa6ef0dcdfa412a9e2ce4dc5674f891b89427766cb8eaab3fc2e929",
+    "hash": "d6b8465868390189c73483962b1864a2cbba53426e5e9f1623b86ac39cb8090e",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "OCI File Storage: Update Quota Rule",
@@ -283139,6 +283167,13 @@
         "value": null,
         "label": "Compartment OCID",
         "placeholder": "ocid1.compartment.oc1..aaaa… (scopes the file-system picker)"
+      },
+      {
+        "name": "availability_domain",
+        "type": "string",
+        "value": null,
+        "label": "Availability Domain",
+        "placeholder": "e.g. Uocm:UK-LONDON-1-AD-1 (scopes the file-system / export-set picker; not otherwise used)"
       },
       {
         "name": "file_system_ocid",
@@ -283361,7 +283396,7 @@
     ]
   },
   "oracle/filestorage/replication_delete": {
-    "hash": "b0529361e0bbdf77d504846d4c015a49831ba140e24155e521789a0d07dce223",
+    "hash": "81af3dac105119723916c25111e42f00cd049736edd1dc873b22f4eae817d9f2",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "OCI File Storage: Delete Replication",
@@ -284537,7 +284572,7 @@
     ]
   },
   "oracle/filestorage/snapshot_list": {
-    "hash": "b76569dcf5f8c73f885ce35c5c182f7319bc6e0c64e34cc1c16b8820e17c1670",
+    "hash": "d06463a850664ba60d81ed129f914f0065368399bcce21290cdf0dd32d0a5660",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "OCI File Storage: List Snapshots",
@@ -284609,6 +284644,13 @@
         "value": null,
         "label": "Compartment OCID",
         "placeholder": "ocid1.compartment.oc1..aaaa… (scopes the file-system picker)"
+      },
+      {
+        "name": "availability_domain",
+        "type": "string",
+        "value": null,
+        "label": "Availability Domain",
+        "placeholder": "e.g. Uocm:UK-LONDON-1-AD-1 (scopes the file-system / export-set picker; not otherwise used)"
       },
       {
         "name": "file_system_ocid",

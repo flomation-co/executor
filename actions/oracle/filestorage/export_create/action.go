@@ -32,6 +32,7 @@ var Inputs = [...]core.Connection{
 	{Name: "private_key", Type: core.ConnectionTypeSecret, Label: "Private Key (PEM)", Placeholder: "The API signing private key — full PEM, incl. BEGIN/END lines"},
 	{Name: "private_key_passphrase", Type: core.ConnectionTypeSecret, Label: "Private Key Passphrase", Placeholder: "Only if the key is encrypted (optional)"},
 	{Name: "compartment_ocid", Type: core.ConnectionTypeString, Label: "Compartment OCID", Placeholder: "ocid1.compartment.oc1..aaaa… (scopes the pickers)"},
+	{Name: "availability_domain", Type: core.ConnectionTypeString, Label: "Availability Domain", Placeholder: "e.g. Uocm:UK-LONDON-1-AD-1 (scopes the file-system / export-set picker; not otherwise used)"},
 	{Name: "export_set_ocid", Type: core.ConnectionTypeString, Label: "Export Set OCID", Placeholder: "ocid1.exportset.oc1..aaaa… (from the mount target)", Required: true},
 	{Name: "file_system_ocid", Type: core.ConnectionTypeString, Label: "File System OCID", Placeholder: "ocid1.filesystem.oc1..aaaa…", Required: true},
 	{Name: "path", Type: core.ConnectionTypeString, Label: "Export Path", Placeholder: "The NFS path clients mount, e.g. /shared", Required: true},
