@@ -259981,6 +259981,4477 @@
       }
     ]
   },
+  "oracle/networkloadbalancer/backend_create": {
+    "hash": "e84da80f61fcd1790d5e87bb0f93625758fb0a3e48ab3bd733b5e56c20994adf",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "OCI Network Load Balancer: Create Backend",
+    "description": "Add a backend to a backend set of an Oracle Cloud network load balancer — either an IP address or a compute instance OCID, plus a port. Asynchronous — returns a work-request id.",
+    "website": "https://www.flomation.co",
+    "icon": "oracle+server",
+    "date": "22/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Oracle Cloud",
+      "icon": "oracle",
+      "description": "Oracle Cloud Infrastructure (OCI) integrations"
+    },
+    "sub_category": {
+      "name": "Network Load Balancer",
+      "icon": "ethernet",
+      "description": "Oracle Cloud Network Load Balancer — provision Layer 3/4 (TCP/UDP) load balancers, wire backend sets and listeners, tune health checks, and track backend health"
+    },
+    "inputs": [
+      {
+        "name": "tenancy_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Tenancy OCID",
+        "placeholder": "ocid1.tenancy.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "user_ocid",
+        "type": "string",
+        "value": null,
+        "label": "User OCID",
+        "placeholder": "ocid1.user.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "e.g. uk-london-1",
+        "required": true
+      },
+      {
+        "name": "fingerprint",
+        "type": "string",
+        "value": null,
+        "label": "Key Fingerprint",
+        "placeholder": "aa:bb:cc:… fingerprint of the uploaded API key",
+        "required": true
+      },
+      {
+        "name": "private_key",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key (PEM)",
+        "placeholder": "The API signing private key — full PEM, incl. BEGIN/END lines"
+      },
+      {
+        "name": "private_key_passphrase",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key Passphrase",
+        "placeholder": "Only if the key is encrypted (optional)"
+      },
+      {
+        "name": "compartment_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Compartment OCID",
+        "placeholder": "ocid1.compartment.oc1..aaaa… (scopes the network load balancer picker)"
+      },
+      {
+        "name": "network_load_balancer_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Network Load Balancer OCID",
+        "placeholder": "ocid1.networkloadbalancer.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "backend_set_name",
+        "type": "string",
+        "value": null,
+        "label": "Backend Set Name",
+        "placeholder": "The backend set to add the server to, e.g. app-servers",
+        "required": true
+      },
+      {
+        "name": "ip_address",
+        "type": "string",
+        "value": null,
+        "label": "IP Address",
+        "placeholder": "The backend's IP, e.g. 10.0.1.5 (or supply an instance OCID instead)"
+      },
+      {
+        "name": "target_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Instance OCID",
+        "placeholder": "ocid1.instance.oc1..aaaa… — target a compute instance instead of an IP"
+      },
+      {
+        "name": "port",
+        "type": "string",
+        "value": null,
+        "label": "Port",
+        "placeholder": "The backend's port, e.g. 8080",
+        "required": true
+      },
+      {
+        "name": "weight",
+        "type": "string",
+        "value": null,
+        "label": "Weight",
+        "placeholder": "Relative traffic weight, e.g. 1 (optional)"
+      },
+      {
+        "name": "is_backup",
+        "type": "boolean",
+        "value": null,
+        "label": "Backup",
+        "placeholder": "Only receive traffic when all non-backup backends are unhealthy (optional)"
+      },
+      {
+        "name": "is_drain",
+        "type": "boolean",
+        "value": null,
+        "label": "Drain",
+        "placeholder": "Stop sending NEW connections (drain existing) (optional)"
+      },
+      {
+        "name": "is_offline",
+        "type": "boolean",
+        "value": null,
+        "label": "Offline",
+        "placeholder": "Take the backend out of rotation entirely (optional)"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "work_request_id",
+        "type": "string",
+        "value": null,
+        "label": "Work Request OCID",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "oracle/networkloadbalancer/backend_delete": {
+    "hash": "9bb065416206445ec07430f387615a5e42e59db54242f0041bfc7c3651a20dfd",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "OCI Network Load Balancer: Delete Backend",
+    "description": "Remove a backend server from a backend set of an Oracle Cloud network load balancer, by backend name. Deletion is asynchronous — returns a work-request id to poll with Get Work Request.",
+    "website": "https://www.flomation.co",
+    "icon": "oracle+server",
+    "date": "22/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Oracle Cloud",
+      "icon": "oracle",
+      "description": "Oracle Cloud Infrastructure (OCI) integrations"
+    },
+    "sub_category": {
+      "name": "Network Load Balancer",
+      "icon": "ethernet",
+      "description": "Oracle Cloud Network Load Balancer — provision Layer 3/4 (TCP/UDP) load balancers, wire backend sets and listeners, tune health checks, and track backend health"
+    },
+    "inputs": [
+      {
+        "name": "tenancy_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Tenancy OCID",
+        "placeholder": "ocid1.tenancy.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "user_ocid",
+        "type": "string",
+        "value": null,
+        "label": "User OCID",
+        "placeholder": "ocid1.user.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "e.g. uk-london-1",
+        "required": true
+      },
+      {
+        "name": "fingerprint",
+        "type": "string",
+        "value": null,
+        "label": "Key Fingerprint",
+        "placeholder": "aa:bb:cc:… fingerprint of the uploaded API key",
+        "required": true
+      },
+      {
+        "name": "private_key",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key (PEM)",
+        "placeholder": "The API signing private key — full PEM, incl. BEGIN/END lines"
+      },
+      {
+        "name": "private_key_passphrase",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key Passphrase",
+        "placeholder": "Only if the key is encrypted (optional)"
+      },
+      {
+        "name": "compartment_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Compartment OCID",
+        "placeholder": "ocid1.compartment.oc1..aaaa… (scopes the network load balancer picker)"
+      },
+      {
+        "name": "network_load_balancer_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Network Load Balancer OCID",
+        "placeholder": "ocid1.networkloadbalancer.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "backend_set_name",
+        "type": "string",
+        "value": null,
+        "label": "Backend Set Name",
+        "placeholder": "The backend set the server belongs to, e.g. app-servers",
+        "required": true
+      },
+      {
+        "name": "backend_name",
+        "type": "string",
+        "value": null,
+        "label": "Backend Name",
+        "placeholder": "The backend to remove — its name, or \u003cip\u003e:\u003cport\u003e / \u003ctargetOcid\u003e:\u003cport\u003e, e.g. 10.0.1.5:8080",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "work_request_id",
+        "type": "string",
+        "value": null,
+        "label": "Work Request OCID",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "oracle/networkloadbalancer/backend_get": {
+    "hash": "80b635e7bc1a531cdf219b726bc9fe90659f450359d1c69fe6111d562498bd06",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "OCI Network Load Balancer: Get Backend",
+    "description": "Fetch one backend server of an Oracle Cloud network load balancer's backend set by name — its target, port, weight and drain/backup/offline state.",
+    "website": "https://www.flomation.co",
+    "icon": "oracle+server",
+    "date": "22/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Oracle Cloud",
+      "icon": "oracle",
+      "description": "Oracle Cloud Infrastructure (OCI) integrations"
+    },
+    "sub_category": {
+      "name": "Network Load Balancer",
+      "icon": "ethernet",
+      "description": "Oracle Cloud Network Load Balancer — provision Layer 3/4 (TCP/UDP) load balancers, wire backend sets and listeners, tune health checks, and track backend health"
+    },
+    "inputs": [
+      {
+        "name": "tenancy_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Tenancy OCID",
+        "placeholder": "ocid1.tenancy.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "user_ocid",
+        "type": "string",
+        "value": null,
+        "label": "User OCID",
+        "placeholder": "ocid1.user.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "e.g. uk-london-1",
+        "required": true
+      },
+      {
+        "name": "fingerprint",
+        "type": "string",
+        "value": null,
+        "label": "Key Fingerprint",
+        "placeholder": "aa:bb:cc:… fingerprint of the uploaded API key",
+        "required": true
+      },
+      {
+        "name": "private_key",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key (PEM)",
+        "placeholder": "The API signing private key — full PEM, incl. BEGIN/END lines"
+      },
+      {
+        "name": "private_key_passphrase",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key Passphrase",
+        "placeholder": "Only if the key is encrypted (optional)"
+      },
+      {
+        "name": "compartment_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Compartment OCID",
+        "placeholder": "ocid1.compartment.oc1..aaaa… (scopes the network load balancer picker)"
+      },
+      {
+        "name": "network_load_balancer_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Network Load Balancer OCID",
+        "placeholder": "ocid1.networkloadbalancer.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "backend_set_name",
+        "type": "string",
+        "value": null,
+        "label": "Backend Set Name",
+        "placeholder": "The backend set name, e.g. app-servers",
+        "required": true
+      },
+      {
+        "name": "backend_name",
+        "type": "string",
+        "value": null,
+        "label": "Backend Name",
+        "placeholder": "The backend name, e.g. 10.0.0.3:8080 or the assigned name",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "backend",
+        "type": "object",
+        "value": null,
+        "label": "Backend",
+        "placeholder": ""
+      },
+      {
+        "name": "name",
+        "type": "string",
+        "value": null,
+        "label": "Backend Name",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "oracle/networkloadbalancer/backend_get_health": {
+    "hash": "e957785f5b701b4e81186ec03f7e950f3ec0cd2310b2d6527b1190ecb8ce05a4",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "OCI Network Load Balancer: Get Backend Health",
+    "description": "Read the health status of one backend server in a network load balancer backend set — its overall status and recent health-check results.",
+    "website": "https://www.flomation.co",
+    "icon": "oracle+gauge",
+    "date": "22/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Oracle Cloud",
+      "icon": "oracle",
+      "description": "Oracle Cloud Infrastructure (OCI) integrations"
+    },
+    "sub_category": {
+      "name": "Network Load Balancer",
+      "icon": "ethernet",
+      "description": "Oracle Cloud Network Load Balancer — provision Layer 3/4 (TCP/UDP) load balancers, wire backend sets and listeners, tune health checks, and track backend health"
+    },
+    "inputs": [
+      {
+        "name": "tenancy_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Tenancy OCID",
+        "placeholder": "ocid1.tenancy.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "user_ocid",
+        "type": "string",
+        "value": null,
+        "label": "User OCID",
+        "placeholder": "ocid1.user.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "e.g. uk-london-1",
+        "required": true
+      },
+      {
+        "name": "fingerprint",
+        "type": "string",
+        "value": null,
+        "label": "Key Fingerprint",
+        "placeholder": "aa:bb:cc:… fingerprint of the uploaded API key",
+        "required": true
+      },
+      {
+        "name": "private_key",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key (PEM)",
+        "placeholder": "The API signing private key — full PEM, incl. BEGIN/END lines"
+      },
+      {
+        "name": "private_key_passphrase",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key Passphrase",
+        "placeholder": "Only if the key is encrypted (optional)"
+      },
+      {
+        "name": "compartment_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Compartment OCID",
+        "placeholder": "ocid1.compartment.oc1..aaaa… (scopes the network load balancer picker)"
+      },
+      {
+        "name": "network_load_balancer_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Network Load Balancer OCID",
+        "placeholder": "ocid1.networkloadbalancer.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "backend_set_name",
+        "type": "string",
+        "value": null,
+        "label": "Backend Set Name",
+        "placeholder": "The backend set name, e.g. app-servers",
+        "required": true
+      },
+      {
+        "name": "backend_name",
+        "type": "string",
+        "value": null,
+        "label": "Backend Name",
+        "placeholder": "The backend name, or \u003cipAddress\u003e:\u003cport\u003e / \u003ctargetId\u003e:\u003cport\u003e",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "health",
+        "type": "object",
+        "value": null,
+        "label": "Backend Health",
+        "placeholder": ""
+      },
+      {
+        "name": "status",
+        "type": "string",
+        "value": null,
+        "label": "Health Status",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "oracle/networkloadbalancer/backend_get_operational_status": {
+    "hash": "7fb10be23e77fc50f55f66c741799c28bccd1a0370e168deec74e4aa39e9da1c",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "OCI Network Load Balancer: Get Backend Operational Status",
+    "description": "Read one backend server's operational status (whether it is in or out of rotation) within a backend set of an Oracle Cloud network load balancer.",
+    "website": "https://www.flomation.co",
+    "icon": "oracle+gauge",
+    "date": "22/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Oracle Cloud",
+      "icon": "oracle",
+      "description": "Oracle Cloud Infrastructure (OCI) integrations"
+    },
+    "sub_category": {
+      "name": "Network Load Balancer",
+      "icon": "ethernet",
+      "description": "Oracle Cloud Network Load Balancer — provision Layer 3/4 (TCP/UDP) load balancers, wire backend sets and listeners, tune health checks, and track backend health"
+    },
+    "inputs": [
+      {
+        "name": "tenancy_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Tenancy OCID",
+        "placeholder": "ocid1.tenancy.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "user_ocid",
+        "type": "string",
+        "value": null,
+        "label": "User OCID",
+        "placeholder": "ocid1.user.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "e.g. uk-london-1",
+        "required": true
+      },
+      {
+        "name": "fingerprint",
+        "type": "string",
+        "value": null,
+        "label": "Key Fingerprint",
+        "placeholder": "aa:bb:cc:… fingerprint of the uploaded API key",
+        "required": true
+      },
+      {
+        "name": "private_key",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key (PEM)",
+        "placeholder": "The API signing private key — full PEM, incl. BEGIN/END lines"
+      },
+      {
+        "name": "private_key_passphrase",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key Passphrase",
+        "placeholder": "Only if the key is encrypted (optional)"
+      },
+      {
+        "name": "compartment_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Compartment OCID",
+        "placeholder": "ocid1.compartment.oc1..aaaa… (scopes the network load balancer picker)"
+      },
+      {
+        "name": "network_load_balancer_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Network Load Balancer OCID",
+        "placeholder": "ocid1.networkloadbalancer.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "backend_set_name",
+        "type": "string",
+        "value": null,
+        "label": "Backend Set Name",
+        "placeholder": "The backend set name, e.g. app-servers",
+        "required": true
+      },
+      {
+        "name": "backend_name",
+        "type": "string",
+        "value": null,
+        "label": "Backend Name",
+        "placeholder": "The backend name, or \u003cipAddress\u003e:\u003cport\u003e / \u003ctargetId\u003e:\u003cport\u003e",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "status",
+        "type": "string",
+        "value": null,
+        "label": "Operational Status",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "oracle/networkloadbalancer/backend_list": {
+    "hash": "89e07fe3a16907d78613e8e93d094a25a70a69698ebfd717baee212b99be21e3",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "OCI Network Load Balancer: List Backends",
+    "description": "List the backend servers of one backend set of an Oracle Cloud network load balancer. Walks pagination up to a safe cap.",
+    "website": "https://www.flomation.co",
+    "icon": "oracle+server",
+    "date": "22/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Oracle Cloud",
+      "icon": "oracle",
+      "description": "Oracle Cloud Infrastructure (OCI) integrations"
+    },
+    "sub_category": {
+      "name": "Network Load Balancer",
+      "icon": "ethernet",
+      "description": "Oracle Cloud Network Load Balancer — provision Layer 3/4 (TCP/UDP) load balancers, wire backend sets and listeners, tune health checks, and track backend health"
+    },
+    "inputs": [
+      {
+        "name": "tenancy_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Tenancy OCID",
+        "placeholder": "ocid1.tenancy.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "user_ocid",
+        "type": "string",
+        "value": null,
+        "label": "User OCID",
+        "placeholder": "ocid1.user.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "e.g. uk-london-1",
+        "required": true
+      },
+      {
+        "name": "fingerprint",
+        "type": "string",
+        "value": null,
+        "label": "Key Fingerprint",
+        "placeholder": "aa:bb:cc:… fingerprint of the uploaded API key",
+        "required": true
+      },
+      {
+        "name": "private_key",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key (PEM)",
+        "placeholder": "The API signing private key — full PEM, incl. BEGIN/END lines"
+      },
+      {
+        "name": "private_key_passphrase",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key Passphrase",
+        "placeholder": "Only if the key is encrypted (optional)"
+      },
+      {
+        "name": "compartment_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Compartment OCID",
+        "placeholder": "ocid1.compartment.oc1..aaaa… (scopes the network load balancer picker)"
+      },
+      {
+        "name": "network_load_balancer_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Network Load Balancer OCID",
+        "placeholder": "ocid1.networkloadbalancer.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "backend_set_name",
+        "type": "string",
+        "value": null,
+        "label": "Backend Set Name",
+        "placeholder": "The backend set name, e.g. app-servers",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "backends",
+        "type": "object",
+        "value": null,
+        "label": "Backends",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "string",
+        "value": null,
+        "label": "Count",
+        "placeholder": ""
+      },
+      {
+        "name": "truncated",
+        "type": "boolean",
+        "value": null,
+        "label": "Truncated",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "oracle/networkloadbalancer/backend_set_create": {
+    "hash": "dc2d32da97bb43e7626dea39277ce1d3eba7fc755d9a725632b95a28686590b8",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "OCI Network Load Balancer: Create Backend Set",
+    "description": "Add a backend set — a server pool with a tuple-hash policy (TWO_TUPLE/THREE_TUPLE/FIVE_TUPLE) and a health check — to an Oracle Cloud network load balancer. Asynchronous.",
+    "website": "https://www.flomation.co",
+    "icon": "oracle+server",
+    "date": "22/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Oracle Cloud",
+      "icon": "oracle",
+      "description": "Oracle Cloud Infrastructure (OCI) integrations"
+    },
+    "sub_category": {
+      "name": "Network Load Balancer",
+      "icon": "ethernet",
+      "description": "Oracle Cloud Network Load Balancer — provision Layer 3/4 (TCP/UDP) load balancers, wire backend sets and listeners, tune health checks, and track backend health"
+    },
+    "inputs": [
+      {
+        "name": "tenancy_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Tenancy OCID",
+        "placeholder": "ocid1.tenancy.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "user_ocid",
+        "type": "string",
+        "value": null,
+        "label": "User OCID",
+        "placeholder": "ocid1.user.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "e.g. uk-london-1",
+        "required": true
+      },
+      {
+        "name": "fingerprint",
+        "type": "string",
+        "value": null,
+        "label": "Key Fingerprint",
+        "placeholder": "aa:bb:cc:… fingerprint of the uploaded API key",
+        "required": true
+      },
+      {
+        "name": "private_key",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key (PEM)",
+        "placeholder": "The API signing private key — full PEM, incl. BEGIN/END lines"
+      },
+      {
+        "name": "private_key_passphrase",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key Passphrase",
+        "placeholder": "Only if the key is encrypted (optional)"
+      },
+      {
+        "name": "compartment_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Compartment OCID",
+        "placeholder": "ocid1.compartment.oc1..aaaa… (scopes the network load balancer picker)"
+      },
+      {
+        "name": "network_load_balancer_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Network Load Balancer OCID",
+        "placeholder": "ocid1.networkloadbalancer.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "backend_set_name",
+        "type": "string",
+        "value": null,
+        "label": "Backend Set Name",
+        "placeholder": "A name unique within the NLB, e.g. app-servers",
+        "required": true
+      },
+      {
+        "name": "policy",
+        "type": "string",
+        "value": null,
+        "label": "Policy",
+        "placeholder": "TWO_TUPLE, THREE_TUPLE or FIVE_TUPLE",
+        "required": true
+      },
+      {
+        "name": "health_check_protocol",
+        "type": "string",
+        "value": null,
+        "label": "Health Check Protocol",
+        "placeholder": "TCP, HTTP, HTTPS, UDP or DNS",
+        "required": true
+      },
+      {
+        "name": "health_check_port",
+        "type": "string",
+        "value": null,
+        "label": "Health Check Port",
+        "placeholder": "e.g. 80 (0 = use each backend's port)"
+      },
+      {
+        "name": "health_check_url_path",
+        "type": "string",
+        "value": null,
+        "label": "Health Check URL Path",
+        "placeholder": "For HTTP/HTTPS checks, e.g. /health"
+      },
+      {
+        "name": "is_preserve_source",
+        "type": "boolean",
+        "value": null,
+        "label": "Preserve Source IP",
+        "placeholder": "Pass the client's source IP to the backend (optional)"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "backend_set_name",
+        "type": "string",
+        "value": null,
+        "label": "Backend Set Name",
+        "placeholder": ""
+      },
+      {
+        "name": "work_request_id",
+        "type": "string",
+        "value": null,
+        "label": "Work Request OCID",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "oracle/networkloadbalancer/backend_set_delete": {
+    "hash": "a9d09129bfe7d1d8202a8cf2d5ceded8fc546bd720ad966647ff422de70cfb5d",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "OCI Network Load Balancer: Delete Backend Set",
+    "description": "Delete a backend set of an Oracle Cloud network load balancer by name. Deletion is asynchronous — returns a work-request id to poll with Get Work Request.",
+    "website": "https://www.flomation.co",
+    "icon": "oracle+server",
+    "date": "22/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Oracle Cloud",
+      "icon": "oracle",
+      "description": "Oracle Cloud Infrastructure (OCI) integrations"
+    },
+    "sub_category": {
+      "name": "Network Load Balancer",
+      "icon": "ethernet",
+      "description": "Oracle Cloud Network Load Balancer — provision Layer 3/4 (TCP/UDP) load balancers, wire backend sets and listeners, tune health checks, and track backend health"
+    },
+    "inputs": [
+      {
+        "name": "tenancy_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Tenancy OCID",
+        "placeholder": "ocid1.tenancy.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "user_ocid",
+        "type": "string",
+        "value": null,
+        "label": "User OCID",
+        "placeholder": "ocid1.user.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "e.g. uk-london-1",
+        "required": true
+      },
+      {
+        "name": "fingerprint",
+        "type": "string",
+        "value": null,
+        "label": "Key Fingerprint",
+        "placeholder": "aa:bb:cc:… fingerprint of the uploaded API key",
+        "required": true
+      },
+      {
+        "name": "private_key",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key (PEM)",
+        "placeholder": "The API signing private key — full PEM, incl. BEGIN/END lines"
+      },
+      {
+        "name": "private_key_passphrase",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key Passphrase",
+        "placeholder": "Only if the key is encrypted (optional)"
+      },
+      {
+        "name": "compartment_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Compartment OCID",
+        "placeholder": "ocid1.compartment.oc1..aaaa… (scopes the network load balancer picker)"
+      },
+      {
+        "name": "network_load_balancer_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Network Load Balancer OCID",
+        "placeholder": "ocid1.networkloadbalancer.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "backend_set_name",
+        "type": "string",
+        "value": null,
+        "label": "Backend Set Name",
+        "placeholder": "The backend set name, e.g. app-servers",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "name",
+        "type": "string",
+        "value": null,
+        "label": "Backend Set Name",
+        "placeholder": ""
+      },
+      {
+        "name": "work_request_id",
+        "type": "string",
+        "value": null,
+        "label": "Work Request OCID",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "oracle/networkloadbalancer/backend_set_get": {
+    "hash": "394c7de3ac1a482e72ae1a40970afddcd67f235d9d71b3df639a915aa21a603e",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "OCI Network Load Balancer: Get Backend Set",
+    "description": "Fetch one backend set of an Oracle Cloud network load balancer by name — its policy, health checker and backend servers.",
+    "website": "https://www.flomation.co",
+    "icon": "oracle+server",
+    "date": "22/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Oracle Cloud",
+      "icon": "oracle",
+      "description": "Oracle Cloud Infrastructure (OCI) integrations"
+    },
+    "sub_category": {
+      "name": "Network Load Balancer",
+      "icon": "ethernet",
+      "description": "Oracle Cloud Network Load Balancer — provision Layer 3/4 (TCP/UDP) load balancers, wire backend sets and listeners, tune health checks, and track backend health"
+    },
+    "inputs": [
+      {
+        "name": "tenancy_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Tenancy OCID",
+        "placeholder": "ocid1.tenancy.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "user_ocid",
+        "type": "string",
+        "value": null,
+        "label": "User OCID",
+        "placeholder": "ocid1.user.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "e.g. uk-london-1",
+        "required": true
+      },
+      {
+        "name": "fingerprint",
+        "type": "string",
+        "value": null,
+        "label": "Key Fingerprint",
+        "placeholder": "aa:bb:cc:… fingerprint of the uploaded API key",
+        "required": true
+      },
+      {
+        "name": "private_key",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key (PEM)",
+        "placeholder": "The API signing private key — full PEM, incl. BEGIN/END lines"
+      },
+      {
+        "name": "private_key_passphrase",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key Passphrase",
+        "placeholder": "Only if the key is encrypted (optional)"
+      },
+      {
+        "name": "compartment_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Compartment OCID",
+        "placeholder": "ocid1.compartment.oc1..aaaa… (scopes the network load balancer picker)"
+      },
+      {
+        "name": "network_load_balancer_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Network Load Balancer OCID",
+        "placeholder": "ocid1.networkloadbalancer.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "backend_set_name",
+        "type": "string",
+        "value": null,
+        "label": "Backend Set Name",
+        "placeholder": "The backend set name, e.g. app-servers",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "backend_set",
+        "type": "object",
+        "value": null,
+        "label": "Backend Set",
+        "placeholder": ""
+      },
+      {
+        "name": "name",
+        "type": "string",
+        "value": null,
+        "label": "Backend Set Name",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "oracle/networkloadbalancer/backend_set_get_health": {
+    "hash": "b6e37f9cda00b065f747de0a63b4f613c1a68d5efe8c3a0963cb08c8855b76aa",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "OCI Network Load Balancer: Get Backend Set Health",
+    "description": "Read the health of an Oracle Cloud network load balancer backend set — overall status and the warning, critical and unknown backend server lists.",
+    "website": "https://www.flomation.co",
+    "icon": "oracle+gauge",
+    "date": "22/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Oracle Cloud",
+      "icon": "oracle",
+      "description": "Oracle Cloud Infrastructure (OCI) integrations"
+    },
+    "sub_category": {
+      "name": "Network Load Balancer",
+      "icon": "ethernet",
+      "description": "Oracle Cloud Network Load Balancer — provision Layer 3/4 (TCP/UDP) load balancers, wire backend sets and listeners, tune health checks, and track backend health"
+    },
+    "inputs": [
+      {
+        "name": "tenancy_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Tenancy OCID",
+        "placeholder": "ocid1.tenancy.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "user_ocid",
+        "type": "string",
+        "value": null,
+        "label": "User OCID",
+        "placeholder": "ocid1.user.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "e.g. uk-london-1",
+        "required": true
+      },
+      {
+        "name": "fingerprint",
+        "type": "string",
+        "value": null,
+        "label": "Key Fingerprint",
+        "placeholder": "aa:bb:cc:… fingerprint of the uploaded API key",
+        "required": true
+      },
+      {
+        "name": "private_key",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key (PEM)",
+        "placeholder": "The API signing private key — full PEM, incl. BEGIN/END lines"
+      },
+      {
+        "name": "private_key_passphrase",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key Passphrase",
+        "placeholder": "Only if the key is encrypted (optional)"
+      },
+      {
+        "name": "compartment_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Compartment OCID",
+        "placeholder": "ocid1.compartment.oc1..aaaa… (scopes the network load balancer picker)"
+      },
+      {
+        "name": "network_load_balancer_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Network Load Balancer OCID",
+        "placeholder": "ocid1.networkloadbalancer.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "backend_set_name",
+        "type": "string",
+        "value": null,
+        "label": "Backend Set Name",
+        "placeholder": "The backend set name, e.g. app-servers",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "health",
+        "type": "object",
+        "value": null,
+        "label": "Backend Set Health",
+        "placeholder": ""
+      },
+      {
+        "name": "status",
+        "type": "string",
+        "value": null,
+        "label": "Health Status",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "oracle/networkloadbalancer/backend_set_get_health_checker": {
+    "hash": "2413a077bbecbc3895b3969db72c2fdd9ab9822d178d06ba27d78fc00416638e",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "OCI Network Load Balancer: Get Health Checker",
+    "description": "Read the health-checker policy of one backend set of an Oracle Cloud network load balancer — its protocol, port, URL path, return code and timing.",
+    "website": "https://www.flomation.co",
+    "icon": "oracle+gauge",
+    "date": "22/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Oracle Cloud",
+      "icon": "oracle",
+      "description": "Oracle Cloud Infrastructure (OCI) integrations"
+    },
+    "sub_category": {
+      "name": "Network Load Balancer",
+      "icon": "ethernet",
+      "description": "Oracle Cloud Network Load Balancer — provision Layer 3/4 (TCP/UDP) load balancers, wire backend sets and listeners, tune health checks, and track backend health"
+    },
+    "inputs": [
+      {
+        "name": "tenancy_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Tenancy OCID",
+        "placeholder": "ocid1.tenancy.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "user_ocid",
+        "type": "string",
+        "value": null,
+        "label": "User OCID",
+        "placeholder": "ocid1.user.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "e.g. uk-london-1",
+        "required": true
+      },
+      {
+        "name": "fingerprint",
+        "type": "string",
+        "value": null,
+        "label": "Key Fingerprint",
+        "placeholder": "aa:bb:cc:… fingerprint of the uploaded API key",
+        "required": true
+      },
+      {
+        "name": "private_key",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key (PEM)",
+        "placeholder": "The API signing private key — full PEM, incl. BEGIN/END lines"
+      },
+      {
+        "name": "private_key_passphrase",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key Passphrase",
+        "placeholder": "Only if the key is encrypted (optional)"
+      },
+      {
+        "name": "compartment_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Compartment OCID",
+        "placeholder": "ocid1.compartment.oc1..aaaa… (scopes the network load balancer picker)"
+      },
+      {
+        "name": "network_load_balancer_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Network Load Balancer OCID",
+        "placeholder": "ocid1.networkloadbalancer.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "backend_set_name",
+        "type": "string",
+        "value": null,
+        "label": "Backend Set Name",
+        "placeholder": "The backend set name, e.g. app-servers",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "health_checker",
+        "type": "object",
+        "value": null,
+        "label": "Health Checker",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "oracle/networkloadbalancer/backend_set_list": {
+    "hash": "8f452533f6c9734688f5b14f782a0945b13b7c03af5d715a32ea4781f27c1484",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "OCI Network Load Balancer: List Backend Sets",
+    "description": "List the backend sets of an Oracle Cloud network load balancer — each with its policy, health checker and backend servers.",
+    "website": "https://www.flomation.co",
+    "icon": "oracle+server",
+    "date": "22/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Oracle Cloud",
+      "icon": "oracle",
+      "description": "Oracle Cloud Infrastructure (OCI) integrations"
+    },
+    "sub_category": {
+      "name": "Network Load Balancer",
+      "icon": "ethernet",
+      "description": "Oracle Cloud Network Load Balancer — provision Layer 3/4 (TCP/UDP) load balancers, wire backend sets and listeners, tune health checks, and track backend health"
+    },
+    "inputs": [
+      {
+        "name": "tenancy_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Tenancy OCID",
+        "placeholder": "ocid1.tenancy.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "user_ocid",
+        "type": "string",
+        "value": null,
+        "label": "User OCID",
+        "placeholder": "ocid1.user.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "e.g. uk-london-1",
+        "required": true
+      },
+      {
+        "name": "fingerprint",
+        "type": "string",
+        "value": null,
+        "label": "Key Fingerprint",
+        "placeholder": "aa:bb:cc:… fingerprint of the uploaded API key",
+        "required": true
+      },
+      {
+        "name": "private_key",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key (PEM)",
+        "placeholder": "The API signing private key — full PEM, incl. BEGIN/END lines"
+      },
+      {
+        "name": "private_key_passphrase",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key Passphrase",
+        "placeholder": "Only if the key is encrypted (optional)"
+      },
+      {
+        "name": "compartment_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Compartment OCID",
+        "placeholder": "ocid1.compartment.oc1..aaaa… (scopes the network load balancer picker)"
+      },
+      {
+        "name": "network_load_balancer_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Network Load Balancer OCID",
+        "placeholder": "ocid1.networkloadbalancer.oc1..aaaa…",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "backend_sets",
+        "type": "object",
+        "value": null,
+        "label": "Backend Sets",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "string",
+        "value": null,
+        "label": "Count",
+        "placeholder": ""
+      },
+      {
+        "name": "truncated",
+        "type": "boolean",
+        "value": null,
+        "label": "Truncated",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "oracle/networkloadbalancer/backend_set_update": {
+    "hash": "81d268f376536849e9da50e9d69c08998de5057ab36b139792d15f8fbc8b1c5b",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "OCI Network Load Balancer: Update Backend Set",
+    "description": "Update a backend set on an Oracle Cloud network load balancer — its tuple-hash policy, health checker and preserve-source setting. The current backends and any unspecified fields are read first and carried forward untouched (full-replace-safe). Blank fields keep their current value. Asynchronous.",
+    "website": "https://www.flomation.co",
+    "icon": "oracle+server",
+    "date": "22/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Oracle Cloud",
+      "icon": "oracle",
+      "description": "Oracle Cloud Infrastructure (OCI) integrations"
+    },
+    "sub_category": {
+      "name": "Network Load Balancer",
+      "icon": "ethernet",
+      "description": "Oracle Cloud Network Load Balancer — provision Layer 3/4 (TCP/UDP) load balancers, wire backend sets and listeners, tune health checks, and track backend health"
+    },
+    "inputs": [
+      {
+        "name": "tenancy_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Tenancy OCID",
+        "placeholder": "ocid1.tenancy.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "user_ocid",
+        "type": "string",
+        "value": null,
+        "label": "User OCID",
+        "placeholder": "ocid1.user.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "e.g. uk-london-1",
+        "required": true
+      },
+      {
+        "name": "fingerprint",
+        "type": "string",
+        "value": null,
+        "label": "Key Fingerprint",
+        "placeholder": "aa:bb:cc:… fingerprint of the uploaded API key",
+        "required": true
+      },
+      {
+        "name": "private_key",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key (PEM)",
+        "placeholder": "The API signing private key — full PEM, incl. BEGIN/END lines"
+      },
+      {
+        "name": "private_key_passphrase",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key Passphrase",
+        "placeholder": "Only if the key is encrypted (optional)"
+      },
+      {
+        "name": "compartment_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Compartment OCID",
+        "placeholder": "ocid1.compartment.oc1..aaaa… (scopes the network load balancer picker)"
+      },
+      {
+        "name": "network_load_balancer_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Network Load Balancer OCID",
+        "placeholder": "ocid1.networkloadbalancer.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "backend_set_name",
+        "type": "string",
+        "value": null,
+        "label": "Backend Set Name",
+        "placeholder": "The name of the backend set to update",
+        "required": true
+      },
+      {
+        "name": "policy",
+        "type": "string",
+        "value": null,
+        "label": "Policy",
+        "placeholder": "TWO_TUPLE, THREE_TUPLE or FIVE_TUPLE (blank = keep current)"
+      },
+      {
+        "name": "health_check_protocol",
+        "type": "string",
+        "value": null,
+        "label": "Health Check Protocol",
+        "placeholder": "TCP, HTTP, HTTPS, UDP or DNS (blank = keep current)"
+      },
+      {
+        "name": "health_check_port",
+        "type": "string",
+        "value": null,
+        "label": "Health Check Port",
+        "placeholder": "e.g. 80 (0 = use each backend's port; blank = keep current)"
+      },
+      {
+        "name": "health_check_url_path",
+        "type": "string",
+        "value": null,
+        "label": "Health Check URL Path",
+        "placeholder": "For HTTP/HTTPS checks, e.g. /health (blank = keep current)"
+      },
+      {
+        "name": "is_preserve_source",
+        "type": "boolean",
+        "value": null,
+        "label": "Preserve Source IP",
+        "placeholder": "Pass the client's source IP to the backend (blank = keep current)"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "backend_set_name",
+        "type": "string",
+        "value": null,
+        "label": "Backend Set Name",
+        "placeholder": ""
+      },
+      {
+        "name": "work_request_id",
+        "type": "string",
+        "value": null,
+        "label": "Work Request OCID",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "oracle/networkloadbalancer/backend_set_update_health_checker": {
+    "hash": "6762c6b60045bbf57b4d0f8f60793d0c6ca5d4bd0a15dc10f11040799d3ab8e4",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "OCI Network Load Balancer: Update Health Checker",
+    "description": "Update the health-check policy of a backend set on an Oracle Cloud network load balancer. A full-replace read-modify-write: the current policy is read first and any field you leave blank keeps its current value. Asynchronous.",
+    "website": "https://www.flomation.co",
+    "icon": "oracle+gauge",
+    "date": "22/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Oracle Cloud",
+      "icon": "oracle",
+      "description": "Oracle Cloud Infrastructure (OCI) integrations"
+    },
+    "sub_category": {
+      "name": "Network Load Balancer",
+      "icon": "ethernet",
+      "description": "Oracle Cloud Network Load Balancer — provision Layer 3/4 (TCP/UDP) load balancers, wire backend sets and listeners, tune health checks, and track backend health"
+    },
+    "inputs": [
+      {
+        "name": "tenancy_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Tenancy OCID",
+        "placeholder": "ocid1.tenancy.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "user_ocid",
+        "type": "string",
+        "value": null,
+        "label": "User OCID",
+        "placeholder": "ocid1.user.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "e.g. uk-london-1",
+        "required": true
+      },
+      {
+        "name": "fingerprint",
+        "type": "string",
+        "value": null,
+        "label": "Key Fingerprint",
+        "placeholder": "aa:bb:cc:… fingerprint of the uploaded API key",
+        "required": true
+      },
+      {
+        "name": "private_key",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key (PEM)",
+        "placeholder": "The API signing private key — full PEM, incl. BEGIN/END lines"
+      },
+      {
+        "name": "private_key_passphrase",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key Passphrase",
+        "placeholder": "Only if the key is encrypted (optional)"
+      },
+      {
+        "name": "compartment_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Compartment OCID",
+        "placeholder": "ocid1.compartment.oc1..aaaa… (scopes the network load balancer picker)"
+      },
+      {
+        "name": "network_load_balancer_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Network Load Balancer OCID",
+        "placeholder": "ocid1.networkloadbalancer.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "backend_set_name",
+        "type": "string",
+        "value": null,
+        "label": "Backend Set Name",
+        "placeholder": "The backend set whose health checker to update, e.g. app-servers",
+        "required": true
+      },
+      {
+        "name": "protocol",
+        "type": "string",
+        "value": null,
+        "label": "Protocol",
+        "placeholder": "TCP, HTTP, HTTPS, UDP or DNS (blank = keep current)"
+      },
+      {
+        "name": "port",
+        "type": "string",
+        "value": null,
+        "label": "Port",
+        "placeholder": "e.g. 80 (0 = use each backend's port; blank = keep current)"
+      },
+      {
+        "name": "url_path",
+        "type": "string",
+        "value": null,
+        "label": "URL Path",
+        "placeholder": "For HTTP/HTTPS checks, e.g. /health (blank = keep current)"
+      },
+      {
+        "name": "return_code",
+        "type": "string",
+        "value": null,
+        "label": "Return Code",
+        "placeholder": "Healthy status code, e.g. 200 (blank = keep current)"
+      },
+      {
+        "name": "retries",
+        "type": "string",
+        "value": null,
+        "label": "Retries",
+        "placeholder": "Attempts before unhealthy, e.g. 3 (blank = keep current)"
+      },
+      {
+        "name": "interval_in_millis",
+        "type": "string",
+        "value": null,
+        "label": "Interval (ms)",
+        "placeholder": "Between checks, e.g. 10000 (blank = keep current)"
+      },
+      {
+        "name": "timeout_in_millis",
+        "type": "string",
+        "value": null,
+        "label": "Timeout (ms)",
+        "placeholder": "Per check, e.g. 3000 (blank = keep current)"
+      },
+      {
+        "name": "response_body_regex",
+        "type": "string",
+        "value": null,
+        "label": "Response Body Regex",
+        "placeholder": "Pattern the response must match (blank = keep current)"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "backend_set_name",
+        "type": "string",
+        "value": null,
+        "label": "Backend Set Name",
+        "placeholder": ""
+      },
+      {
+        "name": "work_request_id",
+        "type": "string",
+        "value": null,
+        "label": "Work Request OCID",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "oracle/networkloadbalancer/backend_update": {
+    "hash": "e24bcb621bf44fb90b25bdf3c8dc97003ee6a928c8f0325066a8e09350d6d92e",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "OCI Network Load Balancer: Update Backend",
+    "description": "Update a backend server's traffic settings (weight, backup, drain, offline) in a backend set of an Oracle Cloud network load balancer. Settings you leave blank keep their current value. Asynchronous — returns a work-request id.",
+    "website": "https://www.flomation.co",
+    "icon": "oracle+server",
+    "date": "22/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Oracle Cloud",
+      "icon": "oracle",
+      "description": "Oracle Cloud Infrastructure (OCI) integrations"
+    },
+    "sub_category": {
+      "name": "Network Load Balancer",
+      "icon": "ethernet",
+      "description": "Oracle Cloud Network Load Balancer — provision Layer 3/4 (TCP/UDP) load balancers, wire backend sets and listeners, tune health checks, and track backend health"
+    },
+    "inputs": [
+      {
+        "name": "tenancy_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Tenancy OCID",
+        "placeholder": "ocid1.tenancy.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "user_ocid",
+        "type": "string",
+        "value": null,
+        "label": "User OCID",
+        "placeholder": "ocid1.user.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "e.g. uk-london-1",
+        "required": true
+      },
+      {
+        "name": "fingerprint",
+        "type": "string",
+        "value": null,
+        "label": "Key Fingerprint",
+        "placeholder": "aa:bb:cc:… fingerprint of the uploaded API key",
+        "required": true
+      },
+      {
+        "name": "private_key",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key (PEM)",
+        "placeholder": "The API signing private key — full PEM, incl. BEGIN/END lines"
+      },
+      {
+        "name": "private_key_passphrase",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key Passphrase",
+        "placeholder": "Only if the key is encrypted (optional)"
+      },
+      {
+        "name": "compartment_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Compartment OCID",
+        "placeholder": "ocid1.compartment.oc1..aaaa… (scopes the network load balancer picker)"
+      },
+      {
+        "name": "network_load_balancer_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Network Load Balancer OCID",
+        "placeholder": "ocid1.networkloadbalancer.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "backend_set_name",
+        "type": "string",
+        "value": null,
+        "label": "Backend Set Name",
+        "placeholder": "The backend set the server belongs to, e.g. app-servers",
+        "required": true
+      },
+      {
+        "name": "backend_name",
+        "type": "string",
+        "value": null,
+        "label": "Backend Name",
+        "placeholder": "The backend to update, e.g. 10.0.1.5:8080 (or its explicit name)",
+        "required": true
+      },
+      {
+        "name": "weight",
+        "type": "string",
+        "value": null,
+        "label": "Weight",
+        "placeholder": "Relative traffic weight, e.g. 3 (blank = keep current)"
+      },
+      {
+        "name": "is_backup",
+        "type": "boolean",
+        "value": null,
+        "label": "Backup",
+        "placeholder": "Only receive traffic when all non-backup backends are unhealthy (blank = keep current)"
+      },
+      {
+        "name": "is_drain",
+        "type": "boolean",
+        "value": null,
+        "label": "Drain",
+        "placeholder": "Stop sending NEW connections, drain existing (blank = keep current)"
+      },
+      {
+        "name": "is_offline",
+        "type": "boolean",
+        "value": null,
+        "label": "Offline",
+        "placeholder": "Take the backend out of rotation entirely (blank = keep current)"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "work_request_id",
+        "type": "string",
+        "value": null,
+        "label": "Work Request OCID",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "oracle/networkloadbalancer/listener_create": {
+    "hash": "5d82a862ebec69859cab38cc8fc417dafed4265319614b13c58d369c248031b7",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "OCI Network Load Balancer: Create Listener",
+    "description": "Add a listener — a protocol and port the Oracle Cloud network load balancer accepts traffic on (TCP, UDP, TCP_AND_UDP, L3IP or ANY) — forwarding to a default backend set. Asynchronous.",
+    "website": "https://www.flomation.co",
+    "icon": "oracle+tower-broadcast",
+    "date": "22/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Oracle Cloud",
+      "icon": "oracle",
+      "description": "Oracle Cloud Infrastructure (OCI) integrations"
+    },
+    "sub_category": {
+      "name": "Network Load Balancer",
+      "icon": "ethernet",
+      "description": "Oracle Cloud Network Load Balancer — provision Layer 3/4 (TCP/UDP) load balancers, wire backend sets and listeners, tune health checks, and track backend health"
+    },
+    "inputs": [
+      {
+        "name": "tenancy_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Tenancy OCID",
+        "placeholder": "ocid1.tenancy.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "user_ocid",
+        "type": "string",
+        "value": null,
+        "label": "User OCID",
+        "placeholder": "ocid1.user.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "e.g. uk-london-1",
+        "required": true
+      },
+      {
+        "name": "fingerprint",
+        "type": "string",
+        "value": null,
+        "label": "Key Fingerprint",
+        "placeholder": "aa:bb:cc:… fingerprint of the uploaded API key",
+        "required": true
+      },
+      {
+        "name": "private_key",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key (PEM)",
+        "placeholder": "The API signing private key — full PEM, incl. BEGIN/END lines"
+      },
+      {
+        "name": "private_key_passphrase",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key Passphrase",
+        "placeholder": "Only if the key is encrypted (optional)"
+      },
+      {
+        "name": "compartment_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Compartment OCID",
+        "placeholder": "ocid1.compartment.oc1..aaaa… (scopes the network load balancer picker)"
+      },
+      {
+        "name": "network_load_balancer_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Network Load Balancer OCID",
+        "placeholder": "ocid1.networkloadbalancer.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "listener_name",
+        "type": "string",
+        "value": null,
+        "label": "Listener Name",
+        "placeholder": "A name unique within the NLB, e.g. tcp-listener",
+        "required": true
+      },
+      {
+        "name": "default_backend_set_name",
+        "type": "string",
+        "value": null,
+        "label": "Default Backend Set Name",
+        "placeholder": "The backend set to forward to, e.g. app-servers",
+        "required": true
+      },
+      {
+        "name": "port",
+        "type": "string",
+        "value": null,
+        "label": "Port",
+        "placeholder": "The port to listen on, e.g. 443 (0 = all ports, for L3IP)",
+        "required": true
+      },
+      {
+        "name": "protocol",
+        "type": "string",
+        "value": null,
+        "label": "Protocol",
+        "placeholder": "TCP, UDP, TCP_AND_UDP, L3IP or ANY",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "listener_name",
+        "type": "string",
+        "value": null,
+        "label": "Listener Name",
+        "placeholder": ""
+      },
+      {
+        "name": "work_request_id",
+        "type": "string",
+        "value": null,
+        "label": "Work Request OCID",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "oracle/networkloadbalancer/listener_delete": {
+    "hash": "839195e53439bbb47d3041d3088a119a0f3275a5cafe0daa8b04c7337c22e497",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "OCI Network Load Balancer: Delete Listener",
+    "description": "Remove a listener (identified by name) from an Oracle Cloud network load balancer. Deletion is asynchronous — returns a work-request id to poll with Get Work Request.",
+    "website": "https://www.flomation.co",
+    "icon": "oracle+tower-broadcast",
+    "date": "22/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Oracle Cloud",
+      "icon": "oracle",
+      "description": "Oracle Cloud Infrastructure (OCI) integrations"
+    },
+    "sub_category": {
+      "name": "Network Load Balancer",
+      "icon": "ethernet",
+      "description": "Oracle Cloud Network Load Balancer — provision Layer 3/4 (TCP/UDP) load balancers, wire backend sets and listeners, tune health checks, and track backend health"
+    },
+    "inputs": [
+      {
+        "name": "tenancy_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Tenancy OCID",
+        "placeholder": "ocid1.tenancy.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "user_ocid",
+        "type": "string",
+        "value": null,
+        "label": "User OCID",
+        "placeholder": "ocid1.user.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "e.g. uk-london-1",
+        "required": true
+      },
+      {
+        "name": "fingerprint",
+        "type": "string",
+        "value": null,
+        "label": "Key Fingerprint",
+        "placeholder": "aa:bb:cc:… fingerprint of the uploaded API key",
+        "required": true
+      },
+      {
+        "name": "private_key",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key (PEM)",
+        "placeholder": "The API signing private key — full PEM, incl. BEGIN/END lines"
+      },
+      {
+        "name": "private_key_passphrase",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key Passphrase",
+        "placeholder": "Only if the key is encrypted (optional)"
+      },
+      {
+        "name": "compartment_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Compartment OCID",
+        "placeholder": "ocid1.compartment.oc1..aaaa… (scopes the network load balancer picker)"
+      },
+      {
+        "name": "network_load_balancer_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Network Load Balancer OCID",
+        "placeholder": "ocid1.networkloadbalancer.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "listener_name",
+        "type": "string",
+        "value": null,
+        "label": "Listener Name",
+        "placeholder": "The name of the listener to delete, e.g. tcp-listener",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "listener_name",
+        "type": "string",
+        "value": null,
+        "label": "Listener Name",
+        "placeholder": ""
+      },
+      {
+        "name": "work_request_id",
+        "type": "string",
+        "value": null,
+        "label": "Work Request OCID",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "oracle/networkloadbalancer/listener_get": {
+    "hash": "4841db6d71041485391f5c4d99059adea3abd8caab4a2c3f47d78285864c4cb7",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "OCI Network Load Balancer: Get Listener",
+    "description": "Fetch one listener of an Oracle Cloud network load balancer by name — its protocol, port and default backend set.",
+    "website": "https://www.flomation.co",
+    "icon": "oracle+tower-broadcast",
+    "date": "22/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Oracle Cloud",
+      "icon": "oracle",
+      "description": "Oracle Cloud Infrastructure (OCI) integrations"
+    },
+    "sub_category": {
+      "name": "Network Load Balancer",
+      "icon": "ethernet",
+      "description": "Oracle Cloud Network Load Balancer — provision Layer 3/4 (TCP/UDP) load balancers, wire backend sets and listeners, tune health checks, and track backend health"
+    },
+    "inputs": [
+      {
+        "name": "tenancy_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Tenancy OCID",
+        "placeholder": "ocid1.tenancy.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "user_ocid",
+        "type": "string",
+        "value": null,
+        "label": "User OCID",
+        "placeholder": "ocid1.user.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "e.g. uk-london-1",
+        "required": true
+      },
+      {
+        "name": "fingerprint",
+        "type": "string",
+        "value": null,
+        "label": "Key Fingerprint",
+        "placeholder": "aa:bb:cc:… fingerprint of the uploaded API key",
+        "required": true
+      },
+      {
+        "name": "private_key",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key (PEM)",
+        "placeholder": "The API signing private key — full PEM, incl. BEGIN/END lines"
+      },
+      {
+        "name": "private_key_passphrase",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key Passphrase",
+        "placeholder": "Only if the key is encrypted (optional)"
+      },
+      {
+        "name": "compartment_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Compartment OCID",
+        "placeholder": "ocid1.compartment.oc1..aaaa… (scopes the network load balancer picker)"
+      },
+      {
+        "name": "network_load_balancer_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Network Load Balancer OCID",
+        "placeholder": "ocid1.networkloadbalancer.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "listener_name",
+        "type": "string",
+        "value": null,
+        "label": "Listener Name",
+        "placeholder": "The listener name, e.g. http-listener",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "listener",
+        "type": "object",
+        "value": null,
+        "label": "Listener",
+        "placeholder": ""
+      },
+      {
+        "name": "name",
+        "type": "string",
+        "value": null,
+        "label": "Listener Name",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "oracle/networkloadbalancer/listener_list": {
+    "hash": "a55394c7ae872ed213f7a8ec25c1c0dba2cf66d8656089d2bac92c2813fe8883",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "OCI Network Load Balancer: List Listeners",
+    "description": "List the listeners of an Oracle Cloud network load balancer — each with its protocol, port and default backend set.",
+    "website": "https://www.flomation.co",
+    "icon": "oracle+tower-broadcast",
+    "date": "22/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Oracle Cloud",
+      "icon": "oracle",
+      "description": "Oracle Cloud Infrastructure (OCI) integrations"
+    },
+    "sub_category": {
+      "name": "Network Load Balancer",
+      "icon": "ethernet",
+      "description": "Oracle Cloud Network Load Balancer — provision Layer 3/4 (TCP/UDP) load balancers, wire backend sets and listeners, tune health checks, and track backend health"
+    },
+    "inputs": [
+      {
+        "name": "tenancy_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Tenancy OCID",
+        "placeholder": "ocid1.tenancy.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "user_ocid",
+        "type": "string",
+        "value": null,
+        "label": "User OCID",
+        "placeholder": "ocid1.user.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "e.g. uk-london-1",
+        "required": true
+      },
+      {
+        "name": "fingerprint",
+        "type": "string",
+        "value": null,
+        "label": "Key Fingerprint",
+        "placeholder": "aa:bb:cc:… fingerprint of the uploaded API key",
+        "required": true
+      },
+      {
+        "name": "private_key",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key (PEM)",
+        "placeholder": "The API signing private key — full PEM, incl. BEGIN/END lines"
+      },
+      {
+        "name": "private_key_passphrase",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key Passphrase",
+        "placeholder": "Only if the key is encrypted (optional)"
+      },
+      {
+        "name": "compartment_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Compartment OCID",
+        "placeholder": "ocid1.compartment.oc1..aaaa… (scopes the network load balancer picker)"
+      },
+      {
+        "name": "network_load_balancer_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Network Load Balancer OCID",
+        "placeholder": "ocid1.networkloadbalancer.oc1..aaaa…",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "listeners",
+        "type": "object",
+        "value": null,
+        "label": "Listeners",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "string",
+        "value": null,
+        "label": "Count",
+        "placeholder": ""
+      },
+      {
+        "name": "truncated",
+        "type": "boolean",
+        "value": null,
+        "label": "Truncated",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "oracle/networkloadbalancer/listener_update": {
+    "hash": "e38f9e28c632618ad029ae5d9f19362946eb71a34a5157fa919f653deace84cd",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "OCI Network Load Balancer: Update Listener",
+    "description": "Update a listener (its default backend set, port or protocol) on an Oracle Cloud network load balancer. A full-replace update: the current listener is read first and any field left blank keeps its current value. Asynchronous.",
+    "website": "https://www.flomation.co",
+    "icon": "oracle+tower-broadcast",
+    "date": "22/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Oracle Cloud",
+      "icon": "oracle",
+      "description": "Oracle Cloud Infrastructure (OCI) integrations"
+    },
+    "sub_category": {
+      "name": "Network Load Balancer",
+      "icon": "ethernet",
+      "description": "Oracle Cloud Network Load Balancer — provision Layer 3/4 (TCP/UDP) load balancers, wire backend sets and listeners, tune health checks, and track backend health"
+    },
+    "inputs": [
+      {
+        "name": "tenancy_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Tenancy OCID",
+        "placeholder": "ocid1.tenancy.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "user_ocid",
+        "type": "string",
+        "value": null,
+        "label": "User OCID",
+        "placeholder": "ocid1.user.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "e.g. uk-london-1",
+        "required": true
+      },
+      {
+        "name": "fingerprint",
+        "type": "string",
+        "value": null,
+        "label": "Key Fingerprint",
+        "placeholder": "aa:bb:cc:… fingerprint of the uploaded API key",
+        "required": true
+      },
+      {
+        "name": "private_key",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key (PEM)",
+        "placeholder": "The API signing private key — full PEM, incl. BEGIN/END lines"
+      },
+      {
+        "name": "private_key_passphrase",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key Passphrase",
+        "placeholder": "Only if the key is encrypted (optional)"
+      },
+      {
+        "name": "compartment_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Compartment OCID",
+        "placeholder": "ocid1.compartment.oc1..aaaa… (scopes the network load balancer picker)"
+      },
+      {
+        "name": "network_load_balancer_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Network Load Balancer OCID",
+        "placeholder": "ocid1.networkloadbalancer.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "listener_name",
+        "type": "string",
+        "value": null,
+        "label": "Listener Name",
+        "placeholder": "The listener to update, e.g. tcp-listener",
+        "required": true
+      },
+      {
+        "name": "default_backend_set_name",
+        "type": "string",
+        "value": null,
+        "label": "Default Backend Set Name",
+        "placeholder": "New backend set to forward to (blank = keep current)"
+      },
+      {
+        "name": "port",
+        "type": "string",
+        "value": null,
+        "label": "Port",
+        "placeholder": "New listen port, e.g. 443 (blank = keep current)"
+      },
+      {
+        "name": "protocol",
+        "type": "string",
+        "value": null,
+        "label": "Protocol",
+        "placeholder": "TCP, UDP, TCP_AND_UDP, L3IP or ANY (blank = keep current)"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "listener_name",
+        "type": "string",
+        "value": null,
+        "label": "Listener Name",
+        "placeholder": ""
+      },
+      {
+        "name": "work_request_id",
+        "type": "string",
+        "value": null,
+        "label": "Work Request OCID",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "oracle/networkloadbalancer/network_load_balancer_change_compartment": {
+    "hash": "5417830812c74254491c360e1976b7b4fa0ed44867a20e5a51af046c03948f43",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "OCI Network Load Balancer: Move to Compartment",
+    "description": "Move an Oracle Cloud network load balancer to another compartment. Asynchronous — returns a work-request id to poll with Get Work Request.",
+    "website": "https://www.flomation.co",
+    "icon": "oracle+ethernet",
+    "date": "22/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Oracle Cloud",
+      "icon": "oracle",
+      "description": "Oracle Cloud Infrastructure (OCI) integrations"
+    },
+    "sub_category": {
+      "name": "Network Load Balancer",
+      "icon": "ethernet",
+      "description": "Oracle Cloud Network Load Balancer — provision Layer 3/4 (TCP/UDP) load balancers, wire backend sets and listeners, tune health checks, and track backend health"
+    },
+    "inputs": [
+      {
+        "name": "tenancy_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Tenancy OCID",
+        "placeholder": "ocid1.tenancy.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "user_ocid",
+        "type": "string",
+        "value": null,
+        "label": "User OCID",
+        "placeholder": "ocid1.user.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "e.g. uk-london-1",
+        "required": true
+      },
+      {
+        "name": "fingerprint",
+        "type": "string",
+        "value": null,
+        "label": "Key Fingerprint",
+        "placeholder": "aa:bb:cc:… fingerprint of the uploaded API key",
+        "required": true
+      },
+      {
+        "name": "private_key",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key (PEM)",
+        "placeholder": "The API signing private key — full PEM, incl. BEGIN/END lines"
+      },
+      {
+        "name": "private_key_passphrase",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key Passphrase",
+        "placeholder": "Only if the key is encrypted (optional)"
+      },
+      {
+        "name": "compartment_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Compartment OCID",
+        "placeholder": "ocid1.compartment.oc1..aaaa… (scopes the network load balancer picker)"
+      },
+      {
+        "name": "network_load_balancer_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Network Load Balancer OCID",
+        "placeholder": "ocid1.networkloadbalancer.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "destination_compartment_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Destination Compartment OCID",
+        "placeholder": "ocid1.compartment.oc1..aaaa… to move it into",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Network Load Balancer OCID",
+        "placeholder": ""
+      },
+      {
+        "name": "work_request_id",
+        "type": "string",
+        "value": null,
+        "label": "Work Request OCID",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "oracle/networkloadbalancer/network_load_balancer_create": {
+    "hash": "8812025d8b8915bd2551537788281c6125b394a4b3df6787a63944561a8ae6d2",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "OCI Network Load Balancer: Create Network Load Balancer",
+    "description": "Provision an Oracle Cloud Layer 3/4 network load balancer in a subnet. Returns the new NLB's OCID immediately plus a work-request id to poll with Get Work Request.",
+    "website": "https://www.flomation.co",
+    "icon": "oracle+ethernet",
+    "date": "22/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Oracle Cloud",
+      "icon": "oracle",
+      "description": "Oracle Cloud Infrastructure (OCI) integrations"
+    },
+    "sub_category": {
+      "name": "Network Load Balancer",
+      "icon": "ethernet",
+      "description": "Oracle Cloud Network Load Balancer — provision Layer 3/4 (TCP/UDP) load balancers, wire backend sets and listeners, tune health checks, and track backend health"
+    },
+    "inputs": [
+      {
+        "name": "tenancy_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Tenancy OCID",
+        "placeholder": "ocid1.tenancy.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "user_ocid",
+        "type": "string",
+        "value": null,
+        "label": "User OCID",
+        "placeholder": "ocid1.user.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "e.g. uk-london-1",
+        "required": true
+      },
+      {
+        "name": "fingerprint",
+        "type": "string",
+        "value": null,
+        "label": "Key Fingerprint",
+        "placeholder": "aa:bb:cc:… fingerprint of the uploaded API key",
+        "required": true
+      },
+      {
+        "name": "private_key",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key (PEM)",
+        "placeholder": "The API signing private key — full PEM, incl. BEGIN/END lines"
+      },
+      {
+        "name": "private_key_passphrase",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key Passphrase",
+        "placeholder": "Only if the key is encrypted (optional)"
+      },
+      {
+        "name": "compartment_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Compartment OCID",
+        "placeholder": "ocid1.compartment.oc1..aaaa… (use the tenancy OCID for the root)",
+        "required": true
+      },
+      {
+        "name": "display_name",
+        "type": "string",
+        "value": null,
+        "label": "Display Name",
+        "placeholder": "Friendly name shown in the console",
+        "required": true
+      },
+      {
+        "name": "subnet_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Subnet OCID",
+        "placeholder": "ocid1.subnet.oc1..aaaa… the NLB lives in",
+        "required": true
+      },
+      {
+        "name": "is_private",
+        "type": "boolean",
+        "value": null,
+        "label": "Private",
+        "placeholder": "Create a private (internal) NLB with no public IP (optional)"
+      },
+      {
+        "name": "is_preserve_source_destination",
+        "type": "boolean",
+        "value": null,
+        "label": "Preserve Source/Destination",
+        "placeholder": "Preserve the packet's source \u0026 destination (for transparent proxies) (optional)"
+      },
+      {
+        "name": "network_security_group_ocids",
+        "type": "string",
+        "value": null,
+        "label": "Network Security Group OCIDs",
+        "placeholder": "Comma-separated NSG OCIDs to attach (optional)"
+      },
+      {
+        "name": "tags",
+        "type": "string",
+        "value": null,
+        "label": "Freeform Tags (JSON)",
+        "placeholder": "{\"env\":\"prod\"} (optional)"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "network_load_balancer",
+        "type": "object",
+        "value": null,
+        "label": "Network Load Balancer",
+        "placeholder": ""
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Network Load Balancer OCID",
+        "placeholder": ""
+      },
+      {
+        "name": "lifecycle_state",
+        "type": "string",
+        "value": null,
+        "label": "Lifecycle State",
+        "placeholder": ""
+      },
+      {
+        "name": "work_request_id",
+        "type": "string",
+        "value": null,
+        "label": "Work Request OCID",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "oracle/networkloadbalancer/network_load_balancer_delete": {
+    "hash": "a835affda7a8a306f2a6a83b7c48bd5601916e13999c60e8fcdae765e1f7e7ae",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "OCI Network Load Balancer: Delete Network Load Balancer",
+    "description": "Permanently delete an Oracle Cloud network load balancer by OCID. Deletion is asynchronous — returns a work-request id to poll with Get Work Request.",
+    "website": "https://www.flomation.co",
+    "icon": "oracle+ethernet",
+    "date": "22/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Oracle Cloud",
+      "icon": "oracle",
+      "description": "Oracle Cloud Infrastructure (OCI) integrations"
+    },
+    "sub_category": {
+      "name": "Network Load Balancer",
+      "icon": "ethernet",
+      "description": "Oracle Cloud Network Load Balancer — provision Layer 3/4 (TCP/UDP) load balancers, wire backend sets and listeners, tune health checks, and track backend health"
+    },
+    "inputs": [
+      {
+        "name": "tenancy_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Tenancy OCID",
+        "placeholder": "ocid1.tenancy.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "user_ocid",
+        "type": "string",
+        "value": null,
+        "label": "User OCID",
+        "placeholder": "ocid1.user.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "e.g. uk-london-1",
+        "required": true
+      },
+      {
+        "name": "fingerprint",
+        "type": "string",
+        "value": null,
+        "label": "Key Fingerprint",
+        "placeholder": "aa:bb:cc:… fingerprint of the uploaded API key",
+        "required": true
+      },
+      {
+        "name": "private_key",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key (PEM)",
+        "placeholder": "The API signing private key — full PEM, incl. BEGIN/END lines"
+      },
+      {
+        "name": "private_key_passphrase",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key Passphrase",
+        "placeholder": "Only if the key is encrypted (optional)"
+      },
+      {
+        "name": "compartment_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Compartment OCID",
+        "placeholder": "ocid1.compartment.oc1..aaaa… (scopes the network load balancer picker)"
+      },
+      {
+        "name": "network_load_balancer_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Network Load Balancer OCID",
+        "placeholder": "ocid1.networkloadbalancer.oc1..aaaa…",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Network Load Balancer OCID",
+        "placeholder": ""
+      },
+      {
+        "name": "work_request_id",
+        "type": "string",
+        "value": null,
+        "label": "Work Request OCID",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "oracle/networkloadbalancer/network_load_balancer_get": {
+    "hash": "20882bf98e82d0288c1101b8bb1dfa2c5bcda2b3bb518b836024238802d2d2ae",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "OCI Network Load Balancer: Get Network Load Balancer",
+    "description": "Fetch a single Oracle Cloud network load balancer by OCID — its subnet, IP addresses, and the names of its listeners and backend sets.",
+    "website": "https://www.flomation.co",
+    "icon": "oracle+ethernet",
+    "date": "22/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Oracle Cloud",
+      "icon": "oracle",
+      "description": "Oracle Cloud Infrastructure (OCI) integrations"
+    },
+    "sub_category": {
+      "name": "Network Load Balancer",
+      "icon": "ethernet",
+      "description": "Oracle Cloud Network Load Balancer — provision Layer 3/4 (TCP/UDP) load balancers, wire backend sets and listeners, tune health checks, and track backend health"
+    },
+    "inputs": [
+      {
+        "name": "tenancy_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Tenancy OCID",
+        "placeholder": "ocid1.tenancy.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "user_ocid",
+        "type": "string",
+        "value": null,
+        "label": "User OCID",
+        "placeholder": "ocid1.user.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "e.g. uk-london-1",
+        "required": true
+      },
+      {
+        "name": "fingerprint",
+        "type": "string",
+        "value": null,
+        "label": "Key Fingerprint",
+        "placeholder": "aa:bb:cc:… fingerprint of the uploaded API key",
+        "required": true
+      },
+      {
+        "name": "private_key",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key (PEM)",
+        "placeholder": "The API signing private key — full PEM, incl. BEGIN/END lines"
+      },
+      {
+        "name": "private_key_passphrase",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key Passphrase",
+        "placeholder": "Only if the key is encrypted (optional)"
+      },
+      {
+        "name": "compartment_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Compartment OCID",
+        "placeholder": "ocid1.compartment.oc1..aaaa… (scopes the network load balancer picker)"
+      },
+      {
+        "name": "network_load_balancer_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Network Load Balancer OCID",
+        "placeholder": "ocid1.networkloadbalancer.oc1..aaaa…",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "network_load_balancer",
+        "type": "object",
+        "value": null,
+        "label": "Network Load Balancer",
+        "placeholder": ""
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Network Load Balancer OCID",
+        "placeholder": ""
+      },
+      {
+        "name": "lifecycle_state",
+        "type": "string",
+        "value": null,
+        "label": "Lifecycle State",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "oracle/networkloadbalancer/network_load_balancer_get_health": {
+    "hash": "6c118000bebb755b66a2129c1c7ba451810fe417021b64d3b2e06354ae266809",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "OCI Network Load Balancer: Get Network Load Balancer Health",
+    "description": "Read an Oracle Cloud network load balancer's overall health — its aggregate status plus the names of any backend sets currently in a warning, critical, or unknown state.",
+    "website": "https://www.flomation.co",
+    "icon": "oracle+gauge",
+    "date": "22/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Oracle Cloud",
+      "icon": "oracle",
+      "description": "Oracle Cloud Infrastructure (OCI) integrations"
+    },
+    "sub_category": {
+      "name": "Network Load Balancer",
+      "icon": "ethernet",
+      "description": "Oracle Cloud Network Load Balancer — provision Layer 3/4 (TCP/UDP) load balancers, wire backend sets and listeners, tune health checks, and track backend health"
+    },
+    "inputs": [
+      {
+        "name": "tenancy_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Tenancy OCID",
+        "placeholder": "ocid1.tenancy.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "user_ocid",
+        "type": "string",
+        "value": null,
+        "label": "User OCID",
+        "placeholder": "ocid1.user.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "e.g. uk-london-1",
+        "required": true
+      },
+      {
+        "name": "fingerprint",
+        "type": "string",
+        "value": null,
+        "label": "Key Fingerprint",
+        "placeholder": "aa:bb:cc:… fingerprint of the uploaded API key",
+        "required": true
+      },
+      {
+        "name": "private_key",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key (PEM)",
+        "placeholder": "The API signing private key — full PEM, incl. BEGIN/END lines"
+      },
+      {
+        "name": "private_key_passphrase",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key Passphrase",
+        "placeholder": "Only if the key is encrypted (optional)"
+      },
+      {
+        "name": "compartment_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Compartment OCID",
+        "placeholder": "ocid1.compartment.oc1..aaaa… (scopes the network load balancer picker)"
+      },
+      {
+        "name": "network_load_balancer_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Network Load Balancer OCID",
+        "placeholder": "ocid1.networkloadbalancer.oc1..aaaa…",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "health",
+        "type": "object",
+        "value": null,
+        "label": "Health",
+        "placeholder": ""
+      },
+      {
+        "name": "status",
+        "type": "string",
+        "value": null,
+        "label": "Health Status",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "oracle/networkloadbalancer/network_load_balancer_list": {
+    "hash": "14632745b4851039be7e532d8da30e7ff29348d600877fcd5d3852f8f1d788a2",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "OCI Network Load Balancer: List Network Load Balancers",
+    "description": "List the Oracle Cloud network load balancers in a compartment. Walks pagination up to a safe cap.",
+    "website": "https://www.flomation.co",
+    "icon": "oracle+ethernet",
+    "date": "22/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Oracle Cloud",
+      "icon": "oracle",
+      "description": "Oracle Cloud Infrastructure (OCI) integrations"
+    },
+    "sub_category": {
+      "name": "Network Load Balancer",
+      "icon": "ethernet",
+      "description": "Oracle Cloud Network Load Balancer — provision Layer 3/4 (TCP/UDP) load balancers, wire backend sets and listeners, tune health checks, and track backend health"
+    },
+    "inputs": [
+      {
+        "name": "tenancy_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Tenancy OCID",
+        "placeholder": "ocid1.tenancy.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "user_ocid",
+        "type": "string",
+        "value": null,
+        "label": "User OCID",
+        "placeholder": "ocid1.user.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "e.g. uk-london-1",
+        "required": true
+      },
+      {
+        "name": "fingerprint",
+        "type": "string",
+        "value": null,
+        "label": "Key Fingerprint",
+        "placeholder": "aa:bb:cc:… fingerprint of the uploaded API key",
+        "required": true
+      },
+      {
+        "name": "private_key",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key (PEM)",
+        "placeholder": "The API signing private key — full PEM, incl. BEGIN/END lines"
+      },
+      {
+        "name": "private_key_passphrase",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key Passphrase",
+        "placeholder": "Only if the key is encrypted (optional)"
+      },
+      {
+        "name": "compartment_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Compartment OCID",
+        "placeholder": "ocid1.compartment.oc1..aaaa… (use the tenancy OCID for the root)",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "network_load_balancers",
+        "type": "object",
+        "value": null,
+        "label": "Network Load Balancers",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "string",
+        "value": null,
+        "label": "Count",
+        "placeholder": ""
+      },
+      {
+        "name": "truncated",
+        "type": "boolean",
+        "value": null,
+        "label": "Truncated",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "oracle/networkloadbalancer/network_load_balancer_list_healths": {
+    "hash": "65a42563c49cb12c98aff12eac05911a74a8597aea1a3e1c4e2890dcfd831574",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "OCI Network Load Balancer: List Network Load Balancer Healths",
+    "description": "List the overall health status (OK/WARNING/CRITICAL/UNKNOWN) for every Oracle Cloud network load balancer in a compartment. Walks pagination up to a safe cap.",
+    "website": "https://www.flomation.co",
+    "icon": "oracle+gauge",
+    "date": "22/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Oracle Cloud",
+      "icon": "oracle",
+      "description": "Oracle Cloud Infrastructure (OCI) integrations"
+    },
+    "sub_category": {
+      "name": "Network Load Balancer",
+      "icon": "ethernet",
+      "description": "Oracle Cloud Network Load Balancer — provision Layer 3/4 (TCP/UDP) load balancers, wire backend sets and listeners, tune health checks, and track backend health"
+    },
+    "inputs": [
+      {
+        "name": "tenancy_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Tenancy OCID",
+        "placeholder": "ocid1.tenancy.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "user_ocid",
+        "type": "string",
+        "value": null,
+        "label": "User OCID",
+        "placeholder": "ocid1.user.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "e.g. uk-london-1",
+        "required": true
+      },
+      {
+        "name": "fingerprint",
+        "type": "string",
+        "value": null,
+        "label": "Key Fingerprint",
+        "placeholder": "aa:bb:cc:… fingerprint of the uploaded API key",
+        "required": true
+      },
+      {
+        "name": "private_key",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key (PEM)",
+        "placeholder": "The API signing private key — full PEM, incl. BEGIN/END lines"
+      },
+      {
+        "name": "private_key_passphrase",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key Passphrase",
+        "placeholder": "Only if the key is encrypted (optional)"
+      },
+      {
+        "name": "compartment_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Compartment OCID",
+        "placeholder": "ocid1.compartment.oc1..aaaa… (use the tenancy OCID for the root)",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "health_summaries",
+        "type": "object",
+        "value": null,
+        "label": "Health Summaries",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "string",
+        "value": null,
+        "label": "Count",
+        "placeholder": ""
+      },
+      {
+        "name": "truncated",
+        "type": "boolean",
+        "value": null,
+        "label": "Truncated",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "oracle/networkloadbalancer/network_load_balancer_update": {
+    "hash": "3fcf0a38ff2dfbb2fd0aba697b734afcdf2a141d8433e5f24f31da541582ba6d",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "OCI Network Load Balancer: Update Network Load Balancer",
+    "description": "Update an Oracle Cloud network load balancer's mutable top-level fields — its display name and the source/destination preservation and symmetric-hash flags. Only the fields you supply are changed. Asynchronous — returns a work-request id to poll with Get Work Request.",
+    "website": "https://www.flomation.co",
+    "icon": "oracle+ethernet",
+    "date": "22/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Oracle Cloud",
+      "icon": "oracle",
+      "description": "Oracle Cloud Infrastructure (OCI) integrations"
+    },
+    "sub_category": {
+      "name": "Network Load Balancer",
+      "icon": "ethernet",
+      "description": "Oracle Cloud Network Load Balancer — provision Layer 3/4 (TCP/UDP) load balancers, wire backend sets and listeners, tune health checks, and track backend health"
+    },
+    "inputs": [
+      {
+        "name": "tenancy_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Tenancy OCID",
+        "placeholder": "ocid1.tenancy.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "user_ocid",
+        "type": "string",
+        "value": null,
+        "label": "User OCID",
+        "placeholder": "ocid1.user.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "e.g. uk-london-1",
+        "required": true
+      },
+      {
+        "name": "fingerprint",
+        "type": "string",
+        "value": null,
+        "label": "Key Fingerprint",
+        "placeholder": "aa:bb:cc:… fingerprint of the uploaded API key",
+        "required": true
+      },
+      {
+        "name": "private_key",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key (PEM)",
+        "placeholder": "The API signing private key — full PEM, incl. BEGIN/END lines"
+      },
+      {
+        "name": "private_key_passphrase",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key Passphrase",
+        "placeholder": "Only if the key is encrypted (optional)"
+      },
+      {
+        "name": "compartment_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Compartment OCID",
+        "placeholder": "ocid1.compartment.oc1..aaaa… (scopes the network load balancer picker)"
+      },
+      {
+        "name": "network_load_balancer_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Network Load Balancer OCID",
+        "placeholder": "ocid1.networkloadbalancer.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "display_name",
+        "type": "string",
+        "value": null,
+        "label": "Display Name",
+        "placeholder": "New display name (leave blank to keep current)"
+      },
+      {
+        "name": "is_preserve_source_destination",
+        "type": "boolean",
+        "value": null,
+        "label": "Preserve Source/Destination",
+        "placeholder": "Send the full IP header to backends (leave blank to keep current)"
+      },
+      {
+        "name": "is_symmetric_hash_enabled",
+        "type": "boolean",
+        "value": null,
+        "label": "Symmetric Hash Enabled",
+        "placeholder": "Only valid in transparent mode with source/destination preservation (leave blank to keep current)"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Network Load Balancer OCID",
+        "placeholder": ""
+      },
+      {
+        "name": "work_request_id",
+        "type": "string",
+        "value": null,
+        "label": "Work Request OCID",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "oracle/networkloadbalancer/network_load_balancer_update_network_security_groups": {
+    "hash": "2ecfbbae62e71663f75c043f43dab343e04ee3a9de92b803b910e793eccda3af",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "OCI Network Load Balancer: Update NSGs",
+    "description": "Replace the set of network security groups attached to an Oracle Cloud network load balancer. REPLACE semantics — the OCIDs you supply overwrite the current list; leaving the field empty removes all network security groups. Asynchronous — returns a work-request id to poll with Get Work Request.",
+    "website": "https://www.flomation.co",
+    "icon": "oracle+ethernet",
+    "date": "22/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Oracle Cloud",
+      "icon": "oracle",
+      "description": "Oracle Cloud Infrastructure (OCI) integrations"
+    },
+    "sub_category": {
+      "name": "Network Load Balancer",
+      "icon": "ethernet",
+      "description": "Oracle Cloud Network Load Balancer — provision Layer 3/4 (TCP/UDP) load balancers, wire backend sets and listeners, tune health checks, and track backend health"
+    },
+    "inputs": [
+      {
+        "name": "tenancy_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Tenancy OCID",
+        "placeholder": "ocid1.tenancy.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "user_ocid",
+        "type": "string",
+        "value": null,
+        "label": "User OCID",
+        "placeholder": "ocid1.user.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "e.g. uk-london-1",
+        "required": true
+      },
+      {
+        "name": "fingerprint",
+        "type": "string",
+        "value": null,
+        "label": "Key Fingerprint",
+        "placeholder": "aa:bb:cc:… fingerprint of the uploaded API key",
+        "required": true
+      },
+      {
+        "name": "private_key",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key (PEM)",
+        "placeholder": "The API signing private key — full PEM, incl. BEGIN/END lines"
+      },
+      {
+        "name": "private_key_passphrase",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key Passphrase",
+        "placeholder": "Only if the key is encrypted (optional)"
+      },
+      {
+        "name": "compartment_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Compartment OCID",
+        "placeholder": "ocid1.compartment.oc1..aaaa… (scopes the network load balancer picker)"
+      },
+      {
+        "name": "network_load_balancer_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Network Load Balancer OCID",
+        "placeholder": "ocid1.networkloadbalancer.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "network_security_group_ocids",
+        "type": "string",
+        "value": null,
+        "label": "Network Security Group OCIDs",
+        "placeholder": "Comma-separated OCIDs. REPLACE semantics — this overwrites the current set; leave empty to remove all."
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Network Load Balancer OCID",
+        "placeholder": ""
+      },
+      {
+        "name": "work_request_id",
+        "type": "string",
+        "value": null,
+        "label": "Work Request OCID",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "oracle/networkloadbalancer/policy_list": {
+    "hash": "6c6cb7e1076c6a63d0001b535c05448ce12121071f1c3498d00b98b7a099b3a3",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "OCI Network Load Balancer: List Policies",
+    "description": "List the backend-set load-balancing policies a network load balancer supports (TWO_TUPLE, THREE_TUPLE, FIVE_TUPLE) — the valid policy values for Create Backend Set.",
+    "website": "https://www.flomation.co",
+    "icon": "oracle+list",
+    "date": "22/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Oracle Cloud",
+      "icon": "oracle",
+      "description": "Oracle Cloud Infrastructure (OCI) integrations"
+    },
+    "sub_category": {
+      "name": "Network Load Balancer",
+      "icon": "ethernet",
+      "description": "Oracle Cloud Network Load Balancer — provision Layer 3/4 (TCP/UDP) load balancers, wire backend sets and listeners, tune health checks, and track backend health"
+    },
+    "inputs": [
+      {
+        "name": "tenancy_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Tenancy OCID",
+        "placeholder": "ocid1.tenancy.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "user_ocid",
+        "type": "string",
+        "value": null,
+        "label": "User OCID",
+        "placeholder": "ocid1.user.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "e.g. uk-london-1",
+        "required": true
+      },
+      {
+        "name": "fingerprint",
+        "type": "string",
+        "value": null,
+        "label": "Key Fingerprint",
+        "placeholder": "aa:bb:cc:… fingerprint of the uploaded API key",
+        "required": true
+      },
+      {
+        "name": "private_key",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key (PEM)",
+        "placeholder": "The API signing private key — full PEM, incl. BEGIN/END lines"
+      },
+      {
+        "name": "private_key_passphrase",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key Passphrase",
+        "placeholder": "Only if the key is encrypted (optional)"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "policies",
+        "type": "object",
+        "value": null,
+        "label": "Policies",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "string",
+        "value": null,
+        "label": "Count",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "oracle/networkloadbalancer/protocol_list": {
+    "hash": "560d0b1ffe05e2ad73594af55c06a955692999640115324cc40c7d2fd06be559",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "OCI Network Load Balancer: List Protocols",
+    "description": "List the listener protocols a network load balancer supports (ANY, TCP, UDP, TCP_AND_UDP, L3IP) — the valid protocol values for Create Listener.",
+    "website": "https://www.flomation.co",
+    "icon": "oracle+list",
+    "date": "22/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Oracle Cloud",
+      "icon": "oracle",
+      "description": "Oracle Cloud Infrastructure (OCI) integrations"
+    },
+    "sub_category": {
+      "name": "Network Load Balancer",
+      "icon": "ethernet",
+      "description": "Oracle Cloud Network Load Balancer — provision Layer 3/4 (TCP/UDP) load balancers, wire backend sets and listeners, tune health checks, and track backend health"
+    },
+    "inputs": [
+      {
+        "name": "tenancy_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Tenancy OCID",
+        "placeholder": "ocid1.tenancy.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "user_ocid",
+        "type": "string",
+        "value": null,
+        "label": "User OCID",
+        "placeholder": "ocid1.user.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "e.g. uk-london-1",
+        "required": true
+      },
+      {
+        "name": "fingerprint",
+        "type": "string",
+        "value": null,
+        "label": "Key Fingerprint",
+        "placeholder": "aa:bb:cc:… fingerprint of the uploaded API key",
+        "required": true
+      },
+      {
+        "name": "private_key",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key (PEM)",
+        "placeholder": "The API signing private key — full PEM, incl. BEGIN/END lines"
+      },
+      {
+        "name": "private_key_passphrase",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key Passphrase",
+        "placeholder": "Only if the key is encrypted (optional)"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "protocols",
+        "type": "object",
+        "value": null,
+        "label": "Protocols",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "string",
+        "value": null,
+        "label": "Count",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "oracle/networkloadbalancer/work_request_get": {
+    "hash": "5e6eac987ba3f8be018bff0c14b0fccf6e5d4bc2c0072fbdfac1ff98aea93cab",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "OCI Network Load Balancer: Get Work Request",
+    "description": "Read the status of an Oracle Cloud network-load-balancer work request by OCID. Every asynchronous action returns a work-request id — poll it here until it is SUCCEEDED or FAILED.",
+    "website": "https://www.flomation.co",
+    "icon": "oracle+clock",
+    "date": "22/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Oracle Cloud",
+      "icon": "oracle",
+      "description": "Oracle Cloud Infrastructure (OCI) integrations"
+    },
+    "sub_category": {
+      "name": "Network Load Balancer",
+      "icon": "ethernet",
+      "description": "Oracle Cloud Network Load Balancer — provision Layer 3/4 (TCP/UDP) load balancers, wire backend sets and listeners, tune health checks, and track backend health"
+    },
+    "inputs": [
+      {
+        "name": "tenancy_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Tenancy OCID",
+        "placeholder": "ocid1.tenancy.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "user_ocid",
+        "type": "string",
+        "value": null,
+        "label": "User OCID",
+        "placeholder": "ocid1.user.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "e.g. uk-london-1",
+        "required": true
+      },
+      {
+        "name": "fingerprint",
+        "type": "string",
+        "value": null,
+        "label": "Key Fingerprint",
+        "placeholder": "aa:bb:cc:… fingerprint of the uploaded API key",
+        "required": true
+      },
+      {
+        "name": "private_key",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key (PEM)",
+        "placeholder": "The API signing private key — full PEM, incl. BEGIN/END lines"
+      },
+      {
+        "name": "private_key_passphrase",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key Passphrase",
+        "placeholder": "Only if the key is encrypted (optional)"
+      },
+      {
+        "name": "work_request_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Work Request OCID",
+        "placeholder": "ocid1.networkloadbalancerworkrequest… (from any async action)",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "work_request",
+        "type": "object",
+        "value": null,
+        "label": "Work Request",
+        "placeholder": ""
+      },
+      {
+        "name": "status",
+        "type": "string",
+        "value": null,
+        "label": "Status",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "oracle/networkloadbalancer/work_request_list": {
+    "hash": "3a1a53c26395a67135389f771cd9a0ddb95d58096c50ec8eccf7d58fabdc9f63",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "OCI Network Load Balancer: List Work Requests",
+    "description": "List the Oracle Cloud network-load-balancer work requests in a compartment. Walks pagination up to a safe cap.",
+    "website": "https://www.flomation.co",
+    "icon": "oracle+clock",
+    "date": "22/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Oracle Cloud",
+      "icon": "oracle",
+      "description": "Oracle Cloud Infrastructure (OCI) integrations"
+    },
+    "sub_category": {
+      "name": "Network Load Balancer",
+      "icon": "ethernet",
+      "description": "Oracle Cloud Network Load Balancer — provision Layer 3/4 (TCP/UDP) load balancers, wire backend sets and listeners, tune health checks, and track backend health"
+    },
+    "inputs": [
+      {
+        "name": "tenancy_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Tenancy OCID",
+        "placeholder": "ocid1.tenancy.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "user_ocid",
+        "type": "string",
+        "value": null,
+        "label": "User OCID",
+        "placeholder": "ocid1.user.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "e.g. uk-london-1",
+        "required": true
+      },
+      {
+        "name": "fingerprint",
+        "type": "string",
+        "value": null,
+        "label": "Key Fingerprint",
+        "placeholder": "aa:bb:cc:… fingerprint of the uploaded API key",
+        "required": true
+      },
+      {
+        "name": "private_key",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key (PEM)",
+        "placeholder": "The API signing private key — full PEM, incl. BEGIN/END lines"
+      },
+      {
+        "name": "private_key_passphrase",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key Passphrase",
+        "placeholder": "Only if the key is encrypted (optional)"
+      },
+      {
+        "name": "compartment_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Compartment OCID",
+        "placeholder": "ocid1.compartment.oc1..aaaa… (use the tenancy OCID for the root)",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "work_requests",
+        "type": "object",
+        "value": null,
+        "label": "Work Requests",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "string",
+        "value": null,
+        "label": "Count",
+        "placeholder": ""
+      },
+      {
+        "name": "truncated",
+        "type": "boolean",
+        "value": null,
+        "label": "Truncated",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
   "oracle/objectstorage/bucket_create": {
     "hash": "fe4d2bf9b1f6a674c7734e025380a9d12b53771eceb8666f420b49ef93e4dbf7",
     "author": "Dave McElin",
