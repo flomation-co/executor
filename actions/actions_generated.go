@@ -250,6 +250,91 @@ import (
 	aws_eventbridge_test_event_pattern "flomation.app/automate/executor/actions/aws/eventbridge/test_event_pattern"
 	aws_eventbridge_untag_resource "flomation.app/automate/executor/actions/aws/eventbridge/untag_resource"
 	aws_eventbridge_update_api_destination "flomation.app/automate/executor/actions/aws/eventbridge/update_api_destination"
+	aws_iam_add_role_to_instance_profile "flomation.app/automate/executor/actions/aws/iam/add_role_to_instance_profile"
+	aws_iam_add_user_to_group "flomation.app/automate/executor/actions/aws/iam/add_user_to_group"
+	aws_iam_attach_group_policy "flomation.app/automate/executor/actions/aws/iam/attach_group_policy"
+	aws_iam_attach_role_policy "flomation.app/automate/executor/actions/aws/iam/attach_role_policy"
+	aws_iam_attach_user_policy "flomation.app/automate/executor/actions/aws/iam/attach_user_policy"
+	aws_iam_create_access_key "flomation.app/automate/executor/actions/aws/iam/create_access_key"
+	aws_iam_create_group "flomation.app/automate/executor/actions/aws/iam/create_group"
+	aws_iam_create_instance_profile "flomation.app/automate/executor/actions/aws/iam/create_instance_profile"
+	aws_iam_create_policy "flomation.app/automate/executor/actions/aws/iam/create_policy"
+	aws_iam_create_policy_version "flomation.app/automate/executor/actions/aws/iam/create_policy_version"
+	aws_iam_create_role "flomation.app/automate/executor/actions/aws/iam/create_role"
+	aws_iam_create_user "flomation.app/automate/executor/actions/aws/iam/create_user"
+	aws_iam_delete_access_key "flomation.app/automate/executor/actions/aws/iam/delete_access_key"
+	aws_iam_delete_group "flomation.app/automate/executor/actions/aws/iam/delete_group"
+	aws_iam_delete_instance_profile "flomation.app/automate/executor/actions/aws/iam/delete_instance_profile"
+	aws_iam_delete_policy "flomation.app/automate/executor/actions/aws/iam/delete_policy"
+	aws_iam_delete_role "flomation.app/automate/executor/actions/aws/iam/delete_role"
+	aws_iam_delete_role_policy "flomation.app/automate/executor/actions/aws/iam/delete_role_policy"
+	aws_iam_delete_user "flomation.app/automate/executor/actions/aws/iam/delete_user"
+	aws_iam_detach_group_policy "flomation.app/automate/executor/actions/aws/iam/detach_group_policy"
+	aws_iam_detach_role_policy "flomation.app/automate/executor/actions/aws/iam/detach_role_policy"
+	aws_iam_detach_user_policy "flomation.app/automate/executor/actions/aws/iam/detach_user_policy"
+	aws_iam_get_account_password_policy "flomation.app/automate/executor/actions/aws/iam/get_account_password_policy"
+	aws_iam_get_account_summary "flomation.app/automate/executor/actions/aws/iam/get_account_summary"
+	aws_iam_get_group "flomation.app/automate/executor/actions/aws/iam/get_group"
+	aws_iam_get_instance_profile "flomation.app/automate/executor/actions/aws/iam/get_instance_profile"
+	aws_iam_get_policy "flomation.app/automate/executor/actions/aws/iam/get_policy"
+	aws_iam_get_role "flomation.app/automate/executor/actions/aws/iam/get_role"
+	aws_iam_get_role_policy "flomation.app/automate/executor/actions/aws/iam/get_role_policy"
+	aws_iam_get_user "flomation.app/automate/executor/actions/aws/iam/get_user"
+	aws_iam_list_access_keys "flomation.app/automate/executor/actions/aws/iam/list_access_keys"
+	aws_iam_list_attached_group_policies "flomation.app/automate/executor/actions/aws/iam/list_attached_group_policies"
+	aws_iam_list_attached_role_policies "flomation.app/automate/executor/actions/aws/iam/list_attached_role_policies"
+	aws_iam_list_attached_user_policies "flomation.app/automate/executor/actions/aws/iam/list_attached_user_policies"
+	aws_iam_list_groups "flomation.app/automate/executor/actions/aws/iam/list_groups"
+	aws_iam_list_instance_profiles "flomation.app/automate/executor/actions/aws/iam/list_instance_profiles"
+	aws_iam_list_policies "flomation.app/automate/executor/actions/aws/iam/list_policies"
+	aws_iam_list_policy_versions "flomation.app/automate/executor/actions/aws/iam/list_policy_versions"
+	aws_iam_list_role_policies "flomation.app/automate/executor/actions/aws/iam/list_role_policies"
+	aws_iam_list_roles "flomation.app/automate/executor/actions/aws/iam/list_roles"
+	aws_iam_list_users "flomation.app/automate/executor/actions/aws/iam/list_users"
+	aws_iam_put_role_policy "flomation.app/automate/executor/actions/aws/iam/put_role_policy"
+	aws_iam_remove_role_from_instance_profile "flomation.app/automate/executor/actions/aws/iam/remove_role_from_instance_profile"
+	aws_iam_remove_user_from_group "flomation.app/automate/executor/actions/aws/iam/remove_user_from_group"
+	aws_iam_simulate_principal_policy "flomation.app/automate/executor/actions/aws/iam/simulate_principal_policy"
+	aws_iam_tag_role "flomation.app/automate/executor/actions/aws/iam/tag_role"
+	aws_iam_untag_role "flomation.app/automate/executor/actions/aws/iam/untag_role"
+	aws_iam_update_access_key "flomation.app/automate/executor/actions/aws/iam/update_access_key"
+	aws_iam_update_account_password_policy "flomation.app/automate/executor/actions/aws/iam/update_account_password_policy"
+	aws_iam_update_assume_role_policy "flomation.app/automate/executor/actions/aws/iam/update_assume_role_policy"
+	aws_iam_update_role "flomation.app/automate/executor/actions/aws/iam/update_role"
+	aws_iam_update_user "flomation.app/automate/executor/actions/aws/iam/update_user"
+	aws_kms_cancel_key_deletion "flomation.app/automate/executor/actions/aws/kms/cancel_key_deletion"
+	aws_kms_create_alias "flomation.app/automate/executor/actions/aws/kms/create_alias"
+	aws_kms_create_grant "flomation.app/automate/executor/actions/aws/kms/create_grant"
+	aws_kms_create_key "flomation.app/automate/executor/actions/aws/kms/create_key"
+	aws_kms_decrypt "flomation.app/automate/executor/actions/aws/kms/decrypt"
+	aws_kms_delete_alias "flomation.app/automate/executor/actions/aws/kms/delete_alias"
+	aws_kms_describe_key "flomation.app/automate/executor/actions/aws/kms/describe_key"
+	aws_kms_disable_key "flomation.app/automate/executor/actions/aws/kms/disable_key"
+	aws_kms_disable_key_rotation "flomation.app/automate/executor/actions/aws/kms/disable_key_rotation"
+	aws_kms_enable_key "flomation.app/automate/executor/actions/aws/kms/enable_key"
+	aws_kms_enable_key_rotation "flomation.app/automate/executor/actions/aws/kms/enable_key_rotation"
+	aws_kms_encrypt "flomation.app/automate/executor/actions/aws/kms/encrypt"
+	aws_kms_generate_data_key "flomation.app/automate/executor/actions/aws/kms/generate_data_key"
+	aws_kms_generate_data_key_without_plaintext "flomation.app/automate/executor/actions/aws/kms/generate_data_key_without_plaintext"
+	aws_kms_generate_random "flomation.app/automate/executor/actions/aws/kms/generate_random"
+	aws_kms_get_key_policy "flomation.app/automate/executor/actions/aws/kms/get_key_policy"
+	aws_kms_get_key_rotation_status "flomation.app/automate/executor/actions/aws/kms/get_key_rotation_status"
+	aws_kms_get_public_key "flomation.app/automate/executor/actions/aws/kms/get_public_key"
+	aws_kms_list_aliases "flomation.app/automate/executor/actions/aws/kms/list_aliases"
+	aws_kms_list_grants "flomation.app/automate/executor/actions/aws/kms/list_grants"
+	aws_kms_list_keys "flomation.app/automate/executor/actions/aws/kms/list_keys"
+	aws_kms_list_resource_tags "flomation.app/automate/executor/actions/aws/kms/list_resource_tags"
+	aws_kms_put_key_policy "flomation.app/automate/executor/actions/aws/kms/put_key_policy"
+	aws_kms_re_encrypt "flomation.app/automate/executor/actions/aws/kms/re_encrypt"
+	aws_kms_retire_grant "flomation.app/automate/executor/actions/aws/kms/retire_grant"
+	aws_kms_revoke_grant "flomation.app/automate/executor/actions/aws/kms/revoke_grant"
+	aws_kms_schedule_key_deletion "flomation.app/automate/executor/actions/aws/kms/schedule_key_deletion"
+	aws_kms_sign "flomation.app/automate/executor/actions/aws/kms/sign"
+	aws_kms_tag_resource "flomation.app/automate/executor/actions/aws/kms/tag_resource"
+	aws_kms_untag_resource "flomation.app/automate/executor/actions/aws/kms/untag_resource"
+	aws_kms_update_alias "flomation.app/automate/executor/actions/aws/kms/update_alias"
+	aws_kms_update_key_description "flomation.app/automate/executor/actions/aws/kms/update_key_description"
+	aws_kms_verify "flomation.app/automate/executor/actions/aws/kms/verify"
 	aws_rds_add_role_to_db_cluster "flomation.app/automate/executor/actions/aws/rds/add_role_to_db_cluster"
 	aws_rds_add_tags_to_resource "flomation.app/automate/executor/actions/aws/rds/add_tags_to_resource"
 	aws_rds_apply_pending_maintenance_action "flomation.app/automate/executor/actions/aws/rds/apply_pending_maintenance_action"
@@ -558,6 +643,24 @@ import (
 	aws_s3_update_job_status "flomation.app/automate/executor/actions/aws/s3/update_job_status"
 	aws_s3_upload_part "flomation.app/automate/executor/actions/aws/s3/upload_part"
 	aws_s3_upload_part_copy "flomation.app/automate/executor/actions/aws/s3/upload_part_copy"
+	aws_secretsmanager_cancel_rotate_secret "flomation.app/automate/executor/actions/aws/secretsmanager/cancel_rotate_secret"
+	aws_secretsmanager_create_secret "flomation.app/automate/executor/actions/aws/secretsmanager/create_secret"
+	aws_secretsmanager_delete_resource_policy "flomation.app/automate/executor/actions/aws/secretsmanager/delete_resource_policy"
+	aws_secretsmanager_delete_secret "flomation.app/automate/executor/actions/aws/secretsmanager/delete_secret"
+	aws_secretsmanager_describe_secret "flomation.app/automate/executor/actions/aws/secretsmanager/describe_secret"
+	aws_secretsmanager_get_resource_policy "flomation.app/automate/executor/actions/aws/secretsmanager/get_resource_policy"
+	aws_secretsmanager_get_secret_value "flomation.app/automate/executor/actions/aws/secretsmanager/get_secret_value"
+	aws_secretsmanager_list_secret_version_ids "flomation.app/automate/executor/actions/aws/secretsmanager/list_secret_version_ids"
+	aws_secretsmanager_list_secrets "flomation.app/automate/executor/actions/aws/secretsmanager/list_secrets"
+	aws_secretsmanager_put_resource_policy "flomation.app/automate/executor/actions/aws/secretsmanager/put_resource_policy"
+	aws_secretsmanager_put_secret_value "flomation.app/automate/executor/actions/aws/secretsmanager/put_secret_value"
+	aws_secretsmanager_remove_regions_from_replication "flomation.app/automate/executor/actions/aws/secretsmanager/remove_regions_from_replication"
+	aws_secretsmanager_replicate_secret_to_regions "flomation.app/automate/executor/actions/aws/secretsmanager/replicate_secret_to_regions"
+	aws_secretsmanager_restore_secret "flomation.app/automate/executor/actions/aws/secretsmanager/restore_secret"
+	aws_secretsmanager_rotate_secret "flomation.app/automate/executor/actions/aws/secretsmanager/rotate_secret"
+	aws_secretsmanager_tag_resource "flomation.app/automate/executor/actions/aws/secretsmanager/tag_resource"
+	aws_secretsmanager_untag_resource "flomation.app/automate/executor/actions/aws/secretsmanager/untag_resource"
+	aws_secretsmanager_update_secret "flomation.app/automate/executor/actions/aws/secretsmanager/update_secret"
 	aws_vpc_accept_transit_gateway_peering_attachment "flomation.app/automate/executor/actions/aws/vpc/accept_transit_gateway_peering_attachment"
 	aws_vpc_accept_transit_gateway_vpc_attachment "flomation.app/automate/executor/actions/aws/vpc/accept_transit_gateway_vpc_attachment"
 	aws_vpc_accept_vpc_endpoint_connections "flomation.app/automate/executor/actions/aws/vpc/accept_vpc_endpoint_connections"
@@ -2831,6 +2934,91 @@ var Actions = map[string]core.Action{
 	"aws/eventbridge/test_event_pattern":                                 aws_eventbridge_test_event_pattern.Execute,
 	"aws/eventbridge/untag_resource":                                     aws_eventbridge_untag_resource.Execute,
 	"aws/eventbridge/update_api_destination":                             aws_eventbridge_update_api_destination.Execute,
+	"aws/iam/add_role_to_instance_profile":                               aws_iam_add_role_to_instance_profile.Execute,
+	"aws/iam/add_user_to_group":                                          aws_iam_add_user_to_group.Execute,
+	"aws/iam/attach_group_policy":                                        aws_iam_attach_group_policy.Execute,
+	"aws/iam/attach_role_policy":                                         aws_iam_attach_role_policy.Execute,
+	"aws/iam/attach_user_policy":                                         aws_iam_attach_user_policy.Execute,
+	"aws/iam/create_access_key":                                          aws_iam_create_access_key.Execute,
+	"aws/iam/create_group":                                               aws_iam_create_group.Execute,
+	"aws/iam/create_instance_profile":                                    aws_iam_create_instance_profile.Execute,
+	"aws/iam/create_policy":                                              aws_iam_create_policy.Execute,
+	"aws/iam/create_policy_version":                                      aws_iam_create_policy_version.Execute,
+	"aws/iam/create_role":                                                aws_iam_create_role.Execute,
+	"aws/iam/create_user":                                                aws_iam_create_user.Execute,
+	"aws/iam/delete_access_key":                                          aws_iam_delete_access_key.Execute,
+	"aws/iam/delete_group":                                               aws_iam_delete_group.Execute,
+	"aws/iam/delete_instance_profile":                                    aws_iam_delete_instance_profile.Execute,
+	"aws/iam/delete_policy":                                              aws_iam_delete_policy.Execute,
+	"aws/iam/delete_role":                                                aws_iam_delete_role.Execute,
+	"aws/iam/delete_role_policy":                                         aws_iam_delete_role_policy.Execute,
+	"aws/iam/delete_user":                                                aws_iam_delete_user.Execute,
+	"aws/iam/detach_group_policy":                                        aws_iam_detach_group_policy.Execute,
+	"aws/iam/detach_role_policy":                                         aws_iam_detach_role_policy.Execute,
+	"aws/iam/detach_user_policy":                                         aws_iam_detach_user_policy.Execute,
+	"aws/iam/get_account_password_policy":                                aws_iam_get_account_password_policy.Execute,
+	"aws/iam/get_account_summary":                                        aws_iam_get_account_summary.Execute,
+	"aws/iam/get_group":                                                  aws_iam_get_group.Execute,
+	"aws/iam/get_instance_profile":                                       aws_iam_get_instance_profile.Execute,
+	"aws/iam/get_policy":                                                 aws_iam_get_policy.Execute,
+	"aws/iam/get_role":                                                   aws_iam_get_role.Execute,
+	"aws/iam/get_role_policy":                                            aws_iam_get_role_policy.Execute,
+	"aws/iam/get_user":                                                   aws_iam_get_user.Execute,
+	"aws/iam/list_access_keys":                                           aws_iam_list_access_keys.Execute,
+	"aws/iam/list_attached_group_policies":                               aws_iam_list_attached_group_policies.Execute,
+	"aws/iam/list_attached_role_policies":                                aws_iam_list_attached_role_policies.Execute,
+	"aws/iam/list_attached_user_policies":                                aws_iam_list_attached_user_policies.Execute,
+	"aws/iam/list_groups":                                                aws_iam_list_groups.Execute,
+	"aws/iam/list_instance_profiles":                                     aws_iam_list_instance_profiles.Execute,
+	"aws/iam/list_policies":                                              aws_iam_list_policies.Execute,
+	"aws/iam/list_policy_versions":                                       aws_iam_list_policy_versions.Execute,
+	"aws/iam/list_role_policies":                                         aws_iam_list_role_policies.Execute,
+	"aws/iam/list_roles":                                                 aws_iam_list_roles.Execute,
+	"aws/iam/list_users":                                                 aws_iam_list_users.Execute,
+	"aws/iam/put_role_policy":                                            aws_iam_put_role_policy.Execute,
+	"aws/iam/remove_role_from_instance_profile":                          aws_iam_remove_role_from_instance_profile.Execute,
+	"aws/iam/remove_user_from_group":                                     aws_iam_remove_user_from_group.Execute,
+	"aws/iam/simulate_principal_policy":                                  aws_iam_simulate_principal_policy.Execute,
+	"aws/iam/tag_role":                                                   aws_iam_tag_role.Execute,
+	"aws/iam/untag_role":                                                 aws_iam_untag_role.Execute,
+	"aws/iam/update_access_key":                                          aws_iam_update_access_key.Execute,
+	"aws/iam/update_account_password_policy":                             aws_iam_update_account_password_policy.Execute,
+	"aws/iam/update_assume_role_policy":                                  aws_iam_update_assume_role_policy.Execute,
+	"aws/iam/update_role":                                                aws_iam_update_role.Execute,
+	"aws/iam/update_user":                                                aws_iam_update_user.Execute,
+	"aws/kms/cancel_key_deletion":                                        aws_kms_cancel_key_deletion.Execute,
+	"aws/kms/create_alias":                                               aws_kms_create_alias.Execute,
+	"aws/kms/create_grant":                                               aws_kms_create_grant.Execute,
+	"aws/kms/create_key":                                                 aws_kms_create_key.Execute,
+	"aws/kms/decrypt":                                                    aws_kms_decrypt.Execute,
+	"aws/kms/delete_alias":                                               aws_kms_delete_alias.Execute,
+	"aws/kms/describe_key":                                               aws_kms_describe_key.Execute,
+	"aws/kms/disable_key":                                                aws_kms_disable_key.Execute,
+	"aws/kms/disable_key_rotation":                                       aws_kms_disable_key_rotation.Execute,
+	"aws/kms/enable_key":                                                 aws_kms_enable_key.Execute,
+	"aws/kms/enable_key_rotation":                                        aws_kms_enable_key_rotation.Execute,
+	"aws/kms/encrypt":                                                    aws_kms_encrypt.Execute,
+	"aws/kms/generate_data_key":                                          aws_kms_generate_data_key.Execute,
+	"aws/kms/generate_data_key_without_plaintext":                        aws_kms_generate_data_key_without_plaintext.Execute,
+	"aws/kms/generate_random":                                            aws_kms_generate_random.Execute,
+	"aws/kms/get_key_policy":                                             aws_kms_get_key_policy.Execute,
+	"aws/kms/get_key_rotation_status":                                    aws_kms_get_key_rotation_status.Execute,
+	"aws/kms/get_public_key":                                             aws_kms_get_public_key.Execute,
+	"aws/kms/list_aliases":                                               aws_kms_list_aliases.Execute,
+	"aws/kms/list_grants":                                                aws_kms_list_grants.Execute,
+	"aws/kms/list_keys":                                                  aws_kms_list_keys.Execute,
+	"aws/kms/list_resource_tags":                                         aws_kms_list_resource_tags.Execute,
+	"aws/kms/put_key_policy":                                             aws_kms_put_key_policy.Execute,
+	"aws/kms/re_encrypt":                                                 aws_kms_re_encrypt.Execute,
+	"aws/kms/retire_grant":                                               aws_kms_retire_grant.Execute,
+	"aws/kms/revoke_grant":                                               aws_kms_revoke_grant.Execute,
+	"aws/kms/schedule_key_deletion":                                      aws_kms_schedule_key_deletion.Execute,
+	"aws/kms/sign":                                                       aws_kms_sign.Execute,
+	"aws/kms/tag_resource":                                               aws_kms_tag_resource.Execute,
+	"aws/kms/untag_resource":                                             aws_kms_untag_resource.Execute,
+	"aws/kms/update_alias":                                               aws_kms_update_alias.Execute,
+	"aws/kms/update_key_description":                                     aws_kms_update_key_description.Execute,
+	"aws/kms/verify":                                                     aws_kms_verify.Execute,
 	"aws/rds/add_role_to_db_cluster":                                     aws_rds_add_role_to_db_cluster.Execute,
 	"aws/rds/add_tags_to_resource":                                       aws_rds_add_tags_to_resource.Execute,
 	"aws/rds/apply_pending_maintenance_action":                           aws_rds_apply_pending_maintenance_action.Execute,
@@ -3139,6 +3327,24 @@ var Actions = map[string]core.Action{
 	"aws/s3/update_job_status":                                            aws_s3_update_job_status.Execute,
 	"aws/s3/upload_part":                                                  aws_s3_upload_part.Execute,
 	"aws/s3/upload_part_copy":                                             aws_s3_upload_part_copy.Execute,
+	"aws/secretsmanager/cancel_rotate_secret":                             aws_secretsmanager_cancel_rotate_secret.Execute,
+	"aws/secretsmanager/create_secret":                                    aws_secretsmanager_create_secret.Execute,
+	"aws/secretsmanager/delete_resource_policy":                           aws_secretsmanager_delete_resource_policy.Execute,
+	"aws/secretsmanager/delete_secret":                                    aws_secretsmanager_delete_secret.Execute,
+	"aws/secretsmanager/describe_secret":                                  aws_secretsmanager_describe_secret.Execute,
+	"aws/secretsmanager/get_resource_policy":                              aws_secretsmanager_get_resource_policy.Execute,
+	"aws/secretsmanager/get_secret_value":                                 aws_secretsmanager_get_secret_value.Execute,
+	"aws/secretsmanager/list_secret_version_ids":                          aws_secretsmanager_list_secret_version_ids.Execute,
+	"aws/secretsmanager/list_secrets":                                     aws_secretsmanager_list_secrets.Execute,
+	"aws/secretsmanager/put_resource_policy":                              aws_secretsmanager_put_resource_policy.Execute,
+	"aws/secretsmanager/put_secret_value":                                 aws_secretsmanager_put_secret_value.Execute,
+	"aws/secretsmanager/remove_regions_from_replication":                  aws_secretsmanager_remove_regions_from_replication.Execute,
+	"aws/secretsmanager/replicate_secret_to_regions":                      aws_secretsmanager_replicate_secret_to_regions.Execute,
+	"aws/secretsmanager/restore_secret":                                   aws_secretsmanager_restore_secret.Execute,
+	"aws/secretsmanager/rotate_secret":                                    aws_secretsmanager_rotate_secret.Execute,
+	"aws/secretsmanager/tag_resource":                                     aws_secretsmanager_tag_resource.Execute,
+	"aws/secretsmanager/untag_resource":                                   aws_secretsmanager_untag_resource.Execute,
+	"aws/secretsmanager/update_secret":                                    aws_secretsmanager_update_secret.Execute,
 	"aws/vpc/accept_transit_gateway_peering_attachment":                   aws_vpc_accept_transit_gateway_peering_attachment.Execute,
 	"aws/vpc/accept_transit_gateway_vpc_attachment":                       aws_vpc_accept_transit_gateway_vpc_attachment.Execute,
 	"aws/vpc/accept_vpc_endpoint_connections":                             aws_vpc_accept_vpc_endpoint_connections.Execute,
