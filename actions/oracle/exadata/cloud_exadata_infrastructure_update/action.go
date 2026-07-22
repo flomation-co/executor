@@ -58,6 +58,11 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 		return exa.ErrorResult(err.Error()), nil
 	}
 
+	// Each field is only sent when the operator supplies it. A blank input leaves the field
+	// nil, which the SDK strips from the request body (UpdateCloudExadataInfrastructureDetails
+	// tags them mandatory:false), so OCI leaves that attribute UNCHANGED — this is a partial
+	// update, not a full replace. OptionalInt's ok flag distinguishes a blank count (unchanged)
+	// from an explicit value, so a deliberately-typed number (even 0) is sent as given.
 	details := db.UpdateCloudExadataInfrastructureDetails{}
 	if name := exa.OptionalString("display_name", inputs); name != "" {
 		details.DisplayName = &name
