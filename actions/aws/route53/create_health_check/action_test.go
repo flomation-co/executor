@@ -1,0 +1,17 @@
+package aws_route53_create_health_check
+
+import (
+	"testing"
+
+	core "flomation.app/automate/executor"
+	. "github.com/onsi/gomega"
+)
+
+// Required inputs are validated before any AWS call.
+func TestRequiresType(t *testing.T) {
+	RegisterTestingT(t)
+
+	_, err := Execute(nil, nil, []*core.Connection{})
+	Expect(err).To(HaveOccurred())
+	Expect(err.Error()).To(ContainSubstring("type"))
+}
