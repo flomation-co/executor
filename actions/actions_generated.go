@@ -274,6 +274,46 @@ import (
 	aws_rds_switchover_blue_green_deployment "flomation.app/automate/executor/actions/aws/rds/switchover_blue_green_deployment"
 	aws_rds_switchover_global_cluster "flomation.app/automate/executor/actions/aws/rds/switchover_global_cluster"
 	aws_rds_switchover_read_replica "flomation.app/automate/executor/actions/aws/rds/switchover_read_replica"
+	aws_route53_associate_vpc_with_hosted_zone "flomation.app/automate/executor/actions/aws/route53/associate_vpc_with_hosted_zone"
+	aws_route53_change_resource_record_sets "flomation.app/automate/executor/actions/aws/route53/change_resource_record_sets"
+	aws_route53_change_tags_for_resource "flomation.app/automate/executor/actions/aws/route53/change_tags_for_resource"
+	aws_route53_create_health_check "flomation.app/automate/executor/actions/aws/route53/create_health_check"
+	aws_route53_create_hosted_zone "flomation.app/automate/executor/actions/aws/route53/create_hosted_zone"
+	aws_route53_create_query_logging_config "flomation.app/automate/executor/actions/aws/route53/create_query_logging_config"
+	aws_route53_delete_health_check "flomation.app/automate/executor/actions/aws/route53/delete_health_check"
+	aws_route53_delete_hosted_zone "flomation.app/automate/executor/actions/aws/route53/delete_hosted_zone"
+	aws_route53_delete_query_logging_config "flomation.app/automate/executor/actions/aws/route53/delete_query_logging_config"
+	aws_route53_disassociate_vpc_from_hosted_zone "flomation.app/automate/executor/actions/aws/route53/disassociate_vpc_from_hosted_zone"
+	aws_route53_get_change "flomation.app/automate/executor/actions/aws/route53/get_change"
+	aws_route53_get_health_check "flomation.app/automate/executor/actions/aws/route53/get_health_check"
+	aws_route53_get_health_check_count "flomation.app/automate/executor/actions/aws/route53/get_health_check_count"
+	aws_route53_get_health_check_status "flomation.app/automate/executor/actions/aws/route53/get_health_check_status"
+	aws_route53_get_hosted_zone "flomation.app/automate/executor/actions/aws/route53/get_hosted_zone"
+	aws_route53_get_hosted_zone_count "flomation.app/automate/executor/actions/aws/route53/get_hosted_zone_count"
+	aws_route53_list_health_checks "flomation.app/automate/executor/actions/aws/route53/list_health_checks"
+	aws_route53_list_hosted_zones "flomation.app/automate/executor/actions/aws/route53/list_hosted_zones"
+	aws_route53_list_hosted_zones_by_name "flomation.app/automate/executor/actions/aws/route53/list_hosted_zones_by_name"
+	aws_route53_list_query_logging_configs "flomation.app/automate/executor/actions/aws/route53/list_query_logging_configs"
+	aws_route53_list_resource_record_sets "flomation.app/automate/executor/actions/aws/route53/list_resource_record_sets"
+	aws_route53_list_tags_for_resource "flomation.app/automate/executor/actions/aws/route53/list_tags_for_resource"
+	aws_route53_test_dns_answer "flomation.app/automate/executor/actions/aws/route53/test_dns_answer"
+	aws_route53_update_health_check "flomation.app/automate/executor/actions/aws/route53/update_health_check"
+	aws_route53_update_hosted_zone_comment "flomation.app/automate/executor/actions/aws/route53/update_hosted_zone_comment"
+	aws_route53domains_check_domain_availability "flomation.app/automate/executor/actions/aws/route53domains/check_domain_availability"
+	aws_route53domains_check_domain_transferability "flomation.app/automate/executor/actions/aws/route53domains/check_domain_transferability"
+	aws_route53domains_disable_domain_auto_renew "flomation.app/automate/executor/actions/aws/route53domains/disable_domain_auto_renew"
+	aws_route53domains_enable_domain_auto_renew "flomation.app/automate/executor/actions/aws/route53domains/enable_domain_auto_renew"
+	aws_route53domains_get_domain_detail "flomation.app/automate/executor/actions/aws/route53domains/get_domain_detail"
+	aws_route53domains_get_domain_suggestions "flomation.app/automate/executor/actions/aws/route53domains/get_domain_suggestions"
+	aws_route53domains_get_operation_detail "flomation.app/automate/executor/actions/aws/route53domains/get_operation_detail"
+	aws_route53domains_list_domains "flomation.app/automate/executor/actions/aws/route53domains/list_domains"
+	aws_route53domains_list_operations "flomation.app/automate/executor/actions/aws/route53domains/list_operations"
+	aws_route53domains_register_domain "flomation.app/automate/executor/actions/aws/route53domains/register_domain"
+	aws_route53domains_renew_domain "flomation.app/automate/executor/actions/aws/route53domains/renew_domain"
+	aws_route53domains_transfer_domain "flomation.app/automate/executor/actions/aws/route53domains/transfer_domain"
+	aws_route53domains_update_domain_contact "flomation.app/automate/executor/actions/aws/route53domains/update_domain_contact"
+	aws_route53domains_update_domain_contact_privacy "flomation.app/automate/executor/actions/aws/route53domains/update_domain_contact_privacy"
+	aws_route53domains_update_domain_nameservers "flomation.app/automate/executor/actions/aws/route53domains/update_domain_nameservers"
 	aws_s3_abort_multipart_upload "flomation.app/automate/executor/actions/aws/s3/abort_multipart_upload"
 	aws_s3_complete_multipart_upload "flomation.app/automate/executor/actions/aws/s3/complete_multipart_upload"
 	aws_s3_copy_object "flomation.app/automate/executor/actions/aws/s3/copy_object"
@@ -2555,6 +2595,46 @@ var Actions = map[string]core.Action{
 	"aws/rds/switchover_blue_green_deployment":                aws_rds_switchover_blue_green_deployment.Execute,
 	"aws/rds/switchover_global_cluster":                       aws_rds_switchover_global_cluster.Execute,
 	"aws/rds/switchover_read_replica":                         aws_rds_switchover_read_replica.Execute,
+	"aws/route53/associate_vpc_with_hosted_zone":              aws_route53_associate_vpc_with_hosted_zone.Execute,
+	"aws/route53/change_resource_record_sets":                 aws_route53_change_resource_record_sets.Execute,
+	"aws/route53/change_tags_for_resource":                    aws_route53_change_tags_for_resource.Execute,
+	"aws/route53/create_health_check":                         aws_route53_create_health_check.Execute,
+	"aws/route53/create_hosted_zone":                          aws_route53_create_hosted_zone.Execute,
+	"aws/route53/create_query_logging_config":                 aws_route53_create_query_logging_config.Execute,
+	"aws/route53/delete_health_check":                         aws_route53_delete_health_check.Execute,
+	"aws/route53/delete_hosted_zone":                          aws_route53_delete_hosted_zone.Execute,
+	"aws/route53/delete_query_logging_config":                 aws_route53_delete_query_logging_config.Execute,
+	"aws/route53/disassociate_vpc_from_hosted_zone":           aws_route53_disassociate_vpc_from_hosted_zone.Execute,
+	"aws/route53/get_change":                                  aws_route53_get_change.Execute,
+	"aws/route53/get_health_check":                            aws_route53_get_health_check.Execute,
+	"aws/route53/get_health_check_count":                      aws_route53_get_health_check_count.Execute,
+	"aws/route53/get_health_check_status":                     aws_route53_get_health_check_status.Execute,
+	"aws/route53/get_hosted_zone":                             aws_route53_get_hosted_zone.Execute,
+	"aws/route53/get_hosted_zone_count":                       aws_route53_get_hosted_zone_count.Execute,
+	"aws/route53/list_health_checks":                          aws_route53_list_health_checks.Execute,
+	"aws/route53/list_hosted_zones":                           aws_route53_list_hosted_zones.Execute,
+	"aws/route53/list_hosted_zones_by_name":                   aws_route53_list_hosted_zones_by_name.Execute,
+	"aws/route53/list_query_logging_configs":                  aws_route53_list_query_logging_configs.Execute,
+	"aws/route53/list_resource_record_sets":                   aws_route53_list_resource_record_sets.Execute,
+	"aws/route53/list_tags_for_resource":                      aws_route53_list_tags_for_resource.Execute,
+	"aws/route53/test_dns_answer":                             aws_route53_test_dns_answer.Execute,
+	"aws/route53/update_health_check":                         aws_route53_update_health_check.Execute,
+	"aws/route53/update_hosted_zone_comment":                  aws_route53_update_hosted_zone_comment.Execute,
+	"aws/route53domains/check_domain_availability":            aws_route53domains_check_domain_availability.Execute,
+	"aws/route53domains/check_domain_transferability":         aws_route53domains_check_domain_transferability.Execute,
+	"aws/route53domains/disable_domain_auto_renew":            aws_route53domains_disable_domain_auto_renew.Execute,
+	"aws/route53domains/enable_domain_auto_renew":             aws_route53domains_enable_domain_auto_renew.Execute,
+	"aws/route53domains/get_domain_detail":                    aws_route53domains_get_domain_detail.Execute,
+	"aws/route53domains/get_domain_suggestions":               aws_route53domains_get_domain_suggestions.Execute,
+	"aws/route53domains/get_operation_detail":                 aws_route53domains_get_operation_detail.Execute,
+	"aws/route53domains/list_domains":                         aws_route53domains_list_domains.Execute,
+	"aws/route53domains/list_operations":                      aws_route53domains_list_operations.Execute,
+	"aws/route53domains/register_domain":                      aws_route53domains_register_domain.Execute,
+	"aws/route53domains/renew_domain":                         aws_route53domains_renew_domain.Execute,
+	"aws/route53domains/transfer_domain":                      aws_route53domains_transfer_domain.Execute,
+	"aws/route53domains/update_domain_contact":                aws_route53domains_update_domain_contact.Execute,
+	"aws/route53domains/update_domain_contact_privacy":        aws_route53domains_update_domain_contact_privacy.Execute,
+	"aws/route53domains/update_domain_nameservers":            aws_route53domains_update_domain_nameservers.Execute,
 	"aws/s3/abort_multipart_upload":                           aws_s3_abort_multipart_upload.Execute,
 	"aws/s3/complete_multipart_upload":                        aws_s3_complete_multipart_upload.Execute,
 	"aws/s3/copy_object":                                      aws_s3_copy_object.Execute,
