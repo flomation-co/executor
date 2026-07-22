@@ -214,6 +214,13 @@ func IntOrNil(p *int) interface{} {
 	return *p
 }
 
+func BoolOrNil(p *bool) interface{} {
+	if p == nil {
+		return nil
+	}
+	return *p
+}
+
 func FormatTime(t *common.SDKTime) string {
 	if t == nil {
 		return ""
@@ -375,6 +382,24 @@ func SummariseAddonSummary(a *oke.AddonSummary) map[string]interface{} {
 		"current_installed_version": Str(a.CurrentInstalledVersion),
 		"lifecycle_state":           string(a.LifecycleState),
 		"time_created":              FormatTime(a.TimeCreated),
+	}
+}
+
+func SummariseAddonOptionSummary(a *oke.AddonOptionSummary) map[string]interface{} {
+	versions := make([]map[string]interface{}, 0, len(a.Versions))
+	for i := range a.Versions {
+		versions = append(versions, map[string]interface{}{
+			"version_number": Str(a.Versions[i].VersionNumber),
+			"status":         string(a.Versions[i].Status),
+			"description":    Str(a.Versions[i].Description),
+		})
+	}
+	return map[string]interface{}{
+		"name":         Str(a.Name),
+		"description":  Str(a.Description),
+		"addon_group":  Str(a.AddonGroup),
+		"is_essential": BoolOrNil(a.IsEssential),
+		"versions":     versions,
 	}
 }
 

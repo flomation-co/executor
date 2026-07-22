@@ -91,6 +91,11 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	if lbSubnets := oke.InputStrings("service_lb_subnet_ocids", inputs); len(lbSubnets) > 0 {
 		details.Options = &okesdk.ClusterCreateOptions{ServiceLbSubnetIds: lbSubnets}
 	}
+	// A public API endpoint is only meaningful with an endpoint subnet — fail loudly rather
+	// than silently dropping the flag when the subnet is blank.
+	if oke.OptionalBool("endpoint_public_ip", inputs, false) && oke.OptionalString("endpoint_subnet_ocid", inputs) == "" {
+		return oke.ErrorResult("a public API endpoint requires an endpoint subnet — set the API Endpoint Subnet OCID"), nil
+	}
 	if endpointSubnet := oke.OptionalString("endpoint_subnet_ocid", inputs); endpointSubnet != "" {
 		ep := okesdk.CreateClusterEndpointConfigDetails{SubnetId: &endpointSubnet}
 		if oke.BoolWasSet("endpoint_public_ip", inputs) {

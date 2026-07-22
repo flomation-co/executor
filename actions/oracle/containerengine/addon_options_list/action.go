@@ -64,7 +64,7 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 			return oke.ErrorResult(auth.OCIError(err)), nil
 		}
 		for i := range resp.Items {
-			out = append(out, map[string]interface{}{"name": oke.Str(resp.Items[i].Name)})
+			out = append(out, oke.SummariseAddonOptionSummary(&resp.Items[i]))
 		}
 		if resp.OpcNextPage == nil || *resp.OpcNextPage == "" {
 			break

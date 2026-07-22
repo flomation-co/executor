@@ -289354,7 +289354,7 @@
     ]
   },
   "oracle/containerengine/addon_options_list": {
-    "hash": "1b2123eac43c2cf2bcefd6210e0364636921be59a6cab935d692273fa4b61a5e",
+    "hash": "619dc9a9b7a321f53cced0267097a1ebb4c5d94e37146605b1905ac9f4d0fe48",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "OCI Container Engine: List Add-on Options",
@@ -289611,7 +289611,7 @@
     ]
   },
   "oracle/containerengine/cluster_create": {
-    "hash": "c3bdd705c17ef4a05738a75011c0ea5540d8f0c9ec680c3f8ca22b637b873243",
+    "hash": "ca647fbc64e7a2a9e5bd26acd985e937d7c91e97331433287922c85f2859cfab",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "OCI Container Engine: Create Cluster",
