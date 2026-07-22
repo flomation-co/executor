@@ -1,0 +1,74 @@
+// Package oracle_identity_swift_password_list lists the Swift passwords belonging to an
+// IAM user (the password secret is never returned by a list — only on create).
+package oracle_identity_swift_password_list
+
+import (
+	"fmt"
+
+	core "flomation.app/automate/executor"
+	iam "flomation.app/automate/executor/actions/oracle/identity"
+
+	identity "github.com/oracle/oci-go-sdk/v65/identity"
+)
+
+const (
+	Author       = "Dave McElin"
+	Organisation = "Flomation"
+	Name         = "OCI Identity: List Swift Passwords"
+	Description  = "List the Swift passwords belonging to an Oracle Cloud IAM user — their OCID, description, lifecycle state, creation and expiry times. The password secret itself is never returned by a list (only on create). Swift passwords are deprecated in favour of auth tokens."
+	Website      = "https://www.flomation.co"
+	Icon         = "oracle+key"
+	Date         = "22/07/2026"
+	Type         = core.ActionTypeAction
+)
+
+var Inputs = [...]core.Connection{
+	{Name: "tenancy_ocid", Type: core.ConnectionTypeString, Label: "Tenancy OCID", Placeholder: "ocid1.tenancy.oc1..aaaa…", Required: true},
+	{Name: "user_ocid", Type: core.ConnectionTypeString, Label: "User OCID", Placeholder: "ocid1.user.oc1..aaaa… (the caller's user, for signing)", Required: true},
+	{Name: "region", Type: core.ConnectionTypeString, Label: "Region", Placeholder: "the tenancy home region, e.g. uk-london-1", Required: true},
+	{Name: "fingerprint", Type: core.ConnectionTypeString, Label: "Key Fingerprint", Placeholder: "aa:bb:cc:… fingerprint of the uploaded API key", Required: true},
+	{Name: "private_key", Type: core.ConnectionTypeSecret, Label: "Private Key (PEM)", Placeholder: "The API signing private key — full PEM, incl. BEGIN/END lines"},
+	{Name: "private_key_passphrase", Type: core.ConnectionTypeSecret, Label: "Private Key Passphrase", Placeholder: "Only if the key is encrypted (optional)"},
+	{Name: "compartment_ocid", Type: core.ConnectionTypeString, Label: "Compartment OCID", Placeholder: "Leave blank for the tenancy (scopes the user picker)"},
+	{Name: "target_user_ocid", Type: core.ConnectionTypeString, Label: "User OCID", Placeholder: "ocid1.user.oc1..aaaa… whose Swift passwords to list", Required: true},
+}
+
+var Outputs = [...]core.Connection{
+	{Name: "tool_result", Type: core.ConnectionTypeString, Label: "Result summary"},
+	{Name: "swift_passwords", Type: core.ConnectionTypeObject, Label: "Swift Passwords"},
+	{Name: "count", Type: core.ConnectionTypeString, Label: "Count"},
+	{Name: "truncated", Type: core.ConnectionTypeBoolean, Label: "Truncated"},
+	{Name: "success", Type: core.ConnectionTypeBoolean, Label: "Success"},
+	{Name: "error", Type: core.ConnectionTypeString, Label: "Error"},
+}
+
+func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[string]interface{}, error) {
+	auth, client, userID, errResult := iam.ResourceClient(inputs, "target_user_ocid")
+	if errResult != nil {
+		return errResult, nil
+	}
+	// ListSwiftPasswords takes a user path and returns the full set in one call (the
+	// request carries no page cursor), so there is no pagination loop — an opc-next-page
+	// header simply means the service returned a partial list we cannot page past.
+	resp, err := client.ListSwiftPasswords(iam.Context(), identity.ListSwiftPasswordsRequest{UserId: &userID})
+	if err != nil {
+		return iam.ErrorResult(auth.OCIError(err)), nil
+	}
+	// SwiftPassword has no shared summariser — build the map inline, and never surface the
+	// (list-omitted) password secret.
+	out := make([]map[string]interface{}, 0, len(resp.Items))
+	for i := range resp.Items {
+		sp := resp.Items[i]
+		out = append(out, map[string]interface{}{
+			"id":              iam.Str(sp.Id),
+			"description":     iam.Str(sp.Description),
+			"lifecycle_state": string(sp.LifecycleState),
+			"time_created":    iam.FormatTime(sp.TimeCreated),
+			"time_expires":    iam.FormatTime(sp.ExpiresOn),
+		})
+	}
+	truncated := resp.OpcNextPage != nil && *resp.OpcNextPage != ""
+	return iam.Result(fmt.Sprintf("Found %d Swift password(s)", len(out)), map[string]interface{}{
+		"swift_passwords": out, "count": fmt.Sprintf("%d", len(out)), "truncated": truncated,
+	}), nil
+}
