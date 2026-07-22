@@ -146,6 +146,9 @@ func ManagementForVault(inputs []*coreflow.Connection, inputName string) (auth A
 	if err != nil {
 		return Auth{}, keymanagement.KmsManagementClient{}, "", ErrorResult(a.OCIError(err))
 	}
+	if mgmtEP == "" {
+		return Auth{}, keymanagement.KmsManagementClient{}, "", ErrorResult("the vault has no management endpoint yet — it may still be provisioning (the endpoint DNS can lag a few minutes behind the vault becoming ACTIVE); try again shortly")
+	}
 	c, err := keymanagement.NewKmsManagementClientWithConfigurationProvider(a.provider, mgmtEP)
 	if err != nil {
 		return Auth{}, keymanagement.KmsManagementClient{}, "", ErrorResult(a.OCIError(err))
@@ -167,6 +170,9 @@ func CryptoForVault(inputs []*coreflow.Connection, inputName string) (auth Auth,
 	_, cryptoEP, err := a.getVaultEndpoints(vid)
 	if err != nil {
 		return Auth{}, keymanagement.KmsCryptoClient{}, "", ErrorResult(a.OCIError(err))
+	}
+	if cryptoEP == "" {
+		return Auth{}, keymanagement.KmsCryptoClient{}, "", ErrorResult("the vault has no crypto endpoint yet — it may still be provisioning (the endpoint DNS can lag a few minutes behind the vault becoming ACTIVE); try again shortly")
 	}
 	c, err := keymanagement.NewKmsCryptoClientWithConfigurationProvider(a.provider, cryptoEP)
 	if err != nil {

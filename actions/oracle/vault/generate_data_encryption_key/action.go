@@ -40,7 +40,7 @@ var Inputs = [...]core.Connection{
 		{Name: "RSA", Value: "RSA"},
 		{Name: "ECDSA", Value: "ECDSA"},
 	}},
-	{Name: "length", Type: core.ConnectionTypeString, Label: "Length (bytes)", Placeholder: "AES: 16/24/32 (default 32); RSA: 256/384/512; ECDSA set by curve"},
+	{Name: "length", Type: core.ConnectionTypeString, Label: "Length (bytes)", Placeholder: "Optional — AES 16/24/32 (default 32); RSA 256/384/512 (default 256)"},
 	{Name: "include_plaintext_key", Type: core.ConnectionTypeBoolean, Label: "Include Plaintext Key", Placeholder: "Also return the DEK unencrypted (default true)"},
 }
 
@@ -73,11 +73,17 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	default:
 		return kms.ErrorResult("algorithm must be AES, RSA or ECDSA"), nil
 	}
-	length := 32
-	if v, ok, err := kms.OptionalInt("length", inputs); err != nil {
+	// Default the length by algorithm — a flat 32 is only valid for AES; RSA needs 256/384/512.
+	explicitLen, hasLen, err := kms.OptionalInt("length", inputs)
+	if err != nil {
 		return kms.ErrorResult(err.Error()), nil
-	} else if ok {
-		length = v
+	}
+	length := 32
+	if algorithm == keymanagement.KeyShapeAlgorithmRsa {
+		length = 256
+	}
+	if hasLen {
+		length = explicitLen
 	}
 	shape := keymanagement.KeyShape{Algorithm: algorithm, Length: &length}
 	include := kms.OptionalBool("include_plaintext_key", inputs, true)

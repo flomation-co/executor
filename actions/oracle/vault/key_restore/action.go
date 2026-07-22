@@ -73,7 +73,7 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 		return kms.ErrorResult(auth.OCIError(err)), nil
 	}
 	key := kms.SummariseKey(&resp.Key)
-	return kms.Result(fmt.Sprintf("Restored key %q (%s)", key["display_name"], key["lifecycle_state"]), map[string]interface{}{
+	return kms.Result(fmt.Sprintf("Restoring key %q (%s) — poll Get Key until ENABLED", key["display_name"], key["lifecycle_state"]), map[string]interface{}{
 		"key": key, "id": key["id"], "lifecycle_state": key["lifecycle_state"],
 	}), nil
 }

@@ -114,8 +114,10 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 			return kms.ErrorResult("curve must be NIST_P256, NIST_P384 or NIST_P521"), nil
 		}
 		shape.CurveId = curve
-		if hasLen {
-			length = explicitLen
+		// A curve fixes the key length; catch a mismatched explicit length locally rather than
+		// letting it surface as an opaque OCI 400.
+		if hasLen && explicitLen != length {
+			return kms.ErrorResult(fmt.Sprintf("ECDSA length must be %d bytes for %s (or leave Length blank to use the curve default)", length, curve)), nil
 		}
 		shape.Length = &length
 	default: // AES

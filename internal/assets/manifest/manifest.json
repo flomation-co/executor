@@ -320020,7 +320020,7 @@
     ]
   },
   "oracle/vault/generate_data_encryption_key": {
-    "hash": "b6237c77de02df0db24a80755b3777c126326cd4d75ac5c33a17e903ad01f652",
+    "hash": "6045daf34b7c9d4ffe5da3cf1cd883ded26177ce2eeafafeb3874aa6aa26637d",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "OCI Vault: Generate Data Encryption Key",
@@ -320135,7 +320135,7 @@
         "type": "string",
         "value": null,
         "label": "Length (bytes)",
-        "placeholder": "AES: 16/24/32 (default 32); RSA: 256/384/512; ECDSA set by curve"
+        "placeholder": "Optional — AES 16/24/32 (default 32); RSA 256/384/512 (default 256)"
       },
       {
         "name": "include_plaintext_key",
@@ -320628,7 +320628,7 @@
     ]
   },
   "oracle/vault/key_create": {
-    "hash": "911e7bb2832dd030204d5b46ccee8e67247df71d3a0e0b38f4b64cd6bd836f3d",
+    "hash": "ba819375ac5903e89ce7c49ff4fbfb82e5cb2bfc17eb127c9b28fa6e79ada491",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "OCI Vault: Create Key",
@@ -321375,7 +321375,7 @@
     ]
   },
   "oracle/vault/key_restore": {
-    "hash": "ef49b58c8e7223fe33ec1c3f605f8dd660be02ae6fc695f7ab146af6eabd10c9",
+    "hash": "5fe178a15e74b64ff2ab5e89ba030eb93b950f502af5c907a23b04f854ab5259",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "OCI Vault: Restore Key",
