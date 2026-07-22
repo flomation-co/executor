@@ -335818,7 +335818,7 @@
     ]
   },
   "oracle/notifications/subscription_confirm": {
-    "hash": "70b2a06eabb212c96c05d6a59115e22d63b4b44360df53dbbd12a674844c2092",
+    "hash": "d6049aca7360b8f87fe9edf3c9f1c4199f85c8dab3ad004d17353b4bdcfe511f",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "OCI Notifications: Confirm Subscription",
@@ -335912,8 +335912,34 @@
         "type": "string",
         "value": null,
         "label": "Protocol",
-        "placeholder": "The subscription's protocol, e.g. EMAIL or CUSTOM_HTTPS",
-        "required": true
+        "placeholder": "The subscription's protocol",
+        "required": true,
+        "options": [
+          {
+            "name": "Email",
+            "value": "EMAIL"
+          },
+          {
+            "name": "SMS",
+            "value": "SMS"
+          },
+          {
+            "name": "HTTPS (custom URL)",
+            "value": "CUSTOM_HTTPS"
+          },
+          {
+            "name": "Slack",
+            "value": "SLACK"
+          },
+          {
+            "name": "PagerDuty",
+            "value": "PAGERDUTY"
+          },
+          {
+            "name": "Oracle Function",
+            "value": "ORACLE_FUNCTIONS"
+          }
+        ]
       }
     ],
     "outputs": [

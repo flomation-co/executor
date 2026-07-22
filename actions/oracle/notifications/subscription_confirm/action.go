@@ -32,7 +32,14 @@ var Inputs = [...]core.Connection{
 	{Name: "compartment_ocid", Type: core.ConnectionTypeString, Label: "Compartment OCID", Placeholder: "ocid1.compartment.oc1..aaaa… (scopes the picker)"},
 	{Name: "subscription_ocid", Type: core.ConnectionTypeString, Label: "Subscription OCID", Placeholder: "ocid1.onssubscription.oc1..aaaa… to confirm", Required: true},
 	{Name: "token", Type: core.ConnectionTypeString, Label: "Confirmation Token", Placeholder: "The token from the confirmation link OCI sent the subscriber", Required: true},
-	{Name: "protocol", Type: core.ConnectionTypeString, Label: "Protocol", Placeholder: "The subscription's protocol, e.g. EMAIL or CUSTOM_HTTPS", Required: true},
+	{Name: "protocol", Type: core.ConnectionTypeString, Label: "Protocol", Placeholder: "The subscription's protocol", Required: true, Options: []core.ConnectionOption{
+		{Name: "Email", Value: "EMAIL"},
+		{Name: "SMS", Value: "SMS"},
+		{Name: "HTTPS (custom URL)", Value: "CUSTOM_HTTPS"},
+		{Name: "Slack", Value: "SLACK"},
+		{Name: "PagerDuty", Value: "PAGERDUTY"},
+		{Name: "Oracle Function", Value: "ORACLE_FUNCTIONS"},
+	}},
 }
 
 var Outputs = [...]core.Connection{
