@@ -2401,6 +2401,36 @@ import (
 	oracle_objectstorage_presigned_url_create "flomation.app/automate/executor/actions/oracle/objectstorage/presigned_url_create"
 	oracle_objectstorage_presigned_url_delete "flomation.app/automate/executor/actions/oracle/objectstorage/presigned_url_delete"
 	oracle_objectstorage_presigned_url_get_all "flomation.app/automate/executor/actions/oracle/objectstorage/presigned_url_get_all"
+	oracle_streaming_connect_harness_change_compartment "flomation.app/automate/executor/actions/oracle/streaming/connect_harness_change_compartment"
+	oracle_streaming_connect_harness_create "flomation.app/automate/executor/actions/oracle/streaming/connect_harness_create"
+	oracle_streaming_connect_harness_delete "flomation.app/automate/executor/actions/oracle/streaming/connect_harness_delete"
+	oracle_streaming_connect_harness_get "flomation.app/automate/executor/actions/oracle/streaming/connect_harness_get"
+	oracle_streaming_connect_harness_list "flomation.app/automate/executor/actions/oracle/streaming/connect_harness_list"
+	oracle_streaming_connect_harness_update "flomation.app/automate/executor/actions/oracle/streaming/connect_harness_update"
+	oracle_streaming_consumer_commit "flomation.app/automate/executor/actions/oracle/streaming/consumer_commit"
+	oracle_streaming_consumer_heartbeat "flomation.app/automate/executor/actions/oracle/streaming/consumer_heartbeat"
+	oracle_streaming_cursor_create "flomation.app/automate/executor/actions/oracle/streaming/cursor_create"
+	oracle_streaming_group_cursor_create "flomation.app/automate/executor/actions/oracle/streaming/group_cursor_create"
+	oracle_streaming_group_get "flomation.app/automate/executor/actions/oracle/streaming/group_get"
+	oracle_streaming_group_update "flomation.app/automate/executor/actions/oracle/streaming/group_update"
+	oracle_streaming_message_get "flomation.app/automate/executor/actions/oracle/streaming/message_get"
+	oracle_streaming_message_put "flomation.app/automate/executor/actions/oracle/streaming/message_put"
+	oracle_streaming_stream_change_compartment "flomation.app/automate/executor/actions/oracle/streaming/stream_change_compartment"
+	oracle_streaming_stream_create "flomation.app/automate/executor/actions/oracle/streaming/stream_create"
+	oracle_streaming_stream_delete "flomation.app/automate/executor/actions/oracle/streaming/stream_delete"
+	oracle_streaming_stream_get "flomation.app/automate/executor/actions/oracle/streaming/stream_get"
+	oracle_streaming_stream_list "flomation.app/automate/executor/actions/oracle/streaming/stream_list"
+	oracle_streaming_stream_pool_change_compartment "flomation.app/automate/executor/actions/oracle/streaming/stream_pool_change_compartment"
+	oracle_streaming_stream_pool_create "flomation.app/automate/executor/actions/oracle/streaming/stream_pool_create"
+	oracle_streaming_stream_pool_delete "flomation.app/automate/executor/actions/oracle/streaming/stream_pool_delete"
+	oracle_streaming_stream_pool_get "flomation.app/automate/executor/actions/oracle/streaming/stream_pool_get"
+	oracle_streaming_stream_pool_list "flomation.app/automate/executor/actions/oracle/streaming/stream_pool_list"
+	oracle_streaming_stream_pool_update "flomation.app/automate/executor/actions/oracle/streaming/stream_pool_update"
+	oracle_streaming_stream_update "flomation.app/automate/executor/actions/oracle/streaming/stream_update"
+	oracle_streaming_work_request_errors_list "flomation.app/automate/executor/actions/oracle/streaming/work_request_errors_list"
+	oracle_streaming_work_request_get "flomation.app/automate/executor/actions/oracle/streaming/work_request_get"
+	oracle_streaming_work_request_list "flomation.app/automate/executor/actions/oracle/streaming/work_request_list"
+	oracle_streaming_work_request_logs_list "flomation.app/automate/executor/actions/oracle/streaming/work_request_logs_list"
 	oracle_vault_decrypt "flomation.app/automate/executor/actions/oracle/vault/decrypt"
 	oracle_vault_encrypt "flomation.app/automate/executor/actions/oracle/vault/encrypt"
 	oracle_vault_export_key "flomation.app/automate/executor/actions/oracle/vault/export_key"
@@ -5337,6 +5367,36 @@ var Actions = map[string]core.Action{
 	"oracle/objectstorage/presigned_url_create":                                       oracle_objectstorage_presigned_url_create.Execute,
 	"oracle/objectstorage/presigned_url_delete":                                       oracle_objectstorage_presigned_url_delete.Execute,
 	"oracle/objectstorage/presigned_url_get_all":                                      oracle_objectstorage_presigned_url_get_all.Execute,
+	"oracle/streaming/connect_harness_change_compartment":                             oracle_streaming_connect_harness_change_compartment.Execute,
+	"oracle/streaming/connect_harness_create":                                         oracle_streaming_connect_harness_create.Execute,
+	"oracle/streaming/connect_harness_delete":                                         oracle_streaming_connect_harness_delete.Execute,
+	"oracle/streaming/connect_harness_get":                                            oracle_streaming_connect_harness_get.Execute,
+	"oracle/streaming/connect_harness_list":                                           oracle_streaming_connect_harness_list.Execute,
+	"oracle/streaming/connect_harness_update":                                         oracle_streaming_connect_harness_update.Execute,
+	"oracle/streaming/consumer_commit":                                                oracle_streaming_consumer_commit.Execute,
+	"oracle/streaming/consumer_heartbeat":                                             oracle_streaming_consumer_heartbeat.Execute,
+	"oracle/streaming/cursor_create":                                                  oracle_streaming_cursor_create.Execute,
+	"oracle/streaming/group_cursor_create":                                            oracle_streaming_group_cursor_create.Execute,
+	"oracle/streaming/group_get":                                                      oracle_streaming_group_get.Execute,
+	"oracle/streaming/group_update":                                                   oracle_streaming_group_update.Execute,
+	"oracle/streaming/message_get":                                                    oracle_streaming_message_get.Execute,
+	"oracle/streaming/message_put":                                                    oracle_streaming_message_put.Execute,
+	"oracle/streaming/stream_change_compartment":                                      oracle_streaming_stream_change_compartment.Execute,
+	"oracle/streaming/stream_create":                                                  oracle_streaming_stream_create.Execute,
+	"oracle/streaming/stream_delete":                                                  oracle_streaming_stream_delete.Execute,
+	"oracle/streaming/stream_get":                                                     oracle_streaming_stream_get.Execute,
+	"oracle/streaming/stream_list":                                                    oracle_streaming_stream_list.Execute,
+	"oracle/streaming/stream_pool_change_compartment":                                 oracle_streaming_stream_pool_change_compartment.Execute,
+	"oracle/streaming/stream_pool_create":                                             oracle_streaming_stream_pool_create.Execute,
+	"oracle/streaming/stream_pool_delete":                                             oracle_streaming_stream_pool_delete.Execute,
+	"oracle/streaming/stream_pool_get":                                                oracle_streaming_stream_pool_get.Execute,
+	"oracle/streaming/stream_pool_list":                                               oracle_streaming_stream_pool_list.Execute,
+	"oracle/streaming/stream_pool_update":                                             oracle_streaming_stream_pool_update.Execute,
+	"oracle/streaming/stream_update":                                                  oracle_streaming_stream_update.Execute,
+	"oracle/streaming/work_request_errors_list":                                       oracle_streaming_work_request_errors_list.Execute,
+	"oracle/streaming/work_request_get":                                               oracle_streaming_work_request_get.Execute,
+	"oracle/streaming/work_request_list":                                              oracle_streaming_work_request_list.Execute,
+	"oracle/streaming/work_request_logs_list":                                         oracle_streaming_work_request_logs_list.Execute,
 	"oracle/vault/decrypt":                                                            oracle_vault_decrypt.Execute,
 	"oracle/vault/encrypt":                                                            oracle_vault_encrypt.Execute,
 	"oracle/vault/export_key":                                                         oracle_vault_export_key.Execute,
