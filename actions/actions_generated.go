@@ -1835,6 +1835,55 @@ import (
 	oracle_dns_zone_records_patch "flomation.app/automate/executor/actions/oracle/dns/zone_records_patch"
 	oracle_dns_zone_records_update "flomation.app/automate/executor/actions/oracle/dns/zone_records_update"
 	oracle_dns_zone_update "flomation.app/automate/executor/actions/oracle/dns/zone_update"
+	oracle_filestorage_export_create "flomation.app/automate/executor/actions/oracle/filestorage/export_create"
+	oracle_filestorage_export_delete "flomation.app/automate/executor/actions/oracle/filestorage/export_delete"
+	oracle_filestorage_export_get "flomation.app/automate/executor/actions/oracle/filestorage/export_get"
+	oracle_filestorage_export_list "flomation.app/automate/executor/actions/oracle/filestorage/export_list"
+	oracle_filestorage_export_set_get "flomation.app/automate/executor/actions/oracle/filestorage/export_set_get"
+	oracle_filestorage_export_set_list "flomation.app/automate/executor/actions/oracle/filestorage/export_set_list"
+	oracle_filestorage_export_set_update "flomation.app/automate/executor/actions/oracle/filestorage/export_set_update"
+	oracle_filestorage_export_update "flomation.app/automate/executor/actions/oracle/filestorage/export_update"
+	oracle_filestorage_file_system_change_compartment "flomation.app/automate/executor/actions/oracle/filestorage/file_system_change_compartment"
+	oracle_filestorage_file_system_create "flomation.app/automate/executor/actions/oracle/filestorage/file_system_create"
+	oracle_filestorage_file_system_delete "flomation.app/automate/executor/actions/oracle/filestorage/file_system_delete"
+	oracle_filestorage_file_system_get "flomation.app/automate/executor/actions/oracle/filestorage/file_system_get"
+	oracle_filestorage_file_system_list "flomation.app/automate/executor/actions/oracle/filestorage/file_system_list"
+	oracle_filestorage_file_system_update "flomation.app/automate/executor/actions/oracle/filestorage/file_system_update"
+	oracle_filestorage_mount_target_change_compartment "flomation.app/automate/executor/actions/oracle/filestorage/mount_target_change_compartment"
+	oracle_filestorage_mount_target_create "flomation.app/automate/executor/actions/oracle/filestorage/mount_target_create"
+	oracle_filestorage_mount_target_delete "flomation.app/automate/executor/actions/oracle/filestorage/mount_target_delete"
+	oracle_filestorage_mount_target_downgrade_shape "flomation.app/automate/executor/actions/oracle/filestorage/mount_target_downgrade_shape"
+	oracle_filestorage_mount_target_get "flomation.app/automate/executor/actions/oracle/filestorage/mount_target_get"
+	oracle_filestorage_mount_target_list "flomation.app/automate/executor/actions/oracle/filestorage/mount_target_list"
+	oracle_filestorage_mount_target_update "flomation.app/automate/executor/actions/oracle/filestorage/mount_target_update"
+	oracle_filestorage_mount_target_upgrade_shape "flomation.app/automate/executor/actions/oracle/filestorage/mount_target_upgrade_shape"
+	oracle_filestorage_outbound_connector_create "flomation.app/automate/executor/actions/oracle/filestorage/outbound_connector_create"
+	oracle_filestorage_outbound_connector_delete "flomation.app/automate/executor/actions/oracle/filestorage/outbound_connector_delete"
+	oracle_filestorage_outbound_connector_get "flomation.app/automate/executor/actions/oracle/filestorage/outbound_connector_get"
+	oracle_filestorage_outbound_connector_list "flomation.app/automate/executor/actions/oracle/filestorage/outbound_connector_list"
+	oracle_filestorage_outbound_connector_update "flomation.app/automate/executor/actions/oracle/filestorage/outbound_connector_update"
+	oracle_filestorage_quota_rule_create "flomation.app/automate/executor/actions/oracle/filestorage/quota_rule_create"
+	oracle_filestorage_quota_rule_delete "flomation.app/automate/executor/actions/oracle/filestorage/quota_rule_delete"
+	oracle_filestorage_quota_rule_get "flomation.app/automate/executor/actions/oracle/filestorage/quota_rule_get"
+	oracle_filestorage_quota_rule_list "flomation.app/automate/executor/actions/oracle/filestorage/quota_rule_list"
+	oracle_filestorage_quota_rule_update "flomation.app/automate/executor/actions/oracle/filestorage/quota_rule_update"
+	oracle_filestorage_replication_create "flomation.app/automate/executor/actions/oracle/filestorage/replication_create"
+	oracle_filestorage_replication_delete "flomation.app/automate/executor/actions/oracle/filestorage/replication_delete"
+	oracle_filestorage_replication_get "flomation.app/automate/executor/actions/oracle/filestorage/replication_get"
+	oracle_filestorage_replication_list "flomation.app/automate/executor/actions/oracle/filestorage/replication_list"
+	oracle_filestorage_replication_target_get "flomation.app/automate/executor/actions/oracle/filestorage/replication_target_get"
+	oracle_filestorage_replication_target_list "flomation.app/automate/executor/actions/oracle/filestorage/replication_target_list"
+	oracle_filestorage_replication_update "flomation.app/automate/executor/actions/oracle/filestorage/replication_update"
+	oracle_filestorage_snapshot_create "flomation.app/automate/executor/actions/oracle/filestorage/snapshot_create"
+	oracle_filestorage_snapshot_delete "flomation.app/automate/executor/actions/oracle/filestorage/snapshot_delete"
+	oracle_filestorage_snapshot_get "flomation.app/automate/executor/actions/oracle/filestorage/snapshot_get"
+	oracle_filestorage_snapshot_list "flomation.app/automate/executor/actions/oracle/filestorage/snapshot_list"
+	oracle_filestorage_snapshot_policy_create "flomation.app/automate/executor/actions/oracle/filestorage/snapshot_policy_create"
+	oracle_filestorage_snapshot_policy_delete "flomation.app/automate/executor/actions/oracle/filestorage/snapshot_policy_delete"
+	oracle_filestorage_snapshot_policy_get "flomation.app/automate/executor/actions/oracle/filestorage/snapshot_policy_get"
+	oracle_filestorage_snapshot_policy_list "flomation.app/automate/executor/actions/oracle/filestorage/snapshot_policy_list"
+	oracle_filestorage_snapshot_policy_update "flomation.app/automate/executor/actions/oracle/filestorage/snapshot_policy_update"
+	oracle_filestorage_snapshot_update "flomation.app/automate/executor/actions/oracle/filestorage/snapshot_update"
 	oracle_identity_api_key_delete "flomation.app/automate/executor/actions/oracle/identity/api_key_delete"
 	oracle_identity_api_key_list "flomation.app/automate/executor/actions/oracle/identity/api_key_list"
 	oracle_identity_api_key_upload "flomation.app/automate/executor/actions/oracle/identity/api_key_upload"
@@ -4416,6 +4465,55 @@ var Actions = map[string]core.Action{
 	"oracle/dns/zone_records_patch":                                       oracle_dns_zone_records_patch.Execute,
 	"oracle/dns/zone_records_update":                                      oracle_dns_zone_records_update.Execute,
 	"oracle/dns/zone_update":                                              oracle_dns_zone_update.Execute,
+	"oracle/filestorage/export_create":                                    oracle_filestorage_export_create.Execute,
+	"oracle/filestorage/export_delete":                                    oracle_filestorage_export_delete.Execute,
+	"oracle/filestorage/export_get":                                       oracle_filestorage_export_get.Execute,
+	"oracle/filestorage/export_list":                                      oracle_filestorage_export_list.Execute,
+	"oracle/filestorage/export_set_get":                                   oracle_filestorage_export_set_get.Execute,
+	"oracle/filestorage/export_set_list":                                  oracle_filestorage_export_set_list.Execute,
+	"oracle/filestorage/export_set_update":                                oracle_filestorage_export_set_update.Execute,
+	"oracle/filestorage/export_update":                                    oracle_filestorage_export_update.Execute,
+	"oracle/filestorage/file_system_change_compartment":                   oracle_filestorage_file_system_change_compartment.Execute,
+	"oracle/filestorage/file_system_create":                               oracle_filestorage_file_system_create.Execute,
+	"oracle/filestorage/file_system_delete":                               oracle_filestorage_file_system_delete.Execute,
+	"oracle/filestorage/file_system_get":                                  oracle_filestorage_file_system_get.Execute,
+	"oracle/filestorage/file_system_list":                                 oracle_filestorage_file_system_list.Execute,
+	"oracle/filestorage/file_system_update":                               oracle_filestorage_file_system_update.Execute,
+	"oracle/filestorage/mount_target_change_compartment":                  oracle_filestorage_mount_target_change_compartment.Execute,
+	"oracle/filestorage/mount_target_create":                              oracle_filestorage_mount_target_create.Execute,
+	"oracle/filestorage/mount_target_delete":                              oracle_filestorage_mount_target_delete.Execute,
+	"oracle/filestorage/mount_target_downgrade_shape":                     oracle_filestorage_mount_target_downgrade_shape.Execute,
+	"oracle/filestorage/mount_target_get":                                 oracle_filestorage_mount_target_get.Execute,
+	"oracle/filestorage/mount_target_list":                                oracle_filestorage_mount_target_list.Execute,
+	"oracle/filestorage/mount_target_update":                              oracle_filestorage_mount_target_update.Execute,
+	"oracle/filestorage/mount_target_upgrade_shape":                       oracle_filestorage_mount_target_upgrade_shape.Execute,
+	"oracle/filestorage/outbound_connector_create":                        oracle_filestorage_outbound_connector_create.Execute,
+	"oracle/filestorage/outbound_connector_delete":                        oracle_filestorage_outbound_connector_delete.Execute,
+	"oracle/filestorage/outbound_connector_get":                           oracle_filestorage_outbound_connector_get.Execute,
+	"oracle/filestorage/outbound_connector_list":                          oracle_filestorage_outbound_connector_list.Execute,
+	"oracle/filestorage/outbound_connector_update":                        oracle_filestorage_outbound_connector_update.Execute,
+	"oracle/filestorage/quota_rule_create":                                oracle_filestorage_quota_rule_create.Execute,
+	"oracle/filestorage/quota_rule_delete":                                oracle_filestorage_quota_rule_delete.Execute,
+	"oracle/filestorage/quota_rule_get":                                   oracle_filestorage_quota_rule_get.Execute,
+	"oracle/filestorage/quota_rule_list":                                  oracle_filestorage_quota_rule_list.Execute,
+	"oracle/filestorage/quota_rule_update":                                oracle_filestorage_quota_rule_update.Execute,
+	"oracle/filestorage/replication_create":                               oracle_filestorage_replication_create.Execute,
+	"oracle/filestorage/replication_delete":                               oracle_filestorage_replication_delete.Execute,
+	"oracle/filestorage/replication_get":                                  oracle_filestorage_replication_get.Execute,
+	"oracle/filestorage/replication_list":                                 oracle_filestorage_replication_list.Execute,
+	"oracle/filestorage/replication_target_get":                           oracle_filestorage_replication_target_get.Execute,
+	"oracle/filestorage/replication_target_list":                          oracle_filestorage_replication_target_list.Execute,
+	"oracle/filestorage/replication_update":                               oracle_filestorage_replication_update.Execute,
+	"oracle/filestorage/snapshot_create":                                  oracle_filestorage_snapshot_create.Execute,
+	"oracle/filestorage/snapshot_delete":                                  oracle_filestorage_snapshot_delete.Execute,
+	"oracle/filestorage/snapshot_get":                                     oracle_filestorage_snapshot_get.Execute,
+	"oracle/filestorage/snapshot_list":                                    oracle_filestorage_snapshot_list.Execute,
+	"oracle/filestorage/snapshot_policy_create":                           oracle_filestorage_snapshot_policy_create.Execute,
+	"oracle/filestorage/snapshot_policy_delete":                           oracle_filestorage_snapshot_policy_delete.Execute,
+	"oracle/filestorage/snapshot_policy_get":                              oracle_filestorage_snapshot_policy_get.Execute,
+	"oracle/filestorage/snapshot_policy_list":                             oracle_filestorage_snapshot_policy_list.Execute,
+	"oracle/filestorage/snapshot_policy_update":                           oracle_filestorage_snapshot_policy_update.Execute,
+	"oracle/filestorage/snapshot_update":                                  oracle_filestorage_snapshot_update.Execute,
 	"oracle/identity/api_key_delete":                                      oracle_identity_api_key_delete.Execute,
 	"oracle/identity/api_key_list":                                        oracle_identity_api_key_list.Execute,
 	"oracle/identity/api_key_upload":                                      oracle_identity_api_key_upload.Execute,
