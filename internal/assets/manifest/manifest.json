@@ -288824,6 +288824,5743 @@
       }
     ]
   },
+  "oracle/containerengine/addon_disable": {
+    "hash": "0dbcd36e111a8f14143fa2af4b7b5b1cab5c2616ae59911d02431334307e703d",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "OCI Container Engine: Disable Add-on",
+    "description": "Disable a managed add-on on an Oracle Cloud OKE cluster, optionally removing its deployed resources. Asynchronous — returns a work-request id; poll Get Work Request until it completes.",
+    "website": "https://www.flomation.co",
+    "icon": "oracle+cubes",
+    "date": "22/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Oracle Cloud",
+      "icon": "oracle",
+      "description": "Oracle Cloud Infrastructure (OCI) integrations"
+    },
+    "sub_category": {
+      "name": "Container Engine",
+      "icon": "cubes",
+      "description": "Oracle Cloud Container Engine for Kubernetes (OKE) — provision and manage clusters, node pools and virtual node pools, install add-ons, generate kubeconfig, rotate credentials, and track asynchronous work requests"
+    },
+    "inputs": [
+      {
+        "name": "tenancy_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Tenancy OCID",
+        "placeholder": "ocid1.tenancy.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "user_ocid",
+        "type": "string",
+        "value": null,
+        "label": "User OCID",
+        "placeholder": "ocid1.user.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "e.g. uk-london-1",
+        "required": true
+      },
+      {
+        "name": "fingerprint",
+        "type": "string",
+        "value": null,
+        "label": "Key Fingerprint",
+        "placeholder": "aa:bb:cc:… fingerprint of the uploaded API key",
+        "required": true
+      },
+      {
+        "name": "private_key",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key (PEM)",
+        "placeholder": "The API signing private key — full PEM, incl. BEGIN/END lines"
+      },
+      {
+        "name": "private_key_passphrase",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key Passphrase",
+        "placeholder": "Only if the key is encrypted (optional)"
+      },
+      {
+        "name": "compartment_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Compartment OCID",
+        "placeholder": "ocid1.compartment.oc1..aaaa… (scopes the cluster picker)"
+      },
+      {
+        "name": "cluster_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Cluster OCID",
+        "placeholder": "ocid1.cluster.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "addon_name",
+        "type": "string",
+        "value": null,
+        "label": "Add-on Name",
+        "placeholder": "The add-on to disable, e.g. KubernetesDashboard",
+        "required": true
+      },
+      {
+        "name": "remove_existing",
+        "type": "boolean",
+        "value": null,
+        "label": "Remove Existing Add-on",
+        "placeholder": "Also delete the deployed add-on resources completely (optional)"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "work_request_id",
+        "type": "string",
+        "value": null,
+        "label": "Work Request OCID",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "oracle/containerengine/addon_get": {
+    "hash": "962384ae4fcc41674b92acfe8a0c1fe48e683c5ec5de2808b7e1da441ebda449",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "OCI Container Engine: Get Add-on",
+    "description": "Fetch a single add-on installed on an Oracle Cloud OKE cluster by name — its version, installed version, and lifecycle state.",
+    "website": "https://www.flomation.co",
+    "icon": "oracle+cubes",
+    "date": "22/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Oracle Cloud",
+      "icon": "oracle",
+      "description": "Oracle Cloud Infrastructure (OCI) integrations"
+    },
+    "sub_category": {
+      "name": "Container Engine",
+      "icon": "cubes",
+      "description": "Oracle Cloud Container Engine for Kubernetes (OKE) — provision and manage clusters, node pools and virtual node pools, install add-ons, generate kubeconfig, rotate credentials, and track asynchronous work requests"
+    },
+    "inputs": [
+      {
+        "name": "tenancy_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Tenancy OCID",
+        "placeholder": "ocid1.tenancy.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "user_ocid",
+        "type": "string",
+        "value": null,
+        "label": "User OCID",
+        "placeholder": "ocid1.user.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "e.g. uk-london-1",
+        "required": true
+      },
+      {
+        "name": "fingerprint",
+        "type": "string",
+        "value": null,
+        "label": "Key Fingerprint",
+        "placeholder": "aa:bb:cc:… fingerprint of the uploaded API key",
+        "required": true
+      },
+      {
+        "name": "private_key",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key (PEM)",
+        "placeholder": "The API signing private key — full PEM, incl. BEGIN/END lines"
+      },
+      {
+        "name": "private_key_passphrase",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key Passphrase",
+        "placeholder": "Only if the key is encrypted (optional)"
+      },
+      {
+        "name": "compartment_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Compartment OCID",
+        "placeholder": "ocid1.compartment.oc1..aaaa… (scopes the picker)"
+      },
+      {
+        "name": "cluster_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Cluster OCID",
+        "placeholder": "ocid1.cluster.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "addon_name",
+        "type": "string",
+        "value": null,
+        "label": "Add-on Name",
+        "placeholder": "e.g. KubernetesDashboard",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "addon",
+        "type": "object",
+        "value": null,
+        "label": "Add-on",
+        "placeholder": ""
+      },
+      {
+        "name": "name",
+        "type": "string",
+        "value": null,
+        "label": "Add-on Name",
+        "placeholder": ""
+      },
+      {
+        "name": "lifecycle_state",
+        "type": "string",
+        "value": null,
+        "label": "Lifecycle State",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "oracle/containerengine/addon_install": {
+    "hash": "e331e84c977a7c971717ffdb32eb4cacf8e1d8f69c112382de6d459d098992f5",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "OCI Container Engine: Install Add-on",
+    "description": "Install (enable) a managed add-on such as CertManager or KubernetesDashboard on an Oracle Cloud OKE cluster. Asynchronous — returns a work-request id; poll Get Work Request until it completes.",
+    "website": "https://www.flomation.co",
+    "icon": "oracle+cubes",
+    "date": "22/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Oracle Cloud",
+      "icon": "oracle",
+      "description": "Oracle Cloud Infrastructure (OCI) integrations"
+    },
+    "sub_category": {
+      "name": "Container Engine",
+      "icon": "cubes",
+      "description": "Oracle Cloud Container Engine for Kubernetes (OKE) — provision and manage clusters, node pools and virtual node pools, install add-ons, generate kubeconfig, rotate credentials, and track asynchronous work requests"
+    },
+    "inputs": [
+      {
+        "name": "tenancy_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Tenancy OCID",
+        "placeholder": "ocid1.tenancy.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "user_ocid",
+        "type": "string",
+        "value": null,
+        "label": "User OCID",
+        "placeholder": "ocid1.user.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "e.g. uk-london-1",
+        "required": true
+      },
+      {
+        "name": "fingerprint",
+        "type": "string",
+        "value": null,
+        "label": "Key Fingerprint",
+        "placeholder": "aa:bb:cc:… fingerprint of the uploaded API key",
+        "required": true
+      },
+      {
+        "name": "private_key",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key (PEM)",
+        "placeholder": "The API signing private key — full PEM, incl. BEGIN/END lines"
+      },
+      {
+        "name": "private_key_passphrase",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key Passphrase",
+        "placeholder": "Only if the key is encrypted (optional)"
+      },
+      {
+        "name": "compartment_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Compartment OCID",
+        "placeholder": "ocid1.compartment.oc1..aaaa… (scopes the picker)"
+      },
+      {
+        "name": "cluster_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Cluster OCID",
+        "placeholder": "ocid1.cluster.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "addon_name",
+        "type": "string",
+        "value": null,
+        "label": "Add-on Name",
+        "placeholder": "e.g. CertManager or KubernetesDashboard",
+        "required": true
+      },
+      {
+        "name": "version",
+        "type": "string",
+        "value": null,
+        "label": "Add-on Version",
+        "placeholder": "Specific add-on version to install (optional — defaults to latest)"
+      },
+      {
+        "name": "override_existing",
+        "type": "boolean",
+        "value": null,
+        "label": "Override Existing",
+        "placeholder": "Override an existing installation of this add-on (optional, default false)"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "work_request_id",
+        "type": "string",
+        "value": null,
+        "label": "Work Request OCID",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "oracle/containerengine/addon_list": {
+    "hash": "451f5b4baf4c879db7185c8fb033249bff250d2b7806a54dcffa6188fbc1b4f3",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "OCI Container Engine: List Add-ons",
+    "description": "List the add-ons installed on an Oracle Cloud OKE cluster. Walks pagination up to a safe cap.",
+    "website": "https://www.flomation.co",
+    "icon": "oracle+cubes",
+    "date": "22/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Oracle Cloud",
+      "icon": "oracle",
+      "description": "Oracle Cloud Infrastructure (OCI) integrations"
+    },
+    "sub_category": {
+      "name": "Container Engine",
+      "icon": "cubes",
+      "description": "Oracle Cloud Container Engine for Kubernetes (OKE) — provision and manage clusters, node pools and virtual node pools, install add-ons, generate kubeconfig, rotate credentials, and track asynchronous work requests"
+    },
+    "inputs": [
+      {
+        "name": "tenancy_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Tenancy OCID",
+        "placeholder": "ocid1.tenancy.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "user_ocid",
+        "type": "string",
+        "value": null,
+        "label": "User OCID",
+        "placeholder": "ocid1.user.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "e.g. uk-london-1",
+        "required": true
+      },
+      {
+        "name": "fingerprint",
+        "type": "string",
+        "value": null,
+        "label": "Key Fingerprint",
+        "placeholder": "aa:bb:cc:… fingerprint of the uploaded API key",
+        "required": true
+      },
+      {
+        "name": "private_key",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key (PEM)",
+        "placeholder": "The API signing private key — full PEM, incl. BEGIN/END lines"
+      },
+      {
+        "name": "private_key_passphrase",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key Passphrase",
+        "placeholder": "Only if the key is encrypted (optional)"
+      },
+      {
+        "name": "compartment_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Compartment OCID",
+        "placeholder": "ocid1.compartment.oc1..aaaa… (scopes the picker)"
+      },
+      {
+        "name": "cluster_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Cluster OCID",
+        "placeholder": "ocid1.cluster.oc1..aaaa…",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "addons",
+        "type": "object",
+        "value": null,
+        "label": "Add-ons",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "string",
+        "value": null,
+        "label": "Count",
+        "placeholder": ""
+      },
+      {
+        "name": "truncated",
+        "type": "boolean",
+        "value": null,
+        "label": "Truncated",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "oracle/containerengine/addon_options_list": {
+    "hash": "619dc9a9b7a321f53cced0267097a1ebb4c5d94e37146605b1905ac9f4d0fe48",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "OCI Container Engine: List Add-on Options",
+    "description": "List the Oracle Cloud OKE add-ons available for a given Kubernetes version. Walks pagination up to a safe cap.",
+    "website": "https://www.flomation.co",
+    "icon": "oracle+cubes",
+    "date": "22/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Oracle Cloud",
+      "icon": "oracle",
+      "description": "Oracle Cloud Infrastructure (OCI) integrations"
+    },
+    "sub_category": {
+      "name": "Container Engine",
+      "icon": "cubes",
+      "description": "Oracle Cloud Container Engine for Kubernetes (OKE) — provision and manage clusters, node pools and virtual node pools, install add-ons, generate kubeconfig, rotate credentials, and track asynchronous work requests"
+    },
+    "inputs": [
+      {
+        "name": "tenancy_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Tenancy OCID",
+        "placeholder": "ocid1.tenancy.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "user_ocid",
+        "type": "string",
+        "value": null,
+        "label": "User OCID",
+        "placeholder": "ocid1.user.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "e.g. uk-london-1",
+        "required": true
+      },
+      {
+        "name": "fingerprint",
+        "type": "string",
+        "value": null,
+        "label": "Key Fingerprint",
+        "placeholder": "aa:bb:cc:… fingerprint of the uploaded API key",
+        "required": true
+      },
+      {
+        "name": "private_key",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key (PEM)",
+        "placeholder": "The API signing private key — full PEM, incl. BEGIN/END lines"
+      },
+      {
+        "name": "private_key_passphrase",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key Passphrase",
+        "placeholder": "Only if the key is encrypted (optional)"
+      },
+      {
+        "name": "compartment_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Compartment OCID",
+        "placeholder": "ocid1.compartment.oc1..aaaa… (scopes the picker; this API takes no compartment)"
+      },
+      {
+        "name": "kubernetes_version",
+        "type": "string",
+        "value": null,
+        "label": "Kubernetes Version",
+        "placeholder": "e.g. v1.30.1 — the version to fetch add-ons for",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "addon_options",
+        "type": "object",
+        "value": null,
+        "label": "Add-on Options",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "string",
+        "value": null,
+        "label": "Count",
+        "placeholder": ""
+      },
+      {
+        "name": "truncated",
+        "type": "boolean",
+        "value": null,
+        "label": "Truncated",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "oracle/containerengine/addon_update": {
+    "hash": "047f93d69dee82b71a2eb2a36cf5b23b9a44b3dc911f416d5632b1b2a64d2b34",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "OCI Container Engine: Update Add-on",
+    "description": "Change the version of an add-on installed on an Oracle Cloud OKE cluster — returns a work request to poll until the update completes.",
+    "website": "https://www.flomation.co",
+    "icon": "oracle+cubes",
+    "date": "22/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Oracle Cloud",
+      "icon": "oracle",
+      "description": "Oracle Cloud Infrastructure (OCI) integrations"
+    },
+    "sub_category": {
+      "name": "Container Engine",
+      "icon": "cubes",
+      "description": "Oracle Cloud Container Engine for Kubernetes (OKE) — provision and manage clusters, node pools and virtual node pools, install add-ons, generate kubeconfig, rotate credentials, and track asynchronous work requests"
+    },
+    "inputs": [
+      {
+        "name": "tenancy_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Tenancy OCID",
+        "placeholder": "ocid1.tenancy.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "user_ocid",
+        "type": "string",
+        "value": null,
+        "label": "User OCID",
+        "placeholder": "ocid1.user.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "e.g. uk-london-1",
+        "required": true
+      },
+      {
+        "name": "fingerprint",
+        "type": "string",
+        "value": null,
+        "label": "Key Fingerprint",
+        "placeholder": "aa:bb:cc:… fingerprint of the uploaded API key",
+        "required": true
+      },
+      {
+        "name": "private_key",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key (PEM)",
+        "placeholder": "The API signing private key — full PEM, incl. BEGIN/END lines"
+      },
+      {
+        "name": "private_key_passphrase",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key Passphrase",
+        "placeholder": "Only if the key is encrypted (optional)"
+      },
+      {
+        "name": "compartment_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Compartment OCID",
+        "placeholder": "ocid1.compartment.oc1..aaaa… (scopes the picker)"
+      },
+      {
+        "name": "cluster_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Cluster OCID",
+        "placeholder": "ocid1.cluster.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "addon_name",
+        "type": "string",
+        "value": null,
+        "label": "Add-on Name",
+        "placeholder": "e.g. KubernetesDashboard",
+        "required": true
+      },
+      {
+        "name": "version",
+        "type": "string",
+        "value": null,
+        "label": "Version",
+        "placeholder": "The add-on version to install (optional — omit to keep current)"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "work_request_id",
+        "type": "string",
+        "value": null,
+        "label": "Work Request OCID",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "oracle/containerengine/cluster_create": {
+    "hash": "ca647fbc64e7a2a9e5bd26acd985e937d7c91e97331433287922c85f2859cfab",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "OCI Container Engine: Create Cluster",
+    "description": "Provision a new Oracle Cloud OKE Kubernetes cluster in a VCN. Asynchronous — returns a work-request id; poll Get Work Request until it completes, then Get Cluster for the API endpoints.",
+    "website": "https://www.flomation.co",
+    "icon": "oracle+cubes",
+    "date": "22/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Oracle Cloud",
+      "icon": "oracle",
+      "description": "Oracle Cloud Infrastructure (OCI) integrations"
+    },
+    "sub_category": {
+      "name": "Container Engine",
+      "icon": "cubes",
+      "description": "Oracle Cloud Container Engine for Kubernetes (OKE) — provision and manage clusters, node pools and virtual node pools, install add-ons, generate kubeconfig, rotate credentials, and track asynchronous work requests"
+    },
+    "inputs": [
+      {
+        "name": "tenancy_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Tenancy OCID",
+        "placeholder": "ocid1.tenancy.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "user_ocid",
+        "type": "string",
+        "value": null,
+        "label": "User OCID",
+        "placeholder": "ocid1.user.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "e.g. uk-london-1",
+        "required": true
+      },
+      {
+        "name": "fingerprint",
+        "type": "string",
+        "value": null,
+        "label": "Key Fingerprint",
+        "placeholder": "aa:bb:cc:… fingerprint of the uploaded API key",
+        "required": true
+      },
+      {
+        "name": "private_key",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key (PEM)",
+        "placeholder": "The API signing private key — full PEM, incl. BEGIN/END lines"
+      },
+      {
+        "name": "private_key_passphrase",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key Passphrase",
+        "placeholder": "Only if the key is encrypted (optional)"
+      },
+      {
+        "name": "compartment_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Compartment OCID",
+        "placeholder": "ocid1.compartment.oc1..aaaa… (use the tenancy OCID for the root)",
+        "required": true
+      },
+      {
+        "name": "name",
+        "type": "string",
+        "value": null,
+        "label": "Cluster Name",
+        "placeholder": "A name for the cluster",
+        "required": true
+      },
+      {
+        "name": "vcn_ocid",
+        "type": "string",
+        "value": null,
+        "label": "VCN OCID",
+        "placeholder": "ocid1.vcn.oc1..aaaa… the cluster runs in",
+        "required": true
+      },
+      {
+        "name": "kubernetes_version",
+        "type": "string",
+        "value": null,
+        "label": "Kubernetes Version",
+        "placeholder": "e.g. v1.30.1 (see Get Cluster Options for the supported list)",
+        "required": true
+      },
+      {
+        "name": "endpoint_subnet_ocid",
+        "type": "string",
+        "value": null,
+        "label": "API Endpoint Subnet OCID",
+        "placeholder": "ocid1.subnet.oc1..aaaa… the Kubernetes API endpoint lives in (recommended)"
+      },
+      {
+        "name": "endpoint_public_ip",
+        "type": "boolean",
+        "value": null,
+        "label": "Public API Endpoint",
+        "placeholder": "Give the Kubernetes API endpoint a public IP (only with an endpoint subnet)"
+      },
+      {
+        "name": "cluster_type",
+        "type": "string",
+        "value": null,
+        "label": "Cluster Type",
+        "placeholder": "ENHANCED_CLUSTER (default) or BASIC_CLUSTER",
+        "options": [
+          {
+            "name": "Enhanced",
+            "value": "ENHANCED_CLUSTER"
+          },
+          {
+            "name": "Basic",
+            "value": "BASIC_CLUSTER"
+          }
+        ]
+      },
+      {
+        "name": "service_lb_subnet_ocids",
+        "type": "string",
+        "value": null,
+        "label": "Service LB Subnet OCIDs",
+        "placeholder": "Comma-separated subnet OCIDs for load-balancer services (optional)"
+      },
+      {
+        "name": "kms_key_ocid",
+        "type": "string",
+        "value": null,
+        "label": "KMS Key OCID",
+        "placeholder": "ocid1.key.oc1..aaaa… to encrypt etcd/secrets (optional)"
+      },
+      {
+        "name": "tags",
+        "type": "string",
+        "value": null,
+        "label": "Freeform Tags (JSON)",
+        "placeholder": "{\"env\":\"prod\"} (optional)"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "work_request_id",
+        "type": "string",
+        "value": null,
+        "label": "Work Request OCID",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "oracle/containerengine/cluster_delete": {
+    "hash": "8a0bf89d29f3af9d95052539998a3276148c219ac8738ed7af3c630648cd988e",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "OCI Container Engine: Delete Cluster",
+    "description": "Delete an Oracle Cloud OKE Kubernetes cluster by OCID. Asynchronous — returns a work-request id; poll Get Work Request until the deletion completes.",
+    "website": "https://www.flomation.co",
+    "icon": "oracle+cubes",
+    "date": "22/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Oracle Cloud",
+      "icon": "oracle",
+      "description": "Oracle Cloud Infrastructure (OCI) integrations"
+    },
+    "sub_category": {
+      "name": "Container Engine",
+      "icon": "cubes",
+      "description": "Oracle Cloud Container Engine for Kubernetes (OKE) — provision and manage clusters, node pools and virtual node pools, install add-ons, generate kubeconfig, rotate credentials, and track asynchronous work requests"
+    },
+    "inputs": [
+      {
+        "name": "tenancy_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Tenancy OCID",
+        "placeholder": "ocid1.tenancy.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "user_ocid",
+        "type": "string",
+        "value": null,
+        "label": "User OCID",
+        "placeholder": "ocid1.user.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "e.g. uk-london-1",
+        "required": true
+      },
+      {
+        "name": "fingerprint",
+        "type": "string",
+        "value": null,
+        "label": "Key Fingerprint",
+        "placeholder": "aa:bb:cc:… fingerprint of the uploaded API key",
+        "required": true
+      },
+      {
+        "name": "private_key",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key (PEM)",
+        "placeholder": "The API signing private key — full PEM, incl. BEGIN/END lines"
+      },
+      {
+        "name": "private_key_passphrase",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key Passphrase",
+        "placeholder": "Only if the key is encrypted (optional)"
+      },
+      {
+        "name": "compartment_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Compartment OCID",
+        "placeholder": "ocid1.compartment.oc1..aaaa… (scopes the cluster picker)"
+      },
+      {
+        "name": "cluster_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Cluster OCID",
+        "placeholder": "ocid1.cluster.oc1..aaaa…",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "work_request_id",
+        "type": "string",
+        "value": null,
+        "label": "Work Request OCID",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "oracle/containerengine/cluster_get": {
+    "hash": "a3c5e5a8dd64e3a7cc1d02897f014158f7ea6677e06344acda4d442550d3b19f",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "OCI Container Engine: Get Cluster",
+    "description": "Fetch a single Oracle Cloud OKE cluster by OCID — its Kubernetes version, lifecycle state, and public/private API endpoints.",
+    "website": "https://www.flomation.co",
+    "icon": "oracle+cubes",
+    "date": "22/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Oracle Cloud",
+      "icon": "oracle",
+      "description": "Oracle Cloud Infrastructure (OCI) integrations"
+    },
+    "sub_category": {
+      "name": "Container Engine",
+      "icon": "cubes",
+      "description": "Oracle Cloud Container Engine for Kubernetes (OKE) — provision and manage clusters, node pools and virtual node pools, install add-ons, generate kubeconfig, rotate credentials, and track asynchronous work requests"
+    },
+    "inputs": [
+      {
+        "name": "tenancy_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Tenancy OCID",
+        "placeholder": "ocid1.tenancy.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "user_ocid",
+        "type": "string",
+        "value": null,
+        "label": "User OCID",
+        "placeholder": "ocid1.user.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "e.g. uk-london-1",
+        "required": true
+      },
+      {
+        "name": "fingerprint",
+        "type": "string",
+        "value": null,
+        "label": "Key Fingerprint",
+        "placeholder": "aa:bb:cc:… fingerprint of the uploaded API key",
+        "required": true
+      },
+      {
+        "name": "private_key",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key (PEM)",
+        "placeholder": "The API signing private key — full PEM, incl. BEGIN/END lines"
+      },
+      {
+        "name": "private_key_passphrase",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key Passphrase",
+        "placeholder": "Only if the key is encrypted (optional)"
+      },
+      {
+        "name": "compartment_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Compartment OCID",
+        "placeholder": "ocid1.compartment.oc1..aaaa… (scopes the cluster picker)"
+      },
+      {
+        "name": "cluster_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Cluster OCID",
+        "placeholder": "ocid1.cluster.oc1..aaaa…",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "cluster",
+        "type": "object",
+        "value": null,
+        "label": "Cluster",
+        "placeholder": ""
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Cluster OCID",
+        "placeholder": ""
+      },
+      {
+        "name": "lifecycle_state",
+        "type": "string",
+        "value": null,
+        "label": "Lifecycle State",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "oracle/containerengine/cluster_list": {
+    "hash": "5bba92f0d40942698f0a0d2011e7339cb56d41c55cdceb41fc5c661efbb417a3",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "OCI Container Engine: List Clusters",
+    "description": "List the Oracle Cloud OKE clusters in a compartment. Walks pagination up to a safe cap.",
+    "website": "https://www.flomation.co",
+    "icon": "oracle+cubes",
+    "date": "22/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Oracle Cloud",
+      "icon": "oracle",
+      "description": "Oracle Cloud Infrastructure (OCI) integrations"
+    },
+    "sub_category": {
+      "name": "Container Engine",
+      "icon": "cubes",
+      "description": "Oracle Cloud Container Engine for Kubernetes (OKE) — provision and manage clusters, node pools and virtual node pools, install add-ons, generate kubeconfig, rotate credentials, and track asynchronous work requests"
+    },
+    "inputs": [
+      {
+        "name": "tenancy_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Tenancy OCID",
+        "placeholder": "ocid1.tenancy.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "user_ocid",
+        "type": "string",
+        "value": null,
+        "label": "User OCID",
+        "placeholder": "ocid1.user.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "e.g. uk-london-1",
+        "required": true
+      },
+      {
+        "name": "fingerprint",
+        "type": "string",
+        "value": null,
+        "label": "Key Fingerprint",
+        "placeholder": "aa:bb:cc:… fingerprint of the uploaded API key",
+        "required": true
+      },
+      {
+        "name": "private_key",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key (PEM)",
+        "placeholder": "The API signing private key — full PEM, incl. BEGIN/END lines"
+      },
+      {
+        "name": "private_key_passphrase",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key Passphrase",
+        "placeholder": "Only if the key is encrypted (optional)"
+      },
+      {
+        "name": "compartment_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Compartment OCID",
+        "placeholder": "ocid1.compartment.oc1..aaaa… (use the tenancy OCID for the root)",
+        "required": true
+      },
+      {
+        "name": "name",
+        "type": "string",
+        "value": null,
+        "label": "Name Filter",
+        "placeholder": "Only clusters with this exact name (optional)"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "clusters",
+        "type": "object",
+        "value": null,
+        "label": "Clusters",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "string",
+        "value": null,
+        "label": "Count",
+        "placeholder": ""
+      },
+      {
+        "name": "truncated",
+        "type": "boolean",
+        "value": null,
+        "label": "Truncated",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "oracle/containerengine/cluster_options_get": {
+    "hash": "53675aafdc3ca0318cf26827ec46ab2616c0e3207f06ee99de0ffd9268bcc130",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "OCI Container Engine: Get Cluster Options",
+    "description": "List the Kubernetes versions available for new Oracle Cloud OKE clusters in a compartment.",
+    "website": "https://www.flomation.co",
+    "icon": "oracle+cubes",
+    "date": "22/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Oracle Cloud",
+      "icon": "oracle",
+      "description": "Oracle Cloud Infrastructure (OCI) integrations"
+    },
+    "sub_category": {
+      "name": "Container Engine",
+      "icon": "cubes",
+      "description": "Oracle Cloud Container Engine for Kubernetes (OKE) — provision and manage clusters, node pools and virtual node pools, install add-ons, generate kubeconfig, rotate credentials, and track asynchronous work requests"
+    },
+    "inputs": [
+      {
+        "name": "tenancy_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Tenancy OCID",
+        "placeholder": "ocid1.tenancy.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "user_ocid",
+        "type": "string",
+        "value": null,
+        "label": "User OCID",
+        "placeholder": "ocid1.user.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "e.g. uk-london-1",
+        "required": true
+      },
+      {
+        "name": "fingerprint",
+        "type": "string",
+        "value": null,
+        "label": "Key Fingerprint",
+        "placeholder": "aa:bb:cc:… fingerprint of the uploaded API key",
+        "required": true
+      },
+      {
+        "name": "private_key",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key (PEM)",
+        "placeholder": "The API signing private key — full PEM, incl. BEGIN/END lines"
+      },
+      {
+        "name": "private_key_passphrase",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key Passphrase",
+        "placeholder": "Only if the key is encrypted (optional)"
+      },
+      {
+        "name": "compartment_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Compartment OCID",
+        "placeholder": "ocid1.compartment.oc1..aaaa… (use the tenancy OCID for the root)",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "kubernetes_versions",
+        "type": "object",
+        "value": null,
+        "label": "Kubernetes Versions",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "oracle/containerengine/cluster_update": {
+    "hash": "7ceaec7d543f6938379eb8635c2ea926b77e871fcc0a699b6a70ae00f6524c67",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "OCI Container Engine: Update Cluster",
+    "description": "Rename an Oracle Cloud OKE cluster and/or upgrade its Kubernetes control-plane version. Asynchronous — returns a work-request id; poll Get Work Request until it completes.",
+    "website": "https://www.flomation.co",
+    "icon": "oracle+cubes",
+    "date": "22/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Oracle Cloud",
+      "icon": "oracle",
+      "description": "Oracle Cloud Infrastructure (OCI) integrations"
+    },
+    "sub_category": {
+      "name": "Container Engine",
+      "icon": "cubes",
+      "description": "Oracle Cloud Container Engine for Kubernetes (OKE) — provision and manage clusters, node pools and virtual node pools, install add-ons, generate kubeconfig, rotate credentials, and track asynchronous work requests"
+    },
+    "inputs": [
+      {
+        "name": "tenancy_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Tenancy OCID",
+        "placeholder": "ocid1.tenancy.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "user_ocid",
+        "type": "string",
+        "value": null,
+        "label": "User OCID",
+        "placeholder": "ocid1.user.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "e.g. uk-london-1",
+        "required": true
+      },
+      {
+        "name": "fingerprint",
+        "type": "string",
+        "value": null,
+        "label": "Key Fingerprint",
+        "placeholder": "aa:bb:cc:… fingerprint of the uploaded API key",
+        "required": true
+      },
+      {
+        "name": "private_key",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key (PEM)",
+        "placeholder": "The API signing private key — full PEM, incl. BEGIN/END lines"
+      },
+      {
+        "name": "private_key_passphrase",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key Passphrase",
+        "placeholder": "Only if the key is encrypted (optional)"
+      },
+      {
+        "name": "compartment_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Compartment OCID",
+        "placeholder": "ocid1.compartment.oc1..aaaa… (scopes the cluster picker)"
+      },
+      {
+        "name": "cluster_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Cluster OCID",
+        "placeholder": "ocid1.cluster.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "name",
+        "type": "string",
+        "value": null,
+        "label": "New Cluster Name",
+        "placeholder": "Rename the cluster (optional)"
+      },
+      {
+        "name": "kubernetes_version",
+        "type": "string",
+        "value": null,
+        "label": "Kubernetes Version",
+        "placeholder": "e.g. v1.30.1 — upgrade the control plane (optional; see Get Cluster Options)"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "work_request_id",
+        "type": "string",
+        "value": null,
+        "label": "Work Request OCID",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "oracle/containerengine/cluster_update_endpoint_config": {
+    "hash": "dfbb84b0d1fd6acd42417aec8c4045be70a2e11c4cb9ddd033bb62eb493ed93a",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "OCI Container Engine: Update Cluster Endpoint Config",
+    "description": "Update the Kubernetes API endpoint network config of an Oracle Cloud OKE cluster — public-IP assignment, network security groups, and subnet. Asynchronous — returns a work-request id; poll Get Work Request until it completes.",
+    "website": "https://www.flomation.co",
+    "icon": "oracle+cubes",
+    "date": "22/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Oracle Cloud",
+      "icon": "oracle",
+      "description": "Oracle Cloud Infrastructure (OCI) integrations"
+    },
+    "sub_category": {
+      "name": "Container Engine",
+      "icon": "cubes",
+      "description": "Oracle Cloud Container Engine for Kubernetes (OKE) — provision and manage clusters, node pools and virtual node pools, install add-ons, generate kubeconfig, rotate credentials, and track asynchronous work requests"
+    },
+    "inputs": [
+      {
+        "name": "tenancy_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Tenancy OCID",
+        "placeholder": "ocid1.tenancy.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "user_ocid",
+        "type": "string",
+        "value": null,
+        "label": "User OCID",
+        "placeholder": "ocid1.user.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "e.g. uk-london-1",
+        "required": true
+      },
+      {
+        "name": "fingerprint",
+        "type": "string",
+        "value": null,
+        "label": "Key Fingerprint",
+        "placeholder": "aa:bb:cc:… fingerprint of the uploaded API key",
+        "required": true
+      },
+      {
+        "name": "private_key",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key (PEM)",
+        "placeholder": "The API signing private key — full PEM, incl. BEGIN/END lines"
+      },
+      {
+        "name": "private_key_passphrase",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key Passphrase",
+        "placeholder": "Only if the key is encrypted (optional)"
+      },
+      {
+        "name": "compartment_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Compartment OCID",
+        "placeholder": "ocid1.compartment.oc1..aaaa… (scopes the cluster picker)"
+      },
+      {
+        "name": "cluster_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Cluster OCID",
+        "placeholder": "ocid1.cluster.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "is_public_ip_enabled",
+        "type": "boolean",
+        "value": null,
+        "label": "Assign Public IP",
+        "placeholder": "Whether the endpoint gets a public IP (leave unset to keep current)"
+      },
+      {
+        "name": "nsg_ocids",
+        "type": "string",
+        "value": null,
+        "label": "Network Security Group OCIDs",
+        "placeholder": "Comma-separated NSG OCIDs to apply to the endpoint (optional)"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "work_request_id",
+        "type": "string",
+        "value": null,
+        "label": "Work Request OCID",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "oracle/containerengine/credential_rotation_complete": {
+    "hash": "1aebb47961d68cd1b30a8ea7b27ad0430bfad2528d1b4f62a17568aeb8c59db0",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "OCI Container Engine: Complete Credential Rotation",
+    "description": "Finalise a credential rotation on an Oracle Cloud OKE cluster, retiring the superseded key and certificate material.",
+    "website": "https://www.flomation.co",
+    "icon": "oracle+cubes",
+    "date": "22/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Oracle Cloud",
+      "icon": "oracle",
+      "description": "Oracle Cloud Infrastructure (OCI) integrations"
+    },
+    "sub_category": {
+      "name": "Container Engine",
+      "icon": "cubes",
+      "description": "Oracle Cloud Container Engine for Kubernetes (OKE) — provision and manage clusters, node pools and virtual node pools, install add-ons, generate kubeconfig, rotate credentials, and track asynchronous work requests"
+    },
+    "inputs": [
+      {
+        "name": "tenancy_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Tenancy OCID",
+        "placeholder": "ocid1.tenancy.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "user_ocid",
+        "type": "string",
+        "value": null,
+        "label": "User OCID",
+        "placeholder": "ocid1.user.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "e.g. uk-london-1",
+        "required": true
+      },
+      {
+        "name": "fingerprint",
+        "type": "string",
+        "value": null,
+        "label": "Key Fingerprint",
+        "placeholder": "aa:bb:cc:… fingerprint of the uploaded API key",
+        "required": true
+      },
+      {
+        "name": "private_key",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key (PEM)",
+        "placeholder": "The API signing private key — full PEM, incl. BEGIN/END lines"
+      },
+      {
+        "name": "private_key_passphrase",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key Passphrase",
+        "placeholder": "Only if the key is encrypted (optional)"
+      },
+      {
+        "name": "compartment_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Compartment OCID",
+        "placeholder": "ocid1.compartment.oc1..aaaa… (scopes the cluster picker)"
+      },
+      {
+        "name": "cluster_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Cluster OCID",
+        "placeholder": "ocid1.cluster.oc1..aaaa…",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "work_request_id",
+        "type": "string",
+        "value": null,
+        "label": "Work Request OCID",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "oracle/containerengine/credential_rotation_start": {
+    "hash": "17b8815356f8a501fdb60ee438d22809d77c1df81e9faf0601546585f3c51986",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "OCI Container Engine: Start Credential Rotation",
+    "description": "Begin rotating an Oracle Cloud OKE cluster's credentials. Asynchronous — returns a work-request id; poll Get Work Request until it completes.",
+    "website": "https://www.flomation.co",
+    "icon": "oracle+cubes",
+    "date": "22/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Oracle Cloud",
+      "icon": "oracle",
+      "description": "Oracle Cloud Infrastructure (OCI) integrations"
+    },
+    "sub_category": {
+      "name": "Container Engine",
+      "icon": "cubes",
+      "description": "Oracle Cloud Container Engine for Kubernetes (OKE) — provision and manage clusters, node pools and virtual node pools, install add-ons, generate kubeconfig, rotate credentials, and track asynchronous work requests"
+    },
+    "inputs": [
+      {
+        "name": "tenancy_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Tenancy OCID",
+        "placeholder": "ocid1.tenancy.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "user_ocid",
+        "type": "string",
+        "value": null,
+        "label": "User OCID",
+        "placeholder": "ocid1.user.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "e.g. uk-london-1",
+        "required": true
+      },
+      {
+        "name": "fingerprint",
+        "type": "string",
+        "value": null,
+        "label": "Key Fingerprint",
+        "placeholder": "aa:bb:cc:… fingerprint of the uploaded API key",
+        "required": true
+      },
+      {
+        "name": "private_key",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key (PEM)",
+        "placeholder": "The API signing private key — full PEM, incl. BEGIN/END lines"
+      },
+      {
+        "name": "private_key_passphrase",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key Passphrase",
+        "placeholder": "Only if the key is encrypted (optional)"
+      },
+      {
+        "name": "compartment_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Compartment OCID",
+        "placeholder": "ocid1.compartment.oc1..aaaa… (scopes the cluster picker)"
+      },
+      {
+        "name": "cluster_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Cluster OCID",
+        "placeholder": "ocid1.cluster.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "auto_completion_delay_duration",
+        "type": "string",
+        "value": null,
+        "label": "Auto-Completion Delay",
+        "placeholder": "ISO-8601 days after which old credentials retire, e.g. P3D (max P90D, optional)"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "work_request_id",
+        "type": "string",
+        "value": null,
+        "label": "Work Request OCID",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "oracle/containerengine/credential_rotation_status_get": {
+    "hash": "91bb05dffc66735caf8530eb74d10aba64163c1fe9fec1a0bfd56942d69c736e",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "OCI Container Engine: Get Credential Rotation Status",
+    "description": "Check the credential rotation status of an Oracle Cloud OKE cluster — whether a rotation is in progress, waiting, or completed, and when auto-completion is scheduled.",
+    "website": "https://www.flomation.co",
+    "icon": "oracle+cubes",
+    "date": "22/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Oracle Cloud",
+      "icon": "oracle",
+      "description": "Oracle Cloud Infrastructure (OCI) integrations"
+    },
+    "sub_category": {
+      "name": "Container Engine",
+      "icon": "cubes",
+      "description": "Oracle Cloud Container Engine for Kubernetes (OKE) — provision and manage clusters, node pools and virtual node pools, install add-ons, generate kubeconfig, rotate credentials, and track asynchronous work requests"
+    },
+    "inputs": [
+      {
+        "name": "tenancy_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Tenancy OCID",
+        "placeholder": "ocid1.tenancy.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "user_ocid",
+        "type": "string",
+        "value": null,
+        "label": "User OCID",
+        "placeholder": "ocid1.user.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "e.g. uk-london-1",
+        "required": true
+      },
+      {
+        "name": "fingerprint",
+        "type": "string",
+        "value": null,
+        "label": "Key Fingerprint",
+        "placeholder": "aa:bb:cc:… fingerprint of the uploaded API key",
+        "required": true
+      },
+      {
+        "name": "private_key",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key (PEM)",
+        "placeholder": "The API signing private key — full PEM, incl. BEGIN/END lines"
+      },
+      {
+        "name": "private_key_passphrase",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key Passphrase",
+        "placeholder": "Only if the key is encrypted (optional)"
+      },
+      {
+        "name": "compartment_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Compartment OCID",
+        "placeholder": "ocid1.compartment.oc1..aaaa… (scopes the cluster picker)"
+      },
+      {
+        "name": "cluster_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Cluster OCID",
+        "placeholder": "ocid1.cluster.oc1..aaaa…",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "status",
+        "type": "string",
+        "value": null,
+        "label": "Status",
+        "placeholder": ""
+      },
+      {
+        "name": "status_details",
+        "type": "string",
+        "value": null,
+        "label": "Status Details",
+        "placeholder": ""
+      },
+      {
+        "name": "time_auto_completion_scheduled",
+        "type": "string",
+        "value": null,
+        "label": "Time Auto-Completion Scheduled",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "oracle/containerengine/kubeconfig_create": {
+    "hash": "f860a52084ff597c4d6a8e78b07b5cc7a20b40a3cff69b27f82ce51e6e503673",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "OCI Container Engine: Create Kubeconfig",
+    "description": "Generate a kubeconfig for an Oracle Cloud OKE cluster and return its YAML content — hand it to kubectl or a downstream step to talk to the cluster. Defaults to the public API endpoint and a token that lasts the maximum allowed.",
+    "website": "https://www.flomation.co",
+    "icon": "oracle+cubes",
+    "date": "22/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Oracle Cloud",
+      "icon": "oracle",
+      "description": "Oracle Cloud Infrastructure (OCI) integrations"
+    },
+    "sub_category": {
+      "name": "Container Engine",
+      "icon": "cubes",
+      "description": "Oracle Cloud Container Engine for Kubernetes (OKE) — provision and manage clusters, node pools and virtual node pools, install add-ons, generate kubeconfig, rotate credentials, and track asynchronous work requests"
+    },
+    "inputs": [
+      {
+        "name": "tenancy_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Tenancy OCID",
+        "placeholder": "ocid1.tenancy.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "user_ocid",
+        "type": "string",
+        "value": null,
+        "label": "User OCID",
+        "placeholder": "ocid1.user.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "e.g. uk-london-1",
+        "required": true
+      },
+      {
+        "name": "fingerprint",
+        "type": "string",
+        "value": null,
+        "label": "Key Fingerprint",
+        "placeholder": "aa:bb:cc:… fingerprint of the uploaded API key",
+        "required": true
+      },
+      {
+        "name": "private_key",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key (PEM)",
+        "placeholder": "The API signing private key — full PEM, incl. BEGIN/END lines"
+      },
+      {
+        "name": "private_key_passphrase",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key Passphrase",
+        "placeholder": "Only if the key is encrypted (optional)"
+      },
+      {
+        "name": "compartment_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Compartment OCID",
+        "placeholder": "ocid1.compartment.oc1..aaaa… (scopes the cluster picker)"
+      },
+      {
+        "name": "cluster_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Cluster OCID",
+        "placeholder": "ocid1.cluster.oc1..aaaa… to generate the kubeconfig for",
+        "required": true
+      },
+      {
+        "name": "endpoint",
+        "type": "string",
+        "value": null,
+        "label": "Endpoint",
+        "placeholder": "Which API endpoint the kubeconfig targets — PUBLIC_ENDPOINT (default), PRIVATE_ENDPOINT or VCN_HOSTNAME",
+        "options": [
+          {
+            "name": "Public endpoint",
+            "value": "PUBLIC_ENDPOINT"
+          },
+          {
+            "name": "Private endpoint",
+            "value": "PRIVATE_ENDPOINT"
+          },
+          {
+            "name": "VCN hostname",
+            "value": "VCN_HOSTNAME"
+          }
+        ]
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "kubeconfig",
+        "type": "text",
+        "value": null,
+        "label": "Kubeconfig (YAML)",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "oracle/containerengine/node_delete": {
+    "hash": "90eae1a395e097d5cdef90157f1d7c4d0211da4cab868d74eefea0857c2f2756",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "OCI Container Engine: Delete Node",
+    "description": "Delete a single Oracle Cloud OKE worker node from its node pool by OCID, optionally shrinking the pool. Asynchronous — returns a work-request id; poll Get Work Request until it completes.",
+    "website": "https://www.flomation.co",
+    "icon": "oracle+cubes",
+    "date": "22/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Oracle Cloud",
+      "icon": "oracle",
+      "description": "Oracle Cloud Infrastructure (OCI) integrations"
+    },
+    "sub_category": {
+      "name": "Container Engine",
+      "icon": "cubes",
+      "description": "Oracle Cloud Container Engine for Kubernetes (OKE) — provision and manage clusters, node pools and virtual node pools, install add-ons, generate kubeconfig, rotate credentials, and track asynchronous work requests"
+    },
+    "inputs": [
+      {
+        "name": "tenancy_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Tenancy OCID",
+        "placeholder": "ocid1.tenancy.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "user_ocid",
+        "type": "string",
+        "value": null,
+        "label": "User OCID",
+        "placeholder": "ocid1.user.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "e.g. uk-london-1",
+        "required": true
+      },
+      {
+        "name": "fingerprint",
+        "type": "string",
+        "value": null,
+        "label": "Key Fingerprint",
+        "placeholder": "aa:bb:cc:… fingerprint of the uploaded API key",
+        "required": true
+      },
+      {
+        "name": "private_key",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key (PEM)",
+        "placeholder": "The API signing private key — full PEM, incl. BEGIN/END lines"
+      },
+      {
+        "name": "private_key_passphrase",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key Passphrase",
+        "placeholder": "Only if the key is encrypted (optional)"
+      },
+      {
+        "name": "compartment_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Compartment OCID",
+        "placeholder": "ocid1.compartment.oc1..aaaa… (scopes the picker)"
+      },
+      {
+        "name": "node_pool_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Node Pool OCID",
+        "placeholder": "ocid1.nodepool.oc1..aaaa… the node belongs to",
+        "required": true
+      },
+      {
+        "name": "node_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Node OCID",
+        "placeholder": "ocid1.instance.oc1..aaaa… (the compute instance backing the node)",
+        "required": true
+      },
+      {
+        "name": "decrement_size",
+        "type": "boolean",
+        "value": null,
+        "label": "Decrement Pool Size",
+        "placeholder": "Also shrink the node pool's desired size by one (optional)"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "work_request_id",
+        "type": "string",
+        "value": null,
+        "label": "Work Request OCID",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "oracle/containerengine/node_pool_create": {
+    "hash": "802c5c21aaa9d4760a02e8b9e83302c7acb46104f8c595faf6a040bb899092db",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "OCI Container Engine: Create Node Pool",
+    "description": "Add a managed worker node pool to an Oracle Cloud OKE cluster — pick the compute shape, node image, count and where the nodes land (availability domain + subnet). Asynchronous — returns a work-request id; poll Get Work Request, then Get Node Pool.",
+    "website": "https://www.flomation.co",
+    "icon": "oracle+cubes",
+    "date": "22/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Oracle Cloud",
+      "icon": "oracle",
+      "description": "Oracle Cloud Infrastructure (OCI) integrations"
+    },
+    "sub_category": {
+      "name": "Container Engine",
+      "icon": "cubes",
+      "description": "Oracle Cloud Container Engine for Kubernetes (OKE) — provision and manage clusters, node pools and virtual node pools, install add-ons, generate kubeconfig, rotate credentials, and track asynchronous work requests"
+    },
+    "inputs": [
+      {
+        "name": "tenancy_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Tenancy OCID",
+        "placeholder": "ocid1.tenancy.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "user_ocid",
+        "type": "string",
+        "value": null,
+        "label": "User OCID",
+        "placeholder": "ocid1.user.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "e.g. uk-london-1",
+        "required": true
+      },
+      {
+        "name": "fingerprint",
+        "type": "string",
+        "value": null,
+        "label": "Key Fingerprint",
+        "placeholder": "aa:bb:cc:… fingerprint of the uploaded API key",
+        "required": true
+      },
+      {
+        "name": "private_key",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key (PEM)",
+        "placeholder": "The API signing private key — full PEM, incl. BEGIN/END lines"
+      },
+      {
+        "name": "private_key_passphrase",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key Passphrase",
+        "placeholder": "Only if the key is encrypted (optional)"
+      },
+      {
+        "name": "compartment_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Compartment OCID",
+        "placeholder": "ocid1.compartment.oc1..aaaa… (use the tenancy OCID for the root)",
+        "required": true
+      },
+      {
+        "name": "cluster_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Cluster OCID",
+        "placeholder": "ocid1.cluster.oc1..aaaa… the pool belongs to",
+        "required": true
+      },
+      {
+        "name": "name",
+        "type": "string",
+        "value": null,
+        "label": "Node Pool Name",
+        "placeholder": "A name for the node pool",
+        "required": true
+      },
+      {
+        "name": "kubernetes_version",
+        "type": "string",
+        "value": null,
+        "label": "Kubernetes Version",
+        "placeholder": "e.g. v1.30.1 (must match / trail the cluster)",
+        "required": true
+      },
+      {
+        "name": "node_shape",
+        "type": "string",
+        "value": null,
+        "label": "Node Shape",
+        "placeholder": "e.g. VM.Standard.E4.Flex (see Get Node Pool Options)",
+        "required": true
+      },
+      {
+        "name": "node_image_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Node Image OCID",
+        "placeholder": "ocid1.image.oc1..aaaa… — an OKE worker image",
+        "required": true
+      },
+      {
+        "name": "size",
+        "type": "string",
+        "value": null,
+        "label": "Node Count",
+        "placeholder": "How many worker nodes to launch",
+        "required": true
+      },
+      {
+        "name": "availability_domain",
+        "type": "string",
+        "value": null,
+        "label": "Availability Domain",
+        "placeholder": "e.g. Vgqo:UK-LONDON-1-AD-1 — where the nodes land",
+        "required": true
+      },
+      {
+        "name": "subnet_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Subnet OCID",
+        "placeholder": "ocid1.subnet.oc1..aaaa… for the worker nodes",
+        "required": true
+      },
+      {
+        "name": "ssh_public_key",
+        "type": "text",
+        "value": null,
+        "label": "SSH Public Key",
+        "placeholder": "Public key to allow SSH to the nodes (optional)"
+      },
+      {
+        "name": "tags",
+        "type": "string",
+        "value": null,
+        "label": "Freeform Tags (JSON)",
+        "placeholder": "{\"env\":\"prod\"} (optional)"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "work_request_id",
+        "type": "string",
+        "value": null,
+        "label": "Work Request OCID",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "oracle/containerengine/node_pool_delete": {
+    "hash": "48e7f0417839c29b13f227e7156d8398720ed28d7b7c476d97f12dab52af4109",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "OCI Container Engine: Delete Node Pool",
+    "description": "Delete an Oracle Cloud OKE node pool by OCID, draining and terminating its worker nodes. Asynchronous — returns a work-request id; poll Get Work Request until it completes.",
+    "website": "https://www.flomation.co",
+    "icon": "oracle+cubes",
+    "date": "22/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Oracle Cloud",
+      "icon": "oracle",
+      "description": "Oracle Cloud Infrastructure (OCI) integrations"
+    },
+    "sub_category": {
+      "name": "Container Engine",
+      "icon": "cubes",
+      "description": "Oracle Cloud Container Engine for Kubernetes (OKE) — provision and manage clusters, node pools and virtual node pools, install add-ons, generate kubeconfig, rotate credentials, and track asynchronous work requests"
+    },
+    "inputs": [
+      {
+        "name": "tenancy_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Tenancy OCID",
+        "placeholder": "ocid1.tenancy.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "user_ocid",
+        "type": "string",
+        "value": null,
+        "label": "User OCID",
+        "placeholder": "ocid1.user.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "e.g. uk-london-1",
+        "required": true
+      },
+      {
+        "name": "fingerprint",
+        "type": "string",
+        "value": null,
+        "label": "Key Fingerprint",
+        "placeholder": "aa:bb:cc:… fingerprint of the uploaded API key",
+        "required": true
+      },
+      {
+        "name": "private_key",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key (PEM)",
+        "placeholder": "The API signing private key — full PEM, incl. BEGIN/END lines"
+      },
+      {
+        "name": "private_key_passphrase",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key Passphrase",
+        "placeholder": "Only if the key is encrypted (optional)"
+      },
+      {
+        "name": "compartment_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Compartment OCID",
+        "placeholder": "ocid1.compartment.oc1..aaaa… (scopes the picker)"
+      },
+      {
+        "name": "node_pool_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Node Pool OCID",
+        "placeholder": "ocid1.nodepool.oc1..aaaa…",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "work_request_id",
+        "type": "string",
+        "value": null,
+        "label": "Work Request OCID",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "oracle/containerengine/node_pool_get": {
+    "hash": "9f6f83138ea745b5f5ee575f5aa4cd8e417c6eede26ba889b1c1c779e4208ce1",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "OCI Container Engine: Get Node Pool",
+    "description": "Fetch a single Oracle Cloud OKE node pool by OCID — its node shape, Kubernetes version, size, lifecycle state, and member nodes.",
+    "website": "https://www.flomation.co",
+    "icon": "oracle+cubes",
+    "date": "22/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Oracle Cloud",
+      "icon": "oracle",
+      "description": "Oracle Cloud Infrastructure (OCI) integrations"
+    },
+    "sub_category": {
+      "name": "Container Engine",
+      "icon": "cubes",
+      "description": "Oracle Cloud Container Engine for Kubernetes (OKE) — provision and manage clusters, node pools and virtual node pools, install add-ons, generate kubeconfig, rotate credentials, and track asynchronous work requests"
+    },
+    "inputs": [
+      {
+        "name": "tenancy_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Tenancy OCID",
+        "placeholder": "ocid1.tenancy.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "user_ocid",
+        "type": "string",
+        "value": null,
+        "label": "User OCID",
+        "placeholder": "ocid1.user.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "e.g. uk-london-1",
+        "required": true
+      },
+      {
+        "name": "fingerprint",
+        "type": "string",
+        "value": null,
+        "label": "Key Fingerprint",
+        "placeholder": "aa:bb:cc:… fingerprint of the uploaded API key",
+        "required": true
+      },
+      {
+        "name": "private_key",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key (PEM)",
+        "placeholder": "The API signing private key — full PEM, incl. BEGIN/END lines"
+      },
+      {
+        "name": "private_key_passphrase",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key Passphrase",
+        "placeholder": "Only if the key is encrypted (optional)"
+      },
+      {
+        "name": "compartment_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Compartment OCID",
+        "placeholder": "ocid1.compartment.oc1..aaaa… (scopes the node pool picker)"
+      },
+      {
+        "name": "node_pool_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Node Pool OCID",
+        "placeholder": "ocid1.nodepool.oc1..aaaa…",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "node_pool",
+        "type": "object",
+        "value": null,
+        "label": "Node Pool",
+        "placeholder": ""
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Node Pool OCID",
+        "placeholder": ""
+      },
+      {
+        "name": "lifecycle_state",
+        "type": "string",
+        "value": null,
+        "label": "Lifecycle State",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "oracle/containerengine/node_pool_list": {
+    "hash": "956640b23ead2b68c072ca15bfef30726f144fc0b8d030c696258e05282cbd1e",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "OCI Container Engine: List Node Pools",
+    "description": "List the Oracle Cloud OKE node pools in a compartment, optionally scoped to one cluster. Walks pagination up to a safe cap.",
+    "website": "https://www.flomation.co",
+    "icon": "oracle+cubes",
+    "date": "22/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Oracle Cloud",
+      "icon": "oracle",
+      "description": "Oracle Cloud Infrastructure (OCI) integrations"
+    },
+    "sub_category": {
+      "name": "Container Engine",
+      "icon": "cubes",
+      "description": "Oracle Cloud Container Engine for Kubernetes (OKE) — provision and manage clusters, node pools and virtual node pools, install add-ons, generate kubeconfig, rotate credentials, and track asynchronous work requests"
+    },
+    "inputs": [
+      {
+        "name": "tenancy_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Tenancy OCID",
+        "placeholder": "ocid1.tenancy.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "user_ocid",
+        "type": "string",
+        "value": null,
+        "label": "User OCID",
+        "placeholder": "ocid1.user.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "e.g. uk-london-1",
+        "required": true
+      },
+      {
+        "name": "fingerprint",
+        "type": "string",
+        "value": null,
+        "label": "Key Fingerprint",
+        "placeholder": "aa:bb:cc:… fingerprint of the uploaded API key",
+        "required": true
+      },
+      {
+        "name": "private_key",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key (PEM)",
+        "placeholder": "The API signing private key — full PEM, incl. BEGIN/END lines"
+      },
+      {
+        "name": "private_key_passphrase",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key Passphrase",
+        "placeholder": "Only if the key is encrypted (optional)"
+      },
+      {
+        "name": "compartment_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Compartment OCID",
+        "placeholder": "ocid1.compartment.oc1..aaaa… (use the tenancy OCID for the root)",
+        "required": true
+      },
+      {
+        "name": "cluster_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Cluster OCID",
+        "placeholder": "Only node pools in this cluster (optional)"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "node_pools",
+        "type": "object",
+        "value": null,
+        "label": "Node Pools",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "string",
+        "value": null,
+        "label": "Count",
+        "placeholder": ""
+      },
+      {
+        "name": "truncated",
+        "type": "boolean",
+        "value": null,
+        "label": "Truncated",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "oracle/containerengine/node_pool_options_get": {
+    "hash": "0d4cdc95a9c5891156762d19640cbae8e2c841cf7ad72b82e0444aa54adb9b57",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "OCI Container Engine: Get Node Pool Options",
+    "description": "List the node-pool shapes and Kubernetes versions available in a compartment for creating or updating OKE node pools.",
+    "website": "https://www.flomation.co",
+    "icon": "oracle+cubes",
+    "date": "22/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Oracle Cloud",
+      "icon": "oracle",
+      "description": "Oracle Cloud Infrastructure (OCI) integrations"
+    },
+    "sub_category": {
+      "name": "Container Engine",
+      "icon": "cubes",
+      "description": "Oracle Cloud Container Engine for Kubernetes (OKE) — provision and manage clusters, node pools and virtual node pools, install add-ons, generate kubeconfig, rotate credentials, and track asynchronous work requests"
+    },
+    "inputs": [
+      {
+        "name": "tenancy_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Tenancy OCID",
+        "placeholder": "ocid1.tenancy.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "user_ocid",
+        "type": "string",
+        "value": null,
+        "label": "User OCID",
+        "placeholder": "ocid1.user.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "e.g. uk-london-1",
+        "required": true
+      },
+      {
+        "name": "fingerprint",
+        "type": "string",
+        "value": null,
+        "label": "Key Fingerprint",
+        "placeholder": "aa:bb:cc:… fingerprint of the uploaded API key",
+        "required": true
+      },
+      {
+        "name": "private_key",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key (PEM)",
+        "placeholder": "The API signing private key — full PEM, incl. BEGIN/END lines"
+      },
+      {
+        "name": "private_key_passphrase",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key Passphrase",
+        "placeholder": "Only if the key is encrypted (optional)"
+      },
+      {
+        "name": "compartment_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Compartment OCID",
+        "placeholder": "ocid1.compartment.oc1..aaaa… (use the tenancy OCID for the root)",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "shapes",
+        "type": "object",
+        "value": null,
+        "label": "Shapes",
+        "placeholder": ""
+      },
+      {
+        "name": "kubernetes_versions",
+        "type": "object",
+        "value": null,
+        "label": "Kubernetes versions",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "oracle/containerengine/node_pool_update": {
+    "hash": "66d45f8a0323180e1a33ac8afc0351149e32d83057c7fc17dded629c4619fd87",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "OCI Container Engine: Update Node Pool",
+    "description": "Change a managed Oracle Cloud OKE node pool — rename it, upgrade its Kubernetes version, or scale the node count. Asynchronous — returns a work-request id; poll Get Work Request until it completes, then Get Node Pool.",
+    "website": "https://www.flomation.co",
+    "icon": "oracle+cubes",
+    "date": "22/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Oracle Cloud",
+      "icon": "oracle",
+      "description": "Oracle Cloud Infrastructure (OCI) integrations"
+    },
+    "sub_category": {
+      "name": "Container Engine",
+      "icon": "cubes",
+      "description": "Oracle Cloud Container Engine for Kubernetes (OKE) — provision and manage clusters, node pools and virtual node pools, install add-ons, generate kubeconfig, rotate credentials, and track asynchronous work requests"
+    },
+    "inputs": [
+      {
+        "name": "tenancy_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Tenancy OCID",
+        "placeholder": "ocid1.tenancy.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "user_ocid",
+        "type": "string",
+        "value": null,
+        "label": "User OCID",
+        "placeholder": "ocid1.user.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "e.g. uk-london-1",
+        "required": true
+      },
+      {
+        "name": "fingerprint",
+        "type": "string",
+        "value": null,
+        "label": "Key Fingerprint",
+        "placeholder": "aa:bb:cc:… fingerprint of the uploaded API key",
+        "required": true
+      },
+      {
+        "name": "private_key",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key (PEM)",
+        "placeholder": "The API signing private key — full PEM, incl. BEGIN/END lines"
+      },
+      {
+        "name": "private_key_passphrase",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key Passphrase",
+        "placeholder": "Only if the key is encrypted (optional)"
+      },
+      {
+        "name": "compartment_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Compartment OCID",
+        "placeholder": "ocid1.compartment.oc1..aaaa… (scopes the node-pool picker)"
+      },
+      {
+        "name": "node_pool_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Node Pool OCID",
+        "placeholder": "ocid1.nodepool.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "name",
+        "type": "string",
+        "value": null,
+        "label": "Node Pool Name",
+        "placeholder": "A new name for the node pool (optional)"
+      },
+      {
+        "name": "kubernetes_version",
+        "type": "string",
+        "value": null,
+        "label": "Kubernetes Version",
+        "placeholder": "e.g. v1.30.1 to upgrade the nodes to (optional)"
+      },
+      {
+        "name": "size",
+        "type": "string",
+        "value": null,
+        "label": "Node Count",
+        "placeholder": "New number of worker nodes — scales the pool (optional)"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "work_request_id",
+        "type": "string",
+        "value": null,
+        "label": "Work Request OCID",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "oracle/containerengine/node_reboot": {
+    "hash": "4d749473db2e7886a6730eaa2a3695072abce1dbe38d007462a79f679e6ddf84",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "OCI Container Engine: Reboot Node",
+    "description": "Reboot a single worker node of an Oracle Cloud OKE cluster by OCID — returns a work-request OCID to poll until the reboot completes.",
+    "website": "https://www.flomation.co",
+    "icon": "oracle+cubes",
+    "date": "22/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Oracle Cloud",
+      "icon": "oracle",
+      "description": "Oracle Cloud Infrastructure (OCI) integrations"
+    },
+    "sub_category": {
+      "name": "Container Engine",
+      "icon": "cubes",
+      "description": "Oracle Cloud Container Engine for Kubernetes (OKE) — provision and manage clusters, node pools and virtual node pools, install add-ons, generate kubeconfig, rotate credentials, and track asynchronous work requests"
+    },
+    "inputs": [
+      {
+        "name": "tenancy_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Tenancy OCID",
+        "placeholder": "ocid1.tenancy.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "user_ocid",
+        "type": "string",
+        "value": null,
+        "label": "User OCID",
+        "placeholder": "ocid1.user.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "e.g. uk-london-1",
+        "required": true
+      },
+      {
+        "name": "fingerprint",
+        "type": "string",
+        "value": null,
+        "label": "Key Fingerprint",
+        "placeholder": "aa:bb:cc:… fingerprint of the uploaded API key",
+        "required": true
+      },
+      {
+        "name": "private_key",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key (PEM)",
+        "placeholder": "The API signing private key — full PEM, incl. BEGIN/END lines"
+      },
+      {
+        "name": "private_key_passphrase",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key Passphrase",
+        "placeholder": "Only if the key is encrypted (optional)"
+      },
+      {
+        "name": "compartment_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Compartment OCID",
+        "placeholder": "ocid1.compartment.oc1..aaaa… (scopes the picker)"
+      },
+      {
+        "name": "cluster_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Cluster OCID",
+        "placeholder": "ocid1.cluster.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "node_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Node OCID",
+        "placeholder": "ocid1.instance.oc1..aaaa… (the worker node compute instance)",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "work_request_id",
+        "type": "string",
+        "value": null,
+        "label": "Work Request OCID",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "oracle/containerengine/node_replace_boot_volume": {
+    "hash": "fc491152af0e4218d7d49f61459979701c7b2e922b4cbf8ace11e7904694eca9",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "OCI Container Engine: Replace Node Boot Volume",
+    "description": "Replace the boot volume of a single Oracle Cloud OKE worker node by OCID — returns a work request to poll until it completes.",
+    "website": "https://www.flomation.co",
+    "icon": "oracle+cubes",
+    "date": "22/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Oracle Cloud",
+      "icon": "oracle",
+      "description": "Oracle Cloud Infrastructure (OCI) integrations"
+    },
+    "sub_category": {
+      "name": "Container Engine",
+      "icon": "cubes",
+      "description": "Oracle Cloud Container Engine for Kubernetes (OKE) — provision and manage clusters, node pools and virtual node pools, install add-ons, generate kubeconfig, rotate credentials, and track asynchronous work requests"
+    },
+    "inputs": [
+      {
+        "name": "tenancy_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Tenancy OCID",
+        "placeholder": "ocid1.tenancy.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "user_ocid",
+        "type": "string",
+        "value": null,
+        "label": "User OCID",
+        "placeholder": "ocid1.user.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "e.g. uk-london-1",
+        "required": true
+      },
+      {
+        "name": "fingerprint",
+        "type": "string",
+        "value": null,
+        "label": "Key Fingerprint",
+        "placeholder": "aa:bb:cc:… fingerprint of the uploaded API key",
+        "required": true
+      },
+      {
+        "name": "private_key",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key (PEM)",
+        "placeholder": "The API signing private key — full PEM, incl. BEGIN/END lines"
+      },
+      {
+        "name": "private_key_passphrase",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key Passphrase",
+        "placeholder": "Only if the key is encrypted (optional)"
+      },
+      {
+        "name": "compartment_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Compartment OCID",
+        "placeholder": "ocid1.compartment.oc1..aaaa… (scopes the picker)"
+      },
+      {
+        "name": "cluster_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Cluster OCID",
+        "placeholder": "ocid1.cluster.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "node_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Node OCID",
+        "placeholder": "ocid1.instance.oc1..aaaa… (the compute instance backing the node)",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "work_request_id",
+        "type": "string",
+        "value": null,
+        "label": "Work Request OCID",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "oracle/containerengine/pod_shape_list": {
+    "hash": "45596298fb91becd8e31f5a92366c544854bd4e69e630df037dd4dec9995aa37",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "OCI Container Engine: List Pod Shapes",
+    "description": "List the pod shapes available for virtual nodes in an Oracle Cloud OKE compartment. Walks pagination up to a safe cap.",
+    "website": "https://www.flomation.co",
+    "icon": "oracle+cubes",
+    "date": "22/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Oracle Cloud",
+      "icon": "oracle",
+      "description": "Oracle Cloud Infrastructure (OCI) integrations"
+    },
+    "sub_category": {
+      "name": "Container Engine",
+      "icon": "cubes",
+      "description": "Oracle Cloud Container Engine for Kubernetes (OKE) — provision and manage clusters, node pools and virtual node pools, install add-ons, generate kubeconfig, rotate credentials, and track asynchronous work requests"
+    },
+    "inputs": [
+      {
+        "name": "tenancy_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Tenancy OCID",
+        "placeholder": "ocid1.tenancy.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "user_ocid",
+        "type": "string",
+        "value": null,
+        "label": "User OCID",
+        "placeholder": "ocid1.user.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "e.g. uk-london-1",
+        "required": true
+      },
+      {
+        "name": "fingerprint",
+        "type": "string",
+        "value": null,
+        "label": "Key Fingerprint",
+        "placeholder": "aa:bb:cc:… fingerprint of the uploaded API key",
+        "required": true
+      },
+      {
+        "name": "private_key",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key (PEM)",
+        "placeholder": "The API signing private key — full PEM, incl. BEGIN/END lines"
+      },
+      {
+        "name": "private_key_passphrase",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key Passphrase",
+        "placeholder": "Only if the key is encrypted (optional)"
+      },
+      {
+        "name": "compartment_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Compartment OCID",
+        "placeholder": "ocid1.compartment.oc1..aaaa… (use the tenancy OCID for the root)",
+        "required": true
+      },
+      {
+        "name": "availability_domain",
+        "type": "string",
+        "value": null,
+        "label": "Availability Domain",
+        "placeholder": "Only shapes offered in this AD, e.g. Uocm:UK-LONDON-1-AD-1 (optional)"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "pod_shapes",
+        "type": "object",
+        "value": null,
+        "label": "Pod shapes",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "string",
+        "value": null,
+        "label": "Count",
+        "placeholder": ""
+      },
+      {
+        "name": "truncated",
+        "type": "boolean",
+        "value": null,
+        "label": "Truncated",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "oracle/containerengine/virtual_node_get": {
+    "hash": "fd997c14cd1d96aa9e2ccb9eea17f747f60418866c101eb4d97337aec3713e5a",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "OCI Container Engine: Get Virtual Node",
+    "description": "Fetch a single Oracle Cloud OKE virtual node by OCID — its availability domain, subnet, private IP, and lifecycle state.",
+    "website": "https://www.flomation.co",
+    "icon": "oracle+cubes",
+    "date": "22/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Oracle Cloud",
+      "icon": "oracle",
+      "description": "Oracle Cloud Infrastructure (OCI) integrations"
+    },
+    "sub_category": {
+      "name": "Container Engine",
+      "icon": "cubes",
+      "description": "Oracle Cloud Container Engine for Kubernetes (OKE) — provision and manage clusters, node pools and virtual node pools, install add-ons, generate kubeconfig, rotate credentials, and track asynchronous work requests"
+    },
+    "inputs": [
+      {
+        "name": "tenancy_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Tenancy OCID",
+        "placeholder": "ocid1.tenancy.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "user_ocid",
+        "type": "string",
+        "value": null,
+        "label": "User OCID",
+        "placeholder": "ocid1.user.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "e.g. uk-london-1",
+        "required": true
+      },
+      {
+        "name": "fingerprint",
+        "type": "string",
+        "value": null,
+        "label": "Key Fingerprint",
+        "placeholder": "aa:bb:cc:… fingerprint of the uploaded API key",
+        "required": true
+      },
+      {
+        "name": "private_key",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key (PEM)",
+        "placeholder": "The API signing private key — full PEM, incl. BEGIN/END lines"
+      },
+      {
+        "name": "private_key_passphrase",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key Passphrase",
+        "placeholder": "Only if the key is encrypted (optional)"
+      },
+      {
+        "name": "compartment_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Compartment OCID",
+        "placeholder": "ocid1.compartment.oc1..aaaa… (scopes the picker)"
+      },
+      {
+        "name": "virtual_node_pool_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Virtual Node Pool OCID",
+        "placeholder": "ocid1.virtualnodepool.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "virtual_node_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Virtual Node OCID",
+        "placeholder": "ocid1.virtualnode.oc1..aaaa…",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "virtual_node",
+        "type": "object",
+        "value": null,
+        "label": "Virtual Node",
+        "placeholder": ""
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Virtual Node OCID",
+        "placeholder": ""
+      },
+      {
+        "name": "lifecycle_state",
+        "type": "string",
+        "value": null,
+        "label": "Lifecycle State",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "oracle/containerengine/virtual_node_list": {
+    "hash": "6a6350833002eca20faba7f4dbf3d01fd162add7cc38a399637a4c20c4d50055",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "OCI Container Engine: List Virtual Nodes",
+    "description": "List the virtual nodes in an Oracle Cloud OKE virtual node pool. Walks pagination up to a safe cap.",
+    "website": "https://www.flomation.co",
+    "icon": "oracle+cubes",
+    "date": "22/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Oracle Cloud",
+      "icon": "oracle",
+      "description": "Oracle Cloud Infrastructure (OCI) integrations"
+    },
+    "sub_category": {
+      "name": "Container Engine",
+      "icon": "cubes",
+      "description": "Oracle Cloud Container Engine for Kubernetes (OKE) — provision and manage clusters, node pools and virtual node pools, install add-ons, generate kubeconfig, rotate credentials, and track asynchronous work requests"
+    },
+    "inputs": [
+      {
+        "name": "tenancy_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Tenancy OCID",
+        "placeholder": "ocid1.tenancy.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "user_ocid",
+        "type": "string",
+        "value": null,
+        "label": "User OCID",
+        "placeholder": "ocid1.user.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "e.g. uk-london-1",
+        "required": true
+      },
+      {
+        "name": "fingerprint",
+        "type": "string",
+        "value": null,
+        "label": "Key Fingerprint",
+        "placeholder": "aa:bb:cc:… fingerprint of the uploaded API key",
+        "required": true
+      },
+      {
+        "name": "private_key",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key (PEM)",
+        "placeholder": "The API signing private key — full PEM, incl. BEGIN/END lines"
+      },
+      {
+        "name": "private_key_passphrase",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key Passphrase",
+        "placeholder": "Only if the key is encrypted (optional)"
+      },
+      {
+        "name": "compartment_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Compartment OCID",
+        "placeholder": "ocid1.compartment.oc1..aaaa… (scopes the picker)"
+      },
+      {
+        "name": "virtual_node_pool_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Virtual Node Pool OCID",
+        "placeholder": "ocid1.virtualnodepool.oc1..aaaa…",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "virtual_nodes",
+        "type": "object",
+        "value": null,
+        "label": "Virtual Nodes",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "string",
+        "value": null,
+        "label": "Count",
+        "placeholder": ""
+      },
+      {
+        "name": "truncated",
+        "type": "boolean",
+        "value": null,
+        "label": "Truncated",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "oracle/containerengine/virtual_node_pool_create": {
+    "hash": "f7a6f021d2da7f8f89523c64cb684361b1fcfdc5a8cbd9661b925ba5979725f2",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "OCI Container Engine: Create Virtual Node Pool",
+    "description": "Add a virtual node pool to an Oracle Cloud OKE cluster — serverless pods OCI schedules for you, placed in an availability domain + subnet with a pod subnet and pod shape. Asynchronous — returns a work-request id; poll Get Work Request, then Get Virtual Node Pool.",
+    "website": "https://www.flomation.co",
+    "icon": "oracle+cubes",
+    "date": "22/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Oracle Cloud",
+      "icon": "oracle",
+      "description": "Oracle Cloud Infrastructure (OCI) integrations"
+    },
+    "sub_category": {
+      "name": "Container Engine",
+      "icon": "cubes",
+      "description": "Oracle Cloud Container Engine for Kubernetes (OKE) — provision and manage clusters, node pools and virtual node pools, install add-ons, generate kubeconfig, rotate credentials, and track asynchronous work requests"
+    },
+    "inputs": [
+      {
+        "name": "tenancy_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Tenancy OCID",
+        "placeholder": "ocid1.tenancy.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "user_ocid",
+        "type": "string",
+        "value": null,
+        "label": "User OCID",
+        "placeholder": "ocid1.user.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "e.g. uk-london-1",
+        "required": true
+      },
+      {
+        "name": "fingerprint",
+        "type": "string",
+        "value": null,
+        "label": "Key Fingerprint",
+        "placeholder": "aa:bb:cc:… fingerprint of the uploaded API key",
+        "required": true
+      },
+      {
+        "name": "private_key",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key (PEM)",
+        "placeholder": "The API signing private key — full PEM, incl. BEGIN/END lines"
+      },
+      {
+        "name": "private_key_passphrase",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key Passphrase",
+        "placeholder": "Only if the key is encrypted (optional)"
+      },
+      {
+        "name": "compartment_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Compartment OCID",
+        "placeholder": "ocid1.compartment.oc1..aaaa… (use the tenancy OCID for the root)",
+        "required": true
+      },
+      {
+        "name": "cluster_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Cluster OCID",
+        "placeholder": "ocid1.cluster.oc1..aaaa… the pool belongs to",
+        "required": true
+      },
+      {
+        "name": "display_name",
+        "type": "string",
+        "value": null,
+        "label": "Virtual Node Pool Name",
+        "placeholder": "A name for the virtual node pool",
+        "required": true
+      },
+      {
+        "name": "availability_domain",
+        "type": "string",
+        "value": null,
+        "label": "Availability Domain",
+        "placeholder": "e.g. Vgqo:UK-LONDON-1-AD-1 — where the virtual nodes land",
+        "required": true
+      },
+      {
+        "name": "subnet_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Subnet OCID",
+        "placeholder": "ocid1.subnet.oc1..aaaa… for the virtual nodes",
+        "required": true
+      },
+      {
+        "name": "pod_subnet_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Pod Subnet OCID",
+        "placeholder": "ocid1.subnet.oc1..aaaa… (regional) where pods' VNICs land",
+        "required": true
+      },
+      {
+        "name": "pod_shape",
+        "type": "string",
+        "value": null,
+        "label": "Pod Shape",
+        "placeholder": "e.g. Pod.Standard.E4.Flex — the shape of the pods",
+        "required": true
+      },
+      {
+        "name": "size",
+        "type": "string",
+        "value": null,
+        "label": "Virtual Node Count",
+        "placeholder": "How many virtual nodes to launch (default 1)"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "work_request_id",
+        "type": "string",
+        "value": null,
+        "label": "Work Request OCID",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "oracle/containerengine/virtual_node_pool_delete": {
+    "hash": "33ee946da29f6382edba2097595eb478f4ae14ff830ecfdcf31d8d7b6b274375",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "OCI Container Engine: Delete Virtual Node Pool",
+    "description": "Delete an Oracle Cloud OKE virtual node pool by OCID. Asynchronous — returns a work-request id; poll Get Work Request until the deletion completes.",
+    "website": "https://www.flomation.co",
+    "icon": "oracle+cubes",
+    "date": "22/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Oracle Cloud",
+      "icon": "oracle",
+      "description": "Oracle Cloud Infrastructure (OCI) integrations"
+    },
+    "sub_category": {
+      "name": "Container Engine",
+      "icon": "cubes",
+      "description": "Oracle Cloud Container Engine for Kubernetes (OKE) — provision and manage clusters, node pools and virtual node pools, install add-ons, generate kubeconfig, rotate credentials, and track asynchronous work requests"
+    },
+    "inputs": [
+      {
+        "name": "tenancy_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Tenancy OCID",
+        "placeholder": "ocid1.tenancy.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "user_ocid",
+        "type": "string",
+        "value": null,
+        "label": "User OCID",
+        "placeholder": "ocid1.user.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "e.g. uk-london-1",
+        "required": true
+      },
+      {
+        "name": "fingerprint",
+        "type": "string",
+        "value": null,
+        "label": "Key Fingerprint",
+        "placeholder": "aa:bb:cc:… fingerprint of the uploaded API key",
+        "required": true
+      },
+      {
+        "name": "private_key",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key (PEM)",
+        "placeholder": "The API signing private key — full PEM, incl. BEGIN/END lines"
+      },
+      {
+        "name": "private_key_passphrase",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key Passphrase",
+        "placeholder": "Only if the key is encrypted (optional)"
+      },
+      {
+        "name": "compartment_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Compartment OCID",
+        "placeholder": "ocid1.compartment.oc1..aaaa… (scopes the picker)"
+      },
+      {
+        "name": "virtual_node_pool_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Virtual Node Pool OCID",
+        "placeholder": "ocid1.virtualnodepool.oc1..aaaa…",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "work_request_id",
+        "type": "string",
+        "value": null,
+        "label": "Work Request OCID",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "oracle/containerengine/virtual_node_pool_get": {
+    "hash": "7de3385b6f8e245a4ecabcb972093b60994d0c446c5cb650e73ed58f6d94697c",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "OCI Container Engine: Get Virtual Node Pool",
+    "description": "Fetch a single Oracle Cloud OKE virtual node pool by OCID — its cluster, Kubernetes version, size, and lifecycle state.",
+    "website": "https://www.flomation.co",
+    "icon": "oracle+cubes",
+    "date": "22/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Oracle Cloud",
+      "icon": "oracle",
+      "description": "Oracle Cloud Infrastructure (OCI) integrations"
+    },
+    "sub_category": {
+      "name": "Container Engine",
+      "icon": "cubes",
+      "description": "Oracle Cloud Container Engine for Kubernetes (OKE) — provision and manage clusters, node pools and virtual node pools, install add-ons, generate kubeconfig, rotate credentials, and track asynchronous work requests"
+    },
+    "inputs": [
+      {
+        "name": "tenancy_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Tenancy OCID",
+        "placeholder": "ocid1.tenancy.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "user_ocid",
+        "type": "string",
+        "value": null,
+        "label": "User OCID",
+        "placeholder": "ocid1.user.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "e.g. uk-london-1",
+        "required": true
+      },
+      {
+        "name": "fingerprint",
+        "type": "string",
+        "value": null,
+        "label": "Key Fingerprint",
+        "placeholder": "aa:bb:cc:… fingerprint of the uploaded API key",
+        "required": true
+      },
+      {
+        "name": "private_key",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key (PEM)",
+        "placeholder": "The API signing private key — full PEM, incl. BEGIN/END lines"
+      },
+      {
+        "name": "private_key_passphrase",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key Passphrase",
+        "placeholder": "Only if the key is encrypted (optional)"
+      },
+      {
+        "name": "compartment_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Compartment OCID",
+        "placeholder": "ocid1.compartment.oc1..aaaa… (scopes the picker)"
+      },
+      {
+        "name": "virtual_node_pool_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Virtual Node Pool OCID",
+        "placeholder": "ocid1.virtualnodepool.oc1..aaaa…",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "virtual_node_pool",
+        "type": "object",
+        "value": null,
+        "label": "Virtual Node Pool",
+        "placeholder": ""
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Virtual Node Pool OCID",
+        "placeholder": ""
+      },
+      {
+        "name": "lifecycle_state",
+        "type": "string",
+        "value": null,
+        "label": "Lifecycle State",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "oracle/containerengine/virtual_node_pool_list": {
+    "hash": "8dc5bc6408381127ec306a3587b889fb5b7921358d71796adec7812b2324d06c",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "OCI Container Engine: List Virtual Node Pools",
+    "description": "List the Oracle Cloud OKE virtual node pools in a compartment, optionally scoped to one cluster. Walks pagination up to a safe cap.",
+    "website": "https://www.flomation.co",
+    "icon": "oracle+cubes",
+    "date": "22/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Oracle Cloud",
+      "icon": "oracle",
+      "description": "Oracle Cloud Infrastructure (OCI) integrations"
+    },
+    "sub_category": {
+      "name": "Container Engine",
+      "icon": "cubes",
+      "description": "Oracle Cloud Container Engine for Kubernetes (OKE) — provision and manage clusters, node pools and virtual node pools, install add-ons, generate kubeconfig, rotate credentials, and track asynchronous work requests"
+    },
+    "inputs": [
+      {
+        "name": "tenancy_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Tenancy OCID",
+        "placeholder": "ocid1.tenancy.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "user_ocid",
+        "type": "string",
+        "value": null,
+        "label": "User OCID",
+        "placeholder": "ocid1.user.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "e.g. uk-london-1",
+        "required": true
+      },
+      {
+        "name": "fingerprint",
+        "type": "string",
+        "value": null,
+        "label": "Key Fingerprint",
+        "placeholder": "aa:bb:cc:… fingerprint of the uploaded API key",
+        "required": true
+      },
+      {
+        "name": "private_key",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key (PEM)",
+        "placeholder": "The API signing private key — full PEM, incl. BEGIN/END lines"
+      },
+      {
+        "name": "private_key_passphrase",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key Passphrase",
+        "placeholder": "Only if the key is encrypted (optional)"
+      },
+      {
+        "name": "compartment_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Compartment OCID",
+        "placeholder": "ocid1.compartment.oc1..aaaa… (use the tenancy OCID for the root)",
+        "required": true
+      },
+      {
+        "name": "cluster_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Cluster OCID",
+        "placeholder": "Only virtual node pools in this cluster (optional)"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "virtual_node_pools",
+        "type": "object",
+        "value": null,
+        "label": "Virtual node pools",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "string",
+        "value": null,
+        "label": "Count",
+        "placeholder": ""
+      },
+      {
+        "name": "truncated",
+        "type": "boolean",
+        "value": null,
+        "label": "Truncated",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "oracle/containerengine/virtual_node_pool_update": {
+    "hash": "132f9c5b7824895804d7ec2c33b02b452b08aac19ca2849c449de2ef66515831",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "OCI Container Engine: Update Virtual Node Pool",
+    "description": "Update an Oracle Cloud OKE virtual node pool by OCID — change its display name and/or virtual node count. Asynchronous; poll Get Work Request until it completes.",
+    "website": "https://www.flomation.co",
+    "icon": "oracle+cubes",
+    "date": "22/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Oracle Cloud",
+      "icon": "oracle",
+      "description": "Oracle Cloud Infrastructure (OCI) integrations"
+    },
+    "sub_category": {
+      "name": "Container Engine",
+      "icon": "cubes",
+      "description": "Oracle Cloud Container Engine for Kubernetes (OKE) — provision and manage clusters, node pools and virtual node pools, install add-ons, generate kubeconfig, rotate credentials, and track asynchronous work requests"
+    },
+    "inputs": [
+      {
+        "name": "tenancy_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Tenancy OCID",
+        "placeholder": "ocid1.tenancy.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "user_ocid",
+        "type": "string",
+        "value": null,
+        "label": "User OCID",
+        "placeholder": "ocid1.user.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "e.g. uk-london-1",
+        "required": true
+      },
+      {
+        "name": "fingerprint",
+        "type": "string",
+        "value": null,
+        "label": "Key Fingerprint",
+        "placeholder": "aa:bb:cc:… fingerprint of the uploaded API key",
+        "required": true
+      },
+      {
+        "name": "private_key",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key (PEM)",
+        "placeholder": "The API signing private key — full PEM, incl. BEGIN/END lines"
+      },
+      {
+        "name": "private_key_passphrase",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key Passphrase",
+        "placeholder": "Only if the key is encrypted (optional)"
+      },
+      {
+        "name": "compartment_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Compartment OCID",
+        "placeholder": "ocid1.compartment.oc1..aaaa… (scopes the picker)"
+      },
+      {
+        "name": "virtual_node_pool_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Virtual Node Pool OCID",
+        "placeholder": "ocid1.virtualnodepool.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "display_name",
+        "type": "string",
+        "value": null,
+        "label": "Display Name",
+        "placeholder": "New display name (optional)"
+      },
+      {
+        "name": "size",
+        "type": "string",
+        "value": null,
+        "label": "Size",
+        "placeholder": "Number of virtual nodes (optional)"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "work_request_id",
+        "type": "string",
+        "value": null,
+        "label": "Work Request OCID",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "oracle/containerengine/work_request_cancel": {
+    "hash": "817fc6487bad6199017d8d7938029f8c4edb210a7ea9e027e686f27a0aa3b193",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "OCI Container Engine: Cancel Work Request",
+    "description": "Cancel an in-progress Oracle Cloud OKE work request by OCID, asking OCI to stop the underlying operation.",
+    "website": "https://www.flomation.co",
+    "icon": "oracle+cubes",
+    "date": "22/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Oracle Cloud",
+      "icon": "oracle",
+      "description": "Oracle Cloud Infrastructure (OCI) integrations"
+    },
+    "sub_category": {
+      "name": "Container Engine",
+      "icon": "cubes",
+      "description": "Oracle Cloud Container Engine for Kubernetes (OKE) — provision and manage clusters, node pools and virtual node pools, install add-ons, generate kubeconfig, rotate credentials, and track asynchronous work requests"
+    },
+    "inputs": [
+      {
+        "name": "tenancy_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Tenancy OCID",
+        "placeholder": "ocid1.tenancy.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "user_ocid",
+        "type": "string",
+        "value": null,
+        "label": "User OCID",
+        "placeholder": "ocid1.user.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "e.g. uk-london-1",
+        "required": true
+      },
+      {
+        "name": "fingerprint",
+        "type": "string",
+        "value": null,
+        "label": "Key Fingerprint",
+        "placeholder": "aa:bb:cc:… fingerprint of the uploaded API key",
+        "required": true
+      },
+      {
+        "name": "private_key",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key (PEM)",
+        "placeholder": "The API signing private key — full PEM, incl. BEGIN/END lines"
+      },
+      {
+        "name": "private_key_passphrase",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key Passphrase",
+        "placeholder": "Only if the key is encrypted (optional)"
+      },
+      {
+        "name": "compartment_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Compartment OCID",
+        "placeholder": "ocid1.compartment.oc1..aaaa… (scopes the picker)"
+      },
+      {
+        "name": "work_request_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Work Request OCID",
+        "placeholder": "ocid1.clustersworkrequest.oc1..aaaa…",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Work Request OCID",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "oracle/containerengine/work_request_errors_list": {
+    "hash": "3ec2e8acf70b40da03cfcc64a2ffd93ebc46044fd18fe8cfb05a209f4c67064a",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "OCI Container Engine: List Work Request Errors",
+    "description": "List the errors recorded against an Oracle Cloud OKE work request.",
+    "website": "https://www.flomation.co",
+    "icon": "oracle+cubes",
+    "date": "22/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Oracle Cloud",
+      "icon": "oracle",
+      "description": "Oracle Cloud Infrastructure (OCI) integrations"
+    },
+    "sub_category": {
+      "name": "Container Engine",
+      "icon": "cubes",
+      "description": "Oracle Cloud Container Engine for Kubernetes (OKE) — provision and manage clusters, node pools and virtual node pools, install add-ons, generate kubeconfig, rotate credentials, and track asynchronous work requests"
+    },
+    "inputs": [
+      {
+        "name": "tenancy_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Tenancy OCID",
+        "placeholder": "ocid1.tenancy.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "user_ocid",
+        "type": "string",
+        "value": null,
+        "label": "User OCID",
+        "placeholder": "ocid1.user.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "e.g. uk-london-1",
+        "required": true
+      },
+      {
+        "name": "fingerprint",
+        "type": "string",
+        "value": null,
+        "label": "Key Fingerprint",
+        "placeholder": "aa:bb:cc:… fingerprint of the uploaded API key",
+        "required": true
+      },
+      {
+        "name": "private_key",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key (PEM)",
+        "placeholder": "The API signing private key — full PEM, incl. BEGIN/END lines"
+      },
+      {
+        "name": "private_key_passphrase",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key Passphrase",
+        "placeholder": "Only if the key is encrypted (optional)"
+      },
+      {
+        "name": "compartment_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Compartment OCID",
+        "placeholder": "ocid1.compartment.oc1..aaaa… (use the tenancy OCID for the root)",
+        "required": true
+      },
+      {
+        "name": "work_request_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Work Request OCID",
+        "placeholder": "ocid1.clustersworkrequest.oc1..aaaa…",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "errors",
+        "type": "object",
+        "value": null,
+        "label": "Errors",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "string",
+        "value": null,
+        "label": "Count",
+        "placeholder": ""
+      },
+      {
+        "name": "truncated",
+        "type": "boolean",
+        "value": null,
+        "label": "Truncated",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "oracle/containerengine/work_request_get": {
+    "hash": "02525a29958f5757b0fd6f5b8f53ca5bbad25263bae88d02fb8255ffc51448e4",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "OCI Container Engine: Get Work Request",
+    "description": "Fetch an Oracle Cloud OKE work request by OCID — its operation type, status (ACCEPTED/IN_PROGRESS/SUCCEEDED/FAILED), affected resources and timings. Poll this after any create/update/delete to track the async operation.",
+    "website": "https://www.flomation.co",
+    "icon": "oracle+cubes",
+    "date": "22/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Oracle Cloud",
+      "icon": "oracle",
+      "description": "Oracle Cloud Infrastructure (OCI) integrations"
+    },
+    "sub_category": {
+      "name": "Container Engine",
+      "icon": "cubes",
+      "description": "Oracle Cloud Container Engine for Kubernetes (OKE) — provision and manage clusters, node pools and virtual node pools, install add-ons, generate kubeconfig, rotate credentials, and track asynchronous work requests"
+    },
+    "inputs": [
+      {
+        "name": "tenancy_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Tenancy OCID",
+        "placeholder": "ocid1.tenancy.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "user_ocid",
+        "type": "string",
+        "value": null,
+        "label": "User OCID",
+        "placeholder": "ocid1.user.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "e.g. uk-london-1",
+        "required": true
+      },
+      {
+        "name": "fingerprint",
+        "type": "string",
+        "value": null,
+        "label": "Key Fingerprint",
+        "placeholder": "aa:bb:cc:… fingerprint of the uploaded API key",
+        "required": true
+      },
+      {
+        "name": "private_key",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key (PEM)",
+        "placeholder": "The API signing private key — full PEM, incl. BEGIN/END lines"
+      },
+      {
+        "name": "private_key_passphrase",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key Passphrase",
+        "placeholder": "Only if the key is encrypted (optional)"
+      },
+      {
+        "name": "compartment_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Compartment OCID",
+        "placeholder": "ocid1.compartment.oc1..aaaa… (scopes the work-request picker)"
+      },
+      {
+        "name": "work_request_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Work Request OCID",
+        "placeholder": "ocid1.clustersworkrequest.oc1..aaaa…",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "work_request",
+        "type": "object",
+        "value": null,
+        "label": "Work Request",
+        "placeholder": ""
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Work Request OCID",
+        "placeholder": ""
+      },
+      {
+        "name": "status",
+        "type": "string",
+        "value": null,
+        "label": "Status",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "oracle/containerengine/work_request_list": {
+    "hash": "9d8ec4898d51d76620bc359fbddf5154c17bbd109d513f95481b8d3d75a335ab",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "OCI Container Engine: List Work Requests",
+    "description": "List the Oracle Cloud OKE work requests in a compartment, optionally scoped to a cluster or resource. Walks pagination up to a safe cap.",
+    "website": "https://www.flomation.co",
+    "icon": "oracle+cubes",
+    "date": "22/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Oracle Cloud",
+      "icon": "oracle",
+      "description": "Oracle Cloud Infrastructure (OCI) integrations"
+    },
+    "sub_category": {
+      "name": "Container Engine",
+      "icon": "cubes",
+      "description": "Oracle Cloud Container Engine for Kubernetes (OKE) — provision and manage clusters, node pools and virtual node pools, install add-ons, generate kubeconfig, rotate credentials, and track asynchronous work requests"
+    },
+    "inputs": [
+      {
+        "name": "tenancy_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Tenancy OCID",
+        "placeholder": "ocid1.tenancy.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "user_ocid",
+        "type": "string",
+        "value": null,
+        "label": "User OCID",
+        "placeholder": "ocid1.user.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "e.g. uk-london-1",
+        "required": true
+      },
+      {
+        "name": "fingerprint",
+        "type": "string",
+        "value": null,
+        "label": "Key Fingerprint",
+        "placeholder": "aa:bb:cc:… fingerprint of the uploaded API key",
+        "required": true
+      },
+      {
+        "name": "private_key",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key (PEM)",
+        "placeholder": "The API signing private key — full PEM, incl. BEGIN/END lines"
+      },
+      {
+        "name": "private_key_passphrase",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key Passphrase",
+        "placeholder": "Only if the key is encrypted (optional)"
+      },
+      {
+        "name": "compartment_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Compartment OCID",
+        "placeholder": "ocid1.compartment.oc1..aaaa… (use the tenancy OCID for the root)",
+        "required": true
+      },
+      {
+        "name": "cluster_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Cluster OCID",
+        "placeholder": "Only work requests for this cluster (optional)"
+      },
+      {
+        "name": "resource_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Resource OCID",
+        "placeholder": "Only work requests affecting this resource (optional)"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "work_requests",
+        "type": "object",
+        "value": null,
+        "label": "Work Requests",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "string",
+        "value": null,
+        "label": "Count",
+        "placeholder": ""
+      },
+      {
+        "name": "truncated",
+        "type": "boolean",
+        "value": null,
+        "label": "Truncated",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "oracle/containerengine/work_request_logs_list": {
+    "hash": "f86a537e04f20b0f6d4cbe9cfa21def8847169fc9bc8d31360c8ad34c1e4ebc8",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "OCI Container Engine: List Work Request Logs",
+    "description": "List the log entries for an Oracle Cloud OKE work request, so a flow can trace what an asynchronous operation did.",
+    "website": "https://www.flomation.co",
+    "icon": "oracle+cubes",
+    "date": "22/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Oracle Cloud",
+      "icon": "oracle",
+      "description": "Oracle Cloud Infrastructure (OCI) integrations"
+    },
+    "sub_category": {
+      "name": "Container Engine",
+      "icon": "cubes",
+      "description": "Oracle Cloud Container Engine for Kubernetes (OKE) — provision and manage clusters, node pools and virtual node pools, install add-ons, generate kubeconfig, rotate credentials, and track asynchronous work requests"
+    },
+    "inputs": [
+      {
+        "name": "tenancy_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Tenancy OCID",
+        "placeholder": "ocid1.tenancy.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "user_ocid",
+        "type": "string",
+        "value": null,
+        "label": "User OCID",
+        "placeholder": "ocid1.user.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "e.g. uk-london-1",
+        "required": true
+      },
+      {
+        "name": "fingerprint",
+        "type": "string",
+        "value": null,
+        "label": "Key Fingerprint",
+        "placeholder": "aa:bb:cc:… fingerprint of the uploaded API key",
+        "required": true
+      },
+      {
+        "name": "private_key",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key (PEM)",
+        "placeholder": "The API signing private key — full PEM, incl. BEGIN/END lines"
+      },
+      {
+        "name": "private_key_passphrase",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key Passphrase",
+        "placeholder": "Only if the key is encrypted (optional)"
+      },
+      {
+        "name": "compartment_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Compartment OCID",
+        "placeholder": "ocid1.compartment.oc1..aaaa… (use the tenancy OCID for the root)",
+        "required": true
+      },
+      {
+        "name": "work_request_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Work Request OCID",
+        "placeholder": "ocid1.clustersworkrequest.oc1..aaaa…",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "logs",
+        "type": "object",
+        "value": null,
+        "label": "Log entries",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "string",
+        "value": null,
+        "label": "Count",
+        "placeholder": ""
+      },
+      {
+        "name": "truncated",
+        "type": "boolean",
+        "value": null,
+        "label": "Truncated",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "oracle/containerengine/workload_mapping_create": {
+    "hash": "cfc53ad97634b396ff18b5f49e7797cd954090441bf1d6c27d60c020d5a9c1af",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "OCI Container Engine: Create Workload Mapping",
+    "description": "Create a workload mapping on an Oracle Cloud OKE cluster — bind a Kubernetes namespace to a mapped customer compartment.",
+    "website": "https://www.flomation.co",
+    "icon": "oracle+cubes",
+    "date": "22/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Oracle Cloud",
+      "icon": "oracle",
+      "description": "Oracle Cloud Infrastructure (OCI) integrations"
+    },
+    "sub_category": {
+      "name": "Container Engine",
+      "icon": "cubes",
+      "description": "Oracle Cloud Container Engine for Kubernetes (OKE) — provision and manage clusters, node pools and virtual node pools, install add-ons, generate kubeconfig, rotate credentials, and track asynchronous work requests"
+    },
+    "inputs": [
+      {
+        "name": "tenancy_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Tenancy OCID",
+        "placeholder": "ocid1.tenancy.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "user_ocid",
+        "type": "string",
+        "value": null,
+        "label": "User OCID",
+        "placeholder": "ocid1.user.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "e.g. uk-london-1",
+        "required": true
+      },
+      {
+        "name": "fingerprint",
+        "type": "string",
+        "value": null,
+        "label": "Key Fingerprint",
+        "placeholder": "aa:bb:cc:… fingerprint of the uploaded API key",
+        "required": true
+      },
+      {
+        "name": "private_key",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key (PEM)",
+        "placeholder": "The API signing private key — full PEM, incl. BEGIN/END lines"
+      },
+      {
+        "name": "private_key_passphrase",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key Passphrase",
+        "placeholder": "Only if the key is encrypted (optional)"
+      },
+      {
+        "name": "compartment_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Compartment OCID",
+        "placeholder": "ocid1.compartment.oc1..aaaa… (scopes the cluster picker)"
+      },
+      {
+        "name": "cluster_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Cluster OCID",
+        "placeholder": "ocid1.cluster.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "namespace",
+        "type": "string",
+        "value": null,
+        "label": "Namespace",
+        "placeholder": "The Kubernetes namespace to map, e.g. default",
+        "required": true
+      },
+      {
+        "name": "mapped_compartment_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Mapped Compartment OCID",
+        "placeholder": "ocid1.compartment.oc1..aaaa… — the customer compartment to map to",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "workload_mapping",
+        "type": "object",
+        "value": null,
+        "label": "Workload Mapping",
+        "placeholder": ""
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Workload Mapping OCID",
+        "placeholder": ""
+      },
+      {
+        "name": "lifecycle_state",
+        "type": "string",
+        "value": null,
+        "label": "Lifecycle State",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "oracle/containerengine/workload_mapping_delete": {
+    "hash": "311bc5eebcba267dc2c19f34f36662add72ccf18a82b5e0395312a69e918c47b",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "OCI Container Engine: Delete Workload Mapping",
+    "description": "Delete a single workload mapping from an Oracle Cloud OKE cluster by OCID.",
+    "website": "https://www.flomation.co",
+    "icon": "oracle+cubes",
+    "date": "22/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Oracle Cloud",
+      "icon": "oracle",
+      "description": "Oracle Cloud Infrastructure (OCI) integrations"
+    },
+    "sub_category": {
+      "name": "Container Engine",
+      "icon": "cubes",
+      "description": "Oracle Cloud Container Engine for Kubernetes (OKE) — provision and manage clusters, node pools and virtual node pools, install add-ons, generate kubeconfig, rotate credentials, and track asynchronous work requests"
+    },
+    "inputs": [
+      {
+        "name": "tenancy_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Tenancy OCID",
+        "placeholder": "ocid1.tenancy.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "user_ocid",
+        "type": "string",
+        "value": null,
+        "label": "User OCID",
+        "placeholder": "ocid1.user.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "e.g. uk-london-1",
+        "required": true
+      },
+      {
+        "name": "fingerprint",
+        "type": "string",
+        "value": null,
+        "label": "Key Fingerprint",
+        "placeholder": "aa:bb:cc:… fingerprint of the uploaded API key",
+        "required": true
+      },
+      {
+        "name": "private_key",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key (PEM)",
+        "placeholder": "The API signing private key — full PEM, incl. BEGIN/END lines"
+      },
+      {
+        "name": "private_key_passphrase",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key Passphrase",
+        "placeholder": "Only if the key is encrypted (optional)"
+      },
+      {
+        "name": "compartment_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Compartment OCID",
+        "placeholder": "ocid1.compartment.oc1..aaaa… (scopes the picker)"
+      },
+      {
+        "name": "cluster_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Cluster OCID",
+        "placeholder": "ocid1.cluster.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "workload_mapping_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Workload Mapping OCID",
+        "placeholder": "ocid1.clusterworkloadmapping.oc1..aaaa…",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Workload Mapping OCID",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "oracle/containerengine/workload_mapping_get": {
+    "hash": "56efc5847be9265295954ba7c461f18cedfe79ebcb91c6d5292b6abab50db2aa",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "OCI Container Engine: Get Workload Mapping",
+    "description": "Fetch a single Oracle Cloud OKE workload mapping by OCID — its namespace, mapped tenancy/compartment, and lifecycle state.",
+    "website": "https://www.flomation.co",
+    "icon": "oracle+cubes",
+    "date": "22/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Oracle Cloud",
+      "icon": "oracle",
+      "description": "Oracle Cloud Infrastructure (OCI) integrations"
+    },
+    "sub_category": {
+      "name": "Container Engine",
+      "icon": "cubes",
+      "description": "Oracle Cloud Container Engine for Kubernetes (OKE) — provision and manage clusters, node pools and virtual node pools, install add-ons, generate kubeconfig, rotate credentials, and track asynchronous work requests"
+    },
+    "inputs": [
+      {
+        "name": "tenancy_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Tenancy OCID",
+        "placeholder": "ocid1.tenancy.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "user_ocid",
+        "type": "string",
+        "value": null,
+        "label": "User OCID",
+        "placeholder": "ocid1.user.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "e.g. uk-london-1",
+        "required": true
+      },
+      {
+        "name": "fingerprint",
+        "type": "string",
+        "value": null,
+        "label": "Key Fingerprint",
+        "placeholder": "aa:bb:cc:… fingerprint of the uploaded API key",
+        "required": true
+      },
+      {
+        "name": "private_key",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key (PEM)",
+        "placeholder": "The API signing private key — full PEM, incl. BEGIN/END lines"
+      },
+      {
+        "name": "private_key_passphrase",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key Passphrase",
+        "placeholder": "Only if the key is encrypted (optional)"
+      },
+      {
+        "name": "compartment_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Compartment OCID",
+        "placeholder": "ocid1.compartment.oc1..aaaa… (scopes the picker)"
+      },
+      {
+        "name": "cluster_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Cluster OCID",
+        "placeholder": "ocid1.cluster.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "workload_mapping_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Workload Mapping OCID",
+        "placeholder": "ocid1.clusterworkloadmapping.oc1..aaaa…",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "workload_mapping",
+        "type": "object",
+        "value": null,
+        "label": "Workload Mapping",
+        "placeholder": ""
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Workload Mapping OCID",
+        "placeholder": ""
+      },
+      {
+        "name": "lifecycle_state",
+        "type": "string",
+        "value": null,
+        "label": "Lifecycle State",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "oracle/containerengine/workload_mapping_list": {
+    "hash": "59ba1711c696039cb6f9c75a7d7c27534240937741ba0cc067b701f170fe6043",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "OCI Container Engine: List Workload Mappings",
+    "description": "List the workload mappings on an Oracle Cloud OKE cluster. Walks pagination up to a safe cap.",
+    "website": "https://www.flomation.co",
+    "icon": "oracle+cubes",
+    "date": "22/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Oracle Cloud",
+      "icon": "oracle",
+      "description": "Oracle Cloud Infrastructure (OCI) integrations"
+    },
+    "sub_category": {
+      "name": "Container Engine",
+      "icon": "cubes",
+      "description": "Oracle Cloud Container Engine for Kubernetes (OKE) — provision and manage clusters, node pools and virtual node pools, install add-ons, generate kubeconfig, rotate credentials, and track asynchronous work requests"
+    },
+    "inputs": [
+      {
+        "name": "tenancy_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Tenancy OCID",
+        "placeholder": "ocid1.tenancy.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "user_ocid",
+        "type": "string",
+        "value": null,
+        "label": "User OCID",
+        "placeholder": "ocid1.user.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "e.g. uk-london-1",
+        "required": true
+      },
+      {
+        "name": "fingerprint",
+        "type": "string",
+        "value": null,
+        "label": "Key Fingerprint",
+        "placeholder": "aa:bb:cc:… fingerprint of the uploaded API key",
+        "required": true
+      },
+      {
+        "name": "private_key",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key (PEM)",
+        "placeholder": "The API signing private key — full PEM, incl. BEGIN/END lines"
+      },
+      {
+        "name": "private_key_passphrase",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key Passphrase",
+        "placeholder": "Only if the key is encrypted (optional)"
+      },
+      {
+        "name": "compartment_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Compartment OCID",
+        "placeholder": "ocid1.compartment.oc1..aaaa… (scopes the picker)"
+      },
+      {
+        "name": "cluster_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Cluster OCID",
+        "placeholder": "ocid1.cluster.oc1..aaaa… — the OKE cluster to list mappings for",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "workload_mappings",
+        "type": "object",
+        "value": null,
+        "label": "Workload Mappings",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "string",
+        "value": null,
+        "label": "Count",
+        "placeholder": ""
+      },
+      {
+        "name": "truncated",
+        "type": "boolean",
+        "value": null,
+        "label": "Truncated",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "oracle/containerengine/workload_mapping_update": {
+    "hash": "3ada208cb54659cd2baef560106b50ce52378319157b02ddc6806f485d545190",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "OCI Container Engine: Update Workload Mapping",
+    "description": "Update an Oracle Cloud OKE workload mapping — re-point it at a different mapped compartment for the cluster.",
+    "website": "https://www.flomation.co",
+    "icon": "oracle+cubes",
+    "date": "22/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Oracle Cloud",
+      "icon": "oracle",
+      "description": "Oracle Cloud Infrastructure (OCI) integrations"
+    },
+    "sub_category": {
+      "name": "Container Engine",
+      "icon": "cubes",
+      "description": "Oracle Cloud Container Engine for Kubernetes (OKE) — provision and manage clusters, node pools and virtual node pools, install add-ons, generate kubeconfig, rotate credentials, and track asynchronous work requests"
+    },
+    "inputs": [
+      {
+        "name": "tenancy_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Tenancy OCID",
+        "placeholder": "ocid1.tenancy.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "user_ocid",
+        "type": "string",
+        "value": null,
+        "label": "User OCID",
+        "placeholder": "ocid1.user.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "e.g. uk-london-1",
+        "required": true
+      },
+      {
+        "name": "fingerprint",
+        "type": "string",
+        "value": null,
+        "label": "Key Fingerprint",
+        "placeholder": "aa:bb:cc:… fingerprint of the uploaded API key",
+        "required": true
+      },
+      {
+        "name": "private_key",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key (PEM)",
+        "placeholder": "The API signing private key — full PEM, incl. BEGIN/END lines"
+      },
+      {
+        "name": "private_key_passphrase",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key Passphrase",
+        "placeholder": "Only if the key is encrypted (optional)"
+      },
+      {
+        "name": "compartment_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Compartment OCID",
+        "placeholder": "ocid1.compartment.oc1..aaaa… (scopes the picker)"
+      },
+      {
+        "name": "cluster_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Cluster OCID",
+        "placeholder": "ocid1.cluster.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "workload_mapping_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Workload Mapping OCID",
+        "placeholder": "ocid1.clusterworkloadmapping.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "mapped_compartment_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Mapped Compartment OCID",
+        "placeholder": "ocid1.compartment.oc1..aaaa… (new mapped compartment, optional)"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "workload_mapping",
+        "type": "object",
+        "value": null,
+        "label": "Workload Mapping",
+        "placeholder": ""
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Workload Mapping OCID",
+        "placeholder": ""
+      },
+      {
+        "name": "lifecycle_state",
+        "type": "string",
+        "value": null,
+        "label": "Lifecycle State",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
   "oracle/dns/domain_records_delete": {
     "hash": "119bcef1779ac15960d687789246d69831cafb328068dce44bbc087f537a9cec",
     "author": "Dave McElin",

@@ -1,0 +1,60 @@
+// Package oracle_containerengine_cluster_options_get reports the Kubernetes versions
+// available for OKE clusters in a compartment.
+package oracle_containerengine_cluster_options_get
+
+import (
+	core "flomation.app/automate/executor"
+	oke "flomation.app/automate/executor/actions/oracle/containerengine"
+
+	okesdk "github.com/oracle/oci-go-sdk/v65/containerengine"
+)
+
+const (
+	Author       = "Dave McElin"
+	Organisation = "Flomation"
+	Name         = "OCI Container Engine: Get Cluster Options"
+	Description  = "List the Kubernetes versions available for new Oracle Cloud OKE clusters in a compartment."
+	Website      = "https://www.flomation.co"
+	Icon         = "oracle+cubes"
+	Date         = "22/07/2026"
+	Type         = core.ActionTypeAction
+)
+
+var Inputs = [...]core.Connection{
+	{Name: "tenancy_ocid", Type: core.ConnectionTypeString, Label: "Tenancy OCID", Placeholder: "ocid1.tenancy.oc1..aaaa…", Required: true},
+	{Name: "user_ocid", Type: core.ConnectionTypeString, Label: "User OCID", Placeholder: "ocid1.user.oc1..aaaa…", Required: true},
+	{Name: "region", Type: core.ConnectionTypeString, Label: "Region", Placeholder: "e.g. uk-london-1", Required: true},
+	{Name: "fingerprint", Type: core.ConnectionTypeString, Label: "Key Fingerprint", Placeholder: "aa:bb:cc:… fingerprint of the uploaded API key", Required: true},
+	{Name: "private_key", Type: core.ConnectionTypeSecret, Label: "Private Key (PEM)", Placeholder: "The API signing private key — full PEM, incl. BEGIN/END lines"},
+	{Name: "private_key_passphrase", Type: core.ConnectionTypeSecret, Label: "Private Key Passphrase", Placeholder: "Only if the key is encrypted (optional)"},
+	{Name: "compartment_ocid", Type: core.ConnectionTypeString, Label: "Compartment OCID", Placeholder: "ocid1.compartment.oc1..aaaa… (use the tenancy OCID for the root)", Required: true},
+}
+
+var Outputs = [...]core.Connection{
+	{Name: "tool_result", Type: core.ConnectionTypeString, Label: "Result summary"},
+	{Name: "kubernetes_versions", Type: core.ConnectionTypeObject, Label: "Kubernetes Versions"},
+	{Name: "success", Type: core.ConnectionTypeBoolean, Label: "Success"},
+	{Name: "error", Type: core.ConnectionTypeString, Label: "Error"},
+}
+
+func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[string]interface{}, error) {
+	auth, client, errResult := oke.Client(inputs)
+	if errResult != nil {
+		return errResult, nil
+	}
+	compartment, err := auth.RequiredCompartment()
+	if err != nil {
+		return oke.ErrorResult(err.Error()), nil
+	}
+	optId := "all"
+	resp, err := client.GetClusterOptions(oke.Context(), okesdk.GetClusterOptionsRequest{
+		ClusterOptionId: &optId,
+		CompartmentId:   &compartment,
+	})
+	if err != nil {
+		return oke.ErrorResult(auth.OCIError(err)), nil
+	}
+	return oke.Result("Supported Kubernetes versions", map[string]interface{}{
+		"kubernetes_versions": resp.KubernetesVersions,
+	}), nil
+}
