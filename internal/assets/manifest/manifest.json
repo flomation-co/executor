@@ -286719,7 +286719,7 @@
     ]
   },
   "oracle/apigateway/deployment_create": {
-    "hash": "d4e6715a9bb473c9629fd8b65e9d2ab70e99331cbaafeef958f12b12152b1e11",
+    "hash": "e4931f7f29d8a554782c2b23f8854b6a90d9edf383c8b26207341e87302434db",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "OCI API Gateway: Create Deployment",
@@ -286831,6 +286831,34 @@
         "type": "string",
         "value": null,
         "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "deployment",
+        "type": "object",
+        "value": null,
+        "label": "Deployment",
+        "placeholder": ""
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Deployment OCID",
+        "placeholder": ""
+      },
+      {
+        "name": "lifecycle_state",
+        "type": "string",
+        "value": null,
+        "label": "Lifecycle State",
+        "placeholder": ""
+      },
+      {
+        "name": "endpoint",
+        "type": "string",
+        "value": null,
+        "label": "Endpoint",
         "placeholder": ""
       },
       {

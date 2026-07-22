@@ -41,6 +41,10 @@ var Inputs = [...]core.Connection{
 
 var Outputs = [...]core.Connection{
 	{Name: "tool_result", Type: core.ConnectionTypeString, Label: "Result summary"},
+	{Name: "deployment", Type: core.ConnectionTypeObject, Label: "Deployment"},
+	{Name: "id", Type: core.ConnectionTypeString, Label: "Deployment OCID"},
+	{Name: "lifecycle_state", Type: core.ConnectionTypeString, Label: "Lifecycle State"},
+	{Name: "endpoint", Type: core.ConnectionTypeString, Label: "Endpoint"},
 	{Name: "work_request_id", Type: core.ConnectionTypeString, Label: "Work Request OCID"},
 	{Name: "success", Type: core.ConnectionTypeBoolean, Label: "Success"},
 	{Name: "error", Type: core.ConnectionTypeString, Label: "Error"},
@@ -86,7 +90,14 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	if err != nil {
 		return agw.ErrorResult(auth.OCIError(err)), nil
 	}
+	// The async create returns the deployment in a CREATING state — surface its OCID so the caller
+	// can wire it straight into a Get Deployment poll without a separate list (per Dan's review).
+	dep := agw.SummariseDeployment(&resp.Deployment)
 	return agw.Result(fmt.Sprintf("Creating deployment on gateway %s under %q — poll Get Deployment until ACTIVE", gatewayID, pathPrefix), map[string]interface{}{
+		"deployment":      dep,
+		"id":              dep["id"],
+		"lifecycle_state": dep["lifecycle_state"],
+		"endpoint":        dep["endpoint"],
 		"work_request_id": agw.Str(resp.OpcWorkRequestId),
 	}), nil
 }
