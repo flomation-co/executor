@@ -6,6 +6,7 @@ package oracle_blockvolume_backup_policy_get_all
 
 import (
 	"fmt"
+	"strings"
 
 	core "flomation.app/automate/executor"
 	bv "flomation.app/automate/executor/actions/oracle/blockvolume"
@@ -53,8 +54,9 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 		return bv.ErrorResult(auth.OCIError(err)), nil
 	}
 	req := ocicore.ListVolumeBackupPoliciesRequest{}
-	if c := bv.OptionalString("compartment_ocid", inputs); c != "" {
-		req.CompartmentId = &c
+	compartment := strings.TrimSpace(bv.OptionalString("compartment_ocid", inputs))
+	if compartment != "" {
+		req.CompartmentId = &compartment
 	}
 	var policies []map[string]interface{}
 	truncated := false
@@ -75,8 +77,14 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 		}
 		req.Page = resp.OpcNextPage
 	}
+	// Say WHICH set was returned: with no compartment OCI hands back its predefined
+	// Bronze/Silver/Gold/Platinum policies; with one, the user-defined policies in it.
+	scope := "(predefined)"
+	if compartment != "" {
+		scope = fmt.Sprintf("in compartment %s", compartment)
+	}
 	return map[string]interface{}{
-		"tool_result": fmt.Sprintf("Found %d backup policy(ies)", len(policies)),
+		"tool_result": fmt.Sprintf("Found %d backup policy(ies) %s", len(policies), scope),
 		"policies":    policies,
 		"count":       fmt.Sprintf("%d", len(policies)),
 		"truncated":   truncated,

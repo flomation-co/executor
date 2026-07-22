@@ -44,6 +44,10 @@ var Outputs = [...]core.Connection{
 }
 
 func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[string]interface{}, error) {
+	// compartment_ocid is declared only to scope the policy_ocid picker in the editor
+	// (see the api's dynamicOptionsMetadata) — the assignment itself is keyed on the
+	// asset + policy OCIDs, so it is intentionally not read here. Same pattern as the
+	// networking node's per-resource actions.
 	auth, err := bv.GetAuth(inputs)
 	if err != nil {
 		return bv.ErrorResult(err.Error()), nil

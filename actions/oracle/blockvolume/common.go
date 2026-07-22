@@ -258,6 +258,18 @@ func FormatTime(t *common.SDKTime) string {
 	return t.Time.UTC().Format(time.RFC3339)
 }
 
+// NormaliseRegion trims and lower-cases an operator-entered OCI region identifier.
+// OCI region keys are canonically lower-case (uk-london-1, us-ashburn-1); the auth
+// region is host-selecting, so GetAuth already lower-cases + guards it. The
+// cross-region *destination* fields (backup copies, backup-policy replication) are
+// data rather than host-selecting, but we normalise operator free-text the same way
+// so a stray "US-ASHBURN-1" doesn't bounce off OCI as an invalid region. Centralised
+// here so every destination-region field is handled identically and the intent is
+// documented in one place.
+func NormaliseRegion(name string, inputs []*coreflow.Connection) string {
+	return strings.ToLower(strings.TrimSpace(OptionalString(name, inputs)))
+}
+
 // ---------------------------------------------------------------------------
 // Resource summarisers — one per resource type so the output shape is identical
 // across a resource's create/get/get_all actions.

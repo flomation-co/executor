@@ -1,8 +1,9 @@
 // Package oracle_blockvolume_volume_attach attaches a block volume to a compute
 // instance. This action spans two OCI service clients — the attach call itself lives
 // on the Compute client, keyed by the instance OCID (path) with the volume OCID in
-// the body. A paravirtualized attachment is the sane default (no in-guest iSCSI
-// setup); iSCSI and emulated modes are out of scope for the operator surface.
+// the body. Paravirtualized is the default (no in-guest setup, works on VM shapes);
+// iSCSI is required for bare-metal instances and emulated is available for legacy
+// images, so the attachment type is operator-selectable.
 package oracle_blockvolume_volume_attach
 
 import (
@@ -19,7 +20,7 @@ const (
 	Author       = "Dave McElin"
 	Organisation = "Flomation"
 	Name         = "OCI Block Volumes: Attach Volume"
-	Description  = "Attach an Oracle Cloud block volume to a compute instance (paravirtualized). Optionally set the device path, read-only and shareable flags."
+	Description  = "Attach an Oracle Cloud block volume to a compute instance. Defaults to a paravirtualized attachment (VM shapes); choose iSCSI for bare-metal instances or emulated for legacy images. Optionally set the device path, read-only and shareable flags."
 	Website      = "https://www.flomation.co"
 	Icon         = "oracle+plug"
 	Date         = "21/07/2026"
@@ -36,6 +37,11 @@ var Inputs = [...]core.Connection{
 	{Name: "compartment_ocid", Type: core.ConnectionTypeString, Label: "Compartment OCID", Placeholder: "ocid1.compartment.oc1..aaaa… (scopes the instance & volume pickers)"},
 	{Name: "instance_ocid", Type: core.ConnectionTypeString, Label: "Instance OCID", Placeholder: "ocid1.instance.oc1..aaaa… (the compute instance to attach to)", Required: true},
 	{Name: "volume_ocid", Type: core.ConnectionTypeString, Label: "Volume OCID", Placeholder: "ocid1.volume.oc1..aaaa… (the block volume to attach)", Required: true},
+	{Name: "attachment_type", Type: core.ConnectionTypeString, Label: "Attachment Type", Placeholder: "Paravirtualized (default, VM shapes), iSCSI (required for bare-metal), or Emulated", Options: []core.ConnectionOption{
+		{Name: "Paravirtualized", Value: "paravirtualized"},
+		{Name: "iSCSI", Value: "iscsi"},
+		{Name: "Emulated", Value: "emulated"},
+	}},
 	{Name: "display_name", Type: core.ConnectionTypeString, Label: "Display Name", Placeholder: "Friendly name for the attachment (optional)"},
 	{Name: "device", Type: core.ConnectionTypeString, Label: "Device Path", Placeholder: "e.g. /dev/oracleoci/oraclevdb — pin the in-guest device name (optional)"},
 	{Name: "is_read_only", Type: core.ConnectionTypeBoolean, Label: "Read Only", Placeholder: "Attach the volume read-only (optional)"},
@@ -60,20 +66,36 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	if err != nil {
 		return bv.ErrorResult(err.Error()), nil
 	}
-	details := ocicore.AttachParavirtualizedVolumeDetails{InstanceId: &instanceID, VolumeId: &volumeID}
-	if v := strings.TrimSpace(bv.OptionalString("display_name", inputs)); v != "" {
-		details.DisplayName = &v
+	// Fields common to all three attachment types; nil when the operator left them blank.
+	strPtr := func(name string) *string {
+		if v := strings.TrimSpace(bv.OptionalString(name, inputs)); v != "" {
+			return &v
+		}
+		return nil
 	}
-	if v := strings.TrimSpace(bv.OptionalString("device", inputs)); v != "" {
-		details.Device = &v
+	boolPtr := func(name string) *bool {
+		if bv.BoolWasSet(name, inputs) {
+			b := bv.OptionalBool(name, inputs, false)
+			return &b
+		}
+		return nil
 	}
-	if bv.BoolWasSet("is_read_only", inputs) {
-		ro := bv.OptionalBool("is_read_only", inputs, false)
-		details.IsReadOnly = &ro
-	}
-	if bv.BoolWasSet("is_shareable", inputs) {
-		sh := bv.OptionalBool("is_shareable", inputs, false)
-		details.IsShareable = &sh
+	displayName, device := strPtr("display_name"), strPtr("device")
+	readOnly, shareable := boolPtr("is_read_only"), boolPtr("is_shareable")
+
+	// All three concrete detail types implement the AttachVolumeDetails interface and
+	// share these fields; paravirtualized is the default for VM shapes, iSCSI is
+	// required for bare-metal instances, emulated is for legacy images.
+	var details ocicore.AttachVolumeDetails
+	switch strings.ToLower(strings.TrimSpace(bv.OptionalString("attachment_type", inputs))) {
+	case "", "paravirtualized":
+		details = ocicore.AttachParavirtualizedVolumeDetails{InstanceId: &instanceID, VolumeId: &volumeID, DisplayName: displayName, Device: device, IsReadOnly: readOnly, IsShareable: shareable}
+	case "iscsi":
+		details = ocicore.AttachIScsiVolumeDetails{InstanceId: &instanceID, VolumeId: &volumeID, DisplayName: displayName, Device: device, IsReadOnly: readOnly, IsShareable: shareable}
+	case "emulated":
+		details = ocicore.AttachEmulatedVolumeDetails{InstanceId: &instanceID, VolumeId: &volumeID, DisplayName: displayName, Device: device, IsReadOnly: readOnly, IsShareable: shareable}
+	default:
+		return bv.ErrorResult(fmt.Sprintf("attachment type %q is not valid — expected paravirtualized, iscsi or emulated", bv.OptionalString("attachment_type", inputs))), nil
 	}
 	resp, err := client.AttachVolume(bv.Context(), ocicore.AttachVolumeRequest{AttachVolumeDetails: details})
 	if err != nil {

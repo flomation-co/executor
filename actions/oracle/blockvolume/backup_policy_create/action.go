@@ -65,7 +65,7 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	if v := strings.TrimSpace(bv.OptionalString("display_name", inputs)); v != "" {
 		details.DisplayName = &v
 	}
-	if v := strings.ToLower(strings.TrimSpace(bv.OptionalString("destination_region", inputs))); v != "" {
+	if v := bv.NormaliseRegion("destination_region", inputs); v != "" {
 		details.DestinationRegion = &v
 	}
 	if raw := strings.TrimSpace(bv.OptionalString("schedules_json", inputs)); raw != "" {

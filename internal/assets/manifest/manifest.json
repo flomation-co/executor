@@ -220197,7 +220197,7 @@
     ]
   },
   "oracle/blockvolume/backup_policy_assign": {
-    "hash": "2ed0bde21140508f7c84263ce21d063a03ad12862bcb6ff7276acd2c1888c65a",
+    "hash": "aa524760903a7f202d89ce54b4b1d6db6878bdee13875d2d81acc505c6b5b654",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "OCI Block Volumes: Assign Backup Policy",
@@ -220326,7 +220326,7 @@
     ]
   },
   "oracle/blockvolume/backup_policy_create": {
-    "hash": "6ffd57958c89f93ea7b4f14c05ed0ab976b8e3fb03d2979b8e395ff8f3b40ca3",
+    "hash": "b5321d825d68df205cfe52d97f6dad093df18108fc5e07e21c391ce587277651",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "OCI Block Volumes: Create Backup Policy",
@@ -220703,7 +220703,7 @@
     ]
   },
   "oracle/blockvolume/backup_policy_get_all": {
-    "hash": "5b79016f7d65551c371054e4a37c8bd119b2fb1733b63272cf914e2b945f55c6",
+    "hash": "8ebd96174be11e412781ca0973af293ae31bda697bcbe54c492954e54e24852c",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "OCI Block Volumes: List Backup Policies",
@@ -221179,7 +221179,7 @@
     ]
   },
   "oracle/blockvolume/backup_policy_update": {
-    "hash": "1a1c0b5d4aae8a3e7a7cf87866b56da130904b77f2ced4ddf5b8d34580757b46",
+    "hash": "76c8f816b583684794073d8e58e0e1cc89a8fa87d8dd4df07dcbfe1c951fe3e2",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "OCI Block Volumes: Update Backup Policy",
@@ -221971,7 +221971,7 @@
     ]
   },
   "oracle/blockvolume/boot_volume_backup_copy": {
-    "hash": "f6339c0168e3af2d37a8a7881712e7935dc0607107eaf37a124593001377f890",
+    "hash": "f6f1972107a3e46d86348ad657af8db93fb2719d39f1f48a85097ded40d6076d",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "OCI Block Volumes: Copy Boot Volume Backup",
@@ -224230,11 +224230,11 @@
     ]
   },
   "oracle/blockvolume/volume_attach": {
-    "hash": "75a8dc94578b2d43cf735edefe524b52e99e1a4658097d2ffb06da6659fe7923",
+    "hash": "b9794b53a5cf973fc9633c39d07719ec49d76967702815a13f83168ea80c2c29",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "OCI Block Volumes: Attach Volume",
-    "description": "Attach an Oracle Cloud block volume to a compute instance (paravirtualized). Optionally set the device path, read-only and shareable flags.",
+    "description": "Attach an Oracle Cloud block volume to a compute instance. Defaults to a paravirtualized attachment (VM shapes); choose iSCSI for bare-metal instances or emulated for legacy images. Optionally set the device path, read-only and shareable flags.",
     "website": "https://www.flomation.co",
     "icon": "oracle+plug",
     "date": "21/07/2026",
@@ -224318,6 +224318,27 @@
         "label": "Volume OCID",
         "placeholder": "ocid1.volume.oc1..aaaa… (the block volume to attach)",
         "required": true
+      },
+      {
+        "name": "attachment_type",
+        "type": "string",
+        "value": null,
+        "label": "Attachment Type",
+        "placeholder": "Paravirtualized (default, VM shapes), iSCSI (required for bare-metal), or Emulated",
+        "options": [
+          {
+            "name": "Paravirtualized",
+            "value": "paravirtualized"
+          },
+          {
+            "name": "iSCSI",
+            "value": "iscsi"
+          },
+          {
+            "name": "Emulated",
+            "value": "emulated"
+          }
+        ]
       },
       {
         "name": "display_name",
@@ -224914,7 +224935,7 @@
     ]
   },
   "oracle/blockvolume/volume_backup_copy": {
-    "hash": "9f552714211a2b16bd076ccf6c1c01b98460f871ba799f7c7251fb307ebf7919",
+    "hash": "5d788902151b94b88e8911eb3ec457c82f12c22125d7ffe7f0cf3f423f3eb17a",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "OCI Block Volumes: Copy Volume Backup",
@@ -226633,7 +226654,7 @@
     ]
   },
   "oracle/blockvolume/volume_group_backup_copy": {
-    "hash": "735d12b6b86d5f1fbb2901a05a0f3f901e764127831035e5fbdf57b07d3f5617",
+    "hash": "4b417e4343ba78d24e15c7911c340b7c8324f8a118cb90efd53ea984ec7a45a8",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "OCI Block Volumes: Copy Volume Group Backup",

@@ -50,11 +50,10 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	if errResult != nil {
 		return errResult, nil
 	}
-	dest, err := bv.RequiredString("destination_region", inputs)
-	if err != nil {
-		return bv.ErrorResult(err.Error()), nil
+	dest := bv.NormaliseRegion("destination_region", inputs)
+	if dest == "" {
+		return bv.ErrorResult("destination region is required"), nil
 	}
-	dest = strings.ToLower(dest)
 	details := ocicore.CopyVolumeBackupDetails{DestinationRegion: &dest}
 	if v := strings.TrimSpace(bv.OptionalString("display_name", inputs)); v != "" {
 		details.DisplayName = &v
