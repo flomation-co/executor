@@ -10551,6 +10551,5273 @@
       }
     ]
   },
+  "aws/cloudwatch/delete_alarms": {
+    "hash": "9c54520551a4527ee2ab5386c0fd26472fd9a1d5373fede199e7b0f5d29a863b",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "AWS CloudWatch Delete Alarms",
+    "description": "Delete one or more CloudWatch alarms by name.",
+    "website": "https://www.flomation.co",
+    "icon": "bell+trash",
+    "date": "22/07/2026",
+    "type": 2,
+    "category": {
+      "name": "AWS",
+      "icon": "cloud",
+      "description": "Amazon Web Services integrations"
+    },
+    "sub_category": {
+      "name": "CloudWatch",
+      "icon": "chart-line",
+      "description": "Metrics, alarms and dashboards — publish metric data, manage alarms and build dashboards"
+    },
+    "inputs": [
+      {
+        "name": "auth_method",
+        "type": "string",
+        "value": null,
+        "label": "Authentication",
+        "placeholder": "",
+        "required": true,
+        "options": [
+          {
+            "name": "Access Keys",
+            "value": "keys"
+          },
+          {
+            "name": "Assume Role (cross-account)",
+            "value": "assume_role"
+          },
+          {
+            "name": "Managed Role (Credential)",
+            "value": "credential"
+          }
+        ]
+      },
+      {
+        "name": "aws_access_key",
+        "type": "secret",
+        "value": null,
+        "label": "AWS Access Key",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "aws_secret_key",
+        "type": "secret",
+        "value": null,
+        "label": "AWS Secret Key",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "aws_region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "eu-west-2",
+        "required": true
+      },
+      {
+        "name": "aws_session_token",
+        "type": "secret",
+        "value": null,
+        "label": "Session Token (optional)",
+        "placeholder": "",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "assume_role_arn",
+        "type": "string",
+        "value": null,
+        "label": "Role ARN to Assume",
+        "placeholder": "arn:aws:iam::\u003cyour-account\u003e:role/FlomationAccess",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "assume_role"
+          ]
+        }
+      },
+      {
+        "name": "external_id",
+        "type": "string",
+        "value": null,
+        "label": "Assume Role External ID (optional)",
+        "placeholder": "Must match the External ID in the role's trust policy",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "assume_role"
+          ]
+        }
+      },
+      {
+        "name": "credential",
+        "type": "credential",
+        "value": null,
+        "label": "AWS Role Credential",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "credential"
+          ]
+        }
+      },
+      {
+        "name": "alarm_names",
+        "type": "string",
+        "value": null,
+        "label": "Alarm Names (comma-separated)",
+        "placeholder": "high-cpu,high-mem",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "deleted_count",
+        "type": "integer",
+        "value": null,
+        "label": "Alarms Deleted",
+        "placeholder": ""
+      }
+    ]
+  },
+  "aws/cloudwatch/delete_dashboards": {
+    "hash": "ac7c04c80aa28fc6d37d828bfddf2eab6ce63f2fbc1681e61c96489f851a0ee2",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "AWS CloudWatch Delete Dashboards",
+    "description": "Delete one or more CloudWatch dashboards by name.",
+    "website": "https://www.flomation.co",
+    "icon": "grip+trash",
+    "date": "22/07/2026",
+    "type": 2,
+    "category": {
+      "name": "AWS",
+      "icon": "cloud",
+      "description": "Amazon Web Services integrations"
+    },
+    "sub_category": {
+      "name": "CloudWatch",
+      "icon": "chart-line",
+      "description": "Metrics, alarms and dashboards — publish metric data, manage alarms and build dashboards"
+    },
+    "inputs": [
+      {
+        "name": "auth_method",
+        "type": "string",
+        "value": null,
+        "label": "Authentication",
+        "placeholder": "",
+        "required": true,
+        "options": [
+          {
+            "name": "Access Keys",
+            "value": "keys"
+          },
+          {
+            "name": "Assume Role (cross-account)",
+            "value": "assume_role"
+          },
+          {
+            "name": "Managed Role (Credential)",
+            "value": "credential"
+          }
+        ]
+      },
+      {
+        "name": "aws_access_key",
+        "type": "secret",
+        "value": null,
+        "label": "AWS Access Key",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "aws_secret_key",
+        "type": "secret",
+        "value": null,
+        "label": "AWS Secret Key",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "aws_region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "eu-west-2",
+        "required": true
+      },
+      {
+        "name": "aws_session_token",
+        "type": "secret",
+        "value": null,
+        "label": "Session Token (optional)",
+        "placeholder": "",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "assume_role_arn",
+        "type": "string",
+        "value": null,
+        "label": "Role ARN to Assume",
+        "placeholder": "arn:aws:iam::\u003cyour-account\u003e:role/FlomationAccess",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "assume_role"
+          ]
+        }
+      },
+      {
+        "name": "external_id",
+        "type": "string",
+        "value": null,
+        "label": "Assume Role External ID (optional)",
+        "placeholder": "Must match the External ID in the role's trust policy",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "assume_role"
+          ]
+        }
+      },
+      {
+        "name": "credential",
+        "type": "credential",
+        "value": null,
+        "label": "AWS Role Credential",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "credential"
+          ]
+        }
+      },
+      {
+        "name": "dashboard_names",
+        "type": "string",
+        "value": null,
+        "label": "Dashboard Names (comma-separated)",
+        "placeholder": "dash-a, dash-b",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      }
+    ]
+  },
+  "aws/cloudwatch/describe_alarm_history": {
+    "hash": "124828e1c87f77187a4e8ff90af8a8ca3e3fb582f2ebe1b455f1e61c6d243244",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "AWS CloudWatch Describe Alarm History",
+    "description": "Retrieve the state change and configuration history for alarms.",
+    "website": "https://www.flomation.co",
+    "icon": "bell+clock",
+    "date": "22/07/2026",
+    "type": 2,
+    "category": {
+      "name": "AWS",
+      "icon": "cloud",
+      "description": "Amazon Web Services integrations"
+    },
+    "sub_category": {
+      "name": "CloudWatch",
+      "icon": "chart-line",
+      "description": "Metrics, alarms and dashboards — publish metric data, manage alarms and build dashboards"
+    },
+    "inputs": [
+      {
+        "name": "auth_method",
+        "type": "string",
+        "value": null,
+        "label": "Authentication",
+        "placeholder": "",
+        "required": true,
+        "options": [
+          {
+            "name": "Access Keys",
+            "value": "keys"
+          },
+          {
+            "name": "Assume Role (cross-account)",
+            "value": "assume_role"
+          },
+          {
+            "name": "Managed Role (Credential)",
+            "value": "credential"
+          }
+        ]
+      },
+      {
+        "name": "aws_access_key",
+        "type": "secret",
+        "value": null,
+        "label": "AWS Access Key",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "aws_secret_key",
+        "type": "secret",
+        "value": null,
+        "label": "AWS Secret Key",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "aws_region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "eu-west-2",
+        "required": true
+      },
+      {
+        "name": "aws_session_token",
+        "type": "secret",
+        "value": null,
+        "label": "Session Token (optional)",
+        "placeholder": "",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "assume_role_arn",
+        "type": "string",
+        "value": null,
+        "label": "Role ARN to Assume",
+        "placeholder": "arn:aws:iam::\u003cyour-account\u003e:role/FlomationAccess",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "assume_role"
+          ]
+        }
+      },
+      {
+        "name": "external_id",
+        "type": "string",
+        "value": null,
+        "label": "Assume Role External ID (optional)",
+        "placeholder": "Must match the External ID in the role's trust policy",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "assume_role"
+          ]
+        }
+      },
+      {
+        "name": "credential",
+        "type": "credential",
+        "value": null,
+        "label": "AWS Role Credential",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "credential"
+          ]
+        }
+      },
+      {
+        "name": "alarm_name",
+        "type": "string",
+        "value": null,
+        "label": "Alarm Name (optional)",
+        "placeholder": "high-cpu"
+      },
+      {
+        "name": "history_item_type",
+        "type": "string",
+        "value": null,
+        "label": "History Item Type (optional)",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "Configuration Update",
+            "value": "ConfigurationUpdate"
+          },
+          {
+            "name": "State Update",
+            "value": "StateUpdate"
+          },
+          {
+            "name": "Action",
+            "value": "Action"
+          }
+        ]
+      },
+      {
+        "name": "start_date",
+        "type": "string",
+        "value": null,
+        "label": "Start Date (RFC3339, optional)",
+        "placeholder": "2026-07-22T00:00:00Z"
+      },
+      {
+        "name": "end_date",
+        "type": "string",
+        "value": null,
+        "label": "End Date (RFC3339, optional)",
+        "placeholder": "2026-07-22T23:59:59Z"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "history",
+        "type": "string",
+        "value": null,
+        "label": "History (JSON)",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "History Item Count",
+        "placeholder": ""
+      }
+    ]
+  },
+  "aws/cloudwatch/describe_alarms": {
+    "hash": "1669a9e33ff0db6d6df3958f64871a6aeb31746a2dce08cbce4b30f88a1d96cd",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "AWS CloudWatch Describe Alarms",
+    "description": "List metric alarms with their current state and thresholds.",
+    "website": "https://www.flomation.co",
+    "icon": "bell+magnifying-glass",
+    "date": "22/07/2026",
+    "type": 2,
+    "category": {
+      "name": "AWS",
+      "icon": "cloud",
+      "description": "Amazon Web Services integrations"
+    },
+    "sub_category": {
+      "name": "CloudWatch",
+      "icon": "chart-line",
+      "description": "Metrics, alarms and dashboards — publish metric data, manage alarms and build dashboards"
+    },
+    "inputs": [
+      {
+        "name": "auth_method",
+        "type": "string",
+        "value": null,
+        "label": "Authentication",
+        "placeholder": "",
+        "required": true,
+        "options": [
+          {
+            "name": "Access Keys",
+            "value": "keys"
+          },
+          {
+            "name": "Assume Role (cross-account)",
+            "value": "assume_role"
+          },
+          {
+            "name": "Managed Role (Credential)",
+            "value": "credential"
+          }
+        ]
+      },
+      {
+        "name": "aws_access_key",
+        "type": "secret",
+        "value": null,
+        "label": "AWS Access Key",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "aws_secret_key",
+        "type": "secret",
+        "value": null,
+        "label": "AWS Secret Key",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "aws_region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "eu-west-2",
+        "required": true
+      },
+      {
+        "name": "aws_session_token",
+        "type": "secret",
+        "value": null,
+        "label": "Session Token (optional)",
+        "placeholder": "",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "assume_role_arn",
+        "type": "string",
+        "value": null,
+        "label": "Role ARN to Assume",
+        "placeholder": "arn:aws:iam::\u003cyour-account\u003e:role/FlomationAccess",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "assume_role"
+          ]
+        }
+      },
+      {
+        "name": "external_id",
+        "type": "string",
+        "value": null,
+        "label": "Assume Role External ID (optional)",
+        "placeholder": "Must match the External ID in the role's trust policy",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "assume_role"
+          ]
+        }
+      },
+      {
+        "name": "credential",
+        "type": "credential",
+        "value": null,
+        "label": "AWS Role Credential",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "credential"
+          ]
+        }
+      },
+      {
+        "name": "alarm_names",
+        "type": "string",
+        "value": null,
+        "label": "Alarm Names (comma-separated, optional)",
+        "placeholder": "high-cpu,high-mem"
+      },
+      {
+        "name": "state_value",
+        "type": "string",
+        "value": null,
+        "label": "State (optional)",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "OK",
+            "value": "OK"
+          },
+          {
+            "name": "ALARM",
+            "value": "ALARM"
+          },
+          {
+            "name": "INSUFFICIENT_DATA",
+            "value": "INSUFFICIENT_DATA"
+          }
+        ]
+      },
+      {
+        "name": "alarm_name_prefix",
+        "type": "string",
+        "value": null,
+        "label": "Alarm Name Prefix (optional)",
+        "placeholder": "prod-"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "alarms",
+        "type": "string",
+        "value": null,
+        "label": "Alarms (JSON)",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Alarm Count",
+        "placeholder": ""
+      }
+    ]
+  },
+  "aws/cloudwatch/disable_alarm_actions": {
+    "hash": "e04d9d66f37aaa852bcc2f7fa3c00f77fb6c5b71192e43ca288852eeb1bc4dd2",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "AWS CloudWatch Disable Alarm Actions",
+    "description": "Disable the configured actions for one or more alarms.",
+    "website": "https://www.flomation.co",
+    "icon": "bell+trash",
+    "date": "22/07/2026",
+    "type": 2,
+    "category": {
+      "name": "AWS",
+      "icon": "cloud",
+      "description": "Amazon Web Services integrations"
+    },
+    "sub_category": {
+      "name": "CloudWatch",
+      "icon": "chart-line",
+      "description": "Metrics, alarms and dashboards — publish metric data, manage alarms and build dashboards"
+    },
+    "inputs": [
+      {
+        "name": "auth_method",
+        "type": "string",
+        "value": null,
+        "label": "Authentication",
+        "placeholder": "",
+        "required": true,
+        "options": [
+          {
+            "name": "Access Keys",
+            "value": "keys"
+          },
+          {
+            "name": "Assume Role (cross-account)",
+            "value": "assume_role"
+          },
+          {
+            "name": "Managed Role (Credential)",
+            "value": "credential"
+          }
+        ]
+      },
+      {
+        "name": "aws_access_key",
+        "type": "secret",
+        "value": null,
+        "label": "AWS Access Key",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "aws_secret_key",
+        "type": "secret",
+        "value": null,
+        "label": "AWS Secret Key",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "aws_region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "eu-west-2",
+        "required": true
+      },
+      {
+        "name": "aws_session_token",
+        "type": "secret",
+        "value": null,
+        "label": "Session Token (optional)",
+        "placeholder": "",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "assume_role_arn",
+        "type": "string",
+        "value": null,
+        "label": "Role ARN to Assume",
+        "placeholder": "arn:aws:iam::\u003cyour-account\u003e:role/FlomationAccess",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "assume_role"
+          ]
+        }
+      },
+      {
+        "name": "external_id",
+        "type": "string",
+        "value": null,
+        "label": "Assume Role External ID (optional)",
+        "placeholder": "Must match the External ID in the role's trust policy",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "assume_role"
+          ]
+        }
+      },
+      {
+        "name": "credential",
+        "type": "credential",
+        "value": null,
+        "label": "AWS Role Credential",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "credential"
+          ]
+        }
+      },
+      {
+        "name": "alarm_names",
+        "type": "string",
+        "value": null,
+        "label": "Alarm Names (comma-separated)",
+        "placeholder": "high-cpu,high-mem",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "alarm_count",
+        "type": "integer",
+        "value": null,
+        "label": "Alarms Updated",
+        "placeholder": ""
+      }
+    ]
+  },
+  "aws/cloudwatch/enable_alarm_actions": {
+    "hash": "b5f97ac9cab234078e9b52cfe00c444f06da87bcf9bfe025aebdee506c0b8cfb",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "AWS CloudWatch Enable Alarm Actions",
+    "description": "Enable the configured actions for one or more alarms.",
+    "website": "https://www.flomation.co",
+    "icon": "bell+circle-check",
+    "date": "22/07/2026",
+    "type": 2,
+    "category": {
+      "name": "AWS",
+      "icon": "cloud",
+      "description": "Amazon Web Services integrations"
+    },
+    "sub_category": {
+      "name": "CloudWatch",
+      "icon": "chart-line",
+      "description": "Metrics, alarms and dashboards — publish metric data, manage alarms and build dashboards"
+    },
+    "inputs": [
+      {
+        "name": "auth_method",
+        "type": "string",
+        "value": null,
+        "label": "Authentication",
+        "placeholder": "",
+        "required": true,
+        "options": [
+          {
+            "name": "Access Keys",
+            "value": "keys"
+          },
+          {
+            "name": "Assume Role (cross-account)",
+            "value": "assume_role"
+          },
+          {
+            "name": "Managed Role (Credential)",
+            "value": "credential"
+          }
+        ]
+      },
+      {
+        "name": "aws_access_key",
+        "type": "secret",
+        "value": null,
+        "label": "AWS Access Key",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "aws_secret_key",
+        "type": "secret",
+        "value": null,
+        "label": "AWS Secret Key",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "aws_region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "eu-west-2",
+        "required": true
+      },
+      {
+        "name": "aws_session_token",
+        "type": "secret",
+        "value": null,
+        "label": "Session Token (optional)",
+        "placeholder": "",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "assume_role_arn",
+        "type": "string",
+        "value": null,
+        "label": "Role ARN to Assume",
+        "placeholder": "arn:aws:iam::\u003cyour-account\u003e:role/FlomationAccess",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "assume_role"
+          ]
+        }
+      },
+      {
+        "name": "external_id",
+        "type": "string",
+        "value": null,
+        "label": "Assume Role External ID (optional)",
+        "placeholder": "Must match the External ID in the role's trust policy",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "assume_role"
+          ]
+        }
+      },
+      {
+        "name": "credential",
+        "type": "credential",
+        "value": null,
+        "label": "AWS Role Credential",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "credential"
+          ]
+        }
+      },
+      {
+        "name": "alarm_names",
+        "type": "string",
+        "value": null,
+        "label": "Alarm Names (comma-separated)",
+        "placeholder": "high-cpu,high-mem",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "alarm_count",
+        "type": "integer",
+        "value": null,
+        "label": "Alarms Updated",
+        "placeholder": ""
+      }
+    ]
+  },
+  "aws/cloudwatch/get_dashboard": {
+    "hash": "0bee4ac8d9f563d947d79d30f4a9a46f7a13848662c513baba3b7afa7900b7bf",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "AWS CloudWatch Get Dashboard",
+    "description": "Fetch a CloudWatch dashboard's widget layout JSON and ARN by name.",
+    "website": "https://www.flomation.co",
+    "icon": "grip+magnifying-glass",
+    "date": "22/07/2026",
+    "type": 2,
+    "category": {
+      "name": "AWS",
+      "icon": "cloud",
+      "description": "Amazon Web Services integrations"
+    },
+    "sub_category": {
+      "name": "CloudWatch",
+      "icon": "chart-line",
+      "description": "Metrics, alarms and dashboards — publish metric data, manage alarms and build dashboards"
+    },
+    "inputs": [
+      {
+        "name": "auth_method",
+        "type": "string",
+        "value": null,
+        "label": "Authentication",
+        "placeholder": "",
+        "required": true,
+        "options": [
+          {
+            "name": "Access Keys",
+            "value": "keys"
+          },
+          {
+            "name": "Assume Role (cross-account)",
+            "value": "assume_role"
+          },
+          {
+            "name": "Managed Role (Credential)",
+            "value": "credential"
+          }
+        ]
+      },
+      {
+        "name": "aws_access_key",
+        "type": "secret",
+        "value": null,
+        "label": "AWS Access Key",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "aws_secret_key",
+        "type": "secret",
+        "value": null,
+        "label": "AWS Secret Key",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "aws_region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "eu-west-2",
+        "required": true
+      },
+      {
+        "name": "aws_session_token",
+        "type": "secret",
+        "value": null,
+        "label": "Session Token (optional)",
+        "placeholder": "",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "assume_role_arn",
+        "type": "string",
+        "value": null,
+        "label": "Role ARN to Assume",
+        "placeholder": "arn:aws:iam::\u003cyour-account\u003e:role/FlomationAccess",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "assume_role"
+          ]
+        }
+      },
+      {
+        "name": "external_id",
+        "type": "string",
+        "value": null,
+        "label": "Assume Role External ID (optional)",
+        "placeholder": "Must match the External ID in the role's trust policy",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "assume_role"
+          ]
+        }
+      },
+      {
+        "name": "credential",
+        "type": "credential",
+        "value": null,
+        "label": "AWS Role Credential",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "credential"
+          ]
+        }
+      },
+      {
+        "name": "dashboard_name",
+        "type": "string",
+        "value": null,
+        "label": "Dashboard Name",
+        "placeholder": "my-dashboard",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "dashboard_body",
+        "type": "string",
+        "value": null,
+        "label": "Dashboard Body (JSON)",
+        "placeholder": ""
+      },
+      {
+        "name": "dashboard_arn",
+        "type": "string",
+        "value": null,
+        "label": "Dashboard ARN",
+        "placeholder": ""
+      }
+    ]
+  },
+  "aws/cloudwatch/get_metric_data": {
+    "hash": "e7c98814d4532bb878bc78d5ecaaad80d6fbb0b0b1083e5029821e32f2b759d0",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "AWS CloudWatch Get Metric Data",
+    "description": "Fetch metric data or math expression results via metric data queries.",
+    "website": "https://www.flomation.co",
+    "icon": "chart-area+magnifying-glass",
+    "date": "22/07/2026",
+    "type": 2,
+    "category": {
+      "name": "AWS",
+      "icon": "cloud",
+      "description": "Amazon Web Services integrations"
+    },
+    "sub_category": {
+      "name": "CloudWatch",
+      "icon": "chart-line",
+      "description": "Metrics, alarms and dashboards — publish metric data, manage alarms and build dashboards"
+    },
+    "inputs": [
+      {
+        "name": "auth_method",
+        "type": "string",
+        "value": null,
+        "label": "Authentication",
+        "placeholder": "",
+        "required": true,
+        "options": [
+          {
+            "name": "Access Keys",
+            "value": "keys"
+          },
+          {
+            "name": "Assume Role (cross-account)",
+            "value": "assume_role"
+          },
+          {
+            "name": "Managed Role (Credential)",
+            "value": "credential"
+          }
+        ]
+      },
+      {
+        "name": "aws_access_key",
+        "type": "secret",
+        "value": null,
+        "label": "AWS Access Key",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "aws_secret_key",
+        "type": "secret",
+        "value": null,
+        "label": "AWS Secret Key",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "aws_region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "eu-west-2",
+        "required": true
+      },
+      {
+        "name": "aws_session_token",
+        "type": "secret",
+        "value": null,
+        "label": "Session Token (optional)",
+        "placeholder": "",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "assume_role_arn",
+        "type": "string",
+        "value": null,
+        "label": "Role ARN to Assume",
+        "placeholder": "arn:aws:iam::\u003cyour-account\u003e:role/FlomationAccess",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "assume_role"
+          ]
+        }
+      },
+      {
+        "name": "external_id",
+        "type": "string",
+        "value": null,
+        "label": "Assume Role External ID (optional)",
+        "placeholder": "Must match the External ID in the role's trust policy",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "assume_role"
+          ]
+        }
+      },
+      {
+        "name": "credential",
+        "type": "credential",
+        "value": null,
+        "label": "AWS Role Credential",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "credential"
+          ]
+        }
+      },
+      {
+        "name": "metric_data_queries",
+        "type": "string",
+        "value": null,
+        "label": "Metric Data Queries (JSON array)",
+        "placeholder": "[{\"Id\":\"m1\",\"MetricStat\":{\"Metric\":{\"Namespace\":\"AWS/EC2\",\"MetricName\":\"CPUUtilization\"},\"Period\":300,\"Stat\":\"Average\"}}]",
+        "required": true
+      },
+      {
+        "name": "start_time",
+        "type": "string",
+        "value": null,
+        "label": "Start Time (RFC3339)",
+        "placeholder": "2026-07-22T00:00:00Z",
+        "required": true
+      },
+      {
+        "name": "end_time",
+        "type": "string",
+        "value": null,
+        "label": "End Time (RFC3339)",
+        "placeholder": "2026-07-22T01:00:00Z",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "results",
+        "type": "string",
+        "value": null,
+        "label": "Results (JSON)",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Result Count",
+        "placeholder": ""
+      }
+    ]
+  },
+  "aws/cloudwatch/get_metric_statistics": {
+    "hash": "d14d43ef180a1c36599856661a663c5f9e625ed0389150d71b5925152d0d0d13",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "AWS CloudWatch Get Metric Statistics",
+    "description": "Retrieve aggregated statistics for a metric over a time range.",
+    "website": "https://www.flomation.co",
+    "icon": "chart-line+magnifying-glass",
+    "date": "22/07/2026",
+    "type": 2,
+    "category": {
+      "name": "AWS",
+      "icon": "cloud",
+      "description": "Amazon Web Services integrations"
+    },
+    "sub_category": {
+      "name": "CloudWatch",
+      "icon": "chart-line",
+      "description": "Metrics, alarms and dashboards — publish metric data, manage alarms and build dashboards"
+    },
+    "inputs": [
+      {
+        "name": "auth_method",
+        "type": "string",
+        "value": null,
+        "label": "Authentication",
+        "placeholder": "",
+        "required": true,
+        "options": [
+          {
+            "name": "Access Keys",
+            "value": "keys"
+          },
+          {
+            "name": "Assume Role (cross-account)",
+            "value": "assume_role"
+          },
+          {
+            "name": "Managed Role (Credential)",
+            "value": "credential"
+          }
+        ]
+      },
+      {
+        "name": "aws_access_key",
+        "type": "secret",
+        "value": null,
+        "label": "AWS Access Key",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "aws_secret_key",
+        "type": "secret",
+        "value": null,
+        "label": "AWS Secret Key",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "aws_region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "eu-west-2",
+        "required": true
+      },
+      {
+        "name": "aws_session_token",
+        "type": "secret",
+        "value": null,
+        "label": "Session Token (optional)",
+        "placeholder": "",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "assume_role_arn",
+        "type": "string",
+        "value": null,
+        "label": "Role ARN to Assume",
+        "placeholder": "arn:aws:iam::\u003cyour-account\u003e:role/FlomationAccess",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "assume_role"
+          ]
+        }
+      },
+      {
+        "name": "external_id",
+        "type": "string",
+        "value": null,
+        "label": "Assume Role External ID (optional)",
+        "placeholder": "Must match the External ID in the role's trust policy",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "assume_role"
+          ]
+        }
+      },
+      {
+        "name": "credential",
+        "type": "credential",
+        "value": null,
+        "label": "AWS Role Credential",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "credential"
+          ]
+        }
+      },
+      {
+        "name": "namespace",
+        "type": "string",
+        "value": null,
+        "label": "Namespace",
+        "placeholder": "AWS/EC2",
+        "required": true
+      },
+      {
+        "name": "metric_name",
+        "type": "string",
+        "value": null,
+        "label": "Metric Name",
+        "placeholder": "CPUUtilization",
+        "required": true
+      },
+      {
+        "name": "dimensions",
+        "type": "key_value_array",
+        "value": null,
+        "label": "Dimensions",
+        "placeholder": "Add a Name and Value per dimension"
+      },
+      {
+        "name": "start_time",
+        "type": "string",
+        "value": null,
+        "label": "Start Time (RFC3339)",
+        "placeholder": "2026-07-22T00:00:00Z",
+        "required": true
+      },
+      {
+        "name": "end_time",
+        "type": "string",
+        "value": null,
+        "label": "End Time (RFC3339)",
+        "placeholder": "2026-07-22T01:00:00Z",
+        "required": true
+      },
+      {
+        "name": "period",
+        "type": "integer",
+        "value": null,
+        "label": "Period (seconds)",
+        "placeholder": "300",
+        "required": true
+      },
+      {
+        "name": "statistics",
+        "type": "string",
+        "value": null,
+        "label": "Statistics (comma-separated)",
+        "placeholder": "Average,Maximum",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "datapoints",
+        "type": "string",
+        "value": null,
+        "label": "Data Points (JSON)",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Data Point Count",
+        "placeholder": ""
+      }
+    ]
+  },
+  "aws/cloudwatch/list_dashboards": {
+    "hash": "92d97518225d8afae6c745a23801fce488ced9a0e01da4241f24b13e00294c05",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "AWS CloudWatch List Dashboards",
+    "description": "List CloudWatch dashboards, optionally filtered by a name prefix.",
+    "website": "https://www.flomation.co",
+    "icon": "grip+list",
+    "date": "22/07/2026",
+    "type": 2,
+    "category": {
+      "name": "AWS",
+      "icon": "cloud",
+      "description": "Amazon Web Services integrations"
+    },
+    "sub_category": {
+      "name": "CloudWatch",
+      "icon": "chart-line",
+      "description": "Metrics, alarms and dashboards — publish metric data, manage alarms and build dashboards"
+    },
+    "inputs": [
+      {
+        "name": "auth_method",
+        "type": "string",
+        "value": null,
+        "label": "Authentication",
+        "placeholder": "",
+        "required": true,
+        "options": [
+          {
+            "name": "Access Keys",
+            "value": "keys"
+          },
+          {
+            "name": "Assume Role (cross-account)",
+            "value": "assume_role"
+          },
+          {
+            "name": "Managed Role (Credential)",
+            "value": "credential"
+          }
+        ]
+      },
+      {
+        "name": "aws_access_key",
+        "type": "secret",
+        "value": null,
+        "label": "AWS Access Key",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "aws_secret_key",
+        "type": "secret",
+        "value": null,
+        "label": "AWS Secret Key",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "aws_region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "eu-west-2",
+        "required": true
+      },
+      {
+        "name": "aws_session_token",
+        "type": "secret",
+        "value": null,
+        "label": "Session Token (optional)",
+        "placeholder": "",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "assume_role_arn",
+        "type": "string",
+        "value": null,
+        "label": "Role ARN to Assume",
+        "placeholder": "arn:aws:iam::\u003cyour-account\u003e:role/FlomationAccess",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "assume_role"
+          ]
+        }
+      },
+      {
+        "name": "external_id",
+        "type": "string",
+        "value": null,
+        "label": "Assume Role External ID (optional)",
+        "placeholder": "Must match the External ID in the role's trust policy",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "assume_role"
+          ]
+        }
+      },
+      {
+        "name": "credential",
+        "type": "credential",
+        "value": null,
+        "label": "AWS Role Credential",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "credential"
+          ]
+        }
+      },
+      {
+        "name": "dashboard_name_prefix",
+        "type": "string",
+        "value": null,
+        "label": "Dashboard Name Prefix (optional)",
+        "placeholder": "prod-"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "dashboards",
+        "type": "string",
+        "value": null,
+        "label": "Dashboards (JSON)",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Count",
+        "placeholder": ""
+      }
+    ]
+  },
+  "aws/cloudwatch/list_metrics": {
+    "hash": "21da8b9d6ae2851ee9788c1f8e4bcb45eb78339228aaba29273202bdf82f63de",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "AWS CloudWatch List Metrics",
+    "description": "List available CloudWatch metrics, optionally filtered.",
+    "website": "https://www.flomation.co",
+    "icon": "chart-line+list",
+    "date": "22/07/2026",
+    "type": 2,
+    "category": {
+      "name": "AWS",
+      "icon": "cloud",
+      "description": "Amazon Web Services integrations"
+    },
+    "sub_category": {
+      "name": "CloudWatch",
+      "icon": "chart-line",
+      "description": "Metrics, alarms and dashboards — publish metric data, manage alarms and build dashboards"
+    },
+    "inputs": [
+      {
+        "name": "auth_method",
+        "type": "string",
+        "value": null,
+        "label": "Authentication",
+        "placeholder": "",
+        "required": true,
+        "options": [
+          {
+            "name": "Access Keys",
+            "value": "keys"
+          },
+          {
+            "name": "Assume Role (cross-account)",
+            "value": "assume_role"
+          },
+          {
+            "name": "Managed Role (Credential)",
+            "value": "credential"
+          }
+        ]
+      },
+      {
+        "name": "aws_access_key",
+        "type": "secret",
+        "value": null,
+        "label": "AWS Access Key",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "aws_secret_key",
+        "type": "secret",
+        "value": null,
+        "label": "AWS Secret Key",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "aws_region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "eu-west-2",
+        "required": true
+      },
+      {
+        "name": "aws_session_token",
+        "type": "secret",
+        "value": null,
+        "label": "Session Token (optional)",
+        "placeholder": "",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "assume_role_arn",
+        "type": "string",
+        "value": null,
+        "label": "Role ARN to Assume",
+        "placeholder": "arn:aws:iam::\u003cyour-account\u003e:role/FlomationAccess",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "assume_role"
+          ]
+        }
+      },
+      {
+        "name": "external_id",
+        "type": "string",
+        "value": null,
+        "label": "Assume Role External ID (optional)",
+        "placeholder": "Must match the External ID in the role's trust policy",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "assume_role"
+          ]
+        }
+      },
+      {
+        "name": "credential",
+        "type": "credential",
+        "value": null,
+        "label": "AWS Role Credential",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "credential"
+          ]
+        }
+      },
+      {
+        "name": "namespace",
+        "type": "string",
+        "value": null,
+        "label": "Namespace (optional)",
+        "placeholder": "AWS/EC2"
+      },
+      {
+        "name": "metric_name",
+        "type": "string",
+        "value": null,
+        "label": "Metric Name (optional)",
+        "placeholder": "CPUUtilization"
+      },
+      {
+        "name": "dimensions",
+        "type": "key_value_array",
+        "value": null,
+        "label": "Dimension Filters",
+        "placeholder": "Add a Name and (optional) Value per filter"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "metrics",
+        "type": "string",
+        "value": null,
+        "label": "Metrics (JSON)",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Metric Count",
+        "placeholder": ""
+      }
+    ]
+  },
+  "aws/cloudwatch/put_composite_alarm": {
+    "hash": "c54a6a022189663451b833e46385f7a24dec7ca8a90ea10d23f0ce7dda88a916",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "AWS CloudWatch Put Composite Alarm",
+    "description": "Create or update a composite alarm from a rule over other alarms.",
+    "website": "https://www.flomation.co",
+    "icon": "bell+plus",
+    "date": "22/07/2026",
+    "type": 2,
+    "category": {
+      "name": "AWS",
+      "icon": "cloud",
+      "description": "Amazon Web Services integrations"
+    },
+    "sub_category": {
+      "name": "CloudWatch",
+      "icon": "chart-line",
+      "description": "Metrics, alarms and dashboards — publish metric data, manage alarms and build dashboards"
+    },
+    "inputs": [
+      {
+        "name": "auth_method",
+        "type": "string",
+        "value": null,
+        "label": "Authentication",
+        "placeholder": "",
+        "required": true,
+        "options": [
+          {
+            "name": "Access Keys",
+            "value": "keys"
+          },
+          {
+            "name": "Assume Role (cross-account)",
+            "value": "assume_role"
+          },
+          {
+            "name": "Managed Role (Credential)",
+            "value": "credential"
+          }
+        ]
+      },
+      {
+        "name": "aws_access_key",
+        "type": "secret",
+        "value": null,
+        "label": "AWS Access Key",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "aws_secret_key",
+        "type": "secret",
+        "value": null,
+        "label": "AWS Secret Key",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "aws_region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "eu-west-2",
+        "required": true
+      },
+      {
+        "name": "aws_session_token",
+        "type": "secret",
+        "value": null,
+        "label": "Session Token (optional)",
+        "placeholder": "",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "assume_role_arn",
+        "type": "string",
+        "value": null,
+        "label": "Role ARN to Assume",
+        "placeholder": "arn:aws:iam::\u003cyour-account\u003e:role/FlomationAccess",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "assume_role"
+          ]
+        }
+      },
+      {
+        "name": "external_id",
+        "type": "string",
+        "value": null,
+        "label": "Assume Role External ID (optional)",
+        "placeholder": "Must match the External ID in the role's trust policy",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "assume_role"
+          ]
+        }
+      },
+      {
+        "name": "credential",
+        "type": "credential",
+        "value": null,
+        "label": "AWS Role Credential",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "credential"
+          ]
+        }
+      },
+      {
+        "name": "alarm_name",
+        "type": "string",
+        "value": null,
+        "label": "Alarm Name",
+        "placeholder": "service-degraded",
+        "required": true
+      },
+      {
+        "name": "alarm_rule",
+        "type": "string",
+        "value": null,
+        "label": "Alarm Rule",
+        "placeholder": "ALARM(\"high-cpu\") OR ALARM(\"high-mem\")",
+        "required": true
+      },
+      {
+        "name": "alarm_actions",
+        "type": "string",
+        "value": null,
+        "label": "Alarm Actions (comma-separated ARNs)",
+        "placeholder": "arn:aws:sns:eu-west-2:123456789012:alerts"
+      },
+      {
+        "name": "alarm_description",
+        "type": "string",
+        "value": null,
+        "label": "Description (optional)",
+        "placeholder": ""
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "alarm_name",
+        "type": "string",
+        "value": null,
+        "label": "Alarm Name",
+        "placeholder": ""
+      }
+    ]
+  },
+  "aws/cloudwatch/put_dashboard": {
+    "hash": "9dc694d938908a0a910b38b7b4f287f88fcfad31b82a915f3b73795b7f4c5baf",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "AWS CloudWatch Put Dashboard",
+    "description": "Create or replace a CloudWatch dashboard from its widget layout JSON.",
+    "website": "https://www.flomation.co",
+    "icon": "grip+plus",
+    "date": "22/07/2026",
+    "type": 2,
+    "category": {
+      "name": "AWS",
+      "icon": "cloud",
+      "description": "Amazon Web Services integrations"
+    },
+    "sub_category": {
+      "name": "CloudWatch",
+      "icon": "chart-line",
+      "description": "Metrics, alarms and dashboards — publish metric data, manage alarms and build dashboards"
+    },
+    "inputs": [
+      {
+        "name": "auth_method",
+        "type": "string",
+        "value": null,
+        "label": "Authentication",
+        "placeholder": "",
+        "required": true,
+        "options": [
+          {
+            "name": "Access Keys",
+            "value": "keys"
+          },
+          {
+            "name": "Assume Role (cross-account)",
+            "value": "assume_role"
+          },
+          {
+            "name": "Managed Role (Credential)",
+            "value": "credential"
+          }
+        ]
+      },
+      {
+        "name": "aws_access_key",
+        "type": "secret",
+        "value": null,
+        "label": "AWS Access Key",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "aws_secret_key",
+        "type": "secret",
+        "value": null,
+        "label": "AWS Secret Key",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "aws_region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "eu-west-2",
+        "required": true
+      },
+      {
+        "name": "aws_session_token",
+        "type": "secret",
+        "value": null,
+        "label": "Session Token (optional)",
+        "placeholder": "",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "assume_role_arn",
+        "type": "string",
+        "value": null,
+        "label": "Role ARN to Assume",
+        "placeholder": "arn:aws:iam::\u003cyour-account\u003e:role/FlomationAccess",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "assume_role"
+          ]
+        }
+      },
+      {
+        "name": "external_id",
+        "type": "string",
+        "value": null,
+        "label": "Assume Role External ID (optional)",
+        "placeholder": "Must match the External ID in the role's trust policy",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "assume_role"
+          ]
+        }
+      },
+      {
+        "name": "credential",
+        "type": "credential",
+        "value": null,
+        "label": "AWS Role Credential",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "credential"
+          ]
+        }
+      },
+      {
+        "name": "dashboard_name",
+        "type": "string",
+        "value": null,
+        "label": "Dashboard Name",
+        "placeholder": "my-dashboard",
+        "required": true
+      },
+      {
+        "name": "dashboard_body",
+        "type": "string",
+        "value": null,
+        "label": "Dashboard Body (JSON)",
+        "placeholder": "{\"widgets\":[...]}",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "validation_messages",
+        "type": "string",
+        "value": null,
+        "label": "Validation Messages (JSON)",
+        "placeholder": ""
+      }
+    ]
+  },
+  "aws/cloudwatch/put_metric_alarm": {
+    "hash": "64bf2404c71b01ef3e99e59743bd795f2d3ff3092ee337264bbe80fcc9484809",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "AWS CloudWatch Put Metric Alarm",
+    "description": "Create or update a metric alarm on a threshold comparison.",
+    "website": "https://www.flomation.co",
+    "icon": "bell+plus",
+    "date": "22/07/2026",
+    "type": 2,
+    "category": {
+      "name": "AWS",
+      "icon": "cloud",
+      "description": "Amazon Web Services integrations"
+    },
+    "sub_category": {
+      "name": "CloudWatch",
+      "icon": "chart-line",
+      "description": "Metrics, alarms and dashboards — publish metric data, manage alarms and build dashboards"
+    },
+    "inputs": [
+      {
+        "name": "auth_method",
+        "type": "string",
+        "value": null,
+        "label": "Authentication",
+        "placeholder": "",
+        "required": true,
+        "options": [
+          {
+            "name": "Access Keys",
+            "value": "keys"
+          },
+          {
+            "name": "Assume Role (cross-account)",
+            "value": "assume_role"
+          },
+          {
+            "name": "Managed Role (Credential)",
+            "value": "credential"
+          }
+        ]
+      },
+      {
+        "name": "aws_access_key",
+        "type": "secret",
+        "value": null,
+        "label": "AWS Access Key",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "aws_secret_key",
+        "type": "secret",
+        "value": null,
+        "label": "AWS Secret Key",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "aws_region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "eu-west-2",
+        "required": true
+      },
+      {
+        "name": "aws_session_token",
+        "type": "secret",
+        "value": null,
+        "label": "Session Token (optional)",
+        "placeholder": "",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "assume_role_arn",
+        "type": "string",
+        "value": null,
+        "label": "Role ARN to Assume",
+        "placeholder": "arn:aws:iam::\u003cyour-account\u003e:role/FlomationAccess",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "assume_role"
+          ]
+        }
+      },
+      {
+        "name": "external_id",
+        "type": "string",
+        "value": null,
+        "label": "Assume Role External ID (optional)",
+        "placeholder": "Must match the External ID in the role's trust policy",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "assume_role"
+          ]
+        }
+      },
+      {
+        "name": "credential",
+        "type": "credential",
+        "value": null,
+        "label": "AWS Role Credential",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "credential"
+          ]
+        }
+      },
+      {
+        "name": "alarm_name",
+        "type": "string",
+        "value": null,
+        "label": "Alarm Name",
+        "placeholder": "high-cpu",
+        "required": true
+      },
+      {
+        "name": "comparison_operator",
+        "type": "string",
+        "value": null,
+        "label": "Comparison Operator",
+        "placeholder": "",
+        "required": true,
+        "options": [
+          {
+            "name": "Greater Than Threshold",
+            "value": "GreaterThanThreshold"
+          },
+          {
+            "name": "Greater Than Or Equal To Threshold",
+            "value": "GreaterThanOrEqualToThreshold"
+          },
+          {
+            "name": "Less Than Threshold",
+            "value": "LessThanThreshold"
+          },
+          {
+            "name": "Less Than Or Equal To Threshold",
+            "value": "LessThanOrEqualToThreshold"
+          }
+        ]
+      },
+      {
+        "name": "evaluation_periods",
+        "type": "integer",
+        "value": null,
+        "label": "Evaluation Periods",
+        "placeholder": "1",
+        "required": true
+      },
+      {
+        "name": "metric_name",
+        "type": "string",
+        "value": null,
+        "label": "Metric Name",
+        "placeholder": "CPUUtilization"
+      },
+      {
+        "name": "namespace",
+        "type": "string",
+        "value": null,
+        "label": "Namespace",
+        "placeholder": "AWS/EC2"
+      },
+      {
+        "name": "period",
+        "type": "integer",
+        "value": null,
+        "label": "Period (seconds)",
+        "placeholder": "300"
+      },
+      {
+        "name": "statistic",
+        "type": "string",
+        "value": null,
+        "label": "Statistic",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "Average",
+            "value": "Average"
+          },
+          {
+            "name": "Sum",
+            "value": "Sum"
+          },
+          {
+            "name": "Minimum",
+            "value": "Minimum"
+          },
+          {
+            "name": "Maximum",
+            "value": "Maximum"
+          },
+          {
+            "name": "Sample Count",
+            "value": "SampleCount"
+          }
+        ]
+      },
+      {
+        "name": "threshold",
+        "type": "string",
+        "value": null,
+        "label": "Threshold",
+        "placeholder": "80",
+        "required": true
+      },
+      {
+        "name": "alarm_actions",
+        "type": "string",
+        "value": null,
+        "label": "Alarm Actions (comma-separated ARNs)",
+        "placeholder": "arn:aws:sns:eu-west-2:123456789012:alerts"
+      },
+      {
+        "name": "dimensions",
+        "type": "key_value_array",
+        "value": null,
+        "label": "Dimensions",
+        "placeholder": "Add a Name and Value per dimension"
+      },
+      {
+        "name": "alarm_description",
+        "type": "string",
+        "value": null,
+        "label": "Description (optional)",
+        "placeholder": ""
+      },
+      {
+        "name": "treat_missing_data",
+        "type": "string",
+        "value": null,
+        "label": "Treat Missing Data (optional)",
+        "placeholder": "missing | notBreaching | breaching | ignore"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "alarm_name",
+        "type": "string",
+        "value": null,
+        "label": "Alarm Name",
+        "placeholder": ""
+      }
+    ]
+  },
+  "aws/cloudwatch/put_metric_data": {
+    "hash": "3d750d90c44621c0b4b9b24f6c8e9122edd2dd8bc4e8113c29cf9120da4a3bd8",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "AWS CloudWatch Put Metric Data",
+    "description": "Publish one or more custom metric data points to CloudWatch.",
+    "website": "https://www.flomation.co",
+    "icon": "chart-line+plus",
+    "date": "22/07/2026",
+    "type": 2,
+    "category": {
+      "name": "AWS",
+      "icon": "cloud",
+      "description": "Amazon Web Services integrations"
+    },
+    "sub_category": {
+      "name": "CloudWatch",
+      "icon": "chart-line",
+      "description": "Metrics, alarms and dashboards — publish metric data, manage alarms and build dashboards"
+    },
+    "inputs": [
+      {
+        "name": "auth_method",
+        "type": "string",
+        "value": null,
+        "label": "Authentication",
+        "placeholder": "",
+        "required": true,
+        "options": [
+          {
+            "name": "Access Keys",
+            "value": "keys"
+          },
+          {
+            "name": "Assume Role (cross-account)",
+            "value": "assume_role"
+          },
+          {
+            "name": "Managed Role (Credential)",
+            "value": "credential"
+          }
+        ]
+      },
+      {
+        "name": "aws_access_key",
+        "type": "secret",
+        "value": null,
+        "label": "AWS Access Key",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "aws_secret_key",
+        "type": "secret",
+        "value": null,
+        "label": "AWS Secret Key",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "aws_region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "eu-west-2",
+        "required": true
+      },
+      {
+        "name": "aws_session_token",
+        "type": "secret",
+        "value": null,
+        "label": "Session Token (optional)",
+        "placeholder": "",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "assume_role_arn",
+        "type": "string",
+        "value": null,
+        "label": "Role ARN to Assume",
+        "placeholder": "arn:aws:iam::\u003cyour-account\u003e:role/FlomationAccess",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "assume_role"
+          ]
+        }
+      },
+      {
+        "name": "external_id",
+        "type": "string",
+        "value": null,
+        "label": "Assume Role External ID (optional)",
+        "placeholder": "Must match the External ID in the role's trust policy",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "assume_role"
+          ]
+        }
+      },
+      {
+        "name": "credential",
+        "type": "credential",
+        "value": null,
+        "label": "AWS Role Credential",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "credential"
+          ]
+        }
+      },
+      {
+        "name": "namespace",
+        "type": "string",
+        "value": null,
+        "label": "Namespace",
+        "placeholder": "MyApp/Orders",
+        "required": true
+      },
+      {
+        "name": "metric_name",
+        "type": "string",
+        "value": null,
+        "label": "Metric Name",
+        "placeholder": "OrdersProcessed"
+      },
+      {
+        "name": "value",
+        "type": "string",
+        "value": null,
+        "label": "Value",
+        "placeholder": "1"
+      },
+      {
+        "name": "unit",
+        "type": "string",
+        "value": null,
+        "label": "Unit",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "None",
+            "value": "None"
+          },
+          {
+            "name": "Seconds",
+            "value": "Seconds"
+          },
+          {
+            "name": "Bytes",
+            "value": "Bytes"
+          },
+          {
+            "name": "Percent",
+            "value": "Percent"
+          },
+          {
+            "name": "Count",
+            "value": "Count"
+          },
+          {
+            "name": "Count/Second",
+            "value": "Count/Second"
+          },
+          {
+            "name": "Milliseconds",
+            "value": "Milliseconds"
+          }
+        ]
+      },
+      {
+        "name": "dimensions",
+        "type": "key_value_array",
+        "value": null,
+        "label": "Dimensions",
+        "placeholder": "Add a Name and Value per dimension"
+      },
+      {
+        "name": "metric_data",
+        "type": "string",
+        "value": null,
+        "label": "Metric Data (JSON array, overrides simple fields)",
+        "placeholder": "[{\"MetricName\":\"Orders\",\"Value\":1,\"Unit\":\"Count\"}]"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "datapoint_count",
+        "type": "integer",
+        "value": null,
+        "label": "Data Points Sent",
+        "placeholder": ""
+      }
+    ]
+  },
+  "aws/cloudwatch/set_alarm_state": {
+    "hash": "17cd49f60030d51febed12520649182117f484164b48faaff4a4aab1bff3a1ab",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "AWS CloudWatch Set Alarm State",
+    "description": "Temporarily set an alarm's state to test its actions.",
+    "website": "https://www.flomation.co",
+    "icon": "bell+pen",
+    "date": "22/07/2026",
+    "type": 2,
+    "category": {
+      "name": "AWS",
+      "icon": "cloud",
+      "description": "Amazon Web Services integrations"
+    },
+    "sub_category": {
+      "name": "CloudWatch",
+      "icon": "chart-line",
+      "description": "Metrics, alarms and dashboards — publish metric data, manage alarms and build dashboards"
+    },
+    "inputs": [
+      {
+        "name": "auth_method",
+        "type": "string",
+        "value": null,
+        "label": "Authentication",
+        "placeholder": "",
+        "required": true,
+        "options": [
+          {
+            "name": "Access Keys",
+            "value": "keys"
+          },
+          {
+            "name": "Assume Role (cross-account)",
+            "value": "assume_role"
+          },
+          {
+            "name": "Managed Role (Credential)",
+            "value": "credential"
+          }
+        ]
+      },
+      {
+        "name": "aws_access_key",
+        "type": "secret",
+        "value": null,
+        "label": "AWS Access Key",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "aws_secret_key",
+        "type": "secret",
+        "value": null,
+        "label": "AWS Secret Key",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "aws_region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "eu-west-2",
+        "required": true
+      },
+      {
+        "name": "aws_session_token",
+        "type": "secret",
+        "value": null,
+        "label": "Session Token (optional)",
+        "placeholder": "",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "assume_role_arn",
+        "type": "string",
+        "value": null,
+        "label": "Role ARN to Assume",
+        "placeholder": "arn:aws:iam::\u003cyour-account\u003e:role/FlomationAccess",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "assume_role"
+          ]
+        }
+      },
+      {
+        "name": "external_id",
+        "type": "string",
+        "value": null,
+        "label": "Assume Role External ID (optional)",
+        "placeholder": "Must match the External ID in the role's trust policy",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "assume_role"
+          ]
+        }
+      },
+      {
+        "name": "credential",
+        "type": "credential",
+        "value": null,
+        "label": "AWS Role Credential",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "credential"
+          ]
+        }
+      },
+      {
+        "name": "alarm_name",
+        "type": "string",
+        "value": null,
+        "label": "Alarm Name",
+        "placeholder": "high-cpu",
+        "required": true
+      },
+      {
+        "name": "state_value",
+        "type": "string",
+        "value": null,
+        "label": "State",
+        "placeholder": "",
+        "required": true,
+        "options": [
+          {
+            "name": "OK",
+            "value": "OK"
+          },
+          {
+            "name": "ALARM",
+            "value": "ALARM"
+          },
+          {
+            "name": "INSUFFICIENT_DATA",
+            "value": "INSUFFICIENT_DATA"
+          }
+        ]
+      },
+      {
+        "name": "state_reason",
+        "type": "string",
+        "value": null,
+        "label": "State Reason",
+        "placeholder": "Manual test",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "alarm_name",
+        "type": "string",
+        "value": null,
+        "label": "Alarm Name",
+        "placeholder": ""
+      }
+    ]
+  },
+  "aws/cloudwatchlogs/create_log_group": {
+    "hash": "b9a869c7899f519c7ee8520479de27f90e792422c7343d76b16f487ae539fec0",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "AWS CloudWatch Logs Create Log Group",
+    "description": "Create a CloudWatch Logs log group, optionally KMS-encrypted and tagged.",
+    "website": "https://www.flomation.co",
+    "icon": "file-lines+plus",
+    "date": "22/07/2026",
+    "type": 2,
+    "category": {
+      "name": "AWS",
+      "icon": "cloud",
+      "description": "Amazon Web Services integrations"
+    },
+    "sub_category": {
+      "name": "CloudWatch Logs",
+      "icon": "file-lines",
+      "description": "Log groups, streams and events — write and query logs, and manage metric and subscription filters"
+    },
+    "inputs": [
+      {
+        "name": "auth_method",
+        "type": "string",
+        "value": null,
+        "label": "Authentication",
+        "placeholder": "",
+        "required": true,
+        "options": [
+          {
+            "name": "Access Keys",
+            "value": "keys"
+          },
+          {
+            "name": "Assume Role (cross-account)",
+            "value": "assume_role"
+          },
+          {
+            "name": "Managed Role (Credential)",
+            "value": "credential"
+          }
+        ]
+      },
+      {
+        "name": "aws_access_key",
+        "type": "secret",
+        "value": null,
+        "label": "AWS Access Key",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "aws_secret_key",
+        "type": "secret",
+        "value": null,
+        "label": "AWS Secret Key",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "aws_region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "eu-west-2",
+        "required": true
+      },
+      {
+        "name": "aws_session_token",
+        "type": "secret",
+        "value": null,
+        "label": "Session Token (optional)",
+        "placeholder": "",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "assume_role_arn",
+        "type": "string",
+        "value": null,
+        "label": "Role ARN to Assume",
+        "placeholder": "arn:aws:iam::\u003cyour-account\u003e:role/FlomationAccess",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "assume_role"
+          ]
+        }
+      },
+      {
+        "name": "external_id",
+        "type": "string",
+        "value": null,
+        "label": "Assume Role External ID (optional)",
+        "placeholder": "Must match the External ID in the role's trust policy",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "assume_role"
+          ]
+        }
+      },
+      {
+        "name": "credential",
+        "type": "credential",
+        "value": null,
+        "label": "AWS Role Credential",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "credential"
+          ]
+        }
+      },
+      {
+        "name": "log_group_name",
+        "type": "string",
+        "value": null,
+        "label": "Log Group Name",
+        "placeholder": "/flomation/my-app",
+        "required": true
+      },
+      {
+        "name": "kms_key_id",
+        "type": "string",
+        "value": null,
+        "label": "KMS Key ARN (optional)",
+        "placeholder": "arn:aws:kms:...:key/..."
+      },
+      {
+        "name": "tags",
+        "type": "key_value_array",
+        "value": null,
+        "label": "Tags",
+        "placeholder": ""
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      }
+    ]
+  },
+  "aws/cloudwatchlogs/create_log_stream": {
+    "hash": "68752421629d5b968315655e1697580fde43b753cc157a616169473b8b8d6975",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "AWS CloudWatch Logs Create Log Stream",
+    "description": "Create a log stream inside an existing CloudWatch Logs log group.",
+    "website": "https://www.flomation.co",
+    "icon": "file-lines+plus",
+    "date": "22/07/2026",
+    "type": 2,
+    "category": {
+      "name": "AWS",
+      "icon": "cloud",
+      "description": "Amazon Web Services integrations"
+    },
+    "sub_category": {
+      "name": "CloudWatch Logs",
+      "icon": "file-lines",
+      "description": "Log groups, streams and events — write and query logs, and manage metric and subscription filters"
+    },
+    "inputs": [
+      {
+        "name": "auth_method",
+        "type": "string",
+        "value": null,
+        "label": "Authentication",
+        "placeholder": "",
+        "required": true,
+        "options": [
+          {
+            "name": "Access Keys",
+            "value": "keys"
+          },
+          {
+            "name": "Assume Role (cross-account)",
+            "value": "assume_role"
+          },
+          {
+            "name": "Managed Role (Credential)",
+            "value": "credential"
+          }
+        ]
+      },
+      {
+        "name": "aws_access_key",
+        "type": "secret",
+        "value": null,
+        "label": "AWS Access Key",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "aws_secret_key",
+        "type": "secret",
+        "value": null,
+        "label": "AWS Secret Key",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "aws_region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "eu-west-2",
+        "required": true
+      },
+      {
+        "name": "aws_session_token",
+        "type": "secret",
+        "value": null,
+        "label": "Session Token (optional)",
+        "placeholder": "",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "assume_role_arn",
+        "type": "string",
+        "value": null,
+        "label": "Role ARN to Assume",
+        "placeholder": "arn:aws:iam::\u003cyour-account\u003e:role/FlomationAccess",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "assume_role"
+          ]
+        }
+      },
+      {
+        "name": "external_id",
+        "type": "string",
+        "value": null,
+        "label": "Assume Role External ID (optional)",
+        "placeholder": "Must match the External ID in the role's trust policy",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "assume_role"
+          ]
+        }
+      },
+      {
+        "name": "credential",
+        "type": "credential",
+        "value": null,
+        "label": "AWS Role Credential",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "credential"
+          ]
+        }
+      },
+      {
+        "name": "log_group_name",
+        "type": "string",
+        "value": null,
+        "label": "Log Group Name",
+        "placeholder": "/flomation/my-app",
+        "required": true
+      },
+      {
+        "name": "log_stream_name",
+        "type": "string",
+        "value": null,
+        "label": "Log Stream Name",
+        "placeholder": "2026/07/22",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      }
+    ]
+  },
+  "aws/cloudwatchlogs/delete_log_group": {
+    "hash": "533019d16a8ef87e7cd8965b1db27a0d20de726f14ae543b56158f3bb8eb3eb1",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "AWS CloudWatch Logs Delete Log Group",
+    "description": "Delete a CloudWatch Logs log group and all its log streams and events.",
+    "website": "https://www.flomation.co",
+    "icon": "file-lines+trash",
+    "date": "22/07/2026",
+    "type": 2,
+    "category": {
+      "name": "AWS",
+      "icon": "cloud",
+      "description": "Amazon Web Services integrations"
+    },
+    "sub_category": {
+      "name": "CloudWatch Logs",
+      "icon": "file-lines",
+      "description": "Log groups, streams and events — write and query logs, and manage metric and subscription filters"
+    },
+    "inputs": [
+      {
+        "name": "auth_method",
+        "type": "string",
+        "value": null,
+        "label": "Authentication",
+        "placeholder": "",
+        "required": true,
+        "options": [
+          {
+            "name": "Access Keys",
+            "value": "keys"
+          },
+          {
+            "name": "Assume Role (cross-account)",
+            "value": "assume_role"
+          },
+          {
+            "name": "Managed Role (Credential)",
+            "value": "credential"
+          }
+        ]
+      },
+      {
+        "name": "aws_access_key",
+        "type": "secret",
+        "value": null,
+        "label": "AWS Access Key",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "aws_secret_key",
+        "type": "secret",
+        "value": null,
+        "label": "AWS Secret Key",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "aws_region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "eu-west-2",
+        "required": true
+      },
+      {
+        "name": "aws_session_token",
+        "type": "secret",
+        "value": null,
+        "label": "Session Token (optional)",
+        "placeholder": "",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "assume_role_arn",
+        "type": "string",
+        "value": null,
+        "label": "Role ARN to Assume",
+        "placeholder": "arn:aws:iam::\u003cyour-account\u003e:role/FlomationAccess",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "assume_role"
+          ]
+        }
+      },
+      {
+        "name": "external_id",
+        "type": "string",
+        "value": null,
+        "label": "Assume Role External ID (optional)",
+        "placeholder": "Must match the External ID in the role's trust policy",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "assume_role"
+          ]
+        }
+      },
+      {
+        "name": "credential",
+        "type": "credential",
+        "value": null,
+        "label": "AWS Role Credential",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "credential"
+          ]
+        }
+      },
+      {
+        "name": "log_group_name",
+        "type": "string",
+        "value": null,
+        "label": "Log Group Name",
+        "placeholder": "/flomation/my-app",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      }
+    ]
+  },
+  "aws/cloudwatchlogs/describe_log_groups": {
+    "hash": "af681c69ec6a4b73bfd1672de2bb651dc99ca5a0431d7f589b99255eb2118558",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "AWS CloudWatch Logs Describe Log Groups",
+    "description": "List CloudWatch Logs log groups, optionally filtered by a name prefix.",
+    "website": "https://www.flomation.co",
+    "icon": "file-lines+magnifying-glass",
+    "date": "22/07/2026",
+    "type": 2,
+    "category": {
+      "name": "AWS",
+      "icon": "cloud",
+      "description": "Amazon Web Services integrations"
+    },
+    "sub_category": {
+      "name": "CloudWatch Logs",
+      "icon": "file-lines",
+      "description": "Log groups, streams and events — write and query logs, and manage metric and subscription filters"
+    },
+    "inputs": [
+      {
+        "name": "auth_method",
+        "type": "string",
+        "value": null,
+        "label": "Authentication",
+        "placeholder": "",
+        "required": true,
+        "options": [
+          {
+            "name": "Access Keys",
+            "value": "keys"
+          },
+          {
+            "name": "Assume Role (cross-account)",
+            "value": "assume_role"
+          },
+          {
+            "name": "Managed Role (Credential)",
+            "value": "credential"
+          }
+        ]
+      },
+      {
+        "name": "aws_access_key",
+        "type": "secret",
+        "value": null,
+        "label": "AWS Access Key",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "aws_secret_key",
+        "type": "secret",
+        "value": null,
+        "label": "AWS Secret Key",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "aws_region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "eu-west-2",
+        "required": true
+      },
+      {
+        "name": "aws_session_token",
+        "type": "secret",
+        "value": null,
+        "label": "Session Token (optional)",
+        "placeholder": "",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "assume_role_arn",
+        "type": "string",
+        "value": null,
+        "label": "Role ARN to Assume",
+        "placeholder": "arn:aws:iam::\u003cyour-account\u003e:role/FlomationAccess",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "assume_role"
+          ]
+        }
+      },
+      {
+        "name": "external_id",
+        "type": "string",
+        "value": null,
+        "label": "Assume Role External ID (optional)",
+        "placeholder": "Must match the External ID in the role's trust policy",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "assume_role"
+          ]
+        }
+      },
+      {
+        "name": "credential",
+        "type": "credential",
+        "value": null,
+        "label": "AWS Role Credential",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "credential"
+          ]
+        }
+      },
+      {
+        "name": "log_group_name_prefix",
+        "type": "string",
+        "value": null,
+        "label": "Log Group Name Prefix (optional)",
+        "placeholder": "/flomation/"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "log_groups",
+        "type": "string",
+        "value": null,
+        "label": "Log Groups (JSON)",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Count",
+        "placeholder": ""
+      }
+    ]
+  },
+  "aws/cloudwatchlogs/describe_log_streams": {
+    "hash": "c015fdc5a30f22a83f3f9815528cab3c2022ed6673c612b9be253b4852a3fa6c",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "AWS CloudWatch Logs Describe Log Streams",
+    "description": "List the log streams within a CloudWatch Logs log group.",
+    "website": "https://www.flomation.co",
+    "icon": "file-lines+list",
+    "date": "22/07/2026",
+    "type": 2,
+    "category": {
+      "name": "AWS",
+      "icon": "cloud",
+      "description": "Amazon Web Services integrations"
+    },
+    "sub_category": {
+      "name": "CloudWatch Logs",
+      "icon": "file-lines",
+      "description": "Log groups, streams and events — write and query logs, and manage metric and subscription filters"
+    },
+    "inputs": [
+      {
+        "name": "auth_method",
+        "type": "string",
+        "value": null,
+        "label": "Authentication",
+        "placeholder": "",
+        "required": true,
+        "options": [
+          {
+            "name": "Access Keys",
+            "value": "keys"
+          },
+          {
+            "name": "Assume Role (cross-account)",
+            "value": "assume_role"
+          },
+          {
+            "name": "Managed Role (Credential)",
+            "value": "credential"
+          }
+        ]
+      },
+      {
+        "name": "aws_access_key",
+        "type": "secret",
+        "value": null,
+        "label": "AWS Access Key",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "aws_secret_key",
+        "type": "secret",
+        "value": null,
+        "label": "AWS Secret Key",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "aws_region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "eu-west-2",
+        "required": true
+      },
+      {
+        "name": "aws_session_token",
+        "type": "secret",
+        "value": null,
+        "label": "Session Token (optional)",
+        "placeholder": "",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "assume_role_arn",
+        "type": "string",
+        "value": null,
+        "label": "Role ARN to Assume",
+        "placeholder": "arn:aws:iam::\u003cyour-account\u003e:role/FlomationAccess",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "assume_role"
+          ]
+        }
+      },
+      {
+        "name": "external_id",
+        "type": "string",
+        "value": null,
+        "label": "Assume Role External ID (optional)",
+        "placeholder": "Must match the External ID in the role's trust policy",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "assume_role"
+          ]
+        }
+      },
+      {
+        "name": "credential",
+        "type": "credential",
+        "value": null,
+        "label": "AWS Role Credential",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "credential"
+          ]
+        }
+      },
+      {
+        "name": "log_group_name",
+        "type": "string",
+        "value": null,
+        "label": "Log Group Name",
+        "placeholder": "/flomation/my-app",
+        "required": true
+      },
+      {
+        "name": "log_stream_name_prefix",
+        "type": "string",
+        "value": null,
+        "label": "Log Stream Name Prefix (optional)",
+        "placeholder": "2026/07"
+      },
+      {
+        "name": "order_by",
+        "type": "string",
+        "value": null,
+        "label": "Order By (optional)",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "Log Stream Name",
+            "value": "LogStreamName"
+          },
+          {
+            "name": "Last Event Time",
+            "value": "LastEventTime"
+          }
+        ]
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "log_streams",
+        "type": "string",
+        "value": null,
+        "label": "Log Streams (JSON)",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Count",
+        "placeholder": ""
+      }
+    ]
+  },
+  "aws/cloudwatchlogs/filter_log_events": {
+    "hash": "47fed52bb64a4544d74c1cc83e1dd00f4cce6a409c7e4a997a50afa178b499ff",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "AWS CloudWatch Filter Log Events",
+    "description": "Search CloudWatch Logs across streams by filter pattern and time range.",
+    "website": "https://www.flomation.co",
+    "icon": "file-lines+magnifying-glass",
+    "date": "22/07/2026",
+    "type": 2,
+    "category": {
+      "name": "AWS",
+      "icon": "cloud",
+      "description": "Amazon Web Services integrations"
+    },
+    "sub_category": {
+      "name": "CloudWatch Logs",
+      "icon": "file-lines",
+      "description": "Log groups, streams and events — write and query logs, and manage metric and subscription filters"
+    },
+    "inputs": [
+      {
+        "name": "auth_method",
+        "type": "string",
+        "value": null,
+        "label": "Authentication",
+        "placeholder": "",
+        "required": true,
+        "options": [
+          {
+            "name": "Access Keys",
+            "value": "keys"
+          },
+          {
+            "name": "Assume Role (cross-account)",
+            "value": "assume_role"
+          },
+          {
+            "name": "Managed Role (Credential)",
+            "value": "credential"
+          }
+        ]
+      },
+      {
+        "name": "aws_access_key",
+        "type": "secret",
+        "value": null,
+        "label": "AWS Access Key",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "aws_secret_key",
+        "type": "secret",
+        "value": null,
+        "label": "AWS Secret Key",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "aws_region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "eu-west-2",
+        "required": true
+      },
+      {
+        "name": "aws_session_token",
+        "type": "secret",
+        "value": null,
+        "label": "Session Token (optional)",
+        "placeholder": "",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "assume_role_arn",
+        "type": "string",
+        "value": null,
+        "label": "Role ARN to Assume",
+        "placeholder": "arn:aws:iam::\u003cyour-account\u003e:role/FlomationAccess",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "assume_role"
+          ]
+        }
+      },
+      {
+        "name": "external_id",
+        "type": "string",
+        "value": null,
+        "label": "Assume Role External ID (optional)",
+        "placeholder": "Must match the External ID in the role's trust policy",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "assume_role"
+          ]
+        }
+      },
+      {
+        "name": "credential",
+        "type": "credential",
+        "value": null,
+        "label": "AWS Role Credential",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "credential"
+          ]
+        }
+      },
+      {
+        "name": "log_group_name",
+        "type": "string",
+        "value": null,
+        "label": "Log Group Name",
+        "placeholder": "/flomation/app",
+        "required": true
+      },
+      {
+        "name": "filter_pattern",
+        "type": "string",
+        "value": null,
+        "label": "Filter Pattern (optional)",
+        "placeholder": "ERROR"
+      },
+      {
+        "name": "start_time",
+        "type": "string",
+        "value": null,
+        "label": "Start Time (RFC3339, optional)",
+        "placeholder": "2026-07-22T00:00:00Z"
+      },
+      {
+        "name": "end_time",
+        "type": "string",
+        "value": null,
+        "label": "End Time (RFC3339, optional)",
+        "placeholder": "2026-07-22T23:59:59Z"
+      },
+      {
+        "name": "limit",
+        "type": "integer",
+        "value": null,
+        "label": "Per-page Limit (optional)",
+        "placeholder": "100"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "events",
+        "type": "string",
+        "value": null,
+        "label": "Events (JSON)",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Count",
+        "placeholder": ""
+      }
+    ]
+  },
+  "aws/cloudwatchlogs/get_log_events": {
+    "hash": "05a9c877caaba333e429136746485ce7bb7ace9d4fc88270182c2ef998516449",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "AWS CloudWatch Get Log Events",
+    "description": "Read log events from a CloudWatch Logs stream, optionally by time range.",
+    "website": "https://www.flomation.co",
+    "icon": "file-lines+magnifying-glass",
+    "date": "22/07/2026",
+    "type": 2,
+    "category": {
+      "name": "AWS",
+      "icon": "cloud",
+      "description": "Amazon Web Services integrations"
+    },
+    "sub_category": {
+      "name": "CloudWatch Logs",
+      "icon": "file-lines",
+      "description": "Log groups, streams and events — write and query logs, and manage metric and subscription filters"
+    },
+    "inputs": [
+      {
+        "name": "auth_method",
+        "type": "string",
+        "value": null,
+        "label": "Authentication",
+        "placeholder": "",
+        "required": true,
+        "options": [
+          {
+            "name": "Access Keys",
+            "value": "keys"
+          },
+          {
+            "name": "Assume Role (cross-account)",
+            "value": "assume_role"
+          },
+          {
+            "name": "Managed Role (Credential)",
+            "value": "credential"
+          }
+        ]
+      },
+      {
+        "name": "aws_access_key",
+        "type": "secret",
+        "value": null,
+        "label": "AWS Access Key",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "aws_secret_key",
+        "type": "secret",
+        "value": null,
+        "label": "AWS Secret Key",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "aws_region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "eu-west-2",
+        "required": true
+      },
+      {
+        "name": "aws_session_token",
+        "type": "secret",
+        "value": null,
+        "label": "Session Token (optional)",
+        "placeholder": "",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "assume_role_arn",
+        "type": "string",
+        "value": null,
+        "label": "Role ARN to Assume",
+        "placeholder": "arn:aws:iam::\u003cyour-account\u003e:role/FlomationAccess",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "assume_role"
+          ]
+        }
+      },
+      {
+        "name": "external_id",
+        "type": "string",
+        "value": null,
+        "label": "Assume Role External ID (optional)",
+        "placeholder": "Must match the External ID in the role's trust policy",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "assume_role"
+          ]
+        }
+      },
+      {
+        "name": "credential",
+        "type": "credential",
+        "value": null,
+        "label": "AWS Role Credential",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "credential"
+          ]
+        }
+      },
+      {
+        "name": "log_group_name",
+        "type": "string",
+        "value": null,
+        "label": "Log Group Name",
+        "placeholder": "/flomation/app",
+        "required": true
+      },
+      {
+        "name": "log_stream_name",
+        "type": "string",
+        "value": null,
+        "label": "Log Stream Name",
+        "placeholder": "my-stream",
+        "required": true
+      },
+      {
+        "name": "start_time",
+        "type": "string",
+        "value": null,
+        "label": "Start Time (RFC3339, optional)",
+        "placeholder": "2026-07-22T00:00:00Z"
+      },
+      {
+        "name": "end_time",
+        "type": "string",
+        "value": null,
+        "label": "End Time (RFC3339, optional)",
+        "placeholder": "2026-07-22T23:59:59Z"
+      },
+      {
+        "name": "limit",
+        "type": "integer",
+        "value": null,
+        "label": "Limit (optional)",
+        "placeholder": "100"
+      },
+      {
+        "name": "start_from_head",
+        "type": "boolean",
+        "value": null,
+        "label": "Oldest First (optional)",
+        "placeholder": ""
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "events",
+        "type": "string",
+        "value": null,
+        "label": "Events (JSON)",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Count",
+        "placeholder": ""
+      }
+    ]
+  },
+  "aws/cloudwatchlogs/get_query_results": {
+    "hash": "16f5cbfea96a78b571154204780f2ae93a0a4152947c0c83e267d52b421c2f27",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "AWS CloudWatch Get Query Results",
+    "description": "Fetch the results and status of a CloudWatch Logs Insights query.",
+    "website": "https://www.flomation.co",
+    "icon": "file-lines+magnifying-glass",
+    "date": "22/07/2026",
+    "type": 2,
+    "category": {
+      "name": "AWS",
+      "icon": "cloud",
+      "description": "Amazon Web Services integrations"
+    },
+    "sub_category": {
+      "name": "CloudWatch Logs",
+      "icon": "file-lines",
+      "description": "Log groups, streams and events — write and query logs, and manage metric and subscription filters"
+    },
+    "inputs": [
+      {
+        "name": "auth_method",
+        "type": "string",
+        "value": null,
+        "label": "Authentication",
+        "placeholder": "",
+        "required": true,
+        "options": [
+          {
+            "name": "Access Keys",
+            "value": "keys"
+          },
+          {
+            "name": "Assume Role (cross-account)",
+            "value": "assume_role"
+          },
+          {
+            "name": "Managed Role (Credential)",
+            "value": "credential"
+          }
+        ]
+      },
+      {
+        "name": "aws_access_key",
+        "type": "secret",
+        "value": null,
+        "label": "AWS Access Key",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "aws_secret_key",
+        "type": "secret",
+        "value": null,
+        "label": "AWS Secret Key",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "aws_region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "eu-west-2",
+        "required": true
+      },
+      {
+        "name": "aws_session_token",
+        "type": "secret",
+        "value": null,
+        "label": "Session Token (optional)",
+        "placeholder": "",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "assume_role_arn",
+        "type": "string",
+        "value": null,
+        "label": "Role ARN to Assume",
+        "placeholder": "arn:aws:iam::\u003cyour-account\u003e:role/FlomationAccess",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "assume_role"
+          ]
+        }
+      },
+      {
+        "name": "external_id",
+        "type": "string",
+        "value": null,
+        "label": "Assume Role External ID (optional)",
+        "placeholder": "Must match the External ID in the role's trust policy",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "assume_role"
+          ]
+        }
+      },
+      {
+        "name": "credential",
+        "type": "credential",
+        "value": null,
+        "label": "AWS Role Credential",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "credential"
+          ]
+        }
+      },
+      {
+        "name": "query_id",
+        "type": "string",
+        "value": null,
+        "label": "Query ID",
+        "placeholder": "From Start Query",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "status",
+        "type": "string",
+        "value": null,
+        "label": "Status",
+        "placeholder": ""
+      },
+      {
+        "name": "results",
+        "type": "string",
+        "value": null,
+        "label": "Results (JSON)",
+        "placeholder": ""
+      },
+      {
+        "name": "statistics",
+        "type": "string",
+        "value": null,
+        "label": "Statistics (JSON)",
+        "placeholder": ""
+      }
+    ]
+  },
+  "aws/cloudwatchlogs/put_log_events": {
+    "hash": "890699b8352f00e3463f37911f431057d9b49ac89a11b5c4cc1aaefc12577e2b",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "AWS CloudWatch Put Log Events",
+    "description": "Write one or more log events to a CloudWatch Logs stream.",
+    "website": "https://www.flomation.co",
+    "icon": "file-lines+arrow-up",
+    "date": "22/07/2026",
+    "type": 2,
+    "category": {
+      "name": "AWS",
+      "icon": "cloud",
+      "description": "Amazon Web Services integrations"
+    },
+    "sub_category": {
+      "name": "CloudWatch Logs",
+      "icon": "file-lines",
+      "description": "Log groups, streams and events — write and query logs, and manage metric and subscription filters"
+    },
+    "inputs": [
+      {
+        "name": "auth_method",
+        "type": "string",
+        "value": null,
+        "label": "Authentication",
+        "placeholder": "",
+        "required": true,
+        "options": [
+          {
+            "name": "Access Keys",
+            "value": "keys"
+          },
+          {
+            "name": "Assume Role (cross-account)",
+            "value": "assume_role"
+          },
+          {
+            "name": "Managed Role (Credential)",
+            "value": "credential"
+          }
+        ]
+      },
+      {
+        "name": "aws_access_key",
+        "type": "secret",
+        "value": null,
+        "label": "AWS Access Key",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "aws_secret_key",
+        "type": "secret",
+        "value": null,
+        "label": "AWS Secret Key",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "aws_region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "eu-west-2",
+        "required": true
+      },
+      {
+        "name": "aws_session_token",
+        "type": "secret",
+        "value": null,
+        "label": "Session Token (optional)",
+        "placeholder": "",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "assume_role_arn",
+        "type": "string",
+        "value": null,
+        "label": "Role ARN to Assume",
+        "placeholder": "arn:aws:iam::\u003cyour-account\u003e:role/FlomationAccess",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "assume_role"
+          ]
+        }
+      },
+      {
+        "name": "external_id",
+        "type": "string",
+        "value": null,
+        "label": "Assume Role External ID (optional)",
+        "placeholder": "Must match the External ID in the role's trust policy",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "assume_role"
+          ]
+        }
+      },
+      {
+        "name": "credential",
+        "type": "credential",
+        "value": null,
+        "label": "AWS Role Credential",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "credential"
+          ]
+        }
+      },
+      {
+        "name": "log_group_name",
+        "type": "string",
+        "value": null,
+        "label": "Log Group Name",
+        "placeholder": "/flomation/app",
+        "required": true
+      },
+      {
+        "name": "log_stream_name",
+        "type": "string",
+        "value": null,
+        "label": "Log Stream Name",
+        "placeholder": "my-stream",
+        "required": true
+      },
+      {
+        "name": "messages",
+        "type": "string",
+        "value": null,
+        "label": "Messages",
+        "placeholder": "A plain message, or a JSON array of {\"timestamp\",\"message\"}",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "next_sequence_token",
+        "type": "string",
+        "value": null,
+        "label": "Next Sequence Token",
+        "placeholder": ""
+      }
+    ]
+  },
+  "aws/cloudwatchlogs/put_metric_filter": {
+    "hash": "6e4575c8dea0de8d6812d85253202e0ccddb7d5092a75db0fab49313d67c8535",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "AWS CloudWatch Put Metric Filter",
+    "description": "Create or update a metric filter that emits CloudWatch metrics from log events.",
+    "website": "https://www.flomation.co",
+    "icon": "file-lines+chart-line",
+    "date": "22/07/2026",
+    "type": 2,
+    "category": {
+      "name": "AWS",
+      "icon": "cloud",
+      "description": "Amazon Web Services integrations"
+    },
+    "sub_category": {
+      "name": "CloudWatch Logs",
+      "icon": "file-lines",
+      "description": "Log groups, streams and events — write and query logs, and manage metric and subscription filters"
+    },
+    "inputs": [
+      {
+        "name": "auth_method",
+        "type": "string",
+        "value": null,
+        "label": "Authentication",
+        "placeholder": "",
+        "required": true,
+        "options": [
+          {
+            "name": "Access Keys",
+            "value": "keys"
+          },
+          {
+            "name": "Assume Role (cross-account)",
+            "value": "assume_role"
+          },
+          {
+            "name": "Managed Role (Credential)",
+            "value": "credential"
+          }
+        ]
+      },
+      {
+        "name": "aws_access_key",
+        "type": "secret",
+        "value": null,
+        "label": "AWS Access Key",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "aws_secret_key",
+        "type": "secret",
+        "value": null,
+        "label": "AWS Secret Key",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "aws_region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "eu-west-2",
+        "required": true
+      },
+      {
+        "name": "aws_session_token",
+        "type": "secret",
+        "value": null,
+        "label": "Session Token (optional)",
+        "placeholder": "",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "assume_role_arn",
+        "type": "string",
+        "value": null,
+        "label": "Role ARN to Assume",
+        "placeholder": "arn:aws:iam::\u003cyour-account\u003e:role/FlomationAccess",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "assume_role"
+          ]
+        }
+      },
+      {
+        "name": "external_id",
+        "type": "string",
+        "value": null,
+        "label": "Assume Role External ID (optional)",
+        "placeholder": "Must match the External ID in the role's trust policy",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "assume_role"
+          ]
+        }
+      },
+      {
+        "name": "credential",
+        "type": "credential",
+        "value": null,
+        "label": "AWS Role Credential",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "credential"
+          ]
+        }
+      },
+      {
+        "name": "log_group_name",
+        "type": "string",
+        "value": null,
+        "label": "Log Group Name",
+        "placeholder": "/flomation/app",
+        "required": true
+      },
+      {
+        "name": "filter_name",
+        "type": "string",
+        "value": null,
+        "label": "Filter Name",
+        "placeholder": "ErrorCount",
+        "required": true
+      },
+      {
+        "name": "filter_pattern",
+        "type": "string",
+        "value": null,
+        "label": "Filter Pattern",
+        "placeholder": "ERROR",
+        "required": true
+      },
+      {
+        "name": "metric_transformations",
+        "type": "string",
+        "value": null,
+        "label": "Metric Transformations (JSON array)",
+        "placeholder": "[{\"metricName\":\"ErrorCount\",\"metricNamespace\":\"Flomation\",\"metricValue\":\"1\"}]",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "filter_name",
+        "type": "string",
+        "value": null,
+        "label": "Filter Name",
+        "placeholder": ""
+      }
+    ]
+  },
+  "aws/cloudwatchlogs/put_retention_policy": {
+    "hash": "def0bc78feb9bd7afc8407c2878f0d869a284d748b99d0641139f9522eed3f81",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "AWS CloudWatch Logs Put Retention Policy",
+    "description": "Set how many days a CloudWatch Logs log group retains its events.",
+    "website": "https://www.flomation.co",
+    "icon": "file-lines+clock",
+    "date": "22/07/2026",
+    "type": 2,
+    "category": {
+      "name": "AWS",
+      "icon": "cloud",
+      "description": "Amazon Web Services integrations"
+    },
+    "sub_category": {
+      "name": "CloudWatch Logs",
+      "icon": "file-lines",
+      "description": "Log groups, streams and events — write and query logs, and manage metric and subscription filters"
+    },
+    "inputs": [
+      {
+        "name": "auth_method",
+        "type": "string",
+        "value": null,
+        "label": "Authentication",
+        "placeholder": "",
+        "required": true,
+        "options": [
+          {
+            "name": "Access Keys",
+            "value": "keys"
+          },
+          {
+            "name": "Assume Role (cross-account)",
+            "value": "assume_role"
+          },
+          {
+            "name": "Managed Role (Credential)",
+            "value": "credential"
+          }
+        ]
+      },
+      {
+        "name": "aws_access_key",
+        "type": "secret",
+        "value": null,
+        "label": "AWS Access Key",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "aws_secret_key",
+        "type": "secret",
+        "value": null,
+        "label": "AWS Secret Key",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "aws_region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "eu-west-2",
+        "required": true
+      },
+      {
+        "name": "aws_session_token",
+        "type": "secret",
+        "value": null,
+        "label": "Session Token (optional)",
+        "placeholder": "",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "assume_role_arn",
+        "type": "string",
+        "value": null,
+        "label": "Role ARN to Assume",
+        "placeholder": "arn:aws:iam::\u003cyour-account\u003e:role/FlomationAccess",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "assume_role"
+          ]
+        }
+      },
+      {
+        "name": "external_id",
+        "type": "string",
+        "value": null,
+        "label": "Assume Role External ID (optional)",
+        "placeholder": "Must match the External ID in the role's trust policy",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "assume_role"
+          ]
+        }
+      },
+      {
+        "name": "credential",
+        "type": "credential",
+        "value": null,
+        "label": "AWS Role Credential",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "credential"
+          ]
+        }
+      },
+      {
+        "name": "log_group_name",
+        "type": "string",
+        "value": null,
+        "label": "Log Group Name",
+        "placeholder": "/flomation/my-app",
+        "required": true
+      },
+      {
+        "name": "retention_in_days",
+        "type": "integer",
+        "value": null,
+        "label": "Retention (days)",
+        "placeholder": "30",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      }
+    ]
+  },
+  "aws/cloudwatchlogs/put_subscription_filter": {
+    "hash": "8fce891e4f2e1299133c70de0eff6d63689ce1fa3dae7a7424c346a37ca306fa",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "AWS CloudWatch Put Subscription Filter",
+    "description": "Stream matching log events from a log group to a destination (Lambda, Kinesis, Firehose).",
+    "website": "https://www.flomation.co",
+    "icon": "file-lines+link",
+    "date": "22/07/2026",
+    "type": 2,
+    "category": {
+      "name": "AWS",
+      "icon": "cloud",
+      "description": "Amazon Web Services integrations"
+    },
+    "sub_category": {
+      "name": "CloudWatch Logs",
+      "icon": "file-lines",
+      "description": "Log groups, streams and events — write and query logs, and manage metric and subscription filters"
+    },
+    "inputs": [
+      {
+        "name": "auth_method",
+        "type": "string",
+        "value": null,
+        "label": "Authentication",
+        "placeholder": "",
+        "required": true,
+        "options": [
+          {
+            "name": "Access Keys",
+            "value": "keys"
+          },
+          {
+            "name": "Assume Role (cross-account)",
+            "value": "assume_role"
+          },
+          {
+            "name": "Managed Role (Credential)",
+            "value": "credential"
+          }
+        ]
+      },
+      {
+        "name": "aws_access_key",
+        "type": "secret",
+        "value": null,
+        "label": "AWS Access Key",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "aws_secret_key",
+        "type": "secret",
+        "value": null,
+        "label": "AWS Secret Key",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "aws_region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "eu-west-2",
+        "required": true
+      },
+      {
+        "name": "aws_session_token",
+        "type": "secret",
+        "value": null,
+        "label": "Session Token (optional)",
+        "placeholder": "",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "assume_role_arn",
+        "type": "string",
+        "value": null,
+        "label": "Role ARN to Assume",
+        "placeholder": "arn:aws:iam::\u003cyour-account\u003e:role/FlomationAccess",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "assume_role"
+          ]
+        }
+      },
+      {
+        "name": "external_id",
+        "type": "string",
+        "value": null,
+        "label": "Assume Role External ID (optional)",
+        "placeholder": "Must match the External ID in the role's trust policy",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "assume_role"
+          ]
+        }
+      },
+      {
+        "name": "credential",
+        "type": "credential",
+        "value": null,
+        "label": "AWS Role Credential",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "credential"
+          ]
+        }
+      },
+      {
+        "name": "log_group_name",
+        "type": "string",
+        "value": null,
+        "label": "Log Group Name",
+        "placeholder": "/flomation/app",
+        "required": true
+      },
+      {
+        "name": "filter_name",
+        "type": "string",
+        "value": null,
+        "label": "Filter Name",
+        "placeholder": "ForwardErrors",
+        "required": true
+      },
+      {
+        "name": "filter_pattern",
+        "type": "string",
+        "value": null,
+        "label": "Filter Pattern",
+        "placeholder": "ERROR (empty matches all)",
+        "required": true
+      },
+      {
+        "name": "destination_arn",
+        "type": "string",
+        "value": null,
+        "label": "Destination ARN",
+        "placeholder": "arn:aws:lambda:eu-west-2:...:function:...",
+        "required": true
+      },
+      {
+        "name": "role_arn",
+        "type": "string",
+        "value": null,
+        "label": "Role ARN (optional)",
+        "placeholder": "arn:aws:iam::...:role/..."
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "filter_name",
+        "type": "string",
+        "value": null,
+        "label": "Filter Name",
+        "placeholder": ""
+      }
+    ]
+  },
+  "aws/cloudwatchlogs/start_query": {
+    "hash": "6245d5e3c5610c90ecad075e7268b4a7678fb8e9cf368b90d1ff16805cab90eb",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "AWS CloudWatch Start Query",
+    "description": "Start a CloudWatch Logs Insights query over a log group and time range.",
+    "website": "https://www.flomation.co",
+    "icon": "file-lines+bolt",
+    "date": "22/07/2026",
+    "type": 2,
+    "category": {
+      "name": "AWS",
+      "icon": "cloud",
+      "description": "Amazon Web Services integrations"
+    },
+    "sub_category": {
+      "name": "CloudWatch Logs",
+      "icon": "file-lines",
+      "description": "Log groups, streams and events — write and query logs, and manage metric and subscription filters"
+    },
+    "inputs": [
+      {
+        "name": "auth_method",
+        "type": "string",
+        "value": null,
+        "label": "Authentication",
+        "placeholder": "",
+        "required": true,
+        "options": [
+          {
+            "name": "Access Keys",
+            "value": "keys"
+          },
+          {
+            "name": "Assume Role (cross-account)",
+            "value": "assume_role"
+          },
+          {
+            "name": "Managed Role (Credential)",
+            "value": "credential"
+          }
+        ]
+      },
+      {
+        "name": "aws_access_key",
+        "type": "secret",
+        "value": null,
+        "label": "AWS Access Key",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "aws_secret_key",
+        "type": "secret",
+        "value": null,
+        "label": "AWS Secret Key",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "aws_region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "eu-west-2",
+        "required": true
+      },
+      {
+        "name": "aws_session_token",
+        "type": "secret",
+        "value": null,
+        "label": "Session Token (optional)",
+        "placeholder": "",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "assume_role_arn",
+        "type": "string",
+        "value": null,
+        "label": "Role ARN to Assume",
+        "placeholder": "arn:aws:iam::\u003cyour-account\u003e:role/FlomationAccess",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "assume_role"
+          ]
+        }
+      },
+      {
+        "name": "external_id",
+        "type": "string",
+        "value": null,
+        "label": "Assume Role External ID (optional)",
+        "placeholder": "Must match the External ID in the role's trust policy",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "assume_role"
+          ]
+        }
+      },
+      {
+        "name": "credential",
+        "type": "credential",
+        "value": null,
+        "label": "AWS Role Credential",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "credential"
+          ]
+        }
+      },
+      {
+        "name": "log_group_name",
+        "type": "string",
+        "value": null,
+        "label": "Log Group Name",
+        "placeholder": "/flomation/app",
+        "required": true
+      },
+      {
+        "name": "query_string",
+        "type": "string",
+        "value": null,
+        "label": "Query String",
+        "placeholder": "fields @timestamp, @message | sort @timestamp desc | limit 20",
+        "required": true
+      },
+      {
+        "name": "start_time",
+        "type": "string",
+        "value": null,
+        "label": "Start Time (RFC3339)",
+        "placeholder": "2026-07-22T00:00:00Z",
+        "required": true
+      },
+      {
+        "name": "end_time",
+        "type": "string",
+        "value": null,
+        "label": "End Time (RFC3339)",
+        "placeholder": "2026-07-22T23:59:59Z",
+        "required": true
+      },
+      {
+        "name": "limit",
+        "type": "integer",
+        "value": null,
+        "label": "Limit (optional)",
+        "placeholder": "1000"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "query_id",
+        "type": "string",
+        "value": null,
+        "label": "Query ID",
+        "placeholder": ""
+      }
+    ]
+  },
   "aws/dynamodb": {
     "hash": "614a3779fc3641ffd2b8090b3e3ee65665fd9a2dec4118100c6cb91e46841095",
     "author": "Andy Esser",
@@ -23409,6 +28676,1423 @@
         "type": "object",
         "value": null,
         "label": "Availability Zones",
+        "placeholder": ""
+      }
+    ]
+  },
+  "aws/eventbridge/delete_rule": {
+    "hash": "ce003d86ee42f298d519eaa2dffe16b6acebf97180772b8ab22e3557dae875dc",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "AWS EventBridge Delete Rule",
+    "description": "Delete an EventBridge rule by name.",
+    "website": "https://www.flomation.co",
+    "icon": "bolt+trash",
+    "date": "22/07/2026",
+    "type": 2,
+    "category": {
+      "name": "AWS",
+      "icon": "cloud",
+      "description": "Amazon Web Services integrations"
+    },
+    "sub_category": {
+      "name": "EventBridge",
+      "icon": "bolt",
+      "description": "Event rules and targets — route events with rules, manage targets and publish custom events"
+    },
+    "inputs": [
+      {
+        "name": "auth_method",
+        "type": "string",
+        "value": null,
+        "label": "Authentication",
+        "placeholder": "",
+        "required": true,
+        "options": [
+          {
+            "name": "Access Keys",
+            "value": "keys"
+          },
+          {
+            "name": "Assume Role (cross-account)",
+            "value": "assume_role"
+          },
+          {
+            "name": "Managed Role (Credential)",
+            "value": "credential"
+          }
+        ]
+      },
+      {
+        "name": "aws_access_key",
+        "type": "secret",
+        "value": null,
+        "label": "AWS Access Key",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "aws_secret_key",
+        "type": "secret",
+        "value": null,
+        "label": "AWS Secret Key",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "aws_region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "eu-west-2",
+        "required": true
+      },
+      {
+        "name": "aws_session_token",
+        "type": "secret",
+        "value": null,
+        "label": "Session Token (optional)",
+        "placeholder": "",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "assume_role_arn",
+        "type": "string",
+        "value": null,
+        "label": "Role ARN to Assume",
+        "placeholder": "arn:aws:iam::\u003cyour-account\u003e:role/FlomationAccess",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "assume_role"
+          ]
+        }
+      },
+      {
+        "name": "external_id",
+        "type": "string",
+        "value": null,
+        "label": "Assume Role External ID (optional)",
+        "placeholder": "Must match the External ID in the role's trust policy",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "assume_role"
+          ]
+        }
+      },
+      {
+        "name": "credential",
+        "type": "credential",
+        "value": null,
+        "label": "AWS Role Credential",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "credential"
+          ]
+        }
+      },
+      {
+        "name": "name",
+        "type": "string",
+        "value": null,
+        "label": "Rule Name",
+        "placeholder": "my-rule",
+        "required": true
+      },
+      {
+        "name": "event_bus_name",
+        "type": "string",
+        "value": null,
+        "label": "Event Bus Name (optional)",
+        "placeholder": "default"
+      },
+      {
+        "name": "force",
+        "type": "boolean",
+        "value": null,
+        "label": "Force (delete managed rule)",
+        "placeholder": ""
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      }
+    ]
+  },
+  "aws/eventbridge/describe_rule": {
+    "hash": "e147085f9b7cf5e8a8b80c8c216e37fa5d1b80d5c3aad472799dffc0576f164d",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "AWS EventBridge Describe Rule",
+    "description": "Fetch the details of an EventBridge rule by name.",
+    "website": "https://www.flomation.co",
+    "icon": "bolt+magnifying-glass",
+    "date": "22/07/2026",
+    "type": 2,
+    "category": {
+      "name": "AWS",
+      "icon": "cloud",
+      "description": "Amazon Web Services integrations"
+    },
+    "sub_category": {
+      "name": "EventBridge",
+      "icon": "bolt",
+      "description": "Event rules and targets — route events with rules, manage targets and publish custom events"
+    },
+    "inputs": [
+      {
+        "name": "auth_method",
+        "type": "string",
+        "value": null,
+        "label": "Authentication",
+        "placeholder": "",
+        "required": true,
+        "options": [
+          {
+            "name": "Access Keys",
+            "value": "keys"
+          },
+          {
+            "name": "Assume Role (cross-account)",
+            "value": "assume_role"
+          },
+          {
+            "name": "Managed Role (Credential)",
+            "value": "credential"
+          }
+        ]
+      },
+      {
+        "name": "aws_access_key",
+        "type": "secret",
+        "value": null,
+        "label": "AWS Access Key",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "aws_secret_key",
+        "type": "secret",
+        "value": null,
+        "label": "AWS Secret Key",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "aws_region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "eu-west-2",
+        "required": true
+      },
+      {
+        "name": "aws_session_token",
+        "type": "secret",
+        "value": null,
+        "label": "Session Token (optional)",
+        "placeholder": "",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "assume_role_arn",
+        "type": "string",
+        "value": null,
+        "label": "Role ARN to Assume",
+        "placeholder": "arn:aws:iam::\u003cyour-account\u003e:role/FlomationAccess",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "assume_role"
+          ]
+        }
+      },
+      {
+        "name": "external_id",
+        "type": "string",
+        "value": null,
+        "label": "Assume Role External ID (optional)",
+        "placeholder": "Must match the External ID in the role's trust policy",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "assume_role"
+          ]
+        }
+      },
+      {
+        "name": "credential",
+        "type": "credential",
+        "value": null,
+        "label": "AWS Role Credential",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "credential"
+          ]
+        }
+      },
+      {
+        "name": "name",
+        "type": "string",
+        "value": null,
+        "label": "Rule Name",
+        "placeholder": "my-rule",
+        "required": true
+      },
+      {
+        "name": "event_bus_name",
+        "type": "string",
+        "value": null,
+        "label": "Event Bus Name (optional)",
+        "placeholder": "default"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "arn",
+        "type": "string",
+        "value": null,
+        "label": "Rule ARN",
+        "placeholder": ""
+      },
+      {
+        "name": "state",
+        "type": "string",
+        "value": null,
+        "label": "State",
+        "placeholder": ""
+      },
+      {
+        "name": "event_pattern",
+        "type": "string",
+        "value": null,
+        "label": "Event Pattern",
+        "placeholder": ""
+      },
+      {
+        "name": "schedule_expression",
+        "type": "string",
+        "value": null,
+        "label": "Schedule Expression",
+        "placeholder": ""
+      }
+    ]
+  },
+  "aws/eventbridge/disable_rule": {
+    "hash": "262dc2d93e645994498c767942d1a55b5f93a359e6a2f5bd5e3901e9b1c0d96e",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "AWS EventBridge Disable Rule",
+    "description": "Disable an EventBridge rule so it stops matching events.",
+    "website": "https://www.flomation.co",
+    "icon": "bolt+trash",
+    "date": "22/07/2026",
+    "type": 2,
+    "category": {
+      "name": "AWS",
+      "icon": "cloud",
+      "description": "Amazon Web Services integrations"
+    },
+    "sub_category": {
+      "name": "EventBridge",
+      "icon": "bolt",
+      "description": "Event rules and targets — route events with rules, manage targets and publish custom events"
+    },
+    "inputs": [
+      {
+        "name": "auth_method",
+        "type": "string",
+        "value": null,
+        "label": "Authentication",
+        "placeholder": "",
+        "required": true,
+        "options": [
+          {
+            "name": "Access Keys",
+            "value": "keys"
+          },
+          {
+            "name": "Assume Role (cross-account)",
+            "value": "assume_role"
+          },
+          {
+            "name": "Managed Role (Credential)",
+            "value": "credential"
+          }
+        ]
+      },
+      {
+        "name": "aws_access_key",
+        "type": "secret",
+        "value": null,
+        "label": "AWS Access Key",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "aws_secret_key",
+        "type": "secret",
+        "value": null,
+        "label": "AWS Secret Key",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "aws_region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "eu-west-2",
+        "required": true
+      },
+      {
+        "name": "aws_session_token",
+        "type": "secret",
+        "value": null,
+        "label": "Session Token (optional)",
+        "placeholder": "",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "assume_role_arn",
+        "type": "string",
+        "value": null,
+        "label": "Role ARN to Assume",
+        "placeholder": "arn:aws:iam::\u003cyour-account\u003e:role/FlomationAccess",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "assume_role"
+          ]
+        }
+      },
+      {
+        "name": "external_id",
+        "type": "string",
+        "value": null,
+        "label": "Assume Role External ID (optional)",
+        "placeholder": "Must match the External ID in the role's trust policy",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "assume_role"
+          ]
+        }
+      },
+      {
+        "name": "credential",
+        "type": "credential",
+        "value": null,
+        "label": "AWS Role Credential",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "credential"
+          ]
+        }
+      },
+      {
+        "name": "name",
+        "type": "string",
+        "value": null,
+        "label": "Rule Name",
+        "placeholder": "my-rule",
+        "required": true
+      },
+      {
+        "name": "event_bus_name",
+        "type": "string",
+        "value": null,
+        "label": "Event Bus Name (optional)",
+        "placeholder": "default"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      }
+    ]
+  },
+  "aws/eventbridge/enable_rule": {
+    "hash": "295f12b27651e0ffa6e2a0725f882cc6bcdb19db0844df43c8629981a4b902d0",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "AWS EventBridge Enable Rule",
+    "description": "Enable an EventBridge rule so it matches events again.",
+    "website": "https://www.flomation.co",
+    "icon": "bolt+circle-check",
+    "date": "22/07/2026",
+    "type": 2,
+    "category": {
+      "name": "AWS",
+      "icon": "cloud",
+      "description": "Amazon Web Services integrations"
+    },
+    "sub_category": {
+      "name": "EventBridge",
+      "icon": "bolt",
+      "description": "Event rules and targets — route events with rules, manage targets and publish custom events"
+    },
+    "inputs": [
+      {
+        "name": "auth_method",
+        "type": "string",
+        "value": null,
+        "label": "Authentication",
+        "placeholder": "",
+        "required": true,
+        "options": [
+          {
+            "name": "Access Keys",
+            "value": "keys"
+          },
+          {
+            "name": "Assume Role (cross-account)",
+            "value": "assume_role"
+          },
+          {
+            "name": "Managed Role (Credential)",
+            "value": "credential"
+          }
+        ]
+      },
+      {
+        "name": "aws_access_key",
+        "type": "secret",
+        "value": null,
+        "label": "AWS Access Key",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "aws_secret_key",
+        "type": "secret",
+        "value": null,
+        "label": "AWS Secret Key",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "aws_region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "eu-west-2",
+        "required": true
+      },
+      {
+        "name": "aws_session_token",
+        "type": "secret",
+        "value": null,
+        "label": "Session Token (optional)",
+        "placeholder": "",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "assume_role_arn",
+        "type": "string",
+        "value": null,
+        "label": "Role ARN to Assume",
+        "placeholder": "arn:aws:iam::\u003cyour-account\u003e:role/FlomationAccess",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "assume_role"
+          ]
+        }
+      },
+      {
+        "name": "external_id",
+        "type": "string",
+        "value": null,
+        "label": "Assume Role External ID (optional)",
+        "placeholder": "Must match the External ID in the role's trust policy",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "assume_role"
+          ]
+        }
+      },
+      {
+        "name": "credential",
+        "type": "credential",
+        "value": null,
+        "label": "AWS Role Credential",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "credential"
+          ]
+        }
+      },
+      {
+        "name": "name",
+        "type": "string",
+        "value": null,
+        "label": "Rule Name",
+        "placeholder": "my-rule",
+        "required": true
+      },
+      {
+        "name": "event_bus_name",
+        "type": "string",
+        "value": null,
+        "label": "Event Bus Name (optional)",
+        "placeholder": "default"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      }
+    ]
+  },
+  "aws/eventbridge/list_rules": {
+    "hash": "a1adad58d1acb9c86207d6c9a491dcb702291075fd78ca57c252408e865b9105",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "AWS EventBridge List Rules",
+    "description": "List EventBridge rules, optionally filtered by a name prefix.",
+    "website": "https://www.flomation.co",
+    "icon": "bolt+list",
+    "date": "22/07/2026",
+    "type": 2,
+    "category": {
+      "name": "AWS",
+      "icon": "cloud",
+      "description": "Amazon Web Services integrations"
+    },
+    "sub_category": {
+      "name": "EventBridge",
+      "icon": "bolt",
+      "description": "Event rules and targets — route events with rules, manage targets and publish custom events"
+    },
+    "inputs": [
+      {
+        "name": "auth_method",
+        "type": "string",
+        "value": null,
+        "label": "Authentication",
+        "placeholder": "",
+        "required": true,
+        "options": [
+          {
+            "name": "Access Keys",
+            "value": "keys"
+          },
+          {
+            "name": "Assume Role (cross-account)",
+            "value": "assume_role"
+          },
+          {
+            "name": "Managed Role (Credential)",
+            "value": "credential"
+          }
+        ]
+      },
+      {
+        "name": "aws_access_key",
+        "type": "secret",
+        "value": null,
+        "label": "AWS Access Key",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "aws_secret_key",
+        "type": "secret",
+        "value": null,
+        "label": "AWS Secret Key",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "aws_region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "eu-west-2",
+        "required": true
+      },
+      {
+        "name": "aws_session_token",
+        "type": "secret",
+        "value": null,
+        "label": "Session Token (optional)",
+        "placeholder": "",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "assume_role_arn",
+        "type": "string",
+        "value": null,
+        "label": "Role ARN to Assume",
+        "placeholder": "arn:aws:iam::\u003cyour-account\u003e:role/FlomationAccess",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "assume_role"
+          ]
+        }
+      },
+      {
+        "name": "external_id",
+        "type": "string",
+        "value": null,
+        "label": "Assume Role External ID (optional)",
+        "placeholder": "Must match the External ID in the role's trust policy",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "assume_role"
+          ]
+        }
+      },
+      {
+        "name": "credential",
+        "type": "credential",
+        "value": null,
+        "label": "AWS Role Credential",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "credential"
+          ]
+        }
+      },
+      {
+        "name": "name_prefix",
+        "type": "string",
+        "value": null,
+        "label": "Name Prefix (optional)",
+        "placeholder": "my-"
+      },
+      {
+        "name": "event_bus_name",
+        "type": "string",
+        "value": null,
+        "label": "Event Bus Name (optional)",
+        "placeholder": "default"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "rules",
+        "type": "string",
+        "value": null,
+        "label": "Rules (JSON)",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Rule Count",
+        "placeholder": ""
+      }
+    ]
+  },
+  "aws/eventbridge/put_events": {
+    "hash": "597689ea12d765a956ef5c322d7f588b6fd2e917d2eb7de7b43705928ad8b4c0",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "AWS EventBridge Put Events",
+    "description": "Publish a custom event to an EventBridge event bus.",
+    "website": "https://www.flomation.co",
+    "icon": "bolt+arrow-up",
+    "date": "22/07/2026",
+    "type": 2,
+    "category": {
+      "name": "AWS",
+      "icon": "cloud",
+      "description": "Amazon Web Services integrations"
+    },
+    "sub_category": {
+      "name": "EventBridge",
+      "icon": "bolt",
+      "description": "Event rules and targets — route events with rules, manage targets and publish custom events"
+    },
+    "inputs": [
+      {
+        "name": "auth_method",
+        "type": "string",
+        "value": null,
+        "label": "Authentication",
+        "placeholder": "",
+        "required": true,
+        "options": [
+          {
+            "name": "Access Keys",
+            "value": "keys"
+          },
+          {
+            "name": "Assume Role (cross-account)",
+            "value": "assume_role"
+          },
+          {
+            "name": "Managed Role (Credential)",
+            "value": "credential"
+          }
+        ]
+      },
+      {
+        "name": "aws_access_key",
+        "type": "secret",
+        "value": null,
+        "label": "AWS Access Key",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "aws_secret_key",
+        "type": "secret",
+        "value": null,
+        "label": "AWS Secret Key",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "aws_region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "eu-west-2",
+        "required": true
+      },
+      {
+        "name": "aws_session_token",
+        "type": "secret",
+        "value": null,
+        "label": "Session Token (optional)",
+        "placeholder": "",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "assume_role_arn",
+        "type": "string",
+        "value": null,
+        "label": "Role ARN to Assume",
+        "placeholder": "arn:aws:iam::\u003cyour-account\u003e:role/FlomationAccess",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "assume_role"
+          ]
+        }
+      },
+      {
+        "name": "external_id",
+        "type": "string",
+        "value": null,
+        "label": "Assume Role External ID (optional)",
+        "placeholder": "Must match the External ID in the role's trust policy",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "assume_role"
+          ]
+        }
+      },
+      {
+        "name": "credential",
+        "type": "credential",
+        "value": null,
+        "label": "AWS Role Credential",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "credential"
+          ]
+        }
+      },
+      {
+        "name": "source",
+        "type": "string",
+        "value": null,
+        "label": "Source",
+        "placeholder": "com.mycompany.myapp",
+        "required": true
+      },
+      {
+        "name": "detail_type",
+        "type": "string",
+        "value": null,
+        "label": "Detail Type",
+        "placeholder": "Order Placed",
+        "required": true
+      },
+      {
+        "name": "detail",
+        "type": "string",
+        "value": null,
+        "label": "Detail (JSON)",
+        "placeholder": "{\"orderId\":\"123\"}",
+        "required": true
+      },
+      {
+        "name": "event_bus_name",
+        "type": "string",
+        "value": null,
+        "label": "Event Bus Name (optional)",
+        "placeholder": "default"
+      },
+      {
+        "name": "resources",
+        "type": "string",
+        "value": null,
+        "label": "Resources (comma-separated ARNs)",
+        "placeholder": "arn:aws:...,arn:aws:..."
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "event_id",
+        "type": "string",
+        "value": null,
+        "label": "Event ID",
+        "placeholder": ""
+      },
+      {
+        "name": "failed_entry_count",
+        "type": "integer",
+        "value": null,
+        "label": "Failed Entry Count",
+        "placeholder": ""
+      }
+    ]
+  },
+  "aws/eventbridge/put_rule": {
+    "hash": "7cf29a93431bb4add88ae305e335401862861a291ead00c11ba1813f44c929f1",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "AWS EventBridge Put Rule",
+    "description": "Create or update an EventBridge rule from an event pattern or schedule.",
+    "website": "https://www.flomation.co",
+    "icon": "bolt+plus",
+    "date": "22/07/2026",
+    "type": 2,
+    "category": {
+      "name": "AWS",
+      "icon": "cloud",
+      "description": "Amazon Web Services integrations"
+    },
+    "sub_category": {
+      "name": "EventBridge",
+      "icon": "bolt",
+      "description": "Event rules and targets — route events with rules, manage targets and publish custom events"
+    },
+    "inputs": [
+      {
+        "name": "auth_method",
+        "type": "string",
+        "value": null,
+        "label": "Authentication",
+        "placeholder": "",
+        "required": true,
+        "options": [
+          {
+            "name": "Access Keys",
+            "value": "keys"
+          },
+          {
+            "name": "Assume Role (cross-account)",
+            "value": "assume_role"
+          },
+          {
+            "name": "Managed Role (Credential)",
+            "value": "credential"
+          }
+        ]
+      },
+      {
+        "name": "aws_access_key",
+        "type": "secret",
+        "value": null,
+        "label": "AWS Access Key",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "aws_secret_key",
+        "type": "secret",
+        "value": null,
+        "label": "AWS Secret Key",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "aws_region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "eu-west-2",
+        "required": true
+      },
+      {
+        "name": "aws_session_token",
+        "type": "secret",
+        "value": null,
+        "label": "Session Token (optional)",
+        "placeholder": "",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "assume_role_arn",
+        "type": "string",
+        "value": null,
+        "label": "Role ARN to Assume",
+        "placeholder": "arn:aws:iam::\u003cyour-account\u003e:role/FlomationAccess",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "assume_role"
+          ]
+        }
+      },
+      {
+        "name": "external_id",
+        "type": "string",
+        "value": null,
+        "label": "Assume Role External ID (optional)",
+        "placeholder": "Must match the External ID in the role's trust policy",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "assume_role"
+          ]
+        }
+      },
+      {
+        "name": "credential",
+        "type": "credential",
+        "value": null,
+        "label": "AWS Role Credential",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "credential"
+          ]
+        }
+      },
+      {
+        "name": "name",
+        "type": "string",
+        "value": null,
+        "label": "Rule Name",
+        "placeholder": "my-rule",
+        "required": true
+      },
+      {
+        "name": "event_pattern",
+        "type": "string",
+        "value": null,
+        "label": "Event Pattern (JSON)",
+        "placeholder": "{\"source\":[\"aws.ec2\"]}"
+      },
+      {
+        "name": "schedule_expression",
+        "type": "string",
+        "value": null,
+        "label": "Schedule Expression",
+        "placeholder": "rate(5 minutes) or cron(0 20 * * ? *)"
+      },
+      {
+        "name": "state",
+        "type": "string",
+        "value": null,
+        "label": "State",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "Enabled",
+            "value": "ENABLED"
+          },
+          {
+            "name": "Disabled",
+            "value": "DISABLED"
+          }
+        ]
+      },
+      {
+        "name": "description",
+        "type": "string",
+        "value": null,
+        "label": "Description",
+        "placeholder": "Optional"
+      },
+      {
+        "name": "event_bus_name",
+        "type": "string",
+        "value": null,
+        "label": "Event Bus Name (optional)",
+        "placeholder": "default"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "rule_arn",
+        "type": "string",
+        "value": null,
+        "label": "Rule ARN",
+        "placeholder": ""
+      }
+    ]
+  },
+  "aws/eventbridge/put_targets": {
+    "hash": "76896d6580120815fe7932aca882359cda560f07d4672222425f0c212baaf3c0",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "AWS EventBridge Put Targets",
+    "description": "Add or update the targets invoked when an EventBridge rule fires.",
+    "website": "https://www.flomation.co",
+    "icon": "bolt+link",
+    "date": "22/07/2026",
+    "type": 2,
+    "category": {
+      "name": "AWS",
+      "icon": "cloud",
+      "description": "Amazon Web Services integrations"
+    },
+    "sub_category": {
+      "name": "EventBridge",
+      "icon": "bolt",
+      "description": "Event rules and targets — route events with rules, manage targets and publish custom events"
+    },
+    "inputs": [
+      {
+        "name": "auth_method",
+        "type": "string",
+        "value": null,
+        "label": "Authentication",
+        "placeholder": "",
+        "required": true,
+        "options": [
+          {
+            "name": "Access Keys",
+            "value": "keys"
+          },
+          {
+            "name": "Assume Role (cross-account)",
+            "value": "assume_role"
+          },
+          {
+            "name": "Managed Role (Credential)",
+            "value": "credential"
+          }
+        ]
+      },
+      {
+        "name": "aws_access_key",
+        "type": "secret",
+        "value": null,
+        "label": "AWS Access Key",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "aws_secret_key",
+        "type": "secret",
+        "value": null,
+        "label": "AWS Secret Key",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "aws_region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "eu-west-2",
+        "required": true
+      },
+      {
+        "name": "aws_session_token",
+        "type": "secret",
+        "value": null,
+        "label": "Session Token (optional)",
+        "placeholder": "",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "assume_role_arn",
+        "type": "string",
+        "value": null,
+        "label": "Role ARN to Assume",
+        "placeholder": "arn:aws:iam::\u003cyour-account\u003e:role/FlomationAccess",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "assume_role"
+          ]
+        }
+      },
+      {
+        "name": "external_id",
+        "type": "string",
+        "value": null,
+        "label": "Assume Role External ID (optional)",
+        "placeholder": "Must match the External ID in the role's trust policy",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "assume_role"
+          ]
+        }
+      },
+      {
+        "name": "credential",
+        "type": "credential",
+        "value": null,
+        "label": "AWS Role Credential",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "credential"
+          ]
+        }
+      },
+      {
+        "name": "rule",
+        "type": "string",
+        "value": null,
+        "label": "Rule Name",
+        "placeholder": "my-rule",
+        "required": true
+      },
+      {
+        "name": "event_bus_name",
+        "type": "string",
+        "value": null,
+        "label": "Event Bus Name (optional)",
+        "placeholder": "default"
+      },
+      {
+        "name": "targets",
+        "type": "string",
+        "value": null,
+        "label": "Targets (JSON array)",
+        "placeholder": "[{\"Id\":\"1\",\"Arn\":\"arn:aws:sqs:eu-west-2:123:queue\"}]",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "failed_entry_count",
+        "type": "integer",
+        "value": null,
+        "label": "Failed Entry Count",
         "placeholder": ""
       }
     ]
@@ -44553,7 +51237,7 @@
     ]
   },
   "aws/route53/change_resource_record_sets": {
-    "hash": "2e6fa2831d395302b0b03629a6bac18e624f7640d4526a0cabea9fdbf25727fa",
+    "hash": "f9d434803ef68be5b29d7c544612e226b8f2c7a03795f2e37a4e24e85f9c16cd",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "AWS Route 53 Change Records",
@@ -45010,7 +51694,7 @@
     ]
   },
   "aws/route53/create_health_check": {
-    "hash": "38aed0ec7b51589f6276d1e1483b754a39b5eae7d93521b233cb380ae9570ebf",
+    "hash": "3136157e494f65b2d56f4e96156bb3dd22c27eaaafe329457cc87c4083a18fd4",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "AWS Route 53 Create Health Check",
@@ -45255,7 +51939,7 @@
     ]
   },
   "aws/route53/create_hosted_zone": {
-    "hash": "4896515d43495e7d565c44ae8bf7c51c672404117de71a437dd4f7d56dc92e42",
+    "hash": "e95866706290a74f7e06281fe13efd42f06a79fcafb78368b26db265b5849728",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "AWS Route 53 Create Hosted Zone",
@@ -49901,7 +56585,7 @@
     ]
   },
   "aws/route53domains/get_operation_detail": {
-    "hash": "b0ddc304fa95ef60756e7b2f9eeab05737dd2a8258b0bba72b2d22407808fba9",
+    "hash": "850c5a8c28fbbbc6a22b8ecbdaf162c30caa2485c089106479af7e6475162ffa",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "AWS Route 53 Get Operation Detail",
@@ -50444,7 +57128,7 @@
     ]
   },
   "aws/route53domains/register_domain": {
-    "hash": "50dd4487956b8f0a65b1a950985b907706d85c21c742e7a4270f6ebf494f5d23",
+    "hash": "3b911dde70810ee3c111d657107db3458586d6a58257e2d227d374209a8709d5",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "AWS Route 53 Register Domain",
@@ -308490,6 +315174,454 @@
         "type": "string",
         "value": null,
         "label": "Raw JSON Body",
+        "placeholder": ""
+      },
+      {
+        "name": "triggered_at",
+        "type": "string",
+        "value": null,
+        "label": "Triggered At",
+        "placeholder": ""
+      }
+    ]
+  },
+  "trigger/cloudwatch_alarm": {
+    "hash": "895470a448c06520d15bb6d67b641f43c6d9f1ed16eab4b805a325f5dd2f978d",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "CloudWatch Alarm Trigger",
+    "description": "Triggers a flow when a CloudWatch alarm changes state (OK, ALARM, INSUFFICIENT_DATA). Polls DescribeAlarms.",
+    "website": "https://www.flomation.co",
+    "icon": "bell+bolt",
+    "date": "22/07/2026",
+    "type": 1,
+    "category": {
+      "name": "Triggers",
+      "icon": "bolt-lightning",
+      "description": "Start a Flow"
+    },
+    "inputs": [
+      {
+        "name": "aws_access_key",
+        "type": "secret",
+        "value": null,
+        "label": "AWS Access Key",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "aws_secret_key",
+        "type": "secret",
+        "value": null,
+        "label": "AWS Secret Key",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "aws_region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "eu-west-2",
+        "required": true
+      },
+      {
+        "name": "alarm_names",
+        "type": "string",
+        "value": null,
+        "label": "Alarm Names",
+        "placeholder": "Comma-separated; leave blank for all alarms (optional)"
+      },
+      {
+        "name": "alarm_state",
+        "type": "string",
+        "value": null,
+        "label": "Fire On State",
+        "placeholder": "Any",
+        "options": [
+          {
+            "name": "Any state change",
+            "value": ""
+          },
+          {
+            "name": "ALARM",
+            "value": "ALARM"
+          },
+          {
+            "name": "OK",
+            "value": "OK"
+          },
+          {
+            "name": "INSUFFICIENT_DATA",
+            "value": "INSUFFICIENT_DATA"
+          }
+        ]
+      },
+      {
+        "name": "poll_interval",
+        "type": "string",
+        "value": null,
+        "label": "Poll Interval",
+        "placeholder": "e.g. 60s, 5m"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "alarm_name",
+        "type": "string",
+        "value": null,
+        "label": "Alarm Name",
+        "placeholder": ""
+      },
+      {
+        "name": "state_value",
+        "type": "string",
+        "value": null,
+        "label": "State",
+        "placeholder": ""
+      },
+      {
+        "name": "previous_state",
+        "type": "string",
+        "value": null,
+        "label": "Previous State",
+        "placeholder": ""
+      },
+      {
+        "name": "state_reason",
+        "type": "string",
+        "value": null,
+        "label": "State Reason",
+        "placeholder": ""
+      },
+      {
+        "name": "metric_name",
+        "type": "string",
+        "value": null,
+        "label": "Metric Name",
+        "placeholder": ""
+      },
+      {
+        "name": "namespace",
+        "type": "string",
+        "value": null,
+        "label": "Namespace",
+        "placeholder": ""
+      },
+      {
+        "name": "timestamp",
+        "type": "string",
+        "value": null,
+        "label": "State Changed At",
+        "placeholder": ""
+      },
+      {
+        "name": "triggered_at",
+        "type": "string",
+        "value": null,
+        "label": "Triggered At",
+        "placeholder": ""
+      }
+    ]
+  },
+  "trigger/cloudwatch_logs": {
+    "hash": "c28a23cab72ef0aec45dbe0599318370176999b2173c406b164c4ced861a4915",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "CloudWatch Logs Trigger",
+    "description": "Triggers a flow when log events match a filter pattern in a log group. Polls FilterLogEvents.",
+    "website": "https://www.flomation.co",
+    "icon": "file-lines+bell",
+    "date": "22/07/2026",
+    "type": 1,
+    "category": {
+      "name": "Triggers",
+      "icon": "bolt-lightning",
+      "description": "Start a Flow"
+    },
+    "inputs": [
+      {
+        "name": "aws_access_key",
+        "type": "secret",
+        "value": null,
+        "label": "AWS Access Key",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "aws_secret_key",
+        "type": "secret",
+        "value": null,
+        "label": "AWS Secret Key",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "aws_region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "eu-west-2",
+        "required": true
+      },
+      {
+        "name": "log_group_name",
+        "type": "string",
+        "value": null,
+        "label": "Log Group Name",
+        "placeholder": "/aws/lambda/my-fn",
+        "required": true
+      },
+      {
+        "name": "filter_pattern",
+        "type": "string",
+        "value": null,
+        "label": "Filter Pattern",
+        "placeholder": "e.g. ERROR (blank matches all events)"
+      },
+      {
+        "name": "poll_interval",
+        "type": "string",
+        "value": null,
+        "label": "Poll Interval",
+        "placeholder": "e.g. 60s, 5m"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "log_group",
+        "type": "string",
+        "value": null,
+        "label": "Log Group",
+        "placeholder": ""
+      },
+      {
+        "name": "log_stream",
+        "type": "string",
+        "value": null,
+        "label": "Log Stream",
+        "placeholder": ""
+      },
+      {
+        "name": "message",
+        "type": "string",
+        "value": null,
+        "label": "Message",
+        "placeholder": ""
+      },
+      {
+        "name": "event_id",
+        "type": "string",
+        "value": null,
+        "label": "Event ID",
+        "placeholder": ""
+      },
+      {
+        "name": "timestamp",
+        "type": "string",
+        "value": null,
+        "label": "Event Time",
+        "placeholder": ""
+      },
+      {
+        "name": "triggered_at",
+        "type": "string",
+        "value": null,
+        "label": "Triggered At",
+        "placeholder": ""
+      }
+    ]
+  },
+  "trigger/cloudwatch_metric": {
+    "hash": "b1836b25b44c8b0b4853da0d9684998bd851929071bcb02ef2e4bdcdfc5d8fb8",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "CloudWatch Metric Threshold Trigger",
+    "description": "Triggers a flow when a CloudWatch metric crosses a threshold (edge-triggered). Polls GetMetricStatistics.",
+    "website": "https://www.flomation.co",
+    "icon": "gauge+bell",
+    "date": "22/07/2026",
+    "type": 1,
+    "category": {
+      "name": "Triggers",
+      "icon": "bolt-lightning",
+      "description": "Start a Flow"
+    },
+    "inputs": [
+      {
+        "name": "aws_access_key",
+        "type": "secret",
+        "value": null,
+        "label": "AWS Access Key",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "aws_secret_key",
+        "type": "secret",
+        "value": null,
+        "label": "AWS Secret Key",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "aws_region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "eu-west-2",
+        "required": true
+      },
+      {
+        "name": "namespace",
+        "type": "string",
+        "value": null,
+        "label": "Namespace",
+        "placeholder": "e.g. AWS/EC2",
+        "required": true
+      },
+      {
+        "name": "metric_name",
+        "type": "string",
+        "value": null,
+        "label": "Metric Name",
+        "placeholder": "e.g. CPUUtilization",
+        "required": true
+      },
+      {
+        "name": "dimensions",
+        "type": "string",
+        "value": null,
+        "label": "Dimensions",
+        "placeholder": "Name=Value,Name2=Value2 (optional)"
+      },
+      {
+        "name": "statistic",
+        "type": "string",
+        "value": null,
+        "label": "Statistic",
+        "placeholder": "",
+        "required": true,
+        "options": [
+          {
+            "name": "Average",
+            "value": "Average"
+          },
+          {
+            "name": "Sum",
+            "value": "Sum"
+          },
+          {
+            "name": "Minimum",
+            "value": "Minimum"
+          },
+          {
+            "name": "Maximum",
+            "value": "Maximum"
+          },
+          {
+            "name": "Sample Count",
+            "value": "SampleCount"
+          }
+        ]
+      },
+      {
+        "name": "period",
+        "type": "integer",
+        "value": null,
+        "label": "Period (seconds)",
+        "placeholder": "e.g. 300"
+      },
+      {
+        "name": "comparison",
+        "type": "string",
+        "value": null,
+        "label": "Comparison",
+        "placeholder": "",
+        "required": true,
+        "options": [
+          {
+            "name": "Greater than",
+            "value": "GreaterThanThreshold"
+          },
+          {
+            "name": "Greater than or equal",
+            "value": "GreaterThanOrEqualToThreshold"
+          },
+          {
+            "name": "Less than",
+            "value": "LessThanThreshold"
+          },
+          {
+            "name": "Less than or equal",
+            "value": "LessThanOrEqualToThreshold"
+          }
+        ]
+      },
+      {
+        "name": "threshold",
+        "type": "string",
+        "value": null,
+        "label": "Threshold",
+        "placeholder": "e.g. 80",
+        "required": true
+      },
+      {
+        "name": "poll_interval",
+        "type": "string",
+        "value": null,
+        "label": "Poll Interval",
+        "placeholder": "e.g. 60s, 5m"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "namespace",
+        "type": "string",
+        "value": null,
+        "label": "Namespace",
+        "placeholder": ""
+      },
+      {
+        "name": "metric_name",
+        "type": "string",
+        "value": null,
+        "label": "Metric Name",
+        "placeholder": ""
+      },
+      {
+        "name": "value",
+        "type": "string",
+        "value": null,
+        "label": "Value",
+        "placeholder": ""
+      },
+      {
+        "name": "threshold",
+        "type": "string",
+        "value": null,
+        "label": "Threshold",
+        "placeholder": ""
+      },
+      {
+        "name": "comparison",
+        "type": "string",
+        "value": null,
+        "label": "Comparison",
+        "placeholder": ""
+      },
+      {
+        "name": "statistic",
+        "type": "string",
+        "value": null,
+        "label": "Statistic",
+        "placeholder": ""
+      },
+      {
+        "name": "timestamp",
+        "type": "string",
+        "value": null,
+        "label": "Datapoint Time",
         "placeholder": ""
       },
       {
