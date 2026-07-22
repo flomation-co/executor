@@ -1,0 +1,54 @@
+// Package oracle_containerengine_work_request_cancel cancels an in-progress OKE work
+// request by OCID, asking OCI to stop the underlying operation.
+package oracle_containerengine_work_request_cancel
+
+import (
+	core "flomation.app/automate/executor"
+	oke "flomation.app/automate/executor/actions/oracle/containerengine"
+
+	okesdk "github.com/oracle/oci-go-sdk/v65/containerengine"
+)
+
+const (
+	Author       = "Dave McElin"
+	Organisation = "Flomation"
+	Name         = "OCI Container Engine: Cancel Work Request"
+	Description  = "Cancel an in-progress Oracle Cloud OKE work request by OCID, asking OCI to stop the underlying operation."
+	Website      = "https://www.flomation.co"
+	Icon         = "oracle+cubes"
+	Date         = "22/07/2026"
+	Type         = core.ActionTypeAction
+)
+
+var Inputs = [...]core.Connection{
+	{Name: "tenancy_ocid", Type: core.ConnectionTypeString, Label: "Tenancy OCID", Placeholder: "ocid1.tenancy.oc1..aaaa…", Required: true},
+	{Name: "user_ocid", Type: core.ConnectionTypeString, Label: "User OCID", Placeholder: "ocid1.user.oc1..aaaa…", Required: true},
+	{Name: "region", Type: core.ConnectionTypeString, Label: "Region", Placeholder: "e.g. uk-london-1", Required: true},
+	{Name: "fingerprint", Type: core.ConnectionTypeString, Label: "Key Fingerprint", Placeholder: "aa:bb:cc:… fingerprint of the uploaded API key", Required: true},
+	{Name: "private_key", Type: core.ConnectionTypeSecret, Label: "Private Key (PEM)", Placeholder: "The API signing private key — full PEM, incl. BEGIN/END lines"},
+	{Name: "private_key_passphrase", Type: core.ConnectionTypeSecret, Label: "Private Key Passphrase", Placeholder: "Only if the key is encrypted (optional)"},
+	{Name: "compartment_ocid", Type: core.ConnectionTypeString, Label: "Compartment OCID", Placeholder: "ocid1.compartment.oc1..aaaa… (scopes the picker)"},
+	{Name: "work_request_ocid", Type: core.ConnectionTypeString, Label: "Work Request OCID", Placeholder: "ocid1.clustersworkrequest.oc1..aaaa…", Required: true},
+}
+
+var Outputs = [...]core.Connection{
+	{Name: "tool_result", Type: core.ConnectionTypeString, Label: "Result summary"},
+	{Name: "id", Type: core.ConnectionTypeString, Label: "Work Request OCID"},
+	{Name: "success", Type: core.ConnectionTypeBoolean, Label: "Success"},
+	{Name: "error", Type: core.ConnectionTypeString, Label: "Error"},
+}
+
+func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[string]interface{}, error) {
+	auth, client, errResult := oke.Client(inputs)
+	if errResult != nil {
+		return errResult, nil
+	}
+	id, err := oke.RequiredString("work_request_ocid", inputs)
+	if err != nil {
+		return oke.ErrorResult(err.Error()), nil
+	}
+	if _, err := client.DeleteWorkRequest(oke.Context(), okesdk.DeleteWorkRequestRequest{WorkRequestId: &id}); err != nil {
+		return oke.ErrorResult(auth.OCIError(err)), nil
+	}
+	return oke.Result("Cancelled work request "+id, map[string]interface{}{"id": id}), nil
+}
