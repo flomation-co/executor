@@ -40903,7 +40903,7 @@
     ]
   },
   "aws/iam/create_policy": {
-    "hash": "8c6495a2752912ce840f77d0557f19fb14690566f0c6570c8cac2556968d769b",
+    "hash": "dda9c80dd81e4d5c131e0654b568449e28711ab7b88444dc67eb49316e246fc0",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "AWS IAM Create Policy",
@@ -41279,7 +41279,7 @@
     ]
   },
   "aws/iam/create_role": {
-    "hash": "f4f69cb85034331cf6c51e049e4777781ec220c376150a07b194a4f2ee560786",
+    "hash": "eb33f3519619ff677170af70517a8569adb520b1191ce7a74947df386f68812b",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "AWS IAM Create Role",
@@ -41495,7 +41495,7 @@
     ]
   },
   "aws/iam/create_user": {
-    "hash": "3da66fb5ae4b5f810c09c172c126c66d743bb1b1a8ddc3976deaf4f1c6475136",
+    "hash": "44156ef83768593da162f83fc9f5c764a0463f28d6e5f4dce98abcc6c0d64041",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "AWS IAM Create User",
@@ -50449,7 +50449,7 @@
     ]
   },
   "aws/kms/encrypt": {
-    "hash": "b892587a4934b65208b1afbad2243f38769b79a757e4faf4c7b783f8617c0a4a",
+    "hash": "5f07d76467981e1b6e98c851ec752a17be04f76a803d95f9fcfb031a4dc177b2",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "AWS KMS Encrypt",
@@ -108942,7 +108942,7 @@
     ]
   },
   "aws/secretsmanager/create_secret": {
-    "hash": "aaef8e7515807b78470d1aec303ca2194c7226840b89f9fe4a38851cc94d4722",
+    "hash": "e46adb6ec5e0496a3fc3f5c684c7da930734b398aebc15db2129ee84b73e8779",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "AWS Secrets Manager Create Secret",
@@ -109849,7 +109849,7 @@
     ]
   },
   "aws/secretsmanager/get_secret_value": {
-    "hash": "125e6a408f498642ca32680fab6c193c0468d459156478c5f75aaa38368a31b6",
+    "hash": "c529c320ea7b237c3f518909bae59368f84b614684814e16a47ef02286165843",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "AWS Secrets Manager Get Secret Value",
@@ -335517,6 +335517,2230 @@
         "type": "boolean",
         "value": null,
         "label": "Truncated",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "oracle/notifications/publish_message": {
+    "hash": "ae9a36c8dffd737742772bf8f5082a1a10faa51a359cd1e1887e0561745e5740",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "OCI Notifications: Publish Message",
+    "description": "Publish a message to a Notifications topic — it fans out to every confirmed subscription (email, SMS, HTTPS, Slack and so on). The title becomes the email subject. Choose RAW_TEXT (the body verbatim) or JSON (per-protocol payloads).",
+    "website": "https://www.flomation.co",
+    "icon": "oracle+bell",
+    "date": "22/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Oracle Cloud",
+      "icon": "oracle",
+      "description": "Oracle Cloud Infrastructure (OCI) integrations"
+    },
+    "sub_category": {
+      "name": "Notifications",
+      "icon": "bell",
+      "description": "Oracle Cloud Notifications (ONS) — create topics, manage subscriptions across email, SMS, HTTPS, Slack and more, and publish a message that fans out to every subscriber"
+    },
+    "inputs": [
+      {
+        "name": "tenancy_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Tenancy OCID",
+        "placeholder": "ocid1.tenancy.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "user_ocid",
+        "type": "string",
+        "value": null,
+        "label": "User OCID",
+        "placeholder": "ocid1.user.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "e.g. uk-london-1",
+        "required": true
+      },
+      {
+        "name": "fingerprint",
+        "type": "string",
+        "value": null,
+        "label": "Key Fingerprint",
+        "placeholder": "aa:bb:cc:… fingerprint of the uploaded API key",
+        "required": true
+      },
+      {
+        "name": "private_key",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key (PEM)",
+        "placeholder": "The API signing private key — full PEM, incl. BEGIN/END lines"
+      },
+      {
+        "name": "private_key_passphrase",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key Passphrase",
+        "placeholder": "Only if the key is encrypted (optional)"
+      },
+      {
+        "name": "compartment_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Compartment OCID",
+        "placeholder": "ocid1.compartment.oc1..aaaa… (scopes the topic picker)"
+      },
+      {
+        "name": "topic_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Topic OCID",
+        "placeholder": "ocid1.onstopic.oc1..aaaa… to publish to",
+        "required": true
+      },
+      {
+        "name": "title",
+        "type": "string",
+        "value": null,
+        "label": "Title",
+        "placeholder": "The message title — becomes the email subject (optional but recommended)"
+      },
+      {
+        "name": "body",
+        "type": "text",
+        "value": null,
+        "label": "Body",
+        "placeholder": "The message body",
+        "required": true
+      },
+      {
+        "name": "message_type",
+        "type": "string",
+        "value": null,
+        "label": "Message Type",
+        "placeholder": "RAW_TEXT (default) sends the body verbatim; JSON needs a body like {\"DEFAULT\":\"…\",\"EMAIL\":\"…\"} — a \"DEFAULT\" key is required, plus optional per-protocol keys",
+        "options": [
+          {
+            "name": "Raw text",
+            "value": "RAW_TEXT"
+          },
+          {
+            "name": "JSON (per-protocol)",
+            "value": "JSON"
+          }
+        ]
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "message_id",
+        "type": "string",
+        "value": null,
+        "label": "Message ID",
+        "placeholder": ""
+      },
+      {
+        "name": "timestamp",
+        "type": "string",
+        "value": null,
+        "label": "Timestamp",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "oracle/notifications/subscription_change_compartment": {
+    "hash": "0b61e0d7bb71235899efa308b5d97917bf6f4cd8b11656dbfb69db873778ffa6",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "OCI Notifications: Move Subscription to Compartment",
+    "description": "Move a Notifications subscription to a different compartment. The endpoint, protocol and delivery state are unchanged — only the compartment scope moves.",
+    "website": "https://www.flomation.co",
+    "icon": "oracle+bell",
+    "date": "22/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Oracle Cloud",
+      "icon": "oracle",
+      "description": "Oracle Cloud Infrastructure (OCI) integrations"
+    },
+    "sub_category": {
+      "name": "Notifications",
+      "icon": "bell",
+      "description": "Oracle Cloud Notifications (ONS) — create topics, manage subscriptions across email, SMS, HTTPS, Slack and more, and publish a message that fans out to every subscriber"
+    },
+    "inputs": [
+      {
+        "name": "tenancy_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Tenancy OCID",
+        "placeholder": "ocid1.tenancy.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "user_ocid",
+        "type": "string",
+        "value": null,
+        "label": "User OCID",
+        "placeholder": "ocid1.user.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "e.g. uk-london-1",
+        "required": true
+      },
+      {
+        "name": "fingerprint",
+        "type": "string",
+        "value": null,
+        "label": "Key Fingerprint",
+        "placeholder": "aa:bb:cc:… fingerprint of the uploaded API key",
+        "required": true
+      },
+      {
+        "name": "private_key",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key (PEM)",
+        "placeholder": "The API signing private key — full PEM, incl. BEGIN/END lines"
+      },
+      {
+        "name": "private_key_passphrase",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key Passphrase",
+        "placeholder": "Only if the key is encrypted (optional)"
+      },
+      {
+        "name": "compartment_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Compartment OCID",
+        "placeholder": "ocid1.compartment.oc1..aaaa… (scopes the picker)"
+      },
+      {
+        "name": "subscription_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Subscription OCID",
+        "placeholder": "ocid1.onssubscription.oc1..aaaa… to move",
+        "required": true
+      },
+      {
+        "name": "destination_compartment_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Destination Compartment OCID",
+        "placeholder": "ocid1.compartment.oc1..aaaa… to move the subscription to",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Subscription OCID",
+        "placeholder": ""
+      },
+      {
+        "name": "destination_compartment_id",
+        "type": "string",
+        "value": null,
+        "label": "Destination Compartment OCID",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "oracle/notifications/subscription_confirm": {
+    "hash": "d6049aca7360b8f87fe9edf3c9f1c4199f85c8dab3ad004d17353b4bdcfe511f",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "OCI Notifications: Confirm Subscription",
+    "description": "Confirm a pending Notifications subscription using the token from the confirmation link OCI sends the subscriber. Email and HTTPS subscriptions stay PENDING until confirmed — this completes the handshake so delivery can start.",
+    "website": "https://www.flomation.co",
+    "icon": "oracle+bell",
+    "date": "22/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Oracle Cloud",
+      "icon": "oracle",
+      "description": "Oracle Cloud Infrastructure (OCI) integrations"
+    },
+    "sub_category": {
+      "name": "Notifications",
+      "icon": "bell",
+      "description": "Oracle Cloud Notifications (ONS) — create topics, manage subscriptions across email, SMS, HTTPS, Slack and more, and publish a message that fans out to every subscriber"
+    },
+    "inputs": [
+      {
+        "name": "tenancy_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Tenancy OCID",
+        "placeholder": "ocid1.tenancy.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "user_ocid",
+        "type": "string",
+        "value": null,
+        "label": "User OCID",
+        "placeholder": "ocid1.user.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "e.g. uk-london-1",
+        "required": true
+      },
+      {
+        "name": "fingerprint",
+        "type": "string",
+        "value": null,
+        "label": "Key Fingerprint",
+        "placeholder": "aa:bb:cc:… fingerprint of the uploaded API key",
+        "required": true
+      },
+      {
+        "name": "private_key",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key (PEM)",
+        "placeholder": "The API signing private key — full PEM, incl. BEGIN/END lines"
+      },
+      {
+        "name": "private_key_passphrase",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key Passphrase",
+        "placeholder": "Only if the key is encrypted (optional)"
+      },
+      {
+        "name": "compartment_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Compartment OCID",
+        "placeholder": "ocid1.compartment.oc1..aaaa… (scopes the picker)"
+      },
+      {
+        "name": "subscription_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Subscription OCID",
+        "placeholder": "ocid1.onssubscription.oc1..aaaa… to confirm",
+        "required": true
+      },
+      {
+        "name": "token",
+        "type": "string",
+        "value": null,
+        "label": "Confirmation Token",
+        "placeholder": "The token from the confirmation link OCI sent the subscriber",
+        "required": true
+      },
+      {
+        "name": "protocol",
+        "type": "string",
+        "value": null,
+        "label": "Protocol",
+        "placeholder": "The subscription's protocol",
+        "required": true,
+        "options": [
+          {
+            "name": "Email",
+            "value": "EMAIL"
+          },
+          {
+            "name": "SMS",
+            "value": "SMS"
+          },
+          {
+            "name": "HTTPS (custom URL)",
+            "value": "CUSTOM_HTTPS"
+          },
+          {
+            "name": "Slack",
+            "value": "SLACK"
+          },
+          {
+            "name": "PagerDuty",
+            "value": "PAGERDUTY"
+          },
+          {
+            "name": "Oracle Function",
+            "value": "ORACLE_FUNCTIONS"
+          }
+        ]
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "subscription_id",
+        "type": "string",
+        "value": null,
+        "label": "Subscription OCID",
+        "placeholder": ""
+      },
+      {
+        "name": "topic_id",
+        "type": "string",
+        "value": null,
+        "label": "Topic OCID",
+        "placeholder": ""
+      },
+      {
+        "name": "endpoint",
+        "type": "string",
+        "value": null,
+        "label": "Endpoint",
+        "placeholder": ""
+      },
+      {
+        "name": "unsubscribe_url",
+        "type": "string",
+        "value": null,
+        "label": "Unsubscribe URL",
+        "placeholder": ""
+      },
+      {
+        "name": "message",
+        "type": "string",
+        "value": null,
+        "label": "Confirmation Message",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "oracle/notifications/subscription_create": {
+    "hash": "51231f8237b277396aff6ca4fd42ec2fd4e555e805f4aa3adb7e3857236fa09b",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "OCI Notifications: Create Subscription",
+    "description": "Subscribe an endpoint to a Notifications topic — email, SMS, an HTTPS URL, Slack, PagerDuty or an Oracle Function. For email and HTTPS the subscriber must confirm the subscription before delivery starts (it stays PENDING until then).",
+    "website": "https://www.flomation.co",
+    "icon": "oracle+bell",
+    "date": "22/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Oracle Cloud",
+      "icon": "oracle",
+      "description": "Oracle Cloud Infrastructure (OCI) integrations"
+    },
+    "sub_category": {
+      "name": "Notifications",
+      "icon": "bell",
+      "description": "Oracle Cloud Notifications (ONS) — create topics, manage subscriptions across email, SMS, HTTPS, Slack and more, and publish a message that fans out to every subscriber"
+    },
+    "inputs": [
+      {
+        "name": "tenancy_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Tenancy OCID",
+        "placeholder": "ocid1.tenancy.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "user_ocid",
+        "type": "string",
+        "value": null,
+        "label": "User OCID",
+        "placeholder": "ocid1.user.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "e.g. uk-london-1",
+        "required": true
+      },
+      {
+        "name": "fingerprint",
+        "type": "string",
+        "value": null,
+        "label": "Key Fingerprint",
+        "placeholder": "aa:bb:cc:… fingerprint of the uploaded API key",
+        "required": true
+      },
+      {
+        "name": "private_key",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key (PEM)",
+        "placeholder": "The API signing private key — full PEM, incl. BEGIN/END lines"
+      },
+      {
+        "name": "private_key_passphrase",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key Passphrase",
+        "placeholder": "Only if the key is encrypted (optional)"
+      },
+      {
+        "name": "compartment_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Compartment OCID",
+        "placeholder": "ocid1.compartment.oc1..aaaa… (use the tenancy OCID for the root)",
+        "required": true
+      },
+      {
+        "name": "topic_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Topic OCID",
+        "placeholder": "ocid1.onstopic.oc1..aaaa… to subscribe to",
+        "required": true
+      },
+      {
+        "name": "protocol",
+        "type": "string",
+        "value": null,
+        "label": "Protocol",
+        "placeholder": "How the subscriber is notified",
+        "required": true,
+        "options": [
+          {
+            "name": "Email",
+            "value": "EMAIL"
+          },
+          {
+            "name": "SMS",
+            "value": "SMS"
+          },
+          {
+            "name": "HTTPS (custom URL)",
+            "value": "CUSTOM_HTTPS"
+          },
+          {
+            "name": "Slack",
+            "value": "SLACK"
+          },
+          {
+            "name": "PagerDuty",
+            "value": "PAGERDUTY"
+          },
+          {
+            "name": "Oracle Function",
+            "value": "ORACLE_FUNCTIONS"
+          }
+        ]
+      },
+      {
+        "name": "endpoint",
+        "type": "string",
+        "value": null,
+        "label": "Endpoint",
+        "placeholder": "The address for the protocol — email address, phone number, HTTPS URL, Slack webhook, function OCID…",
+        "required": true
+      },
+      {
+        "name": "metadata",
+        "type": "string",
+        "value": null,
+        "label": "Metadata (JSON)",
+        "placeholder": "Protocol-specific metadata, e.g. custom headers for HTTPS (optional)"
+      },
+      {
+        "name": "tags",
+        "type": "string",
+        "value": null,
+        "label": "Freeform Tags (JSON)",
+        "placeholder": "{\"env\":\"prod\"} (optional)"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "subscription",
+        "type": "object",
+        "value": null,
+        "label": "Subscription",
+        "placeholder": ""
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Subscription OCID",
+        "placeholder": ""
+      },
+      {
+        "name": "lifecycle_state",
+        "type": "string",
+        "value": null,
+        "label": "Lifecycle State",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "oracle/notifications/subscription_delete": {
+    "hash": "ad67c594e0037e9fc02b574ad5e0fa553aead8978dfe1dcdabe46f84dfc62a6f",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "OCI Notifications: Delete Subscription",
+    "description": "Delete (unsubscribe) a Notifications subscription by its OCID. The endpoint stops receiving messages from the topic immediately — this cannot be undone.",
+    "website": "https://www.flomation.co",
+    "icon": "oracle+bell",
+    "date": "22/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Oracle Cloud",
+      "icon": "oracle",
+      "description": "Oracle Cloud Infrastructure (OCI) integrations"
+    },
+    "sub_category": {
+      "name": "Notifications",
+      "icon": "bell",
+      "description": "Oracle Cloud Notifications (ONS) — create topics, manage subscriptions across email, SMS, HTTPS, Slack and more, and publish a message that fans out to every subscriber"
+    },
+    "inputs": [
+      {
+        "name": "tenancy_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Tenancy OCID",
+        "placeholder": "ocid1.tenancy.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "user_ocid",
+        "type": "string",
+        "value": null,
+        "label": "User OCID",
+        "placeholder": "ocid1.user.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "e.g. uk-london-1",
+        "required": true
+      },
+      {
+        "name": "fingerprint",
+        "type": "string",
+        "value": null,
+        "label": "Key Fingerprint",
+        "placeholder": "aa:bb:cc:… fingerprint of the uploaded API key",
+        "required": true
+      },
+      {
+        "name": "private_key",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key (PEM)",
+        "placeholder": "The API signing private key — full PEM, incl. BEGIN/END lines"
+      },
+      {
+        "name": "private_key_passphrase",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key Passphrase",
+        "placeholder": "Only if the key is encrypted (optional)"
+      },
+      {
+        "name": "compartment_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Compartment OCID",
+        "placeholder": "ocid1.compartment.oc1..aaaa… (scopes the picker)"
+      },
+      {
+        "name": "subscription_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Subscription OCID",
+        "placeholder": "ocid1.onssubscription.oc1..aaaa… to delete",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Subscription OCID",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "oracle/notifications/subscription_get": {
+    "hash": "629c78417734cb499f66e02aa2fd636fcd1c6a121b230affbd7f8c14f5befd98",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "OCI Notifications: Get Subscription",
+    "description": "Fetch a single Notifications subscription by its OCID — its topic, protocol, endpoint and lifecycle state (PENDING until an email/HTTPS subscriber confirms, ACTIVE once delivering).",
+    "website": "https://www.flomation.co",
+    "icon": "oracle+bell",
+    "date": "22/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Oracle Cloud",
+      "icon": "oracle",
+      "description": "Oracle Cloud Infrastructure (OCI) integrations"
+    },
+    "sub_category": {
+      "name": "Notifications",
+      "icon": "bell",
+      "description": "Oracle Cloud Notifications (ONS) — create topics, manage subscriptions across email, SMS, HTTPS, Slack and more, and publish a message that fans out to every subscriber"
+    },
+    "inputs": [
+      {
+        "name": "tenancy_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Tenancy OCID",
+        "placeholder": "ocid1.tenancy.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "user_ocid",
+        "type": "string",
+        "value": null,
+        "label": "User OCID",
+        "placeholder": "ocid1.user.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "e.g. uk-london-1",
+        "required": true
+      },
+      {
+        "name": "fingerprint",
+        "type": "string",
+        "value": null,
+        "label": "Key Fingerprint",
+        "placeholder": "aa:bb:cc:… fingerprint of the uploaded API key",
+        "required": true
+      },
+      {
+        "name": "private_key",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key (PEM)",
+        "placeholder": "The API signing private key — full PEM, incl. BEGIN/END lines"
+      },
+      {
+        "name": "private_key_passphrase",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key Passphrase",
+        "placeholder": "Only if the key is encrypted (optional)"
+      },
+      {
+        "name": "compartment_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Compartment OCID",
+        "placeholder": "ocid1.compartment.oc1..aaaa… (scopes the picker)"
+      },
+      {
+        "name": "subscription_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Subscription OCID",
+        "placeholder": "ocid1.onssubscription.oc1..aaaa… to fetch",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "subscription",
+        "type": "object",
+        "value": null,
+        "label": "Subscription",
+        "placeholder": ""
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Subscription OCID",
+        "placeholder": ""
+      },
+      {
+        "name": "lifecycle_state",
+        "type": "string",
+        "value": null,
+        "label": "Lifecycle State",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "oracle/notifications/subscription_list": {
+    "hash": "a5437efd5437c3ecdf2281d0ef95de12ef4b68d08ccbe56d2e7f5debbd66edfc",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "OCI Notifications: List Subscriptions",
+    "description": "List the Oracle Cloud Notifications subscriptions in a compartment, optionally narrowed to a single topic. Walks pagination up to a safe cap.",
+    "website": "https://www.flomation.co",
+    "icon": "oracle+bell",
+    "date": "22/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Oracle Cloud",
+      "icon": "oracle",
+      "description": "Oracle Cloud Infrastructure (OCI) integrations"
+    },
+    "sub_category": {
+      "name": "Notifications",
+      "icon": "bell",
+      "description": "Oracle Cloud Notifications (ONS) — create topics, manage subscriptions across email, SMS, HTTPS, Slack and more, and publish a message that fans out to every subscriber"
+    },
+    "inputs": [
+      {
+        "name": "tenancy_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Tenancy OCID",
+        "placeholder": "ocid1.tenancy.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "user_ocid",
+        "type": "string",
+        "value": null,
+        "label": "User OCID",
+        "placeholder": "ocid1.user.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "e.g. uk-london-1",
+        "required": true
+      },
+      {
+        "name": "fingerprint",
+        "type": "string",
+        "value": null,
+        "label": "Key Fingerprint",
+        "placeholder": "aa:bb:cc:… fingerprint of the uploaded API key",
+        "required": true
+      },
+      {
+        "name": "private_key",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key (PEM)",
+        "placeholder": "The API signing private key — full PEM, incl. BEGIN/END lines"
+      },
+      {
+        "name": "private_key_passphrase",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key Passphrase",
+        "placeholder": "Only if the key is encrypted (optional)"
+      },
+      {
+        "name": "compartment_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Compartment OCID",
+        "placeholder": "ocid1.compartment.oc1..aaaa… (use the tenancy OCID for the root)",
+        "required": true
+      },
+      {
+        "name": "topic_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Topic OCID",
+        "placeholder": "ocid1.onstopic.oc1..aaaa… to narrow to one topic (optional)"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "subscriptions",
+        "type": "object",
+        "value": null,
+        "label": "Subscriptions",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "string",
+        "value": null,
+        "label": "Count",
+        "placeholder": ""
+      },
+      {
+        "name": "truncated",
+        "type": "boolean",
+        "value": null,
+        "label": "Truncated",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "oracle/notifications/subscription_resend_confirmation": {
+    "hash": "6b2f5f14e8beedfa312002eac58a8eb955f8d93e32d91c3e3775b11832e3b39e",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "OCI Notifications: Resend Subscription Confirmation",
+    "description": "Resend the confirmation message for a Notifications subscription. Email and HTTPS subscriptions stay PENDING until the subscriber confirms — use this to re-send that confirmation.",
+    "website": "https://www.flomation.co",
+    "icon": "oracle+bell",
+    "date": "22/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Oracle Cloud",
+      "icon": "oracle",
+      "description": "Oracle Cloud Infrastructure (OCI) integrations"
+    },
+    "sub_category": {
+      "name": "Notifications",
+      "icon": "bell",
+      "description": "Oracle Cloud Notifications (ONS) — create topics, manage subscriptions across email, SMS, HTTPS, Slack and more, and publish a message that fans out to every subscriber"
+    },
+    "inputs": [
+      {
+        "name": "tenancy_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Tenancy OCID",
+        "placeholder": "ocid1.tenancy.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "user_ocid",
+        "type": "string",
+        "value": null,
+        "label": "User OCID",
+        "placeholder": "ocid1.user.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "e.g. uk-london-1",
+        "required": true
+      },
+      {
+        "name": "fingerprint",
+        "type": "string",
+        "value": null,
+        "label": "Key Fingerprint",
+        "placeholder": "aa:bb:cc:… fingerprint of the uploaded API key",
+        "required": true
+      },
+      {
+        "name": "private_key",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key (PEM)",
+        "placeholder": "The API signing private key — full PEM, incl. BEGIN/END lines"
+      },
+      {
+        "name": "private_key_passphrase",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key Passphrase",
+        "placeholder": "Only if the key is encrypted (optional)"
+      },
+      {
+        "name": "compartment_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Compartment OCID",
+        "placeholder": "ocid1.compartment.oc1..aaaa… (scopes the picker)"
+      },
+      {
+        "name": "subscription_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Subscription OCID",
+        "placeholder": "ocid1.onssubscription.oc1..aaaa… to resend confirmation for",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "subscription",
+        "type": "object",
+        "value": null,
+        "label": "Subscription",
+        "placeholder": ""
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Subscription OCID",
+        "placeholder": ""
+      },
+      {
+        "name": "lifecycle_state",
+        "type": "string",
+        "value": null,
+        "label": "Lifecycle State",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "oracle/notifications/subscription_unsubscribe": {
+    "hash": "cbeb497340376df084aab616ccfc2c4d7f91b73e2050d609d1ff0c7f2933e2e9",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "OCI Notifications: Unsubscribe",
+    "description": "Unsubscribe an endpoint from a Notifications topic using the subscription's OCID plus the token and protocol from the unsubscribe link OCI includes in every notification.",
+    "website": "https://www.flomation.co",
+    "icon": "oracle+bell",
+    "date": "22/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Oracle Cloud",
+      "icon": "oracle",
+      "description": "Oracle Cloud Infrastructure (OCI) integrations"
+    },
+    "sub_category": {
+      "name": "Notifications",
+      "icon": "bell",
+      "description": "Oracle Cloud Notifications (ONS) — create topics, manage subscriptions across email, SMS, HTTPS, Slack and more, and publish a message that fans out to every subscriber"
+    },
+    "inputs": [
+      {
+        "name": "tenancy_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Tenancy OCID",
+        "placeholder": "ocid1.tenancy.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "user_ocid",
+        "type": "string",
+        "value": null,
+        "label": "User OCID",
+        "placeholder": "ocid1.user.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "e.g. uk-london-1",
+        "required": true
+      },
+      {
+        "name": "fingerprint",
+        "type": "string",
+        "value": null,
+        "label": "Key Fingerprint",
+        "placeholder": "aa:bb:cc:… fingerprint of the uploaded API key",
+        "required": true
+      },
+      {
+        "name": "private_key",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key (PEM)",
+        "placeholder": "The API signing private key — full PEM, incl. BEGIN/END lines"
+      },
+      {
+        "name": "private_key_passphrase",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key Passphrase",
+        "placeholder": "Only if the key is encrypted (optional)"
+      },
+      {
+        "name": "compartment_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Compartment OCID",
+        "placeholder": "ocid1.compartment.oc1..aaaa… (scopes the picker)"
+      },
+      {
+        "name": "subscription_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Subscription OCID",
+        "placeholder": "ocid1.onssubscription.oc1..aaaa… to unsubscribe",
+        "required": true
+      },
+      {
+        "name": "token",
+        "type": "string",
+        "value": null,
+        "label": "Token",
+        "placeholder": "The token from the unsubscribe link OCI included in the notification",
+        "required": true
+      },
+      {
+        "name": "protocol",
+        "type": "string",
+        "value": null,
+        "label": "Protocol",
+        "placeholder": "The subscription's protocol",
+        "required": true,
+        "options": [
+          {
+            "name": "Email",
+            "value": "EMAIL"
+          },
+          {
+            "name": "SMS",
+            "value": "SMS"
+          },
+          {
+            "name": "HTTPS (custom URL)",
+            "value": "CUSTOM_HTTPS"
+          },
+          {
+            "name": "Slack",
+            "value": "SLACK"
+          },
+          {
+            "name": "PagerDuty",
+            "value": "PAGERDUTY"
+          },
+          {
+            "name": "Oracle Function",
+            "value": "ORACLE_FUNCTIONS"
+          }
+        ]
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "string",
+        "value": null,
+        "label": "Unsubscribe result",
+        "placeholder": ""
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Subscription OCID",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "oracle/notifications/subscription_update": {
+    "hash": "f118e96fe58501e3e2772009b9198d0ce3c6fefd1b567b846e207aacbc71ce28",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "OCI Notifications: Update Subscription",
+    "description": "Update a Notifications subscription — its delivery backoff-retry ceiling and/or freeform tags. A subscription's protocol and endpoint are fixed once created; recreate the subscription to change those.",
+    "website": "https://www.flomation.co",
+    "icon": "oracle+bell",
+    "date": "22/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Oracle Cloud",
+      "icon": "oracle",
+      "description": "Oracle Cloud Infrastructure (OCI) integrations"
+    },
+    "sub_category": {
+      "name": "Notifications",
+      "icon": "bell",
+      "description": "Oracle Cloud Notifications (ONS) — create topics, manage subscriptions across email, SMS, HTTPS, Slack and more, and publish a message that fans out to every subscriber"
+    },
+    "inputs": [
+      {
+        "name": "tenancy_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Tenancy OCID",
+        "placeholder": "ocid1.tenancy.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "user_ocid",
+        "type": "string",
+        "value": null,
+        "label": "User OCID",
+        "placeholder": "ocid1.user.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "e.g. uk-london-1",
+        "required": true
+      },
+      {
+        "name": "fingerprint",
+        "type": "string",
+        "value": null,
+        "label": "Key Fingerprint",
+        "placeholder": "aa:bb:cc:… fingerprint of the uploaded API key",
+        "required": true
+      },
+      {
+        "name": "private_key",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key (PEM)",
+        "placeholder": "The API signing private key — full PEM, incl. BEGIN/END lines"
+      },
+      {
+        "name": "private_key_passphrase",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key Passphrase",
+        "placeholder": "Only if the key is encrypted (optional)"
+      },
+      {
+        "name": "compartment_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Compartment OCID",
+        "placeholder": "ocid1.compartment.oc1..aaaa… (optional — scopes the picker)"
+      },
+      {
+        "name": "subscription_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Subscription OCID",
+        "placeholder": "ocid1.onssubscription.oc1..aaaa… to update",
+        "required": true
+      },
+      {
+        "name": "max_retry_duration_ms",
+        "type": "string",
+        "value": null,
+        "label": "Max Retry Duration (ms)",
+        "placeholder": "Backoff retry ceiling in whole milliseconds, e.g. 7200000 (2 hours) — optional"
+      },
+      {
+        "name": "tags",
+        "type": "string",
+        "value": null,
+        "label": "Freeform Tags (JSON)",
+        "placeholder": "{\"env\":\"prod\"} (optional)"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Subscription OCID",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "oracle/notifications/topic_change_compartment": {
+    "hash": "10d0cc68bae4fa9eff3fe905815d59045cda3752776c13004efab7d368c8589c",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "OCI Notifications: Move Topic to Compartment",
+    "description": "Move an Oracle Cloud Notifications topic into a different compartment.",
+    "website": "https://www.flomation.co",
+    "icon": "oracle+bell",
+    "date": "22/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Oracle Cloud",
+      "icon": "oracle",
+      "description": "Oracle Cloud Infrastructure (OCI) integrations"
+    },
+    "sub_category": {
+      "name": "Notifications",
+      "icon": "bell",
+      "description": "Oracle Cloud Notifications (ONS) — create topics, manage subscriptions across email, SMS, HTTPS, Slack and more, and publish a message that fans out to every subscriber"
+    },
+    "inputs": [
+      {
+        "name": "tenancy_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Tenancy OCID",
+        "placeholder": "ocid1.tenancy.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "user_ocid",
+        "type": "string",
+        "value": null,
+        "label": "User OCID",
+        "placeholder": "ocid1.user.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "e.g. uk-london-1",
+        "required": true
+      },
+      {
+        "name": "fingerprint",
+        "type": "string",
+        "value": null,
+        "label": "Key Fingerprint",
+        "placeholder": "aa:bb:cc:… fingerprint of the uploaded API key",
+        "required": true
+      },
+      {
+        "name": "private_key",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key (PEM)",
+        "placeholder": "The API signing private key — full PEM, incl. BEGIN/END lines"
+      },
+      {
+        "name": "private_key_passphrase",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key Passphrase",
+        "placeholder": "Only if the key is encrypted (optional)"
+      },
+      {
+        "name": "compartment_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Compartment OCID",
+        "placeholder": "ocid1.compartment.oc1..aaaa… (the topic's current compartment — scopes the topic picker)"
+      },
+      {
+        "name": "topic_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Topic OCID",
+        "placeholder": "ocid1.onstopic.oc1..aaaa… of the topic to move",
+        "required": true
+      },
+      {
+        "name": "destination_compartment_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Destination Compartment OCID",
+        "placeholder": "ocid1.compartment.oc1..aaaa… to move the topic into",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "topic_id",
+        "type": "string",
+        "value": null,
+        "label": "Topic OCID",
+        "placeholder": ""
+      },
+      {
+        "name": "destination_compartment_id",
+        "type": "string",
+        "value": null,
+        "label": "Destination Compartment OCID",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "oracle/notifications/topic_create": {
+    "hash": "6f44856ffc3eca1c0124fdc670f404adca8eacfbbf39f6db040580ffd64180f9",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "OCI Notifications: Create Topic",
+    "description": "Create an Oracle Cloud Notifications topic — the fan-out point that subscriptions attach to and messages are published to. Poll Get Topic until ACTIVE.",
+    "website": "https://www.flomation.co",
+    "icon": "oracle+bell",
+    "date": "22/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Oracle Cloud",
+      "icon": "oracle",
+      "description": "Oracle Cloud Infrastructure (OCI) integrations"
+    },
+    "sub_category": {
+      "name": "Notifications",
+      "icon": "bell",
+      "description": "Oracle Cloud Notifications (ONS) — create topics, manage subscriptions across email, SMS, HTTPS, Slack and more, and publish a message that fans out to every subscriber"
+    },
+    "inputs": [
+      {
+        "name": "tenancy_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Tenancy OCID",
+        "placeholder": "ocid1.tenancy.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "user_ocid",
+        "type": "string",
+        "value": null,
+        "label": "User OCID",
+        "placeholder": "ocid1.user.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "e.g. uk-london-1",
+        "required": true
+      },
+      {
+        "name": "fingerprint",
+        "type": "string",
+        "value": null,
+        "label": "Key Fingerprint",
+        "placeholder": "aa:bb:cc:… fingerprint of the uploaded API key",
+        "required": true
+      },
+      {
+        "name": "private_key",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key (PEM)",
+        "placeholder": "The API signing private key — full PEM, incl. BEGIN/END lines"
+      },
+      {
+        "name": "private_key_passphrase",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key Passphrase",
+        "placeholder": "Only if the key is encrypted (optional)"
+      },
+      {
+        "name": "compartment_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Compartment OCID",
+        "placeholder": "ocid1.compartment.oc1..aaaa… (use the tenancy OCID for the root)",
+        "required": true
+      },
+      {
+        "name": "name",
+        "type": "string",
+        "value": null,
+        "label": "Topic Name",
+        "placeholder": "A unique name within the compartment (letters, numbers, hyphens, underscores)",
+        "required": true
+      },
+      {
+        "name": "description",
+        "type": "string",
+        "value": null,
+        "label": "Description",
+        "placeholder": "What this topic is for (optional)"
+      },
+      {
+        "name": "tags",
+        "type": "string",
+        "value": null,
+        "label": "Freeform Tags (JSON)",
+        "placeholder": "{\"env\":\"prod\"} (optional)"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "topic",
+        "type": "object",
+        "value": null,
+        "label": "Topic",
+        "placeholder": ""
+      },
+      {
+        "name": "topic_id",
+        "type": "string",
+        "value": null,
+        "label": "Topic OCID",
+        "placeholder": ""
+      },
+      {
+        "name": "lifecycle_state",
+        "type": "string",
+        "value": null,
+        "label": "Lifecycle State",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "oracle/notifications/topic_delete": {
+    "hash": "f9864e391981275eb934c1af2cb0e47bb430e6899ae8d35c5d700caf03dac84e",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "OCI Notifications: Delete Topic",
+    "description": "Delete an Oracle Cloud Notifications topic by its OCID. This also removes its subscriptions and cannot be undone.",
+    "website": "https://www.flomation.co",
+    "icon": "oracle+bell",
+    "date": "22/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Oracle Cloud",
+      "icon": "oracle",
+      "description": "Oracle Cloud Infrastructure (OCI) integrations"
+    },
+    "sub_category": {
+      "name": "Notifications",
+      "icon": "bell",
+      "description": "Oracle Cloud Notifications (ONS) — create topics, manage subscriptions across email, SMS, HTTPS, Slack and more, and publish a message that fans out to every subscriber"
+    },
+    "inputs": [
+      {
+        "name": "tenancy_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Tenancy OCID",
+        "placeholder": "ocid1.tenancy.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "user_ocid",
+        "type": "string",
+        "value": null,
+        "label": "User OCID",
+        "placeholder": "ocid1.user.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "e.g. uk-london-1",
+        "required": true
+      },
+      {
+        "name": "fingerprint",
+        "type": "string",
+        "value": null,
+        "label": "Key Fingerprint",
+        "placeholder": "aa:bb:cc:… fingerprint of the uploaded API key",
+        "required": true
+      },
+      {
+        "name": "private_key",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key (PEM)",
+        "placeholder": "The API signing private key — full PEM, incl. BEGIN/END lines"
+      },
+      {
+        "name": "private_key_passphrase",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key Passphrase",
+        "placeholder": "Only if the key is encrypted (optional)"
+      },
+      {
+        "name": "compartment_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Compartment OCID",
+        "placeholder": "ocid1.compartment.oc1..aaaa… (scopes the picker)"
+      },
+      {
+        "name": "topic_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Topic OCID",
+        "placeholder": "ocid1.onstopic.oc1..aaaa…",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "topic_id",
+        "type": "string",
+        "value": null,
+        "label": "Topic OCID",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "oracle/notifications/topic_get": {
+    "hash": "2dc5e94511f9356bea528b191d719b3965b197678894f30d683e01990cabb316",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "OCI Notifications: Get Topic",
+    "description": "Fetch a single Oracle Cloud Notifications topic by its OCID.",
+    "website": "https://www.flomation.co",
+    "icon": "oracle+bell",
+    "date": "22/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Oracle Cloud",
+      "icon": "oracle",
+      "description": "Oracle Cloud Infrastructure (OCI) integrations"
+    },
+    "sub_category": {
+      "name": "Notifications",
+      "icon": "bell",
+      "description": "Oracle Cloud Notifications (ONS) — create topics, manage subscriptions across email, SMS, HTTPS, Slack and more, and publish a message that fans out to every subscriber"
+    },
+    "inputs": [
+      {
+        "name": "tenancy_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Tenancy OCID",
+        "placeholder": "ocid1.tenancy.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "user_ocid",
+        "type": "string",
+        "value": null,
+        "label": "User OCID",
+        "placeholder": "ocid1.user.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "e.g. uk-london-1",
+        "required": true
+      },
+      {
+        "name": "fingerprint",
+        "type": "string",
+        "value": null,
+        "label": "Key Fingerprint",
+        "placeholder": "aa:bb:cc:… fingerprint of the uploaded API key",
+        "required": true
+      },
+      {
+        "name": "private_key",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key (PEM)",
+        "placeholder": "The API signing private key — full PEM, incl. BEGIN/END lines"
+      },
+      {
+        "name": "private_key_passphrase",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key Passphrase",
+        "placeholder": "Only if the key is encrypted (optional)"
+      },
+      {
+        "name": "compartment_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Compartment OCID",
+        "placeholder": "ocid1.compartment.oc1..aaaa… (scopes the picker)"
+      },
+      {
+        "name": "topic_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Topic OCID",
+        "placeholder": "ocid1.onstopic.oc1..aaaa…",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "topic",
+        "type": "object",
+        "value": null,
+        "label": "Topic",
+        "placeholder": ""
+      },
+      {
+        "name": "topic_id",
+        "type": "string",
+        "value": null,
+        "label": "Topic OCID",
+        "placeholder": ""
+      },
+      {
+        "name": "lifecycle_state",
+        "type": "string",
+        "value": null,
+        "label": "Lifecycle State",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "oracle/notifications/topic_list": {
+    "hash": "9cb4555b8db6ff628d9ca0ad13aba753af940ec724e26391f0e4e75271ca382a",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "OCI Notifications: List Topics",
+    "description": "List the Oracle Cloud Notifications topics in a compartment. Walks pagination up to a safe cap.",
+    "website": "https://www.flomation.co",
+    "icon": "oracle+bell",
+    "date": "22/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Oracle Cloud",
+      "icon": "oracle",
+      "description": "Oracle Cloud Infrastructure (OCI) integrations"
+    },
+    "sub_category": {
+      "name": "Notifications",
+      "icon": "bell",
+      "description": "Oracle Cloud Notifications (ONS) — create topics, manage subscriptions across email, SMS, HTTPS, Slack and more, and publish a message that fans out to every subscriber"
+    },
+    "inputs": [
+      {
+        "name": "tenancy_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Tenancy OCID",
+        "placeholder": "ocid1.tenancy.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "user_ocid",
+        "type": "string",
+        "value": null,
+        "label": "User OCID",
+        "placeholder": "ocid1.user.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "e.g. uk-london-1",
+        "required": true
+      },
+      {
+        "name": "fingerprint",
+        "type": "string",
+        "value": null,
+        "label": "Key Fingerprint",
+        "placeholder": "aa:bb:cc:… fingerprint of the uploaded API key",
+        "required": true
+      },
+      {
+        "name": "private_key",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key (PEM)",
+        "placeholder": "The API signing private key — full PEM, incl. BEGIN/END lines"
+      },
+      {
+        "name": "private_key_passphrase",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key Passphrase",
+        "placeholder": "Only if the key is encrypted (optional)"
+      },
+      {
+        "name": "compartment_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Compartment OCID",
+        "placeholder": "ocid1.compartment.oc1..aaaa… (use the tenancy OCID for the root)",
+        "required": true
+      },
+      {
+        "name": "name",
+        "type": "string",
+        "value": null,
+        "label": "Name Filter",
+        "placeholder": "Only topics with this exact name (optional)"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "topics",
+        "type": "object",
+        "value": null,
+        "label": "Topics",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "string",
+        "value": null,
+        "label": "Count",
+        "placeholder": ""
+      },
+      {
+        "name": "truncated",
+        "type": "boolean",
+        "value": null,
+        "label": "Truncated",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "oracle/notifications/topic_update": {
+    "hash": "17f2ddfc394826979f32d7b41364998b579c8ce7f225d2db25d20e4a81d43503",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "OCI Notifications: Update Topic",
+    "description": "Update the description and free-form tags of an Oracle Cloud Notifications topic.",
+    "website": "https://www.flomation.co",
+    "icon": "oracle+bell",
+    "date": "22/07/2026",
+    "type": 2,
+    "category": {
+      "name": "Oracle Cloud",
+      "icon": "oracle",
+      "description": "Oracle Cloud Infrastructure (OCI) integrations"
+    },
+    "sub_category": {
+      "name": "Notifications",
+      "icon": "bell",
+      "description": "Oracle Cloud Notifications (ONS) — create topics, manage subscriptions across email, SMS, HTTPS, Slack and more, and publish a message that fans out to every subscriber"
+    },
+    "inputs": [
+      {
+        "name": "tenancy_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Tenancy OCID",
+        "placeholder": "ocid1.tenancy.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "user_ocid",
+        "type": "string",
+        "value": null,
+        "label": "User OCID",
+        "placeholder": "ocid1.user.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "e.g. uk-london-1",
+        "required": true
+      },
+      {
+        "name": "fingerprint",
+        "type": "string",
+        "value": null,
+        "label": "Key Fingerprint",
+        "placeholder": "aa:bb:cc:… fingerprint of the uploaded API key",
+        "required": true
+      },
+      {
+        "name": "private_key",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key (PEM)",
+        "placeholder": "The API signing private key — full PEM, incl. BEGIN/END lines"
+      },
+      {
+        "name": "private_key_passphrase",
+        "type": "secret",
+        "value": null,
+        "label": "Private Key Passphrase",
+        "placeholder": "Only if the key is encrypted (optional)"
+      },
+      {
+        "name": "compartment_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Compartment OCID (scopes the picker)",
+        "placeholder": "ocid1.compartment.oc1..aaaa… (use the tenancy OCID for the root)"
+      },
+      {
+        "name": "topic_ocid",
+        "type": "string",
+        "value": null,
+        "label": "Topic OCID",
+        "placeholder": "ocid1.onstopic.oc1..aaaa…",
+        "required": true
+      },
+      {
+        "name": "description",
+        "type": "string",
+        "value": null,
+        "label": "Description",
+        "placeholder": "New description for the topic (optional)"
+      },
+      {
+        "name": "tags",
+        "type": "string",
+        "value": null,
+        "label": "Free-form Tags",
+        "placeholder": "JSON object of string values, e.g. {\"env\":\"prod\"} (optional)"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "topic",
+        "type": "object",
+        "value": null,
+        "label": "Topic",
+        "placeholder": ""
+      },
+      {
+        "name": "topic_id",
+        "type": "string",
+        "value": null,
+        "label": "Topic OCID",
+        "placeholder": ""
+      },
+      {
+        "name": "lifecycle_state",
+        "type": "string",
+        "value": null,
+        "label": "Lifecycle state",
         "placeholder": ""
       },
       {
