@@ -1,0 +1,62 @@
+// Package oracle_identity_user_update_state unblocks an IAM user. OCI's UpdateUserState
+// API supports ONLY unblocking (blocked=false) — a user is auto-blocked after repeated
+// failed sign-ins, and this clears that block. To actually disable a user, remove their
+// capabilities or delete them.
+package oracle_identity_user_update_state
+
+import (
+	"fmt"
+
+	core "flomation.app/automate/executor"
+	iam "flomation.app/automate/executor/actions/oracle/identity"
+
+	identity "github.com/oracle/oci-go-sdk/v65/identity"
+)
+
+const (
+	Author       = "Dave McElin"
+	Organisation = "Flomation"
+	Name         = "OCI Identity: Unblock User"
+	Description  = "Unblock an Oracle Cloud IAM user that was auto-blocked after repeated failed sign-ins. OCI's state API only supports unblocking — to disable a user, remove their capabilities or delete them."
+	Website      = "https://www.flomation.co"
+	Icon         = "oracle+user"
+	Date         = "22/07/2026"
+	Type         = core.ActionTypeAction
+)
+
+var Inputs = [...]core.Connection{
+	{Name: "tenancy_ocid", Type: core.ConnectionTypeString, Label: "Tenancy OCID", Placeholder: "ocid1.tenancy.oc1..aaaa…", Required: true},
+	{Name: "user_ocid", Type: core.ConnectionTypeString, Label: "User OCID", Placeholder: "ocid1.user.oc1..aaaa… (the caller's user, for signing)", Required: true},
+	{Name: "region", Type: core.ConnectionTypeString, Label: "Region", Placeholder: "the tenancy home region, e.g. uk-london-1", Required: true},
+	{Name: "fingerprint", Type: core.ConnectionTypeString, Label: "Key Fingerprint", Placeholder: "aa:bb:cc:… fingerprint of the uploaded API key", Required: true},
+	{Name: "private_key", Type: core.ConnectionTypeSecret, Label: "Private Key (PEM)", Placeholder: "The API signing private key — full PEM, incl. BEGIN/END lines"},
+	{Name: "private_key_passphrase", Type: core.ConnectionTypeSecret, Label: "Private Key Passphrase", Placeholder: "Only if the key is encrypted (optional)"},
+	{Name: "compartment_ocid", Type: core.ConnectionTypeString, Label: "Compartment OCID", Placeholder: "Leave blank for the tenancy (scopes the user picker)"},
+	{Name: "target_user_ocid", Type: core.ConnectionTypeString, Label: "User OCID (to unblock)", Placeholder: "ocid1.user.oc1..aaaa… of the user to unblock", Required: true},
+}
+
+var Outputs = [...]core.Connection{
+	{Name: "tool_result", Type: core.ConnectionTypeString, Label: "Result summary"},
+	{Name: "user", Type: core.ConnectionTypeObject, Label: "User"},
+	{Name: "id", Type: core.ConnectionTypeString, Label: "User OCID"},
+	{Name: "success", Type: core.ConnectionTypeBoolean, Label: "Success"},
+	{Name: "error", Type: core.ConnectionTypeString, Label: "Error"},
+}
+
+func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[string]interface{}, error) {
+	auth, client, id, errResult := iam.ResourceClient(inputs, "target_user_ocid")
+	if errResult != nil {
+		return errResult, nil
+	}
+	// OCI supports only unblocking (blocked=false); blocked=true is not honoured.
+	unblocked := false
+	resp, err := client.UpdateUserState(iam.Context(), identity.UpdateUserStateRequest{
+		UserId:             &id,
+		UpdateStateDetails: identity.UpdateStateDetails{Blocked: &unblocked},
+	})
+	if err != nil {
+		return iam.ErrorResult(auth.OCIError(err)), nil
+	}
+	user := iam.SummariseUser(&resp.User)
+	return iam.Result(fmt.Sprintf("Unblocked user %q (now %s)", user["name"], user["lifecycle_state"]), map[string]interface{}{"user": user, "id": user["id"]}), nil
+}

@@ -1,0 +1,82 @@
+// Package oracle_identity_dynamic_group_update updates a dynamic group's description, matching rule and/or freeform tags.
+package oracle_identity_dynamic_group_update
+
+import (
+	"fmt"
+
+	core "flomation.app/automate/executor"
+	iam "flomation.app/automate/executor/actions/oracle/identity"
+
+	identity "github.com/oracle/oci-go-sdk/v65/identity"
+)
+
+const (
+	Author       = "Dave McElin"
+	Organisation = "Flomation"
+	Name         = "OCI Identity: Update Dynamic Group"
+	Description  = "Update an Oracle Cloud dynamic group's description, matching rule and/or freeform tags — only the fields you supply are changed."
+	Website      = "https://www.flomation.co"
+	Icon         = "oracle+gears"
+	Date         = "22/07/2026"
+	Type         = core.ActionTypeAction
+)
+
+var Inputs = [...]core.Connection{
+	{Name: "tenancy_ocid", Type: core.ConnectionTypeString, Label: "Tenancy OCID", Placeholder: "ocid1.tenancy.oc1..aaaa…", Required: true},
+	{Name: "user_ocid", Type: core.ConnectionTypeString, Label: "User OCID", Placeholder: "ocid1.user.oc1..aaaa… (the caller's user, for signing)", Required: true},
+	{Name: "region", Type: core.ConnectionTypeString, Label: "Region", Placeholder: "the tenancy home region, e.g. uk-london-1", Required: true},
+	{Name: "fingerprint", Type: core.ConnectionTypeString, Label: "Key Fingerprint", Placeholder: "aa:bb:cc:… fingerprint of the uploaded API key", Required: true},
+	{Name: "private_key", Type: core.ConnectionTypeSecret, Label: "Private Key (PEM)", Placeholder: "The API signing private key — full PEM, incl. BEGIN/END lines"},
+	{Name: "private_key_passphrase", Type: core.ConnectionTypeSecret, Label: "Private Key Passphrase", Placeholder: "Only if the key is encrypted (optional)"},
+	{Name: "compartment_ocid", Type: core.ConnectionTypeString, Label: "Compartment OCID", Placeholder: "Leave blank for the tenancy (dynamic groups live in the root)"},
+	{Name: "dynamic_group_ocid", Type: core.ConnectionTypeString, Label: "Dynamic Group OCID", Placeholder: "ocid1.dynamicgroup.oc1..aaaa… of the dynamic group to update", Required: true},
+	{Name: "description", Type: core.ConnectionTypeString, Label: "Description", Placeholder: "New description (leave blank to keep the current one)"},
+	{Name: "matching_rule", Type: core.ConnectionTypeText, Label: "Matching Rule", Placeholder: "New rule, e.g. ALL {instance.compartment.id = 'ocid1.compartment.oc1..aaaa…'} (leave blank to keep)"},
+	{Name: "tags", Type: core.ConnectionTypeString, Label: "Freeform Tags (JSON)", Placeholder: `{"env":"prod"} — replaces all freeform tags (leave blank to keep)`},
+}
+
+var Outputs = [...]core.Connection{
+	{Name: "tool_result", Type: core.ConnectionTypeString, Label: "Result summary"},
+	{Name: "dynamic_group", Type: core.ConnectionTypeObject, Label: "Dynamic Group"},
+	{Name: "id", Type: core.ConnectionTypeString, Label: "Dynamic Group OCID"},
+	{Name: "success", Type: core.ConnectionTypeBoolean, Label: "Success"},
+	{Name: "error", Type: core.ConnectionTypeString, Label: "Error"},
+}
+
+func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[string]interface{}, error) {
+	auth, client, id, errResult := iam.ResourceClient(inputs, "dynamic_group_ocid")
+	if errResult != nil {
+		return errResult, nil
+	}
+
+	details := identity.UpdateDynamicGroupDetails{}
+	changed := false
+
+	if desc := iam.OptionalString("description", inputs); desc != "" {
+		details.Description = &desc
+		changed = true
+	}
+	if rule := iam.OptionalString("matching_rule", inputs); rule != "" {
+		details.MatchingRule = &rule
+		changed = true
+	}
+	tags, err := iam.FreeformTags("tags", inputs)
+	if err != nil {
+		return iam.ErrorResult(err.Error()), nil
+	}
+	if tags != nil {
+		details.FreeformTags = tags
+		changed = true
+	}
+
+	if !changed {
+		return iam.ErrorResult("nothing to update — supply a description, matching rule and/or freeform tags"), nil
+	}
+
+	resp, err := client.UpdateDynamicGroup(iam.Context(), identity.UpdateDynamicGroupRequest{DynamicGroupId: &id, UpdateDynamicGroupDetails: details})
+	if err != nil {
+		return iam.ErrorResult(auth.OCIError(err)), nil
+	}
+	dg := iam.SummariseDynamicGroup(&resp.DynamicGroup)
+	return iam.Result(fmt.Sprintf("Updated dynamic group %q (%s)", dg["name"], dg["lifecycle_state"]), map[string]interface{}{"dynamic_group": dg, "id": dg["id"]}), nil
+}
