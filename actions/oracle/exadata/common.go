@@ -236,17 +236,17 @@ func FormatTime(t *common.SDKTime) string {
 
 func SummariseCloudExadataInfrastructure(x *database.CloudExadataInfrastructure) map[string]interface{} {
 	return map[string]interface{}{
-		"id":                     Str(x.Id),
-		"display_name":           Str(x.DisplayName),
-		"compartment_id":         Str(x.CompartmentId),
-		"shape":                  Str(x.Shape),
-		"availability_domain":    Str(x.AvailabilityDomain),
-		"lifecycle_state":        string(x.LifecycleState),
-		"compute_count":          IntOrNil(x.ComputeCount),
-		"storage_count":          IntOrNil(x.StorageCount),
-		"total_storage_size_gb":  IntOrNil(x.TotalStorageSizeInGBs),
-		"cpu_count":              IntOrNil(x.CpuCount),
-		"memory_size_gb":         IntOrNil(x.MemorySizeInGBs),
+		"id":                    Str(x.Id),
+		"display_name":          Str(x.DisplayName),
+		"compartment_id":        Str(x.CompartmentId),
+		"shape":                 Str(x.Shape),
+		"availability_domain":   Str(x.AvailabilityDomain),
+		"lifecycle_state":       string(x.LifecycleState),
+		"compute_count":         IntOrNil(x.ComputeCount),
+		"storage_count":         IntOrNil(x.StorageCount),
+		"total_storage_size_gb": IntOrNil(x.TotalStorageSizeInGBs),
+		"cpu_count":             IntOrNil(x.CpuCount),
+		"memory_size_gb":        IntOrNil(x.MemorySizeInGBs),
 	}
 }
 
@@ -322,11 +322,11 @@ func SummariseDbServerSummary(d *database.DbServerSummary) map[string]interface{
 
 func SummariseDbNode(n *database.DbNode) map[string]interface{} {
 	return map[string]interface{}{
-		"id":                Str(n.Id),
-		"hostname":          Str(n.Hostname),
-		"db_system_id":      Str(n.DbSystemId),
-		"fault_domain":      Str(n.FaultDomain),
-		"lifecycle_state":   string(n.LifecycleState),
+		"id":                  Str(n.Id),
+		"hostname":            Str(n.Hostname),
+		"db_system_id":        Str(n.DbSystemId),
+		"fault_domain":        Str(n.FaultDomain),
+		"lifecycle_state":     string(n.LifecycleState),
 		"software_storage_gb": IntOrNil(n.SoftwareStorageSizeInGB),
 	}
 }

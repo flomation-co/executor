@@ -244,10 +244,10 @@ func SummariseCluster(c *oke.Cluster) map[string]interface{} {
 	}
 	if c.Endpoints != nil {
 		out["endpoints"] = map[string]interface{}{
-			"kubernetes":         Str(c.Endpoints.Kubernetes),
-			"public_endpoint":    Str(c.Endpoints.PublicEndpoint),
-			"private_endpoint":   Str(c.Endpoints.PrivateEndpoint),
-			"vcn_hostname":       Str(c.Endpoints.VcnHostnameEndpoint),
+			"kubernetes":       Str(c.Endpoints.Kubernetes),
+			"public_endpoint":  Str(c.Endpoints.PublicEndpoint),
+			"private_endpoint": Str(c.Endpoints.PrivateEndpoint),
+			"vcn_hostname":     Str(c.Endpoints.VcnHostnameEndpoint),
 		}
 	}
 	return out
