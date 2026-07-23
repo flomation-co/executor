@@ -373,12 +373,12 @@ func SummariseVolumeGroup(g *core.VolumeGroup) map[string]interface{} {
 
 func SummariseBackupPolicy(p *core.VolumeBackupPolicy) map[string]interface{} {
 	return map[string]interface{}{
-		"id":                Str(p.Id),
-		"display_name":      Str(p.DisplayName),
-		"compartment_id":    Str(p.CompartmentId),
-		"schedules":         p.Schedules,
+		"id":                 Str(p.Id),
+		"display_name":       Str(p.DisplayName),
+		"compartment_id":     Str(p.CompartmentId),
+		"schedules":          p.Schedules,
 		"destination_region": Str(p.DestinationRegion),
-		"time_created":      FormatTime(p.TimeCreated),
+		"time_created":       FormatTime(p.TimeCreated),
 	}
 }
 
