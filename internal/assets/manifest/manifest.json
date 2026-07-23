@@ -396077,7 +396077,7 @@
     ]
   },
   "oracle/objectstorage/namespace_get": {
-    "hash": "a005ad2dffa03d368e46e9f6b645b9d071365d460af1e79390cd8572bbc4c651",
+    "hash": "d279dffe7e10f85530d509e400fe543a09905487208fe9e2a55a6166e968cafa",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "OCI Object Storage: Get Namespace",
@@ -396098,12 +396098,48 @@
     },
     "inputs": [
       {
+        "name": "auth_method",
+        "type": "string",
+        "value": null,
+        "label": "Authentication",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "Connect Oracle Cloud",
+            "value": "connect"
+          },
+          {
+            "name": "API signing key (advanced)",
+            "value": "keys"
+          }
+        ]
+      },
+      {
+        "name": "credential",
+        "type": "credential",
+        "value": null,
+        "label": "Oracle Cloud connection",
+        "placeholder": "Pick a connected Oracle Cloud account",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "",
+            "connect"
+          ]
+        }
+      },
+      {
         "name": "tenancy_ocid",
         "type": "string",
         "value": null,
         "label": "Tenancy OCID",
         "placeholder": "ocid1.tenancy.oc1..aaaa…",
-        "required": true
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
       },
       {
         "name": "user_ocid",
@@ -396111,7 +396147,12 @@
         "value": null,
         "label": "User OCID",
         "placeholder": "ocid1.user.oc1..aaaa…",
-        "required": true
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
       },
       {
         "name": "region",
@@ -396119,7 +396160,12 @@
         "value": null,
         "label": "Region",
         "placeholder": "e.g. uk-london-1",
-        "required": true
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
       },
       {
         "name": "fingerprint",
@@ -396127,21 +396173,38 @@
         "value": null,
         "label": "Key Fingerprint",
         "placeholder": "aa:bb:cc:… fingerprint of the uploaded API key",
-        "required": true
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
       },
       {
         "name": "private_key",
         "type": "secret",
         "value": null,
         "label": "Private Key (PEM)",
-        "placeholder": "The API signing private key — full PEM, incl. BEGIN/END lines"
+        "placeholder": "The API signing private key — full PEM, incl. BEGIN/END lines",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
       },
       {
         "name": "private_key_passphrase",
         "type": "secret",
         "value": null,
         "label": "Private Key Passphrase",
-        "placeholder": "Only if the key is encrypted (optional)"
+        "placeholder": "Only if the key is encrypted (optional)",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
       }
     ],
     "outputs": [
