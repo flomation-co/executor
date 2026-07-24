@@ -51,7 +51,7 @@ var Inputs = [...]core.Connection{
 	{Name: "external_id", Type: core.ConnectionTypeString, Label: "Assume Role External ID (optional)", Placeholder: "Must match the External ID in the role's trust policy", Visible: &core.VisibleWhen{Field: "auth_method", Values: []string{"assume_role"}}},
 	{Name: "credential", Type: core.ConnectionTypeCredential, Label: "AWS Role Credential", Required: true, Visible: &core.VisibleWhen{Field: "auth_method", Values: []string{"credential"}}},
 	{Name: "instance_id", Type: core.ConnectionTypeString, Label: "Instance ID", Placeholder: "i-0abc123...", Required: true},
-	{Name: "private_key", Type: core.ConnectionTypeSecret, Label: "Key Pair Private Key (PEM)", Placeholder: "Provide the launch key pair's private key to decrypt the password (leave blank to return the encrypted data)"},
+	{Name: "private_key", Type: core.ConnectionTypeString, Label: "Key Pair Private Key (PEM)", Placeholder: "Wire the launch key pair's private key here (or ${secrets.X}) to decrypt; leave blank to return the encrypted data"},
 }
 
 var Outputs = [...]core.Connection{
