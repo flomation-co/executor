@@ -287,6 +287,60 @@ func TestSetVariable_TwoNodesShareSameName(t *testing.T) {
 	Expect(val).To(Equal("second"))
 }
 
+// TestVarSubstitution_MissingVariableResolvesEmpty is the regression for the
+// While-loop bug: a ${var.X} reference to a variable that isn't set must resolve
+// to the EMPTY STRING, never the literal "${var.X}". Leaving the literal made a
+// While condition compare "${var.started}" to "false" (never equal), so the loop
+// was skipped. Mirrors ${user.X}'s "absent → empty" contract.
+func TestVarSubstitution_MissingVariableResolvesEmpty(t *testing.T) {
+	RegisterTestingT(t)
+
+	var captured *string
+	captureAction := func(flow *Flow, node *Node, inputs []*Connection) (map[string]interface{}, error) {
+		for _, c := range inputs {
+			if c.Name == "probe" {
+				captured = c.String()
+			}
+		}
+		return map[string]interface{}{"ok": true}, nil
+	}
+
+	f := &Flow{
+		Nodes: []*Node{
+			{ID: "trigger-1", Type: "trigger/manual", Data: &NodeData{Label: "trigger/manual", Config: NodeConfig{Type: ActionTypeTrigger}}},
+			{ID: "probe-1", Type: "test/probe", Data: &NodeData{
+				Label: "test/probe",
+				Config: NodeConfig{
+					Type: ActionTypeAction,
+					Inputs: []*Connection{
+						// References a flow variable that is NEVER set.
+						{Name: "probe", Type: ConnectionTypeString, Value: "${var.started}"},
+					},
+				},
+			}},
+		},
+		Edges: []*Edge{
+			{ID: "e1", Source: "trigger-1", Target: "probe-1"},
+		},
+		nodeResults:          make(map[string]map[string]interface{}),
+		nodeExecutionResults: make(map[string]*ExecutionNodeResult),
+		outputs:              make(map[string]interface{}),
+		variables:            make(map[string]interface{}),
+	}
+
+	actions := map[string]Action{
+		"trigger/manual": func(flow *Flow, node *Node, inputs []*Connection) (map[string]interface{}, error) {
+			return map[string]interface{}{}, nil
+		},
+		"test/probe": captureAction,
+	}
+
+	_, err := f.Execute(actions, nil, nil)
+	Expect(err).To(BeNil())
+	Expect(captured).ToNot(BeNil())
+	Expect(*captured).To(Equal("")) // NOT the literal "${var.started}"
+}
+
 // --- Bug 4: Should only support 1 On Error node ---
 
 func TestOnErrorChain_WarnsOnMultipleOnErrorNodes(t *testing.T) {

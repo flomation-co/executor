@@ -1835,7 +1835,17 @@ func (f *Flow) executeNodeActionOnly(actions map[string]Action, node *Node, envi
 					// outputs), so we route through ParseReference +
 					// ResolvePath to support ${var.X.field[0].subfield}
 					// drilling into structured variable values.
+					//
+					// An UNRESOLVED reference — unknown variable, nil
+					// variables map, or a failed path walk — resolves to
+					// the EMPTY STRING, never the literal ${var.X}. Leaving
+					// the literal in place silently corrupts downstream
+					// inputs (e.g. a While loop that compares
+					// "${var.started}" to "false" and so never matches).
+					// Mirrors ${user.X}, which also defaults to empty when
+					// absent.
 					name := strings.TrimPrefix(m, "var.")
+					resolved := ""
 					if ref, ok := ParseReference(m); ok && len(ref.Path) > 0 {
 						// Path-bearing reference. Root="var",
 						// Child=first segment of variable name,
@@ -1844,15 +1854,13 @@ func (f *Flow) executeNodeActionOnly(actions map[string]Action, node *Node, envi
 						// look up the unprefixed child first.
 						if f.variables != nil {
 							if varVal, ok := f.variables[ref.Child]; ok {
-								walked, err := ResolvePath(varVal, ref.Path)
-								if err != nil {
+								if walked, err := ResolvePath(varVal, ref.Path); err != nil {
 									log.WithFields(log.Fields{
 										"name":  m,
 										"error": err,
 									}).Warn("path resolution failed on ${var.X}")
-									replaceToken(val, m, jsonCtx, "")
 								} else {
-									replaceToken(val, m, jsonCtx, substitutionString(walked))
+									resolved = substitutionString(walked)
 								}
 							} else {
 								log.WithFields(log.Fields{
@@ -1862,13 +1870,14 @@ func (f *Flow) executeNodeActionOnly(actions map[string]Action, node *Node, envi
 						}
 					} else if f.variables != nil {
 						if varVal, ok := f.variables[name]; ok {
-							replaceToken(val, m, jsonCtx, substitutionString(varVal))
+							resolved = substitutionString(varVal)
 						} else {
 							log.WithFields(log.Fields{
 								"name": name,
 							}).Warn("unknown flow variable")
 						}
 					}
+					replaceToken(val, m, jsonCtx, resolved)
 				} else if strings.HasPrefix(m, "credentials.") {
 					if environment == nil {
 						log.WithFields(log.Fields{
