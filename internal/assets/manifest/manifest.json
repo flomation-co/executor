@@ -26426,6 +26426,186 @@
       }
     ]
   },
+  "aws/ec2/get_password_data": {
+    "hash": "0eb296f76ed337e7db894d87d12e7925c112b6bd0b5b452bb6b1ca3031bd1455",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "AWS EC2 Get Windows Password",
+    "description": "Retrieve and optionally decrypt the Windows Administrator password for an EC2 instance.",
+    "website": "https://www.flomation.co",
+    "icon": "key",
+    "date": "24/07/2026",
+    "type": 2,
+    "category": {
+      "name": "AWS",
+      "icon": "cloud",
+      "description": "Amazon Web Services integrations"
+    },
+    "sub_category": {
+      "name": "EC2",
+      "icon": "server",
+      "description": "Elastic Compute Cloud operations"
+    },
+    "inputs": [
+      {
+        "name": "auth_method",
+        "type": "string",
+        "value": null,
+        "label": "Authentication",
+        "placeholder": "",
+        "required": true,
+        "options": [
+          {
+            "name": "Access Keys",
+            "value": "keys"
+          },
+          {
+            "name": "Assume Role (cross-account)",
+            "value": "assume_role"
+          },
+          {
+            "name": "Managed Role (Credential)",
+            "value": "credential"
+          }
+        ]
+      },
+      {
+        "name": "aws_access_key",
+        "type": "secret",
+        "value": null,
+        "label": "AWS Access Key",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "aws_secret_key",
+        "type": "secret",
+        "value": null,
+        "label": "AWS Secret Key",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "aws_region",
+        "type": "string",
+        "value": null,
+        "label": "Region",
+        "placeholder": "eu-west-2",
+        "required": true
+      },
+      {
+        "name": "aws_session_token",
+        "type": "secret",
+        "value": null,
+        "label": "Session Token (optional)",
+        "placeholder": "",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "keys"
+          ]
+        }
+      },
+      {
+        "name": "assume_role_arn",
+        "type": "string",
+        "value": null,
+        "label": "Role ARN to Assume",
+        "placeholder": "arn:aws:iam::\u003cyour-account\u003e:role/FlomationAccess",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "assume_role"
+          ]
+        }
+      },
+      {
+        "name": "external_id",
+        "type": "string",
+        "value": null,
+        "label": "Assume Role External ID (optional)",
+        "placeholder": "Must match the External ID in the role's trust policy",
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "assume_role"
+          ]
+        }
+      },
+      {
+        "name": "credential",
+        "type": "credential",
+        "value": null,
+        "label": "AWS Role Credential",
+        "placeholder": "",
+        "required": true,
+        "visible_when": {
+          "field": "auth_method",
+          "values": [
+            "credential"
+          ]
+        }
+      },
+      {
+        "name": "instance_id",
+        "type": "string",
+        "value": null,
+        "label": "Instance ID",
+        "placeholder": "i-0abc123...",
+        "required": true
+      },
+      {
+        "name": "private_key",
+        "type": "secret",
+        "value": null,
+        "label": "Key Pair Private Key (PEM)",
+        "placeholder": "Provide the launch key pair's private key to decrypt the password (leave blank to return the encrypted data)"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "password",
+        "type": "string",
+        "value": null,
+        "label": "Administrator Password",
+        "placeholder": ""
+      },
+      {
+        "name": "password_data",
+        "type": "string",
+        "value": null,
+        "label": "Encrypted Password Data",
+        "placeholder": ""
+      },
+      {
+        "name": "available",
+        "type": "boolean",
+        "value": null,
+        "label": "Password Available",
+        "placeholder": ""
+      }
+    ]
+  },
   "aws/ec2/import_key_pair": {
     "hash": "a4bfb876fa52ec9d59145ebfececf5b6bb89970dc2cb2d5f9041e12c2903d774",
     "author": "Andy Esser",

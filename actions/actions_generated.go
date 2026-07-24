@@ -177,6 +177,7 @@ import (
 	aws_ec2_describe_volumes "flomation.app/automate/executor/actions/aws/ec2/describe_volumes"
 	aws_ec2_detach_volume "flomation.app/automate/executor/actions/aws/ec2/detach_volume"
 	aws_ec2_get_console_output "flomation.app/automate/executor/actions/aws/ec2/get_console_output"
+	aws_ec2_get_password_data "flomation.app/automate/executor/actions/aws/ec2/get_password_data"
 	aws_ec2_import_key_pair "flomation.app/automate/executor/actions/aws/ec2/import_key_pair"
 	aws_ec2_modify_instance_attribute "flomation.app/automate/executor/actions/aws/ec2/modify_instance_attribute"
 	aws_ec2_modify_security_group_rules "flomation.app/automate/executor/actions/aws/ec2/modify_security_group_rules"
@@ -3495,6 +3496,7 @@ var Actions = map[string]core.Action{
 	"aws/ec2/describe_volumes":                                           aws_ec2_describe_volumes.Execute,
 	"aws/ec2/detach_volume":                                              aws_ec2_detach_volume.Execute,
 	"aws/ec2/get_console_output":                                         aws_ec2_get_console_output.Execute,
+	"aws/ec2/get_password_data":                                          aws_ec2_get_password_data.Execute,
 	"aws/ec2/import_key_pair":                                            aws_ec2_import_key_pair.Execute,
 	"aws/ec2/modify_instance_attribute":                                  aws_ec2_modify_instance_attribute.Execute,
 	"aws/ec2/modify_security_group_rules":                                aws_ec2_modify_security_group_rules.Execute,
