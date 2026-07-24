@@ -26427,7 +26427,7 @@
     ]
   },
   "aws/ec2/get_password_data": {
-    "hash": "0eb296f76ed337e7db894d87d12e7925c112b6bd0b5b452bb6b1ca3031bd1455",
+    "hash": "9354a15261e8f9bb9559510e30db3ab3f05478aba599429777c064fccf825e68",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "AWS EC2 Get Windows Password",
@@ -26569,10 +26569,10 @@
       },
       {
         "name": "private_key",
-        "type": "secret",
+        "type": "string",
         "value": null,
         "label": "Key Pair Private Key (PEM)",
-        "placeholder": "Provide the launch key pair's private key to decrypt the password (leave blank to return the encrypted data)"
+        "placeholder": "Wire the launch key pair's private key here (or ${secrets.X}) to decrypt; leave blank to return the encrypted data"
       }
     ],
     "outputs": [
