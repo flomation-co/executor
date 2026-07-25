@@ -57,7 +57,20 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 		return nil, err
 	}
 
-	record, err := salesforce.GetRecord(instanceURL, token, "Lead", leadID, salesforce.OptionalString("fields", inputs))
+	// A misspelled field name is rejected locally and never reaches Salesforce,
+	// so it is a configuration mistake and takes the hard error return — the same
+	// contract account_get and case_get follow. Left to GetRecord it comes back
+	// on the soft error port, where it reads as though Salesforce had refused the
+	// request and the flow keeps running down its failure branch, retrying a typo
+	// no retry can fix.
+	fields := salesforce.OptionalString("fields", inputs)
+	for _, f := range salesforce.SplitList(fields) {
+		if _, err := salesforce.ValidateSOQLFieldName(f); err != nil {
+			return nil, fmt.Errorf("Fields — %w", err)
+		}
+	}
+
+	record, err := salesforce.GetRecord(instanceURL, token, "Lead", leadID, fields)
 	if err != nil {
 		return salesforce.ErrorResult(err.Error()), nil
 	}

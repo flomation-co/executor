@@ -51,6 +51,18 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	// useful default for a lookup — a deal's important field is usually a custom
 	// one nobody thought to list.
 	fields := salesforce.OptionalString("fields", inputs)
+	// A misspelled field name — "Close Date" with the space, the label rather
+	// than the API name, which is the commonest Salesforce mistake there is — is
+	// rejected locally and never reaches Salesforce, so it is a configuration
+	// mistake and takes the hard error return. Left to GetRecord it lands on the
+	// soft error port as though Salesforce had refused a well-formed request,
+	// and the flow carries on down its failure branch retrying a typo forever.
+	// Same guard, same wording, as account_get and case_get.
+	for _, f := range salesforce.SplitList(fields) {
+		if _, err := salesforce.ValidateSOQLFieldName(f); err != nil {
+			return nil, fmt.Errorf("Fields — %w", err)
+		}
+	}
 
 	record, err := salesforce.GetRecord(instanceURL, token, "Opportunity", id, fields)
 	if err != nil {

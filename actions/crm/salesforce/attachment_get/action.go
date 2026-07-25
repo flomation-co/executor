@@ -55,7 +55,18 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 		return nil, err
 	}
 
-	record, err := salesforce.GetRecord(instanceURL, token, "Attachment", attachmentID, salesforce.OptionalString("fields", inputs))
+	// A misspelled field name is rejected locally and never reaches Salesforce,
+	// so it is a configuration mistake and takes the hard error return, matching
+	// account_get and case_get. Left to GetRecord it would surface on the soft
+	// error port as though Salesforce had refused a well-formed request.
+	fields := salesforce.OptionalString("fields", inputs)
+	for _, f := range salesforce.SplitList(fields) {
+		if _, err := salesforce.ValidateSOQLFieldName(f); err != nil {
+			return nil, fmt.Errorf("Fields — %w", err)
+		}
+	}
+
+	record, err := salesforce.GetRecord(instanceURL, token, "Attachment", attachmentID, fields)
 	if err != nil {
 		return salesforce.ErrorResult(err.Error()), nil
 	}

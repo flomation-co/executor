@@ -46,7 +46,7 @@ var Inputs = [...]core.Connection{
 	},
 	{Name: "filter_value", Type: core.ConnectionTypeString, Label: "Filter Value", Placeholder: "What to compare against, e.g. THIS_MONTH, 2026-09-01, %Open Day%"},
 	{Name: "filter_conditions", Type: core.ConnectionTypeObject, Label: "More Filters", Placeholder: `[{"field":"BudgetedCost","operator":">","value":"5000"},{"field":"StartDate","operator":">=","value":"THIS_YEAR"}]`},
-	{Name: "match_any_filter", Type: core.ConnectionTypeBoolean, Label: "Match ANY filter instead of all", Placeholder: "Off: a campaign has to match every filter. On: matching any one of them is enough"},
+	{Name: "match_any_filter", Type: core.ConnectionTypeBoolean, Label: "Match ANY filter instead of all", Placeholder: "Off: a campaign has to match every filter. On: matching any one of them is enough. Active Campaigns Only always applies either way"},
 	{Name: "order_by", Type: core.ConnectionTypeString, Label: "Sort By", Placeholder: "StartDate DESC, Name ASC"},
 	{Name: "limit", Type: core.ConnectionTypeInteger, Label: "Limit", Placeholder: "50 by default, up to 2000 — ignored when Return All is on"},
 	{Name: "return_all", Type: core.ConnectionTypeBoolean, Label: "Return All", Placeholder: "Tick to keep fetching pages until every matching campaign has been collected"},
@@ -56,7 +56,7 @@ var Inputs = [...]core.Connection{
 var Outputs = [...]core.Connection{
 	{Name: "results", Type: core.ConnectionTypeObject, Label: "Campaigns"},
 	{Name: "count", Type: core.ConnectionTypeInteger, Label: "Count"},
-	{Name: "total_size", Type: core.ConnectionTypeInteger, Label: "Total Matching"},
+	{Name: "total_size", Type: core.ConnectionTypeInteger, Label: "Records Returned"},
 	{Name: "next_url", Type: core.ConnectionTypeString, Label: "Next Page URL"},
 	{Name: "result", Type: core.ConnectionTypeObject, Label: "Raw Response"},
 	{Name: "tool_result", Type: core.ConnectionTypeString, Label: "Result Summary"},
@@ -71,24 +71,32 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	}
 
 	// Every filter — the plain-English tick boxes, the single field/comparison/
-	// value row, and the JSON escape hatch — is funnelled into one Condition
-	// list. BuildQueryTyped is then the single place a value can reach the SOQL
-	// string, and it is the only place that has to be right about escaping.
-	conditions, err := salesforce.ParseConditions("filter_conditions", inputs)
+	// value row, and the JSON escape hatch — is funnelled into the shared query
+	// builder, which is then the single place a value can reach the SOQL string,
+	// and the only place that has to be right about escaping.
+	//
+	// Two lists, not one: "Active Campaigns Only" is SCOPE and is always ANDed,
+	// because ORing it (which is what "Match ANY filter" used to do to it) hands
+	// back every active campaign in the org plus every switched-off campaign
+	// matching any other filter — the opposite of what the tick box promises.
+	// Status and Campaign Type are ordinary filters and stay under the toggle:
+	// "Planned OR Webinar" is a coherent thing to ask for.
+	filters, err := salesforce.ParseConditions("filter_conditions", inputs)
 	if err != nil {
 		return nil, err
 	}
+	var scope []salesforce.Condition
 	if salesforce.OptionalBool("active_only", inputs) {
-		conditions = append(conditions, salesforce.Condition{Field: "IsActive", Operator: "=", Value: "true"})
+		scope = append(scope, salesforce.Condition{Field: "IsActive", Operator: "=", Value: "true"})
 	}
 	if v := salesforce.OptionalString("campaign_status", inputs); v != "" {
-		conditions = append(conditions, salesforce.Condition{Field: "Status", Operator: "=", Value: v})
+		filters = append(filters, salesforce.Condition{Field: "Status", Operator: "=", Value: v})
 	}
 	if v := salesforce.OptionalString("campaign_type", inputs); v != "" {
-		conditions = append(conditions, salesforce.Condition{Field: "Type", Operator: "=", Value: v})
+		filters = append(filters, salesforce.Condition{Field: "Type", Operator: "=", Value: v})
 	}
 	if field := salesforce.OptionalString("filter_field", inputs); field != "" {
-		conditions = append(conditions, salesforce.Condition{
+		filters = append(filters, salesforce.Condition{
 			Field:    field,
 			Operator: salesforce.OptionalString("filter_operator", inputs),
 			Value:    salesforce.OptionalString("filter_value", inputs),
@@ -107,12 +115,13 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	// depends on the field — BudgetedCost > 5000 is valid where
 	// BudgetedCost > '5000' is INVALID_FIELD. It resolves that from one cached
 	// describe and falls back to the untyped rendering if describe is denied.
-	soql, err := salesforce.BuildQueryTyped(
+	soql, err := salesforce.BuildScopedQueryTyped(
 		instanceURL,
 		token,
 		"Campaign",
 		salesforce.OptionalString("fields", inputs),
-		conditions,
+		scope,
+		filters,
 		salesforce.OptionalBool("match_any_filter", inputs),
 		salesforce.OptionalString("order_by", inputs),
 		salesforce.ClampLimit(limit, limitSet),
@@ -137,7 +146,10 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 		// Deliberately not "x of y": under a LIMIT clause Salesforce reports
 		// totalSize as the size of the limited batch, so quoting it as a total
 		// would tell the operator there are no more when there may well be.
-		out["tool_result"] = fmt.Sprintf("Found %d campaign(s)", len(records))
+		// Salesforce reports totalSize as the PAGE size once a LIMIT is applied
+		// and sets done:true with no cursor, so a capped list is otherwise
+		// indistinguishable from a complete one.
+		out["tool_result"] = fmt.Sprintf("Found %d campaign(s)%s", len(records), salesforce.TruncationHint(len(records), limit, returnAll))
 	}
 	return out, nil
 }

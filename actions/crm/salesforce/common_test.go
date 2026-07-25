@@ -434,6 +434,272 @@ func TestFieldTypesCachesPerObject(t *testing.T) {
 	}
 }
 
+// A cache keyed on the object name alone silently serves one connection's
+// field types to another. Both halves of this are reachable inside a SINGLE
+// flow run, which is the whole lifetime of an executor process:
+//
+//   - two Salesforce nodes pointed at different orgs (a sandbox-to-production
+//     sync), where a field that is Currency in one org is Text in the other
+//   - two credentials against the SAME org, where describe is filtered by each
+//     connected user's field-level security
+//
+// The consequence is a literal rendered for the wrong schema — a bare number
+// where the field is text, or a quoted one where it is currency — which
+// Salesforce rejects with INVALID_FIELD on a query the operator configured
+// correctly.
+func TestFieldTypesCacheIsKeyedByConnection(t *testing.T) {
+	var describes int
+	srv := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		describes++
+		w.Header().Set("Content-Type", "application/json")
+		// Same object name, DIFFERENT schema per caller — exactly the
+		// cross-org case.
+		if r.Header.Get("Authorization") == "Bearer token-org-a" {
+			_, _ = w.Write([]byte(`{"fields":[{"name":"Amount__c","type":"currency"}]}`))
+			return
+		}
+		_, _ = w.Write([]byte(`{"fields":[{"name":"Amount__c","type":"string"}]}`))
+	}))
+	defer srv.Close()
+	restore := SetHostForTest(srv.URL)
+	defer restore()
+
+	const obj = "ConnKeyProbe__c"
+
+	a, err := FieldTypes(srv.URL, "token-org-a", obj)
+	if err != nil {
+		t.Fatal(err)
+	}
+	b, err := FieldTypes(srv.URL, "token-org-b", obj)
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	if a["amount__c"] != "currency" {
+		t.Errorf("org A should see currency, got %q", a["amount__c"])
+	}
+	if b["amount__c"] != "string" {
+		t.Fatalf("org B was served org A's cached schema (%q) — the cache key is missing the connection", b["amount__c"])
+	}
+	if describes != 2 {
+		t.Errorf("expected one describe per connection, got %d", describes)
+	}
+
+	// ...and the same connection must still be cached, or a Loop pays for a
+	// describe on every iteration.
+	if _, err := FieldTypes(srv.URL, "token-org-a", obj); err != nil {
+		t.Fatal(err)
+	}
+	if describes != 2 {
+		t.Errorf("a repeat call on the same connection must hit the cache; describes went to %d", describes)
+	}
+}
+
+// Salesforce refuses to coerce between its Date and DateTime literal forms and
+// rejects the mismatch outright. Contact alone carries ten date/datetime fields
+// side by side in the Filter Field dropdown, so an operator has no way to tell
+// which form a given entry demands. Every expectation here was confirmed live.
+func TestDateLiteralsAreCoercedToTheFieldsForm(t *testing.T) {
+	cases := []struct {
+		name   string
+		in     string
+		sfType string
+		want   string
+	}{
+		// Live: "CreatedDate >= 2026-07-01" -> INVALID_FIELD "must be of type dateTime"
+		{"date value on a datetime field widens to midnight UTC", "2026-07-01", "datetime", "2026-07-01T00:00:00Z"},
+		// Live: "CloseDate > 2026-07-25T00:00:00Z" -> INVALID_FIELD "must be of type date"
+		{"datetime value on a date field truncates", "2026-07-25T00:00:00Z", "date", "2026-07-25"},
+		// Live: "CreatedDate >= 2026-07-01T00:00:00" -> MALFORMED_QUERY (no offset)
+		{"offsetless datetime is normalised to UTC", "2026-07-01T09:30:00", "datetime", "2026-07-01T09:30:00Z"},
+		{"offsetless datetime on a date field truncates", "2026-07-01T09:30:00", "date", "2026-07-01"},
+		// Matching forms pass through untouched.
+		{"date on date", "2026-07-25", "date", "2026-07-25"},
+		{"datetime on datetime", "2026-07-25T10:30:00Z", "datetime", "2026-07-25T10:30:00Z"},
+		{"offset datetime preserved", "2026-07-25T10:30:00+01:00", "datetime", "2026-07-25T10:30:00+01:00"},
+	}
+	for _, c := range cases {
+		t.Run(c.name, func(t *testing.T) {
+			got, err := SOQLValueForType(c.in, c.sfType, false)
+			if err != nil {
+				t.Fatalf("SOQLValueForType(%q, %q) errored: %v", c.in, c.sfType, err)
+			}
+			if got != c.want {
+				t.Errorf("SOQLValueForType(%q, %q) = %q, want %q", c.in, c.sfType, got, c.want)
+			}
+		})
+	}
+}
+
+// A relative date keyword is only a keyword on a field that holds a date.
+// Checking it before the field type meant a TEXT field whose value happened to
+// spell "today" was emitted as a bare SOQL keyword, so the query matched a date
+// range instead of the word the operator typed.
+func TestDateKeywordsOnlyApplyToDateFields(t *testing.T) {
+	got, err := SOQLValueForType("TODAY", "string", false)
+	if err != nil {
+		t.Fatal(err)
+	}
+	if got != "'TODAY'" {
+		t.Errorf("a text field's value must stay a quoted string, got %q", got)
+	}
+	// ...but on a real date field it is still the keyword.
+	got, err = SOQLValueForType("today", "date", false)
+	if err != nil {
+		t.Fatal(err)
+	}
+	if got != "TODAY" {
+		t.Errorf("a date field must still take the bare keyword, got %q", got)
+	}
+	// And with an unknown type, the heuristic keeps the keyword — that is the
+	// only signal available.
+	got, err = SOQLValueForType("today", "", false)
+	if err != nil {
+		t.Fatal(err)
+	}
+	if got != "TODAY" {
+		t.Errorf("unknown type should keep keyword handling, got %q", got)
+	}
+}
+
+// An oversized body used to be truncated mid-JSON and handed to the decoder, so
+// the operator saw "unexpected end of JSON input" — a Go error string, on a
+// flow that worked yesterday and broke as the data grew.
+func TestOversizedResponseIsReportedNotTruncated(t *testing.T) {
+	srv := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		w.Header().Set("Content-Type", "application/json")
+		w.WriteHeader(200)
+		// Well over the 8 MB cap, and deliberately valid-looking JSON so the
+		// only thing that can catch it is the size check.
+		_, _ = w.Write([]byte(`{"totalSize":1,"done":true,"records":[{"Id":"a","Big":"`))
+		chunk := make([]byte, 1<<20)
+		for i := range chunk {
+			chunk[i] = 'x'
+		}
+		for i := 0; i < 9; i++ {
+			_, _ = w.Write(chunk)
+		}
+		_, _ = w.Write([]byte(`"}]}`))
+	}))
+	defer srv.Close()
+	restore := SetHostForTest(srv.URL)
+	defer restore()
+
+	_, _, _, _, err := Query(srv.URL, "tok", "SELECT Id FROM Case", false, false)
+	if err == nil {
+		t.Fatal("an oversized response must be an error, not a silently truncated result")
+	}
+	if strings.Contains(err.Error(), "unexpected end of JSON input") {
+		t.Errorf("the operator is still seeing a JSON decoder message: %v", err)
+	}
+	if !strings.Contains(err.Error(), "more data than this step can handle") {
+		t.Errorf("expected an operator-readable size message, got: %v", err)
+	}
+}
+
+// The Collections endpoints spell the error code "statusCode" inside each
+// per-record result, not "errorCode". Decoding only errorCode dropped both the
+// plain-English translation and the code itself from every bulk failure.
+func TestBulkPerRecordErrorsDecodeStatusCode(t *testing.T) {
+	srv := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		w.Header().Set("Content-Type", "application/json")
+		_, _ = w.Write([]byte(`[{"success":false,"errors":[{"statusCode":"REQUIRED_FIELD_MISSING","message":"Required fields are missing: [LastName]","fields":["LastName"]}]}]`))
+	}))
+	defer srv.Close()
+	restore := SetHostForTest(srv.URL)
+	defer restore()
+
+	outcome, err := CollectionWrite(srv.URL, "tok", "Contact", http.MethodPost,
+		[]map[string]interface{}{{}}, false, "")
+	if err != nil {
+		t.Fatal(err)
+	}
+	if len(outcome.Failures) != 1 {
+		t.Fatalf("expected one failure, got %#v", outcome.Failures)
+	}
+	msg := outcome.Failures[0]
+	if !strings.Contains(msg, "required Salesforce field was left empty") {
+		t.Errorf("statusCode was not translated: %q", msg)
+	}
+	if !strings.Contains(msg, "REQUIRED_FIELD_MISSING") {
+		t.Errorf("the code must survive so callers can branch on it: %q", msg)
+	}
+}
+
+// A failure on a later chunk must not discard the chunks already committed:
+// reporting a bare error invites the operator to re-run and duplicate
+// everything already written.
+func TestBulkFailureKeepsAlreadyCommittedChunks(t *testing.T) {
+	var calls int
+	srv := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		calls++
+		if calls == 1 {
+			w.Header().Set("Content-Type", "application/json")
+			out := make([]map[string]interface{}, 0, MaxCollectionRecords)
+			for i := 0; i < MaxCollectionRecords; i++ {
+				out = append(out, map[string]interface{}{"id": "003aj000023sMvFAAU", "success": true})
+			}
+			_ = json.NewEncoder(w).Encode(out)
+			return
+		}
+		w.WriteHeader(500)
+		_, _ = w.Write([]byte(`[{"message":"Server error","errorCode":"UNKNOWN_EXCEPTION"}]`))
+	}))
+	defer srv.Close()
+	restore := SetHostForTest(srv.URL)
+	defer restore()
+
+	recs := make([]map[string]interface{}, 250)
+	for i := range recs {
+		recs[i] = map[string]interface{}{"LastName": "x"}
+	}
+	outcome, err := CollectionWrite(srv.URL, "tok", "Contact", http.MethodPost, recs, false, "")
+	if err == nil {
+		t.Fatal("expected the second chunk's failure to surface")
+	}
+	if outcome == nil {
+		t.Fatal("the partial outcome was discarded — the operator would re-run and duplicate 200 records")
+	}
+	if outcome.SuccessNo != MaxCollectionRecords {
+		t.Errorf("expected the first chunk's %d successes to survive, got %d", MaxCollectionRecords, outcome.SuccessNo)
+	}
+
+	// ...and the shaper must say so plainly rather than reading as a clean failure.
+	out := PartialBulkResult(outcome, err, len(recs), "Contact")
+	summary, _ := out["tool_result"].(string)
+	if !strings.Contains(summary, "already saved") {
+		t.Errorf("the summary must warn that committed records are NOT undone: %q", summary)
+	}
+	if out["success"] != false || out["error"] == "" {
+		t.Error("a partial bulk failure must still report as a failure")
+	}
+}
+
+func TestFieldTypesReturnsACopy(t *testing.T) {
+	srv := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		w.Header().Set("Content-Type", "application/json")
+		_, _ = w.Write([]byte(`{"fields":[{"name":"Amount","type":"currency"}]}`))
+	}))
+	defer srv.Close()
+	restore := SetHostForTest(srv.URL)
+	defer restore()
+
+	const obj = "CopyProbe__c"
+	first, err := FieldTypes(srv.URL, "tok", obj)
+	if err != nil {
+		t.Fatal(err)
+	}
+	first["amount"] = "string" // a caller mutating what it was handed
+
+	second, err := FieldTypes(srv.URL, "tok", obj)
+	if err != nil {
+		t.Fatal(err)
+	}
+	if second["amount"] != "currency" {
+		t.Errorf("one caller's mutation rewrote the shared cache entry: got %q", second["amount"])
+	}
+}
+
 func TestBuildWhereCombinators(t *testing.T) {
 	conds := []Condition{
 		{Field: "Status", Operator: "=", Value: "Open"},
@@ -1077,4 +1343,69 @@ func TestSOAPCallSendsSessionHeaderAndEscapesToken(t *testing.T) {
 func readAllString(r *http.Request) (string, error) {
 	b, err := io.ReadAll(r.Body)
 	return string(b), err
+}
+
+// The static fallback ends in "Id,Name,LastModifiedDate", and Name is a hard
+// INVALID_FIELD on a large family of objects — verified live against
+// CaseComment, ContentDocumentLink, OpportunityContactRole, Task and Case.
+// record_find and search_records are pointed at an arbitrary object by the
+// operator, so that guess is wrong exactly when the action is doing its job.
+func TestDefaultFieldsForResolvesTheRealNameField(t *testing.T) {
+	srv := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		w.Header().Set("Content-Type", "application/json")
+		switch {
+		case strings.Contains(r.URL.Path, "/NoNameProbe__c/"):
+			// A junction object: no name field at all.
+			_, _ = w.Write([]byte(`{"fields":[{"name":"Id"},{"name":"ParentId"},{"name":"LastModifiedDate"}]}`))
+		default:
+			// Names its label something other than Name (the Case/Task shape).
+			_, _ = w.Write([]byte(`{"fields":[{"name":"Id"},{"name":"CaseNumber","nameField":true},{"name":"LastModifiedDate"}]}`))
+		}
+	}))
+	defer srv.Close()
+	restore := SetHostForTest(srv.URL)
+	defer restore()
+
+	got := DefaultFieldsFor(srv.URL, "tok", "NoNameProbe__c")
+	if strings.Contains(got, "Name") {
+		t.Errorf("an object with no name field must not be asked for Name: %q", got)
+	}
+	if !strings.HasPrefix(got, "Id") {
+		t.Errorf("expected Id to lead, got %q", got)
+	}
+
+	got = DefaultFieldsFor(srv.URL, "tok", "LabelProbe__c")
+	if !strings.Contains(got, "CaseNumber") {
+		t.Errorf("expected the real name field, got %q", got)
+	}
+	if strings.Contains(got, ",Name,") {
+		t.Errorf("must not fall back to Name when a real one exists: %q", got)
+	}
+
+	// A curated entry still wins — it names fields an operator wants, not just
+	// the record's label.
+	if got := DefaultFieldsFor(srv.URL, "tok", "Lead"); !strings.Contains(got, "Company") {
+		t.Errorf("curated Lead projection should be preferred, got %q", got)
+	}
+}
+
+// Salesforce gives NO signal that an explicitly-LIMITed query left rows behind:
+// "SELECT Id FROM Contact LIMIT 2" against 26 contacts answers totalSize:2,
+// done:true and no cursor (verified live). Without a hint, a capped list reads
+// as the complete answer — the worst way for a list to be wrong.
+func TestTruncationHintOnlyFiresWhenTheListWasActuallyCapped(t *testing.T) {
+	if got := TruncationHint(50, 50, false); got == "" {
+		t.Error("a full page under a limit must warn that there may be more")
+	} else if !strings.Contains(got, "first 50") {
+		t.Errorf("the hint should name the limit: %q", got)
+	}
+	if got := TruncationHint(12, 50, false); got != "" {
+		t.Errorf("a partial page is the complete answer — no hint: %q", got)
+	}
+	if got := TruncationHint(50, 50, true); got != "" {
+		t.Errorf("Return All already fetched everything — no hint: %q", got)
+	}
+	if got := TruncationHint(50, 0, false); got != "" {
+		t.Errorf("no limit applied — no hint: %q", got)
+	}
 }

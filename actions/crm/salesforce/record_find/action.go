@@ -86,7 +86,7 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	soql, err := salesforce.BuildQueryTyped(
 		instanceURL, token,
 		object,
-		withID(salesforce.OptionalString("fields", inputs)),
+		withID(defaultedFields(instanceURL, token, object, salesforce.OptionalString("fields", inputs))),
 		[]salesforce.Condition{condition},
 		false,
 		salesforce.OptionalString("order_by", inputs),
@@ -186,4 +186,18 @@ func matchDescription(record map[string]interface{}, id, matchField, matchValue 
 		return fmt.Sprintf("%s where %s matched %q", id, matchField, matchValue)
 	}
 	return fmt.Sprintf("matching %s %q", matchField, matchValue)
+}
+
+// defaultedFields resolves the projection when the operator has chosen none.
+//
+// BuildSelect's own fallback ends in "Id,Name,LastModifiedDate", and Name does
+// not exist on Task, Event, Case, ContentDocument or any junction object — all
+// hard INVALID_FIELD. This action is pointed at an arbitrary object by
+// definition, so that guess is wrong exactly when it matters. Asking describe
+// costs nothing extra: the same response is already cached for field typing.
+func defaultedFields(instanceURL, token, object, chosen string) string {
+	if strings.TrimSpace(chosen) != "" {
+		return chosen
+	}
+	return salesforce.DefaultFieldsFor(instanceURL, token, object)
 }

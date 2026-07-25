@@ -182944,7 +182944,7 @@
     ]
   },
   "crm/salesforce/account_contact_relation_get_all": {
-    "hash": "b01e0157a9263fcfb7fb4d497b4d6b4bd5628cb4177ad366dddcc50a7ea4142d",
+    "hash": "04ac55c9e7b06eb415d6cfdfea6d79436e9cf1e239baf5c2d9cfa0b13d15e999",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Get Many Account-Contact Relationships",
@@ -183056,7 +183056,7 @@
         "name": "total_size",
         "type": "integer",
         "value": null,
-        "label": "Total Matching",
+        "label": "Records Returned",
         "placeholder": ""
       },
       {
@@ -183631,7 +183631,7 @@
     ]
   },
   "crm/salesforce/account_get_all": {
-    "hash": "ccc4d8b31123d39cbc4ee129d11bb959541007d3a43529ee05eda014aad2c7cb",
+    "hash": "b968e6e04bfc3aeef59268299a1d137908af633fab4f1fc563681995c6c90c51",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Get Many Accounts",
@@ -183799,7 +183799,7 @@
         "name": "total_size",
         "type": "integer",
         "value": null,
-        "label": "Total Matching",
+        "label": "Records Returned",
         "placeholder": ""
       },
       {
@@ -184113,7 +184113,7 @@
     ]
   },
   "crm/salesforce/account_upsert": {
-    "hash": "f95d14762c30e5ec9f29c3f3b8fbf69759c270ebe2a3add4eeb99ef3318a0b5f",
+    "hash": "3162fcbb3d2f367061ed38768cec991c30ff61c86c8c321c84907a9496aa7898",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Create or Update Account",
@@ -184170,8 +184170,7 @@
         "type": "string",
         "value": null,
         "label": "Company Name",
-        "placeholder": "Acme Manufacturing Ltd — Salesforce needs this when the account is created",
-        "required": true
+        "placeholder": "Acme Manufacturing Ltd — only needed the first time, when the account has to be created"
       },
       {
         "name": "account_number",
@@ -184635,7 +184634,7 @@
     ]
   },
   "crm/salesforce/approval_get_all": {
-    "hash": "ce27a9e10db6622b9893c1adf42e37bc81ec512e58d0abc943cddb6c71cc4d5d",
+    "hash": "32f50f5c5efae229cb22fa28e9736775d2c40a61b2ef1cd12b66ec9ae7d51502",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Get Many Approval Processes",
@@ -184719,7 +184718,7 @@
         "name": "total_size",
         "type": "integer",
         "value": null,
-        "label": "Total Matching",
+        "label": "Records Returned",
         "placeholder": ""
       },
       {
@@ -185419,7 +185418,7 @@
     ]
   },
   "crm/salesforce/attachment_get": {
-    "hash": "b0c0c5221d87c7860c5c12e4f147a5e2f59a17f0c3d74829977562a8585743fe",
+    "hash": "f75c7290bc9e29ef0fe7ddc301503da03bbac4b48ee2502ac1b7280fd70bcf2e",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Get Attachment (Classic)",
@@ -185510,7 +185509,7 @@
     ]
   },
   "crm/salesforce/attachment_get_all": {
-    "hash": "7b2045a1ed397d6792fec04e408e1cb9b921c3aaaea6e9aaeb896bda13c50c4a",
+    "hash": "4ff31953f1b6237bda09f1608698355b292427b679681ace75e0c51ea6772a57",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Get Many Attachments (Classic)",
@@ -185678,7 +185677,7 @@
         "name": "total_size",
         "type": "integer",
         "value": null,
-        "label": "Total Matching",
+        "label": "Records Returned",
         "placeholder": ""
       },
       {
@@ -186216,7 +186215,7 @@
     ]
   },
   "crm/salesforce/campaign_get_all": {
-    "hash": "87818c61e7ed9d3310c37e83d2e85f4e71a81008b4966dd98dc1b8b090ebe001",
+    "hash": "5072613dfb443faaecbe2344ac82c4ee0e68ca006ec005edea0b9985bccd3662",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Get Many Campaigns",
@@ -186355,7 +186354,7 @@
         "type": "boolean",
         "value": null,
         "label": "Match ANY filter instead of all",
-        "placeholder": "Off: a campaign has to match every filter. On: matching any one of them is enough"
+        "placeholder": "Off: a campaign has to match every filter. On: matching any one of them is enough. Active Campaigns Only always applies either way"
       },
       {
         "name": "order_by",
@@ -186405,7 +186404,7 @@
         "name": "total_size",
         "type": "integer",
         "value": null,
-        "label": "Total Matching",
+        "label": "Records Returned",
         "placeholder": ""
       },
       {
@@ -186662,7 +186661,7 @@
     ]
   },
   "crm/salesforce/campaign_member_get_all": {
-    "hash": "48c346d97f8787540d2d3b65c2ee7f19042d7735c1579a19654d93a56d7f6f50",
+    "hash": "01af05491837b35b3eab43512b5e516a00d52e95d6f826fa15d3b3dd75ca04c4",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Get Many Campaign Members",
@@ -186799,7 +186798,7 @@
         "name": "total_size",
         "type": "integer",
         "value": null,
-        "label": "Total Matching",
+        "label": "Records Returned",
         "placeholder": ""
       },
       {
@@ -187442,7 +187441,7 @@
     ]
   },
   "crm/salesforce/case_comment_get_all": {
-    "hash": "162fc3784d056bd074c2e5ac52260d555b9db6baa568c2200765860732c5aa8c",
+    "hash": "0aa0ab469a12e5a682c85daf1633824e654992c9270c9b0fc3c4ab3b41d072c8",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Get Many Case Comments",
@@ -187541,7 +187540,7 @@
         "name": "total_size",
         "type": "integer",
         "value": null,
-        "label": "Total Matching",
+        "label": "Records Returned",
         "placeholder": ""
       },
       {
@@ -188049,7 +188048,7 @@
     ]
   },
   "crm/salesforce/case_get_all": {
-    "hash": "ccc509f0fd64aafe426833983e75f191bde6cfce22d0ca804eedaa415e0e5970",
+    "hash": "58382a72945a394886ff645116ed13b46d1e944522b6113b0abac160a748b2f8",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Get Many Cases",
@@ -188217,7 +188216,7 @@
         "name": "total_size",
         "type": "integer",
         "value": null,
-        "label": "Total Matching",
+        "label": "Records Returned",
         "placeholder": ""
       },
       {
@@ -189520,7 +189519,7 @@
     ]
   },
   "crm/salesforce/contact_get_all": {
-    "hash": "4a95d33f80ee06b5630361034cf54dbeec9340ad326794791c3ac5af71a88b35",
+    "hash": "d10d8737a71741dcb0236e7b3f05389f52be13b822ff535dea41805e7532548e",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Get Many Contacts",
@@ -189688,7 +189687,7 @@
         "name": "total_size",
         "type": "integer",
         "value": null,
-        "label": "Total Matching",
+        "label": "Records Returned",
         "placeholder": ""
       },
       {
@@ -190740,7 +190739,7 @@
     ]
   },
   "crm/salesforce/custom_object_get_all": {
-    "hash": "fa60803b416347138a9168e03c93439fe2ca206b0d34b7eab599531d9c50a274",
+    "hash": "070e2accb2de8c5c113a3c7a45d344b22091edb9d7a79a1ab1ee1b6ed3832f56",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Get Many Custom Object Records",
@@ -190916,7 +190915,7 @@
         "name": "total_size",
         "type": "integer",
         "value": null,
-        "label": "Total Matching",
+        "label": "Records Returned",
         "placeholder": ""
       },
       {
@@ -191419,7 +191418,7 @@
     ]
   },
   "crm/salesforce/email_message_get_all": {
-    "hash": "b2bfd934592ab2f77852a2414200f713c636b57806aac9d7b1367cfbd97afff2",
+    "hash": "82099cff884bdeca223aa1f6dc13c48f78e5c7efd3e4dd1848bf20326a703cc2",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Get Many Emails",
@@ -191552,7 +191551,7 @@
         "name": "total_size",
         "type": "integer",
         "value": null,
-        "label": "Total Matching",
+        "label": "Records Returned",
         "placeholder": ""
       },
       {
@@ -192348,7 +192347,7 @@
     ]
   },
   "crm/salesforce/event_get_all": {
-    "hash": "d03be2f77ba5b17e846cbb047fda453565dec807da675530ff8aef4f67b04d65",
+    "hash": "1321592d662fb37c7571fe53884627897d5c1ae645c73213f94bc9dc6b126be1",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Get Many Events",
@@ -192438,14 +192437,56 @@
         "type": "string",
         "value": null,
         "label": "Filter Comparison",
-        "placeholder": "= (also !=, \u003c, \u003c=, \u003e, \u003e=, LIKE, IN)"
+        "placeholder": "How to compare the field (defaults to Equals)",
+        "options": [
+          {
+            "name": "Equals",
+            "value": "="
+          },
+          {
+            "name": "Does Not Equal",
+            "value": "!="
+          },
+          {
+            "name": "Less Than",
+            "value": "\u003c"
+          },
+          {
+            "name": "Less Than Or Equal To",
+            "value": "\u003c="
+          },
+          {
+            "name": "Greater Than",
+            "value": "\u003e"
+          },
+          {
+            "name": "Greater Than Or Equal To",
+            "value": "\u003e="
+          },
+          {
+            "name": "Contains (use % as the wildcard)",
+            "value": "LIKE"
+          },
+          {
+            "name": "Does Not Contain (use % as the wildcard)",
+            "value": "NOT LIKE"
+          },
+          {
+            "name": "Is One Of (comma-separated)",
+            "value": "IN"
+          },
+          {
+            "name": "Is Not One Of (comma-separated)",
+            "value": "NOT IN"
+          }
+        ]
       },
       {
         "name": "filter_value",
         "type": "string",
         "value": null,
         "label": "Filter Value",
-        "placeholder": "Head office — or a date shortcut like THIS_WEEK"
+        "placeholder": "Head office — for Contains use % as the wildcard (%head office%); or a date shortcut like THIS_WEEK"
       },
       {
         "name": "filter_conditions",
@@ -192459,7 +192500,7 @@
         "type": "boolean",
         "value": null,
         "label": "Match ANY filter instead of all",
-        "placeholder": ""
+        "placeholder": "On, matching any one of the filters is enough. The Starts On or After / Starts On or Before dates always apply"
       },
       {
         "name": "order_by",
@@ -192509,7 +192550,7 @@
         "name": "total_size",
         "type": "integer",
         "value": null,
-        "label": "Total Matching",
+        "label": "Records Returned",
         "placeholder": ""
       },
       {
@@ -192949,7 +192990,7 @@
     ]
   },
   "crm/salesforce/file_get_all_for_record": {
-    "hash": "10d913c780539bc8055349a7df87cbcc6603bb50d63e1e52ff9c65c32da5de3f",
+    "hash": "7c8cd3158386a5cd46f101f036106eaf16d9c946c81d9d7b3da4d5432c283fd0",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Get Files On A Record",
@@ -193034,7 +193075,7 @@
         "name": "total_size",
         "type": "integer",
         "value": null,
-        "label": "Total Matching",
+        "label": "Records Returned",
         "placeholder": ""
       },
       {
@@ -194395,7 +194436,7 @@
     ]
   },
   "crm/salesforce/lead_get": {
-    "hash": "f939e8a6b9c5cf50022f665906ef85c8ec07d2d0269a638ac23289f8a6fdd688",
+    "hash": "e7f2a05f7921c6d0cabac6b7a3e1402dcae755c3926ea1311eb51d25d9cf5720",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Get Lead",
@@ -194486,7 +194527,7 @@
     ]
   },
   "crm/salesforce/lead_get_all": {
-    "hash": "4b30b1ca6215539799207786f3eb625da7e0f61c03da6e4ba648499fdf4cdbf0",
+    "hash": "1e8d60e93ceb9b7e889c3e636f9a397d1805e918f24aa4fcf4f3f024691ffcd7",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Get Many Leads",
@@ -194654,7 +194695,7 @@
         "name": "total_size",
         "type": "integer",
         "value": null,
-        "label": "Total Matching",
+        "label": "Records Returned",
         "placeholder": ""
       },
       {
@@ -195699,7 +195740,7 @@
     ]
   },
   "crm/salesforce/note_get_all_for_record": {
-    "hash": "69a6c20a4635cb5c6c7f14e36fb0ed68ae500f0b9ed99840afd5f6516677dd11",
+    "hash": "f1e1d8018ba279f889bd16e8bdaf7e362a27111f859c81c2d88ed96231c70b38",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Get Notes On A Record",
@@ -195784,7 +195825,7 @@
         "name": "total_size",
         "type": "integer",
         "value": null,
-        "label": "Total Matching",
+        "label": "Records Returned",
         "placeholder": ""
       },
       {
@@ -195825,7 +195866,7 @@
     ]
   },
   "crm/salesforce/object_describe": {
-    "hash": "294a31bf77aaa13d984c91fbd44a24bc54f24911b41e9e44874027d75f2994e4",
+    "hash": "92aa02d3292e61643c68b1b50552690d38bc8d79735b9dcffd04fe0a8d3cd3f2",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Describe Object",
@@ -196358,7 +196399,7 @@
     ]
   },
   "crm/salesforce/opportunity_contact_role_get_all": {
-    "hash": "11a5403576eb5164dc828cb6f9c87866d16892287a9a3095aaaa48e114609736",
+    "hash": "af1942147e625e6ad2f8cf09f64f4638f0b31d33a181b9c487380e321206327f",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Get Opportunity Contacts",
@@ -196457,7 +196498,7 @@
         "name": "total_size",
         "type": "integer",
         "value": null,
-        "label": "Total Matching",
+        "label": "Records Returned",
         "placeholder": ""
       },
       {
@@ -196961,7 +197002,7 @@
     ]
   },
   "crm/salesforce/opportunity_get": {
-    "hash": "c8996663ef47425afa05a244aa96243c710d7e9f6ad4529bfcd5008e377bbe57",
+    "hash": "46d2863c07ebcb39fd350fbad889ff600e2e061e8374919adb18eedc3f663c47",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Get Opportunity",
@@ -197052,7 +197093,7 @@
     ]
   },
   "crm/salesforce/opportunity_get_all": {
-    "hash": "b276d4303504c4f83655190844cdfe167ddc8e8bf99a3bdb588ffb0ba829f7d9",
+    "hash": "f7634f50214bc22df851a0eeca6306075dd83e868f0c4ac6b3a2bae2d9834828",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Get Many Opportunities",
@@ -197220,7 +197261,7 @@
         "name": "total_size",
         "type": "integer",
         "value": null,
-        "label": "Total Matching",
+        "label": "Records Returned",
         "placeholder": ""
       },
       {
@@ -197492,7 +197533,7 @@
     ]
   },
   "crm/salesforce/opportunity_line_item_get_all": {
-    "hash": "bd42106fc91651a008113f9114f8fe1256e072e04926cb74e2aff946159df58f",
+    "hash": "6233b887d75cd26b67dcd7c17673940d7e10799a8daed36d51796522eeb93c75",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Get Opportunity Products",
@@ -197584,7 +197625,7 @@
         "name": "total_size",
         "type": "integer",
         "value": null,
-        "label": "Total Matching",
+        "label": "Records Returned",
         "placeholder": ""
       },
       {
@@ -197954,7 +197995,7 @@
     ]
   },
   "crm/salesforce/opportunity_upsert": {
-    "hash": "a198cf75022582b8c71879cde213055ebfced644d3f92c00320b3ed5907af4fd",
+    "hash": "8993e3c8ae81cd836ba3c96ca710a8d5c0e99526a8c427f0cfbe653c9431254a",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Create or Update Opportunity",
@@ -198103,6 +198144,13 @@
         "value": null,
         "label": "Owner",
         "placeholder": "0055f00000AbCdEAAV - the salesperson who owns the deal"
+      },
+      {
+        "name": "record_type_id",
+        "type": "string",
+        "value": null,
+        "label": "Record Type",
+        "placeholder": "0125f000000AbCdAAK - only if your org uses record types"
       },
       {
         "name": "additional_fields",
@@ -198583,7 +198631,7 @@
     ]
   },
   "crm/salesforce/record_create_many": {
-    "hash": "f16a02930f7561f89aa9922e3e35107214ef18532a7e4300ba5569d9950e21a2",
+    "hash": "8e7ab0e5b7cc69f6df8f44db5c199aa8b3b1a4ae98c2e29f7f9bb6c43cfb5b15",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Create Many Records",
@@ -198710,7 +198758,7 @@
     ]
   },
   "crm/salesforce/record_delete_many": {
-    "hash": "3455a935dcba79bd22d48ebebbbc18f1f98e9d3a880c698906f7c7d3d9168aa6",
+    "hash": "af9375e29b5665311a346424f0746674e04914ac19a04b283d67fb7c4d2b5d7e",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Delete Many Records",
@@ -198822,7 +198870,7 @@
     ]
   },
   "crm/salesforce/record_find": {
-    "hash": "eac3bee557497f035e14765d6e4e83d265ddfc4dccd852a1d43f9372732808e1",
+    "hash": "609712733ccb6c2dd180e67e59438f29c87855f5e7e9be70aee52ab508352139",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Find Record by Field",
@@ -199552,7 +199600,7 @@
     ]
   },
   "crm/salesforce/record_update_many": {
-    "hash": "924e143c1ed4dbfa81222567a21589445c88a5b248365510bc48669efa8cdf52",
+    "hash": "cb57072cb2c464d69219d1bca6c94a2ab37639c4429847be790772945daae267",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Update Many Records",
@@ -199800,7 +199848,7 @@
     ]
   },
   "crm/salesforce/record_upsert_many": {
-    "hash": "0263a41d01535b74030de1a53cce04163cab457079b8393fbc68e0ec171bfcfb",
+    "hash": "ad5510ea08de7ebaa1618b11c3c657f46370e72a1fa3072671a70eb251a91963",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Create or Update Many Records",
@@ -200301,7 +200349,7 @@
     ]
   },
   "crm/salesforce/search_records": {
-    "hash": "554ee1d90dc11d4e9ec316aa8d6107c37a79351e2f922a6dd22255b435a67d65",
+    "hash": "0be9a777a99d41913b7bf4aad7ef4b6e84e07fa398333268096e2802883a811a",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Find Records",
@@ -201145,7 +201193,7 @@
     ]
   },
   "crm/salesforce/task_get_all": {
-    "hash": "6468a5909bf11c2c924ea37b849ab9d4d24dd04131a5621b54a840641b585a9c",
+    "hash": "9d4251f5df5dd27e605edd6435b5658d050471bff17a443f586e5ebbcfe59c42",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Get Many Tasks",
@@ -201249,14 +201297,56 @@
         "type": "string",
         "value": null,
         "label": "Filter Comparison",
-        "placeholder": "= (also !=, \u003c, \u003c=, \u003e, \u003e=, LIKE, IN)"
+        "placeholder": "How to compare the field (defaults to Equals)",
+        "options": [
+          {
+            "name": "Equals",
+            "value": "="
+          },
+          {
+            "name": "Does Not Equal",
+            "value": "!="
+          },
+          {
+            "name": "Less Than",
+            "value": "\u003c"
+          },
+          {
+            "name": "Less Than Or Equal To",
+            "value": "\u003c="
+          },
+          {
+            "name": "Greater Than",
+            "value": "\u003e"
+          },
+          {
+            "name": "Greater Than Or Equal To",
+            "value": "\u003e="
+          },
+          {
+            "name": "Contains (use % as the wildcard)",
+            "value": "LIKE"
+          },
+          {
+            "name": "Does Not Contain (use % as the wildcard)",
+            "value": "NOT LIKE"
+          },
+          {
+            "name": "Is One Of (comma-separated)",
+            "value": "IN"
+          },
+          {
+            "name": "Is Not One Of (comma-separated)",
+            "value": "NOT IN"
+          }
+        ]
       },
       {
         "name": "filter_value",
         "type": "string",
         "value": null,
         "label": "Filter Value",
-        "placeholder": "Renewal call — or a date shortcut like TODAY or LAST_N_DAYS:7"
+        "placeholder": "Renewal call — for Contains use % as the wildcard (%renewal%); or a date shortcut like TODAY or LAST_N_DAYS:7"
       },
       {
         "name": "filter_conditions",
@@ -201270,7 +201360,7 @@
         "type": "boolean",
         "value": null,
         "label": "Match ANY filter instead of all",
-        "placeholder": ""
+        "placeholder": "On, matching any one of the filters is enough. The Due On or After / Due On or Before dates always apply"
       },
       {
         "name": "order_by",
@@ -201320,7 +201410,7 @@
         "name": "total_size",
         "type": "integer",
         "value": null,
-        "label": "Total Matching",
+        "label": "Records Returned",
         "placeholder": ""
       },
       {
@@ -201361,7 +201451,7 @@
     ]
   },
   "crm/salesforce/task_get_all_for_record": {
-    "hash": "626f7a851137404b98de2d6bc560e5fcf47c621db7a09ab44ff6a0167af49307",
+    "hash": "908142ae8f41b42ba0b41db3e9f1ad9c27459da44be495ba87800596bdd78ebc",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Get Tasks On a Record",
@@ -201454,7 +201544,7 @@
         "name": "total_size",
         "type": "integer",
         "value": null,
-        "label": "Total Matching",
+        "label": "Records Returned",
         "placeholder": ""
       },
       {
@@ -202497,7 +202587,7 @@
     ]
   },
   "crm/salesforce/user_get_all": {
-    "hash": "5ef6460623ddd29e1dd77b7581437bec533bd2b1965a7c5a6b87ec307ea00d48",
+    "hash": "fa7ce4ee74b4719c5c8be85623afa5bd454e2d9530d411769ad4f6f1e8361b60",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Get Many Users",
@@ -202622,7 +202712,7 @@
         "type": "boolean",
         "value": null,
         "label": "Match ANY filter instead of all",
-        "placeholder": "On, any one filter is enough to match — including Active Users Only"
+        "placeholder": "On, any one of your own filters is enough to match. Active Users Only still always applies"
       },
       {
         "name": "order_by",
@@ -202665,7 +202755,7 @@
         "name": "total_size",
         "type": "integer",
         "value": null,
-        "label": "Total Matching",
+        "label": "Records Returned",
         "placeholder": ""
       },
       {

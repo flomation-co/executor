@@ -21,6 +21,7 @@ import (
 	"fmt"
 	"net/http"
 	"net/url"
+	"strings"
 
 	core "flomation.app/automate/executor"
 	salesforce "flomation.app/automate/executor/actions/crm/salesforce"
@@ -96,16 +97,34 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	// and the output shape does not change with the input. Describe has no
 	// top-level picklistValues of its own, so there is nothing to clobber.
 	if field := salesforce.OptionalString("picklist_field", inputs); field != "" {
-		values := salesforce.PicklistValues(describe, field)
-		if values == nil {
-			return nil, fmt.Errorf("%s has no dropdown field called %q — either the field does not exist on this object, it is not a dropdown, or the connected Salesforce user cannot see it", object, field)
+		// The two ways this can be wrong are different mistakes and need
+		// different words. PicklistValues cannot tell them apart — it returns a
+		// non-nil EMPTY slice for any field that exists, whatever its type, so
+		// asking about Name or AnnualRevenue used to report success and
+		// "accepts 0 value(s)" with picklistValues: []. That is not terse, it is
+		// false: AnnualRevenue accepts any number. Resolve the field from the
+		// describe payload directly and say which mistake was made.
+		meta, found := findField(describe, field)
+		switch {
+		case !found:
+			return nil, fmt.Errorf("%s has no field called %q — check the spelling against the field list in this action's output, or the connected Salesforce user may not be allowed to see it", object, field)
+		case !isPicklistType(fieldType(meta)):
+			return nil, fmt.Errorf("%s on %s is not a dropdown — it is a %s, so it has no fixed list of values. Leave Dropdown Field blank to see every field on the object", fieldLabel(meta, field), object, friendlyType(fieldType(meta)))
 		}
+
+		values := salesforce.PicklistValues(describe, field)
 		items := make([]interface{}, 0, len(values))
 		for _, v := range values {
 			items = append(items, v)
 		}
 		describe["picklistValues"] = items
 		summary = fmt.Sprintf("Described %s: %s accepts %d value(s)", object, field, len(items))
+		if len(items) == 0 {
+			// A real picklist with nothing in it. Worth saying out loud, because
+			// "accepts 0 value(s)" reads like a bug rather than like an empty
+			// list somebody has to populate in Setup.
+			summary = fmt.Sprintf("Described %s: %s is a dropdown with no values set up in your org", object, field)
+		}
 	}
 
 	return salesforce.RecordResult("", describe, summary), nil
@@ -128,6 +147,83 @@ func describeLayout(instanceURL, token, object, recordTypeID string) (map[string
 		return nil, fmt.Errorf("could not read the %s page layout from Salesforce: %w", object, err)
 	}
 	return out, nil
+}
+
+// findField locates one field in a describe payload by API name, case-insensitively
+// — the same match PicklistValues makes, so the two never disagree about which
+// field is being talked about.
+func findField(describe map[string]interface{}, name string) (map[string]interface{}, bool) {
+	fields, _ := describe["fields"].([]interface{})
+	for _, f := range fields {
+		fm, ok := f.(map[string]interface{})
+		if !ok {
+			continue
+		}
+		if fn, _ := fm["name"].(string); strings.EqualFold(fn, name) {
+			return fm, true
+		}
+	}
+	return nil, false
+}
+
+func fieldType(meta map[string]interface{}) string {
+	t, _ := meta["type"].(string)
+	return t
+}
+
+// fieldLabel prefers the on-screen label, which is what the operator was
+// looking at when they picked the field.
+func fieldLabel(meta map[string]interface{}, fallback string) string {
+	if l, _ := meta["label"].(string); l != "" {
+		return l
+	}
+	return fallback
+}
+
+// picklistTypes are the Salesforce field types that carry a fixed list of
+// values. combobox is included: it offers the list and also accepts free text,
+// so "what values does this take?" is still a fair question about it.
+var picklistTypes = map[string]bool{
+	"picklist":      true,
+	"multipicklist": true,
+	"combobox":      true,
+}
+
+func isPicklistType(t string) bool { return picklistTypes[strings.ToLower(t)] }
+
+// friendlyType turns Salesforce's own type names into something a front-of-house
+// operator can act on. Unrecognised types fall through unchanged rather than
+// being guessed at — "it is a %s field" with the raw name still beats silence.
+func friendlyType(t string) string {
+	switch strings.ToLower(t) {
+	case "string":
+		return "text field"
+	case "textarea":
+		return "long text field"
+	case "reference":
+		return "link to another record"
+	case "id":
+		return "record ID"
+	case "double", "int", "percent":
+		return "number field"
+	case "currency":
+		return "money field"
+	case "boolean":
+		return "tick box"
+	case "date":
+		return "date field"
+	case "datetime":
+		return "date and time field"
+	case "email":
+		return "email field"
+	case "phone":
+		return "phone field"
+	case "url":
+		return "web address field"
+	case "":
+		return "field of an unknown type"
+	}
+	return t + " field"
 }
 
 // countList reports how many entries a named array in the describe response

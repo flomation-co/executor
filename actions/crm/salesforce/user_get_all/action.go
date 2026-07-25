@@ -59,7 +59,7 @@ var Inputs = [...]core.Connection{
 	},
 	{Name: "filter_value", Type: core.ConnectionTypeString, Label: "Filter Value", Placeholder: "Sales — for Matches Pattern use % as the wildcard (%sales%); for Is One Of, separate values with commas"},
 	{Name: "filter_conditions", Type: core.ConnectionTypeObject, Label: "More Filters", Placeholder: `[{"field":"Department","operator":"=","value":"Sales"},{"field":"Title","operator":"LIKE","value":"%Manager%"}]`},
-	{Name: "match_any_filter", Type: core.ConnectionTypeBoolean, Label: "Match ANY filter instead of all", Placeholder: "On, any one filter is enough to match — including Active Users Only"},
+	{Name: "match_any_filter", Type: core.ConnectionTypeBoolean, Label: "Match ANY filter instead of all", Placeholder: "On, any one of your own filters is enough to match. Active Users Only still always applies"},
 	{Name: "order_by", Type: core.ConnectionTypeString, Label: "Sort By", Placeholder: "Name ASC — or LastLoginDate DESC"},
 	{Name: "return_all", Type: core.ConnectionTypeBoolean, Label: "Return All (fetch every match)"},
 	{Name: "limit", Type: core.ConnectionTypeInteger, Label: "Limit", Placeholder: "50 by default (max 2000); ignored when Return All is on"},
@@ -68,7 +68,7 @@ var Inputs = [...]core.Connection{
 var Outputs = [...]core.Connection{
 	{Name: "results", Type: core.ConnectionTypeObject, Label: "Users"},
 	{Name: "count", Type: core.ConnectionTypeInteger, Label: "Count"},
-	{Name: "total_size", Type: core.ConnectionTypeInteger, Label: "Total Matching"},
+	{Name: "total_size", Type: core.ConnectionTypeInteger, Label: "Records Returned"},
 	{Name: "next_url", Type: core.ConnectionTypeString, Label: "Next Page URL"},
 	{Name: "result", Type: core.ConnectionTypeObject, Label: "Raw Response"},
 	{Name: "tool_result", Type: core.ConnectionTypeString, Label: "Result Summary"},
@@ -82,7 +82,7 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 		return nil, err
 	}
 
-	conditions, err := buildConditions(inputs)
+	scope, filters, err := buildConditions(inputs)
 	if err != nil {
 		return nil, err
 	}
@@ -93,11 +93,12 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	// The limit is applied as a SOQL LIMIT clause, not a REST parameter —
 	// Salesforce has no page-size parameter on /query. With Return All on there
 	// is deliberately no LIMIT so the nextRecordsUrl chain runs to the end.
-	soql, err := salesforce.BuildQueryTyped(
+	soql, err := salesforce.BuildScopedQueryTyped(
 		instanceURL, token,
 		"User",
 		salesforce.OptionalString("fields", inputs),
-		conditions,
+		scope,
+		filters,
 		salesforce.OptionalBool("match_any_filter", inputs),
 		salesforce.OptionalString("order_by", inputs),
 		salesforce.ClampLimit(limit, limitSet),
@@ -125,28 +126,32 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	case nextURL != "":
 		out["tool_result"] = fmt.Sprintf("Found %d user(s) of %d matching — turn on Return All to fetch the rest", len(records), totalSize)
 	default:
-		out["tool_result"] = fmt.Sprintf("Found %d user(s)", len(records))
+		// Salesforce reports totalSize as the PAGE size once a LIMIT is applied
+		// and sets done:true with no cursor, so a capped list is otherwise
+		// indistinguishable from a complete one.
+		out["tool_result"] = fmt.Sprintf("Found %d user(s)%s", len(records), salesforce.TruncationHint(len(records), limit, returnAll))
 	}
 	return out, nil
 }
 
 // buildConditions assembles the WHERE terms from the three filter styles this
-// action offers, in the order they are shown in the editor.
+// action offers, in the order they are shown in the editor, split into the two
+// groups BuildScopedQueryTyped keeps apart.
 //
 // They deliberately stack rather than override each other: "active users only"
 // plus a department filter is the single most common request, and making the
 // operator express that as JSON would defeat the point of the tick box.
 //
-// Note the interaction with "Match ANY filter instead of all": the WHERE builder
-// joins every term with one connective (SOQL bracket grouping is not exposed
-// here), so turning it on ORs the Active Users Only term along with everything
-// else. The input's help text says so rather than the code quietly
-// special-casing it.
-func buildConditions(inputs []*core.Connection) ([]salesforce.Condition, error) {
-	var conditions []salesforce.Condition
-
+// Active Users Only is SCOPE, not one of the filters: its label is an
+// unconditional promise, and it is the one term in this action that must not be
+// ORed away by "Match ANY filter instead of all". Letting the toggle reach it
+// produced `IsActive = true OR Department = 'Sales'` — every active user in the
+// org plus every deactivated person in Sales, which is precisely the "assigns
+// work to someone who left" failure the tick box exists to prevent. The
+// operator's own filter row and More Filters are what the toggle joins.
+func buildConditions(inputs []*core.Connection) (scope, filters []salesforce.Condition, err error) {
 	if salesforce.OptionalBool("active_only", inputs) {
-		conditions = append(conditions, salesforce.Condition{Field: "IsActive", Operator: "=", Value: "true"})
+		scope = append(scope, salesforce.Condition{Field: "IsActive", Operator: "=", Value: "true"})
 	}
 
 	if field := salesforce.OptionalString("filter_field", inputs); field != "" {
@@ -154,7 +159,7 @@ func buildConditions(inputs []*core.Connection) ([]salesforce.Condition, error) 
 		if operator == "" {
 			operator = "="
 		}
-		conditions = append(conditions, salesforce.Condition{
+		filters = append(filters, salesforce.Condition{
 			Field:    field,
 			Operator: operator,
 			Value:    salesforce.OptionalString("filter_value", inputs),
@@ -163,7 +168,7 @@ func buildConditions(inputs []*core.Connection) ([]salesforce.Condition, error) 
 
 	extra, err := salesforce.ParseConditions("filter_conditions", inputs)
 	if err != nil {
-		return nil, err
+		return nil, nil, err
 	}
-	return append(conditions, extra...), nil
+	return scope, append(filters, extra...), nil
 }

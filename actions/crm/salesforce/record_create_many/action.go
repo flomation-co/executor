@@ -85,7 +85,9 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	allOrNone := salesforce.OptionalBool("all_or_none", inputs)
 	outcome, err := salesforce.CollectionWrite(instanceURL, token, object, http.MethodPost, records, allOrNone, "")
 	if err != nil {
-		return salesforce.ErrorResult(err.Error()), nil
+		// A mid-run failure leaves earlier chunks COMMITTED — report what
+		// landed so the operator resumes instead of re-running and duplicating.
+		return salesforce.PartialBulkResult(outcome, err, len(records), object), nil
 	}
 
 	chunks := len(salesforce.ChunkRecords(records))

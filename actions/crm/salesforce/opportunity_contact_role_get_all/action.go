@@ -39,7 +39,7 @@ var Inputs = [...]core.Connection{
 var Outputs = [...]core.Connection{
 	{Name: "results", Type: core.ConnectionTypeObject, Label: "Contact Roles"},
 	{Name: "count", Type: core.ConnectionTypeInteger, Label: "Count"},
-	{Name: "total_size", Type: core.ConnectionTypeInteger, Label: "Total Matching"},
+	{Name: "total_size", Type: core.ConnectionTypeInteger, Label: "Records Returned"},
 	{Name: "next_url", Type: core.ConnectionTypeString, Label: "Next Page URL"},
 	{Name: "result", Type: core.ConnectionTypeObject, Label: "Raw Response"},
 	{Name: "tool_result", Type: core.ConnectionTypeString, Label: "Result Summary"},

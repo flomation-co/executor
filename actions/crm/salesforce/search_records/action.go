@@ -107,7 +107,11 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 			// per-object list the get-many actions use.
 			list := fields
 			if list == "" {
-				list = salesforce.DefaultFields(obj)
+				// Resolve from describe rather than guessing: this action is
+				// pointed at an arbitrary object by the operator, and the
+				// static fallback's "Name" is a hard INVALID_FIELD on Task,
+				// Event, Case, ContentDocument and every junction object.
+				list = salesforce.DefaultFieldsFor(instanceURL, token, obj)
 			}
 			q.Set(obj+".fields", list)
 		}

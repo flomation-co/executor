@@ -78,10 +78,26 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 
 	id, raw, err := salesforce.CreateRecord(instanceURL, token, "AccountContactRelation", body)
 	if err != nil {
-		// Two provider outcomes are common enough to expect: the org has not
-		// enabled Contacts to Multiple Accounts (INVALID_TYPE), or the contact
-		// already belongs to this account directly — Salesforce maintains that
-		// relationship itself and refuses a second, indirect one.
+		// Two provider outcomes are common enough to name explicitly.
+		//
+		// DUPLICATE_VALUE means the contact's PRIMARY account was chosen.
+		// Salesforce maintains that relationship itself — creating a contact
+		// with an Account Name silently creates an AccountContactRelation with
+		// IsDirect=true (verified live) — so asking for it again is always a
+		// duplicate. Salesforce's own text ("This contact already has a
+		// relationship with this account") is true but leaves the operator
+		// stuck, because the thing to do is pick a DIFFERENT account: relating
+		// a contact to additional accounts is the entire point of the feature.
+		if salesforce.ErrorHasCode(err, "DUPLICATE_VALUE") {
+			return salesforce.ErrorResult(fmt.Sprintf(
+				"that contact is already linked to that account — Salesforce creates the link to a contact's own account automatically, so choose one of the OTHER accounts you want them related to (%s)", err.Error())), nil
+		}
+		// INVALID_TYPE means the org has not switched on Contacts to Multiple
+		// Accounts, which is off by default.
+		if salesforce.ErrorHasCode(err, "INVALID_TYPE") {
+			return salesforce.ErrorResult(fmt.Sprintf(
+				"relating a contact to more than one account is switched off in your Salesforce org — an administrator can enable it under Setup ▸ Account Settings (%s)", err.Error())), nil
+		}
 		return salesforce.ErrorResult(err.Error()), nil
 	}
 	return salesforce.RecordResult(id, raw, fmt.Sprintf("Related contact %s to account %s", contactID, accountID)), nil

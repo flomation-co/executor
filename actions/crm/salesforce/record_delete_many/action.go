@@ -72,7 +72,10 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	allOrNone := salesforce.OptionalBool("all_or_none", inputs)
 	outcome, err := salesforce.CollectionDelete(instanceURL, token, ids, allOrNone)
 	if err != nil {
-		return salesforce.ErrorResult(err.Error()), nil
+		// Earlier chunks are already deleted and will not come back on their
+		// own; say which, so the operator knows what is left rather than
+		// re-running a delete over records that no longer exist.
+		return salesforce.PartialBulkResult(outcome, err, len(ids), "record"), nil
 	}
 
 	chunks := (len(ids) + salesforce.MaxCollectionRecords - 1) / salesforce.MaxCollectionRecords

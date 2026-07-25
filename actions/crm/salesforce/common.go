@@ -18,11 +18,14 @@
 //     on, because the raw codes (FIELD_CUSTOM_VALIDATION_EXCEPTION,
 //     INVALID_CROSS_REFERENCE_KEY) mean nothing to the person reading them.
 //
-//   - 204 No Content is the NORMAL success response for update, delete and an
-//     upsert that matched an existing record. decode must tolerate an empty
-//     body, and every write helper returns the record ID it already knows
-//     rather than an empty map — otherwise nothing downstream can chain off an
-//     update, which is the single most common flow shape.
+//   - 204 No Content is the NORMAL success response for update and delete —
+//     verified live on API v62. decode must tolerate an empty body, and those
+//     helpers return the record ID they already hold rather than an empty map,
+//     or nothing downstream can chain off an update, which is the single most
+//     common flow shape. Upsert is the exception worth knowing: on v62 it
+//     answers 201 {created:true} on insert and 200 {created:false} on match,
+//     both WITH a body. Older API versions answered a matched upsert with a
+//     bare 204, so both shapes are handled — but do not expect the 204.
 //
 //   - Every SOQL string is assembled, never parameterised: Salesforce has no
 //     bind-variable syntax over REST. Identifiers are whitelist-validated and
@@ -40,10 +43,13 @@ package salesforce
 
 import (
 	"bytes"
+	"crypto/sha256"
+	"encoding/hex"
 	"encoding/json"
 	"encoding/xml"
 	"fmt"
 	"io"
+	"maps"
 	"net/http"
 	"net/url"
 	"regexp"
@@ -315,9 +321,18 @@ func executeURL(fullURL, token, method string, body interface{}) (*APIResponse, 
 	}
 	defer func() { _ = resp.Body.Close() }()
 
-	respBody, err := io.ReadAll(io.LimitReader(resp.Body, maxResponseBody))
+	// Read ONE byte past the cap so an oversized body is DETECTED rather than
+	// silently truncated mid-JSON. Without this the decoder gets a cut-off
+	// object and the operator sees "unexpected end of JSON input" — a Go error
+	// string, on a flow that worked yesterday and broke as the data grew.
+	// file_download and attachment_download already do this and say why; the
+	// shared request path never got the same treatment.
+	respBody, err := io.ReadAll(io.LimitReader(resp.Body, maxResponseBody+1))
 	if err != nil {
 		return nil, fmt.Errorf("failed to read response: %w", err)
+	}
+	if len(respBody) > maxResponseBody {
+		return nil, fmt.Errorf("Salesforce sent back more data than this step can handle (over %d MB). Choose fewer fields, lower the Limit, or add a filter to narrow the results", maxResponseBody>>20)
 	}
 
 	return &APIResponse{StatusCode: resp.StatusCode, Body: respBody, Headers: resp.Header}, nil
@@ -342,6 +357,19 @@ type sfError struct {
 	Message   string   `json:"message"`
 	ErrorCode string   `json:"errorCode"`
 	Fields    []string `json:"fields"`
+	// The sObject Collections endpoints spell the same thing "statusCode"
+	// inside each per-record result, not "errorCode". Decoding only errorCode
+	// meant every bulk failure lost both its plain-English translation and the
+	// code itself, leaving the operator with Salesforce's bare prose.
+	StatusCode string `json:"statusCode"`
+}
+
+// code returns whichever spelling of the error code this response used.
+func (e sfError) code() string {
+	if e.ErrorCode != "" {
+		return e.ErrorCode
+	}
+	return e.StatusCode
 }
 
 // oauthError is the shape returned by the token/identity endpoints and by a
@@ -467,6 +495,13 @@ func explainErrorCode(code string, fields []string, status int) string {
 		return "your Salesforce administrator's validation rule rejected this record"
 	case "DUPLICATES_DETECTED":
 		return "Salesforce's duplicate rule blocked this record — a matching record already exists"
+	case "FIELD_INTEGRITY_EXCEPTION":
+		// Overwhelmingly this is the State/Country picklist: orgs created in
+		// recent years validate address State and Country against a fixed
+		// list, free text is refused, and Salesforce's standard list has no
+		// sub-states for some countries at all (the United Kingdom among them,
+		// verified live) — so for those the field simply cannot be filled in.
+		return "your Salesforce org checks this value against a fixed list — for an address, State/Province and Country must match your org's own list, and some countries have no states to choose from at all"
 	case "DUPLICATE_VALUE":
 		return "Salesforce already has a matching record and refused to create another"
 	case "INVALID_CROSS_REFERENCE_KEY":
@@ -525,9 +560,11 @@ func explainErrorCode(code string, fields []string, status int) string {
 // decode unmarshals a successful response body into a generic map.
 //
 // An empty body is normal, not exceptional: Salesforce answers a successful
-// update, delete or upsert-that-matched with 204 No Content. Returning an
-// empty map (rather than erroring) is what lets the write helpers substitute
-// the record ID they already know.
+// update or delete with 204 No Content (verified live on v62). Returning an
+// empty map rather than erroring is what lets the write helpers substitute the
+// record ID they already know. A matched upsert also answered 204 on older API
+// versions, so that shape still has to be tolerated even though v62 returns a
+// body.
 func decode(resp *APIResponse) (map[string]interface{}, error) {
 	if len(bytes.TrimSpace(resp.Body)) == 0 {
 		return map[string]interface{}{}, nil
@@ -715,6 +752,11 @@ func SOQLValue(raw string, listValue bool) (string, error) {
 	if salesforceDateLiterals[upper] || relativeNDateLiteral.MatchString(upper) || agoNDateLiteral.MatchString(upper) {
 		return upper, nil
 	}
+	if isoDateTimeNoOffset.MatchString(v) {
+		// Salesforce rejects an offsetless datetime outright; assume UTC rather
+		// than emit a literal that is guaranteed to fail.
+		return v + "Z", nil
+	}
 	if isoDateTimePattern.MatchString(v) || isoDatePattern.MatchString(v) {
 		return v, nil
 	}
@@ -779,15 +821,36 @@ func soqlListValue(v string) (string, error) {
 // cannot see the object's metadata) it degrades to the value-only heuristic
 // rather than failing the action.
 
-// fieldTypeCache memoises describe-derived field types per object.
+// fieldTypeCache memoises describe-derived field types per (connection, object).
 //
 // The executor is a one-shot process — one flow run, then exit — so this
 // cannot accrete across time the way a daemon's cache would. It exists so a
 // Loop firing the same get-many a hundred times describes the object once.
+//
+// The key MUST include the connection, not just the object name. Two reasons,
+// both reachable inside a single flow:
+//
+//   - A flow can hold two Salesforce nodes pointed at DIFFERENT orgs (a
+//     sandbox-to-production sync is the obvious one). Custom fields differ
+//     between orgs, and a field that is Currency in one can be Text in
+//     another, so a shared entry renders the literal for the wrong org.
+//   - describe output is filtered by the CONNECTED USER's field-level
+//     security, so even two credentials against the same org legitimately see
+//     different field sets.
+//
+// The api's describe cache is keyed the same way and for the same reason.
 var fieldTypeCache = struct {
 	mu sync.Mutex
 	m  map[string]map[string]string
 }{m: map[string]map[string]string{}}
+
+// connectionKey fingerprints a connection for cache keying. The token is
+// hashed, never stored — a cache key is not a place to keep a credential, and
+// this map outlives individual calls within the run.
+func connectionKey(instanceURL, token string) string {
+	sum := sha256.Sum256([]byte(instanceURL + "\x00" + token))
+	return hex.EncodeToString(sum[:16])
+}
 
 // FieldTypes returns a lower-cased field name -> Salesforce type map for an
 // object, from its describe. Cached for the life of the process.
@@ -796,12 +859,15 @@ func FieldTypes(instanceURL, token, object string) (map[string]string, error) {
 	if err != nil {
 		return nil, err
 	}
-	key := strings.ToLower(obj)
+	key := connectionKey(instanceURL, token) + "|" + strings.ToLower(obj)
 
 	fieldTypeCache.mu.Lock()
 	if cached, ok := fieldTypeCache.m[key]; ok {
 		fieldTypeCache.mu.Unlock()
-		return cached, nil
+		// Hand back a copy: the cached map is shared by every caller in the
+		// run, so returning it directly lets one caller's mutation silently
+		// rewrite another's view of the schema.
+		return maps.Clone(cached), nil
 	}
 	fieldTypeCache.mu.Unlock()
 
@@ -826,7 +892,7 @@ func FieldTypes(instanceURL, token, object string) (map[string]string, error) {
 	fieldTypeCache.mu.Lock()
 	fieldTypeCache.m[key] = types
 	fieldTypeCache.mu.Unlock()
-	return types, nil
+	return maps.Clone(types), nil
 }
 
 // numericSOQLTypes are the Salesforce field types whose literals must be bare.
@@ -839,11 +905,15 @@ var numericSOQLTypes = map[string]bool{
 func SOQLValueForType(raw, sfType string, isList bool) (string, error) {
 	v := strings.TrimSpace(raw)
 
-	// A relative date literal is bare on any date/datetime field and is never
-	// something the field type should override.
-	upper := strings.ToUpper(v)
-	if salesforceDateLiterals[upper] || relativeNDateLiteral.MatchString(upper) || agoNDateLiteral.MatchString(upper) {
-		return upper, nil
+	// A relative date keyword (TODAY, LAST_N_DAYS:7) is bare — but ONLY on a
+	// field that actually holds a date. Checking it before the type meant a
+	// TEXT field whose value happened to spell "today" was emitted as a bare
+	// SOQL keyword, so the query matched on a date range instead of the word.
+	if sfType == "" || sfType == "date" || sfType == "datetime" {
+		upper := strings.ToUpper(v)
+		if salesforceDateLiterals[upper] || relativeNDateLiteral.MatchString(upper) || agoNDateLiteral.MatchString(upper) {
+			return upper, nil
+		}
 	}
 
 	if isList {
@@ -878,10 +948,21 @@ func SOQLValueForType(raw, sfType string, isList bool) (string, error) {
 		if v == "" {
 			return "null", nil
 		}
-		if isoDateTimePattern.MatchString(v) || isoDatePattern.MatchString(v) {
-			return v, nil
-		}
-		return "", fmt.Errorf("that field holds a date, so the comparison value must be a date (2026-07-25), a date and time (2026-07-25T10:30:00Z) or a Salesforce date keyword such as TODAY or LAST_N_DAYS:7 — got %q", v)
+		// Salesforce will not coerce between its Date and DateTime literal
+		// forms, and rejects the mismatch outright. All three verified live:
+		//
+		//	CreatedDate >= 2026-07-01              INVALID_FIELD "must be of type dateTime"
+		//	CreatedDate >= 2026-07-01T00:00:00Z    OK
+		//	CloseDate   >  2026-07-25T00:00:00Z    INVALID_FIELD "must be of type date"
+		//	CloseDate   >  2026-07-25              OK
+		//	CreatedDate >= 2026-07-01T00:00:00     MALFORMED_QUERY (no offset)
+		//
+		// The operator cannot be expected to know which of two adjacent
+		// dropdown entries is which — Contact alone carries ten date and
+		// datetime fields side by side — so coerce rather than refuse. The
+		// write path has always done this (SetDateIfPresent); the query path
+		// simply never got it.
+		return coerceDateLiteral(v, sfType)
 
 	default:
 		// string, picklist, id, reference, email, phone, url, textarea, ...
@@ -890,6 +971,47 @@ func SOQLValueForType(raw, sfType string, isList bool) (string, error) {
 		}
 		return "'" + EscapeSOQLString(v) + "'", nil
 	}
+}
+
+// isoDateTimeNoOffset matches an ISO datetime with no timezone offset. Salesforce
+// rejects that form outright — "2026-07-01T00:00:00" is MALFORMED_QUERY, not a
+// value error — so it is normalised to UTC rather than refused. Silently
+// shifting by the org's timezone instead would be worse than either.
+var isoDateTimeNoOffset = regexp.MustCompile(`^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(\.\d{1,3})?$`)
+
+// coerceDateLiteral renders an operator's date value in the literal form the
+// FIELD demands, converting between the two forms rather than rejecting a
+// mismatch the operator has no way to anticipate.
+func coerceDateLiteral(v, sfType string) (string, error) {
+	switch {
+	case isoDateTimeNoOffset.MatchString(v):
+		// Tested BEFORE isoDateTimePattern: that pattern's offset group is
+		// optional, so it also matches an offsetless value and would return it
+		// unchanged — straight into MALFORMED_QUERY.
+		if sfType == "date" {
+			return v[:10], nil
+		}
+		return v + "Z", nil
+
+	case isoDatePattern.MatchString(v):
+		if sfType == "datetime" {
+			// A Date field's value on a DateTime field: widen to midnight UTC.
+			// Salesforce compares the instant, so this is the start of the day
+			// the operator named.
+			return v + "T00:00:00Z", nil
+		}
+		return v, nil
+
+	case isoDateTimePattern.MatchString(v):
+		if sfType == "date" {
+			// A DateTime on a Date field: keep the calendar date. Same
+			// truncation SetDateIfPresent applies on the write path.
+			return v[:10], nil
+		}
+		return v, nil
+
+	}
+	return "", fmt.Errorf("that field holds a date, so the comparison value must be a date (2026-07-25), a date and time (2026-07-25T10:30:00Z) or a Salesforce date keyword such as TODAY or LAST_N_DAYS:7 — got %q", v)
 }
 
 func soqlListValueForType(v, sfType string) (string, error) {
@@ -1064,6 +1186,64 @@ func DefaultFields(object string) string {
 		return "Id,Name,Email,IsActive,LastModifiedDate"
 	}
 	return "Id,Name,LastModifiedDate"
+}
+
+// DefaultFieldsFor resolves a zero-configuration projection by ASKING the org,
+// falling back to the static table only when describe is unavailable.
+//
+// The static fallback ends in "Id,Name,LastModifiedDate", and Name is the wrong
+// guess on a large family of objects — verified live, every one of these is a
+// hard INVALID_FIELD on "SELECT Id, Name":
+//
+//	CaseComment, ContentDocumentLink, OpportunityContactRole   no name field at all
+//	Task, Event                                                Subject
+//	Case                                                       CaseNumber
+//	ContentDocument                                            Title
+//
+// That matters most for record_find and search_records, which are pointed at an
+// arbitrary object by the operator, so the guess is wrong exactly when the
+// action is doing its job. The describe is the one already cached by FieldTypes,
+// so this costs nothing extra on a second call.
+func DefaultFieldsFor(instanceURL, token, object string) string {
+	obj, err := ValidateSOQLObjectName(object)
+	if err != nil {
+		return "Id"
+	}
+	// A curated list beats a derived one where we have it — it names the fields
+	// an operator actually wants to see, not just the record's label.
+	if known := DefaultFields(obj); known != "Id,Name,LastModifiedDate" {
+		return known
+	}
+	describe, err := DescribeObject(instanceURL, token, obj)
+	if err != nil {
+		// Describe can be denied to a user who can still read records. "Id"
+		// always works; a wrong guess does not.
+		return "Id"
+	}
+	fields, _ := describe["fields"].([]interface{})
+	nameField := ""
+	hasModified := false
+	for _, f := range fields {
+		fm, ok := f.(map[string]interface{})
+		if !ok {
+			continue
+		}
+		name, _ := fm["name"].(string)
+		if isName, ok := fm["nameField"].(bool); ok && isName && nameField == "" {
+			nameField = name
+		}
+		if name == "LastModifiedDate" {
+			hasModified = true
+		}
+	}
+	out := "Id"
+	if nameField != "" && nameField != "Id" {
+		out += "," + nameField
+	}
+	if hasModified {
+		out += ",LastModifiedDate"
+	}
+	return out
 }
 
 // BuildSelect assembles a validated SELECT clause. fields is a comma-separated
@@ -1426,8 +1606,10 @@ func UpsertRecord(instanceURL, token, object, externalIDField, externalIDValue s
 	if err != nil {
 		return "", false, nil, err
 	}
-	// 200 with a body when created or when a body was requested; 204 when the
-	// update matched and Salesforce had nothing to say.
+	// On v62: 201 with {id, success, created:true} when inserted, 200 with
+	// {..., created:false} when matched — both carry a body. Older API versions
+	// answered a matched upsert with a bare 204, which is why the decode below
+	// is guarded rather than assumed.
 	var cr createResponse
 	if len(bytes.TrimSpace(resp.Body)) > 0 {
 		_ = json.Unmarshal(resp.Body, &cr)
@@ -1471,7 +1653,11 @@ func formatSfErrorSlice(errs []sfError) string {
 	parts := make([]string, 0, len(errs))
 	for _, e := range errs {
 		msg := e.Message
-		if explained := explainErrorCode(e.ErrorCode, e.Fields, 0); explained != "" {
+		code := e.code()
+		// A per-record Collections failure is addressed at one specific record,
+		// so the 404-flavoured wording is the right branch for the codes that
+		// differ by status (INVALID_CROSS_REFERENCE_KEY in particular).
+		if explained := explainErrorCode(code, e.Fields, http.StatusNotFound); explained != "" {
 			msg = explained + " (" + msg + ")"
 		}
 		if len(e.Fields) > 0 {
@@ -1479,8 +1665,8 @@ func formatSfErrorSlice(errs []sfError) string {
 		}
 		// Carry the code, same reason as formatSalesforceErrors: callers branch
 		// on it, and an operator reporting a failure needs something precise.
-		if e.ErrorCode != "" && !strings.Contains(msg, e.ErrorCode) {
-			msg += " [" + e.ErrorCode + "]"
+		if code != "" && !strings.Contains(msg, code) {
+			msg += " [" + code + "]"
 		}
 		parts = append(parts, msg)
 	}
@@ -1566,14 +1752,18 @@ func CollectionWrite(instanceURL, token, object, method string, records []map[st
 
 		resp, err := ExecuteAPI(instanceURL, token, method, path, payload)
 		if err != nil {
-			return nil, err
+			// Everything before this chunk is ALREADY COMMITTED in Salesforce.
+			// Returning nil would tell the operator the whole run failed and
+			// invite them to re-run it, duplicating every record written so
+			// far. Hand back what actually landed, with the error.
+			return outcome, err
 		}
 		if err := CheckResponse(resp); err != nil {
-			return nil, err
+			return outcome, err
 		}
 		var results []CollectionResult
 		if err := json.Unmarshal(resp.Body, &results); err != nil {
-			return nil, fmt.Errorf("failed to parse Salesforce collections response: %w", err)
+			return outcome, fmt.Errorf("failed to parse Salesforce collections response: %w", err)
 		}
 		for i, r := range results {
 			recordIdx := chunkIdx*MaxCollectionRecords + i
@@ -1616,14 +1806,17 @@ func CollectionDelete(instanceURL, token string, ids []string, allOrNone bool) (
 		q.Set("allOrNone", strconv.FormatBool(allOrNone))
 		resp, err := ExecuteAPI(instanceURL, token, http.MethodDelete, "/composite/sobjects?"+q.Encode(), nil)
 		if err != nil {
-			return nil, err
+			// As in CollectionWrite: earlier chunks are already deleted, so the
+			// partial outcome has to survive the error or the operator cannot
+			// tell what is left to do.
+			return outcome, err
 		}
 		if err := CheckResponse(resp); err != nil {
-			return nil, err
+			return outcome, err
 		}
 		var results []CollectionResult
 		if err := json.Unmarshal(resp.Body, &results); err != nil {
-			return nil, fmt.Errorf("failed to parse Salesforce collections response: %w", err)
+			return outcome, fmt.Errorf("failed to parse Salesforce collections response: %w", err)
 		}
 		for j, r := range results {
 			recordIdx := i + j
@@ -1777,9 +1970,14 @@ func SOAPCall(instanceURL, token, innerXML string) ([]byte, error) {
 		return nil, fmt.Errorf("Salesforce SOAP request failed: %w", redactError(err, token))
 	}
 	defer func() { _ = resp.Body.Close() }()
-	respBody, err := io.ReadAll(io.LimitReader(resp.Body, maxResponseBody))
+	// Same overflow detection as executeURL — a truncated SOAP envelope would
+	// fail XML parsing with an equally opaque message.
+	respBody, err := io.ReadAll(io.LimitReader(resp.Body, maxResponseBody+1))
 	if err != nil {
 		return nil, fmt.Errorf("failed to read SOAP response: %w", err)
+	}
+	if len(respBody) > maxResponseBody {
+		return nil, fmt.Errorf("Salesforce sent back more data than this step can handle (over %d MB)", maxResponseBody>>20)
 	}
 
 	if resp.StatusCode < 200 || resp.StatusCode >= 300 {
@@ -2093,6 +2291,24 @@ func ListResult(records []map[string]interface{}, nextURL string, totalSize int,
 	}
 }
 
+// TruncationHint warns that a list was capped, when nothing else can.
+//
+// Salesforce gives NO signal that an explicitly-LIMITed query left rows behind:
+// "SELECT Id FROM Contact LIMIT 2" against 26 contacts answers totalSize:2,
+// done:true and no nextRecordsUrl (verified live). So the only honest tell is
+// that the page came back exactly full — and without it a truncated list reads
+// as the complete answer, which is the worst way for a list to be wrong.
+//
+// Deliberately not a COUNT() round trip: that would double the API cost of the
+// single most-used action in the node, and Flomation's explicit Loop node makes
+// an operator's call volume the thing most likely to break their org.
+func TruncationHint(returned, limit int, returnAll bool) string {
+	if returnAll || limit <= 0 || returned < limit {
+		return ""
+	}
+	return fmt.Sprintf(" — this is the first %d; raise the Limit or turn on Return All if you need the rest", limit)
+}
+
 // BulkResult shapes a Collections outcome into the standard bulk output.
 func BulkResult(outcome *CollectionOutcome, summary string) map[string]interface{} {
 	results := make([]interface{}, 0, len(outcome.Results))
@@ -2120,6 +2336,25 @@ func BulkResult(outcome *CollectionOutcome, summary string) map[string]interface
 		"success": true,
 		"error":   errText,
 	}
+}
+
+// PartialBulkResult shapes a bulk run that FAILED partway through.
+//
+// The chunks before the failure are already committed in Salesforce. Reporting
+// only the error would tell the operator the whole run failed and invite them
+// to re-run it, duplicating everything already written — the worst outcome
+// available. This reports exactly what landed, so they can resume from it.
+func PartialBulkResult(outcome *CollectionOutcome, err error, total int, object string) map[string]interface{} {
+	if outcome == nil || outcome.SuccessNo == 0 {
+		return ErrorResult(err.Error())
+	}
+	out := BulkResult(outcome, "")
+	out["success"] = false
+	out["error"] = err.Error()
+	out["tool_result"] = fmt.Sprintf(
+		"Stopped after writing %d of %d %s record(s) — those %d are already saved in Salesforce and will NOT be undone, so resume from record %d rather than re-running: %s",
+		outcome.SuccessNo, total, object, outcome.SuccessNo, outcome.SuccessNo, err.Error())
+	return out
 }
 
 // StringifyID renders an ID value as a clean string.

@@ -83,7 +83,7 @@ var Inputs = [...]core.Connection{
 var Outputs = [...]core.Connection{
 	{Name: "results", Type: core.ConnectionTypeObject, Label: "Leads"},
 	{Name: "count", Type: core.ConnectionTypeInteger, Label: "Count"},
-	{Name: "total_size", Type: core.ConnectionTypeInteger, Label: "Total Matching"},
+	{Name: "total_size", Type: core.ConnectionTypeInteger, Label: "Records Returned"},
 	{Name: "next_url", Type: core.ConnectionTypeString, Label: "Next Page URL"},
 	{Name: "result", Type: core.ConnectionTypeObject, Label: "Raw Response"},
 	{Name: "tool_result", Type: core.ConnectionTypeString, Label: "Result Summary"},
@@ -149,7 +149,10 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	case nextURL != "":
 		out["tool_result"] = fmt.Sprintf("Found %d lead(s) of %d matching — turn on Return All to fetch the rest", len(records), totalSize)
 	default:
-		out["tool_result"] = fmt.Sprintf("Found %d lead(s)", len(records))
+		// Salesforce reports totalSize as the PAGE size once a LIMIT is applied
+		// and sets done:true with no cursor, so a capped list is otherwise
+		// indistinguishable from a complete one.
+		out["tool_result"] = fmt.Sprintf("Found %d lead(s)%s", len(records), salesforce.TruncationHint(len(records), limit, returnAll))
 	}
 	return out, nil
 }

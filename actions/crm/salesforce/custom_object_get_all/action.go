@@ -59,7 +59,7 @@ var Inputs = [...]core.Connection{
 var Outputs = [...]core.Connection{
 	{Name: "results", Type: core.ConnectionTypeObject, Label: "Records"},
 	{Name: "count", Type: core.ConnectionTypeInteger, Label: "Count"},
-	{Name: "total_size", Type: core.ConnectionTypeInteger, Label: "Total Matching"},
+	{Name: "total_size", Type: core.ConnectionTypeInteger, Label: "Records Returned"},
 	{Name: "next_url", Type: core.ConnectionTypeString, Label: "Next Page URL"},
 	{Name: "result", Type: core.ConnectionTypeObject, Label: "Raw Response"},
 	{Name: "tool_result", Type: core.ConnectionTypeString, Label: "Result Summary"},
@@ -148,7 +148,7 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	case nextURL != "":
 		out["tool_result"] = fmt.Sprintf("Found %d %s record(s) of %d matching — turn on Return All to fetch the rest", len(records), object, totalSize)
 	default:
-		out["tool_result"] = fmt.Sprintf("Found %d %s record(s)", len(records), object)
+		out["tool_result"] = fmt.Sprintf("Found %d %s record(s)%s", len(records), object, salesforce.TruncationHint(len(records), limit, returnAll))
 	}
 	return out, nil
 }

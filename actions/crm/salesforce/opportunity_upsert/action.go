@@ -37,6 +37,7 @@ var Inputs = [...]core.Connection{
 	{Name: "pricebook_id", Type: core.ConnectionTypeString, Label: "Price Book", Placeholder: "01s5f000004AbCdAAK - needed before you can add products to the deal"},
 	{Name: "forecast_category", Type: core.ConnectionTypeString, Label: "Forecast Category", Placeholder: "Pipeline, Best Case, Commit, Closed - normally derived from the stage"},
 	{Name: "owner_id", Type: core.ConnectionTypeString, Label: "Owner", Placeholder: "0055f00000AbCdEAAV - the salesperson who owns the deal"},
+	{Name: "record_type_id", Type: core.ConnectionTypeString, Label: "Record Type", Placeholder: "0125f000000AbCdAAK - only if your org uses record types"},
 	{Name: "additional_fields", Type: core.ConnectionTypeObject, Label: "Additional Fields", Placeholder: "{\"My_Custom_Field__c\":\"value\"} - any other Salesforce field"},
 }
 
@@ -57,6 +58,16 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	extField := salesforce.OptionalString("external_id_field", inputs)
 	if extField == "" {
 		return nil, fmt.Errorf("the match-on field is required — pick a Salesforce field marked as an External ID, e.g. Order_Reference__c")
+	}
+	// The match field is an identifier: it goes into the URL path, where nothing
+	// can quote it. Rejecting it here is also what makes it a HARD error, the way
+	// record_upsert and account_upsert already treat it — a mistyped field name
+	// ("Order Reference__c", with the space) is a configuration mistake that
+	// never reaches Salesforce, and routing it to the soft error port instead
+	// reads as though Salesforce had refused a well-formed request, so any retry
+	// wired to that branch runs forever on something no retry can fix.
+	if _, err := salesforce.ValidateSOQLFieldName(extField); err != nil {
+		return nil, fmt.Errorf("Match On Field — %w", err)
 	}
 	extValue := salesforce.OptionalString("external_id_value", inputs)
 	if extValue == "" {
@@ -90,6 +101,12 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	salesforce.SetIfPresent(body, inputs, "Pricebook2Id", "pricebook_id")
 	salesforce.SetIfPresent(body, inputs, "ForecastCategoryName", "forecast_category")
 	salesforce.SetIfPresent(body, inputs, "OwnerId", "owner_id")
+	// Record Type is opt-in like every other field here — set it and the deal
+	// gets it, leave it blank and a matched deal keeps whatever type it has. It
+	// was simply missing: an operator who built Create Opportunity with a record
+	// type and then swapped in this action to make the step re-runnable got the
+	// profile's DEFAULT record type on every deal, with nothing said about it.
+	salesforce.SetIfPresent(body, inputs, "RecordTypeId", "record_type_id")
 
 	if err := salesforce.MergeAdditionalFields(body, inputs); err != nil {
 		return nil, err

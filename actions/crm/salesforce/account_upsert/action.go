@@ -23,7 +23,7 @@ var Inputs = [...]core.Connection{
 	{Name: "instance_url", Type: core.ConnectionTypeString, Label: "Salesforce Instance URL", Placeholder: "https://mycompany.my.salesforce.com", Required: true},
 	{Name: "external_id_field", Type: core.ConnectionTypeString, Label: "Match Against", Placeholder: "The External ID field to match on, e.g. External_Ref__c", Required: true},
 	{Name: "external_id_value", Type: core.ConnectionTypeString, Label: "Match Value", Placeholder: "The value to look for in that field, e.g. CUST-00142", Required: true},
-	{Name: "name", Type: core.ConnectionTypeString, Label: "Company Name", Placeholder: "Acme Manufacturing Ltd — Salesforce needs this when the account is created", Required: true},
+	{Name: "name", Type: core.ConnectionTypeString, Label: "Company Name", Placeholder: "Acme Manufacturing Ltd — only needed the first time, when the account has to be created"},
 	{Name: "account_number", Type: core.ConnectionTypeString, Label: "Account Number", Placeholder: "Your own reference for this customer, e.g. CUST-00142"},
 	{Name: "account_type", Type: core.ConnectionTypeString, Label: "Type", Placeholder: "Customer, Prospect, Partner — must match a value set up in your org"},
 	{Name: "account_source", Type: core.ConnectionTypeString, Label: "Account Source", Placeholder: "Web, Advertisement, Trade Show — must match your org's Account Source list"},
@@ -82,10 +82,18 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	if externalIDValue == "" {
 		return nil, fmt.Errorf("external_id_value is required — the value to match, e.g. the customer reference from your other system")
 	}
+	// Company Name is deliberately NOT required, and is sent only when it is
+	// filled in. Forcing it into every payload made a field-level sync — "keep
+	// the phone number current, matched on External_Ref__c" — rewrite the account
+	// name on every run: an admin tidying "ACME MANUFACTURING LTD" to "Acme
+	// Manufacturing Ltd" saw it reverted overnight, silently, with the run
+	// reporting success. Salesforce needs a Name only on the half of the upsert
+	// that INSERTS, and it asks for it itself (REQUIRED_FIELD_MISSING, translated
+	// on the way out) when the match finds nothing — so a partial refresh is
+	// expressible and the create case still fails loudly. This is the same
+	// reasoning contact_upsert applies to LastName and opportunity_upsert to
+	// Name/CloseDate/StageName.
 	name := salesforce.OptionalString("name", inputs)
-	if name == "" {
-		return nil, fmt.Errorf("name is required — Salesforce will not create an account without a company name, and this action may need to create one")
-	}
 	for _, lookup := range []struct{ input, label string }{
 		{"owner_id", "Owner"},
 		{"parent_id", "Parent Account"},
@@ -98,7 +106,8 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 		}
 	}
 
-	body := map[string]interface{}{"Name": name}
+	body := map[string]interface{}{}
+	salesforce.SetIfPresent(body, inputs, "Name", "name")
 	applyAccountFields(body, inputs)
 	if err := salesforce.MergeAdditionalFields(body, inputs); err != nil {
 		return nil, err
@@ -157,7 +166,18 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	if created {
 		verb = "Created"
 	}
-	return salesforce.RecordResult(id, record, fmt.Sprintf("%s account %q matched on %s = %q", verb, name, externalIDField, externalIDValue)), nil
+	// Name the account by whatever it is actually called: the box the operator
+	// filled in when they filled one in, otherwise whatever Salesforce sent back.
+	// Quoting a blank box would read as an account with no name.
+	label := name
+	if label == "" {
+		label, _ = record["Name"].(string)
+	}
+	summary := fmt.Sprintf("%s account matched on %s = %q", verb, externalIDField, externalIDValue)
+	if label != "" {
+		summary = fmt.Sprintf("%s account %q matched on %s = %q", verb, label, externalIDField, externalIDValue)
+	}
+	return salesforce.RecordResult(id, record, summary), nil
 }
 
 // applyAccountFields maps the optional inputs onto their Salesforce API names.
