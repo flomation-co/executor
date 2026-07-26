@@ -70,7 +70,7 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	// CloseDate is a Date field — a full ISO timestamp is rejected outright.
 	salesforce.SetDateIfPresent(body, inputs, "CloseDate", "close_date")
 	salesforce.SetIfPresent(body, inputs, "AccountId", "account_id")
-	amount, amountSet, err := numericInput("amount", "Amount", inputs)
+	amount, amountSet, err := salesforce.NumericInput("amount", "Amount", "12500.00", inputs)
 	if err != nil {
 		return nil, err
 	}
@@ -116,17 +116,3 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 // numericInput reads a decimal input, treating an unparseable value as the
 // configuration mistake it is rather than silently dropping the field.
 //
-// SetFloatIfPresent cannot tell "blank" from "12,500" — both come back as
-// unset, so a mistyped amount would leave the deal's value untouched while the
-// run reported success.
-func numericInput(name, label string, inputs []*core.Connection) (float64, bool, error) {
-	raw := salesforce.OptionalString(name, inputs)
-	if raw == "" {
-		return 0, false, nil
-	}
-	v, ok := salesforce.OptionalFloat(name, inputs)
-	if !ok {
-		return 0, false, fmt.Errorf("%s must be a plain number such as 12500.00 — got %q. Leave out currency symbols, thousands separators and spaces", label, raw)
-	}
-	return v, true, nil
-}
