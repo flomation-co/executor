@@ -3325,6 +3325,7 @@ import (
 	trigger_rds_event "flomation.app/automate/executor/actions/trigger/rds_event"
 	trigger_route53_health_check "flomation.app/automate/executor/actions/trigger/route53_health_check"
 	trigger_s3 "flomation.app/automate/executor/actions/trigger/s3"
+	trigger_salesforce_poll "flomation.app/automate/executor/actions/trigger/salesforce_poll"
 	trigger_schedule "flomation.app/automate/executor/actions/trigger/schedule"
 	trigger_sendgrid_webhook "flomation.app/automate/executor/actions/trigger/sendgrid_webhook"
 	trigger_shopify_webhook "flomation.app/automate/executor/actions/trigger/shopify_webhook"
@@ -6821,6 +6822,7 @@ var Actions = map[string]core.Action{
 	"trigger/rds_event":                                                               trigger_rds_event.Execute,
 	"trigger/route53_health_check":                                                    trigger_route53_health_check.Execute,
 	"trigger/s3":                                                                      trigger_s3.Execute,
+	"trigger/salesforce_poll":                                                         trigger_salesforce_poll.Execute,
 	"trigger/schedule":                                                                trigger_schedule.Execute,
 	"trigger/sendgrid_webhook":                                                        trigger_sendgrid_webhook.Execute,
 	"trigger/shopify_webhook":                                                         trigger_shopify_webhook.Execute,
