@@ -58,7 +58,17 @@ const (
 
 var Inputs = [...]core.Connection{
 	{Name: "access_token", Type: core.ConnectionTypeSecret, Label: "Salesforce Connection", Placeholder: "Connect Salesforce, or paste an access token", Required: true},
-	{Name: "instance_url", Type: core.ConnectionTypeString, Label: "Salesforce Instance URL", Placeholder: "Leave blank — taken from your connection", FromCredentialMeta: "instance_url"},
+	// NO FromCredentialMeta HERE, and it must not be added back. A trigger never
+	// runs through the executor's node-build, so autofillFromCredential never sees
+	// it: Launch polls the trigger row directly. A blank value therefore reaches
+	// normaliseInstanceURL(""), which errors, and checkTrigger logs a Warn and
+	// returns — the flow saved 201, the trigger row exists, the editor shows it
+	// enabled, and it silently never fires. Writing ${credentials.X.instance_url}
+	// by hand does not help either: the api's resolveTriggerVariables passes the
+	// whole dotted name to GetCredentialByName, so it resolves to nothing.
+	//
+	// Required until Launch can resolve credential metadata itself.
+	{Name: "instance_url", Type: core.ConnectionTypeString, Label: "Salesforce Instance URL", Placeholder: "https://mycompany.my.salesforce.com", Required: true},
 	{Name: "object", Type: core.ConnectionTypeString, Label: "Object To Watch", Placeholder: "Lead, Opportunity, or your own object", Required: true},
 	{Name: "event", Type: core.ConnectionTypeString, Label: "Fire When", Required: true, Options: []core.ConnectionOption{
 		// The value strings are the cursor FIELD, so Launch needs no mapping table

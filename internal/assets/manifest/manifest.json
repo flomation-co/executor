@@ -542008,7 +542008,7 @@
     ]
   },
   "trigger/salesforce_poll": {
-    "hash": "66e3092753aa2d5b986439296a3a1daba0675655ec64366640479a002e5a9afc",
+    "hash": "c7a0a127f643d6af8f9cd54d03ba8fe2d413f08359b38d1e81c936d12f2bafcf",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Record Created or Updated",
@@ -542036,8 +542036,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "Leave blank — taken from your connection",
-        "from_credential_meta": "instance_url"
+        "placeholder": "https://mycompany.my.salesforce.com",
+        "required": true
       },
       {
         "name": "object",
