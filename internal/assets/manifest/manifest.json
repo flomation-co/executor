@@ -184990,7 +184990,7 @@
     ]
   },
   "crm/salesforce/asset_create": {
-    "hash": "8ebdb88cee7a28ce9427167609dd35e474ad6f1e31cb46394cfadc3e252506ef",
+    "hash": "00146a85698190de853b502a73da62bfc7f8ea19dd412d6065ff4e517f163c9b",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Create Asset",
@@ -185675,7 +185675,7 @@
     ]
   },
   "crm/salesforce/asset_update": {
-    "hash": "37bceb1c327ebb0e608f185b84ea4fb8b92697b739a626e657002ad241b43360",
+    "hash": "1ab067821a5e30c4d18de6d4ebb530a5aa9a712e7888825e8d6bc8b0c74b50e2",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Update Asset",
@@ -198546,7 +198546,7 @@
     ]
   },
   "crm/salesforce/opportunity_create": {
-    "hash": "250a2b4cd25a888e5c864eaff5becacad1345e4468cf633395880a0844ec57e7",
+    "hash": "fd31a4659dec1550465a082aaa00d4b55b94f86d14eee90a7834c07c232de750",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Create Opportunity",
@@ -199197,7 +199197,7 @@
     ]
   },
   "crm/salesforce/opportunity_line_item_create": {
-    "hash": "b926126580431467338b8a2b7c42423b6ecbe688a06c5e96b005c4c81c163531",
+    "hash": "211e3df668e3bbbc3f0d47aa3e35ca5364f6de4e4ac7b9ea415edeafda2888d6",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Add Product to Opportunity",
@@ -199561,7 +199561,7 @@
     ]
   },
   "crm/salesforce/opportunity_line_item_update": {
-    "hash": "be3220b5833a6908a7d073624095ef08a8ec83f44e967f062c97a4df5deed308",
+    "hash": "05e67590401858fb67d2916988eaad34ad9e58f08f1ac27138627c7393a6166c",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Update Opportunity Product",
@@ -199694,7 +199694,7 @@
     ]
   },
   "crm/salesforce/opportunity_update": {
-    "hash": "418620b217278b829c29f2d0ec2af531de041b94f2b09df613736839400e78ee",
+    "hash": "9fab26ef78be8b35f0cfcb59bb65fa45cd41f10dbe9a56118fe5434ec3ebab57",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Update Opportunity",
@@ -199890,7 +199890,7 @@
     ]
   },
   "crm/salesforce/opportunity_upsert": {
-    "hash": "8993e3c8ae81cd836ba3c96ca710a8d5c0e99526a8c427f0cfbe653c9431254a",
+    "hash": "3e30d788b13e0da480336e559ec4706f8ed6319930c1890f4efe951b0a49119b",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Create or Update Opportunity",
@@ -200832,7 +200832,7 @@
     ]
   },
   "crm/salesforce/order_item_create": {
-    "hash": "a17036118cede6a284167de531b0d381551d2f12ad12928f240c787208d0a502",
+    "hash": "6c67571a19c957141372bcf37a111a452690a71346f5684a03b8b31ea7b62fce",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Add Product to Order",
@@ -201464,7 +201464,7 @@
     ]
   },
   "crm/salesforce/price_book_entry_create": {
-    "hash": "5de7ecb0c2a7ed89e9348d67c3be0893c6518b280f782c3563ee5ac40d2c4cf1",
+    "hash": "156f5182125fab697fc6fa80cb2546a620079c127c849698d992686ae998a60e",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Add Product to Price Book",
@@ -201815,7 +201815,7 @@
     ]
   },
   "crm/salesforce/price_book_entry_update": {
-    "hash": "b1b06b1879ad2739a0b8b4da5d22cdeb148f8cd66a268c801afe8ad1eedd1d35",
+    "hash": "0e6eedd8b2ea84afcd875d0a693967f0c4fdc0f3780c2e609798bd1c392de464",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Change Product Price",
@@ -203380,7 +203380,7 @@
     ]
   },
   "crm/salesforce/quote_create": {
-    "hash": "90baa93fdfb4997e3d820a4095ca4d2d0f969b87c0e3cd7af2b878336ed38d43",
+    "hash": "a054986275dc231de2c268443dda648486e75616ff0321cd6a33904a1175fb94",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Create Quote",
@@ -204064,7 +204064,7 @@
     ]
   },
   "crm/salesforce/quote_line_item_create": {
-    "hash": "9995a12efb52f2b8d9fe944f72f0a2a8d1d1c1918b7411a5554274f8d08588dd",
+    "hash": "2853e5dc0403ae59a6c26968b3e1455e2fc3e302df1cd0781c299e235af2d561",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Add Product to Quote",
@@ -204449,7 +204449,7 @@
     ]
   },
   "crm/salesforce/quote_update": {
-    "hash": "29d16033a38f146227d5dbc598366198c4afd2f34926600efa2f0d7a714f5696",
+    "hash": "cb60aabad76feb690ca78895b9db97d3df3aadfb87b48a69f03e038d6785e5ef",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Update Quote",

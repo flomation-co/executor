@@ -8,6 +8,8 @@ import (
 	"net/http/httptest"
 	"strings"
 	"testing"
+
+	core "flomation.app/automate/executor"
 )
 
 // ---------------------------------------------------------------------------
@@ -1497,5 +1499,89 @@ func TestTruncationHintFiresOnTheDefaultLimit(t *testing.T) {
 	// Return All still wins over everything.
 	if got := TruncationHint(DefaultPageLimit, 0, true); got != "" {
 		t.Errorf("Return All fetched everything — no hint: %q", got)
+	}
+}
+
+// NumericInput exists because OptionalFloat answers (0, false) for BOTH a blank
+// input and an unparseable one, so on its own "£50,000" is indistinguishable
+// from a field nobody filled in — and since these fields are optional, the value
+// is dropped and the run reports success on a deal with no amount. This was
+// duplicated into 13 action packages; these tests cover the one shared copy.
+func TestNumericInputSeparatesBlankFromUnusable(t *testing.T) {
+	num := func(v interface{}) []*core.Connection {
+		return []*core.Connection{{Name: "amount", Type: core.ConnectionTypeString, Value: v}}
+	}
+
+	t.Run("blank is not an error and is not set", func(t *testing.T) {
+		v, set, err := NumericInput("amount", "Amount", "12500.00", num(""))
+		if err != nil || set || v != 0 {
+			t.Fatalf("a blank optional field must be silently absent, got (%v, %v, %v)", v, set, err)
+		}
+	})
+
+	t.Run("absent input behaves as blank", func(t *testing.T) {
+		v, set, err := NumericInput("amount", "Amount", "12500.00", nil)
+		if err != nil || set || v != 0 {
+			t.Fatalf("an input that is not present at all must be absent, got (%v, %v, %v)", v, set, err)
+		}
+	})
+
+	t.Run("a plain number is used", func(t *testing.T) {
+		v, set, err := NumericInput("amount", "Amount", "12500.00", num("1250.50"))
+		if err != nil || !set || v != 1250.50 {
+			t.Fatalf("expected 1250.50 set, got (%v, %v, %v)", v, set, err)
+		}
+	})
+
+	// The case that motivates the whole helper.
+	t.Run("a typed-but-unusable value is refused, not dropped", func(t *testing.T) {
+		for _, bad := range []string{"£50,000", "50,000", "50 000", "1.2.3", "abc", "$1,000.00"} {
+			v, set, err := NumericInput("amount", "Amount", "12500.00", num(bad))
+			if err == nil {
+				t.Errorf("%q must be refused rather than silently discarded (got %v, set=%v)", bad, v, set)
+				continue
+			}
+			if set || v != 0 {
+				t.Errorf("%q must not also report a value, got (%v, %v)", bad, v, set)
+			}
+			for _, want := range []string{"Amount", "12500.00", bad} {
+				if !strings.Contains(err.Error(), want) {
+					t.Errorf("the refusal for %q must name the field, the example and what was typed (%q missing): %v", bad, want, err)
+				}
+			}
+		}
+	})
+
+	// Whitespace is NOT in the list above: OptionalString trims, so a stray space
+	// or a variable that resolved to nothing arrives as "" and reads as blank.
+	// Asserted explicitly because it is a subtle interaction between the two
+	// helpers, and someone reading NumericInput alone would expect a refusal.
+	t.Run("whitespace only reads as blank, not as unusable", func(t *testing.T) {
+		v, set, err := NumericInput("amount", "Amount", "12500.00", num("   "))
+		if err != nil || set || v != 0 {
+			t.Fatalf("OptionalString trims, so whitespace must read as blank, got (%v, %v, %v)", v, set, err)
+		}
+	})
+
+	// The example is per-field because a line price, a quantity and a deal amount
+	// are not plausible in the same range — a quantity hinted as "50000.00" reads
+	// as a mistake in the message itself.
+	t.Run("the example is the caller's", func(t *testing.T) {
+		_, _, err := NumericInput("amount", "Quantity", "2", num("two"))
+		if err == nil || !strings.Contains(err.Error(), "such as 2 ") {
+			t.Fatalf("expected the caller's example quoted back, got %v", err)
+		}
+	})
+}
+
+// Money typed into the editor arrives as a string, but an integer-typed
+// connection must still work — OptionalFloat's Number() fallback is what keeps a
+// quantity of 3 usable. ConnectionTypeInteger is the integer-typed connection
+// (there is no ConnectionTypeNumber).
+func TestNumericInputAcceptsANumberTypedConnection(t *testing.T) {
+	inputs := []*core.Connection{{Name: "quantity", Type: core.ConnectionTypeInteger, Value: 3}}
+	v, set, err := NumericInput("quantity", "Quantity", "2", inputs)
+	if err != nil || !set || v != 3 {
+		t.Fatalf("a number-typed connection must be read as 3, got (%v, %v, %v)", v, set, err)
 	}
 }

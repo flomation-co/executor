@@ -93,7 +93,7 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	// filled in": Salesforce refuses a zero quantity on a product line, so
 	// rewriting it to 1 put a line the source data never asked for on the deal and
 	// reported "Added 1 x product line" over the top of it.
-	quantity, quantitySet, err := numericInput("quantity", "Quantity", inputs)
+	quantity, quantitySet, err := salesforce.NumericInput("quantity", "Quantity", "499.00", inputs)
 	if err != nil {
 		return nil, err
 	}
@@ -107,11 +107,11 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 
 	// UnitPrice and TotalPrice are mutually exclusive in Salesforce — sending
 	// both is rejected, and which one wins is not something to guess at.
-	unitPrice, unitSet, err := numericInput("unit_price", "Price Each", inputs)
+	unitPrice, unitSet, err := salesforce.NumericInput("unit_price", "Price Each", "499.00", inputs)
 	if err != nil {
 		return nil, err
 	}
-	totalPrice, totalSet, err := numericInput("total_price", "Line Total", inputs)
+	totalPrice, totalSet, err := salesforce.NumericInput("total_price", "Line Total", "499.00", inputs)
 	if err != nil {
 		return nil, err
 	}
@@ -135,7 +135,7 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 		}
 	}
 
-	discount, discountSet, err := numericInput("discount", "Discount", inputs)
+	discount, discountSet, err := salesforce.NumericInput("discount", "Discount", "499.00", inputs)
 	if err != nil {
 		return nil, err
 	}
@@ -161,19 +161,6 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 // numericInput reads a decimal input, treating an unparseable value as the
 // configuration mistake it is rather than silently dropping the field.
 //
-// OptionalFloat cannot tell "blank" from "£499" — both come back as unset, and
-// a dropped price on a product line is a deal that quietly loses its value.
-func numericInput(name, label string, inputs []*core.Connection) (float64, bool, error) {
-	raw := salesforce.OptionalString(name, inputs)
-	if raw == "" {
-		return 0, false, nil
-	}
-	v, ok := salesforce.OptionalFloat(name, inputs)
-	if !ok {
-		return 0, false, fmt.Errorf("%s must be a plain number such as 499.00 — got %q. Leave out currency symbols, thousands separators and spaces", label, raw)
-	}
-	return v, true, nil
-}
 
 // resolveEntryForProduct turns a product into the price book entry that prices
 // it for this deal, and reads that entry's list price on the way past so the

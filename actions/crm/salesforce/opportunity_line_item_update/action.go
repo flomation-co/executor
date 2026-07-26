@@ -52,7 +52,7 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	}
 
 	body := map[string]interface{}{}
-	quantity, quantitySet, err := numericInput("quantity", "Quantity", inputs)
+	quantity, quantitySet, err := salesforce.NumericInput("quantity", "Quantity", "499.00", inputs)
 	if err != nil {
 		return nil, err
 	}
@@ -63,11 +63,11 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	// UnitPrice and TotalPrice are two views of the same number and Salesforce
 	// rejects a payload that sets both — it derives whichever one you did not
 	// send from the quantity.
-	unitPrice, unitSet, err := numericInput("unit_price", "Price Each", inputs)
+	unitPrice, unitSet, err := salesforce.NumericInput("unit_price", "Price Each", "499.00", inputs)
 	if err != nil {
 		return nil, err
 	}
-	totalPrice, totalSet, err := numericInput("total_price", "Line Total", inputs)
+	totalPrice, totalSet, err := salesforce.NumericInput("total_price", "Line Total", "499.00", inputs)
 	if err != nil {
 		return nil, err
 	}
@@ -81,7 +81,7 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 		body["TotalPrice"] = totalPrice
 	}
 
-	discount, discountSet, err := numericInput("discount", "Discount", inputs)
+	discount, discountSet, err := salesforce.NumericInput("discount", "Discount", "499.00", inputs)
 	if err != nil {
 		return nil, err
 	}
@@ -119,16 +119,3 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 // numericInput reads a decimal input, treating an unparseable value as the
 // configuration mistake it is rather than silently dropping the field.
 //
-// OptionalFloat cannot tell "blank" from "£499" — both come back as unset, so a
-// mistyped price would leave the line untouched while the run reported success.
-func numericInput(name, label string, inputs []*core.Connection) (float64, bool, error) {
-	raw := salesforce.OptionalString(name, inputs)
-	if raw == "" {
-		return 0, false, nil
-	}
-	v, ok := salesforce.OptionalFloat(name, inputs)
-	if !ok {
-		return 0, false, fmt.Errorf("%s must be a plain number such as 499.00 — got %q. Leave out currency symbols, thousands separators and spaces", label, raw)
-	}
-	return v, true, nil
-}

@@ -71,7 +71,7 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	// version of this comment claimed the opposite and told the operator any
 	// sensible number would do, which is the worst kind of wrong: it reads as
 	// reassurance and produces a failure.
-	unitPrice, unitSet, err := numericInput("unit_price", "Price Each", inputs)
+	unitPrice, unitSet, err := salesforce.NumericInput("unit_price", "Price Each", "25000.00", inputs)
 	if err != nil {
 		return nil, err
 	}
@@ -231,17 +231,3 @@ func boolInput(name string, inputs []*core.Connection) (value, set bool) {
 // numericInput reads a decimal input, treating an unparseable value as the
 // configuration mistake it is rather than silently dropping the field.
 //
-// OptionalFloat cannot tell "blank" from "£25,000" — both come back as unset, and
-// a dropped price here is not a missing field but a whole product that cannot be
-// sold, discovered later by whoever tries to quote it.
-func numericInput(name, label string, inputs []*core.Connection) (float64, bool, error) {
-	raw := salesforce.OptionalString(name, inputs)
-	if raw == "" {
-		return 0, false, nil
-	}
-	v, ok := salesforce.OptionalFloat(name, inputs)
-	if !ok {
-		return 0, false, fmt.Errorf("%s must be a plain number such as 25000.00 — got %q. Leave out currency symbols, thousands separators and spaces", label, raw)
-	}
-	return v, true, nil
-}

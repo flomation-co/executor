@@ -155,7 +155,7 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	// source data never asked for on the order a warehouse picks from, behind a
 	// green success. A shop or ERP feed that maps a removed line to 0 has to be
 	// told, not quietly corrected.
-	quantity, quantitySet, err := numericInput("quantity", "Quantity", inputs)
+	quantity, quantitySet, err := salesforce.NumericInput("quantity", "Quantity", "499.00", inputs)
 	if err != nil {
 		return nil, err
 	}
@@ -171,7 +171,7 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	// nillable — verified live: "Order Products must have a Unit Price." So the
 	// fallback to the price book price is not a convenience, it is what stops the
 	// action from demanding a figure the org already holds.
-	unitPrice, unitSet, err := numericInput("unit_price", "Price Each", inputs)
+	unitPrice, unitSet, err := salesforce.NumericInput("unit_price", "Price Each", "499.00", inputs)
 	if err != nil {
 		return nil, err
 	}
@@ -397,19 +397,6 @@ func entryForProduct(instanceURL, token, productID, bookID string) (entryID, ent
 // numericInput reads a decimal input, treating an unparseable value as the
 // configuration mistake it is rather than silently dropping the field.
 //
-// OptionalFloat cannot tell "blank" from "£499" — both come back as unset, and a
-// dropped price on an order line is an order shipped for the wrong money.
-func numericInput(name, label string, inputs []*core.Connection) (float64, bool, error) {
-	raw := salesforce.OptionalString(name, inputs)
-	if raw == "" {
-		return 0, false, nil
-	}
-	v, ok := salesforce.OptionalFloat(name, inputs)
-	if !ok {
-		return 0, false, fmt.Errorf("%s must be a plain number such as 499.00 — got %q. Leave out currency symbols, thousands separators and spaces", label, raw)
-	}
-	return v, true, nil
-}
 
 // describeCandidates names the competing price books and their prices, so the
 // operator can see WHY the choice was refused and what the options were. A raw

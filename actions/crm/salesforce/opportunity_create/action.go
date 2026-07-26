@@ -81,7 +81,7 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	// omitted from the payload rather than sent blank — Salesforce treats an
 	// explicit empty value as "clear this field".
 	salesforce.SetIfPresent(body, inputs, "AccountId", "account_id")
-	amount, amountSet, err := numericInput("amount", "Amount", inputs)
+	amount, amountSet, err := salesforce.NumericInput("amount", "Amount", "12500.00", inputs)
 	if err != nil {
 		return nil, err
 	}
@@ -116,17 +116,3 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 // numericInput reads a decimal input, treating an unparseable value as the
 // configuration mistake it is rather than silently dropping the field.
 //
-// SetFloatIfPresent cannot tell "blank" from "12,500" — both come back as
-// unset, and the second one would create a deal worth nothing at all. That is
-// precisely the kind of failure a front-of-house operator never spots.
-func numericInput(name, label string, inputs []*core.Connection) (float64, bool, error) {
-	raw := salesforce.OptionalString(name, inputs)
-	if raw == "" {
-		return 0, false, nil
-	}
-	v, ok := salesforce.OptionalFloat(name, inputs)
-	if !ok {
-		return 0, false, fmt.Errorf("%s must be a plain number such as 12500.00 — got %q. Leave out currency symbols, thousands separators and spaces", label, raw)
-	}
-	return v, true, nil
-}

@@ -2084,6 +2084,38 @@ func OptionalFloat(name string, inputs []*core.Connection) (float64, bool) {
 	return 0, false
 }
 
+// NumericInput reads an optional money or quantity input and distinguishes
+// "left blank" from "typed something that is not a number".
+//
+// OptionalFloat cannot tell those apart — it answers (0, false) for both — so on
+// its own an Amount of "£50,000" is indistinguishable from an Amount nobody
+// filled in. The field is optional, so the value is dropped and Salesforce is
+// told nothing about it: the run then reports success on a deal with no amount,
+// and the operator's typo is never mentioned. Reading the raw string first makes
+// the difference visible, so a value that was TYPED but unusable can be refused
+// by name instead of silently discarded.
+//
+// example is the number quoted back in the error ("such as 499.00"), so the
+// message suits the field — a line price, a quantity and a deal amount are not
+// plausible in the same range.
+//
+// Returns (value, true, nil) when usable, (0, false, nil) when genuinely blank,
+// and (0, false, err) when the operator typed something unusable.
+func NumericInput(name, label, example string, inputs []*core.Connection) (float64, bool, error) {
+	// OptionalString trims, so a whitespace-only value — a stray space, or a
+	// variable that resolved to nothing — arrives here as "" and is treated as
+	// blank rather than refused.
+	raw := OptionalString(name, inputs)
+	if raw == "" {
+		return 0, false, nil
+	}
+	v, ok := OptionalFloat(name, inputs)
+	if !ok {
+		return 0, false, fmt.Errorf("%s must be a plain number such as %s — got %q. Leave out currency symbols, thousands separators and spaces", label, example, raw)
+	}
+	return v, true, nil
+}
+
 // OptionalBool extracts a boolean input, defaulting to false when unset.
 func OptionalBool(name string, inputs []*core.Connection) bool {
 	conn := core.FindConnection(name, inputs)

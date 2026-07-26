@@ -126,14 +126,14 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	salesforce.SetIfPresent(body, inputs, "Phone", "phone")
 	salesforce.SetIfPresent(body, inputs, "Description", "description")
 
-	tax, taxSet, err := numericInput("tax", "Tax", inputs)
+	tax, taxSet, err := salesforce.NumericInput("tax", "Tax", "250.50", inputs)
 	if err != nil {
 		return nil, err
 	}
 	if taxSet {
 		body["Tax"] = tax
 	}
-	carriage, carriageSet, err := numericInput("shipping_handling", "Shipping & Handling", inputs)
+	carriage, carriageSet, err := salesforce.NumericInput("shipping_handling", "Shipping & Handling", "250.50", inputs)
 	if err != nil {
 		return nil, err
 	}
@@ -208,17 +208,3 @@ func resolveStatus(raw string) (string, error) {
 // numericInput reads a decimal input, treating an unparseable value as the
 // configuration mistake it is rather than silently dropping the field.
 //
-// OptionalFloat cannot tell "blank" from "£250.50" — both come back as unset, so
-// a mistyped tax figure would leave the quote's total untouched while the run
-// reported success.
-func numericInput(name, label string, inputs []*core.Connection) (float64, bool, error) {
-	raw := salesforce.OptionalString(name, inputs)
-	if raw == "" {
-		return 0, false, nil
-	}
-	v, ok := salesforce.OptionalFloat(name, inputs)
-	if !ok {
-		return 0, false, fmt.Errorf("%s must be a plain number such as 250.50 — got %q. Leave out currency symbols, thousands separators and spaces", label, raw)
-	}
-	return v, true, nil
-}

@@ -108,14 +108,14 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	salesforce.SetDateIfPresent(body, inputs, "PurchaseDate", "purchase_date")
 	salesforce.SetDateIfPresent(body, inputs, "InstallDate", "install_date")
 	salesforce.SetDateIfPresent(body, inputs, "UsageEndDate", "usage_end_date")
-	price, priceSet, err := numericInput("price", "Price", inputs)
+	price, priceSet, err := salesforce.NumericInput("price", "Price", "50000.00", inputs)
 	if err != nil {
 		return nil, err
 	}
 	if priceSet {
 		body["Price"] = price
 	}
-	quantity, quantitySet, err := numericInput("quantity", "Quantity", inputs)
+	quantity, quantitySet, err := salesforce.NumericInput("quantity", "Quantity", "50000.00", inputs)
 	if err != nil {
 		return nil, err
 	}
@@ -162,16 +162,3 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 // numericInput reads a decimal input, treating an unparseable value as the
 // configuration mistake it is rather than silently dropping the field.
 //
-// OptionalFloat cannot tell "blank" from "£50,000" — both come back as unset, and
-// an asset created with no price at all reads as a giveaway rather than a mistake.
-func numericInput(name, label string, inputs []*core.Connection) (float64, bool, error) {
-	raw := salesforce.OptionalString(name, inputs)
-	if raw == "" {
-		return 0, false, nil
-	}
-	v, ok := salesforce.OptionalFloat(name, inputs)
-	if !ok {
-		return 0, false, fmt.Errorf("%s must be a plain number such as 50000.00 — got %q. Leave out currency symbols, thousands separators and spaces", label, raw)
-	}
-	return v, true, nil
-}

@@ -55,7 +55,7 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	// update that posted its blank inputs would set the price to nothing, which on
 	// a live price book means a product that quotes at zero.
 	body := map[string]interface{}{}
-	unitPrice, unitSet, err := numericInput("unit_price", "Price Each", inputs)
+	unitPrice, unitSet, err := salesforce.NumericInput("unit_price", "Price Each", "27500.00", inputs)
 	if err != nil {
 		return nil, err
 	}
@@ -158,17 +158,3 @@ func standardPriceRequested(body map[string]interface{}) bool {
 // numericInput reads a decimal input, treating an unparseable value as the
 // configuration mistake it is rather than silently dropping the field.
 //
-// OptionalFloat cannot tell "blank" from "£27,500" — both come back as unset, so
-// a mistyped price would leave the old price in place while the run reported
-// success, and the next quote would go out at last year's figure.
-func numericInput(name, label string, inputs []*core.Connection) (float64, bool, error) {
-	raw := salesforce.OptionalString(name, inputs)
-	if raw == "" {
-		return 0, false, nil
-	}
-	v, ok := salesforce.OptionalFloat(name, inputs)
-	if !ok {
-		return 0, false, fmt.Errorf("%s must be a plain number such as 27500.00 — got %q. Leave out currency symbols, thousands separators and spaces", label, raw)
-	}
-	return v, true, nil
-}
