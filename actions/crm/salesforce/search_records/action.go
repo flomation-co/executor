@@ -25,7 +25,7 @@ const (
 
 var Inputs = [...]core.Connection{
 	{Name: "access_token", Type: core.ConnectionTypeSecret, Label: "Salesforce Connection", Placeholder: "Connect Salesforce, or paste an access token", Required: true},
-	{Name: "instance_url", Type: core.ConnectionTypeString, Label: "Salesforce Instance URL", Placeholder: "https://mycompany.my.salesforce.com", Required: true},
+	{Name: "instance_url", Type: core.ConnectionTypeString, Label: "Salesforce Instance URL", Placeholder: "Leave blank when you have connected Salesforce - only needed if you pasted a token yourself", FromCredentialMeta: "instance_url"},
 	{Name: "search_term", Type: core.ConnectionTypeString, Label: "Search For", Placeholder: "acme, jane@example.com, 07700 900123 — at least 2 characters", Required: true},
 	{Name: "objects", Type: core.ConnectionTypeString, Label: "Search In These Records", Placeholder: "Account, Contact, Lead — leave blank to search everything"},
 	{Name: "fields", Type: core.ConnectionTypeString, Label: "Details to Return", Placeholder: "Id, Name, Email — leave blank for the usual details"},

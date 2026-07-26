@@ -30,7 +30,7 @@ const defaultFields = "Id,LineNumber,QuoteId,Product2Id,Product2.Name,PricebookE
 
 var Inputs = [...]core.Connection{
 	{Name: "access_token", Type: core.ConnectionTypeSecret, Label: "Salesforce Connection", Placeholder: "Connect Salesforce, or paste an access token", Required: true},
-	{Name: "instance_url", Type: core.ConnectionTypeString, Label: "Salesforce Instance URL", Placeholder: "https://mycompany.my.salesforce.com", Required: true},
+	{Name: "instance_url", Type: core.ConnectionTypeString, Label: "Salesforce Instance URL", Placeholder: "Leave blank when you have connected Salesforce - only needed if you pasted a token yourself", FromCredentialMeta: "instance_url"},
 	{Name: "quote_id", Type: core.ConnectionTypeString, Label: "Quote ID", Placeholder: "0Q05f000000AbCdAAK - the quote whose products you want", Required: true},
 	{Name: "fields", Type: core.ConnectionTypeString, Label: "Fields", Placeholder: "Product2.Name,Quantity,UnitPrice,TotalPrice - leave blank for the usual quote-line fields"},
 	{Name: "order_by", Type: core.ConnectionTypeString, Label: "Sort By", Placeholder: "SortOrder ASC - or TotalPrice DESC"},

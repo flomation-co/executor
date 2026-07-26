@@ -182613,7 +182613,7 @@
     ]
   },
   "crm/salesforce/account_add_note": {
-    "hash": "ea17b651dc774fbdf5a642344064bb971683684d38a7dc819e70b91277bc35b5",
+    "hash": "f29a2af234de3cc7a60e08383f88a9735e2e2d84b0e682ad385647278bb8e0a0",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Add Note to Account (Classic)",
@@ -182646,8 +182646,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank when you have connected Salesforce - only needed if you pasted a token yourself",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "account_id",
@@ -182733,7 +182733,7 @@
     ]
   },
   "crm/salesforce/account_contact_relation_create": {
-    "hash": "42032339d0917dbc39ca3f57f66e218b55fbadce7b18136fcbd3212a3c5ea916",
+    "hash": "c7c77d4729167051e5a118e907cd7a1fdddba57d6a27eacaa1008b8d640b8a41",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Relate Contact to Account",
@@ -182766,8 +182766,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank when you have connected Salesforce - only needed if you pasted a token yourself",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "account_id",
@@ -182860,7 +182860,7 @@
     ]
   },
   "crm/salesforce/account_contact_relation_delete": {
-    "hash": "71b119877a6eeebe541a692266051dd0c947804d36ffd9981433ad91f471badf",
+    "hash": "dd86f9945a3511bfe29e48b00e10504a56d941348121ebcb6e4c3f3241dbfb0e",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Remove Contact from Account",
@@ -182893,8 +182893,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank when you have connected Salesforce - only needed if you pasted a token yourself",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "relation_id",
@@ -182944,7 +182944,7 @@
     ]
   },
   "crm/salesforce/account_contact_relation_get_all": {
-    "hash": "04ac55c9e7b06eb415d6cfdfea6d79436e9cf1e239baf5c2d9cfa0b13d15e999",
+    "hash": "7aba3b90478aed0885ce8526e77b507b61c1e165a187e4d5bf205e829268d481",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Get Many Account-Contact Relationships",
@@ -182977,8 +182977,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank when you have connected Salesforce - only needed if you pasted a token yourself",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "account_id",
@@ -183097,7 +183097,7 @@
     ]
   },
   "crm/salesforce/account_create": {
-    "hash": "e86e4545e2abc3f16c763ef647e1dd3fff371b06cd863515da93c1feb22b5a08",
+    "hash": "301e5092bbf85925c4a2b1c52e1e2f88971997d57ba5032301993f262e1ee662",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Create Account",
@@ -183130,8 +183130,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank when you have connected Salesforce - only needed if you pasted a token yourself",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "name",
@@ -183363,7 +183363,7 @@
     ]
   },
   "crm/salesforce/account_delete": {
-    "hash": "f0d2282a84e405a733b59faec990a1fc5f73c38cbcaea0e0c25e2638c6c7be9e",
+    "hash": "ae651defd25434f8dbbee025d944c3df7e9f0913256b81c0330da26c0b81cc05",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Delete Account",
@@ -183396,8 +183396,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank when you have connected Salesforce - only needed if you pasted a token yourself",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "account_id",
@@ -183447,7 +183447,7 @@
     ]
   },
   "crm/salesforce/account_describe": {
-    "hash": "2c3455140d23d8280e5899d040b7e03a8d2c12b0972617f378e77497ac4ea5f0",
+    "hash": "04eb7a3da356c03d215f59f6d48970e79aabc51fe0af1c58229d01a40414c10b",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Get Account Setup Info",
@@ -183480,8 +183480,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank when you have connected Salesforce - only needed if you pasted a token yourself",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "detail_level",
@@ -183540,7 +183540,7 @@
     ]
   },
   "crm/salesforce/account_get": {
-    "hash": "7f2ecd2f4fb27e6d648f383ac3d164c51c544409c5905e27abca1d4796673535",
+    "hash": "a3ea31eda0474c2849d8eaee3bd59756f0cc64a8fa059f41ffc3c40c04a7ce43",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Get Account",
@@ -183573,8 +183573,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank when you have connected Salesforce - only needed if you pasted a token yourself",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "account_id",
@@ -183631,7 +183631,7 @@
     ]
   },
   "crm/salesforce/account_get_all": {
-    "hash": "b968e6e04bfc3aeef59268299a1d137908af633fab4f1fc563681995c6c90c51",
+    "hash": "9d86d2625274a5e69b30175b20d25aa106e59f024a43d669ed99ee289c2adae5",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Get Many Accounts",
@@ -183664,8 +183664,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank when you have connected Salesforce - only needed if you pasted a token yourself",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "return_all",
@@ -183840,7 +183840,7 @@
     ]
   },
   "crm/salesforce/account_update": {
-    "hash": "96de7b5b896ed1445a288010968ff0e6634f198d33f92ed06dfa8b6ca516b52c",
+    "hash": "0095af645803ce06102d0f197d9ad94d3af8c4efcc78fd3efd2ba63001d26354",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Update Account",
@@ -183873,8 +183873,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank when you have connected Salesforce - only needed if you pasted a token yourself",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "account_id",
@@ -184113,7 +184113,7 @@
     ]
   },
   "crm/salesforce/account_upsert": {
-    "hash": "4d40069a802c17688b83fd678ee16e4d6e08a3967299c4e9459b0fa851135448",
+    "hash": "deb3f0555f2bac78e0f36e4fba9f71dd1f166d6d0bc3f93d053b9185f547ab5a",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Create or Update Account",
@@ -184146,8 +184146,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank when you have connected Salesforce - only needed if you pasted a token yourself",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "external_id_field",
@@ -184394,7 +184394,7 @@
     ]
   },
   "crm/salesforce/api_request": {
-    "hash": "40166cb1de31b07a0124da6f4c946fd4465b5b79dcf321db523ed0936a3ed6bb",
+    "hash": "43b3f529549a0c50d52427398926962f5236763a882b115f94b15c74561c5127",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Custom API Call",
@@ -184427,8 +184427,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank when you have connected Salesforce - only needed if you pasted a token yourself",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "method",
@@ -184529,7 +184529,7 @@
     ]
   },
   "crm/salesforce/approval_approve": {
-    "hash": "0ff4696680fdf40c40858d1460166eb84b11dbfcf26f2965919ea1e2dc11ddd0",
+    "hash": "9ff78b735bcd623c7e15ed09f979e2e90ea4042f67c28edc3f23a6b757be282f",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Approve Request",
@@ -184562,8 +184562,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank when you have connected Salesforce - only needed if you pasted a token yourself",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "work_item_id",
@@ -184634,7 +184634,7 @@
     ]
   },
   "crm/salesforce/approval_get_all": {
-    "hash": "32f50f5c5efae229cb22fa28e9736775d2c40a61b2ef1cd12b66ec9ae7d51502",
+    "hash": "97006765478ad8a0bf476bd68d099fc832a059ee00f9a89b4682d1be72b054f3",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Get Many Approval Processes",
@@ -184667,8 +184667,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank when you have connected Salesforce - only needed if you pasted a token yourself",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "object",
@@ -184759,7 +184759,7 @@
     ]
   },
   "crm/salesforce/approval_reject": {
-    "hash": "430fd7b9ed4915a7d07bb4f2035b1e8a83a28f3c8e997d34e7bd78b76414b974",
+    "hash": "98fe946b8db5defbca6598974633b4e06aea95a944c3185012e5b7afa49e3d29",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Reject Request",
@@ -184792,8 +184792,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank when you have connected Salesforce - only needed if you pasted a token yourself",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "work_item_id",
@@ -184857,7 +184857,7 @@
     ]
   },
   "crm/salesforce/approval_submit": {
-    "hash": "e6986f3bffbee26354ab4c3623ca09c3817b7418a4a8304023784541997587d8",
+    "hash": "525d554b5a1e91f338b24e07605847fff5e3b6d8864dbdd9e0d44b8f050c371d",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Submit for Approval",
@@ -184890,8 +184890,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank when you have connected Salesforce - only needed if you pasted a token yourself",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "object",
@@ -184990,7 +184990,7 @@
     ]
   },
   "crm/salesforce/asset_create": {
-    "hash": "00146a85698190de853b502a73da62bfc7f8ea19dd412d6065ff4e517f163c9b",
+    "hash": "c386224d5d3b360f7d5cacc52000691168f46b2beba5f39024eb71be40a9311d",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Create Asset",
@@ -185023,8 +185023,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank when you have connected Salesforce - only needed if you pasted a token yourself",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "name",
@@ -185242,7 +185242,7 @@
     ]
   },
   "crm/salesforce/asset_delete": {
-    "hash": "9850e9b5e06b3c17542c945c05544d561902218478cecc598b096c7b5a243f30",
+    "hash": "47a6bb74b824025c5da2bba12598f46fe79d369746184d151e7ea52920ae29c2",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Delete Asset",
@@ -185275,8 +185275,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank when you have connected Salesforce - only needed if you pasted a token yourself",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "asset_id",
@@ -185326,7 +185326,7 @@
     ]
   },
   "crm/salesforce/asset_get": {
-    "hash": "a25bd115c3488871b2b677ff3bca6e17ed28ac3d09f50d26a5f4e51a31674d98",
+    "hash": "96836045de57dd3e41802a40d6710c3efceb00e511feb9cfbd6f6a829ea17fad",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Get Asset",
@@ -185359,8 +185359,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank when you have connected Salesforce - only needed if you pasted a token yourself",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "asset_id",
@@ -185417,7 +185417,7 @@
     ]
   },
   "crm/salesforce/asset_get_all": {
-    "hash": "864e5632cde14897889991a4c7f3e488a8380f7e5748a1cd51ba2804a93c91d3",
+    "hash": "0c20c9ff6f2b3546d2b8d5fd9ca40b9510a4ce44d0108e5177a85ec11e4918a9",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Get Many Assets",
@@ -185450,8 +185450,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank when you have connected Salesforce - only needed if you pasted a token yourself",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "fields",
@@ -185675,7 +185675,7 @@
     ]
   },
   "crm/salesforce/asset_update": {
-    "hash": "1ab067821a5e30c4d18de6d4ebb530a5aa9a712e7888825e8d6bc8b0c74b50e2",
+    "hash": "8d7af641f07932c65524726821fa8881a3f02393347326a8f897704ea359d884",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Update Asset",
@@ -185708,8 +185708,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank when you have connected Salesforce - only needed if you pasted a token yourself",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "asset_id",
@@ -185927,7 +185927,7 @@
     ]
   },
   "crm/salesforce/attachment_create": {
-    "hash": "77c5d00e1ed4ec2735ece204ca89c285eda1ae4201156ed6d77a3127e432568a",
+    "hash": "5ec7d56d96540ab6e8f76ad1ec254738a739c4cda7bc3be5d95e6ffc996f05ca",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Create Attachment (Classic)",
@@ -185960,8 +185960,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank when you have connected Salesforce - only needed if you pasted a token yourself",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "object",
@@ -186069,7 +186069,7 @@
     ]
   },
   "crm/salesforce/attachment_delete": {
-    "hash": "708305da9e51ef48d971d29a2ed3e122e9901be5d90b13d40fa6af3a7a7af543",
+    "hash": "f4adce77327363a765841de9ba115638e5709ba97a7d2018350567f28b4b2260",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Delete Attachment (Classic)",
@@ -186102,8 +186102,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank when you have connected Salesforce - only needed if you pasted a token yourself",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "attachment_id",
@@ -186153,7 +186153,7 @@
     ]
   },
   "crm/salesforce/attachment_describe": {
-    "hash": "23531c9e9db497d7ea2b367b2bce0c71c6f0e60a1794db8fa4515c6d14d48d71",
+    "hash": "d422166d62981296d16062408d9ffae160da6c1b643f71255a1477dc928a2c11",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Describe Attachments (Classic)",
@@ -186186,8 +186186,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank when you have connected Salesforce - only needed if you pasted a token yourself",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "include_fields",
@@ -186236,7 +186236,7 @@
     ]
   },
   "crm/salesforce/attachment_download": {
-    "hash": "5d3c94c1f975bd58f44ec94b3e82733d007ce922d7536b29cf6f70ff73d405fd",
+    "hash": "559d0e6a3e053cc54c722e14c994c7ddb1afbd529b7d9514175e3e67d36f21d3",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Download Attachment (Classic)",
@@ -186269,8 +186269,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank when you have connected Salesforce - only needed if you pasted a token yourself",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "attachment_id",
@@ -186355,7 +186355,7 @@
     ]
   },
   "crm/salesforce/attachment_get": {
-    "hash": "f75c7290bc9e29ef0fe7ddc301503da03bbac4b48ee2502ac1b7280fd70bcf2e",
+    "hash": "ea884902e14bf2ca336594b3847656e704da747a2a5f93573c950f527edfb543",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Get Attachment (Classic)",
@@ -186388,8 +186388,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank when you have connected Salesforce - only needed if you pasted a token yourself",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "attachment_id",
@@ -186446,7 +186446,7 @@
     ]
   },
   "crm/salesforce/attachment_get_all": {
-    "hash": "4ff31953f1b6237bda09f1608698355b292427b679681ace75e0c51ea6772a57",
+    "hash": "53bd73cbc7a07bd2381beb05d615de8517a2edb01dadd65aa466f4b75e2db1ea",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Get Many Attachments (Classic)",
@@ -186479,8 +186479,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank when you have connected Salesforce - only needed if you pasted a token yourself",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "return_all",
@@ -186655,7 +186655,7 @@
     ]
   },
   "crm/salesforce/attachment_update": {
-    "hash": "0751369bde18abd2158d7c816cf63aa8d718c24a92688facf29f292fccba4fe6",
+    "hash": "9164612e976b5319a657448c6eaeb933f0b88ced40d9a6c4cc34bfa59bc8bd20",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Update Attachment (Classic)",
@@ -186688,8 +186688,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank when you have connected Salesforce - only needed if you pasted a token yourself",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "attachment_id",
@@ -186788,7 +186788,7 @@
     ]
   },
   "crm/salesforce/campaign_create": {
-    "hash": "9916f19d26c0adf1cdc4420227b45e33b2e1ac6851f184a489622b355d2a0521",
+    "hash": "7c5bf848e75b7c0836094d8e9e35c1fd1476bde35a4c6c11f8f38e3bdde35fae",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Create Campaign",
@@ -186821,8 +186821,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank when you have connected Salesforce - only needed if you pasted a token yourself",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "campaign_name",
@@ -186977,7 +186977,7 @@
     ]
   },
   "crm/salesforce/campaign_delete": {
-    "hash": "28b2b5fc74d0f025525357598ec0eb209c879b6b5a9c541ee721b046a800d7bf",
+    "hash": "454ae99929e4e3783017b120c2538b5972bbf7bacb1d97fdc9bde5f3d3c06010",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Delete Campaign",
@@ -187010,8 +187010,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank when you have connected Salesforce - only needed if you pasted a token yourself",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "campaign_id",
@@ -187061,7 +187061,7 @@
     ]
   },
   "crm/salesforce/campaign_get": {
-    "hash": "8fc500cfce5caca35fa07d5bef0736ad4c0e79a6100a8ff2755c74066687da80",
+    "hash": "8d170adda4310785908396f5ffd00728f769aaaccb4ce9d8dd27b488f4629e8c",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Get Campaign",
@@ -187094,8 +187094,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank when you have connected Salesforce - only needed if you pasted a token yourself",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "campaign_id",
@@ -187152,7 +187152,7 @@
     ]
   },
   "crm/salesforce/campaign_get_all": {
-    "hash": "5072613dfb443faaecbe2344ac82c4ee0e68ca006ec005edea0b9985bccd3662",
+    "hash": "1b8e482cdc083f24c6106787cc7a2906959038039f561547e1116856d6c8334f",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Get Many Campaigns",
@@ -187185,8 +187185,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank when you have connected Salesforce - only needed if you pasted a token yourself",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "fields",
@@ -187382,7 +187382,7 @@
     ]
   },
   "crm/salesforce/campaign_member_create": {
-    "hash": "961ff4316990934826c85c81d596d14f4eade166728c771a647bbd5c0ad227d0",
+    "hash": "11b9ad1c54737cc70bff7baa8b90378d4b1b113c45a54f6add19df0852a600d3",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Add Campaign Member",
@@ -187415,8 +187415,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank when you have connected Salesforce - only needed if you pasted a token yourself",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "campaign_id",
@@ -187494,7 +187494,7 @@
     ]
   },
   "crm/salesforce/campaign_member_delete": {
-    "hash": "13733a759eecba85145a56966042067aeb651f127c6962aa5585b7db51f54552",
+    "hash": "b67fae42b96f8c45930f92fff702a070df58ec9df1137e10744a3529172fe3f8",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Remove Campaign Member",
@@ -187527,8 +187527,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank when you have connected Salesforce - only needed if you pasted a token yourself",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "campaign_member_id",
@@ -187598,7 +187598,7 @@
     ]
   },
   "crm/salesforce/campaign_member_get_all": {
-    "hash": "01af05491837b35b3eab43512b5e516a00d52e95d6f826fa15d3b3dd75ca04c4",
+    "hash": "84e7046473d9337687526923a83b597a5777d711a48b5c8b12a5daed4b63207b",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Get Many Campaign Members",
@@ -187631,8 +187631,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank when you have connected Salesforce - only needed if you pasted a token yourself",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "campaign_id",
@@ -187776,7 +187776,7 @@
     ]
   },
   "crm/salesforce/campaign_member_update": {
-    "hash": "4a9e31eabc2e62307c5696c08811f8ae89f1402db7db961b2967f4c4e02c0985",
+    "hash": "26a5b8925de90119fe29d295a9f81cbb6f263006bee0f8c5e201a8edb10bd20b",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Update Campaign Member",
@@ -187809,8 +187809,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank when you have connected Salesforce - only needed if you pasted a token yourself",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "campaign_member_id",
@@ -187894,7 +187894,7 @@
     ]
   },
   "crm/salesforce/campaign_update": {
-    "hash": "d6f5d7b5f4009414cf6dad7f4168b3dd2c4fd6d01e353c266342dd3babb8278c",
+    "hash": "895773b485928bcd7dcdb2388edfe097d557ca378e0becef38cfdec21dae7854",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Update Campaign",
@@ -187927,8 +187927,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank when you have connected Salesforce - only needed if you pasted a token yourself",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "campaign_id",
@@ -188083,7 +188083,7 @@
     ]
   },
   "crm/salesforce/case_add_comment": {
-    "hash": "ed75872f368e2aad2ef8852702cf714f6e9efaa28ba8c5fddd612e810503986a",
+    "hash": "056045a19c0e6b06bb6995f9f12c2fe10f830d850ab42497b19b7e3ff714a7db",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Add Case Comment",
@@ -188116,8 +188116,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank when you have connected Salesforce - only needed if you pasted a token yourself",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "case_id",
@@ -188189,7 +188189,7 @@
     ]
   },
   "crm/salesforce/case_close": {
-    "hash": "067ceaffa02722b78e40bbecb0143cc576f6cb58bfee923de61835dbdd18cfdf",
+    "hash": "bc10bc2c288f9e78f893eb58685ba4814f5e190adfad4e16d16c6c0ef370cba0",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Close Case",
@@ -188222,8 +188222,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank when you have connected Salesforce - only needed if you pasted a token yourself",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "case_id",
@@ -188294,7 +188294,7 @@
     ]
   },
   "crm/salesforce/case_comment_delete": {
-    "hash": "585a3192a72364eb465406beb47965dfa323d091937d1605eeb454b6e6b8d099",
+    "hash": "cbad196c1f94381c35c9dae77983775b59ae44f6f9993a64565e720d18e5d142",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Delete Case Comment",
@@ -188327,8 +188327,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank when you have connected Salesforce - only needed if you pasted a token yourself",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "comment_id",
@@ -188378,7 +188378,7 @@
     ]
   },
   "crm/salesforce/case_comment_get_all": {
-    "hash": "0aa0ab469a12e5a682c85daf1633824e654992c9270c9b0fc3c4ab3b41d072c8",
+    "hash": "f2407bf2dbebb41f47be3cbafa7845b3275ca450509ec16d901f37faea7f738e",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Get Many Case Comments",
@@ -188411,8 +188411,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank when you have connected Salesforce - only needed if you pasted a token yourself",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "case_id",
@@ -188518,7 +188518,7 @@
     ]
   },
   "crm/salesforce/case_create": {
-    "hash": "a33d6fab74c91d14fb226fcce23cf8771afd8be6e3b42f7976a99e1cf6a85b93",
+    "hash": "fefe964353c62bc18960e1f06bce152675edd7e90556ff8bd5797f048367f149",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Create Case",
@@ -188551,8 +188551,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank when you have connected Salesforce - only needed if you pasted a token yourself",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "subject",
@@ -188727,7 +188727,7 @@
     ]
   },
   "crm/salesforce/case_delete": {
-    "hash": "83d562e63676f13d84e9b993885d62b3308459ade7e12090fd811017f861c8fe",
+    "hash": "9cedc3fa5aac9410f0ba1071000e950cc2594c38a65c622e7df5d37c91a6c967",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Delete Case",
@@ -188760,8 +188760,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank when you have connected Salesforce - only needed if you pasted a token yourself",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "case_id",
@@ -188811,7 +188811,7 @@
     ]
   },
   "crm/salesforce/case_describe": {
-    "hash": "47d326a47506a9ae5980ba4451655cfb69a8795bf163d9a81ba95d1e74bacbd4",
+    "hash": "8de0773646fb01dd0a497e0099bb9b552bb0c2818c21edd41b02623f8f868f90",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Describe Case Object",
@@ -188844,8 +188844,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank when you have connected Salesforce - only needed if you pasted a token yourself",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "include_picklist_values",
@@ -188894,7 +188894,7 @@
     ]
   },
   "crm/salesforce/case_get": {
-    "hash": "6728bdaf718f33cc1885bff40ec76fed66a225cacf8a32caca020443e5960f0a",
+    "hash": "bb4cbce951dd2238011fd568716efe24bc9654a6c1c7219083a64ca1c9885360",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Get Case",
@@ -188927,8 +188927,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank when you have connected Salesforce - only needed if you pasted a token yourself",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "case_id",
@@ -188985,7 +188985,7 @@
     ]
   },
   "crm/salesforce/case_get_all": {
-    "hash": "58382a72945a394886ff645116ed13b46d1e944522b6113b0abac160a748b2f8",
+    "hash": "164e4d1cc68a07d0b8ecab42e122cbc9472766005b556611d89f4586345fd0fe",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Get Many Cases",
@@ -189018,8 +189018,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank when you have connected Salesforce - only needed if you pasted a token yourself",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "fields",
@@ -189194,7 +189194,7 @@
     ]
   },
   "crm/salesforce/case_update": {
-    "hash": "c7667d921077261b0b402c48e57d815b5b245819e28471295d91b28be4562a3d",
+    "hash": "85d00f66907edffb32f128e1c21ffda3cccd86c0ea008000f1556e513e2b0be2",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Update Case",
@@ -189227,8 +189227,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank when you have connected Salesforce - only needed if you pasted a token yourself",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "case_id",
@@ -189404,7 +189404,7 @@
     ]
   },
   "crm/salesforce/case_upsert": {
-    "hash": "55fcef0dbff5e5f439bdce152280dd3b2a3032798282dd3633114b41cb25ebb1",
+    "hash": "ac6b3d720a26e31c85c0a46037e073c4fdfb79abecf32f61e318bfbf124da222",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Create or Update Case",
@@ -189437,8 +189437,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank when you have connected Salesforce - only needed if you pasted a token yourself",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "external_id_field",
@@ -189622,7 +189622,7 @@
     ]
   },
   "crm/salesforce/contact_add_note": {
-    "hash": "10e9c932b59538064408e97747bfed59bb8d8526556cbba39b90dc3dab7eb49c",
+    "hash": "091d2fe7e124248aa9126299eb38840c14cabf965f86041e7fc8ed333971b5ce",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Add Note to Contact (Classic)",
@@ -189655,8 +189655,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank when you have connected Salesforce - only needed if you pasted a token yourself",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "contact_id",
@@ -189742,7 +189742,7 @@
     ]
   },
   "crm/salesforce/contact_add_to_campaign": {
-    "hash": "6d4972e66fed08cf197005218f71f69b5d89331ab001928b508231a4f008c856",
+    "hash": "b4aff30c4a3f25a337880103ab1215c7243b3cb9bf5e95d0f5cf08ce77e35e73",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Add Contact to Campaign",
@@ -189775,8 +189775,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank when you have connected Salesforce - only needed if you pasted a token yourself",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "contact_id",
@@ -189855,7 +189855,7 @@
     ]
   },
   "crm/salesforce/contact_create": {
-    "hash": "cb3f3d096ba644cea6c139e752e50c5ea7cb1855b64bbd86ddb69dae70c1fc35",
+    "hash": "6c30610b815a4a9e3683b060d64cfb4292b38393ccb9f982c75ce0cfbdbfae7b",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Create Contact",
@@ -189888,8 +189888,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank when you have connected Salesforce - only needed if you pasted a token yourself",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "last_name",
@@ -190198,7 +190198,7 @@
     ]
   },
   "crm/salesforce/contact_delete": {
-    "hash": "29e354719254593036d8a775ee937cff3e48dc087d5df5d2e1bdaaa62c2db1ca",
+    "hash": "247ac366bd4cb26d667603d79776a479d0246d33723ba6ac41abbddc70a92ceb",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Delete Contact",
@@ -190231,8 +190231,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank when you have connected Salesforce - only needed if you pasted a token yourself",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "contact_id",
@@ -190282,7 +190282,7 @@
     ]
   },
   "crm/salesforce/contact_describe": {
-    "hash": "6643945ba9f199dd7723b4ab0de181a2cdb01a027ea93b5e655016bc595c2f16",
+    "hash": "abb463f0443ab8578d96e19d694a38cdbc0153baa1a54b049475ba83bff5e90b",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Get Contact Metadata",
@@ -190315,8 +190315,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank when you have connected Salesforce - only needed if you pasted a token yourself",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "include_field_details",
@@ -190365,7 +190365,7 @@
     ]
   },
   "crm/salesforce/contact_get": {
-    "hash": "ebd459fd44b6e354eeb38c04057e010e3654a0383eb8007eff4813aa45e2132c",
+    "hash": "5a06bbaeba72bd66901de1fe33ad34c187d615479eaf4a87800b4330786ef684",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Get Contact",
@@ -190398,8 +190398,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank when you have connected Salesforce - only needed if you pasted a token yourself",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "contact_id",
@@ -190456,7 +190456,7 @@
     ]
   },
   "crm/salesforce/contact_get_all": {
-    "hash": "d10d8737a71741dcb0236e7b3f05389f52be13b822ff535dea41805e7532548e",
+    "hash": "67b37aae89b9bdc79ce2958aa847a4cb4932150a2a608ee308b88b02cf54bf9a",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Get Many Contacts",
@@ -190489,8 +190489,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank when you have connected Salesforce - only needed if you pasted a token yourself",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "fields",
@@ -190665,7 +190665,7 @@
     ]
   },
   "crm/salesforce/contact_update": {
-    "hash": "07fcacefe386c3b350681f9bc7e0a043b457d6ca23c8f90b6262a5bee1bfe475",
+    "hash": "fdf1ca09d0c743d260ff02e53a8b18190402402a7982147b469d25cb98607a51",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Update Contact",
@@ -190698,8 +190698,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank when you have connected Salesforce - only needed if you pasted a token yourself",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "contact_id",
@@ -191015,7 +191015,7 @@
     ]
   },
   "crm/salesforce/contact_upsert": {
-    "hash": "c1994216f34e59e0505c88d4d50e8dfa70008dcc357f0d812a2f1e7b54367c94",
+    "hash": "b392a3df30208be55a45d1524e8e1b7ab47905612c170236d708291a3e30b6c4",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Create or Update Contact",
@@ -191048,8 +191048,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank when you have connected Salesforce - only needed if you pasted a token yourself",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "external_id_field",
@@ -191373,7 +191373,7 @@
     ]
   },
   "crm/salesforce/contract_activate": {
-    "hash": "51976543b48f8e78b5e37c2f26ece8066621a06ada93b06bd5c16bf860bff965",
+    "hash": "bc946749d4706e91b257526a996c9d012cdb28c9d3c9f8bbb10176e5f6aa43c9",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Activate Contract",
@@ -191406,8 +191406,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank when you have connected Salesforce - only needed if you pasted a token yourself",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "contract_id",
@@ -191464,7 +191464,7 @@
     ]
   },
   "crm/salesforce/contract_create": {
-    "hash": "75cc08f1e0ed503f1d5ac192265c1f1463ffa76f5dc299d86c342a191ca84119",
+    "hash": "3fbf12f31be8c5f7fac9ab728636c2160a4a80d8e795c1bb4d6aff5d80a1f790",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Create Contract",
@@ -191497,8 +191497,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank when you have connected Salesforce - only needed if you pasted a token yourself",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "account_id",
@@ -191688,7 +191688,7 @@
     ]
   },
   "crm/salesforce/contract_delete": {
-    "hash": "c11fd105aac62c4aabc5b1ecc28fae5c1b303037d89496cb0234d5cfc03a3c04",
+    "hash": "be70beeb11f5de6c74fc33cb9fb077683a8185e229a89ec601daf0857280cdca",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Delete Contract",
@@ -191721,8 +191721,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank when you have connected Salesforce - only needed if you pasted a token yourself",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "contract_id",
@@ -191772,7 +191772,7 @@
     ]
   },
   "crm/salesforce/contract_get": {
-    "hash": "515e8bd0aeb981a7f9d16922e1345fade51b506d6127df87fb3d51fea72dfe55",
+    "hash": "8d0f11370de619a4aae9b97e673c7cce567683f49175a54d68e1f22c18e05254",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Get Contract",
@@ -191805,8 +191805,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank when you have connected Salesforce - only needed if you pasted a token yourself",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "contract_id",
@@ -191863,7 +191863,7 @@
     ]
   },
   "crm/salesforce/contract_get_all": {
-    "hash": "e8f1656963828e3bca9a6bcf1a9f7b85bd8638514fa3a52d3ff84ed305283296",
+    "hash": "e060f979d9fdbcbea0e07f2d7a17ff36922dc58608db9c1fc973a59738b20a70",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Get Many Contracts",
@@ -191896,8 +191896,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank when you have connected Salesforce - only needed if you pasted a token yourself",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "fields",
@@ -192107,7 +192107,7 @@
     ]
   },
   "crm/salesforce/contract_update": {
-    "hash": "49dee16e1ae58b933ca6e19cfcb7a3794cc0960cabf731b1dc83fd26eddacc79",
+    "hash": "34d4970a7cc7262c123cbf6b660087801def71a5b562b803ec85e5e2a22e090f",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Update Contract",
@@ -192140,8 +192140,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank when you have connected Salesforce - only needed if you pasted a token yourself",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "contract_id",
@@ -192331,7 +192331,7 @@
     ]
   },
   "crm/salesforce/custom_object_create": {
-    "hash": "49f1fe2b8fb201644f8935e1a3f754f1a379ef2a08706edf5b7ed22af405fda3",
+    "hash": "f427085d77bb1218b7527a6e25d3deef714425f2c6d27bab28ffc79d6f2f07f5",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Create Custom Object Record",
@@ -192364,8 +192364,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank when you have connected Salesforce - only needed if you pasted a token yourself",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "custom_object",
@@ -192443,7 +192443,7 @@
     ]
   },
   "crm/salesforce/custom_object_delete": {
-    "hash": "34335abb33589172df865984ff14e7d175945f84210c684f84d1be306b1ba117",
+    "hash": "4e4b0bb7493edc4828f645977fecf1ed514e27ee87dbd77a72e657257ae51180",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Delete Custom Object Record",
@@ -192476,8 +192476,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank when you have connected Salesforce - only needed if you pasted a token yourself",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "custom_object",
@@ -192535,7 +192535,7 @@
     ]
   },
   "crm/salesforce/custom_object_get": {
-    "hash": "b1afce1aedf1ce724710fb8d2bbd2f79aadb67232f52b3b307e54230614c50ab",
+    "hash": "bd944f468640f9d66811ad8fcc49d701a39b07053fbdd27c7987cb54df209ef5",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Get Custom Object Record",
@@ -192568,8 +192568,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank when you have connected Salesforce - only needed if you pasted a token yourself",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "custom_object",
@@ -192634,7 +192634,7 @@
     ]
   },
   "crm/salesforce/custom_object_get_all": {
-    "hash": "65a8609d46acedd1bac00d0837ff37b659f08e269a9bd4cde73e7f3d07f672d7",
+    "hash": "5833cb95f24ea911653dce9d34d170ae9e6744a432d043a3aaef8fba1b7f0e9d",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Get Many Custom Object Records",
@@ -192667,8 +192667,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank when you have connected Salesforce - only needed if you pasted a token yourself",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "custom_object",
@@ -192851,7 +192851,7 @@
     ]
   },
   "crm/salesforce/custom_object_update": {
-    "hash": "f2b551d596e4de34c7721f9e29f0de9702c98f43f7bb55e91e21580e04495929",
+    "hash": "d09eeeb6de349b5d600c3187224dc76a3c65e93da83d5c2d277543f362f84b81",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Update Custom Object Record",
@@ -192884,8 +192884,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank when you have connected Salesforce - only needed if you pasted a token yourself",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "custom_object",
@@ -192971,7 +192971,7 @@
     ]
   },
   "crm/salesforce/custom_object_upsert": {
-    "hash": "2e0d2d408202a06f2b569fb108cd7490dc58df56b8548b54a1d71f9f9f1c0b7f",
+    "hash": "a4c6dc24427dd5401c94cf11f83dbc2ab0d515e87097e19b54ca1128727cc459",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Create or Update Custom Object Record",
@@ -193004,8 +193004,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank when you have connected Salesforce - only needed if you pasted a token yourself",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "custom_object",
@@ -193099,7 +193099,7 @@
     ]
   },
   "crm/salesforce/email_message_create": {
-    "hash": "a1251c24f42fa5445b6c899838f3c2004964cd03751c313f33d512473140b892",
+    "hash": "263ddac7b7cc022786a34b3f05d34856b0f27c3d227d9274dfb68a9b6bbd9467",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Log Email",
@@ -193132,8 +193132,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank when you have connected Salesforce - only needed if you pasted a token yourself",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "parent_id",
@@ -193313,7 +193313,7 @@
     ]
   },
   "crm/salesforce/email_message_get_all": {
-    "hash": "82099cff884bdeca223aa1f6dc13c48f78e5c7efd3e4dd1848bf20326a703cc2",
+    "hash": "0a02724350b9134c0bd3057abc8613d3a93eba2eb4e4382fe8164bd870453cde",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Get Many Emails",
@@ -193346,8 +193346,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank when you have connected Salesforce - only needed if you pasted a token yourself",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "parent_id",
@@ -193487,7 +193487,7 @@
     ]
   },
   "crm/salesforce/email_send": {
-    "hash": "6d9517dacaf1c983d9c307a273e982d5ae88a0f41c509ae8a63c7c90031b78f5",
+    "hash": "996f105ffe1dbe3083a10fc796aee5dae62c7b2e550fe9d139c50d1679f0b039",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Send Email",
@@ -193520,8 +193520,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank when you have connected Salesforce - only needed if you pasted a token yourself",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "to_addresses",
@@ -193661,7 +193661,7 @@
     ]
   },
   "crm/salesforce/event_create": {
-    "hash": "bbf09b442b05980a8ba924c5cdbc4227dda767fec5291c5142764ee62a21400f",
+    "hash": "34d2d1d578f8948d781d2e3372f57cc5c65407732ad1b2b6bdc1b3ad0510dce8",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Create Event",
@@ -193694,8 +193694,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank when you have connected Salesforce - only needed if you pasted a token yourself",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "event_subject",
@@ -193983,7 +193983,7 @@
     ]
   },
   "crm/salesforce/event_delete": {
-    "hash": "2a5e4b93c693a208f28859e9154aa6c86d1d5461fc96a7874398ec9bd0970181",
+    "hash": "a194964818f3fba7a3462806212a6c1f9704e6e327d74e97f4e1dc604e875d76",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Delete Event",
@@ -194016,8 +194016,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank when you have connected Salesforce - only needed if you pasted a token yourself",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "event_id",
@@ -194067,7 +194067,7 @@
     ]
   },
   "crm/salesforce/event_delete_series": {
-    "hash": "d0145a8871c8f39c49c69a2f10a24d19d169eff17ad5e2f974991025c6f43a60",
+    "hash": "449a4ea9ab4d7c447a46f3dddd3f788b7f9f242f326b23759c2e2e25762023dc",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Cancel Event Series",
@@ -194100,8 +194100,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank when you have connected Salesforce - only needed if you pasted a token yourself",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "event_id",
@@ -194151,7 +194151,7 @@
     ]
   },
   "crm/salesforce/event_get": {
-    "hash": "af3b855cd7198593a118b02a7ffce095ab4327fb613885b9b7cd35cc56d96b82",
+    "hash": "a2424ab27f4e9ae8614ad06eaac106fa186e2f44966f0a4bb3b350fba764dcca",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Get Event",
@@ -194184,8 +194184,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank when you have connected Salesforce - only needed if you pasted a token yourself",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "event_id",
@@ -194242,7 +194242,7 @@
     ]
   },
   "crm/salesforce/event_get_all": {
-    "hash": "1321592d662fb37c7571fe53884627897d5c1ae645c73213f94bc9dc6b126be1",
+    "hash": "92f32bb62a64def9896c420508a2d7bd0f9b110ebc926d0f950f903ef859e044",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Get Many Events",
@@ -194275,8 +194275,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank when you have connected Salesforce - only needed if you pasted a token yourself",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "fields",
@@ -194486,7 +194486,7 @@
     ]
   },
   "crm/salesforce/event_update": {
-    "hash": "a94f16ad62bfaa073b79a699c61a958f9c0a649b8700fd0f1d80801ea7dc8cac",
+    "hash": "5eba7061c6dd6a3a322a91cd2cd42c369285d168b519d5394a9a81d5ebc540c4",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Update Event",
@@ -194519,8 +194519,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank when you have connected Salesforce - only needed if you pasted a token yourself",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "event_id",
@@ -194682,7 +194682,7 @@
     ]
   },
   "crm/salesforce/file_delete": {
-    "hash": "65b9eb8e9f9c4f3f2cfd7ce6d08548d70a163b7d6e90924e3d880f3a3c600fcb",
+    "hash": "3e72c9c46b6e83787f9fe9549ce31a495156f090e90f36a039e5672fff7efb3a",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Delete File",
@@ -194715,8 +194715,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank when you have connected Salesforce - only needed if you pasted a token yourself",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "file_id",
@@ -194766,7 +194766,7 @@
     ]
   },
   "crm/salesforce/file_download": {
-    "hash": "e399019d24a4fb9d548ef2a3380eb47c11993d5b5c3854e41f562cf92aad1b75",
+    "hash": "0c6be32ac4aeda3a3594470d06b263e11853e8943296f5adae29a4fba73f142e",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Download File",
@@ -194799,8 +194799,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank when you have connected Salesforce - only needed if you pasted a token yourself",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "file_id",
@@ -194885,7 +194885,7 @@
     ]
   },
   "crm/salesforce/file_get_all_for_record": {
-    "hash": "7c8cd3158386a5cd46f101f036106eaf16d9c946c81d9d7b3da4d5432c283fd0",
+    "hash": "a77ed60f82821420ef447f8606c3ecc02a0a49209ba70200a10fe01a73dfcefe",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Get Files On A Record",
@@ -194918,8 +194918,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank when you have connected Salesforce - only needed if you pasted a token yourself",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "object",
@@ -195011,7 +195011,7 @@
     ]
   },
   "crm/salesforce/file_link_to_record": {
-    "hash": "fef874e1c776fce41474214faa50d01599279369fff09edc681419e48a6f6a55",
+    "hash": "2d2bb7a1ae25ef229916044035040ce21d658b2a621efb7a516ef77beb5e67e2",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Attach File To Record",
@@ -195044,8 +195044,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank when you have connected Salesforce - only needed if you pasted a token yourself",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "file_id",
@@ -195159,7 +195159,7 @@
     ]
   },
   "crm/salesforce/file_upload": {
-    "hash": "7058aa720f08f6be1ab057c0bedfcb4a25b0f78161a78b6c5ec4a5bba104dfd5",
+    "hash": "a10ad0d98071f3f55c34aeb73a84e64cd400d42e3af7bbca28c2a933869f2ac9",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Upload File",
@@ -195192,8 +195192,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank when you have connected Salesforce - only needed if you pasted a token yourself",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "title",
@@ -195300,7 +195300,7 @@
     ]
   },
   "crm/salesforce/flow_get_all": {
-    "hash": "04ed64c0e4773415829f15a022511746a44a82fe4022896392a78b8af681d5e2",
+    "hash": "14d92c91a1af84e45d0c52b32542d0ef7ba52ca2c52f4e8616183e1d6edaffdc",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Get Many Flows",
@@ -195333,8 +195333,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank when you have connected Salesforce - only needed if you pasted a token yourself",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "name_contains",
@@ -195411,7 +195411,7 @@
     ]
   },
   "crm/salesforce/flow_invoke": {
-    "hash": "49ca012ed1a177012f2ca3bd0ca4ef1d3113a39107102fe0399643e35377713f",
+    "hash": "48b2c0eab26a434ca80dbd43b939f53d9006d583434ef097ae29076ed829140c",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Run Flow",
@@ -195444,8 +195444,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank when you have connected Salesforce - only needed if you pasted a token yourself",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "flow_name",
@@ -195516,7 +195516,7 @@
     ]
   },
   "crm/salesforce/lead_add_note": {
-    "hash": "46f3a094491d9d09ecb7d13e114779a8e38ba0347de11deab6a79ca403575b59",
+    "hash": "44e730c19679326a1d68ae01755c22a05f104d06c0b3bc375c5e9efefc9df161",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Add Note to Lead (Classic)",
@@ -195549,8 +195549,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank when you have connected Salesforce - only needed if you pasted a token yourself",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "lead_id",
@@ -195636,7 +195636,7 @@
     ]
   },
   "crm/salesforce/lead_add_to_campaign": {
-    "hash": "fc47c8cd71e5976f750e341bfd4f24e7a3050ce03110bde88c5f1e4e33d44221",
+    "hash": "af5fc0467cce74314ba54a209cd3ed525a1c5ad6bc0fa2077f49828b2a148c15",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Add Lead to Campaign",
@@ -195669,8 +195669,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank when you have connected Salesforce - only needed if you pasted a token yourself",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "lead_id",
@@ -195749,7 +195749,7 @@
     ]
   },
   "crm/salesforce/lead_convert": {
-    "hash": "e4f332940258d3f3d66712c0ebc26bef5dda2130040e62522b49ff171659f35d",
+    "hash": "fce5bf73a68121d436be559d3b7d7124348d7695ab2b621968c641d9233587e1",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Convert Lead",
@@ -195782,8 +195782,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank when you have connected Salesforce - only needed if you pasted a token yourself",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "lead_id",
@@ -195890,7 +195890,7 @@
     ]
   },
   "crm/salesforce/lead_create": {
-    "hash": "66b687e1958befb03c49735ffa53a763e36d76482c192e02385e1bddb2b21593",
+    "hash": "d95d654b67e70c987a3b79008089ee3d0290f4bbf0f7a862f479cc87fd2e9fda",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Create Lead",
@@ -195923,8 +195923,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank when you have connected Salesforce - only needed if you pasted a token yourself",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "company",
@@ -196171,7 +196171,7 @@
     ]
   },
   "crm/salesforce/lead_delete": {
-    "hash": "14e62684539133fdbaacd5171d037ef384e99d11d12477a8766b446c561c9ebb",
+    "hash": "dba9fbf5408d477fe02a4de06a8fe082711cc5782942c744476731d27cd85dc3",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Delete Lead",
@@ -196204,8 +196204,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank when you have connected Salesforce - only needed if you pasted a token yourself",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "lead_id",
@@ -196255,7 +196255,7 @@
     ]
   },
   "crm/salesforce/lead_describe": {
-    "hash": "0e503207b9374ef930f6c408d273fbe7901a917e9b187a783535d4a8453eb2f6",
+    "hash": "5f3a465ad9b1470c99a6309e3e230c3fcd0404fddb676698a469ebca68523715",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Describe Lead Object",
@@ -196288,8 +196288,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank when you have connected Salesforce - only needed if you pasted a token yourself",
+        "from_credential_meta": "instance_url"
       }
     ],
     "outputs": [
@@ -196331,7 +196331,7 @@
     ]
   },
   "crm/salesforce/lead_get": {
-    "hash": "e7f2a05f7921c6d0cabac6b7a3e1402dcae755c3926ea1311eb51d25d9cf5720",
+    "hash": "50cb746caa3f12fbc6d165c3a9f12d4571f8677737507170d06d065d575743e4",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Get Lead",
@@ -196364,8 +196364,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank when you have connected Salesforce - only needed if you pasted a token yourself",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "lead_id",
@@ -196422,7 +196422,7 @@
     ]
   },
   "crm/salesforce/lead_get_all": {
-    "hash": "1e8d60e93ceb9b7e889c3e636f9a397d1805e918f24aa4fcf4f3f024691ffcd7",
+    "hash": "06a87857e39809447183f9c4f2e80f494ddfc37f8e714e9a7dc245fb21c4f94a",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Get Many Leads",
@@ -196455,8 +196455,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank when you have connected Salesforce - only needed if you pasted a token yourself",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "fields",
@@ -196631,7 +196631,7 @@
     ]
   },
   "crm/salesforce/lead_update": {
-    "hash": "c72f94c751c3057a402877cf00a5510ff4e7e3f1ce78d37ec32955555544406e",
+    "hash": "7e5a8fafcc462d7b7394365ce55fb86b4ed62339ebce38b2830e04e5c6175494",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Update Lead",
@@ -196664,8 +196664,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank when you have connected Salesforce - only needed if you pasted a token yourself",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "lead_id",
@@ -196918,7 +196918,7 @@
     ]
   },
   "crm/salesforce/lead_upsert": {
-    "hash": "1782847b91b52bf7f29c15fdc955e0ece2c8c98bf66c527d46b439e9eb22ab45",
+    "hash": "fddfab9ab53e036152f38232b1842d2109eb733b77db43d0cd9d00623f92d506",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Create or Update Lead",
@@ -196951,8 +196951,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank when you have connected Salesforce - only needed if you pasted a token yourself",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "external_id_field",
@@ -197213,7 +197213,7 @@
     ]
   },
   "crm/salesforce/list_view_get_all": {
-    "hash": "07f7b5e0d2f1ee779c18738c707e7083864b82fdf5c24b959ebd33b8f2523201",
+    "hash": "f92a4fb946b26e849b2e4a5edc9b5c61f98914dfefe1cdd9614809d4607d3bd2",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Get Many List Views",
@@ -197246,8 +197246,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank when you have connected Salesforce - only needed if you pasted a token yourself",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "object",
@@ -197332,7 +197332,7 @@
     ]
   },
   "crm/salesforce/list_view_run": {
-    "hash": "ced70b61b45e23632f07403f3d44404b84b6942d647339cd26d7d64f2f9e1345",
+    "hash": "e3f2bcbc42d78e623f5640fbefeff8dee41ca986ec20911800d4acc58ef9ed00",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Run List View",
@@ -197365,8 +197365,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank when you have connected Salesforce - only needed if you pasted a token yourself",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "object",
@@ -197466,7 +197466,7 @@
     ]
   },
   "crm/salesforce/note_create": {
-    "hash": "09a0649157407c14e20fcf92b3be456a2a3ec1bf8e4646e00d6985d5050198cd",
+    "hash": "12d547e74b6258205395d7181bff29fc40c59ce995fab198b722827602b18a8a",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Create Note",
@@ -197499,8 +197499,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank when you have connected Salesforce - only needed if you pasted a token yourself",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "title",
@@ -197635,7 +197635,7 @@
     ]
   },
   "crm/salesforce/note_get_all_for_record": {
-    "hash": "f1e1d8018ba279f889bd16e8bdaf7e362a27111f859c81c2d88ed96231c70b38",
+    "hash": "b0b60dc445dd87d8148c895285a7a76e80e80e190aa1ea89313beaf48d7f4f80",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Get Notes On A Record",
@@ -197668,8 +197668,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank when you have connected Salesforce - only needed if you pasted a token yourself",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "object",
@@ -197761,7 +197761,7 @@
     ]
   },
   "crm/salesforce/object_describe": {
-    "hash": "92aa02d3292e61643c68b1b50552690d38bc8d79735b9dcffd04fe0a8d3cd3f2",
+    "hash": "e2ba572e7cb3b10b3341b06ca851b3d42c6aef460e179b23430936f6fb31d471",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Describe Object",
@@ -197794,8 +197794,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank when you have connected Salesforce - only needed if you pasted a token yourself",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "object",
@@ -197859,7 +197859,7 @@
     ]
   },
   "crm/salesforce/object_get_all": {
-    "hash": "ddaea860ed7141f0c9e6764c794d3d70b508a38df3514d9503da05a18db0c0e3",
+    "hash": "159c520289f1d62e867ff9280258e5a7bc1846667b6c9985abaa99413b50cbef",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: List Objects",
@@ -197892,8 +197892,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank when you have connected Salesforce - only needed if you pasted a token yourself",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "custom_only",
@@ -197977,7 +197977,7 @@
     ]
   },
   "crm/salesforce/opportunity_add_note": {
-    "hash": "c19b575faede91e591bdd1f48d309483a2018b02f6b7e32e1d7bbf154dbbdde2",
+    "hash": "20ceb69710f7305a0d587984846c50c7c8b2d2fbeb2891eda1bb9f92ed604d50",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Add Note to Opportunity (Classic)",
@@ -198010,8 +198010,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank when you have connected Salesforce - only needed if you pasted a token yourself",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "opportunity_id",
@@ -198097,7 +198097,7 @@
     ]
   },
   "crm/salesforce/opportunity_contact_role_create": {
-    "hash": "ef1b2e3399fe3a63c6d4189940f55424532913d17394a8904c3ade09cc7337a8",
+    "hash": "9feb5cbb39bdae048b48a66ee2cba3a16d19685d158ea87e6d2d8a648ede9a88",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Add Contact to Opportunity",
@@ -198130,8 +198130,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank when you have connected Salesforce - only needed if you pasted a token yourself",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "opportunity_id",
@@ -198210,7 +198210,7 @@
     ]
   },
   "crm/salesforce/opportunity_contact_role_delete": {
-    "hash": "270f00e22b29fa08831e1d24b52038d16b0fa31066b5d1c29e236e38bc5f1e43",
+    "hash": "98aee2bd0b5c1a50f8396fc0d48b897e665b5eb55dcb360e8bdf933c2c6810ce",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Remove Contact from Opportunity",
@@ -198243,8 +198243,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank when you have connected Salesforce - only needed if you pasted a token yourself",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "contact_role_id",
@@ -198294,7 +198294,7 @@
     ]
   },
   "crm/salesforce/opportunity_contact_role_get_all": {
-    "hash": "af1942147e625e6ad2f8cf09f64f4638f0b31d33a181b9c487380e321206327f",
+    "hash": "9b577cf555a33f2a8cb19588b22a0a03fc725adff691234ca8f0d84392910994",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Get Opportunity Contacts",
@@ -198327,8 +198327,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank when you have connected Salesforce - only needed if you pasted a token yourself",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "opportunity_id",
@@ -198434,7 +198434,7 @@
     ]
   },
   "crm/salesforce/opportunity_contact_role_update": {
-    "hash": "ab73832f386e42e86226fae25982c9dd9c0de766f34a2f2d2fa4b82cce2e59da",
+    "hash": "549959aace780ef5e4446a410a98704cdbdbf3dcbf84fb31182ed13458a459bf",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Update Opportunity Contact",
@@ -198467,8 +198467,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank when you have connected Salesforce - only needed if you pasted a token yourself",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "contact_role_id",
@@ -198546,7 +198546,7 @@
     ]
   },
   "crm/salesforce/opportunity_create": {
-    "hash": "fd31a4659dec1550465a082aaa00d4b55b94f86d14eee90a7834c07c232de750",
+    "hash": "06d4b9da70958eed6fadc00384c56f692c1dfd4b33263fa296c4e87f9c234764",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Create Opportunity",
@@ -198579,8 +198579,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank when you have connected Salesforce - only needed if you pasted a token yourself",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "name",
@@ -198737,7 +198737,7 @@
     ]
   },
   "crm/salesforce/opportunity_delete": {
-    "hash": "a58e879188bd242181d097a2ef45054f12639fdfd6fbfa6f4ce4f3c09f8c0478",
+    "hash": "48f9eef7dbd8befc710611603ce7541ca084ef7938ac0513cdd3cb9ed8a73b4b",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Delete Opportunity",
@@ -198770,8 +198770,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank when you have connected Salesforce - only needed if you pasted a token yourself",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "opportunity_id",
@@ -198821,7 +198821,7 @@
     ]
   },
   "crm/salesforce/opportunity_describe": {
-    "hash": "55133a24de67127b293fc3c23c53498eb4fcddac88b693ed8eafaa3fe62f8e15",
+    "hash": "fec1f1b6f8a095d5f6061f0551efae16a2ebe13e74e0c1c45e9c8f3a298f6109",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Get Opportunity Metadata",
@@ -198854,8 +198854,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank when you have connected Salesforce - only needed if you pasted a token yourself",
+        "from_credential_meta": "instance_url"
       }
     ],
     "outputs": [
@@ -198897,7 +198897,7 @@
     ]
   },
   "crm/salesforce/opportunity_get": {
-    "hash": "46d2863c07ebcb39fd350fbad889ff600e2e061e8374919adb18eedc3f663c47",
+    "hash": "992e492e3211be75c9bec90c3ee3db522f9971070b3ed96b6271416cf8b2cb55",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Get Opportunity",
@@ -198930,8 +198930,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank when you have connected Salesforce - only needed if you pasted a token yourself",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "opportunity_id",
@@ -198988,7 +198988,7 @@
     ]
   },
   "crm/salesforce/opportunity_get_all": {
-    "hash": "2ce3da37fd1e184981916d826445835824255cad6b394c3fa923ab301deca367",
+    "hash": "1d7dfb0fef9cba3a557e151f9e079c98dcafa0b55e1261021291f06d9160a5f1",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Get Many Opportunities",
@@ -199021,8 +199021,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank when you have connected Salesforce - only needed if you pasted a token yourself",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "fields",
@@ -199197,7 +199197,7 @@
     ]
   },
   "crm/salesforce/opportunity_line_item_create": {
-    "hash": "211e3df668e3bbbc3f0d47aa3e35ca5364f6de4e4ac7b9ea415edeafda2888d6",
+    "hash": "a8392bb98dc38794d717d2fba5ada93f9d5c68a66fe49eec992682ff34c34a7e",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Add Product to Opportunity",
@@ -199230,8 +199230,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank when you have connected Salesforce - only needed if you pasted a token yourself",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "opportunity_id",
@@ -199344,7 +199344,7 @@
     ]
   },
   "crm/salesforce/opportunity_line_item_delete": {
-    "hash": "61a1e20372a13c0e29f8121b7a03b36949b71a933037189a4d4eba26473e2e47",
+    "hash": "5bb32edf03be3774e15b560ec2d1105b4c410f69347537d28c99366dbb7182e2",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Remove Product from Opportunity",
@@ -199377,8 +199377,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank when you have connected Salesforce - only needed if you pasted a token yourself",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "line_item_id",
@@ -199428,7 +199428,7 @@
     ]
   },
   "crm/salesforce/opportunity_line_item_get_all": {
-    "hash": "6233b887d75cd26b67dcd7c17673940d7e10799a8daed36d51796522eeb93c75",
+    "hash": "305514f7c34c893524e2803208042229c2f373c3db3327dc36c41fe99a80b8e1",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Get Opportunity Products",
@@ -199461,8 +199461,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank when you have connected Salesforce - only needed if you pasted a token yourself",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "opportunity_id",
@@ -199561,7 +199561,7 @@
     ]
   },
   "crm/salesforce/opportunity_line_item_update": {
-    "hash": "05e67590401858fb67d2916988eaad34ad9e58f08f1ac27138627c7393a6166c",
+    "hash": "7cdf5d6dd317b5ffd9bdd4aea0b3bd140f09cb6226ee3092588ea7f17f69083f",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Update Opportunity Product",
@@ -199594,8 +199594,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank when you have connected Salesforce - only needed if you pasted a token yourself",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "line_item_id",
@@ -199694,7 +199694,7 @@
     ]
   },
   "crm/salesforce/opportunity_update": {
-    "hash": "9fab26ef78be8b35f0cfcb59bb65fa45cd41f10dbe9a56118fe5434ec3ebab57",
+    "hash": "58280727f4f4d8a04e7d8e5f5d3601fb12af08fa1efce737172fd61cc316f6c3",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Update Opportunity",
@@ -199727,8 +199727,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank when you have connected Salesforce - only needed if you pasted a token yourself",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "opportunity_id",
@@ -199890,7 +199890,7 @@
     ]
   },
   "crm/salesforce/opportunity_upsert": {
-    "hash": "3e30d788b13e0da480336e559ec4706f8ed6319930c1890f4efe951b0a49119b",
+    "hash": "de924a753390ab5bb2d58a7b05d990639430e006a52a5e0d1edd6f841d113235",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Create or Update Opportunity",
@@ -199923,8 +199923,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank when you have connected Salesforce - only needed if you pasted a token yourself",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "external_id_field",
@@ -200094,7 +200094,7 @@
     ]
   },
   "crm/salesforce/order_activate": {
-    "hash": "3e3c270a115e123614e20ab842ea8bf36c87ec7278789698652a7747eee570a5",
+    "hash": "c4ce4d704bf4f5b8e8fce18f60a3dbd6509ed58d73dcd334974044b04a0c2853",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Activate Order",
@@ -200127,8 +200127,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank when you have connected Salesforce - only needed if you pasted a token yourself",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "order_id",
@@ -200178,7 +200178,7 @@
     ]
   },
   "crm/salesforce/order_create": {
-    "hash": "5efee4b2b94414b996f6e2ca05fb99fdbe66ebc28cee121f460adcd5584bfc60",
+    "hash": "7cdd0e8b58b7bf4067bb4ad059c407c2f76d970d1ced373514eabc79bff8d3f9",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Create Order",
@@ -200211,8 +200211,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank when you have connected Salesforce - only needed if you pasted a token yourself",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "account_id",
@@ -200448,7 +200448,7 @@
     ]
   },
   "crm/salesforce/order_delete": {
-    "hash": "8a621a1629b4966093a80d01c60164623f06fc6065b84ffcc044374178903c53",
+    "hash": "16c49deec4e92db10cd646896a9385c931846cd2f75c103055e72a1dbffe0b2e",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Delete Order",
@@ -200481,8 +200481,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank when you have connected Salesforce - only needed if you pasted a token yourself",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "order_id",
@@ -200532,7 +200532,7 @@
     ]
   },
   "crm/salesforce/order_get": {
-    "hash": "e19a164a750affe9b715c862e4164b495c856b661ddeb20455bb3d634b57952c",
+    "hash": "7a678ecc95eeedb229670fdfc776f33c690aecf1f0668c6c22334d8b2a53e957",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Get Order",
@@ -200565,8 +200565,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank when you have connected Salesforce - only needed if you pasted a token yourself",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "order_id",
@@ -200623,7 +200623,7 @@
     ]
   },
   "crm/salesforce/order_get_all": {
-    "hash": "c64e4f734194dbe39aab08d152cc1cd5450b37bebab37276f0a8fe06e6ac1810",
+    "hash": "81802c537f8a6f3c9c05598ca84e784df3dd96d5c6164286a0627a0fde64c6b8",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Get Many Orders",
@@ -200656,8 +200656,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank when you have connected Salesforce - only needed if you pasted a token yourself",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "fields",
@@ -200832,7 +200832,7 @@
     ]
   },
   "crm/salesforce/order_item_create": {
-    "hash": "6c67571a19c957141372bcf37a111a452690a71346f5684a03b8b31ea7b62fce",
+    "hash": "29f4ae80369fae962f74ffa13d09cdaab8049b93d3bec83fa5495e052ab85fd4",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Add Product to Order",
@@ -200865,8 +200865,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank when you have connected Salesforce - only needed if you pasted a token yourself",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "order_id",
@@ -200972,7 +200972,7 @@
     ]
   },
   "crm/salesforce/order_item_get_all": {
-    "hash": "7fc2e73eb68780400a24e8e9bd07a437cd9b9e9484faf501a118c28299d2b4fa",
+    "hash": "467cdc6232ba095eddd09389c3594fc79604ccc0e7606ef9cae276329296e946",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Get Order Products",
@@ -201005,8 +201005,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank when you have connected Salesforce - only needed if you pasted a token yourself",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "order_id",
@@ -201105,7 +201105,7 @@
     ]
   },
   "crm/salesforce/order_update": {
-    "hash": "74dab5c732d454f584f7e93b5b890e3d5a01bb37a98ead2517948a417296d0a8",
+    "hash": "51f0352d7705187a3839398145a73136e9fa87b28ee4ca25976d66fac49123b1",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Update Order",
@@ -201138,8 +201138,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank when you have connected Salesforce - only needed if you pasted a token yourself",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "order_id",
@@ -201381,7 +201381,7 @@
     ]
   },
   "crm/salesforce/org_limits_get": {
-    "hash": "7027d7a128b821b14fe26a05551b1b4b59e99967e6f0e4d01cc474e528bf9025",
+    "hash": "48f6a2fa16c6cf3b91616490d979b5886dd3e120111f7deb4a7d5e53bf168db9",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Get Org Limits",
@@ -201414,8 +201414,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank when you have connected Salesforce - only needed if you pasted a token yourself",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "limit_name",
@@ -201464,7 +201464,7 @@
     ]
   },
   "crm/salesforce/price_book_entry_create": {
-    "hash": "be9c7cc3929207ed068dfce06a88f9c9e3c87b69c44c5619f63d942315ccbcd6",
+    "hash": "248b13c49ad512234cdd622636f6acba814f5e17b80627976684cc9715bd28cb",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Add Product to Price Book",
@@ -201497,8 +201497,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank when you have connected Salesforce - only needed if you pasted a token yourself",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "pricebook_id",
@@ -201585,7 +201585,7 @@
     ]
   },
   "crm/salesforce/price_book_entry_get_all": {
-    "hash": "c0f7928c554e2993251a20411b12594961495ddd3eb55c1109106bba19ba7e87",
+    "hash": "2cf916c61e51a8828c5cd1bdb2f368a4053b264403c8656a0253bfbfb40a7f9d",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Get Many Price Book Entries",
@@ -201618,8 +201618,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank when you have connected Salesforce - only needed if you pasted a token yourself",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "pricebook_id",
@@ -201815,7 +201815,7 @@
     ]
   },
   "crm/salesforce/price_book_entry_update": {
-    "hash": "0e6eedd8b2ea84afcd875d0a693967f0c4fdc0f3780c2e609798bd1c392de464",
+    "hash": "f154e9f3fa291754b197d57db6477ec49baf90bbd61c5392eecda6dec389fb56",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Change Product Price",
@@ -201848,8 +201848,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank when you have connected Salesforce - only needed if you pasted a token yourself",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "pricebook_entry_id",
@@ -201927,7 +201927,7 @@
     ]
   },
   "crm/salesforce/price_book_get_all": {
-    "hash": "e59efe6c31b4c5e16766d653a2727d3a95390a34ba4762bd199312c56c61beb3",
+    "hash": "0a35bbb6adeba35c090279f06d27a748e75bbbc0e80f77ef03e25f9935070f5d",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Get Many Price Books",
@@ -201960,8 +201960,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank when you have connected Salesforce - only needed if you pasted a token yourself",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "fields",
@@ -202150,7 +202150,7 @@
     ]
   },
   "crm/salesforce/product_create": {
-    "hash": "7d58907e2287b0741286a0640e1bda493d8b09c0ae610b64fbc4a664d6214465",
+    "hash": "84c59576605412c8aedd7ca3fd2d9e77729fee6d3ce6f724c1a4b2b661b14c3e",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Create Product",
@@ -202183,8 +202183,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank when you have connected Salesforce - only needed if you pasted a token yourself",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "name",
@@ -202318,7 +202318,7 @@
     ]
   },
   "crm/salesforce/product_delete": {
-    "hash": "0d4e12edff83f3c2b39914eefc6a46bfc76eeb5ea28a9319e3792cbce15d2172",
+    "hash": "0ad67baab38becb66e6c1b037173bdb1a48b4d4217dccf30bfc680b94fda2a2c",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Delete Product",
@@ -202351,8 +202351,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank when you have connected Salesforce - only needed if you pasted a token yourself",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "product_id",
@@ -202402,7 +202402,7 @@
     ]
   },
   "crm/salesforce/product_get": {
-    "hash": "bca6754c8969c8cf40139e7210e8da46238778d131a7799e0d3cf1af25bb5d1e",
+    "hash": "4c6b9c773b44feb9984062597941a0d8c92d0c4514e284bbbf31040a63ade29e",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Get Product",
@@ -202435,8 +202435,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank when you have connected Salesforce - only needed if you pasted a token yourself",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "product_id",
@@ -202493,7 +202493,7 @@
     ]
   },
   "crm/salesforce/product_get_all": {
-    "hash": "4fde44797e509316f30fca31b18c340bcf292f785fb2eea408a3e96a3b52ffb4",
+    "hash": "d4468798103b390b7c97107c752955a40eaeae2ef0f261e9ec296cc4a3a20629",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Get Many Products",
@@ -202526,8 +202526,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank when you have connected Salesforce - only needed if you pasted a token yourself",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "fields",
@@ -202716,7 +202716,7 @@
     ]
   },
   "crm/salesforce/product_update": {
-    "hash": "81f266efe3ad2d7961d66249fb0975795ae30b8abbbd5731b269f5c6ef0e4dec",
+    "hash": "df8d6f6a6d0ab92c20ff06f00be5c71744d76cb20e1b6881e0d9f68abe09e868",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Update Product",
@@ -202749,8 +202749,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank when you have connected Salesforce - only needed if you pasted a token yourself",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "product_id",
@@ -202870,7 +202870,7 @@
     ]
   },
   "crm/salesforce/product_upsert": {
-    "hash": "fec473eb96da668ad4bc1d5d1ec981dd4a051a97b64289373f9acd36c50fb20f",
+    "hash": "7bc989029aab9f18a0b87d80ce7361b8b0a6ce8aa0c9f8e2dcca1acb4b1c582a",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Create or Update Product",
@@ -202903,8 +202903,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank when you have connected Salesforce - only needed if you pasted a token yourself",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "match_field",
@@ -203031,7 +203031,7 @@
     ]
   },
   "crm/salesforce/query_all": {
-    "hash": "8aa83811279e9c027b57b88a2ef880487ed0049015d87cc37da557509a484cd7",
+    "hash": "a7fbd2f9b6ca73368733335e3dd6ffda914707af6b6373bb9ded14e69f39271f",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Run Query Including Deleted",
@@ -203064,8 +203064,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank when you have connected Salesforce - only needed if you pasted a token yourself",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "query",
@@ -203143,7 +203143,7 @@
     ]
   },
   "crm/salesforce/quick_action_get_all": {
-    "hash": "09ed11e4ad8e72f5a759aea9029fa4004d5e2658c7a074e05b8a821956954553",
+    "hash": "9c7479f791dfa2190e1606823e46a580ee4614835da41df631b7305ec983d906",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Get Many Quick Actions",
@@ -203176,8 +203176,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank when you have connected Salesforce - only needed if you pasted a token yourself",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "object",
@@ -203261,7 +203261,7 @@
     ]
   },
   "crm/salesforce/quick_action_run": {
-    "hash": "f30644039945763bf0ac5cf612c6592b8d7e065722ef37a8cec59d4fe4233721",
+    "hash": "60d8a2306dfbd92a06778d554b287d933ec06984c84a57e9ddce9657ee2acb90",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Run Quick Action",
@@ -203294,8 +203294,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank when you have connected Salesforce - only needed if you pasted a token yourself",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "object",
@@ -203380,7 +203380,7 @@
     ]
   },
   "crm/salesforce/quote_create": {
-    "hash": "a054986275dc231de2c268443dda648486e75616ff0321cd6a33904a1175fb94",
+    "hash": "8615f8eb58a869a4d7490c0b567233950f69136a92b82cc670a1c6b971e8ca13",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Create Quote",
@@ -203413,8 +203413,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank when you have connected Salesforce - only needed if you pasted a token yourself",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "name",
@@ -203680,7 +203680,7 @@
     ]
   },
   "crm/salesforce/quote_delete": {
-    "hash": "aa7ce59fe0f07a63fb601d19fb60b255c118b64b9a357fe897b19e350108c993",
+    "hash": "af46bc21f31b36e8ab7fb8561b0bc9fce5ccf735301462d5d2fe8c1a5364739a",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Delete Quote",
@@ -203713,8 +203713,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank when you have connected Salesforce - only needed if you pasted a token yourself",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "quote_id",
@@ -203764,7 +203764,7 @@
     ]
   },
   "crm/salesforce/quote_get": {
-    "hash": "fea5cd85d9be3a74d384a6b912bfd150ee084e60a1719f2492d085cdddc8b537",
+    "hash": "9f3f8d470bb9cdc936931cfb9152977bce9c0514bf273f0fec74df0009cd46a0",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Get Quote",
@@ -203797,8 +203797,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank when you have connected Salesforce - only needed if you pasted a token yourself",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "quote_id",
@@ -203855,7 +203855,7 @@
     ]
   },
   "crm/salesforce/quote_get_all": {
-    "hash": "b1e625e97732d7b5a0957a65a64a94f9c0ef13f0f0b42c49dc3b50d49e81b096",
+    "hash": "918c99b6125463f851d2e3cb1db49d8e73c949a42d650ecff49569a99354e36a",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Get Many Quotes",
@@ -203888,8 +203888,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank when you have connected Salesforce - only needed if you pasted a token yourself",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "fields",
@@ -204064,7 +204064,7 @@
     ]
   },
   "crm/salesforce/quote_line_item_create": {
-    "hash": "2853e5dc0403ae59a6c26968b3e1455e2fc3e302df1cd0781c299e235af2d561",
+    "hash": "df1a75a086d54c31428e7c172499c88107e4587221907460499e5b4c6ec8ec50",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Add Product to Quote",
@@ -204097,8 +204097,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank when you have connected Salesforce - only needed if you pasted a token yourself",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "quote_id",
@@ -204218,7 +204218,7 @@
     ]
   },
   "crm/salesforce/quote_line_item_get_all": {
-    "hash": "ffd870fdb4c4e7cdaad838ece7e74e2b94518b686d88b4d6ca5d8d29ce8b1347",
+    "hash": "8b1d126051a1d3b827d37ebfb3a6326b09ecd58d939cb1175f8f99d4e3e6efa2",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Get Quote Products",
@@ -204251,8 +204251,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank when you have connected Salesforce - only needed if you pasted a token yourself",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "quote_id",
@@ -204351,7 +204351,7 @@
     ]
   },
   "crm/salesforce/quote_sync_to_opportunity": {
-    "hash": "37a875b206de6623cfdc0bdfad24a82347b55382db5762f6f3097621459d33e4",
+    "hash": "a6ee4e63b1b4a2cb546a7e21578a53bb7d0de5f0f1e5a283a99feb7ecf0f8fa8",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Sync Quote to Opportunity",
@@ -204384,8 +204384,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank when you have connected Salesforce - only needed if you pasted a token yourself",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "quote_id",
@@ -204449,7 +204449,7 @@
     ]
   },
   "crm/salesforce/quote_update": {
-    "hash": "cb60aabad76feb690ca78895b9db97d3df3aadfb87b48a69f03e038d6785e5ef",
+    "hash": "7037a6ea7facef23e9090bd5afae14af8ce6e877d6c3de7b58ad1741fae47c8a",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Update Quote",
@@ -204482,8 +204482,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank when you have connected Salesforce - only needed if you pasted a token yourself",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "quote_id",
@@ -204749,7 +204749,7 @@
     ]
   },
   "crm/salesforce/record_create_many": {
-    "hash": "8e7ab0e5b7cc69f6df8f44db5c199aa8b3b1a4ae98c2e29f7f9bb6c43cfb5b15",
+    "hash": "f31fed529f12311283e7c582ffb024d286af6bb24e25788f33393b2cf266717b",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Create Many Records",
@@ -204782,8 +204782,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank when you have connected Salesforce - only needed if you pasted a token yourself",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "object",
@@ -204876,7 +204876,7 @@
     ]
   },
   "crm/salesforce/record_delete_many": {
-    "hash": "af9375e29b5665311a346424f0746674e04914ac19a04b283d67fb7c4d2b5d7e",
+    "hash": "41404218a8733aca39a0701867888d695ea2f0ed683ad1bfa2e586ecd65af558",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Delete Many Records",
@@ -204909,8 +204909,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank when you have connected Salesforce - only needed if you pasted a token yourself",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "record_ids",
@@ -204988,7 +204988,7 @@
     ]
   },
   "crm/salesforce/record_find": {
-    "hash": "609712733ccb6c2dd180e67e59438f29c87855f5e7e9be70aee52ab508352139",
+    "hash": "4a398ee31ac4077ac461ffaec7644cca506bffd06f3a1da8410725fb54bd71b8",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Find Record by Field",
@@ -205021,8 +205021,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank when you have connected Salesforce - only needed if you pasted a token yourself",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "object",
@@ -205127,7 +205127,7 @@
     ]
   },
   "crm/salesforce/record_get_deleted": {
-    "hash": "7d7b38a1356af9b46e507dc097c1b9e6c96d3bc9c976263a9c200aa287434dfb",
+    "hash": "cc765fd864b5fe551c010abc6b6093d17fc9d6a1833f4baeff7ac4f7bebdb5b4",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Get Deleted Records",
@@ -205160,8 +205160,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank when you have connected Salesforce - only needed if you pasted a token yourself",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "object",
@@ -205247,7 +205247,7 @@
     ]
   },
   "crm/salesforce/record_get_related": {
-    "hash": "48bd9b446af8f49950ca56b21e0bd52930381608a502e89d03587ffb765d19a4",
+    "hash": "758519757a708cfa064fb05a07aabf85fc26b1f9253715a8cfe80f709e47585a",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Get Related Records",
@@ -205280,8 +205280,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank when you have connected Salesforce - only needed if you pasted a token yourself",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "object",
@@ -205389,7 +205389,7 @@
     ]
   },
   "crm/salesforce/record_get_updated": {
-    "hash": "285a0b945bbcb535432cebb3f9aa17ca28b9c113eea8471b26a4d39294a55943",
+    "hash": "a23d315cf0c5afcc7dced2b28e2d32abe458d347b3295d61c35fb03af8ee2938",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Get Updated Records",
@@ -205422,8 +205422,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank when you have connected Salesforce - only needed if you pasted a token yourself",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "object",
@@ -205509,7 +205509,7 @@
     ]
   },
   "crm/salesforce/record_merge": {
-    "hash": "e8d6e79541f181a7cf2ab7380fff0c0ea10527d138a6901df86468cd97aa63d3",
+    "hash": "2d75de693e6097c55cedce9b30ef50187e798099d66bd08e6100df5e58f1e186",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Merge Duplicate Records",
@@ -205542,8 +205542,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank when you have connected Salesforce - only needed if you pasted a token yourself",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "object",
@@ -205634,7 +205634,7 @@
     ]
   },
   "crm/salesforce/record_undelete": {
-    "hash": "903c725b40a7c656d4efdf88f39ffd85061a4980146bfa6d4319bbe4e1aaf92e",
+    "hash": "3664422d729408a0dbb75391d050aa099444afda76b7a5aeeb1901d7f96a8c11",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Restore Deleted Record",
@@ -205667,8 +205667,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank when you have connected Salesforce - only needed if you pasted a token yourself",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "record_id",
@@ -205718,7 +205718,7 @@
     ]
   },
   "crm/salesforce/record_update_many": {
-    "hash": "cb57072cb2c464d69219d1bca6c94a2ab37639c4429847be790772945daae267",
+    "hash": "8fc16b39f42b7a54c9b395910e63e278bd5ba0fab613548213c3e8c7f8e89736",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Update Many Records",
@@ -205751,8 +205751,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank when you have connected Salesforce - only needed if you pasted a token yourself",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "object",
@@ -205845,7 +205845,7 @@
     ]
   },
   "crm/salesforce/record_upsert": {
-    "hash": "fc47c9d34456f61be48edbf98fb1d124b63dc0805fc0a16d1d26d33fec73c9da",
+    "hash": "6bb25e86d62f4328b50733b040948a2a7c8afc1a53a8c3962c297131e1880fc5",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Create or Update Record",
@@ -205878,8 +205878,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank when you have connected Salesforce - only needed if you pasted a token yourself",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "object",
@@ -205966,7 +205966,7 @@
     ]
   },
   "crm/salesforce/record_upsert_many": {
-    "hash": "ad5510ea08de7ebaa1618b11c3c657f46370e72a1fa3072671a70eb251a91963",
+    "hash": "74898039ebcb722d4935042eb7373f92d42f88eb76f257ed310a37852e08529b",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Create or Update Many Records",
@@ -205999,8 +205999,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank when you have connected Salesforce - only needed if you pasted a token yourself",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "object",
@@ -206101,7 +206101,7 @@
     ]
   },
   "crm/salesforce/report_get_all": {
-    "hash": "4969a77e3039f5fbb89d1c590504bedd03a056adf6951cc5204bc33fd831059c",
+    "hash": "8df4cd9cf3126f91efb3ecbbc5d1eafe68c5854b03cd6aaaff302c0557e52bd5",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Get Many Reports",
@@ -206134,8 +206134,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank when you have connected Salesforce - only needed if you pasted a token yourself",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "scope",
@@ -206243,7 +206243,7 @@
     ]
   },
   "crm/salesforce/report_run": {
-    "hash": "7c0f266ede2825c4a81febd5190e499e3221ebb7d7776c9ad632f2bc235b4a76",
+    "hash": "c85cc7563b4aa64edc88f2e4b5758cd26043d3cbe1a8b1bf2751b145e61d5a5d",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Run Report",
@@ -206276,8 +206276,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank when you have connected Salesforce - only needed if you pasted a token yourself",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "report_id",
@@ -206355,7 +206355,7 @@
     ]
   },
   "crm/salesforce/search_query": {
-    "hash": "ea41dc12906ef8d60295d315b4ddf4308d509ea171a6f90a1a9ee2cd3257515d",
+    "hash": "7ba061c19966d3d07255c1f74dcb8ec214c959588386ec0680881bc5cf040ad5",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Run Query (SOQL)",
@@ -206388,8 +206388,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank when you have connected Salesforce - only needed if you pasted a token yourself",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "query",
@@ -206467,7 +206467,7 @@
     ]
   },
   "crm/salesforce/search_records": {
-    "hash": "0be9a777a99d41913b7bf4aad7ef4b6e84e07fa398333268096e2802883a811a",
+    "hash": "04b95242252c7eed4c3f8364bb783f72b9b6cdd7fb6f2b023eb61b8247cc90aa",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Find Records",
@@ -206500,8 +206500,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank when you have connected Salesforce - only needed if you pasted a token yourself",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "search_term",
@@ -206618,7 +206618,7 @@
     ]
   },
   "crm/salesforce/task_complete": {
-    "hash": "198a3f51140d9b8eee846dfa4ffba6652d34322528ad3e62a51e45b5e0fe5168",
+    "hash": "c3820341717870752c62a44981486464eb4728c031aa6b5dfd29f832e0a0fc1a",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Mark Task Complete",
@@ -206651,8 +206651,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank when you have connected Salesforce - only needed if you pasted a token yourself",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "task_id",
@@ -206730,7 +206730,7 @@
     ]
   },
   "crm/salesforce/task_create": {
-    "hash": "d43fb2b1afcbb9a73862c6b452be75170e42cc257163ebf23847dc1a979b134b",
+    "hash": "d252335e5b1c44fa46d68cb9ab8b004d4ceeb848a320569ef3009c2cd566a861",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Create Task",
@@ -206763,8 +206763,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank when you have connected Salesforce - only needed if you pasted a token yourself",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "task_status",
@@ -207053,7 +207053,7 @@
     ]
   },
   "crm/salesforce/task_delete": {
-    "hash": "8d382dbc99795f2d1398b904215d510ea6fe729112dcc45ec367a6636f3cf4bc",
+    "hash": "9bae57d2a706158b8294e648e5be5c2d76c5940166d6aa10da6b96f89a22b7e1",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Delete Task",
@@ -207086,8 +207086,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank when you have connected Salesforce - only needed if you pasted a token yourself",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "task_id",
@@ -207137,7 +207137,7 @@
     ]
   },
   "crm/salesforce/task_describe": {
-    "hash": "28e5852f818e8768756dd3132d6f8a97e620dbe36a556f566b5ef53c2ad72627",
+    "hash": "630bad349bc1a0cb3f42bdd4493a7cfa23a06d8686860a6e5015b360e26aff6b",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Get Task Object Info",
@@ -207170,8 +207170,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank when you have connected Salesforce - only needed if you pasted a token yourself",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "include_fields",
@@ -207220,7 +207220,7 @@
     ]
   },
   "crm/salesforce/task_get": {
-    "hash": "97f019d000e6f4443bb1b0be04165e69006072595dacca5ae082c8d7d505ad73",
+    "hash": "67b3570aabf50128da0159835b76216473959473b3478b11df4952db56b2e4b5",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Get Task",
@@ -207253,8 +207253,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank when you have connected Salesforce - only needed if you pasted a token yourself",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "task_id",
@@ -207311,7 +207311,7 @@
     ]
   },
   "crm/salesforce/task_get_all": {
-    "hash": "9d4251f5df5dd27e605edd6435b5658d050471bff17a443f586e5ebbcfe59c42",
+    "hash": "e57663f7861913108c3784deb39d3d948865b92004f488e536a3b9c8d8360b5a",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Get Many Tasks",
@@ -207344,8 +207344,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank when you have connected Salesforce - only needed if you pasted a token yourself",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "fields",
@@ -207569,7 +207569,7 @@
     ]
   },
   "crm/salesforce/task_get_all_for_record": {
-    "hash": "908142ae8f41b42ba0b41db3e9f1ad9c27459da44be495ba87800596bdd78ebc",
+    "hash": "10e74c755000ab4d7f11cbc12777a00de4fff8f885b97c1594c8ba00fba6b4c7",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Get Tasks On a Record",
@@ -207602,8 +207602,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank when you have connected Salesforce - only needed if you pasted a token yourself",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "object",
@@ -207703,7 +207703,7 @@
     ]
   },
   "crm/salesforce/task_update": {
-    "hash": "542fefbdbd9263c2a88fef5e61c040b5921beb4bdd161ce1b281fba5ea9da12a",
+    "hash": "69012782f0b4ba303a44a97073875d66c748331db67de75d6def3ec80f149004",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Update Task",
@@ -207736,8 +207736,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank when you have connected Salesforce - only needed if you pasted a token yourself",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "task_id",
@@ -208019,7 +208019,7 @@
     ]
   },
   "crm/salesforce/task_upsert": {
-    "hash": "f7005dc915b9be226ae889e9710394125c194040081a90400d9721f665bd6286",
+    "hash": "b31a1aa153bedf3b5d1b4e9be94b0df4755a2c720155567585085ace3669402c",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Create or Update Task",
@@ -208052,8 +208052,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank when you have connected Salesforce - only needed if you pasted a token yourself",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "external_id_field",
@@ -208216,7 +208216,7 @@
     ]
   },
   "crm/salesforce/user_create": {
-    "hash": "f3f899cf340116b3cab97671c0a9feac77499226a6ef19fcb314fefce8676261",
+    "hash": "8be85c04eb95308f7be84380b4d37fef2025c3bf22bb5c6e7c20ec9d25b21bb5",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Create User",
@@ -208249,8 +208249,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank when you have connected Salesforce - only needed if you pasted a token yourself",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "username",
@@ -208530,7 +208530,7 @@
     ]
   },
   "crm/salesforce/user_deactivate": {
-    "hash": "54ba5a6e742214c3f157df87d3c149e36e2d4f69a3141bac97388365c39d5cfe",
+    "hash": "db4225ccd13faf14237465a3b656fda01515bfeeea4d9c3c75f397b4ade8ddb5",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Deactivate User",
@@ -208563,8 +208563,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank when you have connected Salesforce - only needed if you pasted a token yourself",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "user_id",
@@ -208614,7 +208614,7 @@
     ]
   },
   "crm/salesforce/user_get": {
-    "hash": "6a25c8ad15ed4fde1a3ef256e637beb47215a9f175488c2cafc0db2825ef1cc6",
+    "hash": "5d6a8b58fb1f34e48917d30625dffe57857ad05a623b94f59f553b8cc76a5479",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Get User",
@@ -208647,8 +208647,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank when you have connected Salesforce - only needed if you pasted a token yourself",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "user_id",
@@ -208705,7 +208705,7 @@
     ]
   },
   "crm/salesforce/user_get_all": {
-    "hash": "fa7ce4ee74b4719c5c8be85623afa5bd454e2d9530d411769ad4f6f1e8361b60",
+    "hash": "6cd1ede5ff3a5a21a7b457b9dd7262079ceb8d85dcbb35e2cd4aa27e1fb932d3",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Get Many Users",
@@ -208738,8 +208738,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank when you have connected Salesforce - only needed if you pasted a token yourself",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "fields",
@@ -208914,7 +208914,7 @@
     ]
   },
   "crm/salesforce/user_get_current": {
-    "hash": "9ca7e63f7e0eb78b150b5d275d73b6ea572f9cf1d32faec20cf04bbb7e90bef4",
+    "hash": "aa3be10e30f28e79eb4ad6f690e04c326380c8b87009bb426e80a77ba4dbc2c4",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Get Current User",
@@ -208947,8 +208947,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank when you have connected Salesforce - only needed if you pasted a token yourself",
+        "from_credential_meta": "instance_url"
       }
     ],
     "outputs": [
@@ -208990,7 +208990,7 @@
     ]
   },
   "crm/salesforce/user_update": {
-    "hash": "0e04e84882b6199f3c2f1254d493ce426328ba412cbe094257b2de60990c581f",
+    "hash": "57ca6a41951fd27cd2cff9f72708a114010080e26e305021d2c1d5b910f1286e",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Update User",
@@ -209023,8 +209023,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank when you have connected Salesforce - only needed if you pasted a token yourself",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "user_id",
@@ -542008,7 +542008,7 @@
     ]
   },
   "trigger/salesforce_poll": {
-    "hash": "61a5c0333047a0791488d6090142ef152197af91ab51aff05f66328a74b2a750",
+    "hash": "ae28442fff36bc3837ddf73b36f01231a35ea0c82470c6dd687751fd35845a94",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Record Created or Updated",
@@ -542036,8 +542036,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank when you have connected Salesforce - only needed if you pasted a token yourself",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "object",

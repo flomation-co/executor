@@ -44,7 +44,7 @@ const (
 
 var Inputs = [...]core.Connection{
 	{Name: "access_token", Type: core.ConnectionTypeSecret, Label: "Salesforce Connection", Placeholder: "Connect Salesforce, or paste an access token", Required: true},
-	{Name: "instance_url", Type: core.ConnectionTypeString, Label: "Salesforce Instance URL", Placeholder: "https://mycompany.my.salesforce.com", Required: true},
+	{Name: "instance_url", Type: core.ConnectionTypeString, Label: "Salesforce Instance URL", Placeholder: "Leave blank when you have connected Salesforce - only needed if you pasted a token yourself", FromCredentialMeta: "instance_url"},
 	{Name: "object", Type: core.ConnectionTypeString, Label: "Object", Placeholder: "Opportunity — narrows the record picker"},
 	{Name: "record_id", Type: core.ConnectionTypeString, Label: "Record to Submit", Placeholder: "0065f00000AbcDEAA", Required: true},
 	{Name: "approval_process_name", Type: core.ConnectionTypeString, Label: "Approval Process", Placeholder: "Discount_Approval — leave empty to let Salesforce choose"},

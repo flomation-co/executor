@@ -47,6 +47,114 @@ func getManifestDescriptions() map[string]string {
 	return manifestDescriptions
 }
 
+// credentialMetaLinks maps actionID -> inputName -> credential-metadata key, for
+// every input declaring FromCredentialMeta.
+var credentialMetaLinks map[string]map[string]string
+
+// getCredentialMetaLinks reads the links from the EMBEDDED MANIFEST rather than
+// from the saved node, and that distinction is the whole point.
+//
+// A node's inputs are snapshotted into the flow when it is added to the canvas,
+// so a flow built before this feature existed carries inputs with no
+// from_credential_meta at all. Reading the manifest means the auto-fill starts
+// working for those flows the moment the executor ships, with no re-save and no
+// migration. Mirrors getManifestDescriptions, which exists for the same reason.
+func getCredentialMetaLinks() map[string]map[string]string {
+	if credentialMetaLinks != nil {
+		return credentialMetaLinks
+	}
+	credentialMetaLinks = make(map[string]map[string]string)
+	data, err := assets.Manifest.ReadFile("manifest/manifest.json")
+	if err != nil {
+		return credentialMetaLinks
+	}
+	var manifest map[string]struct {
+		Inputs []struct {
+			Name               string `json:"name"`
+			FromCredentialMeta string `json:"from_credential_meta"`
+		} `json:"inputs"`
+	}
+	if err := json.Unmarshal(data, &manifest); err != nil {
+		return credentialMetaLinks
+	}
+	for actionID, entry := range manifest {
+		for _, in := range entry.Inputs {
+			if in.FromCredentialMeta == "" {
+				continue
+			}
+			if credentialMetaLinks[actionID] == nil {
+				credentialMetaLinks[actionID] = make(map[string]string)
+			}
+			credentialMetaLinks[actionID][in.Name] = in.FromCredentialMeta
+		}
+	}
+	return credentialMetaLinks
+}
+
+// credentialRefPattern matches a whole-value ${credentials.NAME} reference — and
+// deliberately NOT ${credentials.NAME.key}, which is already resolved to a
+// metadata value and is not the connection itself. Credential names are
+// sanitised to [A-Za-z0-9_-] (no dots), so the absence of a dot is a reliable
+// discriminator.
+var credentialRefPattern = regexp.MustCompile(`^\$\{credentials\.([A-Za-z0-9_-]+)\}$`)
+
+// autofillFromCredential fills blank inputs that declare FromCredentialMeta,
+// using the credential bound to a sibling input on the same node.
+//
+// It rewrites the value to a ${credentials.NAME.key} reference rather than
+// fetching anything: substitution already knows how to resolve those, so this
+// only writes the reference the operator would otherwise have had to know
+// existed. Returns the inputs unchanged when the action declares no links, when
+// the operator has typed something, or when no credential is bound — the last
+// being the bring-your-own-token path, which must keep working.
+func autofillFromCredential(actionID string, inputs []*Connection) {
+	links := getCredentialMetaLinks()[actionID]
+	if len(links) == 0 {
+		return
+	}
+
+	// The credential bound anywhere on this node. Actions have exactly one
+	// connection input in practice, so the first match is the right one.
+	credName := ""
+	for _, in := range inputs {
+		if in == nil {
+			continue
+		}
+		s, ok := in.Value.(string)
+		if !ok {
+			continue
+		}
+		if m := credentialRefPattern.FindStringSubmatch(strings.TrimSpace(s)); m != nil {
+			credName = m[1]
+			break
+		}
+	}
+	if credName == "" {
+		return
+	}
+
+	for i := range inputs {
+		if inputs[i] == nil {
+			continue
+		}
+		key, linked := links[inputs[i].Name]
+		if !linked {
+			continue
+		}
+		// Anything the operator typed wins. A blank string counts as untouched,
+		// matching how the auto-wire above treats an empty input.
+		if s, ok := inputs[i].Value.(string); ok && strings.TrimSpace(s) != "" {
+			continue
+		} else if !ok && inputs[i].Value != nil {
+			continue
+		}
+		inputs[i].Value = "${credentials." + credName + "." + key + "}"
+		log.WithFields(log.Fields{
+			"action": actionID, "input": inputs[i].Name, "credential": credName,
+		}).Debug("filled a blank input from the connected credential's metadata")
+	}
+}
+
 const (
 	TriggerTypeManual = "trigger/manual"
 )
@@ -339,6 +447,27 @@ type Connection struct {
 	Required    bool               `json:"required,omitempty"`
 	Options     []ConnectionOption `json:"options,omitempty"`
 	Visible     *VisibleWhen       `json:"visible_when,omitempty"`
+
+	// FromCredentialMeta names a key on the connected credential's metadata that
+	// fills this input when the operator leaves it blank.
+	//
+	// It exists because several providers capture a value at OAuth time that the
+	// operator then has to retype by hand: Salesforce's instance_url, QuickBooks'
+	// realm_id, Xero's tenant_id. Retyping is not merely tedious, it is a trap —
+	// the Salesforce field's placeholder invites pasting the URL from the browser
+	// address bar, which is the LIGHTNING host, not the API one, and fails in a
+	// way that reads as a broken integration.
+	//
+	// When set, and this input is blank, and a sibling input on the same node
+	// holds a ${credentials.NAME} reference, the value becomes
+	// ${credentials.NAME.<FromCredentialMeta>} — which the ordinary substitution
+	// machinery then resolves. Nothing new fetches anything; this only writes the
+	// reference the operator would otherwise have had to know to write.
+	//
+	// An input carrying this must NOT be Required: the whole point is that it can
+	// be left empty. It stays visible and typeable for the bring-your-own-token
+	// path, where there is no credential to read from.
+	FromCredentialMeta string `json:"from_credential_meta,omitempty"`
 }
 
 func (c *Connection) String() *string {
@@ -1643,6 +1772,17 @@ func (f *Flow) executeNodeActionOnly(actions map[string]Action, node *Node, envi
 		if len(toolsChildren) > 0 {
 			f.injectToolDefinitions(node, toolsChildren, actions)
 		}
+	}
+
+	// Fill any blank input that declares FromCredentialMeta from the credential
+	// bound elsewhere on this node, BEFORE the loop below reads the values —
+	// substitution then resolves the reference like any other.
+	if node.Data != nil {
+		actionID := node.Type
+		if _, known := getCredentialMetaLinks()[actionID]; !known {
+			actionID = node.Data.Label
+		}
+		autofillFromCredential(actionID, node.Data.Config.Inputs)
 	}
 
 	var configuration []*Connection

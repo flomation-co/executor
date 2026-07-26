@@ -46,7 +46,7 @@ var noteEscaper = strings.NewReplacer("&", "&amp;", "<", "&lt;", ">", "&gt;")
 
 var Inputs = [...]core.Connection{
 	{Name: "access_token", Type: core.ConnectionTypeSecret, Label: "Salesforce Connection", Placeholder: "Connect Salesforce, or paste an access token", Required: true},
-	{Name: "instance_url", Type: core.ConnectionTypeString, Label: "Salesforce Instance URL", Placeholder: "https://mycompany.my.salesforce.com", Required: true},
+	{Name: "instance_url", Type: core.ConnectionTypeString, Label: "Salesforce Instance URL", Placeholder: "Leave blank when you have connected Salesforce - only needed if you pasted a token yourself", FromCredentialMeta: "instance_url"},
 
 	{Name: "title", Type: core.ConnectionTypeString, Label: "Note Title", Placeholder: "Call with Jane Smith — 25 July", Required: true},
 	{Name: "body", Type: core.ConnectionTypeText, Label: "Note", Placeholder: "What was said, agreed or needs doing next"},
