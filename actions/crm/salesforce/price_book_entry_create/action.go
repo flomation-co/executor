@@ -158,14 +158,66 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 		return salesforce.ErrorResult(err.Error()), nil
 	}
 
-	summary := fmt.Sprintf("Priced product %s at %v on price book %s (%s)", productID, unitPrice, pricebookID, id)
+	// Name the product and the book rather than printing two 18-character IDs at
+	// whoever reads the run. The product in particular is usually NOT something
+	// the operator picked here: the canonical flow is Create or Update Product
+	// followed by this action, with Product bound to the upstream node's id, so
+	// nobody has ever seen the product's name on this node.
+	product, book := entryLabels(instanceURL, token, id)
+	if product == "" {
+		// Falls back to the exact previous wording, so a failed lookup reads as it
+		// always did rather than as a half-finished sentence.
+		product = "product " + productID
+	} else {
+		product = fmt.Sprintf("%q", product)
+	}
+	if book == "" {
+		book = pricebookID
+	}
+
+	summary := fmt.Sprintf("Priced %s at %v on price book %s (%s)", product, unitPrice, book, id)
 	if useStandard {
 		// Salesforce overwrites the figure that was sent with the list price when
 		// this is on, so quoting the operator's number back at them would name a
 		// price the record does not hold.
-		summary = fmt.Sprintf("Priced product %s on price book %s using the standard list price (%s)", productID, pricebookID, id)
+		summary = fmt.Sprintf("Priced %s on price book %s using the standard list price (%s)", product, book, id)
 	}
 	return salesforce.RecordResult(id, raw, summary), nil
+}
+
+// entryLabels reads back the names behind the two IDs in one query, for the
+// summary only.
+//
+// Deliberately fail-open: any failure returns blanks and the caller falls back to
+// the IDs. This is a COSMETIC read on the success path, so it must never turn a
+// completed write into an error — the price exists by the time this runs, and
+// reporting failure would send the operator to create it a second time.
+//
+// (The opposite rule applies to a safety read: syncLineCounts in
+// quote_sync_to_opportunity refuses the sync when it cannot count, because
+// proceeding risks deleting a deal's product lines. Safety reads fail closed,
+// cosmetic reads fail open.)
+func entryLabels(instanceURL, token, entryID string) (product, book string) {
+	soql, err := salesforce.BuildQuery(
+		"PricebookEntry",
+		"Id,Product2.Name,Pricebook2.Name",
+		[]salesforce.Condition{{Field: "Id", Operator: "=", Value: entryID}},
+		false, "", 1, true,
+	)
+	if err != nil {
+		return "", ""
+	}
+	record, err := salesforce.QueryOne(instanceURL, token, soql)
+	if err != nil || record == nil {
+		return "", ""
+	}
+	if p, ok := record["Product2"].(map[string]interface{}); ok {
+		product, _ = p["Name"].(string)
+	}
+	if b, ok := record["Pricebook2"].(map[string]interface{}); ok {
+		book, _ = b["Name"].(string)
+	}
+	return product, book
 }
 
 // standardPriceRequested reports whether the request actually asked Salesforce to

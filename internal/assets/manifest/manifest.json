@@ -201464,7 +201464,7 @@
     ]
   },
   "crm/salesforce/price_book_entry_create": {
-    "hash": "156f5182125fab697fc6fa80cb2546a620079c127c849698d992686ae998a60e",
+    "hash": "be9c7cc3929207ed068dfce06a88f9c9e3c87b69c44c5619f63d942315ccbcd6",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Add Product to Price Book",
