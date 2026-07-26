@@ -105,7 +105,7 @@ var Inputs = [...]core.Connection{
 	{Name: "nickname", Type: core.ConnectionTypeString, Label: "Nickname", Placeholder: "jsmith — shown in Chatter; generated automatically if left blank"},
 	{Name: "street", Type: core.ConnectionTypeString, Label: "Street", Placeholder: "1 High Street"},
 	{Name: "city", Type: core.ConnectionTypeString, Label: "City", Placeholder: "London"},
-	{Name: "state", Type: core.ConnectionTypeString, Label: "County or State", Placeholder: "Greater London"},
+	{Name: "state", Type: core.ConnectionTypeString, Label: "County or State", Placeholder: "California — must match your org's State list, if it uses one"},
 	{Name: "postal_code", Type: core.ConnectionTypeString, Label: "Postcode", Placeholder: "SW1A 1AA"},
 	{Name: "country", Type: core.ConnectionTypeString, Label: "Country", Placeholder: "United Kingdom"},
 	{Name: "is_active", Type: core.ConnectionTypeBoolean, Label: "Login Active", Placeholder: "On by default — turn off to create the account without letting them sign in yet"},

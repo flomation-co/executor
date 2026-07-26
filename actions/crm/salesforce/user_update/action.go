@@ -61,7 +61,7 @@ var Inputs = [...]core.Connection{
 	{Name: "language_locale_key", Type: core.ConnectionTypeString, Label: "Language", Placeholder: "en_US — Salesforce has no en_GB language"},
 	{Name: "street", Type: core.ConnectionTypeString, Label: "Street", Placeholder: "1 High Street"},
 	{Name: "city", Type: core.ConnectionTypeString, Label: "City", Placeholder: "London"},
-	{Name: "state", Type: core.ConnectionTypeString, Label: "County or State", Placeholder: "Greater London"},
+	{Name: "state", Type: core.ConnectionTypeString, Label: "County or State", Placeholder: "California — must match your org's State list, if it uses one"},
 	{Name: "postal_code", Type: core.ConnectionTypeString, Label: "Postcode", Placeholder: "SW1A 1AA"},
 	{Name: "country", Type: core.ConnectionTypeString, Label: "Country", Placeholder: "United Kingdom"},
 	{Name: "is_active", Type: core.ConnectionTypeBoolean, Label: "Login Active", Placeholder: "Turn on to restore a returning colleague's access; use Deactivate User for leavers"},

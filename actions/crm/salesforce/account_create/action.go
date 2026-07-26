@@ -39,7 +39,7 @@ var Inputs = [...]core.Connection{
 	{Name: "jigsaw", Type: core.ConnectionTypeString, Label: "Data.com Key", Placeholder: "Data.com company ID, if you sync from Data.com"},
 	{Name: "billing_street", Type: core.ConnectionTypeString, Label: "Billing Street", Placeholder: "14 Bridge Street"},
 	{Name: "billing_city", Type: core.ConnectionTypeString, Label: "Billing City", Placeholder: "Manchester"},
-	{Name: "billing_state", Type: core.ConnectionTypeString, Label: "Billing County / State", Placeholder: "Greater Manchester"},
+	{Name: "billing_state", Type: core.ConnectionTypeString, Label: "Billing County / State", Placeholder: "California — must match your org's State list, if it uses one"},
 	{Name: "billing_postal_code", Type: core.ConnectionTypeString, Label: "Billing Postcode", Placeholder: "M1 4WT"},
 	{Name: "billing_country", Type: core.ConnectionTypeString, Label: "Billing Country", Placeholder: "United Kingdom"},
 	{Name: "shipping_street", Type: core.ConnectionTypeString, Label: "Shipping Street", Placeholder: "Unit 7, Carlton Industrial Estate"},

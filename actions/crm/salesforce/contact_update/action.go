@@ -51,13 +51,13 @@ var Inputs = [...]core.Connection{
 
 	{Name: "mailing_street", Type: core.ConnectionTypeString, Label: "Mailing Street", Placeholder: "12 High Street"},
 	{Name: "mailing_city", Type: core.ConnectionTypeString, Label: "Mailing Town or City", Placeholder: "London"},
-	{Name: "mailing_state", Type: core.ConnectionTypeString, Label: "Mailing County or State", Placeholder: "Greater London"},
+	{Name: "mailing_state", Type: core.ConnectionTypeString, Label: "Mailing County or State", Placeholder: "California — must match your org's State list, if it uses one"},
 	{Name: "mailing_postal_code", Type: core.ConnectionTypeString, Label: "Mailing Postcode", Placeholder: "SW1A 1AA"},
 	{Name: "mailing_country", Type: core.ConnectionTypeString, Label: "Mailing Country", Placeholder: "United Kingdom"},
 
 	{Name: "other_street", Type: core.ConnectionTypeString, Label: "Other Street", Placeholder: "Second address, e.g. 4 Mill Lane"},
 	{Name: "other_city", Type: core.ConnectionTypeString, Label: "Other Town or City", Placeholder: "Manchester"},
-	{Name: "other_state", Type: core.ConnectionTypeString, Label: "Other County or State", Placeholder: "Greater Manchester"},
+	{Name: "other_state", Type: core.ConnectionTypeString, Label: "Other County or State", Placeholder: "California — must match your org's State list, if it uses one"},
 	{Name: "other_postal_code", Type: core.ConnectionTypeString, Label: "Other Postcode", Placeholder: "M1 2AB"},
 	{Name: "other_country", Type: core.ConnectionTypeString, Label: "Other Country", Placeholder: "United Kingdom"},
 

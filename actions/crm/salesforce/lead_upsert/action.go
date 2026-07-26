@@ -49,7 +49,7 @@ var Inputs = [...]core.Connection{
 
 	{Name: "street", Type: core.ConnectionTypeString, Label: "Street", Placeholder: "12 High Street"},
 	{Name: "city", Type: core.ConnectionTypeString, Label: "Town or City", Placeholder: "London"},
-	{Name: "state", Type: core.ConnectionTypeString, Label: "County or State", Placeholder: "Greater London"},
+	{Name: "state", Type: core.ConnectionTypeString, Label: "County or State", Placeholder: "California — must match your org's State list, if it uses one"},
 	{Name: "postal_code", Type: core.ConnectionTypeString, Label: "Postcode", Placeholder: "SW1A 1AA"},
 	{Name: "country", Type: core.ConnectionTypeString, Label: "Country", Placeholder: "United Kingdom"},
 
