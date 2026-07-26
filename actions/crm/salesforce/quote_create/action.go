@@ -42,7 +42,7 @@ var quoteStatuses = map[string]string{
 
 var Inputs = [...]core.Connection{
 	{Name: "access_token", Type: core.ConnectionTypeSecret, Label: "Salesforce Connection", Placeholder: "Connect Salesforce, or paste an access token", Required: true},
-	{Name: "instance_url", Type: core.ConnectionTypeString, Label: "Salesforce Instance URL", Placeholder: "Leave blank when you have connected Salesforce - only needed if you pasted a token yourself", FromCredentialMeta: "instance_url"},
+	{Name: "instance_url", Type: core.ConnectionTypeString, Label: "Salesforce Instance URL", Placeholder: "Leave blank - taken from your connection", FromCredentialMeta: "instance_url"},
 	{Name: "name", Type: core.ConnectionTypeString, Label: "Quote Name", Placeholder: "Acme Ltd - 50 seat renewal (June revision)", Required: true},
 	{Name: "opportunity_id", Type: core.ConnectionTypeString, Label: "Opportunity (Deal)", Placeholder: "0065f00000AbCdEAAV - the deal this quote is for; Salesforce copies the customer's account across from it. Needed unless an administrator has switched on Create Quotes Without a Related Opportunity"},
 	{Name: "pricebook_id", Type: core.ConnectionTypeString, Label: "Price Book", Placeholder: "01s5f000004AbCdAAK - the price list to quote from; needed before any product can be added"},

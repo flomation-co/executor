@@ -33,7 +33,7 @@ const (
 
 var Inputs = [...]core.Connection{
 	{Name: "access_token", Type: core.ConnectionTypeSecret, Label: "Salesforce Connection", Placeholder: "Connect Salesforce, or paste an access token", Required: true},
-	{Name: "instance_url", Type: core.ConnectionTypeString, Label: "Salesforce Instance URL", Placeholder: "Leave blank when you have connected Salesforce - only needed if you pasted a token yourself", FromCredentialMeta: "instance_url"},
+	{Name: "instance_url", Type: core.ConnectionTypeString, Label: "Salesforce Instance URL", Placeholder: "Leave blank - taken from your connection", FromCredentialMeta: "instance_url"},
 	{Name: "object", Type: core.ConnectionTypeString, Label: "Salesforce Object", Placeholder: "Account, Contact, Opportunity — or a custom one like Invoice__c", Required: true},
 	{Name: "external_id_field", Type: core.ConnectionTypeString, Label: "Match On Field", Placeholder: "The field Salesforce matches on, e.g. Customer_Ref__c", Required: true},
 	{Name: "external_id_value", Type: core.ConnectionTypeString, Label: "Match On Value", Placeholder: "The value to look for, e.g. CUST-1042", Required: true},

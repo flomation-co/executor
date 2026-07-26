@@ -20,7 +20,7 @@ const (
 
 var Inputs = [...]core.Connection{
 	{Name: "access_token", Type: core.ConnectionTypeSecret, Label: "Salesforce Connection", Placeholder: "Connect Salesforce, or paste an access token", Required: true},
-	{Name: "instance_url", Type: core.ConnectionTypeString, Label: "Salesforce Instance URL", Placeholder: "Leave blank when you have connected Salesforce - only needed if you pasted a token yourself", FromCredentialMeta: "instance_url"},
+	{Name: "instance_url", Type: core.ConnectionTypeString, Label: "Salesforce Instance URL", Placeholder: "Leave blank - taken from your connection", FromCredentialMeta: "instance_url"},
 	{Name: "external_id_field", Type: core.ConnectionTypeString, Label: "Match Against", Placeholder: "The External ID field to match on, e.g. External_Ref__c", Required: true},
 	{Name: "external_id_value", Type: core.ConnectionTypeString, Label: "Match Value", Placeholder: "The value to look for in that field, e.g. CUST-00142", Required: true},
 	{Name: "name", Type: core.ConnectionTypeString, Label: "Company Name", Placeholder: "Acme Manufacturing Ltd — only needed the first time, when the account has to be created"},

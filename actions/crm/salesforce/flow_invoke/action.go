@@ -31,7 +31,7 @@ const (
 
 var Inputs = [...]core.Connection{
 	{Name: "access_token", Type: core.ConnectionTypeSecret, Label: "Salesforce Connection", Placeholder: "Connect Salesforce, or paste an access token", Required: true},
-	{Name: "instance_url", Type: core.ConnectionTypeString, Label: "Salesforce Instance URL", Placeholder: "Leave blank when you have connected Salesforce - only needed if you pasted a token yourself", FromCredentialMeta: "instance_url"},
+	{Name: "instance_url", Type: core.ConnectionTypeString, Label: "Salesforce Instance URL", Placeholder: "Leave blank - taken from your connection", FromCredentialMeta: "instance_url"},
 	{Name: "flow_name", Type: core.ConnectionTypeString, Label: "Flow", Placeholder: "Send_Welcome_Email — the flow's API Name from Setup, Flows", Required: true},
 	{Name: "variable_name", Type: core.ConnectionTypeString, Label: "Value to Send", Placeholder: "recordId — the name of the value the flow asks for"},
 	{Name: "variable_value", Type: core.ConnectionTypeString, Label: "Value", Placeholder: "0035f00000AbCdEAAV"},

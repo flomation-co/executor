@@ -33,7 +33,7 @@ const defaultFields = "Id,Name,ProductCode,Family,IsActive,QuantityUnitOfMeasure
 
 var Inputs = [...]core.Connection{
 	{Name: "access_token", Type: core.ConnectionTypeSecret, Label: "Salesforce Connection", Placeholder: "Connect Salesforce, or paste an access token", Required: true},
-	{Name: "instance_url", Type: core.ConnectionTypeString, Label: "Salesforce Instance URL", Placeholder: "Leave blank when you have connected Salesforce - only needed if you pasted a token yourself", FromCredentialMeta: "instance_url"},
+	{Name: "instance_url", Type: core.ConnectionTypeString, Label: "Salesforce Instance URL", Placeholder: "Leave blank - taken from your connection", FromCredentialMeta: "instance_url"},
 	{Name: "fields", Type: core.ConnectionTypeString, Label: "Fields", Placeholder: "Name,ProductCode,Family - leave blank for the usual catalogue fields"},
 	{Name: "active_only", Type: core.ConnectionTypeBoolean, Label: "Only Products Ready To Sell"},
 	{Name: "family", Type: core.ConnectionTypeString, Label: "Product Family", Placeholder: "Generators - must match a value in your org's Product Family list exactly, or nothing comes back"},

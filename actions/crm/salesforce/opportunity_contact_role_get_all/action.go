@@ -27,7 +27,7 @@ const defaultFields = "Id,OpportunityId,ContactId,Contact.Name,Contact.Email,Con
 
 var Inputs = [...]core.Connection{
 	{Name: "access_token", Type: core.ConnectionTypeSecret, Label: "Salesforce Connection", Placeholder: "Connect Salesforce, or paste an access token", Required: true},
-	{Name: "instance_url", Type: core.ConnectionTypeString, Label: "Salesforce Instance URL", Placeholder: "Leave blank when you have connected Salesforce - only needed if you pasted a token yourself", FromCredentialMeta: "instance_url"},
+	{Name: "instance_url", Type: core.ConnectionTypeString, Label: "Salesforce Instance URL", Placeholder: "Leave blank - taken from your connection", FromCredentialMeta: "instance_url"},
 	{Name: "opportunity_id", Type: core.ConnectionTypeString, Label: "Opportunity ID", Placeholder: "0065f00000AbCdEAAV - the deal whose contacts you want", Required: true},
 	{Name: "fields", Type: core.ConnectionTypeString, Label: "Fields", Placeholder: "Role,Contact.Name,Contact.Email - leave blank for names, emails and roles"},
 	{Name: "primary_only", Type: core.ConnectionTypeBoolean, Label: "Only The Primary Contact"},

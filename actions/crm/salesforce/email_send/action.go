@@ -45,7 +45,7 @@ const (
 
 var Inputs = [...]core.Connection{
 	{Name: "access_token", Type: core.ConnectionTypeSecret, Label: "Salesforce Connection", Placeholder: "Connect Salesforce, or paste an access token", Required: true},
-	{Name: "instance_url", Type: core.ConnectionTypeString, Label: "Salesforce Instance URL", Placeholder: "Leave blank when you have connected Salesforce - only needed if you pasted a token yourself", FromCredentialMeta: "instance_url"},
+	{Name: "instance_url", Type: core.ConnectionTypeString, Label: "Salesforce Instance URL", Placeholder: "Leave blank - taken from your connection", FromCredentialMeta: "instance_url"},
 	{Name: "to_addresses", Type: core.ConnectionTypeString, Label: "Send To", Placeholder: "jane@acme.com, accounts@acme.com"},
 	{Name: "subject", Type: core.ConnectionTypeString, Label: "Subject", Placeholder: "Your order is on its way"},
 	{Name: "body", Type: core.ConnectionTypeText, Label: "Message", Placeholder: "Hi Jane, thanks for getting in touch..."},

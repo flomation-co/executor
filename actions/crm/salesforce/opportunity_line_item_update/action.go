@@ -21,7 +21,7 @@ const (
 
 var Inputs = [...]core.Connection{
 	{Name: "access_token", Type: core.ConnectionTypeSecret, Label: "Salesforce Connection", Placeholder: "Connect Salesforce, or paste an access token", Required: true},
-	{Name: "instance_url", Type: core.ConnectionTypeString, Label: "Salesforce Instance URL", Placeholder: "Leave blank when you have connected Salesforce - only needed if you pasted a token yourself", FromCredentialMeta: "instance_url"},
+	{Name: "instance_url", Type: core.ConnectionTypeString, Label: "Salesforce Instance URL", Placeholder: "Leave blank - taken from your connection", FromCredentialMeta: "instance_url"},
 	{Name: "line_item_id", Type: core.ConnectionTypeString, Label: "Product Line ID", Placeholder: "00k5f00000AbCdEAAV - from Get Opportunity Products", Required: true},
 	{Name: "quantity", Type: core.ConnectionTypeString, Label: "Quantity", Placeholder: "3 - how many of this product"},
 	{Name: "unit_price", Type: core.ConnectionTypeString, Label: "Price Each", Placeholder: "499.00 - set this or Line Total, never both"},

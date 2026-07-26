@@ -32,7 +32,7 @@ const (
 
 var Inputs = [...]core.Connection{
 	{Name: "access_token", Type: core.ConnectionTypeSecret, Label: "Salesforce Connection", Placeholder: "Connect Salesforce, or paste an access token", Required: true},
-	{Name: "instance_url", Type: core.ConnectionTypeString, Label: "Salesforce Instance URL", Placeholder: "Leave blank when you have connected Salesforce - only needed if you pasted a token yourself", FromCredentialMeta: "instance_url"},
+	{Name: "instance_url", Type: core.ConnectionTypeString, Label: "Salesforce Instance URL", Placeholder: "Leave blank - taken from your connection", FromCredentialMeta: "instance_url"},
 	{Name: "object", Type: core.ConnectionTypeString, Label: "Record Type", Placeholder: "Account — leave blank for an org-wide quick action"},
 	{Name: "quick_action_name", Type: core.ConnectionTypeString, Label: "Quick Action", Placeholder: "LogACall — the quick action's API name", Required: true},
 	{Name: "context_id", Type: core.ConnectionTypeString, Label: "Related Record", Placeholder: "0015f00000AbCdEAAV — the record the action is being run from"},

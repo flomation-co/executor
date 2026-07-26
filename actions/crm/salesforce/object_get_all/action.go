@@ -38,7 +38,7 @@ const (
 
 var Inputs = [...]core.Connection{
 	{Name: "access_token", Type: core.ConnectionTypeSecret, Label: "Salesforce Connection", Placeholder: "Connect Salesforce, or paste an access token", Required: true},
-	{Name: "instance_url", Type: core.ConnectionTypeString, Label: "Salesforce Instance URL", Placeholder: "Leave blank when you have connected Salesforce - only needed if you pasted a token yourself", FromCredentialMeta: "instance_url"},
+	{Name: "instance_url", Type: core.ConnectionTypeString, Label: "Salesforce Instance URL", Placeholder: "Leave blank - taken from your connection", FromCredentialMeta: "instance_url"},
 	{Name: "custom_only", Type: core.ConnectionTypeBoolean, Label: "Custom Objects Only"},
 	{Name: "createable_only", Type: core.ConnectionTypeBoolean, Label: "Only Objects You Can Add Records To"},
 	{Name: "filter", Type: core.ConnectionTypeString, Label: "Search", Placeholder: "invoice — matches the object's name or its label"},

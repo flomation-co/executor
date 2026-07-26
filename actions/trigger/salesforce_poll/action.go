@@ -58,7 +58,7 @@ const (
 
 var Inputs = [...]core.Connection{
 	{Name: "access_token", Type: core.ConnectionTypeSecret, Label: "Salesforce Connection", Placeholder: "Connect Salesforce, or paste an access token", Required: true},
-	{Name: "instance_url", Type: core.ConnectionTypeString, Label: "Salesforce Instance URL", Placeholder: "Leave blank when you have connected Salesforce - only needed if you pasted a token yourself", FromCredentialMeta: "instance_url"},
+	{Name: "instance_url", Type: core.ConnectionTypeString, Label: "Salesforce Instance URL", Placeholder: "Leave blank - taken from your connection", FromCredentialMeta: "instance_url"},
 	{Name: "object", Type: core.ConnectionTypeString, Label: "Object To Watch", Placeholder: "Lead, Opportunity, or your own object", Required: true},
 	{Name: "event", Type: core.ConnectionTypeString, Label: "Fire When", Required: true, Options: []core.ConnectionOption{
 		// The value strings are the cursor FIELD, so Launch needs no mapping table

@@ -21,7 +21,7 @@ const (
 
 var Inputs = [...]core.Connection{
 	{Name: "access_token", Type: core.ConnectionTypeSecret, Label: "Salesforce Connection", Placeholder: "Connect Salesforce, or paste an access token", Required: true},
-	{Name: "instance_url", Type: core.ConnectionTypeString, Label: "Salesforce Instance URL", Placeholder: "Leave blank when you have connected Salesforce - only needed if you pasted a token yourself", FromCredentialMeta: "instance_url"},
+	{Name: "instance_url", Type: core.ConnectionTypeString, Label: "Salesforce Instance URL", Placeholder: "Leave blank - taken from your connection", FromCredentialMeta: "instance_url"},
 	{Name: "account_id", Type: core.ConnectionTypeString, Label: "Customer (Account)", Placeholder: "0015f00000AbCdEAAV - the account this contract is with; Salesforce will not create a contract without one", Required: true},
 	{Name: "contract_status", Type: core.ConnectionTypeString, Label: "Status", Placeholder: "Leave blank - a new contract always starts as Draft. Move it on afterwards with Update Contract, or make it live with Activate Contract"},
 	{Name: "start_date", Type: core.ConnectionTypeDateTime, Label: "Start Date", Placeholder: "2026-08-01 (the date only) - the end date is worked out from this plus the term"},
