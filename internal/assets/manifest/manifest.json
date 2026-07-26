@@ -185417,7 +185417,7 @@
     ]
   },
   "crm/salesforce/asset_get_all": {
-    "hash": "7a42aedbe3e4e34527cc9ecfabfd8c6c253e6505f24fb138f8f3cd2147579eda",
+    "hash": "864e5632cde14897889991a4c7f3e488a8380f7e5748a1cd51ba2804a93c91d3",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Get Many Assets",
@@ -191373,7 +191373,7 @@
     ]
   },
   "crm/salesforce/contract_activate": {
-    "hash": "a692fa264bbf0c2b7cbbeef69639cda88c32527a1df074b82b777ea2efcf9339",
+    "hash": "51976543b48f8e78b5e37c2f26ece8066621a06ada93b06bd5c16bf860bff965",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Activate Contract",
@@ -191421,8 +191421,8 @@
         "name": "contract_status",
         "type": "string",
         "value": null,
-        "label": "Status To Set",
-        "placeholder": "Leave blank to use Activated - only change this if your administrator has renamed the live status in your org"
+        "label": "Status To Set (leave blank to activate - only change this if your org renamed its live status)",
+        "placeholder": "Leave blank to use Activated - Draft and In Approval Process do NOT activate a contract"
       }
     ],
     "outputs": [
@@ -191464,7 +191464,7 @@
     ]
   },
   "crm/salesforce/contract_create": {
-    "hash": "d60f916b9e53c68f7d76d3f37350d0c60f8da676614a902177d9e5f3efcfbfbd",
+    "hash": "75cc08f1e0ed503f1d5ac192265c1f1463ffa76f5dc299d86c342a191ca84119",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Create Contract",
@@ -191513,7 +191513,7 @@
         "type": "string",
         "value": null,
         "label": "Status",
-        "placeholder": "Draft or In Approval Process - leave blank and Salesforce starts it as Draft. A contract cannot be created as Activated; add an Activate Contract step for that"
+        "placeholder": "Leave blank - a new contract always starts as Draft. Move it on afterwards with Update Contract, or make it live with Activate Contract"
       },
       {
         "name": "start_date",
@@ -191863,7 +191863,7 @@
     ]
   },
   "crm/salesforce/contract_get_all": {
-    "hash": "6ab487150d57193ed45d70b97045841222f7da90b1cac7b510128592e30acbb4",
+    "hash": "e8f1656963828e3bca9a6bcf1a9f7b85bd8638514fa3a52d3ff84ed305283296",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Get Many Contracts",
@@ -192634,7 +192634,7 @@
     ]
   },
   "crm/salesforce/custom_object_get_all": {
-    "hash": "070e2accb2de8c5c113a3c7a45d344b22091edb9d7a79a1ab1ee1b6ed3832f56",
+    "hash": "65a8609d46acedd1bac00d0837ff37b659f08e269a9bd4cde73e7f3d07f672d7",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Get Many Custom Object Records",
@@ -192724,11 +192724,11 @@
             "value": "\u003e="
           },
           {
-            "name": "Contains (LIKE)",
+            "name": "Contains (use % as the wildcard)",
             "value": "LIKE"
           },
           {
-            "name": "Does Not Contain (NOT LIKE)",
+            "name": "Does Not Contain (use % as the wildcard)",
             "value": "NOT LIKE"
           },
           {
@@ -198988,7 +198988,7 @@
     ]
   },
   "crm/salesforce/opportunity_get_all": {
-    "hash": "f7634f50214bc22df851a0eeca6306075dd83e868f0c4ac6b3a2bae2d9834828",
+    "hash": "2ce3da37fd1e184981916d826445835824255cad6b394c3fa923ab301deca367",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Get Many Opportunities",
@@ -199070,11 +199070,11 @@
             "value": "\u003e="
           },
           {
-            "name": "Contains (LIKE)",
+            "name": "Contains (use % as the wildcard)",
             "value": "LIKE"
           },
           {
-            "name": "Does Not Contain (NOT LIKE)",
+            "name": "Does Not Contain (use % as the wildcard)",
             "value": "NOT LIKE"
           },
           {
@@ -199197,7 +199197,7 @@
     ]
   },
   "crm/salesforce/opportunity_line_item_create": {
-    "hash": "70777065fdc0be5f7a55f1c51f5f622aca952ddbb0fb1b514039fbd85266ee90",
+    "hash": "b926126580431467338b8a2b7c42423b6ecbe688a06c5e96b005c4c81c163531",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Add Product to Opportunity",
@@ -200623,7 +200623,7 @@
     ]
   },
   "crm/salesforce/order_get_all": {
-    "hash": "6890167f416d759235365c111c86b6bb8b168f6fe25fc4632b7fa2e432107e39",
+    "hash": "c64e4f734194dbe39aab08d152cc1cd5450b37bebab37276f0a8fe06e6ac1810",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Get Many Orders",
@@ -200705,11 +200705,11 @@
             "value": "\u003e="
           },
           {
-            "name": "Contains (LIKE)",
+            "name": "Contains (use % as the wildcard)",
             "value": "LIKE"
           },
           {
-            "name": "Does Not Contain (NOT LIKE)",
+            "name": "Does Not Contain (use % as the wildcard)",
             "value": "NOT LIKE"
           },
           {
@@ -200832,7 +200832,7 @@
     ]
   },
   "crm/salesforce/order_item_create": {
-    "hash": "e6bdb7c28095f1d1f81911e12b8f0e7bf36a78d28edbfa9d942746e813ee71ea",
+    "hash": "a17036118cede6a284167de531b0d381551d2f12ad12928f240c787208d0a502",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Add Product to Order",
@@ -201105,7 +201105,7 @@
     ]
   },
   "crm/salesforce/order_update": {
-    "hash": "b6c995e096145f086f931f390e65c81c117bad5a788a14ee68e304f09058a86c",
+    "hash": "74dab5c732d454f584f7e93b5b890e3d5a01bb37a98ead2517948a417296d0a8",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Update Order",
@@ -201585,7 +201585,7 @@
     ]
   },
   "crm/salesforce/price_book_entry_get_all": {
-    "hash": "52f8bfa2e1897435c8e277c6858aed3f21878890050b868da755c17891e32703",
+    "hash": "c0f7928c554e2993251a20411b12594961495ddd3eb55c1109106bba19ba7e87",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Get Many Price Book Entries",
@@ -201695,11 +201695,11 @@
             "value": "\u003e="
           },
           {
-            "name": "Contains (LIKE)",
+            "name": "Contains (use % as the wildcard)",
             "value": "LIKE"
           },
           {
-            "name": "Does Not Contain (NOT LIKE)",
+            "name": "Does Not Contain (use % as the wildcard)",
             "value": "NOT LIKE"
           },
           {
@@ -201815,7 +201815,7 @@
     ]
   },
   "crm/salesforce/price_book_entry_update": {
-    "hash": "26fe7caca51b12c1c372d20df1387e7f611ee2739cf59aab343aa15e0edc2616",
+    "hash": "b1b06b1879ad2739a0b8b4da5d22cdeb148f8cd66a268c801afe8ad1eedd1d35",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Change Product Price",
@@ -201927,7 +201927,7 @@
     ]
   },
   "crm/salesforce/price_book_get_all": {
-    "hash": "7de9f8249aa0f4d1f731a2ce55df4789ab4561f58d60a7540b68373f79501948",
+    "hash": "e59efe6c31b4c5e16766d653a2727d3a95390a34ba4762bd199312c56c61beb3",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Get Many Price Books",
@@ -202007,11 +202007,11 @@
             "value": "!="
           },
           {
-            "name": "Contains (LIKE)",
+            "name": "Contains (use % as the wildcard)",
             "value": "LIKE"
           },
           {
-            "name": "Does Not Contain (NOT LIKE)",
+            "name": "Does Not Contain (use % as the wildcard)",
             "value": "NOT LIKE"
           },
           {
@@ -202045,7 +202045,7 @@
         "type": "string",
         "value": null,
         "label": "Filter Value",
-        "placeholder": "Trade with Contains - or Retail,Trade for Is One Of"
+        "placeholder": "%Trade% with Contains - the % signs are the wildcard; or Retail,Trade for Is One Of"
       },
       {
         "name": "filter_conditions",
@@ -202493,7 +202493,7 @@
     ]
   },
   "crm/salesforce/product_get_all": {
-    "hash": "1f4cc208889e7f40876602daa1425bbedaac622b398efe128e540ab34d7fa9da",
+    "hash": "4fde44797e509316f30fca31b18c340bcf292f785fb2eea408a3e96a3b52ffb4",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Get Many Products",
@@ -202589,11 +202589,11 @@
             "value": "\u003e="
           },
           {
-            "name": "Contains (LIKE)",
+            "name": "Contains (use % as the wildcard)",
             "value": "LIKE"
           },
           {
-            "name": "Does Not Contain (NOT LIKE)",
+            "name": "Does Not Contain (use % as the wildcard)",
             "value": "NOT LIKE"
           },
           {
@@ -202870,7 +202870,7 @@
     ]
   },
   "crm/salesforce/product_upsert": {
-    "hash": "040440e6820178d7f9f9eaa419a4ab2811fc26bfb60e54ef8a23d0334b9542ae",
+    "hash": "fec473eb96da668ad4bc1d5d1ec981dd4a051a97b64289373f9acd36c50fb20f",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Create or Update Product",
@@ -203380,7 +203380,7 @@
     ]
   },
   "crm/salesforce/quote_create": {
-    "hash": "4ee5df4ef78fcad9677e746fe0c30c51bb2ad2654164182307646e50098538c5",
+    "hash": "90baa93fdfb4997e3d820a4095ca4d2d0f969b87c0e3cd7af2b878336ed38d43",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Create Quote",
@@ -203855,7 +203855,7 @@
     ]
   },
   "crm/salesforce/quote_get_all": {
-    "hash": "d6e193e4b875199f18f3914ea21d34c65cb692a918a8d446f7c7b78722c25a9f",
+    "hash": "b1e625e97732d7b5a0957a65a64a94f9c0ef13f0f0b42c49dc3b50d49e81b096",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Get Many Quotes",
@@ -203937,11 +203937,11 @@
             "value": "\u003e="
           },
           {
-            "name": "Contains (LIKE)",
+            "name": "Contains (use % as the wildcard)",
             "value": "LIKE"
           },
           {
-            "name": "Does Not Contain (NOT LIKE)",
+            "name": "Does Not Contain (use % as the wildcard)",
             "value": "NOT LIKE"
           },
           {
@@ -204064,7 +204064,7 @@
     ]
   },
   "crm/salesforce/quote_line_item_create": {
-    "hash": "2eff89cc120f5796b187b81ab3f5bc647e3d858380b63a26748eb0a2f10571f8",
+    "hash": "9995a12efb52f2b8d9fe944f72f0a2a8d1d1c1918b7411a5554274f8d08588dd",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Add Product to Quote",
@@ -204351,7 +204351,7 @@
     ]
   },
   "crm/salesforce/quote_sync_to_opportunity": {
-    "hash": "0e8ae2e55073bc16d8061fb847f979e37cdc55772ff0389a064a98ed83bfa27b",
+    "hash": "37a875b206de6623cfdc0bdfad24a82347b55382db5762f6f3097621459d33e4",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Sync Quote to Opportunity",

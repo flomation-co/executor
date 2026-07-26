@@ -114,10 +114,23 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	if v := salesforce.OptionalString("contract_status", inputs); v != "" {
 		filters = append(filters, salesforce.Condition{Field: "Status", Operator: "=", Value: v})
 	}
+	// Both lookup boxes are checked for ID SHAPE before they go anywhere near a
+	// WHERE clause. Salesforce answers an ID field compared against a name or an
+	// email address with a raw parser dump — the SOQL fragment, a caret, a
+	// row/column position and INVALID_QUERY_FILTER_OPERATOR, a code that reads as
+	// though the operator's Filter Comparison is at fault (verified live with
+	// account_id="Edge Communications" and owner_id="priya@example.com"). An
+	// upstream step that resolved to a name is the ordinary way to get here.
 	if v := salesforce.OptionalString("account_id", inputs); v != "" {
+		if err := salesforce.ValidateRecordID(v); err != nil {
+			return nil, fmt.Errorf("Customer (Account) — %w. Pick the account from the list, or pass the ID from an earlier Salesforce step rather than the company name", err)
+		}
 		filters = append(filters, salesforce.Condition{Field: "AccountId", Operator: "=", Value: v})
 	}
 	if v := salesforce.OptionalString("owner_id", inputs); v != "" {
+		if err := salesforce.ValidateRecordID(v); err != nil {
+			return nil, fmt.Errorf("Owner — %w. Pick the user from the list, or pass their Salesforce user ID rather than their name or email address", err)
+		}
 		filters = append(filters, salesforce.Condition{Field: "OwnerId", Operator: "=", Value: v})
 	}
 	if field := salesforce.OptionalString("filter_field", inputs); field != "" {

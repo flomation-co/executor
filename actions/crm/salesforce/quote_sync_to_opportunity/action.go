@@ -67,6 +67,8 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 		return salesforce.ErrorResult(err.Error()), nil
 	}
 
+	stop := salesforce.OptionalBool("stop_syncing", inputs)
+
 	opportunityID := chosenOpp
 	if opportunityID == "" {
 		opportunityID = parentOpp
@@ -74,11 +76,31 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	if opportunityID == "" {
 		return nil, fmt.Errorf("quote %s is not linked to a deal, so there is nothing to sync it to — set the quote's Opportunity first (Update Quote), or name the deal here", quoteID)
 	}
+	// A quote with no deal of its own, synced to a deal chosen here, is the trap
+	// this action used to set for itself: the message above invites the operator
+	// to "name the deal here", and doing exactly that PATCHed SyncedQuoteId and
+	// let Salesforce refuse with INSUFFICIENT_ACCESS_ON_CROSS_REFERENCE_ENTITY —
+	// which common.go quite reasonably translates as a permissions problem. So an
+	// office manager who followed our own instruction was sent to their Salesforce
+	// administrator over access they already had.
+	//
+	// Standalone quotes are ordinary wherever "Create Quotes Without a Related
+	// Opportunity" is on, which is why quote_create does not require the deal. The
+	// real rule is that Salesforce only syncs a quote that is a CHILD of the deal,
+	// and the fix is one step the operator can take.
+	// Stopping is exempt: it only clears a field, and the "deal is syncing a
+	// different quote" guard further down already covers the one hazard there.
+	if chosenOpp != "" && parentOpp == "" && !stop {
+		return nil, fmt.Errorf("quote %s is not attached to any deal, and Salesforce only lets a deal sync a quote of its own — set the quote's Opportunity to %s with Update Quote first, then sync", quoteID, chosenOpp)
+	}
 	if chosenOpp != "" && parentOpp != "" && chosenOpp != parentOpp {
 		return nil, fmt.Errorf("quote %s belongs to deal %s, not %s — Salesforce only lets a deal sync a quote of its own, so either sync it to %s or move the quote to the other deal first", quoteID, parentOpp, chosenOpp, parentOpp)
 	}
 
-	stop := salesforce.OptionalBool("stop_syncing", inputs)
+	// Recorded so the summary can state what the sync overwrote — an execution
+	// log that says "replaced 1 line with 3" is the only trace an operator has
+	// that a replacement happened at all.
+	var syncReplaced, syncApplied int
 
 	// Reading the current synced quote makes the two confusing cases honest: a
 	// re-run that changes nothing, and a "stop syncing" aimed at a deal that is
@@ -89,6 +111,37 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	}
 	if stop && currentlySynced != "" && currentlySynced != quoteID {
 		return nil, fmt.Errorf("deal %s is syncing a different quote (%s), not %s — stopping the sync here would detach the other quote, so check which one you meant", opportunityID, currentlySynced, quoteID)
+	}
+
+	// A sync REPLACES the deal's product lines with the quote's — it does not
+	// merge them. So syncing a quote that has no lines DELETES the deal's lines
+	// and zeroes its Amount, and Salesforce answers 204 with no complaint
+	// whatsoever. Verified live: a £50,000 deal with one line, synced to a
+	// freshly-created quote (which does NOT inherit the deal's products), came
+	// back Amount 0.0 with OpportunityLineItems null. The forecast is simply
+	// gone, and without this guard the run reported plain success.
+	//
+	// Creating a quote and syncing it is the obvious two-step flow for anyone
+	// who has not yet learned that Add Product to Quote has to come in between,
+	// which makes destroying the deal the DEFAULT outcome of the obvious
+	// sequence. Refusing is the only defensible answer: the operator can always
+	// ask again once the quote has its lines, whereas the deleted lines and the
+	// lost total cannot be recovered from here.
+	if !stop {
+		quoteLines, oppLines, err := syncLineCounts(instanceURL, token, quoteID, opportunityID)
+		if err != nil {
+			// Counting is a safety check, not the job. If it fails we must NOT
+			// proceed — a sync we could not assess is exactly the one to refuse.
+			return salesforce.ErrorResult(fmt.Sprintf(
+				"could not check what this sync would replace on deal %s, so it was not started — try again (%s)", opportunityID, err.Error())), nil
+		}
+		if quoteLines == 0 && oppLines > 0 {
+			return salesforce.ErrorResult(fmt.Sprintf(
+				"quote %s has no product lines, and syncing would DELETE the %d product line(s) and the total on deal %s — add the quote's products first with Add Product to Quote, then sync",
+				quoteID, oppLines, opportunityID)), nil
+		}
+		syncReplaced = oppLines
+		syncApplied = quoteLines
 	}
 
 	body := map[string]interface{}{}
@@ -102,6 +155,15 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	}
 
 	if err := salesforce.UpdateRecord(instanceURL, token, "Opportunity", opportunityID, body); err != nil {
+		// Salesforce reports "a deal may only sync its own quote" as a
+		// cross-reference ACCESS error, which reads as a permissions problem the
+		// operator does not have. Name the actual rule instead.
+		if salesforce.ErrorHasCode(err, "INSUFFICIENT_ACCESS_ON_CROSS_REFERENCE_ENTITY") ||
+			salesforce.ErrorHasCode(err, "FIELD_INTEGRITY_EXCEPTION") {
+			return salesforce.ErrorResult(fmt.Sprintf(
+				"Salesforce will not sync quote %s to deal %s — a deal can only sync a quote that belongs to it. Check the quote's Opportunity is %s (Update Quote sets it), then sync (%s)",
+				quoteID, opportunityID, opportunityID, err.Error())), nil
+		}
 		return salesforce.ErrorResult(err.Error()), nil
 	}
 
@@ -121,7 +183,20 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 		}
 		return salesforce.RecordResult(opportunityID, record, fmt.Sprintf("Stopped syncing quote %s to deal %s — the deal keeps the products and total it has now", label, opportunityID)), nil
 	}
+	// Say what the sync REPLACED, not just that it ran. A sync overwrites the
+	// deal's lines and total, and the execution log is the only place an operator
+	// can later see that it happened — "now match the quote" hid a replacement
+	// entirely.
 	summary := fmt.Sprintf("Syncing quote %s to deal %s — the deal's products and total now match the quote", label, opportunityID)
+	switch {
+	case syncReplaced > 0:
+		summary = fmt.Sprintf("Syncing quote %s to deal %s — REPLACED the deal's %d product line(s) with the quote's %d, so its total now comes from the quote",
+			label, opportunityID, syncReplaced, syncApplied)
+	case syncApplied > 0:
+		summary = fmt.Sprintf("Syncing quote %s to deal %s — copied the quote's %d product line(s) onto the deal, which had none", label, opportunityID, syncApplied)
+	}
+	record["ReplacedOpportunityLineCount"] = syncReplaced
+	record["AppliedQuoteLineCount"] = syncApplied
 	if currentlySynced == quoteID {
 		summary = fmt.Sprintf("Quote %s was already syncing to deal %s — the deal's products and total match the quote", label, opportunityID)
 	} else if currentlySynced != "" {
@@ -178,4 +253,25 @@ func opportunitySyncedQuote(instanceURL, token, opportunityID string) (string, e
 		return "", fmt.Errorf("opportunity %s was not found, or the connected Salesforce user cannot see it", opportunityID)
 	}
 	return salesforce.StringifyID(record["SyncedQuoteId"]), nil
+}
+
+// syncLineCounts returns how many product lines the quote has and how many the
+// deal has, so the caller can tell a harmless sync from a destructive one.
+//
+// Two cheap aggregate queries rather than fetching the rows: the counts are all
+// that matters, and a deal with hundreds of lines should not be paged in just to
+// discover it has some.
+func syncLineCounts(instanceURL, token, quoteID, opportunityID string) (quoteLines, oppLines int, err error) {
+	count := func(object, field, id string) (int, error) {
+		soql := fmt.Sprintf("SELECT COUNT() FROM %s WHERE %s = '%s'", object, field, salesforce.EscapeSOQLString(id))
+		_, _, total, _, err := salesforce.Query(instanceURL, token, soql, false, false)
+		return total, err
+	}
+	if quoteLines, err = count("QuoteLineItem", "QuoteId", quoteID); err != nil {
+		return 0, 0, err
+	}
+	if oppLines, err = count("OpportunityLineItem", "OpportunityId", opportunityID); err != nil {
+		return 0, 0, err
+	}
+	return quoteLines, oppLines, nil
 }

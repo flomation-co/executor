@@ -116,13 +116,30 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	if v := salesforce.OptionalString("warranty_ends_on_or_before", inputs); v != "" {
 		scope = append(scope, salesforce.Condition{Field: "UsageEndDate", Operator: "<=", Value: v})
 	}
+	// The three lookup boxes are checked for ID SHAPE before they go anywhere near
+	// a WHERE clause. Salesforce answers an ID field compared against a name with
+	// a raw parser dump — the SOQL fragment, a caret, a row/column position and
+	// INVALID_QUERY_FILTER_OPERATOR, a code that reads as though the operator's
+	// Filter Comparison is at fault (verified live with account_id="Edge
+	// Communications"). An upstream step that resolved to a company NAME rather
+	// than an ID is the ordinary way to get here, and naming the box is the whole
+	// difference between a fixable message and a support call.
 	if v := salesforce.OptionalString("account_id", inputs); v != "" {
+		if err := salesforce.ValidateRecordID(v); err != nil {
+			return nil, fmt.Errorf("Customer (Account) — %w. Pick the account from the list, or pass the ID from an earlier Salesforce step rather than the company name", err)
+		}
 		filters = append(filters, salesforce.Condition{Field: "AccountId", Operator: "=", Value: v})
 	}
 	if v := salesforce.OptionalString("contact_id", inputs); v != "" {
+		if err := salesforce.ValidateRecordID(v); err != nil {
+			return nil, fmt.Errorf("Customer (Contact) — %w. Pick the contact from the list, or pass the ID from an earlier Salesforce step rather than a name or an email address", err)
+		}
 		filters = append(filters, salesforce.Condition{Field: "ContactId", Operator: "=", Value: v})
 	}
 	if v := salesforce.OptionalString("product_id", inputs); v != "" {
+		if err := salesforce.ValidateRecordID(v); err != nil {
+			return nil, fmt.Errorf("Product — %w. Pick the product from the list, or pass the ID from an earlier Salesforce step rather than the product name or code", err)
+		}
 		filters = append(filters, salesforce.Condition{Field: "Product2Id", Operator: "=", Value: v})
 	}
 	if v := salesforce.OptionalString("asset_status", inputs); v != "" {

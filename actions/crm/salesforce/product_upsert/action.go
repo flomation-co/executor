@@ -87,6 +87,32 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 		return nil, err
 	}
 
+	// The match field must not also appear in the body carrying a DIFFERENT value.
+	// Both write paths strip it (the native upsert because Salesforce rejects the
+	// field appearing in the URL and the body at once — "The Name field should not
+	// be specified in the sobject data"), so the smuggled value is discarded and
+	// the record keeps the value we matched on. The body can then be empty, which
+	// still answers 200: a zero-write reported as "Updated".
+	//
+	// Checked against the MERGED body rather than the typed Product Name input, so
+	// it also catches a rename posted through Additional Fields — the advanced
+	// escape hatch is the path where an operator is most likely to try exactly
+	// this, and it was the one route still silently dropping the value.
+	if key, existing, ok := findFieldValue(body, matchField); ok {
+		if text := strings.TrimSpace(fmt.Sprintf("%v", existing)); text != "" && !strings.EqualFold(text, matchValue) {
+			hint := "match on something stable like Product Code instead, or change it with Update Product"
+			if strings.EqualFold(matchField, "Name") {
+				hint = "set Product Name to the same value, match on something stable like Product Code instead, or rename it with Update Product"
+			}
+			return nil, fmt.Errorf(
+				"this is matching products on %s, so %s cannot also be used to change it — %q would be discarded and the product would keep %q. Either %s",
+				matchField, key, text, matchValue, hint)
+		}
+		// Same value in both places is harmless; drop it so the write path does not
+		// have to, and so an otherwise-empty body is visible as empty.
+		delete(body, key)
+	}
+
 	// Native upsert first. UpsertRecord path-escapes the match value (a product
 	// code containing "/" is ordinary) and strips the match field from the body,
 	// which Salesforce rejects if it appears in both places.
@@ -172,12 +198,28 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	if created {
 		verb = "Created"
 	}
-	// Name the product by whatever it is actually called: the box the operator
-	// filled in when they filled one in, otherwise whatever came back. Quoting a
-	// blank box would read as a product with no name.
-	label := salesforce.OptionalString("name", inputs)
+	// Name the product by what Salesforce ACTUALLY stored, never by the box.
+	//
+	// Product2.Name is an idLookup field, so matching on Name — which is the
+	// DEFAULT when Match On is left blank — takes the native upsert path, and
+	// there UpsertRecord must strip the match field from the body because
+	// Salesforce refuses it outright ("The Name field should not be specified in
+	// the sobject data"). Reading the label from the input box therefore reported
+	// a name that was never written. Verified live: matching on Name with a
+	// different Product Name filled in created the product under the MATCH value
+	// while the summary quoted the typed one, and a rename-only run wrote nothing
+	// at all yet still reported "Updated".
+	//
+	// On the native Name path the stored name always equals the match value. On
+	// the find-then-write fallback the body does carry Name, so the box is
+	// truthful there. Prefer what came back, then the match value, and only fall
+	// back to the box when the write genuinely carried it.
+	label, _ := record["Name"].(string)
+	if label == "" && strings.EqualFold(matchField, "Name") {
+		label = matchValue
+	}
 	if label == "" {
-		label, _ = record["Name"].(string)
+		label = salesforce.OptionalString("name", inputs)
 	}
 	summary := fmt.Sprintf("%s product matched on %s = %q", verb, matchField, matchValue)
 	if label != "" {
@@ -310,4 +352,16 @@ func applyProductFields(body map[string]interface{}, inputs []*core.Connection) 
 	salesforce.SetIfPresent(body, inputs, "StockKeepingUnit", "stock_keeping_unit")
 	salesforce.SetIfPresent(body, inputs, "DisplayUrl", "display_url")
 	salesforce.SetIfPresent(body, inputs, "ExternalId", "external_id")
+}
+
+// findFieldValue looks a Salesforce field up in a body built partly from
+// operator-supplied JSON, where capitalisation is whatever they typed. Returns
+// the key AS WRITTEN so an error message quotes back what they actually put in.
+func findFieldValue(body map[string]interface{}, field string) (string, interface{}, bool) {
+	for k, v := range body {
+		if strings.EqualFold(k, field) {
+			return k, v, true
+		}
+	}
+	return "", nil, false
 }

@@ -200,15 +200,29 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 		return salesforce.ErrorResult(err.Error()), nil
 	}
 
+	opp := salesforce.OptionalString("opportunity_id", inputs)
 	summary := fmt.Sprintf("Created quote %q (%s)", name, id)
-	if opp := salesforce.OptionalString("opportunity_id", inputs); opp != "" {
+	if opp != "" {
 		summary = fmt.Sprintf("Created quote %q on opportunity %s (%s)", name, opp, id)
 	}
 	if salesforce.OptionalString("pricebook_id", inputs) == "" {
 		// A quote with no price book cannot take a single product line — the
 		// insert fails with FIELD_INTEGRITY_EXCEPTION (verified live). Say so
 		// now rather than letting the next step in the flow discover it.
-		summary += " — no price book was set, so add one before adding products"
+		//
+		// But only the INPUT is known to be blank, not the record: when the quote is
+		// raised on a deal, Salesforce copies the DEAL's price book onto it at insert
+		// (verified live — the quote came back on the opportunity's own book and took
+		// a product line straight away). Told flatly that no price book was set, an
+		// operator goes hunting for a step they do not need, or sets a different book
+		// with Update Quote — which is how a quote ends up priced off the wrong list,
+		// since Salesforce does not require the two to match. So the note is only
+		// stated as a fact when there is no deal to inherit from.
+		if opp == "" {
+			summary += " — no price book was set, so add one before adding products"
+		} else {
+			summary += " — no price book was set here, so the quote takes the deal's own price book; if that deal has none, set one before adding products"
+		}
 	}
 	return salesforce.RecordResult(id, raw, summary), nil
 }

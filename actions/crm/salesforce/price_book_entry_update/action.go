@@ -96,16 +96,27 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 			return salesforce.ErrorResult(fmt.Sprintf(
 				"one of the fields cannot be changed after the price is created — the Product and the Price Book are fixed for the life of a price, so delete this price and add a new one instead (%s)", err.Error())), nil
 
-		case useStandard && salesforce.ErrorHasCode(err, "FIELD_INTEGRITY_EXCEPTION"):
-			// Verified live: with the box ticked, Salesforce demands Price Each EQUAL
-			// the product's standard price and refuses anything else with a bare
-			// "field integrity exception". It also refuses the combination on the
-			// standard book itself. common.go translates that code as an address
-			// State/Province problem, which is not remotely what happened, so
-			// intercept it whenever the request actually asked for the standard
-			// price — that is what makes this the cause rather than a guess.
+		case salesforce.ErrorHasCode(err, "FIELD_INTEGRITY_EXCEPTION"):
+			// Verified live: when the standard price is in play, Salesforce demands
+			// Price Each EQUAL the product's standard price and refuses anything else
+			// with a bare "field integrity exception". It also refuses the
+			// combination on the standard book itself. common.go translates that code
+			// as an address State/Province problem, which cannot possibly be the
+			// cause here — PricebookEntry has FIFTEEN fields and not one of them is
+			// an address or a picklist (live describe) — so this code is intercepted
+			// on every price change, not only when the tick box was sent.
+			//
+			// That distinction is the whole bug this branch used to have: the flag
+			// lives on the RECORD. An entry created with Copy The Standard Price on
+			// keeps it on, and a later reprice sends nothing but UnitPrice, so
+			// gating on the request left the commonest form of this failure reading
+			// an address-picklist lecture on a record with no address.
+			if useStandard {
+				return salesforce.ErrorResult(fmt.Sprintf(
+					"Copy The Standard Price needs Price Each to be exactly the product's standard price — Salesforce does not fill it in for you. Either set Price Each to the standard price, or untick the box and set the price yourself. On the standard price book itself, untick it: the standard price IS the list price (%s)", err.Error())), nil
+			}
 			return salesforce.ErrorResult(fmt.Sprintf(
-				"Copy The Standard Price needs Price Each to be exactly the product's standard price — Salesforce does not fill it in for you. Either set Price Each to the standard price, or untick the box and set the price yourself. On the standard price book itself, untick it: the standard price IS the list price (%s)", err.Error())), nil
+				"Salesforce would not change this price, and on a price the reason is almost always Copy The Standard Price: while that is switched on, the price is held equal to the product's standard price and no other figure is accepted. Untick Copy The Standard Price in this step to set your own figure, or change the product's standard price instead. Salesforce's own wording is at the end: %s", err.Error())), nil
 		}
 		return salesforce.ErrorResult(err.Error()), nil
 	}

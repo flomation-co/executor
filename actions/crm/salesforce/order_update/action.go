@@ -143,6 +143,15 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 			return salesforce.ErrorResult(fmt.Sprintf(
 				"that order is activated, so Salesforce has locked this change — set its Status back to Draft first (this same action), make the change, then activate it again (%s)", err.Error())), nil
 		}
+		// FAILED_ACTIVATION is what an operator gets for setting Status to Activated
+		// on an order with no product lines. Salesforce's own sentence is fine as far
+		// as it goes ("An order must have at least one product.") but it names no
+		// remedy, and four sibling actions — Activate Order among them — already
+		// translate this exact code. Say which step adds the products.
+		if salesforce.ErrorHasCode(err, "FAILED_ACTIVATION") {
+			return salesforce.ErrorResult(fmt.Sprintf(
+				"Salesforce would not activate that order — an order needs at least one product line before it can be activated, so add its products first with Add Product to Order (%s)", err.Error())), nil
+		}
 		return salesforce.ErrorResult(err.Error()), nil
 	}
 

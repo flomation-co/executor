@@ -2,6 +2,7 @@ package crm_salesforce_order_item_create
 
 import (
 	"fmt"
+	"strings"
 
 	core "flomation.app/automate/executor"
 	salesforce "flomation.app/automate/executor/actions/crm/salesforce"
@@ -109,12 +110,15 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	}
 	orderBook := order.pricebookID
 
-	var entryBook string
+	// entryBookName is the price book's readable name, carried alongside its ID
+	// so the summary can name the book rather than print an 18-character record ID at
+	// an operator who cannot tell one from another.
+	var entryBook, entryBookName string
 	listPrice, havePrice := 0.0, false
 	if entryID != "" {
-		entryBook, listPrice, havePrice, err = readEntry(instanceURL, token, entryID)
+		entryBook, entryBookName, listPrice, havePrice, err = readEntry(instanceURL, token, entryID)
 	} else {
-		entryID, entryBook, listPrice, havePrice, err = entryForProduct(instanceURL, token, productID, orderBook)
+		entryID, entryBook, entryBookName, listPrice, havePrice, err = entryForProduct(instanceURL, token, productID, orderBook)
 	}
 	if err != nil {
 		return salesforce.ErrorResult(err.Error()), nil
@@ -128,7 +132,13 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 		}
 		pinned = true
 	case entryBook != "" && entryBook != orderBook:
-		return nil, fmt.Errorf("that price book entry is on price book %s but the order is on price book %s — Salesforce only allows lines priced from the order's own price book. Choose a product priced on %s, or change the order's price book first", entryBook, orderBook, orderBook)
+		// A PROVIDER outcome, not a configuration mistake: this mismatch is only
+		// discoverable by reading both records back from Salesforce, so a flow
+		// should be able to branch on it — the same treatment the activated-order
+		// check above and the quote twin's identical branch already get. A hard
+		// error here took the whole node down and skipped the operator's own
+		// error-handling step.
+		return salesforce.ErrorResult(fmt.Sprintf("that price book entry is on price book %s but the order is on price book %s — Salesforce only allows lines priced from the order's own price book. Choose a product priced on %s, or change the order's price book first", entryBook, orderBook, orderBook)), nil
 	}
 
 	body := map[string]interface{}{
@@ -138,11 +148,21 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 
 	// Quantity is mandatory on an order line and one is what an operator means
 	// when they do not say — nobody orders "no" of something.
+	//
+	// An explicit 0 is a different instruction and is NOT folded in with "not
+	// filled in". Salesforce refuses it outright ("Can't save order products with
+	// quantities of zero", verified live), so rewriting it to 1 put a line the
+	// source data never asked for on the order a warehouse picks from, behind a
+	// green success. A shop or ERP feed that maps a removed line to 0 has to be
+	// told, not quietly corrected.
 	quantity, quantitySet, err := numericInput("quantity", "Quantity", inputs)
 	if err != nil {
 		return nil, err
 	}
-	if !quantitySet || quantity == 0 {
+	if quantitySet && quantity == 0 {
+		return nil, fmt.Errorf("Quantity is 0, and Salesforce will not put a line for none of something on an order — leave Quantity blank to order one, or skip this product when the quantity coming in is zero")
+	}
+	if !quantitySet {
 		quantity = 1
 	}
 	body["Quantity"] = quantity
@@ -198,7 +218,13 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 
 	summary := fmt.Sprintf("Added %v x product line to order %s (%s)", quantity, orderID, id)
 	if pinned {
-		summary += fmt.Sprintf(" — the order had no price book, so it was put on %s to match the product", entryBook)
+		label := entryBookName
+		if label == "" {
+			// A name is all but guaranteed (Pricebook2.Name is in the SELECT), but
+			// never let a blank read produce "put on  to match the product".
+			label = entryBook
+		}
+		summary += fmt.Sprintf(" — the order had no price book, so it was put on %s to match the product", label)
 	}
 	return salesforce.RecordResult(id, raw, summary), nil
 }
@@ -266,7 +292,7 @@ func dateOnly(v string) string {
 
 // readEntry reads a price book entry the operator supplied directly, returning
 // which price book it belongs to and what it costs.
-func readEntry(instanceURL, token, entryID string) (bookID string, price float64, havePrice bool, err error) {
+func readEntry(instanceURL, token, entryID string) (bookID, bookName string, price float64, havePrice bool, err error) {
 	soql, err := salesforce.BuildQuery(
 		"PricebookEntry",
 		"Id,UnitPrice,Pricebook2Id,Product2Id",
@@ -274,20 +300,24 @@ func readEntry(instanceURL, token, entryID string) (bookID string, price float64
 		false, "", 1, true,
 	)
 	if err != nil {
-		return "", 0, false, err
+		return "", "", 0, false, err
 	}
 	record, err := salesforce.QueryOne(instanceURL, token, soql)
 	if err != nil {
-		return "", 0, false, err
+		return "", "", 0, false, err
 	}
 	if record == nil {
-		return "", 0, false, fmt.Errorf("price book entry %s was not found, or the connected Salesforce user cannot see it", entryID)
+		return "", "", 0, false, fmt.Errorf("price book entry %s was not found, or the connected Salesforce user cannot see it", entryID)
 	}
 	bookID = salesforce.StringifyID(record["Pricebook2Id"])
+	// Carry the book's readable name so a summary never has to print the ID.
+	if pb, ok := record["Pricebook2"].(map[string]interface{}); ok {
+		bookName, _ = pb["Name"].(string)
+	}
 	if p, ok := record["UnitPrice"].(float64); ok {
 		price, havePrice = p, true
 	}
-	return bookID, price, havePrice, nil
+	return bookID, bookName, price, havePrice, nil
 }
 
 // entryForProduct turns a product into the price book entry that prices it,
@@ -299,7 +329,7 @@ func readEntry(instanceURL, token, entryID string) (bookID string, price float64
 // inactive while a working copy carries the prices (verified in the live test org,
 // where IsStandard=true is inactive and the 17 usable entries sit on another book).
 // Pinning an order to an inactive price book would just move the failure.
-func entryForProduct(instanceURL, token, productID, bookID string) (entryID, entryBook string, price float64, havePrice bool, err error) {
+func entryForProduct(instanceURL, token, productID, bookID string) (entryID, entryBook, bookName string, price float64, havePrice bool, err error) {
 	conditions := []salesforce.Condition{
 		{Field: "Product2Id", Operator: "=", Value: productID},
 		{Field: "IsActive", Operator: "=", Value: "true"},
@@ -309,31 +339,59 @@ func entryForProduct(instanceURL, token, productID, bookID string) (entryID, ent
 	} else {
 		conditions = append(conditions, salesforce.Condition{Field: "Pricebook2.IsActive", Operator: "=", Value: "true"})
 	}
+	// LIMIT 2, not 1, and select the book's NAME. With no book to narrow by, one
+	// row means the choice is unambiguous and two mean it is not — and a product
+	// priced on several active books is the ordinary Salesforce setup
+	// (Retail / Wholesale / Partner), not an edge case.
+	//
+	// This used to take LIMIT 1 with no ORDER BY, so Salesforce chose the row.
+	// Reviewed live: a product priced £25,000 on Standard and £1.00 on Wholesale
+	// returned the £1.00 row, the line was written at £1.00, and the document was
+	// then PINNED to the wholesale book so every later line followed it. Picking
+	// a price at random is the one outcome a CRM must never produce quietly, so
+	// this now refuses and names the candidates. Same reasoning as the LIMIT 2
+	// ambiguity check in product_upsert.
 	soql, err := salesforce.BuildQuery(
 		"PricebookEntry",
-		"Id,UnitPrice,Product2Id,Pricebook2Id",
+		"Id,UnitPrice,Product2Id,Pricebook2Id,Pricebook2.Name",
 		conditions,
-		false, "", 1, true,
+		false, "", 2, true,
 	)
 	if err != nil {
-		return "", "", 0, false, err
+		return "", "", "", 0, false, err
 	}
-	record, err := salesforce.QueryOne(instanceURL, token, soql)
+	rows, _, _, _, err := salesforce.Query(instanceURL, token, soql, false, false)
 	if err != nil {
-		return "", "", 0, false, err
+		return "", "", "", 0, false, err
+	}
+	if bookID == "" && len(rows) > 1 {
+		return "", "", "", 0, false, fmt.Errorf(
+			"that product has a price on more than one active price book (%s), so there is no single price to use — set the price book on the %s first, or choose the price book entry instead of the product",
+			describeCandidates(rows), "order")
+	}
+	var record map[string]interface{}
+	if len(rows) > 0 {
+		record = rows[0]
+		// Carry the book's NAME out with the entry. The summary used to print the
+		// 18-character Pricebook2Id at a non-technical operator, who has no way to
+		// tell which book that is — and this action can PIN the document to it, so
+		// the one line telling them what happened has to be readable.
+		if pb, ok := record["Pricebook2"].(map[string]interface{}); ok {
+			bookName, _ = pb["Name"].(string)
+		}
 	}
 	if record == nil {
 		if bookID != "" {
-			return "", "", 0, false, fmt.Errorf("that product is not priced on price book %s, which is the one this order uses — add it to that price book in Salesforce, or supply a price book entry directly", bookID)
+			return "", "", "", 0, false, fmt.Errorf("that product is not priced on price book %s, which is the one this order uses — add it to that price book in Salesforce, or supply a price book entry directly", bookID)
 		}
-		return "", "", 0, false, fmt.Errorf("that product has no active price on any active price book in your Salesforce org — give it a price under the product's Price Books related list, or supply a price book entry directly")
+		return "", "", "", 0, false, fmt.Errorf("that product has no active price on any active price book in your Salesforce org — give it a price under the product's Price Books related list, or supply a price book entry directly")
 	}
 	entryID = salesforce.StringifyID(record["Id"])
 	entryBook = salesforce.StringifyID(record["Pricebook2Id"])
 	if p, ok := record["UnitPrice"].(float64); ok {
 		price, havePrice = p, true
 	}
-	return entryID, entryBook, price, havePrice, nil
+	return entryID, entryBook, bookName, price, havePrice, nil
 }
 
 // numericInput reads a decimal input, treating an unparseable value as the
@@ -351,4 +409,25 @@ func numericInput(name, label string, inputs []*core.Connection) (float64, bool,
 		return 0, false, fmt.Errorf("%s must be a plain number such as 499.00 — got %q. Leave out currency symbols, thousands separators and spaces", label, raw)
 	}
 	return v, true, nil
+}
+
+// describeCandidates names the competing price books and their prices, so the
+// operator can see WHY the choice was refused and what the options were. A raw
+// list of entry IDs would leave them no better off than the silent guess did.
+func describeCandidates(rows []map[string]interface{}) string {
+	parts := make([]string, 0, len(rows))
+	for _, r := range rows {
+		name := "an unnamed price book"
+		if pb, ok := r["Pricebook2"].(map[string]interface{}); ok {
+			if n, ok := pb["Name"].(string); ok && n != "" {
+				name = n
+			}
+		}
+		if p, ok := r["UnitPrice"].(float64); ok {
+			parts = append(parts, fmt.Sprintf("%s at %.2f", name, p))
+			continue
+		}
+		parts = append(parts, name)
+	}
+	return strings.Join(parts, ", ")
 }

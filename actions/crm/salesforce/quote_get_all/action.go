@@ -25,7 +25,17 @@ const (
 // LineItemCount are computed by Salesforce from the quote's product lines and are
 // read-only, which is exactly why they belong in a list projection: they are the
 // figures you cannot get any other way without reading every line item.
-const defaultFields = "Id,Name,QuoteNumber,Status,ExpirationDate,OpportunityId,AccountId,ContactId,Pricebook2Id,Subtotal,TotalPrice,GrandTotal,Discount,LineItemCount,IsSyncing,Email,Phone,LastModifiedDate"
+//
+// The customer takes TWO fields, not one. Quote.AccountId is read-only and comes
+// from the parent opportunity, so it is null on every standalone quote — and a
+// standalone quote is exactly what Create Quote's own "Company (Quote Account)"
+// input makes, because it writes QuoteAccountId instead (verified live: a quote
+// created that way reports AccountId null while QuoteAccountId holds the
+// account). With only AccountId in the projection, "list quotes expiring this
+// month, email the customer" came back with the customer column empty on every
+// row and no error anywhere. Both are carried, each with its name hop, so the
+// list names the customer whichever way the quote was raised.
+const defaultFields = "Id,Name,QuoteNumber,Status,ExpirationDate,OpportunityId,AccountId,Account.Name,QuoteAccountId,QuoteAccount.Name,ContactId,Pricebook2Id,Subtotal,TotalPrice,GrandTotal,Discount,LineItemCount,IsSyncing,Email,Phone,LastModifiedDate"
 
 var Inputs = [...]core.Connection{
 	{Name: "access_token", Type: core.ConnectionTypeSecret, Label: "Salesforce Connection", Placeholder: "Connect Salesforce, or paste an access token", Required: true},
@@ -44,8 +54,8 @@ var Inputs = [...]core.Connection{
 			{Name: "Less Than Or Equal To", Value: "<="},
 			{Name: "Greater Than", Value: ">"},
 			{Name: "Greater Than Or Equal To", Value: ">="},
-			{Name: "Contains (LIKE)", Value: "LIKE"},
-			{Name: "Does Not Contain (NOT LIKE)", Value: "NOT LIKE"},
+			{Name: "Contains (use % as the wildcard)", Value: "LIKE"},
+			{Name: "Does Not Contain (use % as the wildcard)", Value: "NOT LIKE"},
 			{Name: "Is One Of (IN)", Value: "IN"},
 			{Name: "Is Not One Of (NOT IN)", Value: "NOT IN"},
 		},

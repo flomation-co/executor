@@ -88,11 +88,19 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 
 	// Quantity is mandatory on a product line and one is what an operator means
 	// when they do not say — nobody adds "no" of something to a deal.
+	//
+	// An explicit 0 is a different instruction and is NOT folded in with "not
+	// filled in": Salesforce refuses a zero quantity on a product line, so
+	// rewriting it to 1 put a line the source data never asked for on the deal and
+	// reported "Added 1 x product line" over the top of it.
 	quantity, quantitySet, err := numericInput("quantity", "Quantity", inputs)
 	if err != nil {
 		return nil, err
 	}
-	if !quantitySet || quantity == 0 {
+	if quantitySet && quantity == 0 {
+		return nil, fmt.Errorf("Quantity is 0, and Salesforce will not put a line for none of something on a deal — leave Quantity blank to add one, or skip this product when the quantity coming in is zero")
+	}
+	if !quantitySet {
 		quantity = 1
 	}
 	body["Quantity"] = quantity

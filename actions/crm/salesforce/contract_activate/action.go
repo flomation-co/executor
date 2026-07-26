@@ -25,11 +25,25 @@ const (
 // rather than as a required field an operator has to fill in every time.
 const activatedStatus = "Activated"
 
+// activatedStatusCode is the value Contract.StatusCode carries once a contract
+// really is live.
+//
+// StatusCode is the fixed category behind the Status picklist — Draft,
+// InApproval or Activated — and Salesforce sets it itself from whichever status
+// was written. It is therefore the only honest test of "is this contract
+// activated?", and it keeps working in an org that renamed the live status.
+const activatedStatusCode = "Activated"
+
 var Inputs = [...]core.Connection{
 	{Name: "access_token", Type: core.ConnectionTypeSecret, Label: "Salesforce Connection", Placeholder: "Connect Salesforce, or paste an access token", Required: true},
 	{Name: "instance_url", Type: core.ConnectionTypeString, Label: "Salesforce Instance URL", Placeholder: "https://mycompany.my.salesforce.com", Required: true},
 	{Name: "contract_id", Type: core.ConnectionTypeString, Label: "Contract ID", Placeholder: "8005f000001AbCdAAK - the contract to activate, not its contract number", Required: true},
-	{Name: "contract_status", Type: core.ConnectionTypeString, Label: "Status To Set", Placeholder: "Leave blank to use Activated - only change this if your administrator has renamed the live status in your org"},
+	// The warning lives in the LABEL, not only the placeholder: this input is
+	// backed by a live picklist dropdown, and the editor does not render a
+	// placeholder for those — so the placeholder alone left an operator staring at
+	// three statuses, the non-activating one first, with no hint that blank is the
+	// right answer.
+	{Name: "contract_status", Type: core.ConnectionTypeString, Label: "Status To Set (leave blank to activate - only change this if your org renamed its live status)", Placeholder: "Leave blank to use Activated - Draft and In Approval Process do NOT activate a contract"},
 }
 
 var Outputs = [...]core.Connection{
@@ -75,7 +89,12 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	// it forever. That is worth saying out loud at the moment it happens.
 	record, ok := readContract(instanceURL, token, id)
 	if !ok {
-		return salesforce.RecordResult(id, map[string]interface{}{"Id": id, "Status": status}, fmt.Sprintf("Activated contract %s — its status is now %q", id, status)), nil
+		// Nothing came back, so there is nothing to check the new status against.
+		// Report what was SET rather than asserting an activation nobody confirmed.
+		if status == activatedStatus {
+			return salesforce.RecordResult(id, map[string]interface{}{"Id": id, "Status": status}, fmt.Sprintf("Activated contract %s — its status is now %q", id, status)), nil
+		}
+		return salesforce.RecordResult(id, map[string]interface{}{"Id": id, "Status": status}, fmt.Sprintf("Set contract %s to %q — Salesforce accepted the change, but the contract could not be re-read to confirm that this status is the live one in your org, so check it in Salesforce", id, status)), nil
 	}
 
 	number := stringField(record, "ContractNumber")
@@ -83,9 +102,31 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	if number != "" {
 		label = fmt.Sprintf("%s (%s)", number, id)
 	}
-	summary := fmt.Sprintf("Activated contract %s — its status is now %q, but it has NO end date because its start date or term is blank, so renewal reminders will never pick it up. Set the Start Date and Contract Term to fix that", label, status)
+
+	// Only ever say "Activated" when Salesforce agrees the contract IS activated.
+	//
+	// Contract.Status offers Draft, In Approval Process and Activated, and the
+	// live picker on Status To Set offers all three with the NON-activating one
+	// first. Salesforce accepts every one of them with a 204 (verified live), so
+	// this used to report "Activated contract 00000120 — its status is now
+	// \"Draft\"" with ActivatedDate still null, on the success port, with every
+	// downstream invoice, welcome email and onboarding task gated on it.
+	//
+	// StatusCode is the test, not Status: it is the category Salesforce keeps
+	// behind the picklist (Draft / InApproval / Activated), so it still reads
+	// "Activated" in an org that RENAMED the live status — which is the entire
+	// reason the Status To Set override exists. The read-back already fetched it.
+	shown := stringField(record, "Status")
+	if shown == "" {
+		shown = status
+	}
+	if code := stringField(record, "StatusCode"); code != "" && code != activatedStatusCode {
+		return salesforce.ErrorResult(fmt.Sprintf("contract %s was set to %q, which is not a live status in your Salesforce org, so it has NOT been activated — leave Status To Set blank to activate it, or use Update Contract instead if changing the status was all you wanted", label, shown)), nil
+	}
+
+	summary := fmt.Sprintf("Activated contract %s — its status is now %q, but it has NO end date because its start date or term is blank, so renewal reminders will never pick it up. Set the Start Date and Contract Term to fix that", label, shown)
 	if endDate := stringField(record, "EndDate"); endDate != "" {
-		summary = fmt.Sprintf("Activated contract %s — its status is now %q and it runs to %s", label, status, endDate)
+		summary = fmt.Sprintf("Activated contract %s — its status is now %q and it runs to %s", label, shown, endDate)
 	}
 	return salesforce.RecordResult(id, record, summary), nil
 }

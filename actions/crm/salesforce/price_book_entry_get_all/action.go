@@ -55,8 +55,8 @@ var Inputs = [...]core.Connection{
 			{Name: "Less Than Or Equal To", Value: "<="},
 			{Name: "Greater Than", Value: ">"},
 			{Name: "Greater Than Or Equal To", Value: ">="},
-			{Name: "Contains (LIKE)", Value: "LIKE"},
-			{Name: "Does Not Contain (NOT LIKE)", Value: "NOT LIKE"},
+			{Name: "Contains (use % as the wildcard)", Value: "LIKE"},
+			{Name: "Does Not Contain (use % as the wildcard)", Value: "NOT LIKE"},
 			{Name: "Is One Of (IN)", Value: "IN"},
 			{Name: "Is Not One Of (NOT IN)", Value: "NOT IN"},
 		},
@@ -106,12 +106,18 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 		if err := salesforce.ValidateRecordID(pricebookID); err != nil {
 			return nil, fmt.Errorf("Price Book — %w", err)
 		}
+		if err := checkIDPrefix(pricebookID, pricebookIDPrefix, "Price Book", "a price book"); err != nil {
+			return nil, err
+		}
 		scope = append(scope, salesforce.Condition{Field: "Pricebook2Id", Operator: "=", Value: pricebookID})
 		described = append(described, fmt.Sprintf("price book %s", pricebookID))
 	}
 	if productID := salesforce.OptionalString("product_id", inputs); productID != "" {
 		if err := salesforce.ValidateRecordID(productID); err != nil {
 			return nil, fmt.Errorf("Product — %w", err)
+		}
+		if err := checkIDPrefix(productID, productIDPrefix, "Product", "a product"); err != nil {
+			return nil, err
 		}
 		scope = append(scope, salesforce.Condition{Field: "Product2Id", Operator: "=", Value: productID})
 		described = append(described, fmt.Sprintf("product %s", productID))
@@ -205,6 +211,45 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 		out["tool_result"] = fmt.Sprintf("Found %d %s%s%s", len(records), noun, where, salesforce.TruncationHint(len(records), limit, returnAll))
 	}
 	return out, nil
+}
+
+// Salesforce record IDs open with a three-character prefix that names the object
+// they belong to, and the prefixes for standard objects are the same in every
+// org: 01s a price book, 01t a product, 01u one price (a price book entry).
+const (
+	pricebookIDPrefix = "01s"
+	productIDPrefix   = "01t"
+	entryIDPrefix     = "01u"
+)
+
+// checkIDPrefix refuses an ID that belongs to a different object.
+//
+// A cross-typed ID is the one mistake SOQL stays SILENT about. A name in an ID
+// filter is a loud 400; a well-formed ID of the WRONG object returns zero rows
+// and no error at all (verified live: Pricebook2Id = a product ID gives
+// totalSize 0). The empty-result message then reads "Found no prices for price
+// book 01taj… — add it with Add Product to Price Book", which sends the operator
+// off to fix a price book that is not a price book. Shape validation alone
+// cannot catch it: every Salesforce ID is 15 or 18 alphanumerics.
+func checkIDPrefix(id, prefix, box, object string) error {
+	if strings.HasPrefix(id, prefix) {
+		return nil
+	}
+	return fmt.Errorf("%s — %s is not the ID of %s (those start %s)%s", box, id, object, prefix, idBelongsIn(id))
+}
+
+// idBelongsIn names the box an ID actually belongs in, when its prefix is one of
+// the three this action deals with. Naming it is what turns a refusal into a fix.
+func idBelongsIn(id string) string {
+	switch {
+	case strings.HasPrefix(id, pricebookIDPrefix):
+		return ". That is a price book ID, so it belongs in the Price Book box"
+	case strings.HasPrefix(id, productIDPrefix):
+		return ". That is a product ID, so it belongs in the Product box"
+	case strings.HasPrefix(id, entryIDPrefix):
+		return ". That is one price rather than a price book or a product — this action finds prices, so use the Price Book and Product boxes to narrow it down"
+	}
+	return ""
 }
 
 // plural picks the right noun for a count, so the summary an operator reads in
