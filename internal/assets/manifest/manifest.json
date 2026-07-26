@@ -184989,6 +184989,943 @@
       }
     ]
   },
+  "crm/salesforce/asset_create": {
+    "hash": "8ebdb88cee7a28ce9427167609dd35e474ad6f1e31cb46394cfadc3e252506ef",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Salesforce: Create Asset",
+    "description": "Record something a customer owns - which product it is, its serial number, when it was installed and when the warranty runs out. It is what turns \"they bought a boiler two years ago\" into something the person answering the phone can actually look up.",
+    "website": "https://www.flomation.co",
+    "icon": "salesforce+box",
+    "date": "26/07/2026",
+    "type": 2,
+    "category": {
+      "name": "CRM",
+      "icon": "people-group",
+      "description": "Customer relationship management — contacts, companies, deals, and tickets"
+    },
+    "sub_category": {
+      "name": "Salesforce",
+      "icon": "salesforce",
+      "description": "Manage Salesforce leads, contacts, accounts, opportunities, cases, tasks, and any custom object"
+    },
+    "inputs": [
+      {
+        "name": "access_token",
+        "type": "secret",
+        "value": null,
+        "label": "Salesforce Connection",
+        "placeholder": "Connect Salesforce, or paste an access token",
+        "required": true
+      },
+      {
+        "name": "instance_url",
+        "type": "string",
+        "value": null,
+        "label": "Salesforce Instance URL",
+        "placeholder": "https://mycompany.my.salesforce.com",
+        "required": true
+      },
+      {
+        "name": "name",
+        "type": "string",
+        "value": null,
+        "label": "Asset Name",
+        "placeholder": "GenWatt Diesel 1000kW - Edge Communications (up to 255 characters)",
+        "required": true
+      },
+      {
+        "name": "account_id",
+        "type": "string",
+        "value": null,
+        "label": "Customer (Account)",
+        "placeholder": "0015f00000AbCdEAAV - every asset needs an account, a contact, or both"
+      },
+      {
+        "name": "contact_id",
+        "type": "string",
+        "value": null,
+        "label": "Customer (Contact)",
+        "placeholder": "0035f00000XyZabAAF - every asset needs an account, a contact, or both"
+      },
+      {
+        "name": "product_id",
+        "type": "string",
+        "value": null,
+        "label": "Product",
+        "placeholder": "01t5f000004AbCdAAK - the Salesforce product this asset is one of; its product code is copied across for you"
+      },
+      {
+        "name": "serial_number",
+        "type": "string",
+        "value": null,
+        "label": "Serial Number",
+        "placeholder": "SN-00042 - what is stamped on the unit"
+      },
+      {
+        "name": "asset_status",
+        "type": "string",
+        "value": null,
+        "label": "Status",
+        "placeholder": "Shipped, Installed, Registered, Purchased or Obsolete - Salesforce saves anything you type here without complaint, so a typo becomes a real status"
+      },
+      {
+        "name": "purchase_date",
+        "type": "datetime",
+        "value": null,
+        "label": "Purchase Date",
+        "placeholder": "2026-06-20 (the date only)"
+      },
+      {
+        "name": "install_date",
+        "type": "datetime",
+        "value": null,
+        "label": "Install Date",
+        "placeholder": "2026-07-01 (the date only)"
+      },
+      {
+        "name": "usage_end_date",
+        "type": "datetime",
+        "value": null,
+        "label": "Warranty / Usage End Date",
+        "placeholder": "2029-06-30 (the date only) - this is the date an \"is it still under warranty?\" check looks at"
+      },
+      {
+        "name": "price",
+        "type": "string",
+        "value": null,
+        "label": "Price",
+        "placeholder": "50000.00 - what the customer paid, in your org's currency"
+      },
+      {
+        "name": "quantity",
+        "type": "string",
+        "value": null,
+        "label": "Quantity",
+        "placeholder": "1 - how many units this record covers"
+      },
+      {
+        "name": "parent_id",
+        "type": "string",
+        "value": null,
+        "label": "Part Of (Parent Asset)",
+        "placeholder": "02i5f000000AbCdAAK - if this is a component of a bigger asset"
+      },
+      {
+        "name": "owner_id",
+        "type": "string",
+        "value": null,
+        "label": "Owner",
+        "placeholder": "0055f00000AbCdEAAV - leave blank and the connected Salesforce user owns it"
+      },
+      {
+        "name": "asset_provided_by_id",
+        "type": "string",
+        "value": null,
+        "label": "Supplied By (Account)",
+        "placeholder": "0015f00000AbCdEAAV - the company that supplied it, if it was not you"
+      },
+      {
+        "name": "asset_serviced_by_id",
+        "type": "string",
+        "value": null,
+        "label": "Serviced By (Account)",
+        "placeholder": "0015f00000AbCdEAAV - the company that maintains it"
+      },
+      {
+        "name": "is_competitor_product",
+        "type": "boolean",
+        "value": null,
+        "label": "This Is A Competitor's Product",
+        "placeholder": ""
+      },
+      {
+        "name": "is_internal",
+        "type": "boolean",
+        "value": null,
+        "label": "This Is Your Own Company's Asset",
+        "placeholder": ""
+      },
+      {
+        "name": "description",
+        "type": "text",
+        "value": null,
+        "label": "Description",
+        "placeholder": "Anything the support team should know - where it is on site, who signed for it"
+      },
+      {
+        "name": "street",
+        "type": "text",
+        "value": null,
+        "label": "Location Street",
+        "placeholder": "1 Deansgate - where the asset physically is"
+      },
+      {
+        "name": "city",
+        "type": "string",
+        "value": null,
+        "label": "Location City",
+        "placeholder": "Manchester"
+      },
+      {
+        "name": "state",
+        "type": "string",
+        "value": null,
+        "label": "Location County / State",
+        "placeholder": "Leave this blank unless your org's State list has an entry for it - most orgs check it against a fixed list and refuse anything typed by hand"
+      },
+      {
+        "name": "postal_code",
+        "type": "string",
+        "value": null,
+        "label": "Location Postcode",
+        "placeholder": "M1 1AA"
+      },
+      {
+        "name": "country",
+        "type": "string",
+        "value": null,
+        "label": "Location Country",
+        "placeholder": "United Kingdom"
+      },
+      {
+        "name": "record_type_id",
+        "type": "string",
+        "value": null,
+        "label": "Record Type",
+        "placeholder": "0125f000000AbCdAAK - only if your org uses record types on assets"
+      },
+      {
+        "name": "additional_fields",
+        "type": "object",
+        "value": null,
+        "label": "Additional Fields",
+        "placeholder": "{\"My_Custom_Field__c\":\"value\"} - any other Salesforce field on the asset"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Asset ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Raw Response",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "crm/salesforce/asset_delete": {
+    "hash": "9850e9b5e06b3c17542c945c05544d561902218478cecc598b096c7b5a243f30",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Salesforce: Delete Asset",
+    "description": "Send an asset to the Salesforce Recycle Bin, where an administrator can restore it for 15 days. If a unit has simply been retired rather than recorded by mistake, set its status to Obsolete instead so the customer's history is kept. Deleting an asset that other assets sit under empties their Part Of link without warning.",
+    "website": "https://www.flomation.co",
+    "icon": "salesforce+trash",
+    "date": "26/07/2026",
+    "type": 2,
+    "category": {
+      "name": "CRM",
+      "icon": "people-group",
+      "description": "Customer relationship management — contacts, companies, deals, and tickets"
+    },
+    "sub_category": {
+      "name": "Salesforce",
+      "icon": "salesforce",
+      "description": "Manage Salesforce leads, contacts, accounts, opportunities, cases, tasks, and any custom object"
+    },
+    "inputs": [
+      {
+        "name": "access_token",
+        "type": "secret",
+        "value": null,
+        "label": "Salesforce Connection",
+        "placeholder": "Connect Salesforce, or paste an access token",
+        "required": true
+      },
+      {
+        "name": "instance_url",
+        "type": "string",
+        "value": null,
+        "label": "Salesforce Instance URL",
+        "placeholder": "https://mycompany.my.salesforce.com",
+        "required": true
+      },
+      {
+        "name": "asset_id",
+        "type": "string",
+        "value": null,
+        "label": "Asset ID",
+        "placeholder": "02i5f000000AbCdAAK - the asset to delete, not its serial number",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Asset ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Raw Response",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "crm/salesforce/asset_get": {
+    "hash": "a25bd115c3488871b2b677ff3bca6e17ed28ac3d09f50d26a5f4e51a31674d98",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Salesforce: Get Asset",
+    "description": "Look up one asset by its Salesforce ID and return everything on it - which product it is, its serial number, install and purchase dates, when the warranty ends and every custom field.",
+    "website": "https://www.flomation.co",
+    "icon": "salesforce+magnifying-glass",
+    "date": "26/07/2026",
+    "type": 2,
+    "category": {
+      "name": "CRM",
+      "icon": "people-group",
+      "description": "Customer relationship management — contacts, companies, deals, and tickets"
+    },
+    "sub_category": {
+      "name": "Salesforce",
+      "icon": "salesforce",
+      "description": "Manage Salesforce leads, contacts, accounts, opportunities, cases, tasks, and any custom object"
+    },
+    "inputs": [
+      {
+        "name": "access_token",
+        "type": "secret",
+        "value": null,
+        "label": "Salesforce Connection",
+        "placeholder": "Connect Salesforce, or paste an access token",
+        "required": true
+      },
+      {
+        "name": "instance_url",
+        "type": "string",
+        "value": null,
+        "label": "Salesforce Instance URL",
+        "placeholder": "https://mycompany.my.salesforce.com",
+        "required": true
+      },
+      {
+        "name": "asset_id",
+        "type": "string",
+        "value": null,
+        "label": "Asset ID",
+        "placeholder": "02i5f000000AbCdAAK - the asset's Salesforce ID, not its serial number",
+        "required": true
+      },
+      {
+        "name": "fields",
+        "type": "string",
+        "value": null,
+        "label": "Fields",
+        "placeholder": "Name,SerialNumber,Status,InstallDate,UsageEndDate - leave blank to return every field"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Asset ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Asset",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "crm/salesforce/asset_get_all": {
+    "hash": "7a42aedbe3e4e34527cc9ecfabfd8c6c253e6505f24fb138f8f3cd2147579eda",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Salesforce: Get Many Assets",
+    "description": "List what customers own - everything on one account when they ring up, every unit of one product, everything whose warranty runs out in the next month. Turn on Return All to fetch every match instead of one page.",
+    "website": "https://www.flomation.co",
+    "icon": "salesforce+list",
+    "date": "26/07/2026",
+    "type": 2,
+    "category": {
+      "name": "CRM",
+      "icon": "people-group",
+      "description": "Customer relationship management — contacts, companies, deals, and tickets"
+    },
+    "sub_category": {
+      "name": "Salesforce",
+      "icon": "salesforce",
+      "description": "Manage Salesforce leads, contacts, accounts, opportunities, cases, tasks, and any custom object"
+    },
+    "inputs": [
+      {
+        "name": "access_token",
+        "type": "secret",
+        "value": null,
+        "label": "Salesforce Connection",
+        "placeholder": "Connect Salesforce, or paste an access token",
+        "required": true
+      },
+      {
+        "name": "instance_url",
+        "type": "string",
+        "value": null,
+        "label": "Salesforce Instance URL",
+        "placeholder": "https://mycompany.my.salesforce.com",
+        "required": true
+      },
+      {
+        "name": "fields",
+        "type": "string",
+        "value": null,
+        "label": "Fields",
+        "placeholder": "Name,SerialNumber,Status,UsageEndDate - leave blank for the usual asset fields"
+      },
+      {
+        "name": "warranty_ends_on_or_after",
+        "type": "string",
+        "value": null,
+        "label": "Warranty Ends On Or After",
+        "placeholder": "TODAY - or a date like 2026-08-01; always applies, even with Match ANY on"
+      },
+      {
+        "name": "warranty_ends_on_or_before",
+        "type": "string",
+        "value": null,
+        "label": "Warranty Ends On Or Before",
+        "placeholder": "NEXT_N_DAYS:30 - the expiring-warranty window; always applies, even with Match ANY on"
+      },
+      {
+        "name": "account_id",
+        "type": "string",
+        "value": null,
+        "label": "Customer (Account)",
+        "placeholder": "0015f00000AbCdEAAV - only assets belonging to this account"
+      },
+      {
+        "name": "contact_id",
+        "type": "string",
+        "value": null,
+        "label": "Customer (Contact)",
+        "placeholder": "0035f00000XyZabAAF - only assets belonging to this contact"
+      },
+      {
+        "name": "product_id",
+        "type": "string",
+        "value": null,
+        "label": "Product",
+        "placeholder": "01t5f000004AbCdAAK - only assets of this product"
+      },
+      {
+        "name": "asset_status",
+        "type": "string",
+        "value": null,
+        "label": "Status",
+        "placeholder": "Installed, Shipped, Registered, Purchased or Obsolete"
+      },
+      {
+        "name": "serial_number",
+        "type": "string",
+        "value": null,
+        "label": "Serial Number",
+        "placeholder": "SN-00042 - find the one unit by the number stamped on it"
+      },
+      {
+        "name": "filter_field",
+        "type": "string",
+        "value": null,
+        "label": "Filter Field",
+        "placeholder": "One more field to filter on, e.g. Price or Site_Code__c"
+      },
+      {
+        "name": "filter_operator",
+        "type": "string",
+        "value": null,
+        "label": "Filter Comparison",
+        "placeholder": "How to compare the field (defaults to Equals)",
+        "options": [
+          {
+            "name": "Equals",
+            "value": "="
+          },
+          {
+            "name": "Does Not Equal",
+            "value": "!="
+          },
+          {
+            "name": "Less Than",
+            "value": "\u003c"
+          },
+          {
+            "name": "Less Than Or Equal To",
+            "value": "\u003c="
+          },
+          {
+            "name": "Greater Than",
+            "value": "\u003e"
+          },
+          {
+            "name": "Greater Than Or Equal To",
+            "value": "\u003e="
+          },
+          {
+            "name": "Contains (use % as the wildcard)",
+            "value": "LIKE"
+          },
+          {
+            "name": "Does Not Contain (use % as the wildcard)",
+            "value": "NOT LIKE"
+          },
+          {
+            "name": "Is One Of (comma-separated)",
+            "value": "IN"
+          },
+          {
+            "name": "Is Not One Of (comma-separated)",
+            "value": "NOT IN"
+          }
+        ]
+      },
+      {
+        "name": "filter_value",
+        "type": "string",
+        "value": null,
+        "label": "Filter Value",
+        "placeholder": "What to compare against, e.g. 5000, LAST_N_DAYS:90, %Diesel%"
+      },
+      {
+        "name": "filter_conditions",
+        "type": "object",
+        "value": null,
+        "label": "More Filters",
+        "placeholder": "[{\"field\":\"Price\",\"operator\":\"\u003e\",\"value\":\"5000\"},{\"field\":\"IsCompetitorProduct\",\"operator\":\"=\",\"value\":\"false\"}]"
+      },
+      {
+        "name": "match_any_filter",
+        "type": "boolean",
+        "value": null,
+        "label": "Match ANY filter instead of all",
+        "placeholder": "Off: an asset has to match every filter. On: matching any one of them is enough. Warranty Ends On Or After / Before always apply either way"
+      },
+      {
+        "name": "order_by",
+        "type": "string",
+        "value": null,
+        "label": "Sort By",
+        "placeholder": "UsageEndDate ASC - or InstallDate DESC"
+      },
+      {
+        "name": "limit",
+        "type": "integer",
+        "value": null,
+        "label": "Limit",
+        "placeholder": "50 by default, up to 2000 - ignored when Return All is on"
+      },
+      {
+        "name": "return_all",
+        "type": "boolean",
+        "value": null,
+        "label": "Return All",
+        "placeholder": "Tick to keep fetching pages until every matching asset has been collected"
+      },
+      {
+        "name": "include_deleted",
+        "type": "boolean",
+        "value": null,
+        "label": "Include Deleted",
+        "placeholder": "Tick to include assets sitting in the Salesforce Recycle Bin"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "results",
+        "type": "object",
+        "value": null,
+        "label": "Assets",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Count",
+        "placeholder": ""
+      },
+      {
+        "name": "total_size",
+        "type": "integer",
+        "value": null,
+        "label": "Records Returned",
+        "placeholder": ""
+      },
+      {
+        "name": "next_url",
+        "type": "string",
+        "value": null,
+        "label": "Next Page URL",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Raw Response",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "crm/salesforce/asset_update": {
+    "hash": "37bceb1c327ebb0e608f185b84ea4fb8b92697b739a626e657002ad241b43360",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Salesforce: Update Asset",
+    "description": "Change an asset in Salesforce - mark it Installed once the engineer has been, extend the warranty date, move it to a new owner, retire it as Obsolete. Anything you leave blank is left exactly as it was.",
+    "website": "https://www.flomation.co",
+    "icon": "salesforce+pen",
+    "date": "26/07/2026",
+    "type": 2,
+    "category": {
+      "name": "CRM",
+      "icon": "people-group",
+      "description": "Customer relationship management — contacts, companies, deals, and tickets"
+    },
+    "sub_category": {
+      "name": "Salesforce",
+      "icon": "salesforce",
+      "description": "Manage Salesforce leads, contacts, accounts, opportunities, cases, tasks, and any custom object"
+    },
+    "inputs": [
+      {
+        "name": "access_token",
+        "type": "secret",
+        "value": null,
+        "label": "Salesforce Connection",
+        "placeholder": "Connect Salesforce, or paste an access token",
+        "required": true
+      },
+      {
+        "name": "instance_url",
+        "type": "string",
+        "value": null,
+        "label": "Salesforce Instance URL",
+        "placeholder": "https://mycompany.my.salesforce.com",
+        "required": true
+      },
+      {
+        "name": "asset_id",
+        "type": "string",
+        "value": null,
+        "label": "Asset ID",
+        "placeholder": "02i5f000000AbCdAAK - the asset to change, not its serial number",
+        "required": true
+      },
+      {
+        "name": "name",
+        "type": "string",
+        "value": null,
+        "label": "Asset Name",
+        "placeholder": "GenWatt Diesel 1000kW - Edge Communications (up to 255 characters)"
+      },
+      {
+        "name": "asset_status",
+        "type": "string",
+        "value": null,
+        "label": "Status",
+        "placeholder": "Shipped, Installed, Registered, Purchased or Obsolete - Salesforce saves anything you type here without complaint, so a typo becomes a real status"
+      },
+      {
+        "name": "account_id",
+        "type": "string",
+        "value": null,
+        "label": "Customer (Account)",
+        "placeholder": "0015f00000AbCdEAAV - do not clear both this and the contact; Salesforce needs one of them"
+      },
+      {
+        "name": "contact_id",
+        "type": "string",
+        "value": null,
+        "label": "Customer (Contact)",
+        "placeholder": "0035f00000XyZabAAF - do not clear both this and the account; Salesforce needs one of them"
+      },
+      {
+        "name": "product_id",
+        "type": "string",
+        "value": null,
+        "label": "Product",
+        "placeholder": "01t5f000004AbCdAAK - the Salesforce product this asset is one of"
+      },
+      {
+        "name": "serial_number",
+        "type": "string",
+        "value": null,
+        "label": "Serial Number",
+        "placeholder": "SN-00042 - what is stamped on the unit"
+      },
+      {
+        "name": "purchase_date",
+        "type": "datetime",
+        "value": null,
+        "label": "Purchase Date",
+        "placeholder": "2026-06-20 (the date only)"
+      },
+      {
+        "name": "install_date",
+        "type": "datetime",
+        "value": null,
+        "label": "Install Date",
+        "placeholder": "2026-07-01 (the date only)"
+      },
+      {
+        "name": "usage_end_date",
+        "type": "datetime",
+        "value": null,
+        "label": "Warranty / Usage End Date",
+        "placeholder": "2029-06-30 (the date only) - this is the date an \"is it still under warranty?\" check looks at"
+      },
+      {
+        "name": "price",
+        "type": "string",
+        "value": null,
+        "label": "Price",
+        "placeholder": "50000.00 - what the customer paid, in your org's currency"
+      },
+      {
+        "name": "quantity",
+        "type": "string",
+        "value": null,
+        "label": "Quantity",
+        "placeholder": "1 - how many units this record covers"
+      },
+      {
+        "name": "parent_id",
+        "type": "string",
+        "value": null,
+        "label": "Part Of (Parent Asset)",
+        "placeholder": "02i5f000000AbCdAAK - if this is a component of a bigger asset"
+      },
+      {
+        "name": "owner_id",
+        "type": "string",
+        "value": null,
+        "label": "Owner",
+        "placeholder": "0055f00000AbCdEAAV - the Salesforce user who should own the asset"
+      },
+      {
+        "name": "asset_provided_by_id",
+        "type": "string",
+        "value": null,
+        "label": "Supplied By (Account)",
+        "placeholder": "0015f00000AbCdEAAV - the company that supplied it, if it was not you"
+      },
+      {
+        "name": "asset_serviced_by_id",
+        "type": "string",
+        "value": null,
+        "label": "Serviced By (Account)",
+        "placeholder": "0015f00000AbCdEAAV - the company that maintains it"
+      },
+      {
+        "name": "is_competitor_product",
+        "type": "boolean",
+        "value": null,
+        "label": "This Is A Competitor's Product",
+        "placeholder": ""
+      },
+      {
+        "name": "is_internal",
+        "type": "boolean",
+        "value": null,
+        "label": "This Is Your Own Company's Asset",
+        "placeholder": ""
+      },
+      {
+        "name": "description",
+        "type": "text",
+        "value": null,
+        "label": "Description",
+        "placeholder": "Anything the support team should know - where it is on site, who signed for it"
+      },
+      {
+        "name": "street",
+        "type": "text",
+        "value": null,
+        "label": "Location Street",
+        "placeholder": "1 Deansgate - where the asset physically is"
+      },
+      {
+        "name": "city",
+        "type": "string",
+        "value": null,
+        "label": "Location City",
+        "placeholder": "Manchester"
+      },
+      {
+        "name": "state",
+        "type": "string",
+        "value": null,
+        "label": "Location County / State",
+        "placeholder": "Leave this blank unless your org's State list has an entry for it - most orgs check it against a fixed list and refuse anything typed by hand"
+      },
+      {
+        "name": "postal_code",
+        "type": "string",
+        "value": null,
+        "label": "Location Postcode",
+        "placeholder": "M1 1AA"
+      },
+      {
+        "name": "country",
+        "type": "string",
+        "value": null,
+        "label": "Location Country",
+        "placeholder": "United Kingdom"
+      },
+      {
+        "name": "additional_fields",
+        "type": "object",
+        "value": null,
+        "label": "Additional Fields",
+        "placeholder": "{\"My_Custom_Field__c\":\"value\"} - any other Salesforce field on the asset"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Asset ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Applied Changes",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
   "crm/salesforce/attachment_create": {
     "hash": "77c5d00e1ed4ec2735ece204ca89c285eda1ae4201156ed6d77a3127e432568a",
     "author": "Dave McElin",
@@ -190410,6 +191347,964 @@
         "type": "object",
         "value": null,
         "label": "Raw Response",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "crm/salesforce/contract_activate": {
+    "hash": "a692fa264bbf0c2b7cbbeef69639cda88c32527a1df074b82b777ea2efcf9339",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Salesforce: Activate Contract",
+    "description": "Mark a signed contract as Activated so it counts as live. Salesforce stamps who activated it and when. Activating is one-way, so this is the step to run once the signature is actually in.",
+    "website": "https://www.flomation.co",
+    "icon": "salesforce+circle-check",
+    "date": "26/07/2026",
+    "type": 2,
+    "category": {
+      "name": "CRM",
+      "icon": "people-group",
+      "description": "Customer relationship management — contacts, companies, deals, and tickets"
+    },
+    "sub_category": {
+      "name": "Salesforce",
+      "icon": "salesforce",
+      "description": "Manage Salesforce leads, contacts, accounts, opportunities, cases, tasks, and any custom object"
+    },
+    "inputs": [
+      {
+        "name": "access_token",
+        "type": "secret",
+        "value": null,
+        "label": "Salesforce Connection",
+        "placeholder": "Connect Salesforce, or paste an access token",
+        "required": true
+      },
+      {
+        "name": "instance_url",
+        "type": "string",
+        "value": null,
+        "label": "Salesforce Instance URL",
+        "placeholder": "https://mycompany.my.salesforce.com",
+        "required": true
+      },
+      {
+        "name": "contract_id",
+        "type": "string",
+        "value": null,
+        "label": "Contract ID",
+        "placeholder": "8005f000001AbCdAAK - the contract to activate, not its contract number",
+        "required": true
+      },
+      {
+        "name": "contract_status",
+        "type": "string",
+        "value": null,
+        "label": "Status To Set",
+        "placeholder": "Leave blank to use Activated - only change this if your administrator has renamed the live status in your org"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Contract ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Contract",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "crm/salesforce/contract_create": {
+    "hash": "d60f916b9e53c68f7d76d3f37350d0c60f8da676614a902177d9e5f3efcfbfbd",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Salesforce: Create Contract",
+    "description": "Set up a contract against a customer's account - when it starts, how many months it runs for and who signed it. Salesforce gives it its own contract number and works the end date out from the term, so this is the record to hang the signed PDF off. New contracts always start as a draft; add an Activate Contract step to make one live.",
+    "website": "https://www.flomation.co",
+    "icon": "salesforce+plus",
+    "date": "26/07/2026",
+    "type": 2,
+    "category": {
+      "name": "CRM",
+      "icon": "people-group",
+      "description": "Customer relationship management — contacts, companies, deals, and tickets"
+    },
+    "sub_category": {
+      "name": "Salesforce",
+      "icon": "salesforce",
+      "description": "Manage Salesforce leads, contacts, accounts, opportunities, cases, tasks, and any custom object"
+    },
+    "inputs": [
+      {
+        "name": "access_token",
+        "type": "secret",
+        "value": null,
+        "label": "Salesforce Connection",
+        "placeholder": "Connect Salesforce, or paste an access token",
+        "required": true
+      },
+      {
+        "name": "instance_url",
+        "type": "string",
+        "value": null,
+        "label": "Salesforce Instance URL",
+        "placeholder": "https://mycompany.my.salesforce.com",
+        "required": true
+      },
+      {
+        "name": "account_id",
+        "type": "string",
+        "value": null,
+        "label": "Customer (Account)",
+        "placeholder": "0015f00000AbCdEAAV - the account this contract is with; Salesforce will not create a contract without one",
+        "required": true
+      },
+      {
+        "name": "contract_status",
+        "type": "string",
+        "value": null,
+        "label": "Status",
+        "placeholder": "Draft or In Approval Process - leave blank and Salesforce starts it as Draft. A contract cannot be created as Activated; add an Activate Contract step for that"
+      },
+      {
+        "name": "start_date",
+        "type": "datetime",
+        "value": null,
+        "label": "Start Date",
+        "placeholder": "2026-08-01 (the date only) - the end date is worked out from this plus the term"
+      },
+      {
+        "name": "contract_term",
+        "type": "integer",
+        "value": null,
+        "label": "Contract Term (Months)",
+        "placeholder": "12 - the length of the contract in MONTHS, not days or years"
+      },
+      {
+        "name": "owner_id",
+        "type": "string",
+        "value": null,
+        "label": "Owner",
+        "placeholder": "0055f00000AbCdEAAV - leave blank and the connected Salesforce user owns it"
+      },
+      {
+        "name": "owner_expiration_notice",
+        "type": "string",
+        "value": null,
+        "label": "Remind The Owner (Days Before The End)",
+        "placeholder": "60 - Salesforce only accepts 15, 30, 45, 60, 90 or 120; anything else is refused"
+      },
+      {
+        "name": "pricebook_id",
+        "type": "string",
+        "value": null,
+        "label": "Price Book",
+        "placeholder": "01s5f000004AbCdAAK - the price list to use for products on this contract"
+      },
+      {
+        "name": "company_signed_id",
+        "type": "string",
+        "value": null,
+        "label": "Signed By (Your Side)",
+        "placeholder": "0055f00000AbCdEAAV - the Salesforce user who signed for your company"
+      },
+      {
+        "name": "company_signed_date",
+        "type": "datetime",
+        "value": null,
+        "label": "Date You Signed",
+        "placeholder": "2026-07-24 (the date only)"
+      },
+      {
+        "name": "customer_signed_id",
+        "type": "string",
+        "value": null,
+        "label": "Signed By (Customer Contact)",
+        "placeholder": "0035f00000XyZabAAF - the contact who signed for the customer"
+      },
+      {
+        "name": "customer_signed_title",
+        "type": "string",
+        "value": null,
+        "label": "Customer Signatory's Job Title",
+        "placeholder": "Operations Director"
+      },
+      {
+        "name": "customer_signed_date",
+        "type": "datetime",
+        "value": null,
+        "label": "Date The Customer Signed",
+        "placeholder": "2026-07-25 (the date only)"
+      },
+      {
+        "name": "special_terms",
+        "type": "text",
+        "value": null,
+        "label": "Special Terms",
+        "placeholder": "Anything agreed that differs from your standard terms"
+      },
+      {
+        "name": "description",
+        "type": "text",
+        "value": null,
+        "label": "Description",
+        "placeholder": "Background on the contract, visible to everyone on the account"
+      },
+      {
+        "name": "billing_street",
+        "type": "text",
+        "value": null,
+        "label": "Billing Street",
+        "placeholder": "1 Deansgate"
+      },
+      {
+        "name": "billing_city",
+        "type": "string",
+        "value": null,
+        "label": "Billing City",
+        "placeholder": "Manchester"
+      },
+      {
+        "name": "billing_state",
+        "type": "string",
+        "value": null,
+        "label": "Billing County / State",
+        "placeholder": "Leave this blank unless your org's State list has an entry for it - most orgs check it against a fixed list and refuse anything typed by hand"
+      },
+      {
+        "name": "billing_postal_code",
+        "type": "string",
+        "value": null,
+        "label": "Billing Postcode",
+        "placeholder": "M1 1AA"
+      },
+      {
+        "name": "billing_country",
+        "type": "string",
+        "value": null,
+        "label": "Billing Country",
+        "placeholder": "United Kingdom"
+      },
+      {
+        "name": "record_type_id",
+        "type": "string",
+        "value": null,
+        "label": "Record Type",
+        "placeholder": "0125f000000AbCdAAK - only if your org uses record types on contracts"
+      },
+      {
+        "name": "additional_fields",
+        "type": "object",
+        "value": null,
+        "label": "Additional Fields",
+        "placeholder": "{\"My_Custom_Field__c\":\"value\"} - any other Salesforce field on the contract"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Contract ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Raw Response",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "crm/salesforce/contract_delete": {
+    "hash": "c11fd105aac62c4aabc5b1ecc28fae5c1b303037d89496cb0234d5cfc03a3c04",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Salesforce: Delete Contract",
+    "description": "Send a contract to the Salesforce Recycle Bin, where an administrator can restore it for 15 days. Activated contracts can be deleted too, so use this carefully on anything live.",
+    "website": "https://www.flomation.co",
+    "icon": "salesforce+trash",
+    "date": "26/07/2026",
+    "type": 2,
+    "category": {
+      "name": "CRM",
+      "icon": "people-group",
+      "description": "Customer relationship management — contacts, companies, deals, and tickets"
+    },
+    "sub_category": {
+      "name": "Salesforce",
+      "icon": "salesforce",
+      "description": "Manage Salesforce leads, contacts, accounts, opportunities, cases, tasks, and any custom object"
+    },
+    "inputs": [
+      {
+        "name": "access_token",
+        "type": "secret",
+        "value": null,
+        "label": "Salesforce Connection",
+        "placeholder": "Connect Salesforce, or paste an access token",
+        "required": true
+      },
+      {
+        "name": "instance_url",
+        "type": "string",
+        "value": null,
+        "label": "Salesforce Instance URL",
+        "placeholder": "https://mycompany.my.salesforce.com",
+        "required": true
+      },
+      {
+        "name": "contract_id",
+        "type": "string",
+        "value": null,
+        "label": "Contract ID",
+        "placeholder": "8005f000001AbCdAAK - the contract to delete, not its contract number",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Contract ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Raw Response",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "crm/salesforce/contract_get": {
+    "hash": "515e8bd0aeb981a7f9d16922e1345fade51b506d6127df87fb3d51fea72dfe55",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Salesforce: Get Contract",
+    "description": "Look up one contract by its Salesforce ID and return everything on it - its contract number, status, start date, term, the end date Salesforce works out for you, who signed it and every custom field.",
+    "website": "https://www.flomation.co",
+    "icon": "salesforce+magnifying-glass",
+    "date": "26/07/2026",
+    "type": 2,
+    "category": {
+      "name": "CRM",
+      "icon": "people-group",
+      "description": "Customer relationship management — contacts, companies, deals, and tickets"
+    },
+    "sub_category": {
+      "name": "Salesforce",
+      "icon": "salesforce",
+      "description": "Manage Salesforce leads, contacts, accounts, opportunities, cases, tasks, and any custom object"
+    },
+    "inputs": [
+      {
+        "name": "access_token",
+        "type": "secret",
+        "value": null,
+        "label": "Salesforce Connection",
+        "placeholder": "Connect Salesforce, or paste an access token",
+        "required": true
+      },
+      {
+        "name": "instance_url",
+        "type": "string",
+        "value": null,
+        "label": "Salesforce Instance URL",
+        "placeholder": "https://mycompany.my.salesforce.com",
+        "required": true
+      },
+      {
+        "name": "contract_id",
+        "type": "string",
+        "value": null,
+        "label": "Contract ID",
+        "placeholder": "8005f000001AbCdAAK - the contract's Salesforce ID, not its contract number",
+        "required": true
+      },
+      {
+        "name": "fields",
+        "type": "string",
+        "value": null,
+        "label": "Fields",
+        "placeholder": "ContractNumber,Status,StartDate,EndDate,ContractTerm - leave blank to return every field"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Contract ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Contract",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "crm/salesforce/contract_get_all": {
+    "hash": "6ab487150d57193ed45d70b97045841222f7da90b1cac7b510128592e30acbb4",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Salesforce: Get Many Contracts",
+    "description": "List contracts from Salesforce - everything ending in the next 60 days, every contract on one account, everything still in Draft. Pair it with a schedule and an email step and you have a renewals reminder. Turn on Return All to fetch every match instead of one page.",
+    "website": "https://www.flomation.co",
+    "icon": "salesforce+list",
+    "date": "26/07/2026",
+    "type": 2,
+    "category": {
+      "name": "CRM",
+      "icon": "people-group",
+      "description": "Customer relationship management — contacts, companies, deals, and tickets"
+    },
+    "sub_category": {
+      "name": "Salesforce",
+      "icon": "salesforce",
+      "description": "Manage Salesforce leads, contacts, accounts, opportunities, cases, tasks, and any custom object"
+    },
+    "inputs": [
+      {
+        "name": "access_token",
+        "type": "secret",
+        "value": null,
+        "label": "Salesforce Connection",
+        "placeholder": "Connect Salesforce, or paste an access token",
+        "required": true
+      },
+      {
+        "name": "instance_url",
+        "type": "string",
+        "value": null,
+        "label": "Salesforce Instance URL",
+        "placeholder": "https://mycompany.my.salesforce.com",
+        "required": true
+      },
+      {
+        "name": "fields",
+        "type": "string",
+        "value": null,
+        "label": "Fields",
+        "placeholder": "ContractNumber,Status,StartDate,EndDate - leave blank for the usual contract fields"
+      },
+      {
+        "name": "ends_on_or_after",
+        "type": "string",
+        "value": null,
+        "label": "Ends On Or After",
+        "placeholder": "TODAY - or a date like 2026-08-01; always applies, even with Match ANY on"
+      },
+      {
+        "name": "ends_on_or_before",
+        "type": "string",
+        "value": null,
+        "label": "Ends On Or Before",
+        "placeholder": "NEXT_N_DAYS:60 - the renewals window; always applies, even with Match ANY on"
+      },
+      {
+        "name": "contract_status",
+        "type": "string",
+        "value": null,
+        "label": "Status",
+        "placeholder": "Activated, Draft or In Approval Process"
+      },
+      {
+        "name": "account_id",
+        "type": "string",
+        "value": null,
+        "label": "Customer (Account)",
+        "placeholder": "0015f00000AbCdEAAV - only contracts with this account"
+      },
+      {
+        "name": "owner_id",
+        "type": "string",
+        "value": null,
+        "label": "Owner",
+        "placeholder": "0055f00000AbCdEAAV - only contracts owned by this Salesforce user"
+      },
+      {
+        "name": "filter_field",
+        "type": "string",
+        "value": null,
+        "label": "Filter Field",
+        "placeholder": "One more field to filter on, e.g. ContractTerm or Renewal_Owner__c"
+      },
+      {
+        "name": "filter_operator",
+        "type": "string",
+        "value": null,
+        "label": "Filter Comparison",
+        "placeholder": "How to compare the field (defaults to Equals)",
+        "options": [
+          {
+            "name": "Equals",
+            "value": "="
+          },
+          {
+            "name": "Does Not Equal",
+            "value": "!="
+          },
+          {
+            "name": "Less Than",
+            "value": "\u003c"
+          },
+          {
+            "name": "Less Than Or Equal To",
+            "value": "\u003c="
+          },
+          {
+            "name": "Greater Than",
+            "value": "\u003e"
+          },
+          {
+            "name": "Greater Than Or Equal To",
+            "value": "\u003e="
+          },
+          {
+            "name": "Contains (use % as the wildcard)",
+            "value": "LIKE"
+          },
+          {
+            "name": "Does Not Contain (use % as the wildcard)",
+            "value": "NOT LIKE"
+          },
+          {
+            "name": "Is One Of (comma-separated)",
+            "value": "IN"
+          },
+          {
+            "name": "Is Not One Of (comma-separated)",
+            "value": "NOT IN"
+          }
+        ]
+      },
+      {
+        "name": "filter_value",
+        "type": "string",
+        "value": null,
+        "label": "Filter Value",
+        "placeholder": "What to compare against, e.g. 12, THIS_YEAR, 2026-09-01"
+      },
+      {
+        "name": "filter_conditions",
+        "type": "object",
+        "value": null,
+        "label": "More Filters",
+        "placeholder": "[{\"field\":\"ContractTerm\",\"operator\":\"\u003e=\",\"value\":\"12\"},{\"field\":\"Status\",\"operator\":\"=\",\"value\":\"Activated\"}]"
+      },
+      {
+        "name": "match_any_filter",
+        "type": "boolean",
+        "value": null,
+        "label": "Match ANY filter instead of all",
+        "placeholder": "Off: a contract has to match every filter. On: matching any one of them is enough. Ends On Or After / Before always apply either way"
+      },
+      {
+        "name": "order_by",
+        "type": "string",
+        "value": null,
+        "label": "Sort By",
+        "placeholder": "EndDate ASC - or ContractNumber DESC"
+      },
+      {
+        "name": "limit",
+        "type": "integer",
+        "value": null,
+        "label": "Limit",
+        "placeholder": "50 by default, up to 2000 - ignored when Return All is on"
+      },
+      {
+        "name": "return_all",
+        "type": "boolean",
+        "value": null,
+        "label": "Return All",
+        "placeholder": "Tick to keep fetching pages until every matching contract has been collected"
+      },
+      {
+        "name": "include_deleted",
+        "type": "boolean",
+        "value": null,
+        "label": "Include Deleted",
+        "placeholder": "Tick to include contracts sitting in the Salesforce Recycle Bin"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "results",
+        "type": "object",
+        "value": null,
+        "label": "Contracts",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Count",
+        "placeholder": ""
+      },
+      {
+        "name": "total_size",
+        "type": "integer",
+        "value": null,
+        "label": "Records Returned",
+        "placeholder": ""
+      },
+      {
+        "name": "next_url",
+        "type": "string",
+        "value": null,
+        "label": "Next Page URL",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Raw Response",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "crm/salesforce/contract_update": {
+    "hash": "49dee16e1ae58b933ca6e19cfcb7a3794cc0960cabf731b1dc83fd26eddacc79",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Salesforce: Update Contract",
+    "description": "Change a contract in Salesforce - push the start date, extend the term, record the signatures, hand it to a new owner. Anything you leave blank is left exactly as it was.",
+    "website": "https://www.flomation.co",
+    "icon": "salesforce+pen",
+    "date": "26/07/2026",
+    "type": 2,
+    "category": {
+      "name": "CRM",
+      "icon": "people-group",
+      "description": "Customer relationship management — contacts, companies, deals, and tickets"
+    },
+    "sub_category": {
+      "name": "Salesforce",
+      "icon": "salesforce",
+      "description": "Manage Salesforce leads, contacts, accounts, opportunities, cases, tasks, and any custom object"
+    },
+    "inputs": [
+      {
+        "name": "access_token",
+        "type": "secret",
+        "value": null,
+        "label": "Salesforce Connection",
+        "placeholder": "Connect Salesforce, or paste an access token",
+        "required": true
+      },
+      {
+        "name": "instance_url",
+        "type": "string",
+        "value": null,
+        "label": "Salesforce Instance URL",
+        "placeholder": "https://mycompany.my.salesforce.com",
+        "required": true
+      },
+      {
+        "name": "contract_id",
+        "type": "string",
+        "value": null,
+        "label": "Contract ID",
+        "placeholder": "8005f000001AbCdAAK - the contract to change, not its contract number",
+        "required": true
+      },
+      {
+        "name": "contract_status",
+        "type": "string",
+        "value": null,
+        "label": "Status",
+        "placeholder": "Draft, In Approval Process or Activated - note that Activated cannot be undone"
+      },
+      {
+        "name": "start_date",
+        "type": "datetime",
+        "value": null,
+        "label": "Start Date",
+        "placeholder": "2026-08-01 (the date only) - the end date is worked out from this plus the term"
+      },
+      {
+        "name": "contract_term",
+        "type": "integer",
+        "value": null,
+        "label": "Contract Term (Months)",
+        "placeholder": "24 - the length of the contract in MONTHS, not days or years"
+      },
+      {
+        "name": "account_id",
+        "type": "string",
+        "value": null,
+        "label": "Customer (Account)",
+        "placeholder": "0015f00000AbCdEAAV - the account this contract is with"
+      },
+      {
+        "name": "owner_id",
+        "type": "string",
+        "value": null,
+        "label": "Owner",
+        "placeholder": "0055f00000AbCdEAAV - the Salesforce user who should own the contract"
+      },
+      {
+        "name": "owner_expiration_notice",
+        "type": "string",
+        "value": null,
+        "label": "Remind The Owner (Days Before The End)",
+        "placeholder": "60 - Salesforce only accepts 15, 30, 45, 60, 90 or 120; anything else is refused"
+      },
+      {
+        "name": "pricebook_id",
+        "type": "string",
+        "value": null,
+        "label": "Price Book",
+        "placeholder": "01s5f000004AbCdAAK - the price list to use for products on this contract"
+      },
+      {
+        "name": "company_signed_id",
+        "type": "string",
+        "value": null,
+        "label": "Signed By (Your Side)",
+        "placeholder": "0055f00000AbCdEAAV - the Salesforce user who signed for your company"
+      },
+      {
+        "name": "company_signed_date",
+        "type": "datetime",
+        "value": null,
+        "label": "Date You Signed",
+        "placeholder": "2026-07-24 (the date only)"
+      },
+      {
+        "name": "customer_signed_id",
+        "type": "string",
+        "value": null,
+        "label": "Signed By (Customer Contact)",
+        "placeholder": "0035f00000XyZabAAF - the contact who signed for the customer"
+      },
+      {
+        "name": "customer_signed_title",
+        "type": "string",
+        "value": null,
+        "label": "Customer Signatory's Job Title",
+        "placeholder": "Operations Director"
+      },
+      {
+        "name": "customer_signed_date",
+        "type": "datetime",
+        "value": null,
+        "label": "Date The Customer Signed",
+        "placeholder": "2026-07-25 (the date only)"
+      },
+      {
+        "name": "special_terms",
+        "type": "text",
+        "value": null,
+        "label": "Special Terms",
+        "placeholder": "Anything agreed that differs from your standard terms"
+      },
+      {
+        "name": "description",
+        "type": "text",
+        "value": null,
+        "label": "Description",
+        "placeholder": "Background on the contract, visible to everyone on the account"
+      },
+      {
+        "name": "billing_street",
+        "type": "text",
+        "value": null,
+        "label": "Billing Street",
+        "placeholder": "1 Deansgate"
+      },
+      {
+        "name": "billing_city",
+        "type": "string",
+        "value": null,
+        "label": "Billing City",
+        "placeholder": "Manchester"
+      },
+      {
+        "name": "billing_state",
+        "type": "string",
+        "value": null,
+        "label": "Billing County / State",
+        "placeholder": "Leave this blank unless your org's State list has an entry for it - most orgs check it against a fixed list and refuse anything typed by hand"
+      },
+      {
+        "name": "billing_postal_code",
+        "type": "string",
+        "value": null,
+        "label": "Billing Postcode",
+        "placeholder": "M1 1AA"
+      },
+      {
+        "name": "billing_country",
+        "type": "string",
+        "value": null,
+        "label": "Billing Country",
+        "placeholder": "United Kingdom"
+      },
+      {
+        "name": "additional_fields",
+        "type": "object",
+        "value": null,
+        "label": "Additional Fields",
+        "placeholder": "{\"My_Custom_Field__c\":\"value\"} - any other Salesforce field on the contract"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Contract ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Applied Changes",
         "placeholder": ""
       },
       {
@@ -198198,6 +200093,1293 @@
       }
     ]
   },
+  "crm/salesforce/order_activate": {
+    "hash": "3e3c270a115e123614e20ab842ea8bf36c87ec7278789698652a7747eee570a5",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Salesforce: Activate Order",
+    "description": "Activate an order once its product lines are in place, so it counts as a real order rather than a draft. Salesforce stamps who activated it and when, and locks the product lines from further changes.",
+    "website": "https://www.flomation.co",
+    "icon": "salesforce+circle-check",
+    "date": "26/07/2026",
+    "type": 2,
+    "category": {
+      "name": "CRM",
+      "icon": "people-group",
+      "description": "Customer relationship management — contacts, companies, deals, and tickets"
+    },
+    "sub_category": {
+      "name": "Salesforce",
+      "icon": "salesforce",
+      "description": "Manage Salesforce leads, contacts, accounts, opportunities, cases, tasks, and any custom object"
+    },
+    "inputs": [
+      {
+        "name": "access_token",
+        "type": "secret",
+        "value": null,
+        "label": "Salesforce Connection",
+        "placeholder": "Connect Salesforce, or paste an access token",
+        "required": true
+      },
+      {
+        "name": "instance_url",
+        "type": "string",
+        "value": null,
+        "label": "Salesforce Instance URL",
+        "placeholder": "https://mycompany.my.salesforce.com",
+        "required": true
+      },
+      {
+        "name": "order_id",
+        "type": "string",
+        "value": null,
+        "label": "Order ID",
+        "placeholder": "8015f000000AbCdAAK - the draft order to activate",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Order ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Applied Changes",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "crm/salesforce/order_create": {
+    "hash": "5efee4b2b94414b996f6e2ca05fb99fdbe66ebc28cee121f460adcd5584bfc60",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Salesforce: Create Order",
+    "description": "Raise an order against a customer's account in Salesforce - the record that turns a won deal or an online sale into something the warehouse and finance can work from. Add its product lines next, then activate it.",
+    "website": "https://www.flomation.co",
+    "icon": "salesforce+clipboard-list",
+    "date": "26/07/2026",
+    "type": 2,
+    "category": {
+      "name": "CRM",
+      "icon": "people-group",
+      "description": "Customer relationship management — contacts, companies, deals, and tickets"
+    },
+    "sub_category": {
+      "name": "Salesforce",
+      "icon": "salesforce",
+      "description": "Manage Salesforce leads, contacts, accounts, opportunities, cases, tasks, and any custom object"
+    },
+    "inputs": [
+      {
+        "name": "access_token",
+        "type": "secret",
+        "value": null,
+        "label": "Salesforce Connection",
+        "placeholder": "Connect Salesforce, or paste an access token",
+        "required": true
+      },
+      {
+        "name": "instance_url",
+        "type": "string",
+        "value": null,
+        "label": "Salesforce Instance URL",
+        "placeholder": "https://mycompany.my.salesforce.com",
+        "required": true
+      },
+      {
+        "name": "account_id",
+        "type": "string",
+        "value": null,
+        "label": "Company (Account)",
+        "placeholder": "0015f00000AbCdEAAV - the customer this order is for",
+        "required": true
+      },
+      {
+        "name": "effective_date",
+        "type": "datetime",
+        "value": null,
+        "label": "Order Start Date",
+        "placeholder": "2026-08-01 (the date only - Salesforce ignores the time)",
+        "required": true
+      },
+      {
+        "name": "order_status",
+        "type": "string",
+        "value": null,
+        "label": "Status",
+        "placeholder": "Draft - a new order always starts as a draft (leave blank for Draft)",
+        "options": [
+          {
+            "name": "Draft",
+            "value": "Draft"
+          },
+          {
+            "name": "Activated",
+            "value": "Activated"
+          }
+        ]
+      },
+      {
+        "name": "pricebook_id",
+        "type": "string",
+        "value": null,
+        "label": "Price Book",
+        "placeholder": "01s5f000004AbCdAAK - the price list to order from; needed before any product can be added"
+      },
+      {
+        "name": "contract_id",
+        "type": "string",
+        "value": null,
+        "label": "Contract",
+        "placeholder": "8005f000000AbCdAAK - the contract this order is placed under"
+      },
+      {
+        "name": "order_name",
+        "type": "string",
+        "value": null,
+        "label": "Order Name",
+        "placeholder": "Acme Ltd - August generator order (Salesforce numbers the order for you)"
+      },
+      {
+        "name": "order_type",
+        "type": "string",
+        "value": null,
+        "label": "Order Type",
+        "placeholder": "Must match an Order Type in your Salesforce org - Salesforce ships none, so leave it blank unless an administrator has added some"
+      },
+      {
+        "name": "end_date",
+        "type": "datetime",
+        "value": null,
+        "label": "Order End Date",
+        "placeholder": "2027-07-31 (the date only) - for a term or subscription order"
+      },
+      {
+        "name": "po_number",
+        "type": "string",
+        "value": null,
+        "label": "Customer PO Number",
+        "placeholder": "PO-2026-4471 - the customer's own purchase order reference"
+      },
+      {
+        "name": "po_date",
+        "type": "datetime",
+        "value": null,
+        "label": "Customer PO Date",
+        "placeholder": "2026-07-28 (the date only)"
+      },
+      {
+        "name": "order_reference_number",
+        "type": "string",
+        "value": null,
+        "label": "Your Order Reference",
+        "placeholder": "SHOP-10482 - your own reference, e.g. the Shopify or WooCommerce order number"
+      },
+      {
+        "name": "description",
+        "type": "text",
+        "value": null,
+        "label": "Description",
+        "placeholder": "Anything the warehouse or finance need to know about this order"
+      },
+      {
+        "name": "bill_to_contact_id",
+        "type": "string",
+        "value": null,
+        "label": "Bill To Contact",
+        "placeholder": "0035f00000AbCdEAAV - who to invoice"
+      },
+      {
+        "name": "ship_to_contact_id",
+        "type": "string",
+        "value": null,
+        "label": "Ship To Contact",
+        "placeholder": "0035f00000AbCdEAAV - who receives the goods"
+      },
+      {
+        "name": "billing_street",
+        "type": "text",
+        "value": null,
+        "label": "Bill To Street",
+        "placeholder": "1 High Street"
+      },
+      {
+        "name": "billing_city",
+        "type": "string",
+        "value": null,
+        "label": "Bill To City",
+        "placeholder": "London"
+      },
+      {
+        "name": "billing_state",
+        "type": "string",
+        "value": null,
+        "label": "Bill To State/Province",
+        "placeholder": "Only for countries your Salesforce org lists states for - the United Kingdom has none, so leave it blank"
+      },
+      {
+        "name": "billing_postal_code",
+        "type": "string",
+        "value": null,
+        "label": "Bill To Postcode",
+        "placeholder": "EC1A 1BB"
+      },
+      {
+        "name": "billing_country",
+        "type": "string",
+        "value": null,
+        "label": "Bill To Country",
+        "placeholder": "United Kingdom - must match your org's country list"
+      },
+      {
+        "name": "shipping_street",
+        "type": "text",
+        "value": null,
+        "label": "Ship To Street",
+        "placeholder": "Unit 4, Riverside Estate"
+      },
+      {
+        "name": "shipping_city",
+        "type": "string",
+        "value": null,
+        "label": "Ship To City",
+        "placeholder": "Manchester"
+      },
+      {
+        "name": "shipping_state",
+        "type": "string",
+        "value": null,
+        "label": "Ship To State/Province",
+        "placeholder": "Only for countries your Salesforce org lists states for - the United Kingdom has none, so leave it blank"
+      },
+      {
+        "name": "shipping_postal_code",
+        "type": "string",
+        "value": null,
+        "label": "Ship To Postcode",
+        "placeholder": "M1 2AB"
+      },
+      {
+        "name": "shipping_country",
+        "type": "string",
+        "value": null,
+        "label": "Ship To Country",
+        "placeholder": "United Kingdom - must match your org's country list"
+      },
+      {
+        "name": "owner_id",
+        "type": "string",
+        "value": null,
+        "label": "Owner",
+        "placeholder": "0055f00000AbCdEAAV - the person who owns this order"
+      },
+      {
+        "name": "additional_fields",
+        "type": "object",
+        "value": null,
+        "label": "Additional Fields",
+        "placeholder": "{\"My_Custom_Field__c\":\"value\"} - any other Salesforce field on the order"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Order ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Raw Response",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "crm/salesforce/order_delete": {
+    "hash": "8a621a1629b4966093a80d01c60164623f06fc6065b84ffcc044374178903c53",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Salesforce: Delete Order",
+    "description": "Send an order and its product lines to the Salesforce Recycle Bin, where an administrator can restore it for 15 days. Only draft orders can be deleted - an activated one has to be put back to Draft first.",
+    "website": "https://www.flomation.co",
+    "icon": "salesforce+trash",
+    "date": "26/07/2026",
+    "type": 2,
+    "category": {
+      "name": "CRM",
+      "icon": "people-group",
+      "description": "Customer relationship management — contacts, companies, deals, and tickets"
+    },
+    "sub_category": {
+      "name": "Salesforce",
+      "icon": "salesforce",
+      "description": "Manage Salesforce leads, contacts, accounts, opportunities, cases, tasks, and any custom object"
+    },
+    "inputs": [
+      {
+        "name": "access_token",
+        "type": "secret",
+        "value": null,
+        "label": "Salesforce Connection",
+        "placeholder": "Connect Salesforce, or paste an access token",
+        "required": true
+      },
+      {
+        "name": "instance_url",
+        "type": "string",
+        "value": null,
+        "label": "Salesforce Instance URL",
+        "placeholder": "https://mycompany.my.salesforce.com",
+        "required": true
+      },
+      {
+        "name": "order_id",
+        "type": "string",
+        "value": null,
+        "label": "Order ID",
+        "placeholder": "8015f000000AbCdAAK - the order to delete",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Order ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Raw Response",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "crm/salesforce/order_get": {
+    "hash": "e19a164a750affe9b715c862e4164b495c856b661ddeb20455bb3d634b57952c",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Salesforce: Get Order",
+    "description": "Look up one order by its Salesforce ID and return everything on it - the order number, its status, what it adds up to, the dates and the delivery address.",
+    "website": "https://www.flomation.co",
+    "icon": "salesforce+magnifying-glass",
+    "date": "26/07/2026",
+    "type": 2,
+    "category": {
+      "name": "CRM",
+      "icon": "people-group",
+      "description": "Customer relationship management — contacts, companies, deals, and tickets"
+    },
+    "sub_category": {
+      "name": "Salesforce",
+      "icon": "salesforce",
+      "description": "Manage Salesforce leads, contacts, accounts, opportunities, cases, tasks, and any custom object"
+    },
+    "inputs": [
+      {
+        "name": "access_token",
+        "type": "secret",
+        "value": null,
+        "label": "Salesforce Connection",
+        "placeholder": "Connect Salesforce, or paste an access token",
+        "required": true
+      },
+      {
+        "name": "instance_url",
+        "type": "string",
+        "value": null,
+        "label": "Salesforce Instance URL",
+        "placeholder": "https://mycompany.my.salesforce.com",
+        "required": true
+      },
+      {
+        "name": "order_id",
+        "type": "string",
+        "value": null,
+        "label": "Order ID",
+        "placeholder": "8015f000000AbCdAAK - the order's Salesforce ID",
+        "required": true
+      },
+      {
+        "name": "fields",
+        "type": "string",
+        "value": null,
+        "label": "Fields",
+        "placeholder": "OrderNumber,Status,TotalAmount,EffectiveDate - leave blank to return every field"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Order ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Order",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "crm/salesforce/order_get_all": {
+    "hash": "6890167f416d759235365c111c86b6bb8b168f6fe25fc4632b7fa2e432107e39",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Salesforce: Get Many Orders",
+    "description": "List orders from Salesforce, optionally filtered - everything still in draft, every order on one account, everything activated this week. Turn on Return All to fetch every match.",
+    "website": "https://www.flomation.co",
+    "icon": "salesforce+list",
+    "date": "26/07/2026",
+    "type": 2,
+    "category": {
+      "name": "CRM",
+      "icon": "people-group",
+      "description": "Customer relationship management — contacts, companies, deals, and tickets"
+    },
+    "sub_category": {
+      "name": "Salesforce",
+      "icon": "salesforce",
+      "description": "Manage Salesforce leads, contacts, accounts, opportunities, cases, tasks, and any custom object"
+    },
+    "inputs": [
+      {
+        "name": "access_token",
+        "type": "secret",
+        "value": null,
+        "label": "Salesforce Connection",
+        "placeholder": "Connect Salesforce, or paste an access token",
+        "required": true
+      },
+      {
+        "name": "instance_url",
+        "type": "string",
+        "value": null,
+        "label": "Salesforce Instance URL",
+        "placeholder": "https://mycompany.my.salesforce.com",
+        "required": true
+      },
+      {
+        "name": "fields",
+        "type": "string",
+        "value": null,
+        "label": "Fields",
+        "placeholder": "OrderNumber,Status,TotalAmount,EffectiveDate - leave blank for the usual order fields"
+      },
+      {
+        "name": "filter_field",
+        "type": "string",
+        "value": null,
+        "label": "Filter Field",
+        "placeholder": "Status - the field to filter on"
+      },
+      {
+        "name": "filter_operator",
+        "type": "string",
+        "value": null,
+        "label": "Comparison",
+        "placeholder": "How to compare the field to the value (defaults to equals)",
+        "options": [
+          {
+            "name": "Equals",
+            "value": "="
+          },
+          {
+            "name": "Does Not Equal",
+            "value": "!="
+          },
+          {
+            "name": "Less Than",
+            "value": "\u003c"
+          },
+          {
+            "name": "Less Than Or Equal To",
+            "value": "\u003c="
+          },
+          {
+            "name": "Greater Than",
+            "value": "\u003e"
+          },
+          {
+            "name": "Greater Than Or Equal To",
+            "value": "\u003e="
+          },
+          {
+            "name": "Contains (LIKE)",
+            "value": "LIKE"
+          },
+          {
+            "name": "Does Not Contain (NOT LIKE)",
+            "value": "NOT LIKE"
+          },
+          {
+            "name": "Is One Of (IN)",
+            "value": "IN"
+          },
+          {
+            "name": "Is Not One Of (NOT IN)",
+            "value": "NOT IN"
+          }
+        ]
+      },
+      {
+        "name": "filter_value",
+        "type": "string",
+        "value": null,
+        "label": "Filter Value",
+        "placeholder": "Draft - or Activated, or a date word like THIS_MONTH, or Draft,Activated for Is One Of"
+      },
+      {
+        "name": "filter_conditions",
+        "type": "object",
+        "value": null,
+        "label": "More Filters",
+        "placeholder": "[{\"field\":\"TotalAmount\",\"operator\":\"\u003e\",\"value\":\"10000\"},{\"field\":\"EffectiveDate\",\"operator\":\"\u003e=\",\"value\":\"THIS_MONTH\"}] - extra filters"
+      },
+      {
+        "name": "match_any_filter",
+        "type": "boolean",
+        "value": null,
+        "label": "Match ANY filter instead of all",
+        "placeholder": ""
+      },
+      {
+        "name": "order_by",
+        "type": "string",
+        "value": null,
+        "label": "Sort By",
+        "placeholder": "EffectiveDate DESC - or TotalAmount DESC"
+      },
+      {
+        "name": "return_all",
+        "type": "boolean",
+        "value": null,
+        "label": "Return All (fetch every match)",
+        "placeholder": ""
+      },
+      {
+        "name": "limit",
+        "type": "integer",
+        "value": null,
+        "label": "Limit",
+        "placeholder": "50 (max 2000); ignored when Return All is on"
+      },
+      {
+        "name": "include_deleted",
+        "type": "boolean",
+        "value": null,
+        "label": "Include Deleted Orders (Recycle Bin)",
+        "placeholder": ""
+      }
+    ],
+    "outputs": [
+      {
+        "name": "results",
+        "type": "object",
+        "value": null,
+        "label": "Orders",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Count",
+        "placeholder": ""
+      },
+      {
+        "name": "total_size",
+        "type": "integer",
+        "value": null,
+        "label": "Records Returned",
+        "placeholder": ""
+      },
+      {
+        "name": "next_url",
+        "type": "string",
+        "value": null,
+        "label": "Next Page URL",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Raw Response",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "crm/salesforce/order_item_create": {
+    "hash": "1fcc139d47fd341b7fd7dc0719062e580d2107576c69344d4c4daa78644f2013",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Salesforce: Add Product to Order",
+    "description": "Put a product line on an order. Pick the product and we find its price book entry, read the list price and put the order on the right price book for you - an order needs at least one product line before it can be activated.",
+    "website": "https://www.flomation.co",
+    "icon": "salesforce+cart-shopping",
+    "date": "26/07/2026",
+    "type": 2,
+    "category": {
+      "name": "CRM",
+      "icon": "people-group",
+      "description": "Customer relationship management — contacts, companies, deals, and tickets"
+    },
+    "sub_category": {
+      "name": "Salesforce",
+      "icon": "salesforce",
+      "description": "Manage Salesforce leads, contacts, accounts, opportunities, cases, tasks, and any custom object"
+    },
+    "inputs": [
+      {
+        "name": "access_token",
+        "type": "secret",
+        "value": null,
+        "label": "Salesforce Connection",
+        "placeholder": "Connect Salesforce, or paste an access token",
+        "required": true
+      },
+      {
+        "name": "instance_url",
+        "type": "string",
+        "value": null,
+        "label": "Salesforce Instance URL",
+        "placeholder": "https://mycompany.my.salesforce.com",
+        "required": true
+      },
+      {
+        "name": "order_id",
+        "type": "string",
+        "value": null,
+        "label": "Order ID",
+        "placeholder": "8015f000000AbCdAAK - the draft order to add the product to",
+        "required": true
+      },
+      {
+        "name": "product_id",
+        "type": "string",
+        "value": null,
+        "label": "Product",
+        "placeholder": "01t5f000004AbCdAAK - we find its price for you"
+      },
+      {
+        "name": "pricebook_entry_id",
+        "type": "string",
+        "value": null,
+        "label": "Price Book Entry",
+        "placeholder": "01u5f000000AbCdAAK - only if you already know it; it wins over the Product above"
+      },
+      {
+        "name": "quantity",
+        "type": "string",
+        "value": null,
+        "label": "Quantity",
+        "placeholder": "2 - how many of this product (defaults to 1)"
+      },
+      {
+        "name": "unit_price",
+        "type": "string",
+        "value": null,
+        "label": "Price Each",
+        "placeholder": "499.00 - leave blank to use the price book price"
+      },
+      {
+        "name": "service_date",
+        "type": "datetime",
+        "value": null,
+        "label": "Service Or Delivery Date",
+        "placeholder": "2026-08-15 (the date only) - cannot be earlier than the order's own start date"
+      },
+      {
+        "name": "end_date",
+        "type": "datetime",
+        "value": null,
+        "label": "Line End Date",
+        "placeholder": "2027-07-31 (the date only) - for a subscription line; cannot be later than the order's own end date"
+      },
+      {
+        "name": "description",
+        "type": "string",
+        "value": null,
+        "label": "Line Description",
+        "placeholder": "What this line covers, shown on the order"
+      },
+      {
+        "name": "additional_fields",
+        "type": "object",
+        "value": null,
+        "label": "Additional Fields",
+        "placeholder": "{\"My_Custom_Field__c\":\"value\"} - any other field on the order line"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Order Line ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Raw Response",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "crm/salesforce/order_item_get_all": {
+    "hash": "7fc2e73eb68780400a24e8e9bd07a437cd9b9e9484faf501a118c28299d2b4fa",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Salesforce: Get Order Products",
+    "description": "List the product lines on an order with their quantity, price each and line total - what you need to send a picking list to the warehouse, raise an invoice or check an order before activating it.",
+    "website": "https://www.flomation.co",
+    "icon": "salesforce+box",
+    "date": "26/07/2026",
+    "type": 2,
+    "category": {
+      "name": "CRM",
+      "icon": "people-group",
+      "description": "Customer relationship management — contacts, companies, deals, and tickets"
+    },
+    "sub_category": {
+      "name": "Salesforce",
+      "icon": "salesforce",
+      "description": "Manage Salesforce leads, contacts, accounts, opportunities, cases, tasks, and any custom object"
+    },
+    "inputs": [
+      {
+        "name": "access_token",
+        "type": "secret",
+        "value": null,
+        "label": "Salesforce Connection",
+        "placeholder": "Connect Salesforce, or paste an access token",
+        "required": true
+      },
+      {
+        "name": "instance_url",
+        "type": "string",
+        "value": null,
+        "label": "Salesforce Instance URL",
+        "placeholder": "https://mycompany.my.salesforce.com",
+        "required": true
+      },
+      {
+        "name": "order_id",
+        "type": "string",
+        "value": null,
+        "label": "Order ID",
+        "placeholder": "8015f000000AbCdAAK - the order whose products you want",
+        "required": true
+      },
+      {
+        "name": "fields",
+        "type": "string",
+        "value": null,
+        "label": "Fields",
+        "placeholder": "Product2.Name,Quantity,UnitPrice,TotalPrice - leave blank for the usual order-line fields"
+      },
+      {
+        "name": "order_by",
+        "type": "string",
+        "value": null,
+        "label": "Sort By",
+        "placeholder": "TotalPrice DESC - or ServiceDate ASC"
+      },
+      {
+        "name": "return_all",
+        "type": "boolean",
+        "value": null,
+        "label": "Return All (fetch every product line)",
+        "placeholder": ""
+      },
+      {
+        "name": "limit",
+        "type": "integer",
+        "value": null,
+        "label": "Limit",
+        "placeholder": "50 (max 2000); ignored when Return All is on"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "results",
+        "type": "object",
+        "value": null,
+        "label": "Order Lines",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Count",
+        "placeholder": ""
+      },
+      {
+        "name": "total_size",
+        "type": "integer",
+        "value": null,
+        "label": "Records Returned",
+        "placeholder": ""
+      },
+      {
+        "name": "next_url",
+        "type": "string",
+        "value": null,
+        "label": "Next Page URL",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Raw Response",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "crm/salesforce/order_update": {
+    "hash": "b6c995e096145f086f931f390e65c81c117bad5a788a14ee68e304f09058a86c",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Salesforce: Update Order",
+    "description": "Change an order in Salesforce - correct the delivery address, add the customer's PO number, move the dates, or put an activated order back to Draft so its products can be edited. Anything you leave blank is left exactly as it was.",
+    "website": "https://www.flomation.co",
+    "icon": "salesforce+pen",
+    "date": "26/07/2026",
+    "type": 2,
+    "category": {
+      "name": "CRM",
+      "icon": "people-group",
+      "description": "Customer relationship management — contacts, companies, deals, and tickets"
+    },
+    "sub_category": {
+      "name": "Salesforce",
+      "icon": "salesforce",
+      "description": "Manage Salesforce leads, contacts, accounts, opportunities, cases, tasks, and any custom object"
+    },
+    "inputs": [
+      {
+        "name": "access_token",
+        "type": "secret",
+        "value": null,
+        "label": "Salesforce Connection",
+        "placeholder": "Connect Salesforce, or paste an access token",
+        "required": true
+      },
+      {
+        "name": "instance_url",
+        "type": "string",
+        "value": null,
+        "label": "Salesforce Instance URL",
+        "placeholder": "https://mycompany.my.salesforce.com",
+        "required": true
+      },
+      {
+        "name": "order_id",
+        "type": "string",
+        "value": null,
+        "label": "Order ID",
+        "placeholder": "8015f000000AbCdAAK - the order to change",
+        "required": true
+      },
+      {
+        "name": "order_status",
+        "type": "string",
+        "value": null,
+        "label": "Status",
+        "placeholder": "Draft - putting an activated order back to Draft is how you unlock its products",
+        "options": [
+          {
+            "name": "Draft",
+            "value": "Draft"
+          },
+          {
+            "name": "Activated",
+            "value": "Activated"
+          }
+        ]
+      },
+      {
+        "name": "account_id",
+        "type": "string",
+        "value": null,
+        "label": "Company (Account)",
+        "placeholder": "0015f00000AbCdEAAV - the customer this order is for"
+      },
+      {
+        "name": "contract_id",
+        "type": "string",
+        "value": null,
+        "label": "Contract",
+        "placeholder": "8005f000000AbCdAAK - the contract this order is placed under"
+      },
+      {
+        "name": "order_name",
+        "type": "string",
+        "value": null,
+        "label": "Order Name",
+        "placeholder": "Acme Ltd - August generator order"
+      },
+      {
+        "name": "order_type",
+        "type": "string",
+        "value": null,
+        "label": "Order Type",
+        "placeholder": "Must match an Order Type in your Salesforce org - Salesforce ships none, so leave it blank unless an administrator has added some"
+      },
+      {
+        "name": "effective_date",
+        "type": "datetime",
+        "value": null,
+        "label": "Order Start Date",
+        "placeholder": "2026-08-01 (the date only - Salesforce ignores the time)"
+      },
+      {
+        "name": "end_date",
+        "type": "datetime",
+        "value": null,
+        "label": "Order End Date",
+        "placeholder": "2027-07-31 (the date only) - for a term or subscription order"
+      },
+      {
+        "name": "po_number",
+        "type": "string",
+        "value": null,
+        "label": "Customer PO Number",
+        "placeholder": "PO-2026-4471 - the customer's own purchase order reference"
+      },
+      {
+        "name": "po_date",
+        "type": "datetime",
+        "value": null,
+        "label": "Customer PO Date",
+        "placeholder": "2026-07-28 (the date only)"
+      },
+      {
+        "name": "order_reference_number",
+        "type": "string",
+        "value": null,
+        "label": "Your Order Reference",
+        "placeholder": "SHOP-10482 - your own reference, e.g. the Shopify or WooCommerce order number"
+      },
+      {
+        "name": "description",
+        "type": "text",
+        "value": null,
+        "label": "Description",
+        "placeholder": "Anything the warehouse or finance need to know about this order"
+      },
+      {
+        "name": "pricebook_id",
+        "type": "string",
+        "value": null,
+        "label": "Price Book",
+        "placeholder": "01s5f000004AbCdAAK - cannot be changed once the order has product lines"
+      },
+      {
+        "name": "bill_to_contact_id",
+        "type": "string",
+        "value": null,
+        "label": "Bill To Contact",
+        "placeholder": "0035f00000AbCdEAAV - who to invoice"
+      },
+      {
+        "name": "ship_to_contact_id",
+        "type": "string",
+        "value": null,
+        "label": "Ship To Contact",
+        "placeholder": "0035f00000AbCdEAAV - who receives the goods"
+      },
+      {
+        "name": "billing_street",
+        "type": "text",
+        "value": null,
+        "label": "Bill To Street",
+        "placeholder": "1 High Street"
+      },
+      {
+        "name": "billing_city",
+        "type": "string",
+        "value": null,
+        "label": "Bill To City",
+        "placeholder": "London"
+      },
+      {
+        "name": "billing_state",
+        "type": "string",
+        "value": null,
+        "label": "Bill To State/Province",
+        "placeholder": "Only for countries your Salesforce org lists states for - the United Kingdom has none, so leave it blank"
+      },
+      {
+        "name": "billing_postal_code",
+        "type": "string",
+        "value": null,
+        "label": "Bill To Postcode",
+        "placeholder": "EC1A 1BB"
+      },
+      {
+        "name": "billing_country",
+        "type": "string",
+        "value": null,
+        "label": "Bill To Country",
+        "placeholder": "United Kingdom - must match your org's country list"
+      },
+      {
+        "name": "shipping_street",
+        "type": "text",
+        "value": null,
+        "label": "Ship To Street",
+        "placeholder": "Unit 4, Riverside Estate"
+      },
+      {
+        "name": "shipping_city",
+        "type": "string",
+        "value": null,
+        "label": "Ship To City",
+        "placeholder": "Manchester"
+      },
+      {
+        "name": "shipping_state",
+        "type": "string",
+        "value": null,
+        "label": "Ship To State/Province",
+        "placeholder": "Only for countries your Salesforce org lists states for - the United Kingdom has none, so leave it blank"
+      },
+      {
+        "name": "shipping_postal_code",
+        "type": "string",
+        "value": null,
+        "label": "Ship To Postcode",
+        "placeholder": "M1 2AB"
+      },
+      {
+        "name": "shipping_country",
+        "type": "string",
+        "value": null,
+        "label": "Ship To Country",
+        "placeholder": "United Kingdom - must match your org's country list"
+      },
+      {
+        "name": "owner_id",
+        "type": "string",
+        "value": null,
+        "label": "Owner",
+        "placeholder": "0055f00000AbCdEAAV - the person who owns this order"
+      },
+      {
+        "name": "additional_fields",
+        "type": "object",
+        "value": null,
+        "label": "Additional Fields",
+        "placeholder": "{\"My_Custom_Field__c\":\"value\"} - any other Salesforce field on the order"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Order ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Applied Changes",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
   "crm/salesforce/org_limits_get": {
     "hash": "7027d7a128b821b14fe26a05551b1b4b59e99967e6f0e4d01cc474e528bf9025",
     "author": "Dave McElin",
@@ -198256,6 +201438,1573 @@
         "type": "object",
         "value": null,
         "label": "Limits",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "crm/salesforce/price_book_entry_create": {
+    "hash": "a4ab87fa73a767d13801c8f3b95351a1072d7f1050ff890d947c2d6562215cb9",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Salesforce: Add Product to Price Book",
+    "description": "Give a product a price in one of your price books, so it can be quoted and put on deals. Add it to the standard price book first - Salesforce insists on a list price before it will accept any other.",
+    "website": "https://www.flomation.co",
+    "icon": "salesforce+tag",
+    "date": "26/07/2026",
+    "type": 2,
+    "category": {
+      "name": "CRM",
+      "icon": "people-group",
+      "description": "Customer relationship management — contacts, companies, deals, and tickets"
+    },
+    "sub_category": {
+      "name": "Salesforce",
+      "icon": "salesforce",
+      "description": "Manage Salesforce leads, contacts, accounts, opportunities, cases, tasks, and any custom object"
+    },
+    "inputs": [
+      {
+        "name": "access_token",
+        "type": "secret",
+        "value": null,
+        "label": "Salesforce Connection",
+        "placeholder": "Connect Salesforce, or paste an access token",
+        "required": true
+      },
+      {
+        "name": "instance_url",
+        "type": "string",
+        "value": null,
+        "label": "Salesforce Instance URL",
+        "placeholder": "https://mycompany.my.salesforce.com",
+        "required": true
+      },
+      {
+        "name": "pricebook_id",
+        "type": "string",
+        "value": null,
+        "label": "Price Book",
+        "placeholder": "01s5f000004AbCdAAK - use Get Many Price Books to find it, and start with the standard one",
+        "required": true
+      },
+      {
+        "name": "product_id",
+        "type": "string",
+        "value": null,
+        "label": "Product",
+        "placeholder": "01t5f000004AbCdAAK - the product to give a price to",
+        "required": true
+      },
+      {
+        "name": "unit_price",
+        "type": "string",
+        "value": null,
+        "label": "Price Each",
+        "placeholder": "25000.00 - plain numbers only, no currency symbols or commas",
+        "required": true
+      },
+      {
+        "name": "is_active",
+        "type": "boolean",
+        "value": null,
+        "label": "Price Can Be Used (leave off and it is still switched on)",
+        "placeholder": ""
+      },
+      {
+        "name": "use_standard_price",
+        "type": "boolean",
+        "value": null,
+        "label": "Copy The Standard Price (keeps this price in step with the list price; not for the standard price book itself)",
+        "placeholder": ""
+      },
+      {
+        "name": "additional_fields",
+        "type": "object",
+        "value": null,
+        "label": "Additional Fields",
+        "placeholder": "{\"My_Custom_Field__c\":\"value\"} - any other field on the price"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Price Book Entry ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Raw Response",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "crm/salesforce/price_book_entry_get_all": {
+    "hash": "52f8bfa2e1897435c8e277c6858aed3f21878890050b868da755c17891e32703",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Salesforce: Get Many Price Book Entries",
+    "description": "Find what a product costs, and get the price book entry ID you need to put it on a deal. Pick a price book, a product, or both - this is the lookup Salesforce makes you write SOQL for.",
+    "website": "https://www.flomation.co",
+    "icon": "salesforce+dollar-sign",
+    "date": "26/07/2026",
+    "type": 2,
+    "category": {
+      "name": "CRM",
+      "icon": "people-group",
+      "description": "Customer relationship management — contacts, companies, deals, and tickets"
+    },
+    "sub_category": {
+      "name": "Salesforce",
+      "icon": "salesforce",
+      "description": "Manage Salesforce leads, contacts, accounts, opportunities, cases, tasks, and any custom object"
+    },
+    "inputs": [
+      {
+        "name": "access_token",
+        "type": "secret",
+        "value": null,
+        "label": "Salesforce Connection",
+        "placeholder": "Connect Salesforce, or paste an access token",
+        "required": true
+      },
+      {
+        "name": "instance_url",
+        "type": "string",
+        "value": null,
+        "label": "Salesforce Instance URL",
+        "placeholder": "https://mycompany.my.salesforce.com",
+        "required": true
+      },
+      {
+        "name": "pricebook_id",
+        "type": "string",
+        "value": null,
+        "label": "Price Book",
+        "placeholder": "01s5f000004AbCdAAK - only prices from this price book (leave blank for all of them)"
+      },
+      {
+        "name": "product_id",
+        "type": "string",
+        "value": null,
+        "label": "Product",
+        "placeholder": "01t5f000004AbCdAAK - only prices for this product (leave blank for all of them)"
+      },
+      {
+        "name": "product_code",
+        "type": "string",
+        "value": null,
+        "label": "Product Code",
+        "placeholder": "GC1040 - use this instead of Product if all you have is the catalogue code"
+      },
+      {
+        "name": "active_only",
+        "type": "boolean",
+        "value": null,
+        "label": "Only Prices That Can Be Used",
+        "placeholder": ""
+      },
+      {
+        "name": "fields",
+        "type": "string",
+        "value": null,
+        "label": "Fields",
+        "placeholder": "UnitPrice,Product2.Name - leave blank for the price, the product name and the price book name"
+      },
+      {
+        "name": "filter_field",
+        "type": "string",
+        "value": null,
+        "label": "Filter Field",
+        "placeholder": "UnitPrice - the field to filter on"
+      },
+      {
+        "name": "filter_operator",
+        "type": "string",
+        "value": null,
+        "label": "Comparison",
+        "placeholder": "How to compare the field to the value (defaults to equals)",
+        "options": [
+          {
+            "name": "Equals",
+            "value": "="
+          },
+          {
+            "name": "Does Not Equal",
+            "value": "!="
+          },
+          {
+            "name": "Less Than",
+            "value": "\u003c"
+          },
+          {
+            "name": "Less Than Or Equal To",
+            "value": "\u003c="
+          },
+          {
+            "name": "Greater Than",
+            "value": "\u003e"
+          },
+          {
+            "name": "Greater Than Or Equal To",
+            "value": "\u003e="
+          },
+          {
+            "name": "Contains (LIKE)",
+            "value": "LIKE"
+          },
+          {
+            "name": "Does Not Contain (NOT LIKE)",
+            "value": "NOT LIKE"
+          },
+          {
+            "name": "Is One Of (IN)",
+            "value": "IN"
+          },
+          {
+            "name": "Is Not One Of (NOT IN)",
+            "value": "NOT IN"
+          }
+        ]
+      },
+      {
+        "name": "filter_value",
+        "type": "string",
+        "value": null,
+        "label": "Filter Value",
+        "placeholder": "25000 with Greater Than - plain numbers only, no currency symbols or commas"
+      },
+      {
+        "name": "filter_conditions",
+        "type": "object",
+        "value": null,
+        "label": "More Filters",
+        "placeholder": "[{\"field\":\"UnitPrice\",\"operator\":\"\u003e\",\"value\":\"1000\"},{\"field\":\"UseStandardPrice\",\"operator\":\"=\",\"value\":\"false\"}] - extra filters"
+      },
+      {
+        "name": "match_any_filter",
+        "type": "boolean",
+        "value": null,
+        "label": "Match ANY filter instead of all",
+        "placeholder": ""
+      },
+      {
+        "name": "order_by",
+        "type": "string",
+        "value": null,
+        "label": "Sort By",
+        "placeholder": "UnitPrice DESC - or Name ASC"
+      },
+      {
+        "name": "return_all",
+        "type": "boolean",
+        "value": null,
+        "label": "Return All (fetch every match)",
+        "placeholder": ""
+      },
+      {
+        "name": "limit",
+        "type": "integer",
+        "value": null,
+        "label": "Limit",
+        "placeholder": "50 (max 2000); ignored when Return All is on"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "results",
+        "type": "object",
+        "value": null,
+        "label": "Price Book Entries",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Count",
+        "placeholder": ""
+      },
+      {
+        "name": "total_size",
+        "type": "integer",
+        "value": null,
+        "label": "Records Returned",
+        "placeholder": ""
+      },
+      {
+        "name": "next_url",
+        "type": "string",
+        "value": null,
+        "label": "Next Page URL",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Raw Response",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "crm/salesforce/price_book_entry_update": {
+    "hash": "9b2140d52d60b2727f40f0a4142a49c7ab0a5c6eea227997c0e75c0d4df1694e",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Salesforce: Change Product Price",
+    "description": "Change what a product costs in a price book, or switch the price off so nobody can quote it. Anything you leave blank is left exactly as it was.",
+    "website": "https://www.flomation.co",
+    "icon": "salesforce+pen",
+    "date": "26/07/2026",
+    "type": 2,
+    "category": {
+      "name": "CRM",
+      "icon": "people-group",
+      "description": "Customer relationship management — contacts, companies, deals, and tickets"
+    },
+    "sub_category": {
+      "name": "Salesforce",
+      "icon": "salesforce",
+      "description": "Manage Salesforce leads, contacts, accounts, opportunities, cases, tasks, and any custom object"
+    },
+    "inputs": [
+      {
+        "name": "access_token",
+        "type": "secret",
+        "value": null,
+        "label": "Salesforce Connection",
+        "placeholder": "Connect Salesforce, or paste an access token",
+        "required": true
+      },
+      {
+        "name": "instance_url",
+        "type": "string",
+        "value": null,
+        "label": "Salesforce Instance URL",
+        "placeholder": "https://mycompany.my.salesforce.com",
+        "required": true
+      },
+      {
+        "name": "pricebook_entry_id",
+        "type": "string",
+        "value": null,
+        "label": "Price Book Entry",
+        "placeholder": "01u5f000000AbCdAAK - use Get Many Price Book Entries to find the price you want to change",
+        "required": true
+      },
+      {
+        "name": "unit_price",
+        "type": "string",
+        "value": null,
+        "label": "Price Each",
+        "placeholder": "27500.00 - plain numbers only, no currency symbols or commas"
+      },
+      {
+        "name": "is_active",
+        "type": "boolean",
+        "value": null,
+        "label": "Price Can Be Used (untick to stop it being quoted)",
+        "placeholder": ""
+      },
+      {
+        "name": "use_standard_price",
+        "type": "boolean",
+        "value": null,
+        "label": "Copy The Standard Price (keeps this price in step with the list price; not for the standard price book itself)",
+        "placeholder": ""
+      },
+      {
+        "name": "additional_fields",
+        "type": "object",
+        "value": null,
+        "label": "Additional Fields",
+        "placeholder": "{\"My_Custom_Field__c\":\"value\"} - any other field on the price"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Price Book Entry ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Applied Changes",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "crm/salesforce/price_book_get_all": {
+    "hash": "7de9f8249aa0f4d1f731a2ce55df4789ab4561f58d60a7540b68373f79501948",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Salesforce: Get Many Price Books",
+    "description": "List your Salesforce price books and see which one is the standard list price. Use it to find the price book ID a deal or a price needs, without hunting through Setup.",
+    "website": "https://www.flomation.co",
+    "icon": "salesforce+layer-group",
+    "date": "26/07/2026",
+    "type": 2,
+    "category": {
+      "name": "CRM",
+      "icon": "people-group",
+      "description": "Customer relationship management — contacts, companies, deals, and tickets"
+    },
+    "sub_category": {
+      "name": "Salesforce",
+      "icon": "salesforce",
+      "description": "Manage Salesforce leads, contacts, accounts, opportunities, cases, tasks, and any custom object"
+    },
+    "inputs": [
+      {
+        "name": "access_token",
+        "type": "secret",
+        "value": null,
+        "label": "Salesforce Connection",
+        "placeholder": "Connect Salesforce, or paste an access token",
+        "required": true
+      },
+      {
+        "name": "instance_url",
+        "type": "string",
+        "value": null,
+        "label": "Salesforce Instance URL",
+        "placeholder": "https://mycompany.my.salesforce.com",
+        "required": true
+      },
+      {
+        "name": "fields",
+        "type": "string",
+        "value": null,
+        "label": "Fields",
+        "placeholder": "Name,IsActive,IsStandard - leave blank for the usual price book fields"
+      },
+      {
+        "name": "standard_only",
+        "type": "boolean",
+        "value": null,
+        "label": "Only The Standard Price Book",
+        "placeholder": ""
+      },
+      {
+        "name": "active_only",
+        "type": "boolean",
+        "value": null,
+        "label": "Only Price Books In Use",
+        "placeholder": ""
+      },
+      {
+        "name": "filter_field",
+        "type": "string",
+        "value": null,
+        "label": "Filter Field",
+        "placeholder": "Name - the field to filter on"
+      },
+      {
+        "name": "filter_operator",
+        "type": "string",
+        "value": null,
+        "label": "Comparison",
+        "placeholder": "How to compare the field to the value (defaults to equals)",
+        "options": [
+          {
+            "name": "Equals",
+            "value": "="
+          },
+          {
+            "name": "Does Not Equal",
+            "value": "!="
+          },
+          {
+            "name": "Contains (LIKE)",
+            "value": "LIKE"
+          },
+          {
+            "name": "Does Not Contain (NOT LIKE)",
+            "value": "NOT LIKE"
+          },
+          {
+            "name": "Is One Of (IN)",
+            "value": "IN"
+          },
+          {
+            "name": "Is Not One Of (NOT IN)",
+            "value": "NOT IN"
+          },
+          {
+            "name": "Less Than",
+            "value": "\u003c"
+          },
+          {
+            "name": "Less Than Or Equal To",
+            "value": "\u003c="
+          },
+          {
+            "name": "Greater Than",
+            "value": "\u003e"
+          },
+          {
+            "name": "Greater Than Or Equal To",
+            "value": "\u003e="
+          }
+        ]
+      },
+      {
+        "name": "filter_value",
+        "type": "string",
+        "value": null,
+        "label": "Filter Value",
+        "placeholder": "Trade with Contains - or Retail,Trade for Is One Of"
+      },
+      {
+        "name": "filter_conditions",
+        "type": "object",
+        "value": null,
+        "label": "More Filters",
+        "placeholder": "[{\"field\":\"IsActive\",\"operator\":\"=\",\"value\":\"true\"}] - extra filters"
+      },
+      {
+        "name": "match_any_filter",
+        "type": "boolean",
+        "value": null,
+        "label": "Match ANY filter instead of all",
+        "placeholder": ""
+      },
+      {
+        "name": "order_by",
+        "type": "string",
+        "value": null,
+        "label": "Sort By",
+        "placeholder": "Name ASC - or LastModifiedDate DESC"
+      },
+      {
+        "name": "return_all",
+        "type": "boolean",
+        "value": null,
+        "label": "Return All (fetch every match)",
+        "placeholder": ""
+      },
+      {
+        "name": "limit",
+        "type": "integer",
+        "value": null,
+        "label": "Limit",
+        "placeholder": "50 (max 2000); ignored when Return All is on"
+      },
+      {
+        "name": "include_deleted",
+        "type": "boolean",
+        "value": null,
+        "label": "Include Deleted Price Books (Recycle Bin)",
+        "placeholder": ""
+      }
+    ],
+    "outputs": [
+      {
+        "name": "results",
+        "type": "object",
+        "value": null,
+        "label": "Price Books",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Count",
+        "placeholder": ""
+      },
+      {
+        "name": "total_size",
+        "type": "integer",
+        "value": null,
+        "label": "Records Returned",
+        "placeholder": ""
+      },
+      {
+        "name": "next_url",
+        "type": "string",
+        "value": null,
+        "label": "Next Page URL",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Raw Response",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "crm/salesforce/product_create": {
+    "hash": "7d58907e2287b0741286a0640e1bda493d8b09c0ae610b64fbc4a664d6214465",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Salesforce: Create Product",
+    "description": "Add a product to your Salesforce catalogue so it can be priced, quoted and put on deals. New products are created ready to sell unless you turn that off.",
+    "website": "https://www.flomation.co",
+    "icon": "salesforce+plus",
+    "date": "26/07/2026",
+    "type": 2,
+    "category": {
+      "name": "CRM",
+      "icon": "people-group",
+      "description": "Customer relationship management — contacts, companies, deals, and tickets"
+    },
+    "sub_category": {
+      "name": "Salesforce",
+      "icon": "salesforce",
+      "description": "Manage Salesforce leads, contacts, accounts, opportunities, cases, tasks, and any custom object"
+    },
+    "inputs": [
+      {
+        "name": "access_token",
+        "type": "secret",
+        "value": null,
+        "label": "Salesforce Connection",
+        "placeholder": "Connect Salesforce, or paste an access token",
+        "required": true
+      },
+      {
+        "name": "instance_url",
+        "type": "string",
+        "value": null,
+        "label": "Salesforce Instance URL",
+        "placeholder": "https://mycompany.my.salesforce.com",
+        "required": true
+      },
+      {
+        "name": "name",
+        "type": "string",
+        "value": null,
+        "label": "Product Name",
+        "placeholder": "GenWatt Diesel 200kW - what the product is called on quotes and deals",
+        "required": true
+      },
+      {
+        "name": "product_code",
+        "type": "string",
+        "value": null,
+        "label": "Product Code",
+        "placeholder": "GC1040 - your own catalogue code for this product"
+      },
+      {
+        "name": "description",
+        "type": "text",
+        "value": null,
+        "label": "Description",
+        "placeholder": "What the product is, in the words a customer would recognise"
+      },
+      {
+        "name": "is_active",
+        "type": "boolean",
+        "value": null,
+        "label": "Ready To Sell (leave off and it is still switched on)",
+        "placeholder": ""
+      },
+      {
+        "name": "family",
+        "type": "string",
+        "value": null,
+        "label": "Product Family",
+        "placeholder": "Must match a value in your org's Product Family list - Salesforce accepts anything else without complaining and stores it as typed"
+      },
+      {
+        "name": "quantity_unit_of_measure",
+        "type": "string",
+        "value": null,
+        "label": "Sold In Units Of",
+        "placeholder": "Each - must match your org's Quantity Unit Of Measure list"
+      },
+      {
+        "name": "stock_keeping_unit",
+        "type": "string",
+        "value": null,
+        "label": "Stock Code (SKU)",
+        "placeholder": "SKU-000142 - the code your warehouse or shop uses"
+      },
+      {
+        "name": "display_url",
+        "type": "string",
+        "value": null,
+        "label": "Product Web Page",
+        "placeholder": "https://www.acme.co.uk/products/genwatt-200kw"
+      },
+      {
+        "name": "external_id",
+        "type": "string",
+        "value": null,
+        "label": "Your Reference",
+        "placeholder": "ERP-000142 - a plain text box on the product; Salesforce does NOT treat it as an External ID, so Create or Update Product cannot match on it"
+      },
+      {
+        "name": "product_type",
+        "type": "string",
+        "value": null,
+        "label": "Bundle Type",
+        "placeholder": "Leave blank for an ordinary product",
+        "options": [
+          {
+            "name": "Base (an ordinary product)",
+            "value": "Base"
+          },
+          {
+            "name": "Bundle (sold as a package of products)",
+            "value": "Bundle"
+          },
+          {
+            "name": "Set (a group sold together)",
+            "value": "Set"
+          }
+        ]
+      },
+      {
+        "name": "additional_fields",
+        "type": "object",
+        "value": null,
+        "label": "Additional Fields",
+        "placeholder": "{\"My_Custom_Field__c\":\"value\"} - any other field on the product"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Product ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Raw Response",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "crm/salesforce/product_delete": {
+    "hash": "0d4e12edff83f3c2b39914eefc6a46bfc76eeb5ea28a9319e3792cbce15d2172",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Salesforce: Delete Product",
+    "description": "Send a product to the Salesforce Recycle Bin, where it can be restored for 15 days. Its prices go with it. Salesforce will refuse if the product is already on a deal - retire it with Update Product instead.",
+    "website": "https://www.flomation.co",
+    "icon": "salesforce+trash",
+    "date": "26/07/2026",
+    "type": 2,
+    "category": {
+      "name": "CRM",
+      "icon": "people-group",
+      "description": "Customer relationship management — contacts, companies, deals, and tickets"
+    },
+    "sub_category": {
+      "name": "Salesforce",
+      "icon": "salesforce",
+      "description": "Manage Salesforce leads, contacts, accounts, opportunities, cases, tasks, and any custom object"
+    },
+    "inputs": [
+      {
+        "name": "access_token",
+        "type": "secret",
+        "value": null,
+        "label": "Salesforce Connection",
+        "placeholder": "Connect Salesforce, or paste an access token",
+        "required": true
+      },
+      {
+        "name": "instance_url",
+        "type": "string",
+        "value": null,
+        "label": "Salesforce Instance URL",
+        "placeholder": "https://mycompany.my.salesforce.com",
+        "required": true
+      },
+      {
+        "name": "product_id",
+        "type": "string",
+        "value": null,
+        "label": "Product",
+        "placeholder": "01t5f000004AbCdAAK - the record ID of the product to delete",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Product ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Deleted Product",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "crm/salesforce/product_get": {
+    "hash": "bca6754c8969c8cf40139e7210e8da46238778d131a7799e0d3cf1af25bb5d1e",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Salesforce: Get Product",
+    "description": "Look up one product in your Salesforce catalogue by its record ID and return its details. Leave Fields blank to get everything the connected Salesforce user is allowed to see.",
+    "website": "https://www.flomation.co",
+    "icon": "salesforce+magnifying-glass",
+    "date": "26/07/2026",
+    "type": 2,
+    "category": {
+      "name": "CRM",
+      "icon": "people-group",
+      "description": "Customer relationship management — contacts, companies, deals, and tickets"
+    },
+    "sub_category": {
+      "name": "Salesforce",
+      "icon": "salesforce",
+      "description": "Manage Salesforce leads, contacts, accounts, opportunities, cases, tasks, and any custom object"
+    },
+    "inputs": [
+      {
+        "name": "access_token",
+        "type": "secret",
+        "value": null,
+        "label": "Salesforce Connection",
+        "placeholder": "Connect Salesforce, or paste an access token",
+        "required": true
+      },
+      {
+        "name": "instance_url",
+        "type": "string",
+        "value": null,
+        "label": "Salesforce Instance URL",
+        "placeholder": "https://mycompany.my.salesforce.com",
+        "required": true
+      },
+      {
+        "name": "product_id",
+        "type": "string",
+        "value": null,
+        "label": "Product",
+        "placeholder": "01t5f000004AbCdAAK - the record ID of the product to fetch",
+        "required": true
+      },
+      {
+        "name": "fields",
+        "type": "string",
+        "value": null,
+        "label": "Fields",
+        "placeholder": "Name,ProductCode,Family,IsActive (comma-separated; blank returns every field)"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Product ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Product",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "crm/salesforce/product_get_all": {
+    "hash": "1f4cc208889e7f40876602daa1425bbedaac622b398efe128e540ab34d7fa9da",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Salesforce: Get Many Products",
+    "description": "List products from your Salesforce catalogue - everything you sell, one product family, or just the items that are still ready to sell. Turn on Return All to fetch every match.",
+    "website": "https://www.flomation.co",
+    "icon": "salesforce+list",
+    "date": "26/07/2026",
+    "type": 2,
+    "category": {
+      "name": "CRM",
+      "icon": "people-group",
+      "description": "Customer relationship management — contacts, companies, deals, and tickets"
+    },
+    "sub_category": {
+      "name": "Salesforce",
+      "icon": "salesforce",
+      "description": "Manage Salesforce leads, contacts, accounts, opportunities, cases, tasks, and any custom object"
+    },
+    "inputs": [
+      {
+        "name": "access_token",
+        "type": "secret",
+        "value": null,
+        "label": "Salesforce Connection",
+        "placeholder": "Connect Salesforce, or paste an access token",
+        "required": true
+      },
+      {
+        "name": "instance_url",
+        "type": "string",
+        "value": null,
+        "label": "Salesforce Instance URL",
+        "placeholder": "https://mycompany.my.salesforce.com",
+        "required": true
+      },
+      {
+        "name": "fields",
+        "type": "string",
+        "value": null,
+        "label": "Fields",
+        "placeholder": "Name,ProductCode,Family - leave blank for the usual catalogue fields"
+      },
+      {
+        "name": "active_only",
+        "type": "boolean",
+        "value": null,
+        "label": "Only Products Ready To Sell",
+        "placeholder": ""
+      },
+      {
+        "name": "family",
+        "type": "string",
+        "value": null,
+        "label": "Product Family",
+        "placeholder": "Generators - must match a value in your org's Product Family list exactly, or nothing comes back"
+      },
+      {
+        "name": "filter_field",
+        "type": "string",
+        "value": null,
+        "label": "Filter Field",
+        "placeholder": "ProductCode - the field to filter on"
+      },
+      {
+        "name": "filter_operator",
+        "type": "string",
+        "value": null,
+        "label": "Comparison",
+        "placeholder": "How to compare the field to the value (defaults to equals)",
+        "options": [
+          {
+            "name": "Equals",
+            "value": "="
+          },
+          {
+            "name": "Does Not Equal",
+            "value": "!="
+          },
+          {
+            "name": "Less Than",
+            "value": "\u003c"
+          },
+          {
+            "name": "Less Than Or Equal To",
+            "value": "\u003c="
+          },
+          {
+            "name": "Greater Than",
+            "value": "\u003e"
+          },
+          {
+            "name": "Greater Than Or Equal To",
+            "value": "\u003e="
+          },
+          {
+            "name": "Contains (LIKE)",
+            "value": "LIKE"
+          },
+          {
+            "name": "Does Not Contain (NOT LIKE)",
+            "value": "NOT LIKE"
+          },
+          {
+            "name": "Is One Of (IN)",
+            "value": "IN"
+          },
+          {
+            "name": "Is Not One Of (NOT IN)",
+            "value": "NOT IN"
+          }
+        ]
+      },
+      {
+        "name": "filter_value",
+        "type": "string",
+        "value": null,
+        "label": "Filter Value",
+        "placeholder": "GC10% with Contains - or GC1040,GC1060 for Is One Of, or a date word like LAST_N_DAYS:30"
+      },
+      {
+        "name": "filter_conditions",
+        "type": "object",
+        "value": null,
+        "label": "More Filters",
+        "placeholder": "[{\"field\":\"IsActive\",\"operator\":\"=\",\"value\":\"true\"},{\"field\":\"Name\",\"operator\":\"LIKE\",\"value\":\"GenWatt%\"}] - extra filters"
+      },
+      {
+        "name": "match_any_filter",
+        "type": "boolean",
+        "value": null,
+        "label": "Match ANY filter instead of all",
+        "placeholder": ""
+      },
+      {
+        "name": "order_by",
+        "type": "string",
+        "value": null,
+        "label": "Sort By",
+        "placeholder": "Name ASC - or LastModifiedDate DESC"
+      },
+      {
+        "name": "return_all",
+        "type": "boolean",
+        "value": null,
+        "label": "Return All (fetch every match)",
+        "placeholder": ""
+      },
+      {
+        "name": "limit",
+        "type": "integer",
+        "value": null,
+        "label": "Limit",
+        "placeholder": "50 (max 2000); ignored when Return All is on"
+      },
+      {
+        "name": "include_deleted",
+        "type": "boolean",
+        "value": null,
+        "label": "Include Deleted Products (Recycle Bin)",
+        "placeholder": ""
+      }
+    ],
+    "outputs": [
+      {
+        "name": "results",
+        "type": "object",
+        "value": null,
+        "label": "Products",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Count",
+        "placeholder": ""
+      },
+      {
+        "name": "total_size",
+        "type": "integer",
+        "value": null,
+        "label": "Records Returned",
+        "placeholder": ""
+      },
+      {
+        "name": "next_url",
+        "type": "string",
+        "value": null,
+        "label": "Next Page URL",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Raw Response",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "crm/salesforce/product_update": {
+    "hash": "81f266efe3ad2d7961d66249fb0975795ae30b8abbbd5731b269f5c6ef0e4dec",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Salesforce: Update Product",
+    "description": "Change a product in your Salesforce catalogue - rename it, correct its code, or retire it so nobody can put it on a new deal. Anything you leave blank is left exactly as it was.",
+    "website": "https://www.flomation.co",
+    "icon": "salesforce+pen",
+    "date": "26/07/2026",
+    "type": 2,
+    "category": {
+      "name": "CRM",
+      "icon": "people-group",
+      "description": "Customer relationship management — contacts, companies, deals, and tickets"
+    },
+    "sub_category": {
+      "name": "Salesforce",
+      "icon": "salesforce",
+      "description": "Manage Salesforce leads, contacts, accounts, opportunities, cases, tasks, and any custom object"
+    },
+    "inputs": [
+      {
+        "name": "access_token",
+        "type": "secret",
+        "value": null,
+        "label": "Salesforce Connection",
+        "placeholder": "Connect Salesforce, or paste an access token",
+        "required": true
+      },
+      {
+        "name": "instance_url",
+        "type": "string",
+        "value": null,
+        "label": "Salesforce Instance URL",
+        "placeholder": "https://mycompany.my.salesforce.com",
+        "required": true
+      },
+      {
+        "name": "product_id",
+        "type": "string",
+        "value": null,
+        "label": "Product",
+        "placeholder": "01t5f000004AbCdAAK - the record ID of the product to change",
+        "required": true
+      },
+      {
+        "name": "name",
+        "type": "string",
+        "value": null,
+        "label": "Product Name",
+        "placeholder": "GenWatt Diesel 200kW"
+      },
+      {
+        "name": "product_code",
+        "type": "string",
+        "value": null,
+        "label": "Product Code",
+        "placeholder": "GC1040 - your own catalogue code for this product"
+      },
+      {
+        "name": "description",
+        "type": "text",
+        "value": null,
+        "label": "Description",
+        "placeholder": "What the product is, in the words a customer would recognise"
+      },
+      {
+        "name": "is_active",
+        "type": "boolean",
+        "value": null,
+        "label": "Ready To Sell (untick to retire the product)",
+        "placeholder": ""
+      },
+      {
+        "name": "family",
+        "type": "string",
+        "value": null,
+        "label": "Product Family",
+        "placeholder": "Must match a value in your org's Product Family list - Salesforce accepts anything else without complaining and stores it as typed"
+      },
+      {
+        "name": "quantity_unit_of_measure",
+        "type": "string",
+        "value": null,
+        "label": "Sold In Units Of",
+        "placeholder": "Each - must match your org's Quantity Unit Of Measure list"
+      },
+      {
+        "name": "stock_keeping_unit",
+        "type": "string",
+        "value": null,
+        "label": "Stock Code (SKU)",
+        "placeholder": "SKU-000142 - the code your warehouse or shop uses"
+      },
+      {
+        "name": "display_url",
+        "type": "string",
+        "value": null,
+        "label": "Product Web Page",
+        "placeholder": "https://www.acme.co.uk/products/genwatt-200kw"
+      },
+      {
+        "name": "external_id",
+        "type": "string",
+        "value": null,
+        "label": "Your Reference",
+        "placeholder": "ERP-000142 - a plain text box on the product; Salesforce does NOT treat it as an External ID"
+      },
+      {
+        "name": "additional_fields",
+        "type": "object",
+        "value": null,
+        "label": "Additional Fields",
+        "placeholder": "{\"My_Custom_Field__c\":\"value\"} - any other field on the product"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Product ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Applied Changes",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "crm/salesforce/product_upsert": {
+    "hash": "040440e6820178d7f9f9eaa419a4ab2811fc26bfb60e54ef8a23d0334b9542ae",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Salesforce: Create or Update Product",
+    "description": "Keep your Salesforce catalogue in step with a spreadsheet, shop or ERP: match a product on its name, code or your own reference and update it if it exists, or create it if it does not. Safe to run over and over - it will not create duplicates.",
+    "website": "https://www.flomation.co",
+    "icon": "salesforce+rotate",
+    "date": "26/07/2026",
+    "type": 2,
+    "category": {
+      "name": "CRM",
+      "icon": "people-group",
+      "description": "Customer relationship management — contacts, companies, deals, and tickets"
+    },
+    "sub_category": {
+      "name": "Salesforce",
+      "icon": "salesforce",
+      "description": "Manage Salesforce leads, contacts, accounts, opportunities, cases, tasks, and any custom object"
+    },
+    "inputs": [
+      {
+        "name": "access_token",
+        "type": "secret",
+        "value": null,
+        "label": "Salesforce Connection",
+        "placeholder": "Connect Salesforce, or paste an access token",
+        "required": true
+      },
+      {
+        "name": "instance_url",
+        "type": "string",
+        "value": null,
+        "label": "Salesforce Instance URL",
+        "placeholder": "https://mycompany.my.salesforce.com",
+        "required": true
+      },
+      {
+        "name": "match_field",
+        "type": "string",
+        "value": null,
+        "label": "Match On",
+        "placeholder": "Name (the default), or ProductCode, or StockKeepingUnit, or a custom External ID field such as ERP_Code__c"
+      },
+      {
+        "name": "match_value",
+        "type": "string",
+        "value": null,
+        "label": "Match Value",
+        "placeholder": "GenWatt Diesel 200kW - the value to look for in that field",
+        "required": true
+      },
+      {
+        "name": "name",
+        "type": "string",
+        "value": null,
+        "label": "Product Name",
+        "placeholder": "GenWatt Diesel 200kW - only needed the first time, when the product has to be created"
+      },
+      {
+        "name": "product_code",
+        "type": "string",
+        "value": null,
+        "label": "Product Code",
+        "placeholder": "GC1040 - your own catalogue code for this product"
+      },
+      {
+        "name": "description",
+        "type": "text",
+        "value": null,
+        "label": "Description",
+        "placeholder": "What the product is, in the words a customer would recognise"
+      },
+      {
+        "name": "is_active",
+        "type": "boolean",
+        "value": null,
+        "label": "Ready To Sell (Salesforce creates new products switched OFF, so tick this on a first run)",
+        "placeholder": ""
+      },
+      {
+        "name": "family",
+        "type": "string",
+        "value": null,
+        "label": "Product Family",
+        "placeholder": "Must match a value in your org's Product Family list - Salesforce accepts anything else without complaining and stores it as typed"
+      },
+      {
+        "name": "quantity_unit_of_measure",
+        "type": "string",
+        "value": null,
+        "label": "Sold In Units Of",
+        "placeholder": "Each - must match your org's Quantity Unit Of Measure list"
+      },
+      {
+        "name": "stock_keeping_unit",
+        "type": "string",
+        "value": null,
+        "label": "Stock Code (SKU)",
+        "placeholder": "SKU-000142 - the code your warehouse or shop uses"
+      },
+      {
+        "name": "display_url",
+        "type": "string",
+        "value": null,
+        "label": "Product Web Page",
+        "placeholder": "https://www.acme.co.uk/products/genwatt-200kw"
+      },
+      {
+        "name": "external_id",
+        "type": "string",
+        "value": null,
+        "label": "Your Reference",
+        "placeholder": "ERP-000142 - a plain text box on the product; Salesforce does NOT treat it as an External ID"
+      },
+      {
+        "name": "additional_fields",
+        "type": "object",
+        "value": null,
+        "label": "Additional Fields",
+        "placeholder": "{\"My_Custom_Field__c\":\"value\"} - any other field on the product"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Product ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Product",
         "placeholder": ""
       },
       {
@@ -198605,6 +203354,1375 @@
         "type": "object",
         "value": null,
         "label": "Result",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "crm/salesforce/quote_create": {
+    "hash": "4ee5df4ef78fcad9677e746fe0c30c51bb2ad2654164182307646e50098538c5",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Salesforce: Create Quote",
+    "description": "Create a quote on a deal in Salesforce, ready for product lines to be added and sent to the customer. Salesforce works out the quote number, the customer's account and the totals for you.",
+    "website": "https://www.flomation.co",
+    "icon": "salesforce+plus",
+    "date": "26/07/2026",
+    "type": 2,
+    "category": {
+      "name": "CRM",
+      "icon": "people-group",
+      "description": "Customer relationship management — contacts, companies, deals, and tickets"
+    },
+    "sub_category": {
+      "name": "Salesforce",
+      "icon": "salesforce",
+      "description": "Manage Salesforce leads, contacts, accounts, opportunities, cases, tasks, and any custom object"
+    },
+    "inputs": [
+      {
+        "name": "access_token",
+        "type": "secret",
+        "value": null,
+        "label": "Salesforce Connection",
+        "placeholder": "Connect Salesforce, or paste an access token",
+        "required": true
+      },
+      {
+        "name": "instance_url",
+        "type": "string",
+        "value": null,
+        "label": "Salesforce Instance URL",
+        "placeholder": "https://mycompany.my.salesforce.com",
+        "required": true
+      },
+      {
+        "name": "name",
+        "type": "string",
+        "value": null,
+        "label": "Quote Name",
+        "placeholder": "Acme Ltd - 50 seat renewal (June revision)",
+        "required": true
+      },
+      {
+        "name": "opportunity_id",
+        "type": "string",
+        "value": null,
+        "label": "Opportunity (Deal)",
+        "placeholder": "0065f00000AbCdEAAV - the deal this quote is for; Salesforce copies the customer's account across from it. Needed unless an administrator has switched on Create Quotes Without a Related Opportunity"
+      },
+      {
+        "name": "pricebook_id",
+        "type": "string",
+        "value": null,
+        "label": "Price Book",
+        "placeholder": "01s5f000004AbCdAAK - the price list to quote from; needed before any product can be added"
+      },
+      {
+        "name": "contact_id",
+        "type": "string",
+        "value": null,
+        "label": "Quote Recipient (Contact)",
+        "placeholder": "0035f00000AbCdEAAV - the person the quote is addressed to"
+      },
+      {
+        "name": "quote_status",
+        "type": "string",
+        "value": null,
+        "label": "Status",
+        "placeholder": "Draft - where the quote sits in your approval process (leave blank for Draft)",
+        "options": [
+          {
+            "name": "Draft",
+            "value": "Draft"
+          },
+          {
+            "name": "Needs Review",
+            "value": "Needs Review"
+          },
+          {
+            "name": "In Review",
+            "value": "In Review"
+          },
+          {
+            "name": "Approved",
+            "value": "Approved"
+          },
+          {
+            "name": "Rejected",
+            "value": "Rejected"
+          },
+          {
+            "name": "Presented",
+            "value": "Presented"
+          },
+          {
+            "name": "Accepted",
+            "value": "Accepted"
+          },
+          {
+            "name": "Denied",
+            "value": "Denied"
+          }
+        ]
+      },
+      {
+        "name": "expiration_date",
+        "type": "datetime",
+        "value": null,
+        "label": "Expires On",
+        "placeholder": "2026-09-30 (the date only - Salesforce ignores the time)"
+      },
+      {
+        "name": "description",
+        "type": "text",
+        "value": null,
+        "label": "Description",
+        "placeholder": "Notes about this quote, visible to everyone on the deal"
+      },
+      {
+        "name": "email",
+        "type": "string",
+        "value": null,
+        "label": "Recipient Email",
+        "placeholder": "buyer@acme.example.com - where the quote gets sent"
+      },
+      {
+        "name": "phone",
+        "type": "string",
+        "value": null,
+        "label": "Recipient Phone",
+        "placeholder": "020 7946 0000"
+      },
+      {
+        "name": "tax",
+        "type": "string",
+        "value": null,
+        "label": "Tax",
+        "placeholder": "250.50 - the tax amount to add to the quote total"
+      },
+      {
+        "name": "shipping_handling",
+        "type": "string",
+        "value": null,
+        "label": "Shipping \u0026 Handling",
+        "placeholder": "45.00 - carriage to add to the quote total"
+      },
+      {
+        "name": "account_id",
+        "type": "string",
+        "value": null,
+        "label": "Company (Quote Account)",
+        "placeholder": "0015f00000AbCdEAAV - only needed for a quote with no deal behind it"
+      },
+      {
+        "name": "contract_id",
+        "type": "string",
+        "value": null,
+        "label": "Contract",
+        "placeholder": "8005f000000AbCdAAK - the contract this quote relates to"
+      },
+      {
+        "name": "billing_name",
+        "type": "string",
+        "value": null,
+        "label": "Bill To Name",
+        "placeholder": "Acme Ltd - Accounts Payable"
+      },
+      {
+        "name": "billing_street",
+        "type": "text",
+        "value": null,
+        "label": "Bill To Street",
+        "placeholder": "1 High Street"
+      },
+      {
+        "name": "billing_city",
+        "type": "string",
+        "value": null,
+        "label": "Bill To City",
+        "placeholder": "London"
+      },
+      {
+        "name": "billing_state",
+        "type": "string",
+        "value": null,
+        "label": "Bill To State/Province",
+        "placeholder": "Only for countries your Salesforce org lists states for - the United Kingdom has none, so leave it blank"
+      },
+      {
+        "name": "billing_postal_code",
+        "type": "string",
+        "value": null,
+        "label": "Bill To Postcode",
+        "placeholder": "EC1A 1BB"
+      },
+      {
+        "name": "billing_country",
+        "type": "string",
+        "value": null,
+        "label": "Bill To Country",
+        "placeholder": "United Kingdom - must match your org's country list"
+      },
+      {
+        "name": "shipping_name",
+        "type": "string",
+        "value": null,
+        "label": "Ship To Name",
+        "placeholder": "Acme Ltd - Goods In"
+      },
+      {
+        "name": "shipping_street",
+        "type": "text",
+        "value": null,
+        "label": "Ship To Street",
+        "placeholder": "Unit 4, Riverside Estate"
+      },
+      {
+        "name": "shipping_city",
+        "type": "string",
+        "value": null,
+        "label": "Ship To City",
+        "placeholder": "Manchester"
+      },
+      {
+        "name": "shipping_state",
+        "type": "string",
+        "value": null,
+        "label": "Ship To State/Province",
+        "placeholder": "Only for countries your Salesforce org lists states for - the United Kingdom has none, so leave it blank"
+      },
+      {
+        "name": "shipping_postal_code",
+        "type": "string",
+        "value": null,
+        "label": "Ship To Postcode",
+        "placeholder": "M1 2AB"
+      },
+      {
+        "name": "shipping_country",
+        "type": "string",
+        "value": null,
+        "label": "Ship To Country",
+        "placeholder": "United Kingdom - must match your org's country list"
+      },
+      {
+        "name": "owner_id",
+        "type": "string",
+        "value": null,
+        "label": "Owner",
+        "placeholder": "0055f00000AbCdEAAV - the salesperson who owns the quote"
+      },
+      {
+        "name": "additional_fields",
+        "type": "object",
+        "value": null,
+        "label": "Additional Fields",
+        "placeholder": "{\"My_Custom_Field__c\":\"value\"} - any other Salesforce field on the quote"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Quote ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Raw Response",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "crm/salesforce/quote_delete": {
+    "hash": "aa7ce59fe0f07a63fb601d19fb60b255c118b64b9a357fe897b19e350108c993",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Salesforce: Delete Quote",
+    "description": "Send a quote and its product lines to the Salesforce Recycle Bin, where an administrator can restore it for 15 days. Use it to clear out superseded drafts.",
+    "website": "https://www.flomation.co",
+    "icon": "salesforce+trash",
+    "date": "26/07/2026",
+    "type": 2,
+    "category": {
+      "name": "CRM",
+      "icon": "people-group",
+      "description": "Customer relationship management — contacts, companies, deals, and tickets"
+    },
+    "sub_category": {
+      "name": "Salesforce",
+      "icon": "salesforce",
+      "description": "Manage Salesforce leads, contacts, accounts, opportunities, cases, tasks, and any custom object"
+    },
+    "inputs": [
+      {
+        "name": "access_token",
+        "type": "secret",
+        "value": null,
+        "label": "Salesforce Connection",
+        "placeholder": "Connect Salesforce, or paste an access token",
+        "required": true
+      },
+      {
+        "name": "instance_url",
+        "type": "string",
+        "value": null,
+        "label": "Salesforce Instance URL",
+        "placeholder": "https://mycompany.my.salesforce.com",
+        "required": true
+      },
+      {
+        "name": "quote_id",
+        "type": "string",
+        "value": null,
+        "label": "Quote ID",
+        "placeholder": "0Q05f000000AbCdAAK - the quote to delete",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Quote ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Raw Response",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "crm/salesforce/quote_get": {
+    "hash": "fea5cd85d9be3a74d384a6b912bfd150ee084e60a1719f2492d085cdddc8b537",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Salesforce: Get Quote",
+    "description": "Look up one quote by its Salesforce ID and return everything on it - the quote number, its status, what it adds up to, when it expires and who it was sent to.",
+    "website": "https://www.flomation.co",
+    "icon": "salesforce+magnifying-glass",
+    "date": "26/07/2026",
+    "type": 2,
+    "category": {
+      "name": "CRM",
+      "icon": "people-group",
+      "description": "Customer relationship management — contacts, companies, deals, and tickets"
+    },
+    "sub_category": {
+      "name": "Salesforce",
+      "icon": "salesforce",
+      "description": "Manage Salesforce leads, contacts, accounts, opportunities, cases, tasks, and any custom object"
+    },
+    "inputs": [
+      {
+        "name": "access_token",
+        "type": "secret",
+        "value": null,
+        "label": "Salesforce Connection",
+        "placeholder": "Connect Salesforce, or paste an access token",
+        "required": true
+      },
+      {
+        "name": "instance_url",
+        "type": "string",
+        "value": null,
+        "label": "Salesforce Instance URL",
+        "placeholder": "https://mycompany.my.salesforce.com",
+        "required": true
+      },
+      {
+        "name": "quote_id",
+        "type": "string",
+        "value": null,
+        "label": "Quote ID",
+        "placeholder": "0Q05f000000AbCdAAK - the quote's Salesforce ID",
+        "required": true
+      },
+      {
+        "name": "fields",
+        "type": "string",
+        "value": null,
+        "label": "Fields",
+        "placeholder": "QuoteNumber,Status,GrandTotal,ExpirationDate - leave blank to return every field"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Quote ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Quote",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "crm/salesforce/quote_get_all": {
+    "hash": "d6e193e4b875199f18f3914ea21d34c65cb692a918a8d446f7c7b78722c25a9f",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Salesforce: Get Many Quotes",
+    "description": "List quotes from Salesforce, optionally filtered - everything expiring this month, every quote on one deal, everything still waiting to be accepted. Turn on Return All to fetch every match.",
+    "website": "https://www.flomation.co",
+    "icon": "salesforce+list",
+    "date": "26/07/2026",
+    "type": 2,
+    "category": {
+      "name": "CRM",
+      "icon": "people-group",
+      "description": "Customer relationship management — contacts, companies, deals, and tickets"
+    },
+    "sub_category": {
+      "name": "Salesforce",
+      "icon": "salesforce",
+      "description": "Manage Salesforce leads, contacts, accounts, opportunities, cases, tasks, and any custom object"
+    },
+    "inputs": [
+      {
+        "name": "access_token",
+        "type": "secret",
+        "value": null,
+        "label": "Salesforce Connection",
+        "placeholder": "Connect Salesforce, or paste an access token",
+        "required": true
+      },
+      {
+        "name": "instance_url",
+        "type": "string",
+        "value": null,
+        "label": "Salesforce Instance URL",
+        "placeholder": "https://mycompany.my.salesforce.com",
+        "required": true
+      },
+      {
+        "name": "fields",
+        "type": "string",
+        "value": null,
+        "label": "Fields",
+        "placeholder": "QuoteNumber,Status,GrandTotal,ExpirationDate - leave blank for the usual quote fields"
+      },
+      {
+        "name": "filter_field",
+        "type": "string",
+        "value": null,
+        "label": "Filter Field",
+        "placeholder": "Status - the field to filter on"
+      },
+      {
+        "name": "filter_operator",
+        "type": "string",
+        "value": null,
+        "label": "Comparison",
+        "placeholder": "How to compare the field to the value (defaults to equals)",
+        "options": [
+          {
+            "name": "Equals",
+            "value": "="
+          },
+          {
+            "name": "Does Not Equal",
+            "value": "!="
+          },
+          {
+            "name": "Less Than",
+            "value": "\u003c"
+          },
+          {
+            "name": "Less Than Or Equal To",
+            "value": "\u003c="
+          },
+          {
+            "name": "Greater Than",
+            "value": "\u003e"
+          },
+          {
+            "name": "Greater Than Or Equal To",
+            "value": "\u003e="
+          },
+          {
+            "name": "Contains (LIKE)",
+            "value": "LIKE"
+          },
+          {
+            "name": "Does Not Contain (NOT LIKE)",
+            "value": "NOT LIKE"
+          },
+          {
+            "name": "Is One Of (IN)",
+            "value": "IN"
+          },
+          {
+            "name": "Is Not One Of (NOT IN)",
+            "value": "NOT IN"
+          }
+        ]
+      },
+      {
+        "name": "filter_value",
+        "type": "string",
+        "value": null,
+        "label": "Filter Value",
+        "placeholder": "Presented - or a date word like THIS_MONTH, or Presented,Accepted for Is One Of"
+      },
+      {
+        "name": "filter_conditions",
+        "type": "object",
+        "value": null,
+        "label": "More Filters",
+        "placeholder": "[{\"field\":\"ExpirationDate\",\"operator\":\"\u003c=\",\"value\":\"NEXT_N_DAYS:30\"},{\"field\":\"GrandTotal\",\"operator\":\"\u003e\",\"value\":\"10000\"}] - extra filters"
+      },
+      {
+        "name": "match_any_filter",
+        "type": "boolean",
+        "value": null,
+        "label": "Match ANY filter instead of all",
+        "placeholder": ""
+      },
+      {
+        "name": "order_by",
+        "type": "string",
+        "value": null,
+        "label": "Sort By",
+        "placeholder": "ExpirationDate ASC - or GrandTotal DESC"
+      },
+      {
+        "name": "return_all",
+        "type": "boolean",
+        "value": null,
+        "label": "Return All (fetch every match)",
+        "placeholder": ""
+      },
+      {
+        "name": "limit",
+        "type": "integer",
+        "value": null,
+        "label": "Limit",
+        "placeholder": "50 (max 2000); ignored when Return All is on"
+      },
+      {
+        "name": "include_deleted",
+        "type": "boolean",
+        "value": null,
+        "label": "Include Deleted Quotes (Recycle Bin)",
+        "placeholder": ""
+      }
+    ],
+    "outputs": [
+      {
+        "name": "results",
+        "type": "object",
+        "value": null,
+        "label": "Quotes",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Count",
+        "placeholder": ""
+      },
+      {
+        "name": "total_size",
+        "type": "integer",
+        "value": null,
+        "label": "Records Returned",
+        "placeholder": ""
+      },
+      {
+        "name": "next_url",
+        "type": "string",
+        "value": null,
+        "label": "Next Page URL",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Raw Response",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "crm/salesforce/quote_line_item_create": {
+    "hash": "c042c01b891142cd7bf7c03d09cbfeac29b4219dd90278251dad5a491ef9c9a6",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Salesforce: Add Product to Quote",
+    "description": "Put a product line on a quote. Pick the product and we find its price book entry, read the list price and put the quote on the right price book for you - a quote with no product lines totals nothing and cannot be sent.",
+    "website": "https://www.flomation.co",
+    "icon": "salesforce+cart-shopping",
+    "date": "26/07/2026",
+    "type": 2,
+    "category": {
+      "name": "CRM",
+      "icon": "people-group",
+      "description": "Customer relationship management — contacts, companies, deals, and tickets"
+    },
+    "sub_category": {
+      "name": "Salesforce",
+      "icon": "salesforce",
+      "description": "Manage Salesforce leads, contacts, accounts, opportunities, cases, tasks, and any custom object"
+    },
+    "inputs": [
+      {
+        "name": "access_token",
+        "type": "secret",
+        "value": null,
+        "label": "Salesforce Connection",
+        "placeholder": "Connect Salesforce, or paste an access token",
+        "required": true
+      },
+      {
+        "name": "instance_url",
+        "type": "string",
+        "value": null,
+        "label": "Salesforce Instance URL",
+        "placeholder": "https://mycompany.my.salesforce.com",
+        "required": true
+      },
+      {
+        "name": "quote_id",
+        "type": "string",
+        "value": null,
+        "label": "Quote ID",
+        "placeholder": "0Q05f000000AbCdAAK - the quote to add the product to",
+        "required": true
+      },
+      {
+        "name": "product_id",
+        "type": "string",
+        "value": null,
+        "label": "Product",
+        "placeholder": "01t5f000004AbCdAAK - we find its price for you"
+      },
+      {
+        "name": "pricebook_entry_id",
+        "type": "string",
+        "value": null,
+        "label": "Price Book Entry",
+        "placeholder": "01u5f000000AbCdAAK - only if you already know it; it wins over the Product above"
+      },
+      {
+        "name": "quantity",
+        "type": "string",
+        "value": null,
+        "label": "Quantity",
+        "placeholder": "1 - how many of this product (defaults to 1)"
+      },
+      {
+        "name": "unit_price",
+        "type": "string",
+        "value": null,
+        "label": "Price Each",
+        "placeholder": "499.00 - leave blank to use the price book price"
+      },
+      {
+        "name": "discount",
+        "type": "string",
+        "value": null,
+        "label": "Discount (%)",
+        "placeholder": "10 - a percentage off this line, which is what drives the quote's overall discount"
+      },
+      {
+        "name": "service_date",
+        "type": "datetime",
+        "value": null,
+        "label": "Service Or Delivery Date",
+        "placeholder": "2026-10-01 (the date only)"
+      },
+      {
+        "name": "description",
+        "type": "string",
+        "value": null,
+        "label": "Line Description",
+        "placeholder": "What this line covers, printed on the quote"
+      },
+      {
+        "name": "sort_order",
+        "type": "integer",
+        "value": null,
+        "label": "Line Order",
+        "placeholder": "1 - where this line appears on the printed quote"
+      },
+      {
+        "name": "opportunity_line_item_id",
+        "type": "string",
+        "value": null,
+        "label": "Deal Product Line",
+        "placeholder": "00k5f000000AbCdAAK - link this line back to the matching product line on the deal"
+      },
+      {
+        "name": "additional_fields",
+        "type": "object",
+        "value": null,
+        "label": "Additional Fields",
+        "placeholder": "{\"My_Custom_Field__c\":\"value\"} - any other field on the quote line"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Quote Line ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Raw Response",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "crm/salesforce/quote_line_item_get_all": {
+    "hash": "ffd870fdb4c4e7cdaad838ece7e74e2b94518b686d88b4d6ca5d8d29ce8b1347",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Salesforce: Get Quote Products",
+    "description": "List the product lines on a quote with their quantity, price each, discount and line total - what you need to email the quote, build a PDF or turn it into an order.",
+    "website": "https://www.flomation.co",
+    "icon": "salesforce+box",
+    "date": "26/07/2026",
+    "type": 2,
+    "category": {
+      "name": "CRM",
+      "icon": "people-group",
+      "description": "Customer relationship management — contacts, companies, deals, and tickets"
+    },
+    "sub_category": {
+      "name": "Salesforce",
+      "icon": "salesforce",
+      "description": "Manage Salesforce leads, contacts, accounts, opportunities, cases, tasks, and any custom object"
+    },
+    "inputs": [
+      {
+        "name": "access_token",
+        "type": "secret",
+        "value": null,
+        "label": "Salesforce Connection",
+        "placeholder": "Connect Salesforce, or paste an access token",
+        "required": true
+      },
+      {
+        "name": "instance_url",
+        "type": "string",
+        "value": null,
+        "label": "Salesforce Instance URL",
+        "placeholder": "https://mycompany.my.salesforce.com",
+        "required": true
+      },
+      {
+        "name": "quote_id",
+        "type": "string",
+        "value": null,
+        "label": "Quote ID",
+        "placeholder": "0Q05f000000AbCdAAK - the quote whose products you want",
+        "required": true
+      },
+      {
+        "name": "fields",
+        "type": "string",
+        "value": null,
+        "label": "Fields",
+        "placeholder": "Product2.Name,Quantity,UnitPrice,TotalPrice - leave blank for the usual quote-line fields"
+      },
+      {
+        "name": "order_by",
+        "type": "string",
+        "value": null,
+        "label": "Sort By",
+        "placeholder": "SortOrder ASC - or TotalPrice DESC"
+      },
+      {
+        "name": "return_all",
+        "type": "boolean",
+        "value": null,
+        "label": "Return All (fetch every product line)",
+        "placeholder": ""
+      },
+      {
+        "name": "limit",
+        "type": "integer",
+        "value": null,
+        "label": "Limit",
+        "placeholder": "50 (max 2000); ignored when Return All is on"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "results",
+        "type": "object",
+        "value": null,
+        "label": "Quote Lines",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Count",
+        "placeholder": ""
+      },
+      {
+        "name": "total_size",
+        "type": "integer",
+        "value": null,
+        "label": "Records Returned",
+        "placeholder": ""
+      },
+      {
+        "name": "next_url",
+        "type": "string",
+        "value": null,
+        "label": "Next Page URL",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Raw Response",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "crm/salesforce/quote_sync_to_opportunity": {
+    "hash": "0e8ae2e55073bc16d8061fb847f979e37cdc55772ff0389a064a98ed83bfa27b",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Salesforce: Sync Quote to Opportunity",
+    "description": "Make the deal match the quote the customer actually received. Salesforce copies the quote's product lines and total onto the deal and keeps the two in step from then on, so the forecast shows the quoted figure rather than an old estimate.",
+    "website": "https://www.flomation.co",
+    "icon": "salesforce+arrow-right-arrow-left",
+    "date": "26/07/2026",
+    "type": 2,
+    "category": {
+      "name": "CRM",
+      "icon": "people-group",
+      "description": "Customer relationship management — contacts, companies, deals, and tickets"
+    },
+    "sub_category": {
+      "name": "Salesforce",
+      "icon": "salesforce",
+      "description": "Manage Salesforce leads, contacts, accounts, opportunities, cases, tasks, and any custom object"
+    },
+    "inputs": [
+      {
+        "name": "access_token",
+        "type": "secret",
+        "value": null,
+        "label": "Salesforce Connection",
+        "placeholder": "Connect Salesforce, or paste an access token",
+        "required": true
+      },
+      {
+        "name": "instance_url",
+        "type": "string",
+        "value": null,
+        "label": "Salesforce Instance URL",
+        "placeholder": "https://mycompany.my.salesforce.com",
+        "required": true
+      },
+      {
+        "name": "quote_id",
+        "type": "string",
+        "value": null,
+        "label": "Quote ID",
+        "placeholder": "0Q05f000000AbCdAAK - the quote to sync",
+        "required": true
+      },
+      {
+        "name": "opportunity_id",
+        "type": "string",
+        "value": null,
+        "label": "Opportunity (Deal)",
+        "placeholder": "0065f00000AbCdEAAV - leave blank and we use the deal the quote is already on"
+      },
+      {
+        "name": "stop_syncing",
+        "type": "boolean",
+        "value": null,
+        "label": "Stop syncing instead (leave the deal as it is now)",
+        "placeholder": ""
+      }
+    ],
+    "outputs": [
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Opportunity ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Applied Changes",
+        "placeholder": ""
+      },
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "crm/salesforce/quote_update": {
+    "hash": "29d16033a38f146227d5dbc598366198c4afd2f34926600efa2f0d7a714f5696",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Salesforce: Update Quote",
+    "description": "Change a quote in Salesforce - mark it Presented or Accepted, push the expiry out, correct the tax or the delivery address. Anything you leave blank is left exactly as it was.",
+    "website": "https://www.flomation.co",
+    "icon": "salesforce+pen",
+    "date": "26/07/2026",
+    "type": 2,
+    "category": {
+      "name": "CRM",
+      "icon": "people-group",
+      "description": "Customer relationship management — contacts, companies, deals, and tickets"
+    },
+    "sub_category": {
+      "name": "Salesforce",
+      "icon": "salesforce",
+      "description": "Manage Salesforce leads, contacts, accounts, opportunities, cases, tasks, and any custom object"
+    },
+    "inputs": [
+      {
+        "name": "access_token",
+        "type": "secret",
+        "value": null,
+        "label": "Salesforce Connection",
+        "placeholder": "Connect Salesforce, or paste an access token",
+        "required": true
+      },
+      {
+        "name": "instance_url",
+        "type": "string",
+        "value": null,
+        "label": "Salesforce Instance URL",
+        "placeholder": "https://mycompany.my.salesforce.com",
+        "required": true
+      },
+      {
+        "name": "quote_id",
+        "type": "string",
+        "value": null,
+        "label": "Quote ID",
+        "placeholder": "0Q05f000000AbCdAAK - the quote to change",
+        "required": true
+      },
+      {
+        "name": "quote_status",
+        "type": "string",
+        "value": null,
+        "label": "Status",
+        "placeholder": "Presented - where the quote now sits in your approval process",
+        "options": [
+          {
+            "name": "Draft",
+            "value": "Draft"
+          },
+          {
+            "name": "Needs Review",
+            "value": "Needs Review"
+          },
+          {
+            "name": "In Review",
+            "value": "In Review"
+          },
+          {
+            "name": "Approved",
+            "value": "Approved"
+          },
+          {
+            "name": "Rejected",
+            "value": "Rejected"
+          },
+          {
+            "name": "Presented",
+            "value": "Presented"
+          },
+          {
+            "name": "Accepted",
+            "value": "Accepted"
+          },
+          {
+            "name": "Denied",
+            "value": "Denied"
+          }
+        ]
+      },
+      {
+        "name": "name",
+        "type": "string",
+        "value": null,
+        "label": "Quote Name",
+        "placeholder": "Acme Ltd - 50 seat renewal (June revision)"
+      },
+      {
+        "name": "expiration_date",
+        "type": "datetime",
+        "value": null,
+        "label": "Expires On",
+        "placeholder": "2026-10-15 (the date only - Salesforce ignores the time)"
+      },
+      {
+        "name": "contact_id",
+        "type": "string",
+        "value": null,
+        "label": "Quote Recipient (Contact)",
+        "placeholder": "0035f00000AbCdEAAV - the person the quote is addressed to"
+      },
+      {
+        "name": "email",
+        "type": "string",
+        "value": null,
+        "label": "Recipient Email",
+        "placeholder": "buyer@acme.example.com - where the quote gets sent"
+      },
+      {
+        "name": "phone",
+        "type": "string",
+        "value": null,
+        "label": "Recipient Phone",
+        "placeholder": "020 7946 0000"
+      },
+      {
+        "name": "description",
+        "type": "text",
+        "value": null,
+        "label": "Description",
+        "placeholder": "Notes about this quote, visible to everyone on the deal"
+      },
+      {
+        "name": "tax",
+        "type": "string",
+        "value": null,
+        "label": "Tax",
+        "placeholder": "250.50 - the tax amount added to the quote total"
+      },
+      {
+        "name": "shipping_handling",
+        "type": "string",
+        "value": null,
+        "label": "Shipping \u0026 Handling",
+        "placeholder": "45.00 - carriage added to the quote total"
+      },
+      {
+        "name": "pricebook_id",
+        "type": "string",
+        "value": null,
+        "label": "Price Book",
+        "placeholder": "01s5f000004AbCdAAK - cannot be changed once the quote has product lines"
+      },
+      {
+        "name": "opportunity_id",
+        "type": "string",
+        "value": null,
+        "label": "Opportunity (Deal)",
+        "placeholder": "0065f00000AbCdEAAV - the deal this quote belongs to"
+      },
+      {
+        "name": "contract_id",
+        "type": "string",
+        "value": null,
+        "label": "Contract",
+        "placeholder": "8005f000000AbCdAAK - the contract this quote relates to"
+      },
+      {
+        "name": "billing_name",
+        "type": "string",
+        "value": null,
+        "label": "Bill To Name",
+        "placeholder": "Acme Ltd - Accounts Payable"
+      },
+      {
+        "name": "billing_street",
+        "type": "text",
+        "value": null,
+        "label": "Bill To Street",
+        "placeholder": "1 High Street"
+      },
+      {
+        "name": "billing_city",
+        "type": "string",
+        "value": null,
+        "label": "Bill To City",
+        "placeholder": "London"
+      },
+      {
+        "name": "billing_state",
+        "type": "string",
+        "value": null,
+        "label": "Bill To State/Province",
+        "placeholder": "Only for countries your Salesforce org lists states for - the United Kingdom has none, so leave it blank"
+      },
+      {
+        "name": "billing_postal_code",
+        "type": "string",
+        "value": null,
+        "label": "Bill To Postcode",
+        "placeholder": "EC1A 1BB"
+      },
+      {
+        "name": "billing_country",
+        "type": "string",
+        "value": null,
+        "label": "Bill To Country",
+        "placeholder": "United Kingdom - must match your org's country list"
+      },
+      {
+        "name": "shipping_name",
+        "type": "string",
+        "value": null,
+        "label": "Ship To Name",
+        "placeholder": "Acme Ltd - Goods In"
+      },
+      {
+        "name": "shipping_street",
+        "type": "text",
+        "value": null,
+        "label": "Ship To Street",
+        "placeholder": "Unit 4, Riverside Estate"
+      },
+      {
+        "name": "shipping_city",
+        "type": "string",
+        "value": null,
+        "label": "Ship To City",
+        "placeholder": "Manchester"
+      },
+      {
+        "name": "shipping_state",
+        "type": "string",
+        "value": null,
+        "label": "Ship To State/Province",
+        "placeholder": "Only for countries your Salesforce org lists states for - the United Kingdom has none, so leave it blank"
+      },
+      {
+        "name": "shipping_postal_code",
+        "type": "string",
+        "value": null,
+        "label": "Ship To Postcode",
+        "placeholder": "M1 2AB"
+      },
+      {
+        "name": "shipping_country",
+        "type": "string",
+        "value": null,
+        "label": "Ship To Country",
+        "placeholder": "United Kingdom - must match your org's country list"
+      },
+      {
+        "name": "owner_id",
+        "type": "string",
+        "value": null,
+        "label": "Owner",
+        "placeholder": "0055f00000AbCdEAAV - the salesperson who owns the quote"
+      },
+      {
+        "name": "additional_fields",
+        "type": "object",
+        "value": null,
+        "label": "Additional Fields",
+        "placeholder": "{\"My_Custom_Field__c\":\"value\"} - any other Salesforce field on the quote"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Quote ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Applied Changes",
         "placeholder": ""
       },
       {

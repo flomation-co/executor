@@ -1092,6 +1092,11 @@ import (
 	crm_salesforce_approval_get_all "flomation.app/automate/executor/actions/crm/salesforce/approval_get_all"
 	crm_salesforce_approval_reject "flomation.app/automate/executor/actions/crm/salesforce/approval_reject"
 	crm_salesforce_approval_submit "flomation.app/automate/executor/actions/crm/salesforce/approval_submit"
+	crm_salesforce_asset_create "flomation.app/automate/executor/actions/crm/salesforce/asset_create"
+	crm_salesforce_asset_delete "flomation.app/automate/executor/actions/crm/salesforce/asset_delete"
+	crm_salesforce_asset_get "flomation.app/automate/executor/actions/crm/salesforce/asset_get"
+	crm_salesforce_asset_get_all "flomation.app/automate/executor/actions/crm/salesforce/asset_get_all"
+	crm_salesforce_asset_update "flomation.app/automate/executor/actions/crm/salesforce/asset_update"
 	crm_salesforce_attachment_create "flomation.app/automate/executor/actions/crm/salesforce/attachment_create"
 	crm_salesforce_attachment_delete "flomation.app/automate/executor/actions/crm/salesforce/attachment_delete"
 	crm_salesforce_attachment_describe "flomation.app/automate/executor/actions/crm/salesforce/attachment_describe"
@@ -1128,6 +1133,12 @@ import (
 	crm_salesforce_contact_get_all "flomation.app/automate/executor/actions/crm/salesforce/contact_get_all"
 	crm_salesforce_contact_update "flomation.app/automate/executor/actions/crm/salesforce/contact_update"
 	crm_salesforce_contact_upsert "flomation.app/automate/executor/actions/crm/salesforce/contact_upsert"
+	crm_salesforce_contract_activate "flomation.app/automate/executor/actions/crm/salesforce/contract_activate"
+	crm_salesforce_contract_create "flomation.app/automate/executor/actions/crm/salesforce/contract_create"
+	crm_salesforce_contract_delete "flomation.app/automate/executor/actions/crm/salesforce/contract_delete"
+	crm_salesforce_contract_get "flomation.app/automate/executor/actions/crm/salesforce/contract_get"
+	crm_salesforce_contract_get_all "flomation.app/automate/executor/actions/crm/salesforce/contract_get_all"
+	crm_salesforce_contract_update "flomation.app/automate/executor/actions/crm/salesforce/contract_update"
 	crm_salesforce_custom_object_create "flomation.app/automate/executor/actions/crm/salesforce/custom_object_create"
 	crm_salesforce_custom_object_delete "flomation.app/automate/executor/actions/crm/salesforce/custom_object_delete"
 	crm_salesforce_custom_object_get "flomation.app/automate/executor/actions/crm/salesforce/custom_object_get"
@@ -1182,10 +1193,36 @@ import (
 	crm_salesforce_opportunity_line_item_update "flomation.app/automate/executor/actions/crm/salesforce/opportunity_line_item_update"
 	crm_salesforce_opportunity_update "flomation.app/automate/executor/actions/crm/salesforce/opportunity_update"
 	crm_salesforce_opportunity_upsert "flomation.app/automate/executor/actions/crm/salesforce/opportunity_upsert"
+	crm_salesforce_order_activate "flomation.app/automate/executor/actions/crm/salesforce/order_activate"
+	crm_salesforce_order_create "flomation.app/automate/executor/actions/crm/salesforce/order_create"
+	crm_salesforce_order_delete "flomation.app/automate/executor/actions/crm/salesforce/order_delete"
+	crm_salesforce_order_get "flomation.app/automate/executor/actions/crm/salesforce/order_get"
+	crm_salesforce_order_get_all "flomation.app/automate/executor/actions/crm/salesforce/order_get_all"
+	crm_salesforce_order_item_create "flomation.app/automate/executor/actions/crm/salesforce/order_item_create"
+	crm_salesforce_order_item_get_all "flomation.app/automate/executor/actions/crm/salesforce/order_item_get_all"
+	crm_salesforce_order_update "flomation.app/automate/executor/actions/crm/salesforce/order_update"
 	crm_salesforce_org_limits_get "flomation.app/automate/executor/actions/crm/salesforce/org_limits_get"
+	crm_salesforce_price_book_entry_create "flomation.app/automate/executor/actions/crm/salesforce/price_book_entry_create"
+	crm_salesforce_price_book_entry_get_all "flomation.app/automate/executor/actions/crm/salesforce/price_book_entry_get_all"
+	crm_salesforce_price_book_entry_update "flomation.app/automate/executor/actions/crm/salesforce/price_book_entry_update"
+	crm_salesforce_price_book_get_all "flomation.app/automate/executor/actions/crm/salesforce/price_book_get_all"
+	crm_salesforce_product_create "flomation.app/automate/executor/actions/crm/salesforce/product_create"
+	crm_salesforce_product_delete "flomation.app/automate/executor/actions/crm/salesforce/product_delete"
+	crm_salesforce_product_get "flomation.app/automate/executor/actions/crm/salesforce/product_get"
+	crm_salesforce_product_get_all "flomation.app/automate/executor/actions/crm/salesforce/product_get_all"
+	crm_salesforce_product_update "flomation.app/automate/executor/actions/crm/salesforce/product_update"
+	crm_salesforce_product_upsert "flomation.app/automate/executor/actions/crm/salesforce/product_upsert"
 	crm_salesforce_query_all "flomation.app/automate/executor/actions/crm/salesforce/query_all"
 	crm_salesforce_quick_action_get_all "flomation.app/automate/executor/actions/crm/salesforce/quick_action_get_all"
 	crm_salesforce_quick_action_run "flomation.app/automate/executor/actions/crm/salesforce/quick_action_run"
+	crm_salesforce_quote_create "flomation.app/automate/executor/actions/crm/salesforce/quote_create"
+	crm_salesforce_quote_delete "flomation.app/automate/executor/actions/crm/salesforce/quote_delete"
+	crm_salesforce_quote_get "flomation.app/automate/executor/actions/crm/salesforce/quote_get"
+	crm_salesforce_quote_get_all "flomation.app/automate/executor/actions/crm/salesforce/quote_get_all"
+	crm_salesforce_quote_line_item_create "flomation.app/automate/executor/actions/crm/salesforce/quote_line_item_create"
+	crm_salesforce_quote_line_item_get_all "flomation.app/automate/executor/actions/crm/salesforce/quote_line_item_get_all"
+	crm_salesforce_quote_sync_to_opportunity "flomation.app/automate/executor/actions/crm/salesforce/quote_sync_to_opportunity"
+	crm_salesforce_quote_update "flomation.app/automate/executor/actions/crm/salesforce/quote_update"
 	crm_salesforce_record_create_many "flomation.app/automate/executor/actions/crm/salesforce/record_create_many"
 	crm_salesforce_record_delete_many "flomation.app/automate/executor/actions/crm/salesforce/record_delete_many"
 	crm_salesforce_record_find "flomation.app/automate/executor/actions/crm/salesforce/record_find"
@@ -4551,6 +4588,11 @@ var Actions = map[string]core.Action{
 	"crm/salesforce/approval_get_all":                                                 crm_salesforce_approval_get_all.Execute,
 	"crm/salesforce/approval_reject":                                                  crm_salesforce_approval_reject.Execute,
 	"crm/salesforce/approval_submit":                                                  crm_salesforce_approval_submit.Execute,
+	"crm/salesforce/asset_create":                                                     crm_salesforce_asset_create.Execute,
+	"crm/salesforce/asset_delete":                                                     crm_salesforce_asset_delete.Execute,
+	"crm/salesforce/asset_get":                                                        crm_salesforce_asset_get.Execute,
+	"crm/salesforce/asset_get_all":                                                    crm_salesforce_asset_get_all.Execute,
+	"crm/salesforce/asset_update":                                                     crm_salesforce_asset_update.Execute,
 	"crm/salesforce/attachment_create":                                                crm_salesforce_attachment_create.Execute,
 	"crm/salesforce/attachment_delete":                                                crm_salesforce_attachment_delete.Execute,
 	"crm/salesforce/attachment_describe":                                              crm_salesforce_attachment_describe.Execute,
@@ -4587,6 +4629,12 @@ var Actions = map[string]core.Action{
 	"crm/salesforce/contact_get_all":                                                  crm_salesforce_contact_get_all.Execute,
 	"crm/salesforce/contact_update":                                                   crm_salesforce_contact_update.Execute,
 	"crm/salesforce/contact_upsert":                                                   crm_salesforce_contact_upsert.Execute,
+	"crm/salesforce/contract_activate":                                                crm_salesforce_contract_activate.Execute,
+	"crm/salesforce/contract_create":                                                  crm_salesforce_contract_create.Execute,
+	"crm/salesforce/contract_delete":                                                  crm_salesforce_contract_delete.Execute,
+	"crm/salesforce/contract_get":                                                     crm_salesforce_contract_get.Execute,
+	"crm/salesforce/contract_get_all":                                                 crm_salesforce_contract_get_all.Execute,
+	"crm/salesforce/contract_update":                                                  crm_salesforce_contract_update.Execute,
 	"crm/salesforce/custom_object_create":                                             crm_salesforce_custom_object_create.Execute,
 	"crm/salesforce/custom_object_delete":                                             crm_salesforce_custom_object_delete.Execute,
 	"crm/salesforce/custom_object_get":                                                crm_salesforce_custom_object_get.Execute,
@@ -4641,10 +4689,36 @@ var Actions = map[string]core.Action{
 	"crm/salesforce/opportunity_line_item_update":                                     crm_salesforce_opportunity_line_item_update.Execute,
 	"crm/salesforce/opportunity_update":                                               crm_salesforce_opportunity_update.Execute,
 	"crm/salesforce/opportunity_upsert":                                               crm_salesforce_opportunity_upsert.Execute,
+	"crm/salesforce/order_activate":                                                   crm_salesforce_order_activate.Execute,
+	"crm/salesforce/order_create":                                                     crm_salesforce_order_create.Execute,
+	"crm/salesforce/order_delete":                                                     crm_salesforce_order_delete.Execute,
+	"crm/salesforce/order_get":                                                        crm_salesforce_order_get.Execute,
+	"crm/salesforce/order_get_all":                                                    crm_salesforce_order_get_all.Execute,
+	"crm/salesforce/order_item_create":                                                crm_salesforce_order_item_create.Execute,
+	"crm/salesforce/order_item_get_all":                                               crm_salesforce_order_item_get_all.Execute,
+	"crm/salesforce/order_update":                                                     crm_salesforce_order_update.Execute,
 	"crm/salesforce/org_limits_get":                                                   crm_salesforce_org_limits_get.Execute,
+	"crm/salesforce/price_book_entry_create":                                          crm_salesforce_price_book_entry_create.Execute,
+	"crm/salesforce/price_book_entry_get_all":                                         crm_salesforce_price_book_entry_get_all.Execute,
+	"crm/salesforce/price_book_entry_update":                                          crm_salesforce_price_book_entry_update.Execute,
+	"crm/salesforce/price_book_get_all":                                               crm_salesforce_price_book_get_all.Execute,
+	"crm/salesforce/product_create":                                                   crm_salesforce_product_create.Execute,
+	"crm/salesforce/product_delete":                                                   crm_salesforce_product_delete.Execute,
+	"crm/salesforce/product_get":                                                      crm_salesforce_product_get.Execute,
+	"crm/salesforce/product_get_all":                                                  crm_salesforce_product_get_all.Execute,
+	"crm/salesforce/product_update":                                                   crm_salesforce_product_update.Execute,
+	"crm/salesforce/product_upsert":                                                   crm_salesforce_product_upsert.Execute,
 	"crm/salesforce/query_all":                                                        crm_salesforce_query_all.Execute,
 	"crm/salesforce/quick_action_get_all":                                             crm_salesforce_quick_action_get_all.Execute,
 	"crm/salesforce/quick_action_run":                                                 crm_salesforce_quick_action_run.Execute,
+	"crm/salesforce/quote_create":                                                     crm_salesforce_quote_create.Execute,
+	"crm/salesforce/quote_delete":                                                     crm_salesforce_quote_delete.Execute,
+	"crm/salesforce/quote_get":                                                        crm_salesforce_quote_get.Execute,
+	"crm/salesforce/quote_get_all":                                                    crm_salesforce_quote_get_all.Execute,
+	"crm/salesforce/quote_line_item_create":                                           crm_salesforce_quote_line_item_create.Execute,
+	"crm/salesforce/quote_line_item_get_all":                                          crm_salesforce_quote_line_item_get_all.Execute,
+	"crm/salesforce/quote_sync_to_opportunity":                                        crm_salesforce_quote_sync_to_opportunity.Execute,
+	"crm/salesforce/quote_update":                                                     crm_salesforce_quote_update.Execute,
 	"crm/salesforce/record_create_many":                                               crm_salesforce_record_create_many.Execute,
 	"crm/salesforce/record_delete_many":                                               crm_salesforce_record_delete_many.Execute,
 	"crm/salesforce/record_find":                                                      crm_salesforce_record_find.Execute,
