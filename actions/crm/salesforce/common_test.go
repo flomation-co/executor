@@ -1585,3 +1585,85 @@ func TestNumericInputAcceptsANumberTypedConnection(t *testing.T) {
 		t.Fatalf("a number-typed connection must be read as 3, got (%v, %v, %v)", v, set, err)
 	}
 }
+
+// The Salesforce Connection and the Instance URL sit next to each other and both
+// accept a variable, so binding the connection into the URL box is an easy slip.
+// ValidateInstanceURL quotes the host it rejected back into its message, and that
+// message is written into the flow's error output — which is kept and displayed —
+// so the slip would carry a live access token out of the node.
+func TestAnAccessTokenInTheInstanceURLBoxIsNeverEchoed(t *testing.T) {
+	const token = "00Daj00000ABCDE!AQEAQNv_ThisIsTheSecretPartOfTheTokenXXXXXXXXXXXX"
+
+	inputs := []*core.Connection{
+		{Name: "access_token", Type: core.ConnectionTypeSecret, Value: token},
+		{Name: "instance_url", Type: core.ConnectionTypeString, Value: token},
+	}
+	_, _, err := GetAuth(inputs)
+	if err == nil {
+		t.Fatal("an access token in the Instance URL box must be refused")
+	}
+	// CASE-INSENSITIVE deliberately. Hostname normalisation lowercases the value,
+	// so an exact-case check silently misses a leak that is fully recoverable —
+	// verified by reverting the guard, which produced a message containing the
+	// entire token in lower case while the exact-case assertions stayed quiet.
+	lower := strings.ToLower(err.Error())
+	if strings.Contains(lower, strings.ToLower(token)) {
+		t.Errorf("the error echoes the access token, which then reaches the execution log: %q", err)
+	}
+	// Any distinctive slice of the secret escaping is a leak, not just the whole.
+	if strings.Contains(lower, strings.ToLower("AQEAQNv_ThisIsTheSecretPart")) {
+		t.Errorf("the error echoes part of the access token: %q", err)
+	}
+	if !strings.Contains(err.Error(), "Instance URL") {
+		t.Errorf("the refusal must name the box that is wrong: %q", err)
+	}
+}
+
+// A token-shaped value that is not the credential in hand must be caught too —
+// the operator may have pasted one from somewhere else entirely.
+func TestATokenShapedInstanceURLIsRefusedWithoutEchoing(t *testing.T) {
+	const stray = "00Daj00000ZZZZZ!AQEAQPastedFromSomewhereElseEntirelyXXXXXXXXXXXX"
+	inputs := []*core.Connection{
+		{Name: "access_token", Type: core.ConnectionTypeSecret, Value: "a-different-token"},
+		{Name: "instance_url", Type: core.ConnectionTypeString, Value: stray},
+	}
+	_, _, err := GetAuth(inputs)
+	if err == nil {
+		t.Fatal("a token-shaped Instance URL must be refused")
+	}
+	lower := strings.ToLower(err.Error())
+	if strings.Contains(lower, strings.ToLower(stray)) || strings.Contains(lower, strings.ToLower("AQEAQPasted")) {
+		t.Errorf("the error echoes the pasted token: %q", err)
+	}
+}
+
+// An unresolved ${...} means the upstream step never produced a value. Naming the
+// box is enough — the reference text adds nothing and may name a secret.
+func TestAnUnresolvedInstanceURLVariableIsRefused(t *testing.T) {
+	inputs := []*core.Connection{
+		{Name: "access_token", Type: core.ConnectionTypeSecret, Value: "tok"},
+		{Name: "instance_url", Type: core.ConnectionTypeString, Value: "${secrets.my_org_url}"},
+	}
+	_, _, err := GetAuth(inputs)
+	if err == nil {
+		t.Fatal("an unresolved variable must be refused rather than sent as a hostname")
+	}
+	if strings.Contains(err.Error(), "my_org_url") {
+		t.Errorf("the refusal should not repeat the reference, which may name a secret: %q", err)
+	}
+}
+
+// The ordinary case must be untouched by the guard.
+func TestAGenuineInstanceURLStillPassesTheGuard(t *testing.T) {
+	inputs := []*core.Connection{
+		{Name: "access_token", Type: core.ConnectionTypeSecret, Value: "tok"},
+		{Name: "instance_url", Type: core.ConnectionTypeString, Value: "https://mycompany.my.salesforce.com"},
+	}
+	got, tok, err := GetAuth(inputs)
+	if err != nil {
+		t.Fatalf("a valid instance URL must be accepted: %v", err)
+	}
+	if got != "https://mycompany.my.salesforce.com" || tok != "tok" {
+		t.Errorf("got (%q, %q)", got, tok)
+	}
+}

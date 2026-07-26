@@ -609,11 +609,54 @@ func GetAuth(inputs []*core.Connection) (instanceURL, token string, err error) {
 		return testBaseURL, token, nil
 	}
 
-	instanceURL = NormaliseInstanceURL(OptionalString("instance_url", inputs))
+	raw := OptionalString("instance_url", inputs)
+	// Guard BEFORE normalising, because ValidateInstanceURL quotes the host it
+	// rejected back into its message — and if the operator has put the access
+	// token in this box, that host IS the token, which would then travel out
+	// through the node's error output into the execution log.
+	if err := guardInstanceURLValue(raw, token); err != nil {
+		return "", "", err
+	}
+
+	instanceURL = NormaliseInstanceURL(raw)
 	if err := ValidateInstanceURL(instanceURL); err != nil {
 		return "", "", err
 	}
 	return instanceURL, token, nil
+}
+
+// guardInstanceURLValue catches the two ways the Instance URL box ends up
+// holding something that must never be echoed.
+//
+// Both inputs sit next to each other and both accept a variable, so binding the
+// Salesforce Connection into the Instance URL is an easy slip — and the message
+// that reports it is written into the flow's error output, where it is kept and
+// displayed. A secret must not make that trip, so these cases are refused by
+// NAME and the value itself is never quoted back.
+func guardInstanceURLValue(raw, token string) error {
+	v := strings.TrimSpace(raw)
+	if v == "" {
+		return nil // ValidateInstanceURL states the requirement.
+	}
+	if token != "" && v == token {
+		return fmt.Errorf("the Salesforce Instance URL box is set to your Salesforce connection — that box wants your org's web address instead, e.g. https://mycompany.my.salesforce.com. The connection belongs only in the Salesforce Connection box above")
+	}
+	if looksLikeSalesforceToken(v) {
+		return fmt.Errorf("the Salesforce Instance URL box looks like it holds an access token rather than an address — it wants your org's web address, e.g. https://mycompany.my.salesforce.com")
+	}
+	if strings.Contains(v, "${") {
+		// An unresolved reference means the value never arrived. Naming the box is
+		// enough; the reference text adds nothing and may name a secret.
+		return fmt.Errorf("the Salesforce Instance URL still contains a variable that did not resolve — check the step it points at ran, or type the org address directly")
+	}
+	return nil
+}
+
+// looksLikeSalesforceToken recognises Salesforce's session-token shape without
+// matching any plausible URL. Tokens are of the form 00D...!AQEAQ..., and the
+// "!" is the giveaway: it is never present in a host name.
+func looksLikeSalesforceToken(v string) bool {
+	return strings.Contains(v, "!") && len(v) > 40
 }
 
 // ---------------------------------------------------------------------------
