@@ -542007,6 +542007,131 @@
       }
     ]
   },
+  "trigger/salesforce_poll": {
+    "hash": "61a5c0333047a0791488d6090142ef152197af91ab51aff05f66328a74b2a750",
+    "author": "Dave McElin",
+    "organisation": "Flomation",
+    "name": "Salesforce: Record Created or Updated",
+    "description": "Triggers a flow when a Salesforce record is created — or created or changed — on any object, including your own custom ones. Checks on an interval and only ever fires for records it has not already seen.",
+    "website": "https://www.flomation.co",
+    "icon": "salesforce+bolt",
+    "date": "26/07/2026",
+    "type": 1,
+    "category": {
+      "name": "Triggers",
+      "icon": "bolt-lightning",
+      "description": "Start a Flow"
+    },
+    "inputs": [
+      {
+        "name": "access_token",
+        "type": "secret",
+        "value": null,
+        "label": "Salesforce Connection",
+        "placeholder": "Connect Salesforce, or paste an access token",
+        "required": true
+      },
+      {
+        "name": "instance_url",
+        "type": "string",
+        "value": null,
+        "label": "Salesforce Instance URL",
+        "placeholder": "https://mycompany.my.salesforce.com",
+        "required": true
+      },
+      {
+        "name": "object",
+        "type": "string",
+        "value": null,
+        "label": "Object To Watch",
+        "placeholder": "Lead, Opportunity, or your own object",
+        "required": true
+      },
+      {
+        "name": "event",
+        "type": "string",
+        "value": null,
+        "label": "Fire When",
+        "placeholder": "",
+        "required": true,
+        "options": [
+          {
+            "name": "A record is created",
+            "value": "CreatedDate"
+          },
+          {
+            "name": "A record is created or changed",
+            "value": "SystemModstamp"
+          }
+        ]
+      },
+      {
+        "name": "poll_interval",
+        "type": "string",
+        "value": null,
+        "label": "How Often To Check",
+        "placeholder": "15m by default - every check spends one of your Salesforce API calls, so leave it as long as you can live with"
+      },
+      {
+        "name": "fields",
+        "type": "string",
+        "value": null,
+        "label": "Fields To Fetch",
+        "placeholder": "Name, Email, Status - comma separated. Leave blank for the usual ones"
+      },
+      {
+        "name": "where",
+        "type": "string",
+        "value": null,
+        "label": "Only Records Matching",
+        "placeholder": "Status = 'Open' - a SOQL condition, no WHERE (optional)"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "record",
+        "type": "object",
+        "value": null,
+        "label": "Record",
+        "placeholder": ""
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Record ID",
+        "placeholder": ""
+      },
+      {
+        "name": "object",
+        "type": "string",
+        "value": null,
+        "label": "Object",
+        "placeholder": ""
+      },
+      {
+        "name": "event",
+        "type": "string",
+        "value": null,
+        "label": "Fired Because",
+        "placeholder": ""
+      },
+      {
+        "name": "cursor",
+        "type": "string",
+        "value": null,
+        "label": "Cursor Value",
+        "placeholder": ""
+      },
+      {
+        "name": "triggered_at",
+        "type": "string",
+        "value": null,
+        "label": "Triggered At",
+        "placeholder": ""
+      }
+    ]
+  },
   "trigger/schedule": {
     "hash": "72660031b88b57c56819ed536b365e86186ba9a1d057148df1ca7d94ddac7735",
     "author": "Andy Esser",
