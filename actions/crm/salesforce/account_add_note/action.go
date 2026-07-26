@@ -10,7 +10,7 @@ import (
 const (
 	Author       = "Dave McElin"
 	Organisation = "Flomation"
-	Name         = "Salesforce: Add Note to Account"
+	Name         = "Salesforce: Add Note to Account (Classic)"
 	Description  = "Attach a note to a Salesforce account — a call summary, a delivery instruction, anything the team should see on the record. This writes a Classic Note, which appears in the account's Notes & Attachments list."
 	Website      = "https://www.flomation.co"
 	Icon         = "salesforce+comment"

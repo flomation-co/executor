@@ -182613,10 +182613,10 @@
     ]
   },
   "crm/salesforce/account_add_note": {
-    "hash": "77104c7d4b478442a3b9a06920f3a940ebb6110d8a76f3227f6f98daf3f14648",
+    "hash": "ea17b651dc774fbdf5a642344064bb971683684d38a7dc819e70b91277bc35b5",
     "author": "Dave McElin",
     "organisation": "Flomation",
-    "name": "Salesforce: Add Note to Account",
+    "name": "Salesforce: Add Note to Account (Classic)",
     "description": "Attach a note to a Salesforce account — a call summary, a delivery instruction, anything the team should see on the record. This writes a Classic Note, which appears in the account's Notes \u0026 Attachments list.",
     "website": "https://www.flomation.co",
     "icon": "salesforce+comment",

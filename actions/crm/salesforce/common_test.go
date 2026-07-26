@@ -673,6 +673,66 @@ func TestBulkFailureKeepsAlreadyCommittedChunks(t *testing.T) {
 	if out["success"] != false || out["error"] == "" {
 		t.Error("a partial bulk failure must still report as a failure")
 	}
+
+	// The output must be UNAMBIGUOUS about what landed, or a downstream node
+	// (and the operator deciding whether to re-run) cannot tell. Asked for
+	// explicitly in review, so it is pinned here rather than asserted in prose.
+	ids, ok := out["ids"].([]interface{})
+	if !ok || len(ids) != MaxCollectionRecords {
+		t.Fatalf("committed IDs must be listed so a re-run can skip them; got %#v", out["ids"])
+	}
+	if out["success_count"] != MaxCollectionRecords {
+		t.Errorf("success_count = %v, want %d", out["success_count"], MaxCollectionRecords)
+	}
+	if out["failure_count"] != 0 {
+		t.Errorf("failure_count = %v, want 0 — the second chunk never returned per-record results", out["failure_count"])
+	}
+	results, ok := out["results"].([]interface{})
+	if !ok || len(results) != MaxCollectionRecords {
+		t.Fatalf("per-record results must cover the committed chunk; got %d", len(results))
+	}
+	first, _ := results[0].(map[string]interface{})
+	for _, k := range []string{"index", "id", "success"} {
+		if _, present := first[k]; !present {
+			t.Errorf("each per-record result needs %q so the operator can locate it", k)
+		}
+	}
+}
+
+// A WITHIN-chunk partial failure is different from a mid-run abort and must not
+// be conflated: allOrNone=false means Salesforce accepts some records and
+// rejects others in the SAME request. That is a successful call with per-record
+// detail, not a dead branch — so it stays on the success port with the failures
+// enumerated. Review asked which of the two behaviours applies; both are pinned.
+func TestWithinChunkPartialFailureStaysOnTheSuccessPort(t *testing.T) {
+	srv := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		w.Header().Set("Content-Type", "application/json")
+		_, _ = w.Write([]byte(`[{"success":true,"id":"003aj000023sMvFAAU","errors":[]},
+		 {"success":false,"errors":[{"statusCode":"REQUIRED_FIELD_MISSING","message":"Required fields are missing: [LastName]","fields":["LastName"]}]}]`))
+	}))
+	defer srv.Close()
+	restore := SetHostForTest(srv.URL)
+	defer restore()
+
+	outcome, err := CollectionWrite(srv.URL, "tok", "Contact", http.MethodPost,
+		[]map[string]interface{}{{"LastName": "a"}, {}}, false, "")
+	if err != nil {
+		t.Fatalf("a within-chunk partial failure is not a call failure: %v", err)
+	}
+	out := BulkResult(outcome, "done")
+	if out["success"] != true {
+		t.Error("a within-chunk partial failure must stay on the success port so the operator sees the detail")
+	}
+	if out["success_count"] != 1 || out["failure_count"] != 1 {
+		t.Errorf("counts must separate the two: got %v ok / %v failed", out["success_count"], out["failure_count"])
+	}
+	ids, _ := out["ids"].([]interface{})
+	if len(ids) != 1 {
+		t.Errorf("only the committed record's ID should be listed; got %#v", ids)
+	}
+	if errText, _ := out["error"].(string); !strings.Contains(errText, "record 1") {
+		t.Errorf("the failing record's index must be identified: %q", errText)
+	}
 }
 
 func TestFieldTypesReturnsACopy(t *testing.T) {
