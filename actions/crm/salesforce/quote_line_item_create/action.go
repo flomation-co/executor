@@ -117,7 +117,12 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 		}
 		pinned = true
 	case entryBook != "" && entryBook != quoteBook:
-		return nil, fmt.Errorf("that price book entry is on price book %s but the quote is on price book %s — Salesforce only allows lines priced from the quote's own price book. Choose a product priced on %s, or change the quote's price book first", entryBook, quoteBook, quoteBook)
+		// A PROVIDER outcome, not a configuration mistake: this mismatch is only
+		// discoverable by reading both records back from Salesforce, so a flow
+		// should be able to branch on it. Returning a hard error took the node
+		// down instead of reaching the error port, unlike the ENTITY_IS_LOCKED
+		// case below which was already soft.
+		return salesforce.ErrorResult(fmt.Sprintf("that price book entry is on price book %s but the quote is on price book %s — Salesforce only allows lines priced from the quote's own price book. Choose a product priced on %s, or change the quote's price book first", entryBook, quoteBook, quoteBook)), nil
 	}
 
 	body := map[string]interface{}{

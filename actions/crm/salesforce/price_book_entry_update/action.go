@@ -97,14 +97,15 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 				"one of the fields cannot be changed after the price is created — the Product and the Price Book are fixed for the life of a price, so delete this price and add a new one instead (%s)", err.Error())), nil
 
 		case useStandard && salesforce.ErrorHasCode(err, "FIELD_INTEGRITY_EXCEPTION"):
-			// Verified live on the create path: UseStandardPrice=true against the
-			// STANDARD price book is a bare "field integrity exception" with no
-			// detail. common.go translates that code as an address State/Country
-			// problem, which is not remotely what happened, so intercept it
-			// whenever the request actually asked for the standard price — that is
-			// what makes this the cause rather than a guess.
+			// Verified live: with the box ticked, Salesforce demands Price Each EQUAL
+			// the product's standard price and refuses anything else with a bare
+			// "field integrity exception". It also refuses the combination on the
+			// standard book itself. common.go translates that code as an address
+			// State/Province problem, which is not remotely what happened, so
+			// intercept it whenever the request actually asked for the standard
+			// price — that is what makes this the cause rather than a guess.
 			return salesforce.ErrorResult(fmt.Sprintf(
-				"Copy The Standard Price cannot be used on the standard price book itself — the standard price IS the list price, so untick that box for a price on the standard price book (%s)", err.Error())), nil
+				"Copy The Standard Price needs Price Each to be exactly the product's standard price — Salesforce does not fill it in for you. Either set Price Each to the standard price, or untick the box and set the price yourself. On the standard price book itself, untick it: the standard price IS the list price (%s)", err.Error())), nil
 		}
 		return salesforce.ErrorResult(err.Error()), nil
 	}

@@ -62,9 +62,15 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	// UnitPrice is required on EVERY price book entry — including one that says
 	// Copy The Standard Price. Verified live: UseStandardPrice=true with no
 	// UnitPrice answers REQUIRED_FIELD_MISSING [UnitPrice], which is surprising
-	// enough that leaving the operator to discover it is unkind. Salesforce
-	// overwrites the figure with the list price when the box is ticked, so any
-	// sensible number will do, but there has to be one.
+	// enough that leaving the operator to discover it is unkind.
+	//
+	// And it must EQUAL the product's standard price, not merely be present.
+	// Salesforce does NOT overwrite the figure — verified live against a product
+	// with a standard price of 500: UnitPrice 1 with the box ticked is refused
+	// with FIELD_INTEGRITY_EXCEPTION, UnitPrice 500 is accepted. An earlier
+	// version of this comment claimed the opposite and told the operator any
+	// sensible number would do, which is the worst kind of wrong: it reads as
+	// reassurance and produces a failure.
 	unitPrice, unitSet, err := numericInput("unit_price", "Price Each", inputs)
 	if err != nil {
 		return nil, err
@@ -120,23 +126,34 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 				"Salesforce will not price a product on this price book until it has a list price on the STANDARD price book%s — run this action again against the standard price book first, then come back to this one (%s)",
 				standardPricebookHint(instanceURL, token), err.Error())), nil
 
-		case salesforce.ErrorHasCode(err, "DUPLICATE_VALUE"):
-			// "This price definition already exists in this price book" — a product
-			// can only have ONE price per price book, so the operator wants Change
-			// Product Price, not a second entry. This is the ordinary outcome of
-			// re-running a catalogue sync.
+		// Both of the next two cases arrive as FIELD_INTEGRITY_EXCEPTION, so they
+		// can only be told apart by the MESSAGE. Ordering matters: the duplicate
+		// carries specific text, the standard-price mismatch is bare.
+		//
+		// This branch previously tested for DUPLICATE_VALUE, which Salesforce
+		// never sends here — verified live, a second entry for the same product
+		// and book answers FIELD_INTEGRITY_EXCEPTION with "This price definition
+		// already exists in this price book". So the branch was DEAD CODE, the
+		// advice never reached anyone, and re-running a catalogue sync instead
+		// fell through to common.go's translation of that code, which is about
+		// address State/Province picklists and has nothing to do with pricing.
+		case strings.Contains(err.Error(), "already exists in this price book"):
+			// A product can hold only ONE price per price book, so the operator
+			// wants Change Product Price, not a second entry. This is the ordinary
+			// outcome of re-running a catalogue sync.
 			return salesforce.ErrorResult(fmt.Sprintf(
 				"that product already has a price in that price book — a product can only have one price per price book, so use Change Product Price to change it, or Get Many Price Book Entries to find the existing one (%s)", err.Error())), nil
 
 		case useStandard && salesforce.ErrorHasCode(err, "FIELD_INTEGRITY_EXCEPTION"):
-			// Verified live: UseStandardPrice=true against the STANDARD price book
-			// is a bare "field integrity exception" with no detail at all. Worse,
-			// common.go's translation for that code is about address State/Country
-			// picklists, so unaided the operator is sent to look at an address that
-			// is not involved. Asking for the standard price is the only thing that
-			// produces this combination, so the cause is not a guess.
+			// Verified live: with the box ticked, Salesforce demands Price Each
+			// EQUAL the product's standard price and refuses anything else with a
+			// bare "field integrity exception" carrying no detail. It also refuses
+			// the combination on the standard book itself. Either way the operator
+			// needs to know the figure has to match, which the previous wording did
+			// not say — it named the standard-book case only, so an operator using
+			// an ordinary price book was told the one thing they had got right.
 			return salesforce.ErrorResult(fmt.Sprintf(
-				"Copy The Standard Price cannot be used on the standard price book itself — the standard price IS the list price, so untick that box when pricing on the standard price book (%s)", err.Error())), nil
+				"Copy The Standard Price needs Price Each to be exactly the product's standard price — Salesforce does not fill it in for you. Either set Price Each to the standard price, or untick the box and price it yourself. On the standard price book itself, untick it: the standard price IS the list price (%s)", err.Error())), nil
 		}
 		return salesforce.ErrorResult(err.Error()), nil
 	}

@@ -88,7 +88,10 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	// front means the operator is told what to do rather than shown a lock code,
 	// and no pointless price-book lookup happens first.
 	if order.status == "Activated" {
-		return nil, fmt.Errorf("order %s is activated, so Salesforce has locked its product lines — set its Status back to Draft with Update Order, add the product, then activate it again", orderID)
+		// A PROVIDER outcome read back from Salesforce, not a configuration
+		// mistake, so it belongs on the error port where a flow can branch on it —
+		// the same treatment the ENTITY_IS_LOCKED catch further down already gets.
+		return salesforce.ErrorResult(fmt.Sprintf("order %s is activated, so Salesforce has locked its product lines — set its Status back to Draft with Update Order, add the product, then activate it again", orderID)), nil
 	}
 	// A product line has to sit INSIDE its order's own dates. Both verified live:
 	//
