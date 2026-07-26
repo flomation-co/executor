@@ -25,7 +25,7 @@ const (
 
 var Inputs = [...]core.Connection{
 	{Name: "access_token", Type: core.ConnectionTypeSecret, Label: "Salesforce Connection", Placeholder: "Connect Salesforce, or paste an access token", Required: true},
-	{Name: "instance_url", Type: core.ConnectionTypeString, Label: "Salesforce Instance URL", Placeholder: "Leave blank - taken from your connection", FromCredentialMeta: "instance_url"},
+	{Name: "instance_url", Type: core.ConnectionTypeString, Label: "Salesforce Instance URL", Placeholder: "Leave blank — taken from your connection", FromCredentialMeta: "instance_url"},
 	{Name: "object", Type: core.ConnectionTypeString, Label: "Record Type", Placeholder: "Opportunity, Lead, Account, Invoice__c", Required: true},
 	{Name: "limit", Type: core.ConnectionTypeInteger, Label: "Maximum Results", Placeholder: "50 (max 2000)"},
 	{Name: "offset", Type: core.ConnectionTypeInteger, Label: "Skip First", Placeholder: "0 — skip this many before returning results"},

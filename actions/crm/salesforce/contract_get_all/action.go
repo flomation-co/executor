@@ -28,7 +28,7 @@ const defaultFields = "Id,ContractNumber,AccountId,Status,StartDate,EndDate,Cont
 
 var Inputs = [...]core.Connection{
 	{Name: "access_token", Type: core.ConnectionTypeSecret, Label: "Salesforce Connection", Placeholder: "Connect Salesforce, or paste an access token", Required: true},
-	{Name: "instance_url", Type: core.ConnectionTypeString, Label: "Salesforce Instance URL", Placeholder: "Leave blank - taken from your connection", FromCredentialMeta: "instance_url"},
+	{Name: "instance_url", Type: core.ConnectionTypeString, Label: "Salesforce Instance URL", Placeholder: "Leave blank — taken from your connection", FromCredentialMeta: "instance_url"},
 	{Name: "fields", Type: core.ConnectionTypeString, Label: "Fields", Placeholder: "ContractNumber,Status,StartDate,EndDate - leave blank for the usual contract fields"},
 	{Name: "ends_on_or_after", Type: core.ConnectionTypeString, Label: "Ends On Or After", Placeholder: "TODAY - or a date like 2026-08-01; always applies, even with Match ANY on"},
 	{Name: "ends_on_or_before", Type: core.ConnectionTypeString, Label: "Ends On Or Before", Placeholder: "NEXT_N_DAYS:60 - the renewals window; always applies, even with Match ANY on"},

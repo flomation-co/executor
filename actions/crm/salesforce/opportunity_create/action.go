@@ -20,7 +20,7 @@ const (
 
 var Inputs = [...]core.Connection{
 	{Name: "access_token", Type: core.ConnectionTypeSecret, Label: "Salesforce Connection", Placeholder: "Connect Salesforce, or paste an access token", Required: true},
-	{Name: "instance_url", Type: core.ConnectionTypeString, Label: "Salesforce Instance URL", Placeholder: "Leave blank - taken from your connection", FromCredentialMeta: "instance_url"},
+	{Name: "instance_url", Type: core.ConnectionTypeString, Label: "Salesforce Instance URL", Placeholder: "Leave blank — taken from your connection", FromCredentialMeta: "instance_url"},
 	{Name: "name", Type: core.ConnectionTypeString, Label: "Opportunity Name", Placeholder: "Acme Ltd - 50 seat renewal", Required: true},
 	{Name: "close_date", Type: core.ConnectionTypeDateTime, Label: "Expected Close Date", Placeholder: "2026-09-30 (the date only - Salesforce ignores the time)", Required: true},
 	{Name: "stage_name", Type: core.ConnectionTypeString, Label: "Stage", Placeholder: "Prospecting - must match a stage in your Salesforce sales process", Required: true},

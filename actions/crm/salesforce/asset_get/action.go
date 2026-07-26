@@ -20,7 +20,7 @@ const (
 
 var Inputs = [...]core.Connection{
 	{Name: "access_token", Type: core.ConnectionTypeSecret, Label: "Salesforce Connection", Placeholder: "Connect Salesforce, or paste an access token", Required: true},
-	{Name: "instance_url", Type: core.ConnectionTypeString, Label: "Salesforce Instance URL", Placeholder: "Leave blank - taken from your connection", FromCredentialMeta: "instance_url"},
+	{Name: "instance_url", Type: core.ConnectionTypeString, Label: "Salesforce Instance URL", Placeholder: "Leave blank — taken from your connection", FromCredentialMeta: "instance_url"},
 	{Name: "asset_id", Type: core.ConnectionTypeString, Label: "Asset ID", Placeholder: "02i5f000000AbCdAAK - the asset's Salesforce ID, not its serial number", Required: true},
 	{Name: "fields", Type: core.ConnectionTypeString, Label: "Fields", Placeholder: "Name,SerialNumber,Status,InstallDate,UsageEndDate - leave blank to return every field"},
 }

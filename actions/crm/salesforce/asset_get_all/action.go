@@ -28,7 +28,7 @@ const defaultFields = "Id,Name,AccountId,ContactId,Product2Id,SerialNumber,Statu
 
 var Inputs = [...]core.Connection{
 	{Name: "access_token", Type: core.ConnectionTypeSecret, Label: "Salesforce Connection", Placeholder: "Connect Salesforce, or paste an access token", Required: true},
-	{Name: "instance_url", Type: core.ConnectionTypeString, Label: "Salesforce Instance URL", Placeholder: "Leave blank - taken from your connection", FromCredentialMeta: "instance_url"},
+	{Name: "instance_url", Type: core.ConnectionTypeString, Label: "Salesforce Instance URL", Placeholder: "Leave blank — taken from your connection", FromCredentialMeta: "instance_url"},
 	{Name: "fields", Type: core.ConnectionTypeString, Label: "Fields", Placeholder: "Name,SerialNumber,Status,UsageEndDate - leave blank for the usual asset fields"},
 	{Name: "warranty_ends_on_or_after", Type: core.ConnectionTypeString, Label: "Warranty Ends On Or After", Placeholder: "TODAY - or a date like 2026-08-01; always applies, even with Match ANY on"},
 	{Name: "warranty_ends_on_or_before", Type: core.ConnectionTypeString, Label: "Warranty Ends On Or Before", Placeholder: "NEXT_N_DAYS:30 - the expiring-warranty window; always applies, even with Match ANY on"},

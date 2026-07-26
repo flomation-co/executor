@@ -39,7 +39,7 @@ const lookupFields = "Id,Name,Username,IsActive"
 
 var Inputs = [...]core.Connection{
 	{Name: "access_token", Type: core.ConnectionTypeSecret, Label: "Salesforce Connection", Placeholder: "Connect Salesforce, or paste an access token", Required: true},
-	{Name: "instance_url", Type: core.ConnectionTypeString, Label: "Salesforce Instance URL", Placeholder: "Leave blank - taken from your connection", FromCredentialMeta: "instance_url"},
+	{Name: "instance_url", Type: core.ConnectionTypeString, Label: "Salesforce Instance URL", Placeholder: "Leave blank — taken from your connection", FromCredentialMeta: "instance_url"},
 	{Name: "user_id", Type: core.ConnectionTypeString, Label: "User ID", Placeholder: "0055f00000AbCdEAAV — every Salesforce user ID starts with 005", Required: true},
 }
 

@@ -32,7 +32,7 @@ const (
 
 var Inputs = [...]core.Connection{
 	{Name: "access_token", Type: core.ConnectionTypeSecret, Label: "Salesforce Connection", Placeholder: "Connect Salesforce, or paste an access token", Required: true},
-	{Name: "instance_url", Type: core.ConnectionTypeString, Label: "Salesforce Instance URL", Placeholder: "Leave blank - taken from your connection", FromCredentialMeta: "instance_url"},
+	{Name: "instance_url", Type: core.ConnectionTypeString, Label: "Salesforce Instance URL", Placeholder: "Leave blank — taken from your connection", FromCredentialMeta: "instance_url"},
 	{Name: "report_id", Type: core.ConnectionTypeString, Label: "Report", Placeholder: "00O5f000004XyzAEAS — the report ID from Get Many Reports", Required: true},
 	{Name: "include_details", Type: core.ConnectionTypeBoolean, Label: "Include the Individual Rows"},
 	{Name: "report_filters", Type: core.ConnectionTypeObject, Label: "Filters for This Run (JSON)", Placeholder: `[{"column":"CREATED_DATE","operator":"greaterThan","value":"THIS_MONTH"}]`},

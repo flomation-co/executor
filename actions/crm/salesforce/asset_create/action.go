@@ -20,7 +20,7 @@ const (
 
 var Inputs = [...]core.Connection{
 	{Name: "access_token", Type: core.ConnectionTypeSecret, Label: "Salesforce Connection", Placeholder: "Connect Salesforce, or paste an access token", Required: true},
-	{Name: "instance_url", Type: core.ConnectionTypeString, Label: "Salesforce Instance URL", Placeholder: "Leave blank - taken from your connection", FromCredentialMeta: "instance_url"},
+	{Name: "instance_url", Type: core.ConnectionTypeString, Label: "Salesforce Instance URL", Placeholder: "Leave blank — taken from your connection", FromCredentialMeta: "instance_url"},
 	{Name: "name", Type: core.ConnectionTypeString, Label: "Asset Name", Placeholder: "GenWatt Diesel 1000kW - Edge Communications (up to 255 characters)", Required: true},
 	{Name: "account_id", Type: core.ConnectionTypeString, Label: "Customer (Account)", Placeholder: "0015f00000AbCdEAAV - every asset needs an account, a contact, or both"},
 	{Name: "contact_id", Type: core.ConnectionTypeString, Label: "Customer (Contact)", Placeholder: "0035f00000XyZabAAF - every asset needs an account, a contact, or both"},

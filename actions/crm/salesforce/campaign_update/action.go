@@ -22,7 +22,7 @@ const (
 
 var Inputs = [...]core.Connection{
 	{Name: "access_token", Type: core.ConnectionTypeSecret, Label: "Salesforce Connection", Placeholder: "Connect Salesforce, or paste an access token", Required: true},
-	{Name: "instance_url", Type: core.ConnectionTypeString, Label: "Salesforce Instance URL", Placeholder: "Leave blank - taken from your connection", FromCredentialMeta: "instance_url"},
+	{Name: "instance_url", Type: core.ConnectionTypeString, Label: "Salesforce Instance URL", Placeholder: "Leave blank — taken from your connection", FromCredentialMeta: "instance_url"},
 	{Name: "campaign_id", Type: core.ConnectionTypeString, Label: "Campaign ID", Placeholder: "701... — copy it from the end of the campaign's web address", Required: true},
 	{Name: "campaign_name", Type: core.ConnectionTypeString, Label: "Campaign Name", Placeholder: "Autumn Open Day 2026"},
 	{Name: "campaign_type", Type: core.ConnectionTypeString, Label: "Campaign Type", Placeholder: "Webinar, Conference, Trade Show, Email, Advertisement, Direct Mail, Other"},

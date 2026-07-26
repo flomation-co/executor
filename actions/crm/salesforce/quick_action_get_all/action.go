@@ -27,7 +27,7 @@ const (
 
 var Inputs = [...]core.Connection{
 	{Name: "access_token", Type: core.ConnectionTypeSecret, Label: "Salesforce Connection", Placeholder: "Connect Salesforce, or paste an access token", Required: true},
-	{Name: "instance_url", Type: core.ConnectionTypeString, Label: "Salesforce Instance URL", Placeholder: "Leave blank - taken from your connection", FromCredentialMeta: "instance_url"},
+	{Name: "instance_url", Type: core.ConnectionTypeString, Label: "Salesforce Instance URL", Placeholder: "Leave blank — taken from your connection", FromCredentialMeta: "instance_url"},
 	{Name: "object", Type: core.ConnectionTypeString, Label: "Record Type", Placeholder: "Account — leave blank for the org-wide quick actions"},
 	{Name: "name_contains", Type: core.ConnectionTypeString, Label: "Name Contains", Placeholder: "call — leave blank to list them all"},
 	{Name: "limit", Type: core.ConnectionTypeInteger, Label: "Limit", Placeholder: "Most quick actions to return — leave blank for all of them"},

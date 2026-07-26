@@ -24,7 +24,7 @@ const (
 
 var Inputs = [...]core.Connection{
 	{Name: "access_token", Type: core.ConnectionTypeSecret, Label: "Salesforce Connection", Placeholder: "Connect Salesforce, or paste an access token", Required: true},
-	{Name: "instance_url", Type: core.ConnectionTypeString, Label: "Salesforce Instance URL", Placeholder: "Leave blank - taken from your connection", FromCredentialMeta: "instance_url"},
+	{Name: "instance_url", Type: core.ConnectionTypeString, Label: "Salesforce Instance URL", Placeholder: "Leave blank — taken from your connection", FromCredentialMeta: "instance_url"},
 	{Name: "object", Type: core.ConnectionTypeString, Label: "Record Type", Placeholder: "Opportunity, Lead, Account, Invoice__c", Required: true},
 	{Name: "list_view_id", Type: core.ConnectionTypeString, Label: "List View", Placeholder: "00B5f000004XyzAEAS — from Get Many List Views", Required: true},
 	{Name: "return_all", Type: core.ConnectionTypeBoolean, Label: "Return Every Page", Placeholder: "Keep fetching until every record in the view has been returned"},

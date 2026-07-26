@@ -44,7 +44,7 @@ const (
 
 var Inputs = [...]core.Connection{
 	{Name: "access_token", Type: core.ConnectionTypeSecret, Label: "Salesforce Connection", Placeholder: "Connect Salesforce, or paste an access token", Required: true},
-	{Name: "instance_url", Type: core.ConnectionTypeString, Label: "Salesforce Instance URL", Placeholder: "Leave blank - taken from your connection", FromCredentialMeta: "instance_url"},
+	{Name: "instance_url", Type: core.ConnectionTypeString, Label: "Salesforce Instance URL", Placeholder: "Leave blank — taken from your connection", FromCredentialMeta: "instance_url"},
 	{Name: "work_item_id", Type: core.ConnectionTypeString, Label: "Approval Request", Placeholder: "04i5f00000AbcDEAA — from Submit for Approval, or Get Many Approval Processes", Required: true},
 	{Name: "comments", Type: core.ConnectionTypeText, Label: "Reason for Rejecting", Placeholder: "Priced below our floor — resubmit at 15% or less"},
 	{Name: "additional_fields", Type: core.ConnectionTypeObject, Label: "Additional Fields", Placeholder: "{\"comments\":\"Rejected\"} — any other approval request field"},

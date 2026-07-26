@@ -21,7 +21,7 @@ const (
 
 var Inputs = [...]core.Connection{
 	{Name: "access_token", Type: core.ConnectionTypeSecret, Label: "Salesforce Connection", Placeholder: "Connect Salesforce, or paste an access token", Required: true},
-	{Name: "instance_url", Type: core.ConnectionTypeString, Label: "Salesforce Instance URL", Placeholder: "Leave blank - taken from your connection", FromCredentialMeta: "instance_url"},
+	{Name: "instance_url", Type: core.ConnectionTypeString, Label: "Salesforce Instance URL", Placeholder: "Leave blank — taken from your connection", FromCredentialMeta: "instance_url"},
 	{Name: "event_id", Type: core.ConnectionTypeString, Label: "Event ID", Placeholder: "00U5f00000AbCdEEAV", Required: true},
 	{Name: "event_subject", Type: core.ConnectionTypeString, Label: "Subject", Placeholder: "Discovery call"},
 	{Name: "start_date_time", Type: core.ConnectionTypeDateTime, Label: "Starts", Placeholder: "The new start time"},

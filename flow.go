@@ -91,11 +91,18 @@ func getCredentialMetaLinks() map[string]map[string]string {
 	return credentialMetaLinks
 }
 
-// credentialRefPattern matches a whole-value ${credentials.NAME} reference — and
+// credentialRefPattern matches a WHOLE-VALUE ${credentials.NAME} reference — and
 // deliberately NOT ${credentials.NAME.key}, which is already resolved to a
 // metadata value and is not the connection itself. Credential names are
 // sanitised to [A-Za-z0-9_-] (no dots), so the absence of a dot is a reliable
 // discriminator.
+//
+// WHOLE-VALUE ONLY, BY DESIGN, and worth stating because the failure is silent.
+// A compound expression such as "${credentials.NAME}/suffix" is not a binding
+// form today, but if one is ever introduced this will not match it: the linked
+// input simply stays blank rather than erroring, and the operator gets an empty
+// field with no explanation. Anyone adding a new binding form must extend this
+// pattern deliberately rather than assume it generalises.
 var credentialRefPattern = regexp.MustCompile(`^\$\{credentials\.([A-Za-z0-9_-]+)\}$`)
 
 // autofillFromCredential fills blank inputs that declare FromCredentialMeta,

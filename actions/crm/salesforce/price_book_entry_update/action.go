@@ -21,7 +21,7 @@ const (
 
 var Inputs = [...]core.Connection{
 	{Name: "access_token", Type: core.ConnectionTypeSecret, Label: "Salesforce Connection", Placeholder: "Connect Salesforce, or paste an access token", Required: true},
-	{Name: "instance_url", Type: core.ConnectionTypeString, Label: "Salesforce Instance URL", Placeholder: "Leave blank - taken from your connection", FromCredentialMeta: "instance_url"},
+	{Name: "instance_url", Type: core.ConnectionTypeString, Label: "Salesforce Instance URL", Placeholder: "Leave blank — taken from your connection", FromCredentialMeta: "instance_url"},
 	{Name: "pricebook_entry_id", Type: core.ConnectionTypeString, Label: "Price Book Entry", Placeholder: "01u5f000000AbCdAAK - use Get Many Price Book Entries to find the price you want to change", Required: true},
 	{Name: "unit_price", Type: core.ConnectionTypeString, Label: "Price Each", Placeholder: "27500.00 - plain numbers only, no currency symbols or commas"},
 	{Name: "is_active", Type: core.ConnectionTypeBoolean, Label: "Price Can Be Used (untick to stop it being quoted)"},

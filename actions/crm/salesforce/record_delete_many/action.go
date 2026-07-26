@@ -30,7 +30,7 @@ const (
 
 var Inputs = [...]core.Connection{
 	{Name: "access_token", Type: core.ConnectionTypeSecret, Label: "Salesforce Connection", Placeholder: "Connect Salesforce, or paste an access token", Required: true},
-	{Name: "instance_url", Type: core.ConnectionTypeString, Label: "Salesforce Instance URL", Placeholder: "Leave blank - taken from your connection", FromCredentialMeta: "instance_url"},
+	{Name: "instance_url", Type: core.ConnectionTypeString, Label: "Salesforce Instance URL", Placeholder: "Leave blank — taken from your connection", FromCredentialMeta: "instance_url"},
 	{Name: "record_ids", Type: core.ConnectionTypeString, Label: "Record IDs", Placeholder: "0035f000...,0035f000... — comma separated, or a list from an earlier step", Required: true},
 	{Name: "all_or_none", Type: core.ConnectionTypeBoolean, Label: "Roll Everything Back If Any Record Fails"},
 }

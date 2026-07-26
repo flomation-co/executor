@@ -21,7 +21,7 @@ const (
 
 var Inputs = [...]core.Connection{
 	{Name: "access_token", Type: core.ConnectionTypeSecret, Label: "Salesforce Connection", Placeholder: "Connect Salesforce, or paste an access token", Required: true},
-	{Name: "instance_url", Type: core.ConnectionTypeString, Label: "Salesforce Instance URL", Placeholder: "Leave blank - taken from your connection", FromCredentialMeta: "instance_url"},
+	{Name: "instance_url", Type: core.ConnectionTypeString, Label: "Salesforce Instance URL", Placeholder: "Leave blank — taken from your connection", FromCredentialMeta: "instance_url"},
 	{Name: "query", Type: core.ConnectionTypeText, Label: "Query", Placeholder: "SELECT Id, Name, IsDeleted FROM Account WHERE IsDeleted = true", Required: true},
 	{Name: "return_all", Type: core.ConnectionTypeBoolean, Label: "Return Every Page", Placeholder: "Keep fetching until every matching record has been returned"},
 }

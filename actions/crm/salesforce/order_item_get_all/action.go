@@ -30,7 +30,7 @@ const defaultFields = "Id,OrderItemNumber,OrderId,Product2Id,Product2.Name,Price
 
 var Inputs = [...]core.Connection{
 	{Name: "access_token", Type: core.ConnectionTypeSecret, Label: "Salesforce Connection", Placeholder: "Connect Salesforce, or paste an access token", Required: true},
-	{Name: "instance_url", Type: core.ConnectionTypeString, Label: "Salesforce Instance URL", Placeholder: "Leave blank - taken from your connection", FromCredentialMeta: "instance_url"},
+	{Name: "instance_url", Type: core.ConnectionTypeString, Label: "Salesforce Instance URL", Placeholder: "Leave blank — taken from your connection", FromCredentialMeta: "instance_url"},
 	{Name: "order_id", Type: core.ConnectionTypeString, Label: "Order ID", Placeholder: "8015f000000AbCdAAK - the order whose products you want", Required: true},
 	{Name: "fields", Type: core.ConnectionTypeString, Label: "Fields", Placeholder: "Product2.Name,Quantity,UnitPrice,TotalPrice - leave blank for the usual order-line fields"},
 	{Name: "order_by", Type: core.ConnectionTypeString, Label: "Sort By", Placeholder: "TotalPrice DESC - or ServiceDate ASC"},

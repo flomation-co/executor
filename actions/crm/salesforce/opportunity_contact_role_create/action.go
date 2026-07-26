@@ -20,7 +20,7 @@ const (
 
 var Inputs = [...]core.Connection{
 	{Name: "access_token", Type: core.ConnectionTypeSecret, Label: "Salesforce Connection", Placeholder: "Connect Salesforce, or paste an access token", Required: true},
-	{Name: "instance_url", Type: core.ConnectionTypeString, Label: "Salesforce Instance URL", Placeholder: "Leave blank - taken from your connection", FromCredentialMeta: "instance_url"},
+	{Name: "instance_url", Type: core.ConnectionTypeString, Label: "Salesforce Instance URL", Placeholder: "Leave blank — taken from your connection", FromCredentialMeta: "instance_url"},
 	{Name: "opportunity_id", Type: core.ConnectionTypeString, Label: "Opportunity ID", Placeholder: "0065f00000AbCdEAAV - the deal", Required: true},
 	{Name: "contact_id", Type: core.ConnectionTypeString, Label: "Contact", Placeholder: "0035f00000AbCdEAAV - the person involved in the deal", Required: true},
 	{Name: "role", Type: core.ConnectionTypeString, Label: "Role", Placeholder: "Decision Maker, Influencer, Economic Buyer, Evaluator..."},

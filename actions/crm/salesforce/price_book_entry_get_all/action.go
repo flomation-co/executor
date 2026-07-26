@@ -36,7 +36,7 @@ const defaultFields = "Id,Name,ProductCode,UnitPrice,IsActive,UseStandardPrice,P
 
 var Inputs = [...]core.Connection{
 	{Name: "access_token", Type: core.ConnectionTypeSecret, Label: "Salesforce Connection", Placeholder: "Connect Salesforce, or paste an access token", Required: true},
-	{Name: "instance_url", Type: core.ConnectionTypeString, Label: "Salesforce Instance URL", Placeholder: "Leave blank - taken from your connection", FromCredentialMeta: "instance_url"},
+	{Name: "instance_url", Type: core.ConnectionTypeString, Label: "Salesforce Instance URL", Placeholder: "Leave blank — taken from your connection", FromCredentialMeta: "instance_url"},
 	{Name: "pricebook_id", Type: core.ConnectionTypeString, Label: "Price Book", Placeholder: "01s5f000004AbCdAAK - only prices from this price book (leave blank for all of them)"},
 	{Name: "product_id", Type: core.ConnectionTypeString, Label: "Product", Placeholder: "01t5f000004AbCdAAK - only prices for this product (leave blank for all of them)"},
 	{Name: "product_code", Type: core.ConnectionTypeString, Label: "Product Code", Placeholder: "GC1040 - use this instead of Product if all you have is the catalogue code"},

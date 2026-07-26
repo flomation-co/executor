@@ -47,7 +47,7 @@ const defaultOrder = "MessageDate DESC"
 
 var Inputs = [...]core.Connection{
 	{Name: "access_token", Type: core.ConnectionTypeSecret, Label: "Salesforce Connection", Placeholder: "Connect Salesforce, or paste an access token", Required: true},
-	{Name: "instance_url", Type: core.ConnectionTypeString, Label: "Salesforce Instance URL", Placeholder: "Leave blank - taken from your connection", FromCredentialMeta: "instance_url"},
+	{Name: "instance_url", Type: core.ConnectionTypeString, Label: "Salesforce Instance URL", Placeholder: "Leave blank — taken from your connection", FromCredentialMeta: "instance_url"},
 	{Name: "parent_id", Type: core.ConnectionTypeString, Label: "Case", Placeholder: "5005f00000AbcDEAA — read the email thread on this Case"},
 	{Name: "related_to_id", Type: core.ConnectionTypeString, Label: "Related To Record", Placeholder: "0065f00000AbcDEAA — read emails linked to this Account, Opportunity or other record"},
 	{
