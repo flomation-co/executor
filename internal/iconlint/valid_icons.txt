@@ -230,3 +230,4 @@ x-twitter
 xero
 xmark
 zendesk
+salesforce
