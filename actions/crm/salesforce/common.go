@@ -2303,10 +2303,25 @@ func ListResult(records []map[string]interface{}, nextURL string, totalSize int,
 // single most-used action in the node, and Flomation's explicit Loop node makes
 // an operator's call volume the thing most likely to break their org.
 func TruncationHint(returned, limit int, returnAll bool) string {
-	if returnAll || limit <= 0 || returned < limit {
+	if returnAll {
 		return ""
 	}
-	return fmt.Sprintf(" — this is the first %d; raise the Limit or turn on Return All if you need the rest", limit)
+	// Clamp exactly as the QUERY did. Every caller passes the operator's raw
+	// Limit input, but the query it built used ClampLimit — which substitutes
+	// DefaultPageLimit when the input is blank. Comparing against the raw value
+	// meant a blank Limit (0) short-circuited to "" and the hint never fired,
+	// so the single most common configuration — leave Limit alone, more than
+	// DefaultPageLimit records match — returned a capped list that read as the
+	// complete answer. Which is the exact failure this function exists to stop.
+	//
+	// Clamping HERE rather than at the 19 call sites is deliberate: the two
+	// values have to agree, and one place that cannot disagree with itself
+	// beats nineteen that have to remember to.
+	effective := ClampLimit(limit, limit > 0)
+	if effective <= 0 || returned < effective {
+		return ""
+	}
+	return fmt.Sprintf(" — this is the first %d; raise the Limit or turn on Return All if you need the rest", effective)
 }
 
 // BulkResult shapes a Collections outcome into the standard bulk output.

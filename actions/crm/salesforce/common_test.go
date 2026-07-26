@@ -2,6 +2,7 @@ package salesforce
 
 import (
 	"encoding/json"
+	"fmt"
 	"io"
 	"net/http"
 	"net/http/httptest"
@@ -1465,7 +1466,36 @@ func TestTruncationHintOnlyFiresWhenTheListWasActuallyCapped(t *testing.T) {
 	if got := TruncationHint(50, 50, true); got != "" {
 		t.Errorf("Return All already fetched everything — no hint: %q", got)
 	}
-	if got := TruncationHint(50, 0, false); got != "" {
-		t.Errorf("no limit applied — no hint: %q", got)
+}
+
+// The regression this fix exists for, and the commonest configuration there is:
+// the operator leaves Limit blank. The QUERY still gets a limit — ClampLimit
+// substitutes DefaultPageLimit — so the list IS capped, but comparing against
+// the raw 0 short-circuited to "" and the hint never fired. A capped list then
+// read as the complete answer, which is the one outcome this function exists to
+// prevent.
+func TestTruncationHintFiresOnTheDefaultLimit(t *testing.T) {
+	// Blank Limit, and exactly DefaultPageLimit rows came back — the query was
+	// capped whether the operator asked for it or not.
+	got := TruncationHint(DefaultPageLimit, 0, false)
+	if got == "" {
+		t.Fatalf("a blank Limit still caps the query at %d — a full page MUST warn", DefaultPageLimit)
+	}
+	if !strings.Contains(got, fmt.Sprintf("first %d", DefaultPageLimit)) {
+		t.Errorf("the hint must name the limit that actually applied: %q", got)
+	}
+	// ...and a short page under the default is still the complete answer.
+	if got := TruncationHint(DefaultPageLimit-1, 0, false); got != "" {
+		t.Errorf("a partial page under the default needs no hint: %q", got)
+	}
+	// An over-large Limit is clamped by the query to MaxPageLimit, so the hint
+	// has to name the clamped value, not the operator's number.
+	got = TruncationHint(MaxPageLimit, MaxPageLimit+500, false)
+	if !strings.Contains(got, fmt.Sprintf("first %d", MaxPageLimit)) {
+		t.Errorf("an over-large Limit must report the clamped value: %q", got)
+	}
+	// Return All still wins over everything.
+	if got := TruncationHint(DefaultPageLimit, 0, true); got != "" {
+		t.Errorf("Return All fetched everything — no hint: %q", got)
 	}
 }
