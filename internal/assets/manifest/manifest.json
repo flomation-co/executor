@@ -182613,7 +182613,7 @@
     ]
   },
   "crm/salesforce/account_add_note": {
-    "hash": "ea17b651dc774fbdf5a642344064bb971683684d38a7dc819e70b91277bc35b5",
+    "hash": "a43486edf8eeb49882bdfd7f921ebe13ff41fed8a43a922ae3a42c945bcedb2a",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Add Note to Account (Classic)",
@@ -182646,8 +182646,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank — taken from your connection",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "account_id",
@@ -182733,7 +182733,7 @@
     ]
   },
   "crm/salesforce/account_contact_relation_create": {
-    "hash": "42032339d0917dbc39ca3f57f66e218b55fbadce7b18136fcbd3212a3c5ea916",
+    "hash": "85ed1c3886e5f2059767696f297159fe90872d2a3c7e21393b5add799f696cb2",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Relate Contact to Account",
@@ -182766,8 +182766,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank — taken from your connection",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "account_id",
@@ -182860,7 +182860,7 @@
     ]
   },
   "crm/salesforce/account_contact_relation_delete": {
-    "hash": "71b119877a6eeebe541a692266051dd0c947804d36ffd9981433ad91f471badf",
+    "hash": "7a1e06145d93fb3ae116cf6f3a082cec048f0dd1f1ec07b8c949a0fdaf1e723b",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Remove Contact from Account",
@@ -182893,8 +182893,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank — taken from your connection",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "relation_id",
@@ -182944,7 +182944,7 @@
     ]
   },
   "crm/salesforce/account_contact_relation_get_all": {
-    "hash": "04ac55c9e7b06eb415d6cfdfea6d79436e9cf1e239baf5c2d9cfa0b13d15e999",
+    "hash": "0eb59da5653a8c12f6091d57c4a66a711d24c05877e9aacc733a73f23f904bbb",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Get Many Account-Contact Relationships",
@@ -182977,8 +182977,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank — taken from your connection",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "account_id",
@@ -183097,7 +183097,7 @@
     ]
   },
   "crm/salesforce/account_create": {
-    "hash": "e86e4545e2abc3f16c763ef647e1dd3fff371b06cd863515da93c1feb22b5a08",
+    "hash": "29430ff7ef0dda54639f3596005ead4bdd4a7f3b05920d3186fd9286b753d2e9",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Create Account",
@@ -183130,8 +183130,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank — taken from your connection",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "name",
@@ -183363,7 +183363,7 @@
     ]
   },
   "crm/salesforce/account_delete": {
-    "hash": "f0d2282a84e405a733b59faec990a1fc5f73c38cbcaea0e0c25e2638c6c7be9e",
+    "hash": "c77da84d6b085d38e4a10fd6209f678b7be372c77d688c4a13dc90a2d2591363",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Delete Account",
@@ -183396,8 +183396,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank — taken from your connection",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "account_id",
@@ -183447,7 +183447,7 @@
     ]
   },
   "crm/salesforce/account_describe": {
-    "hash": "2c3455140d23d8280e5899d040b7e03a8d2c12b0972617f378e77497ac4ea5f0",
+    "hash": "55918357fcb09da7633bb8446d82ef235acec7505fcdead9c4eec8819b137767",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Get Account Setup Info",
@@ -183480,8 +183480,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank — taken from your connection",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "detail_level",
@@ -183540,7 +183540,7 @@
     ]
   },
   "crm/salesforce/account_get": {
-    "hash": "7f2ecd2f4fb27e6d648f383ac3d164c51c544409c5905e27abca1d4796673535",
+    "hash": "6396de944b71070ee6c44c56134b81bf7ae54d6e7dadf4edd6a89da58d25bb91",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Get Account",
@@ -183573,8 +183573,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank — taken from your connection",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "account_id",
@@ -183631,7 +183631,7 @@
     ]
   },
   "crm/salesforce/account_get_all": {
-    "hash": "b968e6e04bfc3aeef59268299a1d137908af633fab4f1fc563681995c6c90c51",
+    "hash": "d1bc7f15cd736a6a1051bb7c2ca140c5c0dfe789d4a04b6c44adc0b832898f1d",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Get Many Accounts",
@@ -183664,8 +183664,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank — taken from your connection",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "return_all",
@@ -183840,7 +183840,7 @@
     ]
   },
   "crm/salesforce/account_update": {
-    "hash": "96de7b5b896ed1445a288010968ff0e6634f198d33f92ed06dfa8b6ca516b52c",
+    "hash": "e080e5e279fde0cbfb3c7743d8cc8d1415a5b4034676826fed7f4d1b1e1ed022",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Update Account",
@@ -183873,8 +183873,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank — taken from your connection",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "account_id",
@@ -184113,7 +184113,7 @@
     ]
   },
   "crm/salesforce/account_upsert": {
-    "hash": "4d40069a802c17688b83fd678ee16e4d6e08a3967299c4e9459b0fa851135448",
+    "hash": "fe4e20742efebe57bb397573fe11b504f77eba0bff44baf2724187b574d7d431",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Create or Update Account",
@@ -184146,8 +184146,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank — taken from your connection",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "external_id_field",
@@ -184394,7 +184394,7 @@
     ]
   },
   "crm/salesforce/api_request": {
-    "hash": "40166cb1de31b07a0124da6f4c946fd4465b5b79dcf321db523ed0936a3ed6bb",
+    "hash": "10a1bf59a2638e7e83ed667929f3d1524fbae9179f30613ff640db8cd69d6a51",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Custom API Call",
@@ -184427,8 +184427,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank — taken from your connection",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "method",
@@ -184529,7 +184529,7 @@
     ]
   },
   "crm/salesforce/approval_approve": {
-    "hash": "0ff4696680fdf40c40858d1460166eb84b11dbfcf26f2965919ea1e2dc11ddd0",
+    "hash": "29ebbb1c2e177df6e4bb7ddbacda9c41ed896d4ebd5c50007a8128617ce047da",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Approve Request",
@@ -184562,8 +184562,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank — taken from your connection",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "work_item_id",
@@ -184634,7 +184634,7 @@
     ]
   },
   "crm/salesforce/approval_get_all": {
-    "hash": "32f50f5c5efae229cb22fa28e9736775d2c40a61b2ef1cd12b66ec9ae7d51502",
+    "hash": "4f95b9ab8e690db3ef278b686aaaf7baefbc660ba53b0d9110ffd84be00cc695",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Get Many Approval Processes",
@@ -184667,8 +184667,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank — taken from your connection",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "object",
@@ -184759,7 +184759,7 @@
     ]
   },
   "crm/salesforce/approval_reject": {
-    "hash": "430fd7b9ed4915a7d07bb4f2035b1e8a83a28f3c8e997d34e7bd78b76414b974",
+    "hash": "7b6f40dff2f67c612f90c7bedea70402951d6e7d1168e09d52ebe0405e39ef3a",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Reject Request",
@@ -184792,8 +184792,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank — taken from your connection",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "work_item_id",
@@ -184857,7 +184857,7 @@
     ]
   },
   "crm/salesforce/approval_submit": {
-    "hash": "e6986f3bffbee26354ab4c3623ca09c3817b7418a4a8304023784541997587d8",
+    "hash": "e3efaebbfcb426501919cd3ff6c7c16892ada02639689e641ddf4d22c6711e52",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Submit for Approval",
@@ -184890,8 +184890,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank — taken from your connection",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "object",
@@ -184990,7 +184990,7 @@
     ]
   },
   "crm/salesforce/asset_create": {
-    "hash": "00146a85698190de853b502a73da62bfc7f8ea19dd412d6065ff4e517f163c9b",
+    "hash": "126f48e1fb7518df7240af3fd09e6733078d73d7e4fe0342a4511cea6485248f",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Create Asset",
@@ -185023,8 +185023,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank — taken from your connection",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "name",
@@ -185242,7 +185242,7 @@
     ]
   },
   "crm/salesforce/asset_delete": {
-    "hash": "9850e9b5e06b3c17542c945c05544d561902218478cecc598b096c7b5a243f30",
+    "hash": "9d0df5e7c3589e1d7828142a39e8fded4aa12e9797101123ec42a4d3e1069273",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Delete Asset",
@@ -185275,8 +185275,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank — taken from your connection",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "asset_id",
@@ -185326,7 +185326,7 @@
     ]
   },
   "crm/salesforce/asset_get": {
-    "hash": "a25bd115c3488871b2b677ff3bca6e17ed28ac3d09f50d26a5f4e51a31674d98",
+    "hash": "cacd8493a569806ffc2ad96a084ff89401e277f6104718c9811a2980a452c290",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Get Asset",
@@ -185359,8 +185359,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank — taken from your connection",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "asset_id",
@@ -185417,7 +185417,7 @@
     ]
   },
   "crm/salesforce/asset_get_all": {
-    "hash": "864e5632cde14897889991a4c7f3e488a8380f7e5748a1cd51ba2804a93c91d3",
+    "hash": "97801bdebc6c205765511dd717de9cae50a3de96df10463e68a4d82f340334f1",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Get Many Assets",
@@ -185450,8 +185450,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank — taken from your connection",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "fields",
@@ -185675,7 +185675,7 @@
     ]
   },
   "crm/salesforce/asset_update": {
-    "hash": "1ab067821a5e30c4d18de6d4ebb530a5aa9a712e7888825e8d6bc8b0c74b50e2",
+    "hash": "9e67fe0063564db0f1ec9f2653bf1181efda052b55d64964918b4694e6d12279",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Update Asset",
@@ -185708,8 +185708,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank — taken from your connection",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "asset_id",
@@ -185927,7 +185927,7 @@
     ]
   },
   "crm/salesforce/attachment_create": {
-    "hash": "77c5d00e1ed4ec2735ece204ca89c285eda1ae4201156ed6d77a3127e432568a",
+    "hash": "815f8ba90bb0635b973be803c9bbf6762842b19e22680c9549b648c9dc9f72ea",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Create Attachment (Classic)",
@@ -185960,8 +185960,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank — taken from your connection",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "object",
@@ -186069,7 +186069,7 @@
     ]
   },
   "crm/salesforce/attachment_delete": {
-    "hash": "708305da9e51ef48d971d29a2ed3e122e9901be5d90b13d40fa6af3a7a7af543",
+    "hash": "3431b4ffec1a9e7bd904bb2d0344776e4b40d5d589ed76b21b4e8469d7e6848b",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Delete Attachment (Classic)",
@@ -186102,8 +186102,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank — taken from your connection",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "attachment_id",
@@ -186153,7 +186153,7 @@
     ]
   },
   "crm/salesforce/attachment_describe": {
-    "hash": "23531c9e9db497d7ea2b367b2bce0c71c6f0e60a1794db8fa4515c6d14d48d71",
+    "hash": "9765e1d0416ea222e2b60fde2ed3793840a2397145a7cc47a66268a33b40d21e",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Describe Attachments (Classic)",
@@ -186186,8 +186186,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank — taken from your connection",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "include_fields",
@@ -186236,7 +186236,7 @@
     ]
   },
   "crm/salesforce/attachment_download": {
-    "hash": "5d3c94c1f975bd58f44ec94b3e82733d007ce922d7536b29cf6f70ff73d405fd",
+    "hash": "c0e1ddbe84f3f05780109c39a37b729b465db1b09674550b13bd1bd94ec5bae5",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Download Attachment (Classic)",
@@ -186269,8 +186269,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank — taken from your connection",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "attachment_id",
@@ -186355,7 +186355,7 @@
     ]
   },
   "crm/salesforce/attachment_get": {
-    "hash": "f75c7290bc9e29ef0fe7ddc301503da03bbac4b48ee2502ac1b7280fd70bcf2e",
+    "hash": "31814c5617d5a892351c122b568ff4b32c19f9aa5fa17777d2c000a1628cc89f",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Get Attachment (Classic)",
@@ -186388,8 +186388,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank — taken from your connection",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "attachment_id",
@@ -186446,7 +186446,7 @@
     ]
   },
   "crm/salesforce/attachment_get_all": {
-    "hash": "4ff31953f1b6237bda09f1608698355b292427b679681ace75e0c51ea6772a57",
+    "hash": "5970b78d194960cdfca4ef3298da910e054b475207ab4c9c0d7050b3e398f35b",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Get Many Attachments (Classic)",
@@ -186479,8 +186479,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank — taken from your connection",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "return_all",
@@ -186655,7 +186655,7 @@
     ]
   },
   "crm/salesforce/attachment_update": {
-    "hash": "0751369bde18abd2158d7c816cf63aa8d718c24a92688facf29f292fccba4fe6",
+    "hash": "3dcb797368cb43f65420c786e6f714593a945d3eb4dec7ab6350bc7994eea3e0",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Update Attachment (Classic)",
@@ -186688,8 +186688,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank — taken from your connection",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "attachment_id",
@@ -186788,7 +186788,7 @@
     ]
   },
   "crm/salesforce/campaign_create": {
-    "hash": "9916f19d26c0adf1cdc4420227b45e33b2e1ac6851f184a489622b355d2a0521",
+    "hash": "37735dee34de35a326cb60dbdbfe3b1b5eb3c79ac6255c17e7f069b7323211b8",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Create Campaign",
@@ -186821,8 +186821,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank — taken from your connection",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "campaign_name",
@@ -186977,7 +186977,7 @@
     ]
   },
   "crm/salesforce/campaign_delete": {
-    "hash": "28b2b5fc74d0f025525357598ec0eb209c879b6b5a9c541ee721b046a800d7bf",
+    "hash": "273f95799e33bd87029952b68345e4f06824e2379fef5471cc394e6a8cd9e18c",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Delete Campaign",
@@ -187010,8 +187010,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank — taken from your connection",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "campaign_id",
@@ -187061,7 +187061,7 @@
     ]
   },
   "crm/salesforce/campaign_get": {
-    "hash": "8fc500cfce5caca35fa07d5bef0736ad4c0e79a6100a8ff2755c74066687da80",
+    "hash": "dfc532c9d63bd9cfd6ed8b6a7617fb020737c814abe4a2f144a4ae1a66e0420c",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Get Campaign",
@@ -187094,8 +187094,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank — taken from your connection",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "campaign_id",
@@ -187152,7 +187152,7 @@
     ]
   },
   "crm/salesforce/campaign_get_all": {
-    "hash": "5072613dfb443faaecbe2344ac82c4ee0e68ca006ec005edea0b9985bccd3662",
+    "hash": "ea027c0749243df73edaec6ea10af2366ef936a88a681787a84f63f6d3f460bd",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Get Many Campaigns",
@@ -187185,8 +187185,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank — taken from your connection",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "fields",
@@ -187382,7 +187382,7 @@
     ]
   },
   "crm/salesforce/campaign_member_create": {
-    "hash": "961ff4316990934826c85c81d596d14f4eade166728c771a647bbd5c0ad227d0",
+    "hash": "21c078df6b5f19e4650148756ada7cef189f9c0b4c075dfb134b12b815c11855",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Add Campaign Member",
@@ -187415,8 +187415,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank — taken from your connection",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "campaign_id",
@@ -187494,7 +187494,7 @@
     ]
   },
   "crm/salesforce/campaign_member_delete": {
-    "hash": "13733a759eecba85145a56966042067aeb651f127c6962aa5585b7db51f54552",
+    "hash": "4adfb981c79760a4e59d21d2200e8e1d7897be99d2d378f846d9baba914e6583",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Remove Campaign Member",
@@ -187527,8 +187527,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank — taken from your connection",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "campaign_member_id",
@@ -187598,7 +187598,7 @@
     ]
   },
   "crm/salesforce/campaign_member_get_all": {
-    "hash": "01af05491837b35b3eab43512b5e516a00d52e95d6f826fa15d3b3dd75ca04c4",
+    "hash": "5067efc0864bf4c81f45982ff1e58ea495183050ac50bee7665cb780b0ff6ce9",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Get Many Campaign Members",
@@ -187631,8 +187631,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank — taken from your connection",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "campaign_id",
@@ -187776,7 +187776,7 @@
     ]
   },
   "crm/salesforce/campaign_member_update": {
-    "hash": "4a9e31eabc2e62307c5696c08811f8ae89f1402db7db961b2967f4c4e02c0985",
+    "hash": "10a51d96f714be693b48517916759de97571f4f1e4f8f970590e66f67a92b2b2",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Update Campaign Member",
@@ -187809,8 +187809,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank — taken from your connection",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "campaign_member_id",
@@ -187894,7 +187894,7 @@
     ]
   },
   "crm/salesforce/campaign_update": {
-    "hash": "d6f5d7b5f4009414cf6dad7f4168b3dd2c4fd6d01e353c266342dd3babb8278c",
+    "hash": "75096f0863b073f8d485e7f4570289d97c5682e411ca76dae71ebab92376e3c3",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Update Campaign",
@@ -187927,8 +187927,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank — taken from your connection",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "campaign_id",
@@ -188083,7 +188083,7 @@
     ]
   },
   "crm/salesforce/case_add_comment": {
-    "hash": "ed75872f368e2aad2ef8852702cf714f6e9efaa28ba8c5fddd612e810503986a",
+    "hash": "d857108fb97bf098161d3c37b3e601d467a70f317e71b5508339663938859102",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Add Case Comment",
@@ -188116,8 +188116,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank — taken from your connection",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "case_id",
@@ -188189,7 +188189,7 @@
     ]
   },
   "crm/salesforce/case_close": {
-    "hash": "067ceaffa02722b78e40bbecb0143cc576f6cb58bfee923de61835dbdd18cfdf",
+    "hash": "038aefce9a41f6461b7fd1da627ed2e97c0b176dc69bd604ebe021ea4e2e4817",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Close Case",
@@ -188222,8 +188222,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank — taken from your connection",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "case_id",
@@ -188294,7 +188294,7 @@
     ]
   },
   "crm/salesforce/case_comment_delete": {
-    "hash": "585a3192a72364eb465406beb47965dfa323d091937d1605eeb454b6e6b8d099",
+    "hash": "c4225829850b1103077afb4c587b13a0ff480562a08a5748a489698db9f1b2db",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Delete Case Comment",
@@ -188327,8 +188327,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank — taken from your connection",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "comment_id",
@@ -188378,7 +188378,7 @@
     ]
   },
   "crm/salesforce/case_comment_get_all": {
-    "hash": "0aa0ab469a12e5a682c85daf1633824e654992c9270c9b0fc3c4ab3b41d072c8",
+    "hash": "0a93df992e96ba8b421d27d899a297e5ab253d3e8c05267843042612a4a38429",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Get Many Case Comments",
@@ -188411,8 +188411,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank — taken from your connection",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "case_id",
@@ -188518,7 +188518,7 @@
     ]
   },
   "crm/salesforce/case_create": {
-    "hash": "a33d6fab74c91d14fb226fcce23cf8771afd8be6e3b42f7976a99e1cf6a85b93",
+    "hash": "16cf75331153b774ad21a199c822d30d38dc9bfbb87c2a843725665c7955207a",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Create Case",
@@ -188551,8 +188551,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank — taken from your connection",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "subject",
@@ -188727,7 +188727,7 @@
     ]
   },
   "crm/salesforce/case_delete": {
-    "hash": "83d562e63676f13d84e9b993885d62b3308459ade7e12090fd811017f861c8fe",
+    "hash": "c482d4d5419fb622a904b9ced68bad18382882e5b113943aad8ef2a2ca03fdce",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Delete Case",
@@ -188760,8 +188760,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank — taken from your connection",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "case_id",
@@ -188811,7 +188811,7 @@
     ]
   },
   "crm/salesforce/case_describe": {
-    "hash": "47d326a47506a9ae5980ba4451655cfb69a8795bf163d9a81ba95d1e74bacbd4",
+    "hash": "0309f610d0717549564610503b1054ba579adb41a4bb79acdd7d553015acce36",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Describe Case Object",
@@ -188844,8 +188844,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank — taken from your connection",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "include_picklist_values",
@@ -188894,7 +188894,7 @@
     ]
   },
   "crm/salesforce/case_get": {
-    "hash": "6728bdaf718f33cc1885bff40ec76fed66a225cacf8a32caca020443e5960f0a",
+    "hash": "b21dc9031c9f4cc57844028fbc8cd01cdb1164112d6c02fbd5796a12de0617d5",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Get Case",
@@ -188927,8 +188927,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank — taken from your connection",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "case_id",
@@ -188985,7 +188985,7 @@
     ]
   },
   "crm/salesforce/case_get_all": {
-    "hash": "58382a72945a394886ff645116ed13b46d1e944522b6113b0abac160a748b2f8",
+    "hash": "e72ba8fa3f27c1891f19cac860259013ce67d0b47c625e3dcb098d538d6493b0",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Get Many Cases",
@@ -189018,8 +189018,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank — taken from your connection",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "fields",
@@ -189194,7 +189194,7 @@
     ]
   },
   "crm/salesforce/case_update": {
-    "hash": "c7667d921077261b0b402c48e57d815b5b245819e28471295d91b28be4562a3d",
+    "hash": "0648138366ece1cf3ae248258de67034f9413a44424a59e9413003c6e5130cd8",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Update Case",
@@ -189227,8 +189227,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank — taken from your connection",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "case_id",
@@ -189404,7 +189404,7 @@
     ]
   },
   "crm/salesforce/case_upsert": {
-    "hash": "55fcef0dbff5e5f439bdce152280dd3b2a3032798282dd3633114b41cb25ebb1",
+    "hash": "3d26060a62cfa6a06146308b53f6b5c7af42c3f4f0acf697ec0fd84ac2f95567",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Create or Update Case",
@@ -189437,8 +189437,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank — taken from your connection",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "external_id_field",
@@ -189622,7 +189622,7 @@
     ]
   },
   "crm/salesforce/contact_add_note": {
-    "hash": "10e9c932b59538064408e97747bfed59bb8d8526556cbba39b90dc3dab7eb49c",
+    "hash": "3f9d1b1331bbc9828cf558dd583c349b63e5b6cc5d5fe4de091361376afdd179",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Add Note to Contact (Classic)",
@@ -189655,8 +189655,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank — taken from your connection",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "contact_id",
@@ -189742,7 +189742,7 @@
     ]
   },
   "crm/salesforce/contact_add_to_campaign": {
-    "hash": "6d4972e66fed08cf197005218f71f69b5d89331ab001928b508231a4f008c856",
+    "hash": "9241df0f8e6ac083468e387e0d984f6d86daa0905fe008b1610408333ea57b01",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Add Contact to Campaign",
@@ -189775,8 +189775,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank — taken from your connection",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "contact_id",
@@ -189855,7 +189855,7 @@
     ]
   },
   "crm/salesforce/contact_create": {
-    "hash": "cb3f3d096ba644cea6c139e752e50c5ea7cb1855b64bbd86ddb69dae70c1fc35",
+    "hash": "2553308d44135c789047ee7b4de7a3a9f5f9c8ae42c57270425e6cb23b4e31b7",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Create Contact",
@@ -189888,8 +189888,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank — taken from your connection",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "last_name",
@@ -190198,7 +190198,7 @@
     ]
   },
   "crm/salesforce/contact_delete": {
-    "hash": "29e354719254593036d8a775ee937cff3e48dc087d5df5d2e1bdaaa62c2db1ca",
+    "hash": "ba6d914df08af048c5afd96fe2a067404f8dac27f0691dc2f7091fce620c3c72",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Delete Contact",
@@ -190231,8 +190231,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank — taken from your connection",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "contact_id",
@@ -190282,7 +190282,7 @@
     ]
   },
   "crm/salesforce/contact_describe": {
-    "hash": "6643945ba9f199dd7723b4ab0de181a2cdb01a027ea93b5e655016bc595c2f16",
+    "hash": "5da57aff1cf55478fa90664e484b3b457717a53d0d1f4f59a4e5589dcc91456d",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Get Contact Metadata",
@@ -190315,8 +190315,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank — taken from your connection",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "include_field_details",
@@ -190365,7 +190365,7 @@
     ]
   },
   "crm/salesforce/contact_get": {
-    "hash": "ebd459fd44b6e354eeb38c04057e010e3654a0383eb8007eff4813aa45e2132c",
+    "hash": "b23fdf0f6e40d1f896db5341c1d51273cc81efba2fd198a9b1e3e7ee108a6e9a",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Get Contact",
@@ -190398,8 +190398,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank — taken from your connection",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "contact_id",
@@ -190456,7 +190456,7 @@
     ]
   },
   "crm/salesforce/contact_get_all": {
-    "hash": "d10d8737a71741dcb0236e7b3f05389f52be13b822ff535dea41805e7532548e",
+    "hash": "a189329f3b39a186a5e440042e8e6a4c02d843f9bfa7703c6caa069e9f3ad2cb",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Get Many Contacts",
@@ -190489,8 +190489,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank — taken from your connection",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "fields",
@@ -190665,7 +190665,7 @@
     ]
   },
   "crm/salesforce/contact_update": {
-    "hash": "07fcacefe386c3b350681f9bc7e0a043b457d6ca23c8f90b6262a5bee1bfe475",
+    "hash": "eb705771349fd96d1ce9d10f5d4a87acd2e37bc2f8059fb59d21d3db0f3cac88",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Update Contact",
@@ -190698,8 +190698,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank — taken from your connection",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "contact_id",
@@ -191015,7 +191015,7 @@
     ]
   },
   "crm/salesforce/contact_upsert": {
-    "hash": "c1994216f34e59e0505c88d4d50e8dfa70008dcc357f0d812a2f1e7b54367c94",
+    "hash": "02fc2f57764bebcf9431847323c80662fa8b3fa9b54e4cbff29578a823121044",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Create or Update Contact",
@@ -191048,8 +191048,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank — taken from your connection",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "external_id_field",
@@ -191373,7 +191373,7 @@
     ]
   },
   "crm/salesforce/contract_activate": {
-    "hash": "51976543b48f8e78b5e37c2f26ece8066621a06ada93b06bd5c16bf860bff965",
+    "hash": "aaddc079d9b8bde27b6accb16d4e66fdd65270508f9d009e9bc9083e7c9546ab",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Activate Contract",
@@ -191406,8 +191406,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank — taken from your connection",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "contract_id",
@@ -191464,7 +191464,7 @@
     ]
   },
   "crm/salesforce/contract_create": {
-    "hash": "75cc08f1e0ed503f1d5ac192265c1f1463ffa76f5dc299d86c342a191ca84119",
+    "hash": "7a39562a9852b2a7a0bb344d12883caf4d5c663537bb49e3fbf1f07618bb6837",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Create Contract",
@@ -191497,8 +191497,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank — taken from your connection",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "account_id",
@@ -191688,7 +191688,7 @@
     ]
   },
   "crm/salesforce/contract_delete": {
-    "hash": "c11fd105aac62c4aabc5b1ecc28fae5c1b303037d89496cb0234d5cfc03a3c04",
+    "hash": "a3c122c6d117aabe350ff793b8afd3c1a05e351bf4235255c8b496ea1d85f53e",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Delete Contract",
@@ -191721,8 +191721,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank — taken from your connection",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "contract_id",
@@ -191772,7 +191772,7 @@
     ]
   },
   "crm/salesforce/contract_get": {
-    "hash": "515e8bd0aeb981a7f9d16922e1345fade51b506d6127df87fb3d51fea72dfe55",
+    "hash": "aafbe95b5acea84833a3aeacc2394f90d5265d0ed2a7d2fcbec093e378615a0f",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Get Contract",
@@ -191805,8 +191805,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank — taken from your connection",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "contract_id",
@@ -191863,7 +191863,7 @@
     ]
   },
   "crm/salesforce/contract_get_all": {
-    "hash": "e8f1656963828e3bca9a6bcf1a9f7b85bd8638514fa3a52d3ff84ed305283296",
+    "hash": "cb8d0c401957120bde1b14c383e863d557d5e69dd10b45527c2bdc3f92353e55",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Get Many Contracts",
@@ -191896,8 +191896,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank — taken from your connection",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "fields",
@@ -192107,7 +192107,7 @@
     ]
   },
   "crm/salesforce/contract_update": {
-    "hash": "49dee16e1ae58b933ca6e19cfcb7a3794cc0960cabf731b1dc83fd26eddacc79",
+    "hash": "7d0add1f29339b2cc1b9e2c7435d0a45c4ff5e601957777f871b5d8543e0f36c",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Update Contract",
@@ -192140,8 +192140,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank — taken from your connection",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "contract_id",
@@ -192331,7 +192331,7 @@
     ]
   },
   "crm/salesforce/custom_object_create": {
-    "hash": "49f1fe2b8fb201644f8935e1a3f754f1a379ef2a08706edf5b7ed22af405fda3",
+    "hash": "9625f50ec44ff5c4838fed667c9c3d2de361079a60777c8caa2235fe169a31ec",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Create Custom Object Record",
@@ -192364,8 +192364,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank — taken from your connection",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "custom_object",
@@ -192443,7 +192443,7 @@
     ]
   },
   "crm/salesforce/custom_object_delete": {
-    "hash": "34335abb33589172df865984ff14e7d175945f84210c684f84d1be306b1ba117",
+    "hash": "1190a7753a5c6597b3b30ba1931773d03da6b1c975cafd25b97beae448a6bbd6",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Delete Custom Object Record",
@@ -192476,8 +192476,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank — taken from your connection",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "custom_object",
@@ -192535,7 +192535,7 @@
     ]
   },
   "crm/salesforce/custom_object_get": {
-    "hash": "b1afce1aedf1ce724710fb8d2bbd2f79aadb67232f52b3b307e54230614c50ab",
+    "hash": "2bd61eb401f75965bf8adb4c26fcc2ffec343709449c69f90a163545037b6d8a",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Get Custom Object Record",
@@ -192568,8 +192568,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank — taken from your connection",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "custom_object",
@@ -192634,7 +192634,7 @@
     ]
   },
   "crm/salesforce/custom_object_get_all": {
-    "hash": "65a8609d46acedd1bac00d0837ff37b659f08e269a9bd4cde73e7f3d07f672d7",
+    "hash": "757129d46da680aa62ae0cc0fb0caad9c90b422996a7fd22c91aad6433921b2c",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Get Many Custom Object Records",
@@ -192667,8 +192667,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank — taken from your connection",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "custom_object",
@@ -192851,7 +192851,7 @@
     ]
   },
   "crm/salesforce/custom_object_update": {
-    "hash": "f2b551d596e4de34c7721f9e29f0de9702c98f43f7bb55e91e21580e04495929",
+    "hash": "de3f80a2b11a878b04783091495913b31e6541ded649e51715badd22faaf769a",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Update Custom Object Record",
@@ -192884,8 +192884,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank — taken from your connection",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "custom_object",
@@ -192971,7 +192971,7 @@
     ]
   },
   "crm/salesforce/custom_object_upsert": {
-    "hash": "2e0d2d408202a06f2b569fb108cd7490dc58df56b8548b54a1d71f9f9f1c0b7f",
+    "hash": "85d2c51ee3974be694a8986eda4e63649182829a124e39907a3003a319f7fddb",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Create or Update Custom Object Record",
@@ -193004,8 +193004,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank — taken from your connection",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "custom_object",
@@ -193099,7 +193099,7 @@
     ]
   },
   "crm/salesforce/email_message_create": {
-    "hash": "a1251c24f42fa5445b6c899838f3c2004964cd03751c313f33d512473140b892",
+    "hash": "05197cbaad6ae6f5589bc0df2d3532654fae232553b4ad993099f2b9dcc4e581",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Log Email",
@@ -193132,8 +193132,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank — taken from your connection",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "parent_id",
@@ -193313,7 +193313,7 @@
     ]
   },
   "crm/salesforce/email_message_get_all": {
-    "hash": "82099cff884bdeca223aa1f6dc13c48f78e5c7efd3e4dd1848bf20326a703cc2",
+    "hash": "6abb45dfa9ca93a4d973e852a99264c23ddbd6903c272f068c5c90b406e16b25",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Get Many Emails",
@@ -193346,8 +193346,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank — taken from your connection",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "parent_id",
@@ -193487,7 +193487,7 @@
     ]
   },
   "crm/salesforce/email_send": {
-    "hash": "6d9517dacaf1c983d9c307a273e982d5ae88a0f41c509ae8a63c7c90031b78f5",
+    "hash": "d5489ff89cb86024086cac9553a67e630b102cc8e38bb35a3f350b0a9d12ba21",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Send Email",
@@ -193520,8 +193520,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank — taken from your connection",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "to_addresses",
@@ -193661,7 +193661,7 @@
     ]
   },
   "crm/salesforce/event_create": {
-    "hash": "bbf09b442b05980a8ba924c5cdbc4227dda767fec5291c5142764ee62a21400f",
+    "hash": "61892ef276a844bebb28524a85086ba705d3c59451d6cafb3469091fb04ba962",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Create Event",
@@ -193694,8 +193694,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank — taken from your connection",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "event_subject",
@@ -193983,7 +193983,7 @@
     ]
   },
   "crm/salesforce/event_delete": {
-    "hash": "2a5e4b93c693a208f28859e9154aa6c86d1d5461fc96a7874398ec9bd0970181",
+    "hash": "272a62b460ad97e010e9f3fafeb1201056e7a69524cd3daff3a843fcee0ec33c",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Delete Event",
@@ -194016,8 +194016,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank — taken from your connection",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "event_id",
@@ -194067,7 +194067,7 @@
     ]
   },
   "crm/salesforce/event_delete_series": {
-    "hash": "d0145a8871c8f39c49c69a2f10a24d19d169eff17ad5e2f974991025c6f43a60",
+    "hash": "52456347d6794faba0b32eeaaa1231a39af6fd50d3d4c1d89d879d2827f76f1d",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Cancel Event Series",
@@ -194100,8 +194100,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank — taken from your connection",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "event_id",
@@ -194151,7 +194151,7 @@
     ]
   },
   "crm/salesforce/event_get": {
-    "hash": "af3b855cd7198593a118b02a7ffce095ab4327fb613885b9b7cd35cc56d96b82",
+    "hash": "a0aa29df14d3918407d78de96601c1821e5de1f8e9fb57e5fd175cae8b3c9728",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Get Event",
@@ -194184,8 +194184,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank — taken from your connection",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "event_id",
@@ -194242,7 +194242,7 @@
     ]
   },
   "crm/salesforce/event_get_all": {
-    "hash": "1321592d662fb37c7571fe53884627897d5c1ae645c73213f94bc9dc6b126be1",
+    "hash": "03a5370c19d8dae5eede348ef0adaab995358743443c06001a8b8af0cf9d6166",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Get Many Events",
@@ -194275,8 +194275,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank — taken from your connection",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "fields",
@@ -194486,7 +194486,7 @@
     ]
   },
   "crm/salesforce/event_update": {
-    "hash": "a94f16ad62bfaa073b79a699c61a958f9c0a649b8700fd0f1d80801ea7dc8cac",
+    "hash": "1407086168f1226deae3c21cf71f3006a2ee247d116787347542a64083dca855",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Update Event",
@@ -194519,8 +194519,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank — taken from your connection",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "event_id",
@@ -194682,7 +194682,7 @@
     ]
   },
   "crm/salesforce/file_delete": {
-    "hash": "65b9eb8e9f9c4f3f2cfd7ce6d08548d70a163b7d6e90924e3d880f3a3c600fcb",
+    "hash": "733041b9ce7e5ed3ee49f2f142a99dc1009c6ed0316f923835955b32e6e9eb77",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Delete File",
@@ -194715,8 +194715,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank — taken from your connection",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "file_id",
@@ -194766,7 +194766,7 @@
     ]
   },
   "crm/salesforce/file_download": {
-    "hash": "e399019d24a4fb9d548ef2a3380eb47c11993d5b5c3854e41f562cf92aad1b75",
+    "hash": "0c7a45df43c3c8c2518ce82a633b5c441b82909e90ac92957061cefab7c1abb0",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Download File",
@@ -194799,8 +194799,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank — taken from your connection",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "file_id",
@@ -194885,7 +194885,7 @@
     ]
   },
   "crm/salesforce/file_get_all_for_record": {
-    "hash": "7c8cd3158386a5cd46f101f036106eaf16d9c946c81d9d7b3da4d5432c283fd0",
+    "hash": "c22d7b538248e5e3d5b89ead40b87f72c0a506f937662f0806325f93bc3a97df",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Get Files On A Record",
@@ -194918,8 +194918,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank — taken from your connection",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "object",
@@ -195011,7 +195011,7 @@
     ]
   },
   "crm/salesforce/file_link_to_record": {
-    "hash": "fef874e1c776fce41474214faa50d01599279369fff09edc681419e48a6f6a55",
+    "hash": "1b11589a2ec77544de227cc663afdce01392a0bfc6b208e68d4b2075953df3d3",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Attach File To Record",
@@ -195044,8 +195044,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank — taken from your connection",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "file_id",
@@ -195159,7 +195159,7 @@
     ]
   },
   "crm/salesforce/file_upload": {
-    "hash": "7058aa720f08f6be1ab057c0bedfcb4a25b0f78161a78b6c5ec4a5bba104dfd5",
+    "hash": "2d5063a8b6543bf44b4c7566e13f89b6a3899f5f2fbcf3de1e033699ed543103",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Upload File",
@@ -195192,8 +195192,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank — taken from your connection",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "title",
@@ -195300,7 +195300,7 @@
     ]
   },
   "crm/salesforce/flow_get_all": {
-    "hash": "04ed64c0e4773415829f15a022511746a44a82fe4022896392a78b8af681d5e2",
+    "hash": "2475c880ee66295d20071ab9f8f2e623c32393dcf863bddc1a500625c9206fe4",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Get Many Flows",
@@ -195333,8 +195333,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank — taken from your connection",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "name_contains",
@@ -195411,7 +195411,7 @@
     ]
   },
   "crm/salesforce/flow_invoke": {
-    "hash": "49ca012ed1a177012f2ca3bd0ca4ef1d3113a39107102fe0399643e35377713f",
+    "hash": "df82c95649579b2953c83ff671f410a4f4c6e43f803094c4151c0497d86cfe40",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Run Flow",
@@ -195444,8 +195444,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank — taken from your connection",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "flow_name",
@@ -195516,7 +195516,7 @@
     ]
   },
   "crm/salesforce/lead_add_note": {
-    "hash": "46f3a094491d9d09ecb7d13e114779a8e38ba0347de11deab6a79ca403575b59",
+    "hash": "27b597357e6e698e08fa0613baec17cd071f686856a1bbc46ade899b7b437883",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Add Note to Lead (Classic)",
@@ -195549,8 +195549,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank — taken from your connection",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "lead_id",
@@ -195636,7 +195636,7 @@
     ]
   },
   "crm/salesforce/lead_add_to_campaign": {
-    "hash": "fc47c8cd71e5976f750e341bfd4f24e7a3050ce03110bde88c5f1e4e33d44221",
+    "hash": "d252e82b814998fcdecaed478ea0a90316cce281156f690bb2943c0c368e1447",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Add Lead to Campaign",
@@ -195669,8 +195669,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank — taken from your connection",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "lead_id",
@@ -195749,7 +195749,7 @@
     ]
   },
   "crm/salesforce/lead_convert": {
-    "hash": "e4f332940258d3f3d66712c0ebc26bef5dda2130040e62522b49ff171659f35d",
+    "hash": "b163a1a299c9628efeb74b0c0f1f781fc0ec1ebc535f37d0af9c46110904f36e",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Convert Lead",
@@ -195782,8 +195782,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank — taken from your connection",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "lead_id",
@@ -195890,7 +195890,7 @@
     ]
   },
   "crm/salesforce/lead_create": {
-    "hash": "66b687e1958befb03c49735ffa53a763e36d76482c192e02385e1bddb2b21593",
+    "hash": "87d6033053bfd8ac85550211edf336fd33259ec97e33d618b19423f9846d459a",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Create Lead",
@@ -195923,8 +195923,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank — taken from your connection",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "company",
@@ -196171,7 +196171,7 @@
     ]
   },
   "crm/salesforce/lead_delete": {
-    "hash": "14e62684539133fdbaacd5171d037ef384e99d11d12477a8766b446c561c9ebb",
+    "hash": "4ccc3a97e5d711a920910f60e52d7def7433b9a1e2f4893de70abc6684e3c86c",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Delete Lead",
@@ -196204,8 +196204,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank — taken from your connection",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "lead_id",
@@ -196255,7 +196255,7 @@
     ]
   },
   "crm/salesforce/lead_describe": {
-    "hash": "0e503207b9374ef930f6c408d273fbe7901a917e9b187a783535d4a8453eb2f6",
+    "hash": "d4c5e51e4aa542e7581f07f12705a7483d508110fb8fe1fe7639ef1099077412",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Describe Lead Object",
@@ -196288,8 +196288,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank — taken from your connection",
+        "from_credential_meta": "instance_url"
       }
     ],
     "outputs": [
@@ -196331,7 +196331,7 @@
     ]
   },
   "crm/salesforce/lead_get": {
-    "hash": "e7f2a05f7921c6d0cabac6b7a3e1402dcae755c3926ea1311eb51d25d9cf5720",
+    "hash": "5f373581e66942b1fee804b692acc343f0d62ece3ba5aceef081371076d65f8e",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Get Lead",
@@ -196364,8 +196364,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank — taken from your connection",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "lead_id",
@@ -196422,7 +196422,7 @@
     ]
   },
   "crm/salesforce/lead_get_all": {
-    "hash": "1e8d60e93ceb9b7e889c3e636f9a397d1805e918f24aa4fcf4f3f024691ffcd7",
+    "hash": "4acab873d0d04bdb969f9edef905f1f1751d1155f6b754d2710e20adff6857c4",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Get Many Leads",
@@ -196455,8 +196455,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank — taken from your connection",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "fields",
@@ -196631,7 +196631,7 @@
     ]
   },
   "crm/salesforce/lead_update": {
-    "hash": "c72f94c751c3057a402877cf00a5510ff4e7e3f1ce78d37ec32955555544406e",
+    "hash": "72de87957e3556b28106828d3add6a1e70c5a001cffae11132ce43b312425c5f",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Update Lead",
@@ -196664,8 +196664,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank — taken from your connection",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "lead_id",
@@ -196918,7 +196918,7 @@
     ]
   },
   "crm/salesforce/lead_upsert": {
-    "hash": "1782847b91b52bf7f29c15fdc955e0ece2c8c98bf66c527d46b439e9eb22ab45",
+    "hash": "a4a3cee55cabe1c6f75ca391a15d68c7c0c91243961fe949c199a5929c47869e",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Create or Update Lead",
@@ -196951,8 +196951,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank — taken from your connection",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "external_id_field",
@@ -197213,7 +197213,7 @@
     ]
   },
   "crm/salesforce/list_view_get_all": {
-    "hash": "07f7b5e0d2f1ee779c18738c707e7083864b82fdf5c24b959ebd33b8f2523201",
+    "hash": "269807e2e198a5a5c3a9e5d7a62222784ab2af1910d2e5f836d6c567821d2bc9",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Get Many List Views",
@@ -197246,8 +197246,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank — taken from your connection",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "object",
@@ -197332,7 +197332,7 @@
     ]
   },
   "crm/salesforce/list_view_run": {
-    "hash": "ced70b61b45e23632f07403f3d44404b84b6942d647339cd26d7d64f2f9e1345",
+    "hash": "017c54ee92018ddf26b0c191e3029d22236b608e14a5709c6fb5c584c5db7117",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Run List View",
@@ -197365,8 +197365,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank — taken from your connection",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "object",
@@ -197466,7 +197466,7 @@
     ]
   },
   "crm/salesforce/note_create": {
-    "hash": "09a0649157407c14e20fcf92b3be456a2a3ec1bf8e4646e00d6985d5050198cd",
+    "hash": "2f3d690b6808ebdd1c1c0ddd959e9a58f79f4e069feb6b0b5203c0ad2301971a",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Create Note",
@@ -197499,8 +197499,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank — taken from your connection",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "title",
@@ -197635,7 +197635,7 @@
     ]
   },
   "crm/salesforce/note_get_all_for_record": {
-    "hash": "f1e1d8018ba279f889bd16e8bdaf7e362a27111f859c81c2d88ed96231c70b38",
+    "hash": "e6337fa0fbe4d3efba6d4f7f2412f99a21a6353a6bc67412fd44a1b0e61e0b3f",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Get Notes On A Record",
@@ -197668,8 +197668,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank — taken from your connection",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "object",
@@ -197761,7 +197761,7 @@
     ]
   },
   "crm/salesforce/object_describe": {
-    "hash": "92aa02d3292e61643c68b1b50552690d38bc8d79735b9dcffd04fe0a8d3cd3f2",
+    "hash": "2e475ffe69bfd375dac51f21eb90c5b126a0f4ffac59aeee36b9621d01559f9d",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Describe Object",
@@ -197794,8 +197794,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank — taken from your connection",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "object",
@@ -197859,7 +197859,7 @@
     ]
   },
   "crm/salesforce/object_get_all": {
-    "hash": "ddaea860ed7141f0c9e6764c794d3d70b508a38df3514d9503da05a18db0c0e3",
+    "hash": "e226d0ff3fb081ad1966f0b2146ebaee2ebe9120dc3ab896c85467c3900d5377",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: List Objects",
@@ -197892,8 +197892,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank — taken from your connection",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "custom_only",
@@ -197977,7 +197977,7 @@
     ]
   },
   "crm/salesforce/opportunity_add_note": {
-    "hash": "c19b575faede91e591bdd1f48d309483a2018b02f6b7e32e1d7bbf154dbbdde2",
+    "hash": "33f999b51258e42b659e9758a3ffd0bceb8092b9807b9b12723ae33a53409470",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Add Note to Opportunity (Classic)",
@@ -198010,8 +198010,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank — taken from your connection",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "opportunity_id",
@@ -198097,7 +198097,7 @@
     ]
   },
   "crm/salesforce/opportunity_contact_role_create": {
-    "hash": "ef1b2e3399fe3a63c6d4189940f55424532913d17394a8904c3ade09cc7337a8",
+    "hash": "3f1cc1aee214735f879d509d7e58fa642fe729c2276ff115b33249b203c601b9",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Add Contact to Opportunity",
@@ -198130,8 +198130,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank — taken from your connection",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "opportunity_id",
@@ -198210,7 +198210,7 @@
     ]
   },
   "crm/salesforce/opportunity_contact_role_delete": {
-    "hash": "270f00e22b29fa08831e1d24b52038d16b0fa31066b5d1c29e236e38bc5f1e43",
+    "hash": "ff0248eecb431d4ca2dc3fad45e548856a0e03d320b8f89565f87b7036e63fe2",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Remove Contact from Opportunity",
@@ -198243,8 +198243,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank — taken from your connection",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "contact_role_id",
@@ -198294,7 +198294,7 @@
     ]
   },
   "crm/salesforce/opportunity_contact_role_get_all": {
-    "hash": "af1942147e625e6ad2f8cf09f64f4638f0b31d33a181b9c487380e321206327f",
+    "hash": "0f16dadc80a8224b2ac0a0de75f4e2e73d2bced34bef7001609a34887fb8f73c",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Get Opportunity Contacts",
@@ -198327,8 +198327,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank — taken from your connection",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "opportunity_id",
@@ -198434,7 +198434,7 @@
     ]
   },
   "crm/salesforce/opportunity_contact_role_update": {
-    "hash": "ab73832f386e42e86226fae25982c9dd9c0de766f34a2f2d2fa4b82cce2e59da",
+    "hash": "1c51245c46525d48786378dff2f8280ace1cf8a77ebb05ae6973db0a72445ebe",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Update Opportunity Contact",
@@ -198467,8 +198467,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank — taken from your connection",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "contact_role_id",
@@ -198546,7 +198546,7 @@
     ]
   },
   "crm/salesforce/opportunity_create": {
-    "hash": "fd31a4659dec1550465a082aaa00d4b55b94f86d14eee90a7834c07c232de750",
+    "hash": "0fabf815809055f3ae7daf1a48ccacfbfba34e6547248ed18e33e0c1d9fd57a1",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Create Opportunity",
@@ -198579,8 +198579,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank — taken from your connection",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "name",
@@ -198737,7 +198737,7 @@
     ]
   },
   "crm/salesforce/opportunity_delete": {
-    "hash": "a58e879188bd242181d097a2ef45054f12639fdfd6fbfa6f4ce4f3c09f8c0478",
+    "hash": "e710aa4fdd0b2873e68f93f9025cdd331510225a3921552ac3ed706baeea0620",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Delete Opportunity",
@@ -198770,8 +198770,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank — taken from your connection",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "opportunity_id",
@@ -198821,7 +198821,7 @@
     ]
   },
   "crm/salesforce/opportunity_describe": {
-    "hash": "55133a24de67127b293fc3c23c53498eb4fcddac88b693ed8eafaa3fe62f8e15",
+    "hash": "4655d67f2783df5bd9d5e214d35b6d816cbc9a29915d7b220125eba92a21de66",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Get Opportunity Metadata",
@@ -198854,8 +198854,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank — taken from your connection",
+        "from_credential_meta": "instance_url"
       }
     ],
     "outputs": [
@@ -198897,7 +198897,7 @@
     ]
   },
   "crm/salesforce/opportunity_get": {
-    "hash": "46d2863c07ebcb39fd350fbad889ff600e2e061e8374919adb18eedc3f663c47",
+    "hash": "e0b9137bb154bce892c648f11af46596f89cc74cac30e062e2567521e1e1075d",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Get Opportunity",
@@ -198930,8 +198930,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank — taken from your connection",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "opportunity_id",
@@ -198988,7 +198988,7 @@
     ]
   },
   "crm/salesforce/opportunity_get_all": {
-    "hash": "2ce3da37fd1e184981916d826445835824255cad6b394c3fa923ab301deca367",
+    "hash": "822c3248cb1fdbcecfbc01dec5e78c5f94a8c427479113154125d69851e55596",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Get Many Opportunities",
@@ -199021,8 +199021,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank — taken from your connection",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "fields",
@@ -199197,7 +199197,7 @@
     ]
   },
   "crm/salesforce/opportunity_line_item_create": {
-    "hash": "211e3df668e3bbbc3f0d47aa3e35ca5364f6de4e4ac7b9ea415edeafda2888d6",
+    "hash": "b924c957ab952c211a9caca1a0aa08782120c6bd44fc716fcb01625206c4cc3f",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Add Product to Opportunity",
@@ -199230,8 +199230,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank — taken from your connection",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "opportunity_id",
@@ -199344,7 +199344,7 @@
     ]
   },
   "crm/salesforce/opportunity_line_item_delete": {
-    "hash": "61a1e20372a13c0e29f8121b7a03b36949b71a933037189a4d4eba26473e2e47",
+    "hash": "858833c9fcbf326622a2084c5c64006e99f79e759aced85685c2a6ea0d5e1b61",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Remove Product from Opportunity",
@@ -199377,8 +199377,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank — taken from your connection",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "line_item_id",
@@ -199428,7 +199428,7 @@
     ]
   },
   "crm/salesforce/opportunity_line_item_get_all": {
-    "hash": "6233b887d75cd26b67dcd7c17673940d7e10799a8daed36d51796522eeb93c75",
+    "hash": "35abfe17061e49677e29194f15c66bae3fad08deaf2be1afa11469673ec6d1fd",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Get Opportunity Products",
@@ -199461,8 +199461,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank — taken from your connection",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "opportunity_id",
@@ -199561,7 +199561,7 @@
     ]
   },
   "crm/salesforce/opportunity_line_item_update": {
-    "hash": "05e67590401858fb67d2916988eaad34ad9e58f08f1ac27138627c7393a6166c",
+    "hash": "7cbba0867b05eeb772574a8a4f800d686ad2e554fa2aab86c99828b174b49e4e",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Update Opportunity Product",
@@ -199594,8 +199594,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank — taken from your connection",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "line_item_id",
@@ -199694,7 +199694,7 @@
     ]
   },
   "crm/salesforce/opportunity_update": {
-    "hash": "9fab26ef78be8b35f0cfcb59bb65fa45cd41f10dbe9a56118fe5434ec3ebab57",
+    "hash": "79ddbaf532403cf1b306029cf7a13cdd6b5c580073c4222e8d8de8951283c798",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Update Opportunity",
@@ -199727,8 +199727,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank — taken from your connection",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "opportunity_id",
@@ -199890,7 +199890,7 @@
     ]
   },
   "crm/salesforce/opportunity_upsert": {
-    "hash": "3e30d788b13e0da480336e559ec4706f8ed6319930c1890f4efe951b0a49119b",
+    "hash": "094b2d7ccfa688aab79ef15d7e9ae11cca3273a7788e959f3d2746bbdc8829bf",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Create or Update Opportunity",
@@ -199923,8 +199923,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank — taken from your connection",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "external_id_field",
@@ -200094,7 +200094,7 @@
     ]
   },
   "crm/salesforce/order_activate": {
-    "hash": "3e3c270a115e123614e20ab842ea8bf36c87ec7278789698652a7747eee570a5",
+    "hash": "d9a912abccbdf10a074fc3bf0d60f130d7be971d2f8c312b6a005a2151d967de",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Activate Order",
@@ -200127,8 +200127,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank — taken from your connection",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "order_id",
@@ -200178,7 +200178,7 @@
     ]
   },
   "crm/salesforce/order_create": {
-    "hash": "5efee4b2b94414b996f6e2ca05fb99fdbe66ebc28cee121f460adcd5584bfc60",
+    "hash": "71116119a2efc305db6170e3888f064c3aeaa345bc6aef0d36ef8f51ab2aa2da",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Create Order",
@@ -200211,8 +200211,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank — taken from your connection",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "account_id",
@@ -200448,7 +200448,7 @@
     ]
   },
   "crm/salesforce/order_delete": {
-    "hash": "8a621a1629b4966093a80d01c60164623f06fc6065b84ffcc044374178903c53",
+    "hash": "a16adcd2ac5b55360a6a5871131ba04ab0a93e3f6d96712a1993d5b64d4c0fab",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Delete Order",
@@ -200481,8 +200481,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank — taken from your connection",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "order_id",
@@ -200532,7 +200532,7 @@
     ]
   },
   "crm/salesforce/order_get": {
-    "hash": "e19a164a750affe9b715c862e4164b495c856b661ddeb20455bb3d634b57952c",
+    "hash": "ab9df1debf2c061873abcb75585925e9527c87b0e6ff71b551333206efcaaff4",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Get Order",
@@ -200565,8 +200565,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank — taken from your connection",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "order_id",
@@ -200623,7 +200623,7 @@
     ]
   },
   "crm/salesforce/order_get_all": {
-    "hash": "c64e4f734194dbe39aab08d152cc1cd5450b37bebab37276f0a8fe06e6ac1810",
+    "hash": "258a45d1edf9916020e9ca0afd9394a029e27950243b5b04d2bc32df22fd7d70",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Get Many Orders",
@@ -200656,8 +200656,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank — taken from your connection",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "fields",
@@ -200832,7 +200832,7 @@
     ]
   },
   "crm/salesforce/order_item_create": {
-    "hash": "6c67571a19c957141372bcf37a111a452690a71346f5684a03b8b31ea7b62fce",
+    "hash": "8eb2525c78bb0c5f074a82405420c5e2f4f27d355b75b8891e0657b8a89a53d7",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Add Product to Order",
@@ -200865,8 +200865,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank — taken from your connection",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "order_id",
@@ -200972,7 +200972,7 @@
     ]
   },
   "crm/salesforce/order_item_get_all": {
-    "hash": "7fc2e73eb68780400a24e8e9bd07a437cd9b9e9484faf501a118c28299d2b4fa",
+    "hash": "49389ae658f84d333df27c4fe4edfad5fbdb734637e06233e2e701ea7e4a162e",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Get Order Products",
@@ -201005,8 +201005,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank — taken from your connection",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "order_id",
@@ -201105,7 +201105,7 @@
     ]
   },
   "crm/salesforce/order_update": {
-    "hash": "74dab5c732d454f584f7e93b5b890e3d5a01bb37a98ead2517948a417296d0a8",
+    "hash": "a49e9872304ad94a2ef2b1bfd7c01b0ff4091706c9a897c9d12b6a636c73d785",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Update Order",
@@ -201138,8 +201138,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank — taken from your connection",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "order_id",
@@ -201381,7 +201381,7 @@
     ]
   },
   "crm/salesforce/org_limits_get": {
-    "hash": "7027d7a128b821b14fe26a05551b1b4b59e99967e6f0e4d01cc474e528bf9025",
+    "hash": "5887a25f94c2118de407f225620fcd838ab67bed0a5cc7172695a6f90327ba7e",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Get Org Limits",
@@ -201414,8 +201414,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank — taken from your connection",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "limit_name",
@@ -201464,7 +201464,7 @@
     ]
   },
   "crm/salesforce/price_book_entry_create": {
-    "hash": "be9c7cc3929207ed068dfce06a88f9c9e3c87b69c44c5619f63d942315ccbcd6",
+    "hash": "477b77fd5b77e8a1fd871936e9a12423d980f07e30edb38c0cfdde9466355de4",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Add Product to Price Book",
@@ -201497,8 +201497,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank — taken from your connection",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "pricebook_id",
@@ -201585,7 +201585,7 @@
     ]
   },
   "crm/salesforce/price_book_entry_get_all": {
-    "hash": "c0f7928c554e2993251a20411b12594961495ddd3eb55c1109106bba19ba7e87",
+    "hash": "3f1faff4580f4ccfdb2dc33dbc95236c3b0ebac7f5196dfcdc452e06e50a2139",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Get Many Price Book Entries",
@@ -201618,8 +201618,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank — taken from your connection",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "pricebook_id",
@@ -201815,7 +201815,7 @@
     ]
   },
   "crm/salesforce/price_book_entry_update": {
-    "hash": "0e6eedd8b2ea84afcd875d0a693967f0c4fdc0f3780c2e609798bd1c392de464",
+    "hash": "869bef9afdcf172cb80d34f10385e936c9e432aa3f20eeecd09775ca19135e63",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Change Product Price",
@@ -201848,8 +201848,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank — taken from your connection",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "pricebook_entry_id",
@@ -201927,7 +201927,7 @@
     ]
   },
   "crm/salesforce/price_book_get_all": {
-    "hash": "e59efe6c31b4c5e16766d653a2727d3a95390a34ba4762bd199312c56c61beb3",
+    "hash": "d8acf5f124235440d29e1d262de2d2dae36c9abca40e98b572b8603496f0174d",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Get Many Price Books",
@@ -201960,8 +201960,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank — taken from your connection",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "fields",
@@ -202150,7 +202150,7 @@
     ]
   },
   "crm/salesforce/product_create": {
-    "hash": "7d58907e2287b0741286a0640e1bda493d8b09c0ae610b64fbc4a664d6214465",
+    "hash": "1278b27940c0baed456537bfd61099d376ebe83c59dd57d75c2ea731a724d596",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Create Product",
@@ -202183,8 +202183,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank — taken from your connection",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "name",
@@ -202318,7 +202318,7 @@
     ]
   },
   "crm/salesforce/product_delete": {
-    "hash": "0d4e12edff83f3c2b39914eefc6a46bfc76eeb5ea28a9319e3792cbce15d2172",
+    "hash": "f741ba7643594c4094441ed8936ac6cfad2c67eb19afc6f560d7f688ade00651",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Delete Product",
@@ -202351,8 +202351,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank — taken from your connection",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "product_id",
@@ -202402,7 +202402,7 @@
     ]
   },
   "crm/salesforce/product_get": {
-    "hash": "bca6754c8969c8cf40139e7210e8da46238778d131a7799e0d3cf1af25bb5d1e",
+    "hash": "0905ae90f6b6fe4a84086885323951b80a1380fb8c8983137a065093afcf3af2",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Get Product",
@@ -202435,8 +202435,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank — taken from your connection",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "product_id",
@@ -202493,7 +202493,7 @@
     ]
   },
   "crm/salesforce/product_get_all": {
-    "hash": "4fde44797e509316f30fca31b18c340bcf292f785fb2eea408a3e96a3b52ffb4",
+    "hash": "27073a21c6b258c93f711c4e5a09aafd82faf51ebbf24a73c66b3dacf907bae6",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Get Many Products",
@@ -202526,8 +202526,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank — taken from your connection",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "fields",
@@ -202716,7 +202716,7 @@
     ]
   },
   "crm/salesforce/product_update": {
-    "hash": "81f266efe3ad2d7961d66249fb0975795ae30b8abbbd5731b269f5c6ef0e4dec",
+    "hash": "35facb972e05535b6bdc91fa5b3c1af8cca6cf9ccb458c40883b4b7b6a569c08",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Update Product",
@@ -202749,8 +202749,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank — taken from your connection",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "product_id",
@@ -202870,7 +202870,7 @@
     ]
   },
   "crm/salesforce/product_upsert": {
-    "hash": "fec473eb96da668ad4bc1d5d1ec981dd4a051a97b64289373f9acd36c50fb20f",
+    "hash": "8ed92c5e271a5a1df3b755df7bdcc781c5aff7824f91908b58d174cd62ab0d0f",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Create or Update Product",
@@ -202903,8 +202903,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank — taken from your connection",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "match_field",
@@ -203031,7 +203031,7 @@
     ]
   },
   "crm/salesforce/query_all": {
-    "hash": "8aa83811279e9c027b57b88a2ef880487ed0049015d87cc37da557509a484cd7",
+    "hash": "db5e728d4bbf452dead2688ff33b1ce22d5d05a3ea0486d9a1426fe6f46e2188",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Run Query Including Deleted",
@@ -203064,8 +203064,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank — taken from your connection",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "query",
@@ -203143,7 +203143,7 @@
     ]
   },
   "crm/salesforce/quick_action_get_all": {
-    "hash": "09ed11e4ad8e72f5a759aea9029fa4004d5e2658c7a074e05b8a821956954553",
+    "hash": "2e88e1045ec95b897f9ec5dd0908879a9b295b66122f655a03a3b062b6616c76",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Get Many Quick Actions",
@@ -203176,8 +203176,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank — taken from your connection",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "object",
@@ -203261,7 +203261,7 @@
     ]
   },
   "crm/salesforce/quick_action_run": {
-    "hash": "f30644039945763bf0ac5cf612c6592b8d7e065722ef37a8cec59d4fe4233721",
+    "hash": "6499837fefd1335425823c4859309a6a3d79f2ba8651ed4cc3e5cffbc9bdc052",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Run Quick Action",
@@ -203294,8 +203294,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank — taken from your connection",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "object",
@@ -203380,7 +203380,7 @@
     ]
   },
   "crm/salesforce/quote_create": {
-    "hash": "a054986275dc231de2c268443dda648486e75616ff0321cd6a33904a1175fb94",
+    "hash": "e253f35e8d2c00e45f0748b1f8ce48be6ca58dc2ce8a93d27100d9dc47a26e6e",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Create Quote",
@@ -203413,8 +203413,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank — taken from your connection",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "name",
@@ -203680,7 +203680,7 @@
     ]
   },
   "crm/salesforce/quote_delete": {
-    "hash": "aa7ce59fe0f07a63fb601d19fb60b255c118b64b9a357fe897b19e350108c993",
+    "hash": "bf7d2557cde543b41f2aac560bc40e39442b7f9bbd83660b274b4a81304f541e",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Delete Quote",
@@ -203713,8 +203713,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank — taken from your connection",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "quote_id",
@@ -203764,7 +203764,7 @@
     ]
   },
   "crm/salesforce/quote_get": {
-    "hash": "fea5cd85d9be3a74d384a6b912bfd150ee084e60a1719f2492d085cdddc8b537",
+    "hash": "4e91c2bece7c4ff34d101e31637d73936e748603dd5b7eaddc8ca7008a6d21f4",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Get Quote",
@@ -203797,8 +203797,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank — taken from your connection",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "quote_id",
@@ -203855,7 +203855,7 @@
     ]
   },
   "crm/salesforce/quote_get_all": {
-    "hash": "b1e625e97732d7b5a0957a65a64a94f9c0ef13f0f0b42c49dc3b50d49e81b096",
+    "hash": "8f9094d341ef536463287f21859ae5c2a65ba3c8ba94f9a16d99ef15bf9288d1",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Get Many Quotes",
@@ -203888,8 +203888,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank — taken from your connection",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "fields",
@@ -204064,7 +204064,7 @@
     ]
   },
   "crm/salesforce/quote_line_item_create": {
-    "hash": "2853e5dc0403ae59a6c26968b3e1455e2fc3e302df1cd0781c299e235af2d561",
+    "hash": "8a02700d6ea257b248ac93716846058244f1e6c638f4f6f82021c5dc1b4fc60d",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Add Product to Quote",
@@ -204097,8 +204097,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank — taken from your connection",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "quote_id",
@@ -204218,7 +204218,7 @@
     ]
   },
   "crm/salesforce/quote_line_item_get_all": {
-    "hash": "ffd870fdb4c4e7cdaad838ece7e74e2b94518b686d88b4d6ca5d8d29ce8b1347",
+    "hash": "cc5de1b907ab88410c0dd6aae5f6832624f0ed03e6034130758b9ee4c532a70a",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Get Quote Products",
@@ -204251,8 +204251,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank — taken from your connection",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "quote_id",
@@ -204351,7 +204351,7 @@
     ]
   },
   "crm/salesforce/quote_sync_to_opportunity": {
-    "hash": "37a875b206de6623cfdc0bdfad24a82347b55382db5762f6f3097621459d33e4",
+    "hash": "da435ec4c2497bbfce08d5a7b06c4df21564cdc875e5b136ba1565023f5940b1",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Sync Quote to Opportunity",
@@ -204384,8 +204384,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank — taken from your connection",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "quote_id",
@@ -204449,7 +204449,7 @@
     ]
   },
   "crm/salesforce/quote_update": {
-    "hash": "cb60aabad76feb690ca78895b9db97d3df3aadfb87b48a69f03e038d6785e5ef",
+    "hash": "6e62b198f7810882eb736e20cb6929d1f536eaa3dc1a0ed218abdde3b30e36da",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Update Quote",
@@ -204482,8 +204482,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank — taken from your connection",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "quote_id",
@@ -204749,7 +204749,7 @@
     ]
   },
   "crm/salesforce/record_create_many": {
-    "hash": "8e7ab0e5b7cc69f6df8f44db5c199aa8b3b1a4ae98c2e29f7f9bb6c43cfb5b15",
+    "hash": "86317269407c0a4d6711676d524224efa82152abb394601aaa0faa0446c15d35",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Create Many Records",
@@ -204782,8 +204782,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank — taken from your connection",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "object",
@@ -204876,7 +204876,7 @@
     ]
   },
   "crm/salesforce/record_delete_many": {
-    "hash": "af9375e29b5665311a346424f0746674e04914ac19a04b283d67fb7c4d2b5d7e",
+    "hash": "bd55f4a0bb9024cad7a588a6cbb84527fef1a5830231eeddaf6cac6f598dd026",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Delete Many Records",
@@ -204909,8 +204909,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank — taken from your connection",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "record_ids",
@@ -204988,7 +204988,7 @@
     ]
   },
   "crm/salesforce/record_find": {
-    "hash": "609712733ccb6c2dd180e67e59438f29c87855f5e7e9be70aee52ab508352139",
+    "hash": "d7693c0f6a84902f8c9cfc7ae47a65012701b80f7b2d0223d351ea9dfe1f398c",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Find Record by Field",
@@ -205021,8 +205021,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank — taken from your connection",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "object",
@@ -205127,7 +205127,7 @@
     ]
   },
   "crm/salesforce/record_get_deleted": {
-    "hash": "7d7b38a1356af9b46e507dc097c1b9e6c96d3bc9c976263a9c200aa287434dfb",
+    "hash": "5e700db811276eab1048528d313e540df9e2370dbf5bd35677308e954b3453bd",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Get Deleted Records",
@@ -205160,8 +205160,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank — taken from your connection",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "object",
@@ -205247,7 +205247,7 @@
     ]
   },
   "crm/salesforce/record_get_related": {
-    "hash": "48bd9b446af8f49950ca56b21e0bd52930381608a502e89d03587ffb765d19a4",
+    "hash": "bbe2e552306cdb8cb5c921512c9d303b5ebbb2d8726fcd7b1510855f971778ba",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Get Related Records",
@@ -205280,8 +205280,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank — taken from your connection",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "object",
@@ -205389,7 +205389,7 @@
     ]
   },
   "crm/salesforce/record_get_updated": {
-    "hash": "285a0b945bbcb535432cebb3f9aa17ca28b9c113eea8471b26a4d39294a55943",
+    "hash": "0c432f40896ef51dc0d0d6f91f661688ab43b6b697df60fc3f2a1801b55f90e0",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Get Updated Records",
@@ -205422,8 +205422,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank — taken from your connection",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "object",
@@ -205509,7 +205509,7 @@
     ]
   },
   "crm/salesforce/record_merge": {
-    "hash": "e8d6e79541f181a7cf2ab7380fff0c0ea10527d138a6901df86468cd97aa63d3",
+    "hash": "ef05ce4d7bdfa5efe54bdf0844e3c41309f3034f090143e202d05d0e75bfa309",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Merge Duplicate Records",
@@ -205542,8 +205542,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank — taken from your connection",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "object",
@@ -205634,7 +205634,7 @@
     ]
   },
   "crm/salesforce/record_undelete": {
-    "hash": "903c725b40a7c656d4efdf88f39ffd85061a4980146bfa6d4319bbe4e1aaf92e",
+    "hash": "1a9f25c9834249e30b626374311952df0233fa7fe4502469f08630b1eef34a12",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Restore Deleted Record",
@@ -205667,8 +205667,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank — taken from your connection",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "record_id",
@@ -205718,7 +205718,7 @@
     ]
   },
   "crm/salesforce/record_update_many": {
-    "hash": "cb57072cb2c464d69219d1bca6c94a2ab37639c4429847be790772945daae267",
+    "hash": "387d5efeb9e8bd53b344230db43d5026756fa9ae6c6af4cbe8cedf442466d2cf",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Update Many Records",
@@ -205751,8 +205751,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank — taken from your connection",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "object",
@@ -205845,7 +205845,7 @@
     ]
   },
   "crm/salesforce/record_upsert": {
-    "hash": "fc47c9d34456f61be48edbf98fb1d124b63dc0805fc0a16d1d26d33fec73c9da",
+    "hash": "27618314e1564bcbd635cfcf43a4f4bdb9d7ef7b77c057e1f32369227c53602d",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Create or Update Record",
@@ -205878,8 +205878,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank — taken from your connection",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "object",
@@ -205966,7 +205966,7 @@
     ]
   },
   "crm/salesforce/record_upsert_many": {
-    "hash": "ad5510ea08de7ebaa1618b11c3c657f46370e72a1fa3072671a70eb251a91963",
+    "hash": "c22ba4dd988edb7225b6bc0f1600ea159d609629b905720c6b1308bc82e78a2e",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Create or Update Many Records",
@@ -205999,8 +205999,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank — taken from your connection",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "object",
@@ -206101,7 +206101,7 @@
     ]
   },
   "crm/salesforce/report_get_all": {
-    "hash": "4969a77e3039f5fbb89d1c590504bedd03a056adf6951cc5204bc33fd831059c",
+    "hash": "a40b391ee2e35d4a10598b6ea3120601b6b46e85f7cbe80e75896380f88142d1",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Get Many Reports",
@@ -206134,8 +206134,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank — taken from your connection",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "scope",
@@ -206243,7 +206243,7 @@
     ]
   },
   "crm/salesforce/report_run": {
-    "hash": "7c0f266ede2825c4a81febd5190e499e3221ebb7d7776c9ad632f2bc235b4a76",
+    "hash": "75aabb32c062879d74bc10c8f656d408ab760287154e36578e56fe36a3fcbb80",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Run Report",
@@ -206276,8 +206276,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank — taken from your connection",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "report_id",
@@ -206355,7 +206355,7 @@
     ]
   },
   "crm/salesforce/search_query": {
-    "hash": "ea41dc12906ef8d60295d315b4ddf4308d509ea171a6f90a1a9ee2cd3257515d",
+    "hash": "a4bc058f2eef356819e08ba4d72ec2ced6cf1048faf5d11bf5d4682406d2b438",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Run Query (SOQL)",
@@ -206388,8 +206388,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank — taken from your connection",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "query",
@@ -206467,7 +206467,7 @@
     ]
   },
   "crm/salesforce/search_records": {
-    "hash": "0be9a777a99d41913b7bf4aad7ef4b6e84e07fa398333268096e2802883a811a",
+    "hash": "3892ff06f3dc94eeb7685d2cacc2b1507b8aa634e11b4f29b06c5cc083f3f842",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Find Records",
@@ -206500,8 +206500,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank — taken from your connection",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "search_term",
@@ -206618,7 +206618,7 @@
     ]
   },
   "crm/salesforce/task_complete": {
-    "hash": "198a3f51140d9b8eee846dfa4ffba6652d34322528ad3e62a51e45b5e0fe5168",
+    "hash": "c9f57c87cc0f5b171038c382def96ff01571ce71640c1a3de66d5f5ec2b3e696",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Mark Task Complete",
@@ -206651,8 +206651,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank — taken from your connection",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "task_id",
@@ -206730,7 +206730,7 @@
     ]
   },
   "crm/salesforce/task_create": {
-    "hash": "d43fb2b1afcbb9a73862c6b452be75170e42cc257163ebf23847dc1a979b134b",
+    "hash": "a38abca1887d0965c4a8ab3acbac28f882fd92eb289b7738c5f3166ad23b9c6e",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Create Task",
@@ -206763,8 +206763,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank — taken from your connection",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "task_status",
@@ -207053,7 +207053,7 @@
     ]
   },
   "crm/salesforce/task_delete": {
-    "hash": "8d382dbc99795f2d1398b904215d510ea6fe729112dcc45ec367a6636f3cf4bc",
+    "hash": "c5b966323a2087ea23935074a9c4ce29eb6484c0f1144f2f8af016790247de46",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Delete Task",
@@ -207086,8 +207086,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank — taken from your connection",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "task_id",
@@ -207137,7 +207137,7 @@
     ]
   },
   "crm/salesforce/task_describe": {
-    "hash": "28e5852f818e8768756dd3132d6f8a97e620dbe36a556f566b5ef53c2ad72627",
+    "hash": "d9cf63796e6ad00f7b1e7b7cfdbd50f732908f72a8d44b60dc1fe5d1a90d9187",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Get Task Object Info",
@@ -207170,8 +207170,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank — taken from your connection",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "include_fields",
@@ -207220,7 +207220,7 @@
     ]
   },
   "crm/salesforce/task_get": {
-    "hash": "97f019d000e6f4443bb1b0be04165e69006072595dacca5ae082c8d7d505ad73",
+    "hash": "5339b6c3ba6e11d7ffbc23692cf044e6112815d35cc2f86c1c3c8cb2157be8bc",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Get Task",
@@ -207253,8 +207253,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank — taken from your connection",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "task_id",
@@ -207311,7 +207311,7 @@
     ]
   },
   "crm/salesforce/task_get_all": {
-    "hash": "9d4251f5df5dd27e605edd6435b5658d050471bff17a443f586e5ebbcfe59c42",
+    "hash": "01ce62d0e4c055eda1c880a72dc1e70790b3fb5920a4c9c9a830df5282f734ce",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Get Many Tasks",
@@ -207344,8 +207344,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank — taken from your connection",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "fields",
@@ -207569,7 +207569,7 @@
     ]
   },
   "crm/salesforce/task_get_all_for_record": {
-    "hash": "908142ae8f41b42ba0b41db3e9f1ad9c27459da44be495ba87800596bdd78ebc",
+    "hash": "c97970ce67b12f357b810098d33a4ddee07d7721a1e473eda52d6618f6932962",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Get Tasks On a Record",
@@ -207602,8 +207602,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank — taken from your connection",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "object",
@@ -207703,7 +207703,7 @@
     ]
   },
   "crm/salesforce/task_update": {
-    "hash": "542fefbdbd9263c2a88fef5e61c040b5921beb4bdd161ce1b281fba5ea9da12a",
+    "hash": "849b166e0e1fb273ab29eb5edf67e5964745c6531b482e937f79c584fdda05f8",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Update Task",
@@ -207736,8 +207736,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank — taken from your connection",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "task_id",
@@ -208019,7 +208019,7 @@
     ]
   },
   "crm/salesforce/task_upsert": {
-    "hash": "f7005dc915b9be226ae889e9710394125c194040081a90400d9721f665bd6286",
+    "hash": "8afa8d5161d2161836c94c4776ebb3db94ec3c346c655c92d0be49af6a91fa33",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Create or Update Task",
@@ -208052,8 +208052,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank — taken from your connection",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "external_id_field",
@@ -208216,7 +208216,7 @@
     ]
   },
   "crm/salesforce/user_create": {
-    "hash": "f3f899cf340116b3cab97671c0a9feac77499226a6ef19fcb314fefce8676261",
+    "hash": "22c882e0eebd54dc32488c1c6e7c5dbbee5f17484623b7624756f9f806db81d9",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Create User",
@@ -208249,8 +208249,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank — taken from your connection",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "username",
@@ -208530,7 +208530,7 @@
     ]
   },
   "crm/salesforce/user_deactivate": {
-    "hash": "54ba5a6e742214c3f157df87d3c149e36e2d4f69a3141bac97388365c39d5cfe",
+    "hash": "744ebc68a4f4062d164d9c13a2a6ab0b23ee213867b16ce2b232796a247d01a0",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Deactivate User",
@@ -208563,8 +208563,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank — taken from your connection",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "user_id",
@@ -208614,7 +208614,7 @@
     ]
   },
   "crm/salesforce/user_get": {
-    "hash": "6a25c8ad15ed4fde1a3ef256e637beb47215a9f175488c2cafc0db2825ef1cc6",
+    "hash": "cf3cc1ec7052d1da636ab37bfd9ea86c0cac9cae19409bd06db387270de54c7c",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Get User",
@@ -208647,8 +208647,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank — taken from your connection",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "user_id",
@@ -208705,7 +208705,7 @@
     ]
   },
   "crm/salesforce/user_get_all": {
-    "hash": "fa7ce4ee74b4719c5c8be85623afa5bd454e2d9530d411769ad4f6f1e8361b60",
+    "hash": "07db58fabae558047128aa3726c6a1b06c9426326825ffef9903aa058f957938",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Get Many Users",
@@ -208738,8 +208738,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank — taken from your connection",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "fields",
@@ -208914,7 +208914,7 @@
     ]
   },
   "crm/salesforce/user_get_current": {
-    "hash": "9ca7e63f7e0eb78b150b5d275d73b6ea572f9cf1d32faec20cf04bbb7e90bef4",
+    "hash": "ce921e6d8fbb5c43d330c450072ce5606819edaa46287d787ed6c71f95dbab6d",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Get Current User",
@@ -208947,8 +208947,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank — taken from your connection",
+        "from_credential_meta": "instance_url"
       }
     ],
     "outputs": [
@@ -208990,7 +208990,7 @@
     ]
   },
   "crm/salesforce/user_update": {
-    "hash": "0e04e84882b6199f3c2f1254d493ce426328ba412cbe094257b2de60990c581f",
+    "hash": "151cb108fa11bb7ebca0105cce2e84517f1965f4a1d5d01cb05f359b0b6b12b8",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Update User",
@@ -209023,8 +209023,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank — taken from your connection",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "user_id",
@@ -542008,7 +542008,7 @@
     ]
   },
   "trigger/salesforce_poll": {
-    "hash": "61a5c0333047a0791488d6090142ef152197af91ab51aff05f66328a74b2a750",
+    "hash": "66e3092753aa2d5b986439296a3a1daba0675655ec64366640479a002e5a9afc",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Salesforce: Record Created or Updated",
@@ -542036,8 +542036,8 @@
         "type": "string",
         "value": null,
         "label": "Salesforce Instance URL",
-        "placeholder": "https://mycompany.my.salesforce.com",
-        "required": true
+        "placeholder": "Leave blank — taken from your connection",
+        "from_credential_meta": "instance_url"
       },
       {
         "name": "object",

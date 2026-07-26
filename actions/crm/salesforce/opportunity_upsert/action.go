@@ -20,7 +20,7 @@ const (
 
 var Inputs = [...]core.Connection{
 	{Name: "access_token", Type: core.ConnectionTypeSecret, Label: "Salesforce Connection", Placeholder: "Connect Salesforce, or paste an access token", Required: true},
-	{Name: "instance_url", Type: core.ConnectionTypeString, Label: "Salesforce Instance URL", Placeholder: "https://mycompany.my.salesforce.com", Required: true},
+	{Name: "instance_url", Type: core.ConnectionTypeString, Label: "Salesforce Instance URL", Placeholder: "Leave blank — taken from your connection", FromCredentialMeta: "instance_url"},
 	{Name: "external_id_field", Type: core.ConnectionTypeString, Label: "Match On Field", Placeholder: "Order_Reference__c - a Salesforce field marked as an External ID", Required: true},
 	{Name: "external_id_value", Type: core.ConnectionTypeString, Label: "Match On Value", Placeholder: "SO-10432 - the value to look for in that field", Required: true},
 	{Name: "name", Type: core.ConnectionTypeString, Label: "Opportunity Name", Placeholder: "Acme Ltd - 50 seat renewal (required when the deal does not exist yet)"},

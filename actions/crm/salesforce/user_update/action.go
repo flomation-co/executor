@@ -37,7 +37,7 @@ const maxAliasLength = 8
 
 var Inputs = [...]core.Connection{
 	{Name: "access_token", Type: core.ConnectionTypeSecret, Label: "Salesforce Connection", Placeholder: "Connect Salesforce, or paste an access token", Required: true},
-	{Name: "instance_url", Type: core.ConnectionTypeString, Label: "Salesforce Instance URL", Placeholder: "https://mycompany.my.salesforce.com", Required: true},
+	{Name: "instance_url", Type: core.ConnectionTypeString, Label: "Salesforce Instance URL", Placeholder: "Leave blank — taken from your connection", FromCredentialMeta: "instance_url"},
 	{Name: "user_id", Type: core.ConnectionTypeString, Label: "User ID", Placeholder: "0055f00000AbCdEAAV — every Salesforce user ID starts with 005", Required: true},
 	{Name: "profile_id", Type: core.ConnectionTypeString, Label: "Profile", Placeholder: "00e5f000000AbCdAAK — the profile that decides what they can see and do"},
 	{Name: "user_role_id", Type: core.ConnectionTypeString, Label: "Role", Placeholder: "00E5f000000AbCdEAK — sets who can see their records"},

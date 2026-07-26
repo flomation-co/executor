@@ -28,7 +28,7 @@ const (
 
 var Inputs = [...]core.Connection{
 	{Name: "access_token", Type: core.ConnectionTypeSecret, Label: "Salesforce Connection", Placeholder: "Connect Salesforce, or paste an access token", Required: true},
-	{Name: "instance_url", Type: core.ConnectionTypeString, Label: "Salesforce Instance URL", Placeholder: "https://mycompany.my.salesforce.com", Required: true},
+	{Name: "instance_url", Type: core.ConnectionTypeString, Label: "Salesforce Instance URL", Placeholder: "Leave blank — taken from your connection", FromCredentialMeta: "instance_url"},
 	{Name: "account_id", Type: core.ConnectionTypeString, Label: "Account", Placeholder: "Record ID of the account the note belongs to, e.g. 0015f00000AbCdEAAV", Required: true},
 	{Name: "title", Type: core.ConnectionTypeString, Label: "Title", Placeholder: "Call summary — 14 March (up to 80 characters)", Required: true},
 	{Name: "note_body", Type: core.ConnectionTypeText, Label: "Note", Placeholder: "Spoke to Jane about the renewal; she will confirm numbers on Friday"},

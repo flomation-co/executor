@@ -20,7 +20,7 @@ const (
 
 var Inputs = [...]core.Connection{
 	{Name: "access_token", Type: core.ConnectionTypeSecret, Label: "Salesforce Connection", Placeholder: "Connect Salesforce, or paste an access token", Required: true},
-	{Name: "instance_url", Type: core.ConnectionTypeString, Label: "Salesforce Instance URL", Placeholder: "https://mycompany.my.salesforce.com", Required: true},
+	{Name: "instance_url", Type: core.ConnectionTypeString, Label: "Salesforce Instance URL", Placeholder: "Leave blank — taken from your connection", FromCredentialMeta: "instance_url"},
 	{Name: "name", Type: core.ConnectionTypeString, Label: "Product Name", Placeholder: "GenWatt Diesel 200kW - what the product is called on quotes and deals", Required: true},
 	{Name: "product_code", Type: core.ConnectionTypeString, Label: "Product Code", Placeholder: "GC1040 - your own catalogue code for this product"},
 	{Name: "description", Type: core.ConnectionTypeText, Label: "Description", Placeholder: "What the product is, in the words a customer would recognise"},

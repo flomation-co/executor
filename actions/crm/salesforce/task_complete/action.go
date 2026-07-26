@@ -26,7 +26,7 @@ const completedStatus = "Completed"
 
 var Inputs = [...]core.Connection{
 	{Name: "access_token", Type: core.ConnectionTypeSecret, Label: "Salesforce Connection", Placeholder: "Connect Salesforce, or paste an access token", Required: true},
-	{Name: "instance_url", Type: core.ConnectionTypeString, Label: "Salesforce Instance URL", Placeholder: "https://mycompany.my.salesforce.com", Required: true},
+	{Name: "instance_url", Type: core.ConnectionTypeString, Label: "Salesforce Instance URL", Placeholder: "Leave blank — taken from your connection", FromCredentialMeta: "instance_url"},
 	{Name: "task_id", Type: core.ConnectionTypeString, Label: "Task ID", Placeholder: "00T5f00000AbCdEEAV", Required: true},
 	{Name: "task_status", Type: core.ConnectionTypeString, Label: "Completed Status", Placeholder: "Completed — only change this if your org renamed it"},
 	{Name: "description", Type: core.ConnectionTypeText, Label: "Comments", Placeholder: "Optional — replaces the comments on the task, e.g. how the call went"},

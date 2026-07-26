@@ -21,7 +21,7 @@ const (
 
 var Inputs = [...]core.Connection{
 	{Name: "access_token", Type: core.ConnectionTypeSecret, Label: "Salesforce Connection", Placeholder: "Connect Salesforce, or paste an access token", Required: true},
-	{Name: "instance_url", Type: core.ConnectionTypeString, Label: "Salesforce Instance URL", Placeholder: "https://mycompany.my.salesforce.com", Required: true},
+	{Name: "instance_url", Type: core.ConnectionTypeString, Label: "Salesforce Instance URL", Placeholder: "Leave blank — taken from your connection", FromCredentialMeta: "instance_url"},
 	{Name: "asset_id", Type: core.ConnectionTypeString, Label: "Asset ID", Placeholder: "02i5f000000AbCdAAK - the asset to change, not its serial number", Required: true},
 	{Name: "name", Type: core.ConnectionTypeString, Label: "Asset Name", Placeholder: "GenWatt Diesel 1000kW - Edge Communications (up to 255 characters)"},
 	{Name: "asset_status", Type: core.ConnectionTypeString, Label: "Status", Placeholder: "Shipped, Installed, Registered, Purchased or Obsolete - Salesforce saves anything you type here without complaint, so a typo becomes a real status"},

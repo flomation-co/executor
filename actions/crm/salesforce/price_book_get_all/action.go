@@ -32,7 +32,7 @@ const defaultFields = "Id,Name,Description,IsActive,IsStandard,LastModifiedDate"
 
 var Inputs = [...]core.Connection{
 	{Name: "access_token", Type: core.ConnectionTypeSecret, Label: "Salesforce Connection", Placeholder: "Connect Salesforce, or paste an access token", Required: true},
-	{Name: "instance_url", Type: core.ConnectionTypeString, Label: "Salesforce Instance URL", Placeholder: "https://mycompany.my.salesforce.com", Required: true},
+	{Name: "instance_url", Type: core.ConnectionTypeString, Label: "Salesforce Instance URL", Placeholder: "Leave blank — taken from your connection", FromCredentialMeta: "instance_url"},
 	{Name: "fields", Type: core.ConnectionTypeString, Label: "Fields", Placeholder: "Name,IsActive,IsStandard - leave blank for the usual price book fields"},
 	{Name: "standard_only", Type: core.ConnectionTypeBoolean, Label: "Only The Standard Price Book"},
 	{Name: "active_only", Type: core.ConnectionTypeBoolean, Label: "Only Price Books In Use"},

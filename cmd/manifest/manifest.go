@@ -405,6 +405,13 @@ func inspectPackage(dir string) map[string]ManifestEntry {
 									if boolValue != nil {
 										c.Required = *boolValue
 									}
+								case "FromCredentialMeta":
+									// Plain string literal only — same constraint as every
+									// other field here. A concatenated expression is a
+									// BinaryExpr, not a BasicLit, and would silently blank
+									// this, which would turn the auto-fill off without any
+									// signal. Guarded by the generator's own test.
+									c.FromCredentialMeta = value
 								}
 							}
 

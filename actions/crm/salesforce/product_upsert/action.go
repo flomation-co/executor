@@ -29,7 +29,7 @@ const defaultMatchField = "Name"
 
 var Inputs = [...]core.Connection{
 	{Name: "access_token", Type: core.ConnectionTypeSecret, Label: "Salesforce Connection", Placeholder: "Connect Salesforce, or paste an access token", Required: true},
-	{Name: "instance_url", Type: core.ConnectionTypeString, Label: "Salesforce Instance URL", Placeholder: "https://mycompany.my.salesforce.com", Required: true},
+	{Name: "instance_url", Type: core.ConnectionTypeString, Label: "Salesforce Instance URL", Placeholder: "Leave blank — taken from your connection", FromCredentialMeta: "instance_url"},
 	{Name: "match_field", Type: core.ConnectionTypeString, Label: "Match On", Placeholder: "Name (the default), or ProductCode, or StockKeepingUnit, or a custom External ID field such as ERP_Code__c"},
 	{Name: "match_value", Type: core.ConnectionTypeString, Label: "Match Value", Placeholder: "GenWatt Diesel 200kW - the value to look for in that field", Required: true},
 	{Name: "name", Type: core.ConnectionTypeString, Label: "Product Name", Placeholder: "GenWatt Diesel 200kW - only needed the first time, when the product has to be created"},

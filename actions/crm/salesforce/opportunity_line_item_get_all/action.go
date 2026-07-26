@@ -31,7 +31,7 @@ const defaultFields = "Id,Name,OpportunityId,Product2Id,PricebookEntryId,Product
 
 var Inputs = [...]core.Connection{
 	{Name: "access_token", Type: core.ConnectionTypeSecret, Label: "Salesforce Connection", Placeholder: "Connect Salesforce, or paste an access token", Required: true},
-	{Name: "instance_url", Type: core.ConnectionTypeString, Label: "Salesforce Instance URL", Placeholder: "https://mycompany.my.salesforce.com", Required: true},
+	{Name: "instance_url", Type: core.ConnectionTypeString, Label: "Salesforce Instance URL", Placeholder: "Leave blank — taken from your connection", FromCredentialMeta: "instance_url"},
 	{Name: "opportunity_id", Type: core.ConnectionTypeString, Label: "Opportunity ID", Placeholder: "0065f00000AbCdEAAV - the deal whose products you want", Required: true},
 	{Name: "fields", Type: core.ConnectionTypeString, Label: "Fields", Placeholder: "Name,Quantity,UnitPrice - leave blank for the usual product-line fields"},
 	{Name: "order_by", Type: core.ConnectionTypeString, Label: "Sort By", Placeholder: "TotalPrice DESC - or ServiceDate ASC"},

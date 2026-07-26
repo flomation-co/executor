@@ -20,7 +20,7 @@ const (
 
 var Inputs = [...]core.Connection{
 	{Name: "access_token", Type: core.ConnectionTypeSecret, Label: "Salesforce Connection", Placeholder: "Connect Salesforce, or paste an access token", Required: true},
-	{Name: "instance_url", Type: core.ConnectionTypeString, Label: "Salesforce Instance URL", Placeholder: "https://mycompany.my.salesforce.com", Required: true},
+	{Name: "instance_url", Type: core.ConnectionTypeString, Label: "Salesforce Instance URL", Placeholder: "Leave blank — taken from your connection", FromCredentialMeta: "instance_url"},
 	{Name: "external_id_field", Type: core.ConnectionTypeString, Label: "Match On Field", Placeholder: "Booking_Reference__c — an External ID field on Task", Required: true},
 	{Name: "external_id_value", Type: core.ConnectionTypeString, Label: "Match On Value", Placeholder: "The reference this task has in your other system", Required: true},
 	{Name: "task_status", Type: core.ConnectionTypeString, Label: "Status", Placeholder: "Not Started"},

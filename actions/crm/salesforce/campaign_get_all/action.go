@@ -20,7 +20,7 @@ const (
 
 var Inputs = [...]core.Connection{
 	{Name: "access_token", Type: core.ConnectionTypeSecret, Label: "Salesforce Connection", Placeholder: "Connect Salesforce, or paste an access token", Required: true},
-	{Name: "instance_url", Type: core.ConnectionTypeString, Label: "Salesforce Instance URL", Placeholder: "https://mycompany.my.salesforce.com", Required: true},
+	{Name: "instance_url", Type: core.ConnectionTypeString, Label: "Salesforce Instance URL", Placeholder: "Leave blank — taken from your connection", FromCredentialMeta: "instance_url"},
 	{Name: "fields", Type: core.ConnectionTypeString, Label: "Fields", Placeholder: "Leave blank for the usual ones, or list them: Name, Status, Type, StartDate, NumberOfResponses"},
 	{Name: "active_only", Type: core.ConnectionTypeBoolean, Label: "Active Campaigns Only", Placeholder: "Tick to hide campaigns that have been switched off"},
 	{Name: "campaign_status", Type: core.ConnectionTypeString, Label: "Status", Placeholder: "Planned, In Progress, Completed or Aborted"},

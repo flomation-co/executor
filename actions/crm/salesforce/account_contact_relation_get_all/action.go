@@ -29,7 +29,7 @@ const defaultRelationFields = "Id, AccountId, Account.Name, ContactId, Contact.N
 
 var Inputs = [...]core.Connection{
 	{Name: "access_token", Type: core.ConnectionTypeSecret, Label: "Salesforce Connection", Placeholder: "Connect Salesforce, or paste an access token", Required: true},
-	{Name: "instance_url", Type: core.ConnectionTypeString, Label: "Salesforce Instance URL", Placeholder: "https://mycompany.my.salesforce.com", Required: true},
+	{Name: "instance_url", Type: core.ConnectionTypeString, Label: "Salesforce Instance URL", Placeholder: "Leave blank — taken from your connection", FromCredentialMeta: "instance_url"},
 	{Name: "account_id", Type: core.ConnectionTypeString, Label: "Account", Placeholder: "Record ID of the company, to list its contacts, e.g. 0015f00000AbCdEAAV"},
 	{Name: "contact_id", Type: core.ConnectionTypeString, Label: "Contact", Placeholder: "Record ID of the contact, to list their companies, e.g. 0035f00000XyZabAAF"},
 	{Name: "active_only", Type: core.ConnectionTypeBoolean, Label: "Active Relationships Only"},
