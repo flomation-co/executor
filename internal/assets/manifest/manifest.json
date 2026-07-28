@@ -524335,7 +524335,7 @@
     ]
   },
   "script/javascript": {
-    "hash": "4d933171e134056c5e47863af9eb514330e645f24b713b8a226ca0c1c3bd4b0b",
+    "hash": "a163500f78a6715223e323e3cd58f93289b587e6988a125692c6655a875a7d0a",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Run JavaScript",
@@ -524379,11 +524379,18 @@
         "placeholder": "e.g. total → number, status → string. Leave empty to emit the whole return value under \"result\"."
       },
       {
+        "name": "input_vars",
+        "type": "key_value_array",
+        "value": null,
+        "label": "Inputs",
+        "placeholder": "Add each input by name; the value can be a ${...} reference. Read it in the script as inputs.NAME."
+      },
+      {
         "name": "inputs_data",
         "type": "object",
         "value": null,
-        "label": "Inputs",
-        "placeholder": "Available inside the script as `inputs.X`. Wire variables in from upstream nodes."
+        "label": "Inputs (JSON object — advanced)",
+        "placeholder": "Optional. A whole JSON object merged under the named Inputs above. Prefer the named rows."
       },
       {
         "name": "timeout_seconds",
@@ -524425,7 +524432,7 @@
     ]
   },
   "script/python": {
-    "hash": "464c90ac66109014725a99c28d66bd452cac9af855126fceabd18d99090d457f",
+    "hash": "f934f0b0dd7ea8e04bee762f714548559e216e992aa4ddd1ca3d76a063c12a54",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Run Python",
@@ -524469,11 +524476,18 @@
         "placeholder": "e.g. total → number, status → string. Leave empty to emit the whole outputs dict under \"result\"."
       },
       {
+        "name": "input_vars",
+        "type": "key_value_array",
+        "value": null,
+        "label": "Inputs",
+        "placeholder": "Add each input by name; the value can be a ${...} reference. Read it in the script as inputs['NAME']."
+      },
+      {
         "name": "inputs_data",
         "type": "object",
         "value": null,
-        "label": "Inputs",
-        "placeholder": "Available inside the script as `inputs['X']`. Wire variables in from upstream nodes."
+        "label": "Inputs (JSON object — advanced)",
+        "placeholder": "Optional. A whole JSON object merged under the named Inputs above. Prefer the named rows."
       },
       {
         "name": "timeout_seconds",

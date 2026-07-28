@@ -66,10 +66,16 @@ var Inputs = [...]core.Connection{
 		Placeholder: "e.g. total → number, status → string. Leave empty to emit the whole return value under \"result\".",
 	},
 	{
+		Name:        "input_vars",
+		Type:        core.ConnectionTypeKeyValueArray,
+		Label:       "Inputs",
+		Placeholder: "Add each input by name; the value can be a ${...} reference. Read it in the script as inputs.NAME.",
+	},
+	{
 		Name:        "inputs_data",
 		Type:        core.ConnectionTypeObject,
-		Label:       "Inputs",
-		Placeholder: "Available inside the script as `inputs.X`. Wire variables in from upstream nodes.",
+		Label:       "Inputs (JSON object — advanced)",
+		Placeholder: "Optional. A whole JSON object merged under the named Inputs above. Prefer the named rows.",
 	},
 	{
 		Name:        "timeout_seconds",
@@ -108,11 +114,10 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	// declared keys.
 	specs := script_common.ParseOutputSpecs(inputs, "outputs")
 
-	// 3. User-supplied inputs payload. We accept a structured object
-	// directly; if the field arrives as a JSON string (which the
-	// connection layer will produce when a non-object value is
-	// piped in from upstream) we parse it transparently.
-	scriptInputs := readScriptInputs(inputs)
+	// 3. User-supplied inputs payload — the named input_vars rows
+	// (recommended) overlaid on the legacy inputs_data object. See
+	// script_common.BuildScriptInputs for the precedence rules.
+	scriptInputs := script_common.BuildScriptInputs(inputs)
 
 	// 4. Timeout
 	timeoutSecs := script_common.DefaultTimeoutSeconds
@@ -264,34 +269,6 @@ func runScript(ctx context.Context, code string, scriptInputs map[string]interfa
 		}
 	}
 	return merged, logBuf.String(), nil
-}
-
-// readScriptInputs reads the "inputs_data" connection and unwraps
-// it into a map ready for binding. Accepts both Go-native objects
-// (when piped from upstream nodes — Connection.Value is already a
-// map) and JSON strings (when typed directly into the property
-// menu or when an upstream output was JSON-encoded for transport).
-func readScriptInputs(inputs []*core.Connection) map[string]interface{} {
-	conn := core.FindConnection("inputs_data", inputs)
-	if conn == nil || conn.Value == nil {
-		return map[string]interface{}{}
-	}
-	// Native object — wired directly from upstream
-	if obj, ok := conn.Value.(map[string]interface{}); ok {
-		return obj
-	}
-	// JSON-encoded string — round-trip through Unmarshal
-	if s, ok := conn.Value.(string); ok {
-		trimmed := strings.TrimSpace(s)
-		if trimmed == "" {
-			return map[string]interface{}{}
-		}
-		var parsed map[string]interface{}
-		if err := json.Unmarshal([]byte(trimmed), &parsed); err == nil {
-			return parsed
-		}
-	}
-	return map[string]interface{}{}
 }
 
 func stringifyForLog(v interface{}) string {

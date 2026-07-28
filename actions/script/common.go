@@ -7,6 +7,7 @@ package script_common
 
 import (
 	"context"
+	"encoding/json"
 	"fmt"
 	"regexp"
 	"strings"
@@ -146,6 +147,84 @@ func zeroForType(typ string) interface{} {
 	default:
 		return nil
 	}
+}
+
+// ─── Script inputs ─────────────────────────────────────────────────
+//
+// A script action's `inputs` map is assembled from two sources, so authors get
+// an ergonomic named-row editor while older flows keep working:
+//
+//  1. input_vars — a key/value array (name → value). This is the RECOMMENDED
+//     path: one row per input, the value a literal or a ${...} reference. Because
+//     each row is named, `inputs.<name>` is exactly what you typed — no
+//     array-vs-object confusion (the trap of wiring a bare ${array} into a single
+//     object field). Each row's (already-substituted) string value is JSON-coerced
+//     so arrays/objects/numbers/bools arrive typed.
+//  2. inputs_data — the legacy single JSON-object field, kept as a fallback so
+//     existing flows are untouched. A non-object value (e.g. a bare array) yields
+//     nothing here — that is the very footgun input_vars removes.
+//
+// input_vars overlays inputs_data (a named row wins over the same key in the
+// object), so a flow can migrate incrementally.
+
+// coerceInputValue turns a substituted key/value-row string into a typed value:
+// valid JSON (array / object / number / bool / quoted-string) is decoded, and
+// anything else is kept as the raw string. An empty string stays "".
+func coerceInputValue(s string) interface{} {
+	t := strings.TrimSpace(s)
+	if t == "" {
+		return ""
+	}
+	var v interface{}
+	if err := json.Unmarshal([]byte(t), &v); err == nil {
+		return v
+	}
+	return s
+}
+
+// readInputsDataObject reads the legacy single "inputs_data" object field.
+// Accepts a native map (wired directly from an upstream node) or a JSON-object
+// string. A non-object value (a bare array, a scalar) yields nil — callers must
+// treat that as "no legacy inputs", NOT as an error.
+func readInputsDataObject(inputs []*core.Connection) map[string]interface{} {
+	conn := core.FindConnection("inputs_data", inputs)
+	if conn == nil || conn.Value == nil {
+		return nil
+	}
+	if obj, ok := conn.Value.(map[string]interface{}); ok {
+		return obj
+	}
+	if s, ok := conn.Value.(string); ok {
+		trimmed := strings.TrimSpace(s)
+		if trimmed == "" {
+			return nil
+		}
+		var parsed map[string]interface{}
+		if err := json.Unmarshal([]byte(trimmed), &parsed); err == nil {
+			return parsed
+		}
+	}
+	return nil
+}
+
+// BuildScriptInputs assembles the `inputs` map exposed to a script action from
+// the legacy inputs_data object (fallback) overlaid with the named input_vars
+// rows (recommended). See the section comment above for the precedence rules.
+func BuildScriptInputs(inputs []*core.Connection) map[string]interface{} {
+	out := map[string]interface{}{}
+	for k, v := range readInputsDataObject(inputs) {
+		out[k] = v
+	}
+	if conn := core.FindConnection("input_vars", inputs); conn != nil {
+		for _, kv := range conn.KeyValuePairs() {
+			key := strings.TrimSpace(kv.Key)
+			if key == "" {
+				continue
+			}
+			out[key] = coerceInputValue(kv.Value)
+		}
+	}
+	return out
 }
 
 // Truncate caps a string at the given byte limit and appends a
