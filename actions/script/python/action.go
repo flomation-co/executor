@@ -59,10 +59,16 @@ var Inputs = [...]core.Connection{
 		Placeholder: "e.g. total → number, status → string. Leave empty to emit the whole outputs dict under \"result\".",
 	},
 	{
+		Name:        "input_vars",
+		Type:        core.ConnectionTypeKeyValueArray,
+		Label:       "Inputs",
+		Placeholder: "Add each input by name; the value can be a ${...} reference. Read it in the script as inputs['NAME'].",
+	},
+	{
 		Name:        "inputs_data",
 		Type:        core.ConnectionTypeObject,
-		Label:       "Inputs",
-		Placeholder: "Available inside the script as `inputs['X']`. Wire variables in from upstream nodes.",
+		Label:       "Inputs (JSON object — advanced)",
+		Placeholder: "Optional. A whole JSON object merged under the named Inputs above. Prefer the named rows.",
 	},
 	{
 		Name:        "timeout_seconds",
@@ -134,7 +140,7 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	}
 
 	specs := script_common.ParseOutputSpecs(inputs, "outputs")
-	scriptInputs := readScriptInputs(inputs)
+	scriptInputs := script_common.BuildScriptInputs(inputs)
 
 	timeoutSecs := script_common.DefaultTimeoutSeconds
 	if tc := core.FindConnection("timeout_seconds", inputs); tc != nil && tc.Number() != nil {
@@ -337,27 +343,6 @@ func scriptError(ctx context.Context, runErr error, stderr string) error {
 		return fmt.Errorf("python script failed: %s", strings.TrimSpace(stderr))
 	}
 	return fmt.Errorf("python script failed: %w", runErr)
-}
-
-func readScriptInputs(inputs []*core.Connection) map[string]interface{} {
-	conn := core.FindConnection("inputs_data", inputs)
-	if conn == nil || conn.Value == nil {
-		return map[string]interface{}{}
-	}
-	if obj, ok := conn.Value.(map[string]interface{}); ok {
-		return obj
-	}
-	if s, ok := conn.Value.(string); ok {
-		trimmed := strings.TrimSpace(s)
-		if trimmed == "" {
-			return map[string]interface{}{}
-		}
-		var parsed map[string]interface{}
-		if err := json.Unmarshal([]byte(trimmed), &parsed); err == nil {
-			return parsed
-		}
-	}
-	return map[string]interface{}{}
 }
 
 func summariseSuccess(result map[string]interface{}, specs []script_common.OutputSpec) string {
