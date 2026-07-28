@@ -1907,16 +1907,20 @@ func (f *Flow) executeNodeActionOnly(actions map[string]Action, node *Node, envi
 		}
 
 		if val != nil {
-			// When the input is a JSON container (a "rows" 2D array,
-			// hand-authored as `[["${name}","${phone}"]]` and later
-			// json.Unmarshal'd by actions like google/sheets/append),
-			// substituted values must be JSON-string-escaped. Otherwise a
-			// variable holding a double quote, backslash, newline or a
-			// whole pasted JSON blob (common in free-text form answers)
-			// breaks the surrounding JSON and the action fails to parse
-			// its input. Escaping a plain value is a no-op, so ordinary
-			// string inputs are unaffected.
-			jsonCtx := v.Type == ConnectionTypeRows
+			// When the input is a JSON container, substituted values must be
+			// JSON-string-escaped. Otherwise a variable holding a double quote,
+			// backslash, newline or a whole pasted JSON blob (common in free-text
+			// form answers, or a whole array wired into a script Inputs row)
+			// breaks the surrounding JSON and the action fails to parse its input.
+			// Escaping a plain value is a no-op, so ordinary string inputs are
+			// unaffected. Two container types need this:
+			//   - rows: a hand-authored 2D array `[["${name}","${phone}"]]`.
+			//   - key_value_array: each pair's value sits inside a string
+			//     (`"value":"${x}"`) — Bash env vars and the script nodes' named
+			//     Inputs. Without escaping, wiring a ${array}/${object} (or any
+			//     value with a quote) corrupts the pairs JSON and KeyValuePairs()
+			//     silently drops every row.
+			jsonCtx := v.Type == ConnectionTypeRows || v.Type == ConnectionTypeKeyValueArray
 
 			r := regexp.MustCompile(`\${[^{}]*}`)
 			matches := r.FindAllString(*val, -1)
