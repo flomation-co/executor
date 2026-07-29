@@ -1421,8 +1421,11 @@ import (
 	gitlab_add_merge_request_comment "flomation.app/automate/executor/actions/gitlab/add_merge_request_comment"
 	gitlab_approve_merge_request "flomation.app/automate/executor/actions/gitlab/approve_merge_request"
 	gitlab_cancel_pipeline "flomation.app/automate/executor/actions/gitlab/cancel_pipeline"
+	gitlab_create_branch "flomation.app/automate/executor/actions/gitlab/create_branch"
+	gitlab_create_commit "flomation.app/automate/executor/actions/gitlab/create_commit"
 	gitlab_create_issue "flomation.app/automate/executor/actions/gitlab/create_issue"
 	gitlab_create_merge_request "flomation.app/automate/executor/actions/gitlab/create_merge_request"
+	gitlab_create_or_update_file "flomation.app/automate/executor/actions/gitlab/create_or_update_file"
 	gitlab_delete_merge_request_comment "flomation.app/automate/executor/actions/gitlab/delete_merge_request_comment"
 	gitlab_get_issue "flomation.app/automate/executor/actions/gitlab/get_issue"
 	gitlab_get_job_log "flomation.app/automate/executor/actions/gitlab/get_job_log"
@@ -4918,8 +4921,11 @@ var Actions = map[string]core.Action{
 	"gitlab/add_merge_request_comment":                                                gitlab_add_merge_request_comment.Execute,
 	"gitlab/approve_merge_request":                                                    gitlab_approve_merge_request.Execute,
 	"gitlab/cancel_pipeline":                                                          gitlab_cancel_pipeline.Execute,
+	"gitlab/create_branch":                                                            gitlab_create_branch.Execute,
+	"gitlab/create_commit":                                                            gitlab_create_commit.Execute,
 	"gitlab/create_issue":                                                             gitlab_create_issue.Execute,
 	"gitlab/create_merge_request":                                                     gitlab_create_merge_request.Execute,
+	"gitlab/create_or_update_file":                                                    gitlab_create_or_update_file.Execute,
 	"gitlab/delete_merge_request_comment":                                             gitlab_delete_merge_request_comment.Execute,
 	"gitlab/get_issue":                                                                gitlab_get_issue.Execute,
 	"gitlab/get_job_log":                                                              gitlab_get_job_log.Execute,

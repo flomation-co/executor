@@ -229077,6 +229077,230 @@
       }
     ]
   },
+  "gitlab/create_branch": {
+    "hash": "f246ad81aae3c88e241fec3a10392c6ec65d09584fa1408296fa825d0eb264ce",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "GitLab Create Branch",
+    "description": "Create a new branch in a GitLab project via the API (no git checkout)",
+    "website": "https://www.flomation.co",
+    "icon": "gitlab+code-branch",
+    "date": "29/07/2026",
+    "type": 2,
+    "category": {
+      "name": "GitLab",
+      "icon": "gitlab",
+      "description": "Manage merge requests, pipelines, and issues in GitLab"
+    },
+    "inputs": [
+      {
+        "name": "access_token",
+        "type": "secret",
+        "value": null,
+        "label": "GitLab Access Token",
+        "placeholder": "glpat-...",
+        "required": true
+      },
+      {
+        "name": "base_url",
+        "type": "string",
+        "value": null,
+        "label": "GitLab Base URL",
+        "placeholder": "https://gitlab.com"
+      },
+      {
+        "name": "project_id",
+        "type": "string",
+        "value": null,
+        "label": "Project ID",
+        "placeholder": "Numeric ID or namespace/project",
+        "required": true
+      },
+      {
+        "name": "branch",
+        "type": "string",
+        "value": null,
+        "label": "New Branch Name",
+        "placeholder": "feature/my-change",
+        "required": true
+      },
+      {
+        "name": "ref",
+        "type": "string",
+        "value": null,
+        "label": "Source Ref",
+        "placeholder": "main — branch, tag or commit SHA to branch from",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "branch",
+        "type": "string",
+        "value": null,
+        "label": "Branch name",
+        "placeholder": ""
+      },
+      {
+        "name": "commit_sha",
+        "type": "string",
+        "value": null,
+        "label": "Commit SHA",
+        "placeholder": ""
+      },
+      {
+        "name": "web_url",
+        "type": "string",
+        "value": null,
+        "label": "Web URL",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "gitlab/create_commit": {
+    "hash": "3a62fcbc6023bd59f5115a8f571aca8f80377b4201065898f81a6793fa3a5723",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "GitLab Create Commit",
+    "description": "Commit one or more file changes to a branch in a single commit via the API (no git)",
+    "website": "https://www.flomation.co",
+    "icon": "gitlab+code",
+    "date": "29/07/2026",
+    "type": 2,
+    "category": {
+      "name": "GitLab",
+      "icon": "gitlab",
+      "description": "Manage merge requests, pipelines, and issues in GitLab"
+    },
+    "inputs": [
+      {
+        "name": "access_token",
+        "type": "secret",
+        "value": null,
+        "label": "GitLab Access Token",
+        "placeholder": "glpat-...",
+        "required": true
+      },
+      {
+        "name": "base_url",
+        "type": "string",
+        "value": null,
+        "label": "GitLab Base URL",
+        "placeholder": "https://gitlab.com"
+      },
+      {
+        "name": "project_id",
+        "type": "string",
+        "value": null,
+        "label": "Project ID",
+        "placeholder": "Numeric ID or namespace/project",
+        "required": true
+      },
+      {
+        "name": "branch",
+        "type": "string",
+        "value": null,
+        "label": "Branch",
+        "placeholder": "feature/my-change",
+        "required": true
+      },
+      {
+        "name": "commit_message",
+        "type": "string",
+        "value": null,
+        "label": "Commit Message",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "actions",
+        "type": "code",
+        "value": null,
+        "label": "Actions (JSON array)",
+        "placeholder": "[{\"action\":\"create\",\"file_path\":\"NOTES.md\",\"content\":\"# Notes\"}] — action is create|update|delete|move",
+        "required": true
+      },
+      {
+        "name": "start_branch",
+        "type": "string",
+        "value": null,
+        "label": "Start Branch",
+        "placeholder": "main — creates Branch from this ref if it doesn't exist yet"
+      },
+      {
+        "name": "author_name",
+        "type": "string",
+        "value": null,
+        "label": "Author Name",
+        "placeholder": "Optional"
+      },
+      {
+        "name": "author_email",
+        "type": "string",
+        "value": null,
+        "label": "Author Email",
+        "placeholder": "Optional"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "commit_sha",
+        "type": "string",
+        "value": null,
+        "label": "Commit SHA",
+        "placeholder": ""
+      },
+      {
+        "name": "web_url",
+        "type": "string",
+        "value": null,
+        "label": "Web URL",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
   "gitlab/create_issue": {
     "hash": "44d4a78566b1e23fd89b1e222d89a856a7e1be07245c5bfd30889dafe75b467e",
     "author": "Andy Esser",
@@ -229303,6 +229527,130 @@
         "type": "string",
         "value": null,
         "label": "Web URL",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "gitlab/create_or_update_file": {
+    "hash": "33f7833f9f6dbe7b85a9a8b5c30d84131cd58c8554f818ecbb2a594e101865cb",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "GitLab Create or Update File",
+    "description": "Create or update a single file on a branch and commit it via the API (no git)",
+    "website": "https://www.flomation.co",
+    "icon": "gitlab+pencil",
+    "date": "29/07/2026",
+    "type": 2,
+    "category": {
+      "name": "GitLab",
+      "icon": "gitlab",
+      "description": "Manage merge requests, pipelines, and issues in GitLab"
+    },
+    "inputs": [
+      {
+        "name": "access_token",
+        "type": "secret",
+        "value": null,
+        "label": "GitLab Access Token",
+        "placeholder": "glpat-...",
+        "required": true
+      },
+      {
+        "name": "base_url",
+        "type": "string",
+        "value": null,
+        "label": "GitLab Base URL",
+        "placeholder": "https://gitlab.com"
+      },
+      {
+        "name": "project_id",
+        "type": "string",
+        "value": null,
+        "label": "Project ID",
+        "placeholder": "Numeric ID or namespace/project",
+        "required": true
+      },
+      {
+        "name": "branch",
+        "type": "string",
+        "value": null,
+        "label": "Branch",
+        "placeholder": "feature/my-change",
+        "required": true
+      },
+      {
+        "name": "file_path",
+        "type": "string",
+        "value": null,
+        "label": "File Path",
+        "placeholder": "path/to/file.md",
+        "required": true
+      },
+      {
+        "name": "content",
+        "type": "code",
+        "value": null,
+        "label": "File Content",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "commit_message",
+        "type": "string",
+        "value": null,
+        "label": "Commit Message",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "author_name",
+        "type": "string",
+        "value": null,
+        "label": "Author Name",
+        "placeholder": "Optional — overrides the token owner"
+      },
+      {
+        "name": "author_email",
+        "type": "string",
+        "value": null,
+        "label": "Author Email",
+        "placeholder": "Optional"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "file_path",
+        "type": "string",
+        "value": null,
+        "label": "File path",
+        "placeholder": ""
+      },
+      {
+        "name": "branch",
+        "type": "string",
+        "value": null,
+        "label": "Branch",
         "placeholder": ""
       },
       {
