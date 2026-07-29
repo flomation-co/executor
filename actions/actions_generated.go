@@ -1427,6 +1427,7 @@ import (
 	gitlab_create_merge_request "flomation.app/automate/executor/actions/gitlab/create_merge_request"
 	gitlab_create_or_update_file "flomation.app/automate/executor/actions/gitlab/create_or_update_file"
 	gitlab_delete_merge_request_comment "flomation.app/automate/executor/actions/gitlab/delete_merge_request_comment"
+	gitlab_get_file "flomation.app/automate/executor/actions/gitlab/get_file"
 	gitlab_get_issue "flomation.app/automate/executor/actions/gitlab/get_issue"
 	gitlab_get_job_log "flomation.app/automate/executor/actions/gitlab/get_job_log"
 	gitlab_get_merge_request "flomation.app/automate/executor/actions/gitlab/get_merge_request"
@@ -4927,6 +4928,7 @@ var Actions = map[string]core.Action{
 	"gitlab/create_merge_request":                                                     gitlab_create_merge_request.Execute,
 	"gitlab/create_or_update_file":                                                    gitlab_create_or_update_file.Execute,
 	"gitlab/delete_merge_request_comment":                                             gitlab_delete_merge_request_comment.Execute,
+	"gitlab/get_file":                                                                 gitlab_get_file.Execute,
 	"gitlab/get_issue":                                                                gitlab_get_issue.Execute,
 	"gitlab/get_job_log":                                                              gitlab_get_job_log.Execute,
 	"gitlab/get_merge_request":                                                        gitlab_get_merge_request.Execute,
