@@ -229749,6 +229749,142 @@
       }
     ]
   },
+  "gitlab/get_file": {
+    "hash": "33d631de9ed462dc09b106e2e52e748b73af294c56ea3f5f5c9ee55e3b9688aa",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "GitLab Get File",
+    "description": "Read a single file's contents from a branch, tag or commit via the API (no git)",
+    "website": "https://www.flomation.co",
+    "icon": "gitlab+file-lines",
+    "date": "29/07/2026",
+    "type": 2,
+    "category": {
+      "name": "GitLab",
+      "icon": "gitlab",
+      "description": "Manage merge requests, pipelines, and issues in GitLab"
+    },
+    "inputs": [
+      {
+        "name": "access_token",
+        "type": "secret",
+        "value": null,
+        "label": "GitLab Access Token",
+        "placeholder": "glpat-...",
+        "required": true
+      },
+      {
+        "name": "base_url",
+        "type": "string",
+        "value": null,
+        "label": "GitLab Base URL",
+        "placeholder": "https://gitlab.com"
+      },
+      {
+        "name": "project_id",
+        "type": "string",
+        "value": null,
+        "label": "Project ID",
+        "placeholder": "Numeric ID or namespace/project",
+        "required": true
+      },
+      {
+        "name": "file_path",
+        "type": "string",
+        "value": null,
+        "label": "File Path",
+        "placeholder": "path/to/file.json",
+        "required": true
+      },
+      {
+        "name": "ref",
+        "type": "string",
+        "value": null,
+        "label": "Ref",
+        "placeholder": "main — branch, tag or commit SHA to read from",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "content",
+        "type": "string",
+        "value": null,
+        "label": "File content",
+        "placeholder": ""
+      },
+      {
+        "name": "file_path",
+        "type": "string",
+        "value": null,
+        "label": "File path",
+        "placeholder": ""
+      },
+      {
+        "name": "file_name",
+        "type": "string",
+        "value": null,
+        "label": "File name",
+        "placeholder": ""
+      },
+      {
+        "name": "size",
+        "type": "integer",
+        "value": null,
+        "label": "Size (bytes)",
+        "placeholder": ""
+      },
+      {
+        "name": "sha",
+        "type": "string",
+        "value": null,
+        "label": "Content SHA-256",
+        "placeholder": ""
+      },
+      {
+        "name": "blob_id",
+        "type": "string",
+        "value": null,
+        "label": "Blob ID",
+        "placeholder": ""
+      },
+      {
+        "name": "last_commit_id",
+        "type": "string",
+        "value": null,
+        "label": "Last commit SHA",
+        "placeholder": ""
+      },
+      {
+        "name": "ref",
+        "type": "string",
+        "value": null,
+        "label": "Ref",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
   "gitlab/get_issue": {
     "hash": "a033d4f2f7d6065f2832aaeaf6855cf915860a08684a6713663894586749e78d",
     "author": "Andy Esser",
