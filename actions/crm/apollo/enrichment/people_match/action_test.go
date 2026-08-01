@@ -50,7 +50,10 @@ func TestExecute_Success(t *testing.T) {
 	Expect(err).ToNot(HaveOccurred())
 	Expect(res["success"]).To(BeTrue())
 	Expect(res["id"]).To(Equal("p_1"))
-	Expect(res["tool_result"]).To(Equal("Enriched Ada Lovelace"))
+	// tool_result carries the summary AND the enriched record (AI callers only
+	// see tool_result).
+	Expect(res["tool_result"].(string)).To(HavePrefix("Enriched Ada Lovelace"))
+	Expect(res["tool_result"].(string)).To(ContainSubstring("Ada Lovelace"))
 	Expect(string(gotBody)).To(ContainSubstring("ada@example.com"))
 }
 
