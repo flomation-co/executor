@@ -184171,7 +184171,7 @@
     ]
   },
   "crm/apollo/search/organization_search": {
-    "hash": "17723fdffd0e9af143f8041f01896fbdb5d5ea6564cf8a7345f13d85a1ac6ac7",
+    "hash": "ee5580a41c053585c87c2cb3a2603b397e29f9141af7e6ead9ae1f0616d17ab3",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Companies: Search",
@@ -184223,7 +184223,7 @@
         "type": "string",
         "value": null,
         "label": "Headcount Ranges",
-        "placeholder": "1,10 · 11,50 · 51,200 (comma-separated ranges)"
+        "placeholder": "Each range as min,max — separate ranges with ; e.g. 1,10;11,50;51,5000"
       },
       {
         "name": "page",
@@ -184279,7 +184279,7 @@
     ]
   },
   "crm/apollo/search/people_search": {
-    "hash": "bc703da8e0b30364999c4015d10ccaf237b39316e124f13ecc38c7ea29feb33d",
+    "hash": "fae14a1f9f031ed3b13e44f56b734adef1e5e4795dccad63ed6ae58f3ab07b6b",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "People: Search",

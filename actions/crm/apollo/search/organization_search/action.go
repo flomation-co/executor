@@ -22,7 +22,7 @@ var Inputs = [...]core.Connection{
 	{Name: "api_key", Type: core.ConnectionTypeSecret, Label: "Apollo API Key", Placeholder: "${secrets.ApolloApiKey}", Required: true},
 	{Name: "q_organization_name", Type: core.ConnectionTypeString, Label: "Company Name", Placeholder: "Search by company name"},
 	{Name: "organization_locations", Type: core.ConnectionTypeString, Label: "Company Locations", Placeholder: "United Kingdom (comma-separated)"},
-	{Name: "organization_num_employees_ranges", Type: core.ConnectionTypeString, Label: "Headcount Ranges", Placeholder: "1,10 · 11,50 · 51,200 (comma-separated ranges)"},
+	{Name: "organization_num_employees_ranges", Type: core.ConnectionTypeString, Label: "Headcount Ranges", Placeholder: "Each range as min,max — separate ranges with ; e.g. 1,10;11,50;51,5000"},
 	{Name: "page", Type: core.ConnectionTypeInteger, Label: "Page", Placeholder: "1"},
 	{Name: "per_page", Type: core.ConnectionTypeInteger, Label: "Per Page", Placeholder: "25 (max 100)"},
 }
@@ -44,7 +44,7 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	body := map[string]interface{}{}
 	apollo_common.SetString(body, "q_organization_name", "q_organization_name", inputs)
 	apollo_common.SetList(body, "organization_locations", "organization_locations", inputs)
-	apollo_common.SetList(body, "organization_num_employees_ranges", "organization_num_employees_ranges", inputs)
+	apollo_common.SetRangeList(body, "organization_num_employees_ranges", "organization_num_employees_ranges", inputs)
 	apollo_common.SetInt(body, "page", "page", inputs)
 	apollo_common.SetInt(body, "per_page", "per_page", inputs)
 
