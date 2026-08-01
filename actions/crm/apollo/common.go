@@ -368,7 +368,23 @@ func IDOf(obj map[string]interface{}) string {
 
 // --- result shapers ---
 
-// ObjectResult wraps a single Apollo object result for downstream nodes.
+// toolResultWithData renders the AI-facing tool_result as the summary followed
+// by the JSON payload. This is load-bearing: when an action is invoked as an AI
+// tool the agent receives ONLY tool_result (the `result`/`results` outputs are
+// for downstream flow nodes), so a summary-only tool_result — e.g. "Found 10
+// people" — starves the agent of the actual records. The flow engine truncates
+// oversized tool results by token budget, so including the full payload is safe.
+func toolResultWithData(summary string, data interface{}) string {
+	b, err := json.Marshal(data)
+	if err != nil || len(b) == 0 || string(b) == "null" || string(b) == "{}" || string(b) == "[]" {
+		return summary
+	}
+	return summary + ":\n" + string(b)
+}
+
+// ObjectResult wraps a single Apollo object result for downstream nodes. The
+// object is embedded in tool_result so an AI caller gets the fields, not just
+// the summary.
 func ObjectResult(id string, obj map[string]interface{}, summary string) map[string]interface{} {
 	if obj == nil {
 		obj = map[string]interface{}{}
@@ -377,7 +393,7 @@ func ObjectResult(id string, obj map[string]interface{}, summary string) map[str
 		id = IDOf(obj)
 	}
 	return map[string]interface{}{
-		"tool_result": summary,
+		"tool_result": toolResultWithData(summary, obj),
 		"id":          id,
 		"result":      obj,
 		"success":     true,
@@ -385,13 +401,15 @@ func ObjectResult(id string, obj map[string]interface{}, summary string) map[str
 	}
 }
 
-// ListResult wraps a collection of Apollo objects.
+// ListResult wraps a collection of Apollo objects. The records are embedded in
+// tool_result so an AI caller receives the actual data (names, emails, …), not
+// just a count.
 func ListResult(items []map[string]interface{}, summary string) map[string]interface{} {
 	if items == nil {
 		items = []map[string]interface{}{}
 	}
 	return map[string]interface{}{
-		"tool_result": summary,
+		"tool_result": toolResultWithData(summary, items),
 		"results":     items,
 		"count":       len(items),
 		"success":     true,

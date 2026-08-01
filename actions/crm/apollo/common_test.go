@@ -15,30 +15,43 @@ import (
 func TestObjectResult(t *testing.T) {
 	RegisterTestingT(t)
 
-	obj := map[string]interface{}{"id": "p_123", "name": "Ada Lovelace"}
+	obj := map[string]interface{}{"id": "p_123", "name": "Ada Lovelace", "email": "ada@x.com"}
 	res := ObjectResult("", obj, "Enriched Ada Lovelace")
 
 	Expect(res["success"]).To(BeTrue())
 	Expect(res["error"]).To(Equal(""))
 	Expect(res["id"]).To(Equal("p_123")) // derived from the object when id arg empty
-	Expect(res["tool_result"]).To(Equal("Enriched Ada Lovelace"))
 	Expect(res["result"]).To(Equal(obj))
+	// tool_result must carry the summary AND the object fields — an AI caller
+	// only sees tool_result, so summary-only would starve it of the data.
+	tr := res["tool_result"].(string)
+	Expect(tr).To(HavePrefix("Enriched Ada Lovelace"))
+	Expect(tr).To(ContainSubstring("Ada Lovelace"))
+	Expect(tr).To(ContainSubstring("ada@x.com"))
 }
 
 func TestListResult(t *testing.T) {
 	RegisterTestingT(t)
 
-	items := []map[string]interface{}{{"id": "1"}, {"id": "2"}}
+	items := []map[string]interface{}{{"name": "Ada", "email": "ada@x.com"}, {"name": "Grace"}}
 	res := ListResult(items, "Found 2 people")
 	Expect(res["success"]).To(BeTrue())
 	Expect(res["count"]).To(Equal(2))
 	Expect(res["results"]).To(Equal(items))
+	// Regression: tool_result must embed the actual records, not just the count,
+	// or an AI caller sees "Found 2 people" with no names/emails to act on.
+	tr := res["tool_result"].(string)
+	Expect(tr).To(HavePrefix("Found 2 people"))
+	Expect(tr).To(ContainSubstring("Ada"))
+	Expect(tr).To(ContainSubstring("ada@x.com"))
+	Expect(tr).To(ContainSubstring("Grace"))
 
 	// nil items normalise to an empty slice, not a null, so downstream nodes can
-	// iterate safely.
-	res = ListResult(nil, "Found 0")
+	// iterate safely; tool_result falls back to the bare summary (no empty array).
+	res = ListResult(nil, "Found 0 people")
 	Expect(res["count"]).To(Equal(0))
 	Expect(res["results"]).To(Equal([]map[string]interface{}{}))
+	Expect(res["tool_result"]).To(Equal("Found 0 people"))
 }
 
 func TestErrorResult(t *testing.T) {
