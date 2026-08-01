@@ -1077,14 +1077,20 @@ import (
 	conditional_switch "flomation.app/automate/executor/actions/conditional/switch"
 	conditional_while "flomation.app/automate/executor/actions/conditional/while"
 	crm_apollo_accounts_account_create "flomation.app/automate/executor/actions/crm/apollo/accounts/account_create"
+	crm_apollo_accounts_account_get "flomation.app/automate/executor/actions/crm/apollo/accounts/account_get"
 	crm_apollo_accounts_account_search "flomation.app/automate/executor/actions/crm/apollo/accounts/account_search"
 	crm_apollo_accounts_account_update "flomation.app/automate/executor/actions/crm/apollo/accounts/account_update"
 	crm_apollo_contacts_contact_create "flomation.app/automate/executor/actions/crm/apollo/contacts/contact_create"
+	crm_apollo_contacts_contact_get "flomation.app/automate/executor/actions/crm/apollo/contacts/contact_get"
 	crm_apollo_contacts_contact_search "flomation.app/automate/executor/actions/crm/apollo/contacts/contact_search"
 	crm_apollo_contacts_contact_update "flomation.app/automate/executor/actions/crm/apollo/contacts/contact_update"
 	crm_apollo_deals_deal_create "flomation.app/automate/executor/actions/crm/apollo/deals/deal_create"
 	crm_apollo_deals_deal_list "flomation.app/automate/executor/actions/crm/apollo/deals/deal_list"
 	crm_apollo_deals_deal_update "flomation.app/automate/executor/actions/crm/apollo/deals/deal_update"
+	crm_apollo_emailer_email_account_list "flomation.app/automate/executor/actions/crm/apollo/emailer/email_account_list"
+	crm_apollo_emailer_email_draft_create "flomation.app/automate/executor/actions/crm/apollo/emailer/email_draft_create"
+	crm_apollo_emailer_email_search "flomation.app/automate/executor/actions/crm/apollo/emailer/email_search"
+	crm_apollo_emailer_email_send "flomation.app/automate/executor/actions/crm/apollo/emailer/email_send"
 	crm_apollo_enrichment_organization_bulk_enrich "flomation.app/automate/executor/actions/crm/apollo/enrichment/organization_bulk_enrich"
 	crm_apollo_enrichment_organization_enrich "flomation.app/automate/executor/actions/crm/apollo/enrichment/organization_enrich"
 	crm_apollo_enrichment_people_bulk_match "flomation.app/automate/executor/actions/crm/apollo/enrichment/people_bulk_match"
@@ -1092,7 +1098,10 @@ import (
 	crm_apollo_search_organization_search "flomation.app/automate/executor/actions/crm/apollo/search/organization_search"
 	crm_apollo_search_people_search "flomation.app/automate/executor/actions/crm/apollo/search/people_search"
 	crm_apollo_sequences_sequence_add_contacts "flomation.app/automate/executor/actions/crm/apollo/sequences/sequence_add_contacts"
+	crm_apollo_sequences_sequence_create "flomation.app/automate/executor/actions/crm/apollo/sequences/sequence_create"
 	crm_apollo_sequences_sequence_list "flomation.app/automate/executor/actions/crm/apollo/sequences/sequence_list"
+	crm_apollo_sequences_sequence_update "flomation.app/automate/executor/actions/crm/apollo/sequences/sequence_update"
+	crm_apollo_sequences_sequence_update_contact_status "flomation.app/automate/executor/actions/crm/apollo/sequences/sequence_update_contact_status"
 	crm_apollo_sequences_task_create "flomation.app/automate/executor/actions/crm/apollo/sequences/task_create"
 	crm_apollo_sequences_user_list "flomation.app/automate/executor/actions/crm/apollo/sequences/user_list"
 	crm_salesforce_account_add_note "flomation.app/automate/executor/actions/crm/salesforce/account_add_note"
@@ -4598,14 +4607,20 @@ var Actions = map[string]core.Action{
 	"conditional/switch":                                                              conditional_switch.Execute,
 	"conditional/while":                                                               conditional_while.Execute,
 	"crm/apollo/accounts/account_create":                                              crm_apollo_accounts_account_create.Execute,
+	"crm/apollo/accounts/account_get":                                                 crm_apollo_accounts_account_get.Execute,
 	"crm/apollo/accounts/account_search":                                              crm_apollo_accounts_account_search.Execute,
 	"crm/apollo/accounts/account_update":                                              crm_apollo_accounts_account_update.Execute,
 	"crm/apollo/contacts/contact_create":                                              crm_apollo_contacts_contact_create.Execute,
+	"crm/apollo/contacts/contact_get":                                                 crm_apollo_contacts_contact_get.Execute,
 	"crm/apollo/contacts/contact_search":                                              crm_apollo_contacts_contact_search.Execute,
 	"crm/apollo/contacts/contact_update":                                              crm_apollo_contacts_contact_update.Execute,
 	"crm/apollo/deals/deal_create":                                                    crm_apollo_deals_deal_create.Execute,
 	"crm/apollo/deals/deal_list":                                                      crm_apollo_deals_deal_list.Execute,
 	"crm/apollo/deals/deal_update":                                                    crm_apollo_deals_deal_update.Execute,
+	"crm/apollo/emailer/email_account_list":                                           crm_apollo_emailer_email_account_list.Execute,
+	"crm/apollo/emailer/email_draft_create":                                           crm_apollo_emailer_email_draft_create.Execute,
+	"crm/apollo/emailer/email_search":                                                 crm_apollo_emailer_email_search.Execute,
+	"crm/apollo/emailer/email_send":                                                   crm_apollo_emailer_email_send.Execute,
 	"crm/apollo/enrichment/organization_bulk_enrich":                                  crm_apollo_enrichment_organization_bulk_enrich.Execute,
 	"crm/apollo/enrichment/organization_enrich":                                       crm_apollo_enrichment_organization_enrich.Execute,
 	"crm/apollo/enrichment/people_bulk_match":                                         crm_apollo_enrichment_people_bulk_match.Execute,
@@ -4613,7 +4628,10 @@ var Actions = map[string]core.Action{
 	"crm/apollo/search/organization_search":                                           crm_apollo_search_organization_search.Execute,
 	"crm/apollo/search/people_search":                                                 crm_apollo_search_people_search.Execute,
 	"crm/apollo/sequences/sequence_add_contacts":                                      crm_apollo_sequences_sequence_add_contacts.Execute,
+	"crm/apollo/sequences/sequence_create":                                            crm_apollo_sequences_sequence_create.Execute,
 	"crm/apollo/sequences/sequence_list":                                              crm_apollo_sequences_sequence_list.Execute,
+	"crm/apollo/sequences/sequence_update":                                            crm_apollo_sequences_sequence_update.Execute,
+	"crm/apollo/sequences/sequence_update_contact_status":                             crm_apollo_sequences_sequence_update_contact_status.Execute,
 	"crm/apollo/sequences/task_create":                                                crm_apollo_sequences_task_create.Execute,
 	"crm/apollo/sequences/user_list":                                                  crm_apollo_sequences_user_list.Execute,
 	"crm/salesforce/account_add_note":                                                 crm_salesforce_account_add_note.Execute,

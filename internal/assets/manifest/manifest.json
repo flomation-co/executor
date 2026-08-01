@@ -182727,6 +182727,87 @@
       }
     ]
   },
+  "crm/apollo/accounts/account_get": {
+    "hash": "4e18bf03edd89030e7338d2427497aee9b0cf3155235cb18e5ca3ae3e213b060",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Account: Get by ID",
+    "description": "Fetch a single Apollo account by its ID (Apollo master key required).",
+    "website": "https://www.flomation.co",
+    "icon": "apollo+eye",
+    "date": "01/08/2026",
+    "type": 2,
+    "category": {
+      "name": "CRM",
+      "icon": "people-group",
+      "description": "Customer relationship management — contacts, companies, deals, and tickets"
+    },
+    "sub_category": {
+      "name": "Apollo",
+      "icon": "apollo",
+      "description": "Enrich, search and manage Apollo.io contacts, accounts, deals and sequences"
+    },
+    "sub_sub_category": {
+      "name": "Accounts",
+      "icon": "briefcase",
+      "description": "Create, update and search Apollo CRM accounts"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "Apollo API Key",
+        "placeholder": "${secrets.ApolloApiKey} (master key)",
+        "required": true
+      },
+      {
+        "name": "account_id",
+        "type": "string",
+        "value": null,
+        "label": "Account ID",
+        "placeholder": "The Apollo account ID",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Account ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Account",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
   "crm/apollo/accounts/account_search": {
     "hash": "e29dfd6c2556253263b8ee7656e43f63074551e9d66ad743214da49ad51c6982",
     "author": "Andy Esser",
@@ -183089,6 +183170,87 @@
         "value": null,
         "label": "Additional Fields (JSON)",
         "placeholder": "{\"typed_custom_fields\":{\"…\":\"…\"}}"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Contact ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Contact",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "crm/apollo/contacts/contact_get": {
+    "hash": "16f34291909c37ba6cece08b50b0c245814118be7887a4c86e055ca3156fbe9e",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Contact: Get by ID",
+    "description": "Fetch a single Apollo contact by its ID (Apollo master key required).",
+    "website": "https://www.flomation.co",
+    "icon": "apollo+eye",
+    "date": "01/08/2026",
+    "type": 2,
+    "category": {
+      "name": "CRM",
+      "icon": "people-group",
+      "description": "Customer relationship management — contacts, companies, deals, and tickets"
+    },
+    "sub_category": {
+      "name": "Apollo",
+      "icon": "apollo",
+      "description": "Enrich, search and manage Apollo.io contacts, accounts, deals and sequences"
+    },
+    "sub_sub_category": {
+      "name": "Contacts",
+      "icon": "user",
+      "description": "Create, update and search Apollo CRM contacts"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "Apollo API Key",
+        "placeholder": "${secrets.ApolloApiKey} (master key)",
+        "required": true
+      },
+      {
+        "name": "contact_id",
+        "type": "string",
+        "value": null,
+        "label": "Contact ID",
+        "placeholder": "The Apollo contact ID",
+        "required": true
       }
     ],
     "outputs": [
@@ -183777,6 +183939,391 @@
       }
     ]
   },
+  "crm/apollo/emailer/email_account_list": {
+    "hash": "4f676d4f070d5001be156578a5d86764e33eb070837ef16302323ddd9132d69f",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Email Accounts: List",
+    "description": "List the connected mailboxes in Apollo — use an id as the sequence sender. Master key.",
+    "website": "https://www.flomation.co",
+    "icon": "apollo+list",
+    "date": "01/08/2026",
+    "type": 2,
+    "category": {
+      "name": "CRM",
+      "icon": "people-group",
+      "description": "Customer relationship management — contacts, companies, deals, and tickets"
+    },
+    "sub_category": {
+      "name": "Apollo",
+      "icon": "apollo",
+      "description": "Enrich, search and manage Apollo.io contacts, accounts, deals and sequences"
+    },
+    "sub_sub_category": {
+      "name": "Emailer",
+      "icon": "envelope",
+      "description": "Apollo email accounts and one-off outbound email (draft + send)"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "Apollo API Key",
+        "placeholder": "${secrets.ApolloApiKey} (master key)",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "results",
+        "type": "object",
+        "value": null,
+        "label": "Email Accounts",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Count",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "crm/apollo/emailer/email_draft_create": {
+    "hash": "4de241c291f329e1500d8618ffe2236457039f019e543d5c433ede943a680fb1",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Email: Create Draft",
+    "description": "Create a one-off email draft to a contact (does not send). Master key required.",
+    "website": "https://www.flomation.co",
+    "icon": "apollo+pen",
+    "date": "01/08/2026",
+    "type": 2,
+    "category": {
+      "name": "CRM",
+      "icon": "people-group",
+      "description": "Customer relationship management — contacts, companies, deals, and tickets"
+    },
+    "sub_category": {
+      "name": "Apollo",
+      "icon": "apollo",
+      "description": "Enrich, search and manage Apollo.io contacts, accounts, deals and sequences"
+    },
+    "sub_sub_category": {
+      "name": "Emailer",
+      "icon": "envelope",
+      "description": "Apollo email accounts and one-off outbound email (draft + send)"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "Apollo API Key",
+        "placeholder": "${secrets.ApolloApiKey} (master key)",
+        "required": true
+      },
+      {
+        "name": "contact_id",
+        "type": "string",
+        "value": null,
+        "label": "Contact ID",
+        "placeholder": "The Apollo contact to email",
+        "required": true
+      },
+      {
+        "name": "subject",
+        "type": "string",
+        "value": null,
+        "label": "Subject",
+        "placeholder": "Quick question, {{first_name}}"
+      },
+      {
+        "name": "body_html",
+        "type": "text",
+        "value": null,
+        "label": "Body (HTML)",
+        "placeholder": "\u003cp\u003eHi {{first_name}}…\u003c/p\u003e"
+      },
+      {
+        "name": "emailer_template_id",
+        "type": "string",
+        "value": null,
+        "label": "Template ID",
+        "placeholder": "Optional Apollo email template ID"
+      },
+      {
+        "name": "enable_tracking",
+        "type": "boolean",
+        "value": null,
+        "label": "Enable Tracking",
+        "placeholder": "Track opens/clicks"
+      },
+      {
+        "name": "fields",
+        "type": "text",
+        "value": null,
+        "label": "Additional Fields (JSON)",
+        "placeholder": "{\"recipients\":[{\"email\":\"…\",\"type\":\"cc\"}]}"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Email Message ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Email Message",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "crm/apollo/emailer/email_search": {
+    "hash": "fa6a60911cfb26c52ff75dd4f33eb34d15ff8daba381e4fd4ad8a803ebda658f",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Emails: Search",
+    "description": "Search Apollo outreach emails by contact, sequence or keyword. Master key required.",
+    "website": "https://www.flomation.co",
+    "icon": "apollo+magnifying-glass",
+    "date": "01/08/2026",
+    "type": 2,
+    "category": {
+      "name": "CRM",
+      "icon": "people-group",
+      "description": "Customer relationship management — contacts, companies, deals, and tickets"
+    },
+    "sub_category": {
+      "name": "Apollo",
+      "icon": "apollo",
+      "description": "Enrich, search and manage Apollo.io contacts, accounts, deals and sequences"
+    },
+    "sub_sub_category": {
+      "name": "Emailer",
+      "icon": "envelope",
+      "description": "Apollo email accounts and one-off outbound email (draft + send)"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "Apollo API Key",
+        "placeholder": "${secrets.ApolloApiKey} (master key)",
+        "required": true
+      },
+      {
+        "name": "q_keywords",
+        "type": "string",
+        "value": null,
+        "label": "Keywords",
+        "placeholder": "Subject / body search"
+      },
+      {
+        "name": "emailer_campaign_id",
+        "type": "string",
+        "value": null,
+        "label": "Sequence ID",
+        "placeholder": "Filter to one sequence"
+      },
+      {
+        "name": "contact_id",
+        "type": "string",
+        "value": null,
+        "label": "Contact ID",
+        "placeholder": "Filter to one contact"
+      },
+      {
+        "name": "page",
+        "type": "integer",
+        "value": null,
+        "label": "Page",
+        "placeholder": "1"
+      },
+      {
+        "name": "per_page",
+        "type": "integer",
+        "value": null,
+        "label": "Per Page",
+        "placeholder": "25 (max 100)"
+      },
+      {
+        "name": "fields",
+        "type": "text",
+        "value": null,
+        "label": "Additional Filters (JSON)",
+        "placeholder": "{\"email_status\":[\"sent\"]}"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "results",
+        "type": "object",
+        "value": null,
+        "label": "Emails",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Count",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "crm/apollo/emailer/email_send": {
+    "hash": "9fc7d22acbf5c58dac2aef1209158722a3554ae668e37f81ca0d1416457aac03",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Email: Send Now",
+    "description": "Send a drafted Apollo email immediately (async). Master key required.",
+    "website": "https://www.flomation.co",
+    "icon": "apollo+paper-plane",
+    "date": "01/08/2026",
+    "type": 2,
+    "category": {
+      "name": "CRM",
+      "icon": "people-group",
+      "description": "Customer relationship management — contacts, companies, deals, and tickets"
+    },
+    "sub_category": {
+      "name": "Apollo",
+      "icon": "apollo",
+      "description": "Enrich, search and manage Apollo.io contacts, accounts, deals and sequences"
+    },
+    "sub_sub_category": {
+      "name": "Emailer",
+      "icon": "envelope",
+      "description": "Apollo email accounts and one-off outbound email (draft + send)"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "Apollo API Key",
+        "placeholder": "${secrets.ApolloApiKey} (master key)",
+        "required": true
+      },
+      {
+        "name": "emailer_message_id",
+        "type": "string",
+        "value": null,
+        "label": "Email Message ID",
+        "placeholder": "The drafted email message ID to send",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Email Message ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Email Message",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
   "crm/apollo/enrichment/organization_bulk_enrich": {
     "hash": "a25dd9e2048cda6d08f4e3d06b3b0779b4d0dd2c08be599420e8c7c1ad3d5c6e",
     "author": "Andy Esser",
@@ -184035,7 +184582,7 @@
     ]
   },
   "crm/apollo/enrichment/people_match": {
-    "hash": "e45fbac26d3e50d3f1f006491916773fbbd23c369af782ec3a3daa788c381691",
+    "hash": "106a799da531111cd05521a98a875b941b90d7b92e5233d7c674f2b927d3d558",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Person: Enrich",
@@ -184534,6 +185081,136 @@
       }
     ]
   },
+  "crm/apollo/sequences/sequence_create": {
+    "hash": "6217fd0e46efa31d447c5ad3c3491d952e0621477c320c2a65a3441bdafd80dd",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Sequence: Create",
+    "description": "Create an Apollo sequence (emailer campaign). Needs a name. Master key required.",
+    "website": "https://www.flomation.co",
+    "icon": "apollo+plus",
+    "date": "01/08/2026",
+    "type": 2,
+    "category": {
+      "name": "CRM",
+      "icon": "people-group",
+      "description": "Customer relationship management — contacts, companies, deals, and tickets"
+    },
+    "sub_category": {
+      "name": "Apollo",
+      "icon": "apollo",
+      "description": "Enrich, search and manage Apollo.io contacts, accounts, deals and sequences"
+    },
+    "sub_sub_category": {
+      "name": "Sequences",
+      "icon": "paper-plane",
+      "description": "Manage Apollo sequences, tasks and engagement"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "Apollo API Key",
+        "placeholder": "${secrets.ApolloApiKey} (master key)",
+        "required": true
+      },
+      {
+        "name": "name",
+        "type": "string",
+        "value": null,
+        "label": "Sequence Name",
+        "placeholder": "Q3 Enterprise Outbound",
+        "required": true
+      },
+      {
+        "name": "permissions",
+        "type": "string",
+        "value": null,
+        "label": "Visibility",
+        "placeholder": "team_can_use",
+        "options": [
+          {
+            "name": "Team can use",
+            "value": "team_can_use"
+          },
+          {
+            "name": "Team can view",
+            "value": "team_can_view"
+          },
+          {
+            "name": "Private",
+            "value": "private"
+          }
+        ]
+      },
+      {
+        "name": "active",
+        "type": "boolean",
+        "value": null,
+        "label": "Active",
+        "placeholder": "Start the sequence active (default off)"
+      },
+      {
+        "name": "user_id",
+        "type": "string",
+        "value": null,
+        "label": "Owner (User ID)",
+        "placeholder": "Apollo user ID of the owner"
+      },
+      {
+        "name": "label_names",
+        "type": "string",
+        "value": null,
+        "label": "Folder/Label Names",
+        "placeholder": "Comma-separated"
+      },
+      {
+        "name": "fields",
+        "type": "text",
+        "value": null,
+        "label": "Additional Fields (JSON)",
+        "placeholder": "{\"emailer_steps\":[…],\"max_emails_per_day\":50}"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Sequence ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Sequence",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
   "crm/apollo/sequences/sequence_list": {
     "hash": "273485d35831386589856372edfbe125b4aa4590989070b7127484334a5bbf8c",
     "author": "Andy Esser",
@@ -184610,6 +185287,254 @@
         "type": "integer",
         "value": null,
         "label": "Count",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "crm/apollo/sequences/sequence_update": {
+    "hash": "b664ae9e49a6e95adb304bd2aee714c4970db15b2dbf7ec64e9423175e0599b5",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Sequence: Update",
+    "description": "Update an Apollo sequence by ID (name, active, visibility…). Master key required.",
+    "website": "https://www.flomation.co",
+    "icon": "apollo+pen",
+    "date": "01/08/2026",
+    "type": 2,
+    "category": {
+      "name": "CRM",
+      "icon": "people-group",
+      "description": "Customer relationship management — contacts, companies, deals, and tickets"
+    },
+    "sub_category": {
+      "name": "Apollo",
+      "icon": "apollo",
+      "description": "Enrich, search and manage Apollo.io contacts, accounts, deals and sequences"
+    },
+    "sub_sub_category": {
+      "name": "Sequences",
+      "icon": "paper-plane",
+      "description": "Manage Apollo sequences, tasks and engagement"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "Apollo API Key",
+        "placeholder": "${secrets.ApolloApiKey} (master key)",
+        "required": true
+      },
+      {
+        "name": "sequence_id",
+        "type": "string",
+        "value": null,
+        "label": "Sequence ID",
+        "placeholder": "The Apollo sequence (emailer campaign) ID",
+        "required": true
+      },
+      {
+        "name": "name",
+        "type": "string",
+        "value": null,
+        "label": "Sequence Name",
+        "placeholder": "Q3 Enterprise Outbound"
+      },
+      {
+        "name": "active",
+        "type": "boolean",
+        "value": null,
+        "label": "Active",
+        "placeholder": ""
+      },
+      {
+        "name": "permissions",
+        "type": "string",
+        "value": null,
+        "label": "Visibility",
+        "placeholder": "team_can_use",
+        "options": [
+          {
+            "name": "Team can use",
+            "value": "team_can_use"
+          },
+          {
+            "name": "Team can view",
+            "value": "team_can_view"
+          },
+          {
+            "name": "Private",
+            "value": "private"
+          }
+        ]
+      },
+      {
+        "name": "label_names",
+        "type": "string",
+        "value": null,
+        "label": "Folder/Label Names",
+        "placeholder": "Comma-separated"
+      },
+      {
+        "name": "max_emails_per_day",
+        "type": "integer",
+        "value": null,
+        "label": "Max Emails Per Day",
+        "placeholder": "50"
+      },
+      {
+        "name": "fields",
+        "type": "text",
+        "value": null,
+        "label": "Additional Fields (JSON)",
+        "placeholder": "{\"emailer_steps\":[…]}"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Sequence ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Sequence",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "crm/apollo/sequences/sequence_update_contact_status": {
+    "hash": "8dea89cbee6e62fabd652ba0041bcfd77c47ea7e51125dcbb513dc52f82a467c",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Sequence: Update Contact Status",
+    "description": "Mark finished / remove / stop contacts in an Apollo sequence. Master key required.",
+    "website": "https://www.flomation.co",
+    "icon": "apollo+circle-check",
+    "date": "01/08/2026",
+    "type": 2,
+    "category": {
+      "name": "CRM",
+      "icon": "people-group",
+      "description": "Customer relationship management — contacts, companies, deals, and tickets"
+    },
+    "sub_category": {
+      "name": "Apollo",
+      "icon": "apollo",
+      "description": "Enrich, search and manage Apollo.io contacts, accounts, deals and sequences"
+    },
+    "sub_sub_category": {
+      "name": "Sequences",
+      "icon": "paper-plane",
+      "description": "Manage Apollo sequences, tasks and engagement"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "Apollo API Key",
+        "placeholder": "${secrets.ApolloApiKey} (master key)",
+        "required": true
+      },
+      {
+        "name": "sequence_id",
+        "type": "string",
+        "value": null,
+        "label": "Sequence ID",
+        "placeholder": "The Apollo sequence (emailer campaign) ID",
+        "required": true
+      },
+      {
+        "name": "contact_ids",
+        "type": "string",
+        "value": null,
+        "label": "Contact IDs",
+        "placeholder": "Comma-separated Apollo contact IDs",
+        "required": true
+      },
+      {
+        "name": "mode",
+        "type": "string",
+        "value": null,
+        "label": "Mode",
+        "placeholder": "mark_as_finished",
+        "required": true,
+        "options": [
+          {
+            "name": "Mark as finished",
+            "value": "mark_as_finished"
+          },
+          {
+            "name": "Remove from sequence",
+            "value": "remove"
+          },
+          {
+            "name": "Stop",
+            "value": "stop"
+          }
+        ]
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Job ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Progress Job",
         "placeholder": ""
       },
       {
