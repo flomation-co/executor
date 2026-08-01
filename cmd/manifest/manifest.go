@@ -42,8 +42,9 @@ type ManifestEntry struct {
 	Date         string `json:"date"`
 	Type         int64  `json:"type"`
 
-	Category    *CategoryMeta `json:"category,omitempty"`
-	SubCategory *CategoryMeta `json:"sub_category,omitempty"`
+	Category       *CategoryMeta `json:"category,omitempty"`
+	SubCategory    *CategoryMeta `json:"sub_category,omitempty"`
+	SubSubCategory *CategoryMeta `json:"sub_sub_category,omitempty"`
 
 	Inputs  []core.Connection `json:"inputs"`
 	Outputs []core.Connection `json:"outputs"`
@@ -624,39 +625,57 @@ func main() {
 			delete(manifest, key)
 			continue
 		}
-		// Find the matching category (top-level) and sub-category by checking path prefixes
+		// Find the matching category by checking path prefixes at each depth. A
+		// category.go with N path segments (N slashes) sets the level-N grouping:
+		//   0 slashes → top Category      (e.g. "crm")
+		//   1 slash   → Sub-Category      (e.g. "crm/apollo")
+		//   2 slashes → Sub-Sub-Category  (e.g. "crm/apollo/enrichment")
+		// The longest matching prefix at each level wins.
 		topPrefix := ""
 		subPrefix := ""
+		subSubPrefix := ""
 		for catKey := range categories {
 			if strings.HasPrefix(key, catKey+"/") || key == catKey {
-				segments := strings.Count(catKey, "/")
-				if segments == 0 && len(catKey) > len(topPrefix) {
-					topPrefix = catKey
-				} else if segments > 0 && len(catKey) > len(subPrefix) {
-					subPrefix = catKey
+				switch strings.Count(catKey, "/") {
+				case 0:
+					if len(catKey) > len(topPrefix) {
+						topPrefix = catKey
+					}
+				case 1:
+					if len(catKey) > len(subPrefix) {
+						subPrefix = catKey
+					}
+				case 2:
+					if len(catKey) > len(subSubPrefix) {
+						subSubPrefix = catKey
+					}
 				}
 			}
 		}
+		parts := strings.Split(key, "/")
 		if topPrefix != "" && me.Category == nil {
 			me.Category = categories[topPrefix]
 			manifest[key] = me
 		}
-		// Apply sub-category for actions with 3+ path segments
+		// Sub-category: explicit category.go, else auto-generate from parts[1]
+		// for actions with 3+ path segments.
 		if subPrefix != "" {
 			me.SubCategory = categories[subPrefix]
 			manifest[key] = me
-		} else {
-			// Auto-generate sub-category from path for 3+ segment action IDs without explicit metadata
-			parts := strings.Split(key, "/")
-			if len(parts) >= 3 {
-				subDir := parts[1]
-				me.SubCategory = &CategoryMeta{
-					Name:        strings.ToUpper(subDir[:1]) + subDir[1:],
-					Icon:        "",
-					Description: "",
-				}
-				manifest[key] = me
-			}
+		} else if len(parts) >= 3 {
+			subDir := parts[1]
+			me.SubCategory = &CategoryMeta{Name: strings.ToUpper(subDir[:1]) + subDir[1:]}
+			manifest[key] = me
+		}
+		// Sub-sub-category: explicit category.go, else auto-generate from parts[2]
+		// for actions with 4+ path segments.
+		if subSubPrefix != "" {
+			me.SubSubCategory = categories[subSubPrefix]
+			manifest[key] = me
+		} else if len(parts) >= 4 {
+			subSubDir := parts[2]
+			me.SubSubCategory = &CategoryMeta{Name: strings.ToUpper(subSubDir[:1]) + subSubDir[1:]}
+			manifest[key] = me
 		}
 	}
 
