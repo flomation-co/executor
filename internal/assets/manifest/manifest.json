@@ -540243,6 +540243,83 @@
       }
     ]
   },
+  "trigger/apollo_webhook": {
+    "hash": "e7efa918fe24c4da7aa18232b172cdfde370a265bb7ccd8740fcb7103924a0e1",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Apollo Webhook Trigger",
+    "description": "Triggers a flow when an Apollo.io webhook fires (contact/account created, sequence engagement…)",
+    "website": "https://www.flomation.co",
+    "icon": "apollo",
+    "date": "01/08/2026",
+    "type": 1,
+    "category": {
+      "name": "Triggers",
+      "icon": "bolt-lightning",
+      "description": "Start a Flow"
+    },
+    "inputs": [
+      {
+        "name": "webhook_secret",
+        "type": "secret",
+        "value": null,
+        "label": "Webhook Secret",
+        "placeholder": "A secret token you choose; append it to the webhook URL as ?secret=…",
+        "required": true
+      },
+      {
+        "name": "event_filter",
+        "type": "string",
+        "value": null,
+        "label": "Event Filter",
+        "placeholder": "Comma-separated event types, e.g. contact.created,account.created (blank = all)"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "content",
+        "type": "string",
+        "value": null,
+        "label": "Event Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "event_type",
+        "type": "string",
+        "value": null,
+        "label": "Event Type",
+        "placeholder": ""
+      },
+      {
+        "name": "event_id",
+        "type": "string",
+        "value": null,
+        "label": "Event ID",
+        "placeholder": ""
+      },
+      {
+        "name": "record_id",
+        "type": "string",
+        "value": null,
+        "label": "Record ID",
+        "placeholder": ""
+      },
+      {
+        "name": "body",
+        "type": "string",
+        "value": null,
+        "label": "Raw JSON Body",
+        "placeholder": ""
+      },
+      {
+        "name": "triggered_at",
+        "type": "string",
+        "value": null,
+        "label": "Triggered At",
+        "placeholder": ""
+      }
+    ]
+  },
   "trigger/asana_webhook": {
     "hash": "8b5014c3d35bcca921b858be944962b7f3cf648623ca8762f92c8288bd5e360f",
     "author": "Dave McElin",

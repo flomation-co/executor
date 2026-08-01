@@ -3315,6 +3315,7 @@ import (
 	trello_list_update "flomation.app/automate/executor/actions/trello/list_update"
 	trigger_acuity_webhook "flomation.app/automate/executor/actions/trigger/acuity_webhook"
 	trigger_airtable_poll "flomation.app/automate/executor/actions/trigger/airtable_poll"
+	trigger_apollo_webhook "flomation.app/automate/executor/actions/trigger/apollo_webhook"
 	trigger_asana_webhook "flomation.app/automate/executor/actions/trigger/asana_webhook"
 	trigger_awx_webhook "flomation.app/automate/executor/actions/trigger/awx_webhook"
 	trigger_calcom_webhook "flomation.app/automate/executor/actions/trigger/calcom_webhook"
@@ -6835,6 +6836,7 @@ var Actions = map[string]core.Action{
 	"trello/list_update":                                                              trello_list_update.Execute,
 	"trigger/acuity_webhook":                                                          trigger_acuity_webhook.Execute,
 	"trigger/airtable_poll":                                                           trigger_airtable_poll.Execute,
+	"trigger/apollo_webhook":                                                          trigger_apollo_webhook.Execute,
 	"trigger/asana_webhook":                                                           trigger_asana_webhook.Execute,
 	"trigger/awx_webhook":                                                             trigger_awx_webhook.Execute,
 	"trigger/calcom_webhook":                                                          trigger_calcom_webhook.Execute,
