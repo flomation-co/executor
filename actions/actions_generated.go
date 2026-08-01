@@ -1076,6 +1076,25 @@ import (
 	conditional_if "flomation.app/automate/executor/actions/conditional/if"
 	conditional_switch "flomation.app/automate/executor/actions/conditional/switch"
 	conditional_while "flomation.app/automate/executor/actions/conditional/while"
+	crm_apollo_accounts_account_create "flomation.app/automate/executor/actions/crm/apollo/accounts/account_create"
+	crm_apollo_accounts_account_search "flomation.app/automate/executor/actions/crm/apollo/accounts/account_search"
+	crm_apollo_accounts_account_update "flomation.app/automate/executor/actions/crm/apollo/accounts/account_update"
+	crm_apollo_contacts_contact_create "flomation.app/automate/executor/actions/crm/apollo/contacts/contact_create"
+	crm_apollo_contacts_contact_search "flomation.app/automate/executor/actions/crm/apollo/contacts/contact_search"
+	crm_apollo_contacts_contact_update "flomation.app/automate/executor/actions/crm/apollo/contacts/contact_update"
+	crm_apollo_deals_deal_create "flomation.app/automate/executor/actions/crm/apollo/deals/deal_create"
+	crm_apollo_deals_deal_list "flomation.app/automate/executor/actions/crm/apollo/deals/deal_list"
+	crm_apollo_deals_deal_update "flomation.app/automate/executor/actions/crm/apollo/deals/deal_update"
+	crm_apollo_enrichment_organization_bulk_enrich "flomation.app/automate/executor/actions/crm/apollo/enrichment/organization_bulk_enrich"
+	crm_apollo_enrichment_organization_enrich "flomation.app/automate/executor/actions/crm/apollo/enrichment/organization_enrich"
+	crm_apollo_enrichment_people_bulk_match "flomation.app/automate/executor/actions/crm/apollo/enrichment/people_bulk_match"
+	crm_apollo_enrichment_people_match "flomation.app/automate/executor/actions/crm/apollo/enrichment/people_match"
+	crm_apollo_search_organization_search "flomation.app/automate/executor/actions/crm/apollo/search/organization_search"
+	crm_apollo_search_people_search "flomation.app/automate/executor/actions/crm/apollo/search/people_search"
+	crm_apollo_sequences_sequence_add_contacts "flomation.app/automate/executor/actions/crm/apollo/sequences/sequence_add_contacts"
+	crm_apollo_sequences_sequence_list "flomation.app/automate/executor/actions/crm/apollo/sequences/sequence_list"
+	crm_apollo_sequences_task_create "flomation.app/automate/executor/actions/crm/apollo/sequences/task_create"
+	crm_apollo_sequences_user_list "flomation.app/automate/executor/actions/crm/apollo/sequences/user_list"
 	crm_salesforce_account_add_note "flomation.app/automate/executor/actions/crm/salesforce/account_add_note"
 	crm_salesforce_account_contact_relation_create "flomation.app/automate/executor/actions/crm/salesforce/account_contact_relation_create"
 	crm_salesforce_account_contact_relation_delete "flomation.app/automate/executor/actions/crm/salesforce/account_contact_relation_delete"
@@ -3296,6 +3315,7 @@ import (
 	trello_list_update "flomation.app/automate/executor/actions/trello/list_update"
 	trigger_acuity_webhook "flomation.app/automate/executor/actions/trigger/acuity_webhook"
 	trigger_airtable_poll "flomation.app/automate/executor/actions/trigger/airtable_poll"
+	trigger_apollo_webhook "flomation.app/automate/executor/actions/trigger/apollo_webhook"
 	trigger_asana_webhook "flomation.app/automate/executor/actions/trigger/asana_webhook"
 	trigger_awx_webhook "flomation.app/automate/executor/actions/trigger/awx_webhook"
 	trigger_calcom_webhook "flomation.app/automate/executor/actions/trigger/calcom_webhook"
@@ -4577,6 +4597,25 @@ var Actions = map[string]core.Action{
 	"conditional/if":                                                                  conditional_if.Execute,
 	"conditional/switch":                                                              conditional_switch.Execute,
 	"conditional/while":                                                               conditional_while.Execute,
+	"crm/apollo/accounts/account_create":                                              crm_apollo_accounts_account_create.Execute,
+	"crm/apollo/accounts/account_search":                                              crm_apollo_accounts_account_search.Execute,
+	"crm/apollo/accounts/account_update":                                              crm_apollo_accounts_account_update.Execute,
+	"crm/apollo/contacts/contact_create":                                              crm_apollo_contacts_contact_create.Execute,
+	"crm/apollo/contacts/contact_search":                                              crm_apollo_contacts_contact_search.Execute,
+	"crm/apollo/contacts/contact_update":                                              crm_apollo_contacts_contact_update.Execute,
+	"crm/apollo/deals/deal_create":                                                    crm_apollo_deals_deal_create.Execute,
+	"crm/apollo/deals/deal_list":                                                      crm_apollo_deals_deal_list.Execute,
+	"crm/apollo/deals/deal_update":                                                    crm_apollo_deals_deal_update.Execute,
+	"crm/apollo/enrichment/organization_bulk_enrich":                                  crm_apollo_enrichment_organization_bulk_enrich.Execute,
+	"crm/apollo/enrichment/organization_enrich":                                       crm_apollo_enrichment_organization_enrich.Execute,
+	"crm/apollo/enrichment/people_bulk_match":                                         crm_apollo_enrichment_people_bulk_match.Execute,
+	"crm/apollo/enrichment/people_match":                                              crm_apollo_enrichment_people_match.Execute,
+	"crm/apollo/search/organization_search":                                           crm_apollo_search_organization_search.Execute,
+	"crm/apollo/search/people_search":                                                 crm_apollo_search_people_search.Execute,
+	"crm/apollo/sequences/sequence_add_contacts":                                      crm_apollo_sequences_sequence_add_contacts.Execute,
+	"crm/apollo/sequences/sequence_list":                                              crm_apollo_sequences_sequence_list.Execute,
+	"crm/apollo/sequences/task_create":                                                crm_apollo_sequences_task_create.Execute,
+	"crm/apollo/sequences/user_list":                                                  crm_apollo_sequences_user_list.Execute,
 	"crm/salesforce/account_add_note":                                                 crm_salesforce_account_add_note.Execute,
 	"crm/salesforce/account_contact_relation_create":                                  crm_salesforce_account_contact_relation_create.Execute,
 	"crm/salesforce/account_contact_relation_delete":                                  crm_salesforce_account_contact_relation_delete.Execute,
@@ -6797,6 +6836,7 @@ var Actions = map[string]core.Action{
 	"trello/list_update":                                                              trello_list_update.Execute,
 	"trigger/acuity_webhook":                                                          trigger_acuity_webhook.Execute,
 	"trigger/airtable_poll":                                                           trigger_airtable_poll.Execute,
+	"trigger/apollo_webhook":                                                          trigger_apollo_webhook.Execute,
 	"trigger/asana_webhook":                                                           trigger_asana_webhook.Execute,
 	"trigger/awx_webhook":                                                             trigger_awx_webhook.Execute,
 	"trigger/calcom_webhook":                                                          trigger_calcom_webhook.Execute,
