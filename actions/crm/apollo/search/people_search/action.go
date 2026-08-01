@@ -52,7 +52,9 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	apollo_common.SetInt(body, "page", "page", inputs)
 	apollo_common.SetInt(body, "per_page", "per_page", inputs)
 
-	resp, err := apollo_common.NewClient(apiKey).Post(flow, "/mixed_people/search", body)
+	// mixed_people/search is deprecated for API-key access; mixed_people/api_search
+	// is the current API-native endpoint (same request body).
+	resp, err := apollo_common.NewClient(apiKey).Post(flow, "/mixed_people/api_search", body)
 	if err != nil {
 		return apollo_common.MapError(err), nil
 	}

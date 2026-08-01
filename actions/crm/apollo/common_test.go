@@ -104,6 +104,24 @@ func TestStringList(t *testing.T) {
 	Expect(StringList("ids", []*core.Connection{{Name: "ids", Value: "   "}})).To(BeNil())
 }
 
+// TestRangeList guards the headcount-range bug: a range like "50,5000" must stay
+// ONE element (Apollo wants ["50,5000"], not ["50","5000"]); multiple ranges are
+// separated by ';' or newlines, never by the comma inside a range.
+func TestRangeList(t *testing.T) {
+	RegisterTestingT(t)
+
+	// Single range keeps its inner comma.
+	Expect(RangeList("r", []*core.Connection{{Name: "r", Value: "50,5000"}})).To(Equal([]string{"50,5000"}))
+	// Multiple ranges split on ';' (and tolerate whitespace + blanks).
+	Expect(RangeList("r", []*core.Connection{{Name: "r", Value: " 1,10 ; 11,50 ;; 51,5000 "}})).
+		To(Equal([]string{"1,10", "11,50", "51,5000"}))
+	// Newline-separated ranges also work.
+	Expect(RangeList("r", []*core.Connection{{Name: "r", Value: "1,10\n11,50"}})).To(Equal([]string{"1,10", "11,50"}))
+	// Absent / blank → nil (field omitted).
+	Expect(RangeList("missing", nil)).To(BeNil())
+	Expect(RangeList("r", []*core.Connection{{Name: "r", Value: "  "}})).To(BeNil())
+}
+
 func TestSetHelpers(t *testing.T) {
 	RegisterTestingT(t)
 

@@ -250,6 +250,36 @@ func SetList(body map[string]interface{}, field, name string, inputs []*core.Con
 	}
 }
 
+// RangeList splits an input into range strings on SEMICOLONS and newlines only,
+// preserving the comma INSIDE each range. Apollo's headcount filter expects an
+// array of "min,max" strings (e.g. ["50,5000"]), so a plain comma-split would
+// wrongly break "50,5000" into two elements. Returns nil when absent/blank.
+func RangeList(name string, inputs []*core.Connection) []string {
+	raw := strings.TrimSpace(OptionalString(name, inputs))
+	if raw == "" {
+		return nil
+	}
+	parts := strings.FieldsFunc(raw, func(r rune) bool { return r == ';' || r == '\n' || r == '\r' })
+	out := make([]string, 0, len(parts))
+	for _, p := range parts {
+		if t := strings.TrimSpace(p); t != "" {
+			out = append(out, t)
+		}
+	}
+	if len(out) == 0 {
+		return nil
+	}
+	return out
+}
+
+// SetRangeList assigns a semicolon-separated input as a JSON array of range
+// strings (each "min,max") when non-empty.
+func SetRangeList(body map[string]interface{}, field, name string, inputs []*core.Connection) {
+	if v := RangeList(name, inputs); len(v) > 0 {
+		body[field] = v
+	}
+}
+
 // SetNumberValue parses a decimal input (e.g. deal amount) as a JSON number.
 func SetNumberValue(body map[string]interface{}, field, name string, inputs []*core.Connection) {
 	raw := strings.TrimSpace(OptionalString(name, inputs))
