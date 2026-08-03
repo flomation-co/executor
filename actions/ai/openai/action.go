@@ -11,7 +11,23 @@ import (
 
 	core "flomation.app/automate/executor"
 	ai_common "flomation.app/automate/executor/actions/ai"
+	log "github.com/sirupsen/logrus"
 )
+
+// openAIModelRejectsTemperature reports whether an OpenAI model rejects a
+// non-default temperature (returns a 400 "Only the default (1) value is
+// supported"). True for the reasoning o-series (o1/o3/o4/o5…); the gpt-4o /
+// gpt-4.1 / gpt-3.5 chat families still accept it. gpt-4o must NOT match —
+// hence the check is anchored on a leading "o<digit>", which "gpt-4o" fails.
+func openAIModelRejectsTemperature(model string) bool {
+	m := strings.ToLower(strings.TrimSpace(model))
+	for _, p := range []string{"o1", "o3", "o4", "o5", "o6"} {
+		if strings.HasPrefix(m, p) {
+			return true
+		}
+	}
+	return false
+}
 
 const (
 	Author       = "Andy Esser"
@@ -141,10 +157,16 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 		maxTokens = *maxTokensConn.Number()
 	}
 
-	temperature := 0.7
-	tempConn := core.FindConnection("temperature", inputs)
-	if tempConn != nil && tempConn.String() != nil && *tempConn.String() != "" {
-		fmt.Sscanf(*tempConn.String(), "%f", &temperature)
+	// Temperature is opt-in. The reasoning o-series (o1/o3/o4/…) rejects any
+	// non-default temperature with a 400 ("Only the default (1) value is
+	// supported"), so we never send a forced default — only a value the flow
+	// author explicitly set, and only on models that accept it.
+	var temperature *float64
+	if tempConn := core.FindConnection("temperature", inputs); tempConn != nil && tempConn.String() != nil && *tempConn.String() != "" {
+		var t float64
+		if _, err := fmt.Sscanf(*tempConn.String(), "%f", &t); err == nil {
+			temperature = &t
+		}
 	}
 
 	systemPromptStr := ""
@@ -247,10 +269,21 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	useStreaming := streaming && !isToolReinvocation
 
 	payload := map[string]interface{}{
-		"model":       model,
-		"messages":    messages,
-		"max_tokens":  maxTokens,
-		"temperature": temperature,
+		"model":      model,
+		"messages":   messages,
+		"max_tokens": maxTokens,
+	}
+	// Only attach temperature when the author set one AND the model accepts a
+	// non-default value; otherwise (the reasoning o-series) it would 400.
+	if temperature != nil {
+		if openAIModelRejectsTemperature(model) {
+			log.WithFields(log.Fields{
+				"model":       model,
+				"temperature": *temperature,
+			}).Warn("[openai] temperature ignored — this model only supports the default value")
+		} else {
+			payload["temperature"] = *temperature
+		}
 	}
 	if len(tools) > 0 {
 		payload["tools"] = tools

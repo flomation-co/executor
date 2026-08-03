@@ -7,6 +7,7 @@ import (
 	"fmt"
 	"io"
 	"net/http"
+	"strconv"
 	"strings"
 	"time"
 
@@ -141,10 +142,17 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 		maxTokens = *maxTokensConn.Number()
 	}
 
-	temperature := 0.7
-	tempConn := core.FindConnection("temperature", inputs)
-	if tempConn != nil && tempConn.String() != nil && *tempConn.String() != "" {
-		fmt.Sscanf(*tempConn.String(), "%f", &temperature)
+	// Temperature is opt-in. Newer Anthropic models (Opus 4.7+, Opus 5+ and
+	// the Fable/Mythos families) REJECT temperature/top_p/top_k with a 400
+	// ("`temperature` is deprecated for this model"), so we never send a
+	// forced default — only a value the flow author explicitly set, and only
+	// on models that still accept it.
+	var temperature *float64
+	if tempConn := core.FindConnection("temperature", inputs); tempConn != nil && tempConn.String() != nil && *tempConn.String() != "" {
+		var t float64
+		if _, err := fmt.Sscanf(*tempConn.String(), "%f", &t); err == nil {
+			temperature = &t
+		}
 	}
 
 	systemPromptStr := ""
@@ -311,10 +319,22 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	}
 
 	payload := map[string]interface{}{
-		"model":       model,
-		"max_tokens":  maxTokens,
-		"temperature": temperature,
-		"messages":    messages,
+		"model":      model,
+		"max_tokens": maxTokens,
+		"messages":   messages,
+	}
+	// Only attach temperature when the author set one AND the model still
+	// accepts sampling parameters; otherwise it would 400. If they set one on
+	// a model that rejects it, drop it and warn rather than fail the node.
+	if temperature != nil {
+		if modelRejectsSamplingParams(model) {
+			log.WithFields(log.Fields{
+				"model":       model,
+				"temperature": *temperature,
+			}).Warn("[anthropic] temperature ignored — this model rejects sampling parameters")
+		} else {
+			payload["temperature"] = *temperature
+		}
 	}
 
 	log.WithFields(log.Fields{
@@ -584,6 +604,39 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 		"success":          true,
 		"error":            "",
 	}, nil
+}
+
+// modelRejectsSamplingParams reports whether an Anthropic model rejects the
+// temperature/top_p/top_k sampling parameters (they return HTTP 400
+// "`temperature` is deprecated for this model"). True for Opus 4.7 and later —
+// including Opus 5+ — and the Fable/Mythos families; Opus 4.6 and earlier,
+// Sonnet 4.x and Haiku still accept them. Parsing the major/minor keeps it
+// forward-safe as new Opus versions ship.
+func modelRejectsSamplingParams(model string) bool {
+	m := strings.ToLower(model)
+	if strings.Contains(m, "fable") || strings.Contains(m, "mythos") {
+		return true
+	}
+	idx := strings.Index(m, "opus-")
+	if idx == -1 {
+		return false // Sonnet / Haiku still accept sampling params
+	}
+	major, minor := parseOpusVersion(m[idx+len("opus-"):])
+	return major >= 5 || (major == 4 && minor >= 7)
+}
+
+// parseOpusVersion pulls the major and minor numbers from the version tail of
+// an Opus id: "4-8" → (4,8); "5" → (5,0); "5-0-2026…" → (5,0). Missing or
+// non-numeric parts are 0.
+func parseOpusVersion(rest string) (major, minor int) {
+	parts := strings.Split(rest, "-")
+	if len(parts) > 0 {
+		major, _ = strconv.Atoi(parts[0])
+	}
+	if len(parts) > 1 {
+		minor, _ = strconv.Atoi(parts[1])
+	}
+	return major, minor
 }
 
 // extractToolExchanges reads the accumulated tool exchanges from the

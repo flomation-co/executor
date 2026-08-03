@@ -160,8 +160,9 @@ func TestExecuteSamplingParamsOmittedWhenUnset(t *testing.T) {
 	Expect(reqBody).To(Not(HaveKey("frequency_penalty")))
 	Expect(reqBody).To(Not(HaveKey("presence_penalty")))
 	Expect(reqBody).To(Not(HaveKey("response_format")))
-	// The always-sent baseline params remain.
-	Expect(reqBody["temperature"]).To(Equal(0.7))
+	// Temperature is opt-in too — omitted unless the author set one, for the
+	// exact reason above (models that reject unsupported sampling params).
+	Expect(reqBody).To(Not(HaveKey("temperature")))
 	Expect(reqBody["max_tokens"]).To(Equal(float64(2048)))
 }
 
@@ -490,8 +491,9 @@ func TestExecuteInvalidTemperatureFallsBack(t *testing.T) {
 
 	_, err := Execute(&core.Flow{}, nil, inputs)
 	Expect(err).To(BeNil())
-	// Malformed input must fall back to the 0.7 default, not 0.
-	Expect(reqBody["temperature"]).To(Equal(0.7))
+	// Temperature is opt-in: a malformed value is omitted entirely rather than
+	// coerced to a default that a routed model might reject.
+	Expect(reqBody).To(Not(HaveKey("temperature")))
 }
 
 func TestExecuteNoResponseSentinel(t *testing.T) {
