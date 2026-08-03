@@ -1189,7 +1189,7 @@
     ]
   },
   "ai/anthropic": {
-    "hash": "0122abcfd936a2d2fbfef9c709c5d3ed5f1a7514e866a02f9d28f94764afaf8b",
+    "hash": "37c7458de306612b61a857676a36204697bd662cd6ef65b47632c009ad2f6bf2",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Anthropic Prompt",
@@ -1214,22 +1214,30 @@
       },
       {
         "name": "model",
-        "type": "secret",
+        "type": "string",
         "value": null,
         "label": "Model",
         "placeholder": "",
         "options": [
+          {
+            "name": "Claude Opus 4.8",
+            "value": "claude-opus-4-8"
+          },
+          {
+            "name": "Claude Opus 4.7",
+            "value": "claude-opus-4-7"
+          },
           {
             "name": "Claude Sonnet 4.6",
             "value": "claude-sonnet-4-6"
           },
           {
             "name": "Claude Haiku 4.5",
-            "value": "claude-haiku-4-5-20251001"
+            "value": "claude-haiku-4-5"
           },
           {
-            "name": "Claude Opus 4.6",
-            "value": "claude-opus-4-6"
+            "name": "Claude Fable 5",
+            "value": "claude-fable-5"
           }
         ]
       },
@@ -1358,7 +1366,7 @@
     ]
   },
   "ai/azure_openai": {
-    "hash": "9e5136f211759a772160d6714313cd949d586df17e0397062ab53d0ff6497cf4",
+    "hash": "846e2d4a0a5609b0ea1b25bc0bfa3cee30db0250eb3fa29afff05d432bbf5f58",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Azure OpenAI Prompt",
@@ -1507,6 +1515,13 @@
         "value": null,
         "label": "Tool Definitions (JSON)",
         "placeholder": "[{\"type\":\"function\",\"function\":{\"name\":\"web_search\",\"description\":\"Search the web\",\"parameters\":{\"type\":\"object\",\"properties\":{\"query\":{\"type\":\"string\"}},\"required\":[\"query\"]}}}]"
+      },
+      {
+        "name": "streaming",
+        "type": "boolean",
+        "value": null,
+        "label": "Streaming (fires response per sentence for low-latency voice)",
+        "placeholder": ""
       }
     ],
     "outputs": [
@@ -1830,7 +1845,7 @@
     ]
   },
   "ai/gemini": {
-    "hash": "1998526dd579be63c267fec8b492722555faa26849a0877f872f15089bd52f52",
+    "hash": "5b3513589d4083d7383510db5d7a199fd84fdc07523180fa2f9c9844a0c9883a",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Gemini Prompt",
@@ -1855,7 +1870,7 @@
       },
       {
         "name": "model",
-        "type": "secret",
+        "type": "string",
         "value": null,
         "label": "Model",
         "placeholder": "",
@@ -1924,6 +1939,13 @@
         "value": null,
         "label": "Tool Definitions (JSON)",
         "placeholder": "[{\"name\":\"web_search\",\"description\":\"Search the web\",\"parameters\":{\"type\":\"object\",\"properties\":{\"query\":{\"type\":\"string\"}},\"required\":[\"query\"]}}]"
+      },
+      {
+        "name": "streaming",
+        "type": "boolean",
+        "value": null,
+        "label": "Streaming (fires response per sentence for low-latency voice)",
+        "placeholder": ""
       }
     ],
     "outputs": [
@@ -2428,7 +2450,7 @@
     ]
   },
   "ai/groq": {
-    "hash": "60afd916da2668d24e74c423fefa9c2c506fd14a73b808d90f4005c4b34dcba5",
+    "hash": "b9796c35f355f10babe1f31d8a4d508b5097973cf5c11f4fee45401727eb6bd3",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Groq Prompt",
@@ -2534,6 +2556,13 @@
         "value": null,
         "label": "Tool Definitions (JSON)",
         "placeholder": "[{\"type\":\"function\",\"function\":{\"name\":\"web_search\",\"description\":\"Search the web\",\"parameters\":{\"type\":\"object\",\"properties\":{\"query\":{\"type\":\"string\"}},\"required\":[\"query\"]}}}]"
+      },
+      {
+        "name": "streaming",
+        "type": "boolean",
+        "value": null,
+        "label": "Streaming (fires response per sentence for low-latency voice)",
+        "placeholder": ""
       }
     ],
     "outputs": [
@@ -2603,7 +2632,7 @@
     ]
   },
   "ai/ollama": {
-    "hash": "f5d0a49c8abfe95dd02ffcdea8be36a9379e994227a91d6061996c9c0a097ea0",
+    "hash": "f2fdf7311c2debadca7e4d4c237734cf63b9d2a579b28695dfc8062b3962248e",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Ollama Prompt",
@@ -3039,6 +3068,13 @@
         "value": null,
         "label": "Tool Definitions (JSON)",
         "placeholder": "[{\"type\":\"function\",\"function\":{\"name\":\"web_search\",\"description\":\"Search the web\",\"parameters\":{\"type\":\"object\",\"properties\":{\"query\":{\"type\":\"string\"}},\"required\":[\"query\"]}}}]"
+      },
+      {
+        "name": "streaming",
+        "type": "boolean",
+        "value": null,
+        "label": "Streaming (fires response per sentence for low-latency voice)",
+        "placeholder": ""
       }
     ],
     "outputs": [
@@ -3115,7 +3151,7 @@
     ]
   },
   "ai/openai": {
-    "hash": "7c31da3f8c27ea28f1603283f15e88befe347d40377e38eb86f194b8efc95694",
+    "hash": "1ec6ae35a113392617293604136f34756a7a61b2d6c8ff51cfca91fd2d6d9afc",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "OpenAI Prompt",
@@ -3140,18 +3176,22 @@
       },
       {
         "name": "model",
-        "type": "secret",
+        "type": "string",
         "value": null,
         "label": "Model",
         "placeholder": "",
         "options": [
           {
-            "name": "GPT-4o",
-            "value": "gpt-4o"
+            "name": "GPT-5",
+            "value": "gpt-5"
           },
           {
-            "name": "GPT-4o Mini",
-            "value": "gpt-4o-mini"
+            "name": "GPT-5 Mini",
+            "value": "gpt-5-mini"
+          },
+          {
+            "name": "GPT-5 Nano",
+            "value": "gpt-5-nano"
           },
           {
             "name": "GPT-4.1",
@@ -3166,12 +3206,16 @@
             "value": "gpt-4.1-nano"
           },
           {
-            "name": "o3",
-            "value": "o3"
+            "name": "GPT-4o",
+            "value": "gpt-4o"
           },
           {
-            "name": "o3 Mini",
-            "value": "o3-mini"
+            "name": "GPT-4o Mini",
+            "value": "gpt-4o-mini"
+          },
+          {
+            "name": "o3",
+            "value": "o3"
           },
           {
             "name": "o4 Mini",
@@ -3221,6 +3265,13 @@
         "value": null,
         "label": "Tool Definitions (JSON)",
         "placeholder": "[{\"type\":\"function\",\"function\":{\"name\":\"web_search\",\"description\":\"Search the web\",\"parameters\":{\"type\":\"object\",\"properties\":{\"query\":{\"type\":\"string\"}},\"required\":[\"query\"]}}}]"
+      },
+      {
+        "name": "streaming",
+        "type": "boolean",
+        "value": null,
+        "label": "Streaming (fires response per sentence for low-latency voice)",
+        "placeholder": ""
       }
     ],
     "outputs": [
@@ -3290,7 +3341,7 @@
     ]
   },
   "ai/openrouter": {
-    "hash": "542356ee20754bc8b99da798720e7c2b652694bba9a0a9bcfce9b4f51d2801d8",
+    "hash": "6e7ad1cd46429a7975666c048f0864c401c0dd64edf83f3982b7c736e7285556",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "OpenRouter Prompt",
@@ -3450,6 +3501,13 @@
         "value": null,
         "label": "Tool Definitions (JSON)",
         "placeholder": "[{\"type\":\"function\",\"function\":{\"name\":\"web_search\",\"description\":\"Search the web\",\"parameters\":{\"type\":\"object\",\"properties\":{\"query\":{\"type\":\"string\"}},\"required\":[\"query\"]}}}]"
+      },
+      {
+        "name": "streaming",
+        "type": "boolean",
+        "value": null,
+        "label": "Streaming (fires response per sentence for low-latency voice)",
+        "placeholder": ""
       }
     ],
     "outputs": [
@@ -3533,7 +3591,7 @@
     ]
   },
   "ai/openwebui": {
-    "hash": "03bc59458aa6be6cfa107bc14bc496f443e893a02245f4788e7a9a4ce01ef89e",
+    "hash": "657cdaa46866bb3d25756e49432bafb0ca065db079de87f9c90d532df976c522",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Open WebUI Prompt",
@@ -3614,6 +3672,13 @@
         "value": null,
         "label": "Tool Definitions (JSON)",
         "placeholder": "[{\"type\":\"function\",\"function\":{\"name\":\"web_search\",\"description\":\"Search the web\",\"parameters\":{\"type\":\"object\",\"properties\":{\"query\":{\"type\":\"string\"}},\"required\":[\"query\"]}}}]"
+      },
+      {
+        "name": "streaming",
+        "type": "boolean",
+        "value": null,
+        "label": "Streaming (fires response per sentence for low-latency voice)",
+        "placeholder": ""
       }
     ],
     "outputs": [

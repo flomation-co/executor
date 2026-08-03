@@ -213,6 +213,11 @@ var Inputs = [...]core.Connection{
 		Label:       "Tool Definitions (JSON)",
 		Placeholder: `[{"type":"function","function":{"name":"web_search","description":"Search the web","parameters":{"type":"object","properties":{"query":{"type":"string"}},"required":["query"]}}}]`,
 	},
+	{
+		Name:  "streaming",
+		Type:  core.ConnectionTypeBoolean,
+		Label: "Streaming (fires response per sentence for low-latency voice)",
+	},
 }
 
 var Outputs = [...]core.Connection{
@@ -445,6 +450,39 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	}
 	if len(tools) > 0 {
 		payload["tools"] = tools
+	}
+
+	// Streaming: fire the Response handle per sentence for low-latency
+	// voice. Skipped on tool re-invocations. Azure speaks the OpenAI SSE
+	// format so the shared parser handles it, but the request goes through a
+	// dedicated streaming send — the pooled sendChatRequest reads the whole
+	// body, which a stream must not.
+	streaming := false
+	if s := core.FindConnection("streaming", inputs); s != nil && s.String() != nil && *s.String() == "true" {
+		streaming = true
+	}
+	isToolReinvocation := false
+	if _, hasResults := flow.GetVariable(core.ToolResultsKey); hasResults {
+		isToolReinvocation = true
+	}
+	if streaming && !isToolReinvocation {
+		payload["stream"] = true
+		payload["stream_options"] = map[string]interface{}{"include_usage": true}
+		streamResp, err := postChatStreaming(flow, requestURL, apiKey, payload)
+		if err != nil {
+			return nil, err
+		}
+		if streamResp.StatusCode != http.StatusOK {
+			defer func() { _ = streamResp.Body.Close() }()
+			respBody, _ := io.ReadAll(io.LimitReader(streamResp.Body, maxResponseBody))
+			return nil, fmt.Errorf("Azure OpenAI API error (%d): %s",
+				streamResp.StatusCode, redact(string(respBody), apiKey))
+		}
+		return ai_common.HandleOpenAICompatibleStream(flow, streamResp, deployment, map[string]interface{}{
+			"prompt_tokens":     int64(0),
+			"completion_tokens": int64(0),
+			"total_tokens":      int64(0),
+		})
 	}
 
 	resp, respBody, err := sendChatRequest(flow, requestURL, apiKey, payload)
@@ -776,6 +814,29 @@ func sendChatRequest(flow *core.Flow, requestURL, apiKey string, payload map[str
 
 	log.WithField("deployment", requestURL).Debug("[azure_openai] deployment rejected max_completion_tokens; retrying with max_tokens")
 	return postChat(flow, requestURL, apiKey, retry)
+}
+
+// postChatStreaming issues the chat request WITHOUT reading the body, so the
+// shared OpenAI-compatible streaming parser can consume the SSE stream. It
+// mirrors postChat's headers (Azure's non-standard api-key auth) but hands
+// the live response back to the caller, which owns closing the body via the
+// streaming goroutine.
+func postChatStreaming(flow *core.Flow, requestURL, apiKey string, payload map[string]interface{}) (*http.Response, error) {
+	body, err := json.Marshal(payload)
+	if err != nil {
+		return nil, fmt.Errorf("failed to marshal request: %w", err)
+	}
+	req, err := http.NewRequestWithContext(flow.GoContext(), http.MethodPost, requestURL, bytes.NewReader(body))
+	if err != nil {
+		return nil, fmt.Errorf("failed to create request: %w", err)
+	}
+	req.Header.Set("Content-Type", "application/json")
+	req.Header.Set("api-key", apiKey)
+	resp, err := httpClient.Do(req)
+	if err != nil {
+		return nil, fmt.Errorf("Azure OpenAI request failed: %s", redact(err.Error(), apiKey))
+	}
+	return resp, nil
 }
 
 func postChat(flow *core.Flow, requestURL, apiKey string, payload map[string]interface{}) (*http.Response, []byte, error) {
