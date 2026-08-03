@@ -108,6 +108,24 @@ var Inputs = [...]core.Connection{
 		Label:       "Label IDs",
 		Placeholder: "Comma-separated label UUIDs to set (optional)",
 	},
+	{
+		Name:        "labels",
+		Type:        core.ConnectionTypeString,
+		Label:       "Labels (names — resolves to UUIDs automatically)",
+		Placeholder: "Comma-separated label names, e.g. Enriched, Priority (SETS the full list)",
+	},
+	{
+		Name:        "assignee",
+		Type:        core.ConnectionTypeString,
+		Label:       "Assignee (name or email — resolves to UUID automatically)",
+		Placeholder: "e.g. Rhys Caldwell or rhys@flomation.co",
+	},
+	{
+		Name:        "project",
+		Type:        core.ConnectionTypeString,
+		Label:       "Project (name — resolves to UUID automatically)",
+		Placeholder: "Project name",
+	},
 }
 
 var Outputs = [...]core.Connection{
@@ -212,6 +230,41 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 		}
 		if len(ids) > 0 {
 			update["labelIds"] = ids
+		}
+	}
+
+	// Agent-friendly name resolution — only applied when the UUID variant is
+	// absent, so an agent can pass "Enriched" / "Rhys Caldwell" without ever
+	// handling a UUID. This is what avoids the can't-get-the-UUID loop.
+	if _, set := update["labelIds"]; !set {
+		if v := linear.OptionalString("labels", inputs); v != "" {
+			ids, unresolved, rErr := linear.ResolveLabelIDs(apiKey, linear.SplitCSV(v))
+			if rErr != nil {
+				return map[string]interface{}{"tool_result": fmt.Sprintf("Could not resolve labels: %s", rErr), "success": false, "error": rErr.Error()}, nil
+			}
+			if len(unresolved) > 0 {
+				msg := fmt.Sprintf("Unknown label(s): %s — use list_labels to see available labels", strings.Join(unresolved, ", "))
+				return map[string]interface{}{"tool_result": msg, "success": false, "error": msg}, nil
+			}
+			update["labelIds"] = ids
+		}
+	}
+	if _, set := update["assigneeId"]; !set {
+		if v := linear.OptionalString("assignee", inputs); v != "" {
+			uid, rErr := linear.ResolveUserID(apiKey, v)
+			if rErr != nil {
+				return map[string]interface{}{"tool_result": fmt.Sprintf("Could not resolve assignee %q: %s", v, rErr), "success": false, "error": rErr.Error()}, nil
+			}
+			update["assigneeId"] = uid
+		}
+	}
+	if _, set := update["projectId"]; !set {
+		if v := linear.OptionalString("project", inputs); v != "" {
+			pid, rErr := linear.ResolveProjectID(apiKey, v)
+			if rErr != nil {
+				return map[string]interface{}{"tool_result": fmt.Sprintf("Could not resolve project %q: %s", v, rErr), "success": false, "error": rErr.Error()}, nil
+			}
+			update["projectId"] = pid
 		}
 	}
 
