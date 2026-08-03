@@ -328,6 +328,11 @@ var Inputs = [...]core.Connection{
 		Label:       "Tool Definitions (JSON)",
 		Placeholder: `[{"type":"function","function":{"name":"web_search","description":"Search the web","parameters":{"type":"object","properties":{"query":{"type":"string"}},"required":["query"]}}}]`,
 	},
+	{
+		Name:  "streaming",
+		Type:  core.ConnectionTypeBoolean,
+		Label: "Streaming (fires response per sentence for low-latency voice)",
+	},
 }
 
 var Outputs = [...]core.Connection{
@@ -574,12 +579,25 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 		messages = append(messages, buildUserMessage(prompt, flow.Blobs()))
 	}
 
+	// Streaming: fire the Response handle per sentence for low-latency
+	// voice. Skipped on tool re-invocations — the tool loop needs the full
+	// response to detect tool calls before deciding whether to stream.
+	streaming := false
+	if s := core.FindConnection("streaming", inputs); s != nil && s.String() != nil && *s.String() == "true" {
+		streaming = true
+	}
+	isToolReinvocation := false
+	if _, hasResults := flow.GetVariable(core.ToolResultsKey); hasResults {
+		isToolReinvocation = true
+	}
+	useStreaming := streaming && !isToolReinvocation
+
 	payload := map[string]interface{}{
 		"model":    model,
 		"messages": messages,
-		// /api/chat streams by default; this action consumes a single
-		// JSON response.
-		"stream": false,
+		// /api/chat streams by default; the non-streaming path consumes a
+		// single JSON response, the streaming path reads the NDJSON stream.
+		"stream": useStreaming,
 	}
 	if len(options) > 0 {
 		payload["options"] = options
@@ -623,11 +641,10 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	if err != nil {
 		return nil, fmt.Errorf("Ollama request failed: %w", err)
 	}
-	defer func() { _ = resp.Body.Close() }()
-
-	respBody, _ := io.ReadAll(io.LimitReader(resp.Body, maxResponseBody))
 
 	if resp.StatusCode != http.StatusOK {
+		defer func() { _ = resp.Body.Close() }()
+		respBody, _ := io.ReadAll(io.LimitReader(resp.Body, maxResponseBody))
 		// Native error shape is {"error": "..."}; proxies may wrap it
 		// OpenAI-style as {"error": {"message": "..."}}.
 		var apiErr struct {
@@ -650,6 +667,20 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 		}
 		return nil, fmt.Errorf("Ollama API error (%d): %s", resp.StatusCode, errMsg)
 	}
+
+	// Streaming response: the shared Ollama NDJSON parser owns resp.Body and
+	// emits sentences via the engine's streaming channel contract.
+	if useStreaming {
+		return ai_common.HandleOllamaStream(flow, resp, model, map[string]interface{}{
+			"prompt_tokens":     int64(0),
+			"completion_tokens": int64(0),
+			"total_tokens":      int64(0),
+			"thinking":          "",
+		})
+	}
+
+	defer func() { _ = resp.Body.Close() }()
+	respBody, _ := io.ReadAll(io.LimitReader(resp.Body, maxResponseBody))
 
 	var result struct {
 		Model   string `json:"model"`

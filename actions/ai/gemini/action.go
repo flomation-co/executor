@@ -66,8 +66,11 @@ var Inputs = [...]core.Connection{
 	},
 	{
 		Name:  "model",
-		Type:  core.ConnectionTypeSecret,
+		Type:  core.ConnectionTypeString,
 		Label: "Model",
+		// Static fallback list — the editor replaces this with a live
+		// dropdown fetched from the Gemini models endpoint (see the api's
+		// getGeminiModels proxy) whenever an API key is set.
 		Options: []core.ConnectionOption{
 			{Name: "Gemini 2.5 Pro", Value: "gemini-2.5-pro"},
 			{Name: "Gemini 2.5 Flash", Value: "gemini-2.5-flash"},
@@ -117,6 +120,11 @@ var Inputs = [...]core.Connection{
 		Type:        core.ConnectionTypeText,
 		Label:       "Tool Definitions (JSON)",
 		Placeholder: `[{"name":"web_search","description":"Search the web","parameters":{"type":"object","properties":{"query":{"type":"string"}},"required":["query"]}}]`,
+	},
+	{
+		Name:  "streaming",
+		Type:  core.ConnectionTypeBoolean,
+		Label: "Streaming (fires response per sentence for low-latency voice)",
 	},
 }
 
@@ -288,6 +296,19 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 		contents = append(contents, geminiContent{Role: "user", Parts: userParts})
 	}
 
+	// Streaming: fire the Response handle per sentence for low-latency
+	// voice. Skipped on tool re-invocations — the tool loop needs the full
+	// response to detect function calls before deciding whether to stream.
+	streaming := false
+	if s := core.FindConnection("streaming", inputs); s != nil && s.String() != nil && *s.String() == "true" {
+		streaming = true
+	}
+	isToolReinvocation := false
+	if _, hasResults := flow.GetVariable(core.ToolResultsKey); hasResults {
+		isToolReinvocation = true
+	}
+	useStreaming := streaming && !isToolReinvocation
+
 	payload := map[string]interface{}{
 		"contents": contents,
 		"generationConfig": map[string]interface{}{
@@ -311,7 +332,13 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 		return nil, fmt.Errorf("failed to marshal request: %w", err)
 	}
 
-	url := apiBase + model + ":generateContent"
+	// Streaming uses the SSE variant of the endpoint; the shared Gemini
+	// stream parser reads it. Non-streaming hits :generateContent.
+	endpoint := ":generateContent"
+	if useStreaming {
+		endpoint = ":streamGenerateContent?alt=sse"
+	}
+	url := apiBase + model + endpoint
 	req, err := http.NewRequestWithContext(flow.GoContext(), http.MethodPost, url, bytes.NewReader(body))
 	if err != nil {
 		return nil, fmt.Errorf("failed to create request: %w", err)
@@ -324,11 +351,10 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	if err != nil {
 		return nil, fmt.Errorf("Gemini request failed: %w", err)
 	}
-	defer func() { _ = resp.Body.Close() }()
-
-	respBody, _ := io.ReadAll(io.LimitReader(resp.Body, maxResponseBody))
 
 	if resp.StatusCode != http.StatusOK {
+		defer func() { _ = resp.Body.Close() }()
+		respBody, _ := io.ReadAll(io.LimitReader(resp.Body, maxResponseBody))
 		var apiErr struct {
 			Error struct {
 				Message string `json:"message"`
@@ -342,6 +368,19 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 		}
 		return nil, fmt.Errorf("Gemini API error (%d): %s", resp.StatusCode, errMsg)
 	}
+
+	// Streaming response: the shared Gemini SSE parser owns resp.Body and
+	// emits sentences via the engine's streaming channel contract.
+	if useStreaming {
+		return ai_common.HandleGeminiStream(flow, resp, model, map[string]interface{}{
+			"prompt_tokens":     int64(0),
+			"completion_tokens": int64(0),
+			"total_tokens":      int64(0),
+		})
+	}
+
+	defer func() { _ = resp.Body.Close() }()
+	respBody, _ := io.ReadAll(io.LimitReader(resp.Body, maxResponseBody))
 
 	var result struct {
 		Candidates []struct {

@@ -42,12 +42,17 @@ var Inputs = [...]core.Connection{
 	},
 	{
 		Name:  "model",
-		Type:  core.ConnectionTypeSecret,
+		Type:  core.ConnectionTypeString,
 		Label: "Model",
+		// Static fallback list — the editor replaces this with a live
+		// dropdown fetched from GET /v1/models (see the api's
+		// getAnthropicModels proxy) whenever an API key is set.
 		Options: []core.ConnectionOption{
+			{Name: "Claude Opus 4.8", Value: "claude-opus-4-8"},
+			{Name: "Claude Opus 4.7", Value: "claude-opus-4-7"},
 			{Name: "Claude Sonnet 4.6", Value: "claude-sonnet-4-6"},
-			{Name: "Claude Haiku 4.5", Value: "claude-haiku-4-5-20251001"},
-			{Name: "Claude Opus 4.6", Value: "claude-opus-4-6"},
+			{Name: "Claude Haiku 4.5", Value: "claude-haiku-4-5"},
+			{Name: "Claude Fable 5", Value: "claude-fable-5"},
 		},
 	},
 	{
@@ -632,18 +637,21 @@ func estimateMessagesTokens(messages []interface{}) int {
 // any tool_use blocks. After the stream completes, tool requests and the
 // full text are stored in flow variables for the executor to pick up.
 func handleStreamingResponse(flow *core.Flow, resp *http.Response, model string, maxTokens int64) (map[string]interface{}, error) {
-	ch := make(chan string, 10)
+	streamer := ai_common.NewSentenceStreamer()
+
+	// Publish the channel BEFORE spawning the reader so the main goroutine's
+	// write and the reader's later FinalizeStream writes never touch the
+	// flow's variable map concurrently (the `go` statement synchronises).
+	flow.SetVariable(core.StreamSentencesKey, streamer.Channel())
 
 	// Start streaming in a goroutine. The goroutine owns resp.Body.
 	go func() {
-		defer close(ch)
+		defer streamer.Close()
 		defer func() { _ = resp.Body.Close() }()
 
 		scanner := bufio.NewScanner(resp.Body)
 		scanner.Buffer(make([]byte, 64*1024), 256*1024)
 
-		var sentenceBuffer strings.Builder
-		var fullText strings.Builder
 		var toolRequests []core.ToolRequest
 
 		// Current tool_use accumulation state
@@ -706,11 +714,7 @@ func handleStreamingResponse(flow *core.Flow, resp *http.Response, model string,
 				if event.ContentBlock != nil {
 					if event.ContentBlock.Type == "tool_use" {
 						// Flush any pending text before switching to tool mode
-						remaining := strings.TrimSpace(sentenceBuffer.String())
-						if remaining != "" {
-							ch <- remaining
-							sentenceBuffer.Reset()
-						}
+						streamer.FlushPending()
 						inToolUse = true
 						currentToolID = event.ContentBlock.ID
 						currentToolName = event.ContentBlock.Name
@@ -725,9 +729,7 @@ func handleStreamingResponse(flow *core.Flow, resp *http.Response, model string,
 					continue
 				}
 				if event.Delta.Type == "text_delta" && !inToolUse {
-					sentenceBuffer.WriteString(event.Delta.Text)
-					fullText.WriteString(event.Delta.Text)
-					emitSentences(&sentenceBuffer, ch)
+					streamer.PushText(event.Delta.Text)
 				} else if event.Delta.Type == "input_json_delta" && inToolUse {
 					currentToolInput.WriteString(event.Delta.PartialJSON)
 				}
@@ -761,108 +763,24 @@ func handleStreamingResponse(flow *core.Flow, resp *http.Response, model string,
 				}
 
 			case "message_stop":
-				remaining := strings.TrimSpace(sentenceBuffer.String())
-				if remaining != "" {
-					ch <- remaining
-				}
+				streamer.FlushPending()
 			}
 		}
 
-		// Store results in flow variables for the executor to read
-		// after the channel is drained.
-		flow.SetVariable(core.StreamFullTextKey, fullText.String())
-		flow.SetVariable(core.StreamStopReasonKey, stopReason)
-		flow.SetVariable(core.StreamUsageKey, map[string]int64{
-			"input_tokens":  inputTokens,
-			"output_tokens": outputTokens,
+		ai_common.FinalizeStream(flow, ai_common.StreamResult{
+			FullText:     streamer.FullText(),
+			StopReason:   stopReason,
+			Model:        responseModel,
+			InputTokens:  inputTokens,
+			OutputTokens: outputTokens,
+			ToolRequests: toolRequests,
 		})
-		if len(toolRequests) > 0 {
-			flow.SetVariable(core.StreamToolRequestsKey, toolRequests)
-		}
-		if responseModel != "" {
-			flow.SetVariable("__stream_model", responseModel)
-		}
 	}()
 
-	// Store the channel as a flow variable
-	flow.SetVariable(core.StreamSentencesKey, ch)
-
-	return map[string]interface{}{
-		core.StreamSentencesKey: true, // flag for executor
-		"response":              "",   // filled after channel drain
-		"response_mode":         "text",
-		"should_respond":        true,
-		"model":                 model,
-		"input_tokens":          int64(0), // updated after stream
-		"output_tokens":         int64(0),
-		"stop_reason":           "",
-		"tool_calls_count":      int64(0),
-		"success":               true,
-		"error":                 "",
-	}, nil
-}
-
-// emitSentences checks the buffer for complete sentences and sends them
-// to the channel. Returns the number of sentences emitted.
-func emitSentences(buf *strings.Builder, ch chan<- string) int {
-	text := buf.String()
-	emitted := 0
-
-	for {
-		idx := findSentenceBoundary(text)
-		if idx < 0 {
-			break
-		}
-
-		sentence := strings.TrimSpace(text[:idx+1])
-		if sentence != "" {
-			ch <- sentence
-			emitted++
-		}
-		text = text[idx+1:]
-	}
-
-	buf.Reset()
-	buf.WriteString(text)
-	return emitted
-}
-
-// findSentenceBoundary returns the index of the first sentence-ending
-// character (. ! ?) that's followed by a space, newline, or end of text.
-// Returns -1 if no boundary found. Handles common abbreviations.
-func findSentenceBoundary(text string) int {
-	for i := 0; i < len(text); i++ {
-		ch := text[i]
-		if ch != '.' && ch != '!' && ch != '?' {
-			continue
-		}
-
-		// Must be followed by whitespace or end of string
-		if i+1 < len(text) && text[i+1] != ' ' && text[i+1] != '\n' {
-			continue
-		}
-
-		// Skip common abbreviations (Mr. Mrs. Dr. etc.)
-		if ch == '.' && i >= 2 {
-			before := strings.ToLower(text[max(0, i-3) : i+1])
-			if strings.HasSuffix(before, "mr.") ||
-				strings.HasSuffix(before, "mrs.") ||
-				strings.HasSuffix(before, "ms.") ||
-				strings.HasSuffix(before, "dr.") ||
-				strings.HasSuffix(before, "st.") ||
-				strings.HasSuffix(before, "no.") {
-				continue
-			}
-		}
-
-		// Skip decimal numbers (3.14)
-		if ch == '.' && i > 0 && i+1 < len(text) {
-			if text[i-1] >= '0' && text[i-1] <= '9' && text[i+1] >= '0' && text[i+1] <= '9' {
-				continue
-			}
-		}
-
-		return i
-	}
-	return -1
+	return ai_common.StreamingInitialOutputs(model, map[string]interface{}{
+		"response_mode": "text",
+		"input_tokens":  int64(0),
+		"output_tokens": int64(0),
+		"stop_reason":   "",
+	}), nil
 }

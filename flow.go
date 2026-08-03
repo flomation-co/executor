@@ -914,6 +914,13 @@ type Flow struct {
 	nodeExecutionResults map[string]*ExecutionNodeResult
 	outputs              map[string]interface{}
 	variables            map[string]interface{}
+	// variablesMu guards SetVariable/GetVariable. Almost all variable
+	// access is on the single execution goroutine, but a streaming AI
+	// action's reader goroutine writes the stream result variables
+	// (StreamFullTextKey, etc.) via FinalizeStream while the executor's
+	// drainStreamingChannel concurrently reads them — the lock makes that
+	// hand-off race-free.
+	variablesMu sync.Mutex
 	entryNodeID          string
 	reachableNodes       map[string]bool
 	inErrorChain         bool
@@ -3195,8 +3202,13 @@ func (f *Flow) drainStreamingChannel(actions map[string]Action, node *Node, outp
 	}
 	if usage, ok := f.GetVariable(StreamUsageKey); ok {
 		if u, ok := usage.(map[string]int64); ok {
-			outputs["input_tokens"] = u["input_tokens"]
-			outputs["output_tokens"] = u["output_tokens"]
+			// Copy every token key the provider recorded. Anthropic carries
+			// input_tokens/output_tokens; OpenAI-family providers additionally
+			// carry prompt_tokens/completion_tokens/total_tokens — this keeps
+			// each provider's declared token outputs populated after a stream.
+			for k, v := range u {
+				outputs[k] = v
+			}
 		}
 		f.SetVariable(StreamUsageKey, nil)
 	}
@@ -3435,6 +3447,8 @@ func (f *Flow) GetOutputs() map[string]interface{} {
 }
 
 func (f *Flow) SetVariable(name string, value interface{}) {
+	f.variablesMu.Lock()
+	defer f.variablesMu.Unlock()
 	if f.variables == nil {
 		f.variables = make(map[string]interface{})
 	}
@@ -3442,6 +3456,8 @@ func (f *Flow) SetVariable(name string, value interface{}) {
 }
 
 func (f *Flow) GetVariable(name string) (interface{}, bool) {
+	f.variablesMu.Lock()
+	defer f.variablesMu.Unlock()
 	if f.variables == nil {
 		return nil, false
 	}

@@ -95,6 +95,11 @@ var Inputs = [...]core.Connection{
 		Label:       "Tool Definitions (JSON)",
 		Placeholder: `[{"type":"function","function":{"name":"web_search","description":"Search the web","parameters":{"type":"object","properties":{"query":{"type":"string"}},"required":["query"]}}}]`,
 	},
+	{
+		Name:  "streaming",
+		Type:  core.ConnectionTypeBoolean,
+		Label: "Streaming (fires response per sentence for low-latency voice)",
+	},
 }
 
 var Outputs = [...]core.Connection{
@@ -240,11 +245,25 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 			}
 		}
 
+		userContent := ai_common.BuildOpenAIUserContent(prompt, flow.Blobs())
 		messages = append(messages, map[string]interface{}{
 			"role":    "user",
-			"content": prompt,
+			"content": userContent,
 		})
 	}
+
+	// Streaming: fire the Response handle per sentence for low-latency
+	// voice. Skipped on tool re-invocations — the tool loop needs the full
+	// response to detect tool calls before deciding whether to stream.
+	streaming := false
+	if s := core.FindConnection("streaming", inputs); s != nil && s.String() != nil && *s.String() == "true" {
+		streaming = true
+	}
+	isToolReinvocation := false
+	if _, hasResults := flow.GetVariable(core.ToolResultsKey); hasResults {
+		isToolReinvocation = true
+	}
+	useStreaming := streaming && !isToolReinvocation
 
 	payload := map[string]interface{}{
 		"model":    model,
@@ -258,6 +277,10 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	}
 	if len(tools) > 0 {
 		payload["tools"] = tools
+	}
+	if useStreaming {
+		payload["stream"] = true
+		payload["stream_options"] = map[string]interface{}{"include_usage": true}
 	}
 
 	body, err := json.Marshal(payload)
@@ -277,11 +300,10 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	if err != nil {
 		return nil, fmt.Errorf("Open WebUI request failed: %w", err)
 	}
-	defer func() { _ = resp.Body.Close() }()
-
-	respBody, _ := io.ReadAll(io.LimitReader(resp.Body, maxResponseBody))
 
 	if resp.StatusCode != http.StatusOK {
+		defer func() { _ = resp.Body.Close() }()
+		respBody, _ := io.ReadAll(io.LimitReader(resp.Body, maxResponseBody))
 		var apiErr struct {
 			Error struct {
 				Message string `json:"message"`
@@ -294,6 +316,20 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 		}
 		return nil, fmt.Errorf("Open WebUI API error (%d): %s", resp.StatusCode, errMsg)
 	}
+
+	// Streaming response: the shared OpenAI-compatible SSE parser owns
+	// resp.Body (closes it when the stream ends) and emits sentences via the
+	// engine's streaming channel contract.
+	if useStreaming {
+		return ai_common.HandleOpenAICompatibleStream(flow, resp, model, map[string]interface{}{
+			"prompt_tokens":     int64(0),
+			"completion_tokens": int64(0),
+			"total_tokens":      int64(0),
+		})
+	}
+
+	defer func() { _ = resp.Body.Close() }()
+	respBody, _ := io.ReadAll(io.LimitReader(resp.Body, maxResponseBody))
 
 	var result struct {
 		Choices []struct {
