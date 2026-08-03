@@ -3,6 +3,7 @@ package linear_create_issue
 import (
 	"encoding/json"
 	"fmt"
+	"strings"
 
 	core "flomation.app/automate/executor"
 	linear "flomation.app/automate/executor/actions/linear"
@@ -78,10 +79,28 @@ var Inputs = [...]core.Connection{
 		Placeholder: "Comma-separated label UUIDs (optional)",
 	},
 	{
+		Name:        "labels",
+		Type:        core.ConnectionTypeString,
+		Label:       "Labels (names — resolves to UUIDs automatically)",
+		Placeholder: "Comma-separated label names, e.g. Enriched, Priority",
+	},
+	{
+		Name:        "assignee",
+		Type:        core.ConnectionTypeString,
+		Label:       "Assignee (name or email — resolves to UUID automatically)",
+		Placeholder: "e.g. Rhys Caldwell or rhys@flomation.co",
+	},
+	{
 		Name:        "project_id",
 		Type:        core.ConnectionTypeString,
 		Label:       "Project ID",
 		Placeholder: "Project UUID (optional)",
+	},
+	{
+		Name:        "project",
+		Type:        core.ConnectionTypeString,
+		Label:       "Project (name — resolves to UUID automatically)",
+		Placeholder: "Project name",
 	},
 	{
 		Name:        "estimate",
@@ -159,6 +178,40 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 		}
 		if len(ids) > 0 {
 			vars["labelIds"] = ids
+		}
+	}
+
+	// Agent-friendly name resolution — applied only when the UUID variant is
+	// absent, so an agent can pass label/assignee/project by name.
+	if _, set := vars["labelIds"]; !set {
+		if v := linear.OptionalString("labels", inputs); v != "" {
+			ids, unresolved, rErr := linear.ResolveLabelIDs(apiKey, linear.SplitCSV(v))
+			if rErr != nil {
+				return map[string]interface{}{"tool_result": fmt.Sprintf("Could not resolve labels: %s", rErr), "success": false, "error": rErr.Error()}, nil
+			}
+			if len(unresolved) > 0 {
+				msg := fmt.Sprintf("Unknown label(s): %s — use list_labels to see available labels", strings.Join(unresolved, ", "))
+				return map[string]interface{}{"tool_result": msg, "success": false, "error": msg}, nil
+			}
+			vars["labelIds"] = ids
+		}
+	}
+	if _, set := vars["assigneeId"]; !set {
+		if v := linear.OptionalString("assignee", inputs); v != "" {
+			uid, rErr := linear.ResolveUserID(apiKey, v)
+			if rErr != nil {
+				return map[string]interface{}{"tool_result": fmt.Sprintf("Could not resolve assignee %q: %s", v, rErr), "success": false, "error": rErr.Error()}, nil
+			}
+			vars["assigneeId"] = uid
+		}
+	}
+	if _, set := vars["projectId"]; !set {
+		if v := linear.OptionalString("project", inputs); v != "" {
+			pid, rErr := linear.ResolveProjectID(apiKey, v)
+			if rErr != nil {
+				return map[string]interface{}{"tool_result": fmt.Sprintf("Could not resolve project %q: %s", v, rErr), "success": false, "error": rErr.Error()}, nil
+			}
+			vars["projectId"] = pid
 		}
 	}
 

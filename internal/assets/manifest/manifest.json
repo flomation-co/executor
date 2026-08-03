@@ -289637,8 +289637,87 @@
       }
     ]
   },
+  "linear/add_labels": {
+    "hash": "a0ff7b29b8efa444aa65fe6c070fc2438ccce542851c103920f880638739e428",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Add Labels",
+    "description": "Add labels (by name or UUID) to an issue without removing existing labels.",
+    "website": "https://www.flomation.co",
+    "icon": "linear+tag",
+    "date": "03/08/2026",
+    "type": 2,
+    "category": {
+      "name": "Linear",
+      "icon": "linear",
+      "description": "Manage issues, projects, and teams in Linear"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "Linear API Key",
+        "placeholder": "lin_api_...",
+        "required": true
+      },
+      {
+        "name": "issue_id",
+        "type": "string",
+        "value": null,
+        "label": "Issue ID or Identifier",
+        "placeholder": "UUID or FLO-123",
+        "required": true
+      },
+      {
+        "name": "labels",
+        "type": "string",
+        "value": null,
+        "label": "Labels",
+        "placeholder": "Comma-separated label names or UUIDs, e.g. Enriched, Priority",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "Issue ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "Issue",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
   "linear/create_issue": {
-    "hash": "ca6e7a953fc025d3d8994c3042778e587fde811958855b5a55eaa5fcd5d93909",
+    "hash": "1a5265b00a57ddd126ffc2d57d1b28de999a7d15229fbb3b68be375c2d3ae7b5",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Create Issue",
@@ -289735,11 +289814,32 @@
         "placeholder": "Comma-separated label UUIDs (optional)"
       },
       {
+        "name": "labels",
+        "type": "string",
+        "value": null,
+        "label": "Labels (names — resolves to UUIDs automatically)",
+        "placeholder": "Comma-separated label names, e.g. Enriched, Priority"
+      },
+      {
+        "name": "assignee",
+        "type": "string",
+        "value": null,
+        "label": "Assignee (name or email — resolves to UUID automatically)",
+        "placeholder": "e.g. Rhys Caldwell or rhys@flomation.co"
+      },
+      {
         "name": "project_id",
         "type": "string",
         "value": null,
         "label": "Project ID",
         "placeholder": "Project UUID (optional)"
+      },
+      {
+        "name": "project",
+        "type": "string",
+        "value": null,
+        "label": "Project (name — resolves to UUID automatically)",
+        "placeholder": "Project name"
       },
       {
         "name": "estimate",
@@ -289925,6 +290025,69 @@
         "type": "string",
         "value": null,
         "label": "Issue ID",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "linear/get_current_user": {
+    "hash": "177af7c1d80d455b1ddaf676106de2ad134e73abb51f66b086e979600bd532ce",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Get Current User",
+    "description": "Get the user the API key belongs to (id, name, email) — use for self-assignment.",
+    "website": "https://www.flomation.co",
+    "icon": "linear+user",
+    "date": "03/08/2026",
+    "type": 2,
+    "category": {
+      "name": "Linear",
+      "icon": "linear",
+      "description": "Manage issues, projects, and teams in Linear"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "Linear API Key",
+        "placeholder": "lin_api_...",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "id",
+        "type": "string",
+        "value": null,
+        "label": "User ID",
+        "placeholder": ""
+      },
+      {
+        "name": "result",
+        "type": "object",
+        "value": null,
+        "label": "User",
         "placeholder": ""
       },
       {
@@ -290310,6 +290473,146 @@
       }
     ]
   },
+  "linear/list_labels": {
+    "hash": "30bdaff9d5a39fffd656f5919cf5f10339abfb11c36aafb20a3a6728384978d0",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "List Labels",
+    "description": "List issue labels with their UUIDs. Use this to get the label UUIDs needed by update_issue.",
+    "website": "https://www.flomation.co",
+    "icon": "linear+list",
+    "date": "03/08/2026",
+    "type": 2,
+    "category": {
+      "name": "Linear",
+      "icon": "linear",
+      "description": "Manage issues, projects, and teams in Linear"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "Linear API Key",
+        "placeholder": "lin_api_...",
+        "required": true
+      },
+      {
+        "name": "team_id",
+        "type": "string",
+        "value": null,
+        "label": "Team ID or Key (optional)",
+        "placeholder": "UUID or team key (e.g. FLO). Blank = all workspace labels."
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "labels",
+        "type": "object",
+        "value": null,
+        "label": "Labels",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Count",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "linear/list_projects": {
+    "hash": "357d69937eb0c85be265f712efabd4843691137028e0729922ed56abc4385fcb",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "List Projects",
+    "description": "List projects with their UUIDs. Use this to get the project UUID needed by create/update_issue.",
+    "website": "https://www.flomation.co",
+    "icon": "linear+list",
+    "date": "03/08/2026",
+    "type": 2,
+    "category": {
+      "name": "Linear",
+      "icon": "linear",
+      "description": "Manage issues, projects, and teams in Linear"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "Linear API Key",
+        "placeholder": "lin_api_...",
+        "required": true
+      },
+      {
+        "name": "query",
+        "type": "string",
+        "value": null,
+        "label": "Name Filter (optional)",
+        "placeholder": "Filter projects by name substring"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "projects",
+        "type": "object",
+        "value": null,
+        "label": "Projects",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Count",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
   "linear/list_teams": {
     "hash": "c6ed5e0eea1d685ac5612b76482a02c6baefe86b300ef6471002f01768a2bdf3",
     "author": "Andy Esser",
@@ -290593,7 +290896,7 @@
     ]
   },
   "linear/update_issue": {
-    "hash": "b47ed64cb89d3a866516abc1d57a06fcf5b65406dff76154f8b89e8f17f12fbd",
+    "hash": "315f9f56d0e5127eababbce775ca25ca32421dc33fbf05cb8ba1255aab2468cf",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Update Issue",
@@ -290726,6 +291029,27 @@
         "value": null,
         "label": "Label IDs",
         "placeholder": "Comma-separated label UUIDs to set (optional)"
+      },
+      {
+        "name": "labels",
+        "type": "string",
+        "value": null,
+        "label": "Labels (names — resolves to UUIDs automatically)",
+        "placeholder": "Comma-separated label names, e.g. Enriched, Priority (SETS the full list)"
+      },
+      {
+        "name": "assignee",
+        "type": "string",
+        "value": null,
+        "label": "Assignee (name or email — resolves to UUID automatically)",
+        "placeholder": "e.g. Rhys Caldwell or rhys@flomation.co"
+      },
+      {
+        "name": "project",
+        "type": "string",
+        "value": null,
+        "label": "Project (name — resolves to UUID automatically)",
+        "placeholder": "Project name"
       }
     ],
     "outputs": [

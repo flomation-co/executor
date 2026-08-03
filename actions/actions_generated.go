@@ -1829,12 +1829,16 @@ import (
 	journey_render_static_map "flomation.app/automate/executor/actions/journey/render_static_map"
 	journey_reverse_geocode "flomation.app/automate/executor/actions/journey/reverse_geocode"
 	linear_add_comment "flomation.app/automate/executor/actions/linear/add_comment"
+	linear_add_labels "flomation.app/automate/executor/actions/linear/add_labels"
 	linear_create_issue "flomation.app/automate/executor/actions/linear/create_issue"
 	linear_delete_comment "flomation.app/automate/executor/actions/linear/delete_comment"
 	linear_get_comment "flomation.app/automate/executor/actions/linear/get_comment"
+	linear_get_current_user "flomation.app/automate/executor/actions/linear/get_current_user"
 	linear_get_issue "flomation.app/automate/executor/actions/linear/get_issue"
 	linear_list_comments "flomation.app/automate/executor/actions/linear/list_comments"
 	linear_list_issues "flomation.app/automate/executor/actions/linear/list_issues"
+	linear_list_labels "flomation.app/automate/executor/actions/linear/list_labels"
+	linear_list_projects "flomation.app/automate/executor/actions/linear/list_projects"
 	linear_list_teams "flomation.app/automate/executor/actions/linear/list_teams"
 	linear_list_users "flomation.app/automate/executor/actions/linear/list_users"
 	linear_list_workflow_states "flomation.app/automate/executor/actions/linear/list_workflow_states"
@@ -5359,12 +5363,16 @@ var Actions = map[string]core.Action{
 	"journey/render_static_map":                                                       journey_render_static_map.Execute,
 	"journey/reverse_geocode":                                                         journey_reverse_geocode.Execute,
 	"linear/add_comment":                                                              linear_add_comment.Execute,
+	"linear/add_labels":                                                               linear_add_labels.Execute,
 	"linear/create_issue":                                                             linear_create_issue.Execute,
 	"linear/delete_comment":                                                           linear_delete_comment.Execute,
 	"linear/get_comment":                                                              linear_get_comment.Execute,
+	"linear/get_current_user":                                                         linear_get_current_user.Execute,
 	"linear/get_issue":                                                                linear_get_issue.Execute,
 	"linear/list_comments":                                                            linear_list_comments.Execute,
 	"linear/list_issues":                                                              linear_list_issues.Execute,
+	"linear/list_labels":                                                              linear_list_labels.Execute,
+	"linear/list_projects":                                                            linear_list_projects.Execute,
 	"linear/list_teams":                                                               linear_list_teams.Execute,
 	"linear/list_users":                                                               linear_list_users.Execute,
 	"linear/list_workflow_states":                                                     linear_list_workflow_states.Execute,
