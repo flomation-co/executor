@@ -224,17 +224,19 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	// connection type (only Integer); see the action's Inputs. Parse it
 	// explicitly so malformed values warn loudly and fall back to the
 	// default rather than being silently swallowed.
-	temperature := 0.7
+	// Temperature is opt-in — OpenRouter proxies to any provider (incl. models
+	// that reject a non-default temperature), so only send a value the author
+	// explicitly set rather than a forced default.
+	var temperature *float64
 	tempConn := core.FindConnection("temperature", inputs)
 	if tempConn != nil && tempConn.String() != nil && *tempConn.String() != "" {
 		raw := strings.TrimSpace(*tempConn.String())
 		if parsed, err := strconv.ParseFloat(raw, 64); err == nil {
-			temperature = parsed
+			temperature = &parsed
 		} else {
 			log.WithFields(log.Fields{
-				"value":   raw,
-				"default": temperature,
-			}).Warn("[openrouter] invalid temperature; falling back to default")
+				"value": raw,
+			}).Warn("[openrouter] invalid temperature; omitting it")
 		}
 	}
 
@@ -364,10 +366,12 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	useStreaming := streaming && !isToolReinvocation
 
 	payload := map[string]interface{}{
-		"model":       model,
-		"messages":    messages,
-		"max_tokens":  maxTokens,
-		"temperature": temperature,
+		"model":      model,
+		"messages":   messages,
+		"max_tokens": maxTokens,
+	}
+	if temperature != nil {
+		payload["temperature"] = *temperature
 	}
 	if topP != nil {
 		payload["top_p"] = *topP

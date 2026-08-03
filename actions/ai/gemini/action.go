@@ -194,11 +194,14 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 		maxTokens = *c.Number()
 	}
 
-	temperature := 0.7
+	// Temperature is opt-in — only sent when the author explicitly sets one,
+	// rather than a forced default, for consistency with the other providers.
+	var temperature *float64
 	if c := core.FindConnection("temperature", inputs); c != nil && c.String() != nil && *c.String() != "" {
-		// Parse best-effort; if the user's value is garbage we keep
-		// the default 0.7 rather than failing the whole node.
-		_, _ = fmt.Sscanf(*c.String(), "%f", &temperature)
+		var t float64
+		if _, err := fmt.Sscanf(*c.String(), "%f", &t); err == nil {
+			temperature = &t
+		}
 	}
 
 	systemPromptStr := ""
@@ -309,12 +312,15 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	}
 	useStreaming := streaming && !isToolReinvocation
 
+	generationConfig := map[string]interface{}{
+		"maxOutputTokens": maxTokens,
+	}
+	if temperature != nil {
+		generationConfig["temperature"] = *temperature
+	}
 	payload := map[string]interface{}{
-		"contents": contents,
-		"generationConfig": map[string]interface{}{
-			"temperature":     temperature,
-			"maxOutputTokens": maxTokens,
-		},
+		"contents":         contents,
+		"generationConfig": generationConfig,
 	}
 	if systemPromptStr != "" {
 		payload["systemInstruction"] = map[string]interface{}{

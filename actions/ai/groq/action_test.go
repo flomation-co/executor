@@ -299,8 +299,10 @@ func TestExecuteInvalidTemperatureFallsBack(t *testing.T) {
 
 	_, err := Execute(&core.Flow{}, nil, inputs)
 	Expect(err).To(BeNil())
-	// Malformed input must fall back to the 0.7 default, not 0.
-	Expect(reqBody["temperature"]).To(Equal(0.7))
+	// Temperature is opt-in: a malformed value is omitted entirely (not
+	// coerced to a default), so a request never forces a temperature onto a
+	// model that might reject it.
+	Expect(reqBody).ToNot(HaveKey("temperature"))
 }
 
 func TestExecuteNoResponseSentinel(t *testing.T) {
