@@ -1344,6 +1344,7 @@ import (
 	devops_jenkins_job_list "flomation.app/automate/executor/actions/devops/jenkins/job_list"
 	devops_jenkins_job_trigger "flomation.app/automate/executor/actions/devops/jenkins/job_trigger"
 	devops_jenkins_job_trigger_params "flomation.app/automate/executor/actions/devops/jenkins/job_trigger_params"
+	document_fill_pdf "flomation.app/automate/executor/actions/document/fill_pdf"
 	ecommerce_shopify_order_create "flomation.app/automate/executor/actions/ecommerce/shopify/order_create"
 	ecommerce_shopify_order_delete "flomation.app/automate/executor/actions/ecommerce/shopify/order_delete"
 	ecommerce_shopify_order_get "flomation.app/automate/executor/actions/ecommerce/shopify/order_get"
@@ -4878,6 +4879,7 @@ var Actions = map[string]core.Action{
 	"devops/jenkins/job_list":                                                         devops_jenkins_job_list.Execute,
 	"devops/jenkins/job_trigger":                                                      devops_jenkins_job_trigger.Execute,
 	"devops/jenkins/job_trigger_params":                                               devops_jenkins_job_trigger_params.Execute,
+	"document/fill_pdf":                                                               document_fill_pdf.Execute,
 	"ecommerce/shopify/order_create":                                                  ecommerce_shopify_order_create.Execute,
 	"ecommerce/shopify/order_delete":                                                  ecommerce_shopify_order_delete.Execute,
 	"ecommerce/shopify/order_get":                                                     ecommerce_shopify_order_get.Execute,

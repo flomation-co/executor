@@ -1189,7 +1189,7 @@
     ]
   },
   "ai/anthropic": {
-    "hash": "37c7458de306612b61a857676a36204697bd662cd6ef65b47632c009ad2f6bf2",
+    "hash": "0321179de6830c709d31c7e2f9b0383da971bd869a7b30afc7d9f3ecaa471123",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Anthropic Prompt",
@@ -1845,7 +1845,7 @@
     ]
   },
   "ai/gemini": {
-    "hash": "5b3513589d4083d7383510db5d7a199fd84fdc07523180fa2f9c9844a0c9883a",
+    "hash": "16dca28f30a97bc84fe09994688de718004950aee0375059ee7150221af684f9",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Gemini Prompt",
@@ -2450,7 +2450,7 @@
     ]
   },
   "ai/groq": {
-    "hash": "b9796c35f355f10babe1f31d8a4d508b5097973cf5c11f4fee45401727eb6bd3",
+    "hash": "a6b3b670ac04185174d478ab6905618f2f3558bc09f85aa9efb2d929b57e4bab",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "Groq Prompt",
@@ -3151,7 +3151,7 @@
     ]
   },
   "ai/openai": {
-    "hash": "1ec6ae35a113392617293604136f34756a7a61b2d6c8ff51cfca91fd2d6d9afc",
+    "hash": "98040ba4858146f7affeb0b240056a303c53cee913e4b5b6b0f3b314884fff35",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "OpenAI Prompt",
@@ -3341,7 +3341,7 @@
     ]
   },
   "ai/openrouter": {
-    "hash": "6e7ad1cd46429a7975666c048f0864c401c0dd64edf83f3982b7c736e7285556",
+    "hash": "01e6389b87c434e60b5b3fe2a4797ca98728a9ca672c1d15507cb5f8e1a9c8a0",
     "author": "Dave McElin",
     "organisation": "Flomation",
     "name": "OpenRouter Prompt",
@@ -219291,6 +219291,90 @@
         "type": "string",
         "value": null,
         "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "document/fill_pdf": {
+    "hash": "aeb89bfcc256434e3d8a93a9627b9df5658c88aab2ead5d0ae3f83579b857891",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Fill PDF Form",
+    "description": "Populate an uploaded fillable PDF's form fields and output the completed PDF",
+    "website": "https://www.flomation.co",
+    "icon": "file-export",
+    "date": "04/08/2026",
+    "type": 2,
+    "category": {
+      "name": "Document",
+      "icon": "file-lines",
+      "description": "Generate and populate documents (fill PDF forms, templates, export)"
+    },
+    "inputs": [
+      {
+        "name": "template",
+        "type": "file",
+        "value": null,
+        "label": "PDF template",
+        "placeholder": "Upload a fillable PDF",
+        "required": true
+      },
+      {
+        "name": "fields",
+        "type": "key_value_array",
+        "value": null,
+        "label": "Field values",
+        "placeholder": "PDF field name = value"
+      },
+      {
+        "name": "flatten",
+        "type": "boolean",
+        "value": null,
+        "label": "Lock fields (make the result non-editable)",
+        "placeholder": ""
+      },
+      {
+        "name": "filename",
+        "type": "string",
+        "value": null,
+        "label": "Output filename",
+        "placeholder": "completed.pdf"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "pdf",
+        "type": "string",
+        "value": null,
+        "label": "Completed PDF (media reference)",
+        "placeholder": ""
+      },
+      {
+        "name": "filename",
+        "type": "string",
+        "value": null,
+        "label": "Filename",
         "placeholder": ""
       },
       {
