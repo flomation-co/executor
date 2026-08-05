@@ -29,6 +29,7 @@ var Inputs = [...]core.Connection{
 var Outputs = [...]core.Connection{
 	{Name: "tool_result", Type: core.ConnectionTypeString, Label: "Result summary"},
 	{Name: "blocks", Type: core.ConnectionTypeObject, Label: "Blocks (JSON)"},
+	{Name: "block_ids", Type: core.ConnectionTypeObject, Label: "Block IDs (JSON array)"},
 	{Name: "count", Type: core.ConnectionTypeInteger, Label: "Count"},
 	{Name: "success", Type: core.ConnectionTypeBoolean, Label: "Success"},
 	{Name: "error", Type: core.ConnectionTypeString, Label: "Error"},
@@ -64,28 +65,50 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 		return notion.ErrorResult(fmt.Sprintf("Failed to parse response: %s", err)), nil
 	}
 
-	var sb strings.Builder
-	sb.WriteString(fmt.Sprintf("Block %s has %d child block(s):\n\n", blockID, len(result.Results)))
-	for _, r := range result.Results {
-		if bm, ok := r.(map[string]interface{}); ok {
-			blockType, _ := bm["type"].(string)
-			// Extract text content from common block types
-			text := extractBlockText(bm, blockType)
-			if text != "" {
-				sb.WriteString(fmt.Sprintf("[%s] %s\n", blockType, text))
-			} else {
-				sb.WriteString(fmt.Sprintf("[%s]\n", blockType))
-			}
-		}
-	}
+	summary, blockIDs := summariseBlocks(blockID, result.Results)
 
 	return map[string]interface{}{
-		"tool_result": sb.String(),
+		"tool_result": summary,
 		"blocks":      result.Results,
+		"block_ids":   blockIDs,
 		"count":       int64(len(result.Results)),
 		"success":     true,
 		"error":       "",
 	}, nil
+}
+
+// summariseBlocks renders the AI-/human-readable block listing (one line per
+// block, each carrying its ID so a caller can target it for update/delete/
+// reorder) and returns the collected block IDs in order.
+func summariseBlocks(blockID string, results []interface{}) (string, []string) {
+	var sb strings.Builder
+	sb.WriteString(fmt.Sprintf("Block %s has %d child block(s):\n\n", blockID, len(results)))
+	ids := make([]string, 0, len(results))
+	for _, r := range results {
+		bm, ok := r.(map[string]interface{})
+		if !ok {
+			continue
+		}
+		blockType, _ := bm["type"].(string)
+		id, _ := bm["id"].(string)
+		if id != "" {
+			ids = append(ids, id)
+		}
+		// A "(has children)" hint flags blocks whose own children need a
+		// further get_block_children call to reach.
+		childHint := ""
+		if hc, _ := bm["has_children"].(bool); hc {
+			childHint = " (has children)"
+		}
+		// Include the block ID on every line so a caller (or the AI) can target
+		// this exact block.
+		if text := extractBlockText(bm, blockType); text != "" {
+			sb.WriteString(fmt.Sprintf("[%s] %s  (id: %s)%s\n", blockType, text, id, childHint))
+		} else {
+			sb.WriteString(fmt.Sprintf("[%s]  (id: %s)%s\n", blockType, id, childHint))
+		}
+	}
+	return sb.String(), ids
 }
 
 func extractBlockText(block map[string]interface{}, blockType string) string {
