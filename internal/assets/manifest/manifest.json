@@ -219310,7 +219310,7 @@
     ]
   },
   "document/fill_pdf": {
-    "hash": "aeb89bfcc256434e3d8a93a9627b9df5658c88aab2ead5d0ae3f83579b857891",
+    "hash": "7c26a178f7b01b1483763c61847464b138f1a4ab1e44a31bc59e0adc414b535c",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Fill PDF Form",
@@ -219334,10 +219334,17 @@
         "required": true
       },
       {
+        "name": "auto_fill",
+        "type": "boolean",
+        "value": null,
+        "label": "Auto-fill fields from matching flow values",
+        "placeholder": ""
+      },
+      {
         "name": "fields",
         "type": "key_value_array",
         "value": null,
-        "label": "Field values",
+        "label": "Field values (override auto-fill)",
         "placeholder": "PDF field name = value"
       },
       {

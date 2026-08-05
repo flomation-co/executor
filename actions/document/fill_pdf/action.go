@@ -8,6 +8,12 @@
 // engine resolves via ResolveToLocalFile). Filling is done with pdfcpu (pure Go,
 // no external binary): export the form's field structure, set each field's value
 // by name, then fill; optionally lock the fields so the result isn't editable.
+//
+// Values come from two sources, explicit winning: the `fields` map (PDF field
+// name -> value) and, when `auto_fill` is on, a match against the flow's incoming
+// values — the merged outputs of the node's parents (e.g. a Form trigger's
+// answers, keyed by field identifier). So a template whose AcroForm fields are
+// named to match the form's field identifiers needs no mapping at all.
 package fillpdf
 
 import (
@@ -35,7 +41,8 @@ const (
 
 var Inputs = [...]core.Connection{
 	{Name: "template", Type: core.ConnectionTypeFile, Label: "PDF template", Placeholder: "Upload a fillable PDF", Required: true},
-	{Name: "fields", Type: core.ConnectionTypeKeyValueArray, Label: "Field values", Placeholder: "PDF field name = value"},
+	{Name: "auto_fill", Type: core.ConnectionTypeBoolean, Label: "Auto-fill fields from matching flow values"},
+	{Name: "fields", Type: core.ConnectionTypeKeyValueArray, Label: "Field values (override auto-fill)", Placeholder: "PDF field name = value"},
 	{Name: "flatten", Type: core.ConnectionTypeBoolean, Label: "Lock fields (make the result non-editable)"},
 	{Name: "filename", Type: core.ConnectionTypeString, Label: "Output filename", Placeholder: "completed.pdf"},
 }
@@ -63,14 +70,40 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	}
 	templateRef := strings.TrimSpace(*tc.String())
 
-	// Field name -> value map from the key-value input (values may be ${...}).
-	values := map[string]string{}
+	// Explicit field name -> value map from the key-value input (values are
+	// already ${...}-substituted by the engine before Execute).
+	explicit := map[string]string{}
 	if fc := core.FindConnection("fields", inputs); fc != nil {
 		for _, kv := range fc.KeyValuePairs() {
 			if k := strings.TrimSpace(kv.Key); k != "" {
-				values[k] = kv.Value
+				explicit[k] = kv.Value
 			}
 		}
+	}
+
+	autoFill := false
+	if bc := core.FindConnection("auto_fill", inputs); bc != nil && bc.Boolean() != nil {
+		autoFill = *bc.Boolean()
+	}
+	// When auto-filling, gather the flow's incoming values (merged parent
+	// outputs) so a PDF field can be matched to a same-named answer.
+	var pool map[string]string
+	if autoFill {
+		pool = autoFillPool(flow, node)
+	}
+
+	// A field's value is the explicit mapping if present, else (when auto-filling)
+	// a non-empty same-named incoming value. Explicit always wins.
+	lookup := func(name string) (string, bool) {
+		if v, ok := explicit[name]; ok {
+			return v, true
+		}
+		if autoFill {
+			if v, ok := pool[name]; ok && v != "" {
+				return v, true
+			}
+		}
+		return "", false
 	}
 
 	flatten := false
@@ -101,7 +134,7 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	if err != nil {
 		return errResult("read form data: " + err.Error())
 	}
-	merged, filledCount, err := mergeFormValues(raw, values)
+	merged, filledCount, err := mergeFormValues(raw, lookup)
 	if err != nil {
 		return errResult(err.Error())
 	}
@@ -145,11 +178,11 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 }
 
 // mergeFormValues takes the pdfcpu-exported form JSON and sets each field's value
-// from `values` (matched by field name), coercing to the field's own value type
-// (bool for checkboxes, []string for list boxes, else string). Fields absent from
-// `values` keep their existing/default value. Returns the modified JSON and how
-// many fields were populated.
-func mergeFormValues(raw []byte, values map[string]string) ([]byte, int, error) {
+// from `lookup` (matched by field name), coercing to the field's own value type
+// (bool for checkboxes, []string for list boxes, else string). Fields for which
+// lookup returns false keep their existing/default value. Returns the modified
+// JSON and how many fields were populated.
+func mergeFormValues(raw []byte, lookup func(name string) (string, bool)) ([]byte, int, error) {
 	var doc map[string]interface{}
 	if err := json.Unmarshal(raw, &doc); err != nil {
 		return nil, 0, fmt.Errorf("parse form data: %w", err)
@@ -173,8 +206,11 @@ func mergeFormValues(raw []byte, values map[string]string) ([]byte, int, error) 
 					continue
 				}
 				name, _ := field["name"].(string)
-				incoming, present := values[name]
-				if name == "" || !present {
+				if name == "" {
+					continue
+				}
+				incoming, present := lookup(name)
+				if !present {
 					continue
 				}
 				setFieldValue(field, incoming)
@@ -184,6 +220,51 @@ func mergeFormValues(raw []byte, values map[string]string) ([]byte, int, error) 
 	}
 	out, err := json.Marshal(doc)
 	return out, filled, err
+}
+
+// autoFillPool gathers the flow's incoming values for name-matching: the merged
+// outputs of the node's parents (a Form trigger's answers are its outputs, keyed
+// by field identifier), first non-empty value winning — mirroring how a bare
+// ${field_name} reference resolves against merged parent results.
+func autoFillPool(flow *core.Flow, node *core.Node) map[string]string {
+	pool := map[string]string{}
+	if flow == nil || node == nil {
+		return pool
+	}
+	for _, p := range flow.FindSource(node.ID) {
+		for k, v := range flow.GetNodeResult(p.ID) {
+			s := toStr(v)
+			if s == "" {
+				continue
+			}
+			if _, exists := pool[k]; !exists {
+				pool[k] = s
+			}
+		}
+	}
+	return pool
+}
+
+// toStr renders an output value as a string suitable for a PDF text field
+// (scalars verbatim, objects/arrays as JSON).
+func toStr(v interface{}) string {
+	switch x := v.(type) {
+	case nil:
+		return ""
+	case string:
+		return x
+	case bool:
+		return strconv.FormatBool(x)
+	case float64:
+		return strconv.FormatFloat(x, 'f', -1, 64)
+	case json.Number:
+		return x.String()
+	default:
+		if b, err := json.Marshal(x); err == nil && string(b) != "null" {
+			return string(b)
+		}
+		return fmt.Sprintf("%v", x)
+	}
 }
 
 // setFieldValue writes `incoming` into a field's "value", coercing to match the
