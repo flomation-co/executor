@@ -37,15 +37,20 @@ func fieldByName(list interface{}, name string) map[string]interface{} {
 	return nil
 }
 
+// mapLookup adapts a plain map into the lookup func mergeFormValues expects.
+func mapLookup(m map[string]string) func(string) (string, bool) {
+	return func(name string) (string, bool) { v, ok := m[name]; return v, ok }
+}
+
 func TestMergeFormValues_SetsByNameWithTypeCoercion(t *testing.T) {
 	RegisterTestingT(t)
 
-	merged, n, err := mergeFormValues([]byte(sampleFormJSON), map[string]string{
+	merged, n, err := mergeFormValues([]byte(sampleFormJSON), mapLookup(map[string]string{
 		"company_name": "Wurkplace Ltd",
 		"employees":    "42",
 		"agree":        "yes",
 		"unknown_pdf":  "ignored", // no matching field -> not counted
-	})
+	}))
 	Expect(err).ToNot(HaveOccurred())
 	Expect(n).To(Equal(3))
 
@@ -66,13 +71,55 @@ func TestMergeFormValues_EmptyMapAndBadJSON(t *testing.T) {
 	RegisterTestingT(t)
 
 	// No values -> nothing filled, JSON unchanged-shaped.
-	_, n, err := mergeFormValues([]byte(sampleFormJSON), map[string]string{})
+	_, n, err := mergeFormValues([]byte(sampleFormJSON), mapLookup(map[string]string{}))
 	Expect(err).ToNot(HaveOccurred())
 	Expect(n).To(Equal(0))
 
 	// Malformed JSON is surfaced as an error, not a panic.
-	_, _, err = mergeFormValues([]byte("{not json"), map[string]string{"a": "b"})
+	_, _, err = mergeFormValues([]byte("{not json"), mapLookup(map[string]string{"a": "b"}))
 	Expect(err).To(HaveOccurred())
+}
+
+func TestLookup_ExplicitWinsOverAutoFill(t *testing.T) {
+	RegisterTestingT(t)
+
+	// The lookup precedence used by Execute: explicit map first, then a non-empty
+	// auto-fill value, else not present.
+	explicit := map[string]string{"company_name": "Explicit Ltd"}
+	pool := map[string]string{"company_name": "AutoFill Ltd", "employees": "7", "blank": ""}
+	autoFill := true
+	lookup := func(name string) (string, bool) {
+		if v, ok := explicit[name]; ok {
+			return v, true
+		}
+		if autoFill {
+			if v, ok := pool[name]; ok && v != "" {
+				return v, true
+			}
+		}
+		return "", false
+	}
+
+	v, ok := lookup("company_name")
+	Expect(ok).To(BeTrue())
+	Expect(v).To(Equal("Explicit Ltd")) // explicit overrides auto-fill
+	v, ok = lookup("employees")
+	Expect(ok).To(BeTrue())
+	Expect(v).To(Equal("7")) // auto-filled
+	_, ok = lookup("blank")
+	Expect(ok).To(BeFalse()) // empty auto-fill value doesn't fill
+	_, ok = lookup("missing")
+	Expect(ok).To(BeFalse())
+}
+
+func TestToStr(t *testing.T) {
+	RegisterTestingT(t)
+	Expect(toStr("hi")).To(Equal("hi"))
+	Expect(toStr(nil)).To(Equal(""))
+	Expect(toStr(true)).To(Equal("true"))
+	Expect(toStr(float64(42))).To(Equal("42"))
+	Expect(toStr(float64(3.5))).To(Equal("3.5"))
+	Expect(toStr([]interface{}{"a", "b"})).To(Equal(`["a","b"]`))
 }
 
 func TestParseBool(t *testing.T) {
