@@ -2051,6 +2051,7 @@ import (
 	notion_list_databases "flomation.app/automate/executor/actions/notion/list_databases"
 	notion_query_database "flomation.app/automate/executor/actions/notion/query_database"
 	notion_search "flomation.app/automate/executor/actions/notion/search"
+	notion_update_block "flomation.app/automate/executor/actions/notion/update_block"
 	notion_update_page "flomation.app/automate/executor/actions/notion/update_page"
 	opentofu_apply "flomation.app/automate/executor/actions/opentofu/apply"
 	opentofu_destroy "flomation.app/automate/executor/actions/opentofu/destroy"
@@ -5586,6 +5587,7 @@ var Actions = map[string]core.Action{
 	"notion/list_databases":                                                           notion_list_databases.Execute,
 	"notion/query_database":                                                           notion_query_database.Execute,
 	"notion/search":                                                                   notion_search.Execute,
+	"notion/update_block":                                                             notion_update_block.Execute,
 	"notion/update_page":                                                              notion_update_page.Execute,
 	"opentofu/apply":                                                                  opentofu_apply.Execute,
 	"opentofu/destroy":                                                                opentofu_destroy.Execute,
