@@ -435,3 +435,80 @@ func MapError(err error) map[string]interface{} {
 	}
 	return ErrorResult(err.Error())
 }
+
+// ── Query-parameter builders ────────────────────────────────────────────────
+//
+// CRITICAL: Apollo's search endpoints (people, companies, contacts, accounts,
+// sequences, emailer messages) read their filters from the URL QUERY STRING,
+// not the JSON request body — array filters use bracket notation
+// (key[]=a&key[]=b). Sending filters in the body makes Apollo silently ignore
+// them and return a generic, unscoped list. Every search action must build its
+// filters with these helpers and POST via PostQuery.
+
+// PostQuery POSTs to path with the filters in the query string and an empty JSON
+// body (which preserves the application/json Content-Type Apollo expects).
+func (c *Client) PostQuery(flow *core.Flow, path string, query url.Values) (map[string]interface{}, error) {
+	return c.Request(flow, http.MethodPost, path, query, map[string]interface{}{})
+}
+
+// AddQueryString sets a scalar query param from a string input, when non-empty.
+func AddQueryString(q url.Values, key, name string, inputs []*core.Connection) {
+	if v := strings.TrimSpace(OptionalString(name, inputs)); v != "" {
+		q.Set(key, v)
+	}
+}
+
+// AddQueryList adds an array input as repeated bracketed params: key[]=a&key[]=b.
+func AddQueryList(q url.Values, key, name string, inputs []*core.Connection) {
+	for _, v := range StringList(name, inputs) {
+		if t := strings.TrimSpace(v); t != "" {
+			q.Add(key+"[]", t)
+		}
+	}
+}
+
+// AddQueryRangeList adds a range input (e.g. "50,5000") as bracketed params,
+// preserving the comma inside each range.
+func AddQueryRangeList(q url.Values, key, name string, inputs []*core.Connection) {
+	for _, v := range RangeList(name, inputs) {
+		if t := strings.TrimSpace(v); t != "" {
+			q.Add(key+"[]", t)
+		}
+	}
+}
+
+// AddQueryInt sets an integer query param when the input is present.
+func AddQueryInt(q url.Values, key, name string, inputs []*core.Connection) {
+	if p := OptionalInt(name, inputs); p != nil {
+		q.Set(key, strconv.FormatInt(*p, 10))
+	}
+}
+
+// AddQueryBool sets a boolean query param when the input is present.
+func AddQueryBool(q url.Values, key, name string, inputs []*core.Connection) {
+	if b := OptionalBool(name, inputs); b != nil {
+		q.Set(key, strconv.FormatBool(*b))
+	}
+}
+
+// AddQueryFromMap flattens an arbitrary JSON object (a `fields` override) into
+// query params: scalars as key=value, arrays as key[]=item.
+func AddQueryFromMap(q url.Values, m map[string]interface{}) {
+	for k, v := range m {
+		switch vv := v.(type) {
+		case nil:
+		case string:
+			q.Set(k, vv)
+		case bool:
+			q.Set(k, strconv.FormatBool(vv))
+		case float64:
+			q.Set(k, strconv.FormatFloat(vv, 'f', -1, 64))
+		case []interface{}:
+			for _, item := range vv {
+				q.Add(k+"[]", fmt.Sprint(item))
+			}
+		default:
+			q.Set(k, fmt.Sprint(vv))
+		}
+	}
+}

@@ -2,6 +2,7 @@ package contact_search
 
 import (
 	"fmt"
+	"net/url"
 
 	core "flomation.app/automate/executor"
 	apollo_common "flomation.app/automate/executor/actions/crm/apollo"
@@ -43,16 +44,17 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 		return apollo_common.ErrorResult(err.Error()), nil
 	}
 
-	body := map[string]interface{}{}
-	apollo_common.SetString(body, "q_keywords", "q_keywords", inputs)
-	apollo_common.SetList(body, "contact_stage_ids", "contact_stage_ids", inputs)
-	apollo_common.SetList(body, "contact_label_ids", "contact_label_ids", inputs)
-	apollo_common.SetString(body, "sort_by_field", "sort_by_field", inputs)
-	apollo_common.SetBool(body, "sort_ascending", "sort_ascending", inputs)
-	apollo_common.SetInt(body, "page", "page", inputs)
-	apollo_common.SetInt(body, "per_page", "per_page", inputs)
+	// Apollo reads contact-search filters from the URL query string, not the body.
+	q := url.Values{}
+	apollo_common.AddQueryString(q, "q_keywords", "q_keywords", inputs)
+	apollo_common.AddQueryList(q, "contact_stage_ids", "contact_stage_ids", inputs)
+	apollo_common.AddQueryList(q, "contact_label_ids", "contact_label_ids", inputs)
+	apollo_common.AddQueryString(q, "sort_by_field", "sort_by_field", inputs)
+	apollo_common.AddQueryBool(q, "sort_ascending", "sort_ascending", inputs)
+	apollo_common.AddQueryInt(q, "page", "page", inputs)
+	apollo_common.AddQueryInt(q, "per_page", "per_page", inputs)
 
-	resp, err := apollo_common.NewClient(apiKey).Post(flow, "/contacts/search", body)
+	resp, err := apollo_common.NewClient(apiKey).PostQuery(flow, "/contacts/search", q)
 	if err != nil {
 		return apollo_common.MapError(err), nil
 	}

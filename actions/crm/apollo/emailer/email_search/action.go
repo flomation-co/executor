@@ -2,6 +2,7 @@ package email_search
 
 import (
 	"fmt"
+	"net/url"
 
 	core "flomation.app/automate/executor"
 	apollo_common "flomation.app/automate/executor/actions/crm/apollo"
@@ -42,20 +43,21 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 		return apollo_common.ErrorResult(err.Error()), nil
 	}
 
-	body := map[string]interface{}{}
-	apollo_common.SetString(body, "q_keywords", "q_keywords", inputs)
-	apollo_common.SetString(body, "emailer_campaign_id", "emailer_campaign_id", inputs)
-	apollo_common.SetString(body, "contact_id", "contact_id", inputs)
-	apollo_common.SetInt(body, "page", "page", inputs)
-	apollo_common.SetInt(body, "per_page", "per_page", inputs)
+	// Apollo reads emailer-message search filters from the URL query string.
+	q := url.Values{}
+	apollo_common.AddQueryString(q, "q_keywords", "q_keywords", inputs)
+	apollo_common.AddQueryString(q, "emailer_campaign_id", "emailer_campaign_id", inputs)
+	apollo_common.AddQueryString(q, "contact_id", "contact_id", inputs)
+	apollo_common.AddQueryInt(q, "page", "page", inputs)
+	apollo_common.AddQueryInt(q, "per_page", "per_page", inputs)
 
 	extra, err := apollo_common.ParseJSONObject("fields", inputs)
 	if err != nil {
 		return apollo_common.ErrorResult(err.Error()), nil
 	}
-	apollo_common.MergeFields(body, extra)
+	apollo_common.AddQueryFromMap(q, extra)
 
-	resp, err := apollo_common.NewClient(apiKey).Post(flow, "/emailer_messages/search", body)
+	resp, err := apollo_common.NewClient(apiKey).PostQuery(flow, "/emailer_messages/search", q)
 	if err != nil {
 		return apollo_common.MapError(err), nil
 	}

@@ -2,6 +2,7 @@ package sequence_list
 
 import (
 	"fmt"
+	"net/url"
 
 	core "flomation.app/automate/executor"
 	apollo_common "flomation.app/automate/executor/actions/crm/apollo"
@@ -39,12 +40,14 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 		return apollo_common.ErrorResult(err.Error()), nil
 	}
 
-	body := map[string]interface{}{}
-	apollo_common.SetString(body, "q_name", "q_name", inputs)
-	apollo_common.SetInt(body, "page", "page", inputs)
-	apollo_common.SetInt(body, "per_page", "per_page", inputs)
+	// Apollo reads sequence (emailer campaign) search filters from the URL query
+	// string, not the body.
+	q := url.Values{}
+	apollo_common.AddQueryString(q, "q_name", "q_name", inputs)
+	apollo_common.AddQueryInt(q, "page", "page", inputs)
+	apollo_common.AddQueryInt(q, "per_page", "per_page", inputs)
 
-	resp, err := apollo_common.NewClient(apiKey).Post(flow, "/emailer_campaigns/search", body)
+	resp, err := apollo_common.NewClient(apiKey).PostQuery(flow, "/emailer_campaigns/search", q)
 	if err != nil {
 		return apollo_common.MapError(err), nil
 	}
