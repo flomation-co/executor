@@ -78,7 +78,10 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	}
 
 	people := apollo_common.Arr(resp, "people")
-	return apollo_common.ListResult(people, fmt.Sprintf("Found %d people", len(people))), nil
+	// Warn loudly if the plan gated the personal data (obfuscated surnames, no
+	// emails/cities) so a caller cannot mistake masked people for real contacts.
+	summary := apollo_common.GatePrefix(fmt.Sprintf("Found %d people", len(people)), people)
+	return apollo_common.ListResult(people, summary), nil
 }
 
 // addList appends each non-empty value under the bracketed key so Apollo sees a

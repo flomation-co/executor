@@ -512,3 +512,76 @@ func AddQueryFromMap(q url.Values, m map[string]interface{}) {
 		}
 	}
 }
+
+// ── Plan-gated / obfuscated data detection ──────────────────────────────────
+//
+// On limited Apollo plans, People Search and enrichment return records whose
+// personal data is WITHHELD: the surname comes back only as
+// `last_name_obfuscated` ("Mc***y") and email/city/phone are replaced by
+// `has_email` / `has_city` / `has_direct_phone` boolean flags with no actual
+// value. The results look plausible but are not verifiable or contactable, and
+// revealing them needs a plan with API access and enrichment credits. These
+// helpers detect that so an action can warn loudly rather than let an agent
+// present masked people as a confident cohort.
+
+// IsGatedRecord reports whether an Apollo person record has plan-gated personal
+// data (an obfuscated surname, or a has_* flag set while the real value is
+// absent/empty).
+func IsGatedRecord(m map[string]interface{}) bool {
+	if m == nil {
+		return false
+	}
+	if s, ok := m["last_name_obfuscated"].(string); ok && strings.TrimSpace(s) != "" {
+		return true
+	}
+	if truthyFlag(m["has_email"]) && emptyValue(m["email"]) {
+		return true
+	}
+	if truthyFlag(m["has_city"]) && emptyValue(m["city"]) {
+		return true
+	}
+	return false
+}
+
+// GatePrefix returns summary with a loud data-gating warning prepended when any
+// of the records are plan-gated; otherwise it returns summary unchanged. The
+// warning is written into tool_result so an AI/agent caller cannot miss it.
+func GatePrefix(summary string, records []map[string]interface{}) string {
+	gated := 0
+	for _, m := range records {
+		if IsGatedRecord(m) {
+			gated++
+		}
+	}
+	if gated == 0 {
+		return summary
+	}
+	warn := fmt.Sprintf("WARNING - APOLLO DATA GATED: %d of %d result(s) have personal data withheld by this API key's Apollo plan (surnames obfuscated as last_name_obfuscated; email/city/phone hidden behind has_* flags). These people CANNOT be verified or contacted from this key - an Apollo plan with API access and available credits is required to reveal (unlock) them. Do NOT present these as confirmed contacts.", gated, len(records))
+	if strings.TrimSpace(summary) == "" {
+		return warn
+	}
+	return warn + "\n\n" + summary
+}
+
+// truthyFlag reads Apollo's has_* flags, which arrive as either a bool or a
+// string ("true"/"Yes").
+func truthyFlag(v interface{}) bool {
+	switch t := v.(type) {
+	case bool:
+		return t
+	case string:
+		s := strings.ToLower(strings.TrimSpace(t))
+		return s == "true" || s == "yes"
+	}
+	return false
+}
+
+func emptyValue(v interface{}) bool {
+	if v == nil {
+		return true
+	}
+	if s, ok := v.(string); ok {
+		return strings.TrimSpace(s) == ""
+	}
+	return false
+}
