@@ -184891,7 +184891,7 @@
     ]
   },
   "crm/apollo/search/people_search": {
-    "hash": "fae14a1f9f031ed3b13e44f56b734adef1e5e4795dccad63ed6ae58f3ab07b6b",
+    "hash": "2e24275dc31dafb940533246ca586676b7cf157a62f8b4490eed86df4414754e",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "People: Search",
@@ -184950,7 +184950,7 @@
         "type": "string",
         "value": null,
         "label": "Person Locations",
-        "placeholder": "London, United Kingdom (comma-separated)"
+        "placeholder": "City, region or country, e.g. Chester, United Kingdom (comma-separated)"
       },
       {
         "name": "organization_domains",

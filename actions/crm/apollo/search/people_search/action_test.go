@@ -1,10 +1,9 @@
 package people_search
 
 import (
-	"encoding/json"
-	"io"
 	"net/http"
 	"net/http/httptest"
+	"net/url"
 	"testing"
 
 	core "flomation.app/automate/executor"
@@ -31,49 +30,51 @@ func withServer(t *testing.T, handler http.HandlerFunc) func() {
 	}
 }
 
-// The domain filter must reach Apollo under q_organization_domains_list as bare,
-// normalised domains — NOT the old organization_domains key, which Apollo
-// silently ignored (returning a generic title-matched list of the wrong people).
-func TestExecute_DomainFilterUsesCorrectKeyAndNormalises(t *testing.T) {
+// Every filter must reach Apollo as a URL query parameter (array filters with
+// bracket notation), NOT in the JSON body — otherwise Apollo silently ignores
+// the location/domain/title filters and returns a generic list of the wrong
+// people (the reported bug).
+func TestExecute_FiltersAreQueryParamsWithBracketArrays(t *testing.T) {
 	RegisterTestingT(t)
 
-	var gotBody []byte
+	var q url.Values
 	cleanup := withServer(t, func(w http.ResponseWriter, r *http.Request) {
 		Expect(r.URL.Path).To(Equal("/mixed_people/api_search"))
-		gotBody, _ = io.ReadAll(r.Body)
+		q = r.URL.Query()
 		w.Header().Set("Content-Type", "application/json")
 		_, _ = w.Write([]byte(`{"people":[{"id":"p_1","name":"A Person"}]}`))
 	})
 	defer cleanup()
 
-	res, err := Execute(nil, nil, inputs(
+	ins := inputs(
 		[2]string{"api_key", "k123"},
-		[2]string{"person_titles", "Chief Executive"},
-		// Messy input: scheme, www., uppercase, path, trailing spaces, and a
-		// second bare domain.
-		[2]string{"organization_domains", "https://www.HSE.ie/about , nice.org.uk "},
-	))
+		[2]string{"person_titles", "Chief Executive, Founder"},
+		[2]string{"person_locations", "Chester, Wrexham"},
+		[2]string{"organization_domains", "https://www.HSE.ie/about"},
+	)
+	ins = append(ins,
+		&core.Connection{Name: "page", Type: core.ConnectionTypeInteger, Value: "2"},
+		&core.Connection{Name: "per_page", Type: core.ConnectionTypeInteger, Value: "10"},
+	)
+	res, err := Execute(nil, nil, ins)
 	Expect(err).ToNot(HaveOccurred())
 	Expect(res["success"]).To(BeTrue())
 
-	var body map[string]interface{}
-	Expect(json.Unmarshal(gotBody, &body)).To(Succeed())
-
-	// Correct key present with normalised bare domains.
-	Expect(body).To(HaveKey("q_organization_domains_list"))
-	list := body["q_organization_domains_list"].([]interface{})
-	Expect(list).To(Equal([]interface{}{"hse.ie", "nice.org.uk"}))
-
-	// The old, ignored key must NOT be sent.
-	Expect(body).ToNot(HaveKey("organization_domains"))
+	// Arrays as repeated bracketed query params.
+	Expect(q["person_titles[]"]).To(Equal([]string{"Chief Executive", "Founder"}))
+	Expect(q["person_locations[]"]).To(Equal([]string{"Chester", "Wrexham"}))
+	Expect(q["q_organization_domains_list[]"]).To(Equal([]string{"hse.ie"}))
+	// Scalars.
+	Expect(q.Get("page")).To(Equal("2"))
+	Expect(q.Get("per_page")).To(Equal("10"))
 }
 
-func TestExecute_NoDomainFilterOmitsKey(t *testing.T) {
+func TestExecute_OmitsAbsentFilters(t *testing.T) {
 	RegisterTestingT(t)
 
-	var gotBody []byte
+	var q url.Values
 	cleanup := withServer(t, func(w http.ResponseWriter, r *http.Request) {
-		gotBody, _ = io.ReadAll(r.Body)
+		q = r.URL.Query()
 		w.Header().Set("Content-Type", "application/json")
 		_, _ = w.Write([]byte(`{"people":[]}`))
 	})
@@ -84,10 +85,8 @@ func TestExecute_NoDomainFilterOmitsKey(t *testing.T) {
 		[2]string{"person_titles", "CEO"},
 	))
 	Expect(err).ToNot(HaveOccurred())
-
-	var body map[string]interface{}
-	Expect(json.Unmarshal(gotBody, &body)).To(Succeed())
-	Expect(body).ToNot(HaveKey("q_organization_domains_list"))
+	Expect(q).ToNot(HaveKey("person_locations[]"))
+	Expect(q).ToNot(HaveKey("q_organization_domains_list[]"))
 }
 
 func TestNormaliseDomains(t *testing.T) {
@@ -96,6 +95,5 @@ func TestNormaliseDomains(t *testing.T) {
 	Expect(normaliseDomains([]string{"https://www.HSE.ie/about"})).To(Equal([]string{"hse.ie"}))
 	Expect(normaliseDomains([]string{"jo@nice.org.uk"})).To(Equal([]string{"nice.org.uk"}))
 	Expect(normaliseDomains([]string{" Example.COM ", "acme.io"})).To(Equal([]string{"example.com", "acme.io"}))
-	// Entries without a dot (not a domain) are dropped so they can't widen the search.
 	Expect(normaliseDomains([]string{"notadomain", ""})).To(BeEmpty())
 }
