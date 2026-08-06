@@ -86,6 +86,7 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 					state { name }
 					assignee { name email }
 					team { key name }
+					project { id name }
 					labels { nodes { name } }
 				}
 			}
@@ -124,6 +125,9 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 		Assignee *struct {
 			Name string `json:"name"`
 		} `json:"assignee"`
+		Project *struct {
+			Name string `json:"name"`
+		} `json:"project"`
 		Labels struct {
 			Nodes []struct {
 				Name string `json:"name"`
@@ -153,8 +157,12 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 			if len(labels) > 0 {
 				labelStr = fmt.Sprintf(" [%s]", strings.Join(labels, ", "))
 			}
-			fmt.Fprintf(&sb, "• [%s] %s (id:%s, %s, %s, %s%s)%s\n",
-				row.Identifier, row.Title, row.ID, row.State.Name, row.PriorityLabel, assignee, due, labelStr)
+			project := "No project"
+			if row.Project != nil && row.Project.Name != "" {
+				project = row.Project.Name
+			}
+			fmt.Fprintf(&sb, "• [%s] %s (id:%s, %s, %s, %s, project:%s%s)%s\n",
+				row.Identifier, row.Title, row.ID, row.State.Name, row.PriorityLabel, assignee, project, due, labelStr)
 		}
 		var generic interface{}
 		_ = json.Unmarshal(raw, &generic)

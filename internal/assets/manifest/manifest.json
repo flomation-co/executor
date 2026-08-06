@@ -184891,7 +184891,7 @@
     ]
   },
   "crm/apollo/search/people_search": {
-    "hash": "fae14a1f9f031ed3b13e44f56b734adef1e5e4795dccad63ed6ae58f3ab07b6b",
+    "hash": "1ccc8cf20fc77fd8b9c47baca20fef7a51a347a228c75d8ffddc4afeb77e69c9",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "People: Search",
@@ -290263,7 +290263,7 @@
     ]
   },
   "linear/get_issue": {
-    "hash": "bce0971fae78189e7feff352164dad968ebf56fc30c9e390b52fd570c22d39c4",
+    "hash": "9b9807b5a6aa8446cd80b6d60dba9c954b726a8d042e6681b3b90011d00a632b",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Get Issue",
@@ -290496,11 +290496,11 @@
     ]
   },
   "linear/list_issues": {
-    "hash": "be02a4061f9f2f464af944bed7bf9c5e72685d8268de4d6ee033738ace4f6c7b",
+    "hash": "50634ff908b35d93d6c09b8f6ab4106d02ee912b56d74e21e741bf7f7958828f",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "List Issues",
-    "description": "List and filter Linear issues by team, state, assignee, priority, or label.",
+    "description": "List and filter Linear issues by team, project, state, assignee, priority, or label.",
     "website": "https://www.flomation.co",
     "icon": "linear+list",
     "date": "15/04/2026",
@@ -290582,6 +290582,13 @@
         "value": null,
         "label": "Project ID",
         "placeholder": "Filter by project UUID (optional)"
+      },
+      {
+        "name": "project",
+        "type": "string",
+        "value": null,
+        "label": "Project (name — resolves to UUID automatically)",
+        "placeholder": "Filter by project name, e.g. Sales (optional)"
       },
       {
         "name": "limit",
@@ -290974,7 +290981,7 @@
     ]
   },
   "linear/search_issues": {
-    "hash": "2ac46707a77b5a55d941bb504baae44db9500f0aca48dd262d94561082bc431c",
+    "hash": "56326bc9a35dec19cd6753cc95ad4fc72a21ef9f76f4495b054ccafd5f95771b",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Search Issues",

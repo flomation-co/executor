@@ -11,10 +11,11 @@ import (
 	core "flomation.app/automate/executor"
 )
 
-const (
-	// APIURL is the single GraphQL endpoint for all Linear operations.
-	APIURL = "https://api.linear.app/graphql"
+// APIURL is the single GraphQL endpoint for all Linear operations. It is a var
+// (not a const) so tests can point it at an httptest server.
+var APIURL = "https://api.linear.app/graphql"
 
+const (
 	// maxResponseBody caps the response body to prevent memory exhaustion.
 	maxResponseBody = 1 << 20 // 1 MB
 
