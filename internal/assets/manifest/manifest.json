@@ -182874,7 +182874,7 @@
     ]
   },
   "crm/apollo/accounts/account_search": {
-    "hash": "e29dfd6c2556253263b8ee7656e43f63074551e9d66ad743214da49ad51c6982",
+    "hash": "ab53a279753634d4d8cc2095eb0e1b201bdeb25d7454a54d7fd91b3f43620d12",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Accounts: Search",
@@ -183357,7 +183357,7 @@
     ]
   },
   "crm/apollo/contacts/contact_search": {
-    "hash": "cb6b4e3e6b8a45dbe88dab0d25dd458d9f923700ba08245d465f9d408102c5b8",
+    "hash": "a034532acde5062a6d620c1880413e1826d45dd99ac2fbda8ae28c00381ee8fd",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Contacts: Search",
@@ -184194,7 +184194,7 @@
     ]
   },
   "crm/apollo/emailer/email_search": {
-    "hash": "fa6a60911cfb26c52ff75dd4f33eb34d15ff8daba381e4fd4ad8a803ebda658f",
+    "hash": "7a02387e8f5e89d1eb020ebc10450cba31758f4c1b95c18051a1ebc8347ed36e",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Emails: Search",
@@ -184783,7 +184783,7 @@
     ]
   },
   "crm/apollo/search/organization_search": {
-    "hash": "ee5580a41c053585c87c2cb3a2603b397e29f9141af7e6ead9ae1f0616d17ab3",
+    "hash": "9fca979b4ddafecee8b752441cb4c9d60689563c15e08a059eb73fa28eb97771",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Companies: Search",
@@ -184891,7 +184891,7 @@
     ]
   },
   "crm/apollo/search/people_search": {
-    "hash": "1ccc8cf20fc77fd8b9c47baca20fef7a51a347a228c75d8ffddc4afeb77e69c9",
+    "hash": "2e24275dc31dafb940533246ca586676b7cf157a62f8b4490eed86df4414754e",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "People: Search",
@@ -184950,7 +184950,7 @@
         "type": "string",
         "value": null,
         "label": "Person Locations",
-        "placeholder": "London, United Kingdom (comma-separated)"
+        "placeholder": "City, region or country, e.g. Chester, United Kingdom (comma-separated)"
       },
       {
         "name": "organization_domains",
@@ -185277,7 +185277,7 @@
     ]
   },
   "crm/apollo/sequences/sequence_list": {
-    "hash": "273485d35831386589856372edfbe125b4aa4590989070b7127484334a5bbf8c",
+    "hash": "3eefc0322b6aabb3aba1c89f3bc30b9404128900bb79a9f5fca1ce79f008c892",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Sequences: List",

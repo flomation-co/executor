@@ -2,6 +2,7 @@ package organization_search
 
 import (
 	"fmt"
+	"net/url"
 
 	core "flomation.app/automate/executor"
 	apollo_common "flomation.app/automate/executor/actions/crm/apollo"
@@ -41,14 +42,17 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 		return apollo_common.ErrorResult(err.Error()), nil
 	}
 
-	body := map[string]interface{}{}
-	apollo_common.SetString(body, "q_organization_name", "q_organization_name", inputs)
-	apollo_common.SetList(body, "organization_locations", "organization_locations", inputs)
-	apollo_common.SetRangeList(body, "organization_num_employees_ranges", "organization_num_employees_ranges", inputs)
-	apollo_common.SetInt(body, "page", "page", inputs)
-	apollo_common.SetInt(body, "per_page", "per_page", inputs)
+	// Apollo reads company-search filters from the URL query string, not the
+	// JSON body — sending them in the body made Apollo ignore the location and
+	// name filters and return a generic list. See the query-parameter builders.
+	q := url.Values{}
+	apollo_common.AddQueryString(q, "q_organization_name", "q_organization_name", inputs)
+	apollo_common.AddQueryList(q, "organization_locations", "organization_locations", inputs)
+	apollo_common.AddQueryRangeList(q, "organization_num_employees_ranges", "organization_num_employees_ranges", inputs)
+	apollo_common.AddQueryInt(q, "page", "page", inputs)
+	apollo_common.AddQueryInt(q, "per_page", "per_page", inputs)
 
-	resp, err := apollo_common.NewClient(apiKey).Post(flow, "/mixed_companies/search", body)
+	resp, err := apollo_common.NewClient(apiKey).PostQuery(flow, "/mixed_companies/search", q)
 	if err != nil {
 		return apollo_common.MapError(err), nil
 	}
