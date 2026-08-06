@@ -13,7 +13,7 @@ const (
 	Author       = "Andy Esser"
 	Organisation = "Flomation"
 	Name         = "List Issues"
-	Description  = "List and filter Linear issues by team, state, assignee, priority, or label."
+	Description  = "List and filter Linear issues by team, project, state, assignee, priority, or label."
 	Website      = "https://www.flomation.co"
 	Icon         = "linear+list"
 	Date         = "15/04/2026"
@@ -71,6 +71,12 @@ var Inputs = [...]core.Connection{
 		Placeholder: "Filter by project UUID (optional)",
 	},
 	{
+		Name:        "project",
+		Type:        core.ConnectionTypeString,
+		Label:       "Project (name — resolves to UUID automatically)",
+		Placeholder: "Filter by project name, e.g. Sales (optional)",
+	},
+	{
 		Name:        "limit",
 		Type:        core.ConnectionTypeInteger,
 		Label:       "Limit",
@@ -125,6 +131,18 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	}
 	if v := linear.OptionalString("project_id", inputs); v != "" {
 		filter["project"] = map[string]interface{}{"id": map[string]string{"eq": v}}
+	} else if v := linear.OptionalString("project", inputs); v != "" {
+		// Resolve a project NAME (e.g. "Sales") to its UUID so an agent can
+		// filter by project without knowing the id.
+		pid, rErr := linear.ResolveProjectID(apiKey, v)
+		if rErr != nil {
+			return map[string]interface{}{
+				"tool_result": fmt.Sprintf("Could not resolve project %q: %s", v, rErr),
+				"success":     false,
+				"error":       rErr.Error(),
+			}, nil
+		}
+		filter["project"] = map[string]interface{}{"id": map[string]string{"eq": pid}}
 	}
 
 	vars := map[string]interface{}{
@@ -150,6 +168,7 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 					state { name }
 					assignee { name email }
 					team { key name }
+					project { id name }
 					labels { nodes { name } }
 				}
 			}
@@ -190,6 +209,9 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 		Team struct {
 			Key string `json:"key"`
 		} `json:"team"`
+		Project *struct {
+			Name string `json:"name"`
+		} `json:"project"`
 		Labels struct {
 			Nodes []struct {
 				Name string `json:"name"`
@@ -219,8 +241,12 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 			if len(labels) > 0 {
 				labelStr = fmt.Sprintf(" [%s]", strings.Join(labels, ", "))
 			}
-			fmt.Fprintf(&sb, "• [%s] %s (id:%s, %s, %s, %s%s)%s\n",
-				row.Identifier, row.Title, row.ID, row.State.Name, row.PriorityLabel, assignee, due, labelStr)
+			project := "No project"
+			if row.Project != nil && row.Project.Name != "" {
+				project = row.Project.Name
+			}
+			fmt.Fprintf(&sb, "• [%s] %s (id:%s, %s, %s, %s, project:%s%s)%s\n",
+				row.Identifier, row.Title, row.ID, row.State.Name, row.PriorityLabel, assignee, project, due, labelStr)
 		}
 		var generic interface{}
 		_ = json.Unmarshal(raw, &generic)

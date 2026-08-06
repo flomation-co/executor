@@ -182874,7 +182874,7 @@
     ]
   },
   "crm/apollo/accounts/account_search": {
-    "hash": "e29dfd6c2556253263b8ee7656e43f63074551e9d66ad743214da49ad51c6982",
+    "hash": "ab53a279753634d4d8cc2095eb0e1b201bdeb25d7454a54d7fd91b3f43620d12",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Accounts: Search",
@@ -183357,7 +183357,7 @@
     ]
   },
   "crm/apollo/contacts/contact_search": {
-    "hash": "cb6b4e3e6b8a45dbe88dab0d25dd458d9f923700ba08245d465f9d408102c5b8",
+    "hash": "a034532acde5062a6d620c1880413e1826d45dd99ac2fbda8ae28c00381ee8fd",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Contacts: Search",
@@ -184194,7 +184194,7 @@
     ]
   },
   "crm/apollo/emailer/email_search": {
-    "hash": "fa6a60911cfb26c52ff75dd4f33eb34d15ff8daba381e4fd4ad8a803ebda658f",
+    "hash": "7a02387e8f5e89d1eb020ebc10450cba31758f4c1b95c18051a1ebc8347ed36e",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Emails: Search",
@@ -184783,7 +184783,7 @@
     ]
   },
   "crm/apollo/search/organization_search": {
-    "hash": "ee5580a41c053585c87c2cb3a2603b397e29f9141af7e6ead9ae1f0616d17ab3",
+    "hash": "9fca979b4ddafecee8b752441cb4c9d60689563c15e08a059eb73fa28eb97771",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Companies: Search",
@@ -185277,7 +185277,7 @@
     ]
   },
   "crm/apollo/sequences/sequence_list": {
-    "hash": "273485d35831386589856372edfbe125b4aa4590989070b7127484334a5bbf8c",
+    "hash": "3eefc0322b6aabb3aba1c89f3bc30b9404128900bb79a9f5fca1ce79f008c892",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Sequences: List",
@@ -290263,7 +290263,7 @@
     ]
   },
   "linear/get_issue": {
-    "hash": "bce0971fae78189e7feff352164dad968ebf56fc30c9e390b52fd570c22d39c4",
+    "hash": "9b9807b5a6aa8446cd80b6d60dba9c954b726a8d042e6681b3b90011d00a632b",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Get Issue",
@@ -290496,11 +290496,11 @@
     ]
   },
   "linear/list_issues": {
-    "hash": "be02a4061f9f2f464af944bed7bf9c5e72685d8268de4d6ee033738ace4f6c7b",
+    "hash": "50634ff908b35d93d6c09b8f6ab4106d02ee912b56d74e21e741bf7f7958828f",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "List Issues",
-    "description": "List and filter Linear issues by team, state, assignee, priority, or label.",
+    "description": "List and filter Linear issues by team, project, state, assignee, priority, or label.",
     "website": "https://www.flomation.co",
     "icon": "linear+list",
     "date": "15/04/2026",
@@ -290582,6 +290582,13 @@
         "value": null,
         "label": "Project ID",
         "placeholder": "Filter by project UUID (optional)"
+      },
+      {
+        "name": "project",
+        "type": "string",
+        "value": null,
+        "label": "Project (name — resolves to UUID automatically)",
+        "placeholder": "Filter by project name, e.g. Sales (optional)"
       },
       {
         "name": "limit",
@@ -290974,7 +290981,7 @@
     ]
   },
   "linear/search_issues": {
-    "hash": "2ac46707a77b5a55d941bb504baae44db9500f0aca48dd262d94561082bc431c",
+    "hash": "56326bc9a35dec19cd6753cc95ad4fc72a21ef9f76f4495b054ccafd5f95771b",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Search Issues",

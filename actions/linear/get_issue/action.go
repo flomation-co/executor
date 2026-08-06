@@ -269,6 +269,9 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	if teamName != "" {
 		fmt.Fprintf(&sb, "  Team: %s\n", teamName)
 	}
+	if issue.Project != nil && issue.Project.Name != "" {
+		fmt.Fprintf(&sb, "  Project: %s\n", issue.Project.Name)
+	}
 	if dueDate != "" {
 		fmt.Fprintf(&sb, "  Due: %s\n", dueDate)
 	}
