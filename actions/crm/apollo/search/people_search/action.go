@@ -2,6 +2,7 @@ package people_search
 
 import (
 	"fmt"
+	"strings"
 
 	core "flomation.app/automate/executor"
 	apollo_common "flomation.app/automate/executor/actions/crm/apollo"
@@ -48,7 +49,14 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	apollo_common.SetList(body, "person_titles", "person_titles", inputs)
 	apollo_common.SetList(body, "person_seniorities", "person_seniorities", inputs)
 	apollo_common.SetList(body, "person_locations", "person_locations", inputs)
-	apollo_common.SetList(body, "organization_domains", "organization_domains", inputs)
+	// Apollo's people search filters by employer domain via
+	// `q_organization_domains_list` (an array). The old `organization_domains`
+	// key is NOT a recognised filter — Apollo silently ignored it and returned
+	// a generic title-matched list, so results were not actually scoped to the
+	// requested company. Domains must be bare (no scheme, no `www.`, no path).
+	if domains := normaliseDomains(apollo_common.StringList("organization_domains", inputs)); len(domains) > 0 {
+		body["q_organization_domains_list"] = domains
+	}
 	apollo_common.SetInt(body, "page", "page", inputs)
 	apollo_common.SetInt(body, "per_page", "per_page", inputs)
 
@@ -61,4 +69,33 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 
 	people := apollo_common.Arr(resp, "people")
 	return apollo_common.ListResult(people, fmt.Sprintf("Found %d people", len(people))), nil
+}
+
+// normaliseDomains reduces each entry to a bare registrable domain, since Apollo
+// matches `q_organization_domains_list` on exact bare domains and will silently
+// drop anything with a scheme, `www.`, `@`, a path or surrounding whitespace.
+// A blank/invalid entry is dropped so it can never widen the search.
+func normaliseDomains(raw []string) []string {
+	out := make([]string, 0, len(raw))
+	for _, d := range raw {
+		d = strings.ToLower(strings.TrimSpace(d))
+		// Strip a scheme (http://, https://) if present.
+		if i := strings.Index(d, "://"); i != -1 {
+			d = d[i+3:]
+		}
+		// Drop any user@ prefix and anything from the first slash onwards.
+		d = strings.TrimPrefix(d, "@")
+		if i := strings.IndexByte(d, '@'); i != -1 {
+			d = d[i+1:]
+		}
+		if i := strings.IndexByte(d, '/'); i != -1 {
+			d = d[:i]
+		}
+		d = strings.TrimPrefix(d, "www.")
+		d = strings.Trim(d, ".")
+		if d != "" && strings.Contains(d, ".") {
+			out = append(out, d)
+		}
+	}
+	return out
 }
