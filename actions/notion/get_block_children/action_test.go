@@ -40,6 +40,38 @@ func TestSummariseBlocks_IncludesIDsAndChildHint(t *testing.T) {
 	Expect(ids).To(Equal([]string{"aaaa1111", "bbbb2222", "cccc3333"}))
 }
 
+// A table with two rows: Notion returns each row's content under `cells`
+// (an array of rich_text arrays), NOT `rich_text`. The summary must render the
+// cell text so a caller can read/verify a row without a separate fetch.
+const sampleTableBlocks = `[
+  {"id": "row1", "type": "table_row", "table_row": {"cells": [
+    [{"type": "text", "plain_text": "3", "text": {"content": "3"}}],
+    [{"type": "text", "plain_text": "Mike Ashley", "text": {"content": "Mike Ashley"}}],
+    [{"type": "text", "plain_text": "Infrastructure Engineer", "text": {"content": "Infrastructure Engineer"}}],
+    [{"type": "text", "plain_text": "GBG", "text": {"content": "GBG"}}],
+    [{"type": "text", "plain_text": "Wrexham", "text": {"content": "Wrexham"}}],
+    [{"type": "text", "plain_text": "mike.ashley@gbgplc.com", "text": {"content": "mike.ashley@gbgplc.com"}}]
+  ]}},
+  {"id": "row2", "type": "table_row", "table_row": {"cells": [[], []]}}
+]`
+
+func TestSummariseBlocks_RendersTableRowCells(t *testing.T) {
+	RegisterTestingT(t)
+
+	var results []interface{}
+	Expect(json.Unmarshal([]byte(sampleTableBlocks), &results)).To(Succeed())
+
+	summary, ids := summariseBlocks("table-abc", results)
+
+	// The full row renders pipe-joined so every column is verifiable — this is
+	// the exact readback the agent needs to prove a table_row update landed.
+	Expect(summary).To(ContainSubstring("[table_row] 3 | Mike Ashley | Infrastructure Engineer | GBG | Wrexham | mike.ashley@gbgplc.com  (id: row1)"))
+	// An all-empty two-column row renders the delimiter (both columns blank),
+	// which still conveys the column count. The row id is always present.
+	Expect(summary).To(ContainSubstring("[table_row]  |   (id: row2)"))
+	Expect(ids).To(Equal([]string{"row1", "row2"}))
+}
+
 func TestSummariseBlocks_ToleratesMalformedEntries(t *testing.T) {
 	RegisterTestingT(t)
 	results := []interface{}{"not-a-map", map[string]interface{}{"type": "paragraph"}}

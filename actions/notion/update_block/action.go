@@ -85,8 +85,17 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	var updated map[string]interface{}
 	_ = json.Unmarshal(resp.Body, &updated)
 
+	// Read the new content back off Notion's own PATCH response so the result is
+	// self-verifying: the summary echoes exactly what Notion now stores (for a
+	// table_row, all cells pipe-joined — proving the other columns survived the
+	// whole-row replace, not just the cell you meant to change).
+	summary := fmt.Sprintf("Updated block %s", blockID)
+	if content := notion.BlockPlainText(updated); content != "" {
+		summary = fmt.Sprintf("Updated block %s — now reads: %s", blockID, content)
+	}
+
 	return map[string]interface{}{
-		"tool_result": fmt.Sprintf("Updated block %s", blockID),
+		"tool_result": summary,
 		"block":       updated,
 		"success":     true,
 		"error":       "",

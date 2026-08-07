@@ -112,10 +112,8 @@ func summariseBlocks(blockID string, results []interface{}) (string, []string) {
 }
 
 func extractBlockText(block map[string]interface{}, blockType string) string {
-	if typeData, ok := block[blockType].(map[string]interface{}); ok {
-		if richText, ok := typeData["rich_text"].([]interface{}); ok {
-			return notion.ExtractRichText(richText)
-		}
-	}
-	return ""
+	// BlockPlainText handles both standard rich_text blocks and table_row cells,
+	// so a table's rows list their cell contents (pipe-joined) rather than a bare
+	// "[table_row] (id: …)" — making the row readable/verifiable in the summary.
+	return notion.BlockPlainText(block)
 }
