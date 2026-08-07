@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"io"
 	"net/http"
+	"strings"
 	"time"
 
 	core "flomation.app/automate/executor"
@@ -176,4 +177,40 @@ func ExtractRichText(arr []interface{}) string {
 		}
 	}
 	return result
+}
+
+// ExtractCells renders a table_row's `cells` — an array of cells, each itself a
+// rich_text array — as pipe-joined plain text (one segment per column). Notion
+// DOES return cell contents on read (they live under `cells`, not `rich_text`),
+// so this is what makes a table row readable/verifiable.
+func ExtractCells(cells []interface{}) string {
+	parts := make([]string, 0, len(cells))
+	for _, c := range cells {
+		if cellArr, ok := c.([]interface{}); ok {
+			parts = append(parts, ExtractRichText(cellArr))
+		} else {
+			parts = append(parts, "")
+		}
+	}
+	return strings.Join(parts, " | ")
+}
+
+// BlockPlainText renders a Notion block's human-/AI-readable text. Standard
+// blocks expose `rich_text`; a table_row exposes `cells`. Returning the row's
+// cells here lets callers read a row back and verify a write without a separate
+// fetch (a table_row has no child blocks, so get_block_children on the row is
+// empty — you must read the cells off the row block itself).
+func BlockPlainText(block map[string]interface{}) string {
+	blockType, _ := block["type"].(string)
+	typeData, ok := block[blockType].(map[string]interface{})
+	if !ok {
+		return ""
+	}
+	if richText, ok := typeData["rich_text"].([]interface{}); ok {
+		return ExtractRichText(richText)
+	}
+	if cells, ok := typeData["cells"].([]interface{}); ok {
+		return ExtractCells(cells)
+	}
+	return ""
 }
