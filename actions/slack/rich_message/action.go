@@ -58,8 +58,8 @@ var Inputs = [...]core.Connection{
 	{
 		Name: "blocks",
 		Type: core.ConnectionTypeText,
-		Label: "Block Kit blocks as a JSON array. Common block types: " +
-			"section (with mrkdwn text or fields), divider, image, context, header, actions (buttons). " +
+		Label: "Block Kit blocks as a JSON array (a bare [...] array, or the Block Kit Builder's {\"blocks\":[...]} object — both accepted). " +
+			"Common block types: section (with mrkdwn text or fields), divider, image, context, header, actions (buttons). " +
 			"Example: [{\"type\":\"header\",\"text\":{\"type\":\"plain_text\",\"text\":\"Report\"}},{\"type\":\"section\",\"text\":{\"type\":\"mrkdwn\",\"text\":\"*Status:* All clear\"}}]",
 		Required: true,
 	},
@@ -138,25 +138,14 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 		return nil, fmt.Errorf("blocks is required")
 	}
 
-	// Parse blocks JSON.
-	var blocks []interface{}
-	if err := json.Unmarshal([]byte(blocksRaw), &blocks); err != nil {
-		// Try to recover: the AI sometimes wraps in markdown fences.
-		cleaned := strings.TrimSpace(blocksRaw)
-		if strings.HasPrefix(cleaned, "```") {
-			if idx := strings.Index(cleaned[3:], "\n"); idx != -1 {
-				cleaned = cleaned[3+idx+1:]
-			}
-			cleaned = strings.TrimSuffix(strings.TrimSpace(cleaned), "```")
-			cleaned = strings.TrimSpace(cleaned)
-		}
-		if err2 := json.Unmarshal([]byte(cleaned), &blocks); err2 != nil {
-			return map[string]interface{}{
-				"tool_result": fmt.Sprintf("Invalid blocks JSON: %s", err),
-				"success":     false,
-				"error":       err.Error(),
-			}, nil
-		}
+	// Parse blocks JSON — leniently (see parseBlockKitArray).
+	blocks, err := parseBlockKitArray(blocksRaw)
+	if err != nil {
+		return map[string]interface{}{
+			"tool_result": fmt.Sprintf("Invalid blocks JSON: %s", err),
+			"success":     false,
+			"error":       err.Error(),
+		}, nil
 	}
 
 	payload := map[string]interface{}{
@@ -183,10 +172,9 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 		payload["thread_ts"] = threadTS
 	}
 
-	// Parse optional attachments.
+	// Parse optional attachments (also accepts the {"attachments":[...]} wrapper).
 	if attachRaw := optionalString("attachments", inputs); attachRaw != "" {
-		var attachments []interface{}
-		if err := json.Unmarshal([]byte(attachRaw), &attachments); err != nil {
+		if attachments, err := parseJSONArrayOrWrapped(attachRaw, "attachments"); err != nil {
 			log.WithError(err).Warn("failed to parse attachments JSON — skipping")
 		} else {
 			payload["attachments"] = attachments
@@ -240,6 +228,50 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 		"success":     true,
 		"error":       "",
 	}, nil
+}
+
+// parseBlockKitArray parses the blocks/attachments input leniently. Slack's own
+// Block Kit Builder exports the wrapper object {"blocks":[...]} (and likewise
+// {"attachments":[...]}), which people paste verbatim — so as well as the bare
+// JSON array we also unwrap that object under the given key. Markdown code
+// fences the AI sometimes adds are stripped first.
+func parseBlockKitArray(raw string) ([]interface{}, error) {
+	return parseJSONArrayOrWrapped(raw, "blocks")
+}
+
+func parseJSONArrayOrWrapped(raw, wrapperKey string) ([]interface{}, error) {
+	cleaned := stripCodeFence(strings.TrimSpace(raw))
+
+	// Preferred shape: a bare JSON array.
+	var arr []interface{}
+	arrErr := json.Unmarshal([]byte(cleaned), &arr)
+	if arrErr == nil {
+		return arr, nil
+	}
+
+	// Builder wrapper: {"<wrapperKey>":[...]} — unwrap it.
+	var obj map[string]json.RawMessage
+	if json.Unmarshal([]byte(cleaned), &obj) == nil {
+		if inner, ok := obj[wrapperKey]; ok {
+			if err := json.Unmarshal(inner, &arr); err == nil {
+				return arr, nil
+			}
+		}
+	}
+
+	// Surface the original array-parse error — it's the most actionable.
+	return nil, arrErr
+}
+
+func stripCodeFence(s string) string {
+	if !strings.HasPrefix(s, "```") {
+		return s
+	}
+	if idx := strings.Index(s[3:], "\n"); idx != -1 {
+		s = s[3+idx+1:]
+	}
+	s = strings.TrimSuffix(strings.TrimSpace(s), "```")
+	return strings.TrimSpace(s)
 }
 
 // isValidSlackTS checks whether a string looks like a Slack message timestamp
