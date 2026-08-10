@@ -143,21 +143,41 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 		responseMimeType == "application/xml"
 
 	result := map[string]interface{}{
-		"tool_result": fmt.Sprintf("Downloaded %s (%d bytes)", meta.Name, len(body)),
-		"mime_type":   responseMimeType,
-		"success":     true,
-		"error":       "",
+		"mime_type": responseMimeType,
+		"success":   true,
+		"error":     "",
 	}
 
 	if isText {
-		result["content"] = string(body)
+		text := string(body)
+		result["content"] = text
 		result["content_base64"] = ""
+		// Put the actual text in tool_result. The AI primarily reads
+		// tool_result; without this a Google Doc export reads as
+		// "Downloaded N bytes" and the agent wrongly concludes it's binary
+		// even though the readable text is sitting in `content`.
+		result["tool_result"] = fmt.Sprintf("%s (%s):\n\n%s", meta.Name, responseMimeType, truncateForTool(text))
 	} else {
 		result["content"] = ""
 		result["content_base64"] = base64.StdEncoding.EncodeToString(body)
+		result["tool_result"] = fmt.Sprintf(
+			"Downloaded %s (%s, %d bytes) as binary — base64 is in content_base64. This isn't readable as text; if it's a Google Doc, use the 'Read Document' action instead.",
+			meta.Name, responseMimeType, len(body))
 	}
 
 	return result, nil
+}
+
+// truncateForTool caps the text surfaced in tool_result so a very large file
+// can't blow up the agent's context, while the full text stays in `content`.
+func truncateForTool(text string) string {
+	const maxRunes = 50000
+	runes := []rune(text)
+	if len(runes) <= maxRunes {
+		return text
+	}
+	return fmt.Sprintf("%s\n\n[...truncated %d of %d characters — use the 'content' output for the full text...]",
+		string(runes[:maxRunes]), maxRunes, len(runes))
 }
 
 func parseJSON(data []byte, v interface{}) error {

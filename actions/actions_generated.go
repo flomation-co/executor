@@ -1482,7 +1482,9 @@ import (
 	google_calendar_update "flomation.app/automate/executor/actions/google/calendar/update"
 	google_docs_append_text "flomation.app/automate/executor/actions/google/docs/append_text"
 	google_docs_create "flomation.app/automate/executor/actions/google/docs/create"
+	google_docs_fill_table "flomation.app/automate/executor/actions/google/docs/fill_table"
 	google_docs_get_metadata "flomation.app/automate/executor/actions/google/docs/get_metadata"
+	google_docs_import_doc "flomation.app/automate/executor/actions/google/docs/import_doc"
 	google_docs_insert_image "flomation.app/automate/executor/actions/google/docs/insert_image"
 	google_docs_read "flomation.app/automate/executor/actions/google/docs/read"
 	google_docs_replace_text "flomation.app/automate/executor/actions/google/docs/replace_text"
@@ -5018,7 +5020,9 @@ var Actions = map[string]core.Action{
 	"google/calendar/update":                                                          google_calendar_update.Execute,
 	"google/docs/append_text":                                                         google_docs_append_text.Execute,
 	"google/docs/create":                                                              google_docs_create.Execute,
+	"google/docs/fill_table":                                                          google_docs_fill_table.Execute,
 	"google/docs/get_metadata":                                                        google_docs_get_metadata.Execute,
+	"google/docs/import_doc":                                                          google_docs_import_doc.Execute,
 	"google/docs/insert_image":                                                        google_docs_insert_image.Execute,
 	"google/docs/read":                                                                google_docs_read.Execute,
 	"google/docs/replace_text":                                                        google_docs_replace_text.Execute,

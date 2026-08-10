@@ -235889,6 +235889,103 @@
       }
     ]
   },
+  "google/docs/fill_table": {
+    "hash": "49bc30188252d07e96416123ee9511a1ee5d37f0d22feeb6255fc71370715595",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Fill Document Table",
+    "description": "Write values into the cells of a table in a Google Doc (by row and column)",
+    "website": "https://www.flomation.co",
+    "icon": "table+pencil",
+    "date": "10/08/2026",
+    "type": 2,
+    "category": {
+      "name": "Google",
+      "icon": "google",
+      "description": "Google Workspace integrations"
+    },
+    "sub_category": {
+      "name": "Docs",
+      "icon": "file-lines",
+      "description": "Google Docs document operations"
+    },
+    "inputs": [
+      {
+        "name": "document_id",
+        "type": "string",
+        "value": null,
+        "label": "Document ID",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "table_index",
+        "type": "integer",
+        "value": null,
+        "label": "Which table (0-based, in document order)",
+        "placeholder": ""
+      },
+      {
+        "name": "cells",
+        "type": "text",
+        "value": null,
+        "label": "Cells to fill: JSON array of {\"row\":N,\"column\":N,\"text\":\"...\"} (0-based)",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "clear_existing",
+        "type": "boolean",
+        "value": null,
+        "label": "Clear each cell's current text before writing",
+        "placeholder": ""
+      },
+      {
+        "name": "account",
+        "type": "string",
+        "value": null,
+        "label": "Google Account (email)",
+        "placeholder": ""
+      },
+      {
+        "name": "credential",
+        "type": "credential",
+        "value": null,
+        "label": "Google OAuth Credential",
+        "placeholder": "${credentials.GOOGLE_DRIVE}"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "cells_written",
+        "type": "integer",
+        "value": null,
+        "label": "Cells Written",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
   "google/docs/get_metadata": {
     "hash": "a1291787bce7101d5f84c69df69470f01727c651348a8da1e2625f7a677c657f",
     "author": "Andy Esser",
@@ -235960,6 +236057,109 @@
         "type": "string",
         "value": null,
         "label": "Metadata (JSON)",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "google/docs/import_doc": {
+    "hash": "97bd9f22167988afda1103b8d47eafad5a920ec41dafb564e65d87aa5a33f8d8",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Convert to Google Doc",
+    "description": "Convert a Drive file (e.g. an uploaded .docx) into a native, editable Google Doc",
+    "website": "https://www.flomation.co",
+    "icon": "file-lines+arrow-right-arrow-left",
+    "date": "10/08/2026",
+    "type": 2,
+    "category": {
+      "name": "Google",
+      "icon": "google",
+      "description": "Google Workspace integrations"
+    },
+    "sub_category": {
+      "name": "Docs",
+      "icon": "file-lines",
+      "description": "Google Docs document operations"
+    },
+    "inputs": [
+      {
+        "name": "file_id",
+        "type": "string",
+        "value": null,
+        "label": "Source Drive File ID (.docx, .odt, etc.)",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "name",
+        "type": "string",
+        "value": null,
+        "label": "Name for the new Google Doc (defaults to the source name)",
+        "placeholder": ""
+      },
+      {
+        "name": "folder_id",
+        "type": "string",
+        "value": null,
+        "label": "Destination Folder ID (defaults to the source's location)",
+        "placeholder": ""
+      },
+      {
+        "name": "account",
+        "type": "string",
+        "value": null,
+        "label": "Google Account (email)",
+        "placeholder": ""
+      },
+      {
+        "name": "credential",
+        "type": "credential",
+        "value": null,
+        "label": "Google OAuth Credential",
+        "placeholder": "${credentials.GOOGLE_DRIVE}"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "document_id",
+        "type": "string",
+        "value": null,
+        "label": "New Google Doc ID (use with the Docs actions)",
+        "placeholder": ""
+      },
+      {
+        "name": "web_link",
+        "type": "string",
+        "value": null,
+        "label": "Web Link",
+        "placeholder": ""
+      },
+      {
+        "name": "already_native",
+        "type": "boolean",
+        "value": null,
+        "label": "Source was already a Google Doc",
         "placeholder": ""
       },
       {
@@ -236069,7 +236269,7 @@
     ]
   },
   "google/docs/read": {
-    "hash": "901d7b7b1b71eed81a5fbd6ba5e9631e04b077179af81ee08fd02a4e59c5b759",
+    "hash": "f72779c1677e25582531f3ed7a32003c2e7ddf1ce2bfb25ac4ea31670c04960b",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Read Document",
@@ -236124,7 +236324,14 @@
         "name": "content",
         "type": "string",
         "value": null,
-        "label": "Document Text",
+        "label": "Document Text (paragraphs and tables)",
+        "placeholder": ""
+      },
+      {
+        "name": "tables",
+        "type": "object",
+        "value": null,
+        "label": "Tables (JSON array of rows of cell text)",
         "placeholder": ""
       },
       {
@@ -236516,7 +236723,7 @@
     ]
   },
   "google/drive/download": {
-    "hash": "01060f0083c94c3179884818b203fed59dd8a6771fac596b86c96ac36e911118",
+    "hash": "f0c44f19f533a77672d7c34bca9f4e51c5172e6d3ab0ecfa3115d5f1ff9b166f",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Download Drive File",
@@ -315067,7 +315274,7 @@
     ]
   },
   "notion/get_block_children": {
-    "hash": "47a4b8bb5688b6112a487e60c2a2b16a6c2cfcf8ca31369b6f28f68145d35701",
+    "hash": "065d9ff1ea503de0a1756228594da9512c0435b5f7b603638c2a942faa175bab",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Notion Get Block Children",
@@ -315647,7 +315854,7 @@
     ]
   },
   "notion/update_block": {
-    "hash": "21124d18dabf780fc4aa0d0be6151fc179a0b6f3e009c8cd638afb55dd4fbd9b",
+    "hash": "b93b56f15099caba6a1d347ada70d6660e55e514f2ddcd8dade298aac25a9587",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Notion Update Block",
@@ -529311,7 +529518,7 @@
     ]
   },
   "slack/rich_message": {
-    "hash": "aafe73ecc413a93f1686d5d6b38bcd051ce29f6b1490b7fd47a25eb5ddefcfbf",
+    "hash": "836ae654711a05ffb0f8862554b4cbd2849499cba83acb7cbcc1316115c38260",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Slack Rich Message",
@@ -529352,7 +529559,7 @@
         "name": "blocks",
         "type": "text",
         "value": null,
-        "label": "Block Kit blocks as a JSON array. Common block types: section (with mrkdwn text or fields), divider, image, context, header, actions (buttons). Example: [{\"type\":\"header\",\"text\":{\"type\":\"plain_text\",\"text\":\"Report\"}},{\"type\":\"section\",\"text\":{\"type\":\"mrkdwn\",\"text\":\"*Status:* All clear\"}}]",
+        "label": "Block Kit blocks as a JSON array (a bare [...] array, or the Block Kit Builder's {\"blocks\":[...]} object — both accepted). Common block types: section (with mrkdwn text or fields), divider, image, context, header, actions (buttons). Example: [{\"type\":\"header\",\"text\":{\"type\":\"plain_text\",\"text\":\"Report\"}},{\"type\":\"section\",\"text\":{\"type\":\"mrkdwn\",\"text\":\"*Status:* All clear\"}}]",
         "placeholder": "",
         "required": true
       },
