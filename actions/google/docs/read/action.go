@@ -31,7 +31,8 @@ var Inputs = [...]core.Connection{
 
 var Outputs = [...]core.Connection{
 	{Name: "tool_result", Type: core.ConnectionTypeString, Label: "Result Summary"},
-	{Name: "content", Type: core.ConnectionTypeString, Label: "Document Text"},
+	{Name: "content", Type: core.ConnectionTypeString, Label: "Document Text (paragraphs and tables)"},
+	{Name: "tables", Type: core.ConnectionTypeObject, Label: "Tables (JSON array of rows of cell text)"},
 	{Name: "title", Type: core.ConnectionTypeString, Label: "Title"},
 	{Name: "document", Type: core.ConnectionTypeString, Label: "Full Document (JSON)"},
 	{Name: "success", Type: core.ConnectionTypeBoolean, Label: "Success"},
@@ -67,46 +68,97 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 		if status == 401 || status == 403 {
 			google.HandleAuthError(flow, token.Email, status)
 		}
+		// A 400 here usually means the ID points at an uploaded .docx (or other
+		// non-native file), which the Docs API can't read. Steer the caller to
+		// convert it to a native Google Doc first rather than dead-end.
+		if status == 400 {
+			return google.ErrorResult(fmt.Sprintf(
+				"Google API returned 400: %s. If this is an uploaded .docx or other Office file, convert it to a native Google Doc first with the 'Convert to Google Doc' action, then read the returned document_id.",
+				google.TruncateBody(body)))
+		}
 		return google.ErrorResult(fmt.Sprintf("Google API returned %d: %s", status, google.TruncateBody(body)))
 	}
 
 	var doc struct {
 		Title string `json:"title"`
 		Body  struct {
-			Content []struct {
-				Paragraph *struct {
-					Elements []struct {
-						TextRun *struct {
-							Content string `json:"content"`
-						} `json:"textRun,omitempty"`
-					} `json:"elements"`
-				} `json:"paragraph,omitempty"`
-			} `json:"content"`
+			Content []structuralElement `json:"content"`
 		} `json:"body"`
 	}
 	if err := json.Unmarshal(body, &doc); err != nil {
 		return google.ErrorResult(fmt.Sprintf("failed to parse document: %v", err))
 	}
 
-	// Extract plain text
+	// Walk paragraphs AND tables so table content (e.g. a question/answer
+	// grid) is included — the previous version only read top-level paragraphs
+	// and silently dropped every table.
 	var textBuilder strings.Builder
-	for _, content := range doc.Body.Content {
-		if content.Paragraph != nil {
-			for _, elem := range content.Paragraph.Elements {
-				if elem.TextRun != nil {
-					textBuilder.WriteString(elem.TextRun.Content)
-				}
-			}
-		}
-	}
+	var tables [][][]string
+	renderContent(doc.Body.Content, &textBuilder, &tables)
 	text := strings.TrimSpace(textBuilder.String())
 
 	return map[string]interface{}{
 		"tool_result": text,
 		"content":     text,
+		"tables":      tables,
 		"title":       doc.Title,
 		"document":    string(body),
 		"success":     true,
 		"error":       "",
 	}, nil
+}
+
+// Minimal Google Docs document model — enough to extract text from paragraphs
+// and from tables (which nest arbitrarily deep via cell content).
+type structuralElement struct {
+	Paragraph *struct {
+		Elements []struct {
+			TextRun *struct {
+				Content string `json:"content"`
+			} `json:"textRun,omitempty"`
+		} `json:"elements"`
+	} `json:"paragraph,omitempty"`
+	Table *struct {
+		TableRows []struct {
+			TableCells []struct {
+				Content []structuralElement `json:"content"`
+			} `json:"tableCells"`
+		} `json:"tableRows"`
+	} `json:"table,omitempty"`
+}
+
+// renderContent appends readable text for a run of structural elements and
+// collects every table it encounters as rows of plain-text cells.
+func renderContent(content []structuralElement, out *strings.Builder, tables *[][][]string) {
+	for _, el := range content {
+		if el.Paragraph != nil {
+			for _, elem := range el.Paragraph.Elements {
+				if elem.TextRun != nil {
+					out.WriteString(elem.TextRun.Content)
+				}
+			}
+		}
+		if el.Table != nil {
+			var rows [][]string
+			for _, row := range el.Table.TableRows {
+				var cells []string
+				for _, cell := range row.TableCells {
+					cells = append(cells, strings.TrimSpace(cellText(cell.Content)))
+				}
+				rows = append(rows, cells)
+				out.WriteString(strings.Join(cells, " | "))
+				out.WriteString("\n")
+			}
+			*tables = append(*tables, rows)
+		}
+	}
+}
+
+// cellText extracts the plain text of a single table cell (which may itself
+// contain paragraphs and nested tables).
+func cellText(content []structuralElement) string {
+	var b strings.Builder
+	var ignore [][][]string
+	renderContent(content, &b, &ignore)
+	return b.String()
 }
