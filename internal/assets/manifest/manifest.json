@@ -251038,7 +251038,7 @@
     ]
   },
   "heygen/videos/generate_avatar_video": {
-    "hash": "79ed8680ebc9a06521cc3384664b56a393018138fe2ff61f24eab9281b6a9931",
+    "hash": "a900cd830003b3fd177bd571a839147f73d356715a7f82ea47d6cf0bcb0e3015",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Generate Avatar Video",
@@ -251162,6 +251162,97 @@
         "value": null,
         "label": "Voice Speed",
         "placeholder": "0.5 to 1.5 (default 1.0)"
+      },
+      {
+        "name": "background_image_url",
+        "type": "string",
+        "value": null,
+        "label": "Background Image URL",
+        "placeholder": "A room/studio image to place the avatar in"
+      },
+      {
+        "name": "background_color",
+        "type": "string",
+        "value": null,
+        "label": "Background Colour",
+        "placeholder": "#150e14 (ignored if a background image is set)"
+      },
+      {
+        "name": "remove_background",
+        "type": "boolean",
+        "value": null,
+        "label": "Remove avatar background (needs a matting-trained avatar)",
+        "placeholder": ""
+      },
+      {
+        "name": "fit",
+        "type": "string",
+        "value": null,
+        "label": "Fit",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "Cover (fill, may crop)",
+            "value": "cover"
+          },
+          {
+            "name": "Contain (fit, may letterbox)",
+            "value": "contain"
+          }
+        ]
+      },
+      {
+        "name": "motion_prompt",
+        "type": "string",
+        "value": null,
+        "label": "Motion Prompt",
+        "placeholder": "e.g. gesture naturally and glance at the screen"
+      },
+      {
+        "name": "expressiveness",
+        "type": "string",
+        "value": null,
+        "label": "Expressiveness (photo/Avatar IV)",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "High",
+            "value": "high"
+          },
+          {
+            "name": "Medium",
+            "value": "medium"
+          },
+          {
+            "name": "Low",
+            "value": "low"
+          }
+        ]
+      },
+      {
+        "name": "engine",
+        "type": "string",
+        "value": null,
+        "label": "Avatar Engine",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "Default",
+            "value": ""
+          },
+          {
+            "name": "Avatar III",
+            "value": "avatar_iii"
+          },
+          {
+            "name": "Avatar IV",
+            "value": "avatar_iv"
+          },
+          {
+            "name": "Avatar V (most dynamic)",
+            "value": "avatar_v"
+          }
+        ]
       },
       {
         "name": "callback_url",
