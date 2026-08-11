@@ -156,6 +156,12 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 		body[k] = v
 	}
 
+	// HeyGen wants `engine` as an object ({"type":"avatar_v"}). Agents and the
+	// raw_json path often pass it as a plain string ("avatar_v"), which HeyGen
+	// rejects with "Input should be a valid dictionary or object". Coerce it so
+	// either form works, from any source.
+	normalizeEngine(body)
+
 	resp, err := heygen.NewClient(apiKey).Post(flow, "/v3/videos", body)
 	if err != nil {
 		return heygen.MapError(err), nil
@@ -173,4 +179,20 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 		"video_id": videoID,
 		"status":   status,
 	}), nil
+}
+
+// normalizeEngine coerces a string engine ("avatar_v") into the object HeyGen
+// requires ({"type":"avatar_v"}), and drops an empty engine entirely. A value
+// already in object form is left untouched.
+func normalizeEngine(body map[string]interface{}) {
+	switch v := body["engine"].(type) {
+	case string:
+		if v == "" {
+			delete(body, "engine")
+		} else {
+			body["engine"] = map[string]interface{}{"type": v}
+		}
+	case nil:
+		delete(body, "engine")
+	}
 }
