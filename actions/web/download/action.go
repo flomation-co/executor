@@ -106,7 +106,11 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	}
 
 	return map[string]interface{}{
-		"tool_result": fmt.Sprintf("Downloaded %s (%d bytes, %s). Reference ready to upload/attach.", filename, len(body), mimeType),
+		// Surface the file reference IN tool_result: an agent only reads
+		// tool_result, so without the handle here it can't chain the download
+		// into an upload/attach action (it lives in the `file` output too, for
+		// node-wired flows).
+		"tool_result": fmt.Sprintf("Downloaded %s (%d bytes, %s). Pass this file reference to an upload/attach action's file input: %s", filename, len(body), mimeType, ref),
 		"file":        ref,
 		"filename":    filename,
 		"mime_type":   mimeType,
