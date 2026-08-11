@@ -26,7 +26,7 @@ var Inputs = [...]core.Connection{
 	{Name: "api_key", Type: core.ConnectionTypeSecret, Label: "HeyGen API Key", Placeholder: "${secrets.HeyGenApiKey}", Required: true},
 	{Name: "avatar_id", Type: core.ConnectionTypeString, Label: "Avatar ID", Placeholder: "From List Avatars", Required: true},
 	{Name: "script", Type: core.ConnectionTypeText, Label: "Script (spoken text)", Placeholder: "What the avatar should say (uses text-to-speech)"},
-	{Name: "voice_id", Type: core.ConnectionTypeString, Label: "Voice ID", Placeholder: "From List Voices (required with a script)"},
+	{Name: "voice_id", Type: core.ConnectionTypeString, Label: "Voice ID", Placeholder: "Optional: blank uses the avatar's default voice"},
 	{Name: "audio_url", Type: core.ConnectionTypeString, Label: "Audio URL", Placeholder: "Alternative to a script: lip-sync to this audio"},
 	{Name: "title", Type: core.ConnectionTypeString, Label: "Title"},
 	{
@@ -84,11 +84,10 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	}
 	if script != "" {
 		body["script"] = script
-		if voiceID := heygen.OptionalString("voice_id", inputs); voiceID != "" {
-			body["voice_id"] = voiceID
-		} else {
-			return heygen.ErrorResult("a voice_id is required when using a script — pick one from List Voices"), nil
-		}
+		// voice_id is optional: when omitted, HeyGen speaks with the avatar's
+		// configured default voice (set in the HeyGen dashboard — which may be an
+		// ElevenLabs voice). Only send it when the author picks a specific voice.
+		heygen.SetString(body, "voice_id", "voice_id", inputs)
 		if speed := heygen.OptionalFloat("voice_speed", inputs); speed != nil {
 			body["voice_settings"] = map[string]interface{}{"speed": *speed}
 		}

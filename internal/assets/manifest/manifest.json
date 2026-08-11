@@ -251038,7 +251038,7 @@
     ]
   },
   "heygen/videos/generate_avatar_video": {
-    "hash": "8bc40e163b16250af0be9b3e7af1f5365e3131665362289a7fc5f81a451b866f",
+    "hash": "79ed8680ebc9a06521cc3384664b56a393018138fe2ff61f24eab9281b6a9931",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Generate Avatar Video",
@@ -251086,7 +251086,7 @@
         "type": "string",
         "value": null,
         "label": "Voice ID",
-        "placeholder": "From List Voices (required with a script)"
+        "placeholder": "Optional: blank uses the avatar's default voice"
       },
       {
         "name": "audio_url",
