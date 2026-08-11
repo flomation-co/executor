@@ -6,6 +6,7 @@ package generate_avatar_video
 
 import (
 	"fmt"
+	"strings"
 
 	core "flomation.app/automate/executor"
 	heygen "flomation.app/automate/executor/actions/heygen"
@@ -161,6 +162,7 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	// rejects with "Input should be a valid dictionary or object". Coerce it so
 	// either form works, from any source.
 	normalizeEngine(body)
+	normalizeBackground(body)
 
 	resp, err := heygen.NewClient(apiKey).Post(flow, "/v3/videos", body)
 	if err != nil {
@@ -195,4 +197,40 @@ func normalizeEngine(body map[string]interface{}) {
 	case nil:
 		delete(body, "engine")
 	}
+}
+
+// normalizeBackground coerces a string background into the object HeyGen
+// requires: a leading "#" (or a bare hex value) becomes {"type":"color",
+// "value":...}, an http(s) URL becomes {"type":"image","url":...}. An empty
+// string is dropped; an object is left untouched.
+func normalizeBackground(body map[string]interface{}) {
+	s, ok := body["background"].(string)
+	if !ok {
+		return
+	}
+	s = strings.TrimSpace(s)
+	switch {
+	case s == "":
+		delete(body, "background")
+	case strings.HasPrefix(s, "http://"), strings.HasPrefix(s, "https://"):
+		body["background"] = map[string]interface{}{"type": "image", "url": s}
+	default:
+		// Treat anything else (e.g. "#150e14" or "150e14") as a colour value.
+		if !strings.HasPrefix(s, "#") && isHex(s) {
+			s = "#" + s
+		}
+		body["background"] = map[string]interface{}{"type": "color", "value": s}
+	}
+}
+
+func isHex(s string) bool {
+	if len(s) != 3 && len(s) != 6 {
+		return false
+	}
+	for _, r := range s {
+		if !((r >= '0' && r <= '9') || (r >= 'a' && r <= 'f') || (r >= 'A' && r <= 'F')) {
+			return false
+		}
+	}
+	return true
 }

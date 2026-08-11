@@ -28,3 +28,31 @@ func TestNormalizeEngine(t *testing.T) {
 	normalizeEngine(b)
 	Expect(b).ToNot(HaveKey("engine"))
 }
+
+func TestNormalizeBackground(t *testing.T) {
+	RegisterTestingT(t)
+
+	// hex with # -> colour
+	b := map[string]interface{}{"background": "#150e14"}
+	normalizeBackground(b)
+	Expect(b["background"]).To(Equal(map[string]interface{}{"type": "color", "value": "#150e14"}))
+
+	// bare hex -> colour with # prepended
+	b = map[string]interface{}{"background": "150e14"}
+	normalizeBackground(b)
+	Expect(b["background"]).To(Equal(map[string]interface{}{"type": "color", "value": "#150e14"}))
+
+	// http(s) URL -> image
+	b = map[string]interface{}{"background": "https://cdn/room.jpg"}
+	normalizeBackground(b)
+	Expect(b["background"]).To(Equal(map[string]interface{}{"type": "image", "url": "https://cdn/room.jpg"}))
+
+	// object left untouched; empty dropped
+	obj := map[string]interface{}{"type": "image", "asset_id": "a1"}
+	b = map[string]interface{}{"background": obj}
+	normalizeBackground(b)
+	Expect(b["background"]).To(Equal(obj))
+	b = map[string]interface{}{"background": ""}
+	normalizeBackground(b)
+	Expect(b).ToNot(HaveKey("background"))
+}
