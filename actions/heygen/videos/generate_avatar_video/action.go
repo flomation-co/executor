@@ -49,6 +49,34 @@ var Inputs = [...]core.Connection{
 		},
 	},
 	{Name: "voice_speed", Type: core.ConnectionTypeString, Label: "Voice Speed", Placeholder: "0.5 to 1.5 (default 1.0)"},
+	{Name: "background_image_url", Type: core.ConnectionTypeString, Label: "Background Image URL", Placeholder: "A room/studio image to place the avatar in"},
+	{Name: "background_color", Type: core.ConnectionTypeString, Label: "Background Colour", Placeholder: "#150e14 (ignored if a background image is set)"},
+	{Name: "remove_background", Type: core.ConnectionTypeBoolean, Label: "Remove avatar background (needs a matting-trained avatar)"},
+	{
+		Name: "fit", Type: core.ConnectionTypeString, Label: "Fit",
+		Options: []core.ConnectionOption{
+			{Name: "Cover (fill, may crop)", Value: "cover"},
+			{Name: "Contain (fit, may letterbox)", Value: "contain"},
+		},
+	},
+	{Name: "motion_prompt", Type: core.ConnectionTypeString, Label: "Motion Prompt", Placeholder: "e.g. gesture naturally and glance at the screen"},
+	{
+		Name: "expressiveness", Type: core.ConnectionTypeString, Label: "Expressiveness (photo/Avatar IV)",
+		Options: []core.ConnectionOption{
+			{Name: "High", Value: "high"},
+			{Name: "Medium", Value: "medium"},
+			{Name: "Low", Value: "low"},
+		},
+	},
+	{
+		Name: "engine", Type: core.ConnectionTypeString, Label: "Avatar Engine",
+		Options: []core.ConnectionOption{
+			{Name: "Default", Value: ""},
+			{Name: "Avatar III", Value: "avatar_iii"},
+			{Name: "Avatar IV", Value: "avatar_iv"},
+			{Name: "Avatar V (most dynamic)", Value: "avatar_v"},
+		},
+	},
 	{Name: "callback_url", Type: core.ConnectionTypeString, Label: "Webhook Callback URL", Placeholder: "Called when the video is ready"},
 	{Name: "callback_id", Type: core.ConnectionTypeString, Label: "Callback ID", Placeholder: "Echoed back in the webhook"},
 	{Name: "raw_json", Type: core.ConnectionTypeText, Label: "Advanced: extra JSON merged into the request body"},
@@ -98,6 +126,24 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	heygen.SetString(body, "title", "title", inputs)
 	heygen.SetString(body, "aspect_ratio", "aspect_ratio", inputs)
 	heygen.SetString(body, "resolution", "resolution", inputs)
+
+	// Presenter/scene settings: place the avatar in a room, matte it out, and
+	// make it more dynamic — the levers that turn a talking head into a presenter.
+	if img := heygen.OptionalString("background_image_url", inputs); img != "" {
+		body["background"] = map[string]interface{}{"type": "image", "url": img}
+	} else if col := heygen.OptionalString("background_color", inputs); col != "" {
+		body["background"] = map[string]interface{}{"type": "color", "value": col}
+	}
+	if c := core.FindConnection("remove_background", inputs); c != nil && c.Boolean() != nil {
+		body["remove_background"] = *c.Boolean()
+	}
+	heygen.SetString(body, "fit", "fit", inputs)
+	heygen.SetString(body, "motion_prompt", "motion_prompt", inputs)
+	heygen.SetString(body, "expressiveness", "expressiveness", inputs)
+	if eng := heygen.OptionalString("engine", inputs); eng != "" {
+		body["engine"] = map[string]interface{}{"type": eng}
+	}
+
 	heygen.SetString(body, "callback_url", "callback_url", inputs)
 	heygen.SetString(body, "callback_id", "callback_id", inputs)
 
