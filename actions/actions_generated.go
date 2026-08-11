@@ -1608,6 +1608,9 @@ import (
 	helpdesk_zendesk_user_update "flomation.app/automate/executor/actions/helpdesk/zendesk/user_update"
 	heygen_account_get_credits "flomation.app/automate/executor/actions/heygen/account/get_credits"
 	heygen_avatars_list_avatars "flomation.app/automate/executor/actions/heygen/avatars/list_avatars"
+	heygen_templates_generate "flomation.app/automate/executor/actions/heygen/templates/generate"
+	heygen_templates_get_template "flomation.app/automate/executor/actions/heygen/templates/get_template"
+	heygen_templates_list_templates "flomation.app/automate/executor/actions/heygen/templates/list_templates"
 	heygen_videos_generate_avatar_video "flomation.app/automate/executor/actions/heygen/videos/generate_avatar_video"
 	heygen_videos_get_video "flomation.app/automate/executor/actions/heygen/videos/get_video"
 	heygen_voices_list_voices "flomation.app/automate/executor/actions/heygen/voices/list_voices"
@@ -5152,6 +5155,9 @@ var Actions = map[string]core.Action{
 	"helpdesk/zendesk/user_update":                                                    helpdesk_zendesk_user_update.Execute,
 	"heygen/account/get_credits":                                                      heygen_account_get_credits.Execute,
 	"heygen/avatars/list_avatars":                                                     heygen_avatars_list_avatars.Execute,
+	"heygen/templates/generate":                                                       heygen_templates_generate.Execute,
+	"heygen/templates/get_template":                                                   heygen_templates_get_template.Execute,
+	"heygen/templates/list_templates":                                                 heygen_templates_list_templates.Execute,
 	"heygen/videos/generate_avatar_video":                                             heygen_videos_generate_avatar_video.Execute,
 	"heygen/videos/get_video":                                                         heygen_videos_get_video.Execute,
 	"heygen/voices/list_voices":                                                       heygen_voices_list_voices.Execute,
