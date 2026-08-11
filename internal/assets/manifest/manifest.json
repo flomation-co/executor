@@ -560669,6 +560669,90 @@
       }
     ]
   },
+  "web/download": {
+    "hash": "daa3803e342070707d5c74856c3a4e54a42d832bedc3c8b2758395e256517bf8",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Download File",
+    "description": "Download a file from a URL into the workspace as a reference you can upload or attach.",
+    "website": "https://www.flomation.co",
+    "icon": "globe+arrow-down",
+    "date": "11/08/2026",
+    "type": 2,
+    "category": {
+      "name": "Web",
+      "icon": "globe",
+      "description": "Web browsing, search, and HTTP request operations"
+    },
+    "inputs": [
+      {
+        "name": "url",
+        "type": "string",
+        "value": null,
+        "label": "File URL",
+        "placeholder": "https://…",
+        "required": true
+      },
+      {
+        "name": "filename",
+        "type": "string",
+        "value": null,
+        "label": "Filename (optional, e.g. demo.mp4 — otherwise derived from the URL)",
+        "placeholder": ""
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result summary",
+        "placeholder": ""
+      },
+      {
+        "name": "file",
+        "type": "string",
+        "value": null,
+        "label": "File reference (feed to Slack File Upload, Drive Upload, etc.)",
+        "placeholder": ""
+      },
+      {
+        "name": "filename",
+        "type": "string",
+        "value": null,
+        "label": "Filename",
+        "placeholder": ""
+      },
+      {
+        "name": "mime_type",
+        "type": "string",
+        "value": null,
+        "label": "MIME type",
+        "placeholder": ""
+      },
+      {
+        "name": "size_bytes",
+        "type": "integer",
+        "value": null,
+        "label": "Size (bytes)",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
   "web/fetch": {
     "hash": "80163995f9d887fb64c7a50dd958587b9ce48b9df095be25d5e8d0ddfbec504e",
     "author": "Andy Esser",
