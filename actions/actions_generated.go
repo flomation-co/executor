@@ -3475,6 +3475,7 @@ import (
 	video_trim "flomation.app/automate/executor/actions/video/trim"
 	video_video_watermark "flomation.app/automate/executor/actions/video/video_watermark"
 	video_waveform "flomation.app/automate/executor/actions/video/waveform"
+	web_download "flomation.app/automate/executor/actions/web/download"
 	web_fetch "flomation.app/automate/executor/actions/web/fetch"
 	web_request "flomation.app/automate/executor/actions/web/request"
 	web_search "flomation.app/automate/executor/actions/web/search"
@@ -7018,6 +7019,7 @@ var Actions = map[string]core.Action{
 	"video/trim":                                                                      video_trim.Execute,
 	"video/video_watermark":                                                           video_video_watermark.Execute,
 	"video/waveform":                                                                  video_waveform.Execute,
+	"web/download":                                                                    web_download.Execute,
 	"web/fetch":                                                                       web_fetch.Execute,
 	"web/request":                                                                     web_request.Execute,
 	"web/search":                                                                      web_search.Execute,
