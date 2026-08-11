@@ -56,3 +56,27 @@ func TestNormalizeBackground(t *testing.T) {
 	normalizeBackground(b)
 	Expect(b).ToNot(HaveKey("background"))
 }
+
+func TestDefaultPortraitFit(t *testing.T) {
+	RegisterTestingT(t)
+
+	// portrait + no fit -> cover
+	b := map[string]interface{}{"aspect_ratio": "9:16"}
+	defaultPortraitFit(b)
+	Expect(b["fit"]).To(Equal("cover"))
+	b = map[string]interface{}{"aspect_ratio": "4:5"}
+	defaultPortraitFit(b)
+	Expect(b["fit"]).To(Equal("cover"))
+
+	// explicit fit is respected
+	b = map[string]interface{}{"aspect_ratio": "9:16", "fit": "contain"}
+	defaultPortraitFit(b)
+	Expect(b["fit"]).To(Equal("contain"))
+
+	// landscape/square/none -> untouched
+	for _, ar := range []string{"16:9", "1:1", "auto", ""} {
+		b = map[string]interface{}{"aspect_ratio": ar}
+		defaultPortraitFit(b)
+		Expect(b).ToNot(HaveKey("fit"), "ar=%s should not get a default fit", ar)
+	}
+}
