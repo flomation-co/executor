@@ -251037,6 +251037,289 @@
       }
     ]
   },
+  "heygen/templates/generate": {
+    "hash": "0db188c34ea46c4d2f0514fe1dcaf19cd6bbe6f652acce25e5d146b693f2968e",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Generate from Template",
+    "description": "Render a video from a HeyGen template by filling its variables (avatar, scene and branding are baked in).",
+    "website": "https://www.flomation.co",
+    "icon": "copy+plus",
+    "date": "11/08/2026",
+    "type": 2,
+    "category": {
+      "name": "HeyGen",
+      "icon": "film",
+      "description": "Generate AI avatar videos, voices and translations with HeyGen"
+    },
+    "sub_category": {
+      "name": "Templates",
+      "icon": "copy",
+      "description": "Generate branded videos from HeyGen Studio templates"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "HeyGen API Key",
+        "placeholder": "${secrets.HeyGenApiKey}",
+        "required": true
+      },
+      {
+        "name": "template_id",
+        "type": "string",
+        "value": null,
+        "label": "Template ID",
+        "placeholder": "",
+        "required": true
+      },
+      {
+        "name": "text_values",
+        "type": "text",
+        "value": null,
+        "label": "Text variables: JSON object of {\"variable\":\"value\"} (auto-typed as text)",
+        "placeholder": ""
+      },
+      {
+        "name": "variables",
+        "type": "text",
+        "value": null,
+        "label": "Advanced: full typed variables JSON (from Get Template) — overrides text_values",
+        "placeholder": ""
+      },
+      {
+        "name": "title",
+        "type": "string",
+        "value": null,
+        "label": "Title",
+        "placeholder": ""
+      },
+      {
+        "name": "caption",
+        "type": "boolean",
+        "value": null,
+        "label": "Burn in captions",
+        "placeholder": ""
+      },
+      {
+        "name": "callback_url",
+        "type": "string",
+        "value": null,
+        "label": "Webhook Callback URL",
+        "placeholder": "Called when the video is ready"
+      },
+      {
+        "name": "callback_id",
+        "type": "string",
+        "value": null,
+        "label": "Callback ID",
+        "placeholder": "Echoed back in the webhook"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "video_id",
+        "type": "string",
+        "value": null,
+        "label": "Video ID",
+        "placeholder": ""
+      },
+      {
+        "name": "status",
+        "type": "string",
+        "value": null,
+        "label": "Status",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "heygen/templates/get_template": {
+    "hash": "06a3b24d87fbb6128ddd261f887d0a1156c869eba7b1c20674eb4e26d255f002",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Get Template",
+    "description": "Get a HeyGen template and its variable schema (the fields you fill to generate a video).",
+    "website": "https://www.flomation.co",
+    "icon": "copy+circle-info",
+    "date": "11/08/2026",
+    "type": 2,
+    "category": {
+      "name": "HeyGen",
+      "icon": "film",
+      "description": "Generate AI avatar videos, voices and translations with HeyGen"
+    },
+    "sub_category": {
+      "name": "Templates",
+      "icon": "copy",
+      "description": "Generate branded videos from HeyGen Studio templates"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "HeyGen API Key",
+        "placeholder": "${secrets.HeyGenApiKey}",
+        "required": true
+      },
+      {
+        "name": "template_id",
+        "type": "string",
+        "value": null,
+        "label": "Template ID",
+        "placeholder": "",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "name",
+        "type": "string",
+        "value": null,
+        "label": "Template Name",
+        "placeholder": ""
+      },
+      {
+        "name": "aspect_ratio",
+        "type": "string",
+        "value": null,
+        "label": "Aspect Ratio",
+        "placeholder": ""
+      },
+      {
+        "name": "variables",
+        "type": "object",
+        "value": null,
+        "label": "Variable schema (edit and pass to Generate from Template)",
+        "placeholder": ""
+      },
+      {
+        "name": "template",
+        "type": "object",
+        "value": null,
+        "label": "Full template (JSON)",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "heygen/templates/list_templates": {
+    "hash": "324e3dc3758ee9f99e84cbad6ccae55b0e25f017cfc4c03e8f26888ee9c0dccf",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "List Templates",
+    "description": "List available HeyGen Studio templates (avatar + scene + layout you can fill and render).",
+    "website": "https://www.flomation.co",
+    "icon": "copy+list",
+    "date": "11/08/2026",
+    "type": 2,
+    "category": {
+      "name": "HeyGen",
+      "icon": "film",
+      "description": "Generate AI avatar videos, voices and translations with HeyGen"
+    },
+    "sub_category": {
+      "name": "Templates",
+      "icon": "copy",
+      "description": "Generate branded videos from HeyGen Studio templates"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "HeyGen API Key",
+        "placeholder": "${secrets.HeyGenApiKey}",
+        "required": true
+      },
+      {
+        "name": "limit",
+        "type": "integer",
+        "value": null,
+        "label": "Limit",
+        "placeholder": "Max results"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "results",
+        "type": "object",
+        "value": null,
+        "label": "Templates",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Count",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
   "heygen/videos/generate_avatar_video": {
     "hash": "79ed8680ebc9a06521cc3384664b56a393018138fe2ff61f24eab9281b6a9931",
     "author": "Andy Esser",

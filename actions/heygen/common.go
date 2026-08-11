@@ -183,6 +183,15 @@ func OptionalInt(name string, inputs []*core.Connection) *int64 {
 	return c.Number()
 }
 
+// OptionalBool extracts an optional boolean input, nil when absent.
+func OptionalBool(name string, inputs []*core.Connection) *bool {
+	c := core.FindConnection(name, inputs)
+	if c == nil {
+		return nil
+	}
+	return c.Boolean()
+}
+
 // OptionalFloat parses a decimal string input (e.g. voice speed) as a float.
 // Returns nil when absent or unparseable.
 func OptionalFloat(name string, inputs []*core.Connection) *float64 {
