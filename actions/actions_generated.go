@@ -1606,6 +1606,11 @@ import (
 	helpdesk_zendesk_user_get_related_data "flomation.app/automate/executor/actions/helpdesk/zendesk/user_get_related_data"
 	helpdesk_zendesk_user_search "flomation.app/automate/executor/actions/helpdesk/zendesk/user_search"
 	helpdesk_zendesk_user_update "flomation.app/automate/executor/actions/helpdesk/zendesk/user_update"
+	heygen_account_get_credits "flomation.app/automate/executor/actions/heygen/account/get_credits"
+	heygen_avatars_list_avatars "flomation.app/automate/executor/actions/heygen/avatars/list_avatars"
+	heygen_videos_generate_avatar_video "flomation.app/automate/executor/actions/heygen/videos/generate_avatar_video"
+	heygen_videos_get_video "flomation.app/automate/executor/actions/heygen/videos/get_video"
+	heygen_voices_list_voices "flomation.app/automate/executor/actions/heygen/voices/list_voices"
 	hubspot_associate "flomation.app/automate/executor/actions/hubspot/associate"
 	hubspot_company_create "flomation.app/automate/executor/actions/hubspot/company_create"
 	hubspot_company_delete "flomation.app/automate/executor/actions/hubspot/company_delete"
@@ -5144,6 +5149,11 @@ var Actions = map[string]core.Action{
 	"helpdesk/zendesk/user_get_related_data":                                          helpdesk_zendesk_user_get_related_data.Execute,
 	"helpdesk/zendesk/user_search":                                                    helpdesk_zendesk_user_search.Execute,
 	"helpdesk/zendesk/user_update":                                                    helpdesk_zendesk_user_update.Execute,
+	"heygen/account/get_credits":                                                      heygen_account_get_credits.Execute,
+	"heygen/avatars/list_avatars":                                                     heygen_avatars_list_avatars.Execute,
+	"heygen/videos/generate_avatar_video":                                             heygen_videos_generate_avatar_video.Execute,
+	"heygen/videos/get_video":                                                         heygen_videos_get_video.Execute,
+	"heygen/voices/list_voices":                                                       heygen_voices_list_voices.Execute,
 	"hubspot/associate":                                                               hubspot_associate.Execute,
 	"hubspot/company_create":                                                          hubspot_company_create.Execute,
 	"hubspot/company_delete":                                                          hubspot_company_delete.Execute,
