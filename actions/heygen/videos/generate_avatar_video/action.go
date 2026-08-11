@@ -163,6 +163,7 @@ func Execute(flow *core.Flow, node *core.Node, inputs []*core.Connection) (map[s
 	// either form works, from any source.
 	normalizeEngine(body)
 	normalizeBackground(body)
+	defaultPortraitFit(body)
 
 	resp, err := heygen.NewClient(apiKey).Post(flow, "/v3/videos", body)
 	if err != nil {
@@ -233,4 +234,18 @@ func isHex(s string) bool {
 		}
 	}
 	return true
+}
+
+// defaultPortraitFit sets fit=cover for a portrait canvas (9:16 / 4:5) when the
+// author hasn't chosen a fit. HeyGen otherwise letterboxes a landscape avatar
+// into a vertical frame (white bars top/bottom); cover fills it. Runs after the
+// raw_json merge so it sees the final aspect_ratio and respects any explicit fit.
+func defaultPortraitFit(body map[string]interface{}) {
+	if _, hasFit := body["fit"]; hasFit {
+		return
+	}
+	switch ar, _ := body["aspect_ratio"].(string); ar {
+	case "9:16", "4:5":
+		body["fit"] = "cover"
+	}
 }
