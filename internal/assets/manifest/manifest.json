@@ -250887,6 +250887,528 @@
       }
     ]
   },
+  "heygen/account/get_credits": {
+    "hash": "b5dc8f57311f20194b4dd7ec017c257a57095215a8a31f9dac21423b48f69eed",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Get Credit Balance",
+    "description": "Get the HeyGen account's remaining credits and plan.",
+    "website": "https://www.flomation.co",
+    "icon": "gauge",
+    "date": "11/08/2026",
+    "type": 2,
+    "category": {
+      "name": "HeyGen",
+      "icon": "film",
+      "description": "Generate AI avatar videos, voices and translations with HeyGen"
+    },
+    "sub_category": {
+      "name": "Account",
+      "icon": "gauge",
+      "description": "HeyGen account and credit balance"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "HeyGen API Key",
+        "placeholder": "${secrets.HeyGenApiKey}",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "remaining_credits",
+        "type": "string",
+        "value": null,
+        "label": "Remaining Credits",
+        "placeholder": ""
+      },
+      {
+        "name": "plan",
+        "type": "string",
+        "value": null,
+        "label": "Plan",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "heygen/avatars/list_avatars": {
+    "hash": "423f665805317c483eb38f6a879c9cd5aca3f5132cf4d58bad98580d97624d86",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "List Avatars",
+    "description": "List available HeyGen avatars (their look id is the avatar_id for generating a video).",
+    "website": "https://www.flomation.co",
+    "icon": "user+list",
+    "date": "11/08/2026",
+    "type": 2,
+    "category": {
+      "name": "HeyGen",
+      "icon": "film",
+      "description": "Generate AI avatar videos, voices and translations with HeyGen"
+    },
+    "sub_category": {
+      "name": "Avatars",
+      "icon": "user",
+      "description": "Browse HeyGen avatars and looks"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "HeyGen API Key",
+        "placeholder": "${secrets.HeyGenApiKey}",
+        "required": true
+      },
+      {
+        "name": "group_id",
+        "type": "string",
+        "value": null,
+        "label": "Avatar Group ID",
+        "placeholder": "Optional: filter to one group"
+      },
+      {
+        "name": "limit",
+        "type": "integer",
+        "value": null,
+        "label": "Limit",
+        "placeholder": "Max results"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "results",
+        "type": "object",
+        "value": null,
+        "label": "Avatars",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Count",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "heygen/videos/generate_avatar_video": {
+    "hash": "8bc40e163b16250af0be9b3e7af1f5365e3131665362289a7fc5f81a451b866f",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Generate Avatar Video",
+    "description": "Create a HeyGen talking-head video from a script (text-to-speech) or an audio URL.",
+    "website": "https://www.flomation.co",
+    "icon": "film+plus",
+    "date": "11/08/2026",
+    "type": 2,
+    "category": {
+      "name": "HeyGen",
+      "icon": "film",
+      "description": "Generate AI avatar videos, voices and translations with HeyGen"
+    },
+    "sub_category": {
+      "name": "Videos",
+      "icon": "video",
+      "description": "Generate and retrieve HeyGen avatar videos"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "HeyGen API Key",
+        "placeholder": "${secrets.HeyGenApiKey}",
+        "required": true
+      },
+      {
+        "name": "avatar_id",
+        "type": "string",
+        "value": null,
+        "label": "Avatar ID",
+        "placeholder": "From List Avatars",
+        "required": true
+      },
+      {
+        "name": "script",
+        "type": "text",
+        "value": null,
+        "label": "Script (spoken text)",
+        "placeholder": "What the avatar should say (uses text-to-speech)"
+      },
+      {
+        "name": "voice_id",
+        "type": "string",
+        "value": null,
+        "label": "Voice ID",
+        "placeholder": "From List Voices (required with a script)"
+      },
+      {
+        "name": "audio_url",
+        "type": "string",
+        "value": null,
+        "label": "Audio URL",
+        "placeholder": "Alternative to a script: lip-sync to this audio"
+      },
+      {
+        "name": "title",
+        "type": "string",
+        "value": null,
+        "label": "Title",
+        "placeholder": ""
+      },
+      {
+        "name": "aspect_ratio",
+        "type": "string",
+        "value": null,
+        "label": "Aspect Ratio",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "Auto",
+            "value": "auto"
+          },
+          {
+            "name": "16:9 (landscape)",
+            "value": "16:9"
+          },
+          {
+            "name": "9:16 (portrait)",
+            "value": "9:16"
+          },
+          {
+            "name": "1:1 (square)",
+            "value": "1:1"
+          },
+          {
+            "name": "4:5",
+            "value": "4:5"
+          },
+          {
+            "name": "5:4",
+            "value": "5:4"
+          }
+        ]
+      },
+      {
+        "name": "resolution",
+        "type": "string",
+        "value": null,
+        "label": "Resolution",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "1080p",
+            "value": "1080p"
+          },
+          {
+            "name": "720p",
+            "value": "720p"
+          },
+          {
+            "name": "4K",
+            "value": "4k"
+          }
+        ]
+      },
+      {
+        "name": "voice_speed",
+        "type": "string",
+        "value": null,
+        "label": "Voice Speed",
+        "placeholder": "0.5 to 1.5 (default 1.0)"
+      },
+      {
+        "name": "callback_url",
+        "type": "string",
+        "value": null,
+        "label": "Webhook Callback URL",
+        "placeholder": "Called when the video is ready"
+      },
+      {
+        "name": "callback_id",
+        "type": "string",
+        "value": null,
+        "label": "Callback ID",
+        "placeholder": "Echoed back in the webhook"
+      },
+      {
+        "name": "raw_json",
+        "type": "text",
+        "value": null,
+        "label": "Advanced: extra JSON merged into the request body",
+        "placeholder": ""
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "video_id",
+        "type": "string",
+        "value": null,
+        "label": "Video ID",
+        "placeholder": ""
+      },
+      {
+        "name": "status",
+        "type": "string",
+        "value": null,
+        "label": "Status",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "heygen/videos/get_video": {
+    "hash": "4fd483f90b169cbb97e707bf62d0c9c7c920e75806fd966225f4f22b6d09ea55",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Get Video",
+    "description": "Get a HeyGen video's status and, when ready, its download URL.",
+    "website": "https://www.flomation.co",
+    "icon": "film+circle-info",
+    "date": "11/08/2026",
+    "type": 2,
+    "category": {
+      "name": "HeyGen",
+      "icon": "film",
+      "description": "Generate AI avatar videos, voices and translations with HeyGen"
+    },
+    "sub_category": {
+      "name": "Videos",
+      "icon": "video",
+      "description": "Generate and retrieve HeyGen avatar videos"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "HeyGen API Key",
+        "placeholder": "${secrets.HeyGenApiKey}",
+        "required": true
+      },
+      {
+        "name": "video_id",
+        "type": "string",
+        "value": null,
+        "label": "Video ID",
+        "placeholder": "",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "status",
+        "type": "string",
+        "value": null,
+        "label": "Status",
+        "placeholder": ""
+      },
+      {
+        "name": "video_url",
+        "type": "string",
+        "value": null,
+        "label": "Video URL",
+        "placeholder": ""
+      },
+      {
+        "name": "thumbnail_url",
+        "type": "string",
+        "value": null,
+        "label": "Thumbnail URL",
+        "placeholder": ""
+      },
+      {
+        "name": "subtitle_url",
+        "type": "string",
+        "value": null,
+        "label": "Subtitle URL",
+        "placeholder": ""
+      },
+      {
+        "name": "duration",
+        "type": "string",
+        "value": null,
+        "label": "Duration (seconds)",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "heygen/voices/list_voices": {
+    "hash": "cc06ebd5df4d5e00287afe8a88fea03e3ba0c881a95c47b1d6ac2b9cb98fa9ec",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "List Voices",
+    "description": "List available HeyGen voices (their id is the voice_id for text-to-speech generation).",
+    "website": "https://www.flomation.co",
+    "icon": "microphone+list",
+    "date": "11/08/2026",
+    "type": 2,
+    "category": {
+      "name": "HeyGen",
+      "icon": "film",
+      "description": "Generate AI avatar videos, voices and translations with HeyGen"
+    },
+    "sub_category": {
+      "name": "Voices",
+      "icon": "microphone",
+      "description": "Browse HeyGen voices"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "HeyGen API Key",
+        "placeholder": "${secrets.HeyGenApiKey}",
+        "required": true
+      },
+      {
+        "name": "language",
+        "type": "string",
+        "value": null,
+        "label": "Language",
+        "placeholder": "Optional: filter, e.g. English"
+      },
+      {
+        "name": "gender",
+        "type": "string",
+        "value": null,
+        "label": "Gender",
+        "placeholder": "Optional: male / female"
+      },
+      {
+        "name": "limit",
+        "type": "integer",
+        "value": null,
+        "label": "Limit",
+        "placeholder": "Max results"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "results",
+        "type": "object",
+        "value": null,
+        "label": "Voices",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Count",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
   "hubspot/associate": {
     "hash": "58e66113e7821682d95f9e4f2e89173a1576343be904c961404303210441086d",
     "author": "Dave McElin",
