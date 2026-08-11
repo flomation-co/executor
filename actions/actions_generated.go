@@ -1612,6 +1612,7 @@ import (
 	heygen_templates_get_template "flomation.app/automate/executor/actions/heygen/templates/get_template"
 	heygen_templates_list_templates "flomation.app/automate/executor/actions/heygen/templates/list_templates"
 	heygen_videos_generate_avatar_video "flomation.app/automate/executor/actions/heygen/videos/generate_avatar_video"
+	heygen_videos_generate_cinematic "flomation.app/automate/executor/actions/heygen/videos/generate_cinematic"
 	heygen_videos_get_video "flomation.app/automate/executor/actions/heygen/videos/get_video"
 	heygen_voices_list_voices "flomation.app/automate/executor/actions/heygen/voices/list_voices"
 	hubspot_associate "flomation.app/automate/executor/actions/hubspot/associate"
@@ -5159,6 +5160,7 @@ var Actions = map[string]core.Action{
 	"heygen/templates/get_template":                                                   heygen_templates_get_template.Execute,
 	"heygen/templates/list_templates":                                                 heygen_templates_list_templates.Execute,
 	"heygen/videos/generate_avatar_video":                                             heygen_videos_generate_avatar_video.Execute,
+	"heygen/videos/generate_cinematic":                                                heygen_videos_generate_cinematic.Execute,
 	"heygen/videos/get_video":                                                         heygen_videos_get_video.Execute,
 	"heygen/voices/list_voices":                                                       heygen_voices_list_voices.Execute,
 	"hubspot/associate":                                                               hubspot_associate.Execute,

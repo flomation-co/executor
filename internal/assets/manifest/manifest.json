@@ -251597,6 +251597,177 @@
       }
     ]
   },
+  "heygen/videos/generate_cinematic": {
+    "hash": "887fda6e7ca582abb2ea5f5652d0f11a03549013ad15945a6ec400db2ebccfb4",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Generate Cinematic Video",
+    "description": "Generate a HeyGen video from a scene prompt — describe the setting and the avatar's motion/gestures.",
+    "website": "https://www.flomation.co",
+    "icon": "film+star",
+    "date": "11/08/2026",
+    "type": 2,
+    "category": {
+      "name": "HeyGen",
+      "icon": "film",
+      "description": "Generate AI avatar videos, voices and translations with HeyGen"
+    },
+    "sub_category": {
+      "name": "Videos",
+      "icon": "video",
+      "description": "Generate and retrieve HeyGen avatar videos"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "HeyGen API Key",
+        "placeholder": "${secrets.HeyGenApiKey}",
+        "required": true
+      },
+      {
+        "name": "avatar_ids",
+        "type": "string",
+        "value": null,
+        "label": "Avatar Look IDs",
+        "placeholder": "1 to 3, comma-separated (from List Avatars)",
+        "required": true
+      },
+      {
+        "name": "prompt",
+        "type": "text",
+        "value": null,
+        "label": "Scene \u0026 motion prompt",
+        "placeholder": "Describe the setting and how the avatar moves/gestures",
+        "required": true
+      },
+      {
+        "name": "aspect_ratio",
+        "type": "string",
+        "value": null,
+        "label": "Aspect Ratio",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "16:9 (landscape)",
+            "value": "16:9"
+          },
+          {
+            "name": "9:16 (portrait)",
+            "value": "9:16"
+          },
+          {
+            "name": "1:1 (square)",
+            "value": "1:1"
+          }
+        ]
+      },
+      {
+        "name": "resolution",
+        "type": "string",
+        "value": null,
+        "label": "Resolution",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "720p",
+            "value": "720p"
+          },
+          {
+            "name": "1080p",
+            "value": "1080p"
+          }
+        ]
+      },
+      {
+        "name": "duration",
+        "type": "integer",
+        "value": null,
+        "label": "Duration (seconds, 4 to 15)",
+        "placeholder": ""
+      },
+      {
+        "name": "auto_duration",
+        "type": "boolean",
+        "value": null,
+        "label": "Auto duration (ignore Duration)",
+        "placeholder": ""
+      },
+      {
+        "name": "enhance_prompt",
+        "type": "boolean",
+        "value": null,
+        "label": "Let HeyGen enhance the prompt",
+        "placeholder": ""
+      },
+      {
+        "name": "references",
+        "type": "text",
+        "value": null,
+        "label": "Advanced: reference assets JSON array (images/videos for style)",
+        "placeholder": ""
+      },
+      {
+        "name": "title",
+        "type": "string",
+        "value": null,
+        "label": "Title",
+        "placeholder": ""
+      },
+      {
+        "name": "callback_url",
+        "type": "string",
+        "value": null,
+        "label": "Webhook Callback URL",
+        "placeholder": "Called when the video is ready"
+      },
+      {
+        "name": "callback_id",
+        "type": "string",
+        "value": null,
+        "label": "Callback ID",
+        "placeholder": "Echoed back in the webhook"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "video_id",
+        "type": "string",
+        "value": null,
+        "label": "Video ID",
+        "placeholder": ""
+      },
+      {
+        "name": "status",
+        "type": "string",
+        "value": null,
+        "label": "Status",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
   "heygen/videos/get_video": {
     "hash": "4fd483f90b169cbb97e707bf62d0c9c7c920e75806fd966225f4f22b6d09ea55",
     "author": "Andy Esser",
