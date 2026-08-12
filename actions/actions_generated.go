@@ -1292,6 +1292,15 @@ import (
 	databricks_run_job "flomation.app/automate/executor/actions/databricks/run_job"
 	databricks_run_sql "flomation.app/automate/executor/actions/databricks/run_sql"
 	databricks_upload_file "flomation.app/automate/executor/actions/databricks/upload_file"
+	desktop_click "flomation.app/automate/executor/actions/desktop/click"
+	desktop_key "flomation.app/automate/executor/actions/desktop/key"
+	desktop_move "flomation.app/automate/executor/actions/desktop/move"
+	desktop_open_url "flomation.app/automate/executor/actions/desktop/open_url"
+	desktop_record_start "flomation.app/automate/executor/actions/desktop/record_start"
+	desktop_record_stop "flomation.app/automate/executor/actions/desktop/record_stop"
+	desktop_screenshot "flomation.app/automate/executor/actions/desktop/screenshot"
+	desktop_scroll "flomation.app/automate/executor/actions/desktop/scroll"
+	desktop_type_text "flomation.app/automate/executor/actions/desktop/type_text"
 	devops_azuredevops_branch_get_all "flomation.app/automate/executor/actions/devops/azuredevops/branch_get_all"
 	devops_azuredevops_build_cancel "flomation.app/automate/executor/actions/devops/azuredevops/build_cancel"
 	devops_azuredevops_build_get "flomation.app/automate/executor/actions/devops/azuredevops/build_get"
@@ -4845,6 +4854,15 @@ var Actions = map[string]core.Action{
 	"databricks/run_job":                                                              databricks_run_job.Execute,
 	"databricks/run_sql":                                                              databricks_run_sql.Execute,
 	"databricks/upload_file":                                                          databricks_upload_file.Execute,
+	"desktop/click":                                                                   desktop_click.Execute,
+	"desktop/key":                                                                     desktop_key.Execute,
+	"desktop/move":                                                                    desktop_move.Execute,
+	"desktop/open_url":                                                                desktop_open_url.Execute,
+	"desktop/record_start":                                                            desktop_record_start.Execute,
+	"desktop/record_stop":                                                             desktop_record_stop.Execute,
+	"desktop/screenshot":                                                              desktop_screenshot.Execute,
+	"desktop/scroll":                                                                  desktop_scroll.Execute,
+	"desktop/type_text":                                                               desktop_type_text.Execute,
 	"devops/azuredevops/branch_get_all":                                               devops_azuredevops_branch_get_all.Execute,
 	"devops/azuredevops/build_cancel":                                                 devops_azuredevops_build_cancel.Execute,
 	"devops/azuredevops/build_get":                                                    devops_azuredevops_build_get.Execute,
