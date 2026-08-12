@@ -251320,8 +251320,285 @@
       }
     ]
   },
+  "heygen/translation/create": {
+    "hash": "2bac512786e39c5c514d1549b43c954b4d2ac9a2d4d7f6b378864f71caac39d7",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Translate Video",
+    "description": "Translate/dub an existing video into another language with HeyGen.",
+    "website": "https://www.flomation.co",
+    "icon": "globe+plus",
+    "date": "12/08/2026",
+    "type": 2,
+    "category": {
+      "name": "HeyGen",
+      "icon": "film",
+      "description": "Generate AI avatar videos, voices and translations with HeyGen"
+    },
+    "sub_category": {
+      "name": "Translation",
+      "icon": "globe",
+      "description": "Translate and dub existing videos into other languages with HeyGen"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "HeyGen API Key",
+        "placeholder": "${secrets.HeyGenApiKey}",
+        "required": true
+      },
+      {
+        "name": "video_url",
+        "type": "string",
+        "value": null,
+        "label": "Video URL",
+        "placeholder": "A public URL of the source video to translate",
+        "required": true
+      },
+      {
+        "name": "output_language",
+        "type": "string",
+        "value": null,
+        "label": "Output Language",
+        "placeholder": "e.g. Spanish (see List Translation Languages)",
+        "required": true
+      },
+      {
+        "name": "title",
+        "type": "string",
+        "value": null,
+        "label": "Title",
+        "placeholder": ""
+      },
+      {
+        "name": "translate_audio_only",
+        "type": "boolean",
+        "value": null,
+        "label": "Translate audio only (keep original video)",
+        "placeholder": ""
+      },
+      {
+        "name": "speaker_num",
+        "type": "integer",
+        "value": null,
+        "label": "Number of Speakers",
+        "placeholder": "Optional: how many distinct speakers to detect"
+      },
+      {
+        "name": "callback_id",
+        "type": "string",
+        "value": null,
+        "label": "Callback ID",
+        "placeholder": "Echoed back in the webhook"
+      },
+      {
+        "name": "raw_json",
+        "type": "text",
+        "value": null,
+        "label": "Advanced: extra JSON merged into the request body",
+        "placeholder": ""
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "video_translate_id",
+        "type": "string",
+        "value": null,
+        "label": "Translation ID",
+        "placeholder": ""
+      },
+      {
+        "name": "status",
+        "type": "string",
+        "value": null,
+        "label": "Status",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "heygen/translation/get": {
+    "hash": "f96c4c06ea8e2d3169d37a68a195c6ed15f114801ddc9db873c1a91d1820dd7a",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Get Translation",
+    "description": "Get the status and output URL of a HeyGen video translation job.",
+    "website": "https://www.flomation.co",
+    "icon": "globe+magnifying-glass",
+    "date": "12/08/2026",
+    "type": 2,
+    "category": {
+      "name": "HeyGen",
+      "icon": "film",
+      "description": "Generate AI avatar videos, voices and translations with HeyGen"
+    },
+    "sub_category": {
+      "name": "Translation",
+      "icon": "globe",
+      "description": "Translate and dub existing videos into other languages with HeyGen"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "HeyGen API Key",
+        "placeholder": "${secrets.HeyGenApiKey}",
+        "required": true
+      },
+      {
+        "name": "video_translate_id",
+        "type": "string",
+        "value": null,
+        "label": "Translation ID",
+        "placeholder": "From Translate Video",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "status",
+        "type": "string",
+        "value": null,
+        "label": "Status",
+        "placeholder": ""
+      },
+      {
+        "name": "video_url",
+        "type": "string",
+        "value": null,
+        "label": "Translated Video URL",
+        "placeholder": ""
+      },
+      {
+        "name": "title",
+        "type": "string",
+        "value": null,
+        "label": "Title",
+        "placeholder": ""
+      },
+      {
+        "name": "message",
+        "type": "string",
+        "value": null,
+        "label": "Message",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "heygen/translation/list_languages": {
+    "hash": "7371c97cc6a42b9ba265c1e98a475537017fc4a6ba1f86332f5979e31f7523c3",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "List Translation Languages",
+    "description": "List the target languages HeyGen can translate/dub a video into.",
+    "website": "https://www.flomation.co",
+    "icon": "globe+list",
+    "date": "12/08/2026",
+    "type": 2,
+    "category": {
+      "name": "HeyGen",
+      "icon": "film",
+      "description": "Generate AI avatar videos, voices and translations with HeyGen"
+    },
+    "sub_category": {
+      "name": "Translation",
+      "icon": "globe",
+      "description": "Translate and dub existing videos into other languages with HeyGen"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "HeyGen API Key",
+        "placeholder": "${secrets.HeyGenApiKey}",
+        "required": true
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "results",
+        "type": "object",
+        "value": null,
+        "label": "Languages",
+        "placeholder": ""
+      },
+      {
+        "name": "count",
+        "type": "integer",
+        "value": null,
+        "label": "Count",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
   "heygen/videos/generate_avatar_video": {
-    "hash": "dadeaa3df91a1cab1609de509aea52be082284e16fbdb838160a90f7f78e1ba9",
+    "hash": "a113c9c2aac3773f2d2e4305e5b75765e4df0d5f128f74001a467748480e9a2b",
     "author": "Andy Esser",
     "organisation": "Flomation",
     "name": "Generate Avatar Video",
@@ -251728,6 +252005,264 @@
         "value": null,
         "label": "Callback ID",
         "placeholder": "Echoed back in the webhook"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "tool_result",
+        "type": "string",
+        "value": null,
+        "label": "Result Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "video_id",
+        "type": "string",
+        "value": null,
+        "label": "Video ID",
+        "placeholder": ""
+      },
+      {
+        "name": "status",
+        "type": "string",
+        "value": null,
+        "label": "Status",
+        "placeholder": ""
+      },
+      {
+        "name": "success",
+        "type": "boolean",
+        "value": null,
+        "label": "Success",
+        "placeholder": ""
+      },
+      {
+        "name": "error",
+        "type": "string",
+        "value": null,
+        "label": "Error",
+        "placeholder": ""
+      }
+    ]
+  },
+  "heygen/videos/generate_from_image": {
+    "hash": "d5b4ea47775a3c026bd2fa8b97b20fd64dfbf72204e9349a6dae88467d6263b4",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "Generate Talking Photo",
+    "description": "Create a HeyGen video from a still photo (talking photo) speaking a script or audio.",
+    "website": "https://www.flomation.co",
+    "icon": "image+plus",
+    "date": "12/08/2026",
+    "type": 2,
+    "category": {
+      "name": "HeyGen",
+      "icon": "film",
+      "description": "Generate AI avatar videos, voices and translations with HeyGen"
+    },
+    "sub_category": {
+      "name": "Videos",
+      "icon": "video",
+      "description": "Generate and retrieve HeyGen avatar videos"
+    },
+    "inputs": [
+      {
+        "name": "api_key",
+        "type": "secret",
+        "value": null,
+        "label": "HeyGen API Key",
+        "placeholder": "${secrets.HeyGenApiKey}",
+        "required": true
+      },
+      {
+        "name": "talking_photo_id",
+        "type": "string",
+        "value": null,
+        "label": "Talking Photo ID",
+        "placeholder": "A talking-photo asset uploaded to HeyGen"
+      },
+      {
+        "name": "photo_url",
+        "type": "string",
+        "value": null,
+        "label": "Photo URL",
+        "placeholder": "Alternative to a Talking Photo ID: a public image URL"
+      },
+      {
+        "name": "script",
+        "type": "text",
+        "value": null,
+        "label": "Script (spoken text)",
+        "placeholder": "What the photo should say (uses text-to-speech)"
+      },
+      {
+        "name": "voice_id",
+        "type": "string",
+        "value": null,
+        "label": "Voice ID",
+        "placeholder": "Optional: needed when using a script"
+      },
+      {
+        "name": "audio_url",
+        "type": "string",
+        "value": null,
+        "label": "Audio URL",
+        "placeholder": "Alternative to a script: lip-sync to this audio"
+      },
+      {
+        "name": "title",
+        "type": "string",
+        "value": null,
+        "label": "Title",
+        "placeholder": ""
+      },
+      {
+        "name": "aspect_ratio",
+        "type": "string",
+        "value": null,
+        "label": "Aspect Ratio",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "Auto",
+            "value": "auto"
+          },
+          {
+            "name": "16:9 (landscape)",
+            "value": "16:9"
+          },
+          {
+            "name": "9:16 (portrait)",
+            "value": "9:16"
+          },
+          {
+            "name": "1:1 (square)",
+            "value": "1:1"
+          },
+          {
+            "name": "4:5",
+            "value": "4:5"
+          },
+          {
+            "name": "5:4",
+            "value": "5:4"
+          }
+        ]
+      },
+      {
+        "name": "resolution",
+        "type": "string",
+        "value": null,
+        "label": "Resolution",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "1080p",
+            "value": "1080p"
+          },
+          {
+            "name": "720p",
+            "value": "720p"
+          },
+          {
+            "name": "4K",
+            "value": "4k"
+          }
+        ]
+      },
+      {
+        "name": "voice_speed",
+        "type": "string",
+        "value": null,
+        "label": "Voice Speed",
+        "placeholder": "0.5 to 1.5 (default 1.0)"
+      },
+      {
+        "name": "background_image_url",
+        "type": "string",
+        "value": null,
+        "label": "Background Image URL",
+        "placeholder": "A room/studio image to place the photo in"
+      },
+      {
+        "name": "background_color",
+        "type": "string",
+        "value": null,
+        "label": "Background Colour",
+        "placeholder": "#150e14 (ignored if a background image is set)"
+      },
+      {
+        "name": "remove_background",
+        "type": "boolean",
+        "value": null,
+        "label": "Remove photo background (needs a matting-trained photo)",
+        "placeholder": ""
+      },
+      {
+        "name": "fit",
+        "type": "string",
+        "value": null,
+        "label": "Fit",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "Cover (fill, may crop)",
+            "value": "cover"
+          },
+          {
+            "name": "Contain (fit, may letterbox)",
+            "value": "contain"
+          }
+        ]
+      },
+      {
+        "name": "motion_prompt",
+        "type": "string",
+        "value": null,
+        "label": "Motion Prompt",
+        "placeholder": "e.g. gesture naturally and glance at the screen"
+      },
+      {
+        "name": "expressiveness",
+        "type": "string",
+        "value": null,
+        "label": "Expressiveness",
+        "placeholder": "",
+        "options": [
+          {
+            "name": "High",
+            "value": "high"
+          },
+          {
+            "name": "Medium",
+            "value": "medium"
+          },
+          {
+            "name": "Low",
+            "value": "low"
+          }
+        ]
+      },
+      {
+        "name": "callback_url",
+        "type": "string",
+        "value": null,
+        "label": "Webhook Callback URL",
+        "placeholder": "Called when the video is ready"
+      },
+      {
+        "name": "callback_id",
+        "type": "string",
+        "value": null,
+        "label": "Callback ID",
+        "placeholder": "Echoed back in the webhook"
+      },
+      {
+        "name": "raw_json",
+        "type": "text",
+        "value": null,
+        "label": "Advanced: extra JSON merged into the request body",
+        "placeholder": ""
       }
     ],
     "outputs": [
@@ -545349,6 +545884,97 @@
         "type": "string",
         "value": null,
         "label": "Folder ID",
+        "placeholder": ""
+      }
+    ]
+  },
+  "trigger/heygen_webhook": {
+    "hash": "70964d6edf9c1ed866b206507a1b542e6fbada25112d5695afda3823d95c6091",
+    "author": "Andy Esser",
+    "organisation": "Flomation",
+    "name": "HeyGen Webhook Trigger",
+    "description": "Triggers a flow when a HeyGen video is ready (avatar_video.success / .fail, translation events).",
+    "website": "https://www.flomation.co",
+    "icon": "film+bolt",
+    "date": "12/08/2026",
+    "type": 1,
+    "category": {
+      "name": "Triggers",
+      "icon": "bolt-lightning",
+      "description": "Start a Flow"
+    },
+    "inputs": [
+      {
+        "name": "webhook_secret",
+        "type": "secret",
+        "value": null,
+        "label": "Webhook Secret",
+        "placeholder": "A secret token you choose; append it to the callback URL as ?secret=…",
+        "required": true
+      },
+      {
+        "name": "event_filter",
+        "type": "string",
+        "value": null,
+        "label": "Event Filter",
+        "placeholder": "Comma-separated event types, e.g. avatar_video.success (blank = all)"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "content",
+        "type": "string",
+        "value": null,
+        "label": "Event Summary",
+        "placeholder": ""
+      },
+      {
+        "name": "event_type",
+        "type": "string",
+        "value": null,
+        "label": "Event Type",
+        "placeholder": ""
+      },
+      {
+        "name": "video_id",
+        "type": "string",
+        "value": null,
+        "label": "Video ID",
+        "placeholder": ""
+      },
+      {
+        "name": "video_url",
+        "type": "string",
+        "value": null,
+        "label": "Video URL",
+        "placeholder": ""
+      },
+      {
+        "name": "callback_id",
+        "type": "string",
+        "value": null,
+        "label": "Callback ID",
+        "placeholder": ""
+      },
+      {
+        "name": "status",
+        "type": "string",
+        "value": null,
+        "label": "Status",
+        "placeholder": ""
+      },
+      {
+        "name": "body",
+        "type": "string",
+        "value": null,
+        "label": "Raw JSON Body",
+        "placeholder": ""
+      },
+      {
+        "name": "triggered_at",
+        "type": "string",
+        "value": null,
+        "label": "Triggered At",
         "placeholder": ""
       }
     ]

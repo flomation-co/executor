@@ -227,6 +227,76 @@ func SetString(body map[string]interface{}, field, name string, inputs []*core.C
 	}
 }
 
+// --- create-video body coercion (shared by generate_avatar_video and
+// generate_from_image; HeyGen's `type` union takes the same presenter fields) ---
+
+// NormalizeEngine coerces a string engine ("avatar_v") into the object HeyGen
+// requires ({"type":"avatar_v"}), and drops an empty engine entirely. A value
+// already in object form is left untouched. Agents and the raw_json path often
+// pass the string form, which HeyGen rejects with "Input should be a valid
+// dictionary or object".
+func NormalizeEngine(body map[string]interface{}) {
+	switch v := body["engine"].(type) {
+	case string:
+		if v == "" {
+			delete(body, "engine")
+		} else {
+			body["engine"] = map[string]interface{}{"type": v}
+		}
+	case nil:
+		delete(body, "engine")
+	}
+}
+
+// NormalizeBackground coerces a string background into the object HeyGen
+// requires: an http(s) URL becomes {"type":"image","url":...}, anything else
+// (e.g. "#150e14" or a bare "150e14") becomes {"type":"color","value":...}. An
+// empty string is dropped; an object is left untouched.
+func NormalizeBackground(body map[string]interface{}) {
+	s, ok := body["background"].(string)
+	if !ok {
+		return
+	}
+	s = strings.TrimSpace(s)
+	switch {
+	case s == "":
+		delete(body, "background")
+	case strings.HasPrefix(s, "http://"), strings.HasPrefix(s, "https://"):
+		body["background"] = map[string]interface{}{"type": "image", "url": s}
+	default:
+		if !strings.HasPrefix(s, "#") && isHex(s) {
+			s = "#" + s
+		}
+		body["background"] = map[string]interface{}{"type": "color", "value": s}
+	}
+}
+
+func isHex(s string) bool {
+	if len(s) != 3 && len(s) != 6 {
+		return false
+	}
+	for _, r := range s {
+		if !((r >= '0' && r <= '9') || (r >= 'a' && r <= 'f') || (r >= 'A' && r <= 'F')) {
+			return false
+		}
+	}
+	return true
+}
+
+// DefaultPortraitFit sets fit=cover for a portrait canvas (9:16 / 4:5) when the
+// author hasn't chosen a fit. HeyGen otherwise letterboxes a landscape source
+// into a vertical frame (white bars top/bottom); cover fills it. Runs after the
+// raw_json merge so it sees the final aspect_ratio and respects any explicit fit.
+func DefaultPortraitFit(body map[string]interface{}) {
+	if _, hasFit := body["fit"]; hasFit {
+		return
+	}
+	switch ar, _ := body["aspect_ratio"].(string); ar {
+	case "9:16", "4:5":
+		body["fit"] = "cover"
+	}
+}
+
 // --- response extraction ---
 
 // DataObj returns the top-level "data" object HeyGen wraps most responses in.
